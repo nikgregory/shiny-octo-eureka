@@ -1,0 +1,131 @@
+; adaptivetheme :: a Commercial starter theme by http://adaptivethemes.com
+
+
+;----------// Theme Information
+
+ ; Change the name to match your new themes name. Modify the optional description.
+
+  name         = Adatptive Theme
+  description  = Commercial starter theme
+
+  core         = 6.x
+  engine       = phptemplate
+  screenshot   = screenshot.png
+
+
+;----------// Version Information
+
+  version      = "6.x-1.0"
+  core         = "6.x"
+
+
+;----------// Modular Stylesheets
+
+  ; core styles
+  stylesheets[all][] = css/core/base.css
+  stylesheets[all][] = css/core/layout.css
+  stylesheets[all][] = css/core/edit-links.css
+	
+  ; uncomment for dark themes
+  ;stylesheets[all][] = css/dark.css
+	
+  ; customisable stylesheets
+  stylesheets[all][] = css/blocks.css
+  stylesheets[all][] = css/comments.css
+  stylesheets[all][] = css/nodes.css
+  stylesheets[all][] = css/page.css
+  stylesheets[all][] = css/style.css
+
+
+;----------// IE Conditional Stylesheets
+
+  ; Support for the Conditional Styles module. This module allows themes 
+  ; to specify conditional stylesheets in their .info file and the conditional 
+  ; comments will be automatically included at the end of the standard $styles 
+  ; variable. http://drupal.org/project/conditional_styles
+  ;
+  ; Note: You do not need to install the module, it is now included in Genesis.
+
+  ; Example only: see the README in the Conditional Styles module
+  ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
+
+
+;----------// jQuery Plugins and JavaScripts
+
+  ; Theme settings JS
+  scripts[] = js/theme-settings.js
+
+  ; Insert WAI ARIA Landmark Roles. Uncomment to use.
+  scripts[] = js/aria-roles.js
+
+  ; Equal Height Columns
+  ; This will set first child divs in the #columns division
+  ; to the same height (#sidebar-left, #sidebar-right, #content-column).
+  ; To use uncomment and clear cache data in Performance settings.
+  ;scripts[] = js/jquery.equalizeheights.minified.js
+
+  : Preload CSS Images
+  ; jQuery plugin that automatically preloads all images referenced in CSS files.
+  ; http://www.filamentgroup.com
+  ;scripts[] = js/preloadCssImages.jQuery_v5_minfied.js
+
+ 
+;----------// Regions
+
+  ; You can define new regions here.
+
+  regions[leaderboard]        = Leaderboard
+  regions[header]             = Header blocks
+  regions[secondary_content]  = Secondary content
+  regions[content_top]        = Content top
+  regions[content_aside]      = Content aside
+  regions[content]            = Main content
+  regions[content_bottom]     = Content bottom
+  regions[tertiary_content]   = Tertiary content
+  regions[left]               = Sidebar left
+  regions[right]              = Sidebar right
+  regions[footer]             = Footer
+  regions[node_bottom]        = Node bottom
+
+  ; Gpanel Regions - use in conjunction with the Gpanel snippets.
+  ; See /gpanels and the README in that folder.
+  ; Uncomment the required regions.
+
+  ; 2 col Gpanel
+  ;regions[two_col_first]     = 2col Gpanel col 1
+  ;regions[two_col_second]    = 2col Gpanel col 2
+
+  ; 2 col, 2 col Nested Gpanel
+  ;regions[two_col_nested_first]  = 2col Nested Gpanel col 1
+  ;regions[two_col_nested_second] = 2col Nested Gpanel col 2
+
+  ; 3 col Gpanel
+  ;regions[three_col_first]   = 3col Gpanel col 1
+  ;regions[three_col_second]  = 3col Gpanel col 2
+  ;regions[three_col_third]   = 3col Gpanel col 3
+
+  ; 4 col Gpanel
+  ;regions[four_col_first]    = 4col Gpanel col 1
+  ;regions[four_col_second]   = 4col Gpanel col 2
+  ;regions[four_col_third]    = 4col Gpanel col 3
+  ;regions[four_col_fourth]   = 4col Gpanel col 4
+		
+
+;----------// Features
+
+  ; The "features" control which of these check boxes display on the
+  ; admin/build/themes configuration page. This is useful for 
+  ; suppressing check boxes for elements not used by your theme.
+
+  features[] = logo
+  features[] = name
+  features[] = slogan
+  features[] = mission
+  features[] = node_user_picture
+  features[] = comment_user_picture
+  features[] = search
+  features[] = favicon
+  features[] = primary_links
+  features[] = secondary_links
+
+
