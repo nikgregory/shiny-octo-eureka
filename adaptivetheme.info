@@ -5,7 +5,7 @@
 
  ; Change the name to match your new themes name. Modify the optional description.
 
-  name         = Adatptive Theme
+  name         = Adaptive Theme
   description  = Commercial starter theme
 
   core         = 6.x
