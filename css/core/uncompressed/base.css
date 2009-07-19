@@ -283,7 +283,7 @@ div.messages ul {
 }
 
 div.error {
-  background: #FFF3F6 url(../images/error.png) no-repeat 0.5em 0.45em;
+  background: #FFF3F6 url(../images/status-error.png) no-repeat 0.5em 0.45em;
   border: 1px solid #C00000;
   color: #C00000;
 }
@@ -304,20 +304,20 @@ div.notice  {
 }
 
 div.status  {
-  background: #E8F7C5 url(../images/ok.png) no-repeat 0.75em 0.6em;
+  background: #E8F7C5 url(../images/status-ok.png) no-repeat 0.75em 0.6em;
   border: 1px solid #4DA449;
   color: #2A6827;
 }
 
 div.help {
-  background: #F7F8F8 url(../images/info.png) no-repeat 0.5em 0.45em;
+  background: #F7F8F8 url(../images/status-info.png) no-repeat 0.5em 0.45em;
   border: 1px solid #66BEF4;
   margin: 1em 0;
   color: #000D2F;
 }
 
 div.warning {
-  background: #FFF6DF url(../images/warning.png) no-repeat 0.5em 0.45em;
+  background: #FFF6DF url(../images/status-warning.png) no-repeat 0.5em 0.45em;
   border: 1px solid #FFB900;
   color: #9F3800;
 }
