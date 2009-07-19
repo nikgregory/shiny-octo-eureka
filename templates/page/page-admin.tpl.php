@@ -98,7 +98,7 @@
  * @see layout.css
  */
 ?>        
-<body id="layout-1b" <?php print $section_class; ?>>
+<body id="at-admin" <?php print $section_class; ?>>
   <div id="container" class="<?php print $classes; ?>">
 
     <div id="skip-nav">
