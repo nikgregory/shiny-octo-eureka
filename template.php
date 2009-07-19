@@ -8,7 +8,6 @@
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/template.theme-settings.inc');
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/template.theme-functions.inc');
 
-
 /**
  * Implement HOOK_theme
  * - Add conditional stylesheets:
@@ -76,10 +75,10 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   if (!empty($vars['logo'])) {
     // Return the site_name even when site_name is disabled in theme settings.
     $vars['logo_alt_text'] = variable_get('site_name', '');
-    $vars['site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .' '. t('logo') .'" /></a>';
+    $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .' '. t('logo') .'" /></a>';
   }
   if (!empty($vars['site_name'])) {
-    $vars['site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
+    $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
   }
 
   // Set variables for the primary and secondary links.
@@ -137,6 +136,9 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     // Set a class based on Drupals internal path, e.g. page-node-1. 
     // Using the alias is fragile because path alias's can change, $normal_path is more reliable.
     $classes[] = safe_string('page-'. $normal_path);
+    if (arg(2) == 'block') {
+      $classes[] = 'page-block';
+    }
     if (arg(0) == 'node') {
       if (arg(1) == 'add') {
         $classes[] = 'page-node-add'; // Add .node-add class.
@@ -296,8 +298,8 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   
   $vars['edit_links_array'] = array();
   $vars['edit_links'] = '';
-  if (theme_get_setting('adpt_block_edit_links') && user_access('administer blocks')) {
-    include_once './' . drupal_get_path('theme', 'genesis_TNT') . '/template.block-editing.inc';
+  if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
+    include_once './' . drupal_get_path('theme', 'adaptivetheme') . '/template.block-editing.inc';
     phptemplate_preprocess_block_editing($vars, $hook);
     $classes[] = 'block-edit-links';
   }
