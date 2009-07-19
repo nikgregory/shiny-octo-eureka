@@ -91,6 +91,8 @@ SCRIPT;
     'comment_node_suffix_default'           => '',
     'comment_enable_content_type'           => 0,
     'rebuild_registry'                      => 0,
+    'at_admin_theme'                        => 1,
+    'at_admin_theme_node'                   => 1,
     'block_edit_links'                      => 1
   );
   
@@ -802,13 +804,25 @@ SCRIPT;
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
   // Administrationt settings
-  $form['adpt_container']['block_editing']['administration'] = array(
+  $form['adpt_container']['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
     '#title' => t('Admin settings'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['block_editing']['administration']['block_edit_links'] = array(
+  $form['adpt_container']['admin_settings']['administration']['at_admin_theme'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Use the Administration theme for admin pages'),
+    '#default_value' => $settings['at_admin_theme'],
+    '#description' => t('The site will use the built in Administration theme for admin pages.'),  
+  );
+  $form['adpt_container']['admin_settings']['administration']['at_admin_theme_node'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Use the Administration theme for node add/edit/delete pages.'),
+    '#default_value' => $settings['at_admin_theme_node'],
+    '#description' => t('The site will use the built in Administration theme for for node add, edit and delete pages.'),  
+  );
+  $form['adpt_container']['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Show block editing hover links'),
     '#default_value' => $settings['block_edit_links'],

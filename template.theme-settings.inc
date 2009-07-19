@@ -75,6 +75,8 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'comment_node_suffix_default'           => '',
     'comment_enable_content_type'           => 0,
     'rebuild_registry'                      => 0,
+    'at_admin_theme'                        => 1,
+    'at_admin_theme_node'                   => 1,
     'block_edit_links'                      => 1
   );
   
@@ -163,6 +165,24 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
 }
 
 
+
+/**
+ * Load the admin theme CSS file.
+ */
+if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
+  if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+    drupal_add_css('sites/all/themes/adaptivetheme/css/core/at-admin.css', 'theme', 'all');
+  }
+}
+
+// Load collapsed js on blocks page
+if (theme_get_setting('at_admin_theme')) {
+  if (arg(2) == 'block') {
+    drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
+  }
+}
+
+
 /**
  * Modify theme variables
  */
@@ -175,11 +195,46 @@ function phptemplate_preprocess(&$vars) {
 
 function phptemplate_preprocess_page(&$vars) {
 
-  // TNT THEME SETTINGS SECTION
+  // ADPT THEME SETTINGS SECTION
   // Display mission statement on all pages
   if (theme_get_setting('mission_statement_pages') == 'all') {
     $vars['mission'] = theme_get_setting('mission', false);  
   }
+  
+  // Template suggestions for admin theme
+  if (!$vars['is_front']) {
+  	if (theme_get_setting('at_admin_theme')) {
+      if (arg(2) == 'block') {
+        $vars['template_files'][] = 'page';
+      }
+  	}
+  	if (theme_get_setting('at_admin_theme_node')) {
+      if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+        $vars['template_files'][] = 'page-admin';
+      }
+    }
+  }
+  
+  // Unset stuff to make theming easier
+  if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
+  	if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+  	  // Unset vars
+      unset($vars['logo']);
+      unset($vars['primary_links']);
+      unset($vars['secondary_links']);
+      // Unset CSS
+      $css = drupal_add_css();
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/page.css']);
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/style.css']);
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/blocks.css']);
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/comments.css']);
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/nodes.css']);
+      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/dark.css']);
+      $vars['styles'] = drupal_get_css($css);
+      return $vars;
+    }
+  }
+
   
   // Hide breadcrumb on all pages
   //if (theme_get_setting('breadcrumb_display') == 0) {
@@ -395,10 +450,20 @@ function phptemplate_preprocess_node(&$vars) {
   $vars['links'] = theme('links', $vars['node']->links, array('class' => 'links inline')); 
 }
 
+
+function phptemplate_preprocess_block(&$vars) {
+  global $theme;
+  if (theme_get_setting('at_admin_theme')) {
+    if (arg(2) == 'block') {
+      $vars['template_files'][] = 'block-at_admin';
+    }
+  }
+}
+
 /**
  * Modify search results based on theme settings
  */
-function phptemplate_preprocess_search_result(&$variables) {
+function phptemplate_preprocess_search_result(&$vars) {
   static $search_zebra = 'even';
   $search_zebra = ($search_zebra == 'even') ? 'odd' : 'even';
   $variables['search_zebra'] = $search_zebra;
@@ -460,3 +525,17 @@ function phptemplate_preprocess_comment_wrapper(&$vars) {
 function phptemplate_preprocess_views_view(&$vars) {
   $vars['css_name'] = $vars['css_name'] .' view-style-'. views_css_safe(strtolower($vars['view']->type));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
