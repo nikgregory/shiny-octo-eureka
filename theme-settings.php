@@ -173,7 +173,7 @@ SCRIPT;
     '#title' => t('Advanced Theme Settings'),
     '#description' => t('Use these settings to change what and how information is displayed in your theme.'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => FALSE,
   ); 
   // General Settings
   $form['adpt_container']['general_settings'] = array(
@@ -812,7 +812,7 @@ SCRIPT;
   );
   $form['adpt_container']['admin_settings']['administration']['at_admin_theme'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Use the Administration theme for admin pages'),
+    '#title' => t('Use the Administration theme for admin pages.'),
     '#default_value' => $settings['at_admin_theme'],
     '#description' => t('The site will use the built in Administration theme for admin pages.'),  
   );
@@ -824,7 +824,7 @@ SCRIPT;
   );
   $form['adpt_container']['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Show block editing hover links'),
+    '#title' => t('Show block editing hover links.'),
     '#default_value' => $settings['block_edit_links'],
     '#description' => t('When hovering over a block, privileged users will see block editing links.'),  
   );
