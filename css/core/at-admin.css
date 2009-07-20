@@ -137,7 +137,7 @@ body > #container {
   padding: 3px;
 }
 
-.page-block .block {
+.page-block .region .block {
   background: #FFF;
 }
 
@@ -422,14 +422,23 @@ ul.menu li.collapsed {}
 ul.menu li.expanded  {}
 ul.menu li.leaf      {}
 
+ul.menu li a         {display: block;}
 ul.menu li a:link    {}
-ul.menu li a:hover   {}
+ul.menu li a:hover,
+ul.menu li a:focus   {outline: 0;}
 ul.menu li a:visited {}
 ul.menu li.active a  {}
 ul.menu li.active-trail {}
 
 ul.menu li.first {}
 ul.menu li.last  {}
+
+#main-content ul.menu,
+#main-content ul.menu li {
+  margin: 0;
+  list-style:none;
+  font-weight: bold;
+}
 
 
 /*********************************************************
@@ -530,6 +539,20 @@ div.admin .right {
 
 .admin .compact-link {
   margin: 0 0 1em;
+}
+
+.admin .compact-link a {
+  color: #555;
+  border: 1px solid #BBB;
+  padding: 0.3em 0.5em;
+  text-transform: capitalize;
+  -moz-border-radius: 12px;
+}
+
+.admin .compact-link a:hover {
+  color: #222;
+  background: #F7F7F7;
+  border: 1px solid #464646;
 }
 
 .page-admin-by-module .admin-panel .body {
@@ -682,11 +705,11 @@ tbody th {
 
 tr.odd, 
 tr.info {
-  background-color: #F5F5F5;
+  background-color: #FFF;
 }
 
 tr.even {
-  background-color: #FFF;
+  background-color: #E9EFF2;
 }
 
 tr.drag {
@@ -720,6 +743,57 @@ tr:first-child td.module,
 tr:first-child td.container {
   border-top-width: 0;
 }
+
+#block-admin-display-form tr .block {
+  background: transparent;
+}
+
+#system-modules td strong {
+  display: block; 
+  width: 110px;
+}
+
+
+.fieldset-toggle-display {margin-bottom: 0;}
+
+.fieldset-toggle-display .form-item {
+  background: #EEE;
+  float: left;
+  margin: 0.1em;
+  padding: 3px;
+  width: 16.5em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.fieldset-logo-image-settings {margin-right: 1%;}
+.fieldset-logo-image-settings,
+.fieldset-shortcut-icon-settings {
+  float: left;
+  width: 46.5%;
+}
+
+#edit-logo-path,
+#edit-favicon-path {width: 90%;}
+
+.fieldset-theme-specific-settings {clear:both;}
+
+#system-theme-settings fieldset {
+  min-height: 200px; /* not well supported */
+}
+
+#system-theme-settings .button-wrapper {
+  clear: right;
+  display: block;
+  float: left;
+}
+
+
+
+
+
+
+
 
 /**********************************************************
  *                     Admin tables
@@ -926,6 +1000,12 @@ fieldset {
   -webkit-border-radius: 6px;
 }
 
+.vertical-tabs fieldset {
+  background: #FFF;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
 /* Targets IE 7. Fixes background image in field sets (if one is set). */
 *:first-child+html fieldset {
   background-color: transparent;
@@ -941,7 +1021,7 @@ fieldset {
 fieldset legend {
   display: block;
   font-weight: bold;
-  padding: 0 1em 0 0;
+  padding: 0 0.5em;
 }
 
 *:first-child+html fieldset legend, *:first-child+html fieldset.collapsed legend {
