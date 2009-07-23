@@ -77,6 +77,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'rebuild_registry'                      => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
+    'at_admin_theme_logo'                   => 0,
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0
   );
@@ -166,21 +167,10 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
 }
 
 
-
-/**
- * Load the admin theme CSS file.
- */
-if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
-  if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
-    drupal_add_css('sites/all/themes/adaptivetheme/css/core/at-admin.css', 'theme', 'all');
-  }
-}
-
 // Load collapsed js on blocks page
 if (theme_get_setting('at_admin_theme')) {
   if (arg(2) == 'block') {
     drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
-    //drupal_add_js('sites/all/themes/adaptivetheme/js/slider.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
 }
 
@@ -196,7 +186,8 @@ function phptemplate_preprocess(&$vars) {
 
 
 function phptemplate_preprocess_page(&$vars) {
-
+  global $theme;
+  
   // ADPT THEME SETTINGS SECTION
   // Display mission statement on all pages
   if (theme_get_setting('mission_statement_pages') == 'all') {
@@ -206,14 +197,26 @@ function phptemplate_preprocess_page(&$vars) {
   // Template suggestions for admin theme
   if (!$vars['is_front']) {
   	if (theme_get_setting('at_admin_theme')) {
+  	  if ((arg(0) == 'admin')) {
+  	    $vars['template_files'][] = 'page-at_admin';
+  	  }
       if (arg(2) == 'block') {
         $vars['template_files'][] = 'page';
       }
   	}
   	if (theme_get_setting('at_admin_theme_node')) {
       if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
-        $vars['template_files'][] = 'page-admin';
+        $vars['template_files'][] = 'page-at_admin';
       }
+    }
+  }
+  
+  /**
+   * Load the admin theme CSS file.
+   */
+  if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
+    if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+      drupal_add_css(path_to_theme() . '/css/core/at-admin.css', 'theme', 'all');
     }
   }
   
@@ -221,9 +224,12 @@ function phptemplate_preprocess_page(&$vars) {
   if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
   	if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
   	  // Unset vars
-      unset($vars['logo']);
       unset($vars['primary_links']);
       unset($vars['secondary_links']);
+  	  // Check whether logo is enabled for admin pages
+      if (theme_get_setting('at_admin_theme_logo') == 0) {
+        unset($vars['logo']);
+      }
       // Check whether help is disabled
       if (theme_get_setting('at_admin_hide_help')) {
         unset($vars['help']);
@@ -307,7 +313,7 @@ function phptemplate_preprocess_page(&$vars) {
 
 
 function phptemplate_preprocess_node(&$vars) {
-
+  global $theme;
   // Node Theme Settings
   // Date & author
   $date = t('Posted ') . format_date($vars['node']->created, 'medium');                 // Format date as small, medium, or large
@@ -456,6 +462,24 @@ function phptemplate_preprocess_node(&$vars) {
 }
 
 
+/**
+ * Override of theme_node_form().
+ */
+function phptemplate_node_form($form) {
+  if (theme_get_setting('at_admin_theme_node')) {
+    if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+      $sidebar = drupal_render($form['taxonomy']);
+      $main = drupal_render($form);
+      return "<div class='node-form clear-block'>
+        <div class='right'>{$buttons}{$sidebar}</div>
+        <div class='left'><div class='main'>{$main}{$buttons}</div></div>
+        </div>";
+    }
+  }
+}
+
+
 function phptemplate_preprocess_block(&$vars) {
   global $theme;
   if (theme_get_setting('at_admin_theme')) {
@@ -470,7 +494,7 @@ function phptemplate_preprocess_block(&$vars) {
 /**
  * Modify search results based on theme settings
  */
-function phptemplate_preprocess_search_result(&$vars) {
+function phptemplate_preprocess_search_result(&$variables) {
   static $search_zebra = 'even';
   $search_zebra = ($search_zebra == 'even') ? 'odd' : 'even';
   $variables['search_zebra'] = $search_zebra;
@@ -512,6 +536,7 @@ function phptemplate_preprocess_search_result(&$vars) {
   // Provide alternate search result template.
   $variables['template_files'][] = 'search-result-'. $variables['type'];
 }
+
 
 /**
  * Set defaults for comments display

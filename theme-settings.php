@@ -93,6 +93,7 @@ SCRIPT;
     'rebuild_registry'                      => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
+    'at_admin_theme_logo'                   => 0,
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0
   );
@@ -822,6 +823,12 @@ SCRIPT;
     '#title' => t('Use the Administration theme for node add/edit/delete pages.'),
     '#default_value' => $settings['at_admin_theme_node'],
     '#description' => t('The site will use the built in Administration theme for for node add, edit and delete pages.'),  
+  );
+  $form['adpt_container']['admin_settings']['administration']['at_admin_theme_logo'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Show site logo on admin pages.'),
+    '#default_value' => $settings['at_admin_theme_logo'],
+    '#description' => t('When checked the site logo will show on admin pages.'),  
   );
   $form['adpt_container']['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
