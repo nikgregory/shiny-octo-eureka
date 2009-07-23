@@ -94,8 +94,7 @@
 </head>
 <?php
 /**
- * Change the body id selector to your preferred layout, e.g body id="genesis-1a".
- * @see layout.css
+ * Note the body ID is #at-admim.
  */
 ?>        
 <body id="at-admin" <?php print $section_class; ?>>

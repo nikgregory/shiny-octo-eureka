@@ -93,7 +93,8 @@ SCRIPT;
     'rebuild_registry'                      => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
-    'block_edit_links'                      => 1
+    'block_edit_links'                      => 1,
+    'at_admin_hide_help'                    => 0
   );
   
   // Make the default content-type settings the same as the default theme settings,
@@ -824,10 +825,16 @@ SCRIPT;
   );
   $form['adpt_container']['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Show block editing hover links.'),
+    '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
-    '#description' => t('When hovering over a block, privileged users will see block editing links.'),  
+    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),  
   );
-  // Return theme settings form
+  $form['adpt_container']['admin_settings']['administration']['at_admin_hide_help'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Hide help messages.'),
+    '#default_value' => $settings['at_admin_hide_help'],
+    '#description' => t('When this setting is checked all help messages will be hidden.'),  
+  );
+  // Return theme settings form at_admin_hide_help
   return $form;
 }

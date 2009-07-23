@@ -77,7 +77,8 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'rebuild_registry'                      => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
-    'block_edit_links'                      => 1
+    'block_edit_links'                      => 1,
+    'at_admin_hide_help'                    => 0
   );
   
   // Make the default content-type settings the same as the default theme settings,
@@ -179,6 +180,7 @@ if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_nod
 if (theme_get_setting('at_admin_theme')) {
   if (arg(2) == 'block') {
     drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
+    //drupal_add_js('sites/all/themes/adaptivetheme/js/slider.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
 }
 
@@ -222,6 +224,10 @@ function phptemplate_preprocess_page(&$vars) {
       unset($vars['logo']);
       unset($vars['primary_links']);
       unset($vars['secondary_links']);
+      // Check whether help is disabled
+      if (theme_get_setting('at_admin_hide_help')) {
+        unset($vars['help']);
+      }
       // Unset CSS
       $css = drupal_add_css();
       unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/page.css']);
@@ -234,7 +240,6 @@ function phptemplate_preprocess_page(&$vars) {
       return $vars;
     }
   }
-
   
   // Hide breadcrumb on all pages
   //if (theme_get_setting('breadcrumb_display') == 0) {
@@ -456,6 +461,8 @@ function phptemplate_preprocess_block(&$vars) {
   if (theme_get_setting('at_admin_theme')) {
     if (arg(2) == 'block') {
       $vars['template_files'][] = 'block-at_admin';
+      $vars['block_slider'] = '<a id="close" style="display: none;" class="close" href="#"><span class="panel-close">'. t('Close') .'</span></a>';
+      $vars['block_slider'] .= '<a id="open" class="open" href="#"><span class="panel-open">'. t('Open') .'</span></a>';
     }
   }
 }

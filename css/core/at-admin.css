@@ -380,14 +380,20 @@ h1#page-title {font-size:1.5em;}
   -webkit-border-radius: 6px;
 }
 
-.block-inner   {} /* Block inner div */
-.block-title   {
+.block-inner {
+ position: relative;
+}
+
+.block-title {
   display: block;
   background: #EDEDED url('core-images/gray-grad.png') repeat-x left bottom;
   font-size: 1.18em;
   padding: 0.3em 0.5em;
 }
-.block-content {margin: 0 0.5em 0.5em} /* Block content wrapper */
+
+.block-content {
+ margin: 0 0.5em 0.5em,
+}
 
 /* Navigation Menu block   */
 #block-user-1 {}
@@ -409,7 +415,7 @@ ul.menu,
 ul.menu ul, 
 ul.menu ul ul, 
 ul.menu ul ul ul {
-  margin: 0 0 0 0.75em; /* LTR */
+  margin:0 0 0 1.5em; /* LTR */
   padding: 0;
 }
 
@@ -445,31 +451,87 @@ ul.menu li.last  {}
 *                    Admin Blocks
 **********************************************************/
 
-.block-at-admin {background: #FFF;border: 1px solid #444; margin-bottom: 3px;}
-.block-at-admin .block-inner {  padding: 3px;}
-.block-at-admin h2 {background: #444;color: #EEE;}
+.block-at-admin {
+  background: #FFF;
+  border: 1px solid #13749F;
+  margin-bottom: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.block-at-admin .block-inner {
+  padding: 3px;
+}
+.block-at-admin h2 {
+  background: #13749F;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+}
+
 .block-at-admin .block-content {}
-.block-at-admin legend {}
+
+.block-at-admin legend {
+  margin:0 0 0 -10px;
+  padding:0;
+}
+
 .block-at-admin fieldset {
   background: #FFF;
-  border: 1px solid #444;
+  margin: 0;
+  border: none;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
-  margin: 1em 0 0;
 }
+
+.fieldset-block-info {
+  margin-bottom: 0.5em;
+}
+.fieldset-block-content {}
+
+.fieldset-block-info dl {
+  margin: 0;
+}
+.fieldset-block-info dt {
+  font-size: 0.82em;
+  border-bottom: 1px solid #EEE;
+}
+.fieldset-block-info dd {
+  color: #777;
+  font-size: 0.94em;
+  margin: 0 0 0.3em;
+}
+
+/* at-admin block edit links */
 .block-at-admin .fieldset-wrapper {padding: 3px;}
 
-.at-admin-block-edit-links {font-size: 0.94em;}
-.at-admin-block-edit-links ul {margin:0;}
+.at-admin-block-edit-links {
+  font-size: 0.94em;
+  float: right;
+  padding-bottom: 3px;
+}
+
+.at-admin-block-edit-links ul {
+  margin:0;
+}
+
 .at-admin-block-edit-links .item-list li {
  list-style:none;
  display: inline;
- margin: 0 0.5em;
+ margin: 0 0.3em 0 0;
 }
-.at-admin-block-edit-links .item-list li a {}
-.at-admin-block-edit-links .item-list li a:hover {}
 
+.at-admin-block-edit-links .item-list li a {
+  color: #555;
+  border: 1px solid #BBB;
+  padding: 0.2em 0.6em;
+  text-transform: capitalize;
+  -moz-border-radius: 10px;
+}
 
+.at-admin-block-edit-links .item-list li a:hover {
+  color: #222;
+  background: #F7F7F7;
+  border: 1px solid #464646;
+}
 
 /*********************************************************
 *                        Admin
@@ -640,18 +702,6 @@ ul.secondary li a.active {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /**********************************************************
  *                   Tables
  **********************************************************/
@@ -753,7 +803,6 @@ tr:first-child td.container {
   width: 110px;
 }
 
-
 .fieldset-toggle-display {margin-bottom: 0;}
 
 .fieldset-toggle-display .form-item {
@@ -778,21 +827,13 @@ tr:first-child td.container {
 
 .fieldset-theme-specific-settings {clear:both;}
 
-#system-theme-settings fieldset {
-  min-height: 200px; /* not well supported */
-}
+#system-theme-settings fieldset {}
 
 #system-theme-settings .button-wrapper {
   clear: right;
   display: block;
   float: left;
 }
-
-
-
-
-
-
 
 
 /**********************************************************
@@ -986,6 +1027,44 @@ div.resizable-textarea textarea {
 label, legend {
   margin: 0; 
   padding: 0;
+}
+
+/* default styling for all form buttons */
+input.form-submit, input.teaser-button {
+  background: transparent url(core-images/blue-button.png) no-repeat top;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 96%;
+  font-weight: bold;
+  margin: 0 4px;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  outline: 1px solid #9BABB0;
+  -moz-border-radius: 4px;
+  -moz-outline-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.node-form input#edit-submit.form-submit, input#edit-save.form-submit {
+  background: transparent url(core-images/green-button.png) no-repeat top;
+}
+
+input#edit-delete.form-submit,
+#system-modules-uninstall input#edit-submit,
+#user-multiple-delete-confirm input#edit-submit {
+  background: transparent url(core-images/red-button.png) no-repeat top;
+}
+
+input.form-submit:hover,
+input.teaser-button:hover,
+input#edit-save.form-submit,
+.node-form input#edit-submit.form-submit:hover,
+input#edit-delete.form-submit:hover,
+ #system-modules-uninstall input#edit-submit:hover,
+#user-multiple-delete-confirm input#edit-submit:hover   {
+  background-position: bottom;
+  cursor: pointer;
 }
 
 /*********************************************************

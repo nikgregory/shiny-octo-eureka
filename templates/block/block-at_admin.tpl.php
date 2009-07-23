@@ -38,48 +38,48 @@
 <div id="<?php print $block_id; ?>" class="block-at-admin">
 	
   <?php // dprint_r($block); ?>
-  
+
   <?php if ($block->subject): ?>
-    <h2 class="block-title"><?php print $block->subject; ?>
-    	<?php print $block->title['info']; ?>
-    </h2>
-  <?php endif; ?>
-
-  <?php if ($edit_links): ?>
-    <div class="at-admin-block-edit-links">
-  	  <?php print $edit_links; ?>
+    <div class="block-header">
+      <h2 class="block-title"><?php print $block->subject; ?></h2>
     </div>
   <?php endif; ?>
+  
+  <div class="block-inner clear-block">
+    <fieldset class="collapsible collapsed fieldset-block-info">
+      <legend class="collapse">
+  	    <a href="#"><?php print t('Block Info'); ?></a>
+      </legend>
+      <div class="fieldset-wrapper">
+        <dl>
+          <dt>Block Module</dt>
+            <dd><?php print $block->module; ?></dd>
+          <dt>Block Delta</dt>
+            <dd><?php print $block->delta; ?></dd>
+          <dt>Block Region</dt>
+            <dd><?php print $block->region; ?></dd>
+          <dt>Block ID</dt>
+            <dd><?php print $block_id; ?></dd>
+          <dt>Block Classes</dt>
+            <dd><?php print $classes; ?></dd>
+        </dl>
+      </div>
+    </fieldset>
 
-  <div class="block-inner">
-  <fieldset class="collapsible collapsed fieldset-block-info">
-    <legend class="collapse">
-  	  <a href="#"><?php print t('Block Info'); ?></a>
-    </legend>
-    <div class="fieldset-wrapper">
-    <dl>
-      <dt>Block Module</dt>
-        <dd><?php print $block->module; ?></dd>
-      <dt>Block Delta</dt>
-        <dd><?php print $block->delta; ?></dd>
-      <dt>Block Region</dt>
-        <dd><?php print $block->region; ?></dd>
-      <dt>Block ID</dt>
-        <dd><?php print $block_id; ?></dd>
-      <dt>Block Classes</dt>
-        <dd><?php print $classes; ?></dd>
-    </dl>
-    </div>
-  </fieldset>
+    <fieldset class="collapsible collapsed fieldset-block-content">
+      <legend class="collapse">
+  	    <a href="#"><?php print t('Block Content'); ?></a>
+      </legend>
+      <div class="fieldset-wrapper">
+        <div class="block-content"><?php print $block->content ?></div>
+      </div>
+    </fieldset>
 
-  <fieldset class="collapsible collapsed fieldset-block-content">
-    <legend class="collapse">
-  	  <a href="#"><?php print t('Block Content'); ?></a>
-    </legend>
-    <div class="fieldset-wrapper">
-      <div class="block-content"><?php print $block->content ?></div>
-    </div>
-  </fieldset>
+    <?php if ($edit_links): ?>
+      <div class="at-admin-block-edit-links">
+  	    <?php print $edit_links; ?>
+      </div>
+    <?php endif; ?>
 
   </div>
 </div> <!-- /block-at_admin -->
