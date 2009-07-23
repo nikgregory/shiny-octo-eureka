@@ -302,6 +302,18 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   //$classes[] = 'block-'. $block->region;    // block-[region] class
   //$classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
   
+  // Add special classes to support for http://drupal.org/project/blocktheme module.
+  if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
+    $classes[] = $vars['blocktheme'];
+    $classes[] = $block->region .'-'. $vars['blocktheme'];
+  }
+  
+  // Add special classes to support for http://drupal.org/project/block_class module.
+  if (function_exists('block_class') && block_class($block)) {
+    $classes[] = block_class($block);
+    $classes[] = $block->region .'-'. block_class($block);
+  }
+  
   $vars['edit_links_array'] = array();
   $vars['edit_links'] = '';
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
