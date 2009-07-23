@@ -104,6 +104,9 @@
     <div id="skip-nav">
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
+    
+    <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
+    <?php if (!empty($admin)) print $admin; ?>
 
     <?php if ($leaderboard): ?>
       <div id="leaderboard" class="section region"><div class="region-inner">
