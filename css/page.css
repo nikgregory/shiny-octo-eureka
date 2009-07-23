@@ -376,15 +376,8 @@ div.logo-site-name strong {}
 
 #search-theme-form label {}
 #search-theme-form input {}
-#search-theme-form .form-item {}
-#search-theme-form .form-submit {}
-
-#edit-search-theme-form-1 {}
-
-/* Override forms.css focus style */
-#edit-search-theme-form-1:hover,
-#edit-search-theme-form-1:focus {}
-
+#search-theme-form .search-input {}
+#search-theme-form .search_submit {}
 
 /**
  * Advanced search form
