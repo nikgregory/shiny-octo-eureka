@@ -60,11 +60,20 @@ a {
 }
 
 a:link,
-a:visited {color:#21759B;}
-a:visited {color:#21759B;}
-a:hover {background: transparent; color: #555}
+a:visited {
+  color: #21759B;
+}
+a:visited {
+  color: #21759B;
+}
+a:hover {
+  background: transparent;
+  color: #555;
+}
 a:active,
-a.active  {color:#222;}
+a.active {
+  color:#222;
+}
 
 /* Set global a:active and a:focus styles. */
 a:active,
@@ -99,7 +108,9 @@ body > #container {
 }
 
 /* Column wrappers */
-#columns {padding: 1em;}
+#columns {
+  padding: 1em;
+}
 .columns-inner {}
 
 /* Content wrappers */
@@ -126,10 +137,13 @@ body > #container {
 .region {}
 .region-inner {}
 
-.page-block .region {margin: 0.5em 0;}
+.page-block .region {
+  margin: 0.5em 0;
+}
 .page-block .region-inner,
 .page-block .sidebar-inner,
 .page-block #content-top,
+.page-block #content-aside,
 .page-block #content-bottom,
 .page-block #main-content .block-region {
   background: #EAF2FA;
@@ -137,8 +151,18 @@ body > #container {
   padding: 3px;
 }
 
+.page-block #content-top .block-region,
+.page-block #content-aside .block-region,
+.page-block #content-bottom .block-region {
+  border: none; 
+}
+
 .page-block .region .block {
   background: #FFF;
+}
+
+.page-block #main-content .block-region {
+  padding: 9px 12px;
 }
 
 .block-region {
@@ -183,20 +207,6 @@ body > #container {
 }
 #content-bottom {}
 
-
-/**********************************************************
- *                      Sidebars
- **********************************************************/
-/* Target both sidebars with this low specifity selector. */
-.sidebar {}
-.sidebar-inner {}
-
-/* Target a specific sidebar, inner or sidebar-inner. */
-#sidebar-left {}
-#sidebar-left .sidebar-inner {}
-
-#sidebar-right {}
-#sidebar-right .sidebar-inner {}
 
 
 /**********************************************************
@@ -245,32 +255,48 @@ body > #container {
   padding: 0.75em 1em;
 }
 
-/* site_name wrapper. */
-#site-name {float:left;}
+/* logo site_name wrapper. */
+.logo-site-name {}
 
 /* DIV/strong combo when when title is set. */
-div#site-name strong {}
+.logo-site-name strong {}
 
 /* Remove display:block if you want the site name inline with the logo. */
-#site-name span {
+.logo-site-name span {
   display: block;
+  float: left;
 }
+
+#logo {
+  padding: 0 10px 0 0;
+}
+
 
 #site-name {
   font-weight: bold; /* Bold or else the line heights vary. */
   font-size: 1.33em;
   line-height: 1.5;
+  padding: 2px 0;
 }
 
 /* Override default pseudo class styles. */
 #site-name a:link, 
-#site-name a:visited {color:#FFF;}
+#site-name a:visited {
+  color:#FFF;
+}
 #site-name a:hover,
-#site-name a:focus   {color: #CCC; background: transparent;}
+#site-name a:focus {
+  color: #CCC; 
+  background: transparent;
+}
 #site-name a:active  {}
 
-/* Site slogan. */
-#site-slogan {}
+/* user-date. */
+#user-date {
+  clear: both;
+  color: #CCC;
+  font-size: 0.94em;
+}
 
 
 /**********************************************************
@@ -282,7 +308,8 @@ div#site-name strong {}
  */
 /* Float the serch box right. */
 #search-box {
-  float: right; /* LTR */
+  float: right;
+  padding: 5px 0 0 0;
 }
 
 /* Reset form element margins. */
@@ -294,21 +321,36 @@ div#site-name strong {}
 #search-theme-form > div {}
 
 /* #search and .container-inline apply to the same div. */
-#search-theme-form #search {margin:-5px 0 0;}
+#search-theme-form #search {
+  margin:-5px 0 0;
+}
 #search-theme-form .container-inline {}
 
-#search-theme-form label {color: #CCC;}
-#search-theme-form input {}
-#search-theme-form .form-item {}
-#search-theme-form .form-submit {}
+#search-theme-form label {
+  color: #CCC;
+  font-size: 0.94em;
+}
+#search-theme-form input.search_submit {
+  color: #999;
+  background: url(core-images/search-button-tile.png) repeat-x 0 -15px;
+  border: 1px solid #777;
+  cursor: pointer;
+  padding:1px 6px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 
-#edit-search-theme-form-1 {}
+#search-theme-form input.search_submit:hover {
+  color: #EEE;
+  background-position: 0 -65px ;
+}
 
-/* Override forms.css focus style */
-#edit-search-theme-form-1:hover,
-#edit-search-theme-form-1:focus {}
-
-
+#edit-search_theme_form {
+  background: #EEE;
+  width: 120px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 
 
 /**********************************************************
@@ -331,39 +373,97 @@ div#site-name strong {}
 /* The main title on each page. */
 h1#page-title {font-size:1.5em;}
 
-
 /**********************************************************
  *                     Pager 
  **********************************************************/
 /* The first 2 classes provide the base pager styles. */
-.item-list ul.pager    {}
+.item-list ul.pager {
+  background-color: #EEE;
+  color: #FFF;
+  font-size: 1.1em;
+  margin: 0 0 20px 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 .item-list ul.pager li {
-  margin: 0;
+  color:#FFF;
+  margin:0;
 }
 
 /* Theme the various states of pager links. */
-.item-list ul.pager li a:link    {}
-.item-list ul.pager li a:visited {}
-.item-list ul.pager li a:hover   {}
+.item-list ul.pager li a {padding:6px 10px;font-weight:bold;}
+.item-list ul.pager li a:link {color: #444;}
+.item-list ul.pager li a:visited {color: #444;}
+.item-list ul.pager li a:hover {
+  background-color: #BBB;
+  color:#FFF;
+  font-weight:bold;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 
-/* Note: .pager-current is for the current page. */
-.item-list ul.pager li.pager-item     {}
-.item-list ul.pager li.first          {}
-.item-list ul.pager li.last           {}
-.item-list ul.pager li.pager-current  {}
-.item-list ul.pager li.pager-first    {}
-.item-list ul.pager li.pager-previous {}
-.item-list ul.pager li.pager-next     {}
-.item-list ul.pager li.pager-last     {}
-
+/* .pager-current is the current page. */
+.item-list ul.pager li.pager-current  {
+  background-color: #bbb;
+  color:#FFF;
+  font-weight:bold;
+  padding:6px 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 
 /**********************************************************
- *               Footer, Footer Message
+ *          Footer, Footer Message, Attribution
  **********************************************************/
 #footer {}
 #footer .region-inner {}
 #footer a {}
 
+#attribution {
+  font-size: 0.82em;
+  padding: 5px;
+  text-align: center;
+}
+
+#attribution a {
+  color: #999;
+}
+
+#attribution a:hover {
+  color: #CCC;
+}
+
+
+/**********************************************************
+ *                       Node forms
+ **********************************************************/
+#node-form .right {
+  float: right;
+  margin-top: 35px;
+  width: 24.5%;
+}
+#node-form .right .buttons {
+  background: #EEE;
+  border: 1px solid #DADADA;
+  padding: 10px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#node-form .right .buttons #edit-submit,
+#node-form .right .buttons #edit-preview,
+#node-form .right .buttons #edit-delete {
+   margin: 2px 2px 2px 0;
+}
+
+#node-form .right .fieldset-vocabularies {}
+
+#node-form .left {
+  float: left;
+  width: 74.5%;
+}
 
 /**********************************************************
  *                       Blocks
@@ -395,8 +495,18 @@ h1#page-title {font-size:1.5em;}
  margin: 0 0.5em 0.5em,
 }
 
-/* Navigation Menu block   */
+/* Navigation Menu block */
 #block-user-1 {}
+
+/* Drupal icon block */
+#block-system-0 {
+  border: none;
+  text-align: center;
+}
+
+#block-system-0 .fieldset-block-info {
+  text-align: left;
+}
 
 .block a:link,
 .block a:visited {color:#21759B;}
@@ -445,7 +555,6 @@ ul.menu li.last  {}
   list-style:none;
   font-weight: bold;
 }
-
 
 /*********************************************************
 *                    Admin Blocks
@@ -506,6 +615,7 @@ ul.menu li.last  {}
 .at-admin-block-edit-links {
   font-size: 0.94em;
   float: right;
+  margin-top: 0.5em;
   padding-bottom: 3px;
 }
 
