@@ -5,8 +5,11 @@
  * @file template.php
  */
 
-include_once(drupal_get_path('theme', 'adaptivetheme') .'/template.theme-settings.inc');
-include_once(drupal_get_path('theme', 'adaptivetheme') .'/template.theme-functions.inc');
+/**
+ * Include dependant settings and function.
+ */
+include_once 'template.theme-settings.inc';
+include_once 'template.theme-functions.inc';
 
 /**
  * Implement HOOK_theme
@@ -17,7 +20,7 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path){
   
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    include_once $base_path . drupal_get_path('theme', 'adaptivetheme') . '/template.conditional-styles.inc';
+    include_once $base_path . path_to_theme() . '/template.conditional-styles.inc';
     // _conditional_styles_theme() only needs to be run once.
     if ($theme == 'adaptivetheme') {
       _conditional_styles_theme($existing, $type, $theme, $path);
@@ -88,6 +91,9 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   if (!empty($vars['secondary_links'])) {
     $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
   }
+  
+  // Attribution.
+  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Drupal theme by AdaptiveThemes.com</a></div>"  ;
 
   // Section class. The section class is printed on the body element and allows you to theme site sections.
   // We use the path alias otherwise all nodes will be in "section-node".
@@ -299,7 +305,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   $vars['edit_links_array'] = array();
   $vars['edit_links'] = '';
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-    include_once './' . drupal_get_path('theme', 'adaptivetheme') . '/template.block-editing.inc';
+    include_once './' . path_to_theme() . '/template.block-editing.inc';
     phptemplate_preprocess_block_editing($vars, $hook);
     $classes[] = 'block-edit-links';
   }
@@ -323,6 +329,3 @@ $string = strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
   }
   return $string;
 }
-
-
-
