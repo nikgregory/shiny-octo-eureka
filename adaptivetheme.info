@@ -1,12 +1,11 @@
-; adaptivetheme :: a Commercial starter theme by http://adaptivethemes.com
-
+; $Id$
 
 ;----------// Theme Information
 
  ; Change the name to match your new themes name. Modify the optional description.
 
-  name         = Adaptive Theme
-  description  = Commercial starter theme
+  name         = AdaptiveTheme
+  description  = AdaptiveTheme starter theme
 
   core         = 6.x
   engine       = phptemplate
@@ -25,16 +24,21 @@
   stylesheets[all][] = css/core/base.css
   stylesheets[all][] = css/core/layout.css
   stylesheets[all][] = css/core/edit-links.css
+  
+  ; unset if you don't need this - provides a basic site only.
+  stylesheets[all][] = css/core/starter.css
+  
+  ; uncomment if using Gpanels
+  ;stylesheets[all][] = css/core/gpanels.css
 	
-  ; uncomment for dark themes
-  ;stylesheets[all][] = css/dark.css
+  ; uncomment for Dark Themes
+  ;stylesheets[all][] = css/core/dark.css
+  
+  ; uncomment for Development (good for firebugging)
+  ;stylesheets[all][] = css/core/dev.css
 	
-  ; customisable stylesheets
-  stylesheets[all][] = css/blocks.css
-  stylesheets[all][] = css/comments.css
-  stylesheets[all][] = css/nodes.css
-  stylesheets[all][] = css/page.css
-  stylesheets[all][] = css/style.css
+  ; custom stylesheet - don't rename or move this file
+  stylesheets[all][] = css/theme/theme.css
 
 
 ;----------// IE Conditional Stylesheets
@@ -95,10 +99,6 @@
   ;regions[two_col_first]     = 2col Gpanel col 1
   ;regions[two_col_second]    = 2col Gpanel col 2
 
-  ; 2 col, 2 col Nested Gpanel
-  ;regions[two_col_nested_first]  = 2col Nested Gpanel col 1
-  ;regions[two_col_nested_second] = 2col Nested Gpanel col 2
-
   ; 3 col Gpanel
   ;regions[three_col_first]   = 3col Gpanel col 1
   ;regions[three_col_second]  = 3col Gpanel col 2
@@ -128,4 +128,11 @@
   features[] = primary_links
   features[] = secondary_links
 
+
+
+; Information added by drupal.org packaging script on 2009-07-23
+version = "6.x-1.0-rc2"
+core = "6.x"
+project = "adaptivetheme"
+datestamp = "1248377414"
 
