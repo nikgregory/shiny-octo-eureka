@@ -1,4 +1,4 @@
-<?php
+<?php // $Id$
 // adaptivethemes.com
 
 /**
@@ -236,12 +236,14 @@ function phptemplate_preprocess_page(&$vars) {
       }
       // Unset CSS
       $css = drupal_add_css();
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/page.css']);
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/style.css']);
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/blocks.css']);
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/comments.css']);
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/nodes.css']);
-      unset($css['all']['theme']['sites/all/themes/adaptivetheme/css/dark.css']);
+      $core_styles = array('dev.css', 'dark.css', 'starter.css');
+      $path_to_core = path_to_theme() .'/css/core/';
+      foreach ($core_styles as $stylesheet) {
+        $file = $path_to_core . $stylesheet;
+        unset($css['all']['theme'][$file]);
+      }
+      $theme_styles = path_to_theme() .'/css/theme/theme.css';
+      unset($css['all']['theme'][$theme_styles]);
       $vars['styles'] = drupal_get_css($css);
       return $vars;
     }
@@ -557,17 +559,3 @@ function phptemplate_preprocess_comment_wrapper(&$vars) {
 function phptemplate_preprocess_views_view(&$vars) {
   $vars['css_name'] = $vars['css_name'] .' view-style-'. views_css_safe(strtolower($vars['view']->type));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
