@@ -1,26 +1,11 @@
-/* adaptivethemes.com base.css */
+/* $Id$ */
+/* adaptivethemes.com */
 
 /**
  * @file base.css
  * Base is the master reset for browsers and Drupal.
- * 
- * Base contains a compressed copy of the modular stylsheets.
- *
- * typography.css
- * tables.css
- * messages.css
- * lists.css
- * forms.css
- * admin-styles.css
- *
- * By default the theme uses base.css, mainly because Drupal can 
- * load a ridiculus number of stylesheets depending on what modules
- * you have enabled; base.css is an effort to reduce http requests and 
- * mitigate triggering IE's max 30 linked stylesheets issue.
- *
- * To gain more control over the stylesheets you can unset this and load
- * a subset of the modular stylesheets.
  */
+
 html{font-size:75%;}
 body{line-height:1.5;}
 h1{font-size:2em;margin:0 0 .5em;padding:0;}

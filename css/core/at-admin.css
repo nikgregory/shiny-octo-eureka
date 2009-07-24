@@ -1,4 +1,5 @@
-/* adaptivethemes.com at-admin.css */
+/* $Id$ */
+/* adaptivethemes.com */
 
 /**
  * @file at-admin.css
@@ -1086,7 +1087,7 @@ textarea {
 
 textarea, 
 input {
-  font: 1em normal Arial, Helvetica, sans-serif;
+  font: 1em Verdana,Arial,"Bitstream Vera Sans",sans-serif;
 }
 
 div.form-item {
