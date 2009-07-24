@@ -220,13 +220,13 @@ function phptemplate_preprocess_page(&$vars) {
     }
   }
   
-  // Unset stuff to make theming easier
+  // Unset stuff to make theming easier.
   if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
   	if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
   	  // Unset vars
       unset($vars['primary_links']);
       unset($vars['secondary_links']);
-  	  // Check whether logo is enabled for admin pages
+  	  // Check whether logo is enabled for admin pages.
       if (theme_get_setting('at_admin_theme_logo') == 0) {
         unset($vars['logo']);
       }
@@ -242,14 +242,22 @@ function phptemplate_preprocess_page(&$vars) {
         $file = $path_to_core . $stylesheet;
         unset($css['all']['theme'][$file]);
       }
+      // Comment out the following if using the array/foreach loop below.
       $theme_styles = path_to_theme() .'/css/theme/theme.css';
+      // Uncomment and add to this array if you need to unset additional theme CSS files.
+  	  // $theme_styles = array('theme.css');
+      // $path_to_theme = path_to_theme() .'/css/theme/';
+      // foreach ($theme_styles as $stylesheet) {
+      //   $file = $path_to_theme . $stylesheet;
+      //   unset($css['all']['theme'][$file]);
+      // }
       unset($css['all']['theme'][$theme_styles]);
       $vars['styles'] = drupal_get_css($css);
       return $vars;
     }
   }
   
-  // Hide breadcrumb on all pages
+  // Hide breadcrumb on all pages.
   //if (theme_get_setting('breadcrumb_display') == 0) {
   //  $vars['breadcrumb'] = '';  
   //}
