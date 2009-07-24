@@ -1,3 +1,4 @@
+// $Id$
 // adaptivethemes.com theme-settings.js
 $(document).ready( function() {
   // Hide the breadcrumb details, if no breadcrumb.

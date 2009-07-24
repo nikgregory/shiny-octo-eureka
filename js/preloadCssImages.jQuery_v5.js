@@ -1,3 +1,5 @@
+// $Id$
+
 /**
  * jQuery-Plugin "preloadCssImages"
  * by Scott Jehl, scott@filamentgroup.com
