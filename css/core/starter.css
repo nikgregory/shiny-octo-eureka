@@ -1,0 +1,67 @@
+/* $Id$ */
+/* adaptivethemes.com */
+
+/**
+ * @file stater.css
+ * Default styles for getting started.
+ */
+
+.block{clear:both;margin:0 0 1.5em;}
+ul.menu{margin:0 0 0 .75em;padding:0;}
+ul.menu ul{margin:0 0 0 .75em;padding:0;}
+ul.menu ul ul{margin:0 0 0 .75em;padding:0;}
+ul.menu ul ul ul{margin:0 0 0 .75em;padding:0;}
+ul.menu li{padding:.35em 0 0;}
+.block .item-list ul{margin:0;}
+.comment{margin:0 0 1em;}
+.comment .indented{margin-left:2em;}
+.comment-title .new{color:#FF8000;}
+.comment-title a:link{text-decoration:none;}
+.comment-title a:visited{text-decoration:none;}
+.comment-title a:active{text-decoration:none;}
+.comment-title a:hover{text-decoration:underline;}
+.comment-links ul.links{display:block;padding:0 1em 0 0;text-align:right;}
+.node{margin:0 0 1.5em;}
+.node-title a:link{text-decoration:none;}
+.node-title a:visited{text-decoration:none;}
+.node-title a:active{text-decoration:none;}
+.node-title a:hover{text-decoration:underline;}
+.node ul.links li{padding:0 1em 0 0;}
+.node-links{margin:0;}
+.node-links ul.links li{margin:0;padding:0;}
+.node-terms li.vocab{list-style:none;}
+.node-terms li span.vocab-name{font-weight:700;}
+.node-terms ul.taxonomy{margin:0;}
+.node-terms ul.taxonomy li.vocab-term{display:inline;list-style:none;}
+body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;}
+a{margin:0;padding:0;}
+a:active{border:0;color:#C00000;}
+a:focus{border:0;color:#C00000;}
+a img{border:none;}
+#container{width:980px;}
+#layout-1b .two-sidebars .content-inner{padding:0 1%;}
+#layout-1b .sidebar-left .content-inner{padding:0 0 0 1%;}
+#layout-1b .sidebar-right .content-inner{padding:0 1% 0 0;}
+#layout-2b .content-inner{padding:0 1% 0 0;}
+#layout-3b .content-inner{padding:0 0 0 1%;}
+#header-blocks{float:left;margin-left:2em;}
+#content-aside{background:#FFF;float:right;padding:0 0 20px 10px;width:240px;}
+#skip-nav{text-align:right;}
+#branding{float:left;}
+#branding h1{font-size:1em;}
+.logo-site-name span{display:block;}
+#site-name{font-size:2em;font-weight:700;line-height:1.5;}
+#search-box{float:right;}
+#search-theme-form{margin:1.5em 0;}
+.primary-links{background:#555;font-weight:700;height:2em;margin:0;padding:0;}
+.primary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
+.primary-links li a{color:#FFF;display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
+.primary-links li a:hover{background:#181818;}
+.secondary-links{background:#FFF;font-weight:700;height:2em;margin:0;padding:0;}
+.secondary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
+.secondary-links li a{color:#242424;display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
+.secondary-links li a:hover{background:#CCC;}
+#breadcrumb{padding:0 0 .75em;}
+#mission{font-weight:700;margin:0 0 1.5em;}
+.item-list ul.pager li{margin:0;}
+.feed-icon img{padding:0 .5em;}

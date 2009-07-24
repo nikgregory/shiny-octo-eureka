@@ -1,0 +1,38 @@
+/* $Id$ */
+/* adaptivethemes.com */
+
+/**
+ * Accessibility Classes
+ * This file is never loaded, they are example selectors from which
+ * you can take the properties and values (the declaration blocks)
+ * and apply to elements.
+ */
+
+/* Hide content without positioning issues. */
+.invisible {
+  height: 0;
+  overflow: hidden;
+}
+
+/** 
+ * Move content off screen where appropriate. 
+ * This should not be used for focusable elements! 
+ * Instead swap top and left values to move it to the 
+ * side of the viewport or else you will get scrolling 
+ * issues when an element is focused (e.g. tabbed onto). 
+ */
+.offscreen {
+  position: absolute;
+  top: -9999em;
+  left: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Completely remove content for all users.
+   DO NOT use this for Skip links, display:none 
+   hides content from screen readers! */
+.remove {
+  display: none;
+}
