@@ -1,4 +1,5 @@
-<?php // adaptivethemes.com 4col-25-25-25-25.php 
+<?php // $Id$ 
+// adaptivethemes.com 4col-25-25-25-25.php 
 
 /**
  * @file 4col-25-25-25-25.php

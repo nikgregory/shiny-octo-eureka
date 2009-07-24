@@ -1,4 +1,5 @@
-<?php // adaptivethemes.com page-gpanel_examples.tpl.php
+<?php // $Id$
+// adaptivethemes.com page-gpanel_examples.tpl.php
 
 /**
  * @file page-gpanel_examples.tpl.php
