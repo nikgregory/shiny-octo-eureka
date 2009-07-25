@@ -29,7 +29,7 @@
   stylesheets[all][] = css/core/starter.css
   
   ; uncomment if using Gpanels
-  stylesheets[all][] = css/core/gpanels.css
+  ;stylesheets[all][] = css/core/gpanels.css
 	
   ; uncomment for Dark Themes
   ;stylesheets[all][] = css/core/dark.css
@@ -107,56 +107,56 @@
   ;--// TWO column Gpanels
   
   ; 2 col 2x50 Gpanel
-  regions[two_col_2x50_first]   = 2col 2x50 Gpanel col 1
-  regions[two_col_2x50_second]  = 2col 2x50 Gpanel col 2
+  ;regions[two_col_2x50_first]   = 2col 2x50 Gpanel col 1
+  ;regions[two_col_2x50_second]  = 2col 2x50 Gpanel col 2
 
   ; 2 col 33-66 Gpanel
-  regions[two_col_33_66_first]      = 2col 33-66 Gpanel col 1
-  regions[two_col_33_66_second]     = 2col 33-66 Gpanel col 2
+  ;regions[two_col_33_66_first]      = 2col 33-66 Gpanel col 1
+  ;regions[two_col_33_66_second]     = 2col 33-66 Gpanel col 2
 
   ; 2 col 66-33 Gpanel
-  regions[two_col_66_33_first]      = 2col 66-33 Gpanel col 1
-  regions[two_col_66_33_second]     = 2col 66-33 Gpanel col 2
+  ;regions[two_col_66_33_first]      = 2col 66-33 Gpanel col 1
+  ;regions[two_col_66_33_second]     = 2col 66-33 Gpanel col 2
 
 
   ;--// THREE column Gpanels
   
   ; 3 col 3x33 Gpanel
-  regions[three_col_3x33_first]       = 3col 3x33 Gpanel col 1
-  regions[three_col_3x33_second]      = 3col 3x33 Gpanel col 2
-  regions[three_col_3x33_third]       = 3col 3x33 Gpanel col 3
+  ;regions[three_col_3x33_first]       = 3col 3x33 Gpanel col 1
+  ;regions[three_col_3x33_second]      = 3col 3x33 Gpanel col 2
+  ;regions[three_col_3x33_third]       = 3col 3x33 Gpanel col 3
 
   ; 3 col 25-25-50 Gpanel
-  regions[three_col_25_25_50_first]   = 3col 25-25-50 Gpanel col 1
-  regions[three_col_25_25_50_second]  = 3col 25-25-50 Gpanel col 2
-  regions[three_col_25_25_50_third]   = 3col 25-25-50 Gpanel col 3
+  ;regions[three_col_25_25_50_first]   = 3col 25-25-50 Gpanel col 1
+  ;regions[three_col_25_25_50_second]  = 3col 25-25-50 Gpanel col 2
+  ;regions[three_col_25_25_50_third]   = 3col 25-25-50 Gpanel col 3
   
   ; 3 col 50-25-25 Gpanel
-  regions[three_col_50_25_25_first]   = 3col 50-25-25 Gpanel col 1
-  regions[three_col_50_25_25_second]  = 3col 50-25-25 Gpanel col 2
-  regions[three_col_50_25_25_third]   = 3col 50-25-25 Gpanel col 3
+  ;regions[three_col_50_25_25_first]   = 3col 50-25-25 Gpanel col 1
+  ;regions[three_col_50_25_25_second]  = 3col 50-25-25 Gpanel col 2
+  ;regions[three_col_50_25_25_third]   = 3col 50-25-25 Gpanel col 3
   
 
   ;--// FOUR column Gpanel
-  regions[four_col_first]   = 4col Gpanel col 1
-  regions[four_col_second]  = 4col Gpanel col 2
-  regions[four_col_third]   = 4col Gpanel col 3
-  regions[four_col_fourth]  = 4col Gpanel col 4
+  ;regions[four_col_first]   = 4col Gpanel col 1
+  ;regions[four_col_second]  = 4col Gpanel col 2
+  ;regions[four_col_third]   = 4col Gpanel col 3
+  ;regions[four_col_fourth]  = 4col Gpanel col 4
 
   ;--// FIVE column Gpanel
-  regions[five_col_first]   = 5col Gpanel col 1
-  regions[five_col_second]  = 5col Gpanel col 2
-  regions[five_col_third]   = 5col Gpanel col 3
-  regions[five_col_fourth]  = 5col Gpanel col 4
-  regions[five_col_fifth]   = 5col Gpanel col 5
+  ;regions[five_col_first]   = 5col Gpanel col 1
+  ;regions[five_col_second]  = 5col Gpanel col 2
+  ;regions[five_col_third]   = 5col Gpanel col 3
+  ;regions[five_col_fourth]  = 5col Gpanel col 4
+  ;regions[five_col_fifth]   = 5col Gpanel col 5
 
   ;--// SIX column Gpanel
-  regions[six_col_first]    = 6col Gpanel col 1
-  regions[six_col_second]   = 6col Gpanel col 2
-  regions[six_col_third]    = 6col Gpanel col 3
-  regions[six_col_fourth]   = 6col Gpanel col 4
-  regions[six_col_fifth]    = 6col Gpanel col 5
-  regions[six_col_sixth]    = 6col Gpanel col 6
+  ;regions[six_col_first]    = 6col Gpanel col 1
+  ;regions[six_col_second]   = 6col Gpanel col 2
+  ;regions[six_col_third]    = 6col Gpanel col 3
+  ;regions[six_col_fourth]   = 6col Gpanel col 4
+  ;regions[six_col_fifth]    = 6col Gpanel col 5
+  ;regions[six_col_sixth]    = 6col Gpanel col 6
 
 
 ;----------// Features
