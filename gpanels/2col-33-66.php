@@ -1,9 +1,9 @@
-<?php // $Id$
-// adaptivethemes.com 2col-50-50.php
+<?php // $Id:
+// adaptivethemes.com
 
 /**
- * @file 2col-50-50.php
- * Gpanel code snippet to display two 50% width regions as columns.
+ * @file 2col-33-66.php
+ * Gpanel code snippet to display two regions (33%/66%) as columns.
  *
  * GPanels are drop in multi-column snippets for displaying blocks in 
  * vertical columns, such as 2 columns, 3 columns or 4 columns.
@@ -18,28 +18,21 @@
  * 
  * Gpanels are fluid, meaning they stretch and compress with the page width.
  *
- *
  * Region Variables:
  * 
- * Standard Two column Gpanel 
- * $two_col_first:  outputs the "2col Gpanel column 1" region.
- * $two_col_second: outputs the "2col Gpanel column 2" region.
- * 
- * Nested Two column Gpanel (see the 2nd code example)
- * $two_col_nested_first:  outputs the "2col Nested Gpanel col 1" region.
- * $two_col_nested_second: outputs the "2col Nested Gpanel col 2" region.
+ * $two_col_33_66_first:  outputs the "2col 33-66 Gpanel col 1" region.
+ * $two_col_33_66_second: outputs the "2col 33-66 Gpanel col 2" region.
  */
 ?>
 
-
-<!--//   Two column Gpanel   //-->
-<?php if ($two_col_first or $two_col_second): ?>
-  <div class="two-col-50 gpanel clear-block">
+<!--//   Two column 33-66 Gpanel   //-->
+<?php if ($two_col_33_66_first or $two_col_33_66_second): ?>
+  <div class="two-col-33-66 gpanel clear-block">
     <div class="section region col-1 first"><div class="inner">
-      <?php if ($two_col_first): print $two_col_first; endif; ?>
+      <?php if ($two_col_33_66_first): print $two_col_33_66_first; endif; ?>
     </div></div>
     <div class="section region col-2 last"><div class="inner">
-      <?php if ($two_col_second): print $two_col_second; endif; ?>
+      <?php if ($two_col_33_66_second): print $two_col_33_66_second; endif; ?>
     </div></div>
   </div>
 <?php endif; ?>

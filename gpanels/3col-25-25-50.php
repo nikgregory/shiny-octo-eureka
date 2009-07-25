@@ -1,9 +1,9 @@
-<?php // $Id$
-// adaptivethemes.com 3col-33-34-33.php
+<?php // $Id:
+// adaptivethemes.com
 
 /**
- * @file 3col-33-34-33.php
- * Gpanel code snippet to display three 33% width regions as columns.
+ * @file 3col-25-25-50.php
+ * Gpanel code snippet to display three regions (25%, 25%, 50%) as columns.
  *
  * GPanels are drop in multi-column snippets for displaying blocks in 
  * vertical columns, such as 2 columns, 3 columns or 4 columns.
@@ -19,23 +19,23 @@
  * Gpanels are fluid, meaning they stretch and compress with the page width.
  *
  * Region variables:
- * $three_col_first:  outputs the "3col Gpanel column 1" region.
- * $three_col_second: outputs the "3col Gpanel column 2" region.
- * $three_col_third:  outputs the "3col Gpanel column 3" region.
+ * $three_col_25_25_50_first:  outputs the "3col 25-25-50 Gpanel col 1" region.
+ * $three_col_25_25_50_second: outputs the "3col 25-25-50 Gpanel col 2" region.
+ * $three_col_25_25_50_third:  outputs the "3col 25-25-50 Gpanel col 3" region.
  */
 ?>
 
-<!--//   Three column Gpanel   //-->
-<?php if ($three_col_first or $three_col_second or $three_col_third): ?>
-  <div class="three-col-33 gpanel clear-block">
+<!--//   Three column 25-25-50 Gpanel   //-->
+<?php if ($three_col_25_25_50_first or $three_col_25_25_50_second or $three_col_25_25_50_third): ?>
+  <div class="three-col-25-25-50 gpanel clear-block">
     <div class="section region col-1 first"><div class="inner">
-      <?php if ($three_col_first): print $three_col_first; endif; ?>
+      <?php if ($three_col_25_25_50_first): print $three_col_25_25_50_first; endif; ?>
     </div></div>
     <div class="section region col-2"><div class="inner">
-      <?php if ($three_col_second): print $three_col_second; endif; ?>
+      <?php if ($three_col_25_25_50_second): print $three_col_25_25_50_second; endif; ?>
     </div></div>
     <div class="section region col-3 last"><div class="inner">
-      <?php if ($three_col_third): print $three_col_third; endif; ?>
+      <?php if ($three_col_25_25_50_third): print $three_col_25_25_50_third; endif; ?>
     </div></div>
   </div>
 <?php endif; ?>

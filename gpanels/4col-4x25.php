@@ -1,9 +1,9 @@
-<?php // $Id$ 
-// adaptivethemes.com 4col-25-25-25-25.php 
+<?php // $Id:
+// adaptivethemes.com
 
 /**
- * @file 4col-25-25-25-25.php
- * Gpanel code snippet to display four 25% width regions as columns.
+ * @file 4col-4x25.php
+ * Gpanel code snippet to display 4x25% width regions as columns.
  *
  * GPanels are drop in multi-column snippets for displaying blocks in 
  * vertical columns, such as 2 columns, 3 columns or 4 columns.
@@ -19,16 +19,16 @@
  * Gpanels are fluid, meaning they stretch and compress with the page width.
  *
  * Region variables:
- * $four_col_first:  outputs the "4col Gpanel column 1" region.
- * $four_col_second: outputs the "4col Gpanel column 2" region.
- * $four_col_third:  outputs the "4col Gpanel column 3" region.
- * $four_col_third:  outputs the "4col Gpanel column 4" region.
+ * $four_col_first:  outputs the "4col Gpanel col 1" region.
+ * $four_col_second: outputs the "4col Gpanel col 2" region.
+ * $four_col_third:  outputs the "4col Gpanel col 3" region.
+ * $four_col_third:  outputs the "4col Gpanel col 4" region.
  */
 ?>
 
 <!--//   Four column Gpanel   //-->
 <?php if ($four_col_first or $four_col_second or $four_col_third or $four_col_fourth): ?>
-  <div class="four-col-25 gpanel clear-block">
+  <div class="four-col-4x25 gpanel clear-block">
     <div class="section-1">
       <div class="section region col-1 first"><div class="inner">
         <?php if ($four_col_first): print $four_col_first; endif; ?>
