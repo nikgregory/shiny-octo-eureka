@@ -5,7 +5,7 @@
  ; Change the name to match your new themes name. Modify the optional description.
 
   name         = AdaptiveTheme
-  description  = AdaptiveTheme starter theme
+  description  = A starter theme by <a href="http://adaptivethemes.com">AdaptiveThemes</a>
 
   core         = 6.x
   engine       = phptemplate
