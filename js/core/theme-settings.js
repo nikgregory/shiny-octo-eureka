@@ -1,5 +1,6 @@
 // $Id$
-// adaptivethemes.com theme-settings.js
+// adaptivethemes.com
+
 $(document).ready( function() {
   // Hide the breadcrumb details, if no breadcrumb.
   $('#edit-tnt-breadcrumb').change(
@@ -26,4 +27,4 @@ $(document).ready( function() {
     }
   );
   $('#edit-breadcrumb-title').change();
-} );
+});

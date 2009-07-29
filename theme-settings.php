@@ -787,7 +787,8 @@ SCRIPT;
       '#rows' => 6,
       '#default_value' => $settings['meta_description'],
     );
-  } else {
+  } 
+  else {
       $form['adpt_container']['seo']['meta']['#description'] = 'NOTICE: You currently have the "nodewords" module installed and enabled, so the meta tag theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the meta tag theme settings, you must first disable the "nodewords" module.';
       $form['adpt_container']['seo']['meta']['meta_keywords']['#disabled'] = 'disabled';
       $form['adpt_container']['seo']['meta']['meta_description']['#disabled'] = 'disabled';

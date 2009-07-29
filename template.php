@@ -16,11 +16,11 @@ include_once 'template.theme-functions.inc';
  * - Add conditional stylesheets:
  *   For more information: http://msdn.microsoft.com/en-us/library/ms537512.aspx
  */
-function adaptivetheme_theme(&$existing, $type, $theme, $path){
+function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    include_once $base_path . path_to_theme() . '/template.conditional-styles.inc';
+    include_once $base_path . path_to_theme() .'/template.conditional-styles.inc';
     // _conditional_styles_theme() only needs to be run once.
     if ($theme == 'adaptivetheme') {
       _conditional_styles_theme($existing, $type, $theme, $path);
@@ -71,7 +71,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
 
   // Add conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    $vars['styles'] .= $vars['conditional_styles'] = variable_get('conditional_styles_' . $GLOBALS['theme'], '');
+    $vars['styles'] .= $vars['conditional_styles'] = variable_get('conditional_styles_'. $GLOBALS['theme'], '');
   }
 
   // Set variables for the logo and site_name.
@@ -92,8 +92,15 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
   }
   
+  // Admin welcome message with date
+  global $user;
+  $welcome = t('Welcome') .' '. $user->name;
+  $conjunction = ', '. t('it\'s') .' ';
+  $todays_date = date("l, F d Y" , time()); 
+  $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+
   // Attribution.
-  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Drupal theme by AdaptiveThemes.com</a></div>"  ;
+  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
 
   // Section class. The section class is printed on the body element and allows you to theme site sections.
   // We use the path alias otherwise all nodes will be in "section-node".
@@ -190,6 +197,10 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   }
   if (isset($vars['preview'])) {
     $classes[] = 'node-preview';
+  }
+  // Add support for Skinr module classes http://drupal.org/project/skinr
+  if (function_exists('node_skinr_data')) {
+    $classes[] = $vars['skinr'];
   }
   // Class for node type: "node-type-page", "node-type-story", "node-type-my-custom-type", etc.
   $classes[] = 'node-'. $vars['node']->type;
@@ -301,23 +312,25 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   //$classes[] = $vars['block_zebra'];        // odd, even zebra class
   //$classes[] = 'block-'. $block->region;    // block-[region] class
   //$classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
-  
+
   // Add special classes to support the http://drupal.org/project/blocktheme module.
   if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
     $classes[] = $vars['blocktheme'];
     $classes[] = $block->region .'-'. $vars['blocktheme'];
   }
-  
   // Add special classes to support the http://drupal.org/project/block_class module.
   if (function_exists('block_class') && block_class($block)) {
     $classes[] = block_class($block);
     $classes[] = $block->region .'-'. block_class($block);
   }
-  
+  // Add support for Skinr module classes http://drupal.org/project/skinr
+  if (function_exists('block_skinr_data')) {
+    $classes[] = $vars['skinr'];
+  }
   $vars['edit_links_array'] = array();
   $vars['edit_links'] = '';
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-    include_once './' . path_to_theme() . '/template.block-editing.inc';
+    include_once './'. path_to_theme() .'/template.block-editing.inc';
     phptemplate_preprocess_block_editing($vars, $hook);
     $classes[] = 'block-edit-links';
   }

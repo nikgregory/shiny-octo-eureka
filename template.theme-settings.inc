@@ -9,16 +9,16 @@
  * Initialize theme settings
  */
 if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting('rebuild_registry')) {
-    
+
   // Auto-rebuild the theme registry during theme development.
-  if(theme_get_setting('rebuild_registry')) {
-    drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/' . $GLOBALS['theme']))), 'warning');
+  if (theme_get_setting('rebuild_registry')) {
+    drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
   }
 
   global $theme_key;
   // Get node types
   $node_types = node_get_types('names');
-  
+
   /**
    * The default values for the theme variables. Make sure $defaults exactly
    * matches the $defaults in the theme-settings.php file.
@@ -81,11 +81,11 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0
   );
-  
+
   // Make the default content-type settings the same as the default theme settings,
   // so we can tell if content-type-specific settings have been altered.
   $defaults = array_merge($defaults, theme_get_settings());
-  
+
   // Set the default values for content-type-specific settings
   foreach ($node_types as $type => $name) {
     $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
@@ -115,10 +115,10 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     $defaults["comment_node_prefix_{$type}"]      = $defaults['comment_node_prefix_default'];
     $defaults["comment_node_suffix_{$type}"]      = $defaults['comment_node_suffix_default'];
   }
-  
+
   // Get default theme settings.
   $settings = theme_get_settings($theme_key);
-  
+
   // If content type-specifc settings are not enabled, reset the values
   if (!$settings['readmore_enable_content_type']) {
     foreach ($node_types as $type => $name) {
@@ -150,7 +150,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
       $defaults["comment_node_suffix_{$type}"]      = $defaults['comment_node_suffix_default'];
     }
   }
-  
+
   // Don't save the toggle_node_info_ variables
   if (module_exists('node')) {
     foreach (node_get_types() as $type => $name) {
@@ -187,46 +187,46 @@ function phptemplate_preprocess(&$vars) {
 
 function phptemplate_preprocess_page(&$vars) {
   global $theme;
-  
+
   // ADPT THEME SETTINGS SECTION
   // Display mission statement on all pages
   if (theme_get_setting('mission_statement_pages') == 'all') {
-    $vars['mission'] = theme_get_setting('mission', false);  
+    $vars['mission'] = theme_get_setting('mission', FALSE);  
   }
   
   // Template suggestions for admin theme
   if (!$vars['is_front']) {
-  	if (theme_get_setting('at_admin_theme')) {
-  	  if ((arg(0) == 'admin')) {
-  	    $vars['template_files'][] = 'page-at_admin';
-  	  }
+    if (theme_get_setting('at_admin_theme')) {
+      if ((arg(0) == 'admin')) {
+        $vars['template_files'][] = 'page-at_admin';
+      }
       if (arg(2) == 'block') {
         $vars['template_files'][] = 'page';
       }
-  	}
-  	if (theme_get_setting('at_admin_theme_node')) {
+    }
+    if (theme_get_setting('at_admin_theme_node')) {
       if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
         $vars['template_files'][] = 'page-at_admin';
       }
     }
   }
-  
+
   /**
    * Load the admin theme CSS file.
    */
   if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
     if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
-      drupal_add_css(path_to_theme() . '/css/core/at-admin.css', 'theme', 'all');
+      drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
     }
   }
-  
+
   // Unset stuff to make theming easier.
   if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
-  	if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
-  	  // Unset vars
+    if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+      // Unset vars
       unset($vars['primary_links']);
       unset($vars['secondary_links']);
-  	  // Check whether logo is enabled for admin pages.
+      // Check whether logo is enabled for admin pages.
       if (theme_get_setting('at_admin_theme_logo') == 0) {
         unset($vars['logo']);
       }
@@ -242,10 +242,10 @@ function phptemplate_preprocess_page(&$vars) {
         $file = $path_to_core . $stylesheet;
         unset($css['all']['theme'][$file]);
       }
-      // Comment out the following if using the array/foreach loop below.
+      // Comment out the following if using the array/foreach loop below it to unset custom stylesheets.
       $theme_styles = path_to_theme() .'/css/theme/theme.css';
-      // Uncomment and add to this array if you need to unset additional theme CSS files.
-  	  // $theme_styles = array('theme.css');
+      // Uncomment and add to this array if you need to unset additional theme CSS files. If you don't it could mess up the admin themes.
+      // $theme_styles = array('theme.css');
       // $path_to_theme = path_to_theme() .'/css/theme/';
       // foreach ($theme_styles as $stylesheet) {
       //   $file = $path_to_theme . $stylesheet;
@@ -399,7 +399,7 @@ function phptemplate_preprocess_node(&$vars) {
           theme_get_setting('comment_add_prefix_'. $node_content_type),
           theme_get_setting('comment_add_suffix_'. $node_content_type),
           theme_get_setting('comment_add_'. $node_content_type),
-          "comment/reply/".$vars['node']->nid,
+          "comment/reply/". $vars['node']->nid,
           array(
             'attributes' => array('title' => theme_get_setting('comment_add_title_'. $node_content_type)), 
             'query' => NULL, 'fragment' => 'comment-form', 'absolute' => FALSE, 'html' => TRUE
@@ -415,7 +415,7 @@ function phptemplate_preprocess_node(&$vars) {
           theme_get_setting('comment_node_prefix_'. $node_content_type),
           theme_get_setting('comment_node_suffix_'. $node_content_type),
           theme_get_setting('comment_node_'. $node_content_type),
-          "comment/reply/".$vars['node']->nid,
+          "comment/reply/". $vars['node']->nid,
           array(
             'attributes' => array('title' => theme_get_setting('comment_node_title_'. $node_content_type)), 
             'query' => NULL, 'fragment' => 'comment-form', 'absolute' => FALSE, 'html' => TRUE
@@ -437,7 +437,7 @@ function phptemplate_preprocess_node(&$vars) {
           theme_get_setting('comment_new_singular_'. $node_content_type),
           theme_get_setting('comment_new_plural_'. $node_content_type)
         ),
-        "node/".$vars['node']->nid,
+        "node/". $vars['node']->nid,
         array(
           'attributes' => array('title' => theme_get_setting('comment_new_title_'. $node_content_type)), 
           'query' => NULL, 'fragment' => 'new', 'absolute' => FALSE, 'html' => TRUE
@@ -458,7 +458,7 @@ function phptemplate_preprocess_node(&$vars) {
           theme_get_setting('comment_singular_'. $node_content_type),
           theme_get_setting('comment_plural_'. $node_content_type)
         ),
-        "node/".$vars['node']->nid,
+        "node/". $vars['node']->nid,
         array(
           'attributes' => array('title' => theme_get_setting('comment_title_'. $node_content_type)), 
           'query' => NULL, 'fragment' => 'comments', 'absolute' => FALSE, 'html' => TRUE
