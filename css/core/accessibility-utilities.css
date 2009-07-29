@@ -29,10 +29,3 @@
   height: 1px;
   overflow: hidden;
 }
-
-/* Completely remove content for all users.
-   DO NOT use this for Skip links, display:none 
-   hides content from screen readers! */
-.remove {
-  display: none;
-}
