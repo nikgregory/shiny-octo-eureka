@@ -32,7 +32,7 @@
  */
 ?>
 <?php if ($content): ?>
-  <div id="comments">
+  <div id="comments" class="<?php print $skinr; ?>">
 	  <h2 id="comments-title"><?php print t('Comments'); ?></h2>
     <?php print $content; ?>
   </div>

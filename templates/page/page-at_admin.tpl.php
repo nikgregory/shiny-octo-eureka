@@ -87,7 +87,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
 <head>
-  <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
@@ -143,13 +142,8 @@
       <?php endif; ?>
       
       <div id="user-date">
-        <?php 
-          global $user;
-          print t('Welcome') .' '. $user->name;
-          print ', '. t('it\'s') .' ';
-          print date("l, F d Y" ,time()); 
-        ?>
-      </div>
+        <?php print $admin_welcome; ?>
+      </div> <!-- /admin welcome -->
 
     </div> <!-- /header -->
 
@@ -247,8 +241,8 @@
     <?php endif; ?>
 
   </div> <!-- /container -->
-  <?php print $attribution ?>
-  <?php print $closure ?>
+  <?php print $attribution; ?>
+  <?php print $closure; ?>
 
 </body>
 </html>

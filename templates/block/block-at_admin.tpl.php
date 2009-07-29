@@ -36,16 +36,14 @@
  */
 ?>
 <div id="<?php print $block_id; ?>" class="block-at-admin">
-	
-  <?php // dprint_r($block); ?>
 
   <?php if ($block->subject): ?>
     <div class="block-header">
       <h2 class="block-title"><?php print $block->subject; ?></h2>
     </div>
   <?php endif; ?>
-  
-  <div class="block-inner clear-block">
+
+  <div class="block-inner content clear-block">
     <fieldset class="collapsible collapsed fieldset-block-info">
       <legend class="collapse">
   	    <a href="#"><?php print t('Block Info'); ?></a>
