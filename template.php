@@ -8,8 +8,9 @@
 /**
  * Include dependant settings and function.
  */
-include_once 'template.theme-settings.inc';
-include_once 'template.theme-functions.inc';
+include_once 'inc/template.custom-functions.inc';
+include_once 'inc/template.theme-settings.inc';
+include_once 'inc/template.theme-functions.inc';
 
 /**
  * Implement HOOK_theme
@@ -20,7 +21,7 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    include_once $base_path . path_to_theme() .'/template.conditional-styles.inc';
+    include_once $base_path . path_to_theme() .'/inc/template.conditional-styles.inc';
     // _conditional_styles_theme() only needs to be run once.
     if ($theme == 'adaptivetheme') {
       _conditional_styles_theme($existing, $type, $theme, $path);
@@ -69,7 +70,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['right'] = '';
   }
 
-  // Add conditional stylesheets.
+  // Add conditional stylesheets (for Internt Explorer).
   if (!module_exists('conditional_styles')) {
     $vars['styles'] .= $vars['conditional_styles'] = variable_get('conditional_styles_'. $GLOBALS['theme'], '');
   }
@@ -92,7 +93,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
   }
   
-  // Admin welcome message with date
+  // Admin welcome message with date for the admin theme.
   global $user;
   $welcome = t('Welcome') .' '. $user->name;
   $conjunction = ', '. t('it\'s') .' ';
@@ -120,8 +121,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
 
  /** 
   * Optional Region body classes
-  * Uncomment the following if you need to set
-  * a body class for each active region.
+  * Uncomment the following if you need to set a body class for each active region.
   */
   /*        
   if (!empty($vars['leaderboard'])) {
@@ -145,9 +145,9 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
    * Additional body classes to help out themers.
    */
   if (!$vars['is_front']) {
-    $normal_path = drupal_get_normal_path($_GET['q']);
-    // Set a class based on Drupals internal path, e.g. page-node-1. 
+    // Set classes based on Drupals internal path, e.g. page-node-1. 
     // Using the alias is fragile because path alias's can change, $normal_path is more reliable.
+    $normal_path = drupal_get_normal_path($_GET['q']);
     $classes[] = safe_string('page-'. $normal_path);
     if (arg(2) == 'block') {
       $classes[] = 'page-block';
@@ -179,7 +179,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   // Set the node id.
   $vars['node_id'] = 'node-'. $vars['node']->nid;
 
-  // Special classes for nodes, emulate Drupal 7.
+  // Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
   $classes = array();
   $classes[] = 'node';
   if ($vars['promote']) {
@@ -206,7 +206,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   $classes[] = 'node-'. $vars['node']->type;
   $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
   
-  // Add node_bottom region content
+  // Add node_bottom region content.
   $vars['node_bottom'] = theme('blocks', 'node_bottom');
   
   // Set messages if node is unpublished.
@@ -232,7 +232,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
 function adaptivetheme_preprocess_comment(&$vars, $hook) {
   global $user;
 
-  // Special classes for comments, emulate Drupal 7.
+  // Special classes for comments, emulates Drupal 7 for forward compatibility.
   // Load the node object that the current comment is attached to.
   $node = node_load($vars['comment']->nid);
   $classes = array();
@@ -330,27 +330,10 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   $vars['edit_links_array'] = array();
   $vars['edit_links'] = '';
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-    include_once './'. path_to_theme() .'/template.block-editing.inc';
+    include_once './'. path_to_theme() .'/inc/template.block-editing.inc';
     phptemplate_preprocess_block_editing($vars, $hook);
     $classes[] = 'block-edit-links';
   }
   
   $vars['classes'] = implode(' ', $classes);
-}
-
-
-/**
- * Clean a string of unwanted characters.
- *
- * @param $string
- *   The string
- * @return
- *   The converted string
- */
-function safe_string($string) {
-$string = strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
-  if (!ctype_lower($string{0})) {
-    $string = 'id'. $string;
-  }
-  return $string;
 }
