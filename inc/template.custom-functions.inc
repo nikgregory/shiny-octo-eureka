@@ -1,0 +1,37 @@
+<?php //$Id$
+
+/**
+ * Clean a string of unwanted characters.
+ *
+ * @param $string
+ *   The string
+ * @return
+ *   The converted string
+ */
+function safe_string($string) {
+$string = strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
+  if (!ctype_lower($string{0})) {
+    $string = 'id'. $string;
+  }
+  return $string;
+}
+
+/**
+ * Limit the length of a string.
+ *
+ * @param $string
+ *   The string
+ * @param $lenght
+ *   The lenght of the trimmed string
+ * @$ellipsis
+ *   
+ * @return
+ *   The converted string
+ */
+function wordlimit($string, $length = 50, $ellipsis = "...") {
+  $words = explode(' ', strip_tags($string));
+  if (count($words) > $length)
+    return implode(' ', array_slice($words, 0, $length)) . $ellipsis;
+  else
+    return $string;
+}

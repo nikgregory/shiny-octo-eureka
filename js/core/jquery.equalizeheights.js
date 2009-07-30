@@ -90,6 +90,6 @@ $.fn.equalHeights = function(px) {
 
 if (Drupal.jsEnabled) {
   $(document).ready(function() {
-    $('#columns').equalHeights();
+    $('#columns-inner').equalHeights();
   });
 }
