@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* $Id$ */
+/* adaptivethemes.com */
+
+/**
+ * @file stater-rtl.css
+ * Default styles for getting started. Unset this if you want a style-free starter theme.
+ */
+body{font-family:"Arabic Transparent";}
+#skip-nav{text-align:left;}
+.primary-links li{float:left;}
+.secondary-links li{float:left;}
+ul.menu,
+ul.menu ul,
+ul.menu ul ul,
+ul.menu ul ul ul{margin:0 0 0 .75em;}
+.comment-links ul.links{padding:0 0 0 1em;text-align:left;}
+.node ul.links li{padding:0 1em 0 0;}
