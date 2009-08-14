@@ -29,22 +29,18 @@
 <!--//   Four column Gpanel   //-->
 <?php if ($four_col_first or $four_col_second or $four_col_third or $four_col_fourth): ?>
   <div class="four-col-4x25 gpanel clear-block">
-    <div class="section-1">
-      <div class="section region col-1 first"><div class="inner">
-        <?php if ($four_col_first): print $four_col_first; endif; ?>
-      </div></div>
-      <div class="section region col-2"><div class="inner">
-        <?php if ($four_col_second): print $four_col_second; endif; ?>
-      </div></div>
-    </div>
-    <div class="section-2">
-      <div class="section region col-3"><div class="inner">
-        <?php if ($four_col_third): print $four_col_third; endif; ?>
-      </div></div>
-      <div class="section region col-4 last"><div class="inner">
-        <?php if ($four_col_fourth): print $four_col_fourth; endif; ?>
-      </div></div>
-    </div>
+    <div class="section region col-1 first"><div class="inner">
+      <?php if ($four_col_first): print $four_col_first; endif; ?>
+    </div></div>
+    <div class="section region col-2"><div class="inner">
+      <?php if ($four_col_second): print $four_col_second; endif; ?>
+    </div></div>
+    <div class="section region col-3"><div class="inner">
+      <?php if ($four_col_third): print $four_col_third; endif; ?>
+    </div></div>
+    <div class="section region col-4 last"><div class="inner">
+      <?php if ($four_col_fourth): print $four_col_fourth; endif; ?>
+    </div></div>
   </div>
 <?php endif; ?>
 <!--/end Gpanel-->
