@@ -75,6 +75,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'comment_node_suffix_default'           => '',
     'comment_enable_content_type'           => 0,
     'rebuild_registry'                      => 0,
+    'load_firebug_lite'                     => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
@@ -171,7 +172,16 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
 if (theme_get_setting('at_admin_theme')) {
   if (arg(2) == 'block') {
     drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
+    $path_to_core = path_to_theme() .'/js/core/';
+    drupal_add_js($path_to_core .'admin.collapseblock.js', 'theme', 'header', FALSE, TRUE, TRUE);
+    drupal_add_js($path_to_core .'jquery.cookie.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
+}
+
+// Load Firebug lite
+if (theme_get_setting('load_firebug_lite')) {
+  $path_to_core = path_to_theme() .'/js/core/';
+  drupal_add_js($path_to_core .'firebug.lite.compressed.js', 'theme', 'header', FALSE, TRUE, TRUE);
 }
 
 
@@ -482,8 +492,8 @@ function phptemplate_node_form($form) {
       $sidebar = drupal_render($form['taxonomy']);
       $main = drupal_render($form);
       return "<div class='node-form clear-block'>
-        <div class='right'>{$buttons}{$sidebar}</div>
-        <div class='left'><div class='main'>{$main}{$buttons}</div></div>
+        <div class='node-col-last'>{$buttons}{$sidebar}</div>
+        <div class='node-col-first'><div class='main'>{$main}{$buttons}</div></div>
         </div>";
     }
   }
@@ -498,6 +508,12 @@ function phptemplate_preprocess_block(&$vars) {
       $vars['block_slider'] = '<a id="close" style="display: none;" class="close" href="#"><span class="panel-close">'. t('Close') .'</span></a>';
       $vars['block_slider'] .= '<a id="open" class="open" href="#"><span class="panel-open">'. t('Open') .'</span></a>';
     }
+  }
+  $vars['edit_links_array'] = array();
+  $vars['edit_links'] = '';
+  if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
+    include_once './'. path_to_theme() .'/inc/template.block-editing.inc';
+    phptemplate_preprocess_block_editing($vars, $hook);
   }
 }
 
