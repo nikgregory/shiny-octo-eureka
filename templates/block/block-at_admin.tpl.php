@@ -35,15 +35,16 @@
  * then unset the block-edit.css in your subhtemes .info file.
  */
 ?>
-<div id="<?php print $block_id; ?>" class="block-at-admin">
+<div id="<?php print $block_id; ?>" class="block-at-admin"><div class="block-at-admin-inner">
 
-  <?php if ($block->subject): ?>
     <div class="block-header">
-      <h2 class="block-title"><?php print $block->subject; ?></h2>
+      <h2 class="block-title clear-block">
+      	<span><a href="#" class="toggle-block" id="<?php print $block->module .'-'. $block->delta;?>">Toggle</a></span>
+      	<?php print $block->subject ? $block->subject : t('No title set'); ?>
+  	  </h2>
     </div>
-  <?php endif; ?>
 
-  <div class="block-inner content clear-block">
+  <div class="block-at-admin-content content clear-block toggle-<?php print $block->module .'-'. $block->delta; ?>">
     <fieldset class="collapsible collapsed fieldset-block-info">
       <legend class="collapse">
   	    <a href="#"><?php print t('Block Info'); ?></a>
@@ -80,4 +81,4 @@
     <?php endif; ?>
 
   </div>
-</div> <!-- /block-at_admin -->
+</div></div> <!-- /block-at_admin -->
