@@ -327,11 +327,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   if (function_exists('block_skinr_data')) {
     $classes[] = $vars['skinr'];
   }
-  $vars['edit_links_array'] = array();
-  $vars['edit_links'] = '';
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-    include_once './'. path_to_theme() .'/inc/template.block-editing.inc';
-    phptemplate_preprocess_block_editing($vars, $hook);
     $classes[] = 'block-edit-links';
   }
   
