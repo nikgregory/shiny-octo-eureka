@@ -78,8 +78,7 @@
 #layout-4 .sidebar-left #sidebar-first{width:37%;margin-left:-37%;}
 
 /* Add padding to align elements to the grid. */
-.node,.block,.block-at-admin,.comment,#skip-nav,#branding,#search-box,.primary-inner,.secondary-inner,
-#mission,#main-content-header,.footer-message-inner,#attribution {padding:0 10px;}
+.node,.block,.block-at-admin,.comment,#skip-nav,#branding,#search-box,.primary-inner,.secondary-inner,#mission,#main-content-header,.profile,.footer-message-inner,#attribution {padding:0 10px;}
 
 /* Position header elements. */
 #branding{float:left;width:300px;}
