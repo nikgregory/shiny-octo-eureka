@@ -91,6 +91,7 @@ SCRIPT;
     'comment_node_suffix_default'           => '',
     'comment_enable_content_type'           => 0,
     'rebuild_registry'                      => 0,
+    'load_firebug_lite'                     => 0,
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
@@ -805,6 +806,12 @@ SCRIPT;
     '#title' => t('Rebuild theme registry on every page.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
+  );
+ $form['adpt_container']['themedev']['load_firebug_lite'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Load Firebug lite script for debuggin in IE, Opera and Webkit browsers.'),
+    '#default_value' => $settings['load_firebug_lite'],
+    '#description' => t('<a href="!link">Firebug lite</a> is a useful tool for debugging CSS and JavaScript in non Firefox browsers.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
   // Administrationt settings
   $form['adpt_container']['admin_settings']['administration'] = array(
