@@ -25,6 +25,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
         array(
           'attributes' => array(
             'class' => 'block-edit',
+            'title' => t('Edit this block'),
           ),
           'query' => drupal_get_destination(),
           'html' => TRUE,
@@ -37,6 +38,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
         array(
           'attributes' => array(
             'class' => 'block-edit',
+            'title' => t('Configure this block'),
           ),
           'query' => drupal_get_destination(),
           'html' => TRUE,
@@ -50,6 +52,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
         array(
           'attributes' => array(
             'class' => 'block-edit',
+            'title' => t('Edit this menu'),
           ),
           'query' => drupal_get_destination(),
           'html' => TRUE,
