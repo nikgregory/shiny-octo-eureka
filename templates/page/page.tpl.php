@@ -97,7 +97,7 @@
  * @see layout.css
  */
 ?>        
-<body id="layout-1b" <?php print $section_class; ?>>
+<body id="layout-1c" <?php print $section_class; ?>>
   <div id="container" class="<?php print $classes; ?>">
 
     <div id="skip-nav">
@@ -113,7 +113,7 @@
       </div></div> <!-- /leaderboard -->
     <?php endif; ?>
 
-    <div id="header" class="clear-block">
+    <div id="header"><div class="header-inner clear-block">
 
       <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
         <div id="branding">
@@ -149,7 +149,7 @@
         </div></div> <!-- /header-blocks -->
       <?php endif; ?>
 
-    </div> <!-- /header -->
+    </div></div> <!-- /header -->
 
     <?php if ($primary_menu or $secondary_menu): ?>
       <div id="nav" class="clear-block">
@@ -159,7 +159,7 @@
         <?php endif; ?>
 
         <?php if ($secondary_menu): ?>
-          <div id="secondary"><?php print $secondary_menu; ?></div>
+          <div id="secondary"><div class="secondary-inner"><?php print $secondary_menu; ?></div>
         <?php endif; ?>
 
       </div> <!-- /nav -->
@@ -184,38 +184,46 @@
         <?php endif; ?>
 
         <?php if ($content_top): ?>
-          <div id="content-top" class="section region"><?php print $content_top; ?></div> <!-- /content-top -->
+          <div id="content-top" class="section region"><div class="region-inner">
+            <?php print $content_top; ?>
+        </div></div> <!-- /content-top -->
         <?php endif; ?>
         
         <div id="main-content">
-          <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-          <?php if ($tabs): ?>
-            <div class="local-tasks"><?php print $tabs; ?></div>
-          <?php endif; ?>
-          <?php if ($messages): print $messages; endif; ?>
-          <?php if ($help): print $help; endif; ?>
-          <?php if ($content_aside): ?>
-            <div id="content-aside" class="section region"><?php print $content_aside; ?></div> <!-- /content-adide -->
+          <div id="main-content-header">
+            <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
+            <?php if ($tabs): ?>
+              <div class="local-tasks"><?php print $tabs; ?></div>
+            <?php endif; ?>
+            <?php if ($messages): print $messages; endif; ?>
+            <?php if ($help): print $help; endif; ?>
+          </div>
+          <?php if ($content_aside): ?> 
+            <div id="content-aside" class="section region"><div class="region-inner">
+              <?php print $content_aside; ?>
+            </div></div> <!-- /content-adide -->
           <?php endif; ?> 
-          <div id="content" class="section region">
+          <div id="content" class="section region"><div class="region-inner">
             <?php print $content; ?>
-          </div>								
+          </div></div>							
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom" class="section region"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
+          <div id="content-bottom" class="section region"><div class="region-inner">
+            <?php print $content_bottom; ?>
+        </div></div> <!-- /content-bottom -->
         <?php endif; ?>
 
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-left" class="section sidebar region"><div class="sidebar-inner">
+        <div id="sidebar-first" class="section sidebar region"><div class="region-inner">
           <?php print $left; ?>
         </div></div> <!-- /sidebar-left -->
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-right" class="section sidebar region"><div class="sidebar-inner">
+        <div id="sidebar-last" class="section sidebar region"><div class="region-inner">
           <?php print $right; ?>
         </div></div> <!-- /sidebar-right -->
       <?php endif; ?>
@@ -238,7 +246,9 @@
         <?php endif; ?>
 
         <?php if ($footer_message or $feed_icons): ?>
-          <div id="footer-message"><?php print $footer_message; ?><?php print $feed_icons; ?></div> <!-- /footer-message/feed-icon -->
+          <div id="footer-message"><div class="footer-message-inner">
+            <?php print $footer_message; ?><?php print $feed_icons; ?>
+        </div></div> <!-- /footer-message/feed-icon -->
         <?php endif; ?>
         
         <?php print $attribution; ?>
