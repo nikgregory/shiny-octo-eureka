@@ -123,8 +123,8 @@ a img {}
  */
 .one-sidebar   {}
 .two-sidebars  {}
-.sidebar-right {}
-.sidebar-left  {}
+.sidebar-last {}
+.sidebar-first  {}
 
 /** 
  * Optional Region body classes
@@ -194,22 +194,22 @@ body > #container {
 /* Set padding for content inner */
 /* Em based layouts */
 #layout-1a .two-sidebars  .content-inner {}
-#layout-1a .sidebar-left  .content-inner {}
-#layout-1a .sidebar-right .content-inner {}
+#layout-1a .sidebar-first  .content-inner {}
+#layout-1a .sidebar-last .content-inner {}
 #layout-2a .content-inner {}
 #layout-3a .content-inner {}
 
 /* Percentage based layouts */
 #layout-1b .two-sidebars  .content-inner {}
-#layout-1b .sidebar-left  .content-inner {}
-#layout-1b .sidebar-right .content-inner {}
+#layout-1b .sidebar-first  .content-inner {}
+#layout-1b .sidebar-last .content-inner {}
 #layout-2b .content-inner {}
 #layout-3b .content-inner {}
 
 /* Pixel based layouts */
 #layout-1c .two-sidebars  .content-inner {}
-#layout-1c .sidebar-left  .content-inner {}
-#layout-1c .sidebar-right .content-inner {}
+#layout-1c .sidebar-first  .content-inner {}
+#layout-1c .sidebar-last .content-inner {}
 #layout-2c .content-inner {}
 #layout-3c .content-inner {}
 
@@ -261,11 +261,11 @@ body > #container {
 .sidebar-inner {}
 
 /* Target a specific sidebar, inner or sidebar-inner. */
-#sidebar-left {}
-#sidebar-left .sidebar-inner {}
+#sidebar-first {}
+#sidebar-first .sidebar-inner {}
 
-#sidebar-right {}
-#sidebar-right .sidebar-inner {}
+#sidebar-last {}
+#sidebar-last .sidebar-inner {}
 
 
 /*********************************************************
@@ -861,15 +861,15 @@ ul.links li.comment_delete a {}
 .region .block .block-content {}
 
 /* High specifity selectors to style blocks in one sidebar. */
-#sidebar-left .block {}
-#sidebar-left .block h2 {}
-#sidebar-left .block-inner {}
-#sidebar-left .block .block-content {}
+#sidebar-first .block {}
+#sidebar-first .block h2 {}
+#sidebar-first .block-inner {}
+#sidebar-first .block .block-content {}
 
-#sidebar-right .block {}
-#sidebar-right .block h2 {}
-#sidebar-right .block-inner {}
-#sidebar-right .block .block-content {}
+#sidebar-last .block {}
+#sidebar-last .block h2 {}
+#sidebar-last .block-inner {}
+#sidebar-last .block .block-content {}
 
 
 /**********************************************************

@@ -4,6 +4,8 @@
 /**
  * @file gpanel.css
  */
+.gpanel div.block{padding:0 10px;}
+ 
 .gpanel{margin-bottom:.75em;clear:both;}
 .gpanel .region{display:inline;position:relative;}
 /* 2 column */
@@ -33,6 +35,11 @@
 .four-col-4x25 .section-2{float:right;width:49.5%;}
 .four-col-4x25 .col-1,.four-col-4x25 .col-3{float:left;width:49%;}
 .four-col-4x25 .col-2,.four-col-4x25 .col-4{float:right;width:49%;}
+
+/* 4 column */
+.four-col-4x25 .region{float:left;width:25%;}
+.four-col-4x25 .col-4{width:24.5%;}.four-col-4x25 .col-4{width:24.5%;}
+
 /* 5 column */
 .five-col-5x20 .region{float:left;width:19.2%;}
 .five-col-5x20 .col-2{right:-1%;}

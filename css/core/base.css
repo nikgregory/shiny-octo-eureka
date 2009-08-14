@@ -5,7 +5,6 @@
  * @file base.css
  * Base is the master reset for browsers and Drupal.
  */
-
 html{font-size:75%;}
 body{line-height:1.5;}
 h1{font-size:2em;margin:0 0 .5em;padding:0;}
@@ -74,11 +73,13 @@ div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .block-region{border:1px dotted #000;color:#000;font: 1.25em "Lucida Console",Monaco,"DejaVu Sans Mono",monospace;padding:3px 6px 1px;}
 .node-unpublished,.comment-unpublished{background-color:#FFF6DF;}
 .unpublished{visibility:hidden;}
+.indented {margin-left:60px;}
 .node-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
-ul,ol{margin:0 0 1.5em 1.75em;padding:0;}
+.block{clear:both;margin:0 0 20px;position:relative;}
+ul,ol{margin:0 0 1.5em 1.667em;padding:0;}
 li{margin:0;padding:0;}
-ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 0 0 1.75em;}
+ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 0 0 1.667em;}
 ul{list-style-type:disc;}
 ul ul{list-style-type:circle;}
 ul ul ul{list-style-type:square;}
@@ -87,10 +88,10 @@ ol{list-style-type:decimal;}
 ol ol{list-style-type:lower-alpha;}
 ol ol ol{list-style-type:lower-roman;}
 dt{font-weight:bold;}
-dd{margin:0 0 1.5em 1.75em;}
-.item-list ul,.item-list ol{margin:0 0 0 1.75em;padding:0;}
-form{margin:0 0 1.5em;padding:0;}
-input{margin:.375em .1875em 0;}
+dd{margin:0 0 1.5em 1.667em;}
+.item-list ul,.item-list ol{margin:0 0 0 1.667em;padding:0;}
+form{margin:0 0 1.667em;padding:0;}
+input{margin:.375em 0;}
 input.text,input.title,textarea,select{border:1px solid #C0C0C0;margin:.375em 0;}
 .form-text:focus,.form-checkbox:focus, .form-radio:focus, .form-select:focus{border:1px solid #FFCC00;background:#FFFFDF;}
 textarea:focus{border:1px solid #FFCC00;background:#FFF;}
@@ -98,7 +99,7 @@ input.text,input.title{padding:.375em;}
 input.title{font-size:1.5em;}
 input.form-text,textarea{border:1px solid #CCC;height:auto;padding:.1875em;}
 textarea,input{font:1em normal Arial, Helvetica, sans-serif;}
-div.form-item{margin-bottom:1em;margin-top:1em;}
+div.form-item{margin-bottom:.833em;margin-top:.833em;}
 .form-item textarea.error{padding:.1875em;}
 .form-item .description{font-size:.9em;line-height:1.667em;}
 span.form-required,span.marker{color:#8A1F11;}
@@ -138,6 +139,7 @@ div.admin .left,div.admin .right{margin-left:0;margin-right:0;width:49%;}
 .page-admin-by-module .admin-panel .body p{color:#555;font-size:.94em;}
 #user-admin-filter ul li,#node-admin-filter ul li{list-style:none;}
 .more-help-link{font-size:.94em;line-height:1.667em;}
+#block-admin-display-form{clear:both;}
 #permissions td.permission{padding-left:.5em;}
 #permissions td.module{background:#EEE;color:#222;font-weight:bold;}
 tr .block{border:0;}
@@ -149,6 +151,23 @@ ul.primary li a{background-color:#F5F5F5;border-color:#CCC;margin-right:.08em;pa
 ul.secondary{border-bottom:1px solid #CCC;margin:1em 0 0 0;padding:0 .3em 1em;}
 ul.secondary li{border-right:0;list-style:none;padding:0 2em 0 0;}
 ul.secondary li a:hover,ul.secondary li a.active{border-bottom:none;text-decoration:underline;}
-body.admin-menu{margin-top: 2em !important;}
+body.admin-menu{margin-top: 23px !important;}
 #admin-menu{font: 0.9em Arial, Helvetica, sans-serif;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
+/**
+ * Style edit links for blocks and views.
+ */
+div.block{position:relative;}
+div.block div.block-edit{font-size:.9em;position:absolute;right:0;top:0;visibility:hidden;z-index:40;}
+div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;}
+div.block div.block-edit a{text-decoration:none;color:#ccc;}
+div.block div.block-edit a:before{content:"[";}
+div.block div.block-edit a:after{content:"]";}
+div.block div.block-edit a:hover{color:#000;background:#FFF;}
+div.block div.block-edit li{display:inline;float:left;list-style:none;margin:0 0 0 .5em;}
+div.view div.views-admin-links{font-size:.85em;}
+.block div.view div.views-admin-links{margin-top:1.8em;}
+#main-content div.view div.views-admin-links{margin-top:-.8em;}
+div.view div.views-admin-links li a{text-decoration:none;width:5em;}
+div.view div.views-admin-links li a:hover{color:#000;background:#FFF;}
+div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{color:#CCC;}
