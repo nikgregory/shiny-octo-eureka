@@ -158,7 +158,7 @@
         <?php endif; ?>
 
         <?php if ($secondary_menu): ?>
-          <div id="secondary"><div class="secondary-inner"><?php print $secondary_menu; ?></div>
+          <div id="secondary"><div class="secondary-inner"><?php print $secondary_menu; ?></div></div>
         <?php endif; ?>
 
       </div> <!-- /nav -->
