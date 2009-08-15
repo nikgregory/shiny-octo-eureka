@@ -6,6 +6,16 @@
  * Contains all styles for the built in Administration Theme.
  */ 
 
+/* Jeffs border radius reference...
+-moz-border-radius-topleft 
+-moz-border-radius-topright 
+-moz-border-radius-bottomleft 
+-moz-border-radius-bottomright
+-webkit-border-top-left-radius
+-webkit-border-top-right-radius
+-webkit-border-bottom-left-radius
+-webkit-border-bottom-right-radius
+*/
 
 body.section-admin,
 body#at-admin {
