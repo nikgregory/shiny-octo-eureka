@@ -173,21 +173,6 @@
 #layout-4 #sidebar-last{width:37%;margin-left:-37%;}
 #layout-4 .sidebar-left #sidebar-first{width:37%;margin-left:-37%;}
 
-
-/*********************************************************
-*               Header elements basic styles
-**********************************************************/
-#branding{float:right;}
-#search-box{float:left;}
-#header-blocks{float:right;}
-
-
-/*********************************************************
-*             Position floating Aside region
-**********************************************************/
-#content-aside{float:left;padding-right:10px;width:240px;}
-
-
 /*********************************************************
 *                 Skinr grid classes
 **********************************************************/
@@ -207,7 +192,6 @@
 .grid_14,
 .grid_15,
 .grid_16 {float:right;}
-
 
 /*********************************************************
 *            Helper classes for all layouts

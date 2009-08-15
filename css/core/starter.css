@@ -10,13 +10,16 @@
 .content-inner {background: #eee;}
 .block-inner {background:#ddd}
 */
-body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;}
+body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;margin-bottom:0;}
 a{margin:0;padding:0;}
 a:active,
 a:focus{border:0;color:#C00000;}
 a img{border:none;}
 #content-aside{background:#FFF;}
 #skip-nav{text-align:right;}
+#branding{float:left;width:300px;}
+#search-box{float:right;width:300px;}
+#header-blocks{float:left;width:320px;}
 #branding h1{font-size:1em;}
 .logo-site-name span{display:block;}
 #site-name{font-size:2em;font-weight:700;line-height:1.5;}
@@ -31,6 +34,7 @@ a img{border:none;}
 .secondary-links li a:hover{background:#CCC;}
 #breadcrumb{padding:0 0 .75em;}
 #mission{font-weight:700;margin:0 0 20px;}
+#content-aside{float:right;padding-left:10px;width:240px;}
 ul.menu,
 ul.menu ul,
 ul.menu ul ul,

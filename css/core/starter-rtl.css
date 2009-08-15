@@ -8,8 +8,12 @@
  */
 body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;}
 #skip-nav{text-align:left;}
+#branding{float:right;}
+#search-box{float:left;}
+#header-blocks{float:right;}
 .primary-links li{float:right;}
 .secondary-links li{float:right;}
+#content-aside{float:left;padding-right:10px;width:240px;}
 ul.menu,
 ul.menu ul,
 ul.menu ul ul,
