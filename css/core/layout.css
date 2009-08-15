@@ -78,18 +78,12 @@
 #layout-4 .sidebar-left #sidebar-first{width:37%;margin-left:-37%;}
 
 /* Add padding to align elements to the grid. */
-.node,.block,.block-at-admin,.comment,#skip-nav,.primary-inner,.secondary-inner,#mission,#main-content-header,.profile,.footer-message-inner,#attribution {padding:0 10px;}
+.node,.block,.block-at-admin,.comment,#skip-nav,#branding,#search-box,#mission,#main-content-header,.profile,.footer-message-inner,#attribution {padding:0 10px;}
 
 /* Position header elements. */
 #branding{float:left;width:300px;}
 #search-box{float:right;width:300px;}
 #header-blocks{float:left;width:320px;}
-
-/* Custom margin or padding for top boxes. */
-#skip-nav,
-.header-inner {margin: 0 10px;}
-#branding {padding: 0 10px 0 0;}
-#search-box {padding: 0 0 0 10px;}
 
 /* Position floating Aside region. */
 #content-aside{float:right;padding-left:10px;width:240px;}
