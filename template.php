@@ -8,10 +8,9 @@
 /**
  * Include dependant settings and function.
  */
-$path_to_theme = $base_path . path_to_theme();
-include_once $path_to_theme . '/inc/template.custom-functions.inc';
-include_once $path_to_theme . '/inc/template.theme-settings.inc';
-include_once $path_to_theme . '/inc/template.theme-functions.inc';
+include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc';
+include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc';
+include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';';
 
 /**
  * Implement HOOK_theme
@@ -22,7 +21,7 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    include_once $base_path . path_to_theme() .'/inc/template.conditional-styles.inc';
+    include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.conditional-styles.inc';
     // _conditional_styles_theme() only needs to be run once.
     if ($theme == 'adaptivetheme') {
       _conditional_styles_theme($existing, $type, $theme, $path);
