@@ -8,9 +8,10 @@
 /**
  * Include dependant settings and function.
  */
-include_once 'inc/template.custom-functions.inc';
-include_once 'inc/template.theme-settings.inc';
-include_once 'inc/template.theme-functions.inc';
+$path_to_theme = $base_path . path_to_theme();
+include_once $path_to_theme . '/inc/template.custom-functions.inc';
+include_once $path_to_theme . '/inc/template.theme-settings.inc';
+include_once $path_to_theme . '/inc/template.theme-functions.inc';
 
 /**
  * Implement HOOK_theme
@@ -108,7 +109,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
     list($section, ) = explode('/', $path_alias, 2);
-    $vars['section_class'] = 'class="'. safe_string('section-'. $section) .'"';
+    $vars['section_class'] = safe_string('section-'. $section);
   }
 
   // Body Classes. In Genesis these are printed on the #container wrapper div, not on the body.
