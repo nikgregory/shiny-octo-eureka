@@ -58,9 +58,9 @@
           <dt>Block Region</dt>
             <dd><?php print $block->region; ?></dd>
           <dt>Block ID</dt>
-            <dd><?php print $block_id; ?></dd>
+            <dd>#<?php print $block_id; ?></dd>
           <dt>Block Classes</dt>
-            <dd><?php print $classes; ?></dd>
+            <dd>.<?php print $block_at_admin_classes; ?></dd>
         </dl>
       </div>
     </fieldset>

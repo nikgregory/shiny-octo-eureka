@@ -10,7 +10,7 @@
  */
 include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc';
 include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc';
-include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';';
+include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';
 
 /**
  * Implement HOOK_theme
@@ -108,7 +108,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
     list($section, ) = explode('/', $path_alias, 2);
-    $vars['section_class'] = safe_string('section-'. $section);
+    $vars['section_class'] = 'class="'. safe_string('section-'. $section) .'"';
   }
 
   // Body Classes. In Genesis these are printed on the #container wrapper div, not on the body.
@@ -324,7 +324,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
     $classes[] = $block->region .'-'. block_class($block);
   }
   // Add support for Skinr module classes http://drupal.org/project/skinr
-  if (function_exists('block_skinr_data')) {
+  if (!empty($vars['skinr'])) {
     $classes[] = $vars['skinr'];
   }
   if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
@@ -332,4 +332,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   }
   
   $vars['classes'] = implode(' ', $classes);
+  
+  // print special var for block at admin
+  $vars['block_at_admin_classes'] = implode(' .', $classes);
 }
