@@ -6,12 +6,13 @@
  * Contains all styles for the built in Administration Theme.
  */ 
 
-body.section-admin,body#at-admin{background:#FFF;color:#222;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0;}
+body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0;}
 #at-admin .two-sidebars .content-inner{margin:0 240px;}
 #at-admin .sidebar-first .content-inner{margin-left:240px;}
 #at-admin .sidebar-right .content-inner{margin-right:240px;}
 #at-admin #sidebar-first{margin-left:-100%;width:240px;}
 #at-admin #sidebar-last{margin-left:-240px;width:240px;}
+#sidebar-last .block,#sidebar-first .block {padding:10px 10px 0;}
 #content .region-inner{padding:0 10px;}
 a{margin:0;padding:0;text-decoration:none;}
 a:hover{background:transparent;color:#555;}
@@ -28,14 +29,15 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #content-aside{background:#FFF;float:right;padding:0 0 20px 10px;width:240px;}
 #skip-nav{height:1px;left:auto;overflow:hidden;position:absolute;text-align:right;top:-9999em;width:1px;}
 #header{background:#464646;padding:0 0 7px;}
+#header-inner{position:relative;}
 .logo-site-name span{display:block;float:left;}
 #logo{padding:0 10px 0 0;}
 #site-name{font-size:1.33em;font-weight:bold;line-height:1.5;padding:2px 0 0;}
 #site-name a:hover,#site-name a:focus{background:transparent;color:#CCC;}
-#site-slogan{clear:both;font-size:.94em;color:#777;}
+#site-slogan{display:none;}
 #user-date{clear:both;color:#CCC;font-size:0.94em;padding:0 10px;}
 #header-blocks{float:left;padding:0 10px;}
-#search-box{padding-top:5px;float:right;}
+#search-box{padding-top:5px;left:auto;right:0;position:absolute;}
 #search-theme-form #search{margin:-5px 0 0;}
 #search-theme-form label{color:#CCC;font-size:0.94em;}
 #search-theme-form input.search_submit{-moz-border-radius:4px;-webkit-border-radius:4px;background:url(core-images/search-button-tile.png) repeat-x 0 -15px;border:1px solid #777;color:#999;cursor:pointer;padding:1px 6px;}
