@@ -93,7 +93,7 @@
 </head>
 <?php
 /**
- * Change the body id selector to your preferred layout, e.g body id="genesis-1a".
+ * Change the body id selector to your preferred layout.
  * @see layout.css
  */
 ?>        
@@ -166,7 +166,9 @@
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
-      <div id="breadcrumb" class="nav"><?php print $breadcrumb; ?></div> <!-- /breadcrumb -->
+      <div id="breadcrumb" class="nav"><div class="breadcrumb-inner">
+        <?php print $breadcrumb; ?>
+      </div></div> <!-- /breadcrumb -->
     <?php endif; ?>
     
     <?php if ($secondary_content): ?>
@@ -217,18 +219,18 @@
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-first" class="section sidebar region"><div class="region-inner">
+        <div id="sidebar-first" class="sidebar section region"><div class="region-inner">
           <?php print $left; ?>
         </div></div> <!-- /sidebar-left -->
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-last" class="section sidebar region"><div class="region-inner">
+        <div id="sidebar-last" class="sidebar section region"><div class="region-inner">
           <?php print $right; ?>
         </div></div> <!-- /sidebar-right -->
       <?php endif; ?>
     
-  </div></div> <!-- /columns -->
+    </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
       <div id="tertiary-content" class="section region clear-block"><div class="region-inner">
