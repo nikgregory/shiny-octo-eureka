@@ -78,7 +78,26 @@
 #layout-4 .sidebar-left #sidebar-first{width:37%;margin-left:-37%;}
 
 /* Add padding to align elements to the grid. */
-.node,.block,.block-at-admin,.comment,#skip-nav,#branding,#search-box,#mission,#main-content-header,.profile,.footer-message-inner,#attribution {padding:0 10px;}
+.node,
+.block,
+.block-at-admin,
+.comment,
+.profile,
+.footer-message-inner,
+#main-content-header,
+#skip-nav,
+#branding,
+#search-box,
+#mission,
+#primary,
+#secondary,
+#attribution, 
+#first-time, 
+#forum,
+#aggregator,
+#tracker,
+.section-admin #content .region-inner,
+.breadcrumb-inner {padding:0 10px;}
 
  /* Skinr grid classes. */
 .grid_1,
