@@ -14,7 +14,6 @@
  *
  * Helper variables:
  * - $block_module_delta: Outputs a unique css id for each block.
- * - $block_module_delta: Outputs a unique css id for each block.
  * - $classes: Outputs dynamic classes for advanced themeing.
  * - $edit_links: Outputs hover style links for block configuration and editing.
  * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.

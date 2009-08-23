@@ -37,5 +37,12 @@
   <input class="search-input form-text" type="text" maxlength="128" name="search_theme_form" id="edit-search_theme_form" size="15" value="" title="<?php print t('Enter the terms you wish to search for.'); ?>" />
   <input class="search_submit" type="submit" name="op" value=" <?php print t('Search'); ?>"/>
   <?php print $search['hidden']; ?>
-  <?php // <a class="advanced-search-link" href="/search" title="Advanced Search">Advanced Search</a> ?>
 </div>
+
+<?php 
+/* Uncomment and place inside the div#search wrapper.
+  <a class="advanced-search-link" href="/search" title="<?php print t('Advanced Search'); ?>">
+    <?php print t('Advanced Search'); ?>
+  </a>
+*/ 
+?>
