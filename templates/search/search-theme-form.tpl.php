@@ -33,11 +33,9 @@
  * @see template_preprocess_search_theme_form()
  */
 ?>
-
 <div id="search" class="container-inline">
-  <label for="edit-search_theme_form">Search this site:</label>
-  <input class="search-input form-text" type="text" maxlength="128" name="search_theme_form" id="edit-search_theme_form"  size="15" value="" title="Enter the terms you wish to search for" />
-  <input class="search_submit" type="submit" name="op" value="Search"  />
+  <input class="search-input form-text" type="text" maxlength="128" name="search_theme_form" id="edit-search_theme_form" size="15" value="" title="<?php print t('Enter the terms you wish to search for.'); ?>" />
+  <input class="search_submit" type="submit" name="op" value=" <?php print t('Search'); ?>"/>
   <?php print $search['hidden']; ?>
   <?php // <a class="advanced-search-link" href="/search" title="Advanced Search">Advanced Search</a> ?>
 </div>
