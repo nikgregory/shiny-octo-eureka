@@ -17,7 +17,7 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>      
-<body id="layout-1b">
+<body>
   <div id="container" class="<?php print $body_classes; ?>">
     <div id="header" class="clear-block">
 
