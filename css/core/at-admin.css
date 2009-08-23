@@ -86,7 +86,7 @@ ul.menu li a:hover,ul.menu li a:focus{outline:0;}
 .at-admin-block-edit-links .item-list li.first a{background: url(core-images/configure.png) no-repeat 0 0;}
 .at-admin-block-edit-links .item-list li.last a{background: url(core-images/edit.png) no-repeat 0 0;}
 .at-admin-block-edit-links .item-list li a:hover{background-color:#F7F7F7;border:1px solid #464646;color:#222;}
-div.block div.block-edit{top:10px;right:10px;}
+div.block div.block-edit{top:10px;right:15px;}
 div.admin-panel{-moz-border-radius:6px;-webkit-border-radius:6px;border:1px solid #DFDFDF;margin:0 0 0.75em;padding:0;}
 div.admin .left,div.admin .right{margin-left:0;margin-right:0;width:49%;}
 .admin-panel .body{padding:0 1em;}

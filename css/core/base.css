@@ -156,7 +156,7 @@ body.admin-menu{margin-top: 23px !important;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
 /* Style edit links for blocks and views. */
 div.block{position:relative;}
-div.block div.block-edit{font-size:.9em;position:absolute;right:0;top:0;visibility:hidden;z-index:40;}
+div.block div.block-edit{font-size:.9em;position:absolute;right:15px;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
 div.block div.block-edit li{padding:3px;}
 div.block div.block-edit li a{text-decoration:none;color:#BBB;display:block;padding:2px 3px 1px 18px;}
