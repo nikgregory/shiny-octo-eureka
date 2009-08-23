@@ -80,7 +80,13 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
     'block_edit_links'                      => 1,
-    'at_admin_hide_help'                    => 0
+    'at_admin_hide_help'                    => 0,
+    'layout_method'                         => '0',
+    'layout_width'                          => '960px',
+    'layout_sidebar_first_width'            => '240',
+    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
+    'color_schemes'                         => 'colors-default.css',
+    'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
   );
 
   // Make the default content-type settings the same as the default theme settings,
@@ -202,6 +208,53 @@ function phptemplate_preprocess_page(&$vars) {
   // Display mission statement on all pages
   if (theme_get_setting('mission_statement_pages') == 'all') {
     $vars['mission'] = theme_get_setting('mission', FALSE);  
+  }
+
+  // Layout settings - set the page width and layout method
+  if (theme_get_setting('layout_enable_settings') == 'on') {
+    $vars['at_layout_width'] = theme_get_setting('layout_width');
+    $method = theme_get_setting('layout_method');
+    $right_width = theme_get_setting('layout_sidebar_last_width');
+    $left_width = theme_get_setting('layout_sidebar_first_width');
+    if ($method == '0') {
+      $content_margin_right = $right_width;
+      $content_margin_left  = $left_width;
+      $pull_right           = $right_width;
+      $styles = array();
+      $styles[] = '.two-sidebars .content-inner{margin:0 '. $content_margin_right .'px 0 '. $content_margin_left .'px;}';
+      $styles[] = '.sidebar-left .content-inner{margin-left:'. $content_margin_left .'px;;}';
+      $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;;}';
+      $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-100%;}';
+      $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-' .$pull_right .'px;}';
+    }
+    if ($method == '1') {
+      $content_margin       = $right_width + $left_width;
+      $content_margin_right = $right_width;
+      $content_margin_left  = $left_width;
+      $left_margin          = $right_width + $left_width;
+      $right_margin         = $right_width;
+      $styles = array();
+      $styles[] = '.two-sidebars .content-inner{margin-right:'. $content_margin .'px;}';
+      $styles[] = '.sidebar-left .content-inner{margin-right:'. $content_margin_left .'px;}';
+      $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;}';
+      $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_margin .'px;}';
+      $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $right_margin .'px;}';
+      $styles[] = '.sidebar-left #sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_width .'px;}';
+    }
+    if ($method == '2') {
+      $content_margin = $right_width + $left_width;
+      $left_margin    = $right_width + $left_width;
+      $right_margin   = $right_width;
+      $push_right     = $left_width;
+      $styles = array();
+      $styles[] = ".two-sidebars .content-inner{margin:0 0 0 $content_margin\px;}";
+      $styles[] = ".sidebar-left .content-inner{margin-left:$left_margin\px;}";
+      $styles[] = ".sidebar-right .content-inner{margin-left:$right_margin\px;}";
+      $styles[] = "#sidebar-first{width:$left_width\px; margin-left: -100%;}";
+      $styles[] = "#sidebar-last{width:$right_width\px; margin-left: -100%;}";
+      $styles[] = ".two-sidebars #sidebar-last {width:$right_width\px; position: relative; left:$push_right\px;}";
+    }
+    $vars['at_layout'] = implode('', $styles);
   }
   
   // Template suggestions for admin theme
@@ -582,4 +635,19 @@ function phptemplate_preprocess_comment_wrapper(&$vars) {
  */
 function phptemplate_preprocess_views_view(&$vars) {
   $vars['css_name'] = $vars['css_name'] .' view-style-'. views_css_safe(strtolower($vars['view']->type));
+}
+
+
+/**
+ * Set a default color scheme and set a cookie.
+ */
+function get_at_colors() {
+  $scheme = theme_get_setting('color_schemes');
+  if (!$scheme) {
+    $scheme = 'colors-default.css';
+  }
+  if (isset($_COOKIE["atcolors"])) {
+    $scheme = $_COOKIE["atcolors"];
+  }
+  return $scheme;
 }

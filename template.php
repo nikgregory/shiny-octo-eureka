@@ -8,9 +8,19 @@
 /**
  * Include dependant settings and function.
  */
-include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc';
-include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc';
-include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';
+include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc';
+include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc';
+include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';
+
+
+/**
+ * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
+ * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
+ */
+if (theme_get_setting('color_enable_schemes') == 'on') {
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme/' . get_at_colors(), 'theme');
+}
+
 
 /**
  * Implement HOOK_theme
@@ -21,7 +31,7 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
-    include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.conditional-styles.inc';
+    include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.conditional-styles.inc';
     // _conditional_styles_theme() only needs to be run once.
     if ($theme == 'adaptivetheme') {
       _conditional_styles_theme($existing, $type, $theme, $path);
@@ -108,7 +118,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
     list($section, ) = explode('/', $path_alias, 2);
-    $vars['section_class'] = 'class="'. safe_string('section-'. $section) .'"';
+    $vars['section_class'] = ' class="'. safe_string('section-'. $section) .'"';
   }
 
   // Body Classes. In Genesis these are printed on the #container wrapper div, not on the body.
