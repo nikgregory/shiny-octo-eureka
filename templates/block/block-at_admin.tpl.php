@@ -13,7 +13,7 @@
  * - $block->region: The block region embedding the current block.
  *
  * Helper variables:
- * - $block_id: Outputs a unique id for each block.
+ * - $block_module_delta: Outputs a unique css id for each block.
  * - $classes: Outputs dynamic classes for advanced themeing.
  * - $edit_links: Outputs hover style links for block configuration and editing.
  * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
@@ -35,7 +35,7 @@
  * then unset the block-edit.css in your subhtemes .info file.
  */
 ?>
-<div id="<?php print $block_id; ?>" class="block-at-admin"><div class="block-at-admin-inner">
+<div id="<?php print $block_module_delta; ?>" class="block-at-admin"><div class="block-at-admin-inner">
 
     <div class="block-header">
       <h2 class="block-title clear-block">
@@ -51,15 +51,15 @@
       </legend>
       <div class="fieldset-wrapper">
         <dl>
-          <dt>Block Module</dt>
+          <dt><?php print t('Block Module'); ?></dt>
             <dd><?php print $block->module; ?></dd>
-          <dt>Block Delta</dt>
+          <dt><?php print t('Block Delta'); ?></dt>
             <dd><?php print $block->delta; ?></dd>
-          <dt>Block Region</dt>
+          <dt><?php print t('Block Region'); ?></dt>
             <dd><?php print $block->region; ?></dd>
-          <dt>Block ID</dt>
+          <dt><?php print t('Block ID'); ?></dt>
             <dd>#<?php print $block_id; ?></dd>
-          <dt>Block Classes</dt>
+          <dt><?php print t('Block Classes'); ?></dt>
             <dd>.<?php print $block_at_admin_classes; ?></dd>
         </dl>
       </div>

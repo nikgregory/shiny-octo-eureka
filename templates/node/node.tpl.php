@@ -31,7 +31,7 @@
  * - $id: Position of the node. Increments each time it's output.
  *
  * Helper variables:
- * - $node_id: Outputs a unique id for each node.
+ * - $node_nid: Outputs a unique id for each node.
  * - $classes: Outputs dynamic classes for advanced themeing.
  *
  * Node status variables:
@@ -52,7 +52,7 @@
  * @see genesis_preprocess_node()
  */
 ?>
-<div id="<?php print $node_id; ?>" class="<?php print $classes; ?>">
+<div id="<?php print $node_nid; ?>" class="<?php print $classes; ?>">
   <div class="node-inner">
 
     <?php if (!$page): ?>

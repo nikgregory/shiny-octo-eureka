@@ -13,7 +13,8 @@
  * - $block->region: The block region embedding the current block.
  *
  * Helper variables:
- * - $block_id: Outputs a unique id for each block.
+ * - $block_module_delta: Outputs a unique css id for each block.
+ * - $block_module_delta: Outputs a unique css id for each block.
  * - $classes: Outputs dynamic classes for advanced themeing.
  * - $edit_links: Outputs hover style links for block configuration and editing.
  * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
@@ -35,12 +36,10 @@
  * then unset the block-edit.css in your subhtemes .info file.
  */
 ?>
-<div id="<?php print $block_id; ?>" class="<?php print $classes; ?>">
+<div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
   <div class="block-inner">
 
     <?php if ($block->subject): ?>
-      <?php $firstword = wordlimit($block->subject, 1, "");
-      $block->subject = str_replace($firstword, '<span class="first-word">'. $firstword .'</span>', $block->subject); ?>
       <h2 class="block-title"><?php print $block->subject; ?></h2>
     <?php endif; ?>
 
