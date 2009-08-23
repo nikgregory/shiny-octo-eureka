@@ -187,7 +187,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   global $user;
   
   // Set the node id.
-  $vars['node_id'] = 'node-'. $vars['node']->nid;
+  $vars['node_nid'] = 'node-'. $vars['node']->nid;
 
   // Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
   $classes = array();
@@ -297,7 +297,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   $block = $vars['block'];
   
   // Set the block id.
-  $vars['block_id'] = 'block-'. $block->module .'-'. $block->delta;
+  $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
 
   // Special classes for blocks, emulate Drupal 7.
   // Set up variables for navigation-like blocks.
