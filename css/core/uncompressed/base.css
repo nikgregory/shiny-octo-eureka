@@ -855,6 +855,71 @@ body.admin-menu {
 }
 
 
+/**********************************************************
+ *            LayoutSP theme settings 
+ **********************************************************/
+.fieldset-layout-settings {}
+.fieldset-layout-settings .layouts {
+  margin: 0;
+}
 
+.fieldset-layout-settings .layouts .form-item,
+.fieldset-layout-settings .page-width,
+.fieldset-layout-settings .sidebar-width-left,
+.fieldset-layout-settings .sidebar-width-right {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  background: #EEE;
+  float: left;
+  margin-right: 5px;
+  padding: 6px;
+  text-align: left;
+  width: 100px;
+}
 
+.fieldset-layout-settings label {
+  font-weight: normal;
+}
 
+.fieldset-layout-settings .layouts input {}
+.fieldset-layout-settings img {
+  display: block;
+  margin-left: 18px;
+}
+
+.fieldset-layout-settings strong {
+  font-weight: normal;
+}
+
+.fieldset-layout-settings span {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.fieldset-layout-settings .page-width,
+.fieldset-layout-settings .sidebar-width {
+  float: left;
+}
+
+.fieldset-layout-settings .page-width .form-item,
+.fieldset-layout-settings .sidebar-width .form-item {
+  margin: 0;
+}
+
+.fieldset-layout-settings .layout-method,
+.fieldset-layout-settings .layout-help,
+.fieldset-layout-settings .page-width {
+  clear: both;
+}
+
+.fieldset-layout-settings .layout-help dt,
+.fieldset-layout-settings .layout-help dd {
+  margin: 0;
+  padding: 0;
+}
+
+.fieldset-layout-settings .page-width,
+.fieldset-layout-settings .sidebar-width {
+  margin-bottom: 10px;
+}

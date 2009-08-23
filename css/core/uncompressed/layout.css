@@ -92,33 +92,33 @@
  * Unit:   em
  * Layout: Standard 3 col - left/content/right
  */
-#layout-1a .two-sidebars .content-inner{margin:0 20em;}
-#layout-1a .sidebar-first .content-inner{margin-left:20em;}
-#layout-1a .sidebar-last .content-inner{margin-right:20em;}
-#layout-1a #sidebar-first{width:20em;margin-left:-100%;}
-#layout-1a #sidebar-last{width:20em;margin-left:-20em;}
+.two-sidebars .content-inner{margin:0 20em;}
+.sidebar-left .content-inner{margin-left:20em;}
+.sidebar-right .content-inner{margin-right:20em;}
+#sidebar-first{width:20em;margin-left:-100%;}
+#sidebar-last{width:20em;margin-left:-20em;}
 
 /**
  * #layout-1b
  * Unit:   %
  * Layout: Standard 3 col - left/content/right
  */
-#layout-1b .two-sidebars .content-inner{margin:0 25%;}
-#layout-1b .sidebar-first .content-inner{margin-left:25%;}
-#layout-1b .sidebar-last .content-inner{margin-right:25%;}
-#layout-1b #sidebar-first{width:25%;margin-left:-100%;}
-#layout-1b #sidebar-last{width:25%;margin-left:-25%;}
+.two-sidebars .content-inner{margin:0 25%;}
+.sidebar-left .content-inner{margin-left:25%;}
+.sidebar-right .content-inner{margin-right:25%;}
+#sidebar-first{width:25%;margin-left:-100%;}
+#sidebar-last{width:25%;margin-left:-25%;}
 
 /**
  * #layout-1c
  * Unit:   px
  * Layout: Standard 3 col; left/content/right
  */
-#layout-1c .two-sidebars .content-inner{margin:0 240px;}
-#layout-1c .sidebar-first .content-inner{margin-left:240px;}
-#layout-1c .sidebar-last .content-inner{margin-right:240px;}
-#layout-1c #sidebar-first{width:240px;margin-left:-100%;}
-#layout-1c #sidebar-last{width:240px;margin-left:-240px;}
+.two-sidebars .content-inner{margin:0 240px;}
+.sidebar-left .content-inner{margin-left:240px;}
+.sidebar-right .content-inner{margin-right:240px;}
+#sidebar-first{width:240px;margin-left:-100%;}
+#sidebar-last{width:240px;margin-left:-240px;}
 
 
 /*********************************************************
@@ -143,36 +143,36 @@
  * Unit:   em
  * Layout: Both sidebars on the right; content/left/right
  */
-#layout-2a .two-sidebars .content-inner{margin-right:40em;}
-#layout-2a .sidebar-first .content-inner{margin-right:20em;}
-#layout-2a .sidebar-last .content-inner{margin-right:20em;}
-#layout-2a #sidebar-first{width:20em;margin-left:-40em;}
-#layout-2a #sidebar-last{width:20em;margin-left:-20em;}
-#layout-2a .sidebar-first #sidebar-first{width:20em;margin-left:-20em;}
+.two-sidebars .content-inner{margin-right:40em;}
+.sidebar-left .content-inner{margin-right:20em;}
+.sidebar-right .content-inner{margin-right:20em;}
+#sidebar-first{width:20em;margin-left:-40em;}
+#sidebar-last{width:20em;margin-left:-20em;}
+.sidebar-left #sidebar-first{width:20em;margin-left:-20em;}
 
 /**
  * #layout-2b
  * Unit:   %
  * Layout: Both sidebars on the right; content/left/right
  */
-#layout-2b .two-sidebars .content-inner{margin-right:50%;}
-#layout-2b .sidebar-first .content-inner{margin-right:25%;}
-#layout-2b .sidebar-last .content-inner{margin-right:25%;}
-#layout-2b #sidebar-first{width:25%;margin-left:-50%;}
-#layout-2b #sidebar-last{width:25%;margin-left:-25%;}
-#layout-2b .sidebar-first #sidebar-first{width:25%;margin-left:-25%;}
+.two-sidebars .content-inner{margin-right:50%;}
+.sidebar-left .content-inner{margin-right:25%;}
+.sidebar-right .content-inner{margin-right:25%;}
+#sidebar-first{width:25%;margin-left:-50%;}
+#sidebar-last{width:25%;margin-left:-25%;}
+.sidebar-left #sidebar-first{width:25%;margin-left:-25%;}
 
 /**
  * #layout-2c
  * Unit:   px
  * Layout: Both sidebars on the right; content/left/right
  */
-#layout-2c .two-sidebars .content-inner{margin-right:480px;}
-#layout-2c .sidebar-first .content-inner{margin-right:240px;}
-#layout-2c .sidebar-last .content-inner{margin-right:240px;}
-#layout-2c #sidebar-first{width:240px;margin-left:-480px;}
-#layout-2c #sidebar-last{width:240px;margin-left:-240px;}
-#layout-2c .sidebar-first #sidebar-first{width:240px;margin-left:-240px;}
+.two-sidebars .content-inner{margin-right:480px;}
+.sidebar-left .content-inner{margin-right:240px;}
+.sidebar-right .content-inner{margin-right:240px;}
+#sidebar-first{width:240px;margin-left:-480px;}
+#sidebar-last{width:240px;margin-left:-240px;}
+.sidebar-left #sidebar-first{width:240px;margin-left:-240px;}
 
 
 /*********************************************************
@@ -197,173 +197,34 @@
  * Unit:   em
  * Layout: Both sidebars on the left - left/right/content
  */
-#layout-3a .two-sidebars .content-inner{margin-left:40em;}
-#layout-3a .sidebar-first .content-inner{margin-left:20em;}
-#layout-3a .sidebar-last .content-inner{margin-left:20em;}
-#layout-3a #sidebar-first{width:20em;margin-left:-100%;}
-#layout-3a #sidebar-last{width:20em;margin-left:-100%;}
-#layout-3a .two-sidebars #sidebar-last{width:20em;position:relative;left:20em;}
+.two-sidebars .content-inner{margin-left:40em;}
+.sidebar-left .content-inner{margin-left:20em;}
+.sidebar-right .content-inner{margin-left:20em;}
+#sidebar-first{width:20em;margin-left:-100%;}
+#sidebar-last{width:20em;margin-left:-100%;}
+.two-sidebars #sidebar-last{width:20em;position:relative;left:20em;}
 
 /**
  * #layout-3b
  * Unit:   %
  * Layout: Both sidebars on the left - left/right/content
  */
-#layout-3b .two-sidebars .content-inner{margin-left:50%;}
-#layout-3b .sidebar-first .content-inner{margin-left:25%;}
-#layout-3b .sidebar-last .content-inner{margin-left:25%;}
-#layout-3b #sidebar-first{width:25%;margin-left:-100%;}
-#layout-3b #sidebar-last{width:25%;margin-left:-100%;}
-#layout-3b .two-sidebars #sidebar-last{width:25%;position:relative;left:25%;}
+.two-sidebars .content-inner{margin-left:50%;}
+.sidebar-left .content-inner{margin-left:25%;}
+.sidebar-right .content-inner{margin-left:25%;}
+#sidebar-first{width:25%;margin-left:-100%;}
+#sidebar-last{width:25%;margin-left:-100%;}
+.two-sidebars #sidebar-last{width:25%;position:relative;left:25%;}
 
 /**
  * #layout-3c
  * Unit:   px
  * Layout: Both sidebars on the left - left/right/content
  */
-#layout-3c .two-sidebars .content-inner{margin-left:480px;}
-#layout-3c .sidebar-first .content-inner{margin-left:240px;}
-#layout-3c .sidebar-last .content-inner{margin-left:240px;}
-#layout-3c #sidebar-first{width:240px;margin-left:-100%;}
-#layout-3c #sidebar-last{width:240px;margin-left:-100%;}
-#layout-3c .two-sidebars #sidebar-last{width:240px;position:relative;left:240px;}
-
-
-/*********************************************************
-   
-  Layout 4 - The Golden Rule
-   
-  The layout-4 layout is two column only. This layout is 
-  commonly known as the Golden Rule Layout (1:1.618).
-			
-  Content | Left or Right (one only)
-			
-  There is only one variant:
-			
-  #layout-4 - Percentages (fluid)
- 
-**********************************************************/
-/**
- * #layout-4
- * Unit:   %
- * Layout: Two column (one sidebar) content/left or right
- */
-#layout-4 .two-sidebars .content-inner{margin-right:37%;}
-#layout-4 .sidebar-first .content-inner{margin-right:37%;}
-#layout-4 .sidebar-last .content-inner{margin-right:37%;}
-#layout-4 #sidebar-first{width:37%;margin-left:-37%;}
-#layout-4 #sidebar-last{width:37%;margin-left:-37%;}
-#layout-4 .sidebar-first #sidebar-first{width:37%;margin-left:-37%;}
-
-
-/*********************************************************
-*                        Padding
-**********************************************************/
-/* Add padding to align elements to the grid. */
-.node,.block,.block-at-admin,.comment,#skip-nav,#branding,#search-box,.primary-inner,.secondary-inner,
-#mission,#main-content-header,.footer-message-inner,#attribution {padding:0 10px;}
-
-
-/*********************************************************
-*               Header elements basic styles
-**********************************************************//
-#branding{float:left;width:300px;}
-#search-box{float:right;width:300px;}
-#header-blocks{float:left;width:320px;}
-
-
-/*********************************************************
-*             Position floating Aside region
-**********************************************************/
-#content-aside{float:right;padding-left:10px;width:240px;}
-
-
-/*********************************************************
-*                 Skinr grid classes
-**********************************************************/
-.grid_1,
-.grid_2,
-.grid_3,
-.grid_4,
-.grid_5,
-.grid_6,
-.grid_7,
-.grid_8,
-.grid_9,
-.grid_10,
-.grid_11,
-.grid_12,
-.grid_13,
-.grid_14,
-.grid_15,
-.grid_16 {float:left;clear:none!important;display:inline;}
-
-.grid_1 {width: 40px;}
-.grid_2 {width: 100px;}
-.grid_3 {width: 160px;}
-.grid_4 {width: 220px;}
-.grid_5 {width: 280px;}
-.grid_6 {width: 340px;}
-.grid_7 {width: 400px;}
-.grid_8 {width: 460px;}
-.grid_9 {width: 520px;}
-.grid_10 {width: 580px;}
-.grid_11 {width: 640px;}
-.grid_12 {width: 700px;}
-.grid_13 {width: 760px;}
-.grid_14 {width: 820px;}
-.grid_15 {width: 880px;}
-.grid_16 {width: 940px;}
-
-
-/*********************************************************
-*            Helper classes for all layouts
-**********************************************************/
-/* Automatic centering for widths less than 100%. */
-#container {
-  margin: 0 auto;
-  position: relative; /* Trigger hasLayout. */
-} 
-
-/* Trigger hasLayout. */
-#columns {
-  display: inline-block;
-  margin-bottom: 1em;
-}
-/* Reset for compliant browsers. */
-#container > #columns {
-  display: block;
-}
-
-/* Float the columns. */
-#content-column,
-#sidebar-first,
-#sidebar-last {
-  float: left;
-}
-
-/* Set a width on main content column. */
-#content-column {
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-/* Helper class for clearing both. */
-.clear,
-#nav,
-#columns,
-#breadcrumb,
-#content-bottom,
-#secondary-content,
-#tertiary-content,
-#footer-wrapper,
-#footer,
-#footer-message {
-  clear: both;
-}
-
-.hide {
-  height: 0; 
-  overflow: hidden;
-}
+.two-sidebars .content-inner{margin-left:480px;}
+.sidebar-left .content-inner{margin-left:240px;}
+.sidebar-right .content-inner{margin-left:240px;}
+#sidebar-first{width:240px;margin-left:-100%;}
+#sidebar-last{width:240px;margin-left:-100%;}
+.two-sidebars #sidebar-last{width:240px;position:relative;left:240px;}
 

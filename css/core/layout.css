@@ -4,78 +4,20 @@
 /**
  * @file layout.css
  * 
- * See layout-uncompressed.css For a more human readable version of this 
- * file with instructions and comments.
+ * See layout-uncompressed.css For the layout variants with 
+ * with instructions and comments.
  * @see layout-uncompressed.css
  */
-
-/* Main layouts. */
-#layout-1a .two-sidebars .content-inner{margin:0 20em;}
-#layout-1a .sidebar-left .content-inner{margin-left:20em;}
-#layout-1a .sidebar-right .content-inner{margin-right:20em;}
-#layout-1a #sidebar-first{width:20em;margin-left:-100%;}
-#layout-1a #sidebar-last{width:20em;margin-left:-20em;}
-
-#layout-1b .two-sidebars .content-inner{margin:0 25%;}
-#layout-1b .sidebar-left .content-inner{margin-left:25%;}
-#layout-1b .sidebar-right .content-inner{margin-right:25%;}
-#layout-1b #sidebar-first{width:25%;margin-left:-100%;}
-#layout-1b #sidebar-last{width:25%;margin-left:-25%;}
-
-#layout-1c .two-sidebars .content-inner{margin:0 240px;}
-#layout-1c .sidebar-left .content-inner{margin-left:240px;}
-#layout-1c .sidebar-right .content-inner{margin-right:240px;}
-#layout-1c #sidebar-first{width:240px;margin-left:-100%;}
-#layout-1c #sidebar-last{width:240px;margin-left:-240px;}
-
-#layout-2a .two-sidebars .content-inner{margin-right:40em;}
-#layout-2a .sidebar-left .content-inner{margin-right:20em;}
-#layout-2a .sidebar-right .content-inner{margin-right:20em;}
-#layout-2a #sidebar-first{width:20em;margin-left:-40em;}
-#layout-2a #sidebar-last{width:20em;margin-left:-20em;}
-#layout-2a .sidebar-left #sidebar-first{width:20em;margin-left:-20em;}
-
-#layout-2b .two-sidebars .content-inner{margin-right:50%;}
-#layout-2b .sidebar-left .content-inner{margin-right:25%;}
-#layout-2b .sidebar-right .content-inner{margin-right:25%;}
-#layout-2b #sidebar-first{width:25%;margin-left:-50%;}
-#layout-2b #sidebar-last{width:25%;margin-left:-25%;}
-#layout-2b .sidebar-left #sidebar-first{width:25%;margin-left:-25%;}
-
-#layout-2c .two-sidebars .content-inner{margin-right:480px;}
-#layout-2c .sidebar-left .content-inner{margin-right:240px;}
-#layout-2c .sidebar-right .content-inner{margin-right:240px;}
-#layout-2c #sidebar-first{width:240px;margin-left:-480px;}
-#layout-2c #sidebar-last{width:240px;margin-left:-240px;}
-#layout-2c .sidebar-left #sidebar-first{width:240px;margin-left:-240px;}
-
-#layout-3a .two-sidebars .content-inner{margin-left:40em;}
-#layout-3a .sidebar-left .content-inner{margin-left:20em;}
-#layout-3a .sidebar-right .content-inner{margin-left:20em;}
-#layout-3a #sidebar-first{width:20em;margin-left:-100%;}
-#layout-3a #sidebar-last{width:20em;margin-left:-100%;}
-#layout-3a .two-sidebars #sidebar-last{width:20em;position:relative;left:20em;}
-
-#layout-3b .two-sidebars .content-inner{margin-left:50%;}
-#layout-3b .sidebar-left .content-inner{margin-left:25%;}
-#layout-3b .sidebar-right .content-inner{margin-left:25%;}
-#layout-3b #sidebar-first{width:25%;margin-left:-100%;}
-#layout-3b #sidebar-last{width:25%;margin-left:-100%;}
-#layout-3b .two-sidebars #sidebar-last{width:25%;position:relative;left:25%;}
-
-#layout-3c .two-sidebars .content-inner{margin-left:480px;}
-#layout-3c .sidebar-left .content-inner{margin-left:240px;}
-#layout-3c .sidebar-right .content-inner{margin-left:240px;}
-#layout-3c #sidebar-first{width:240px;margin-left:-100%;}
-#layout-3c #sidebar-last{width:240px;margin-left:-100%;}
-#layout-3c .two-sidebars #sidebar-last{width:240px;position:relative;left:240px;}
-
-#layout-4 .two-sidebars .content-inner{margin-right:37%;}
-#layout-4 .sidebar-left .content-inner{margin-right:37%;}
-#layout-4 .sidebar-right .content-inner{margin-right:37%;}
-#layout-4 #sidebar-first{width:37%;margin-left:-37%;}
-#layout-4 #sidebar-last{width:37%;margin-left:-37%;}
-#layout-4 .sidebar-left #sidebar-first{width:37%;margin-left:-37%;}
+ 
+/**
+ * #layout-1c
+ * Replace with your preferred layout, remove if using LayoutSP!
+ */
+.two-sidebars .content-inner{margin:0 240px;}
+.sidebar-left .content-inner{margin-left:240px;}
+.sidebar-right .content-inner{margin-right:240px;}
+#sidebar-first{width:240px;margin-left:-100%;}
+#sidebar-last{width:240px;margin-left:-240px;}
 
 /* Add padding to align elements to the grid. */
 .node,
@@ -96,10 +38,15 @@
 #forum,
 #aggregator,
 #tracker,
+#user-login,
+#user-register,
+#user-pass,
 .section-admin #content .region-inner,
-.breadcrumb-inner {padding:0 10px;}
+.breadcrumb-inner,
+.in-maintenance #content,
+.in-maintenance #page-title {padding:0 10px;}
 
- /* Skinr grid classes. */
+/* Skinr grid classes. */
 .grid_1,
 .grid_2,
 .grid_3,

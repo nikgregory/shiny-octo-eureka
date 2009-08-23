@@ -154,9 +154,7 @@ ul.secondary li a:hover,ul.secondary li a.active{border-bottom:none;text-decorat
 body.admin-menu{margin-top: 23px !important;}
 #admin-menu{font: 0.9em Arial, Helvetica, sans-serif;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
-/**
- * Style edit links for blocks and views.
- */
+/* Style edit links for blocks and views. */
 div.block{position:relative;}
 div.block div.block-edit{font-size:.9em;position:absolute;right:0;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
@@ -172,3 +170,12 @@ div.view div.views-admin-links{font-size:.85em;}
 div.view div.views-admin-links li a{text-decoration:none;width:5em;}
 div.view div.views-admin-links li a:hover{color:#000;background:#FFF;}
 div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{color:#CCC;}
+/* LayoutSP theme settings, included here because at-admin.css could be unset. */
+.fieldset-layout-settings .layouts .form-item,.fieldset-layout-settings .page-width,.fieldset-layout-settings .sidebar-width-left,.fieldset-layout-settings .sidebar-width-right{-moz-border-radius:6px;-webkit-border-radius:6px;background:#EEE;float:left;margin-right:5px;padding:6px;text-align:left;width:100px;}
+.fieldset-layout-settings img{display:block;margin-left:18px;}
+.fieldset-layout-settings span{height:0;overflow:hidden;position:absolute;}
+.fieldset-layout-settings .page-width,.fieldset-layout-settings .sidebar-width{float:left;margin-bottom:10px;}
+.fieldset-layout-settings .layout-method,.fieldset-layout-settings .layout-help,.fieldset-layout-settings .page-width{clear:both;}
+.fieldset-layout-settings .layout-help dt,.fieldset-layout-settings .layout-help dd{margin:0;padding:0;}
+.fieldset-layout-settings .layouts,.fieldset-layout-settings .page-width .form-item,.fieldset-layout-settings .sidebar-width .form-item{margin:0;}
+.fieldset-layout-settings label,.fieldset-layout-settings strong{font-weight:400;}
