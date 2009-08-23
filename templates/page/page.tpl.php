@@ -32,7 +32,11 @@
  * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes). 
  *     This contains flags indicating the current layout (multiple columns, single column), 
  *     the current path, whether the user is logged in, and so on.
- *
+ * 
+ * Layout variables:
+ * - $at_layout_width: the theme setting value for the page width if LayoutSP is enabled.
+ * - $at_layout: the full layout CSS if LayoutSP is enabled.
+ * 
  * Site identity:
  * - $front_page: The URL of the front page. Use this instead of $base_path,
  *     when linking to the front page. This includes the language domain or prefix.
@@ -89,15 +93,15 @@
 <head>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
+  <?php if(!empty($at_layout)): ?>
+    <style type="text/css">
+      #container{width:<?php print $at_layout_width; ?>;}
+      <?php print $at_layout; ?>
+    </style>
+  <?php endif; ?>
   <?php print $scripts; ?>
-</head>
-<?php
-/**
- * Change the body id selector to your preferred layout.
- * @see layout.css
- */
-?>        
-<body id="layout-1c" <?php print $section_class; ?>>
+</head>    
+<body<?php print $section_class; ?>>
   <div id="container" class="<?php print $classes; ?>">
 
     <div id="skip-nav">
