@@ -8,7 +8,7 @@
 /**
  * Override username theming to display/hide 'not verified' text
  */
-function phptemplate_username($object) {
+function adaptivetheme_username($object) {
   if ($object->uid && $object->name) {
     // Shorten the name when it is too long or it will break many tables.
     if (drupal_strlen($object->name) > 20) {
@@ -49,7 +49,7 @@ function phptemplate_username($object) {
 /**
  * Set default form file input size 
  */
-function phptemplate_file($element) {
+function adaptivetheme_file($element) {
   $element['#size'] = 40;
   return theme_file($element);
 }
@@ -118,7 +118,7 @@ function phptemplate_button($element) {
  * @return
  *   A string containing the breadcrumb output.
  */
-function phptemplate_breadcrumb($breadcrumb) {
+function adaptivetheme_breadcrumb($breadcrumb) {
   // Determine if we are to display the breadcrumb.
   $show_breadcrumb = theme_get_setting('breadcrumb_display');
   if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
@@ -156,7 +156,7 @@ function phptemplate_breadcrumb($breadcrumb) {
  * @return
  *   A themed HTML string representing the form item group.
  */
-function phptemplate_fieldset($element) {
+function adaptivetheme_fieldset($element) {
   if ($element['#collapsible']) {
     drupal_add_js('misc/collapse.js');
 

@@ -1,4 +1,5 @@
 <?php //$Id$
+// adaptivethemes.com
 
 /**
  * Clean a string of unwanted characters.
@@ -34,4 +35,18 @@ function wordlimit($string, $length = 50, $ellipsis = "...") {
     return implode(' ', array_slice($words, 0, $length)) . $ellipsis;
   else
     return $string;
+}
+
+/**
+ * Set a default color scheme and set a cookie.
+ */
+function get_at_colors() {
+  $scheme = theme_get_setting('color_schemes');
+  if (!$scheme) {
+    $scheme = 'colors-default.css';
+  }
+  if (isset($_COOKIE["atcolors"])) {
+    $scheme = $_COOKIE["atcolors"];
+  }
+  return $scheme;
 }
