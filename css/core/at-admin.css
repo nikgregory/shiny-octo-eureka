@@ -70,6 +70,7 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 0 0 1.5em;padding:0;}
 ul.menu li{padding:0.35em 0 0;}
 ul.menu li a:hover,ul.menu li a:focus{outline:0;}
+.block .item-list ul,.block .item-list ol{margin:0;padding:0;}
 #main-content ul.menu,#main-content ul.menu li{font-weight:bold;list-style:none;margin:0;}
 .block-at-admin {padding:10px 10px 0;}
 .block-at-admin-inner{-moz-border-radius:3px;-webkit-border-radius:3px;background:#FFF;border:1px solid #13749F;margin-bottom:3px;}
