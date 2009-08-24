@@ -67,10 +67,12 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #header-blocks .block-content{margin:0;}
 #block-system-0 .block-inner{border:none;text-align:center;}
 #block-user-3 .item-list h3{font-size:1em;}
-ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 0 0 1.5em;padding:0;}
-ul.menu li{padding:0.35em 0 0;}
+
+.block .item-list ul,.block .item-list ol{margin:0;}
+ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
+.item-list ul li,.item-list ol li,ul.menu li{padding:0.35em 0 0;}
 ul.menu li a:hover,ul.menu li a:focus{outline:0;}
-.block .item-list ul,.block .item-list ol{margin:0;padding:0;}
+
 #main-content ul.menu,#main-content ul.menu li{font-weight:bold;list-style:none;margin:0;}
 .block-at-admin {padding:10px 10px 0;}
 .block-at-admin-inner{-moz-border-radius:3px;-webkit-border-radius:3px;background:#FFF;border:1px solid #13749F;margin-bottom:3px;}
@@ -129,9 +131,8 @@ tr:first-child td.region,tr:first-child td.module,tr:first-child td.container{bo
 #block-admin-display-form tr .block{background:transparent;}
 #system-modules td strong{display:block;width:110px;}
 .fieldset-toggle-display{margin-bottom:0;}
-.fieldset-toggle-display .form-item{-moz-border-radius:4px;-webkit-border-radius:4px;background:#EEE;float:left;margin:0.1em;padding:3px;width:16.5em;}
-.fieldset-logo-image-settings{margin-right:1%;}
-.fieldset-logo-image-settings,.fieldset-shortcut-icon-settings{float:left;width:46.5%;}
+.fieldset-drupal-core-theme-settings .form-item{-moz-border-radius:4px;-webkit-border-radius:4px;background:#EEE;float:left;margin:0.1em;padding:3px;width:16.5em;}
+.fieldset-adaptive-theme-settings{margin-bottom:1.5em;}
 #edit-logo-path,#edit-favicon-path{width:90%;}
 .fieldset-theme-specific-settings{clear:both;}
 #system-theme-settings .button-wrapper{clear:both;display:block;}

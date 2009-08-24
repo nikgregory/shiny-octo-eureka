@@ -29,6 +29,16 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
  */
 function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
+  // Register a function so we can theme the theme settings form.
+  return array(
+    'system_settings_form' => array(
+      'arguments' => array(
+        'form' => NULL,
+        'key' => 'adaptivetheme',
+      ),
+    ),
+  );
+  
   // Compute the conditional stylesheets.
   if (!module_exists('conditional_styles')) {
     include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.conditional-styles.inc';
@@ -40,6 +50,34 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   $templates = drupal_find_theme_functions($existing, array('phptemplate', $theme));
   $templates += drupal_find_theme_templates($existing, '.tpl.php', $path);
   return $templates;
+}
+
+
+// Modify the theme settings form for our theme.
+function adaptivetheme_system_settings_form($form) {
+  // Theme the crap out of the theme settings fieldsets.
+  $form['theme_settings']['#title'] = t('Drupal core theme settings');
+  $form['theme_settings']['#collapsible'] = TRUE;
+  $form['theme_settings']['#collapsed']   = TRUE;
+  $form['theme_settings']['#prefix'] = '<div class="theme-settings-settings-wrapper">';
+  $form['theme_settings']['#suffix'] = '</div>';
+  $form['logo']['#collapsible'] = TRUE;
+  $form['logo']['#collapsed']   = TRUE;
+  $form['logo']['#prefix'] = '<div class="logo-settings-wrapper">';
+  $form['logo']['#suffix'] = '</div>';
+  $form['favicon']['#collapsible'] = TRUE;
+  $form['favicon']['#collapsed']   = TRUE;
+  $form['favicon']['#prefix'] = '<div class="favicon-settings-wrapper">';
+  $form['favicon']['#suffix'] = '</div>';
+  $form['node_info']['#collapsible'] = TRUE;
+  $form['node_info']['#collapsed']   = TRUE;
+  $form['node_info']['#prefix'] = '<div class="node-info-settings-wrapper">';
+  $form['node_info']['#suffix'] = '</div>';
+  $form['theme_specific']['#title'] = t('Advanced theme settings');
+  $form['theme_specific']['#collapsible'] = TRUE;
+  $form['theme_specific']['#collapsed']   = TRUE;
+  //print '<pre>'; print_r($form); print '</pre>';
+  return drupal_render($form);
 }
 
 

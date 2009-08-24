@@ -178,15 +178,8 @@ SCRIPT;
   // Create theme settings form widgets using Forms API
 
   // TNT Fieldset
-  $form['adpt_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Advanced Theme Settings'),
-    '#description' => t('Use these settings to change what and how information is displayed in your theme.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  ); 
   // General Settings
-  $form['adpt_container']['general_settings'] = array(
+  $form['general_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('General settings'),
     '#collapsible' => TRUE,
@@ -194,13 +187,13 @@ SCRIPT;
     '#attributes' => array('class' => 'general_settings'),
   );
   // Mission Statement
-  $form['adpt_container']['general_settings']['mission_statement'] = array(
+  $form['general_settings']['mission_statement'] = array(
     '#type' => 'fieldset',
     '#title' => t('Mission statement'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['general_settings']['mission_statement']['mission_statement_pages'] = array(
+  $form['general_settings']['mission_statement']['mission_statement_pages'] = array(
     '#type'          => 'radios',
     '#title'         => t('Where should your mission statement be displayed?'),
     '#default_value' => $settings['mission_statement_pages'],
@@ -209,13 +202,13 @@ SCRIPT;
                           'all' => t('Display mission statement on all pages'),
                         ),
   );
-  $form['adpt_container']['general_settings']['breadcrumb'] = array(
+  $form['general_settings']['breadcrumb'] = array(
     '#type' => 'fieldset',
     '#title' => t('Breadcrumb'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['general_settings']['breadcrumb']['breadcrumb_display'] = array(
+  $form['general_settings']['breadcrumb']['breadcrumb_display'] = array(
     '#type'          => 'select',
     '#title'         => t('Display breadcrumb'),
     '#default_value' => $settings['breadcrumb'],
@@ -225,7 +218,7 @@ SCRIPT;
                           'admin' => t('Only in admin section'),                
                         ),
   );
-  $form['adpt_container']['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
+  $form['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Breadcrumb separator'),
     '#description'   => t('Text only. Dont forget to include spaces.'),
@@ -234,18 +227,18 @@ SCRIPT;
     '#maxlength'     => 10,
     '#prefix'        => '<div id="div-breadcrumb-collapse">', // jquery hook to show/hide optional widgets
   );
-  $form['adpt_container']['general_settings']['breadcrumb']['breadcrumb_home'] = array(
+  $form['general_settings']['breadcrumb']['breadcrumb_home'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Show home page link in breadcrumb'),
     '#default_value' => $settings['breadcrumb_home'],
   );
-  $form['adpt_container']['general_settings']['breadcrumb']['breadcrumb_trailing'] = array(
+  $form['general_settings']['breadcrumb']['breadcrumb_trailing'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Append a separator to the end of the breadcrumb'),
     '#default_value' => $settings['breadcrumb_trailing'],
     '#description'   => t('Useful when the breadcrumb is placed just before the title.'),
   );
-  $form['adpt_container']['general_settings']['breadcrumb']['breadcrumb_title'] = array(
+  $form['general_settings']['breadcrumb']['breadcrumb_title'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Append the content title to the end of the breadcrumb'),
     '#default_value' => $settings['breadcrumb_title'],
@@ -254,59 +247,59 @@ SCRIPT;
   );
   
   // Username
-  $form['adpt_container']['general_settings']['username'] = array(
+  $form['general_settings']['username'] = array(
     '#type' => 'fieldset',
     '#title' => t('Username'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['general_settings']['username']['user_notverified_display'] = array(
+  $form['general_settings']['username']['user_notverified_display'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display "not verified" for unregistered usernames'),
     '#default_value' => $settings['user_notverified_display'],
   );
   
   // Search Settings
-  $form['adpt_container']['general_settings']['search_container'] = array(
+  $form['general_settings']['search_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
     '#description' => t('What additional information should be displayed on your search results page?'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_snippet'] = array(
+  $form['general_settings']['search_container']['search_results']['search_snippet'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display text snippet'),
     '#default_value' => $settings['search_snippet'],
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_info_type'] = array(
+  $form['general_settings']['search_container']['search_results']['search_info_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display content type'),
     '#default_value' => $settings['search_info_type'],
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_info_user'] = array(
+  $form['general_settings']['search_container']['search_results']['search_info_user'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display author name'),
     '#default_value' => $settings['search_info_user'],
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_info_date'] = array(
+  $form['general_settings']['search_container']['search_results']['search_info_date'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display posted date'),
     '#default_value' => $settings['search_info_date'],
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_info_comment'] = array(
+  $form['general_settings']['search_container']['search_results']['search_info_comment'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display comment count'),
     '#default_value' => $settings['search_info_comment'],
   );
-  $form['adpt_container']['general_settings']['search_container']['search_results']['search_info_upload'] = array(
+  $form['general_settings']['search_container']['search_results']['search_info_upload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display attachment count'),
     '#default_value' => $settings['search_info_upload'],
   );
   
   // Node Settings
-  $form['adpt_container']['node_type_specific'] = array(
+  $form['node_type_specific'] = array(
     '#type' => 'fieldset',
     '#title' => t('Node settings'),
     '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the "Use content-type specific settings" box to customize them for each content type.  For example, you may want to show the date on stories, but not pages.'),
@@ -316,7 +309,7 @@ SCRIPT;
   );
   
   // Author & Date Settings
-  $form['adpt_container']['node_type_specific']['submitted_by_container'] = array(
+  $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Author & date'),
     '#collapsible' => TRUE,
@@ -325,27 +318,27 @@ SCRIPT;
   if (module_exists('submitted_by') == FALSE) {
     // Default & content-type specific settings
     foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
+      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
         '#type' => 'fieldset',
         '#title' => t('!name', array('!name' => t($name))),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
+      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Display author\'s username'),
         '#default_value' => $settings["submitted_by_author_{$type}"],
       );
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
+      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Display date posted (you can customize this format on your Date and Time settings page)'),
         '#default_value' => $settings["submitted_by_date_{$type}"],
       );
       // Options for default settings
       if ($type == 'default') {
-        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
-        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
-        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
+        $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
+        $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
+        $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
           '#type'          => 'checkbox',
           '#title'         => t('Use custom settings for each content type instead of the default above'),
           '#default_value' => $settings['submitted_by_enable_content_type'],
@@ -358,13 +351,13 @@ SCRIPT;
     }
   }
   else {
-    $form['adpt_container']['node_type_specific']['submitted_by_container']['#description'] = 'NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.';
-    $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
+    $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.');
+    $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
   }
   
   // Taxonomy Settings
   if (module_exists('taxonomy')) {
-    $form['adpt_container']['node_type_specific']['display_taxonomy_container'] = array(
+    $form['node_type_specific']['display_taxonomy_container'] = array(
       '#type' => 'fieldset',
       '#title' => t('Taxonomy terms'),
       '#collapsible' => TRUE,
@@ -373,14 +366,14 @@ SCRIPT;
     // Default & content-type specific settings
     foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
       // taxonomy display per node
-      $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
+      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
         '#type' => 'fieldset',
         '#title'       => t('!name', array('!name' => t($name))),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
       // display
-      $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
+      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
         '#type'          => 'select',
         '#title'         => t('When should taxonomy terms be displayed?'),
         '#default_value' => $settings["taxonomy_display_{$type}"],
@@ -392,7 +385,7 @@ SCRIPT;
                             ),
       );
       // format
-      $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
+      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
         '#type'          => 'radios',
         '#title'         => t('Taxonomy display format'),
         '#default_value' => $settings["taxonomy_format_{$type}"],
@@ -409,7 +402,7 @@ SCRIPT;
       }
       // Display taxonomy checkboxes
       foreach ($vocabs as $key => $vocab_name) {
-        $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
           '#type'          => 'checkbox',
           '#title'         => t('Display vocabulary: '. $vocab_name),
           '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"], 
@@ -417,9 +410,9 @@ SCRIPT;
       }
       // Options for default settings
       if ($type == 'default') {
-        $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
-        $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
-        $form['adpt_container']['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
           '#type'          => 'checkbox',
           '#title'         => t('Use custom settings for each content type instead of the default above'),
           '#default_value' => $settings['taxonomy_enable_content_type'],
@@ -432,7 +425,7 @@ SCRIPT;
     }
   }
   // Read More & Comment Link Settings
-  $form['adpt_container']['node_type_specific']['link_settings'] = array(
+  $form['node_type_specific']['link_settings'] = array(
     '#type'        => 'fieldset',
     '#title'       => t('Links'),
     '#description' => t('Customize the text of node links'),
@@ -440,7 +433,7 @@ SCRIPT;
     '#collapsed'   => TRUE,
    );
   // Read more link settings
-  $form['adpt_container']['node_type_specific']['link_settings']['readmore'] = array(
+  $form['node_type_specific']['link_settings']['readmore'] = array(
     '#type'        => 'fieldset',
     '#title'       => t('“Read more”'),
     '#collapsible' => TRUE,
@@ -449,31 +442,31 @@ SCRIPT;
   // Default & content-type specific settings
   foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
     // Read more
-    $form['adpt_container']['node_type_specific']['link_settings']['readmore'][$type] = array(
+    $form['node_type_specific']['link_settings']['readmore'][$type] = array(
       '#type'        => 'fieldset',
       '#title'       => t('!name', array('!name' => t($name))),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['readmore'][$type]["readmore_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['readmore'][$type]["readmore_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text'),
       '#default_value' => $settings["readmore_{$type}"],
       '#description'   => t('HTML is allowed.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['readmore'][$type]["readmore_title_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['readmore'][$type]["readmore_title_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Title text (tool tip)'),
       '#default_value' => $settings["readmore_title_{$type}"],
       '#description'   => t('Displayed when hovering over link. Plain text only.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['readmore'][$type]["readmore_prefix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['readmore'][$type]["readmore_prefix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Prefix'),
       '#default_value' => $settings["readmore_prefix_{$type}"],
       '#description'   => t('Text or HTML placed before the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['readmore'][$type]["readmore_suffix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['readmore'][$type]["readmore_suffix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Suffix'),
       '#default_value' => $settings["readmore_suffix_{$type}"],
@@ -481,9 +474,9 @@ SCRIPT;
     );
     // Options for default settings
     if ($type == 'default') {
-      $form['adpt_container']['node_type_specific']['link_settings']['readmore']['default']['#title'] = t('Default');
-      $form['adpt_container']['node_type_specific']['link_settings']['readmore']['default']['#collapsed'] = $settings['readmore_enable_content_type'] ? TRUE : FALSE;
-      $form['adpt_container']['node_type_specific']['link_settings']['readmore']['readmore_enable_content_type'] = array(
+      $form['node_type_specific']['link_settings']['readmore']['default']['#title'] = t('Default');
+      $form['node_type_specific']['link_settings']['readmore']['default']['#collapsed'] = $settings['readmore_enable_content_type'] ? TRUE : FALSE;
+      $form['node_type_specific']['link_settings']['readmore']['readmore_enable_content_type'] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Use custom settings for each content type instead of the default above'),
         '#default_value' => $settings['readmore_enable_content_type'],
@@ -495,7 +488,7 @@ SCRIPT;
     }
   }
   // Comments link settings
-  $form['adpt_container']['node_type_specific']['link_settings']['comment'] = array(
+  $form['node_type_specific']['link_settings']['comment'] = array(
     '#type'        => 'fieldset',
     '#title'       => t('“Comment”'),
     '#collapsible' => TRUE,
@@ -503,181 +496,181 @@ SCRIPT;
   );
   // Default & content-type specific settings
   foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type] = array(
       '#type'        => 'fieldset',
       '#title'       => t('!name', array('!name' => t($name))),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
     // Full nodes
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('For full content'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('“Add new comment” link'),
       '#description' => t('The link when the full content is being displayed.'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add']["comment_node_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add']["comment_node_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text'),
       '#default_value' => $settings["comment_node_{$type}"],
       '#description'   => t('HTML is allowed.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add']["comment_node_title_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add']["comment_node_title_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Title text (tool tip)'),
       '#default_value' => $settings["comment_node_title_{$type}"],
       '#description'   => t('Displayed when hovering over link. Plain text only.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('Advanced'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra']["comment_node_prefix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra']["comment_node_prefix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Prefix'),
       '#default_value' => $settings["comment_node_prefix_{$type}"],
       '#description'   => t('Text or HTML placed before the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra']["comment_node_suffix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['node']['add']['extra']["comment_node_suffix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Suffix'),
       '#default_value' => $settings["comment_node_suffix_{$type}"],
       '#description'   => t('Text or HTML placed after the link.'),
     );
     // Teasers
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('For teasers'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('“Add new comment” link'),
       '#description' => t('The link when there are no comments.'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']["comment_add_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']["comment_add_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text'),
       '#default_value' => $settings["comment_add_{$type}"],
       '#description'   => t('HTML is allowed.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']["comment_add_title_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']["comment_add_title_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Title text (tool tip)'),
       '#default_value' => $settings["comment_add_title_{$type}"],
       '#description'   => t('Displayed when hovering over link. Plain text only.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('Advanced'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra']["comment_add_prefix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra']["comment_add_prefix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Prefix'),
       '#default_value' => $settings["comment_add_prefix_{$type}"],
       '#description'   => t('Text or HTML placed before the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra']["comment_add_suffix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['add']['extra']["comment_add_suffix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Suffix'),
       '#default_value' => $settings["comment_add_suffix_{$type}"],
       '#description'   => t('Text or HTML placed after the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('“Comments” link'),
       '#description' => t('The link when there are one or more comments.'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_singular_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_singular_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text when there is 1 comment'),
       '#default_value' => $settings["comment_singular_{$type}"],
       '#description'   => t('HTML is allowed.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_plural_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_plural_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text when there are multiple comments'),
       '#default_value' => $settings["comment_plural_{$type}"],
       '#description'   => t('HTML is allowed. @count will be replaced with the number of comments.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_title_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']["comment_title_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Title text (tool tip)'),
       '#default_value' => $settings["comment_title_{$type}"],
       '#description'   => t('Displayed when hovering over link. Plain text only.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('Advanced'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra']["comment_prefix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra']["comment_prefix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Prefix'),
       '#default_value' => $settings["comment_prefix_{$type}"],
       '#description'   => t('Text or HTML placed before the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra']["comment_suffix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['standard']['extra']["comment_suffix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Suffix'),
       '#default_value' => $settings["comment_suffix_{$type}"],
       '#description'   => t('Text or HTML placed after the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('“New comments” link'),
       '#description' => t('The link when there are one or more new comments.'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_singular_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_singular_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text when there is 1 new comment'),
       '#default_value' => $settings["comment_new_singular_{$type}"],
       '#description'   => t('HTML is allowed.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_plural_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_plural_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Link text when there are multiple new comments'),
       '#default_value' => $settings["comment_new_plural_{$type}"],
       '#description'   => t('HTML is allowed. @count will be replaced with the number of comments.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_title_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']["comment_new_title_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Title text (tool tip)'),
       '#default_value' => $settings["comment_new_title_{$type}"],
       '#description'   => t('Displayed when hovering over link. Plain text only.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra'] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra'] = array(
       '#type'        => 'fieldset',
       '#title'       => t('Advanced'),
       '#collapsible' => TRUE,
       '#collapsed'   => TRUE,
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra']["comment_new_prefix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra']["comment_new_prefix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Prefix'),
       '#default_value' => $settings["comment_new_prefix_{$type}"],
       '#description'   => t('Text or HTML placed before the link.'),
     );
-    $form['adpt_container']['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra']["comment_new_suffix_{$type}"] = array(
+    $form['node_type_specific']['link_settings']['comment'][$type]['teaser']['new']['extra']["comment_new_suffix_{$type}"] = array(
       '#type'          => 'textfield',
       '#title'         => t('Suffix'),
       '#default_value' => $settings["comment_new_suffix_{$type}"],
@@ -685,9 +678,9 @@ SCRIPT;
     );
     // Options for default settings
     if ($type == 'default') {
-      $form['adpt_container']['node_type_specific']['link_settings']['comment']['default']['#title'] = t('Default');
-      $form['adpt_container']['node_type_specific']['link_settings']['comment']['default']['#collapsed'] = $settings['comment_enable_content_type'] ? TRUE : FALSE;
-      $form['adpt_container']['node_type_specific']['link_settings']['comment']['comment_enable_content_type'] = array(
+      $form['node_type_specific']['link_settings']['comment']['default']['#title'] = t('Default');
+      $form['node_type_specific']['link_settings']['comment']['default']['#collapsed'] = $settings['comment_enable_content_type'] ? TRUE : FALSE;
+      $form['node_type_specific']['link_settings']['comment']['comment_enable_content_type'] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Use custom settings for each content type instead of the default above'),
         '#default_value' => $settings['comment_enable_content_type'],
@@ -700,7 +693,7 @@ SCRIPT;
   }
   
   // SEO settings
-  $form['adpt_container']['seo'] = array(
+  $form['seo'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search engine optimization (SEO) settings'),
     '#collapsible' => TRUE,
@@ -708,7 +701,7 @@ SCRIPT;
   );
   // Page titles
 
-  $form['adpt_container']['seo']['page_format_titles'] = array(
+  $form['seo']['page_format_titles'] = array(
     '#type' => 'fieldset',
     '#title' => t('Page titles'),
     '#description'   => t('This is the title that displays in the title bar of your web browser. Your site title, slogan, and mission can all be set on your Site Information page'),
@@ -717,14 +710,14 @@ SCRIPT;
   );
   if (module_exists('page_title') == FALSE) {
     // front page title
-    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles'] = array(
+    $form['seo']['page_format_titles']['front_page_format_titles'] = array(
       '#type' => 'fieldset',
       '#title' => t('Front page title'),
       '#description'   => t('Your front page in particular should have important keywords for your site in the page title'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display'] = array(
+    $form['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display'] = array(
       '#type' => 'select',
       '#title' => t('Set text of front page title'),
       '#collapsible' => TRUE,
@@ -737,7 +730,7 @@ SCRIPT;
                     'custom' => t('Custom (below)'),
                   ),
     );
-    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['page_title_display_custom'] = array(
+    $form['seo']['page_format_titles']['front_page_format_titles']['page_title_display_custom'] = array(
       '#type' => 'textfield',
       '#title' => t('Custom'),
       '#size' => 60,
@@ -745,13 +738,13 @@ SCRIPT;
       '#description'   => t('Enter a custom page title for your front page'),
     );
     // other pages title
-    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles'] = array(
+    $form['seo']['page_format_titles']['other_page_format_titles'] = array(
       '#type' => 'fieldset',
       '#title' => t('Other page titles'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display'] = array(
+    $form['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display'] = array(
       '#type' => 'select',
       '#title' => t('Set text of other page titles'),
       '#collapsible' => TRUE,
@@ -765,7 +758,7 @@ SCRIPT;
                     'custom' => t('Custom (below)'),
                   ),
     );
-    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display_custom'] = array(
+    $form['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display_custom'] = array(
       '#type' => 'textfield',
       '#title' => t('Custom'),
       '#size' => 60,
@@ -773,7 +766,7 @@ SCRIPT;
       '#description'   => t('Enter a custom page title for all other pages'),
     );
     // SEO configurable separator
-    $form['adpt_container']['seo']['page_format_titles']['configurable_separator'] = array(
+    $form['seo']['page_format_titles']['configurable_separator'] = array(
       '#type' => 'textfield',
       '#title' => t('Title separator'),
       '#description' => t('Customize the separator character used in the page title'),
@@ -782,12 +775,12 @@ SCRIPT;
     );
   } 
   else {
-    $form['adpt_container']['seo']['page_format_titles']['#description'] = 'NOTICE: You currently have the "Page Title" module installed and enabled, so the page title theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the page title theme settings, you must first disable the "Page Title" module.';
-    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display']['#disabled'] = 'disabled';
-    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display']['#disabled'] = 'disabled';
+    $form['seo']['page_format_titles']['#description'] = t('NOTICE: You currently have the "Page Title" module installed and enabled, so the page title theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the page title theme settings, you must first disable the "Page Title" module.');
+    $form['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display']['#disabled'] = 'disabled';
+    $form['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display']['#disabled'] = 'disabled';
   }
   // Metadata
-  $form['adpt_container']['seo']['meta'] = array(
+  $form['seo']['meta'] = array(
     '#type' => 'fieldset',
     '#title' => t('Meta tags'),
     '#description' => t('Meta tags aren\'t used much by search engines anymore, but the meta description is important -- this is what will be shown as the description of your link in search engine results.  NOTE: For more advanced meta tag functionality, check out the Meta Tags (aka. Node Words) module.  These theme settings do not work in conjunction with this module and will not appear if you have it enabled.'),
@@ -795,14 +788,14 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   if (module_exists('nodewords') == FALSE) {
-    $form['adpt_container']['seo']['meta']['meta_keywords'] = array(
+    $form['seo']['meta']['meta_keywords'] = array(
       '#type' => 'textfield',
       '#title' => t('Meta keywords'),
       '#description' => t('Enter a comma-separated list of keywords'),
       '#size' => 60,
       '#default_value' => $settings['meta_keywords'],
     );
-    $form['adpt_container']['seo']['meta']['meta_description'] = array(
+    $form['seo']['meta']['meta_description'] = array(
       '#type' => 'textarea',
       '#title' => t('Meta description'),
       '#cols' => 60,
@@ -811,61 +804,61 @@ SCRIPT;
     );
   } 
   else {
-    $form['adpt_container']['seo']['meta']['#description'] = 'NOTICE: You currently have the "nodewords" module installed and enabled, so the meta tag theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the meta tag theme settings, you must first disable the "nodewords" module.';
-    $form['adpt_container']['seo']['meta']['meta_keywords']['#disabled'] = 'disabled';
-    $form['adpt_container']['seo']['meta']['meta_description']['#disabled'] = 'disabled';
+    $form['seo']['meta']['#description'] = t('NOTICE: You currently have the "Nodewords" (Meta tags) module installed and enabled, so the meta tag theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the meta tag theme settings, you must first disable the "Nodewords" module.');
+    $form['seo']['meta']['meta_keywords']['#disabled'] = 'disabled';
+    $form['seo']['meta']['meta_description']['#disabled'] = 'disabled';
   }
   // Development settings
-  $form['adpt_container']['themedev'] = array(
+  $form['themedev'] = array(
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
- $form['adpt_container']['themedev']['rebuild_registry'] = array(
+ $form['themedev']['rebuild_registry'] = array(
     '#type' => 'checkbox',
     '#title' => t('Rebuild theme registry on every page.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
- $form['adpt_container']['themedev']['load_firebug_lite'] = array(
+ $form['themedev']['load_firebug_lite'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load Firebug lite script for debugging in IE, Opera and Webkit.'),
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
   // Administrationt settings
-  $form['adpt_container']['admin_settings']['administration'] = array(
+  $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
     '#title' => t('Admin settings'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['adpt_container']['admin_settings']['administration']['at_admin_theme'] = array(
+  $form['admin_settings']['administration']['at_admin_theme'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Use the Administration theme for admin pages.'),
     '#default_value' => $settings['at_admin_theme'],
     '#description' => t('The site will use the built in Administration theme for admin pages.'),  
   );
-  $form['adpt_container']['admin_settings']['administration']['at_admin_theme_node'] = array(
+  $form['admin_settings']['administration']['at_admin_theme_node'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Use the Administration theme for node add/edit/delete pages.'),
     '#default_value' => $settings['at_admin_theme_node'],
     '#description' => t('The site will use the built in Administration theme for for node add, edit and delete pages.'),  
   );
-  $form['adpt_container']['admin_settings']['administration']['at_admin_theme_logo'] = array(
+  $form['admin_settings']['administration']['at_admin_theme_logo'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Show site logo on admin pages.'),
     '#default_value' => $settings['at_admin_theme_logo'],
     '#description' => t('When checked the site logo will show on admin pages.'),  
   );
-  $form['adpt_container']['admin_settings']['administration']['block_edit_links'] = array(
+  $form['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
     '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),  
   );
-  $form['adpt_container']['admin_settings']['administration']['at_admin_hide_help'] = array(
+  $form['admin_settings']['administration']['at_admin_hide_help'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Hide help messages.'),
     '#default_value' => $settings['at_admin_hide_help'],
@@ -874,19 +867,19 @@ SCRIPT;
   // Layout settings
   if ($settings['layout_enable_settings'] == 'on') {
     $image_path = path_to_theme() .'/css/core/core-images';
-    $form['adpt_container']['layout'] = array(
+    $form['layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Layout settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#description'   => t('Use these settings to customize the layout of your site. If no overrides are set the default layout will apply.'),
+      '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
     );
-    $form['adpt_container']['layout']['layout_width_help'] = array(
+    $form['layout']['layout_width_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
     );
-    $form['adpt_container']['layout']['layout_width'] = array(
+    $form['layout']['layout_width'] = array(
       '#type'          => 'select',
       '#prefix'        => '<div class="page-width">',
       '#suffix'        => '</div>',
@@ -905,12 +898,12 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'field-layout-width'),
     );
-    $form['adpt_container']['layout']['layout_sidebar_help'] = array(
+    $form['layout']['layout_sidebar_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
     );
-    $form['adpt_container']['layout']['layout_sidebar_first_width'] = array(
+    $form['layout']['layout_sidebar_first_width'] = array(
       '#type'          => 'select',
       '#title'         => t('Sidebar first'),
       '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
@@ -936,7 +929,7 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'sidebar-width-select'),
     );
-    $form['adpt_container']['layout']['layout_sidebar_last_width'] = array(
+    $form['layout']['layout_sidebar_last_width'] = array(
       '#type'          => 'select',
       '#title'         => t('Sidebar last'),
       '#prefix'       => '<div class="sidebar-width-right">',
@@ -962,12 +955,12 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'sidebar-width-select'),
     );
-    $form['adpt_container']['layout']['layout_method_help'] = array(
+    $form['layout']['layout_method_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
     );
-    $form['adpt_container']['layout']['layout_method'] = array(
+    $form['layout']['layout_method'] = array(
       '#type' => 'radios',
       '#prefix'       => '<div class="layout-method">',
       '#suffix'       => '</div>',
@@ -979,21 +972,21 @@ SCRIPT;
       ),
      '#attributes' => array('class' => 'layouts'), 
     );
-    $form['adpt_container']['layout']['layout_enable_settings'] = array(
+    $form['layout']['layout_enable_settings'] = array(
       '#type'    => 'hidden',
       '#value'   => $settings['layout_enable_settings'],
     );   
   } //endif layout settings
   // Color schemes
   if ($settings['color_enable_schemes'] == 'on') {
-    $form['adpt_container']['color'] = array(
+    $form['color'] = array(
       '#type' => 'fieldset',
       '#title' => t('Color settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#description'   => t('Use these settings to customize the colors of your site. If no stylesheet is selected the default colors will apply.'),
     );
-    $form['adpt_container']['color']['color_schemes'] = array(
+    $form['color']['color_schemes'] = array(
       '#type' => 'select',
       '#title' => t('Color Schemes'),
       '#default_value' => $settings['color_schemes'],
@@ -1002,7 +995,7 @@ SCRIPT;
         //'colors-example.css' => t('Example color scheme'), // add aditional stylesheets here, they must be in css/theme and match name perfectly!
       ),
     );
-    $form['adpt_container']['color']['color_enable_schemes'] = array(
+    $form['color']['color_enable_schemes'] = array(
       '#type'    => 'hidden',
       '#value'   => $settings['color_enable_schemes'],
     ); 

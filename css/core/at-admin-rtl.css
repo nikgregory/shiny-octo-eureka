@@ -35,3 +35,4 @@ tr #acquia-agent-no-search{background-position:24px 5px;padding-left:0;padding-r
 .block-at-admin fieldset{margin-right:0.5em;}
 .block-at-admin h2 span {float:left;}
 div.block div.block-edit{top:10px;left:15px;right:auto;}
+ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 1em 0 0;}
