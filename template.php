@@ -105,10 +105,12 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   
   // Admin welcome message with date for the admin theme.
   global $user;
-  $welcome = t('Welcome') .' '. $user->name;
-  $conjunction = ', '. t('it\'s') .' ';
-  $todays_date = date("l, F d Y" , time()); 
-  $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+  if ($vars['logged_in'] && arg(0) == 'admin') {
+    $welcome = t('Welcome') .' '. $user->name;
+    $conjunction = ', '. t('it\'s') .' ';
+    $todays_date = date("l, F d Y" , time()); 
+    $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+  }
 
   // Attribution.
   $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;

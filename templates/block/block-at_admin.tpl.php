@@ -58,7 +58,7 @@
           <dt><?php print t('Block Region'); ?></dt>
             <dd><?php print $block->region; ?></dd>
           <dt><?php print t('Block ID'); ?></dt>
-            <dd>#<?php print $block_id; ?></dd>
+            <dd>#<?php print $block_module_delta; ?></dd>
           <dt><?php print t('Block Classes'); ?></dt>
             <dd>.<?php print $block_at_admin_classes; ?></dd>
         </dl>
