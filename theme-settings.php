@@ -322,40 +322,46 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // Default & content-type specific settings
-  foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-    $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
-      '#type' => 'fieldset',
-      '#title' => t('!name', array('!name' => t($name))),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Display author\'s username'),
-      '#default_value' => $settings["submitted_by_author_{$type}"],
-    );
-    $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Display date posted (you can customize this format on your Date and Time settings page)'),
-      '#default_value' => $settings["submitted_by_date_{$type}"],
-    );
-    // Options for default settings
-    if ($type == 'default') {
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
-      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
-        '#type'          => 'checkbox',
-        '#title'         => t('Use custom settings for each content type instead of the default above'),
-        '#default_value' => $settings['submitted_by_enable_content_type'],
+  if (module_exists('submitted_by') == FALSE) {
+    // Default & content-type specific settings
+    foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
+      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
+        '#type' => 'fieldset',
+        '#title' => t('!name', array('!name' => t($name))),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
       );
-    }
-    // Collapse content-type specific settings if default settings are being used
-    else if ($settings['submitted_by_enable_content_type'] == 0) {
-      $form['submitted_by'][$type]['#collapsed'] = TRUE;
+      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Display author\'s username'),
+        '#default_value' => $settings["submitted_by_author_{$type}"],
+      );
+      $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Display date posted (you can customize this format on your Date and Time settings page)'),
+        '#default_value' => $settings["submitted_by_date_{$type}"],
+      );
+      // Options for default settings
+      if ($type == 'default') {
+        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
+        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
+        $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
+          '#type'          => 'checkbox',
+          '#title'         => t('Use custom settings for each content type instead of the default above'),
+          '#default_value' => $settings['submitted_by_enable_content_type'],
+        );
+      }
+      // Collapse content-type specific settings if default settings are being used
+      else if ($settings['submitted_by_enable_content_type'] == 0) {
+        $form['submitted_by'][$type]['#collapsed'] = TRUE;
+      }
     }
   }
-    
+  else {
+    $form['adpt_container']['node_type_specific']['submitted_by_container']['#description'] = 'NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.';
+    $form['adpt_container']['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
+  }
+  
   // Taxonomy Settings
   if (module_exists('taxonomy')) {
     $form['adpt_container']['node_type_specific']['display_taxonomy_container'] = array(
@@ -701,6 +707,7 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   // Page titles
+
   $form['adpt_container']['seo']['page_format_titles'] = array(
     '#type' => 'fieldset',
     '#title' => t('Page titles'),
@@ -708,70 +715,77 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // front page title
-  $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Front page title'),
-    '#description'   => t('Your front page in particular should have important keywords for your site in the page title'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display'] = array(
-    '#type' => 'select',
-    '#title' => t('Set text of front page title'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#default_value' => $settings['front_page_title_display'],
-    '#options' => array(
+  if (module_exists('page_title') == FALSE) {
+    // front page title
+    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Front page title'),
+      '#description'   => t('Your front page in particular should have important keywords for your site in the page title'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display'] = array(
+      '#type' => 'select',
+      '#title' => t('Set text of front page title'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#default_value' => $settings['front_page_title_display'],
+      '#options' => array(
                     'title_slogan' => t('Site title | Site slogan'),
                     'slogan_title' => t('Site slogan | Site title'),
                     'title_mission' => t('Site title | Site mission'),
                     'custom' => t('Custom (below)'),
                   ),
-  );
-  $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['page_title_display_custom'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Custom'),
-    '#size' => 60,
-    '#default_value' => $settings['page_title_display_custom'],
-    '#description'   => t('Enter a custom page title for your front page'),
-  );
-  // other pages title
-  $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Other page titles'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display'] = array(
-    '#type' => 'select',
-    '#title' => t('Set text of other page titles'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#default_value' => $settings['other_page_title_display'],
-    '#options' => array(
+    );
+    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['page_title_display_custom'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Custom'),
+      '#size' => 60,
+      '#default_value' => $settings['page_title_display_custom'],
+      '#description'   => t('Enter a custom page title for your front page'),
+    );
+    // other pages title
+    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Other page titles'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display'] = array(
+      '#type' => 'select',
+      '#title' => t('Set text of other page titles'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#default_value' => $settings['other_page_title_display'],
+      '#options' => array(
                     'ptitle_slogan' => t('Page title | Site slogan'),
                     'ptitle_stitle' => t('Page title | Site title'),
                     'ptitle_smission' => t('Page title | Site mission'),
                     'ptitle_custom' => t('Page title | Custom (below)'),
                     'custom' => t('Custom (below)'),
                   ),
-  );
-  $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display_custom'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Custom'),
-    '#size' => 60,
-    '#default_value' => $settings['other_page_title_display_custom'],
-    '#description'   => t('Enter a custom page title for all other pages'),
-  );
-  // SEO configurable separator
-  $form['adpt_container']['seo']['page_format_titles']['configurable_separator'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Title separator'),
-    '#description' => t('Customize the separator character used in the page title'),
-    '#size' => 60,
-    '#default_value' => $settings['configurable_separator'],
-  );
+    );
+    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display_custom'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Custom'),
+      '#size' => 60,
+      '#default_value' => $settings['other_page_title_display_custom'],
+      '#description'   => t('Enter a custom page title for all other pages'),
+    );
+    // SEO configurable separator
+    $form['adpt_container']['seo']['page_format_titles']['configurable_separator'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title separator'),
+      '#description' => t('Customize the separator character used in the page title'),
+      '#size' => 60,
+      '#default_value' => $settings['configurable_separator'],
+    );
+  } 
+  else {
+    $form['adpt_container']['seo']['page_format_titles']['#description'] = 'NOTICE: You currently have the "Page Title" module installed and enabled, so the page title theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the page title theme settings, you must first disable the "Page Title" module.';
+    $form['adpt_container']['seo']['page_format_titles']['front_page_format_titles']['front_page_title_display']['#disabled'] = 'disabled';
+    $form['adpt_container']['seo']['page_format_titles']['other_page_format_titles']['other_page_title_display']['#disabled'] = 'disabled';
+  }
   // Metadata
   $form['adpt_container']['seo']['meta'] = array(
     '#type' => 'fieldset',
@@ -797,9 +811,9 @@ SCRIPT;
     );
   } 
   else {
-      $form['adpt_container']['seo']['meta']['#description'] = 'NOTICE: You currently have the "nodewords" module installed and enabled, so the meta tag theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the meta tag theme settings, you must first disable the "nodewords" module.';
-      $form['adpt_container']['seo']['meta']['meta_keywords']['#disabled'] = 'disabled';
-      $form['adpt_container']['seo']['meta']['meta_description']['#disabled'] = 'disabled';
+    $form['adpt_container']['seo']['meta']['#description'] = 'NOTICE: You currently have the "nodewords" module installed and enabled, so the meta tag theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the meta tag theme settings, you must first disable the "nodewords" module.';
+    $form['adpt_container']['seo']['meta']['meta_keywords']['#disabled'] = 'disabled';
+    $form['adpt_container']['seo']['meta']['meta_description']['#disabled'] = 'disabled';
   }
   // Development settings
   $form['adpt_container']['themedev'] = array(

@@ -84,6 +84,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'layout_method'                         => '0',
     'layout_width'                          => '960px',
     'layout_sidebar_first_width'            => '240',
+    'layout_sidebar_last_width'             => '240',
     'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
     'color_schemes'                         => 'colors-default.css',
     'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
@@ -257,6 +258,71 @@ function phptemplate_preprocess_page(&$vars) {
     $vars['at_layout'] = implode('', $styles);
   }
   
+  // Hide breadcrumb on all pages.
+  //if (theme_get_setting('breadcrumb_display') == 0) {
+  //  $vars['breadcrumb'] = '';  
+  //}
+  
+  // Set site title, slogan, mission, page title & separator
+  if (!function_exists('page_title_preprocess_page')) {
+    $title = t(variable_get('site_name', ''));
+    $slogan = t(variable_get('site_slogan', ''));
+    $mission = t(variable_get('site_mission', ''));
+    $page_title = t(drupal_get_title());
+    $title_separator = theme_get_setting('configurable_separator');
+    if (drupal_is_front_page()) {                                  // Front page title settings
+      switch (theme_get_setting('front_page_title_display')) {
+        case 'title_slogan':
+          $vars['head_title'] = drupal_set_title($title . $title_separator . $slogan);
+          break;
+        case 'slogan_title':
+          $vars['head_title'] = drupal_set_title($slogan . $title_separator . $title);
+          break;
+        case 'title_mission':
+          $vars['head_title'] = drupal_set_title($title . $title_separator . $mission);
+          break;
+        case 'custom':
+          if (theme_get_setting('page_title_display_custom') !== '') {
+            $vars['head_title'] = drupal_set_title(t(theme_get_setting('page_title_display_custom')));
+          }
+      }
+    }
+   else {                                                         // Non-front page title settings
+      switch (theme_get_setting('other_page_title_display')) {
+        case 'ptitle_slogan':
+          $vars['head_title'] = drupal_set_title($page_title . $title_separator . $slogan);
+          break;
+        case 'ptitle_stitle':
+          $vars['head_title'] = drupal_set_title($page_title . $title_separator . $title);
+          break;
+        case 'ptitle_smission':
+          $vars['head_title'] = drupal_set_title($page_title . $title_separator . $mission);
+          break;
+        case 'ptitle_custom':
+          if (theme_get_setting('other_page_title_display_custom') !== '') {
+            $vars['head_title'] = drupal_set_title($page_title . $title_separator . t(theme_get_setting('other_page_title_display_custom')));
+          }
+          break;
+        case 'custom':
+          if (theme_get_setting('other_page_title_display_custom') !== '') {
+            $vars['head_title'] = drupal_set_title(t(theme_get_setting('other_page_title_display_custom')));
+          }
+      }
+    }
+    $vars['head_title'] = strip_tags($vars['head_title']);         // Remove any potential html tags
+  }
+
+  if (!function_exists('nodewords_theme')) {
+    if (theme_get_setting('meta_keywords') !== '') {
+      $keywords = '<meta name="keywords" content="'. theme_get_setting('meta_keywords') .'" />';
+      $vars['head'] .= $keywords ."\n";
+    } 
+    if (theme_get_setting('meta_description') !== '') {
+      $keywords = '<meta name="description" content="'. theme_get_setting('meta_description') .'" />';
+      $vars['head'] .= $keywords ."\n";
+    } 
+  }
+  
   // Template suggestions for admin theme
   if (!$vars['is_front']) {
     if (theme_get_setting('at_admin_theme')) {
@@ -319,69 +385,6 @@ function phptemplate_preprocess_page(&$vars) {
       return $vars;
     }
   }
-  
-  // Hide breadcrumb on all pages.
-  //if (theme_get_setting('breadcrumb_display') == 0) {
-  //  $vars['breadcrumb'] = '';  
-  //}
-  
-  // Set site title, slogan, mission, page title & separator
-  $title = t(variable_get('site_name', ''));
-  $slogan = t(variable_get('site_slogan', ''));
-  $mission = t(variable_get('site_mission', ''));
-  $page_title = t(drupal_get_title());
-  $title_separator = theme_get_setting('configurable_separator');
-  if (drupal_is_front_page()) {                                                // Front page title settings
-    switch (theme_get_setting('front_page_title_display')) {
-      case 'title_slogan':
-        $vars['head_title'] = drupal_set_title($title . $title_separator . $slogan);
-        break;
-      case 'slogan_title':
-        $vars['head_title'] = drupal_set_title($slogan . $title_separator . $title);
-        break;
-      case 'title_mission':
-        $vars['head_title'] = drupal_set_title($title . $title_separator . $mission);
-        break;
-      case 'custom':
-        if (theme_get_setting('page_title_display_custom') !== '') {
-          $vars['head_title'] = drupal_set_title(t(theme_get_setting('page_title_display_custom')));
-        }
-    }
-  }
-  else {                                                                       // Non-front page title settings
-    switch (theme_get_setting('other_page_title_display')) {
-      case 'ptitle_slogan':
-        $vars['head_title'] = drupal_set_title($page_title . $title_separator . $slogan);
-        break;
-      case 'ptitle_stitle':
-        $vars['head_title'] = drupal_set_title($page_title . $title_separator . $title);
-        break;
-      case 'ptitle_smission':
-        $vars['head_title'] = drupal_set_title($page_title . $title_separator . $mission);
-        break;
-      case 'ptitle_custom':
-        if (theme_get_setting('other_page_title_display_custom') !== '') {
-          $vars['head_title'] = drupal_set_title($page_title . $title_separator . t(theme_get_setting('other_page_title_display_custom')));
-        }
-        break;
-      case 'custom':
-        if (theme_get_setting('other_page_title_display_custom') !== '') {
-          $vars['head_title'] = drupal_set_title(t(theme_get_setting('other_page_title_display_custom')));
-        }
-    }
-  }
-  $vars['head_title'] = strip_tags($vars['head_title']);                                        // Remove any potential html tags
-
-  if (!module_exists('nodewords')) {
-    if (theme_get_setting('meta_keywords') !== '') {
-      $keywords = '<meta name="keywords" content="'. theme_get_setting('meta_keywords') .'" />';
-      $vars['head'] .= $keywords ."\n";
-    } 
-    if (theme_get_setting('meta_description') !== '') {
-      $keywords = '<meta name="description" content="'. theme_get_setting('meta_description') .'" />';
-      $vars['head'] .= $keywords ."\n";
-    } 
-  }
 }
 
 
@@ -389,17 +392,19 @@ function phptemplate_preprocess_node(&$vars) {
   global $theme;
   // Node Theme Settings
   // Date & author
-  $date = t('Posted ') . format_date($vars['node']->created, 'medium');                 // Format date as small, medium, or large
-  $author = theme('username', $vars['node']);
-  $author_only_separator = t('Posted by ');
-  $author_date_separator = t(' by ');
-  $submitted_by_content_type = (theme_get_setting('submitted_by_enable_content_type') == 1) ? $vars['node']->type : 'default';
-  $date_setting = (theme_get_setting('submitted_by_date_'. $submitted_by_content_type) == 1);
-  $author_setting = (theme_get_setting('submitted_by_author_'. $submitted_by_content_type) == 1);
-  $author_separator = ($date_setting) ? $author_date_separator : $author_only_separator;
-  $date_author = ($date_setting) ? $date : '';
-  $date_author .= ($author_setting) ? $author_separator . $author : '';
-  $vars['submitted'] = $date_author;
+  if (!function_exists('submitted_by_node_submitted')) {
+    $date = t('Posted ') . format_date($vars['node']->created, 'medium');                 // Format date as small, medium, or large
+    $author = theme('username', $vars['node']);
+    $author_only_separator = t('Posted by ');
+    $author_date_separator = t(' by ');
+    $submitted_by_content_type = (theme_get_setting('submitted_by_enable_content_type') == 1) ? $vars['node']->type : 'default';
+    $date_setting = (theme_get_setting('submitted_by_date_'. $submitted_by_content_type) == 1);
+    $author_setting = (theme_get_setting('submitted_by_author_'. $submitted_by_content_type) == 1);
+    $author_separator = ($date_setting) ? $author_date_separator : $author_only_separator;
+    $date_author = ($date_setting) ? $date : '';
+    $date_author .= ($author_setting) ? $author_separator . $author : '';
+    $vars['submitted'] = $date_author;
+  }
 
   // Taxonomy
   $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
