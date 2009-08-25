@@ -16,11 +16,12 @@
  * - $more: A link to view more, if any
  * - $admin_links: A rendered list of administrative links
  * - $admin_links_raw: A list of administrative links suitable for theme('links')
+ * - $skinr: Print skinr module classes if any.
  *
  * @ingroup views_templates
  */
 ?>
-<div class="view view-<?php print $css_name; ?> view-id-<?php print $name; ?> view-display-id-<?php print $display_id; ?> view-dom-id-<?php print $dom_id; ?> <?php print ' '. $skinr; ?>">
+<div class="view view-<?php print $css_name; ?> view-id-<?php print $name; ?> view-display-id-<?php print $display_id; ?> view-dom-id-<?php print $dom_id; ?><?php print $skinr ? ' '. $skinr : ''; ?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>
@@ -79,5 +80,4 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-
-</div> <?php /* class view */ ?>
+</div>
