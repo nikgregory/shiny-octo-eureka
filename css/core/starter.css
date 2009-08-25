@@ -28,7 +28,7 @@ a img{border:none;}
 .secondary-links li a{color:#242424;display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
 .secondary-links li a:hover{background:#CCC;}
 #breadcrumb{padding:0 0 .75em;}
-#mission{font-weight:700;margin:0 0 20px;}
+#mission{font-weight:700;margin:.3em 0 1.5em;}
 #content-aside{float:right;padding-left:10px;width:240px;}
 ul.menu,
 ul.menu ul,
