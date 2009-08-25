@@ -17,6 +17,6 @@ body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-seri
 ul.menu,
 ul.menu ul,
 ul.menu ul ul,
-ul.menu ul ul ul{margin:0 .75em 0 0;}
+ul.menu ul ul ul{margin:0 1em 0 0;}
 .comment-links ul.links{padding:0 1em;text-align:left;}
 .node ul.links li{padding:0 1em;}

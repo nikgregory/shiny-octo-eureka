@@ -33,8 +33,9 @@ a img{border:none;}
 ul.menu,
 ul.menu ul,
 ul.menu ul ul,
-ul.menu ul ul ul{margin:0 0 0 .75em;padding:0;}
+ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
 ul.menu li{padding:.35em 0 0;}
+.item-list ul li{padding:0.35em 0 0;}
 .block .item-list ul{margin:0;}
 #block-user-3 .item-list h3{font-size:1em;}
 .comment{margin:0 0 1.5em;}
