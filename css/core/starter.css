@@ -35,9 +35,11 @@ ul.menu ul,
 ul.menu ul ul,
 ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
 ul.menu li{padding:.35em 0 0;}
-.item-list ul li{padding:0.35em 0 0;}
+.item-list ul li{padding:.35em 0 0;}
 .block .item-list ul{margin:0;}
 #block-user-3 .item-list h3{font-size:1em;}
+#block-locale-0 ul{margin:0 0 0 1.5em;padding:0;}
+#block-locale-0 ul li{padding:.35em 0 0;}
 .comment{margin:0 0 1.5em;}
 .comment-title .new{color:#FF8000;}
 .comment-title a:link,
