@@ -6,23 +6,6 @@
  */
 
 /**
- * Include dependant settings and function.
- */
-include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc';
-include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc';
-include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-functions.inc';
-
-
-/**
- * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
- * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
- */
-if (theme_get_setting('color_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme/' . get_at_colors(), 'theme');
-}
-
-
-/**
  * Implement HOOK_theme
  * - Add conditional stylesheets:
  *   For more information: http://msdn.microsoft.com/en-us/library/ms537512.aspx
@@ -52,38 +35,12 @@ function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   return $templates;
 }
 
-
-// Modify the theme settings form for our theme.
-function adaptivetheme_system_settings_form($form) {
-  // Theme the crap out of the theme settings fieldsets.
-  $form['theme_settings']['#title'] = t('Drupal core theme settings');
-  $form['theme_settings']['#collapsible'] = TRUE;
-  $form['theme_settings']['#collapsed']   = TRUE;
-  $form['theme_settings']['#prefix'] = '<div class="theme-settings-settings-wrapper">';
-  $form['theme_settings']['#suffix'] = '</div>';
-  $form['logo']['#collapsible'] = TRUE;
-  $form['logo']['#collapsed']   = TRUE;
-  $form['logo']['#prefix'] = '<div class="logo-settings-wrapper">';
-  $form['logo']['#suffix'] = '</div>';
-  $form['favicon']['#collapsible'] = TRUE;
-  $form['favicon']['#collapsed']   = TRUE;
-  $form['favicon']['#prefix'] = '<div class="favicon-settings-wrapper">';
-  $form['favicon']['#suffix'] = '</div>';
-  $form['node_info']['#collapsible'] = TRUE;
-  $form['node_info']['#collapsed']   = TRUE;
-  $form['node_info']['#prefix'] = '<div class="node-info-settings-wrapper">';
-  $form['node_info']['#suffix'] = '</div>';
-  $form['theme_specific']['#title'] = t('Advanced theme settings');
-  $form['theme_specific']['#collapsible'] = TRUE;
-  $form['theme_specific']['#collapsed']   = TRUE;
-  //print '<pre>'; print_r($form); print '</pre>';
-  return drupal_render($form);
-}
-
-
 /**
- * Override or insert variables into all templates.
- *
+ * Implementation of hook_preprocess()
+ * 
+ * This function checks to see if a hook has a preprocess file associated with 
+ * it, and if so, loads it.
+ * 
  * @param $vars
  *   An array of variables to pass to the theme template.
  * @param $hook
@@ -93,296 +50,339 @@ function adaptivetheme_preprocess(&$vars, $hook) {
   global $user;                                            // Get the current user
   $vars['is_admin'] = in_array('admin', $user->roles);     // Check for Admin, logged in
   $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
+  
+  if(is_file(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.preprocess-' . str_replace('_', '-', $hook) . '.inc')) {
+    include(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.preprocess-' . str_replace('_', '-', $hook) . '.inc');
+  }
 }
 
+/**
+ * Include custom function<.
+ */
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 
 /**
- * Override or insert variables into page templates.
- *
- * @param $vars
- *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
+ * Initialize theme settings
  */
-function adaptivetheme_preprocess_page(&$vars, $hook) {
-  global $theme;
+if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting('rebuild_registry')) {
 
-  // Don't display empty help from node_help().
-  if ($vars['help'] == "<div class=\"help\"> \n</div>") {
-    $vars['help'] = '';
-  }
-  
-  // Remove sidebars if disabled e.g., for Panels
-  if (!$vars['show_blocks']) {
-    $vars['left'] = '';
-    $vars['right'] = '';
+  // Auto-rebuild the theme registry during theme development.
+  if (theme_get_setting('rebuild_registry')) {
+    drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
   }
 
-  // Add conditional stylesheets (for Internt Explorer).
-  if (!module_exists('conditional_styles')) {
-    $vars['styles'] .= $vars['conditional_styles'] = variable_get('conditional_styles_'. $GLOBALS['theme'], '');
-  }
-
-  // Set variables for the logo and site_name.
-  if (!empty($vars['logo'])) {
-    // Return the site_name even when site_name is disabled in theme settings.
-    $vars['logo_alt_text'] = variable_get('site_name', '');
-    $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .' '. t('logo') .'" /></a>';
-  }
-  if (!empty($vars['site_name'])) {
-    $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
-  }
-
-  // Set variables for the primary and secondary links.
-  if (!empty($vars['primary_links'])) {
-    $vars['primary_menu'] = theme('links', $vars['primary_links'], array('class' => 'primary-links clear-block'));
-  }
-  if (!empty($vars['secondary_links'])) {
-    $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
-  }
-  
-  // Admin welcome message with date for the admin theme.
-  global $user;
-  if ($vars['logged_in'] && arg(0) == 'admin') {
-    $welcome = t('Welcome') .' '. $user->name;
-    $conjunction = ', '. t('it\'s') .' ';
-    $todays_date = date("l, F d Y" , time()); 
-    $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
-  }
-
-  // Attribution.
-  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
-
-  // Section class. The section class is printed on the body element and allows you to theme site sections.
-  // We use the path alias otherwise all nodes will be in "section-node".
-  $path_alias = drupal_get_path_alias($_GET['q']);
-  if (!$vars['is_front']) {
-    list($section, ) = explode('/', $path_alias, 2);
-    $vars['section_class'] = ' class="'. safe_string('section-'. $section) .'"';
-  }
-
-  // Body Classes. In Genesis these are printed on the #container wrapper div, not on the body.
-  $classes = explode(' ', $vars['body_classes']);
-
-  // Remove the useless page-arg(0) class.
-  if ($class = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-]+!s', '', 'page-'. drupal_strtolower(arg(0))), $classes)) {
-    unset($classes[$class]);
-  }
-
- /** 
-  * Optional Region body classes
-  * Uncomment the following if you need to set a body class for each active region.
-  */
-  /*        
-  if (!empty($vars['leaderboard'])) {
-    $classes[] = 'leaderboard';
-  }
-  if (!empty($vars['header'])) {
-    $classes[] = 'header-blocks';
-  }
-  if (!empty($vars['secondary_content'])) {
-    $classes[] = 'secondary-content';
-  }
-  if (!empty($vars['tertiary_content'])) {
-    $classes[] = 'tertiary-content';
-  }
-  if (!empty($vars['footer'])) {
-    $classes[] = 'footer';
-  }
-  */
+  global $theme_key;
+  // Get node types
+  $node_types = node_get_types('names');
 
   /**
-   * Additional body classes to help out themers.
+   * The default values for the theme variables. Make sure $defaults exactly
+   * matches the $defaults in the theme-settings.php file.
    */
-  if (!$vars['is_front']) {
-    // Set classes based on Drupals internal path, e.g. page-node-1. 
-    // Using the alias is fragile because path alias's can change, $normal_path is more reliable.
-    $normal_path = drupal_get_normal_path($_GET['q']);
-    $classes[] = safe_string('page-'. $normal_path);
-    if (arg(2) == 'block') {
-      $classes[] = 'page-block';
-    }
-    if (arg(0) == 'node') {
-      if (arg(1) == 'add') {
-        $classes[] = 'page-node-add'; // Add .node-add class.
-      }
-      elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
-        $classes[] = 'page-node-'. arg(2); // Add .node-edit or .node-delete classes.
-      }
+  $defaults = array(
+    'user_notverified_display'              => 1,
+    'breadcrumb'                            => 'yes',
+    'breadcrumb_separator'                  => ' &#187; ',
+    'breadcrumb_home'                       => 0,
+    'breadcrumb_trailing'                   => 0,
+    'breadcrumb_title'                      => 0,
+    'search_snippet'                        => 1,
+    'search_info_type'                      => 1,
+    'search_info_user'                      => 1,
+    'search_info_date'                      => 1,
+    'search_info_comment'                   => 1,
+    'search_info_upload'                    => 1,
+    'mission_statement_pages'               => 'home',
+    'taxonomy_display_default'              => 'only',
+    'taxonomy_format_default'               => 'vocab',
+    'taxonomy_enable_content_type'          => 0,
+    'submitted_by_author_default'           => 1,
+    'submitted_by_date_default'             => 1,
+    'submitted_by_enable_content_type'      => 0,
+    'rebuild_registry'                      => 0,
+    'load_firebug_lite'                     => 0,
+    'at_admin_theme'                        => 1,
+    'at_admin_theme_node'                   => 1,
+    'at_admin_theme_logo'                   => 0,
+    'block_edit_links'                      => 1,
+    'at_admin_hide_help'                    => 0,
+    'layout_method'                         => '0',
+    'layout_width'                          => '960px',
+    'layout_sidebar_first_width'            => '240',
+    'layout_sidebar_last_width'             => '240',
+    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
+    'color_schemes'                         => 'colors-default.css',
+    'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
+  );
+
+  // Make the default content-type settings the same as the default theme settings,
+  // so we can tell if content-type-specific settings have been altered.
+  $defaults = array_merge($defaults, theme_get_settings());
+
+  // Set the default values for content-type-specific settings
+  foreach ($node_types as $type => $name) {
+    $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
+    $defaults["taxonomy_format_{$type}"]          = $defaults['taxonomy_format_default'];
+    $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
+    $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
+  }
+
+  // Get default theme settings.
+  $settings = theme_get_settings($theme_key);
+
+  // Don't save the toggle_node_info_ variables
+  if (module_exists('node')) {
+    foreach (node_get_types() as $type => $name) {
+      unset($settings['toggle_node_info_'. $type]);
     }
   }
-  $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+  // Save default theme settings
+  variable_set(
+    str_replace('/', '_', 'theme_'. $theme_key .'_settings'),
+    array_merge($defaults, $settings)
+  );
+  // Force refresh of Drupal internals
+  theme_get_setting('', TRUE);
 }
 
+// Load collapsed js on blocks page
+if (theme_get_setting('at_admin_theme')) {
+  if (arg(2) == 'block') {
+    drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
+    $path_to_core = path_to_theme() .'/js/core/';
+    drupal_add_js($path_to_core .'admin.collapseblock.js', 'theme', 'header', FALSE, TRUE, TRUE);
+    drupal_add_js($path_to_core .'jquery.cookie.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  }
+}
+
+// Load Firebug lite
+if (theme_get_setting('load_firebug_lite')) {
+  $path_to_core = path_to_theme() .'/js/core/';
+  drupal_add_js($path_to_core .'firebug.lite.compressed.js', 'theme', 'header', FALSE, TRUE, TRUE);
+}
 
 /**
- * Override or insert variables into the node templates.
- *
- * @param $vars
- *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
+ * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
+ * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
  */
-function adaptivetheme_preprocess_node(&$vars, $hook) {
-  global $user;
-  
-  // Set the node id.
-  $vars['node_nid'] = 'node-'. $vars['node']->nid;
+if (theme_get_setting('color_enable_schemes') == 'on') {
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme/' . get_at_colors(), 'theme');
+}
 
-  // Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
-  $classes = array();
-  $classes[] = 'node';
-  if ($vars['promote']) {
-    $classes[] = 'node-promoted';
-  }
-  if ($vars['sticky']) {
-    $classes[] = 'node-sticky';
-  }
-  if (!$vars['status']) {
-    $classes[] = 'node-unpublished';
-  }
-  if ($vars['teaser']) {
-    // Node is displayed as teaser.
-    $classes[] = 'node-teaser';
-  }
-  if (isset($vars['preview'])) {
-    $classes[] = 'node-preview';
-  }
-  // Add support for Skinr module classes http://drupal.org/project/skinr
-  if (function_exists('node_skinr_data')) {
-    $classes[] = $vars['skinr'];
-  }
-  // Class for node type: "node-type-page", "node-type-story", "node-type-my-custom-type", etc.
-  $classes[] = 'node-'. $vars['node']->type;
-  $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+/**
+ * Modify search results based on theme settings
+ */
+function adaptivetheme_preprocess_search_result(&$variables) {
+  static $search_zebra = 'even';
+  $search_zebra = ($search_zebra == 'even') ? 'odd' : 'even';
+  $variables['search_zebra'] = $search_zebra;
   
-  // Add node_bottom region content.
-  $vars['node_bottom'] = theme('blocks', 'node_bottom');
+  $result = $variables['result'];
+  $variables['url'] = check_url($result['link']);
+  $variables['title'] = check_plain($result['title']);
+
+  // Check for existence. User search does not include snippets.
+  $variables['snippet'] = '';
+  if (isset($result['snippet']) && theme_get_setting('search_snippet')) {
+    $variables['snippet'] = $result['snippet'];
+  }
   
-  // Set messages if node is unpublished.
-  if (!$vars['node']->status) {
-    if ($vars['page']) {
-      drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning'); 
+  $info = array();
+  if (!empty($result['type']) && theme_get_setting('search_info_type')) {
+    $info['type'] = check_plain($result['type']);
+  }
+  if (!empty($result['user']) && theme_get_setting('search_info_user')) {
+    $info['user'] = $result['user'];
+  }
+  if (!empty($result['date']) && theme_get_setting('search_info_date')) {
+    $info['date'] = format_date($result['date'], 'small');
+  }
+  if (isset($result['extra']) && is_array($result['extra'])) {
+    // $info = array_merge($info, $result['extra']);  Drupal bug?  [extra] array not keyed with 'comment' & 'upload'
+    if (!empty($result['extra'][0]) && theme_get_setting('search_info_comment')) {
+      $info['comment'] = $result['extra'][0];
+    }
+    if (!empty($result['extra'][1]) && theme_get_setting('search_info_upload')) {
+      $info['upload'] = $result['extra'][1];
+    }
+  }
+
+  // Provide separated and grouped meta information.
+  $variables['info_split'] = $info;
+  $variables['info'] = implode(' - ', $info);
+
+  // Provide alternate search result template.
+  $variables['template_files'][] = 'search-result-'. $variables['type'];
+}
+
+/**
+ * Override username theming to display/hide 'not verified' text
+ */
+function adaptivetheme_username($object) {
+  if ($object->uid && $object->name) {
+    // Shorten the name when it is too long or it will break many tables.
+    if (drupal_strlen($object->name) > 20) {
+      $name = drupal_substr($object->name, 0, 15) .'...';
     }
     else {
-      $vars['unpublished'] = '<span class="unpublished">'. t('Unpublished') .'</span>';
+      $name = $object->name;
+    }
+    if (user_access('access user profiles')) {
+      $output = l($name, 'user/'. $object->uid, array('attributes' => array('title' => t('View user profile.'))));
+    }
+    else {
+      $output = check_plain($name);
     }
   }
-}
-
-
-/**
- * Override or insert variables in comment templates.
- *
- * @param $vars
- *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
- */
-function adaptivetheme_preprocess_comment(&$vars, $hook) {
-  global $user;
-
-  // Special classes for comments, emulates Drupal 7 for forward compatibility.
-  // Load the node object that the current comment is attached to.
-  $node = node_load($vars['comment']->nid);
-  $classes = array();
-  $classes[]  = 'comment';
-  if ($vars['status'] != 'comment-published') {
-    $classes[] = $vars['status'];
+  else if ($object->name) {
+    // Sometimes modules display content composed by people who are
+    // not registered members of the site (e.g. mailing list or news
+    // aggregator modules). This clause enables modules to display
+    // the true author of the content.
+    if (!empty($object->homepage)) {
+      $output = l($object->name, $object->homepage, array('attributes' => array('rel' => 'nofollow')));
+    }
+    else {
+      $output = check_plain($object->name);
+    }
+    // Display or hide 'not verified' text
+    if (theme_get_setting('user_notverified_display') == 1) {
+      $output .= ' ('. t('not verified') .')';
+    }
   }
   else {
-    if ($vars['comment']->uid == 0) {
-      $classes[] = 'comment-by-anonymous';
-    }
-    if ($vars['comment']->uid === $vars['node']->uid) {
-      $classes[] = 'comment-by-node-author';
-    }
-    if ($vars['comment']->uid === $vars['user']->uid) {
-      $classes[] = 'comment-by-viewer';
-    }
-    if ($vars['comment']->new) {
-      $classes[] = 'comment-new';
-    }
-    $classes[] = $vars['zebra'];
+    $output = variable_get('anonymous', t('Anonymous'));
   }
-  $vars['classes'] = implode(' ', $classes);
-
-  // If comment subjects are disabled, don't display them.
-  if (variable_get('comment_subject_field', 1) == 0) {
-    $vars['title'] = '';
-  }
-  
-  // Date & author
-  $submitted_by = t('by ') .'<span class="comment-name">'.  theme('username', $vars['comment']) .'</span>';
-  $submitted_by .= t(' - ') .'<span class="comment-date">'.  format_date($vars['comment']->timestamp, 'small') .'</span>';     // Format date as small, medium, or large
-  $vars['submitted'] = $submitted_by;
-
-  // Set messages if comment is unpublished.
-  if ($vars['comment']->status == COMMENT_NOT_PUBLISHED) {
-    drupal_set_message(t('Comment #!id !title is currently unpublished', array('!id' => $vars['id'], '!title' => $vars['title'])), 'warning');
-    $vars['unpublished'] = '<span class="unpublished">'. t('Unpublished') .'</span>';
- }
+  return $output;
 }
 
+/**
+ * Set default form file input size 
+ */
+function adaptivetheme_file($element) {
+  $element['#size'] = 60;
+  return theme_file($element);
+}
 
 /**
- * Override or insert variables into block templates.
+ * Creates a link with prefix and suffix text
  *
- * @param $vars
- *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
+ * @param $prefix
+ *   The text to prefix the link.
+ * @param $suffix
+ *   The text to suffix the link.
+ * @param $text
+ *   The text to be enclosed with the anchor tag.
+ * @param $path
+ *   The Drupal path being linked to, such as "admin/content/node". Can be an external
+ *   or internal URL.
+ *     - If you provide the full URL, it will be considered an
+ *   external URL.
+ *     - If you provide only the path (e.g. "admin/content/node"), it is considered an
+ *   internal link. In this case, it must be a system URL as the url() function
+ *   will generate the alias.
+ * @param $options
+ *   An associative array that contains the following other arrays and values
+ *     @param $attributes
+ *       An associative array of HTML attributes to apply to the anchor tag.
+ *     @param $query
+ *       A query string to append to the link.
+ *     @param $fragment
+ *       A fragment identifier (named anchor) to append to the link.
+ *     @param $absolute
+ *       Whether to force the output to be an absolute link (beginning with http:).
+ *       Useful for links that will be displayed outside the site, such as in an RSS
+ *       feed.
+ *     @param $html
+ *       Whether the title is HTML or not (plain text)
+ * @return
+ *   an HTML string containing a link to the given path.
  */
-function adaptivetheme_preprocess_block(&$vars, $hook) {
-  $block = $vars['block'];
-  
-  // Set the block id.
-  $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
+function _themesettings_link($prefix, $suffix, $text, $path, $options) {
+  return $prefix . (($text) ? l($text, $path, $options) : '') . $suffix;
+}
 
-  // Special classes for blocks, emulate Drupal 7.
-  // Set up variables for navigation-like blocks.
-  $n1 = array('user-1', 'statistics-0');
-  $n2 = array('menu', 'book', 'forum', 'blog', 'aggregator', 'comment');
-  $h1 = $block->module .'-'. $block->delta;
-  $h2 = $block->module;
-
-  // Special classes for blocks
-  $classes = array();
-  $classes[] = 'block';
-  $classes[] = 'block-'. $block->module;
-  // Add nav class to navigation-like blocks.
-  if (in_array($h1, $n1)) {
-    $classes[] = 'nav';
+// Override theme_button for expanding graphic buttons
+function phptemplate_button($element) {
+  if (isset($element['#attributes']['class'])) {
+    $element['#attributes']['class'] = 'form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
   }
-  if (in_array($h2, $n2)) {
-    $classes[] = 'nav';
+  else {
+    $element['#attributes']['class'] = 'form-'. $element['#button_type'];
   }
 
-  // Optionally use additional block classes
-  //$classes[] = $vars['block_zebra'];        // odd, even zebra class
-  //$classes[] = 'block-'. $block->region;    // block-[region] class
-  //$classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
+  // Wrap visible inputs with span tags for button graphics
+  if (stristr($element['#attributes']['style'], 'display: none;') || stristr($element['#attributes']['class'], 'fivestar-submit')) {
+    return '<input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." />\n";
+  }
+  else {
+    return '<span class="button-wrapper"><span class="button"><span><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span></span></span>\n";
+  }
+}
 
-  // Add special classes to support the http://drupal.org/project/blocktheme module.
-  if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
-    $classes[] = $vars['blocktheme'];
-    $classes[] = $block->region .'-'. $vars['blocktheme'];
+/**
+ * Return a themed breadcrumb trail.
+ *
+ * @param $breadcrumb
+ *   An array containing the breadcrumb links.
+ * @return
+ *   A string containing the breadcrumb output.
+ */
+function adaptivetheme_breadcrumb($breadcrumb) {
+  // Determine if we are to display the breadcrumb.
+  $show_breadcrumb = theme_get_setting('breadcrumb_display');
+  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
+
+    // Optionally get rid of the homepage link.
+    $show_breadcrumb_home = theme_get_setting('breadcrumb_home');
+    if (!$show_breadcrumb_home) {
+      array_shift($breadcrumb);
+    }
+
+    // Return the breadcrumb with separators.
+    if (!empty($breadcrumb)) {
+      $breadcrumb_separator = theme_get_setting('breadcrumb_separator');
+      $trailing_separator = $title = '';
+      if (theme_get_setting('breadcrumb_title')) {
+        $trailing_separator = $breadcrumb_separator;
+        $title = menu_get_active_title();
+      }
+      elseif (theme_get_setting('breadcrumb_trailing')) {
+        $trailing_separator = $breadcrumb_separator;
+      }
+      return implode($breadcrumb_separator, $breadcrumb) . $trailing_separator . $title;
+    }
   }
-  // Add special classes to support the http://drupal.org/project/block_class module.
-  if (function_exists('block_class') && block_class($block)) {
-    $classes[] = block_class($block);
-    $classes[] = $block->region .'-'. block_class($block);
+  // Otherwise, return an empty string.
+  return '';
+}
+
+/**
+ * Format a group of form items.
+ *
+ * @param $element 
+ *   An associative array containing the properties of the element. 
+ *
+ * @return
+ *   A themed HTML string representing the form item group.
+ */
+function adaptivetheme_fieldset($element) {
+  if ($element['#collapsible']) {
+    drupal_add_js('misc/collapse.js');
+
+    if (!isset($element['#attributes']['class'])) {
+      $element['#attributes']['class'] = '';
+    }
+
+    $element['#attributes']['class'] .= ' collapsible';
+    if ($element['#collapsed']) {
+     $element['#attributes']['class'] .= ' collapsed';
+    }
   }
-  // Add support for Skinr module classes http://drupal.org/project/skinr
-  if (!empty($vars['skinr'])) {
-    $classes[] = $vars['skinr'];
-  }
-  if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-    $classes[] = 'block-edit-links';
-  }
-  
-  $vars['classes'] = implode(' ', $classes);
-  
-  // print special var for block at admin
-  $vars['block_at_admin_classes'] = implode(' .', $classes);
+  // Custom fieldset CSS class from element #title.
+  $css_class = 'fieldset-'. safe_string($element['#title']);
+
+  $element['#attributes']['class'] .= (!empty($element['#attributes']['class']) ? " " : "") . $css_class;
+
+  return '<fieldset'. drupal_attributes($element['#attributes']) .'>'. ($element['#title'] ? '<legend>'. $element['#title'] .'</legend>' : '') . ($element['#description'] ? '<div class="description">'. $element['#description'] .'</div>' : '') . $element['#children'] . $element['#value'] ."</fieldset>\n";
 }
