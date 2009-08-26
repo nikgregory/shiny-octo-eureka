@@ -160,10 +160,10 @@ div.block{position:relative;}
 div.block div.block-edit{font-size:.9em;position:absolute;right:15px;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
 div.block div.block-edit li{padding:3px;}
-div.block div.block-edit li a{text-decoration:none;color:#BBB;display:block;padding:2px 3px 1px 18px;}
-div.block div.block-edit li.first a{background: url(core-images/configure.png) no-repeat 0 0;}
-div.block div.block-edit li.last a{background: url(core-images/edit.png) no-repeat 0 0;}
-div.block div.block-edit li a:hover{color:#000;background-color:#FFF;-moz-border-radius:4px;-webkit-border-radius:4px;}
+div.block div.block-edit li a{text-decoration:none;color:#BBB;display:block;padding:2px 3px 1px 18px;border:1px solid #CCC;-moz-border-radius:4px;-webkit-border-radius:4px;}
+div.block div.block-edit li.first a{background:#FFF url(core-images/configure.png) no-repeat 0 0;}
+div.block div.block-edit li.last a{background:#FFF url(core-images/edit.png) no-repeat 0 0;}
+div.block div.block-edit li a:hover{color:#000;background-color:#FFF;border-color:#444;}
 div.block div.block-edit li{display:inline;float:left;list-style:none;margin:0 0 0 .5em;}
 div.view div.views-admin-links{font-size:.85em;}
 .block div.view div.views-admin-links{margin-top:1.8em;}
