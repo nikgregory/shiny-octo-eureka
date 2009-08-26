@@ -302,24 +302,6 @@ function _themesettings_link($prefix, $suffix, $text, $path, $options) {
   return $prefix . (($text) ? l($text, $path, $options) : '') . $suffix;
 }
 
-// Override theme_button for expanding graphic buttons
-function phptemplate_button($element) {
-  if (isset($element['#attributes']['class'])) {
-    $element['#attributes']['class'] = 'form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
-  }
-  else {
-    $element['#attributes']['class'] = 'form-'. $element['#button_type'];
-  }
-
-  // Wrap visible inputs with span tags for button graphics
-  if (stristr($element['#attributes']['style'], 'display: none;') || stristr($element['#attributes']['class'], 'fivestar-submit')) {
-    return '<input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." />\n";
-  }
-  else {
-    return '<span class="button-wrapper"><span class="button"><span><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span></span></span>\n";
-  }
-}
-
 /**
  * Return a themed breadcrumb trail.
  *
@@ -357,6 +339,24 @@ function adaptivetheme_breadcrumb($breadcrumb) {
   return '';
 }
 
+// Override theme_button for expanding graphic buttons
+function adaptivetheme_button($element) {
+  if (isset($element['#attributes']['class'])) {
+    $element['#attributes']['class'] = 'form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
+  }
+  else {
+    $element['#attributes']['class'] = 'form-'. $element['#button_type'];
+  }
+
+  // Wrap visible inputs with span tags for button graphics
+  if (stristr($element['#attributes']['style'], 'display: none;') || stristr($element['#attributes']['class'], 'fivestar-submit')) {
+    return '<input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." />\n";
+  }
+  else {
+    return '<span class="button-wrapper"><span class="button"><span><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span></span></span>\n";
+  }
+}
+
 /**
  * Format a group of form items.
  *
@@ -385,4 +385,36 @@ function adaptivetheme_fieldset($element) {
   $element['#attributes']['class'] .= (!empty($element['#attributes']['class']) ? " " : "") . $css_class;
 
   return '<fieldset'. drupal_attributes($element['#attributes']) .'>'. ($element['#title'] ? '<legend>'. $element['#title'] .'</legend>' : '') . ($element['#description'] ? '<div class="description">'. $element['#description'] .'</div>' : '') . $element['#children'] . $element['#value'] ."</fieldset>\n";
+}
+
+/**
+ * Modify the theme settings form for our theme.
+ *
+ * This is incldued here to make it easier to set up the theme, so 
+ * you only have one file to worry about search/repeace the theme name.
+ */
+function adaptivetheme_system_settings_form($form) {
+  // Theme the crap out of the theme settings fieldsets.
+  $form['theme_settings']['#title'] = t('Drupal core theme settings');
+  $form['theme_settings']['#collapsible'] = TRUE;
+  $form['theme_settings']['#collapsed']   = TRUE;
+  $form['theme_settings']['#prefix'] = '<div class="theme-settings-settings-wrapper">';
+  $form['theme_settings']['#suffix'] = '</div>';
+  $form['logo']['#collapsible'] = TRUE;
+  $form['logo']['#collapsed']   = TRUE;
+  $form['logo']['#prefix'] = '<div class="logo-settings-wrapper">';
+  $form['logo']['#suffix'] = '</div>';
+  $form['favicon']['#collapsible'] = TRUE;
+  $form['favicon']['#collapsed']   = TRUE;
+  $form['favicon']['#prefix'] = '<div class="favicon-settings-wrapper">';
+  $form['favicon']['#suffix'] = '</div>';
+  $form['node_info']['#collapsible'] = TRUE;
+  $form['node_info']['#collapsed']   = TRUE;
+  $form['node_info']['#prefix'] = '<div class="node-info-settings-wrapper">';
+  $form['node_info']['#suffix'] = '</div>';
+  $form['theme_specific']['#title'] = t('Advanced theme settings');
+  $form['theme_specific']['#collapsible'] = TRUE;
+  $form['theme_specific']['#collapsed']   = TRUE;
+  //print '<pre>'; print_r($form); print '</pre>';
+  return drupal_render($form);
 }
