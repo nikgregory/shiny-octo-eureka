@@ -1,5 +1,5 @@
 <?php //$Id$
-
+// adaptivethemes.com
 /**
  * Clean a string of unwanted characters.
  *

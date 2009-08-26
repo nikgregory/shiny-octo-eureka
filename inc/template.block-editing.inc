@@ -1,6 +1,5 @@
 <?php // $Id$
 // adaptivethemes.com
-
 /**
  * @file template.block-editing.inc
  */
