@@ -172,6 +172,23 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
 }
 
 /**
+ * Override of theme_node_form().
+ */
+function adaptivetheme_node_form($form) {
+  if (theme_get_setting('at_admin_theme_node')) {
+    if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+      $sidebar = drupal_render($form['taxonomy']);
+      $main = drupal_render($form);
+      return "<div class='node-form clear-block'>
+        <div class='node-col-last'>{$buttons}{$sidebar}</div>
+        <div class='node-col-first'><div class='main'>{$main}{$buttons}</div></div>
+        </div>";
+    }
+  }
+}
+
+/**
  * Modify search results based on theme settings
  */
 function adaptivetheme_preprocess_search_result(&$variables) {
