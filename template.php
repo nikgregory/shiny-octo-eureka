@@ -155,7 +155,9 @@ if (theme_get_setting('at_admin_theme')) {
   }
 }
 
-// Load Firebug lite
+/** 
+ * Load Firebug lite
+ */
 if (theme_get_setting('load_firebug_lite')) {
   $path_to_core = path_to_theme() .'/js/core/';
   drupal_add_js($path_to_core .'firebug.lite.compressed.js', 'theme', 'header', FALSE, TRUE, TRUE);
@@ -262,44 +264,6 @@ function adaptivetheme_username($object) {
 function adaptivetheme_file($element) {
   $element['#size'] = 60;
   return theme_file($element);
-}
-
-/**
- * Creates a link with prefix and suffix text
- *
- * @param $prefix
- *   The text to prefix the link.
- * @param $suffix
- *   The text to suffix the link.
- * @param $text
- *   The text to be enclosed with the anchor tag.
- * @param $path
- *   The Drupal path being linked to, such as "admin/content/node". Can be an external
- *   or internal URL.
- *     - If you provide the full URL, it will be considered an
- *   external URL.
- *     - If you provide only the path (e.g. "admin/content/node"), it is considered an
- *   internal link. In this case, it must be a system URL as the url() function
- *   will generate the alias.
- * @param $options
- *   An associative array that contains the following other arrays and values
- *     @param $attributes
- *       An associative array of HTML attributes to apply to the anchor tag.
- *     @param $query
- *       A query string to append to the link.
- *     @param $fragment
- *       A fragment identifier (named anchor) to append to the link.
- *     @param $absolute
- *       Whether to force the output to be an absolute link (beginning with http:).
- *       Useful for links that will be displayed outside the site, such as in an RSS
- *       feed.
- *     @param $html
- *       Whether the title is HTML or not (plain text)
- * @return
- *   an HTML string containing a link to the given path.
- */
-function _themesettings_link($prefix, $suffix, $text, $path, $options) {
-  return $prefix . (($text) ? l($text, $path, $options) : '') . $suffix;
 }
 
 /**
@@ -415,6 +379,5 @@ function adaptivetheme_system_settings_form($form) {
   $form['theme_specific']['#title'] = t('Advanced theme settings');
   $form['theme_specific']['#collapsible'] = TRUE;
   $form['theme_specific']['#collapsed']   = TRUE;
-  //print '<pre>'; print_r($form); print '</pre>';
   return drupal_render($form);
 }
