@@ -1,8 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com
+
 /**
  * @file template.block-editing.inc
  */
+
 /**
  * Add block editing variables into the block templates.
  *

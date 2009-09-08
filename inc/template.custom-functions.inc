@@ -1,5 +1,10 @@
-<?php //$Id$
+<?php // $Id$
 // adaptivethemes.com
+
+/**
+ * @file template.custom-functions.inc
+ */
+
 /**
  * Clean a string of unwanted characters.
  *

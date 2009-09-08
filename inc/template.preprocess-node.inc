@@ -1,5 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com
+
+/**
+ * @file template.preprocess-node.inc
+ */
+
 /**
  * Override or insert variables into the node templates.
  *
@@ -8,8 +13,7 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-global $user;
-global $theme;
+global $user, $theme;
  
 // Set the node id.
 $vars['node_nid'] = 'node-'. $vars['node']->nid;

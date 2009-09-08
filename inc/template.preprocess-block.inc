@@ -1,5 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com
+
+/**
+ * @file template.preprocess-block.inc
+ */
+
 /**
  * Override or insert variables into block templates.
  *
@@ -48,16 +53,23 @@ if (function_exists('block_class') && block_class($block)) {
   $classes[] = block_class($block);
   $classes[] = $block->region .'-'. block_class($block);
 }
-// Add support for Skinr module classes http://drupal.org/project/skinr
+// Add support for Skinr module classes http://drupal.org/project/skinr.
 if (!empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
+
+// Add class for block edit links in enabled.
 if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   $classes[] = 'block-edit-links';
 }
-  
+
+// Add classes for the horizontal login block if enabled. 
+if (theme_get_setting('horizontal_login_block') && $vars['block_module_delta'] == 'block-user-0') {
+  $classes[] = 'at-horizontal-login clear-block';
+}
+
 $vars['classes'] = implode(' ', $classes);
- 
+
 if (theme_get_setting('at_admin_theme') && arg(2) == 'block') {
   // print special var for block at admin
   $vars['block_at_admin_classes'] = implode(' .', $classes);
@@ -69,4 +81,9 @@ $vars['edit_links'] = '';
 if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   include_once path_to_theme() .'/inc/template.block-editing.inc';
   phptemplate_preprocess_block_editing($vars, $hook);
+}
+
+// Unset the title in the menu_region for superfish menus
+if ($block->region == 'menu_region') {
+  unset($vars['title']);
 }

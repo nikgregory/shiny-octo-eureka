@@ -84,10 +84,10 @@ function _conditional_styles_theme($existing, $type, $theme, $path) {
       }
       // Save the stylesheets for later retrieval.
       if ($conditional_styles) {
-        variable_set('conditional_styles_'. $theme, $conditional_styles);
+        variable_set('conditional_styles_' . $theme, $conditional_styles);
       }
       else {
-        variable_del('conditional_styles_'. $theme);
+        variable_del('conditional_styles_' . $theme);
       }
     }
   }

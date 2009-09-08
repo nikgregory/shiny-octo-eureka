@@ -1,5 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com
+
+/**
+ * @file template.preprocess-page.inc
+ */
+
 /**
  * Override or insert variables into page templates.
  *
@@ -19,11 +24,6 @@ if ($vars['help'] == "<div class=\"help\"> \n</div>") {
 if (!$vars['show_blocks']) {
   $vars['left'] = '';
   $vars['right'] = '';
-}
-
-// Add conditional stylesheets (for Internt Explorer).
-if (!module_exists('conditional_styles')) {
-  $vars['styles'] .= $vars['conditional_styles'] = variable_get('conditional_styles_'. $GLOBALS['theme'], '');
 }
 
 // Set variables for the logo and site_name.
@@ -59,10 +59,10 @@ $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.
 $path_alias = drupal_get_path_alias($_GET['q']);
 if (!$vars['is_front']) {
   list($section, ) = explode('/', $path_alias, 2);
-  $vars['section_class'] = ' class="'. safe_string('section-'. $section) .'"';
+  $vars['section_class'] = safe_string('section-'. $section) .' ';
 }
 
-// Body Classes. In Genesis these are printed on the #container wrapper div, not on the body.
+// Body Classes.
 $classes = explode(' ', $vars['body_classes']);
 
 // Remove the useless page-arg(0) class.
@@ -116,7 +116,7 @@ if (!$vars['is_front']) {
   }
 }
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
-  
+
 // THEME SETTINGS
 // Display mission statement on all pages
 if (theme_get_setting('mission_statement_pages') == 'all') {
@@ -125,7 +125,7 @@ if (theme_get_setting('mission_statement_pages') == 'all') {
 
 // Layout settings - set the page width and layout method
 if (theme_get_setting('layout_enable_settings') == 'on') {
-  $vars['at_layout_width'] = theme_get_setting('layout_width');
+  $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');
   $right_width = theme_get_setting('layout_sidebar_last_width');
   $left_width = theme_get_setting('layout_sidebar_first_width');
@@ -135,10 +135,10 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $pull_right           = $right_width;
     $styles = array();
     $styles[] = '.two-sidebars .content-inner{margin:0 '. $content_margin_right .'px 0 '. $content_margin_left .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-left:'. $content_margin_left .'px;;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;;}';
+    $styles[] = '.sidebar-left .content-inner{margin-left:'. $content_margin_left .'px; margin-right:0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px; margin-left:0;}';
     $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-100%;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-' .$pull_right .'px;}';
+    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $pull_right .'px;}';
   }
   if ($method == '1') {
     $content_margin       = $right_width + $left_width;
@@ -147,9 +147,9 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $left_margin          = $right_width + $left_width;
     $right_margin         = $right_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin-right:'. $content_margin .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-right:'. $content_margin_left .'px;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-right:'. $content_margin .'px;margin-left:0;}';
+    $styles[] = '.sidebar-left .content-inner{margin-right:'. $content_margin_left .'px;margin-left:0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;margin-left:0;}';
     $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_margin .'px;}';
     $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $right_margin .'px;}';
     $styles[] = '.sidebar-left #sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_width .'px;}';
@@ -161,13 +161,19 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $push_right     = $left_width;
     $styles = array();
     $styles[] = ".two-sidebars .content-inner{margin:0 0 0 $content_margin\px;}";
-    $styles[] = ".sidebar-left .content-inner{margin-left:$left_margin\px;}";
-    $styles[] = ".sidebar-right .content-inner{margin-left:$right_margin\px;}";
+    $styles[] = ".sidebar-left .content-inner{margin-left:$left_margin\px;margin-right:0;}";
+    $styles[] = ".sidebar-right .content-inner{margin-left:$right_margin\px;margin-right:0;}";
     $styles[] = "#sidebar-first{width:$left_width\px; margin-left: -100%;}";
     $styles[] = "#sidebar-last{width:$right_width\px; margin-left: -100%;}";
     $styles[] = ".two-sidebars #sidebar-last {width:$right_width\px; position: relative; left:$push_right\px;}";
   }
   $vars['at_layout'] = implode('', $styles);
+  if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
+    $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
+  }
+  if (theme_get_setting('at_admin_theme') == 1 && arg(2) == 'block') {
+    $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout'] .'</style>';
+  }
 }
   
 // Template suggestions for admin theme

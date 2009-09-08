@@ -1,5 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com
+
+/**
+ * @file template.preprocess-comment.inc
+ */
+
 /**
  * Override or insert variables in comment templates.
  *
