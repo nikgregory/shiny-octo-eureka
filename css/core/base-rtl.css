@@ -36,7 +36,22 @@ ul.primary li a{margin-right:0;margin-left:.08em;padding:0.2em 0.75em 0.25em;}
 .local-tasks ul.primary li.active a{background-color:#FFF;border-bottom-color:#FFF;}
 ul.secondary{border-bottom:1px solid #CCC;margin:1em 0 0 0;padding:0 .3em 1em;}
 ul.secondary li{border-right:0;list-style:none;padding:0 2em 0 0;}
-/**
- * Style edit links for blocks and views.
- */
+/* Style edit links for blocks and views. */
 div.block div.block-edit {left:15px;right:auto;}
+/* Skinr style classes. */
+/* Horizontal login block styles. */
+.at-horizontal-login .form-item,.at-horizontal-login .form-submit{float:right;}
+.at-horizontal-login .item-list ul{float:right;}
+.at-horizontal-login .item-list ul li{float:right;}
+.at-horizontal-login #user-login-form{text-align:right;}
+.at-horizontal-login label{float:right;}
+#block-user-0 label.overlabel-apply{margin-left:0;margin-right:.375em;}
+.at-horizontal-login #user-login-form li a{padding:0 0 0 20px;}
+/* inline menu style. */
+.at-inline-menu ul.menu li{border-left-style:solid;border-left-width:1px;border-right-style:none;border-right-width:0;}
+.at-inline-menu ul.menu li a{padding:0 .45em 0 .75em;}
+/* multi-column menu style. */
+.at-multicolumn-menu .block-content{}
+.at-multicolumn-menu .block-content ul li{float:right;}
+.at-multicolumn-menu .block-content ul li.expanded ul{margin-right:0;}
+.at-multicolumn-menu .block-content ul li.expanded ul li{}

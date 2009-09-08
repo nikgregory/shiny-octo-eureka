@@ -180,3 +180,40 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .fieldset-layout-settings .layout-help dt,.fieldset-layout-settings .layout-help dd{margin:0;padding:0;}
 .fieldset-layout-settings .layouts,.fieldset-layout-settings .page-width .form-item,.fieldset-layout-settings .sidebar-width .form-item{margin:0;}
 .fieldset-layout-settings label,.fieldset-layout-settings strong{font-weight:400;}
+/* Skinr style classes. */
+.at-center-content,.at-center-content ul.menu,.at-center-content.item-list ul{margin:0;text-align:center;}
+.at-center-content ul.menu li,.at-center-content.item-list ul li{list-style:none;margin:0;}
+
+.at-align-right-content,.at-align-right-content ul.menu,.at-align-right-content.item-list ul{margin:0;text-align:right;}
+.at-align-left-content,.at-align-left-content ul.menu,.at-align-left-content.item-list ul{margin:0;text-align:left;}
+
+/* Equalize heights need to expand the block inner div as well. */
+.block-inner{min-height:100%;height:auto;}
+/* Horizontal login block styles. */
+.at-horizontal-login h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
+.at-horizontal-login .form-item,.at-horizontal-login .form-submit{float:left;padding:0 .5em;}
+.at-horizontal-login .item-list ul{float:left;margin:.5em 0 0 0!important;padding:0;}
+.at-horizontal-login .item-list ul li{float:left;}
+.at-horizontal-login #user-login-form{text-align:left;}
+.at-horizontal-login label{float:left;}
+#block-user-0 label.overlabel-apply{position:absolute;top:1em;margin-left:.375em;float:none;}
+.at-horizontal-login input{margin:0;}
+.at-horizontal-login .button-wrapper input{margin:.75em .5em 0;}
+.at-horizontal-login #user-login-form li a{padding:0 20px 0 0;}
+.at-horizontal-login #user-login-form li.openid-link a,.at-horizontal-login #user-login li.openid-link a{padding:0 20px;}
+/* inline menu style. */
+.at-inline-menu{margin-bottom:.5em}
+.at-inline-menu h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
+.at-inline-menu .block-content ul{margin:0;padding:0;}
+.at-inline-menu ul.menu li{border-right-style:solid;border-right-width:1px;display:inline;margin:0;padding:0;white-space:nowrap;list-style:none;list-style-image:none;}
+.at-inline-menu ul.menu li a{padding:0 .75em 0 .45em;}
+.at-inline-menu ul li.last{border:none;}
+.at-inline-menu ul li.expanded ul{display:none;}
+/* multi-column menu style. */
+.at-multicolumn-menu h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
+.at-multicolumn-menu .block-content{overflow:auto;}
+.at-multicolumn-menu .block-content ul{margin:0;padding:0;}
+.at-multicolumn-menu .block-content ul li{display:block;font-weight:bold;float:left;margin:0;width:160px;list-style:none;list-style-image:none;}
+.at-multicolumn-menu .block-content ul li.expanded ul{display:block;margin-left:0;width:160px;}
+.at-multicolumn-menu .block-content ul li.expanded ul li{border:none;display:block;}
+.at-multicolumn-menu .block-content ul.menu li ul.menu li{font-weight:normal;}
