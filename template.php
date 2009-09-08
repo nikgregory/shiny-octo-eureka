@@ -11,28 +11,11 @@
  *   For more information: http://msdn.microsoft.com/en-us/library/ms537512.aspx
  */
 function adaptivetheme_theme(&$existing, $type, $theme, $path) {
-  
-  // Register a function so we can theme the theme settings form.
   return array(
     'system_settings_form' => array(
-      'arguments' => array(
-        'form' => NULL,
-        'key' => 'adaptivetheme',
-      ),
+      'arguments' => array('form' => NULL, 'key' => 'adaptivetheme'),
     ),
   );
-  
-  // Compute the conditional stylesheets.
-  if (!module_exists('conditional_styles')) {
-    include_once drupal_get_path('theme', 'adaptivetheme') .'/inc/template.conditional-styles.inc';
-    // _conditional_styles_theme() only needs to be run once.
-    if ($theme == 'adaptivetheme') {
-      _conditional_styles_theme($existing, $type, $theme, $path);
-    }
-  }  
-  $templates = drupal_find_theme_functions($existing, array('phptemplate', $theme));
-  $templates += drupal_find_theme_templates($existing, '.tpl.php', $path);
-  return $templates;
 }
 
 /**
@@ -51,13 +34,13 @@ function adaptivetheme_preprocess(&$vars, $hook) {
   $vars['is_admin'] = in_array('admin', $user->roles);     // Check for Admin, logged in
   $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
   
-  if(is_file(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.preprocess-' . str_replace('_', '-', $hook) . '.inc')) {
-    include(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.preprocess-' . str_replace('_', '-', $hook) . '.inc');
+  if (is_file(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc')) {
+    include(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc');
   }
 }
 
 /**
- * Include custom function<.
+ * Include custom functions.
  */
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 
@@ -81,7 +64,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
    */
   $defaults = array(
     'user_notverified_display'              => 1,
-    'breadcrumb'                            => 'yes',
+    'breadcrumb_display'                    => 'yes',
     'breadcrumb_separator'                  => ' &#187; ',
     'breadcrumb_home'                       => 0,
     'breadcrumb_trailing'                   => 0,
@@ -110,7 +93,12 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'layout_width'                          => '960px',
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_settings'                => 'on', // set to 'on' to enable, 'off' to disable
+    'equal_heights_sidebars'                => 0,
+    'equal_heights_blocks'                  => 0,
+    'horizontal_login_block'                => 0,
+    'horizontal_login_block_overlabel'      => 0,
+    'horizontal_login_block_enable'         => 'on', // set to 'on' to enable, 'off' to disable
     'color_schemes'                         => 'colors-default.css',
     'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
   );
@@ -155,6 +143,20 @@ if (theme_get_setting('at_admin_theme')) {
   }
 }
 
+// Load equalizeheights.js
+if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
+if (theme_get_setting('equal_heights_sidebars') || theme_get_setting('equal_heights_blocks')) {
+  $path_to_core = path_to_theme() .'/js/core/';
+  drupal_add_js($path_to_core .'jquery.equalizeheights.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  if (theme_get_setting('equal_heights_sidebars')) {
+     drupal_add_js($path_to_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE); 
+  }
+  if (theme_get_setting('equal_heights_blocks')) {
+    drupal_add_js($path_to_core .'equalize-blocks.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  }
+}
+}
+
 /** 
  * Load Firebug lite
  */
@@ -163,12 +165,20 @@ if (theme_get_setting('load_firebug_lite')) {
   drupal_add_js($path_to_core .'firebug.lite.compressed.js', 'theme', 'header', FALSE, TRUE, TRUE);
 }
 
+/** 
+ * Use horizontal login block overlabel js
+ */
+if (theme_get_setting('horizontal_login_block_overlabel')) {
+  $path_to_core = path_to_theme() .'/js/core/';
+  drupal_add_js($path_to_core .'jquery.overlabel.js', 'theme', 'header', FALSE, TRUE, TRUE);
+}
+
 /**
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
  * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
  */
 if (theme_get_setting('color_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme/' . get_at_colors(), 'theme');
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') .'/css/theme/'. get_at_colors(), 'theme');
 }
 
 /**

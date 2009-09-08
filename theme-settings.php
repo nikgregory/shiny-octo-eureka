@@ -41,7 +41,7 @@ SCRIPT;
    */
   $defaults = array(
     'user_notverified_display'              => 1,
-    'breadcrumb'                            => 'yes',
+    'breadcrumb_display'                    => 'yes',
     'breadcrumb_separator'                  => ' &#187; ',
     'breadcrumb_home'                       => 0,
     'breadcrumb_trailing'                   => 0,
@@ -71,6 +71,11 @@ SCRIPT;
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
     'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
+    'equal_heights_sidebars'                => 0,
+    'equal_heights_blocks'                  => 0,
+    'horizontal_login_block'                => 0,
+    'horizontal_login_block_overlabel'      => 0,
+    'horizontal_login_block_enable'         => 'off', // set to 'on' to enable, 'off' to disable
     'color_schemes'                         => 'colors-default.css',
     'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
   );
@@ -140,7 +145,7 @@ SCRIPT;
     '#default_value' => $settings['breadcrumb_separator'],
     '#size'          => 8,
     '#maxlength'     => 10,
-    '#prefix'        => '<div id="div-breadcrumb-collapse">', // jquery hook to show/hide optional widgets
+    '#prefix'        => '<div id="div-breadcrumb-collapse">',
   );
   $form['general_settings']['breadcrumb']['breadcrumb_home'] = array(
     '#type'          => 'checkbox',
@@ -158,7 +163,7 @@ SCRIPT;
     '#title'         => t('Append the content title to the end of the breadcrumb'),
     '#default_value' => $settings['breadcrumb_title'],
     '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
-    '#suffix'        => '</div>', // #div-breadcrumb
+    '#suffix'        => '</div>',
   );
   
   // Username
@@ -396,22 +401,28 @@ SCRIPT;
     '#default_value' => $settings['at_admin_hide_help'],
     '#description' => t('When this setting is checked all help messages will be hidden.'),  
   );
-  // Layout settings
-  if ($settings['layout_enable_settings'] == 'on') {
-    $image_path = path_to_theme() .'/css/core/core-images';
+  // Layout settings  
     $form['layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Layout settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
+    );
+    if ($settings['layout_enable_settings'] == 'on') {
+    $image_path = path_to_theme() .'/css/core/core-images';
+    $form['layout']['page_layout'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Page Layout'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
       '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
     );
-    $form['layout']['layout_width_help'] = array(
+    $form['layout']['page_layout']['layout_width_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
     );
-    $form['layout']['layout_width'] = array(
+    $form['layout']['page_layout']['layout_width'] = array(
       '#type'          => 'select',
       '#prefix'        => '<div class="page-width">',
       '#suffix'        => '</div>',
@@ -430,12 +441,12 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'field-layout-width'),
     );
-    $form['layout']['layout_sidebar_help'] = array(
+    $form['layout']['page_layout']['layout_sidebar_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
     );
-    $form['layout']['layout_sidebar_first_width'] = array(
+    $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
       '#type'          => 'select',
       '#title'         => t('Sidebar first'),
       '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
@@ -461,7 +472,7 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'sidebar-width-select'),
     );
-    $form['layout']['layout_sidebar_last_width'] = array(
+    $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
       '#type'          => 'select',
       '#title'         => t('Sidebar last'),
       '#prefix'       => '<div class="sidebar-width-right">',
@@ -487,28 +498,67 @@ SCRIPT;
       ),
       '#attributes' => array('class' => 'sidebar-width-select'),
     );
-    $form['layout']['layout_method_help'] = array(
+    $form['layout']['page_layout']['layout_method_help'] = array(
       '#prefix'        => '<div class="layout-help">',
       '#suffix'        => '</div>',
       '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
     );
-    $form['layout']['layout_method'] = array(
+    $form['layout']['page_layout']['layout_method'] = array(
       '#type' => 'radios',
       '#prefix'       => '<div class="layout-method">',
       '#suffix'       => '</div>',
       '#default_value' => $settings['layout_method'],      
       '#options' => array(
-        '0' => t('<strong>Layout #1</strong>') . theme("image",$image_path."/layout-default.png")        . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
-        '1' => t('<strong>Layout #2</strong>') . theme("image",$image_path."/layout-sidebars-right.png") . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
-        '2' => t('<strong>Layout #3</strong>') . theme("image",$image_path."/layout-sidebars-left.png")  . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
+        '0' => t('<strong>Layout #1</strong>') . theme("image", $image_path ."/layout-default.png") . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
+        '1' => t('<strong>Layout #2</strong>') . theme("image", $image_path ."/layout-sidebars-right.png") . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
+        '2' => t('<strong>Layout #3</strong>') . theme("image", $image_path ."/layout-sidebars-left.png") . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
       ),
      '#attributes' => array('class' => 'layouts'), 
     );
-    $form['layout']['layout_enable_settings'] = array(
+    $form['layout']['page_layout']['layout_enable_settings'] = array(
       '#type'    => 'hidden',
       '#value'   => $settings['layout_enable_settings'],
-    );   
+    );
   } //endif layout settings
+  $form['layout']['equal_heights'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Equal Heights'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#description'   => t('These settings allow you to set the sidebars and/or region blocks to be equal height.'),
+  );
+  $form['layout']['equal_heights']['equal_heights_sidebars'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Equal Height Sidebars'),
+    '#default_value' => $settings['equal_heights_sidebars'],
+    '#description'   => t('This setting will make the sidebars and the main content column equal to the hight of the tallest column.'),
+  );
+  $form['layout']['equal_heights']['equal_heights_blocks'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Equal Height Blocks'),
+    '#default_value' => $settings['equal_heights_blocks'],
+    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. This will not affect blocks in sidebars.'),
+  );
+  if ($settings['horizontal_login_block_enable'] == 'on') {
+    $form['layout']['login_block'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Login Block'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['layout']['login_block']['horizontal_login_block'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Horizontal Login Block'),
+      '#default_value' => $settings['horizontal_login_block'],
+      '#description'   => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
+    );
+    $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use Overlabel JavaScript'),
+      '#default_value' => $settings['horizontal_login_block_overlabel'],
+      '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
+    );
+  } // endif horizontal block settings
   // Color schemes
   if ($settings['color_enable_schemes'] == 'on') {
     $form['color'] = array(
@@ -523,7 +573,7 @@ SCRIPT;
       '#title' => t('Color Schemes'),
       '#default_value' => $settings['color_schemes'],
       '#options' => array(
-	    'colors-default.css' => t('Default color scheme'),
+        'colors-default.css' => t('Default color scheme'),
         //'colors-example.css' => t('Example color scheme'), // add aditional stylesheets here, they must be in css/theme and match name perfectly!
       ),
     );
