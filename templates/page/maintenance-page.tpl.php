@@ -18,8 +18,8 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>      
-<body>
-  <div id="container" class="<?php print $body_classes; ?>">
+<body class="<?php print $body_classes; ?>">
+  <div id="container">
     <div id="header" class="clear-block">
 
       <?php if ($site_logo or $site_name or $site_slogan): ?>

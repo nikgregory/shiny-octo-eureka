@@ -90,11 +90,12 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
+  <?php print $layout_settings; ?>
   <?php print $scripts; ?>
 </head>
-<?php //Note the body ID is #at-admim. This is to ensure the layout never gets borked. ?>        
-<body id="at-admin" <?php print $section_class; ?>> <!-- admin section -->
-  <div id="container" class="<?php print $classes; ?>">
+<?php //Note the body ID is #at-admim. This is to ensure the layout never gets borked. ?>
+<body id="at-admin" class="<?php print $section_class . $classes; ?>">
+  <div id="container">
 
     <div id="skip-nav">
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>

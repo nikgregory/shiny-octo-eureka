@@ -94,16 +94,11 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php if(!empty($at_layout)): ?>
-    <style type="text/css">
-      #container{width:<?php print $at_layout_width; ?>;}
-      <?php print $at_layout; ?>
-    </style>
-  <?php endif; ?>
+  <?php print $layout_settings; ?>
   <?php print $scripts; ?>
 </head>    
-<body<?php print $section_class; ?>>
-  <div id="container" class="<?php print $classes; ?>">
+<body class="<?php print $section_class . $classes; ?>">
+  <div id="container">
 
     <div id="skip-nav">
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
@@ -158,7 +153,7 @@
 
     <?php if ($primary_menu or $secondary_menu): ?>
       <div id="nav" class="clear-block">
-
+        
         <?php if ($primary_menu): ?>
           <div id="primary"><div class="primary-inner"><?php print $primary_menu; ?></div></div>
         <?php endif; ?>
