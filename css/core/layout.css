@@ -10,8 +10,8 @@
  */
  
 /**
- * #layout-1c
- * Replace with your preferred layout, remove if using LayoutSP!
+ * Default layout (layout-1c)
+ * Override in your theme.css file. LayoutSP always overrides this.
  */
 .two-sidebars .content-inner{margin:0 240px;}
 .sidebar-left .content-inner{margin-left:240px;}
@@ -50,39 +50,39 @@
 .in-maintenance #page-title {padding:0 10px;}
 
 /* Skinr grid classes. */
-.grid_1,
-.grid_2,
-.grid_3,
-.grid_4,
-.grid_5,
-.grid_6,
-.grid_7,
-.grid_8,
-.grid_9,
-.grid_10,
-.grid_11,
-.grid_12,
-.grid_13,
-.grid_14,
-.grid_15,
-.grid_16 {float:left;clear:none!important;display:inline;}
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-5,
+.grid-6,
+.grid-7,
+.grid-8,
+.grid-9,
+.grid-10,
+.grid-11,
+.grid-12,
+.grid-13,
+.grid-14,
+.grid-15,
+.grid-16 {float:left;clear:none!important;display:inline;}
 
-.grid_1 {width: 40px;}
-.grid_2 {width: 100px;}
-.grid_3 {width: 160px;}
-.grid_4 {width: 220px;}
-.grid_5 {width: 280px;}
-.grid_6 {width: 340px;}
-.grid_7 {width: 400px;}
-.grid_8 {width: 460px;}
-.grid_9 {width: 520px;}
-.grid_10 {width: 580px;}
-.grid_11 {width: 640px;}
-.grid_12 {width: 700px;}
-.grid_13 {width: 760px;}
-.grid_14 {width: 820px;}
-.grid_15 {width: 880px;}
-.grid_16 {width: 940px;}
+.grid-1 {width: 40px;}
+.grid-2 {width: 100px;}
+.grid-3 {width: 160px;}
+.grid-4 {width: 220px;}
+.grid-5 {width: 280px;}
+.grid-6 {width: 340px;}
+.grid-7 {width: 400px;}
+.grid-8 {width: 460px;}
+.grid-9 {width: 520px;}
+.grid-10 {width: 580px;}
+.grid-11 {width: 640px;}
+.grid-12 {width: 700px;}
+.grid-13 {width: 760px;}
+.grid-14 {width: 820px;}
+.grid-15 {width: 880px;}
+.grid-16 {width: 940px;}
 
 /* Containers and helpers. */
 #container{position:relative;margin:0 auto;width:960px;}

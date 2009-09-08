@@ -64,3 +64,4 @@ ul.menu li{padding:.35em 0 0;}
 .item-list ul.pager li{margin:0;}
 .feed-icon img{padding:0 10px;}
 #block-node-0 .feed-icon img{padding:10px 0;}
+#menu-region .superfish-menu-hide-title{height:0;overflow:hidden;position:absolute;}

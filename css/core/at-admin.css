@@ -7,11 +7,11 @@
  */ 
 
 body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0;}
-#at-admin .two-sidebars .content-inner{margin:0 240px;}
-#at-admin .sidebar-left .content-inner{margin-left:240px;}
-#at-admin .sidebar-right .content-inner{margin-right:240px;}
-#at-admin #sidebar-first{margin-left:-100%;width:240px;}
-#at-admin #sidebar-last{margin-left:-240px;width:240px;}
+.two-sidebars .content-inner{margin:0 240px;}
+.sidebar-left .content-inner{margin-left:240px;}
+.sidebar-right .content-inner{margin-right:240px;}
+#sidebar-first{margin-left:-100%;width:240px;}
+#sidebar-last{margin-left:-240px;width:240px;}
 #sidebar-last .block,#sidebar-first .block {padding:10px 10px 0;}
 #content .region-inner{padding:0 10px;}
 a{margin:0;padding:0;text-decoration:none;}
@@ -67,12 +67,10 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #header-blocks .block-content{margin:0;}
 #block-system-0 .block-inner{border:none;text-align:center;}
 #block-user-3 .item-list h3{font-size:1em;}
-
 .block .item-list ul,.block .item-list ol{margin:0;}
 ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
 .item-list ul li,.item-list ol li,ul.menu li{padding:0.35em 0 0;}
 ul.menu li a:hover,ul.menu li a:focus{outline:0;}
-
 #main-content ul.menu,#main-content ul.menu li{font-weight:bold;list-style:none;margin:0;}
 .block-at-admin {padding:10px 10px 0;}
 .block-at-admin-inner{-moz-border-radius:3px;-webkit-border-radius:3px;background:#FFF;border:1px solid #13749F;margin-bottom:3px;}
@@ -170,7 +168,7 @@ input#edit-delete.form-submit,#system-modules-uninstall input#edit-submit,#user-
 input[value~=Save]:hover,#system-theme-settings input#edit-submit:hover,input.form-submit:hover,input.teaser-button:hover,input#edit-save.form-submit,.node-form input#edit-submit.form-submit:hover,input#edit-delete.form-submit:hover,#system-modules-uninstall input#edit-submit:hover,#user-multiple-delete-confirm input#edit-submit:hover{background-position:bottom;cursor:pointer;}
 fieldset{-moz-border-radius:6px;-webkit-border-radius:6px;background:#FFF url('core-images/gray-grad2.png') repeat-x left top;border:1px solid #dadada;margin:1.5em 0;padding:0.75em;}
 .vertical-tabs fieldset{-moz-border-radius:0;-webkit-border-radius:0;background:#FFF;}
-*:first-child+html fieldset{background-color:transparent;background-position:0 .75em;padding:0 1em 0.75em;}
+*:first-child+html fieldset{background-color:transparent;background-position:0 .75em;padding:0 1em .75em;}
 *:first-child+html fieldset > .description,*:first-child+html fieldset .fieldset-wrapper .description{padding-top:1.5em;}
 fieldset legend{display:block;font-weight:bold;padding:0 0.5em;}
 *:first-child+html fieldset legend,*:first-child+html fieldset.collapsed legend{display:inline;}
@@ -186,6 +184,9 @@ h1#page-title,.node-form #edit-title,input.title{font-size:1.5em;}
 #block-system-0 .fieldset-block-info,caption,th,td{text-align:left;}
 .block a:hover,tr #acquia-agent-no-search a:hover{background:#EAF2FA;color:#555;}
 ul.menu li a,.form-item strong.error{display:block;}
+.block.at-inline-menu .block-inner{border:none;}
+.at-inline-menu ul.menu li{border-color:#CCC;}
+.block.at-inline-menu ul.menu li a{display:inline;}
 .block-at-admin .block-inner,
 .block-at-admin .fieldset-wrapper{padding:3px;}
 .admin .compact-link a:hover{background:#F7F7F7;border:1px solid #464646;color:#222;}

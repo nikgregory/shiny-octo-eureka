@@ -9,8 +9,8 @@
  * @author    Jeff Burnz
  */
 /**
- * #layout-1c rtl
- * Replace with your preferred layout, remove if using LayoutSP!
+ * Default layout (layout-1c RTL)
+ * Override in your theme.css file. LayoutSP always overrides this.
  */
 .two-sidebars .content-inner{margin:0 240px;}
 .sidebar-left .content-inner{margin-right:240px;margin-left:0;}
@@ -19,22 +19,22 @@
 #sidebar-last{width:240px;margin-right:-240px;margin-left:0;}
 
 /* Skinr grid classes. */
-.grid_1,
-.grid_2,
-.grid_3,
-.grid_4,
-.grid_5,
-.grid_6,
-.grid_7,
-.grid_8,
-.grid_9,
-.grid_10,
-.grid_11,
-.grid_12,
-.grid_13,
-.grid_14,
-.grid_15,
-.grid_16 {float:right;}
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-5,
+.grid-6,
+.grid-7,
+.grid-8,
+.grid-9,
+.grid-10,
+.grid-11,
+.grid-12,
+.grid-13,
+.grid-14,
+.grid-15,
+.grid-16 {float:right;}
 
 /* Containers and helpers. */
 #container,.block{zoom:1;}
