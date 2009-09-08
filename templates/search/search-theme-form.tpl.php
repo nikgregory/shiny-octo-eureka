@@ -39,11 +39,10 @@
   <input class="search_submit" type="submit" name="op" value=" <?php print t('Search'); ?>"/>
   <?php print $search['hidden']; ?>
 </div>
-
 <?php 
 /* Uncomment and place inside the div#search wrapper.
   <a class="advanced-search-link" href="/search" title="<?php print t('Advanced Search'); ?>">
     <?php print t('Advanced Search'); ?>
   </a>
 */ 
-?>
+?><!-- /search -->
