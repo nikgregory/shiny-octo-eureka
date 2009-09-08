@@ -1,5 +1,25 @@
 // $Id$
 
+/*
+ * In most instances this will be called using the built in theme settings.
+ * However, if you want to use this manually you can call this file
+ * in the info file and user the ready function e.g.:
+ * 
+ * This will set sidebars and the main content colum all to equal height:
+ *  if (Drupal.jsEnabled) {
+ *    $(document).ready(function() {
+ *    $('.columns-inner').equalHeights();
+ *   });
+ *  }
+ *  
+ * This will set all blocks in regions (not sidebars) to equal height:
+ *  if (Drupal.jsEnabled) {
+ *    $(document).ready(function() {
+ *    $('.region-inner').equalHeights();
+ *   });
+ *  }
+ */
+
 /*-------------------------------------------------------------------- 
  * javascript method: "pxToEm"
  * by:
@@ -83,13 +103,7 @@ $.fn.equalHeights = function(px) {
 		if (!px || !Number.prototype.pxToEm) currentTallest = currentTallest.pxToEm(); //use ems unless px is specified
 		// for ie6, set height since min-height isn't supported
 		if ($.browser.msie && $.browser.version == 6.0) { $(this).children().css({'height': currentTallest}); }
-		$(this).children().css({'min-height': currentTallest}); 
+		$(this).children().css({'height': currentTallest}); 
 	});
 	return this;
 };
-
-if (Drupal.jsEnabled) {
-  $(document).ready(function() {
-    $('.columns-inner').equalHeights();
-  });
-}
