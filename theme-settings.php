@@ -70,7 +70,10 @@ SCRIPT;
     'layout_width'                          => '960px',
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_settings'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_sidebars'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_method'                  => 'on', // set to 'on' to enable, 'off' to disable
     'equal_heights_sidebars'                => 0,
     'equal_heights_blocks'                  => 0,
     'horizontal_login_block'                => 0,
@@ -118,7 +121,7 @@ SCRIPT;
     '#title'         => t('Where should your mission statement be displayed?'),
     '#default_value' => $settings['mission_statement_pages'],
     '#options'       => array(
-                          'home' => t('Display mission statement only on front page'),
+                          'home' => t('Display mission statement only on the home page'),
                           'all' => t('Display mission statement on all pages'),
                         ),
   );
@@ -175,7 +178,7 @@ SCRIPT;
   );
   $form['general_settings']['username']['user_notverified_display'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Display "not verified" for unregistered usernames'),
+    '#title' => t('Display "not verified" for unregistered user names'),
     '#default_value' => $settings['user_notverified_display'],
   );
   
@@ -401,14 +404,15 @@ SCRIPT;
     '#default_value' => $settings['at_admin_hide_help'],
     '#description' => t('When this setting is checked all help messages will be hidden.'),  
   );
+  
   // Layout settings  
-    $form['layout'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Layout settings'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    if ($settings['layout_enable_settings'] == 'on') {
+  $form['layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Layout settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  if ($settings['layout_enable_settings'] == 'on') {
     $image_path = path_to_theme() .'/css/core/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
@@ -417,109 +421,118 @@ SCRIPT;
       '#collapsed' => TRUE,
       '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
     );
-    $form['layout']['page_layout']['layout_width_help'] = array(
-      '#prefix'        => '<div class="layout-help">',
-      '#suffix'        => '</div>',
-      '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
-    );
-    $form['layout']['page_layout']['layout_width'] = array(
-      '#type'          => 'select',
-      '#prefix'        => '<div class="page-width">',
-      '#suffix'        => '</div>',
-      '#default_value' => $settings['layout_width'],
-      '#options'       => array(
-        '720px'   => t('720px'),
-        '780px'   => t('780px'),
-        '840px'   => t('840px'),
-        '900px'   => t('900px'),
-        '960px'   => t('960px'),
-        '1020px'   => t('1020px'),
-        '1080px'   => t('1080px'),
-        '1140px'   => t('1140px'),
-        '1200px'   => t('1200px'),
-        '1260px'   => t('1260px'),
-      ),
-      '#attributes' => array('class' => 'field-layout-width'),
-    );
-    $form['layout']['page_layout']['layout_sidebar_help'] = array(
-      '#prefix'        => '<div class="layout-help">',
-      '#suffix'        => '</div>',
-      '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
-    );
-    $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
-      '#type'          => 'select',
-      '#title'         => t('Sidebar first'),
-      '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
-      '#suffix'       => '</div>',
-      '#default_value' => $settings['layout_sidebar_first_width'],
-      '#options'       => array(
-        '60'    => t('60px'),
-        '120'   => t('120px'),
-        '180'   => t('180px'),
-        '240'   => t('240px'),
-        '300'   => t('300px'),
-        '360'   => t('360px'),
-        '420'   => t('420px'),
-        '480'   => t('480px'),
-        '540'   => t('540px'),
-        '600'   => t('600px'),
-        '660'   => t('660px'),
-        '720'   => t('720px'),
-        '780'   => t('780px'),
-        '840'   => t('840px'),
-        '900'   => t('900px'),
-        '960'   => t('960px'),
-      ),
-      '#attributes' => array('class' => 'sidebar-width-select'),
-    );
-    $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
-      '#type'          => 'select',
-      '#title'         => t('Sidebar last'),
-      '#prefix'       => '<div class="sidebar-width-right">',
-      '#suffix'       => '</div></div>',
-      '#default_value' => $settings['layout_sidebar_last_width'],
-      '#options'       => array(
-        '60'    => t('60px'),
-        '120'   => t('120px'),
-        '180'   => t('180px'),
-        '240'   => t('240px'),
-        '300'   => t('300px'),
-        '360'   => t('360px'),
-        '420'   => t('420px'),
-        '480'   => t('480px'),
-        '540'   => t('540px'),
-        '600'   => t('600px'),
-        '660'   => t('660px'),
-        '720'   => t('720px'),
-        '780'   => t('780px'),
-        '840'   => t('840px'),
-        '900'   => t('900px'),
-        '960'   => t('960px'),
-      ),
-      '#attributes' => array('class' => 'sidebar-width-select'),
-    );
-    $form['layout']['page_layout']['layout_method_help'] = array(
-      '#prefix'        => '<div class="layout-help">',
-      '#suffix'        => '</div>',
-      '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
-    );
-    $form['layout']['page_layout']['layout_method'] = array(
-      '#type' => 'radios',
-      '#prefix'       => '<div class="layout-method">',
-      '#suffix'       => '</div>',
-      '#default_value' => $settings['layout_method'],      
-      '#options' => array(
-        '0' => t('<strong>Layout #1</strong>') . theme("image", $image_path ."/layout-default.png") . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
-        '1' => t('<strong>Layout #2</strong>') . theme("image", $image_path ."/layout-sidebars-right.png") . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
-        '2' => t('<strong>Layout #3</strong>') . theme("image", $image_path ."/layout-sidebars-left.png") . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
-      ),
-     '#attributes' => array('class' => 'layouts'), 
-    );
-    $form['layout']['page_layout']['layout_enable_settings'] = array(
-      '#type'    => 'hidden',
-      '#value'   => $settings['layout_enable_settings'],
-    );
+    
+    if ($settings['layout_enable_width'] == 'on') {
+      $form['layout']['page_layout']['layout_width_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_width'] = array(
+        '#type'          => 'select',
+        '#prefix'        => '<div class="page-width">',
+        '#suffix'        => '</div>',
+        '#default_value' => $settings['layout_width'],
+        '#options'       => array(
+          '720px'   => t('720px'),
+          '780px'   => t('780px'),
+          '840px'   => t('840px'),
+          '900px'   => t('900px'),
+          '960px'   => t('960px'),
+          '1020px'   => t('1020px'),
+          '1080px'   => t('1080px'),
+          '1140px'   => t('1140px'),
+          '1200px'   => t('1200px'),
+          '1260px'   => t('1260px'),
+        ),
+        '#attributes' => array('class' => 'field-layout-width'),
+      );
+    } // endif width
+    if ($settings['layout_enable_sidebars'] == 'on') {
+      $form['layout']['page_layout']['layout_sidebar_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
+        '#type'          => 'select',
+        '#title'         => t('Sidebar first'),
+        '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
+        '#suffix'       => '</div>',
+        '#default_value' => $settings['layout_sidebar_first_width'],
+        '#options'       => array(
+          '60'    => t('60px'),
+          '120'   => t('120px'),
+          '180'   => t('180px'),
+          '240'   => t('240px'),
+          '300'   => t('300px'),
+          '360'   => t('360px'),
+          '420'   => t('420px'),
+          '480'   => t('480px'),
+          '540'   => t('540px'),
+          '600'   => t('600px'),
+          '660'   => t('660px'),
+          '720'   => t('720px'),
+          '780'   => t('780px'),
+          '840'   => t('840px'),
+          '900'   => t('900px'),
+          '960'   => t('960px'),
+        ),
+        '#attributes' => array('class' => 'sidebar-width-select'),
+      );
+      $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
+        '#type'          => 'select',
+        '#title'         => t('Sidebar last'),
+        '#prefix'       => '<div class="sidebar-width-right">',
+        '#suffix'       => '</div></div>',
+        '#default_value' => $settings['layout_sidebar_last_width'],
+        '#options'       => array(
+          '60'    => t('60px'),
+          '120'   => t('120px'),
+          '180'   => t('180px'),
+          '240'   => t('240px'),
+          '300'   => t('300px'),
+          '360'   => t('360px'),
+          '420'   => t('420px'),
+          '480'   => t('480px'),
+          '540'   => t('540px'),
+          '600'   => t('600px'),
+          '660'   => t('660px'),
+          '720'   => t('720px'),
+          '780'   => t('780px'),
+          '840'   => t('840px'),
+          '900'   => t('900px'),
+          '960'   => t('960px'),
+        ),
+        '#attributes' => array('class' => 'sidebar-width-select'),
+      );
+    } //endif layout sidebars
+    if ($settings['layout_enable_method'] == 'on') {
+      $form['layout']['page_layout']['layout_method_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_method'] = array(
+        '#type' => 'radios',
+        '#prefix'       => '<div class="layout-method">',
+        '#suffix'       => '</div>',
+        '#default_value' => $settings['layout_method'],      
+        '#options' => array(
+          '0' => t('<strong>Layout #1</strong>') . theme("image", $image_path ."/layout-default.png") . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
+          '1' => t('<strong>Layout #2</strong>') . theme("image", $image_path ."/layout-sidebars-right.png") . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
+          '2' => t('<strong>Layout #3</strong>') . theme("image", $image_path ."/layout-sidebars-left.png") . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
+        ),
+       '#attributes' => array('class' => 'layouts'), 
+      );
+      $form['layout']['page_layout']['layout_enable_settings'] = array(
+        '#type'    => 'hidden',
+        '#value'   => $settings['layout_enable_settings'],
+      );
+    } //endif layout method
   } //endif layout settings
+  
+  // Equal heights settings
   $form['layout']['equal_heights'] = array(
     '#type' => 'fieldset',
     '#title' => t('Equal Heights'),
@@ -559,6 +572,7 @@ SCRIPT;
       '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
+
   // Color schemes
   if ($settings['color_enable_schemes'] == 'on') {
     $form['color'] = array(
@@ -573,7 +587,10 @@ SCRIPT;
       '#title' => t('Color Schemes'),
       '#default_value' => $settings['color_schemes'],
       '#options' => array(
-        'colors-default.css' => t('Default color scheme'),
+        'colors-default.css' => t('Default color scheme (Gray))'),
+        'colors-red.css' => t('Red highlights)'),
+        'colors-blue.css' => t('Blue highlights)'),
+        'colors-green.css' => t('Green highlights)'),
         //'colors-example.css' => t('Example color scheme'), // add aditional stylesheets here, they must be in css/theme and match name perfectly!
       ),
     );
@@ -584,3 +601,4 @@ SCRIPT;
   } //endif color schemes
   return $form;
 }
+  

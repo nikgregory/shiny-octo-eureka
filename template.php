@@ -94,6 +94,9 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
     'layout_enable_settings'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_sidebars'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_method'                  => 'on', // set to 'on' to enable, 'off' to disable
     'equal_heights_sidebars'                => 0,
     'equal_heights_blocks'                  => 0,
     'horizontal_login_block'                => 0,
