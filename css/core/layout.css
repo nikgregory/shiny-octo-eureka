@@ -85,7 +85,7 @@
 .grid-16 {width: 940px;}
 
 /* Containers and helpers. */
-#container{position:relative;margin:0 auto;width:960px;}
+#container{overflow:hidden;position:relative;margin:0 auto;width:960px;}
 #columns{display:inline-block;}
 #container > #columns{display:block;}
 #content-column,#sidebar-first,#sidebar-last{float:left;}
