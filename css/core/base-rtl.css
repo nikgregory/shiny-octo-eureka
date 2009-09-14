@@ -7,7 +7,8 @@
  * Base is the master reset for browsers and Drupal.
  */
 blockquote{margin:0 0 1.5em;padding:0 3em 0 0;}
-#forum tr td.forum{background-position:5px 5px!important;padding-right:1.67em;}
+#forum table{clear:both;}
+#forum tr td.forum{background-position:98% 5px!important;padding-right:1.67em;}
 #forum tr td.forum .name{padding-right:.375em;}
 #forum div.indent{margin-right:.5em;}
 div.messages ul{margin:0 1.25em 0 0;}
