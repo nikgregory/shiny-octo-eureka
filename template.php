@@ -10,7 +10,7 @@
  * - Add conditional stylesheets:
  *   For more information: http://msdn.microsoft.com/en-us/library/ms537512.aspx
  */
-function adaptivetheme_theme(&$existing, $type, $theme, $path) {
+function adaptivetheme_theme() {
   return array(
     'system_settings_form' => array(
       'arguments' => array('form' => NULL, 'key' => 'adaptivetheme'),
