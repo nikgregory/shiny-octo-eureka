@@ -52,9 +52,7 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #attribution{font-size:0.82em;padding:5px;text-align:center;}
 #attribution a{color:#999;}
 #attribution a:hover{color:#CCC;}
-
 #node-form .node-col-last .buttons{-moz-border-radius:6px;-webkit-border-radius:6px;background:#EEE;border:1px solid #DADADA;padding:10px;}
-
 .block{padding: 10px 10px 0}
 .block-inner{-moz-border-radius:6px;-webkit-border-radius:6px;border:1px solid #DFDFDF;clear:both;margin:0 0 1.5em;background:#FFF;}
 .block-content{margin:0 0.5em 0.5em;}
