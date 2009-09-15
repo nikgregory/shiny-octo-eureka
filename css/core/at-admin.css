@@ -52,12 +52,9 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #attribution{font-size:0.82em;padding:5px;text-align:center;}
 #attribution a{color:#999;}
 #attribution a:hover{color:#CCC;}
-#node-form .node-col-last{float:right;margin-top:35px;width:24.5%;}
+
 #node-form .node-col-last .buttons{-moz-border-radius:6px;-webkit-border-radius:6px;background:#EEE;border:1px solid #DADADA;padding:10px;}
-#node-form .node-col-last .buttons #edit-submit,
-#node-form .node-col-last .buttons #edit-preview,
-#node-form .node-col-last .buttons #edit-delete{margin:2px 2px 2px 0;}
-#node-form .node-col-first{float:left;width:74.5%;}
+
 .block{padding: 10px 10px 0}
 .block-inner{-moz-border-radius:6px;-webkit-border-radius:6px;border:1px solid #DFDFDF;clear:both;margin:0 0 1.5em;background:#FFF;}
 .block-content{margin:0 0.5em 0.5em;}

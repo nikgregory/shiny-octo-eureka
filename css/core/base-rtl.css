@@ -56,3 +56,9 @@ div.block div.block-edit {left:15px;right:auto;}
 .at-multicolumn-menu .block-content ul li{float:right;}
 .at-multicolumn-menu .block-content ul li.expanded ul{margin-right:0;}
 .at-multicolumn-menu .block-content ul li.expanded ul li{}
+/* node from rtl */
+#node-form .node-col-last{float:left;}
+#node-form .node-col-first{float:right;}
+#node-form .node-col-last .buttons #edit-submit,
+#node-form .node-col-last .buttons #edit-preview,
+#node-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}

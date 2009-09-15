@@ -16,11 +16,6 @@
 #search-box{left:0;position:absolute;right:auto;}
 .logo-site-name span{float:right;}
 #logo{padding:0 0 0 10px;}
-#node-form .node-col-last{float:left;}
-#node-form .node-col-first{float:right;}
-#node-form .node-col-last .buttons #edit-submit,
-#node-form .node-col-last .buttons #edit-preview,
-#node-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}
 ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 1em 0 0;}
 .block-at-admin h2{text-align:right;}
 .block-at-admin legend{margin:0 -10px 0 0;}

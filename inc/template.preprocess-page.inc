@@ -194,17 +194,15 @@ if (!$vars['is_front']) {
 }
 
 /**
- * Load the admin theme CSS file.
+ * Load the admin theme CSS file and unset stuff to make theming easier.
  */
-if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
-  if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin') 
+  || (theme_get_setting('at_admin_theme_node') 
+  && arg(0) == 'node' && arg(1) == 'add') 
+  || (is_numeric(arg(1)) && (arg(2) == 'edit' 
+  || arg(2) == 'delete'))) {
+    // Load the admin theme CSS file.
     drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
-  }
-}
-
-// Unset stuff to make theming easier.
-if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_node')) {
-  if ((arg(0) == 'admin') || (arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
     // Unset vars
     unset($vars['primary_menu']);
     unset($vars['secondary_menu']);
@@ -236,5 +234,4 @@ if (theme_get_setting('at_admin_theme') || theme_get_setting('at_admin_theme_nod
     unset($css['all']['theme'][$theme_styles]);
     $vars['styles'] = drupal_get_css($css);
     return $vars;
-  }
 }
