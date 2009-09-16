@@ -167,7 +167,7 @@ fieldset{-moz-border-radius:6px;-webkit-border-radius:6px;background:#FFF url('c
 *:first-child+html fieldset > .description,*:first-child+html fieldset .fieldset-wrapper .description{padding-top:1.5em;}
 fieldset legend{display:block;font-weight:bold;padding:0 0.5em;}
 *:first-child+html fieldset legend,*:first-child+html fieldset.collapsed legend{display:inline;}
-html.js fieldset.collapsed{background:transparent;padding-bottom:.75em;padding-top:0;}
+html.js fieldset.collapsed{-moz-border-radius:0;-webkit-border-radius:0;background:transparent;padding-bottom:.75em;padding-top:0;}
 a:link,a:visited,a:visited,.block a:link,.block a:visited,.block a:visited,tr #acquia-agent-no-search a:link,tr #acquia-agent-no-search a:visited{color:#21759B;}
 a:active,a.active,.block a:active,.block a.active{color:#222;}
 a img,.page-block #content-top .block-region,.page-block #content-aside .block-region,.page-block #content-bottom .block-region{border:none;}

@@ -91,5 +91,5 @@
 #container > #columns{display:block;}
 #content-column,#sidebar-first,#sidebar-last{float:left;}
 #content-column{width:100%;}
-div.block{position:relative;}
+#main-content,div.block{position:relative;}
 .clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer-wrapper,#footer,#footer-message{clear:both;}

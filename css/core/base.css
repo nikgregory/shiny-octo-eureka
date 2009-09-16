@@ -216,8 +216,8 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .at-multicolumn-menu .block-content ul li.expanded ul li{border:none;display:block;}
 .at-multicolumn-menu .block-content ul.menu li ul.menu li{font-weight:normal;}
 /* node form classes */
-#node-form .node-col-last{float:right;margin-top:35px;width:24.5%;}
+#node-form .node-col-last{float:right;margin-top:35px;width:30%;}
 #node-form .node-col-last .buttons #edit-submit,
 #node-form .node-col-last .buttons #edit-preview,
 #node-form .node-col-last .buttons #edit-delete{margin:2px 2px 2px 0;}
-#node-form .node-col-first{float:left;width:74.5%;}
+#node-form .node-col-first{float:left;width:69%;}
