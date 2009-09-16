@@ -6,9 +6,8 @@
  */
 
 /**
- * Implement HOOK_theme
- * - Add conditional stylesheets:
- *   For more information: http://msdn.microsoft.com/en-us/library/ms537512.aspx
+ * Implementation of hook_theme
+ * Register a theme function for the system_settings_form.
  */
 function adaptivetheme_theme() {
   return array(
@@ -93,15 +92,15 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'layout_width'                          => '960px',
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
     'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_sidebars'                => 'on', // set to 'on' to enable, 'off' to disable
-    'layout_enable_method'                  => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_sidebars'                => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_method'                  => 'off', // set to 'on' to enable, 'off' to disable
     'equal_heights_sidebars'                => 0,
     'equal_heights_blocks'                  => 0,
     'horizontal_login_block'                => 0,
     'horizontal_login_block_overlabel'      => 0,
-    'horizontal_login_block_enable'         => 'on', // set to 'on' to enable, 'off' to disable
+    'horizontal_login_block_enable'         => 'off', // set to 'on' to enable, 'off' to disable
     'color_schemes'                         => 'colors-default.css',
     'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
   );

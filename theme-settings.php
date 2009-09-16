@@ -6,12 +6,12 @@
  */
 
 /**
-* Implementation of THEMEHOOK_settings() function.
+* Implementation of themehook_settings() function.
 *
 * @param $saved_settings
-*   array An array of saved settings for this theme.
+*   An array of saved settings for this theme.
 * @return
-*   array A form array.
+*   A form array.
 */
 function phptemplate_settings($saved_settings) {
 
@@ -70,10 +70,10 @@ SCRIPT;
     'layout_width'                          => '960px',
     'layout_sidebar_first_width'            => '240',
     'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
     'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_sidebars'                => 'on', // set to 'on' to enable, 'off' to disable
-    'layout_enable_method'                  => 'on', // set to 'on' to enable, 'off' to disable
+    'layout_enable_sidebars'                => 'off', // set to 'on' to enable, 'off' to disable
+    'layout_enable_method'                  => 'off', // set to 'on' to enable, 'off' to disable
     'equal_heights_sidebars'                => 0,
     'equal_heights_blocks'                  => 0,
     'horizontal_login_block'                => 0,
@@ -100,7 +100,6 @@ SCRIPT;
 
   // Create theme settings form widgets using Forms API
 
-  // TNT Fieldset
   // General Settings
   $form['general_settings'] = array(
     '#type' => 'fieldset',
@@ -118,11 +117,11 @@ SCRIPT;
   );
   $form['general_settings']['mission_statement']['mission_statement_pages'] = array(
     '#type'          => 'radios',
-    '#title'         => t('Where should your mission statement be displayed?'),
+    '#title'         => t('Where should the mission statement be displayed?'),
     '#default_value' => $settings['mission_statement_pages'],
     '#options'       => array(
-                          'home' => t('Display mission statement only on the home page'),
-                          'all' => t('Display mission statement on all pages'),
+                          'home' => t('Display the mission statement only on the home page'),
+                          'all' => t('Display the mission statement on all pages'),
                         ),
   );
   $form['general_settings']['breadcrumb'] = array(
@@ -138,7 +137,7 @@ SCRIPT;
     '#options'       => array(
                           'yes'   => t('Yes'),
                           'no'    => t('No'),
-                          'admin' => t('Only in admin section'),                
+                          'admin' => t('Only in the admin section'),                
                         ),
   );
   $form['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
@@ -152,7 +151,7 @@ SCRIPT;
   );
   $form['general_settings']['breadcrumb']['breadcrumb_home'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Show home page link in breadcrumb'),
+    '#title'         => t('Show the home page link in breadcrumbs'),
     '#default_value' => $settings['breadcrumb_home'],
   );
   $form['general_settings']['breadcrumb']['breadcrumb_trailing'] = array(
@@ -168,7 +167,6 @@ SCRIPT;
     '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
     '#suffix'        => '</div>',
   );
-  
   // Username
   $form['general_settings']['username'] = array(
     '#type' => 'fieldset',
@@ -181,12 +179,11 @@ SCRIPT;
     '#title' => t('Display "not verified" for unregistered user names'),
     '#default_value' => $settings['user_notverified_display'],
   );
-  
   // Search Settings
   $form['general_settings']['search_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
-    '#description' => t('What additional information should be displayed on your search results page?'),
+    '#description' => t('What additional information should be displayed in your search results?'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -220,17 +217,15 @@ SCRIPT;
     '#title' => t('Display attachment count'),
     '#default_value' => $settings['search_info_upload'],
   );
-  
   // Node Settings
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
     '#title' => t('Node settings'),
-    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the "Use content-type specific settings" box to customize them for each content type.  For example, you may want to show the date on stories, but not pages.'),
+    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the "Use content-type specific settings" box to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
   );
-  
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
@@ -254,7 +249,7 @@ SCRIPT;
       );
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
         '#type'          => 'checkbox',
-        '#title'         => t('Display date posted (you can customize this format on your Date and Time settings page)'),
+        '#title'         => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
         '#default_value' => $settings["submitted_by_date_{$type}"],
       );
       // Options for default settings
@@ -263,7 +258,7 @@ SCRIPT;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
           '#type'          => 'checkbox',
-          '#title'         => t('Use custom settings for each content type instead of the default above'),
+          '#title'         => t('Use custom settings for each content type instead of the default above.'),
           '#default_value' => $settings['submitted_by_enable_content_type'],
         );
       }
@@ -277,7 +272,6 @@ SCRIPT;
     $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.');
     $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
   }
-  
   // Taxonomy Settings
   if (module_exists('taxonomy')) {
     $form['node_type_specific']['display_taxonomy_container'] = array(
@@ -295,7 +289,7 @@ SCRIPT;
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
-      // display
+      // Display
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
         '#type'          => 'select',
         '#title'         => t('When should taxonomy terms be displayed?'),
@@ -307,7 +301,7 @@ SCRIPT;
                               'only' => t('Only display taxonomy terms on full node pages'),
                             ),
       );
-      // format
+      // Formatting
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
         '#type'          => 'radios',
         '#title'         => t('Taxonomy display format'),
@@ -347,7 +341,6 @@ SCRIPT;
       }
     }
   }
-
   // Development settings
   $form['themedev'] = array(
     '#type' => 'fieldset',
@@ -404,7 +397,6 @@ SCRIPT;
     '#default_value' => $settings['at_admin_hide_help'],
     '#description' => t('When this setting is checked all help messages will be hidden.'),  
   );
-  
   // Layout settings  
   $form['layout'] = array(
     '#type' => 'fieldset',
@@ -421,7 +413,6 @@ SCRIPT;
       '#collapsed' => TRUE,
       '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
     );
-    
     if ($settings['layout_enable_width'] == 'on') {
       $form['layout']['page_layout']['layout_width_help'] = array(
         '#prefix'        => '<div class="layout-help">',
@@ -529,9 +520,8 @@ SCRIPT;
         '#type'    => 'hidden',
         '#value'   => $settings['layout_enable_settings'],
       );
-    } //endif layout method
-  } //endif layout settings
-  
+    } // endif layout method
+  } // endif layout settings
   // Equal heights settings
   $form['layout']['equal_heights'] = array(
     '#type' => 'fieldset',
@@ -572,7 +562,6 @@ SCRIPT;
       '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
-
   // Color schemes
   if ($settings['color_enable_schemes'] == 'on') {
     $form['color'] = array(
@@ -598,7 +587,6 @@ SCRIPT;
       '#type'    => 'hidden',
       '#value'   => $settings['color_enable_schemes'],
     ); 
-  } //endif color schemes
+  } // endif color schemes
   return $form;
 }
-  
