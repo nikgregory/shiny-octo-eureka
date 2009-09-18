@@ -196,7 +196,10 @@ if (!$vars['is_front']) {
 /**
  * Load the admin theme CSS file and unset stuff to make theming easier.
  */
-if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin') || (theme_get_setting('at_admin_theme_node') && arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin') 
+ || (theme_get_setting('at_admin_theme_node') && arg(0) == 'node' && arg(1) == 'add') 
+ || (theme_get_setting('at_admin_theme_node') && is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+  
     // Load the admin theme CSS file.
     drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
     // Unset vars
