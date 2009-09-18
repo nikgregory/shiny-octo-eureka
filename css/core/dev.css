@@ -1080,7 +1080,7 @@ ul.menu li.last  {}
 /* 5 column */
 .five-col-5x20 {}
 .five-col-5x20 .region {}
-.five-col-5x20 .region inner {}
+.five-col-5x20 .region .inner {}
 .five-col-5x20 .col-1 {}
 .five-col-5x20 .col-2 {}
 .five-col-5x20 .col-3 {}
