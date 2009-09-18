@@ -133,7 +133,7 @@ SCRIPT;
   $form['general_settings']['breadcrumb']['breadcrumb_display'] = array(
     '#type'          => 'select',
     '#title'         => t('Display breadcrumb'),
-    '#default_value' => $settings['breadcrumb'],
+    '#default_value' => $settings['breadcrumb_display'],
     '#options'       => array(
                           'yes'   => t('Yes'),
                           'no'    => t('No'),
