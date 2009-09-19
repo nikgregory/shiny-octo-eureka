@@ -64,6 +64,7 @@ SCRIPT;
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
+    'admin_user_links'                      => 1,
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0,
     'layout_method'                         => '0',
@@ -360,7 +361,7 @@ SCRIPT;
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
-  // Administrationt settings
+  // Admin settings
   $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
     '#title' => t('Admin settings'),
@@ -384,6 +385,12 @@ SCRIPT;
     '#title' => t('Show site logo on admin pages.'),
     '#default_value' => $settings['at_admin_theme_logo'],
     '#description' => t('When checked the site logo will show on admin pages.'),  
+  );
+  $form['admin_settings']['administration']['admin_user_links'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Show the built in Admin user menu link.'),
+    '#default_value' => $settings['admin_user_links'],
+    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),  
   );
   $form['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
@@ -576,10 +583,7 @@ SCRIPT;
       '#title' => t('Color Schemes'),
       '#default_value' => $settings['color_schemes'],
       '#options' => array(
-        'colors-default.css' => t('Default color scheme (Gray))'),
-        'colors-red.css' => t('Red highlights)'),
-        'colors-blue.css' => t('Blue highlights)'),
-        'colors-green.css' => t('Green highlights)'),
+        'colors-default.css' => t('Default color scheme'),
         //'colors-example.css' => t('Example color scheme'), // add aditional stylesheets here, they must be in css/theme and match name perfectly!
       ),
     );

@@ -200,20 +200,22 @@ if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin')
   $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
 
   // Admin user links
-  if (!function_exists(admin_menu_perm)) {
-    $admin_user_links[] = l(t('Create content'), 'node/add');
-    $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';
-    $admin_user_links[] = user_access('administer blocks') ? l(t('Blocks'), 'admin/build/block') : '';
-    $admin_user_links[] = user_access('administer menu') ? l(t('Menus'), 'admin/build/menu') : '';
-    $admin_user_links[] = user_access('administer users') ? l(t('Users'), 'admin/user/user') : '';
-    $admin_user_links[] = user_access('access administration pages') ? l(t('Admin'), 'admin') : '';
+  if (theme_get_setting('admin_user_links')) {
+    if (!function_exists(admin_menu_perm)) {
+      $admin_user_links[] = l(t('Create content'), 'node/add');
+      $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';
+      $admin_user_links[] = user_access('administer blocks') ? l(t('Blocks'), 'admin/build/block') : '';
+      $admin_user_links[] = user_access('administer menu') ? l(t('Menus'), 'admin/build/menu') : '';
+      $admin_user_links[] = user_access('administer users') ? l(t('Users'), 'admin/user/user') : '';
+      $admin_user_links[] = user_access('access administration pages') ? l(t('Admin'), 'admin') : '';
+    }
+    $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
+    if (!function_exists(admin_menu_perm)) {
+      $admin_user_links[] = l(t('Logout'), 'logout');
+    }
+    $vars['admin_user_menu'] = $admin_user_links;
+    $vars['admin_user_links'] = theme('item_list', $admin_user_links);
   }
-  $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
-  if (!function_exists(admin_menu_perm)) {
-    $admin_user_links[] = l(t('Logout'), 'logout');
-  }
-  $vars['admin_user_menu'] = $admin_user_links;
-  $vars['admin_user_links'] = theme('item_list', $admin_user_links);
   
   // Load the admin theme CSS file.
   drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
