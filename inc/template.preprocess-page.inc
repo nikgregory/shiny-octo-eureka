@@ -13,7 +13,7 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-global $theme;
+global $theme, $user;
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
@@ -43,13 +43,6 @@ if (!empty($vars['primary_links'])) {
 if (!empty($vars['secondary_links'])) {
   $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
 }
-  
-// Admin welcome message with date for the admin theme.
-global $user;
-$welcome = t('Welcome') .' '. $user->name;
-$conjunction = ', '. t('it\'s') .' ';
-$todays_date = date("l, F d Y" , time()); 
-$vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
 
 // Attribution.
 $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
@@ -175,62 +168,84 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout'] .'</style>';
   }
 }
-  
-// Template suggestions for admin theme
-if (!$vars['is_front']) {
-  if (theme_get_setting('at_admin_theme')) {
-    if ((arg(0) == 'admin')) {
-      $vars['template_files'][] = 'page-at_admin';
-    }
-    if (arg(2) == 'block') {
-      $vars['template_files'][] = 'page';
-    }
-  }
-  if (theme_get_setting('at_admin_theme_node')) {
-    if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
-      $vars['template_files'][] = 'page-at_admin';
-    }
-  }
-}
 
 /**
- * Load the admin theme CSS file and unset stuff to make theming easier.
+ * Load the admin theme and unset stuff to make theming easier.
  */
 if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin') 
  || (theme_get_setting('at_admin_theme_node') && arg(0) == 'node' && arg(1) == 'add') 
  || (theme_get_setting('at_admin_theme_node') && is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+
+  // Template suggestions for admin theme
+  if (!$vars['is_front']) {
+    if (theme_get_setting('at_admin_theme')) {
+      if ((arg(0) == 'admin')) {
+        $vars['template_files'][] = 'page-at_admin';
+      }
+      if (arg(2) == 'block') {
+        $vars['template_files'][] = 'page';
+      }
+    }
+    if (theme_get_setting('at_admin_theme_node')) {
+      if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete'))) {
+        $vars['template_files'][] = 'page-at_admin';
+      }
+    }
+  }
   
-    // Load the admin theme CSS file.
-    drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
-    // Unset vars
-    unset($vars['primary_menu']);
-    unset($vars['secondary_menu']);
-    // Check whether logo is enabled for admin pages.
-    if (theme_get_setting('at_admin_theme_logo') == 0) {
-      unset($vars['linked_site_logo']);
-    }
-   // Check whether help is disabled
-    if (theme_get_setting('at_admin_hide_help')) {
-      unset($vars['help']);
-    }
-    // Unset CSS
-    $css = drupal_add_css();
-    $core_styles = array('dev.css', 'dark.css', 'starter.css');
-    $path_to_core = path_to_theme() .'/css/core/';
-    foreach ($core_styles as $stylesheet) {
-      $file = $path_to_core . $stylesheet;
-      unset($css['all']['theme'][$file]);
-    }
-    // Comment out the following if using the array/foreach loop below it to unset custom stylesheets.
-    $theme_styles = path_to_theme() .'/css/theme/theme.css';
-    // Uncomment and add to this array if you need to unset additional theme CSS files. If you don't it could mess up the admin themes.
-    // $theme_styles = array('theme.css');
-    // $path_to_theme = path_to_theme() .'/css/theme/';
-    // foreach ($theme_styles as $stylesheet) {
-    //   $file = $path_to_theme . $stylesheet;
-    //   unset($css['all']['theme'][$file]);
-    // }
-    unset($css['all']['theme'][$theme_styles]);
-    $vars['styles'] = drupal_get_css($css);
-    return $vars;
+  // Admin welcome message with date for the admin theme.
+  $welcome = t('Welcome') .' '. $user->name;
+  $conjunction = ', '. t('it\'s') .' ';
+  $todays_date = date("l, F d Y" , time()); 
+  $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+
+  // Admin user links
+  if (!function_exists(admin_menu_perm)) {
+    $admin_user_links[] = l(t('Create content'), 'node/add');
+    $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';
+    $admin_user_links[] = user_access('administer blocks') ? l(t('Blocks'), 'admin/build/block') : '';
+    $admin_user_links[] = user_access('administer menu') ? l(t('Menus'), 'admin/build/menu') : '';
+    $admin_user_links[] = user_access('administer users') ? l(t('Users'), 'admin/user/user') : '';
+    $admin_user_links[] = user_access('access administration pages') ? l(t('Admin'), 'admin') : '';
+  }
+  $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
+  if (!function_exists(admin_menu_perm)) {
+    $admin_user_links[] = l(t('Logout'), 'logout');
+  }
+  $vars['admin_user_menu'] = $admin_user_links;
+  $vars['admin_user_links'] = theme('item_list', $admin_user_links);
+  
+  // Load the admin theme CSS file.
+  drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
+  // Unset vars
+  unset($vars['primary_menu']);
+  unset($vars['secondary_menu']);
+  // Check whether logo is enabled for admin pages.
+  if (theme_get_setting('at_admin_theme_logo') == 0) {
+    unset($vars['linked_site_logo']);
+  }
+ // Check whether help is disabled
+  if (theme_get_setting('at_admin_hide_help')) {
+    unset($vars['help']);
+  }
+  // Unset CSS
+  $css = drupal_add_css();
+  $core_styles = array('dev.css', 'dark.css', 'starter.css');
+  $path_to_core = path_to_theme() .'/css/core/';
+  foreach ($core_styles as $stylesheet) {
+    $file = $path_to_core . $stylesheet;
+    unset($css['all']['theme'][$file]);
+  }
+  // Comment out the following if using the array/foreach loop below it to unset custom stylesheets.
+  $theme_styles = path_to_theme() .'/css/theme/theme.css';
+  // Uncomment and add to this array if you need to unset additional theme CSS files. If you don't it could mess up the admin themes.
+  // $theme_styles = array('theme.css');
+  // $path_to_theme = path_to_theme() .'/css/theme/';
+  // foreach ($theme_styles as $stylesheet) {
+  //   $file = $path_to_theme . $stylesheet;
+  //   unset($css['all']['theme'][$file]);
+  // }
+  unset($css['all']['theme'][$theme_styles]);
+  $vars['styles'] = drupal_get_css($css);
+  return $vars;
 }

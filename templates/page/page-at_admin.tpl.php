@@ -97,9 +97,7 @@
 <body id="at-admin" class="<?php print $section_class . $classes; ?>">
   <div id="container">
 
-    <div id="skip-nav">
-      <a href="#main-content"><?php print t('Skip to main content'); ?></a>
-    </div>
+    <div id="skip-nav"><a href="#main-content"><?php print t('Skip to main content'); ?></a></div>
     
     <?php // Add support for Admin module header, uncomment, http://drupal.org/project/admin. ?>
     <?php // if (!empty($admin)) print $admin; ?>
@@ -146,9 +144,11 @@
         </div></div> <!-- /header-blocks -->
       <?php endif; ?>
       
-      <div id="user-date">
-        <?php print $admin_welcome; ?>
-      </div> <!-- /admin welcome -->
+      <div id="user-date"><?php print $admin_welcome; ?></div> <!-- /admin welcome -->
+      
+      <?php if ($admin_user_links): ?>
+        <div id="user-menu"><?php print $admin_user_links; ?></div> <!-- /admin user link -->
+      <?php endif; ?>
 
     </div></div> <!-- /header -->
 

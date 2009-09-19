@@ -16,6 +16,10 @@
 #search-box{left:0;position:absolute;right:auto;}
 .logo-site-name span{float:right;}
 #logo{padding:0 0 0 10px;}
+#user-date{float:right;padding:}
+#user-menu{float:left;margin:10px 0 0 10px;}
+#user-menu ul li a{margin-right:0;margin-left:0.08em;}
+#header-blocks{float:right;}
 ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 1em 0 0;}
 .block-at-admin h2{text-align:right;}
 .block-at-admin legend{margin:0 -10px 0 0;}

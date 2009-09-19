@@ -5,7 +5,6 @@
  * @file at-admin.css
  * Contains all styles for the built in Administration Theme.
  */ 
-
 body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0;}
 .two-sidebars .content-inner{margin:0 240px;}
 .sidebar-left .content-inner{margin-left:240px;}
@@ -13,6 +12,7 @@ body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Gran
 #sidebar-first{margin-left:-100%;width:240px;}
 #sidebar-last{margin-left:-240px;width:240px;}
 #sidebar-last .block,#sidebar-first .block {padding:10px 10px 0;}
+#breadcrumb,#secondary-content,#columns,#tertiary-content,#footer-wrapper{margin-left:20px;margin-right:20px;}
 #content .region-inner{padding:0 10px;}
 a{margin:0;padding:0;text-decoration:none;}
 a:hover{background:transparent;color:#555;}
@@ -28,14 +28,18 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 .block-region{background:transparent;border:none;color:#9BBFCF;font-weight:bold;}
 #content-aside{background:#FFF;float:right;padding:0 0 20px 10px;width:240px;}
 #skip-nav{height:1px;left:auto;overflow:hidden;position:absolute;text-align:right;top:-9999em;width:1px;}
-#header{background:#464646;padding:0 0 7px;}
+#header{background:#464646;padding:0 0 3px;}
 #header-inner{position:relative;}
 .logo-site-name span{display:block;float:left;}
 #logo{padding:0 10px 0 0;}
 #site-name{font-size:1.33em;font-weight:bold;line-height:1.5;padding:2px 0 0;}
 #site-name a:hover,#site-name a:focus{background:transparent;color:#CCC;}
 #site-slogan{display:none;}
-#user-date{clear:both;color:#CCC;font-size:0.94em;padding:0 10px;}
+#user-date{clear:both;color:#CCC;font-size:0.94em;float:left;padding:0 10px;}
+#user-menu{float:right;margin:10px 10px 0 0;}
+#user-menu ul li{display:inline;margin:0;}
+#user-menu ul li a{-moz-border-radius-topleft:6px;-moz-border-radius-topright:6px;-webkit-border-top-left-radius:6px;-webkit-border-top-right-radius:6px;background:#222;margin-right:0.08em;padding:0.3em 1em 0.4em;color:#FFF;}
+#user-menu ul li a:hover{background:#666;}
 #header-blocks{float:left;padding:0 10px;}
 #search-box{padding-top:5px;left:auto;right:0;position:absolute;}
 #search-theme-form #search{margin:-5px 0 0;}
