@@ -192,7 +192,12 @@ if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin')
       }
     }
   }
-  
+
+  if (empty($vars['site_name'])) {
+    $admin_sitename = variable_get('site_name', '');
+    $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $admin_sitename .'</a>';
+  }
+
   // Admin welcome message with date for the admin theme.
   $welcome = t('Welcome') .' '. $user->name;
   $conjunction = ', '. t('it\'s') .' ';

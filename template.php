@@ -86,6 +86,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
+    'at_admin_theme_sitename'               => 1,
     'admin_user_links'                      => 1,
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0,

@@ -64,6 +64,7 @@ SCRIPT;
     'at_admin_theme'                        => 1,
     'at_admin_theme_node'                   => 1,
     'at_admin_theme_logo'                   => 0,
+    'at_admin_theme_sitename'               => 1,
     'admin_user_links'                      => 1,
     'block_edit_links'                      => 1,
     'at_admin_hide_help'                    => 0,
@@ -385,6 +386,12 @@ SCRIPT;
     '#title' => t('Show site logo on admin pages.'),
     '#default_value' => $settings['at_admin_theme_logo'],
     '#description' => t('When checked the site logo will show on admin pages.'),  
+  );
+  $form['admin_settings']['administration']['at_admin_theme_sitename'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Always show the sitename on admin pages.'),
+    '#default_value' => $settings['at_admin_theme_sitename'],
+    '#description' => t('When checked the sitename will show in admin pages even when it\'s turned off for the front end site.'),  
   );
   $form['admin_settings']['administration']['admin_user_links'] = array(
     '#type'  => 'checkbox',
