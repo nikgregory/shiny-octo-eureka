@@ -1037,8 +1037,10 @@ ul.menu li.last  {}
 .three-col-3x33 {}
 .three-col-3x33 .region {}
 .three-col-3x33 .region .inner {}
+.three-col-3x33 .col-1 {}
 .three-col-3x33 .col-2 {}
 .three-col-3x33 .col-3 {}
+.three-col-3x33 .col-1 .inner {}
 .three-col-3x33 .col-2 .inner {}
 .three-col-3x33 .col-3 .inner {}
 
