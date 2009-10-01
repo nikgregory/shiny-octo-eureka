@@ -143,7 +143,6 @@ if (theme_get_setting('at_admin_theme')) {
     drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
     $path_to_core = path_to_theme() .'/js/core/';
     drupal_add_js($path_to_core .'admin.collapseblock.js', 'theme', 'header', FALSE, TRUE, TRUE);
-    drupal_add_js($path_to_core .'jquery.cookie.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
 }
 
