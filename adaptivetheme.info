@@ -56,7 +56,7 @@
   ; Insert WAI ARIA Landmark Roles. Uncomment to use.
   scripts[] = js/core/aria-roles.js
 
-  : Preload CSS Images
+  ; Preload CSS Images
   ; jQuery plugin that automatically preloads all images referenced in CSS files.
   ;scripts[] = js/core/preloadCssImages.jQuery_v5.js
 
