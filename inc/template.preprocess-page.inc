@@ -224,35 +224,42 @@ if ((theme_get_setting('at_admin_theme') && arg(0) == 'admin')
   
   // Load the admin theme CSS file.
   drupal_add_css(path_to_theme() .'/css/core/at-admin.css', 'theme', 'all');
+  
   // Unset vars
   unset($vars['primary_menu']);
   unset($vars['secondary_menu']);
+  
   // Check whether logo is enabled for admin pages.
   if (theme_get_setting('at_admin_theme_logo') == 0) {
     unset($vars['linked_site_logo']);
   }
+  
  // Check whether help is disabled
   if (theme_get_setting('at_admin_hide_help')) {
     unset($vars['help']);
   }
+  
   // Unset CSS
   $css = drupal_add_css();
   $core_styles = array('dev.css', 'dark.css', 'starter.css');
   $path_to_core = path_to_theme() .'/css/core/';
   foreach ($core_styles as $stylesheet) {
-    $file = $path_to_core . $stylesheet;
-    unset($css['all']['theme'][$file]);
+    $files = $path_to_core . $stylesheet;
+    unset($css['all']['theme'][$files]);
   }
-  // Comment out the following if using the array/foreach loop below it to unset custom stylesheets.
+  
+  // Comment out the following TWO lines if using the array/foreach loop below it to unset custom stylesheets.
   $theme_styles = path_to_theme() .'/css/theme/theme.css';
+  unset($css['all']['theme'][$theme_styles]);
+  
   // Uncomment and add to this array if you need to unset additional theme CSS files. If you don't it could mess up the admin themes.
-  // $theme_styles = array('theme.css');
+  // $theme_styles = array('theme.css', 'colors-default.css'); // this example shows theme.css and colors-default.css
   // $path_to_theme = path_to_theme() .'/css/theme/';
   // foreach ($theme_styles as $stylesheet) {
-  //   $file = $path_to_theme . $stylesheet;
-  //   unset($css['all']['theme'][$file]);
+  //   $files = $path_to_theme . $stylesheet;
+  //   unset($css['all']['theme'][$files]);
   // }
-  unset($css['all']['theme'][$theme_styles]);
+  
   $vars['styles'] = drupal_get_css($css);
   return $vars;
 }
