@@ -181,6 +181,7 @@ h1#page-title,.node-form #edit-title,input.title{font-size:1.5em;}
 .item-list ul.pager li a:link,.item-list ul.pager li a:visited{color:#444;}
 .block-title,.admin-panel h3{background:#EDEDED url('core-images/gray-grad.png') repeat-x left bottom;display:block;font-size:1.18em;padding:0.3em 0.5em;}
 #block-system-0 .fieldset-block-info,caption,th,td{text-align:left;}
+#system-themes-form td:first-child{vertical-align:top;}
 .block a:hover,tr #acquia-agent-no-search a:hover{background:#EAF2FA;color:#555;}
 ul.menu li a,.form-item strong.error{display:block;}
 .block.at-inline-menu .block-inner{border:none;}
