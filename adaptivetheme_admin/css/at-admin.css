@@ -12,7 +12,7 @@ body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Gran
 #sidebar-first{margin-left:-100%;width:240px;}
 #sidebar-last{margin-left:-240px;width:240px;}
 #sidebar-last .block,#sidebar-first .block {padding:10px 10px 0;}
-#breadcrumb,#secondary-content,#columns,#tertiary-content,#footer-wrapper{margin-left:20px;margin-right:20px;}
+#breadcrumb,#secondary-content,#columns,#tertiary-content,#footer-wrapper{margin-left:10px;margin-right:10px;}
 #content .region-inner{padding:0 10px;}
 a{margin:0;padding:0;text-decoration:none;}
 a:hover{background:transparent;color:#555;}
@@ -32,7 +32,7 @@ body > #container{max-width:1280px;min-width:960px;width:100%;}
 #header-inner{position:relative;}
 .logo-site-name span{display:block;float:left;}
 #logo{padding:0 10px 0 0;}
-#site-name{font-size:1.33em;font-weight:bold;line-height:1.5;padding:2px 0 0;}
+#site-name{font-size:1.7em;font-weight:bold;line-height:1.5;padding:15px 0 0;}
 #site-name a:hover,#site-name a:focus{background:transparent;color:#CCC;}
 #site-slogan{display:none;}
 #user-date{clear:both;color:#CCC;font-size:0.94em;float:left;padding:0 10px;}
@@ -168,7 +168,7 @@ html.js fieldset.collapsed{-moz-border-radius:0;-webkit-border-radius:0;backgrou
 a:link,a:visited,a:visited,.block a:link,.block a:visited,.block a:visited,tr #acquia-agent-no-search a:link,tr #acquia-agent-no-search a:visited{color:#21759B;}
 a:active,a.active,.block a:active,.block a.active{color:#222;}
 a img,.page-block #content-top .block-region,.page-block #content-aside .block-region,.page-block #content-bottom .block-region{border:none;}
-#skip-nav a:hover,#skip-nav a:focus,#site-name a:link,#site-name a:visited{color:#FFF;}
+#skip-nav a:hover,#skip-nav a:focus,#site-name a:link,#site-name a:visited{color:#B2B2B2;}
 #search-theme-form,.fieldset-block-info dl,.at-admin-block-edit-links ul,.admin-panel .item-list ul,.page-admin-by-module .admin-panel .body,div.form-item div.description img{margin:0;}
 h1#page-title,.node-form #edit-title,input.title{font-size:1.5em;}
 .item-list ul.pager li a:link,.item-list ul.pager li a:visited{color:#444;}
@@ -184,5 +184,5 @@ ul.menu li a,.form-item strong.error{display:block;}
 .admin .compact-link a:hover{background:#F7F7F7;border:1px solid #464646;color:#222;}
 tbody,tfoot,thead,tr,label,legend{margin:0;padding:0;}
 .block-at-admin h2 span {float:right;width:16px;height:16px;}
-.block-at-admin h2 a.toggle-block {background: url(core-images/up-down.png) no-repeat center center;text-indent:-999em;overflow: hidden;display:block;}
+
 span.tabledrag-changed{display:none;}
