@@ -1,0 +1,68 @@
+/* $Id$ */
+/* adaptivethemes.com */
+
+/**
+ * @file stater.css
+ * Default styles for getting started. Unset this in the info file 
+ * if you want a style-free starter theme.
+ */
+body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;margin-bottom:0;}
+a{margin:0;padding:0;}
+a:active,
+a:focus{border:0;color:#C00000;}
+a img{border:none;}
+#content-aside{background:#FFF;}
+#skip-nav{text-align:right;}
+#branding{float:left;width:300px;}
+#search-box{float:right;width:300px;}
+#header-blocks{float:left;width:320px;}
+#branding h1{font-size:1em;}
+.logo-site-name span{display:block;}
+#site-name{font-size:2em;font-weight:700;line-height:1.5;}
+#search-theme-form{margin:1.5em 0;}
+.primary-links{background:#555;font-weight:700;height:2em;margin:0;padding:0;}
+.primary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
+.primary-links li a{color:#FFF;display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
+.primary-links li a:hover{background:#181818;}
+.secondary-links{background:#FFF;font-weight:700;height:2em;margin:0;padding:0;}
+.secondary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
+.secondary-links li a{color:#242424;display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
+.secondary-links li a:hover{background:#CCC;}
+#breadcrumb{padding:0 0 .75em;}
+#mission{font-weight:700;margin:.3em 0 1.5em;}
+#content-aside{float:right;padding-left:10px;width:240px;}
+ul.menu,
+ul.menu ul,
+ul.menu ul ul,
+ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
+ul.menu li{padding:.35em 0 0;}
+.item-list ul li{padding:.35em 0 0;}
+.block .item-list ul{margin:0;}
+#block-user-3 .item-list h3{font-size:1em;}
+#block-locale-0 ul{margin:0 0 0 1.5em;padding:0;}
+#block-locale-0 ul li{padding:.35em 0 0;}
+.comment{margin:0 0 1.5em;}
+.comment-title .new{color:#FF8000;}
+.comment-title a:link,
+.comment-title a:visited,
+.comment-title a:active{text-decoration:none;}
+.comment-title a:hover,
+.comment-title a:focus{text-decoration:underline;}
+.comment-links ul.links{display:block;padding:0 1em 0 0;text-align:right;}
+.node{margin:0 0 1.5em;}
+.node-title a:link,
+.node-title a:visited,
+.node-title a:active{text-decoration:none;}
+.node-title a:hover,
+.node-title a:focus{text-decoration:underline;}
+.node ul.links li{padding:0 1em 0 0;}
+.node-links{margin:0;}
+.node-links ul.links li{margin:0;padding:0;}
+.node-terms li.vocab{list-style:none;}
+.node-terms li span.vocab-name{font-weight:700;}
+.node-terms ul.taxonomy{margin:0;}
+.node-terms ul.taxonomy li.vocab-term{display:inline;list-style:none;}
+.item-list ul.pager li{margin:0;}
+.feed-icon img{padding:0 10px;}
+#block-node-0 .feed-icon img{padding:10px 0;}
+#menu-region .superfish-menu-hide-title{height:0;overflow:hidden;position:absolute;}
