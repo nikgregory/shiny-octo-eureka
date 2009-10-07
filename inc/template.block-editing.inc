@@ -25,7 +25,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
       $edit_links[] = l(t('Edit Block'), 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
         array(
           'attributes' => array(
-            'class' => 'block-edit',
+            'class' => 'block-edit-link',
             'title' => t('Edit this block'),
           ),
           'query' => drupal_get_destination(),
@@ -38,7 +38,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
       $edit_links[] = l(t('Configure'), 'admin/build/block/configure/'. $block->module .'/'. $block->delta,
         array(
           'attributes' => array(
-            'class' => 'block-edit',
+            'class' => 'block-edit-link',
             'title' => t('Configure this block'),
           ),
           'query' => drupal_get_destination(),
@@ -52,7 +52,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
       $edit_links[] = l( t('Edit Menu'), 'admin/build/menu-customize/'. $menu_name, 
         array(
           'attributes' => array(
-            'class' => 'block-edit',
+            'class' => 'block-edit-link',
             'title' => t('Edit this menu'),
           ),
           'query' => drupal_get_destination(),
@@ -62,5 +62,6 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
     }
   // Theme links as an item list.
   $vars['edit_links_array'] = $edit_links;
-  $vars['edit_links'] = '<div class="block-edit">'. theme('item_list', $edit_links) .'</div>';
+  $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list',));
+  $vars['edit_links'] = '<div class="block-edit">'. strip_tags($items, '<ul><li><a>') .'</div>';
 }
