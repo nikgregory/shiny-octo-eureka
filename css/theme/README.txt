@@ -1,11 +1,11 @@
 
-  Here place your themes custom stylesheet (call it theme.css).
-
-  It MUST be named theme.css and for AdaptiveThemes.com themes 
-  it must include the license text.
-
-  You can download a sample theme.css file with the license text included:
-  http://adaptivethemes.com/documentation/base-theme
+  This directory contains the CSS files you will be editing
+  for your theme.
   
-  If you need to add any other stylesheets to this directory each file must
-  include the license text!
+  theme.css - this is the file to use to build your theme. It contains many empty
+  CSS selectors that show up in Firebug and make prototyping styles very easy.
+  
+  starter.css - this file includes some basic styles, you should unset this
+  if you think its getting in the way of theming, its just an example.
+  
+  starter-rtl.css - same with above, but gives RTL support to the example styles.

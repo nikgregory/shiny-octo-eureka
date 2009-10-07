@@ -5,7 +5,7 @@
  ; Change the name to match your new themes name. Modify the optional description.
 
   name         = AdaptiveTheme
-  description  = A starter theme for Drupal Rockstars
+  description  = A starter theme for Drupal Rockstars by <b><a href="http://adaptivethemes.com">AdaptiveThemes</a></b>. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help or wish to post a bug report please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
 
   core         = 6.x
   engine       = phptemplate
@@ -14,22 +14,24 @@
 
 ;----------// Modular Stylesheets
 
-  ; Core styles
+  ; Core CSS
   stylesheets[all][] = css/core/base.css
   stylesheets[all][] = css/core/layout.css
   
-  ; Unset if you don't need this - provides basic starter styles only.
-  stylesheets[all][] = css/core/starter.css
-  
-  ; Uncomment if using Gpanels, if using 960 fixed width layout use the gpanels 960 CSS.
+  ; Uncomment if using Gpanels. There are two: 960 Grids based and Fluid - you will need 
+  ; to decide which you want or need to use. Generally if the page width is changeing 
+  ; or you have enabled the advacned layout settings it might be easier to use the 
+  ; fluid width CSS.
   ;stylesheets[all][] = css/core/gpanels-960-fixed.css
   ;stylesheets[all][] = css/core/gpanels-fluid.css
 	
   ; Uncomment for Dark Themes
   ;stylesheets[all][] = css/core/dark.css
-  
-  ; Uncomment for Development (good for firebugging)
-  ;stylesheets[all][] = css/core/dev.css
+
+
+  ; Theme CSS
+  ; Unset if you don't need this - provides basic starter styles only.
+  stylesheets[all][] = css/theme/starter.css
 	
   ; Custom stylesheet - don't rename or move this file
   stylesheets[all][] = css/theme/theme.css
