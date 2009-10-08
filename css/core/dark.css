@@ -7,6 +7,17 @@
  * support dark themes for Drupal.
  */
 
+body{background:#292929;color:#FFF;font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;}
+a{margin:0;padding:0;}
+a:hover{color:#FF0;}
+a:focus{color:#FF0;border:0;}
+li a.active{color:#FF0;text-decoration:underline;}
+a img{border:none;}
+.invisible{height:0;overflow:hidden;}
+.offscreen{position:absolute;left:-999em;top:auto;width:1px;height:1px;overflow:hidden;}
+.remove{display:none;}
+a:link,a:visited{color:#027AC6;}
+
 thead th{border-color:#444;color:#CCC;}
 tbody{border-top:1px solid #000;}
 tr.even,tr.odd,tbody th{border-color:#333;}

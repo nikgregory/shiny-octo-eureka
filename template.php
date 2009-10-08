@@ -141,8 +141,6 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
 if (theme_get_setting('at_admin_theme')) {
   if (arg(2) == 'block') {
     drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
-    $path_to_core = path_to_theme() .'/js/core/';
-    drupal_add_js($path_to_core .'admin.collapseblock.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
 }
 
