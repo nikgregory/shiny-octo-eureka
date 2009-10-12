@@ -79,6 +79,7 @@ $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
 $delimiter = theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type);
+$heading_level = $vars['page'] ? 'h2' : 'h3';
 if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page']))) {
   $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
   $output = '';
@@ -87,7 +88,7 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
     if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
       $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
       if ($terms) {
-        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><h2 class="vocab-name">'. $vocabulary->name .':</h2> <ul class="vocab-list">' : '';
+        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .':</'. $heading_level .'> <ul class="vocab-list">' : '';
         $links = array();
         $term_index = 0 ;
         foreach ($terms as $term) {
