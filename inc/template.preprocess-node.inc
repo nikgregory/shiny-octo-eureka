@@ -90,15 +90,15 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
       if ($terms) {
         $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .':</'. $heading_level .'> <ul class="vocab-list">' : '';
         $links = array();
-        $term_index = 0 ;
+        $term_index = 0;
         foreach ($terms as $term) {
           $term_index++;
           $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter ;
           $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
         }
         if ($taxonomy_format == 'list') {
-          $output .= $vocab_delimiter;    // Add comma between vocabularies
-          $vocab_delimiter = $delimiter;        // Use a comma delimiter after first displayed vocabulary
+          $output .= $vocab_delimiter;
+          $vocab_delimiter = $delimiter;
         }
         $output .= implode("", $links);
         $output .= ($taxonomy_format == 'vocab') ? '</ul></li>' : '';
