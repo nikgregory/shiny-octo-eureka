@@ -77,6 +77,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'mission_statement_pages'               => 'home',
     'taxonomy_display_default'              => 'only',
     'taxonomy_format_default'               => 'vocab',
+    'taxonomy_delimiter_default'            => ', ',
     'taxonomy_enable_content_type'          => 0,
     'submitted_by_author_default'           => 1,
     'submitted_by_date_default'             => 1,
@@ -115,6 +116,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
   foreach ($node_types as $type => $name) {
     $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
     $defaults["taxonomy_format_{$type}"]          = $defaults['taxonomy_format_default'];
+    $defaults["taxonomy_delimiter_{$type}"]       = $defaults['taxonomy_delimiter_default'];
     $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
     $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
   }
