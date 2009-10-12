@@ -93,7 +93,7 @@
 
 /* Containers and helpers. */
 #container{overflow:hidden;position:relative;margin:0 auto;width:960px;}
-#columns{display:inline-block;}
+#columns{display:inline-block;width:100%;}
 #container > #columns{display:block;}
 #content-column,#sidebar-first,#sidebar-last{float:left;}
 #content-column{width:100%;}

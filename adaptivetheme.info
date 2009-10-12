@@ -28,7 +28,6 @@
   ; Uncomment for Dark Themes
   ;stylesheets[all][] = css/core/dark.css
 
-
   ; Theme CSS
   ; Unset if you don't need this - provides basic starter styles only.
   stylesheets[all][] = css/theme/starter.css
@@ -199,6 +198,8 @@
   ; Content alignment
   skinr[at-align-content][title] = Content alignment
   skinr[at-align-content][type] = select
+  skinr[at-menu][features][] = block
+  skinr[at-menu][features][] = panel-pane
   skinr[at-align-content][options][1][label] = Center content within its container
   skinr[at-align-content][options][1][class] = at-center-content
   skinr[at-align-content][options][2][label] = Align content to the right within its container
@@ -234,5 +235,3 @@
   features[] = favicon
   features[] = primary_links
   features[] = secondary_links
-
-
