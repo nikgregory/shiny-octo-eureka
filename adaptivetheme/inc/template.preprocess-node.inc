@@ -78,6 +78,8 @@ if (!function_exists('submitted_by_node_submitted')) {
 $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
+$delimiter = theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type);
+$heading_level = $vars['page'] ? 'h2' : 'h3';
 if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page']))) {
   $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
   $output = '';
@@ -86,16 +88,19 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
     if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
       $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
       if ($terms) {
-        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><span class="vocab-name">'. $vocabulary->name .':</span> <ul class="vocab-list">' : '';
+        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .':</'. $heading_level .'> <ul class="vocab-list">' : '';
         $links = array();
-        foreach ($terms as $term) {        
-          $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) .'</li>';        
+        $term_index = 0;
+        foreach ($terms as $term) {
+          $term_index++;
+          $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter ;
+          $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
         }
         if ($taxonomy_format == 'list') {
-          $output .= $vocab_delimiter;    // Add comma between vocabularies
-          $vocab_delimiter = ', ';        // Use a comma delimiter after first displayed vocabulary
+          $output .= $vocab_delimiter;
+          $vocab_delimiter = $delimiter;
         }
-        $output .= implode(", ", $links);
+        $output .= implode("", $links);
         $output .= ($taxonomy_format == 'vocab') ? '</ul></li>' : '';
       }
     }
@@ -108,5 +113,3 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
 else {
   $vars['terms'] = '';
 }
-
- 

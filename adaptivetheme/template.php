@@ -78,6 +78,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'split_node_form'                       => 0,
     'taxonomy_display_default'              => 'only',
     'taxonomy_format_default'               => 'vocab',
+    'taxonomy_delimiter_default'            => ', ',
     'taxonomy_enable_content_type'          => 0,
     'submitted_by_author_default'           => 1,
     'submitted_by_date_default'             => 1,
@@ -177,7 +178,8 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
  * Override of theme_node_form().
  */
 function adaptivetheme_node_form($form) {
-    if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+  if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+    if (theme_get_setting('split_node_form') == 1) {
       $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
       $sidebar = drupal_render($form['taxonomy']);
       $main = drupal_render($form);
@@ -185,6 +187,14 @@ function adaptivetheme_node_form($form) {
         <div class='node-col-last'>{$buttons}{$sidebar}</div>
         <div class='node-col-first'><div class='main'>{$main}{$buttons}</div></div>
         </div>";
+    }
+    elseif (theme_get_setting('split_node_form') == 0) {
+      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+      $main = drupal_render($form);
+      return "<div class='node-form clear-block'>
+        <div class='main'>{$main}{$buttons}</div>
+        </div>";
+    }
   }
 }
 

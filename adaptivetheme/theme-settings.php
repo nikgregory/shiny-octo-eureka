@@ -53,10 +53,10 @@ SCRIPT;
     'search_info_comment'                   => 1,
     'search_info_upload'                    => 1,
     'mission_statement_pages'               => 'home',
-  
     'split_node_form'                       => 0,
     'taxonomy_display_default'              => 'only',
     'taxonomy_format_default'               => 'vocab',
+    'taxonomy_delimiter_default'            => ', ',
     'taxonomy_enable_content_type'          => 0,
     'submitted_by_author_default'           => 1,
     'submitted_by_date_default'             => 1,
@@ -91,6 +91,7 @@ SCRIPT;
   foreach ($node_types as $type => $name) {
     $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
     $defaults["taxonomy_format_{$type}"]          = $defaults['taxonomy_format_default'];
+    $defaults["taxonomy_delimiter_{$type}"]       = $defaults['taxonomy_delimiter_default'];
     $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
     $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
   }
@@ -326,6 +327,15 @@ SCRIPT;
                               'list' => t('Display all taxonomy terms together in single list'),
                             ),
       );
+      // Delimiter
+      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_delimiter_{$type}"] = array(
+        '#type'          => 'textfield',
+        '#title'         => t('Delimiter'),
+        '#description'   => t('Modify the delimiter. The default is a comma followed by a space.'),
+        '#default_value' => $settings['taxonomy_delimiter_default'],
+        '#size'          => 8,
+        '#maxlength'     => 10,
+      );
       // Get taxonomy vocabularies by node type
       $vocabs = array();
       $vocabs_by_type = ($type == 'default') ? taxonomy_get_vocabularies() : taxonomy_get_vocabularies($type);
@@ -543,7 +553,7 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Equal Height Blocks'),
     '#default_value' => $settings['equal_heights_blocks'],
-    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. This will not affect blocks in sidebars.'),
+    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. <b>This will not affect blocks in sidebars and does not work for blocks in Gpanels or Panels.</b>'),
   );
   if ($settings['horizontal_login_block_enable'] == 'on') {
     $form['layout']['login_block'] = array(

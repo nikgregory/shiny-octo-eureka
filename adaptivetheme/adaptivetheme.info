@@ -31,10 +31,10 @@
 
 
   ; Theme CSS
-  ; Unset if you don't need this - provides basic starter styles only.
-  stylesheets[all][] = css/theme/starter.css
+  ; Enable if required.
+  ; stylesheets[all][] = css/theme/starter.css
 	
-  ; Custom stylesheet - don't rename or move this file
+  ; Custom stylesheet - don't rename or move this file. Enable if required.
   stylesheets[all][] = css/theme/theme.css
 
 
@@ -150,6 +150,11 @@
   ;regions[six_col_fourth]   = 6col Gpanel col 4
   ;regions[six_col_fifth]    = 6col Gpanel col 5
   ;regions[six_col_sixth]    = 6col Gpanel col 6
+
+
+;----------// Panels
+
+  plugins[panels][layouts] = panels
 
 
 ;----------// Skinr Styles
