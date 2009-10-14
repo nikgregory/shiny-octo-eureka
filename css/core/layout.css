@@ -51,10 +51,7 @@
 .in-maintenance #page-title,
 .not-logged-in .local-tasks,
 .no-sidebars .local-tasks,
-.not-logged-in .messages,
-.no-sidebars .messages,
-.not-logged-in .help,
-.no-sidebars .help {padding:0 10px;}
+#messages-and-help {padding:0 10px;}
 
 /* Skinr grid classes. */
 .grid-1,

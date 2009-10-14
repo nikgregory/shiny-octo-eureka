@@ -170,7 +170,14 @@
         <?php print $breadcrumb; ?>
       </div></div> <!-- /breadcrumb -->
     <?php endif; ?>
-    
+
+    <?php if ($messages or $help): ?>
+      <div id="messages-and-help">
+        <?php if ($messages): print $messages; endif; ?>
+        <?php if ($help): print $help; endif; ?>
+      </div>
+    <?php endif; ?>
+  
     <?php if ($secondary_content): ?>
       <div id="secondary-content" class="section region"><div class="region-inner">
         <?php print $secondary_content; ?>
@@ -192,14 +199,14 @@
         <?php endif; ?>
         
         <div id="main-content">
-          <div id="main-content-header">
-            <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-            <?php if ($tabs): ?>
-              <div class="local-tasks"><?php print $tabs; ?></div>
-            <?php endif; ?>
-            <?php if ($messages): print $messages; endif; ?>
-            <?php if ($help): print $help; endif; ?>
-          </div>
+          <?php if ($title or $tabs): ?>
+            <div id="main-content-header">
+              <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
+              <?php if ($tabs): ?>
+                <div class="local-tasks"><?php print $tabs; ?></div>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
           <?php if ($content_aside): ?> 
             <div id="content-aside" class="section region"><div class="region-inner">
               <?php print $content_aside; ?>
