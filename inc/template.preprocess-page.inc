@@ -153,12 +153,12 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $right_margin   = $right_width;
     $push_right     = $left_width;
     $styles = array();
-    $styles[] = ".two-sidebars .content-inner{margin:0 0 0 $content_margin\px;}";
-    $styles[] = ".sidebar-left .content-inner{margin-left:$left_margin\px;margin-right:0;}";
-    $styles[] = ".sidebar-right .content-inner{margin-left:$right_margin\px;margin-right:0;}";
-    $styles[] = "#sidebar-first{width:$left_width\px; margin-left: -100%;}";
-    $styles[] = "#sidebar-last{width:$right_width\px; margin-left: -100%;}";
-    $styles[] = ".two-sidebars #sidebar-last {width:$right_width\px; position: relative; left:$push_right\px;}";
+$styles[] = '.two-sidebars .content-inner{margin:0 0 0'. $content_margin . 'px;}';
+    $styles[] = '.sidebar-left .content-inner{margin-left:'. $left_margin .'px;margin-right:0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-left:'. $right_margin .'px;margin-right:0;}';
+    $styles[] = '#sidebar-first{width:'. $left_width .'px; margin-left: -100%;}';
+    $styles[] = '#sidebar-last{width:'. $right_width .'px; margin-left: -100%;}';
+    $styles[] = '.two-sidebars #sidebar-last {width:'. $right_width .'px; position: relative; left:'. $push_right .'px;}';
   }
   $vars['at_layout'] = implode('', $styles);
   if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {

@@ -739,9 +739,6 @@ ul.links li.print_pdf a {}
 /* Filefield field. */
 .field-type-filefield {}
 
-/* Imagefield field. */
-.field-type-image {}
-
 /* Node reference field. */
 .field-type-nodereference {}
 
