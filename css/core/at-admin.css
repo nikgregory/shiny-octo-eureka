@@ -12,7 +12,6 @@ body.section-admin,#at-admin{background:#FFF;color:#222;font-family:"Lucida Gran
 #sidebar-first{margin-left:-100%;width:240px;}
 #sidebar-last{margin-left:-240px;width:240px;}
 #sidebar-last .block,#sidebar-first .block {padding:10px 10px 0;}
-#breadcrumb,#secondary-content,#columns,#tertiary-content,#footer-wrapper{margin-left:20px;margin-right:20px;}
 #content .region-inner{padding:0 10px;}
 a{margin:0;padding:0;text-decoration:none;}
 a:hover{background:transparent;color:#555;}

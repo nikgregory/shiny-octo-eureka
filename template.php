@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com
+// adaptivethemes.com 61
 
 /**
  * @file template.php
@@ -75,6 +75,7 @@ if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting(
     'search_info_comment'                   => 1,
     'search_info_upload'                    => 1,
     'mission_statement_pages'               => 'home',
+    'split_node_form'                       => 0,
     'taxonomy_display_default'              => 'only',
     'taxonomy_format_default'               => 'vocab',
     'taxonomy_delimiter_default'            => ', ',

@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com
+// adaptivethemes.com 61
 
 /**
  * @file theme-settings.php
@@ -53,6 +53,7 @@ SCRIPT;
     'search_info_comment'                   => 1,
     'search_info_upload'                    => 1,
     'mission_statement_pages'               => 'home',
+    'split_node_form'                       => 0,
     'taxonomy_display_default'              => 'only',
     'taxonomy_format_default'               => 'vocab',
     'taxonomy_delimiter_default'            => ', ',
@@ -229,6 +230,19 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
+  );
+  //'split_node_form
+  $form['node_type_specific']['split_node_container'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Custom Node Form'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['node_type_specific']['split_node_container']['split_node_form'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use the custom node form layout'),
+  '#description' => t('This will place additional node Save, Preview and Delete links and the taxonomy term fieldsets in a new column on the node edit form.'),
+    '#default_value' => $settings['split_node_form'],
   );
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(
