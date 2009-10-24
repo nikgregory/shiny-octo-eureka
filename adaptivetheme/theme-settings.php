@@ -1,9 +1,11 @@
 <?php // $Id$
-// adaptivethemes.com
+// adaptivethemes.com 62
 
 /**
  * @file theme-settings.php
  */
+
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc');
 
 /**
 * Implementation of themehook_settings() function.
@@ -13,8 +15,10 @@
 * @return
 *   A form array.
 */
-function phptemplate_settings($saved_settings) {
+function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
 
+  global $theme_info; 
+  
   // Only open one of the general or node setting fieldsets at a time
   $js = <<<SCRIPT
     $(document).ready(function(){
@@ -34,58 +38,19 @@ SCRIPT;
 
   // Get the node types
   $node_types = node_get_types('names');
- 
-  /**
-   * The default values for the theme variables. Make sure $defaults exactly
-   * matches the $defaults in the template.php file.
-   */
-  $defaults = array(
-    'user_notverified_display'              => 1,
-    'breadcrumb_display'                    => 'yes',
-    'breadcrumb_separator'                  => ' &#187; ',
-    'breadcrumb_home'                       => 0,
-    'breadcrumb_trailing'                   => 0,
-    'breadcrumb_title'                      => 0,
-    'search_snippet'                        => 1,
-    'search_info_type'                      => 1,
-    'search_info_user'                      => 1,
-    'search_info_date'                      => 1,
-    'search_info_comment'                   => 1,
-    'search_info_upload'                    => 1,
-    'mission_statement_pages'               => 'home',
-    'split_node_form'                       => 0,
-    'taxonomy_display_default'              => 'only',
-    'taxonomy_format_default'               => 'vocab',
-    'taxonomy_delimiter_default'            => ', ',
-    'taxonomy_enable_content_type'          => 0,
-    'submitted_by_author_default'           => 1,
-    'submitted_by_date_default'             => 1,
-    'submitted_by_enable_content_type'      => 0,
-    'rebuild_registry'                      => 0,
-    'load_firebug_lite'                     => 0,
-    'admin_user_links'                      => 1,
-    'block_edit_links'                      => 1,
-    'at_admin_hide_help'                    => 0,
-    'layout_method'                         => '0',
-    'layout_width'                          => '960px',
-    'layout_sidebar_first_width'            => '240',
-    'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_sidebars'                => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_method'                  => 'off', // set to 'on' to enable, 'off' to disable
-    'equal_heights_sidebars'                => 0,
-    'equal_heights_blocks'                  => 0,
-    'horizontal_login_block'                => 0,
-    'horizontal_login_block_overlabel'      => 0,
-    'horizontal_login_block_enable'         => 'off', // set to 'on' to enable, 'off' to disable
-    'color_schemes'                         => 'colors-default.css',
-    'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
-  );
+
+  // Get the default values from the .info file.
+  $defaults = adaptivetheme_theme_get_default_settings('adaptivetheme');
+
+  // Allow a subtheme to override the default values.
+  $defaults = array_merge($defaults, $subtheme_defaults);
+
+  // Merge the saved variables and their default values.
+  //$settings = array_merge($defaults, $saved_settings);
   
   // Make the default content-type settings the same as the default theme settings,
   // so we can tell if content-type-specific settings have been altered.
-  $defaults = array_merge($defaults, theme_get_settings());
+  //$defaults = array_merge($defaults, theme_get_settings());
   
   // Set the default values for content-type-specific settings
   foreach ($node_types as $type => $name) {
@@ -95,12 +60,11 @@ SCRIPT;
     $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
     $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
   }
-    
+
   // Merge the saved variables and their default values
   $settings = array_merge($defaults, $saved_settings);
 
   // Create theme settings form widgets using Forms API
-
   // General Settings
   $form['general_settings'] = array(
     '#type' => 'fieldset',
@@ -221,27 +185,25 @@ SCRIPT;
   // Node Settings
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Node settings'),
+    '#title' => t('Content type settings'),
     '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the "Use content-type specific settings" box to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
-  );
-  
+  );  
   //'split_node_form
   $form['node_type_specific']['split_node_container'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Custom Node Form'),
+    '#title' => t('Customized Content Entry Form'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   $form['node_type_specific']['split_node_container']['split_node_form'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Use the custom node form layout'),
-  '#description' => t('This will place additional node Save, Preview and Delete links and the taxonomy term fieldsets in a new column on the node edit form.'),
+    '#title' => t('Use the custom content entryt form layout'),
+  '#description' => t('This will place additional Save, Preview and Delete links and the taxonomy term fieldsets in a new column on the content entry edit form.'),
     '#default_value' => $settings['split_node_form'],
   );
-
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
@@ -394,7 +356,7 @@ SCRIPT;
   );
   $form['admin_settings']['administration']['admin_user_links'] = array(
     '#type'  => 'checkbox',
-    '#title' => t('Show the built in Admin user menu.'),
+    '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['admin_user_links'],
     '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),  
   );
@@ -418,7 +380,7 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   if ($settings['layout_enable_settings'] == 'on') {
-    $image_path = path_to_theme() .'/css/core/core-images';
+    $image_path = drupal_get_path('theme', 'adaptivetheme') . '/css/core/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Page Layout'),
@@ -523,9 +485,9 @@ SCRIPT;
         '#suffix'       => '</div>',
         '#default_value' => $settings['layout_method'],      
         '#options' => array(
-          '0' => t('<strong>Layout #1</strong>') . theme("image", $image_path ."/layout-default.png") . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
-          '1' => t('<strong>Layout #2</strong>') . theme("image", $image_path ."/layout-sidebars-right.png") . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
-          '2' => t('<strong>Layout #3</strong>') . theme("image", $image_path ."/layout-sidebars-left.png") . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
+          '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
+          '1' => t('<strong>Layout #2</strong>') . theme('image', $image_path .'/layout-sidebars-right.png') . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
+          '2' => t('<strong>Layout #3</strong>') . theme('image', $image_path .'/layout-sidebars-left.png') . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
         ),
        '#attributes' => array('class' => 'layouts'), 
       );
@@ -575,28 +537,6 @@ SCRIPT;
       '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
-  // Color schemes
-  if ($settings['color_enable_schemes'] == 'on') {
-    $form['color'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Color settings'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#description'   => t('Use these settings to customize the colors of your site. If no stylesheet is selected the default colors will apply.'),
-    );
-    $form['color']['color_schemes'] = array(
-      '#type' => 'select',
-      '#title' => t('Color Schemes'),
-      '#default_value' => $settings['color_schemes'],
-      '#options' => array(
-        'colors-default.css' => t('Default color scheme'),
-        //'colors-example.css' => t('Example color scheme'), // add aditional stylesheets here, they must be in css/theme and match name perfectly!
-      ),
-    );
-    $form['color']['color_enable_schemes'] = array(
-      '#type'    => 'hidden',
-      '#value'   => $settings['color_enable_schemes'],
-    ); 
-  } // endif color schemes
+
   return $form;
 }

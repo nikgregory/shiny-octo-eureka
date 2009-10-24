@@ -13,14 +13,14 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-global $theme, $user;
+global $theme, $theme_info, $user;
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
   $vars['help'] = '';
 }
   
-// Remove sidebars if disabled e.g., for Panels
+// Remove sidebars if disabled e.g., for Panels.
 if (!$vars['show_blocks']) {
   $vars['left'] = '';
   $vars['right'] = '';
@@ -29,9 +29,10 @@ if (!$vars['show_blocks']) {
 // Set variables for the logo and site_name.
 if (!empty($vars['logo'])) {
   // Return the site_name even when site_name is disabled in theme settings.
-  $vars['logo_alt_text'] = variable_get('site_name', '');
-  $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .' '. t('logo') .'" /></a>';
+  $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
+  $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .'" /></a>';
 }
+
 if (!empty($vars['site_name'])) {
   $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
 }
@@ -68,11 +69,11 @@ if ($class = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-]+!s', 
  * Uncomment the following if you need to set a body class for each active region.
  */
 /*        
-if (!empty($vars['leaderboard'])) {
-  $classes[] = 'leaderboard';
+if (!empty($vars['page_top'])) {
+  $classes[] = 'page-top';
 }
 if (!empty($vars['header'])) {
-  $classes[] = 'header-blocks';
+  $classes[] = 'header-region';
 }
 if (!empty($vars['content_aside'])) {
   $classes[] = 'content-aside';
@@ -101,22 +102,23 @@ if (!$vars['is_front']) {
   }
   if (arg(0) == 'node') {
     if (arg(1) == 'add') {
-      $classes[] = 'page-node-add'; // Add .node-add class.
+      $classes[] = 'page-article-add'; // Add .node-add class.
     }
     elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
-      $classes[] = 'page-node-'. arg(2); // Add .node-edit or .node-delete classes.
+      $classes[] = 'page-article-'. arg(2); // Add .article-edit or .article-delete classes.
     }
   }
 }
-$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+$classes_string = implode(' ', $classes); 
+$vars['classes'] = str_replace('node', 'article', $classes_string);
 
 // THEME SETTINGS
-// Display mission statement on all pages
+// Display mission statement on all pages.
 if (theme_get_setting('mission_statement_pages') == 'all') {
   $vars['mission'] = theme_get_setting('mission', FALSE);  
 }
 
-// Layout settings - set the page width and layout method
+// Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');
@@ -153,12 +155,12 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $right_margin   = $right_width;
     $push_right     = $left_width;
     $styles = array();
-    $styles[] = ".two-sidebars .content-inner{margin:0 0 0 $content_margin\px;}";
-    $styles[] = ".sidebar-left .content-inner{margin-left:$left_margin\px;margin-right:0;}";
-    $styles[] = ".sidebar-right .content-inner{margin-left:$right_margin\px;margin-right:0;}";
-    $styles[] = "#sidebar-first{width:$left_width\px; margin-left: -100%;}";
-    $styles[] = "#sidebar-last{width:$right_width\px; margin-left: -100%;}";
-    $styles[] = ".two-sidebars #sidebar-last {width:$right_width\px; position: relative; left:$push_right\px;}";
+    $styles[] = '.two-sidebars .content-inner{margin:0 0 0 '. $content_margin . 'px;}';
+    $styles[] = '.sidebar-left .content-inner{margin-left:'. $left_margin .'px;margin-right:0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-left:'. $right_margin .'px;margin-right:0;}';
+    $styles[] = '#sidebar-first{width:'. $left_width .'px; margin-left: -100%;}';
+    $styles[] = '#sidebar-last{width:'. $right_width .'px; margin-left: -100%;}';
+    $styles[] = '.two-sidebars #sidebar-last {width:'. $right_width .'px; position: relative; left:'. $push_right .'px;}';
   }
   $vars['at_layout'] = implode('', $styles);
   if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
@@ -169,12 +171,12 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
   }
 }
 
-// Check whether help is disabled
+// Check whether help is disabled.
 if (theme_get_setting('at_admin_hide_help')) {
   unset($vars['help']);
 }
 
-// Admin user links
+// Admin user links.
 if (theme_get_setting('admin_user_links')) {
   if (!function_exists(admin_menu_perm)) {
     $admin_user_links[] = l(t('Create content'), 'node/add');
@@ -190,4 +192,80 @@ if (theme_get_setting('admin_user_links')) {
   }
   $vars['admin_user_menu'] = $admin_user_links;
   $vars['admin_user_links'] = theme('item_list', $admin_user_links);
+}
+
+/**
+ * From Studio 6.x-2.x
+ * Check for stylesheets to be placed at the top of the stack or conditional
+ * Internet Explorer styles in the .info file and add them to the $styles
+ * variable.
+ */
+$top_styles = array();
+$ie_styles = array();
+
+/**
+ * If there is more than one active theme, check all base themes for
+ * stylesheets.
+ */
+if (count($themes_active) > 1) {
+  foreach ($base_theme_info as $name => $info) {
+    if (isset($info->info['top stylesheets'])) {
+      $top_styles[$name] = $info->info['top stylesheets'];
+    }
+    if (isset($info->info['ie stylesheets'])) {
+      $ie_styles[$name] = $info->info['ie stylesheets'];
+    }
+  }
+}
+
+/**
+ * Check the current theme for stylesheets.
+ */
+if (isset($theme_info->info['top stylesheets'])) {
+  $top_styles[$theme_info->name] = $theme_info->info['top stylesheets'];
+}
+if (isset($theme_info->info['ie stylesheets'])) {
+  $ie_styles[$theme_info->name] = $theme_info->info['ie stylesheets'];
+}
+
+/**
+ * If there is at least one entry in the $top_styles array, process it.
+ */
+if (count($top_styles) >= 1) {
+  // Format the array into a format readable by drupal_get_css().
+  $vars['top_css'] = array();
+  foreach ($top_styles as $name => $theme_styles) {
+    $path = drupal_get_path('theme', $name);
+    foreach ($theme_styles as $media => $styles) {
+      foreach ($styles as $style){
+        $vars['top_css'][$media]['featured'][$path . '/' . $style] = TRUE;
+      }
+      // Add the new styles to the top of the $vars['css'] array.
+      array_unshift($vars['css'][$media], $vars['top_css'][$media]['featured']);
+    }
+  }
+  // Run $vars['css'] through drupal_get_css and replace the $styles variable.
+  $vars['styles'] = drupal_get_css($vars['css']);
+}
+
+/**
+ * If there is at least one entry in the $ie_styles array, process it.
+ */
+if (count($ie_styles) >= 1) {
+  // Format the array into a format readable by drupal_get_css().
+  $vars['ie_css'] = array();
+  foreach ($ie_styles as $name => $theme_styles) {
+    $path = drupal_get_path('theme', $name);
+    foreach ($theme_styles as $version => $media) {
+      foreach ($media as $type => $styles) {
+        foreach ($styles as $style) {
+          $vars['ie_css'][$version][$type]['theme'][$path . '/' . $style] = TRUE;
+        }
+      }
+    }
+  }
+  // Append the stylesheets to $styles, grouped by IE conditional.
+  foreach ($vars['ie_css'] as $version => $styles) {
+    $vars['styles'] .= '<!--[if ' . $version . ']>' . "\n" . drupal_get_css($styles) . '<![endif]-->' . "\n";
+  }
 }

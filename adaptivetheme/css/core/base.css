@@ -71,10 +71,10 @@ div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .form-item input.error,.form-item textarea.error,.form-item select.error{border:2px solid #C00000;}
 .form-item strong.error em{font-weight:bold;color:#E41F0B;font-size:1.2em;}
 .block-region{border:1px dotted #000;color:#000;font: 1.25em "Lucida Console",Monaco,"DejaVu Sans Mono",monospace;padding:3px 6px 1px;}
-.node-unpublished,.comment-unpublished{background-color:#FFF6DF;}
+.article-unpublished,.comment-unpublished{background-color:#FFF6DF;}
 .unpublished{visibility:hidden;}
 .indented {margin-left:60px;}
-.node-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
+.article-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
 .block{clear:both;margin:0 0 20px;position:relative;}
 ul,ol{margin:0 0 1.5em 1.667em;padding:0;}
@@ -104,7 +104,7 @@ div.form-item{margin-bottom:.833em;margin-top:.833em;}
 .form-item .description{font-size:.9em;line-height:1.667em;}
 span.form-required,span.marker{color:#8A1F11;}
 div.form-item div.description img{margin:0;}
-#node-admin-filter ul{padding:.375em 0;}
+#article-admin-filter ul{padding:.375em 0;}
 #edit-operation-wrapper select{margin:.375em;}
 div.resizable-textarea textarea{margin-top:0;}
 .tips{font-size:1em;margin-left:3em;padding:.1875em .375em .1875em 1.5em;}
@@ -137,7 +137,7 @@ div.admin .left,div.admin .right{margin-left:0;margin-right:0;width:49%;}
 .admin .compact-link{margin:0 0 1em;}
 .page-admin-by-module .admin-panel .body{margin:0;}
 .page-admin-by-module .admin-panel .body p{color:#555;font-size:.94em;}
-#user-admin-filter ul li,#node-admin-filter ul li{list-style:none;}
+#user-admin-filter ul li,#article-admin-filter ul li{list-style:none;}
 .more-help-link{font-size:.94em;line-height:1.667em;}
 #block-admin-display-form{clear:both;}
 #permissions td.permission{padding-left:.5em;}
@@ -215,9 +215,9 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .at-multicolumn-menu .block-content ul li.expanded ul{display:block;margin-left:0;width:160px;}
 .at-multicolumn-menu .block-content ul li.expanded ul li{border:none;display:block;}
 .at-multicolumn-menu .block-content ul.menu li ul.menu li{font-weight:normal;}
-/* node form classes */
-#node-form .node-col-last{float:right;margin-top:35px;width:30%;}
-#node-form .node-col-last .buttons #edit-submit,
-#node-form .node-col-last .buttons #edit-preview,
-#node-form .node-col-last .buttons #edit-delete{margin:2px 2px 2px 0;}
-#node-form .node-col-first{float:left;width:69%;}
+/* article form classes */
+#article-form .article-col-last{float:right;margin-top:35px;width:30%;}
+#article-form .article-col-last .buttons #edit-submit,
+#article-form .article-col-last .buttons #edit-preview,
+#article-form .article-col-last .buttons #edit-delete{margin:2px 2px 2px 0;}
+#article-form .article-col-first{float:left;width:69%;}

@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com
+// adaptivethemes.com 62
 
 /**
  * @file template.preprocess-node.inc
@@ -16,39 +16,41 @@
 global $user, $theme;
  
 // Set the node id.
-$vars['node_nid'] = 'node-'. $vars['node']->nid;
+$vars['article_id'] = 'article-'. $vars['node']->nid;
 
 // Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
 $classes = array();
-$classes[] = 'node';
+$classes[] = 'article';
 if ($vars['promote']) {
-  $classes[] = 'node-promoted';
+  $classes[] = 'article-promoted';
 }
 if ($vars['sticky']) {
-  $classes[] = 'node-sticky';
+  $classes[] = 'article-sticky';
 }
 if (!$vars['status']) {
-  $classes[] = 'node-unpublished';
+  $classes[] = 'article-unpublished';
 }
 if ($vars['teaser']) {
   // Node is displayed as teaser.
-  $classes[] = 'node-teaser';
+  $classes[] = 'article-teaser';
 }
 if (isset($vars['preview'])) {
-  $classes[] = 'node-preview';
+  $classes[] = 'article-preview';
 }
 // Add support for Skinr module classes http://drupal.org/project/skinr
 if (function_exists('node_skinr_data')) {
   $classes[] = $vars['skinr'];
 }
-// Class for node type: "node-type-page", "node-type-story", "node-type-my-custom-type", etc.
-$classes[] = 'node-'. $vars['node']->type;
+// Class for node type: "node-type-page", "node-type-my-custom-type", etc.
+$classes[] = 'article-'. $vars['node']->type;
+
+// $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
   
-// Add node_bottom region content.
-$vars['node_bottom'] = theme('blocks', 'node_bottom');
+// Add article_aside region content.
+$vars['article_aside'] = theme('blocks', 'article_aside');
 
-// Set messages if node is unpublished.
+// Set message if node is unpublished.
 if (!$vars['node']->status) {
   if ($vars['page']) {
     drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning'); 
@@ -58,10 +60,10 @@ if (!$vars['node']->status) {
   }
 }
   
-// Node Theme Settings
-// Date & author
+// Node Theme Settings.
+// Date & author theme settings.
 if (!function_exists('submitted_by_node_submitted')) {
-  $date = t('Posted ') . format_date($vars['node']->created, 'medium');                 // Format date as small, medium, or large
+  $date = t('Posted ') . format_date($vars['node']->created, 'medium');
   $author = theme('username', $vars['node']);
   $author_only_separator = t('Posted by ');
   $author_date_separator = t(' by ');
@@ -74,7 +76,7 @@ if (!function_exists('submitted_by_node_submitted')) {
   $vars['submitted'] = $date_author;
 }
 
-// Taxonomy
+// Taxonomy theme settings.
 $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
@@ -88,7 +90,7 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
     if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
       $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
       if ($terms) {
-        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .':</'. $heading_level .'> <ul class="vocab-list">' : '';
+        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="vocab-list">' : '';
         $links = array();
         $term_index = 0;
         foreach ($terms as $term) {

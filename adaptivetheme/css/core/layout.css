@@ -20,7 +20,7 @@
 #sidebar-last{width:240px;margin-left:-240px;}
 
 /* Add padding to align elements to the grid. */
-.node,
+.article,
 .block,
 .block-at-admin,
 .comment,
@@ -96,4 +96,4 @@
 #content-column,#sidebar-first,#sidebar-last{float:left;}
 #content-column{width:100%;}
 #main-content,div.block{position:relative;}
-.clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer-wrapper,#footer,#footer-message{clear:both;}
+.clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer,#footer-region,#footer-message{clear:both;}

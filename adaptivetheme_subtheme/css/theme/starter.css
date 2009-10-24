@@ -11,14 +11,13 @@ a{margin:0;padding:0;}
 a:active,
 a:focus{border:0;color:#C00000;}
 a img{border:none;}
-#content-aside{background:#FFF;}
 #skip-nav{text-align:right;float:right;width:160px;}
 #user-menu ul {margin:0;}
 #user-menu ul li {display:inline;float:left;margin:0 1em 0 0;padding:0;}
 #header{clear:both;}
 #branding{float:left;width:300px;}
 #search-box{float:right;width:300px;}
-#header-blocks{float:left;width:320px;}
+#header-region{float:left;width:320px;}
 #branding h1{font-size:1em;}
 .logo-site-name span{display:block;}
 #site-name{font-size:2em;font-weight:700;line-height:1.5;}
@@ -33,7 +32,7 @@ a img{border:none;}
 .secondary-links li a:hover{background:#CCC;}
 #breadcrumb{padding:0 0 .75em;}
 #mission{font-weight:700;margin:.3em 0 1.5em;}
-#content-aside{float:right;padding-left:10px;width:240px;}
+#content-aside{background:#FFF;float:right;padding-left:10px;width:240px;}
 ul.menu,
 ul.menu ul,
 ul.menu ul ul,
@@ -52,19 +51,20 @@ ul.menu li{padding:.35em 0 0;}
 .comment-title a:hover,
 .comment-title a:focus{text-decoration:underline;}
 .comment-links ul.links{display:block;padding:0 1em 0 0;text-align:right;}
-.node{margin:0 0 1.5em;}
-.node-title a:link,
-.node-title a:visited,
-.node-title a:active{text-decoration:none;}
-.node-title a:hover,
-.node-title a:focus{text-decoration:underline;}
-.node ul.links li{padding:0 1em 0 0;}
-.node-links{margin:0;}
-.node-links ul.links li{margin:0;padding:0;}
-.node-terms li.vocab{list-style:none;}
-.node-terms li span.vocab-name{font-weight:700;}
-.node-terms ul.taxonomy{margin:0;}
-.node-terms ul.taxonomy li.vocab-term{display:inline;list-style:none;}
+.article{margin:0 0 1.5em;}
+.article-title a:link,
+.article-title a:visited,
+.article-title a:active{text-decoration:none;}
+.article-title a:hover,
+.article-title a:focus{text-decoration:underline;}
+.article ul.links li{padding:0 1em 0 0;}
+.article-links{margin:0;}
+.article-links ul.links li{margin:0;padding:0;}
+.article-terms .vocab-name{font-size:1em;}
+.article-terms li.vocab{list-style:none;}
+.article-terms li span.vocab-name{font-weight:700;}
+.article-terms ul.taxonomy{margin:0;}
+.article-terms ul.taxonomy li.vocab-term{display:inline;list-style:none;}
 .item-list ul.pager li{margin:0;}
 .feed-icon img{padding:0 10px;}
 #block-node-0 .feed-icon img{padding:10px 0;}

@@ -28,21 +28,15 @@
  * @see template_preprocess_block()
  * @see genesis_preprocess_block()
  */
-
-/**
- * Block Edit Links
- * To disable block edit links remove or comment out the $edit_links variable 
- * then unset the block-edit.css in your subhtemes .info file.
- */
 ?>
 <div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
   <div class="block-inner">
 
     <?php if ($block->subject): ?>
-      <h2 class="block-title"><?php print $block->subject; ?></h2>
+      <h2 class="block-title title"><?php print $block->subject; ?></h2>
     <?php endif; ?>
 
-    <div class="content block-content"><?php print $block->content ?></div>
+    <div class="block-content content"><?php print $block->content ?></div>
 
     <?php print $edit_links; ?>
 

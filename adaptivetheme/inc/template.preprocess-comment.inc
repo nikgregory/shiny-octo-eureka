@@ -45,12 +45,12 @@ if (variable_get('comment_subject_field', 1) == 0) {
   $vars['title'] = '';
 }
   
-// Date & author
+// Date & author theme settings.
 $submitted_by = t('by ') .'<span class="comment-name">'.  theme('username', $vars['comment']) .'</span>';
 $submitted_by .= t(' - ') .'<span class="comment-date">'.  format_date($vars['comment']->timestamp, 'small') .'</span>';     // Format date as small, medium, or large
 $vars['submitted'] = $submitted_by;
 
-// Set messages if comment is unpublished.
+// Set messages if comments are unpublished.
 if ($vars['comment']->status == COMMENT_NOT_PUBLISHED) {
   drupal_set_message(t('Comment #!id !title is currently unpublished', array('!id' => $vars['id'], '!title' => $vars['title'])), 'warning');
   $vars['unpublished'] = '<span class="unpublished">'. t('Unpublished') .'</span>';

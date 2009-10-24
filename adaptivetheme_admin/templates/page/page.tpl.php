@@ -93,22 +93,18 @@
   <?php print $layout_settings; ?>
   <?php print $scripts; ?>
 </head>
-<?php //Note the body ID is #at-admim. This is to ensure the layout never gets borked. ?>
 <body id="at-admin" class="<?php print $section_class . $classes; ?>">
-  <div id="container">
 
     <div id="skip-nav"><a href="#main-content"><?php print t('Skip to main content'); ?></a></div>
     
     <?php // Add support for Admin module header, uncomment, http://drupal.org/project/admin. ?>
     <?php // if (!empty($admin)) print $admin; ?>
 
-    <?php if ($leaderboard): ?>
-      <div id="leaderboard" class="section region"><div class="region-inner">
-        <?php print $leaderboard; ?>
-      </div></div> <!-- /leaderboard -->
-    <?php endif; ?>
-
     <div id="header"><div class="header-inner clear-block">
+
+      <?php if ($primary_menu): ?>
+        <div id="primary"><div class="primary-inner"><?php print $primary_menu; ?></div></div>
+      <?php endif; ?>
 
       <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
         <div id="branding">
@@ -139,9 +135,9 @@
       <?php endif; ?>
 
       <?php if ($header): ?>
-        <div id="header-blocks" class="section region"><div class="region-inner">
+        <div id="header-region" class="section region"><div class="region-inner">
           <?php print $header; ?>
-        </div></div> <!-- /header-blocks -->
+        </div></div> <!-- /header-region -->
       <?php endif; ?>
       
       <?php if ($admin_welcome): ?>
@@ -154,24 +150,19 @@
 
     </div></div> <!-- /header -->
 
-    <?php if ($primary_menu or $secondary_menu): ?>
-      <div id="nav" class="clear-block">
-
-        <?php if ($primary_menu): ?>
-          <div id="primary"><div class="primary-inner"><?php print $primary_menu; ?></div></div>
-        <?php endif; ?>
-
-        <?php if ($secondary_menu): ?>
-          <div id="secondary"><div class="secondary-inner"><?php print $secondary_menu; ?></div></div>
-        <?php endif; ?>
-
-      </div> <!-- /nav -->
-    <?php endif; ?>
+  <div id="container">
 
     <?php if ($breadcrumb): ?>
       <div id="breadcrumb" class="nav"><?php print $breadcrumb; ?></div> <!-- /breadcrumb -->
     <?php endif; ?>
-    
+
+    <?php if ($messages or $help): ?>
+      <div id="messages-and-help">
+        <?php if ($messages): print $messages; endif; ?>
+        <?php if ($help): print $help; endif; ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($secondary_content): ?>
       <div id="secondary-content" class="section region"><div class="region-inner">
         <?php print $secondary_content; ?>
@@ -189,19 +180,14 @@
         <?php endif; ?>
         
         <div id="main-content">
-          <div id="main-content-header">
-            <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-            <?php if ($tabs): ?>
-              <div class="local-tasks"><?php print $tabs; ?></div>
-            <?php endif; ?>
-            <?php if ($messages): print $messages; endif; ?>
-            <?php if ($help): print $help; endif; ?>
-          </div>
-          <?php if ($content_aside): ?>
-            <div id="content-aside" class="section region"><div class="region-inner">
-            	<?php print $content_aside; ?>
-        	</div></div> <!-- /content-adide -->
-          <?php endif; ?> 
+          <?php if ($title or $tabs): ?>
+            <div id="main-content-header">
+              <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
+              <?php if ($tabs): ?>
+                <div class="local-tasks"><?php print $tabs; ?></div>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
           <div id="content" class="section region"><div class="region-inner">
             <?php print $content; ?>
           </div></div>							
@@ -235,26 +221,32 @@
       </div></div> <!-- /tertiary-content -->
     <?php endif; ?>
 
-    <?php if ($footer or $footer_message): ?>
-      <div id="footer-wrapper" class="clear-block">
+    <?php if ($footer or $footer_message or $feed_icons): ?>
+      <div id="footer" class="clear-block">
 
         <?php if ($footer): ?>
-          <div id="footer" class="section region"><div class="region-inner">
+          <div id="footer-region" class="section region"><div class="region-inner">
             <?php print $footer; ?>
-          </div></div> <!-- /footer -->
+          </div></div> <!-- /footer-region -->
         <?php endif; ?>
 
-        <?php if ($footer_message or $feed_icons): ?>
+        <?php if ($footer_message): ?>
           <div id="footer-message"><div class="footer-message-inner">
-          	<?php print $footer_message; ?><?php print $feed_icons; ?>
-      	</div></div> <!-- /footer-message/feed-icon -->
+            <?php print $footer_message; ?>
+          </div></div> <!-- /footer-message -->
         <?php endif; ?>
+        
+        <?php if ($feed_icons): ?>
+          <div id="feed-icons"><?php print $feed_icons; ?></div>
+        <?php endif; ?>
+        
+        <?php print $attribution; ?>
 
-      </div> <!-- /footer-wrapper -->
+      </div> <!-- /footer -->
     <?php endif; ?>
 
   </div> <!-- /container -->
-  <?php print $attribution; ?>
+  
   <?php print $closure ?>
 
 </body>

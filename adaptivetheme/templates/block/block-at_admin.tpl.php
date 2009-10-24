@@ -37,12 +37,12 @@
 ?>
 <div id="<?php print $block_module_delta; ?>" class="block-at-admin"><div class="block-at-admin-inner">
 
-    <div class="block-header">
-      <h2 class="block-title clear-block">
-      	<span><a href="#" class="toggle-block" id="<?php print $block->module .'-'. $block->delta;?>">Toggle</a></span>
-      	<?php print $block->subject ? $block->subject : t('No title set'); ?>
-  	  </h2>
-    </div>
+  <div class="block-header">
+    <h2 class="block-title clear-block">
+      <span><a href="#" class="toggle-block" id="<?php print $block->module .'-'. $block->delta;?>">Toggle</a></span>
+      <?php print $block->subject ? $block->subject : t('No title set'); ?>
+    </h2>
+  </div>
 
   <div class="block-at-admin-content content clear-block toggle-<?php print $block->module .'-'. $block->delta; ?>">
     <fieldset class="collapsible collapsed fieldset-block-info">

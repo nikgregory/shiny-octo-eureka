@@ -37,7 +37,7 @@
   <div class="comment-inner">
 
     <?php if ($title): ?>
-      <h3 class="comment-title">
+      <h3 class="comment-title title">
         <?php print $title; ?> 
         <?php if ($comment->new): ?>
           <span class="new"><?php print $new; ?></span>
@@ -49,10 +49,10 @@
     <?php print $picture; ?>
 
     <?php if ($submitted): ?>
-      <div class="comment-submitted"><?php print $submitted; ?></div>
+      <div class="comment-submitted author-date-time"><?php print $submitted; ?></div>
     <?php endif; ?>
 
-    <div class="comment-content">
+    <div class="comment-content content">
       <?php print $content; ?>
       <?php if ($signature): ?>
         <div class="user-signature clear-block"><?php print $signature; ?></div>

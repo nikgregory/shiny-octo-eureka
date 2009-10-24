@@ -1,9 +1,14 @@
 <?php // $Id$
-// adaptivethemes.com
+// adaptivethemes.com 62
 
 /**
  * @file template.php
  */
+
+// Auto-rebuild the theme registry during theme development.
+if (theme_get_setting('rebuild_registry')) {
+  drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
+}
 
 /**
  * Implementation of hook_theme
@@ -15,6 +20,7 @@ function adaptivetheme_theme() {
       'arguments' => array('form' => NULL, 'key' => 'adaptivetheme'),
     ),
   );
+  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-registry.inc');
 }
 
 /**
@@ -43,103 +49,11 @@ function adaptivetheme_preprocess(&$vars, $hook) {
  */
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 
-/**
- * Initialize theme settings
- */
-if (is_null(theme_get_setting('user_notverified_display')) || theme_get_setting('rebuild_registry')) {
-
-  // Auto-rebuild the theme registry during theme development.
-  if (theme_get_setting('rebuild_registry')) {
-    drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
-  }
-
-  global $theme_key;
-  // Get node types
-  $node_types = node_get_types('names');
-
-  /**
-   * The default values for the theme variables. Make sure $defaults exactly
-   * matches the $defaults in the theme-settings.php file.
-   */
-  $defaults = array(
-    'user_notverified_display'              => 1,
-    'breadcrumb_display'                    => 'yes',
-    'breadcrumb_separator'                  => ' &#187; ',
-    'breadcrumb_home'                       => 0,
-    'breadcrumb_trailing'                   => 0,
-    'breadcrumb_title'                      => 0,
-    'search_snippet'                        => 1,
-    'search_info_type'                      => 1,
-    'search_info_user'                      => 1,
-    'search_info_date'                      => 1,
-    'search_info_comment'                   => 1,
-    'search_info_upload'                    => 1,
-    'mission_statement_pages'               => 'home',
-    'split_node_form'                       => 0,
-    'taxonomy_display_default'              => 'only',
-    'taxonomy_format_default'               => 'vocab',
-    'taxonomy_delimiter_default'            => ', ',
-    'taxonomy_enable_content_type'          => 0,
-    'submitted_by_author_default'           => 1,
-    'submitted_by_date_default'             => 1,
-    'submitted_by_enable_content_type'      => 0,
-    'rebuild_registry'                      => 0,
-    'load_firebug_lite'                     => 0,
-    'admin_user_links'                      => 1,
-    'block_edit_links'                      => 1,
-    'at_admin_hide_help'                    => 0,
-    'layout_method'                         => '0',
-    'layout_width'                          => '960px',
-    'layout_sidebar_first_width'            => '240',
-    'layout_sidebar_last_width'             => '240',
-    'layout_enable_settings'                => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_width'                   => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_sidebars'                => 'off', // set to 'on' to enable, 'off' to disable
-    'layout_enable_method'                  => 'off', // set to 'on' to enable, 'off' to disable
-    'equal_heights_sidebars'                => 0,
-    'equal_heights_blocks'                  => 0,
-    'horizontal_login_block'                => 0,
-    'horizontal_login_block_overlabel'      => 0,
-    'horizontal_login_block_enable'         => 'off', // set to 'on' to enable, 'off' to disable
-    'color_schemes'                         => 'colors-default.css',
-    'color_enable_schemes'                  => 'off',  // set to 'on' to enable, 'off' to disable
-  );
-
-  // Make the default content-type settings the same as the default theme settings,
-  // so we can tell if content-type-specific settings have been altered.
-  $defaults = array_merge($defaults, theme_get_settings());
-
-  // Set the default values for content-type-specific settings
-  foreach ($node_types as $type => $name) {
-    $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
-    $defaults["taxonomy_format_{$type}"]          = $defaults['taxonomy_format_default'];
-    $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
-    $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
-  }
-
-  // Get default theme settings.
-  $settings = theme_get_settings($theme_key);
-
-  // Don't save the toggle_node_info_ variables
-  if (module_exists('node')) {
-    foreach (node_get_types() as $type => $name) {
-      unset($settings['toggle_node_info_'. $type]);
-    }
-  }
-  // Save default theme settings
-  variable_set(
-    str_replace('/', '_', 'theme_'. $theme_key .'_settings'),
-    array_merge($defaults, $settings)
-  );
-  // Force refresh of Drupal internals
-  theme_get_setting('', TRUE);
-}
-
 
 // Load equalizeheights.js
-if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
+
 if (theme_get_setting('equal_heights_sidebars') || theme_get_setting('equal_heights_blocks')) {
-  $path_to_core = path_to_theme() .'/js/core/';
+  $path_to_core = drupal_get_path('theme', 'adaptivetheme') .'/js/core/';
   drupal_add_js($path_to_core .'jquery.equalizeheights.js', 'theme', 'header', FALSE, TRUE, TRUE);
   if (theme_get_setting('equal_heights_sidebars')) {
      drupal_add_js($path_to_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE); 
@@ -147,7 +61,6 @@ if (theme_get_setting('equal_heights_sidebars') || theme_get_setting('equal_heig
   if (theme_get_setting('equal_heights_blocks')) {
     drupal_add_js($path_to_core .'equalize-blocks.js', 'theme', 'header', FALSE, TRUE, TRUE);
   }
-}
 }
 
 /** 
@@ -183,15 +96,15 @@ function adaptivetheme_node_form($form) {
       $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
       $sidebar = drupal_render($form['taxonomy']);
       $main = drupal_render($form);
-      return "<div class='node-form clear-block'>
-        <div class='node-col-last'>{$buttons}{$sidebar}</div>
-        <div class='node-col-first'><div class='main'>{$main}{$buttons}</div></div>
+      return "<div class='article-form clear-block'>
+        <div class='article-col-last'>{$buttons}{$sidebar}</div>
+        <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
         </div>";
     }
     elseif (theme_get_setting('split_node_form') == 0) {
       $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
       $main = drupal_render($form);
-      return "<div class='node-form clear-block'>
+      return "<div class='article-form clear-block'>
         <div class='main'>{$main}{$buttons}</div>
         </div>";
     }

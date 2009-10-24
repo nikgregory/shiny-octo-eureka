@@ -31,7 +31,7 @@
  * - $id: Position of the node. Increments each time it's output.
  *
  * Helper variables:
- * - $node_nid: Outputs a unique id for each node.
+ * - $article_id: Outputs a unique id for each article (node).
  * - $classes: Outputs dynamic classes for advanced themeing.
  *
  * Node status variables:
@@ -52,35 +52,35 @@
  * @see genesis_preprocess_node()
  */
 ?>
-<div id="<?php print $node_nid; ?>" class="<?php print $classes; ?>">
-  <div class="node-inner">
+<div id="<?php print $article_id; ?>" class="<?php print $classes; ?>">
+  <div class="article-inner">
 
     <?php if (!$page): ?>
-      <h2 class="node-title">
+      <h2 class="article-title title">
         <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
         <?php print $unpublished; ?>
       </h2>
     <?php endif; ?>
 
     <?php if ($submitted): ?>
-      <div class="node-submitted"><?php print $submitted; ?></div>
+      <div class="article-submitted author-date-time"><?php print $submitted; ?></div>
     <?php endif; ?>
 
     <?php print $picture; ?>
 
-    <div class="node-content"><?php print $content; ?></div>
+    <div class="article-content content"><?php print $content; ?></div>
 
     <?php if ($terms): ?>
-      <div class="node-terms"><?php print $terms; ?></div>
+      <div class="article-terms tags"><?php print $terms; ?></div>
     <?php endif; ?>
 
     <?php if ($links): ?>
-      <div class="node-links"><?php print $links; ?></div>
+      <div class="article-links"><?php print $links; ?></div>
     <?php endif; ?>
     
-    <?php if ($node_bottom && !$teaser): ?>
-      <div id="node-bottom">
-        <?php print $node_bottom; ?>
+    <?php if ($article_aside && !$teaser): ?>
+      <div id="article-aside" class="aside">
+        <?php print $article_aside; ?>
       </div>
     <?php endif; ?>
 

@@ -111,10 +111,10 @@
     <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
     <?php // if (!empty($admin)) print $admin; ?>
 
-    <?php if ($leaderboard): ?>
-      <div id="leaderboard" class="section region"><div class="region-inner">
-        <?php print $leaderboard; ?>
-      </div></div> <!-- /leaderboard -->
+    <?php if ($page_top): ?>
+      <div id="page-top" class="section region"><div class="region-inner">
+        <?php print $page_top; ?>
+      </div></div> <!-- /page top -->
     <?php endif; ?>
 
     <div id="header"><div class="header-inner clear-block">
@@ -148,9 +148,9 @@
       <?php endif; ?>
 
       <?php if ($header): ?>
-        <div id="header-blocks" class="section region"><div class="region-inner">
+        <div id="header-region" class="section region"><div class="region-inner">
           <?php print $header; ?>
-        </div></div> <!-- /header-blocks -->
+        </div></div> <!-- /header region -->
       <?php endif; ?>
 
     </div></div> <!-- /header -->
@@ -249,24 +249,28 @@
       </div></div> <!-- /tertiary-content -->
     <?php endif; ?>
 
-    <?php if ($footer or $footer_message): ?>
-      <div id="footer-wrapper" class="clear-block">
+    <?php if ($footer or $footer_message or $feed_icons): ?>
+      <div id="footer" class="clear-block">
 
         <?php if ($footer): ?>
-          <div id="footer" class="section region"><div class="region-inner">
+          <div id="footer-region" class="section region"><div class="region-inner">
             <?php print $footer; ?>
-          </div></div> <!-- /footer -->
+          </div></div> <!-- /footer-region -->
         <?php endif; ?>
 
-        <?php if ($footer_message or $feed_icons): ?>
+        <?php if ($footer_message): ?>
           <div id="footer-message"><div class="footer-message-inner">
-            <?php print $footer_message; ?><?php print $feed_icons; ?>
-        </div></div> <!-- /footer-message/feed-icon -->
+            <?php print $footer_message; ?>
+          </div></div> <!-- /footer-message -->
+        <?php endif; ?>
+        
+        <?php if ($feed_icons): ?>
+          <div id="feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
         
         <?php print $attribution; ?>
 
-      </div> <!-- /footer-wrapper -->
+      </div> <!-- /footer -->
     <?php endif; ?>
 
   </div> <!-- /container -->

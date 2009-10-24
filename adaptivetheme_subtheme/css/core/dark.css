@@ -16,7 +16,6 @@ a img{border:none;}
 .offscreen{position:absolute;left:-999em;top:auto;width:1px;height:1px;overflow:hidden;}
 .remove{display:none;}
 a:link,a:visited{color:#027AC6;}
-
 thead th{border-color:#444;color:#CCC;}
 tbody{border-top:1px solid #000;}
 tr.even,tr.odd,tbody th{border-color:#333;}
@@ -49,8 +48,8 @@ table.system-status-report a:hover,table.system-status-report a:focus,table.upda
 .update tr.warning table.version-recommended td{background:#DF601B;}
 .update tr.error table.version-recommended td{background:#000;}
 .form-item strong.error em{color:#E41F0B;}
-.node-unpublished,.comment-unpublished{background-color:transparent;}
-.preview .node,.preview .comment{background-color:#111;}
+.article-unpublished,.comment-unpublished{background-color:transparent;}
+.preview .article,.preview .comment{background-color:#111;}
 ul.primary li a{background-color:#111;border:3px solid #242424;font-weight:bold;padding:0.35em 1.4em 0.5em;}
 .local-tasks ul.primary li.active a{background-color:#111;border:3px solid #242424;}
 .local-tasks ul.primary li a:hover{background-color:#333;border:3px solid #444;}

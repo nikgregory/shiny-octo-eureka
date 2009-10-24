@@ -16,10 +16,7 @@
 function phptemplate_preprocess_block_editing(&$vars, $hook) {
   $block = $vars['block'];
   /**
-   * Add block edit links. Credit to the Zen theme for this implimentation. The only
-   * real difference is that the Zen theme wraps each link in span, whereas here we 
-   * output the links as an item-list. Also I have omitted the Views links as these 
-   * seem redundant because Views has its own set of hover links.
+   * Add block edit links.
    */
     if ($block->module == 'block') {
       $edit_links[] = l(t('Edit Block'), 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
