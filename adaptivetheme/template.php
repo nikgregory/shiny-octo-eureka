@@ -20,7 +20,7 @@ function adaptivetheme_theme() {
       'arguments' => array('form' => NULL, 'key' => 'adaptivetheme'),
     ),
   );
-  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-registry.inc');
+  include(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc');
 }
 
 /**

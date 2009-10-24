@@ -1,5 +1,6 @@
 <?php
 // $Id$
+// adaptivethemes.com
 
 /**
  * @file template.theme-settings.inc
@@ -7,7 +8,9 @@
 
 /**
  * Return the default values from the info file 
- * and save them into the database.
+ * and save them into the database. The theme settings functions
+ * code mostly comes from the Zen theme, whose inplimentation
+ * for subthemes is superb.
  *
  * @param $theme
  *   The name of theme.

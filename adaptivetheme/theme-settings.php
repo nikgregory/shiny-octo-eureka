@@ -9,6 +9,9 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-set
 
 /**
 * Implementation of themehook_settings() function.
+* The original concept of these advanced theme settings
+* comes from the Acquia Marina theme, although they have been
+* massivly changed and added to. Kudos to TNT for the inspiration.
 *
 * @param $saved_settings
 *   An array of saved settings for this theme.

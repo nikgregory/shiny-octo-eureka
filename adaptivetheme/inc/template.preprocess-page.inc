@@ -195,7 +195,7 @@ if (theme_get_setting('admin_user_links')) {
 }
 
 /**
- * From Studio 6.x-2.x
+ * From Studio Theme 6.x-2.x
  * Check for stylesheets to be placed at the top of the stack or conditional
  * Internet Explorer styles in the .info file and add them to the $styles
  * variable.
