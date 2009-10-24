@@ -195,28 +195,6 @@ body > #container {
 #main-content {}
 #content {}
 
-/* Set padding for content inner */
-/* Em based layouts */
-#layout-1a .two-sidebars  .content-inner {}
-#layout-1a .sidebar-first  .content-inner {}
-#layout-1a .sidebar-last .content-inner {}
-#layout-2a .content-inner {}
-#layout-3a .content-inner {}
-
-/* Percentage based layouts */
-#layout-1b .two-sidebars  .content-inner {}
-#layout-1b .sidebar-first  .content-inner {}
-#layout-1b .sidebar-last .content-inner {}
-#layout-2b .content-inner {}
-#layout-3b .content-inner {}
-
-/* Pixel based layouts */
-#layout-1c .two-sidebars  .content-inner {}
-#layout-1c .sidebar-first  .content-inner {}
-#layout-1c .sidebar-last .content-inner {}
-#layout-2c .content-inner {}
-#layout-3c .content-inner {}
-
 
 /**********************************************************
  *                       Regions
@@ -262,14 +240,14 @@ body > #container {
  **********************************************************/
 /* Target both sidebars with this low specifity selector. */
 .sidebar {}
-.sidebar-inner {}
+.region-inner {}
 
 /* Target a specific sidebar, inner or sidebar-inner. */
 #sidebar-first {}
-#sidebar-first .sidebar-inner {}
+#sidebar-first .region-inner {}
 
 #sidebar-last {}
-#sidebar-last .sidebar-inner {}
+#sidebar-last .region-inner {}
 
 /**********************************************************
  *                   Skip navigation
