@@ -46,7 +46,7 @@
   ; The following classes require the Skinr module, http://drupal.org/project/skinr
   ; Adaptivetheme includes native support for Skinr classes on nodes, blocks and views.
 
-  ; Grids - 960px, 16 column grid classes
+  ; Grids - 960px, 16 column grid classes, with a single 12 grid class (4-12 for 3x320 layout)
   skinr[at-grid][title] = Width
   skinr[at-grid][type] = select
   skinr[at-grid][description] = Select the width for this block. All blocks with widths set will float left to align themselves horizontally. A block with no width set will take up the full with of the region (and clear the other blocks above it). This allows you to build complex block layouts in sidebars and other regions.
@@ -60,34 +60,36 @@
   skinr[at-grid][options][3][label] = 180px
   skinr[at-grid][options][3][class] = grid-3
   skinr[at-grid][options][4][label] = 240px
-  skinr[at-grid][options][4][class] = grid-4
+  skinr[at-grid][options][4][class] = grid-4-16
   
   skinr[at-grid][options][5][label] = 300px
   skinr[at-grid][options][5][class] = grid-5
-  skinr[at-grid][options][6][label] = 360px
-  skinr[at-grid][options][6][class] = grid-6
-  skinr[at-grid][options][7][label] = 420px
-  skinr[at-grid][options][7][class] = grid-7
-  skinr[at-grid][options][8][label] = 480px
-  skinr[at-grid][options][8][class] = grid-8
+  skinr[at-grid][options][6][label] = 320px
+  skinr[at-grid][options][6][class] = grid-4-12
+  skinr[at-grid][options][7][label] = 360px
+  skinr[at-grid][options][7][class] = grid-6
+  skinr[at-grid][options][8][label] = 420px
+  skinr[at-grid][options][8][class] = grid-7
+  skinr[at-grid][options][9][label] = 480px
+  skinr[at-grid][options][9][class] = grid-8
   
-  skinr[at-grid][options][9][label] = 540px
-  skinr[at-grid][options][9][class] = grid-9
-  skinr[at-grid][options][10][label] = 600px
-  skinr[at-grid][options][10][class] = grid-10
-  skinr[at-grid][options][11][label] = 660px
-  skinr[at-grid][options][11][class] = grid-11
-  skinr[at-grid][options][12][label] = 720px
-  skinr[at-grid][options][12][class] = grid-12
+  skinr[at-grid][options][10][label] = 540px
+  skinr[at-grid][options][10][class] = grid-9
+  skinr[at-grid][options][11][label] = 600px
+  skinr[at-grid][options][11][class] = grid-10
+  skinr[at-grid][options][12][label] = 660px
+  skinr[at-grid][options][12][class] = grid-11
+  skinr[at-grid][options][13][label] = 720px
+  skinr[at-grid][options][13][class] = grid-12
  
-  skinr[at-grid][options][13][label] = 780px
-  skinr[at-grid][options][13][class] = grid-13
-  skinr[at-grid][options][14][label] = 840px
-  skinr[at-grid][options][14][class] = grid-14
-  skinr[at-grid][options][15][label] = 900px
-  skinr[at-grid][options][15][class] = grid-15
-  skinr[at-grid][options][16][label] = 960px
-  skinr[at-grid][options][16][class] = grid-16
+  skinr[at-grid][options][14][label] = 780px
+  skinr[at-grid][options][14][class] = grid-13
+  skinr[at-grid][options][15][label] = 840px
+  skinr[at-grid][options][15][class] = grid-14
+  skinr[at-grid][options][16][label] = 900px
+  skinr[at-grid][options][16][class] = grid-15
+  skinr[at-grid][options][17][label] = 960px
+  skinr[at-grid][options][17][class] = grid-16
   
   ; Content alignment
   skinr[at-align-content][title] = Content alignment

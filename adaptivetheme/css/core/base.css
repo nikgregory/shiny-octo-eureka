@@ -70,13 +70,13 @@ div.ok,tr.ok,table tr.ok td{color:#222;padding:1em .5em;}
 div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .form-item input.error,.form-item textarea.error,.form-item select.error{border:2px solid #C00000;}
 .form-item strong.error em{font-weight:bold;color:#E41F0B;font-size:1.2em;}
-.block-region{border:1px dotted #000;color:#000;font: 1.25em "Lucida Console",Monaco,"DejaVu Sans Mono",monospace;padding:3px 6px 1px;}
+.block-region{-webkit-border-radius:6px;-moz-border-radius:6px;-border-radius:6px;background-color:#F7F8F8;border:3px dashed #DDD;clear:both;color:#666;font-family:"Lucida Console",Monaco,"DejaVu Sans Mono",monospace;font-size:1.1067em;font-weight:normal;margin-bottom:12px;margin-top:4px;padding:3px 6px 1px;}
 .article-unpublished,.comment-unpublished{background-color:#FFF6DF;}
 .unpublished{visibility:hidden;}
 .indented {margin-left:60px;}
 .article-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
-.block{clear:both;margin:0 0 20px;position:relative;}
+.block{clear:both;margin:0 0 20px;}
 ul,ol{margin:0 0 1.5em 1.667em;padding:0;}
 li{margin:0;padding:0;}
 ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 0 0 1.667em;}
@@ -156,7 +156,6 @@ body.admin-menu{margin-top: 23px !important;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
 div.krumo-root{color:#000;}
 /* Style edit links for blocks and views. */
-div.block{position:relative;}
 div.block div.block-edit{font-size:.9em !important;position:absolute;right:15px;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
 div.block div.block-edit ul.edit-links-list{background:transparent !important;}

@@ -35,7 +35,7 @@
  * then unset the block-edit.css in your subhtemes .info file.
  */
 ?>
-<div id="<?php print $block_module_delta; ?>" class="block-at-admin"><div class="block-at-admin-inner">
+<div id="<?php print $block_module_delta; ?>" class="block-at-admin <?php print $skinr; ?>"><div class="block-at-admin-inner">
 
   <div class="block-header">
     <h2 class="block-title clear-block">

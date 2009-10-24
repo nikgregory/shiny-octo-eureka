@@ -14,3 +14,5 @@
 .block-at-admin h2 span {float:left;}
 div.block div.block-edit{top:10px;left:15px;right:auto;}
 
+.block-at-admin h2.block-title,
+.fieldset-block-info{text-align:right;}

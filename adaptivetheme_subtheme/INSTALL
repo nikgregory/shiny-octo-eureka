@@ -1,0 +1,35 @@
+Intallation and setup is totally different from the first version of Adaptivetheme, 
+this is because now we only use subthemes. 
+
+There is no need to touch the base theme at all.
+
+
+1) Copy and past the included starter subtheme (adaptivetheme_subtheme) 
+to your sites/all/themes folder or where ever you are installing your theme.
+
+
+2) Rename the theme folder and info file to your preferred theme name, 
+then open up the info file and change the name as well.
+
+
+3) Open up your subthemes template.php file and search/replace all instances 
+of “adaptivetheme_subtheme” with your new themes name (there are 6 instances).
+
+
+4) Open up your subthemes theme-settings.php file and search/replace all instances 
+of “adaptivetheme_subtheme” with your new themes name - there are 2…
+
+One in the function (you must rename the function) and one below it on line 22:
+
+function adaptivetheme_subtheme_settings($saved_settings) {
+ 
+  // Get the default values from the .info file.
+  $defaults = adaptivetheme_theme_get_default_settings('adaptivetheme_subtheme');
+
+NOTE: if the advanced theme settings dont show up on your themes configuration page,
+chances are you forgot to rename the themeNAME_settings funtion.
+
+5) If you want to use the color schemes features open up the info file, 
+scroll to the bottom and change settings[color_enable_schemes] = ‘off’ to ‘on’.
+
+Now you can enable the theme as per usual.
