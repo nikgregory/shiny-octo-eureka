@@ -16,6 +16,14 @@
   stylesheets[all][] = css/core/at-admin.css
 
 
+;----------// Skinr Styles
+
+  ; The following require the Skinr module, http://drupal.org/project/skinr
+  ; Adaptivetheme provides native support for Skinr classes.
+
+  skinr[options][inherit_skins] = true
+
+
 ;----------// Regions
 
   regions[header]            = Header Region
@@ -31,44 +39,44 @@
 
 ;----------// Theme Setting Defaults
 
-settings[user_notverified_display]         = 0
-settings[breadcrumb_display]               = 'yes'
-settings[breadcrumb_separator]             = ' &#187; '
-settings[breadcrumb_home]                  = 0
-settings[breadcrumb_trailing]              = 0
-settings[breadcrumb_title]                 = 0
-settings[search_snippet]                   = 1
-settings[search_info_type]                 = 1
-settings[search_info_user]                 = 1
-settings[search_info_date]                 = 1
-settings[search_info_comment]              = 1
-settings[search_info_upload]               = 1
-settings[mission_statement_pages]          = 'home'
-settings[split_node_form]                  = 0
-settings[taxonomy_display_default]         = 'only'
-settings[taxonomy_format_default]          = 'vocab'
-settings[taxonomy_delimiter_default]       = ', '
-settings[taxonomy_enable_content_type]     = 0
-settings[submitted_by_author_default]      = 1
-settings[submitted_by_date_default]        = 1
-settings[submitted_by_enable_content_type] = 0
-settings[rebuild_registry]                 = 0
-settings[load_firebug_lite]                = 0
-settings[admin_user_links]                 = 1
-settings[block_edit_links]                 = 1
-settings[at_admin_hide_help]               = 0
-settings[layout_method]                    = '0'
-settings[layout_width]                     = '1260px'
-settings[layout_sidebar_first_width]       = '240'
-settings[layout_sidebar_last_width]        = '240'
-settings[layout_enable_settings]           = 'on'
-settings[layout_enable_width]              = 'on'
-settings[layout_enable_sidebars]           = 'on'
-settings[layout_enable_method]             = 'on'
-settings[equal_heights_sidebars]           = 0
-settings[equal_heights_blocks]             = 0
-settings[horizontal_login_block]           = 0
-settings[horizontal_login_block_overlabel] = 0
-settings[horizontal_login_block_enable]    = 'on'
-settings[color_schemes]                    = 'onyx.css'
-settings[color_enable_schemes]             = 'on'
+  settings[user_notverified_display]         = 0
+  settings[breadcrumb_display]               = 'yes'
+  settings[breadcrumb_separator]             = ' &#187; '
+  settings[breadcrumb_home]                  = 0
+  settings[breadcrumb_trailing]              = 0
+  settings[breadcrumb_title]                 = 0
+  settings[search_snippet]                   = 1
+  settings[search_info_type]                 = 1
+  settings[search_info_user]                 = 1
+  settings[search_info_date]                 = 1
+  settings[search_info_comment]              = 1
+  settings[search_info_upload]               = 1
+  settings[mission_statement_pages]          = 'home'
+  settings[split_node_form]                  = 0
+  settings[taxonomy_display_default]         = 'only'
+  settings[taxonomy_format_default]          = 'vocab'
+  settings[taxonomy_delimiter_default]       = ', '
+  settings[taxonomy_enable_content_type]     = 0
+  settings[submitted_by_author_default]      = 1
+  settings[submitted_by_date_default]        = 1
+  settings[submitted_by_enable_content_type] = 0
+  settings[rebuild_registry]                 = 0
+  settings[load_firebug_lite]                = 0
+  settings[admin_user_links]                 = 1
+  settings[block_edit_links]                 = 1
+  settings[at_admin_hide_help]               = 0
+  settings[layout_method]                    = '0'
+  settings[layout_width]                     = '1260px'
+  settings[layout_sidebar_first_width]       = '240'
+  settings[layout_sidebar_last_width]        = '240'
+  settings[layout_enable_settings]           = 'on'
+  settings[layout_enable_width]              = 'on'
+  settings[layout_enable_sidebars]           = 'on'
+  settings[layout_enable_method]             = 'on'
+  settings[equal_heights_sidebars]           = 0
+  settings[equal_heights_blocks]             = 0
+  settings[horizontal_login_block]           = 0
+  settings[horizontal_login_block_overlabel] = 0
+  settings[horizontal_login_block_enable]    = 'on'
+  settings[color_schemes]                    = 'onyx.css'
+  settings[color_enable_schemes]             = 'on'
