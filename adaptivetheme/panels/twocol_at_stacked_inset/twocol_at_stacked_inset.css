@@ -1,0 +1,49 @@
+/* $Id$ */
+/* adaptivethemes.com */
+
+.twocol-at-stacked-inset { 
+/*  overflow: hidden;  */
+}
+
+.twocol-at-stacked-inset .panel-col-top { 
+}
+
+.twocol-at-stacked-inset .panel-col-bottom {
+  clear:both;
+}
+
+.twocol-at-stacked-inset .panel-col-top .inside {
+  margin-bottom: .5em;
+}
+
+.twocol-at-stacked-inset .panel-col-first { 
+  float: left; 
+  width: 25%; 
+}
+
+.twocol-at-stacked-inset .panel-col .inside { 
+  margin: 0 .5em 1em .5em;
+}
+
+.center-wrapper {
+  float:left;
+  margin-left:2%;
+  width:73%;
+}
+
+.twocol-at-stacked-inset .panel-col { 
+  float:left;
+  width:100%;
+}
+
+.twocol-at-stacked-inset .panel-col .inside { 
+  margin:0 0 1em;
+}
+
+.twocol-at-stacked-inset .panel-col-last .inside { 
+  margin:0 0 1em;
+}
+
+.twocol-at-stacked-inset .panel-separator {
+  margin:0 0 1em;
+}

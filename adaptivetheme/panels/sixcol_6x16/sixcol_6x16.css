@@ -1,0 +1,11 @@
+/* $Id$ */
+/* adaptivethemes.com */
+
+/* Panels */
+.at-panel div.block,.at-panel div.panel-pane{padding:0 10px;}
+.at-panel{clear:both;}
+.at-panel .panel-panel{display:inline;position:relative;float:left;}
+
+/* sixcol-6x16 */
+.sixcol-6x16 .panel-panel{float:left;width:16.666%;}
+.sixcol-6x16 .panel-col-six{width:16.333%;}
