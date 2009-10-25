@@ -137,7 +137,7 @@ a img {}
  * themeName_preprocess_page(), @see template.php.
  */
 /*
-.page-top          {}
+.leaderboard       {}
 .header-region     {}
 .secondary-content {}
 .tertiary-content  {}
@@ -208,9 +208,10 @@ body > #container {
  * design contingencies.
  */
  
-/* Page top is a full width region at the very top, 
+/* Leaderboard is a full width region at the very top, 
    ideal for displaying banners. */
-#page-top {}
+#leaderboard {}
+#leaderboard .region-inner {}
 
 /* Header region is embedded in the header, floated
    between the logo/site_name and the search box. */

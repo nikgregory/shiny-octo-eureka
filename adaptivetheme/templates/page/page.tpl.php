@@ -111,10 +111,10 @@
     <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
     <?php // if (!empty($admin)) print $admin; ?>
 
-    <?php if ($page_top): ?>
-      <div id="page-top" class="section region"><div class="region-inner">
-        <?php print $page_top; ?>
-      </div></div> <!-- /page top -->
+    <?php if ($leaderboard): ?>
+      <div id="leaderboard" class="section region"><div class="region-inner">
+        <?php print $leaderboard; ?>
+      </div></div> <!-- /leaderboard -->
     <?php endif; ?>
 
     <div id="header"><div class="header-inner clear-block">

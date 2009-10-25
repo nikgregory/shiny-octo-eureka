@@ -39,7 +39,7 @@
 
 
 ;----------// Regions
-  regions[page_top]          = Page Top
+  regions[leaderboard]       = Leaderboard
   regions[header]            = Header Region
   regions[secondary_content] = Secondary Content
   regions[content_top]       = Content Top

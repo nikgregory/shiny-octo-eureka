@@ -69,8 +69,8 @@ if ($class = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-]+!s', 
  * Uncomment the following if you need to set a body class for each active region.
  */
 /*        
-if (!empty($vars['page_top'])) {
-  $classes[] = 'page-top';
+if (!empty($vars['leaderboard'])) {
+  $classes[] = 'leaderboard';
 }
 if (!empty($vars['header'])) {
   $classes[] = 'header-region';
