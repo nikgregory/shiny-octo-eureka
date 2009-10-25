@@ -171,12 +171,14 @@
 
     <?php if ($breadcrumb): ?>
       <div id="breadcrumb" class="nav"><div class="breadcrumb-inner">
+        <h2 class="element-invisible"><?php print t('You are here:'); ?></h2>
         <?php print $breadcrumb; ?>
       </div></div> <!-- /breadcrumb -->
     <?php endif; ?>
     
     <?php if ($messages or $help): ?>
       <div id="messages-and-help">
+        <h2 class="element-invisible"><?php print t('System message:'); ?></h2>
         <?php if ($messages): print $messages; endif; ?>
         <?php if ($help): print $help; endif; ?>
       </div>
@@ -232,13 +234,13 @@
       <?php if ($left): ?>
         <div id="sidebar-first" class="sidebar section region"><div class="region-inner">
           <?php print $left; ?>
-        </div></div> <!-- /sidebar-left -->
+        </div></div> <!-- /sidebar-first -->
       <?php endif; ?>
 
       <?php if ($right): ?>
         <div id="sidebar-last" class="sidebar section region"><div class="region-inner">
           <?php print $right; ?>
-        </div></div> <!-- /sidebar-right -->
+        </div></div> <!-- /sidebar-last -->
       <?php endif; ?>
     
     </div></div> <!-- /columns -->

@@ -5,6 +5,7 @@
  * @file theme-settings.php
  */
 
+// Initialize theme settings.
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-settings.inc');
 
 /**

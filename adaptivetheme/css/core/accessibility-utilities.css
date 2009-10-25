@@ -3,10 +3,12 @@
 
 /**
  * Accessibility Classes
- * This file is never loaded, they are example selectors from which
- * you can take the properties and values (the declaration blocks)
- * and apply to elements.
+ * This file exists to explain the usage of the new acessibility classes in 
+ * Druapl 7. NOTE: these classes are included in base.css. You can easily copy
+ * the technique for use in other selectors and the explanations provided are a 
+ * guide to their appropriate usage.
  */
+
 
 /**
  * Hide elements from all users.
@@ -20,6 +22,7 @@
   display: none;
 }
 
+
 /**
  * Hide elements visually, but keep them available for screen-readers.
  *
@@ -29,19 +32,20 @@
  * not be used for focusable elements (such as links and form elements) as this
  * causes issues for keyboard only or voice recognition users.
  */
-
 .element-invisible {
   height: 0;
   overflow: hidden;
   position: absolute;
 }
 
+
 /** 
- * Move content off screen where appropriate. 
- * This should not be used for focusable elements! 
- * Instead swap top and left values to move it to the 
- * side of the viewport or else you will get scrolling 
- * issues when an element is focused (e.g. tabbed onto). 
+ * Move content off screen where appropriate (Not in D7).  
+ *
+ * This should not be used for 
+ * focusable elements! Instead swap top and left values to move it to the 
+ * side of the viewport or else you will get scrolling issues when an element 
+ * is focused (e.g. tabbed onto). 
  */
 .offscreen {
   position: absolute;
@@ -51,3 +55,10 @@
   height: 1px;
   overflow: hidden;
 }
+
+
+
+
+
+
+

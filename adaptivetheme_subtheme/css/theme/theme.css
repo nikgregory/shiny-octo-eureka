@@ -260,12 +260,10 @@ body > #container {
  *                   Skip navigation
  **********************************************************/
 /**
- * To hide the skip-nav you can use: 
+ * To hide the skip-nav you can add the "element-invisible"
+ * class to the skip nav wrapper div in page.tpl.php.
  * 
- * height: 0; 
- * overflow: hidden;
- * 
- * Do not use display:none as this hides it from screen readers!
+ * DO NOT USE display:none as this hides it from screen readers!
  */
 #skip-nav {}
 
@@ -277,21 +275,6 @@ body > #container {
 #skip-nav a:active  {}
 
 /**
- * Move the skip-nav out of the viewport. 
- * Using left -9999em can cause issue with some browsers especially in RTL mode.
- */
-/*
-#skip-nav {
-  position: absolute;
-  top: -9999em;
-  left: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-*/
- 
-/**
  * An alternative method is to position the skip-nav link offscreen
  * until the user tabs the link into focus. Uncomment the following to use.
  * 
@@ -299,7 +282,7 @@ body > #container {
  */
 /*
 #skip-nav {
-   text-align: left;
+  text-align: left;
 }
 #skip-nav a:link, 
 #skip-nav a:hover, 

@@ -7,12 +7,16 @@
  */
 html{font-size:75%;}
 body{line-height:1.5;}
+
+/* HTML elements */
 h1{font-size:2em;margin:0 0 .5em;padding:0;}
 h2{font-size:1.5em;}
 h3{font-size:1.25em;}
 h4{font-size:1.17em;}
 h5,h6{font-size:1em;}
 h1,h2,h3,h4,h5,h6,h1 img,h2 img,h3 img,h4 img,h5 img,h6 img,em,dfn,del,ins{margin:0;padding:0;}
+a{margin:0;padding:0;}
+a img{border:none;}
 p{margin:0 0 1.5em;padding:0;}
 blockquote p{margin:0;}
 strong{font-weight:bold;}
@@ -24,6 +28,13 @@ pre,code,tt,samp,kbd,var{font: 1em "Lucida Console",Monaco,"DejaVu Sans Mono",mo
 blockquote,q{font-style:italic;quotes:"" "";}
 blockquote{margin:0 0 1.5em;padding:0 0 0 3em;}
 blockquote:before,blockquote:after,q:before,q:after{content:"";}
+
+/* Accessibility classes for hiding content */
+.element-hidden{display:none;}
+.element-invisible{height:0;overflow:hidden;position:absolute;}
+.offscreen{position:absolute;top:-9999em;left:auto;width:1px;height:1px;overflow:hidden;}
+
+/* Tables */
 table{border-color:#C0C0C0;border-spacing:0;margin:1em 0;padding:0;}
 caption,th,td{text-align:left;}
 caption, th{font-weight:bold;}
@@ -46,6 +57,8 @@ tr:first-child td.region,tr:first-child td.module,tr:first-child td.container{bo
 .section-admin table {width:100%;}
 #system-themes-form table.sticky-table{position:relative;z-index: 10;}
 .description{color:#555;}
+
+/* Messages */
 div.messages{font-weight:normal;margin:1em 0;}
 div.messages ul{margin:0 0 0 1.25em;}
 div.error{background:#FFF3F6 url(core-images/status-error.png) no-repeat .5em .45em;border:1px solid #C00000;color:#C00000;}
@@ -73,10 +86,10 @@ div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .block-region{-webkit-border-radius:6px;-moz-border-radius:6px;-border-radius:6px;background-color:#F7F8F8;border:3px dashed #DDD;clear:both;color:#666;font-family:"Lucida Console",Monaco,"DejaVu Sans Mono",monospace;font-size:1.1067em;font-weight:normal;margin-bottom:12px;margin-top:4px;padding:3px 6px 1px;}
 .article-unpublished,.comment-unpublished{background-color:#FFF6DF;}
 .unpublished{visibility:hidden;}
-.indented {margin-left:60px;}
 .article-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
-.block{clear:both;margin:0 0 20px;}
+
+/* Lists */
 ul,ol{margin:0 0 1.5em 1.667em;padding:0;}
 li{margin:0;padding:0;}
 ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 0 0 1.667em;}
@@ -90,6 +103,8 @@ ol ol ol{list-style-type:lower-roman;}
 dt{font-weight:bold;}
 dd{margin:0 0 1.5em 1.667em;}
 .item-list ul,.item-list ol{margin:0 0 0 1.667em;padding:0;}
+
+/* Forms */
 form{margin:0 0 1.667em;padding:0;}
 input{margin:.375em 0;}
 input.text,input.title,textarea,select{border:1px solid #C0C0C0;margin:.375em 0;}
@@ -123,6 +138,8 @@ html.js #user-login-form li.openid-link,html.js #user-login li.openid-link{list-
 #user-login-form li.openid-link,#user-login li.openid-link{background:none;}
 #user-login-form li.openid-link a,#user-login li.openid-link a{background:transparent url(core-images/openid.png) no-repeat 0 0;padding:0 20px;}
 #user-login-form .item-list li{list-style:none;margin:0;}
+
+/* Admin section */
 div.admin-panel{border:1px solid #DDD;margin:0 0 .75em;padding:0;}
 div.admin .left,div.admin .right{margin-left:0;margin-right:0;width:49%;}
 .admin-panel h3{background:#EEE;color:#222;padding:0 0 0 .5em;}
@@ -155,6 +172,7 @@ body.admin-menu{margin-top: 23px !important;}
 #admin-menu{font: 0.9em Arial, Helvetica, sans-serif;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
 div.krumo-root{color:#000;}
+
 /* Style edit links for blocks and views. */
 div.block div.block-edit{font-size:.9em !important;position:absolute;right:15px;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
@@ -170,6 +188,7 @@ div.view div.views-admin-links{font-size:.85em;}
 div.view div.views-admin-links li a{text-decoration:none;width:5em;}
 div.view div.views-admin-links li a:hover{color:#000;background:#FFF;}
 div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{color:#CCC;}
+
 /* LayoutSP theme settings, included here because at-admin.css could be unset. */
 .fieldset-layout-settings .layouts .form-item,.fieldset-layout-settings .page-width,.fieldset-layout-settings .sidebar-width-left,.fieldset-layout-settings .sidebar-width-right{-moz-border-radius:6px;-webkit-border-radius:6px;background:#EEE;float:left;margin-right:5px;padding:6px;text-align:left;width:100px;}
 .fieldset-layout-settings img{display:block;margin-left:18px;}
@@ -179,13 +198,16 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .fieldset-layout-settings .layout-help dt,.fieldset-layout-settings .layout-help dd{margin:0;padding:0;}
 .fieldset-layout-settings .layouts,.fieldset-layout-settings .page-width .form-item,.fieldset-layout-settings .sidebar-width .form-item{margin:0;}
 .fieldset-layout-settings label,.fieldset-layout-settings strong{font-weight:400;}
+
 /* Skinr style classes. */
 .at-center-content,.at-center-content ul.menu,.at-center-content.item-list ul{margin:0;text-align:center;}
 .at-center-content ul.menu li,.at-center-content.item-list ul li{list-style:none;margin:0;}
 .at-align-right-content,.at-align-right-content ul.menu,.at-align-right-content.item-list ul{margin:0;text-align:right;}
 .at-align-left-content,.at-align-left-content ul.menu,.at-align-left-content.item-list ul{margin:0;text-align:left;}
+
 /* Equalize heights need to expand the block inner div as well. */
 .block-inner{min-height:100%;height:auto;}
+
 /* Horizontal login block styles. */
 .at-horizontal-login h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
 .at-horizontal-login .form-item,.at-horizontal-login .form-submit{float:left;padding:0 .5em;}
@@ -198,6 +220,7 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .at-horizontal-login .button-wrapper input{margin:.75em .5em 0;}
 .at-horizontal-login #user-login-form li a{padding:0 20px 0 0;}
 .at-horizontal-login #user-login-form li.openid-link a,.at-horizontal-login #user-login li.openid-link a{padding:0 20px;}
+
 /* inline menu style. */
 .at-inline-menu{margin-bottom:.5em}
 .at-inline-menu h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
@@ -206,6 +229,7 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .at-inline-menu ul.menu li a{padding:0 .75em 0 .45em;}
 .at-inline-menu ul li.last{border:none;}
 .at-inline-menu ul li.expanded ul{display:none;}
+
 /* multi-column menu style. */
 .at-multicolumn-menu h2{height:0;overflow:hidden;position:absolute;padding:0;margin:0;}
 .at-multicolumn-menu .block-content{overflow:auto;}
@@ -214,6 +238,7 @@ div.view div.views-admin-links-hover a,div.view div.views-admin-links:hover a{co
 .at-multicolumn-menu .block-content ul li.expanded ul{display:block;margin-left:0;width:160px;}
 .at-multicolumn-menu .block-content ul li.expanded ul li{border:none;display:block;}
 .at-multicolumn-menu .block-content ul.menu li ul.menu li{font-weight:normal;}
+
 /* article form classes */
 #article-form .article-col-last{float:right;margin-top:35px;width:30%;}
 #article-form .article-col-last .buttons #edit-submit,
