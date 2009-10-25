@@ -1,7 +1,8 @@
-<?php
+<?php // $Id$
 // adpativethemes.com
 
 /**
+ * @file fivecol_5x20.inc
  * Implementation of hook_panels_layouts()
  */
 function adaptivetheme_fivecol_5x20_panels_layouts() {

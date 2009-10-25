@@ -1,7 +1,8 @@
-<?php
+<?php // $Id$
 // adpativethemes.com
 
 /**
+ * @file fourcol_4x25.inc
  * Implementation of hook_panels_layouts()
  */
 function adaptivetheme_fourcol_4x25_panels_layouts() {

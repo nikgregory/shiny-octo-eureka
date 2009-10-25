@@ -27,12 +27,12 @@ function adaptivetheme_theme_get_default_settings($theme) {
     // Don't save the toggle_node_info_ variables.
     if (module_exists('node')) {
       foreach (node_get_types() as $type => $name) {
-        unset($settings['toggle_node_info_' . $type]);
+        unset($settings['toggle_node_info_'. $type]);
       }
     }
     // Save default theme settings.
     variable_set(
-      str_replace('/', '_', 'theme_' . $theme . '_settings'),
+      str_replace('/', '_', 'theme_'. $theme .'_settings'),
       array_merge($defaults, $settings)
     );
     // If the active theme has been loaded, force refresh of Drupal internals.

@@ -1,8 +1,8 @@
-<?php
-// $Id$
+<?php // $Id$
 // adpativethemes.com
 
 /**
+ * @file threecol_at_stacked_inset.inc
  * Implementation of hook_panels_layouts()
  */
 function adaptivetheme_threecol_at_stacked_inset_panels_layouts() {

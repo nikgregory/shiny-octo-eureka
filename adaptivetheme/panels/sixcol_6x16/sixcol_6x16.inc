@@ -1,7 +1,8 @@
-<?php
+<?php // $Id$
 // adpativethemes.com
 
 /**
+ * @file sixcol_60x16.inc
  * Implementation of hook_panels_layouts()
  */
 function adaptivetheme_sixcol_6x16_panels_layouts() {

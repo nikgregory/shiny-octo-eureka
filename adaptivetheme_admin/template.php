@@ -1,6 +1,10 @@
 <?php // $Id$
 // adaptivethemes.com admin
 
+/**
+ * @file template.php
+ */
+
 // Include base theme custom functions.
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 

@@ -1,7 +1,8 @@
-<?php
+<?php // $Id$
 // adpativethemes.com
 
 /**
+ * @file twocol_at_50_25_25.inc
  * Implementation of hook_panels_layouts()
  */
 function adaptivetheme_threecol_at_50_25_25_panels_layouts() {

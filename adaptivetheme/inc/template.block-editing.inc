@@ -59,6 +59,6 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
     }
   // Theme links as an item list.
   $vars['edit_links_array'] = $edit_links;
-  $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list',));
+  $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list'));
   $vars['edit_links'] = '<div class="block-edit">'. strip_tags($items, '<ul><li><a>') .'</div>';
 }

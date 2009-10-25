@@ -155,7 +155,7 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $right_margin   = $right_width;
     $push_right     = $left_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin:0 0 0 '. $content_margin . 'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin:0 0 0 '. $content_margin .'px;}';
     $styles[] = '.sidebar-left .content-inner{margin-left:'. $left_margin .'px;margin-right:0;}';
     $styles[] = '.sidebar-right .content-inner{margin-left:'. $right_margin .'px;margin-right:0;}';
     $styles[] = '#sidebar-first{width:'. $left_width .'px; margin-left: -100%;}';
@@ -237,8 +237,8 @@ if (count($top_styles) >= 1) {
   foreach ($top_styles as $name => $theme_styles) {
     $path = drupal_get_path('theme', $name);
     foreach ($theme_styles as $media => $styles) {
-      foreach ($styles as $style){
-        $vars['top_css'][$media]['featured'][$path . '/' . $style] = TRUE;
+      foreach ($styles as $style) {
+        $vars['top_css'][$media]['featured'][$path .'/'. $style] = TRUE;
       }
       // Add the new styles to the top of the $vars['css'] array.
       array_unshift($vars['css'][$media], $vars['top_css'][$media]['featured']);
@@ -259,13 +259,13 @@ if (count($ie_styles) >= 1) {
     foreach ($theme_styles as $version => $media) {
       foreach ($media as $type => $styles) {
         foreach ($styles as $style) {
-          $vars['ie_css'][$version][$type]['theme'][$path . '/' . $style] = TRUE;
+          $vars['ie_css'][$version][$type]['theme'][$path .'/'. $style] = TRUE;
         }
       }
     }
   }
   // Append the stylesheets to $styles, grouped by IE conditional.
   foreach ($vars['ie_css'] as $version => $styles) {
-    $vars['styles'] .= '<!--[if ' . $version . ']>' . "\n" . drupal_get_css($styles) . '<![endif]-->' . "\n";
+    $vars['styles'] .= '<!--[if '. $version .']>'."\n". drupal_get_css($styles) .'<![endif]-->'."\n";
   }
 }

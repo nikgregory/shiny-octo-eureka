@@ -384,7 +384,7 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   if ($settings['layout_enable_settings'] == 'on') {
-    $image_path = drupal_get_path('theme', 'adaptivetheme') . '/css/core/core-images';
+    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Page Layout'),
