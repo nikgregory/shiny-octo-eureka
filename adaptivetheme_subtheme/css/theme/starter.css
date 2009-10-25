@@ -31,11 +31,11 @@ a:active,a:focus{border:0;color:#C00000;}
 
 /* Primary and Secondary links basic styles - comment this out or remove if you dont want it. */
 .primary-links,
-.secondary-links{font-weight:bold;height:2em;margin:0;padding:0;}
+.secondary-links{margin:0;padding:0;}
 .primary-links li,
 .secondary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
 .primary-links li a,
-.secondary-links li a{display:block;line-height:2em;padding:0 1em;text-decoration:none;white-space:nowrap;}
+.secondary-links li a{display:block;padding:0 0.5em;white-space:nowrap;}
 
 /* Lists. */
 ul.menu,
