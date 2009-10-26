@@ -1,54 +1,14 @@
 /* $Id$ */
 /* adaptivethemes.com */
 
-.threecol-at-stacked-inset { 
-/*  overflow: hidden;  */
-}
-
-.threecol-at-stacked-inset .panel-col-top { 
-}
-
-.threecol-at-stacked-inset .panel-col-bottom {
-  clear:both;
-}
-
-.threecol-at-stacked-inset .panel-col-top .inside {
-  margin-bottom: .5em;
-}
-
-.threecol-at-stacked-inset .panel-col-first { 
-  float: left; 
-  width: 25%; 
-}
-
-.threecol-at-stacked-inset .panel-col .inside { 
-  margin: 0 .5em 1em .5em;
-}
-
-.center-wrapper {
-  float:left;
-  margin-left:2%;
-  width:73%;
-}
-
-.threecol-at-stacked-inset .panel-col { 
-  float:left;
-  width:70%;
-}
-
-.threecol-at-stacked-inset .panel-col .inside { 
-  margin:0 0 1em;
-}
-
-.threecol-at-stacked-inset .panel-col-last { 
-  float:left;
-  width:30%;
-}
-
-.threecol-at-stacked-inset .panel-col-last .inside { 
-  margin:0 0 1em;
-}
-
-.threecol-at-stacked-inset .panel-separator {
-  margin:0 0 1em;
-}
+.at-panel div.block,.at-panel div.panel-pane{padding:0 10px;}
+.at-panel{clear:both;}
+.center-wrapper{float:left;margin:0;width:74.5%;}
+.threecol-at-stacked-inset .panel-col{float:left;width:70%;}
+.threecol-at-stacked-inset .panel-separator,
+.threecol-at-stacked-inset .panel-col .inside{margin:0;}
+.threecol-at-stacked-inset .panel-col-first{float:left;width:25%;}
+.threecol-at-stacked-inset .panel-col-last{float:left;width:29.5%;}
+.threecol-at-stacked-inset .panel-col-top,
+.threecol-at-stacked-inset .panel-col-bottom{width:99.5%;}
+.threecol-at-stacked-inset .panel-col-bottom{clear:both;}
