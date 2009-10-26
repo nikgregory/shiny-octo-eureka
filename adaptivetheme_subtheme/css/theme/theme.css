@@ -840,17 +840,18 @@ ul.links li.comment_delete a {}
  * You can target blocks in one or more regions and 
  * style them differently. 
  */
-/* Low specifity selector to style blocks in both sidebars. */
-.sidebar .block {}
-.sidebar .block h2 {}
-.sidebar .block-inner {}
-.sidebar .block .block-content {}
-
+ 
 /* Low specifity selector to style blocks in all regions. */
 .region .block {}
 .region .block h2 {}
 .region .block-inner {}
 .region .block .block-content {}
+
+/* Low specifity selector to style blocks in both sidebars. */
+.sidebar .block {}
+.sidebar .block h2 {}
+.sidebar .block-inner {}
+.sidebar .block .block-content {}
 
 /* High specifity selectors to style blocks in one sidebar. */
 #sidebar-first .block {}

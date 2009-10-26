@@ -154,4 +154,4 @@
   settings[horizontal_login_block_overlabel] = 0
   settings[horizontal_login_block_enable]    = 'on'
   settings[color_schemes]                    = 'colors-default.css'
-  settings[color_enable_schemes]             = 'on'
+  settings[color_enable_schemes]             = 'off'
