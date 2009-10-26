@@ -177,7 +177,7 @@ if (theme_get_setting('at_admin_hide_help')) {
 }
 
 // Admin user links.
-if (theme_get_setting('admin_user_links')) {
+if ($vars['logged_in'] && theme_get_setting('admin_user_links')) {
   if (!function_exists(admin_menu_perm)) {
     $admin_user_links[] = l(t('Create content'), 'node/add');
     $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';
@@ -186,7 +186,9 @@ if (theme_get_setting('admin_user_links')) {
     $admin_user_links[] = user_access('administer users') ? l(t('Users'), 'admin/user/user') : '';
     $admin_user_links[] = user_access('access administration pages') ? l(t('Admin'), 'admin') : '';
   }
-  $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
+  if ($vars['logged_in']) {
+    $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
+  }
   if (!function_exists(admin_menu_perm)) {
     $admin_user_links[] = l(t('Logout'), 'logout');
   }
