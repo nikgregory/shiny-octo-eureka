@@ -4,9 +4,7 @@
 
 /**
  * @file
- * Template for a 3 column panel layout.
- *
- * Template for a 3 column panel layout with extra panels top and bottom..
+ * Template for a 3 column stacked panel layout with extra panels top and bottom.
  *
  * Variables:
  * - $id: An optional CSS id to use for the layout.

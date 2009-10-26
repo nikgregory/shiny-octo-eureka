@@ -4,7 +4,7 @@
  * @file
  * Template for a 6 column panel layout.
  *
- * This template provides a four column 6 x 16% panel display layout.
+ * This template provides a six column 6 x 16% panel display layout.
  *
  * Variables:
  * - $id: An optional CSS id to use for the layout.

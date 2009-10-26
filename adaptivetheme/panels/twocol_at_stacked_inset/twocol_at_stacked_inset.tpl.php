@@ -4,10 +4,7 @@
 
 /**
  * @file
- * Template for a 2 column panel layout with extra panels top and bottom.
- *
- * This template provides a three column 25%-50%-25% panel display layout, with
- * additional areas for the top and the bottom.
+ * Template for a 2 column stacked panel layout with extra panels top and bottom.
  *
  * Variables:
  * - $id: An optional CSS id to use for the layout.
