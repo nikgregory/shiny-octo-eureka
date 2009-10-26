@@ -1,23 +1,40 @@
 
-
-IMPORTANT :: For basic info and set up guide see: 
-http://adaptivethemes.com/documentation/base-theme
-
-Some tips:
-
-* The theme is based on Genesis, although you won't find too many
-  references to Genesis in the theme, they have all been removed. But,
-  the docs for Genesis mostly all apply, just use some lateral thinking.
-
-* For dark style themes there's a dark.css file, just uncomment it in the info file.
-
-* If you have some problem with the theme settings, clear the cache and/or the
-  theme registry
+  Adaptivetheme 2 is built and supported by http://adaptivethemes.com
   
-* If you don't use Firebug then get it now, this theme has many pre written CSS
-  selectors. The theme was designed for porting right from the get go and makes it
-  really easy as long as you don't fight the workflow, embrace it:)
-  
-* bug, issue or other pita? Post in the Themers Crowd (OG group).
+  Project page: http://drupal.org/project/adaptivetheme
+  Issue queue:  http://drupal.org/project/issues/adaptivetheme
 
-Otherwise skype me for assistance: jmburnz (but not too often...)
+  IMPORTANT :: For basic info and set up guide see: 
+  http://adaptivethemes.com/documentation/adaptivetheme-6x-2x
+
+  Adaptivetheme is an advanced starter theme that includes many theme
+  settings and layout features.
+
+  To use all the major features you need to install the following modules 
+  (these are not required but to use the advanced features you need them):
+
+  http://drupal.org/project/skinr
+  Just install and its ready to use, AT2 has built-in support for the Skinr 
+  module and comes pre-packaged with many useful Skinr styles.
+
+  http://drupal.org/project/panels
+  Just install and its ready to use, AT2 comes with 9 additional Panels Layouts 
+  ready to use - NOTE that to use them you must enable both the Base theme and 
+  the Subtheme.
+
+  http://drupal.org/project/block_class
+  http://drupal.org/project/blocktheme
+  Optionally you can also test out AT2's support for Block class and Blocktheme modules. 
+  Again, theres nothing more to do other than installing these module and start 
+  using them, AT provides native support out of the box.
+
+  The core adaptivetheme is not meant to be used, instead copy and paste
+  the included subtheme and follow the INSTALL instructions in the
+  adaptivetheme_subtheme folder.
+
+  If you need to override a template from the core theme, copy and paste it
+  into your subtheme so you never hack the core theme.
+
+  Closely review your subthemes .info file, many of the themes features are
+  controlled via the info file.
+  
