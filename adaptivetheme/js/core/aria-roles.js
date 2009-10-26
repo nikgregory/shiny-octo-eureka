@@ -34,7 +34,7 @@ if (Drupal.jsEnabled) {
     $("#footer-message").attr("role","contentinfo");
 
     // Set role=article on nodes.
-    $(".node").attr("role","article");
+    $(".article").attr("role","article");
 
     // Set role=nav on navigation-like blocks.
     $("#nav, ul.links, ul.taxonomy, .admin-panel, #breadcrumb, .block-menu, #block-user-1, #block-user-3, .block-book, .block-forum, .block-blog, .block-comment, .block-statistics-0, .block-aggregator, ul.pager, .local-tasks").attr("role","navigation");
