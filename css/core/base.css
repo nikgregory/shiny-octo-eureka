@@ -76,7 +76,7 @@ div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .indented {margin-left:60px;}
 .node-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
-.block{clear:both;margin:0 0 20px;position:relative;}
+.block{clear:both;margin:0 0 20px;}
 ul,ol{margin:0 0 1.5em 1.667em;padding:0;}
 li{margin:0;padding:0;}
 ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 0 0 1.667em;}
@@ -156,7 +156,6 @@ body.admin-menu{margin-top: 23px !important;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
 div.krumo-root{color:#000;}
 /* Style edit links for blocks and views. */
-div.block{position:relative;}
 div.block div.block-edit{font-size:.9em !important;position:absolute;right:15px;top:0;visibility:hidden;z-index:40;}
 div.block:hover div.block-edit{display:block;font-family:Arial,Helvetica,"Nimbus Sans",sans-serif;visibility:visible;padding:3px;}
 div.block div.block-edit ul.edit-links-list{background:transparent !important;}
