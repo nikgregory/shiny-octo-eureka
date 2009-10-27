@@ -813,11 +813,11 @@ ul.links li.comment_delete a {}
 
 /* Comment form on a seperate page. */
 .section-comment .box {}
-.section-comment .box .title {}
+.section-comment .box .box-title {}
 
 /* Comment form below content. */
 #comments .box {}
-#comments .box .title {}
+#comments .box .box-title {}
 
 
 /**********************************************************

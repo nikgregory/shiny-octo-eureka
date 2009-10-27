@@ -13,8 +13,10 @@
  */
 ?>
 <div class="box"><div class="box-inner">
-    <?php if ($title): ?>
-      <h2 class="box-title"><?php print $title ?></h2>
-    <?php endif; ?>
-    <div class="box-content"><?php print $content ?></div>
+  <?php if ($title): ?>
+    <h2 class="box-title title"><?php print $title ?></h2>
+  <?php endif; ?>
+  <div class="box-content">
+    <?php print $content ?>
+  </div>
 </div></div> <!-- /box -->
