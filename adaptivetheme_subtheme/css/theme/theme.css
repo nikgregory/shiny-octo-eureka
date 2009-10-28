@@ -199,7 +199,11 @@ body > #container {
 /**********************************************************
  *                       Regions
  **********************************************************/
-/* Target all regions with this low specifity selector. */
+/* Target all aside content (all regions except the main content 
+   region and the footer-region). */
+.aside {}
+ 
+/* Target all regions, with these low specifity selectors. */
 .region {}
 .region-inner {}
 
@@ -686,24 +690,22 @@ ul.links li.print_pdf a {}
 
 
 /**********************************************************
- *                   Core content types
+ *                     Content types
+ *              Style article types by type.
  **********************************************************/
-.article-blog  {}
-.article-page  {}
-.article-story {}
-.article-forum {}
-.article-book  {}
-.article-poll  {}
+.book-article  {}
+.blog-article  {}
+.forum-article {}
+.page-article  {}
+.poll-article  {}
+.story-article {}
 
-
-/**********************************************************
- *                 Custom node types
- **********************************************************/
+/* Custom node types/
 /** 
  * Replace CONTENT_TYPE with the content type 
  * machine-readable name. 
  */
-.article-type-CONTENT_TYPE {}
+.CONTENT_TYPE-article {}
 
 
 /**********************************************************
@@ -811,13 +813,21 @@ ul.links li.comment_delete a {}
 /* Themes the "Unpublished" text. */
 .comment-unpublished .unpublished {}
 
-/* Comment form on a seperate page. */
+/* Comment box wrapper on a seperate page. */
 .section-comment .box {}
 .section-comment .box .box-title {}
 
-/* Comment form below content. */
+/* Comment box wrapper below content. */
 #comments .box {}
 #comments .box .box-title {}
+
+/* Sytle comments by article type. */
+.book-comments  {}
+.blog-comments  {}
+.forum-comments {}
+.page-comments  {}
+.poll-comments  {}
+.story-comments {}
 
 
 /**********************************************************

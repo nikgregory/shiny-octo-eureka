@@ -31,18 +31,19 @@ if (!$vars['status']) {
   $classes[] = 'article-unpublished';
 }
 if ($vars['teaser']) {
-  // Node is displayed as teaser.
   $classes[] = 'article-teaser';
 }
 if (isset($vars['preview'])) {
   $classes[] = 'article-preview';
 }
+
 // Add support for Skinr module classes http://drupal.org/project/skinr
-if (function_exists('node_skinr_data')) {
+if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
+
 // Class for node type: "node-type-page", "node-type-my-custom-type", etc.
-$classes[] = 'article-'. $vars['node']->type;
+$classes[] = $vars['node']->type .'-article';
 
 // $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.

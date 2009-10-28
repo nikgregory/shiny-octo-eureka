@@ -112,7 +112,7 @@
     <?php // if (!empty($admin)) print $admin; ?>
 
     <?php if ($leaderboard): ?>
-      <div id="leaderboard" class="section region"><div class="region-inner">
+      <div id="leaderboard" class="aside region"><div class="region-inner">
         <?php print $leaderboard; ?>
       </div></div> <!-- /leaderboard -->
     <?php endif; ?>
@@ -148,7 +148,7 @@
       <?php endif; ?>
 
       <?php if ($header): ?>
-        <div id="header-region" class="section region"><div class="region-inner">
+        <div id="header-region" class="aside region"><div class="region-inner">
           <?php print $header; ?>
         </div></div> <!-- /header region -->
       <?php endif; ?>
@@ -185,7 +185,7 @@
     <?php endif; ?>
     
     <?php if ($secondary_content): ?>
-      <div id="secondary-content" class="section region"><div class="region-inner">
+      <div id="secondary-content" class="aside region"><div class="region-inner">
         <?php print $secondary_content; ?>
       </div></div> <!-- /secondary-content -->
     <?php endif; ?>
@@ -199,7 +199,7 @@
         <?php endif; ?>
 
         <?php if ($content_top): ?>
-          <div id="content-top" class="section region"><div class="region-inner">
+          <div id="content-top" class="aside region"><div class="region-inner">
             <?php print $content_top; ?>
         </div></div> <!-- /content-top -->
         <?php endif; ?>
@@ -214,17 +214,17 @@
             </div>
           <?php endif; ?>
           <?php if ($content_aside): ?> 
-            <div id="content-aside" class="section region"><div class="region-inner">
+            <div id="content-aside" class="aside region"><div class="region-inner">
               <?php print $content_aside; ?>
-            </div></div> <!-- /content-adide -->
+            </div></div> <!-- /content-aside -->
           <?php endif; ?> 
-          <div id="content" class="section region"><div class="region-inner">
+          <div id="content" class="aside region"><div class="region-inner">
             <?php print $content; ?>
           </div></div>							
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom" class="section region"><div class="region-inner">
+          <div id="content-bottom" class="aside region"><div class="region-inner">
             <?php print $content_bottom; ?>
         </div></div> <!-- /content-bottom -->
         <?php endif; ?>
@@ -232,13 +232,13 @@
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-first" class="sidebar section region"><div class="region-inner">
+        <div id="sidebar-first" class="sidebar aside region"><div class="region-inner">
           <?php print $left; ?>
         </div></div> <!-- /sidebar-first -->
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-last" class="sidebar section region"><div class="region-inner">
+        <div id="sidebar-last" class="sidebar aside region"><div class="region-inner">
           <?php print $right; ?>
         </div></div> <!-- /sidebar-last -->
       <?php endif; ?>
@@ -246,7 +246,7 @@
     </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
-      <div id="tertiary-content" class="section region clear-block"><div class="region-inner">
+      <div id="tertiary-content" class="aside region clear-block"><div class="region-inner">
         <?php print $tertiary_content; ?>
       </div></div> <!-- /tertiary-content -->
     <?php endif; ?>
@@ -255,7 +255,7 @@
       <div id="footer" class="clear-block">
 
         <?php if ($footer): ?>
-          <div id="footer-region" class="section region"><div class="region-inner">
+          <div id="footer-region" class="region"><div class="region-inner">
             <?php print $footer; ?>
           </div></div> <!-- /footer-region -->
         <?php endif; ?>
