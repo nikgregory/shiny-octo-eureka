@@ -8,12 +8,11 @@
 global $theme;
 
 $classes = array();
+
 // Add support for Skinr module classes http://drupal.org/project/skinr
 if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
- 
-$classes = array();
  
 // Class for node types: "forum-comments", "blog-comments", etc.
 $classes[] = $vars['node']->type .'-comments';
