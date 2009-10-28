@@ -218,7 +218,7 @@
               <?php print $content_aside; ?>
             </div></div> <!-- /content-aside -->
           <?php endif; ?> 
-          <div id="content" class="aside region"><div class="region-inner">
+          <div id="content" class="section region"><div class="region-inner">
             <?php print $content; ?>
           </div></div>							
         </div> <!-- /main-content -->
