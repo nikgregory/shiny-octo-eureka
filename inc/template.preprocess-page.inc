@@ -116,49 +116,57 @@ if (theme_get_setting('mission_statement_pages') == 'all') {
   $vars['mission'] = theme_get_setting('mission', FALSE);  
 }
 
-// Layout settings - set the page width and layout method
+// Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');
-  $right_width = theme_get_setting('layout_sidebar_last_width');
-  $left_width = theme_get_setting('layout_sidebar_first_width');
+  $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
+  $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
+  if ($vars['language']->dir == 'ltr') {
+    $left = 'left';
+    $right = 'right';
+  }
+  if ($vars['language']->dir == 'rtl') {
+    $left = 'right';
+    $right = 'left';
+  }
   if ($method == '0') {
-    $content_margin_right = $right_width;
-    $content_margin_left  = $left_width;
-    $pull_right           = $right_width;
+    $push_right = $sidebar_last_width;
+    $push_left  = $sidebar_first_width;
+    $pull_right = $sidebar_last_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin:0 '. $content_margin_right .'px 0 '. $content_margin_left .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-left:'. $content_margin_left .'px; margin-right:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px; margin-left:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-100%;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $pull_right .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':'. $push_right .'px;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px; margin-'. $left .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-100%;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $pull_right .'px;}';
   }
   if ($method == '1') {
-    $content_margin       = $right_width + $left_width;
-    $content_margin_right = $right_width;
-    $content_margin_left  = $left_width;
-    $left_margin          = $right_width + $left_width;
-    $right_margin         = $right_width;
+    $content_margin = $sidebar_last_width + $sidebar_first_width;
+    $push_right     = $sidebar_last_width;
+    $push_left      = $sidebar_first_width;
+    $left_margin    = $sidebar_last_width + $sidebar_first_width;
+    $right_margin   = $sidebar_last_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin-right:'. $content_margin .'px;margin-left:0;}';
-    $styles[] = '.sidebar-left .content-inner{margin-right:'. $content_margin_left .'px;margin-left:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;margin-left:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_margin .'px;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $right_margin .'px;}';
-    $styles[] = '.sidebar-left #sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_width .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $right .':'. $content_margin .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $right .':'. $push_left .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px;margin-'. $left .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $left_margin .'px;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $right_margin .'px;}';
+    $styles[] = '.sidebar-left #sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $sidebar_first_width .'px;}';
   }
   if ($method == '2') {
-    $content_margin = $right_width + $left_width;
-    $left_margin    = $right_width + $left_width;
-    $right_margin   = $right_width;
-    $push_right     = $left_width;
+    $content_margin = $sidebar_last_width + $sidebar_first_width;
+    $left_margin    = $sidebar_first_width;
+    $right_margin   = $sidebar_last_width;
+    $push_right     = $sidebar_first_width;
     $styles = array();
-$styles[] = '.two-sidebars .content-inner{margin:0 0 0'. $content_margin . 'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-left:'. $left_margin .'px;margin-right:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-left:'. $right_margin .'px;margin-right:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px; margin-left: -100%;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px; margin-left: -100%;}';
-    $styles[] = '.two-sidebars #sidebar-last {width:'. $right_width .'px; position: relative; left:'. $push_right .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $content_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $left_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $left .':'. $right_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px; margin-'. $left .': -100%;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px; margin-'. $left .': -100%;}';
+    $styles[] = '.two-sidebars #sidebar-last {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';
   }
   $vars['at_layout'] = implode('', $styles);
   if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
