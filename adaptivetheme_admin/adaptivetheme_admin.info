@@ -61,6 +61,7 @@
   settings[submitted_by_date_default]        = 1
   settings[submitted_by_enable_content_type] = 0
   settings[rebuild_registry]                 = 0
+  settings[show_theme_info]                  = 0
   settings[load_firebug_lite]                = 0
   settings[admin_user_links]                 = 1
   settings[block_edit_links]                 = 1

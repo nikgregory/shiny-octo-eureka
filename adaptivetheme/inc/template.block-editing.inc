@@ -19,10 +19,10 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
    * Add block edit links.
    */
     if ($block->module == 'block') {
-      $edit_links[] = l(t('Edit Block'), 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
+      $edit_links[] = l('<span>'. t('Edit Block') .'</span>', 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
         array(
           'attributes' => array(
-            'class' => 'block-edit-link',
+            'class' => 'block-edit-link edit-block-block',
             'title' => t('Edit this block'),
           ),
           'query' => drupal_get_destination(),
@@ -32,10 +32,10 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
     }
     // Display 'Configure' for other blocks.
     else {
-      $edit_links[] = l(t('Configure'), 'admin/build/block/configure/'. $block->module .'/'. $block->delta,
+      $edit_links[] = l('<span>'. t('Configure') .'</span>', 'admin/build/block/configure/'. $block->module .'/'. $block->delta,
         array(
           'attributes' => array(
-            'class' => 'block-edit-link',
+            'class' => 'block-edit-link edit-block-block',
             'title' => t('Configure this block'),
           ),
           'query' => drupal_get_destination(),
@@ -46,10 +46,10 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
     // Display 'Edit Menu' for menu blocks.
     if (($block->module == 'menu' || ($block->module == 'user' && $block->delta == 1)) && user_access('administer menu')) {
       $menu_name = ($block->module == 'user') ? 'navigation' : $block->delta;
-      $edit_links[] = l( t('Edit Menu'), 'admin/build/menu-customize/'. $menu_name, 
+      $edit_links[] = l('<span>'. t('Edit Menu') .'</span>', 'admin/build/menu-customize/'. $menu_name, 
         array(
           'attributes' => array(
-            'class' => 'block-edit-link',
+            'class' => 'block-edit-link edit-block-menu',
             'title' => t('Edit this menu'),
           ),
           'query' => drupal_get_destination(),
@@ -59,6 +59,7 @@ function phptemplate_preprocess_block_editing(&$vars, $hook) {
     }
   // Theme links as an item list.
   $vars['edit_links_array'] = $edit_links;
-  $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list'));
-  $vars['edit_links'] = '<div class="block-edit">'. strip_tags($items, '<ul><li><a>') .'</div>';
+  $vars['edit_links'] = '<div class="edit-links">' . implode(' ', $edit_links) . '</div>';
+ // $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list'));
+ // $vars['edit_links'] = '<div class="block-edit">'. strip_tags($items, '<ul><li><a>') .'</div>';
 }

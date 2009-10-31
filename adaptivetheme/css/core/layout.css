@@ -97,5 +97,6 @@
 #container > #columns{display:block;}
 #content-column,#sidebar-first,#sidebar-last{float:left;}
 #content-column{width:100%;}
-#main-content,.block{position:relative;zoom:1;}
+#main-content,.block{position:relative;}
+.block-inner{zoom:1;}
 .clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer,#footer-region,#footer-message,.block{clear:both;}

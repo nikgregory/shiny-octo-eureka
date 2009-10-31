@@ -103,13 +103,13 @@
     <div id="skip-nav">
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
-    
+
     <?php if ($admin_user_links): ?>
-      <div id="user-menu" class="clear-block"><?php print $admin_user_links; ?></div> <!-- /admin user link -->
+      <div id="user-menu" class="clear-block">
+        <h2 class="element-invisible"><?php print t('User menu'); ?></h2>
+        <?php print $admin_user_links; ?>
+      </div> <!-- /admin user link -->
     <?php endif; ?>
-    
-    <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
-    <?php // if (!empty($admin)) print $admin; ?>
 
     <?php if ($leaderboard): ?>
       <div id="leaderboard" class="aside region"><div class="region-inner">
@@ -157,13 +157,19 @@
 
     <?php if ($primary_menu or $secondary_menu): ?>
       <div id="nav" class="clear-block">
-        
+
         <?php if ($primary_menu): ?>
-          <div id="primary"><div class="primary-inner"><?php print $primary_menu; ?></div></div>
+          <div id="primary"><div class="primary-inner">
+            <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
+            <?php print $primary_menu; ?>
+          </div></div>
         <?php endif; ?>
 
         <?php if ($secondary_menu): ?>
-          <div id="secondary"><div class="secondary-inner"><?php print $secondary_menu; ?></div></div>
+          <div id="secondary"><div class="secondary-inner">
+            <h2 class="element-invisible"><?php print t('Secondary menu'); ?></h2>
+            <?php print $secondary_menu; ?>
+          </div></div>
         <?php endif; ?>
 
       </div> <!-- /nav -->
@@ -175,15 +181,15 @@
         <?php print $breadcrumb; ?>
       </div></div> <!-- /breadcrumb -->
     <?php endif; ?>
-    
+
     <?php if ($messages or $help): ?>
       <div id="messages-and-help">
-        <h2 class="element-invisible"><?php print t('System message:'); ?></h2>
+        <h2 class="element-invisible"><?php print t('System messages:'); ?></h2>
         <?php if ($messages): print $messages; endif; ?>
         <?php if ($help): print $help; endif; ?>
-      </div>
+      </div> <!-- /messages/help -->
     <?php endif; ?>
-    
+
     <?php if ($secondary_content): ?>
       <div id="secondary-content" class="aside region"><div class="region-inner">
         <?php print $secondary_content; ?>
@@ -201,10 +207,11 @@
         <?php if ($content_top): ?>
           <div id="content-top" class="aside region"><div class="region-inner">
             <?php print $content_top; ?>
-        </div></div> <!-- /content-top -->
+          </div></div> <!-- /content-top -->
         <?php endif; ?>
-        
+
         <div id="main-content">
+
           <?php if ($title or $tabs): ?>
             <div id="main-content-header">
               <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
@@ -213,14 +220,17 @@
               <?php endif; ?>
             </div>
           <?php endif; ?>
+
           <?php if ($content_aside): ?> 
             <div id="content-aside" class="aside region"><div class="region-inner">
               <?php print $content_aside; ?>
             </div></div> <!-- /content-aside -->
-          <?php endif; ?> 
+          <?php endif; ?>
+
           <div id="content" class="section region"><div class="region-inner">
             <?php print $content; ?>
-          </div></div>							
+          </div></div>
+
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
@@ -242,7 +252,7 @@
           <?php print $right; ?>
         </div></div> <!-- /sidebar-last -->
       <?php endif; ?>
-    
+
     </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
@@ -265,11 +275,11 @@
             <?php print $footer_message; ?>
           </div></div> <!-- /footer-message -->
         <?php endif; ?>
-        
+
         <?php if ($feed_icons): ?>
           <div id="feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
-        
+
         <?php print $attribution; ?>
 
       </div> <!-- /footer -->

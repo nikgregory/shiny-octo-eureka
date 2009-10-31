@@ -218,6 +218,9 @@ h1#page-title,.node-form #edit-title,input.title{font-size:1.5em;}
 
 .block a:hover,tr #acquia-agent-no-search a:hover{background:#EAF2FA;color:#555;}
 
+/* Style edit links for blocks and views. */
+div.block-edit-links .edit-links{top:15px;}
+
 ul.menu li a,.form-item strong.error{display:block;}
 .block.at-inline-menu .block-inner{border:none;}
 .at-inline-menu ul.menu li{border-color:#CCC;}

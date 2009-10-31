@@ -333,19 +333,37 @@ SCRIPT;
     }
   }
   // Development settings
-  $form['themedev'] = array(
+  $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
- $form['themedev']['rebuild_registry'] = array(
+  $form['themedev']['dev']['rebuild_registry'] = array(
     '#type' => 'checkbox',
     '#title' => t('Rebuild theme registry on every page.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
- $form['themedev']['load_firebug_lite'] = array(
+  //show_theme_info
+  if (module_exists('devel')) {
+    $form['themedev']['dev']['show_theme_info'] = array(
+       '#type' => 'checkbox',
+       '#title' => t('Show theme info.'),
+       '#default_value' => $settings['show_theme_info'],
+       '#description' => t('This will show the output of the global $theme_info variable using Krumo.'),
+    );
+  }
+  else {
+    $form['themedev']['dev']['show_theme_info'] = array(
+       '#type' => 'checkbox',
+       '#title' => t('Show theme info.'),
+       '#default_value' => $settings['show_theme_info'],
+       '#disabled' => 'disabled',
+       '#description' => t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel')),
+    );
+  }
+  $form['themedev']['dev']['load_firebug_lite'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load Firebug lite script for debugging in IE, Opera and Webkit.'),
     '#default_value' => $settings['load_firebug_lite'],

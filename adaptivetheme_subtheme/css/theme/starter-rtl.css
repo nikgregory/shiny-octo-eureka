@@ -4,10 +4,10 @@
 
 /**
  * @file stater-rtl.css
- * Default styles for getting started. Unset this if you want a style-free starter theme.
+ * Default RTL styles for getting started.
  */
 body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;}
-#skip-nav{text-align:left;}
+#skip-nav{text-align:left;float:left;}
 #branding{float:right;}
 #search-box{float:left;}
 #header-blocks{float:right;}
@@ -22,3 +22,5 @@ ul.menu ul ul ul{margin:0 1em 0 0;}
 .article ul.links li{padding:0 1em;}
 #block-locale-0 ul{margin:0 1.5em 0 0;}
 .indented {margin-right:60px;}
+#user-menu ul {float:right;}
+#user-menu ul li {float:right;margin:0 0 0 1em;}

@@ -764,8 +764,8 @@ ul.links li.print_pdf a {}
 .comment-title a:link,
 .comment-title a:visited,
 .comment-title a:active {}
-
-.comment-title a:hover {}
+.comment-title a:hover,
+.comment-title a:focus {}
 
 .comment .user-picture {}
 .comment .user-picture img {}
@@ -962,11 +962,13 @@ ul.menu li.collapsed {}
 ul.menu li.expanded  {}
 ul.menu li.leaf      {}
 
-ul.menu li a:link    {}
-ul.menu li a:hover   {}
+ul.menu li a:link,
 ul.menu li a:visited {}
+ul.menu li a:hover,
+ul.menu li a:focus,
+ul.menu li a:active   {}
 ul.menu li.active a  {}
-ul.menu li.active-trail {}
+ul.menu li.active-trail a {}
 
 ul.menu li.first {}
 ul.menu li.last  {}

@@ -113,54 +113,58 @@ $classes_string = implode(' ', $classes);
 $vars['classes'] = str_replace('node', 'article', $classes_string);
 
 // THEME SETTINGS
-// Display mission statement on all pages.
-if (theme_get_setting('mission_statement_pages') == 'all') {
-  $vars['mission'] = theme_get_setting('mission', FALSE);  
-}
 
 // Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');
-  $right_width = theme_get_setting('layout_sidebar_last_width');
-  $left_width = theme_get_setting('layout_sidebar_first_width');
+  $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
+  $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
+  if ($vars['language']->dir == 'ltr') {
+    $left = 'left';
+    $right = 'right';
+  }
+  if ($vars['language']->dir == 'rtl') {
+    $left = 'right';
+    $right = 'left';
+  }
   if ($method == '0') {
-    $content_margin_right = $right_width;
-    $content_margin_left  = $left_width;
-    $pull_right           = $right_width;
+    $push_right = $sidebar_last_width;
+    $push_left  = $sidebar_first_width;
+    $pull_right = $sidebar_last_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin:0 '. $content_margin_right .'px 0 '. $content_margin_left .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-left:'. $content_margin_left .'px; margin-right:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px; margin-left:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-100%;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $pull_right .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':'. $push_right .'px;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px; margin-'. $left .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-100%;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $pull_right .'px;}';
   }
   if ($method == '1') {
-    $content_margin       = $right_width + $left_width;
-    $content_margin_right = $right_width;
-    $content_margin_left  = $left_width;
-    $left_margin          = $right_width + $left_width;
-    $right_margin         = $right_width;
+    $content_margin = $sidebar_last_width + $sidebar_first_width;
+    $push_right     = $sidebar_last_width;
+    $push_left      = $sidebar_first_width;
+    $left_margin    = $sidebar_last_width + $sidebar_first_width;
+    $right_margin   = $sidebar_last_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin-right:'. $content_margin .'px;margin-left:0;}';
-    $styles[] = '.sidebar-left .content-inner{margin-right:'. $content_margin_left .'px;margin-left:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-right:'. $content_margin_right .'px;margin-left:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_margin .'px;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px;margin-left:-'. $right_margin .'px;}';
-    $styles[] = '.sidebar-left #sidebar-first{width:'. $left_width .'px;margin-left:-'. $left_width .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $right .':'. $content_margin .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $right .':'. $push_left .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px;margin-'. $left .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $left_margin .'px;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $right_margin .'px;}';
+    $styles[] = '.sidebar-left #sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $sidebar_first_width .'px;}';
   }
   if ($method == '2') {
-    $content_margin = $right_width + $left_width;
-    $left_margin    = $right_width + $left_width;
-    $right_margin   = $right_width;
-    $push_right     = $left_width;
+    $content_margin = $sidebar_last_width + $sidebar_first_width;
+    $left_margin    = $sidebar_first_width;
+    $right_margin   = $sidebar_last_width;
+    $push_right     = $sidebar_first_width;
     $styles = array();
-    $styles[] = '.two-sidebars .content-inner{margin:0 0 0 '. $content_margin .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-left:'. $left_margin .'px;margin-right:0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-left:'. $right_margin .'px;margin-right:0;}';
-    $styles[] = '#sidebar-first{width:'. $left_width .'px; margin-left: -100%;}';
-    $styles[] = '#sidebar-last{width:'. $right_width .'px; margin-left: -100%;}';
-    $styles[] = '.two-sidebars #sidebar-last {width:'. $right_width .'px; position: relative; left:'. $push_right .'px;}';
+    $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $content_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $left_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-right .content-inner{margin-'. $left .':'. $right_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px; margin-'. $left .': -100%;}';
+    $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px; margin-'. $left .': -100%;}';
+    $styles[] = '.two-sidebars #sidebar-last {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';
   }
   $vars['at_layout'] = implode('', $styles);
   if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
@@ -169,6 +173,16 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
   if (theme_get_setting('at_admin_theme') == 1 && arg(2) == 'block') {
     $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout'] .'</style>';
   }
+}
+
+// Display mission statement on all pages.
+if (theme_get_setting('mission_statement_pages') == 'all') {
+  $vars['mission'] = theme_get_setting('mission', FALSE);  
+}
+
+// Show $theme_info output using krumo.
+if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
+  kpr($theme_info);
 }
 
 // Check whether help is disabled.
@@ -194,80 +208,4 @@ if ($vars['logged_in'] && theme_get_setting('admin_user_links')) {
   }
   $vars['admin_user_menu'] = $admin_user_links;
   $vars['admin_user_links'] = theme('item_list', $admin_user_links);
-}
-
-/**
- * From Studio Theme 6.x-2.x
- * Check for stylesheets to be placed at the top of the stack or conditional
- * Internet Explorer styles in the .info file and add them to the $styles
- * variable.
- */
-$top_styles = array();
-$ie_styles = array();
-
-/**
- * If there is more than one active theme, check all base themes for
- * stylesheets.
- */
-if (count($themes_active) > 1) {
-  foreach ($base_theme_info as $name => $info) {
-    if (isset($info->info['top stylesheets'])) {
-      $top_styles[$name] = $info->info['top stylesheets'];
-    }
-    if (isset($info->info['ie stylesheets'])) {
-      $ie_styles[$name] = $info->info['ie stylesheets'];
-    }
-  }
-}
-
-/**
- * Check the current theme for stylesheets.
- */
-if (isset($theme_info->info['top stylesheets'])) {
-  $top_styles[$theme_info->name] = $theme_info->info['top stylesheets'];
-}
-if (isset($theme_info->info['ie stylesheets'])) {
-  $ie_styles[$theme_info->name] = $theme_info->info['ie stylesheets'];
-}
-
-/**
- * If there is at least one entry in the $top_styles array, process it.
- */
-if (count($top_styles) >= 1) {
-  // Format the array into a format readable by drupal_get_css().
-  $vars['top_css'] = array();
-  foreach ($top_styles as $name => $theme_styles) {
-    $path = drupal_get_path('theme', $name);
-    foreach ($theme_styles as $media => $styles) {
-      foreach ($styles as $style) {
-        $vars['top_css'][$media]['featured'][$path .'/'. $style] = TRUE;
-      }
-      // Add the new styles to the top of the $vars['css'] array.
-      array_unshift($vars['css'][$media], $vars['top_css'][$media]['featured']);
-    }
-  }
-  // Run $vars['css'] through drupal_get_css and replace the $styles variable.
-  $vars['styles'] = drupal_get_css($vars['css']);
-}
-
-/**
- * If there is at least one entry in the $ie_styles array, process it.
- */
-if (count($ie_styles) >= 1) {
-  // Format the array into a format readable by drupal_get_css().
-  $vars['ie_css'] = array();
-  foreach ($ie_styles as $name => $theme_styles) {
-    $path = drupal_get_path('theme', $name);
-    foreach ($theme_styles as $version => $media) {
-      foreach ($media as $type => $styles) {
-        foreach ($styles as $style) {
-          $vars['ie_css'][$version][$type]['theme'][$path .'/'. $style] = TRUE;
-        }
-      }
-    }
-  }
-  // Append the stylesheets to $styles, grouped by IE conditional.
-  foreach ($vars['ie_css'] as $version => $styles) {
-    $vars['styles'] .= '<!--[if '. $version .']>'."\n". drupal_get_css($styles) .'<![endif]-->'."\n";
-  }
 }
