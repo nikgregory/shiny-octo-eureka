@@ -15,33 +15,49 @@
  */
 global $theme;
 $block = $vars['block'];
-  
+
 // Set the block id.
-$vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
+if (theme_get_setting('cleanup_block_block_module_delta')) {
+  $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
+}
 
-// Set up variables for navigation-like blocks.
-$n1 = array('user-1', 'statistics-0');
-$n2 = array('menu', 'book', 'forum', 'blog', 'aggregator', 'comment');
-$h1 = $block->module .'-'. $block->delta;
-$h2 = $block->module;
+if (theme_get_setting('cleanup_block_classes_nav')) {
+  // Set up variables for navigation-like blocks.
+  $n1 = array('user-1', 'statistics-0');
+  $n2 = array('menu', 'book', 'forum', 'blog', 'aggregator', 'comment');
+  $h1 = $block->module .'-'. $block->delta;
+  $h2 = $block->module;
+}
 
-// Special classes for blocks, emulate Drupal 7.
+  // Special classes for blocks, emulate Drupal 7.
 $classes = array();
 $classes[] = 'block';
-$classes[] = 'block-'. $block->module;
+
+if (theme_get_setting('cleanup_block_classes_module')) {
+  $classes[] = 'block-'. $block->module;
+}
 
 // Add nav class to navigation-like blocks.
-if (in_array($h1, $n1)) {
-  $classes[] = 'nav';
-}
-if (in_array($h2, $n2)) {
-  $classes[] = 'nav';
+if (theme_get_setting('cleanup_block_classes_nav')) {
+  if (in_array($h1, $n1)) {
+    $classes[] = 'nav';
+  }
+  if (in_array($h2, $n2)) {
+    $classes[] = 'nav';
+  }
 }
 
-// Optionally use additional block classes
-// $classes[] = $vars['block_zebra'];        // odd, even zebra class
-// $classes[] = 'block-'. $block->region;    // block-[region] class
-// $classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
+if (theme_get_setting('cleanup_block_classes_zebra')) {
+  $classes[] = $vars['block_zebra']; // odd, even zebra class
+}
+
+if (theme_get_setting('cleanup_block_classes_region')) {
+  $classes[] = 'block-'. $block->region; // block-[region] class
+}
+
+if (theme_get_setting('cleanup_block_classes_count')) {
+  $classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
+}
 
 // Add special classes to support the http://drupal.org/project/blocktheme module.
 if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
@@ -65,7 +81,7 @@ if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   $classes[] = 'block-edit-links';
 }
 
-// Add classes for the horizontal login block if enabled. 
+// Add classes for the horizontal login block if enabled.
 if (theme_get_setting('horizontal_login_block') && $vars['block_module_delta'] == 'block-user-0') {
   $classes[] = 'at-horizontal-login clear-block';
 }

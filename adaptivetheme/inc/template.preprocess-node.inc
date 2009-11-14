@@ -14,27 +14,43 @@
  *   The name of the theme function being called.
  */
 global $user, $theme;
- 
+
+if (theme_get_setting('cleanup_article_classes_promote')) {
 // Set the node id.
-$vars['article_id'] = 'article-'. $vars['node']->nid;
+  $vars['article_id'] = 'article-'. $vars['node']->nid;
+}
 
 // Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
 $classes = array();
+
 $classes[] = 'article';
-if ($vars['promote']) {
-  $classes[] = 'article-promoted';
+
+if (theme_get_setting('cleanup_article_classes_promote')) {
+  if ($vars['promote']) {
+    $classes[] = 'article-promoted';
+  }
 }
-if ($vars['sticky']) {
-  $classes[] = 'article-sticky';
+
+if (theme_get_setting('cleanup_article_classes_sticky')) {
+  if ($vars['sticky']) {
+    $classes[] = 'article-sticky';
+  }
 }
+
+if (theme_get_setting('cleanup_article_classes_teaser')) {
+  if ($vars['teaser']) {
+    $classes[] = 'article-teaser';
+  }
+}
+
+if (theme_get_setting('cleanup_article_classes_preview')) {
+  if (isset($vars['preview'])) {
+    $classes[] = 'article-preview';
+  }
+}
+
 if (!$vars['status']) {
   $classes[] = 'article-unpublished';
-}
-if ($vars['teaser']) {
-  $classes[] = 'article-teaser';
-}
-if (isset($vars['preview'])) {
-  $classes[] = 'article-preview';
 }
 
 // Add support for Skinr module classes http://drupal.org/project/skinr
@@ -42,8 +58,10 @@ if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
 
-// Class for node type: "node-type-page", "node-type-my-custom-type", etc.
-$classes[] = $vars['node']->type .'-article';
+if (theme_get_setting('cleanup_article_classes_type')) {
+  // Class for node type: "node-type-page", "node-type-my-custom-type", etc.
+  $classes[] = $vars['node']->type .'-article';
+}
 
 // $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
@@ -81,23 +99,23 @@ if (!function_exists('submitted_by_node_submitted')) {
 $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
-$delimiter = theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type);
+$delimiter = filter_xss(theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type));
 $heading_level = $vars['page'] ? 'h2' : 'h3';
 if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page']))) {
   $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
   $output = '';
-  $vocab_delimiter = '';
+  $vocab_delimiter = ''; 
   foreach ($vocabularies as $vocabulary) {
     if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
       $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
       if ($terms) {
-        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. $vocabulary->vid .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="vocab-list">' : '';
+        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. safe_string($vocabulary->name) .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="terms">' : '';
         $links = array();
         $term_index = 0;
         foreach ($terms as $term) {
           $term_index++;
-          $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter ;
-          $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
+          $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter;
+          $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
         }
         if ($taxonomy_format == 'list') {
           $output .= $vocab_delimiter;

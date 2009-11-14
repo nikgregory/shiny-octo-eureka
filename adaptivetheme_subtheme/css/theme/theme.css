@@ -78,31 +78,13 @@ a.active  {}
 a:active,
 a:focus {}
 
-/* Drupal sets this to black. */
-li a.active {}
-
-/* Remove borders on linked images. */
-a img {}
 
 /**********************************************************
  *              Section, Page and Body Classes
  **********************************************************/
-/**
- * Normally you will use these in combination with other
- * selectors. I include them here for completedness.
- */
-	
-/** 
- * Section Class
- * The section class takes the 2nd part of the URL and
- * builds a section-[arg] class from it. If you emulate
- * site sections using the Pathauto module this can be a 
- * powerful way to style site sections.
- *
- * Look in body element for the section you want to style
- * to find the class to replace section-[arg]:
- */
-/* .section-arg {} */
+ /* Note that most of these are not active by default,
+    to use the extra classes you need to enable them
+    in the Advanced theme settings first. */
 
 /* Front or not front. */
 .front {}
@@ -120,69 +102,14 @@ a img {}
 .article-type-poll  {}
 .article-type-story {}
 
-/**
- * Warning! 
- * The sidebar body classes are integral to how Adaptivetheme
- * applies the layout. Be careful. 
- */
-.one-sidebar   {}
-.two-sidebars  {}
-.sidebar-left  {} /* Applies to sidebar-first in AT */
-.sidebar-right {} /* Applies to sidebar-last in AT */
-
-/** 
- * Optional Region body classes
- * When any of the following regions are active a body class can be set.
- * To use you need to uncomment the conditional statements in 
- * themeName_preprocess_page(), @see template.php.
- */
-/*
-.leaderboard       {}
-.header-region     {}
-.secondary-content {}
-.tertiary-content  {}
-.footer            {}
-*/
-
-/** 
- * Page Path Class
- * The page path class takes the entire URL and builds a page-[path] 
- * class from it. See examplebelow. You need to use Firebug or view 
- * source to find out what the actual class will be, and be aware
- * that this will change if your URL alias changes!
- *
- * Replace [example-item-path] with the path you want
- * to style.
- */
-/* .page-example-item-path {} */
-
 	
 /**********************************************************
  *                  The wrapper divs
  *    Be careful how you modify these, see layout.css
  **********************************************************/
-/**
- * Width Setting
- *
- * The layout supports Elastic, Fluid and Fixed width values.
- * Elastic layouts are dynamic and will expand or contract when 
- * the font size is changed. Fluid widths change when the browser 
- * is resized and fixed width layouts stay the same width even 
- * when the broswer is resized or the font size is changed.
- *
- * Elastic layouts use ems,       e.g. 80em
- * Fluid layouts use percentages, e.g. 85%
- * Fixed widths use pixels,       e.g. 960px
- */
+
 #container {}
 
-/* Set a flexible width with max/min widths.
-body > #container {
-  width: 100%;      
-  max-width: 980px;
-  min-width: 760px;
-}
-*/
 /* Column wrappers */
 #columns {}
 .columns-inner {}
@@ -199,49 +126,28 @@ body > #container {
 /**********************************************************
  *                       Regions
  **********************************************************/
-/* Target all aside content (all regions except the main content 
-   region and the footer-region). */
+/* Target all aside content (all regions except the header, content and footer). */
 .aside {}
  
-/* Target all regions, with these low specifity selectors. */
-.region {}
-.region-inner {}
-
-/**
- * Most regions have an .inner div to set paddings or other
- * design contingencies.
- */
- 
-/* Leaderboard is a full width region at the very top, 
-   ideal for displaying banners. */
+/* Leaderboard is a full width region at the very top, ideal for displaying banners. */
 #leaderboard {}
-#leaderboard .region-inner {}
 
-/* Header region is embedded in the header, floated
-   between the logo/site_name and the search box. */
+/* Header region is embedded in the header, floated between the logo/site_name and the search box. */
 #header-region {}
-#header-region .region-inner {}
 
-/* Secondary content is a full width region between 
-   the header and the main columns. */
+/* Secondary content is a full width region between the header and the main columns. */
 #secondary-content {}
-#secondary-content .region-inner {}
 
-/* Tertiary content is a full width region above the footer, 
-   below the main content. */
+/* Tertiary content is a full width region above the footer, below the main content. */
 #tertiary-content {}
-#tertiary-content .region-inner {}
 
-/* Content top and bottom are above and below the main content, 
-   within the main content column. Content aside floats to the 
-   right within the main central column, but below content top. */
+/* Content top and bottom are above and below the main content, within the main content column. 
+   Content aside floats to the right within the main central column, but below content top. */
 #content-top {}
 #content-aside {}
 #content-bottom {}
 
-/* Article aside appears only in articles (nodes). By default its
-   placed at the bottom of the node.tpl.php template, but you are 
-   free to move it around. */
+/* Article aside appears only in articles (nodes). By default its placed at the bottom of the node.tpl.php template. */
 #article-aside {}
 
 
@@ -250,23 +156,16 @@ body > #container {
  **********************************************************/
 /* Target both sidebars with this low specifity selector. */
 .sidebar {}
-.sidebar .region-inner {}
 
 /* Target a specific sidebar, inner or sidebar-inner. */
 #sidebar-first {}
-#sidebar-first .region-inner {}
-
 #sidebar-last {}
-#sidebar-last .region-inner {}
 
 
 /**********************************************************
  *                   Skip navigation
  **********************************************************/
 /**
- * To hide the skip-nav you can add the "element-invisible"
- * class to the skip nav wrapper div in page.tpl.php.
- * 
  * DO NOT USE display:none as this hides it from screen readers!
  */
 #skip-nav {}
@@ -277,38 +176,6 @@ body > #container {
 #skip-nav a:hover   {}
 #skip-nav a:focus   {}
 #skip-nav a:active  {}
-
-/**
- * An alternative method is to position the skip-nav link offscreen
- * until the user tabs the link into focus. Uncomment the following to use.
- * 
- * Adjust the style of the active/focused link to suit.
- */
-/*
-#skip-nav {
-  text-align: left;
-}
-#skip-nav a:link, 
-#skip-nav a:hover, 
-#skip-nav a:visited {
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  top: -999em;
-}
-#skip-nav a:active,
-#skip-nav a:focus {
-  background: #FFF;
-  color: #C00000;
-  height: 1.5em;
-  overflow: visible;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: auto;
-  z-index: 1000;
-}
-*/
 
 
 /**********************************************************
@@ -424,18 +291,6 @@ dl.search-results dd .search-info {}
  *               Primary & Secondary Links
  **********************************************************/
 /**
- * Implimentation of Primary and Secondary Links.
- *
- * Primary & Secondary Links are colored by default so you 
- * can easily identify them.
- */
-
-/**
- * #nav is the containing div for Primary & Secondary Links.
- */
-#nav {}
-
-/**
  * Primary Links
  */
  
@@ -527,15 +382,7 @@ dl.search-results dd .search-info {}
 /**********************************************************
  *                      Breadcrumb
  **********************************************************/
-/**
- * The breadcrumb is directly below the header, 
- * giving it the full width of theme to expand into.
- * You can eaisly drag the breadcrumb html/php to the main 
- * content column if you need to.
- */
 #breadcrumb {}
-#breadcrumb .breadcrumb-inner {}
-
 #breadcrumb a {}
 #breadcrumb a:link {}
 #breadcrumb a:visited {}
@@ -553,7 +400,6 @@ dl.search-results dd .search-info {}
 /**********************************************************
  *                    H1 Page Title
  **********************************************************/
-/* The main title on each page. */
 h1#page-title {}
 
 
@@ -586,7 +432,6 @@ h1#page-title {}
 #footer {}
 
 #footer-region {}
-#footer-region .region-inner {}
 #footer-region a {}
 
 #footer-message {}
@@ -617,29 +462,23 @@ h1#page-title {}
  **********************************************************/
 .article {}
 
-/* Inner wrapper div for articles. */
-.article-inner {}
-
 /* article title on teasers and other lists. */
 .article-title {}
 
 .article-title a:link,
-.article-title a:visited,
+.article-title a:visited {}
+.article-title a:hover,
+.article-title a:focus,
 .article-title a:active {}
-
-.article-title a:hover {}
-
-/* article content wrapper. */
-.article-content {}
 
 /* User Picture. */
 .article .user-picture {}
 .article .user-picture img {}
 
 /* Submitted */
-.article-submitted {}
-.article-submitted a {}
-.article-submitted a:hover {}
+.article .author-date-time {}
+.article .author-date-time a {}
+.article .author-date-time a:hover {}
 
 /* Common links classes. */
 .article ul.links {}
@@ -647,18 +486,21 @@ h1#page-title {}
 .article ul.links li a {}
 
 /* Links. */
-.article-links {}
-.article-links ul.links {}
-.article-links ul.links li  {}
-.article-links ul.links li a {}
+.article ul.links {}
+.article ul.links li  {}
+.article ul.links li a {}
 
 /* Taxonomy terms. */
-.article-terms {}
-.article-terms .vocab-name {}
-.article-terms li.vocab {}
-.article-terms ul.taxonomy {}
-.article-terms ul.taxonomy li.vocab-term {}
-.article-terms ul.taxonomy li.vocab-term a {}
+/* Term list */
+.article ul.taxonomy {}
+.article ul.taxonomy li {}
+.article ul.taxonomy li a {}
+/* With vocab headers */
+.article ul.taxonomy li.vocab {}
+.article h3.vocab-name {}
+.article ul.terms {}
+.article ul.terms li {}
+.article ul.terms li a {}
 
 /* Style module links. */
 ul.links li.node_read_more a {}
@@ -762,26 +604,22 @@ ul.links li.print_pdf a {}
 .comment-title .new {}
 
 .comment-title a:link,
-.comment-title a:visited,
-.comment-title a:active {}
+.comment-title a:visited {}
 .comment-title a:hover,
-.comment-title a:focus {}
+.comment-title a:focus,
+.comment-title a:active {}
 
 .comment .user-picture {}
 .comment .user-picture img {}
 
-.comment-submitted {}
-.comment-submitted a {}
-.comment-submitted a:hover {}
-
-/* Comment content wrapper. */
-.comment-content {}
+.comment .author-date-time {}
+.comment .author-date-time a {}
+.comment .author-date-time a:hover {}
 
 /* Comment links. */
-.comment-links {}
-.comment-links ul.links {}
-.comment-links ul.links li {}
-.comment-links ul.links li a {}
+.comment ul.links {}
+.comment ul.links li {}
+.comment ul.links li a {}
 
 /* Core comment link classes. */
 ul.links li.comment_reply a {}
@@ -789,8 +627,8 @@ ul.links li.comment_edit a {}
 ul.links li.comment_delete a {}
 
 /* Comment ul link first and last classes. */
-.comment-links ul.links li.first {}
-.comment-links ul.links li.last  {}
+.comment ul.links li.first {}
+.comment ul.links li.last  {}
 
 /**
  * Comment Classes - extra classes to help out themers.
@@ -840,7 +678,6 @@ ul.links li.comment_delete a {}
 .block {}
 .block-inner   {} /* Block inner div */
 .block-title   {} /* h2 block title */
-.block-content {} /* Block content wrapper */
 
 
 /**********************************************************
@@ -852,27 +689,23 @@ ul.links li.comment_delete a {}
  */
  
 /* Low specifity selector to style blocks in all regions. */
-.region .block {}
-.region .block h2 {}
-.region .block-inner {}
-.region .block .block-content {}
+.aside .block {}
+.aside .block h2 {}
+.aside .block-inner {}
 
 /* Low specifity selector to style blocks in both sidebars. */
 .sidebar .block {}
 .sidebar .block h2 {}
 .sidebar .block-inner {}
-.sidebar .block .block-content {}
 
 /* High specifity selectors to style blocks in one sidebar. */
 #sidebar-first .block {}
 #sidebar-first .block h2 {}
 #sidebar-first .block-inner {}
-#sidebar-first .block .block-content {}
 
 #sidebar-last .block {}
 #sidebar-last .block h2 {}
 #sidebar-last .block-inner {}
-#sidebar-last .block .block-content {}
 
 
 /**********************************************************
@@ -1141,8 +974,4 @@ ul.menu li.last  {}
 
 .threecol-at-stacked-inset {}
 .twocol-at-stacked-inset {}
-
-
-
-
 

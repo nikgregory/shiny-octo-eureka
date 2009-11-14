@@ -16,7 +16,5 @@
   <?php if ($title): ?>
     <h2 class="box-title title"><?php print $title ?></h2>
   <?php endif; ?>
-  <div class="box-content">
-    <?php print $content ?>
-  </div>
+  <?php print $content ?>
 </div></div> <!-- /box -->

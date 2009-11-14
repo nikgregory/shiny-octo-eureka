@@ -94,17 +94,18 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php print $layout_settings; ?>
+  <?php print $layout_settings ? $layout_settings : '' ; ?>
   <?php print $scripts; ?>
 </head>    
 <body class="<?php print $section_class . $classes; ?>">
   <div id="container">
 
-    <div id="skip-nav">
+    <div id="skip-nav" class="element-invisible">
+      <!-- NEVER use display:none to hide skip links - see http://drupal.org/node/472572 -->
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
 
-    <?php if ($admin_user_links): ?>
+    <?php if (!empty($admin_user_links)): ?>
       <div id="user-menu" class="clear-block">
         <h2 class="element-invisible"><?php print t('User menu'); ?></h2>
         <?php print $admin_user_links; ?>
@@ -112,12 +113,10 @@
     <?php endif; ?>
 
     <?php if ($leaderboard): ?>
-      <div id="leaderboard" class="aside region"><div class="region-inner">
-        <?php print $leaderboard; ?>
-      </div></div> <!-- /leaderboard -->
+      <div id="leaderboard"><?php print $leaderboard; ?></div> <!-- /leaderboard -->
     <?php endif; ?>
 
-    <div id="header"><div class="header-inner clear-block">
+    <div id="header" class="clear-block">
 
       <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
         <div id="branding">
@@ -144,42 +143,34 @@
       <?php endif; ?>
 
       <?php if ($search_box): ?>
-        <div id="search-box"><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box" class="clear-block"><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
 
       <?php if ($header): ?>
-        <div id="header-region" class="aside region"><div class="region-inner">
-          <?php print $header; ?>
-        </div></div> <!-- /header region -->
+        <div id="header-region"><?php print $header; ?></div> <!-- /header region -->
       <?php endif; ?>
 
-    </div></div> <!-- /header -->
+    </div> <!-- /header -->
 
-    <?php if ($primary_menu or $secondary_menu): ?>
-      <div id="nav" class="clear-block">
+    <?php if (!empty($primary_menu)): ?>
+      <div id="primary">
+        <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
+        <?php print $primary_menu; ?>
+      </div>
+    <?php endif; ?>
 
-        <?php if ($primary_menu): ?>
-          <div id="primary"><div class="primary-inner">
-            <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
-            <?php print $primary_menu; ?>
-          </div></div>
-        <?php endif; ?>
-
-        <?php if ($secondary_menu): ?>
-          <div id="secondary"><div class="secondary-inner">
-            <h2 class="element-invisible"><?php print t('Secondary menu'); ?></h2>
-            <?php print $secondary_menu; ?>
-          </div></div>
-        <?php endif; ?>
-
-      </div> <!-- /nav -->
+    <?php if (!empty($secondary_menu)): ?>
+      <div id="secondary">
+        <h2 class="element-invisible"><?php print t('Secondary menu'); ?></h2>
+        <?php print $secondary_menu; ?>
+      </div>
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
-      <div id="breadcrumb" class="nav"><div class="breadcrumb-inner">
+      <div id="breadcrumb">
         <h2 class="element-invisible"><?php print t('You are here:'); ?></h2>
         <?php print $breadcrumb; ?>
-      </div></div> <!-- /breadcrumb -->
+      </div> <!-- /breadcrumb -->
     <?php endif; ?>
 
     <?php if ($messages or $help): ?>
@@ -191,9 +182,7 @@
     <?php endif; ?>
 
     <?php if ($secondary_content): ?>
-      <div id="secondary-content" class="aside region"><div class="region-inner">
-        <?php print $secondary_content; ?>
-      </div></div> <!-- /secondary-content -->
+      <div id="secondary-content" class="aside"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
     <?php endif; ?>
 
     <div id="columns"><div class="columns-inner clear-block">
@@ -205,9 +194,7 @@
         <?php endif; ?>
 
         <?php if ($content_top): ?>
-          <div id="content-top" class="aside region"><div class="region-inner">
-            <?php print $content_top; ?>
-          </div></div> <!-- /content-top -->
+          <div id="content-top" class="aside"><?php print $content_top; ?></div> <!-- /content-top -->
         <?php endif; ?>
 
         <div id="main-content">
@@ -222,58 +209,42 @@
           <?php endif; ?>
 
           <?php if ($content_aside): ?> 
-            <div id="content-aside" class="aside region"><div class="region-inner">
-              <?php print $content_aside; ?>
-            </div></div> <!-- /content-aside -->
+            <div id="content-aside" class="aside"><?php print $content_aside; ?></div> <!-- /content-aside -->
           <?php endif; ?>
 
-          <div id="content" class="section region"><div class="region-inner">
-            <?php print $content; ?>
-          </div></div>
+          <div id="content"><?php print $content; ?></div>
 
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom" class="aside region"><div class="region-inner">
-            <?php print $content_bottom; ?>
-        </div></div> <!-- /content-bottom -->
+          <div id="content-bottom" class="aside"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
         <?php endif; ?>
 
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-first" class="sidebar aside region"><div class="region-inner">
-          <?php print $left; ?>
-        </div></div> <!-- /sidebar-first -->
+        <div id="sidebar-first" class="sidebar aside"><?php print $left; ?></div> <!-- /sidebar-first -->
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-last" class="sidebar aside region"><div class="region-inner">
-          <?php print $right; ?>
-        </div></div> <!-- /sidebar-last -->
+        <div id="sidebar-last" class="sidebar aside"><?php print $right; ?></div> <!-- /sidebar-last -->
       <?php endif; ?>
 
     </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
-      <div id="tertiary-content" class="aside region clear-block"><div class="region-inner">
-        <?php print $tertiary_content; ?>
-      </div></div> <!-- /tertiary-content -->
+      <div id="tertiary-content" class="aside"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
     <?php endif; ?>
 
     <?php if ($footer or $footer_message or $feed_icons): ?>
       <div id="footer" class="clear-block">
 
         <?php if ($footer): ?>
-          <div id="footer-region" class="region"><div class="region-inner">
-            <?php print $footer; ?>
-          </div></div> <!-- /footer-region -->
+          <div id="footer-region"><?php print $footer; ?></div> <!-- /footer-region -->
         <?php endif; ?>
 
         <?php if ($footer_message): ?>
-          <div id="footer-message"><div class="footer-message-inner">
-            <?php print $footer_message; ?>
-          </div></div> <!-- /footer-message -->
+          <div id="footer-message"><?php print $footer_message; ?></div> <!-- /footer-message -->
         <?php endif; ?>
 
         <?php if ($feed_icons): ?>

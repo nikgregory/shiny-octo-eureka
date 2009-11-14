@@ -19,7 +19,7 @@ global $theme, $theme_info, $user;
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
   $vars['help'] = '';
 }
-  
+
 // Remove sidebars if disabled e.g., for Panels.
 if (!$vars['show_blocks']) {
   $vars['left'] = '';
@@ -50,67 +50,70 @@ $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.
 
 // Section class. The section class is printed on the body element and allows you to theme site sections.
 // We use the path alias otherwise all nodes will be in "section-node".
-$path_alias = drupal_get_path_alias($_GET['q']);
-if (!$vars['is_front']) {
-  list($section, ) = explode('/', $path_alias, 2);
-  $vars['section_class'] = safe_string('section-'. $section) .' ';
+if (theme_get_setting('cleanup_classes_section')){
+  $path_alias = drupal_get_path_alias($_GET['q']);
+  if (!$vars['is_front']) {
+    list($section, ) = explode('/', $path_alias, 2);
+    $vars['section_class'] = safe_string('section-'. $section) .' ';
+  }
 }
 
 // Body Classes.
-$classes = explode(' ', $vars['body_classes']);
-
-// Remove the useless page-arg(0) class.
-if ($class = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-]+!s', '', 'page-'. drupal_strtolower(arg(0))), $classes)) {
-  unset($classes[$class]);
+$vars['layout'] = 'none';
+if (!empty($vars['left'])) {
+  $vars['layout'] = 'first';
+}
+if (!empty($vars['right'])) {
+  $vars['layout'] = ($vars['layout'] == 'first') ? 'both' : 'last';
 }
 
-/** 
- * Optional Region body classes
- * Uncomment the following if you need to set a body class for each active region.
- */
-/*        
-if (!empty($vars['leaderboard'])) {
-  $classes[] = 'leaderboard';
-}
-if (!empty($vars['header'])) {
-  $classes[] = 'header-region';
-}
-if (!empty($vars['content_aside'])) {
-  $classes[] = 'content-aside';
-}
-if (!empty($vars['secondary_content'])) {
-  $classes[] = 'secondary-content';
-}
-if (!empty($vars['tertiary_content'])) {
-  $classes[] = 'tertiary-content';
-}
-if (!empty($vars['footer'])) {
- $classes[] = 'footer';
-}
-*/
+$classes = array();
 
-/**
- * Additional body classes to help out themers.
- */
+if (theme_get_setting('cleanup_classes_front')) {
+  $classes[] = $vars['is_front'] ? 'front' : 'not-front';
+}
+if (theme_get_setting('cleanup_classes_user_status')) {
+  $classes[] = $vars['logged_in'] ? 'logged-in' : 'not-logged-in';
+}
+if (theme_get_setting('cleanup_classes_arg_one')) {
+  $classes[] = preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. form_clean_id(drupal_strtolower(arg(0))));
+}
+if (theme_get_setting('cleanup_classes_node_type')) {
+  if (isset($vars['node']) && $vars['node']->type) {
+    $classes[] = 'article-type-'. form_clean_id($vars['node']->type);
+  }
+}
 if (!$vars['is_front']) {
-  // Set classes based on Drupals internal path, e.g. page-node-1. 
-  // Using the alias is fragile because path alias's can change, $normal_path is more reliable.
-  $normal_path = drupal_get_normal_path($_GET['q']);
-  $classes[] = safe_string('page-'. $normal_path);
+  if (theme_get_setting('cleanup_classes_normal_path')) {
+    $normal_path = drupal_get_normal_path($_GET['q']);
+    $classes[] = safe_string('page-'. $normal_path);
+  }
   if (arg(2) == 'block') {
     $classes[] = 'page-block';
   }
-  if (arg(0) == 'node') {
-    if (arg(1) == 'add') {
-      $classes[] = 'page-article-add'; // Add .node-add class.
-    }
-    elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
-      $classes[] = 'page-article-'. arg(2); // Add .article-edit or .article-delete classes.
+  if (theme_get_setting('cleanup_classes_add_edit_delete')){
+    if (arg(0) == 'node') {
+      if (arg(1) == 'add') {
+        $classes[] = 'article-add'; // Add .node-add class.
+      }
+      elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
+        $classes[] = 'article-'. arg(2);
+      }
     }
   }
 }
-$classes_string = implode(' ', $classes); 
-$vars['classes'] = str_replace('node', 'article', $classes_string);
+// Add information about the number of sidebars.
+if ($vars['layout'] == 'both') {
+  $classes[] = 'two-sidebars';
+}
+elseif ($vars['layout'] == 'none') {
+  $classes[] = 'no-sidebars';
+}
+else {
+  $classes[] = 'one-sidebar sidebar-'. $vars['layout'];
+}
+$classes_string = implode(' ', $classes);
+$vars['classes'] = $classes_string;
 
 // THEME SETTINGS
 
@@ -134,8 +137,8 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $pull_right = $sidebar_last_width;
     $styles = array();
     $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':'. $push_right .'px;}';
-    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px; margin-'. $left .':0;}';
+    $styles[] = '.sidebar-first .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':0;}';
+    $styles[] = '.sidebar-last .content-inner{margin-'. $right .':'. $push_right .'px; margin-'. $left .':0;}';
     $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-100%;}';
     $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $pull_right .'px;}';
   }
@@ -147,11 +150,11 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $right_margin   = $sidebar_last_width;
     $styles = array();
     $styles[] = '.two-sidebars .content-inner{margin-'. $right .':'. $content_margin .'px;margin-'. $left .':0;}';
-    $styles[] = '.sidebar-left .content-inner{margin-'. $right .':'. $push_left .'px;margin-'. $left .':0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-'. $right .':'. $push_right .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-first .content-inner{margin-'. $right .':'. $push_left .'px;margin-'. $left .':0;}';
+    $styles[] = '.sidebar-last .content-inner{margin-'. $right .':'. $push_right .'px;margin-'. $left .':0;}';
     $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $left_margin .'px;}';
     $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $right_margin .'px;}';
-    $styles[] = '.sidebar-left #sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $sidebar_first_width .'px;}';
+    $styles[] = '.sidebar-first #sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $sidebar_first_width .'px;}';
   }
   if ($method == '2') {
     $content_margin = $sidebar_last_width + $sidebar_first_width;
@@ -160,8 +163,8 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $push_right     = $sidebar_first_width;
     $styles = array();
     $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $content_margin .'px;margin-'. $right .':0;}';
-    $styles[] = '.sidebar-left .content-inner{margin-'. $left .':'. $left_margin .'px;margin-'. $right .':0;}';
-    $styles[] = '.sidebar-right .content-inner{margin-'. $left .':'. $right_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-first .content-inner{margin-'. $left .':'. $left_margin .'px;margin-'. $right .':0;}';
+    $styles[] = '.sidebar-last .content-inner{margin-'. $left .':'. $right_margin .'px;margin-'. $right .':0;}';
     $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px; margin-'. $left .': -100%;}';
     $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px; margin-'. $left .': -100%;}';
     $styles[] = '.two-sidebars #sidebar-last {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';

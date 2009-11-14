@@ -29,18 +29,14 @@
  * @see genesis_preprocess_block()
  */
 ?>
-<div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
-  <div class="block-inner">
+<div<?php print $block_module_delta ? ' id="'. $block_module_delta .'"' : ''; ?> class="<?php print $classes; ?>"><div class="block-inner">
 
-    <?php if ($block->subject): ?>
-      <h2 class="block-title title"><?php print $block->subject; ?></h2>
-    <?php endif; ?>
+  <?php if ($block->subject): ?>
+    <h2 class="block-title title"><?php print $block->subject; ?></h2>
+  <?php endif; ?>
 
-    <div class="block-content content">
-      <?php print $block->content ?>
-    </div>
+  <?php print $block->content ?>
 
-    <?php print $edit_links; ?>
+  <?php print $edit_links; ?>
 
-  </div>
-</div> <!-- /block -->
+</div></div> <!-- /block -->

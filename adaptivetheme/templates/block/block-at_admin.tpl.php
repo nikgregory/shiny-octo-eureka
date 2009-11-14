@@ -2,8 +2,8 @@
 // adaptivethemes.com
 
 /**
- * @file block.tpl.php
- * Theme implementation to display a block.
+ * @file block-at_admin.tpl.php
+ * Theme implementation to display a block in the blocks section.
  *
  * Available variables:
  * - $block->subject: Block title.
@@ -58,9 +58,18 @@
           <dt><?php print t('Block Region'); ?></dt>
             <dd><?php print $block->region; ?></dd>
           <dt><?php print t('Block ID'); ?></dt>
-            <dd>#<?php print $block_module_delta; ?></dd>
+            <dd>
+              <?php if (!empty($block_module_delta)) { ?>
+                <?php print '#'. $block_module_delta; ?>
+              <?php } else { ?>
+                <?php print t('Block ID\'s are not enabled. <br /><a href="!link">Enable Block ID\'s</a>.', array('!link' => url('admin/build/themes/settings/' . $GLOBALS['theme'])));?>
+              <?php } ?>
+            </dd>
           <dt><?php print t('Block Classes'); ?></dt>
-            <dd>.<?php print $block_at_admin_classes; ?></dd>
+            <dd>
+              <?php print '.'. $block_at_admin_classes; ?><br />
+              <?php print t('<a href="!link">Add or remove block classes</a>.', array('!link' => url('admin/build/themes/settings/' . $GLOBALS['theme'])));?>
+            </dd>
         </dl>
       </div>
     </fieldset>

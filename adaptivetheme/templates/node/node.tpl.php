@@ -52,37 +52,29 @@
  * @see genesis_preprocess_node()
  */
 ?>
-<div id="<?php print $article_id; ?>" class="<?php print $classes; ?>">
-  <div class="article-inner">
+<div<?php print $article_id ? ' id="'. $article_id .'"' : ''; ?> class="<?php print $classes; ?>">
 
-    <?php if (!$page): ?>
-      <h2 class="article-title title">
-        <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-        <?php print $unpublished; ?>
-      </h2>
-    <?php endif; ?>
+  <?php if (!$page): ?>
+    <h2 class="article-title title">
+      <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
+      <?php print $unpublished; ?>
+    </h2>
+  <?php endif; ?>
 
-    <?php if ($submitted): ?>
-      <div class="article-submitted author-date-time"><?php print $submitted; ?></div>
-    <?php endif; ?>
+  <?php if ($submitted): ?>
+    <p class="author-date-time"><?php print $submitted; ?></p>
+  <?php endif; ?>
 
-    <?php print $picture; ?>
+  <?php if ($picture): print $picture; endif; ?>
 
-    <div class="article-content content"><?php print $content; ?></div>
+  <?php print $content; ?>
 
-    <?php if ($terms): ?>
-      <div class="article-terms tags"><?php print $terms; ?></div>
-    <?php endif; ?>
+  <?php if ($terms): print $terms; endif; ?>
 
-    <?php if ($links): ?>
-      <div class="article-links"><?php print $links; ?></div>
-    <?php endif; ?>
-    
-    <?php if ($article_aside && !$teaser): ?>
-      <div id="article-aside" class="aside">
-        <?php print $article_aside; ?>
-      </div>
-    <?php endif; ?>
+  <?php if ($links): print $links; endif; ?>
 
-  </div>
+  <?php if ($article_aside && !$teaser): ?>
+    <div id="article-aside" class="aside"><?php print $article_aside; ?></div>
+  <?php endif; ?>
+
 </div> <!-- /node -->

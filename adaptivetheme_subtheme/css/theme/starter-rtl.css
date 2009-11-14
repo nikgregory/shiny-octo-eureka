@@ -7,7 +7,10 @@
  * Default RTL styles for getting started.
  */
 body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;}
-#skip-nav{text-align:left;float:left;}
+#skip-nav{text-align:right;float:right;}
+#user-menu{float:left;}
+#user-menu ul{float:left;}
+#user-menu ul li{float:right;margin:0 1em 0 0;}
 #branding{float:right;}
 #search-box{float:left;}
 #header-blocks{float:right;}
@@ -23,4 +26,4 @@ ul.menu ul ul ul{margin:0 1em 0 0;}
 #block-locale-0 ul{margin:0 1.5em 0 0;}
 .indented {margin-right:60px;}
 #user-menu ul {float:right;}
-#user-menu ul li {float:right;margin:0 0 0 1em;}
+#user-menu ul li {float:left;margin:0 0 0 1em;}

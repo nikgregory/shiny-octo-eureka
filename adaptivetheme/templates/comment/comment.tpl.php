@@ -34,34 +34,29 @@
  */
 ?>
 <div class="<?php print $classes; ?>">
-  <div class="comment-inner">
 
-    <?php if ($title): ?>
-      <h3 class="comment-title title">
-        <?php print $title; ?> 
-        <?php if ($comment->new): ?>
-          <span class="new"><?php print $new; ?></span>
-        <?php endif; ?>
-        <?php print $unpublished; ?>
-      </h3>
-    <?php endif; ?>
-
-    <?php print $picture; ?>
-
-    <?php if ($submitted): ?>
-      <div class="comment-submitted author-date-time"><?php print $submitted; ?></div>
-    <?php endif; ?>
-
-    <div class="comment-content content">
-      <?php print $content; ?>
-      <?php if ($signature): ?>
-        <div class="user-signature clear-block"><?php print $signature; ?></div>
+  <?php if ($title): ?>
+    <h3 class="comment-title title">
+      <?php print $title; ?> 
+      <?php if ($comment->new): ?>
+        <span class="new"><?php print $new; ?></span>
       <?php endif; ?>
-    </div>
+      <?php print $unpublished; ?>
+    </h3>
+  <?php endif; ?>
 
-    <?php if ($links): ?>
-      <div class="comment-links"><?php print $links; ?></div>
-    <?php endif; ?>
+  <?php print $picture; ?>
 
-  </div>
+  <?php if ($submitted): ?>
+    <p class="author-date-time"><?php print $submitted; ?></p>
+  <?php endif; ?>
+
+  <?php print $content; ?>
+      
+  <?php if ($signature): ?>
+    <div class="user-signature"><?php print $signature; ?></div>
+  <?php endif; ?>
+
+  <?php if ($links): print $links; endif; ?>
+
 </div> <!-- /comment -->

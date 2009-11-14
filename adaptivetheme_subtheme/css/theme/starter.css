@@ -12,9 +12,10 @@ body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;margin:0;padding:0;}
 a:active,a:focus{border:0;color:#C00000;}
 
 /* Common page elements */
-#skip-nav{text-align:right;float:right;width:160px;}
-#user-menu ul {margin:0;}
-#user-menu ul li {display:inline;float:left;margin:0 1em 0 0;padding:0;}
+#skip-nav{text-align:left;float:left;width:160px; /* Hidden by default with .element-invisible class see page.tpl.php */}
+#user-menu{float:right;width:760px;}
+#user-menu ul{float:right;margin:0;}
+#user-menu ul li{display:inline;float:left;margin:0 0 0 1em;padding:0;}
 #header{clear:both;}
 #branding{float:left;width:300px;}
 #search-box{float:right;width:300px;}
@@ -22,12 +23,13 @@ a:active,a:focus{border:0;color:#C00000;}
 #branding h1{font-size:1em;}
 .logo-site-name span{display:block;}
 #site-name{font-size:2em;font-weight:bold;line-height:1.5;}
-#search-theme-form{margin:1.5em 0;}
-#breadcrumb{padding:0 0 .75em;}
+#search-theme-form{float:right;margin:1.5em 0;}
+#breadcrumb{padding-bottom: 1em;}
 #mission{font-weight:bold;margin:.3em 0 1.5em;}
 .block{margin:0 0 20px;}
 .feed-icon img{padding:0 10px;}
 #content-aside{background:#FFF;float:right;padding-left:10px;width:240px;}
+.author-date-time {margin:0;}
 
 /* Primary and Secondary links basic styles - comment this out or remove if you dont want it. */
 .primary-links,
@@ -58,7 +60,7 @@ ul.menu li{padding:.35em 0 0;}
 .comment-title a:active{text-decoration:none;}
 .comment-title a:hover,
 .comment-title a:focus{text-decoration:underline;}
-.comment-links ul.links{display:block;padding:0 1em 0 0;text-align:right;}
+.comment ul.links{display:block;padding:0 1em 0 0;text-align:right;}
 
 /* Aricles (nodes). */
 .article{margin:0 0 1.5em;}
@@ -67,15 +69,14 @@ ul.menu li{padding:.35em 0 0;}
 .article-title a:active{text-decoration:none;}
 .article-title a:hover,
 .article-title a:focus{text-decoration:underline;}
+.article ul.links{margin:0;}
 .article ul.links li{padding:0 1em 0 0;}
-.article-links{margin:0;}
-.article-links ul.links li{margin:0;padding:0;}
-.article-terms .vocab-name{font-size:1em;}
-.article-terms li.vocab{list-style:none;}
-.article-terms li span.vocab-name{font-weight:bold;}
-.article-terms ul.taxonomy{margin:0;}
-.article-terms ul.taxonomy li.vocab-term{display:inline;list-style:none;}
+.article .taxonomy{margin:0 0 1em;}
+.article .taxonomy li{display:inline;list-style:none;}
+.article .vocab-name{font-size:1em;font-weight:bold;}
+
 .item-list ul.pager li{margin:0;}
+
 
 /* Misc. */
 #block-node-0 .feed-icon img{padding:10px 0;}

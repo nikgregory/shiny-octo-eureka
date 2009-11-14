@@ -30,13 +30,12 @@ if (arg(2) == 'block') {
  *   The name of the theme function being called.
  */
 function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
-  // Check whether help is disabled
-  // if (theme_get_setting('at_admin_hide_help')) {
-  //  unset($vars['help']);
-  // }
+  global $user;
   // Admin welcome message with date for the admin theme.
-  $welcome = t('Welcome') .' '. $user->name;
-  $conjunction = ', '. t('it\'s') .' ';
-  $todays_date = date("l, F d Y" , time()); 
-  $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+  if ($vars['logged_in']) {
+    $welcome = t('Welcome') .' '. $user->name;
+    $conjunction = ', '. t('it\'s') .' ';
+    $todays_date = date("l, F d Y" , time()); 
+    $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+  }
 }

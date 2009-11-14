@@ -4,7 +4,7 @@
 /**
  * @file at-admin.css
  * Contains all styles for the built in Administration Theme.
- */ 
+ */
 body,body.section-admin{background:#FFF;color:#222;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0;}
 
 .two-sidebars .content-inner{margin:0 240px;}
@@ -17,11 +17,10 @@ body,body.section-admin{background:#FFF;color:#222;font-family:"Lucida Grande",V
 #breadcrumb,#secondary-content,#columns,#tertiary-content,#footer{margin-left:10px;margin-right:10px;}
 
 #columns{width:auto;margin-bottom:30px;}
-#content .region-inner{padding:0 10px;}
-a{margin:0;padding:0;text-decoration:none;}
-a:hover{background:transparent;}
+#content{padding:0 10px;}
+a{text-decoration:none;}
 
-#container{background:#FFF;max-width:1260px;min-width:960px;width:100%;}
+#container{background:#FFF;max-width:1260px;min-width:960px;}
 #main-content{padding-top:10px;}
 #footer{background:#F7F7F7;line-height:0;margin:0;padding:15px 0;}
 
@@ -32,10 +31,8 @@ a:hover{background:transparent;}
 .page-block #main-content .block-region{padding:9px 12px;}
 .block-region{background:transparent;border:none;color:#9BBFCF;font-weight:bold;}
 
-#skip-nav{height:1px;left:auto;overflow:hidden;position:absolute;text-align:right;top:-9999em;width:1px;}
-
-#header{background:#444;bpadding:0 0 4px;width:100%;min-height:80px;}
-.header-inner{position:relative;max-width:1260px;min-width:960px;width:100%;min-height:80px;}
+#header{background:#444;padding:0;min-height:80px;}
+.header-inner{position:relative;max-width:1260px;min-width:960px;min-height:80px;}
 
 .logo-site-name span{display:block;float:left;}
 #logo{padding:0 10px 0 0;}
@@ -50,7 +47,7 @@ a:hover{background:transparent;}
 
 #header-region{float:left;padding:0 10px;}
 
-#search-box {left:auto;position:absolute;right:0;top:28px;}
+#search-box {left:auto;position:absolute;right:0;top:28px;overflow:auto;}
 #search-theme-form #search{margin:-5px 0 0;}
 #search-theme-form label{font-size:0.94em;}
 #search-theme-form input.search_submit{-moz-border-radius:4px;-webkit-border-radius:4px;background:url(core-images/search-button-tile.png) repeat-x 0 -15px;cursor:pointer;padding:1px 6px;}
@@ -75,9 +72,9 @@ a:hover{background:transparent;}
 .item-list ul.pager li a:hover{-moz-border-radius:4px;-webkit-border-radius:4px;font-weight:bold;}
 .item-list ul.pager li.pager-current{-moz-border-radius:4px;-webkit-border-radius:4px;font-weight:bold;padding:6px 10px;}
 
-#attribution,.footer-message-inner{font-size:0.82em;padding:6px 0 10px;text-align:center;}
-#attribution a,.footer-message-inner a{color:#999;}
-#attribution a:hover,.footer-message-inner a:hover,#attribution a:focus,.footer-message-inner a:focus{color:#CCC;}
+#attribution,#footer-message{font-size:0.82em;padding:6px 0 10px;text-align:center;}
+#attribution a,#footer-message a{color:#999;}
+#attribution a:hover,#footer-message a:hover,#attribution a:focus,#footer-message a:focus{color:#CCC;}
 
 #node-form .node-col-last .buttons{-moz-border-radius:6px;-webkit-border-radius:6px;padding:10px;}
 
@@ -92,9 +89,13 @@ a:hover{background:transparent;}
 
 #block-system-0 .block-inner{border:none;text-align:center;}
 #block-user-3 .item-list h3{font-size:1em;}
+
+.block ul{padding:0 0 0.25em 1.75em;}
+.block ul *{padding-left:0;}
+ul.menu li{margin:0;}
 .block .item-list ul,.block .item-list ol{margin:0;}
 
-ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
+
 .item-list ul li,.item-list ol li,ul.menu li{padding:0.35em 0 0;}
 ul.menu li a:hover,ul.menu li a:focus{outline:0;}
 #main-content ul.menu,#main-content ul.menu li{font-weight:bold;list-style:none;margin:0;}
@@ -162,7 +163,7 @@ tr:first-child td.region,tr:first-child td.module,tr:first-child td.container{bo
 .fieldset-theme-specific-settings{clear:both;}
 #system-theme-settings .button-wrapper{clear:both;display:block;}
 .section-admin table{width:100%;}
-#system-themes-form table.sticky-table{position:relative;z-index:10000;}
+.page-admin-build-themes #system-themes-form table{position:relative;z-index:999;}
 
 div.messages,div.help,div.error,div.warning{-moz-border-radius:6px;-webkit-border-radius:6px;}
 div.error{background-color:#C00000;border:2px solid #FF3F3F;color:#FFF3F6;}
@@ -191,7 +192,7 @@ span.form-required,span.marker{color:#8A1F11;}
 div.resizable-textarea textarea{margin-top:0;}
 .tips{font-size:1em;margin-left:3em;padding:0.1875em 0.375em 0.1875em 1.5em;}
 
-input.form-submit,input.teaser-button{-moz-border-radius:4px;-moz-outline-radius:4px;-webkit-border-radius:4px;background:transparent url(core-images/blue-button.png) no-repeat top;border:1px solid #fff;color:#fff;cursor:pointer;font-size:0.94em;font-weight:bold;margin:3px;outline:1px solid #9BABB0;padding:2px 4px;}
+input.form-submit,input.teaser-button{-moz-border-radius:4px;-moz-outline-radius:4px;-webkit-border-radius:4px;background:transparent url(core-images/blue-button.png) no-repeat top;border:1px solid #fff;color:#fff;cursor:pointer;font-size:0.94em;font-weight:bold;margin:3px 0;outline:1px solid #9BABB0;padding:2px;}
 input[value~=Save],#system-theme-settings input#edit-submit,.node-form input#edit-submit.form-submit,input#edit-save.form-submit{background:transparent url(core-images/green-button.png) no-repeat top;}
 input#edit-delete.form-submit,#system-modules-uninstall input#edit-submit,#user-multiple-delete-confirm input#edit-submit{background:transparent url(core-images/red-button.png) no-repeat top;}
 input[value~=Save]:hover,#system-theme-settings input#edit-submit:hover,input.form-submit:hover,input.teaser-button:hover,input#edit-save.form-submit,.node-form input#edit-submit.form-submit:hover,input#edit-delete.form-submit:hover,#system-modules-uninstall input#edit-submit:hover,#user-multiple-delete-confirm input#edit-submit:hover{background-position:bottom;cursor:pointer;}
@@ -208,7 +209,7 @@ a:active,a.active,.block a:active,.block a.active{color:#222;}
 a img,.page-block #content-top .block-region,.page-block #content-aside .block-region,.page-block #content-bottom .block-region{border:none;}
 
 #search-theme-form,.fieldset-block-info dl,.at-admin-block-edit-links ul,.admin-panel .item-list ul,.page-admin-by-module .admin-panel .body,div.form-item div.description img{margin:0;}
-h1#page-title,.node-form #edit-title,input.title{font-size:1.5em;}
+h1#page-title,#node-form #edit-title,input.title{font-size:1.5em;}
 
 .item-list ul.pager li a:link,.item-list ul.pager li a:visited{color:#444;}
 
@@ -225,6 +226,7 @@ ul.menu li a,.form-item strong.error{display:block;}
 .block.at-inline-menu .block-inner{border:none;}
 .at-inline-menu ul.menu li{border-color:#CCC;}
 .block.at-inline-menu ul.menu li a{display:inline;}
+
 
 tbody,tfoot,thead,tr,label,legend{margin:0;padding:0;}
 .block-at-admin h2 span {float:right;width:16px;height:16px;}
@@ -315,3 +317,9 @@ tr.odd td.active{background-color:#EEE;}
 tr.even td.active{background-color:#F7F7F7;}
 td.region,td.module,
 td.container td.category{background-color:#EEE;border-bottom:1px solid #CCC;border-top:1.5em solid #FFF;color:#222;}
+
+/* Panels layout page */
+.panels-layouts-checkboxes .form-checkboxes .form-item, #panels-choose-layout .form-radios .form-item {margin-right:10px;width:120px;text-align:center;}
+.panels-layouts-checkboxes .form-checkboxes .form-item .layout-icon,#panels-choose-layout .form-radios .form-item .layout-icon{height:13em;width:120px;}
+.panels-layouts-checkboxes .form-checkboxes .option,#panels-choose-layout .form-radios .form-item .option{text-align:center;width:120px;}
+#panels-choose-layout .layout-icon .caption{width:120px;}

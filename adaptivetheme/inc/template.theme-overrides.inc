@@ -99,7 +99,7 @@ function adaptivetheme_breadcrumb($breadcrumb) {
 
     // Return the breadcrumb with separators.
     if (!empty($breadcrumb)) {
-      $breadcrumb_separator = theme_get_setting('breadcrumb_separator');
+      $breadcrumb_separator = filter_xss(theme_get_setting('breadcrumb_separator'));
       $trailing_separator = $title = '';
       if (theme_get_setting('breadcrumb_title')) {
         $trailing_separator = $breadcrumb_separator;

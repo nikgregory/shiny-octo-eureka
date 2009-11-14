@@ -336,6 +336,7 @@ SCRIPT;
   $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
+  '#description' => t('WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
@@ -368,6 +369,167 @@ SCRIPT;
     '#title' => t('Load Firebug lite script for debugging in IE, Opera and Webkit.'),
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
+  );
+
+  $form['themedev']['dev']['body_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Body CSS Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // Body classes
+  $form['themedev']['dev']['body_classes']['cleanup_classes_section'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print section classes.'),
+    '#default_value' => $settings['cleanup_classes_section'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_front'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .front and .not-front classes.'),
+    '#default_value' => $settings['cleanup_classes_front'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_user_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .logged-in and .not-logged-in classes.'),
+    '#default_value' => $settings['cleanup_classes_user_status'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_arg_one'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .page-[arg(1)] classes.'),
+    '#default_value' => $settings['cleanup_classes_arg_one'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_normal_path'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .page-[$normal_path] classes.'),
+    '#default_value' => $settings['cleanup_classes_normal_path'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_node_type'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .article-type-[type] classes.'),
+    '#default_value' => $settings['cleanup_classes_node_type'],
+  );
+  $form['themedev']['dev']['body_classes']['cleanup_classes_add_edit_delete'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print classes for node add, edit and delete pages (.article-[arg]).'),
+    '#default_value' => $settings['cleanup_classes_add_edit_delete'],
+  );
+  // Node classes
+  $form['themedev']['dev']['article_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Article CSS Classes (for nodes)'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_id'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print a unique ID for each article e.g. #article-1.'),
+    '#default_value' => $settings['cleanup_article_id'],
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_classes_sticky'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .article-sticky class for articles set to sticky.'),
+    '#default_value' => $settings['cleanup_article_classes_sticky'],
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_classes_promote'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .article-promoted class for articles promoted to front.'),
+    '#default_value' => $settings['cleanup_article_classes_promote'],
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_classes_teaser'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .article-teaser class for teaser view (such as front page and taxonomy term lists of articles).'),
+    '#default_value' => $settings['cleanup_article_classes_teaser'],
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_classes_preview'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .article-preview class for article previews.'),
+    '#default_value' => $settings['cleanup_article_classes_preview'],
+  );
+  $form['themedev']['dev']['article_classes']['cleanup_article_classes_type'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .[content-type]-article classes.'),
+    '#default_value' => $settings['cleanup_article_classes_type'],
+  );
+  // Comment classes
+  $form['themedev']['dev']['comment_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Comments CSS Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_anonymous'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .comment-by-anonymous for anonymous comments.'),
+    '#default_value' => $settings['cleanup_comment_anonymous'],
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_article_author'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .comment-by-article-author for author comments.'),
+    '#default_value' => $settings['cleanup_comment_article_author'],
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_by_viewer'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .comment-by-viewer for viewer comments.'),
+    '#default_value' => $settings['cleanup_comment_by_viewer'],
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_new'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .comment-new for new comments.'),
+    '#default_value' => $settings['cleanup_comment_new'],
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_zebra'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .odd and .even classes for comments.'),
+    '#default_value' => $settings['cleanup_comment_zebra'],
+  );
+  $form['themedev']['dev']['comment_classes']['cleanup_comment_wrapper_type'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print a content type class on the comments wrapper, e.g. .blog-comments, .forum-comments.'),
+    '#default_value' => $settings['cleanup_comment_wrapper_type'],
+  );
+  
+
+  
+  // Block classes
+  $form['themedev']['dev']['block_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Block CSS Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_block_module_delta'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print a unique ID for each block (#block-module-delta).'),
+    '#default_value' => $settings['cleanup_block_block_module_delta'],
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_classes_module'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print a .block-[module] class.'),
+    '#default_value' => $settings['cleanup_block_classes_module'],
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_classes_nav'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print a .nav class for navigation type blocks such as menu blocks - usefull as a jQuery hook.'),
+    '#default_value' => $settings['cleanup_block_classes_nav'],
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_classes_zebra'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .odd and .even classes for blocks.'),
+    '#default_value' => $settings['cleanup_block_classes_zebra'],
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_classes_region'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .block-[region] classes.'),
+    '#default_value' => $settings['cleanup_block_classes_region'],
+  );
+  $form['themedev']['dev']['block_classes']['cleanup_block_classes_count'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .block-[count] classes.'),
+    '#default_value' => $settings['cleanup_block_classes_count'],
   );
   // Admin settings
   $form['admin_settings']['administration'] = array(
@@ -454,6 +616,7 @@ SCRIPT;
           '180'   => t('180px'),
           '240'   => t('240px'),
           '300'   => t('300px'),
+          '320'   => t('320px'),
           '360'   => t('360px'),
           '420'   => t('420px'),
           '480'   => t('480px'),
@@ -480,6 +643,7 @@ SCRIPT;
           '180'   => t('180px'),
           '240'   => t('240px'),
           '300'   => t('300px'),
+          '320'   => t('320px'),
           '360'   => t('360px'),
           '420'   => t('420px'),
           '480'   => t('480px'),

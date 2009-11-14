@@ -42,4 +42,4 @@
 /* Float the columns right. */
 #content-column,#sidebar-first,#sidebar-last{float:right;}
 #content-column{position:relative;}
-#sidebar-first,#sidebar-last{position:relative;z-index: 1000;}
+#sidebar-first,#sidebar-last{position:relative;z-index:1000;}

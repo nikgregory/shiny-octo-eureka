@@ -24,21 +24,33 @@ if ($vars['status'] != 'comment-published') {
   $classes[] = $vars['status'];
 }
 else {
-  if ($vars['comment']->uid == 0) {
-    $classes[] = 'comment-by-anonymous';
+  if (theme_get_setting('cleanup_comment_anonymous')) {
+    if ($vars['comment']->uid == 0) {
+      $classes[] = 'comment-by-anonymous';
+    }
   }
-  if ($vars['comment']->uid === $vars['node']->uid) {
-    $classes[] = 'comment-by-node-author';
+  if (theme_get_setting('cleanup_comment_article_author')) {
+    if ($vars['comment']->uid === $vars['node']->uid) {
+      $classes[] = 'comment-by-article-author';
+    }
   }
-  if ($vars['comment']->uid === $vars['user']->uid) {
-    $classes[] = 'comment-by-viewer';
+  if (theme_get_setting('cleanup_comment_by_viewer')) {
+    if ($vars['comment']->uid === $vars['user']->uid) {
+      $classes[] = 'comment-by-viewer';
+    }
   }
-  if ($vars['comment']->new) {
-    $classes[] = 'comment-new';
+  if (theme_get_setting('cleanup_comment_new')) {
+    if ($vars['comment']->new) {
+      $classes[] = 'comment-new';
+    }
   }
-  $classes[] = $vars['zebra'];
+  if (theme_get_setting('cleanup_comment_zebra')) {
+    $classes[] = $vars['zebra'];
+  }
 }
 $vars['classes'] = implode(' ', $classes);
+
+
 
 // If comment subjects are disabled, don't display them.
 if (variable_get('comment_subject_field', 1) == 0) {

@@ -16,7 +16,5 @@
  */
 ?>
 <?php if (!empty($picture)): ?>
-  <div class="user-picture">
-    <?php print $picture; ?>
-  </div>
-<?php endif; ?> <!-- /user-picture -->
+  <div class="user-picture"><?php print $picture; ?></div> <!-- /user-picture -->
+<?php endif; ?>

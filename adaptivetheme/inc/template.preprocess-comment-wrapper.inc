@@ -14,8 +14,10 @@ if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
  
-// Class for node types: "forum-comments", "blog-comments", etc.
-$classes[] = $vars['node']->type .'-comments';
+// Class for content types: "forum-comments", "blog-comments", etc.
+if (theme_get_setting('cleanup_comment_wrapper_type')) {
+  $classes[] = $vars['node']->type .'-comments';
+}
 
 // $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
