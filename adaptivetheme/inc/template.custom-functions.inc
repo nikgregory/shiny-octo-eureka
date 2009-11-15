@@ -15,9 +15,6 @@
  */
 function safe_string($string) {
   $string = drupal_strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
-  if (!ctype_lower($string{0})) {
-    $string = 'id'. $string;
-  }
   return $string;
 }
 
