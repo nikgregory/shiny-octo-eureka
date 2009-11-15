@@ -14,10 +14,7 @@
  *   The converted string
  */
 function safe_string($string) {
-$string = strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
-  if (!ctype_lower($string{0})) {
-    $string = 'id'. $string;
-  }
+  $string = strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $string));
   return $string;
 }
 
