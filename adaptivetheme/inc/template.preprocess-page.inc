@@ -59,6 +59,8 @@ if (theme_get_setting('cleanup_classes_section')){
 }
 
 // Body Classes.
+
+// Setup the layout classes.
 $vars['layout'] = 'none';
 if (!empty($vars['left'])) {
   $vars['layout'] = 'first';
@@ -72,17 +74,21 @@ $classes = array();
 if (theme_get_setting('cleanup_classes_front')) {
   $classes[] = $vars['is_front'] ? 'front' : 'not-front';
 }
+
 if (theme_get_setting('cleanup_classes_user_status')) {
   $classes[] = $vars['logged_in'] ? 'logged-in' : 'not-logged-in';
 }
+
 if (theme_get_setting('cleanup_classes_arg_one')) {
   $classes[] = preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. form_clean_id(drupal_strtolower(arg(0))));
 }
+
 if (theme_get_setting('cleanup_classes_node_type')) {
   if (isset($vars['node']) && $vars['node']->type) {
     $classes[] = 'article-type-'. form_clean_id($vars['node']->type);
   }
 }
+
 if (!$vars['is_front']) {
   if (theme_get_setting('cleanup_classes_normal_path')) {
     $normal_path = drupal_get_normal_path($_GET['q']);
@@ -102,6 +108,7 @@ if (!$vars['is_front']) {
     }
   }
 }
+
 // Add information about the number of sidebars.
 if ($vars['layout'] == 'both') {
   $classes[] = 'two-sidebars';
@@ -112,8 +119,9 @@ elseif ($vars['layout'] == 'none') {
 else {
   $classes[] = 'one-sidebar sidebar-'. $vars['layout'];
 }
-$classes_string = implode(' ', $classes);
-$vars['classes'] = $classes_string;
+
+// $classes is the varaible that will hold the page classes, and is printed in page tpl files.
+$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
 
 // THEME SETTINGS
 

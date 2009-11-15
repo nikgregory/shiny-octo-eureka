@@ -21,42 +21,32 @@
 <body class="<?php print $body_classes; ?>">
   <div id="container">
     <div id="header" class="clear-block">
-
       <?php if ($site_logo or $site_name or $site_slogan): ?>
         <div id="branding">
-
           <?php if (!empty($logo)): ?>
             <a href="<?php print $base_path; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
               <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
             </a>
           <?php endif; ?>
-
           <?php if (!empty($site_name)): ?>
             <div id="site-name"><strong>
               <a href="<?php print $base_path ?>" title="<?php print t('Home'); ?>" rel="home"><?php print $site_name; ?></a>
             </strong></div>
           <?php endif; ?>
-
           <?php if ($site_slogan): ?>
             <div id="site-slogan"><?php print $site_slogan; ?></div>
           <?php endif; ?>
-
         </div> <!-- /branding -->
       <?php endif; ?>
-
     </div> <!-- /header -->
-
     <div id="columns"><div class="columns-inner clear-block">
       <div id="content-column"><div class="content-inner">
         <div id="main-content">
           <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-          <div id="content" class="section region">
-            <?php print $content; ?>
-          </div>
+          <div id="content"><?php print $content; ?></div>
         </div> <!-- /main-content -->
       </div></div> <!-- /content-column -->
-  </div></div> <!-- /columns -->
-
+    </div></div> <!-- /columns -->
   </div> <!-- /container -->
   <?php print $attribution; ?>
   <?php print $closure ?>
