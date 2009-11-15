@@ -78,13 +78,14 @@ if (!function_exists('submitted_by_node_submitted')) {
 $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
-$delimiter = theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type);
+$delimiter = filter_xss(theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type));
 $heading_level = $vars['page'] ? 'h2' : 'h3';
 if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page']))) {
   $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
   $output = '';
-  $vocab_delimiter = '';
+  $vocab_index = 0;
   foreach ($vocabularies as $vocabulary) {
+    $vocab_index++;
     if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
       $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
       if ($terms) {
@@ -93,12 +94,13 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
         $term_index = 0;
         foreach ($terms as $term) {
           $term_index++;
-          $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter ;
-          $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
-        }
-        if ($taxonomy_format == 'list') {
-          $output .= $vocab_delimiter;
-          $vocab_delimiter = $delimiter;
+          if (($term_index == count($terms)) && (($taxonomy_format == 'vocab') || ($taxonomy_format == 'list') && ($vocab_index == count($vocabularies)))) {
+            $use_delimiter = FALSE;
+          }
+          else {
+            $use_delimiter = TRUE;
+          }
+          $links[] = '<li class="vocab-term">'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) .($use_delimiter ? $delimiter :'') .'</li>';
         }
         $output .= implode("", $links);
         $output .= ($taxonomy_format == 'vocab') ? '</ul></li>' : '';
