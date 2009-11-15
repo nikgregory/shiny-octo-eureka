@@ -33,9 +33,11 @@
 ?>
 <?php if ($content): ?>
   <div id="comments"<?php print $classes ? ' class="'. $classes .'"' : '' ; ?>">
-    <h2 id="comments-title"<?php if ($node->type == 'forum') { print ' class="element-invisible"'; } ?>>
-      <?php print t('Comments'); ?>
-    </h2>
+    <?php if ($node->comment_count != 0): ?>
+      <h2 id="comments-title"<?php if ($node->type == 'forum') { print ' class="element-invisible"'; } ?>>
+        <?php print t('Comments'); ?>
+      </h2>
+    <?php endif; ?>
     <?php print $content; ?>
   </div>
 <?php endif; ?> <!-- /comment-wrapper -->
