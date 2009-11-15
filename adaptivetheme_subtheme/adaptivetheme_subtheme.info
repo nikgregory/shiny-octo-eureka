@@ -34,8 +34,9 @@
   
 
 ;----------// IE Conditional Stylesheets
- 
-  ;ie stylesheets[lte IE 7][screen][] = css/ie/ie-lte-7.css
+
+ ; Note: You MUST install http://drupal.org/project/conditional_styles (and see its readme!)
+  ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
 
 
 ;----------// Regions
