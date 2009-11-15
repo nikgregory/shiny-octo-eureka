@@ -1,8 +1,4 @@
-﻿// $Id$
-/**
- * Show/Hide block content in block admin.
- */
-$(document).ready(function(){
+﻿$(document).ready(function(){
   $('.block-at-admin-content').hide();
   $('a.toggle-block').click(function() {
     var id = $(this).attr('id');
