@@ -99,7 +99,7 @@
       <!-- NEVER use display:none to hide skip links - see http://drupal.org/node/472572 -->
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
-    <div id="header"><div class="header-inner clear-block">
+    <div id="header"><div class="header-inner clearfix">
       <?php if ($primary_menu): ?>
         <div id="primary"><div class="primary-inner">
           <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
@@ -130,7 +130,7 @@
         <div id="search-box"><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
       <?php if ($header): ?>
-        <div id="header-region" class="aside"><?php print $header; ?></div><!-- /header-region -->
+        <div id="header-region"><?php print $header; ?></div><!-- /header-region -->
       <?php endif; ?>
       <?php if ($admin_welcome): ?>
         <div id="user-date"><?php print $admin_welcome; ?></div> <!-- /admin welcome -->
@@ -157,12 +157,12 @@
         </div> <!-- /messages and help -->
       <?php endif; ?>
       <?php if ($secondary_content): ?>
-        <div id="secondary-content" class="aside"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
+        <div id="secondary-content"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
       <?php endif; ?>
-      <div id="columns"><div class="columns-inner clear-block">
+      <div id="columns"><div class="columns-inner clearfix">
         <div id="content-column"><div class="content-inner">
           <?php if ($content_top): ?>
-            <div id="content-top" class="aside"><?php print $content_top; ?></div> <!-- /content-top -->
+            <div id="content-top"><?php print $content_top; ?></div> <!-- /content-top -->
           <?php endif; ?>
           <div id="main-content">
             <?php if ($title or $tabs): ?>
@@ -176,21 +176,21 @@
             <div id="content"><?php print $content; ?></div> <!-- /content -->
           </div> <!-- /main-content -->
           <?php if ($content_bottom): ?>
-            <div id="content-bottom" class="aside"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
+            <div id="content-bottom"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
           <?php endif; ?>
         </div></div> <!-- /content-column -->
         <?php if ($left): ?>
-          <div id="sidebar-first" class="sidebar aside"><?php print $left; ?></div> <!-- /sidebar-left -->
+          <div id="sidebar-first" class="sidebar"><?php print $left; ?></div> <!-- /sidebar-left -->
         <?php endif; ?>
         <?php if ($right): ?>
-          <div id="sidebar-last" class="sidebar aside"><?php print $right; ?></div> <!-- /sidebar-right -->
+          <div id="sidebar-last" class="sidebar"><?php print $right; ?></div> <!-- /sidebar-right -->
         <?php endif; ?>
       </div></div> <!-- /columns -->
       <?php if ($tertiary_content): ?>
-        <div id="tertiary-content" class="aside"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
+        <div id="tertiary-content"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
       <?php endif; ?>
       <?php if ($footer or $footer_message or $feed_icons): ?>
-        <div id="footer" class="clear-block">
+        <div id="footer" class="clearfix">
           <?php if ($footer): ?>
             <div id="footer-region"><?php print $footer; ?></div> <!-- /footer-region -->
           <?php endif; ?>

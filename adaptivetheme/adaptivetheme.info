@@ -111,6 +111,20 @@
   skinr[at-menu][options][1][class] = at-inline-menu
   skinr[at-menu][options][2][label] = Multi-column menu with headers
   skinr[at-menu][options][2][class] = at-multicolumn-menu clear-block
+  
+  ; Semantic classes
+  skinr[at-semantic-classes][title] = Semantic classes
+  skinr[at-semantic-classes][type] = select
+  skinr[at-semantic-classes][description] = Add relevant semantic classes. Based on <a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5</a>.
+  skinr[at-semantic-classes][features][] = block
+  skinr[at-semantic-classes][features][] = panels_pane
+  skinr[at-semantic-classes][options][1][label] = .section
+  skinr[at-semantic-classes][options][1][class] = section
+  skinr[at-semantic-classes][options][2][label] = .aside
+  skinr[at-semantic-classes][options][2][class] = aside
+  skinr[at-semantic-classes][options][3][label] = .nav
+  skinr[at-semantic-classes][options][3][class] = nav
+
 
 ;----------// Theme Setting Defaults
 

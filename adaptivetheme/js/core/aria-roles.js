@@ -18,11 +18,12 @@ if (Drupal.jsEnabled) {
     // Set role=banner on #branding wrapper div.
     $("#branding").attr("role","banner");
 
+    // Optionally set role=complementary
     // Set role=complementary on #main-content blocks, sidebars and regions.
-    $(".block").attr("role","complementary");
+    // $(".block").attr("role","complementary");
 
     // Remove role=complementary from system blocks.
-    $(".block-system, td.block, tr.region, td.region").removeAttr("role","complementary");
+    // $(".block-system, td.block, tr.region, td.region").removeAttr("role","complementary");
 
     // Set role=main on #main-content div.
     $("#main-content").attr("role","main");

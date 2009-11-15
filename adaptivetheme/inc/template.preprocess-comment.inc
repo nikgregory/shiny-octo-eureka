@@ -59,8 +59,8 @@ if (variable_get('comment_subject_field', 1) == 0) {
   
 // Date & author theme settings.
 if (!function_exists('submitted_by_comment_submitted')) {
-  $submitted_by = t('by ') .'<span class="comment-name">'.  theme('username', $vars['comment']) .'</span>';
-  $submitted_by .= t(' - ') .'<span class="comment-date">'.  format_date($vars['comment']->timestamp, 'small') .'</span>'; // Format date as small, medium, or large
+  $submitted_by = t('by ') .'<span class="author">'.  theme('username', $vars['comment']) .'</span>';
+  $submitted_by .= t(' - ') .'<span class="time">'.  format_date($vars['comment']->timestamp, 'small') .'</span>'; // Format date as small, medium, or large
   $vars['submitted'] = $submitted_by;
 }
 

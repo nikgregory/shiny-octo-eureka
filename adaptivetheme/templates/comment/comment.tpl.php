@@ -48,7 +48,7 @@
   <?php print $picture; ?>
 
   <?php if ($submitted): ?>
-    <p class="author-date-time"><?php print $submitted; ?></p>
+    <p class="submitted"><?php print $submitted; ?></p>
   <?php endif; ?>
 
   <?php print $content; ?>

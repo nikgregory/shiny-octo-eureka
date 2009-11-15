@@ -11,11 +11,15 @@ body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;margin:0;padding:0;}
 /* Global focus style for links. */
 a:active,a:focus{border:0;color:#C00000;}
 
-/* Common page elements */
+/* Skip navigtation */
 #skip-nav{text-align:left;float:left;width:160px; /* Hidden by default with .element-invisible class see page.tpl.php */}
+
+/* User menu */
 #user-menu{float:right;width:760px;}
 #user-menu ul{float:right;margin:0;}
 #user-menu ul li{display:inline;float:left;margin:0 0 0 1em;padding:0;}
+
+/* Header, Branding, Search box */
 #header{clear:both;}
 #branding{float:left;width:300px;}
 #search-box{float:right;width:300px;}
@@ -24,43 +28,18 @@ a:active,a:focus{border:0;color:#C00000;}
 .logo-site-name span{display:block;}
 #site-name{font-size:2em;font-weight:bold;line-height:1.5;}
 #search-theme-form{float:right;margin:1.5em 0;}
+
+/* Breadcrumb, Mission */
 #breadcrumb{padding-bottom: 1em;}
 #mission{font-weight:bold;margin:.3em 0 1.5em;}
-.block{margin:0 0 20px;}
-.feed-icon img{padding:0 10px;}
-#content-aside{background:#FFF;float:right;padding-left:10px;width:240px;}
-.author-date-time {margin:0;}
 
-/* Primary and Secondary links basic styles - comment this out or remove if you dont want it. */
+/* Primary and Secondary menus. */
 .primary-links,
 .secondary-links{margin:0;padding:0;}
 .primary-links li,
 .secondary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
 .primary-links li a,
 .secondary-links li a{display:block;padding:0 0.5em;white-space:nowrap;}
-
-/* Lists. */
-ul.menu,
-ul.menu ul,
-ul.menu ul ul,
-ul.menu ul ul ul{margin:0 0 0 1em;padding:0;}
-ul.menu li{padding:.35em 0 0;}
-.item-list ul li{padding:.35em 0 0;}
-.block .item-list ul{margin:0;}
-#block-user-3 .item-list h3{font-size:1em;}
-#block-locale-0 ul{margin:0 0 0 1.5em;padding:0;}
-#block-locale-0 ul li{padding:.35em 0 0;}
-
-/* Comments. */
-.indented {margin-left:60px;}
-.comment{margin:0 0 1.5em;}
-.comment-title .new{color:#FF8000;}
-.comment-title a:link,
-.comment-title a:visited,
-.comment-title a:active{text-decoration:none;}
-.comment-title a:hover,
-.comment-title a:focus{text-decoration:underline;}
-.comment ul.links{display:block;padding:0 1em 0 0;text-align:right;}
 
 /* Aricles (nodes). */
 .article{margin:0 0 1.5em;}
@@ -75,12 +54,37 @@ ul.menu li{padding:.35em 0 0;}
 .article .taxonomy li{display:inline;list-style:none;}
 .article .vocab-name{font-size:1em;font-weight:bold;}
 
+/* Comments. */
+.indented {margin-left:60px;}
+.comment{margin:0 0 1.5em;}
+.comment-title .new{color:#FF8000;}
+.comment-title a:link,
+.comment-title a:visited,
+.comment-title a:active{text-decoration:none;}
+.comment-title a:hover,
+.comment-title a:focus{text-decoration:underline;}
+.comment ul.links{display:block;padding:0 1em 0 0;text-align:right;}
+
+/* Generic classes. */
+.submitted {margin:.375em 0 0.75em;}
+
+/* Blocks. */
+.block{margin:0 0 20px;}
+.block ul li {margin:0 0 0 0.5em;}
+#block-user-3 .item-list h3{font-size:1em;}
+#block-locale-0 ul{margin:0 0 0 1.5em;padding:0;}
+#block-locale-0 ul li{padding:.35em 0 0;}
+#block-node-0 .feed-icon img{padding:10px 0;}
+
+/* Pager. */
 .item-list ul.pager li{margin:0;}
 
-
-/* Misc. */
-#block-node-0 .feed-icon img{padding:10px 0;}
+/* Regions. */
 #menu-region .superfish-menu-hide-title{height:0;overflow:hidden;position:absolute;}
+#content-aside{background:#FFF;float:right;padding-left:10px;width:240px;}
+
+/* Footer, Feed icons. */
+.feed-icon img{padding:0 10px;}
 
 /* Collapsed block config block styles. */
 .block-at-admin .block-title{color:#555;font-size:1.333em;}

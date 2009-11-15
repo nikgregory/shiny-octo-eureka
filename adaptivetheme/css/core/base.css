@@ -34,6 +34,9 @@ blockquote:before,blockquote:after,q:before,q:after{content:"";}
 .element-invisible{height:0;overflow:hidden;position:absolute;}
 .offscreen{position:absolute;top:-9999em;left:auto;width:1px;height:1px;overflow:hidden;}
 
+/* Easy clearing */
+.clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;visibility:hidden;}
+
 /* Tables */
 table{border-color:#C0C0C0;border-spacing:0;margin:1em 0;padding:0;}
 caption,th,td{text-align:left;}

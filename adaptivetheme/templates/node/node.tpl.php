@@ -62,7 +62,7 @@
   <?php endif; ?>
 
   <?php if ($submitted): ?>
-    <p class="author-date-time"><?php print $submitted; ?></p>
+    <p class="submitted"><?php print $submitted; ?></p>
   <?php endif; ?>
 
   <?php if ($picture): print $picture; endif; ?>
@@ -77,4 +77,4 @@
     <div id="article-aside" class="aside"><?php print $article_aside; ?></div>
   <?php endif; ?>
 
-</div> <!-- /node -->
+</div> <!-- /article -->

@@ -82,8 +82,8 @@ if (!$vars['node']->status) {
 // Node Theme Settings.
 // Date & author theme settings.
 if (!function_exists('submitted_by_node_submitted')) {
-  $date = t('Posted ') . format_date($vars['node']->created, 'medium');
-  $author = theme('username', $vars['node']);
+  $date = t('Posted ') .'<span class="time">'. format_date($vars['node']->created, 'medium') .'</span>';
+  $author = '<span class="author">'. theme('username', $vars['node']) .'</span>';
   $author_only_separator = t('Posted by ');
   $author_date_separator = t(' by ');
   $submitted_by_content_type = (theme_get_setting('submitted_by_enable_content_type') == 1) ? $vars['node']->type : 'default';

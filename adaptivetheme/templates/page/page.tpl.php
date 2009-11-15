@@ -105,8 +105,11 @@
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
 
+    <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
+    <?php if (!empty($admin)) print $admin; ?>
+
     <?php if (!empty($admin_user_links)): ?>
-      <div id="user-menu" class="clear-block">
+      <div id="user-menu" class="clearfix">
         <h2 class="element-invisible"><?php print t('User menu'); ?></h2>
         <?php print $admin_user_links; ?>
       </div> <!-- /admin user link -->
@@ -116,7 +119,7 @@
       <div id="leaderboard"><?php print $leaderboard; ?></div> <!-- /leaderboard -->
     <?php endif; ?>
 
-    <div id="header" class="clear-block">
+    <div id="header" class="clearfix">
 
       <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
         <div id="branding">
@@ -143,7 +146,7 @@
       <?php endif; ?>
 
       <?php if ($search_box): ?>
-        <div id="search-box" class="clear-block"><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box" class="clearfix"><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
 
       <?php if ($header): ?>
@@ -153,14 +156,14 @@
     </div> <!-- /header -->
 
     <?php if (!empty($primary_menu)): ?>
-      <div id="primary">
+      <div id="primary" class="nav">
         <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
         <?php print $primary_menu; ?>
       </div>
     <?php endif; ?>
 
     <?php if (!empty($secondary_menu)): ?>
-      <div id="secondary">
+      <div id="secondary" class="nav">
         <h2 class="element-invisible"><?php print t('Secondary menu'); ?></h2>
         <?php print $secondary_menu; ?>
       </div>
@@ -182,10 +185,10 @@
     <?php endif; ?>
 
     <?php if ($secondary_content): ?>
-      <div id="secondary-content" class="aside"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
+      <div id="secondary-content"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
     <?php endif; ?>
 
-    <div id="columns"><div class="columns-inner clear-block">
+    <div id="columns"><div class="columns-inner clearfix">
     
       <div id="content-column"><div class="content-inner">
 
@@ -194,7 +197,7 @@
         <?php endif; ?>
 
         <?php if ($content_top): ?>
-          <div id="content-top" class="aside"><?php print $content_top; ?></div> <!-- /content-top -->
+          <div id="content-top"><?php print $content_top; ?></div> <!-- /content-top -->
         <?php endif; ?>
 
         <div id="main-content">
@@ -209,7 +212,7 @@
           <?php endif; ?>
 
           <?php if ($content_aside): ?> 
-            <div id="content-aside" class="aside"><?php print $content_aside; ?></div> <!-- /content-aside -->
+            <div id="content-aside"><?php print $content_aside; ?></div> <!-- /content-aside -->
           <?php endif; ?>
 
           <div id="content"><?php print $content; ?></div>
@@ -217,27 +220,27 @@
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom" class="aside"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
+          <div id="content-bottom"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
         <?php endif; ?>
 
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-first" class="sidebar aside"><?php print $left; ?></div> <!-- /sidebar-first -->
+        <div id="sidebar-first" class="sidebar"><?php print $left; ?></div> <!-- /sidebar-first -->
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-last" class="sidebar aside"><?php print $right; ?></div> <!-- /sidebar-last -->
+        <div id="sidebar-last" class="sidebar"><?php print $right; ?></div> <!-- /sidebar-last -->
       <?php endif; ?>
 
     </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
-      <div id="tertiary-content" class="aside"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
+      <div id="tertiary-content"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
     <?php endif; ?>
 
     <?php if ($footer or $footer_message or $feed_icons): ?>
-      <div id="footer" class="clear-block">
+      <div id="footer" class="clearfix">
 
         <?php if ($footer): ?>
           <div id="footer-region"><?php print $footer; ?></div> <!-- /footer-region -->

@@ -20,7 +20,6 @@ body.admin-menu #container {}
 /**********************************************************
  *                 HTML Elements
  **********************************************************/
-
 h1 {}
 h2 {}
 h3 {}
@@ -80,11 +79,10 @@ a:focus {}
 
 
 /**********************************************************
- *              Section, Page and Body Classes
+ *                    Body Classes
  **********************************************************/
- /* Note that most of these are not active by default,
-    to use the extra classes you need to enable them
-    in the Advanced theme settings first. */
+ /* NOTE: these are not active by default; you need to 
+    enable them in the Advanced theme settings. */
 
 /* Front or not front. */
 .front {}
@@ -107,7 +105,6 @@ a:focus {}
  *                  The wrapper divs
  *    Be careful how you modify these, see layout.css
  **********************************************************/
-
 #container {}
 
 /* Column wrappers */
@@ -126,9 +123,6 @@ a:focus {}
 /**********************************************************
  *                       Regions
  **********************************************************/
-/* Target all aside content (all regions except the header, content and footer). */
-.aside {}
- 
 /* Leaderboard is a full width region at the very top, ideal for displaying banners. */
 #leaderboard {}
 
@@ -451,7 +445,7 @@ h1#page-title {}
  *                  Generic Content Classes
  **********************************************************/
 .title {}
-.author-date-time {}
+.submitted {}
 .content {}
 .links {}
 .tags {}
@@ -476,9 +470,11 @@ h1#page-title {}
 .article .user-picture img {}
 
 /* Submitted */
-.article .author-date-time {}
-.article .author-date-time a {}
-.article .author-date-time a:hover {}
+.article .submitted {}
+.article .submitted a {}
+.article .submitted a:hover {}
+.article .submitted .author {}
+.article .submitted .time {}
 
 /* Common links classes. */
 .article ul.links {}
@@ -612,9 +608,11 @@ ul.links li.print_pdf a {}
 .comment .user-picture {}
 .comment .user-picture img {}
 
-.comment .author-date-time {}
-.comment .author-date-time a {}
-.comment .author-date-time a:hover {}
+.comment .submitted {}
+.comment .submitted a {}
+.comment .submitted a:hover {}
+.comment .submitted .author {}
+.comment .submitted .time {}
 
 /* Comment links. */
 .comment ul.links {}
@@ -815,6 +813,17 @@ ul.menu li.last  {}
 
 
 /**********************************************************
+ *             Block config block styles
+ **********************************************************/
+.block-at-admin .block-title {}
+.block-at-admin .block-at-admin-inner {}
+.block-at-admin fieldset {}
+.block-at-admin a {}
+.block-at-admin a:hover,
+.block-at-admin a:focus {}
+
+
+/**********************************************************
  *                  Gpanel blocks
  **********************************************************/
 /* Examples to get started. Add col specific selectors to style
@@ -956,7 +965,6 @@ ul.menu li.last  {}
     You need the Panels3 module installed to use the
     built in panels and the Adaptivetheme base theme
     must be enabled.
- 
  **********************************************************/
 .panel-col {}
 .panel-col .inside {}
