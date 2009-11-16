@@ -456,7 +456,7 @@ h1#page-title {}
  **********************************************************/
 .article {}
 
-/* article title on teasers and other lists. */
+/* Teaser title (H2). */
 .article-title {}
 
 .article-title a:link,
@@ -508,11 +508,11 @@ ul.links li.print_html a {}
 ul.links li.print_email a {}
 ul.links li.print_pdf a {}
 
-/* Node ul link first and last classes. */
+/* UL link first and last classes. */
 .article ul.links li.first {}
 .article ul.links li.last  {}
 
-/* Node classes for node workflow states. */
+/* Workflow states. */
 .article-add    {}
 .article-edit   {}
 .article-delete {}
@@ -520,10 +520,10 @@ ul.links li.print_pdf a {}
 .article-sticky   {}
 .article-promoted {}
 
-/* Node status. */
+/* Status. */
 .article-unpublished {}
 
-/* Theme the node teaser seperatly. */
+/* Theme the teaser seperatly. */
 .article-teaser {}
 
 
@@ -582,39 +582,42 @@ ul.links li.print_pdf a {}
 /**********************************************************
  *                     Comments
  **********************************************************/
-/* Comment wrapper */
+/* Comment wrapper: wraps all comments and the comment form. */
 #comments {}
 #comments-title {}
-	
+
+/* Wrapper class for each individual comment. */
 .comment {}
 
-/* Inner wrapper div for comments. */
-.comment-inner {}
-
+/* Indentation */
 .comment .indented {}
 
-/* The title of each comment. */
+/* Comment Title (H3) */
 .comment-title {}
-
-.comment-id {}
-.comment-title .new {}
-
 .comment-title a:link,
 .comment-title a:visited {}
 .comment-title a:hover,
 .comment-title a:focus,
 .comment-title a:active {}
 
+/* Comment id (count with pound sign, see line 28 comment.tpl.php) 
+   and comment "new" notification. */
+.comment-id {}
+.comment-title .new {}
+
+
+/* User Picture */
 .comment .user-picture {}
 .comment .user-picture img {}
 
+/* Submitted */
 .comment .submitted {}
 .comment .submitted a {}
 .comment .submitted a:hover {}
 .comment .submitted .author {}
 .comment .submitted .time {}
 
-/* Comment links. */
+/* Links */
 .comment ul.links {}
 .comment ul.links li {}
 .comment ul.links li a {}
@@ -624,26 +627,23 @@ ul.links li.comment_reply a {}
 ul.links li.comment_edit a {}
 ul.links li.comment_delete a {}
 
-/* Comment ul link first and last classes. */
+/* UL link first and last classes. */
 .comment ul.links li.first {}
 .comment ul.links li.last  {}
 
-/**
- * Comment Classes - extra classes to help out themers.
- */
-/* Comment author. */
+/* Author */
 .comment-by-anonymous   {}
-.comment-by-node-author {}
+.comment-by-article-author {}
 .comment-by-viewer      {}
 
-/* Comment is new. */
+/* New */
 .comment-new {}
 
-/* Zebra odd/even classes. */
+/* Zebra */
 .comment.odd  {}
 .comment.even {}
 
-/* Comment status. */
+/* Status */
 .comment-unpublished {}
 
 /* Themes the "Unpublished" text. */
