@@ -108,9 +108,9 @@
   skinr[at-menu][features][] = block
   skinr[at-menu][features][] = panels_pane
   skinr[at-menu][options][1][label] = Horizontal inline menu
-  skinr[at-menu][options][1][class] = at-inline-menu clear-block
+  skinr[at-menu][options][1][class] = at-inline-menu clearfix
   skinr[at-menu][options][2][label] = Multi-column menu with headers
-  skinr[at-menu][options][2][class] = at-multicolumn-menu clear-block
+  skinr[at-menu][options][2][class] = at-multicolumn-menu clearfix
   
   ; Semantic classes
   skinr[at-semantic-classes][title] = Semantic classes
@@ -222,7 +222,3 @@
 
   settings[color_schemes]                    = 'colors-default.css'
   settings[color_enable_schemes]             = 'off'
-
-  
-
-  
