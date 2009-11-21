@@ -21,8 +21,8 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-set
 */
 function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
 
-  global $theme_info; 
-  
+  global $theme_info;
+
   // Only open one of the general or node setting fieldsets at a time
   $js = <<<SCRIPT
     $(document).ready(function(){
@@ -51,11 +51,11 @@ SCRIPT;
 
   // Merge the saved variables and their default values.
   //$settings = array_merge($defaults, $saved_settings);
-  
+
   // Make the default content-type settings the same as the default theme settings,
   // so we can tell if content-type-specific settings have been altered.
   //$defaults = array_merge($defaults, theme_get_settings());
-  
+
   // Set the default values for content-type-specific settings
   foreach ($node_types as $type => $name) {
     $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
@@ -106,7 +106,7 @@ SCRIPT;
     '#options'       => array(
                           'yes'   => t('Yes'),
                           'no'    => t('No'),
-                          'admin' => t('Only in the admin section'),                
+                          'admin' => t('Only in the admin section'),
                         ),
   );
   $form['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
@@ -194,7 +194,7 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
-  );  
+  );
   //'split_node_form
   $form['node_type_specific']['split_node_container'] = array(
     '#type' => 'fieldset',
@@ -204,7 +204,7 @@ SCRIPT;
   );
   $form['node_type_specific']['split_node_container']['split_node_form'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Use the custom content entryt form layout'),
+    '#title' => t('Use the custom content form layout'),
   '#description' => t('This will place additional Save, Preview and Delete links and the taxonomy term fieldsets in a new column on the content entry edit form.'),
     '#default_value' => $settings['split_node_form'],
   );
@@ -313,7 +313,7 @@ SCRIPT;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
           '#type'          => 'checkbox',
           '#title'         => t('Display vocabulary: '. $vocab_name),
-          '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"], 
+          '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
         );
       }
       // Options for default settings
@@ -370,10 +370,9 @@ SCRIPT;
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
-
   $form['themedev']['dev']['body_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Body CSS Classes'),
+    '#title' => t('Body Classes'),
     '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -417,7 +416,7 @@ SCRIPT;
   // Node classes
   $form['themedev']['dev']['article_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Article CSS Classes (for nodes)'),
+    '#title' => t('Article Classes (nodes)'),
     '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -455,7 +454,7 @@ SCRIPT;
   // Comment classes
   $form['themedev']['dev']['comment_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Comments CSS Classes'),
+    '#title' => t('Comments Classes'),
     '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -490,13 +489,10 @@ SCRIPT;
     '#title' => t('Print a content type class on the comments wrapper, e.g. .blog-comments, .forum-comments.'),
     '#default_value' => $settings['cleanup_comment_wrapper_type'],
   );
-  
-
-  
   // Block classes
   $form['themedev']['dev']['block_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Block CSS Classes'),
+    '#title' => t('Block Classes'),
     '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -531,6 +527,57 @@ SCRIPT;
     '#title' => t('Print .block-[count] classes.'),
     '#default_value' => $settings['cleanup_block_classes_count'],
   );
+  // Menu classes
+  $form['themedev']['dev']['menu_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Menu Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['menu_classes']['cleanup_menu_menu_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the ul.menu class.'),
+    '#default_value' => $settings['cleanup_menu_menu_class'],
+  );
+  $form['themedev']['dev']['menu_classes']['cleanup_menu_leaf_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the .leaf class on menu list items.'),
+    '#default_value' => $settings['cleanup_menu_leaf_class'],
+  );
+  $form['themedev']['dev']['menu_classes']['cleanup_menu_first_last_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the .first and .last classes on menu list items.'),
+    '#default_value' => $settings['cleanup_menu_first_last_classes'],
+  );
+  $form['themedev']['dev']['menu_classes']['cleanup_menu_active_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the .active classes on menu list items (active classes always print on the anchor).'),
+    '#default_value' => $settings['cleanup_menu_active_classes'],
+  );
+  $form['themedev']['dev']['menu_classes']['cleanup_links_type_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the type class on Primary and Secondary links.'),
+    '#default_value' => $settings['cleanup_links_type_class'],
+  );
+  // Item list classes
+  $form['themedev']['dev']['itemlist_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Item list Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['itemlist_classes']['cleanup_item_list_zebra'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .odd and .even classes for list items.'),
+    '#default_value' => $settings['cleanup_item_list_zebra'],
+  );
+  $form['themedev']['dev']['itemlist_classes']['cleanup_item_list_first_last'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .first and .last classes for the first and last items in the list.'),
+    '#default_value' => $settings['cleanup_item_list_first_last'],
+  );
   // Admin settings
   $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
@@ -542,21 +589,21 @@ SCRIPT;
     '#type'  => 'checkbox',
     '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['admin_user_links'],
-    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),  
+    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
   );
   $form['admin_settings']['administration']['block_edit_links'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
-    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),  
+    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
   );
   $form['admin_settings']['administration']['at_admin_hide_help'] = array(
     '#type'  => 'checkbox',
     '#title' => t('Hide help messages.'),
     '#default_value' => $settings['at_admin_hide_help'],
-    '#description' => t('When this setting is checked all help messages will be hidden.'),  
+    '#description' => t('When this setting is checked all help messages will be hidden.'),
   );
-  // Layout settings  
+  // Layout settings
   $form['layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Layout settings'),
@@ -669,13 +716,13 @@ SCRIPT;
         '#type' => 'radios',
         '#prefix'       => '<div class="layout-method">',
         '#suffix'       => '</div>',
-        '#default_value' => $settings['layout_method'],      
+        '#default_value' => $settings['layout_method'],
         '#options' => array(
           '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
           '1' => t('<strong>Layout #2</strong>') . theme('image', $image_path .'/layout-sidebars-right.png') . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
           '2' => t('<strong>Layout #3</strong>') . theme('image', $image_path .'/layout-sidebars-left.png') . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
         ),
-       '#attributes' => array('class' => 'layouts'), 
+       '#attributes' => array('class' => 'layouts'),
       );
       $form['layout']['page_layout']['layout_enable_settings'] = array(
         '#type'    => 'hidden',

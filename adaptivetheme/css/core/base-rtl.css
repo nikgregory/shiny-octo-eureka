@@ -57,8 +57,8 @@ div.block-edit-links .edit-links{left:15px;right:auto;}
 .at-horizontal-login #user-login-form li a{padding:0 0 0 20px;}
 
 /* inline menu style. */
-.at-inline-menu ul.menu li{border-left-style:solid;border-left-width:1px;border-right-style:none;border-right-width:0;}
-.at-inline-menu ul.menu li a{padding:0 .45em 0 .75em;}
+.at-inline-menu ul.menu li{float:right;}
+.at-inline-menu ul.menu li a{padding:0 .5em;}
 
 /* multi-column menu style. */
 .at-multicolumn-menu .block-content{}
@@ -67,8 +67,8 @@ div.block-edit-links .edit-links{left:15px;right:auto;}
 .at-multicolumn-menu .block-content ul li.expanded ul li{}
 
 /* Article form rtl */
-#article-form .node-col-last{float:left;}
-#article-form .node-col-first{float:right;}
-#article-form .node-col-last .buttons #edit-submit,
-#article-form .node-col-last .buttons #edit-preview,
-#article-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}
+#node-form .node-col-last{float:left;}
+#node-form .node-col-first{float:right;}
+#node-form .node-col-last .buttons #edit-submit,
+#node-form .node-col-last .buttons #edit-preview,
+#node-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}

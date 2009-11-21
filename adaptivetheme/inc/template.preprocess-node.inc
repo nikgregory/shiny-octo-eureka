@@ -100,34 +100,47 @@ $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1
 $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
 $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
 $delimiter = filter_xss(theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type));
-$heading_level = $vars['page'] ? 'h2' : 'h3';
 if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page']))) {
-  $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
   $output = '';
-  $vocab_delimiter = ''; 
-  foreach ($vocabularies as $vocabulary) {
-    if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
-      $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
-      if ($terms) {
-        $output .= ($taxonomy_format == 'vocab') ? '<li class="vocab vocab-'. safe_string($vocabulary->name) .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="terms">' : '';
-        $links = array();
-        $term_index = 0;
-        foreach ($terms as $term) {
-          $term_index++;
-          $term_delimiter = ($term_index == count($terms)) ? '' : $delimiter;
-          $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . $term_delimiter .'</li>';
+  switch ($taxonomy_format) {
+    case "list":
+      $terms = taxonomy_node_get_terms($vars['node']);
+      $links = array();
+      $term_index = 0;
+      foreach ($terms as $term) {
+        $term_count = count($terms);
+        $term_index++;
+        if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $term->vid) == 1) {
+          $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . ( $term_index == $term_count ? '' : $delimiter ) .'</li>';
         }
-        if ($taxonomy_format == 'list') {
-          $output .= $vocab_delimiter;
-          $vocab_delimiter = $delimiter;
-        }
-        $output .= implode("", $links);
-        $output .= ($taxonomy_format == 'vocab') ? '</ul></li>' : '';
       }
-    }
-  }
-  if ($output != '') {
-    $output = '<ul class="taxonomy">'. $output .'</ul>';
+      $output .= implode("", $links);
+      $output = '<ul class="taxonomy">'. $output .'</ul>';
+      break;
+    case "vocab":
+      $heading_level = $vars['page'] ? 'h2' : 'h3';
+      $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
+      $vocab_index = 0;
+      foreach ($vocabularies as $vocabulary) {
+        $vocab_index++;
+        if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
+          $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
+        }
+        if ($terms) {
+          $links = array();
+          $output .= '<li class="vocab vocab-'. safe_string($vocabulary->name) .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="vocab-list">' ;
+          $term_count = count($terms);
+          $term_index = 0;
+          foreach ($terms as $term) {
+            $term_index++;
+            $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) .  ( $term_index == $term_count ? '' : $delimiter )  .'</li>';
+          }
+        $output .= implode("", $links);
+        $output .= '</ul></li>';
+        }
+      }
+      $output = '<ul class="taxonomy">'. $output .'</ul>';
+      break;
   }
   $vars['terms'] = $output;
 }

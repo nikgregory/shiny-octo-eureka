@@ -107,8 +107,8 @@
   skinr[at-menu][description] = Different layouts and alignment options for your menus
   skinr[at-menu][features][] = block
   skinr[at-menu][features][] = panels_pane
-  skinr[at-menu][options][1][label] = Single line inline menu with separators
-  skinr[at-menu][options][1][class] = at-inline-menu
+  skinr[at-menu][options][1][label] = Horizontal inline menu
+  skinr[at-menu][options][1][class] = at-inline-menu clear-block
   skinr[at-menu][options][2][label] = Multi-column menu with headers
   skinr[at-menu][options][2][class] = at-multicolumn-menu clear-block
   
@@ -189,7 +189,17 @@
   settings[cleanup_block_classes_zebra]      = 0
   settings[cleanup_block_classes_region]     = 0
   settings[cleanup_block_classes_count]      = 0
-  
+
+  settings[cleanup_menu_menu_class]          = 1
+  settings[cleanup_menu_leaf_class]          = 0
+  settings[cleanup_menu_first_last_classes]  = 0
+  settings[cleanup_menu_active_classes]      = 0
+
+  settings[cleanup_links_type_class]         = 1
+
+  settings[cleanup_item_list_zebra]          = 0
+  settings[cleanup_item_list_first_last]     = 0
+
   settings[admin_user_links]                 = 1
   settings[block_edit_links]                 = 1
   settings[at_admin_hide_help]               = 0
