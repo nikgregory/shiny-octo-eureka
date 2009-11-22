@@ -21,30 +21,12 @@ if (theme_get_setting('cleanup_block_block_module_delta')) {
   $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
 }
 
-if (theme_get_setting('cleanup_block_classes_nav')) {
-  // Set up variables for navigation-like blocks.
-  $n1 = array('user-1', 'statistics-0');
-  $n2 = array('menu', 'book', 'forum', 'blog', 'aggregator', 'comment');
-  $h1 = $block->module .'-'. $block->delta;
-  $h2 = $block->module;
-}
-
-  // Special classes for blocks, emulate Drupal 7.
+// Special classes for blocks, emulate Drupal 7.
 $classes = array();
 $classes[] = 'block';
 
 if (theme_get_setting('cleanup_block_classes_module')) {
   $classes[] = 'block-'. $block->module;
-}
-
-// Add nav class to navigation-like blocks.
-if (theme_get_setting('cleanup_block_classes_nav')) {
-  if (in_array($h1, $n1)) {
-    $classes[] = 'nav';
-  }
-  if (in_array($h2, $n2)) {
-    $classes[] = 'nav';
-  }
 }
 
 if (theme_get_setting('cleanup_block_classes_zebra')) {
@@ -82,8 +64,8 @@ if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
 }
 
 // Add classes for the horizontal login block if enabled.
-if (theme_get_setting('horizontal_login_block') && $vars['block_module_delta'] == 'block-user-0') {
-  $classes[] = 'at-horizontal-login clear-block';
+if (theme_get_setting('horizontal_login_block')  && $block->module = 'user' && $block->delta == '0') {
+  $classes[] = 'at-horizontal-login clearfix';
 }
 
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.

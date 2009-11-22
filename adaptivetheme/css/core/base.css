@@ -34,6 +34,13 @@ blockquote:before,blockquote:after,q:before,q:after{content:"";}
 .element-invisible{height:0;overflow:hidden;position:absolute;}
 .offscreen{position:absolute;top:-9999em;left:auto;width:1px;height:1px;overflow:hidden;}
 
+/* Skip Navigation classes */
+.show-skip-link{text-align:right; /* LTR */}
+.show-on-focus a:link,
+.show-on-focus a:hover, 
+.show-on-focus a:visited{height:1px;overflow:hidden;position:absolute;top:-999em;}
+.show-on-focus a:active,.show-on-focus a:focus{background:#FFF;height:1.5em;overflow:visible;position:fixed;top:0;right:0;width:auto;z-index: 1000;}
+
 /* Easy clearing */
 .clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;visibility:hidden;}
 .clearfix{display:inline-block;}
@@ -181,6 +188,7 @@ body.admin-menu{margin-top: 23px !important;}
 #admin-menu ul li a:focus{color:#000;border:0;background:#FFFF00;}
 div.krumo-root{color:#000;}
 .block-at-admin h2.block-title{height:auto;position:static;}
+.fieldset-advanced-theme-settings .description em{font-weight:bold;}
 
 /* Accessible edit links for blocks. */
 div.block-edit-links .edit-links{padding:0;position:absolute;height:0;right:10px;top:.5em;overflow:hidden;z-index:99;}
@@ -217,7 +225,7 @@ div.view .views-admin-links a:hover{background:#FFF;}
 .at-horizontal-login .item-list ul li{float:left;}
 .at-horizontal-login #user-login-form{text-align:left;}
 .at-horizontal-login label{float:left;}
-#block-user-0 label.overlabel-apply{position:absolute;top:1em;margin-left:.375em;float:none;}
+.at-horizontal-login label.overlabel-apply{position:absolute;top:1em;margin-left:.375em;float:none;}
 .at-horizontal-login input{margin:0;}
 .at-horizontal-login .button-wrapper input{margin:.75em .5em 0;}
 .at-horizontal-login #user-login-form li a{padding:0 20px 0 0;}

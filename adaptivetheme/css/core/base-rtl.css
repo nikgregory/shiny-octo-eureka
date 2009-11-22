@@ -6,6 +6,9 @@
  * @file base-rtl.css
  * Base is the master reset for browsers and Drupal.
  */
+.show-skip-link{text-align:left;}
+.show-on-focus a:active,.show-on-focus a:focus{left:0;right:auto;}
+
 blockquote{margin:0 0 1.5em;padding:0 3em 0 0;}
 
 #forum table{clear:both;}

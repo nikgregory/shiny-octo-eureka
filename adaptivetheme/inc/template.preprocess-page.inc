@@ -26,13 +26,23 @@ if (!$vars['show_blocks']) {
   $vars['right'] = '';
 }
 
+// Skip navigation class.
+if (theme_get_setting('skip_navigation_display') == 'hide') {
+    $vars['skip_nav_class'] = 'element-invisible';
+}
+if (theme_get_setting('skip_navigation_display') == 'show') {
+    $vars['skip_nav_class'] = 'show';
+}
+if (theme_get_setting('skip_navigation_display') == 'focus') {
+    $vars['skip_nav_class'] = 'show-on-focus';
+}
+
 // Set variables for the logo and site_name.
 if (!empty($vars['logo'])) {
   // Return the site_name even when site_name is disabled in theme settings.
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .'" /></a>';
 }
-
 if (!empty($vars['site_name'])) {
   $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
 }
@@ -59,8 +69,6 @@ if (theme_get_setting('cleanup_classes_section')){
 }
 
 // Body Classes.
-
-// Setup the layout classes.
 $vars['layout'] = 'none';
 if (!empty($vars['left'])) {
   $vars['layout'] = 'first';
@@ -122,8 +130,6 @@ else {
 
 // $classes is the varaible that will hold the page classes, and is printed in page tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
-
-// THEME SETTINGS
 
 // Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
@@ -202,7 +208,7 @@ if (theme_get_setting('at_admin_hide_help')) {
 }
 
 // Admin user links.
-if ($vars['logged_in'] && theme_get_setting('admin_user_links')) {
+if ($vars['logged_in'] && theme_get_setting('at_user_menu') == 1) {
   if (!function_exists(admin_menu_perm)) {
     $admin_user_links[] = l(t('Create content'), 'node/add');
     $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';

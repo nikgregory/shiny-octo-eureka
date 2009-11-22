@@ -132,6 +132,8 @@
 
   settings[user_notverified_display]         = 0
 
+  settings[skip_navigation_display]          = 'hide'
+
   settings[breadcrumb_display]               = 'yes'
   settings[breadcrumb_separator]             = ' &#187; '
   settings[breadcrumb_home]                  = 0
@@ -184,7 +186,6 @@
   settings[cleanup_comment_wrapper_type]     = 0
   
   settings[cleanup_block_block_module_delta] = 0
-  settings[cleanup_block_classes_nav]        = 0
   settings[cleanup_block_classes_module]     = 0
   settings[cleanup_block_classes_zebra]      = 0
   settings[cleanup_block_classes_region]     = 0
@@ -200,7 +201,7 @@
   settings[cleanup_item_list_zebra]          = 0
   settings[cleanup_item_list_first_last]     = 0
 
-  settings[admin_user_links]                 = 1
+  settings[at_user_menu]                     = 0
   settings[block_edit_links]                 = 1
   settings[at_admin_hide_help]               = 0
 

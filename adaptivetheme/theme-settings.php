@@ -77,6 +77,24 @@ SCRIPT;
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'general_settings'),
   );
+
+  // Skip Navigation
+  $form['general_settings']['skip_navigation'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Skip Navigation'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['general_settings']['skip_navigation']['skip_navigation_display'] = array(
+    '#type'          => 'radios',
+    '#title'         => t('Modify the display of the skip navigation'),
+    '#default_value' => $settings['skip_navigation_display'],
+    '#options'       => array(
+                          'show' => t('Show skip navigation'),
+                          'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
+                          'hide' => t('Hide skip navigation'),
+                        ),
+  );
   // Mission Statement
   $form['general_settings']['mission_statement'] = array(
     '#type' => 'fieldset',
@@ -86,7 +104,7 @@ SCRIPT;
   );
   $form['general_settings']['mission_statement']['mission_statement_pages'] = array(
     '#type'          => 'radios',
-    '#title'         => t('Where should the mission statement be displayed?'),
+    '#title'         => t('Where should the mission statement be displayed'),
     '#default_value' => $settings['mission_statement_pages'],
     '#options'       => array(
                           'home' => t('Display the mission statement only on the home page'),
@@ -195,19 +213,6 @@ SCRIPT;
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
   );
-  //'split_node_form
-  $form['node_type_specific']['split_node_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Customized Content Entry Form'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['node_type_specific']['split_node_container']['split_node_form'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Use the custom content form layout'),
-  '#description' => t('This will place additional Save, Preview and Delete links and the taxonomy term fieldsets in a new column on the content entry edit form.'),
-    '#default_value' => $settings['split_node_form'],
-  );
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
@@ -240,7 +245,7 @@ SCRIPT;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
           '#type'          => 'checkbox',
-          '#title'         => t('Use custom settings for each content type instead of the default above.'),
+          '#title'         => t('Use content-type specific settings.'),
           '#default_value' => $settings['submitted_by_enable_content_type'],
         );
       }
@@ -322,7 +327,7 @@ SCRIPT;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
           '#type'          => 'checkbox',
-          '#title'         => t('Use custom settings for each content type instead of the default above'),
+          '#title'         => t('Use content-type specific settings.'),
           '#default_value' => $settings['taxonomy_enable_content_type'],
         );
       }
@@ -332,6 +337,211 @@ SCRIPT;
       }
     }
   }
+  // Layout settings
+  $form['layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Layout settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  if ($settings['layout_enable_settings'] == 'on') {
+    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core/core-images';
+    $form['layout']['page_layout'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Page Layout'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
+    );
+    if ($settings['layout_enable_width'] == 'on') {
+      $form['layout']['page_layout']['layout_width_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_width'] = array(
+        '#type'          => 'select',
+        '#prefix'        => '<div class="page-width">',
+        '#suffix'        => '</div>',
+        '#default_value' => $settings['layout_width'],
+        '#options'       => array(
+          '720px'   => t('720px'),
+          '780px'   => t('780px'),
+          '840px'   => t('840px'),
+          '900px'   => t('900px'),
+          '960px'   => t('960px'),
+          '1020px'   => t('1020px'),
+          '1080px'   => t('1080px'),
+          '1140px'   => t('1140px'),
+          '1200px'   => t('1200px'),
+          '1260px'   => t('1260px'),
+        ),
+        '#attributes' => array('class' => 'field-layout-width'),
+      );
+    } // endif width
+    if ($settings['layout_enable_sidebars'] == 'on') {
+      $form['layout']['page_layout']['layout_sidebar_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
+        '#type'          => 'select',
+        '#title'         => t('Sidebar first'),
+        '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
+        '#suffix'       => '</div>',
+        '#default_value' => $settings['layout_sidebar_first_width'],
+        '#options'       => array(
+          '60'    => t('60px'),
+          '120'   => t('120px'),
+          '180'   => t('180px'),
+          '240'   => t('240px'),
+          '300'   => t('300px'),
+          '320'   => t('320px'),
+          '360'   => t('360px'),
+          '420'   => t('420px'),
+          '480'   => t('480px'),
+          '540'   => t('540px'),
+          '600'   => t('600px'),
+          '660'   => t('660px'),
+          '720'   => t('720px'),
+          '780'   => t('780px'),
+          '840'   => t('840px'),
+          '900'   => t('900px'),
+          '960'   => t('960px'),
+        ),
+        '#attributes' => array('class' => 'sidebar-width-select'),
+      );
+      $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
+        '#type'          => 'select',
+        '#title'         => t('Sidebar last'),
+        '#prefix'       => '<div class="sidebar-width-right">',
+        '#suffix'       => '</div></div>',
+        '#default_value' => $settings['layout_sidebar_last_width'],
+        '#options'       => array(
+          '60'    => t('60px'),
+          '120'   => t('120px'),
+          '180'   => t('180px'),
+          '240'   => t('240px'),
+          '300'   => t('300px'),
+          '320'   => t('320px'),
+          '360'   => t('360px'),
+          '420'   => t('420px'),
+          '480'   => t('480px'),
+          '540'   => t('540px'),
+          '600'   => t('600px'),
+          '660'   => t('660px'),
+          '720'   => t('720px'),
+          '780'   => t('780px'),
+          '840'   => t('840px'),
+          '900'   => t('900px'),
+          '960'   => t('960px'),
+        ),
+        '#attributes' => array('class' => 'sidebar-width-select'),
+      );
+    } //endif layout sidebars
+    if ($settings['layout_enable_method'] == 'on') {
+      $form['layout']['page_layout']['layout_method_help'] = array(
+        '#prefix'        => '<div class="layout-help">',
+        '#suffix'        => '</div>',
+        '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
+      );
+      $form['layout']['page_layout']['layout_method'] = array(
+        '#type' => 'radios',
+        '#prefix'       => '<div class="layout-method">',
+        '#suffix'       => '</div>',
+        '#default_value' => $settings['layout_method'],
+        '#options' => array(
+          '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
+          '1' => t('<strong>Layout #2</strong>') . theme('image', $image_path .'/layout-sidebars-right.png') . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
+          '2' => t('<strong>Layout #3</strong>') . theme('image', $image_path .'/layout-sidebars-left.png') . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
+        ),
+       '#attributes' => array('class' => 'layouts'),
+      );
+      $form['layout']['page_layout']['layout_enable_settings'] = array(
+        '#type'    => 'hidden',
+        '#value'   => $settings['layout_enable_settings'],
+      );
+    } // endif layout method
+  } // endif layout settings
+  // Equal heights settings
+  $form['layout']['equal_heights'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Equal Heights'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#description'   => t('These settings allow you to set the sidebars and/or region blocks to be equal height.'),
+  );
+  $form['layout']['equal_heights']['equal_heights_sidebars'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Equal Height Sidebars'),
+    '#default_value' => $settings['equal_heights_sidebars'],
+    '#description'   => t('This setting will make the sidebars and the main content column equal to the hight of the tallest column.'),
+  );
+  $form['layout']['equal_heights']['equal_heights_blocks'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Equal Height Blocks'),
+    '#default_value' => $settings['equal_heights_blocks'],
+    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. <b>This will not affect blocks in sidebars and does not work for blocks in Gpanels or Panels.</b>'),
+  );
+  if ($settings['horizontal_login_block_enable'] == 'on') {
+    $form['layout']['login_block'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Login Block'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['layout']['login_block']['horizontal_login_block'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Horizontal Login Block'),
+      '#default_value' => $settings['horizontal_login_block'],
+      '#description'   => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
+    );
+    $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use Overlabel JavaScript'),
+      '#default_value' => $settings['horizontal_login_block_overlabel'],
+      '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
+    );
+  } // endif horizontal block settings
+  //split_node_form
+  $form['layout']['split_node_container'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Content Forms'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['layout']['split_node_container']['split_node_form'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Alternate content form layout'),
+    '#description' => t('This setting does three things. 1) Splits content forms into two columns, 2) Adds Save, Preview and Delete buttons to the top of the form (in the new column) and 3) Moves the Taxonomy Term fieldset into the new column as well.'),
+    '#default_value' => $settings['split_node_form'],
+  );
+  // Admin settings
+  $form['admin_settings']['administration'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Admin settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['admin_settings']['administration']['at_user_menu'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Show the built in User Menu.'),
+    '#default_value' => $settings['at_user_menu'],
+    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
+  );
+  $form['admin_settings']['administration']['block_edit_links'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Show block editing and configuration links.'),
+    '#default_value' => $settings['block_edit_links'],
+    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
+  );
+  $form['admin_settings']['administration']['at_admin_hide_help'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Hide help messages.'),
+    '#default_value' => $settings['at_admin_hide_help'],
+    '#description' => t('When this setting is checked all help messages will be hidden.'),
+  );
   // Development settings
   $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
@@ -507,11 +717,6 @@ SCRIPT;
     '#title' => t('Print a .block-[module] class.'),
     '#default_value' => $settings['cleanup_block_classes_module'],
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_classes_nav'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a .nav class for navigation type blocks such as menu blocks - usefull as a jQuery hook.'),
-    '#default_value' => $settings['cleanup_block_classes_nav'],
-  );
   $form['themedev']['dev']['block_classes']['cleanup_block_classes_zebra'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .odd and .even classes for blocks.'),
@@ -578,198 +783,5 @@ SCRIPT;
     '#title' => t('Print .first and .last classes for the first and last items in the list.'),
     '#default_value' => $settings['cleanup_item_list_first_last'],
   );
-  // Admin settings
-  $form['admin_settings']['administration'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Admin settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['admin_settings']['administration']['admin_user_links'] = array(
-    '#type'  => 'checkbox',
-    '#title' => t('Show the built in User Menu.'),
-    '#default_value' => $settings['admin_user_links'],
-    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
-  );
-  $form['admin_settings']['administration']['block_edit_links'] = array(
-    '#type'  => 'checkbox',
-    '#title' => t('Show block editing and configuration links.'),
-    '#default_value' => $settings['block_edit_links'],
-    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
-  );
-  $form['admin_settings']['administration']['at_admin_hide_help'] = array(
-    '#type'  => 'checkbox',
-    '#title' => t('Hide help messages.'),
-    '#default_value' => $settings['at_admin_hide_help'],
-    '#description' => t('When this setting is checked all help messages will be hidden.'),
-  );
-  // Layout settings
-  $form['layout'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Layout settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  if ($settings['layout_enable_settings'] == 'on') {
-    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core/core-images';
-    $form['layout']['page_layout'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Page Layout'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
-    );
-    if ($settings['layout_enable_width'] == 'on') {
-      $form['layout']['page_layout']['layout_width_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
-      );
-      $form['layout']['page_layout']['layout_width'] = array(
-        '#type'          => 'select',
-        '#prefix'        => '<div class="page-width">',
-        '#suffix'        => '</div>',
-        '#default_value' => $settings['layout_width'],
-        '#options'       => array(
-          '720px'   => t('720px'),
-          '780px'   => t('780px'),
-          '840px'   => t('840px'),
-          '900px'   => t('900px'),
-          '960px'   => t('960px'),
-          '1020px'   => t('1020px'),
-          '1080px'   => t('1080px'),
-          '1140px'   => t('1140px'),
-          '1200px'   => t('1200px'),
-          '1260px'   => t('1260px'),
-        ),
-        '#attributes' => array('class' => 'field-layout-width'),
-      );
-    } // endif width
-    if ($settings['layout_enable_sidebars'] == 'on') {
-      $form['layout']['page_layout']['layout_sidebar_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
-      );
-      $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
-        '#type'          => 'select',
-        '#title'         => t('Sidebar first'),
-        '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
-        '#suffix'       => '</div>',
-        '#default_value' => $settings['layout_sidebar_first_width'],
-        '#options'       => array(
-          '60'    => t('60px'),
-          '120'   => t('120px'),
-          '180'   => t('180px'),
-          '240'   => t('240px'),
-          '300'   => t('300px'),
-          '320'   => t('320px'),
-          '360'   => t('360px'),
-          '420'   => t('420px'),
-          '480'   => t('480px'),
-          '540'   => t('540px'),
-          '600'   => t('600px'),
-          '660'   => t('660px'),
-          '720'   => t('720px'),
-          '780'   => t('780px'),
-          '840'   => t('840px'),
-          '900'   => t('900px'),
-          '960'   => t('960px'),
-        ),
-        '#attributes' => array('class' => 'sidebar-width-select'),
-      );
-      $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
-        '#type'          => 'select',
-        '#title'         => t('Sidebar last'),
-        '#prefix'       => '<div class="sidebar-width-right">',
-        '#suffix'       => '</div></div>',
-        '#default_value' => $settings['layout_sidebar_last_width'],
-        '#options'       => array(
-          '60'    => t('60px'),
-          '120'   => t('120px'),
-          '180'   => t('180px'),
-          '240'   => t('240px'),
-          '300'   => t('300px'),
-          '320'   => t('320px'),
-          '360'   => t('360px'),
-          '420'   => t('420px'),
-          '480'   => t('480px'),
-          '540'   => t('540px'),
-          '600'   => t('600px'),
-          '660'   => t('660px'),
-          '720'   => t('720px'),
-          '780'   => t('780px'),
-          '840'   => t('840px'),
-          '900'   => t('900px'),
-          '960'   => t('960px'),
-        ),
-        '#attributes' => array('class' => 'sidebar-width-select'),
-      );
-    } //endif layout sidebars
-    if ($settings['layout_enable_method'] == 'on') {
-      $form['layout']['page_layout']['layout_method_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
-      );
-      $form['layout']['page_layout']['layout_method'] = array(
-        '#type' => 'radios',
-        '#prefix'       => '<div class="layout-method">',
-        '#suffix'       => '</div>',
-        '#default_value' => $settings['layout_method'],
-        '#options' => array(
-          '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
-          '1' => t('<strong>Layout #2</strong>') . theme('image', $image_path .'/layout-sidebars-right.png') . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
-          '2' => t('<strong>Layout #3</strong>') . theme('image', $image_path .'/layout-sidebars-left.png') . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
-        ),
-       '#attributes' => array('class' => 'layouts'),
-      );
-      $form['layout']['page_layout']['layout_enable_settings'] = array(
-        '#type'    => 'hidden',
-        '#value'   => $settings['layout_enable_settings'],
-      );
-    } // endif layout method
-  } // endif layout settings
-  // Equal heights settings
-  $form['layout']['equal_heights'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Equal Heights'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#description'   => t('These settings allow you to set the sidebars and/or region blocks to be equal height.'),
-  );
-  $form['layout']['equal_heights']['equal_heights_sidebars'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Equal Height Sidebars'),
-    '#default_value' => $settings['equal_heights_sidebars'],
-    '#description'   => t('This setting will make the sidebars and the main content column equal to the hight of the tallest column.'),
-  );
-  $form['layout']['equal_heights']['equal_heights_blocks'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Equal Height Blocks'),
-    '#default_value' => $settings['equal_heights_blocks'],
-    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. <b>This will not affect blocks in sidebars and does not work for blocks in Gpanels or Panels.</b>'),
-  );
-  if ($settings['horizontal_login_block_enable'] == 'on') {
-    $form['layout']['login_block'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Login Block'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['layout']['login_block']['horizontal_login_block'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Horizontal Login Block'),
-      '#default_value' => $settings['horizontal_login_block'],
-      '#description'   => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
-    );
-    $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Use Overlabel JavaScript'),
-      '#default_value' => $settings['horizontal_login_block_overlabel'],
-      '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
-    );
-  } // endif horizontal block settings
-
   return $form;
 }

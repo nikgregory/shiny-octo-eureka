@@ -49,5 +49,5 @@
 } )( jQuery );
 
 $(document).ready(function() {
-  $("#block-user-0 label").overlabel();
+  $(".at-horizontal-login label").overlabel();
 });

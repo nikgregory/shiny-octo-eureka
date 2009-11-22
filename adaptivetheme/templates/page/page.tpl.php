@@ -100,8 +100,8 @@
 <body class="<?php print $section_class . $classes; ?>">
   <div id="container">
 
-    <div id="skip-nav" class="element-invisible">
-      <!-- NEVER use display:none to hide skip links - see http://drupal.org/node/472572 -->
+    <div id="skip-nav" class="<?php print $skip_nav_class; ?>">
+      <!-- To adjust the display of the skip link see the Advanced theme settings (General settings), and never use display:none! -->
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
 
