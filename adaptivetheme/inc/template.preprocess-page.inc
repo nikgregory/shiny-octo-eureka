@@ -58,16 +58,6 @@ if (!empty($vars['secondary_links'])) {
 // Attribution.
 $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
 
-// Section class. The section class is printed on the body element and allows you to theme site sections.
-// We use the path alias otherwise all nodes will be in "section-node".
-if (theme_get_setting('cleanup_classes_section')){
-  $path_alias = drupal_get_path_alias($_GET['q']);
-  if (!$vars['is_front']) {
-    list($section, ) = explode('/', $path_alias, 2);
-    $vars['section_class'] = safe_string('section-'. $section) .' ';
-  }
-}
-
 // Body Classes.
 $vars['layout'] = 'none';
 if (!empty($vars['left'])) {
@@ -78,6 +68,16 @@ if (!empty($vars['right'])) {
 }
 
 $classes = array();
+
+// Section class. The section class is printed on the body element and allows you to theme site sections.
+// We use the path alias otherwise all nodes will be in "section-node".
+if (theme_get_setting('cleanup_classes_section')){
+  $path_alias = drupal_get_path_alias($_GET['q']);
+  if (!$vars['is_front']) {
+    list($section, ) = explode('/', $path_alias, 2);
+    $classes[] = safe_string('section-'. $section) .' ';
+  }
+}
 
 if (theme_get_setting('cleanup_classes_front')) {
   $classes[] = $vars['is_front'] ? 'front' : 'not-front';
