@@ -735,35 +735,59 @@ SCRIPT;
   // Menu classes
   $form['themedev']['dev']['menu_classes'] = array(
     '#type' => 'fieldset',
+    '#title' => t('Menu and Primary/Secondary Links Classes'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  if (!function_exists('dhtml_menu_init')) {
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes'] = array(
+    '#type' => 'fieldset',
     '#title' => t('Menu Classes'),
     '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-  );
-  $form['themedev']['dev']['menu_classes']['cleanup_menu_menu_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the ul.menu class.'),
-    '#default_value' => $settings['cleanup_menu_menu_class'],
-  );
-  $form['themedev']['dev']['menu_classes']['cleanup_menu_leaf_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the .leaf class on menu list items.'),
-    '#default_value' => $settings['cleanup_menu_leaf_class'],
-  );
-  $form['themedev']['dev']['menu_classes']['cleanup_menu_first_last_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the .first and .last classes on menu list items.'),
-    '#default_value' => $settings['cleanup_menu_first_last_classes'],
-  );
-  $form['themedev']['dev']['menu_classes']['cleanup_menu_active_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the .active classes on menu list items (active classes always print on the anchor).'),
-    '#default_value' => $settings['cleanup_menu_active_classes'],
-  );
-  $form['themedev']['dev']['menu_classes']['cleanup_links_type_class'] = array(
+    );
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_menu_class'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the ul.menu class.'),
+      '#default_value' => $settings['cleanup_menu_menu_class'],
+    );
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_leaf_class'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the .leaf class on menu list items.'),
+      '#default_value' => $settings['cleanup_menu_leaf_class'],
+    );
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_first_last_classes'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the .first and .last classes on menu list items.'),
+      '#default_value' => $settings['cleanup_menu_first_last_classes'],
+    );
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_active_classes'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the .active classes on menu list items (active classes always print on the anchor).'),
+      '#default_value' => $settings['cleanup_menu_active_classes'],
+    );
+  }
+  else {
+    $form['themedev']['dev']['menu_classes']['#description'] = t('NOTICE: You currently have the DHTML Menu module installed. The custom menu class options have been disabled because this module will not work correctly with them enabled - you can still set classes for the Primary and Secondary links (below).');
+    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['#disabled'] = 'disabled';
+  }
+  $form['themedev']['dev']['menu_classes']['menu_links_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Primary and Secondary Links Classes'),
+    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    );
+  $form['themedev']['dev']['menu_classes']['menu_links_classes']['cleanup_links_type_class'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print the type class on Primary and Secondary links.'),
     '#default_value' => $settings['cleanup_links_type_class'],
+  );
+  $form['themedev']['dev']['menu_classes']['menu_links_classes']['cleanup_links_active_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print the active classes on Primary and Secondary links.'),
+    '#default_value' => $settings['cleanup_links_active_classes'],
   );
   // Item list classes
   $form['themedev']['dev']['itemlist_classes'] = array(

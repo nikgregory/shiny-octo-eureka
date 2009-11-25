@@ -6,27 +6,40 @@
  */
 
 /**
- * Override of theme_node_form().
+ * Return a themed breadcrumb trail.
+ *
+ * @param $breadcrumb
+ *   An array containing the breadcrumb links.
+ * @return
+ *   A string containing the breadcrumb output.
  */
-function adaptivetheme_node_form($form) {
-  if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
-    if (theme_get_setting('split_node_form') == 1) {
-      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
-      $sidebar = drupal_render($form['taxonomy']);
-      $main = drupal_render($form);
-      return "<div class='article-form clear-block'>
-        <div class='article-col-last'>{$buttons}{$sidebar}</div>
-        <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
-        </div>";
+function adaptivetheme_breadcrumb($breadcrumb) {
+  // Determine if we are to display the breadcrumb.
+  $show_breadcrumb = theme_get_setting('breadcrumb_display');
+  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
+
+    // Optionally get rid of the homepage link.
+    $show_breadcrumb_home = theme_get_setting('breadcrumb_home');
+    if (!$show_breadcrumb_home) {
+      array_shift($breadcrumb);
     }
-    elseif (theme_get_setting('split_node_form') == 0) {
-      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
-      $main = drupal_render($form);
-      return "<div class='article-form clear-block'>
-        <div class='main'>{$main}{$buttons}</div>
-        </div>";
+
+    // Return the breadcrumb with separators.
+    if (!empty($breadcrumb)) {
+      $breadcrumb_separator = filter_xss(theme_get_setting('breadcrumb_separator'));
+      $trailing_separator = $title = '';
+      if (theme_get_setting('breadcrumb_title')) {
+        $trailing_separator = $breadcrumb_separator;
+        $title = menu_get_active_title();
+      }
+      elseif (theme_get_setting('breadcrumb_trailing')) {
+        $trailing_separator = $breadcrumb_separator;
+      }
+      return implode($breadcrumb_separator, $breadcrumb) . $trailing_separator . $title;
     }
   }
+  // Otherwise, return an empty string.
+  return '';
 }
 
 /**
@@ -76,43 +89,6 @@ function adaptivetheme_username($object) {
 function adaptivetheme_file($element) {
   $element['#size'] = 60;
   return theme_file($element);
-}
-
-/**
- * Return a themed breadcrumb trail.
- *
- * @param $breadcrumb
- *   An array containing the breadcrumb links.
- * @return
- *   A string containing the breadcrumb output.
- */
-function adaptivetheme_breadcrumb($breadcrumb) {
-  // Determine if we are to display the breadcrumb.
-  $show_breadcrumb = theme_get_setting('breadcrumb_display');
-  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
-
-    // Optionally get rid of the homepage link.
-    $show_breadcrumb_home = theme_get_setting('breadcrumb_home');
-    if (!$show_breadcrumb_home) {
-      array_shift($breadcrumb);
-    }
-
-    // Return the breadcrumb with separators.
-    if (!empty($breadcrumb)) {
-      $breadcrumb_separator = filter_xss(theme_get_setting('breadcrumb_separator'));
-      $trailing_separator = $title = '';
-      if (theme_get_setting('breadcrumb_title')) {
-        $trailing_separator = $breadcrumb_separator;
-        $title = menu_get_active_title();
-      }
-      elseif (theme_get_setting('breadcrumb_trailing')) {
-        $trailing_separator = $breadcrumb_separator;
-      }
-      return implode($breadcrumb_separator, $breadcrumb) . $trailing_separator . $title;
-    }
-  }
-  // Otherwise, return an empty string.
-  return '';
 }
 
 // Override theme_button for expanding graphic buttons
@@ -192,4 +168,243 @@ function adaptivetheme_system_settings_form($form) {
   $form['theme_specific']['#collapsible'] = TRUE;
   $form['theme_specific']['#collapsed']   = TRUE;
   return drupal_render($form);
+}
+
+/**
+ * Override of theme_node_form().
+ */
+function adaptivetheme_node_form($form) {
+  if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+    if (theme_get_setting('split_node_form') == 1) {
+      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+      $sidebar = drupal_render($form['taxonomy']);
+      $main = drupal_render($form);
+      return "<div class='article-form clear-block'>
+        <div class='article-col-last'>{$buttons}{$sidebar}</div>
+        <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
+        </div>";
+    }
+    elseif (theme_get_setting('split_node_form') == 0) {
+      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+      $main = drupal_render($form);
+      return "<div class='article-form clear-block'>
+        <div class='main'>{$main}{$buttons}</div>
+        </div>";
+    }
+  }
+}
+
+// If DHTML module is installed dont override these funtions.
+if (!function_exists('dhtml_menu_init')) {
+  /**
+   * Generate the HTML output for a menu tree
+   *
+   * @ingroup themeable
+   */
+  function adaptivetheme_menu_tree($tree) {
+    if (theme_get_setting('cleanup_menu_menu_class')) {
+      return '<ul class="menu">'."\n". $tree .'  </ul>'. "\n";
+    }
+    else{
+      return '<ul>'."\n". $tree ."\n".'  </ul>'."\n";
+    }
+  }
+
+  /**
+   * Generate the HTML output for a menu item and submenu.
+   *
+   * @ingroup themeable
+   */
+  function adaptivetheme_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
+    if (theme_get_setting('cleanup_menu_leaf_class')) {
+      $class = ($menu ? 'expanded' : ($has_children ? 'collapsed' : 'leaf'));
+    }
+    if (!empty($extra_class) AND theme_get_setting('cleanup_menu_first_last_classes')) {
+      if ($class) {
+        $class .= ' '. $extra_class;
+      }
+      else{
+        $class .= $extra_class;
+      }
+    }
+    if ($in_active_trail AND theme_get_setting('cleanup_menu_active_classes')) {
+      $class .= ' active-trail';
+    }
+    if ($class) {
+      return '<li class="'. $class .'">'. $link . $menu ."</li>\n";
+    }
+    else{
+      return '<li>'. $link . $menu ."</li>\n";
+    }
+  }
+}
+
+/**
+ * Return a themed set of links.
+ *
+ * @param $links
+ *   A keyed array of links to be themed.
+ * @param $attributes
+ *   A keyed array of attributes
+ * @return
+ *   A string containing an unordered list of links.
+ */
+function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
+  $output = '';
+  if (count($links) > 0) {
+    if (theme_get_setting('cleanup_links_type_class')) {
+      $output = '  <ul'. drupal_attributes($attributes) .'>';
+    }
+    else{
+      $output = '  <ul>';
+    }
+    $num_links = count($links);
+    $i = 1;
+    foreach ($links as $key => $link) {
+      $class = $key;
+      if (theme_get_setting('cleanup_menu_first_last_classes')) {
+        // Add first, last and active classes to the list of links to help out themers.
+        if ($i == 1) {
+          $class .= ' first';
+        }
+        if ($i == $num_links) {
+          $class .= ' last';
+        }
+      }
+      if (theme_get_setting('cleanup_links_active_classes')) {
+        if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))) {
+          $class .= ' active';
+        }
+      }
+      if (isset($link['href'])) {
+        // add active class for containing <li> and <a> if active-trail is set on the link itself
+        if (theme_get_setting('cleanup_links_active_classes')) {
+          if (strpos($link['attributes']['class'], 'active-trail') !== FALSE && strpos($class, 'active') === FALSE) {
+            $class .= ' active';
+            $link['attributes']['class'] .= ' active';
+          }
+        }
+        // Pass in $link as $options, they share the same keys.
+        $link = l($link['title'], $link['href'], $link);
+      }
+      elseif (!empty($link['title'])) {
+        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes
+        if (empty($link['html'])) {
+          $link['title'] = check_plain($link['title']);
+        }
+        $span_attributes = '';
+        if (isset($link['attributes'])) {
+          $span_attributes = drupal_attributes($link['attributes']);
+        }
+        $link = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
+      }
+      $i++;
+      $output .= '  <li'. drupal_attributes(array('class' => $class)) .'>';
+      $output .= $link;
+      $output .= "</li>\n";
+    }
+    $output .= '</ul>' . "\n";
+  }
+  return $output;
+}
+
+/**
+ * Return a themed list of items.
+ *
+ * @param $items
+ *   An array of items to be displayed in the list. If an item is a string,
+ *   then it is used as is. If an item is an array, then the "data" element of
+ *   the array is used as the contents of the list item. If an item is an array
+ *   with a "children" element, those children are displayed in a nested list.
+ *   All other elements are treated as attributes of the list item element.
+ * @param $title
+ *   The title of the list.
+ * @param $type
+ *   The type of list to return (e.g. "ul", "ol")
+ * @param $attributes
+ *   The attributes applied to the list element.
+ * @return
+ *   A string containing the list output.
+ */
+function mothership_item_list($items = array(), $title = NULL, $type = 'ul', $attributes = NULL) {
+  if ($type == "div-span") {
+    $type = "div";
+    $item_type = "div-span";
+  }
+  else{
+    $item_type = $type;
+  }
+  $attributes['class'] .= " item-list";
+  //test if we have an title then add the div.item-list around the list
+  if (isset($title)) {
+    $output = '<div class="item-list">';
+    if ($item_type == "span") {
+      $output .= '<span class="title">'. $title .'</span>';
+    }
+    else{
+      $output .= '<h3>'. $title .'</h3>';
+    }
+  }
+  if (!empty($items)) {
+    $output .= "<$type". drupal_attributes($attributes) .'>';
+    $num_items = count($items);
+    foreach ($items as $i => $item) {
+      $attributes = array();
+      $children = array();
+      if (is_array($item)) {
+        foreach ($item as $key => $value) {
+          if ($key == 'data') {
+            $data = $value;
+          }
+          elseif ($key == 'children') {
+            $children = $value;
+          }
+          else {
+            $attributes[$key] = $value;
+          }
+        }
+      }
+      else {
+        $data = $item;
+      }
+      if (count($children) > 0) {
+        $data .= theme_item_list($children, NULL, $type, $attributes); // Render nested list
+      }
+      if (theme_get_setting('cleanup_item_list_zebra')) {
+        if ($i & 1) {
+          $attributes['class'] = empty($attributes['class']) ? 'odd' : ($attributes['class'] .' odd');
+        }
+        else {
+          $attributes['class'] = empty($attributes['class']) ? 'even' : ($attributes['class'] .' even');
+        }
+      }
+      //removed first / last fromt the item list?
+      if (theme_get_setting('cleanup_item_list_first_last')) {
+        if ($i == 0) {
+          $attributes['class'] .= ' first';
+        }
+        if ($i == $num_items - 1) {
+          $attributes['class'] .= ' last';
+        }
+      }
+      //is it a li or a span or a div ?
+      if ($item_type == "ul" OR $item_type == "ol") {
+        $output .= '<li'. drupal_attributes($attributes) .'>'. $data ."</li>\n";
+      }
+      elseif ($item_type == "span" OR $item_type == "div-span" ) {
+        $output .= '<span'. drupal_attributes($attributes) .'>'. $data ."</span>\n";
+      }
+      elseif ($item_type == "div") {
+        $output .= '<div'. drupal_attributes($attributes) .'>'. $data ."</div>\n";
+      }
+      else{
+        $output .= '<li'. drupal_attributes($attributes) .'>'. $data ."</li>\n";
+      }
+    }
+    $output .= "</$type>";
+  }
+  if (isset($title)) {
+    $output .= '</div>';
+  }
+  return $output;
 }

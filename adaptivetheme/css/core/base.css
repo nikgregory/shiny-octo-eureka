@@ -119,6 +119,12 @@ dt{font-weight:bold;}
 dd{margin:0 0 1.5em 1.667em;}
 .item-list ul,.item-list ol{margin:0 0 0 1.667em;padding:0;}
 
+/* Pager override */
+ul.pager{clear:both;text-align:center;}
+ul.pager li{background-image:none;display:inline;list-style-type:none;padding:.5em;}
+ul.pager li.pager-current{font-weight:bold;}
+.block ul.pager li{margin:0;}
+
 /* Forms */
 form{margin:0 0 1.667em;padding:0;}
 input{margin:.375em 0;}

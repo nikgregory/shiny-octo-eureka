@@ -29,13 +29,13 @@
   ; Starter CSS - comment this out if you dont need it, provides basic styles only.
   stylesheets[all][] = css/theme/starter.css
 	
-  ; Theme CSS - don't rename or move this file.
+  ; Theme CSS - use this stylesheet to build your custom theme.
   stylesheets[all][] = css/theme/theme.css
   
 
 ;----------// IE Conditional Stylesheets
 
- ; Note: You MUST install http://drupal.org/project/conditional_styles (and see its readme!)
+  ; You MUST install http://drupal.org/project/conditional_styles (and see its readme!)
   ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
 
 
@@ -51,11 +51,7 @@
   regions[right]             = Sidebar Last
   regions[tertiary_content]  = Tertiary Content
   regions[footer]            = Footer
-
-
-;----------// Article Regions
-
-  regions[article_aside] = Article Aside
+  regions[article_aside]     = Article Aside
 
 
 ;----------// Gpanel Regions
@@ -211,11 +207,12 @@
   settings[cleanup_block_classes_count]      = 0
 
   settings[cleanup_menu_menu_class]          = 1
-  settings[cleanup_menu_leaf_class]          = 0
+  settings[cleanup_menu_leaf_class]          = 1
   settings[cleanup_menu_first_last_classes]  = 0
   settings[cleanup_menu_active_classes]      = 0
 
   settings[cleanup_links_type_class]         = 1
+  settings[cleanup_links_active_classes]     = 0
 
   settings[cleanup_item_list_zebra]          = 0
   settings[cleanup_item_list_first_last]     = 0
