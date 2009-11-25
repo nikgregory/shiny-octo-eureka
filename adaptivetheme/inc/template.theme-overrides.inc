@@ -91,7 +91,9 @@ function adaptivetheme_file($element) {
   return theme_file($element);
 }
 
-// Override theme_button for expanding graphic buttons
+/**
+ * Theme a form button.
+ */
 function adaptivetheme_button($element) {
   if (isset($element['#attributes']['class'])) {
     $element['#attributes']['class'] = 'form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
@@ -212,8 +214,6 @@ if (!function_exists('dhtml_menu_init')) {
 
   /**
    * Generate the HTML output for a menu item and submenu.
-   *
-   * @ingroup themeable
    */
   function adaptivetheme_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
     if (theme_get_setting('cleanup_menu_leaf_class')) {
@@ -326,7 +326,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
  * @return
  *   A string containing the list output.
  */
-function mothership_item_list($items = array(), $title = NULL, $type = 'ul', $attributes = NULL) {
+function adaptivetheme_item_list($items = array(), $title = NULL, $type = 'ul', $attributes = NULL) {
   if ($type == "div-span") {
     $type = "div";
     $item_type = "div-span";
