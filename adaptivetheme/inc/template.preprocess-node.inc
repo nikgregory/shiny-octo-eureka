@@ -15,7 +15,7 @@
  */
 global $user, $theme;
 
-if (theme_get_setting('cleanup_article_classes_promote')) {
+if (theme_get_setting('cleanup_article_id')) {
 // Set the node id.
   $vars['article_id'] = 'article-'. $vars['node']->nid;
 }
