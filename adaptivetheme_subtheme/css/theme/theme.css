@@ -151,7 +151,7 @@ a:focus {}
 /* Target both sidebars with this low specifity selector. */
 .sidebar {}
 
-/* Target a specific sidebar, inner or sidebar-inner. */
+/* Target a specific sidebar. */
 #sidebar-first {}
 #sidebar-last {}
 
@@ -192,7 +192,7 @@ h1.logo-site-name  {}
 /* DIV/strong combo when when title is set. */
 div.logo-site-name strong {}
 
-/* Remove display:block if you want the site name inline with the logo. */
+/* Over-ride display:block if you want the site name inline with the logo. */
 .logo-site-name span {}
 
 /* Logo. */
@@ -284,33 +284,14 @@ dl.search-results dd .search-info {}
 /**********************************************************
  *               Primary & Secondary Links
  **********************************************************/
-/**
- * Primary Links
- */
- 
-/**
- * Primary Links Positioning
- */
-/* FLOAT PRIMARY RIGHT */
-/* 
-#primary .primary-inner {float: right; margin-right:200px;}
-*/
-/* ALIGN PRIMARY CENTER */
-/* #primary .primary-inner {display: table; margin: 0 auto; text-align: center;} */
- 
- 
-/* #primary is the primary-links div wrapper */
+/* Primary-links div wrapper */
 #primary {}
-
-/* Inner wrapper div. */
-.primary-inner {}
 
 /* Class on the ul */
 .primary-links {}
 
 /* Modify the margin to set tab spacings. */
 .primary-links li {}
-
 .primary-links li a {}
 
 /* Set pseudo class styles. */
@@ -329,31 +310,14 @@ dl.search-results dd .search-info {}
 .primary-links li.active-trail {}
 .primary-links li.active-trail a {}
 
-
-/**
- * Secondary Links
- */
- 
- /**
- * Secondary Links Positioning
- */
-/* FLOAT SECONDARY RIGHT */
-/* #secondary .secondary-inner {float: right;} */
-/* ALIGN SECONDARY CENTER */
-/* #secondary .secondary-inner {display: table; margin: 0 auto; text-align: center;} */
-
-/* #secondary is the secondary-links div wrapper */
+/* Secondary-links div wrapper */
 #secondary {}
-
-/* Inner wrapper div. */
-.secondary-inner {}
 
 /* Class on the ul */
 .secondary-links {}
 
 /* Modify the margin to set tab spacings. */
 .secondary-links li {}
-
 .secondary-links li a {}
 
 /* Set pseudo class styles. */
@@ -401,23 +365,23 @@ h1#page-title {}
  *                     Pager 
  **********************************************************/
 /* The first 2 classes provide the base pager styles. */
-.item-list ul.pager    {}
-.item-list ul.pager li {}
+ul.pager    {}
+ul.pager li {}
 
 /* Theme the various states of pager links. */
-.item-list ul.pager li a:link    {}
-.item-list ul.pager li a:visited {}
-.item-list ul.pager li a:hover   {}
+ul.pager li a:link    {}
+ul.pager li a:visited {}
+ul.pager li a:hover   {}
 
 /* Note: .pager-current is for the current page. */
-.item-list ul.pager li.pager-item     {}
-.item-list ul.pager li.first          {}
-.item-list ul.pager li.last           {}
-.item-list ul.pager li.pager-current  {}
-.item-list ul.pager li.pager-first    {}
-.item-list ul.pager li.pager-previous {}
-.item-list ul.pager li.pager-next     {}
-.item-list ul.pager li.pager-last     {}
+ul.pager li.pager-item     {}
+ul.pager li.first          {}
+ul.pager li.last           {}
+ul.pager li.pager-current  {}
+ul.pager li.pager-first    {}
+ul.pager li.pager-previous {}
+ul.pager li.pager-next     {}
+ul.pager li.pager-last     {}
 
 
 /**********************************************************
@@ -446,9 +410,12 @@ h1#page-title {}
  **********************************************************/
 .title {}
 .submitted {}
+.submitted em {}
+.submitted a {}
 .content {}
-.links {}
-.tags {}
+ul.links {}
+ul.links li {}
+ul.links li a {}
 
 
 /**********************************************************
@@ -471,6 +438,7 @@ h1#page-title {}
 
 /* Submitted */
 .article .submitted {}
+.article .submitted em {}
 .article .submitted a {}
 .article .submitted a:hover {}
 .article .submitted .author {}
@@ -481,22 +449,17 @@ h1#page-title {}
 .article ul.links li {}
 .article ul.links li a {}
 
-/* Links. */
-.article ul.links {}
-.article ul.links li  {}
-.article ul.links li a {}
-
 /* Taxonomy terms. */
 /* Term list */
-.article ul.taxonomy {}
-.article ul.taxonomy li {}
-.article ul.taxonomy li a {}
+ul.taxonomy {}
+ul.taxonomy li {}
+ul.taxonomy li a {}
 /* With vocab headers */
-.article ul.taxonomy li.vocab {}
-.article h3.vocab-name {}
-.article ul.terms {}
-.article ul.terms li {}
-.article ul.terms li a {}
+ul.taxonomy li.vocab {}
+.vocab-name {}
+ul.vocab-list {}
+ul.vocab-list li {}
+ul.vocab-list li a {}
 
 /* Style module links. */
 ul.links li.node_read_more a {}
@@ -612,6 +575,7 @@ ul.links li.print_pdf a {}
 
 /* Submitted */
 .comment .submitted {}
+.comment .submitted em {}
 .comment .submitted a {}
 .comment .submitted a:hover {}
 .comment .submitted .author {}
@@ -696,7 +660,7 @@ ul.links li.comment_delete a {}
 .sidebar .block h2 {}
 .sidebar .block-inner {}
 
-/* High specifity selectors to style blocks in one sidebar. */
+/* High specifity selectors to style blocks in one sidebar - careful, these are powerful selectors! */
 #sidebar-first .block {}
 #sidebar-first .block h2 {}
 #sidebar-first .block-inner {}
