@@ -50,9 +50,9 @@ a:active,a:focus{border:0;color:#C00000;}
 .article-title a:focus{text-decoration:underline;}
 .article ul.links{margin:0;}
 .article ul.links li{padding:0 1em 0 0;}
-.article .taxonomy{margin:0 0 1em;}
-.article .taxonomy li{display:inline;list-style:none;}
-.article .vocab-name{font-size:1em;font-weight:bold;}
+.taxonomy{margin:0 0 1em;}
+.taxonomy li{display:inline;list-style:none;}
+.vocab-name{font-size:1em;font-weight:bold;}
 
 /* Comments. */
 .indented {margin-left:60px;}
@@ -66,7 +66,8 @@ a:active,a:focus{border:0;color:#C00000;}
 .comment ul.links{display:block;padding:0 1em 0 0;text-align:right;}
 
 /* Generic classes. */
-.submitted {margin:.375em 0 0.75em;}
+.submitted {margin:.375em 0 0.75em; font-style}
+.submitted em {font-style:normal;}
 
 /* Blocks. */
 .block{margin:0 0 20px;}

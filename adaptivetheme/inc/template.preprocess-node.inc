@@ -82,8 +82,8 @@ if (!$vars['node']->status) {
 // Node Theme Settings.
 // Date & author theme settings.
 if (!function_exists('submitted_by_node_submitted')) {
-  $date = t('Posted ') .'<span class="time">'. format_date($vars['node']->created, 'medium') .'</span>';
-  $author = '<span class="author">'. theme('username', $vars['node']) .'</span>';
+  $date = t('Posted ') .'<em class="time">'. format_date($vars['node']->created, 'medium') .'</em>';
+  $author = '<em class="author">'. theme('username', $vars['node']) .'</em>';
   $author_only_separator = t('Posted by ');
   $author_date_separator = t(' by ');
   $submitted_by_content_type = (theme_get_setting('submitted_by_enable_content_type') == 1) ? $vars['node']->type : 'default';
@@ -115,7 +115,9 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
         }
       }
       $output .= implode("", $links);
-      $output = '<ul class="taxonomy">'. $output .'</ul>';
+      if ($output != '') {
+        $output = '<ul class="taxonomy">'. $output .'</ul>';
+      }
       break;
     case "vocab":
       $heading_level = $vars['page'] ? 'h2' : 'h3';
@@ -138,8 +140,10 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
         $output .= implode("", $links);
         $output .= '</ul></li>';
         }
+        if ($output != '') {
+          $output = '<ul class="taxonomy">'. $output .'</ul>';
+        }
       }
-      $output = '<ul class="taxonomy">'. $output .'</ul>';
       break;
   }
   $vars['terms'] = $output;
