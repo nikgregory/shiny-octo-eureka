@@ -22,14 +22,13 @@ a{text-decoration:none;}
 
 #container{background:#FFF;max-width:1260px;min-width:960px;}
 #main-content{padding-top:10px;}
-#footer{background:#F7F7F7;line-height:0;margin:0;padding:15px 0;}
+#footer{background:#F7F7F7;margin:0;padding:15px 0;}
 
 .page-block .region{margin:0.5em 0;}
-.page-block .region-inner,.page-block #main-content .block-region{background:#EAF2FA;border:2px dashed #9BBFCF;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .page-block #content .region-inner{background:#FFF;border:none;}
 .page-block .region .block{background:#FFF;}
 .page-block #main-content .block-region{padding:9px 12px;}
-.block-region{background:transparent;border:none;color:#9BBFCF;font-weight:bold;}
+.block-region{background:#EAF2FA;border-color:#9BBFCF;color:#9BBFCF;font-weight:bold;}
 
 #header{background:#444;padding:0;min-height:80px;}
 .header-inner{position:relative;max-width:1260px;min-width:960px;min-height:80px;}
@@ -42,6 +41,7 @@ a{text-decoration:none;}
 
 #user-date{clear:both;font-size:0.94em;float:left;padding:0 10px;}
 #user-menu{bottom:3px;position:absolute;right:0;}
+#user-menu ul{margin:0;}
 #user-menu ul li{display:inline;margin:0;}
 #user-menu ul li a{-moz-border-radius-topleft:6px;-moz-border-radius-topright:6px;-webkit-border-top-left-radius:6px;-webkit-border-top-right-radius:6px;margin-right:0.08em;padding:0.3em 1em 0.4em;}
 
@@ -205,7 +205,7 @@ fieldset legend{display:block;font-weight:bold;padding:0 0.5em;}
 html.js fieldset.collapsed{-moz-border-radius:0;-webkit-border-radius:0;background:transparent;padding-bottom:.75em;padding-top:0;}
 
 a:active,a.active,.block a:active,.block a.active{color:#222;}
-a img,.page-block #content-top .block-region,.page-block #content-aside .block-region,.page-block #content-bottom .block-region{border:none;}
+a img{border:none;}
 
 #search-theme-form,.fieldset-block-info dl,.at-admin-block-edit-links ul,.admin-panel .item-list ul,.page-admin-by-module .admin-panel .body,div.form-item div.description img{margin:0;}
 h1#page-title,#node-form #edit-title,input.title{font-size:1.25em;width:85%;}
