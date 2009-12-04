@@ -475,14 +475,34 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Equal Height Sidebars'),
     '#default_value' => $settings['equal_heights_sidebars'],
-    '#description'   => t('This setting will make the sidebars and the main content column equal to the hight of the tallest column.'),
+    '#description'   => t('This setting will make the sidebars and the main content column equal to the height of the tallest column.'),
+  );
+  // Equal height blocks per region
+  $equalized_blocks = array(
+    'leaderboard'       => t('Leaderboard region'),
+    'header'            => t('Header region'),
+    'secondary-content' => t('Secondary Content region'),
+    'content-top'       => t('Content Top region'),
+    'content-bottom'    => t('Content Bottom region'),
+    'tertiary-content'  => t('Tertiary Content region'),
+    'footer'            => t('Footer region'),
   );
   $form['layout']['equal_heights']['equal_heights_blocks'] = array(
-    '#type' => 'checkbox',
+    '#type'  => 'fieldset',
     '#title' => t('Equal Height Blocks'),
-    '#default_value' => $settings['equal_heights_blocks'],
-    '#description'   => t('This setting will make all blocks in regions equal to the height of the tallest block. <b>This will not affect blocks in sidebars and does not work for blocks in Gpanels or Panels.</b>'),
   );
+  $form['layout']['equal_heights']['equal_heights_blocks'] += array(
+      '#prefix' => '<div id="div-equalize-collapse">',
+      '#suffix' => '</div>',
+      '#description' => t('Select which regions to want to have equal height blocks. Equal heights is applied with jQuery and applies to the block-inner DIV.'),
+    );
+    foreach ($equalized_blocks as $name => $title) {
+      $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
+      	'#type' => 'checkbox', 
+        '#title' => $title, 
+        '#default_value' => $settings['equalize_'. $name]);
+    }
+  // Horizonatal login block
   if ($settings['horizontal_login_block_enable'] == 'on') {
     $form['layout']['login_block'] = array(
       '#type' => 'fieldset',

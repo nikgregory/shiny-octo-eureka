@@ -35,6 +35,7 @@ function adaptivetheme_preprocess(&$vars, $hook) {
   global $user;
   $vars['is_admin'] = in_array('admin', $user->roles);
   $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
+  $vars['theme_path'] = base_path() . path_to_theme() .'/';
   
   // Include preprocess functions if and when required.
   if (is_file(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc')) {
@@ -48,10 +49,8 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-fu
 // Include theme overrides.
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-overrides.inc');
 
-// Include some jQuery if one of the following theme settings is enabled.
-if (theme_get_setting('equal_heights_sidebars') || theme_get_setting('equal_heights_blocks') || theme_get_setting('load_firebug_lite') || theme_get_setting('horizontal_login_block_overlabel')) {
-  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-js.inc');
-}
+// Include some jQuery.
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-js.inc');
 
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('rebuild_registry')) {

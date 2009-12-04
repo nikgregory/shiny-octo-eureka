@@ -16,9 +16,7 @@
 
 ;----------// jQuery Plugins and JavaScripts
 
-  scripts[] = js/core/theme-settings.js
-  scripts[] = js/core/admin.collapseblock.js
-  scripts[] = js/core/aria-roles.js
+  scripts[] = js/core/at_scripts.js
 
 ;----------// Regions
   regions[leaderboard]       = Leaderboard

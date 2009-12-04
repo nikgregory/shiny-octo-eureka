@@ -103,6 +103,7 @@ div.help p:last-child,div.help ul:last-child{margin-bottom:0;}
 .unpublished{visibility:hidden;}
 .article-unpublished .unpublished,.comment-unpublished .unpublished{background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;color:#FFB900;font-size:.94em;margin-left:.5em;padding-left:18px;visibility:visible;}
 .admin-dependencies,.admin-required,.admin-enabled,.admin-disabled,.admin-missing{font-weight:bold;}
+div#acquia-agent-no-search {margin:8px 0;padding-left:3em !important;}
 
 /* Lists */
 ul,ol{margin:0 0 1.5em 1.667em;padding:0;}

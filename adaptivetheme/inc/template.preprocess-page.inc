@@ -28,13 +28,13 @@ if (!$vars['show_blocks']) {
 
 // Skip navigation class.
 if (theme_get_setting('skip_navigation_display') == 'hide') {
-    $vars['skip_nav_class'] = 'element-invisible';
+  $vars['skip_nav_class'] = 'element-invisible';
 }
 if (theme_get_setting('skip_navigation_display') == 'show') {
-    $vars['skip_nav_class'] = 'show';
+  $vars['skip_nav_class'] = 'show';
 }
 if (theme_get_setting('skip_navigation_display') == 'focus') {
-    $vars['skip_nav_class'] = 'show-on-focus';
+  $vars['skip_nav_class'] = 'show-on-focus';
 }
 
 // Set variables for the logo and site_name.

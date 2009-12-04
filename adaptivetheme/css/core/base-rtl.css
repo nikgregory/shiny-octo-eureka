@@ -25,6 +25,7 @@ div.messages,div.warning,div.help,div.status,div.error{padding:.6em 3em .6em 1em
 .update .info{padding:0 1em 0 0;}
 .indented {margin-right:60px;}
 .article-unpublished .unpublished,.comment-unpublished .unpublished{margin-left:0;padding-left:0;margin-right:.5em;padding-right:18px;}
+div#acquia-agent-no-search {padding-left:1em !important;padding-right:3em !important;}
 
 ul,ol{margin:0 1.667em 1.5em 0;}
 ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.item-list ul ul,.item-list ul ol,.item-list ol ol,.item-list ol ul{margin:0 1.667em 0 0;}
