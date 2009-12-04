@@ -254,8 +254,6 @@
           <div id="feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
 
-        <?php print $attribution; ?>
-
       </div> <!-- /footer -->
     <?php endif; ?>
 

@@ -4,7 +4,45 @@
 
 /**
  * @file base-rtl.css
- * Base is the master reset for browsers and Drupal.
+ */
+
+/**
+ * AdaptiveTheme layout rtl
+ */
+.two-sidebars .content-inner{margin:0 240px;}
+.sidebar-left .content-inner{margin-left:0;margin-left:240px;}
+.sidebar-right .content-inner{margin-left:240px;margin-right:0;}
+#sidebar-first{width:240px;margin-right:-100%;margin-left:0;}
+#sidebar-last{width:240px;margin-right:-240px;margin-left:0;}
+
+/* Skinr grid classes. */
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4-12,
+.grid-4-16,
+.grid-5,
+.grid-6,
+.grid-7,
+.grid-8,
+.grid-9,
+.grid-10,
+.grid-11,
+.grid-12,
+.grid-13,
+.grid-14,
+.grid-15,
+.grid-16 {float:right;}
+
+/* Containers and helpers. */
+#container,.block{zoom:1;}
+/* Float the columns right. */
+#content-column,#sidebar-first,#sidebar-last{float:right;}
+#content-column{position:relative;}
+#sidebar-first,#sidebar-last{position:relative;z-index:1000;}
+ 
+/**
+ * Master reset for browsers and Drupal.
  */
 .show-skip-link{text-align:left;}
 .show-on-focus a:active,.show-on-focus a:focus{left:0;right:auto;}
@@ -76,3 +114,17 @@ div.block-edit-links .edit-links{left:15px;right:auto;}
 #node-form .node-col-last .buttons #edit-submit,
 #node-form .node-col-last .buttons #edit-preview,
 #node-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}
+
+/**
+ * Contains basic styles for the fancy collaspe blocks on the block config page.
+ */
+.block-at-admin h2{text-align:right;}
+.block-at-admin legend{margin:0 -10px 0 0;}
+.at-admin-block-edit-links .item-list li{margin:0 0 0 .3em;}
+
+.block-at-admin fieldset{margin-right:0.5em;}
+.block-at-admin h2 span {float:left;}
+div.block div.block-edit{top:10px;left:15px;right:auto;}
+
+.block-at-admin h2.block-title,
+.fieldset-block-info{text-align:right;}

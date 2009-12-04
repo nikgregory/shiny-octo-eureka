@@ -10,13 +10,11 @@
 
 ;----------// Stylesheets
 
-  stylesheets[all][] = css/core/base.css
-  stylesheets[all][] = css/core/layout.css  
-  stylesheets[all][] = css/core/admin-build-block.css
+  stylesheets[all][] = css/base.css
 
 ;----------// jQuery Plugins and JavaScripts
 
-  scripts[] = js/core/at_scripts.js
+  scripts[] = js/at-scripts.js
 
 ;----------// Regions
   regions[leaderboard]       = Leaderboard

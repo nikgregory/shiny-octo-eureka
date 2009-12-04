@@ -6,7 +6,7 @@
  * Load Javascript files as required.
  */
 
-$path_to_js_core = drupal_get_path('theme', 'adaptivetheme') .'/js/core/';
+$path_to_js_core = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 
 $regions = array(
   'leaderboard',
