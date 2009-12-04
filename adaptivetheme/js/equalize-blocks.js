@@ -1,11 +1,28 @@
 // $Id$
+// adaptivethemes.com
+
+/**
+ * @file equalize-blocks.js
+ * Apply equal height to blocks in selected regions.
+ */
+
 $(document).ready(function() {
-  $('#leaderboard .region-inner').equalHeights();
-  $('#header-blocks .region-inner').equalHeights();
-  $('#secondary-content .region-inner').equalHeights();
-  $('#content-top .region-inner').equalHeights();
-  $('#content-aside .region-inner').equalHeights();
-  $('#content-bottom .region-inner').equalHeights();
-  $('#tertiary-content .region-inner').equalHeights();
-  $('#footer .region-inner').equalHeights();
+  var tags_hash = new Array();
+  tmp=Drupal.settings.active_regions+'';
+  if(tmp.indexOf(',')<1) {
+    tags_hash[0]=tmp;    
+  } else {
+    tags_hash=tmp.split(",");
+  }
+  applyHeights(tags_hash);
 });
+
+function applyHeights(tags_hash) {
+  var tmpTag = "";
+  var toLoop = tags_hash.length
+  for (tmpi=0; tmpi<toLoop; tmpi++) {
+    xclass=$('#'+tags_hash[tmpi]+' .block-inner').attr('class');
+    $('#'+tags_hash[tmpi]+' .block-inner').attr('class',xclass+' clearfix');
+    $('#'+tags_hash[tmpi]+' .block-inner').equalHeight();
+  }
+}
