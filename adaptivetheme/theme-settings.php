@@ -58,11 +58,11 @@ SCRIPT;
 
   // Set the default values for content-type-specific settings
   foreach ($node_types as $type => $name) {
-    $defaults["taxonomy_display_{$type}"]         = $defaults['taxonomy_display_default'];
-    $defaults["taxonomy_format_{$type}"]          = $defaults['taxonomy_format_default'];
-    $defaults["taxonomy_delimiter_{$type}"]       = $defaults['taxonomy_delimiter_default'];
-    $defaults["submitted_by_author_{$type}"]      = $defaults['submitted_by_author_default'];
-    $defaults["submitted_by_date_{$type}"]        = $defaults['submitted_by_date_default'];
+    $defaults["taxonomy_display_{$type}"] = $defaults['taxonomy_display_default'];
+    $defaults["taxonomy_format_{$type}"]  = $defaults['taxonomy_format_default'];
+    $defaults["taxonomy_delimiter_{$type}"] = $defaults['taxonomy_delimiter_default'];
+    $defaults["submitted_by_author_{$type}"] = $defaults['submitted_by_author_default'];
+    $defaults["submitted_by_date_{$type}"] = $defaults['submitted_by_date_default'];
   }
 
   // Merge the saved variables and their default values
@@ -77,7 +77,6 @@ SCRIPT;
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'general_settings'),
   );
-
   // Skip Navigation
   $form['general_settings']['skip_navigation'] = array(
     '#type' => 'fieldset',
@@ -86,14 +85,14 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   $form['general_settings']['skip_navigation']['skip_navigation_display'] = array(
-    '#type'          => 'radios',
-    '#title'         => t('Modify the display of the skip navigation'),
+    '#type' => 'radios',
+    '#title'  => t('Modify the display of the skip navigation'),
     '#default_value' => $settings['skip_navigation_display'],
-    '#options'       => array(
-                          'show' => t('Show skip navigation'),
-                          'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
-                          'hide' => t('Hide skip navigation'),
-                        ),
+    '#options' => array(
+      'show' => t('Show skip navigation'),
+      'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
+      'hide' => t('Hide skip navigation'),
+    ),
   );
   // Mission Statement
   $form['general_settings']['mission_statement'] = array(
@@ -103,14 +102,15 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   $form['general_settings']['mission_statement']['mission_statement_pages'] = array(
-    '#type'          => 'radios',
-    '#title'         => t('Where should the mission statement be displayed'),
+    '#type' => 'radios',
+    '#title' => t('Where should the mission statement be displayed'),
     '#default_value' => $settings['mission_statement_pages'],
-    '#options'       => array(
-                          'home' => t('Display the mission statement only on the home page'),
-                          'all' => t('Display the mission statement on all pages'),
-                        ),
+    '#options' => array(
+      'home' => t('Display the mission statement only on the home page'),
+      'all' => t('Display the mission statement on all pages'),
+    ),
   );
+  // Breadcrumbs
   $form['general_settings']['breadcrumb'] = array(
     '#type' => 'fieldset',
     '#title' => t('Breadcrumb'),
@@ -118,41 +118,41 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   $form['general_settings']['breadcrumb']['breadcrumb_display'] = array(
-    '#type'          => 'select',
-    '#title'         => t('Display breadcrumb'),
+    '#type' => 'select',
+    '#title' => t('Display breadcrumb'),
     '#default_value' => $settings['breadcrumb_display'],
-    '#options'       => array(
-                          'yes'   => t('Yes'),
-                          'no'    => t('No'),
-                          'admin' => t('Only in the admin section'),
-                        ),
+    '#options' => array(
+      'yes' => t('Yes'),
+      'no' => t('No'),
+      'admin' => t('Only in the admin section'),
+    ),
   );
   $form['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
-    '#type'          => 'textfield',
-    '#title'         => t('Breadcrumb separator'),
-    '#description'   => t('Text only. Dont forget to include spaces.'),
+    '#type'  => 'textfield',
+    '#title' => t('Breadcrumb separator'),
+    '#description' => t('Text only. Dont forget to include spaces.'),
     '#default_value' => $settings['breadcrumb_separator'],
-    '#size'          => 8,
-    '#maxlength'     => 10,
-    '#prefix'        => '<div id="div-breadcrumb-collapse">',
+    '#size' => 8,
+    '#maxlength' => 10,
+    '#prefix' => '<div id="div-breadcrumb-collapse">',
   );
   $form['general_settings']['breadcrumb']['breadcrumb_home'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Show the home page link in breadcrumbs'),
+    '#type' => 'checkbox',
+    '#title' => t('Show the home page link in breadcrumbs'),
     '#default_value' => $settings['breadcrumb_home'],
   );
   $form['general_settings']['breadcrumb']['breadcrumb_trailing'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Append a separator to the end of the breadcrumb'),
+    '#type' => 'checkbox',
+    '#title' => t('Append a separator to the end of the breadcrumb'),
     '#default_value' => $settings['breadcrumb_trailing'],
-    '#description'   => t('Useful when the breadcrumb is placed just before the title.'),
+    '#description' => t('Useful when the breadcrumb is placed just before the title.'),
   );
   $form['general_settings']['breadcrumb']['breadcrumb_title'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Append the content title to the end of the breadcrumb'),
+    '#type' => 'checkbox',
+    '#title' => t('Append the content title to the end of the breadcrumb'),
     '#default_value' => $settings['breadcrumb_title'],
-    '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
-    '#suffix'        => '</div>',
+    '#description' => t('Useful when the breadcrumb is not placed just before the title.'),
+    '#suffix' => '</div>',
   );
   // Username
   $form['general_settings']['username'] = array(
@@ -230,13 +230,13 @@ SCRIPT;
         '#collapsed' => TRUE,
       );
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
-        '#type'          => 'checkbox',
-        '#title'         => t('Display author\'s username'),
+        '#type' => 'checkbox',
+        '#title' => t('Display author\'s username'),
         '#default_value' => $settings["submitted_by_author_{$type}"],
       );
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
-        '#type'          => 'checkbox',
-        '#title'         => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
+        '#type' => 'checkbox',
+        '#title' => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
         '#default_value' => $settings["submitted_by_date_{$type}"],
       );
       // Options for default settings
@@ -244,8 +244,8 @@ SCRIPT;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
         $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
-          '#type'          => 'checkbox',
-          '#title'         => t('Use content-type specific settings.'),
+          '#type' => 'checkbox',
+          '#title' => t('Use content-type specific settings.'),
           '#default_value' => $settings['submitted_by_enable_content_type'],
         );
       }
@@ -272,39 +272,39 @@ SCRIPT;
       // taxonomy display per node
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
         '#type' => 'fieldset',
-        '#title'       => t('!name', array('!name' => t($name))),
+        '#title' => t('!name', array('!name' => t($name))),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
       // Display
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
-        '#type'          => 'select',
-        '#title'         => t('When should taxonomy terms be displayed?'),
+        '#type' => 'select',
+        '#title' => t('When should taxonomy terms be displayed?'),
         '#default_value' => $settings["taxonomy_display_{$type}"],
-        '#options'       => array(
-                              'never' => t('Never display taxonomy terms'),
-                              'all' => t('Always display taxonomy terms'),
-                              'only' => t('Only display taxonomy terms on full node pages'),
-                            ),
+        '#options' => array(
+          'never' => t('Never display taxonomy terms'),
+          'all' => t('Always display taxonomy terms'),
+          'only' => t('Only display taxonomy terms on full node pages'),
+        ),
       );
       // Formatting
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
-        '#type'          => 'radios',
-        '#title'         => t('Taxonomy display format'),
+        '#type' => 'radios',
+        '#title' => t('Taxonomy display format'),
         '#default_value' => $settings["taxonomy_format_{$type}"],
-        '#options'       => array(
-                              'vocab' => t('Display each vocabulary on a new line'),
-                              'list' => t('Display all taxonomy terms together in single list'),
-                            ),
+        '#options' => array(
+          'vocab' => t('Display each vocabulary on a new line'),
+          'list' => t('Display all taxonomy terms together in single list'),
+        ),
       );
       // Delimiter
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_delimiter_{$type}"] = array(
-        '#type'          => 'textfield',
-        '#title'         => t('Delimiter'),
-        '#description'   => t('Modify the delimiter. The default is a comma followed by a space.'),
+        '#type' => 'textfield',
+        '#title' => t('Delimiter'),
+        '#description' => t('Modify the delimiter. The default is a comma followed by a space.'),
         '#default_value' => $settings['taxonomy_delimiter_default'],
-        '#size'          => 8,
-        '#maxlength'     => 10,
+        '#size' => 8,
+        '#maxlength' => 10,
       );
       // Get taxonomy vocabularies by node type
       $vocabs = array();
@@ -315,8 +315,8 @@ SCRIPT;
       // Display taxonomy checkboxes
       foreach ($vocabs as $key => $vocab_name) {
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
-          '#type'          => 'checkbox',
-          '#title'         => t('Display vocabulary: '. $vocab_name),
+          '#type' => 'checkbox',
+          '#title' => t('Display vocabulary: '. $vocab_name),
           '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
         );
       }
@@ -325,8 +325,8 @@ SCRIPT;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
-          '#type'          => 'checkbox',
-          '#title'         => t('Use content-type specific settings.'),
+          '#type' => 'checkbox',
+          '#title' => t('Use content-type specific settings.'),
           '#default_value' => $settings['taxonomy_enable_content_type'],
         );
       }
@@ -344,111 +344,111 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   if ($settings['layout_enable_settings'] == 'on') {
-    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core/core-images';
+    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Page Layout'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#description'   => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
+      '#description' => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
     );
     if ($settings['layout_enable_width'] == 'on') {
       $form['layout']['page_layout']['layout_width_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
+        '#prefix' => '<div class="layout-help">',
+        '#suffix' => '</div>',
+        '#value' => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
       );
       $form['layout']['page_layout']['layout_width'] = array(
-        '#type'          => 'select',
-        '#prefix'        => '<div class="page-width">',
-        '#suffix'        => '</div>',
+        '#type' => 'select',
+        '#prefix' => '<div class="page-width">',
+        '#suffix' => '</div>',
         '#default_value' => $settings['layout_width'],
-        '#options'       => array(
-          '720px'   => t('720px'),
-          '780px'   => t('780px'),
-          '840px'   => t('840px'),
-          '900px'   => t('900px'),
-          '960px'   => t('960px'),
-          '1020px'   => t('1020px'),
-          '1080px'   => t('1080px'),
-          '1140px'   => t('1140px'),
-          '1200px'   => t('1200px'),
-          '1260px'   => t('1260px'),
+        '#options' => array(
+          '720px' => t('720px'),
+          '780px' => t('780px'),
+          '840px' => t('840px'),
+          '900px' => t('900px'),
+          '960px' => t('960px'),
+          '1020px' => t('1020px'),
+          '1080px' => t('1080px'),
+          '1140px' => t('1140px'),
+          '1200px' => t('1200px'),
+          '1260px' => t('1260px'),
         ),
         '#attributes' => array('class' => 'field-layout-width'),
       );
     } // endif width
     if ($settings['layout_enable_sidebars'] == 'on') {
       $form['layout']['page_layout']['layout_sidebar_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
+        '#prefix' => '<div class="layout-help">',
+        '#suffix' => '</div>',
+        '#value' => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
       );
       $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
-        '#type'          => 'select',
-        '#title'         => t('Sidebar first'),
-        '#prefix'       => '<div class="sidebar-width"><div class="sidebar-width-left">',
-        '#suffix'       => '</div>',
+        '#type' => 'select',
+        '#title' => t('Sidebar first'),
+        '#prefix' => '<div class="sidebar-width"><div class="sidebar-width-left">',
+        '#suffix' => '</div>',
         '#default_value' => $settings['layout_sidebar_first_width'],
-        '#options'       => array(
-          '60'    => t('60px'),
-          '120'   => t('120px'),
-          '180'   => t('180px'),
-          '240'   => t('240px'),
-          '300'   => t('300px'),
-          '320'   => t('320px'),
-          '360'   => t('360px'),
-          '420'   => t('420px'),
-          '480'   => t('480px'),
-          '540'   => t('540px'),
-          '600'   => t('600px'),
-          '660'   => t('660px'),
-          '720'   => t('720px'),
-          '780'   => t('780px'),
-          '840'   => t('840px'),
-          '900'   => t('900px'),
-          '960'   => t('960px'),
+        '#options' => array(
+          '60' => t('60px'),
+          '120' => t('120px'),
+          '180' => t('180px'),
+          '240' => t('240px'),
+          '300' => t('300px'),
+          '320' => t('320px'),
+          '360' => t('360px'),
+          '420' => t('420px'),
+          '480' => t('480px'),
+          '540' => t('540px'),
+          '600' => t('600px'),
+          '660' => t('660px'),
+          '720' => t('720px'),
+          '780' => t('780px'),
+          '840' => t('840px'),
+          '900' => t('900px'),
+          '960' => t('960px'),
         ),
         '#attributes' => array('class' => 'sidebar-width-select'),
       );
       $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
-        '#type'          => 'select',
-        '#title'         => t('Sidebar last'),
-        '#prefix'       => '<div class="sidebar-width-right">',
-        '#suffix'       => '</div></div>',
+        '#type' => 'select',
+        '#title' => t('Sidebar last'),
+        '#prefix' => '<div class="sidebar-width-right">',
+        '#suffix' => '</div></div>',
         '#default_value' => $settings['layout_sidebar_last_width'],
-        '#options'       => array(
-          '60'    => t('60px'),
-          '120'   => t('120px'),
-          '180'   => t('180px'),
-          '240'   => t('240px'),
-          '300'   => t('300px'),
-          '320'   => t('320px'),
-          '360'   => t('360px'),
-          '420'   => t('420px'),
-          '480'   => t('480px'),
-          '540'   => t('540px'),
-          '600'   => t('600px'),
-          '660'   => t('660px'),
-          '720'   => t('720px'),
-          '780'   => t('780px'),
-          '840'   => t('840px'),
-          '900'   => t('900px'),
-          '960'   => t('960px'),
+        '#options' => array(
+          '60' => t('60px'),
+          '120' => t('120px'),
+          '180' => t('180px'),
+          '240' => t('240px'),
+          '300' => t('300px'),
+          '320' => t('320px'),
+          '360' => t('360px'),
+          '420' => t('420px'),
+          '480' => t('480px'),
+          '540' => t('540px'),
+          '600' => t('600px'),
+          '660' => t('660px'),
+          '720' => t('720px'),
+          '780' => t('780px'),
+          '840' => t('840px'),
+          '900' => t('900px'),
+          '960' => t('960px'),
         ),
         '#attributes' => array('class' => 'sidebar-width-select'),
       );
     } //endif layout sidebars
     if ($settings['layout_enable_method'] == 'on') {
       $form['layout']['page_layout']['layout_method_help'] = array(
-        '#prefix'        => '<div class="layout-help">',
-        '#suffix'        => '</div>',
-        '#value'   => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
+        '#prefix' => '<div class="layout-help">',
+        '#suffix' => '</div>',
+        '#value' => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
       );
       $form['layout']['page_layout']['layout_method'] = array(
         '#type' => 'radios',
-        '#prefix'       => '<div class="layout-method">',
-        '#suffix'       => '</div>',
+        '#prefix' => '<div class="layout-method">',
+        '#suffix' => '</div>',
         '#default_value' => $settings['layout_method'],
         '#options' => array(
           '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
@@ -458,8 +458,8 @@ SCRIPT;
        '#attributes' => array('class' => 'layouts'),
       );
       $form['layout']['page_layout']['layout_enable_settings'] = array(
-        '#type'    => 'hidden',
-        '#value'   => $settings['layout_enable_settings'],
+        '#type' => 'hidden',
+        '#value' => $settings['layout_enable_settings'],
       );
     } // endif layout method
   } // endif layout settings
@@ -479,16 +479,16 @@ SCRIPT;
   );
   // Equal height blocks per region
   $equalized_blocks = array(
-    'leaderboard'       => t('Leaderboard region'),
-    'header'            => t('Header region'),
+    'leaderboard' => t('Leaderboard region'),
+    'header' => t('Header region'),
     'secondary-content' => t('Secondary Content region'),
-    'content-top'       => t('Content Top region'),
-    'content-bottom'    => t('Content Bottom region'),
-    'tertiary-content'  => t('Tertiary Content region'),
-    'footer'            => t('Footer region'),
+    'content-top' => t('Content Top region'),
+    'content-bottom' => t('Content Bottom region'),
+    'tertiary-content' => t('Tertiary Content region'),
+    'footer' => t('Footer region'),
   );
   $form['layout']['equal_heights']['equal_heights_blocks'] = array(
-    '#type'  => 'fieldset',
+    '#type' => 'fieldset',
     '#title' => t('Equal Height Blocks'),
   );
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
@@ -514,13 +514,13 @@ SCRIPT;
       '#type' => 'checkbox',
       '#title' => t('Horizontal Login Block'),
       '#default_value' => $settings['horizontal_login_block'],
-      '#description'   => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
+      '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
     );
     $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
       '#type' => 'checkbox',
       '#title' => t('Use Overlabel JavaScript'),
       '#default_value' => $settings['horizontal_login_block_overlabel'],
-      '#description'   => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
+      '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
   //split_node_form
@@ -544,19 +544,19 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   $form['admin_settings']['administration']['at_user_menu'] = array(
-    '#type'  => 'checkbox',
+    '#type' => 'checkbox',
     '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['at_user_menu'],
     '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
   );
   $form['admin_settings']['administration']['block_edit_links'] = array(
-    '#type'  => 'checkbox',
+    '#type' => 'checkbox',
     '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
     '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
   );
   $form['admin_settings']['administration']['at_admin_hide_help'] = array(
-    '#type'  => 'checkbox',
+    '#type' => 'checkbox',
     '#title' => t('Hide help messages.'),
     '#default_value' => $settings['at_admin_hide_help'],
     '#description' => t('When this setting is checked all help messages will be hidden.'),
