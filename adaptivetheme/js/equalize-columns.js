@@ -1,4 +1,4 @@
 // $Id$
 $(document).ready(function() {
-  $('.columns-inner').equalHeights();
+  $('#content-column, .sidebar').equalHeight();
 });
