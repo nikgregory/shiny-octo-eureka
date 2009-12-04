@@ -88,15 +88,14 @@ ul.secondary li{border-right:0;list-style:none;padding:0 2em 0 0;}
 /* Style edit links for blocks and views. */
 div.block-edit-links .edit-links{left:15px;right:auto;}
 
-/* Skinr style classes. */
 /* Horizontal login block styles. */
 .at-horizontal-login .form-item,.at-horizontal-login .form-submit{float:right;}
-.at-horizontal-login .item-list ul{float:right;}
-.at-horizontal-login .item-list ul li{float:right;}
+.at-horizontal-login#user-login-form ul{float:right;}
+.at-horizontal-login #user-login-form ul li{float:right;}
 .at-horizontal-login #user-login-form{text-align:right;}
 .at-horizontal-login label{float:right;}
 #block-user-0 label.overlabel-apply{margin-left:0;margin-right:.375em;}
-.at-horizontal-login #user-login-form li a{padding:0 0 0 20px;}
+.at-horizontal-login #user-login-form li a{padding:0 0 0 .75em;}
 
 /* inline menu style. */
 .at-inline-menu ul.menu li{float:right;}
@@ -119,9 +118,8 @@ div.block-edit-links .edit-links{left:15px;right:auto;}
  * Contains basic styles for the fancy collaspe blocks on the block config page.
  */
 .block-at-admin h2{text-align:right;}
-.block-at-admin legend{margin:0 -10px 0 0;}
-.at-admin-block-edit-links .item-list li{margin:0 0 0 .3em;}
-
+.block-at-admin legend{margin:0 0 0 -10px;}
+.at-admin-block-edit-links{float:left;padding:0 0 3px 3px;}
 .block-at-admin fieldset{margin-right:0.5em;}
 .block-at-admin h2 span {float:left;}
 div.block div.block-edit{top:10px;left:15px;right:auto;}
