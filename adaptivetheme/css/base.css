@@ -336,6 +336,7 @@ div.view .views-admin-links a:hover{background:#FFF;}
 #node-form .article-col-last .buttons #edit-preview,
 #node-form .article-col-last .buttons #edit-delete{margin:2px 2px 2px 0;}
 #node-form .article-col-first{float:left;width:69%;}
+#node-form .vertical-tabs,#node-form .vertical-tabs-list,#node-form .vertical-tabs-list li{border-color:#DADADA !important}
 
 /**
  * Contains basic styles block config page.

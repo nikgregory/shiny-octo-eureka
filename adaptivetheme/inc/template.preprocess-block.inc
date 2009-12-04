@@ -16,6 +16,13 @@
 global $theme;
 $block = $vars['block'];
 
+if ($block->region == 'left') {
+  $block->region = 'sidebar-first';
+}
+if ($block->region == 'right') {
+  $block->region = 'sidebar-last';
+}
+
 // Set the block id.
 if (theme_get_setting('cleanup_block_block_module_delta')) {
   $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
@@ -34,7 +41,7 @@ if (theme_get_setting('cleanup_block_classes_zebra')) {
 }
 
 if (theme_get_setting('cleanup_block_classes_region')) {
-  $classes[] = 'block-'. $block->region; // block-[region] class
+  $classes[] = 'block-'. safe_string($block->region); // block-[region] class
 }
 
 if (theme_get_setting('cleanup_block_classes_count')) {
@@ -44,13 +51,13 @@ if (theme_get_setting('cleanup_block_classes_count')) {
 // Add special classes to support the http://drupal.org/project/blocktheme module.
 if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
   $classes[] = $vars['blocktheme'];
-  $classes[] = $block->region .'-'. $vars['blocktheme'];
+  $classes[] = safe_string($block->region) .'-'. $vars['blocktheme'];
 }
 
 // Add special classes to support the http://drupal.org/project/block_class module.
 if (function_exists('block_class') && block_class($block)) {
   $classes[] = block_class($block);
-  $classes[] = $block->region .'-'. block_class($block);
+  $classes[] = safe_string($block->region) .'-'. block_class($block);
 }
 
 // Add support for Skinr module classes http://drupal.org/project/skinr.

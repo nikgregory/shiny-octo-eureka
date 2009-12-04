@@ -84,14 +84,6 @@ function adaptivetheme_username($object) {
 }
 
 /**
- * Set default form file input size 
- */
-function adaptivetheme_file($element) {
-  $element['#size'] = 60;
-  return theme_file($element);
-}
-
-/**
  * Theme a form button.
  */
 function adaptivetheme_button($element) {

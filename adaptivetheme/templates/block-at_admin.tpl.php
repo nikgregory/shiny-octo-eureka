@@ -55,8 +55,8 @@
             <dd><?php print $block->module; ?></dd>
           <dt><?php print t('Block Delta'); ?></dt>
             <dd><?php print $block->delta; ?></dd>
-          <dt><?php print t('Block Region'); ?></dt>
-            <dd><?php print $block->region; ?></dd>
+          <dt><?php print t('Block Region ID'); ?></dt>
+            <dd><?php print '#'. safe_string($block->region); ?></dd>
           <dt><?php print t('Block ID'); ?></dt>
             <dd>
               <?php if (!empty($block_module_delta)) { ?>
