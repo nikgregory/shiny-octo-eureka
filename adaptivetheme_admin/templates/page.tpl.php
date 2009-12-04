@@ -205,6 +205,6 @@
       <?php endif; ?>
     </div> <!-- /container -->
     <?php print $closure ?>
-  </div> <!-- /wrapepr -->
+  </div> <!-- /wrapper -->
 </body>
 </html>
