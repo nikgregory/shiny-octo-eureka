@@ -167,39 +167,56 @@ SCRIPT;
     '#default_value' => $settings['user_notverified_display'],
   );
   // Search Settings
-  $form['general_settings']['search_container'] = array(
+  $form['general_settings']['search'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Search'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['general_settings']['search']['search_form'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Search box form'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['general_settings']['search']['search_form']['display_search_form_label'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display the search box form label ("Search this site")'),
+    '#default_value' => $settings['display_search_form_label'],
+  );
+  $form['general_settings']['search']['search_results'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
     '#description' => t('What additional information should be displayed in your search results?'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['general_settings']['search_container']['search_results']['search_snippet'] = array(
+  $form['general_settings']['search']['search_results']['search_snippet'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display text snippet'),
     '#default_value' => $settings['search_snippet'],
   );
-  $form['general_settings']['search_container']['search_results']['search_info_type'] = array(
+  $form['general_settings']['search']['search_results']['search_info_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display content type'),
     '#default_value' => $settings['search_info_type'],
   );
-  $form['general_settings']['search_container']['search_results']['search_info_user'] = array(
+  $form['general_settings']['search']['search_results']['search_info_user'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display author name'),
     '#default_value' => $settings['search_info_user'],
   );
-  $form['general_settings']['search_container']['search_results']['search_info_date'] = array(
+  $form['general_settings']['search']['search_results']['search_info_date'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display posted date'),
     '#default_value' => $settings['search_info_date'],
   );
-  $form['general_settings']['search_container']['search_results']['search_info_comment'] = array(
+  $form['general_settings']['search']['search_results']['search_info_comment'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display comment count'),
     '#default_value' => $settings['search_info_comment'],
   );
-  $form['general_settings']['search_container']['search_results']['search_info_upload'] = array(
+  $form['general_settings']['search']['search_results']['search_info_upload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display attachment count'),
     '#default_value' => $settings['search_info_upload'],
@@ -208,7 +225,7 @@ SCRIPT;
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
     '#title' => t('Content type settings'),
-    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the "Use content-type specific settings" box to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
+    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the <em>"Use content-type specific settings"</em> checkbox to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
@@ -494,7 +511,7 @@ SCRIPT;
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
       '#prefix' => '<div id="div-equalize-collapse">',
       '#suffix' => '</div>',
-      '#description' => t('Select which regions to want to have equal height blocks. Equal heights is applied with jQuery and applies to the block-inner DIV.'),
+      '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so is not applicable by default to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes that come with Adaptivetheme. Equal heights is applied with jQuery and applies to the block-inner DIV.</p><p>Select which regions to want to have equal height blocks.</p>'),
     );
     foreach ($equalized_blocks as $name => $title) {
       $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
@@ -514,7 +531,7 @@ SCRIPT;
       '#type' => 'checkbox',
       '#title' => t('Horizontal Login Block'),
       '#default_value' => $settings['horizontal_login_block'],
-      '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line).'),
+      '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
     );
     $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
       '#type' => 'checkbox',
@@ -602,7 +619,7 @@ SCRIPT;
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',
     '#title' => t('And or Remove CSS Classes'),
-    '#description' => t('This is a fast and easy way to add or remove CSS classes during theme development so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site. Note that whenever you change the defaults you need to click "Reset to Defaults" to save them to the variables table and have them applied.'),
+    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development, so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site.</p><p>Note that whenever you change the defaults you need to click <em>"Reset to defaults"</em> to save them to the variables table and have them applied.</p>'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );

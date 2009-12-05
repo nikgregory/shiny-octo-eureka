@@ -136,6 +136,8 @@
   settings[breadcrumb_trailing]              = 0
   settings[breadcrumb_title]                 = 0
 
+  settings[display_search_form_label]        = 1
+
   settings[search_snippet]                   = 1
   settings[search_info_type]                 = 1
   settings[search_info_user]                 = 1
