@@ -14,7 +14,7 @@
  *   The name of the theme function being called.
  */
 
-global $theme, $theme_info;
+global $theme, $theme_info, $user;
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {

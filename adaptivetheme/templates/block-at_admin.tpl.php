@@ -36,58 +36,49 @@
  */
 ?>
 <div class="block-at-admin <?php print $skinr; ?>"><div class="block-at-admin-inner">
-
   <div class="block-header">
     <h2 class="block-title clearfix">
       <span><a href="#" class="toggle-block" id="<?php print $block->module .'-'. $block->delta;?>">Toggle</a></span>
       <?php print $block->subject ? $block->subject : t('No title set'); ?>
     </h2>
   </div>
-
   <div class="block-at-admin-content content clearfix toggle-<?php print $block->module .'-'. $block->delta; ?>">
     <fieldset class="collapsible collapsed fieldset-block-info">
       <legend class="collapse">
   	    <a href="#"><?php print t('Block Info'); ?></a>
       </legend>
-      <div class="fieldset-wrapper">
-        <dl>
-          <dt><?php print t('Block Module'); ?></dt>
-            <dd><?php print $block->module; ?></dd>
-          <dt><?php print t('Block Delta'); ?></dt>
-            <dd><?php print $block->delta; ?></dd>
-          <dt><?php print t('Block Region ID'); ?></dt>
-            <dd><?php print '#'. safe_string($block->region); ?></dd>
-          <dt><?php print t('Block ID'); ?></dt>
-            <dd>
-              <?php if (!empty($block_module_delta)) { ?>
-                <?php print '#'. $block_module_delta; ?>
-              <?php } else { ?>
-                <?php print t('Block ID\'s are not enabled. <br /><a href="!link">Enable Block ID\'s</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
-              <?php } ?>
-            </dd>
-          <dt><?php print t('Block Classes'); ?></dt>
-            <dd>
-              <?php print '.'. $block_at_admin_classes; ?><br />
-              <?php print t('<a href="!link">Add or remove block classes</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
-            </dd>
-        </dl>
-      </div>
+      <dl>
+        <dt><?php print t('Block Module'); ?></dt>
+          <dd><?php print $block->module; ?></dd>
+        <dt><?php print t('Block Delta'); ?></dt>
+          <dd><?php print $block->delta; ?></dd>
+        <dt><?php print t('Block Region ID'); ?></dt>
+          <dd><?php print '#'. safe_string($block->region); ?></dd>
+        <dt><?php print t('Block ID'); ?></dt>
+          <dd>
+            <?php if (!empty($block_module_delta)) { ?>
+              <?php print '#'. $block_module_delta; ?>
+            <?php } else { ?>
+              <?php print t('Block ID\'s are not enabled. <br /><a href="!link">Enable Block ID\'s</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
+            <?php } ?>
+          </dd>
+        <dt><?php print t('Block Classes'); ?></dt>
+          <dd>
+            <?php print '.'. $block_at_admin_classes; ?><br />
+            <?php print t('<a href="!link">Add or remove block classes</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
+          </dd>
+      </dl>
     </fieldset>
-
     <fieldset class="collapsible collapsed fieldset-block-content">
       <legend class="collapse">
   	    <a href="#"><?php print t('Block Content'); ?></a>
       </legend>
-      <div class="fieldset-wrapper">
-        <div class="block-content"><?php print $block->content ?></div>
-      </div>
+      <div class="block-content"><?php print $block->content ?></div>
     </fieldset>
-
     <?php if ($edit_links): ?>
       <div class="at-admin-block-edit-links">
   	    <?php print $edit_links; ?>
       </div>
     <?php endif; ?>
-
   </div>
 </div></div> <!-- /block-at_admin -->

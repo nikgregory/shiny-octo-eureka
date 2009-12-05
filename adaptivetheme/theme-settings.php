@@ -617,13 +617,13 @@ SCRIPT;
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
-  // Add and remove extra classes
+  // Add or remove extra classes
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',
-    '#title' => t('And or Remove CSS Classes'),
-    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development, so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site.</p><p>Note that whenever you change the defaults you need to click <em>"Reset to defaults"</em> to save them to the variables table and have them applied.</p>'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#title' => t('Add or Remove CSS Classes'),
+    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development, so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site.</p><p>Note that whenever you change the defaults in the .info file you need to click <em>"Reset to defaults"</em> to save them to the variables table and have them applied.</p>'),
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
   );
   // Body classes
   $form['themedev']['dev']['classses']['body_classes'] = array(

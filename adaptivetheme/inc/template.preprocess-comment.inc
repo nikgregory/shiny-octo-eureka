@@ -12,6 +12,8 @@
  *   A sequential array of variables to pass to the theme template.
  */
 
+global $theme, $user;
+
 // Load the node object that the current comment is attached to.
 $node = node_load($vars['comment']->nid);
 

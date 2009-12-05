@@ -14,7 +14,7 @@
  *   The name of the theme function being called.
  */
 
-global $theme;
+global $theme, $user;
 
 if (theme_get_setting('cleanup_article_id')) {
   // Set article id.

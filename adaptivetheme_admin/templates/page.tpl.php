@@ -142,6 +142,7 @@
         </div> <!-- /admin user link -->
       <?php endif; ?>
     </div></div> <!-- /header -->
+    <div id="shadow"></div>
     <div id="container">
       <?php if ($breadcrumb): ?>
         <div id="breadcrumb">

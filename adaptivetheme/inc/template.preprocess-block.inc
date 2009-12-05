@@ -12,7 +12,7 @@
  *   A sequential array of variables to pass to the theme template.
  */
 
-global $theme;
+global $theme, $user;
 
 $block = $vars['block'];
 

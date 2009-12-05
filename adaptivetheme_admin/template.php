@@ -29,13 +29,13 @@ if (arg(2) == 'block') {
  * @param $hook
  *   The name of the theme function being called.
  */
-function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
+function adaptivetheme_admin_preprocess_page(&$vars) {
   global $user;
   // Admin welcome message with date for the admin theme.
   if ($vars['logged_in']) {
-    $welcome = t('Welcome') .' '. $user->name;
+    $welcome = t('Welcome') .' '. check_plain($user->name);
     $conjunction = ', '. t('it\'s') .' ';
-    $todays_date = date("l, F d Y" , time()); 
+    $todays_date = date("l, jS F, Y" , time()); 
     $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
   }
 }
