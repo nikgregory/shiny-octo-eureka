@@ -13,10 +13,11 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-global $user, $theme;
+
+global $theme;
 
 if (theme_get_setting('cleanup_article_id')) {
-// Set the node id.
+  // Set article id.
   $vars['article_id'] = 'article-'. $vars['node']->nid;
 }
 

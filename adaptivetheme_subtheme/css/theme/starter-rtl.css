@@ -1,29 +1,56 @@
 @charset "utf-8";
-/* $Id$ */
-/* adaptivethemes.com */
-
 /**
+ * $Id$ 
+ * adaptivethemes.com 
+ *
  * @file stater-rtl.css
  * Default RTL styles for getting started.
  */
-body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;}
-#skip-nav{text-align:right;float:right;}
-#user-menu{float:left;}
-#user-menu ul{float:left;}
-#user-menu ul li{float:right;margin:0 1em 0 0;}
-#branding{float:right;}
-#search-box{float:left;}
-#header-blocks{float:right;}
-.primary-links li{float:right;}
-.secondary-links li{float:right;}
-#content-aside{float:left;padding-right:10px;width:240px;}
-ul.menu,
-ul.menu ul,
-ul.menu ul ul,
-ul.menu ul ul ul{margin:0 1em 0 0;}
-.comment-links ul.links{padding:0 1em;text-align:left;}
-.article ul.links li{padding:0 1em;}
-#block-locale-0 ul{margin:0 1.5em 0 0;}
-.indented {margin-right:60px;}
-#user-menu ul {float:right;}
-#user-menu ul li {float:left;margin:0 0 0 1em;}
+body {
+font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;
+}
+
+#skip-nav {
+text-align:right;
+float:right;
+}
+
+#user-menu ul li {
+float:left;
+margin:0 0 0 1em;
+}
+
+#content-aside {
+float:left;
+padding-right:10px;
+width:240px;
+}
+
+ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul {
+margin:0 1em 0 0;
+}
+
+.comment-links ul.links {
+text-align:left;
+padding:0 1em;
+}
+
+.article ul.links li {
+padding:0 1em;
+}
+
+#block-locale-0 ul {
+margin:0 1.5em 0 0;
+}
+
+.indented {
+margin-right:60px;
+}
+
+#user-menu,#search-box {
+float:left;
+}
+
+#user-menu ul,#branding,#header-blocks,.primary-links li,.secondary-links li {
+float:right;
+}

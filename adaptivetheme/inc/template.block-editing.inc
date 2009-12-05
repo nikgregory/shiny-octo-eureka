@@ -15,9 +15,7 @@
  */
 function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
   $block = $vars['block'];
-  /**
-   * Add block edit links.
-   */
+    // Display 'Edit this block' link for block module blocks.
     if ($block->module == 'block') {
       $edit_links[] = l('<span>'. t('Edit Block') .'</span>', 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
         array(
@@ -57,9 +55,6 @@ function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
         )
       );
     }
-  // Theme links as an item list.
   $vars['edit_links_array'] = $edit_links;
-  $vars['edit_links'] = '<div class="edit-links">' . implode(' ', $edit_links) . '</div>';
- // $items = theme('item_list', $edit_links, NULL, 'ul', $attributes = array('class' => 'edit-links-list'));
- // $vars['edit_links'] = '<div class="block-edit">'. strip_tags($items, '<ul><li><a>') .'</div>';
+  $vars['edit_links'] = '<div class="edit-links">'. implode(' ', $edit_links) .'</div>';
 }

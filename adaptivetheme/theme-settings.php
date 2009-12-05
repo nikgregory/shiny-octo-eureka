@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com 62
+// adaptivethemes.com
 
 /**
  * @file theme-settings.php
@@ -48,13 +48,6 @@ SCRIPT;
 
   // Allow a subtheme to override the default values.
   $defaults = array_merge($defaults, $subtheme_defaults);
-
-  // Merge the saved variables and their default values.
-  //$settings = array_merge($defaults, $saved_settings);
-
-  // Make the default content-type settings the same as the default theme settings,
-  // so we can tell if content-type-specific settings have been altered.
-  //$defaults = array_merge($defaults, theme_get_settings());
 
   // Set the default values for content-type-specific settings
   foreach ($node_types as $type => $name) {
@@ -173,6 +166,7 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
+  // Search form
   $form['general_settings']['search']['search_form'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search box form'),
@@ -184,6 +178,7 @@ SCRIPT;
     '#title' => t('Display the search box form label ("Search this site")'),
     '#default_value' => $settings['display_search_form_label'],
   );
+  // Search results
   $form['general_settings']['search']['search_results'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
@@ -276,7 +271,7 @@ SCRIPT;
     $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.');
     $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
   }
-  // Taxonomy Settings
+  // Taxonomy term display
   if (module_exists('taxonomy')) {
     $form['node_type_specific']['display_taxonomy_container'] = array(
       '#type' => 'fieldset',
@@ -488,6 +483,7 @@ SCRIPT;
     '#collapsed' => TRUE,
     '#description'   => t('These settings allow you to set the sidebars and/or region blocks to be equal height.'),
   );
+  // Equal height sidebars
   $form['layout']['equal_heights']['equal_heights_sidebars'] = array(
     '#type' => 'checkbox',
     '#title' => t('Equal Height Sidebars'),
@@ -515,7 +511,7 @@ SCRIPT;
     );
     foreach ($equalized_blocks as $name => $title) {
       $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
-      	'#type' => 'checkbox', 
+        '#type' => 'checkbox', 
         '#title' => $title, 
         '#default_value' => $settings['equalize_'. $name]);
     }
@@ -560,18 +556,21 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
+  // Show user menu
   $form['admin_settings']['administration']['at_user_menu'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['at_user_menu'],
     '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
   );
+  // Show block edit links
   $form['admin_settings']['administration']['block_edit_links'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
     '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
   );
+  // Hide help messages
   $form['admin_settings']['administration']['at_admin_hide_help'] = array(
     '#type' => 'checkbox',
     '#title' => t('Hide help messages.'),
@@ -586,13 +585,14 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
+  // Rebuild registry
   $form['themedev']['dev']['rebuild_registry'] = array(
     '#type' => 'checkbox',
     '#title' => t('Rebuild theme registry on every page.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
-  //show_theme_info
+  // Show $theme_info
   if (module_exists('devel')) {
     $form['themedev']['dev']['show_theme_info'] = array(
        '#type' => 'checkbox',
@@ -610,12 +610,14 @@ SCRIPT;
        '#description' => t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel')),
     );
   }
+  // Firebug lite
   $form['themedev']['dev']['load_firebug_lite'] = array(
     '#type' => 'checkbox',
     '#title' => t('Load Firebug lite script for debugging in IE, Opera and Webkit.'),
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
+  // Add and remove extra classes
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',
     '#title' => t('And or Remove CSS Classes'),

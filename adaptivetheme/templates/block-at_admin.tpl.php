@@ -62,13 +62,13 @@
               <?php if (!empty($block_module_delta)) { ?>
                 <?php print '#'. $block_module_delta; ?>
               <?php } else { ?>
-                <?php print t('Block ID\'s are not enabled. <br /><a href="!link">Enable Block ID\'s</a>.', array('!link' => url('admin/build/themes/settings/' . $GLOBALS['theme'])));?>
+                <?php print t('Block ID\'s are not enabled. <br /><a href="!link">Enable Block ID\'s</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
               <?php } ?>
             </dd>
           <dt><?php print t('Block Classes'); ?></dt>
             <dd>
               <?php print '.'. $block_at_admin_classes; ?><br />
-              <?php print t('<a href="!link">Add or remove block classes</a>.', array('!link' => url('admin/build/themes/settings/' . $GLOBALS['theme'])));?>
+              <?php print t('<a href="!link">Add or remove block classes</a>.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme'])));?>
             </dd>
         </dl>
       </div>

@@ -10,14 +10,12 @@
  *
  * @param $vars
  *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
  */
-global $user;
 
-// Special classes for comments, emulates Drupal 7 for forward compatibility.
 // Load the node object that the current comment is attached to.
 $node = node_load($vars['comment']->nid);
+
+// Special classes for comments, emulates Drupal 7 for forward compatibility.
 $classes = array();
 $classes[]  = 'comment';
 if ($vars['status'] != 'comment-published') {

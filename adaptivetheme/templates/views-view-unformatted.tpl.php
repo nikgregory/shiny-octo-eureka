@@ -14,4 +14,4 @@
   <div class="views-row-item <?php print $classes[$id]; ?>">
     <?php print $row; ?>
   </div>
-<?php endforeach; ?>
+<?php endforeach; ?><!-- /views-view-unformatted -->

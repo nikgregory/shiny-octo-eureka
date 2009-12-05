@@ -4,7 +4,7 @@
 /**
  * @file template.preprocess-comment-wrapper.inc
  */
-  
+
 global $theme;
 
 $classes = array();
@@ -19,5 +19,8 @@ if (theme_get_setting('cleanup_comment_wrapper_type')) {
   $classes[] = $vars['node']->type .'-comments';
 }
 
-// $classes is the variable that holds the node classes and is printed in node tpl files.
-$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+/**
+ * $classes is the variable that holds the comment-wrapper 
+ * classes and is printed in comment-wrapper.tpl.php
+ */
+$vars['classes'] = implode(' ', $classes);

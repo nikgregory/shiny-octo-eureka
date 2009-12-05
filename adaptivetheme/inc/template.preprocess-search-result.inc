@@ -14,7 +14,7 @@ $result = $vars['result'];
 $vars['url'] = check_url($result['link']);
 $variables['title'] = check_plain($result['title']);
 
-// Check for existence. User search does not include snippets.
+// Check for snippets - user search does not include snippets.
 $vars['snippet'] = '';
 if (isset($result['snippet']) && theme_get_setting('search_snippet')) {
   $vars['snippet'] = $result['snippet'];
@@ -31,7 +31,6 @@ if (!empty($result['date']) && theme_get_setting('search_info_date')) {
   $info['date'] = format_date($result['date'], 'small');
 }
 if (isset($result['extra']) && is_array($result['extra'])) {
-  // $info = array_merge($info, $result['extra']);  Drupal bug?  [extra] array not keyed with 'comment' & 'upload'
   if (!empty($result['extra'][0]) && theme_get_setting('search_info_comment')) {
     $info['comment'] = $result['extra'][0];
   }

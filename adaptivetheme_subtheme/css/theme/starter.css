@@ -1,96 +1,251 @@
-/* $Id$ */
-/* adaptivethemes.com 62 */
-
 /**
+ * $Id$ 
+ * adaptivethemes.com 
+ *
  * @file starter.css
  * Default styles for getting started. Unset this in the info file 
  * if you want a style-free starter theme.
- */ 
-body{font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;margin:0;padding:0;}
+ */
+body {
+font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;
+margin:0;
+padding:0;
+}
 
 /* Global focus style for links. */
-a:active,a:focus{border:0;color:#C00000;}
+a:active,a:focus {
+border:0;
+color:#C00000;
+}
 
 /* Skip navigtation */
-#skip-nav{text-align:left;float:left;width:160px; /* Hidden by default with .element-invisible class see page.tpl.php */}
+#skip-nav {
+text-align:left;
+float:left;
+width:160px;
+}
 
 /* User menu */
-#user-menu{float:right;width:760px;}
-#user-menu ul{float:right;margin:0;}
-#user-menu ul li{display:inline;float:left;margin:0 0 0 1em;padding:0;}
+#user-menu {
+float:right;
+width:760px;
+}
+
+#user-menu ul {
+float:right;
+margin:0;
+}
+
+#user-menu ul li {
+display:inline;
+float:left;
+margin:0 0 0 1em;
+padding:0;
+}
 
 /* Header, Branding, Search box */
-#header{clear:both;}
-#branding{float:left;width:300px;}
-#search-box{float:right;width:300px;}
-#header-region{float:left;width:320px;}
-#branding h1{font-size:1em;}
-.logo-site-name span{display:block;}
-#site-name{font-size:2em;font-weight:bold;line-height:1.5;}
-#search-theme-form{float:right;margin:1.5em 0;}
+#header {
+clear:both;
+}
+
+#branding {
+float:left;
+width:300px;
+}
+
+#search-box {
+float:right;
+width:300px;
+}
+
+#header-region {
+float:left;
+width:320px;
+}
+
+.logo-site-name span {
+display:block;
+}
+
+#site-name {
+font-size:2em;
+font-weight:700;
+line-height:1.5;
+}
+
+#search-theme-form {
+float:right;
+margin:1.5em 0;
+}
 
 /* Breadcrumb, Mission */
-#breadcrumb{padding-bottom: 1em;}
-#mission{font-weight:bold;margin:.3em 0 1.5em;}
+#breadcrumb {
+padding-bottom:1em;
+}
+
+#mission {
+font-weight:700;
+margin:.3em 0 1.5em;
+}
 
 /* Primary and Secondary menus. */
-.primary-links,
-.secondary-links{margin:0;padding:0;}
-.primary-links li,
-.secondary-links li{display:inline;float:left;list-style:none;margin:0;padding:0;}
-.primary-links li a,
-.secondary-links li a{display:block;padding:0 0.5em;white-space:nowrap;}
+.primary-links,.secondary-links {
+margin:0;
+padding:0;
+}
 
-/* Aricles (nodes). */
-.article{margin:0 0 1.5em;}
-.article-title a:link,
-.article-title a:visited,
-.article-title a:active{text-decoration:none;}
-.article-title a:hover,
-.article-title a:focus{text-decoration:underline;}
-.article ul.links{margin:0;}
-.article ul.links li{padding:0 1em 0 0;}
-.taxonomy{margin:0 0 1em;}
-.taxonomy li{display:inline;list-style:none;}
-.vocab-name{font-size:1em;font-weight:bold;}
+.primary-links li,.secondary-links li {
+display:inline;
+float:left;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.primary-links li a,.secondary-links li a {
+display:block;
+white-space:nowrap;
+padding:0 0.5em;
+}
+
+.article ul.links li {
+padding:0 1em 0 0;
+}
+
+.taxonomy {
+margin:0 0 1em;
+}
+
+.taxonomy li {
+display:inline;
+list-style:none;
+}
+
+.vocab-name {
+font-size:1em;
+font-weight:700;
+}
 
 /* Comments. */
-.indented {margin-left:60px;}
-.comment{margin:0 0 1.5em;}
-.comment-title .new{color:#FF8000;}
-.comment-title a:link,
-.comment-title a:visited,
-.comment-title a:active{text-decoration:none;}
-.comment-title a:hover,
-.comment-title a:focus{text-decoration:underline;}
-.comment ul.links{display:block;padding:0 1em 0 0;text-align:right;}
+.indented {
+margin-left:60px;
+}
+
+.comment-title .new {
+color:#FF8000;
+}
+
+.comment ul.links {
+display:block;
+text-align:right;
+padding:0 1em 0 0;
+}
 
 /* Generic classes. */
-.submitted {margin:.375em 0 0.75em; font-style}
-.submitted em {font-style:normal;}
+.submitted {
+margin:.375em 0 0.75em;
+}
+
+.submitted em {
+font-style:normal;
+}
 
 /* Blocks. */
-.block{margin:0 0 20px;}
-.block-inner{padding:0 0 10px;}
-.block ul li{margin:0 0 0 0.5em;}
-#block-user-3 .item-list h3{font-size:1em;}
-#block-locale-0 ul{margin:0 0 0 1.5em;padding:0;}
-#block-locale-0 ul li{padding:.35em 0 0;}
-#block-node-0 .feed-icon img{padding:10px 0;}
+.block {
+margin:0 0 20px;
+}
 
-/* Pager. */
-.item-list ul.pager li{margin:0;}
+.block-inner {
+padding:0 0 10px;
+}
+
+.block ul li {
+margin:0 0 0 0.5em;
+}
+
+#block-locale-0 ul {
+margin:0 0 0 1.5em;
+padding:0;
+}
+
+#block-locale-0 ul li {
+padding:.35em 0 0;
+}
+
+#block-node-0 .feed-icon img {
+padding:10px 0;
+}
 
 /* Regions. */
-#menu-region .superfish-menu-hide-title{height:0;overflow:hidden;position:absolute;}
-#content-aside{background:#FFF;float:right;padding-left:10px;width:240px;}
+#menu-region .superfish-menu-hide-title {
+height:0;
+overflow:hidden;
+position:absolute;
+}
+
+#content-aside {
+background:#FFF;
+float:right;
+padding-left:10px;
+width:240px;
+}
 
 /* Footer, Feed icons. */
-.feed-icon img{padding:0 10px;}
+.feed-icon img {
+padding:0 10px;
+}
 
 /* Collapsed block config block styles. */
-.block-at-admin .block-title{color:#555;font-size:1.333em;}
-.block-at-admin .block-at-admin-inner{-moz-border-radius:4px;-webkit-border-radius:4px;-border-radius:4px;background:#FFF;border:1px solid #A4D5E5;padding:0 4px;color:#444;}
-.block-at-admin fieldset{-moz-border-radius:4px;-webkit-border-radius:4px;-border-radius:4px;border:1px solid #E0EBEF;margin:1em 0;padding:0.5em;}
-.block-at-admin a{color:#2C788F;text-decoration:none;}
-.block-at-admin a:hover,.block-at-admin a:focus{color:#660000;text-decoration:underline;}
+.block-at-admin .block-title {
+color:#555;
+font-size:1.333em;
+}
+
+.block-at-admin .block-at-admin-inner {
+-moz-border-radius:4px;
+-webkit-border-radius:4px;
+-border-radius:4px;
+background:#FFF;
+border:1px solid #A4D5E5;
+color:#444;
+padding:0 4px;
+}
+
+.block-at-admin fieldset {
+-moz-border-radius:4px;
+-webkit-border-radius:4px;
+-border-radius:4px;
+border:1px solid #E0EBEF;
+margin:1em 0;
+padding:0.5em;
+}
+
+.block-at-admin a {
+color:#2C788F;
+text-decoration:none;
+}
+
+.block-at-admin a:hover,.block-at-admin a:focus {
+color:#600;
+text-decoration:underline;
+}
+
+#branding h1,#block-user-3 .item-list h3 {
+font-size:1em;
+}
+
+.article,.comment {
+margin:0 0 1.5em;
+}
+
+.article-title a:link,.article-title a:visited,.article-title a:active,.comment-title a:link,.comment-title a:visited,.comment-title a:active {
+text-decoration:none;
+}
+
+.article-title a:hover,.article-title a:focus,.comment-title a:hover,.comment-title a:focus {
+text-decoration:underline;
+}
+
+.article ul.links,.item-list ul.pager li {
+margin:0;
+}

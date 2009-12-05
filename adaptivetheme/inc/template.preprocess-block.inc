@@ -10,12 +10,13 @@
  *
  * @param $vars
  *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
  */
+
 global $theme;
+
 $block = $vars['block'];
 
+// Rewrite the left and right region names.
 if ($block->region == 'left') {
   $block->region = 'sidebar-first';
 }
@@ -76,7 +77,7 @@ if (theme_get_setting('horizontal_login_block')  && $block->module = 'user' && $
 }
 
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
-$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+$vars['classes'] = implode(' ', $classes);
 
 // Collapsible block admin blocks.
 if (arg(2) == 'block') {

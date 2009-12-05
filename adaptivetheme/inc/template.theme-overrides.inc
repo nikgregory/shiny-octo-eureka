@@ -135,9 +135,7 @@ function adaptivetheme_fieldset($element) {
 
 /**
  * Modify the theme settings form for our theme.
- *
- * This is incldued here to make it easier to set up the theme, so 
- * you only have one file to worry about search/repeace the theme name.
+ * In short this collapses the fieldsets on the theme configuration page.
  */
 function adaptivetheme_system_settings_form($form) {
   // Theme the crap out of the theme settings fieldsets.
@@ -166,6 +164,7 @@ function adaptivetheme_system_settings_form($form) {
 
 /**
  * Override of theme_node_form().
+ * Split the node form into two columns.
  */
 function adaptivetheme_node_form($form) {
   if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
@@ -173,22 +172,24 @@ function adaptivetheme_node_form($form) {
       $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
       $sidebar = drupal_render($form['taxonomy']);
       $main = drupal_render($form);
-      return "<div class='article-form clear-block'>
-        <div class='article-col-last'>{$buttons}{$sidebar}</div>
-        <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
-        </div>";
+      return "
+<div class='article-form clear-block'>
+  <div class='article-col-last'>{$buttons}{$sidebar}</div>
+  <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
+</div>";
     }
     elseif (theme_get_setting('split_node_form') == 0) {
       $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
       $main = drupal_render($form);
-      return "<div class='article-form clear-block'>
-        <div class='main'>{$main}{$buttons}</div>
-        </div>";
+      return "
+<div class='article-form clear-block'>
+  <div class='main'>{$main}{$buttons}</div>
+</div>";
     }
   }
 }
 
-// If DHTML module is installed dont override these funtions.
+// If DHTML module is installed dont override theme_menu_tree and theme_menu_item.
 if (!function_exists('dhtml_menu_init')) {
   /**
    * Generate the HTML output for a menu tree
@@ -197,13 +198,12 @@ if (!function_exists('dhtml_menu_init')) {
    */
   function adaptivetheme_menu_tree($tree) {
     if (theme_get_setting('cleanup_menu_menu_class')) {
-      return '<ul class="menu">'."\n". $tree .'  </ul>'. "\n";
+      return "<ul class=\"menu\">\n $tree </ul>\n";
     }
     else{
-      return '<ul>'."\n". $tree ."\n".'  </ul>'."\n";
+      return "<ul>\n $tree \n</ul>\n";
     }
   }
-
   /**
    * Generate the HTML output for a menu item and submenu.
    */
@@ -223,7 +223,7 @@ if (!function_exists('dhtml_menu_init')) {
       $class .= ' active-trail';
     }
     if ($class) {
-      return '<li class="'. $class .'">'. $link . $menu ."</li>\n";
+      return "<li class=\"$class\">". $link . $menu ."</li>\n";
     }
     else{
       return '<li>'. $link . $menu ."</li>\n";
@@ -245,10 +245,10 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
   $output = '';
   if (count($links) > 0) {
     if (theme_get_setting('cleanup_links_type_class')) {
-      $output = '  <ul'. drupal_attributes($attributes) .'>';
+      $output = '<ul'. drupal_attributes($attributes) .'>';
     }
     else{
-      $output = '  <ul>';
+      $output = '<ul>';
     }
     $num_links = count($links);
     $i = 1;
@@ -291,11 +291,11 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
         $link = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
       }
       $i++;
-      $output .= '  <li'. drupal_attributes(array('class' => $class)) .'>';
+      $output .= '<li'. drupal_attributes(array('class' => $class)) .'>';
       $output .= $link;
       $output .= "</li>\n";
     }
-    $output .= '</ul>' . "\n";
+    $output .= "</ul>\n";
   }
   return $output;
 }

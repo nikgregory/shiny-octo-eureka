@@ -22,7 +22,7 @@ foreach ($regions as $region) {
   $setting = theme_get_setting('equalize_'. $region);
   $settings[] = $setting;
   if ($setting == 1) {
-  	$active_regions[] = $region;
+    $active_regions[] = $region;
   }
 }
 $region_settings = $settings;

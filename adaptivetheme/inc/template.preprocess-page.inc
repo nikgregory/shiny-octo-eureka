@@ -13,7 +13,8 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-global $theme, $theme_info, $user;
+
+global $theme, $theme_info;
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
@@ -71,7 +72,7 @@ $classes = array();
 
 // Section class. The section class is printed on the body element and allows you to theme site sections.
 // We use the path alias otherwise all nodes will be in "section-node".
-if (theme_get_setting('cleanup_classes_section')){
+if (theme_get_setting('cleanup_classes_section')) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
     list($section, ) = explode('/', $path_alias, 2);
@@ -105,7 +106,7 @@ if (!$vars['is_front']) {
   if (arg(2) == 'block') {
     $classes[] = 'page-block';
   }
-  if (theme_get_setting('cleanup_classes_add_edit_delete')){
+  if (theme_get_setting('cleanup_classes_add_edit_delete')) {
     if (arg(0) == 'node') {
       if (arg(1) == 'add') {
         $classes[] = 'article-add'; // Add .node-add class.

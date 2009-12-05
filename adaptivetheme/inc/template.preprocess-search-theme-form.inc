@@ -1,4 +1,6 @@
 <?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file template.preprocess-search-theme-form.inc
  */
