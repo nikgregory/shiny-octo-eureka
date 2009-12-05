@@ -49,10 +49,10 @@ if (!empty($vars['site_name'])) {
 
 // Set variables for the primary and secondary links.
 if (!empty($vars['primary_links'])) {
-  $vars['primary_menu'] = theme('links', $vars['primary_links'], array('class' => 'primary-links clear-block'));
+  $vars['primary_menu'] = theme('links', $vars['primary_links'], array('class' => 'primary-links clearfix'));
 }
 if (!empty($vars['secondary_links'])) {
-  $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clear-block'));
+  $vars['secondary_menu'] = theme('links', $vars['secondary_links'], array('class' => 'secondary-links clearfix'));
 }
 
 // Attribution.
@@ -88,12 +88,12 @@ if (theme_get_setting('cleanup_classes_user_status')) {
 }
 
 if (theme_get_setting('cleanup_classes_arg_one')) {
-  $classes[] = preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. form_clean_id(drupal_strtolower(arg(0))));
+  $classes[] = preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. safe_string(arg(0)));
 }
 
 if (theme_get_setting('cleanup_classes_node_type')) {
   if (isset($vars['node']) && $vars['node']->type) {
-    $classes[] = 'article-type-'. form_clean_id($vars['node']->type);
+    $classes[] = 'article-type-'. safe_string($vars['node']->type);
   }
 }
 

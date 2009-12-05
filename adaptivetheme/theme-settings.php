@@ -216,7 +216,7 @@ SCRIPT;
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Author & date'),
+    '#title' => t('Author &amp; Date'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -599,229 +599,235 @@ SCRIPT;
     '#default_value' => $settings['load_firebug_lite'],
     '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
   );
-  $form['themedev']['dev']['body_classes'] = array(
+  $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Body Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#title' => t('And or Remove CSS Classes'),
+    '#description' => t('This is a fast and easy way to add or remove CSS classes during theme development so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site. Note that whenever you change the defaults you need to click "Reset to Defaults" to save them to the variables table and have them applied.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   // Body classes
-  $form['themedev']['dev']['body_classes']['cleanup_classes_section'] = array(
+  $form['themedev']['dev']['classses']['body_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Page Classes'),
+    '#description' => t('Page classes are added to the BODY element and apply to the whole page.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_section'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print section classes.'),
     '#default_value' => $settings['cleanup_classes_section'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_front'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_front'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .front and .not-front classes.'),
     '#default_value' => $settings['cleanup_classes_front'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_user_status'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_user_status'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .logged-in and .not-logged-in classes.'),
     '#default_value' => $settings['cleanup_classes_user_status'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_arg_one'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_arg_one'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .page-[arg(1)] classes.'),
     '#default_value' => $settings['cleanup_classes_arg_one'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_normal_path'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_normal_path'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .page-[$normal_path] classes.'),
     '#default_value' => $settings['cleanup_classes_normal_path'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_node_type'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_node_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-type-[type] classes.'),
     '#default_value' => $settings['cleanup_classes_node_type'],
   );
-  $form['themedev']['dev']['body_classes']['cleanup_classes_add_edit_delete'] = array(
+  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_add_edit_delete'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print classes for node add, edit and delete pages (.article-[arg]).'),
     '#default_value' => $settings['cleanup_classes_add_edit_delete'],
   );
   // Node classes
-  $form['themedev']['dev']['article_classes'] = array(
+  $form['themedev']['dev']['classses']['article_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Article Classes (nodes)'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#title' => t('Article Classes'),
+    '#description' => t('Article classes apply to nodes. They print in the main wrapper DIV for all articles (nodes) in node.tpl.php.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_id'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_id'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print a unique ID for each article e.g. #article-1.'),
     '#default_value' => $settings['cleanup_article_id'],
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_classes_sticky'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_sticky'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-sticky class for articles set to sticky.'),
     '#default_value' => $settings['cleanup_article_classes_sticky'],
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_classes_promote'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_promote'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-promoted class for articles promoted to front.'),
     '#default_value' => $settings['cleanup_article_classes_promote'],
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_classes_teaser'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_teaser'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-teaser class for teaser view (such as front page and taxonomy term lists of articles).'),
     '#default_value' => $settings['cleanup_article_classes_teaser'],
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_classes_preview'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_preview'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-preview class for article previews.'),
     '#default_value' => $settings['cleanup_article_classes_preview'],
   );
-  $form['themedev']['dev']['article_classes']['cleanup_article_classes_type'] = array(
+  $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .[content-type]-article classes.'),
     '#default_value' => $settings['cleanup_article_classes_type'],
   );
   // Comment classes
-  $form['themedev']['dev']['comment_classes'] = array(
+  $form['themedev']['dev']['classses']['comment_classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Comments Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#description' => t('Comment classes apply to node comments. They print in the main wrapper DIV for all comments in comment.tpl.php.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_anonymous'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_anonymous'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-anonymous for anonymous comments.'),
     '#default_value' => $settings['cleanup_comment_anonymous'],
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_article_author'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_article_author'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-article-author for author comments.'),
     '#default_value' => $settings['cleanup_comment_article_author'],
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_by_viewer'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_by_viewer'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-viewer for viewer comments.'),
     '#default_value' => $settings['cleanup_comment_by_viewer'],
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_new'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_new'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-new for new comments.'),
     '#default_value' => $settings['cleanup_comment_new'],
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_zebra'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_zebra'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .odd and .even classes for comments.'),
     '#default_value' => $settings['cleanup_comment_zebra'],
   );
-  $form['themedev']['dev']['comment_classes']['cleanup_comment_wrapper_type'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_wrapper_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print a content type class on the comments wrapper, e.g. .blog-comments, .forum-comments.'),
     '#default_value' => $settings['cleanup_comment_wrapper_type'],
   );
   // Block classes
-  $form['themedev']['dev']['block_classes'] = array(
+  $form['themedev']['dev']['classses']['block_classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Block Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#description' => t('Comment classes apply to blocks. They print in the main wrapper DIV for all blocks in block.tpl.php.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_block_module_delta'] = array(
+  $form['themedev']['dev']['classses']['block_classes']['cleanup_block_block_module_delta'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print a unique ID for each block (#block-module-delta).'),
     '#default_value' => $settings['cleanup_block_block_module_delta'],
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_classes_module'] = array(
+  $form['themedev']['dev']['classses']['block_classes']['cleanup_block_classes_module'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print a .block-[module] class.'),
     '#default_value' => $settings['cleanup_block_classes_module'],
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_classes_zebra'] = array(
+  $form['themedev']['dev']['classses']['block_classes']['cleanup_block_classes_zebra'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .odd and .even classes for blocks.'),
     '#default_value' => $settings['cleanup_block_classes_zebra'],
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_classes_region'] = array(
+  $form['themedev']['dev']['classses']['block_classes']['cleanup_block_classes_region'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .block-[region] classes.'),
     '#default_value' => $settings['cleanup_block_classes_region'],
   );
-  $form['themedev']['dev']['block_classes']['cleanup_block_classes_count'] = array(
+  $form['themedev']['dev']['classses']['block_classes']['cleanup_block_classes_count'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .block-[count] classes.'),
     '#default_value' => $settings['cleanup_block_classes_count'],
   );
   // Menu classes
-  $form['themedev']['dev']['menu_classes'] = array(
+  $form['themedev']['dev']['classses']['menu_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Menu and Primary/Secondary Links Classes'),
+    '#title' => t('Menu &amp; Primary and Secondary Links Classes'),
+    '#description' => t('Standard menus get their classes via the <code>theme_menu_tree</code> function override while the Primary and Secondary links use the <code>theme_links</code> function override (both are found in template.theme-overrides.inc). Note that the standard menu class options will not appear and will not be applied if the <a href="!link">DHTML Menu</a> module is installed.', array('!link' => 'http://drupal.org/project/dhtml_menu')),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   if (!function_exists('dhtml_menu_init')) {
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes'] = array(
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Menu Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     );
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_menu_class'] = array(
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_menu_class'] = array(
       '#type' => 'checkbox',
       '#title' => t('Print the ul.menu class.'),
       '#default_value' => $settings['cleanup_menu_menu_class'],
     );
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_leaf_class'] = array(
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_leaf_class'] = array(
       '#type' => 'checkbox',
       '#title' => t('Print the .leaf class on menu list items.'),
       '#default_value' => $settings['cleanup_menu_leaf_class'],
     );
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_first_last_classes'] = array(
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_first_last_classes'] = array(
       '#type' => 'checkbox',
       '#title' => t('Print the .first and .last classes on menu list items.'),
       '#default_value' => $settings['cleanup_menu_first_last_classes'],
     );
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['cleanup_menu_active_classes'] = array(
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_active_classes'] = array(
       '#type' => 'checkbox',
       '#title' => t('Print the .active classes on menu list items (active classes always print on the anchor).'),
       '#default_value' => $settings['cleanup_menu_active_classes'],
     );
   }
   else {
-    $form['themedev']['dev']['menu_classes']['#description'] = t('NOTICE: You currently have the DHTML Menu module installed. The custom menu class options have been disabled because this module will not work correctly with them enabled - you can still set classes for the Primary and Secondary links (below).');
-    $form['themedev']['dev']['menu_classes']['menu_menu_classes']['#disabled'] = 'disabled';
+    $form['themedev']['dev']['classses']['menu_classes']['#description'] = t('NOTICE: You currently have the DHTML Menu module installed. The custom menu class options have been disabled because this module will not work correctly with them enabled - you can still set classes for the Primary and Secondary links (below).');
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['#disabled'] = 'disabled';
   }
-  $form['themedev']['dev']['menu_classes']['menu_links_classes'] = array(
+  $form['themedev']['dev']['classses']['menu_classes']['menu_links_classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Primary and Secondary Links Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     );
-  $form['themedev']['dev']['menu_classes']['menu_links_classes']['cleanup_links_type_class'] = array(
+  $form['themedev']['dev']['classses']['menu_classes']['menu_links_classes']['cleanup_links_type_class'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print the type class on Primary and Secondary links.'),
     '#default_value' => $settings['cleanup_links_type_class'],
   );
-  $form['themedev']['dev']['menu_classes']['menu_links_classes']['cleanup_links_active_classes'] = array(
+  $form['themedev']['dev']['classses']['menu_classes']['menu_links_classes']['cleanup_links_active_classes'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print the active classes on Primary and Secondary links.'),
     '#default_value' => $settings['cleanup_links_active_classes'],
   );
   // Item list classes
-  $form['themedev']['dev']['itemlist_classes'] = array(
+  $form['themedev']['dev']['classses']['itemlist_classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Item list Classes'),
-    '#description' => t('Select which classes you require for your theme - this is for DEV only, once decided these should be set as defaults in the subthemes info file!'),
+    '#description' => t('Item list classes are applied using the <code>theme_item_list</code> function override in template.theme-overrides.inc'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['themedev']['dev']['itemlist_classes']['cleanup_item_list_zebra'] = array(
+  $form['themedev']['dev']['classses']['itemlist_classes']['cleanup_item_list_zebra'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .odd and .even classes for list items.'),
     '#default_value' => $settings['cleanup_item_list_zebra'],
   );
-  $form['themedev']['dev']['itemlist_classes']['cleanup_item_list_first_last'] = array(
+  $form['themedev']['dev']['classses']['itemlist_classes']['cleanup_item_list_first_last'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .first and .last classes for the first and last items in the list.'),
     '#default_value' => $settings['cleanup_item_list_first_last'],
