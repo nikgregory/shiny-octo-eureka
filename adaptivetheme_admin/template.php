@@ -29,7 +29,7 @@ if (arg(2) == 'block') {
  * @param $hook
  *   The name of the theme function being called.
  */
-function adaptivetheme_admin_preprocess_page(&$vars) {
+function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
   global $user;
   // Admin welcome message with date for the admin theme.
   if ($vars['logged_in']) {
