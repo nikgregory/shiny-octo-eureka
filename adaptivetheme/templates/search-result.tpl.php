@@ -48,7 +48,7 @@
 ?>
 <dt class="title"><a href="<?php print $url; ?>"><?php print $title; ?></a></dt>
 
-<?php if ($snippet or $info): ?>
+<?php if ($snippet or $info_split): ?>
   <dd>
     <?php if ($snippet) : ?>
       <p class="search-snippet"><?php print $snippet; ?></p>
@@ -58,23 +58,23 @@
       <p class="search-info">
   
         <?php if (isset($info_split['type'])) : ?>
-          <span class="search-info-type"><?php print $info_split['type'] . $info_separator; ?></span>
+          <span class="search-info-type"><?php print $info_split['type']; ?></span>
         <?php endif; ?>
 
         <?php if (isset($info_split['user'])) : ?>
-          <span class="search-info-user"><?php print $info_split['user'] . $info_separator; ?></span>
+          <span class="search-info-user"><?php print $info_separator . $info_split['user']; ?></span>
         <?php endif; ?>
    
         <?php if (isset($info_split['date'])) : ?>
-          <span class="search-info-date"><?php print $info_split['date'] . $info_separator; ?></span>
+          <span class="search-info-date"><?php print $info_separator . $info_split['date']; ?></span>
         <?php endif; ?>
 
         <?php if (isset($info_split['comment'])) : ?>
-          <span class="search-info-comment"><?php print $info_split['comment'] . $info_separator; ?></span>
+          <span class="search-info-comment"><?php print $info_separator . $info_split['comment']; ?></span>
         <?php endif; ?>
 
         <?php if (isset($info_split['upload'])) : ?>
-          <span class="search-info-upload"><?php print $info_split['upload']; ?></span>
+          <span class="search-info-upload"><?php print $info_separator . $info_split['upload']; ?></span>
         <?php endif; ?>
       </p>
     <?php endif; ?>
