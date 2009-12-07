@@ -6,10 +6,6 @@
  *  Modify search results based on theme settings.
  */
 
-static $search_zebra = 'even';
-$search_zebra = ($search_zebra == 'even') ? 'odd' : 'even';
-$vars['search_zebra'] = $search_zebra;
-
 $result = $vars['result'];
 $vars['url'] = check_url($result['link']);
 $variables['title'] = check_plain($result['title']);
