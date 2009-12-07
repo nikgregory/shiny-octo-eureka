@@ -166,16 +166,16 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // Search form
+  // Search forms
   $form['general_settings']['search']['search_form'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Search box form'),
+    '#title' => t('Search forms'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   $form['general_settings']['search']['search_form']['display_search_form_label'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Display the search box form label ("Search this site")'),
+    '#title' => t('Display the search form label <em>"Search this site"</em>'),
     '#default_value' => $settings['display_search_form_label'],
   );
   // Search results
@@ -709,39 +709,52 @@ SCRIPT;
   // Comment classes
   $form['themedev']['dev']['classses']['comment_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Comments Classes'),
-    '#description' => t('Comment classes apply to node comments. They print in the main wrapper DIV for all comments in comment.tpl.php.'),
+    '#title' => t('Comment Classes'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_anonymous'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comments'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Comments'),
+    '#description' => t('Comment classes apply to all comments. They print in comment.tpl.php on the wrapper DIV for each comment.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['classses']['comment_classes']['comments']['cleanup_comment_anonymous'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-anonymous for anonymous comments.'),
     '#default_value' => $settings['cleanup_comment_anonymous'],
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_article_author'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comments']['cleanup_comment_article_author'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-article-author for author comments.'),
     '#default_value' => $settings['cleanup_comment_article_author'],
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_by_viewer'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comments']['cleanup_comment_by_viewer'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-by-viewer for viewer comments.'),
     '#default_value' => $settings['cleanup_comment_by_viewer'],
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_new'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comments']['cleanup_comment_new'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .comment-new for new comments.'),
     '#default_value' => $settings['cleanup_comment_new'],
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_zebra'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comments']['cleanup_comment_zebra'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .odd and .even classes for comments.'),
     '#default_value' => $settings['cleanup_comment_zebra'],
   );
-  $form['themedev']['dev']['classses']['comment_classes']['cleanup_comment_wrapper_type'] = array(
+  $form['themedev']['dev']['classses']['comment_classes']['comment-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Comment Wrapper'),
+   '#description' => t('This class prints in comment-wrapper.tpl.php. The DIV wrapper encloses both the comments and the comment form (if on the same page).'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['classses']['comment_classes']['comment-wrapper']['cleanup_comment_wrapper_type'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print a content type class on the comments wrapper, e.g. .blog-comments, .forum-comments.'),
+    '#title' => t('Print a content type class on the comments wrapper i.e. .[content-type]-comments.'),
     '#default_value' => $settings['cleanup_comment_wrapper_type'],
   );
   // Block classes
