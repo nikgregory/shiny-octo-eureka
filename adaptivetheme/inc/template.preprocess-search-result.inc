@@ -8,11 +8,11 @@
 
 $result = $vars['result'];
 $vars['url'] = check_url($result['link']);
-$variables['title'] = check_plain($result['title']);
+$vars['title'] = check_plain($result['title']);
 
 // Check for snippets - user search does not include snippets.
 $vars['snippet'] = '';
-if (isset($result['snippet']) && theme_get_setting('search_snippet')) {
+if (!empty($result['snippet']) && theme_get_setting('search_snippet')) {
   $vars['snippet'] = $result['snippet'];
 }
   
@@ -41,3 +41,6 @@ $vars['info'] = implode(' - ', $info);
 
 // Provide alternate search result template.
 $vars['template_files'][] = 'search-result-'. $vars['type'];
+
+// info_separator
+$vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));

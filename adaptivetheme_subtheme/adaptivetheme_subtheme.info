@@ -163,6 +163,7 @@
   settings[search_info_date]                 = 1
   settings[search_info_comment]              = 1
   settings[search_info_upload]               = 1
+  settings[search_info_separator]            = ' - '
 
   settings[mission_statement_pages]          = 'home'
   settings[split_node_form]                  = 0

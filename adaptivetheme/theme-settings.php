@@ -216,6 +216,15 @@ SCRIPT;
     '#title' => t('Display attachment count'),
     '#default_value' => $settings['search_info_upload'],
   );
+  //search_info_separator
+  $form['general_settings']['search']['search_results']['search_info_separator'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search info separator'),
+    '#description' => t('Modify the separator. The default is a hypen with a space before and after.'),
+    '#default_value' => $settings['search_info_separator'],
+    '#size' => 8,
+    '#maxlength' => 10,
+  );
   // Node Settings
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
