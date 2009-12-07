@@ -280,6 +280,12 @@ dl.search-results dd p {}
 dl.search-results dd .search-snippet {}
 dl.search-results dd .search-info {}
 
+span.search-info-type {}
+span.search-info-user {}
+span.search-info-date {}
+span.search-info-comment {}
+span.search-info-upload  {}
+
 
 /**********************************************************
  *               Primary & Secondary Links
