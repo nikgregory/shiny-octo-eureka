@@ -714,6 +714,10 @@ position:relative;
 z-index:999;
 }
 
+#messages-and-help {
+padding:0 20px;
+}
+
 div.messages,div.help,div.error,div.warning {
 -moz-border-radius:6px;
 -webkit-border-radius:6px;
