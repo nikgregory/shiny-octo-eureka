@@ -152,3 +152,13 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
 else {
   $vars['terms'] = '';
 }
+
+// Display links
+$links_content_type = (theme_get_setting('display_links_enable_content_type') == 1) ? $vars['node']->type : 'default';
+$links_display = theme_get_setting('display_links_'. $links_content_type);
+if ((module_exists('node')) && ($links_display == 'all' || ($links_display == 'only' && $vars['page']))) {
+  $vars['links'] = $vars['links'];
+}
+else {
+  $vars['links'] = '';
+}

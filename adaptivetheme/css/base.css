@@ -1024,7 +1024,7 @@ float:left;
 width:100%;
 }
 
-.clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer,#footer-region,#footer-message,.block,#block-admin-display-form,.fieldset-layout-settings .layout-method,.fieldset-layout-settings .layout-help,.fieldset-layout-settings .page-width {
+.clear,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer,#footer-region,#footer-message,.block,#block-admin-display-form,.fieldset-layout-settings .layout-method,.fieldset-layout-settings .layout-help,.fieldset-layout-settings .page-width {
 clear:both;
 }
 

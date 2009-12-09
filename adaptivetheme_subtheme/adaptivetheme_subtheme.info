@@ -177,6 +177,9 @@
   settings[submitted_by_date_default]        = 1
   settings[submitted_by_enable_content_type] = 0
 
+  settings[display_links_default]            = 'all'
+  settings[display_links_enable_content_type]= 0
+
   settings[rebuild_registry]                 = 0
   settings[show_theme_info]                  = 0
   settings[load_firebug_lite]                = 0

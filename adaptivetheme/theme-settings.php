@@ -56,6 +56,7 @@ SCRIPT;
     $defaults["taxonomy_delimiter_{$type}"] = $defaults['taxonomy_delimiter_default'];
     $defaults["submitted_by_author_{$type}"] = $defaults['submitted_by_author_default'];
     $defaults["submitted_by_date_{$type}"] = $defaults['submitted_by_date_default'];
+    $defaults["display_links_{$type}"] = $defaults['display_links_default'];
   }
 
   // Merge the saved variables and their default values
@@ -357,6 +358,47 @@ SCRIPT;
       }
     }
   }
+  // Links display
+  $form['node_type_specific']['links_container'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Links'),
+    '#description' => t('Links are the "links" displayed at the bottom of articles.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // Default & content-type specific settings
+  foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
+    $form['node_type_specific']['links_container']['links'][$type] = array(
+      '#type' => 'fieldset',
+      '#title' => t('!name', array('!name' => t($name))),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['node_type_specific']['links_container']['links'][$type]["display_links_{$type}"] = array(
+      '#type' => 'select',
+      '#title' => t('Display Links'),
+      '#default_value' => $settings['display_links_default'],
+      '#options' => array(
+        'never' => t('Never display links'),
+        'all' => t('Always display links'),
+        'only' => t('Only display links on full nodes'),
+      ),
+    );
+    // Options for default settings
+    if ($type == 'default') {
+      $form['node_type_specific']['links_container']['links']['default']['#title'] = t('Default');
+      $form['node_type_specific']['links_container']['links']['default']['#collapsed'] = $settings['display_links_enable_content_type'] ? TRUE : FALSE;
+      $form['node_type_specific']['links_container']['links']['display_links_enable_content_type'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Use content-type specific settings.'),
+        '#default_value' => $settings['display_links_enable_content_type'],
+      );
+    }
+    // Collapse content-type specific settings if default settings are being used
+    else if ($settings['display_links_enable_content_type'] == 0) {
+      $form['links'][$type]['#collapsed'] = TRUE;
+    }
+  }
   // Layout settings
   $form['layout'] = array(
     '#type' => 'fieldset',
@@ -371,7 +413,7 @@ SCRIPT;
       '#title' => t('Page Layout'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#description' => t('Use these settings to customize the layout of your site. NOTE: If you have the built-in Admin theme enabled these settings will not affect the Admin section; they only apply to the "front end" theme. If no overrides are set the default layout will apply.'),
+      '#description' => t('Use these settings to customize the layout of your theme.'),
     );
     if ($settings['layout_enable_width'] == 'on') {
       $form['layout']['page_layout']['layout_width_help'] = array(
@@ -570,14 +612,14 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['at_user_menu'],
-    '#description' => t('This will show or hide useful links in the header depending on what permissions the users role has been assigned.'),
+    '#description' => t('This will show or hide useful links in the header. NOTE that if the <a href="!link">Admin Menu</a> module is installed most links will not show up because they are included in the Admin Menu.', array('!link' => 'http://drupal.org/project/admin_menu')),
   );
   // Show block edit links
   $form['admin_settings']['administration']['block_edit_links'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show block editing and configuration links.'),
     '#default_value' => $settings['block_edit_links'],
-    '#description' => t('When hovering or over a block or viewing blocks in the blocks list page, privileged users will see block editing and configuration links.'),
+    '#description' => t('When hovering over a block or viewing blocks in the blocks list page privileged users will see block editing and configuration links.'),
   );
   // Hide help messages
   $form['admin_settings']['administration']['at_admin_hide_help'] = array(
