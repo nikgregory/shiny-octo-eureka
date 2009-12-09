@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com 62
+// adaptivethemes.com
 
 /**
  * @file template.preprocess-node.inc
@@ -141,9 +141,9 @@ if ((module_exists('taxonomy')) && ($taxonomy_display == 'all' || ($taxonomy_dis
         $output .= implode("", $links);
         $output .= '</ul></li>';
         }
-        if ($output != '') {
-          $output = '<ul class="taxonomy">'. $output .'</ul>';
-        }
+      }
+      if ($output != '') {
+        $output = '<ul class="taxonomy">'. $output .'</ul>';
       }
       break;
   }
