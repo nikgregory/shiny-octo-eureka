@@ -25,6 +25,19 @@ float:left;
 width:160px;
 }
 
+/* Markup free clearing */
+#leaderboard,
+#secondary-content,
+#content-top,
+#content-aside,
+#content-bottom
+#tertiary-content,
+#footer,
+#footer-region {
+overflow:hidden;
+zoom:1; /* change zoom:1; to width:100%; if you need valid CSS */
+}
+
 /* User menu */
 #user-menu {
 float:right;
