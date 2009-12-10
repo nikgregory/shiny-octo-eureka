@@ -129,6 +129,13 @@ else {
   $classes[] = 'one-sidebar sidebar-'. $vars['layout'];
 }
 
+// Stab at grabbing the context classes...
+foreach (context_active_contexts() as $context) {
+  if (!empty($context->theme_section['class'])) {
+    $classes[$context->theme_section['class']] = $context->theme_section['class'];
+  }
+}
+
 // $classes is the varaible that will hold the page classes, and is printed in page tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
 
