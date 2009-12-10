@@ -109,7 +109,6 @@ width:940px;
 
 /* Containers and helpers. */
 #container {
-overflow:hidden;
 position:relative;
 width:960px;
 margin:0 auto;
@@ -240,13 +239,20 @@ height:0;
 visibility:hidden;
 }
 
-/* Hides from IE-mac \*/
-* html .clearfix {
-height:1%;
+.clearfix {
+display:inline-block;
 }
 
-/* End hide from IE-mac 
- Tables */
+/* Hides from IE5/mac \*/
+* html .clearfix {
+height:1px;
+}
+.clearfix {
+display:block;
+}
+/* End hide from IE5/mac */ 
+
+/* Tables */
 table {
 border-spacing:0;
 border-color:silver;
