@@ -129,11 +129,11 @@ else {
   $classes[] = 'one-sidebar sidebar-'. $vars['layout'];
 }
 
-// Stab at grabbing Context module classes...
+// Support for Context module body classes.
 if (function_exists('context_context')) {
   foreach (context_active_contexts() as $context) {
     if (!empty($context->theme_section['class'])) {
-     $classes[$context->theme_section['class']] = $context->theme_section['class'];
+     $classes[] = $context->theme_section['class'];
     }
   }
 }
