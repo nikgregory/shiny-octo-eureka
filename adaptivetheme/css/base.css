@@ -966,6 +966,10 @@ width:69%;
 border-color:#DADADA !important;
 }
 
+.vertical-tabs input.form-text {
+width:95%;
+}
+
 /**
  * Contains basic styles block config page.
  */

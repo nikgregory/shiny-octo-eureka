@@ -50,9 +50,6 @@ function adaptivetheme_subtheme_preprocess(&$vars, $hook) {
 /*
 function adaptivetheme_subtheme_preprocess_page(&$vars, $hook) {
   $vars['sample_variable'] = t('Lorem ipsum.');
-  // Expose the theme info in Krumo, requires the Devel module.
-  // global $theme_info;
-  // dpm($theme_info);
 }
 */
 
