@@ -24,9 +24,7 @@ function adaptivetheme_subtheme_settings($saved_settings) {
   // Merge the saved variables and their default values.
   $settings = array_merge($defaults, $saved_settings);
 
-  /*
-   * Create the form using Forms API: http://api.drupal.org/api/6
-   */
+  // Create the form using Forms API: http://api.drupal.org/api/6
   $form = array();
   // Color schemes
   if ($settings['color_enable_schemes'] == 'on') {

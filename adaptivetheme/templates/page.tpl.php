@@ -146,7 +146,7 @@
       <?php endif; ?>
 
       <?php if ($search_box): ?>
-        <div id="search-box" class="clearfix"><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box"><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
 
       <?php if ($header): ?>
@@ -240,7 +240,7 @@
     <?php endif; ?>
 
     <?php if ($footer or $footer_message or $feed_icons): ?>
-      <div id="footer" class="clearfix">
+      <div id="footer">
 
         <?php if ($footer): ?>
           <div id="footer-region"><?php print $footer; ?></div> <!-- /footer-region -->

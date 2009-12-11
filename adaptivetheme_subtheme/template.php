@@ -1,5 +1,5 @@
 <?php // $Id$
-// adaptivethemes.com st
+// adaptivethemes.com
 
 /**
  * @file template.php
@@ -21,7 +21,7 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
  * 1. Rename each function to match your subthemes name, 
  *    e.g. if you name your theme "themeName" then the function 
  *    name will be "themeName_preprocess_hook".
- * 2. Uncomment the required fucntion to use. You can delete the
+ * 2. Uncomment the required function to use. You can delete the
  *    "sample_variable".
  */
 

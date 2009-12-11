@@ -1013,7 +1013,7 @@ top:10px;
 right:15px;
 }
 
-#container > #main-content,#container > #columns,.clearfix {
+.content-inner > #main-content,#container > #columns {
 display:block;
 }
 

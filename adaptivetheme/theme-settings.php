@@ -10,9 +10,9 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-set
 
 /**
 * Implementation of themehook_settings() function.
-* The original concept of these advanced theme settings
-* comes from the Acquia Marina theme, although they have been
-* massivly changed and added to. Kudos to TNT for the inspiration.
+* The inspiration for these theme settings comes mainly from three themes - Zen,
+* Acquia Marina and Mothership. I have added many other settings and refactored most
+* of the original code to suit our purpose. Kudos to those who did it first.
 *
 * @param $saved_settings
 *   An array of saved settings for this theme.
@@ -62,7 +62,7 @@ SCRIPT;
   // Merge the saved variables and their default values
   $settings = array_merge($defaults, $saved_settings);
 
-  // Create theme settings form widgets using Forms API
+  // Create the form using Forms API: http://api.drupal.org/api/6
   // General Settings
   $form['general_settings'] = array(
     '#type' => 'fieldset',
@@ -639,7 +639,7 @@ SCRIPT;
   // Rebuild registry
   $form['themedev']['dev']['rebuild_registry'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Rebuild theme registry on every page.'),
+    '#title' => t('Rebuild the theme registry on every page load.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
