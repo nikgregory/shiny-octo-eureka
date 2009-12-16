@@ -1,5 +1,6 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file views-view.tpl.php
  * Main view template
@@ -80,4 +81,4 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-</div>
+</div> <!-- /views-view -->

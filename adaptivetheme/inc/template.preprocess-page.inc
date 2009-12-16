@@ -138,6 +138,14 @@ if (function_exists('context_context')) {
   }
 }
 
+// Language specific body class.
+if (theme_get_setting('cleanup_classes_language')) {
+  if (function_exists('locale')) {
+    global $language;
+    $classes[] = 'lang-'. $language->language;
+  }
+}
+
 // $classes is the varaible that will hold the page classes, and is printed in page tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
 

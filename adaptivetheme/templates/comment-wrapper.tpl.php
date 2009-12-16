@@ -34,7 +34,7 @@
 <?php if ($content): ?>
   <div id="comments"<?php print $classes ? ' class="'. $classes .'"' : '' ; ?>>
     <?php if ($node->comment_count != 0): ?>
-      <h2 id="comments-title"<?php if ($node->type == 'forum') { print ' class="element-invisible"'; } ?>>
+      <h2 id="comments-title"<?php $node->type == 'forum' ? print ' class="element-invisible"' : ''; ?>>
         <?php print t('Comments'); ?>
       </h2>
     <?php endif; ?>

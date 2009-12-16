@@ -419,7 +419,7 @@ SCRIPT;
       $form['layout']['page_layout']['layout_width_help'] = array(
         '#prefix' => '<div class="layout-help">',
         '#suffix' => '</div>',
-        '#value' => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page. Each width increment is 60px or 1 grid column.</dd></dl>'),
+        '#value' => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page.</dd></dl>'),
       );
       $form['layout']['page_layout']['layout_width'] = array(
         '#type' => 'select',
@@ -445,7 +445,7 @@ SCRIPT;
       $form['layout']['page_layout']['layout_sidebar_help'] = array(
         '#prefix' => '<div class="layout-help">',
         '#suffix' => '</div>',
-        '#value' => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. Increments are in 60px or 1 grid column. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
+        '#value' => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
       );
       $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
         '#type' => 'select',
@@ -456,6 +456,7 @@ SCRIPT;
         '#options' => array(
           '60' => t('60px'),
           '120' => t('120px'),
+          '160' => t('160px'),
           '180' => t('180px'),
           '240' => t('240px'),
           '300' => t('300px'),
@@ -483,6 +484,7 @@ SCRIPT;
         '#options' => array(
           '60' => t('60px'),
           '120' => t('120px'),
+          '160' => t('160px'),
           '180' => t('180px'),
           '240' => t('240px'),
           '300' => t('300px'),
@@ -719,6 +721,13 @@ SCRIPT;
     '#title' => t('Print classes for node add, edit and delete pages (.article-[arg]).'),
     '#default_value' => $settings['cleanup_classes_add_edit_delete'],
   );
+  if (function_exists('locale')) {
+   $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_language'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print classes for Locale page language such as .lang-en, .lang-sv'),
+      '#default_value' => $settings['cleanup_classes_language'],
+    );
+  }
   // Node classes
   $form['themedev']['dev']['classses']['article_classes'] = array(
     '#type' => 'fieldset',
@@ -744,19 +753,26 @@ SCRIPT;
   );
   $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_teaser'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print .article-teaser class for teaser view (such as front page and taxonomy term lists of articles).'),
+    '#title' => t('Print .article-teaser class on article teasers.'),
     '#default_value' => $settings['cleanup_article_classes_teaser'],
   );
   $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_preview'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .article-preview class for article previews.'),
     '#default_value' => $settings['cleanup_article_classes_preview'],
-  );
+  );  
   $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .[content-type]-article classes.'),
     '#default_value' => $settings['cleanup_article_classes_type'],
   );
+  if (function_exists('i18n_init')) {
+    $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_language'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print .article-lang-[language] classes (requires i18n module)'),
+      '#default_value' => $settings['cleanup_article_classes_language'],
+    );
+  }
   // Comment classes
   $form['themedev']['dev']['classses']['comment_classes'] = array(
     '#type' => 'fieldset',

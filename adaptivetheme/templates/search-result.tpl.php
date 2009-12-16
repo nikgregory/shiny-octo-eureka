@@ -84,4 +84,4 @@
       </p>
     <?php endif; ?>
   </dd>
-<?php endif; ?>
+<?php endif; ?> <!-- /search-result -->

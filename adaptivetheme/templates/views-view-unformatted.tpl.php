@@ -1,5 +1,6 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file views-view-unformatted.tpl.php
  * Default simple view template to display a list of rows.
@@ -14,4 +15,4 @@
   <div class="views-row-item <?php print $classes[$id]; ?>">
     <?php print $row; ?>
   </div>
-<?php endforeach; ?><!-- /views-view-unformatted -->
+<?php endforeach; ?> <!-- /views-view-unformatted -->

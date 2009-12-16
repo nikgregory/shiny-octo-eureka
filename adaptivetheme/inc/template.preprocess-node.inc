@@ -64,6 +64,16 @@ if (theme_get_setting('cleanup_article_classes_type')) {
   $classes[] = $vars['node']->type .'-article';
 }
 
+// Language specific body class.
+if (theme_get_setting('cleanup_article_classes_language')) {
+  if (function_exists('i18n_init')) {
+    if ($vars['node']->language) {
+      global $language;
+      $classes[] = 'article-lang-'. $vars['node']->language;
+    }
+  }
+}
+
 // $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
   

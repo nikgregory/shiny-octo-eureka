@@ -44,4 +44,4 @@
     <?php print t('Advanced Search'); ?>
   </a>
 */
-?><!-- /search-block-form -->
+?> <!-- /search-block-form -->

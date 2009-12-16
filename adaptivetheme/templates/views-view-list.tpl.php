@@ -1,5 +1,6 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file views-view-list.tpl.php
  * Default simple view template to display a list of rows.
@@ -18,4 +19,4 @@
       <li class="views-row-item <?php print $classes[$id]; ?>"><?php print $row; ?></li>
     <?php endforeach; ?>
   </<?php print $options['type']; ?>>
-</div>
+</div> <!-- /views-view-list -->

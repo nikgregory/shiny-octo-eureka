@@ -33,7 +33,7 @@ padding:0 10px;
 }
 
 /* Skinr grid classes. */
-.grid-1,.grid-2,.grid-3,.grid-4-16,.grid-4-12,.grid-5,.grid-6,.grid-7,.grid-8,.grid-9,.grid-10,.grid-11,.grid-12,.grid-13,.grid-14,.grid-15,.grid-16 {
+.grid-1,.grid-2-12,.grid-2-16,.grid-3,.grid-4-16,.grid-4-12,.grid-5,.grid-6,.grid-7,.grid-8,.grid-9,.grid-10,.grid-11,.grid-12,.grid-13,.grid-14,.grid-15,.grid-16 {
 float:left;
 clear:none !important;
 display:inline;
@@ -43,8 +43,12 @@ display:inline;
 width:40px;
 }
 
-.grid-2 {
+.grid-2-16 {
 width:100px;
+}
+
+.grid-2-12 {
+width:140px;
 }
 
 .grid-3 {

@@ -45,4 +45,4 @@
     <?php print t('Advanced Search'); ?>
   </a>
 */
-?><!-- /search -->
+?> <!-- /search-theme-form -->

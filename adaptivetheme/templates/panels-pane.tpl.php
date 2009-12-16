@@ -1,5 +1,6 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file panels-pane.tpl.php
  * Main panel pane template
@@ -50,4 +51,4 @@
       <?php print $more; ?>
     </div>
   <?php endif; ?>
-</div>
+</div> <!-- /panels-pane -->
