@@ -74,7 +74,7 @@ if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
 }
 
 // Add classes for the horizontal login block if enabled.
-if (theme_get_setting('horizontal_login_block')  && $block->module = 'user' && $block->delta == '0') {
+if (theme_get_setting('horizontal_login_block')  && $block->module == 'user' && $block->delta == '0') {
   $classes[] = 'at-horizontal-login clearfix';
 }
 

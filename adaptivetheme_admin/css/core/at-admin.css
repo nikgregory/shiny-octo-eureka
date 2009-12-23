@@ -105,9 +105,10 @@ background:#464646;
 }
 
 .header-inner {
+margin:0 auto;
 position:relative;
 max-width:1260px;
-min-width:960px;
+min-width:760px;
 min-height:80px;
 }
 
