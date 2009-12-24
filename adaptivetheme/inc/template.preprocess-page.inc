@@ -130,7 +130,7 @@ else {
 }
 
 // Support for Context module body classes.
-if (function_exists('context_context')) {
+if (module_exists('context')) { // use module_exists, its slower but I cant be sure all fucntions will survive development.
   foreach (context_active_contexts() as $context) {
     if (!empty($context->theme_section['class'])) {
      $classes[] = $context->theme_section['class'];
@@ -212,7 +212,7 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
 
 // Display mission statement on all pages.
 if (theme_get_setting('mission_statement_pages') == 'all') {
-  $vars['mission'] = theme_get_setting('mission', FALSE);  
+  $vars['mission'] = theme_get_setting('mission', FALSE);
 }
 
 // Show $theme_info output using krumo.

@@ -17,11 +17,11 @@
   <?php print $head; ?>
   <?php print $styles; ?>
   <?php print $scripts; ?>
-</head>      
+</head>
 <body class="<?php print $body_classes; ?>">
   <div id="container">
     <div id="header" class="clear-block">
-      <?php if ($site_logo or $site_name or $site_slogan): ?>
+      <?php if ($logo or $site_name or $site_slogan): ?>
         <div id="branding">
           <?php if (!empty($logo)): ?>
             <a href="<?php print $base_path; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
@@ -48,7 +48,6 @@
       </div></div> <!-- /content-column -->
     </div></div> <!-- /columns -->
   </div> <!-- /container -->
-  <?php print $attribution; ?>
   <?php print $closure ?>
 </body>
 </html>

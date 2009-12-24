@@ -1096,3 +1096,8 @@ position:absolute;
 margin:0;
 padding:0;
 }
+
+/* Maintenance mode */
+.in-maintenance h1#page-title {
+padding:10px;
+}
