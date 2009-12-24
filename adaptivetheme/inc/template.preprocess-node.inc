@@ -76,20 +76,20 @@ if (theme_get_setting('cleanup_article_classes_language')) {
 
 // $classes is the variable that holds the node classes and is printed in node tpl files.
 $vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
-  
+
 // Add article_aside region content.
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
   if ($vars['page']) {
-    drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning'); 
+    drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning');
   }
   else {
     $vars['unpublished'] = '<span class="unpublished">'. t('Unpublished') .'</span>';
   }
 }
-  
+
 // Node Theme Settings.
 // Date & author theme settings.
 if (!function_exists('submitted_by_node_submitted')) {

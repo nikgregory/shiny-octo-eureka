@@ -17,7 +17,7 @@ function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
   $block = $vars['block'];
     // Display 'Edit this block' link for block module blocks.
     if ($block->module == 'block') {
-      $edit_links[] = l('<span>'. t('Edit Block') .'</span>', 'admin/build/block/configure/'. $block->module .'/'. $block->delta, 
+      $edit_links[] = l('<span>'. t('Edit Block') .'</span>', 'admin/build/block/configure/'. $block->module .'/'. $block->delta,
         array(
           'attributes' => array(
             'class' => 'block-edit-link edit-block-block',
@@ -44,7 +44,7 @@ function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
     // Display 'Edit Menu' for menu blocks.
     if (($block->module == 'menu' || ($block->module == 'user' && $block->delta == 1)) && user_access('administer menu')) {
       $menu_name = ($block->module == 'user') ? 'navigation' : $block->delta;
-      $edit_links[] = l('<span>'. t('Edit Menu') .'</span>', 'admin/build/menu-customize/'. $menu_name, 
+      $edit_links[] = l('<span>'. t('Edit Menu') .'</span>', 'admin/build/menu-customize/'. $menu_name,
         array(
           'attributes' => array(
             'class' => 'block-edit-link edit-block-menu',

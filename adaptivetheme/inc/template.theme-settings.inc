@@ -7,7 +7,7 @@
  */
 
 /**
- * Return the default values from the info file 
+ * Return the default values from the info file
  * and save them into the database. The theme settings functions
  * code mostly comes from the Zen theme, whose inplimentation
  * for subthemes is superb.

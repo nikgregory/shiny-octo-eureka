@@ -26,7 +26,7 @@ function safe_string($string) {
  * @param $lenght
  *   The lenght of the trimmed string
  * @$ellipsis
- *   
+ *
  * @return
  *   The converted string
  */

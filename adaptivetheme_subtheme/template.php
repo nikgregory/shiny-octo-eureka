@@ -5,8 +5,11 @@
  * @file template.php
  */
 
-// Include base theme custom functions.
-include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+// Don't include custom functions if the database is inactive.
+if (db_is_active()) {
+  // Include base theme custom functions.
+  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+}
 
 /**
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
@@ -18,8 +21,8 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
 
 /**
  * USAGE
- * 1. Rename each function to match your subthemes name, 
- *    e.g. if you name your theme "themeName" then the function 
+ * 1. Rename each function to match your subthemes name,
+ *    e.g. if you name your theme "themeName" then the function
  *    name will be "themeName_preprocess_hook".
  * 2. Uncomment the required function to use. You can delete the
  *    "sample_variable".

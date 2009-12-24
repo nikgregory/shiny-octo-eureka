@@ -15,7 +15,7 @@ $vars['snippet'] = '';
 if (!empty($result['snippet']) && theme_get_setting('search_snippet')) {
   $vars['snippet'] = $result['snippet'];
 }
-  
+
 $info = array();
 if (!empty($result['type']) && theme_get_setting('search_info_type')) {
   $info['type'] = check_plain($result['type']);

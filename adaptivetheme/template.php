@@ -6,7 +6,7 @@
  * Its probabably not a good idea to modify anything in this file.
  */
 
-// Run nothing is the database is inactive.
+// Run nothing if the database is inactive.
 if (db_is_active()) {
   /**
    * Implementation of hook_theme

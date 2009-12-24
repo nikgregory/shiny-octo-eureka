@@ -5,8 +5,11 @@
  * @file template.php
  */
 
-// Include base theme custom functions.
-include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+// Don't include custom functions if the database is inactive.
+if (db_is_active()) {
+  // Include base theme custom functions.
+  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+}
 
 /**
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
@@ -35,7 +38,7 @@ function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
   if ($vars['logged_in']) {
     $welcome = t('Welcome') .' '. check_plain($user->name);
     $conjunction = ', '. t('it\'s') .' ';
-    $todays_date = date("l, jS F, Y" , time()); 
+    $todays_date = date("l, jS F, Y" , time());
     $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
   }
 }

@@ -58,7 +58,7 @@ $vars['classes'] = implode(' ', $classes);
 if (variable_get('comment_subject_field', 1) == 0) {
   $vars['title'] = '';
 }
-  
+
 // Date & author theme settings.
 if (!function_exists('submitted_by_comment_submitted')) {
   $submitted_by = t('by ') .'<em class="author">'.  theme('username', $vars['comment']) .'</em>';
