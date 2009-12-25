@@ -59,19 +59,10 @@ if (!empty($vars['secondary_links'])) {
 // Attribution.
 $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
 
-// Body Classes.
-$vars['layout'] = 'none';
-if (!empty($vars['left'])) {
-  $vars['layout'] = 'first';
-}
-if (!empty($vars['right'])) {
-  $vars['layout'] = ($vars['layout'] == 'first') ? 'both' : 'last';
-}
+// Body classes - manipulate for our own ends, in Drupal 7 we can drop most of these shenanagins.
+$classes = explode(' ', $vars['body_classes']);
 
-$classes = array();
-
-// Section class. The section class is printed on the body element and allows you to theme site sections.
-// We use the path alias otherwise all nodes will be in "section-node".
+// Section class - use the path alias otherwise all nodes will be in "section-node".
 if (theme_get_setting('cleanup_classes_section')) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
@@ -80,32 +71,50 @@ if (theme_get_setting('cleanup_classes_section')) {
   }
 }
 
-if (theme_get_setting('cleanup_classes_front')) {
-  $classes[] = $vars['is_front'] ? 'front' : 'not-front';
+// Unset Drupals page-arg(0) class.
+if ($index = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. drupal_strtolower(arg(0))), $classes)) {
+  unset($classes[$index]);
 }
 
-if (theme_get_setting('cleanup_classes_user_status')) {
-  $classes[] = $vars['logged_in'] ? 'logged-in' : 'not-logged-in';
+// Replace "node-type" with the more semantic "article-type".
+$classes = str_replace('node-type-', 'article-type-', $classes);
+
+// Replace left and right with first and last - better support for RTL.
+$classes = str_replace('sidebar-left', 'sidebar-first', $classes);
+$classes = str_replace('sidebar-right', 'sidebar-last', $classes);
+
+// .front and .not-front classes.
+if (in_array('front', $classes)) {
+  theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('front', '', $classes);
+}
+if (in_array('not-front', $classes)) {
+  theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('not-front', '', $classes);
 }
 
-if (theme_get_setting('cleanup_classes_arg_one')) {
-  $classes[] = preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. safe_string(arg(0)));
+// User status classes.
+if (in_array('logged-in', $classes)) {
+  theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('logged-in', '', $classes);
+}
+if (in_array('not-logged-in', $classes)) {
+  theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('not-logged-in', '', $classes);
 }
 
-if (theme_get_setting('cleanup_classes_node_type')) {
-  if (isset($vars['node']) && $vars['node']->type) {
-    $classes[] = 'article-type-'. safe_string($vars['node']->type);
-  }
+// Article type classes.
+if (in_array('article-type-'. $vars['node']->type, $classes)) {
+  theme_get_setting('cleanup_classes_node_type') ? '' : $classes = str_replace('article-type-'. $vars['node']->type, '', $classes);
 }
 
 if (!$vars['is_front']) {
+  // Replacement for Drupals page-arg(0) class, instead we print page-$normal_page.
   if (theme_get_setting('cleanup_classes_normal_path')) {
     $normal_path = drupal_get_normal_path($_GET['q']);
     $classes[] = safe_string('page-'. $normal_path);
   }
+  // AT can use this class to restyle the blocks page.
   if (arg(2) == 'block') {
     $classes[] = 'page-block';
   }
+  // Add extra classes for node add, edit and delete pages.
   if (theme_get_setting('cleanup_classes_add_edit_delete')) {
     if (arg(0) == 'node') {
       if (arg(1) == 'add') {
@@ -118,26 +127,6 @@ if (!$vars['is_front']) {
   }
 }
 
-// Add information about the number of sidebars.
-if ($vars['layout'] == 'both') {
-  $classes[] = 'two-sidebars';
-}
-elseif ($vars['layout'] == 'none') {
-  $classes[] = 'no-sidebars';
-}
-else {
-  $classes[] = 'one-sidebar sidebar-'. $vars['layout'];
-}
-
-// Support for Context module body classes.
-if (module_exists('context')) { // use module_exists, its slower but I cant be sure all fucntions will survive development.
-  foreach (context_active_contexts() as $context) {
-    if (!empty($context->theme_section['class'])) {
-     $classes[] = $context->theme_section['class'];
-    }
-  }
-}
-
 // Language specific body class.
 if (theme_get_setting('cleanup_classes_language')) {
   if (function_exists('locale')) {
@@ -146,8 +135,8 @@ if (theme_get_setting('cleanup_classes_language')) {
   }
 }
 
-// $classes is the varaible that will hold the page classes, and is printed in page tpl files.
-$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
+// $classes is the varaible that holds the page classes, printed in page tpl files.
+$vars['classes'] = implode(' ', $classes);
 
 // Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {

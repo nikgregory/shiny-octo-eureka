@@ -564,8 +564,8 @@ SCRIPT;
     );
     foreach ($equalized_blocks as $name => $title) {
       $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
-        '#type' => 'checkbox', 
-        '#title' => $title, 
+        '#type' => 'checkbox',
+        '#title' => $title,
         '#default_value' => $settings['equalize_'. $name]);
     }
   // Horizonatal login block
@@ -688,7 +688,7 @@ SCRIPT;
   );
   $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_section'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print section classes.'),
+    '#title' => t('Print section classes (.section-$section, uses the path-alias)'),
     '#default_value' => $settings['cleanup_classes_section'],
   );
   $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_front'] = array(
@@ -700,11 +700,6 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Print .logged-in and .not-logged-in classes.'),
     '#default_value' => $settings['cleanup_classes_user_status'],
-  );
-  $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_arg_one'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .page-[arg(1)] classes.'),
-    '#default_value' => $settings['cleanup_classes_arg_one'],
   );
   $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_normal_path'] = array(
     '#type' => 'checkbox',
@@ -718,7 +713,7 @@ SCRIPT;
   );
   $form['themedev']['dev']['classses']['body_classes']['cleanup_classes_add_edit_delete'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print classes for node add, edit and delete pages (.article-[arg]).'),
+    '#title' => t('Print classes for article add, edit and delete pages (.article-[arg]).'),
     '#default_value' => $settings['cleanup_classes_add_edit_delete'],
   );
   if (function_exists('locale')) {
@@ -760,7 +755,7 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Print .article-preview class for article previews.'),
     '#default_value' => $settings['cleanup_article_classes_preview'],
-  );  
+  );
   $form['themedev']['dev']['classses']['article_classes']['cleanup_article_classes_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Print .[content-type]-article classes.'),

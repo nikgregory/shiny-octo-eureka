@@ -83,7 +83,6 @@
   settings[cleanup_classes_section]           = 0
   settings[cleanup_classes_front]             = 0
   settings[cleanup_classes_user_status]       = 0
-  settings[cleanup_classes_arg_one]           = 0
   settings[cleanup_classes_normal_path]       = 0
   settings[cleanup_classes_node_type]         = 0
   settings[cleanup_classes_add_edit_delete]   = 0
