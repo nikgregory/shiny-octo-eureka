@@ -34,52 +34,52 @@ if (theme_get_setting('cleanup_block_block_module_delta')) {
 // Special classes for blocks, emulate Drupal 7.
 $classes = array();
 $classes[] = 'block';
-
 if (theme_get_setting('cleanup_block_classes_module')) {
   $classes[] = 'block-'. $block->module;
 }
-
 if (theme_get_setting('cleanup_block_classes_zebra')) {
   $classes[] = $vars['block_zebra']; // odd, even zebra class
 }
-
 if (theme_get_setting('cleanup_block_classes_region')) {
   $classes[] = 'block-'. safe_string($block->region); // block-[region] class
 }
-
 if (theme_get_setting('cleanup_block_classes_count')) {
   $classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
 }
-
 // Add special classes to support the http://drupal.org/project/blocktheme module.
 if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
   $classes[] = $vars['blocktheme'];
   $classes[] = safe_string($block->region) .'-'. $vars['blocktheme'];
 }
-
 // Add special classes to support the http://drupal.org/project/block_class module.
 if (function_exists('block_class') && block_class($block)) {
   $classes[] = block_class($block);
   $classes[] = safe_string($block->region) .'-'. block_class($block);
 }
-
 // Add support for Skinr module classes http://drupal.org/project/skinr.
 if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
-
 // Add class for block edit links if enabled.
 if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   $classes[] = 'block-edit-links';
 }
-
 // Add classes for the horizontal login block if enabled.
 if (theme_get_setting('horizontal_login_block')  && $block->module == 'user' && $block->delta == '0') {
   $classes[] = 'at-horizontal-login clearfix';
 }
-
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
 $vars['classes'] = implode(' ', $classes);
+
+// Set title classes
+$title_classes = array();
+if (theme_get_setting('cleanup_headings_title_class')) {
+  $title_classes[] = 'title';
+}
+if (theme_get_setting('cleanup_headings_namespaced_class')) {
+  $title_classes[] = 'block-title';
+}
+$vars['title_classes'] = implode(' ', $title_classes);
 
 // Collapsible block admin blocks.
 if (arg(2) == 'block') {

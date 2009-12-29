@@ -119,6 +119,9 @@
 
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
+  
+  settings[cleanup_headings_title_class]      = 1
+  settings[cleanup_headings_namespaced_class] = 1
 
   settings[at_user_menu]                      = 1
   settings[block_edit_links]                  = 1

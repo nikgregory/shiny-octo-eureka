@@ -52,7 +52,18 @@ else {
 }
 $vars['classes'] = implode(' ', $classes);
 
+// $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
+$vars['classes'] = implode(' ', $classes);
 
+// Set title classes
+$title_classes = array();
+if (theme_get_setting('cleanup_headings_title_class')) {
+  $title_classes[] = 'title';
+}
+if (theme_get_setting('cleanup_headings_namespaced_class')) {
+  $title_classes[] = 'comment-title';
+}
+$vars['title_classes'] = implode(' ', $title_classes);
 
 // If comment subjects are disabled, don't display them.
 if (variable_get('comment_subject_field', 1) == 0) {

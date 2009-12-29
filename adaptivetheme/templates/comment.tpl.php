@@ -24,9 +24,9 @@
  * These two variables are provided for context.
  * - $comment: Full comment object.
  * - $node: Node object the comments are attached to.
- * 
+ *
  * Optionally add a count id:
- * <span class="comment-id"><?php print '#'. $id; ?></span> 
+ * <span class="comment-id"><?php print '#'. $id; ?></span>
  *
  * @see template_preprocess_comment()
  * @see genesis_preprocess_comment()
@@ -36,8 +36,8 @@
 <div class="<?php print $classes; ?>">
 
   <?php if ($title): ?>
-    <h3 class="comment-title title">
-      <?php print $title; ?> 
+    <h3<?php print $title_classes ? ' class="'. $title_classes .'"' : ''; ?>>
+      <?php print $title; ?>
       <?php if ($comment->new): ?>
         <span class="new"><?php print $new; ?></span>
       <?php endif; ?>
@@ -52,7 +52,7 @@
   <?php endif; ?>
 
   <?php print $content; ?>
-      
+
   <?php if ($signature): ?>
     <div class="user-signature"><?php print $signature; ?></div>
   <?php endif; ?>

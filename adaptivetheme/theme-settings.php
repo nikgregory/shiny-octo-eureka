@@ -926,5 +926,23 @@ SCRIPT;
     '#title' => t('Print .first and .last classes for the first and last items in the list.'),
     '#default_value' => $settings['cleanup_item_list_first_last'],
   );
+  // Title classes for headings
+  $form['themedev']['dev']['classses']['heading_classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Heading Classes'),
+    '#description' => t('Heading classes apply to article, block and comment titles (h2, h3 etc).'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['themedev']['dev']['classses']['heading_classes']['cleanup_headings_title_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add the .title class to all headings.'),
+    '#default_value' => $settings['cleanup_headings_title_class'],
+  );
+  $form['themedev']['dev']['classses']['heading_classes']['cleanup_headings_namespaced_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add a pseudo name spaced title class to headings, i.e. .article-title, .block-title, .comment-title.'),
+    '#default_value' => $settings['cleanup_headings_namespaced_class'],
+  );
   return $form;
 }

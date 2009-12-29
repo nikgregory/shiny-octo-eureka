@@ -21,7 +21,7 @@ $(document).ready(function(){
  * insert the roles. This is a stop-gap measure while the W3C sort 
  * out the validator.
  *
- * To unset comment out aria-roles.js in genesis.info
+ * This is a starting point, you can copy this and use it in your subtheme for more granular control.
  */
 if (Drupal.jsEnabled) {
   $(document).ready(function() {
@@ -46,10 +46,10 @@ if (Drupal.jsEnabled) {
     $("#footer-message").attr("role","contentinfo");
 
     // Set role=article on nodes.
-    $(".article").attr("role","article");
+    // $(".article").attr("role","article");
 
     // Set role=nav on navigation-like blocks.
-    $("#nav, ul.links, ul.taxonomy, .admin-panel, #breadcrumb, .block-menu, #block-user-1, #block-user-3, .block-book, .block-forum, .block-blog, .block-comment, .block-statistics-0, .block-aggregator, ul.pager, .local-tasks").attr("role","navigation");
+    $("#nav, .admin-panel, #breadcrumb, .block-menu, #block-user-1, .local-tasks").attr("role","navigation");
   
   });
 }

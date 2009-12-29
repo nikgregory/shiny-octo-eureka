@@ -33,7 +33,7 @@
   <div class="block-inner">
 
     <?php if ($block->subject): ?>
-      <h2 class="block-title title"><?php print $block->subject; ?></h2>
+      <h2<?php print $title_classes ? ' class="'. $title_classes .'"' : ''; ?>><?php print $block->subject; ?></h2>
     <?php endif; ?>
 
     <?php print $block->content ?>
