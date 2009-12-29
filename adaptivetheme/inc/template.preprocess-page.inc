@@ -61,28 +61,23 @@ $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.
 
 // Body classes - manipulate for our own ends, in Drupal 7 we can drop most of these shenanagins.
 $classes = explode(' ', $vars['body_classes']);
-
 // Section class - use the path alias otherwise all nodes will be in "section-node".
 if (theme_get_setting('cleanup_classes_section')) {
   $path_alias = drupal_get_path_alias($_GET['q']);
   if (!$vars['is_front']) {
     list($section, ) = explode('/', $path_alias, 2);
-    $classes[] = safe_string('section-'. $section) .' ';
+    $classes[] = safe_string('section-'. $section);
   }
 }
-
 // Unset Drupals page-arg(0) class.
 if ($index = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. drupal_strtolower(arg(0))), $classes)) {
   unset($classes[$index]);
 }
-
 // Replace "node-type" with the more semantic "article-type".
 $classes = str_replace('node-type-', 'article-type-', $classes);
-
 // Replace left and right with first and last - better support for RTL.
 $classes = str_replace('sidebar-left', 'sidebar-first', $classes);
 $classes = str_replace('sidebar-right', 'sidebar-last', $classes);
-
 // .front and .not-front classes.
 if (in_array('front', $classes)) {
   theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('front', '', $classes);
@@ -90,7 +85,6 @@ if (in_array('front', $classes)) {
 if (in_array('not-front', $classes)) {
   theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('not-front', '', $classes);
 }
-
 // User status classes.
 if (in_array('logged-in', $classes)) {
   theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('logged-in', '', $classes);
@@ -98,12 +92,10 @@ if (in_array('logged-in', $classes)) {
 if (in_array('not-logged-in', $classes)) {
   theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('not-logged-in', '', $classes);
 }
-
 // Article type classes.
 if (in_array('article-type-'. $vars['node']->type, $classes)) {
   theme_get_setting('cleanup_classes_node_type') ? '' : $classes = str_replace('article-type-'. $vars['node']->type, '', $classes);
 }
-
 if (!$vars['is_front']) {
   // Replacement for Drupals page-arg(0) class, instead we print page-$normal_page.
   if (theme_get_setting('cleanup_classes_normal_path')) {
@@ -126,7 +118,6 @@ if (!$vars['is_front']) {
     }
   }
 }
-
 // Language specific body class.
 if (theme_get_setting('cleanup_classes_language')) {
   if (function_exists('locale')) {
@@ -134,7 +125,6 @@ if (theme_get_setting('cleanup_classes_language')) {
     $classes[] = 'lang-'. $language->language;
   }
 }
-
 // $classes is the varaible that holds the page classes, printed in page tpl files.
 $vars['classes'] = implode(' ', $classes);
 

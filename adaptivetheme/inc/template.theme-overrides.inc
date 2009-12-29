@@ -106,8 +106,8 @@ function adaptivetheme_button($element) {
 /**
  * Format a group of form items.
  *
- * @param $element 
- *   An associative array containing the properties of the element. 
+ * @param $element
+ *   An associative array containing the properties of the element.
  *
  * @return
  *   A themed HTML string representing the form item group.
@@ -263,24 +263,29 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
           $class .= ' last';
         }
       }
+      // Add Access keys if set for AT Mobile theme.
+      if (theme_get_setting('add_access_keys')) {
+        $link['attributes']['accesskey'] = $i;
+      }
       if (theme_get_setting('cleanup_links_active_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))) {
           $class .= ' active';
         }
       }
       if (isset($link['href'])) {
-        // add active class for containing <li> and <a> if active-trail is set on the link itself
+        // add active class for containing <li> and <a> if active-trail is set on the link itself.
         if (theme_get_setting('cleanup_links_active_classes')) {
           if (strpos($link['attributes']['class'], 'active-trail') !== FALSE && strpos($class, 'active') === FALSE) {
             $class .= ' active';
             $link['attributes']['class'] .= ' active';
           }
         }
+
         // Pass in $link as $options, they share the same keys.
         $link = l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {
-        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes
+        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
         if (empty($link['html'])) {
           $link['title'] = check_plain($link['title']);
         }
