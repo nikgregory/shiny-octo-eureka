@@ -21,7 +21,9 @@ $node = node_load($vars['comment']->nid);
 
 // Special classes for comments, emulates Drupal 7 for forward compatibility.
 $classes = array();
+
 $classes[]  = 'comment';
+
 if ($vars['status'] != 'comment-published') {
   $classes[] = $vars['status'];
 }
@@ -50,6 +52,7 @@ else {
     $classes[] = $vars['zebra'];
   }
 }
+
 $vars['classes'] = implode(' ', $classes);
 
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
@@ -60,9 +63,11 @@ $title_classes = array();
 if (theme_get_setting('cleanup_headings_title_class')) {
   $title_classes[] = 'title';
 }
+
 if (theme_get_setting('cleanup_headings_namespaced_class')) {
   $title_classes[] = 'comment-title';
 }
+
 $vars['title_classes'] = implode(' ', $title_classes);
 
 // If comment subjects are disabled, don't display them.

@@ -60,6 +60,9 @@
   settings[search_info_comment]               = 1
   settings[search_info_upload]                = 1
   settings[search_info_separator]             = ' - '
+  
+  settings[primary_links_tree]                = 0
+  settings[secondary_links_tree]              = 0
 
   settings[mission_statement_pages]           = 'home'
   settings[split_node_form]                   = 1

@@ -217,7 +217,7 @@ SCRIPT;
     '#title' => t('Display attachment count'),
     '#default_value' => $settings['search_info_upload'],
   );
-  //search_info_separator
+  // Search_info_separator
   $form['general_settings']['search']['search_results']['search_info_separator'] = array(
     '#type' => 'textfield',
     '#title' => t('Search info separator'),
@@ -225,6 +225,24 @@ SCRIPT;
     '#default_value' => $settings['search_info_separator'],
     '#size' => 8,
     '#maxlength' => 10,
+  );
+  // Primary and Secondary Links Settings
+  $form['general_settings']['menu_trees'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Primary and Secondary Links'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#description' => t('Output Primary and Secondary links as standard Drupal menus (shows levels expanded and with the standard menu classes).'),
+  );
+  $form['general_settings']['menu_trees']['primary_links_tree'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Modify Primary Links',
+    '#default_value' => $settings['primary_links_tree'],
+  );
+  $form['general_settings']['menu_trees']['secondary_links_tree'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Modify Secondary Links',
+    '#default_value' => $settings['secondary_links_tree'],
   );
   // Node Settings
   $form['node_type_specific'] = array(

@@ -90,7 +90,7 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php print $layout_settings ? $layout_settings : '' ; ?>
+  <?php print $layout_settings; ?>
   <?php print $scripts; ?>
 </head>
 <body id="at-admin" class="<?php print $section_class . $classes; ?>">
@@ -127,7 +127,7 @@
         </div> <!-- /branding -->
       <?php endif; ?>
       <?php if ($search_box): ?>
-        <div id="search-box"><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box"<?php print $toggle_label ?>><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
       <?php if ($header): ?>
         <div id="header-region"><?php print $header; ?></div><!-- /header-region -->
