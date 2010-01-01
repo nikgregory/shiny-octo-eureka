@@ -825,7 +825,6 @@ div.view .views-admin-links a:hover {
 background:#FFF;
 }
 
-/* LayoutSP theme settings, included here because at-admin.css could be unset. */
 .fieldset-layout-settings .layouts .form-item,.fieldset-layout-settings .page-width,.fieldset-layout-settings .sidebar-width-left,.fieldset-layout-settings .sidebar-width-right {
 -moz-border-radius:6px;
 -webkit-border-radius:6px;
@@ -845,6 +844,12 @@ margin-left:18px;
 .fieldset-layout-settings .page-width,.fieldset-layout-settings .sidebar-width {
 float:left;
 margin-bottom:10px;
+}
+
+.hide-label label {
+height:0;
+overflow:hidden;
+position:absolute;
 }
 
 /* Skinr style classes. */

@@ -29,20 +29,20 @@
  *     for the page.
  * - $section_class: A CSS class that uses .section + the 1st URL argument, allows for
  *     themeing site sections based on path.
- * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes). 
- *     This contains flags indicating the current layout (multiple columns, single column), 
+ * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes).
+ *     This contains flags indicating the current layout (multiple columns, single column),
  *     the current path, whether the user is logged in, and so on.
- * 
+ *
  * Layout variables:
  * - $at_layout_width: the theme setting value for the page width if LayoutSP is enabled.
  * - $at_layout: the full layout CSS if LayoutSP is enabled.
- * 
+ *
  * Site identity:
  * - $front_page: The URL of the front page. Use this instead of $base_path,
  *     when linking to the front page. This includes the language domain or prefix.
- * - $site_logo: The preprocessed $logo varaible. Includes the path to the logo image, 
+ * - $site_logo: The preprocessed $logo varaible. Includes the path to the logo image,
  *     as defined in theme configuration and wrapped in an anchor linking to the homepage.
- * - $site_name: The name of the site (preprocessed) wrapped in an anchor linking to the homepage. 
+ * - $site_name: The name of the site (preprocessed) wrapped in an anchor linking to the homepage.
  *     Empty when display has been disabled in theme settings.
  * - $site_slogan: The slogan of the site, empty when display has been disabled
  *     in theme settings.
@@ -50,9 +50,9 @@
  *     in theme settings.
  *
  * Navigation:
- * - $primary_menu: The preprocessed $primary_links (array), an array containing primary 
+ * - $primary_menu: The preprocessed $primary_links (array), an array containing primary
  *     navigation links for the site, if they have been configured.
- * - $secondary_menu: The preprocessed $secondary_links (array), an array containing secondary 
+ * - $secondary_menu: The preprocessed $secondary_links (array), an array containing secondary
  *     navigation links for the site, if they have been configured.
  * - $search_box: HTML to display the search box, empty if search has been disabled.
  *
@@ -73,7 +73,7 @@
  * - $content_bottom: A custom region for displaying content above the main content.
  * - $left: Region for the left sidebar.
  * - $right: Region for the right sidebar.
- * - $tertiary_content: Full width custom region for displaying content between main content 
+ * - $tertiary_content: Full width custom region for displaying content between main content
  *   columns and the footer.
  *
  * Footer/closing data:
@@ -94,9 +94,9 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $styles; ?>
-  <?php print $layout_settings ? $layout_settings : '' ; ?>
+  <?php print $layout_settings; ?>
   <?php print $scripts; ?>
-</head>    
+</head>
 <body class="<?php print $classes; ?>">
   <div id="container">
 
@@ -129,8 +129,8 @@
               <div class="logo-site-name"><strong>
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div>           
-            <?php else: /* Use h1 when the content title is empty */ ?>     
+              </strong></div>
+            <?php else: /* Use h1 when the content title is empty */ ?>
               <h1 class="logo-site-name">
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
@@ -146,7 +146,7 @@
       <?php endif; ?>
 
       <?php if ($search_box): ?>
-        <div id="search-box"><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box"<?php print $toggle_label ?>><?php print $search_box; ?></div> <!-- /search box -->
       <?php endif; ?>
 
       <?php if ($header): ?>
@@ -189,7 +189,7 @@
     <?php endif; ?>
 
     <div id="columns"><div class="columns-inner clearfix">
-    
+
       <div id="content-column"><div class="content-inner">
 
         <?php if ($mission): ?>
@@ -211,7 +211,7 @@
             </div>
           <?php endif; ?>
 
-          <?php if ($content_aside): ?> 
+          <?php if ($content_aside): ?>
             <div id="content-aside"><?php print $content_aside; ?></div> <!-- /content-aside -->
           <?php endif; ?>
 

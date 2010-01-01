@@ -65,9 +65,17 @@ if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   $classes[] = 'block-edit-links';
 }
 // Add classes for the horizontal login block if enabled.
-if (theme_get_setting('horizontal_login_block')  && $block->module == 'user' && $block->delta == '0') {
+if (theme_get_setting('horizontal_login_block') && $block->module == 'user' && $block->delta == '0') {
   $classes[] = 'at-horizontal-login clearfix';
 }
+
+// Hide search label on the search block
+if ($block->module == 'search' && $block->delta == 0) {
+  if (theme_get_setting('display_search_form_label') == 0) {
+    $classes[] = 'hide-label';
+  }
+}
+
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
 $vars['classes'] = implode(' ', $classes);
 

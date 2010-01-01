@@ -204,6 +204,11 @@ if (theme_get_setting('at_admin_hide_help')) {
   unset($vars['help']);
 }
 
+// Hide search theme form label
+if ($vars['search_box'] && theme_get_setting('display_search_form_label') == 0) {
+  $vars['toggle_label'] = ' class="hide-label"';
+}
+
 // Admin user links.
 if ($vars['logged_in'] && theme_get_setting('at_user_menu') == 1) {
   if (!function_exists(admin_menu_perm)) {
