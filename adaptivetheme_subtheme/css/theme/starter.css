@@ -247,7 +247,7 @@ color:#600;
 text-decoration:underline;
 }
 
-#branding h1,#block-user-3 .item-list h3 {
+h1.logo-site-name,#block-user-3 .item-list h3 {
 font-size:1em;
 }
 

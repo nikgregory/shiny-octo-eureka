@@ -52,7 +52,6 @@ dl {}
 dd {}
 dt {}
 
-
 abbr {}
 acronym {}
 
@@ -181,24 +180,26 @@ a:focus {}
 /* #branding wraps #logo, #site-name and #site-slogan. */
 #branding {}
 
-/* h1 is for the front page only, all others use the div. */
-#branding h1 {}
-
-/* Logo and site_name wrapper. */
+/* Logo and Site Name wrapper. */
 .logo-site-name {}
-div.logo-site-name {}
+
+/* Logo and Site Name wrapper h1 - normally applies only the homepage. */
 h1.logo-site-name  {}
+
+/* Logo and Site Name wrapper DIV - normally applies to all internal pages,
+   or where no title is set. */
+div.logo-site-name {}
 
 /* DIV/strong combo when when title is set. */
 div.logo-site-name strong {}
 
-/* Over-ride display:block if you want the site name inline with the logo. */
+/* By default the span is set to display:block, you can display:inline
+   or float the elements to get them all on one line. */
 .logo-site-name span {}
 
-/* Logo. */
-#logo {}
-
-#site-name {}
+/* Logo and Site Name SPAN wrappers. */
+span#logo {}
+span#site-name {}
 
 /* Override default pseudo class styles. */
 #site-name a:link    {}
@@ -224,17 +225,16 @@ div.logo-site-name strong {}
 /* Reset form element margins. */
 #search-theme-form {}
 
-/* Use the child selector because the inner div has no class. */
+/* Wrapper DIVs */
 #search-theme-form > div {}
-
-/* #search and .container-inline apply to the same div. */
 #search-theme-form #search {}
-#search-theme-form .container-inline {}
+#edit-search-theme-form-1-wrapper {}
 
 #search-theme-form label {}
 #search-theme-form input {}
-#search-theme-form .search-input {}
-#search-theme-form .search_submit {}
+
+#search-theme-form .form-text {}
+#search-theme-form .form-submit {}
 
 /**
  * Advanced search form
@@ -258,7 +258,7 @@ div.logo-site-name strong {}
 #search-form #edit-keys-wrapper input:focus {}
 
 /* Advanced search fieldset. */
-fieldset #search-advanced {}
+#search-form fieldset.search-advanced {}
 
 /**
  * Search results
@@ -507,11 +507,11 @@ ul.links li.print_pdf a {}
 .poll-article  {}
 .story-article {}
 
-/* Custom node types/
-/** 
- * Replace CONTENT_TYPE with the content type 
- * machine-readable name. 
- */
+ /**
+  * Custom Content Types
+  * Replace CONTENT_TYPE with the content type
+  * machine-readable name.
+  */
 .CONTENT_TYPE-article {}
 
 
@@ -730,15 +730,16 @@ ul.links li.comment_delete a {}
  **********************************************************/
 #search-block-form {}
 
-/* Wrapper divs. */
+/* Wrapper DIVs. */
 #search-block-form > div {}
 #search-block-form .container-inline{}
+#edit-search-block-form-1-wrapper {}
 
 #search-block-form label {}
 #search-block-form input {}
-#search-block-form .form-item {}
+
 #search-block-form .form-submit {}
-#search-block-form #edit-search-block-form-1 {}
+#search-block-form .form-text {}
 
 /* Override forms.css focus style */
 #edit-search-block-form-1:hover,
@@ -816,8 +817,11 @@ ul.menu li.last  {}
 /**********************************************************
  *                  Gpanel Regions
  **********************************************************/
-
-/* ONLY ADD BORDERS, MARGIN AND PADDING TO THE INNER OR THE CONTAINED BLOCK */
+/**
+ * NOTE: If you are adding borders, padding or margin (anything
+ * that adds width) you should apply these to the INNER div or
+ * the contained element, such as a block or mini-panel.
+ */
 
 .gpanel {}
 .gpanel .region {}
@@ -932,7 +936,7 @@ ul.menu li.last  {}
 /**********************************************************
                       AT Panels
     Classes for styling the built in Panels Layouts
-    You need the Panels3 module installed to use the
+    You need the Panels 3 module installed to use the
     built in panels and the Adaptivetheme base theme
     must be enabled.
  **********************************************************/
@@ -953,3 +957,58 @@ ul.menu li.last  {}
 .threecol-at-stacked-inset {}
 .twocol-at-stacked-inset {}
 
+
+/**********************************************************
+ *                 AT Button Wrappers
+ **********************************************************/
+/**
+ * Adaptivetheme wraps input buttons with SPANs for
+ * easy theming.
+ */
+ span.button-wrapper {} /* Outer wrapper */
+ span.button {} /* Inner wrapper */
+
+
+/**********************************************************
+ *                       Tables
+ **********************************************************/
+/**
+ * The selector groupings are from Garland which offers a
+ * sensible starting point for styling Drupal tables.
+ */
+table {}
+
+caption, th, td {}
+caption, th {}
+
+table, td, th {}
+tbody, tfoot, thead, tr {}
+thead th {}
+td, th {}
+
+tr.even, tr.odd, tbody th {}
+tr.odd, tr.info {}
+tr.even {}
+
+tr.drag {}
+tr.drag-previous  {}
+
+tr.odd td.active  {}
+tr.even td.active {}
+
+td.region,
+td.module,
+td.container td.category {}
+
+tr:first-child td.region,
+tr:first-child td.module,
+tr:first-child td.container {}
+
+
+/**********************************************************
+ *                   Forum Tables
+ **********************************************************/
+#forum table {}
+#forum tr td.forum {}
+#forum tr td.forum .name {}
+#forum div.indent {}
