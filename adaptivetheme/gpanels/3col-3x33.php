@@ -27,7 +27,7 @@
 
 <!--//   Three column 3x33 Gpanel  //-->
 <?php if ($three_col_3x33_first or $three_col_3x33_second or $three_col_3x33_third): ?>
-  <div class="three-col-3x33 gpanel clear-block">
+  <div class="three-col-3x33 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($three_col_3x33_first): print $three_col_3x33_first; endif; ?>
     </div></div>

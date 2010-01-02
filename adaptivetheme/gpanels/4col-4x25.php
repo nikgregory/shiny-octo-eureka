@@ -28,7 +28,7 @@
 
 <!--//   Four column Gpanel   //-->
 <?php if ($four_col_first or $four_col_second or $four_col_third or $four_col_fourth): ?>
-  <div class="four-col-4x25 gpanel clear-block">
+  <div class="four-col-4x25 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($four_col_first): print $four_col_first; endif; ?>
     </div></div>

@@ -27,7 +27,7 @@
 
 <!--//   Three column 50-25-25 Gpanel   //-->
 <?php if ($three_col_50_25_25_first or $three_col_50_25_25_second or $three_col_50_25_25_third): ?>
-  <div class="three-col-50-25-25 gpanel clear-block">
+  <div class="three-col-50-25-25 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($three_col_50_25_25_first): print $three_col_50_25_25_first; endif; ?>
     </div></div>

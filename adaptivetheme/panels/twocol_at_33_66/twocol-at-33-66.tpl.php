@@ -15,7 +15,7 @@
  *   - $content['right']: Content in the right column.
  */
 ?>
-<div class="panel-display twocol-at-33-66 at-panel clear-block" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display twocol-at-33-66 at-panel clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
   <div class="panel-panel panel-col-first">
     <div class="inside"><?php print $content['left']; ?></div>
   </div>

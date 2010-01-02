@@ -29,7 +29,7 @@
 
 <!--//   Two column Gpanel 2x50   //-->
 <?php if ($two_col_2x50_first or $two_col_2x50_second): ?>
-  <div class="two-col-2x50 gpanel clear-block">
+  <div class="two-col-2x50 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($two_col_2x50_first): print $two_col_2x50_first; endif; ?>
     </div></div>

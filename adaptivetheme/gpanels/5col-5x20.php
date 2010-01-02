@@ -30,7 +30,7 @@
 
 <!--//   Five column Gpanel   //-->
 <?php if ($five_col_first or $five_col_second or $five_col_third or $five_col_fourth or $five_col_fifth): ?>
-  <div class="five-col-5x20 gpanel clear-block">
+  <div class="five-col-5x20 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($five_col_first): print $five_col_first; endif; ?>
     </div></div>

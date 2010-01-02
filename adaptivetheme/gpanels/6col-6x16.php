@@ -31,7 +31,7 @@
 
 <!--//   Six column Gpanel   //-->
 <?php if ($six_col_first or $six_col_second or $six_col_third or $six_col_fourth or $six_col_fifth or $six_col_sixth): ?>
-  <div class="six-col-6x16 gpanel clear-block">
+  <div class="six-col-6x16 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($six_col_first): print $six_col_first; endif; ?>
     </div></div>

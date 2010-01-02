@@ -27,7 +27,7 @@
 
 <!--//   Two column 33-66 Gpanel   //-->
 <?php if ($two_col_33_66_first or $two_col_33_66_second): ?>
-  <div class="two-col-33-66 gpanel clear-block">
+  <div class="two-col-33-66 gpanel clearfix">
     <div class="section region col-1 first"><div class="inner">
       <?php if ($two_col_33_66_first): print $two_col_33_66_first; endif; ?>
     </div></div>

@@ -16,7 +16,7 @@
  *   - $content['col4']: Content column four.
  */
 ?>
-<div class="panel-display fourcol-4x25 at-panel clear-block" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display fourcol-4x25 at-panel clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
   <div class="panel-panel panel-col-one">
     <div class="inside"><?php print $content['col1']; ?></div>
   </div>

@@ -18,7 +18,7 @@
  *   - $content['col6']: Content column six.
  */
 ?>
-<div class="panel-display sixcol-6x16 at-panel clear-block" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display sixcol-6x16 at-panel clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
   <div class="panel-panel panel-col-one">
     <div class="inside"><?php print $content['col1']; ?></div>
   </div>
