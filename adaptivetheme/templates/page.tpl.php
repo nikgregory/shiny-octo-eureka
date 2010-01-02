@@ -157,14 +157,14 @@
 
     <?php if (!empty($primary_menu)): ?>
       <div id="primary" class="nav">
-        <h2 class="element-invisible"><?php print t('Main menu'); ?></h2>
+        <h2 class="element-invisible"><?php print t('Main Menu'); ?></h2>
         <?php print $primary_menu; ?>
       </div>
     <?php endif; ?>
 
     <?php if (!empty($secondary_menu)): ?>
       <div id="secondary" class="nav">
-        <h2 class="element-invisible"><?php print t('Secondary menu'); ?></h2>
+        <h2 class="element-invisible"><?php print t('Secondary Menu'); ?></h2>
         <?php print $secondary_menu; ?>
       </div>
     <?php endif; ?>
@@ -178,7 +178,7 @@
 
     <?php if ($messages or $help): ?>
       <div id="messages-and-help">
-        <h2 class="element-invisible"><?php print t('System messages:'); ?></h2>
+        <h2 class="element-invisible"><?php print t('System Messages'); ?></h2>
         <?php if ($messages): print $messages; endif; ?>
         <?php if ($help): print $help; endif; ?>
       </div> <!-- /messages/help -->
