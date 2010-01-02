@@ -134,7 +134,7 @@
               <h1 class="logo-site-name">
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-             </h1>
+              </h1>
             <?php endif; ?>
           <?php endif; ?>
 

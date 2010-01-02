@@ -40,37 +40,30 @@ if (theme_get_setting('skip_navigation_display') == 'focus') {
   $vars['skip_nav_class'] = 'show-on-focus';
 }
 
-// Set variables for the logo and site_name.
-if (!empty($vars['logo'])) {
-  // Return the site_name even when site_name is disabled in theme settings.
-  $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
-  $vars['linked_site_logo'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home"><img src="'. $vars['logo'] .'" alt="'. $vars['logo_alt_text'] .'" /></a>';
-}
-
-if (!empty($vars['site_name'])) {
-  $vars['linked_site_name'] = '<a href="'. $vars['front_page'] .'" title="'. t('Home page') .'" rel="home">'. $vars['site_name'] .'</a>';
-}
+// Set variables for the logo and site name for easy printing in templates.
+$vars['logo_alt_text']    = check_plain(variable_get('site_name', '')) .' '. t('logo');
+$vars['logo_img']         = $vars['logo'] ? theme('image', substr($vars['logo'], strlen(base_path())), $vars['logo_alt_text'], t('Home page')) : '';
+$vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'), 'html' => TRUE)) : '';
+$vars['linked_site_name'] = $vars['site_name'] ? l($vars['site_name'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'))) : '';
 
 // Set variables for the primary and secondary links.
-$primary_links = $vars['primary_links'];
-$secondary_links = $vars['secondary_links'];
+$primary_menu_links = $vars['primary_links'];
+$secondary_menu_links = $vars['secondary_links'];
 
 // Standard primary and secondary links.
-if (!empty($primary_links)) {
-  $vars['primary_menu'] = theme('links', $primary_links, array('class' => 'primary-links clearfix'));
+if (!empty($primary_menu_links)) {
+  $vars['primary_menu'] = theme('links', $primary_menu_links, array('class' => 'primary-links clearfix'));
 }
-
-if (!empty($secondary_links)) {
-  $vars['secondary_menu'] = theme('links', $secondary_links, array('class' => 'secondary-links clearfix'));
+if (!empty($secondary_menu_links)) {
+  $vars['secondary_menu'] = theme('links', $secondary_menu_links, array('class' => 'secondary-links clearfix'));
 }
 
 // Output the primary and secondary menus as regular menu trees.
-if (!empty($primary_links) && theme_get_setting('primary_links_tree')) {
+if (!empty($primary_menu_links) && theme_get_setting('primary_links_tree')) {
   $primary_tree_menu = menu_tree_all_data('primary-links'); 
   $vars['primary_menu'] = menu_tree_output($primary_tree_menu);
 }
-
-if (!empty($secondary_links) && theme_get_setting('secondary_links_tree')) {
+if (!empty($secondary_menu_links) && theme_get_setting('secondary_links_tree')) {
   $secondary_tree_menu = menu_tree_all_data('secondary-links'); 
   $vars['secondary_menu'] = menu_tree_output($secondary_tree_menu);
 }

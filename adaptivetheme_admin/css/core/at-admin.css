@@ -524,7 +524,9 @@ margin:0;
 padding:1em 0;
 }
 
-.admin-panel dt {
+#main-content .admin-panel dt,
+#main-content .admin-panel ul.menu li,
+#main-content .admin-panel ul.item-list li{
 font-weight:normal;
 }
 

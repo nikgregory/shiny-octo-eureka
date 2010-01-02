@@ -122,25 +122,30 @@ a:focus {}
 /**********************************************************
  *                       Regions
  **********************************************************/
-/* Leaderboard is a full width region at the very top, ideal for displaying banners. */
+/* Leaderboard is a full width region at the very top of the page. */
 #leaderboard {}
 
-/* Header region is embedded in the header, floated between the logo/site_name and the search box. */
+/* Header region is embedded in the header, floated between the logo/site_name
+   and the search box. */
 #header-region {}
 
-/* Secondary content is a full width region between the header and the main columns. */
+/* Secondary content is a full width region between the header and the
+   main columns. */
 #secondary-content {}
 
-/* Tertiary content is a full width region above the footer, below the main content. */
+/* Tertiary content is a full width region above the footer, below the
+   main content. */
 #tertiary-content {}
 
-/* Content top and bottom are above and below the main content, within the main content column. 
-   Content aside floats to the right within the main central column, but below content top. */
+/* Content top and bottom are above and below the main content, within the main 
+   content column. Content aside floats to the right within the main central
+   column, but below content top. */
 #content-top {}
 #content-aside {}
 #content-bottom {}
 
-/* Article aside appears only in articles (nodes). By default its placed at the bottom of the node.tpl.php template. */
+/* Article aside appears only in articles (nodes). By default its placed at
+   the bottom of the node.tpl.php template. */
 #article-aside {}
 
 
@@ -666,7 +671,8 @@ ul.links li.comment_delete a {}
 .sidebar .block h2 {}
 .sidebar .block-inner {}
 
-/* High specifity selectors to style blocks in one sidebar - careful, these are powerful selectors! */
+/* High specifity selectors to style blocks in one sidebar - be careful,
+   these are powerful selectors! */
 #sidebar-first .block {}
 #sidebar-first .block h2 {}
 #sidebar-first .block-inner {}

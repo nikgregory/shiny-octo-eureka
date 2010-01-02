@@ -1,8 +1,18 @@
 
   Installation and setup is strait forward, just follow the steps carefully:
 
+  UPGRADING
+  If you are upgrading from 6.x-1.x you must first remove all the 6.x-1.x
+  files before installing 6.x-2.x.
+
+
+  INSALLATION
   1) Copy and paste the included starter subtheme (adaptivetheme_subtheme) 
-     to your sites/all/themes folder or where ever you are installing your new subtheme.
+     to your sites/all/themes folder or where ever you are installing your
+     new subtheme.
+
+     For multisite installations you can place the base theme in sites/all/themes,
+     and your subtheme can go in sites/mysite.com/themes.
 
 
   2) Rename the theme folder and info file to your preferred theme name, 
@@ -10,14 +20,13 @@
 
 
   3) Open up your subthemes template.php file and search/replace all instances 
-     of “adaptivetheme_subtheme” with your new theme name (there are 6 instances).
+     of "adaptivetheme_subtheme" with your new theme name.
 
 
   4) Open up your subthemes theme-settings.php file and locate these lines: 
 
        (line 19) function adaptivetheme_subtheme_settings($saved_settings) {
        (line 22)   $defaults = adaptivetheme_theme_get_default_settings('adaptivetheme_subtheme');
-
 
        a) You must re-name the function to match your theme name, then...
        b) replace the instance of ('adaptivetheme_subtheme') with ('YourThemeName').
@@ -29,16 +38,14 @@
 
 
   5) If you want to use the color schemes feature open up the .info file and 
-     scroll to the bottom and change settings[color_enable_schemes] = ‘off’ to ‘on’. 
+     scroll to the bottom and change settings[color_enable_schemes] = 'off' to 'on'.
      If you make this change after you have enabled the theme you must click 
      "Reset to defaults" for your subtheme for the color settings to work.
  
      Now you can enable the theme as per usual.
 
 
-
-  Trouble Shooting FAQ:
-  
+  TROUBLE SHOOTING FAQ
   Q: My theme settings aren't showing up in the theme config.
   A: If the Advanced Theme Settings don't show up you most likely made a mistake in Step 4.
   
@@ -63,7 +70,15 @@
   http://drupal.org/project/issues/adaptivetheme
 
 
- 
+  For paid support, customizations and theme development please contact:
+
+  Jeff Burnz
+  Ph: +46 (0)40 693 63 11
+  Mob: +46 (0)709 600 416
+  Skype: jmburnz
+  http://adaptivethemes.com/contact
+  http://drupal.org/user/61393
+
 
 
 
