@@ -179,7 +179,7 @@ padding:0 10px;
 #search-box {
 left:auto;
 position:absolute;
-right:0;
+right:2px;
 top:28px;
 overflow:auto;
 }
@@ -193,17 +193,18 @@ font-size:0.94em;
 color:#CCC;
 }
 
-#search-theme-form input.search_submit {
+#search-theme-form .form-submit {
 -moz-border-radius:4px;
 -webkit-border-radius:4px;
+background:transparent url(core-images/search-button-tile.png) repeat-x 0 -15px;
+border:none;
+color:#B2B2B2;
 cursor:pointer;
-padding:1px 6px;
-background:url(core-images/search-button-tile.png) repeat-x 0 -15px;
-border:1px solid #777;
-color:#999;
+outline-color:#555;
+padding:2px 5px;
 }
 
-#search-theme-form input.search_submit:hover {
+#search-theme-form .form-submit:hover {
 background-position:0 -65px;
 color:#EEE;
 }

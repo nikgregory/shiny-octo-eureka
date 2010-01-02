@@ -155,7 +155,7 @@ if (theme_get_setting('cleanup_classes_language')) {
 }
 
 // $classes is the varaible that holds the page classes, printed in page tpl files.
-$vars['classes'] = implode(' ', $classes);
+$vars['classes'] = trim(implode(' ', $classes));
 
 // Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {

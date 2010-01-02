@@ -34,7 +34,7 @@ function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
         array(
           'attributes' => array(
             'class' => 'block-edit-link edit-block-block',
-            'title' => t('Configure this block'),
+            'title' => t('Configure block'),
           ),
           'query' => drupal_get_destination(),
           'html' => TRUE,
@@ -48,7 +48,7 @@ function adaptivetheme_preprocess_block_editing(&$vars, $hook) {
         array(
           'attributes' => array(
             'class' => 'block-edit-link edit-block-menu',
-            'title' => t('Edit this menu'),
+            'title' => t('Edit menu'),
           ),
           'query' => drupal_get_destination(),
           'html' => TRUE,
