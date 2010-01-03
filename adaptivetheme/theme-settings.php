@@ -310,9 +310,9 @@ SCRIPT;
         '#title' => t('When should taxonomy terms be displayed?'),
         '#default_value' => $settings["taxonomy_display_{$type}"],
         '#options' => array(
-          'never' => t('Never display taxonomy terms'),
-          'all' => t('Always display taxonomy terms'),
-          'only' => t('Only display taxonomy terms on full node pages'),
+          'never' => t('Hide terms'),
+          'only' => t('Show terms in page view'),
+          'all' => t('Show terms in teaser and page view'),
         ),
       );
       // Formatting
