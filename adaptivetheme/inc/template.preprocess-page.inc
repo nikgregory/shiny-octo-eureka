@@ -218,7 +218,7 @@ if (theme_get_setting('mission_statement_pages') == 'all') {
 
 // Show $theme_info output using krumo.
 if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
-  kpr($theme_info);
+  dsm($theme_info); /* Use dsm, kpr messes up IE */
 }
 
 // Check whether help is disabled.

@@ -148,18 +148,6 @@ SCRIPT;
     '#description' => t('Useful when the breadcrumb is not placed just before the title.'),
     '#suffix' => '</div>',
   );
-  // Username
-  $form['general_settings']['username'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Username'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['username']['user_notverified_display'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display "not verified" for unregistered user names'),
-    '#default_value' => $settings['user_notverified_display'],
-  );
   // Search Settings
   $form['general_settings']['search'] = array(
     '#type' => 'fieldset',
