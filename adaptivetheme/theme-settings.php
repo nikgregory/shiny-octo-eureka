@@ -443,6 +443,7 @@ SCRIPT;
           '1140px' => t('1140px'),
           '1200px' => t('1200px'),
           '1260px' => t('1260px'),
+          '100%' => t('100% Fluid'),
         ),
         '#attributes' => array('class' => 'field-layout-width'),
       );
@@ -892,6 +893,11 @@ SCRIPT;
       '#type' => 'checkbox',
       '#title' => t('Print the .active classes on menu list items (active classes always print on the anchor).'),
       '#default_value' => $settings['cleanup_menu_active_classes'],
+    );
+    $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_title_class'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print classes based on the menu title, i.e. .menu-[title].'),
+      '#default_value' => $settings['cleanup_menu_title_class'],
     );
   }
   else {

@@ -211,7 +211,7 @@ if (!function_exists('dhtml_menu_init')) {
     if (theme_get_setting('cleanup_menu_leaf_class')) {
       $class = ($menu ? 'expanded' : ($has_children ? 'collapsed' : 'leaf'));
     }
-    if (!empty($extra_class) AND theme_get_setting('cleanup_menu_first_last_classes')) {
+    if (!empty($extra_class) && theme_get_setting('cleanup_menu_first_last_classes')) {
       if ($class) {
         $class .= ' '. $extra_class;
       }
@@ -219,7 +219,10 @@ if (!function_exists('dhtml_menu_init')) {
         $class .= $extra_class;
       }
     }
-    if ($in_active_trail AND theme_get_setting('cleanup_menu_active_classes')) {
+    if (theme_get_setting('cleanup_menu_title_class')) {
+      $class .= ' ' . safe_string(strip_tags($link));
+    }
+    if ($in_active_trail && theme_get_setting('cleanup_menu_active_classes')) {
       $class .= ' active-trail';
     }
     if ($class) {

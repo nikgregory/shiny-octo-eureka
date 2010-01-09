@@ -203,12 +203,7 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $styles[] = '.two-sidebars #sidebar-last {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';
   }
   $vars['at_layout'] = implode('', $styles);
-  if ((theme_get_setting('at_admin_theme') == 1 && arg(0) !== 'admin') || (theme_get_setting('at_admin_theme') == 0)) {
-    $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
-  }
-  if (theme_get_setting('at_admin_theme') == 1 && arg(2) == 'block') {
-    $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout'] .'</style>';
-  }
+  $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
 }
 
 // Display mission statement on all pages.

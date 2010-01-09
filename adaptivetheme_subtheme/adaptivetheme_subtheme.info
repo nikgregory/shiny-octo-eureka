@@ -218,6 +218,7 @@
   settings[cleanup_menu_leaf_class]           = 1
   settings[cleanup_menu_first_last_classes]   = 0
   settings[cleanup_menu_active_classes]       = 0
+  settings[cleanup_menu_title_class]          = 0
 
   settings[cleanup_links_type_class]          = 1
   settings[cleanup_links_active_classes]      = 0
