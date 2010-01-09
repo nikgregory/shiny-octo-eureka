@@ -49,7 +49,7 @@ SCRIPT;
   // Allow a subtheme to override the default values.
   $defaults = array_merge($defaults, $subtheme_defaults);
 
-  // Set the default values for content-type-specific settings
+  // Set the default values for content type specific settings
   foreach ($node_types as $type => $name) {
     $defaults["taxonomy_display_{$type}"] = $defaults['taxonomy_display_default'];
     $defaults["taxonomy_format_{$type}"]  = $defaults['taxonomy_format_default'];
@@ -236,7 +236,7 @@ SCRIPT;
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
     '#title' => t('Content type settings'),
-    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the <em>"Use content-type specific settings"</em> checkbox to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
+    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the <em>"Use content type specific settings"</em> checkbox to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => 'node_settings'),
@@ -249,11 +249,11 @@ SCRIPT;
     '#collapsed' => TRUE,
   );
   if (module_exists('submitted_by') == FALSE) {
-    // Default & content-type specific settings
+    // Default & content type specific settings
     foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
         '#type' => 'fieldset',
-        '#title' => t('!name', array('!name' => t($name))),
+        '#title' => t('@name', array('@name' => $name)),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
@@ -273,11 +273,11 @@ SCRIPT;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
           '#type' => 'checkbox',
-          '#title' => t('Use content-type specific settings.'),
+          '#title' => t('Use content type specific settings.'),
           '#default_value' => $settings['submitted_by_enable_content_type'],
         );
       }
-      // Collapse content-type specific settings if default settings are being used
+      // Collapse content type specific settings if default settings are being used
       else if ($settings['submitted_by_enable_content_type'] == 0) {
         $form['submitted_by'][$type]['#collapsed'] = TRUE;
       }
@@ -295,12 +295,12 @@ SCRIPT;
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    // Default & content-type specific settings
+    // Default & content type specific settings
     foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
       // taxonomy display per node
       $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
         '#type' => 'fieldset',
-        '#title' => t('!name', array('!name' => t($name))),
+        '#title' => t('@name', array('@name' => $name)),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
@@ -344,7 +344,7 @@ SCRIPT;
       foreach ($vocabs as $key => $vocab_name) {
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
           '#type' => 'checkbox',
-          '#title' => t('Display vocabulary: '. $vocab_name),
+          '#title' => t('Display vocabulary: @vocab_name', array('@vocab_name' => $vocab_name)),
           '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
         );
       }
@@ -354,11 +354,11 @@ SCRIPT;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
         $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
           '#type' => 'checkbox',
-          '#title' => t('Use content-type specific settings.'),
+          '#title' => t('Use content type specific settings.'),
           '#default_value' => $settings['taxonomy_enable_content_type'],
         );
       }
-      // Collapse content-type specific settings if default settings are being used
+      // Collapse content type specific settings if default settings are being used
       else if ($settings['taxonomy_enable_content_type'] == 0) {
         $form['display_taxonomy'][$type]['#collapsed'] = TRUE;
       }
@@ -372,11 +372,11 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // Default & content-type specific settings
+  // Default & content type specific settings
   foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
     $form['node_type_specific']['links_container']['links'][$type] = array(
       '#type' => 'fieldset',
-      '#title' => t('!name', array('!name' => t($name))),
+      '#title' => t('@name', array('@name' => @$name)),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
@@ -396,11 +396,11 @@ SCRIPT;
       $form['node_type_specific']['links_container']['links']['default']['#collapsed'] = $settings['display_links_enable_content_type'] ? TRUE : FALSE;
       $form['node_type_specific']['links_container']['links']['display_links_enable_content_type'] = array(
         '#type' => 'checkbox',
-        '#title' => t('Use content-type specific settings.'),
+        '#title' => t('Use content type specific settings.'),
         '#default_value' => $settings['display_links_enable_content_type'],
       );
     }
-    // Collapse content-type specific settings if default settings are being used
+    // Collapse content type specific settings if default settings are being used
     else if ($settings['display_links_enable_content_type'] == 0) {
       $form['links'][$type]['#collapsed'] = TRUE;
     }

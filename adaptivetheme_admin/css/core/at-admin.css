@@ -59,7 +59,6 @@ text-decoration:none;
 
 #container {
 background:#FFF;
-max-width:1260px;
 min-width:960px;
 }
 
@@ -107,8 +106,7 @@ background:#464646;
 .header-inner {
 margin:0 auto;
 position:relative;
-max-width:1260px;
-min-width:760px;
+min-width:960px;
 min-height:80px;
 }
 
