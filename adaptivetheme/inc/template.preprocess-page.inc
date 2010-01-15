@@ -202,7 +202,7 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
     $styles[] = '#sidebar-last{width:'. $sidebar_last_width .'px; margin-'. $left .': -100%;}';
     $styles[] = '.two-sidebars #sidebar-last {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';
   }
-  $vars['at_layout'] = implode('', $styles);
+  $styles ? $vars['at_layout'] = implode('', $styles) : '';
   $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
 }
 
