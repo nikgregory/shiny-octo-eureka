@@ -327,23 +327,9 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
  *   A string containing the list output.
  */
 function adaptivetheme_item_list($items = array(), $title = NULL, $type = 'ul', $attributes = NULL) {
-  if ($type == "div-span") {
-    $type = "div";
-    $item_type = "div-span";
-  }
-  else{
-    $item_type = $type;
-  }
-  $attributes['class'] .= " item-list";
-  //test if we have an title then add the div.item-list around the list
+  $output = '<div class="item-list">';
   if (isset($title)) {
-    $output = '<div class="item-list">';
-    if ($item_type == "span") {
-      $output .= '<span class="title">'. $title .'</span>';
-    }
-    else{
-      $output .= '<h3>'. $title .'</h3>';
-    }
+    $output .= '<h3>'. $title .'</h3>';
   }
   if (!empty($items)) {
     $output .= "<$type". drupal_attributes($attributes) .'>';
@@ -378,33 +364,18 @@ function adaptivetheme_item_list($items = array(), $title = NULL, $type = 'ul', 
           $attributes['class'] = empty($attributes['class']) ? 'even' : ($attributes['class'] .' even');
         }
       }
-      //removed first / last fromt the item list?
       if (theme_get_setting('cleanup_item_list_first_last')) {
         if ($i == 0) {
-          $attributes['class'] .= ' first';
+          $attributes['class'] = empty($attributes['class']) ? 'first' : ($attributes['class'] .' first');
         }
         if ($i == $num_items - 1) {
-          $attributes['class'] .= ' last';
+          $attributes['class'] = empty($attributes['class']) ? 'last' : ($attributes['class'] .' last');
         }
       }
-      //is it a li or a span or a div ?
-      if ($item_type == "ul" OR $item_type == "ol") {
-        $output .= '<li'. drupal_attributes($attributes) .'>'. $data ."</li>\n";
-      }
-      elseif ($item_type == "span" OR $item_type == "div-span" ) {
-        $output .= '<span'. drupal_attributes($attributes) .'>'. $data ."</span>\n";
-      }
-      elseif ($item_type == "div") {
-        $output .= '<div'. drupal_attributes($attributes) .'>'. $data ."</div>\n";
-      }
-      else{
-        $output .= '<li'. drupal_attributes($attributes) .'>'. $data ."</li>\n";
-      }
+      $output .= '<li'. drupal_attributes($attributes) .'>'. $data ."</li>\n";
     }
     $output .= "</$type>";
   }
-  if (isset($title)) {
-    $output .= '</div>';
-  }
+  $output .= '</div>';
   return $output;
 }
