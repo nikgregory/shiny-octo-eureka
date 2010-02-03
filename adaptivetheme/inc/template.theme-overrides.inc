@@ -138,16 +138,16 @@ function adaptivetheme_fieldset($element) {
  * In short this collapses the fieldsets on the theme configuration page.
  */
 function adaptivetheme_system_settings_form($form) {
-  // Theme the crap out of the theme settings fieldsets.
+  // Reset titles.
   $form['theme_settings']['#title'] = t('Drupal core theme settings');
   $form['theme_specific']['#title'] = t('Advanced theme settings');
-
+  // Collapse all fieldsets and give them a wrapper to help out themers.
   $form_elements = element_children($form);
   foreach ($form_elements as $element) {
-    if ( $form[$element]['#type'] == 'fieldset' ) {
+    if ($form[$element]['#type'] == 'fieldset') {
       $form[$element]['#collapsible'] = TRUE;
       $form[$element]['#collapsed']   = TRUE;
-      $form[$element]['#prefix'] = '<div class="' . safe_string($element) . '-settings-wrapper">';
+      $form[$element]['#prefix'] = '<div class="'. safe_string($element) .'-settings-wrapper">';
       $form[$element]['#suffix'] = '</div>';
     }
   }
