@@ -93,6 +93,9 @@ $vars['title_classes'] = implode(' ', $title_classes);
 // Add article_aside region content.
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
+// Support node tpl suggestions per node
+$vars['template_files'][] = 'node-'.$vars['node']->nid; 
+      
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
   if ($vars['page']) {
