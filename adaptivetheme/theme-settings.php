@@ -69,7 +69,6 @@ SCRIPT;
     '#title' => t('General settings'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#attributes' => array('class' => 'general_settings'),
   );
   // Skip Navigation
   $form['general_settings']['skip_navigation'] = array(
@@ -239,7 +238,6 @@ SCRIPT;
     '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the <em>"Use content type specific settings"</em> checkbox to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#attributes' => array('class' => 'node_settings'),
   );
   // Author & Date Settings
   $form['node_type_specific']['submitted_by_container'] = array(

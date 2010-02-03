@@ -140,25 +140,17 @@ function adaptivetheme_fieldset($element) {
 function adaptivetheme_system_settings_form($form) {
   // Theme the crap out of the theme settings fieldsets.
   $form['theme_settings']['#title'] = t('Drupal core theme settings');
-  $form['theme_settings']['#collapsible'] = TRUE;
-  $form['theme_settings']['#collapsed']   = TRUE;
-  $form['theme_settings']['#prefix'] = '<div class="theme-settings-settings-wrapper">';
-  $form['theme_settings']['#suffix'] = '</div>';
-  $form['logo']['#collapsible'] = TRUE;
-  $form['logo']['#collapsed']   = TRUE;
-  $form['logo']['#prefix'] = '<div class="logo-settings-wrapper">';
-  $form['logo']['#suffix'] = '</div>';
-  $form['favicon']['#collapsible'] = TRUE;
-  $form['favicon']['#collapsed']   = TRUE;
-  $form['favicon']['#prefix'] = '<div class="favicon-settings-wrapper">';
-  $form['favicon']['#suffix'] = '</div>';
-  $form['node_info']['#collapsible'] = TRUE;
-  $form['node_info']['#collapsed']   = TRUE;
-  $form['node_info']['#prefix'] = '<div class="node-info-settings-wrapper">';
-  $form['node_info']['#suffix'] = '</div>';
   $form['theme_specific']['#title'] = t('Advanced theme settings');
-  $form['theme_specific']['#collapsible'] = TRUE;
-  $form['theme_specific']['#collapsed']   = TRUE;
+
+  $form_elements = element_children($form);
+  foreach ($form_elements as $element) {
+    if ( $form[$element]['#type'] == 'fieldset' ) {
+      $form[$element]['#collapsible'] = TRUE;
+      $form[$element]['#collapsed']   = TRUE;
+      $form[$element]['#prefix'] = '<div class="' . safe_string($element) . '-settings-wrapper">';
+      $form[$element]['#suffix'] = '</div>';
+    }
+  }
   return drupal_render($form);
 }
 
