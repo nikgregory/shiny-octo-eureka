@@ -14,7 +14,7 @@
  *   The name of the theme function being called.
  */
 
-global $theme, $theme_info, $user;
+global $theme, $theme_info, $user, $language;
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
@@ -42,7 +42,7 @@ if (theme_get_setting('skip_navigation_display') == 'focus') {
 
 // Set variables for the logo and site name for easy printing in templates.
 $vars['logo_alt_text']    = check_plain(variable_get('site_name', '')) .' '. t('logo');
-$vars['logo_img']         = $vars['logo'] ? theme('image', substr($vars['logo'], strlen(base_path())), $vars['logo_alt_text'], t('Home page')) : '';
+$vars['logo_img']         = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'" title="'. t('Home page') .'"/>' : '';
 $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'), 'html' => TRUE)) : '';
 $vars['linked_site_name'] = $vars['site_name'] ? l($vars['site_name'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'))) : '';
 
@@ -142,7 +142,6 @@ if (!$vars['is_front']) {
 // Language specific body class.
 if (theme_get_setting('cleanup_classes_language')) {
   if (function_exists('locale')) {
-    global $language;
     $classes[] = 'lang-'. $language->language;
   }
 }
