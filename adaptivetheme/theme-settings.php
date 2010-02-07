@@ -252,6 +252,7 @@ SCRIPT;
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
         '#type' => 'fieldset',
         '#title' => t('@name', array('@name' => $name)),
+      '#description' => t('These settings allow you to modify the output of the author and date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
       );
@@ -282,7 +283,7 @@ SCRIPT;
     }
   }
   else {
-    $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the "Submitted by" module installed and enabled, so the author and date theme settings have been disabled to prevent conflicts.  If you later wish to re-enable the author and date theme settings, you must first disable the "Submitted by" module.');
+    $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the <a href="!link">Submitted By</a> module installed and enabled - the author and date theme settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/submitted_by'));
     $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
   }
   // Taxonomy term display
@@ -594,19 +595,23 @@ SCRIPT;
       '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
-  //split_node_form
+  // split_node_container  
   $form['layout']['split_node_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Content Forms'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-  );
+  );   
   $form['layout']['split_node_container']['split_node_form'] = array(
     '#type' => 'checkbox',
     '#title' => t('Alternate content form layout'),
-    '#description' => t('This setting does three things. 1) Splits content forms into two columns, 2) Adds Save, Preview and Delete buttons to the top of the form (in the new column) and 3) Moves the Taxonomy Term fieldset into the new column as well.'),
+    '#description' => t('This setting does three things. 1) Splits content forms into two columns, 2) Adds Save, Preview and Delete buttons to the top of the form (in the new column) and 3) Moves the Taxonomy Term fieldset into the new column as well. For more control over the layout of content forma install the <a href="!link">Node Form Columns</a> module.', array('!link' => 'http://drupal.org/project/nodeformcols')),
     '#default_value' => $settings['split_node_form'],
   );
+  if (module_exists('nodeformcols')) {
+    $form['layout']['split_node_container']['split_node_form']['#description'] = t('NOTICE: You currently have the <a href="!link">Node Form Columns</a> module installed and enabled - the content form settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/nodeformcols'));
+    $form['layout']['split_node_container']['split_node_form']['#disabled'] = 'disabled';
+  }
   // Admin settings
   $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
@@ -639,7 +644,7 @@ SCRIPT;
   $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
-  '#description' => t('WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
+    '#description' => t('WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
@@ -651,30 +656,16 @@ SCRIPT;
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
   // Show $theme_info
-  if (module_exists('devel')) {
-    $form['themedev']['dev']['show_theme_info'] = array(
-       '#type' => 'checkbox',
-       '#title' => t('Show theme info.'),
-       '#default_value' => $settings['show_theme_info'],
-       '#description' => t('This will show the output of the global $theme_info variable using Krumo.'),
-    );
-  }
-  else {
-    $form['themedev']['dev']['show_theme_info'] = array(
-       '#type' => 'checkbox',
-       '#title' => t('Show theme info.'),
-       '#default_value' => $settings['show_theme_info'],
-       '#disabled' => 'disabled',
-       '#description' => t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel')),
-    );
-  }
-  // Firebug lite
-  $form['themedev']['dev']['load_firebug_lite'] = array(
+  $form['themedev']['dev']['show_theme_info'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Load Firebug lite script for debugging in IE, Opera and Webkit.'),
-    '#default_value' => $settings['load_firebug_lite'],
-    '#description' => t('WARNING! To use Firebug lite you must first download and install the script to the /js/core/ directory in your theme. <a href="!link">Download Firebug lite</a>.', array('!link' => 'http://getfirebug.com/lite.html')),
+    '#title' => t('Show theme info.'),
+    '#default_value' => $settings['show_theme_info'],
+    '#description' => t('This will show the output of the global $theme_info variable using Krumo.'),
   );
+  if (!module_exists('devel')) {
+    $form['themedev']['dev']['show_theme_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
+    $form['themedev']['dev']['show_theme_info']['#disabled'] = 'disabled';
+  }
   // Add or remove extra classes
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',

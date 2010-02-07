@@ -568,8 +568,10 @@ margin-top:.833em;
 padding:.1875em;
 }
 
-.form-item .description {
-font-size:.9em;
+.form-item .description,
+fieldset .description,
+.fieldset-layout-settings dd {
+font-size:0.9em;
 line-height:1.667em;
 }
 

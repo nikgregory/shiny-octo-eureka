@@ -163,7 +163,6 @@
 
   settings[rebuild_registry]                  = 0
   settings[show_theme_info]                   = 0
-  settings[load_firebug_lite]                 = 0
 
   settings[cleanup_classes_section]           = 0
   settings[cleanup_classes_front]             = 0

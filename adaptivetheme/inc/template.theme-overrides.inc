@@ -158,25 +158,28 @@ function adaptivetheme_system_settings_form($form) {
  * Override of theme_node_form().
  * Split the node form into two columns.
  */
-function adaptivetheme_node_form($form) {
-  if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
-    if (theme_get_setting('split_node_form') == 1) {
-      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
-      $sidebar = drupal_render($form['taxonomy']);
-      $main = drupal_render($form);
-      return "
+// Support the Node Form Columns module http://drupal.org/project/nodeformcols
+if (!module_exists('nodeformcols')) {
+  function adaptivetheme_node_form($form) {
+    if ((arg(0) == 'node' && arg(1) == 'add') || (is_numeric(arg(1)) && (arg(2) == 'edit'))) {
+      if (theme_get_setting('split_node_form') == 1) {
+        $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+        $sidebar = drupal_render($form['taxonomy']);
+        $main = drupal_render($form);
+        return "
 <div class='article-form clear-block'>
   <div class='article-col-last'>{$buttons}{$sidebar}</div>
   <div class='article-col-first'><div class='main'>{$main}{$buttons}</div></div>
 </div>";
-    }
-    elseif (theme_get_setting('split_node_form') == 0) {
-      $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
-      $main = drupal_render($form);
-      return "
+      }
+      elseif (theme_get_setting('split_node_form') == 0) {
+        $buttons = '<div class="buttons">'. drupal_render($form['buttons']) .'</div>';
+        $main = drupal_render($form);
+        return "
 <div class='article-form clear-block'>
   <div class='main'>{$main}{$buttons}</div>
 </div>";
+      }
     }
   }
 }
