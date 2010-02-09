@@ -31,6 +31,9 @@ function adaptivetheme_breadcrumb($breadcrumb) {
       if (theme_get_setting('breadcrumb_title')) {
         $trailing_separator = $breadcrumb_separator;
         $title = menu_get_active_title();
+        if ((module_exists('taxonomy')) && arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
+          $title = drupal_get_title();
+        }
       }
       elseif (theme_get_setting('breadcrumb_trailing')) {
         $trailing_separator = $breadcrumb_separator;
