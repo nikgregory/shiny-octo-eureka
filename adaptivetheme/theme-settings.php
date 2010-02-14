@@ -23,23 +23,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
 
   global $theme_info;
 
-  // Only open one of the general or node setting fieldsets at a time
-  $js = <<<SCRIPT
-    $(document).ready(function(){
-      $("fieldset.general_settings > legend > a").click(function(){
-      	if(!$("fieldset.node_settings").hasClass("collapsed")) {
-          Drupal.toggleFieldset($("fieldset.node_settings"));
-      	}
-      });
-      $("fieldset.node_settings > legend > a").click(function(){
-      	if (!$("fieldset.general_settings").hasClass("collapsed")) {
-          Drupal.toggleFieldset($("fieldset.general_settings"));
-      	}
-      });
-    });
-SCRIPT;
-  drupal_add_js($js, 'inline');
-
   // Get the node types
   $node_types = node_get_types('names');
 
@@ -61,6 +44,105 @@ SCRIPT;
 
   // Merge the saved variables and their default values
   $settings = array_merge($defaults, $saved_settings);
+  
+
+  // Export theme settings  
+  $exportable_settings = array (
+    'skip_navigation_display'           => $settings['skip_navigation_display'],
+    'breadcrumb_display'                => $settings['breadcrumb_display'],
+    'breadcrumb_separator'              => $settings['breadcrumb_separator'],
+    'breadcrumb_home'                   => $settings['breadcrumb_home'],
+    'breadcrumb_trailing'               => $settings['breadcrumb_trailing'],
+    'breadcrumb_title'                  => $settings['breadcrumb_title'],
+    'display_search_form_label'         => $settings['display_search_form_label'],
+    'search_snippet'                    => $settings['search_snippet'],
+    'search_info_type'                  => $settings['search_info_type'],
+    'search_info_user'                  => $settings['search_info_user'],
+    'search_info_date'                  => $settings['search_info_date'],
+    'search_info_comment'               => $settings['search_info_comment'],
+    'search_info_upload'                => $settings['search_info_upload'],
+    'search_info_separator'             => $settings['search_info_separator'],
+    'primary_links_tree'                => $settings['primary_links_tree'],
+    'secondary_links_tree'              => $settings['secondary_links_tree'],
+    'mission_statement_pages'           => $settings['mission_statement_pages'],
+    'split_node_form'                   => $settings['split_node_form'],
+    'taxonomy_settings_enabled'         => $settings['taxonomy_settings_enabled'],
+    'taxonomy_display_default'          => $settings['taxonomy_display_default'],
+    'taxonomy_format_default'           => $settings['taxonomy_format_default'],
+    'taxonomy_delimiter_default'        => $settings['taxonomy_delimiter_default'],
+    'taxonomy_enable_content_type'      => $settings['taxonomy_enable_content_type'],
+    'submitted_by_settings_enabled'     => $settings['submitted_by_settings_enabled'],
+    'submitted_by_author_default'       => $settings['submitted_by_author_default'],
+    'submitted_by_date_default'         => $settings['submitted_by_date_default'],
+    'submitted_by_enable_content_type'  => $settings['submitted_by_enable_content_type'],
+    'display_links_settings_enabled'    => $settings['display_links_settings_enabled'],
+    'display_links_default'             => $settings['display_links_default'],
+    'display_links_enable_content_type' => $settings['display_links_enable_content_type'],
+    'rebuild_registry'                  => $settings['rebuild_registry'],
+    'show_theme_info'                   => $settings['show_theme_info'],
+    'cleanup_classes_section'           => $settings['cleanup_classes_section'],
+    'cleanup_classes_front'             => $settings['cleanup_classes_front'],
+    'cleanup_classes_user_status'       => $settings['cleanup_classes_user_status'],
+    'cleanup_classes_normal_path'       => $settings['cleanup_classes_normal_path'],
+    'cleanup_classes_node_type'         => $settings['cleanup_classes_node_type'],
+    'cleanup_classes_add_edit_delete'   => $settings['cleanup_classes_add_edit_delete'],
+    'cleanup_classes_language'          => $settings['cleanup_classes_language'],
+    'cleanup_article_id'                => $settings['cleanup_article_id'],
+    'cleanup_article_classes_promote'   => $settings['cleanup_article_classes_promote'],
+    'cleanup_article_classes_sticky'    => $settings['cleanup_article_classes_sticky'],
+    'cleanup_article_classes_teaser'    => $settings['cleanup_article_classes_teaser'],
+    'cleanup_article_classes_preview'   => $settings['cleanup_article_classes_preview'],
+    'cleanup_article_classes_type'      => $settings['cleanup_article_classes_type'],
+    'cleanup_article_classes_language'  => $settings['cleanup_article_classes_language'],
+    'cleanup_comment_anonymous'         => $settings['cleanup_comment_anonymous'],
+    'cleanup_comment_article_author'    => $settings['cleanup_comment_article_author'],
+    'cleanup_comment_by_viewer'         => $settings['cleanup_comment_by_viewer'],
+    'cleanup_comment_new'               => $settings['cleanup_comment_new'],
+    'cleanup_comment_zebra'             => $settings['cleanup_comment_zebra'],
+    'cleanup_comment_wrapper_type'      => $settings['cleanup_comment_wrapper_type'],
+    'cleanup_block_block_module_delta'  => $settings['cleanup_block_block_module_delta'],
+    'cleanup_block_classes_module'      => $settings['cleanup_block_classes_module'],
+    'cleanup_block_classes_zebra'       => $settings['cleanup_block_classes_zebra'],
+    'cleanup_block_classes_region'      => $settings['cleanup_block_classes_region'],
+    'cleanup_block_classes_count'       => $settings['cleanup_block_classes_count'],
+    'cleanup_menu_menu_class'           => $settings['cleanup_menu_menu_class'],
+    'cleanup_menu_leaf_class'           => $settings['cleanup_menu_leaf_class'],
+    'cleanup_menu_first_last_classes'   => $settings['cleanup_menu_first_last_classes'],
+    'cleanup_menu_active_classes'       => $settings['cleanup_menu_active_classes'],
+    'cleanup_menu_title_class'          => $settings['cleanup_menu_title_class'],
+    'cleanup_links_type_class'          => $settings['cleanup_links_type_class'],
+    'cleanup_links_active_classes'      => $settings['cleanup_links_active_classes'],
+    'cleanup_item_list_zebra'           => $settings['cleanup_item_list_zebra'],
+    'cleanup_item_list_first_last'      => $settings['cleanup_item_list_first_last'],
+    'cleanup_headings_title_class'      => $settings['cleanup_headings_title_class'],
+    'cleanup_headings_namespaced_class' => $settings['cleanup_headings_namespaced_class'],
+    'at_user_menu'                      => $settings['at_user_menu'],
+    'block_edit_links'                  => $settings['block_edit_links'],
+    'at_admin_hide_help'                => $settings['at_admin_hide_help'],
+    'layout_method'                     => $settings['layout_method'],
+    'layout_width'                      => $settings['layout_width'],
+    'layout_sidebar_first_width'        => $settings['layout_sidebar_first_width'],
+    'layout_sidebar_last_width'         => $settings['layout_sidebar_last_width'],
+    'layout_enable_settings'            => $settings['layout_enable_settings'],
+    'layout_enable_width'               => $settings['layout_enable_width'],
+    'layout_enable_sidebars'            => $settings['layout_enable_sidebars'],
+    'layout_enable_method'              => $settings['layout_enable_method'],
+    'layout_enable_frontpage'           => $settings['layout_enable_frontpage'],
+    'equal_heights_sidebars'            => $settings['equal_heights_sidebars'],
+    'equal_heights_blocks'              => $settings['equal_heights_blocks'],
+    'horizontal_login_block'            => $settings['horizontal_login_block'],
+    'horizontal_login_block_overlabel'  => $settings['horizontal_login_block_overlabel'],
+    'horizontal_login_block_enable'     => $settings['horizontal_login_block_enable'],
+    'color_schemes'                     => $settings['color_schemes'],
+    'color_enable_schemes'              => $settings['color_enable_schemes'],
+  );
+  // Output key value pairs formatted as settings
+  foreach($exportable_settings as $key => $value) {
+  	$key = filter_xss($key);
+  	$value = filter_xss($value);
+  	$output .= "settings[$key]=\"$value\"\n";
+  }
+  $exports = $output;
 
   // Create the form using Forms API: http://api.drupal.org/api/6
   // General Settings
@@ -246,120 +328,136 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  if (module_exists('submitted_by') == FALSE) {
-    // Default & content type specific settings
-    foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
-        '#type' => 'fieldset',
-        '#title' => t('@name', array('@name' => $name)),
-      '#description' => t('These settings allow you to modify the output of the author and date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-      );
-      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
-        '#type' => 'checkbox',
-        '#title' => t('Display author\'s username'),
-        '#default_value' => $settings["submitted_by_author_{$type}"],
-      );
-      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
-        '#type' => 'checkbox',
-        '#title' => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
-        '#default_value' => $settings["submitted_by_date_{$type}"],
-      );
-      // Options for default settings
-      if ($type == 'default') {
-        $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
-        $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
-        $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Use content type specific settings.'),
-          '#default_value' => $settings['submitted_by_enable_content_type'],
+  $form['node_type_specific']['submitted_by_container']['submitted_by_settings_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Author &amp; Date Settings'),
+    '#description' => t('These settings are disabled by default to avoid conflicts with modules, such as the <a href="!link">Submitted By</a> module. If you encounter issues with a module try disabeling this setting.', array('!link' => 'http://drupal.org/project/submitted_by')),
+    '#default_value' => $settings['submitted_by_settings_enabled'],
+  );
+  if ($settings['submitted_by_settings_enabled'] == 1) {
+    if (module_exists('submitted_by') == FALSE) {
+      // Default & content type specific settings
+      foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
+        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
+          '#type' => 'fieldset',
+          '#title' => t('@name', array('@name' => $name)),
+          '#description' => t('These settings allow you to modify the output of the author and date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
+          '#collapsible' => TRUE,
+          '#collapsed' => TRUE,
         );
-      }
-      // Collapse content type specific settings if default settings are being used
-      else if ($settings['submitted_by_enable_content_type'] == 0) {
+        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Display author\'s username'),
+          '#default_value' => $settings["submitted_by_author_{$type}"],
+        );
+        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
+          '#default_value' => $settings["submitted_by_date_{$type}"],
+        );
+        // Options for default settings
+        if ($type == 'default') {
+          $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
+          $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
+          $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Use content type specific settings.'),
+            '#default_value' => $settings['submitted_by_enable_content_type'],
+          );
+        }
+        // Collapse content type specific settings if default settings are being used
+        else if ($settings['submitted_by_enable_content_type'] == 0) {
         $form['submitted_by'][$type]['#collapsed'] = TRUE;
+        }
       }
     }
-  }
-  else {
-    $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the <a href="!link">Submitted By</a> module installed and enabled - the author and date theme settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/submitted_by'));
-    $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
+    else {
+      $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the <a href="!link">Submitted By</a> module installed and enabled - the author and date theme settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/submitted_by'));
+      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
+    }
   }
   // Taxonomy term display
   if (module_exists('taxonomy')) {
     $form['node_type_specific']['display_taxonomy_container'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Taxonomy terms'),
+      '#title' => t('Taxonomy Terms'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    // Default & content type specific settings
-    foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-      // taxonomy display per node
-      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
-        '#type' => 'fieldset',
-        '#title' => t('@name', array('@name' => $name)),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-      );
-      // Display
-      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
-        '#type' => 'select',
-        '#title' => t('When should taxonomy terms be displayed?'),
-        '#default_value' => $settings["taxonomy_display_{$type}"],
-        '#options' => array(
-          'never' => t('Hide terms'),
-          'only' => t('Show terms in page view'),
-          'all' => t('Show terms in teaser and page view'),
-        ),
-      );
-      // Formatting
-      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
-        '#type' => 'radios',
-        '#title' => t('Taxonomy display format'),
-        '#default_value' => $settings["taxonomy_format_{$type}"],
-        '#options' => array(
-          'vocab' => t('Display each vocabulary on a new line'),
-          'list' => t('Display all taxonomy terms together in single list'),
-        ),
-      );
-      // Delimiter
-      $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_delimiter_{$type}"] = array(
-        '#type' => 'textfield',
-        '#title' => t('Delimiter'),
-        '#description' => t('Modify the delimiter. The default is a comma followed by a space.'),
-        '#default_value' => $settings['taxonomy_delimiter_default'],
-        '#size' => 8,
-        '#maxlength' => 10,
-      );
-      // Get taxonomy vocabularies by node type
-      $vocabs = array();
-      $vocabs_by_type = ($type == 'default') ? taxonomy_get_vocabularies() : taxonomy_get_vocabularies($type);
-      foreach ($vocabs_by_type as $key => $value) {
-        $vocabs[$value->vid] = $value->name;
-      }
-      // Display taxonomy checkboxes
-      foreach ($vocabs as $key => $vocab_name) {
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Display vocabulary: @vocab_name', array('@vocab_name' => $vocab_name)),
-          '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
+    $form['node_type_specific']['display_taxonomy_container']['taxonomy_settings_enabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable Taxonomy Term Settings'),
+      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabeling this setting.'),
+      '#default_value' => $settings['taxonomy_settings_enabled'],
+    );
+    if ($settings['taxonomy_settings_enabled'] == 1) {
+      // Default & content type specific settings
+      foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
+        // taxonomy display per node
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
+          '#type' => 'fieldset',
+          '#title' => t('@name', array('@name' => $name)),
+          '#collapsible' => TRUE,
+          '#collapsed' => TRUE,
         );
-      }
-      // Options for default settings
-      if ($type == 'default') {
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Use content type specific settings.'),
-          '#default_value' => $settings['taxonomy_enable_content_type'],
+        // Display
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
+          '#type' => 'select',
+          '#title' => t('When should taxonomy terms be displayed?'),
+          '#default_value' => $settings["taxonomy_display_{$type}"],
+          '#options' => array(
+            'never' => t('Hide terms'),
+            'only' => t('Show terms in page view'),
+            'all' => t('Show terms in teaser and page view'),
+          ),
         );
-      }
-      // Collapse content type specific settings if default settings are being used
-      else if ($settings['taxonomy_enable_content_type'] == 0) {
-        $form['display_taxonomy'][$type]['#collapsed'] = TRUE;
+        // Formatting
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
+          '#type' => 'radios',
+          '#title' => t('Taxonomy display format'),
+          '#default_value' => $settings["taxonomy_format_{$type}"],
+          '#options' => array(
+            'vocab' => t('Display each vocabulary on a new line'),
+            'list' => t('Display all taxonomy terms together in single list'),
+          ),
+        );
+        // Delimiter
+        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_delimiter_{$type}"] = array(
+          '#type' => 'textfield',
+          '#title' => t('Delimiter'),
+          '#description' => t('Modify the delimiter. The default is a comma followed by a space.'),
+          '#default_value' => $settings['taxonomy_delimiter_default'],
+          '#size' => 8,
+          '#maxlength' => 10,
+        );
+        // Get taxonomy vocabularies by node type
+        $vocabs = array();
+        $vocabs_by_type = ($type == 'default') ? taxonomy_get_vocabularies() : taxonomy_get_vocabularies($type);
+        foreach ($vocabs_by_type as $key => $value) {
+          $vocabs[$value->vid] = $value->name;
+        }
+        // Display taxonomy checkboxes
+        foreach ($vocabs as $key => $vocab_name) {
+          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Display vocabulary: @vocab_name', array('@vocab_name' => $vocab_name)),
+            '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
+          );
+        }
+        // Options for default settings
+        if ($type == 'default') {
+          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
+          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
+          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Use content type specific settings.'),
+            '#default_value' => $settings['taxonomy_enable_content_type'],
+          );
+        }
+        // Collapse content type specific settings if default settings are being used
+        else if ($settings['taxonomy_enable_content_type'] == 0) {
+          $form['display_taxonomy'][$type]['#collapsed'] = TRUE;
+        }
       }
     }
   }
@@ -371,37 +469,45 @@ SCRIPT;
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // Default & content type specific settings
-  foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-    $form['node_type_specific']['links_container']['links'][$type] = array(
-      '#type' => 'fieldset',
-      '#title' => t('@name', array('@name' => @$name)),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['node_type_specific']['links_container']['links'][$type]["display_links_{$type}"] = array(
-      '#type' => 'select',
-      '#title' => t('Display Links'),
-      '#default_value' => $settings['display_links_default'],
-      '#options' => array(
-        'never' => t('Never display links'),
-        'all' => t('Always display links'),
-        'only' => t('Only display links on full nodes'),
-      ),
-    );
-    // Options for default settings
-    if ($type == 'default') {
-      $form['node_type_specific']['links_container']['links']['default']['#title'] = t('Default');
-      $form['node_type_specific']['links_container']['links']['default']['#collapsed'] = $settings['display_links_enable_content_type'] ? TRUE : FALSE;
-      $form['node_type_specific']['links_container']['links']['display_links_enable_content_type'] = array(
-        '#type' => 'checkbox',
-        '#title' => t('Use content type specific settings.'),
-        '#default_value' => $settings['display_links_enable_content_type'],
+  $form['node_type_specific']['links_container']['display_links_settings_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Links Settings'),
+    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabeling this setting.'),
+    '#default_value' => $settings['display_links_settings_enabled'],
+  );
+  if ($settings['display_links_settings_enabled'] == 1) {
+    // Default & content type specific settings
+    foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
+      $form['node_type_specific']['links_container']['links'][$type] = array(
+        '#type' => 'fieldset',
+        '#title' => t('@name', array('@name' => @$name)),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
       );
-    }
-    // Collapse content type specific settings if default settings are being used
-    else if ($settings['display_links_enable_content_type'] == 0) {
-      $form['links'][$type]['#collapsed'] = TRUE;
+      $form['node_type_specific']['links_container']['links'][$type]["display_links_{$type}"] = array(
+        '#type' => 'select',
+        '#title' => t('Display Links'),
+        '#default_value' => $settings['display_links_default'],
+        '#options' => array(
+          'never' => t('Never display links'),
+          'all' => t('Always display links'),
+          'only' => t('Only display links on full nodes'),
+        ),
+      );
+      // Options for default settings
+      if ($type == 'default') {
+        $form['node_type_specific']['links_container']['links']['default']['#title'] = t('Default');
+        $form['node_type_specific']['links_container']['links']['default']['#collapsed'] = $settings['display_links_enable_content_type'] ? TRUE : FALSE;
+        $form['node_type_specific']['links_container']['links']['display_links_enable_content_type'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Use content type specific settings.'),
+          '#default_value' => $settings['display_links_enable_content_type'],
+        );
+      }
+      // Collapse content type specific settings if default settings are being used
+      else if ($settings['display_links_enable_content_type'] == 0) {
+        $form['links'][$type]['#collapsed'] = TRUE;
+      }
     }
   }
   // Layout settings
@@ -564,16 +670,17 @@ SCRIPT;
     '#title' => t('Equal Height Blocks'),
   );
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
-      '#prefix' => '<div id="div-equalize-collapse">',
-      '#suffix' => '</div>',
-      '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so is not applicable by default to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes that come with Adaptivetheme. Equal heights is applied with jQuery and applies to the block-inner DIV.</p><p>Select which regions to want to have equal height blocks.</p>'),
+    '#prefix' => '<div id="div-equalize-collapse">',
+    '#suffix' => '</div>',
+    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so is not applicable by default to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes that come with Adaptivetheme. Equal heights is applied with jQuery and applies to the block-inner DIV.</p><p>Select which regions to want to have equal height blocks.</p>'),
+  );
+  foreach ($equalized_blocks as $name => $title) {
+    $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
+      '#type' => 'checkbox',
+      '#title' => $title,
+      '#default_value' => $settings['equalize_'. $name],
     );
-    foreach ($equalized_blocks as $name => $title) {
-      $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
-        '#type' => 'checkbox',
-        '#title' => $title,
-        '#default_value' => $settings['equalize_'. $name]);
-    }
+  }
   // Horizonatal login block
   if ($settings['horizontal_login_block_enable'] == 'on') {
     $form['layout']['login_block'] = array(
@@ -944,6 +1051,21 @@ SCRIPT;
     '#type' => 'checkbox',
     '#title' => t('Add a pseudo name spaced title class to headings, i.e. .article-title, .block-title, .comment-title.'),
     '#default_value' => $settings['cleanup_headings_namespaced_class'],
+  );
+  // TS Export
+  $form['theme_settings_export']['export'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Export Advanced Theme Settings'),
+    '#description' => t('<p>Copy/paste these settings to a text file for backup or paste to your themes .info file (over-write the defaults) - useful if you are moving your theme to a new site and want to retain custom settings.</p><p>NOTE: Content type specific settings are NOT included here, these cannot be set via the info file.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['theme_settings_export']['export']['exported_settings'] = array(
+    '#type' => 'textarea',
+    '#default_value' => $exports,
+    '#resizable' => FALSE,
+    '#cols' => 60,
+    '#rows' => 25,
   );
   return $form;
 }

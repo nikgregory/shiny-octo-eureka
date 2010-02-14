@@ -65,15 +65,18 @@
   settings[mission_statement_pages]           = 'home'
   settings[split_node_form]                   = 1
 
+  settings[taxonomy_settings_enabled]         = 0
   settings[taxonomy_display_default]          = 'only'
   settings[taxonomy_format_default]           = 'vocab'
   settings[taxonomy_delimiter_default]        = ', '
   settings[taxonomy_enable_content_type]      = 0
 
+  settings[submitted_by_settings_enabled]     = 0
   settings[submitted_by_author_default]       = 1
   settings[submitted_by_date_default]         = 1
   settings[submitted_by_enable_content_type]  = 0
 
+  settings[display_links_settings_enabled]    = 0
   settings[display_links_default]             = 'all'
   settings[display_links_enable_content_type] = 0
 
