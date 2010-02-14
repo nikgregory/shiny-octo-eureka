@@ -44,7 +44,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
 
   // Merge the saved variables and their default values
   $settings = array_merge($defaults, $saved_settings);
-  
 
   // Export theme settings  
   $exportable_settings = array (
@@ -138,7 +137,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   );
   // Output key value pairs formatted as settings
   foreach($exportable_settings as $key => $value) {
-  	$key = filter_xss($key);
   	$value = filter_xss($value);
   	$output .= "settings[$key]=\"$value\"\n";
   }
@@ -1052,7 +1050,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#title' => t('Add a pseudo name spaced title class to headings, i.e. .article-title, .block-title, .comment-title.'),
     '#default_value' => $settings['cleanup_headings_namespaced_class'],
   );
-  // TS Export
+  // Theme Settings Export
   $form['theme_settings_export']['export'] = array(
     '#type' => 'fieldset',
     '#title' => t('Export Advanced Theme Settings'),
