@@ -149,19 +149,6 @@ if (theme_get_setting('cleanup_classes_language')) {
 // $classes is the varaible that holds the page classes, printed in page tpl files.
 $vars['classes'] = trim(implode(' ', $classes));
 
-// Page tpls files for path parts
-if(module_exists('path')) {
-  //Get the "clean" URL of the current page
-  $alias = drupal_get_path_alias($_GET['q']);
-  $suggestions = array();
-  $template_filename = 'page';
-  foreach(explode('/', $alias) as $path_part) {
-    $template_filename = $template_filename.'-'.$path_part;
-    $suggestions[] = $template_filename;
-  }
-  $vars['template_files'] = $suggestions;
-}
-
 // Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
