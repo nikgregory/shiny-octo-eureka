@@ -329,7 +329,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['node_type_specific']['submitted_by_container']['submitted_by_settings_enabled'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Author &amp; Date Settings'),
-    '#description' => t('These settings are disabled by default to avoid conflicts with modules, such as the <a href="!link">Submitted By</a> module. If you encounter issues with a module try disabeling this setting.', array('!link' => 'http://drupal.org/project/submitted_by')),
+    '#description' => t('These settings are disabled by default to avoid conflicts with modules, such as the <a href="!link">Submitted By</a> module. If you encounter issues with a module try disabling this setting.', array('!link' => 'http://drupal.org/project/submitted_by')),
     '#default_value' => $settings['submitted_by_settings_enabled'],
   );
   if ($settings['submitted_by_settings_enabled'] == 1) {
@@ -385,7 +385,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     $form['node_type_specific']['display_taxonomy_container']['taxonomy_settings_enabled'] = array(
       '#type' => 'checkbox',
       '#title' => t('Enable Taxonomy Term Settings'),
-      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabeling this setting.'),
+      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabling this setting.'),
       '#default_value' => $settings['taxonomy_settings_enabled'],
     );
     if ($settings['taxonomy_settings_enabled'] == 1) {
@@ -470,7 +470,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['node_type_specific']['links_container']['display_links_settings_enabled'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Links Settings'),
-    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabeling this setting.'),
+    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabling this setting.'),
     '#default_value' => $settings['display_links_settings_enabled'],
   );
   if ($settings['display_links_settings_enabled'] == 1) {
