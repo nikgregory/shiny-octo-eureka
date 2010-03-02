@@ -63,7 +63,6 @@
   settings[secondary_links_tree]              = 0
 
   settings[mission_statement_pages]           = 'home'
-  settings[split_node_form]                   = 1
 
   settings[taxonomy_settings_enabled]         = 0
   settings[taxonomy_display_default]          = 'only'

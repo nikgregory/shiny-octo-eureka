@@ -64,7 +64,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'primary_links_tree'                => $settings['primary_links_tree'],
     'secondary_links_tree'              => $settings['secondary_links_tree'],
     'mission_statement_pages'           => $settings['mission_statement_pages'],
-    'split_node_form'                   => $settings['split_node_form'],
     'taxonomy_settings_enabled'         => $settings['taxonomy_settings_enabled'],
     'taxonomy_display_default'          => $settings['taxonomy_display_default'],
     'taxonomy_format_default'           => $settings['taxonomy_format_default'],
@@ -700,23 +699,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
     );
   } // endif horizontal block settings
-  // split_node_container  
-  $form['layout']['split_node_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Content Forms'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );   
-  $form['layout']['split_node_container']['split_node_form'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Alternate content form layout'),
-    '#description' => t('This setting does three things. 1) Splits content forms into two columns, 2) Adds Save, Preview and Delete buttons to the top of the form (in the new column) and 3) Moves the Taxonomy Term fieldset into the new column as well. For more control over the layout of content forma install the <a href="!link">Node Form Columns</a> module.', array('!link' => 'http://drupal.org/project/nodeformcols')),
-    '#default_value' => $settings['split_node_form'],
-  );
-  if (module_exists('nodeformcols')) {
-    $form['layout']['split_node_container']['split_node_form']['#description'] = t('NOTICE: You currently have the <a href="!link">Node Form Columns</a> module installed and enabled - the content form settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/nodeformcols'));
-    $form['layout']['split_node_container']['split_node_form']['#disabled'] = 'disabled';
-  }
   // Admin settings
   $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
