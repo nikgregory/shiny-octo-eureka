@@ -45,7 +45,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   // Merge the saved variables and their default values
   $settings = array_merge($defaults, $saved_settings);
 
-  // Export theme settings  
+  // Export theme settings
   $exportable_settings = array (
     'skip_navigation_display'           => $settings['skip_navigation_display'],
     'breadcrumb_display'                => $settings['breadcrumb_display'],
@@ -314,7 +314,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
     '#title' => t('Content type settings'),
-    '#description' => t('Here you can make adjustments to which information is shown with your content, and how it is displayed.  You can modify these settings so they apply to all content types, or check the <em>"Use content type specific settings"</em> checkbox to customize them for each content type.  For example, you may want to show the date on Stories, but not Pages.'),
+    '#description' => t('Use these settings to change the meta information shown with your content.  You can apply these settings to all content types, or check <em>"Use content type specific settings"</em> to customize them for each content type.  For example, you may want to show the date on Stories, but not on other content types.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -322,6 +322,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['node_type_specific']['submitted_by_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Author &amp; Date'),
+    '#description' => t('Modify the output of the Author and Date for content types'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -338,7 +339,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
         $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
           '#type' => 'fieldset',
           '#title' => t('@name', array('@name' => $name)),
-          '#description' => t('These settings allow you to modify the output of the author and date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
+          '#description' => t('These settings allow you to modify the output of the Author and Date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
         );
@@ -378,13 +379,14 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     $form['node_type_specific']['display_taxonomy_container'] = array(
       '#type' => 'fieldset',
       '#title' => t('Taxonomy Terms'),
+      '#description' => t('Modify the output of the Taxonomy Terms for content types'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
     $form['node_type_specific']['display_taxonomy_container']['taxonomy_settings_enabled'] = array(
       '#type' => 'checkbox',
       '#title' => t('Enable Taxonomy Term Settings'),
-      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabling this setting.'),
+      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module that modifies the display or output of Taxonomy Terms try disabling this setting.'),
       '#default_value' => $settings['taxonomy_settings_enabled'],
     );
     if ($settings['taxonomy_settings_enabled'] == 1) {
@@ -469,7 +471,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['node_type_specific']['links_container']['display_links_settings_enabled'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Links Settings'),
-    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module try disabling this setting.'),
+    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module that modifies the display or output of Links try disabling this setting.'),
     '#default_value' => $settings['display_links_settings_enabled'],
   );
   if ($settings['display_links_settings_enabled'] == 1) {
@@ -484,7 +486,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       $form['node_type_specific']['links_container']['links'][$type]["display_links_{$type}"] = array(
         '#type' => 'select',
         '#title' => t('Display Links'),
-        '#default_value' => $settings['display_links_default'],
+        '#default_value' => $settings["display_links_{$type}"],
         '#options' => array(
           'never' => t('Never display links'),
           'all' => t('Always display links'),
@@ -757,7 +759,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',
     '#title' => t('Add or Remove CSS Classes'),
-    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development, so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site.</p><p>Note that whenever you change the defaults in the .info file you need to click <em>"Reset to defaults"</em> to save them to the variables table and have them applied.</p>'),
+    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development, so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file - this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site. Use the <b>Export Advanced Theme Settings</b> to copy/paste your theme settings to the .info file (save them first if you have made changes).</p><p>Note that whenever you change the defaults in the .info file you need to click <em>"Reset to defaults"</em> to save them to the variables table and have them applied.</p>'),
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
@@ -962,7 +964,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     );
     $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_first_last_classes'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Print the .first and .last classes on menu list items.'),
+      '#title' => t('Print the .first and .last classes on menu list items. If there is only one item in the menu the class .single-item will replace the .last class (requires the .leaf class).'),
       '#default_value' => $settings['cleanup_menu_first_last_classes'],
     );
     $form['themedev']['dev']['classses']['menu_classes']['menu_menu_classes']['cleanup_menu_active_classes'] = array(
@@ -1036,7 +1038,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['theme_settings_export']['export'] = array(
     '#type' => 'fieldset',
     '#title' => t('Export Advanced Theme Settings'),
-    '#description' => t('<p>Copy/paste these settings to a text file for backup or paste to your themes .info file (over-write the defaults) - useful if you are moving your theme to a new site and want to retain custom settings.</p><p>NOTE: Content type specific settings are NOT included here, these cannot be set via the info file.'),
+    '#description' => t('<p>Copy/paste these settings to a text file for backup or paste to your themes .info file (over-write the defaults) - useful if you are moving your theme to a new site and want to retain custom settings.</p><p>NOTE: Content type specific settings are NOT included here, these cannot be set via the info file.</p><p>WARNING! If you are using a WYSIWYG editor it must be disabled for this text area, otherwise all special characters are likely to be converted to HTML entities. If your editor has a \'view source\' feature try that first.</p>'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );

@@ -176,14 +176,24 @@ if (!function_exists('dhtml_menu_init')) {
    * Generate the HTML output for a menu item and submenu.
    */
   function adaptivetheme_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
+    static $counter = 0;
     if (theme_get_setting('cleanup_menu_leaf_class')) {
       $class = ($menu ? 'expanded' : ($has_children ? 'collapsed' : 'leaf'));
+    }
+    if ($class == 'leaf') {
+      $counter ++;
+      if ($extra_class == 'last') {
+        if ($counter == 1) {
+          $extra_class = 'single-item';
+        }
+        else $counter = 0;
+      }
     }
     if (!empty($extra_class) && theme_get_setting('cleanup_menu_first_last_classes')) {
       if ($class) {
         $class .= ' '. $extra_class;
       }
-      else{
+      else {
         $class .= $extra_class;
       }
     }
@@ -194,7 +204,7 @@ if (!function_exists('dhtml_menu_init')) {
       $class .= ' active-trail';
     }
     if ($class) {
-      return "<li class=\"$class\">". $link . $menu ."</li>\n";
+      return '<li class="'. $class .'">'. $link . $menu ."</li>\n";
     }
     else{
       return '<li>'. $link . $menu ."</li>\n";
