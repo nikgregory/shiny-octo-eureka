@@ -143,8 +143,6 @@
  
 ;----------// Theme Setting Defaults
 
-  ; 0 = off, 1 = on.
-
   settings[skip_navigation_display]           = 'hide'
 
   settings[breadcrumb_display]                = 'yes'

@@ -59,12 +59,12 @@ if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
 
+// Class for content types e.g. "article-page", "article-my-content-type", etc.
 if (theme_get_setting('cleanup_article_classes_type')) {
-  // Class for node type: "node-type-page", "node-type-my-custom-type", etc.
   $classes[] = $vars['node']->type .'-article';
 }
 
-// Language specific body class.
+// Language specific article class.
 if (theme_get_setting('cleanup_article_classes_language')) {
   if (function_exists('i18n_init')) {
     if ($vars['node']->language) {
@@ -72,6 +72,10 @@ if (theme_get_setting('cleanup_article_classes_language')) {
       $classes[] = 'article-lang-'. $vars['node']->language;
     }
   }
+}
+
+if (theme_get_setting('cleanup_article_classes_zebra')) {
+  $classes[] = $vars['zebra'];
 }
 
 // $classes is the variable that holds the node classes and is printed in node tpl files.
@@ -93,9 +97,9 @@ $vars['title_classes'] = implode(' ', $title_classes);
 // Add article_aside region content.
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
-// Support node tpl suggestions per node
+// Support node tpl suggestions per node nid.
 $vars['template_files'][] = 'node-'.$vars['node']->nid; 
-      
+
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
   if ($vars['page']) {
@@ -181,7 +185,7 @@ if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxo
   }
 }
 
-// Display links
+// Display links.
 if (theme_get_setting('display_links_settings_enabled') == 1) {
   $links_content_type = (theme_get_setting('display_links_enable_content_type') == 1) ? $vars['node']->type : 'default';
   $links_display = theme_get_setting('display_links_'. $links_content_type);
