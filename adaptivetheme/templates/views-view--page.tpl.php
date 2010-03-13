@@ -22,7 +22,29 @@
  * @ingroup views_templates
  */
 ?>
-<div class="view view-page-display view-<?php print $css_name; ?> view-id-<?php print $name; ?> view-display-id-<?php print $display_id; ?> view-dom-id-<?php print $dom_id; ?><?php print $skinr ? ' '. $skinr : ''; ?>">
+<?php
+// Conditionally add CSS classes.
+$classes = array();
+if (theme_get_setting(cleanup_views_css_name)) {
+  $classes[] = 'view-' . $css_name;
+}
+if (theme_get_setting(cleanup_views_view_name)) {
+  $classes[] = 'view-id-' . $name;
+}
+if (theme_get_setting(cleanup_views_display_id)) {
+  $classes[] = 'view-display-id-' . $display_id;
+}
+if (theme_get_setting(cleanup_views_dom_id)) {
+  $classes[] = 'view-dom-id-' . $dom_id;
+}
+
+//Skinr module classes.
+$classes[] = $skinr;
+  
+$views_classes = implode(' ', $classes);
+$page_classes = ' '. $views_classes;
+?>
+<div class="view<?php print $page_classes ? $page_classes : '';?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>
