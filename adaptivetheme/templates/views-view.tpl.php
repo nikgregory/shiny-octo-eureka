@@ -37,14 +37,13 @@ if (theme_get_setting(cleanup_views_display_id)) {
 if (theme_get_setting(cleanup_views_dom_id)) {
   $classes[] = 'view-dom-id-' . $dom_id;
 }
-
 //Skinr module classes.
 $classes[] = $skinr;
-  
-$views_classes = implode(' ', $classes);
-$page_classes = ' '. $views_classes;
+if ($classes) {
+  $views_classes = implode(' ', $classes);
+}
 ?>
-<div class="view<?php print $page_classes ? $page_classes : '';?>">
+<div class="view<?php print $views_classes ? ' ' . $views_classes : '';?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>

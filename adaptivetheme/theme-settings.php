@@ -112,6 +112,13 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'cleanup_links_active_classes'      => $settings['cleanup_links_active_classes'],
     'cleanup_item_list_zebra'           => $settings['cleanup_item_list_zebra'],
     'cleanup_item_list_first_last'      => $settings['cleanup_item_list_first_last'],
+    'cleanup_views_css_name'            => $settings['cleanup_views_css_name'],
+    'cleanup_views_view_name'           => $settings['cleanup_views_view_name'],
+    'cleanup_views_display_id'          => $settings['cleanup_views_display_id'],
+    'cleanup_views_dom_id'              => $settings['cleanup_views_dom_id'],
+    'cleanup_views_unformatted'         => $settings['cleanup_views_unformatted'],
+    'cleanup_views_item_list'           => $settings['cleanup_views_item_list'],
+    'cleanup_fields_zebra'              => $settings['cleanup_fields_zebra'],
     'cleanup_headings_title_class'      => $settings['cleanup_headings_title_class'],
     'cleanup_headings_namespaced_class' => $settings['cleanup_headings_namespaced_class'],
     'at_user_menu'                      => $settings['at_user_menu'],
@@ -940,7 +947,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   // Menu classes
   $form['themedev']['dev']['classses']['menu_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Menu &amp; Primary and Secondary Links Classes'),
+    '#title' => t('Menu, Primary &amp; Secondary Links Classes'),
     '#description' => t('Standard menus get their classes via the <code>theme_menu_tree</code> function override while the Primary and Secondary links use the <code>theme_links</code> function override (both are found in template.theme-overrides.inc). Note that the standard menu class options will not appear and will not be applied if the <a href="!link">DHTML Menu</a> module is installed.', array('!link' => 'http://drupal.org/project/dhtml_menu')),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -1016,6 +1023,73 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#title' => t('Print .first and .last classes for the first and last items in the list.'),
     '#default_value' => $settings['cleanup_item_list_first_last'],
   );
+  // Views classes
+  if (module_exists('views')) {
+    $form['themedev']['dev']['classses']['views_classes'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Views Classes'),
+      '#description' => t('NOTE: If you are using custom Views templates you must use the template overrides that come with Adaptivetheme to preserve this functality.'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['themedev']['dev']['classses']['views_classes']['display'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Display Classes'),
+      '#description' => t('Control the classes for Views displays (views-view.tpl.php).'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['themedev']['dev']['classses']['views_classes']['display']['cleanup_views_css_name'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the CSS Name class.'),
+      '#default_value' => $settings['cleanup_views_css_name'],
+    );
+    $form['themedev']['dev']['classses']['views_classes']['display']['cleanup_views_view_name'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the View Name class.'),
+      '#default_value' => $settings['cleanup_views_view_name'],
+    );
+    $form['themedev']['dev']['classses']['views_classes']['display']['cleanup_views_display_id'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the Display ID class.'),
+      '#default_value' => $settings['cleanup_views_display_id'],
+    );
+    $form['themedev']['dev']['classses']['views_classes']['display']['cleanup_views_dom_id'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print the DOM ID class.'),
+      '#default_value' => $settings['cleanup_views_dom_id'],
+    );
+    $form['themedev']['dev']['classses']['views_classes']['style'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Views Style Classes'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['themedev']['dev']['classses']['views_classes']['style']['cleanup_views_unformatted'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print extra classes for unformatted views (views-view-unformatted.tpl.php).'),
+      '#default_value' => $settings['cleanup_views_unformatted'],
+    );
+    $form['themedev']['dev']['classses']['views_classes']['style']['cleanup_views_item_list'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print extra classes for item list views (views-view-list.tpl.php).'),
+      '#default_value' => $settings['cleanup_views_item_list'],
+    );
+  }
+  // Field classes (CCK).
+  if (module_exists('content')) {
+    $form['themedev']['dev']['classses']['field_classes'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Field Classes'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_zebra'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print odd/even zebra classes on CCK fields.'),
+      '#default_value' => $settings['cleanup_fields_zebra'],
+    );
+  }
   // Title classes for headings
   $form['themedev']['dev']['classses']['heading_classes'] = array(
     '#type' => 'fieldset',
