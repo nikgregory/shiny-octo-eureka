@@ -343,27 +343,11 @@ color:#999;
 color:#CCC;
 }
 
-/* Node Forms */
-#node-form .node-col-last .buttons {
--moz-border-radius:6px;
--webkit-border-radius:6px;
-padding:10px;
-background:#EEE;
-border:1px solid #DADADA;
-}
-
-#node-form .article-col-last .buttons {
--webkit-border-radius:6px;
--moz-border-radius:6px;
--border-radius:6px;
-padding:0.5em;
-}
-
+/* Blocks */
 .block {
 padding:10px 10px 0;
 }
 
-/* Blocks */
 .block-inner {
 -moz-border-radius:6px;
 -webkit-border-radius:6px;

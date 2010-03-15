@@ -1,6 +1,6 @@
 /** 
  * $Id$ 
- * adaptivethemes.com 
+ * adaptivethemes.com
  *
  * @file base.css
  * Base includes all CSS for layout, master reset and basic admin block styles.
@@ -949,27 +949,21 @@ display:block;
 }
 
 /* article form classes */
-#node-form .article-col-last {
-float:right;
-margin-top:35px;
-width:30%;
-}
-
-#node-form .article-col-last .buttons #edit-submit,#node-form .article-col-last .buttons #edit-preview,#node-form .article-col-last .buttons #edit-delete {
-margin:2px 2px 2px 0;
-}
-
-#node-form .article-col-first {
-float:left;
-width:69%;
-}
-
 #node-form .vertical-tabs,#node-form .vertical-tabs-list,#node-form .vertical-tabs-list li {
 border-color:#DADADA !important;
 }
 
 .vertical-tabs input.form-text {
 width:95%;
+}
+
+/* Fields. */
+h3.label,h3.label-inline {
+font-size:1em;
+}
+
+.field .inline  {
+display:inline;
 }
 
 /**
