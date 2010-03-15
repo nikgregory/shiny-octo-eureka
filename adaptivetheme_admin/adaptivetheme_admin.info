@@ -121,6 +121,16 @@
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
   
+  settings[cleanup_views_css_name]            = 0
+  settings[cleanup_views_view_name]           = 0
+  settings[cleanup_views_display_id]          = 0
+  settings[cleanup_views_dom_id]              = 0
+  
+  settings[cleanup_views_unformatted]         = 0
+  settings[cleanup_views_item_list]           = 0
+  
+  settings[cleanup_fields_zebra]              = 0
+  
   settings[cleanup_headings_title_class]      = 1
   settings[cleanup_headings_namespaced_class] = 1
 

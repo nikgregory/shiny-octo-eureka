@@ -266,3 +266,12 @@ text-decoration:underline;
 .article ul.links,.item-list ul.pager li {
 margin:0;
 }
+
+/* Fields. */
+h3.label,h3.label-inline {
+font-size:1em;
+}
+
+.field .inline  {
+display:inline;
+}
