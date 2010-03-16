@@ -110,6 +110,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'cleanup_menu_title_class'          => $settings['cleanup_menu_title_class'],
     'cleanup_links_type_class'          => $settings['cleanup_links_type_class'],
     'cleanup_links_active_classes'      => $settings['cleanup_links_active_classes'],
+    'cleanup_links_first_last_classes'  => $settings['cleanup_links_first_last_classes'],
     'cleanup_item_list_zebra'           => $settings['cleanup_item_list_zebra'],
     'cleanup_item_list_first_last'      => $settings['cleanup_item_list_first_last'],
     'cleanup_views_css_name'            => $settings['cleanup_views_css_name'],
@@ -1026,6 +1027,11 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#type' => 'checkbox',
     '#title' => t('Print the active classes on Primary and Secondary links.'),
     '#default_value' => $settings['cleanup_links_active_classes'],
+  );
+  $form['themedev']['dev']['classses']['menu_classes']['menu_links_classes']['cleanup_links_first_last_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Print .first and .last classes.'),
+     '#default_value' => $settings['cleanup_links_first_last_classes'],
   );
   // Item list classes
   $form['themedev']['dev']['classses']['itemlist_classes'] = array(

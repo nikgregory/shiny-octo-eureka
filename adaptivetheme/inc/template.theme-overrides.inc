@@ -235,7 +235,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
     $i = 1;
     foreach ($links as $key => $link) {
       $class = $key;
-      if (theme_get_setting('cleanup_menu_first_last_classes')) {
+      if (theme_get_setting('cleanup_links_first_last_classes')) {
         // Add first, last and active classes to the list of links to help out themers.
         if ($i == 1) {
           $class .= ' first';
