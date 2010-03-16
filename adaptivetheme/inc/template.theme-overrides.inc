@@ -261,6 +261,12 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
             $link['attributes']['class'] .= ' active';
           }
         }
+      
+        // wrap <span>'s around the anchor text
+        if (theme_get_setting('links_add_span_elements')) {
+          $link['title'] = '<span>' . check_plain($link['title']) . '</span>';
+          $link['html'] = TRUE;
+        }
 
         // Pass in $link as $options, they share the same keys.
         $link = l($link['title'], $link['href'], $link);

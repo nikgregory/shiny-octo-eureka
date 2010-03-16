@@ -36,7 +36,7 @@
       <h2<?php print $title_classes ? ' class="'. $title_classes .'"' : ''; ?>><?php print $block->subject; ?></h2>
     <?php endif; ?>
 
-    <?php print $block->content ?>
+    <div class="content"><?php print $block->content ?></div>
 
     <?php print $edit_links; ?>
 

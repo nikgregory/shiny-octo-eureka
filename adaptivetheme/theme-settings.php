@@ -121,6 +121,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'cleanup_fields_zebra'              => $settings['cleanup_fields_zebra'],
     'cleanup_headings_title_class'      => $settings['cleanup_headings_title_class'],
     'cleanup_headings_namespaced_class' => $settings['cleanup_headings_namespaced_class'],
+    'links_add_span_elements'           => $settings['links_add_span_elements'],
     'at_user_menu'                      => $settings['at_user_menu'],
     'block_edit_links'                  => $settings['block_edit_links'],
     'at_admin_hide_help'                => $settings['at_admin_hide_help'],
@@ -744,24 +745,45 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#collapsible' => TRUE,
     '#collapsed' => $settings['rebuild_registry'] ? FALSE : TRUE,
   );
+  // Global settings
+  $form['themedev']['dev']['global'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Global Settings'),
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+  );
   // Rebuild registry
-  $form['themedev']['dev']['rebuild_registry'] = array(
+  $form['themedev']['dev']['global']['rebuild_registry'] = array(
     '#type' => 'checkbox',
     '#title' => t('Rebuild the theme registry on every page load.'),
     '#default_value' => $settings['rebuild_registry'],
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
   // Show $theme_info
-  $form['themedev']['dev']['show_theme_info'] = array(
+  $form['themedev']['dev']['global']['show_theme_info'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show theme info.'),
     '#default_value' => $settings['show_theme_info'],
     '#description' => t('This will show the output of the global $theme_info variable using Krumo.'),
   );
   if (!module_exists('devel')) {
-    $form['themedev']['dev']['show_theme_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
-    $form['themedev']['dev']['show_theme_info']['#disabled'] = 'disabled';
+    $form['themedev']['dev']['global']['show_theme_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
+    $form['themedev']['dev']['global']['show_theme_info']['#disabled'] = 'disabled';
   }
+  // Add or remove markup
+  $form['themedev']['dev']['markup'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Add or Remove Markup'),
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+  );
+  // Add spans to theme_links
+  $form['themedev']['dev']['markup']['links_add_span_elements'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add SPAN tags to Primary and Secondary links anchor text.'),
+    '#description' => t('Wrapping SPAN tags around the anchor text can help out when building sliding door type tabs with hover states.'),
+    '#default_value' => $settings['links_add_span_elements'],
+  );
   // Add or remove extra classes
   $form['themedev']['dev']['classses'] = array(
     '#type' => 'fieldset',

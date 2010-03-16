@@ -45,7 +45,7 @@ if (theme_get_setting('cleanup_block_classes_zebra')) {
 }
 
 if (theme_get_setting('cleanup_block_classes_region')) {
-  $classes[] = 'block-'. safe_string($block->region); // block-[region] class
+  $classes[] = 'block-region-'. safe_string($block->region); // block-[region] class
 }
 
 if (theme_get_setting('cleanup_block_classes_count')) {
