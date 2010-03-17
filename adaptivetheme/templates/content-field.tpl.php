@@ -1,5 +1,5 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
 
 /**
  * @file content-field.tpl.php

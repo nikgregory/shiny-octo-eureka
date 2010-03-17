@@ -1,17 +1,4 @@
 // $Id$
-
-/**
- * Show/Hide block content in block admin.
- */
-$(document).ready(function(){
-  $('div.block-at-admin-content').hide();
-  $('a.toggle-block').click(function() {
-    var bid = $(this).attr('id');
-    $('.toggle-' + bid).toggle('fast');
-    return false;
-  });
-});
-
 /**
  * Insert WAI-ARIA Landmark Roles (Roles for Accessible Rich Internet Applications)
  *

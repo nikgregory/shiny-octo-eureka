@@ -790,17 +790,6 @@ ul.menu li.last  {}
 
 
 /**********************************************************
- *             Block config block styles
- **********************************************************/
-.block-at-admin .block-title {}
-.block-at-admin .block-at-admin-inner {}
-.block-at-admin fieldset {}
-.block-at-admin a {}
-.block-at-admin a:hover,
-.block-at-admin a:focus {}
-
-
-/**********************************************************
  *                  Gpanel blocks
  **********************************************************/
 /* Examples to get started. Add col specific selectors to style

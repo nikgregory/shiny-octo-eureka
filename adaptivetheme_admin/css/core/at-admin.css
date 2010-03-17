@@ -425,38 +425,6 @@ list-style:none;
 margin:0;
 }
 
-.block-at-admin {
-padding:10px 10px 0;
-}
-
-.block-at-admin-inner {
--moz-border-radius:3px;
--webkit-border-radius:3px;
-margin-bottom:3px;
-background:#FFF;
-border:1px solid #13749F;
-}
-
-.block-at-admin h2 {
-padding:0.2em 0.5em;
-text-align:left;
-background:#13749F;
-color:#FFF;
-}
-
-.block-at-admin legend {
-margin:0 0 0 -10px;
-padding:0;
-}
-
-.block-at-admin fieldset {
--moz-border-radius:0;
--webkit-border-radius:0;
-border:none;
-margin:0;
-background:#FFF;
-}
-
 .fieldset-block-info {
 margin-bottom:0.5em;
 }
@@ -958,12 +926,6 @@ display:inline;
 tbody,tfoot,thead,tr,label,legend {
 margin:0;
 padding:0;
-}
-
-.block-at-admin h2 span {
-float:right;
-width:16px;
-height:16px;
 }
 
 span.tabledrag-changed {

@@ -101,13 +101,6 @@ if (theme_get_setting('cleanup_headings_namespaced_class')) {
 
 $vars['title_classes'] = implode(' ', $title_classes);
 
-// Collapsible block admin blocks.
-if (arg(2) == 'block') {
-  $vars['block_at_admin_classes'] = implode(' .', $classes);
-  drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
-  $vars['template_files'][] = 'block-at_admin';
-}
-
 // Block edit links.
 $vars['edit_links_array'] = array();
 $vars['edit_links'] = '';

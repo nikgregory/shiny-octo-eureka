@@ -1,5 +1,6 @@
-<?php
-// $Id$
+<?php // $Id$
+// adaptivethemes.com
+
 /**
  * @file views-view-grid.tpl.php
  * Default simple view template to display a rows in a grid.

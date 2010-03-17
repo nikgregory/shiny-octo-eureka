@@ -212,41 +212,6 @@ width:240px;
 padding:0 10px;
 }
 
-/* Collapsed block config block styles. */
-.block-at-admin .block-title {
-color:#555;
-font-size:1.333em;
-}
-
-.block-at-admin .block-at-admin-inner {
--moz-border-radius:4px;
--webkit-border-radius:4px;
--border-radius:4px;
-background:#FFF;
-border:1px solid #A4D5E5;
-color:#444;
-padding:0 4px;
-}
-
-.block-at-admin fieldset {
--moz-border-radius:4px;
--webkit-border-radius:4px;
--border-radius:4px;
-border:1px solid #E0EBEF;
-margin:1em 0;
-padding:0.5em;
-}
-
-.block-at-admin a {
-color:#2C788F;
-text-decoration:none;
-}
-
-.block-at-admin a:hover,.block-at-admin a:focus {
-color:#600;
-text-decoration:underline;
-}
-
 h1.logo-site-name,#block-user-3 .item-list h3 {
 font-size:1em;
 }
