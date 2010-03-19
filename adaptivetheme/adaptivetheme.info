@@ -227,6 +227,7 @@
 
   settings[equal_heights_sidebars]            = 0
   settings[equal_heights_blocks]              = 0
+  settings[equal_heights_gpanels]             = 0
   settings[horizontal_login_block]            = 0
 
   settings[horizontal_login_block_overlabel]  = 0

@@ -238,7 +238,7 @@ margin:0 1.667em 0 0;
 margin-right:0;
 }
 
-.at-horizontal-login #user-login-form,.block-at-admin h2,.block-at-admin h2.block-title,.fieldset-block-info {
+caption, th, td, .at-horizontal-login #user-login-form {
 text-align:right;
 }
 

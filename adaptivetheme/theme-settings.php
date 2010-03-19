@@ -137,6 +137,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'layout_enable_frontpage'           => $settings['layout_enable_frontpage'],
     'equal_heights_sidebars'            => $settings['equal_heights_sidebars'],
     'equal_heights_blocks'              => $settings['equal_heights_blocks'],
+    'equal_heights_gpanels'             => $settings['equal_heights_gpanels'],
     'horizontal_login_block'            => $settings['horizontal_login_block'],
     'horizontal_login_block_overlabel'  => $settings['horizontal_login_block_overlabel'],
     'horizontal_login_block_enable'     => $settings['horizontal_login_block_enable'],
@@ -414,9 +415,9 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
           '#title' => t('When should taxonomy terms be displayed?'),
           '#default_value' => $settings["taxonomy_display_{$type}"],
           '#options' => array(
-            'never' => t('Hide terms'),
-            'only' => t('Show terms in page view'),
-            'all' => t('Show terms in teaser and page view'),
+            'all' => t('Always show terms'),
+            'only' => t('Hide terms on teasers'),
+            'never' => t('Never display terms'),
           ),
         );
         // Formatting
@@ -663,6 +664,13 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#default_value' => $settings['equal_heights_sidebars'],
     '#description'   => t('This setting will make the sidebars and the main content column equal to the height of the tallest column.'),
   );
+  // Equal height gpanels
+  $form['layout']['equal_heights']['equal_heights_gpanels'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Equal Height Gpanels'),
+    '#default_value' => $settings['equal_heights_gpanels'],
+    '#description'   => t('This will make all Gpanel blocks equal to the height of the tallest block in any Gpanel, regardless of which Gpanel the blocks are in. Good for creating a grid type block layout, however it could be too generic if you have more than one Gpanel active in the page.'),
+  );
   // Equal height blocks per region
   $equalized_blocks = array(
     'leaderboard' => t('Leaderboard region'),
@@ -680,7 +688,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
     '#prefix' => '<div id="div-equalize-collapse">',
     '#suffix' => '</div>',
-    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so is not applicable by default to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes that come with Adaptivetheme. Equal heights is applied with jQuery and applies to the block-inner DIV.</p><p>Select which regions to want to have equal height blocks.</p>'),
+    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so do not apply to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes.</p>'),
   );
   foreach ($equalized_blocks as $name => $title) {
     $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(

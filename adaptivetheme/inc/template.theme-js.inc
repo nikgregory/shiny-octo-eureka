@@ -39,6 +39,11 @@ if (theme_get_setting('equal_heights_sidebars')) {
   drupal_add_js($path_to_js_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE); 
 }
 
+// Load equal height gpanels
+if (theme_get_setting('equal_heights_gpanels')) {
+  drupal_add_js($path_to_js_core .'equalize-gpanels.js', 'theme', 'header', FALSE, TRUE, TRUE); 
+}
+
 // Use horizontal login block overlabel js
 if (theme_get_setting('horizontal_login_block_overlabel')) {
   drupal_add_js($path_to_js_core .'jquery.overlabel.js', 'theme', 'header', FALSE, TRUE, TRUE);

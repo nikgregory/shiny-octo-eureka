@@ -157,10 +157,14 @@ if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxo
         $vocab_index = 0;
         foreach ($vocabularies as $vocabulary) {
           $vocab_index++;
+          $terms = '';
           if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
             $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
           }
           if ($terms) {
+            if (module_exists('i18n')){
+              $terms = i18ntaxonomy_localize_terms ($terms);
+            }
             $links = array();
             $output .= '<li class="vocab vocab-'. safe_string($vocabulary->name) .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="vocab-list">' ;
             $term_count = count($terms);
@@ -171,6 +175,7 @@ if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxo
             }
           $output .= implode("", $links);
           $output .= '</ul></li>';
+          
           }
         }
         if ($output != '') {
