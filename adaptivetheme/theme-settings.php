@@ -688,7 +688,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
     '#prefix' => '<div id="div-equalize-collapse">',
     '#suffix' => '</div>',
-    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so do not apply to sidebars. The equal height settings work well in conjuntion with the Skinr block layout classes.</p>'),
+    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so do not apply to sidebars. The equal height settings work well in conjunction with the Skinr block layout classes.</p>'),
   );
   foreach ($equalized_blocks as $name => $title) {
     $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
