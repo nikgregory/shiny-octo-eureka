@@ -9,16 +9,16 @@
  * - $title: the (sanitized) title of the node.
  * - $content: Node body or teaser depending on $teaser flag.
  * - $picture: The authors picture of the node output from
- *   theme_user_picture().
+ *     theme_user_picture().
  * - $date: Formatted creation date (use $created to reformat with
- *   format_date()).
+ *     format_date()).
  * - $links: Themed links like "Read more", "Add new comment", etc. output
- *   from theme_links().
+ *     from theme_links().
  * - $name: Themed username of node author output from theme_user().
  * - $node_url: Direct url of the current node.
  * - $terms: the themed list of taxonomy term links output from theme_links().
  * - $submitted: themed submission information output from
- *   theme_node_submitted().
+ *     theme_node_submitted().
  *
  * Other variables:
  * - $node: Full node object. Contains data that may not be safe.
@@ -27,12 +27,16 @@
  * - $uid: User ID of the node author.
  * - $created: Time the node was published formatted in Unix timestamp.
  * - $zebra: Outputs either "even" or "odd". Useful for zebra striping in
- *   teaser listings.
+ *     teaser listings.
  * - $id: Position of the node. Increments each time it's output.
  *
  * Helper variables:
  * - $article_id: Outputs a unique id for each article (node).
  * - $classes: Outputs dynamic classes for advanced themeing.
+ * - $title_classes: classes for title element.
+ *
+ * Regions
+ * - $article_aside: region embedded in the node template.
  *
  * Node status variables:
  * - $teaser: Flag for the teaser state.
@@ -42,7 +46,8 @@
  * - $status: Flag for published status.
  * - $comment: State of comment settings for the node.
  * - $readmore: Flags true if the teaser content of the node cannot hold the
- *   main body content.
+ *     main body content.
+ * - $unpublished: prints a message if the node is unpublished.
  * - $is_front: Flags true when presented in the front page.
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.

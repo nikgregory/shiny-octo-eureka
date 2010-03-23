@@ -14,12 +14,14 @@
  * - $picture: Authors picture.
  * - $signature: Authors signature.
  * - $status: Comment status. Possible values are:
- *   comment-unpublished, comment-published or comment-preview.
+ *     comment-unpublished, comment-published or comment-preview.
  * - $submitted: By line with date and time.
  * - $title: Linked title.
  *
  * Helper variables:
  * - $classes: Outputs dynamic classes for advanced themeing.
+ * - $title_classes: classes for the title element.
+ * - $unpublished: prints a message if the comment is unpublished.
  *
  * These two variables are provided for context.
  * - $comment: Full comment object.

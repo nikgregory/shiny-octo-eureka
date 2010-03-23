@@ -119,6 +119,8 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'cleanup_views_dom_id'              => $settings['cleanup_views_dom_id'],
     'cleanup_views_unformatted'         => $settings['cleanup_views_unformatted'],
     'cleanup_views_item_list'           => $settings['cleanup_views_item_list'],
+    'cleanup_fields_type'               => $settings['cleanup_fields_type'],
+    'cleanup_fields_name'               => $settings['cleanup_fields_name'],
     'cleanup_fields_zebra'              => $settings['cleanup_fields_zebra'],
     'cleanup_headings_title_class'      => $settings['cleanup_headings_title_class'],
     'cleanup_headings_namespaced_class' => $settings['cleanup_headings_namespaced_class'],
@@ -1119,6 +1121,16 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       '#title' => t('Field Classes'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
+    );
+   $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_type'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print field type classes.'),
+      '#default_value' => $settings['cleanup_fields_type'],
+    );
+   $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_name'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print field name classes.'),
+      '#default_value' => $settings['cleanup_fields_name'],
     );
     $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_zebra'] = array(
       '#type' => 'checkbox',

@@ -3,7 +3,7 @@
 
 /**
  * @file page.tpl.php
- * Theme implementation to display a single Drupal page for Genesis Subtheme.
+ * Theme implementation to display a single Drupal page.
  *
  * Available variables:
  *
@@ -27,23 +27,20 @@
  * - $styles: Style tags necessary to import all CSS files for the page.
  * - $scripts: Script tags necessary to load the JavaScript files and settings
  *     for the page.
- * - $section_class: A CSS class that uses .section + the 1st URL argument, allows for
- *     themeing site sections based on path.
- * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes).
+ * - $classes: A set of CSS classes (preprocess $body_classes + custom classes).
  *     This contains flags indicating the current layout (multiple columns, single column),
  *     the current path, whether the user is logged in, and so on.
  *
- * Layout variables:
- * - $at_layout_width: the theme setting value for the page width if LayoutSP is enabled.
- * - $at_layout: the full layout CSS if LayoutSP is enabled.
+ * Layout variable:
+ * - $layout_settings: prints the layout CSS if the layout theme settings are enabled.
  *
  * Site identity:
  * - $front_page: The URL of the front page. Use this instead of $base_path,
  *     when linking to the front page. This includes the language domain or prefix.
- * - $site_logo: The preprocessed $logo varaible. Includes the path to the logo image,
- *     as defined in theme configuration and wrapped in an anchor linking to the homepage.
- * - $site_name: The name of the site (preprocessed) wrapped in an anchor linking to the homepage.
- *     Empty when display has been disabled in theme settings.
+ * - $linked_site_logo: The preprocessed $logo variable. Includes the path to the logo image,
+ *     as defined in theme configuration and wrapped in an anchor linking to the home page.
+ * - $linked_site_name: The name of the site (preprocessed) wrapped in an anchor linking to
+ *     the home page.
  * - $site_slogan: The slogan of the site, empty when display has been disabled
  *     in theme settings.
  * - $mission: The text of the site mission, empty when display has been disabled
@@ -56,10 +53,11 @@
  *     navigation links for the site, if they have been configured.
  * - $search_box: HTML to display the search box, empty if search has been disabled.
  *
- * Page content (in order of occurrance in the default page.tpl.php):
+ * Page content:
  * - $leaderboard: Custom region for displaying content at the top of the page, useful
  *     for displaying a banner.
  * - $header: The header blocks region for display content in the header.
+ * - $menu_bar: a region for placing dynamic menus.
  * - $secondary_content: Full width custom region for displaying content between the header
  *     and the main content columns.
  * - $breadcrumb: The breadcrumb trail for the current page.
