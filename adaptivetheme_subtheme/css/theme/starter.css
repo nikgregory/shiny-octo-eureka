@@ -25,7 +25,7 @@ float:left;
 width:160px;
 }
 
-/* Markup free clearing */
+/* Markup free clearing. NOTE: you may need to remove this if using dynamic menus. */
 #leaderboard,
 #secondary-content,
 #content-top,
@@ -35,7 +35,7 @@ width:160px;
 #footer,
 #footer-region {
 overflow:hidden;
-zoom:1; /* change zoom:1; to width:100%; if you need valid CSS */
+zoom:1;
 }
 
 /* User menu */
@@ -99,6 +99,10 @@ padding-bottom:1em;
 #mission {
 font-weight:700;
 margin:.3em 0 1.5em;
+}
+
+#menu-bar, #primary, #secondary {
+clear:both;
 }
 
 /* Primary and Secondary menus. */

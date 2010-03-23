@@ -129,6 +129,10 @@ a:focus {}
    and the search box. */
 #header-region {}
 
+/* Menu Bar sits below the header and is ideal for dynamic menus 
+   such as http://drupal.org/project/superfish. */
+#menu-bar {}
+
 /* Secondary content is a full width region between the header and the
    main columns. */
 #secondary-content {}
@@ -686,8 +690,9 @@ ul.links li.comment_delete a {}
  *                  Region blocks
  **********************************************************/
 /* High specifity selectors to style blocks in one region. */
-#page-top          .block {}
+#leaderboard       .block {}
 #header-region     .block {}
+#menu-bar          .block {}
 #secondary-content .block {}
 #tertiary-content  .block {}
 #content-top       .block {}

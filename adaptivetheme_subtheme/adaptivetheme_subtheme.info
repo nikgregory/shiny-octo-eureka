@@ -42,6 +42,7 @@
 ;----------// Regions
   regions[leaderboard]       = Leaderboard
   regions[header]            = Header Region
+  regions[menu_bar]          = Menu Bar
   regions[secondary_content] = Secondary Content
   regions[content_top]       = Content Top
   regions[content_aside]     = Content Aside

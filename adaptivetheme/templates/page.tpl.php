@@ -129,17 +129,17 @@
               <div class="logo-site-name"><strong>
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div>
+              </strong></div> <!-- /logo/site name -->
             <?php else: /* Use h1 when the content title is empty */ ?>
               <h1 class="logo-site-name">
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </h1>
+              </h1> <!-- /logo/site name -->
             <?php endif; ?>
           <?php endif; ?>
 
           <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div>
+            <div id="site-slogan"><?php print $site_slogan; ?></div> <!-- /slogan -->
           <?php endif; ?>
 
         </div> <!-- /branding -->
@@ -155,18 +155,24 @@
 
     </div> <!-- /header -->
 
+    <?php if (!empty($menu_bar)): ?>
+      <div id="menu-bar">
+        <?php print $menu_bar; ?>
+      </div> <!-- /menu bar -->
+    <?php endif; ?>
+
     <?php if (!empty($primary_menu)): ?>
       <div id="primary" class="nav">
         <h2 class="element-invisible"><?php print t('Main Menu'); ?></h2>
         <?php print $primary_menu; ?>
-      </div>
+      </div> <!-- /primary link menu -->
     <?php endif; ?>
 
     <?php if (!empty($secondary_menu)): ?>
       <div id="secondary" class="nav">
         <h2 class="element-invisible"><?php print t('Secondary Menu'); ?></h2>
         <?php print $secondary_menu; ?>
-      </div>
+      </div> <!-- /secondary link menu -->
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
@@ -251,7 +257,7 @@
         <?php endif; ?>
 
         <?php if ($feed_icons): ?>
-          <div id="feed-icons"><?php print $feed_icons; ?></div>
+          <div id="feed-icons"><?php print $feed_icons; ?></div> <!-- /feed icons -->
         <?php endif; ?>
 
       </div> <!-- /footer -->
