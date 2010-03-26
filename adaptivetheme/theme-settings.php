@@ -417,7 +417,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
           '#title' => t('When should taxonomy terms be displayed?'),
           '#default_value' => $settings["taxonomy_display_{$type}"],
           '#options' => array(
-            'all' => t('Always show terms'),
+            'all' => t('Always display terms'),
             'only' => t('Hide terms on teasers'),
             'never' => t('Never display terms'),
           ),
@@ -499,10 +499,10 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
         '#type' => 'select',
         '#title' => t('Display Links'),
         '#default_value' => $settings["display_links_{$type}"],
-        '#options' => array(
-          'never' => t('Never display links'),
+        '#options' => array(       
           'all' => t('Always display links'),
-          'only' => t('Only display links on full nodes'),
+          'only' => t('Hide links on teasers'),
+          'never' => t('Never display links'),
         ),
       );
       // Options for default settings
