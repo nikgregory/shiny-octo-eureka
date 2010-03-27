@@ -8,6 +8,7 @@
 
 $path_to_js_core = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 
+// Load equal height blocks
 $regions = array(
   'leaderboard',
   'header', 
@@ -17,19 +18,14 @@ $regions = array(
   'tertiary-content',
   'footer'
 );
-
 foreach ($regions as $region) {
   $setting = theme_get_setting('equalize_'. $region);
-  $settings[] = $setting;
   if ($setting == 1) {
     $active_regions[] = $region;
   }
 }
-$region_settings = $settings;
-$active_regions_list = $active_regions;
-
-// Load equal height blocks
-if (count($active_regions)>0) {
+if (!empty($active_regions)) {
+  $active_regions_list = $active_regions;
   drupal_add_js(array('active_regions' => $active_regions_list), 'setting');
   drupal_add_js($path_to_js_core .'equalize-blocks.js', 'theme', 'header', FALSE, TRUE, TRUE);
 }
