@@ -60,11 +60,11 @@ if (!empty($secondary_menu_links)) {
 
 // Output the primary and secondary menus as regular menu trees.
 if (!empty($primary_menu_links) && theme_get_setting('primary_links_tree')) {
-  $primary_tree_menu = menu_tree_all_data('primary-links'); 
+  $primary_tree_menu = menu_tree_all_data('primary-links');
   $vars['primary_menu'] = menu_tree_output($primary_tree_menu);
 }
 if (!empty($secondary_menu_links) && theme_get_setting('secondary_links_tree')) {
-  $secondary_tree_menu = menu_tree_all_data('secondary-links'); 
+  $secondary_tree_menu = menu_tree_all_data('secondary-links');
   $vars['secondary_menu'] = menu_tree_output($secondary_tree_menu);
 }
 
@@ -144,6 +144,10 @@ if (theme_get_setting('cleanup_classes_language')) {
   if (function_exists('locale')) {
     $classes[] = 'lang-'. $language->language;
   }
+}
+
+if (module_exists('skinr') && !empty($vars['skinr'])) {
+  $classes[] = $vars['skinr'];
 }
 
 // $classes is the varaible that holds the page classes, printed in page tpl files.
@@ -227,7 +231,7 @@ if ($vars['search_box'] && theme_get_setting('display_search_form_label') == 0) 
 
 // Admin user links.
 if ($vars['logged_in'] && theme_get_setting('at_user_menu') == 1) {
-  if (!function_exists(admin_menu_perm)) {
+  if (!function_exists('admin_menu_perm')) {
     $admin_user_links[] = l(t('Create content'), 'node/add');
     $admin_user_links[] = user_access('administer nodes') ? l(t('Manage content'), 'admin/content/node') : '';
     $admin_user_links[] = user_access('administer blocks') ? l(t('Blocks'), 'admin/build/block') : '';
@@ -238,7 +242,7 @@ if ($vars['logged_in'] && theme_get_setting('at_user_menu') == 1) {
   if ($vars['logged_in']) {
     $admin_user_links[] = l(t('My Account'), 'user/'. $user->uid);
   }
-  if (!function_exists(admin_menu_perm)) {
+  if (!function_exists('admin_menu_perm')) {
     $admin_user_links[] = l(t('Logout'), 'logout');
   }
   $vars['admin_user_menu'] = $admin_user_links;

@@ -65,7 +65,7 @@ if (function_exists('block_class') && block_class($block)) {
 }
 
 // Add support for Skinr module classes http://drupal.org/project/skinr.
-if (function_exists('skinr_preprocess') && !empty($vars['skinr'])) {
+if (module_exists('skinr') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
 

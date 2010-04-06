@@ -28,10 +28,10 @@
 <?php if (!$field_empty): ?>
 <?php
   $field_classes = array();
-  if (theme_get_setting(cleanup_fields_type)) {
+  if (theme_get_setting('cleanup_fields_type')) {
     $field_classes[] = $field_type_css;
   }
-  if (theme_get_setting(cleanup_fields_name)) {
+  if (theme_get_setting('cleanup_fields_name')) {
     $field_classes[] = $field_name_css;
   }
   $classes = implode(' ', $field_classes);
@@ -43,7 +43,7 @@
     <?php $count = 1;
     foreach ($items as $delta => $item):
       if (!$item['empty']): ?>
-        <?php theme_get_setting(cleanup_fields_zebra) ? $zebra = $count % 2 ? 'odd' : 'even' : $zebra = '' ;?>
+        <?php theme_get_setting('cleanup_fields_zebra') ? $zebra = $count % 2 ? 'odd' : 'even' : $zebra = '' ;?>
         <?php if ($label_display == 'inline'): ?>
           <h3 class="label inline"><?php print t($label); ?>:&nbsp;</h3>
           <div class="item inline<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></div>
