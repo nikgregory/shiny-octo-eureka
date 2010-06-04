@@ -58,17 +58,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'search_info_comment'               => $settings['search_info_comment'],
     'search_info_upload'                => $settings['search_info_upload'],
     'search_info_separator'             => $settings['search_info_separator'],
-    'primary_links_tree'                => $settings['primary_links_tree'],
-    'secondary_links_tree'              => $settings['secondary_links_tree'],
-    'mission_statement_pages'           => $settings['mission_statement_pages'],
 
-    'submitted_by_settings_enabled'     => $settings['submitted_by_settings_enabled'],
-    'submitted_by_author_default'       => $settings['submitted_by_author_default'],
-    'submitted_by_date_default'         => $settings['submitted_by_date_default'],
-    'submitted_by_enable_content_type'  => $settings['submitted_by_enable_content_type'],
-    'display_links_settings_enabled'    => $settings['display_links_settings_enabled'],
-    'display_links_default'             => $settings['display_links_default'],
-    'display_links_enable_content_type' => $settings['display_links_enable_content_type'],
     'rebuild_registry'                  => $settings['rebuild_registry'],
     'show_theme_info'                   => $settings['show_theme_info'],
     'cleanup_classes_section'           => $settings['cleanup_classes_section'],
@@ -170,22 +160,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       'hide' => t('Hide skip navigation'),
     ),
   );
-  // Mission Statement
-  $form['general_settings']['mission_statement'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Mission statement'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['mission_statement']['mission_statement_pages'] = array(
-    '#type' => 'radios',
-    '#title' => t('Where should the mission statement be displayed'),
-    '#default_value' => $settings['mission_statement_pages'],
-    '#options' => array(
-      'home' => t('Display the mission statement only on the home page'),
-      'all' => t('Display the mission statement on all pages'),
-    ),
-  );
+
   // Breadcrumbs
   $form['general_settings']['breadcrumb'] = array(
     '#type' => 'fieldset',
@@ -296,121 +271,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#size' => 8,
     '#maxlength' => 10,
   );
-
-  // Node Settings
-  $form['node_type_specific'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Content type settings'),
-    '#description' => t('Use these settings to change the meta information shown with your content.  You can apply these settings to all content types, or check <em>"Use content type specific settings"</em> to customize them for each content type.  For example, you may want to show the date on Stories, but not on other content types.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  // Author & Date Settings
-  $form['node_type_specific']['submitted_by_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Author &amp; Date'),
-    '#description' => t('Modify the output of the Author and Date for content types'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['node_type_specific']['submitted_by_container']['submitted_by_settings_enabled'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable Author &amp; Date Settings'),
-    '#description' => t('These settings are disabled by default to avoid conflicts with modules, such as the <a href="!link">Submitted By</a> module. If you encounter issues with a module try disabling this setting.', array('!link' => 'http://drupal.org/project/submitted_by')),
-    '#default_value' => $settings['submitted_by_settings_enabled'],
-  );
-  if ($settings['submitted_by_settings_enabled'] == 1) {
-    if (module_exists('submitted_by') == FALSE) {
-      // Default & content type specific settings
-      foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type] = array(
-          '#type' => 'fieldset',
-          '#title' => t('@name', array('@name' => $name)),
-          '#description' => t('These settings allow you to modify the output of the Author and Date information shown on articles. For more options you can install the <a href="!link">Submitted By</a> module.', array('!link' => 'http://drupal.org/project/submitted_by')),
-          '#collapsible' => TRUE,
-          '#collapsed' => TRUE,
-        );
-        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_author_{$type}"] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Display author\'s username'),
-          '#default_value' => $settings["submitted_by_author_{$type}"],
-        );
-        $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]["submitted_by_date_{$type}"] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Display date posted (you can customize this format on the Date and Time settings page.)'),
-          '#default_value' => $settings["submitted_by_date_{$type}"],
-        );
-        // Options for default settings
-        if ($type == 'default') {
-          $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#title'] = t('Default');
-          $form['node_type_specific']['submitted_by_container']['submitted_by']['default']['#collapsed'] = $settings['submitted_by_enable_content_type'] ? TRUE : FALSE;
-          $form['node_type_specific']['submitted_by_container']['submitted_by']['submitted_by_enable_content_type'] = array(
-            '#type' => 'checkbox',
-            '#title' => t('Use content type specific settings.'),
-            '#default_value' => $settings['submitted_by_enable_content_type'],
-          );
-        }
-        // Collapse content type specific settings if default settings are being used
-        else if ($settings['submitted_by_enable_content_type'] == 0) {
-        $form['submitted_by'][$type]['#collapsed'] = TRUE;
-        }
-      }
-    }
-    else {
-      $form['node_type_specific']['submitted_by_container']['#description'] = t('NOTICE: You currently have the <a href="!link">Submitted By</a> module installed and enabled - the author and date theme settings have been disabled to prevent conflicts.', array('!link' => 'http://drupal.org/project/submitted_by'));
-      $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
-    }
-  }
-
-  // Links display
-  $form['node_type_specific']['links_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Links'),
-    '#description' => t('Links are the "links" displayed at the bottom of articles.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['node_type_specific']['links_container']['display_links_settings_enabled'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable Links Settings'),
-    '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module that modifies the display or output of Links try disabling this setting.'),
-    '#default_value' => $settings['display_links_settings_enabled'],
-  );
-  if ($settings['display_links_settings_enabled'] == 1) {
-    // Default & content type specific settings
-    foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-      $form['node_type_specific']['links_container']['links'][$type] = array(
-        '#type' => 'fieldset',
-        '#title' => t('@name', array('@name' => @$name)),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-      );
-      $form['node_type_specific']['links_container']['links'][$type]["display_links_{$type}"] = array(
-        '#type' => 'select',
-        '#title' => t('Display Links'),
-        '#default_value' => $settings["display_links_{$type}"],
-        '#options' => array(
-          'all' => t('Always display links'),
-          'only' => t('Hide links on teasers'),
-          'never' => t('Never display links'),
-        ),
-      );
-      // Options for default settings
-      if ($type == 'default') {
-        $form['node_type_specific']['links_container']['links']['default']['#title'] = t('Default');
-        $form['node_type_specific']['links_container']['links']['default']['#collapsed'] = $settings['display_links_enable_content_type'] ? TRUE : FALSE;
-        $form['node_type_specific']['links_container']['links']['display_links_enable_content_type'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Use content type specific settings.'),
-          '#default_value' => $settings['display_links_enable_content_type'],
-        );
-      }
-      // Collapse content type specific settings if default settings are being used
-      else if ($settings['display_links_enable_content_type'] == 0) {
-        $form['links'][$type]['#collapsed'] = TRUE;
-      }
-    }
-  }
   // Layout settings
   $form['layout'] = array(
     '#type' => 'fieldset',

@@ -57,17 +57,6 @@
   settings[search_info_upload]                = 1
   settings[search_info_separator]             = ' - '
 
-  settings[mission_statement_pages]           = 'home'
-
-  settings[submitted_by_settings_enabled]     = 0
-  settings[submitted_by_author_default]       = 1
-  settings[submitted_by_date_default]         = 1
-  settings[submitted_by_enable_content_type]  = 0
-
-  settings[display_links_settings_enabled]    = 0
-  settings[display_links_default]             = 'all'
-  settings[display_links_enable_content_type] = 0
-
   settings[rebuild_registry]                  = 0
   settings[show_theme_info]                   = 0
 
