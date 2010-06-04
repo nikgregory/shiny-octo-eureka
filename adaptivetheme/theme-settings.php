@@ -34,9 +34,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
 
   // Set the default values for content type specific settings
   foreach ($node_types as $type => $name) {
-    $defaults["taxonomy_display_{$type}"] = $defaults['taxonomy_display_default'];
-    $defaults["taxonomy_format_{$type}"]  = $defaults['taxonomy_format_default'];
-    $defaults["taxonomy_delimiter_{$type}"] = $defaults['taxonomy_delimiter_default'];
     $defaults["submitted_by_author_{$type}"] = $defaults['submitted_by_author_default'];
     $defaults["submitted_by_date_{$type}"] = $defaults['submitted_by_date_default'];
     $defaults["display_links_{$type}"] = $defaults['display_links_default'];
@@ -64,11 +61,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'primary_links_tree'                => $settings['primary_links_tree'],
     'secondary_links_tree'              => $settings['secondary_links_tree'],
     'mission_statement_pages'           => $settings['mission_statement_pages'],
-    'taxonomy_settings_enabled'         => $settings['taxonomy_settings_enabled'],
-    'taxonomy_display_default'          => $settings['taxonomy_display_default'],
-    'taxonomy_format_default'           => $settings['taxonomy_format_default'],
-    'taxonomy_delimiter_default'        => $settings['taxonomy_delimiter_default'],
-    'taxonomy_enable_content_type'      => $settings['taxonomy_enable_content_type'],
+
     'submitted_by_settings_enabled'     => $settings['submitted_by_settings_enabled'],
     'submitted_by_author_default'       => $settings['submitted_by_author_default'],
     'submitted_by_date_default'         => $settings['submitted_by_date_default'],
@@ -126,8 +119,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'cleanup_headings_namespaced_class' => $settings['cleanup_headings_namespaced_class'],
     'links_add_span_elements'           => $settings['links_add_span_elements'],
     'at_user_menu'                      => $settings['at_user_menu'],
-    'block_edit_links'                  => $settings['block_edit_links'],
-    'at_admin_hide_help'                => $settings['at_admin_hide_help'],
+
     'layout_method'                     => $settings['layout_method'],
     'layout_width'                      => $settings['layout_width'],
     'layout_sidebar_first_width'        => $settings['layout_sidebar_first_width'],
@@ -304,24 +296,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#size' => 8,
     '#maxlength' => 10,
   );
-  // Primary and Secondary Links Settings
-  $form['general_settings']['menu_trees'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Primary and Secondary Links'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#description' => t('Output Primary and Secondary links as standard Drupal menus (shows levels expanded and with the standard menu classes).'),
-  );
-  $form['general_settings']['menu_trees']['primary_links_tree'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Modify Primary Links',
-    '#default_value' => $settings['primary_links_tree'],
-  );
-  $form['general_settings']['menu_trees']['secondary_links_tree'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Modify Secondary Links',
-    '#default_value' => $settings['secondary_links_tree'],
-  );
+
   // Node Settings
   $form['node_type_specific'] = array(
     '#type' => 'fieldset',
@@ -386,92 +361,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       $form['node_type_specific']['submitted_by_container']['submitted_by'][$type]['#disabled'] = 'disabled';
     }
   }
-  // Taxonomy term display
-  if (module_exists('taxonomy')) {
-    $form['node_type_specific']['display_taxonomy_container'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Taxonomy Terms'),
-      '#description' => t('Modify the output of the Taxonomy Terms for content types'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['node_type_specific']['display_taxonomy_container']['taxonomy_settings_enabled'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Enable Taxonomy Term Settings'),
-      '#description' => t('These settings are disabled by default to avoid conflicts with modules. If you encounter issues with a module that modifies the display or output of Taxonomy Terms try disabling this setting.'),
-      '#default_value' => $settings['taxonomy_settings_enabled'],
-    );
-    if ($settings['taxonomy_settings_enabled'] == 1) {
-      // Default & content type specific settings
-      foreach ((array('default' => 'Default') + node_get_types('names')) as $type => $name) {
-        // taxonomy display per node
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type] = array(
-          '#type' => 'fieldset',
-          '#title' => t('@name', array('@name' => $name)),
-          '#collapsible' => TRUE,
-          '#collapsed' => TRUE,
-        );
-        // Display
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_display_{$type}"] = array(
-          '#type' => 'select',
-          '#title' => t('When should taxonomy terms be displayed?'),
-          '#default_value' => $settings["taxonomy_display_{$type}"],
-          '#options' => array(
-            'all' => t('Always display terms'),
-            'only' => t('Hide terms on teasers'),
-            'never' => t('Never display terms'),
-          ),
-        );
-        // Formatting
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_format_{$type}"] = array(
-          '#type' => 'radios',
-          '#title' => t('Taxonomy display format'),
-          '#default_value' => $settings["taxonomy_format_{$type}"],
-          '#options' => array(
-            'vocab' => t('Display each vocabulary on a new line'),
-            'list' => t('Display all taxonomy terms together in single list'),
-          ),
-        );
-        // Delimiter
-        $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_delimiter_{$type}"] = array(
-          '#type' => 'textfield',
-          '#title' => t('Delimiter'),
-          '#description' => t('Modify the delimiter. The default is a comma followed by a space.'),
-          '#default_value' => $settings['taxonomy_delimiter_default'],
-          '#size' => 8,
-          '#maxlength' => 10,
-        );
-        // Get taxonomy vocabularies by node type
-        $vocabs = array();
-        $vocabs_by_type = ($type == 'default') ? taxonomy_get_vocabularies() : taxonomy_get_vocabularies($type);
-        foreach ($vocabs_by_type as $key => $value) {
-          $vocabs[$value->vid] = $value->name;
-        }
-        // Display taxonomy checkboxes
-        foreach ($vocabs as $key => $vocab_name) {
-          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy'][$type]["taxonomy_vocab_display_{$type}_{$key}"] = array(
-            '#type' => 'checkbox',
-            '#title' => t('Display vocabulary: @vocab_name', array('@vocab_name' => $vocab_name)),
-            '#default_value' => $settings["taxonomy_vocab_display_{$type}_{$key}"],
-          );
-        }
-        // Options for default settings
-        if ($type == 'default') {
-          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#title'] = t('Default');
-          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['default']['#collapsed'] = $settings['taxonomy_enable_content_type'] ? TRUE : FALSE;
-          $form['node_type_specific']['display_taxonomy_container']['display_taxonomy']['taxonomy_enable_content_type'] = array(
-            '#type' => 'checkbox',
-            '#title' => t('Use content type specific settings.'),
-            '#default_value' => $settings['taxonomy_enable_content_type'],
-          );
-        }
-        // Collapse content type specific settings if default settings are being used
-        else if ($settings['taxonomy_enable_content_type'] == 0) {
-          $form['display_taxonomy'][$type]['#collapsed'] = TRUE;
-        }
-      }
-    }
-  }
+
   // Links display
   $form['node_type_specific']['links_container'] = array(
     '#type' => 'fieldset',
@@ -499,7 +389,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
         '#type' => 'select',
         '#title' => t('Display Links'),
         '#default_value' => $settings["display_links_{$type}"],
-        '#options' => array(       
+        '#options' => array(
           'all' => t('Always display links'),
           'only' => t('Hide links on teasers'),
           'never' => t('Never display links'),
@@ -733,20 +623,6 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#title' => t('Show the built in User Menu.'),
     '#default_value' => $settings['at_user_menu'],
     '#description' => t('This will show or hide useful links in the header. NOTE that if the <a href="!link">Admin Menu</a> module is installed most links will not show up because they are included in the Admin Menu.', array('!link' => 'http://drupal.org/project/admin_menu')),
-  );
-  // Show block edit links
-  $form['admin_settings']['administration']['block_edit_links'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show block editing and configuration links.'),
-    '#default_value' => $settings['block_edit_links'],
-    '#description' => t('When hovering over a block or viewing blocks in the blocks list page privileged users will see block editing and configuration links.'),
-  );
-  // Hide help messages
-  $form['admin_settings']['administration']['at_admin_hide_help'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Hide help messages.'),
-    '#default_value' => $settings['at_admin_hide_help'],
-    '#description' => t('When this setting is checked all help messages will be hidden.'),
   );
   // Development settings
   $form['themedev']['dev'] = array(

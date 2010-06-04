@@ -98,7 +98,7 @@ $vars['title_classes'] = implode(' ', $title_classes);
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
 // Support node tpl suggestions per node nid.
-$vars['template_files'][] = 'node-'.$vars['node']->nid; 
+$vars['template_files'][] = 'node-'.$vars['node']->nid;
 
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
@@ -124,70 +124,6 @@ if (theme_get_setting('submitted_by_settings_enabled') == 1 && !function_exists(
   $date_author = ($date_setting) ? $date : '';
   $date_author .= ($author_setting) ? $author_separator . $author : '';
   $vars['submitted'] = $date_author;
-}
-
-// Taxonomy theme settings.
-if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxonomy_perm')) {
-  $taxonomy_content_type = (theme_get_setting('taxonomy_enable_content_type') == 1) ? $vars['node']->type : 'default';
-  $taxonomy_display = theme_get_setting('taxonomy_display_'. $taxonomy_content_type);
-  $taxonomy_format = theme_get_setting('taxonomy_format_'. $taxonomy_content_type);
-  $delimiter = filter_xss(theme_get_setting('taxonomy_delimiter_'. $taxonomy_content_type));
-  if ($taxonomy_display == 'all' || ($taxonomy_display == 'only' && $vars['page'])) {
-    $output = '';
-    switch ($taxonomy_format) {
-      case "list":
-        $terms = taxonomy_node_get_terms($vars['node']);
-        $links = array();
-        $term_index = 0;
-        foreach ($terms as $term) {
-          $term_count = count($terms);
-          $term_index++;
-          if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $term->vid) == 1) {
-            $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) . ( $term_index == $term_count ? '' : $delimiter ) .'</li>';
-          }
-        }
-        $output .= implode("", $links);
-        if ($output != '') {
-          $output = '<ul class="taxonomy">'. $output .'</ul>';
-        }
-        break;
-      case "vocab":
-        $heading_level = $vars['page'] ? 'h2' : 'h3';
-        $vocabularies = taxonomy_get_vocabularies($vars['node']->type);
-        $vocab_index = 0;
-        foreach ($vocabularies as $vocabulary) {
-          $vocab_index++;
-          $terms = '';
-          if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
-            $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
-          }
-          if ($terms) {
-            if (module_exists('i18n')){
-              $terms = i18ntaxonomy_localize_terms ($terms);
-            }
-            $links = array();
-            $output .= '<li class="vocab vocab-'. safe_string($vocabulary->name) .'"><'. $heading_level .' class="vocab-name">'. $vocabulary->name .'</'. $heading_level .'><ul class="vocab-list">' ;
-            $term_count = count($terms);
-            $term_index = 0;
-            foreach ($terms as $term) {
-              $term_index++;
-              $links[] = '<li>'. l($term->name, taxonomy_term_path($term), array('attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description)))) .  ( $term_index == $term_count ? '' : $delimiter )  .'</li>';
-            }
-          $output .= implode("", $links);
-          $output .= '</ul></li>';
-          
-          }
-        }
-        if ($output != '') {
-          $output = '<ul class="taxonomy">'. $output .'</ul>';
-        }
-        break;
-    }
-    $vars['terms'] = $output;
-  }
-  else {
-    $vars['terms'] = '';
-  }
 }
 
 // Display links.

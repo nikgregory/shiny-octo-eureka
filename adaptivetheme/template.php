@@ -6,8 +6,6 @@
  * Its probabably not a good idea to modify anything in this file.
  */
 
-// Run nothing if the database is inactive.
-if (db_is_active()) {
   /**
    * Implementation of hook_theme
    */
@@ -64,4 +62,4 @@ if (db_is_active()) {
   if (theme_get_setting('color_enable_schemes') == 'on') {
     drupal_add_css(drupal_get_path('theme', 'adaptivetheme') .'/css/theme/'. get_at_colors(), 'theme');
   }
-}
+

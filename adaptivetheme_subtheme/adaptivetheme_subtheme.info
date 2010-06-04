@@ -11,7 +11,7 @@
 
 ;----------// Required Theme Information
 
-  core       = 6.x
+  core       = 7.x
   engine     = phptemplate
   screenshot = screenshot.png
   base theme = adaptivetheme
@@ -162,16 +162,7 @@
   settings[search_info_upload]                = 1
   settings[search_info_separator]             = ' - '
 
-  settings[primary_links_tree]                = 0
-  settings[secondary_links_tree]              = 0
-
   settings[mission_statement_pages]           = 'home'
-
-  settings[taxonomy_settings_enabled]         = 0
-  settings[taxonomy_display_default]          = 'only'
-  settings[taxonomy_format_default]           = 'vocab'
-  settings[taxonomy_delimiter_default]        = ', '
-  settings[taxonomy_enable_content_type]      = 0
 
   settings[submitted_by_settings_enabled]     = 0
   settings[submitted_by_author_default]       = 1
@@ -245,8 +236,6 @@
   settings[links_add_span_elements]           = 0
 
   settings[at_user_menu]                      = 0
-  settings[block_edit_links]                  = 1
-  settings[at_admin_hide_help]                = 0
 
   settings[layout_method]                     = '0'
   settings[layout_width]                      = '960px'
@@ -268,10 +257,4 @@
 
   settings[color_schemes]                     = 'colors-default.css'
   settings[color_enable_schemes]              = 'off'
-
-; Information added by drupal.org packaging script on 2010-03-27
-version = "6.x-2.2"
-core = "6.x"
-project = "adaptivetheme"
-datestamp = "1269667828"
 

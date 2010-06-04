@@ -60,11 +60,11 @@ if (!empty($secondary_menu_links)) {
 
 // Output the primary and secondary menus as regular menu trees.
 if (!empty($primary_menu_links) && theme_get_setting('primary_links_tree')) {
-  $primary_tree_menu = menu_tree_all_data('primary-links'); 
+  $primary_tree_menu = menu_tree_all_data('primary-links');
   $vars['primary_menu'] = menu_tree_output($primary_tree_menu);
 }
 if (!empty($secondary_menu_links) && theme_get_setting('secondary_links_tree')) {
-  $secondary_tree_menu = menu_tree_all_data('secondary-links'); 
+  $secondary_tree_menu = menu_tree_all_data('secondary-links');
   $vars['secondary_menu'] = menu_tree_output($secondary_tree_menu);
 }
 
@@ -213,11 +213,6 @@ if (theme_get_setting('mission_statement_pages') == 'all') {
 // Show $theme_info output using krumo.
 if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
   dsm($theme_info); /* Use dsm, kpr messes up IE */
-}
-
-// Check whether help is disabled.
-if (theme_get_setting('at_admin_hide_help')) {
-  unset($vars['help']);
 }
 
 // Hide search theme form label
