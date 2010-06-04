@@ -69,11 +69,6 @@ if (function_exists('skinr_preprocess') && !empty($vars['skinr'])) {
   $classes[] = $vars['skinr'];
 }
 
-// Add class for block edit links if enabled.
-if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-  $classes[] = 'block-edit-links';
-}
-
 // Add classes for the horizontal login block if enabled.
 if (theme_get_setting('horizontal_login_block') && $block->module == 'user' && $block->delta == '0') {
   $classes[] = 'at-horizontal-login clearfix';
@@ -100,11 +95,3 @@ if (theme_get_setting('cleanup_headings_namespaced_class')) {
 }
 
 $vars['title_classes'] = implode(' ', $title_classes);
-
-// Block edit links.
-$vars['edit_links_array'] = array();
-$vars['edit_links'] = '';
-if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
-  include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.block-editing.inc';
-  adaptivetheme_preprocess_block_editing($vars, $hook);
-}
