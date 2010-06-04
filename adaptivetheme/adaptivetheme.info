@@ -31,10 +31,6 @@
   regions[footer]            = Footer
   regions[article_aside]     = Article Aside
 
-;----------// Panels
-
-  plugins[panels][layouts] = panels
-
 ;----------// Skinr Styles
 
   ; The following classes require the Skinr module, http://drupal.org/project/skinr
