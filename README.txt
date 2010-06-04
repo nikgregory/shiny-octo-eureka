@@ -17,7 +17,3 @@ Some tips:
 * If you don't use Firebug then get it now, this theme has many pre written CSS
   selectors. The theme was designed for porting right from the get go and makes it
   really easy as long as you don't fight the workflow, embrace it:)
-  
-* bug, issue or other pita? Post in the Themers Crowd (OG group).
-
-Otherwise skype me for assistance: jmburnz (but not too often...)
