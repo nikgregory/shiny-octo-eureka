@@ -13,7 +13,7 @@
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-overrides.inc');
 
 // Include some jQuery.
-//include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-js.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-js.inc');
 
 
 // Auto-rebuild the theme registry during theme development.
@@ -63,7 +63,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Skip navigation class.
   if (theme_get_setting('skip_navigation_display') == 'hide') {
-    $vars['skip_nav_class'] = 'element-invisible';
+    $vars['skip_nav_class'] = 'offscreen';
   }
 
   if (theme_get_setting('skip_navigation_display') == 'show') {
@@ -166,7 +166,7 @@ function adaptivetheme_process_html(&$vars) {
   }
 
   // De-populate the body classes of the suggestion classes.
-  // $classes = str_replace(theme_get_suggestions(arg(), 'page', '-'), '', $classes);
+  $classes = str_replace(theme_get_suggestions(arg(), 'page', '--'), '', $classes);
 
   // Node type class.
   if ($node = menu_get_object()) {
@@ -365,3 +365,48 @@ function adaptivetheme_preprocess_block(&$vars) {
   // Add the content class to block content wrapper.
   $vars['content_attributes_array']['class'][] = 'content';
 }
+
+/**
+ *  Modify search results based on theme settings.
+ */
+function adaptivetheme_preprocess_search_result(&$vars) {
+  $result = $vars['result'];
+  $vars['url'] = check_url($result['link']);
+  $vars['title'] = check_plain($result['title']);
+
+  // Check for snippets - user search does not include snippets.
+  $vars['snippet'] = '';
+  if (!empty($result['snippet']) && theme_get_setting('search_snippet')) {
+    $vars['snippet'] = $result['snippet'];
+  }
+
+  $info = array();
+  if (!empty($result['type']) && theme_get_setting('search_info_type')) {
+    $info['type'] = check_plain($result['type']);
+  }
+  if (!empty($result['user']) && theme_get_setting('search_info_user')) {
+    $info['user'] = $result['user'];
+  }
+  if (!empty($result['date']) && theme_get_setting('search_info_date')) {
+    $info['date'] = format_date($result['date'], 'small');
+  }
+  if (isset($result['extra']) && is_array($result['extra'])) {
+    if (!empty($result['extra'][0]) && theme_get_setting('search_info_comment')) {
+      $info['comment'] = $result['extra'][0];
+    }
+    if (!empty($result['extra'][1]) && theme_get_setting('search_info_upload')) {
+      $info['upload'] = $result['extra'][1];
+    }
+  }
+
+  // Provide separated and grouped meta information.
+  $vars['info_split'] = $info;
+  $vars['info'] = implode(' - ', $info);
+
+  // Provide alternate search result template.
+  $vars['template_files'][] = 'search-result-'. $vars['type'];
+
+  // info_separator
+  $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
+}
+

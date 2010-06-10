@@ -6,14 +6,14 @@
  * Load Javascript files as required.
  */
 
-$path_to_js_core = drupal_get_path('theme', 'adaptivetheme') .'/js/';
+$path = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 
 // Load equal height blocks
 $regions = array(
   'leaderboard',
   'header',
   'secondary-content',
-  'content-top',
+  'highlight',
   'content-bottom',
   'tertiary-content',
   'footer'
@@ -26,21 +26,50 @@ foreach ($regions as $region) {
 }
 if (!empty($active_regions)) {
   $active_regions_list = $active_regions;
-  drupal_add_js(array('active_regions' => $active_regions_list), 'setting');
-  drupal_add_js($path_to_js_core .'equalize-blocks.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  drupal_add_js(array('active_regions' => $active_regions_list),
+    array(
+      'type' => 'setting',
+      'scope' => 'header',
+    )
+  );
+  drupal_add_js($path .'equalize-blocks.js',
+    array(
+      'type' => 'file',
+      'scope' => 'header',
+      'weight' => 999,
+    )
+  );
 }
 
 // Load equal height sidebars
 if (theme_get_setting('equal_heights_sidebars')) {
-  drupal_add_js($path_to_js_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  drupal_add_js($path .'equalize-columns.js',
+    array(
+      'type' => 'file',
+      'scope' => 'header',
+      'weight' => 999,
+    )
+  );
 }
 
 // Load equal height gpanels
 if (theme_get_setting('equal_heights_gpanels')) {
-  drupal_add_js($path_to_js_core .'equalize-gpanels.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  drupal_add_js($path .'equalize-gpanels.js',
+    array(
+      'type' => 'file',
+      'scope' => 'header',
+      'weight' => 999,
+    )
+  );
 }
 
 // Use horizontal login block overlabel js
 if (theme_get_setting('horizontal_login_block_overlabel')) {
-  drupal_add_js($path_to_js_core .'jquery.overlabel.js', 'theme', 'header', FALSE, TRUE, TRUE);
+  drupal_add_js($path .'jquery.overlabel.js',
+    array(
+      'type' => 'file',
+      'scope' => 'header',
+      'weight' => 999,
+    )
+  );
 }

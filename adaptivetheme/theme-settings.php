@@ -21,8 +21,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     'breadcrumb_title'                  => theme_get_setting('breadcrumb_title'),
  */
 
-    'display_search_form_label'         => theme_get_setting('display_search_form_label'),
-
     'search_snippet'                    => theme_get_setting('search_snippet'),
     'search_info_type'                  => theme_get_setting('search_info_type'),
     'search_info_user'                  => theme_get_setting('search_info_user'),
@@ -194,64 +192,46 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   );
   */
   // Search Settings
-  $form['general_settings']['search'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Search'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  // Search forms
-  $form['general_settings']['search']['search_form'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Search forms'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['search']['search_form']['display_search_form_label'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display the search form label <em>"Search this site"</em>'),
-    '#default_value' => theme_get_setting('display_search_form_label'),
-  );
   // Search results
-  $form['general_settings']['search']['search_results'] = array(
+  $form['general_settings']['search_results'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
     '#description' => t('What additional information should be displayed in your search results?'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['general_settings']['search']['search_results']['search_snippet'] = array(
+  $form['general_settings']['search_results']['search_snippet'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display text snippet'),
     '#default_value' => theme_get_setting('search_snippet'),
   );
-  $form['general_settings']['search']['search_results']['search_info_type'] = array(
+  $form['general_settings']['search_results']['search_info_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display content type'),
     '#default_value' => theme_get_setting('search_info_type'),
   );
-  $form['general_settings']['search']['search_results']['search_info_user'] = array(
+  $form['general_settings']['search_results']['search_info_user'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display author name'),
     '#default_value' => theme_get_setting('search_info_user'),
   );
-  $form['general_settings']['search']['search_results']['search_info_date'] = array(
+  $form['general_settings']['search_results']['search_info_date'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display posted date'),
     '#default_value' => theme_get_setting('search_info_date'),
   );
-  $form['general_settings']['search']['search_results']['search_info_comment'] = array(
+  $form['general_settings']['search_results']['search_info_comment'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display comment count'),
     '#default_value' => theme_get_setting('search_info_comment'),
   );
-  $form['general_settings']['search']['search_results']['search_info_upload'] = array(
+  $form['general_settings']['search_results']['search_info_upload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display attachment count'),
     '#default_value' => theme_get_setting('search_info_upload'),
   );
   // Search_info_separator
-  $form['general_settings']['search']['search_results']['search_info_separator'] = array(
+  $form['general_settings']['search_results']['search_info_separator'] = array(
     '#type' => 'textfield',
     '#title' => t('Search info separator'),
     '#description' => t('Modify the separator. The default is a hypen with a space before and after.'),

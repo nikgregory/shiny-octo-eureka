@@ -1,4 +1,8 @@
 // $Id$
-$(document).ready(function() {
-  $('.gpanel .block-inner').equalHeight();
-});
+(function ($) {
+  Drupal.behaviors.adaptivetheme_equalizegpanels = {
+    attach: function(context) {
+      $('.gpanel .block-inner').equalHeight();
+    }
+  };
+})(jQuery);
