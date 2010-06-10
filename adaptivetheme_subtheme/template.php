@@ -6,10 +6,10 @@
  */
 
 // Don't include custom functions if the database is inactive.
-if (db_is_active()) {
+
   // Include base theme custom functions.
-  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
-}
+  //include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+
 
 /**
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.

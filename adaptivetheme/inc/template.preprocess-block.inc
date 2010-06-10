@@ -13,85 +13,52 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-
-global $theme, $user;
-
-$block = $vars['block'];
-
-// Rewrite the left and right region names.
-if ($block->region == 'left') {
-  $block->region = 'sidebar-first';
-}
-if ($block->region == 'right') {
-  $block->region = 'sidebar-last';
-}
-
-// Set the block id.
+// Set the block html id.
 if (theme_get_setting('cleanup_block_block_module_delta')) {
-  $vars['block_module_delta'] = 'block-'. $block->module .'-'. $block->delta;
+  $vars['block_html_id'] = ' id="' . $vars['block_html_id'] .'"';
+}
+else {
+  unset($vars['block_html_id']);
 }
 
-// Special classes for blocks, emulate Drupal 7.
-$classes = array();
-
-$classes[] = 'block';
+// Special classes for blocks.
+$vars['classes_array'][] = 'block';
 
 if (theme_get_setting('cleanup_block_classes_module')) {
-  $classes[] = 'block-'. $block->module;
+  $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->module);
 }
 
 if (theme_get_setting('cleanup_block_classes_zebra')) {
-  $classes[] = $vars['block_zebra']; // odd, even zebra class
+  $vars['classes_array'][] = $vars['block_zebra']; // odd, even zebra class
 }
 
 if (theme_get_setting('cleanup_block_classes_region')) {
-  $classes[] = 'block-region-'. safe_string($block->region); // block-[region] class
+  $vars['classes_array'][] = 'block-region-'. drupal_html_class($vars['block']->region); // block-[region] class
 }
 
 if (theme_get_setting('cleanup_block_classes_count')) {
-  $classes[] = 'block-count-'. $vars['id']; // block-count-[count] class
-}
-
-// Add special classes to support the http://drupal.org/project/blocktheme module.
-if (function_exists('blocktheme_preprocess_block') && isset($vars['blocktheme'])) {
-  $classes[] = $vars['blocktheme'];
-  $classes[] = safe_string($block->region) .'-'. $vars['blocktheme'];
-}
-
-// Add special classes to support the http://drupal.org/project/block_class module.
-if (function_exists('block_class') && block_class($block)) {
-  $classes[] = block_class($block);
-  $classes[] = safe_string($block->region) .'-'. block_class($block);
-}
-
-// Add support for Skinr module classes http://drupal.org/project/skinr.
-if (function_exists('skinr_preprocess') && !empty($vars['skinr'])) {
-  $classes[] = $vars['skinr'];
+  $vars['classes_array'][] = 'block-count-'. $vars['block_id']; // block-count-[count] class
 }
 
 // Add classes for the horizontal login block if enabled.
-if (theme_get_setting('horizontal_login_block') && $block->module == 'user' && $block->delta == '0') {
-  $classes[] = 'at-horizontal-login clearfix';
+if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'user-login') {
+  $vars['classes_array'][] = 'at-horizontal-login clearfix';
 }
 
 // Hide search label on the search block
-if ($block->module == 'search' && $block->delta == 0) {
+if ($vars['block']->module == 'search' && $vars['block']->delta == 'search-form') {
   if (theme_get_setting('display_search_form_label') == 0) {
-    $classes[] = 'hide-label';
+    $vars['classes_array'][] = 'hide-label';
   }
 }
 
-// $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
-$vars['classes'] = implode(' ', $classes);
-
-// Set title classes
-$title_classes = array();
+// Set title classes.
 if (theme_get_setting('cleanup_headings_title_class')) {
-  $title_classes[] = 'title';
+  $vars['title_attributes_array']['class'][] = 'title';
 }
-
 if (theme_get_setting('cleanup_headings_namespaced_class')) {
-  $title_classes[] = 'block-title';
+  $vars['title_attributes_array']['class'][] = 'block-title';
 }
 
-$vars['title_classes'] = implode(' ', $title_classes);
+// Add the content class to block content wrapper.
+$vars['content_attributes_array']['class'][] = 'content';

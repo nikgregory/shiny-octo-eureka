@@ -21,50 +21,52 @@ if (theme_get_setting('cleanup_article_id')) {
   $vars['article_id'] = 'article-'. $vars['node']->nid;
 }
 
-// Special classes for nodes. Emulates Drupal 7 node classes for forward compatibility.
-$classes = array();
+// Unset core node classes, trusting modules will still be able to set their own?
+unset($vars['classes']);
 
-$classes[] = 'article';
+$vars['classes_array'][] = 'article';
 
+// Reset node classes to use article prefix.
 if (theme_get_setting('cleanup_article_classes_promote')) {
   if ($vars['promote']) {
-    $classes[] = 'article-promoted';
+    $vars['classes_array'][] = 'article-promoted';
   }
 }
 
 if (theme_get_setting('cleanup_article_classes_sticky')) {
   if ($vars['sticky']) {
-    $classes[] = 'article-sticky';
+    $vars['classes_array'][] = 'article-sticky';
   }
 }
 
 if (theme_get_setting('cleanup_article_classes_teaser')) {
   if ($vars['teaser']) {
-    $classes[] = 'article-teaser';
+    $vars['classes_array'][] = 'article-teaser';
   }
 }
 
 if (theme_get_setting('cleanup_article_classes_preview')) {
   if (isset($vars['preview'])) {
-    $classes[] = 'article-preview';
+    $vars['classes_array'][] = 'article-preview';
   }
 }
 
 if (!$vars['status']) {
-  $classes[] = 'article-unpublished';
+  $vars['classes_array'][] = 'article-unpublished';
 }
 
 // Add support for Skinr module classes http://drupal.org/project/skinr
-if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
-  $classes[] = $vars['skinr'];
-}
+// if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
+//  $classes[] = $vars['skinr'];
+// }
 
 // Class for content types e.g. "article-page", "article-my-content-type", etc.
 if (theme_get_setting('cleanup_article_classes_type')) {
-  $classes[] = $vars['node']->type .'-article';
+  $vars['classes_array'][] = drupal_html_class('article-' . $node->type);
 }
 
 // Language specific article class.
+/*
 if (theme_get_setting('cleanup_article_classes_language')) {
   if (function_exists('i18n_init')) {
     if ($vars['node']->language) {
@@ -73,39 +75,21 @@ if (theme_get_setting('cleanup_article_classes_language')) {
     }
   }
 }
+*/
 
 if (theme_get_setting('cleanup_article_classes_zebra')) {
-  $classes[] = $vars['zebra'];
+  $vars['classes_array'][] = $vars['zebra'];
 }
 
-// $classes is the variable that holds the node classes and is printed in node tpl files.
-$vars['classes'] = implode(' ', $classes); // Concatenate with spaces.
-
 // Set title classes
-$title_classes = array();
-
 if (theme_get_setting('cleanup_headings_title_class')) {
-  $title_classes[] = 'title';
+  $vars['title_attributes_array']['class'][] = 'title';
 }
 
 if (theme_get_setting('cleanup_headings_namespaced_class')) {
-  $title_classes[] = 'article-title';
+  $vars['title_attributes_array']['class'][] = 'article-title';
 }
-
-$vars['title_classes'] = implode(' ', $title_classes);
 
 // Add article_aside region content.
-$vars['article_aside'] = theme('blocks', 'article_aside');
+// $vars['article_aside'] = theme('blocks', 'article_aside');
 
-// Support node tpl suggestions per node nid.
-$vars['template_files'][] = 'node-'.$vars['node']->nid;
-
-// Set message if node is unpublished.
-if (!$vars['node']->status) {
-  if ($vars['page']) {
-    drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning');
-  }
-  else {
-    $vars['unpublished'] = '<span class="unpublished">'. t('Unpublished') .'</span>';
-  }
-}

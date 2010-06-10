@@ -18,19 +18,22 @@
 
 ;----------// Regions
   regions[leaderboard]       = Leaderboard
-  regions[header]            = Header Region
+  regions[header]            = Header
   regions[menu_bar]          = Menu Bar
-  regions[secondary_content] = Secondary Content
-  regions[content_top]       = Content Top
-  regions[content_aside]     = Content Aside
+  regions[help]              = Help
+  regions[secondary_content] = Secondary
+  regions[highlight]         = Highlight
+  regions[content_aside]     = Aside
   regions[content]           = Main Content
-  regions[content_bottom]    = Content Bottom
-  regions[left]              = Sidebar First
-  regions[right]             = Sidebar Last
-  regions[tertiary_content]  = Tertiary Content
+  regions[content_bottom]    = Content bottom
+  regions[sidebar_first]     = Sidebar first
+  regions[sidebar_second]    = Sidebar second
+  regions[tertiary_content]  = Tertiary
   regions[footer]            = Footer
-  regions[article_aside]     = Article Aside
-
+  regions[article_aside]     = Article aside
+  regions[page_top]          = Page top
+  regions[page_bottom]       = Page bottom
+  
 ;----------// Skinr Styles
 
   ; The following classes require the Skinr module, http://drupal.org/project/skinr
@@ -122,11 +125,11 @@
 
   settings[skip_navigation_display]           = 'hide'
 
-  settings[breadcrumb_display]                = 'yes'
-  settings[breadcrumb_separator]              = ' &#187; '
-  settings[breadcrumb_home]                   = 0
-  settings[breadcrumb_trailing]               = 0
-  settings[breadcrumb_title]                  = 0
+ ; settings[breadcrumb_display]                = 'yes'
+ ; settings[breadcrumb_separator]              = ' &#187; '
+ ; settings[breadcrumb_home]                   = 1
+ ; settings[breadcrumb_trailing]               = 0
+ ; settings[breadcrumb_title]                  = 0
 
   settings[display_search_form_label]         = 1
 

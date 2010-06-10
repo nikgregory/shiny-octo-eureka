@@ -13,7 +13,7 @@ margin:0 240px;
 margin-left:240px;
 }
 
-.sidebar-last .content-inner {
+.sidebar-second .content-inner {
 margin-right:240px;
 }
 
@@ -22,13 +22,13 @@ width:240px;
 margin-left:-100%;
 }
 
-#sidebar-last {
+#sidebar-second {
 width:240px;
 margin-left:-240px;
 }
 
 /* Add padding to align elements to the grid. */
-.block,#user-menu,#skip-nav,#branding,#search-box,#mission,#primary,#secondary,#attribution,#breadcrumb,#main-content-header,#content,#messages-and-help,#footer-message {
+.block,#user-menu,#skip-nav,#branding,#search-box,#mission,#primary,#secondary,#attribution,#breadcrumb,#page-title,.local-tasks,#content,#messages-and-help,#footer-message {
 padding:0 10px;
 }
 
@@ -970,7 +970,7 @@ right:15px;
 display:block;
 }
 
-#content-column,#sidebar-first,#sidebar-last,.at-horizontal-login label {
+#content-column,#sidebar-first,#sidebar-second,.at-horizontal-login label {
 float:left;
 }
 

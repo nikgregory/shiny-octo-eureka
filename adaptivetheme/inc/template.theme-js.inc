@@ -11,7 +11,7 @@ $path_to_js_core = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 // Load equal height blocks
 $regions = array(
   'leaderboard',
-  'header', 
+  'header',
   'secondary-content',
   'content-top',
   'content-bottom',
@@ -32,12 +32,12 @@ if (!empty($active_regions)) {
 
 // Load equal height sidebars
 if (theme_get_setting('equal_heights_sidebars')) {
-  drupal_add_js($path_to_js_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE); 
+  drupal_add_js($path_to_js_core .'equalize-columns.js', 'theme', 'header', FALSE, TRUE, TRUE);
 }
 
 // Load equal height gpanels
 if (theme_get_setting('equal_heights_gpanels')) {
-  drupal_add_js($path_to_js_core .'equalize-gpanels.js', 'theme', 'header', FALSE, TRUE, TRUE); 
+  drupal_add_js($path_to_js_core .'equalize-gpanels.js', 'theme', 'header', FALSE, TRUE, TRUE);
 }
 
 // Use horizontal login block overlabel js
