@@ -42,7 +42,7 @@
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
-  <?php print $layout_settings; ?>
+  <?php if (!$in_overlay) { print $layout_settings; } ?>
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>

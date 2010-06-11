@@ -1,8 +1,6 @@
 ; $Id$
 
-
 ;----------// Theme Information
-
   name        = AT Admin
   description = Clean, usable Administration theme with five color options.
   core        = 7.x
@@ -12,12 +10,10 @@
 
 
 ;----------// Stylesheets
-
   stylesheets[all][] = css/core/at-admin.css
 
 
 ;----------// Skinr Styles
-
   ; The following require the Skinr module, http://drupal.org/project/skinr
   ; Adaptivetheme provides native support for Skinr classes.
 
@@ -25,27 +21,28 @@
 
 
 ;----------// Regions
-
   regions[header]            = Header Region
+  regions[help]              = Help
   regions[secondary_content] = Secondary Content
-  regions[content_top]       = Content Top
+  regions[hightlight]        = Highlight
   regions[content]           = Main Content
   regions[content_bottom]    = Content Bottom
+  regions[sidebar_first]     = Sidebar first
+  regions[sidebar_second]    = Sidebar second
   regions[tertiary_content]  = Tertiary Content
-  regions[left]              = Sidebar First
-  regions[right]             = Sidebar Last
   regions[footer]            = Footer
+  regions[page_top]          = Page top
+  regions[page_bottom]       = Page bottom
 
 
 ;----------// Theme Setting Defaults
-
-  settings[skip_navigation_display]           = 'hide'
-
  ; settings[breadcrumb_display]                = 'yes'
  ; settings[breadcrumb_separator]              = ' &#187; '
  ; settings[breadcrumb_home]                   = 1
  ; settings[breadcrumb_trailing]               = 0
  ; settings[breadcrumb_title]                  = 0
+
+  settings[skip_navigation_display]           = 'hide'
 
   settings[search_snippet]                    = 1
   settings[search_info_type]                  = 1
@@ -80,26 +77,28 @@
   settings[cleanup_comment_new]               = 0
   settings[cleanup_comment_zebra]             = 0
   settings[cleanup_comment_wrapper_type]      = 0
-
-  settings[cleanup_block_block_module_delta]  = 1
+  
+  settings[cleanup_block_block_module_delta]  = 0
   settings[cleanup_block_classes_module]      = 0
   settings[cleanup_block_classes_zebra]       = 0
   settings[cleanup_block_classes_region]      = 0
   settings[cleanup_block_classes_count]       = 0
 
   settings[cleanup_menu_menu_class]           = 1
-  settings[cleanup_menu_leaf_class]           = 1
-  settings[cleanup_menu_first_last_classes]   = 1
-  settings[cleanup_menu_active_classes]       = 1
+  settings[cleanup_menu_link_classes]         = 1
   settings[cleanup_menu_title_class]          = 0
 
-  settings[cleanup_links_type_class]          = 1
-  settings[cleanup_links_active_classes]      = 1
-  settings[cleanup_links_first_last_classes]  = 0
+  settings[cleanup_main_mlid_class]           = 1
+  settings[cleanup_main_active_classes]       = 1
+  settings[cleanup_main_firstlast_classes]    = 1
+
+  settings[cleanup_sec_mlid_classes]          = 0
+  settings[cleanup_sec_active_classes]        = 0
+  settings[cleanup_sec_firstlast_classes]     = 0
 
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
-  
+
   settings[cleanup_views_css_name]            = 0
   settings[cleanup_views_view_name]           = 0
   settings[cleanup_views_display_id]          = 0
@@ -107,26 +106,27 @@
   
   settings[cleanup_views_unformatted]         = 0
   settings[cleanup_views_item_list]           = 0
-  
+ 
   settings[cleanup_fields_type]               = 0
   settings[cleanup_fields_name]               = 0
   settings[cleanup_fields_zebra]              = 0
   
-  settings[cleanup_headings_title_class]      = 1
-  settings[cleanup_headings_namespaced_class] = 1
-
-  settings[links_add_span_elements]           = 0
-
-  settings[at_user_menu]                      = 1
+  settings[cleanup_headings_title_class]      = 0
+  settings[cleanup_headings_namespaced_class] = 0
+  
+  settings[theme_main_menu_spans]             = 0
+  settings[theme_sec_menu_spans]              = 0
+  settings[theme_menu_link_spans]             = 0
 
   settings[layout_method]                     = '0'
-  settings[layout_width]                      = '1260px'
+  settings[layout_width]                      = '100%'
   settings[layout_sidebar_first_width]        = '240'
   settings[layout_sidebar_last_width]         = '240'
   settings[layout_enable_settings]            = 'on'
   settings[layout_enable_width]               = 'on'
   settings[layout_enable_sidebars]            = 'on'
   settings[layout_enable_method]              = 'on'
+  settings[layout_enable_frontpage]           = 'on'
 
   settings[equal_heights_sidebars]            = 0
   settings[equal_heights_blocks]              = 0
@@ -138,4 +138,3 @@
 
   settings[color_schemes]                     = 'onyx.css'
   settings[color_enable_schemes]              = 'on'
-

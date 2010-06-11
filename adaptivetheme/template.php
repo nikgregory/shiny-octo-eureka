@@ -7,7 +7,7 @@
  */
 
 // Include custom functions.
-//include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 
 // Include theme overrides.
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-overrides.inc');
@@ -18,6 +18,7 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.theme-js.
 
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('rebuild_registry')) {
+  drupal_theme_rebuild();
   drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
 }
 
@@ -146,9 +147,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 }
 
 function adaptivetheme_process_html(&$vars) {
-
   $classes = explode(' ', $vars['classes']);
-
   // .front and .not-front classes.
   if (in_array('front', $classes)) {
     theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('front', '', $classes);
@@ -156,7 +155,6 @@ function adaptivetheme_process_html(&$vars) {
   if (in_array('not-front', $classes)) {
     theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('not-front', '', $classes);
   }
-
   // User status classes.
   if (in_array('logged-in', $classes)) {
     theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('logged-in', '', $classes);
@@ -164,23 +162,19 @@ function adaptivetheme_process_html(&$vars) {
   if (in_array('not-logged-in', $classes)) {
     theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('not-logged-in', '', $classes);
   }
-
   // De-populate the body classes of the suggestion classes.
   $classes = str_replace(theme_get_suggestions(arg(), 'page', '--'), '', $classes);
-
   // Node type class.
   if ($node = menu_get_object()) {
     $node_type_class = drupal_html_class('node-type-' . $node->type);
     if (in_array($node_type_class, $classes)) {
       theme_get_setting('cleanup_classes_node_type') ? '' : $classes = str_replace($node_type_class, '', $classes);
+      $classes = str_replace('node-type-', 'article-type-', $classes);
     }
   }
-
   // $classes is the varaible that holds the page classes, printed in page tpl files.
   $vars['classes'] = trim(implode(' ', $classes));
 }
-
-
 
 /**
  * Override or insert variables into the page templates.
@@ -190,9 +184,7 @@ function adaptivetheme_process_html(&$vars) {
  * @param $hook
  *   The name of the template being rendered.
  */
-
 function adaptivetheme_preprocess_page(&$vars) {
-
   // Set variables for the logo and site name for easy printing in templates.
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'" title="'. t('Home page') .'"/>' : '';
@@ -211,36 +203,35 @@ function adaptivetheme_preprocess_page(&$vars) {
   ) : '';
 
   // Set variables for the main and secondary menus.
-  $vars['main_menu'] = theme('links__system_main_menu', array(
-    'links' => $vars['main_menu'],
-    'attributes' => array(
-      'id' => 'main-menu-links',
-      'class' => array(
-      'links', 'clearfix')
+  if (isset($vars['main_menu'])) {
+    $vars['main_menu_links'] = theme('links__system_main_menu', array(
+      'links' => $vars['main_menu'],
+      'attributes' => array(
+        'class' => array('links', 'clearfix'),
       ),
-      'heading' => t('Main menu')
-    )
-  );
-  $vars['secondary_menu'] = theme('links__system_secondary_menu', array(
-    'links' => $vars['secondary_menu'],
-    'attributes' => array(
-      'id' => 'secondary-menu-links',
-      'class' => array(
-        'links', 'clearfix')
-      ),
-      'heading' => t('Secondary menu')
-    )
-  );
+      'heading' => array(
+        'text' => t('Main menu'),
+        'level' => 'h2',
+        'class' => array('element-invisible'),
+      )
+    ));
+  }
+  if (isset($vars['secondary_menu'])) {
+    $vars['secondary_menu_links'] = theme('links__system_secondary_menu', array(
+      'links' => $vars['secondary_menu'],
+      'attributes' => array(
+        'class' => array('links', 'clearfix')
+       ),
+      'heading' => array(
+        'text' => t('Secondary menu'),
+        'level' => 'h2',
+        'class' => array('element-invisible'),
+       )
+     ));
+  }
 
   // Attribution.
-  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
-
-  // Hide search theme form label
-  /* - double check for advanced search forms
-  if ($vars['search_box'] && theme_get_setting('display_search_form_label') == 0) {
-    $vars['toggle_label'] = ' class="hide-label"';
-  }
-  */
+  $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>";
 }
 
 /**
@@ -253,20 +244,16 @@ function adaptivetheme_preprocess_page(&$vars) {
  */
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
-
   $vars['article_id'] = '';
   if (theme_get_setting('cleanup_article_id')) {
     // Set article id.
     $vars['article_id'] = 'article-'. $vars['node']->nid;
   }
-
-
   /* Add support for Skinr module classes http://drupal.org/project/skinr
    if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
      $classes[] = $vars['skinr'];
    }
   */
-
   // Language specific article class.
   if (theme_get_setting('cleanup_article_classes_language')) {
     if (module_exists('translation')) {
@@ -276,47 +263,34 @@ function adaptivetheme_preprocess_node(&$vars) {
       }
     }
   }
-
   if (theme_get_setting('cleanup_article_classes_zebra')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
-
   // Set title classes
   if (theme_get_setting('cleanup_headings_title_class')) {
     $vars['title_attributes_array']['class'][] = 'title';
   }
-
   if (theme_get_setting('cleanup_headings_namespaced_class')) {
     $vars['title_attributes_array']['class'][] = 'article-title';
   }
 }
-
-
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
-  // Replace "node" with the more semantic "article".
   $classes = str_replace('node', 'article', $classes);
-
-  // Gather node classes.
   if (in_array('article-promoted', $classes)) {
     theme_get_setting('cleanup_article_classes_promote') ? '' : $classes = str_replace('article-promoted', '', $classes);
   }
-
   if (in_array('article-sticky', $classes)) {
     theme_get_setting('cleanup_article_classes_sticky') ? '' : $classes = str_replace('article-sticky', '', $classes);
   }
-
   if (in_array('article-teaser', $classes)) {
     theme_get_setting('cleanup_article_classes_teaser') ? '' : $classes = str_replace('article-teaser', '', $classes);
   }
-
   if (in_array('article-preview', $classes)) {
     theme_get_setting('cleanup_article_classes_preview') ? '' : $classes = str_replace('article-preview', '', $classes);
   }
-  // $classes is the varaible that holds the page classes, printed in page tpl files.
   $vars['classes'] = trim(implode(' ', $classes));
 }
-
 
 /**
  * Override or insert variables into the comment templates.
@@ -326,11 +300,36 @@ function adaptivetheme_process_node(&$vars) {
  * @param $hook
  *   The name of the template being rendered.
  */
-/*
-function adaptivetheme_subtheme_preprocess_comment(&$vars) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+function adaptivetheme_preprocess_comment(&$vars) {
+  if (theme_get_setting('cleanup_comment_zebra')) {
+    $vars['classes_array'][] = $vars['zebra'];
+  }
+  // Set title classes
+  if (theme_get_setting('cleanup_headings_title_class')) {
+    $vars['title_attributes_array']['class'][] = 'title';
+  }
+  if (theme_get_setting('cleanup_headings_namespaced_class')) {
+    $vars['title_attributes_array']['class'][] = 'comment-title';
+  }
 }
-*/
+function adaptivetheme_process_comment(&$vars) {
+  $classes = explode(' ', $vars['classes']);
+  if (in_array('comment-by-anonymous', $classes)) {
+    theme_get_setting('cleanup_comment_anonymous') ? '' : $classes = str_replace('comment-by-anonymous', '', $classes);
+  }
+  if (in_array('comment-by-node-author', $classes)) {
+    $classes = str_replace('comment-by-node-author', 'comment-by-article-author', $classes);
+    theme_get_setting('cleanup_comment_article_author') ? '' : $classes = str_replace('comment-by-article-author', '', $classes);
+  }
+  if (in_array('comment-by-viewer', $classes)) {
+    theme_get_setting('cleanup_comment_by_viewer') ? '' : $classes = str_replace('comment-by-viewer', '', $classes);
+  }
+  if (in_array('comment-new', $classes)) {
+    theme_get_setting('cleanup_comment_new') ? '' : $classes = str_replace('comment-new', '', $classes);
+  }
+  $vars['classes'] = trim(implode(' ', $classes));
+}
+
 
 /**
  * Override or insert variables into the block templates.
@@ -341,19 +340,10 @@ function adaptivetheme_subtheme_preprocess_comment(&$vars) {
  *   The name of the template being rendered.
  */
 function adaptivetheme_preprocess_block(&$vars) {
-
   // Add classes for the horizontal login block if enabled.
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'user-login') {
     $vars['classes_array'][] = 'at-horizontal-login clearfix';
   }
-
-  // Hide search label on the search block
-  if ($vars['block']->module == 'search' && $vars['block']->delta == 'search-form') {
-    if (theme_get_setting('display_search_form_label') == 0) {
-      $vars['classes_array'][] = 'hide-label';
-    }
-  }
-
   // Set title classes.
   if (theme_get_setting('cleanup_headings_title_class')) {
     $vars['title_attributes_array']['class'][] = 'title';
@@ -361,7 +351,6 @@ function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('cleanup_headings_namespaced_class')) {
     $vars['title_attributes_array']['class'][] = 'block-title';
   }
-
   // Add the content class to block content wrapper.
   $vars['content_attributes_array']['class'][] = 'content';
 }
@@ -373,13 +362,11 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $result = $vars['result'];
   $vars['url'] = check_url($result['link']);
   $vars['title'] = check_plain($result['title']);
-
   // Check for snippets - user search does not include snippets.
   $vars['snippet'] = '';
   if (!empty($result['snippet']) && theme_get_setting('search_snippet')) {
     $vars['snippet'] = $result['snippet'];
   }
-
   $info = array();
   if (!empty($result['type']) && theme_get_setting('search_info_type')) {
     $info['type'] = check_plain($result['type']);
@@ -398,14 +385,11 @@ function adaptivetheme_preprocess_search_result(&$vars) {
       $info['upload'] = $result['extra'][1];
     }
   }
-
   // Provide separated and grouped meta information.
   $vars['info_split'] = $info;
   $vars['info'] = implode(' - ', $info);
-
   // Provide alternate search result template.
   $vars['template_files'][] = 'search-result-'. $vars['type'];
-
   // info_separator
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }

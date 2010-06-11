@@ -1,7 +1,6 @@
 ; $Id$
 
 ;----------// Theme Information
-
   name        = AdaptiveTheme
   description = A starter theme for Drupal Rockstars by <b><a href="http://adaptivethemes.com">AdaptiveThemes</a></b>. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help or wish to post a bug report please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
   core        = 7.x
@@ -9,11 +8,9 @@
   screenshot  = screenshot.png
 
 ;----------// Stylesheets
-
   stylesheets[all][] = css/base.css
 
 ;----------// jQuery Plugins and JavaScripts
-
   scripts[] = js/at-scripts.js
 
 ;----------// Regions
@@ -35,7 +32,6 @@
   regions[page_bottom]       = Page bottom
   
 ;----------// Skinr Styles
-
   ; The following classes require the Skinr module, http://drupal.org/project/skinr
   ; Adaptivetheme includes native support for Skinr classes on nodes, blocks and views.
 
@@ -122,14 +118,13 @@
 
 
 ;----------// Theme Setting Defaults
-
-  settings[skip_navigation_display]           = 'hide'
-
  ; settings[breadcrumb_display]                = 'yes'
  ; settings[breadcrumb_separator]              = ' &#187; '
  ; settings[breadcrumb_home]                   = 1
  ; settings[breadcrumb_trailing]               = 0
  ; settings[breadcrumb_title]                  = 0
+
+  settings[skip_navigation_display]           = 'hide'
 
   settings[search_snippet]                    = 1
   settings[search_info_type]                  = 1
@@ -172,14 +167,16 @@
   settings[cleanup_block_classes_count]       = 0
 
   settings[cleanup_menu_menu_class]           = 1
-  settings[cleanup_menu_leaf_class]           = 1
-  settings[cleanup_menu_first_last_classes]   = 0
-  settings[cleanup_menu_active_classes]       = 0
+  settings[cleanup_menu_link_classes]         = 1
   settings[cleanup_menu_title_class]          = 0
 
-  settings[cleanup_links_type_class]          = 1
-  settings[cleanup_links_active_classes]      = 0
-  settings[cleanup_links_first_last_classes]  = 0
+  settings[cleanup_main_mlid_class]           = 1
+  settings[cleanup_main_active_classes]       = 1
+  settings[cleanup_main_firstlast_classes]    = 1
+
+  settings[cleanup_sec_mlid_classes]          = 0
+  settings[cleanup_sec_active_classes]        = 0
+  settings[cleanup_sec_firstlast_classes]     = 0
 
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
@@ -191,7 +188,7 @@
   
   settings[cleanup_views_unformatted]         = 0
   settings[cleanup_views_item_list]           = 0
-  
+ 
   settings[cleanup_fields_type]               = 0
   settings[cleanup_fields_name]               = 0
   settings[cleanup_fields_zebra]              = 0
@@ -199,9 +196,9 @@
   settings[cleanup_headings_title_class]      = 0
   settings[cleanup_headings_namespaced_class] = 0
   
-  settings[links_add_span_elements]           = 0
-
-  settings[at_user_menu]                      = 0
+  settings[theme_main_menu_spans]             = 0
+  settings[theme_sec_menu_spans]              = 0
+  settings[theme_menu_link_spans]             = 0
 
   settings[layout_method]                     = '0'
   settings[layout_width]                      = '960px'
@@ -223,4 +220,3 @@
 
   settings[color_schemes]                     = 'colors-default.css'
   settings[color_enable_schemes]              = 'off'
-

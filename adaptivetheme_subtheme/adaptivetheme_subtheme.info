@@ -1,24 +1,17 @@
 ; $Id$
 
-
 ;----------// Theme Information
-
  ; Change the name and description for your subtheme.
 
   name        = AT Subtheme
-  description = Starter subtheme for Adaptivetheme. Copy and paste this subtheme to get started building your own Drupal theme.
-
-
-;----------// Required Theme Information
-
-  core       = 7.x
-  engine     = phptemplate
-  screenshot = screenshot.png
-  base theme = adaptivetheme
+  description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme.
+  core        = 7.x
+  engine      = phptemplate
+  screenshot  = screenshot.png
+  base theme  = adaptivetheme
 
 
 ;----------// Stylesheets
-
   ; Uncomment if using Gpanels. There are two: 960 Grids based and Fluid.
   ;stylesheets[all][] = css/core/gpanels-960-fixed.css
   ;stylesheets[all][] = css/core/gpanels-fluid.css
@@ -34,7 +27,6 @@
   
 
 ;----------// IE Conditional Stylesheets
-
   ; You MUST install http://drupal.org/project/conditional_styles (and see its readme!)
   ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
 
@@ -59,13 +51,11 @@
 
 
 ;----------// Gpanel Regions
-
   ; Gpanel Regions - use in conjunction with the Gpanel snippets.
   ; See /gpanels and the README in that folder.
   ; Uncomment the required regions.
 
   ;--// TWO column Gpanels
-  
   ; 2 col 2x50 Gpanel
   ;regions[two_col_2x50_first]  = 2col 2x50 Gpanel col 1
   ;regions[two_col_2x50_second] = 2col 2x50 Gpanel col 2
@@ -80,7 +70,6 @@
 
 
   ;--// THREE column Gpanels
-  
   ; 3 col 3x33 Gpanel
   ;regions[three_col_3x33_first]  = 3col 3x33 Gpanel col 1
   ;regions[three_col_3x33_second] = 3col 3x33 Gpanel col 2
@@ -95,7 +84,6 @@
   ;regions[three_col_50_25_25_first]  = 3col 50-25-25 Gpanel col 1
   ;regions[three_col_50_25_25_second] = 3col 50-25-25 Gpanel col 2
   ;regions[three_col_50_25_25_third]  = 3col 50-25-25 Gpanel col 3
-  
 
   ;--// FOUR column Gpanel
   ;regions[four_col_first]  = 4col Gpanel col 1
@@ -120,40 +108,20 @@
 
 
 ;----------// Skinr Styles
-
   ; The following require the Skinr module, http://drupal.org/project/skinr
   ; Adaptivetheme provides native support for Skinr classes.
 
   skinr[options][inherit_skins] = true
 
-
-;----------// Features
-
-  ; The "features" control which of these check boxes display on the
-  ; admin/build/themes configuration page. This is useful for 
-  ; suppressing check boxes for elements not used by your theme.
-
-  features[] = logo
-  features[] = name
-  features[] = slogan
-  features[] = mission
-  features[] = node_user_picture
-  features[] = comment_user_picture
-  features[] = search
-  features[] = favicon
-  features[] = primary_links
-  features[] = secondary_links
-
  
 ;----------// Theme Setting Defaults
-
-  settings[skip_navigation_display]           = 'hide'
-
  ; settings[breadcrumb_display]                = 'yes'
  ; settings[breadcrumb_separator]              = ' &#187; '
  ; settings[breadcrumb_home]                   = 1
  ; settings[breadcrumb_trailing]               = 0
  ; settings[breadcrumb_title]                  = 0
+
+  settings[skip_navigation_display]           = 'hide'
 
   settings[search_snippet]                    = 1
   settings[search_info_type]                  = 1
@@ -196,14 +164,16 @@
   settings[cleanup_block_classes_count]       = 0
 
   settings[cleanup_menu_menu_class]           = 1
-  settings[cleanup_menu_leaf_class]           = 1
-  settings[cleanup_menu_first_last_classes]   = 0
-  settings[cleanup_menu_active_classes]       = 0
+  settings[cleanup_menu_link_classes]         = 1
   settings[cleanup_menu_title_class]          = 0
 
-  settings[cleanup_links_type_class]          = 1
-  settings[cleanup_links_active_classes]      = 0
-  settings[cleanup_links_first_last_classes]  = 0
+  settings[cleanup_main_mlid_class]           = 1
+  settings[cleanup_main_active_classes]       = 1
+  settings[cleanup_main_firstlast_classes]    = 1
+
+  settings[cleanup_sec_mlid_classes]          = 0
+  settings[cleanup_sec_active_classes]        = 0
+  settings[cleanup_sec_firstlast_classes]     = 0
 
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
@@ -223,9 +193,9 @@
   settings[cleanup_headings_title_class]      = 0
   settings[cleanup_headings_namespaced_class] = 0
   
-  settings[links_add_span_elements]           = 0
-
-  settings[at_user_menu]                      = 0
+  settings[theme_main_menu_spans]             = 0
+  settings[theme_sec_menu_spans]              = 0
+  settings[theme_menu_link_spans]             = 0
 
   settings[layout_method]                     = '0'
   settings[layout_width]                      = '960px'
@@ -247,4 +217,3 @@
 
   settings[color_schemes]                     = 'colors-default.css'
   settings[color_enable_schemes]              = 'off'
-

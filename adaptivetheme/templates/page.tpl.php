@@ -111,8 +111,8 @@
       <div id="menu-bar"><?php print render($page['menu_bar']); ?></div> <!-- /menu bar -->
     <?php endif; ?>
 
-    <?php if (!empty($main_menu)): ?>
-      <div id="main-menu" class="nav"><?php print $main_menu; ?></div> <!-- /primary link menu -->
+    <?php if (!empty($main_menu_links)): ?>
+      <div id="main-menu" class="nav"><?php print $main_menu_links; ?></div> <!-- /main menu -->
     <?php endif; ?>
 
   <?php endif; // end hide in overaly ?>
@@ -189,8 +189,8 @@
           <div id="footer-region"><?php print render($page['footer']); ?></div> <!-- /footer region -->
         <?php endif; ?>
 
-        <?php if (!empty($secondary_menu)): ?>
-          <div id="secondary" class="nav"><?php print $secondary_menu; ?></div> <!-- /secondary links menu -->
+        <?php if (!empty($secondary_menu_links)): ?>
+          <div id="secondary" class="nav"><?php print $secondary_menu_links; ?></div> <!-- /secondary menu links -->
         <?php endif; ?>
 
         <?php if ($feed_icons): ?>

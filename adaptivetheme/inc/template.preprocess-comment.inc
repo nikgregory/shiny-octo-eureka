@@ -24,20 +24,29 @@ $classes = array();
 
 $classes[]  = 'comment';
 
-if ($vars['status'] != 'comment-published') {
-  $classes[] = $vars['status'];
-}
-else {
-  if (theme_get_setting('cleanup_comment_anonymous')) {
-    if ($vars['comment']->uid == 0) {
-      $classes[] = 'comment-by-anonymous';
-    }
+//
+
+  $classes = explode(' ', $vars['classes']);
+
+  if (in_array('comment-by-anonymous', $classes)) {
+    theme_get_setting('cleanup_comment_anonymous') ? '' : $classes = str_replace('comment-by-anonymous', '', $classes);
   }
-  if (theme_get_setting('cleanup_comment_article_author')) {
-    if ($vars['comment']->uid === $vars['node']->uid) {
-      $classes[] = 'comment-by-article-author';
-    }
+  if (in_array('comment-by-node-author', $classes)) {
+    $classes = str_replace('comment-by-node-author', 'comment-by-article-author', $classes);
+    theme_get_setting('cleanup_comment_article_author') ? '' : $classes = str_replace('comment-by-article-author', '', $classes);
   }
+  if (in_array('comment-by-viewer', $classes)) {
+    theme_get_setting('cleanup_comment_by_viewer') ? '' : $classes = str_replace('comment-by-viewer', '', $classes);
+  }
+  if (in_array('comment-by-viewer', $classes)) {
+    theme_get_setting('cleanup_comment_by_viewer') ? '' : $classes = str_replace('comment-by-viewer', '', $classes);
+  }
+  if (in_array('comment-new', $classes)) {
+    theme_get_setting('cleanup_comment_new') ? '' : $classes = str_replace('comment-new', '', $classes);
+  }
+
+  //
+
   if (theme_get_setting('cleanup_comment_by_viewer')) {
     if ($vars['comment']->uid === $vars['user']->uid) {
       $classes[] = 'comment-by-viewer';
@@ -53,10 +62,49 @@ else {
   }
 }
 
-$vars['classes'] = implode(' ', $classes);
-
 // $classes is the varaible that will hold the blocks classes, and is printed in block tpl files.
 $vars['classes'] = implode(' ', $classes);
+
+/*
+
+  // Gather comment classes.
+  if ($comment->uid === 0) {
+    $variables['classes_array'][] = 'comment-by-anonymous';
+  }
+  else {
+    // Published class is not needed. It is either 'comment-preview' or 'comment-unpublished'.
+    if ($variables['status'] != 'comment-published') {
+      $variables['classes_array'][] = $variables['status'];
+    }
+    if ($comment->uid === $variables['node']->uid) {
+      $variables['classes_array'][] = 'comment-by-node-author';
+    }
+    if ($comment->uid === $variables['user']->uid) {
+      $variables['classes_array'][] = 'comment-by-viewer';
+    }
+    if ($variables['new']) {
+      $variables['classes_array'][] = 'comment-new';
+    }
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Set title classes
 $title_classes = array();
