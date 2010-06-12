@@ -29,6 +29,17 @@
   regions[footer]            = Footer
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom
+  
+
+;----------// Shortcut link
+  settings[shortcut_module_link] = 1
+
+
+;----------// Features
+  features[] = name
+  features[] = favicon
+  features[] = main_menu
+  features[] = secondary_menu
 
 
 ;----------// Theme Setting Defaults

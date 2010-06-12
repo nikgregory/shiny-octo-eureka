@@ -93,15 +93,16 @@
         </div> <!-- /branding -->
       <?php endif; ?>
 
+      <?php if ($time_date): ?>
+        <div id="time-and-date"><?php print $time_date; ?></div> <!-- /time and date -->
+      <?php endif; ?>
+
+      <?php if (!empty($main_menu_links)): ?>
+        <div id="main-menu" class="nav"><?php print $main_menu_links; ?></div> <!-- /main menu -->
+      <?php endif; ?>
+
     </div> <!-- /header -->
-
-    <?php if ($page['menu_bar']): ?>
-      <div id="menu-bar"><?php print render($page['menu_bar']); ?></div> <!-- /menu bar -->
-    <?php endif; ?>
-
-    <?php if (!empty($main_menu_links)): ?>
-      <div id="main-menu" class="nav"><?php print $main_menu_links; ?></div> <!-- /main menu -->
-    <?php endif; ?>
+    <div id="shadow"></div>
 
   <?php endif; // end hide in overaly ?>
 
@@ -164,7 +165,9 @@
         <?php endif; ?>
 
         <?php if (!empty($secondary_menu_links)): ?>
-          <div id="secondary" class="nav"><?php print $secondary_menu_links; ?></div> <!-- /secondary menu links -->
+          <div id="secondary-menu" class="nav"><div class="inner">
+            <?php print $secondary_menu_links; ?>
+          </div></div> <!-- /secondary menu links -->
         <?php endif; ?>
 
       </div> <!-- /footer -->

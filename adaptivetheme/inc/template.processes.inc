@@ -182,6 +182,12 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
   // Attribution.
   $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>";
+
+
+// test message styles
+//drupal_set_message('Aliquam erat volutpat. Cras bibendum leo nec lacus varius ut sodales tortor pellentesque. In semper ipsum cursus nisi tincidunt tempus.', 'error');
+//drupal_set_message('Aliquam erat volutpat. Cras bibendum leo nec lacus varius ut sodales tortor pellentesque. In semper ipsum cursus nisi tincidunt tempus.', 'warning');
+//drupal_set_message('Aliquam erat volutpat. Cras bibendum leo nec lacus varius ut sodales tortor pellentesque. In semper ipsum cursus nisi tincidunt tempus.', 'status');
 }
 
 /**

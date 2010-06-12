@@ -90,8 +90,9 @@ font-weight:bold;
 
 /* Header */
 #header {
-padding:.75em 0 0.375em;
+padding:.75em 0 0;
 background:#464646;
+position:relative;
 }
 
 .header-inner {
@@ -102,8 +103,9 @@ min-height:80px;
 }
 
 .logo-site-name span {
+bottom:0;
 display:block;
-float:left;
+position:absolute;
 }
 
 #logo {
@@ -114,7 +116,7 @@ padding:0 10px 0 0;
 font-size:1.7em;
 font-weight:bold;
 line-height:1.5;
-padding:15px 0 0;
+padding:0;
 }
 
 #site-name a:hover,
@@ -127,11 +129,11 @@ color:#CCC;
 display:none;
 }
 
-#user-date {
-clear:both;
+#time-and-date {
+float:right; /* LTR */
 font-size:0.94em;
-float:left;
-padding:0 10px;
+margin:5px 10px;
+padding:0 0.5em;
 color:#CCC;
 }
 
@@ -144,38 +146,43 @@ height:10px;
 padding:0.5em 0;
 }
 
+#main-menu {
+float:right;
+clear:right;
+}
+
 #main-menu .links {
-background:transparent;
-font-weight:normal;
 margin:0;
-padding:0;
-position:absolute;
-right:6px;
-top:.5em;
 }
 
 #main-menu .links li {
 display:inline;
-float:left;
-list-style:none;
 margin:0;
 padding:0;
 }
 
 #main-menu .links li a {
-color:#B2B2B2;
-display:block;
-line-height:1.5em;
+-moz-border-radius:6px 6px 0 0;
+-webkit-border-top-left-radius:6px;
+-webkit-border-top-right-radius:6px;
+border-radius:6px 6px 0 0;
+margin:0.4em 0.2em 0;
 padding:0 0.5em;
-text-decoration:none;
-white-space:nowrap;
+height:1.75em;
+line-height: 1.75em;
+background:#222;
+color:#EEE;
+display: block;
+float: left;
 }
 
-#main-menu .links li a:hover {
+#main-menu .links li a:hover,
+#main-menu .links li a:focus {
+background:#666;
 color:#FFF;
 }
 
-#secondary-menu .secondary-inner {
+#secondary-menu .inner {
 display:table;
 margin:0 auto;
 text-align:center;
@@ -567,46 +574,29 @@ position:relative;
 z-index:999;
 }
 
+div.add-or-remove-shortcuts  {
+padding-top:0;
+position:absolute;
+right:10px; /* LTR */
+top:1.2em;
+}
+
 #messages-and-help {
 padding:0 20px;
 }
 
 div.messages,
-div.help,
+div.status,
 div.error,
 div.warning {
 -moz-border-radius:6px;
 -webkit-border-radius:6px;
 }
 
-div.error {
-background-color:#C00000;
-border:2px solid #FF3F3F;
-color:#FFF3F6;
-}
-
-div.notice {
-background:#FFF6BF;
-border-color:#FFD324;
-color:#514721;
-}
-
-div.status {
-background-color:#2A6827;
-border:2px solid #4DA449;
-color:#F1FFCF;
-}
-
 div.help {
 background-color:#027AC6;
 border:2px solid #66BEF4;
 color:#F7F8F8;
-}
-
-div.warning {
-background-color:#9F3800;
-border:2px solid #FFB900;
-color:#FFF6DF;
 }
 
 tr div.warning {
@@ -630,7 +620,6 @@ div.help a:link,
 div.help a:visited,
 div.warning a:link,
 div.warning a:visited {
-color:#FF0;
 font-weight:bold;
 }
 
@@ -673,6 +662,15 @@ textarea {
 height:auto;
 padding:0.1875em;
 border:1px solid #CCC;
+}
+
+input.form-checkbox, 
+input.form-radio {
+margin: 0 3px;
+}
+.form-item label.option,
+.form-item label.option input {
+vertical-align: middle;
 }
 
 textarea,
@@ -723,9 +721,9 @@ padding:2px;
 }
 
 #edit-title {
-  width:98.5%;
-  padding:0.4em;
-  font-size:1.33em;
+width:98.5%;
+padding:0.4em;
+font-size:1.33em;
 }
 
 input[value~=Save],
@@ -752,6 +750,32 @@ input#edit-delete.form-submit:hover,
 #user-multiple-delete-confirm input#edit-submit:hover {
 background-position:bottom;
 cursor:pointer;
+}
+
+/* Views UI */
+#edit-views-apply, 
+#edit-views-reset {
+margin-top:1.85em;
+}
+
+#views-ui-analyze-view-button {
+margin:0;
+padding:6px 0 4px;
+}
+
+form#views-add-display-form  {
+padding-bottom: 4px;
+}
+
+form#views-add-display-form div.form-item {
+margin-bottom: 4px;
+}
+
+#views-live-preview form div.form-item-live-preview  {
+margin:1.8em 0 0 0;
+}
+#views-live-preview form input#preview-submit {
+margin:2em 0 0 0;
 }
 
 fieldset {

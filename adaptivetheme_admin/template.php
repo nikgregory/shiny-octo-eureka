@@ -19,19 +19,11 @@ if (theme_get_setting('color_enable_schemes') == 'on') {
 
 /**
  * Override or insert variables into page templates.
- *
- * @param $vars
- *   A sequential array of variables to pass to the theme template.
- * @param $hook
- *   The name of the theme function being called.
  */
-function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
+function adaptivetheme_admin_process_page(&$vars, $hook) {
   global $user;
-  // Admin welcome message with date for the admin theme.
+  // Welcome message with date for the admin theme.
   if ($vars['logged_in']) {
-    $welcome = t('Welcome') .' '. check_plain($user->name);
-    $conjunction = ', '. t('it\'s') .' ';
-    $todays_date = date("l, jS F, Y" , time());
-    $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
+    $vars['time_date'] = date("r" , time());
   }
 }
