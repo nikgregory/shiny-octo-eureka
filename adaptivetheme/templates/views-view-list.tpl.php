@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file views-view-list.tpl.php
@@ -10,19 +10,17 @@
  * @ingroup views_templates
  */
 ?>
-<?php
-// Conditionally add extra classes.
-if (theme_get_setting(cleanup_views_item_list)) {
-  $extra_classes = TRUE;
-}
-?>
 <div class="item-list">
   <?php if (!empty($title)) : ?>
     <h3><?php print $title; ?></h3>
   <?php endif; ?>
   <<?php print $options['type']; ?>>
     <?php foreach ($rows as $id => $row): ?>
-      <li class="views-list-item<?php print $extra_classes ? ' ' . $classes[$id] : ''; ?>"><?php print $row; ?></li>
+    <?php if (theme_get_setting('cleanup_views_item_list') == 0) { ?>
+      <li><?php print $row; ?></li>
+    <?php } else { ?>
+      <li class="<?php print $classes_array[$id]; ?>"><?php print $row; ?></li>
+   <?php } ?>
     <?php endforeach; ?>
   </<?php print $options['type']; ?>>
-</div> <!-- /views-view-list -->
+</div>

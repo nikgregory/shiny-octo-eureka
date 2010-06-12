@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file views-view.tpl.php
@@ -25,25 +25,25 @@
 <?php
 // Conditionally add CSS classes.
 $classes = array();
-if (theme_get_setting(cleanup_views_css_name)) {
+if (theme_get_setting('cleanup_views_css_name')) {
   $classes[] = 'view-' . $css_name;
 }
-if (theme_get_setting(cleanup_views_view_name)) {
+if (theme_get_setting('cleanup_views_view_name')) {
   $classes[] = 'view-id-' . $name;
 }
-if (theme_get_setting(cleanup_views_display_id)) {
+if (theme_get_setting('cleanup_views_display_id')) {
   $classes[] = 'view-display-id-' . $display_id;
 }
-if (theme_get_setting(cleanup_views_dom_id)) {
+if (theme_get_setting('cleanup_views_dom_id')) {
   $classes[] = 'view-dom-id-' . $dom_id;
 }
 //Skinr module classes.
-$classes[] = $skinr;
+// $classes[] = $skinr;
 if ($classes) {
-  $views_classes = implode(' ', $classes);
+  $classes = implode(' ', $classes);
 }
 ?>
-<div class="view<?php print $views_classes ? ' ' . $views_classes : '';?>">
+<div class="view<?php print $classes ? ' ' . $classes : '';?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>
@@ -102,4 +102,4 @@ if ($classes) {
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-</div> <!-- /views-view -->
+</div>

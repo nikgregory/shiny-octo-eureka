@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file views-view-fields.tpl.php
@@ -26,13 +26,13 @@
   <?php endif; ?>
 
   <<?php print $field->inline_html;?> class="<?php print $field->class; ?>">
-  
+
     <?php if ($field->label): ?>
       <label class="views-label-<?php print $field->class; ?>">
         <?php print $field->label; ?>:
       </label>
     <?php endif; ?>
-    
+
     <?php if ($field->label): ?>
       <<?php print $field->element_type; ?>>
         <?php print $field->content; ?>
@@ -42,4 +42,4 @@
     <?php endif; ?>
 
   </<?php print $field->inline_html;?>>
-<?php endforeach; ?> <!--/views-view-fields.tpl.php -->
+<?php endforeach; ?>

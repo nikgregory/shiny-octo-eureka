@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file views-view-table.tpl.php
@@ -40,4 +40,4 @@
       </tr>
     <?php endforeach; ?>
   </tbody>
-</table> <!--/views-view-table.tpl.php -->
+</table>
