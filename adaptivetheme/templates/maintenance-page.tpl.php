@@ -1,5 +1,6 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
+
 /**
 * @file maintenance-page.tpl.php
 *
@@ -8,25 +9,23 @@
 * Adaptivetheme maintenance page does not include sidebars by default, nor
 * does it print messages, tabs or anything else that typically you would
 * not see on a maintenance page. If you require any of these additional variables
-* you will need to add them. Also the columns layout has been totally removed.
-*
-* themename_preprocess is disabled when the database is not active (see
-* template.php). This is because it calls many functions that rely on the database
-* being active and will cause errors when the maintenance page is viewed.
-*
-* @see template_preprocess()
-* @see template_preprocess_maintenance_page()
+* you will need to add them. Its designed to be lightweight and fast.
 */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
 <head>
-  <title><?php print $head_title; ?></title>
   <?php print $head; ?>
+  <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
-<body class="<?php print $body_classes; ?>">
+<body class="<?php print $classes; ?>" <?php print $attributes;?>>
+  <div id="skip-link">
+    <a href="#main-content"><?php print t('Skip to main content'); ?></a>
+  </div>
+  <?php print $page_top; ?>
   <div id="container">
     <div id="header" class="clearfix">
       <?php if ($logo or $site_name or $site_slogan): ?>
@@ -60,6 +59,6 @@
       <div id="content"><?php print $content; ?></div>
     </div> <!-- /main-content -->
   </div> <!-- /container -->
-  <?php print $closure ?>
+  <?php print $page_bottom ?>
 </body>
 </html>
