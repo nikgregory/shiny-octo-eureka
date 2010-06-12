@@ -107,7 +107,7 @@ margin:0;
 }
 
 .article ul.links li {
-padding:0 1em 0 0;
+padding:0 1em 0 0; /* LTR */
 }
 
 .field-type-taxonomy-term-reference {
