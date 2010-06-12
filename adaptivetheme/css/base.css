@@ -431,18 +431,6 @@ padding:3px 6px 1px;
 .comment-unpublished {
 background-color:#FFF6DF;
 }
-.unpublished {
-visibility:hidden;
-}
-.article-unpublished .unpublished,
-.comment-unpublished .unpublished {
-background:transparent url(core-images/warning-small.png) no-repeat 0 .1em;
-color:#FFB900;
-font-size:.94em;
-margin-left:.5em;
-padding-left:18px;
-visibility:visible;
-}
 
 /* Lists */
 ul,
@@ -579,28 +567,8 @@ border:1px solid #dadada;
 margin:1.5em 0;
 padding:.75em;
 }
-*:first-child+html fieldset {
-background-color:transparent;
-background-position:0 .75em;
-padding:0 1em .75em;
-}
-*:first-child+html fieldset > .description,
-*:first-child+html fieldset .fieldset-wrapper .description {
-padding-top:1.5em;
-}
-fieldset legend {
-display:block;
+legend {
 font-weight:700;
-padding:0 1em 0 0;
-}
-*:first-child+html fieldset legend,
-*:first-child+html fieldset.collapsed legend {
-display:inline;
-}
-html.js fieldset.collapsed {
-background:transparent;
-padding-bottom:.75em;
-padding-top:0;
 }
 #user-login-form li.openid-link,
 #user-login-form li.user-link {
@@ -892,7 +860,6 @@ width:100%;
 #tertiary-content,
 #footer,
 #footer-region,
-#footer-message,
 .block,
 #block-admin-display-form,
 .fieldset-layout-settings .layout-method,

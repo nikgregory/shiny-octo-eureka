@@ -21,15 +21,11 @@
 
 
 ;----------// Regions
-  regions[header]            = Header Region
   regions[help]              = Help
-  regions[secondary_content] = Secondary Content
   regions[hightlight]        = Highlight
   regions[content]           = Main Content
-  regions[content_bottom]    = Content Bottom
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
-  regions[tertiary_content]  = Tertiary Content
   regions[footer]            = Footer
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom

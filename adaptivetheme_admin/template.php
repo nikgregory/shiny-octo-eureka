@@ -5,11 +5,9 @@
  * @file template.php
  */
 
-// Don't include custom functions if the database is inactive.
-if (db_is_active()) {
-  // Include base theme custom functions.
-  include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
-}
+// Include base theme custom functions.
+include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
+
 
 /**
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
@@ -17,11 +15,6 @@ if (db_is_active()) {
  */
 if (theme_get_setting('color_enable_schemes') == 'on') {
   drupal_add_css(drupal_get_path('theme', 'adaptivetheme_admin') .'/css/theme/'. get_at_colors(), 'theme');
-}
-
-// Load collapsed js on blocks pages
-if (arg(2) == 'block') {
-  drupal_add_js('misc/collapse.js', 'core', 'header', FALSE, TRUE, TRUE);
 }
 
 /**

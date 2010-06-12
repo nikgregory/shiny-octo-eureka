@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file template.custom-functions.inc

@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file template.theme-overrides.inc
@@ -57,18 +57,6 @@ function adaptivetheme_button($vars) {
 
 /**
  * Returns HTML for a list or nested list of items.
- *
- * @param $vars
- *   An associative array containing:
- *   - items: An array of items to be displayed in the list. If an item is a
- *     string, then it is used as is. If an item is an array, then the "data"
- *     element of the array is used as the contents of the list item. If an item
- *     is an array with a "children" element, those children are displayed in a
- *     nested list. All other elements are treated as attributes of the list
- *     item element.
- *   - title: The title of the list.
- *   - type: The type of list to return (e.g. "ul", "ol").
- *   - attributes: The attributes applied to the list element.
  */
 function adaptivetheme_item_list($vars) {
   $items = $vars['items'];
@@ -225,13 +213,19 @@ function adaptivetheme_links__system_main_menu($vars) {
           $class[] = 'last';
         }
       }
+
+      // Add Access keys if set for AT Mobile theme.
+      if (theme_get_setting('add_access_keys')) {
+        $link['attributes']['accesskey'] = $i;
+      }
+
       if (theme_get_setting('cleanup_main_active_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
             && (empty($link['language']) || $link['language']->language == $language_url->language)) {
           $class[] = 'active';
         }
       }
-      if (theme_get_setting('cleanup_main_mlid_class') || theme_get_setting('cleanup_main_firstlast_classes') || theme_get_setting('cleanup_main_active_classes')) {
+      if (theme_get_setting('cleanup_main_mlid_class') || theme_get_setting('cleanup_main_firstlast_classes') || theme_get_setting('cleanup_main_active_classes') || theme_get_setting('add_access_keys')) {
         $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
       }
       else {

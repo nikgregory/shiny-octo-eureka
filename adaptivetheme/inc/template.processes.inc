@@ -25,6 +25,7 @@ function adaptivetheme_process(&$vars) {
  */
 function adaptivetheme_preprocess_html(&$vars) {
   // Skip navigation class.
+  $vars['skip_nav_class'] = '';
   if (theme_get_setting('skip_navigation_display') == 'hide') {
     $vars['skip_nav_class'] = 'offscreen';
   }
