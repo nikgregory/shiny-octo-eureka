@@ -353,6 +353,14 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
   // Add the content class to block content wrapper.
   $vars['content_attributes_array']['class'][] = 'content';
+  // Remove "block" class from "Main page content" block
+  if ($vars['block']->module == 'system' && $vars['block']->delta == 'main') {
+    foreach ($vars['classes_array'] as $key => $val) {
+      if ($val == 'block') {
+        unset($vars['classes_array'][$key]);
+      }
+    }
+  }
 }
 
 /**
@@ -394,3 +402,10 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }
 
+/**
+ * Theme preprocess function for theme_field() and field.tpl.php.
+ */
+function adaptivetheme_preprocess_field(&$vars, $hook) {
+  // Add specific suggestions that can override the default implementation.
+  array_unshift($vars['theme_hook_suggestions'], 'field__' . $vars['element']['#field_type']);
+}

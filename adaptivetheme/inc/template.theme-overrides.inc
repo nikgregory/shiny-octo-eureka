@@ -8,13 +8,13 @@
 /**
  * Returns HTML for a breadcrumb trail.
  *
- * @param $variables
+ * @param $vars
  *   An associative array containing:
  *   - breadcrumb: An array containing the breadcrumb links.
  */
 /* TODO: waiting on http://drupal.org/node/576290
-function adaptivetheme_breadcrumb($variables) {
-  $breadcrumb = $variables['breadcrumb'];
+function adaptivetheme_breadcrumb($vars) {
+  $breadcrumb = $vars['breadcrumb'];
 
   // Determine if we are to display the breadcrumb.
   $show_breadcrumb = theme_get_setting('breadcrumb_display');
@@ -48,8 +48,8 @@ function adaptivetheme_breadcrumb($variables) {
 /**
  * Theme a form button.
  */
-function adaptivetheme_button($variables) {
-  $element = $variables['element'];
+function adaptivetheme_button($vars) {
+  $element = $vars['element'];
   $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
   // Wrap visible inputs with span tags for button graphics
   return '<span class="button '. $element['#id'] .'"><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ') .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span>\n";
@@ -58,7 +58,7 @@ function adaptivetheme_button($variables) {
 /**
  * Returns HTML for a list or nested list of items.
  *
- * @param $variables
+ * @param $vars
  *   An associative array containing:
  *   - items: An array of items to be displayed in the list. If an item is a
  *     string, then it is used as is. If an item is an array, then the "data"
@@ -136,17 +136,17 @@ if (!function_exists('dhtml_menu_init')) {
   /**
    * Generate the HTML output for a menu tree
    */
-  function adaptivetheme_menu_tree($variables) {
+  function adaptivetheme_menu_tree($vars) {
     if (theme_get_setting('cleanup_menu_menu_class')) {
-      return '<ul class="menu">' . $variables['tree'] . '</ul>';
+      return '<ul class="menu">' . $vars['tree'] . '</ul>';
     }
     else{
-      return '<ul>' . $variables['tree'] . '</ul>';
+      return '<ul>' . $vars['tree'] . '</ul>';
     }
   }
 
-  function adaptivetheme_menu_link(array $variables) {
-    $element = $variables['element'];
+  function adaptivetheme_menu_link(array $vars) {
+    $element = $vars['element'];
     $sub_menu = '';
 
     if ($element['#below']) {
@@ -176,10 +176,10 @@ if (!function_exists('dhtml_menu_init')) {
 } // end DHTML menu check.
 
 // Main menu links
-function adaptivetheme_links__system_main_menu($variables) {
-  $links = $variables['links'];
-  $attributes = $variables['attributes'];
-  $heading = $variables['heading'];
+function adaptivetheme_links__system_main_menu($vars) {
+  $links = $vars['links'];
+  $attributes = $vars['attributes'];
+  $heading = $vars['heading'];
   global $language_url;
   $output = '';
 
@@ -270,10 +270,10 @@ function adaptivetheme_links__system_main_menu($variables) {
 }
 
 // Secondary menu links
-function adaptivetheme_links__system_secondary_menu($variables) {
-  $links = $variables['links'];
-  $attributes = $variables['attributes'];
-  $heading = $variables['heading'];
+function adaptivetheme_links__system_secondary_menu($vars) {
+  $links = $vars['links'];
+  $attributes = $vars['attributes'];
+  $heading = $vars['heading'];
   global $language_url;
   $output = '';
 
@@ -362,10 +362,3 @@ function adaptivetheme_links__system_secondary_menu($variables) {
 
   return $output;
 }
-
-
-
-
-
-
-
