@@ -267,6 +267,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
           '1140px' => t('1140px'),
           '1200px' => t('1200px'),
           '1260px' => t('1260px'),
+          '85%'  => t('85% Fluid'),
           '100%' => t('100% Fluid'),
         ),
         //'#attributes' => array('class' => 'field-layout-width'),
