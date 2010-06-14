@@ -53,7 +53,6 @@
       </div>
     <?php endif; ?>
     <?php print $page_top; ?>
-    <?php // print '<pre>'; var_dump($classes_array); print '</pre>';?>
     <?php print $page; ?>
     <?php print $page_bottom; ?>
   </div>

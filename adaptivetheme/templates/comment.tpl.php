@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file
@@ -57,16 +57,19 @@
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php print $picture ?>
 
-  <?php print render($title_prefix); ?>
+  <?php print $picture; ?>
+
+  <?php if ($title): ?>
+    <?php print render($title_prefix); ?>
     <h3 class="comment-title"<?php print $title_attributes; ?>>
       <?php print $title ?>
       <?php if ($new): ?>
         <span class="new"><?php print $new ?></span>
       <?php endif; ?>
     </h3>
-  <?php print render($title_suffix); ?>
+    <?php print render($title_suffix); ?>
+  <?php endif; ?>
 
   <div class="comment-submitted">
     <span class="comment-id"><?php print $permalink; ?></span>
@@ -90,5 +93,5 @@
   </div>
 
   <?php print render($content['links']) ?>
-</div>
 
+</div> <!-- /comment -->

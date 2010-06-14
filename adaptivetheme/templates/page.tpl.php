@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file
@@ -68,7 +68,6 @@
  * @see template_process()
  */
 ?>
-
   <?php if (!$in_overlay): //hide in overlay ?>
 
     <?php if ($page['leaderboard']): ?>
@@ -143,21 +142,26 @@
 
         <div id="main-content">
 
-          <?php print render($title_prefix); ?>
           <?php if ($title): ?>
+          <?php print render($title_prefix); ?>
             <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-          <?php endif; ?>
           <?php print render($title_suffix); ?>
+          <?php endif; ?>
+
           <?php if ($tabs): ?>
             <div class="local-tasks"><?php print render($tabs); ?></div> <!-- /local task tabs -->
           <?php endif; ?>
+
           <?php if ($action_links): ?>
             <ul class="action-links"><?php print render($action_links); ?></ul> <!-- /action links -->
           <?php endif; ?>
+
           <?php if ($page['content_aside']): ?>
             <div id="content-aside"><?php print render($page['content_aside']); ?></div> <!-- /content-aside -->
           <?php endif; ?>
+
           <?php print render($page['content']); ?> <!-- /content -->
+
         </div> <!-- /main-content -->
 
         <?php if ($page['content_bottom']): ?>
