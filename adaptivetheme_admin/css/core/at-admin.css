@@ -1073,6 +1073,17 @@ width:120px;
 padding:0;
 }
 
+.overlay #container {
+background:none;
+}
+
+.overlay div.add-or-remove-shortcuts {
+margin-top:7px;
+position:static;
+right:auto;
+top:auto;
+}
+
 .overlay #messages-and-help,
 .overlay #breadcrumb,
 .overlay #columns {

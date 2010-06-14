@@ -1,5 +1,5 @@
-<?php // $Id$
-// adaptivethemes.com st
+<?php
+// $Id$
 
 /**
  * @file theme-settings.php
@@ -17,10 +17,10 @@ function adaptivethemes_startertheme_form_system_theme_settings_alter(&$form, &$
   // Create the form using Forms API: http://api.drupal.org/api/7
 
   /* -- Delete this line if you want to use this setting
-  $form['STARTERKIT_example'] = array(
+  $form['example_setting'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('STARTERKIT sample setting'),
-    '#default_value' => theme_get_setting('STARTERKIT_example'),
+    '#title'         => t('Sample setting'),
+    '#default_value' => theme_get_setting(example_setting'),
     '#description'   => t("This option doesn't do anything; it's just an example."),
   );
   // */
