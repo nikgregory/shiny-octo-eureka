@@ -8,11 +8,11 @@
 <div<?php print $article_id ? ' id="' . $article_id . '"' : ''; ?> class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if (!$page && $title): ?>
-  <?php print render($title_prefix); ?>
+    <?php print render($title_prefix); ?>
     <h2<?php print $title_attributes; ?>>
       <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
     </h2>
-  <?php print render($title_suffix); ?>
+    <?php print render($title_suffix); ?>
   <?php endif; ?>
 
   <?php print $user_picture; ?>

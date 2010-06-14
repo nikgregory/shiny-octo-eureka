@@ -143,9 +143,9 @@
         <div id="main-content">
 
           <?php if ($title): ?>
-          <?php print render($title_prefix); ?>
+            <?php print render($title_prefix); ?>
             <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-          <?php print render($title_suffix); ?>
+            <?php print render($title_suffix); ?>
           <?php endif; ?>
 
           <?php if ($tabs): ?>
