@@ -1,114 +1,10 @@
-<?php // $Id$
-// adaptivethemes.com
+<?php
+// $Id$
 
 /**
  * @file theme-settings.php
  */
-
 function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
-
-  global $theme_info;
-
-    /* TODO: waiting on http://drupal.org/node/576290
-    'breadcrumb_display'                => theme_get_setting('breadcrumb_display'),
-    'breadcrumb_separator'              => theme_get_setting('breadcrumb_separator'),
-    'breadcrumb_home'                   => theme_get_setting('breadcrumb_home'),
-    'breadcrumb_trailing'               => theme_get_setting('breadcrumb_trailing'),
-    'breadcrumb_title'                  => theme_get_setting('breadcrumb_title'),
- */
-
-  // Export theme settings
-  $exportable_settings = array (
-    'skip_navigation_display'           => theme_get_setting('skip_navigation_display'),
-    'search_snippet'                    => theme_get_setting('search_snippet'),
-    'search_info_type'                  => theme_get_setting('search_info_type'),
-    'search_info_user'                  => theme_get_setting('search_info_user'),
-    'search_info_date'                  => theme_get_setting('search_info_date'),
-    'search_info_comment'               => theme_get_setting('search_info_comment'),
-    'search_info_upload'                => theme_get_setting('search_info_upload'),
-    'search_info_separator'             => theme_get_setting('search_info_separator'),
-    'rebuild_registry'                  => theme_get_setting('rebuild_registry'),
-    'show_theme_info'                   => theme_get_setting('show_theme_info'),
-    'cleanup_classes_section'           => theme_get_setting('cleanup_classes_section'),
-    'cleanup_classes_front'             => theme_get_setting('cleanup_classes_front'),
-    'cleanup_classes_user_status'       => theme_get_setting('cleanup_classes_user_status'),
-    'cleanup_classes_node_type'         => theme_get_setting('cleanup_classes_node_type'),
-    'cleanup_classes_language'          => theme_get_setting('cleanup_classes_language'),
-    'cleanup_article_id'                => theme_get_setting('cleanup_article_id'),
-    'cleanup_article_classes_promote'   => theme_get_setting('cleanup_article_classes_promote'),
-    'cleanup_article_classes_sticky'    => theme_get_setting('cleanup_article_classes_sticky'),
-    'cleanup_article_classes_teaser'    => theme_get_setting('cleanup_article_classes_teaser'),
-    'cleanup_article_classes_preview'   => theme_get_setting('cleanup_article_classes_preview'),
-    'cleanup_article_classes_type'      => theme_get_setting('cleanup_article_classes_type'),
-    'cleanup_article_classes_language'  => theme_get_setting('cleanup_article_classes_language'),
-    'cleanup_comment_anonymous'         => theme_get_setting('cleanup_comment_anonymous'),
-    'cleanup_comment_article_author'    => theme_get_setting('cleanup_comment_article_author'),
-    'cleanup_comment_by_viewer'         => theme_get_setting('cleanup_comment_by_viewer'),
-    'cleanup_comment_new'               => theme_get_setting('cleanup_comment_new'),
-    'cleanup_comment_zebra'             => theme_get_setting('cleanup_comment_zebra'),
-    'cleanup_comment_wrapper_type'      => theme_get_setting('cleanup_comment_wrapper_type'),
-    'cleanup_block_block_module_delta'  => theme_get_setting('cleanup_block_block_module_delta'),
-    'cleanup_block_classes_module'      => theme_get_setting('cleanup_block_classes_module'),
-    'cleanup_block_classes_zebra'       => theme_get_setting('cleanup_block_classes_zebra'),
-    'cleanup_block_classes_region'      => theme_get_setting('cleanup_block_classes_region'),
-    'cleanup_block_classes_count'       => theme_get_setting('cleanup_block_classes_count'),
-
-
-    'cleanup_menu_menu_class'           => theme_get_setting('cleanup_menu_menu_class'),
-    'cleanup_menu_link_classes'         => theme_get_setting('cleanup_menu_link_classes'),
-    'cleanup_menu_title_class'          => theme_get_setting('cleanup_menu_title_class'),
-
-    'cleanup_main_mlid_class'         => theme_get_setting('cleanup_main_mlid_class'),
-    'cleanup_main_active_classes'       => theme_get_setting('cleanup_main_active_classes'),
-    'cleanup_main_firstlast_classes'      => theme_get_setting('cleanup_main_firstlast_classes'),
-
-    'cleanup_sec_mlid_classes'         => theme_get_setting('cleanup_sec_mlid_classes'),
-    'cleanup_sec_active_classes'       => theme_get_setting('cleanup_sec_active_classes'),
-    'cleanup_sec_firstlast_classes'    => theme_get_setting('cleanup_sec_firstlast_classes'),
-
-    'cleanup_item_list_zebra'           => theme_get_setting('cleanup_item_list_zebra'),
-    'cleanup_item_list_first_last'      => theme_get_setting('cleanup_item_list_first_last'),
-    'cleanup_views_css_name'            => theme_get_setting('cleanup_views_css_name'),
-    'cleanup_views_view_name'           => theme_get_setting('cleanup_views_view_name'),
-    'cleanup_views_display_id'          => theme_get_setting('cleanup_views_display_id'),
-    'cleanup_views_dom_id'              => theme_get_setting('cleanup_views_dom_id'),
-    'cleanup_views_unformatted'         => theme_get_setting('cleanup_views_unformatted'),
-    'cleanup_views_item_list'           => theme_get_setting('cleanup_views_item_list'),
-    'cleanup_fields_type'               => theme_get_setting('cleanup_fields_type'),
-    'cleanup_fields_name'               => theme_get_setting('cleanup_fields_name'),
-    'cleanup_fields_zebra'              => theme_get_setting('cleanup_fields_zebra'),
-    'cleanup_headings_title_class'      => theme_get_setting('cleanup_headings_title_class'),
-    'cleanup_headings_namespaced_class' => theme_get_setting('cleanup_headings_namespaced_class'),
-
-    'theme_links_spans'                 => theme_get_setting('theme_links_spans'),
-    'theme_menu_link_spans'             => theme_get_setting('theme_menu_link_spans'),
-
-    'layout_method'                     => theme_get_setting('layout_method'),
-    'layout_width'                      => theme_get_setting('layout_width'),
-    'layout_sidebar_first_width'        => theme_get_setting('layout_sidebar_first_width'),
-    'layout_sidebar_last_width'         => theme_get_setting('layout_sidebar_last_width'),
-    'layout_enable_settings'            => theme_get_setting('layout_enable_settings'),
-    'layout_enable_width'               => theme_get_setting('layout_enable_width'),
-    'layout_enable_sidebars'            => theme_get_setting('layout_enable_sidebars'),
-    'layout_enable_method'              => theme_get_setting('layout_enable_method'),
-    'layout_enable_frontpage'           => theme_get_setting('layout_enable_frontpage'),
-    'equal_heights_sidebars'            => theme_get_setting('equal_heights_sidebars'),
-    'equal_heights_blocks'              => theme_get_setting('equal_heights_blocks'),
-    'equal_heights_gpanels'             => theme_get_setting('equal_heights_gpanels'),
-    'horizontal_login_block'            => theme_get_setting('horizontal_login_block'),
-    'horizontal_login_block_overlabel'  => theme_get_setting('horizontal_login_block_overlabel'),
-    'horizontal_login_block_enable'     => theme_get_setting('horizontal_login_block_enable'),
-    'color_schemes'                     => theme_get_setting('color_schemes'),
-    'color_enable_schemes'              => theme_get_setting('color_enable_schemes'),
-  );
-  // Output key value pairs formatted as settings
-  foreach($exportable_settings as $key => $value) {
-    $output = '';
-  	$value = filter_xss($value);
-  	$output .= "settings[$key]=\"$value\"\n";
-  }
-  $exports = $output;
-
   // Create the form using Forms API: http://api.drupal.org/api/7
   // General Settings
   $form['general_settings'] = array(
@@ -134,55 +30,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       'hide' => t('Hide skip navigation'),
     ),
   );
-
-  // Breadcrumbs
-  /* TODO: waiting on http://drupal.org/node/576290
-  $form['general_settings']['breadcrumb'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Breadcrumb'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['breadcrumb']['breadcrumb_display'] = array(
-    '#type' => 'select',
-    '#title' => t('Display breadcrumb'),
-    '#default_value' => theme_get_setting('breadcrumb_display'),
-    '#options' => array(
-      'yes' => t('Yes'),
-      'no' => t('No'),
-      'admin' => t('Only in the admin section'),
-    ),
-  );
-  $form['general_settings']['breadcrumb']['breadcrumb_separator'] = array(
-    '#type'  => 'textfield',
-    '#title' => t('Breadcrumb separator'),
-    '#description' => t('Text only. Dont forget to include spaces.'),
-    '#default_value' => theme_get_setting('breadcrumb_separator'),
-    '#size' => 8,
-    '#maxlength' => 10,
-    '#prefix' => '<div id="div-breadcrumb-collapse">',
-  );
-  $form['general_settings']['breadcrumb']['breadcrumb_home'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show the home page link in breadcrumbs'),
-    '#default_value' => theme_get_setting('breadcrumb_home'),
-  );
-  $form['general_settings']['breadcrumb']['breadcrumb_trailing'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Append a separator to the end of the breadcrumb'),
-    '#default_value' => theme_get_setting('breadcrumb_trailing'),
-    '#description' => t('Useful when the breadcrumb is placed just before the title.'),
-  );
-  $form['general_settings']['breadcrumb']['breadcrumb_title'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Append the content title to the end of the breadcrumb'),
-    '#default_value' => theme_get_setting('breadcrumb_title'),
-    '#description' => t('Useful when the breadcrumb is not placed just before the title.'),
-    '#suffix' => '</div>',
-  );
-  */
   // Search Settings
-  // Search results
   $form['general_settings']['search_results'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search results'),
@@ -348,9 +196,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
         '#suffix' => '</div>',
         '#default_value' => theme_get_setting('layout_method'),
         '#options' => array(
-          '0' => t('<strong>Layout #1</strong>') . theme('image', $image_path .'/layout-default.png') . t('<span class="layout-type">Standard three column layout—left, content, right.</span>'),
-          '1' => t('<strong>Layout #2</strong>') . theme('image', $image_path .'/layout-sidebars-right.png') . t('<span class="layout-type">Two columns on the right—content, left, right.</span>'),
-          '2' => t('<strong>Layout #3</strong>') . theme('image', $image_path .'/layout-sidebars-left.png') . t('<span class="layout-type">Two columns on the left—left, right, content.</span>'),
+          0 => t('<strong>Layout #1</strong> <span class="layout-type-0">Standard three column layout—left, content, right.</span>'),
+          1 => t('<strong>Layout #2</strong> <span class="layout-type-1">Two columns on the right—content, left, right.</span>'),
+          2 => t('<strong>Layout #3</strong> <span class="layout-type-2">Two columns on the left—left, right, content.</span>'),
         ),
        //'#attributes' => array('class' => 'layouts'),
       );
@@ -854,21 +702,4 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#title' => t('Add a pseudo name spaced title class to headings, i.e. .article-title, .block-title, .comment-title.'),
     '#default_value' => theme_get_setting('cleanup_headings_namespaced_class'),
   );
-  // Theme Settings Export - this is broken, need to fix.
-  /*
-  $form['theme']['development']['theme_settings_export']['export'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Export Advanced Theme Settings'),
-    '#description' => t('<p>Copy/paste these settings to a text file for backup or paste to your themes .info file (over-write the defaults) - useful if you are moving your theme to a new site and want to retain custom settings.</p><p>NOTE: Content type specific settings are NOT included here, these cannot be set via the info file.</p><p>WARNING! If you are using a WYSIWYG editor it must be disabled for this text area, otherwise all special characters are likely to be converted to HTML entities. If your editor has a \'view source\' feature try that first.</p>'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['theme_settings_export']['export']['exported_settings'] = array(
-    '#type' => 'textarea',
-    '#default_value' => $exports,
-    '#resizable' => FALSE,
-    '#cols' => 60,
-    '#rows' => 25,
-  );
-  */
 }

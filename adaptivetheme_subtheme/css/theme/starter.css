@@ -22,18 +22,6 @@ text-align:left;
 float:left;
 }
 
-#leaderboard,
-#secondary-content,
-#content-top,
-#content-aside,
-#content-bottom
-#tertiary-content,
-#footer,
-#footer-region {
-overflow:hidden;
-zoom:1;
-}
-
 #header {
 clear:both;
 }
@@ -43,7 +31,7 @@ float:left;
 width:300px;
 }
 
-#header-region {
+.region-header {
 float:left;
 width:320px;
 }
@@ -64,24 +52,18 @@ margin:1.5em 0;
 }
 
 /* Breadcrumb, Mission */
-#breadcrumb {
-padding-bottom:1em;
+.breadcrumb {
+padding:10px;
 }
 
 #menu-bar,
-#main-menu,
+.region-main-menu,
 #secondary-menu {
 clear:both;
 }
 
-#main-menu .links,
-#secondary-menu .links {
-margin:0;
-padding:0;
-}
-
-#main-menu .links li,
-#secondary-menu .links li {
+#main-menu li,
+#secondary-menu li {
 display:inline;
 float:left;
 list-style:none;
@@ -89,11 +71,11 @@ margin:0;
 padding:0;
 }
 
-#main-menu .links li a,
-#secondary-menu .links li a {
+#main-menu li a,
+#secondary-menu li a {
 display:block;
+padding:0 10px;
 white-space:nowrap;
-padding:0 0.5em;
 }
 
 .article,
@@ -167,8 +149,7 @@ margin-left:1em;
 margin:0;
 }
 
-#content-aside {
-background:#FFF;
+.region-content-aside {
 float:right;
 padding-left:10px;
 width:240px;

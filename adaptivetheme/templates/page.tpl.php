@@ -70,9 +70,7 @@
 ?>
   <?php if (!$in_overlay): //hide in overlay ?>
 
-    <?php if ($page['leaderboard']): ?>
-      <div id="leaderboard" class="clearfix"><?php print render($page['leaderboard']); ?></div> <!-- /leaderboard -->
-    <?php endif; ?>
+    <?php print render($page['leaderboard']); ?> <!-- /leaderboard -->
 
     <div id="header" class="clearfix">
 
@@ -100,107 +98,59 @@
         </div> <!-- /branding -->
       <?php endif; ?>
 
-      <?php if ($page['header']): ?>
-        <div id="header-region"><?php print render($page['header']); ?></div> <!-- /header region -->
-      <?php endif; ?>
+      <?php print render($page['header']); ?> <!-- /header region -->
 
     </div> <!-- /header -->
 
-    <?php if ($page['menu_bar']): ?>
-      <div id="menu-bar"><?php print render($page['menu_bar']); ?></div> <!-- /menu bar -->
-    <?php endif; ?>
-
-    <?php if (!empty($main_menu_links)): ?>
-      <div id="main-menu" class="nav"><?php print $main_menu_links; ?></div> <!-- /main menu -->
-    <?php endif; ?>
+    <?php print render($page['menu_bar']); ?> <!-- /menu bar -->
+    <?php print $main_menu_links; ?> <!-- /main menu -->
 
   <?php endif; // end hide in overaly ?>
 
-    <?php if ($breadcrumb): ?>
-      <div id="breadcrumb"><?php print $breadcrumb; ?></div> <!-- /breadcrumb -->
-    <?php endif; ?>
-
-    <?php if ($messages || $page['help']): ?>
-      <div id="messages-and-help">
-        <?php print $messages; ?>
-        <?php print render($page['help']); ?>
-      </div> <!-- /messages/help -->
-    <?php endif; ?>
+    <?php print $breadcrumb; ?> <!-- /breadcrumb -->
+    <?php print $messages; ?> <!-- /message -->
+    <?php print render($page['help']); ?> <!-- /help -->
 
     <?php if (!$in_overlay): //hide in overlay ?>
-      <?php if ($page['secondary_content']): ?>
-        <div id="secondary-content"><?php print render($page['secondary_content']); ?></div> <!-- /secondary-content -->
-      <?php endif; ?>
+      <?php print render($page['secondary_content']); ?> <!-- /secondary-content -->
     <?php endif; // end hide in overaly ?>
 
     <div id="columns"><div class="columns-inner clearfix">
       <div id="content-column"><div class="content-inner">
 
-        <?php if ($page['highlight']): ?>
-          <div id="highlight"><?php print render($page['highlight']); ?></div> <!-- /highlight -->
-        <?php endif; ?>
+        <?php print render($page['highlight']); ?> <!-- /highlight -->
 
         <div id="main-content">
-
           <?php if ($title): ?>
             <?php print render($title_prefix); ?>
             <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
             <?php print render($title_suffix); ?>
           <?php endif; ?>
 
-          <?php if ($tabs): ?>
-            <div class="local-tasks"><?php print render($tabs); ?></div> <!-- /local task tabs -->
-          <?php endif; ?>
-
-          <?php if ($action_links): ?>
-            <ul class="action-links"><?php print render($action_links); ?></ul> <!-- /action links -->
-          <?php endif; ?>
-
-          <?php if ($page['content_aside']): ?>
-            <div id="content-aside"><?php print render($page['content_aside']); ?></div> <!-- /content-aside -->
-          <?php endif; ?>
-
+          <?php print render($tabs); ?> <!-- /local task tabs -->
+          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
+          <?php print render($page['content_aside']); ?> <!-- /content-aside -->
           <?php print render($page['content']); ?> <!-- /content -->
-
         </div> <!-- /main-content -->
 
-        <?php if ($page['content_bottom']): ?>
-          <div id="content-bottom"><?php print render($page['content_bottom']); ?></div> <!-- /content-bottom -->
-        <?php endif; ?>
+        <?php print render($page['content_bottom']); ?> <!-- /content-bottom -->
 
       </div></div> <!-- /content-column -->
 
-      <?php if ($page['sidebar_first']): ?>
-        <div id="sidebar-first" class="sidebar"><?php print render($page['sidebar_first']); ?></div>
-      <?php endif; ?>
-
-      <?php if ($page['sidebar_second']): ?>
-        <div id="sidebar-second" class="sidebar"><?php print render($page['sidebar_second']); ?></div>
-      <?php endif; ?>
+      <?php print render($page['sidebar_first']); ?>
+      <?php print render($page['sidebar_second']); ?>
 
     </div></div> <!-- /columns -->
 
   <?php if (!$in_overlay): //hide in overlay ?>
 
-    <?php if ($page['tertiary_content']): ?>
-      <div id="tertiary-content"><?php print render($page['tertiary_content']); ?></div> <!-- /tertiary-content -->
-    <?php endif; ?>
+    <?php print render($page['tertiary_content']); ?> <!-- /tertiary-content -->
 
     <?php if ($page['footer'] || $secondary_menu || $feed_icons): ?>
       <div id="footer">
-
-        <?php if ($page['footer']): ?>
-          <div id="footer-region"><?php print render($page['footer']); ?></div> <!-- /footer region -->
-        <?php endif; ?>
-
-        <?php if (!empty($secondary_menu_links)): ?>
-          <div id="secondary" class="nav"><?php print $secondary_menu_links; ?></div> <!-- /secondary menu links -->
-        <?php endif; ?>
-
-        <?php if ($feed_icons): ?>
-          <div id="feed-icons"><?php print $feed_icons; ?></div> <!-- /feed icons -->
-        <?php endif; ?>
-
+        <?php print render($page['footer']); ?> <!-- /footer region -->
+        <?php print $secondary_menu_links; ?> <!-- /secondary menu links -->
+        <?php print $feed_icons; ?> <!-- /feed icons -->
       </div> <!-- /footer -->
     <?php endif; ?>
 

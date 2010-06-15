@@ -43,67 +43,72 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
   */
-  // Layout settings - set the page width and layout method.
-  if (theme_get_setting('layout_enable_settings') == 'on') {
-    $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
-    $method = theme_get_setting('layout_method');
-    $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
-    $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
-    if ($vars['language']->dir == 'ltr') {
-      $left = 'left';
-      $right = 'right';
-    }
-    if ($vars['language']->dir == 'rtl') {
-      $left = 'right';
-      $right = 'left';
-    }
-    if ($method == '0') {
-      $push_right = $sidebar_last_width;
-      $push_left  = $sidebar_first_width;
-      $pull_right = $sidebar_last_width;
-      $styles = array();
-      $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':'. $push_right .'px;}';
-      $styles[] = '.sidebar-first .content-inner{margin-'. $left .':'. $push_left .'px; margin-'. $right .':0;}';
-      $styles[] = '.sidebar-second .content-inner{margin-'. $right .':'. $push_right .'px; margin-'. $left .':0;}';
-      $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-100%;}';
-      $styles[] = '#sidebar-second{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $pull_right .'px;}';
-    }
-    if ($method == '1') {
-      $content_margin = $sidebar_last_width + $sidebar_first_width;
-      $push_right     = $sidebar_last_width;
-      $push_left      = $sidebar_first_width;
-      $left_margin    = $sidebar_last_width + $sidebar_first_width;
-      $right_margin   = $sidebar_last_width;
-      $styles = array();
-      $styles[] = '.two-sidebars .content-inner{margin-'. $right .':'. $content_margin .'px;margin-'. $left .':0;}';
-      $styles[] = '.sidebar-first .content-inner{margin-'. $right .':'. $push_left .'px;margin-'. $left .':0;}';
-      $styles[] = '.sidebar-second .content-inner{margin-'. $right .':'. $push_right .'px;margin-'. $left .':0;}';
-      $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $left_margin .'px;}';
-      $styles[] = '#sidebar-second{width:'. $sidebar_last_width .'px;margin-'. $left .':-'. $right_margin .'px;}';
-      $styles[] = '.sidebar-first #sidebar-first{width:'. $sidebar_first_width .'px;margin-'. $left .':-'. $sidebar_first_width .'px;}';
-    }
-    if ($method == '2') {
-      $content_margin = $sidebar_last_width + $sidebar_first_width;
-      $left_margin    = $sidebar_first_width;
-      $right_margin   = $sidebar_last_width;
-      $push_right     = $sidebar_first_width;
-      $styles = array();
-      $styles[] = '.two-sidebars .content-inner{margin-'. $left .':'. $content_margin .'px;margin-'. $right .':0;}';
-      $styles[] = '.sidebar-first .content-inner{margin-'. $left .':'. $left_margin .'px;margin-'. $right .':0;}';
-      $styles[] = '.sidebar-second .content-inner{margin-'. $left .':'. $right_margin .'px;margin-'. $right .':0;}';
-      $styles[] = '#sidebar-first{width:'. $sidebar_first_width .'px; margin-'. $left .': -100%;}';
-      $styles[] = '#sidebar-second{width:'. $sidebar_last_width .'px; margin-'. $left .': -100%;}';
-      $styles[] = '.two-sidebars #sidebar-second {width:'. $sidebar_last_width .'px; position: relative;'. $left .':'. $push_right .'px;}';
-    }
-    $styles ? $vars['at_layout'] = implode('', $styles) : '';
-    $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
-  }
   // Show $theme_info output using krumo.
   if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
     dsm($theme_info); /* Use dsm, kpr messes up IE */
   }
+
+  // Layout settings - set the page width and layout method.
+  if (theme_get_setting('layout_enable_settings') == 'on') {
+    $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
+    if (isset($vars['page']['sidebar_first']) || isset($vars['page']['sidebar_second'])) {
+      $method = theme_get_setting('layout_method');
+      $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
+      $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
+      if ($vars['language']->dir == 'ltr') {
+        $left = 'left';
+        $right = 'right';
+      }
+      if ($vars['language']->dir == 'rtl') {
+        $left = 'right';
+        $right = 'left';
+      }
+      $styles = array();
+      if ($method == 0) {
+        $push_right = $sidebar_last_width;
+        $push_left  = $sidebar_first_width;
+        $pull_right = $sidebar_last_width;
+        $styles[] = '.two-sidebars .content-inner{margin-' . $left . ':' . $push_left . 'px;margin-' . $right . ':' . $push_right . 'px;}' . "\n";
+        $styles[] = '.sidebar-first .content-inner{margin-' . $left . ':' . $push_left . 'px;margin-' . $right . ':0;}' . "\n";
+        $styles[] = '.sidebar-second .content-inner{margin-' . $right . ':' . $push_right . 'px; margin-' . $left . ':0;}' . "\n";
+        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-100%;}' . "\n";
+        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px;margin-' . $left . ':-' . $pull_right . 'px;}' . "\n";
+      }
+      if ($method == 1) {
+        $content_margin = $sidebar_last_width + $sidebar_first_width;
+        $push_right     = $sidebar_last_width;
+        $push_left      = $sidebar_first_width;
+        $left_margin    = $sidebar_last_width + $sidebar_first_width;
+        $right_margin   = $sidebar_last_width;
+        $styles[] = '.two-sidebars .content-inner{margin-' . $right . ':' . $content_margin . 'px;margin-'. $left . ':0;}' . "\n";
+        $styles[] = '.sidebar-first .content-inner{margin-' . $right . ':' . $push_left . 'px;margin-' . $left . ':0;}' . "\n";
+        $styles[] = '.sidebar-second .content-inner{margin-' . $right . ':' . $push_right . 'px;margin-' . $left . ':0;}' . "\n";
+        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-' . $left_margin . 'px;}' . "\n";
+        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px;margin-' . $left . ':-' . $right_margin . 'px;}' . "\n";
+        $styles[] = '.sidebar-first .region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-' . $sidebar_first_width . 'px;}' . "\n";
+      }
+      if ($method == 2) {
+        $content_margin = $sidebar_last_width + $sidebar_first_width;
+        $left_margin    = $sidebar_first_width;
+        $right_margin   = $sidebar_last_width;
+        $push_right     = $sidebar_first_width;
+        $styles[] = '.two-sidebars .content-inner{margin-' . $left . ':' . $content_margin . 'px;margin-' . $right . ':0;}' . "\n";
+        $styles[] = '.sidebar-first .content-inner{margin-' . $left . ':' . $left_margin . 'px;margin-' . $right . ':0;}' . "\n";
+        $styles[] = '.sidebar-second .content-inner{margin-' . $left . ':' . $right_margin . 'px;margin-' . $right . ':0;}' . "\n";
+        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px; margin-' . $left . ': -100%;}' . "\n";
+        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px; margin-' . $left . ': -100%;}' . "\n";
+        $styles[] = '.two-sidebars .region-sidebar-second{width:' . $sidebar_last_width . 'px; position: relative;' . $left . ':' . $push_right . 'px;}' . "\n";
+      }
+      $vars['at_layout'] = implode('', $styles);
+      $vars['layout_settings'] = '<style type="text/css">' . "\n" . $vars['at_layout_width'] . "\n" . $vars['at_layout'] . '</style>';
+    }
+    else {
+      $vars['layout_settings'] = '<style type="text/css">' . $vars['at_layout_width'] . '</style>' . "\n";
+    }
+  }
 }
 function adaptivetheme_process_html(&$vars) {
+
   $classes = explode(' ', $vars['classes']);
   // .front and .not-front classes.
   if (in_array('front', $classes)) {
@@ -159,6 +164,7 @@ function adaptivetheme_preprocess_page(&$vars) {
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('links', 'clearfix'),
+        'id' => array('main-menu'),
       ),
       'heading' => array(
         'text' => t('Main menu'),
@@ -171,7 +177,8 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['secondary_menu_links'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(
-        'class' => array('links', 'clearfix')
+        'class' => array('links', 'clearfix'),
+        'id' => array('secondary-menu'),
        ),
       'heading' => array(
         'text' => t('Secondary menu'),
@@ -182,6 +189,8 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
   // Attribution.
   $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>";
+}
+function adaptivetheme_process_page(&$vars) {
 }
 
 /**

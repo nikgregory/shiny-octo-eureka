@@ -15,29 +15,26 @@ margin-left:240px;
 .sidebar-second .content-inner {
 margin-right:240px;
 }
-#sidebar-first {
+.region-sidebar-first {
 width:240px;
 margin-left:-100%;
 }
-#sidebar-second {
+.region-sidebar-second {
 width:240px;
 margin-left:-240px;
 }
 
 /* Add padding to align elements to the grid. */
 .block,
-#block-system-main,
+.region-content,
 #skip-nav,
 #branding,
 #main-menu,
 #secondary-menu,
 #attribution,
-#breadcrumb,
+.breadcrumb,
 #page-title,
-.local-tasks,
-#content,
-#messages-and-help,
-#footer-message {
+.tabs {
 padding:0 10px;
 }
 
@@ -323,9 +320,10 @@ margin-left:.5em;
 }
 
 /* Messages */
-div.messages {
+div.messages,
+#block-system-help {
   padding: 9px;
-  margin: 0.5em 0 0;
+  margin: 5px 10px;
   color: #036;
   background: #bdf;
   border: 1px solid #ace;
@@ -352,14 +350,12 @@ table tr.warning {
   color: #840;
   background: #fe6;
 }
-
 div.ok,
 tr.ok,
 table tr.ok td {
 color:#222;
 padding:1em .5em;
 }
-
 .update tr.ok {
   color: #360;
   background: #cf8;
@@ -373,17 +369,20 @@ padding:1em .5em;
   color: #840;
   background: #fe6;
 }
-
 .update .info {
 padding:0 0 0 1em;
 }
 .includes {
 color:#222;
 }
-#messages-and-help p:last-child,
-#messages-and-help ul:last-child {
+
+#block-system-help p:last-child,
+#block-system-help ul:last-child,
+.messages p:last-child,
+.messages ul:last-child {
 margin-bottom:0;
 }
+
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
@@ -394,7 +393,6 @@ font-weight:700;
 color:#D52;
 font-size:1.2em;
 }
-
 .block-region {
 -webkit-border-radius:6px;
 -moz-border-radius:6px;
@@ -639,7 +637,7 @@ margin-bottom:1em;
 }
 ul.primary {
 border-bottom-color:#CCC;
-margin:1.5em 0 0;
+margin:18px 10px 10px;
 padding:0 0 .2em .3em;
 }
 ul.primary li a {
@@ -657,9 +655,9 @@ background-color:#FFF;
 border-bottom-color:#FFF;
 }
 ul.secondary {
-border-bottom:1px solid #CCC;
-margin:1em 0 0;
-padding:0 .3em 1em;
+border-bottom:1px solid #CCCCCC;
+margin:10px 10px 0;
+padding:0 0 10px;
 }
 ul.secondary li {
 border-right:0;
@@ -670,6 +668,13 @@ ul.secondary li a:hover,
 ul.secondary li a.active {
 border-bottom:none;
 text-decoration:underline;
+}
+
+/* Action links */
+ul.action-links  {
+list-style:none;
+margin:10px;
+padding:0;
 }
 
 /* Support for admin menu */
@@ -700,7 +705,6 @@ background:#FFF;
 
 /*
  * Needs work, these are for Layout theme settings
- * 
  */
 .fieldset-layout-settings .layouts .form-item,
 .fieldset-layout-settings .page-width,
@@ -827,8 +831,8 @@ width:95%;
 display:block;
 }
 #content-column,
-#sidebar-first,
-#sidebar-second,
+.region-sidebar-first,
+.region-sidebar-second,
 .at-horizontal-login label {
 float:left;
 }
@@ -839,12 +843,12 @@ width:100%;
 }
 .clear,
 #columns,
-#breadcrumb,
-#content-bottom,
-#secondary-content,
-#tertiary-content,
+.breadcrumb,
+.region-content-bottom,
+.region-secondary-content,
+.region-tertiary-content,
 #footer,
-#footer-region,
+.region-footer,
 .block,
 #block-admin-display-form,
 .fieldset-layout-settings .layout-method,

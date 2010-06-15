@@ -15,11 +15,11 @@ margin-left:240px;
 margin-left:240px;
 margin-right:0;
 }
-#sidebar-first {
+.region-sidebar-first {
 margin-right:-100%;
 margin-left:0;
 }
-#sidebar-second {
+.region-sidebar-second {
 margin-right:-240px;
 margin-left:0;
 }
@@ -32,8 +32,8 @@ zoom:1;
 #content-column {
 position:relative;
 }
-#sidebar-first,
-#sidebar-second {
+.region-sidebar-first,
+.region-sidebar-second {
 position:relative;
 z-index:1000;
 }
@@ -68,25 +68,6 @@ margin-right:.5em;
 }
 div.messages ul {
 margin:0 1.25em 0 0;
-}
-div.error {
-background:#FFF3F6 url(core-images/status-error.png) no-repeat 99% .45em;
-}
-div.status {
-background:#F1FFCF url(core-images/status-ok.png) no-repeat 99% .6em;
-}
-div.help {
-background:#F7F8F8 url(core-images/status-info.png) no-repeat 99% .45em;
-}
-div.warning {
-background:#FFF6DF url(core-images/status-warning.png) no-repeat 99% .45em;
-}
-div.messages,
-div.warning,
-div.help,
-div.status,
-div.error {
-padding:.6em 3em .6em 1em;
 }
 .update .info {
 padding:0 1em 0 0;
@@ -176,8 +157,8 @@ padding:0 .5em;
 .grid-15,
 .grid-16,
 #content-column,
-#sidebar-first,
-#sidebar-second,
+.region-sidebar-first,
+.region-sidebar-second,
 .at-horizontal-login .form-item,
 .at-horizontal-login .form-submit,
 .at-horizontal-login #user-login-form ul,

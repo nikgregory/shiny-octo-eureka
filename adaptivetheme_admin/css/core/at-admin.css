@@ -14,8 +14,8 @@ margin:0;
 padding:0;
 }
 
-#sidebar-last .block,
-#sidebar-second .block {
+.region-sidebar-first .block,
+.region-sidebar-second .block {
 padding:10px 10px 0;
 }
 
@@ -142,8 +142,8 @@ background:url(core-images/shadow.png) repeat-x 0 0;
 height:10px;
 }
 
-#breadcrumb {
-padding:0.5em 0;
+.breadcrumb {
+padding:5px 10px;
 }
 
 #main-menu {
@@ -151,17 +151,17 @@ float:right;
 clear:right;
 }
 
-#main-menu .links {
+#main-menu {
 margin:0;
 }
 
-#main-menu .links li {
+#main-menu li {
 display:inline;
 margin:0;
 padding:0;
 }
 
-#main-menu .links li a {
+#main-menu li a {
 -moz-border-radius:6px 6px 0 0;
 -webkit-border-top-left-radius:6px;
 -webkit-border-top-right-radius:6px;
@@ -176,44 +176,37 @@ display: block;
 float: left;
 }
 
-#main-menu .links li a:hover,
-#main-menu .links li a:focus {
+#main-menu li a:hover,
+#main-menu li a:focus {
 background:#666;
 color:#FFF;
 }
 
-#secondary-menu .inner {
-display:table;
-margin:0 auto;
-text-align:center;
-}
-
-#secondary-menu .links {
+#secondary-menu {
 background:transparent;
 font-weight:normal;
 line-height:1em;
 height:16px;
 margin:0;
 padding:0;
+text-align:center;
 }
 
-#secondary-menu .links li {
+#secondary-menu li {
 display:inline;
-float:left;
 list-style:none;
 margin:0;
 padding:0;
 }
 
-#secondary-menu .links li a {
+#secondary-menu li a {
 color:#242424;
-display:block;
 padding:0 0.5em;
 text-decoration:none;
 white-space:nowrap;
 }
 
-#secondary-menu .links li a:hover {
+#secondary-menu li a:hover {
 text-decoration:underline;
 }
 
@@ -443,7 +436,7 @@ tr .block {
 border:0;
 }
 
-.local-tasks {
+.tabs {
 margin-bottom:0.75em;
 }
 
@@ -464,12 +457,12 @@ margin-right:0.08em;
 padding:0.3em 1em 0.4em;
 }
 
-.local-tasks ul.primary li a:hover {
+ul.primary li a:hover {
 background:#F5F5F5;
 border-color:#DDD;
 }
 
-.local-tasks ul.primary li.active a {
+ul.primary li.active a {
 background:#FFF;
 border-bottom-color:#FFF;
 }
