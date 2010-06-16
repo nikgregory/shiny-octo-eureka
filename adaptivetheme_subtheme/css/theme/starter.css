@@ -106,9 +106,8 @@ display:inline;
 list-style:none;
 }
 
-.field-type-taxonomy-term-reference h2 {
+.field .field-label {
 font-size:1em;
-font-weight:700;
 }
 
 .indented {

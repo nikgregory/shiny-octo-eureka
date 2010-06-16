@@ -308,12 +308,9 @@ tr:first-child td.container {
 border-top-width:0;
 }
 /* Forum tables */
-#forum tr td.forum {
-background-position:5px 5px;
-padding-left:1.67em;
-}
-#forum tr td.forum .name {
-padding-left:.375em;
+#forum tr td.forum  {
+background-position:5px 2px;
+padding-left:36px;
 }
 #forum div.indent {
 margin-left:.5em;

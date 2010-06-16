@@ -18,22 +18,20 @@
   <?php print $user_picture; ?>
 
   <?php if ($display_submitted): ?>
-    <div class="article-submitted">
+    <p class="article-submitted">
       <?php
         print t('Submitted by !username on !datetime',
         array('!username' => $name, '!datetime' => $date));
       ?>
-    </div>
+    </p>
   <?php endif; ?>
 
-  <div class="article-content"<?php print $content_attributes; ?>>
-    <?php
-      // Hide comments and links and render them later.
-      hide($content['comments']);
-      hide($content['links']);
-      print render($content);
-    ?>
-  </div>
+  <?php
+    // Hide comments and links and render them later.
+    hide($content['comments']);
+    hide($content['links']);
+    print render($content);
+  ?>
 
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
@@ -41,17 +39,14 @@
     if ($teaser || !empty($content['comments']['comment_form'])) {
       unset($content['links']['comment']['#links']['comment-add']);
     }
-    // Only display the wrapper div if there are links.
     $links = render($content['links']);
-    if ($links):
+    if ($links) {
+      print $links;
+    }
   ?>
-    <div class="article-links">
-      <?php print $links; ?>
-    </div>
-  <?php endif; ?>
 
-  <?php if ($page['article_aside'] && !$teaser): ?>
-    <div id="article-aside" class="aside"><?php print render($page['article_aside']) ?></div>
+  <?php if ($page && $page['article_aside']): ?>
+    <?php print render($page['article_aside']) ?>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
