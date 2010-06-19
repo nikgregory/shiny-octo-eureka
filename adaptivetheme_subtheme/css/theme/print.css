@@ -1,0 +1,154 @@
+/**
+ * $Id$ 
+ * adaptivethemes.com 
+ *
+ * @file sprint.css
+ * Basic styles for print.
+ */
+
+/* Body */
+body { 
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height: 1.4;
+  word-spacing:1.1pt;
+  letter-spacing:0.2pt;
+  font-family: Garamond, Perpetua, "Nimbus Roman No9 L", "Times New Roman", serif;
+  color:#000;
+  background:none;
+  font-size:11pt;
+}
+
+/* Hide various parts of the site. */ 
+.region,
+.breadcrumb,
+.block,
+#main-menu,
+#secondary-menu,
+.field-type-taxonomy-term-reference,
+ul.links,
+ul.links a,
+.feed-icon,
+.poll .bar,
+.poll .bar .foreground,
+.comment-form,
+#comment-form {
+  display:none;
+}
+/* Display the main content region */
+.region-content {
+  display:block !important;
+}
+
+/* Layout */
+.content-inner {
+  margin:0 !important;
+  padding:0 !important;
+ }
+
+/* Logo, Site name */
+h1.logo-site-name,
+div.logo-site-name {
+  font-size:14pt !important;
+  padding:0;
+  margin:0;
+}
+#logo img {
+  padding:0 10px 0 0;
+}
+
+/* HTML elements */
+h1,h2,h3,h4,h5,h6,#site-name {
+  font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size:16pt;
+}
+h2{
+  font-size:14pt;
+}
+h3{
+  font-size:12pt;
+}
+h4,h5,h6{
+  font-size:11pt;
+}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a,#site-name a {
+  text-decoration: none !important;
+}
+code {
+  font:10pt "Courier New", Monaco, "Nimbus Mono L", monospace;
+}
+blockquote {
+  margin:1.3em;
+  padding:1em;
+font-size: 10pt;
+}
+hr {
+  background-color:#ccc;
+}
+
+/* Images */
+img {
+  float:left;
+  margin:0.5em 1.5em 1.5em 0;
+  page-break-inside:avoid;
+}
+a img {
+  border:none;
+}
+
+/* Links */
+a:link,
+a:visited {
+  background:transparent;
+  font-weight:700;
+  text-decoration:underline;
+  color:#333;
+}
+a:link[href^="http://"]:after,
+a[href^="http://"]:visited:after {
+  content:" (" attr(href) ") ";
+  font-size:90%;
+ }
+a[href^="http://"] {
+  color:#000;
+}
+
+/* Table */
+table {
+  margin:1px;
+  text-align:left;
+}
+th {
+  border-bottom:1px solid #333;
+  font-weight:bold;
+}
+td {
+  border-bottom:1px solid #333;
+}
+th,td {
+  padding:4px 10px 4px 0;
+}
+tfoot {
+  font-style:italic;
+}
+caption {
+  background:#fff;
+  margin-bottom:1em;
+  text-align:left;
+}
+thead {
+  display:table-header-group;
+}
+tr {
+  page-break-inside:avoid;
+} 
+
+/* Poll module */
+.poll .text,
+.poll .percent,
+.poll .total {
+  text-align:left;
+}
