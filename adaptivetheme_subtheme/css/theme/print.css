@@ -31,8 +31,14 @@ body {
 .content-inner,
 .region-content,
 .article,
+.article h2,
+.article content,
 .comment,
+.comment h3,
+.comment-content,
 .block,
+.block h2,
+.block .content,
 table {
   background:none !important;
 }
@@ -50,7 +56,9 @@ ul.links a,
 .poll .bar,
 .poll .bar .foreground,
 .comment-form,
-#comment-form {
+#comment-form,
+.book-navigation,
+.tabs {
   display:none;
 }
 /* Display the main content region */
@@ -64,26 +72,15 @@ ul.links a,
   padding:0 !important;
  }
 
-/* Logo, Site name */
-h1.logo-site-name,
-div.logo-site-name {
-  font-size:14pt !important;
-  padding:0;
-  margin:0;
-}
-#logo img {
-  padding:0 10px 0 0;
-}
-
 /* HTML elements */
 h1,h2,h3,h4,h5,h6,#site-name {
   font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 h1 {
-  font-size:16pt;
+  font-size:14pt;
 }
 h2{
-  font-size:14pt;
+  font-size:13pt;
 }
 h3{
   font-size:12pt;
@@ -104,6 +101,25 @@ font-size: 10pt;
 }
 hr {
   background-color:#ccc;
+}
+
+/* Header, Logo, Site name */
+#header {
+  padding-bottom: 15px;
+}
+h1.logo-site-name,
+div.logo-site-name {
+  padding:0;
+  margin:0;
+}
+#logo img {
+  padding:0 10px 0 0;
+  margin:0 !important;
+  float:none !important;
+}
+.logo-site-name a:link,
+.logo-site-name a:visited {
+  text-decoration:none;
 }
 
 /* Images */
@@ -161,11 +177,25 @@ thead {
 }
 tr {
   page-break-inside:avoid;
-} 
+}
+
+/* Forms */
+form {
+  margin-bottom:10px;
+}
 
 /* Poll module */
 .poll .text,
 .poll .percent,
 .poll .total {
   text-align:left;
+}
+.poll form {
+  margin-bottom:0;
+}
+
+/* Articles */
+.article {
+  margin-bottom:10px;
+  border-bottom:1px solid #CCC;
 }

@@ -26,10 +26,6 @@ a:active,a:focus {
   clear:both;
 }
 
-.logo-site-name span {
-  display:block;
-}
-
 #site-name {
   font-size:2em;
   font-weight:700;
