@@ -20,6 +20,23 @@ body {
   font-size:11pt;
 }
 
+/* Strip backgrounds of likely candidates */
+#header,
+#footer,
+#branding,
+#container,
+#columns,
+.columns-inner,
+#content-column,
+.content-inner,
+.region-content,
+.article,
+.comment,
+.block,
+table {
+  background:none !important;
+}
+
 /* Hide various parts of the site. */ 
 .region,
 .breadcrumb,
