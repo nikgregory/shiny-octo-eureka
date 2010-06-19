@@ -42,7 +42,6 @@
 <title><?php print $head_title; ?></title>
 <?php print $styles; ?>
 <?php print $scripts; ?>
-<?php print $layout_settings; ?>
 </head>
 <!-- html -->
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>

@@ -4,12 +4,14 @@
 /**
  * Override or insert variables into all templates.
  */
+// template_preprocess
 function adaptivetheme_preprocess(&$vars, $hook) {
   global $user;
   $vars['is_admin'] = in_array('admin', $user->roles);
   $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
   $vars['theme_path'] = base_path() . path_to_theme() .'/';
 }
+// template_process
 function adaptivetheme_process(&$vars) {
   // Provide a variable to check if the page is in the overlay.
   if (module_exists('overlay')) {
@@ -23,6 +25,7 @@ function adaptivetheme_process(&$vars) {
 /**
  * Override or insert variables into the HTML template.
  */
+// template_preprocess_html
 function adaptivetheme_preprocess_html(&$vars) {
   // Skip navigation class.
   $vars['skip_nav_class'] = '';
@@ -100,13 +103,15 @@ function adaptivetheme_preprocess_html(&$vars) {
         $styles[] = '.two-sidebars .region-sidebar-second{width:' . $sidebar_last_width . 'px; position: relative;' . $left . ':' . $push_right . 'px;}' . "\n";
       }
       $vars['at_layout'] = implode('', $styles);
-      $vars['layout_settings'] = '<style type="text/css">' . "\n" . $vars['at_layout_width'] . "\n" . $vars['at_layout'] . '</style>';
+      $vars['layout'] = $vars['at_layout_width'] . $vars['at_layout'];
     }
     else {
-      $vars['layout_settings'] = '<style type="text/css">' . $vars['at_layout_width'] . '</style>' . "\n";
+      $vars['layout'] = $vars['at_layout_width'];
     }
+    drupal_add_css($vars['layout'], array('weight' => CSS_THEME, 'type' => 'inline'));
   }
 }
+// template_process_html
 function adaptivetheme_process_html(&$vars) {
 
   $classes = explode(' ', $vars['classes']);
@@ -141,6 +146,7 @@ function adaptivetheme_process_html(&$vars) {
 /**
  * Override or insert variables into the page templates.
  */
+// template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
   // Set variables for the logo and site name for easy printing in templates.
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
@@ -190,12 +196,14 @@ function adaptivetheme_preprocess_page(&$vars) {
   // Attribution.
   $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>";
 }
+// template_process_html
 function adaptivetheme_process_page(&$vars) {
 }
 
 /**
  * Override or insert variables into the node templates.
  */
+// template_preprocess_node
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
   $vars['article_id'] = '';
@@ -228,6 +236,7 @@ function adaptivetheme_preprocess_node(&$vars) {
     $vars['title_attributes_array']['class'][] = 'article-title';
   }
 }
+// template_process_node
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
   $classes = str_replace('node', 'article', $classes);
@@ -249,6 +258,7 @@ function adaptivetheme_process_node(&$vars) {
 /**
  * Override or insert variables into the comment templates.
  */
+// template_preprocess_comment
 function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('cleanup_comment_zebra')) {
     $vars['classes_array'][] = $vars['zebra'];
@@ -261,6 +271,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
     $vars['title_attributes_array']['class'][] = 'comment-title';
   }
 }
+// template_process_comment
 function adaptivetheme_process_comment(&$vars) {
   $classes = explode(' ', $vars['classes']);
   if (in_array('comment-by-anonymous', $classes)) {
@@ -282,6 +293,7 @@ function adaptivetheme_process_comment(&$vars) {
 /**
  * Override or insert variables into the block templates.
  */
+// template_preprocess_block
 function adaptivetheme_preprocess_block(&$vars) {
   // Add classes for the horizontal login block if enabled.
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'user-login') {
@@ -309,6 +321,7 @@ function adaptivetheme_preprocess_block(&$vars) {
 /**
  *  Modify search results based on theme settings.
  */
+// template_preprocess_search_result
 function adaptivetheme_preprocess_search_result(&$vars) {
   $result = $vars['result'];
   $vars['url'] = check_url($result['link']);
@@ -348,6 +361,7 @@ function adaptivetheme_preprocess_search_result(&$vars) {
 /**
  * Theme preprocess function for theme_field() and field.tpl.php.
  */
+// template_preprocess_field
 function adaptivetheme_preprocess_field(&$vars, $hook) {
   // Add specific suggestions that can override the default implementation.
   array_unshift($vars['theme_hook_suggestions'], 'field__' . $vars['element']['#field_type']);
