@@ -209,13 +209,13 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['article_id'] = '';
   if (theme_get_setting('cleanup_article_id')) {
     // Set article id.
-    $vars['article_id'] = 'article-'. $vars['node']->nid;
+    // $vars['article_id'] = 'article-'. $vars['node']->nid;
+    $vars['attributes_array']['id'][] = 'article-'. $vars['node']->nid;
   }
-  /* Add support for Skinr module classes http://drupal.org/project/skinr
-   if (function_exists('node_skinr_data') && !empty($vars['skinr'])) {
-     $classes[] = $vars['skinr'];
-   }
-  */
+  /* Add support for Skinr module classes http://drupal.org/project/skinr */
+  if (module_exists('skinr') && !empty($vars['skinr'])) {
+    $classes[] = $vars['skinr'];
+  }
   // Language specific article class.
   if (theme_get_setting('cleanup_article_classes_language')) {
     if (module_exists('translation')) {
@@ -240,17 +240,20 @@ function adaptivetheme_preprocess_node(&$vars) {
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
   $classes = str_replace('node', 'article', $classes);
-  if (in_array('article-promoted', $classes)) {
-    theme_get_setting('cleanup_article_classes_promote') ? '' : $classes = str_replace('article-promoted', '', $classes);
-  }
   if (in_array('article-sticky', $classes)) {
     theme_get_setting('cleanup_article_classes_sticky') ? '' : $classes = str_replace('article-sticky', '', $classes);
+  }
+  if (in_array('article-promoted', $classes)) {
+    theme_get_setting('cleanup_article_classes_promote') ? '' : $classes = str_replace('article-promoted', '', $classes);
   }
   if (in_array('article-teaser', $classes)) {
     theme_get_setting('cleanup_article_classes_teaser') ? '' : $classes = str_replace('article-teaser', '', $classes);
   }
   if (in_array('article-preview', $classes)) {
     theme_get_setting('cleanup_article_classes_preview') ? '' : $classes = str_replace('article-preview', '', $classes);
+  }
+  if (in_array('article-' . $vars['node']->type, $classes)) {
+    theme_get_setting('cleanup_article_classes_type') ? '' : $classes = str_replace('article-' . $vars['node']->type, '', $classes);
   }
   $vars['classes'] = trim(implode(' ', $classes));
 }
@@ -295,8 +298,22 @@ function adaptivetheme_process_comment(&$vars) {
  */
 // template_preprocess_block
 function adaptivetheme_preprocess_block(&$vars) {
+  // Add the block_html_id to the attributes array.
+  if (theme_get_setting('cleanup_block_block_module_delta')) {
+   $vars['attributes_array']['id'][] = $vars['block_html_id'];
+  }
+  if (theme_get_setting('cleanup_block_classes_zebra')) {
+    $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
+  }
+  if (theme_get_setting('cleanup_block_classes_region')) {
+    $vars['classes_array'][] = 'block-count-'. $vars['id'];
+  }
+  if (theme_get_setting('cleanup_block_classes_count')) {
+    $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
+  }
+
   // Add classes for the horizontal login block if enabled.
-  if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'user-login') {
+  if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
     $vars['classes_array'][] = 'at-horizontal-login clearfix';
   }
   // Set title classes.
@@ -316,6 +333,14 @@ function adaptivetheme_preprocess_block(&$vars) {
       }
     }
   }
+}
+// process block
+function adaptivetheme_process_block(&$vars) {
+  $classes = explode(' ', $vars['classes']);
+  if (in_array('block-' . $vars['block']->module, $classes)) {
+    theme_get_setting('cleanup_block_classes_module') ? '' : $classes = str_replace('block-' . $vars['block']->module, '', $classes);
+  }
+  $vars['classes'] = trim(implode(' ', $classes));
 }
 
 /**

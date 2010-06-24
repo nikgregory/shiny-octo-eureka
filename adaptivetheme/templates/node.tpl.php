@@ -5,7 +5,7 @@
  * @file node.tpl.php
  */
 ?>
-<div<?php print $article_id ? ' id="' . $article_id . '"' : ''; ?> class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if (!$page && $title): ?>
     <?php print render($title_prefix); ?>

@@ -33,7 +33,7 @@
       $("#nav, .admin-panel, #breadcrumb, .block-menu, #block-user-1, .local-tasks").attr("role","navigation");
 
       // Horizontal login block settings
-      $('#edit-horizontal-login-block-overlabel').attr('disabled', true);
+      // $('#edit-horizontal-login-block-overlabel').attr('disabled', true);
       $('#edit-horizontal-login-block').change(function() {
         if ($(this).is(':checked')) {
           $('#edit-horizontal-login-block-overlabel').attr('disabled', false);

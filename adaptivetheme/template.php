@@ -21,7 +21,7 @@ include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.processe
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('rebuild_registry')) {
   drupal_theme_rebuild();
-  drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/build/themes/settings/'. $GLOBALS['theme']))), 'warning');
+  drupal_set_message(t('The theme registry has been rebuilt. <a href="!link">Turn off</a> this feature on production websites.', array('!link' => url('admin/appearance/settings/'. $GLOBALS['theme']))), 'warning');
 }
 
 // Add the color scheme stylesheets.

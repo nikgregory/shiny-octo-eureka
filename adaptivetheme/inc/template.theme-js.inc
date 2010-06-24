@@ -63,8 +63,8 @@ if (theme_get_setting('equal_heights_gpanels')) {
   );
 }
 
-// Use horizontal login block overlabel js
-if (theme_get_setting('horizontal_login_block_overlabel')) {
+// Use horizontal login block overlabel js horizontal_login_block
+if (theme_get_setting('horizontal_login_block') && theme_get_setting('horizontal_login_block_overlabel')) {
   drupal_add_js($path .'jquery.overlabel.js',
     array(
       'type' => 'file',

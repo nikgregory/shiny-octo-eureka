@@ -6,83 +6,12 @@
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   // Create the form using Forms API: http://api.drupal.org/api/7
-  // General Settings
-  $form['general_settings'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('General settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  // Skip Navigation
-  $form['general_settings']['skip_navigation'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Skip Navigation'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['skip_navigation']['skip_navigation_display'] = array(
-    '#type' => 'radios',
-    '#title'  => t('Modify the display of the skip navigation'),
-    '#default_value' => theme_get_setting('skip_navigation_display'),
-    '#options' => array(
-      'show' => t('Show skip navigation'),
-      'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
-      'hide' => t('Hide skip navigation'),
-    ),
-  );
-  // Search Settings
-  $form['general_settings']['search_results'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Search results'),
-    '#description' => t('What additional information should be displayed in your search results?'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['general_settings']['search_results']['search_snippet'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display text snippet'),
-    '#default_value' => theme_get_setting('search_snippet'),
-  );
-  $form['general_settings']['search_results']['search_info_type'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display content type'),
-    '#default_value' => theme_get_setting('search_info_type'),
-  );
-  $form['general_settings']['search_results']['search_info_user'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display author name'),
-    '#default_value' => theme_get_setting('search_info_user'),
-  );
-  $form['general_settings']['search_results']['search_info_date'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display posted date'),
-    '#default_value' => theme_get_setting('search_info_date'),
-  );
-  $form['general_settings']['search_results']['search_info_comment'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display comment count'),
-    '#default_value' => theme_get_setting('search_info_comment'),
-  );
-  $form['general_settings']['search_results']['search_info_upload'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Display attachment count'),
-    '#default_value' => theme_get_setting('search_info_upload'),
-  );
-  // Search_info_separator
-  $form['general_settings']['search_results']['search_info_separator'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Search info separator'),
-    '#description' => t('Modify the separator. The default is a hypen with a space before and after.'),
-    '#default_value' => theme_get_setting('search_info_separator'),
-    '#size' => 8,
-    '#maxlength' => 10,
-  );
   // Layout settings
   $form['layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Layout settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
   );
   if (theme_get_setting('layout_enable_settings') == 'on') {
     $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core-images';
@@ -275,15 +204,93 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       '#title' => t('Use Overlabel JavaScript'),
       '#default_value' => theme_get_setting('horizontal_login_block_overlabel'),
       '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
+      '#states' => array(
+        'visible' => array(
+          'input[name*=horizontal_login_block]' => array(
+            'value' => '1',
+          ),
+        ),
+      ),
     );
   } // endif horizontal block settings
+  // General Settings
+  $form['general_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Skip navigation &amp; Search result settings'),
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+  );
+  // Skip Navigation
+  $form['general_settings']['skip_navigation'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Skip Navigation'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['general_settings']['skip_navigation']['skip_navigation_display'] = array(
+    '#type' => 'radios',
+    '#title'  => t('Modify the display of the skip navigation'),
+    '#default_value' => theme_get_setting('skip_navigation_display'),
+    '#options' => array(
+      'show' => t('Show skip navigation'),
+      'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
+      'hide' => t('Hide skip navigation'),
+    ),
+  );
+  // Search Settings
+  $form['general_settings']['search_results'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Search Results'),
+    '#description' => t('What additional information should be displayed in your search results?'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['general_settings']['search_results']['search_snippet'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display text snippet'),
+    '#default_value' => theme_get_setting('search_snippet'),
+  );
+  $form['general_settings']['search_results']['search_info_type'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display content type'),
+    '#default_value' => theme_get_setting('search_info_type'),
+  );
+  $form['general_settings']['search_results']['search_info_user'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display author name'),
+    '#default_value' => theme_get_setting('search_info_user'),
+  );
+  $form['general_settings']['search_results']['search_info_date'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display posted date'),
+    '#default_value' => theme_get_setting('search_info_date'),
+  );
+  $form['general_settings']['search_results']['search_info_comment'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display comment count'),
+    '#default_value' => theme_get_setting('search_info_comment'),
+  );
+  $form['general_settings']['search_results']['search_info_upload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display attachment count'),
+    '#default_value' => theme_get_setting('search_info_upload'),
+  );
+  // Search_info_separator
+  $form['general_settings']['search_results']['search_info_separator'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search info separator'),
+    '#description' => t('Modify the separator. The default is a hypen with a space before and after.'),
+    '#default_value' => theme_get_setting('search_info_separator'),
+    '#size' => 8,
+    '#maxlength' => 10,
+  );
   // Development settings
   $form['theme']['development'] = array(
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
     '#description' => t('These settings are for the theme developer. Changing these settings may break your theme.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => theme_get_setting('rebuild_registry') ? FALSE : TRUE,
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
   );
   // Global settings
   $form['theme']['development']['global'] = array(
@@ -335,7 +342,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#title' => t('Wrap menu link anchor text in SPAN tags.'),
     '#default_value' => theme_get_setting('theme_menu_link_spans'),
   );
-
   // Add or remove extra classes
   $form['theme']['development']['classes'] = array(
     '#type' => 'fieldset',
