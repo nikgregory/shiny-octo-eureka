@@ -848,15 +848,16 @@ fieldset.collapsed legend {
 -webkit-border-radius:6px;
 border-radius:6px;
 }
-fieldset legend a {
-color: #3b3b3b;
-}
+fieldset legend,
+fieldset legend a:link,
+fieldset legend a:visited,
 fieldset legend a:hover,
 fieldset legend a:focus,
 fieldset legend a:active {
-  color: #000;
+font-weight: normal;
+color: #000;
+text-shadow:0 1px 0 #FFF;
 }
-
 
 a:active,
 a.active,
@@ -981,6 +982,12 @@ background:#666;
 #site-name a:link,
 #site-name a:visited {
 color:#B2B2B2;
+}
+
+.region-title {
+background: #8D8D8D;
+color: #FFF;
+text-shadow:0 1px 0 #333;
 }
 
 .block a:hover,

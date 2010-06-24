@@ -17,25 +17,13 @@
  * these regions is already set up so there is nothing more to do.
  *
  * Gpanels are fluid, meaning they stretch and compress with the page width.
- *
- * Region variables:
- * $page['three_col_25_25_50_first']  outputs the "3col 25-25-50 Gpanel col 1" region.
- * $page['three_col_25_25_50_second'] outputs the "3col 25-25-50 Gpanel col 2" region.
- * $page['three_col_25_25_50_third']  outputs the "3col 25-25-50 Gpanel col 3" region.
  */
 ?>
 <!-- Three column 25-25-50 Gpanel -->
-<?php if ($page['three_col_25_25_50_first'] || $page['three_col_25_25_50_second'] || $page['three_col_25_25_50_third']): ?>
-  <div class="three-col-25-25-50 gpanel clearfix">
-    <div class="section region col-1 first"><div class="inner">
-      <?php if ($page['three_col_25_25_50_first']): print render($page['three_col_25_25_50_first']); endif; ?>
-    </div></div>
-    <div class="section region col-2"><div class="inner">
-      <?php if ($page['three_col_25_25_50_second']): print render($page['three_col_25_25_50_second']); endif; ?>
-    </div></div>
-    <div class="section region col-3 last"><div class="inner">
-      <?php if ($page['three_col_25_25_50_third']): print render($page['three_col_25_25_50_third']); endif; ?>
-    </div></div>
+<?php if ($page['three_25_25_50_first'] || $page['three_25_25_50_second'] || $page['three_25_25_50_third']): ?>
+  <div class="three-25-25-50 gpanel clearfix">
+    <?php print render($page['three_25_25_50_first']); ?>
+    <?php print render($page['three_25_25_50_second']); ?>
+    <?php print render($page['three_25_25_50_third']); ?>
   </div>
 <?php endif; ?>
-<!--/end Gpanel-->

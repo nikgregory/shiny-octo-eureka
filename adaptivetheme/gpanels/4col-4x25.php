@@ -17,29 +17,14 @@
  * these regions is already set up so there is nothing more to do.
  *
  * Gpanels are fluid, meaning they stretch and compress with the page width.
- *
- * Region variables:
- * $page['four_col_first']  outputs the "4col Gpanel col 1" region.
- * $page['four_col_second'] outputs the "4col Gpanel col 2" region.
- * $page['four_col_third']  outputs the "4col Gpanel col 3" region.
- * $page['four_col_third']  outputs the "4col Gpanel col 4" region.
  */
 ?>
 <!-- Four column Gpanel -->
-<?php if ($page['four_col_first'] || $page['four_col_second'] || $page['four_col_third'] || $page['four_col_fourth']): ?>
-  <div class="four-col-4x25 gpanel clearfix">
-    <div class="section region col-1 first"><div class="inner">
-      <?php if ($page['four_col_first']): print render($page['four_col_first']); endif; ?>
-    </div></div>
-    <div class="section region col-2"><div class="inner">
-      <?php if ($page['four_col_second']): print render($page['four_col_second']); endif; ?>
-    </div></div>
-    <div class="section region col-3"><div class="inner">
-      <?php if ($page['four_col_third']): print render($page['four_col_third']); endif; ?>
-    </div></div>
-    <div class="section region col-4 last"><div class="inner">
-      <?php if ($page['four_col_fourth']): print render($page['four_col_fourth']); endif; ?>
-    </div></div>
+<?php if ($page['four_first'] || $page['four_second'] || $page['four_third'] || $page['four_fourth']): ?>
+  <div class="four-4x25 gpanel clearfix">
+    <?php print render($page['four_first']); ?>
+    <?php print render($page['four_second']); ?>
+    <?php print render($page['four_third']); ?>
+    <?php print render($page['four_fourth']); ?>
   </div>
 <?php endif; ?>
-<!--/end Gpanel-->

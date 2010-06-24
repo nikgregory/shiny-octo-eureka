@@ -17,21 +17,12 @@
  * these regions is already set up so there is nothing more to do.
  *
  * Gpanels are fluid, meaning they stretch and compress with the page width.
- *
- * Region Variables:
- * $page['two_col_33_66_first']  outputs the "2col 33-66 Gpanel col 1" region.
- * $page['two_col_33_66_second'] outputs the "2col 33-66 Gpanel col 2" region.
  */
 ?>
 <!-- Two column 33-66 Gpanel -->
-<?php if ($page['two_col_33_66_first'] || $page['two_col_33_66_second']): ?>
-  <div class="two-col-33-66 gpanel clearfix">
-    <div class="section region col-1 first"><div class="inner">
-      <?php if ($page['two_col_33_66_first']): print render($page['two_col_33_66_first']); endif; ?>
-    </div></div>
-    <div class="section region col-2 last"><div class="inner">
-      <?php if ($page['two_col_33_66_second']): print render($page['two_col_33_66_second']); endif; ?>
-    </div></div>
+<?php if ($page['two_33_66_first'] || $page['two_33_66_second']): ?>
+  <div class="two-33-66 gpanel clearfix">
+    <?php print render($page['two_33_66_first']); ?>
+    <?php print render($page['two_33_66_second']); ?>
   </div>
 <?php endif; ?>
-<!--/end Gpanel-->

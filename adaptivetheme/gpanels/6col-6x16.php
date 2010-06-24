@@ -17,37 +17,16 @@
  * these regions is already set up so there is nothing more to do.
  *
  * Gpanels are fluid, meaning they stretch and compress with the page width.
- *
- * Region Variables:
- * $page['six_col_first']  outputs the "6col Gpanel col 1" region.
- * $page['six_col_second'] outputs the "6col Gpanel col 2" region.
- * $page['six_col_third']  outputs the "6col Gpanel col 3" region.
- * $page['six_col_fourth'] outputs the "6col Gpanel col 4" region.
- * $page['six_col_fifth']  outputs the "6col Gpanel col 5" region.
- * $page['six_col_sixth']  outputs the "6col Gpanel col 6" region.
  */
 ?>
 <!-- Six column Gpanel -->
-<?php if ($page['six_col_first'] || $page['six_col_second'] || $page['six_col_third'] || $page['six_col_fourth'] || $page['six_col_fifth'] || $page['six_col_sixth']): ?>
-  <div class="six-col-6x16 gpanel clearfix">
-    <div class="section region col-1 first"><div class="inner">
-      <?php if ($page['six_col_first']): print render($page['six_col_first']); endif; ?>
-    </div></div>
-    <div class="section region col-2"><div class="inner">
-      <?php if ($page['six_col_second']): print render($page['six_col_second']); endif; ?>
-    </div></div>
-    <div class="section region col-3"><div class="inner">
-      <?php if ($page['six_col_third']): print render($page['six_col_third']); endif; ?>
-    </div></div>
-    <div class="section region col-4"><div class="inner">
-      <?php if ($page['six_col_fourth']): print render($page['six_col_fourth']); endif; ?>
-    </div></div>
-    <div class="section region col-5 last"><div class="inner">
-      <?php if ($page['six_col_fifth']): print render($page['six_col_fifth']); endif; ?>
-    </div></div>
-    <div class="section region col-6 last"><div class="inner">
-      <?php if ($page['six_col_sixth']): print render($page['six_col_sixth']); endif; ?>
-    </div></div>
+<?php if ($page['six_first'] || $page['six_second'] || $page['six_third'] || $page['six_fourth'] || $page['six_fifth'] || $page['six_sixth']): ?>
+  <div class="six-6x16 gpanel clearfix">
+    <?php print render($page['six_first']); ?>
+    <?php print render($page['six_second']); ?>
+    <?php print render($page['six_third']); ?>
+    <?php print render($page['six_fourth']); ?>
+    <?php print render($page['six_fifth']); ?>
+    <?php print render($page['six_sixth']); ?>
   </div>
 <?php endif; ?>
-<!--/end Gpanel-->
