@@ -150,18 +150,18 @@ function adaptivetheme_process_html(&$vars) {
 function adaptivetheme_preprocess_page(&$vars) {
   // Set variables for the logo and site name for easy printing in templates.
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
-  $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'" title="'. t('Home page') .'"/>' : '';
+  $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
     'attributes' => array(
-      'rel' => 'home'),
-      'title' => t('Home page'),
-      'html' => TRUE,
+      'rel' => 'home',
+      'title' => t('Home page')),
+    'html' => TRUE,
     )
   ) : '';
   $vars['linked_site_name'] = $vars['site_name'] ? l($vars['site_name'], '<front>', array(
     'attributes' => array(
-      'rel' => 'home'),
-      'title' => t('Home page')
+      'rel' => 'home',
+      'title' => t('Home page')),
     )
   ) : '';
   // Set variables for the main and secondary menus.

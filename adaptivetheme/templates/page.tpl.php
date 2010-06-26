@@ -107,40 +107,40 @@
 
   <?php endif; // end hide in overaly ?>
 
-    <?php print $breadcrumb; ?> <!-- /breadcrumb -->
-    <?php print $messages; ?> <!-- /message -->
-    <?php print render($page['help']); ?> <!-- /help -->
+  <?php print $breadcrumb; ?> <!-- /breadcrumb -->
+  <?php print $messages; ?> <!-- /message -->
+  <?php print render($page['help']); ?> <!-- /help -->
 
-    <?php if (!$in_overlay): //hide in overlay ?>
-      <?php print render($page['secondary_content']); ?> <!-- /secondary-content -->
-    <?php endif; // end hide in overaly ?>
+  <?php if (!$in_overlay): //hide in overlay ?>
+    <?php print render($page['secondary_content']); ?> <!-- /secondary-content -->
+  <?php endif; // end hide in overaly ?>
 
-    <div id="columns"><div class="columns-inner clearfix">
-      <div id="content-column"><div class="content-inner">
+  <div id="columns"><div class="columns-inner clearfix">
+    <div id="content-column"><div class="content-inner">
 
-        <?php print render($page['highlight']); ?> <!-- /highlight -->
+      <?php print render($page['highlight']); ?> <!-- /highlight -->
 
-        <div id="main-content">
-          <?php if ($title): ?>
-            <?php print render($title_prefix); ?>
-            <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-            <?php print render($title_suffix); ?>
-          <?php endif; ?>
+      <div id="main-content">
+        <?php if ($title): ?>
+          <?php print render($title_prefix); ?>
+          <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
+          <?php print render($title_suffix); ?>
+        <?php endif; ?>
 
-          <?php print render($tabs); ?> <!-- /local task tabs -->
-          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
-          <?php print render($page['content_aside']); ?> <!-- /content-aside -->
-          <?php print render($page['content']); ?> <!-- /content -->
-        </div> <!-- /main-content -->
+        <?php print render($tabs); ?> <!-- /local task tabs -->
+        <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
+        <?php print render($page['content_aside']); ?> <!-- /content-aside -->
+        <?php print render($page['content']); ?> <!-- /content -->
+      </div> <!-- /main-content -->
 
-        <?php print render($page['content_bottom']); ?> <!-- /content-bottom -->
+      <?php print render($page['content_bottom']); ?> <!-- /content-bottom -->
 
-      </div></div> <!-- /content-column -->
+    </div></div> <!-- /content-column -->
 
-      <?php print render($page['sidebar_first']); ?>
-      <?php print render($page['sidebar_second']); ?>
+    <?php print render($page['sidebar_first']); ?>
+    <?php print render($page['sidebar_second']); ?>
 
-    </div></div> <!-- /columns -->
+  </div></div> <!-- /columns -->
 
   <?php if (!$in_overlay): //hide in overlay ?>
 
