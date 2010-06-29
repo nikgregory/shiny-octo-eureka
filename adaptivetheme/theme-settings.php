@@ -361,10 +361,10 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['theme']['development']['classes']['body_classes']['cleanup_classes_section'] = array(
+  $form['theme']['development']['classes']['body_classes']['cleanup_classes_suggestions'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print section classes (.section-$section, uses the path-alias)'),
-    '#default_value' => theme_get_setting('cleanup_classes_section'),
+    '#title' => t('Print classes based on the available template suggestions.'),
+    '#default_value' => theme_get_setting('cleanup_classes_suggestions'),
   );
   $form['theme']['development']['classes']['body_classes']['cleanup_classes_front'] = array(
     '#type' => 'checkbox',
@@ -384,7 +384,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   if (function_exists('locale')) {
    $form['theme']['development']['classes']['body_classes']['cleanup_classes_language'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Print classes for Locale page language such as .lang-en, .lang-sv'),
+      '#title' => t('Print classes a page language class e.g. .lang-en'),
       '#default_value' => theme_get_setting('cleanup_classes_language'),
     );
   }

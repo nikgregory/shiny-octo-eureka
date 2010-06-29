@@ -127,12 +127,10 @@
   settings[search_info_separator]             = ' - '
   settings[rebuild_registry]                  = 0
   settings[show_theme_info]                   = 0
-  settings[cleanup_classes_section]           = 0
   settings[cleanup_classes_front]             = 0
   settings[cleanup_classes_user_status]       = 0
-  settings[cleanup_classes_normal_path]       = 0
+  settings[cleanup_classes_suggestions]       = 0
   settings[cleanup_classes_node_type]         = 0
-  settings[cleanup_classes_add_edit_delete]   = 0
   settings[cleanup_classes_language]          = 0
   settings[cleanup_article_id]                = 0
   settings[cleanup_article_classes_promote]   = 0

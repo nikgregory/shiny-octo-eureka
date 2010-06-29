@@ -38,14 +38,20 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('skip_navigation_display') == 'focus') {
     $vars['skip_nav_class'] = 'show-on-focus';
   }
-  // Language specific body class. NOT SURE IF WE NEED THIS...
-  /*
+  // Language specific body class.
   if (theme_get_setting('cleanup_classes_language')) {
     if (function_exists('locale')) {
-      $classes[] = 'lang-'. $language->language;
+      $vars['classes_array'][] = 'lang-'. $vars['language']->language;
     }
   }
-  */
+  // Remove the suggestion classes.
+  if (theme_get_setting('cleanup_classes_suggestions') == 0) {
+    foreach($vars['classes_array'] as $i =>$class) {
+      if(preg_match('/page*/', $class)) {
+        unset($vars['classes_array'][$i]);
+      }
+    }
+  }
   // Show $theme_info output using krumo.
   if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
     dsm($theme_info); /* Use dsm, kpr messes up IE */
@@ -113,7 +119,6 @@ function adaptivetheme_preprocess_html(&$vars) {
 }
 // template_process_html
 function adaptivetheme_process_html(&$vars) {
-
   $classes = explode(' ', $vars['classes']);
   // .front and .not-front classes.
   if (in_array('front', $classes)) {
@@ -129,8 +134,6 @@ function adaptivetheme_process_html(&$vars) {
   if (in_array('not-logged-in', $classes)) {
     theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('not-logged-in', '', $classes);
   }
-  // De-populate the body classes of the suggestion classes.
-  $classes = str_replace(theme_get_suggestions(arg(), 'page', '--'), '', $classes);
   // Node type class.
   if ($node = menu_get_object()) {
     $node_type_class = drupal_html_class('node-type-' . $node->type);
