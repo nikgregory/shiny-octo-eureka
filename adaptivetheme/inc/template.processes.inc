@@ -30,10 +30,10 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Skip navigation class.
   $vars['skip_nav_class'] = '';
   if (theme_get_setting('skip_navigation_display') == 'hide') {
-    $vars['skip_nav_class'] = 'offscreen';
+    $vars['skip_nav_class'] = 'element-invisible';
   }
   if (theme_get_setting('skip_navigation_display') == 'show') {
-    $vars['skip_nav_class'] = 'show';
+    $vars['skip_nav_class'] = 'show-skip-link';
   }
   if (theme_get_setting('skip_navigation_display') == 'focus') {
     $vars['skip_nav_class'] = 'show-on-focus';
@@ -59,7 +59,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Layout settings - set the page width and layout method.
   if (theme_get_setting('layout_enable_settings') == 'on') {
-    $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
+    $vars['at_layout_width'] = '#container,.container{width:'. theme_get_setting('layout_width') .';}';
     if (isset($vars['page']['sidebar_first']) || isset($vars['page']['sidebar_second'])) {
       $method = theme_get_setting('layout_method');
       $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');

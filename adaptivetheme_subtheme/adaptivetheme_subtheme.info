@@ -61,8 +61,8 @@
   ; Uncomment the required regions.
 
   ; 2 col 2 x 50
-  ;regions[two_50_first]  = GP 2 x 50% First
-  ;regions[two_50_second] = GP 2 x 50% Second
+  ;regions[two_50_first]  = GP 2 x 50% - First
+  ;regions[two_50_second] = GP 2 x 50% - Second
 
   ; 2 col 33-66
   ;regions[two_33_66_first]  = GP 33% 66% - First
@@ -117,7 +117,7 @@
 
  
 ;----------// Theme Setting Defaults
-  settings[skip_navigation_display]           = hide
+  settings[skip_navigation_display]           = focus
   settings[search_snippet]                    = 1
   settings[search_info_type]                  = 1
   settings[search_info_user]                  = 1

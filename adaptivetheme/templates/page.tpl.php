@@ -68,6 +68,7 @@
  * @see template_process()
  */
 ?>
+<div id="container">
   <?php if (!$in_overlay): //hide in overlay ?>
 
     <?php print render($page['leaderboard']); ?> <!-- /leaderboard -->
@@ -121,12 +122,11 @@
       <?php print render($page['highlight']); ?> <!-- /highlight -->
 
       <div id="main-content">
+        <?php print render($title_prefix); ?>
         <?php if ($title): ?>
-          <?php print render($title_prefix); ?>
           <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-          <?php print render($title_suffix); ?>
         <?php endif; ?>
-
+        <?php print render($title_suffix); ?>
         <?php print render($tabs); ?> <!-- /local task tabs -->
         <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
         <?php print render($page['content_aside']); ?> <!-- /content-aside -->
@@ -155,3 +155,4 @@
     <?php endif; ?>
 
   <?php endif; // end hide in overaly ?>
+</div>
