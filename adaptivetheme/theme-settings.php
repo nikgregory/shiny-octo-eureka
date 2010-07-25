@@ -307,15 +307,15 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
   // Show $theme_info
-  $form['theme']['development']['global']['show_theme_info'] = array(
+  $form['theme']['development']['global']['show_page_info'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Show theme info.'),
-    '#default_value' => theme_get_setting('show_theme_info'),
-    '#description' => t('This will show the output of the global $theme_info variable using Krumo.'),
+    '#title' => t('Show $page info.'),
+    '#default_value' => theme_get_setting('show_page_info'),
+    '#description' => t('This will show the output of $page using Krumo (uses kpr()).'),
   );
   if (!module_exists('devel')) {
-    $form['theme']['development']['global']['show_theme_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of the global $theme_info variable using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
-    $form['theme']['development']['global']['show_theme_info']['#disabled'] = 'disabled';
+    $form['theme']['development']['global']['show_page_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of $page using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
+    $form['theme']['development']['global']['show_page_info']['#disabled'] = 'disabled';
   }
   // Add or remove markup
   $form['theme']['development']['markup'] = array(

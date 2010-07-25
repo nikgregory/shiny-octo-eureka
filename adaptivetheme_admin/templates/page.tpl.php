@@ -6,7 +6,7 @@
  * Default theme implementation to display a single Drupal page.
  */
 ?>
-<div id="wrapper">
+<div id="container"><div id="wrapper">
   <?php if (!$in_overlay): //hide in overlay ?>
 
     <div id="header" class="clearfix">
@@ -51,13 +51,15 @@
         <?php print render($page['highlight']); ?> <!-- /highlight -->
 
         <div id="main-content">
-          <?php print render($title_prefix); ?>
-          <?php if ($title): ?>
-            <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-          <?php endif; ?>
-          <?php print render($title_suffix); ?>
-          <?php print render($tabs); ?> <!-- /local task tabs -->
-          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
+          <div id="main-content-header">
+            <?php print render($title_prefix); ?>
+            <?php if ($title): ?>
+              <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
+            <?php endif; ?>
+            <?php print render($title_suffix); ?>
+            <?php print render($tabs); ?> <!-- /local task tabs -->
+            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
+          </div>
           <?php print render($page['content']); ?> <!-- /content -->
         </div> <!-- /main-content -->
 
@@ -78,4 +80,4 @@
     <?php endif; ?>
 
   <?php endif; // end hide in overaly ?>
-</div> <!-- /wrapper -->
+</div></div> <!-- /container/wrapper -->

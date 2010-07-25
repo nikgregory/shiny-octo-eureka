@@ -52,9 +52,9 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   }
-  // Show $theme_info output using krumo.
+  // Show the $page output using Krumo.
   if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
-    dsm($theme_info); /* Use dsm, kpr messes up IE */
+    kpr($vars['page']);
   }
 
   // Layout settings - set the page width and layout method.
