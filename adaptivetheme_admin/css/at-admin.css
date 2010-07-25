@@ -786,7 +786,7 @@ position: relative;
 border-radius: 6px;
 }
 .fieldset-wrapper {
-margin-top: 2em;
+margin: 3em 0 1em;
 }
 .filter-wrapper {
 -khtml-border-radius-topright: 0;
