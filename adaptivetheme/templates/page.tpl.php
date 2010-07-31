@@ -68,7 +68,8 @@
  * @see template_process()
  */
 ?>
-<div id="container">
+<div id="page">
+
   <?php if (!$in_overlay): //hide in overlay ?>
 
     <?php print render($page['leaderboard']); ?> <!-- /leaderboard -->
@@ -155,4 +156,5 @@
     <?php endif; ?>
 
   <?php endif; // end hide in overaly ?>
-</div>
+
+</div> <!-- /page -->

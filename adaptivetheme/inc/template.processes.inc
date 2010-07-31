@@ -59,7 +59,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Layout settings - set the page width and layout method.
   if (theme_get_setting('layout_enable_settings') == 'on') {
-    $vars['at_layout_width'] = '#container,.container{width:'. theme_get_setting('layout_width') .';}';
+    $vars['at_layout_width'] = '#page,.container{width:'. theme_get_setting('layout_width') .';}';
     if (isset($vars['page']['sidebar_first']) || isset($vars['page']['sidebar_second'])) {
       $method = theme_get_setting('layout_method');
       $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');

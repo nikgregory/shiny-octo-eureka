@@ -14,7 +14,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => FALSE,
   );
   if (theme_get_setting('layout_enable_settings') == 'on') {
-    $image_path = drupal_get_path('theme', 'adaptivetheme') .'/css/core-images';
+    $image_path = drupal_get_path('theme', 'adaptivetheme') . '/css/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Page Layout'),
@@ -30,10 +30,13 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       );
       $form['layout']['page_layout']['layout_width'] = array(
         '#type' => 'select',
+        '#title' => t('Page width'),
         '#prefix' => '<div class="page-width">',
         '#suffix' => '</div>',
         '#default_value' => theme_get_setting('layout_width'),
         '#options' => array(
+          '600px' => t('600px'),
+          '660px' => t('660px'),
           '720px' => t('720px'),
           '780px' => t('780px'),
           '840px' => t('840px'),
@@ -44,8 +47,15 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
           '1140px' => t('1140px'),
           '1200px' => t('1200px'),
           '1260px' => t('1260px'),
-          '85%'  => t('85% Fluid'),
-          '100%' => t('100% Fluid'),
+          '1320px' => t('1320px'),
+          '1380px' => t('1380px'),
+          '1440px' => t('1440px'),
+          '1500px' => t('1500px'),
+          '80%'  => t('80%'),
+          '85%'  => t('85%'),
+          '90%'  => t('90%'),
+          '95%'  => t('95%'),
+          '100%' => t('100%'),
         ),
         //'#attributes' => array('class' => 'field-layout-width'),
       );
@@ -58,7 +68,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       );
       $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
         '#type' => 'select',
-        '#title' => t('Sidebar first'),
+        '#title' => t('Sidebar first width'),
         '#prefix' => '<div class="sidebar-width"><div class="sidebar-width-left">',
         '#suffix' => '</div>',
         '#default_value' => theme_get_setting('layout_sidebar_first_width'),
@@ -86,7 +96,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       );
       $form['layout']['page_layout']['layout_sidebar_last_width'] = array(
         '#type' => 'select',
-        '#title' => t('Sidebar last'),
+        '#title' => t('Sidebar last width'),
         '#prefix' => '<div class="sidebar-width-right">',
         '#suffix' => '</div></div>',
         '#default_value' => theme_get_setting('layout_sidebar_last_width'),
@@ -121,13 +131,15 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       );
       $form['layout']['page_layout']['layout_method'] = array(
         '#type' => 'radios',
+        '#title' => t('Sidebar layout'),
+        '#description' => t('The sidebar layout descriptions are for LTR (left to right languages), these will flip in RTL mode.'),
         '#prefix' => '<div class="layout-method">',
         '#suffix' => '</div>',
         '#default_value' => theme_get_setting('layout_method'),
         '#options' => array(
-          0 => t('<strong>Layout #1</strong> <span class="layout-type-0">Standard three column layout—left, content, right.</span>'),
-          1 => t('<strong>Layout #2</strong> <span class="layout-type-1">Two columns on the right—content, left, right.</span>'),
-          2 => t('<strong>Layout #3</strong> <span class="layout-type-2">Two columns on the left—left, right, content.</span>'),
+          0 => t('<strong>Layout #1</strong> <span class="layout-type-0">Standard three column layout — Sidebar first | Content | Sidebar last</span>'),
+          1 => t('<strong>Layout #2</strong> <span class="layout-type-1">Two columns on the right — Content | Sidebar first | Sidebar last</span>'),
+          2 => t('<strong>Layout #3</strong> <span class="layout-type-2">Two columns on the left — Sidebar first | Sidebar last | Content</span>'),
         ),
        //'#attributes' => array('class' => 'layouts'),
       );

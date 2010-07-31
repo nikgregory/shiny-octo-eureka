@@ -69,6 +69,10 @@ margin-right:.5em;
 div.messages ul {
 margin:0 1.25em 0 0;
 }
+div.messages,
+#block-system-help {
+  border-width: 0 10px 0 0;
+}
 .update .info {
 padding:0 1em 0 0;
 }
