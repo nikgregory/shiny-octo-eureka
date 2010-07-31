@@ -15,7 +15,7 @@ body {}
 
 /* Admin menu */
 body.admin-menu {}
-body.admin-menu #container {}
+body.admin-menu #page {}
 
 /**********************************************************
  *                 HTML Elements
@@ -104,7 +104,7 @@ a:focus {}
  *                  The wrapper divs
  *    Be careful how you modify these, see layout.css
  **********************************************************/
-#container {}
+#page {}
 
 /* Column wrappers */
 #columns {}
