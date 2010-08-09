@@ -98,7 +98,7 @@ $vars['title_classes'] = implode(' ', $title_classes);
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
 // Support node tpl suggestions per node nid.
-$vars['template_files'][] = 'node-'.$vars['node']->nid; 
+$vars['template_files'][] = 'node-'.$vars['node']->nid;
 
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
@@ -175,7 +175,7 @@ if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxo
             }
           $output .= implode("", $links);
           $output .= '</ul></li>';
-          
+
           }
         }
         if ($output != '') {
