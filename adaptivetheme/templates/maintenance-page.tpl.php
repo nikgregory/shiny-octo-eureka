@@ -26,7 +26,7 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
-<body class="<?php print $body_classes; ?>">
+<body class="<?php print $body_classes; ?><?php if(arg(0) == 'user'): print ' in-maintenance'; endif;?>">
   <div id="container">
     <div id="header" class="clearfix">
       <?php if ($logo or $site_name or $site_slogan): ?>
@@ -57,7 +57,9 @@
     </div> <!-- /header -->
     <div id="main-content">
       <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-      <div id="content"><?php print $content; ?></div>
+      <div id="content">
+        <?php print $content; ?>
+      </div>
     </div> <!-- /main-content -->
   </div> <!-- /container -->
   <?php print $closure ?>

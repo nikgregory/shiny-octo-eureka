@@ -14,7 +14,13 @@
  *   The name of the theme function being called.
  */
 
-global $theme, $theme_info, $user, $language;
+global $theme, $theme_info, $language;
+
+if($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user') {
+  $vars['template_files'][] = 'maintenance-page';
+  $vars['head_title'] = drupal_set_title(t('User Login'));
+  $vars['title'] = drupal_set_title(t('User Login'));
+}
 
 // Don't display empty help from node_help().
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
@@ -60,11 +66,11 @@ if (!empty($secondary_menu_links)) {
 
 // Output the primary and secondary menus as regular menu trees.
 if (!empty($primary_menu_links) && theme_get_setting('primary_links_tree')) {
-  $primary_tree_menu = menu_tree_all_data('primary-links'); 
+  $primary_tree_menu = menu_tree_all_data('primary-links');
   $vars['primary_menu'] = menu_tree_output($primary_tree_menu);
 }
 if (!empty($secondary_menu_links) && theme_get_setting('secondary_links_tree')) {
-  $secondary_tree_menu = menu_tree_all_data('secondary-links'); 
+  $secondary_tree_menu = menu_tree_all_data('secondary-links');
   $vars['secondary_menu'] = menu_tree_output($secondary_tree_menu);
 }
 

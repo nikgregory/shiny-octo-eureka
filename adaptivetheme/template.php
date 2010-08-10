@@ -35,9 +35,9 @@ if (db_is_active()) {
    */
   function adaptivetheme_preprocess(&$vars, $hook) {
     global $user;
-    $vars['is_admin'] = in_array('admin', $user->roles);
-    $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
+
     $vars['theme_path'] = base_path() . path_to_theme() .'/';
+    $vars['in_maintenance'] = MAINTENANCE_MODE;
 
     // Include preprocess functions if and when required.
     if (is_file(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc')) {
