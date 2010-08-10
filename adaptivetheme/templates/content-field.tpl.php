@@ -39,19 +39,22 @@
 <div class="field<?php print $classes ? ' '. $classes : ''; ?>">
   <?php if ($label_display == 'above'): ?>
     <h3 class="label"><?php print t($label); ?></h3>
+  <?php elseif ($label_display =='inline'): ?>
+    <h3 class="label inline"><?php print t($label); ?>:&nbsp;</h3>
   <?php endif; ?>
-    <?php $count = 1;
+  <?php
+    $count = 1;
     foreach ($items as $delta => $item):
       if (!$item['empty']): ?>
         <?php theme_get_setting(cleanup_fields_zebra) ? $zebra = $count % 2 ? 'odd' : 'even' : $zebra = '' ;?>
         <?php if ($label_display == 'inline'): ?>
-          <h3 class="label inline"><?php print t($label); ?>:&nbsp;</h3>
-          <div class="item inline<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></div>
+          <span class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></span>
         <?php else: ?>
           <div class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></div>
         <?php endif; ?>
       <?php $count++;
       endif;
-    endforeach; ?>
+    endforeach;
+  ?>
 </div>
 <?php endif; ?> <!-- /content-field -->
