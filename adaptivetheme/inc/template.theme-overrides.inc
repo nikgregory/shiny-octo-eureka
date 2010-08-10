@@ -34,6 +34,11 @@ function adaptivetheme_breadcrumb($breadcrumb) {
         if ((module_exists('taxonomy')) && arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
           $title = drupal_get_title();
         }
+        // Don't display the title or trailing separator on search pages.
+        if ((module_exists('search')) && arg(0) == 'search') {
+          $title = '';
+          $trailing_separator = '';
+        }
       }
       elseif (theme_get_setting('breadcrumb_trailing')) {
         $trailing_separator = $breadcrumb_separator;
@@ -261,7 +266,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
             $link['attributes']['class'] .= ' active';
           }
         }
-      
+
         // wrap <span>'s around the anchor text
         if (theme_get_setting('links_add_span_elements')) {
           $link['title'] = '<span>' . check_plain($link['title']) . '</span>';
