@@ -1113,6 +1113,16 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
+   $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_type'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print field type classes.'),
+      '#default_value' => $settings['cleanup_fields_type'],
+    );
+   $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_name'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Print field name classes.'),
+      '#default_value' => $settings['cleanup_fields_name'],
+    );
     $form['themedev']['dev']['classses']['field_classes']['cleanup_fields_zebra'] = array(
       '#type' => 'checkbox',
       '#title' => t('Print odd/even zebra classes on CCK fields.'),
