@@ -6,9 +6,6 @@
  */
 // template_preprocess
 function adaptivetheme_preprocess(&$vars, $hook) {
-  global $user;
-  $vars['is_admin'] = in_array('admin', $user->roles);
-  $vars['logged_in'] = ($user->uid > 0) ? TRUE : FALSE;
   $vars['theme_path'] = base_path() . path_to_theme() .'/';
 }
 // template_process
@@ -56,7 +53,6 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
     kpr($vars['page']);
   }
-
   // Layout settings - set the page width and layout method.
   if (theme_get_setting('layout_enable_settings') == 'on') {
     $vars['at_layout_width'] = '#page,.container{width:'. theme_get_setting('layout_width') .';}';
@@ -169,33 +165,36 @@ function adaptivetheme_preprocess_page(&$vars) {
   ) : '';
   // Set variables for the main and secondary menus.
   if (isset($vars['main_menu'])) {
-    $vars['main_menu_links'] = theme('links__system_main_menu', array(
+    $vars['primary_navigation'] = theme('links__system_main_menu', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('links', 'clearfix'),
-        'id' => array('main-menu'),
+        'id' => array('primary-nav'),
       ),
       'heading' => array(
-        'text' => t('Main menu'),
+        'text' => t('Primary navigation'),
         'level' => 'h2',
         'class' => array('element-invisible'),
       )
     ));
   }
   if (isset($vars['secondary_menu'])) {
-    $vars['secondary_menu_links'] = theme('links__system_secondary_menu', array(
+    $vars['secondary_navigation'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(
         'class' => array('links', 'clearfix'),
-        'id' => array('secondary-menu'),
+        'id' => array('secondary-nav'),
        ),
       'heading' => array(
-        'text' => t('Secondary menu'),
+        'text' => t('Secondary navigation'),
         'level' => 'h2',
         'class' => array('element-invisible'),
        )
      ));
   }
+  // Set variables for local tasks.
+  $vars['primary_local_tasks'] = menu_primary_local_tasks();
+  $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   // Attribution.
   $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>";
 }
@@ -211,8 +210,6 @@ function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
   $vars['article_id'] = '';
   if (theme_get_setting('cleanup_article_id')) {
-    // Set article id.
-    // $vars['article_id'] = 'article-'. $vars['node']->nid;
     $vars['attributes_array']['id'][] = 'article-'. $vars['node']->nid;
   }
   /* Add support for Skinr module classes http://drupal.org/project/skinr */
@@ -235,8 +232,15 @@ function adaptivetheme_preprocess_node(&$vars) {
   if (theme_get_setting('cleanup_headings_title_class')) {
     $vars['title_attributes_array']['class'][] = 'title';
   }
-  if (theme_get_setting('cleanup_headings_namespaced_class')) {
+  if (theme_get_setting('cleanup_headings_type_class')) {
     $vars['title_attributes_array']['class'][] = 'article-title';
+  }
+  // Set content wrapper classes
+  if (theme_get_setting('cleanup_content_class')) {
+    $vars['content_attributes_array']['class'][] = 'content';
+  }
+  if (theme_get_setting('cleanup_content_type_class')) {
+    $vars['content_attributes_array']['class'][] = 'article-content';
   }
 }
 // template_process_node
@@ -273,10 +277,25 @@ function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('cleanup_headings_title_class')) {
     $vars['title_attributes_array']['class'][] = 'title';
   }
-  if (theme_get_setting('cleanup_headings_namespaced_class')) {
+  if (theme_get_setting('cleanup_headings_type_class')) {
     $vars['title_attributes_array']['class'][] = 'comment-title';
   }
+  // Set content wrapper classes
+  if (theme_get_setting('cleanup_content_class')) {
+    $vars['content_attributes_array']['class'][] = 'content';
+  }
+  if (theme_get_setting('cleanup_content_type_class')) {
+    $vars['content_attributes_array']['class'][] = 'comment-content';
+  }
+  // Permalinks - add rel='bookmark' to permalinks
+  $uri = entity_uri('comment', $vars['comment']);
+  $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
+  $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
+  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
+  // Use the $created variable for the permalink, aka Wordpress/Twitter style.
+  $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
 }
+
 // template_process_comment
 function adaptivetheme_process_comment(&$vars) {
   $classes = explode(' ', $vars['classes']);
@@ -294,6 +313,10 @@ function adaptivetheme_process_comment(&$vars) {
     theme_get_setting('cleanup_comment_new') ? '' : $classes = str_replace('comment-new', '', $classes);
   }
   $vars['classes'] = trim(implode(' ', $classes));
+  // Unset the permalink variable generated by core.
+  if (theme_get_setting('comment_permalink_cid') == 0) {
+    $vars['permalink'] = '';
+  }
 }
 
 /**
@@ -314,7 +337,6 @@ function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('cleanup_block_classes_count')) {
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
   }
-
   // Add classes for the horizontal login block if enabled.
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
     $vars['classes_array'][] = 'at-horizontal-login clearfix';
@@ -323,11 +345,16 @@ function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('cleanup_headings_title_class')) {
     $vars['title_attributes_array']['class'][] = 'title';
   }
-  if (theme_get_setting('cleanup_headings_namespaced_class')) {
+  if (theme_get_setting('cleanup_headings_type_class')) {
     $vars['title_attributes_array']['class'][] = 'block-title';
   }
-  // Add the content class to block content wrapper.
-  $vars['content_attributes_array']['class'][] = 'content';
+  // Set content wrapper classes
+  if (theme_get_setting('cleanup_content_class')) {
+    $vars['content_attributes_array']['class'][] = 'content';
+  }
+  if (theme_get_setting('cleanup_content_type_class')) {
+    $vars['content_attributes_array']['class'][] = 'block-content';
+  }
   // Remove "block" class from "Main page content" block
   if ($vars['block']->module == 'system' && $vars['block']->delta == 'main') {
     foreach ($vars['classes_array'] as $key => $val) {

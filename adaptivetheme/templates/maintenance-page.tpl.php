@@ -22,7 +22,7 @@
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
-  <div id="skip-link">
+  <div id="skip-link" class="show-on-focus">
     <a href="#main-content"><?php print t('Skip to main content'); ?></a>
   </div>
   <?php print $page_top; ?>
@@ -56,7 +56,7 @@
     </div> <!-- /header -->
     <div id="main-content">
       <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-      <div id="content"><?php print $content; ?></div>
+      <div class="region region-content"><?php print $content; ?></div>
     </div> <!-- /main-content -->
   </div> <!-- /container -->
   <?php print $page_bottom ?>

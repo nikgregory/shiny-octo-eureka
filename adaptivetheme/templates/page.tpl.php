@@ -105,7 +105,8 @@
     </div> <!-- /header -->
 
     <?php print render($page['menu_bar']); ?> <!-- /menu bar -->
-    <?php print $main_menu_links; ?> <!-- /main menu -->
+    <?php print $primary_navigation; ?> <!-- /main menu -->
+    <?php print $secondary_navigation; ?> <!-- /secondary menu links -->
 
   <?php endif; // end hide in overaly ?>
 
@@ -124,14 +125,16 @@
 
       <div id="main-content">
         <?php print render($title_prefix); ?>
-        <?php if ($title): ?>
-          <h1 id="page-title"><?php print $title; ?></h1> <!-- /page title -->
-        <?php endif; ?>
+        <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?> <!-- /page title -->
         <?php print render($title_suffix); ?>
-        <?php print render($tabs); ?> <!-- /local task tabs -->
+
+        <?php if ($primary_local_tasks): ?><ul class="tabs primary"><?php print render($primary_local_tasks); ?></ul><?php endif; ?> <!-- /primary local tasks -->
+        <?php if ($secondary_local_tasks): ?><ul class="tabs secondary"><?php print render($secondary_local_tasks); ?></ul><?php endif; ?> <!-- /secondary local tasks -->
         <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
+
         <?php print render($page['content_aside']); ?> <!-- /content-aside -->
         <?php print render($page['content']); ?> <!-- /content -->
+        <?php print $feed_icons; ?> <!-- /feed icons -->
       </div> <!-- /main-content -->
 
       <?php print render($page['content_bottom']); ?> <!-- /content-bottom -->
@@ -147,11 +150,9 @@
 
     <?php print render($page['tertiary_content']); ?> <!-- /tertiary-content -->
 
-    <?php if ($page['footer'] || $secondary_menu || $feed_icons): ?>
+    <?php if ($page['footer']): ?>
       <div id="footer">
         <?php print render($page['footer']); ?> <!-- /footer region -->
-        <?php print $secondary_menu_links; ?> <!-- /secondary menu links -->
-        <?php print $feed_icons; ?> <!-- /feed icons -->
       </div> <!-- /footer -->
     <?php endif; ?>
 

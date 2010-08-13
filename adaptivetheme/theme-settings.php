@@ -10,8 +10,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   $form['layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Layout settings'),
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   if (theme_get_setting('layout_enable_settings') == 'on') {
     $image_path = drupal_get_path('theme', 'adaptivetheme') . '/css/core-images';
@@ -225,21 +225,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       ),
     );
   } // endif horizontal block settings
-  // General Settings
-  $form['general_settings'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Skip navigation &amp; Search result settings'),
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
-  );
   // Skip Navigation
-  $form['general_settings']['skip_navigation'] = array(
+  $form['skip_navigation'] = array(
     '#type' => 'fieldset',
     '#title' => t('Skip Navigation'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['general_settings']['skip_navigation']['skip_navigation_display'] = array(
+  $form['skip_navigation']['skip_navigation_display'] = array(
     '#type' => 'radios',
     '#title'  => t('Modify the display of the skip navigation'),
     '#default_value' => theme_get_setting('skip_navigation_display'),
@@ -250,45 +243,45 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     ),
   );
   // Search Settings
-  $form['general_settings']['search_results'] = array(
+  $form['search_results'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search Results'),
     '#description' => t('What additional information should be displayed in your search results?'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['general_settings']['search_results']['search_snippet'] = array(
+  $form['search_results']['search_snippet'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display text snippet'),
     '#default_value' => theme_get_setting('search_snippet'),
   );
-  $form['general_settings']['search_results']['search_info_type'] = array(
+  $form['search_results']['search_info_type'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display content type'),
     '#default_value' => theme_get_setting('search_info_type'),
   );
-  $form['general_settings']['search_results']['search_info_user'] = array(
+  $form['search_results']['search_info_user'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display author name'),
     '#default_value' => theme_get_setting('search_info_user'),
   );
-  $form['general_settings']['search_results']['search_info_date'] = array(
+  $form['search_results']['search_info_date'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display posted date'),
     '#default_value' => theme_get_setting('search_info_date'),
   );
-  $form['general_settings']['search_results']['search_info_comment'] = array(
+  $form['search_results']['search_info_comment'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display comment count'),
     '#default_value' => theme_get_setting('search_info_comment'),
   );
-  $form['general_settings']['search_results']['search_info_upload'] = array(
+  $form['search_results']['search_info_upload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display attachment count'),
     '#default_value' => theme_get_setting('search_info_upload'),
   );
   // Search_info_separator
-  $form['general_settings']['search_results']['search_info_separator'] = array(
+  $form['search_results']['search_info_separator'] = array(
     '#type' => 'textfield',
     '#title' => t('Search info separator'),
     '#description' => t('Modify the separator. The default is a hypen with a space before and after.'),
@@ -301,8 +294,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#type' => 'fieldset',
     '#title' => t('Theme development settings'),
     '#description' => t('These settings are for the theme developer. Changing these settings may break your theme.'),
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   // Global settings
   $form['theme']['development']['global'] = array(
@@ -702,22 +695,32 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       '#default_value' => theme_get_setting('cleanup_fields_zebra'),
     );
   }
-  // Title classes for headings
-  $form['theme']['development']['classes']['heading_classes'] = array(
+  // Title and content wrapper classes.
+  $form['theme']['development']['classes']['attribute_classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Heading Classes'),
-    '#description' => t('Heading classes apply to article, block and comment titles (h2, h3 etc).'),
+    '#title' => t('Title and Content Wrapper Classes'),
+    '#description' => t('Classes apply to article, block and comment titles and the wrapper divs around $content.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['theme']['development']['classes']['heading_classes']['cleanup_headings_title_class'] = array(
+  $form['theme']['development']['classes']['attribute_classes']['cleanup_headings_title_class'] = array(
     '#type' => 'checkbox',
     '#title' => t('Add the .title class to all headings.'),
     '#default_value' => theme_get_setting('cleanup_headings_title_class'),
   );
-  $form['theme']['development']['classes']['heading_classes']['cleanup_headings_namespaced_class'] = array(
+  $form['theme']['development']['classes']['attribute_classes']['cleanup_headings_type_class'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Add a pseudo name spaced title class to headings, i.e. .article-title, .block-title, .comment-title.'),
-    '#default_value' => theme_get_setting('cleanup_headings_namespaced_class'),
+    '#title' => t('Add the type class to headings, i.e. .article-title, .block-title, .comment-title.'),
+    '#default_value' => theme_get_setting('cleanup_headings_type_class'),
+  );
+  $form['theme']['development']['classes']['attribute_classes']['cleanup_content_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add the .content class to all $content wrappers.'),
+    '#default_value' => theme_get_setting('cleanup_content_class'),
+  );
+  $form['theme']['development']['classes']['attribute_classes']['cleanup_content_type_class'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add the type class to all $content wrappers, i.e. .article-content, .block-content, .comment-content.'),
+    '#default_value' => theme_get_setting('cleanup_content_type_class'),
   );
 }

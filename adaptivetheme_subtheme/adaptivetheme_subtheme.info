@@ -170,8 +170,10 @@
   settings[cleanup_fields_type]               = 0
   settings[cleanup_fields_name]               = 0
   settings[cleanup_fields_zebra]              = 0
-  settings[cleanup_headings_title_class]      = 0
-  settings[cleanup_headings_namespaced_class] = 0
+  settings[cleanup_headings_title_class]      = 1
+  settings[cleanup_headings_type_class]       = 0
+  settings[cleanup_content_class]             = 1
+  settings[cleanup_content_type_class]        = 0
   settings[theme_main_menu_spans]             = 0
   settings[theme_sec_menu_spans]              = 0
   settings[theme_menu_link_spans]             = 0

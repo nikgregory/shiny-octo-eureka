@@ -299,57 +299,52 @@ span.search-info-upload  {}
 /**********************************************************
  *               Primary & Secondary Links
  **********************************************************/
-/* Primary-links div wrapper */
-#primary {}
 
-/* Class on the ul */
-.primary-links {}
+/* Primary navigation */
+#primary-nav {}
 
 /* Modify the margin to set tab spacings. */
-.primary-links li {}
-.primary-links li a {}
+#primary-nav li {}
+#primary-nav li a {}
 
 /* Set pseudo class styles. */
-.primary-links li a:link {}
-.primary-links li a:visited {}
-.primary-links li a:hover {}
-.primary-links li a:focus {}
-.primary-links li a:active {}
+#primary-nav li a:link {}
+#primary-nav li a:visited {}
+#primary-nav li a:hover {}
+#primary-nav li a:focus {}
+#primary-nav li a:active {}
 
 /* Primary first and last classes. */
-.primary-links li.first {}
-.primary-links li.last {}
+#primary-nav li.first {}
+#primary-nav li.last {}
 
 /* Active trail classes. */
-.primary-links li.active {}
-.primary-links li.active-trail {}
-.primary-links li.active-trail a {}
+#primary-nav li.active {}
+#primary-nav li.active-trail {}
+#primary-nav li.active-trail a {}
 
-/* Secondary-links div wrapper */
-#secondary {}
-
-/* Class on the ul */
-.secondary-links {}
+/* Secondary navigation */
+#secondary-nav {}
 
 /* Modify the margin to set tab spacings. */
-.secondary-links li {}
-.secondary-links li a {}
+#secondary-nav li {}
+#secondary-nav li a {}
 
 /* Set pseudo class styles. */
-.secondary-links li a:link {}
-.secondary-links li a:visited {}
-.secondary-links li a:hover {}
-.secondary-links li a:focus {}
-.secondary-links li a:active {}
+#secondary-nav li a:link {}
+#secondary-nav li a:visited {}
+#secondary-nav li a:hover {}
+#secondary-nav li a:focus {}
+#secondary-nav li a:active {}
 
 /* Secondary first and last classes. */
-.secondary-links li.first {}
-.secondary-links li.last {}
+#secondary-nav li.first {}
+#secondary-nav li.last {}
 
 /* Active trail classes. */
-.secondary-links li.active {}
-.secondary-links li.active-trail {}
-.secondary-links li.active-trail a {}
+#secondary-nav li.active {}
+#secondary-nav li.active-trail {}
+#secondary-nav li.active-trail a {}
 
 
 /**********************************************************

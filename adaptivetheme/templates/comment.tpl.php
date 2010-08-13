@@ -58,39 +58,37 @@
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-  <?php print $picture; ?>
-
+  <?php print render($title_prefix); ?>
   <?php if ($title): ?>
-    <?php print render($title_prefix); ?>
-    <h3 class="comment-title"<?php print $title_attributes; ?>>
+    <h3<?php print $title_attributes; ?>>
       <?php print $title ?>
-      <?php if ($new): ?>
-        <span class="new"><?php print $new ?></span>
-      <?php endif; ?>
     </h3>
-    <?php print render($title_suffix); ?>
+  <?php endif; ?>
+  <?php print render($title_suffix); ?>
+
+  <?php if ($new): ?>
+    <em class="new"><?php print $new ?></em>
   <?php endif; ?>
 
   <div class="comment-submitted">
-    <span class="comment-id"><?php print $permalink; ?></span>
+    <?php print $picture; ?>
     <?php
-      print t('Submitted by !username on !datetime.',
+      print t('Submitted by !username on !datetime',
       array('!username' => $author, '!datetime' => $created));
     ?>
   </div>
 
-  <div class="comment-content"<?php print $content_attributes; ?>>
+  <div<?php print $content_attributes; ?>>
     <?php
-      // We hide the comments and links now so that we can render them later.
+      // We hide the links now so that we can render them later.
       hide($content['links']);
       print render($content);
     ?>
-    <?php if ($signature): ?>
-    <div class="user-signature clearfix">
-      <?php print $signature ?>
-    </div>
-    <?php endif; ?>
   </div>
+
+  <?php if ($signature): ?>
+    <div class="user-signature"><?php print $signature ?></div>
+  <?php endif; ?>
 
   <?php print render($content['links']) ?>
 

@@ -26,12 +26,14 @@
     </p>
   <?php endif; ?>
 
+  <div<?php print $content_attributes; ?>>
   <?php
     // Hide comments and links and render them later.
     hide($content['comments']);
     hide($content['links']);
     print render($content);
   ?>
+  </div>
 
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment

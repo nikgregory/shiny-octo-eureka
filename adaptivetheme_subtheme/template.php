@@ -5,95 +5,72 @@
  * @file template.php
  */
 
-// Don't include custom functions if the database is inactive.
-
-  // Include base theme custom functions.
-  //include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
-
-
 /**
- * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
- * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
- */
-if (theme_get_setting('color_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_subtheme') .'/css/theme/'. get_at_colors(), 'theme');
-}
-
-/**
- * USAGE
+ * Preprocess and Process Functions SEE: http://drupal.org/node/254940#variables-processor
  * 1. Rename each function to match your subthemes name,
  *    e.g. if you name your theme "themeName" then the function
  *    name will be "themeName_preprocess_hook".
- * 2. Uncomment the required function to use. You can delete the
- *    "sample_variable".
+ * 2. Uncomment the required function to use.
  */
 
 /**
  * Override or insert variables into all templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered.
  */
 /*
 function adaptivetheme_subtheme_preprocess(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+}
+function adaptivetheme_subtheme_process(&$vars, $hook) {
+}
+*/
+
+/**
+ * Override or insert variables into the html templates.
+ */
+/*
+function adaptivetheme_subtheme_preprocess_html(&$vars) {
+  // Uncomment the folowing line to add a conditional stylesheet for IE
+  // drupal_add_css(path_to_theme() . '/css/ie/lte-ie.css', array('weight' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
+}
+function adaptivetheme_subtheme_process_html(&$vars) {
 }
 */
 
 /**
  * Override or insert variables into the page templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered.
  */
 /*
-function adaptivetheme_subtheme_preprocess_page(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+function adaptivetheme_subtheme_preprocess_page(&$vars) {
+}
+function adaptivetheme_subtheme_process_page(&$vars) {
 }
 */
 
 /**
  * Override or insert variables into the node templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered.
  */
 /*
-function adaptivetheme_subtheme_preprocess_node(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+function adaptivetheme_subtheme_preprocess_node(&$vars) {
+}
+function adaptivetheme_subtheme_process_node(&$vars) {
 }
 */
 
 /**
  * Override or insert variables into the comment templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered.
  */
 /*
-function adaptivetheme_subtheme_preprocess_comment(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+function adaptivetheme_subtheme_preprocess_comment(&$vars) {
+}
+function adaptivetheme_subtheme_process_comment(&$vars) {
 }
 */
 
 /**
  * Override or insert variables into the block templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered.
  */
 /*
-function adaptivetheme_subtheme_preprocess_block(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+function adaptivetheme_subtheme_preprocess_block(&$vars) {
+}
+function adaptivetheme_subtheme_process_block(&$vars) {
 }
 */
