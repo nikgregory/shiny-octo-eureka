@@ -1,5 +1,5 @@
 
-  Adaptivetheme 6.x-2.x is built and supported by http://adaptivethemes.com
+  Adaptivetheme 6.x-3.x is built and supported by http://adaptivethemes.com
 
   Project page: http://drupal.org/project/adaptivetheme
   Issue queue:  http://drupal.org/project/issues/adaptivetheme
@@ -34,7 +34,7 @@
 
   http://drupal.org/project/block_class
   http://drupal.org/project/blocktheme
-  Optionally you can also test out AT2's support for Block class and Blocktheme modules. 
+  Optionally you can also test out AT3's support for Block class and Blocktheme modules. 
   Again, theres nothing more to do other than installing these module and start 
   using them, AT provides native support out of the box.
 
