@@ -36,7 +36,7 @@ if (db_is_active()) {
   function adaptivetheme_preprocess(&$vars, $hook) {
     global $user;
 
-    $vars['theme_path'] = base_path() . path_to_theme() .'/';
+    $vars['theme_path'] = path_to_theme() .'/';
     $vars['in_maintenance'] = MAINTENANCE_MODE;
 
     // Include preprocess functions if and when required.

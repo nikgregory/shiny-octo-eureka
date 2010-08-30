@@ -953,11 +953,12 @@ width:95%;
 }
 
 /* Fields. */
-h3.label,h3.label-inline {
+h3.label {
 font-size:1em;
 }
 
-.field .inline  {
+.field-inline h3,
+.field-inline .item {
 display:inline;
 }
 
