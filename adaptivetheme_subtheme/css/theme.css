@@ -469,12 +469,6 @@ ul.links li a {}
 ul.taxonomy {}
 ul.taxonomy li {}
 ul.taxonomy li a {}
-/* With vocab headers */
-ul.taxonomy li.vocab {}
-.vocab-name {}
-ul.vocab-list {}
-ul.vocab-list li {}
-ul.vocab-list li a {}
 
 /* Style module links. */
 ul.links li.node_read_more a {}

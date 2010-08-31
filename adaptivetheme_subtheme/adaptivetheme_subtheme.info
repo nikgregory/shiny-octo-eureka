@@ -1,6 +1,5 @@
 ; $Id$
 
-
 ;----------// Theme Information
 
  ; Change the name and description for your subtheme.
@@ -20,17 +19,18 @@
 ;----------// Stylesheets
 
   ; Uncomment if using Gpanels. There are two: 960 Grids based and Fluid.
-  ;stylesheets[all][] = css/core/gpanels-960-fixed.css
-  ;stylesheets[all][] = css/core/gpanels-fluid.css
+  ;stylesheets[all][] = css/gpanels/gpanels-960-fixed.css
+  ;stylesheets[all][] = css/gpanels/gpanels-fluid.css
+  
+  ; Starter CSS - comment this out if you don't need it, provides basic styles and
+  is more of an example of how you can use this theme.
+  stylesheets[all][] = css/starter.css
 	
-  ; Dark Theme CSS - uncomment to enable.
-  ;stylesheets[all][] = css/core/dark.css
-
-  ; Starter CSS - comment this out if you dont need it, provides basic styles only.
-  stylesheets[all][] = css/theme/starter.css
+  ; Dark Theme CSS - uncomment to convert Drupal to support negative designs.
+  ;stylesheets[all][] = css/dark.css
 	
   ; Theme CSS - use this stylesheet to build your custom theme.
-  stylesheets[all][] = css/theme/theme.css
+  stylesheets[all][] = css/theme.css
   
 
 ;----------// IE Conditional Stylesheets
@@ -40,6 +40,7 @@
 
 
 ;----------// Regions
+
   regions[leaderboard]       = Leaderboard
   regions[header]            = Header Region
   regions[menu_bar]          = Menu Bar
@@ -62,7 +63,7 @@
   ; Uncomment the required regions.
 
   ;--// TWO column Gpanels
-  
+
   ; 2 col 2x50 Gpanel
   ;regions[two_col_2x50_first]  = 2col 2x50 Gpanel col 1
   ;regions[two_col_2x50_second] = 2col 2x50 Gpanel col 2
@@ -77,7 +78,7 @@
 
 
   ;--// THREE column Gpanels
-  
+
   ; 3 col 3x33 Gpanel
   ;regions[three_col_3x33_first]  = 3col 3x33 Gpanel col 1
   ;regions[three_col_3x33_second] = 3col 3x33 Gpanel col 2
@@ -95,12 +96,14 @@
   
 
   ;--// FOUR column Gpanel
+
   ;regions[four_col_first]  = 4col Gpanel col 1
   ;regions[four_col_second] = 4col Gpanel col 2
   ;regions[four_col_third]  = 4col Gpanel col 3
   ;regions[four_col_fourth] = 4col Gpanel col 4
 
   ;--// FIVE column Gpanel
+
   ;regions[five_col_first]  = 5col Gpanel col 1
   ;regions[five_col_second] = 5col Gpanel col 2
   ;regions[five_col_third]  = 5col Gpanel col 3
@@ -108,6 +111,7 @@
   ;regions[five_col_fifth]  = 5col Gpanel col 5
 
   ;--// SIX column Gpanel
+
   ;regions[six_col_first]  = 6col Gpanel col 1
   ;regions[six_col_second] = 6col Gpanel col 2
   ;regions[six_col_third]  = 6col Gpanel col 3
@@ -144,16 +148,13 @@
  
 ;----------// Theme Setting Defaults
 
-  settings[skip_navigation_display]           = 'hide'
-
+  settings[skip_navigation_display]           = 'focus'
   settings[breadcrumb_display]                = 'yes'
   settings[breadcrumb_separator]              = ' &#187; '
   settings[breadcrumb_home]                   = 0
   settings[breadcrumb_trailing]               = 0
   settings[breadcrumb_title]                  = 0
-
   settings[display_search_form_label]         = 1
-
   settings[search_snippet]                    = 1
   settings[search_info_type]                  = 1
   settings[search_info_user]                  = 1
@@ -161,30 +162,10 @@
   settings[search_info_comment]               = 1
   settings[search_info_upload]                = 1
   settings[search_info_separator]             = ' - '
-
   settings[primary_links_tree]                = 0
   settings[secondary_links_tree]              = 0
-
-  settings[mission_statement_pages]           = 'home'
-
-  settings[taxonomy_settings_enabled]         = 0
-  settings[taxonomy_display_default]          = 'only'
-  settings[taxonomy_format_default]           = 'vocab'
-  settings[taxonomy_delimiter_default]        = ', '
-  settings[taxonomy_enable_content_type]      = 0
-
-  settings[submitted_by_settings_enabled]     = 0
-  settings[submitted_by_author_default]       = 1
-  settings[submitted_by_date_default]         = 1
-  settings[submitted_by_enable_content_type]  = 0
-
-  settings[display_links_settings_enabled]    = 0
-  settings[display_links_default]             = 'all'
-  settings[display_links_enable_content_type] = 0
-
   settings[rebuild_registry]                  = 0
   settings[show_theme_info]                   = 0
-
   settings[cleanup_classes_section]           = 0
   settings[cleanup_classes_front]             = 0
   settings[cleanup_classes_user_status]       = 0
@@ -192,7 +173,6 @@
   settings[cleanup_classes_node_type]         = 0
   settings[cleanup_classes_add_edit_delete]   = 0
   settings[cleanup_classes_language]          = 0
-
   settings[cleanup_article_id]                = 0
   settings[cleanup_article_classes_promote]   = 0
   settings[cleanup_article_classes_sticky]    = 0
@@ -200,54 +180,42 @@
   settings[cleanup_article_classes_preview]   = 0
   settings[cleanup_article_classes_type]      = 0
   settings[cleanup_article_classes_language]  = 0
-
   settings[cleanup_comment_anonymous]         = 0
   settings[cleanup_comment_article_author]    = 0
   settings[cleanup_comment_by_viewer]         = 0
   settings[cleanup_comment_new]               = 0
   settings[cleanup_comment_zebra]             = 0
   settings[cleanup_comment_wrapper_type]      = 0
-  
   settings[cleanup_block_block_module_delta]  = 0
   settings[cleanup_block_classes_module]      = 0
   settings[cleanup_block_classes_zebra]       = 0
   settings[cleanup_block_classes_region]      = 0
   settings[cleanup_block_classes_count]       = 0
-
   settings[cleanup_menu_menu_class]           = 1
   settings[cleanup_menu_leaf_class]           = 1
   settings[cleanup_menu_first_last_classes]   = 0
   settings[cleanup_menu_active_classes]       = 0
   settings[cleanup_menu_title_class]          = 0
-
   settings[cleanup_links_type_class]          = 1
   settings[cleanup_links_active_classes]      = 0
   settings[cleanup_links_first_last_classes]  = 0
-
   settings[cleanup_item_list_zebra]           = 0
   settings[cleanup_item_list_first_last]      = 0
-
   settings[cleanup_views_css_name]            = 0
   settings[cleanup_views_view_name]           = 0
   settings[cleanup_views_display_id]          = 0
   settings[cleanup_views_dom_id]              = 0
-  
   settings[cleanup_views_unformatted]         = 0
   settings[cleanup_views_item_list]           = 0
- 
   settings[cleanup_fields_type]               = 0
   settings[cleanup_fields_name]               = 0
   settings[cleanup_fields_zebra]              = 0
-  
   settings[cleanup_headings_title_class]      = 0
   settings[cleanup_headings_namespaced_class] = 0
-  
   settings[links_add_span_elements]           = 0
-
   settings[at_user_menu]                      = 0
   settings[block_edit_links]                  = 1
   settings[at_admin_hide_help]                = 0
-
   settings[layout_method]                     = '0'
   settings[layout_width]                      = '960px'
   settings[layout_sidebar_first_width]        = '240'
@@ -257,21 +225,11 @@
   settings[layout_enable_sidebars]            = 'on'
   settings[layout_enable_method]              = 'on'
   settings[layout_enable_frontpage]           = 'on'
-
   settings[equal_heights_sidebars]            = 0
   settings[equal_heights_blocks]              = 0
   settings[equal_heights_gpanels]             = 0
   settings[horizontal_login_block]            = 0
-
   settings[horizontal_login_block_overlabel]  = 0
   settings[horizontal_login_block_enable]     = 'on'
-
-  settings[color_schemes]                     = 'colors-default.css'
-  settings[color_enable_schemes]              = 'off'
-
-; Information added by drupal.org packaging script on 2010-03-27
-version = "6.x-2.2"
-core = "6.x"
-project = "adaptivetheme"
-datestamp = "1269667828"
-
+  settings[styles_schemes]                     = 'style-default.css'
+  settings[styles_enable_schemes]              = 'off'

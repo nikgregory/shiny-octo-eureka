@@ -211,11 +211,6 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
 }
 
-// Display mission statement on all pages.
-if (theme_get_setting('mission_statement_pages') == 'all') {
-  $vars['mission'] = theme_get_setting('mission', FALSE);
-}
-
 // Show $theme_info output using krumo.
 if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
   dsm($theme_info); /* Use dsm, kpr messes up IE */

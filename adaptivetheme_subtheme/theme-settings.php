@@ -17,38 +17,39 @@ include_once(drupal_get_path('theme', 'adaptivetheme') .'/theme-settings.php');
 *   A form array.
 */
 function adaptivetheme_subtheme_settings($saved_settings) {
-  
+
   // Get the default values from the .info file.
   $defaults = adaptivetheme_theme_get_default_settings('adaptivetheme_subtheme');
-    
+
   // Merge the saved variables and their default values.
   $settings = array_merge($defaults, $saved_settings);
 
   // Create the form using Forms API: http://api.drupal.org/api/6
   $form = array();
-  // Color schemes
-  if ($settings['color_enable_schemes'] == 'on') {
-    $form['color'] = array(
+
+  // You can add settings here - the example uses the style_schemes settings.
+  // Style schemes
+  if ($settings['style_enable_schemes'] == 'on') {
+    $form['style'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Color settings'),
+      '#title' => t('Style settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#weight' => 90,
-      '#description'   => t('Use these settings to customize the colors of your site. If no stylesheet is selected the default colors will apply.'),
+      '#description'   => t('Use these settings to modify the style - such as the color scheme. If no stylesheet is selected the default styles will apply.'),
     );
-    $form['color']['color_schemes'] = array(
+    $form['style']['style_schemes'] = array(
       '#type' => 'select',
-      '#title' => t('Color Schemes'),
-      '#default_value' => $settings['color_schemes'],
+      '#title' => t('Styles'),
+      '#default_value' => $settings['style_schemes'],
       '#options' => array(
-        'colors-default.css' => t('Default Color Scheme'),
-      //'colors-mine.css' => t('My Color Scheme'), // add extra color css files, place these in your css/theme folder
+        'style-default.css' => t('Default Style'),
       ),
     );
-    $form['color']['color_enable_schemes'] = array(
-      '#type'    => 'hidden',
-      '#value'   => $settings['color_enable_schemes'],
-    ); 
+    $form['style']['style_enable_schemes'] = array(
+      '#type' => 'hidden',
+      '#value' => $settings['style_enable_schemes'],
+    );
   } // endif color schemes
 
   // Add the base theme's settings.

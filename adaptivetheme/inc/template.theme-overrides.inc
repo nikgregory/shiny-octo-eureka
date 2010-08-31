@@ -27,22 +27,7 @@ function adaptivetheme_breadcrumb($breadcrumb) {
     // Return the breadcrumb with separators.
     if (!empty($breadcrumb)) {
       $breadcrumb_separator = filter_xss(theme_get_setting('breadcrumb_separator'));
-      $trailing_separator = $title = '';
-      if (theme_get_setting('breadcrumb_title')) {
-        $trailing_separator = $breadcrumb_separator;
-        $title = menu_get_active_title();
-        if ((module_exists('taxonomy')) && arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
-          $title = drupal_get_title();
-        }
-        if ((module_exists('search')) && arg(0) == 'search') {
-          $title = '';
-          $trailing_separator = '';
-        }
-      }
-      elseif (theme_get_setting('breadcrumb_trailing')) {
-        $trailing_separator = $breadcrumb_separator;
-      }
-      return implode($breadcrumb_separator, $breadcrumb) . $trailing_separator . $title;
+      return implode($breadcrumb_separator, $breadcrumb);
     }
   }
   // Otherwise, return an empty string.
@@ -145,20 +130,27 @@ function adaptivetheme_fieldset($element) {
  * In short this collapses the fieldsets on the theme configuration page.
  */
 function adaptivetheme_system_settings_form($form) {
-  // Reset titles.
-  $form['theme_settings']['#title'] = t('Drupal core theme settings');
-  $form['theme_specific']['#title'] = t('Advanced theme settings');
-  // Collapse all fieldsets and give them a wrapper to help out themers.
-  $form_elements = element_children($form);
-  foreach ($form_elements as $element) {
-    if ($form[$element]['#type'] == 'fieldset') {
-      $form[$element]['#collapsible'] = TRUE;
-      $form[$element]['#collapsed']   = TRUE;
-      $form[$element]['#prefix'] = '<div class="'. safe_string($element) .'-settings-wrapper">';
-      $form[$element]['#suffix'] = '</div>';
+
+  // only run this if we're on a theme settings page.
+  if (arg(2) == 'themes' && arg(3) == 'settings') {
+
+    // Reset titles.
+    $form['theme_settings']['#title'] = t('Drupal core theme settings');
+    $form['theme_specific']['#title'] = t('Advanced theme settings');
+
+    // Collapse all fieldsets and give them a wrapper to help out themers.
+    $form_elements = element_children($form);
+    foreach ($form_elements as $element) {
+      if ($form[$element]['#type'] == 'fieldset') {
+        $form[$element]['#collapsible'] = TRUE;
+        $form[$element]['#collapsed']   = TRUE;
+        $form[$element]['#prefix'] = '<div class="'. safe_string($element) .'-settings-wrapper">';
+        $form[$element]['#suffix'] = '</div>';
+      }
     }
+    return drupal_render($form);
   }
-  return drupal_render($form);
+
 }
 
 // If DHTML module is installed dont override theme_menu_tree and theme_menu_item.

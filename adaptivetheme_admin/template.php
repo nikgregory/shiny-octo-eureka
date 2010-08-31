@@ -15,8 +15,8 @@ if (db_is_active()) {
  * Add the color scheme stylesheet if color_enable_schemes is set to 'on'.
  * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
  */
-if (theme_get_setting('color_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_admin') .'/css/theme/'. get_at_colors(), 'theme');
+if (theme_get_setting('style_enable_schemes') == 'on') {
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_admin') .'/css/theme/'. get_at_styles(), 'theme');
 }
 
 // Load collapsed js on blocks pages

@@ -39,15 +39,15 @@ function wordlimit($string, $length = 50, $ellipsis = "...") {
 }
 
 /**
- * Set a default color scheme and set a cookie.
+ * Set a default style scheme and set a cookie.
  */
-function get_at_colors() {
-  $scheme = theme_get_setting('color_schemes');
+function get_at_styles() {
+  $scheme = theme_get_setting('style_schemes');
   if (!$scheme) {
-    $scheme = 'colors-default.css';
+    $scheme = 'style-default.css';
   }
-  if (isset($_COOKIE["atcolors"])) {
-    $scheme = $_COOKIE["atcolors"];
+  if (isset($_COOKIE["atstyles"])) {
+    $scheme = $_COOKIE["atstyles"];
   }
   return $scheme;
 }
