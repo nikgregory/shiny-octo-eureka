@@ -1,9 +1,8 @@
 ; $Id$
 
 ;----------// Theme Information
-
   name        = AT Admin
-  description = Clean, usable Administration theme with five color options.
+  description = Clean, usable administration theme with five color options.
   core        = 6.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -11,33 +10,28 @@
 
 
 ;----------// Stylesheets
-
-  stylesheets[all][] = css/core/at-admin.css
+  stylesheets[all][] = css/at-admin.css
 
 
 ;----------// Skinr Styles
-
-  ; The following require the Skinr module, http://drupal.org/project/skinr
-  ; Adaptivetheme provides native support for Skinr classes.
-
   skinr[options][inherit_skins] = true
 
 
 ;----------// Regions
-
-  regions[header]            = Header Region
-  regions[secondary_content] = Secondary Content
-  regions[content_top]       = Content Top
-  regions[content]           = Main Content
-  regions[content_bottom]    = Content Bottom
-  regions[tertiary_content]  = Tertiary Content
-  regions[left]              = Sidebar First
-  regions[right]             = Sidebar Last
-  regions[footer]            = Footer
+  regions[content] = Main Content
+  regions[left]    = Sidebar First
+  regions[right]   = Sidebar Last
+  regions[footer]  = Footer
 
 
-;----------// Theme Setting Defaults
+;----------// Features
+  features[] = name
+  features[] = favicon
+  features[] = primary_links
+  features[] = secondary_links
 
+
+;----------// Theme Settings
   settings[skip_navigation_display]           = 'focus'
   settings[breadcrumb_display]                = 'yes'
   settings[breadcrumb_separator]              = ' &#8594; '
@@ -107,7 +101,7 @@
   settings[block_edit_links]                  = 1
   settings[at_admin_hide_help]                = 0
   settings[layout_method]                     = '0'
-  settings[layout_width]                      = '1260px'
+  settings[layout_width]                      = '95%'
   settings[layout_sidebar_first_width]        = '240'
   settings[layout_sidebar_last_width]         = '240'
   settings[layout_enable_settings]            = 'on'

@@ -61,7 +61,7 @@ if (db_is_active()) {
   }
 
   // Add the color scheme stylesheets.
-  if (theme_get_setting('color_enable_schemes') == 'on') {
-    drupal_add_css(drupal_get_path('theme', 'adaptivetheme') .'/css/theme/'. get_at_colors(), 'theme');
+  if (theme_get_setting('style_enable_schemes') == 'on') {
+    drupal_add_css(drupal_get_path('theme', 'adaptivetheme') .'/css/theme/'. get_at_styles(), 'theme');
   }
 }

@@ -16,7 +16,7 @@ if (db_is_active()) {
  * Note: you must have at minimum a color-default.css stylesheet in /css/theme/
  */
 if (theme_get_setting('style_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_admin') .'/css/theme/'. get_at_styles(), 'theme');
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_admin') .'/css/'. get_at_styles(), 'theme');
 }
 
 // Load collapsed js on blocks pages
@@ -38,7 +38,7 @@ function adaptivetheme_admin_preprocess_page(&$vars, $hook) {
   if ($vars['logged_in']) {
     $welcome = t('Welcome') .' '. check_plain($user->name);
     $conjunction = ', '. t('it\'s') .' ';
-    $todays_date = date("l, jS F, Y" , time());
+    $todays_date = date("r" , time());
     $vars['admin_welcome'] = $welcome . $conjunction . $todays_date;
   }
 }

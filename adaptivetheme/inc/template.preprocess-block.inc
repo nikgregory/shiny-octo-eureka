@@ -108,3 +108,7 @@ if (theme_get_setting('block_edit_links') && user_access('administer blocks')) {
   include_once './'. drupal_get_path('theme', 'adaptivetheme') .'/inc/template.block-editing.inc';
   adaptivetheme_preprocess_block_editing($vars, $hook);
 }
+
+if (theme_get_setting('slider_login_block') && $vars['block_module_delta'] == 'block-user-0') {
+ $vars['template_files'][] = 'block-slider-login';
+}

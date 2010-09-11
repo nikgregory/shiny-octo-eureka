@@ -29,16 +29,16 @@
  *     for the page.
  * - $section_class: A CSS class that uses .+ the 1st URL argument, allows for
  *     themeing site sections based on path.
- * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes). 
- *     This contains flags indicating the current layout (multiple columns, single column), 
+ * - $classes: A set of CSS classes (preprocess $body_classes + Genesis custom classes).
+ *     This contains flags indicating the current layout (multiple columns, single column),
  *     the current path, whether the user is logged in, and so on.
  *
  * Site identity:
  * - $front_page: The URL of the front page. Use this instead of $base_path,
  *     when linking to the front page. This includes the language domain or prefix.
- * - $site_logo: The preprocessed $logo varaible. Includes the path to the logo image, 
+ * - $site_logo: The preprocessed $logo varaible. Includes the path to the logo image,
  *     as defined in theme configuration and wrapped in an anchor linking to the homepage.
- * - $site_name: The name of the site (preprocessed) wrapped in an anchor linking to the homepage. 
+ * - $site_name: The name of the site (preprocessed) wrapped in an anchor linking to the homepage.
  *     Empty when display has been disabled in theme settings.
  * - $site_slogan: The slogan of the site, empty when display has been disabled
  *     in theme settings.
@@ -46,9 +46,9 @@
  *     in theme settings.
  *
  * Navigation:
- * - $primary_menu: The preprocessed $primary_links (array), an array containing primary 
+ * - $primary_menu: The preprocessed $primary_links (array), an array containing primary
  *     navigation links for the site, if they have been configured.
- * - $secondary_menu: The preprocessed $secondary_links (array), an array containing secondary 
+ * - $secondary_menu: The preprocessed $secondary_links (array), an array containing secondary
  *     navigation links for the site, if they have been configured.
  * - $search_box: HTML to display the search box, empty if search has been disabled.
  *
@@ -69,7 +69,7 @@
  * - $content_bottom: A custom region for displaying content above the main content.
  * - $left: region for the left sidebar.
  * - $right: region for the right sidebar.
- * - $tertiary_content: Full width custom region for displaying content between main content 
+ * - $tertiary_content: Full width custom region for displaying content between main content
  *   columns and the footer.
  *
  * Footer/closing data:
@@ -106,31 +106,20 @@
           <?php print $primary_menu; ?> <!-- /primary links menu -->
         </div></div>
       <?php endif; ?>
-      <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
+      <?php if ($linked_site_name): ?>
         <div id="branding">
-          <?php if ($linked_site_logo or $linked_site_name): ?>
+          <?php if ($linked_site_name): ?>
             <?php if ($title): ?>
               <div class="logo-site-name"><strong>
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div>           
-            <?php else: /* Use h1 when the content title is empty */ ?>     
+              </strong></div>
+            <?php else: /* Use h1 when the content title is empty */ ?>
               <h1 class="logo-site-name">
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
              </h1>
             <?php endif; ?>
           <?php endif; ?>
-          <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div> <!-- /slogan -->
-          <?php endif; ?>
         </div> <!-- /branding -->
-      <?php endif; ?>
-      <?php if ($search_box): ?>
-        <div id="search-box"<?php print $toggle_label ?>><?php print $search_box; ?></div> <!-- /search box -->
-      <?php endif; ?>
-      <?php if ($header): ?>
-        <div id="header-region"><?php print $header; ?></div><!-- /header-region -->
       <?php endif; ?>
       <?php if ($admin_welcome): ?>
         <div id="user-date"><?php print $admin_welcome; ?></div> <!-- /admin welcome -->
@@ -157,14 +146,8 @@
           <?php if ($help): print $help; endif; ?>
         </div> <!-- /messages and help -->
       <?php endif; ?>
-      <?php if ($secondary_content): ?>
-        <div id="secondary-content"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
-      <?php endif; ?>
       <div id="columns"><div class="columns-inner clearfix">
         <div id="content-column"><div class="content-inner">
-          <?php if ($content_top): ?>
-            <div id="content-top"><?php print $content_top; ?></div> <!-- /content-top -->
-          <?php endif; ?>
           <div id="main-content">
             <?php if ($title or $tabs): ?>
               <div id="main-content-header">
@@ -176,9 +159,6 @@
             <?php endif; ?>
             <div id="content"><?php print $content; ?></div> <!-- /content -->
           </div> <!-- /main-content -->
-          <?php if ($content_bottom): ?>
-            <div id="content-bottom"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
-          <?php endif; ?>
         </div></div> <!-- /content-column -->
         <?php if ($left): ?>
           <div id="sidebar-first" class="sidebar"><?php print $left; ?></div> <!-- /sidebar-left -->
@@ -187,9 +167,6 @@
           <div id="sidebar-last" class="sidebar"><?php print $right; ?></div> <!-- /sidebar-right -->
         <?php endif; ?>
       </div></div> <!-- /columns -->
-      <?php if ($tertiary_content): ?>
-        <div id="tertiary-content"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
-      <?php endif; ?>
       <?php if ($footer or $footer_message or $feed_icons): ?>
         <div id="footer" class="clearfix">
           <?php if ($footer): ?>
@@ -197,9 +174,6 @@
           <?php endif; ?>
           <?php if ($footer_message): ?>
             <div id="footer-message"><?php print $footer_message; ?></div> <!-- /footer-message -->
-          <?php endif; ?>
-          <?php if ($feed_icons): ?>
-            <div id="feed-icons"><?php print $feed_icons; ?></div>
           <?php endif; ?>
           <?php print $attribution; ?>
         </div> <!-- /footer -->

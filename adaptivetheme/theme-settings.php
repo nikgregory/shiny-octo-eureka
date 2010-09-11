@@ -157,6 +157,11 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
           '1140px' => t('1140px'),
           '1200px' => t('1200px'),
           '1260px' => t('1260px'),
+          '75%' => t('75% Fluid'),
+          '80%' => t('80% Fluid'),
+          '85%' => t('85% Fluid'),
+          '90%' => t('90% Fluid'),
+          '95%' => t('95% Fluid'),
           '100%' => t('100% Fluid'),
         ),
         '#attributes' => array('class' => 'field-layout-width'),
@@ -342,6 +347,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#type' => 'checkbox',
     '#title' => t('Show the home page link in breadcrumbs'),
     '#default_value' => $settings['breadcrumb_home'],
+    '#suffix' => '</div>',
   );
   // Search Settings
   $form['display_settings']['search'] = array(
@@ -409,27 +415,33 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#size' => 8,
     '#maxlength' => 10,
   );
-  // Horizonatal login block
-  if ($settings['horizontal_login_block_enable'] == 'on') {
+  // Login block
+  if ($settings['slider_login_block_enable'] == 'on' || $settings['horizontal_login_block_enable'] == 'on') {
     $form['display_settings']['login_block'] = array(
       '#type' => 'fieldset',
       '#title' => t('Login Block'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    $form['display_settings']['login_block']['horizontal_login_block'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Horizontal Login Block'),
-      '#default_value' => $settings['horizontal_login_block'],
-      '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
-    );
-    $form['display_settings']['login_block']['horizontal_login_block_overlabel'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Use Overlabel JavaScript'),
-      '#default_value' => $settings['horizontal_login_block_overlabel'],
-      '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
-    );
-  } // endif horizontal block settings
+    // Horizonatal login block
+    if ($settings['horizontal_login_block_enable'] == 'on') {
+      $form['display_settings']['login_block']['horizontal_login_block'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Horizontal Login Block'),
+        '#default_value' => $settings['horizontal_login_block'],
+        '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
+      );
+    } // endif horizontal block settings
+    // Slider login block
+    if ($settings['slider_login_block_enable'] == 'on') {
+      $form['display_settings']['login_block']['slider_login_block'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Sliding Login Block'),
+        '#default_value' => $settings['slider_login_block'],
+        '#description' => t('Checking this setting will enable a Sliding style login block - the block will collapse and provide a toggle link to open and close the block (Twitter Style).'),
+      );
+    } // endif slider block settings
+  }
   // Admin settings
   $form['admin_settings']['administration'] = array(
     '#type' => 'fieldset',
