@@ -329,6 +329,7 @@ tr:first-child td.module,
 tr:first-child td.container {
   border-top-width: 0;
 }
+
 /* Forum tables */
 #forum tr td.forum  {
   background-position: 5px 2px;
@@ -336,95 +337,6 @@ tr:first-child td.container {
 }
 #forum div.indent {
   margin-left: .5em;
-}
-
-/* Messages */
-div.messages,
-#block-system-help {
-  padding: 9px;
-  margin: 5px 10px;
-  color: #000;
-  background: #bdf;
-  border-bottom-color: #ace;
-  border-style: solid;
-  border-width: 0 0 0 10px; /* LTR */
-}
-div.warning {
-  background: #fff8bf;
-  border-color: #fe6;
-}
-div.error {
-  background: #ffe8df;
-  border-color:#d52;
-}
-div.error p.error {
-  color: #333;
-}
-div.status {
-  background: #f1ffdf;
-  border-color: #be7;
-}
-table tr.warning {
-  color: #840;
-  background: #fe6;
-}
-div.ok,
-tr.ok,
-table tr.ok td {
-  color: #222;
-  padding: 1em .5em;
-}
-.update tr.ok {
-  color: #360;
-  background: #cf8;
-}
-.update tr.error {
-  color: #fff;
-  background: #e63;
-  border-color: #d52;
-}
-.update tr.warning {
-  color: #840;
-  background: #fe6;
-}
-.update .info {
-  padding: 0 0 0 1em;
-}
-.includes {
-  color: #222;
-}
-
-#block-system-help p:last-child,
-#block-system-help ul:last-child,
-.messages p:last-child,
-.messages ul:last-child {
-  margin-bottom: 0;
-}
-
-.form-item input.error,
-.form-item textarea.error,
-.form-item select.error {
-  border: 2px solid #D52;
-}
-.form-item strong.error em {
-  font-weight: 700;
-  color: #D52;
-  font-size: 1.2em;
-}
-.block-region {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background-color: #F7F8F8;
-  border: 3px dashed #DDD;
-  clear: both;
-  color: #666;
-  font-family: "Lucida Console", Monaco, "DejaVu Sans Mono", monospace;
-  font-size: 1.167em;
-  font-weight: 400;
-  margin-bottom: 12px;
-  margin-top: 4px;
-  padding: 3px 6px 1px;
 }
 
 /* Unpublished */
@@ -702,10 +614,15 @@ ul.secondary li a.active {
 }
 
 /* Action links */
-ul.action-links  {
+.action-links  {
   list-style: none;
-  margin: 10px 0;
+  margin: 25px 0 20px;
   padding: 0;
+}
+.action-links li a {
+  background: url(core-images/add.png) no-repeat left center;
+  padding: 4px 7px 3px 20px;
+  font-weight: 400;
 }
 
 /* Support for admin menu */
