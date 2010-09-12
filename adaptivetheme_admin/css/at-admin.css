@@ -1,15 +1,15 @@
 /**
- * $Id$ 
- * adaptivethemes.com 
+ * $Id$
+ * adaptivethemes.com
  *
  * @file at-admin.css
  * Contains all styles for AT Admin theme.
- * 
+ *
  * TODO: Check accessibility and -khtml styles.
  */
 body,
 body.section-admin {
-  background: #fff;
+  background: #f4f4f4;
   color: #222;
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, "Bitstream Vera Sans", sans-serif;
   margin: 0;
@@ -48,6 +48,7 @@ h1#page-title {
 #page {
   background: #fff;
   min-width: 960px;
+  -moz-box-shadow: 0 0 10px #bbb;
 }
 #main-content {
   padding-top: 10px;
@@ -350,6 +351,13 @@ ul.menu li a {
 }
 
 /* Admin related */
+dl.admin-list {
+  padding: 0 10px;
+}
+div.admin-panel .description {
+  margin:0 0 3px;
+  padding: 8px 4px 2px 8px;
+}
 div.admin-panel {
   -khtml-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -465,8 +473,8 @@ ul.primary li.active a {
   border-bottom-color: #fff;
 }
 ul.secondary {
-  border-bottom: 1px solid #ccc;
-  margin: 1em 0 0;
+  border-bottom: 0;
+  margin: 1em 0 1.25em;
   padding: 0 0 1em;
 }
 ul.secondary li {
@@ -627,6 +635,8 @@ div.messages,
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 /* Forms */
@@ -768,7 +778,7 @@ form#views-add-display-form div.form-item {
   color: #777;
 }
 fieldset {
-  background: #fff url('images/gray-grad2.png') repeat-x left top;
+  background: #fff;
   border: 1px solid #e6e4e4;
   margin: .75em 0;
   padding: .75em;
@@ -965,9 +975,29 @@ tr #acquia-agent-no-search a:visited {
   margin-right: 1%;
   width: 97.9%;
 }
-.action-links a {
-  display: block;
-  background: url(images/plus-sign.png) no-repeat left center;
-  padding-left: 22px;
+
+/* Action links */
+ul.action-links {
+  margin:0;
+  padding:0;
+}
+ul.action-links li a {
+  background: url("images/add.png") no-repeat scroll 2px center #f7f7f7;
+  border: 1px solid #ddd;
+  color: #666;
   font-weight: 700;
+  padding: 2px 10px 3px 20px;
+  -khtml-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+ul.action-links li a:hover,
+ul.action-links li a:focus {
+  color: #333;
+}
+
+/* Themes list */
+.system-themes-list h2 {
+  margin:1em 0 0;
 }

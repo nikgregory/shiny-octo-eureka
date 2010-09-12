@@ -68,7 +68,7 @@
  * @see template_process()
  */
 ?>
-<div id="page">
+<div id="page" class="container">
 
   <?php if (!$in_overlay): //hide in overlay ?>
 

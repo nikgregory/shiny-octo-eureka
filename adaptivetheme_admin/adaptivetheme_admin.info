@@ -97,7 +97,7 @@
   settings[theme_sec_menu_spans]              = 0
   settings[theme_menu_link_spans]             = 0
   settings[layout_method]                     = 0'
-  settings[layout_width]                      = 100%
+  settings[layout_width]                      = 95%
   settings[layout_sidebar_first_width]        = 240
   settings[layout_sidebar_last_width]         = 240
   settings[layout_enable_settings]            = on

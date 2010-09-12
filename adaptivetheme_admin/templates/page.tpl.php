@@ -6,26 +6,24 @@
  * Default theme implementation to display a single Drupal page.
  */
 ?>
-<div id="page"><div id="wrapper">
+<div id="page" class="container">
 
   <?php if (!$in_overlay): //hide in overlay ?>
 
     <div id="header" class="clearfix">
 
-      <?php if ($linked_site_logo || $linked_site_name): ?>
+      <?php if ($linked_site_name): ?>
         <div id="branding">
 
-          <?php if ($linked_site_logo or $linked_site_name): ?>
+          <?php if ($linked_site_name): ?>
             <?php if ($title): ?>
               <div class="logo-site-name"><strong>
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div> <!-- /logo/site name -->
+              </strong></div> <!-- /site name -->
             <?php else: /* Use h1 when the content title is empty */ ?>
               <h1 class="logo-site-name">
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </h1> <!-- /logo/site name -->
+              </h1> <!-- /site name -->
             <?php endif; ?>
           <?php endif; ?>
 
@@ -42,9 +40,10 @@
 
   <?php endif; // end hide in overaly ?>
 
-    <?php print $breadcrumb; ?> <!-- /breadcrumb -->
-    <?php print $messages; ?> <!-- /message -->
-    <?php print render($page['help']); ?> <!-- /help -->
+  <?php print $breadcrumb; ?> <!-- /breadcrumb -->
+  <?php print $messages; ?> <!-- /message -->
+  <?php print render($page['help']); ?> <!-- /help -->
+
 
     <div id="columns"><div class="columns-inner clearfix">
       <div id="content-column"><div class="content-inner">
@@ -81,4 +80,4 @@
 
   <?php endif; // end hide in overaly ?>
 
-</div></div> <!-- /page/wrapper -->
+</div> <!-- /page -->
