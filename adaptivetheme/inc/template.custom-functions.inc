@@ -1,8 +1,8 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file template.custom-functions.inc
+ * @file
+ * template.custom-functions.inc
  */
 
 /**

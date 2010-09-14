@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file user-picture.tpl.php
+ * @file
  * Default theme implementation to present an picture configured for the
  * user's account.
  *
@@ -17,4 +16,4 @@
 ?>
 <?php if (!empty($picture)): ?>
   <div class="user-picture"><?php print $picture; ?></div>
-<?php endif; ?> <!-- /user-picture -->
+<?php endif; ?>

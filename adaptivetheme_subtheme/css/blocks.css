@@ -1,0 +1,60 @@
+/** 
+ * $Id$
+ */
+
+/* Blocks. */
+.block {
+  margin: 0 0 20px;
+}
+
+.block-inner {}
+.block-title {}
+
+.sidebar .block {}
+.sidebar .block h2 {}
+.sidebar .block-inner {}
+
+#sidebar-first .block {}
+#sidebar-first .block h2 {}
+#sidebar-first .block-inner {}
+
+#sidebar-last .block {}
+#sidebar-last .block h2 {}
+#sidebar-last .block-inner {}
+
+.block ul li {
+  margin: 0 0 0 0.5em;
+}
+.block .item-list ul  {
+  margin-left: 1em;
+}
+
+#block-locale-0 ul {
+  margin: 0 0 0 1.5em;
+  padding: 0;
+}
+#block-locale-0 ul li {
+  padding: .35em 0 0;
+}
+#block-node-0 .feed-icon img {
+  padding:10px 0;
+}
+#search-block-form {
+  margin:0;
+}
+#block-user-3 .item-list h3 {
+  font-size:1em;
+}
+
+/* Gpanel blocks */   
+.two-col-2x50  .block {}
+.two-col-33-66 .block {}
+.two-col-66-33 .block {}
+
+.three-col-3x33     .block {}
+.three-col-25-25-50 .block {}
+.three-col-50-25-25 .block {}
+
+.four-col-4x25 .block {}
+.five-col-5x20 .block {}
+.six-col-6x16  .block {}

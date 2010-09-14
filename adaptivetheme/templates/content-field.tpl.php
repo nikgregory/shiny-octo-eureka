@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file content-field.tpl.php
+ * @file
  * Default theme implementation to display the value of a field.
  *
  * Available variables:
@@ -28,33 +27,23 @@
 <?php if (!$field_empty): ?>
 <?php
   $field_classes = array();
-  if (theme_get_setting(cleanup_fields_type)) {
-    $field_classes[] = $field_type_css;
-  }
-  if (theme_get_setting(cleanup_fields_name)) {
-    $field_classes[] = $field_name_css;
-  }
+  $field_classes[] = $field_type_css;
+  $field_classes[] = $field_name_css;
   $classes = implode(' ', $field_classes);
 ?>
-<div class="field<?php print $classes ? ' '. $classes : ''; ?>">
+<div class="field <?php print $classes; ?>">
   <?php if ($label_display == 'above'): ?>
     <h3 class="label"><?php print t($label); ?></h3>
   <?php elseif ($label_display =='inline'): ?>
     <h3 class="label inline"><?php print t($label); ?>:&nbsp;</h3>
   <?php endif; ?>
-  <?php
-    $count = 1;
-    foreach ($items as $delta => $item):
-      if (!$item['empty']): ?>
-        <?php theme_get_setting(cleanup_fields_zebra) ? $zebra = $count % 2 ? 'odd' : 'even' : $zebra = '' ;?>
-        <?php if ($label_display == 'inline'): ?>
-          <span class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></span>
-        <?php else: ?>
-          <div class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></div>
-        <?php endif; ?>
-      <?php $count++;
-      endif;
-    endforeach;
-  ?>
+  <?php $count = 1; foreach ($items as $delta => $item): if (!$item['empty']): ?>
+    <?php $zebra = $count % 2 ? 'odd' : 'even';?>
+    <?php if ($label_display == 'inline'): ?>
+      <span class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></span>
+    <?php else: ?>
+      <div class="item<?php print $zebra ? ' '. $zebra : ''; ?>"><?php print $item['view']; ?></div>
+    <?php endif; ?>
+  <?php $count++; endif; endforeach; ?>
 </div>
-<?php endif; ?> <!-- /content-field -->
+<?php endif; ?>

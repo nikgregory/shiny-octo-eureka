@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file page.tpl.php
+ * @file
  * Theme implementation to display a single Drupal page for Genesis Subtheme.
  *
  * Available variables:
@@ -94,9 +93,8 @@
   <?php print $scripts; ?>
 </head>
 <body id="at-admin" class="<?php print $section_class . $classes; ?>">
-  <div id="wrapper">
-    <div id="skip-nav" class="element-invisible">
-      <!-- NEVER use display:none to hide skip links - see http://drupal.org/node/472572 -->
+  <div id="page" class="container">
+    <div id="skip-nav" class="show-on-focus">
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
     <div id="header"><div class="header-inner clearfix">
@@ -131,8 +129,7 @@
         </div> <!-- /admin user link -->
       <?php endif; ?>
     </div></div> <!-- /header -->
-    <div id="shadow"></div>
-    <div id="container">
+    <div class="content-wrapper">
       <?php if ($breadcrumb): ?>
         <div id="breadcrumb">
           <h2 class="element-invisible"><?php print t('You are here:'); ?></h2>
@@ -179,7 +176,7 @@
         </div> <!-- /footer -->
       <?php endif; ?>
     </div> <!-- /container -->
-    <?php print $closure ?>
-  </div> <!-- /wrapper -->
+  </div> <!-- /page -->
+<?php print $closure ?>
 </body>
 </html>

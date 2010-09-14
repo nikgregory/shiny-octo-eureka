@@ -1,11 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file template.preprocess-page.inc
- */
-
-/**
+ * @file
  * Override or insert variables into page templates.
  *
  * @param $vars
@@ -13,7 +9,6 @@
  * @param $hook
  *   The name of the theme function being called.
  */
-
 global $theme, $theme_info, $language;
 
 if($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user') {
@@ -22,41 +17,37 @@ if($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user') {
   $vars['title'] = drupal_set_title(t('User Login'));
 }
 
-// Don't display empty help from node_help().
+if ($vars['content_front'] && $vars['is_front']) {
+  $vars['content'] = $vars['content_front'];
+}
+
 if ($vars['help'] == "<div class=\"help\"> \n</div>") {
   $vars['help'] = '';
 }
 
-// Remove sidebars if disabled e.g., for Panels.
 if (!$vars['show_blocks']) {
   $vars['left'] = '';
   $vars['right'] = '';
 }
 
-// Skip navigation class.
 if (theme_get_setting('skip_navigation_display') == 'hide') {
   $vars['skip_nav_class'] = 'element-invisible';
 }
-
 if (theme_get_setting('skip_navigation_display') == 'show') {
   $vars['skip_nav_class'] = 'show';
 }
-
 if (theme_get_setting('skip_navigation_display') == 'focus') {
   $vars['skip_nav_class'] = 'show-on-focus';
 }
 
-// Set variables for the logo and site name for easy printing in templates.
 $vars['logo_alt_text']    = check_plain(variable_get('site_name', '')) .' '. t('logo');
 $vars['logo_img']         = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'" title="'. t('Home page') .'"/>' : '';
 $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'), 'html' => TRUE)) : '';
 $vars['linked_site_name'] = $vars['site_name'] ? l($vars['site_name'], '<front>', array('attributes' => array('rel' => 'home'), 'title' => t('Home page'))) : '';
 
-// Set variables for the primary and secondary links.
 $primary_menu_links = $vars['primary_links'];
 $secondary_menu_links = $vars['secondary_links'];
 
-// Standard primary and secondary links.
 if (!empty($primary_menu_links)) {
   $vars['primary_menu'] = theme('links', $primary_menu_links, array('class' => 'primary-links clearfix'));
 }
@@ -64,7 +55,6 @@ if (!empty($secondary_menu_links)) {
   $vars['secondary_menu'] = theme('links', $secondary_menu_links, array('class' => 'secondary-links clearfix'));
 }
 
-// Output the primary and secondary menus as regular menu trees.
 if (!empty($primary_menu_links) && theme_get_setting('primary_links_tree')) {
   $primary_tree_menu = menu_tree_all_data('primary-links');
   $vars['primary_menu'] = menu_tree_output($primary_tree_menu);
@@ -74,90 +64,44 @@ if (!empty($secondary_menu_links) && theme_get_setting('secondary_links_tree')) 
   $vars['secondary_menu'] = menu_tree_output($secondary_tree_menu);
 }
 
-// Attribution.
 $vars['attribution'] = "<div id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></div>"  ;
 
-// Body classes - manipulate for our own ends, in Drupal 7 we can drop most of these shenanagins.
 $classes = explode(' ', $vars['body_classes']);
-
-// Section class - use the path alias otherwise all nodes will be in "section-node".
-if (theme_get_setting('cleanup_classes_section')) {
-  $path_alias = drupal_get_path_alias($_GET['q']);
-  if (!$vars['is_front']) {
-    list($section, ) = explode('/', $path_alias, 2);
-    $classes[] = safe_string('section-'. $section);
-  }
-}
-
-// Unset Drupals page-arg(0) class.
 if ($index = array_search(preg_replace('![^abcdefghijklmnopqrstuvwxyz0-9-_]+!s', '', 'page-'. drupal_strtolower(arg(0))), $classes)) {
   unset($classes[$index]);
 }
-
-// Replace "node-type" with the more semantic "article-type".
-$classes = str_replace('node-type-', 'article-type-', $classes);
-
-// Replace left and right with first and last - better support for RTL.
+$classes = str_replace('node-type-', 'page-type-', $classes);
 $classes = str_replace('sidebar-left', 'sidebar-first', $classes);
 $classes = str_replace('sidebar-right', 'sidebar-last', $classes);
-
-// .front and .not-front classes.
-if (in_array('front', $classes)) {
-  theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('front', '', $classes);
-}
-if (in_array('not-front', $classes)) {
-  theme_get_setting('cleanup_classes_front') ? '' : $classes = str_replace('not-front', '', $classes);
-}
-
-// User status classes.
-if (in_array('logged-in', $classes)) {
-  theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('logged-in', '', $classes);
-}
-if (in_array('not-logged-in', $classes)) {
-  theme_get_setting('cleanup_classes_user_status') ? '' : $classes = str_replace('not-logged-in', '', $classes);
-}
-
-// Article type classes.
-if (in_array('article-type-'. $vars['node']->type, $classes)) {
-  theme_get_setting('cleanup_classes_node_type') ? '' : $classes = str_replace('article-type-'. $vars['node']->type, '', $classes);
-}
-
+$path_alias = drupal_get_path_alias($_GET['q']);
 if (!$vars['is_front']) {
-  // Replacement for Drupals page-arg(0) class, instead we print page-$normal_page.
-  if (theme_get_setting('cleanup_classes_normal_path')) {
+  list($section, ) = explode('/', $path_alias, 2);
+  $classes[] = safe_string('section-'. $section);
+}
+if (theme_get_setting('extra_page_classes')) {
+  if (!$vars['is_front']) {
     $normal_path = drupal_get_normal_path($_GET['q']);
     $classes[] = safe_string('page-'. $normal_path);
-  }
-  // AT can use this class to restyle the blocks page.
-  if (arg(2) == 'block') {
-    $classes[] = 'page-block';
-  }
-  // Add extra classes for node add, edit and delete pages.
-  if (theme_get_setting('cleanup_classes_add_edit_delete')) {
+    if (arg(2) == 'block') {
+      $classes[] = 'page-block';
+    }
     if (arg(0) == 'node') {
       if (arg(1) == 'add') {
-        $classes[] = 'article-add'; // Add .node-add class.
+        $classes[] = 'article-add';
       }
       elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
         $classes[] = 'article-'. arg(2);
       }
     }
   }
-}
-
-// Language specific body class.
-if (theme_get_setting('cleanup_classes_language')) {
   if (function_exists('locale')) {
-    $classes[] = 'lang-'. $language->language;
+  $classes[] = 'lang-'. $language->language;
   }
 }
-
-// $classes is the varaible that holds the page classes, printed in page tpl files.
 $vars['classes'] = trim(implode(' ', $classes));
 
-// Layout settings - set the page width and layout method.
 if (theme_get_setting('layout_enable_settings') == 'on') {
-  $vars['at_layout_width'] = '#container{width:'. theme_get_setting('layout_width') .';}';
+  $vars['at_layout_width'] = 'div.container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');
   $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
   $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
@@ -211,22 +155,10 @@ if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['layout_settings'] = '<style type="text/css">'. $vars['at_layout_width'] . $vars['at_layout'] .'</style>';
 }
 
-// Show $theme_info output using krumo.
-if (module_exists('devel') && theme_get_setting('show_theme_info') == 1) {
-  dsm($theme_info); /* Use dsm, kpr messes up IE */
-}
-
-// Check whether help is disabled.
-if (theme_get_setting('at_admin_hide_help')) {
-  unset($vars['help']);
-}
-
-// Hide search theme form label
 if ($vars['search_box'] && theme_get_setting('display_search_form_label') == 0) {
   $vars['toggle_label'] = ' class="hide-label"';
 }
 
-// Admin user links.
 if ($vars['logged_in'] && theme_get_setting('at_user_menu') == 1) {
   if (!function_exists(admin_menu_perm)) {
     $admin_user_links[] = l(t('Create content'), 'node/add');

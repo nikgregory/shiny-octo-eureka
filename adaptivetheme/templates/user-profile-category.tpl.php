@@ -1,8 +1,7 @@
-<?php
-// $Id$
+<?php // $Id$
 
 /**
- * @file user-profile-category.tpl.php
+ * @file
  * Default theme implementation to present profile categories (groups of
  * profile items).
  *
@@ -26,11 +25,10 @@
  */
 ?>
 <div class="<?php print safe_string($title); ?>">
-<?php if ($title) : ?>
-  <h3><?php print $title; ?></h3>
-<?php endif; ?>
-
-<dl<?php print $attributes; ?>>
-  <?php print $profile_items; ?>
-</dl>
+  <?php if ($title) : ?>
+    <h3><?php print $title; ?></h3>
+  <?php endif; ?>
+  <dl<?php print $attributes; ?>>
+    <?php print $profile_items; ?>
+  </dl>
 </div>

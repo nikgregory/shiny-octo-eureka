@@ -28,12 +28,4 @@
  * @see genesis_preprocess_block()
  */
 ?>
-<div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
-  <div class="block-inner">
-    <?php if ($block->subject): ?>
-      <h2 class="<?php print $title_classes; ?>"><?php print $block->subject; ?></h2>
-    <?php endif; ?>
-    <div class="content"><?php print $block->content ?></div>
-    <?php print $edit_links; ?>
-  </div>
-</div>
+<?php print $block->content ?>

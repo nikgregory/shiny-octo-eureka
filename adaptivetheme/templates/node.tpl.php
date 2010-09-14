@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file node.tpl.php
+ * @file
  * Theme implementation to display a node.
  *
  * Available variables:
@@ -57,29 +56,21 @@
  * @see genesis_preprocess_node()
  */
 ?>
-<div<?php print $article_id ? ' id="'. $article_id .'"' : ''; ?> class="<?php print $classes; ?>">
-
+<div id="<?php print $article_id; ?>" class="<?php print $classes; ?>">
   <?php if (!$page): ?>
-    <h2<?php print $title_classes ? ' class="'. $title_classes .'"' : ''; ?>>
+    <h2 class="<?php print $title_classes; ?>">
       <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
       <?php print $unpublished; ?>
     </h2>
   <?php endif; ?>
-
   <?php if ($submitted): ?>
     <p class="submitted"><?php print $submitted; ?></p>
   <?php endif; ?>
-
   <?php if ($picture): print $picture; endif; ?>
-
   <?php print $content; ?>
-
   <?php if ($terms): print $terms; endif; ?>
-
   <?php if ($links): print $links; endif; ?>
-
   <?php if ($article_aside && !$teaser): ?>
     <div id="article-aside" class="aside"><?php print $article_aside; ?></div>
   <?php endif; ?>
-
-</div> <!-- /article -->
+</div>

@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file comment.tpl.php
+ * @file
  * Default theme implementation for comments.
  *
  * Available variables:
@@ -36,29 +35,20 @@
  */
 ?>
 <div class="<?php print $classes; ?>">
-
   <?php if ($title): ?>
-    <h3<?php print $title_classes ? ' class="'. $title_classes .'"' : ''; ?>>
+    <h3 class="<?php print $title_classes; ?>">
       <?php print $title; ?>
-      <?php if ($comment->new): ?>
-        <span class="new"><?php print $new; ?></span>
-      <?php endif; ?>
+      <?php if ($comment->new): ?><span class="new"><?php print $new; ?></span><?php endif; ?>
       <?php print $unpublished; ?>
     </h3>
   <?php endif; ?>
-
   <?php print $picture; ?>
-
   <?php if ($submitted): ?>
     <p class="submitted"><?php print $submitted; ?></p>
   <?php endif; ?>
-
   <?php print $content; ?>
-
   <?php if ($signature): ?>
     <div class="user-signature"><?php print $signature; ?></div>
   <?php endif; ?>
-
   <?php if ($links): print $links; endif; ?>
-
-</div> <!-- /comment -->
+</div>

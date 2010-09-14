@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file page.tpl.php
+ * @file
  * Theme implementation to display a single Drupal page.
  *
  * Available variables:
@@ -96,25 +95,21 @@
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>">
-  <div id="container">
+  <div id="page" class="container">
 
     <div id="skip-nav" class="<?php print $skip_nav_class; ?>">
-      <!-- To adjust the display of the skip link see the Advanced theme settings (General settings), and never use display:none! -->
       <a href="#main-content"><?php print t('Skip to main content'); ?></a>
     </div>
-
-    <?php // Add support for Admin module header, http://drupal.org/project/admin. ?>
-    <?php if (!empty($admin)) print $admin; ?>
 
     <?php if (!empty($admin_user_links)): ?>
       <div id="user-menu" class="clearfix">
         <h2 class="element-invisible"><?php print t('User menu'); ?></h2>
         <?php print $admin_user_links; ?>
-      </div> <!-- /admin user link -->
+      </div>
     <?php endif; ?>
 
     <?php if ($leaderboard): ?>
-      <div id="leaderboard"><?php print $leaderboard; ?></div> <!-- /leaderboard -->
+      <div id="leaderboard"><?php print $leaderboard; ?></div>
     <?php endif; ?>
 
     <div id="header" class="clearfix">
@@ -127,57 +122,55 @@
               <div class="logo-site-name"><strong>
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div> <!-- /logo/site name -->
-            <?php else: /* Use h1 when the content title is empty */ ?>
+              </strong></div>
+            <?php else: ?>
               <h1 class="logo-site-name">
                 <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
                 <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </h1> <!-- /logo/site name -->
+              </h1>
             <?php endif; ?>
           <?php endif; ?>
 
           <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div> <!-- /slogan -->
+            <div id="site-slogan"><?php print $site_slogan; ?></div>
           <?php endif; ?>
 
         </div> <!-- /branding -->
       <?php endif; ?>
 
       <?php if ($search_box): ?>
-        <div id="search-box"<?php print $toggle_label ?>><?php print $search_box; ?></div> <!-- /search box -->
+        <div id="search-box"<?php print $toggle_label ?>><?php print $search_box; ?></div>
       <?php endif; ?>
 
       <?php if ($header): ?>
-        <div id="header-region"><?php print $header; ?></div> <!-- /header region -->
+        <div id="header-region"><?php print $header; ?></div>
       <?php endif; ?>
 
     </div> <!-- /header -->
 
-    <?php if (!empty($menu_bar)): ?>
-      <div id="menu-bar">
-        <?php print $menu_bar; ?>
-      </div> <!-- /menu bar -->
-    <?php endif; ?>
-
-    <?php if (!empty($primary_menu)): ?>
-      <div id="primary" class="nav">
+    <?php if ($menu_bar || $primary_menu): ?>
+      <div id="primary-menu" class="nav">
         <h2 class="element-invisible"><?php print t('Main Menu'); ?></h2>
-        <?php print $primary_menu; ?>
-      </div> <!-- /primary link menu -->
+        <?php if ($menu_bar) { ?>
+          <?php print $menu_bar; ?>
+        <?php } else if ($primary_menu) { ?>
+          <?php print $primary_menu; ?>
+        <?php } ?>
+      </div>
     <?php endif; ?>
 
-    <?php if (!empty($secondary_menu)): ?>
-      <div id="secondary" class="nav">
+    <?php if ($secondary_menu): ?>
+      <div id="secondary-menu" class="nav">
         <h2 class="element-invisible"><?php print t('Secondary Menu'); ?></h2>
         <?php print $secondary_menu; ?>
-      </div> <!-- /secondary link menu -->
+      </div>
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
       <div id="breadcrumb">
         <h2 class="element-invisible"><?php print t('You are here:'); ?></h2>
         <?php print $breadcrumb; ?>
-      </div> <!-- /breadcrumb -->
+      </div>
     <?php endif; ?>
 
     <?php if ($messages or $help): ?>
@@ -185,11 +178,11 @@
         <h2 class="element-invisible"><?php print t('System Messages'); ?></h2>
         <?php if ($messages): print $messages; endif; ?>
         <?php if ($help): print $help; endif; ?>
-      </div> <!-- /messages/help -->
+      </div>
     <?php endif; ?>
 
     <?php if ($secondary_content): ?>
-      <div id="secondary-content"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
+      <div id="secondary-content"><?php print $secondary_content; ?></div>
     <?php endif; ?>
 
     <div id="columns"><div class="columns-inner clearfix">
@@ -197,11 +190,11 @@
       <div id="content-column"><div class="content-inner">
 
         <?php if ($mission): ?>
-          <div id="mission"><?php print $mission; ?></div> <!-- /mission -->
+          <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
 
         <?php if ($content_top): ?>
-          <div id="content-top"><?php print $content_top; ?></div> <!-- /content-top -->
+          <div id="content-top"><?php print $content_top; ?></div>
         <?php endif; ?>
 
         <div id="main-content">
@@ -209,14 +202,12 @@
           <?php if ($title or $tabs): ?>
             <div id="main-content-header">
               <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
-              <?php if ($tabs): ?>
-                <div class="local-tasks"><?php print $tabs; ?></div>
-              <?php endif; ?>
+              <?php if ($tabs): ?><div class="local-tasks"><?php print $tabs; ?></div><?php endif; ?>
             </div>
           <?php endif; ?>
 
           <?php if ($content_aside): ?>
-            <div id="content-aside"><?php print $content_aside; ?></div> <!-- /content-aside -->
+            <div id="content-aside"><?php print $content_aside; ?></div>
           <?php endif; ?>
 
           <div id="content"><?php print $content; ?></div>
@@ -224,44 +215,44 @@
         </div> <!-- /main-content -->
 
         <?php if ($content_bottom): ?>
-          <div id="content-bottom"><?php print $content_bottom; ?></div> <!-- /content-bottom -->
+          <div id="content-bottom"><?php print $content_bottom; ?></div>
         <?php endif; ?>
 
       </div></div> <!-- /content-column -->
 
       <?php if ($left): ?>
-        <div id="sidebar-first" class="sidebar"><?php print $left; ?></div> <!-- /sidebar-first -->
+        <div id="sidebar-first" class="sidebar"><?php print $left; ?></div>
       <?php endif; ?>
 
       <?php if ($right): ?>
-        <div id="sidebar-last" class="sidebar"><?php print $right; ?></div> <!-- /sidebar-last -->
+        <div id="sidebar-last" class="sidebar"><?php print $right; ?></div>
       <?php endif; ?>
 
     </div></div> <!-- /columns -->
 
     <?php if ($tertiary_content): ?>
-      <div id="tertiary-content"><?php print $tertiary_content; ?></div> <!-- /tertiary-content -->
+      <div id="tertiary-content"><?php print $tertiary_content; ?></div>
     <?php endif; ?>
 
     <?php if ($footer or $footer_message or $feed_icons): ?>
       <div id="footer">
 
         <?php if ($footer): ?>
-          <div id="footer-region"><?php print $footer; ?></div> <!-- /footer-region -->
+          <div id="footer-region"><?php print $footer; ?></div>
         <?php endif; ?>
 
         <?php if ($footer_message): ?>
-          <div id="footer-message"><?php print $footer_message; ?></div> <!-- /footer-message -->
+          <div id="footer-message"><?php print $footer_message; ?></div>
         <?php endif; ?>
 
         <?php if ($feed_icons): ?>
-          <div id="feed-icons"><?php print $feed_icons; ?></div> <!-- /feed icons -->
+          <div id="feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
 
       </div> <!-- /footer -->
     <?php endif; ?>
 
-  </div> <!-- /container -->
+  </div> <!-- /page -->
 
   <?php print $closure ?>
 

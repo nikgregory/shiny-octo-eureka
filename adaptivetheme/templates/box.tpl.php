@@ -1,8 +1,7 @@
 <?php // $Id$
-// adaptivethemes.com
 
 /**
- * @file box.tpl.php
+ * @file
  * Theme implementation to display a box.
  *
  * Available variables:
@@ -17,4 +16,4 @@
     <h2 class="box-title title"><?php print $title ?></h2>
   <?php endif; ?>
   <?php print $content ?>
-</div></div> <!-- /box -->
+</div></div>
