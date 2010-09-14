@@ -18,7 +18,7 @@ th {
 caption,
 th,
 td {
-  text-align:left; /* LTR */
+  text-align:left;
 }
 thead th {
   border-bottom:1px solid #EEE;
