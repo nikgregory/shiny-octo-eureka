@@ -8,11 +8,11 @@ if (db_is_active()) {
   include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');
 }
 
-/*
-if (theme_get_setting('style_enable_schemes') == 'on') {
- drupal_add_css(drupal_get_path('theme', 'adaptivetheme_subtheme') .'/css/'. get_at_styles(), 'theme');
+
+if (theme_get_setting('styles_enable_schemes') == 'on') {
+ drupal_add_css(drupal_get_path('theme', 'adaptivetheme_subtheme') .'/css/schemes/'. get_at_styles(), 'theme');
 }
-*/
+
 
 /**
  * Override or insert variables into all templates.
