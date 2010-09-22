@@ -33,7 +33,7 @@
     <?php foreach ($rows as $count => $row): ?>
       <tr class="<?php print implode(' ', $row_classes[$count]); ?>">
         <?php foreach ($row as $field => $content): ?>
-          <td class=<?php print $fields[$field]; ?>">
+          <td class="<?php print $fields[$field]; ?>">
             <?php print $content; ?>
           </td>
         <?php endforeach; ?>
