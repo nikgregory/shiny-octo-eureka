@@ -37,6 +37,8 @@ if (theme_get_setting(cleanup_views_display_id)) {
 if (theme_get_setting(cleanup_views_dom_id)) {
   $classes[] = 'view-dom-id-' . $dom_id;
 }
+// User speicified classes if any.
+$classes[] = $css_class;
 //Skinr module classes.
 $classes[] = $skinr;
 if ($classes) {
