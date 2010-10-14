@@ -50,11 +50,11 @@
         <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php if ($primary_local_tasks || $secondary_local_tasks || $action_links): ?>
-          <nav id="tasks">
+          <div id="tasks">
             <?php if ($primary_local_tasks): ?><ul class="tabs primary"><?php print render($primary_local_tasks); ?></ul><?php endif; ?> <!-- /primary local tasks -->
             <?php if ($secondary_local_tasks): ?><ul class="tabs secondary"><?php print render($secondary_local_tasks); ?></ul><?php endif; ?> <!-- /secondary local tasks -->
             <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?> <!-- /action links -->
-          </nav>
+          </div>
         <?php endif; ?>
         <div id="content">
           <?php print render($page['content']); ?>
