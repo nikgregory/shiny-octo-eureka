@@ -754,6 +754,10 @@ input.form-radio {
   padding-bottom:0.5em;
   color: #666;
 }
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 1.9em;
+}
 textarea,
 input {
   font: 1em Verdana, Arial, "Bitstream Vera Sans", sans-serif;
