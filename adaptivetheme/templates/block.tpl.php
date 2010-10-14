@@ -33,7 +33,7 @@
     <?php if ($block->subject): ?>
       <h2 class="<?php print $title_classes; ?>"><?php print $block->subject; ?></h2>
     <?php endif; ?>
-    <div class="content"><?php print $block->content ?></div>
+    <div class="<?php print $content_classes; ?>"><?php print $block->content ?></div>
     <?php print $edit_links; ?>
   </div>
 </div>

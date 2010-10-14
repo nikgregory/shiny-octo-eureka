@@ -10,6 +10,10 @@
 .block-inner {}
 .block-title {}
 
+.mini-panel-title {
+  margin: 0 10px;
+}
+
 .sidebar .block {}
 .sidebar .block h2 {}
 .sidebar .block-inner {}
@@ -46,15 +50,21 @@
   font-size:1em;
 }
 
-/* Gpanel blocks */   
-.two-col-2x50  .block {}
-.two-col-33-66 .block {}
-.two-col-66-33 .block {}
+/* Gpanel blocks */
+.gpanel h2 {}
+.gpanel .block-inner {}
+.gpanel .block-content {}
+#main-content .gpanel h2 {}
+#main-content .gpanel .block-inner {}
+#main-content .gpanel .block-content {}
+#footer .block h2 {}
+#footer .block .block-inner {}
+#footer .block .block-content {}
 
-.three-col-3x33     .block {}
-.three-col-25-25-50 .block {}
-.three-col-50-25-25 .block {}
-
-.four-col-4x25 .block {}
-.five-col-5x20 .block {}
-.six-col-6x16  .block {}
+/* Block wrapper for Mini Panels */
+.block-panels_mini {}
+.block-panels_mini .block-inner {}
+.block-panels_mini .block-content {}
+.block-panels_mini .mini-panel-title {
+  margin: 0 10px;
+}

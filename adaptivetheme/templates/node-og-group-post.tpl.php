@@ -54,26 +54,29 @@
  * @see genesis_preprocess_node()
  */
 ?>
-<div id="<?php print $article_id; ?>" class="<?php print $classes; ?> clearfix">
-  <?php if (!$page): ?>
-   <h2 class="<?php print $title_classes; ?>">
-     <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-     <?php print $unpublished; ?>
-   </h2>
-  <?php endif; ?>
-  <?php if ($article_aside && !$teaser): ?>
-    <div id="article-aside" class="aside"><?php print $article_aside; ?></div>
-  <?php endif; ?>
-  <?php if ($submitted): ?>
-    <p class="submitted"><?php print $submitted; ?></p>
-  <?php endif; ?>
-  <?php if ($picture): print $picture; endif; ?>
-  <?php print $content; ?>
-  <?php
-    if ($node->og_groups && $page) {
-      print '<div class="groups">'. t('Groups'). ': ';
-      print '<div class="links">'.  $og_links['view']. '</div></div>';
-    }
-  ?>
-  <?php if ($links): print $links; endif; ?>
+<div id="<?php print $article_id; ?>" class="<?php print $classes; ?>">
+  <div class="article-inner clearfix">
+    <?php if (!$page): ?>
+      <h2 class="<?php print $title_classes; ?>">
+        <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
+        <?php print $unpublished; ?>
+      </h2>
+    <?php endif; ?>
+    <?php if ($article_aside && !$teaser): ?>
+      <div id="article-aside" class="aside"><?php print $article_aside; ?></div>
+    <?php endif; ?>
+    <?php if ($submitted): ?>
+      <p class="submitted"><?php print $submitted; ?></p>
+    <?php endif; ?>
+    <?php if ($picture): print $picture; endif; ?>
+    <?php print $content; ?>
+    <?php if ($node->og_groups && $page): ?>
+      <div class="groups">
+        <h3 class="groups-title"><?php print t('Groups') ;?></h3>
+        <div class="groups-links"><?php print $og_links['view'] ;?></div>
+      </div>
+    <?php endif; ?>
+    <?php if ($links): print $links; endif; ?>
+    <?php if ($terms): print $terms; endif; ?>
+  </div>
 </div>

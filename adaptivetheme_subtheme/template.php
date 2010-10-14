@@ -9,7 +9,7 @@ if (db_is_active()) {
 }
 
 
-if (theme_get_setting('styles_enable_schemes') == 'on') {
+if (theme_get_setting('style_enable_schemes') == 'on') {
  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_subtheme') .'/css/schemes/'. get_at_styles(), 'theme');
 }
 

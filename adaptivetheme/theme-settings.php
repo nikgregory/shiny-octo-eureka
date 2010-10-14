@@ -465,7 +465,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     '#default_value' => $settings['extra_block_classes'],
     '#description' => t('Adds a bunch of new classes to blocks.'),
   );
-  $form['themedev']['dev']['classes']['extra_block_classes'] = array(
+  $form['themedev']['dev']['classes']['extra_item_list_classes'] = array(
     '#type' => 'checkbox',
     '#title' => 'Print extra item-list classes',
     '#default_value' => $settings['extra_item_list_classes'],

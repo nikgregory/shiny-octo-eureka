@@ -5,18 +5,21 @@
 #header {
   clear: both;
 }
+
 #branding {
   float: left;
   width: 300px;
 }
 
-h1.logo-site-name {
+h1.brand-elements {
   font-size:1em;
 }
-.logo-site-name span {
+.brand-elements span {
   display: block;
 }
-
+#logo {
+  float: left;
+}
 #site-name {
   font-size: 2em;
   font-weight: 700;
@@ -142,134 +145,6 @@ span.search-info-user {}
 span.search-info-date {}
 span.search-info-comment {}
 span.search-info-upload  {}
-
-/* Gpanel Regions */
-.gpanel {}
-.gpanel .region {}
-.gpanel .region .inner {}
-.gpanel .first  .inner {}
-.gpanel .last   .inner {}
-
-/* 2 column */
-.two-col-2x50 {}
-.two-col-2x50 .region {}
-.two-col-2x50 .region .inner {}
-.two-col-2x50 .col-1  {}
-.two-col-2x50 .col-2  {}
-.two-col-2x50 .col-1 .inner {}
-.two-col-2x50 .col-2 .inner {}
-
-.two-col-33-66 {}
-.two-col-33-66 .region {}
-.two-col-33-66 .region .inner {}
-.two-col-33-66 .col-1 {}
-.two-col-33-66 .col-2 {}
-.two-col-33-66 .col-1 .inner {}
-.two-col-33-66 .col-2 .inner {}
-
-.two-col-66-33 {}
-.two-col-66-33 .region {}
-.two-col-66-33 .region .inner {}
-.two-col-66-33 .col-1 {}
-.two-col-66-33 .col-2 {}
-.two-col-66-33 .col-1 .inner {}
-.two-col-66-33 .col-2 .inner {}
-
-/* 3 column */
-.three-col-3x33 {}
-.three-col-3x33 .region {}
-.three-col-3x33 .region .inner {}
-.three-col-3x33 .col-1 {}
-.three-col-3x33 .col-2 {}
-.three-col-3x33 .col-3 {}
-.three-col-3x33 .col-1 .inner {}
-.three-col-3x33 .col-2 .inner {}
-.three-col-3x33 .col-3 .inner {}
-
-.three-col-25-25-50 {}
-.three-col-25-25-50 .region {}
-.three-col-25-25-50 .region .inner {}
-.three-col-25-25-50 .col-1 {}
-.three-col-25-25-50 .col-2 {}
-.three-col-25-25-50 .col-3 {}
-.three-col-25-25-50 .col-1 .inner {}
-.three-col-25-25-50 .col-2 .inner {}
-.three-col-25-25-50 .col-3 .inner {}
-
-.three-col-50-25-25 {}
-.three-col-50-25-25 .region {}
-.three-col-50-25-25 .region .inner {}
-.three-col-50-25-25 .col-1 {}
-.three-col-50-25-25 .col-2 {}
-.three-col-50-25-25 .col-3 {}
-.three-col-50-25-25 .col-1 .inner {}
-.three-col-50-25-25 .col-2 .inner {}
-.three-col-50-25-25 .col-3 .inner {}
-
-/* 4 column */
-.four-col-4x25 {}
-.four-col-4x25 .region {}
-.four-col-4x25 .region .inner {}
-.four-col-4x25 .section-1 {}
-.four-col-4x25 .section-2 {}
-.four-col-4x25 .col-1 {}
-.four-col-4x25 .col-2 {}
-.four-col-4x25 .col-3 {}
-.four-col-4x25 .col-4 {}
-.four-col-4x25 .col-1 .inner {}
-.four-col-4x25 .col-2 .inner {}
-.four-col-4x25 .col-3 .inner {}
-.four-col-4x25 .col-4 .inner {}
-
-/* 5 column */
-.five-col-5x20 {}
-.five-col-5x20 .region {}
-.five-col-5x20 .region .inner {}
-.five-col-5x20 .col-1 {}
-.five-col-5x20 .col-2 {}
-.five-col-5x20 .col-3 {}
-.five-col-5x20 .col-4 {}
-.five-col-5x20 .col-5 {}
-.five-col-5x20 .col-1 .inner {}
-.five-col-5x20 .col-2 .inner {}
-.five-col-5x20 .col-3 .inner {}
-.five-col-5x20 .col-4 .inner {}
-.five-col-5x20 .col-5 .inner {}
-
-/* 6 column */
-.six-col-6x16 {}
-.six-col-6x16 .region {}
-.six-col-6x16 .region .inner {}
-.six-col-6x16 .col-1 {}
-.six-col-6x16 .col-2 {}
-.six-col-6x16 .col-3 {}
-.six-col-6x16 .col-4 {}
-.six-col-6x16 .col-5 {}
-.six-col-6x16 .col-6 {}
-.six-col-6x16 .col-1 .inner {}
-.six-col-6x16 .col-2 .inner {}
-.six-col-6x16 .col-3 .inner {}
-.six-col-6x16 .col-4 .inner {}
-.six-col-6x16 .col-5 .inner {}
-.six-col-6x16 .col-6 .inner {}
-
-/* AT Panels */
-.panel-col {}
-.panel-col .inside {}
-.panel-pane {}
-
-.sixcol-6x16 {}
-.fivecol-5x20 {}
-.fourcol-4x25 {}
-
-.threecol-at-25-25-50 {}
-.threecol-at-50-25-25 {}
-
-.twocol-at-33-66 {}
-.twocol-at-66-33 {}
-
-.threecol-at-stacked-inset {}
-.twocol-at-stacked-inset {}
 
 /* Button Wrappers */
 span.button-wrapper {} /* Outer wrapper */

@@ -29,7 +29,7 @@ function adaptivetheme_subtheme_settings($saved_settings) {
 
   // You can add settings here - the example uses the style_schemes settings.
   // Style schemes
-  if ($settings['styles_enable_schemes'] == 'on') {
+  if ($settings['style_enable_schemes'] == 'on') {
     $form['style'] = array(
       '#type' => 'fieldset',
       '#title' => t('Style settings'),

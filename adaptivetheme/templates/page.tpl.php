@@ -114,27 +114,21 @@
 
     <div id="header" class="clearfix">
 
-      <?php if ($linked_site_logo or $linked_site_name or $site_slogan): ?>
+      <?php if ($linked_site_logo || $linked_site_name || $site_slogan): ?>
         <div id="branding">
-
-          <?php if ($linked_site_logo or $linked_site_name): ?>
-            <?php if ($title): ?>
-              <div class="logo-site-name"><strong>
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
-                <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </strong></div>
-            <?php else: ?>
-              <h1 class="logo-site-name">
-                <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
-                <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              </h1>
-            <?php endif; ?>
+          <?php if ($title): ?>
+            <div class="brand-elements"><strong>
+              <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
+              <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
+              <?php if ($site_slogan): ?><span id="site-slogan"><?php print $site_slogan; ?></span><?php endif; ?>
+            </strong></div>
+          <?php else: ?>
+            <h1 class="brand-elements">
+              <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
+              <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
+              <?php if ($site_slogan): ?><span id="site-slogan"><?php print $site_slogan; ?></span><?php endif; ?>
+            </h1>
           <?php endif; ?>
-
-          <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div>
-          <?php endif; ?>
-
         </div> <!-- /branding -->
       <?php endif; ?>
 
@@ -173,7 +167,7 @@
       </div>
     <?php endif; ?>
 
-    <?php if ($messages or $help): ?>
+    <?php if ($messages || $help): ?>
       <div id="messages-and-help">
         <h2 class="element-invisible"><?php print t('System Messages'); ?></h2>
         <?php if ($messages): print $messages; endif; ?>
@@ -199,7 +193,7 @@
 
         <div id="main-content">
 
-          <?php if ($title or $tabs): ?>
+          <?php if ($title || $tabs): ?>
             <div id="main-content-header">
               <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
               <?php if ($tabs): ?><div class="local-tasks"><?php print $tabs; ?></div><?php endif; ?>
@@ -234,7 +228,7 @@
       <div id="tertiary-content"><?php print $tertiary_content; ?></div>
     <?php endif; ?>
 
-    <?php if ($footer or $footer_message or $feed_icons): ?>
+    <?php if ($footer || $footer_message || $feed_icons): ?>
       <div id="footer">
 
         <?php if ($footer): ?>

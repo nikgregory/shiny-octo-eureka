@@ -1,0 +1,12 @@
+/** 
+ * $Id$
+ */
+
+.panel-pane {}
+.pane-inner {}
+.pane-title {}
+.pane-content {}
+
+.panel-pane .feed {}
+.panel-pane .links {}
+.panel-pane .more-link {}

@@ -11,24 +11,28 @@ a,
 tbody,tfoot,thead,tr,
 li,
 label,legend {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Accessibility helpers */
 .offscreen {
-  position:absolute;
-  top:-9999em;
-  left:auto;
-  width:1px;
-  height:1px;
-  overflow:hidden;
+  position: absolute;
+  top: -9999em;
+  left: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .element-hidden {
-  display:none;
+  display: none;
 }
 .element-invisible {
-  position: absolute;
+  position: absolute !important;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
+}
+.element-focusable {
+  position: static !important;
+  clip: auto;
 }

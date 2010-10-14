@@ -18,21 +18,31 @@
  *   data including the contexts and all of the other panes being displayed.
  */
 ?>
-<div class="<?php print $classes .' '. $skinr; ?>" <?php print $id; ?>>
-  <?php if ($admin_links): ?>
-    <div class="admin-links panel-hide"><?php print $admin_links; ?></div>
-  <?php endif; ?>
-  <?php if ($title): ?>
-    <h2 class="pane-title"><?php print $title; ?></h2>
-  <?php endif; ?>
-  <?php if ($feeds): ?>
-    <div class="feed"><?php print $feeds; ?></div>
-  <?php endif; ?>
-  <div class="pane-content"><?php print $content; ?></div>
-  <?php if ($links): ?>
-    <div class="links"><?php print $links; ?></div>
-  <?php endif; ?>
-  <?php if ($more): ?>
-    <div class="more-link"><?php print $more; ?></div>
-  <?php endif; ?>
+<?php
+if (!empty($skinr)) {
+  $skinr_classes = array();
+  $skinr_classes[] = $skinr;
+  $skinr_classes[] = 'skinr-pane';
+  $skinr_pane_classes = implode(' ', $skinr_classes);
+}
+?>
+<div class="<?php print $classes;?><?php print $skinr_pane_classes ? ' ' . $skinr_pane_classes : ''; ?>" <?php print $id; ?>>
+  <div class="pane-inner">
+    <?php if ($admin_links): ?>
+      <div class="admin-links panel-hide"><?php print $admin_links; ?></div>
+    <?php endif; ?>
+    <?php if ($title): ?>
+      <h2 class="pane-title"><?php print $title; ?></h2>
+    <?php endif; ?>
+    <?php if ($feeds): ?>
+      <div class="feed"><?php print $feeds; ?></div>
+    <?php endif; ?>
+    <div class="pane-content"><?php print $content; ?></div>
+    <?php if ($links): ?>
+      <div class="links"><?php print $links; ?></div>
+    <?php endif; ?>
+    <?php if ($more): ?>
+      <div class="more-link"><?php print $more; ?></div>
+    <?php endif; ?>
+  </div>
 </div>

@@ -53,7 +53,6 @@
   skinr[at-grid][type] = select
   skinr[at-grid][description] = Select the width for this block. All blocks with widths set will float left to align themselves horizontally. A block with no width set will take up the full with of the region (and clear the other blocks above it). This allows you to build complex block layouts in sidebars and other regions.
   skinr[at-grid][features][] = block
-  skinr[at-grid][features][] = panels_pane
   
   skinr[at-grid][options][1][label] = 60px
   skinr[at-grid][options][1][class] = grid-1
@@ -98,6 +97,8 @@
   ; Content alignment
   skinr[at-align-content][title] = Content alignment
   skinr[at-align-content][type] = select
+  skinr[at-align-content][features][] = block
+  skinr[at-align-content][features][] = node
   skinr[at-align-content][options][1][label] = Center content within its container
   skinr[at-align-content][options][1][class] = at-center-content
   skinr[at-align-content][options][2][label] = Align content to the right within its container
@@ -110,24 +111,10 @@
   skinr[at-menu][type] = select
   skinr[at-menu][description] = Different layouts and alignment options for your menus
   skinr[at-menu][features][] = block
-  skinr[at-menu][features][] = panels_pane
   skinr[at-menu][options][1][label] = Horizontal inline menu
   skinr[at-menu][options][1][class] = at-inline-menu clearfix
   skinr[at-menu][options][2][label] = Multi-column menu with headers
   skinr[at-menu][options][2][class] = at-multicolumn-menu clearfix
-  
-  ; Semantic classes
-  skinr[at-semantic-classes][title] = Semantic classes
-  skinr[at-semantic-classes][type] = select
-  skinr[at-semantic-classes][description] = Add relevant semantic classes. Based on <a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5</a>.
-  skinr[at-semantic-classes][features][] = block
-  skinr[at-semantic-classes][features][] = panels_pane
-  skinr[at-semantic-classes][options][1][label] = .section
-  skinr[at-semantic-classes][options][1][class] = section
-  skinr[at-semantic-classes][options][2][label] = .aside
-  skinr[at-semantic-classes][options][2][class] = aside
-  skinr[at-semantic-classes][options][3][label] = .nav
-  skinr[at-semantic-classes][options][3][class] = nav
 
 
 ;----------// Theme Setting Defaults
@@ -170,5 +157,5 @@
   settings[equal_heights_gpanels]          = 0
   settings[horizontal_login_block]         = 0
   settings[horizontal_login_block_enable]  = 'on'
-  settings[styles_schemes]                 = 'style-default.css'
-  settings[styles_enable_schemes]          = 'off'
+  settings[style_schemes]                  = 'style-default.css'
+  settings[style_enable_schemes]           = 'off'

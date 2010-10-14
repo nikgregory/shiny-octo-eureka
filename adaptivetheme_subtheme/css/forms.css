@@ -7,6 +7,9 @@ form {
   margin:0 0 1.667em;
   padding:0;
 }
+.form-item label {
+  font-weight: bold;
+}
 input {
   margin:.375em 0;
 }

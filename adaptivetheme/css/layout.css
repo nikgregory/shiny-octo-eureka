@@ -226,6 +226,11 @@ div.container {
   width:24.5%;
 }
 
+/* Panels */
+.block-panels_mini {
+  padding: 0;
+}
+
 /* Enhanced universal clearfix */
 .clearfix:after {
   content:" ";
