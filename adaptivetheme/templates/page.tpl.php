@@ -143,7 +143,7 @@
     </div> <!-- /header -->
 
     <?php if ($menu_bar || $primary_menu): ?>
-      <div id="primary-menu" class="nav">
+      <div id="primary-menu" class="nav clearfix">
         <h2 class="element-invisible"><?php print t('Main Menu'); ?></h2>
         <?php if ($menu_bar) { ?>
           <?php print $menu_bar; ?>
@@ -154,7 +154,7 @@
     <?php endif; ?>
 
     <?php if ($secondary_menu): ?>
-      <div id="secondary-menu" class="nav">
+      <div id="secondary-menu" class="nav clearfix">
         <h2 class="element-invisible"><?php print t('Secondary Menu'); ?></h2>
         <?php print $secondary_menu; ?>
       </div>

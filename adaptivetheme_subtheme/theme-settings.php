@@ -1,33 +1,24 @@
 <?php // $Id$
-// adaptivethemes.com st
 
-/**
- * @file theme-settings.php
- */
-
-// Include the definition of adaptivetheme_settings() and adaptivetheme_theme_get_default_settings().
+// DONT TOUCH THIS LINE:
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/theme-settings.php');
 
 /**
-* Implementation of themehook_settings() function.
-*
-* @param $saved_settings
-*   An array of saved settings for this theme.
-* @return
-*   A form array.
+* USAGE:
+* 1 - Change all instances of "adaptivetheme_subtheme" to your themes name (there are only 2).
+* 2 - Set "style_enable_schemes" to "on" in your themes info file (right at the bottom).
+* 3 - See template.php for the changes you need to make there.
 */
+
+// Change 'adaptivetheme_subtheme_settings' to 'your_themes_name_settings'
 function adaptivetheme_subtheme_settings($saved_settings) {
 
-  // Get the default values from the .info file.
+  // Change ('adaptivetheme_subtheme') to ('your_themes_name')
   $defaults = adaptivetheme_theme_get_default_settings('adaptivetheme_subtheme');
 
-  // Merge the saved variables and their default values.
   $settings = array_merge($defaults, $saved_settings);
-
-  // Create the form using Forms API: http://api.drupal.org/api/6
   $form = array();
 
-  // You can add settings here - the example uses the style_schemes settings.
   // Style schemes
   if ($settings['style_enable_schemes'] == 'on') {
     $form['style'] = array(
@@ -44,6 +35,7 @@ function adaptivetheme_subtheme_settings($saved_settings) {
       '#default_value' => $settings['style_schemes'],
       '#options' => array(
         'style-default.css' => t('Default Style'),
+        // 'my-style.css' => t('My Style'), // Add your own schemes (must go in your themes /schemes directory)
       ),
     );
     $form['style']['style_enable_schemes'] = array(
@@ -52,7 +44,7 @@ function adaptivetheme_subtheme_settings($saved_settings) {
     );
   } // endif schemes
 
-  // Add the base theme's settings.
+  // DONT TOUCH THIS LINE.
   $form += adaptivetheme_settings($saved_settings, $defaults);
 
   // Return the form

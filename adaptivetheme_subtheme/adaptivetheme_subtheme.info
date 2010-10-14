@@ -21,6 +21,7 @@
   ;stylesheets[all][] = css/dark.css
 
 ;----------// IE Conditional Stylesheets
+  ; Requires the Conditional styles module - http://drupal.org/project/conditional_styles
   ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
 
 ;----------// Regions
@@ -143,5 +144,5 @@
   settings[equal_heights_gpanels]          = 0
   settings[horizontal_login_block]         = 0
   settings[horizontal_login_block_enable]  = 'on'
-  settings[style_schemes]                  = 'style-default.css'
   settings[style_enable_schemes]           = 'off'
+  settings[style_schemes]                  = 'style-default.css'
