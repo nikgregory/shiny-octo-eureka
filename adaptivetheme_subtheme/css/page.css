@@ -1,0 +1,100 @@
+/** 
+ * $Id$
+ */
+
+header {
+  clear: both;
+}
+
+#branding {
+  float: left;
+  width: 300px;
+}
+
+h1.brand-elements {
+  font-size:1em;
+}
+.brand-elements span {
+  display: block;
+}
+#logo {
+  float: left;
+}
+#site-name {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.5;
+}
+#site-name a:link    {}
+#site-name a:visited {}
+#site-name a:hover   {}
+#site-name a:focus   {}
+#site-name a:active  {}
+
+#header-region {
+  float: left;
+}
+
+h1#page-title {}
+.in-maintenance h1#page-title {
+  padding:10px;
+}
+
+/* Sidebars */
+.sidebar {}
+.region-sidebar-first {}
+.region-sidebar-second {}
+
+/* Footer */
+footer {}
+
+
+/* Feed icons */
+.feed-icon img {
+  padding:0 10px;
+}
+#feed-icons {}
+#feed-icons .feed-icon {}
+#feed-icons .feed-icon img {}
+#feed-icons a.feed-icon {}
+
+/* Search results list. */
+.search-results {
+  margin: 0;
+}
+.search-results .search-result {}
+.search-results .title {
+  font-size: 1.25em;
+}
+.search-results .search-snippet-info {
+  padding: 0;
+}
+.search-results p {
+  margin: 0;
+}
+.search-results .search-snippet {}
+.search-results .search-info {
+  font-size: 0.9em;
+}
+span.search-info-type {}
+span.search-info-user {}
+span.search-info-date {}
+span.search-info-comment {}
+span.search-info-upload  {}
+
+/* Button Wrappers */
+span.button-wrapper {} /* Outer wrapper */
+span.button {} /* Inner wrapper */
+
+/* Aggregator */
+.feed-item {}
+.feed-item header {}
+.feed-item-title {}
+.feed-item-meta {}
+.feed-item .content {}
+.feed-item footer {}
+
+.feed-source {
+  margin: 1em 0;
+}
+.feed-description {}

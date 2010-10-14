@@ -1,0 +1,52 @@
+/* Messages */
+div.help {
+  background:#f7f7f7 url(images/help.png) no-repeat 8px 8px;
+  border:none;
+  margin:6px 0;
+  padding:10px 10px 10px 50px;
+}
+div.help code,
+div.messages code {
+  font-weight:700;
+}
+div.help p:last-child,
+div.help ul:last-child {
+  margin-bottom:0;
+}
+.block-region {
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  -khtml-border-radius:6
+  border-radius:6
+  border-radius:6px;
+  background-color:#F7F8F8;
+  border:2px dashed #DDD;
+  clear:both;
+  color:#666;
+  font-family:"Lucida Console",Monaco,"DejaVu Sans Mono",monospace;
+  font-size:1.167em;
+  font-weight:400;
+  margin-bottom:12px;
+  margin-top:4px;
+  padding:3px 6px 1px;
+}
+.article-unpublished,
+.comment-unpublished {
+  background-color:#FFF6DF;
+}
+.unpublished {
+  visibility:hidden;
+}
+.article-unpublished .unpublished,
+.comment-unpublished .unpublished {
+  background:transparent url(images/warning.png) no-repeat 0 .1em;
+  color:#FFB900;
+  font-size:.94em;
+  margin-left:.5em;
+  padding-left:18px;
+  visibility:visible;
+}
+div#acquia-agent-no-search {
+  padding-left:3em !important;
+  margin:8px 0;
+}

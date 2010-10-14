@@ -9,9 +9,13 @@
 
 ;----------// Stylesheets
   stylesheets[all][] = css/base.css
+  stylesheets[all][] = css/edit-links.css
+  stylesheets[all][] = css/layout.css
+  stylesheets[all][] = css/messages.css
 
 ;----------// jQuery Plugins and JavaScripts
-  scripts[] = js/at-scripts.js
+  scripts[] = js/at.js
+  scripts[] = js/html5shiv.js
 
 ;----------// Regions
   regions[leaderboard]       = Leaderboard
@@ -27,13 +31,10 @@
   regions[sidebar_second]    = Sidebar second
   regions[tertiary_content]  = Tertiary
   regions[footer]            = Footer
-  regions[article_aside]     = Article aside
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom
   
 ;----------// Skinr Styles
-  ; The following classes require the Skinr module, http://drupal.org/project/skinr
-  ; Adaptivetheme includes native support for Skinr classes on nodes, blocks and views.
 
   ; Grids - 960px, 16 column grid classes, with a single 12 grid class (4-12 for 3x320 layout)
   skinr[at-grid][title] = Width
@@ -41,7 +42,6 @@
   skinr[at-grid][description] = Select the width for this block. All blocks with widths set will float left to align themselves horizontally. A block with no width set will take up the full with of the region (and clear the other blocks above it). This allows you to build complex block layouts in sidebars and other regions.
   skinr[at-grid][features][] = block
   skinr[at-grid][features][] = panels_pane
-  
   skinr[at-grid][options][1][label] = 60px
   skinr[at-grid][options][1][class] = grid-1
   skinr[at-grid][options][2][label] = 120px
@@ -102,16 +102,3 @@
   skinr[at-menu][options][1][class] = at-inline-menu clearfix
   skinr[at-menu][options][2][label] = Multi-column menu with headers
   skinr[at-menu][options][2][class] = at-multicolumn-menu clearfix
-  
-  ; Semantic classes
-  skinr[at-semantic-classes][title] = Semantic classes
-  skinr[at-semantic-classes][type] = select
-  skinr[at-semantic-classes][description] = Add relevant semantic classes. Based on <a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5</a>.
-  skinr[at-semantic-classes][features][] = block
-  skinr[at-semantic-classes][features][] = panels_pane
-  skinr[at-semantic-classes][options][1][label] = .section
-  skinr[at-semantic-classes][options][1][class] = section
-  skinr[at-semantic-classes][options][2][label] = .aside
-  skinr[at-semantic-classes][options][2][class] = aside
-  skinr[at-semantic-classes][options][3][label] = .nav
-  skinr[at-semantic-classes][options][3][class] = nav

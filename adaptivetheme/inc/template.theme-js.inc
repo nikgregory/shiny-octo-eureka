@@ -1,14 +1,7 @@
 <?php
 // $Id$
 
-/**
- * @file template.theme-js.inc
- * Load Javascript files as required.
- */
-
 $path = drupal_get_path('theme', 'adaptivetheme') .'/js/';
-
-// Load equal height blocks
 $regions = array(
   'leaderboard',
   'header',
@@ -40,8 +33,6 @@ if (!empty($active_regions)) {
     )
   );
 }
-
-// Load equal height sidebars
 if (theme_get_setting('equal_heights_sidebars')) {
   drupal_add_js($path .'equalize-columns.js',
     array(
@@ -51,8 +42,6 @@ if (theme_get_setting('equal_heights_sidebars')) {
     )
   );
 }
-
-// Load equal height gpanels
 if (theme_get_setting('equal_heights_gpanels')) {
   drupal_add_js($path .'equalize-gpanels.js',
     array(
@@ -62,8 +51,6 @@ if (theme_get_setting('equal_heights_gpanels')) {
     )
   );
 }
-
-// Use horizontal login block overlabel js horizontal_login_block
 if (theme_get_setting('horizontal_login_block') && theme_get_setting('horizontal_login_block_overlabel')) {
   drupal_add_js($path .'jquery.overlabel.js',
     array(

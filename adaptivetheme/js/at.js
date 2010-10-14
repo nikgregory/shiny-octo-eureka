@@ -14,33 +14,33 @@
   Drupal.behaviors.adaptivetheme = {
     attach: function(context) {
 
-      // Set role=banner on #branding wrapper div.
-      $("#branding").attr("role","banner");
+      // Set role="banner" on the header element.
+      $("#banner").attr("role","banner");
 
-      // Set role=main on #main-content div.
+      // Set role="main" on #main-content div.
       $("#main-content").attr("role","main");
 
-      // Set role=search on search block and box.
+      // Set role="search" on search forms.
       $("#search-theme-form").attr("role","search");
 
-      // Set role=contentinfo on the footer message.
-      $("#footer-message").attr("role","contentinfo");
+      // Set role="contentinfo" on the page footer.
+      $("#page-footer").attr("role","contentinfo");
 
       // Set role=article on nodes.
       $(".article").attr("role","article");
 
-      // Set role=nav on navigation-like blocks.
-      $("#nav, .admin-panel, #breadcrumb, .block-menu, #block-user-1, .local-tasks").attr("role","navigation");
+      // Set role="nav" on navigation-like blocks.
+      $("nav, .admin-panel, #breadcrumb").attr("role","navigation");
+      
+      // Set role="complementary" on navigation-like blocks.
+      $("aside").attr("role","complementary");
 
-      // Horizontal login block settings
-      // $('#edit-horizontal-login-block-overlabel').attr('disabled', true);
-      $('#edit-horizontal-login-block').change(function() {
-        if ($(this).is(':checked')) {
-          $('#edit-horizontal-login-block-overlabel').attr('disabled', false);
-        } else {
-          $('#edit-horizontal-login-block-overlabel').attr('disabled', true);
-        }
-      }); 
+      // Set role="region" on section elements.
+      $("section").attr("role","region");
+
+      // Set role="region" on section elements.
+      $("#search-block-form, #search-form").attr("role","search");
+
     }
   };
 

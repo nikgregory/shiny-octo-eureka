@@ -1,12 +1,5 @@
 // $Id$
-// adaptivethemes.com
-
-/**
- * @file equalize-blocks.js
- * Apply equal height to blocks in selected regions.
- */
 (function ($) {
-
   Drupal.behaviors.adaptivetheme_equalizeblocks = {
     attach: function(context) {
       var tags_hash = new Array();
@@ -19,7 +12,6 @@
       applyHeights(tags_hash);
     }
   };
-
   function applyHeights(tags_hash) {
     var tmpTag = "";
     var toLoop = tags_hash.length
@@ -29,5 +21,4 @@
       $('#'+tags_hash[tmpi]+' .block-inner').equalHeight();
     }
   }
-
 })(jQuery);

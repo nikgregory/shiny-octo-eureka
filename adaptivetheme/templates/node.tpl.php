@@ -1,56 +1,38 @@
 <?php
 // $Id$
-
-/**
- * @file node.tpl.php
- */
 ?>
-<div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
-  <?php if (!$page && $title): ?>
-    <?php print render($title_prefix); ?>
-    <h2<?php print $title_attributes; ?>>
-      <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-    </h2>
-    <?php print render($title_suffix); ?>
+<article id="article-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <?php if ($title || $display_submitted): ?>
+    <header>
+      <?php print render($title_prefix); ?>
+      <?php if (!$page && $title): ?>
+        <h2<?php print $title_attributes; ?>>
+          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
+        </h2>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+      <?php print $user_picture; ?>
+      <?php if ($display_submitted): ?>
+        <div class="submitted">
+          <?php
+            print t('Submitted by !username on !datetime',
+            array('!username' => '<span class="author">' . $name . '</span>', '!datetime' => '<time datetime="' . $datetime . '">' . $date . '</time>'));
+          ?>
+        </div>
+      <?php endif; ?>
+    </header>
   <?php endif; ?>
-
-  <?php print $user_picture; ?>
-
-  <?php if ($display_submitted): ?>
-    <p class="article-submitted">
-      <?php
-        print t('Submitted by !username on !datetime',
-        array('!username' => $name, '!datetime' => $date));
-      ?>
-    </p>
-  <?php endif; ?>
-
   <div<?php print $content_attributes; ?>>
   <?php
-    // Hide comments and links and render them later.
     hide($content['comments']);
     hide($content['links']);
     print render($content);
   ?>
   </div>
-
-  <?php
-    // Remove the "Add new comment" link on the teaser page or if the comment
-    // form is being displayed on the same page.
-    if ($teaser || !empty($content['comments']['comment_form'])) {
-      unset($content['links']['comment']['#links']['comment-add']);
-    }
-    $links = render($content['links']);
-    if ($links) {
-      print $links;
-    }
-  ?>
-
-  <?php if ($page && $page['article_aside']): ?>
-    <?php print render($page['article_aside']) ?>
+  <?php if (!empty($content['links'])): ?>
+    <footer>
+      <?php print render($content['links']); ?>
+    </footer>
   <?php endif; ?>
-
   <?php print render($content['comments']); ?>
-
-</div> <!-- /article -->
+</article>

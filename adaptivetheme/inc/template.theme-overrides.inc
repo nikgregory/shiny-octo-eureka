@@ -2,48 +2,33 @@
 // $Id$
 
 /**
- * @file template.theme-overrides.inc
- */
-
-/**
  * Returns HTML for a breadcrumb trail.
- *
- * @param $vars
- *   An associative array containing:
- *   - breadcrumb: An array containing the breadcrumb links.
  */
-/* TODO: waiting on http://drupal.org/node/576290
 function adaptivetheme_breadcrumb($vars) {
   $breadcrumb = $vars['breadcrumb'];
-
-  // Determine if we are to display the breadcrumb.
   $show_breadcrumb = theme_get_setting('breadcrumb_display');
-  if ($show_breadcrumb == 'yes' || $show_breadcrumb == 'admin' && arg(0) == 'admin') {
-
-    // Optionally get rid of the homepage link.
+  if ($show_breadcrumb == 'yes') {
     $show_breadcrumb_home = theme_get_setting('breadcrumb_home');
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
     }
-
-    // Return the breadcrumb with separators.
     if (!empty($breadcrumb)) {
-      $breadcrumb_separator = filter_xss(theme_get_setting('breadcrumb_separator'));
-      $trailing_separator = $title = '';
-      if (theme_get_setting('breadcrumb_title')) {
-        $trailing_separator = $breadcrumb_separator;
-        $title = drupal_get_title();
+      $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+      $separator = filter_xss(theme_get_setting('breadcrumb_separator'));
+      $output = '';
+      foreach ($breadcrumb as $key => $val) {
+        if ($key == 0) {
+          $output .= '<li class="crumb">' . $val . '</li>';
+        }
+        else {
+          $output .= '<li class="crumb"><span>' . $separator . '</span>' . $val . '</li>';
+        }
       }
-      elseif (theme_get_setting('breadcrumb_trailing')) {
-        $trailing_separator = $breadcrumb_separator;
-      }
-      return implode($breadcrumb_separator, $breadcrumb) . $trailing_separator . $title;
+      return $heading . '<ol id="crumbs">' . $output . '</ol>';
     }
   }
-  // Otherwise, return an empty string.
   return '';
 }
-*/
 
 /**
  * Theme a form button.
@@ -51,7 +36,6 @@ function adaptivetheme_breadcrumb($vars) {
 function adaptivetheme_button($vars) {
   $element = $vars['element'];
   $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
-  // Wrap visible inputs with span tags for button graphics
   return '<span class="button '. $element['#id'] .'"><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ') .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span>\n";
 }
 
@@ -63,12 +47,10 @@ function adaptivetheme_item_list($vars) {
   $title = $vars['title'];
   $type = $vars['type'];
   $attributes = $vars['attributes'];
-
   $output = '<div class="item-list">';
   if (isset($title)) {
     $output .= '<h3>' . $title . '</h3>';
   }
-
   if (!empty($items)) {
     $output .= "<$type" . drupal_attributes($attributes) . '>';
     $num_items = count($items);
@@ -92,10 +74,9 @@ function adaptivetheme_item_list($vars) {
         $data = $item;
       }
       if (count($children) > 0) {
-        // Render nested list.
         $data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
       }
-      if (theme_get_setting('cleanup_item_list_zebra')) {
+      if (theme_get_setting('extra_item_list_classes')) {
         if ($i & 1) {
           $attributes['class'] = empty($attributes['class']) ? 'odd' : ($attributes['class'] .' odd');
         }
@@ -103,7 +84,7 @@ function adaptivetheme_item_list($vars) {
           $attributes['class'] = empty($attributes['class']) ? 'even' : ($attributes['class'] .' even');
         }
       }
-      if (theme_get_setting('cleanup_item_list_first_last')) {
+      if (theme_get_setting('extra_item_list_classes')) {
         if ($i == 0) {
           $attributes['class'] = empty($attributes['class']) ? 'first' : ($attributes['class'] .' first');
         }
@@ -111,7 +92,7 @@ function adaptivetheme_item_list($vars) {
           $attributes['class'] = empty($attributes['class']) ? 'last' : ($attributes['class'] .' last');
         }
       }
-      $output .= '<li' . drupal_attributes($attributes) . '>' . $data . "</li>\n";
+      $output .= '<li' . drupal_attributes($attributes) . '>' . $data . "</li>";
     }
     $output .= "</$type>";
   }
@@ -119,49 +100,37 @@ function adaptivetheme_item_list($vars) {
   return $output;
 }
 
-// If DHTML module is installed dont override theme_menu_tree and theme_menu_link.
 if (!function_exists('dhtml_menu_init')) {
-  /**
-   * Generate the HTML output for a menu tree
-   */
+
+  // theme_menu_tree
   function adaptivetheme_menu_tree($vars) {
-    if (theme_get_setting('cleanup_menu_menu_class')) {
-      return '<ul class="menu">' . $vars['tree'] . '</ul>';
-    }
-    else{
-      return '<ul>' . $vars['tree'] . '</ul>';
-    }
+    return '<ul class="menu clearfix">' . $vars['tree'] . '</ul>';
   }
 
+  // theme_menu_link
   function adaptivetheme_menu_link(array $vars) {
     $element = $vars['element'];
     $sub_menu = '';
-
     if ($element['#below']) {
       $sub_menu = drupal_render($element['#below']);
     }
-
-    // add a class based on the anchor text for granular theming.
-    if (theme_get_setting('cleanup_menu_title_class')) {
+    if (theme_get_setting('extra_menu_classes')) {
       $element['#attributes']['class'][] = drupal_html_class($element['#title']);
     }
-
-    // wrap <span>'s around the anchor text
     if (theme_get_setting('theme_menu_link_spans')) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
-
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
-    if (theme_get_setting('cleanup_menu_link_classes') == 0) {
-      return '<li>' . $output . $sub_menu . "</li>\n";
+    if (theme_get_setting('extra_menu_classes') == 0) {
+      return '<li>' . $output . $sub_menu . "</li>";
     }
     else {
-      return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+      return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
     }
   }
 
-} // end DHTML menu check.
+}
 
 // Main menu links
 function adaptivetheme_links__system_main_menu($vars) {
@@ -170,19 +139,12 @@ function adaptivetheme_links__system_main_menu($vars) {
   $heading = $vars['heading'];
   global $language_url;
   $output = '';
-
   if (count($links) > 0) {
     $output = '';
-
-    // Treat the heading first if it is present to prepend it to the
-    // list of links.
     if (!empty($heading)) {
       if (is_string($heading)) {
-        // Prepare the array that will be used when the passed heading
-        // is a string.
         $heading = array(
           'text' => $heading,
-          // Set the default level of the heading.
           'level' => 'h2',
         );
       }
@@ -192,20 +154,14 @@ function adaptivetheme_links__system_main_menu($vars) {
       }
       $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
     }
-
     $output .= '<ul' . drupal_attributes($attributes) . '>';
-
     $num_links = count($links);
     $i = 1;
-
     foreach ($links as $key => $link) {
-
-      if (theme_get_setting('cleanup_main_mlid_class')) {
+      if (theme_get_setting('extra_menu_classes')) {
         $class = array($key);
       }
-
-      // Add first, last and active classes to the list of links to help out themers.
-      if (theme_get_setting('cleanup_main_firstlast_classes')) {
+      if (theme_get_setting('extra_menu_classes')) {
         if ($i == 1) {
           $class[] = 'first';
         }
@@ -213,36 +169,26 @@ function adaptivetheme_links__system_main_menu($vars) {
           $class[] = 'last';
         }
       }
-
-      // Add Access keys if set for AT Mobile theme.
-      if (theme_get_setting('add_access_keys')) {
-        $link['attributes']['accesskey'] = $i;
-      }
-
-      if (theme_get_setting('cleanup_main_active_classes')) {
+      if (theme_get_setting('extra_menu_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
             && (empty($link['language']) || $link['language']->language == $language_url->language)) {
           $class[] = 'active';
         }
       }
-      if (theme_get_setting('cleanup_main_mlid_class') || theme_get_setting('cleanup_main_firstlast_classes') || theme_get_setting('cleanup_main_active_classes') || theme_get_setting('add_access_keys')) {
+      if (theme_get_setting('extra_menu_classes')) {
         $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
       }
       else {
         $output .= '<li>';
       }
-
       if (isset($link['href'])) {
-        // wrap <span>'s around the anchor text
-        if (theme_get_setting('theme_main_menu_spans')) {
+        if (theme_get_setting('menu_item_span_elements')) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
-        // Pass in $link as $options, they share the same keys.
         $output .= l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {
-        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
         if (empty($link['html'])) {
           $link['title'] = check_plain($link['title']);
         }
@@ -252,14 +198,11 @@ function adaptivetheme_links__system_main_menu($vars) {
         }
         $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
       }
-
       $i++;
-      $output .= "</li>\n";
+      $output .= "</li>";
     }
-
     $output .= '</ul>';
   }
-
   return $output;
 }
 
@@ -270,19 +213,12 @@ function adaptivetheme_links__system_secondary_menu($vars) {
   $heading = $vars['heading'];
   global $language_url;
   $output = '';
-
   if (count($links) > 0) {
     $output = '';
-
-    // Treat the heading first if it is present to prepend it to the
-    // list of links.
     if (!empty($heading)) {
       if (is_string($heading)) {
-        // Prepare the array that will be used when the passed heading
-        // is a string.
         $heading = array(
           'text' => $heading,
-          // Set the default level of the heading.
           'level' => 'h2',
         );
       }
@@ -292,20 +228,14 @@ function adaptivetheme_links__system_secondary_menu($vars) {
       }
       $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
     }
-
     $output .= '<ul' . drupal_attributes($attributes) . '>';
-
     $num_links = count($links);
     $i = 1;
-
     foreach ($links as $key => $link) {
-
-      if (theme_get_setting('cleanup_sec_mlid_class')) {
+      if (theme_get_setting('extra_menu_classes')) {
         $class = array($key);
       }
-
-      // Add first, last and active classes to the list of links to help out themers.
-      if (theme_get_setting('cleanup_sec_firstlast_classes')) {
+      if (theme_get_setting('extra_menu_classes')) {
         if ($i == 1) {
           $class[] = 'first';
         }
@@ -313,30 +243,26 @@ function adaptivetheme_links__system_secondary_menu($vars) {
           $class[] = 'last';
         }
       }
-      if (theme_get_setting('cleanup_sec_active_classes')) {
+      if (theme_get_setting('extra_menu_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
             && (empty($link['language']) || $link['language']->language == $language_url->language)) {
           $class[] = 'active';
         }
       }
-      if (theme_get_setting('cleanup_main_sec_class') || theme_get_setting('cleanup_sec_firstlast_classes') || theme_get_setting('cleanup_sec_active_classes')) {
+      if (theme_get_setting('extra_menu_classes')) {
         $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
       }
       else {
         $output .= '<li>';
       }
-
       if (isset($link['href'])) {
-        // wrap <span>'s around the anchor text
-        if (theme_get_setting('theme_sec_menu_spans')) {
+        if (theme_get_setting('menu_item_span_elements')) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
-        // Pass in $link as $options, they share the same keys.
         $output .= l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {
-        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
         if (empty($link['html'])) {
           $link['title'] = check_plain($link['title']);
         }
@@ -346,13 +272,10 @@ function adaptivetheme_links__system_secondary_menu($vars) {
         }
         $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
       }
-
       $i++;
-      $output .= "</li>\n";
+      $output .= "</li>";
     }
-
     $output .= '</ul>';
   }
-
   return $output;
 }

@@ -1,11 +1,7 @@
 <?php
 // $Id$
 
-/**
- * @file theme-settings.php
- */
 function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
-  // Create the form using Forms API: http://api.drupal.org/api/7
   // Layout settings
   $form['layout'] = array(
     '#type' => 'fieldset',
@@ -289,438 +285,128 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#size' => 8,
     '#maxlength' => 10,
   );
+  // Breadcrumbs
+  $form['breadcrumb_settings']['breadcrumb'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Breadcrumb'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['breadcrumb_settings']['breadcrumb']['breadcrumb_display'] = array(
+    '#type' => 'select',
+    '#title' => t('Display breadcrumb'),
+    '#default_value' => theme_get_setting('breadcrumb_display'),
+    '#options' => array(
+      'yes' => t('Yes'),
+      'no' => t('No'),
+    ),
+  );
+  $form['breadcrumb_settings']['breadcrumb']['breadcrumb_separator'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Breadcrumb separator'),
+    '#description' => t('Text only. Dont forget to include spaces.'),
+    '#default_value' => theme_get_setting('breadcrumb_separator'),
+    '#size' => 8,
+    '#maxlength' => 10,
+    '#states' => array(
+      'visible' => array(
+          '#edit-breadcrumb-display' => array(
+            'value' => 'yes',
+          ),
+      ),
+    ),
+  );
+  $form['breadcrumb_settings']['breadcrumb']['breadcrumb_home'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the homepage link in breadcrumbs'),
+    '#default_value' => theme_get_setting('breadcrumb_home'),
+    '#states' => array(
+      'visible' => array(
+          '#edit-breadcrumb-display' => array(
+            'value' => 'yes',
+          ),
+      ),
+    ),
+  );
   // Development settings
-  $form['theme']['development'] = array(
+  $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Theme development settings'),
-    '#description' => t('These settings are for the theme developer. Changing these settings may break your theme.'),
+    '#title' => t('Development'),
+    '#description' => t('WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-  );
-  // Global settings
-  $form['theme']['development']['global'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Global Settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => theme_get_setting('rebuild_registry') ? FALSE : TRUE,
-  );
-  // Rebuild registry
-  $form['theme']['development']['global']['rebuild_registry'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Rebuild the theme registry on every page load.'),
-    '#default_value' => theme_get_setting('rebuild_registry'),
-    '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING! This is a performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
-  );
-  // Show $theme_info
-  $form['theme']['development']['global']['show_page_info'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show $page info.'),
-    '#default_value' => theme_get_setting('show_page_info'),
-    '#description' => t('This will show the output of $page using Krumo (uses kpr()).'),
-  );
-  if (!module_exists('devel')) {
-    $form['theme']['development']['global']['show_page_info']['#description'] = t('NOTICE: The setting requires the <a href="!link">Devel module</a> to be installed. This will show the output of $page using Krumo.', array('!link' => 'http://drupal.org/project/devel'));
-    $form['theme']['development']['global']['show_page_info']['#disabled'] = 'disabled';
-  }
-  // Add or remove markup
-  $form['theme']['development']['markup'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Add SPAN tags to Menu Anchors'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  // Add spans to main menu anchor text
-  $form['theme']['development']['markup']['theme_main_menu_spans'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Wrap Main menu anchor text in SPAN tags.'),
-    '#default_value' => theme_get_setting('theme_main_menu_spans'),
-  );
-  // Add spans to secondary menu anchor text
-  $form['theme']['development']['markup']['theme_sec_menu_spans'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Wrap Secondary menu anchor text in SPAN tags.'),
-    '#default_value' => theme_get_setting('theme_sec_menu_spans'),
-  );
-  // Add spans to theme_menu_link
-  $form['theme']['development']['markup']['theme_menu_link_spans'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Wrap menu link anchor text in SPAN tags.'),
-    '#default_value' => theme_get_setting('theme_menu_link_spans'),
   );
   // Add or remove extra classes
-  $form['theme']['development']['classes'] = array(
+  $form['themedev']['dev']['classes'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Add or Remove CSS Classes'),
-    '#description' => t('<p>This is a fast and easy way to add or remove CSS classes during theme development,
-     so you only print what you require. Once you have decided which classes you need you can set new defaults in your subthemes .info file -
-     this is useful if your theme needs to be portable, such as a commercial theme or when moving from development server to the live site.
-     </p><p>Note that whenever you change the defaults in the .info file you need to clear the cache on the <a href="!link">Performance Settings</a> page.</p>', array('!link' => base_path() . 'admin/config/development/performance')),
+    '#title' => t('CSS Classes'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  // Body classes
-  $form['theme']['development']['classes']['body_classes'] = array(
+  $form['themedev']['dev']['classes']['extra_page_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra page classes',
+    '#default_value' => theme_get_setting('extra_page_classes'),
+    '#description' => t('Adds a page-[path-to-page] class, add, edit and delete classes for articles, and a lang-[language] class.'),
+  );
+  $form['themedev']['dev']['classes']['extra_article_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra article classes',
+    '#default_value' => theme_get_setting('extra_article_classes'),
+    '#description' => t('Adds promoted, sticky, preview, language and odd/even classes to articles.'),
+  );
+  $form['themedev']['dev']['classes']['extra_comment_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra comment classes',
+    '#default_value' => theme_get_setting('extra_comment_classes'),
+    '#description' => t('Adds anonymous, author, viewer, new, and odd/even classes to comments.'),
+  );
+  $form['themedev']['dev']['classes']['extra_block_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra block classes',
+    '#default_value' => theme_get_setting('extra_block_classes'),
+    '#description' => t('Adds a bunch of new classes to blocks.'),
+  );
+  $form['themedev']['dev']['classes']['extra_menu_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra menu classes',
+    '#default_value' => theme_get_setting('extra_menu_classes'),
+    '#description' => t('Adds a bunch of new classes to all menus (main, secondary, normal menus etc).'),
+  );
+  $form['themedev']['dev']['classes']['extra_item_list_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Print extra item-list classes',
+    '#default_value' => theme_get_setting('extra_item_list_classes'),
+    '#description' => t('Adds first, last and odd/even classes to item lists.'),
+  );
+  // Primary and Secondary Links Settings
+  $form['themedev']['dev']['primary_secondary_links'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Page Classes'),
-    '#description' => t('Page classes are added to the BODY element and apply to the whole page.'),
+    '#title' => t('Modify Links'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['theme']['development']['classes']['body_classes']['cleanup_classes_suggestions'] = array(
+  // Add spans to theme_links
+  $form['themedev']['dev']['primary_secondary_links']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Print classes based on the available template suggestions.'),
-    '#default_value' => theme_get_setting('cleanup_classes_suggestions'),
+    '#title' => check_plain(t('Add <span></span> tags around Main and Secondary menu anchor text')),
+    '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
-  $form['theme']['development']['classes']['body_classes']['cleanup_classes_front'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .front and .not-front classes.'),
-    '#default_value' => theme_get_setting('cleanup_classes_front'),
-  );
-  $form['theme']['development']['classes']['body_classes']['cleanup_classes_user_status'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .logged-in and .not-logged-in classes.'),
-    '#default_value' => theme_get_setting('cleanup_classes_user_status'),
-  );
-  $form['theme']['development']['classes']['body_classes']['cleanup_classes_node_type'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .article-type-[type] classes.'),
-    '#default_value' => theme_get_setting('cleanup_classes_node_type'),
-  );
-  if (function_exists('locale')) {
-   $form['theme']['development']['classes']['body_classes']['cleanup_classes_language'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print classes a page language class e.g. .lang-en'),
-      '#default_value' => theme_get_setting('cleanup_classes_language'),
-    );
-  }
-  // Node classes
-  $form['theme']['development']['classes']['article_classes'] = array(
+  // Theme Settings Export
+  /*
+  $form['themedev']['dev']['export'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Article Classes'),
-    '#description' => t('Article classes apply to nodes. They print in the main wrapper DIV for all articles (nodes) in node.tpl.php.'),
+    '#title' => t('Export'),
+    '#description' => t('<p>Copy and paste these settings to a plain text file for backup or paste to your themes .info file.</p><p>WARNING! If you are using a WYSIWYG editor it must be disabled for this text area, otherwise all special characters are likely to be converted to HTML entities. If your editor has a \'view source\' feature try that first.</p>'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_id'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a unique ID for each article e.g. #article-1.'),
-    '#default_value' => theme_get_setting('cleanup_article_id'),
+  $form['themedev']['dev']['export']['exported_settings'] = array(
+    '#type' => 'textarea',
+    '#default_value' => $exports,
+    '#resizable' => FALSE,
+    '#cols' => 60,
+    '#rows' => 25,
   );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_sticky'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .article-sticky class for articles set to sticky.'),
-    '#default_value' => theme_get_setting('cleanup_article_classes_sticky'),
-  );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_promote'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .article-promoted class for articles promoted to front.'),
-    '#default_value' => theme_get_setting('cleanup_article_classes_promote'),
-  );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_teaser'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .article-teaser class on article teasers.'),
-    '#default_value' => theme_get_setting('cleanup_article_classes_teaser'),
-  );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_preview'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .article-preview class for article previews.'),
-    '#default_value' => theme_get_setting('cleanup_article_classes_preview'),
-  );
-  $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_type'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .[content-type]-article classes.'),
-    '#default_value' => theme_get_setting('cleanup_article_classes_type'),
-  );
-  if (function_exists('i18n_init')) {
-    $form['theme']['development']['classes']['article_classes']['cleanup_article_classes_language'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print .article-lang-[language] classes (requires i18n module)'),
-      '#default_value' => theme_get_setting('cleanup_article_classes_language'),
-    );
-  }
-  // Comment classes
-  $form['theme']['development']['classes']['comment_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Comment Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Comments'),
-    '#description' => t('Comment classes apply to all comments. They print in comment.tpl.php on the wrapper DIV for each comment.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments']['cleanup_comment_anonymous'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .comment-by-anonymous for anonymous comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_anonymous'),
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments']['cleanup_comment_article_author'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .comment-by-article-author for author comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_article_author'),
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments']['cleanup_comment_by_viewer'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .comment-by-viewer for viewer comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_by_viewer'),
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments']['cleanup_comment_new'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .comment-new for new comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_new'),
-  );
-  $form['theme']['development']['classes']['comment_classes']['comments']['cleanup_comment_zebra'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .odd and .even classes for comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_zebra'),
-  );
-  $form['theme']['development']['classes']['comment_classes']['comment-wrapper'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Comment Wrapper'),
-   '#description' => t('This class prints in comment-wrapper.tpl.php. The DIV wrapper encloses both the comments and the comment form (if on the same page).'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['comment_classes']['comment-wrapper']['cleanup_comment_wrapper_type'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a content type class on the comments wrapper i.e. .[content-type]-comments.'),
-    '#default_value' => theme_get_setting('cleanup_comment_wrapper_type'),
-  );
-  // Block classes
-  $form['theme']['development']['classes']['block_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Block Classes'),
-    '#description' => t('Comment classes apply to blocks. They print in the main wrapper DIV for all blocks in block.tpl.php.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['block_classes']['cleanup_block_block_module_delta'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a unique ID for each block (#block-module-delta).'),
-    '#default_value' => theme_get_setting('cleanup_block_block_module_delta'),
-  );
-  $form['theme']['development']['classes']['block_classes']['cleanup_block_classes_module'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a .block-[module] class.'),
-    '#default_value' => theme_get_setting('cleanup_block_classes_module'),
-  );
-  $form['theme']['development']['classes']['block_classes']['cleanup_block_classes_zebra'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .odd and .even classes for blocks.'),
-    '#default_value' => theme_get_setting('cleanup_block_classes_zebra'),
-  );
-  $form['theme']['development']['classes']['block_classes']['cleanup_block_classes_region'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .block-[region] classes.'),
-    '#default_value' => theme_get_setting('cleanup_block_classes_region'),
-  );
-  $form['theme']['development']['classes']['block_classes']['cleanup_block_classes_count'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .block-[count] classes.'),
-    '#default_value' => theme_get_setting('cleanup_block_classes_count'),
-  );
-  // Menu classes
-  $form['theme']['development']['classes']['menu_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Menu Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  if (!function_exists('dhtml_menu_init')) {
-    $form['theme']['development']['classes']['menu_classes']['menu_menu_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Block Menu Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    );
-    $form['theme']['development']['classes']['menu_classes']['menu_menu_classes']['cleanup_menu_menu_class'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print the ul.menu class.'),
-      '#default_value' => theme_get_setting('cleanup_menu_menu_class'),
-    );
-    $form['theme']['development']['classes']['menu_classes']['menu_menu_classes']['cleanup_menu_link_classes'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print extra clases on menu link items, such as leaf, collasped, first and last.'),
-      '#default_value' => theme_get_setting('cleanup_menu_link_classes'),
-    );
-    $form['theme']['development']['classes']['menu_classes']['menu_menu_classes']['cleanup_menu_title_class'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print classes based on the menu title, i.e. .menu-[title].'),
-      '#default_value' => theme_get_setting('cleanup_menu_title_class'),
-    );
-  }
-  else {
-    $form['theme']['development']['classes']['menu_classes']['#description'] = t('NOTICE: You currently have the DHTML Menu module installed. The custom menu class options have been disabled because this module will not work correctly with them enabled - you can still set classes for the Primary and Secondary links (below).');
-    $form['theme']['development']['classes']['menu_classes']['menu_menu_classes']['#disabled'] = 'disabled';
-  }
-  // Main menu classes
-  $form['theme']['development']['classes']['menu_classes']['main_menu_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Main Menu Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['menu_classes']['main_menu_classes']['cleanup_main_active_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the active classes.'),
-    '#default_value' => theme_get_setting('cleanup_main_active_classes'),
-  );
-  $form['theme']['development']['classes']['menu_classes']['main_menu_classes']['cleanup_main_firstlast_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .first and .last classes.'),
-     '#default_value' => theme_get_setting('cleanup_main_firstlast_classes'),
-  );
-  $form['theme']['development']['classes']['menu_classes']['main_menu_classes']['cleanup_main_mlid_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a unique identifier class, e.g. .menu-345'),
-     '#default_value' => theme_get_setting('cleanup_main_mlid_class'),
-  );
-  // Secondary menu classes
-  $form['theme']['development']['classes']['menu_classes']['secondary_menu_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Secondary Menu Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['menu_classes']['secondary_menu_classes']['cleanup_sec_active_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print the active classes.'),
-    '#default_value' => theme_get_setting('cleanup_sec_active_classes'),
-  );
-  $form['theme']['development']['classes']['menu_classes']['secondary_menu_classes']['cleanup_sec_firstlast_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .first and .last classes.'),
-     '#default_value' => theme_get_setting('cleanup_sec_firstlast_classes'),
-  );
-  $form['theme']['development']['classes']['menu_classes']['secondary_menu_classes']['cleanup_sec_mlid_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print a unique identifier class, e.g. .menu-345'),
-     '#default_value' => theme_get_setting('cleanup_sec_mlid_class'),
-  );
-  // Item list classes
-  $form['theme']['development']['classes']['itemlist_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Item list Classes'),
-    '#description' => t('Item list classes are applied using the <code>theme_item_list</code> function override in template.theme-overrides.inc'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['itemlist_classes']['cleanup_item_list_zebra'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .odd and .even classes for list items.'),
-    '#default_value' => theme_get_setting('cleanup_item_list_zebra'),
-  );
-  $form['theme']['development']['classes']['itemlist_classes']['cleanup_item_list_first_last'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Print .first and .last classes for the first and last items in the list.'),
-    '#default_value' => theme_get_setting('cleanup_item_list_first_last'),
-  );
-  // Views classes
-  if (module_exists('views')) {
-    $form['theme']['development']['classes']['views_classes'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Views Classes'),
-      '#description' => t('NOTE: If you are using custom Views templates you must use the template overrides that come with Adaptivetheme to preserve these settings.'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['theme']['development']['classes']['views_classes']['display'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Display Classes'),
-      '#description' => t('Control the classes for Views displays (views-view.tpl.php).'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['theme']['development']['classes']['views_classes']['display']['cleanup_views_css_name'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print the CSS Name class.'),
-      '#default_value' => theme_get_setting('cleanup_views_css_name'),
-    );
-    $form['theme']['development']['classes']['views_classes']['display']['cleanup_views_view_name'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print the View Name class.'),
-      '#default_value' => theme_get_setting('cleanup_views_view_name'),
-    );
-    $form['theme']['development']['classes']['views_classes']['display']['cleanup_views_display_id'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print the Display ID class.'),
-      '#default_value' => theme_get_setting('cleanup_views_display_id'),
-    );
-    $form['theme']['development']['classes']['views_classes']['display']['cleanup_views_dom_id'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print the DOM ID class.'),
-      '#default_value' => theme_get_setting('cleanup_views_dom_id'),
-    );
-    $form['theme']['development']['classes']['views_classes']['style'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Views Style Classes'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['theme']['development']['classes']['views_classes']['style']['cleanup_views_unformatted'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print extra classes for unformatted views (views-view-unformatted.tpl.php).'),
-      '#default_value' => theme_get_setting('cleanup_views_unformatted'),
-    );
-    $form['theme']['development']['classes']['views_classes']['style']['cleanup_views_item_list'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print extra classes for item list views (views-view-list.tpl.php).'),
-      '#default_value' => theme_get_setting('cleanup_views_item_list'),
-    );
-  }
-  // Field classes (CCK).
-  if (module_exists('content')) {
-    $form['theme']['development']['classes']['field_classes'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Field Classes'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-   $form['theme']['development']['classes']['field_classes']['cleanup_fields_type'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print field type classes.'),
-      '#default_value' => theme_get_setting('cleanup_fields_type'),
-    );
-   $form['theme']['development']['classes']['field_classes']['cleanup_fields_name'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print field name classes.'),
-      '#default_value' => theme_get_setting('cleanup_fields_name'),
-    );
-    $form['theme']['development']['classes']['field_classes']['cleanup_fields_zebra'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Print odd/even zebra classes on CCK fields.'),
-      '#default_value' => theme_get_setting('cleanup_fields_zebra'),
-    );
-  }
-  // Title and content wrapper classes.
-  $form['theme']['development']['classes']['attribute_classes'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Title and Content Wrapper Classes'),
-    '#description' => t('Classes apply to article, block and comment titles and the wrapper divs around $content.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['theme']['development']['classes']['attribute_classes']['cleanup_headings_title_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Add the .title class to all headings.'),
-    '#default_value' => theme_get_setting('cleanup_headings_title_class'),
-  );
-  $form['theme']['development']['classes']['attribute_classes']['cleanup_headings_type_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Add the type class to headings, i.e. .article-title, .block-title, .comment-title.'),
-    '#default_value' => theme_get_setting('cleanup_headings_type_class'),
-  );
-  $form['theme']['development']['classes']['attribute_classes']['cleanup_content_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Add the .content class to all $content wrappers.'),
-    '#default_value' => theme_get_setting('cleanup_content_class'),
-  );
-  $form['theme']['development']['classes']['attribute_classes']['cleanup_content_type_class'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Add the type class to all $content wrappers, i.e. .article-content, .block-content, .comment-content.'),
-    '#default_value' => theme_get_setting('cleanup_content_type_class'),
-  );
+  */
 }

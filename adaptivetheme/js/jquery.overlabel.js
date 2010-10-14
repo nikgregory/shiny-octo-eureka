@@ -1,7 +1,5 @@
 // $Id$
-
 (function($) {
- 
     // plugin definition
     $.fn.overlabel = function(options) {
         // build main options before element iteration
@@ -23,7 +21,6 @@
         } );
         return opts.filter ? selection : selection.end();
     };
- 
     // publicly accessible defaults
     $.fn.overlabel.defaults = {
         label_class:   'overlabel-apply',
@@ -32,7 +29,6 @@
         show_css:      {'text-indent': '0px', 'cursor': 'text'},
         filter:        false
     };
-    
     // Apply when the right class is found.
     Drupal.behaviors.adaptivetheme_overlabel = {
       attach: function(context) {

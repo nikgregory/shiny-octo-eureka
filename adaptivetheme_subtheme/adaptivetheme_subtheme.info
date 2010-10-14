@@ -1,8 +1,6 @@
 ; $Id$
 
 ;----------// Theme Information
- ; Change the name and description for your subtheme.
-
   name        = AT Subtheme
   description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme.
   core        = 7.x
@@ -11,28 +9,20 @@
   base theme  = adaptivetheme
 
 
-;----------// Style-sheets
-  ; Gpanel layouts.
-  ; If using a fixed width use the fixed width Gpanels
-  ;stylesheets[all][] = css/core/gpanels-960-fixed.css
-  
-  ; If using a fluid width use the fluid with Gpanels.
-  ;stylesheets[all][] = css/core/gpanels-fluid.css
-	
-  ; Dark Theme CSS - uncomment to enable.
-  ;stylesheets[all][] = css/core/dark.css
+;----------// Modular stylesheets
+  stylesheets[all][] = css/html-elements.css
+  stylesheets[all][] = css/forms.css
+  stylesheets[all][] = css/tables.css
+  stylesheets[all][] = css/page.css
+  stylesheets[all][] = css/articles.css
+  stylesheets[all][] = css/comments.css
+  stylesheets[all][] = css/blocks.css
+  stylesheets[all][] = css/navigation.css
+  stylesheets[all][] = css/skins.css
+  ;stylesheets[all][] = css/dark.css
 
-  ; Starter CSS - comment this out if you dont need it, provides basic styles only.
-  stylesheets[all][] = css/theme/starter.css
-	
-  ; Theme CSS - use this stylesheet to build your custom theme.
-  stylesheets[all][] = css/theme/theme.css
-
-  ; Print CSS
-  stylesheets[print][] = css/theme/print.css
 
 ;----------// IE Conditional Stylesheets
-  ; You MUST install http://drupal.org/project/conditional_styles (and see its readme!)
   ;conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
 
 
@@ -40,73 +30,67 @@
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
   regions[content]           = Main Content
-  regions[highlight]         = Content Top (Highlight)
-  regions[content_bottom]    = Content bottom
+  regions[highlight]         = Highlight
+  regions[content_aside]     = Aside
   regions[secondary_content] = Secondary
   regions[tertiary_content]  = Tertiary
   regions[footer]            = Footer
   regions[leaderboard]       = Leaderboard
   regions[header]            = Header
   regions[menu_bar]          = Menu Bar
-  regions[content_aside]     = Content Aside
-  regions[article_aside]     = Article aside
   regions[help]              = Help
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom
 
 
 ;----------// Gpanel Regions
-  ; Gpanel Regions - use in conjunction with the Gpanel snippets.
-  ; See /gpanels and the README in that folder.
-  ; Uncomment the required regions.
-
-  ; 2 col 2 x 50
-  ;regions[two_50_first]  = GP 2 x 50% - First
-  ;regions[two_50_second] = GP 2 x 50% - Second
+  ; 2 col 2x50
+  ;regions[two_col_2x50_first]  = 2col 2x50 Gpanel col 1
+  ;regions[two_col_2x50_second] = 2col 2x50 Gpanel col 2
 
   ; 2 col 33-66
-  ;regions[two_33_66_first]  = GP 33% 66% - First
-  ;regions[two_33_66_second] = GP 33% 66% - Second
+  ;regions[two_col_33_66_first]  = 2col 33-66 Gpanel col 1
+  ;regions[two_col_33_66_second] = 2col 33-66 Gpanel col 2
 
   ; 2 col 66-33
-  ;regions[two_66_33_first]  = GP 66% 33% - First
-  ;regions[two_66_33_second] = GP 66% 33% - Second
+  ;regions[two_col_66_33_first]  = 2col 66-33 Gpanel col 1
+  ;regions[two_col_66_33_second] = 2col 66-33 Gpanel col 2
 
-  ; 3 col 3 x 33
-  ;regions[three_33_first]  = GP 3 x 33% - First
-  ;regions[three_33_second] = GP 3 x 33% - Second
-  ;regions[three_33_third]  = GP 3 x 33% - Third
+  ; 3 col 3x33
+  ;regions[three_col_3x33_first]  = 3col 3x33 Gpanel col 1
+  ;regions[three_col_3x33_second] = 3col 3x33 Gpanel col 2
+  ;regions[three_col_3x33_third]  = 3col 3x33 Gpanel col 3
 
   ; 3 col 25-25-50
-  ;regions[three_25_25_50_first]  = GP 25% 25% 50% - First
-  ;regions[three_25_25_50_second] = GP 25% 25% 50% - Second
-  ;regions[three_25_25_50_third]  = GP 25% 25% 50% - Third
+  ;regions[three_col_25_25_50_first]  = 3col 25-25-50 Gpanel col 1
+  ;regions[three_col_25_25_50_second] = 3col 25-25-50 Gpanel col 2
+  ;regions[three_col_25_25_50_third]  = 3col 25-25-50 Gpanel col 3
   
   ; 3 col 50-25-25
-  ;regions[three_50_25_25_first]  = GP 50% 25% 25% - First
-  ;regions[three_50_25_25_second] = GP 50% 25% 25% - Second
-  ;regions[three_50_25_25_third]  = GP 50% 25% 25% - Third
+  ;regions[three_col_50_25_25_first]  = 3col 50-25-25 Gpanel col 1
+  ;regions[three_col_50_25_25_second] = 3col 50-25-25 Gpanel col 2
+  ;regions[three_col_50_25_25_third]  = 3col 50-25-25 Gpanel col 3
+  
+  ; 4 col
+  ;regions[four_col_first]  = 4col Gpanel col 1
+  ;regions[four_col_second] = 4col Gpanel col 2
+  ;regions[four_col_third]  = 4col Gpanel col 3
+  ;regions[four_col_fourth] = 4col Gpanel col 4
 
-  ; 4 col 4 x 25
-  ;regions[four_first]  = GP 4 x 25% - First
-  ;regions[four_second] = GP 4 x 25% - Second
-  ;regions[four_third]  = GP 4 x 25% - Third
-  ;regions[four_fourth] = GP 4 x 25% - Fourth
+  ; 5 col
+  ;regions[five_col_first]  = 5col Gpanel col 1
+  ;regions[five_col_second] = 5col Gpanel col 2
+  ;regions[five_col_third]  = 5col Gpanel col 3
+  ;regions[five_col_fourth] = 5col Gpanel col 4
+  ;regions[five_col_fifth]  = 5col Gpanel col 5
 
-  ; 5 col 5 x 20
-  ;regions[five_first]  = GP 5 x 20% - First
-  ;regions[five_second] = GP 5 x 20% - Second
-  ;regions[five_third]  = GP 5 x 20% - Third
-  ;regions[five_fourth] = GP 5 x 20% - Fourth
-  ;regions[five_fifth]  = GP 5 x 20% - Fifth
-
-  ; 6 col 6 x 16
-  ;regions[six_first]  = GP 6 x 16% - First
-  ;regions[six_second] = GP 6 x 16% - Second
-  ;regions[six_third]  = GP 6 x 16% - Third
-  ;regions[six_fourth] = GP 6 x 16% - Fourth
-  ;regions[six_fifth]  = GP 6 x 16% - Fifth
-  ;regions[six_sixth]  = GP 6 x 16% - Sixth
+  ; 6 col
+  ;regions[six_col_first]  = 6col Gpanel col 1
+  ;regions[six_col_second] = 6col Gpanel col 2
+  ;regions[six_col_third]  = 6col Gpanel col 3
+  ;regions[six_col_fourth] = 6col Gpanel col 4
+  ;regions[six_col_fifth]  = 6col Gpanel col 5
+  ;regions[six_col_sixth]  = 6col Gpanel col 6
 
 
 ;----------// Skinr Styles
@@ -117,80 +101,38 @@
 
  
 ;----------// Theme Setting Defaults
-  settings[skip_navigation_display]           = focus
-  settings[search_snippet]                    = 1
-  settings[search_info_type]                  = 1
-  settings[search_info_user]                  = 1
-  settings[search_info_date]                  = 1
-  settings[search_info_comment]               = 1
-  settings[search_info_upload]                = 1
-  settings[search_info_separator]             = ' - '
-  settings[rebuild_registry]                  = 0
-  settings[show_page_info]                    = 0
-  settings[cleanup_classes_front]             = 0
-  settings[cleanup_classes_user_status]       = 0
-  settings[cleanup_classes_suggestions]       = 0
-  settings[cleanup_classes_node_type]         = 0
-  settings[cleanup_classes_language]          = 0
-  settings[cleanup_article_id]                = 0
-  settings[cleanup_article_classes_promote]   = 0
-  settings[cleanup_article_classes_sticky]    = 0
-  settings[cleanup_article_classes_teaser]    = 0
-  settings[cleanup_article_classes_preview]   = 0
-  settings[cleanup_article_classes_type]      = 0
-  settings[cleanup_article_classes_language]  = 0
-  settings[cleanup_comment_anonymous]         = 0
-  settings[cleanup_comment_article_author]    = 0
-  settings[cleanup_comment_by_viewer]         = 0
-  settings[cleanup_comment_new]               = 0
-  settings[cleanup_comment_zebra]             = 0
-  settings[cleanup_comment_wrapper_type]      = 0
-  settings[cleanup_block_block_module_delta]  = 0
-  settings[cleanup_block_classes_module]      = 0
-  settings[cleanup_block_classes_zebra]       = 0
-  settings[cleanup_block_classes_region]      = 0
-  settings[cleanup_block_classes_count]       = 0
-  settings[cleanup_menu_menu_class]           = 1
-  settings[cleanup_menu_link_classes]         = 1
-  settings[cleanup_menu_title_class]          = 0
-  settings[cleanup_main_mlid_class]           = 1
-  settings[cleanup_main_active_classes]       = 1
-  settings[cleanup_main_firstlast_classes]    = 1
-  settings[cleanup_sec_mlid_classes]          = 0
-  settings[cleanup_sec_active_classes]        = 0
-  settings[cleanup_sec_firstlast_classes]     = 0
-  settings[cleanup_item_list_zebra]           = 0
-  settings[cleanup_item_list_first_last]      = 0
-  settings[cleanup_views_css_name]            = 0
-  settings[cleanup_views_view_name]           = 0
-  settings[cleanup_views_display_id]          = 0
-  settings[cleanup_views_dom_id]              = 0
-  settings[cleanup_views_unformatted]         = 0
-  settings[cleanup_views_item_list]           = 0
-  settings[cleanup_fields_type]               = 0
-  settings[cleanup_fields_name]               = 0
-  settings[cleanup_fields_zebra]              = 0
-  settings[cleanup_headings_title_class]      = 1
-  settings[cleanup_headings_type_class]       = 0
-  settings[cleanup_content_class]             = 1
-  settings[cleanup_content_type_class]        = 0
-  settings[theme_main_menu_spans]             = 0
-  settings[theme_sec_menu_spans]              = 0
-  settings[theme_menu_link_spans]             = 0
-  settings[layout_method]                     = 0
-  settings[layout_width]                      = 960px
-  settings[layout_sidebar_first_width]        = 240
-  settings[layout_sidebar_last_width]         = 240
-  settings[layout_enable_settings]            = on
-  settings[layout_enable_width]               = on
-  settings[layout_enable_sidebars]            = on
-  settings[layout_enable_method]              = on
-  settings[layout_enable_frontpage]           = on
-  settings[equal_heights_sidebars]            = 0
-  settings[equal_heights_blocks]              = 0
-  settings[equal_heights_gpanels]             = 0
-  settings[horizontal_login_block]            = 0
-  settings[horizontal_login_block_overlabel]  = 0
-  settings[horizontal_login_block_enable]     = on
-  settings[color_schemes]                     = colors-default.css
-  settings[color_enable_schemes]              = off
+
+  settings[skip_navigation_display]        = 'focus'
+  settings[breadcrumb_display]             = 'yes'
+  settings[breadcrumb_separator]           = ' &#187; '
+  settings[breadcrumb_home]                = 0
+  settings[display_search_form_label]      = 1
+  settings[search_snippet]                 = 1
+  settings[search_info_type]               = 1
+  settings[search_info_user]               = 1
+  settings[search_info_date]               = 1
+  settings[search_info_comment]            = 1
+  settings[search_info_upload]             = 1
+  settings[search_info_separator]          = ' - '
+  settings[extra_page_classes]             = 0
+  settings[extra_article_classes]          = 0
+  settings[extra_comment_classes]          = 0
+  settings[extra_block_classes]            = 0
+  settings[extra_menu_classes]             = 1
+  settings[extra_item_list_classes]        = 0
+  settings[menu_item_span_elements]        = 0
+  settings[layout_method]                  = '0'
+  settings[layout_width]                   = '960px'
+  settings[layout_sidebar_first_width]     = '240'
+  settings[layout_sidebar_last_width]      = '240'
+  settings[layout_enable_settings]         = 'on'
+  settings[layout_enable_width]            = 'on'
+  settings[layout_enable_sidebars]         = 'on'
+  settings[layout_enable_method]           = 'on'
+  settings[equal_heights_sidebars]         = 0
+  settings[equal_heights_blocks]           = 0
+  settings[equal_heights_gpanels]          = 0
+  settings[horizontal_login_block]         = 0
+  settings[horizontal_login_block_enable]  = 'on'
+  settings[style_schemes]                  = 'style-default.css'
+  settings[style_enable_schemes]           = 'off'
