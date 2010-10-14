@@ -693,7 +693,7 @@ div.help a:hover,
 div.help a:focus,
 div.warning a:hover,
 div.warning a:focus {
-  color:#ff0;
+  text-decoration: underline;
 }
 div.messages,
 #block-system-help {
@@ -703,7 +703,7 @@ div.messages,
   border-radius: 2px;
 }
 div.messages {
-  background-position:8px 5px;
+  background-position: 8px 5px;
 }
 
 /* Forms */
