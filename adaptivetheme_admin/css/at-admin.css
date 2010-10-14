@@ -551,6 +551,10 @@ table {
   border-color: silver;
   width: 100%;
 }
+tr.even,
+tr.odd {
+  border-bottom: 0;
+}
 caption,
 th {
   font-weight: 700;
@@ -569,12 +573,12 @@ thead th {
 td,
 th {
   margin: 0;
-  padding: .375em .5em;
-  border-bottom: 1px solid #ccc;
+  padding: .85em .5em;
+  border-bottom: 0;
 }
 th.active a {
   padding-right: 25px;
-    position: relative;
+  position: relative;
 }
 th.active a img {
   position: absolute;
@@ -704,6 +708,12 @@ div.messages,
 }
 div.messages {
   background-position: 8px 5px;
+}
+div.admin-requirements,
+div.admin-required {
+  color:#666;
+  padding:0;
+  line-height:1.5;
 }
 
 /* Forms */
