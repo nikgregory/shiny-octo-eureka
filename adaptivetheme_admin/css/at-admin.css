@@ -754,14 +754,15 @@ input.form-radio {
 .form-item label.option input {
   vertical-align: middle;
 }
+td div.description,
 .form-item .description {
   font-size: 0.9em;
   padding: 2px;
   color: #666;
 }
 #user-admin-settings fieldset .fieldset-description {
-  font-size:1em;
-  padding-bottom:0.5em;
+  font-size: 1em;
+  padding-bottom: 0.5em;
   color: #666;
 }
 .form-type-radio .description,
