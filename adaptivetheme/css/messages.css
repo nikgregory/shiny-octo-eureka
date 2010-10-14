@@ -1,4 +1,7 @@
 /* Messages */
+div.messages {
+  margin: 10px;
+}
 div.help {
   background:#f7f7f7 url(images/help.png) no-repeat 8px 8px;
   border:none;

@@ -13,12 +13,12 @@
       <?php print render($title_suffix); ?>
       <?php print $user_picture; ?>
       <?php if ($display_submitted): ?>
-        <div class="submitted">
+        <p class="submitted">
           <?php
             print t('Submitted by !username on !datetime',
             array('!username' => '<span class="author">' . $name . '</span>', '!datetime' => '<time datetime="' . $datetime . '">' . $date . '</time>'));
           ?>
-        </div>
+        </p>
       <?php endif; ?>
     </header>
   <?php endif; ?>

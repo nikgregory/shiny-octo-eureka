@@ -1,9 +1,7 @@
 <?php
 // $Id$
 
-/**
- * Override or insert variables into all templates.
- */
+// Override or insert variables into all templates.
 // template_preprocess
 function adaptivetheme_preprocess(&$vars, $hook) {
   $vars['theme_path'] = base_path() . path_to_theme() .'/';
@@ -18,9 +16,7 @@ function adaptivetheme_process(&$vars) {
   }
 }
 
-/**
- * Override or insert variables into the HTML template.
- */
+// Preprocess variables for html.tpl.php.
 // template_preprocess_html
 function adaptivetheme_preprocess_html(&$vars) {
   $vars['skip_nav_class'] = '';
@@ -117,9 +113,7 @@ function adaptivetheme_process_html(&$vars) {
   $vars['classes'] = trim(implode(' ', $classes));
 }
 
-/**
- * Override or insert variables into the page templates.
- */
+// Preprocess variables for page.tpl.php.
 // template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
@@ -170,9 +164,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
 
-/**
- * Override or insert variables into the node templates.
- */
+// Preprocess variables for node.tpl.php.
 // template_preprocess_node
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
@@ -213,9 +205,7 @@ function adaptivetheme_process_node(&$vars) {
   $vars['classes'] = trim(implode(' ', $classes));
 }
 
-/**
- * Override or insert variables into the comment templates.
- */
+// Preprocess variables for comment.tpl.php.
 // template_preprocess_comment
 function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('extra_comment_classes')) {
@@ -252,9 +242,7 @@ function adaptivetheme_process_comment(&$vars) {
   }
 }
 
-/**
- * Override or insert variables into the block templates.
- */
+// Preprocess variables for block.tpl.php.
 function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('extra_block_classes')) {
     $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
@@ -276,9 +264,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
 }
 
-/**
- *  Modify search results based on theme settings.
- */
+// Modify search results based on theme settings.
 function adaptivetheme_preprocess_search_result(&$vars) {
   $result = $vars['result'];
   $vars['url'] = check_url($result['link']);
@@ -310,26 +296,25 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }
 
-/**
- * Process function for theme_field() and field.tpl.php.
- */
+// Process function for theme_field() and field.tpl.php.
 function adaptivetheme_preprocess_field(&$vars, $hook) {
   array_unshift($vars['theme_hook_suggestions'], 'field__' . $vars['element']['#field_type']);
 }
 
-/**
- * Preprocess variables for region.tpl.php.
- */
+// Preprocess variables for region.tpl.php.
 function adaptivetheme_preprocess_region(&$vars, $hook) {
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
 }
 
-/**
- * Process variables for aggregator-item.tpl.php.
- */
+// Process variables for aggregator-item.tpl.php.
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'c');
+}
+
+// Process variables for maintenance-page.tpl.php.
+function adaptivetheme_preprocess_maintenance_page(&$vars) {
+  $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }

@@ -12,12 +12,12 @@
       <em class="new"><?php print $new ?></em>
     <?php endif; ?>
     <?php print $picture; ?>
-    <div class="submitted">
+    <p class="submitted">
       <?php
         print t('Submitted by !username on !datetime',
         array('!username' => '<span class="author">' . $author . '</span>', '!datetime' => '<time datetime="' . $datetime . '">' . $created . '</time>'));
       ?>
-    </div>
+    </p>
   </header>
   <div<?php print $content_attributes; ?>>
     <?php

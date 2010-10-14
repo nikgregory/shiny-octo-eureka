@@ -7,11 +7,14 @@
  *
  * TODO: Check accessibility and -khtml styles.
  */
+html {
+  font-size: 75%;
+}
 body,
 body.section-admin {
   background: #fff;
   color: #222;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, "Bitstream Vera Sans", sans-serif;
+  font-family: Verdana, "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", "Bitstream Vera Sans", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -27,6 +30,7 @@ body.section-admin {
 }
 .overlay #page {
   background: none;
+  width: 100%;
 }
 .overlay div.add-or-remove-shortcuts {
   margin-top: 7px;
@@ -94,7 +98,14 @@ h1#page-title {
   position:relative;
   min-height: 60px;
 }
-#footer {
+#overlay #main-content-header {
+  background: transparent;
+  padding: 20px 20px 0;
+  border-bottom: 0;
+  position:relative;
+  min-height: 0;
+}
+#page-footer {
   background: #fff;
   margin: 0;
   padding: 15px 0;
@@ -167,20 +178,38 @@ a img {
   padding: 5px 0;
   float: right; /* LTR */
 }
-.breadcrumb {
+#breadcrumb {
   padding: 5px 0;
   float: left; /* LTR */
 }
+ol#crumbs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ol#crumbs li {
+  display: inline;
+}
 #time-and-date,
-.breadcrumb,
-.breadcrumb a:link,
-.breadcrumb a:visited {
+ol#crumbs,
+ol#crumbs a:link,
+ol#crumbs a:visited {
   color: #ccc;
 }
-.breadcrumb a:hover,
-.breadcrumb a:focus,
-.breadcrumb a:active {
+ol#crumbs a:hover,
+ol#crumbs a:focus,
+ol#crumbs a:active {
   color: #fff;
+}
+#overlay ol#crumbs,
+#overlay ol#crumbs a:link,
+#overlay ol#crumbs a:visited {
+  color: #666;
+}
+#overlay ol#crumbs a:hover,
+#overlay ol#crumbs a:focus,
+#overlay ol#crumbs a:active {
+  color: #333;
 }
 #secondary-nav {
   background: transparent;
@@ -359,8 +388,20 @@ ul.menu li a {
 }
 
 /* Admin related */
-dl.admin-list {
+dl.admin-list,
+dl.node-type-list {
   padding: 0 10px;
+}
+dl.admin-list dt,
+dl.node-type-list dt {
+  font-weight: 700;
+}
+dl.admin-list dd,
+dl.node-type-list dd {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0 7px;
+  margin: 0 0 7px;
+  color: #666;
 }
 div.admin-panel .description {
   margin:0 0 3px;
@@ -397,9 +438,9 @@ div.admin .right {
   margin: 0;
   padding: 1em 0;
 }
-#main-content .admin-panel dt,
-#main-content .admin-panel ul.menu li,
-#main-content .admin-panel ul.item-list li{
+.admin-panel dt,
+.admin-panel ul.menu li,
+.admin-panel ul.item-list li {
   font-weight: 400;
 }
 .admin-panel dd {
@@ -661,6 +702,9 @@ div.messages,
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
+div.messages {
+  background-position:8px 5px;
+}
 
 /* Forms */
 form {
@@ -700,12 +744,22 @@ input.form-radio {
 .form-item label.option input {
   vertical-align: middle;
 }
+.form-item .description {
+  font-size: 0.9em;
+  padding: 2px;
+  color: #666;
+}
+#user-admin-settings fieldset .fieldset-description {
+  font-size:1em;
+  padding-bottom:0.5em;
+  color: #666;
+}
 textarea,
 input {
   font: 1em Verdana, Arial, "Bitstream Vera Sans", sans-serif;
 }
 div.form-item {
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   margin-top: 1em;
 }
 .form-item textarea.error {
@@ -811,6 +865,21 @@ fieldset {
 .fieldset-wrapper {
   padding: 0 3px;
 }
+
+fieldset fieldset {
+  margin: 10px 30px;
+  background: #f9f9f9;
+}
+fieldset fieldset .fieldset-wrapper {
+  padding: 10px 15px;
+}
+fieldset fieldset fieldset {
+  margin: 20px;
+  background: #f4f4f4;
+}
+fieldset fieldset fieldset .fieldset-wrapper {
+  padding: 10px 15px;
+}
 .filter-wrapper {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-topleft: 0;
@@ -844,6 +913,9 @@ fieldset#edit-body-und-0-format {
   -webkit-border-radius: 0;
   border-radius: 0;
   background: #fff;
+}
+.vertical-tabs-panes .fieldset-wrapper {
+  padding: 10px 15px;
 }
 legend {
   font-size: 1em;
@@ -915,7 +987,6 @@ div.vertical-tabs ul.vertical-tabs-list li {
   background: #f9f9f9;
 }
 
-
 /* AT Style overrides for Skinr classes */
 .block.at-inline-menu .block-inner {
   border: none;
@@ -985,6 +1056,7 @@ tr #acquia-agent-no-search a:visited {
 ul.action-links {
   margin:20px 0 0;
   padding:0;
+  list-style: none;
 }
 ul.action-links li a {
   background: url("images/add.png") no-repeat scroll 2px center #fff;
@@ -1002,3 +1074,38 @@ ul.action-links li a:focus {
 .system-themes-list h2 {
   margin:1em 0 0;
 }
+
+/* Content exposed filters */
+.exposed-filters .filters {
+  width:auto;
+}
+.exposed-filters .form-item {
+  background:#F9F9F9;
+  margin:0 0 1px;
+  padding:0 5px 0 10px;
+}
+.exposed-filters .form-item label {
+  float:left;
+  font-weight:bold;
+  text-transform:capitalize;
+  width:14em;
+  margin:0.45em 0 0;
+  padding:1px;
+}
+
+/* Dashboard */
+#dashboard #disabled-blocks .block {
+  clear:none;
+}
+.dashboard-region ul {
+  padding: 5px 0;
+}
+
+
+
+
+
+
+
+
+

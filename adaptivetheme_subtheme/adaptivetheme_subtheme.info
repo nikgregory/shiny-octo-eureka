@@ -105,7 +105,7 @@
   settings[skip_navigation_display]        = 'focus'
   settings[breadcrumb_display]             = 'yes'
   settings[breadcrumb_separator]           = ' &#187; '
-  settings[breadcrumb_home]                = 0
+  settings[breadcrumb_home]                = 1
   settings[display_search_form_label]      = 1
   settings[search_snippet]                 = 1
   settings[search_info_type]               = 1
