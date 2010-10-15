@@ -44,10 +44,13 @@ body.section-admin {
   margin-left: 20px;
   margin-right: 20px;
 }
-.no-sidebars #messages-and-help,
-.no-sidebars .columns-inner {
-  margin-left: 20px;
-  margin-right: 20px;
+#messages-and-help,
+.columns-inner {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.content-inner {
+  padding: 0 10px;
 }
 
 /* Micro reset */
@@ -68,7 +71,7 @@ h3 {
 /* Page */
 h1#page-title {
   font-size: 1.33em;
-  padding: 0 5px;
+  padding: 0;
 }
 .region-sidebar-first .block,
 .region-sidebar-second .block {
@@ -84,7 +87,7 @@ h1#page-title {
 #content {
   padding: 0 10px;
 }
-#page {
+.container {
   background: #fff;
   min-width: 960px;
 }
@@ -1126,6 +1129,25 @@ ul.action-links li a:focus {
 }
 #system-themes-page .theme-info .theme-description {
   color: #666;
+}
+
+/* Block search */
+#block-search-form .block-inner {
+  background: none;
+  border: none;
+}
+
+/* Tips */
+#edit-body-und-0-format {
+  padding-top: 0;
+}
+#edit-body-und-0-format-help {
+  padding-top: 1.7em;
+}
+.tips {
+  font-size: 0.95em;
+  margin: 0;
+  padding: 0 0 0 1.5em;
 }
 
 /* Skip Navigation */

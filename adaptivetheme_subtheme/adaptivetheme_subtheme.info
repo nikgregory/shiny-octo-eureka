@@ -97,8 +97,12 @@
 
 
 ;----------// Site Features
-  ; AT7 does not support the Main or Secondary menu variables, 
-  ; instead all menus are handled as blocks.
+  ; AT7 does not print Main or Secondary menu's by default, 
+  ; instead all menus are handled as blocks. You can add
+  ; the variables back in if you require (un-comment the feature
+  ; below first), the add the your code to page.tpl.php. You can use
+  ; the following variables to print these menus:
+  
 
   features[] = logo
   features[] = name
@@ -107,6 +111,8 @@
   features[] = comment_user_picture
   features[] = comment_user_verification
   features[] = favicon
+   features[] = main_menu
+   features[] = secondary_menu
 
  
 ;----------// Theme Setting Defaults

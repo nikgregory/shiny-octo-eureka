@@ -1,8 +1,8 @@
 ; $Id$
 
 ;----------// Theme Information
-  name        = AdaptiveTheme
-  description = A starter theme for Drupal Rockstars by <b><a href="http://adaptivethemes.com">AdaptiveThemes</a></b>. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help or wish to post a bug report please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
+  name        = AT Core
+  description = AT Core is the base theme - you do not need to enable or modify this theme - instead use the Subtheme as a starting point for building your own theme. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png

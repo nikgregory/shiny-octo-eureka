@@ -131,9 +131,43 @@ function adaptivetheme_preprocess_page(&$vars) {
       'title' => t('Home page')),
     )
   ) : '';
+  if (isset($vars['main_menu'])) {
+    $vars['primary_navigation'] = theme('links__system_main_menu', array(
+      'links' => $vars['main_menu'],
+      'attributes' => array(
+        'class' => array('menu', 'primary-menu', 'clearfix'),
+       ),
+     'heading' => array(
+     'text' => t('Primary navigation'),
+     'level' => 'h2',
+       'class' => array('element-invisible'),
+     )
+    ));
+  }
+  $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
+  if (isset($vars['secondary_menu'])) {
+    $vars['secondary_navigation'] = theme('links__system_secondary_menu', array(
+      'links' => $vars['secondary_menu'],
+      'attributes' => array(
+        'class' => array('menu', 'secondary-menu', 'clearfix'),
+     ),
+     'heading' => array(
+     'text' => t('Secondary navigation'),
+     'level' => 'h2',
+       'class' => array('element-invisible'),
+     )
+    ));
+  }
+  $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+}
+
+// Helper function for theming main and secondary variables.
+function _theme_menu_variables($menu, $type) {
+  $output = '<div id=' . $type . '-menu-bar class="nav"><nav>' . $menu . '</nav></div>';
+  return $output;
 }
 
 // Preprocess variables for node.tpl.php.
@@ -230,6 +264,9 @@ function adaptivetheme_preprocess_block(&$vars) {
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu', 'superfish', 'nice_menus');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
+  }
+  if (in_array($vars['block']->delta, $nav_blocks) && $vars['block']->region == 'menu_bar') {
+    $vars['theme_hook_suggestions'][] = 'block__menu_bar';
   }
   $nav_modules = array('superfish', 'nice_menus');
   if (in_array($vars['block']->module, $nav_modules)) {

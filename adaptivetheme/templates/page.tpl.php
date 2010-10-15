@@ -24,6 +24,8 @@
       <?php print render($page['header']); ?>
     </header>
     <?php print render($page['menu_bar']); ?>
+    <?php if ($primary_navigation): print $primary_navigation; endif; ?>
+    <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
   <?php endif; ?>
   <?php if ($breadcrumb): ?>
     <section id="breadcrumb"><?php print $breadcrumb; ?></section>

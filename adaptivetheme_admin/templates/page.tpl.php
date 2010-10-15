@@ -13,7 +13,6 @@
 
   <div id="main-content-header">
     <?php if ($in_overlay): print $breadcrumb; endif; ?>
-    <?php print $messages; ?>
     <?php if (!$in_overlay): // hide in overlay ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
@@ -31,6 +30,7 @@
       <?php if ($secondary_local_tasks): ?>
         <div id="secondary-tasks"><ul class="tabs secondary"><?php print render($secondary_local_tasks); ?></ul></div>
       <?php endif; ?>
+      <?php print $messages; ?>
       <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
       <?php print render($page['highlight']); ?>
       <div id="main-content">
