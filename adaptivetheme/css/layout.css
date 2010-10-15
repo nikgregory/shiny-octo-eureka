@@ -139,7 +139,7 @@ width:160px;
 }
 
 /* Containers and layout helpers. */
-div.container {
+.container {
   position:relative;
   width:960px;
   margin:0 auto;

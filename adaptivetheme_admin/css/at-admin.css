@@ -45,7 +45,6 @@ body.section-admin {
   margin-right: 20px;
 }
 .no-sidebars #messages-and-help,
-.no-sidebars #breadcrumb,
 .no-sidebars .columns-inner {
   margin-left: 20px;
   margin-right: 20px;
@@ -69,6 +68,7 @@ h3 {
 /* Page */
 h1#page-title {
   font-size: 1.33em;
+  padding: 0 5px;
 }
 .region-sidebar-first .block,
 .region-sidebar-second .block {
@@ -96,7 +96,7 @@ h1#page-title {
   padding: 20px 20px 0;
   border-bottom: #eee;
   position:relative;
-  min-height: 60px;
+  min-height: 50px;
 }
 #overlay #main-content-header {
   background: transparent;
@@ -161,8 +161,8 @@ a img {
   border: none;
 }
 
-/* Header */
-#header {
+/* Banner */
+#banner {
   font-size: .94em;
   padding: 5px 20px 0;
   background: #555;
@@ -518,7 +518,7 @@ ul.primary li.active a {
 }
 ul.secondary {
   border-bottom: 0;
-  margin: 1em 0 1.25em;
+  margin: 1.5em 0 1em;
   padding: 0 0 1em;
 }
 ul.secondary li {
@@ -876,7 +876,7 @@ form#views-add-display-form div.form-item {
 fieldset {
   background: #fff;
   border: 0;
-  margin: 15px 0;
+  margin: 5px 0 10px;
   padding: 10px 0;
   position: relative;
 }
@@ -1119,11 +1119,63 @@ ul.action-links li a:focus {
   padding: 5px 0;
 }
 
+/* Themes page */
+#system-themes-page .theme-info h3 {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+#system-themes-page .theme-info .theme-description {
+  color: #666;
+}
 
-
-
-
-
-
-
-
+/* Skip Navigation */
+#skip-nav {
+  text-align: left;
+  float: left;
+  width: 160px;
+}
+#skip-nav.show-skip-link {
+  text-align:right;
+}
+#skip-nav.show-on-focus {
+  margin-top: 0;
+  position: absolute;
+  left: 50%;
+  margin-left: -5.25em;
+  width: auto !important;
+  z-index: 50;
+}
+#skip-nav.show-on-focus a,
+#skip-nav.show-on-focus a:link,
+#skip-nav.show-on-focus a:visited,
+#skip-nav.show-on-focus a:focus,
+#skip-nav.show-on-focus a:hover,
+#skip-nav.show-on-focus a:active {
+  position: absolute;
+  display: block;
+  top: auto;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  background: #444;
+  color: #fff;
+  font-size: 0.94em;
+  text-decoration: none;
+  -khtml-border-radius: 0 0 10px 10px;
+  -moz-border-radius: 0 0 10px 10px;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  border-radius:0 0 10px 10px;
+}
+#skip-nav.show-on-focus a:hover,
+#skip-nav.show-on-focus a:active,
+#skip-nav.show-on-focus a:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  outline: 0;
+  padding: 1px 10px 2px 10px;
+}
