@@ -7,35 +7,26 @@
     <header id="banner" class="clearfix">
       <?php if ($linked_site_logo || $linked_site_name || $site_slogan): ?>
         <div id="branding">
+          <?php if ($linked_site_logo): ?><div id="logo"><?php print $linked_site_logo; ?></div><?php endif; ?>
           <?php if ($title): ?>
-            <div class="brand-elements"><strong>
-              <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
-              <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              <?php if ($site_slogan): ?><span id="site-slogan"><?php print $site_slogan; ?></span><?php endif; ?>
-            </strong></div>
+            <div id="brand-elements">
+              <?php if ($linked_site_name): ?><div id="site-name"><strong><?php print $linked_site_name; ?></strong></div><?php endif; ?>
+              <?php if ($site_slogan): ?><div id="site-slogan"><?php print $site_slogan; ?></div><?php endif; ?>
+            </div>
           <?php else: ?>
-            <h1 class="brand-elements">
-              <?php if ($linked_site_logo): ?><span id="logo"><?php print $linked_site_logo; ?></span><?php endif; ?>
-              <?php if ($linked_site_name): ?><span id="site-name"><?php print $linked_site_name; ?></span><?php endif; ?>
-              <?php if ($site_slogan): ?><span id="site-slogan"><?php print $site_slogan; ?></span><?php endif; ?>
-            </h1>
+            <hgroup id="brand-elements">
+              <?php if ($linked_site_name): ?><h1 id="site-name"><?php print $linked_site_name; ?></h1><?php endif; ?>
+              <?php if ($site_slogan): ?><h2 id="site-slogan"><?php print $site_slogan; ?></h2><?php endif; ?>
+            </hgroup>
           <?php endif; ?>
         </div>
       <?php endif; ?>
       <?php print render($page['header']); ?>
     </header>
-    <?php if ($page['menu_bar']): ?>
-      <nav id="menu-bar"><?php print render($page['menu_bar']); ?></nav>
-    <?php endif; ?>
-    <?php if ($primary_navigation): ?>
-      <nav id="primary-nav"><?php print $primary_navigation; ?></nav>
-    <?php endif; ?>
-    <?php if ($secondary_navigation): ?>
-      <nav id="secondary-nav"><?php print $secondary_navigation; ?></nav>
-    <?php endif; ?>
+    <?php print render($page['menu_bar']); ?>
   <?php endif; ?>
-  <?php if($breadcrumb): ?>
-    <nav id="breadcrumb"><?php print $breadcrumb; ?></nav>
+  <?php if ($breadcrumb): ?>
+    <section id="breadcrumb"><?php print $breadcrumb; ?></section>
   <?php endif; ?>
   <?php print $messages; ?>
   <?php print render($page['help']); ?>

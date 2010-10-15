@@ -379,17 +379,17 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('extra_item_list_classes'),
     '#description' => t('Adds first, last and odd/even classes to item lists.'),
   );
-  // Primary and Secondary Links Settings
-  $form['themedev']['dev']['primary_secondary_links'] = array(
+  // Menu Links Settings
+  $form['themedev']['dev']['menu_links'] = array(
     '#type' => 'fieldset',
     '#title' => t('Modify Links'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   // Add spans to theme_links
-  $form['themedev']['dev']['primary_secondary_links']['menu_item_span_elements'] = array(
+  $form['themedev']['dev']['menu_links']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
-    '#title' => check_plain(t('Add <span></span> tags around Main and Secondary menu anchor text')),
+    '#title' => check_plain(t('Add <span></span> tags to menu items')),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
   // Theme Settings Export

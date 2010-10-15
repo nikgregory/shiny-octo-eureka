@@ -606,6 +606,9 @@ tr:first-child td.container {
 #block-admin-display-form tr .block {
   background: transparent;
 }
+tr.draggable td.block {
+  padding: 0 0.5em;
+}
 #system-modules td strong {
   display: block;
   width: 110px;

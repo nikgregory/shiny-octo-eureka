@@ -4,26 +4,23 @@
 
 header {
   clear: both;
+  padding: 10px 0 0;
 }
-
 #branding {
   float: left;
-  width: 300px;
+  width: 49.5%;
 }
-
-h1.brand-elements {
-  font-size:1em;
-}
-.brand-elements span {
-  display: block;
+hgroup#brand-elements {
+  font-size: 1em;
 }
 #logo {
   float: left;
+  padding: 0 10px 0 0;
 }
 #site-name {
-  font-size: 2em;
-  font-weight: 700;
-  line-height: 1.5;
+  font-size: 1.75em;
+  margin: 0;
+  padding: 0;
 }
 #site-name a:link    {}
 #site-name a:visited {}
@@ -31,8 +28,15 @@ h1.brand-elements {
 #site-name a:focus   {}
 #site-name a:active  {}
 
-#header-region {
-  float: left;
+#site-slogan {
+  font-size: 1.25em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.region-header {
+  float: right;
 }
 
 h1#page-title {}
@@ -48,6 +52,11 @@ h1#page-title {}
 /* Footer */
 footer {}
 
+/* Field reset */
+.field-type-taxonomy-term-reference h2,
+.field-type-taxonomy-term-reference h3 {
+  font-size: 1em;
+}
 
 /* Feed icons */
 .feed-icon img {

@@ -131,34 +131,6 @@ function adaptivetheme_preprocess_page(&$vars) {
       'title' => t('Home page')),
     )
   ) : '';
-  if (isset($vars['main_menu'])) {
-    $vars['primary_navigation'] = theme('links__system_main_menu', array(
-      'links' => $vars['main_menu'],
-      'attributes' => array(
-        'class' => array('links', 'clearfix'),
-        //'id' => array('primary-nav'),
-      ),
-      'heading' => array(
-        'text' => t('Primary navigation'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-      )
-    ));
-  }
-  if (isset($vars['secondary_menu'])) {
-    $vars['secondary_navigation'] = theme('links__system_secondary_menu', array(
-      'links' => $vars['secondary_menu'],
-      'attributes' => array(
-        'class' => array('links', 'clearfix'),
-        //'id' => array('secondary-nav'),
-       ),
-      'heading' => array(
-        'text' => t('Secondary navigation'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-       )
-     ));
-  }
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
@@ -261,6 +233,9 @@ function adaptivetheme_preprocess_block(&$vars) {
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
+  }
+  if ($vars['block']->region == 'menu_bar') {
+    $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 }
 
