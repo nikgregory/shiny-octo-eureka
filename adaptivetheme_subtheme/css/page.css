@@ -53,9 +53,20 @@ h1#page-title {}
 footer {}
 
 /* Field reset */
-.field-type-taxonomy-term-reference h2,
-.field-type-taxonomy-term-reference h3 {
+.field-type-taxonomy-term-reference .field-label {
   font-size: 1em;
+}
+.field-type-taxonomy-term-reference ul {
+  margin: 0;
+  padding: 0;
+}
+.field-type-taxonomy-term-reference ul li {
+  display: inline;
+  list-style: none;
+  padding: 0 0.3em;
+}
+.field-lable-inline .field-label {
+  display: inline;
 }
 
 /* Feed icons */

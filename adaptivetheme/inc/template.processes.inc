@@ -209,9 +209,6 @@ function adaptivetheme_process_comment(&$vars) {
     theme_get_setting('extra_comment_classes') ? '' : $classes = str_replace('comment-new', '', $classes);
   }
   $vars['classes'] = trim(implode(' ', $classes));
-  if (theme_get_setting('comment_permalink_cid') == 0) {
-    $vars['permalink'] = '';
-  }
 }
 
 // Preprocess variables for block.tpl.php.
@@ -230,13 +227,19 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
   $vars['title_attributes_array']['class'][] = 'title block-title';
   $vars['content_attributes_array']['class'][] = 'content block-content';
-  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
+  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu', 'superfish', 'nice_menus');
   if (in_array($vars['block']->delta, $nav_blocks)) {
+    $vars['theme_hook_suggestions'][] = 'block__menu';
+  }
+  $nav_modules = array('superfish', 'nice_menus');
+  if (in_array($vars['block']->module, $nav_modules)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
   }
   if ($vars['block']->region == 'menu_bar') {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
+  // For example we can have templates such as block--header--search, or block--menu-bar--menu, which is cool...
+  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
 }
 
 // Modify search results based on theme settings.
