@@ -177,7 +177,7 @@ a img {
   min-width: 960px;
   min-height: 80px;
 }
-#time-and-date {
+header time {
   padding: 5px 0;
   float: right; /* LTR */
 }
@@ -193,7 +193,7 @@ ol#crumbs {
 ol#crumbs li {
   display: inline;
 }
-#time-and-date,
+header time,
 ol#crumbs,
 ol#crumbs a:link,
 ol#crumbs a:visited {
@@ -877,18 +877,18 @@ form#views-add-display-form div.form-item {
   color: #777;
 }
 fieldset {
-  background: #fff;
+  background: #fdfdfd;
   border: 0;
   margin: 5px 0 10px;
   padding: 10px 0;
   position: relative;
 }
 .fieldset-wrapper {
-  padding: 0 3px;
+  padding: 0 15px;
 }
 
 fieldset fieldset {
-  margin: 10px 30px;
+  margin: 10px;
   background: #f9f9f9;
 }
 fieldset fieldset .fieldset-wrapper {

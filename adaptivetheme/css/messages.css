@@ -33,21 +33,16 @@ div.help ul:last-child {
   margin-top:4px;
   padding:3px 6px 1px;
 }
-.article-unpublished,
-.comment-unpublished {
-  background-color:#FFF6DF;
+#page article.article-unpublished,
+#page article.comment-unpublished {
+  background-color: #FFFCE5;
 }
-.unpublished {
-  visibility:hidden;
-}
-.article-unpublished .unpublished,
-.comment-unpublished .unpublished {
-  background:transparent url(images/warning.png) no-repeat 0 .1em;
-  color:#FFB900;
-  font-size:.94em;
-  margin-left:.5em;
-  padding-left:18px;
-  visibility:visible;
+#page .article-unpublished .unpublished,
+#page .comment-unpublished .unpublished {
+  background: url("images/warning.png") no-repeat 5px 12px;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 10px 10px 25px;
 }
 div#acquia-agent-no-search {
   padding-left:3em !important;

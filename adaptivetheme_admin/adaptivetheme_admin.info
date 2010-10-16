@@ -11,16 +11,13 @@
 ;----------// Stylesheets
   stylesheets[all][] = css/at-admin.css
 
-;----------// Skinr Styles
-  skinr[options][inherit_skins] = true
-
 ;----------// Regions
-  regions[help]           = Help
-  regions[hightlight]     = Highlight
   regions[content]        = Main Content
   regions[sidebar_first]  = Sidebar first
   regions[sidebar_second] = Sidebar second
   regions[footer]         = Footer
+  regions[hightlight]     = Highlight
+  regions[help]           = Help
   regions[page_top]       = Page top
   regions[page_bottom]    = Page bottom
 
@@ -28,6 +25,7 @@
   settings[shortcut_module_link] = 1
 
 ;----------// Features
+  features[] = logo
   features[] = name
   features[] = favicon
   features[] = main_menu

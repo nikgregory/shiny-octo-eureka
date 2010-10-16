@@ -2,12 +2,8 @@
 // $Id$
 
 // Override or insert variables into all templates.
-// template_preprocess
-function adaptivetheme_preprocess(&$vars, $hook) {
-  $vars['theme_path'] = base_path() . path_to_theme() .'/';
-}
 // template_process
-function adaptivetheme_process(&$vars) {
+function adaptivetheme_preprocess(&$vars) {
   if (module_exists('overlay')) {
     $vars['in_overlay'] = (overlay_get_mode() == 'child');
   }
@@ -144,7 +140,6 @@ function adaptivetheme_preprocess_page(&$vars) {
      )
     ));
   }
-  $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
   if (isset($vars['secondary_menu'])) {
     $vars['secondary_navigation'] = theme('links__system_secondary_menu', array(
       'links' => $vars['secondary_menu'],
@@ -158,6 +153,7 @@ function adaptivetheme_preprocess_page(&$vars) {
      )
     ));
   }
+  $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
   $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
@@ -191,6 +187,10 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['title_attributes_array']['class'][] = 'title article-title';
   $vars['content_attributes_array']['class'][] = 'content article-content';
   $vars['datetime'] = format_date($vars['created'], 'custom', 'c');
+  $vars['unpublished'] = '';
+  if (!$vars['status']) {
+    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+  }
 }
 // template_process_node
 function adaptivetheme_process_node(&$vars) {
@@ -225,6 +225,10 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
   $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'c');
+  $vars['unpublished'] = '';
+  if ($vars['status'] == 'comment-unpublished') {
+    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+  }
 }
 // template_process_comment
 function adaptivetheme_process_comment(&$vars) {

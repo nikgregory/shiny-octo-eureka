@@ -2,6 +2,7 @@
 // $Id$
 ?>
 <article id="article-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <?php print $unpublished; ?>
   <?php if ($title || $display_submitted): ?>
     <header>
       <?php print render($title_prefix); ?>

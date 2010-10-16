@@ -2,6 +2,7 @@
 // $Id$
 ?>
 <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <?php print $unpublished; ?>
   <header>
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>

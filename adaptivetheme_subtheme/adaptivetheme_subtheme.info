@@ -2,7 +2,7 @@
 
 ;----------// Theme Information
   name        = AT Subtheme
-  description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme.
+  description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -97,12 +97,6 @@
 
 
 ;----------// Site Features
-  ; AT7 does not print Main or Secondary menu's by default, 
-  ; instead all menus are handled as blocks. You can add
-  ; the variables back in if you require (un-comment the feature
-  ; below first), the add the your code to page.tpl.php. You can use
-  ; the following variables to print these menus:
-  
 
   features[] = logo
   features[] = name
@@ -111,8 +105,8 @@
   features[] = comment_user_picture
   features[] = comment_user_verification
   features[] = favicon
-   features[] = main_menu
-   features[] = secondary_menu
+  features[] = main_menu
+  features[] = secondary_menu
 
  
 ;----------// Theme Setting Defaults
