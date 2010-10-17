@@ -4,7 +4,7 @@
 /**
  * Override or insert variables into page templates.
  */
-function adaptivetheme_admin_process_page(&$vars) {
+function adaptivetheme_admin_preprocess_page(&$vars) {
   global $user;
   // Welcome message with date for the admin theme.
   if ($vars['logged_in']) {

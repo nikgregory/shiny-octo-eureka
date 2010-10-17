@@ -26,7 +26,7 @@
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
   regions[content]           = Main Content
-  regions[highlight]         = Highlight
+  regions[highlighted]       = Highlighted
   regions[content_aside]     = Aside
   regions[secondary_content] = Secondary
   regions[tertiary_content]  = Tertiary

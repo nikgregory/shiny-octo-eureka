@@ -1,17 +1,6 @@
 <?php
 // $Id$
 
-// Override or insert variables into all templates.
-// template_process
-function adaptivetheme_preprocess(&$vars) {
-  if (module_exists('overlay')) {
-    $vars['in_overlay'] = (overlay_get_mode() == 'child');
-  }
-  else {
-    $vars['in_overlay'] = FALSE;
-  }
-}
-
 // Preprocess variables for html.tpl.php.
 // template_preprocess_html
 function adaptivetheme_preprocess_html(&$vars) {

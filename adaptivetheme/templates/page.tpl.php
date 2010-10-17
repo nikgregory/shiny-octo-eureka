@@ -37,7 +37,7 @@
   <?php endif; ?>
   <div id="columns"><div class="columns-inner clearfix">
     <div id="content-column"><div class="content-inner">
-      <?php print render($page['highlight']); ?>
+      <?php print render($page['highlighted']); ?>
       <div id="main-content">
         <?php print render($title_prefix); ?>
         <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>

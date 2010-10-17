@@ -9,11 +9,9 @@
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>
-  <?php if (!$in_overlay): ?>
-    <div id="skip-nav" class="<?php print $skip_nav_class; ?>">
-      <a href="#main-content"><?php print t('Skip to main content'); ?></a>
-    </div>
-  <?php endif; ?>
+  <div id="skip-nav" class="<?php print $skip_nav_class; ?>">
+    <a href="#main-content"><?php print t('Skip to main content'); ?></a>
+  </div>
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>

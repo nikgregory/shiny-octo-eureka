@@ -2,7 +2,7 @@
 
 ;----------// Theme Information
   name        = AT Admin
-  description = Clean, usable Administration theme for Drupal 7.
+  description = A better admin theme for Drupal 7.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -12,12 +12,11 @@
   stylesheets[all][] = css/at-admin.css
 
 ;----------// Regions
+  regions[help]           = Help
   regions[content]        = Main Content
   regions[sidebar_first]  = Sidebar first
   regions[sidebar_second] = Sidebar second
   regions[footer]         = Footer
-  regions[hightlight]     = Highlight
-  regions[help]           = Help
   regions[page_top]       = Page top
   regions[page_bottom]    = Page bottom
 
@@ -25,7 +24,7 @@
   settings[shortcut_module_link] = 1
 
 ;----------// Features
-  features[] = logo
+  ;features[] = logo
   features[] = name
   features[] = favicon
   features[] = main_menu

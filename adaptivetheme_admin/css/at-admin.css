@@ -1,9 +1,5 @@
 /**
  * $Id$
- * adaptivethemes.com
- *
- * @file at-admin.css
- * Contains all styles for AT Admin theme.
  *
  * TODO: Check accessibility and -khtml styles.
  */
@@ -67,6 +63,9 @@ h3 {
   font-weight: 400;
   margin: 1em 0 0;
 }
+p {
+  line-height: 1.4;
+}
 
 /* Page */
 h1#page-title {
@@ -101,16 +100,9 @@ h1#page-title {
   position:relative;
   min-height: 50px;
 }
-#overlay #main-content-header {
-  background: transparent;
-  padding: 20px 20px 0;
-  border-bottom: 0;
-  position:relative;
-  min-height: 0;
-}
 #page-footer {
   background: #fff;
-  margin: 0;
+  margin: 0 10px;
   padding: 15px 0;
 }
 .page-block .region {
@@ -127,10 +119,8 @@ h1#page-title {
   padding: 9px 12px;
 }
 .block-region {
-  background: #eaf2fa;
-  border-color: #9bbfcf;
-  color: #9bbfcf;
-  font-weight: 700;
+  font-size: 1em;
+  margin: 10px 0 0;
 }
 #blocks tr.region-title {
   background:#fff;
@@ -203,16 +193,6 @@ ol#crumbs a:hover,
 ol#crumbs a:focus,
 ol#crumbs a:active {
   color: #fff;
-}
-#overlay ol#crumbs,
-#overlay ol#crumbs a:link,
-#overlay ol#crumbs a:visited {
-  color: #666;
-}
-#overlay ol#crumbs a:hover,
-#overlay ol#crumbs a:focus,
-#overlay ol#crumbs a:active {
-  color: #333;
 }
 #secondary-nav {
   background: transparent;
@@ -329,6 +309,9 @@ tr #acquia-agent-no-search a:hover {
 .content {
   margin: 0 .5em .5em;
 }
+#block-system-help .content {
+  margin: 0 0 .5em;
+}
 #block-system-0 .block-inner {
   border: none;
   text-align: center;
@@ -340,9 +323,8 @@ tr .block {
 .admin-panel h3 {
   display: block;
   font-size: 1.12em;
-  padding: .1em .5em;
+  padding: .1em .5em .2em;
   background: #E0E0D8;
-  text-shadow: 0 1px 0 #fff;
 }
 .admin-panel h3 {
   margin: 0 0 0.5em;
@@ -397,7 +379,7 @@ dl.node-type-list {
 }
 dl.admin-list dt,
 dl.node-type-list dt {
-  font-weight: 700;
+  font-weight: 400;
 }
 dl.admin-list dd,
 dl.node-type-list dd {
@@ -490,6 +472,11 @@ div.add-or-remove-shortcuts  {
 .admin-panel ul li {
   color: #555;
 }
+a.block-demo-backlink,
+a.block-demo-backlink:link,
+a.block-demo-backlink:visited {
+  padding:4px 10px 2px;
+}
 
 /* Main, Secondary, local tasks menus */
 ul.primary {
@@ -527,20 +514,24 @@ ul.secondary {
 ul.secondary li {
   border-right: 0;
   list-style: none;
-  padding: 0 10px 0 0;
+  padding: 0 2px 0 0; /* LTR */
 }
 ul.secondary li a {
-  background: #999;
-  color: #fff;
-  padding: 3px 8px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  background: #eee;
+  color: #666;
+  font-size: 0.917em;
+  font-weight: 700;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 8px;
 }
 ul.secondary li a:hover,
 ul.secondary li a.active {
   border-bottom: 0;
   text-decoration: none;
-  background: #666;
+  background: #ccc;
 }
 .tabs {
   margin-bottom: .75em;
@@ -567,6 +558,7 @@ td,
 th {
   vertical-align: middle;
 }
+thead tr,
 thead th {
   font-weight: 700;
   border-bottom: 1px solid #ccc;
@@ -656,7 +648,7 @@ tr.even td.active {
 }
 div.messages,
 div.help {
-  margin: 10px 0 0;
+  margin: 10px 0;
 }
 div.messages,
 div.status,
@@ -822,6 +814,7 @@ input.teaser-button {
   padding: 2px;
 }
 input[value~=Save],
+input[value~=Update],
 #system-theme-settings input#edit-submit,
 .node-form input#edit-submit.form-submit,
 input#edit-save.form-submit {
@@ -832,6 +825,7 @@ input#edit-delete.form-submit,
 #user-multiple-delete-confirm input#edit-submit {
   background: transparent url(images/red-button.png) no-repeat top;
 }
+input[value~=Update]:hover,
 input[value~=Save]:hover,
 #system-theme-settings input#edit-submit:hover,
 input.form-submit:hover,
@@ -877,7 +871,7 @@ form#views-add-display-form div.form-item {
   color: #777;
 }
 fieldset {
-  background: #fdfdfd;
+  background: #fbfbfb;
   border: 0;
   margin: 5px 0 10px;
   padding: 10px 0;
@@ -888,15 +882,13 @@ fieldset {
 }
 
 fieldset fieldset {
-  margin: 10px;
-  background: #f9f9f9;
+  background: #f7f7f7;
 }
 fieldset fieldset .fieldset-wrapper {
   padding: 10px 15px;
 }
 fieldset fieldset fieldset {
-  margin: 20px;
-  background: #f4f4f4;
+  background: #f3f2f2;
 }
 fieldset fieldset fieldset .fieldset-wrapper {
   padding: 10px 15px;
@@ -916,6 +908,8 @@ html.js fieldset.collapsed {
 }
 fieldset.collapsed {
   background: transparent;
+  margin-bottom: 0;
+  padding-bottom: 0;
   -khtml-border-radius: 0;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -944,7 +938,7 @@ legend {
   background: #E0E0D8;
   display: block;
   border-bottom: 1px solid #eee;
-  padding: 2px 1%;
+  padding: 4px 1%;
   width: 98%;
   -khtml-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -958,8 +952,10 @@ fieldset legend a:hover,
 fieldset legend a:focus,
 fieldset legend a:active {
   font-weight: 400;
-  color: #000;
-  text-shadow:0 1px 0 #fff;
+  color: #494949;
+}
+html.js fieldset.collapsible .fieldset-legend {
+  padding-left: 17px;
 }
 input.form-text:focus,
 input.text:focus,
@@ -1199,5 +1195,55 @@ ul.action-links li a:focus {
   height: auto;
   overflow: visible;
   outline: 0;
-  padding: 1px 10px 2px 10px;
+  padding: 5px 10px 5px;
+}
+
+/* Overlay overrides */
+#overlay #main-content-header {
+  background: transparent;
+  padding: 20px 30px 5px;
+  border-bottom: 0;
+  position:relative;
+  min-height: 0;
+}
+#overlay #main-content {
+  padding-top: 0;
+}
+#overlay dl.admin-list,
+#overlay dl.node-type-list {
+  padding: 0;
+}
+#overlay ol#crumbs,
+#overlay ol#crumbs a:link,
+#overlay ol#crumbs a:visited {
+  color: #666;
+}
+#overlay ol#crumbs a:hover,
+#overlay ol#crumbs a:focus,
+#overlay ol#crumbs a:active {
+  color: #333;
+}
+#overlay-tabs li a,
+#overlay-tabs li a:active,
+#overlay-tabs li a:visited,
+#overlay-tabs li a:hover {
+  background-color:#aaa;
+}
+#overlay div.add-or-remove-shortcuts {
+  padding-top: 0.6em;
+  position:static;
+  right:auto;
+  top:auto;
+}
+ol#crumbs,
+#overlay #skip-nav,
+#overlay header,
+#overlay footer,
+#overlay h1#page-title,
+#overlay #primary-tasks {
+  display: none;
+}
+#banner ol#crumbs,
+#overlay ol#crumbs {
+  display: block;
 }
