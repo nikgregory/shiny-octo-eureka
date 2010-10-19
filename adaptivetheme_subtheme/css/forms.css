@@ -175,12 +175,12 @@ fieldset#edit-advanced fieldset .fieldset-legend {
   color: #555;
 }
 /* Tips overrides */
-#edit-comment-body-und-0-format {
+.field-type-text-with-summary fieldset {
   padding: 1em 0;
 }
-.form-item-comment-body-und-0-format {
+.field-type-text-with-summary fieldset .form-item {
   margin: 0;
 }
-.filter-help {
+.field-type-text-with-summary fieldset .filter-help {
   padding: .5em 1.5em;
 }
