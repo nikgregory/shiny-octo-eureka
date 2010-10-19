@@ -10,20 +10,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => TRUE,
   );
   if (theme_get_setting('layout_enable_settings') == 'on') {
-    $image_path = drupal_get_path('theme', 'adaptivetheme') . '/css/core-images';
     $form['layout']['page_layout'] = array(
       '#type' => 'fieldset',
       '#title' => t('Page Layout'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#description' => t('Use these settings to customize the layout of your theme.'),
+      '#description' => t('Use these settings to set the width of the page, each sidebar, and to set the position of sidebars.'),
     );
     if (theme_get_setting('layout_enable_width') == 'on') {
-      $form['layout']['page_layout']['layout_width_help'] = array(
-        '#prefix' => '<div class="layout-help">',
-        '#suffix' => '</div>',
-        '#value' => t('<dl><dt>Page width</dt><dd>Set the overall width of the the page.</dd></dl>'),
-      );
       $form['layout']['page_layout']['layout_width'] = array(
         '#type' => 'select',
         '#title' => t('Page width'),
@@ -57,11 +51,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       );
     } // endif width
     if (theme_get_setting('layout_enable_sidebars') == 'on') {
-      $form['layout']['page_layout']['layout_sidebar_help'] = array(
-        '#prefix' => '<div class="layout-help">',
-        '#suffix' => '</div>',
-        '#value' => t('<dl><dt>Sidebar widths</dt><dd>Set the width of each sidebar. The content columm will stretch to fill the rest of the page width.</dd></dl>'),
-      );
       $form['layout']['page_layout']['layout_sidebar_first_width'] = array(
         '#type' => 'select',
         '#title' => t('Sidebar first width'),
@@ -116,28 +105,24 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
           '900' => t('900px'),
           '960' => t('960px'),
         ),
-        //'#attributes' => array('class' => 'sidebar-width-select'),
       );
     } //endif layout sidebars
     if (theme_get_setting('layout_enable_method') == 'on') {
-      $form['layout']['page_layout']['layout_method_help'] = array(
-        '#prefix' => '<div class="layout-help">',
-        '#suffix' => '</div>',
-        '#value' => t('<dl><dt>Sidebar layout</dt><dd>Set the default sidebar configuration. You can choose a standard three column layout or place both sidebars to the right or left of the main content column.</dd></dl>'),
+      $form['layout']['page_layout']['select_method'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Sidebar Position'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
       );
-      $form['layout']['page_layout']['layout_method'] = array(
+      $form['layout']['page_layout']['select_method']['layout_method'] = array(
         '#type' => 'radios',
-        '#title' => t('Sidebar layout'),
         '#description' => t('The sidebar layout descriptions are for LTR (left to right languages), these will flip in RTL mode.'),
-        '#prefix' => '<div class="layout-method">',
-        '#suffix' => '</div>',
         '#default_value' => theme_get_setting('layout_method'),
         '#options' => array(
           0 => t('<strong>Layout #1</strong> <span class="layout-type-0">Standard three column layout — Sidebar first | Content | Sidebar last</span>'),
           1 => t('<strong>Layout #2</strong> <span class="layout-type-1">Two columns on the right — Content | Sidebar first | Sidebar last</span>'),
           2 => t('<strong>Layout #3</strong> <span class="layout-type-2">Two columns on the left — Sidebar first | Sidebar last | Content</span>'),
         ),
-       //'#attributes' => array('class' => 'layouts'),
       );
       $form['layout']['page_layout']['layout_enable_settings'] = array(
         '#type' => 'hidden',
@@ -332,7 +317,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   $form['themedev']['dev'] = array(
     '#type' => 'fieldset',
     '#title' => t('Development'),
-    '#description' => t('WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
+    '#description' => t('These settings allow you to add or remove CSS classes and markup from the output. WARNING: These settings are for the theme developer! Changing these settings may break your site. Make sure you really know what you are doing before changing these.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -389,24 +374,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   // Add spans to theme_links
   $form['themedev']['dev']['menu_links']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
-    '#title' => check_plain(t('Add <span></span> tags to menu items')),
+    '#title' => check_plain(t('Add span tags around menu item anchor text')),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
-  // Theme Settings Export
-  /*
-  $form['themedev']['dev']['export'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Export'),
-    '#description' => t('<p>Copy and paste these settings to a plain text file for backup or paste to your themes .info file.</p><p>WARNING! If you are using a WYSIWYG editor it must be disabled for this text area, otherwise all special characters are likely to be converted to HTML entities. If your editor has a \'view source\' feature try that first.</p>'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['themedev']['dev']['export']['exported_settings'] = array(
-    '#type' => 'textarea',
-    '#default_value' => $exports,
-    '#resizable' => FALSE,
-    '#cols' => 60,
-    '#rows' => 25,
-  );
-  */
 }

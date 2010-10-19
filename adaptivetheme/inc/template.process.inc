@@ -101,6 +101,10 @@ function adaptivetheme_process_html(&$vars) {
 // Preprocess variables for page.tpl.php.
 // template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
+  // Ugly hack to remove the page title when viewing a node
+  //if (arg(0) == 'node' && is_numeric(arg(1)) && !is_string(arg(2))) {
+  //  $vars['title'] = '';
+  //}
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -117,7 +121,7 @@ function adaptivetheme_preprocess_page(&$vars) {
     )
   ) : '';
   if (isset($vars['main_menu'])) {
-    $vars['primary_navigation'] = theme('links__system_main_menu', array(
+    $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('menu', 'primary-menu', 'clearfix'),
@@ -129,8 +133,11 @@ function adaptivetheme_preprocess_page(&$vars) {
      )
     ));
   }
+  if (!empty($vars['primary_navigation'])) {
+    $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
+  }
   if (isset($vars['secondary_menu'])) {
-    $vars['secondary_navigation'] = theme('links__system_secondary_menu', array(
+    $vars['secondary_navigation'] = theme('links', array(
       'links' => $vars['secondary_menu'],
       'attributes' => array(
         'class' => array('menu', 'secondary-menu', 'clearfix'),
@@ -142,8 +149,9 @@ function adaptivetheme_preprocess_page(&$vars) {
      )
     ));
   }
-  $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
-  $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
+  if (!empty($vars['secondary_navigation'])) {
+    $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
+  }
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
@@ -151,7 +159,7 @@ function adaptivetheme_preprocess_page(&$vars) {
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
-  $output = '<div id=' . $type . '-menu-bar class="nav"><nav>' . $menu . '</nav></div>';
+  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav>' . $menu . '</nav></div>';
   return $output;
 }
 
@@ -173,8 +181,8 @@ function adaptivetheme_preprocess_node(&$vars) {
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
-  $vars['title_attributes_array']['class'][] = 'title article-title';
-  $vars['content_attributes_array']['class'][] = 'content article-content';
+  $vars['title_attributes_array']['class'][] = 'article-title';
+  $vars['content_attributes_array']['class'][] = 'article-content';
   $vars['datetime'] = format_date($vars['created'], 'custom', 'c');
   $vars['unpublished'] = '';
   if (!$vars['status']) {
@@ -185,6 +193,9 @@ function adaptivetheme_preprocess_node(&$vars) {
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
   $classes = str_replace('node', 'article', $classes);
+  if (in_array('article-' . $vars['node']->type, $classes)) {
+    $classes = str_replace('article-' . $vars['node']->type, 'article-type-' . $vars['node']->type, $classes);
+  }
   if (in_array('article-sticky', $classes)) {
     theme_get_setting('extra_article_classes') ? '' : $classes = str_replace('article-sticky', '', $classes);
   }
@@ -206,8 +217,8 @@ function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
-  $vars['title_attributes_array']['class'][] = 'title comment-title';
-  $vars['content_attributes_array']['class'][] = 'content comment-content';
+  $vars['title_attributes_array']['class'][] = 'comment-title';
+  $vars['content_attributes_array']['class'][] = 'comment-content';
   $uri = entity_uri('comment', $vars['comment']);
   $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
   $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
@@ -252,8 +263,8 @@ function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
     $vars['classes_array'][] = 'at-horizontal-login clearfix';
   }
-  $vars['title_attributes_array']['class'][] = 'title block-title';
-  $vars['content_attributes_array']['class'][] = 'content block-content';
+  $vars['title_attributes_array']['class'][] = 'block-title';
+  $vars['content_attributes_array']['class'][] = 'block-content';
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu', 'superfish', 'nice_menus');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';

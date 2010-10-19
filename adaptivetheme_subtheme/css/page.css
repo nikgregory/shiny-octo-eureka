@@ -2,23 +2,18 @@
  * $Id$
  */
 
-header {
+#page > header {
   clear: both;
   padding: 10px 0 0;
 }
-#branding {
-  float: left;
-  width: 49.5%;
-}
-hgroup#brand-elements {
-  font-size: 1em;
-}
 #logo {
   float: left;
-  padding: 0 10px 0 0;
+  padding: 0 10px;
+}
+#page > header > hgroup {
+  float: left;
 }
 #site-name {
-  font-size: 1.75em;
   margin: 0;
   padding: 0;
 }
@@ -63,7 +58,7 @@ footer {}
 .field-type-taxonomy-term-reference ul li {
   display: inline;
   list-style: none;
-  padding: 0 0.3em;
+  padding: 0 .75em 0 0;
 }
 .field-lable-inline .field-label {
   display: inline;

@@ -1,7 +1,8 @@
 <?php
 // $Id$
 ?>
-<nav id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<?php $tag = $block->subject ? 'nav' : 'div'; ?>
+<<?php print $tag; ?> id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div class="block-inner clearfix">
     <?php print render($title_prefix); ?>
     <?php if ($block->subject): ?>
@@ -12,4 +13,4 @@
       <?php print $content ?>
     </div>
   </div>
-</nav>
+</<?php print $tag; ?>>

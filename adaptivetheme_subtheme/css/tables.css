@@ -6,6 +6,8 @@
 table {
   border-spacing:0;
   border-color:#EEE;
+  font-size: inherit;
+  font: 100%;
   margin:1em 0;
   padding:0;
   width:100%;

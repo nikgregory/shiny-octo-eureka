@@ -1,9 +1,10 @@
 <?php
 // $Id$
 
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.theme-overrides.inc');
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.theme-js.inc');
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.processes.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.theme.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.js.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.process.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.alter.inc');
 
 //hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {

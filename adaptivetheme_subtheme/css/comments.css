@@ -4,19 +4,19 @@
 
 /* Comment wrapper: wraps all comments and the comment form. */
 #comments {}
-#comments-title {}
+#comments h2.comment-form {}
 
 /* Wrapper class for each individual comment. */
 .comment {
-  margin:0 0 1.5em;
+  margin: 0 0 1.5em;
 }
 
 /* Indentation */
 .comment .indented {
-  margin-left:60px;
+  margin-left: 60px;
 }
 
-/* Comment Title (H3) */
+/* Comment Title */
 .comment-title {}
 .comment-title a:link,
 .comment-title a:visited,
@@ -28,9 +28,7 @@
   text-decoration: underline;
 }
 
-/* Comment id (count with pound sign, see line 28 comment.tpl.php) 
-   and comment "new" notification. */
-.comment-id {}
+/* Comment "new" notification */
 .comment-title .new {
   color:  #FF8000;
 }
@@ -40,16 +38,12 @@
 .comment .user-picture img {}
 
 /* Submitted */
-.comment .submitted {
-  margin: .375em 0 0.75em;
-}
-.comment .submitted em {
-  font-style: normal;
-}
-.comment .submitted a {}
-.comment .submitted a:hover {}
-.comment .submitted .author {}
-.comment .submitted .time {}
+.comment > footer {}
+.comment > footer em {}
+.comment > footer a {}
+.comment > footer a:hover {}
+.comment > footer .username {}
+.comment > footer time {}
 
 /* Links */
 .comment ul.links {
@@ -86,14 +80,6 @@ ul.links li.comment_delete a {}
 
 /* Themes the "Unpublished" text. */
 .comment-unpublished .unpublished {}
-
-/* Comment box wrapper on a seperate page. */
-.section-comment .box {}
-.section-comment .box .box-title {}
-
-/* Comment box wrapper below content. */
-#comments .box {}
-#comments .box .box-title {}
 
 /* Sytle comments by article type. */
 .book-comments  {}

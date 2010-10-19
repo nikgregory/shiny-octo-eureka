@@ -2,27 +2,32 @@
 // $Id$
 ?>
 <article id="article-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+
   <?php print $unpublished; ?>
-  <?php if ($title || $display_submitted): ?>
+
+  <?php if ($title && !$page): ?>
     <header>
       <?php print render($title_prefix); ?>
-      <?php if (!$page && $title): ?>
-        <h2<?php print $title_attributes; ?>>
+      <?php if ($title): ?>
+        <h1<?php print $title_attributes; ?>>
           <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-        </h2>
+        </h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
-      <?php print $user_picture; ?>
-      <?php if ($display_submitted): ?>
-        <p class="submitted">
-          <?php
-            print t('Submitted by !username on !datetime',
-            array('!username' => '<span class="author">' . $name . '</span>', '!datetime' => '<time datetime="' . $datetime . '">' . $date . '</time>'));
-          ?>
-        </p>
-      <?php endif; ?>
     </header>
   <?php endif; ?>
+
+  <?php print $user_picture; ?>
+
+  <?php if ($display_submitted): ?>
+    <footer>
+      <?php
+        print t('Submitted by !username on !datetime',
+        array('!username' => $name, '!datetime' => '<time datetime="' . $datetime . '">' . $date . '</time>'));
+      ?>
+    </footer>
+  <?php endif; ?>
+
   <div<?php print $content_attributes; ?>>
   <?php
     hide($content['comments']);
@@ -30,10 +35,11 @@
     print render($content);
   ?>
   </div>
+
   <?php if (!empty($content['links'])): ?>
-    <footer>
-      <?php print render($content['links']); ?>
-    </footer>
+    <nav><?php print render($content['links']); ?></nav>
   <?php endif; ?>
+
   <?php print render($content['comments']); ?>
+
 </article>

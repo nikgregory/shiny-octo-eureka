@@ -2,7 +2,9 @@
 // $Id$
 ?>
 <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+
   <?php print $unpublished; ?>
+
   <header>
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
@@ -12,26 +14,30 @@
     <?php if ($new): ?>
       <em class="new"><?php print $new ?></em>
     <?php endif; ?>
-    <?php print $picture; ?>
-    <p class="submitted">
-      <?php
-        print t('Submitted by !username on !datetime',
-        array('!username' => '<span class="author">' . $author . '</span>', '!datetime' => '<time datetime="' . $datetime . '">' . $created . '</time>'));
-      ?>
-    </p>
   </header>
+
+  <?php print $picture; ?>
+
+  <footer>
+   <?php
+      print t('Submitted by !username on !datetime',
+      array('!username' => $author, '!datetime' => '<time datetime="' . $datetime . '">' . $created . '</time>'));
+    ?>
+  </footer>
+
   <div<?php print $content_attributes; ?>>
     <?php
       hide($content['links']);
       print render($content);
     ?>
   </div>
+
   <?php if ($signature): ?>
     <div class="user-signature"><?php print $signature ?></div>
   <?php endif; ?>
+
   <?php if (!empty($content['links'])): ?>
-    <footer>
-      <?php print render($content['links']) ?>
-    </footer>
+    <nav><?php print render($content['links']); ?></nav>
   <?php endif; ?>
+
 </article>

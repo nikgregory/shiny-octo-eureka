@@ -15,31 +15,31 @@
     attach: function(context) {
 
       // Set role="banner" on the header element.
-      $("#banner").attr("role","banner");
+      $("body > header").attr("role", "banner");
 
       // Set role="main" on #main-content div.
-      $("#main-content").attr("role","main");
+      $("#main-content").attr("role", "main");
 
       // Set role="search" on search forms.
-      $("#search-theme-form").attr("role","search");
+      $("#search-theme-form").attr("role", "search");
 
       // Set role="contentinfo" on the page footer.
-      $("#page-footer").attr("role","contentinfo");
+      $("footer").attr("role", "contentinfo");
 
       // Set role=article on nodes.
-      $(".article").attr("role","article");
+      $(".article").attr("role", "article");
 
       // Set role="nav" on navigation-like blocks.
-      $("nav, .admin-panel, #breadcrumb").attr("role","navigation");
+      $("nav, .admin-panel, #breadcrumb").attr("role", "navigation");
       
       // Set role="complementary" on navigation-like blocks.
-      $("aside").attr("role","complementary");
+      $("aside").attr("role", "complementary");
 
       // Set role="region" on section elements.
-      $("section").attr("role","region");
+      $("section").attr("role", "region");
 
       // Set role="region" on section elements.
-      $("#search-block-form, #search-form").attr("role","search");
+      $("#search-block-form, #search-form").attr("role", "search");
 
     }
   };

@@ -25,32 +25,24 @@
 
 /* Submitted */
 .article .submitted {
-  margin: .375em 0 0.75em;
+  font-size: 1em;
+  font-weight: 400;
+  margin: .375em 0 .75em;
 }
 .article .submitted em {
   font-style: normal;
 }
-.article .submitted a {}
-.article .submitted a:hover {}
-.article .submitted .author {}
-.article .submitted .time {}
-
-/* Taxonomy terms. */
-ul.taxonomy {
-  margin: 0 0 1em;
-}
-ul.taxonomy li {
-  display: inline;
-  list-style: none;
-}
-ul.taxonomy li a {}
+.article > footer a {}
+.article > footer a:hover {}
+.article > footer .username {}
+.article > footer time {}
 
 /* Links. */
 ul.links {
   margin: 0;
 }
 ul.links li {
-  padding: 0 1em 0 0;
+  padding: 0 .75em 0 0;
 }
 ul.links li a {}
 ul.links li.node_read_more a {}

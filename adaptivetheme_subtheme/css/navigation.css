@@ -249,7 +249,7 @@ ul.pager li.pager-last     {}
 }
 
 /* Tabs */
-.local-tasks {
+#tasks {
   margin-bottom:1em;
 }
 ul.primary {
