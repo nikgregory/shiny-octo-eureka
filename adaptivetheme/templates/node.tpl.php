@@ -23,7 +23,7 @@
     <footer>
       <?php
         print t('Submitted by !username on !datetime',
-        array('!username' => $name, '!datetime' => '<time datetime="' . $datetime . '">' . $date . '</time>'));
+        array('!username' => $name, '!datetime' => '<time datetime="' . $datetime . '" pubdate="pubdate">' . $date . '</time>'));
       ?>
     </footer>
   <?php endif; ?>

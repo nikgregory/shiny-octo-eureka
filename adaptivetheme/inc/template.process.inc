@@ -4,6 +4,15 @@
 // Preprocess variables for html.tpl.php.
 // template_preprocess_html
 function adaptivetheme_preprocess_html(&$vars) {
+  if (module_exists('rdf')) {
+    $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
+    $vars['rdf_html_version'] = 'version="HTML+RDFa 1.1"';
+    $vars['head_profile'] = ' profile="' . $vars['grddl_profile'] . '"';
+  } else {
+    $vars['doctype'] = '<!DOCTYPE html>' . "\n";
+    $vars['rdf_html_version'] = '';
+    $vars['head_profile'] = '';
+  }
   $vars['skip_nav_class'] = '';
   if (theme_get_setting('skip_navigation_display') == 'hide') {
     $vars['skip_nav_class'] = 'element-invisible';

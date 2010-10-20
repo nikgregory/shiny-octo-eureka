@@ -1,8 +1,9 @@
 <?php
 // $Id$
-?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">
-<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" version="HTML+RDFa 1.1" <?php print $rdf_namespaces; ?>>
-<head profile="<?php print $grddl_profile; ?>">
+?>
+<?php print $doctype; ?>
+<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" <?php print $rdf_html_version . $rdf_namespaces; ?>>
+<head<?php print $head_profile; ?>>
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
