@@ -47,6 +47,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'extra_article_classes'             => $settings['extra_article_classes'],
     'extra_comment_classes'             => $settings['extra_comment_classes'],
     'extra_block_classes'               => $settings['extra_block_classes'],
+    'extra_menu_classes'                => $settings['extra_menu_classes'],
     'extra_item_list_classes'           => $settings['extra_item_list_classes'],
     'primary_links_tree'                => $settings['primary_links_tree'],
     'secondary_links_tree'              => $settings['secondary_links_tree'],
@@ -438,38 +439,39 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
   $form['themedev']['dev']['classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('CSS Classes'),
+    '#description' => t('Adaptivetheme prints many heplful classes for templates by default - these settings allow you to expand on these by adding extra classes to pages, articles, comments, blocks, menus and item lists.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   $form['themedev']['dev']['classes']['extra_page_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra page classes',
+    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), and a language class (i18n).') . '</span>',
     '#default_value' => $settings['extra_page_classes'],
-    '#description' => t('Adds a page-[path-to-page] class, add, edit and delete classes for articles, and a lang-[language] class.'),
   );
   $form['themedev']['dev']['classes']['extra_article_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra article classes',
+    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language and odd/even classes.') . '</span>',
     '#default_value' => $settings['extra_article_classes'],
-    '#description' => t('Adds promoted, sticky, preview, language and odd/even classes to articles.'),
   );
   $form['themedev']['dev']['classes']['extra_comment_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra comment classes',
+    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, and odd/even classes.') . '</span>',
     '#default_value' => $settings['extra_comment_classes'],
-    '#description' => t('Adds anonymous, author, viewer, new, and odd/even classes to comments.'),
   );
   $form['themedev']['dev']['classes']['extra_block_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra block classes',
+    '#title' => t('Blocks: ') . '<span class="description">' . t('add odd/even, block region and block count classes.') . '</span>',
     '#default_value' => $settings['extra_block_classes'],
-    '#description' => t('Adds a bunch of new classes to blocks.'),
+  );
+  $form['themedev']['dev']['classes']['extra_menu_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Menus: ') . '<span class="description">' . t('add an extra class based on the link text.') . '</span>',
+    '#default_value' => $settings['extra_block_classes'],
   );
   $form['themedev']['dev']['classes']['extra_item_list_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra item-list classes',
+    '#title' => t('Item-lists: ') . '<span class="description">' . t('add first, last and odd/even classes.') . '</span>',
     '#default_value' => $settings['extra_item_list_classes'],
-    '#description' => t('Adds first, last and odd/even classes to item lists.'),
   );
   // Primary and Secondary Links Settings
   $form['themedev']['dev']['primary_secondary_links'] = array(

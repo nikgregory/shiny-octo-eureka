@@ -177,16 +177,13 @@ if (!function_exists('dhtml_menu_init')) {
         $class .= $extra_class;
       }
     }
-    $class .= ' ' . safe_string(strip_tags($link));
+    if (theme_get_setting('extra_menu_classes')) {
+      $class .= ' menu-item-' . safe_string(strip_tags($link));
+    }
     if ($in_active_trail) {
       $class .= ' active-trail';
     }
-    if ($class && theme_get_setting('extra_menu_classes')) {
-      return '<li class="'. $class .'">'. $link . $menu ."</li>";
-    }
-    else{
-      return '<li>'. $link . $menu ."</li>";
-    }
+    return '<li class="'. $class .'">'. $link . $menu ."</li>";
   }
 }
 

@@ -137,6 +137,7 @@
   settings[extra_article_classes]          = 0
   settings[extra_comment_classes]          = 0
   settings[extra_block_classes]            = 0
+  settings[extra_menu_classes]             = 0
   settings[extra_item_list_classes]        = 0
   settings[primary_links_tree]             = 0
   settings[secondary_links_tree]           = 0
