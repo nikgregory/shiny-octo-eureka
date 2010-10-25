@@ -6,12 +6,14 @@
 function adaptivetheme_preprocess_html(&$vars) {
   if (module_exists('rdf')) {
     $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
-    $vars['rdf_html_version'] = 'version="HTML+RDFa 1.1"';
-    $vars['head_profile'] = ' profile="' . $vars['grddl_profile'] . '"';
+    $vars['rdf']->version = 'version="HTML+RDFa 1.1"';
+    $vars['rdf']->namespaces = $vars['rdf_namespaces'];
+    $vars['rdf']->profile = ' profile="' . $vars['grddl_profile'] . '"';
   } else {
     $vars['doctype'] = '<!DOCTYPE html>' . "\n";
-    $vars['rdf_html_version'] = '';
-    $vars['head_profile'] = '';
+    $vars['rdf']->version = '';
+    $vars['rdf']->namespaces = '';
+    $vars['rdf']->profile = '';
   }
   $vars['skip_nav_class'] = '';
   if (theme_get_setting('skip_navigation_display') == 'hide') {
@@ -325,6 +327,7 @@ function adaptivetheme_preprocess_search_result(&$vars) {
 }
 
 // Process function for theme_field() and field.tpl.php.
+// TODO: remove these suggestions before production release, its here to provide backward compatibility with early d7 beta1 which does not have these.
 function adaptivetheme_preprocess_field(&$vars, $hook) {
   array_unshift($vars['theme_hook_suggestions'], 'field__' . $vars['element']['#field_type']);
 }

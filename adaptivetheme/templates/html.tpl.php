@@ -2,8 +2,8 @@
 // $Id$
 ?>
 <?php print $doctype; ?>
-<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" <?php print $rdf_html_version . $rdf_namespaces; ?>>
-<head<?php print $head_profile; ?>>
+<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" <?php print $rdf->version . $rdf->namespaces; ?>>
+<head<?php print $rdf->profile; ?>>
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>

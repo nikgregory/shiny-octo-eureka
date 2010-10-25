@@ -51,12 +51,3 @@ if (theme_get_setting('equal_heights_gpanels')) {
     )
   );
 }
-if (theme_get_setting('horizontal_login_block') && theme_get_setting('horizontal_login_block_overlabel')) {
-  drupal_add_js($path .'jquery.overlabel.js',
-    array(
-      'type' => 'file',
-      'scope' => 'header',
-      'weight' => 999,
-    )
-  );
-}

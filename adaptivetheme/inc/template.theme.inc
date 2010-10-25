@@ -115,19 +115,14 @@ if (!function_exists('dhtml_menu_init')) {
       $sub_menu = drupal_render($element['#below']);
     }
     if (theme_get_setting('extra_menu_classes')) {
-      $element['#attributes']['class'][] = 'menu-' . $element['#original_link']['mlid'];
+      $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
     }
     if (theme_get_setting('menu_item_span_elements')) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
-    if (theme_get_setting('extra_menu_classes') == 0) {
-      return '<li>' . $output . $sub_menu . "</li>";
-    }
-    else {
-      return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
-    }
+    return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
 
 }

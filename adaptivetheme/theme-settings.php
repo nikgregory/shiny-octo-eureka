@@ -192,19 +192,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       '#default_value' => theme_get_setting('horizontal_login_block'),
       '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
     );
-    $form['layout']['login_block']['horizontal_login_block_overlabel'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Use Overlabel JavaScript'),
-      '#default_value' => theme_get_setting('horizontal_login_block_overlabel'),
-      '#description' => t('Checking this setting will place the "User name:*" and "Password:*" labels inside the user name and password text fields.'),
-      '#states' => array(
-        'visible' => array(
-          'input[name*=horizontal_login_block]' => array(
-            'value' => '1',
-          ),
-        ),
-      ),
-    );
   } // endif horizontal block settings
   // Skip Navigation
   $form['skip_navigation'] = array(
@@ -325,44 +312,39 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   $form['themedev']['dev']['classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('CSS Classes'),
+    '#description' => t('Adaptivetheme prints many heplful classes for templates by default - these settings allow you to expand on these by adding extra classes to pages, articles, comments, blocks, menus and item lists.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
   $form['themedev']['dev']['classes']['extra_page_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra page classes',
+    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), and a language class (i18n).') . '</span>',
     '#default_value' => theme_get_setting('extra_page_classes'),
-    '#description' => t('Adds a page-[path-to-page] class, add, edit and delete classes for articles, and a lang-[language] class.'),
   );
   $form['themedev']['dev']['classes']['extra_article_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra article classes',
+    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language and odd/even classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_article_classes'),
-    '#description' => t('Adds promoted, sticky, preview, language and odd/even classes to articles.'),
   );
   $form['themedev']['dev']['classes']['extra_comment_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra comment classes',
+    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, and odd/even classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_comment_classes'),
-    '#description' => t('Adds anonymous, author, viewer, new, and odd/even classes to comments.'),
   );
   $form['themedev']['dev']['classes']['extra_block_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra block classes',
+    '#title' => t('Blocks: ') . '<span class="description">' . t('add odd/even, block region and block count classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_block_classes'),
-    '#description' => t('Adds a bunch of new classes to blocks.'),
   );
   $form['themedev']['dev']['classes']['extra_menu_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra menu classes',
+    '#title' => t('Menus: ') . '<span class="description">' . t('add an extra class based on the menu link ID (mlid).') . '</span>',
     '#default_value' => theme_get_setting('extra_menu_classes'),
-    '#description' => t('Adds a bunch of new classes to all menus (main, secondary, normal menus etc).'),
   );
   $form['themedev']['dev']['classes']['extra_item_list_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Print extra item-list classes',
+    '#title' => t('Item-lists: ') . '<span class="description">' . t('add first, last and odd/even classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_item_list_classes'),
-    '#description' => t('Adds first, last and odd/even classes to item lists.'),
   );
   // Menu Links Settings
   $form['themedev']['dev']['menu_links'] = array(
