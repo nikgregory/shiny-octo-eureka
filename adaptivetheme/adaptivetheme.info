@@ -85,6 +85,17 @@
   skinr[at-grid][options][17][class] = grid-15
   skinr[at-grid][options][18][label] = 960px
   skinr[at-grid][options][18][class] = grid-16
+
+  skinr[at-grid][options][19][label] = 16% (6 column)
+  skinr[at-grid][options][19][class] = fgrid-6
+  skinr[at-grid][options][20][label] = 20% (5 column)
+  skinr[at-grid][options][20][class] = fgrid-5
+  skinr[at-grid][options][21][label] = 25% (4 column)
+  skinr[at-grid][options][21][class] = fgrid-4
+  skinr[at-grid][options][22][label] = 33% (3 column)
+  skinr[at-grid][options][22][class] = fgrid-3
+  skinr[at-grid][options][23][label] = 50% (2 column)
+  skinr[at-grid][options][23][class] = fgrid-2
   
   ; Content alignment
   skinr[at-align-content][title] = Content alignment
