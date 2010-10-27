@@ -40,7 +40,7 @@ section {
 }
 
 /* Add padding to align elements to the grid. */
-.block,
+.block-inner,
 .breadcrumb,
 .messages,
 #primary-nav,
@@ -52,7 +52,8 @@ section {
 #skip-nav,
 #branding,
 #attribution {
-  padding:0 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Strip block padding inside content column area */
@@ -78,7 +79,12 @@ section {
 .grid-13,
 .grid-14,
 .grid-15,
-.grid-16 {
+.grid-16,
+.fgrid-6,
+.fgrid-5,
+.fgrid-4,
+.fgrid-3,
+.fgrid-2 {
   float:left;
   clear:none !important;
   display:inline;
@@ -136,6 +142,22 @@ width:160px;
 }
 .grid-16 {
   width:940px;
+}
+/* Fluid grids */
+.fgrid-6 {
+  width:16.67%;
+}
+.fgrid-5 {
+  width:20%;
+}
+.fgrid-4 {
+  width:25%;
+}
+.fgrid-3 {
+  width:33.33%;
+}
+.fgrid-2 {
+  width:50%;
 }
 
 /* Containers and layout helpers. */
