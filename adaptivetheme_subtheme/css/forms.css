@@ -204,12 +204,12 @@ fieldset#edit-advanced fieldset .fieldset-legend {
   padding: 0 0 0 15px;
 }
 fieldset .filter-help {
-  padding: 5px 15px;
+  padding: 0 15px 5px;
 }
 .filter-guidelines {
   font-size: .923em;
   margin: 0;
-  padding: 0 18px 10px;
+  padding: 5px 18px 10px;
 }
 /* Special case modules */
 #devel-switch-user-form {

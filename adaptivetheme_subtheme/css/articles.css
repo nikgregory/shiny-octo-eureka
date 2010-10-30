@@ -7,6 +7,8 @@
   margin-bottom: 20px;
 }
 
+.article > header {}
+
 /* Teaser title. */
 .article-title {}
 .article-title a:link,
@@ -42,25 +44,26 @@
 .article > footer time {}
 
 /* Links. */
-ul.links {
+.article ul.links {
   margin: 0;
 }
-ul.links li {
+.article ul.links li {
+  margin: 0;
   padding: 0 .75em 0 0;
 }
-ul.links li a {}
-ul.links li.node_read_more a {}
-ul.links li.comment_add a {}
-ul.links li.comment_comments a {}
-ul.links li.comment_new_comments a {}
-ul.links li.blog_usernames_blog a {}
-ul.links li.print_html a {}
-ul.links li.print_email a {}
-ul.links li.print_pdf a {}
+.article ul.links li a {}
+.article ul.links li.node_read_more a {}
+.article ul.links li.comment_add a {}
+.article ul.links li.comment_comments a {}
+.article ul.links li.comment_new_comments a {}
+.article ul.links li.blog_usernames_blog a {}
+.article ul.links li.print_html a {}
+.article ul.links li.print_email a {}
+.article ul.links li.print_pdf a {}
 
 /* UL link first and last classes. */
-ul.links li.first {}
-ul.links li.last  {}
+.article ul.links li.first {}
+.article ul.links li.last  {}
 
 /* Workflow states. */
 .article-add    {}
