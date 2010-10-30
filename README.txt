@@ -12,9 +12,9 @@ Some tips:
 
 * Validation - to validate this theme you must disable the RDF module - because the W3C
   validator cannot handle the doctype and will freak out. When you disable the RDF module
-  the doctype will automagically change and you will be able to validate it agains HTML5 as 
+  the doctype will automagically change and you will be able to validate it against HTML5 as 
   per usual. I would suggest using a lint tool instead in any case, validation is only so useful
-  and for HTML5 I think lint + ouline tools are more realistic tools for building in HTML5.
+  and for HTML5 I think lint + outline tools are more realistic tools for building in HTML5.
 
 * For dark style themes there's a dark.css file, just uncomment it in the info file,
   however understand at the moment the dark stylesheet needs major work and is not
