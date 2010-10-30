@@ -21,9 +21,9 @@ function get_at_styles() {
   return $scheme;
 }
 
-// ONLY MODIFY THIS - change 'adaptivetheme_subtheme' to your theme name:
+// ONLY MODIFY THIS - change 'pixture_reloaded' to your theme name:
 if (theme_get_setting('style_enable_schemes') == 'on') {
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme_subtheme') .'/css/schemes/'. get_at_styles(), 'theme');
+  drupal_add_css(drupal_get_path('theme', 'pixture_reloaded') .'/css/schemes/'. get_at_styles(), 'theme');
 }
 
 // */
@@ -41,21 +41,23 @@ if (theme_get_setting('style_enable_schemes') == 'on') {
  * Override or insert variables into all templates.
  */
 /* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess(&$vars, $hook) {
+function pixture_reloaded_preprocess(&$vars, $hook) {
 }
-function adaptivetheme_subtheme_process(&$vars, $hook) {
+function pixture_reloaded_process(&$vars, $hook) {
 }
 // */
 
 /**
  * Override or insert variables into the html templates.
  */
-/* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess_html(&$vars) {
+
+function pixture_reloaded_preprocess_html(&$vars) {
   // Uncomment the folowing line to add a conditional stylesheet for IE 7 or less.
   // drupal_add_css(path_to_theme() . '/css/ie/ie-lte-7.css', array('weight' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
+
+
 }
-function adaptivetheme_subtheme_process_html(&$vars) {
+function pixture_reloaded_process_html(&$vars) {
 }
 // */
 
@@ -63,9 +65,9 @@ function adaptivetheme_subtheme_process_html(&$vars) {
  * Override or insert variables into the page templates.
  */
 /* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess_page(&$vars) {
+function pixture_reloaded_preprocess_page(&$vars) {
 }
-function adaptivetheme_subtheme_process_page(&$vars) {
+function pixture_reloaded_process_page(&$vars) {
 }
 // */
 
@@ -73,9 +75,9 @@ function adaptivetheme_subtheme_process_page(&$vars) {
  * Override or insert variables into the node templates.
  */
 /* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess_node(&$vars) {
+function pixture_reloaded_preprocess_node(&$vars) {
 }
-function adaptivetheme_subtheme_process_node(&$vars) {
+function pixture_reloaded_process_node(&$vars) {
 }
 // */
 
@@ -83,9 +85,9 @@ function adaptivetheme_subtheme_process_node(&$vars) {
  * Override or insert variables into the comment templates.
  */
 /* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess_comment(&$vars) {
+function pixture_reloaded_preprocess_comment(&$vars) {
 }
-function adaptivetheme_subtheme_process_comment(&$vars) {
+function pixture_reloaded_process_comment(&$vars) {
 }
 // */
 
@@ -93,8 +95,8 @@ function adaptivetheme_subtheme_process_comment(&$vars) {
  * Override or insert variables into the block templates.
  */
 /* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess_block(&$vars) {
+function pixture_reloaded_preprocess_block(&$vars) {
 }
-function adaptivetheme_subtheme_process_block(&$vars) {
+function pixture_reloaded_process_block(&$vars) {
 }
 // */

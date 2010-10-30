@@ -1,26 +1,25 @@
-/** 
+/**
  * $Id$
  */
 html {
-  font-size: 75%; /* 16px x 75% = 12px */
+  font-size: 81.3%; /* 16px x 81.3% = 13px */
 }
 body {
   font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
-  line-height: 1.5;
+  line-height: 1.5; /* Unit-less line-height means line height can scale. */
 }
+/* Sizes match proper font scaling. */
 h1 {
-  font-size: 1.667em;
-  margin: 0 0 .5em;
-  padding: 0;
+  font-size: 1.538em;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.385em;
 }
 h3 {
-  font-size: 1.333em;
+  font-size: 1.231em;
 }
 h4 {
-  font-size: 1.167em;
+  font-size: 1.077em;
 }
 h5,
 h6 {
@@ -30,16 +29,16 @@ a img {
   border:none;
 }
 p {
-  margin: 0 0 1em;
+  margin: 0 0 1.5em;
   padding: 0;
 }
 em,
 dfn {
-  font-style:italic;
+  font-style: italic;
 }
 ins {
-  border-bottom:none;
-  text-decoration:none;
+  border-bottom: none;
+  text-decoration: none;
 }
 pre,
 code,
@@ -49,7 +48,8 @@ kbd,
 var {
   font: 1em "Lucida Console",Monaco,"DejaVu Sans Mono",monospace;
 }
-blockquote,q {
+blockquote,
+q {
   font-style:italic;
   quotes:"" "";
 }
@@ -64,7 +64,7 @@ q:after {
   content:"";
 }
 blockquote p {
-  margin:0;
+  margin: 0;
 }
 strong,
 dfn,
@@ -96,7 +96,7 @@ ol ul,
 .item-list ul ol,
 .item-list ol ol,
 .item-list ol ul {
-  margin: 0 0 0 1em;
+  margin-bottom: 0;
 }
 ul {
   list-style-type: disc;
@@ -121,5 +121,5 @@ dt {
   font-weight: 700;
 }
 dd {
-  margin: 0 0 1.5em 1.667em;
+  margin: 0 0 1.5em 1.538em;
 }

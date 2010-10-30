@@ -14,11 +14,11 @@
   };
   function applyHeights(tags_hash) {
     var tmpTag = "";
-    var toLoop = tags_hash.length
+    var toLoop = tags_hash.length;
     for (tmpi=0; tmpi<toLoop; tmpi++) {
-      xclass=$('#'+tags_hash[tmpi]+' .block-inner').attr('class');
-      $('#'+tags_hash[tmpi]+' .block-inner').attr('class',xclass+' clearfix');
-      $('#'+tags_hash[tmpi]+' .block-inner').equalHeight();
+      xclass=$('.'+tags_hash[tmpi]+' .block-inner').attr('class');
+      $('.'+tags_hash[tmpi]+' .block-inner').attr('class',xclass+' clearfix');
+      $('.'+tags_hash[tmpi]+' .block-inner').equalHeight();
     }
   }
 })(jQuery);

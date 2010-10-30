@@ -1,10 +1,10 @@
-/** 
+/**
  * $Id$
  */
 
 /* Articles (nodes) */
 .article {
-  margin:0 0 1.5em;
+  margin-bottom: 20px;
 }
 
 /* Teaser title. */
@@ -19,19 +19,23 @@
   text-decoration: underline;
 }
 
+/* Skinr article title alignment. */
+.ta-l .article-title {
+  text-align: left;
+}
+.ta-r .article-title {
+  text-align: right;
+}
+.ta-c .article-title {
+  text-align: center;
+}
+
 /* User Picture. */
 .article .user-picture {}
 .article .user-picture img {}
 
 /* Submitted */
-.article .submitted {
-  font-size: 1em;
-  font-weight: 400;
-  margin: .375em 0 .75em;
-}
-.article .submitted em {
-  font-style: normal;
-}
+.article > footer {}
 .article > footer a {}
 .article > footer a:hover {}
 .article > footer .username {}
@@ -71,40 +75,3 @@ ul.links li.last  {}
 
 /* Theme the teaser. */
 .article-teaser {}
-
-/* Fields */
-h3.label {
-  font-size:1em;
-}
-.field-inline h3,
-.field-inline .item {
-  display:inline;
-}
-/* Wrapper for any CCK field. */
-.field {}
-
-/* Use "datetime" when creating new CCK date fields. */
-.field-type-datetime {}
-
-/* Filefield field. */
-.field-type-filefield {}
-
-/* Node reference field. */
-.field-type-nodereference {}
-
-/* User reference field. */
-.field-type-userreference {}
-
-/* Number fields. */
-.field-type-number-decimal {}
-.field-type-number-float   {}
-.field-type-number-integer {}
-
-/* Text field. */
-.field-type-text {}
-
-/**
- * Specific field names.
- */
-/* Underscores in field name are replaced with dashes. */
-.field-field-FIELDNAME {}

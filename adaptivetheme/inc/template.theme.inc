@@ -1,6 +1,18 @@
 <?php
 // $Id$
 
+// Helper function for theming main and secondary variables.
+function _theme_menu_variables($menu, $type) {
+  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav>' . $menu . '</nav></div>';
+  return $output;
+}
+
+// Simple theme function to output js in a conditional comment.
+function _conditional_js($condition, $file_path) {
+  $output = '<!--[if ' . $condition . ']><script type="text/javascript" src="' . $file_path . '?' . variable_get('css_js_query_string') . '"></script><![endif]-->';
+  return $output;
+}
+
 /**
  * Returns HTML for a breadcrumb trail.
  */

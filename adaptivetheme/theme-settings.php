@@ -154,13 +154,13 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   );
   // Equal height blocks per region
   $equalized_blocks = array(
-    'leaderboard' => t('Leaderboard region'),
-    'header' => t('Header region'),
-    'secondary-content' => t('Secondary Content region'),
-    'highlight' => t('Highlight region'),
-    'content-bottom' => t('Content Bottom region'),
-    'tertiary-content' => t('Tertiary Content region'),
-    'footer' => t('Footer region'),
+    'region-leaderboard' => t('Leaderboard'),
+    'region-header' => t('Header'),
+    'region-secondary-content' => t('Secondary'),
+    'region-highlighted' => t('Highlighted'),
+    'region-content-aside' => t('Aside'),
+    'region-tertiary-content' => t('Tertiary'),
+    'region-footer' => t('Footer'),
   );
   $form['layout']['equal_heights']['equal_heights_blocks'] = array(
     '#type' => 'fieldset',
@@ -169,7 +169,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   $form['layout']['equal_heights']['equal_heights_blocks'] += array(
     '#prefix' => '<div id="div-equalize-collapse">',
     '#suffix' => '</div>',
-    '#description' => t('<p>Equal height blocks only makes sense for blocks aligned horizontally so do not apply to sidebars. The equal height settings work well in conjunction with the Skinr block layout classes.</p>'),
+    '#description' => t('<p>Equal height blocks apply to these regions only. This works well in conjunction with the Skinr block width options.</p>'),
   );
   foreach ($equalized_blocks as $name => $title) {
     $form['layout']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
@@ -193,23 +193,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
       '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
     );
   } // endif horizontal block settings
-  // Skip Navigation
-  $form['skip_navigation'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Skip Navigation'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['skip_navigation']['skip_navigation_display'] = array(
-    '#type' => 'radios',
-    '#title'  => t('Modify the display of the skip navigation'),
-    '#default_value' => theme_get_setting('skip_navigation_display'),
-    '#options' => array(
-      'show' => t('Show skip navigation'),
-      'focus' => t('Show skip navigation when in focus, otherwise is hidden'),
-      'hide' => t('Hide skip navigation'),
-    ),
-  );
   // Search Settings
   $form['search_results'] = array(
     '#type' => 'fieldset',

@@ -15,24 +15,31 @@ label,legend {
   padding: 0;
 }
 
+/* Reset HTML5 elements, CSS assumes elements are inline. */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
 /* Accessibility helpers */
 .offscreen {
   position: absolute;
   top: -9999em;
-  left: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
 }
 .element-hidden {
   display: none;
-}
-.element-invisible {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-}
-.element-focusable {
-  position: static !important;
-  clip: auto;
 }

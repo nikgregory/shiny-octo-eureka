@@ -1,19 +1,23 @@
-/** 
+/**
  * $Id$
+ * 
+ * TODO: check classes still apply in D7 - in particular the unpublished classes and the extra classes.
  */
 
 /* Comment wrapper: wraps all comments and the comment form. */
 #comments {}
-#comments h2.comment-form {}
+#comments > h2.title {
+  margin-bottom: .5em;
+}
 
 /* Wrapper class for each individual comment. */
 .comment {
-  margin: 0 0 1.5em;
+  margin-bottom: 20px;
 }
 
 /* Indentation */
 .comment .indented {
-  margin-left: 60px;
+  margin-left: 60px; /* one grid column */
 }
 
 /* Comment Title */
@@ -28,9 +32,20 @@
   text-decoration: underline;
 }
 
+/* Skinr comment title alignment. */
+.ta-l .comment-title {
+  text-align: left;
+}
+.ta-r .comment-title {
+  text-align: right;
+}
+.ta-c .comment-title {
+  text-align: center;
+}
+
 /* Comment "new" notification */
 .comment-title .new {
-  color:  #FF8000;
+  color: #ff8000;
 }
 
 /* User Picture */
@@ -82,9 +97,9 @@ ul.links li.comment_delete a {}
 .comment-unpublished .unpublished {}
 
 /* Sytle comments by article type. */
-.book-comments  {}
-.blog-comments  {}
-.forum-comments {}
-.page-comments  {}
-.poll-comments  {}
-.story-comments {}
+.book-comments    {}
+.blog-comments    {}
+.forum-comments   {}
+.page-comments    {}
+.poll-comments    {}
+.article-comments {}

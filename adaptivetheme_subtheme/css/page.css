@@ -12,22 +12,22 @@
 }
 #page > header > hgroup {
   float: left;
+  line-height: 1.2;
 }
 #site-name {
-  margin: 0;
-  padding: 0;
+  font-size: 1.846em;
 }
-#site-name a:link    {}
+#site-name a    {
+  text-decoration: none;
+}
 #site-name a:visited {}
 #site-name a:hover   {}
 #site-name a:focus   {}
 #site-name a:active  {}
 
 #site-slogan {
-  font-size: 1.25em;
+  font-size: 1.077em;
   font-weight: 400;
-  margin: 0;
-  padding: 0;
 }
 
 .region-header {
@@ -36,7 +36,7 @@
 
 h1#page-title {}
 .in-maintenance h1#page-title {
-  padding:10px;
+  padding: 10px;
 }
 
 /* Sidebars */
@@ -44,29 +44,12 @@ h1#page-title {}
 .region-sidebar-first {}
 .region-sidebar-second {}
 
-/* Footer */
-footer {}
-
-/* Field reset */
-.field-type-taxonomy-term-reference .field-label {
-  font-size: 1em;
-}
-.field-type-taxonomy-term-reference ul {
-  margin: 0;
-  padding: 0;
-}
-.field-type-taxonomy-term-reference ul li {
-  display: inline;
-  list-style: none;
-  padding: 0 .75em 0 0;
-}
-.field-lable-inline .field-label {
-  display: inline;
-}
+/* Footer - the main page footer only */
+#page > footer {}
 
 /* Feed icons */
 .feed-icon img {
-  padding:0 10px;
+  padding: 0 10px;
 }
 #feed-icons {}
 #feed-icons .feed-icon {}
@@ -79,7 +62,7 @@ footer {}
 }
 .search-results .search-result {}
 .search-results .title {
-  font-size: 1.25em;
+  font-size: 1.154em;
 }
 .search-results .search-snippet-info {
   padding: 0;
@@ -89,7 +72,7 @@ footer {}
 }
 .search-results .search-snippet {}
 .search-results .search-info {
-  font-size: 0.9em;
+  font-size: .923em;
 }
 span.search-info-type {}
 span.search-info-user {}

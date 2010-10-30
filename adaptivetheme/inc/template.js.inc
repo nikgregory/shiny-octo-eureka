@@ -3,13 +3,13 @@
 
 $path = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 $regions = array(
-  'leaderboard',
-  'header',
-  'secondary-content',
-  'highlight',
-  'content-bottom',
-  'tertiary-content',
-  'footer'
+  'region-leaderboard',
+  'region-header',
+  'region-secondary-content',
+  'region-highlighted',
+  'region-content-aside',
+  'region-tertiary-content',
+  'region-footer'
 );
 foreach ($regions as $region) {
   $setting = theme_get_setting('equalize_'. $region);

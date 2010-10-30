@@ -15,16 +15,6 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['rdf']->namespaces = '';
     $vars['rdf']->profile = '';
   }
-  $vars['skip_nav_class'] = '';
-  if (theme_get_setting('skip_navigation_display') == 'hide') {
-    $vars['skip_nav_class'] = 'element-invisible';
-  }
-  if (theme_get_setting('skip_navigation_display') == 'show') {
-    $vars['skip_nav_class'] = 'show-skip-link';
-  }
-  if (theme_get_setting('skip_navigation_display') == 'focus') {
-    $vars['skip_nav_class'] = 'show-on-focus';
-  }
   if (theme_get_setting('extra_page_classes')) {
     if (function_exists('locale')) {
       $vars['classes_array'][] = 'lang-'. $vars['language']->language;
@@ -93,7 +83,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     else {
       $vars['layout'] = $vars['at_layout_width'];
     }
-    drupal_add_css($vars['layout'], array('weight' => CSS_THEME, 'type' => 'inline'));
+    drupal_add_css($vars['layout'], array('group' => CSS_THEME, 'type' => 'inline'));
   }
 }
 // template_process_html
@@ -166,12 +156,6 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
-}
-
-// Helper function for theming main and secondary variables.
-function _theme_menu_variables($menu, $type) {
-  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav>' . $menu . '</nav></div>';
-  return $output;
 }
 
 // Preprocess variables for node.tpl.php.
@@ -272,7 +256,10 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
   }
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
-    $vars['classes_array'][] = 'at-horizontal-login clearfix';
+    $vars['classes_array'][] = 'lb-h';
+  }
+  if (theme_get_setting('slider_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
+    $vars['classes_array'][] = 'lb-s';
   }
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';

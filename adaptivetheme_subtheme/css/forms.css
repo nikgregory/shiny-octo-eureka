@@ -2,27 +2,33 @@
  * $Id$
  */
 
-/* Forms */
+/**
+ * Adaptivetheme takes a pretty heavy handed approach to form styling,
+ * this is so you can have decent looking forms without having to do a
+ * lot of work. The CSS is included in full, including all positioning,
+ * so you can change anything you want.
+ */
 form {
-  margin:0 0 1.5em;
-  padding:0;
+  margin: 0 0 1.5em;
+  padding: 0;
 }
 .form-item label {
   font-weight: 400;
 }
 input {
-  margin: .5em 0;
+  margin: 0;
 }
 input.title {
-  font-size: 1.5em;
+  font-size: 1.385em;
 }
 input.text,
 input.title,
 textarea,
 select {
   border: 1px solid #ccc;
-  margin: .5em 0;
+  margin: 0;
 }
+/* Focus styles for accessibility and usabiltiy. */
 .form-text:focus,
 .form-checkbox:focus,
 .form-radio:focus,
@@ -31,8 +37,8 @@ select {
   background: #ffffdf;
 }
 textarea:focus {
-  border:1px solid #FC0;
-  background:#FFF;
+  border: 1px solid #fco;
+  background: #fff;
 }
 input.text,
 input.title {
@@ -40,7 +46,7 @@ input.title {
 }
 input.form-text,
 textarea {
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   height: auto;
   padding: 2px;
 }
@@ -48,7 +54,14 @@ textarea,
 input {
   font: 1em normal Arial, Helvetica, sans-serif;
 }
-div.form-item {
+.form-item,
+.form-action {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.exposed-filters .form-item {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 .form-item textarea.error {
   padding: 2px;
@@ -56,7 +69,7 @@ div.form-item {
 .form-item .description,
 fieldset .description,
 .fieldset-layout-settings dd {
-  font-size: .9em;
+  font-size: 0.846em;
 }
 span.form-required,
 span.marker {}
@@ -74,22 +87,29 @@ div.resizable-textarea textarea {
 fieldset {
   background: transparent;
   border: 1px solid #dadada;
-  margin: 1.5em 0;
-  padding: .75em;
+  margin: 10px 0;
+  padding: 10px;
+}
+fieldset fieldset:last-child {
+  margin-bottom: 0;
+}
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 0;
 }
 *:first-child+html fieldset {
-  background-color:transparent;
-  background-position: 0 .75em;
-  padding: 0 1em .75em;
+  background-color: transparent;
+  background-position: 0 10px;
+  padding: 0 10px 10px;
 }
 *:first-child+html fieldset > .description,
 *:first-child+html fieldset .fieldset-wrapper .description {
-  padding-top: 1.5em;
+  padding-top: 10px;
 }
 fieldset legend {
-  display:block;
+  display: block;
   font-weight: 400;
-  padding: 0 1em 0 0;
+  padding: 0 10px 0 0;
 }
 *:first-child+html fieldset legend,
 *:first-child+html fieldset.collapsed legend {
@@ -97,7 +117,7 @@ fieldset legend {
 }
 html.js fieldset.collapsed {
   background: transparent;
-  padding-top: .25em;
+  padding-top: 5px;
 }
 
 /* Search */
@@ -127,10 +147,10 @@ fieldset#edit-advanced fieldset .fieldset-legend {
   margin: 0 5px;
 }
 #edit-keywords-fieldset .form-item:first-child {
-  margin-top: 0.4em;
+  margin-top: 5px;
 }
 #search-form {
-  margin: 1em 0;
+  margin: 10px 0;
 }
 #search-form > div {}
 #search-form .container-inline {}
@@ -166,6 +186,7 @@ fieldset#edit-advanced fieldset .fieldset-legend {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
+  background: none;
 }
 #user-admin-filter ul li,
 #article-admin-filter ul li {
@@ -175,12 +196,22 @@ fieldset#edit-advanced fieldset .fieldset-legend {
   color: #555;
 }
 /* Tips overrides */
-.field-type-text-with-summary fieldset {
-  padding: 1em 0;
+.field-type-text-long fieldset {
+  padding: 10px 0;
 }
-.field-type-text-with-summary fieldset .form-item {
+.field-type-text-long fieldset .form-item {
   margin: 0;
+  padding: 0 0 0 15px;
 }
-.field-type-text-with-summary fieldset .filter-help {
-  padding: .5em 1.5em;
+fieldset .filter-help {
+  padding: 5px 15px;
+}
+.filter-guidelines {
+  font-size: .923em;
+  margin: 0;
+  padding: 0 18px 10px;
+}
+/* Special case modules */
+#devel-switch-user-form {
+  margin-bottom: 0;
 }

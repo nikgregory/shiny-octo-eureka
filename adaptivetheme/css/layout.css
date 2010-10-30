@@ -1,8 +1,5 @@
 /** 
  * $Id$
- *
- * @file
- * Fallback layout and helpers.
  */
 .two-sidebars .content-inner {
   margin:0 240px;
@@ -22,43 +19,23 @@
   margin-left:-240px;
 }
 
-/* Reset HTML5 elements, CSS assumes elements are inline. */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-
-/* Add padding to align elements to the grid. */
+/* Add margin to align elements to the grid. */
 .block-inner,
 .breadcrumb,
 .messages,
 #primary-nav,
 #secondary-nav,
 #breadcrumb,
-#page-title,
-#tasks,
-#content,
-#skip-nav,
+#main-content > header,
 #branding,
 #attribution {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-/* Strip block padding inside content column area */
+/* Strip block margin inside content column area */
 .content-inner .block {
-  padding: 0;
+  margin: 0;
 }
 
 /* Grids. */
@@ -160,49 +137,83 @@ width:160px;
   width:50%;
 }
 
-/* Containers and layout helpers. */
-.container {
-  position:relative;
-  width:960px;
-  margin:0 auto;
+/* Grid offsets - an offset = grid-width + gutter */
+.go-1 {
+  margin-left: 60px;
 }
-#main-content,
-#columns {
-  display:inline-block;
-  width:100%;
+.pos-r.go-1 {
+  margin-left: 0;
+  margin-right: 60px;
 }
-#main-content,
-.block {
-  position:relative;
+.go-2-16 {
+  margin-left: 120px;
 }
-.content-inner > #main-content,
-#page > #columns {
-  display:block;
+.pos-r.go-2-16 {
+  margin-left: 0;
+  margin-right: 120px;
 }
-#content-column,
-.region-sidebar-first,
-.region-sidebar-second,
-.at-horizontal-login label {
-  float:left;
+.go-2-12 {
+  margin-left: 160px;
 }
-#content-column {
-  width:100%;
+.pos-r.go-2-12 {
+  margin-left: 0;
+  margin-right: 160px;
 }
-.clear,
-#columns,
-#breadcrumb,
-#content-bottom,
-#secondary-content,
-#tertiary-content,
-#footer,
-#footer-region,
-#footer-message,
-.block,
-#block-admin-display-form,
-.fieldset-layout-settings .layout-method,
-.fieldset-layout-settings .layout-help,
-.fieldset-layout-settings .page-width {
-  clear:both;
+.go-3 {
+  margin-left: 180px;
+}
+.pos-r.go-3 {
+  margin-left: 0;
+  margin-right: 180px;
+}  
+.go-4-16 {
+  margin-left: 240px;
+}
+.pos-r.go-4-16 {
+  margin-left: 0;
+  margin-right: 240px;
+}
+.go-5 {
+  margin-left: 300px;
+}
+.pos-r.go-5 {
+  margin-left: 0;
+  margin-right: 300px;
+}
+.go-4-12 {
+  margin-left: 320px;
+}
+.pos-r.go-4-12 {
+  margin-left: 0;
+  margin-right: 320px;
+}
+.fgo-6 {
+  margin-left: 16.67%;
+}
+.pos-r.fgo-6 {
+  margin-left: 0;
+  margin-right: 16.67%;
+}
+.fgo-5 {
+  margin-left: 20%;
+}
+.pos-r.fgo-5 {
+  margin-left: 0;
+  margin-right: 20%;
+}
+.fgo-4 {
+  margin-left: 25%;
+}
+.pos-r.fgo-4 {
+  margin-left: 0;
+  margin-right: 25%;
+}
+.fgo-3 {
+  margin-left: 33.33%;
+}
+.pos-r.fgo-3 {
+  margin-left: 0;
+  margin-right: 33.33%;
 }
 
 /* Gpanels */
@@ -271,6 +282,113 @@ width:160px;
 /* Panels */
 .block-panels_mini {
   padding: 0;
+}
+
+/* Block positioning */
+.pos-c {
+  float:none;
+  display:block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.pos-r {
+  float: right;
+}
+.pos-cf {
+  float:none;
+  clear:both;
+  display: block;
+}
+
+/* Content alignment */
+/* Centered */
+.ca-c,
+.ca-c ul.menu,
+.ca-c .item-list ul {
+  text-align:center;
+  margin:0;
+}
+.ca-c ul.menu li,
+.ca-c .item-list ul li {
+  list-style:none;
+  margin:0;
+}
+/* left */
+.ca-l,
+.ca-l ul.menu,
+.ca-l .item-list ul {
+  text-align:left;
+  margin:0;
+}
+/* Right */
+.ca-r,
+.ca-r ul.menu,
+.ca-r .item-list ul {
+  text-align:right;
+  margin:0;
+}
+
+/* Imagefield positioning */
+.ai-l .field-type-image {
+  float: left;
+}
+.ai-r .field-type-image {
+  float: right;
+} 
+.ai-b,
+.ai-b .block-inner,
+.ai-b .block-content {
+  padding: 0;
+  overflow: hidden;
+}
+.ai-b .block-content p,
+.ai-b .block-content div.field-type-image {
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+/* Containers and layout helpers. */
+.container {
+  position:relative;
+  width:960px;
+  margin:0 auto;
+}
+#main-content,
+#columns {
+  display:inline-block;
+  width:100%;
+}
+#main-content,
+.block {
+  position:relative;
+}
+.content-inner > #main-content,
+#page > #columns {
+  display:block;
+}
+#content-column,
+.region-sidebar-first,
+.region-sidebar-second,
+.at-horizontal-login label {
+  float:left;
+}
+#content-column {
+  width:100%;
+}
+.clear,
+#columns,
+#breadcrumb,
+#content-bottom,
+#secondary-content,
+#tertiary-content,
+#footer,
+#footer-region,
+#footer-message,
+.block,
+.pos-cf,
+#block-admin-display-form {
+  clear:both;
 }
 
 /* Enhanced universal clearfix */
