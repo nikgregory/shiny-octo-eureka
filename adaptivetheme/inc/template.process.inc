@@ -102,10 +102,7 @@ function adaptivetheme_process_html(&$vars) {
 // Preprocess variables for page.tpl.php.
 // template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
-  // Ugly hack to remove the page title when viewing a node
-  //if (arg(0) == 'node' && is_numeric(arg(1)) && !is_string(arg(2))) {
-  //  $vars['title'] = '';
-  //}
+
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -115,7 +112,16 @@ function adaptivetheme_preprocess_page(&$vars) {
     'html' => TRUE,
     )
   ) : '';
-  $vars['linked_site_name'] = $vars['site_name'] ? l($vars['site_name'], '<front>', array(
+  if (theme_get_setting('toggle_name') == FALSE) {
+    $vars['visibility'] = 'element-invisible';
+    $vars['hide_site_name'] = TRUE;
+  }
+  else {
+    $vars['visibility'] = '';
+    $vars['hide_site_name'] = FALSE;
+  }
+  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
       'rel' => 'home',
       'title' => t('Home page')),
