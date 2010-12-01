@@ -2,20 +2,13 @@
 (function ($) {
   /**
    * Insert WAI-ARIA Landmark Roles (Roles for Accessible Rich Internet Applications)
-   *
    * http://www.w3.org/TR/2006/WD-aria-role-20060926/
-   * 
-   * Due to validation errors with WAI-ARIA roles we use JavaScript to 
-   * insert the roles. This is a stop-gap measure while the W3C sort 
-   * out the validator.
-   *
-   * This is a starting point, you can copy this and use it in your subtheme for more granular control.
    */
   Drupal.behaviors.adaptivetheme = {
     attach: function(context) {
 
       // Set role="banner" on the header element.
-      $("body > header").attr("role", "banner");
+      $("#page > header").attr("role", "banner");
 
       // Set role="main" on #main-content div.
       $("#main-content").attr("role", "main");
