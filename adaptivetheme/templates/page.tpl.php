@@ -51,7 +51,7 @@
           <header>
             <?php print render($title_prefix); ?>
             <?php if ($title): ?>
-            <h1 id="page-title"><?php print $title; ?></h1>
+              <h1 id="page-title"><?php print $title; ?></h1>
             <?php endif; ?>
             <?php print render($title_suffix); ?>
 
@@ -71,9 +71,7 @@
           </header>
         <?php endif; ?>
 
-        <div id="content">
-          <?php print render($page['content']); ?>
-        </div>
+        <div id="content"><?php print render($page['content']); ?></div>
 
         <?php print $feed_icons; ?>
 
@@ -91,9 +89,7 @@
   <?php print render($page['tertiary_content']); ?>
 
   <?php if ($page['footer']): ?>
-    <footer>
-      <?php print render($page['footer']); ?>
-    </footer>
+    <footer><?php print render($page['footer']); ?></footer>
   <?php endif; ?>
 
 </div>
