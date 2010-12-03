@@ -102,7 +102,6 @@ function adaptivetheme_process_html(&$vars) {
 // Preprocess variables for page.tpl.php.
 // template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
-
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -182,9 +181,23 @@ function adaptivetheme_preprocess_node(&$vars) {
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
+  if (!$vars['teaser'] && theme_get_setting('extra_article_classes')) {
+    $vars['classes_array'][] = drupal_html_class('article-' . $vars['view_mode']);
+  }
   $vars['title_attributes_array']['class'][] = 'article-title';
   $vars['content_attributes_array']['class'][] = 'article-content';
   $vars['datetime'] = format_date($vars['created'], 'custom', 'c');
+  if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
+    $vars['submitted'] = t('Submitted by !username on !datetime',
+      array(
+        '!username' => $vars['name'],
+        '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>',
+      )
+    );
+  }
+  else {
+    $vars['submitted'] = '';
+  }
   $vars['unpublished'] = '';
   if (!$vars['status']) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';

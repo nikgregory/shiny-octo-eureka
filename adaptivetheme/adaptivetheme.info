@@ -6,7 +6,7 @@
 
 ;----------// Theme Information
   name        = AT Core
-  description = AT Core is the base theme for all Adaptivetheme subthemes..
+  description = AT Core is the base theme for all Adaptivetheme subthemes.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -20,7 +20,6 @@
 
 ;----------// jQuery Plugins and JavaScripts
   scripts[] = js/at.js
-  
 
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first

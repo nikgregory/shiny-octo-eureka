@@ -17,14 +17,10 @@
     </header>
   <?php endif; ?>
 
-  <?php print $user_picture; ?>
-
   <?php if ($display_submitted): ?>
-    <footer>
-      <?php
-        print t('Submitted by !username on !datetime',
-        array('!username' => $name, '!datetime' => '<time datetime="' . $datetime . '" pubdate="pubdate">' . $date . '</time>'));
-      ?>
+    <footer class="submitted">
+      <?php print $user_picture; ?>
+      <?php print $submitted; ?>
     </footer>
   <?php endif; ?>
 
@@ -37,7 +33,7 @@
   </div>
 
   <?php if (!empty($content['links'])): ?>
-    <nav><?php print render($content['links']); ?></nav>
+    <nav class="clearfix"><?php print render($content['links']); ?></nav>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>

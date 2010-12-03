@@ -306,7 +306,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
   );
   $form['themedev']['dev']['classes']['extra_article_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language and odd/even classes.') . '</span>',
+    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language, odd/even classes and build mode classes such as .article-teaser and .article-full.') . '</span>',
     '#default_value' => theme_get_setting('extra_article_classes'),
   );
   $form['themedev']['dev']['classes']['extra_comment_classes'] = array(
