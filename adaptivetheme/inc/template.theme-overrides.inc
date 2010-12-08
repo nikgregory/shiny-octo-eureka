@@ -294,6 +294,9 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
         }
         $link = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
       }
+      else {
+        $link = '';
+      }
       $i++;
       $output .= '<li'. drupal_attributes(array('class' => $class)) .'>';
       $output .= $link;
