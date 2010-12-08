@@ -98,7 +98,7 @@ $vars['title_classes'] = implode(' ', $title_classes);
 $vars['article_aside'] = theme('blocks', 'article_aside');
 
 // Support node tpl suggestions per node nid.
-$vars['template_files'][] = 'node-'.$vars['node']->nid; 
+$vars['template_files'][] = 'node-'.$vars['node']->nid;
 
 // Set message if node is unpublished.
 if (!$vars['node']->status) {
@@ -157,12 +157,12 @@ if (theme_get_setting('taxonomy_settings_enabled') == 1 && function_exists('taxo
         $vocab_index = 0;
         foreach ($vocabularies as $vocabulary) {
           $vocab_index++;
-		  $terms = '';
+		      $terms = '';
           if (theme_get_setting('taxonomy_vocab_display_'. $taxonomy_content_type .'_'. $vocabulary->vid) == 1) {
             $terms = taxonomy_node_get_terms_by_vocabulary($vars['node'], $vocabulary->vid);
           }
           if ($terms) {
-		     if (module_exists('i18n')){
+		        if (module_exists('i18n')){
  	             $terms = i18ntaxonomy_localize_terms ($terms);
  	          }
             $links = array();
@@ -200,18 +200,3 @@ if (theme_get_setting('display_links_settings_enabled') == 1) {
     $vars['links'] = '';
   }
 }
-
-/* Variables for node-product.tpl.php, save this for another day...
-if (uc_product_is_product($vars['node']->type)) {
-  $vars['uc_image']         = $vars['node']->content['image']['#value'];
-  $vars['uc_body']          = $vars['node']->content['body']['#value'];
-  $vars['uc_display_price'] = $vars['node']->content['display_price']['#value'];
-  $vars['uc_add_to_cart']   = $vars['node']->content['add_to_cart']['#value'];
-  $vars['uc_weight']        = $vars['node']->content['weight']['#value'];
-  $vars['uc_dimensions']    = $vars['node']->content['dimensions']['#value'];
-  $vars['uc_model']         = $vars['node']->content['model']['#value'];
-  $vars['uc_list_price']    = $vars['node']->content['list_price']['#value'];
-  $vars['uc_cost']          = $vars['node']->content['cost']['#value'];
-  $vars['uc_sell_price']    = $vars['node']->content['sell_price']['#value'];
-}
-*/
