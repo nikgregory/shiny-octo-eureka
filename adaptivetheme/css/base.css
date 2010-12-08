@@ -918,11 +918,11 @@ padding:0;
 padding:0 .5em;
 }
 
-.at-multicolumn-menu .block-content {
+.at-multicolumn-menu .content {
 overflow:auto;
 }
 
-.at-multicolumn-menu .block-content ul li {
+.at-multicolumn-menu .content ul li {
 display:block;
 font-weight:700;
 float:left;
@@ -932,13 +932,13 @@ list-style-image:none;
 margin:0;
 }
 
-.at-multicolumn-menu .block-content ul li.expanded ul {
+.at-multicolumn-menu .content ul li.expanded ul {
 display:block;
 margin-left:0;
 width:160px;
 }
 
-.at-multicolumn-menu .block-content ul li.expanded ul li {
+.at-multicolumn-menu .content ul li.expanded ul li {
 border:none;
 display:block;
 }
@@ -986,7 +986,7 @@ h2,input.title {
 font-size:1.5em;
 }
 
-h1,h2,h3,h4,h5,h6,h1 img,h2 img,h3 img,h4 img,h5 img,h6 img,em,dfn,del,ins,a,tbody,tfoot,thead,tr,li,label,legend,#user-login-form ul,.fieldset-layout-settings .layout-help dt,.fieldset-layout-settings .layout-help dd,.at-inline-menu ul.menu,.at-multicolumn-menu .block-content ul {
+h1,h2,h3,h4,h5,h6,h1 img,h2 img,h3 img,h4 img,h5 img,h6 img,em,dfn,del,ins,a,tbody,tfoot,thead,tr,li,label,legend,#user-login-form ul,.fieldset-layout-settings .layout-help dt,.fieldset-layout-settings .layout-help dd,.at-inline-menu ul.menu,.at-multicolumn-menu .content ul {
 margin:0;
 padding:0;
 }
@@ -1034,7 +1034,7 @@ list-style:none;
 margin:0;
 }
 
-.admin-panel dt,.fieldset-layout-settings label,.fieldset-layout-settings strong,.at-multicolumn-menu .block-content ul.menu li ul.menu li {
+.admin-panel dt,.fieldset-layout-settings label,.fieldset-layout-settings strong,.at-multicolumn-menu .content ul.menu li ul.menu li {
 font-weight:400;
 }
 

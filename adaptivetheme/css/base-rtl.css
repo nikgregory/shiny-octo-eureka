@@ -222,7 +222,7 @@ left:15px;
 right:auto;
 }
 
-.grid-1,.grid-2,.grid-3,.grid-4-12,.grid-4-16,.grid-5,.grid-6,.grid-7,.grid-8,.grid-9,.grid-10,.grid-11,.grid-12,.grid-13,.grid-14,.grid-15,.grid-16,#content-column,#sidebar-first,#sidebar-last,.at-horizontal-login .form-item,.at-horizontal-login .form-submit,.at-horizontal-login#user-login-form ul,.at-horizontal-login #user-login-form ul li,.at-horizontal-login label,.at-inline-menu ul.menu li,.at-multicolumn-menu .block-content ul li,#node-form .node-col-first {
+.grid-1,.grid-2,.grid-3,.grid-4-12,.grid-4-16,.grid-5,.grid-6,.grid-7,.grid-8,.grid-9,.grid-10,.grid-11,.grid-12,.grid-13,.grid-14,.grid-15,.grid-16,#content-column,#sidebar-first,#sidebar-last,.at-horizontal-login .form-item,.at-horizontal-login .form-submit,.at-horizontal-login#user-login-form ul,.at-horizontal-login #user-login-form ul li,.at-horizontal-login label,.at-inline-menu ul.menu li,.at-multicolumn-menu .content ul li,#node-form .node-col-first {
 float:right;
 }
 
@@ -234,7 +234,7 @@ ul ul,ul ol,ol ol,ol ul,.block ul ul,.block ul ol,.block ol ol,.block ol ul,.ite
 margin:0 1.667em 0 0;
 }
 
-.admin-panel dd,.at-multicolumn-menu .block-content ul li.expanded ul {
+.admin-panel dd,.at-multicolumn-menu .content ul li.expanded ul {
 margin-right:0;
 }
 
