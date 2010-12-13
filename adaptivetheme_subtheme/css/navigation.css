@@ -42,7 +42,10 @@ a:focus {}
 }
 
 /* Primary-links div wrapper */
-#primary-menu {}
+#primary-menu {
+  position: relative;
+  z-index: 100;
+}
 
 /* Class on the ul */
 .primary-links {}

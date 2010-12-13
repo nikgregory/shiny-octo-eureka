@@ -72,7 +72,7 @@ function adaptivetheme_fieldset($element) {
 }
 
 /**
- * Modify the theme settings form.
+ * Modify the system settings form for themes.
  */
 function adaptivetheme_system_settings_form($form) {
   if (arg(2) == 'themes' && arg(3) == 'settings') {
@@ -127,7 +127,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
           $link['attributes']['class'] .= ' active';
         }
         if (theme_get_setting('links_add_span_elements')) {
-          $link['title'] = '<span>' . check_plain($link['title']) . '</span>';
+          $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
         $link = l($link['title'], $link['href'], $link);
@@ -141,6 +141,9 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
           $span_attributes = drupal_attributes($link['attributes']);
         }
         $link = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
+      }
+      else {
+        $link = '';
       }
       $i++;
       $output .= '<li'. drupal_attributes(array('class' => $class)) .'>';
