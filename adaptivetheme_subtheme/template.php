@@ -20,7 +20,7 @@ function get_at_styles() {
 }
 if (theme_get_setting('style_enable_schemes') == 'on') {
   $style = get_at_styles();
-  drupal_add_css(path_to_theme() . '/css/schemes/' . $style, array('group' => CSS_THEME));
+  drupal_add_css(path_to_theme() . '/css/schemes/' . $style, array('group' => CSS_THEME, 'preprocess' => TRUE));
 }
 // */
 

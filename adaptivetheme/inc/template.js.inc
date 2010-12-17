@@ -30,6 +30,9 @@ if (!empty($active_regions)) {
       'type' => 'file',
       'scope' => 'header',
       'weight' => 999,
+      'group' => JS_THEME,
+      'preprocess' => TRUE,
+      'cache' => TRUE,
     )
   );
 }
@@ -39,6 +42,9 @@ if (theme_get_setting('equal_heights_sidebars')) {
       'type' => 'file',
       'scope' => 'header',
       'weight' => 999,
+      'group' => JS_THEME,
+      'preprocess' => TRUE,
+      'cache' => TRUE,
     )
   );
 }
@@ -48,6 +54,9 @@ if (theme_get_setting('equal_heights_gpanels')) {
       'type' => 'file',
       'scope' => 'header',
       'weight' => 999,
+      'group' => JS_THEME,
+      'preprocess' => TRUE,
+      'cache' => TRUE,
     )
   );
 }

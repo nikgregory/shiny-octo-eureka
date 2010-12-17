@@ -107,7 +107,8 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
     'attributes' => array(
       'rel' => 'home',
-      'title' => t('Home page')),
+      'title' => t('Home page')
+    ),
     'html' => TRUE,
     )
   ) : '';
@@ -300,6 +301,11 @@ function adaptivetheme_preprocess_block(&$vars) {
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
 }
 
+// Changes the search form to use the "search" input element of HTML5 (from the Boron theme).
+function adaptivetheme_preprocess_search_block_form(&$vars) {
+  $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
+}
+
 // Modify search results based on theme settings.
 function adaptivetheme_preprocess_search_result(&$vars) {
   $result = $vars['result'];
@@ -330,12 +336,6 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_split'] = $info;
   $vars['info'] = implode(' - ', $info);
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
-}
-
-// Process function for theme_field() and field.tpl.php.
-// TODO: remove these suggestions before production release, its here to provide backward compatibility with early d7 beta1 which does not have these.
-function adaptivetheme_preprocess_field(&$vars, $hook) {
-  array_unshift($vars['theme_hook_suggestions'], 'field__' . $vars['element']['#field_type']);
 }
 
 // Preprocess variables for region.tpl.php.

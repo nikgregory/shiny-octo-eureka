@@ -1,5 +1,13 @@
 <?php
 
+// hook_html_head_alter().
+function adaptivetheme_html_head_alter(&$head_elements) {
+  $head_elements['system_meta_content_type']['#attributes'] = array(
+    'charset' => 'utf-8',
+  );
+}
+
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -81,4 +89,13 @@ function adaptivetheme_form_search_form_alter(&$form, $form_state) {
     }
     $form['#validate'][] = 'node_search_validate';
   }
+}
+
+/**
+ * Set a class on the iframe body element for WYSIWYG editors. This allows you
+ * to easily override the background for the iframe body element.
+ * This only works for the WYSIWYG module: http://drupal.org/project/wysiwyg
+ */
+function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
+  $settings['bodyClass'] = 'wysiwygeditor';
 }
