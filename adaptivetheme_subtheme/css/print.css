@@ -46,10 +46,9 @@ table {
 }
 
 /* Hide various parts of the site. */
-.breadcrumb,
-#menu-bar,
-#main-menu,
-#secondary-menu,
+.sidebar,
+#breadcrumb,
+.nav,
 .field-type-taxonomy-term-reference,
 ul.links,
 ul.links a,
@@ -92,13 +91,23 @@ h4,h5,h6{
 h1 a,h2 a,h3 a,h4 a,h5 a,h6 a,#site-name a {
   text-decoration: none !important;
 }
-code {
-  font: 10pt "Courier New", Monaco, "Nimbus Mono L", monospace;
+h1#page-title {
+  margin-top: 1em;
+}
+pre,
+code,
+tt,
+samp,
+kbd,
+var {
+  font-size: 10pt;
+  font-family: Consolas, "Lucida Console", Menlo, Monaco, "DejaVu Sans Mono", monospace, sans-serif; /* Safari hack */
 }
 blockquote {
   margin: 1.3em;
   padding: 1em;
   font-size: 10pt;
+  font-style: italic;
 }
 hr {
   background-color: #ccc;

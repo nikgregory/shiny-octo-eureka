@@ -31,6 +31,7 @@ function adaptivetheme_subtheme_form_system_theme_settings_alter(&$form, &$form_
       '#title' => t('Styles'),
       '#default_value' => theme_get_setting('style_schemes'),
       '#options' => array(
+        'none' => t('None'),
         'style-default.css' => t('Default Style'),
         // 'my-style.css' => t('My Style'), // Add your schemes, these MUST be placed in your subthemes /schemes directory!
       ),
