@@ -20,6 +20,7 @@
   stylesheets[all][] = css/blocks.css
   stylesheets[all][] = css/navigation.css
   stylesheets[all][] = css/skins.css
+  stylesheets[print][] = css/print.css
   
   ; Disabled styles - un-comment if you need these. TODO - dark.css needs a total revamp.
   ;stylesheets[all][] = css/admin-section.css
