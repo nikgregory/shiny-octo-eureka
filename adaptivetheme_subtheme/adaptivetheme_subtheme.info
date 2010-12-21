@@ -58,9 +58,9 @@
   ;regions[two_66_33_second] = 2col 66-33 Gpanel col 2
 
   ; 3 col 3x33
-  regions[three_33_first]  = 3col 3x33 Gpanel col 1
-  regions[three_33_second] = 3col 3x33 Gpanel col 2
-  regions[three_33_third]  = 3col 3x33 Gpanel col 3
+  ;regions[three_33_first]  = 3col 3x33 Gpanel col 1
+  ;regions[three_33_second] = 3col 3x33 Gpanel col 2
+  ;regions[three_33_third]  = 3col 3x33 Gpanel col 3
 
   ; 3 col 25-25-50
   ;regions[three_25_25_50_first]  = 3col 25-25-50 Gpanel col 1
