@@ -11,7 +11,7 @@
  */
 global $theme, $theme_info, $language;
 
-if($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user') {
+if ($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user' && (!arg(1) || arg(1) == 'login')) {
   $vars['template_files'][] = 'maintenance-page';
   $vars['head_title'] = drupal_set_title(t('User Login'));
   $vars['title'] = drupal_set_title(t('User Login'));

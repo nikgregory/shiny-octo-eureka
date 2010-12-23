@@ -16,7 +16,7 @@ if (db_is_active()) {
    function adaptivetheme_preprocess(&$vars, $hook) {
     global $user;
     $vars['theme_path'] = path_to_theme() .'/';
-    $vars['in_maintenance'] = MAINTENANCE_MODE;
+    $vars['in_maintenance'] = variable_get('site_offline', 0);
     if (is_file(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc')) {
       include(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.preprocess-'. str_replace('_', '-', $hook) .'.inc');
     }
