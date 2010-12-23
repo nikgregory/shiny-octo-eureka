@@ -23,6 +23,7 @@
   regions[content_top]       = Content Top
   regions[content_aside]     = Content Aside
   regions[content]           = Main Content
+  regions[content_front]     = Front Page Main Content
   regions[content_bottom]    = Content Bottom
   regions[left]              = Sidebar First
   regions[right]             = Sidebar Last
