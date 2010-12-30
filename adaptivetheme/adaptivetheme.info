@@ -1,8 +1,7 @@
 ; $Id$
 
 ; NOTE - you do not need to enable or modify this theme - instead use
-; the Subtheme as a starting point for building your own theme. By default
-; this theme is hidden on the Themes List page.
+; adaptivetheme_subtheme as a starting point for building your own theme.
 
 ;----------// Theme Information
   name        = AT Core
@@ -10,7 +9,6 @@
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
-  hidden      = TRUE
 
 ;----------// Stylesheets
   stylesheets[all][] = css/base.css
