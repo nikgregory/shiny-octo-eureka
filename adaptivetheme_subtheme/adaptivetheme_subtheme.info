@@ -109,7 +109,6 @@
  
 ;----------// Theme Setting Defaults
 
-  settings[skip_navigation_display]        = 'focus'
   settings[breadcrumb_display]             = 'yes'
   settings[breadcrumb_separator]           = ' &#187; '
   settings[breadcrumb_home]                = 1
