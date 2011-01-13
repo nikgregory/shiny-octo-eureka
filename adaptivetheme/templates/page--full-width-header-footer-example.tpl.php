@@ -1,5 +1,5 @@
 <?php
-// $Id
+// $Id$
 
 /**
  * This is an example page template that has 100% width header and footer backgrounds.
