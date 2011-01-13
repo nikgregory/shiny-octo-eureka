@@ -94,13 +94,6 @@
   ;regions[six_sixth]  = 6col Gpanel col 6
 
 
-;----------// Skinr Styles
-  ; The following require the Skinr module, http://drupal.org/project/skinr
-  ; Adaptivetheme provides native support for Skinr classes.
-
-  skinr[options][inherit_skins] = true
-
-
 ;----------// Site Features
 
   features[] = logo
