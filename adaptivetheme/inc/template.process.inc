@@ -168,14 +168,11 @@ function adaptivetheme_preprocess_page(&$vars) {
 // template_preprocess_node
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
-  if (module_exists('skinr') && !empty($vars['skinr'])) {
-    $classes[] = $vars['skinr'];
-  }
   if (theme_get_setting('extra_article_classes')) {
     if (module_exists('translation')) {
       if ($vars['node']->language) {
         global $language;
-        $classes[] = 'article-lang-'. $vars['node']->language;
+        $vars['classes_array'][] = 'article-lang-'. $vars['node']->language;
       }
     }
   }
