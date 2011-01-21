@@ -280,18 +280,16 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
-  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu', 'superfish', 'nice_menus');
+  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
-  }
-  if (in_array($vars['block']->delta, $nav_blocks) && $vars['block']->region == 'menu_bar') {
-    $vars['theme_hook_suggestions'][] = 'block__menu_bar';
   }
   $nav_modules = array('superfish', 'nice_menus');
   if (in_array($vars['block']->module, $nav_modules)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
   }
   if ($vars['block']->region == 'menu_bar') {
+    $vars['theme_hook_suggestions'][] = 'block__menu_bar';
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
   // For example we can have templates such as block--header--search, or block--menu-bar--menu, which is cool...

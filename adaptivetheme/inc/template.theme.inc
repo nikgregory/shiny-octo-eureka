@@ -212,3 +212,29 @@ function adaptivetheme_links($vars) {
   }
   return $output;
 }
+
+/**
+ * Modify the output of theme_field to support HTML5 in AT7.
+ * This has changed due to Views not working correctly with field.tpl.php
+ * overrides in themes: http://drupal.org/node/1034388
+ */
+function adaptivetheme_field($vars) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$vars['label_hidden']) {
+    $output .= '<div class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</div>';
+  }
+
+  // Render the items.
+  foreach ($vars['items'] as $delta => $item) {
+    $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
+    $output .= '<div class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
+  }
+
+  // Render the top-level DIV.
+  $tag = $vars['label_hidden'] ? 'div' : 'section';
+  $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
+
+  return $output;
+}
