@@ -19,8 +19,8 @@
     </div></div>
   <?php endif; ?>
 
-  <div id="header-wrapper">
-    <header class="container clearfix">
+  <div id="header-wrapper"><div class="container clearfix">
+    <header class="clearfix">
 
       <?php if ($linked_site_logo): ?>
         <div id="logo"><?php print $linked_site_logo; ?></div>
@@ -40,7 +40,7 @@
       <?php print render($page['header']); ?>
 
     </header>
-  </div>
+  </div></div>
 
   <?php if ($page['menu_bar'] || $primary_navigation || $secondary_navigation): ?>
     <div id="nav-wrapper"><div class="container clearfix">
@@ -51,9 +51,11 @@
   <?php endif; ?>
 
   <?php if ($breadcrumb): ?>
-    <div id="breadcrumb-wrapper"><section id="breadcrumb" class="container clearfix">
-      <?php print $breadcrumb; ?>
-    </section></div>
+    <div id="breadcrumb-wrapper"><div class="container clearfix">
+      <section id="breadcrumb" class="clearfix">
+        <?php print $breadcrumb; ?>
+      </section>
+    </div></div>
   <?php endif; ?>
 
   <?php if ($messages || $page['help']): ?>
@@ -125,9 +127,11 @@
   <?php endif; ?>
 
   <?php if ($page['footer']): ?>
-    <div id="footer-wrapper"><footer class="container clearfix">
-      <?php print render($page['footer']); ?>
-    </footer></div>
+    <div id="footer-wrapper"><div class="container clearfix">
+      <footer class="clearfix">
+        <?php print render($page['footer']); ?>
+      </footer>
+   </div></div>
   <?php endif; ?>
 
 </div></div>
