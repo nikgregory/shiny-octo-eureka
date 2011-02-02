@@ -59,10 +59,12 @@ function adaptivetheme_item_list($vars) {
   $title = $vars['title'];
   $type = $vars['type'];
   $attributes = $vars['attributes'];
+
   $output = '<div class="item-list">';
   if (isset($title)) {
     $output .= '<h3>' . $title . '</h3>';
   }
+
   if (!empty($items)) {
     $output .= "<$type" . drupal_attributes($attributes) . '>';
     $num_items = count($items);
@@ -86,25 +88,24 @@ function adaptivetheme_item_list($vars) {
         $data = $item;
       }
       if (count($children) > 0) {
+        // Render nested list.
         $data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
       }
       if (theme_get_setting('extra_item_list_classes')) {
         if ($i & 1) {
-          $attributes['class'] = empty($attributes['class']) ? 'odd' : ($attributes['class'] .' odd');
+          $attributes['class'][] = 'odd';
         }
         else {
-          $attributes['class'] = empty($attributes['class']) ? 'even' : ($attributes['class'] .' even');
+          $attributes['class'][] = 'even';
         }
-      }
-      if (theme_get_setting('extra_item_list_classes')) {
         if ($i == 0) {
-          $attributes['class'] = empty($attributes['class']) ? 'first' : ($attributes['class'] .' first');
+          $attributes['class'][] = 'first';
         }
         if ($i == $num_items - 1) {
-          $attributes['class'] = empty($attributes['class']) ? 'last' : ($attributes['class'] .' last');
+          $attributes['class'][] = 'last';
         }
       }
-      $output .= '<li' . drupal_attributes($attributes) . '>' . $data . "</li>";
+      $output .= '<li' . drupal_attributes($attributes) . '>' . $data . "</li>"; // no new line!
     }
     $output .= "</$type>";
   }
