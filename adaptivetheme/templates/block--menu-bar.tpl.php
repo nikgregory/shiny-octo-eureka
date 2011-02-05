@@ -1,7 +1,5 @@
 <?php
 // $Id$
-// add classes/attributes back in if you need them...
-/* id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?> */
 ?>
 <?php if ($content): // try to print nothing if block has no content ?>
   <nav id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
@@ -10,6 +8,6 @@
       <h2<?php print $title_attributes; ?>><?php print $block->subject; ?></h2>
     <?php endif; ?>
     <?php print render($title_suffix); ?>
-    <?php print $content ?>
+    <div class="menu-wrapper"><?php print $content ?></div>
   </nav>
 <?php endif; ?>
