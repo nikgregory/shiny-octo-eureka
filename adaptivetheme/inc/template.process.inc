@@ -6,14 +6,13 @@
 function adaptivetheme_preprocess_html(&$vars) {
   if (module_exists('rdf')) {
     $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
-    $vars['rdf']->version = ' version="HTML+RDFa 1.1"';
-    $vars['rdf']->namespaces = $vars['rdf_namespaces'];
-    $vars['rdf']->profile = ' profile="' . $vars['grddl_profile'] . '"';
-  } else {
+    $vars['rdf_version'] = ' version="HTML+RDFa 1.1"';
+    $vars['rdf_profile'] = ' profile="' . $vars['grddl_profile'] . '"';
+  }
+  else {
     $vars['doctype'] = '<!DOCTYPE html>' . "\n";
-    $vars['rdf']->version = '';
-    $vars['rdf']->namespaces = '';
-    $vars['rdf']->profile = '';
+    $vars['rdf_version'] = '';
+    $vars['rdf_profile'] = '';
   }
   if (theme_get_setting('extra_page_classes')) {
     if (function_exists('locale')) {
@@ -162,6 +161,16 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+  // Work-around a stupid bug in Drupal 7...
+  if (arg(0) == 'user' && arg(1) == 'login') {
+    drupal_set_title(t('User login'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'password') {
+    drupal_set_title(t('Request new password'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'register') {
+    drupal_set_title(t('Create new account'));
+  }
 }
 
 // Preprocess variables for node.tpl.php.
