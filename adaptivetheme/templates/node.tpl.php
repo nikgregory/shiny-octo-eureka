@@ -32,8 +32,8 @@
   ?>
   </div>
 
-  <?php if (!empty($content['links'])): ?>
-    <nav class="clearfix"><?php print render($content['links']); ?></nav>
+  <?php if ($links = render($content['links'])): ?>
+    <nav class="clearfix"><?php print $links; ?></nav>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
