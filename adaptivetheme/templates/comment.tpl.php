@@ -36,8 +36,8 @@
     <div class="user-signature"><?php print $signature ?></div>
   <?php endif; ?>
 
-  <?php if (!empty($content['links'])): ?>
-    <nav><?php print render($content['links']); ?></nav>
+  <?php if ($links = render($content['links'])): ?>
+    <nav class="clearfix"><?php print $links; ?></nav>
   <?php endif; ?>
 
 </article>
