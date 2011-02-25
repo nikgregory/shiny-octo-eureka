@@ -1,4 +1,3 @@
-// $Id$
 Drupal.behaviors.LoginSlider = function (context) {
   $("#slider-login:not(.slider-login-processed)", context).each(
     function() {
