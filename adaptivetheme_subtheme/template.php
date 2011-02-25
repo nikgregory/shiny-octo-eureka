@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Add the Style Schemes if enabled.

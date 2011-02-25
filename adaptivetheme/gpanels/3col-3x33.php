@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * @file 3col-3x33.php

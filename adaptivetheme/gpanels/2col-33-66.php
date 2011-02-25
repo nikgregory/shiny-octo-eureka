@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * @file 2col-33-66.php

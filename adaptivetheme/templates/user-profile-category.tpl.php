@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <section class="<?php print drupal_html_class($title); ?>">
   <?php if ($title) : ?>

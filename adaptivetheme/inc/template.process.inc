@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 // Preprocess variables for html.tpl.php.
 // template_preprocess_html

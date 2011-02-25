@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <aside class="feed-source">
   <?php if ($source_description): ?>

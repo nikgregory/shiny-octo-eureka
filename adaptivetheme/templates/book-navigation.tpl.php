@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php if ($tree || $has_links): ?>
   <footer id="book-navigation-<?php print $book_id; ?>" class="book-navigation">

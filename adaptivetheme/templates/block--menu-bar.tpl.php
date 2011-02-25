@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php if ($content): // try to print nothing if block has no content ?>
   <nav id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>

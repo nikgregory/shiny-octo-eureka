@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.theme.inc');
 include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.js.inc');

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <li class="search-result">
   <h3 class="title"><a href="<?php print $url; ?>"><?php print $title; ?></a></h3>

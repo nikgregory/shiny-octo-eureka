@@ -1,4 +1,3 @@
-// $Id$
 (function ($) {
   Drupal.behaviors.adaptivetheme_equalizeblocks = {
     attach: function(context) {

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <article id="article-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 

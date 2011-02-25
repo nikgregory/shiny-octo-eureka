@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php print $doctype; ?>
 <html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_version . $rdf_namespaces; ?>>

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php if (!empty($content)): ?>
   <aside class="<?php print $classes; ?>">

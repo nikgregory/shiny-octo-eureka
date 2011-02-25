@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php $tag = $block->subject ? 'section' : 'div'; ?>
 <<?php print $tag; ?> id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>

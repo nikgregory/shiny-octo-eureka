@@ -1,4 +1,3 @@
-// $Id$
 (function ($) {
   Drupal.behaviors.adaptivetheme_equalizecolumns = {
     attach: function(context) {

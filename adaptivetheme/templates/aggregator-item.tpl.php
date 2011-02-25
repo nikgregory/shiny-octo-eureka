@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <article class="feed-item">
   <header>

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {

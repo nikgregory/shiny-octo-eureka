@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 <?php if (!empty($content)): ?>
   <div id="menu-bar" class="nav">

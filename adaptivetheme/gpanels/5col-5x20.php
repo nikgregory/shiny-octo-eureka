@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * @file 5col-5x20.php
