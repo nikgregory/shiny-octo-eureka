@@ -1,4 +1,3 @@
-// $Id$
 /**
  * Insert WAI-ARIA Landmark Roles (Roles for Accessible Rich Internet Applications)
  *

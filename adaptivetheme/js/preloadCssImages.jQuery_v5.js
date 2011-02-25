@@ -1,4 +1,3 @@
-// $Id$
 
 /**
  * jQuery-Plugin "preloadCssImages"
