@@ -1,5 +1,3 @@
-<?php
-?>
 <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php print $unpublished; ?>

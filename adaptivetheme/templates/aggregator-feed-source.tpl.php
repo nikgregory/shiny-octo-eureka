@@ -1,5 +1,3 @@
-<?php
-?>
 <aside class="feed-source">
   <?php if ($source_description): ?>
     <header class="feed-description"><?php print $source_description; ?></header>

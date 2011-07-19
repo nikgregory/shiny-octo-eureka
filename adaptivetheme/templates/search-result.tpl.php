@@ -1,5 +1,3 @@
-<?php
-?>
 <li class="search-result">
   <h3 class="title"><a href="<?php print $url; ?>"><?php print $title; ?></a></h3>
   <?php if ($snippet or $info_split): ?>

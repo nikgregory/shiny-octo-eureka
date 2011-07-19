@@ -1,5 +1,3 @@
-<?php
-?>
 <?php $tag = $label_hidden ? 'div' : 'section'; ?>
 <<?php print $tag; ?> class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php if (!$label_hidden) : ?>

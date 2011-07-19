@@ -1,5 +1,4 @@
-/** 
- */
+/* CSS for major navigation elements such as menus, pager, superfish etc */
 
 a {}
 a:link    {}
@@ -15,6 +14,9 @@ a:focus {}
 /* Any menu block in the menu-bar region. */
 .nav {
   clear:both;
+  margin: 0;
+}
+.nav ul.menu {
   margin: 0;
 }
 .nav li,

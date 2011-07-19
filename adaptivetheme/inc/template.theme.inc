@@ -232,9 +232,11 @@ function adaptivetheme_field($vars) {
     $output .= '<div class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
   }
 
-  // Render the top-level DIV.
+  // Render the top-level wrapper element.
   $tag = $vars['label_hidden'] ? 'div' : 'section';
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
 
   return $output;
 }
+
+

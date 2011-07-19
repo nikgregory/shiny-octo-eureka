@@ -1,5 +1,3 @@
-<?php
-?>
 <article class="feed-item">
   <header>
     <h2 class="title feed-item-title">

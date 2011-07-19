@@ -16,7 +16,7 @@
   stylesheets[all][] = css/messages.css
 
 ;----------// jQuery Plugins and JavaScripts
-  scripts[] = js/at.js
+  ;scripts[] = js/at.js
 
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first

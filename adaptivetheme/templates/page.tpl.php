@@ -1,10 +1,8 @@
-<?php
-?>
 <div id="page" class="container">
 
   <?php print render($page['leaderboard']); ?>
 
-  <header class="clearfix">
+  <header class="clearfix" role="banner">
 
     <?php if ($linked_site_logo): ?>
       <div id="logo"><?php print $linked_site_logo; ?></div>

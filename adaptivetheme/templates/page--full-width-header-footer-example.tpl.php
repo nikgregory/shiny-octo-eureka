@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This is an example page template that has 100% width header and footer backgrounds.
  * Additionally you will notice most of the elements have new wrapper divs, so in effect

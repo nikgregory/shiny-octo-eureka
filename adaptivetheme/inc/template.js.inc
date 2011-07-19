@@ -1,5 +1,4 @@
 <?php
-
 $path = drupal_get_path('theme', 'adaptivetheme') .'/js/';
 $regions = array(
   'region-leaderboard',
