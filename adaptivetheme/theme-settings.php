@@ -218,53 +218,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, $form_state) {
     '#size' => 8,
     '#maxlength' => 10,
   );
-  // Equal heights settings
-  $form['at']['equal_heights'] = array(
-    '#type' => 'fieldset',
-    '#weight' => '98',
-    '#title' => t('Equal Heights'),
-    '#description'   => t('These settings allow you to set the sidebars and/or region blocks to be equal height.'),
-  );
-  // Equal height sidebars
-  $form['at']['equal_heights']['equal_heights_sidebars'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Equal Height Sidebars'),
-    '#default_value' => theme_get_setting('equal_heights_sidebars'),
-    '#description'   => t('This setting will make the sidebars and the main content column equal to the height of the tallest column.'),
-  );
-  // Equal height gpanels
-  $form['at']['equal_heights']['equal_heights_gpanels'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Equal Height Gpanels'),
-    '#default_value' => theme_get_setting('equal_heights_gpanels'),
-    '#description'   => t('This will make all Gpanel blocks equal to the height of the tallest block in any Gpanel, regardless of which Gpanel the blocks are in. Good for creating a grid type block layout, however it could be too generic if you have more than one Gpanel active in the page.'),
-  );
-  // Equal height blocks per region
-  $equalized_blocks = array(
-    'region-leaderboard' => t('Leaderboard'),
-    'region-header' => t('Header'),
-    'region-secondary-content' => t('Secondary'),
-    'region-highlighted' => t('Highlighted'),
-    'region-content-aside' => t('Aside'),
-    'region-tertiary-content' => t('Tertiary'),
-    'region-footer' => t('Footer'),
-  );
-  $form['at']['equal_heights']['equal_heights_blocks'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Equal Height Blocks'),
-  );
-  $form['at']['equal_heights']['equal_heights_blocks'] += array(
-    '#prefix' => '<div id="div-equalize-collapse">',
-    '#suffix' => '</div>',
-    '#description' => t('<p>Equal height blocks apply to these regions only. This works well in conjunction with the Skinr block width options.</p>'),
-  );
-  foreach ($equalized_blocks as $name => $title) {
-    $form['at']['equal_heights']['equal_heights_blocks']['equalize_'. $name] = array(
-      '#type' => 'checkbox',
-      '#title' => $title,
-      '#default_value' => theme_get_setting('equalize_'. $name),
-    );
-  }
   // Horizonatal login block
   if (theme_get_setting('horizontal_login_block_enable') == 'on') {
     $form['at']['login_block'] = array(
