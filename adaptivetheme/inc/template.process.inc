@@ -1,6 +1,6 @@
 <?php
+
 // Preprocess variables for html.tpl.php.
-// template_preprocess_html
 function adaptivetheme_preprocess_html(&$vars) {
   if (module_exists('rdf')) {
     $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
@@ -81,7 +81,8 @@ function adaptivetheme_preprocess_html(&$vars) {
     drupal_add_css($vars['layout'], array('group' => CSS_THEME, 'type' => 'inline'));
   }
 }
-// template_process_html
+
+// Process variables for html.tpl.php.
 function adaptivetheme_process_html(&$vars) {
   $classes = explode(' ', $vars['classes']);
   if ($node = menu_get_object()) {
@@ -95,7 +96,6 @@ function adaptivetheme_process_html(&$vars) {
 }
 
 // Preprocess variables for page.tpl.php.
-// template_preprocess_page
 function adaptivetheme_preprocess_page(&$vars) {
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
@@ -170,7 +170,6 @@ function adaptivetheme_preprocess_page(&$vars) {
 }
 
 // Preprocess variables for node.tpl.php.
-// template_preprocess_node
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
   if (theme_get_setting('extra_article_classes')) {
@@ -207,7 +206,8 @@ function adaptivetheme_preprocess_node(&$vars) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
 }
-// template_process_node
+
+// Process variables for node.tpl.php.
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
   $classes = str_replace('node', 'article', $classes);
@@ -230,7 +230,6 @@ function adaptivetheme_process_node(&$vars) {
 }
 
 // Preprocess variables for comment.tpl.php.
-// template_preprocess_comment
 function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
@@ -248,7 +247,8 @@ function adaptivetheme_preprocess_comment(&$vars) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
 }
-// template_process_comment
+
+// Process variables for comment.tpl.php.
 function adaptivetheme_process_comment(&$vars) {
   $classes = explode(' ', $vars['classes']);
   if (in_array('comment-by-anonymous', $classes)) {

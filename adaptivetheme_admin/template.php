@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Override or insert variables into page templates.
  */
