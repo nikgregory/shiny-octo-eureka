@@ -1,5 +1,4 @@
-<?php
-?>
+<?php // at-admin ?>
 <div id="page" class="container">
   <header id="banner" class="clearfix">
     <section id="breadcrumb"><?php print $breadcrumb; ?></section>

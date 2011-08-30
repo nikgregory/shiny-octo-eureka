@@ -1,7 +1,7 @@
 
 ;----------// Theme Information
   name        = AT Subtheme
-  description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme. For help see our <b><a href="http://adaptivethemes.com/documentation/base-theme">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
+  description = Starter subtheme for Adaptivetheme. Copy this subtheme to get started building your own Drupal theme. For help see our <b><a href="http://adaptivethemes.com/documentation/adaptivethemes-documentation">documentation</a></b> and <b><a href="http://vimeo.com/channels/61157">video tutorials</a></b>. If you have a problem and need additional help please use the <b><a href="http://drupal.org/project/issues/adaptivetheme">issue queue</a></b>.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -124,16 +124,81 @@
   settings[extra_block_classes]            = 0
   settings[extra_menu_classes]             = 0
   settings[extra_item_list_classes]        = 0
-  settings[menu_item_span_elements]        = 0
-  settings[layout_method]                  = '0'
-  settings[layout_width]                   = '960px'
-  settings[layout_sidebar_first_width]     = '240'
-  settings[layout_sidebar_last_width]      = '240'
-  settings[layout_enable_settings]         = 'on'
-  settings[layout_enable_width]            = 'on'
-  settings[layout_enable_sidebars]         = 'on'
-  settings[layout_enable_method]           = 'on'
+  settings[menu_item_span_elements]        = 0  
   settings[horizontal_login_block]         = 0
   settings[horizontal_login_block_enable]  = 'on'
   settings[style_enable_schemes]           = 'off'
   settings[style_schemes]                  = 'style-default.css'
+
+  ; Layout
+  settings[layout_type] = 'adaptive'
+ 
+  ; Smartphone
+  settings[smartphone_portrait_layout]                     = 'one-col-stack'
+  settings[smartphone_landscape_layout]                    = 'one-col-vert'
+  settings[smartphone_override_landscape_width]            = 0
+  settings[smartphone_landscape_width_adaptive]            = '480px'
+  settings[smartphone_portrait_width_adaptive]             = '320px'
+  settings[smartphone_landscape_width_responsive]          = '100%'
+  settings[smartphone_portrait_width_responsive]           = '100%'
+  settings[smartphone_sidebar_first_portrait_adaptive]     = '320px'
+  settings[smartphone_sidebar_second_portrait_adaptive]    = '320px'
+  settings[smartphone_sidebar_first_landscape_adaptive]    = '240px'
+  settings[smartphone_sidebar_second_landscape_adaptive]   = '240px'
+  settings[smartphone_sidebar_first_portrait_responsive]   = '100%'
+  settings[smartphone_sidebar_second_portrait_responsive]  = '100%'
+  settings[smartphone_sidebar_first_landscape_responsive]  = '50%'
+  settings[smartphone_sidebar_second_landscape_responsive] = '50%'
+  
+  ; Tablet
+  settings[tablet_portrait_layout]                     = 'two-col-stack'
+  settings[tablet_landscape_layout]                    = 'three-col-grail'
+  settings[tablet_override_portrait_width]             = 0
+  settings[tablet_override_landscape_width]            = 0
+  settings[tablet_portrait_width_adaptive]             = '720px'
+  settings[tablet_landscape_width_adaptive]            = '960px'
+  settings[tablet_sidebar_first_portrait_adaptive]     = '180px'
+  settings[tablet_sidebar_second_portrait_adaptive]    = '180px'
+  settings[tablet_sidebar_first_landscape_adaptive]    = '180px'
+  settings[tablet_sidebar_second_landscape_adaptive]   = '180px'
+  settings[tablet_portrait_width_responsive]           = '100%'
+  settings[tablet_landscape_width_responsive]          = '100%'
+  settings[tablet_sidebar_first_portrait_responsive]   = '50%'
+  settings[tablet_sidebar_second_portrait_responsive]  = '50%'
+  settings[tablet_sidebar_first_landscape_responsive]  = '20%'
+  settings[tablet_sidebar_second_landscape_responsive] = '20%'
+
+  ; Laptop
+  settings[laptop_layout]                    = 'three-col-grail'
+  settings[laptop_layout_width]              = '960px'
+  settings[laptop_sidebar_first_adaptive]    = '240px'
+  settings[laptop_sidebar_second_adaptive]   = '240px'
+  settings[laptop_sidebar_first_responsive]  = '20%'
+  settings[laptop_sidebar_second_responsive] = '20%'
+  settings[laptop_layout_min_width]          = '760px'
+  settings[laptop_layout_max_width]          = '1140px'
+
+  ; Desktop
+  settings[desktop_layout]                    = 'three-col-grail'
+  settings[desktop_layout_width]              = '1260px'
+  settings[desktop_sidebar_first_adaptive]    = '240px'
+  settings[desktop_sidebar_second_adaptive]   = '240px'
+  settings[desktop_sidebar_first_responsive]  = '25%'
+  settings[desktop_sidebar_second_responsive] = '25%'
+  settings[desktop_layout_min_width]          = '760px'
+  settings[desktop_layout_max_width]          = '1260px
+
+  ; Breakpoints
+  settings[smartphone_override_media_query]  = 0
+  settings[smartphone_landscape_media_query] = 'screen and (max-device-width:480px) and (orientation:landscape)'
+  settings[smartphone_portrait_media_query]  = 'screen and (max-device-width:320px) and (orientation:portrait)'
+
+  settings[tablet_override_media_query]      = 0
+  settings[tablet_landscape_media_query]     = 'screen and (max-device-width:1024px) and (orientation:landscape)'
+  settings[tablet_portrait_media_query]      = 'screen and (max-device-width:768px) and (orientation:portrait)'
+  
+  settings[laptop_override_media_query]      = 0
+  settings[laptop_media_query]               = 'screen and (min-width:1224px)'
+  
+  settings[desktop_override_media_query]     = 0
+  settings[desktop_media_query]              = 'screen and (min-width:1382px)'

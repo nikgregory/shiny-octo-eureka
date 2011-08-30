@@ -15,72 +15,116 @@ function adaptivetheme_preprocess_html(&$vars) {
       $vars['classes_array'][] = 'lang-'. $vars['language']->language;
     }
   }
-  if (theme_get_setting('extra_page_classes') == 1) { // *** http://drupal.org/node/1093924 - needs testing
+  if (theme_get_setting('extra_page_classes') == 0) {
     foreach($vars['classes_array'] as $i =>$class) {
       if(preg_match('/page*/', $class)) {
         unset($vars['classes_array'][$i]);
       }
     }
   }
-  if (theme_get_setting('layout_enable_settings') == 'on') {
-    $vars['at_layout_width'] = 'div.container{width:'. theme_get_setting('layout_width') .';}';
-    if (isset($vars['page']['sidebar_first']) || isset($vars['page']['sidebar_second'])) {
-      $method = theme_get_setting('layout_method');
-      $sidebar_last_width = theme_get_setting('layout_sidebar_last_width');
-      $sidebar_first_width = theme_get_setting('layout_sidebar_first_width');
-      if ($vars['language']->dir == 'ltr') {
-        $left = 'left';
-        $right = 'right';
-      }
-      if ($vars['language']->dir == 'rtl') {
-        $left = 'right';
-        $right = 'left';
-      }
-      $styles = array();
-      if ($method == 0) {
-        $push_right = $sidebar_last_width;
-        $push_left  = $sidebar_first_width;
-        $pull_right = $sidebar_last_width;
-        $styles[] = '.two-sidebars .content-inner{margin-' . $left . ':' . $push_left . 'px;margin-' . $right . ':' . $push_right . 'px;}' . "\n";
-        $styles[] = '.sidebar-first .content-inner{margin-' . $left . ':' . $push_left . 'px;margin-' . $right . ':0;}' . "\n";
-        $styles[] = '.sidebar-second .content-inner{margin-' . $right . ':' . $push_right . 'px; margin-' . $left . ':0;}' . "\n";
-        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-100%;}' . "\n";
-        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px;margin-' . $left . ':-' . $pull_right . 'px;}' . "\n";
-      }
-      if ($method == 1) {
-        $content_margin = $sidebar_last_width + $sidebar_first_width;
-        $push_right     = $sidebar_last_width;
-        $push_left      = $sidebar_first_width;
-        $left_margin    = $sidebar_last_width + $sidebar_first_width;
-        $right_margin   = $sidebar_last_width;
-        $styles[] = '.two-sidebars .content-inner{margin-' . $right . ':' . $content_margin . 'px;margin-'. $left . ':0;}' . "\n";
-        $styles[] = '.sidebar-first .content-inner{margin-' . $right . ':' . $push_left . 'px;margin-' . $left . ':0;}' . "\n";
-        $styles[] = '.sidebar-second .content-inner{margin-' . $right . ':' . $push_right . 'px;margin-' . $left . ':0;}' . "\n";
-        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-' . $left_margin . 'px;}' . "\n";
-        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px;margin-' . $left . ':-' . $right_margin . 'px;}' . "\n";
-        $styles[] = '.sidebar-first .region-sidebar-first{width:' . $sidebar_first_width . 'px;margin-' . $left . ':-' . $sidebar_first_width . 'px;}' . "\n";
-      }
-      if ($method == 2) {
-        $content_margin = $sidebar_last_width + $sidebar_first_width;
-        $left_margin    = $sidebar_first_width;
-        $right_margin   = $sidebar_last_width;
-        $push_right     = $sidebar_first_width;
-        $styles[] = '.two-sidebars .content-inner{margin-' . $left . ':' . $content_margin . 'px;margin-' . $right . ':0;}' . "\n";
-        $styles[] = '.sidebar-first .content-inner{margin-' . $left . ':' . $left_margin . 'px;margin-' . $right . ':0;}' . "\n";
-        $styles[] = '.sidebar-second .content-inner{margin-' . $left . ':' . $right_margin . 'px;margin-' . $right . ':0;}' . "\n";
-        $styles[] = '.region-sidebar-first{width:' . $sidebar_first_width . 'px; margin-' . $left . ': -100%;}' . "\n";
-        $styles[] = '.region-sidebar-second{width:' . $sidebar_last_width . 'px; margin-' . $left . ': -100%;}' . "\n";
-        $styles[] = '.two-sidebars .region-sidebar-second{width:' . $sidebar_last_width . 'px; position: relative;' . $left . ':' . $push_right . 'px;}' . "\n";
-      }
-      $vars['at_layout'] = implode('', $styles);
-      $vars['layout'] = $vars['at_layout_width'] . $vars['at_layout'];
-    }
-    else {
-      $vars['layout'] = $vars['at_layout_width'];
-    }
-    drupal_add_css($vars['layout'], array('group' => CSS_THEME, 'type' => 'inline'));
+  /**
+   * Build each layout wrapped in media queries - this is mad to parse on every page load
+   * so I need to write this to a file (instead of using inline css) and run this only
+   * when theme settings are saved.
+   */ 
+  include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.layout.inc');
+
+  // set a variable for the layout type.
+  $layout_type = 'adaptive';
+  if (theme_get_setting('layout_type') == 'responsive') {
+    $layout_type = 'responsive';
   }
-}
+
+  if (theme_get_setting('smartphone_portrait_layout')) {
+    $sidebar_first  = theme_get_setting("smartphone_sidebar_first_portrait_$layout_type");
+    $sidebar_second = theme_get_setting("smartphone_sidebar_second_portrait_$layout_type");
+    $media_query = check_plain(theme_get_setting('smartphone_portrait_media_query'));
+    $method = theme_get_setting('smartphone_portrait_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    $width = '.container { width: 100%; }';
+    $layout = implode('', $styles) . $width;
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  if (theme_get_setting('smartphone_landscape_layout')) {
+    $sidebar_first  = theme_get_setting("smartphone_sidebar_first_landscape_$layout_type");
+    $sidebar_second = theme_get_setting("smartphone_sidebar_second_landscape_$layout_type");
+    $media_query = check_plain(theme_get_setting('smartphone_landscape_media_query'));
+    $method = theme_get_setting('smartphone_landscape_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    if ($layout_type == 'responsive') {
+      $width = '.container { width: 100%; }';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = '.container { width:' . theme_get_setting('smartphone_landscape_width_adaptive') . '; }';
+    }
+    $layout = implode('', $styles) . $width;
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  if (theme_get_setting('tablet_portrait_layout')) {
+    $sidebar_first  = theme_get_setting("tablet_sidebar_second_portrait_$layout_type");
+    $sidebar_second = theme_get_setting("tablet_sidebar_second_portrait_$layout_type");
+    $media_query = check_plain(theme_get_setting('tablet_portrait_media_query'));
+    $method = theme_get_setting('tablet_portrait_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    if ($layout_type == 'responsive') {
+      $width = '.container { width: 100%; }';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = '.container { width:' . theme_get_setting('tablet_portrait_width_adaptive') . '; }';
+    }
+    $layout = implode('', $styles) . $width;
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  if (theme_get_setting('tablet_landscape_layout')) {
+    $sidebar_first  = theme_get_setting("tablet_sidebar_first_landscape_$layout_type");
+    $sidebar_second = theme_get_setting("tablet_sidebar_second_landscape_$layout_type");
+    $media_query = check_plain(theme_get_setting('tablet_landscape_media_query'));
+    $method = theme_get_setting('tablet_landscape_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    if ($layout_type == 'responsive') {
+      $width = '.container { width: 100%; }';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = '.container{ width: ' . theme_get_setting('tablet_landscape_width_adaptive') . '; }';
+    }
+    $layout = implode('', $styles) . $width;
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  if (theme_get_setting('laptop_layout')) {
+    $sidebar_first  = theme_get_setting("laptop_sidebar_first_$layout_type");
+    $sidebar_second = theme_get_setting("laptop_sidebar_second_$layout_type");
+    $media_query = check_plain(theme_get_setting('laptop_media_query'));
+    $method = theme_get_setting('laptop_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    if ($layout_type == 'responsive') {
+      $min_width = theme_get_setting('laptop_layout_min_width');
+      $max_width = theme_get_setting('laptop_layout_max_width');
+      $width = '.container { width: 100%; min-width: ' . $min_width . '; max-width: ' . $max_width . '; }';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = '.container { width: ' . theme_get_setting('laptop_layout_width') . '; }';
+    }
+    $layout = implode('', $styles) . $width;
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  if (theme_get_setting('desktop_layout')) {
+    $sidebar_first  = theme_get_setting("desktop_sidebar_first_$layout_type");
+    $sidebar_second = theme_get_setting("desktop_sidebar_second_$layout_type");
+    $media_query = check_plain(theme_get_setting('desktop_media_query'));
+    $method = theme_get_setting('desktop_layout');
+    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
+    if ($layout_type == 'responsive') {
+      $min_width = theme_get_setting('desktop_layout_min_width');
+      $max_width = theme_get_setting('desktop_layout_max_width');
+      $width = '.container { width: 100%; min-width: ' . $min_width . '; max-width:' . $max_width . '; }';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = '.container { width: ' . theme_get_setting('desktop_layout_width') . '; }';
+    }
+    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
+  }
+  $vars['path_to_adaptivetheme'] = drupal_get_path('theme', 'adaptivetheme');
+} 
 
 // Process variables for html.tpl.php.
 function adaptivetheme_process_html(&$vars) {
@@ -88,8 +132,12 @@ function adaptivetheme_process_html(&$vars) {
   if ($node = menu_get_object()) {
     $node_type_class = drupal_html_class('node-type-' . $node->type);
     if (in_array($node_type_class, $classes)) {
-      theme_get_setting('extra_page_classes') == 0 ? '' : $classes = str_replace($node_type_class, '', $classes);
-      $classes = str_replace('node-type-', 'page-type-', $classes);
+      if (theme_get_setting('extra_page_classes') == 0) {
+        $classes = str_replace($node_type_class, '', $classes);
+      }
+      if (theme_get_setting('extra_page_classes') == 1) {
+        $classes = str_replace('node-type-', 'page-type-', $classes);
+      }
     }
   }
   $vars['classes'] = trim(implode(' ', $classes));
@@ -286,6 +334,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
+  $vars['content_attributes_array']['class'][] = 'content';
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';

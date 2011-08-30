@@ -42,15 +42,6 @@ function adaptivetheme_breadcrumb($vars) {
 }
 
 /**
- * Theme a form button.
- */
-function adaptivetheme_button($vars) {
-  $element = $vars['element'];
-  $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
-  return '<span class="button '. $element['#id'] .'"><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ') .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span>\n";
-}
-
-/**
  * Returns HTML for a list or nested list of items.
  */
 function adaptivetheme_item_list($vars) {
@@ -215,22 +206,25 @@ function adaptivetheme_links($vars) {
 
 /**
  * Modify the output of theme_field to support HTML5 in AT7.
- * This has changed due to Views not working correctly with field.tpl.php
- * overrides in themes: http://drupal.org/node/1034388
+ * There is a mirror image of this code as a template file in the 
+ * templates directory, see field.tpl.php.txt (example file to use 
+ * for template suggestions).
  */
 function adaptivetheme_field($vars) {
   $output = '';
 
   // Render the label, if it's not hidden.
   if (!$vars['label_hidden']) {
-    $output .= '<div class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</div>';
+    $output .= '<h2 class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</h2>';
   }
 
   // Render the items.
+  $output .= '<div class="field-items"' . $vars['content_attributes'] . '>';
   foreach ($vars['items'] as $delta => $item) {
     $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
     $output .= '<div class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
   }
+  $output .= '</div>';
 
   // Render the top-level wrapper element.
   $tag = $vars['label_hidden'] ? 'div' : 'section';
@@ -238,5 +232,3 @@ function adaptivetheme_field($vars) {
 
   return $output;
 }
-
-

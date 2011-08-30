@@ -65,3 +65,18 @@
   settings[horizontal_login_block_enable]  = 'on'
   settings[style_enable_schemes]           = 'off'
   settings[style_schemes]                  = 'style-default.css'
+
+  settings[smartphone-min-device-width] = '320'
+  settings[smartphone-max-device-width] = '480'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
