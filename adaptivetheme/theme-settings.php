@@ -18,7 +18,7 @@ function at_option_values($min, $max, $increment, $postfix) {
  * @see http://drupal.org/node/1135794
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-  
+
   // set the default layout type early
   $layout_type = 'adaptive';
 
@@ -53,13 +53,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   }
 
   // Add some CSS so we can style our form in any theme, i.e. in Seven.
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme-settings.css', array('group' => CSS_THEME));
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme-settings-form-defaults.css', array('group' => CSS_THEME));
 
   // Layout settings
   $form['at'] = array(
     '#type' => 'vertical_tabs',
     '#weight' => -10,
     '#default_tab' => 'defaults',
+    '#tree' => FALSE,
   );
   // desktop
   $form['at']['desktop'] = array(
@@ -484,13 +485,21 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Smartphone Portrait Layout'),
     '#description' => t('<h3>Portrait Smartphone</h3><p>In portrait content always displays in one column - sidebars automatically stack below the main content column. This is the same as the "One column" setting for landscape orientation.</p>'),
   );
+  $form['at']['smartphone']['portrait']['smartphone_portrait_layout'] = array(
+    '#type' => 'hidden',
+    '#value' => 'one-col-stack',
+  );
   // layout type - adaptive or responsive
-  $form['at']['type'] = array(
+  $form['at']['layout_master'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Layout type'),
+    '#title' => t('Layout Defaults'),
+  );
+  $form['at']['layout_master']['type'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Layout Type'),
     '#description' => t('<h3>Select Adaptive or Resonsive Layout</h3><p>Adaptive and responsive layouts allow your theme to change dynamically depending on the size of the users device, such as smartphones, tablets, laptops and desktop computers. Adaptive layouts use fixed width layouts while responsive layouts use fluid widths.</p><p><strong>If you change this setting you must save the theme settings before altering any other settings.</strong></p>'),
   );
-  $form['at']['type']['layout_type'] = array(
+  $form['at']['layout_master']['type']['layout_type'] = array(
     '#type' => 'select',
     '#title' => t('Layout type'),
     '#default_value' => theme_get_setting('layout_type'),
@@ -498,6 +507,130 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'adaptive' => t('Adaptive'),
       'responsive' => t('Responsive'),
     )
+  );
+  // Media queries
+  $form['at']['layout_master']['media_queries'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Media Queries'),
+    '#description' => t('<h3>Media Queries</h3><p>You can override the default media queries for each class of device/screen size. Because both smartphones and tablets can rotate the screen orientation both landscape and portrait orientations are supported.<p></p>This is a basic implimentation of media queries and you may need to change them depending on your requirements.</p>'),
+    '#weight' => 102,
+  );
+  // smartphone breakpoints
+  $form['at']['layout_master']['media_queries']['smartphone'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Smartphone Media Queries'),
+  );
+  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_override_media_query'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Override Smartphone media queries'),
+    '#default_value' => theme_get_setting('smartphone_override_media_query'),
+  );
+  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_landscape_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Landscape media query'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('smartphone_landscape_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_portrait_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Portrait media query'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('smartphone_portrait_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  // tablet breakpoints
+  $form['at']['layout_master']['media_queries']['tablet'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet Media Queries'),
+  );
+  $form['at']['layout_master']['media_queries']['tablet']['tablet_override_media_query'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Override Tablet media queries'),
+    '#default_value' => theme_get_setting('tablet_override_media_query'),
+  );
+  $form['at']['layout_master']['media_queries']['tablet']['tablet_landscape_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Landscape media query'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('tablet_landscape_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['layout_master']['media_queries']['tablet']['tablet_portrait_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Portrait media query'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('tablet_portrait_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  // laptop breakpoints
+  $form['at']['layout_master']['media_queries']['laptop'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Laptop Media Queries'),
+  );
+  $form['at']['layout_master']['media_queries']['laptop']['laptop_override_media_query'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Override Laptop media queries'),
+    '#default_value' => theme_get_setting('laptop_override_media_query'),
+  );
+  $form['at']['layout_master']['media_queries']['laptop']['laptop_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for laptops and desktops'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('laptop_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="laptop_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  // desktop breakpoints
+  $form['at']['layout_master']['media_queries']['desktop'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Desktop Media Queries'),
+  );
+  $form['at']['layout_master']['media_queries']['desktop']['desktop_override_media_query'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Override Desktop and large screen media queries'),
+    '#default_value' => theme_get_setting('desktop_override_media_query'),
+  );
+  $form['at']['layout_master']['media_queries']['desktop']['desktop_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for large screens'),
+    '#size' => 100,
+    '#default_value' => theme_get_setting('desktop_media_query'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="desktop_override_media_query"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  // debug
+  $form['at']['layout_master']['media_queries']['debug'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Debug Media Queries'),
+    '#description' => t('<h3>Debug Media Queries</h3><p>Normally Drupal will add all stylesheets via @import method when CSS aggregation is off, this setting will force the file to be exempt from aggregation and load it using the link element without the @import method. This is needed so respond.js can parse the CSS file (to provide graceful degradation for media queries in < IE8) since respond.js cannot parse CSS files loaded using the @import method. You can safely turn this off when CSS aggregation is on.</p>'),
+  );
+  $form['at']['layout_master']['media_queries']['debug']['debug_media_queries'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Debug media queries in IE8 or lower',
+    '#default_value' => theme_get_setting('debug_media_queries'),
   );
   // Breadcrumbs
   $form['at']['breadcrumb'] = array(
@@ -652,103 +785,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
-  // Media queries
-  $form['at']['media_queries'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Media queries'),
-    '#description' => t('<h3>Media Queries</h3><p>Modify the media query breakpoints for each class of device/screen size. Because both smartphones and tablets can rotate the screen orientation both are supported. This is a basic implimentation of media queries and you may need to change them depending on your requirements.</p>'),
-    '#weight' => 102,
-  );
-  // smartphone breakpoints
-  $form['at']['media_queries']['smartphone_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override media queries for smartphones'),
-    '#default_value' => theme_get_setting('smartphone_override_media_query'),
-  );
-  $form['at']['media_queries']['smartphone_landscape_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Landscape media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('smartphone_landscape_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at']['media_queries']['smartphone_portrait_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Portrait media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('smartphone_portrait_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  // tablet breakpoints
-  $form['at']['media_queries']['tablet_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override media queries for tablets'),
-    '#default_value' => theme_get_setting('tablet_override_media_query'),
-  );
-  $form['at']['media_queries']['tablet_landscape_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Landscape media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('tablet_landscape_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at']['media_queries']['tablet_portrait_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Portrait media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('tablet_portrait_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  // laptop breakpoints
-  $form['at']['media_queries']['laptop_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override media queries for laptops and desktops'),
-    '#default_value' => theme_get_setting('laptop_override_media_query'),
-  );
-  $form['at']['media_queries']['laptop_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('laptop_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="laptop_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  // desktop breakpoints
-  $form['at']['media_queries']['desktop_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override media queries for large desktops'),
-    '#default_value' => theme_get_setting('desktop_override_media_query'),
-  );
-  $form['at']['media_queries']['desktop_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('desktop_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="desktop_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
 
   // The following will be processed even if the theme is inactive.
   // If you are on a theme specific settings page but it is not an active
@@ -783,4 +819,223 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       $form_settings($form, $form_state);
     }
   }
+
+  // Custom submit function
+  $form['#submit'][] = 'at_theme_settings_submit';
+}
+
+function at_theme_settings_submit($form, &$form_state) {
+
+  global $language;
+
+  // set a variable for the layout type.
+  $layout_type = 'adaptive';
+  if (theme_get_setting('layout_type') == 'responsive') {
+    $layout_type = 'responsive';
+  }
+
+  // Set variables for the language direction
+  $lang = 'ltr';
+  /* cant seem to get the global lang in this scope...
+  if ($language->dir == 'rtl') {
+    $lang == 'rtl';
+  }
+  */
+
+  $values = '';
+  $values = $form_state['values'];
+
+  $layouts = array();
+  if ($values['smartphone_portrait_layout']) {
+    $method         = 'one-col-stack';
+    $sidebar_first  = '100%';
+    $sidebar_second = '100%';
+    $media_query    = check_plain($values['smartphone_portrait_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    $width = "\n" . '.container {width: 100%;}';
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  if ($values['smartphone_landscape_layout']) {
+    $method         = $values['smartphone_landscape_layout'];
+    $sidebar_first  = $values["smartphone_sidebar_first_landscape_$layout_type"];
+    $sidebar_second = $values["smartphone_sidebar_second_landscape_$layout_type"];
+    $media_query    = check_plain($values['smartphone_landscape_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    $width = "\n" . '.container {width: 100%;}';
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  if ($values['tablet_portrait_layout']) {
+    $method         = $values['tablet_portrait_layout'];
+    $sidebar_first  = $values["tablet_sidebar_second_portrait_$layout_type"];
+    $sidebar_second = $values["tablet_sidebar_second_portrait_$layout_type"];
+    $media_query    = check_plain($values['tablet_portrait_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    if ($layout_type == 'responsive') {
+      $width = "\n" . '.container {width: 100%;}';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = "\n" . '.container {width:' . $values['tablet_portrait_width_adaptive'] . ';}';
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  if ($values['tablet_landscape_layout']) {
+    $method         = $values['tablet_landscape_layout'];
+    $sidebar_first  = $values["tablet_sidebar_first_landscape_$layout_type"];
+    $sidebar_second = $values["tablet_sidebar_second_landscape_$layout_type"];
+    $media_query    = check_plain($values['tablet_landscape_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    if ($layout_type == 'responsive') {
+      $width = "\n" . '.container {width: 100%;}';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = "\n" . '.container{width:' . $values['tablet_landscape_width_adaptive'] . ';}';
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  if ($values['laptop_layout']) {
+    $method         = $values['laptop_layout'];
+    $sidebar_first  = $values["laptop_sidebar_first_$layout_type"];
+    $sidebar_second = $values["laptop_sidebar_second_$layout_type"];
+    $media_query    = check_plain($values['laptop_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    if ($layout_type == 'responsive') {
+      $min_width = $values['laptop_layout_min_width'];
+      $max_width = $values['laptop_layout_max_width'];
+      $width = "\n" . '.container {width:100%; min-width:' . $min_width . '; max-width:' . $max_width . ';}';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = "\n" . '.container {width:' . $values['laptop_layout_width'] . ';}';
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  if ($values['desktop_layout']) {
+    $method         = $values['desktop_layout'];
+    $sidebar_first  = $values["desktop_sidebar_first_$layout_type"];
+    $sidebar_second = $values["desktop_sidebar_second_$layout_type"];
+    $media_query    = check_plain($values['desktop_media_query']);
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang);
+
+    if ($layout_type == 'responsive') {
+      $min_width = $values['desktop_layout_min_width'];
+      $max_width = $values['desktop_layout_max_width'];
+      $width = "\n" . '.container {width:100%; min-width:' . $min_width . '; max-width:' . $max_width . ';}';
+    }
+    if ($layout_type == 'adaptive') {
+      $width = "\n" . '.container {width:' . $values['desktop_layout_width'] . ';}';
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = $css;
+  }
+  $layout_data = implode("\n",$layouts);
+
+  $theme = $form_state['build_info']['args'][0];
+  $file  = $theme . '_mediaqueries.css';
+  $path  = "public://at_css";
+  $data  = $layout_data;
+
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  $filepath = $path . '/' . $file;
+  file_save_data($data, $filepath, FILE_EXISTS_REPLACE);
+  drupal_chmod($file);
+  
+  // set variables so we can retrive them later to load the css file
+  variable_set($theme . '_mediaqueries_path', $path);
+  variable_set($theme . '_mediaqueries_css', $file);
+}
+
+// Process layout styles
+function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang) {
+
+  // set a variable for the unit value, we need this because the unit gets stripped when we add values.
+  $unit = 'px';
+  if (theme_get_setting('layout_type') == 'responsive') {
+    $unit = '%';
+  }
+
+  // Set variables for language direction
+  $left = 'left';
+  $right = 'right';
+  if ($lang == 'rtl') {
+    $left = 'right';
+    $right = 'left';
+  }
+
+  // build the sytle arrays, params are passed to the function from preprocess_html
+  $styles = array();
+  if ($method == 'three-col-grail') {
+    $push_right = $sidebar_second;
+    $push_left  = $sidebar_first;
+    $pull_right = $sidebar_second;
+    $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $push_left . '; margin-' . $right . ': ' . $push_right . ';}';
+    $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $push_left . '; margin-' . $right . ': 0;}';
+    $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
+    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -' . $pull_right . ';}';
+  }
+  if ($method == 'three-col-right') {
+    $content_margin = $sidebar_second + $sidebar_first . $unit;
+    $push_right     = $sidebar_second;
+    $push_left      = $sidebar_first;
+    $left_margin    = $sidebar_second + $sidebar_first . $unit;
+    $right_margin   = $sidebar_second;
+    $styles[] = '.two-sidebars .content-inner {margin-' . $right . ': ' . $content_margin . '; margin-'. $left . ': 0;}';
+    $styles[] = '.sidebar-first .content-inner {margin-' . $right . ': ' . $push_left . '; margin-' . $left . ': 0;}';
+    $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $left_margin . ';}';
+    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -' . $right_margin . ';}';
+    $styles[] = '.sidebar-first .region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -' . $sidebar_first . ';}';
+  }
+  if ($method == 'three-col-left') {
+    $content_margin = $sidebar_second + $sidebar_first . $unit;
+    $left_margin    = $sidebar_first;
+    $right_margin   = $sidebar_second;
+    $push_right     = $sidebar_first;
+    $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $content_margin . '; margin-' . $right . ': 0;}';
+    $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $left_margin . '; margin-' . $right . ': 0;}';
+    $styles[] = '.sidebar-second .content-inner {margin-' . $left . ': ' . $right_margin . '; margin-' . $right . ': 0;}';
+    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.two-sidebars .region-sidebar-second {width:' . $sidebar_second . '; position: relative; ' . $left . ': ' . $push_right . ' ;}';
+  }
+  if ($method == 'two-col-stack') {
+    $push_right = $sidebar_first;
+    $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': 0; margin-' . $right . ':' . $push_right . ';}';
+    $styles[] = '.sidebar-second .content-inner {margin-right: 0; margin-left: 0;}';
+    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ':-' . $push_right . ';}';
+    $styles[] = '.region-sidebar-second {width: 100%; margin-left: 0; margin-right: 0; clear: both;}';
+  }
+  if ($method == 'one-col-stack') {
+    $styles[] = '.two-sidebars .content-inner,.sidebar-second .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . ';}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . ';}';
+    $styles[] = '.content-inner,.region-sidebar-first,.region-sidebar-second {float: none;}';
+    $styles[] = '.region-sidebar-first, .region-sidebar-second {clear: both;}';
+  }
+  if ($method == 'one-col-vert') {
+    $styles[] = '.two-sidebars .content-inner,.sidebar-second .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . ';}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . ';}';
+  }
+  return $styles;
 }
