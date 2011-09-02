@@ -40,11 +40,6 @@
   ; Smartphone
   settings[smartphone_portrait_layout]                     = 'one-col-stack'
   settings[smartphone_landscape_layout]                    = 'one-col-vert'
-  settings[smartphone_override_landscape_width]            = 0
-  settings[smartphone_landscape_width_adaptive]            = '480px'
-  settings[smartphone_portrait_width_adaptive]             = '320px'
-  settings[smartphone_landscape_width_responsive]          = '100%'
-  settings[smartphone_portrait_width_responsive]           = '100%'
   settings[smartphone_sidebar_first_portrait_adaptive]     = '320px'
   settings[smartphone_sidebar_second_portrait_adaptive]    = '320px'
   settings[smartphone_sidebar_first_landscape_adaptive]    = '240px'
@@ -57,55 +52,37 @@
   ; Tablet
   settings[tablet_portrait_layout]                     = 'two-col-stack'
   settings[tablet_landscape_layout]                    = 'three-col-grail'
-  settings[tablet_override_portrait_width]             = 0
-  settings[tablet_override_landscape_width]            = 0
-  settings[tablet_portrait_width_adaptive]             = '720px'
-  settings[tablet_landscape_width_adaptive]            = '960px'
   settings[tablet_sidebar_first_portrait_adaptive]     = '180px'
   settings[tablet_sidebar_second_portrait_adaptive]    = '180px'
   settings[tablet_sidebar_first_landscape_adaptive]    = '180px'
   settings[tablet_sidebar_second_landscape_adaptive]   = '180px'
-  settings[tablet_portrait_width_responsive]           = '100%'
-  settings[tablet_landscape_width_responsive]          = '100%'
   settings[tablet_sidebar_first_portrait_responsive]   = '50%'
   settings[tablet_sidebar_second_portrait_responsive]  = '50%'
   settings[tablet_sidebar_first_landscape_responsive]  = '20%'
   settings[tablet_sidebar_second_landscape_responsive] = '20%'
 
-  ; Laptop
-  settings[laptop_layout]                    = 'three-col-grail'
-  settings[laptop_layout_width]              = '960px'
-  settings[laptop_sidebar_first_adaptive]    = '240px'
-  settings[laptop_sidebar_second_adaptive]   = '240px'
-  settings[laptop_sidebar_first_responsive]  = '20%'
-  settings[laptop_sidebar_second_responsive] = '20%'
-  settings[laptop_layout_min_width]          = '760px'
-  settings[laptop_layout_max_width]          = '1140px'
-
-  ; Desktop
-  settings[desktop_layout]                    = 'three-col-grail'
-  settings[desktop_layout_width]              = '1260px'
-  settings[desktop_sidebar_first_adaptive]    = '240px'
-  settings[desktop_sidebar_second_adaptive]   = '240px'
-  settings[desktop_sidebar_first_responsive]  = '25%'
-  settings[desktop_sidebar_second_responsive] = '25%'
-  settings[desktop_layout_min_width]          = '760px'
-  settings[desktop_layout_max_width]          = '1260px
+  ; Bigscreen
+  settings[bigscreen_layout]                    = 'three-col-grail'
+  settings[bigscreen_layout_width]              = '960px'
+  settings[bigscreen_sidebar_first_adaptive]    = '180px'
+  settings[bigscreen_sidebar_second_adaptive]   = '180px'
+  settings[bigscreen_sidebar_first_responsive]  = '20%'
+  settings[bigscreen_sidebar_second_responsive] = '20%'
+  settings[bigscreen_layout_max_width]          = '1260px'
 
   ; Media queries
+  setting[debug_media_queries] = 1
+
   settings[smartphone_override_media_query]  = 0
-  settings[smartphone_landscape_media_query] = 'only screen and (max-width:480px) and (max-device-width:480px)  and (orientation:landscape)'
-  settings[smartphone_portrait_media_query]  = 'only screen and (max-width:320px) and (min-device-width:320px) and (orientation:portrait)'
+  settings[smartphone_landscape_media_query] = 'only screen and (min-width:321px) and (max-width:480px)'
+  settings[smartphone_portrait_media_query]  = 'only screen and (max-width:320px)'
 
   settings[tablet_override_media_query]      = 0
-  settings[tablet_landscape_media_query]     = 'only screen and (min-width:481px) and (max-width:960px) and (max-device-width:1024px) and (orientation:landscape)'
-  settings[tablet_portrait_media_query]      = 'only screen and(min-width:481px) and (max-width:768px) and (min-device-width:768px) and (orientation:portrait)'
+  settings[tablet_landscape_media_query]     = 'only screen and (min-width:769px) and (max-width:1024px)'
+  settings[tablet_portrait_media_query]      = 'only screen and (min-width:481px) and (max-width:768px)'
 
-  settings[laptop_override_media_query]      = 0
-  settings[laptop_media_query]               = 'only screen and (min-width:960px) and (max-width:1280px) and (max-device-width:1366px)'
-
-  settings[desktop_override_media_query]     = 0
-  settings[desktop_media_query]              = 'only screen and (min-width:1281px) and (min-device-width:1367px)'
+  settings[bigscreen_override_media_query]   = 0
+  settings[bigscreen_media_query]            = 'only screen and (min-width:1025px)'
 
   ; Breadcrumb
   settings[breadcrumb_display]   = 'yes'

@@ -2,6 +2,7 @@
 
 // Preprocess variables for html.tpl.php.
 function adaptivetheme_preprocess_html(&$vars) {
+  // set the doctype with vars
   if (module_exists('rdf')) {
     $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
     $vars['rdf_profile'] = ' profile="' . $vars['grddl_profile'] . '"';
@@ -10,6 +11,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['doctype'] = '<!DOCTYPE html>' . "\n";
     $vars['rdf_profile'] = '';
   }
+  // add extra classes if set
   if (theme_get_setting('extra_page_classes')) {
     if (function_exists('locale')) {
       $vars['classes_array'][] = 'lang-'. $vars['language']->language;
@@ -22,109 +24,22 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   }
-  /**
-   * Build each layout wrapped in media queries - this is mad to parse on every page load
-   * so I need to write this to a file (instead of using inline css) and run this only
-   * when theme settings are saved.
-   */ 
-  include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.layout.inc');
-
-  // set a variable for the layout type.
-  $layout_type = 'adaptive';
-  if (theme_get_setting('layout_type') == 'responsive') {
-    $layout_type = 'responsive';
+  // Load the media queries layout CSS file
+  global $theme;
+  $filename = $theme . '_mediaqueries_css';
+  $file = variable_get($filename);
+  $path = "public://at_css";
+  if (!empty($file)) {
+    $filepath = $path . '/' . $file;
+    drupal_add_css($filepath, array(
+      'preprocess' => theme_get_setting('debug_media_queries') == 1 ? FALSE : TRUE,
+      'group' => CSS_THEME,
+      'media' => 'screen',
+      'every_page' => TRUE,
+      )
+    );
   }
-
-  if (theme_get_setting('smartphone_portrait_layout')) {
-    $sidebar_first  = theme_get_setting("smartphone_sidebar_first_portrait_$layout_type");
-    $sidebar_second = theme_get_setting("smartphone_sidebar_second_portrait_$layout_type");
-    $media_query = check_plain(theme_get_setting('smartphone_portrait_media_query'));
-    $method = theme_get_setting('smartphone_portrait_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    $width = '.container { width: 100%; }';
-    $layout = implode('', $styles) . $width;
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  if (theme_get_setting('smartphone_landscape_layout')) {
-    $sidebar_first  = theme_get_setting("smartphone_sidebar_first_landscape_$layout_type");
-    $sidebar_second = theme_get_setting("smartphone_sidebar_second_landscape_$layout_type");
-    $media_query = check_plain(theme_get_setting('smartphone_landscape_media_query'));
-    $method = theme_get_setting('smartphone_landscape_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    if ($layout_type == 'responsive') {
-      $width = '.container { width: 100%; }';
-    }
-    if ($layout_type == 'adaptive') {
-      $width = '.container { width:' . theme_get_setting('smartphone_landscape_width_adaptive') . '; }';
-    }
-    $layout = implode('', $styles) . $width;
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  if (theme_get_setting('tablet_portrait_layout')) {
-    $sidebar_first  = theme_get_setting("tablet_sidebar_second_portrait_$layout_type");
-    $sidebar_second = theme_get_setting("tablet_sidebar_second_portrait_$layout_type");
-    $media_query = check_plain(theme_get_setting('tablet_portrait_media_query'));
-    $method = theme_get_setting('tablet_portrait_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    if ($layout_type == 'responsive') {
-      $width = '.container { width: 100%; }';
-    }
-    if ($layout_type == 'adaptive') {
-      $width = '.container { width:' . theme_get_setting('tablet_portrait_width_adaptive') . '; }';
-    }
-    $layout = implode('', $styles) . $width;
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  if (theme_get_setting('tablet_landscape_layout')) {
-    $sidebar_first  = theme_get_setting("tablet_sidebar_first_landscape_$layout_type");
-    $sidebar_second = theme_get_setting("tablet_sidebar_second_landscape_$layout_type");
-    $media_query = check_plain(theme_get_setting('tablet_landscape_media_query'));
-    $method = theme_get_setting('tablet_landscape_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    if ($layout_type == 'responsive') {
-      $width = '.container { width: 100%; }';
-    }
-    if ($layout_type == 'adaptive') {
-      $width = '.container{ width: ' . theme_get_setting('tablet_landscape_width_adaptive') . '; }';
-    }
-    $layout = implode('', $styles) . $width;
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  if (theme_get_setting('laptop_layout')) {
-    $sidebar_first  = theme_get_setting("laptop_sidebar_first_$layout_type");
-    $sidebar_second = theme_get_setting("laptop_sidebar_second_$layout_type");
-    $media_query = check_plain(theme_get_setting('laptop_media_query'));
-    $method = theme_get_setting('laptop_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    if ($layout_type == 'responsive') {
-      $min_width = theme_get_setting('laptop_layout_min_width');
-      $max_width = theme_get_setting('laptop_layout_max_width');
-      $width = '.container { width: 100%; min-width: ' . $min_width . '; max-width: ' . $max_width . '; }';
-    }
-    if ($layout_type == 'adaptive') {
-      $width = '.container { width: ' . theme_get_setting('laptop_layout_width') . '; }';
-    }
-    $layout = implode('', $styles) . $width;
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  if (theme_get_setting('desktop_layout')) {
-    $sidebar_first  = theme_get_setting("desktop_sidebar_first_$layout_type");
-    $sidebar_second = theme_get_setting("desktop_sidebar_second_$layout_type");
-    $media_query = check_plain(theme_get_setting('desktop_media_query'));
-    $method = theme_get_setting('desktop_layout');
-    $styles = at_layout_styles($method, $sidebar_first, $sidebar_second);
-    if ($layout_type == 'responsive') {
-      $min_width = theme_get_setting('desktop_layout_min_width');
-      $max_width = theme_get_setting('desktop_layout_max_width');
-      $width = '.container { width: 100%; min-width: ' . $min_width . '; max-width:' . $max_width . '; }';
-    }
-    if ($layout_type == 'adaptive') {
-      $width = '.container { width: ' . theme_get_setting('desktop_layout_width') . '; }';
-    }
-    drupal_add_css($layout, array('group' => CSS_THEME, 'type' => 'inline', 'media' => $media_query));
-  }
-  $vars['path_to_adaptivetheme'] = drupal_get_path('theme', 'adaptivetheme');
-} 
+}
 
 // Process variables for html.tpl.php.
 function adaptivetheme_process_html(&$vars) {
