@@ -1,0 +1,24 @@
+/**
+ * This file is never loaded and serves as a reference
+ * of the default media queries used in Adaptivetheme.
+ */
+
+/* Smartphone portrait */
+@media only screen and (max-width:320px) {
+}
+
+/* Smartphone landscape */
+@media only screen and (min-width:321px) and (max-width:480px) {
+}
+
+/* Tablet portrait */
+@media only screen and (min-width:481px) and (max-width:768px) {
+}
+
+/* Tablet landscape */
+@media only screen and (min-width:769px) and (max-width:1024px) {
+}
+
+/* Standard layout */
+@media only screen and (min-width:1025px) {
+}

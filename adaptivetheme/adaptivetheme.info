@@ -15,6 +15,9 @@
   stylesheets[all][] = css/layout.css
   stylesheets[all][] = css/messages.css
 
+;----------// Stylesheets
+  scripts[] = js/respond.js
+
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
@@ -30,7 +33,6 @@
   regions[help]              = Help
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom
-
 
 ;----------// Theme Settings
 

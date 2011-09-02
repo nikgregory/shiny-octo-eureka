@@ -771,9 +771,10 @@ function at_theme_settings_submit($form, &$form_state) {
       $media_query    = check_plain($values['smartphone_portrait_media_query']);
       $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
       $width          = "\n" . '.container {width: 100%;}';
-
+      $comment        = "/* Smartphone portrait - $method, $layout_type */\n";
+      
       $styles = implode("\n", $layout) . $width;
-      $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
       $layouts[] = $css;
     }
     if ($values['smartphone_landscape_layout']) {
@@ -783,9 +784,10 @@ function at_theme_settings_submit($form, &$form_state) {
       $media_query    = check_plain($values['smartphone_landscape_media_query']);
       $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
       $width          = "\n" . '.container {width: 100%;}';
-
+      $comment        = "/* Smartphone landscape - $method, $layout_type */\n";
+      
       $styles = implode("\n", $layout) . $width;
-      $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
       $layouts[] = $css;
     }
     if ($values['tablet_portrait_layout']) {
@@ -795,9 +797,10 @@ function at_theme_settings_submit($form, &$form_state) {
       $media_query    = check_plain($values['tablet_portrait_media_query']);
       $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
       $width          = "\n" . '.container {width: 100%;}';
-
+      $comment        = "/* Tablet portrait - $method, $layout_type */\n";
+      
       $styles = implode("\n", $layout) . $width;
-      $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
       $layouts[] = $css;
     }
     if ($values['tablet_landscape_layout']) {
@@ -807,9 +810,10 @@ function at_theme_settings_submit($form, &$form_state) {
       $media_query    = check_plain($values['tablet_landscape_media_query']);
       $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
       $width          = "\n" . '.container {width: 100%;}';
-
+      $comment        = "/* Tablet landscape - $method, $layout_type */\n";
+      
       $styles = implode("\n", $layout) . $width;
-      $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
       $layouts[] = $css;
     }
     if ($values['bigscreen_layout']) {
@@ -818,17 +822,18 @@ function at_theme_settings_submit($form, &$form_state) {
       $sidebar_second = $values["bigscreen_sidebar_second_$layout_type"];
       $media_query    = check_plain($values['bigscreen_media_query']);
       $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
+      $comment        = "/* Standard layout - $method, $layout_type */\n";
 
       if ($layout_type == 'responsive') {
         $max_width = $values['bigscreen_layout_max_width'];
-        $width = "\n" . '.container {width:100%; max-width:' . $max_width . ';}';
+        $width = "\n" . '.container {width: 100%; max-width: ' . $max_width . ';}';
       }
       if ($layout_type == 'adaptive') {
-        $width = "\n" . '.container {width:' . $values['bigscreen_layout_width'] . ';}';
+        $width = "\n" . '.container {width: ' . $values['bigscreen_layout_width'] . ';}';
       }
 
       $styles = implode("\n", $layout) . $width;
-      $css = '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
       $layouts[] = $css;
     }
     $layout_data = implode("\n",$layouts);
@@ -870,8 +875,8 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
     $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $push_left . '; margin-' . $right . ': ' . $push_right . ';}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $push_left . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
-    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -100%;}';
-    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -' . $pull_right . '; clear: none;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -' . $pull_right . '; clear: none;}';
   }
   if ($method == 'three-col-right') {
     $content_margin = $sidebar_second + $sidebar_first . $unit;
@@ -883,8 +888,8 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
     $styles[] = '.sidebar-first .content-inner {margin-' . $right . ': ' . $push_left . '; margin-' . $left . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
     $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $left_margin . ';}';
-    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -' . $right_margin . '; clear: none;}';
-    $styles[] = '.sidebar-first .region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -' . $sidebar_first . ';}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -' . $right_margin . '; clear: none;}';
+    $styles[] = '.sidebar-first .region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $sidebar_first . ';}';
   }
   if ($method == 'three-col-left') {
     $content_margin = $sidebar_second + $sidebar_first . $unit;
@@ -894,16 +899,17 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
     $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $content_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $left_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $left . ': ' . $right_margin . '; margin-' . $right . ': 0;}';
-    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ': -100%;}';
-    $styles[] = '.region-sidebar-second {width:' . $sidebar_second . '; margin-' . $left . ': -100%; clear: none;}';
-    $styles[] = '.two-sidebars .region-sidebar-second {width:' . $sidebar_second . '; position: relative; ' . $left . ': ' . $push_right . ' ;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -100%; clear: none;}';
+    $styles[] = '.two-sidebars .region-sidebar-second {width: ' . $sidebar_second . '; position: relative; ' . $left . ': ' . $push_right . ' ;}';
   }
   if ($method == 'two-col-stack') {
     $push_right = $sidebar_first;
-    $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': 0; margin-' . $right . ':' . $push_right . ';}';
+    $styles[] = '.two-sidebars .content-inner,.sidebar-first .content-inner {margin-' . $left . ': 0; margin-' . $right . ': ' . $push_right . ';}';
     $styles[] = '.sidebar-second .content-inner {margin-right: 0; margin-left: 0;}';
-    $styles[] = '.region-sidebar-first {width:' . $sidebar_first . '; margin-' . $left . ':-' . $push_right . ';}';
-    $styles[] = '.region-sidebar-second {width: 100%; margin-left: 0; margin-right: 0; clear: both;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $push_right . ';}';
+    $styles[] = '.region-sidebar-second {width: 100%; margin-left: 0; margin-right: 0; margin-top: 20px; clear: both; overflow: hidden;}';
+    $styles[] = '.region-sidebar-second .block {float: left; clear: none;}';
   }
   if ($method == 'one-col-stack') {
     $styles[] = '.two-sidebars .content-inner,.one-sidebar .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
@@ -916,6 +922,8 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
     $styles[] = '.two-sidebars .content-inner,.one-sidebar .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
     $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . ';}';
     $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . ';}';
+    $styles[] = '.region-sidebar-first, .region-sidebar-second {overflow: hidden; margin-top: 20px;}';
+    $styles[] = '.region-sidebar-first .block, .region-sidebar-second .block {float: left; clear: none;}';
   }
   return $styles;
 }
