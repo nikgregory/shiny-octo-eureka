@@ -4,7 +4,7 @@
 
 ;----------// Theme Information
   name        = AT Core
-  description = AT Core is the base theme for all Adaptivetheme subthemes.
+  description = AT Core is the base theme for all Adaptivetheme subthemes. Now with baked in support for mobile devices.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png

@@ -2,6 +2,7 @@
 
 // Preprocess variables for html.tpl.php.
 function adaptivetheme_preprocess_html(&$vars) {
+
   // set the doctype with vars
   if (module_exists('rdf')) {
     $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
@@ -11,12 +12,14 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['doctype'] = '<!DOCTYPE html>' . "\n";
     $vars['rdf_profile'] = '';
   }
+
   // add extra classes if set
   if (theme_get_setting('extra_page_classes')) {
     if (function_exists('locale')) {
       $vars['classes_array'][] = 'lang-'. $vars['language']->language;
     }
   }
+  // strip rubbish classes if extra classes not set
   if (theme_get_setting('extra_page_classes') == 0) {
     foreach($vars['classes_array'] as $i =>$class) {
       if(preg_match('/page*/', $class)) {
@@ -24,6 +27,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   }
+
   // Load the media queries layout CSS file
   global $theme;
   $filename = $theme . '_mediaqueries_css';
@@ -39,6 +43,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       )
     );
   }
+
 }
 
 // Process variables for html.tpl.php.
@@ -60,6 +65,7 @@ function adaptivetheme_process_html(&$vars) {
 
 // Preprocess variables for page.tpl.php.
 function adaptivetheme_preprocess_page(&$vars) {
+
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -85,6 +91,7 @@ function adaptivetheme_preprocess_page(&$vars) {
       'title' => t('Home page')),
     )
   ) : '';
+
   if (isset($vars['main_menu'])) {
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
@@ -117,9 +124,11 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (!empty($vars['secondary_navigation'])) {
     $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
   }
+
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+
   // Work-around a stupid bug in Drupal 7...
   if (arg(0) == 'user' && arg(1) == 'login') {
     drupal_set_title(t('User login'));
@@ -130,11 +139,13 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (arg(0) == 'user' && arg(1) == 'register') {
     drupal_set_title(t('Create new account'));
   }
+
 }
 
 // Preprocess variables for node.tpl.php.
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
+
   if (theme_get_setting('extra_article_classes')) {
     if (module_exists('translation')) {
       if ($vars['node']->language) {
@@ -143,12 +154,14 @@ function adaptivetheme_preprocess_node(&$vars) {
       }
     }
   }
+
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
   if (!$vars['teaser'] && theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = drupal_html_class('article-' . $vars['view_mode']);
   }
+
   $vars['attributes_array']['role'][] = 'article';
   $vars['title_attributes_array']['class'][] = 'article-title';
   $vars['content_attributes_array']['class'][] = 'article-content';
@@ -164,10 +177,12 @@ function adaptivetheme_preprocess_node(&$vars) {
   else {
     $vars['submitted'] = '';
   }
+
   $vars['unpublished'] = '';
   if (!$vars['status']) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
+
 }
 
 // Process variables for node.tpl.php.
@@ -194,21 +209,26 @@ function adaptivetheme_process_node(&$vars) {
 
 // Preprocess variables for comment.tpl.php.
 function adaptivetheme_preprocess_comment(&$vars) {
+
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
   }
+
   $vars['title_attributes_array']['class'][] = 'comment-title';
   $vars['content_attributes_array']['class'][] = 'comment-content';
+
   $uri = entity_uri('comment', $vars['comment']);
   $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
   $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
   $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
   $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'c');
+  
   $vars['unpublished'] = '';
   if ($vars['status'] == 'comment-unpublished') {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
+
 }
 
 // Process variables for comment.tpl.php.
@@ -232,13 +252,10 @@ function adaptivetheme_process_comment(&$vars) {
 
 // Preprocess variables for block.tpl.php.
 function adaptivetheme_preprocess_block(&$vars) {
+
   if (theme_get_setting('extra_block_classes')) {
     $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
-  }
-  if (theme_get_setting('extra_block_classes')) {
     $vars['classes_array'][] = 'block-count-'. $vars['id'];
-  }
-  if (theme_get_setting('extra_block_classes')) {
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
   }
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
@@ -247,10 +264,12 @@ function adaptivetheme_preprocess_block(&$vars) {
   if (theme_get_setting('slider_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
     $vars['classes_array'][] = 'lb-s';
   }
+
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
+
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['theme_hook_suggestions'][] = 'block__menu';
   }
@@ -262,103 +281,54 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['theme_hook_suggestions'][] = 'block__menu_bar';
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
+
   // For example we can have templates such as block--header--search, or block--menu-bar--menu, which is cool...
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
 
-  // Add Aria Roles via attributes
-  if ($vars['block']->module == 'aggregator') {
-    $vars['attributes_array']['role'] = 'complementary';
-  }
-  if ($vars['block']->module == 'blog') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']-> module == 'book') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']-> module == 'book') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']->module == 'comment') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']->module == 'forum') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']->module == 'help') {
-    $vars['attributes_array']['role'] = 'complementary';
-  }
-  if ($vars['block']->module == 'locale') {
-    $vars['attributes_array']['role'] = 'complementary';
-  }
-  if ($vars['block']->module == 'menu') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']->module == 'poll') {
-    $vars['attributes_array']['role'] = 'complementary';
-  }
-  if ($vars['block']->module == 'profile') {
-    $vars['attributes_array']['role'] = 'complementary';
-  }
-  if ($vars['block']->module == 'search') {
-    $vars['attributes_array']['role'] = 'search';
-  }
-  if ($vars['block']->module == 'shortcut') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  if ($vars['block']->module == 'statistics') {
-    $vars['attributes_array']['role'] = 'navigation';
-  }
-  // System module blocks
-  if ($vars['block']->module == 'system') {
-    switch ($vars['block']->delta) {
-      case 'main':
-        $vars['attributes_array']['role'] = 'main';
-        break;
-
-      case 'powered-by':
-        $vars['attributes_array']['role'] = 'complementary';
-        break;
-
-      case 'help':
-        $vars['attributes_array']['role'] = 'complementary';
-        break;
-
-      // System menu blocks should get the same class as menu module blocks.
-      default:
-      if (in_array($vars['block']->delta, array_keys(menu_list_system_menus()))) {
-        $vars['attributes_array']['role'] = 'navigation';
-        $vars['classes_array'][] = 'block-menu';
+  // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
+  $roles = array(
+    'complementary' => array(
+      'aggregator',
+      'help',
+      'locale',
+      'poll',
+      'profile',
+      'node' => array('syndicate'),
+      'system' => array('powered-by', 'help'),
+      'user' => array('new', 'online'),
+    ),
+    'navigation' => array(
+      'blog',
+      'book',
+      'comment',
+      'forum',
+      'menu',
+      'menu_block',
+      'node' => array('recent'),
+      'shortcut',
+      'statistics',
+      'system' => array_keys(menu_list_system_menus()),
+    ),
+    'search' => array(
+      'search',
+    ),
+    'form' => array(
+      'user' => array('login'),
+    ),
+  );
+  foreach ($roles as $role => $module) {
+    if (!is_array($role) && in_array($vars['block']->module, $module)) {
+      $vars['attributes_array']['role'] = "$role";
+    }
+    elseif (is_array($role)) {
+      foreach ($role as $module => $delta) {
+        if ($vars['block']->module == $module && in_array($vars['block']->delta, $delta)) {
+          $vars['attributes_array']['role'] = "$role";
+        }
       }
-    }
+    } 
   }
-  // User module blocks
-  if ($vars['block']->module == 'user') {
-    switch ($vars['block']->delta) {
-      case 'login':
-        $vars['attributes_array']['role'] = 'form';
-        break;
 
-      case 'new':
-        $vars['attributes_array']['role'] = 'complementary';
-        break;
-
-      case 'online':
-        $vars['attributes_array']['role'] = 'complementary';
-        break;
-    }
-  }
-  // Node module blocks
-  if ($vars['block']->module == 'node') {
-    switch ($vars['block']->delta) {
-      case 'syndicate':
-        $vars['attributes_array']['role'] = 'complementary';
-        break;
-
-      case 'recent':
-        $vars['attributes_array']['role'] = 'navigation';
-        break;
-    }
-  }
 }
 
 // Changes the search form to use the "search" input element of HTML5 (from the Boron theme).
