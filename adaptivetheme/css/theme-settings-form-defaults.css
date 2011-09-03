@@ -17,7 +17,10 @@ div.vertical-tabs .vertical-tabs-panes {
   width: 10em;
 }
 #edit-font select {
-  width: 20em;
+  width: auto;
+}
+#edit-font .form-wrapper select {
+  width: auto;
 }
 #edit-font #edit-font-size {
   width: auto;

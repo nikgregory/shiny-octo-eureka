@@ -165,7 +165,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['attributes_array']['role'][] = 'article';
   $vars['title_attributes_array']['class'][] = 'article-title';
   $vars['content_attributes_array']['class'][] = 'article-content';
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'c');
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z');
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
       array(
@@ -222,7 +222,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
   $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
-  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'c');
+  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z');
   
   $vars['unpublished'] = '';
   if ($vars['status'] == 'comment-unpublished') {
@@ -378,7 +378,7 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
 // Process variables for aggregator-item.tpl.php.
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
-  $vars['datetime'] = format_date($item->timestamp, 'custom', 'c');
+  $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
 }
 
 // Process variables for maintenance-page.tpl.php.
