@@ -29,6 +29,9 @@ div.vertical-tabs .vertical-tabs-panes {
 #edit-breadcrumb input#edit-breadcrumb-separator {
   width: auto;
 }
+#edit-pagestyles fieldset p {
+  margin-bottom: 0;
+}
 .vertical-tabs-panes .form-type-checkbox label,
 .vertical-tabs-panes .form-type-radios label {
   float: none;

@@ -115,6 +115,7 @@
   ; Smartphone
   settings[smartphone_portrait_layout]                     = 'one-col-stack'
   settings[smartphone_landscape_layout]                    = 'one-col-vert'
+  settings[smartphone_landscape_width]                     = '480px'
   settings[smartphone_sidebar_first_portrait_adaptive]     = '320px'
   settings[smartphone_sidebar_second_portrait_adaptive]    = '320px'
   settings[smartphone_sidebar_first_landscape_adaptive]    = '240px'
@@ -127,6 +128,8 @@
   ; Tablet
   settings[tablet_portrait_layout]                     = 'two-col-stack'
   settings[tablet_landscape_layout]                    = 'three-col-grail'
+  settings[tablet_portrait_width]                      = '720px'
+  settings[tablet_landscape_width]                     = '960px'
   settings[tablet_sidebar_first_portrait_adaptive]     = '180px'
   settings[tablet_sidebar_second_portrait_adaptive]    = '180px'
   settings[tablet_sidebar_first_landscape_adaptive]    = '180px'

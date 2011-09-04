@@ -1,7 +1,28 @@
 <?php
+/**
+ * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
+ *
+ * If you need to add or modify preprocess or process functions do it in your sub-theme.
+ */
+ 
+// Process varsiables for html tag
+function adaptivetheme_process_html_tag(&$vars) {
+  $tag = &$vars['element'];
+  if ($tag['#tag'] == 'style' || $tag['#tag'] == 'script') {
+    // Remove redundant type attribute and CDATA comments.
+    unset($tag['#attributes']['type'], $tag['#value_prefix'], $tag['#value_suffix']);
 
-// Preprocess variables for html.tpl.php.
+    // Remove media="all" but leave others unaffected.
+    if (isset($tag['#attributes']['media']) && $tag['#attributes']['media'] === 'all') {
+      unset($tag['#attributes']['media']);
+    }
+  }
+}
+
+// Preprocess variables for html.tpl.php
 function adaptivetheme_preprocess_html(&$vars) {
+
+  global $language;
 
   // set the doctype with vars
   if (module_exists('rdf')) {
@@ -12,6 +33,9 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['doctype'] = '<!DOCTYPE html>' . "\n";
     $vars['rdf_profile'] = '';
   }
+
+  // Clean up the lang attributes, great idea Zen
+  $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
   // add extra classes if set
   if (theme_get_setting('extra_page_classes')) {
@@ -26,6 +50,21 @@ function adaptivetheme_preprocess_html(&$vars) {
         unset($vars['classes_array'][$i]);
       }
     }
+  }
+
+  // Set classes for views and panels pages, thanks again Zen!
+  $vars['menu_item'] = menu_get_item();
+  switch ($vars['menu_item']['page_callback']) {
+    case 'views_page':
+      // Is this a Views page?
+      $vars['classes_array'][] = 'page-views';
+      break;
+    case 'page_manager_page_execute':
+    case 'page_manager_node_view':
+    case 'page_manager_contact_site':
+      // Is this a Panels page?
+      $vars['classes_array'][] = 'page-panels';
+      break;
   }
 
   // Load the media queries layout CSS file
@@ -46,7 +85,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
 }
 
-// Process variables for html.tpl.php.
+// Process variables for html.tpl.php
 function adaptivetheme_process_html(&$vars) {
   $classes = explode(' ', $vars['classes']);
   if ($node = menu_get_object()) {
@@ -63,7 +102,7 @@ function adaptivetheme_process_html(&$vars) {
   $vars['classes'] = trim(implode(' ', $classes));
 }
 
-// Preprocess variables for page.tpl.php.
+// Preprocess variables for page.tpl.php
 function adaptivetheme_preprocess_page(&$vars) {
 
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
@@ -129,7 +168,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
-  // Work-around a stupid bug in Drupal 7...
+  // Work-around a stupid bug in Drupal 7
   if (arg(0) == 'user' && arg(1) == 'login') {
     drupal_set_title(t('User login'));
   }
@@ -142,7 +181,7 @@ function adaptivetheme_preprocess_page(&$vars) {
 
 }
 
-// Preprocess variables for node.tpl.php.
+// Preprocess variables for node.tpl.php
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
 
@@ -165,7 +204,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['attributes_array']['role'][] = 'article';
   $vars['title_attributes_array']['class'][] = 'article-title';
   $vars['content_attributes_array']['class'][] = 'article-content';
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z');
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, we need to build it
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
       array(
@@ -185,7 +224,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 
 }
 
-// Process variables for node.tpl.php.
+// Process variables for node.tpl.php
 function adaptivetheme_process_node(&$vars) {
   $classes = explode(' ', $vars['classes']);
   $classes = str_replace('node', 'article', $classes);
@@ -207,7 +246,7 @@ function adaptivetheme_process_node(&$vars) {
   $vars['classes'] = trim(implode(' ', $classes));
 }
 
-// Preprocess variables for comment.tpl.php.
+// Preprocess variables for comment.tpl.php
 function adaptivetheme_preprocess_comment(&$vars) {
 
   if (theme_get_setting('extra_comment_classes')) {
@@ -223,7 +262,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
   $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z');
-  
+
   $vars['unpublished'] = '';
   if ($vars['status'] == 'comment-unpublished') {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
@@ -231,7 +270,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
 }
 
-// Process variables for comment.tpl.php.
+// Process variables for comment.tpl.php
 function adaptivetheme_process_comment(&$vars) {
   $classes = explode(' ', $vars['classes']);
   if (in_array('comment-by-anonymous', $classes)) {
@@ -250,7 +289,7 @@ function adaptivetheme_process_comment(&$vars) {
   $vars['classes'] = trim(implode(' ', $classes));
 }
 
-// Preprocess variables for block.tpl.php.
+// Preprocess variables for block.tpl.php
 function adaptivetheme_preprocess_block(&$vars) {
 
   if (theme_get_setting('extra_block_classes')) {
@@ -282,7 +321,7 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 
-  // For example we can have templates such as block--header--search, or block--menu-bar--menu, which is cool...
+  // For example we can have templates such as block--header--search, or block--menu-bar--menu
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
@@ -326,17 +365,17 @@ function adaptivetheme_preprocess_block(&$vars) {
           $vars['attributes_array']['role'] = "$role";
         }
       }
-    } 
+    }
   }
 
 }
 
-// Changes the search form to use the "search" input element of HTML5 (from the Boron theme).
+// Changes the search form to use the "search" input element of HTML5 (from the Boron theme)
 function adaptivetheme_preprocess_search_block_form(&$vars) {
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
 
-// Modify search results based on theme settings.
+// Modify search results based on theme settings
 function adaptivetheme_preprocess_search_result(&$vars) {
   $result = $vars['result'];
   $vars['url'] = check_url($result['link']);
@@ -368,20 +407,20 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }
 
-// Preprocess variables for region.tpl.php.
+// Preprocess variables for region.tpl.php
 function adaptivetheme_preprocess_region(&$vars, $hook) {
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
 }
 
-// Process variables for aggregator-item.tpl.php.
+// Process variables for aggregator-item.tpl.php
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
 }
 
-// Process variables for maintenance-page.tpl.php.
+// Process variables for maintenance-page.tpl.php
 function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }

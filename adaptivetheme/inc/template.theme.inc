@@ -1,4 +1,9 @@
 <?php
+/**
+ * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
+ *
+ * If you need to add or modify theme functions do it in your sub-theme.
+ */
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
