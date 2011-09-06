@@ -5,7 +5,7 @@
  * If you need to add or modify preprocess or process functions do it in your sub-theme.
  */
  
-// Process varsiables for html tag
+// Process variables for html tag
 function adaptivetheme_process_html_tag(&$vars) {
   $tag = &$vars['element'];
   if ($tag['#tag'] == 'style' || $tag['#tag'] == 'script') {
@@ -104,7 +104,6 @@ function adaptivetheme_process_html(&$vars) {
 
 // Preprocess variables for page.tpl.php
 function adaptivetheme_preprocess_page(&$vars) {
-
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(

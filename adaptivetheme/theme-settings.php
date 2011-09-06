@@ -1,13 +1,4 @@
 <?php
-// generate option values with unit
-function at_option_values($min, $max, $increment, $postfix) {
-  $array = array();
-  for ($a = $min; $a <= $max; $a += $increment) {
-    $array[$a . $postfix] = $a . $postfix;
-  }
-  return $array;
-}
-
 /**
  * Implements hook_form_system_theme_settings_alter().
  *
@@ -18,28 +9,6 @@ function at_option_values($min, $max, $increment, $postfix) {
  * @see http://drupal.org/node/1135794
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-
-  $layout_type = '';
-  // set options for widths by type
-  if (theme_get_setting('layout_type') == 'adaptive') {
-    $layout_type = 'adaptive';
-    $smartphone_sidebar_options         = at_option_values(120, 480,  60, 'px');
-    $smartphone_width_options_landscape = at_option_values(240, 480,  60, 'px');
-    $tablet_sidebar_options_portrait    = at_option_values(120, 480,  60, 'px');
-    $tablet_sidebar_options_landscape   = at_option_values(120, 600,  60, 'px');
-    $tablet_width_options_portrait      = at_option_values(480, 780,  60, 'px');
-    $tablet_width_options_landscape     = at_option_values(600, 1020, 60, 'px');
-    $sidebar_options                    = at_option_values(120, 480,  60, 'px');
-  }
-  if (theme_get_setting('layout_type') == 'responsive') {
-    $layout_type = 'responsive';
-    $smartphone_sidebar_options       = at_option_values(10, 50, 5, '%');
-    $tablet_sidebar_options_portrait  = at_option_values(10, 50, 5, '%');
-    $tablet_sidebar_options_landscape = at_option_values(10, 50, 5, '%');
-    $sidebar_options                  = at_option_values(10, 50, 5, '%');
-  }
-  // unconditional options, set width for adaptive, max-width for responsive
-  $bigscreen_width_options        = at_option_values(960,  1320, 60, 'px');
 
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
@@ -56,19 +25,23 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'vertical_tabs',
     '#weight' => -10,
     '#default_tab' => 'defaults',
-    '#tree' => FALSE,
   );
   // bigscreen
   $form['at']['bigscreen'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Standard layout'),
+    '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
+    '#attributes' => array(
+      'class' => array(
+        'at-layout-form',
+      ),
+    ),
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-layout-wrapper'] = array(
+  $form['at']['bigscreen']['bigscreen-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-layout-wrapper']['bigscreen_layout'] = array(
+  $form['at']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('bigscreen_layout'),
@@ -78,508 +51,567 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'three-col-left'  => t('Three column, both sidebars on the left'),
     )
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-width-wrapper'] = array(
+  $form['at']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
-    '#weight' => 1,
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-width-wrapper']['bigscreen_sidebar_first_adaptive'] = array(
+  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_unit'] = array(
     '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('bigscreen_sidebar_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
+    '#type' => 'textfield',
     '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('bigscreen_sidebar_first_adaptive'),
-    '#options' => $sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-    ),
+    '#default_value' => theme_get_setting('bigscreen_sidebar_first'),
+    '#size' => 4,
+    '#maxlenght' => 4,
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-width-wrapper']['bigscreen_sidebar_second_adaptive'] = array(
-    '#type' => 'select',
+  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
+    '#type' => 'textfield',
     '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('bigscreen_sidebar_second_adaptive'),
-    '#options' => $sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-    ),
+    '#default_value' => theme_get_setting('bigscreen_sidebar_second'),
+    '#size' => 4,
+    '#maxlenght' => 4,
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-width-wrapper']['bigscreen_sidebar_first_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('bigscreen_sidebar_first_responsive'),
-    '#options' => $sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-    ),
-  );
-  $form['at']['bigscreen']['bigscreen-sidebar-width-wrapper']['bigscreen_sidebar_second_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('bigscreen_sidebar_second_responsive'),
-    '#options' => $sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-    ),
-  );
-  $form['at']['bigscreen']['bigscreen-page-width-wrapper'] = array(
+  $form['at']['bigscreen']['bigscreen-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
-    '#weight' => 2,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
+  );
+  $form['at']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('bigscreen_page_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
     ),
   );
-  $form['at']['bigscreen']['bigscreen-page-width-wrapper']['bigscreen_layout_width'] = array(
-    '#type'  => 'select',
+  $form['at']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
+    '#type'  => 'textfield',
     '#title' => t('Page width'),
-    '#default_value' => theme_get_setting('bigscreen_layout_width'),
-    '#options' => $bigscreen_width_options,
+    '#default_value' => theme_get_setting('bigscreen_page_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
   );
-  $form['at']['bigscreen']['bigscreen-page-max-width-wrapper'] = array(
+  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
-    '#description' => t('<strong>Set a max width for responsive layouts</strong>'),
-    '#weight' => 2,
     '#states' => array(
       'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
+        'select[name="bigscreen_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
       ),
     ),
   );
-  $form['at']['bigscreen']['bigscreen-page-max-width-wrapper']['bigscreen_layout_max_width'] = array(
-    '#type'  => 'select',
+  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set a max width'),
+    '#default_value' => theme_get_setting('bigscreen_set_max_width'),
+  );
+  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('bigscreen_max_width_unit'),
+    '#options' => array(
+      'px' => 'px',
+      'em' => 'em',
+    ),
+    '#states' => array(
+      'visible' => array(
+        'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
+    '#type'  => 'textfield',
     '#title' => t('Max width'),
-    '#default_value' => theme_get_setting('bigscreen_layout_max_width'),
-    '#options' => $bigscreen_width_options,
+    '#default_value' => theme_get_setting('bigscreen_max_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+    '#states' => array(
+      'visible' => array(
+        'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['bigscreen']['media-queries-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Standard Screen Media Queries'),
+    '#weight' => 1,
+    '#attributes' => array(
+      'class' => array(
+        'at-media-queries',
+      ),
+    ),
+  );
+  $form['at']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for this layout'),
+    '#default_value' => theme_get_setting('bigscreen_media_query'),
+    '#description' => t('Do not include @media, its included automatically.'),
+    '#field_prefix' => '@media',
+    '#size' => 100,
   );
   // tablet
   $form['at']['tablet'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Tablet layout'),
+    '#title' => t('Tablet Layout'),
     '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad have two orientations - landscape and portrait. You can configure a different layout for each orientation.</p>'),
+    '#attributes' => array(
+      'class' => array(
+        'at-layout-form',
+      ),
+    ),
   );
-  // tablet landscape
+  // landscape
   $form['at']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
-    '#description' => t('<h4>Landscape Tablet</h4>'),
+    '#description' => t('<h4>Landscape tablet</h4>'),
   );
-  $form['at']['tablet']['landscape']['tablet-sidebar-layout-wrapper'] = array(
+  $form['at']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['tablet']['landscape']['tablet-sidebar-layout-wrapper']['tablet_landscape_layout'] = array(
+  $form['at']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_landscape_layout'),
     '#options' => array(
-      'two-col-stack'   => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
       'three-col-grail' => t('Standard three column'),
       'three-col-right' => t('Three column, both sidebars on the right'),
       'three-col-left'  => t('Three column, both sidebars on the left'),
+      'two-col-stack'   => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
     )
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-width-wrapper'] = array(
+  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Landscape width'),
-    '#description' => t('<strong>Set the overall page width</strong>'),
+    '#title' => t('Set sidebar widths'),
+    '#description' => t('<strong>Set the width of each sidebar</strong>'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-width-wrapper']['tablet_landscape_width'] = array(
+  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_unit'] = array(
     '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_landscape_sidebar_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
+    '#type' => 'textfield',
+    '#title' => t('First sidebar'),
+    '#default_value' => theme_get_setting('tablet_landscape_sidebar_first'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Second sidebar'),
+    '#default_value' => theme_get_setting('tablet_landscape_sidebar_second'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+    '#states' => array(
+      'disabled' => array(
+        'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
+      ),
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Set the page width'),
+    '#description' => t('<strong>Set the page width</strong>'),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_landscape_page_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
+    '#type'  => 'textfield',
     '#title' => t('Page width'),
-    '#default_value' => theme_get_setting('tablet_landscape_width'),
-    '#options' => $tablet_width_options_landscape,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-    ),
+    '#default_value' => theme_get_setting('tablet_landscape_page_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
   );
-  $form['at']['tablet']['landscape']['tablet-sidebar-width-wrapper'] = array(
+  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Choose sidebar layout'),
-    '#description' => t('<strong>Set sidebar widths</strong>'),
+    '#title' => t('Set a max width'),
+    '#states' => array(
+      'visible' => array(
+        'select[name="tablet_landscape_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
+      ),
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_set_max_width'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set a max width'),
+    '#default_value' => theme_get_setting('tablet_landscape_set_max_width'),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_landscape_max_width_unit'),
+    '#options' => array(
+      'px' => 'px',
+      'em' => 'em',
+    ),
+    '#states' => array(
+      'visible' => array(
+        'input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Max width'),
+    '#default_value' => theme_get_setting('tablet_landscape_max_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+    '#states' => array(
+      'visible' => array(
+        'input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet Landscape Media Queries'),
     '#weight' => 1,
-  );
-  $form['at']['tablet']['landscape']['tablet-sidebar-width-wrapper']['tablet_landscape_layout']['tablet_sidebar_first_landscape_adaptive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_first_landscape_adaptive'),
-    '#options' => $tablet_sidebar_options_landscape,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
+    '#attributes' => array(
+      'class' => array(
+        'at-media-queries',
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-sidebar-width-wrapper']['tablet_landscape_layout']['tablet_sidebar_second_landscape_adaptive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_second_landscape_adaptive'),
-    '#options' => $tablet_sidebar_options_landscape,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-      'disabled' => array(
-        'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
-      ),
-    ),
-  );
-  $form['at']['tablet']['landscape']['tablet-sidebar-width-wrapper']['tablet_landscape_layout']['tablet_sidebar_first_landscape_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_first_landscape_responsive'),
-    '#options' => $tablet_sidebar_options_landscape,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-    ),
-  );
-  $form['at']['tablet']['landscape']['tablet-sidebar-width-wrapper']['tablet_landscape_layout']['tablet_sidebar_second_landscape_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_second_landscape_responsive'),
-    '#options' => $tablet_sidebar_options_landscape,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-      'disabled' => array(
-        'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
-      ),
-    ),
+  $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for this layout'),
+    '#default_value' => theme_get_setting('tablet_landscape_media_query'),
+    '#description' => t('Do not include @media, its included automatically.'),
+    '#field_prefix' => '@media',
+    '#size' => 100,
   );
   // tablet portrait
   $form['at']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
-    '#description' => t('<h4>Portrait Tablet</h4>'),
+    '#description' => t('<h4>Portrait tablet</h4>'),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-layout-wrapper'] = array(
+  $form['at']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-layout-wrapper']['tablet_portrait_layout'] = array(
+  $form['at']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
     '#type' => 'radios',
-    '#title' => t('Configure sidebar positions'),
+    '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_portrait_layout'),
     '#options' => array(
-      'two-col-stack' => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
       'one-col-stack' => t('One column'),
       'one-col-vert'  => t('Sidebars in two vertical columns below the main column'),
+      'two-col-stack' => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
     )
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-width-wrapper'] = array(
+  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Choose sidebar layout'),
-    '#description' => t('<strong>Set sidebar widths</strong>'),
-    '#weight' => 1,
+    '#title' => t('Set sidebar widths'),
+    '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      'disabled' => array(
+      '!visible' => array(
         'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-width-wrapper'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Portrait width'),
-    '#description' => t('<strong>Set the overall page width</strong>'),
-  );
-  $form['at']['tablet']['portrait']['tablet-portrait-width-wrapper']['tablet_portrait_width'] = array(
+  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
     '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_portrait_sidebar_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
+    '#type' => 'textfield',
+    '#title' => t('First sidebar'),
+    '#default_value' => theme_get_setting('tablet_portrait_sidebar_first'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Second sidebar'),
+    '#default_value' => theme_get_setting('tablet_portrait_sidebar_second'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+    '#states' => array(
+      'disabled' => array(
+        'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
+      ),
+    ),
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Set the page width'),
+    '#description' => t('<strong>Set the page width</strong>'),
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_portrait_page_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
+    '#type'  => 'textfield',
     '#title' => t('Page width'),
-    '#default_value' => theme_get_setting('tablet_portrait_width'),
-    '#options' => $tablet_width_options_portrait,
+    '#default_value' => theme_get_setting('tablet_portrait_page_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Set a max width'),
     '#states' => array(
       'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
+        'select[name="tablet_portrait_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-width-wrapper']['tablet_portrait_layout']['tablet_sidebar_first_portrait_adaptive'] = array(
+  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_set_max_width'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set a max width'),
+    '#default_value' => theme_get_setting('tablet_portrait_set_max_width'),
+  );
+  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width_unit'] = array(
     '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_first_portrait_adaptive'),
-    '#options' => $tablet_sidebar_options_portrait,
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('tablet_portrait_max_width_unit'),
+    '#options' => array(
+      'px' => 'px',
+      'em' => 'em',
+    ),
     '#states' => array(
       'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
+        'input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE),
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-width-wrapper']['tablet_portrait_layout']['tablet_sidebar_second_portrait_adaptive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_second_portrait_adaptive'),
-    '#options' => $tablet_sidebar_options_portrait,
+  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Max width'),
+    '#default_value' => theme_get_setting('tablet_portrait_max_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
     '#states' => array(
       'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-      'disabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
+        'input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE),
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-width-wrapper']['tablet_portrait_layout']['tablet_sidebar_first_portrait_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_first_portrait_responsive'),
-    '#options' => $tablet_sidebar_options_portrait,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-      'disabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
+  $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet Portrait Media Queries'),
+    '#weight' => 1,
+    '#attributes' => array(
+      'class' => array(
+        'at-media-queries',
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-sidebar-width-wrapper']['tablet_portrait_layout']['tablet_sidebar_second_portrait_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('tablet_sidebar_second_portrait_responsive'),
-    '#options' => $tablet_sidebar_options_portrait,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-      'disabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
-      ),
-      '!enabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
-      ),
-    ),
+  $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for this layout'),
+    '#default_value' => theme_get_setting('tablet_portrait_media_query'),
+    '#description' => t('Do not include @media, its included automatically.'),
+    '#field_prefix' => '@media',
+    '#size' => 100,
   );
   // smartphone
   $form['at']['smartphone'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Smartphone layout'),
+    '#title' => t('Smartphone Layout'),
     '#description' => t('<h3>Smartphone Layout</h3><p>Smartphone devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
+    '#attributes' => array(
+      'class' => array(
+        'at-layout-form',
+      ),
+    ),
   );
-  // smartphone landscape
+  // landscape
   $form['at']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
-    '#description' => t('<h4>Landscape Smartphone</h4>'),
+    '#description' => t('<h4>Landscape smartphone</h4>'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-layout-wrapper'] = array(
+  $form['at']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-layout-wrapper']['smartphone_landscape_layout'] = array(
+  $form['at']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
     '#type' => 'radios',
-    '#title' => t('<strong>Choose sidebar layout</strong>'),
+    '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('smartphone_landscape_layout'),
     '#options' => array(
       'one-col-stack' => t('One column'),
-      'one-col-vert' => t('Sidebars in two vertical columns below the main column'),
+      'one-col-vert'  => t('Sidebars in two vertical columns below the main column'),
     )
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-width-wrapper'] = array(
+  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Landscape width'),
-    '#description' => t('<strong>Set the overall page width</strong>'),
-  );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-width-wrapper']['smartphone_landscape_width'] = array(
-    '#type' => 'select',
-    '#title' => t('Page width'),
-    '#default_value' => theme_get_setting('smartphone_landscape_width'),
-    '#options' => $smartphone_width_options_landscape,
+    '#title' => t('Set sidebar widths'),
+    '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-    ),
-  );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-width-wrapper'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Set sidebar width'),
-    '#description' => t('<strong>Set sidebar width</strong>'),
-    '#states' => array(
-      'disabled' => array(
+      '!visible' => array(
         'input[name="smartphone_landscape_layout"]' => array('value' => 'one-col-stack'),
       ),
     ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('smartphone_landscape_sidebar_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
+    '#type' => 'textfield',
+    '#title' => t('First sidebar'),
+    '#default_value' => theme_get_setting('smartphone_landscape_sidebar_first'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Second sidebar'),
+    '#default_value' => theme_get_setting('smartphone_landscape_sidebar_second'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Set the page width'),
+    '#description' => t('<strong>Set the page width</strong>'),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('smartphone_landscape_page_unit'),
+    '#options' => array(
+      'px' => 'px',
+      '%' => '%',
+      'em' => 'em',
+    ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_width'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Page width'),
+    '#default_value' => theme_get_setting('smartphone_landscape_page_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Set a max width'),
+    '#states' => array(
+      'visible' => array(
+        'select[name="smartphone_landscape_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
+      ),
+    ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_set_max_width'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set a max width'),
+    '#default_value' => theme_get_setting('smartphone_landscape_set_max_width'),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Unit'),
+    '#default_value' => theme_get_setting('smartphone_landscape_max_width_unit'),
+    '#options' => array(
+      'px' => 'px',
+      'em' => 'em',
+    ),
+    '#states' => array(
+      'visible' => array(
+        'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Max width'),
+    '#default_value' => theme_get_setting('smartphone_landscape_max_width'),
+    '#size' => 4,
+    '#maxlenght' => 4,
+    '#states' => array(
+      'visible' => array(
+        'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Smartphone Landscape Media Queries'),
     '#weight' => 1,
-  );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-width-wrapper']['smartphone_landscape_layout']['smartphone_sidebar_first_landscape_adaptive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('smartphone_sidebar_first_landscape_adaptive'),
-    '#options' => $smartphone_sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
+    '#attributes' => array(
+      'class' => array(
+        'at-media-queries',
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-width-wrapper']['smartphone_landscape_layout']['smartphone_sidebar_second_landscape_adaptive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('smartphone_sidebar_second_landscape_adaptive'),
-    '#options' => $smartphone_sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'adaptive'),
-      ),
-    ),
-  );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-width-wrapper']['smartphone_landscape_layout']['smartphone_sidebar_first_landscape_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('First sidebar'),
-    '#default_value' => theme_get_setting('smartphone_sidebar_first_landscape_responsive'),
-    '#options' => $smartphone_sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-    ),
-  );
-  $form['at']['smartphone']['landscape']['smartphone-sidebar-width-wrapper']['smartphone_landscape_layout']['smartphone_sidebar_second_landscape_responsive'] = array(
-    '#type' => 'select',
-    '#title' => t('Second sidebar'),
-    '#default_value' => theme_get_setting('smartphone_sidebar_second_landscape_responsive'),
-    '#options' => $smartphone_sidebar_options,
-    '#states' => array(
-      'visible' => array(
-        'select[name="layout_type"]' => array('selected' => 'selected', 'value' => 'responsive'),
-      ),
-    ),
+  $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Media query for this layout'),
+    '#default_value' => theme_get_setting('smartphone_landscape_media_query'),
+    '#description' => t('Do not include @media, its included automatically.'),
+    '#field_prefix' => '@media',
+    '#size' => 100,
   );
   // smartphone portrait
   $form['at']['smartphone']['portrait'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Smartphone Portrait Layout'),
-    '#description' => t('<h3>Portrait Smartphone</h3><p>In portrait content always displays in one column - sidebars automatically stack below the main content column. This is the same as the "One column" setting for landscape orientation.</p>'),
+    '#title' => t('Portrait'),
+    '#description' => t('<h4>Portrait smartphone</h4><div class="smartphone-portrait-layout">One column</div><p>The smartphone portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
   );
-  $form['at']['smartphone']['portrait']['smartphone_portrait_layout'] = array(
-    '#type' => 'hidden',
-    '#value' => 'one-col-stack',
-  );
-  // layout type - adaptive or responsive
-  $form['at']['layout_master'] = array(
+  $form['at']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Layout Defaults'),
-  );
-  $form['at']['layout_master']['type'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Layout Type'),
-    '#description' => t('<h3>Select Adaptive or Resonsive Layout</h3><p>Adaptive and responsive layouts allow your theme to change dynamically depending on the size of the users device, such as smartphones, tablets, bigscreens and desktop computers. Adaptive layouts use fixed width layouts while responsive layouts use fluid widths.</p><p><strong>If you change this setting you must save the theme settings before altering any other settings.</strong></p>'),
-  );
-  $form['at']['layout_master']['type']['layout_type'] = array(
-    '#type' => 'select',
-    '#title' => t('Layout type'),
-    '#default_value' => theme_get_setting('layout_type'),
-    '#options' => array(
-      'adaptive' => t('Adaptive'),
-      'responsive' => t('Responsive'),
-    )
-  );
-  // Media queries
-  $form['at']['layout_master']['media_queries'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Media Queries'),
-    '#description' => t('<h3>Media Queries</h3><p>You can override the default media queries for each class of device/screen size. Because both smartphones and tablets can rotate the screen orientation both landscape and portrait orientations are supported.<p></p>This is a basic implimentation of media queries and you may need to change them depending on your requirements.</p>'),
-    '#weight' => 102,
-  );
-  // bigscreen breakpoints
-  $form['at']['layout_master']['media_queries']['bigscreen'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Srandard Screen Media Queries'),
-  );
-  $form['at']['layout_master']['media_queries']['bigscreen']['bigscreen_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override Standard screen media queries'),
-    '#default_value' => theme_get_setting('bigscreen_override_media_query'),
-  );
-  $form['at']['layout_master']['media_queries']['bigscreen']['bigscreen_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('bigscreen_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="bigscreen_override_media_query"]' => array('checked' => TRUE),
+    '#title' => t('Smartphone Portrait Media Queries'),
+    '#weight' => 1,
+    '#attributes' => array(
+      'class' => array(
+        'at-media-queries',
       ),
     ),
   );
-  // tablet breakpoints
-  $form['at']['layout_master']['media_queries']['tablet'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Tablet Media Queries'),
-  );
-  $form['at']['layout_master']['media_queries']['tablet']['tablet_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override Tablet media queries'),
-    '#default_value' => theme_get_setting('tablet_override_media_query'),
-  );
-  $form['at']['layout_master']['media_queries']['tablet']['tablet_landscape_media_query'] = array(
+  $form['at']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
     '#type' => 'textfield',
-    '#title' => t('Landscape media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('tablet_landscape_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at']['layout_master']['media_queries']['tablet']['tablet_portrait_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Portrait media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('tablet_portrait_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="tablet_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  // smartphone breakpoints
-  $form['at']['layout_master']['media_queries']['smartphone'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Smartphone Media Queries'),
-  );
-  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_override_media_query'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Override Smartphone media queries'),
-    '#default_value' => theme_get_setting('smartphone_override_media_query'),
-  );
-  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_landscape_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Landscape media query'),
-    '#size' => 100,
-    '#default_value' => theme_get_setting('smartphone_landscape_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at']['layout_master']['media_queries']['smartphone']['smartphone_portrait_media_query'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Portrait media query'),
-    '#size' => 100,
+    '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('smartphone_portrait_media_query'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_override_media_query"]' => array('checked' => TRUE),
-      ),
-    ),
+    '#description' => t('Do not include @media, its included automatically.'),
+    '#field_prefix' => '@media',
+    '#size' => 100,
   );
   // debug
   $message = '';
@@ -589,12 +621,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   if (variable_get('preprocess_css', '') == 1 && theme_get_setting('debug_media_queries') == 0) {
     $message = t('<p class="message warning">CSS aggregation is ON, leave this setting unchecked as its not required.</p>');
   }
-  $form['at']['layout_master']['media_queries']['debug'] = array(
+  $form['at']['media_queries']['debug'] = array(
     '#type' => 'fieldset',
     '#title' => t('Debug Media Queries'),
-    '#description' => t('<h3>Debug Media Queries</h3><p>When CSS aggregation is off Drupal adds all stylesheets using the @import method, this setting will load it using the link element without the @import method, however it will also be exempt from normal aggregation. This is needed so respond.js can parse the CSS file (to provide graceful degradation for media queries in < IE8) since respond.js cannot parse CSS files loaded using the @import method.</p>') . $message,
+    '#description' => t('<h3>Debug Media Queries</h3><p>This setting will allow you to more easily debug media queries in Internet Explorer 8 and below. It forces Drupal to load the generated media queries CSS file in a link element, rather than using the normal @import method - this is required because respond.js cannot parse media queries inside files loaded using the @import method. This setting is only useful when CSS aggregation is off.</p>') . $message,
   );
-  $form['at']['layout_master']['media_queries']['debug']['debug_media_queries'] = array(
+  $form['at']['media_queries']['debug']['debug_media_queries'] = array(
     '#type' => 'checkbox',
     '#title' => 'Debug media queries in IE8 or lower',
     '#default_value' => theme_get_setting('debug_media_queries'),
@@ -787,126 +819,182 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     }
   }
   // Custom submit function
-  $form['#submit'][] = 'at_theme_settings_submit';
+  $form['#validate'][] = 'at_theme_settings_validate';
+  $form['#submit'][]   = 'at_theme_settings_submit';
 
   //kpr($form);
 }
 
-function at_theme_settings_submit($form, &$form_state) {
+function at_theme_settings_validate($form, &$form_state) {
 
-  // Set variables for the language direction, if someone can figure out
-  // how to get the global $language here I can support RTL in two seconds, otherwise....
-  $lang = 'ltr';
-
-  // just in case, for some weird ass reason $form_state values are empty, set a variable...
-  $values = '';
   $values = $form_state['values'];
 
-  // set variables for the layout and unit types
-  $layout_type = '';
-  if ($values['layout_type'] == 'adaptive') {
-    $layout_type = 'adaptive';
-    $unit = 'px';
+  // Validate max_width values seperatly, they need a condition that they are actually visible on the page
+  if ($values['bigscreen_set_max_width'] == 1) {
+    if (empty($values['bigscreen_max_width']['#default_value'])) {
+      form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
+    }
   }
-  if ($values['layout_type'] == 'responsive') {
-    $layout_type = 'responsive';
-    $unit = '%';
+  if ($values['tablet_landscape_set_max_width'] == 1) {
+    if (empty($values['tablet_landscape_max_width']['#default_value'])) {
+      form_set_error('tablet_landscape_max_width', t('Tablet landscape layout max-width is empty - you forgot to enter a value for the max width!'));
+    }
   }
-  // when switching layout types its not set when the settings form first reloads...
-  if (isset($layout_type)) {
-    $layouts = array();
-    if ($values['smartphone_portrait_layout']) {
-      $method         = 'one-col-stack';
-      $sidebar_first  = '100%';
-      $sidebar_second = '100%';
-      $media_query    = check_plain($values['smartphone_portrait_media_query']);
-      $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
-      $width          = "\n" . '.container {width: 100%;}';
-      $comment        = "/* Smartphone portrait - $method, $layout_type */\n";
-      
-      $styles = implode("\n", $layout) . $width;
-      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
-      $layouts[] = $css;
+  if ($values['tablet_portrait_set_max_width'] == 1) {
+    if (empty($values['tablet_portrait_max_width']['#default_value'])) {
+      form_set_error('tablet_portrait_max_width', t('Tablet portrait max-width is empty - you forgot to enter a value for the max width!'));
     }
-    if ($values['smartphone_landscape_layout']) {
-      $method         = $values['smartphone_landscape_layout'];
-      $sidebar_first  = $values["smartphone_sidebar_first_landscape_$layout_type"];
-      $sidebar_second = $values["smartphone_sidebar_second_landscape_$layout_type"];
-      $media_query    = check_plain($values['smartphone_landscape_media_query']);
-      $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
-      $comment        = "/* Smartphone landscape - $method, $layout_type */\n";
-
-      if ($layout_type == 'responsive') {
-        $width = "\n" . '.container {width: 100%;}';
-      }
-      if ($layout_type == 'adaptive') {
-        $width = "\n" . '.container {width: ' . $values['smartphone_landscape_width'] . ';}';
-      }
-
-      $styles = implode("\n", $layout) . $width;
-      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
-      $layouts[] = $css;
-    }
-    if ($values['tablet_portrait_layout']) {
-      $method         = $values['tablet_portrait_layout'];
-      $sidebar_first  = $values["tablet_sidebar_first_portrait_$layout_type"];
-      $sidebar_second = $values["tablet_sidebar_second_portrait_$layout_type"];
-      $media_query    = check_plain($values['tablet_portrait_media_query']);
-      $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
-      $comment        = "/* Tablet portrait - $method, $layout_type */\n";
-
-      if ($layout_type == 'responsive') {
-        $width = "\n" . '.container {width: 100%;}';
-      }
-      if ($layout_type == 'adaptive') {
-        $width = "\n" . '.container {width: ' . $values['tablet_portrait_width'] . ';}';
-      }
-
-      $styles = implode("\n", $layout) . $width;
-      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
-      $layouts[] = $css;
-    }
-    if ($values['tablet_landscape_layout']) {
-      $method         = $values['tablet_landscape_layout'];
-      $sidebar_first  = $values["tablet_sidebar_first_landscape_$layout_type"];
-      $sidebar_second = $values["tablet_sidebar_second_landscape_$layout_type"];
-      $media_query    = check_plain($values['tablet_landscape_media_query']);
-      $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
-      $comment        = "/* Tablet landscape - $method, $layout_type */\n";
-
-      if ($layout_type == 'responsive') {
-        $width = "\n" . '.container {width: 100%;}';
-      }
-      if ($layout_type == 'adaptive') {
-        $width = "\n" . '.container {width: ' . $values['tablet_landscape_width'] . ';}';
-      }
-      
-      $styles = implode("\n", $layout) . $width;
-      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
-      $layouts[] = $css;
-    }
-    if ($values['bigscreen_layout']) {
-      $method         = $values['bigscreen_layout'];
-      $sidebar_first  = $values["bigscreen_sidebar_first_$layout_type"];
-      $sidebar_second = $values["bigscreen_sidebar_second_$layout_type"];
-      $media_query    = check_plain($values['bigscreen_media_query']);
-      $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit);
-      $comment        = "/* Standard layout - $method, $layout_type */\n";
-
-      if ($layout_type == 'responsive') {
-        $max_width = $values['bigscreen_layout_max_width'];
-        $width = "\n" . '.container {width: 100%; max-width: ' . $max_width . ';}';
-      }
-      if ($layout_type == 'adaptive') {
-        $width = "\n" . '.container {width: ' . $values['bigscreen_layout_width'] . ';}';
-      }
-
-      $styles = implode("\n", $layout) . $width;
-      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
-      $layouts[] = $css;
-    }
-    $layout_data = implode("\n",$layouts);
   }
+  if ($values['smartphone_landscape_set_max_width'] == 1) {
+    if (empty($values['smartphone_landscape_max_width']['#default_value'])) {
+      form_set_error('smartphone_landscape_max_width', t('Smartphone landscape max-width is empty - you forgot to enter a value for the max width!'));
+    }
+  }
+
+  // check @media is not included in the media query strings, if so remove it silently
+  $mq = array(
+    'bigscreen_media_query' => $values['bigscreen_media_query'],
+    'tablet_landscape_media_query' => $values['tablet_landscape_media_query'],
+    'tablet_portrait_media_query' => $values['tablet_portrait_media_query'],
+    'smartphone_landscape_media_query' => $values['smartphone_landscape_media_query'],
+    'smartphone_portrait_media_query' => $values['smartphone_portrait_media_query'],
+  );
+}
+
+// Custom submit function to generate and save the layout css with media queries
+function at_theme_settings_submit($form, &$form_state) {
+
+  $values = $form_state['values'];
+
+  // Standard bigscreen layout
+  if ($values['bigscreen_layout']) {
+    $sidebar_first  = $values['bigscreen_sidebar_first'];
+    $sidebar_second = $values['bigscreen_sidebar_second'];
+    $media_query    = $values['bigscreen_media_query'];
+    $page_width     = $values['bigscreen_page_width'];
+    $method         = $values['bigscreen_layout'];
+    $sidebar_unit   = $values['bigscreen_sidebar_unit'];
+    $page_unit      = $values['bigscreen_page_unit'];
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
+    $comment        = "/* Standard layout $method */\n";
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+
+    if ($values['bigscreen_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['bigscreen_max_width'];
+      $max_width_unit = $values['bigscreen_max_width_unit'];
+      if (!empty($max_width)) {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+      }
+      else {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+      }
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = check_plain($css);
+  }
+  // Tablet layout - landscape
+  if ($values['tablet_landscape_layout']) {
+    $sidebar_first  = $values['tablet_landscape_sidebar_first'];
+    $sidebar_second = $values['tablet_landscape_sidebar_second'];
+    $media_query    = $values['tablet_landscape_media_query'];
+    $page_width     = $values['tablet_landscape_page_width'];
+    $method         = $values['tablet_landscape_layout'];
+    $sidebar_unit   = $values['tablet_landscape_sidebar_unit'];
+    $page_unit      = $values['tablet_landscape_page_unit'];
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
+    $comment        = "/* Tablet landscape $method */\n";
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+
+    if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['tablet_landscape_max_width'];
+      $max_width_unit = $values['tablet_landscape_max_width_unit'];
+      if (!empty($max_width)) {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+      }
+      else {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+      }
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = check_plain($css);
+  }
+  // Tablet layout - portrait
+  if ($values['tablet_portrait_layout']) {
+    $sidebar_first  = $values['tablet_portrait_sidebar_first'];
+    $sidebar_second = $values['tablet_portrait_sidebar_second'];
+    $media_query    = $values['tablet_portrait_media_query'];
+    $page_width     = $values['tablet_portrait_page_width'];
+    $method         = $values['tablet_portrait_layout'];
+    $sidebar_unit   = $values['tablet_portrait_sidebar_unit'];
+    $page_unit      = $values['tablet_portrait_page_unit'];
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
+    $comment        = "/* Tablet portrait $method */\n";
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+
+    if ($values['tablet_portrait_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['tablet_portrait_max_width'];
+      $max_width_unit = $values['tablet_portrait_max_width_unit'];
+      if (!empty($max_width)) {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+      }
+      else {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+      }
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = check_plain($css);
+  }
+  // Smartphone layout - landscape
+  if ($values['smartphone_landscape_layout']) {
+    $sidebar_first  = $values['smartphone_landscape_sidebar_first'];
+    $sidebar_second = $values['smartphone_landscape_sidebar_second'];
+    $media_query    = $values['smartphone_landscape_media_query'];
+    $page_width     = $values['smartphone_landscape_page_width'];
+    $method         = $values['smartphone_landscape_layout'];
+    $sidebar_unit   = $values['smartphone_landscape_sidebar_unit'];
+    $page_unit      = $values['smartphone_landscape_page_unit'];
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
+    $comment        = "/* Smartphone landscape $method */\n";
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+
+    if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['smartphone_landscape_max_width'];
+      $max_width_unit = $values['smartphone_landscape_max_width_unit'];
+      if (!empty($max_width)) {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+      }
+      else {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+      }
+    }
+
+    $styles = implode("\n", $layout) . $width;
+    $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = check_plain($css);
+  }
+  // Smartphone layout - portrait, we only need the media query values
+  if ($values['smartphone_portrait_media_query']) {
+    $sidebar_first  = 100;
+    $sidebar_second = 100;
+    $media_query    = $values['smartphone_portrait_media_query'];
+    $method         = 'one-col-stack';
+    $sidebar_unit   = '%';
+    $page_unit      = '%';
+    $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
+    $comment        = "/* Smartphone portrait $method */\n";
+    $width          = "\n" . '.container {width: 100%;}';
+
+    $styles = implode("\n", $layout) . $width;
+    $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
+    $layouts[] = check_plain($css);
+  }
+  $layout_data = implode("\n", $layouts);
 
   $theme = $form_state['build_info']['args'][0];
   $file  = $theme . '_mediaqueries.css';
@@ -925,19 +1013,17 @@ function at_theme_settings_submit($form, &$form_state) {
 }
 
 // Process layout styles
-function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit) {
+function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit) {
 
   // Set variables for language direction
   $left = 'left';
   $right = 'right';
-  if ($lang == 'rtl') {
-    $left = 'right';
-    $right = 'left';
-  }
 
   // build the sytle arrays, params are passed to the function from preprocess_html
   $styles = array();
   if ($method == 'three-col-grail') {
+    $sidebar_second = $sidebar_second . $sidebar_unit;
+    $sidebar_first = $sidebar_first . $sidebar_unit;
     $push_right = $sidebar_second;
     $push_left  = $sidebar_first;
     $pull_right = $sidebar_second;
@@ -948,35 +1034,35 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
     $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -' . $pull_right . '; clear: none;}';
   }
   if ($method == 'three-col-right') {
-    $content_margin = $sidebar_second + $sidebar_first . $unit;
-    $push_right     = $sidebar_second;
-    $push_left      = $sidebar_first;
-    $left_margin    = $sidebar_second + $sidebar_first . $unit;
-    $right_margin   = $sidebar_second;
+    $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
+    $push_right     = $sidebar_second . $sidebar_unit;
+    $push_left      = $sidebar_first . $sidebar_unit;
+    $left_margin    = $sidebar_second + $sidebar_first . $sidebar_unit;
+    $right_margin   = $sidebar_second . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner {margin-' . $right . ': ' . $content_margin . '; margin-'. $left . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $right . ': ' . $push_left . '; margin-' . $left . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
-    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $left_margin . ';}';
-    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -' . $right_margin . '; clear: none;}';
-    $styles[] = '.sidebar-first .region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $sidebar_first . ';}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . '; margin-' . $left . ': -' . $left_margin . ';}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . $sidebar_unit . '; margin-' . $left . ': -' . $right_margin . '; clear: none;}';
+    $styles[] = '.sidebar-first .region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . '; margin-' . $left . ': -' . $sidebar_first . $sidebar_unit . ';}';
   }
   if ($method == 'three-col-left') {
-    $content_margin = $sidebar_second + $sidebar_first . $unit;
-    $left_margin    = $sidebar_first;
-    $right_margin   = $sidebar_second;
-    $push_right     = $sidebar_first;
+    $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
+    $left_margin    = $sidebar_first . $sidebar_unit;
+    $right_margin   = $sidebar_second . $sidebar_unit;
+    $push_right     = $sidebar_first . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $content_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $left_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $left . ': ' . $right_margin . '; margin-' . $right . ': 0;}';
-    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -100%;}';
-    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . '; margin-' . $left . ': -100%; clear: none;}';
-    $styles[] = '.two-sidebars .region-sidebar-second {width: ' . $sidebar_second . '; position: relative; ' . $left . ': ' . $push_right . ' ;}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . '; margin-' . $left . ': -100%;}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . $sidebar_unit . '; margin-' . $left . ': -100%; clear: none;}';
+    $styles[] = '.two-sidebars .region-sidebar-second {width: ' . $sidebar_second . $sidebar_unit . '; position: relative; ' . $left . ': ' . $push_right . ' ;}';
   }
   if ($method == 'two-col-stack') {
-    $push_right = $sidebar_first;
+    $push_right = $sidebar_first . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner,.sidebar-first .content-inner {margin-' . $left . ': 0; margin-' . $right . ': ' . $push_right . ';}';
     $styles[] = '.sidebar-second .content-inner {margin-right: 0; margin-left: 0;}';
-    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . '; margin-' . $left . ': -' . $push_right . ';}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . '; margin-' . $left . ': -' . $push_right . ';}';
     $styles[] = '.region-sidebar-second {width: 100%; margin-left: 0; margin-right: 0; margin-top: 20px; clear: both; overflow: hidden;}';
     $styles[] = '.region-sidebar-second .block {float: left; clear: none;}';
   }
@@ -989,8 +1075,8 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $lang, $unit
   }
   if ($method == 'one-col-vert') {
     $styles[] = '.two-sidebars .content-inner,.one-sidebar .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
-    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . ';}';
-    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . ';}';
+    $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . ';}';
+    $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . $sidebar_unit . ';}';
     $styles[] = '.region-sidebar-first, .region-sidebar-second {overflow: hidden; margin-top: 20px;}';
     $styles[] = '.region-sidebar-first .block, .region-sidebar-second .block {width: 100%;}';
   }
