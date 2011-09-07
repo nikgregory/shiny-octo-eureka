@@ -46,12 +46,17 @@ div.vertical-tabs .vertical-tabs-panes {
   padding-top: 10px;
 }
 .vertical-tabs-panes fieldset fieldset .fieldset-wrapper .fieldset-description {
+  padding-bottom: 5px;
+}
+fieldset.at-layout-form div.form-item  label[for*="-media-query"] {
   padding-bottom: 10px;
+}
+fieldset.at-layout-form div.form-item[class*="-media-query"] .description {
+  padding-top: 3px;
 }
 .vertical-tabs .form-type-textfield input {
   width: auto;
 }
-
 /* Layout settings */
 .at-layout-form div.form-item {
   float: left;
