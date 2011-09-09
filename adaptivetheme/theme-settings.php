@@ -818,7 +818,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       $form_settings($form, $form_state);
     }
   }
-  // Custom submit function
+  // Custom validate and submit functions
   $form['#validate'][] = 'at_theme_settings_validate';
   $form['#submit'][]   = 'at_theme_settings_submit';
 
@@ -857,50 +857,38 @@ function at_theme_settings_submit($form, &$form_state) {
 
   $values = $form_state['values'];
 
-  // Standard bigscreen layout
-  if ($values['bigscreen_layout']) {
-    $sidebar_first  = $values['bigscreen_sidebar_first'];
-    $sidebar_second = $values['bigscreen_sidebar_second'];
-    $media_query    = $values['bigscreen_media_query'];
-    $page_width     = $values['bigscreen_page_width'];
-    $method         = $values['bigscreen_layout'];
-    $sidebar_unit   = $values['bigscreen_sidebar_unit'];
-    $page_unit      = $values['bigscreen_page_unit'];
+  // Smartphone layout - portrait, we only need the media query values
+  if ($values['smartphone_portrait_media_query']) {
+    $sidebar_first  = 100;
+    $sidebar_second = 100;
+    $media_query    = $values['smartphone_portrait_media_query'];
+    $method         = 'one-col-stack';
+    $sidebar_unit   = '%';
+    $page_unit      = '%';
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
-    $comment        = "/* Standard layout $method */\n";
-    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
-
-    if ($values['bigscreen_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['bigscreen_max_width'];
-      $max_width_unit = $values['bigscreen_max_width_unit'];
-      if (!empty($max_width)) {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
-      }
-      else {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
-      }
-    }
+    $comment        = "/* Smartphone portrait $method */\n";
+    $width          = "\n" . '.container {width: 100%;}';
 
     $styles = implode("\n", $layout) . $width;
     $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
     $layouts[] = check_plain($css);
   }
-  // Tablet layout - landscape
-  if ($values['tablet_landscape_layout']) {
-    $sidebar_first  = $values['tablet_landscape_sidebar_first'];
-    $sidebar_second = $values['tablet_landscape_sidebar_second'];
-    $media_query    = $values['tablet_landscape_media_query'];
-    $page_width     = $values['tablet_landscape_page_width'];
-    $method         = $values['tablet_landscape_layout'];
-    $sidebar_unit   = $values['tablet_landscape_sidebar_unit'];
-    $page_unit      = $values['tablet_landscape_page_unit'];
+  // Smartphone layout - landscape
+  if ($values['smartphone_landscape_layout']) {
+    $sidebar_first  = $values['smartphone_landscape_sidebar_first'];
+    $sidebar_second = $values['smartphone_landscape_sidebar_second'];
+    $media_query    = $values['smartphone_landscape_media_query'];
+    $page_width     = $values['smartphone_landscape_page_width'];
+    $method         = $values['smartphone_landscape_layout'];
+    $sidebar_unit   = $values['smartphone_landscape_sidebar_unit'];
+    $page_unit      = $values['smartphone_landscape_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
-    $comment        = "/* Tablet landscape $method */\n";
+    $comment        = "/* Smartphone landscape $method */\n";
     $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
 
-    if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['tablet_landscape_max_width'];
-      $max_width_unit = $values['tablet_landscape_max_width_unit'];
+    if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['smartphone_landscape_max_width'];
+      $max_width_unit = $values['smartphone_landscape_max_width_unit'];
       if (!empty($max_width)) {
         $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
       }
@@ -941,22 +929,22 @@ function at_theme_settings_submit($form, &$form_state) {
     $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
     $layouts[] = check_plain($css);
   }
-  // Smartphone layout - landscape
-  if ($values['smartphone_landscape_layout']) {
-    $sidebar_first  = $values['smartphone_landscape_sidebar_first'];
-    $sidebar_second = $values['smartphone_landscape_sidebar_second'];
-    $media_query    = $values['smartphone_landscape_media_query'];
-    $page_width     = $values['smartphone_landscape_page_width'];
-    $method         = $values['smartphone_landscape_layout'];
-    $sidebar_unit   = $values['smartphone_landscape_sidebar_unit'];
-    $page_unit      = $values['smartphone_landscape_page_unit'];
+  // Tablet layout - landscape
+  if ($values['tablet_landscape_layout']) {
+    $sidebar_first  = $values['tablet_landscape_sidebar_first'];
+    $sidebar_second = $values['tablet_landscape_sidebar_second'];
+    $media_query    = $values['tablet_landscape_media_query'];
+    $page_width     = $values['tablet_landscape_page_width'];
+    $method         = $values['tablet_landscape_layout'];
+    $sidebar_unit   = $values['tablet_landscape_sidebar_unit'];
+    $page_unit      = $values['tablet_landscape_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
-    $comment        = "/* Smartphone landscape $method */\n";
+    $comment        = "/* Tablet landscape $method */\n";
     $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
 
-    if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['smartphone_landscape_max_width'];
-      $max_width_unit = $values['smartphone_landscape_max_width_unit'];
+    if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['tablet_landscape_max_width'];
+      $max_width_unit = $values['tablet_landscape_max_width_unit'];
       if (!empty($max_width)) {
         $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
       }
@@ -969,17 +957,29 @@ function at_theme_settings_submit($form, &$form_state) {
     $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
     $layouts[] = check_plain($css);
   }
-  // Smartphone layout - portrait, we only need the media query values
-  if ($values['smartphone_portrait_media_query']) {
-    $sidebar_first  = 100;
-    $sidebar_second = 100;
-    $media_query    = $values['smartphone_portrait_media_query'];
-    $method         = 'one-col-stack';
-    $sidebar_unit   = '%';
-    $page_unit      = '%';
+  // Standard bigscreen layout
+  if ($values['bigscreen_layout']) {
+    $sidebar_first  = $values['bigscreen_sidebar_first'];
+    $sidebar_second = $values['bigscreen_sidebar_second'];
+    $media_query    = $values['bigscreen_media_query'];
+    $page_width     = $values['bigscreen_page_width'];
+    $method         = $values['bigscreen_layout'];
+    $sidebar_unit   = $values['bigscreen_sidebar_unit'];
+    $page_unit      = $values['bigscreen_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
-    $comment        = "/* Smartphone portrait $method */\n";
-    $width          = "\n" . '.container {width: 100%;}';
+    $comment        = "/* Standard layout $method */\n";
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+
+    if ($values['bigscreen_set_max_width'] == 1 && $page_unit == '%') {
+      $max_width = $values['bigscreen_max_width'];
+      $max_width_unit = $values['bigscreen_max_width_unit'];
+      if (!empty($max_width)) {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+      }
+      else {
+        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+      }
+    }
 
     $styles = implode("\n", $layout) . $width;
     $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';

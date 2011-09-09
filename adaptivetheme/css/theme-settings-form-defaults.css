@@ -178,6 +178,13 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
     padding-top: 35px;
 }
 
+/* Heading styles for advanced themes */
+#edit-headings .form-type-radios {
+  width: 12em;
+  float: left;
+  clear: none;
+}
+
 /* Give some real definition to disabled selects */
 select[disabled],
 fieldset[disabled] select,
