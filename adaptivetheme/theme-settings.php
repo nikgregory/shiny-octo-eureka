@@ -850,15 +850,6 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('smartphone_landscape_max_width', t('Smartphone landscape max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
-
-  // check @media is not included in the media query strings, if so remove it silently
-  $mq = array(
-    'bigscreen_media_query' => $values['bigscreen_media_query'],
-    'tablet_landscape_media_query' => $values['tablet_landscape_media_query'],
-    'tablet_portrait_media_query' => $values['tablet_portrait_media_query'],
-    'smartphone_landscape_media_query' => $values['smartphone_landscape_media_query'],
-    'smartphone_portrait_media_query' => $values['smartphone_portrait_media_query'],
-  );
 }
 
 // Custom submit function to generate and save the layout css with media queries
@@ -997,7 +988,7 @@ function at_theme_settings_submit($form, &$form_state) {
   $layout_data = implode("\n", $layouts);
 
   $theme = $form_state['build_info']['args'][0];
-  $file  = $theme . '_mediaqueries.css';
+  $file  = $theme . '-responsive-layout.css';
   $path  = "public://at_css";
   $data  = $layout_data;
 

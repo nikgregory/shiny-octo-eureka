@@ -47,11 +47,31 @@ function adaptivetheme_subtheme_process(&$vars, $hook) {
 /**
  * Override or insert variables into the html templates.
  */
-/* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
+
+  global $theme;
+
+  // Don't change this unless you know what you are doing
+  $media_queries_css = array(
+    'responsive-style.css',
+    'responsive-gpanels.css'
+  );
+  foreach ($media_queries_css as $css) {
+    $filepath = drupal_get_path('theme', $theme) . '/css/' . $css;
+    drupal_add_css($filepath, array(
+      'preprocess' => theme_get_setting('debug_media_queries') == 1 ? FALSE : TRUE,
+      'group' => CSS_THEME,
+      'media' => 'screen',
+      'every_page' => TRUE,
+      )
+    );
+  }
+  // End
+
   // Uncomment the folowing line to add a conditional stylesheet for IE 7 or less.
   // drupal_add_css(path_to_theme() . '/css/ie/ie-lte-7.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
 }
+/* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_process_html(&$vars) {
 }
 // */

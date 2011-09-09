@@ -1,5 +1,11 @@
 /* Set layout for gpanels for smaller devices */
 
+/**
+ * Use this file to conditionally override gpanel layouts for devices.
+ * If you adjust the media queries in the theme settings you should
+ * adjust them here so they match.
+ */
+
 /* Smartphone portrait */
 @media only screen and (max-width:320px) {
 

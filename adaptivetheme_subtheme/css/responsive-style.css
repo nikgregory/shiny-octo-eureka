@@ -1,6 +1,7 @@
 /**
- * This file is never loaded and serves as a reference
- * of the default media queries used in Adaptivetheme.
+ * Use this file to conditionally override styles for devices.
+ * If you adjust the media queries in the theme settings you should
+ * adjust them here so they match.
  */
 
 /* Smartphone portrait */
