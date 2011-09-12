@@ -996,7 +996,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
   $filepath = $path . '/' . $file;
   file_save_data($data, $filepath, FILE_EXISTS_REPLACE);
-  drupal_chmod($file);
+  //drupal_chmod($file);
 
   // set variables so we can retrive them later to load the css file
   variable_set($theme . '_mediaqueries_path', $path);
