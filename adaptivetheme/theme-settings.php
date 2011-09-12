@@ -1014,7 +1014,7 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   $styles = array();
   if ($method == 'three-col-grail') {
     $sidebar_second = $sidebar_second . $sidebar_unit;
-    $sidebar_first = $sidebar_first . $sidebar_unit;
+    $sidebar_first  = $sidebar_first  . $sidebar_unit;
     $push_right = $sidebar_second;
     $push_left  = $sidebar_first;
     $pull_right = $sidebar_second;
@@ -1027,7 +1027,7 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   if ($method == 'three-col-right') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
     $push_right     = $sidebar_second . $sidebar_unit;
-    $push_left      = $sidebar_first . $sidebar_unit;
+    $push_left      = $sidebar_first  . $sidebar_unit;
     $left_margin    = $sidebar_second + $sidebar_first . $sidebar_unit;
     $right_margin   = $sidebar_second . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner {margin-' . $right . ': ' . $content_margin . '; margin-'. $left . ': 0;}';
@@ -1039,9 +1039,9 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   }
   if ($method == 'three-col-left') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
-    $left_margin    = $sidebar_first . $sidebar_unit;
+    $left_margin    = $sidebar_first  . $sidebar_unit;
     $right_margin   = $sidebar_second . $sidebar_unit;
-    $push_right     = $sidebar_first . $sidebar_unit;
+    $push_right     = $sidebar_first  . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $content_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $left_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $left . ': ' . $right_margin . '; margin-' . $right . ': 0;}';
@@ -1065,9 +1065,11 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
     $styles[] = '.region-sidebar-first, .region-sidebar-second {clear: both;}';
   }
   if ($method == 'one-col-vert') {
+    $one_sidebar = $sidebar_first + $sidebar_second;
     $styles[] = '.two-sidebars .content-inner,.one-sidebar .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0;}';
     $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . ';}';
     $styles[] = '.region-sidebar-second {width: ' . $sidebar_second . $sidebar_unit . ';}';
+    $styles[] = '.one-sidebar .sidebar {width: ' . $one_sidebar . $sidebar_unit . ';}';
     $styles[] = '.region-sidebar-first, .region-sidebar-second {overflow: hidden; margin-top: 20px;}';
     $styles[] = '.region-sidebar-first .block, .region-sidebar-second .block {width: 100%;}';
   }
