@@ -1,5 +1,5 @@
 <?php
-
+// Google fonts array
 function get_gwf_font_families() {
   return array (
     'Abel',

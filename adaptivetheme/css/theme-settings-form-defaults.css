@@ -6,9 +6,9 @@ div.vertical-tabs .vertical-tabs-panes {
   clear: both;
 }
 .vertical-tabs-panes label {
-  float: left;
-  width: 10em;
   font-weight: 400;
+  margin: 0 0 5px;
+  display: inline-block;
 }
 .vertical-tabs-panes select {
   width: auto;
