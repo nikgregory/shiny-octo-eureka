@@ -2,6 +2,8 @@
  * Use this file to conditionally override styles for devices.
  * If you adjust the media queries in the theme settings you should
  * adjust them here so they match.
+ *
+ * Make sure you have un-commeted this in the info file.
  */
 
 /* Smartphone portrait */

@@ -9,8 +9,13 @@
 
 ;----------// Stylesheets
   stylesheets[all][] = css/at-admin.css
-  stylesheets[all][] = css/responsive-gpanels.css
-  stylesheets[all][] = css/responsive-style.css
+  
+  ; If you are using Gpanels you should enable this to support
+  ; Gpanels in responsive layouts.
+  ;stylesheets[all][] = css/responsive-gpanels.css
+  
+  ; Enable this if you want to customize the responsive styles
+  ;stylesheets[all][] = css/responsive-style.css
 
 ;----------// Regions
   regions[help]           = Help
@@ -25,7 +30,7 @@
   settings[shortcut_module_link] = 1
 
 ;----------// Features
-  ;features[] = logo
+  features[] = logo
   features[] = name
   features[] = favicon
   features[] = main_menu
