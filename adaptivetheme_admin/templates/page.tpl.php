@@ -14,24 +14,26 @@
       <?php if ($title): ?><h1 id="page-title"><?php print $title; ?></h1><?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php if ($primary_local_tasks): ?>
-        <nav id="primary-tasks" class="clearfix" role="navigation">
+        <nav id="primary-tasks" class="clearfix<?php print $secondary_local_tasks ? ' with-secondary' : '' ?>" role="navigation">
           <ul class="tabs primary"><?php print render($primary_local_tasks); ?></ul>
         </nav>
       <?php endif; ?>
     </header>
   </div></div>
-  <div class="content-columns"><div class="container clearfix">
+  <?php if ($secondary_local_tasks): ?>
+    <div class="secondary-tasks-wrapper" ><div class="container">
+      <nav id="secondary-tasks" class="clearfix" role="navigation">
+        <ul class="tabs secondary clearfix"><?php print render($secondary_local_tasks); ?></ul>
+      </nav>
+    </div></div>
+  <?php endif; ?>
+  <div class="content-columns"><div class="container clearfix">  
     <div id="columns"><div class="columns-inner clearfix">
       <div id="content-column"><div class="content-inner">
-        <?php if ($secondary_local_tasks): ?>
-          <nav id="secondary-tasks" class="clearfix" role="navigation">
-            <ul class="tabs secondary clearfix"><?php print render($secondary_local_tasks); ?></ul>
-          </nav>
-        <?php endif; ?>
         <?php print $messages; ?>
         <?php print render($page['help']); ?>
         <?php if ($action_links): ?>
-          <ul class="action-links"><?php print render($action_links); ?></ul>
+          <nav class="actions-wrapper clearfix"><ul class="action-links clearfix"><?php print render($action_links); ?></ul></nav>
         <?php endif; ?>
         <div id="main-content">
           <?php print render($page['content']); ?>

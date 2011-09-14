@@ -1,7 +1,7 @@
 
 ;----------// Theme Information
   name        = AT Admin
-  description = A better admin theme for Drupal 7.
+  description = A better admin theme for Drupal 7. Clean and calm look and feel. Includes left and right sidebars, Overlay support and settings for font family and font size.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -40,31 +40,31 @@
   ; Layout settings
 
   ; Standard bigscreen
-  settings[bigscreen_layout]         = 'three-col-grail'
+  settings[bigscreen_layout]         = 'three-col-right'
   settings[bigscreen_page_unit]      = '%'
-  settings[bigscreen_sidebar_unit]   = '%'
+  settings[bigscreen_sidebar_unit]   = 'px'
   settings[bigscreen_max_width_unit] = 'px'
   settings[bigscreen_page_width]     = 100
-  settings[bigscreen_sidebar_first]  = 20
-  settings[bigscreen_sidebar_second] = 20
+  settings[bigscreen_sidebar_first]  = 200
+  settings[bigscreen_sidebar_second] = 160
   settings[bigscreen_set_max_width]  = 1
   settings[bigscreen_max_width]      = 1260
   settings[bigscreen_media_query]    = 'only screen and (min-width:1025px)'
 
   ; Tablet landscape
-  settings[tablet_landscape_layout]         = 'three-col-grail'
+  settings[tablet_landscape_layout]         = 'three-col-right'
   settings[tablet_landscape_page_unit]      = '%'
   settings[tablet_landscape_sidebar_unit]   = '%'
   settings[tablet_landscape_max_width_unit] = 'px'
   settings[tablet_landscape_page_width]     = 100
   settings[tablet_landscape_sidebar_first]  = 20
-  settings[tablet_landscape_sidebar_second] = 20
+  settings[tablet_landscape_sidebar_second] = 15
   settings[tablet_landscape_set_max_width]  = 0
   settings[tablet_landscape_max_width]      = 960
   settings[tablet_landscape_media_query]    = 'only screen and (min-width:769px) and (max-width:1024px)'
 
   ; Tablet portrait
-  settings[tablet_portrait_layout]         = 'one-col-vert'
+  settings[tablet_portrait_layout]         = 'one-col-stack'
   settings[tablet_portrait_page_unit]      = '%'
   settings[tablet_portrait_sidebar_unit]   = '%'
   settings[tablet_portrait_max_width_unit] = 'px'
@@ -76,7 +76,7 @@
   settings[tablet_portrait_media_query]    = 'only screen and (min-width:481px) and (max-width:768px)'
 
   ; smartphone landscape
-  settings[smartphone_landscape_layout]         = 'one-col-vert'
+  settings[smartphone_landscape_layout]         = 'one-col-stack'
   settings[smartphone_landscape_page_unit]      = '%'
   settings[smartphone_landscape_sidebar_unit]   = '%'
   settings[smartphone_landscape_max_width_unit] = 'px'
@@ -96,7 +96,7 @@
   ; Breadcrumb
   settings[breadcrumb_display]   = 'yes'
   settings[breadcrumb_separator] = ' &#187; '
-  settings[breadcrumb_home]      = 0
+  settings[breadcrumb_home]      = 1
 
   ; Search
   settings[display_search_form_label] = 1
@@ -125,4 +125,8 @@
   settings[extra_item_list_classes] = 0
 
   ; Extra markup
-  settings[menu_item_span_elements] = 0¨T
+  settings[menu_item_span_elements] = 0
+
+  ; Fonts
+  settings[font_family] = 'ff-l'
+  settings[font_size]   = 'fs-medium'
