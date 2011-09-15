@@ -24,7 +24,7 @@
   margin-left: -180px;
 }
  
-/* Add margin to align elements to the grid. */
+/* Add gutters. */
 .block-inner,
 .breadcrumb,
 .region-help,
@@ -39,15 +39,25 @@
   margin-right: 10px;
 }
 
-/* Strip block margin inside content column area */
+/* Clear floating elements. */
+.clear,
+#columns,
+#breadcrumb,
+#crumbs,
+.region-secondary-content,
+.region-tertiary-content,
+.region-footer,
+#block-admin-display-form ,
+.gpanel {
+  clear: both;
+}
+
+/* Strip block margin inside content column area. */
 .content-inner .block {
   margin: 0;
 }
 
 /* GPanels */
-.gpanel {
-  clear: both;
-}
 .gpanel .region {
   display: inline;
   position: relative;

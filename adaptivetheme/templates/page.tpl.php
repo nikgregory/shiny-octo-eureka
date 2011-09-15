@@ -28,7 +28,7 @@
   <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
 
   <?php if ($breadcrumb): ?>
-    <section id="breadcrumb"><?php print $breadcrumb; ?></section>
+    <nav id="breadcrumb"><?php print $breadcrumb; ?></nav>
   <?php endif; ?>
 
   <?php print $messages; ?>

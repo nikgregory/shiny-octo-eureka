@@ -733,10 +733,23 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
     );
   } // endif horizontal block settings
+  // Comments
+  $form['at']['comments'] = array(
+    '#type' => 'fieldset',
+    '#weight' => '100',
+    '#title' => t('Comments'),
+    '#description' => t('<h3>Comment Options</h3>'),
+  );
+  $form['at']['comments']['comments_hide_title'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide the comment title'),
+    '#default_value' => theme_get_setting('comments_hide_title'),
+    '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
+  );
   // Development settings
   $form['at']['classes'] = array(
     '#type' => 'fieldset',
-    '#weight' => '100',
+    '#weight' => '101',
     '#title' => t('CSS Classes'),
     '#description' => t('<h3>Add or Remove CSS Classes</h3><p>Many classes are removed by default (unchecked checkbox), to add classes check the checkbox.</p>'),
   );
@@ -747,12 +760,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   );
   $form['at']['classes']['extra_article_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language, odd/even classes and build mode classes such as .article-teaser and .article-full.') . '</span>',
+    '#title' => t('Articles: ') . '<span class="description">' . t('add promoted, sticky, preview, language, odd/even classes, user picture handling, and build mode classes such as .article-teaser and .article-full.') . '</span>',
     '#default_value' => theme_get_setting('extra_article_classes'),
   );
   $form['at']['classes']['extra_comment_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, and odd/even classes.') . '</span>',
+    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, odd/even classes and classes for title, user picture and signature handling.') . '</span>',
     '#default_value' => theme_get_setting('extra_comment_classes'),
   );
   $form['at']['classes']['extra_block_classes'] = array(

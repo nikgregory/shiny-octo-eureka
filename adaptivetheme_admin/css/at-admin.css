@@ -575,7 +575,6 @@ ul.secondary li a {
   padding: 0 10px;
   text-transform: none;
 }
-ul.secondary li a:active ,
 ul.secondary li a.active {
   border-bottom: 0;
   color: #194468;

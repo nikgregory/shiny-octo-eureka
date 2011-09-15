@@ -195,6 +195,9 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
+    if ($vars['picture']) {
+      $vars['classes_array'][] = 'article-with-picture'; 
+    }
   }
   if (!$vars['teaser'] && theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = drupal_html_class('article-' . $vars['view_mode']);
@@ -250,9 +253,21 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
+    if (theme_get_setting('comments_hide_title')) {
+      $vars['classes_array'][] = 'comment-title-hidden'; 
+    }
+    if ($vars['picture']) {
+      $vars['classes_array'][] = 'comment-with-picture'; 
+    }
+    if ($vars['signature']) {
+      $vars['classes_array'][] = 'comment-with-signature'; 
+    }
   }
 
   $vars['title_attributes_array']['class'][] = 'comment-title';
+  if (theme_get_setting('comments_hide_title')) {
+    $vars['title_attributes_array']['class'][] = 'element-invisible';  
+  }
   $vars['content_attributes_array']['class'][] = 'comment-content';
 
   $uri = entity_uri('comment', $vars['comment']);
