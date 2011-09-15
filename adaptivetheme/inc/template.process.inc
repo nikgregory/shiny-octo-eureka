@@ -108,7 +108,6 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
     'attributes' => array(
-      'rel' => 'home',
       'title' => t('Home page')
     ),
     'html' => TRUE,
@@ -125,7 +124,6 @@ function adaptivetheme_preprocess_page(&$vars) {
   $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
   $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
-      'rel' => 'home',
       'title' => t('Home page')),
     )
   ) : '';
