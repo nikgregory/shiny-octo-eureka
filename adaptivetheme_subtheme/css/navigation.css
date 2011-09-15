@@ -160,6 +160,9 @@ ul.pager li.pager-last     {}
 }
 
 /* Superfish blocks */
+.block-superfish {
+  position: static;
+}
 .block-superfish .block-inner,
 .block-superfish .block-inner .content {
   padding: 0;
@@ -195,6 +198,9 @@ ul.pager li.pager-last     {}
 }
 .sf-navbar {
   padding-bottom: 0 !important;
+}
+.sf-menu.sf-style-default li a {
+  padding: 0 1em;
 }
 
 /* Skip Navigation */
@@ -269,70 +275,4 @@ ul.secondary li a:hover,
 ul.secondary li a.active {
   border-bottom: none;
   text-decoration: underline;
-}
-
-/* Skinr Menu Layouts */
-.at-inline-menu ul.menu,
-.at-multicolumn-menu .block-content ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Skinr inline menu */
-.ms-im {
-  margin-bottom: .5em;
-}
-.ms-im ul.menu li {
-  display: inline;
-  float: left;
-  white-space: nowrap;
-  list-style: none;
-  list-style-image: none;
-  margin: 0;
-  padding: 0;
-}
-.ms-im ul.menu li a {
-  padding: 0 .5em;
-}
-.ms-im ul li.expanded ul {
-  display: none;
-}
-
-/* Skinr multi-column menu with headers */
-.ms-mc .block-content {
-  overflow: auto;
-}
-.ms-mc ul.menu {
-  margin-left: 0;
-}
-.ms-mc .block-content ul li,
-.ms-mc .block-content ul li.expanded ul {
-  width:160px; /* Adjust column width to suit */
-}
-.ms-mc .block-content ul li {
-  display: block;
-  font-weight: 700;
-  float: left;
-  list-style: none;
-  list-style-image: none;
-  margin: 0;
-}
-.ms-mc .block-content ul li.expanded ul {
-  display: block;
-  margin-left: 0;
-  padding: 0;
-}
-.ms-mc .block-content ul li.expanded ul li {
-  border: none;
-  display: block;
-}
-.ms-mc .block-content ul.menu li ul.menu li {
-  font-weight: 400;
-}
-/* Hide block titles for both menu styles */
-.ms-im h2,
-.ms-mc h2 {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
 }
