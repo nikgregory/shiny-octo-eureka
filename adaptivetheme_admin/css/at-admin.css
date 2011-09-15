@@ -6,7 +6,7 @@ body,
 body.section-admin {
   background: #fff;
   color: #222;
-  font-family: "Lucida Sans Unicode", "DejaVu Sans", "Bitstream Vera Sans", sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Sans", "Lucida Grande", Geneva, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -53,10 +53,6 @@ body.ff-ms    {font-family: Consolas, Monaco, "Courier New", Courier, monospace;
   margin-left: 20px;
   margin-right: 20px;
 }
-#messages-and-help {
-  margin-left: 10px;
-  margin-right: 10px;
-}
 
 /* Micro reset */
 tbody,
@@ -99,7 +95,7 @@ h1#page-title {
   padding-top: 10px;
 }
 .content-header {
-  background: #fafafa;
+  background: #eee;
 }
 #banner {
   padding-top: 20px;
@@ -154,6 +150,9 @@ h1#page-title {
 /* Hyperlinks */
 a {
   text-decoration: none;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 a:active,
 a.active,
@@ -164,27 +163,18 @@ a.active,
 a img {
   border: none;
 }
+a,
 a:link,
 a:visited,
-.block a:link,
+.block a,
 .block a:visited,
 tr #acquia-agent-no-search a:link,
 tr #acquia-agent-no-search a:visited {
   color: #3188D1;
 }
-#user-menu ul li a:hover,
-#user-menu ul li a:focus {
-  background: #666;
-}
 a:hover,
-a:focus,
-a:visited:hover,
-a:focus:hover {
-  text-decoration: underline;
-}
-a:active,
 a:focus {
-  color: #c00000;
+  text-decoration: underline;
 }
 .show-on-focus a,
 .show-on-focus a:link,
@@ -437,13 +427,13 @@ div.admin-panel dd {
   padding-bottom: 10px;
 }
 div.admin-panel {
+  margin: 0 0 .75em;
+  padding: 0;
+  border: 1px solid #d7d7d7;
   -khtml-border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  margin: 0 0 .75em;
-  padding: 0;
-  border: 1px solid #d7d7d7;
 }
 div.admin .left,
 div.admin .right {
@@ -535,9 +525,6 @@ ul.primary li a {
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-top-left-radius: 6px;
   -webkit-border-top-right-radius: 6px;
@@ -557,18 +544,12 @@ ul.primary li.active a:focus {
   color: #6e6e6e;
   text-decoration: none !important;
 }
-.with-secondary ul.primary li.active a,
-.with-secondary ul.primary li.active a:hover,
-.with-secondary ul.primary li.active a:focus {
-  background: #f2f2f2;
-  color: #6e6e6e;
-  text-decoration: none;
-}
+
 .secondary-tasks-wrapper {
-  background: #f2f2f2;
+  background: #fff;
 }
 #secondary-tasks {
-  padding: 8px 0;
+  padding: 15px 0 0;
 }
 ul.secondary {
   border-bottom: 0;
@@ -585,7 +566,6 @@ ul.secondary li {
   float: left;
 }
 ul.secondary li a {
-  background: transparent;
   color: #3188D1;
   display: block;
   float: left;
@@ -594,21 +574,12 @@ ul.secondary li a {
   line-height: 1.8em;
   padding: 0 10px;
   text-transform: none;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
 }
 ul.secondary li a:active ,
-ul.secondary li a:focus,
-ul.secondary li a:hover,
 ul.secondary li a.active {
-    background: none repeat scroll 0 0 #FDFDFD;
-    border-bottom: 0 none;
-    color: #3188D1;
-    text-decoration: none;
+  border-bottom: 0;
+  color: #194468;
+  text-decoration: underline;
 }
 
 /* Tables */
@@ -785,6 +756,10 @@ div.admin-required {
   color:#666;
   padding:0;
   line-height:1.5;
+}
+#messages-and-help {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 #block-system-help {
   background-color: #f0f8ff;

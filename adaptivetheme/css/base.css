@@ -6,12 +6,13 @@ em,dfn,del,ins,
 a,
 tbody,tfoot,thead,tr,
 li,
-label,legend {
+label,legend,
+figure,figcaption {
   margin: 0;
   padding: 0;
 }
 
-/* Reset HTML5 elements, CSS assumes elements are inline */
+/* Reset HTML5 elements */
 article,
 aside,
 details,
@@ -26,13 +27,6 @@ section {
   display: block;
 }
 
-/* Reset figure and figcaption elements */
-figure,
-figcaption {
-  margin: 0;
-  padding: 0;
-}
-
 /* Enable responsive images */
 img {
   max-width: 100%;
@@ -41,10 +35,11 @@ img {
 /* Accessibility helpers */
 .offscreen {
   position: absolute;
-  top: -9999em;
+  top: -99999em;
   width: 1px;
   height: 1px;
   overflow: hidden;
+  outline: 0;
 }
 .element-hidden {
   display: none;

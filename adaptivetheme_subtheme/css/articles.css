@@ -41,6 +41,9 @@
 .article > footer a:hover {}
 .article > footer .username {}
 .article > footer time {}
+.article footer p {
+  margin: 0;
+}
 
 /* Links. */
 .article ul.links {

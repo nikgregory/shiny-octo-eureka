@@ -1,5 +1,12 @@
 <?php
-// Google fonts array
+/**
+ * Google Fonts
+ * This file in included in the core theme to ease management 
+ * and updates to the font families. Google add new fonts on
+ * a regular basis and we will provide patches and updates
+ * for this file periodically.
+ */
+
 function get_gwf_font_families() {
   return array (
     'Abel',

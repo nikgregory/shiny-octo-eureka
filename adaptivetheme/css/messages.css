@@ -5,22 +5,21 @@ div.messages {
 #block-system-help {
   background: #f7f7f7 url(images/help.png) no-repeat 8px 8px;
   border: none;
-  margin: 6px 0;
+  margin: 10px 0;
   padding: 10px 10px 10px 50px;
 }
 #block-system-help code,
 div.messages code {
   font-weight: 700;
 }
-div.help p:last-child,
-div.help ul:last-child {
+#block-system-help p:last-child,
+#block-system-help ul:last-child {
   margin-bottom: 0;
 }
+#block-system-help p:first-child {
+  margin-top: 0;
+}
 .block-region {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
   background-color: #f7f8f8;
   border: 2px dashed #ddd;
   clear: both;
@@ -31,6 +30,10 @@ div.help ul:last-child {
   margin-bottom: 10px;
   margin-top: 5px;
   padding: 3px 6px 1px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
 }
 #page article.article-unpublished,
 #page article.comment-unpublished {

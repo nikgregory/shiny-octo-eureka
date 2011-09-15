@@ -67,14 +67,14 @@ a:focus {}
 .menu li.last  {}
 
 .block .menu li.content {
-  padding: 0; /* extra class can equal a standard class */
+  padding: 0;
 }
 
-/* Breadcrumb */
+/* Breadcrumbs
+   AT7 builds brumbcrumb trails as an ordered list. */
 #breadcrumb {
   padding-bottom: 1em;
 }
-/* AT7 builds brumbcrumb trails as an ordered list. */
 #breadcrumb ol {
   margin: 0;
   padding: 0;
@@ -130,27 +130,22 @@ ul.pager li.pager-last     {}
 /* Superfish Skins */
 .sf-menu {
   margin-bottom: 0;
-  height: 30px;
-  line-height: 30px;
 }
+.sf-menu li {}
+
 .sf-menu a {
   border-left: 0;
   border-top: 0;
-  padding: .75em 1em;
+  padding: 0 10px;
   text-decoration: none;
+  height: 2.5em;
+  line-height: 2.5em;
 }
+
 .sf-menu a:link,
-.sf-menu a,
 .sf-menu a:visited  {}
-.sf-menu > li > a:link,
-.sf-menu > li > a,
-.sf-menu > li > a:visited  {}
-.sf-menu li {
-  background: transparent;
-}
-.sf-menu li li {}
-.sf-menu li li li {}
-.sf-menu li li li li {}
+
+
 .sf-menu li:hover,
 .sf-menu li.sfHover,
 .sf-menu a:focus,
@@ -173,6 +168,8 @@ ul.pager li.pager-last     {}
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/* Vertical style */
 .sf-vertical,
 .sf-vertical li {
   width: 100%;
@@ -193,8 +190,15 @@ ul.pager li.pager-last     {}
 .sf-vertical li a {
   padding: 0 10px;
 }
+
+/* Navbar */
 .sf-navbar {
   padding-bottom: 0 !important;
+}
+
+/* Sensible padding for the default style */
+.sf-menu.sf-style-default a {
+  padding: 0 10px;
 }
 
 /* Skip Navigation */
@@ -271,68 +275,3 @@ ul.secondary li a.active {
   text-decoration: underline;
 }
 
-/* Skinr Menu Layouts */
-.at-inline-menu ul.menu,
-.at-multicolumn-menu .block-content ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Skinr inline menu */
-.ms-im {
-  margin-bottom: .5em;
-}
-.ms-im ul.menu li {
-  display: inline;
-  float: left;
-  white-space: nowrap;
-  list-style: none;
-  list-style-image: none;
-  margin: 0;
-  padding: 0;
-}
-.ms-im ul.menu li a {
-  padding: 0 .5em;
-}
-.ms-im ul li.expanded ul {
-  display: none;
-}
-
-/* Skinr multi-column menu with headers */
-.ms-mc .block-content {
-  overflow: auto;
-}
-.ms-mc ul.menu {
-  margin-left: 0;
-}
-.ms-mc .block-content ul li,
-.ms-mc .block-content ul li.expanded ul {
-  width:160px; /* Adjust column width to suit */
-}
-.ms-mc .block-content ul li {
-  display: block;
-  font-weight: 700;
-  float: left;
-  list-style: none;
-  list-style-image: none;
-  margin: 0;
-}
-.ms-mc .block-content ul li.expanded ul {
-  display: block;
-  margin-left: 0;
-  padding: 0;
-}
-.ms-mc .block-content ul li.expanded ul li {
-  border: none;
-  display: block;
-}
-.ms-mc .block-content ul.menu li ul.menu li {
-  font-weight: 400;
-}
-/* Hide block titles for both menu styles */
-.ms-im h2,
-.ms-mc h2 {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
-}

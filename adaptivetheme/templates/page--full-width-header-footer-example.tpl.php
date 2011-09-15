@@ -2,8 +2,8 @@
 /**
  * This is an example page template that has 100% width header and footer backgrounds.
  * Additionally you will notice most of the elements have new wrapper divs, so in effect
- * you can style things like the main menu, breadcrumbs, secondary content region etc etc
- * with 100% width backgrounds. This tempalte is compatible with AT's normal page width
+ * you can style things like the main menu, breadcrumbs, secondary content region etc
+ * with 100% width backgrounds. This template is compatible with AT's normal page layout
  * settings (just the backgrounds will be 100%).
  *
  * To use copy this to your subtheme and rename it page.tpl.php

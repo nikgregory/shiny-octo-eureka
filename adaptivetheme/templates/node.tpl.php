@@ -2,22 +2,22 @@
 
   <?php print $unpublished; ?>
 
+  <?php print render($title_prefix); ?>
   <?php if ($title && !$page): ?>
     <header>
-      <?php print render($title_prefix); ?>
       <?php if ($title): ?>
         <h1<?php print $title_attributes; ?>>
           <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
         </h1>
       <?php endif; ?>
-      <?php print render($title_suffix); ?>
     </header>
   <?php endif; ?>
+  <?php print render($title_suffix); ?>
 
   <?php if ($display_submitted): ?>
     <footer class="submitted">
       <?php print $user_picture; ?>
-      <?php print $submitted; ?>
+      <p class="author-datetime"><?php print $submitted; ?></p>
     </footer>
   <?php endif; ?>
 

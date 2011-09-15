@@ -2,24 +2,20 @@
 
   <?php print $unpublished; ?>
 
+  <?php print render($title_prefix); ?>
+  <?php if ($title || $new): ?>
   <header>
-    <?php print render($title_prefix); ?>
-    <?php if ($title): ?>
-      <h3<?php print $title_attributes; ?>><?php print $title ?></h3>
-    <?php endif; ?>
-    <?php print render($title_suffix); ?>
+    <h3<?php print $title_attributes; ?>><?php print $title ?></h3>
     <?php if ($new): ?>
       <em class="new"><?php print $new ?></em>
     <?php endif; ?>
   </header>
+  <?php endif; ?>
+  <?php print render($title_suffix); ?>
 
-  <?php print $picture; ?>
-
-  <footer>
-   <?php
-      print t('Submitted by !username on !datetime',
-      array('!username' => $author, '!datetime' => '<time datetime="' . $datetime . '">' . $created . '</time>'));
-    ?>
+  <footer class="submitted">
+    <?php print $picture; ?>
+    <p class="author-datetime"><?php print $submitted; ?></p>
   </footer>
 
   <div<?php print $content_attributes; ?>>

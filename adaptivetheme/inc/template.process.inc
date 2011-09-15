@@ -261,12 +261,16 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
   $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z');
-
+  $vars['submitted'] = t('Submitted by !username on !datetime',
+    array(
+      '!username' => $vars['author'],
+      '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['created'] . '</time>',
+    )
+  );
   $vars['unpublished'] = '';
   if ($vars['status'] == 'comment-unpublished') {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
-
 }
 
 // Process variables for comment.tpl.php
