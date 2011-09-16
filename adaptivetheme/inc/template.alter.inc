@@ -13,7 +13,8 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 
 // hook_js_alter(). Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
 function adaptivetheme_js_alter(&$javascript) {
-  $javascript['misc/vertical-tabs.js']['data'] = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
+  $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
+  $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
 }
 
 // hook_form_FORM_ID_alter().

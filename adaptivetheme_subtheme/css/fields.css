@@ -2,8 +2,13 @@
 /* Wrapper for all fields. */
 .field {}
 
-/* Field labels - these are h2 in Adaptivetheme */
-.field-label {}
+/* Field labels are h2 in Adaptivetheme */
+.field .field-label {
+  font-size: 1em;
+  font-weight: 700;
+  line-height: inherit;
+  margin: 0;
+}
 .field-lable-above .field-label {}
 .field-lable-inline .field-label {
   display: inline;
