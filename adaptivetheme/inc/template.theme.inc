@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  *
@@ -7,7 +8,7 @@
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
-  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav>' . $menu . '</nav></div>';
+  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav class="clearfix">' . $menu . '</nav></div>';
   return $output;
 }
 

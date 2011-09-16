@@ -531,7 +531,7 @@ ul.primary li a {
   border-radius: 6px 6px 0 0;
 }
 ul.primary li a:hover {
-  background: #ddd;
+  background: #6e6e6e;
 }
 ul.primary li a:active {
   text-decoration: none;
@@ -574,6 +574,10 @@ ul.secondary li a {
   line-height: 1.8em;
   padding: 0 10px;
   text-transform: none;
+}
+ul.secondary li a:hover,
+ul.secondary li a:focus {
+  text-decoration: underline;
 }
 ul.secondary li a.active {
   border-bottom: 0;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
@@ -10,9 +11,12 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   );
 }
 
-/**
- * Implements hook_form_FORM_ID_alter().
- */
+// hook_js_alter(). Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
+function adaptivetheme_js_alter(&$javascript) {
+  $javascript['misc/vertical-tabs.js']['data'] = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
+}
+
+// hook_form_FORM_ID_alter().
 function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {
     // Keyword boxes:

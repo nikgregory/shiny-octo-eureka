@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  *
@@ -129,16 +130,19 @@ function adaptivetheme_preprocess_page(&$vars) {
   ) : '';
 
   if (isset($vars['main_menu'])) {
+
+    $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
+    
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('menu', 'primary-menu', 'clearfix'),
        ),
-     'heading' => array(
-     'text' => t('Primary navigation'),
-     'level' => 'h2',
-       'class' => array('element-invisible'),
-     )
+      'heading' => array(
+        'text' => $text,
+        'level' => 'h2',
+        'class' => array('element-invisible'),
+      )
     ));
   }
   if (!empty($vars['primary_navigation'])) {
@@ -149,12 +153,12 @@ function adaptivetheme_preprocess_page(&$vars) {
       'links' => $vars['secondary_menu'],
       'attributes' => array(
         'class' => array('menu', 'secondary-menu', 'clearfix'),
-     ),
-     'heading' => array(
-     'text' => t('Secondary navigation'),
-     'level' => 'h2',
-       'class' => array('element-invisible'),
-     )
+      ),
+      'heading' => array(
+        'text' => t('Secondary navigation'),
+        'level' => 'h2',
+        'class' => array('element-invisible'),
+      )
     ));
   }
   if (!empty($vars['secondary_navigation'])) {
@@ -175,7 +179,6 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (arg(0) == 'user' && arg(1) == 'register') {
     drupal_set_title(t('Create new account'));
   }
-
 }
 
 // Preprocess variables for node.tpl.php
@@ -337,7 +340,7 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 
-  // For example we can have templates such as block--header--search, or block--menu-bar--menu
+  // Provide template suggestions such as block--header--search, or block--menu-bar--menu
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)

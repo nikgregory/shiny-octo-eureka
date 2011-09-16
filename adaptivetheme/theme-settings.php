@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implements hook_form_system_theme_settings_alter().
  *
@@ -8,6 +9,7 @@
  * @see http://drupal.org/node/943212
  * @see http://drupal.org/node/1135794
  */
+
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
 
   // General "alters" use a form id. Settings should not be set here. The only
@@ -72,6 +74,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('bigscreen_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
     '#type' => 'textfield',
@@ -79,6 +82,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('bigscreen_sidebar_second'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['bigscreen']['bigscreen-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -101,6 +105,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('bigscreen_page_width'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
     '#type' => 'fieldset',
@@ -159,6 +164,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Do not include @media, its included automatically.'),
     '#field_prefix' => '@media',
     '#size' => 100,
+    '#required' => TRUE,
   );
   // tablet
   $form['at']['tablet'] = array(
@@ -213,6 +219,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_landscape_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
@@ -220,6 +227,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_landscape_sidebar_second'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
     '#states' => array(
       'disabled' => array(
         'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
@@ -247,6 +255,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_landscape_page_width'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -305,6 +314,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Do not include @media, its included automatically.'),
     '#field_prefix' => '@media',
     '#size' => 100,
+    '#required' => TRUE,
   );
   // tablet portrait
   $form['at']['tablet']['portrait'] = array(
@@ -352,6 +362,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_portrait_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
     '#type' => 'textfield',
@@ -359,6 +370,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_portrait_sidebar_second'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
     '#states' => array(
       'disabled' => array(
         'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
@@ -386,6 +398,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_portrait_page_width'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -444,6 +457,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Do not include @media, its included automatically.'),
     '#field_prefix' => '@media',
     '#size' => 100,
+    '#required' => TRUE,
   );
   // smartphone
   $form['at']['smartphone'] = array(
@@ -501,6 +515,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
@@ -508,6 +523,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_second'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -530,6 +546,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_page_width'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -565,6 +582,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_max_width'),
     '#size' => 4,
     '#maxlenght' => 4,
+    '#required' => TRUE,
     '#states' => array(
       'visible' => array(
         'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
@@ -588,6 +606,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Do not include @media, its included automatically.'),
     '#field_prefix' => '@media',
     '#size' => 100,
+    '#required' => TRUE,
   );
   // smartphone portrait
   $form['at']['smartphone']['portrait'] = array(

@@ -58,3 +58,6 @@ a.block-demo-backlink:visited {
   text-align:center;
   width:18em;
 }
+.vertical-tab-button-error a {
+  border: 1px solid #FC6F5D;
+}
