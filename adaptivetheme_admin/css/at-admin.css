@@ -150,9 +150,11 @@ h1#page-title {
 /* Hyperlinks */
 a {
   text-decoration: none;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 a:active,
 a.active,
@@ -354,8 +356,6 @@ tr .block {
 .block ul {
   padding: 0;
   margin: 0;
-}
-.block ul * {
 }
 ul.menu li {
   margin: 0;
@@ -622,11 +622,10 @@ thead th {
 tbody {
   border-top: 1px solid #eee;
 }
-td,
-th {
+td,th {
   margin: 0;
-  padding: .85em .5em;
-  border-bottom: 0;
+  padding: 0.85em 0;
+  text-indent: 6px;
 }
 th.active a {
   padding-right: 25px;
@@ -637,8 +636,7 @@ th.active a img {
   top: 0;
   right: 3px;
 }
-tr.odd,
-tr.info {
+tr.odd,tr.info {
   background-color: #fff;
 }
 td.region,
@@ -660,6 +658,12 @@ tr:first-child td.container {
 }
 tr.draggable td.block {
   padding: 10px 0 0 6px;
+}
+.draggable a.tabledrag-handle {
+  margin-left: 0.25em;
+}
+body div.tabledrag-changed-warning {
+  margin: 0 0 10px 0;
 }
 #system-modules td strong {
   display: block;
@@ -888,9 +892,6 @@ input.teaser-button {
   margin: 3px 10px 3px 0;
   outline: 1px solid #9babb0;
   padding: 2px 6px;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
 }
 .ajax-new-content input.form-submit,
 .ajax-new-content input.teaser-button {
