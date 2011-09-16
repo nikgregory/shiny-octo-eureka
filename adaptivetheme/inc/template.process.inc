@@ -75,7 +75,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (!empty($file)) {
     $filepath = $path . '/' . $file;
     drupal_add_css($filepath, array(
-      'preprocess' => theme_get_setting('debug_media_queries') == 1 ? FALSE : TRUE,
+      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
       'group' => CSS_THEME,
       'media' => 'screen',
       'every_page' => TRUE,

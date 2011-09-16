@@ -613,24 +613,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#field_prefix' => '@media',
     '#size' => 100,
   );
-  // debug
-  $message = '';
-  if (variable_get('preprocess_css', '') == 1 && theme_get_setting('debug_media_queries') == 1) {
-    $message = t('<p class="message warning">CSS aggregation is ON, for optimal performance uncheck this this setting.</p>');
-  }
-  if (variable_get('preprocess_css', '') == 1 && theme_get_setting('debug_media_queries') == 0) {
-    $message = t('<p class="message warning">CSS aggregation is ON, leave this setting unchecked as its not required.</p>');
-  }
-  $form['at']['media_queries']['debug'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Debug Media Queries'),
-    '#description' => t('<h3>Debug Media Queries</h3><p>This setting will allow you to more easily debug media queries in Internet Explorer 8 and below. It forces Drupal to load the generated media queries CSS file in a link element, rather than using the normal @import method - this is required because respond.js cannot parse media queries inside files loaded using the @import method. This setting is only useful when CSS aggregation is off.</p>') . $message,
-  );
-  $form['at']['media_queries']['debug']['debug_media_queries'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Debug media queries in IE8 or lower',
-    '#default_value' => theme_get_setting('debug_media_queries'),
-  );
   // Breadcrumbs
   $form['at']['breadcrumb'] = array(
     '#type' => 'fieldset',
