@@ -10,10 +10,9 @@
   screenshot  = screenshot.png
 
 ;----------// Stylesheets
-  stylesheets[all][] = css/base.css
-  stylesheets[all][] = css/edit-links.css
-  stylesheets[all][] = css/layout.css
-  stylesheets[all][] = css/messages.css
+  stylesheets[all][] = css/at.base.css
+  stylesheets[all][] = css/at.layout.css
+  stylesheets[all][] = css/at.messages.css
 
 ;----------// Stylesheets
   scripts[] = js/respond.js

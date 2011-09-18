@@ -5,7 +5,7 @@
  *
  * If you need to add or modify preprocess or process functions do it in your sub-theme.
  */
- 
+
 // Process variables for html tag
 function adaptivetheme_process_html_tag(&$vars) {
   $tag = &$vars['element'];
@@ -43,6 +43,39 @@ function adaptivetheme_preprocess_html(&$vars) {
     if (function_exists('locale')) {
       $vars['classes_array'][] = 'lang-'. $vars['language']->language;
     }
+
+    // Classes for body element. Allows advanced theming based on context
+    // (home page, node of certain type, etc.), cheers Zen.
+    if (!$vars['is_front']) {
+      // Add unique class for each page.
+      $path = drupal_get_path_alias($_GET['q']);
+      // Add unique class for each website section.
+      list($section, ) = explode('/', $path, 2);
+      $arg = explode('/', $_GET['q']);
+      if ($arg[0] == 'node') {
+        if ($arg[1] == 'add') {
+          $section = 'node-add';
+        }
+        elseif (isset($arg[2]) && is_numeric($arg[1]) && ($arg[2] == 'edit' || $arg[2] == 'delete')) {
+          $section = 'node-' . $arg[2];
+        }
+      }
+      $vars['classes_array'][] = drupal_html_class('section-' . $section);
+    }
+    // Set classes for views and panels pages, thanks again Zen!
+    $vars['menu_item'] = menu_get_item();
+    switch ($vars['menu_item']['page_callback']) {
+      case 'views_page':
+        // Is this a Views page?
+        $vars['classes_array'][] = 'page-views';
+        break;
+      case 'page_manager_page_execute':
+      case 'page_manager_node_view':
+      case 'page_manager_contact_site':
+        // Is this a Panels page?
+        $vars['classes_array'][] = 'page-panels';
+        break;
+    }
   }
   // strip rubbish classes if extra classes not set
   if (theme_get_setting('extra_page_classes') == 0) {
@@ -53,22 +86,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Set classes for views and panels pages, thanks again Zen!
-  $vars['menu_item'] = menu_get_item();
-  switch ($vars['menu_item']['page_callback']) {
-    case 'views_page':
-      // Is this a Views page?
-      $vars['classes_array'][] = 'page-views';
-      break;
-    case 'page_manager_page_execute':
-    case 'page_manager_node_view':
-    case 'page_manager_contact_site':
-      // Is this a Panels page?
-      $vars['classes_array'][] = 'page-panels';
-      break;
-  }
-
-  // Load the media queries layout CSS file
+  // Load the media queries layout CSS files
   global $theme;
   $filename = $theme . '_mediaqueries_css';
   $file = variable_get($filename);
@@ -83,7 +101,6 @@ function adaptivetheme_preprocess_html(&$vars) {
       )
     );
   }
-
 }
 
 // Process variables for html.tpl.php
@@ -132,7 +149,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (isset($vars['main_menu'])) {
 
     $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
-    
+
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
@@ -197,7 +214,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
     if ($vars['picture']) {
-      $vars['classes_array'][] = 'article-with-picture'; 
+      $vars['classes_array'][] = 'article-with-picture';
     }
   }
   if (!$vars['teaser'] && theme_get_setting('extra_article_classes')) {
@@ -255,19 +272,19 @@ function adaptivetheme_preprocess_comment(&$vars) {
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
     if (theme_get_setting('comments_hide_title')) {
-      $vars['classes_array'][] = 'comment-title-hidden'; 
+      $vars['classes_array'][] = 'comment-title-hidden';
     }
     if ($vars['picture']) {
-      $vars['classes_array'][] = 'comment-with-picture'; 
+      $vars['classes_array'][] = 'comment-with-picture';
     }
     if ($vars['signature']) {
-      $vars['classes_array'][] = 'comment-with-signature'; 
+      $vars['classes_array'][] = 'comment-with-signature';
     }
   }
 
   $vars['title_attributes_array']['class'][] = 'comment-title';
   if (theme_get_setting('comments_hide_title')) {
-    $vars['title_attributes_array']['class'][] = 'element-invisible';  
+    $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
   $vars['content_attributes_array']['class'][] = 'comment-content';
 
@@ -366,6 +383,8 @@ function adaptivetheme_preprocess_block(&$vars) {
       'shortcut',
       'statistics',
       'system' => array_keys(menu_list_system_menus()),
+      'superfish',
+      'nice_menus',
     ),
     'search' => array(
       'search',

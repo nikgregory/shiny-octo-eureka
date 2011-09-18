@@ -6,18 +6,6 @@
  * If you need to add or modify theme functions do it in your sub-theme.
  */
 
-// Helper function for theming main and secondary variables.
-function _theme_menu_variables($menu, $type) {
-  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav class="clearfix">' . $menu . '</nav></div>';
-  return $output;
-}
-
-// Simple theme function to output js in a conditional comment.
-function _conditional_js($condition, $file_path) {
-  $output = '<!--[if ' . $condition . ']><script type="text/javascript" src="' . $file_path . '?' . variable_get('css_js_query_string') . '"></script><![endif]-->';
-  return $output;
-}
-
 /**
  * Returns HTML for a breadcrumb trail.
  */
@@ -212,8 +200,8 @@ function adaptivetheme_links($vars) {
 
 /**
  * Modify the output of theme_field to support HTML5 in AT7.
- * There is a mirror image of this code as a template file in the 
- * templates directory, see field.tpl.php.txt (example file to use 
+ * There is a mirror image of this code as a template file in the
+ * templates directory, see field.tpl.php.txt (example file to use
  * for template suggestions).
  */
 function adaptivetheme_field($vars) {

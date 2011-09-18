@@ -13,7 +13,7 @@
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
-  <footer class="submitted clearfix<?php $picture ? print ' with-picture' : ''; ?>">
+  <footer class="submitted<?php $picture ? print ' with-picture' : ''; ?>">
     <?php print $picture; ?>
     <p class="author-datetime"><?php print $submitted; ?></p>
   </footer>

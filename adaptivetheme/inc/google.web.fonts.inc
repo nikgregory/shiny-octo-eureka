@@ -1,13 +1,19 @@
 <?php
+
+/**
+ * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
+ */
+
 /**
  * Google Fonts
- * This file in included in the core theme to ease management 
+ * This file in included in the core theme to ease management
  * and updates to the font families. Google add new fonts on
  * a regular basis and we will provide patches and updates
  * for this file periodically.
  */
 
-function get_gwf_font_families() {
+// Build an array of Google web fonts
+function google_web_fonts_list() {
   return array (
     'Abel',
     'Abril Fatface',
@@ -283,22 +289,84 @@ function get_gwf_font_families() {
   );
 }
 
-function get_gwf_font_families_options() {
-  global $_gwf_font_families;
-  if ($_gwf_font_families) {
-    return $_gwf_font_families;
+// Return a list of options
+function google_web_fonts_list_options() {
+  global $google_web_font_families;
+  if ($google_web_font_families) {
+    return $google_web_font_families;
   }
-  $_gwf_font_families = array();
-  $font_families = get_gwf_font_families();
+  $google_web_font_families = array();
+  $font_families = google_web_fonts_list();
   foreach($font_families as $ff) {
-    $_gwf_font_families[$ff] = $ff;
+    $google_web_font_families[$ff] = $ff;
   }
-  return $_gwf_font_families;
+  return $google_web_font_families;
 }
 
-function get_style_name($key, $font_type, $font_value) {
+// Return the style name
+function google_web_fonts_get_style_name($key, $font_type, $font_value) {
   $font_value = trim($font_value);
   $font_value = strtolower($font_value);
   $font_value = str_replace(' ', '-', $font_value);
   return $key . (!empty($font_type) ? '-' . $font_type :  "") . "-" . $font_value;
+}
+
+// Process font families, this is not specific to Google fonts but makes sense including it here
+function get_font_families($fonts, $theme_name) {
+  $google_font_families = array();
+  $font_families = array();
+  foreach($fonts as $key => $value) {
+    $font_type = theme_get_setting($value . '_type', $theme_name);
+    $font_value = theme_get_setting($value . (!empty($font_type) ? '_' . $font_type : ''), $theme_name);
+    if ($font_type == '') {
+      $font_families[] = $font_value;
+    }
+    else {
+      if ($font_type == 'gwf') {
+        $gff = str_replace(' ', '+', $font_value);
+        $google_font_families[] = $gff;
+      }
+      $font_value = preg_replace('/[^\w\d_ -]/si', '', $font_value);
+      $style_name = google_web_fonts_get_style_name($key, $font_type, $font_value);
+      $font_families[] = $style_name;
+      switch($key) {
+        case 'bf':
+          drupal_add_css("body.$style_name, .$style_name .form-text {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'snf':
+          drupal_add_css("body.$style_name #site-name {font-family : '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'ssf':
+          drupal_add_css("body.$style_name #site-slogan {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'mmf':
+          drupal_add_css(".$style_name #nav-wrapper {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'ptf':
+          drupal_add_css("body.$style_name #page-title {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'ntf':
+          drupal_add_css("body.$style_name .article-title {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'ctf':
+          drupal_add_css("body.$style_name .comment-title {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+        case 'btf':
+          drupal_add_css("body.$style_name .block-title {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
+          break;
+      }
+    }
+  }
+  if (!empty($google_font_families)) {
+    $array = array_unique($google_font_families);
+    $google_fonts = trim(implode('|', $array));
+    drupal_add_css('http://fonts.googleapis.com/css?family=' . $google_fonts, array(
+      'group' => CSS_THEME,
+      'type' => 'external',
+      'weight' => -1,
+      'preprocess' => FALSE,
+      )
+    );
+  }
+  return $font_families;
 }

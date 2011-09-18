@@ -15,7 +15,7 @@
   <?php print render($title_suffix); ?>
 
   <?php if ($display_submitted): ?>
-    <footer class="submitted">
+    <footer class="submitted<?php $user_picture ? print ' with-user-picture' : ''; ?>">
       <?php print $user_picture; ?>
       <p class="author-datetime"><?php print $submitted; ?></p>
     </footer>

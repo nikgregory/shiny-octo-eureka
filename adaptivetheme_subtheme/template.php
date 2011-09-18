@@ -2,10 +2,10 @@
 
 /**
  * Preprocess and Process Functions SEE: http://drupal.org/node/254940#variables-processor
- * 1. Rename each function to match your subthemes name,
- *    e.g. if you name your theme "themeName" then the function
- *    name will be "themeName_preprocess_hook". Tip - you can
- *    search/replace on "adaptivetheme_subtheme".
+ * 1. Rename each function and instance of "adaptivetheme_subtheme" to match 
+ *    your subthemes name, e.g. if you name your theme "footheme" then the function
+ *    name will be "footheme_preprocess_hook". Tip - you can search/replace 
+ *    on "adaptivetheme_subtheme".
  * 2. Uncomment the required function to use.
  */
 
@@ -23,38 +23,34 @@ function adaptivetheme_subtheme_process(&$vars, $hook) {
  * Override or insert variables into the html templates.
  */
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
-
-  global $theme;
-
-  // Don't change this unless you know what you are doing
+  // Load the media queries styles
+  // Remember to rename these files to match the names used here - they are 
+  // in the CSS directory of your subtheme.
   $media_queries_css = array(
-    'responsive-style.css',
-    'responsive-gpanels.css'
+    'adaptivetheme_subtheme-responsive-style.css',
+    'adaptivetheme_subtheme-responsive-gpanels.css'
   );
-  foreach ($media_queries_css as $css) {
-    $filepath = drupal_get_path('theme', $theme) . '/css/' . $css;
-    drupal_add_css($filepath, array(
-      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-      'group' => CSS_THEME,
-      'media' => 'screen',
-      'every_page' => TRUE,
-      )
-    );
-  }
+  load_subtheme_media_queries($media_queries_css, 'adaptivetheme_subtheme');
 
+ /**
+  * Load IE specific stylesheets
+  * AT automates adding IE stylesheets, simply add to the array using
+  * the conditional comment as the key and the stylesheet name as the value.
+  *
+  * For example to add a stylesheet for IE8 only use:
+  *
+  *  'IE 8' => 'ie-8.css',
+  *
+  * Your IE CSS file must be in the /css/ directory in your subtheme.
+  */
   /* -- Delete this line to add a conditional stylesheet for IE 7 or less.
-  drupal_add_css(path_to_theme() . '/css/ie/ie-lte-7.css', array(
-    'group' => CSS_THEME,
-    'browsers' => array(
-      'IE' => 'lte IE 7',
-      '!IE' => FALSE,
-      ),
-    'preprocess' => FALSE,
-    )
+  $ie_files = array(
+    'lte IE 7' => 'ie-lte-7.css',
   );
+  load_subtheme_ie_styles($ie_files, 'adaptivetheme_subtheme');
   // */
 }
-/* -- Delete this line if you want to use these functions
+/* -- Delete this line if you want to use this function
 function adaptivetheme_subtheme_process_html(&$vars) {
 }
 // */

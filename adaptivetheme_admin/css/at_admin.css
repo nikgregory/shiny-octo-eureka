@@ -521,8 +521,9 @@ ul.primary li a {
   color: #fff;
   border: 0 !important;
   margin-right: 3px;
-  padding: .4em 18px .4em;
+  padding: .45em 16px;
   font-weight: 700;
+  font-size: 0.923em;
   text-transform: uppercase;
   text-decoration: none;
   -moz-border-radius: 6px 6px 0 0;
@@ -570,6 +571,7 @@ ul.secondary li a {
   display: block;
   float: left;
   font-weight: 600;
+  font-size: 0.923em;
   height: 1.8em;
   line-height: 1.8em;
   padding: 0 10px;
@@ -624,8 +626,7 @@ tbody {
 }
 td,th {
   margin: 0;
-  padding: 0.85em 0;
-  text-indent: 6px;
+  padding: 0.85em 0.6em;
 }
 th.active a {
   padding-right: 25px;
@@ -660,7 +661,6 @@ tr.draggable td.block {
   padding: 10px 0 0 6px;
 }
 .draggable a.tabledrag-handle {
-  margin-left: 0.25em;
 }
 body div.tabledrag-changed-warning {
   margin: 0 0 10px 0;

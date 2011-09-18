@@ -42,7 +42,7 @@
       <?php print render($page['highlighted']); ?>
 
       <?php $tag = $title ? 'section' : 'div'; ?>
-      <<?php print $tag; ?> id="main-content">
+      <<?php print $tag; ?> id="main-content" role="main">
 
         <?php if ($title || $primary_local_tasks || $secondary_local_tasks || $action_links = render($action_links)): ?>
           <header>

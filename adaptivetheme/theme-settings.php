@@ -20,7 +20,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   }
 
   // Add some CSS so we can style our form in any theme, i.e. in Seven.
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/theme-settings-form-defaults.css', array('group' => CSS_THEME));
+  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css', array('group' => CSS_THEME));
 
   // Layout settings
   $form['at'] = array(
@@ -582,7 +582,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_max_width'),
     '#size' => 4,
     '#maxlenght' => 4,
-    '#required' => TRUE,
     '#states' => array(
       'visible' => array(
         'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
@@ -1002,7 +1001,7 @@ function at_theme_settings_submit($form, &$form_state) {
   $layout_data = implode("\n", $layouts);
 
   $theme = $form_state['build_info']['args'][0];
-  $file  = $theme . '-responsive-layout.css';
+  $file  = $theme . '.responsive.layout.css';
   $path  = "public://at_css";
   $data  = $layout_data;
 
