@@ -27,8 +27,8 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   // Remember to rename these files to match the names used here - they are 
   // in the CSS directory of your subtheme.
   $media_queries_css = array(
-    'adaptivetheme_subtheme-responsive-style.css',
-    'adaptivetheme_subtheme-responsive-gpanels.css'
+    'adaptivetheme_subtheme.responsive.style.css',
+    'adaptivetheme_subtheme.responsive.gpanels.css'
   );
   load_subtheme_media_queries($media_queries_css, 'adaptivetheme_subtheme');
 
