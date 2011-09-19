@@ -656,7 +656,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlength' => 10,
     '#states' => array(
       'visible' => array(
-          '#edit-breadcrumb-display' => array('value' => 'yes',),
+          '#edit-breadcrumb-display' => array('value' => 'yes'),
       ),
     ),
   );
@@ -897,16 +897,16 @@ function at_theme_settings_submit($form, &$form_state) {
     $page_unit      = $values['smartphone_landscape_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Smartphone landscape $method */\n";
-    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+    $width          = "\n" . '.container {width: ' . $page_width . $page_unit . ';}';
 
     if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['smartphone_landscape_max_width'];
       $max_width_unit = $values['smartphone_landscape_max_width_unit'];
       if (!empty($max_width)) {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $max_width . $max_width_unit . ';}';
       }
       else {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $page_width . $page_unit . ';}';
       }
     }
 
@@ -925,16 +925,16 @@ function at_theme_settings_submit($form, &$form_state) {
     $page_unit      = $values['tablet_portrait_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Tablet portrait $method */\n";
-    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+    $width          = "\n" . '.container {width: ' . $page_width . $page_unit . ';}';
 
     if ($values['tablet_portrait_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['tablet_portrait_max_width'];
       $max_width_unit = $values['tablet_portrait_max_width_unit'];
       if (!empty($max_width)) {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $max_width . $max_width_unit . ';}';
       }
       else {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $page_width . $page_unit . ';}';
       }
     }
 
@@ -953,16 +953,16 @@ function at_theme_settings_submit($form, &$form_state) {
     $page_unit      = $values['tablet_landscape_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Tablet landscape $method */\n";
-    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+    $width          = "\n" . '.container {width: ' . $page_width . $page_unit . ';}';
 
     if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['tablet_landscape_max_width'];
       $max_width_unit = $values['tablet_landscape_max_width_unit'];
       if (!empty($max_width)) {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $max_width . $max_width_unit . ';}';
       }
       else {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $page_width . $page_unit . ';}';
       }
     }
 
@@ -981,16 +981,16 @@ function at_theme_settings_submit($form, &$form_state) {
     $page_unit      = $values['bigscreen_page_unit'];
     $layout         = at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Standard layout $method */\n";
-    $width          = "\n" . '.container {width: '. $page_width . $page_unit .';}';
+    $width          = "\n" . '.container {width: '. $page_width . $page_unit . ';}';
 
     if ($values['bigscreen_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['bigscreen_max_width'];
       $max_width_unit = $values['bigscreen_max_width_unit'];
       if (!empty($max_width)) {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $max_width . $max_width_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $max_width . $max_width_unit . ';}';
       }
       else {
-        $width = "\n" . '.container {width: '. $page_width . $page_unit .'; max-width: ' . $page_width . $page_unit . ';}';
+        $width = "\n" . '.container {width: ' . $page_width . $page_unit . '; max-width: ' . $page_width . $page_unit . ';}';
       }
     }
 
@@ -1027,7 +1027,7 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   $styles = array();
   if ($method == 'three-col-grail') {
     $sidebar_second = $sidebar_second . $sidebar_unit;
-    $sidebar_first  = $sidebar_first  . $sidebar_unit;
+    $sidebar_first  = $sidebar_first . $sidebar_unit;
     $push_right = $sidebar_second;
     $push_left  = $sidebar_first;
     $pull_right = $sidebar_second;
@@ -1040,10 +1040,10 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   if ($method == 'three-col-right') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
     $push_right     = $sidebar_second . $sidebar_unit;
-    $push_left      = $sidebar_first  . $sidebar_unit;
+    $push_left      = $sidebar_first . $sidebar_unit;
     $left_margin    = $sidebar_second + $sidebar_first . $sidebar_unit;
     $right_margin   = $sidebar_second . $sidebar_unit;
-    $styles[] = '.two-sidebars .content-inner {margin-' . $right . ': ' . $content_margin . '; margin-'. $left . ': 0;}';
+    $styles[] = '.two-sidebars .content-inner {margin-' . $right . ': ' . $content_margin . '; margin-' . $left . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $right . ': ' . $push_left . '; margin-' . $left . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . '; margin-' . $left . ': 0;}';
     $styles[] = '.region-sidebar-first {width: ' . $sidebar_first . $sidebar_unit . '; margin-' . $left . ': -' . $left_margin . ';}';
@@ -1052,9 +1052,9 @@ function at_layout_styles($method, $sidebar_first, $sidebar_second, $sidebar_uni
   }
   if ($method == 'three-col-left') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
-    $left_margin    = $sidebar_first  . $sidebar_unit;
+    $left_margin    = $sidebar_first . $sidebar_unit;
     $right_margin   = $sidebar_second . $sidebar_unit;
-    $push_right     = $sidebar_first  . $sidebar_unit;
+    $push_right     = $sidebar_first . $sidebar_unit;
     $styles[] = '.two-sidebars .content-inner {margin-' . $left . ': ' . $content_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-first .content-inner {margin-' . $left . ': ' . $left_margin . '; margin-' . $right . ': 0;}';
     $styles[] = '.sidebar-second .content-inner {margin-' . $left . ': ' . $right_margin . '; margin-' . $right . ': 0;}';

@@ -41,7 +41,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // add extra classes if set
   if (theme_get_setting('extra_page_classes')) {
     if (function_exists('locale')) {
-      $vars['classes_array'][] = 'lang-'. $vars['language']->language;
+      $vars['classes_array'][] = 'lang-' . $vars['language']->language;
     }
 
     // Classes for body element. Allows advanced theming based on context
@@ -79,8 +79,8 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
   // strip rubbish classes if extra classes not set
   if (theme_get_setting('extra_page_classes') == 0) {
-    foreach($vars['classes_array'] as $i =>$class) {
-      if(preg_match('/page*/', $class)) {
+    foreach ($vars['classes_array'] as $i => $class) {
+      if (preg_match('/page*/', $class)) {
         unset($vars['classes_array'][$i]);
       }
     }
@@ -122,8 +122,8 @@ function adaptivetheme_process_html(&$vars) {
 
 // Preprocess variables for page.tpl.php
 function adaptivetheme_preprocess_page(&$vars) {
-  $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) .' '. t('logo');
-  $vars['logo_img'] = $vars['logo'] ? '<img src="'. check_url($vars['logo']) .'" alt="'. $vars['logo_alt_text'] .'"/>' : '';
+  $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) . ' ' . t('logo');
+  $vars['logo_img'] = $vars['logo'] ? '<img src="' . check_url($vars['logo']) . '" alt="' . $vars['logo_alt_text'] . '"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
     'attributes' => array(
       'title' => t('Home page')
@@ -206,7 +206,7 @@ function adaptivetheme_preprocess_node(&$vars) {
     if (module_exists('translation')) {
       if ($vars['node']->language) {
         global $language;
-        $vars['classes_array'][] = 'article-lang-'. $vars['node']->language;
+        $vars['classes_array'][] = 'article-lang-' . $vars['node']->language;
       }
     }
   }
@@ -330,7 +330,7 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   if (theme_get_setting('extra_block_classes')) {
     $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
-    $vars['classes_array'][] = 'block-count-'. $vars['id'];
+    $vars['classes_array'][] = 'block-count-' . $vars['id'];
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
   }
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {

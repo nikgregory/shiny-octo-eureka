@@ -74,7 +74,7 @@ function get_color_scheme_name($theme_name) {
 /**
  * Add classes for platforms and browsers.
  */
-function css_browser_selector($ua = null) {
+function css_browser_selector($ua = NULL) {
   $ua = ($ua) ? strtolower($ua) : strtolower($_SERVER['HTTP_USER_AGENT']);
   $g = 'gecko';
   $w = 'webkit';
@@ -83,45 +83,57 @@ function css_browser_selector($ua = null) {
   // browsers
   if(!preg_match('/opera|webtv/i', $ua) && preg_match('/msie\s(\d)/', $ua, $array)) {
     $b[] = 'ie ie' . $array[1];
-  } else if(strstr($ua, 'firefox/2')) {
-    $b[] = $g . ' ff2';
-  } else if(strstr($ua, 'firefox/3.5')) {
+  }
+  elseif (strstr($ua, 'firefox/3.6')) {
     $b[] = $g . ' ff3 ff3_5';
-  } else if(strstr($ua, 'firefox/3')) {
-    $b[] = $g . ' ff3';
-  } else if(strstr($ua, 'gecko/')) {
+  }
+  elseif (strstr($ua, 'gecko/')) {
     $b[] = $g;
-  } else if(preg_match('/opera(\s|\/)(\d+)/', $ua, $array)) {
+  }
+  elseif (preg_match('/opera(\s|\/)(\d+)/', $ua, $array)) {
     $b[] = 'opera opera' . $array[2];
-  } else if(strstr($ua, 'konqueror')) {
+  }
+  elseif (strstr($ua, 'konqueror')) {
     $b[] = 'konqueror';
-  } else if(strstr($ua, 'chrome')) {
+  }
+  elseif (strstr($ua, 'chrome')) {
     $b[] = $w . ' ' . $s . ' chrome';
-  } else if(strstr($ua, 'iron')) {
+  }
+  elseif (strstr($ua, 'iron')) {
     $b[] = $w . ' ' . $s . ' iron';
-  } else if(strstr($ua, 'applewebkit/')) {
+  }
+  elseif (strstr($ua, 'applewebkit/')) {
     $b[] = (preg_match('/version\/(\d+)/i', $ua, $array)) ? $w . ' ' . $s . ' ' . $s . $array[1] : $w . ' ' . $s;
-  } else if(strstr($ua, 'mozilla/')) {
+  }
+  elseif (strstr($ua, 'mozilla/')) {
     $b[] = $g;
   }
   // platform
-  if(strstr($ua, 'j2me')) {
+  if (strstr($ua, 'j2me')) {
     $b[] = 'mobile';
-  } else if(strstr($ua, 'iphone')) {
+  }
+  elseif (strstr($ua, 'iphone')) {
     $b[] = 'iphone';
-  } else if(strstr($ua, 'ipod')) {
+  }
+  elseif (strstr($ua, 'ipod')) {
     $b[] = 'ipod';
-  } else if(strstr($ua, 'mac')) {
+  }
+  elseif (strstr($ua, 'mac')) {
     $b[] = 'mac';
-  } else if(strstr($ua, 'darwin')) {
+  }
+  elseif (strstr($ua, 'darwin')) {
     $b[] = 'mac';
-  } else if(strstr($ua, 'webtv')) {
+  }
+  elseif (strstr($ua, 'webtv')) {
     $b[] = 'webtv';
-  } else if(strstr($ua, 'win')) {
+  }
+  elseif (strstr($ua, 'win')) {
     $b[] = 'win';
-  } else if(strstr($ua, 'freebsd')) {
+  }
+  elseif (strstr($ua, 'freebsd')) {
     $b[] = 'freebsd';
-  } else if(strstr($ua, 'x11') || strstr($ua, 'linux')) {
+  }
+  elseif (strstr($ua, 'x11') || strstr($ua, 'linux')) {
     $b[] = 'linux';
   }
   return join(' ', $b);

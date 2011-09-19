@@ -14,7 +14,7 @@
 
 // Build an array of Google web fonts
 function google_web_fonts_list() {
-  return array (
+  return array(
     'Abel',
     'Abril Fatface',
     'Aclonica',
@@ -291,16 +291,16 @@ function google_web_fonts_list() {
 
 // Return a list of options
 function google_web_fonts_list_options() {
-  global $google_web_font_families;
-  if ($google_web_font_families) {
-    return $google_web_font_families;
+  global $_google_web_font_families;
+  if ($_google_web_font_families) {
+    return $_google_web_font_families;
   }
-  $google_web_font_families = array();
+  $_google_web_font_families = array();
   $font_families = google_web_fonts_list();
-  foreach($font_families as $ff) {
-    $google_web_font_families[$ff] = $ff;
+  foreach ($font_families as $ff) {
+    $_google_web_font_families[$ff] = $ff;
   }
-  return $google_web_font_families;
+  return $_google_web_font_families;
 }
 
 // Return the style name
@@ -315,7 +315,7 @@ function google_web_fonts_get_style_name($key, $font_type, $font_value) {
 function get_font_families($fonts, $theme_name) {
   $google_font_families = array();
   $font_families = array();
-  foreach($fonts as $key => $value) {
+  foreach ($fonts as $key => $value) {
     $font_type = theme_get_setting($value . '_type', $theme_name);
     $font_value = theme_get_setting($value . (!empty($font_type) ? '_' . $font_type : ''), $theme_name);
     if ($font_type == '') {
@@ -329,7 +329,7 @@ function get_font_families($fonts, $theme_name) {
       $font_value = preg_replace('/[^\w\d_ -]/si', '', $font_value);
       $style_name = google_web_fonts_get_style_name($key, $font_type, $font_value);
       $font_families[] = $style_name;
-      switch($key) {
+      switch ($key) {
         case 'bf':
           drupal_add_css("body.$style_name, .$style_name .form-text {font-family: '" . $font_value . "'}", array('group' => CSS_DEFAULT, 'type' => 'inline'));
           break;
