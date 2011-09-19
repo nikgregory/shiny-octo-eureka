@@ -47,12 +47,6 @@ body.ff-ms    {font-family: Consolas, Monaco, "Courier New", Courier, monospace;
   right: auto;
   top: auto;
 }
-.overlay #messages-and-help,
-.overlay #breadcrumb,
-.overlay .columns-inner {
-  margin-left: 20px;
-  margin-right: 20px;
-}
 
 /* Micro reset */
 tbody,
@@ -1320,12 +1314,13 @@ ul.action-links li a:focus {
 }
 
 /* Overlay overrides */
-#overlay #banner {
+#overlay .topbar-wrapper {
   background: transparent;
-  padding: 20px 30px 5px;
-  border-bottom: 0;
-  position:relative;
-  min-height: 0;
+}
+#overlay #topbar,
+#overlay  #banner {
+  padding-left: 0;
+  padding-right: 0;
 }
 #overlay #main-content {
   padding-top: 0;
@@ -1356,17 +1351,23 @@ ul.action-links li a:focus {
   right:auto;
   top:auto;
 }
-ol#crumbs,
 #overlay #skip-nav,
 #overlay header,
 #overlay footer,
 #overlay h1#page-title,
-#overlay #primary-tasks {
+#overlay #primary-tasks,
+#topbar time {
   display: none;
 }
-#topbar ol#crumbs,
-#overlay ol#crumbs {
-  display: block;
+#overlay ul.secondary li a {
+  padding: 0 20px 0 0;
+}
+#overlay-titlebar {
+  padding: 0 14px;
+}
+#overlay div.region-help,
+#overlay div.messages {
+    margin: 20px 0;
 }
 
 /* Color form */

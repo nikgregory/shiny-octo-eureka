@@ -10,16 +10,6 @@
  */
 
 /**
- * Override or insert variables into all templates.
- */
-/* -- Delete this line if you want to use these functions
-function adaptivetheme_subtheme_preprocess(&$vars, $hook) {
-}
-function adaptivetheme_subtheme_process(&$vars, $hook) {
-}
-// */
-
-/**
  * Override or insert variables into the html templates.
  */
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
@@ -37,6 +27,8 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   * AT automates adding IE stylesheets, simply add to the array using
   * the conditional comment as the key and the stylesheet name as the value.
   *
+  * See our online help: http://adaptivethemes.com/documentation/working-with-internet-explorer
+  *
   * For example to add a stylesheet for IE8 only use:
   *
   *  'IE 8' => 'ie-8.css',
@@ -50,6 +42,7 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   load_subtheme_ie_styles($ie_files, 'adaptivetheme_subtheme');
   // */
 }
+
 /* -- Delete this line if you want to use this function
 function adaptivetheme_subtheme_process_html(&$vars) {
 }
@@ -61,6 +54,7 @@ function adaptivetheme_subtheme_process_html(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_page(&$vars) {
 }
+
 function adaptivetheme_subtheme_process_page(&$vars) {
 }
 // */
@@ -71,6 +65,7 @@ function adaptivetheme_subtheme_process_page(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_node(&$vars) {
 }
+
 function adaptivetheme_subtheme_process_node(&$vars) {
 }
 // */
@@ -81,6 +76,7 @@ function adaptivetheme_subtheme_process_node(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_comment(&$vars) {
 }
+
 function adaptivetheme_subtheme_process_comment(&$vars) {
 }
 // */
@@ -91,6 +87,7 @@ function adaptivetheme_subtheme_process_comment(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_block(&$vars) {
 }
+
 function adaptivetheme_subtheme_process_block(&$vars) {
 }
 // */
