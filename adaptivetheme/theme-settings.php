@@ -19,14 +19,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     return;
   }
 
-  // Add some CSS so we can style our form in any theme, i.e. in Seven.
-  drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css', array('group' => CSS_THEME));
-
   // Layout settings
   $form['at'] = array(
     '#type' => 'vertical_tabs',
     '#weight' => -10,
     '#default_tab' => 'defaults',
+    '#attached' => array(
+      'css' => array(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css'),
+    ),
   );
   // bigscreen
   $form['at']['bigscreen'] = array(
