@@ -44,8 +44,8 @@ a:focus {}
 
 /* Menus */
 .menu,
-.menu ul, 
-.menu ul ul, 
+.menu ul,
+.menu ul ul,
 .menu ul ul ul {}
 
 /* Menu li styles */
@@ -70,8 +70,7 @@ a:focus {}
   padding: 0;
 }
 
-/* Breadcrumbs
-   AT7 builds brumbcrumb trails as an ordered list. */
+/* Breadcrumbs - AT7 builds brumbcrumb trails as an ordered list. */
 #breadcrumb {
   padding-bottom: 1em;
 }
@@ -128,12 +127,13 @@ ul.pager li.pager-next     {}
 ul.pager li.pager-last     {}
 
 /* Superfish Skins */
-.sf-menu {
+ul.sf-menu {
   margin-bottom: 0;
 }
-.sf-menu li {}
-
-.sf-menu a {
+ul.sf-menu li ul {
+  display: none; /* Prevent momentary display of sub menus */
+}
+ul.sf-menu a {
   border-left: 0;
   border-top: 0;
   padding: 0 10px;
@@ -142,15 +142,14 @@ ul.pager li.pager-last     {}
   line-height: 2.5em;
 }
 
-.sf-menu a:link,
-.sf-menu a:visited  {}
+ul.sf-menu a:link,
+ul.sf-menu a:visited  {}
 
-
-.sf-menu li:hover,
-.sf-menu li.sfHover,
-.sf-menu a:focus,
-.sf-menu a:hover,
-.sf-menu a:active {
+ul.sf-menu li:hover,
+ul.sf-menu li.sfHover,
+ul.sf-menu a:focus,
+ul.sf-menu a:hover,
+ul.sf-menu a:active {
   outline: 0;
 }
 
@@ -274,4 +273,3 @@ ul.secondary li a.active {
   border-bottom: none;
   text-decoration: underline;
 }
-

@@ -213,7 +213,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   if (theme_get_setting('extra_article_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
-    if ($vars['picture']) {
+    if ($vars['display_submitted'] && !empty($vars['picture'])) {
       $vars['classes_array'][] = 'article-with-picture';
     }
   }
