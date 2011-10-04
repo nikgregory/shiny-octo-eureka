@@ -751,7 +751,7 @@ a.tabledrag-handle .handle {
 }
 div.region-help,
 div.messages {
-  margin: 20px 10px;
+  margin: 20px 0;
 }
 tr #acquia-agent-no-search {
   background-position: 24px 5px;

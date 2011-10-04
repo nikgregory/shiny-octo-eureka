@@ -2,8 +2,12 @@
 
 /* Header */
 #page > header {}
-#logo {}
-#page > header > hgroup {}
+#logo {
+  margin: 0 10px;
+}
+#page > header > hgroup {
+  margin: 0 10px;
+}
 #site-name {}
 #site-name a    {}
 #site-name a:visited {}
@@ -74,4 +78,17 @@ span.search-info-upload  {}
 .maintenance-page footer a {
   text-decoration: none;
   color: #ccc;
+}
+
+/* Prevent overflowing content */
+header[role=banner],
+.content-inner,
+.nav,
+.region-sidebar-first,
+.region-sidebar-second,
+.region-secondary-content,
+.region-tertiary-content,
+.region-footer {
+  overflow: visible;
+  word-wrap: break-word;
 }

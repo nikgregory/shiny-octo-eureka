@@ -11,7 +11,15 @@ a.active  {}
 a:active,
 a:focus {}
 
-/* Any menu block in the menu-bar region. */
+/**
+ * Primary, Seondary and Menu bar menus, use one of the following id's for granular control:
+ * #menu-bar
+ * #primary-menu-bar
+ * #secondary-menu-bar
+ */
+.nav nav {
+  margin: 0 10px;
+}
 .nav {
   clear:both;
   margin: 0;
@@ -37,37 +45,45 @@ a:focus {}
   margin: 0;
   padding: 0;
 }
+
+/* Menu bar block */
 .nav .block {
-  margin: 0;
-  padding: 0;
+  margin-bottom: 0;
 }
 
 /* Menus */
-.menu,
-.menu ul,
-.menu ul ul,
-.menu ul ul ul {}
+ul.menu {
+  margin-left: 15px;
+}
+ul.menu ul,
+ul.menu ul ul,
+ul.menu ul ul ul {
+  margin-left: 15px;
+}
 
 /* Menu li styles */
-.menu li {}
+ul.menu li {
+  margin: 0;
+}
+ul.menu li.collapsed {}
+ul.menu li.expanded  {}
+ul.menu li.leaf      {}
 
-.menu li.collapsed {}
-.menu li.expanded  {}
-.menu li.leaf      {}
+ul.menu li a:link,
+ul.menu li a:visited {}
 
-.menu li a:link,
-.menu li a:visited {}
-.menu li a:hover,
-.menu li a:focus,
-.menu li a:active  {}
-.menu li.active a  {}
-.menu li.active-trail a {}
+ul.menu li a:hover,
+ul.menu li a:focus,
+ul.menu li a:active  {}
 
-.menu li.first {}
-.menu li.last  {}
+ul.menu li.active a  {}
+ul.menu li.active-trail a {}
+
+ul.menu li.first {}
+ul.menu li.last  {}
 
 .block .menu li.content {
-  padding: 0;
+  padding: 0; /* this class can be a problem in some occurances, so mitigate risk */
 }
 
 /* Breadcrumbs - AT7 builds brumbcrumb trails as an ordered list. */
@@ -173,12 +189,8 @@ ul.sf-menu a:active {
 .sf-vertical li {
   width: 100%;
 }
-.sf-vertical li {
-  border-bottom: 1px solid #fff;
-}
-.sf-vertical li.last {
-  border-bottom: none;
-}
+.sf-vertical li {}
+.sf-vertical li.last {}
 .sf-vertical li:hover ul,
 .sf-vertical li.sfHover ul {
   left: 100%; /* match ul width */

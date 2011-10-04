@@ -35,6 +35,7 @@ a img {
 }
 img {
   max-width: 100%; /* flexible images - can cause issues in table cells where no width is set on the column, only in webkit and IE 7/8 */
+  height: auto;
 }
 p {
   margin: 0 0 1.5em;
@@ -85,12 +86,16 @@ th {
 /* Lists */
 ul,
 ol {
-  margin: 0 0 1.5em 1em;
+  margin: 0 0 1.5em 40px;
   padding: 0;
 }
 .item-list ul,
 .item-list ol {
-  margin: 0 0 0 1em;
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+.item-list ul li {
+  margin: 0;
   padding: 0;
 }
 ul ul,
@@ -130,5 +135,5 @@ dt {
   font-weight: 700;
 }
 dd {
-  margin: 0 0 1.5em 1.538em;
+  margin: 0 0 1.5em 40px;
 }

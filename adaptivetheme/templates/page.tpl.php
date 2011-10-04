@@ -86,7 +86,7 @@
   <?php print render($page['tertiary_content']); ?>
 
   <?php if ($page['footer']): ?>
-    <footer><?php print render($page['footer']); ?></footer>
+    <footer role="contentinfo"><?php print render($page['footer']); ?></footer>
   <?php endif; ?>
 
 </div>

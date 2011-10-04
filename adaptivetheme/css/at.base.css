@@ -27,9 +27,19 @@ section {
   display: block;
 }
 
-/* Enable responsive images */
+/**
+ * Flexible Images
+ * - This can cause issues in table cells where no width is set on the column,
+ *   only in some versions of webkit and IE 7/8.
+ * - Google maps break also, see below for the override to fix Gmaps.
+ */
 img {
   max-width: 100%;
+  height: auto;
+}
+/* Override max-width 100% for Gmaps */
+.gmap img {
+  max-width: none;
 }
 
 /* Accessibility helpers */

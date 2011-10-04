@@ -18,14 +18,6 @@
 .sidebar .block-title {}
 .sidebar .block-content {}
 
-/* Block lists */
-.block ul li {
-  margin: 0 0 0 0.5em;
-}
-.block .item-list ul  {
-  margin-left: 1em;
-}
-
 /* Gpanel blocks */
 .gpanel .block {}
 .gpanel .block-inner {}
