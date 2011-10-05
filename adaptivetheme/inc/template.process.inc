@@ -25,15 +25,10 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   global $language;
 
-  // set the doctype with vars
-  if (module_exists('rdf')) {
-    $vars['doctype'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">' . "\n";
-    $vars['rdf_profile'] = ' profile="' . $vars['grddl_profile'] . '"';
-  }
-  else {
-    $vars['doctype'] = '<!DOCTYPE html>' . "\n";
-    $vars['rdf_profile'] = '';
-  }
+  // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
+  // compatibility with pre 7.x-2.1 versions of html.tpl.php
+  $vars['doctype'] = '<!DOCTYPE html>' . "\n";
+  $vars['rdf_profile'] = '';
 
   // Clean up the lang attributes, great idea Zen
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
@@ -62,7 +57,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
       $vars['classes_array'][] = drupal_html_class('section-' . $section);
     }
-    // Set classes for views and panels pages, thanks again Zen!
+    // Set classes for views and panels pages, thanks again Zen, you're amazing!
     $vars['menu_item'] = menu_get_item();
     switch ($vars['menu_item']['page_callback']) {
       case 'views_page':
