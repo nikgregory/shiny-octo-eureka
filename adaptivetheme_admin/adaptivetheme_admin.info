@@ -1,7 +1,7 @@
 
 ;----------// Theme Information
   name        = AT Admin
-  description = A better admin theme for Drupal 7. Clean and calm look and feel. Includes left and right sidebars, Overlay support and settings for font family and font size.
+  description = A better admin theme for Drupal 7. Clean, calm, invisible. Includes left and right sidebars, Overlay support and settings for font family and font size.
   core        = 7.x
   engine      = phptemplate
   screenshot  = screenshot.png
@@ -9,19 +9,14 @@
 
 ;----------// Stylesheets
   stylesheets[all][] = css/at_admin.css
-  
-  ; If you are using Gpanels you should enable this to support
-  ; Gpanels in responsive layouts.
-  ;stylesheets[all][] = css/responsive-gpanels.css
-  
-  ; Enable this if you want to customize the responsive styles
-  ;stylesheets[all][] = css/responsive-style.css
 
 ;----------// Regions
-  regions[help]           = Help
-  regions[content]        = Main Content
+
+  regions[content]        = Main content
   regions[sidebar_first]  = Sidebar first
   regions[sidebar_second] = Sidebar second
+  regions[highlighted]    = Highlighted
+  regions[help]           = Help
   regions[footer]         = Footer
   regions[page_top]       = Page top
   regions[page_bottom]    = Page bottom
@@ -37,7 +32,6 @@
   features[] = secondary_menu
 
 ;----------// Theme Setting Defaults
-  ; Layout settings
 
   ; Standard bigscreen
   settings[bigscreen_layout]         = 'three-col-right'

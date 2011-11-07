@@ -14,9 +14,6 @@
   stylesheets[all][] = css/at.layout.css
   stylesheets[all][] = css/at.messages.css
 
-;----------// Stylesheets
-  scripts[] = js/respond.js
-
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second

@@ -97,6 +97,17 @@ function adaptivetheme_preprocess_html(&$vars) {
     );
   }
 
+  // Ad respond.js to the footer to avoid crashes in IE8
+  drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
+    array(
+      'type' => 'file',
+      'scope' => 'footer',
+      'group' => JS_THEME,
+      'preprocess' => TRUE,
+      'cache' => TRUE,
+    )
+  );
+
   // add a body class is the site name is hidden
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['classes_array'][] = 'site-name-hidden';
