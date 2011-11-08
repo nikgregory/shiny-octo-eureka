@@ -79,6 +79,7 @@ svg:not(:root) {
   overflow: hidden;
 }
 
+/* Helpful classes for hiding content */
 .offscreen {
   position: absolute;
   top: -99999em;
