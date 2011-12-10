@@ -70,7 +70,8 @@ video {
 .gmap img,
 .view-gmap img,
 .openlayers-map img,
-#getlocations_map_canvas img {
+#getlocations_map_canvas img,
+#locationmap_map img {
   max-width: none !important;
 }
 
