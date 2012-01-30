@@ -1473,7 +1473,7 @@ ul.action-links li a:focus {
 .views-displays .secondary a:hover, .views-displays .secondary .active a {
   background-color: #d7d7d7;
   border-bottom-width: 1px;
-  color: #666666;
+  color: #666;
 }
 .views-ui-dialog #views-ajax-popup {
   -moz-box-shadow: 0 4px 4px 4px rgba(0,0,0,0.4);
@@ -1482,4 +1482,10 @@ ul.action-links li a:focus {
 }
 .views-ui-dialog input.form-submit {
   margin: 3px 10px 3px 0;
+}
+.views-edit-view .ctools-dropbutton .ctools-content input,
+.views-edit-view .action-list input {
+  color: #3188d1;
+  outline: 0;
+  font-weight: 300;
 }
