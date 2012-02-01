@@ -91,7 +91,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     drupal_add_css($filepath, array(
       'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
       'group' => CSS_THEME,
-      'media' => 'screen',
+      'media' => 'all',
       'every_page' => TRUE,
       )
     );

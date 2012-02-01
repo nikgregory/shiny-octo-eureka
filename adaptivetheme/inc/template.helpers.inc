@@ -18,7 +18,7 @@ function load_subtheme_media_queries($files, $theme_name) {
     drupal_add_css($filepath, array(
       'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
       'group' => CSS_THEME,
-      'media' => 'screen',
+      'media' => 'all',
       'every_page' => TRUE,
       'weight' => 99,
       )
