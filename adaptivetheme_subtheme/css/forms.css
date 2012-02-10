@@ -129,6 +129,10 @@ html.js fieldset.collapsed {
 #search-block-form .form-submit {}
 #search-block-form .form-text {}
 
+.panel-pane #search-block-form {
+  margin-bottom: 20px;
+}
+
 /* Advanced search form */
 fieldset#edit-advanced fieldset {
   float: left;

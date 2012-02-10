@@ -58,64 +58,13 @@
 .region-secondary-content,
 .region-tertiary-content,
 .region-footer,
-#block-admin-display-form ,
-.gpanel {
+#block-admin-display-form  {
   clear: both;
 }
 
 /* Strip block margin inside content column area. */
 .content-inner .block {
   margin: 0;
-}
-
-/* Maintain backwards compatibility with older AT designs. */
-.block {
-  position: relative;
-}
-.block-superfish,
-.block-nice-menus {
-  position: static;
-}
-
-/* GPanels */
-.gpanel .region {
-  display: inline;
-  position: relative;
-  float: left;
-}
-.two-33-66 .region-two-33-66-second {
-  width: 66.333%;
-}
-.two-66-33 .region-two-66-33-first {
-  width: 66.666%;
-}
-.five-5x20 .region {
-  width: 20%;
-}
-.six-6x16 .region {
-  width: 16.666%;
-}
-.two-50 .region,
-.three-50-25-25 .region-three-50-25-25-first,
-.three-25-25-50 .region-three-25-25-50-third {
-  width: 50%;
-}
-.three-3x33 .region,
-.two-33-66 .region-two-33-66-first,
-.two-66-33 .region-two-66-33-second {
-  width: 33.333%;
-}
-.four-4x25 .region,
-.three-25-25-50 .region-three-25-25-50-first,
-.three-25-25-50 .region-three-25-25-50-second,
-.three-50-25-25 .region-three-50-25-25-second,
-.three-50-25-25 .region-three-50-25-25-third {
-  width: 25%;
-}
-
-/* Panels */
-.block-panels_mini {
-  padding: 0;
 }
 
 /* Compass clearfix */
@@ -128,9 +77,41 @@
   zoom: 1;
 }
 
+/* Mini Panels */
+.block-panels_mini {
+  padding: 0;
+}
+
+/* AT Panels */
+.page-panels #block-system-main .block-inner {
+  margin: 0;
+}
+.block-panels-mini .block-inner  {
+  margin-left: 0;
+  margin-right: 0;
+}
+.page-panels .panel-pane {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.at-panel .region {
+  display: inline;
+  float: left;
+}
+.at-panel .conditional-stack-top,
+.at-panel .conditional-stack-bottom {
+  clear: both;
+  display: block;
+  float: none;
+}
+
 /* lte IE7 Layout fixes - these use the html element classes rather 
  * than loading a global IE stylesheet */
 /* Be sure the layout is set */
+.ie6-7 .at-panel .region {
+  position: relative;
+  overflow: hidden;
+}
 .ie6-7 #main-content,
 .ie6-7 #columns {
   display: block;
@@ -142,80 +123,4 @@
 .ie6-7 .region-sidebar-second,
 .ie6-7 .gpanel .region {
   zoom: 1;
-}
-
-/* Circumvent sub-pixel rounding */
-.ie6-7 .gpanel {
-  clear: both;
-}
-.ie6-7 .gpanel .region {
-  display: inline;
-  position: relative;
-  overflow: hidden;
-}
-.ie6-7 .two-50 .region-two-50-second,
-.ie6-7 .two-66-33 .region-two-66-33-second,
-.ie6-7 .two-33-66 .region-two-33-66-second {
-  float: right;
-}
-.ie6-7 .two-33-66 .region-two-33-66-first,
-.ie6-7 .two-66-33 .region-two-66-33-second {
-  width: 33%;
-}
-.ie6-7 .two-66-33 .region-two-66-33-first,
-.ie6-7 .two-33-66 .region-two-33-66-second {
-  width: 66%;
-}
-.ie6-7 .three-3x33 .region {
-  width: 32.666%;
-}
-.ie6-7 .five-5x20 .region {
-  width: 19.2%;
-}
-.ie6-7 .six-6x16 .region {
-  width: 15.833%;
-}
-.ie6-7 .two-50 .region,
-.ie6-7 .three-25-25-50 .region-three-25-25-50-third,
-.ie6-7 .three-50-25-25 .region-three-50-25-25-first {
-  width: 49.5%;
-}
-.ie6-7 .three-25-25-50 .region-three-25-25-50-first,
-.ie6-7 .three-25-25-50 .region-three-25-25-50-second,
-.ie6-7 .three-50-25-25 .region-three-50-25-25-second,
-.ie6-7 .three-50-25-25 .region-three-50-25-25-third,
-.ie6-7 .four-4x25 .region {
-  width: 24.25%;
-}
-.ie6-7 .three-3x33 .region-three-33-second,
-.ie6-7 .three-3x33 .region-three-2-33-second,
-.ie6-7 .three-25-25-50 .region-three-25-25-50-second,
-.ie6-7 .three-50-25-25 .region-three-50-25-25-second,
-.ie6-7 .four-4x25 .region-four-second,
-.ie6-7 .five-5x20 .region-five-second,
-.ie6-7 .six-6x16 .region-six-second {
-  right: -1%;
-}
-.ie6-7 .three-3x33 .region-three-33-third,
-.ie6-7 .three-3x33 .region-three-2-33-third,
-.ie6-7 .three-25-25-50 .region-three-25-25-50-third,
-.ie6-7 .three-50-25-25 .region-three-50-25-25-third,
-.ie6-7 .four-4x25 .region-four-third,
-.ie6-7 .four-4x25 .region-four-2-third,
-.ie6-7 .five-5x20 .region-five-third,
-.ie6-7 .six-6x16 .region-six-third {
-  right: -2%;
-}
-.ie6-7 .four-4x25 .region-four-fourth,
-.ie6-7 .four-4x25 .region-four-2-fourth,
-.ie6-7 .five-5x20 .region-five-fourth,
-.ie6-7 .six-6x16 .region-six-fourth {
-  right: -3%;
-}
-.ie6-7 .five-5x20 .region-five-fifth,
-.ie6-7 .six-6x16 .region-six-fifth {
-  right: -4%;
-}
-.ie6-7 .six-6x16 .region-six-sixth {
-  right: -5%;
 }

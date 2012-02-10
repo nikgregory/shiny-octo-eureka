@@ -108,7 +108,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     )
   );
 
-  // add a body class is the site name is hidden
+  // add a body class if the site name is hidden
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['classes_array'][] = 'site-name-hidden';
   }

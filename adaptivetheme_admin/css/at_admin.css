@@ -1143,6 +1143,15 @@ div.vertical-tabs ul.vertical-tabs-list li {
 #system-theme-settings #edit-font label {
   width: 3.6em;
 }
+html.js input.form-autocomplete {
+  background-position: 100% 4px;
+}
+html.js input.throbbing {
+  background-position: 100% -16px;
+}
+div.form-type-textfield {
+  position: relative;
+}
 
 /* Panels layout page TODO: check accessibility regarding width settings */
 .panels-layouts-checkboxes .form-checkboxes .form-item,
@@ -1162,7 +1171,9 @@ div.vertical-tabs ul.vertical-tabs-list li {
   width: 120px;
 }
 #panels-choose-layout .layout-icon .caption {
-  width: 120px;
+  font-size: 0.9em;
+  padding: 0 4px;
+  width: 112px;
 }
 #update-manager-install-form p {
   margin-top: .75em;
@@ -1536,7 +1547,6 @@ ul.action-links li a:focus {
   padding: 0;
   font-weight: 700;
 }
-
 .panels-layouts-checkboxes .form-checkboxes .form-item,
 #panels-choose-layout .form-type-radio,
 .panels-choose-layout .form-type-radio {
@@ -1583,4 +1593,39 @@ ul.action-links li a:focus {
 }
 .page-manager-tabs div.messages {
   margin: 15px 0;
+}
+#panels-dnd-main div.panel-region h2.label {
+  font-size: 1em;
+  margin: 4px 0;
+}
+#panels-dnd-main .panel-pane .pane-title {
+  padding: 2px 0 5px;
+  font-size: 1em;
+}
+
+/* Module Filter */
+#module-filter-squeeze {
+  padding: 10px 10px 5px;
+}
+
+/* Admin menu */
+#admin-menu, #admin-menu ul {
+  font-size: small-x;
+  line-height: 1.3;
+}
+
+/* Context module */
+#context-blockform td.blocks, #context-blockform td.selector {
+  vertical-align: top;
+}
+#context-blockform .context-blockform-selector {
+  border: 1px solid #ddd;
+  height: 30em;
+  padding: 10px;
+}
+#context-blockform .context-blockform-selector label {
+  margin-bottom: 2px;
+}
+#context-blockform .context-blockform-selector .form-checkboxes {
+  margin-bottom: 20px;
 }

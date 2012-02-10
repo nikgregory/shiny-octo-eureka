@@ -52,16 +52,3 @@
   list-style: none;
   padding: 0 10px 0 0;
 }
-
-/* Imagefield skinr settings */
-.ai-l .field-type-image {
-  margin: 4px 20px 10px 0;
-}
-.ai-r .field-type-image {
-  margin: 4px 0 10px 20px;
-}
-.ai-b,
-.ai-b .block-inner,
-.ai-b .block-content {}
-.ai-b .block-content p,
-.ai-b .block-content div.field-type-image {}

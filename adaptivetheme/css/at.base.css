@@ -43,6 +43,8 @@ section {
  * Flexible Media and Cross browser improvements
  * - This can cause issues in table cells where no width is set on the column,
  *   only in some versions of webkit and IE 7/8.
+ * - declaring the width attribute on image elements and using max-width causes
+ *   the "dissappering images" bug in IE8.
  * - Google maps break also, see below for fixes.
  */
 img {
@@ -64,7 +66,10 @@ video {
 .ie6 object,
 .ie6 embed,
 .ie6 video {
-  width: 100%
+  width: 100%;
+}
+.ie8 img {
+  max-width: none;
 }
 /* Override max-width 100% for map displays */
 .gmap img,

@@ -2,9 +2,7 @@
 
 /* Comment wrapper wraps all comments and the comment form. */
 #comments {}
-#comments h2.title {
-  margin-bottom: .5em;
-}
+#comments h2.title {}
 
 /* Wrapper class for each individual comment. */
 .comment {
@@ -64,9 +62,9 @@ ul.links li.comment_delete a {}
 .comment ul.links li.last  {}
 
 /* Author */
-.comment-by-anonymous   {}
+.comment-by-anonymous {}
 .comment-by-article-author {}
-.comment-by-viewer      {}
+.comment-by-viewer {}
 
 /* New */
 .comment-new {}
@@ -82,9 +80,9 @@ ul.links li.comment_delete a {}
 .comment-unpublished .unpublished {}
 
 /* Sytle comments by article type. */
-.book-comments    {}
-.blog-comments    {}
-.forum-comments   {}
-.page-comments    {}
-.poll-comments    {}
+.book-comments {}
+.blog-comments {}
+.forum-comments {}
+.page-comments {}
+.poll-comments {}
 .article-comments {}
