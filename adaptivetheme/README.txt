@@ -19,6 +19,13 @@ that you can drop into your subtheme. For example you may want a 4 column footer
 or a 3 column panel above your main content. Gpanels makes this as easy as copy 
 and paste. See the README in the gpanels directory for instructions.
 
+-- PANELS SUPPORT
+
+Like all Gpanels the built in Panels module layouts are all responsive - simply 
+enable this theme, go to Panels and start building your pages. All the Panels
+layouts will load automatically inside Panels - they are called AT Responsive Panels.
+Only AT Responsive Panels are responsive, the normal Panels layout are not.
+
 -- THEME SETTINGS --
 
 The base theme provides the core layout settings that provide support for 
