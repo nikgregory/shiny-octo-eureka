@@ -5,6 +5,7 @@ function adaptivetheme_sixcol_6x16_panels_layouts() {
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'sixcol_6x16.png',
     'theme'    => 'sixcol_6x16',
+    'admin css' => 'sixcol_6x16.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'six_first'  => t('Column 1'),

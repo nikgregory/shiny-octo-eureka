@@ -5,6 +5,7 @@ function adaptivetheme_threecol_inset_left_panels_layouts() {
     'category' => t('AT Responsive Panels - Inset'),
     'icon' => 'threecol_inset_left.png',
     'theme' => 'threecol_inset_left',
+    'admin css' => 'threecol_inset_left.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'threecol_inset_left_sidebar' => t('Sidebar'),

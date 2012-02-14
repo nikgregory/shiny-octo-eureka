@@ -5,7 +5,7 @@ function adaptivetheme_twocol_50_panels_layouts() {
     'category' => t('AT Responsive Panels - 2 column'),
     'icon'     => 'twocol_50.png',
     'theme'    => 'twocol_50',
-    'admin css' => 'twocol_50.css',
+    'admin css' => 'twocol_50.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'twocol_50_top'    => t('Top (conditional)'),

@@ -5,6 +5,7 @@ function adaptivetheme_threecol_50_25_25_panels_layouts() {
     'category' => t('AT Responsive Panels - 3 column'),
     'icon'     => 'threecol_50_25_25.png',
     'theme'    => 'threecol_50_25_25',
+    'admin css' => 'threecol_50_25_25.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'three_50_25_25_top'    => t('Top (conditional)'),

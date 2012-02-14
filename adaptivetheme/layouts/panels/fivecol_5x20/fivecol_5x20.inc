@@ -5,6 +5,7 @@ function adaptivetheme_fivecol_5x20_panels_layouts() {
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'fivecol_5x20.png',
     'theme'    => 'fivecol_5x20',
+    'admin css' => 'fivecol_5x20.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'five_first'  => t('Column 1'),

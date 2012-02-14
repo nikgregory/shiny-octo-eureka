@@ -5,6 +5,7 @@ function adaptivetheme_fourcol_4x25_panels_layouts() {
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'fourcol_4x25.png',
     'theme'    => 'fourcol_4x25',
+    'admin css' => 'fourcol_4x25.admin.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'four_first'  => t('Column 1'),
