@@ -5,6 +5,7 @@ function adaptivetheme_twocol_brick_panels_layouts() {
     'category' => t('AT Responsive Panels - 2 column'),
     'icon'     => 'twocol_brick.png',
     'theme'    => 'twocol_brick',
+    'admin css' => 'twocol_brick.css',
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'twocol_brick_top'         => t('Top (conditional)'),
