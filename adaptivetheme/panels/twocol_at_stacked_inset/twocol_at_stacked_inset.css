@@ -1,9 +1,0 @@
-/* twocol_at_stacked_inset.css */
-
-.at-panel div.block,.at-panel div.panel-pane{padding:0 10px;}
-.at-panel{clear:both;}
-.center-wrapper{float:left;margin:0;width:74.5%;}
-.twocol-at-stacked-inset .panel-col-first {float:left;width:25%;}
-.twocol-at-stacked-inset .panel-separator,
-.twocol-at-stacked-inset .panel-col .inside{margin:0;}
-.twocol-at-stacked-inset .panel-col-bottom {clear:both;}
