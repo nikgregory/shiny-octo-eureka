@@ -17,7 +17,6 @@ body.section-admin {
 .fs-medium     {font-size: 1em;}
 .fs-large       {font-size: 1.083em;}
 .fs-largest   {font-size: 1.167em;}
-
 body.ff-sss  {font-family: Candara, "Trebuchet MS", "Helvetica Neue", Arial, Helvetica, sans-serif;}
 body.ff-ssl  {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
 body.ff-a      {font-family: Arial, Helvetica, sans-serif;}
@@ -522,11 +521,15 @@ ul.primary li a {
   color: #fff;
   border: 0 !important;
   margin-right: 3px;
-  padding: .45em 16px;
+  padding: 0 16px;
   font-weight: 700;
   font-size: 0.923em;
+  display: block;
+  float: left;
+  line-height: 2.25;
   text-transform: uppercase;
   text-decoration: none;
+  white-space: normal;
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-top-left-radius: 6px;
   -webkit-border-top-right-radius: 6px;
@@ -749,33 +752,83 @@ a.tabledrag-handle .handle {
   width: 60px;
 }
 
-/* Messages and Help */
-div.region-help,
-div.messages {
-  margin: 20px 0;
-}
+/* Message */
 div.messages {
   background-position: 8px 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
   -khtml-border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
+
+}
+#block-system-help {
+  background: url(images/help.png) no-repeat 5px 5px #f0f8ff;
+  border: 0;
+  margin: 10px 10px 0;
+  padding: 0;
+}
+.block-region {
+  background-color: #f7f8f8;
+  border: 2px dashed #ddd;
+  clear: both;
+  color: #666;
+  font-family: Consolas, "Lucida Console", Menlo, Monaco, "DejaVu Sans Mono", monospace, sans-serif;
+  font-size: 1.077em;
+  font-weight: 400;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding: 3px 6px 1px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+  
+}
+
+#page article.article-unpublished,
+#page article.comment-unpublished {
+  background-color: #fffce5;
+}
+#page .article-unpublished .unpublished,
+#page .comment-unpublished .unpublished {
+  background: url("images/warning.png") no-repeat 1px 7px;
+  color: #625b42;
+  font-weight: 700;
+  padding: 5px 10px 10px 20px;
+}
+div#acquia-agent-no-search {
+  padding-left: 3em !important;
+  margin: 8px 0;
+}
+a.block-demo-backlink,
+a.block-demo-backlink:link,
+a.block-demo-backlink:visited {
+  left: 50%;
+  margin-left: -9em;
+  text-align: center;
+  width: 18em;
+}
+.vertical-tab-button-error a {
+  border: 1px solid #FC6F5D;
+}
+body.maintenance-page,
+body.maintenance-page .container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 30px;
+}
+body.maintenance-page #header {
+  padding-left: 0;
+  padding-right: 0;
+}
+div.region-help,
+div.messages {
+  margin: 20px 0;
 }
 tr #acquia-agent-no-search {
   background-position: 24px 5px;
   padding-left: 75px;
-}
-div.error a:link,
-div.error a:visited,
-div.status a:link,
-div.status a:visited,
-div.help a:link,
-div.help a:visited,
-div.warning a:link,
-div.warning a:visited {
-  font-weight: 700;
 }
 div.error a:hover,
 div.error a:focus,
@@ -787,29 +840,36 @@ div.warning a:hover,
 div.warning a:focus {
   text-decoration: underline;
 }
-div.admin-requirements,
-div.admin-required {
-  color:#666;
-  padding:0;
-  line-height:1.5;
-}
-#block-system-help {
-  background-color: #f0f8ff;
-  background-position: 5px 5px;
-  border: 0;
-  margin: 10px 10px 0;
+div.admin-requirements,div.admin-required {
+  color: #666;
+  line-height: 1.5;
   padding: 0;
 }
 #block-system-help .content {
-  margin: 0;
   min-height: 30px;
+  margin: 0;
   padding: 5px 0 10px 25px;
 }
-#block-system-help .content p:first-child {
-  margin-top: 0;
+#block-system-help code,
+div.messages code,
+div.error a:link,
+div.error a:visited,
+div.status a:link,
+div.status a:visited,
+div.help a:link,
+div.help a:visited,
+div.warning a:link,
+div.warning a:visited {
+  font-weight: 700;
 }
+#block-system-help p:last-child,
+#block-system-help ul:last-child,
 #block-system-help .content p:last-child {
   margin-bottom: 0;
+}
+#block-system-help p:first-child,
+#block-system-help .content p:first-child {
+  margin-top: 0;
 }
 
 /* Forms - hodge podge of styles and targets */
@@ -1462,6 +1522,12 @@ ul.action-links li a:focus {
   line-height: inherit;
   margin: 0;
 }
+.views-displays .secondary .action-list {
+  top: 27px;
+}
+.views-displays .secondary .action-list li {
+  width: 100%;
+}
 .ctools-toggle {
   margin-top: 0.615em;
 }
@@ -1628,4 +1694,17 @@ ul.action-links li a:focus {
 }
 #context-blockform .context-blockform-selector .form-checkboxes {
   margin-bottom: 20px;
+}
+
+/* Helpful classes for hiding content */
+.offscreen {
+  position: absolute;
+  top: -99999em;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  outline: 0;
+}
+.element-hidden {
+  display: none;
 }

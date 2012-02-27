@@ -1,0 +1,255 @@
+/*
+ * NOTICE: This is a commercial Drupal theme. Elements of this theme including this field
+ * are licensed under a standard commercial license which does not permit redistribution. 
+ */
+
+html {
+}
+body {
+}
+
+/* Main wrappers (if using wrappers) */
+div#page {
+}
+#top-menu-wrapper {
+}
+#header-wrapper {
+}
+#menu-wrapper {
+}
+#secondary-content-wrapper {
+}
+#tertiary-content-wrapper {
+}
+#sub-panels-wrapper {
+}
+#footer-panels-wrapper {
+}
+#footer-wrapper {
+}
+
+/* Links */
+a:link,
+a:visited,
+a:active,
+a.active {
+}
+a:hover,
+a:focus {
+}
+
+/* Header */
+#site-slogan,
+#site-name a {}
+
+.region-header .block a,
+.region-header .block-menu a,
+.region-header .block .item-list a {}
+.region-header #block-user-login label,
+.region-header #search-block-form .form-submit {}
+
+/* Menu bar */
+.nav ul li a,
+.nav ul li a:hover,
+.nav ul li a:focus,
+.nav  ul li a:active {}
+
+.nav ul li a.active,
+.nav ul li.active-trail a {}
+
+/* Superfish Skin */
+.sf-menu a {
+  border: 0;
+}
+
+.sf-navbar.sf-style-none {}
+
+.sf-menu.sf-style-none li {}
+.sf-menu.sf-style-none li a {}
+
+.sf-menu.sf-style-none li li {}
+.sf-menu.sf-style-none li li li {}
+
+.sf-menu.sf-style-none li:hover,
+.sf-menu.sf-style-none li.sfHover,
+.sf-menu.sf-style-none li.active a {}
+
+.sf-menu.sf-style-none li a:focus,
+.sf-menu.sf-style-none li a:hover,
+.sf-menu.sf-style-none li a:active {}
+
+.sf-menu.sf-style-none li li:hover,
+.sf-menu.sf-style-none li li.sfHover,
+.sf-menu.sf-style-none li li.active a {}
+
+.sf-menu.sf-style-none li li a:focus,
+.sf-menu.sf-style-none li li a:hover,
+.sf-menu.sf-style-none li li a:active {}
+
+/* Book nav */
+.book-navigation ul.menu,
+.book-navigation .page-links {}
+
+/* Breadcrumb */
+#breadcrumb-wrapper {}
+#breadcrumb-wrapper a {}
+
+/* Footer */
+#footer, {}
+#footer a {}
+
+/* Blocks */
+.block-inner {}
+.block-title {}
+.block-content {}
+.block ul li a {}
+
+#main-content .block-content {}
+.block .article,
+.block .article-sticky {}
+
+.block-menu a,
+.block .item-list a {}
+
+/* Poll */
+.poll .bar {}
+.poll .bar .foreground {}
+
+/* Articles */
+.article-teaser {}
+.article-title {}
+.article-teaser.article-sticky {}
+
+/* Fields */
+.field-type-image {}
+.field-type-image .field-items {}
+.field-type-image figure {}
+
+/* Comments */
+.comment {}
+.comment-title {}
+#comments .odd {}
+#comments .even {}
+
+/* Aggregator */
+#aggregator .feed-source {}
+
+/* Forum */
+#forum td.container {}
+#forum thead, 
+#forum tbody {}
+
+/* Profile */
+#profile .profile {}
+#profile h2 {}
+
+/* Pager */
+div.item-list ul.pager li a,
+div.item-list ul.pager li a:hover,
+div.item-list ul.pager li a:focus,
+div.item-list ul.pager li a:active {
+}
+
+/* Local task tabs */
+ul.primary li a {
+  background: #ffffff;
+  border: solid 1px #ededed;
+  font-weight: 700;
+}
+ul.primary li a:hover {
+  background: #ffffff;
+  border: solid 1px #ededed;
+}
+ul.primary li a.active,
+ul.primary li.active a {
+  border: solid 1px #ededed;
+  background: #ededed;
+  color: #000000;
+}
+ul.primary li a.active:hover,
+ul.primary li a.active:focus {
+  border: solid 1px #eb5ac3;
+  background: #ededed;
+  color: #000000;
+}
+ul.secondary li {
+  border-right: 0;
+  line-height: 2em;
+  margin: 0 0 0.5em;
+  padding: 0 1em 0 0;
+}
+
+/* HTML elements */
+blockquote {}
+hr {}
+
+/* Tables */
+tr.even {}
+tbody tr:nth-child(2n+1),
+tr.odd {}
+
+/* Form */
+input.form-text,
+textarea {}
+.form-submit {}
+.form-submit:hover,
+.form-submit:focus {}
+
+#search-block-form input.form-text,
+#search-block-form input::-webkit-input-placeholder,
+#search-block-form input:-moz-placeholder {}
+
+/* Calendar styles */
+.calendar-calendar div.date-nav {
+  background-color: transparent;
+  color: #b81d00;
+}
+.calendar-calendar div.date-nav a,
+.calendar-calendar div.date-nav h3 {
+  color: #b81d00;
+}
+.calendar-calendar td {
+  color: #181818;
+}
+.calendar-calendar th {
+  background-color: #fdfdff;
+  color: #b81d00;
+  border: 1px solid #cccccc;
+}
+.calendar-calendar th.days {
+  background-color: #ffffff;
+  color: #666666;
+}
+.calendar-calendar td .inner div.calendar div,
+.calendar-calendar td .inner div.calendar div a,
+.calendar-calendar td .inner div,
+.calendar-calendar td .inner div a {
+  background-color: #fdfdff;
+}
+.calendar-calendar tr td.today,
+.calendar-calendar tr.odd td.today,
+.calendar-calendar tr.even td.today {
+  background-color: #fdfdff;
+}
+.calendar-calendar td.calendar-agenda-hour,
+.calendar-calendar td.calendar-agenda-items,
+.calendar-calendar td.calendar-agenda-hour {
+  border-color: #cccccc;
+}
+.view-content .calendar-calendar ul.inline li {
+  border: 1px solid #cccccc;
+}
+#content .block .calendar-calendar .month-view table {
+  border: 1px solid #cccccc;
+}
+
+/* Quicktabs */
+.quicktabs-style-nostyle ul.quicktabs-tabs li a {}
+.quicktabs-style-nostyle ul.quicktabs-tabs li a:hover,
+.quicktabs-style-nostyle ul.quicktabs-tabs li a:focus,
+.quicktabs-style-nostyle ul.quicktabs-tabs li.active a {}
+
+
+
+
+

@@ -10,9 +10,8 @@
   screenshot  = screenshot.png
 
 ;----------// Stylesheets
-  stylesheets[all][] = css/at.base.css
   stylesheets[all][] = css/at.layout.css
-  stylesheets[all][] = css/at.messages.css
+
 
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
@@ -88,6 +87,38 @@
   ; smartphone portrait
   settings[smartphone_portrait_media_query] = 'only screen and (max-width:320px)'
 
+  ; AT Panels
+  settings[tablet_landscape_twocol_50]    = 'two-50'
+  settings[tablet_landscape_twocol_33_66] = 'two-66-33'
+  settings[tablet_landscape_twocol_66_33] = 'two-33-66'
+  settings[tablet_landscape_twocol_brick] = 'two-brick'
+
+  settings[tablet_portrait_twocol_50]    = 'two-50'
+  settings[tablet_portrait_twocol_33_66] = 'two-66-33'
+  settings[tablet_portrait_twocol_66_33] = 'two-33-66'
+  settings[tablet_portrait_twocol_brick] = 'two-brick'
+  
+  settings[smartphone_landscape_twocol_50]    = 'two-50'
+  settings[smartphone_landscape_twocol_33_66] = 'two-66-33'
+  settings[smartphone_landscape_twocol_66_33] = 'two-33-66'
+  settings[smartphone_landscape_twocol_brick] = 'two-brick'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ; Breadcrumb
   settings[breadcrumb_display]   = 'yes'
   settings[breadcrumb_separator] = ' &#187; '

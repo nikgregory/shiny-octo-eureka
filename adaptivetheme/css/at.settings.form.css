@@ -1,6 +1,31 @@
 /* Theme Settings CSS
    This is crafted to work with Seven and AT Admin themes,
    other admin themes could spit the dummy with these styles. */
+.theme-settings-header {
+  background: #e7e7e7;
+  padding: 10px;
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
+}
+.theme-settings-header h1 {
+  margin: 0;
+  float: left;
+  font-size: 1.25em;
+  text-shadow: 1px 1px 1px #fff;
+}
+.layout-header a {
+  display: block;
+  float: right;
+  width: 65px;
+}
+.layout-header a img {
+  width: 100%;
+  height: auto;
+}
+div.vertical-tabs {
+  margin: 0 0 20px 15em;
+}
 div.vertical-tabs .vertical-tabs-panes {
   min-height: 300px;
 }
@@ -76,7 +101,6 @@ fieldset.at-layout-form div.form-item input {
 fieldset.at-layout-form select {
   width: 4em;
 }
-
 fieldset.at-layout-form div.form-type-checkbox label,
 fieldset.at-media-queries div.form-type-textfield label {
   font-weight: 700;
@@ -116,30 +140,18 @@ div.smartphone-portrait-layout  {
   text-align: center;
 }
 #edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-grail],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-grail]  {
-  background-position: 0 0;
-}
+#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-grail]  {background-position: 0 0;}
 #edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-right],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-right]  {
-  background-position: 0 -80px;
-}
+#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-right]  {background-position: 0 -80px;}
 #edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-left],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-left]  {
-  background-position: 0 -160px;
-}
+#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-left]  {background-position: 0 -160px;}
 #edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-two-col-stack],
-#edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-two-col-stack]  {
-  background-position: 0 -240px;
-}
+#edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-two-col-stack]  {background-position: 0 -240px;}
 #edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-one-col-vert],
-#edit-smartphone-landscape-layout-wrapper .form-type-radio label[for=edit-smartphone-landscape-layout-one-col-vert]  {
-  background-position: 0 -320px;
-}
+#edit-smartphone-landscape-layout-wrapper .form-type-radio label[for=edit-smartphone-landscape-layout-one-col-vert]  {background-position: 0 -320px;}
 #edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-one-col-stack],
 #edit-smartphone-landscape-layout-wrapper .form-type-radio label[for=edit-smartphone-landscape-layout-one-col-stack],
-div.smartphone-portrait-layout  {
-  background-position: 0 -400px;
-}
+div.smartphone-portrait-layout  {background-position: 0 -400px;}
 div.smartphone-portrait-layout  {
   float: left;
   margin: 15px 15px 0 0;
@@ -170,7 +182,108 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   background: url(images/warning.png) no-repeat left center;
   padding-left: 25px;
 }
-
+/* AT Panels */
+#edit-rpw > .fieldset-wrapper > .fieldset-description {}
+.panel-option-lists .fieldset-wrapper {
+  display: table;
+  width: 97%;
+}
+.panel-option-lists .fieldset-wrapper > .form-item {
+  display: table-row;
+}
+.panel-option-lists .fieldset-wrapper > .form-item > label,
+.panel-option-lists .fieldset-wrapper > .form-item > div > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.panel-option-lists .fieldset-wrapper > .form-item > label {
+  font-weight: 700;
+  width: 20%;
+}
+.panel-option-lists .fieldset-wrapper legend {
+  display: block;
+}
+.panel-option-lists label {
+}
+.panel-option-lists .form-type-radio {
+  clear: none;
+  float: left;
+  margin: 0 30px 10px 0;
+  text-align: center;
+  width: 40px;
+}
+.panel-option-lists .form-radios label {
+  background: #ddd;
+  background-repeat: no-repeat;
+  margin-top: 4px;
+  height: 40px;
+  width: 40px;
+  text-indent: -99999em;
+  overflow: hidden;
+  display: block;
+  float: none;
+  text-align: center;
+}
+/* Two col sprite */
+[id^=edit-twocol] .form-type-radio label {background: url(images/twocol-sprite.png);}
+.form-type-radio label[for$=two-50] {background-position: 0 0;}
+.form-type-radio label[for$=two-66-33] {background-position: -41px 0;}
+.form-type-radio label[for$=two-33-66] {background-position: -82px 0;}
+.form-type-radio label[for$=two-brick] {background-position: -123px 0;}
+.form-type-radio label[for$=two-brick-stack] {background-position: -164px 0;}
+.form-type-radio label[for$=two-50-stack],
+.form-type-radio label[for$=two-66-33-stack],
+.form-type-radio label[for$=two-33-66-stack] {background-position: -205px 0;}
+/* Three col sprite */
+[id^=edit-threecol] .form-type-radio label {background: url(images/threecol-sprite.png);}
+.form-type-radio label[for$=three-3x33] {background-position: 0 0;}
+.form-type-radio label[for$=three-3x33-stack-top] {background-position: -41px 0;}
+.form-type-radio label[for$=three-3x33-stack-bottom] {background-position: -82px 0;}
+.form-type-radio label[for$=three-25-50-25] {background-position: 0 -41px;}
+.form-type-radio label[for$=three-25-50-25-stack-top] {background-position: -41px -41px;}
+.form-type-radio label[for$=three-25-50-25-stack-bottom] {background-position: -82px -41px;}
+.form-type-radio label[for$=three-25-25-50] {background-position: 0 -82px;}
+.form-type-radio label[for$=three-25-25-50-stack-top] {background-position: -41px -82px;}
+.form-type-radio label[for$=three-25-25-50-stack-bottom] {background-position: -82px 0;}
+.form-type-radio label[for$=three-50-25-25] {background-position: 0 -123px;}
+.form-type-radio label[for$=three-50-25-25-stack-top] {background-position: -41px 0;}
+.form-type-radio label[for$=three-50-25-25-stack-bottom] {background-position: -41px -123px;}
+.form-type-radio label[for$=three-3x33-stack],
+.form-type-radio label[for$=three-25-50-25-stack],
+.form-type-radio label[for$=three-25-25-50-stack],
+.form-type-radio label[for$=three-50-25-25-stack] {background-position: -82px -82px;}
+/* Four col sprite */
+[id^=edit-fourcol] .form-type-radio label {background: url(images/fourcol-sprite.png);}
+.form-type-radio label[for$=four-4x25] {background-position: 0 0;}
+.form-type-radio label[for$=four-4x25-right-stack] {background-position: -41px 0;}
+.form-type-radio label[for$=four-4x25-2x2-grid] {background-position: -82px 0;}
+.form-type-radio label[for$=four-4x25-stack] {background-position: -123px 0;}
+/* Five col sprite */
+[id^=edit-fivecol] .form-type-radio label {background: url(images/fivecol-sprite.png);}
+.form-type-radio label[for$=five-5x20] {background-position: 0 0;}
+.form-type-radio label[for$=five-5x20-2x3-grid] {background-position: -41px 0;}
+.form-type-radio label[for$=five-5x20-1x2x2-grid] {background-position: -82px 0;}
+.form-type-radio label[for$=five-5x20-stack-2] {background-position: -123px 0;}
+.form-type-radio label[for$=five-5x20-stack] {background-position: -164px 0;}
+/* Six col sprite */
+[id^=edit-sixcol] .form-type-radio label {background: url(images/sixcol-sprite.png);}
+.form-type-radio label[for$=six-6x16] {background-position: 0 0;}
+.form-type-radio label[for$=six-6x16-3x2-grid] {background-position: -41px 0;}
+.form-type-radio label[for$=six-6x16-2x3-grid] {background-position: -82px 0;}
+.form-type-radio label[for$=six-6x16-stack] {background-position: -123px 0;}
+/* Inset sprite */
+[id^=edit-inset] .form-type-radio label {background: url(images/inset-sprite.png);}
+.form-type-radio label[for$three-inset-left] {background-position: 0 0;}
+.form-type-radio label[for$=three-inset-left-wrap] {background-position: -41px 0;}
+.form-type-radio label[for$=three-inset-left-stack] {background-position: -164px 0;}
+.form-type-radio label[for$=three-inset-right] {background-position: -82px 0;}
+.form-type-radio label[for$=three-inset-right-wrap] {background-position: -123px 0;}
+.form-type-radio label[for$=three-inset-right-stack] {background-position: -164px 0;}
+/* Wrangel fielset wrappers */
+html.js .vertical-tabs-panes fieldset.collapsed div.fieldset-wrapper {
+  overflow: hidden;
+  display: none !important;
+}
 /* Fonts */
 fieldset#edit-font .fieldset-wrapper legend {
   display: block;
@@ -179,14 +292,12 @@ fieldset#edit-font .fieldset-wrapper legend {
 fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
     padding-top: 35px;
 }
-
 /* Heading styles for advanced themes */
 #edit-headings .form-type-radios {
   width: 12em;
   float: left;
   clear: none;
 }
-
 /* Give some real definition to disabled selects */
 select[disabled],
 fieldset[disabled] select,

@@ -26,7 +26,6 @@
  
 /* Add gutters */
 .block-inner,
-.region-help,
 .messages,
 #primary-nav,
 #secondary-nav,
@@ -40,17 +39,19 @@
 
 /* Float the columns */
 #content-column,
+.content-column,
 .region-sidebar-first,
 .region-sidebar-second {
   float: left;
 }
 
 /* Ensure the content column is always the full width of its container */
-#content-column {
+#content-column,
+.content-column {
   width: 100%;
 }
 
-/* Clear floating elements */
+/* Clear floating elements :: legacy, this is really no longer required */
 .clear,
 #columns,
 #breadcrumb,
@@ -77,50 +78,18 @@
   zoom: 1;
 }
 
-/* Mini Panels */
-.block-panels_mini {
-  padding: 0;
-}
-
 /* AT Panels */
-.page-panels #block-system-main .block-inner {
-  margin: 0;
-}
-.block-panels-mini .block-inner  {
-  margin-left: 0;
-  margin-right: 0;
-}
-.page-panels .panel-pane {
-  margin-left: 10px;
-  margin-right: 10px;
-}
 .at-panel .region {
   display: inline;
   float: left;
 }
-.at-panel .conditional-stack-top,
-.at-panel .conditional-stack-bottom {
-  clear: both;
-  display: block;
+.one-column .region,
+div.at-panel .region-conditional-stack {
   float: none;
-}
-
-/* lte IE7 Layout fixes - these use the html element classes rather 
- * than loading a global IE stylesheet */
-/* Be sure the layout is set */
-.ie6-7 .at-panel .region {
-  position: relative;
-  overflow: hidden;
-}
-.ie6-7 #main-content,
-.ie6-7 #columns {
   display: block;
+  clear: both;
+  width: 100%;
 }
-.ie6-7 #main-content,
-.ie6-7 #columns,
-.ie6-7 #content-column,
-.ie6-7 .region-sidebar-first,
-.ie6-7 .region-sidebar-second,
-.ie6-7 .gpanel .region {
-  zoom: 1;
+.lt-ie8 .at-panel {
+  overflow: hidden;
 }

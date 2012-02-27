@@ -1,0 +1,129 @@
+/**
+ * NOTICE: This is a commercial Drupal theme. Elements of this theme including this field
+ * are licensed under a standard commercial license which does not permit redistribution. 
+ */
+
+/*** Panels ***/
+.panel-pane {}
+.pane-inner {}
+.pane-title {}
+.pane-content {}
+.panel-pane .feed {}
+.panel-pane .links {}
+.panel-pane .more-link {}
+
+.page-panels #block-system-main .block-inner {
+  margin: 0;
+}
+.page-panels .panel-pane {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.panel-pane {}
+.pane-inner {}
+.pane-title {}
+.pane-content {}
+.panel-pane .feed {}
+.panel-pane .links {}
+.panel-pane .more-link {}
+
+/* Mini Panels */
+.block-panels_mini {
+  padding: 0;
+}
+.block-panels-mini .block-inner  {
+}
+
+ 
+/*** Views slideshow ***/
+.view-content .skin-default img {}
+.views-slideshow-controls-top,
+.views-slideshow-controls-bottom {}
+.views-slideshow-controls-top {}
+.views-slideshow-controls-bottom {}
+.views-slideshow-controls-top {}
+.views-slideshow-controls-bottom {}
+
+
+/*** Quicktabs ***/
+.block-quicktabs .block-inner .block-inner,
+.sidebar .block-quicktabs .block-inner .block-inner {
+}
+.block-quicktabs .block-content,
+.sidebar .block-quicktabs .block-content {
+}
+.block-quicktabs .block-content-inner,
+.sidebar .block-quicktabs .block-content-inner {
+}
+.block-quicktabs ul.quicktabs-tabs {;
+}
+.block-quicktabs ul.quicktabs-tabs li{
+}
+.quicktabs-style-nostyle ul.quicktabs_tabs {
+}
+.quicktabs-style-nostyle ul.quicktabs_tabs li {
+}
+.quicktabs-style-nostyle ul.quicktabs_tabs li a {
+}
+
+/*** Date/Calendar ***/
+.calendar-calendar div.date-nav {
+  border: 0;
+  padding: 1px;
+}
+.calendar-calendar td {
+  text-align: center;
+}
+.calendar-calendar th.days {
+  border: 0;
+}
+.calendar-calendar td.calendar-agenda-hour {
+  border-style: solid none none;
+}
+.calendar-calendar td.calendar-agenda-items {
+  border-style: solid;
+}
+.calendar-calendar td.calendar-agenda-hour {
+  border-style: none none solid solid;
+  border-width: 1px;
+}
+.calendar-calendar td.calendar-agenda-hour .calendar-hour {
+  padding: 0 5px;
+  white-space: nowrap;
+}
+.calendar-calendar div.calendar {
+  font-size: 1em;
+}
+.calendar-calendar td .inner div.calendar div {
+  border: 0;
+  padding: 0 5px;
+}
+.calendar-calendar td .inner div.calendar div a {
+  padding: 0;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.week-view .calendar-calendar td .inner div,
+.week-view .calendar-calendar td .inner div a {
+  border-bottom: 1px solid #fff;
+}
+.calendar-calendar td.empty {
+    background: none;
+}
+.view-content .calendar-calendar ul.inline {
+  padding: 0 0 10px;
+  display: block;
+}
+.view-content .calendar-calendar ul.inline li {
+  margin-right: 2px;
+}
+.block .calendar-calendar .month-view table {
+  border: 2px solid #fff;
+  clear: both;
+  margin: 0;
+  padding: 3px;
+}
+.calendar-calendar .inner {
+  padding: 1px;
+}

@@ -18,12 +18,33 @@
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
 
   global $theme_key;
-  
-  // Load the media queries styles
-  $media_queries_css = array(
-    'responsive.style.css',
-  );
-  load_subtheme_media_queries($media_queries_css, $theme_key);
+
+  // Only load these files if responsiveness is still enabled - you can
+  // disable responsive capability using the theme settings - look under
+  // the Global settings. Do not simply delete this - use the theme setting!
+  if (theme_get_setting('disable_responsive_styles') == FALSE) {
+    // Load the media queries stylesheets in link elements. They are loaded using
+    // drupal_add_css() so we can generate the media query from theme settings and
+    // inject it into the media attribute.
+    $smartphone_portrait_mq = theme_get_setting('smartphone_portrait_media_query');
+    $smartphone_landscape_mq = theme_get_setting('smartphone_landscape_media_query');
+    $tablet_portrait_mq = theme_get_setting('tablet_portrait_media_query');
+    $tablet_landscape_mq = theme_get_setting('tablet_landscape_media_query');
+    $bigscreen_mq = theme_get_setting('bigscreen_media_query');
+    $files = array(
+      'responsive.smartphone.portrait' => $smartphone_portrait_mq,
+      'responsive.smartphone.landscape' => $smartphone_landscape_mq,
+      'responsive.tablet.portrait' => $tablet_portrait_mq,
+      'responsive.tablet.landscape' => $tablet_landscape_mq,
+      'responsive.bigscreen' => $bigscreen_mq,
+    );
+    // Loop over the files array and load each CSS file using drupal_add_css()
+    foreach ($files as $key => $value) {
+      $file = $key . '.css';
+      $media_query = $value;
+      load_subtheme_responsive_styles($file, $theme_key, $media_query);
+    }
+  }
 
  /**
   * Load IE Stylesheets
@@ -37,16 +58,18 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   *
   *  'IE 8' => 'ie-8.css',
   *
-  * Your IE CSS file must be in the /css/ directory in your subtheme.
+  * By default the sub-theme includes one IE specific stylesheet: lt-ie9.css
+  *
+  * Your IE CSS files must be in the mytheme/css/ directory in your subtheme.
   */
-  /* -- Delete this line to add a conditional stylesheet for IE 7 or less.
+  /* -- Delete this line to add a conditional stylesheet for IE 8 or less.
   $ie_files = array(
-    'lte IE 7' => 'ie-lte-7.css',
+    'lt IE 9' => 'lt-ie9.css',
   );
-  load_subtheme_ie_styles($ie_files, 'adaptivetheme_subtheme');
+  load_subtheme_ie_styles($ie_files, $theme_key);
   // */
-  
-  // Add class for the active theme name
+
+  // Add a class for the active theme name.
   /* -- Delete this line to add a class for the active theme name.
   $vars['classes_array'][] = drupal_html_class($theme_key);
   // */
@@ -55,7 +78,6 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   /* -- Delete this line to add a classes for the browser and platform.
   $vars['classes_array'][] = css_browser_selector();
   // */
-
 }
 
 /* -- Delete this line if you want to use this function
@@ -104,34 +126,5 @@ function adaptivetheme_subtheme_preprocess_block(&$vars) {
 }
 
 function adaptivetheme_subtheme_process_block(&$vars) {
-}
-// */
-
-/**
- * Add the Style Schemes if enabled.
- * NOTE: You MUST make changes in your subthemes theme-settings.php file
- * also to enable Style Schemes.
- */
-/* -- Delete this line if you want to enable style schemes.
-// DONT TOUCH THIS STUFF...
-function get_at_styles() {
-  $scheme = theme_get_setting('style_schemes');
-  if (!$scheme) {
-    $scheme = 'style-default.css';
-  }
-  if (isset($_COOKIE["atstyles"])) {
-    $scheme = $_COOKIE["atstyles"];
-  }
-  return $scheme;
-}
-if (theme_get_setting('style_enable_schemes') == 'on') {
-  $style = get_at_styles();
-  if ($style != 'none') {
-    drupal_add_css(path_to_theme() . '/css/schemes/' . $style, array(
-      'group' => CSS_THEME,
-      'preprocess' => TRUE,
-      )
-    );
-  }
 }
 // */

@@ -1,7 +1,4 @@
 <?php
-// Include custom form validation, submit function and layout builder functions
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/layout.inc');
-
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
@@ -14,9 +11,16 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     return;
   }
 
+  // Build a custom header for the layout settings form
+  $layout_header  = '<div class="layout-header theme-settings-header clearfix">';
+  $layout_header .= '<h1>' . t('Layout Settings') . '</h1>';
+  $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . drupal_get_path('theme', 'adaptivetheme') . '/logo.png" /></a>';
+  $layout_header .= '</div>';
   // Layout settings
-  $form['at'] = array(
+  $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
+    '#description' => t('Layout Settings'),
+    '#prefix' => $layout_header,
     '#weight' => -10,
     '#default_tab' => 'defaults',
     '#attached' => array(
@@ -24,7 +28,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     ),
   );
   // bigscreen
-  $form['at']['bigscreen'] = array(
+  $form['at-layout']['bigscreen'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
@@ -34,11 +38,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['bigscreen']['bigscreen-layout-wrapper'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('bigscreen_layout'),
@@ -48,12 +52,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'three-col-left'  => t('Three column, both sidebars on the left'),
     )
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_unit'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('bigscreen_sidebar_unit'),
@@ -63,7 +67,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => theme_get_setting('bigscreen_sidebar_first'),
@@ -71,7 +75,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => theme_get_setting('bigscreen_sidebar_second'),
@@ -79,12 +83,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['bigscreen']['bigscreen-width-wrapper'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
-  $form['at']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_unit'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('bigscreen_page_unit'),
@@ -94,7 +98,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => theme_get_setting('bigscreen_page_width'),
@@ -102,7 +106,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
@@ -111,12 +115,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
     '#type' => 'checkbox',
     '#title' => t('Set a max width'),
     '#default_value' => theme_get_setting('bigscreen_set_max_width'),
   );
-  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width_unit'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('bigscreen_max_width_unit'),
@@ -130,7 +134,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
+  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Max width'),
     '#default_value' => theme_get_setting('bigscreen_max_width'),
@@ -142,7 +146,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['bigscreen']['media-queries-wrapper'] = array(
+  $form['at-layout']['bigscreen']['media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Screen Media Queries'),
     '#weight' => 1,
@@ -152,7 +156,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
+  $form['at-layout']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('bigscreen_media_query'),
@@ -162,7 +166,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#required' => TRUE,
   );
   // tablet
-  $form['at']['tablet'] = array(
+  $form['at-layout']['tablet'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Layout'),
     '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad have two orientations - landscape and portrait. You can configure a different layout for each orientation.</p>'),
@@ -173,16 +177,16 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     ),
   );
   // landscape
-  $form['at']['tablet']['landscape'] = array(
+  $form['at-layout']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape tablet</h4>'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_landscape_layout'),
@@ -193,12 +197,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'two-col-stack'   => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
     )
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_unit'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_landscape_sidebar_unit'),
@@ -208,7 +212,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => theme_get_setting('tablet_landscape_sidebar_first'),
@@ -216,7 +220,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => theme_get_setting('tablet_landscape_sidebar_second'),
@@ -229,12 +233,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_unit'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_landscape_page_unit'),
@@ -244,7 +248,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => theme_get_setting('tablet_landscape_page_width'),
@@ -252,7 +256,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
@@ -261,12 +265,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_set_max_width'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_set_max_width'] = array(
     '#type' => 'checkbox',
     '#title' => t('Set a max width'),
     '#default_value' => theme_get_setting('tablet_landscape_set_max_width'),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width_unit'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_landscape_max_width_unit'),
@@ -280,7 +284,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Max width'),
     '#default_value' => theme_get_setting('tablet_landscape_max_width'),
@@ -292,7 +296,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Landscape Media Queries'),
     '#weight' => 1,
@@ -302,7 +306,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
+  $form['at-layout']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('tablet_landscape_media_query'),
@@ -312,16 +316,16 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#required' => TRUE,
   );
   // tablet portrait
-  $form['at']['tablet']['portrait'] = array(
+  $form['at-layout']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait tablet</h4>'),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_portrait_layout'),
@@ -331,7 +335,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'two-col-stack' => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
     )
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
@@ -341,7 +345,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_portrait_sidebar_unit'),
@@ -351,7 +355,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => theme_get_setting('tablet_portrait_sidebar_first'),
@@ -359,7 +363,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => theme_get_setting('tablet_portrait_sidebar_second'),
@@ -372,12 +376,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_unit'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_portrait_page_unit'),
@@ -387,7 +391,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => theme_get_setting('tablet_portrait_page_width'),
@@ -395,7 +399,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
@@ -404,12 +408,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_set_max_width'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_set_max_width'] = array(
     '#type' => 'checkbox',
     '#title' => t('Set a max width'),
     '#default_value' => theme_get_setting('tablet_portrait_set_max_width'),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width_unit'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('tablet_portrait_max_width_unit'),
@@ -423,7 +427,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Max width'),
     '#default_value' => theme_get_setting('tablet_portrait_max_width'),
@@ -435,7 +439,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Portrait Media Queries'),
     '#weight' => 1,
@@ -445,7 +449,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
+  $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('tablet_portrait_media_query'),
@@ -455,7 +459,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#required' => TRUE,
   );
   // smartphone
-  $form['at']['smartphone'] = array(
+  $form['at-layout']['smartphone'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Layout'),
     '#description' => t('<h3>Smartphone Layout</h3><p>Smartphone devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
@@ -466,16 +470,16 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     ),
   );
   // landscape
-  $form['at']['smartphone']['landscape'] = array(
+  $form['at-layout']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape smartphone</h4>'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('smartphone_landscape_layout'),
@@ -484,7 +488,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'one-col-vert'  => t('Sidebars in two vertical columns below the main column'),
     )
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
@@ -494,7 +498,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_unit'),
@@ -504,7 +508,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_first'),
@@ -512,7 +516,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_second'),
@@ -520,12 +524,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_unit'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('smartphone_landscape_page_unit'),
@@ -535,7 +539,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'em' => 'em',
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_width'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => theme_get_setting('smartphone_landscape_page_width'),
@@ -543,7 +547,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
@@ -552,12 +556,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_set_max_width'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_set_max_width'] = array(
     '#type' => 'checkbox',
     '#title' => t('Set a max width'),
     '#default_value' => theme_get_setting('smartphone_landscape_set_max_width'),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width_unit'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => theme_get_setting('smartphone_landscape_max_width_unit'),
@@ -571,7 +575,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Max width'),
     '#default_value' => theme_get_setting('smartphone_landscape_max_width'),
@@ -583,7 +587,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Landscape Media Queries'),
     '#weight' => 1,
@@ -593,7 +597,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
+  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('smartphone_landscape_media_query'),
@@ -603,12 +607,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#required' => TRUE,
   );
   // smartphone portrait
-  $form['at']['smartphone']['portrait'] = array(
+  $form['at-layout']['smartphone']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait smartphone</h4><div class="smartphone-portrait-layout">One column</div><p>The smartphone portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
   );
-  $form['at']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
+  $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Portrait Media Queries'),
     '#weight' => 1,
@@ -618,7 +622,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
-  $form['at']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
+  $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => theme_get_setting('smartphone_portrait_media_query'),
@@ -626,8 +630,650 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#field_prefix' => '@media',
     '#size' => 100,
   );
+  // AT PANELS LAYOUTS
+    $form['at-layout']['rp'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Responsive Panels'),
+  );
+  $form['at-layout']['rp']['rpw'] = array(
+    '#type' => 'fieldset',
+    '#attributes' => array('class' => array('panel-option-lists')),
+    '#description' => t('<h3>Responsive Panels</h3><p>These settings apply to both <strong>Gpanels and Panels module layouts</strong> (those supplied by Adaptivetheme). If you are using the <a href="!link" target="_blank">Panels module</a> you will find fourteen additional layouts supplied by Adaptivetheme - they all have responsive capability. To use Gpanels (layout snippets) in your <code>page.tpl.php</code> see the README in the base theme (adaptivetheme/layouts/gpanels).</p><p>Select a layout option for each layout per mobile device orientation. An <em>option</em> is what the default layout will <em>change to</em> for each device orientation. For each layout the first option is the default.</p><p>The Standard layout always uses the default panel layout while Smartphone portrait always displays all regions stacked in one column.</p>', array('!link' => 'http://drupal.org/project/panels')),
+  );
+  // TABLET landscape
+  $form['at-layout']['rp']['rpw']['tl'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet landscape'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 COL
+  $form['at-layout']['rp']['rpw']['tl']['twocol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Two column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 50
+  $form['at-layout']['rp']['rpw']['tl']['twocol']['tablet_landscape_two_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 50/50'),
+    '#default_value' => theme_get_setting('tablet_landscape_two_50'),
+    '#options' => array(
+      'two-50'       => t('Two col 50 default'),
+      'two-50-stack' => t('Two col 50 stack'),
+    ),
+  );
+  // 2 33 66
+  $form['at-layout']['rp']['rpw']['tl']['twocol']['tablet_landscape_two_33_66'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 33/66'),
+    '#default_value' => theme_get_setting('tablet_landscape_two_33_66'),
+    '#options' => array(
+      'two-33-66'       => t('Two col 33/66 default'),
+      'two-33-66-stack' => t('Two col 33/66 stack'),
+    ),
+  );
+  // 2 66 33
+  $form['at-layout']['rp']['rpw']['tl']['twocol']['tablet_landscape_two_66_33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 66/33'),
+    '#default_value' => theme_get_setting('tablet_landscape_two_66_33'),
+    '#options' => array(
+      'two-66-33'       => t('Two col 66/33 default'),
+      'two-66-33-stack' => t('Two col 66/33 stack'),
+    ),
+  );
+  // 2 brick
+  $form['at-layout']['rp']['rpw']['tl']['twocol']['tablet_landscape_two_brick'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col brick'),
+    '#default_value' => theme_get_setting('tablet_landscape_two_brick'),
+    '#options' => array(
+      'two-brick'       => t('Two col brick default'),
+      'two-brick-stack' => t('Two col brick stack'),
+    ),
+  );
+  // 3 COL
+  $form['at-layout']['rp']['rpw']['tl']['threecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Three column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 3x33
+  $form['at-layout']['rp']['rpw']['tl']['threecol']['tablet_landscape_three_3x33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 3x33'),
+    '#default_value' => theme_get_setting('tablet_landscape_three_3x33'),
+    '#options' => array(
+      'three-3x33'              => t('3x33 default'),
+      'three-3x33-stack-top'    => t('Top stack'),
+      'three-3x33-stack-bottom' => t('Bottom stack'),
+      'three-3x33-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-50-25
+  $form['at-layout']['rp']['rpw']['tl']['threecol']['tablet_landscape_three_25_50_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-50-25'),
+    '#default_value' => theme_get_setting('tablet_landscape_three_25_50_25'),
+    '#options' => array(
+      'three-25-50-25'              => t('25/50/25 default'),
+      'three-25-50-25-stack-top'    => t('Top stack'),
+      'three-25-50-25-stack-bottom' => t('Bottom stack'),
+      'three-25-50-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-25-50
+  $form['at-layout']['rp']['rpw']['tl']['threecol']['tablet_landscape_three_25_25_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-25-50'),
+    '#default_value' => theme_get_setting('tablet_landscape_three_25_25_50'),
+    '#options' => array(
+      'three-25-25-50'              => t('25/25/50 default'),
+      'three-25-25-50-stack-top'    => t('Top stack'),
+      'three-25-25-50-stack-bottom' => t('Bottom stack'),
+      'three-25-25-50-stack'        => t('Full stack'),
+    ),
+  );
+  // 50-25-25
+  $form['at-layout']['rp']['rpw']['tl']['threecol']['tablet_landscape_three_50_25_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 50-25-25'),
+    '#default_value' => theme_get_setting('tablet_landscape_three_50_25_25'),
+    '#options' => array(
+      'three-50-25-25'              => t('50/25/25 default'),
+      'three-50-25-25-stack-top'    => t('Top stack'),
+      'three-50-25-25-stack-bottom' => t('Bottom stack'),
+      'three-50-25-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 4 COL
+  $form['at-layout']['rp']['rpw']['tl']['fourcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Four column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tl']['fourcol']['tablet_landscape_four_4x25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Four 4x25'),
+    '#default_value' => theme_get_setting('tablet_landscape_four_4x25'),
+    '#options' => array(
+      'four-4x25'             => t('4x25 default'),
+      'four-4x25-right-stack' => t('Right column stack'),
+      'four-4x25-2x2-grid'    => t('2x2 Grid'),
+      'four-4x25-stack'       => t('Full stack'),
+    ),
+  );
+  // 5 COL
+  $form['at-layout']['rp']['rpw']['tl']['fivecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Five column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tl']['fivecol']['tablet_landscape_five_5x20'] = array(
+    '#type' => 'radios',
+    '#title' => t('Five 5x20'),
+    '#default_value' => theme_get_setting('tablet_landscape_five_5x20'),
+    '#options' => array(
+      'five-5x20'            => t('5x20 default'),
+      'five-5x20-2x3-grid'   => t('2/3 Split grid'),
+      'five-5x20-1x2x2-grid' => t('Top stack'),
+      'five-5x20-stack-2'    => t('Stack 50/50 bottom'),
+      'five-5x20-stack'      => t('Full stack'),
+    ),
+  );
+  // 6 COL
+  $form['at-layout']['rp']['rpw']['tl']['sixcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Six column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tl']['sixcol']['tablet_landscape_six_6x16'] = array(
+    '#type' => 'radios',
+    '#title' => t('Six 6x16'),
+    '#default_value' => theme_get_setting('tablet_landscape_six_6x16'),
+    '#options' => array(
+      'six-6x16'          => t('6x16 default'),
+      'six-6x16-3x2-grid' => t('3x2 Grid'),
+      'six-6x16-2x3-grid' => t('2x3 Grid'),
+      'six-6x16-stack'    => t('Full stack'),
+    ),
+  );
+  // Inset
+  $form['at-layout']['rp']['rpw']['tl']['inset'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Inset'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // inset left
+  $form['at-layout']['rp']['rpw']['tl']['inset']['tablet_landscape_inset_left'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset left'),
+    '#default_value' => theme_get_setting('tablet_landscape_inset_left'),
+    '#options' => array(
+      'three-inset-left'       => t('Inset left default'),
+      'three-inset-left-wrap'  => t('Wrap inset'),
+      'three-inset-left-stack' => t('Full stack'),
+    ),
+  );
+  // inset right
+  $form['at-layout']['rp']['rpw']['tl']['inset']['tablet_landscape_inset_right'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset right'),
+    '#default_value' => theme_get_setting('tablet_landscape_inset_right'),
+    '#options' => array(
+      'three-inset-right'       => t('Inset right default'),
+      'three-inset-right-wrap'  => t('Wrap inset'),
+      'three-inset-right-stack' => t('Full stack'),
+    ),
+  );
+  // TABLET portrait
+  $form['at-layout']['rp']['rpw']['tp'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet portrait'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 COL
+  $form['at-layout']['rp']['rpw']['tp']['twocol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Two column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 50
+  $form['at-layout']['rp']['rpw']['tp']['twocol']['tablet_portrait_two_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 50/50'),
+    '#default_value' => theme_get_setting('tablet_portrait_two_50'),
+    '#options' => array(
+      'two-50'       => t('Two col 50 default'),
+      'two-50-stack' => t('Two col 50 stack'),
+    ),
+  );
+  // 2 33 66
+  $form['at-layout']['rp']['rpw']['tp']['twocol']['tablet_portrait_two_33_66'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 33/66'),
+    '#default_value' => theme_get_setting('tablet_portrait_two_33_66'),
+    '#options' => array(
+      'two-33-66'       => t('Two col 33/66 default'),
+      'two-33-66-stack' => t('Two col 33/66 stack'),
+    ),
+  );
+  // 2 66 33
+  $form['at-layout']['rp']['rpw']['tp']['twocol']['tablet_portrait_two_66_33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 66/33'),
+    '#default_value' => theme_get_setting('tablet_portrait_two_66_33'),
+    '#options' => array(
+      'two-66-33'       => t('Two col 66/33 default'),
+      'two-66-33-stack' => t('Two col 66/33 stack'),
+    ),
+  );
+  // 2 brick
+  $form['at-layout']['rp']['rpw']['tp']['twocol']['tablet_portrait_two_brick'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col brick'),
+    '#default_value' => theme_get_setting('tablet_portrait_two_brick'),
+    '#options' => array(
+      'two-brick'       => t('Two col brick default'),
+      'two-brick-stack' => t('Two col brick stack'),
+    ),
+  );
+  // 3 COL TABLET PORTRAIT
+  $form['at-layout']['rp']['rpw']['tp']['threecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Three column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 3x33
+  $form['at-layout']['rp']['rpw']['tp']['threecol']['tablet_portrait_three_3x33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 3x33'),
+    '#default_value' => theme_get_setting('tablet_portrait_three_3x33'),
+    '#options' => array(
+      'three-3x33'              => t('3x33 default'),
+      'three-3x33-stack-top'    => t('Top stack'),
+      'three-3x33-stack-bottom' => t('Bottom stack'),
+      'three-3x33-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-50-25
+  $form['at-layout']['rp']['rpw']['tp']['threecol']['tablet_portrait_three_25_50_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-50-25'),
+    '#default_value' => theme_get_setting('tablet_portrait_three_25_50_25'),
+    '#options' => array(
+      'three-25-50-25'              => t('25/50/25 default'),
+      'three-25-50-25-stack-top'    => t('Top stack'),
+      'three-25-50-25-stack-bottom' => t('Bottom stack'),
+      'three-25-50-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-25-50
+  $form['at-layout']['rp']['rpw']['tp']['threecol']['tablet_portrait_three_25_25_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-25-50'),
+    '#default_value' => theme_get_setting('tablet_portrait_three_25_25_50'),
+    '#options' => array(
+      'three-25-25-50'              => t('25/25/50 default'),
+      'three-25-25-50-stack-top'    => t('Top stack'),
+      'three-25-25-50-stack-bottom' => t('Bottom stack'),
+      'three-25-25-50-stack'        => t('Full stack'),
+    ),
+  );
+  // 50-25-25
+  $form['at-layout']['rp']['rpw']['tp']['threecol']['tablet_portrait_three_50_25_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 50-25-25'),
+    '#default_value' => theme_get_setting('tablet_portrait_three_50_25_25'),
+    '#options' => array(
+      'three-50-25-25'              => t('50/25/25 default'),
+      'three-50-25-25-stack-top'    => t('Top stack'),
+      'three-50-25-25-stack-bottom' => t('Bottom stack'),
+      'three-50-25-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 4 COL
+  $form['at-layout']['rp']['rpw']['tp']['fourcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Four column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tp']['fourcol']['tablet_portrait_four_4x25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Four 4x25'),
+    '#default_value' => theme_get_setting('tablet_portrait_four_4x25'),
+    '#options' => array(
+      'four-4x25'             => t('4x25 default'),
+      'four-4x25-right-stack' => t('Right column stack'),
+      'four-4x25-2x2-grid'    => t('2x2 Grid'),
+      'four-4x25-stack'       => t('Full stack'),
+    ),
+  );
+  // 5 COL
+  $form['at-layout']['rp']['rpw']['tp']['fivecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Five column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tp']['fivecol']['tablet_portrait_five_5x20'] = array(
+    '#type' => 'radios',
+    '#title' => t('Five 5x20'),
+    '#default_value' => theme_get_setting('tablet_portrait_five_5x20'),
+    '#options' => array(
+      'five-5x20'            => t('5x20 default'),
+      'five-5x20-2x3-grid'   => t('2/3 Split grid'),
+      'five-5x20-1x2x2-grid' => t('Top stack'),
+      'five-5x20-stack-2'    => t('Stack 50/50 bottom'),
+      'five-5x20-stack'      => t('Full stack'),
+    ),
+  );
+  // 6 COL
+  $form['at-layout']['rp']['rpw']['tp']['sixcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Six column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['tp']['sixcol']['tablet_portrait_six_6x16'] = array(
+    '#type' => 'radios',
+    '#title' => t('Six 6x16'),
+    '#default_value' => theme_get_setting('tablet_portrait_six_6x16'),
+    '#options' => array(
+      'six-6x16'          => t('6x16 default'),
+      'six-6x16-3x2-grid' => t('3x2 Grid'),
+      'six-6x16-2x3-grid' => t('2x3 Grid'),
+      'six-6x16-stack'    => t('Full stack'),
+    ),
+  );
+  // Inset
+  $form['at-layout']['rp']['rpw']['tp']['inset'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Inset'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // inset left
+  $form['at-layout']['rp']['rpw']['tp']['inset']['tablet_portrait_inset_left'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset left'),
+    '#default_value' => theme_get_setting('tablet_portrait_inset_left'),
+    '#options' => array(
+      'three-inset-left'       => t('Inset left default'),
+      'three-inset-left-wrap'  => t('Wrap inset'),
+      'three-inset-left-stack' => t('Full stack'),
+    ),
+  );
+  // inset right
+  $form['at-layout']['rp']['rpw']['tp']['inset']['tablet_portrait_inset_right'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset right'),
+    '#default_value' => theme_get_setting('tablet_portrait_inset_right'),
+    '#options' => array(
+      'three-inset-right'       => t('Inset right default'),
+      'three-inset-right-wrap'  => t('Wrap inset'),
+      'three-inset-right-stack' => t('Full stack'),
+    ),
+  );
+  // SMARTPHONE landscape
+  $form['at-layout']['rp']['rpw']['sl'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Smartphone landscape'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 COL
+  $form['at-layout']['rp']['rpw']['sl']['twocol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Two column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 2 50
+  $form['at-layout']['rp']['rpw']['sl']['twocol']['smartphone_landscape_two_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 50/50'),
+    '#default_value' => theme_get_setting('smartphone_landscape_two_50'),
+    '#options' => array(
+      'two-50'       => t('Two col 50 default'),
+      'two-50-stack' => t('Two col 50 stack'),
+    ),
+  );
+  // 2 33 66
+  $form['at-layout']['rp']['rpw']['sl']['twocol']['smartphone_landscape_two_33_66'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 33/66'),
+    '#default_value' => theme_get_setting('smartphone_landscape_two_33_66'),
+    '#options' => array(
+      'two-33-66'       => t('Two col 33/66 default'),
+      'two-33-66-stack' => t('Two col 33/66 stack'),
+    ),
+  );
+  // 2 66 33
+  $form['at-layout']['rp']['rpw']['sl']['twocol']['smartphone_landscape_two_66_33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col 66/33'),
+    '#default_value' => theme_get_setting('smartphone_landscape_two_66_33'),
+    '#options' => array(
+      'two-66-33'       => t('Two col 66/33 default'),
+      'two-66-33-stack' => t('Two col 66/33 stack'),
+    ),
+  );
+  // 2 brick
+  $form['at-layout']['rp']['rpw']['sl']['twocol']['smartphone_landscape_two_brick'] = array(
+    '#type' => 'radios',
+    '#title' => t('Two col brick'),
+    '#default_value' => theme_get_setting('smartphone_landscape_two_brick'),
+    '#options' => array(
+      'two-brick'       => t('Two col brick default'),
+      'two-brick-stack' => t('Two col brick stack'),
+    ),
+  );
+  // 3 COL
+  $form['at-layout']['rp']['rpw']['sl']['threecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Three column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // 3x33
+  $form['at-layout']['rp']['rpw']['sl']['threecol']['smartphone_landscape_three_3x33'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 3x33'),
+    '#default_value' => theme_get_setting('smartphone_landscape_three_3x33'),
+    '#options' => array(
+      'three-3x33'              => t('3x33 default'),
+      'three-3x33-stack-top'    => t('Top stack'),
+      'three-3x33-stack-bottom' => t('Bottom stack'),
+      'three-3x33-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-50-25
+  $form['at-layout']['rp']['rpw']['sl']['threecol']['smartphone_landscape_three_25_50_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-50-25'),
+    '#default_value' => theme_get_setting('smartphone_landscape_three_25_50_25'),
+    '#options' => array(
+      'three-25-50-25'              => t('25/50/25 default'),
+      'three-25-50-25-stack-top'    => t('Top stack'),
+      'three-25-50-25-stack-bottom' => t('Bottom stack'),
+      'three-25-50-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 25-25-50
+  $form['at-layout']['rp']['rpw']['sl']['threecol']['smartphone_landscape_three_25_25_50'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 25-25-50'),
+    '#default_value' => theme_get_setting('smartphone_landscape_three_25_25_50'),
+    '#options' => array(
+      'three-25-25-50'              => t('25/25/50 default'),
+      'three-25-25-50-stack-top'    => t('Top stack'),
+      'three-25-25-50-stack-bottom' => t('Bottom stack'),
+      'three-25-25-50-stack'        => t('Full stack'),
+    ),
+  );
+  // 50-25-25
+  $form['at-layout']['rp']['rpw']['sl']['threecol']['smartphone_landscape_three_50_25_25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Three col 50-25-25'),
+    '#default_value' => theme_get_setting('smartphone_landscape_three_50_25_25'),
+    '#options' => array(
+      'three-50-25-25'              => t('50/25/25 default'),
+      'three-50-25-25-stack-top'    => t('Top stack'),
+      'three-50-25-25-stack-bottom' => t('Bottom stack'),
+      'three-50-25-25-stack'        => t('Full stack'),
+    ),
+  );
+  // 4 COL
+  $form['at-layout']['rp']['rpw']['sl']['fourcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Four column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['sl']['fourcol']['smartphone_landscape_four_4x25'] = array(
+    '#type' => 'radios',
+    '#title' => t('Four 4x25'),
+    '#default_value' => theme_get_setting('smartphone_landscape_four_4x25'),
+    '#options' => array(
+      'four-4x25'             => t('4x25 default'),
+      'four-4x25-right-stack' => t('Right column stack'),
+      'four-4x25-2x2-grid'    => t('2x2 Grid'),
+      'four-4x25-stack'       => t('Full stack'),
+    ),
+  );
+  // 5 COL
+  $form['at-layout']['rp']['rpw']['sl']['fivecol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Five column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['sl']['fivecol']['smartphone_landscape_five_5x20'] = array(
+    '#type' => 'radios',
+    '#title' => t('Five 5x20'),
+    '#default_value' => theme_get_setting('smartphone_landscape_five_5x20'),
+    '#options' => array(
+      'five-5x20'            => t('5x20 default'),
+      'five-5x20-2x3-grid'   => t('2/3 Split grid'),
+      'five-5x20-1x2x2-grid' => t('Top stack'),
+      'five-5x20-stack-2'    => t('Stack 50/50 bottom'),
+      'five-5x20-stack'      => t('Full stack'),
+    ),
+  );
+  // 6 COL
+  $form['at-layout']['rp']['rpw']['sl']['sixcol'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Six column'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at-layout']['rp']['rpw']['sl']['sixcol']['smartphone_landscape_six_6x16'] = array(
+    '#type' => 'radios',
+    '#title' => t('Six 6x16'),
+    '#default_value' => theme_get_setting('smartphone_landscape_six_6x16'),
+    '#options' => array(
+      'six-6x16'          => t('6x16 default'),
+      'six-6x16-3x2-grid' => t('3x2 Grid'),
+      'six-6x16-2x3-grid' => t('2x3 Grid'),
+      'six-6x16-stack'    => t('Full stack'),
+    ),
+  );
+  // Inset
+  $form['at-layout']['rp']['rpw']['sl']['inset'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Inset'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  // inset left
+  $form['at-layout']['rp']['rpw']['sl']['inset']['smartphone_landscape_inset_left'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset left'),
+    '#default_value' => theme_get_setting('smartphone_landscape_inset_left'),
+    '#options' => array(
+      'three-inset-left'       => t('Inset left default'),
+      'three-inset-left-wrap'  => t('Wrap inset'),
+      'three-inset-left-stack' => t('Full stack'),
+    ),
+  );
+  // inset right
+  $form['at-layout']['rp']['rpw']['sl']['inset']['smartphone_landscape_inset_right'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inset right'),
+    '#default_value' => theme_get_setting('smartphone_landscape_inset_right'),
+    '#options' => array(
+      'three-inset-right'       => t('Inset right default'),
+      'three-inset-right-wrap'  => t('Wrap inset'),
+      'three-inset-right-stack' => t('Full stack'),
+    ),
+  );
+  // Global Settings
+  $form['at-layout']['global-settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Global Settings'),
+  );
+  $form['at-layout']['global-settings']['disable-rs'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Respond.js'),
+    '#description' => t('<h3>Disable Responsive Layout and Styles</h3><p>By checking this setting the site will use only the Standard Layout and the default Gpanels and Panels layouts. You can turn this back on at any time.</p>'),
+  );
+  $form['at-layout']['global-settings']['disable-rs']['disable_responsive_styles'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable responsive layout and styles'),
+    '#default_value' => theme_get_setting('disable_responsive_styles'),
+  );
+  $form['at-layout']['global-settings']['respondjs'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Enable Media Query Support in Non-supporting Browsers'),
+    '#description' => t('<h3>Enable Media Query Support in Non-supporting Browsers</h3><p>Setting this to ON will force IE6, 7 and 8 to rely on <a href="!link" target="_blank">respond.js</a> to set the layout. There are known issues with doing this (such as performance overhead) and you should check the <a href="!link2" target="_blank">respond.js issue queue</a>. This feature is provided as an option and usage is at your own risk and you understand the issues that may occur should you choose to enable this setting.</p><p>When this setting is OFF the responsive capabilites are disabled for IE6, 7 and 8 and those browsers will display the Standard Layout and the default layout for Gpanels and Panels only.</p><p>Note that IE9 and above natively support media queries and do not need this setting to support the responsive layout and styles.</p>', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
+    '#states' => array(
+      'disabled' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at-layout']['global-settings']['respondjs']['load_respondjs'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable media queries in IE8 and below'),
+    '#description' => t('<small>(By enabling this setting you agree to never bug Jeff again about respond.js and IE...)</small>'),
+    '#default_value' => theme_get_setting('load_respondjs'),
+  );
+  // DEBUG
+  $form['at-layout']['debug'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Debug Layout'),
+  );
+  $form['at-layout']['debug']['region-highlighting'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Debug Layout by highlighting regions'),
+    '#description' => t('<h3>Debug Layout by highlighting regions</h3><p>Highlight regions so you can easily view the layout. This will show standard regions in yellow and Gpanel and Panel regions in pink. Region class names are shown in white with dark background. The Gpanel or Panel ID is shown in the top right corner. This only works in browsers that supports the :before pseudo selector (all modern browsers).</p>'),
+  );
+  $form['at-layout']['debug']['region-highlighting']['expose_regions'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Highlight regions'),
+    '#default_value' => theme_get_setting('expose_regions'),
+  );
+  
+  $form['at-layout']['debug']['region-highlighting']['load_all_panels'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels.'),
+    '#default_value' => theme_get_setting('load_all_panels'),
+  );
   // All media queries for copy/pastings if you need them
   // build array for media query display
+  $queries = '';
   $mq = array();
   $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . theme_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';
   $mq[] =  '/* Smartphone landscape */' . "\n" . '@media ' . theme_get_setting('smartphone_landscape_media_query') . ' {' . "\n" . '}';
@@ -635,33 +1281,40 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $mq[] =  '/* Tablet landscape */' . "\n" . '@media ' . theme_get_setting('tablet_landscape_media_query') . ' {' . "\n" . '}';
   $mq[] =  '/* Standard layout */' . "\n" . '@media ' . theme_get_setting('bigscreen_media_query') . ' {' . "\n" . '}';
   $queries = implode("\n\n", $mq);
-  $form['at']['mediaqueries'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('All Media Queries'),
-  );
-  $form['at']['mediaqueries']['mq'] = array(
+  $form['at-layout']['debug']['mediaqueries'] = array(
     '#type' => 'fieldset',
     '#title' => t('<h3>All Media Queries - Copy Only!</h3>'),
-    '#description' => t('<h3>All Media Queries - Copy Only</h3><p>Copy and paste these to <strong>!themename.responsive.style.css</strong> in the CSS folder in the <em>!themename</em> subtheme. You only need to do this if you have modifed the default media query in one or more of the Standard, Tablet or Smartphone layouts.</p><p>Do not enter anything here - this is display only!</p>', array('!themename' => $GLOBALS['theme_key'])),
+    '#description' => t('<h3>All Media Queries - Copy Only</h3><p>These are the media queries currently being used by your theme. This is provided so you may save a backup copy for reference. Do not enter anything here - this is display only!</p>'),
   );
-  $form['at']['mediaqueries']['mq']['check'] = array(
+  $form['at-layout']['debug']['mediaqueries']['check'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable the text field so I can copy this now.'),
   );
-  $form['at']['mediaqueries']['mq']['output'] = array(
+  $form['at-layout']['debug']['mediaqueries']['output'] = array(
     '#type' => 'textarea',
     '#rows' => 18,
-    '#default_value' => $queries,
+    '#default_value' => $queries ? $queries : '',
     '#states' => array(
       'disabled' => array(
           'input[name="check"]' => array('checked' => FALSE),
       ),
     ),
   );
+  // STYLE SETTINGS
+  // Build a custom header for the style settings form
+  $styles_header  = '<div class="styles-header theme-settings-header clearfix">';
+  $styles_header .= '<h1>' . t('Style Settings') . '</h1>';
+  $styles_header .= '</div>';
+  $form['at'] = array(
+    '#type' => 'vertical_tabs',
+    '#weight' => -9,
+    '#prefix' => $styles_header,
+    '#default_tab' => 'defaults',
+  );
   // Breadcrumbs
   $form['at']['breadcrumb'] = array(
     '#type' => 'fieldset',
-    '#weight' => '96',
+    '#weight' => 96,
     '#title' => t('Breadcrumbs'),
   );
   $form['at']['breadcrumb']['bd'] = array(
@@ -706,7 +1359,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Search Settings
   $form['at']['search-results'] = array(
     '#type' => 'fieldset',
-    '#weight' => '97',
+    '#weight' => 97,
     '#title' => t('Search Results'),
   );
   $form['at']['search-results']['srs'] = array(
@@ -757,7 +1410,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   if (theme_get_setting('horizontal_login_block_enable') == 'on') {
     $form['at']['login-block'] = array(
       '#type' => 'fieldset',
-      '#weight' => '99',
+      '#weight' => 99,
       '#title' => t('Login Block'),
     );
     $form['at']['login-block']['hlb'] = array(
@@ -776,7 +1429,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Comments
   $form['at']['comments'] = array(
     '#type' => 'fieldset',
-    '#weight' => '100',
+    '#weight' => 100,
     '#title' => t('Comments'),
   );
   $form['at']['comments']['comment-title'] = array(
@@ -790,20 +1443,37 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('comments_hide_title'),
     '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
   );
+  // Feed icons
+  $form['at']['feed-icons'] = array(
+    '#type' => 'fieldset',
+    '#weight' => 101,
+    '#title' => t('Feed Icons'),
+  );
+  $form['at']['feed-icons']['feed-icons-title'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Feed Icons'),
+    '#description' => t('<h3>Feed Icons</h3>'),
+  );
+  $form['at']['feed-icons']['feed-icons-title']['feed_icons_hide'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Do not display the RSS Feed Icons'),
+    '#default_value' => theme_get_setting('feed_icons_hide'),
+    '#description' => t('Checking this setting will remove RSS feed icons. This will not affect the Syndicate block icon.'),
+  );
   // Development settings
   $form['at']['classes'] = array(
     '#type' => 'fieldset',
-    '#weight' => '101',
+    '#weight' => 102,
     '#title' => t('CSS Classes'),
   );
   $form['at']['classes']['extra-classes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Extra Classes'),
-    '#description' => t('<h3>Add or Remove CSS Classes</h3><p>Many classes are removed by default (unchecked checkbox), to add classes check the checkbox.</p>'),
+    '#description' => t('<h3>Extra CSS Classes</h3>'),
   );
   $form['at']['classes']['extra-classes']['extra_page_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), and a language class (i18n).') . '</span>',
+    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n).') . '</span>',
     '#default_value' => theme_get_setting('extra_page_classes'),
   );
   $form['at']['classes']['extra-classes']['extra_article_classes'] = array(
@@ -813,17 +1483,17 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   );
   $form['at']['classes']['extra-classes']['extra_comment_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, odd/even classes and classes for title, user picture and signature handling.') . '</span>',
+    '#title' => t('Comments: ') . '<span class="description">' . t('add anonymous, author, viewer, new, odd/even classes and classes for hidden titles, user picture and signature handling.') . '</span>',
     '#default_value' => theme_get_setting('extra_comment_classes'),
   );
   $form['at']['classes']['extra-classes']['extra_block_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Blocks: ') . '<span class="description">' . t('add odd/even, block region and block count classes.') . '</span>',
+    '#title' => t('Blocks: ') . '<span class="description">' . t('add odd/even (zebra classes), block region and block count classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_block_classes'),
   );
   $form['at']['classes']['extra-classes']['extra_menu_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Menus: ') . '<span class="description">' . t('add an extra class based on the menu link ID (mlid).') . '</span>',
+    '#title' => t('Menus: ') . '<span class="description">' . t('add extra classes based on the menu link ID (mlid) and menu level (depth).') . '</span>',
     '#default_value' => theme_get_setting('extra_menu_classes'),
   );
   $form['at']['classes']['extra-classes']['extra_item_list_classes'] = array(
@@ -835,7 +1505,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['at']['markup'] = array(
     '#type' => 'fieldset',
     '#title' => t('Markup'),
-    '#weight' => 101,
+    '#weight' => 103,
   );
   $form['at']['markup']['menu-links'] = array(
     '#type' => 'fieldset',
@@ -849,7 +1519,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
-
+  $form['theme_settings']['#collapsible'] = TRUE;
+  $form['theme_settings']['#collapsed'] = TRUE;
+  $form['logo']['#collapsible'] = TRUE;
+  $form['logo']['#collapsed'] = TRUE;
+  $form['favicon']['#collapsible'] = TRUE;
+  $form['favicon']['#collapsed'] = TRUE;
   /**
    * The following will be processed even if the theme is inactive.
    * If you are on a theme specific settings page but it is not an active
@@ -886,3 +1561,5 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['#validate'][] = 'at_theme_settings_validate';
   $form['#submit'][] = 'at_theme_settings_submit';
 }
+// Include custom form validation, submit function and layout builder functions
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/layout.inc');

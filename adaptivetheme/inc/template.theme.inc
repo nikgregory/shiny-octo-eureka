@@ -6,6 +6,7 @@
  * If you need to add or modify theme functions do it in your sub-theme.
  */
 
+
 /**
  * Returns HTML for a breadcrumb trail.
  */
@@ -111,13 +112,19 @@ if (!function_exists('dhtml_menu_init')) {
     if ($element['#below']) {
       $sub_menu = drupal_render($element['#below']);
     }
-    if (theme_get_setting('extra_menu_classes')) {
-      $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
+    if (theme_get_setting('extra_menu_classes') && !empty($element['#original_link'])) {
+      if (!empty($element['#original_link']['depth'])) {
+        $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
+      }
+      if (!empty($element['#original_link']['mlid'])) {
+        $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
+      }
     }
-    if (theme_get_setting('menu_item_span_elements')) {
+    if (theme_get_setting('menu_item_span_elements') && !empty($element['#title'])) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
+
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }

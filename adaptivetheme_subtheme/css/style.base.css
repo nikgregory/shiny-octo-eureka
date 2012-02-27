@@ -1,0 +1,622 @@
+/* Elements - set global styles for html elements */
+/* Reset */
+html {
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body,
+h1,h2,h3,h4,h5,h6,
+h1 img,h2 img,h3 img,h4 img,h5 img,h6 img,
+em,dfn,del,ins,
+a,
+tbody,tfoot,thead,tr,
+ul,li,
+label,legend,
+figure,figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset HTML5 elements */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+/**
+ * Flexible Media and Cross browser improvements
+ * - This can cause issues in table cells where no width is set on the column,
+ *   only in some versions of webkit and IE 7/8.
+ * - declaring the width attribute on image elements and using max-width causes
+ *   the "dissappering images" bug in IE8.
+ * - Google maps break also, see below for fixes.
+ */
+img {
+  max-width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* Corrects inline-block display not defined in IE6/7/8/9 & FF3 */
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* Prevents modern browsers from displaying 'audio' without controls */
+audio:not([controls]) {
+  display: none;
+}
+
+/* Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4: Known issue: no IE6 support */
+[hidden] {
+  display: none;
+}
+
+/* Kill flexible images in less than IE9 */
+.lt-ie9 img {
+  max-width: none;
+}
+
+/* Override max-width 100% for map displays */
+.gmap img,
+.view-gmap img,
+.openlayers-map img,
+#getlocations_map_canvas img,
+#locationmap_map img {
+  max-width: none !important;
+}
+
+/* Improve IE's resizing of images */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/**
+ * The default font size is 16px x 81.3% = 13px
+ * Use http://pxtoem.com to calculate proper font size and scale.
+ *
+ * The font size is set on the html element so we can dynamically
+ * resize the font using body classes.
+ */
+html {
+  font-size: 81.3%;
+}
+body {
+  font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+  line-height: 1.5;
+}
+h1 {
+  font-size: 1.538em;
+}
+h2 {
+  font-size: 1.385em;
+}
+h3 {
+  font-size: 1.231em;
+}
+h4 {
+  font-size: 1.077em;
+}
+h5,
+h6 {
+  font-size: 1em;
+}
+img,
+a img {
+  border: 0;
+}
+p {
+  margin: 0 0 1.5em;
+  padding: 0;
+}
+em,
+dfn {
+  font-style: italic;
+}
+ins {
+  border-bottom: none;
+  text-decoration: none;
+}
+pre,
+code,
+tt,
+samp,
+kbd,
+var {
+  font-size: 1em;
+  font-family: Consolas, "Lucida Console", Menlo, Monaco, "DejaVu Sans Mono", monospace, sans-serif; /* sans-serif Safari hack */
+}
+blockquote,
+q {
+  font-style: italic;
+  quotes: "" "";
+}
+blockquote {
+  margin: 0 0 1.5em;
+  padding: 0 0 0 3em;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+}
+blockquote p {
+  margin: 0;
+}
+strong,
+dfn,
+caption,
+th {
+  font-weight: 700;
+}
+
+/* Lists */
+ul,
+ol {
+  margin: 0 0 1.5em 40px;
+  padding: 0;
+}
+.item-list ul,
+.item-list ol {
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+.item-list ul li {
+  margin: 0;
+  padding: 0;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul,
+.block ul ul,
+.block ul ol,
+.block ol ol,
+.block ol ul,
+.item-list ul ul,
+.item-list ul ol,
+.item-list ol ol,
+.item-list ol ul {
+  margin-bottom: 0;
+}
+ul {
+  list-style-type: disc;
+}
+ul ul ul {
+  list-style-type: square;
+}
+ol {
+  list-style-type: decimal;
+}
+ol ol {
+  list-style-type: lower-alpha;
+}
+ol ol ol {
+  list-style-type: lower-roman;
+}
+ul ul,
+ul ul ul ul {
+  list-style-type: circle;
+}
+dt {
+  font-weight: 700;
+}
+dd {
+  margin: 0 0 1.5em 40px;
+}
+
+/**
+ * Adaptivetheme takes a pretty heavy handed approach to form styling,
+ * this is so you can have decent looking forms without having to do a
+ * lot of work. The CSS is included in full, including all positioning,
+ * so you can change anything you want.
+ */
+form {
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+/* Focus styles for accessibility and usabiltiy. */
+.form-text:focus,
+.form-checkbox:focus,
+.form-radio:focus,
+.form-select:focus {
+  border: 1px solid #fc0;
+  background: #ffffdf;
+}
+textarea:focus {
+  border: 1px solid #fc0;
+  background: #fff;
+}
+
+/* Inputs and textarea */
+input {
+  margin: 0;
+  max-width: 100%;
+}
+input.text,
+input.title,
+textarea,
+select {
+  border: 1px solid #ccc;
+  margin: 0;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+  *overflow: visible;
+}
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+input.text,
+input.title {
+  padding: .5em;
+}
+input.form-text,
+textarea {
+  border: 1px solid #ccc;
+  height: auto;
+  padding: 2px;
+}
+textarea,
+input {
+  font: 1em normal Arial, Helvetica, sans-serif;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px;
+}
+div.resizable-textarea textarea {
+  margin-top: 0;
+}
+
+/* Misc */
+.form-item,
+.form-action {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.exposed-filters .form-item {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.form-item textarea.error {
+  padding: 2px;
+}
+.form-item .description,
+fieldset .description,
+.fieldset-layout-settings dd {
+  font-size: 0.846em;
+}
+.form-item label {
+  font-weight: 400;
+}
+
+/* Required, mark */
+span.form-required,
+span.marker {}
+
+
+/* Fieldsets */
+fieldset {
+  background: transparent;
+  border: 1px solid #dadada;
+  margin: 10px 0;
+  padding: 10px;
+}
+fieldset fieldset:last-child {
+  margin-bottom: 0;
+}
+legend,
+fieldset legend {
+  border: 0;
+  display: block;
+  font-weight: 400;
+  padding: 0 10px 0 0;
+  white-space: normal;
+  *margin-left: -7px;
+}
+html.js fieldset.collapsed {
+  background: transparent;
+  padding-top: 5px;
+}
+
+/* Form descriptions */
+.description {}
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 0;
+}
+
+/* Search */
+#search-block-form {}
+#search-block-form > div {}
+#search-block-form .container-inline{}
+#edit-search-block-form-1-wrapper {}
+#search-block-form label {}
+#search-block-form input {}
+#search-block-form .form-submit {}
+#search-block-form .form-text {}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+.panel-pane #search-block-form {
+  margin-bottom: 20px;
+}
+
+/* Advanced search form */
+fieldset#edit-advanced fieldset {
+  float: left;
+  margin: 0 10px 10px 0;
+}
+fieldset#edit-advanced fieldset .fieldset-legend {
+  background: none;
+  padding-left: 1em;
+}
+.advanced-search-submit {
+  clear: both;
+}
+.search-advanced .criterion {
+  float: none;
+  margin: 0 5px;
+}
+#edit-keywords-fieldset .form-item:first-child {
+  margin-top: 5px;
+}
+#search-form {
+  margin: 10px 0;
+}
+#search-form > div {}
+#search-form .container-inline {}
+#search-form label {}
+#search-form input {}
+#search-form .form-item {}
+#search-form .form-submit {}
+
+/* User login */
+#user-login-form ul {
+  margin: 0;
+  padding: 0;
+}
+#user-login-form li.openid-link,
+#user-login-form li.user-link {
+  text-align: center;
+}
+#user-login ul {
+  margin: 0 0 5px;
+}
+#user-login ul li {
+  margin: 0;
+}
+#user-login-form .item-list li {
+  list-style: none;
+  margin: 0;
+}
+#user-login-form li.openid-link,
+#user-login li.openid-link {
+  background: none;
+}
+
+/* hide lable class - mostly deprecated but could be present in an upgraded theme */
+.hide-label label {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  background: none;
+}
+
+/* Admin filters, could be redundant, need to test. */
+#user-admin-filter ul li,
+#article-admin-filter ul li {
+  list-style: none;
+}
+#article-admin-filter ul {
+  padding: .5em 0;
+}
+#edit-operation-wrapper select {
+  margin: .5em;
+}
+
+/* Tips overrides */
+.field-type-text-long fieldset {
+  padding: 10px 0;
+}
+.field-type-text-long fieldset .form-item {
+  margin: 0;
+  padding: 0 0 0 15px;
+}
+fieldset .filter-help {
+  padding: 0 15px 5px;
+}
+.filter-guidelines {
+  font-size: .923em;
+  margin: 0;
+  padding: 5px 18px 10px;
+}
+.tips {
+  font-size: 0.857em;
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
+/* Special case modules */
+#devel-switch-user-form {
+  margin-bottom: 0;
+}
+
+
+/* Tables - set global styles for tables */
+table {
+  border: 1px solid;
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-size: inherit;
+  font: 100%;
+  margin: 10px 0;
+  padding: 0;
+  width: 100%;
+}
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  border-color: #ccc;
+}
+table.sticky-header {
+  z-index: 10;
+}
+table,
+td,
+th {
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+}
+thead th {
+  color: #494949;
+  font-weight: 700;
+}
+td,
+th {
+  border-bottom: 0;
+  margin: 0;
+  padding: 5px 7px;
+}
+tbody {}
+tr.even,
+tr.odd {
+  border-bottom: 0;
+}
+tr.odd,
+tr.info,
+tbody tr:nth-child(2n+1) {
+  background-color: #f5f5f5;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+tr.even {
+  background-color: #fff;
+}
+tr.drag {
+  background-color: #fffff0;
+}
+tr.drag-previous {
+  background-color: #ffd;
+}
+tr.odd td.active {
+  background-color: #eee;
+}
+tr.even td.active {
+  background-color: #f7f7f7;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+/* Fields - set global styles for fields */
+.field {}
+
+/* Field labels are h2 in Adaptivetheme */
+.field .field-label {
+  font-size: 1em;
+  font-weight: 700;
+  line-height: inherit;
+  margin: 0;
+}
+.field-lable-above .field-label {}
+.field-lable-inline .field-label {
+  display: inline;
+}
+
+/* Imagefields */
+.field-type-image {}
+.field-type-image img {}
+
+/* Use "datetime" when creating new CCK date fields. */
+.field-type-datetime {}
+
+/* Filefield field. */
+.field-type-filefield {}
+
+/* Node reference field. */
+.field-type-nodereference {}
+
+/* User reference field. */
+.field-type-userreference {}
+
+/* Number fields. */
+.field-type-number-decimal {}
+.field-type-number-float   {}
+.field-type-number-integer {}
+
+/* Text fields. */
+.field-type-text {}
+.field-type-text-long {}
+
+/* Term reference fields. */
+.field-type-taxonomy-term-reference .field-label {
+  font-size: 1em;
+}
+.field-type-taxonomy-term-reference ul {
+  margin: 0;
+  padding: 0;
+}
+.field-type-taxonomy-term-reference ul li {
+  display: inline;
+  list-style: none;
+  padding: 0 10px 0 0;
+}

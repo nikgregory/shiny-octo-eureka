@@ -6,11 +6,25 @@
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
-  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav class="clearfix">' . $menu . '</nav></div>';
+  $output = '<div id="' . $type . '-menu-bar" class="nav clearfix"><nav id="' . $type . '-menu" class="clearfix">' . $menu . '</nav></div>';
   return $output;
 }
 
-// Load sub-theme media queries, $files is an array of css file names, $themename is the theme name.
+// Load sub-theme responsive stylesheets in link elements
+function load_subtheme_responsive_styles($file, $theme_key, $media_query) {
+  $path_to_theme = drupal_get_path('theme', $theme_key);
+  $filepath = $path_to_theme . '/css/' . $file;
+  drupal_add_css($filepath, array(
+    'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+    'group' => CSS_THEME,
+    'media' => $media_query,
+    'every_page' => TRUE,
+    'weight' => 99,
+    )
+  );
+}
+
+// Load sub-theme media queries, 7.x-2.x backward compatibility, this is never used by 7.x-3.x themes.
 function load_subtheme_media_queries($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $file) {
@@ -180,4 +194,18 @@ function css_browser_selector($ua = NULL) {
     $b[] = 'linux';
   }
   return join(' ', $b);
+}
+
+// Might use one day, crufty and can live here for now
+function minify_css($css) {
+	$css = preg_replace( '#\s+#', ' ', $css );
+	$css = preg_replace( '#/\*.*?\*/#s', '', $css );
+	$css = str_replace( '; ', ';', $css );
+	$css = str_replace( ': ', ':', $css );
+	$css = str_replace( ' {', '{', $css );
+	$css = str_replace( '{ ', '{', $css );
+	$css = str_replace( ', ', ',', $css );
+	$css = str_replace( '} ', '}', $css );
+	$css = str_replace( ';}', '}', $css );
+	return trim( $css );
 }

@@ -23,7 +23,7 @@ function adaptivetheme_process_html_tag(&$vars) {
 // Preprocess variables for html.tpl.php
 function adaptivetheme_preprocess_html(&$vars) {
 
-  global $language;
+  global $language, $theme;
 
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -81,36 +81,82 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load the media queries layout CSS files
-  global $theme;
-  $filename = $theme . '_mediaqueries_css';
-  $file = variable_get($filename);
-  $path = "public://at_css";
-  if (!empty($file)) {
-    $filepath = $path . '/' . $file;
-    drupal_add_css($filepath, array(
-      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-      'group' => CSS_THEME,
-      'media' => 'all',
-      'every_page' => TRUE,
-      )
-    );
+  // Load CSS and JS after a lot of conditional checking...
+  if (theme_get_setting('disable_responsive_styles') == FALSE) {
+    // Load responsive styles if its not disabled
+    $filename = $theme . '_responsive_css';
+    $file = variable_get($filename);
+    $path = "public://at_css";
+    if (!empty($file)) {
+      $filepath = $path . '/' . $file;
+      drupal_add_css($filepath, array(
+        'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+        'group' => CSS_THEME,
+        'media' => 'screen',
+        'every_page' => TRUE,
+        )
+      );
+    }
+    // IE css if respond.js is disabled
+    if (theme_get_setting('load_respondjs') == FALSE) {
+      $ur_filename = $theme . '_unresponsive_css';
+      $ur_file = variable_get($ur_filename);
+      if (!empty($ur_file)) {
+        $ur_filepath = $path . '/' . $ur_file;
+        drupal_add_css($ur_filepath, array(
+          'group' => CSS_THEME,
+          'media' => 'screen',
+          'browsers' => array(
+            'IE' => '(lt IE 9)&(!IEMobile 7)',
+            '!IE' => FALSE,
+            ),
+          'preprocess' => FALSE,
+          )
+        );
+      }
+    }
+    // add respond.js to the footer if both responsive styles and respond.js are enabled
+    if (theme_get_setting('load_respondjs') == TRUE) {
+      // Ad respond.js to the footer to avoid crashes in IE8 (yeah, right...).
+      drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
+        array(
+          'type' => 'file',
+          'scope' => 'footer',
+          'group' => JS_THEME,
+          'preprocess' => TRUE,
+          'cache' => TRUE,
+        )
+      );
+    }
   }
-
-  // Ad respond.js to the footer to avoid crashes in IE8
-  drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
-    array(
-      'type' => 'file',
-      'scope' => 'footer',
-      'group' => JS_THEME,
-      'preprocess' => TRUE,
-      'cache' => TRUE,
-    )
-  );
+  if (theme_get_setting('disable_responsive_styles')) {
+    // Load unresponsive styles... cause nothing else is by this point...
+    $ur_filename = $theme . '_unresponsive_css';
+    $ur_file = variable_get($ur_filename);
+    $path = "public://at_css";
+    if (!empty($ur_file)) {
+      $ur_filepath = $path . '/' . $ur_file;
+      drupal_add_css($ur_filepath, array(
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        'media' => 'screen',
+        'weight' => 100,
+        'every_page' => TRUE,
+        )
+      );
+    }
+  }
 
   // add a body class if the site name is hidden
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['classes_array'][] = 'site-name-hidden';
+  }
+
+  // add a body class for exposing region
+  if (theme_get_setting('expose_regions') == TRUE) {
+    $vars['classes_array'][] = 'debug-regions';
+    $vars['classes_array'][] = 'debug-panels';
+    drupal_add_css(drupal_get_path('theme', 'adaptivetheme') . '/css/debug-regions.css');
   }
 }
 
@@ -129,6 +175,14 @@ function adaptivetheme_process_html(&$vars) {
     }
   }
   $vars['classes'] = trim(implode(' ', $classes));
+
+  // Load the panels test
+  if (theme_get_setting('load_all_panels') == TRUE) {
+    if (drupal_is_front_page()) {
+       $panels_test = file_get_contents(drupal_get_path('theme', 'adaptivetheme') . '/layouts/panels_test.html');
+       $vars['page'] = $panels_test;
+    }
+  }
 }
 
 // Preprocess variables for page.tpl.php
@@ -158,9 +212,10 @@ function adaptivetheme_preprocess_page(&$vars) {
   ) : '';
 
   if (isset($vars['main_menu'])) {
-
-    $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
-
+    $text = t('Main menu');
+    if (module_exists('block')) {
+      $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
+    }
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
@@ -172,9 +227,6 @@ function adaptivetheme_preprocess_page(&$vars) {
         'class' => array('element-invisible'),
       )
     ));
-  }
-  if (!empty($vars['primary_navigation'])) {
-    $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
   }
   if (isset($vars['secondary_menu'])) {
     $vars['secondary_navigation'] = theme('links', array(
@@ -189,12 +241,23 @@ function adaptivetheme_preprocess_page(&$vars) {
       )
     ));
   }
-  if (!empty($vars['secondary_navigation'])) {
-    $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
-  }
 
+  // Build variables for Primary and Secondary local tasks
   $vars['primary_local_tasks'] = menu_primary_local_tasks();
   $vars['secondary_local_tasks'] = menu_secondary_local_tasks();
+
+  // Add back the $search_box var to D7
+  if (module_exists('search')) {
+    $search_box = drupal_get_form('search_form');
+    $vars['search_box'] = '<div id="search-box">' . drupal_render($search_box) . '</div>';
+  }
+
+  // Remove the infernal feed icons
+  if (theme_get_setting('feed_icons_hide') == TRUE) {
+    $vars['feed_icons'] = '';
+  }
+
+  // Attribution variable used in admin theme and some others
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
   // Work-around a stupid bug in Drupal 7
@@ -206,6 +269,16 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
   if (arg(0) == 'user' && arg(1) == 'register') {
     drupal_set_title(t('Create new account'));
+  }
+}
+
+// Process variables for page.tpl.php
+function adaptivetheme_process_page(&$vars) {
+  if (!empty($vars['primary_navigation'])) {
+    $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
+  }
+  if (!empty($vars['secondary_navigation'])) {
+    $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
   }
 }
 
@@ -252,7 +325,6 @@ function adaptivetheme_preprocess_node(&$vars) {
   if (!$vars['status']) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
-
 }
 
 // Process variables for node.tpl.php
@@ -279,7 +351,6 @@ function adaptivetheme_process_node(&$vars) {
 
 // Preprocess variables for comment.tpl.php
 function adaptivetheme_preprocess_comment(&$vars) {
-
   if (theme_get_setting('extra_comment_classes')) {
     $vars['classes_array'][] = $vars['zebra'];
     if (theme_get_setting('comments_hide_title')) {
@@ -338,8 +409,11 @@ function adaptivetheme_process_comment(&$vars) {
 
 // Preprocess variables for block.tpl.php
 function adaptivetheme_preprocess_block(&$vars) {
+  // Generate the wrapper element, if there's a title, use section
+  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
 
   if (theme_get_setting('extra_block_classes')) {
+    $vars['classes_array'][] = 'block-' . $vars['block']->delta;
     $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
     $vars['classes_array'][] = 'block-count-' . $vars['id'];
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
@@ -351,25 +425,33 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['classes_array'][] = 'lb-s';
   }
 
+  // Give our block titles and content some class
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
-  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
 
+  // Use nav element for menu blocks and provide a powerfull suggestion for all of them
+  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
   if (in_array($vars['block']->delta, $nav_blocks)) {
-    $vars['theme_hook_suggestions'][] = 'block__menu';
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
   }
   $nav_modules = array('superfish', 'nice_menus');
   if (in_array($vars['block']->module, $nav_modules)) {
-    $vars['theme_hook_suggestions'][] = 'block__menu';
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
   }
+
+  // Hide the title for blocks in the menu bar
   if ($vars['block']->region == 'menu_bar') {
-    $vars['theme_hook_suggestions'][] = 'block__menu_bar';
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 
-  // Provide template suggestions such as block--header--search, or block--menu-bar--menu
+  // Provide additional suggestions so the block__menu suggestion can be overridden easily
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
+  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
+
+  //dsm($vars['theme_hook_suggestions']); // debug suggestions
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
   $roles = array(
@@ -416,7 +498,6 @@ function adaptivetheme_preprocess_block(&$vars) {
       }
     }
   }
-
 }
 
 // Changes the search form to use the "search" input element of HTML5 (from the Boron theme)
@@ -456,11 +537,70 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }
 
+//Override or insert vars into the field template.
+function adaptivetheme_preprocess_field(&$vars) {
+  $element = $vars['element'];
+
+  // add a view mode class to fields
+  $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
+
+  // provide an variable we can use to test the view mode inside templates
+  $vars['field_view_mode'] = $element['#view_mode'] ? $element['#view_mode'] : '';
+
+  // enable captioning capability for image fields
+  if ($element['#field_type'] == 'image') {
+    $vars['image_caption_teaser'] = FALSE;
+    $vars['image_caption_full'] = FALSE;
+    if (theme_get_setting('image_caption_teaser') == 1) {
+      $vars['image_caption_teaser'] = TRUE;
+    }
+    if (theme_get_setting('image_caption_full') == 1) {
+      $vars['image_caption_full'] = TRUE;
+    }
+  }
+}
+
 // Preprocess variables for region.tpl.php
 function adaptivetheme_preprocess_region(&$vars, $hook) {
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
+
+  //  if (substr($vars['region'], -4, 4) == '_top') {
+  //    $vars['classes_array'][] = 'conditional-stack-top';
+  //  }
+  //  if (substr($vars['region'], -7, 7) == '_bottom') {
+  //    $vars['classes_array'][] = 'conditional-stack-bottom';
+  //  }
+
+  // Add classes to conditional stack regions
+  $conditional_stack_regions = array(
+    'three_25_25_50_top',
+    'three_25_25_50_bottom',
+    'three_25_50_25_top',
+    'three_25_50_25_bottom',
+    'three_50_25_25_top',
+    'three_50_25_25_bottom',
+    'three_33_top',
+    'three_33_bottom',
+    'two_50_top',
+    'two_50_bottom',
+    'two_33_66_top',
+    'two_33_66_bottom',
+    'two_66_33_top',
+    'two_66_33_bottom',
+    'two_brick_top',
+    'two_brick_middle',
+    'two_brick_bottom',
+    'threecol_inset_left_top',
+    'threecol_inset_left_bottom',
+    'threecol_inset_right_top',
+    'threecol_inset_right_bottom',
+  );
+  if (in_array($vars['region'], $conditional_stack_regions)){
+    $vars['classes_array'][] = 'region-conditional-stack';
+  }
+
 }
 
 // Process variables for aggregator-item.tpl.php

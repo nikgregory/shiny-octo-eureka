@@ -1,0 +1,184 @@
+
+// SASS integration is in development, please help me - http://drupal.org/project/issues/adaptivetheme
+
+// import partials
+@import "partial.base"
+
+html {
+}
+body {
+}
+
+// Main wrappers
+div#page {
+}
+#header-wrapper {
+}
+#menu-wrapper {
+}
+#secondary-content-wrapper {
+}
+#tertiary-content-wrapper {
+}
+#sub-panels-wrapper {
+}
+#footer-panels-wrapper {
+}
+#footer-wrapper {
+}
+
+// Links
+a:link,
+a:visited,
+a:active,
+a.active {
+}
+a:hover,
+a:focus {
+}
+
+// Header
+#site-slogan,
+#site-name a {}
+
+.region-header .block a,
+.region-header .block-menu a,
+.region-header .block .item-list a {}
+.region-header #block-user-login label,
+.region-header #search-block-form .form-submit {}
+
+// Menu bar
+.nav ul li a,
+.nav ul li a:hover,
+.nav ul li a:focus,
+.nav  ul li a:active {}
+
+.nav ul li a.active,
+.nav ul li.active-trail a {}
+
+// Superfish Skin
+.sf-menu a {
+  border: 0;
+}
+
+.sf-navbar.sf-style-none {}
+
+.sf-menu.sf-style-none li {}
+.sf-menu.sf-style-none li a {}
+
+.sf-menu.sf-style-none li li {}
+.sf-menu.sf-style-none li li li {}
+
+.sf-menu.sf-style-none li:hover,
+.sf-menu.sf-style-none li.sfHover,
+.sf-menu.sf-style-none li.active a {}
+
+.sf-menu.sf-style-none li a:focus,
+.sf-menu.sf-style-none li a:hover,
+.sf-menu.sf-style-none li a:active {}
+
+.sf-menu.sf-style-none li li:hover,
+.sf-menu.sf-style-none li li.sfHover,
+.sf-menu.sf-style-none li li.active a {}
+
+.sf-menu.sf-style-none li li a:focus,
+.sf-menu.sf-style-none li li a:hover,
+.sf-menu.sf-style-none li li a:active {}
+
+// Book nav
+.book-navigation ul.menu,
+.book-navigation .page-links {}
+
+// Breadcrumb
+#breadcrumb-wrapper {}
+#breadcrumb-wrapper a {}
+
+// Footer
+#footer, {}
+#footer a {}
+
+// Blocks
+.block-inner {}
+.block-title {}
+.block-content {}
+.block ul li a {}
+
+#main-content .block-content {}
+.block .article,
+.block .article-sticky {}
+
+.block-menu a,
+.block .item-list a {}
+
+// Poll
+.poll .bar {}
+.poll .bar .foreground {}
+
+// Articles
+.article-teaser {}
+.article-title {}
+.article-teaser.article-sticky {}
+
+// Fields
+.field-type-image {}
+.field-type-image .field-items {}
+.field-type-image figure {}
+
+// Comments
+.comment {}
+.comment-title {}
+#comments .odd {}
+#comments .even {}
+
+// Aggregator
+#aggregator .feed-source {}
+
+// Forum
+#forum td.container {}
+#forum thead, 
+#forum tbody {}
+
+// Profile
+#profile .profile {}
+#profile h2 {}
+
+// Pager
+div.item-list ul.pager li a,
+div.item-list ul.pager li a:hover,
+div.item-list ul.pager li a:focus,
+div.item-list ul.pager li a:active {
+}
+
+// Local task tabs
+ul.primary li a {
+}
+ul.primary li a:hover {
+}
+ul.primary li a.active,
+ul.primary li.active a {
+}
+ul.primary li a.active:hover,
+ul.primary li a.active:focus {
+}
+ul.secondary li {
+}
+
+// HTML elements
+blockquote {}
+hr {}
+
+// Tables
+tr.even {}
+tbody tr:nth-child(2n+1),
+tr.odd {}
+
+// Form
+input.form-text,
+textarea {}
+.form-submit {}
+.form-submit:hover,
+.form-submit:focus {}
+
+#search-block-form input.form-text,
+#search-block-form input::-webkit-input-placeholder,
+#search-block-form input:-moz-placeholder {}
