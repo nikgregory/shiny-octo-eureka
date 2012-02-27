@@ -11,16 +11,16 @@
 
 ;----------// Modular stylesheets
 
-  stylesheets[all][] = css/style.base.css
-  stylesheets[all][] = css/style.theme.css
-  stylesheets[all][] = css/style.modules.css
-  stylesheets[all][] = css/style.settings.css
+  stylesheets[screen, handheld][] = css/style.base.css
+  stylesheets[screen, handheld][] = css/style.theme.css
+  stylesheets[screen, handheld][] = css/style.modules.css
+  stylesheets[screen, handheld][] = css/style.settings.css
 
   ; Enable if using color module
-  ;stylesheets[all][] = css/style.colors.css
+  ;stylesheets[screen, handheld][] = css/style.colors.css
 
   ; Enable if you need some late breaking custom overrides
-  ;stylesheets[all][] = css/style.custom.css
+  ;stylesheets[screen, handheld][] = css/style.custom.css
 
   ; Enable print styles
   ;stylesheets[print][] = css/print.css

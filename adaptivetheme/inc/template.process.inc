@@ -92,7 +92,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($filepath, array(
         'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
         'group' => CSS_THEME,
-        'media' => 'screen',
+        'media' => 'screen, handheld',
         'every_page' => TRUE,
         )
       );
@@ -139,7 +139,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($ur_filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        'media' => 'screen',
+        'media' => 'screen, handheld',
         'weight' => 100,
         'every_page' => TRUE,
         )
@@ -445,6 +445,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   // Hide the title for blocks in the menu bar
   if ($vars['block']->region == 'menu_bar') {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
+    $vars['classes_array'][] = 'menu-wrapper';
   }
 
   // Provide additional suggestions so the block__menu suggestion can be overridden easily

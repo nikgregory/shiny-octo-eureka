@@ -1,4 +1,8 @@
 /* Layout */
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 /* Provide a backup layout for browsers that do not support media queries */
 .container {

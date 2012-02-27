@@ -10,7 +10,7 @@
   screenshot  = screenshot.png
 
 ;----------// Stylesheets
-  stylesheets[all][] = css/at.layout.css
+  stylesheets[screen, handheld][] = css/at.layout.css
 
 
 ;----------// Regions

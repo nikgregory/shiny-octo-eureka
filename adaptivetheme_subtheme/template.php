@@ -19,7 +19,7 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
 
   global $theme_key;
 
-  // Only load these files if responsiveness is still enabled - you can
+  // We only load these files if responsiveness is still enabled - you can
   // disable responsive capability using the theme settings - look under
   // the Global settings. Do not simply delete this - use the theme setting!
   if (theme_get_setting('disable_responsive_styles') == FALSE) {
