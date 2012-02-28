@@ -684,6 +684,9 @@ clear:both;
 .section-admin table {
   width: 100%;
 }
+.section-admin table.image-anchor {
+  width: auto;
+}
 .page-admin-build-themes #system-themes-form table {
   position: relative;
   z-index: 999;
@@ -760,13 +763,16 @@ div.messages {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-
 }
 #block-system-help {
-  background: url(images/help.png) no-repeat 5px 5px #f0f8ff;
+  background: url(images/help.png) no-repeat 8px 5px #f0f8ff;
   border: 0;
   margin: 10px 10px 0;
   padding: 0;
+  -khtml-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 .block-region {
   background-color: #f7f8f8;
@@ -785,7 +791,6 @@ div.messages {
   border-radius: 6px;
   
 }
-
 #page article.article-unpublished,
 #page article.comment-unpublished {
   background-color: #fffce5;
@@ -824,7 +829,9 @@ body.maintenance-page #header {
 }
 div.region-help,
 div.messages {
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
 }
 tr #acquia-agent-no-search {
   background-position: 24px 5px;
@@ -846,9 +853,8 @@ div.admin-requirements,div.admin-required {
   padding: 0;
 }
 #block-system-help .content {
-  min-height: 30px;
   margin: 0;
-  padding: 5px 0 10px 25px;
+  padding: 7px 0 10px 40px;
 }
 #block-system-help code,
 div.messages code,

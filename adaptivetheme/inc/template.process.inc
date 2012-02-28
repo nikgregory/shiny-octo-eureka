@@ -257,6 +257,13 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['feed_icons'] = '';
   }
 
+  // Remove block system main, just from the front page
+  if (drupal_is_front_page()) {
+    if (theme_get_setting('unset_block_system_main_front') == TRUE) {
+      $vars['page']['content']['system_main'] = '';
+    }
+  }
+
   // Attribution variable used in admin theme and some others
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
@@ -499,6 +506,7 @@ function adaptivetheme_preprocess_block(&$vars) {
       }
     }
   }
+
 }
 
 // Changes the search form to use the "search" input element of HTML5 (from the Boron theme)

@@ -27,6 +27,14 @@ html, body {
   width: 180px;
   margin-left: -180px;
 }
+
+/* Prevent the layout from collapsing if there is nothing in the content column */
+.content-inner {
+  min-height: 1px;
+}
+.lt-ie7 .content-inner {
+  height: 1px;
+}
  
 /* Add gutters */
 .block-inner,

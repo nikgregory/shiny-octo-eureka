@@ -70,9 +70,11 @@
             <?php endif; ?>
             <?php print render($title_suffix); ?>
 
-            <div id="content">
-              <?php print render($page['content']); ?>
-            </div>
+            <?php if ($content = render($page['content'])): ?>
+              <div id="content">
+                <?php print $content; ?>
+              </div>
+            <?php endif; ?>
 
             <?php print $feed_icons; ?>
 

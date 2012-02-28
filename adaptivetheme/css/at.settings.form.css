@@ -23,7 +23,7 @@
   width: 100%;
   height: auto;
 }
-div.vertical-tabs {
+.admin-theme-adaptivetheme_admin div.vertical-tabs {
   margin: 0 0 20px 15em;
 }
 div.vertical-tabs .vertical-tabs-panes {
@@ -201,7 +201,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   width: 20%;
 }
 .panel-option-lists .fieldset-wrapper legend {
-  display: block;
+  display: block !important; /* need to show these no matter what */
 }
 .panel-option-lists label {
 }
@@ -305,4 +305,11 @@ input[disabled] {
   background: #fafafa;
   border-color: #ccc;
   color: #fafafa;
+}
+/* Seven tidy up */
+.admin-theme-seven .panel-option-lists .fieldset-legend {
+  position: static;
+}
+.admin-theme-seven .panel-option-lists .form-type-radio {
+  margin-right: 20px;
 }

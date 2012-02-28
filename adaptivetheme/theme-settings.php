@@ -3,16 +3,18 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
   // theme and *not* the theme setting.
   if (isset($form_id)) {
     return;
   }
+  
+  // Get the admin theme so we can set an attribute class based on it
+  $admin_theme = variable_get('admin_theme');
 
   // Build a custom header for the layout settings form
-  $layout_header  = '<div class="layout-header theme-settings-header clearfix">';
+  $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. $admin_theme .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout Settings') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . drupal_get_path('theme', 'adaptivetheme') . '/logo.png" /></a>';
   $layout_header .= '</div>';
@@ -21,6 +23,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'vertical_tabs',
     '#description' => t('Layout Settings'),
     '#prefix' => $layout_header,
+    '#suffix' => '</div>',
     '#weight' => -10,
     '#default_tab' => 'defaults',
     '#attached' => array(
@@ -1302,13 +1305,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   );
   // STYLE SETTINGS
   // Build a custom header for the style settings form
-  $styles_header  = '<div class="styles-header theme-settings-header clearfix">';
+  $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
   $styles_header .= '<h1>' . t('Style Settings') . '</h1>';
   $styles_header .= '</div>';
   $form['at'] = array(
     '#type' => 'vertical_tabs',
     '#weight' => -9,
     '#prefix' => $styles_header,
+    '#suffix' => '</div>',
     '#default_tab' => 'defaults',
   );
   // Breadcrumbs
@@ -1426,39 +1430,60 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
     );
   } // endif horizontal block settings
-  // Comments
-  $form['at']['comments'] = array(
+    // Comments
+  $form['at']['site-tweaks'] = array(
     '#type' => 'fieldset',
     '#weight' => 100,
-    '#title' => t('Comments'),
+    '#title' => t('Site Tweaks'),
   );
-  $form['at']['comments']['comment-title'] = array(
+  // Comments
+  $form['at']['site-tweaks']['comments'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Comment Options'),
-    '#description' => t('<h3>Comment Options</h3>'),
+    '#title' => t('Comments'),
+    '#description' => t('<h3>Hide Comment Title</h3>'),
   );
-  $form['at']['comments']['comment-title']['comments_hide_title'] = array(
+  $form['at']['site-tweaks']['comments']['comments_hide_title'] = array(
     '#type' => 'checkbox',
     '#title' => t('Hide the comment title'),
     '#default_value' => theme_get_setting('comments_hide_title'),
     '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
   );
   // Feed icons
-  $form['at']['feed-icons'] = array(
-    '#type' => 'fieldset',
-    '#weight' => 101,
-    '#title' => t('Feed Icons'),
-  );
-  $form['at']['feed-icons']['feed-icons-title'] = array(
+  $form['at']['site-tweaks']['feed-icons'] = array(
     '#type' => 'fieldset',
     '#title' => t('Feed Icons'),
-    '#description' => t('<h3>Feed Icons</h3>'),
+    '#description' => t('<h3>Remove Feed Icons</h3>'),
   );
-  $form['at']['feed-icons']['feed-icons-title']['feed_icons_hide'] = array(
+  $form['at']['site-tweaks']['feed-icons']['feed_icons_hide'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Do not display the RSS Feed Icons'),
+    '#title' => t('Remove RSS feed icons'),
     '#default_value' => theme_get_setting('feed_icons_hide'),
     '#description' => t('Checking this setting will remove RSS feed icons. This will not affect the Syndicate block icon.'),
+  );
+  // Welcome message
+  $form['at']['site-tweaks']['block-system-main'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Main content block settings'),
+    '#description' => t('<h3>Remove Main Content Block</h3>'),
+  );
+  $form['at']['site-tweaks']['block-system-main']['unset_block_system_main_front'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Do not display the Main content block on the front page'),
+    '#default_value' => theme_get_setting('unset_block_system_main_front'),
+    '#description' => t('Checking this setting will remove the Main content block from the front page only - useful for removing the welcome message and allowing use of another block.'),
+  );
+  // Menu Links Settings
+  $form['at']['site-tweaks']['menu-links'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Add Span tags menu items'),
+    '#description' => t('<h3>Menu Item Span Tags</h3>'),
+  );
+  // Add spans to theme_links
+  $form['at']['site-tweaks']['menu-links']['menu_item_span_elements'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Wrap menu item text in SPAN tags - useful for certain theme or design related techniques'),
+    '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
+    '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
   // Development settings
   $form['at']['classes'] = array(
@@ -1500,24 +1525,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'checkbox',
     '#title' => t('Item-lists: ') . '<span class="description">' . t('add first, last and odd/even classes.') . '</span>',
     '#default_value' => theme_get_setting('extra_item_list_classes'),
-  );
-  // Menu Links Settings
-  $form['at']['markup'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Markup'),
-    '#weight' => 103,
-  );
-  $form['at']['markup']['menu-links'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Menu items markup'),
-    '#description' => t('<h3>Extra Markup Options</h3>'),
-  );
-  // Add spans to theme_links
-  $form['at']['markup']['menu-links']['menu_item_span_elements'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Wrap menu item text in SPAN tags - useful for certain theme or design related techniques'),
-    '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
-    '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
   $form['theme_settings']['#collapsible'] = TRUE;
   $form['theme_settings']['#collapsed'] = TRUE;
