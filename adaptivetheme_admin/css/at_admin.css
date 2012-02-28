@@ -28,11 +28,11 @@ body.ff-sl    {font-family: Georgia, Baskerville, Palatino, "Palatino Linotype",
 body.ff-ms    {font-family: Consolas, Monaco, "Courier New", Courier, monospace;}
 
 /* Layout */
-#block-system-main, 
+#block-system-main,
 #skip-nav,
 #page-title,
-.local-tasks, 
-#content, 
+.local-tasks,
+#content,
 #messages-and-help {
   padding: 0;
 }
@@ -138,7 +138,7 @@ h1#page-title {
 #blocks tr.even {
   background: #fff;
 }
-#blocks td, 
+#blocks td,
 #blocks th {
   border-bottom: 1px solid #f9f9f9;
 }
@@ -246,24 +246,18 @@ ol#crumbs a:active {
   font-weight: 700;
   padding: 6px 10px;
 }
-.item-list ul.pager li a:hover {
+.item-list ul.pager li a:hover,
+.item-list ul.pager li.pager-current {
+  font-weight: 700;
+  background-color: #bbb;
+  color: #fff;
   -khtml-border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  font-weight: 700;
-  background-color: #bbb;
-  color: #fff;
 }
 .item-list ul.pager li.pager-current {
-  -khtml-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  font-weight: 700;
   padding: 6px 10px;
-  background-color: #bbb;
-  color: #fff;
 }
 .item-list ul.pager li a:link,
 .item-list ul.pager li a:visited {
@@ -472,8 +466,6 @@ div.admin .right {
 }
 .admin .compact-link a {
   padding: .3em .5em;
-}
-.admin .compact-link a:hover {
 }
 .page-admin-by-module .admin-panel .body p {
   font-size: .94em;
@@ -789,7 +781,7 @@ div.messages {
   -moz-border-radius: 6px;
   -khtml-border-radius: 6px;
   border-radius: 6px;
-  
+
 }
 #page article.article-unpublished,
 #page article.comment-unpublished {
@@ -910,7 +902,7 @@ textarea {
   padding: 3px;
   border: 1px solid #d7d7d7;
 }
-input.form-checkbox, 
+input.form-checkbox,
 input.form-radio {
   margin: 0 3px;
 }
@@ -942,7 +934,7 @@ div.form-item {
   margin-bottom: 15px;
   margin-top: 10px;
 }
-tr.odd .ajax-new-content .form-item, 
+tr.odd .ajax-new-content .form-item,
 tr.even .ajax-new-content .form-item {
   margin-bottom: 5px;
   margin-top: 5px;
@@ -1019,7 +1011,7 @@ input#edit-delete.form-submit:hover,
   background-position: bottom;
   cursor: pointer;
 }
-#edit-views-apply, 
+#edit-views-apply,
 #edit-views-reset {
   margin-top: 20px;
 }
@@ -1575,6 +1567,18 @@ ul.action-links li a:focus {
   color: #3188d1;
   outline: 0;
   font-weight: 300;
+}
+
+/* Advanced help */
+.advanced-help-link {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+	transition: none;
+}
+.views-ui-display-tab-bucket .advanced-help-link {
+  margin-top: 6px;
 }
 
 /* Fix Panels whacky CSS */
