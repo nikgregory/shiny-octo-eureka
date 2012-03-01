@@ -1,12 +1,21 @@
 /* Elements - set global styles for html elements */
-/* Reset */
+/**
+ * The default font size is 16px x 81.3% = 13px
+ * Use http://pxtoem.com to calculate proper font size and scale.
+ *
+ * font-size is set on the html element so we can adjust the
+ * size using body classes or simply reset the font size for body.
+ */
 html {
+  font-size: 81.3%;
   height: 100%;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
 body {
+  font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+  line-height: 1.5;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
@@ -95,20 +104,6 @@ svg:not(:root) {
   overflow: hidden;
 }
 
-/**
- * The default font size is 16px x 81.3% = 13px
- * Use http://pxtoem.com to calculate proper font size and scale.
- *
- * The font size is set on the html element so we can dynamically
- * resize the font using body classes.
- */
-html {
-  font-size: 81.3%;
-}
-body {
-  font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
-  line-height: 1.5;
-}
 h1 {
   font-size: 1.538em;
 }
@@ -492,7 +487,6 @@ fieldset .filter-help {
 #devel-switch-user-form {
   margin-bottom: 0;
 }
-
 
 /* Tables - set global styles for tables */
 table {

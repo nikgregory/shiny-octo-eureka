@@ -303,9 +303,6 @@ ul.pager li.pager-last     {}
 ul.sf-menu {
   margin-bottom: 0;
 }
-ul.sf-menu li ul {
-  display: none; /* Prevent momentary display of sub menus */
-}
 ul.sf-menu a {
   border-left: 0;
   border-top: 0;
@@ -314,7 +311,6 @@ ul.sf-menu a {
   height: 2.5em;
   line-height: 2.5em;
 }
-
 ul.sf-menu a:link,
 ul.sf-menu a:visited  {}
 
@@ -324,6 +320,12 @@ ul.sf-menu a:focus,
 ul.sf-menu a:hover,
 ul.sf-menu a:active {
   outline: 0;
+}
+/* Prevent momentary display of sub menus */
+ul.sf-vertical li ul,
+ul.sf-horizontal li ul,
+ul.sf-navbar li ul ul {
+  display: none; 
 }
 
 /* Superfish blocks */

@@ -36,7 +36,7 @@
   
   The global styles do not target any specific device. Four of these global 
   stylesheets are loaded by default:
-  
+
   style.base.css     (html elements, forms, tables, fields)
   style.modules.css  (used for styling contrib module specific output)
   style.settings.css (for styling theme setting output)
