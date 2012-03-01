@@ -17,6 +17,16 @@ function adaptivetheme_js_alter(&$javascript) {
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
 }
 
+// hook_form_FORM_alter().
+function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
+  if(module_exists('noggin')) {
+    if ($form_id == 'system_theme_settings' && isset($form['var']['#value']) && $form['var']['#value'] != 'theme_settings') {
+      $form['noggin']['#collapsible'] = TRUE;
+      $form['noggin']['#collapsed'] = TRUE;
+    }
+  }
+}
+
 // hook_form_FORM_ID_alter().
 function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {

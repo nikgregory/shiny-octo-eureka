@@ -23,7 +23,7 @@ function adaptivetheme_process_html_tag(&$vars) {
 // Preprocess variables for html.tpl.php
 function adaptivetheme_preprocess_html(&$vars) {
 
-  global $language, $theme;
+  global $language, $theme_key;
 
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -81,70 +81,101 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load CSS and JS after a lot of conditional checking...
-  if (theme_get_setting('disable_responsive_styles') == FALSE) {
-    // Load responsive styles if its not disabled
-    $filename = $theme . '_responsive_css';
-    $file = variable_get($filename);
-    $path = "public://at_css";
+  // In layout.inc we built 3 stylesheets:
+  // 1. themeName.default.layout.css - this always loads, so we just load it
+  // 2. themeName.responsive.layout.css - only loads if responsive capability is enabled
+  // 3. themeName.lt-ie9.layout.css - only loads if responsive capability is enabled
+  //
+  // Now we need to load them, but only under certain conditions:
+  // a. Is the default layout the standard layout?
+  // b. Is the responsive capability disabled?
+  //
+  // If either a or b equate to TRUE, then we are not doing mobile first
+  // If a is FALSE then this is mobile first
+  // If b is FALSE then we are doing responsive design
+
+  // Set the path to the directory where our CSS files are saved
+  $path = "public://at_css";
+  $file = '';
+  
+  // Load the default layout, but only if Standard layout is default, otherwise we do nothing
+  if (theme_get_setting('global_default_layout') == 'standard-layout') {
+    $file = "$theme_key.default.layout.css";
     if (!empty($file)) {
-      $filepath = $path . '/' . $file;
+      $filepath = "$path/$file";
       drupal_add_css($filepath, array(
-        'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+        'preprocess' => TRUE,
         'group' => CSS_THEME,
-        'media' => 'screen, handheld',
+        'media' => 'screen',
         'every_page' => TRUE,
-        )
-      );
-    }
-    // IE css if respond.js is disabled
-    if (theme_get_setting('load_respondjs') == FALSE) {
-      $ur_filename = $theme . '_unresponsive_css';
-      $ur_file = variable_get($ur_filename);
-      if (!empty($ur_file)) {
-        $ur_filepath = $path . '/' . $ur_file;
-        drupal_add_css($ur_filepath, array(
-          'group' => CSS_THEME,
-          'media' => 'screen',
-          'browsers' => array(
-            'IE' => '(lt IE 9)&(!IEMobile 7)',
-            '!IE' => FALSE,
-            ),
-          'preprocess' => FALSE,
-          )
-        );
-      }
-    }
-    // add respond.js to the footer if both responsive styles and respond.js are enabled
-    if (theme_get_setting('load_respondjs') == TRUE) {
-      // Ad respond.js to the footer to avoid crashes in IE8 (yeah, right...).
-      drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
-        array(
-          'type' => 'file',
-          'scope' => 'footer',
-          'group' => JS_THEME,
-          'preprocess' => TRUE,
-          'cache' => TRUE,
         )
       );
     }
   }
-  if (theme_get_setting('disable_responsive_styles')) {
-    // Load unresponsive styles... cause nothing else is by this point...
-    $ur_filename = $theme . '_unresponsive_css';
-    $ur_file = variable_get($ur_filename);
-    $path = "public://at_css";
-    if (!empty($ur_file)) {
-      $ur_filepath = $path . '/' . $ur_file;
-      drupal_add_css($ur_filepath, array(
-        'preprocess' => TRUE,
+  // Next we check if we need to load the responsive layout
+  if (theme_get_setting('disable_responsive_styles') == 0) {
+    $file = "$theme_key.responsive.layout.css";
+    if (!empty($file)) {
+      $filepath = "$path/$file";
+      drupal_add_css($filepath, array(
+        'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
         'group' => CSS_THEME,
-        'media' => 'screen, handheld',
-        'weight' => 100,
+        'media' => 'screen',
         'every_page' => TRUE,
         )
       );
     }
+  }
+
+  // If load_respondjs is enabled, load it
+  if (theme_get_setting('load_respondjs') == 1) {
+    drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
+      array(
+        'type' => 'file',
+        'scope' => 'footer',
+        'group' => JS_THEME,
+        'preprocess' => TRUE,
+        'cache' => TRUE,
+      )
+    );
+  }
+
+  // The lt ie9 loads only under one very specific set of conditions...
+  // 1. Responsive capabilities are ON, if they are off kill it
+  // 2. The standard layout is NOT the default layout, in which case Smartphone is default, so we must load it
+  // 3. Respond.js is OFF, but if respond is ON IE relies on media queries, so nuke it
+  if (theme_get_setting('disable_responsive_styles') == 0) {
+    if (theme_get_setting('global_default_layout') != 'standard-layout') {
+      if (theme_get_setting('load_respondjs') == 0) {
+        $ie_file = "$theme_key.lt-ie9.layout.css";
+        if (!empty($ie_file)) {
+          $ie_filepath = "$path/$ie_file";
+          drupal_add_css($ie_filepath, array(
+            'group' => CSS_THEME,
+            'media' => 'screen',
+            'browsers' => array(
+              'IE' => 'lt IE 9',
+              '!IE' => FALSE,
+              ),
+            'preprocess' => FALSE,
+            )
+          );
+        }
+      }
+    }
+  }
+  
+  // Load window size bookmarklet
+  if (theme_get_setting('show_window_size') == 1) {
+    drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/window-size.js',
+      array(
+        'type' => 'file',
+        'scope' => 'footer',
+        'group' => JS_THEME,
+        'preprocess' => TRUE,
+        'cache' => TRUE,
+      )
+    );
   }
 
   // add a body class if the site name is hidden

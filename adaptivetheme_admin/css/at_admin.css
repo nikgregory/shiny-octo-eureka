@@ -541,7 +541,6 @@ ul.primary li.active a:focus {
   color: #6e6e6e;
   text-decoration: none !important;
 }
-
 .secondary-tasks-wrapper {
   background: #fff;
 }
@@ -1130,6 +1129,10 @@ fieldset legend a:active {
 }
 html.js fieldset.collapsible .fieldset-legend {
   padding-left: 17px;
+}
+html.js #edit-css-settings > legend > .fieldset-legend {
+  padding-left: 0;
+  background-image: none;
 }
 table fieldset,
 table legend {

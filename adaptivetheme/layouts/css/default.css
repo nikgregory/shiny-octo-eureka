@@ -1,19 +1,24 @@
 /* AT Panels defaults */
-.panel-row {float:left}
-.inset-wrapper {float:left;width:75%}
+.at-panel .region,
+.panel-row,
+.inset-wrapper {display:inline;float:left}
+.inset-wrapper {width:75%}
 .inset-wrapper .region {width:100%}
 .five-5x20 .row-1 {width:40%}
 .five-5x20 .row-2 {width:60%}
 .three-25-25-50 .region,
 .three-25-50-25 .region,
 .three-50-25-25 .region,
-.region-three-inset-right-sidebar,.region-three-inset-left-sidebar {width:25%}
+.region-three-inset-right-sidebar,
+.region-three-inset-left-sidebar {width:25%}
 .two-50 .region,
 .two-brick .region,
 .three-50-25-25 .region-three-50-25-25-first,
 .three-25-50-25 .region-three-25-50-25-second,
 .three-25-25-50 .region-three-25-25-50-third,
-.four-4x25 .region,.four-4x25 .row-1,.four-4x25 .row-2,
+.four-4x25 .region,
+.four-4x25 .row-1,
+.four-4x25 .row-2,
 .five-5x20 .row-1 .region,
 .six-6x16 .region {width:50%}
 .three-3x33 .region,

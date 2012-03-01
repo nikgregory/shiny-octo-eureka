@@ -148,7 +148,6 @@
 .debug-regions .region-preface:before {
   content: ".region-preface";
 }
-
 .debug-regions .region-help:before {
   content: ".region-help";
 }
@@ -181,23 +180,24 @@
   position: relative;
 }
 .debug-panels .at-panel .region {
-  background: #ddd;
+  background: rgba(255, 192, 203, 0.5);
   position: relative;
+  outline: 1px dotted #000;
 }
 .debug-panels .at-panel .region:hover {
   background: rgb(255, 192, 203);
   outline: 1px dotted #000;
 }
 .debug-panels .at-panel:before {
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 700;
   position: absolute;
   right: 0;
   padding: 3px 10px;
-  color: #666;
+  color: #555;
 }
 .debug-panels .at-panel .region:before {
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 700;
   position: absolute;
   left: 0;
@@ -205,10 +205,9 @@
   width: 100%;
   padding: 3px 0;
   text-align: center;
-  color: #fff;
+  color: #000;
 }
 .debug-panels .at-panel .region:hover:before {
-  background: rgba(0,0,0,0.8);
 }
 /* One */
 .debug-panels .one-column:before {

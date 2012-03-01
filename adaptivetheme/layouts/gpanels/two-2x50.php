@@ -27,7 +27,7 @@ regions[two_50_bottom] = 2x50 Gpanel bottom
   $page['two_50_second'] ||
   $page['two_50_bottom']
   ): ?>
-  <div class="at-panel gpanel two-50 clearfix">
+  <div class="two-50 at-panel gpanel clearfix">
     <?php print render($page['two_50_top']); ?>
     <?php print render($page['two_50_first']); ?>
     <?php print render($page['two_50_second']); ?>

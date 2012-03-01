@@ -170,13 +170,15 @@
 
 
   ; Global settings
+  settings[global_default_layout] = 'smartphone-portrait'
   settings[disable_responsive_styles] = 0
   settings[load_respondjs] = 0
-
+  
 
   ; Debug
   settings[expose_regions] = 0
   settings[load_all_panels] = 0
+  settings[show_window_size] = 0
 
 
   ; Breadcrumb

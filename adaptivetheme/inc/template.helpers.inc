@@ -40,7 +40,7 @@ function load_subtheme_media_queries($files, $theme_name) {
   }
 }
 
-// Load IE stylesheets, $files is a keyed array of files, keyed by conditional comment, $theme_name is the theme name.
+// Load subtheme IE stylesheets, $files is a keyed array of files, keyed by conditional comment, $theme_name is the theme name.
 function load_subtheme_ie_styles($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $key => $value) {

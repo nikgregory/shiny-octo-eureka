@@ -298,6 +298,12 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
   float: left;
   clear: none;
 }
+/* Global settings form is ugly */
+#edit-global-settings .fieldset-description {
+  padding-bottom: 0;
+}
+
+
 /* Give some real definition to disabled selects */
 select[disabled],
 fieldset[disabled] select,

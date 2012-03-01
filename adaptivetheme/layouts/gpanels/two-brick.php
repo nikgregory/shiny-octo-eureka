@@ -34,16 +34,16 @@ regions[two_brick_bottom]      = 2 col Brick bottom
   $page['two_brick_bottom']
   ): ?>
 <div class="at-panel gpanel two-brick clearfix">
-  <?php print render($page['two_brick_top']; ?>
+  <?php print render($page['two_brick_top']); ?>
   <div class="panel-row row-1 clearfix">
-    <?php print render($page['two_brick_left_above']; ?>
-    <?php print render($page['two_brick_right_above']; ?>
+    <?php print render($page['two_brick_left_above']); ?>
+    <?php print render($page['two_brick_right_above']); ?>
   </div>
-  <?php pprint render($page['two_brick_middle']; ?>
+  <?php print render($page['two_brick_middle']); ?>
   <div class="panel-row row-2 clearfix">
-    <?php print render($page['two_brick_left_below']; ?>
-    <?php print render($page['two_brick_right_below']; ?>
+    <?php print render($page['two_brick_left_below']); ?>
+    <?php print render($page['two_brick_right_below']); ?>
   </div>
-  <?php print render($page['two_brick_bottom']; ?>
+  <?php print render($page['two_brick_bottom']); ?>
 </div>
 <?php endif; ?>

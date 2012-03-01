@@ -641,7 +641,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['at-layout']['rp']['rpw'] = array(
     '#type' => 'fieldset',
     '#attributes' => array('class' => array('panel-option-lists')),
-    '#description' => t('<h3>Responsive Panels</h3><p>These settings apply to both <strong>Gpanels and Panels module layouts</strong> (those supplied by Adaptivetheme). If you are using the <a href="!link" target="_blank">Panels module</a> you will find fourteen additional layouts supplied by Adaptivetheme - they all have responsive capability. To use Gpanels (layout snippets) in your <code>page.tpl.php</code> see the README in the base theme (adaptivetheme/layouts/gpanels).</p><p>Select a layout option for each layout per mobile device orientation. An <em>option</em> is what the default layout will <em>change to</em> for each device orientation. For each layout the first option is the default.</p><p>The Standard layout always uses the default panel layout while Smartphone portrait always displays all regions stacked in one column.</p>', array('!link' => 'http://drupal.org/project/panels')),
+    '#description' => t('<h3>Responsive Panels</h3><p>These settings apply to both <a href="!gpanels_link" target="_blank">Gpanels</a> and <a href="!panels_link" target="_blank">Panels module</a> layouts.</p><p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels')),
   );
   // TABLET landscape
   $form['at-layout']['rp']['rpw']['tl'] = array(
@@ -1227,22 +1227,45 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Global Settings'),
   );
+  // Disable responsive layout
   $form['at-layout']['global-settings']['disable-rs'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Respond.js'),
-    '#description' => t('<h3>Disable Responsive Layout and Styles</h3><p>By checking this setting the site will use only the Standard Layout and the default Gpanels and Panels layouts. You can turn this back on at any time.</p>'),
+    '#title' => t('Disable Responsive Layout'),
+    '#description' => t('<h3>Disable Responsive Layout</h3>'),
   );
   $form['at-layout']['global-settings']['disable-rs']['disable_responsive_styles'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disable responsive layout and styles'),
+    '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
     '#default_value' => theme_get_setting('disable_responsive_styles'),
   );
+  // set default layout
+  $form['at-layout']['global-settings']['default-layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Mobile first or Mobile last'),
+    '#description' => t('<h3>Mobile first or Desktop first</h3>'),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at-layout']['global-settings']['default-layout']['global_default_layout'] = array(
+    '#type' => 'radios',
+    '#description' => t('Adaptivetheme supports both mobile first and desktop first design approaches. Please review our documentation (TODO - insert link).'),
+    '#default_value' => theme_get_setting('global_default_layout'),
+    '#options' => array(
+      'smartphone-portrait'  => t('Mobile first'),
+      'standard-layout'      => t('Desktop first'),
+    ),
+  );
+  // Enable respond.js
   $form['at-layout']['global-settings']['respondjs'] = array(
     '#type' => 'fieldset',
     '#title' => t('Enable Media Query Support in Non-supporting Browsers'),
-    '#description' => t('<h3>Enable Media Query Support in Non-supporting Browsers</h3><p>Setting this to ON will force IE6, 7 and 8 to rely on <a href="!link" target="_blank">respond.js</a> to set the layout. There are known issues with doing this (such as performance overhead) and you should check the <a href="!link2" target="_blank">respond.js issue queue</a>. This feature is provided as an option and usage is at your own risk and you understand the issues that may occur should you choose to enable this setting.</p><p>When this setting is OFF the responsive capabilites are disabled for IE6, 7 and 8 and those browsers will display the Standard Layout and the default layout for Gpanels and Panels only.</p><p>Note that IE9 and above natively support media queries and do not need this setting to support the responsive layout and styles.</p>', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
+    '#description' => t('<h3>Enable Media Query Support in Non-supporting Browsers</h3>'),
     '#states' => array(
-      'disabled' => array(
+      'invisible' => array(
         'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
       ),
     ),
@@ -1250,29 +1273,33 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['at-layout']['global-settings']['respondjs']['load_respondjs'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable media queries in IE8 and below'),
-    '#description' => t('<small>(By enabling this setting you agree to never bug Jeff again about respond.js and IE...)</small>'),
+    '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
     '#default_value' => theme_get_setting('load_respondjs'),
   );
   // DEBUG
   $form['at-layout']['debug'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Debug Layout'),
+    '#title' => t('Debug'),
   );
-  $form['at-layout']['debug']['region-highlighting'] = array(
+  $form['at-layout']['debug']['debug-layout'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Debug Layout by highlighting regions'),
-    '#description' => t('<h3>Debug Layout by highlighting regions</h3><p>Highlight regions so you can easily view the layout. This will show standard regions in yellow and Gpanel and Panel regions in pink. Region class names are shown in white with dark background. The Gpanel or Panel ID is shown in the top right corner. This only works in browsers that supports the :before pseudo selector (all modern browsers).</p>'),
+    '#title' => t('Debug Layout'),
+    '#description' => t('<h3>Debug Layout</h3>'),
   );
-  $form['at-layout']['debug']['region-highlighting']['expose_regions'] = array(
+  $form['at-layout']['debug']['debug-layout']['expose_regions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Highlight regions'),
     '#default_value' => theme_get_setting('expose_regions'),
   );
-  
-  $form['at-layout']['debug']['region-highlighting']['load_all_panels'] = array(
+  $form['at-layout']['debug']['debug-layout']['load_all_panels'] = array(
     '#type' => 'checkbox',
     '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels.'),
     '#default_value' => theme_get_setting('load_all_panels'),
+  );
+  $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show window size - appears in the bottom left corner.'),
+    '#default_value' => theme_get_setting('show_window_size'),
   );
   // All media queries for copy/pastings if you need them
   // build array for media query display
@@ -1485,7 +1512,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
-  // Development settings
+  // Designers settings
   $form['at']['classes'] = array(
     '#type' => 'fieldset',
     '#weight' => 102,
