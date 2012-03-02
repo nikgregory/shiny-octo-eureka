@@ -88,10 +88,10 @@
 /* Region */
 .debug-regions .region,
 .debug-regions #menu-bar {
-  background: #ddd;
+  background: rgba(255, 255, 0, 0.2);
   position: relative;
   min-height: 80px;
-  outline: 1px dotted #eee;
+  outline: 1px dotted #000;
 }
 .debug-regions .region-three-inset-left-sidebar,
 .debug-regions .region-three-inset-right-sidebar {
@@ -112,10 +112,11 @@
 .debug-regions .region:hover,
 .debug-regions #menu-bar:hover {
   outline: 1px dotted #000;
+  background: rgba(255, 255, 0, 0.5);
 }
 .debug-regions  .region:before,
 .debug-regions #menu-bar:before {
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 700;
   position: absolute;
   z-index: 100;
@@ -124,7 +125,7 @@
   width: 100%;
   padding: 3px 0;
   text-align: center;
-  color: #666;
+  color: #000;
 }
 .debug-regions .region:hover:before {}
 .debug-regions .region-top-bar:before {

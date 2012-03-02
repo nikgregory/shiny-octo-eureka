@@ -97,7 +97,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Set the path to the directory where our CSS files are saved
   $path = "public://at_css";
   $file = '';
-  
+
   // Load the default layout, but only if Standard layout is default, otherwise we do nothing
   if (theme_get_setting('global_default_layout') == 'standard-layout') {
     $file = "$theme_key.default.layout.css";
@@ -106,7 +106,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        'media' => 'screen',
+        'media' => 'screen, handheld',
         'every_page' => TRUE,
         )
       );
@@ -120,7 +120,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($filepath, array(
         'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
         'group' => CSS_THEME,
-        'media' => 'screen',
+        'media' => 'screen, handheld',
         'every_page' => TRUE,
         )
       );
@@ -164,7 +164,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   }
-  
+
   // Load window size bookmarklet
   if (theme_get_setting('show_window_size') == 1) {
     drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/window-size.js',
