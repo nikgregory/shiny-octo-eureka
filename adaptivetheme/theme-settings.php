@@ -259,6 +259,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
+  /*
   $form['at-layout']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
@@ -299,6 +300,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
+  */
   $form['at-layout']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Landscape Media Queries'),
@@ -402,6 +404,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
+  /*
   $form['at-layout']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
@@ -442,6 +445,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
+  */
   $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Portrait Media Queries'),
@@ -550,6 +554,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
   );
+  /*
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
@@ -590,6 +595,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     ),
   );
+  */
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Landscape Media Queries'),

@@ -1,19 +1,17 @@
 <?php
-// Validate some stuff: set form errors if the user accidentally does not enter a required value, we need
-// to tell them where to look because these settings could be invisible! None of these fields
-// are actually *required, we need to validate this ourselves and set helpful messages. IMO
-// this is actually a bug in the form_state states system, if a form item is required AND
-// is invisible, then it should be forced visible when the error is returned.
+// Validate some stuff
 function at_theme_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
 
-  // Validate max_width values seperatly, they need a condition so the errors are actually visible 
-  // on the page and not buried in tabs.
+  // consider deprecating max-width for all but bigscreen
   if ($values['bigscreen_set_max_width'] == 1) {
     if (empty($values['bigscreen_max_width']['#default_value'])) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
+  
+  // for now I will just comment these, in case someone comes with a use case, I think this is edge
+  /*
   if ($values['tablet_landscape_set_max_width'] == 1) {
     if (empty($values['tablet_landscape_max_width']['#default_value'])) {
       form_set_error('tablet_landscape_max_width', t('Tablet landscape layout max-width is empty - you forgot to enter a value for the max width!'));
@@ -29,6 +27,7 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('smartphone_landscape_max_width', t('Smartphone landscape max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
+  */
 }
 
 // Custom submit function to generate and save the layout CSS embedded in media queries, or not, as the case may be...
