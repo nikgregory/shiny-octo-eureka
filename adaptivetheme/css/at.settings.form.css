@@ -308,9 +308,9 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
 select[disabled],
 fieldset[disabled] select,
 input[disabled] {
-  background: #fafafa;
+  background: #eee;
   border-color: #ccc;
-  color: #fafafa;
+  color: #666;
 }
 /* Seven tidy up */
 .admin-theme-seven .panel-option-lists .fieldset-legend {

@@ -1227,18 +1227,29 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Global Settings'),
   );
-  // Disable responsive layout
-  $form['at-layout']['global-settings']['disable-rs'] = array(
+  // Mode
+  $form['at-layout']['global-settings']['mode'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Disable Responsive Layout'),
-    '#description' => t('<h3>Disable Responsive Layout</h3>'),
+    '#title' => t('Production Mode'),
+    '#description' => t('<h3>Production Mode</h3><p>Production mode enables several important performance enhancements including reducing HTTP requests and disabling system_rebuild_theme_data() and drupal_theme_rebuild() on every page request.</p>'),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
   );
-  $form['at-layout']['global-settings']['disable-rs']['disable_responsive_styles'] = array(
+  $form['at-layout']['global-settings']['mode']['production_mode'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Disable responsive layout and styles'),
-    '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
-    '#default_value' => theme_get_setting('disable_responsive_styles'),
+    '#title' => t('Enable Production Mode'),
+    '#default_value' => theme_get_setting('production_mode'),
   );
+  /*
+  $form['at-layout']['global-settings']['mode']['disable_mode_warning'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable the annoying warning message about development mode'),
+    '#default_value' => theme_get_setting('disable_mode_warning'),
+  );
+  */
   // set default layout
   $form['at-layout']['global-settings']['default-layout'] = array(
     '#type' => 'fieldset',
@@ -1259,6 +1270,36 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'standard-layout'      => t('Desktop first'),
     ),
   );
+  // Cascading media queries
+  $form['at-layout']['global-settings']['cascading-mediaqueries'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Cascading Media Queries'),
+    '#description' => t('<h3>Cascading Media Queries</h3><p>Use <a href="http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack" target="_blank">overlapped media queries</a>. These are are in a seperate file: <code>themeName/css/responsive.cascade.css</code>, you must set the media queries in this file manually!'),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['at-layout']['global-settings']['cascading-mediaqueries']['enable_cascading_media_queries'] = array(
+    '#type' => 'checkbox',
+    '#default_value' => theme_get_setting('enable_cascading_media_queries'),
+    '#title'  => t('Enable the responsive.cascade.css file'),
+  );
+  $form['at-layout']['global-settings']['cascading-mediaqueries']['cascade_media_query'] = array(
+    '#type' => 'textfield',
+    '#description' => t('Enter the smallest min-width in your <code>responsive.cascade.css</code> file, this is used when loading the file in Development mode.'),
+    '#default_value' => theme_get_setting('cascade_media_query'),
+    '#field_prefix' => '@media',
+    '#states' => array(
+      'invisible' => array(
+        'input[name="production_mode"]' => array('checked' => TRUE),
+      ),
+      'disabled' => array(
+        'input[name="enable_cascading_media_queries"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
   // Enable respond.js
   $form['at-layout']['global-settings']['respondjs'] = array(
     '#type' => 'fieldset',
@@ -1275,6 +1316,18 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Enable media queries in IE8 and below'),
     '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
     '#default_value' => theme_get_setting('load_respondjs'),
+  );
+  // Disable responsive layout
+  $form['at-layout']['global-settings']['disable-rs'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Disable Responsive Layout'),
+    '#description' => t('<h3>Disable Responsive Layout</h3>'),
+  );
+  $form['at-layout']['global-settings']['disable-rs']['disable_responsive_styles'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable responsive layout and styles'),
+    '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
+    '#default_value' => theme_get_setting('disable_responsive_styles'),
   );
   // DEBUG
   $form['at-layout']['debug'] = array(

@@ -81,7 +81,87 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // In layout.inc we built 3 stylesheets:
+  // Load Styles and JS
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  // Set the path to the directory where our CSS files are saved
+  $path = "public://at_css";
+  $file = '';
+
+  /**
+   * Responsive Stylesheet Loader: Development Mode
+   *
+   * We only load these files if:
+   * - 1: We're not in production mode
+   * - 2: Responsiveness is not disabled
+   *
+   * When in production mode these files are aggregated into one file
+   * and loaded using load_subtheme_responsive_styles().
+   *
+   * You can disable responsive capability using the theme settings - look under
+   * the Global settings. Do not delete or alther this - use the theme setting!
+   */
+   if (theme_get_setting('production_mode') == FALSE) {
+     if (theme_get_setting('disable_responsive_styles') == FALSE) {
+   
+      // Get the media query for each device group.
+      $smartphone_portrait_media_query  = theme_get_setting('smartphone_portrait_media_query');
+      $smartphone_landscape_media_query = theme_get_setting('smartphone_landscape_media_query');
+      $tablet_portrait_media_query      = theme_get_setting('tablet_portrait_media_query');
+      $tablet_landscape_media_query     = theme_get_setting('tablet_landscape_media_query');   
+      $desktop_media_query              = theme_get_setting('bigscreen_media_query');
+   
+      // Next build a keyed array of CSS file-names as key, and media query as value.
+      // The file names must match the files in your themes CSS directory, if
+      // you change them you must update to match.
+      $files = array(
+        'responsive.smartphone.portrait'  => $smartphone_portrait_media_query,
+        'responsive.smartphone.landscape' => $smartphone_landscape_media_query,
+        'responsive.tablet.portrait'      => $tablet_portrait_media_query,
+        'responsive.tablet.landscape'     => $tablet_landscape_media_query,
+        'responsive.desktop'              => $desktop_media_query,
+      );
+
+      // Add the cascading stylesheet if enabled
+      if (theme_get_setting('enable_cascading_media_queries') == TRUE) {
+        $cascade_media_query = theme_get_setting('cascade_media_query');
+        $item = array('responsive.cascade' => $cascade_media_query);
+        $files = array_merge($item, $files);
+      }
+
+      // Loop over the files array and load each CSS.
+      // load_subtheme_responsive_styles() takes 3 arguements:
+      // - $css_file - the name of the css file
+      // - $media_query - the media query from theme settings to use for the media attribute
+      // - $theme_name - to generate the path-to-theme for drupal_add_css()
+      foreach ($files as $key => $value) {
+        $css_file = $key . '.css';
+        $media_query = $value;
+        load_subtheme_responsive_styles($css_file, $media_query, $theme_name);
+      }
+    }
+  }
+
+  // In Production mode we only load one file for responsive styles.
+  // We use a media query to prevent non media query browsers from downloading it.
+  // The embedded media queries in this file take precedence always.
+  if (theme_get_setting('production_mode') == TRUE) {
+    $file = "$theme_name.responsive.styles.css";
+    $media_query = 'only screen and (min-width:160px)';
+    if (!empty($file)) {
+      $filepath = "$path/$file";
+      drupal_add_css($filepath, array(
+        'preprocess' =>  variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+        'group' => CSS_THEME,
+        'media' => $media_query,
+        'every_page' => TRUE,
+        )
+      );
+    }
+  }
+  
+  // In layout.inc we built 3 layout stylesheets:
   // 1. themeName.default.layout.css - this always loads, so we just load it
   // 2. themeName.responsive.layout.css - only loads if responsive capability is enabled
   // 3. themeName.lt-ie9.layout.css - only loads if responsive capability is enabled
@@ -94,13 +174,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   // If a is FALSE then this is mobile first
   // If b is FALSE then we are doing responsive design
 
-  // Set the path to the directory where our CSS files are saved
-  $path = "public://at_css";
-  $file = '';
-
   // Load the default layout, but only if Standard layout is default, otherwise we do nothing
   if (theme_get_setting('global_default_layout') == 'standard-layout') {
-    $file = "$theme_key.default.layout.css";
+    $file = "$theme_name.default.layout.css";
     if (!empty($file)) {
       $filepath = "$path/$file";
       drupal_add_css($filepath, array(
@@ -114,7 +190,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
   // Next we check if we need to load the responsive layout
   if (theme_get_setting('disable_responsive_styles') == 0) {
-    $file = "$theme_key.responsive.layout.css";
+    $file = "$theme_name.responsive.layout.css";
     if (!empty($file)) {
       $filepath = "$path/$file";
       drupal_add_css($filepath, array(
@@ -140,21 +216,22 @@ function adaptivetheme_preprocess_html(&$vars) {
     );
   }
 
-  // The lt ie9 loads only under one very specific set of conditions...
-  // 1. Responsive capabilities are ON, if they are off kill it
-  // 2. The standard layout is NOT the default layout, in which case Smartphone is default, so we must load it
-  // 3. Respond.js is OFF, but if respond is ON IE relies on media queries, so nuke it
+  // The lt ie9 loads only under one very specific set of conditions:
+  // 1. Responsive capabilities are ON
+  // 2. Mobile first is ON
+  // 3. Respond.js is OFF
+  // Note this excludes IEMobile 7
   if (theme_get_setting('disable_responsive_styles') == 0) {
     if (theme_get_setting('global_default_layout') != 'standard-layout') {
       if (theme_get_setting('load_respondjs') == 0) {
-        $ie_file = "$theme_key.lt-ie9.layout.css";
+        $ie_file = "$theme_name.lt-ie9.layout.css";
         if (!empty($ie_file)) {
           $ie_filepath = "$path/$ie_file";
           drupal_add_css($ie_filepath, array(
             'group' => CSS_THEME,
             'media' => 'screen',
             'browsers' => array(
-              'IE' => 'lt IE 9',
+              'IE' => '(lt IE 9)&(!IEMobile 7)',
               '!IE' => FALSE,
               ),
             'preprocess' => FALSE,
@@ -218,6 +295,8 @@ function adaptivetheme_process_html(&$vars) {
 
 // Preprocess variables for page.tpl.php
 function adaptivetheme_preprocess_page(&$vars) {
+  global $theme_key;
+
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) . ' ' . t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="' . check_url($vars['logo']) . '" alt="' . $vars['logo_alt_text'] . '"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -308,6 +387,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (arg(0) == 'user' && arg(1) == 'register') {
     drupal_set_title(t('Create new account'));
   }
+
 }
 
 // Process variables for page.tpl.php

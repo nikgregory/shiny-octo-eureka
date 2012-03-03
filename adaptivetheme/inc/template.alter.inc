@@ -108,6 +108,23 @@ function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   }
 }
 
+// hook_form_BASE_FORM_ID_alter()
+function adaptivetheme_form_node_form_alter(&$form, &$form_state, $form_id) {
+  // Remove if #1245218 is backported to D7 core.
+  foreach (array_keys($form) as $item) {
+    if (strpos($item, 'field_') === 0) {
+      if (!empty($form[$item]['#attributes']['class'])) {
+        foreach ($form[$item]['#attributes']['class'] as &$class) {
+          if (strpos($class, 'field-type-') === 0 || strpos($class, 'field-name-') === 0) {
+            // Make the class different from that used in theme_field().
+            $class = $class . '-form';
+          }
+        }
+      }
+    }
+  }
+}
+
 /**
  * Set a class on the iframe body element for WYSIWYG editors. This allows you
  * to easily override the background for the iframe body element.

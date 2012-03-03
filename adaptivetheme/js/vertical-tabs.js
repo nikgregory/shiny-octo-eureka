@@ -1,4 +1,4 @@
-
+/* This is overridden to fix an annoying issue in webkit browsers. */
 (function ($) {
 
 /**

@@ -170,8 +170,12 @@
 
 
   ; Global settings
-  settings[global_default_layout] = 'smartphone-portrait'
+  settings[production_mode] = 0
+  settings[disable_mode_warning] = 0
   settings[disable_responsive_styles] = 0
+  settings[global_default_layout] = 'smartphone-portrait'
+  settings[enable_cascading_media_queries] = 0
+  settings[cascade_media_query] = 'only screen and (min-width:240px)'
   settings[load_respondjs] = 0
   
 

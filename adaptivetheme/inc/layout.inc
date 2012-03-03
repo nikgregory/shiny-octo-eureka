@@ -1,10 +1,14 @@
 <?php
-// Validate some stuff
+// Validate some stuff: set form errors if the user accidentally does not enter a required value, we need
+// to tell them where to look because these settings could be invisible! None of these fields
+// are actually *required, we need to validate this ourselves and set helpful messages. IMO
+// this is actually a bug in the form_state states system, if a form item is required AND
+// is invisible, then it should be forced visible when the error is returned.
 function at_theme_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
 
-  // Validate max_width values seperatly, they need a condition so the errors are actually visible on the page and not buried in tabs.
-  // Am I missing something here? Why do I need to do this?
+  // Validate max_width values seperatly, they need a condition so the errors are actually visible 
+  // on the page and not buried in tabs.
   if ($values['bigscreen_set_max_width'] == 1) {
     if (empty($values['bigscreen_max_width']['#default_value'])) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
@@ -32,14 +36,23 @@ function at_theme_settings_submit($form, &$form_state) {
 
   // Setup some variables we're going to use a lot
   $values = $form_state['values'];
+  $theme_name = $form_state['build_info']['args'][0];
   $is_default_layout = $values['global_default_layout'];
   $path_to_panels_css = drupal_get_path('theme', 'adaptivetheme') . '/layouts/css/';
+  $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
   // Initialize the panels layout variable, this will by and large hold the panels layouts
   $panels_layout = '';
-
   // $layouts will hold all the page level layouts
   $layouts = array();
+  // $responsive_styles will hold all the styles from the responsive stylesheets, wrapped in media queries.
+  $responsive_styles = array();
+  
+  // If the cascade setting is true, load up these styles first
+  if ($values['enable_cascading_media_queries'] == TRUE) {
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.cascade.css', FALSE);
+    $responsive_styles[] = $responsive_css . "\n";
+  }
 
   // Smartphone layout - portrait, we only need the media query values
   if ($values['smartphone_portrait_media_query']) {
@@ -66,6 +79,10 @@ function at_theme_settings_submit($form, &$form_state) {
     else {
       $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
     }
+    
+    // Get and wrap the responsive CSS in the relative media query
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.portrait.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
     $layouts[] = $css;
   }
@@ -111,13 +128,13 @@ function at_theme_settings_submit($form, &$form_state) {
     $css_files = array();
     foreach ($panel_settings as $setting) {
       $option = $values[$setting];
-      $css_files[] = file_get_contents($path_to_panels_css . $option . '.css');
+      $css_files[] = drupal_load_stylesheet($path_to_panels_css . $option . '.css', FALSE);
     }
     // respond.js is enabled, we need to push all the IE specific panels layout overrides into media queries
     if ($values['load_respondjs'] == 1) {
       foreach ($panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  file_get_contents($path_to_panels_css . '/ie/' . $option . '.css');
+        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
     // These panel regions can float, add a single declaration to support floating regions
@@ -125,6 +142,11 @@ function at_theme_settings_submit($form, &$form_state) {
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
+    
+    // Get and wrap the responsive CSS in the relative media query
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.landscape.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    
     $layouts[] = $css;
   }
   // Tablet layout - portrait
@@ -169,13 +191,13 @@ function at_theme_settings_submit($form, &$form_state) {
     $css_files = array();
     foreach ($panel_settings as $setting) {
       $option = $values[$setting];
-      $css_files[] = file_get_contents($path_to_panels_css . $option . '.css');
+      $css_files[] = drupal_load_stylesheet($path_to_panels_css . $option . '.css', FALSE);
     }
     // respond.js is enabled, we need to push all the IE specific panels layout overrides into media queries
     if ($values['load_respondjs'] == 1) {
       foreach ($panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  file_get_contents($path_to_panels_css . '/ie/' . $option . '.css');
+        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
     // These panel regions can float, add a single declaration to support floating regions
@@ -183,6 +205,11 @@ function at_theme_settings_submit($form, &$form_state) {
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
+    
+     // Get and wrap the responsive CSS in the relative media query
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.portrait.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    
     $layouts[] = $css;
   }
   // Tablet layout - landscape
@@ -227,20 +254,26 @@ function at_theme_settings_submit($form, &$form_state) {
     $css_files = array();
     foreach ($panel_settings as $setting) {
       $option = $values[$setting];
-      $css_files[] = file_get_contents($path_to_panels_css . $option . '.css');
+      $css_files[] = drupal_load_stylesheet($path_to_panels_css . $option . '.css', FALSE);
     }
     // respond.js is enabled, we need to push all the IE specific panels layout overrides into media queries
     if ($values['load_respondjs'] == 1) {
       foreach ($panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  file_get_contents($path_to_panels_css . '/ie/' . $option . '.css');
+        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
+    
     // These panel regions can float, add a single declaration to support floating regions
     $float = '.at-panel .region {display:inline;float:left}';
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
+    
+     // Get and wrap the responsive CSS in the relative media query
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.landscape.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    
     $layouts[] = $css;
   }
   // Standard bigscreen layout
@@ -269,47 +302,64 @@ function at_theme_settings_submit($form, &$form_state) {
       }
     }
 
-    // Everything gets much more serious with the standard layout, it dictates by and large what is written into each file.
-    // And we can't forget about respond.js, it sticks its mucky hand in here as well.
+    // Everything gets much more serious with the standard layout, it dictates by and large 
+    // what is written into each file.
+    // We can't forget about respond.js, it sticks its mucky hand in here as well.
 
     // Load $panels_layout, we always need to load this somewhere
-    $panels_layouts = file_get_contents($path_to_panels_css . 'default.css');
+    $panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'default.css', FALSE);
 
     // Get the lte ie7 panels layout overrides, we always need to load these somewhere also
-    $ie_panels_layouts = file_get_contents($path_to_panels_css . '/ie/' . 'ie_defaults.css');
+    $ie_panels_layouts = drupal_load_stylesheet($path_to_panels_css . '/ie/' . 'ie_defaults.css', FALSE);
 
     // Now build a $styles variable with the correct layout, width and default panels layouts
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
 
     // Next we need to know if respond.js is loading or not, so we can setup variables for later on
     if ($values['load_respondjs'] == 0) {
-      // respondjs is OFF, we need to load the IE stylesheet with the standard layout, width, panels layouts and tack the lt ie7 panels layout overrides on the end
+      // respondjs is OFF, we need to load the IE stylesheet with the standard layout, width, panels 
+      // layouts and tack the lt ie7 panels layout overrides on the end
       $lt_ie9_css = $standard_layout_comment . implode("\n", $layout) . $width . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
     }
     if ($values['load_respondjs'] == 1) {
-      // respondjs is ON, load all the panels layouts into one variable - this will go into themeName.responsive.layout.css file
+      // respondjs is ON, load all the panels layouts into one variable - this will go into 
+      // themeName.responsive.layout.css file
       $panels_layouts = $panels_layouts . "\n" . $ie_panels_layouts;
-      // Load a comment in the lt ie9 css file to tell the themer this file is not being used, we don't need it since respondjs is loading
+      // Load a comment in the lt ie9 css file to tell the themer this file is not being used, we 
+      // don't need it since respondjs is loading
       $lt_ie9_css = '/* respond.js is loading so we dont load this file. IE6, 7 and 8 will rely on respond.js to work its magic */';
     }
 
     // We need to check for the default layout again
     if ($is_default_layout == 'standard-layout') {
       // reset the IE styles variable to a comment, we don't need it if the standard layout is default
-      $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing mobile last */';
-      // is the default layout, $css gets a comment that this is the default, and we load the layout $styles into $default_layout
-      $css = '/* The standard layout is the default layout, this is a mobile last design */';
+      $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing desktop first design */';
+      // is the default layout, $css gets a comment that this is the default, and we load the layout 
+      // $styles into $default_layout
+      $css = '/* The standard layout is the default layout - this is a desktop first design */';
       $default_layout = $standard_layout_comment . $styles . "\n" . $ie_panels_layouts;
     }
     else {
-      // is not the default, load the $css var with the layout $styles and tack the lt ie7 panels layout overrides on the end
-      $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . $ie_panels_layouts . "\n" . '}';
+      // is not the default, load the $css var with the layout $styles and tack the lt ie7 panels layout 
+      // overrides on the end (but only if respond.js is loading)
+      if ($values['load_respondjs'] == 1) {
+        $not_default_styles = $styles . "\n" . $ie_panels_layouts . "\n";
+      }
+      else {
+        $not_default_styles = $styles . "\n";
+      }
+      $css = $comment . '@media ' . $media_query . ' {' . $not_default_styles . '}';
     }
+
     // Finally we really need to know if responsive capability is on or off...
     if ($values['disable_responsive_styles'] == 1) {
       $lt_ie9_css = '/* Responsive capabilites are disabled, we no longer need to load an IE specific layout */';
       $default_layout = $standard_layout_comment . $styles . "\n" . $ie_panels_layouts;
     }
+
+     // Get and wrap the responsive CSS in the relative media query
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
     // add $css to the layouts array
     $layouts[] = $css;
@@ -323,15 +373,12 @@ function at_theme_settings_submit($form, &$form_state) {
   // adaptivetheme_preprocess_html() will take care of loading the
   // right ones when they are needed.
 
-  // Get the theme name, we need this to namespace the files
-  $theme = $form_state['build_info']['args'][0];
-
   // Set up the stream wrapper and create the directory
   $path  = "public://at_css";
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
 
   // Set up variables for each layout, we already have the $default_layout but its not sanitized
-  $default_layout = $default_layout;
+  // $default_layout = $default_layout;
 
   // Next the responsive layout
   $responsive_layout_data = implode("\n", $layouts);
@@ -343,12 +390,16 @@ function at_theme_settings_submit($form, &$form_state) {
 
   // Finally for lt ie9
   $lt_ie9_layout = $lt_ie9_css;
+  
+  // Not finished yet though, we need to aggregate the responsive stylesheets
+  $responsive_css = implode("\n", $responsive_styles);
 
   // Build a keyed array: file names as key, layout data as value
   $files = array(
-    "$theme.default.layout" => $default_layout,
-    "$theme.responsive.layout" => $responsive_layout,
-    "$theme.lt-ie9.layout" => $lt_ie9_layout,
+    "$theme_name.default.layout" => $default_layout,
+    "$theme_name.responsive.layout" => $responsive_layout,
+    "$theme_name.lt-ie9.layout" => $lt_ie9_layout,
+    "$theme_name.responsive.styles" => $responsive_css,
   );
 
   // Loop over the array and save each file, and we're done... and none too soon...

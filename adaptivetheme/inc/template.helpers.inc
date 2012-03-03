@@ -10,18 +10,30 @@ function _theme_menu_variables($menu, $type) {
   return $output;
 }
 
-// Load sub-theme responsive stylesheets in link elements
-function load_subtheme_responsive_styles($file, $theme_key, $media_query) {
-  $path_to_theme = drupal_get_path('theme', $theme_key);
-  $filepath = $path_to_theme . '/css/' . $file;
-  drupal_add_css($filepath, array(
-    'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-    'group' => CSS_THEME,
-    'media' => $media_query,
-    'every_page' => TRUE,
-    'weight' => 99,
-    )
-  );
+/**
+* Load sub-theme responsive stylesheets in link elements
+* 
+* load_subtheme_responsive_styles() takes 3 arguements:
+* - $css_file - the name of the css file.
+* - $media_query - the media query from theme settings to use for the media attribute.
+* - $theme_name - to generate the path-to-theme for drupal_add_css().
+*
+* This is almost always called from a sub-themes template.php file to load
+* that themes responsive stylesheets.
+*/
+function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
+  $path_to_theme = drupal_get_path('theme', $theme_name);
+  $filepath = $path_to_theme . '/css/' . $css_file;
+  if (file_exists($filepath)) {
+    drupal_add_css($filepath, array(
+      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+      'group' => CSS_THEME,
+      'media' => $media_query,
+      'every_page' => TRUE,
+      'weight' => 99,
+      )
+    );
+  }
 }
 
 // Load sub-theme media queries, 7.x-2.x backward compatibility, this is never used by 7.x-3.x themes.

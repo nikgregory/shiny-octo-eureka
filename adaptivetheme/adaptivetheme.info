@@ -141,6 +141,8 @@
 
 
   ; Global settings
+  settings[production_mode] = 0
+  settings[disable_mode_warning] = 0
   settings[global_default_layout] = 'smartphone-portrait'
   settings[disable_responsive_styles] = 0
   settings[load_respondjs] = 0
