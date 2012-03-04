@@ -1,0 +1,251 @@
+/* Fields
+**********************************************************************/
+.field {}
+
+/* Field labels are h2 in Adaptivetheme */
+.field .field-label {
+  font-size: 1em;
+  font-weight: 700;
+  line-height: inherit;
+  margin: 0;
+}
+.field-lable-above .field-label {}
+.field-lable-inline .field-label {
+  display: inline;
+}
+
+/* Imagefields */
+.field-type-image {}
+.field-type-image img {}
+
+/* Use "datetime" when creating new CCK date fields. */
+.field-type-datetime {}
+
+/* Filefield field. */
+.field-type-filefield {}
+
+/* Node reference field. */
+.field-type-nodereference {}
+
+/* User reference field. */
+.field-type-userreference {}
+
+/* Number fields. */
+.field-type-number-decimal {}
+.field-type-number-float   {}
+.field-type-number-integer {}
+
+/* Text fields. */
+.field-type-text {}
+.field-type-text-long {}
+
+/* Term reference fields. */
+.field-type-taxonomy-term-reference .field-label {
+  font-size: 1em;
+}
+.field-type-taxonomy-term-reference ul {
+  margin: 0;
+  padding: 0;
+}
+.field-type-taxonomy-term-reference ul li {
+  display: inline;
+  list-style: none;
+  padding: 0 10px 0 0;
+}
+
+/*** Articles (nodes) ***/
+.article {
+  margin-bottom: 20px;
+}
+
+.article > header {}
+
+/* Title */
+.article-title {}
+.article-title a:link,
+.article-title a:visited,
+.article-title a:active {}
+
+.article-title a:hover,
+.article-title a:focus {}
+
+/* User Picture */
+.article .user-picture {}
+.article .user-picture img {}
+
+/* Submitted */
+.article .submitted {}
+.article .submitted  a {}
+.article .submitted  a:hover {}
+.article .submitted  p.author-datetime {}
+.article .submitted  time {}
+
+/* Links */
+.article nav {}
+.article ul.links {}
+.article ul.links li {}
+.article ul.links li a {}
+.article ul.links li.node_read_more a {}
+.article ul.links li.comment_add a {}
+.article ul.links li.comment_comments a {}
+.article ul.links li.comment_new_comments a {}
+.article ul.links li.blog_usernames_blog a {}
+.article ul.links li.print_html a {}
+.article ul.links li.print_email a {}
+.article ul.links li.print_pdf a {}
+
+/* UL link first and last classes */
+.article ul.links li.first {}
+.article ul.links li.last  {}
+
+/* Workflow states */
+.article-add    {}
+.article-edit   {}
+.article-delete {}
+.article-preview  {}
+.article-sticky   {}
+.article-promoted {}
+
+/* Status */
+.article-unpublished {}
+
+/* Theme the teaser */
+.article-teaser {}
+
+
+/*** Comments ***/
+
+/* Comment wrapper wraps all comments and the comment form. */
+#comments {}
+#comments h2.title {}
+
+/* Wrapper class for each individual comment. */
+.comment {
+  margin-bottom: 20px;
+}
+
+/* Indentation */
+.comment .indented {
+  margin-left: 60px;
+}
+
+/* Comment Title */
+.comment-title {}
+.comment-title a:link,
+.comment-title a:visited,
+.comment-title a:active {}
+
+.comment-title a:hover,
+.comment-title a:focus {}
+
+/* Comment "new" notification */
+.comment-title .new {
+  color: #ff8000;
+}
+
+/* User Picture */
+.comment .user-picture {}
+.comment .user-picture img {}
+
+/* Submitted */
+.comment > footer {}
+.comment > footer em {}
+.comment > footer a {}
+.comment > footer a:hover {}
+.comment > footer .username {}
+.comment > footer time {}
+
+/* Links */
+.comment ul.links {
+  display: block;
+  text-align: right;
+  padding: 0;
+  margin: 10px 0;
+}
+.comment ul.links li {
+  padding: 0 0 0 10px;
+}
+.comment ul.links li a {}
+
+/* Core comment link classes. */
+ul.links li.comment_reply a {}
+ul.links li.comment_edit a {}
+ul.links li.comment_delete a {}
+
+/* UL link first and last classes. */
+.comment ul.links li.first {}
+.comment ul.links li.last  {}
+
+/* Author */
+.comment-by-anonymous {}
+.comment-by-article-author {}
+.comment-by-viewer {}
+
+/* New */
+.comment-new {}
+
+/* Zebra */
+.comment-odd  {}
+.comment-even {}
+
+/* Status */
+.comment-unpublished {}
+
+/* Themes the "Unpublished" text. */
+.comment-unpublished .unpublished {}
+
+/* Sytle comments by article type. */
+.book-comments {}
+.blog-comments {}
+.forum-comments {}
+.page-comments {}
+.poll-comments {}
+.article-comments {}
+
+
+/*** Blocks ***/
+/* Yes, I know blocks are not really entities, but they should be... */
+
+.block {
+  margin-bottom: 0;
+}
+
+.block-inner {} /* set block background styles on .block-inner */
+.block-title {}
+.block-content {}
+
+/* Target sidebar blocks */
+.sidebar .block {}
+.sidebar .block-inner {}
+.sidebar .block-title {}
+.sidebar .block-content {}
+
+/* Gpanel blocks */
+.gpanel .block {}
+.gpanel .block-inner {}
+.gpanel .block-title {}
+.gpanel .block-content {}
+
+/* Mini panels get a special title class */
+.mini-panel-title {
+  margin: 0 10px;
+}
+
+/* Block wrapper for Mini Panels */
+.block-panels_mini {}
+.block-panels_mini .block-inner {}
+.block-panels_mini .block-content {}
+.block-panels_mini .mini-panel-title {
+  margin: 0 10px;
+}
+
+/* Reset margins and padding for the Help block .block-inner */
+#block-system-help .block-inner {
+  padding: 0;
+  margin: 0;
+}
+
+/* Reset block ul in the dashboard */
+#dashboard .block ul {
+  margin-left: 0;
+}

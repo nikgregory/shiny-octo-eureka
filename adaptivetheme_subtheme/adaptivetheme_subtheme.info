@@ -13,11 +13,9 @@
 
   stylesheets[screen, handheld][] = css/style.base.css
   stylesheets[screen, handheld][] = css/style.theme.css
+  stylesheets[screen, handheld][] = css/style.entities.css
   stylesheets[screen, handheld][] = css/style.modules.css
   stylesheets[screen, handheld][] = css/style.settings.css
-
-  ; Enable if using color module
-  ;stylesheets[screen, handheld][] = css/style.colors.css
 
   ; Enable if you need some late breaking custom overrides
   ;stylesheets[screen, handheld][] = css/style.custom.css

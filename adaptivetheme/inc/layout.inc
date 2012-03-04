@@ -9,7 +9,7 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
-  
+
   // for now I will just comment these, in case someone comes with a use case, I think this is edge
   /*
   if ($values['tablet_landscape_set_max_width'] == 1) {
@@ -46,7 +46,7 @@ function at_theme_settings_submit($form, &$form_state) {
   $layouts = array();
   // $responsive_styles will hold all the styles from the responsive stylesheets, wrapped in media queries.
   $responsive_styles = array();
-  
+
   // If the cascade setting is true, load up these styles first
   if ($values['enable_cascading_media_queries'] == TRUE) {
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.cascade.css', FALSE);
@@ -78,7 +78,7 @@ function at_theme_settings_submit($form, &$form_state) {
     else {
       $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
     }
-    
+
     // Get and wrap the responsive CSS in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.portrait.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
@@ -98,6 +98,8 @@ function at_theme_settings_submit($form, &$form_state) {
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Smartphone landscape $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
+
+    /*
     if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['smartphone_landscape_max_width'];
       $max_width_unit = $values['smartphone_landscape_max_width_unit'];
@@ -108,6 +110,8 @@ function at_theme_settings_submit($form, &$form_state) {
         $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width: ' . $page_width . $page_unit . '}';
       }
     }
+    */
+
     // Panels layouts
     $panel_settings = array(
       'smartphone_landscape_two_50',
@@ -141,11 +145,11 @@ function at_theme_settings_submit($form, &$form_state) {
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
-    
+
     // Get and wrap the responsive CSS in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.landscape.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
-    
+
     $layouts[] = $css;
   }
   // Tablet layout - portrait
@@ -161,6 +165,8 @@ function at_theme_settings_submit($form, &$form_state) {
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Tablet portrait $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
+
+    /*
     if ($values['tablet_portrait_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['tablet_portrait_max_width'];
       $max_width_unit = $values['tablet_portrait_max_width_unit'];
@@ -171,6 +177,8 @@ function at_theme_settings_submit($form, &$form_state) {
         $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $page_width . $page_unit . '}';
       }
     }
+    */
+
     // Panels layouts
     $panel_settings = array(
       'tablet_portrait_two_50',
@@ -204,11 +212,11 @@ function at_theme_settings_submit($form, &$form_state) {
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
-    
+
      // Get and wrap the responsive CSS in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.portrait.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
-    
+
     $layouts[] = $css;
   }
   // Tablet layout - landscape
@@ -224,6 +232,8 @@ function at_theme_settings_submit($form, &$form_state) {
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Tablet landscape $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
+
+    /*
     if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
       $max_width = $values['tablet_landscape_max_width'];
       $max_width_unit = $values['tablet_landscape_max_width_unit'];
@@ -234,6 +244,8 @@ function at_theme_settings_submit($form, &$form_state) {
         $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $page_width . $page_unit . '}';
       }
     }
+    */
+
     // panels layouts
     $panel_settings = array(
       'tablet_landscape_two_50',
@@ -262,17 +274,17 @@ function at_theme_settings_submit($form, &$form_state) {
         $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
-    
+
     // These panel regions can float, add a single declaration to support floating regions
     $float = '.at-panel .region {display:inline;float:left}';
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
-    
+
      // Get and wrap the responsive CSS in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.landscape.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
-    
+
     $layouts[] = $css;
   }
   // Standard bigscreen layout
@@ -301,7 +313,7 @@ function at_theme_settings_submit($form, &$form_state) {
       }
     }
 
-    // Everything gets much more serious with the standard layout, it dictates by and large 
+    // Everything gets much more serious with the standard layout, it dictates by and large
     // what is written into each file.
     // We can't forget about respond.js, it sticks its mucky hand in here as well.
 
@@ -316,15 +328,15 @@ function at_theme_settings_submit($form, &$form_state) {
 
     // Next we need to know if respond.js is loading or not, so we can setup variables for later on
     if ($values['load_respondjs'] == 0) {
-      // respondjs is OFF, we need to load the IE stylesheet with the standard layout, width, panels 
+      // respondjs is OFF, we need to load the IE stylesheet with the standard layout, width, panels
       // layouts and tack the lt ie7 panels layout overrides on the end
       $lt_ie9_css = $standard_layout_comment . implode("\n", $layout) . $width . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
     }
     if ($values['load_respondjs'] == 1) {
-      // respondjs is ON, load all the panels layouts into one variable - this will go into 
+      // respondjs is ON, load all the panels layouts into one variable - this will go into
       // themeName.responsive.layout.css file
       $panels_layouts = $panels_layouts . "\n" . $ie_panels_layouts;
-      // Load a comment in the lt ie9 css file to tell the themer this file is not being used, we 
+      // Load a comment in the lt ie9 css file to tell the themer this file is not being used, we
       // don't need it since respondjs is loading
       $lt_ie9_css = '/* respond.js is loading so we dont load this file. IE6, 7 and 8 will rely on respond.js to work its magic */';
     }
@@ -333,13 +345,13 @@ function at_theme_settings_submit($form, &$form_state) {
     if ($is_default_layout == 'standard-layout') {
       // reset the IE styles variable to a comment, we don't need it if the standard layout is default
       $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing desktop first design */';
-      // is the default layout, $css gets a comment that this is the default, and we load the layout 
+      // is the default layout, $css gets a comment that this is the default, and we load the layout
       // $styles into $default_layout
       $css = '/* The standard layout is the default layout - this is a desktop first design */';
       $default_layout = $standard_layout_comment . $styles . "\n" . $ie_panels_layouts;
     }
     else {
-      // is not the default, load the $css var with the layout $styles and tack the lt ie7 panels layout 
+      // is not the default, load the $css var with the layout $styles and tack the lt ie7 panels layout
       // overrides on the end (but only if respond.js is loading)
       if ($values['load_respondjs'] == 1) {
         $not_default_styles = $styles . "\n" . $ie_panels_layouts . "\n";
@@ -389,7 +401,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
   // Finally for lt ie9
   $lt_ie9_layout = $lt_ie9_css;
-  
+
   // Not finished yet though, we need to aggregate the responsive stylesheets
   $responsive_css = implode("\n", $responsive_styles);
 
