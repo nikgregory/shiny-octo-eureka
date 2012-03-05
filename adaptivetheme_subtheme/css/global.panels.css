@@ -1,0 +1,50 @@
+/**
+ * @file
+ * Panels Styling
+ */
+
+
+/* Panels */
+.page-panels /* Body class when viewing a Panels page */ {
+}
+
+
+
+
+
+
+/*
+ * Panes
+ */
+.panel-pane {
+  margin-bottom: 20px;
+}
+
+.pane-inner {
+}
+
+.pane-title {
+}
+
+.pane-content {
+}
+
+.panel-pane .feed {
+}
+
+.panel-pane .links {
+}
+
+.panel-pane .more-link {
+}
+
+
+/*
+ * Mini Panels
+ */
+.block-panels_mini {
+  padding: 0;
+}
+
+.block-panels-mini .block-inner  {
+}

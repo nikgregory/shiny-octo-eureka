@@ -1,0 +1,28 @@
+/**
+ * Import all the global styles into one file.
+ * This is done purely as a house-keeping exercise and to make it easy
+ * to unset one stylesheet by simply commenting it out.
+ * 
+ * When CSS aggregation is ON the @imports are resolved and only one
+ * aggreated file is generated, so there is zero performance overhead
+ * in using @import.
+ *
+ * The modular structure is very similar to Zen and the actual CSS used in 
+ * many of these files are a strait copy from the Zen theme - this is to 
+ * provide a consistant themer experience for those who have used Zen. 
+ * Adaptivetheme adds additional classes, makes minor adjustments to some 
+ * classes and id's and adds tables.css and panels.css, otherwise its 
+ * nearly identical to Zen. Shout it out for JohnAlbin, you rock man.
+ */
+
+@import "global.base.css";     /* Reset + additional styles to support modern web browsers */
+@import "global.tables.css";   /* Global table styles, these can apply heavily to the admin area or front end */
+@import "global.forms.css";    /* Global form styles */
+@import "global.pages.css";    /* General styles for page template elements */
+@import "global.nav.css";      /* Main navigation, menus, breadcrumbs, local tasks, action links, pager and skip navigation */
+@import "global.fields.css";   /* Global styles for fields */
+@import "global.nodes.css";    /* Content types */
+@import "global.comments.css"; /* Comment wrapper, commentss and the comment form */
+@import "global.blocks.css";   /* Block styles, includes all core blocks */
+@import "global.views.css";    /* Starter CSS for styling Views */
+@import "global.panels.css";   /* Starter CSS for styling Panels and panel panes */

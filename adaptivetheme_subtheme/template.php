@@ -15,7 +15,9 @@
  * Override or insert variables into the html templates.
  */
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
-
+  global $theme_key;
+  $theme_name = $theme_key;
+  
   /**
    * Load IE Stylesheets
    *
@@ -29,20 +31,20 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
    * By default the sub-theme includes one IE specific stylesheet: lt-ie9.css
    * Your IE CSS files must be in the mytheme/css/ directory in your subtheme.
    */
-  /* -- Delete this line to add a conditional stylesheets.
+  /* -- Delete this line to enable.
   $ie_files = array(
-    'lt IE 9' => 'lt-ie9.css',
+    '(lt IE 9)&(!IEMobile 7)' => 'lt-ie9.css',
   );
   load_subtheme_ie_styles($ie_files, $theme_name);
   // */
 
   // Add a class for the active theme name.
-  /* -- Delete this line to add a class for the active theme name.
+  /* -- Delete this line to enable.
   $vars['classes_array'][] = drupal_html_class($theme_name);
   // */
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
-  /* -- Delete this line to add a classes for the browser and platform.
+  /* -- Delete this line to enable.
   $vars['classes_array'][] = css_browser_selector();
   // */
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
@@ -15,6 +14,23 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 function adaptivetheme_js_alter(&$javascript) {
   $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
+}
+
+// hook_page_alter()
+function adaptivetheme_page_alter(&$page) {
+  // Look in each visible region for blocks.
+  foreach (system_region_list($GLOBALS['theme'], REGIONS_VISIBLE) as $region => $name) {
+    if (!empty($page[$region])) {
+      // Find the last block in the region.
+      $blocks = array_reverse(element_children($page[$region]));
+      while ($blocks && !isset($page[$region][$blocks[0]]['#block'])) {
+        array_shift($blocks);
+      }
+      if ($blocks) {
+        $page[$region][$blocks[0]]['#block']->last_in_region = TRUE;
+      }
+    }
+  }
 }
 
 // hook_form_FORM_alter().

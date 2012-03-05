@@ -1,5 +1,4 @@
 <?php
-
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
@@ -63,7 +62,8 @@ function load_subtheme_ie_styles($files, $theme_name) {
         'IE' => $key,
         '!IE' => FALSE,
         ),
-      'preprocess' => FALSE,
+      'media' => 'screen',
+      'preprocess' => TRUE,
       )
     );
   }

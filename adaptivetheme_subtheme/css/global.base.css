@@ -1,12 +1,14 @@
 /**
- * The default font size is 16px x 81.3% = 13px
- * Use http://pxtoem.com to calculate proper font size and scale.
- *
- * font-size is set on the html element so we can adjust the
- * size using body classes or simply reset the font size for body.
+ * global.base.css 
+ * This is basically a big reset for html elements and sets up
+ * global defaults. A notable exception is a global font-size
+ * reset, instead we do that in each responsive stylesheet or 
+ * in the responsive.cascade.css file if you are using it (see
+ * Global Settings in the them settings to enable its usage).
  */
+
 html {
-  font-size: 81.3%;
+  font-size: 1em; /* 16px, set the value of 1em */
   height: 100%;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
@@ -14,7 +16,6 @@ html {
 }
 body {
   font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
-  line-height: 1.5;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;

@@ -9,19 +9,10 @@
   base theme  = adaptivetheme
 
 
-;----------// Modular stylesheets
+;----------// Stylesheets
 
-  stylesheets[screen, handheld][] = css/style.base.css
-  stylesheets[screen, handheld][] = css/style.theme.css
-  stylesheets[screen, handheld][] = css/style.entities.css
-  stylesheets[screen, handheld][] = css/style.modules.css
-  stylesheets[screen, handheld][] = css/style.settings.css
-
-  ; Enable if you need some late breaking custom overrides
-  ;stylesheets[screen, handheld][] = css/style.custom.css
-
-  ; Enable print styles
-  ;stylesheets[print][] = css/print.css
+  stylesheets[screen, handheld][] = css/globals.css
+  stylesheets[print][] = css/print.css
 
 
 ;----------// Regions

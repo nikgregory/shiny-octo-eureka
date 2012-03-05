@@ -1,5 +1,4 @@
 <?php
-
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  *
@@ -82,12 +81,14 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Load Styles and JS
-  global $theme_key;
   $theme_name = $theme_key;
 
   // Set the path to the directory where our CSS files are saved
   $path = "public://at_css";
   $file = '';
+
+  // Set a variable for the mode
+  $mode = theme_get_setting('production_mode');
 
   /**
    * Responsive Stylesheet Loader: Development Mode
@@ -102,16 +103,16 @@ function adaptivetheme_preprocess_html(&$vars) {
    * You can disable responsive capability using the theme settings - look under
    * the Global settings. Do not delete or alther this - use the theme setting!
    */
-   if (theme_get_setting('production_mode') == FALSE) {
+   if ($mode == FALSE) {
      if (theme_get_setting('disable_responsive_styles') == FALSE) {
-   
+
       // Get the media query for each device group.
       $smartphone_portrait_media_query  = theme_get_setting('smartphone_portrait_media_query');
       $smartphone_landscape_media_query = theme_get_setting('smartphone_landscape_media_query');
       $tablet_portrait_media_query      = theme_get_setting('tablet_portrait_media_query');
-      $tablet_landscape_media_query     = theme_get_setting('tablet_landscape_media_query');   
+      $tablet_landscape_media_query     = theme_get_setting('tablet_landscape_media_query');
       $desktop_media_query              = theme_get_setting('bigscreen_media_query');
-   
+
       // Next build a keyed array of CSS file-names as key, and media query as value.
       // The file names must match the files in your themes CSS directory, if
       // you change them you must update to match.
@@ -146,21 +147,22 @@ function adaptivetheme_preprocess_html(&$vars) {
   // In Production mode we only load one file for responsive styles.
   // We use a media query to prevent non media query browsers from downloading it.
   // The embedded media queries in this file take precedence always.
-  if (theme_get_setting('production_mode') == TRUE) {
+  if ($mode == TRUE) {
     $file = "$theme_name.responsive.styles.css";
-    $media_query = 'only screen and (min-width:160px)';
+    $media_query = 'only screen and (min-width:1px)';
     if (!empty($file)) {
       $filepath = "$path/$file";
       drupal_add_css($filepath, array(
         'preprocess' =>  variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
         'group' => CSS_THEME,
         'media' => $media_query,
+        'weight' => 99,
         'every_page' => TRUE,
         )
       );
     }
   }
-  
+
   // In layout.inc we built 3 layout stylesheets:
   // 1. themeName.default.layout.css - this always loads, so we just load it
   // 2. themeName.responsive.layout.css - only loads if responsive capability is enabled
@@ -234,7 +236,7 @@ function adaptivetheme_preprocess_html(&$vars) {
               'IE' => '(lt IE 9)&(!IEMobile 7)',
               '!IE' => FALSE,
               ),
-            'preprocess' => FALSE,
+            'preprocess' => TRUE,
             )
           );
         }
@@ -270,20 +272,6 @@ function adaptivetheme_preprocess_html(&$vars) {
 
 // Process variables for html.tpl.php
 function adaptivetheme_process_html(&$vars) {
-  $classes = explode(' ', $vars['classes']);
-  if ($node = menu_get_object()) {
-    $node_type_class = drupal_html_class('node-type-' . $node->type);
-    if (in_array($node_type_class, $classes)) {
-      if (theme_get_setting('extra_page_classes') == 0) {
-        $classes = str_replace($node_type_class, '', $classes);
-      }
-      if (theme_get_setting('extra_page_classes') == 1) {
-        $classes = str_replace('node-type-', 'page-type-', $classes);
-      }
-    }
-  }
-  $vars['classes'] = trim(implode(' ', $classes));
-
   // Load the panels test
   if (theme_get_setting('load_all_panels') == TRUE) {
     if (drupal_is_front_page()) {
@@ -297,6 +285,7 @@ function adaptivetheme_process_html(&$vars) {
 function adaptivetheme_preprocess_page(&$vars) {
   global $theme_key;
 
+  // Set up logo element
   $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) . ' ' . t('logo');
   $vars['logo_img'] = $vars['logo'] ? '<img src="' . check_url($vars['logo']) . '" alt="' . $vars['logo_alt_text'] . '"/>' : '';
   $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
@@ -306,6 +295,7 @@ function adaptivetheme_preprocess_page(&$vars) {
     'html' => TRUE,
     )
   ) : '';
+  // Hide site name if toggled off
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['visibility'] = 'element-invisible';
     $vars['hide_site_name'] = TRUE;
@@ -314,13 +304,14 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['visibility'] = '';
     $vars['hide_site_name'] = FALSE;
   }
-  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal')); /* Convert entitles if used, cunning... */
   $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
       'title' => t('Home page')),
     )
   ) : '';
 
+  // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
     $text = t('Main menu');
     if (module_exists('block')) {
@@ -338,6 +329,8 @@ function adaptivetheme_preprocess_page(&$vars) {
       )
     ));
   }
+
+  // Build a variable for the secondary menu
   if (isset($vars['secondary_menu'])) {
     $vars['secondary_navigation'] = theme('links', array(
       'links' => $vars['secondary_menu'],
@@ -392,6 +385,7 @@ function adaptivetheme_preprocess_page(&$vars) {
 
 // Process variables for page.tpl.php
 function adaptivetheme_process_page(&$vars) {
+  // Call our helper function to wrap menus in extra markup
   if (!empty($vars['primary_navigation'])) {
     $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
   }
@@ -404,28 +398,35 @@ function adaptivetheme_process_page(&$vars) {
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;
 
+  // Extra classes if required
   if (theme_get_setting('extra_article_classes')) {
+    // Zebra
+    $vars['classes_array'][] = $vars['zebra'];
+    // Langauge
     if (module_exists('translation')) {
       if ($vars['node']->language) {
         global $language;
-        $vars['classes_array'][] = 'article-lang-' . $vars['node']->language;
+        $vars['classes_array'][] = 'node-lang-' . $vars['node']->language;
       }
     }
-  }
-
-  if (theme_get_setting('extra_article_classes')) {
-    $vars['classes_array'][] = $vars['zebra'];
+    // User picture?
     if ($vars['display_submitted'] && !empty($vars['picture'])) {
-      $vars['classes_array'][] = 'article-with-picture';
+      $vars['classes_array'][] = 'node-with-picture';
+    }
+    // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
+    if ($vars['view_mode'] != 'teaser') {
+      $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
     }
   }
-  if (!$vars['teaser'] && theme_get_setting('extra_article_classes')) {
-    $vars['classes_array'][] = drupal_html_class('article-' . $vars['view_mode']);
-  }
 
+  // ARIA Role
   $vars['attributes_array']['role'][] = 'article';
-  $vars['title_attributes_array']['class'][] = 'article-title';
-  $vars['content_attributes_array']['class'][] = 'article-content';
+
+  // Title and content classes
+  $vars['title_attributes_array']['class'][] = 'node-title';
+  $vars['content_attributes_array']['class'][] = 'node-content';
+
+  // Build the submitted by and time elements
   $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, we need to build it
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
@@ -439,6 +440,7 @@ function adaptivetheme_preprocess_node(&$vars) {
     $vars['submitted'] = '';
   }
 
+  // Unpublised?
   $vars['unpublished'] = '';
   if (!$vars['status']) {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
@@ -447,59 +449,78 @@ function adaptivetheme_preprocess_node(&$vars) {
 
 // Process variables for node.tpl.php
 function adaptivetheme_process_node(&$vars) {
-  $classes = explode(' ', $vars['classes']);
-  $classes = str_replace('node', 'article', $classes);
-  if (in_array('article-' . $vars['node']->type, $classes)) {
-    $classes = str_replace('article-' . $vars['node']->type, 'article-type-' . $vars['node']->type, $classes);
+  // Strip default drupal classes if not required  
+  if (theme_get_setting('extra_article_classes') == 0) {
+    $classes = explode(' ', $vars['classes']);
+    if (in_array('node-sticky', $classes)) {
+      $classes = str_replace('node-sticky', '', $classes);
+    }
+    if (in_array('node-promoted', $classes)) {
+      $classes = str_replace('node-promoted', '', $classes);
+    }
+    if (in_array('node-teaser', $classes)) {
+      $classes = str_replace('node-teaser', '', $classes);
+    }
+    if (in_array('node-preview', $classes)) {
+      $classes = str_replace('node-preview', '', $classes);
+    }
+    $vars['classes'] = trim(implode(' ', $classes));
   }
-  if (in_array('article-sticky', $classes)) {
-    theme_get_setting('extra_article_classes') ? '' : $classes = str_replace('article-sticky', '', $classes);
-  }
-  if (in_array('article-promoted', $classes)) {
-    theme_get_setting('extra_article_classes') ? '' : $classes = str_replace('article-promoted', '', $classes);
-  }
-  if (in_array('article-teaser', $classes)) {
-    theme_get_setting('extra_article_classes') ? '' : $classes = str_replace('article-teaser', '', $classes);
-  }
-  if (in_array('article-preview', $classes)) {
-    theme_get_setting('extra_article_classes') ? '' : $classes = str_replace('article-preview', '', $classes);
-  }
-  $vars['classes'] = trim(implode(' ', $classes));
 }
 
 // Preprocess variables for comment.tpl.php
 function adaptivetheme_preprocess_comment(&$vars) {
+
+  // Extra comment classes if required
   if (theme_get_setting('extra_comment_classes')) {
+    // Zebra
     $vars['classes_array'][] = $vars['zebra'];
+    // Position?
+    if ($vars['id'] == 1) {
+      $vars['classes_array'][] = 'first';
+    }
+    if ($vars['id'] == $vars['node']->comment_count) {
+      $vars['classes_array'][] = 'last';
+    }
+    // Title hidden?
     if (theme_get_setting('comments_hide_title')) {
       $vars['classes_array'][] = 'comment-title-hidden';
     }
+    // User picture?
     if ($vars['picture']) {
       $vars['classes_array'][] = 'comment-with-picture';
     }
+    // Signature?
     if ($vars['signature']) {
       $vars['classes_array'][] = 'comment-with-signature';
     }
   }
 
+  // Classes for comment title
   $vars['title_attributes_array']['class'][] = 'comment-title';
+  // Title hidden?
   if (theme_get_setting('comments_hide_title')) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
+
+  // Classes for comment content
   $vars['content_attributes_array']['class'][] = 'comment-content';
 
+  // Build the submitted by and time elements
   $uri = entity_uri('comment', $vars['comment']);
   $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
   $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
-  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
+  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']); // Permalinks are embedded in the time element, aka Wordpress
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
-  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z');
+  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z'); // Generate the timestamp, PHP "c" format is wrong
   $vars['submitted'] = t('Submitted by !username on !datetime',
     array(
       '!username' => $vars['author'],
       '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['created'] . '</time>',
     )
   );
+
+  // Unpublished?
   $vars['unpublished'] = '';
   if ($vars['status'] == 'comment-unpublished') {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
@@ -508,34 +529,51 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
 // Process variables for comment.tpl.php
 function adaptivetheme_process_comment(&$vars) {
-  $classes = explode(' ', $vars['classes']);
-  if (in_array('comment-by-anonymous', $classes)) {
-    theme_get_setting('extra_comment_classes') ? '' : $classes = str_replace('comment-by-anonymous', '', $classes);
+  // Strip default drupal classes if not required
+  if (theme_get_setting('extra_comment_classes') == 0) {
+    $classes = explode(' ', $vars['classes']);
+    if (in_array('comment-by-anonymous', $classes)) {
+      $classes = str_replace('comment-by-anonymous', '', $classes);
+    }
+    if (in_array('comment-by-node-author', $classes)) {
+      $classes = str_replace('comment-by-node-author', '', $classes);
+    }
+    if (in_array('comment-by-viewer', $classes)) {
+      $classes = str_replace('comment-by-viewer', '', $classes);
+    }
+    if (in_array('comment-new', $classes)) {
+      $classes = str_replace('comment-new', '', $classes);
+    }
+    $vars['classes'] = trim(implode(' ', $classes));
   }
-  if (in_array('comment-by-node-author', $classes)) {
-    $classes = str_replace('comment-by-node-author', 'comment-by-article-author', $classes);
-    theme_get_setting('extra_comment_classes') ? '' : $classes = str_replace('comment-by-article-author', '', $classes);
-  }
-  if (in_array('comment-by-viewer', $classes)) {
-    theme_get_setting('extra_comment_classes') ? '' : $classes = str_replace('comment-by-viewer', '', $classes);
-  }
-  if (in_array('comment-new', $classes)) {
-    theme_get_setting('extra_comment_classes') ? '' : $classes = str_replace('comment-new', '', $classes);
-  }
-  $vars['classes'] = trim(implode(' ', $classes));
 }
 
 // Preprocess variables for block.tpl.php
 function adaptivetheme_preprocess_block(&$vars) {
-  // Generate the wrapper element, if there's a title, use section
+
+  // Generate the wrapper element, if there's a title use section
   $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
 
+  // Add extra classes if required
   if (theme_get_setting('extra_block_classes')) {
-    $vars['classes_array'][] = 'block-' . $vars['block']->delta;
-    $vars['classes_array'][] = 'block-' . $vars['block_zebra'];
+    // Zebra
+    $vars['classes_array'][] = $vars['block_zebra'];
+    // Position?
+    if ($vars['block_id'] == 1) {
+      $vars['classes_array'][] = 'first';
+    }
+    if (isset($vars['block']->last_in_region)) {
+      $vars['classes_array'][] = 'last';
+    }
+    // Count
     $vars['classes_array'][] = 'block-count-' . $vars['id'];
+    // Region
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
+    // Delta
+    $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
   }
+
+  // Add classes to theme the horizontal block option
   if (theme_get_setting('horizontal_login_block') && $vars['block']->module == 'user' && $vars['block']->delta == 'login') {
     $vars['classes_array'][] = 'lb-h';
   }

@@ -1686,6 +1686,12 @@ ul.action-links li a:focus {
   padding: 2px 0 5px;
   font-size: 1em;
 }
+.panels-add-content-modal {
+  background-repeat: repeat-y;
+}
+.content-type-button div {
+  top: auto;
+}
 
 /* Module Filter */
 #module-filter-squeeze {

@@ -2,18 +2,15 @@
 # This file is only needed for Compass/Sass integration. If you are not using
 # Compass, you may safely ignore or delete this file.
 #
-# If you'd like to learn more about Sass and Compass, see the sass/README.txt
+# If you'd like to learn more about Sass and Compass, see the sass/_README.txt
 # file for more information.
 #
 # This config file is borrowed from Zen, so thanks JohnAlbin for your hard work
 # in bringing such fine tools to Drupal so us mere mortals may benefit.
-#
-
 
 # Change this to :development if you prefer working that way.
 #environment = :development
 environment = :production
-
 
 # Location of the theme's resources.
 css_dir = "css"
@@ -21,7 +18,6 @@ sass_dir = "sass"
 images_dir = "css/images"
 #extensions_dir = "sass-extensions"
 #javascripts_dir = "js"
-
 
 ##
 ## You probably don't need to edit anything below this.

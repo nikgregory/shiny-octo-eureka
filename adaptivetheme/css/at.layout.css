@@ -18,13 +18,13 @@ html, body {
 }
  
 /* Add gutters */
-.block-inner,
+.region-inner,
 .messages,
+#branding,
 #primary-nav,
 #secondary-nav,
 #breadcrumb,
-#main-content > header,
-#branding,
+#main-content-header,
 #attribution {
   margin-left: 10px;
   margin-right: 10px;

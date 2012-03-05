@@ -1,22 +1,30 @@
 <div class="at-panel panel-panel two-50 clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
-  <?php if ($content['twocol_50_top']): ?>
+  <?php if ($content['two_50_top']): ?>
     <div class="region region-two-50-top region-conditional-stack">
-      <?php print $content['twocol_50_top']; ?>
+      <div class="region-inner cleafix">
+        <?php print $content['two_50_top']; ?>
+      </div>
     </div>
   <?php endif; ?>
 
   <div class="region region-two-50-first">
-    <?php print $content['twocol_50_first']; ?>
+    <div class="region-inner cleafix">
+      <?php print $content['two_50_first']; ?>
+    </div>
   </div>
 
   <div class="region region-two-50-second">
-    <?php print $content['twocol_50_second']; ?>
+    <div class="region-inner cleafix">
+      <?php print $content['two_50_second']; ?>
+    </div>
   </div>
 
-  <?php if ($content['twocol_50_bottom']): ?>
+  <?php if ($content['two_50_bottom']): ?>
     <div class="region region-two-50-bottom region-conditional-stack">
-      <?php print $content['twocol_50_bottom']; ?>
+      <div class="region-inner cleafix">
+        <?php print $content['two_50_bottom']; ?>
+      </div>
     </div>
   <?php endif; ?>
 

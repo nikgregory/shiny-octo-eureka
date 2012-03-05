@@ -1237,7 +1237,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['at-layout']['global-settings']['mode'] = array(
     '#type' => 'fieldset',
     '#title' => t('Production Mode'),
-    '#description' => t('<h3>Production Mode</h3><p>Production mode enables several important performance enhancements including reducing HTTP requests and disabling system_rebuild_theme_data() and drupal_theme_rebuild() on every page request.</p>'),
+    '#description' => t('<h3>Production Mode</h3><p>Enabling Production mode reduces HTTP requests by aggregating the responsive stylesheets and disables <code>system_rebuild_theme_data()</code> and <code>drupal_theme_rebuild()</code> being called on every page request. TODO - insert link to docs.</p>'),
     '#states' => array(
       'invisible' => array(
         'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
