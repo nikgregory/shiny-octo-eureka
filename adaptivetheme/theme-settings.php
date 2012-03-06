@@ -50,9 +50,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('bigscreen_layout'),
     '#options' => array(
-      'three-col-grail' => t('Standard three column'),
-      'three-col-right' => t('Three column, both sidebars on the right'),
-      'three-col-left'  => t('Three column, both sidebars on the left'),
+      'three-col-grail' => t('<span>Standard three column</span>'),
+      'three-col-right' => t('<span>Two sidebars right</span>'),
+      'three-col-left'  => t('<span>Two sidebars left</span>'),
     )
   );
   $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
@@ -147,6 +147,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'visible' => array(
         'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
       ),
+      'required' => array(
+        'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
+      ),
     ),
   );
   $form['at-layout']['bigscreen']['media-queries-wrapper'] = array(
@@ -194,10 +197,10 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_landscape_layout'),
     '#options' => array(
-      'three-col-grail' => t('Standard three column'),
-      'three-col-right' => t('Three column, both sidebars on the right'),
-      'three-col-left'  => t('Three column, both sidebars on the left'),
-      'two-col-stack'   => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
+      'three-col-grail' => t('<span>Standard three column</span>'),
+      'three-col-right' => t('<span>Two sidebar right</span>'),
+      'three-col-left'  => t('<span>Two sidebar left</span>'),
+      'two-col-stack'   => t('<span>Sidebar second stacked</span>'),
     )
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
@@ -335,9 +338,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_portrait_layout'),
     '#options' => array(
-      'one-col-stack' => t('One column'),
-      'one-col-vert'  => t('Sidebars in two vertical columns below the main column'),
-      'two-col-stack' => t('Two colums, sidebar second stacked below the main column (the second sidebar is full width)'),
+      'one-col-stack' => t('<span>Sidebars stacked</span>'),
+      'one-col-vert'  => t('<span>Sidebars wrapped</span>'),
+      'two-col-stack' => t('<span>Second sidebar stacked</span>'),
     )
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
@@ -491,8 +494,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('smartphone_landscape_layout'),
     '#options' => array(
-      'one-col-stack' => t('One column'),
-      'one-col-vert'  => t('Sidebars in two vertical columns below the main column'),
+      'one-col-stack' => t('<span>One column stacked</span>'),
+      'one-col-vert'  => t('<span>Sidebars wrapped</span>'),
     )
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
@@ -521,7 +524,10 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
-    '#required' => TRUE,
+    '#states' => array('required' => array(
+        'input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE),
+      ),
+    ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
@@ -529,7 +535,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_second'),
     '#size' => 4,
     '#maxlenght' => 4,
-    '#required' => TRUE,
+    '#states' => array(
+      'required' => array(
+        'input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE),
+      ),
+    ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
     '#type' => 'fieldset',

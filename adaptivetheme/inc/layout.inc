@@ -3,31 +3,20 @@
 function at_theme_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
 
-  // consider deprecating max-width for all but bigscreen
+  // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] == 1) {
-    if (empty($values['bigscreen_max_width']['#default_value'])) {
-      form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
+    if (empty($values['bigscreen_max_width'])) {
+      form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - enter a value or deselect "Set a max width".'));
     }
   }
-
-  // for now I will just comment these, in case someone comes with a use case, I think this is edge
-  /*
-  if ($values['tablet_landscape_set_max_width'] == 1) {
-    if (empty($values['tablet_landscape_max_width']['#default_value'])) {
-      form_set_error('tablet_landscape_max_width', t('Tablet landscape layout max-width is empty - you forgot to enter a value for the max width!'));
+  if ($values['smartphone_landscape_layout'] == 'one-col-vert') {
+    if (empty($values['smartphone_landscape_sidebar_first'])) {
+      form_set_error('smartphone_landscape_sidebar_first', t('Smartphone First Sidebar width is empty - enter a value or choose another layout.'));
+    }
+    if (empty($values['smartphone_landscape_sidebar_second'])) {
+      form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
   }
-  if ($values['tablet_portrait_set_max_width'] == 1) {
-    if (empty($values['tablet_portrait_max_width']['#default_value'])) {
-      form_set_error('tablet_portrait_max_width', t('Tablet portrait max-width is empty - you forgot to enter a value for the max width!'));
-    }
-  }
-  if ($values['smartphone_landscape_set_max_width'] == 1) {
-    if (empty($values['smartphone_landscape_max_width']['#default_value'])) {
-      form_set_error('smartphone_landscape_max_width', t('Smartphone landscape max-width is empty - you forgot to enter a value for the max width!'));
-    }
-  }
-  */
 }
 
 // Custom submit function to generate and save the layout CSS embedded in media queries, or not, as the case may be...

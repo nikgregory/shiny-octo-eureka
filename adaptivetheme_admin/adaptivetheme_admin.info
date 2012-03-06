@@ -36,13 +36,13 @@
   ; Standard bigscreen
   settings[bigscreen_layout]         = 'three-col-right'
   settings[bigscreen_page_unit]      = '%'
-  settings[bigscreen_sidebar_unit]   = 'px'
-  settings[bigscreen_max_width_unit] = 'px'
+  settings[bigscreen_sidebar_unit]   = 'em'
+  settings[bigscreen_max_width_unit] = 'em'
   settings[bigscreen_page_width]     = 100
-  settings[bigscreen_sidebar_first]  = 200
-  settings[bigscreen_sidebar_second] = 160
+  settings[bigscreen_sidebar_first]  = 13
+  settings[bigscreen_sidebar_second] = 13
   settings[bigscreen_set_max_width]  = 1
-  settings[bigscreen_max_width]      = 1260
+  settings[bigscreen_max_width]      = 96
   settings[bigscreen_media_query]    = 'only screen and (min-width:1025px)'
 
   ; Tablet landscape

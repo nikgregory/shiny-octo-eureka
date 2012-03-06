@@ -39,6 +39,7 @@ div.vertical-tabs .vertical-tabs-panes {
 }
 .vertical-tabs-panes select {
   width: auto;
+  max-width: 960px; /* Mitigate huge width when page is zoomed */
 }
 #edit-font label {
   width: 10em;
@@ -97,9 +98,11 @@ fieldset.at-layout-form div.form-type-checkbox {
 }
 fieldset.at-layout-form div.form-item input {
   width: 8em;
+  max-width: 120px;
 }
 fieldset.at-layout-form select {
   width: 4em;
+   max-width: 100px;
 }
 fieldset.at-layout-form div.form-type-checkbox label,
 fieldset.at-media-queries div.form-type-textfield label {
@@ -111,6 +114,7 @@ fieldset.at-media-queries div.form-item {
 fieldset.at-media-queries div.form-item,
 fieldset.at-media-queries div.form-type-textfield input {
   width: 90%;
+  max-width: 960px;
 }
 h4 {
   margin-bottom: 0;
@@ -156,6 +160,33 @@ div.smartphone-portrait-layout  {
   float: left;
   margin: 15px 15px 0 0;
 }
+
+/* Test lable as hover tip
+fieldset.at-layout-form div.form-type-radio label:hover  {
+  position: relative;
+  text-indent: 0;
+}
+fieldset.at-layout-form div.form-type-radio label span  {
+  display: block;
+  height: 70px;
+  width: 78px;
+  padding: 5px 1px;
+  position: absolute;
+  z-index: 100;
+  font-size: 0.8em;
+  background: transparent;
+  top: 0;
+  left: 0;
+}
+fieldset.at-layout-form div.form-type-radio label span:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+*/
+
 fieldset#edit-portrait--2  .fieldset-description {
   overflow: hidden;
 }

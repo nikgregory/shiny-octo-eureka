@@ -323,7 +323,7 @@ ul.primary li a {
   background-color: #f5f5f5;
   margin-right: .08em;
   border-color: #ccc;
-  padding: .1em .75em .2em;
+  padding: .1em 10px .2em;
 }
 
 .local-tasks ul.primary li a:hover {

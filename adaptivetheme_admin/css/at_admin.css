@@ -94,6 +94,7 @@ h1#page-title {
 }
 #main-content {
   padding-top: 10px;
+  position: relative;
 }
 .content-header {
   background: #eee;
@@ -200,14 +201,14 @@ a:focus {
 
 /* Topbar */
 .topbar-wrapper {
-  font-size: 0.923em;
-  line-height: 1.5;
   position: relative;
   background: #555;
 }
 #topbar time,
 #breadcrumb {
   padding: 7px 0;
+  font-size: 0.923em;
+  line-height: 1.5;
 }
 #topbar time {
   float: right; /* LTR */
@@ -357,6 +358,9 @@ tr .block {
 .block ul {
   padding: 0;
   margin: 0;
+}
+.block ul.menu {
+  margin: 0 0 0 15px;
 }
 ul.menu li {
   margin: 0;
@@ -1510,16 +1514,35 @@ ul.action-links li a:focus {
 }
 
 /* Views UI */
-.views-displays .secondary a {
+.views-display-top .secondary > li {
+  margin: 2px 5px 1px 0;
+  padding-left: 0;
+}
+.views-displays ul.secondary a {
   border: 1px solid #d7d7d7;
-  line-height: 1.4;
-  padding: 3px 6px 0;
+  line-height: 1.5;
+  padding: 3px 5px 0;
+  margin: 0;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+.views-displays ul.secondary li.open a {
+  -moz-border-radius: 2px 2px 0 0 !important;
+  -webkit-border-radius: 2px 2px 0 0 !important;
+  border-radius: 2px 2px 0 0 !important;
 }
 .views-admin .icon.add {
-  background-position: -3px 5px;
+  background-position: -2px 6px;
 }
 .views-displays .secondary a:hover > .icon.add {
-  background-position: -3px -23px;
+  background-position: -2px -23px;
+}
+.views-displays .secondary .open a:hover > .icon.add {
+  background-position: -2px 6px;
+}
+.views-display-top .ctools-button-processed {
+  top: 10px;
 }
 #edit-display-settings-title {
   background: transparent;
@@ -1528,10 +1551,10 @@ ul.action-links li a:focus {
   line-height: inherit;
   margin: 0;
 }
-.views-displays .secondary .action-list {
+.views-displays ul.secondary .action-list {
   top: 27px;
 }
-.views-displays .secondary .action-list li {
+.views-displays ul.secondary .action-list li {
   width: 100%;
 }
 .ctools-toggle {
@@ -1572,9 +1595,21 @@ ul.action-links li a:focus {
 }
 .views-edit-view .ctools-dropbutton .ctools-content input,
 .views-edit-view .action-list input {
-  color: #3188d1;
-  outline: 0;
+  color: #3188D1;
   font-weight: 300;
+  margin: 0;
+  outline: 0 none;
+  padding: 0 12px;
+  text-align: left;
+}
+.ctools-dropbutton-processed .ctools-content ul {
+  margin: 0;
+  padding: 0;
+  min-width: 65px;
+}
+.ctools-dropbutton-processed .ctools-twisty,
+.ctools-dropbutton-processed.open .ctools-twisty {
+  top: 0.75em;
 }
 
 /* Advanced help */

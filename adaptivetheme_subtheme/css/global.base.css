@@ -96,7 +96,7 @@ q {
 }
 blockquote {
   margin: 0 0 1.5em;
-  padding: 0 0 0 3em;
+  padding: 0 0 0 40px;
 }
 blockquote:before,
 blockquote:after,
@@ -197,7 +197,8 @@ video {
   max-width: none;
 }
 
-/* Override max-width 100% for map displays */
+/* Override max-width 100% for map displays, as much as possible anyway... */
+#map img,
 .gmap img,
 .view-gmap img,
 .openlayers-map img,
