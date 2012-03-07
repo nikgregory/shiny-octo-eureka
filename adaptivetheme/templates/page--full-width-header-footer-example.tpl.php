@@ -20,8 +20,8 @@
   <div id="header-wrapper"><div class="container clearfix">
     <header class="clearfix">
 
-      <?php if ($linked_site_logo): ?>
-        <div id="logo"><?php print $linked_site_logo; ?></div>
+      <?php if ($site_logo): ?>
+        <div id="logo"><?php print $site_logo; ?></div>
       <?php endif; ?>
 
       <?php if ($site_name || $site_slogan): ?>
@@ -75,7 +75,6 @@
 
         <?php print render($page['highlighted']); ?>
 
-        <?php $tag = $title ? 'section' : 'div'; ?>
         <<?php print $tag; ?> id="main-content">
 
           <?php if ($title || $primary_local_tasks || $secondary_local_tasks || $action_links): ?>
