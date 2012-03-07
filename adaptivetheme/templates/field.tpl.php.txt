@@ -2,12 +2,19 @@
 /**
  * This is a copy of cores field.tpl.php modified to support HTML5 and use
  * h2 for the label. This file is not used by default by Adaptivetheme which
- * is why this is a text file - its here to serve as an example to use if you
- * want to override field templates using suggestions. Instead Adaptivetheme
- * overrides theme_field() beacuse functions are 5 times faster than templates.
- 
+ * is why this is a text file - it is here to serve as an example if you
+ * want to override field templates using suggestions.
+ *
+ * Adaptivetheme overrides theme_field() to achieve the same thing because 
+ * functions are 5 times faster than templates.
+ *
  * Note that Adaptivetheme outputs taxonomy term fields as unordered lists - it
- * does this in adaptivetheme_field__taxonomy_term_reference()
+ * does this in adaptivetheme_field__taxonomy_term_reference().
+ *
+ * Adaptivetheme supplied variables:
+ * - $field_view_mode: The view mode so we can test for it inside a template.
+ * - $image_caption_teaser: Boolean value to test for a theme setting.
+ * - $image_caption_full: Boolean value to test for a theme setting.
  *
  * Available variables:
  * - $items: An array of field values. Use render() to output them.
