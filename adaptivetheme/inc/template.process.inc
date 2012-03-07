@@ -391,6 +391,8 @@ function adaptivetheme_process_page(&$vars) {
   if (!empty($vars['secondary_navigation'])) {
     $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
   }
+  // Generate the wrapper element for the main content
+  $vars['tag'] = $vars['title'] ? 'section' : 'div';
 }
 
 // Preprocess variables for node.tpl.php
@@ -828,29 +830,3 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
 function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
