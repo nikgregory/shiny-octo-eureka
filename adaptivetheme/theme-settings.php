@@ -1345,6 +1345,16 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
     '#default_value' => theme_get_setting('disable_responsive_styles'),
   );
+  $form['at-layout']['global-settings']['dev'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Rebuild Theme Data and Registry'),
+    '#description' => t('<h3>Rebuild Theme Data and Registry</h3><p>Enabling this setting will fire <code>system_rebuild_theme_data()</code> and <code>drupal_theme_rebuild()</code> on every page request. Disable this when your site is live - its a major performance overhead. TODO - insert link to docs.</p>'),
+  );
+  $form['at-layout']['global-settings']['dev']['rebuild_theme_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Rebuild theme data and the theme registry on every page request'),
+    '#default_value' => theme_get_setting('rebuild_theme_data'),
+  );
   // DEBUG
   $form['at-layout']['debug'] = array(
     '#type' => 'fieldset',

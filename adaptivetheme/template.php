@@ -2,7 +2,7 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE OR ANY OF THE INCLUDED FILES.
  */
-if ((theme_get_setting('production_mode') == FALSE) && (!defined('MAINTENANCE_MODE'))) {
+if ((theme_get_setting('rebuild_theme_data') == TRUE) && (!defined('MAINTENANCE_MODE'))) {
   system_rebuild_theme_data();
   drupal_theme_rebuild();
 }

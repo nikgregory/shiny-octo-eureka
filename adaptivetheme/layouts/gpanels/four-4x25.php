@@ -27,7 +27,7 @@ regions[four_fourth] = 4col Gpanel - 4
   $page['four_third'] ||
   $page['four_fourth']
   ): ?>
-  <div class="at-panel gpanel four-4x25 clearfix">
+  <div class="at-panel gpanel panel-display four-4x25 clearfix">
     <div class="panel-row row-1 clearfix">
       <?php print render($page['four_first']); ?>
       <?php print render($page['four_second']); ?>

@@ -30,7 +30,7 @@ regions[three_25_25_50_bottom] = 25-25-50 Gpanel bottom
   $page['three_25_25_50_third'] ||
   $page['three_25_25_50_bottom']
   ): ?>
-  <div class="at-panel gpanel three-25-25-50 clearfix">
+  <div class="at-panel gpanel panel-display three-25-25-50 clearfix">
     <?php print render($page['three_25_25_50_top']); ?>
     <?php print render($page['three_25_25_50_first']); ?>
     <?php print render($page['three_25_25_50_second']); ?>

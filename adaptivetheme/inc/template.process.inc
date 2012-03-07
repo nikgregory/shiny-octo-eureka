@@ -380,7 +380,6 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (arg(0) == 'user' && arg(1) == 'register') {
     drupal_set_title(t('Create new account'));
   }
-
 }
 
 // Process variables for page.tpl.php
@@ -449,7 +448,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 
 // Process variables for node.tpl.php
 function adaptivetheme_process_node(&$vars) {
-  // Strip default drupal classes if not required  
+  // Strip default drupal classes if not required
   if (theme_get_setting('extra_article_classes') == 0) {
     $classes = explode(' ', $vars['classes']);
     if (in_array('node-sticky', $classes)) {
@@ -551,8 +550,12 @@ function adaptivetheme_process_comment(&$vars) {
 // Preprocess variables for block.tpl.php
 function adaptivetheme_preprocess_block(&$vars) {
 
-  // Generate the wrapper element, if there's a title use section
-  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
+  // The menu bar region gets special treatment for the block template
+  if ($vars['block']->region == 'menu_bar') {
+    // Hide titles, very unlikey to want it show, ever
+    $vars['title_attributes_array']['class'][] = 'element-invisible';
+    $vars['classes_array'][] = 'menu-wrapper';
+  }
 
   // Add extra classes if required
   if (theme_get_setting('extra_block_classes')) {
@@ -585,30 +588,6 @@ function adaptivetheme_preprocess_block(&$vars) {
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
-
-  // Use nav element for menu blocks and provide a powerfull suggestion for all of them
-  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
-  if (in_array($vars['block']->delta, $nav_blocks)) {
-    $vars['tag'] = 'nav';
-    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
-  }
-  $nav_modules = array('superfish', 'nice_menus');
-  if (in_array($vars['block']->module, $nav_modules)) {
-    $vars['tag'] = 'nav';
-    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
-  }
-
-  // Hide the title for blocks in the menu bar
-  if ($vars['block']->region == 'menu_bar') {
-    $vars['title_attributes_array']['class'][] = 'element-invisible';
-    $vars['classes_array'][] = 'menu-wrapper';
-  }
-
-  // Provide additional suggestions so the block__menu suggestion can be overridden easily
-  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
-  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
-
-  //dsm($vars['theme_hook_suggestions']); // debug suggestions
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
   $roles = array(
@@ -655,7 +634,64 @@ function adaptivetheme_preprocess_block(&$vars) {
       }
     }
   }
+}
 
+// Process block variables
+function adaptivetheme_process_block(&$vars) {
+
+  // Generate the wrapper element, if there's a title use section
+  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
+
+  // Search is never a section, its just a div
+  if ($vars['block_html_id'] == 'block-search-form') {
+    $vars['tag'] = 'div';
+  }
+
+  // Initialize and populate the inner wrapper variables
+  $vars['inner_prefix'] = '<div class="block-inner clearfix">';
+  $vars['inner_suffix'] = '</div>';
+
+  // Use nav element for menu blocks and provide a powerfull suggestion for all of them
+  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
+  if (in_array($vars['block']->delta, $nav_blocks)) {
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
+  }
+  $nav_modules = array('superfish', 'nice_menus');
+  if (in_array($vars['block']->module, $nav_modules)) {
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
+  }
+  
+  // The menu bar region gets special treatment for the block template
+  if ($vars['block']->region == 'menu_bar') {
+    // They are always menu blocks, right?
+    $vars['tag'] = 'nav';
+  }
+
+  // Now we know all the block $tag's, we can generate our wrapper
+  $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
+  $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
+  
+  // Wait, some blocks look like shit with either wrapper, blow them away...
+  if ($vars['block_html_id'] == 'block-system-main') {
+    $vars['outer_prefix'] = '';
+    $vars['outer_suffix'] = '';
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
+  }
+  if ($vars['block']->module == 'panels_mini') {
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
+  }
+
+  // Drupal 7 should use a $title variable instead of $block->subject.
+  $vars['title'] = $vars['block']->subject;
+
+  // Provide additional suggestions so the block__menu suggestion can be overridden easily
+  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
+  $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
+  //dsm($vars['theme_hook_suggestions']); // debug suggestions
 }
 
 // Changes the search form to use the "search" input element of HTML5 (from the Boron theme)
@@ -719,17 +755,12 @@ function adaptivetheme_preprocess_field(&$vars) {
 }
 
 // Preprocess variables for region.tpl.php
-function adaptivetheme_preprocess_region(&$vars, $hook) {
+function adaptivetheme_preprocess_region(&$vars) {
+
+  // Add a "sidebar" class to sidebar regions
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
-
-  //  if (substr($vars['region'], -4, 4) == '_top') {
-  //    $vars['classes_array'][] = 'conditional-stack-top';
-  //  }
-  //  if (substr($vars['region'], -7, 7) == '_bottom') {
-  //    $vars['classes_array'][] = 'conditional-stack-bottom';
-  //  }
 
   // Add classes to conditional stack regions
   $conditional_stack_regions = array(
@@ -758,7 +789,33 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
   if (in_array($vars['region'], $conditional_stack_regions)){
     $vars['classes_array'][] = 'region-conditional-stack';
   }
+}
 
+// Process variables for region.tpl.php
+function adaptivetheme_process_region(&$vars) {
+
+  // Initialize and populate the outer wrapper variables
+  $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
+  $vars['outer_suffix'] = '</div>';
+
+  // Initialize and populate the inner wrapper variables
+  $vars['inner_prefix'] = '<div class="region-inner clearfix">';
+  $vars['inner_suffix'] = '</div>';
+
+  // Some regions need different or no markup
+  // Use a region template with no wrappers for the main content
+  if ($vars['region'] == 'content') {
+    $vars['outer_prefix'] = '';
+    $vars['outer_suffix'] = '';
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
+  }
+  // Menu bar needs an id, nav class and no inner wrapper
+  if ($vars['region'] == 'menu_bar') {
+    $vars['outer_prefix'] = '<div id="menu-bar" class="nav clearfix">';
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
+  }
 }
 
 // Process variables for aggregator-item.tpl.php
@@ -771,3 +828,29 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
 function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

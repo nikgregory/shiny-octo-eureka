@@ -29,7 +29,7 @@ regions[five_fifth]  = 5col Gpanel - 5
   $page['five_fourth'] ||
   $page['five_fifth']
 ): ?>
-  <div class="at-panel gpanel five-5x20 clearfix">
+  <div class="at-panel gpanel panel-display five-5x20 clearfix">
     <div class="panel-row row-1 clearfix">
       <?php print render($page['five_first']); ?>
       <?php print render($page['five_second']); ?>

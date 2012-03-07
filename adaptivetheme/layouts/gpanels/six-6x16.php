@@ -31,7 +31,7 @@ regions[six_sixth]  = 6col Gpanel - 6
   $page['six_fifth'] ||
   $page['six_sixth']
   ): ?>
-  <div class="at-panel gpanel six-6x16 clearfix">
+  <div class="at-panel gpanel panel-display six-6x16 clearfix">
     <div class="panel-row row-1 clearfix">
       <?php print render($page['six_first']); ?>
       <?php print render($page['six_second']); ?>

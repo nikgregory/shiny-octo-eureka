@@ -85,6 +85,10 @@
 }
 */
 
+.debug-regions {
+  font-size: 13px;
+}
+
 /* Region */
 .debug-regions .region,
 .debug-regions #menu-bar {
@@ -93,21 +97,24 @@
   min-height: 80px;
   outline: 1px dotted #000;
 }
+.region-inner {
+}
 .debug-regions .region-three-inset-left-sidebar,
-.debug-regions .region-three-inset-right-sidebar {
+.debug-regions .region-three-inset-left-sidebar .region-inner,
+.debug-regions .region-three-inset-right-sidebar,
+.debug-regions .region-three-inset-right-sidebar .region-inner {
   min-height: 240px;
 }
 #branding,
 .debug-regions .region-inner,
 .debug-regions #menu-bar .block {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 .all-panel-layouts .at-panel {
   margin-bottom: 25px;
   background: #eee;
 }
 .debug-regions .all-panel-layouts .at-panel .region {
-  outline: 1px dotted #000;
 }
 .debug-regions .region:hover,
 .debug-regions #menu-bar:hover {
@@ -183,7 +190,6 @@
 .debug-panels .at-panel .region {
   background: rgba(255, 192, 203, 0.5);
   position: relative;
-  outline: 1px dotted #000;
 }
 .debug-panels .at-panel .region:hover {
   background: rgb(255, 192, 203);
@@ -219,7 +225,7 @@
 }
 /* Two 50 */
 .debug-panels .two-50:before {
-  content: "TWO 50 AT Panel (.two-50)";
+  content: "TWO 50 (.two-50)";
 }
 .debug-panels .region-two-50-top:before {
   content: ".region-two-50-top";
@@ -235,7 +241,7 @@
 }
 /* Two 33 66 */
 .debug-panels .two-33-66:before {
-  content: "TWO 33/66 AT Panel (.two-33-66)";
+  content: "TWO 33/66 (.two-33-66)";
 }
 .debug-panels .region-two-33-66-top:before {
   content: ".region-two-33-66-top";
@@ -251,7 +257,7 @@
 }
 /* Two 66 33 */
 .debug-panels .two-66-33:before {
-  content: "TWO 66/33 AT Panel (.two-66-33)";
+  content: "TWO 66/33 (.two-66-33)";
 }
 .debug-panels .region-two-66-33-top:before {
   content: ".region-two-66-33-top";
@@ -267,7 +273,7 @@
 }
 /* Two brick */
 .debug-panels .two-brick:before {
-  content: "TWO BRICK AT Panel (.two-brick)";
+  content: "TWO BRICK (.two-brick)";
 }
 .debug-panels .region-two-brick-top:before {
   content: ".region-two-brick-top";
@@ -292,7 +298,7 @@
 }
 /* Three 3x33 */
 .debug-panels .three-3x33:before {
-  content: "THREE 3x33 AT Panel (.three-3x33)";
+  content: "THREE 3x33 (.three-3x33)";
 }
 .debug-panels .region-three-33-top:before {
   content: ".region-three-33-top";
@@ -311,7 +317,7 @@
 }
 /* Three 25-25-50 */
 .debug-panels .three-25-25-50:before {
-  content: "THREE 25-25-50 AT Panel (.three-25-25-50)";
+  content: "THREE 25-25-50 (.three-25-25-50)";
 }
 .debug-panels .region-three-25-25-50-top:before {
   content: ".region-three-25-25-50-top";
@@ -330,7 +336,7 @@
 }
 /* Three 25-50-25 */
 .debug-panels .three-25-50-25:before {
-  content: "THREE 25-50-25 AT Panel (.three-25-50-25)";
+  content: "THREE 25-50-25 (.three-25-50-25)";
 }
 .debug-panels .region-three-25-50-25-top:before {
   content: ".region-three-25-50-25-top";
@@ -349,7 +355,7 @@
 }
 /* Three 50-25-25 */
 .debug-panels .three-50-25-25:before {
-  content: "THREE 50-25-25 AT Panel (.three-50-25-25)";
+  content: "THREE 50-25-25 (.three-50-25-25)";
 }
 .debug-panels .region-three-50-25-25-top:before {
   content: ".region-three-50-25-25-top";
@@ -368,7 +374,7 @@
 }
 /* Four 4x25 */
 .debug-panels .four-4x25:before {
-  content: "FOUR 4x25 AT Panel (.four-4x25)";
+  content: "FOUR 4x25 (.four-4x25)";
 }
 .debug-panels .region-four-first:before {
   content: ".region-four-first";
@@ -384,7 +390,7 @@
 }
 /* Five 5x20 */
 .debug-panels .five-5x20:before {
-  content: "FIVE 5x20 AT Panel (.five-5x20)";
+  content: "FIVE 5x20 (.five-5x20)";
 }
 .debug-panels .region-five-first:before {
   content: ".region-five-first";
@@ -403,7 +409,7 @@
 }
 /* Six 6x16 */
 .debug-panels .six-6x16:before {
-  content: "SIX 6x16 AT Panel (.six-6x16)";
+  content: "SIX 6x16 (.six-6x16)";
 }
 .debug-panels .region-six-first:before {
   content: ".region-six-first";
@@ -425,7 +431,7 @@
 }
 /* Inset left */
 .three-inset-left:before {
-  content: "INSET LEFT AT Panel (.three-inset-left)";
+  content: "INSET LEFT (.three-inset-left)";
 }
 .region-three-inset-left-sidebar:before {
   content: ".region-three-inset-left-sidebar";
@@ -444,7 +450,7 @@
 }
 /* Inset right */
 .three-inset-right:before {
-  content: "INSET RIGHT AT Panel (.three-inset-right)";
+  content: "INSET RIGHT (.three-inset-right)";
 }
 .region-three-inset-right-sidebar:before {
   content: ".region-three-inset-right-sidebar";

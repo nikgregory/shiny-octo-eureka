@@ -27,7 +27,7 @@ regions[two_66_33_bottom] = 66-33 Gpanel bottom
   $page['two_66_33_second'] ||
   $page['two_66_33_bottom']
   ): ?>
-  <div class="at-panel gpanel two-66-33 clearfix">
+  <div class="at-panel gpanel panel-display two-66-33 clearfix">
     <?php print render($page['two_66_33_top']); ?>
     <?php print render($page['two_66_33_first']); ?>
     <?php print render($page['two_66_33_second']); ?>

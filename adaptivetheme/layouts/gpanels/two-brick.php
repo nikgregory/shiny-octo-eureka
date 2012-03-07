@@ -33,7 +33,7 @@ regions[two_brick_bottom]      = 2 col Brick bottom
   $page['two_brick_right_below'] ||
   $page['two_brick_bottom']
   ): ?>
-<div class="at-panel gpanel two-brick clearfix">
+<div class="at-panel gpanel panel-display two-brick clearfix">
   <?php print render($page['two_brick_top']); ?>
   <div class="panel-row row-1 clearfix">
     <?php print render($page['two_brick_left_above']); ?>

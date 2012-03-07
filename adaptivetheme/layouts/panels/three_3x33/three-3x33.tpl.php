@@ -1,27 +1,31 @@
-<div class="at-panel panel-panel three-3x33 clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
-
+<div class="at-panel panel-display three-3x33 clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
   <?php if ($content['three_33_top']): ?>
     <div class="region region-three-33-top region-conditional-stack">
-      <?php print $content['three_33_top']; ?>
+      <div class="region-inner clearfix">
+        <?php print $content['three_33_top']; ?>
+      </div>
     </div>
   <?php endif; ?>
-
   <div class="region region-three-33-first">
-    <?php print $content['three_33_first']; ?>
+    <div class="region-inner clearfix">
+      <?php print $content['three_33_first']; ?>
+    </div>
   </div>
-
   <div class="region region-three-33-second">
-    <?php print $content['three_33_second']; ?>
+    <div class="region-inner clearfix">
+      <?php print $content['three_33_second']; ?>
+    </div>
   </div>
-
   <div class="region region-three-33-third">
-    <?php print $content['three_33_third']; ?>
+    <div class="region-inner clearfix">
+      <?php print $content['three_33_third']; ?>
+    </div>
   </div>
-
   <?php if ($content['three_33_bottom']): ?>
     <div class="region region-three-33-bottom region-conditional-stack">
-      <?php print $content['three_33_bottom']; ?>
+      <div class="region-inner clearfix">
+        <?php print $content['three_33_bottom']; ?>
+      </div>
     </div>
   <?php endif; ?>
-
 </div>

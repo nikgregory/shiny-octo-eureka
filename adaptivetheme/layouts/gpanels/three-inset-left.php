@@ -29,7 +29,7 @@ regions[threecol_inset_left_bottom]  = 3 col Inset left - bottom
   $page['threecol_inset_left_inset'] ||
   $page['threecol_inset_left_bottom']
   ): ?>
-<div class="at-panel gpanel three-inset-left clearfix">
+<div class="at-panel gpanel panel-display three-inset-left clearfix">
   <?php print $content['threecol_inset_left_sidebar']; ?>
   <div class="inset-wrapper clearfix">
     <?php print $content['threecol_inset_left_top']; ?>

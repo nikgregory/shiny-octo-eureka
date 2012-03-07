@@ -96,8 +96,6 @@ ul.sf-navbar li ul ul {
 /* Superfish blocks */
 .block-superfish .block-inner,
 .block-superfish .block-inner .content {
-  padding: 0;
-  margin: 0;
 }
 
 .block-superfish ul,

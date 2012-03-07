@@ -1,1 +1,5 @@
-#panels-dnd-main .region {float: left; margin: 0 0.4166666666666667% 5px; width: 19%;}
+#panels-dnd-main .region {float: left; margin: 0 0.4166666666666667% 5px;}
+#panels-dnd-main .five-5x20 .row-1 {width: 40%;}
+#panels-dnd-main .five-5x20 .row-2 {width: 60%;}
+#panels-dnd-main .five-5x20 .row-1 .region {width: 49%;}
+#panels-dnd-main .five-5x20 .row-2 .region {width: 32%;}

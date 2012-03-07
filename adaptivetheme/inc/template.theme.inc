@@ -232,6 +232,30 @@ function adaptivetheme_field($vars) {
   return $output;
 }
 
+// Output taxonomy term fields as unordered lists, this has been moved to a function in AT 7.x-3.x for performance reasons
+function adaptivetheme_field__taxonomy_term_reference($vars) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$vars['label_hidden']) {
+    $output .= '<h2 class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</h2>';
+  }
+
+  // Render the items.
+  $output .= '<ul class="field-items"' . $vars['content_attributes'] . '>';
+  foreach ($vars['items'] as $delta => $item) {
+    $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
+    $output .= '<li class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</li>';
+  }
+  $output .= '</ul>';
+
+  // Render the top-level wrapper element.
+  $tag = $vars['label_hidden'] ? 'div' : 'section';
+  $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
+
+  return $output;
+}
+
 /**
  * Make drupal core generated images responsive i.e. flexible in width
  */
