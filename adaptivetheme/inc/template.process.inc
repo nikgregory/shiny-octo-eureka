@@ -649,6 +649,12 @@ function adaptivetheme_process_block(&$vars) {
     $vars['tag'] = 'div';
   }
 
+  // Use a $title variable instead of $block->subject
+  $vars['title'] = $vars['block']->subject;
+
+  // Wrap the content variable in a div with attributes
+  $vars['content_processed'] = '<div' . $vars['content_attributes'] . '>' . $vars['content'] . '</div>';
+
   // Initialize and populate the inner wrapper variables
   $vars['inner_prefix'] = '<div class="block-inner clearfix">';
   $vars['inner_suffix'] = '</div>';
@@ -669,27 +675,26 @@ function adaptivetheme_process_block(&$vars) {
   if ($vars['block']->region == 'menu_bar') {
     // They are always menu blocks, right?
     $vars['tag'] = 'nav';
+    $vars['content_processed'] = $vars['content'];
   }
 
   // Now we know all the block $tag's, we can generate our wrapper
   $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
   $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
-  
-  // Wait, some blocks look like shit with either wrapper, blow them away...
+
+  // Wait, some blocks look like shit with wrapper, blow them away...
   if ($vars['block_html_id'] == 'block-system-main') {
     $vars['outer_prefix'] = '';
     $vars['outer_suffix'] = '';
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
+    $vars['content_processed'] = $vars['content'];
   }
   if ($vars['block']->module == 'panels_mini') {
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
   }
-
-  // Drupal 7 should use a $title variable instead of $block->subject.
-  $vars['title'] = $vars['block']->subject;
-
+  
   // Provide additional suggestions so the block__menu suggestion can be overridden easily
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
