@@ -255,18 +255,3 @@ function adaptivetheme_field__taxonomy_term_reference($vars) {
 
   return $output;
 }
-
-/**
- * Make drupal core generated images responsive i.e. flexible in width
- */
-function adaptivetheme_image($vars) {
-  $attributes = $vars['attributes'];
-  $attributes['src'] = file_create_url($vars['path']);
-  // we remove width and height attributes
-  foreach (array('alt', 'title') as $key) {
-    if (isset($vars[$key])) {
-      $attributes[$key] = $vars[$key];
-    }
-  }
-  return '<img' . drupal_attributes($attributes) . ' />';
-}

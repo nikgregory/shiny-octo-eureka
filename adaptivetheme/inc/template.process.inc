@@ -659,7 +659,7 @@ function adaptivetheme_process_block(&$vars) {
   $vars['inner_prefix'] = '<div class="block-inner clearfix">';
   $vars['inner_suffix'] = '</div>';
 
-  // Use nav element for menu blocks and provide a powerfull suggestion for all of them
+  // Use nav element for menu blocks and provide a suggestion for all of them
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
   if (in_array($vars['block']->delta, $nav_blocks)) {
     $vars['tag'] = 'nav';
@@ -682,7 +682,7 @@ function adaptivetheme_process_block(&$vars) {
   $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
   $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
 
-  // Wait, some blocks look like shit with wrapper, blow them away...
+  // Wait, some blocks look like shit with wrappers, blow them away...
   if ($vars['block_html_id'] == 'block-system-main') {
     $vars['outer_prefix'] = '';
     $vars['outer_suffix'] = '';
