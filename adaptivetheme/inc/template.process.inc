@@ -5,21 +5,9 @@
  * If you need to add or modify preprocess or process functions do it in your sub-theme.
  */
 
-// Process variables for html tag
-function adaptivetheme_process_html_tag(&$vars) {
-  $tag = &$vars['element'];
-  if ($tag['#tag'] == 'style' || $tag['#tag'] == 'script') {
-    // Remove redundant type attribute and CDATA comments.
-    unset($tag['#attributes']['type'], $tag['#value_prefix'], $tag['#value_suffix']);
-
-    // Remove media="all" but leave others unaffected.
-    if (isset($tag['#attributes']['media']) && $tag['#attributes']['media'] === 'all') {
-      unset($tag['#attributes']['media']);
-    }
-  }
-}
-
-// Preprocess variables for html.tpl.php
+/**
+ * Preprocess variables for html.tpl.php
+ */
 function adaptivetheme_preprocess_html(&$vars) {
 
   global $language, $theme_key;
@@ -270,7 +258,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 }
 
-// Process variables for html.tpl.php
+/**
+ * Process variables for html.tpl.php
+ */
 function adaptivetheme_process_html(&$vars) {
   // Load the panels test
   if (theme_get_setting('load_all_panels') == TRUE) {
@@ -281,12 +271,30 @@ function adaptivetheme_process_html(&$vars) {
   }
 }
 
-// Preprocess variables for page.tpl.php
+/**
+ * Process variables for the html tag
+ */
+function adaptivetheme_process_html_tag(&$vars) {
+  $tag = &$vars['element'];
+  if ($tag['#tag'] == 'style' || $tag['#tag'] == 'script') {
+    // Remove redundant type attribute and CDATA comments.
+    unset($tag['#attributes']['type'], $tag['#value_prefix'], $tag['#value_suffix']);
+
+    // Remove media="all" but leave others unaffected.
+    if (isset($tag['#attributes']['media']) && $tag['#attributes']['media'] === 'all') {
+      unset($tag['#attributes']['media']);
+    }
+  }
+}
+
+/**
+ * Preprocess variables for page.tpl.php
+ */
 function adaptivetheme_preprocess_page(&$vars) {
 
   // Set up logo element
   $logo = check_url($vars['logo']);
-  $logo_alt = check_plain(variable_get('site_name', ''));
+  $logo_alt = check_plain(variable_get('site_name', 'Site logo'));
   $logo_vars = array('path' => $logo, 'alt' => $logo_alt, 'attributes' => array('class' => 'site-logo'));
   $logo_img = theme('image', $logo_vars);
   $vars['site_logo'] = $logo_img ? l($logo_img, '<front>', array(
@@ -386,7 +394,9 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
 }
 
-// Process variables for page.tpl.php
+/**
+ * Process variables for page.tpl.php
+ */
 function adaptivetheme_process_page(&$vars) {
   // Call our helper function to wrap menus in extra markup
   if (!empty($vars['primary_navigation'])) {
@@ -399,161 +409,77 @@ function adaptivetheme_process_page(&$vars) {
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 }
 
-// Preprocess variables for node.tpl.php
-function adaptivetheme_preprocess_node(&$vars) {
-  global $theme, $user;
+/**
+ * Preprocess variables for region.tpl.php
+ */
+function adaptivetheme_preprocess_region(&$vars) {
 
-  // Extra classes if required
-  if (theme_get_setting('extra_article_classes')) {
-    // Zebra
-    $vars['classes_array'][] = $vars['zebra'];
-    // Langauge
-    if (module_exists('translation')) {
-      if ($vars['node']->language) {
-        global $language;
-        $vars['classes_array'][] = 'node-lang-' . $vars['node']->language;
-      }
-    }
-    // User picture?
-    if ($vars['display_submitted'] && !empty($vars['picture'])) {
-      $vars['classes_array'][] = 'node-with-picture';
-    }
-    // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
-    if ($vars['view_mode'] != 'teaser') {
-      $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
-    }
+  // Add a "sidebar" class to sidebar regions
+  if (strpos($vars['region'], 'sidebar_') === 0) {
+    $vars['classes_array'][] = 'sidebar';
   }
 
-  // ARIA Role
-  $vars['attributes_array']['role'][] = 'article';
-
-  // Title and content classes
-  $vars['title_attributes_array']['class'][] = 'node-title';
-  $vars['content_attributes_array']['class'][] = 'node-content';
-
-  // Build the submitted by and time elements
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, we need to build it
-  if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
-    $vars['submitted'] = t('Submitted by !username on !datetime',
-      array(
-        '!username' => $vars['name'],
-        '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>',
-      )
-    );
-  }
-  else {
-    $vars['submitted'] = '';
-  }
-
-  // Unpublised?
-  $vars['unpublished'] = '';
-  if (!$vars['status']) {
-    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
-  }
-}
-
-// Process variables for node.tpl.php
-function adaptivetheme_process_node(&$vars) {
-  // Strip default drupal classes if not required
-  if (theme_get_setting('extra_article_classes') == 0) {
-    $classes = explode(' ', $vars['classes']);
-    if (in_array('node-sticky', $classes)) {
-      $classes = str_replace('node-sticky', '', $classes);
-    }
-    if (in_array('node-promoted', $classes)) {
-      $classes = str_replace('node-promoted', '', $classes);
-    }
-    if (in_array('node-teaser', $classes)) {
-      $classes = str_replace('node-teaser', '', $classes);
-    }
-    if (in_array('node-preview', $classes)) {
-      $classes = str_replace('node-preview', '', $classes);
-    }
-    $vars['classes'] = trim(implode(' ', $classes));
-  }
-}
-
-// Preprocess variables for comment.tpl.php
-function adaptivetheme_preprocess_comment(&$vars) {
-
-  // Extra comment classes if required
-  if (theme_get_setting('extra_comment_classes')) {
-    // Zebra
-    $vars['classes_array'][] = $vars['zebra'];
-    // Position?
-    if ($vars['id'] == 1) {
-      $vars['classes_array'][] = 'first';
-    }
-    if ($vars['id'] == $vars['node']->comment_count) {
-      $vars['classes_array'][] = 'last';
-    }
-    // Title hidden?
-    if (theme_get_setting('comments_hide_title')) {
-      $vars['classes_array'][] = 'comment-title-hidden';
-    }
-    // User picture?
-    if ($vars['picture']) {
-      $vars['classes_array'][] = 'comment-with-picture';
-    }
-    // Signature?
-    if ($vars['signature']) {
-      $vars['classes_array'][] = 'comment-with-signature';
-    }
-  }
-
-  // Classes for comment title
-  $vars['title_attributes_array']['class'][] = 'comment-title';
-  // Title hidden?
-  if (theme_get_setting('comments_hide_title')) {
-    $vars['title_attributes_array']['class'][] = 'element-invisible';
-  }
-
-  // Classes for comment content
-  $vars['content_attributes_array']['class'][] = 'comment-content';
-
-  // Build the submitted by and time elements
-  $uri = entity_uri('comment', $vars['comment']);
-  $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
-  $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
-  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']); // Permalinks are embedded in the time element, aka Wordpress
-  $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
-  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z'); // Generate the timestamp, PHP "c" format is wrong
-  $vars['submitted'] = t('Submitted by !username on !datetime',
-    array(
-      '!username' => $vars['author'],
-      '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['created'] . '</time>',
-    )
+  // Add classes to conditional stack regions
+  $conditional_stack_regions = array(
+    'three_25_25_50_top',
+    'three_25_25_50_bottom',
+    'three_25_50_25_top',
+    'three_25_50_25_bottom',
+    'three_50_25_25_top',
+    'three_50_25_25_bottom',
+    'three_33_top',
+    'three_33_bottom',
+    'two_50_top',
+    'two_50_bottom',
+    'two_33_66_top',
+    'two_33_66_bottom',
+    'two_66_33_top',
+    'two_66_33_bottom',
+    'two_brick_top',
+    'two_brick_middle',
+    'two_brick_bottom',
+    'threecol_inset_left_top',
+    'threecol_inset_left_bottom',
+    'threecol_inset_right_top',
+    'threecol_inset_right_bottom',
   );
-
-  // Unpublished?
-  $vars['unpublished'] = '';
-  if ($vars['status'] == 'comment-unpublished') {
-    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+  if (in_array($vars['region'], $conditional_stack_regions)){
+    $vars['classes_array'][] = 'region-conditional-stack';
   }
 }
 
-// Process variables for comment.tpl.php
-function adaptivetheme_process_comment(&$vars) {
-  // Strip default drupal classes if not required
-  if (theme_get_setting('extra_comment_classes') == 0) {
-    $classes = explode(' ', $vars['classes']);
-    if (in_array('comment-by-anonymous', $classes)) {
-      $classes = str_replace('comment-by-anonymous', '', $classes);
-    }
-    if (in_array('comment-by-node-author', $classes)) {
-      $classes = str_replace('comment-by-node-author', '', $classes);
-    }
-    if (in_array('comment-by-viewer', $classes)) {
-      $classes = str_replace('comment-by-viewer', '', $classes);
-    }
-    if (in_array('comment-new', $classes)) {
-      $classes = str_replace('comment-new', '', $classes);
-    }
-    $vars['classes'] = trim(implode(' ', $classes));
+/**
+ * Process variables for region.tpl.php
+ */
+function adaptivetheme_process_region(&$vars) {
+
+  // Initialize and populate the outer wrapper variables
+  $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
+  $vars['outer_suffix'] = '</div>';
+
+  // Initialize and populate the inner wrapper variables
+  $vars['inner_prefix'] = '<div class="region-inner clearfix">';
+  $vars['inner_suffix'] = '</div>';
+
+  // Some regions need different or no markup
+  // Use a region template with no wrappers for the main content
+  if ($vars['region'] == 'content') {
+    $vars['outer_prefix'] = '';
+    $vars['outer_suffix'] = '';
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
+  }
+  // Menu bar needs an id, nav class and no inner wrapper
+  if ($vars['region'] == 'menu_bar') {
+    $vars['outer_prefix'] = '<div id="menu-bar" class="nav clearfix">';
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
   }
 }
 
-// Preprocess variables for block.tpl.php
+/**
+ * Preprocess variables for block.tpl.php
+ */
 function adaptivetheme_preprocess_block(&$vars) {
 
   // The menu bar region gets special treatment for the block template
@@ -642,7 +568,9 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
 }
 
-// Process block variables
+/**
+ * Process variables for block.tpl.php
+ */
 function adaptivetheme_process_block(&$vars) {
 
   // Generate the wrapper element, if there's a title use section
@@ -674,7 +602,7 @@ function adaptivetheme_process_block(&$vars) {
     $vars['tag'] = 'nav';
     array_unshift($vars['theme_hook_suggestions'], 'block__menu');
   }
-  
+
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region == 'menu_bar') {
     // They are always menu blocks, right?
@@ -698,20 +626,188 @@ function adaptivetheme_process_block(&$vars) {
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
   }
-  
+
   // Provide additional suggestions so the block__menu suggestion can be overridden easily
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
   //dsm($vars['theme_hook_suggestions']); // debug suggestions
 }
 
-// Changes the search form to use the "search" input element of HTML5 (from the Boron theme)
+/**
+ * Preprocess variables for node.tpl.php
+ */
+function adaptivetheme_preprocess_node(&$vars) {
+  global $theme, $user;
+
+  // Extra classes if required
+  if (theme_get_setting('extra_article_classes')) {
+    // Zebra
+    $vars['classes_array'][] = $vars['zebra'];
+    // Langauge
+    if (module_exists('translation')) {
+      if ($vars['node']->language) {
+        global $language;
+        $vars['classes_array'][] = 'node-lang-' . $vars['node']->language;
+      }
+    }
+    // User picture?
+    if ($vars['display_submitted'] && !empty($vars['picture'])) {
+      $vars['classes_array'][] = 'node-with-picture';
+    }
+    // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
+    if ($vars['view_mode'] != 'teaser') {
+      $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
+    }
+  }
+
+  // ARIA Role
+  $vars['attributes_array']['role'][] = 'article';
+
+  // Title and content classes
+  $vars['title_attributes_array']['class'][] = 'node-title';
+  $vars['content_attributes_array']['class'][] = 'node-content';
+
+  // Build the submitted by and time elements
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, we need to build it
+  if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
+    $vars['submitted'] = t('Submitted by !username on !datetime',
+      array(
+        '!username' => $vars['name'],
+        '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>',
+      )
+    );
+  }
+  else {
+    $vars['submitted'] = '';
+  }
+
+  // Unpublised?
+  $vars['unpublished'] = '';
+  if (!$vars['status']) {
+    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+  }
+}
+
+/**
+ * Process variables for node.tpl.php
+ */
+function adaptivetheme_process_node(&$vars) {
+  // Strip default drupal classes if not required
+  if (theme_get_setting('extra_article_classes') == 0) {
+    $classes = explode(' ', $vars['classes']);
+    if (in_array('node-sticky', $classes)) {
+      $classes = str_replace('node-sticky', '', $classes);
+    }
+    if (in_array('node-promoted', $classes)) {
+      $classes = str_replace('node-promoted', '', $classes);
+    }
+    if (in_array('node-teaser', $classes)) {
+      $classes = str_replace('node-teaser', '', $classes);
+    }
+    if (in_array('node-preview', $classes)) {
+      $classes = str_replace('node-preview', '', $classes);
+    }
+    $vars['classes'] = trim(implode(' ', $classes));
+  }
+}
+
+/**
+ * Preprocess variables for comment.tpl.php
+ */
+function adaptivetheme_preprocess_comment(&$vars) {
+
+  // Extra comment classes if required
+  if (theme_get_setting('extra_comment_classes')) {
+    // Zebra
+    $vars['classes_array'][] = $vars['zebra'];
+    // Position?
+    if ($vars['id'] == 1) {
+      $vars['classes_array'][] = 'first';
+    }
+    if ($vars['id'] == $vars['node']->comment_count) {
+      $vars['classes_array'][] = 'last';
+    }
+    // Title hidden?
+    if (theme_get_setting('comments_hide_title')) {
+      $vars['classes_array'][] = 'comment-title-hidden';
+    }
+    // User picture?
+    if ($vars['picture']) {
+      $vars['classes_array'][] = 'comment-with-picture';
+    }
+    // Signature?
+    if ($vars['signature']) {
+      $vars['classes_array'][] = 'comment-with-signature';
+    }
+  }
+
+  // Classes for comment title
+  $vars['title_attributes_array']['class'][] = 'comment-title';
+  // Title hidden?
+  if (theme_get_setting('comments_hide_title')) {
+    $vars['title_attributes_array']['class'][] = 'element-invisible';
+  }
+
+  // Classes for comment content
+  $vars['content_attributes_array']['class'][] = 'comment-content';
+
+  // Build the submitted by and time elements
+  $uri = entity_uri('comment', $vars['comment']);
+  $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
+  $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
+  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']); // Permalinks are embedded in the time element, aka Wordpress
+  $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
+  $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z'); // Generate the timestamp, PHP "c" format is wrong
+  $vars['submitted'] = t('Submitted by !username on !datetime',
+    array(
+      '!username' => $vars['author'],
+      '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['created'] . '</time>',
+    )
+  );
+
+  // Unpublished?
+  $vars['unpublished'] = '';
+  if ($vars['status'] == 'comment-unpublished') {
+    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+  }
+}
+
+/**
+ * Process variables for comment.tpl.php
+ */
+function adaptivetheme_process_comment(&$vars) {
+  // Strip default drupal classes if not required
+  if (theme_get_setting('extra_comment_classes') == 0) {
+    $classes = explode(' ', $vars['classes']);
+    if (in_array('comment-by-anonymous', $classes)) {
+      $classes = str_replace('comment-by-anonymous', '', $classes);
+    }
+    if (in_array('comment-by-node-author', $classes)) {
+      $classes = str_replace('comment-by-node-author', '', $classes);
+    }
+    if (in_array('comment-by-viewer', $classes)) {
+      $classes = str_replace('comment-by-viewer', '', $classes);
+    }
+    if (in_array('comment-new', $classes)) {
+      $classes = str_replace('comment-new', '', $classes);
+    }
+    $vars['classes'] = trim(implode(' ', $classes));
+  }
+}
+
+/**
+ * Preprocess variables for the search block form.
+ */
 function adaptivetheme_preprocess_search_block_form(&$vars) {
+  // Changes the search form to use the "search" input element attribute
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
 
-// Modify search results based on theme settings
+/**
+ * Preprocess variables for search-result.tpl.php
+ */
 function adaptivetheme_preprocess_search_result(&$vars) {
+  // Modify search result view based on theme settings
   $result = $vars['result'];
   $vars['url'] = check_url($result['link']);
   $vars['title'] = check_plain($result['title']);
@@ -742,7 +838,9 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator'));
 }
 
-//Override or insert vars into the field template.
+/**
+ * Preprocess variables for field.tpl.php
+ */
 function adaptivetheme_preprocess_field(&$vars) {
   $element = $vars['element'];
 
@@ -765,77 +863,17 @@ function adaptivetheme_preprocess_field(&$vars) {
   }
 }
 
-// Preprocess variables for region.tpl.php
-function adaptivetheme_preprocess_region(&$vars) {
-
-  // Add a "sidebar" class to sidebar regions
-  if (strpos($vars['region'], 'sidebar_') === 0) {
-    $vars['classes_array'][] = 'sidebar';
-  }
-
-  // Add classes to conditional stack regions
-  $conditional_stack_regions = array(
-    'three_25_25_50_top',
-    'three_25_25_50_bottom',
-    'three_25_50_25_top',
-    'three_25_50_25_bottom',
-    'three_50_25_25_top',
-    'three_50_25_25_bottom',
-    'three_33_top',
-    'three_33_bottom',
-    'two_50_top',
-    'two_50_bottom',
-    'two_33_66_top',
-    'two_33_66_bottom',
-    'two_66_33_top',
-    'two_66_33_bottom',
-    'two_brick_top',
-    'two_brick_middle',
-    'two_brick_bottom',
-    'threecol_inset_left_top',
-    'threecol_inset_left_bottom',
-    'threecol_inset_right_top',
-    'threecol_inset_right_bottom',
-  );
-  if (in_array($vars['region'], $conditional_stack_regions)){
-    $vars['classes_array'][] = 'region-conditional-stack';
-  }
-}
-
-// Process variables for region.tpl.php
-function adaptivetheme_process_region(&$vars) {
-
-  // Initialize and populate the outer wrapper variables
-  $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
-  $vars['outer_suffix'] = '</div>';
-
-  // Initialize and populate the inner wrapper variables
-  $vars['inner_prefix'] = '<div class="region-inner clearfix">';
-  $vars['inner_suffix'] = '</div>';
-
-  // Some regions need different or no markup
-  // Use a region template with no wrappers for the main content
-  if ($vars['region'] == 'content') {
-    $vars['outer_prefix'] = '';
-    $vars['outer_suffix'] = '';
-    $vars['inner_prefix'] = '';
-    $vars['inner_suffix'] = '';
-  }
-  // Menu bar needs an id, nav class and no inner wrapper
-  if ($vars['region'] == 'menu_bar') {
-    $vars['outer_prefix'] = '<div id="menu-bar" class="nav clearfix">';
-    $vars['inner_prefix'] = '';
-    $vars['inner_suffix'] = '';
-  }
-}
-
-// Process variables for aggregator-item.tpl.php
+/**
+ * Preprocess variables for aggregator-item.tpl.php
+ */
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
 }
 
-// Process variables for maintenance-page.tpl.php
+/**
+ * Preprocess variables for maintenance-page.tpl.php
+ */
 function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
