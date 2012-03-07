@@ -296,6 +296,8 @@ function adaptivetheme_preprocess_page(&$vars) {
     'html' => TRUE,
     )
   ) : '';
+  // Maintain backwards compatibility with 7.x-2.x sub-themes
+  $vars['linked_site_logo'] = $vars['site_logo'];
 
   // Hide site name if toggled off
   if (theme_get_setting('toggle_name') == FALSE) {
