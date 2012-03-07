@@ -83,8 +83,8 @@
 
   <header id="header" class="clearfix" role="banner">
 
-    <?php if ($linked_site_logo): ?>
-      <div id="logo"><?php print $linked_site_logo; ?></div>
+    <?php if ($site_logo): ?>
+      <div id="logo"><?php print $site_logo; ?></div>
     <?php endif; ?>
 
     <?php if ($site_name || $site_slogan): ?>

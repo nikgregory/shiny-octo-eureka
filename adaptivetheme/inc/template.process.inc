@@ -283,18 +283,20 @@ function adaptivetheme_process_html(&$vars) {
 
 // Preprocess variables for page.tpl.php
 function adaptivetheme_preprocess_page(&$vars) {
-  global $theme_key;
 
   // Set up logo element
-  $vars['logo_alt_text'] = check_plain(variable_get('site_name', '')) . ' ' . t('logo');
-  $vars['logo_img'] = $vars['logo'] ? '<img src="' . check_url($vars['logo']) . '" alt="' . $vars['logo_alt_text'] . '"/>' : '';
-  $vars['linked_site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array(
+  $logo = check_url($vars['logo']);
+  $logo_alt = check_plain(variable_get('site_name', ''));
+  $logo_vars = array('path' => $logo, 'alt' => $logo_alt, 'attributes' => array('class' => 'site-logo'));
+  $logo_img = theme('image', $logo_vars);
+  $vars['site_logo'] = $logo_img ? l($logo_img, '<front>', array(
     'attributes' => array(
       'title' => t('Home page')
     ),
     'html' => TRUE,
     )
   ) : '';
+
   // Hide site name if toggled off
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['visibility'] = 'element-invisible';
