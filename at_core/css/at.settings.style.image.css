@@ -1,0 +1,18 @@
+/* Image Alignment */
+.field-type-image {margin:0}
+.field-type-image img {display:block;line-height:0;}
+.ia-n .field-type-image {float:none}
+.ia-l .field-type-image {float:left;margin:5px 20px 5px 0}
+.ia-c .field-type-image {text-align:center;margin:5px auto;}
+.ia-c .field-type-image img{text-align:center;margin-left:auto;margin-right:auto}
+.ia-r .field-type-image {float:right;margin:5px 0 5px 20px}
+.field-type-image.field-label-above {margin-top:0}
+.field-type-image .field-label {margin-bottom:5px}
+.field-type-image.field-label-inline .field-label {margin-bottom:0;line-height:1}
+/* Short codes */
+body .image-left,body div.image-left,body div.image-left .field-type-image {float:left;margin:4px 15px 0 0;text-align:left}
+body .image-left img,body div.image-left img,body div.image-left .field-type-image img {text-align:left;margin:0}
+body .image-right,body div.image-right,body div.image-right .field-type-image {float:right;margin:4px 0 0 15px;text-align:right}
+body .image-right img,body div.image-right img,body div.image-right .field-type-image img {text-align:right;margin:0}
+body .image-center,body .image-center img,body div.image-center,body div.image-center .field-type-image {text-align:center}
+body .image-center,body div.image-center,body div.image-center .field-type-image img{text-align:center;margin-left:auto;margin-right:auto}

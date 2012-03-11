@@ -1,0 +1,21 @@
+/* Heading styles */
+.hs-caps h1,.hs-caps h2,.hs-caps h3,.hs-caps h4,.hs-caps h5,.hs-caps h6 {text-transform:uppercase}
+.hs-fwn h1,.hs-fwn h2,.hs-fwn h3,.hs-fwn h4,.hs-fwn h5,.hs-fwn h6 {font-weight:400}
+.hs-ts .block-title {text-shadow:0 1px 0 rgba(255,255,255,.3)}
+/* Case */
+.ptc-n #page-title,.ntc-n .node-title,.ctc-n .comment-title,.btc-n .block-title {text-transform:none}
+.ptc-uc #page-title,.ntc-uc .node-title,.ctc-uc .comment-title,.btc-uc .block-title {text-transform:uppercase}
+.ptc-lc #page-title,.ntc-lc .node-title,.ctc-lc .comment-title,.btc-lc .block-title {text-transform:lowercase}
+.ptc-c #page-title,.ntc-c .node-title,.ctc-c .comment-title,.btc-c .block-title {text-transform:capitalize}
+.ptc-sc #page-title,.ntc-sc .node-title,.ctc-sc .comment-title,.btc-sc .block-title {text-transform:none;font-variant:small-caps}
+/* Weight */
+.ptw-n #page-title,.ntw-n .node-title,.ctw-n .comment-title,.btw-n .block-title {font-weight:400}
+.ptw-b #page-title,.ntw-b .node-title,.ctw-b .comment-title,.btw-b .block-title {font-weight:700}
+/* Alignments */
+.pta-l #page-title,.nta-l .node-title,.cta-l .comment-title,.bta-l .block-title {text-align:left}
+.pta-r #page-title,.nta-r .node-title,.cta-r .comment-title,.bta-r .block-title{text-align:right}
+.pta-c #page-title,.nta-c .node-title,.cta-c .comment-title,.bta-c .block-title {text-align:center}
+/* Shadows */
+.pts-l #page-title,.nts-l .node-title,.cts-l .comment-title,.bts-l .block-title {text-shadow:0 1px 1px rgba(0,0,0,.3)}
+.pts-d #page-title,.nts-d .node-title,.cts-d .comment-title,.bts-d .block-title {text-shadow:0 1px 1px rgba(0,0,0,.6)}
+.pts-w #page-title,.nts-w .node-title,.cts-w .comment-title,.bts-w .block-title {text-shadow:0 1px 1px rgba(255,255,255,.8)}

@@ -1,0 +1,37 @@
+
+# Structure:
+
+  In this directory there are three folders:
+  
+  - at_core
+  - at_admin
+  - at_subtheme
+  
+  AT Core - the base theme, includes the core layout engine and style settings.
+  You can safely ingnore this theme, its merely there to run in the background
+  and do the heavy lifting. For developers the code is well commented and I have
+  tried to structure the theme so its easy to follow. Suggestions, improvements
+  and of course patches are welcome.
+  
+  AT Admin - administration theme, use is entirely optional.
+  
+  AT Subteme - a blank "starterkit" type theme for building your own sub-theme.
+  This is the one you need and will be most interested in if you are developing
+  a new theme. Instructions are included in the README in this theme.
+  
+  
+# Note from the developer:
+
+  I hope you enjoy this theme and it provides the tools and experience you are
+  looking for. I have spent countless hours development Adaptivetheme in the hope
+  that it will ease theme development and make your job a little bit more
+  enjoyable.
+
+  At some stage you may need support or simply have a question, or even a bold
+  new suggestion - please see the issue queue first and submit issues there:
+  
+  http://drupal.org/project/issues/adaptivetheme
+  
+  Jeff Burnz
+  Adaptivethemes.com
+  
