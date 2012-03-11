@@ -547,6 +547,8 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
     $vars['classes_array'][] = 'menu-wrapper';
   }
+  
+  
 
   // Add extra classes if required
   if (theme_get_setting('extra_block_classes', $theme_name) === 1) {

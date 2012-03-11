@@ -3,107 +3,147 @@
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
 
-// Centralise our elements array
+// The fonts array is used by the fonts sub-system to 
+// generate forms, build stylesheets and load
+// font styles. Note this has nothing what-so-ever to
+// do with Drupal 6 hook_elements, the name is merely
+// a coincendence because it suited my purpose.
 function font_elements() {
-
   $elements = array(
     // default
     'base' => array(
+      'type' => 'default',
+      'subtype' => '',
       'element' => 'bf',
       'selector' => 'html',
       'setting' => 'base_font',
     ),
-    // branding
+    // titles
     'site_name' => array(
+      'type' => 'title',
+      'subtype' => 'branding',
       'element' => 'sn',
       'selector' => '#site-name',
       'setting' => 'site_name_font',
     ),
     'site_slogan' => array(
+      'type' => 'title',
+      'subtype' => 'branding',
       'element' => 'ss',
       'selector' => '#site-slogan',
       'setting' => 'site_slogan_font',
     ),
-    // titles
     'page_title' => array(
+      'type' => 'title',
+      'subtype' => '',
       'element' => 'pt',
       'selector' => '#page-title',
       'setting' => 'page_title_font',
     ),
     'node_title' => array(
+      'type' => 'title',
+      'subtype' => 'entity_title',
       'element' => 'nt',
       'selector' => '.node-title',
       'setting' => 'node_title_font',
     ),
     'comment_title' => array(
+      'type' => 'title',
+      'subtype' => 'entity_title',
       'element' => 'ct',
       'selector' => '.comment-title',
       'setting' => 'comment_title_font',
     ),
     'block_title' => array(
+      'type' => 'title',
+      'subtype' => '',
       'element' => 'bt',
       'selector' => '.block-title',
       'setting' => 'block_title_font',
     ),
     // in-content headings
     'content_headings_h1h4' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_group',
       'element' => 'h1h4',
       'selector' => 'h1,h2,h3,h4',
       'setting' => 'content_headings_h1h4_font',
     ),
     'content_headings_h5h6' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_group',
       'element' => 'h5h6',
       'selector' => 'h5,h6',
       'setting' => 'content_headings_h5h6_font',
     ),
     'content_headings_h1' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h1',
       'selector' => 'h1',
       'setting' => 'h1_font',
     ),
     'content_headings_h2' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h2',
       'selector' => 'h2',
       'setting' => 'h2_font',
     ),
     'content_headings_h3' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h3',
       'selector' => 'h3',
       'setting' => 'h3_font',
     ),
     'content_headings_h4' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h4',
       'selector' => 'h4',
       'setting' => 'h4_font',
     ),
     'content_headings_h5' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h5',
       'selector' => 'h5',
       'setting' => 'h5_font',
     ),
     'content_headings_h6' => array(
+      'type' => 'heading',
+      'subtype' => 'heading_level',
       'element' => 'h6',
       'selector' => 'h6',
       'setting' => 'h6_font',
     ),
     // menus
     'main_menu' => array(
+      'type' => 'menu',
+      'subtype' => 'menu_variable',
       'element' => 'mm',
       'selector' => '#menu-bar ul,#primary-menu ul',
       'setting' => 'main_menu_font',
     ),
     'secondary_menu' => array(
+      'type' => 'menu',
+      'subtype' => 'menu_variable',
       'element' => 'sm',
       'selector' => '#secondary-menu ul',
       'setting' => 'secondary_menu_font',
     ),
     'block_menu' => array(
+      'type' => 'menu',
+      'subtype' => 'menu_block',
       'element' => 'bm',
       'selector' => 'nav.block ul',
       'setting' => 'block_menu_font',
     ),
     // custom css selector
     'selectors' => array(
+      'type' => 'custom',
+      'subtype' => '',
       'element' => 'css',
       'selector' => 'custom_css',
       'setting' => 'selectors_font',
@@ -113,7 +153,7 @@ function font_elements() {
   return $elements;
 }
 
- // Return a list of options
+ // Return lists of font names keyed by element
 function font_list($type, $element) {
   $font_list = array();
 
@@ -177,15 +217,6 @@ function font_your_face_fonts_list($element) {
   return $fonts;
 }
 
-/**
- * Basic Google Fonts
- * This file in included in the core theme to ease management
- * and updates to the font families. Google add new fonts on
- * a regular basis and we will provide patches and updates
- * for this file periodically. For a more up to date approach
- * use the @font-your-face module, especially if you need
- * greek or other variants.
- */
 // Build an array of Google web fonts
 function google_fonts_list($element) {
   $google_fonts = google_font_names();
@@ -198,10 +229,13 @@ function google_fonts_list($element) {
   return $fonts;
 }
 
-// Simple list of font names, we need this seperate to use it later
-// in less expensive operations, looping google_fonts_list() to get
-// matches is VERY exspensive.
-// Last update: 27/02/2012
+/**
+ * Basic Google Fonts
+ * Google add new fonts on a regular basis and we will provide patches and updates
+ * for this file periodically. For a more up to date approach use the @font-your-face 
+ * module, especially if you need Greek, Cryillic or other variants.
+ * Last update: 27/02/2012
+ */
 function google_font_names() {
   $array = array(
     'Abel',
@@ -888,6 +922,7 @@ function font_style_options($style, $element) {
 }
 
 // Backwards compatibility cruft for pre 7.x-3.x subthemes that have google fonts
+// We dont want them to use this but if saves the site blowing up if a user tries...
 // Return a list of options
 function google_web_fonts_list_options() {
   $google_web_font_families = array();

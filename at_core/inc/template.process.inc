@@ -149,7 +149,6 @@ function adaptivetheme_process_block(&$vars) {
   // Provide additional suggestions so the block__menu suggestion can be overridden easily
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->delta;
-  //dsm($vars['theme_hook_suggestions']); // debug suggestions
 }
 
 /**

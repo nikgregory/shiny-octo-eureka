@@ -33,6 +33,7 @@ function adaptivetheme_page_alter(&$page) {
       }
     }
   }
+  // dsm($page);
 }
 
 // hook_form_FORM_alter().
