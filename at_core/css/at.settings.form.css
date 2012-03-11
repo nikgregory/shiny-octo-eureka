@@ -347,6 +347,7 @@ input[disabled] {
   color: #666;
 }
 /* Seven tidy up */
+.admin-theme-seven .font-element-wrapper .fieldset-legend,
 .admin-theme-seven .panel-option-lists .fieldset-legend {
   position: static;
 }

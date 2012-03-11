@@ -50,13 +50,13 @@
     '#type' => 'fieldset',
     '#title' => t('Fonts'),
     '#description' => $fonts_message,
+    '#attributes' => array('class' => array('font-element-wrapper')),
     '#weight' => 1,
   );
   // Base font - global font family unless overridden by a more specific selector
   $form['at']['font']['base-font'] = array (
     '#type' => 'fieldset',
     '#title' => t('Default font'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['base-font']['base_font_type'] = array (
     '#type' => 'select',
@@ -155,7 +155,6 @@
       $form['at']['font']['titles']['' .  $setting_container . ''] = array (
         '#type' => 'fieldset',
         '#title' => t($title),
-        '#attributes' => array('class' => array('font-element-wrapper')),
       );
       $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_type . ''] = array (
         '#type' => 'select',
@@ -215,7 +214,6 @@
   $form['at']['font']['content-headings']['h1h4'] = array (
     '#type' => 'fieldset',
     '#title' => t('h1 to h4'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['content-headings']['h1h4']['content_headings_h1h4_font_type'] = array (
     '#type' => 'select',
@@ -263,7 +261,6 @@
   $form['at']['font']['content-headings']['h5h6'] = array (
     '#type' => 'fieldset',
     '#title' => t('h5 and h6'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['content-headings']['h5h6']['content_headings_h5h6_font_type'] = array (
     '#type' => 'select',
@@ -373,7 +370,6 @@
   $form['at']['font']['menus']['main-menu'] = array (
     '#type' => 'fieldset',
     '#title' => t('Main Menu'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['menus']['main-menu']['main_menu_font_type'] = array (
     '#type' => 'select',
@@ -432,7 +428,6 @@
   $form['at']['font']['menus']['secondary-menu'] = array (
     '#type' => 'fieldset',
     '#title' => t('Secondary Menu (user menu)'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['menus']['secondary-menu']['secondary_menu_font_type'] = array (
     '#type' => 'select',
@@ -491,7 +486,6 @@
   $form['at']['font']['menus']['block-menu'] = array (
     '#type' => 'fieldset',
     '#title' => t('Block Menus (default for all other menus)'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
   );
   $form['at']['font']['menus']['block-menu']['block_menu_font_type'] = array (
     '#type' => 'select',
@@ -550,7 +544,6 @@
   $form['at']['font']['css'] = array (
     '#type' => 'fieldset',
     '#title' => t('Custom CSS'),
-    '#attributes' => array('class' => array('font-element-wrapper')),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -601,21 +594,10 @@
   $form['at']['font']['css']['selectors_css'] = array(
     '#type' => 'textfield',
     '#title' => t('CSS'),
-    '#maxlength' => 1024,
+    '#maxlength' => 1024, // enough or should this be a textarea?
     '#default_value' => theme_get_setting('selectors_css') ? theme_get_setting('selectors_css') : '',
     '#description' => t("Enter a comma seperated list of valid CSS selectors such as <code>.node-content, .block-content</code>"),
     '#states' => array (
       'disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>')),
     )
   );
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
