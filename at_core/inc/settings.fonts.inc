@@ -70,10 +70,7 @@
     '#default_value' => theme_get_setting('base_font'),
     '#options' => str_replace("'", "", font_list('wsf', 'bf')),
     '#states' => array (
-      'visible' => array (
-        'select[name="base_font_type"]' => array (
-          'value' => ''
-        )
+      'visible' => array ('select[name="base_font_type"]' => array ('value' => '')
       )
     )
   );
@@ -83,10 +80,7 @@
     '#default_value' => theme_get_setting('base_font_gwf'),
     '#options' => font_list('gwf', 'bf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="base_font_type"]' => array (
-          'value' => 'gwf'
-        )
+      'visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf')
       )
     )
   );
@@ -96,11 +90,8 @@
     '#default_value' => theme_get_setting('base_font_cfs') ? theme_get_setting('base_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="base_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['base-font']['base_font_fyf'] = array(
@@ -109,10 +100,7 @@
     '#default_value' => theme_get_setting('base_font_fyf'),
     '#options' => font_list('fyf', 'bf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="base_font_type"]' => array (
-          'value' => 'fyf'
-        )
+      'visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf')
       )
     )
   );
@@ -124,10 +112,7 @@
     '#default_value' => theme_get_setting('base_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
     '#states' => array (
-      'invisible' => array (
-        'select[name="base_font_type"]' => array (
-          'value' => '<none>'
-        )
+      'invisible' => array ('select[name="base_font_type"]' => array ('value' => '<none>')
       )
     )
   );
@@ -163,7 +148,7 @@
       $setting_type = $setting . '_type';
       $setting_font = $setting . '_font';
       $setting_gwf  = $setting . '_gwf';
-      $setting_cwf  = $setting . '_cwf';
+      $setting_cfs  = $setting . '_cfs';
       $setting_yfy  = $setting . '_fyf';
       $setting_size = $setting . '_size';
 
@@ -192,12 +177,15 @@
         '#options' => font_list('gwf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
-      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_cwf . ''] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_cfs . ''] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cwf) ? theme_get_setting($setting_cwf) : '',
+        '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
         '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
-        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs'))),
+        '#states' => array (
+          'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
+          'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
+        ),
       );
       $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_yfy . ''] = array(
         '#type' => 'select',
@@ -241,11 +229,7 @@
     '#default_value' => theme_get_setting('content_headings_h1h4_font'),
     '#options' => font_list('wsf', 'h1h4'),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h1h4_font_type"]' => array (
-          'value' => ''
-        )
-      )
+      'visible' => array ('select[name="content_headings_h1h4_font_type"]' => array ('value' => '')),
     )
   );
   $form['at']['font']['content-headings']['h1h4']['content_headings_h1h4_font_gwf'] = array(
@@ -254,11 +238,7 @@
     '#default_value' => theme_get_setting('content_headings_h1h4_font_gwf'),
     '#options' => font_list('gwf', 'h1h4'),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h1h4_font_type"]' => array (
-          'value' => 'gwf'
-        )
-      )
+      'visible' => array ('select[name="content_headings_h1h4_font_type"]' => array ('value' => 'gwf')),
     )
   );
   $form['at']['font']['content-headings']['h1h4']['content_headings_h1h4_font_cfs'] = array(
@@ -267,11 +247,8 @@
     '#default_value' => theme_get_setting('content_headings_h1h4_font_cfs') ? theme_get_setting('content_headings_h1h4_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h1h4_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="content_headings_h1h4_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="content_headings_h1h4_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['content-headings']['h1h4']['content_headings_h1h4_font_fyf'] = array(
@@ -279,12 +256,7 @@
     '#title' => t('Font'),
     '#default_value' => theme_get_setting('content_headings_h1h4_font_fyf'),
     '#options' => font_list('fyf', 'h1h4'),
-    '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h1h4_font_type"]' => array (
-          'value' => 'fyf'
-        )
-      )
+    '#states' => array ('visible' => array ('select[name="content_headings_h1h4_font_type"]' => array ('value' => 'fyf')),
     )
   );
   // h5 to h6 only
@@ -305,11 +277,7 @@
     '#default_value' => theme_get_setting('content_headings_h5h6_font'),
     '#options' => font_list('wsf', 'h5h6'),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h5h6_font_type"]' => array (
-          'value' => ''
-        )
-      )
+      'visible' => array ('select[name="content_headings_h5h6_font_type"]' => array ('value' => '')),
     )
   );
   $form['at']['font']['content-headings']['h5h6']['content_headings_h5h6_font_gwf'] = array(
@@ -318,11 +286,7 @@
     '#default_value' => theme_get_setting('content_headings_h5h6_font_gwf'),
     '#options' => font_list('gwf', 'h5h6'),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h5h6_font_type"]' => array (
-          'value' => 'gwf'
-        )
-      )
+      'visible' => array ('select[name="content_headings_h5h6_font_type"]' => array ('value' => 'gwf')),
     )
   );
   $form['at']['font']['content-headings']['h5h6']['content_headings_h5h6_font_cfs'] = array(
@@ -331,11 +295,8 @@
     '#default_value' => theme_get_setting('content_headings_h5h6_font_cfs') ? theme_get_setting('content_headings_h5h6_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h5h6_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="content_headings_h5h6_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="content_headings_h5h6_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['content-headings']['h5h6']['content_headings_h5h6_font_fyf'] = array(
@@ -344,11 +305,7 @@
     '#default_value' => theme_get_setting('content_headings_h5h6_font_fyf'),
     '#options' => font_list('fyf', 'h5h6'),
     '#states' => array (
-      'visible' => array (
-        'select[name="content_headings_h5h6_font_type"]' => array (
-          'value' => 'fyf'
-        )
-      )
+      'visible' => array ('select[name="content_headings_h5h6_font_type"]' => array ('value' => 'fyf')),
     )
   );
   // Size for in-content headings
@@ -430,11 +387,7 @@
     '#default_value' => theme_get_setting('main_menu_font'),
     '#options' => font_list('wsf', 'mmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="main_menu_font_type"]' => array (
-          'value' => ''
-        )
-      )
+      'visible' => array ('select[name="main_menu_font_type"]' => array ('value' => '')),
     )
   );
   $form['at']['font']['menus']['main-menu']['main_menu_font_gwf'] = array(
@@ -443,11 +396,7 @@
     '#default_value' => theme_get_setting('main_menu_font_gwf'),
     '#options' => font_list('gwf', 'mmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="main_menu_font_type"]' => array (
-          'value' => 'gwf'
-        )
-      )
+      'visible' => array ('select[name="main_menu_font_type"]' => array ('value' => 'gwf')),
     )
   );
   $form['at']['font']['menus']['main-menu']['main_menu_font_cfs'] = array(
@@ -456,11 +405,8 @@
     '#default_value' => theme_get_setting('main_menu_font_cfs') ? theme_get_setting('main_menu_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="main_menu_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="main_menu_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="main_menu_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['menus']['main-menu']['main_menu_font_fyf'] = array(
@@ -469,11 +415,7 @@
     '#default_value' => theme_get_setting('main_menu_font_fyf'),
     '#options' => font_list('fyf', 'mmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="main_menu_font_type"]' => array (
-          'value' => 'fyf'
-        )
-      )
+      'visible' => array ('select[name="main_menu_font_type"]' => array ('value' => 'fyf')),
     )
   );
   $form['at']['font']['menus']['main-menu']['main_menu_font_size'] = array(
@@ -483,11 +425,7 @@
     '#default_value' => theme_get_setting('main_menu_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
     '#states' => array (
-      'invisible' => array (
-        'select[name="main_menu_font_type"]' => array (
-          'value' => '<none>'
-        )
-      )
+      'invisible' => array ('select[name="main_menu_font_type"]' => array ('value' => '<none>')),
     )
   );
   // Secondary menu
@@ -508,11 +446,7 @@
     '#default_value' => theme_get_setting('secondary_menu_font'),
     '#options' => font_list('wsf', 'smf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="secondary_menu_font_type"]' => array (
-          'value' => ''
-        )
-      )
+      'visible' => array ('select[name="secondary_menu_font_type"]' => array ('value' => '')),
     )
   );
   $form['at']['font']['menus']['secondary-menu']['secondary_menu_font_gwf'] = array(
@@ -521,11 +455,7 @@
     '#default_value' => theme_get_setting('secondary_menu_font_gwf'),
     '#options' => font_list('gwf', 'smf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="secondary_menu_font_type"]' => array (
-          'value' => 'gwf'
-        )
-      )
+      'visible' => array ('select[name="secondary_menu_font_type"]' => array ('value' => 'gwf')),
     )
   );
   $form['at']['font']['menus']['secondary-menu']['secondary_menu_font_cfs'] = array(
@@ -534,11 +464,8 @@
     '#default_value' => theme_get_setting('secondary_menu_font_cfs') ? theme_get_setting('secondary_menu_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="secondary_menu_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="secondary_menu_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="secondary_menu_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['menus']['secondary-menu']['secondary_menu_font_fyf'] = array(
@@ -547,11 +474,7 @@
     '#default_value' => theme_get_setting('secondary_menu_font_fyf'),
     '#options' => font_list('fyf', 'smf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="secondary_menu_font_type"]' => array (
-          'value' => 'fyf'
-        )
-      )
+      'visible' => array ('select[name="secondary_menu_font_type"]' => array ('value' => 'fyf')),
     )
   );
   $form['at']['font']['menus']['secondary-menu']['secondary_menu_font_size'] = array(
@@ -561,11 +484,7 @@
     '#default_value' => theme_get_setting('secondary_menu_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
     '#states' => array (
-      'invisible' => array (
-        'select[name="secondary_menu_font_type"]' => array (
-          'value' => '<none>'
-        )
-      )
+      'invisible' => array ('select[name="secondary_menu_font_type"]' => array ('value' => '<none>')),
     )
   );
   // block menus
@@ -586,11 +505,7 @@
     '#default_value' => theme_get_setting('block_menu_font'),
     '#options' => font_list('wsf', 'bmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="block_menu_font_type"]' => array (
-          'value' => ''
-        )
-      )
+      'visible' => array ('select[name="block_menu_font_type"]' => array ('value' => '')),
     )
   );
   $form['at']['font']['menus']['block-menu']['block_menu_font_gwf'] = array(
@@ -599,11 +514,7 @@
     '#default_value' => theme_get_setting('block_menu_font_gwf'),
     '#options' => font_list('gwf', 'bmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="block_menu_font_type"]' => array (
-          'value' => 'gwf'
-        )
-      )
+      'visible' => array ('select[name="block_menu_font_type"]' => array ('value' => 'gwf')),
     )
   );
   $form['at']['font']['menus']['block-menu']['block_menu_font_cfs'] = array(
@@ -612,11 +523,8 @@
     '#default_value' => theme_get_setting('block_menu_font_cfs') ? theme_get_setting('block_menu_font_cfs') : '',
     '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
     '#states' => array (
-      'visible' => array (
-        'select[name="block_menu_font_type"]' => array (
-          'value' => 'cfs',
-        )
-      )
+      'visible' => array ('select[name="block_menu_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="block_menu_font_type"]' => array ('value' => 'cfs')),
     )
   );
   $form['at']['font']['menus']['block-menu']['block_menu_font_fyf'] = array(
@@ -625,11 +533,7 @@
     '#default_value' => theme_get_setting('block_menu_font_fyf'),
     '#options' => font_list('fyf', 'bmf'),
     '#states' => array (
-      'visible' => array (
-        'select[name="block_menu_font_type"]' => array (
-          'value' => 'fyf'
-        )
-      )
+      'visible' => array ('select[name="block_menu_font_type"]' => array ('value' => 'fyf')),
     )
   );
   $form['at']['font']['menus']['block-menu']['block_menu_font_size'] = array(
@@ -639,10 +543,6 @@
     '#default_value' => theme_get_setting('block_menu_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
     '#states' => array (
-      'invisible' => array (
-        'select[name="block_menu_font_type"]' => array (
-          'value' => '<none>'
-        )
-      )
+      'invisible' => array ('select[name="block_menu_font_type"]' => array ('value' => '<none>')),
     )
   );

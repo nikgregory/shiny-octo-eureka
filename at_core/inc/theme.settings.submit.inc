@@ -20,6 +20,29 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
   }
+  // Custom font stacks are "required" using form states also...
+  $custom_font_stack_settings = array(
+    'base_font_type'           => 'base_font_cfs',
+    'site_name_font_type'      => 'site_name_font_cfs',
+    'site_slogan_font_type'    => 'site_slogan_font_cfs',
+    'page_title_font_type'     => 'page_title_font_cfs',
+    'node_title_font_type'     => 'node_title_font_cfs',
+    'comment_title_font_type'  => 'comment_title_font_cfs',
+    'block_title_font_type'    => 'block_title_font_cfs',
+    'main_menu_font_type'      => 'main_menu_font_cfs',
+    'secondary_menu_font_type' => 'secondary_menu_font_cfs',
+    'block_menu_font_type'     => 'block_menu_font_cfs',
+    'content_headings_h1h4_font_type' => 'content_headings_h1h4_font_cfs',
+    'content_headings_h5h6_font_type' => 'content_headings_h5h6_font_cfs',
+  );
+  foreach ($custom_font_stack_settings as $key => $value) {
+    if ($values[$key] == 'cfs') {
+      if (empty($values[$value])) {
+        $setting_text = str_replace('_', ' ', str_replace('cfs', '', ucfirst($value)));
+        form_set_error($value, t("Ops, you need to enter some fonts for <b>$setting_text</b> (custom font stack), or choose a different type."));
+      }
+    }
+  }
 }
 
 // Custom submit function - this mostly builds and saves stylesheets for various features such as the
@@ -406,10 +429,11 @@ function at_theme_settings_submit($form, &$form_state) {
     "$theme_name.responsive.styles" => $responsive_css,
   );
 
-  // Loop over the array and save each file, and we're done... and none too soon...
+  // Loop over the array and save each file, and we're done!
   foreach ($files as $key => $value) {
+    $sanitized_values = filter_xss($value); // some data might be user entered, check_plain gave me encoding errors
     $filepath = "$path/$key.css";
-    file_save_data($value, $filepath, FILE_EXISTS_REPLACE);
+    file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
   }
 
   // Fonts
@@ -457,7 +481,7 @@ function at_theme_settings_submit($form, &$form_state) {
         $font_type = $values[$setting . '_type'];
       }
       else {
-        $font_type = '<none>'; // this is an individual content heading
+        $font_type = '<none>'; // this is an individual "in-content" heading
       }
 
       // Get the font size if isset, not all font settings have size
@@ -465,7 +489,7 @@ function at_theme_settings_submit($form, &$form_state) {
         $font_size = $values[$setting . '_size'];
       } 
       else {
-        $font_size = '<none>';
+        $font_size = '<none>'; // this is a grouped "in-content" heading
       }
 
       // Get the font value (the font name or family) for the right font type if isset,
@@ -474,7 +498,8 @@ function at_theme_settings_submit($form, &$form_state) {
         $font_value = $values[$setting . (!empty($font_type) ? '_' . $font_type : '')];
       }
 
-      // Some Content Headings have no type or family
+      // Some Content Headings have no type or family, we add these first,
+      // these are the h1 to h6 settings that only have a size
       if ($font_type === '<none>') {
         $font_values['font_family'] = '';
         $font_values['font_size']   = $font_size;
@@ -504,9 +529,9 @@ function at_theme_settings_submit($form, &$form_state) {
         $font_styles_data[] = build_font_families_css($element, $selector, $font_values);
       }
 
-      // Custom Fonts
+      // Custom Font stacks (user entered data)
       if ($font_type === 'cfs') {
-        $font_values['font_family'] = $font_value;
+        $font_values['font_family'] = filter_xss($font_value); // check_plain can give weird encoding issues
         $font_values['font_size']   = $font_size;
         $font_values['font_style']  = '';
         $font_values['font_weight'] = '';
