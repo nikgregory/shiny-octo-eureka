@@ -546,3 +546,76 @@
       'invisible' => array ('select[name="block_menu_font_type"]' => array ('value' => '<none>')),
     )
   );
+  // Custom CSS selectors
+  $form['at']['font']['css'] = array (
+    '#type' => 'fieldset',
+    '#title' => t('Custom CSS'),
+    '#attributes' => array('class' => array('font-element-wrapper')),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['at']['font']['css']['selectors_font_type'] = array (
+    '#type' => 'select',
+    '#title' => t('Type'),
+    '#options' => $font_type_options,
+    '#default_value' => theme_get_setting('selectors_font_type')
+  );
+  $form['at']['font']['css']['selectors_font'] = array(
+    '#type' => 'select',
+    '#title' => t('Font'),
+    '#default_value' => theme_get_setting('selectors_font'),
+    '#options' => font_list('wsf', 'css'),
+    '#states' => array (
+      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => '')),
+    )
+  );
+  $form['at']['font']['css']['selectors_font_gwf'] = array(
+    '#type' => 'select',
+    '#title' => t('Font'),
+    '#default_value' => theme_get_setting('selectors_font_gwf'),
+    '#options' => font_list('gwf', 'css'),
+    '#states' => array (
+      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf')),
+    )
+  );
+  $form['at']['font']['css']['selectors_font_cfs'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Font'),
+    '#default_value' => theme_get_setting('selectors_font_cfs') ? theme_get_setting('selectors_font_cfs') : '',
+    '#description' => t("Enter a comma seperated list of fonts. Font names with spaces should be wrapped in single quotes, for example 'Times New Roman'."),
+    '#states' => array (
+      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
+      'required' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
+    )
+  );
+  $form['at']['font']['css']['selectors_font_fyf'] = array(
+    '#type' => 'select',
+    '#title' => t('Font'),
+    '#default_value' => theme_get_setting('selectors_font_fyf'),
+    '#options' => font_list('fyf', 'css'),
+    '#states' => array (
+      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
+    )
+  );
+  // css selectors need a text field to enter stuff
+  $form['at']['font']['css']['selectors_css'] = array(
+    '#type' => 'textfield',
+    '#title' => t('CSS'),
+    '#maxlength' => 1024,
+    '#default_value' => theme_get_setting('selectors_css') ? theme_get_setting('selectors_css') : '',
+    '#description' => t("Enter a comma seperated list of valid CSS selectors such as <code>.node-content, .block-content</code>"),
+    '#states' => array (
+      'disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>')),
+    )
+  );
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

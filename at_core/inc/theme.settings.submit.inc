@@ -448,11 +448,11 @@ function at_theme_settings_submit($form, &$form_state) {
 
     // Get the font elements array. Everything is built from the items in this
     // array, simply adding to it will generate new CSS, as long as the form
-    // items exist to collect the values - ideally the form itself should be 
+    // items exist to collect the values - ideally the form itself should be
     // generated from this array, although for now its hard coded.
     // Note to self: generate ALL forms from multidimensional arrays...
     $font_elements = font_elements();
-    
+
     // Check if fontyourface is enabled, doing this in the loop will be expensive
     if (module_exists('fontyourface')) {
       $fontyourface = TRUE;
@@ -460,14 +460,14 @@ function at_theme_settings_submit($form, &$form_state) {
 
     // How this works: first loop over the elements array, which is really a
     // list of html elements and selectors that we want to apply font styles
-    // to. For each "element" it grabs the values from the form[values] 
+    // to. For each "element" it grabs the values from the form[values]
     // and sets these into variables. Initially it wants to know what
-    // type we are looking at such as websafe, google, custom stack or 
+    // type we are looking at such as websafe, google, custom stack or
     // @font-your-face. For websafe, google and font-your-face it needs to
     // find a match - where the setting matches a font in one of those
     // arrays. Custom stack is easier, we just take the value we are given.
     // Once we know all the winners etc we format the values etc into CSS
-    // using build_font_families_css(). In short this was not built for 
+    // using build_font_families_css(). In short this was not built for
     // performance and its pretty slow, but it does the job.
     foreach ($font_elements as $key => $value) {
 
@@ -475,6 +475,11 @@ function at_theme_settings_submit($form, &$form_state) {
       $element  = $value['element'];  // a key to use later
       $selector = $value['selector']; // the selector to use when building the CSS
       $setting  = $value['setting'];  // the theme setting used to retrieve the font values
+      
+      // We need to retrive this, its in a theme setting not in the font elements array
+      if ($selector === 'custom_css') {
+       $selector = filter_xss($values['selectors_css']); // user entered data
+      }
 
       // Get the font type if isset, not all font settings have a type
       if (isset($values[$setting . '_type'])) {
@@ -487,9 +492,9 @@ function at_theme_settings_submit($form, &$form_state) {
       // Get the font size if isset, not all font settings have size
       if (isset($values[$setting . '_size'])) {
         $font_size = $values[$setting . '_size'];
-      } 
+      }
       else {
-        $font_size = '<none>'; // this is a grouped "in-content" heading
+        $font_size = '<none>'; // this is a grouped "in-content" heading or custom selectors
       }
 
       // Get the font value (the font name or family) for the right font type if isset,
@@ -507,9 +512,9 @@ function at_theme_settings_submit($form, &$form_state) {
         $font_values['font_weight'] = '';
 
         // Add styles to the array for printing into the stylsheet
-        $font_styles_data[] = build_font_families_css($element, $selector, $font_values);  
+        $font_styles_data[] = build_font_families_css($element, $selector, $font_values);
       }
-      
+
       // Websafe Fonts
       if ($font_type === '') {
         // Get a list of websafe fonts
@@ -586,7 +591,7 @@ function at_theme_settings_submit($form, &$form_state) {
         }
       }
     }
-
+ 
     $font_styles = implode("\n", $font_styles_data);
 
     $file_name = $theme_name . '_font_families.css';

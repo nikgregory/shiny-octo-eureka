@@ -305,7 +305,6 @@ function adaptivetheme_preprocess_html(&$vars) {
   // custom font stacks and integrate with @font-your-face module.
   // All can be configured in the "Fonts" theme settings.
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
-
     $used_fonts = array();
     $font_elements = font_elements();
     foreach ($font_elements as $key => $value) {
@@ -313,25 +312,31 @@ function adaptivetheme_preprocess_html(&$vars) {
       $element = $value['element'];
       // Check if any elements are set to use a google font
       if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
-        // Get the font names
+        // Get the theme setting
         $setting = theme_get_setting($setting . '_gwf', $theme_name);
+        // strip the element prefix
         $font = str_replace($element . '-', '', $setting);
+        // replace hyphens with spaces, now we have a lower case font name, no good,
+        // Google won't like it and will return the dreaded "font not supported" error
         $used_fonts[] = str_replace('-', ' ', $font);
       }
     }
     if (!empty($used_fonts)) {
-      // this is mad but a zillion times faster than looping over google_fonts_list()
-      // like we do during theme settings submit - got a better way, I want to know!!!
+      // Get the full list of font names, remember Google fonts are case sensitive, and
+      // you cannot just uppercase/ucfirst, font names are not consistant
       $google_fonts = google_font_names();
+      // Populate a variable with lower cased font names
       $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
+      // Now key the array with our lower case font names, and set that to a variable
       $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
       $used_google_fonts = array();
+      // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
       foreach ($google_fonts_lower_case_keys as $k => $v) {
         if (in_array($k, $used_fonts)) {
-          $used_google_fonts[] = $v;
+          $used_google_fonts[] = $v; // at last, we have the right font name/s
         }
       }
-      // the same font can be used multiple times, but we only need to load it once
+      // The same font can be used multiple times, but we only need to load it once
       $array = array_unique($used_google_fonts);
       // Implode the array, seperate font names with a pipe
       $google_fonts = trim(implode('|', $array));

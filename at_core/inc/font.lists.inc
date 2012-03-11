@@ -102,6 +102,12 @@ function font_elements() {
       'selector' => 'nav.block ul',
       'setting' => 'block_menu_font',
     ),
+    // custom css selector
+    'selectors' => array(
+      'element' => 'css',
+      'selector' => 'custom_css',
+      'setting' => 'selectors_font',
+    ),
   );
 
   return $elements;
@@ -159,7 +165,7 @@ function font_your_face_fonts_list($element) {
   if (module_exists('fontyourface')) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
     foreach ($enabled_fonts as $font) {
-      // <none> is "add selector in theme CSS" in fontyourface settings
+      // <none> is "-- add selector in theme CSS --" in fontyourface settings
       if ($font->css_selector === '<none>') {
         $key = drupal_html_class("$element-$font->name");
         $value = $font->name;
