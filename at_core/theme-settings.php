@@ -5,6 +5,9 @@
 
 global $theme_key, $path_to_at_core;
 
+// Get our config arrys
+include_once($path_to_at_core . '/inc/config.inc');
+
 // Pull in the font lists
 if(theme_get_setting('enable_font_settings', $theme_key) === 1) {
   include_once($path_to_at_core . '/inc/font.lists.inc');

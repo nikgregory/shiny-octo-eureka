@@ -1,4 +1,6 @@
-<?php 
+<?php
+  // I have thought about putting this into a config array like fonts and reponsive panels forms,
+  // however each fieldset is very bespoke and it will be hard to generate this from a config array.
   // bigscreen
   $form['at-layout']['bigscreen'] = array(
     '#type' => 'fieldset',

@@ -8,6 +8,8 @@
 global $path_to_at_core;
 // This holds a misc group of functions called by preprocess functions
 include_once($path_to_at_core . '/inc/template.helpers.inc');
+// Get our config arrys
+include_once($path_to_at_core . '/inc/config.inc');
 
 /**
  * Preprocess variables for html.tpl.php

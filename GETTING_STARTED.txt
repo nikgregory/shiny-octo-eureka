@@ -8,7 +8,7 @@
   - at_subtheme
   
   AT Core - the base theme, includes the core layout engine and style settings.
-  You can safely ingnore this theme, its merely there to run in the background
+  You can safely ignore this theme, its merely there to run in the background
   and do the heavy lifting. For developers the code is well commented and I have
   tried to structure the theme so its easy to follow. Suggestions, improvements
   and of course patches are welcome.

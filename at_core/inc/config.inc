@@ -3,10 +3,6 @@
 // these are config as data structures - they are not consistant
 // because we don't need a generic system, what we need is a bespoke
 // and highly optimised system that only supports what is needed.
-// There is one missing, the layout sub system config, 
-// because it does not exist...
-
-// this should not load globally, only in the scopes that we need it.
 
 // The panels array is used by the responsive panels sub-system
 function responsive_panels() {

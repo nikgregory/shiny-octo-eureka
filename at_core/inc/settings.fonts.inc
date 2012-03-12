@@ -3,10 +3,10 @@
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  *
  * This can probably be refactored to put everything inside a single foreach loop, which
- * was the original intention, but I ran out of time - the data structure exists that will
- * probably do it, font_elements(), which we use, but time was against me. It works and at
- * least gets us away from hard coding every form element which is difficult to maintain
- * and error prone.
+ * was the original intention, but I ran out of time and did it wrong to begin with...
+ * The data structure exists that will probably do it, font_elements(), which we use, 
+ * but time was against me. It works and at least gets us away from hard coding every 
+ * form element which is difficult to maintain and error prone.
  */
 
   // Get the font elements array, this holds options and settings for each font type
