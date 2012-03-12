@@ -250,7 +250,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   text-align: center;
 }
 /* Two col sprite */
-[id^=edit-twocol] .form-type-radio label {background: url(images/twocol-sprite.png);}
+[id^=edit-two] .form-type-radio label {background: url(images/twocol-sprite.png);}
 .form-type-radio label[for$=two-50] {background-position: 0 0;}
 .form-type-radio label[for$=two-66-33] {background-position: -41px 0;}
 .form-type-radio label[for$=two-33-66] {background-position: -82px 0;}
@@ -260,7 +260,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 .form-type-radio label[for$=two-66-33-stack],
 .form-type-radio label[for$=two-33-66-stack] {background-position: -205px 0;}
 /* Three col sprite */
-[id^=edit-threecol] .form-type-radio label {background: url(images/threecol-sprite.png);}
+[id^=edit-three] .form-type-radio label {background: url(images/threecol-sprite.png);}
 .form-type-radio label[for$=three-3x33] {background-position: 0 0;}
 .form-type-radio label[for$=three-3x33-stack-top] {background-position: -41px 0;}
 .form-type-radio label[for$=three-3x33-stack-bottom] {background-position: -82px 0;}
@@ -278,20 +278,20 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 .form-type-radio label[for$=three-25-25-50-stack],
 .form-type-radio label[for$=three-50-25-25-stack] {background-position: -82px -82px;}
 /* Four col sprite */
-[id^=edit-fourcol] .form-type-radio label {background: url(images/fourcol-sprite.png);}
+[id^=edit-four] .form-type-radio label {background: url(images/fourcol-sprite.png);}
 .form-type-radio label[for$=four-4x25] {background-position: 0 0;}
 .form-type-radio label[for$=four-4x25-right-stack] {background-position: -41px 0;}
 .form-type-radio label[for$=four-4x25-2x2-grid] {background-position: -82px 0;}
 .form-type-radio label[for$=four-4x25-stack] {background-position: -123px 0;}
 /* Five col sprite */
-[id^=edit-fivecol] .form-type-radio label {background: url(images/fivecol-sprite.png);}
+[id^=edit-five] .form-type-radio label {background: url(images/fivecol-sprite.png);}
 .form-type-radio label[for$=five-5x20] {background-position: 0 0;}
 .form-type-radio label[for$=five-5x20-2x3-grid] {background-position: -41px 0;}
 .form-type-radio label[for$=five-5x20-1x2x2-grid] {background-position: -82px 0;}
 .form-type-radio label[for$=five-5x20-stack-2] {background-position: -123px 0;}
 .form-type-radio label[for$=five-5x20-stack] {background-position: -164px 0;}
 /* Six col sprite */
-[id^=edit-sixcol] .form-type-radio label {background: url(images/sixcol-sprite.png);}
+[id^=edit-six] .form-type-radio label {background: url(images/sixcol-sprite.png);}
 .form-type-radio label[for$=six-6x16] {background-position: 0 0;}
 .form-type-radio label[for$=six-6x16-3x2-grid] {background-position: -41px 0;}
 .form-type-radio label[for$=six-6x16-2x3-grid] {background-position: -82px 0;}

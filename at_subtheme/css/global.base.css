@@ -6,7 +6,7 @@
 /*
  * Fonts
  *
- * By default there is no global font size is reset. A common 
+ * By default there is no global font size reset. A common 
  * method is to reset it to 62.5%, or 10px. This makes it very 
  * easy to calculate the required font sizes in em, for example:
  *
@@ -15,7 +15,7 @@
  *
  * In Adaptivetheme this should be applied to the HTML element,
  * so it will play nicely with the theme settings. If you use 
- * the body element or #page wrapper you will get unpredicable 
+ * the body element or #page wrapper you will get unpredictable 
  * font scaling issues.
  *
  * Font size chart from http://pxtoem.com/

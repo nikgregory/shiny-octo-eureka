@@ -5,14 +5,19 @@
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
 
+global $path_to_at_core;
+// This holds a misc group of functions called by preprocess functions
+include_once($path_to_at_core . '/inc/template.helpers.inc');
+
 /**
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-  global $theme_key, $language;
+  global $theme_key, $language, $path_to_at_core;
+
   $theme_name = $theme_key;
   $vars['base_path'] = base_path();
-  $vars['path_to_adaptivetheme'] = drupal_get_path('theme', 'adaptivetheme');
+  $vars['path_to_adaptivetheme'] = $path_to_at_core;
 
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -205,7 +210,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // If load_respondjs is enabled, load it
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    drupal_add_js($vars['path_to_adaptivetheme'] . '/js/respond.js',
+    drupal_add_js($path_to_at_core . '/js/respond.js',
       array(
         'type' => 'file',
         'scope' => 'footer',
@@ -289,7 +294,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('enable_loginblock_settings.css', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.login';
   }
-  $filepath = $vars['path_to_adaptivetheme'] . '/css/';
+  $filepath = $path_to_at_core . '/css/';
   foreach ($settings_css as $file) {
     drupal_add_css($filepath . $file, array(
       'preprocess' => TRUE,
@@ -305,6 +310,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   // custom font stacks and integrate with @font-your-face module.
   // All can be configured in the "Fonts" theme settings.
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
+    // Pull in the font lists
+    include_once($path_to_at_core . '/inc/font.lists.inc');
+
     $used_fonts = array();
     $font_elements = font_elements();
     foreach ($font_elements as $key => $value) {
@@ -367,11 +375,11 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('expose_regions', $theme_name) === 1) {
     $vars['classes_array'][] = 'debug-regions';
     $vars['classes_array'][] = 'debug-panels';
-    drupal_add_css($vars['path_to_adaptivetheme'] . '/css/debug-regions.css');
+    drupal_add_css($path_to_at_core . '/css/debug-regions.css');
   }
   // Load window size bookmarklet
   if (theme_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($vars['path_to_adaptivetheme'] . '/js/window-size.js',
+    drupal_add_js($path_to_at_core . '/js/window-size.js',
       array(
         'type' => 'file',
         'scope' => 'footer',

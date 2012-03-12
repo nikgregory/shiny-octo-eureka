@@ -5,12 +5,6 @@
  * Provides frequently used functions that don't fit logically anywhere else.
  */
 
-// Pull in the font lists, if enabled we need them globally.
-global $theme_key;
-if(theme_get_setting('enable_font_settings', $theme_key) === 1) {
-  include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/font.lists.inc');
-}
-
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
   $output = '<div id="' . $type . '-menu-bar" class="nav clearfix"><nav id="' . $type . '-menu" class="clearfix">' . $menu . '</nav></div>';

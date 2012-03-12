@@ -1,6 +1,10 @@
-<?php 
+<?php
+
+  // Get the responsive panels array, this holds options and settings for each responsive panel
+  // $responsive_panels = responsive_panels();
+
   // AT PANELS LAYOUTS
-    $form['at-layout']['rp'] = array(
+  $form['at-layout']['rp'] = array(
     '#type' => 'fieldset',
     '#title' => t('Responsive Panels'),
   );
@@ -9,8 +13,8 @@
     '#attributes' => array('class' => array('panel-option-lists')),
     '#description' => t('<h3>Responsive Panels</h3><p>These settings apply to both <a href="!gpanels_link" target="_blank">Gpanels</a> and <a href="!panels_link" target="_blank">Panels module</a> layouts.</p><p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels')),
   );
-  // TABLET landscape
-  $form['at-layout']['rp']['rpw']['tl'] = array(
+ // TABLET landscape
+  $form['at-layout']['panels']['device-orientation']['tablet-landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet landscape'),
     '#collapsible' => TRUE,

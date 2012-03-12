@@ -3,13 +3,19 @@
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
 
+global $theme_key, $path_to_at_core;
+
+// Pull in the font lists
+if(theme_get_setting('enable_font_settings', $theme_key) === 1) {
+  include_once($path_to_at_core . '/inc/font.lists.inc');
+}
+
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
 
-  // Path to core theme
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  global $path_to_at_core;
 
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
@@ -25,7 +31,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Build a custom header for the layout settings form
   $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. $admin_theme .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout Settings') . '</h1>';
-  $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . drupal_get_path('theme', 'adaptivetheme') . '/logo.png" /></a>';
+  $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $path_to_at_core . '/logo.png" /></a>';
   $layout_header .= '</div>';
 
   $form['at-layout'] = array(

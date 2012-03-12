@@ -21,25 +21,27 @@ function at_theme_settings_validate($form, &$form_state) {
     }
   }
   // Custom font stacks are "required" using form states also...
-  $custom_font_stack_settings = array(
-    'base_font_type'           => 'base_font_cfs',
-    'site_name_font_type'      => 'site_name_font_cfs',
-    'site_slogan_font_type'    => 'site_slogan_font_cfs',
-    'page_title_font_type'     => 'page_title_font_cfs',
-    'node_title_font_type'     => 'node_title_font_cfs',
-    'comment_title_font_type'  => 'comment_title_font_cfs',
-    'block_title_font_type'    => 'block_title_font_cfs',
-    'main_menu_font_type'      => 'main_menu_font_cfs',
-    'secondary_menu_font_type' => 'secondary_menu_font_cfs',
-    'block_menu_font_type'     => 'block_menu_font_cfs',
-    'content_headings_h1h4_font_type' => 'content_headings_h1h4_font_cfs',
-    'content_headings_h5h6_font_type' => 'content_headings_h5h6_font_cfs',
-  );
-  foreach ($custom_font_stack_settings as $key => $value) {
-    if ($values[$key] == 'cfs') {
-      if (empty($values[$value])) {
-        $setting_text = str_replace('_', ' ', str_replace('cfs', '', ucfirst($value)));
-        form_set_error($value, t("Ops, you need to enter some fonts for <b>$setting_text</b> (custom font stack), or choose a different type."));
+  if ($values['enable_font_settings'] === 1) {
+    $custom_font_stack_settings = array(
+      'base_font_type'           => 'base_font_cfs',
+      'site_name_font_type'      => 'site_name_font_cfs',
+      'site_slogan_font_type'    => 'site_slogan_font_cfs',
+      'page_title_font_type'     => 'page_title_font_cfs',
+      'node_title_font_type'     => 'node_title_font_cfs',
+      'comment_title_font_type'  => 'comment_title_font_cfs',
+      'block_title_font_type'    => 'block_title_font_cfs',
+      'main_menu_font_type'      => 'main_menu_font_cfs',
+      'secondary_menu_font_type' => 'secondary_menu_font_cfs',
+      'block_menu_font_type'     => 'block_menu_font_cfs',
+      'content_headings_h1h4_font_type' => 'content_headings_h1h4_font_cfs',
+      'content_headings_h5h6_font_type' => 'content_headings_h5h6_font_cfs',
+    );
+    foreach ($custom_font_stack_settings as $key => $value) {
+      if ($values[$key] == 'cfs') {
+        if (empty($values[$value])) {
+          $setting_text = str_replace('_', ' ', str_replace('cfs', '', ucfirst($value)));
+          form_set_error($value, t("Ops, you need to enter some fonts for <b>$setting_text</b> (custom font stack), or choose a different type."));
+        }
       }
     }
   }

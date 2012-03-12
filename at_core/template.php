@@ -6,9 +6,10 @@ if ((theme_get_setting('rebuild_theme_data') == TRUE) && (!defined('MAINTENANCE_
   system_rebuild_theme_data();
   drupal_theme_rebuild();
 }
-$filepath = drupal_get_path('theme', 'adaptivetheme');
-include_once($filepath . '/inc/template.helpers.inc');
-include_once($filepath . '/inc/template.theme.inc');
-include_once($filepath . '/inc/template.alter.inc');
-include_once($filepath . '/inc/template.preprocess.inc');
-include_once($filepath . '/inc/template.process.inc');
+global $path_to_at_core;
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+include_once($path_to_at_core . '/inc/config.inc');
+include_once($path_to_at_core . '/inc/template.theme.inc');
+include_once($path_to_at_core . '/inc/template.alter.inc');
+include_once($path_to_at_core . '/inc/template.preprocess.inc');
+include_once($path_to_at_core . '/inc/template.process.inc');
