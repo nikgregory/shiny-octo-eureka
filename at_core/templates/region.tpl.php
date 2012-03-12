@@ -42,9 +42,6 @@
  * @see adaptivetheme_preprocess_region()
  * @see adaptivetheme_process_region()
  */
-?>
-<?php if ($content): ?>
-  <?php print $outer_prefix . $inner_prefix; ?>
-    <?php print $content; ?>
-  <?php print $inner_suffix . $outer_suffix; ?>
-<?php endif; ?>
+if ($content) {
+  print $outer_prefix . $inner_prefix . $content . $inner_suffix . $outer_suffix;
+}

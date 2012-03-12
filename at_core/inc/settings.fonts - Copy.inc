@@ -153,31 +153,31 @@
       $setting_yfy  = $setting . '_fyf';
       $setting_size = $setting . '_size';
 
-      $form['at']['font']['titles'][$setting_container] = array (
+      $form['at']['font']['titles']['' .  $setting_container . ''] = array (
         '#type' => 'fieldset',
         '#title' => t($title),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_type] = array (
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_type . ''] = array (
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
         '#default_value' => theme_get_setting($setting_type),
       );
-      $form['at']['font']['titles'][$setting_container][$setting] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_gwf] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_gwf .''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_gwf),
         '#options' => font_list('gwf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_cfs] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_cfs . ''] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
@@ -187,14 +187,14 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_yfy] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_yfy . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_yfy),
         '#options' => font_list('fyf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_size] = array(
+      $form['at']['font']['titles']['' .  $setting_container . '']['' . $setting_size . ''] = array(
         '#type' => 'select',
         '#title' => t('Size'),
         '#options' => $font_sizes_em,
@@ -239,31 +239,31 @@
       $setting_cfs  = $setting . '_cfs';
       $setting_yfy  = $setting . '_fyf';
 
-      $form['at']['font']['headings'][$setting_container] = array (
+      $form['at']['font']['headings']['' .  $setting_container . ''] = array (
         '#type' => 'fieldset',
         '#title' => t($title),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_type] = array (
+      $form['at']['font']['headings']['' .  $setting_container . '']['' . $setting_type . ''] = array (
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
         '#default_value' => theme_get_setting($setting_type),
       );
-      $form['at']['font']['headings'][$setting_container][$setting] = array(
+      $form['at']['font']['headings']['' .  $setting_container . '']['' . $setting . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_gwf .''] = array(
+      $form['at']['font']['headings']['' .  $setting_container . '']['' . $setting_gwf .''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_gwf),
         '#options' => font_list('gwf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_cfs] = array(
+      $form['at']['font']['headings']['' .  $setting_container . '']['' . $setting_cfs . ''] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
@@ -273,7 +273,7 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
+      $form['at']['font']['headings']['' .  $setting_container . '']['' . $setting_yfy . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_yfy),
@@ -303,7 +303,7 @@
       $setting_type = $setting . '_type';
       $setting_size = $setting . '_size';
 
-      $form['at']['font']['headings']['sizes'][$setting_size] = array(
+      $form['at']['font']['headings']['sizes']['' . $setting_size . ''] = array(
         '#type' => 'select',
         '#title' => t($element), // element as title is fine in this context
         '#options' => $font_sizes_em,
@@ -340,31 +340,31 @@
       $setting_yfy  = $setting . '_fyf';
       $setting_size = $setting . '_size';
 
-      $form['at']['font']['menus'][$setting_container] = array (
+      $form['at']['font']['menus']['' .  $setting_container . ''] = array (
         '#type' => 'fieldset',
         '#title' => t($title),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_type] = array (
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting_type . ''] = array (
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
         '#default_value' => theme_get_setting($setting_type),
       );
-      $form['at']['font']['menus'][$setting_container][$setting] = array(
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_gwf .''] = array(
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting_gwf .''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_gwf),
         '#options' => font_list('gwf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_cfs] = array(
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting_cfs . ''] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
@@ -374,14 +374,14 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_yfy] = array(
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting_yfy . ''] = array(
         '#type' => 'select',
         '#title' => t('Font'),
         '#default_value' => theme_get_setting($setting_yfy),
         '#options' => font_list('fyf', $element),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_size] = array(
+      $form['at']['font']['menus']['' .  $setting_container . '']['' . $setting_size . ''] = array(
         '#type' => 'select',
         '#title' => t('Size'),
         '#options' => $font_sizes_em,
