@@ -103,6 +103,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['logo']['#collapsed'] = TRUE;
   $form['favicon']['#collapsible'] = TRUE;
   $form['favicon']['#collapsed'] = TRUE;
+  
+
 
   /**
    * The following will be processed even if the theme is inactive.

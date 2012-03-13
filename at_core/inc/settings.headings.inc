@@ -2,13 +2,15 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
-  $form['at']['headings'] = array(
+  $form['at']['titles'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Heading Styles'),
-    '#description' => t('<h3>Heading Styles</h3><p>Add extra styles to headings. Text shadows only work for CSS3 capable browsers such as Firefox, Safari, IE9 etc.</p>'),
+    '#title' => t('Title Styles'),
+    '#description' => t('<h3>Title Styles</h3><p>Add extra styles to headings. Text shadows only work for CSS3 capable browsers such as Firefox, Safari, IE9 etc.</p>'),
     '#weight' => 3,
   );
   $headings_valid_types = array(
+    'site_name',
+    'site_slogan',
     'page_title',
     'node_title',
     'block_title',
@@ -33,30 +35,30 @@
       $setting_alignment  = $setting . '_alignment';
       $setting_shadow     = $setting . '_shadow';
 
-      $form['at']['headings']['' . $setting_container . '']  = array(
+      $form['at']['titles']['' . $setting_container . '']  = array(
         '#type' => 'fieldset',
         '#title' => t($title),
         '#description' => t("<strong>$title</strong>"),
       );
-      $form['at']['headings']['' . $setting_container . '']['' . $setting_case . ''] = array(
+      $form['at']['titles']['' . $setting_container . '']['' . $setting_case . ''] = array(
         '#type' => 'radios',
         '#title' => t('Case'),
         '#default_value' => theme_get_setting($setting_case),
         '#options' => font_style_options('case', $element),
       );
-      $form['at']['headings']['' . $setting_container . '']['' . $setting_weight . ''] = array(
+      $form['at']['titles']['' . $setting_container . '']['' . $setting_weight . ''] = array(
         '#type' => 'radios',
-        '#title' => t('Font weight'),
+        '#title' => t('Weight'),
         '#default_value' => theme_get_setting($setting_weight),
         '#options' => font_style_options('weight', $element),
       );
-      $form['at']['headings']['' . $setting_container . '']['' . $setting_alignment . ''] = array(
+      $form['at']['titles']['' . $setting_container . '']['' . $setting_alignment . ''] = array(
         '#type' => 'radios',
         '#title' => t('Alignment'),
         '#default_value' => theme_get_setting($setting_alignment),
         '#options' => font_style_options('alignment', $element),
       );
-      $form['at']['headings']['' . $setting_container . '']['' . $setting_shadow . ''] = array(
+      $form['at']['titles']['' . $setting_container . '']['' . $setting_shadow . ''] = array(
         '#type' => 'radios',
         '#title' => t('Text shadow'),
         '#default_value' => theme_get_setting($setting_shadow),

@@ -38,8 +38,8 @@ function adaptivetheme_page_alter(&$page) {
 
 // hook_form_FORM_alter().
 function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
-  if(module_exists('noggin')) {
-    if ($form_id == 'system_theme_settings' && isset($form['var']['#value']) && $form['var']['#value'] != 'theme_settings') {
+  if ($form_id == 'system_theme_settings') {
+    if (module_exists('noggin')) {  
       $form['noggin']['#collapsible'] = TRUE;
       $form['noggin']['#collapsed'] = TRUE;
     }

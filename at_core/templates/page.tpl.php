@@ -178,7 +178,7 @@
   <?php print render($page['tertiary_content']); ?>
 
   <?php if ($page['footer']): ?>
-    <footer role="contentinfo"><?php print render($page['footer']); ?></footer>
+    <footer id="footer" class="clearfix" role="contentinfo"><?php print render($page['footer']); ?></footer>
   <?php endif; ?>
 
 </div>

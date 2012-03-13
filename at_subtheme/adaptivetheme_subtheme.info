@@ -196,13 +196,13 @@
 
 
   ; Font type
-  setting[base_font_type]          = ''
-  setting[site_name_font_type]     = ''
-  setting[site_slogan_font_type]   = ''
-  setting[page_title_font_type]    = ''
-  setting[node_title_font_type]    = ''
-  setting[comment_title_font_type] = ''
-  setting[block_title_font_type]   = ''
+  settings[base_font_type]          = ''
+  settings[site_name_font_type]     = ''
+  settings[site_slogan_font_type]   = ''
+  settings[page_title_font_type]    = ''
+  settings[node_title_font_type]    = ''
+  settings[comment_title_font_type] = ''
+  settings[block_title_font_type]   = ''
 
 
   ; Fonts
@@ -217,13 +217,13 @@
 
 
   ; Font size
-  setting[base_font_size]          = '1.4em'
-  setting[site_name_font_size]     = '2.4em'
-  setting[site_slogan_font_size]   = '1.6em'
-  setting[page_title_font_size]    = '2em'
-  setting[node_title_font_size]    = '1.8em'
-  setting[comment_title_font_size] = '1.6em'
-  setting[block_title_font_size]   = '1.8em'
+  settings[base_font_size]          = '1.4em'
+  settings[site_name_font_size]     = '2.4em'
+  settings[site_slogan_font_size]   = '1.6em'
+  settings[page_title_font_size]    = '2em'
+  settings[node_title_font_size]    = '1.8em'
+  settings[comment_title_font_size] = '1.6em'
+  settings[block_title_font_size]   = '1.8em'
 
 
   ; Page title

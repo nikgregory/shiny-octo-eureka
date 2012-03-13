@@ -12,11 +12,10 @@
  */
 
 /**
- * Override or insert variables into the html templates.
+ * Preprocess variables for the html template.
  */
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
   global $theme_key;
-  $theme_name = $theme_key;
   
   /**
    * Load IE Stylesheets
@@ -35,12 +34,12 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   $ie_files = array(
     '(lt IE 9)&(!IEMobile 7)' => 'lt-ie9.css',
   );
-  load_subtheme_ie_styles($ie_files, $theme_name);
+  load_subtheme_ie_styles($ie_files, $theme_key);
   // */
 
   // Add a class for the active theme name.
   /* -- Delete this line to enable.
-  $vars['classes_array'][] = drupal_html_class($theme_name);
+  $vars['classes_array'][] = drupal_html_class($theme_key);
   // */
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
@@ -49,7 +48,9 @@ function adaptivetheme_subtheme_preprocess_html(&$vars) {
   // */
 }
 
-
+/**
+ * Process variables for the html template.
+ */
 /* -- Delete this line if you want to use this function
 function adaptivetheme_subtheme_process_html(&$vars) {
 }
@@ -57,13 +58,11 @@ function adaptivetheme_subtheme_process_html(&$vars) {
 
 
 /**
- * Override or insert variables into the page templates.
+ * Preprocess variables for the page templates.
  */
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_page(&$vars) {
 }
-
-
 function adaptivetheme_subtheme_process_page(&$vars) {
 }
 // */
@@ -75,7 +74,6 @@ function adaptivetheme_subtheme_process_page(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_node(&$vars) {
 }
-
 function adaptivetheme_subtheme_process_node(&$vars) {
 }
 // */
@@ -87,7 +85,6 @@ function adaptivetheme_subtheme_process_node(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_comment(&$vars) {
 }
-
 function adaptivetheme_subtheme_process_comment(&$vars) {
 }
 // */
@@ -99,7 +96,6 @@ function adaptivetheme_subtheme_process_comment(&$vars) {
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_block(&$vars) {
 }
-
 function adaptivetheme_subtheme_process_block(&$vars) {
 }
 // */

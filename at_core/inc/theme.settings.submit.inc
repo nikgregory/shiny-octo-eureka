@@ -21,6 +21,7 @@ function at_theme_settings_validate($form, &$form_state) {
     }
   }
   // Custom font stacks are "required" using form states also...
+  /*   
   if ($values['enable_font_settings'] === 1) {
     $custom_font_stack_settings = array(
       'base_font_type'           => 'base_font_cfs',
@@ -44,7 +45,8 @@ function at_theme_settings_validate($form, &$form_state) {
         }
       }
     }
-  }
+  } 
+  */
 }
 
 // Custom submit function - this mostly builds and saves stylesheets for various features such as the
@@ -474,13 +476,13 @@ function at_theme_settings_submit($form, &$form_state) {
     foreach ($font_elements as $key => $value) {
 
       // Each item in $font_elements has 3 key value pairs
-      $element  = $value['element'];  // a key to use later
-      $selector = $value['selector']; // the selector to use when building the CSS
-      $setting  = $value['setting'];  // the theme setting used to retrieve the font values
+      $element  = $value['element']  ? $value['element'] : '';  // a key to use later
+      $selector = $value['selector'] ? $value['selector'] : ''; // the selector to use when building the CSS
+      $setting  = $value['setting']  ? $value['setting'] : '';  // the theme setting used to retrieve the font values
       
       // We need to retrive this, its in a theme setting not in the font elements array
-      if ($selector === 'custom_css') {
-       $selector = filter_xss($values['selectors_css']); // user entered data
+      if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
+        $selector = filter_xss($values['selectors_css']); // user entered data
       }
 
       // Get the font type if isset, not all font settings have a type

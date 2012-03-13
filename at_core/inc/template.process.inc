@@ -41,6 +41,7 @@ function adaptivetheme_process_html_tag(&$vars) {
  */
 function adaptivetheme_process_page(&$vars) {
   global $theme_key;
+  $theme_name = $theme_key;
 
   // Call our helper function to wrap menus in extra markup
   if (!empty($vars['primary_navigation'])) {
@@ -54,10 +55,9 @@ function adaptivetheme_process_page(&$vars) {
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
   
   // Force full width wrapper template suggestion if enabled
-  if (theme_get_setting('page_full_width_wrappers', $theme_key) === 1) {
+  if (theme_get_setting('page_full_width_wrappers', $theme_name) === 1) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
   }
-  //dsm($vars['theme_hook_suggestions']);
 }
 
 /**

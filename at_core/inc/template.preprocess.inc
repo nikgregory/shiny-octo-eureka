@@ -15,7 +15,9 @@ include_once($path_to_at_core . '/inc/config.inc');
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-  global $theme_key, $language, $path_to_at_core;
+  global $theme_key, $language, $path_to_at_core, $theme_info;
+
+  //dsm($theme_info);
 
   $theme_name = $theme_key;
   $vars['base_path'] = base_path();
@@ -251,10 +253,19 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Load micro CSS files and body classes if settings are active
   $settings_css = array();
+  $filepath = $path_to_at_core . '/css/';
   // Headings
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.headings.css';
     $settings_array = array(
+      'site_name_case',
+      'site_name_weight',
+      'site_name_alignment',
+      'site_name_shadow',
+      'site_slogan_case',
+      'site_slogan_weight',
+      'site_slogan_alignment',
+      'site_slogan_shadow',
       'page_title_case',
       'page_title_weight',
       'page_title_alignment',
@@ -273,8 +284,8 @@ function adaptivetheme_preprocess_html(&$vars) {
       'block_title_shadow',
     );
     foreach ($settings_array as $setting) {
-      if ($this_setting = theme_get_setting($setting, $theme_name)) {
-        $vars['classes_array'][] = $this_setting;
+      if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+        $vars['classes_array'][] = $heading_setting;
       }
     }
   }
@@ -287,24 +298,27 @@ function adaptivetheme_preprocess_html(&$vars) {
       'image_alignment',
     );
     foreach ($settings_array as $setting) {
-      if ($this_setting = theme_get_setting($setting, $theme_name)) {
-        $vars['classes_array'][] = $this_setting;
+      if ($image_setting = theme_get_setting($setting, $theme_name)) {
+        $vars['classes_array'][] = $image_setting;
       }
     }
   }
   // Login block
-  if (theme_get_setting('enable_loginblock_settings.css', $theme_name) === 1) {
-    $settings_css[] = 'at.settings.style.login';
+  if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
+    $settings_css[] = 'at.settings.style.login.css';
   }
-  $filepath = $path_to_at_core . '/css/';
-  foreach ($settings_css as $file) {
-    drupal_add_css($filepath . $file, array(
-      'preprocess' => TRUE,
-      'group' => CSS_THEME,
-      'media' => 'screen, handheld',
-      'every_page' => TRUE,
-      )
-    );
+  // Load the micro styles
+  if (!empty($settings_css)) {
+    foreach ($settings_css as $cssfile) {
+      drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        //'weight' => -100,
+        'media' => 'screen, handheld',
+        'every_page' => TRUE,
+        )
+      );
+    }
   }
 
   // Font loader

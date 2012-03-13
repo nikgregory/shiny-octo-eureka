@@ -21,7 +21,7 @@
   );
   $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Show window size - appears in the bottom left corner.'),
+    '#title' => t('Show window size - appears in the bottom right corner.'),
     '#default_value' => theme_get_setting('show_window_size'),
   );
   // All media queries for copy/pastings if you need them

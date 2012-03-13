@@ -31,6 +31,7 @@ h2.field-label /* Lables are H2 in Adaptivetheme. Use a strong selector to mitig
 
 /* Image fields use the <figure> and <figcaption> elements from HTML5. */
 .field-type-image {
+  margin-bottom: 1.5em; /* The same bottom margin as p, blockquote, ul, ol and dl */
 }
 
 .field .caption  /* The .caption class is applied to all captions regardless of view mode. */ {

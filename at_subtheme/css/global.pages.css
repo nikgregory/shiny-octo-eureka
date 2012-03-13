@@ -92,7 +92,7 @@ h1#page-title, /* The title of the page. */ {
 }
 
 div.messages /* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */ {
-  margin: 1.5em 0; /* Drupal core uses "6px 0" margin */
+  margin: 1.5em 10px; /* Drupal core uses "6px 0" margin */
 }
 
 div.messages ul {
