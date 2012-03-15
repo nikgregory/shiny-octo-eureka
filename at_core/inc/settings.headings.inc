@@ -16,6 +16,7 @@
     'block_title',
     'comment_title',
   );
+  $form_elements = font_elements();
   foreach ($form_elements as $key => $value) {
 
     $heading = $key;
@@ -39,28 +40,29 @@
         '#type' => 'fieldset',
         '#title' => t($title),
         '#description' => t("<strong>$title</strong>"),
+        '#attributes' => array('class' => array('headings-styles-wrapper')),
       );
       $form['at']['titles']['' . $setting_container . '']['' . $setting_case . ''] = array(
-        '#type' => 'radios',
+        '#type' => 'select',
         '#title' => t('Case'),
         '#default_value' => theme_get_setting($setting_case),
         '#options' => font_style_options('case', $element),
       );
       $form['at']['titles']['' . $setting_container . '']['' . $setting_weight . ''] = array(
-        '#type' => 'radios',
+        '#type' => 'select',
         '#title' => t('Weight'),
         '#default_value' => theme_get_setting($setting_weight),
         '#options' => font_style_options('weight', $element),
       );
       $form['at']['titles']['' . $setting_container . '']['' . $setting_alignment . ''] = array(
-        '#type' => 'radios',
+        '#type' => 'select',
         '#title' => t('Alignment'),
         '#default_value' => theme_get_setting($setting_alignment),
         '#options' => font_style_options('alignment', $element),
       );
       $form['at']['titles']['' . $setting_container . '']['' . $setting_shadow . ''] = array(
-        '#type' => 'radios',
-        '#title' => t('Text shadow'),
+        '#type' => 'select',
+        '#title' => t('Shadow'),
         '#default_value' => theme_get_setting($setting_shadow),
         '#options' => font_style_options('shadow', $element),
       );

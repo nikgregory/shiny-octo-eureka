@@ -17,11 +17,11 @@
 
   // Hard code the devices, this is no problem as far as I am concerned
   $devices = array('tablet_landscape','tablet_portrait','smartphone_landscape');
+
   // Get the configuration array for panel layouts
   $rp = responsive_panels();
 
   foreach ($devices as $device) {
-    //dsm($device);
     $title = str_replace('_', ' ', ucfirst($device));
     $form['at-layout']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
@@ -30,7 +30,6 @@
       '#collapsed' => TRUE,
     );
     foreach ($rp as $key => $value) {
-      //dsm($key); // type such as two, tree, four
       $type = $key;
       $form['at-layout']['panels']['panels-wrapper'][$device][$type] = array(
         '#type' => 'fieldset',
@@ -39,9 +38,6 @@
         '#collapsed' => TRUE,
       );
       foreach ($value as $key => $value) {
-        //dsm($value); // array of settings for each subtype
-        //dsm($device .'_'. $value['setting']); // theme setting = device + setting
-        //dsm($value['options']); // array of options for each subtype
         $form['at-layout']['panels']['panels-wrapper'][$device][$type][$device .'_'. $value['setting']] = array(
           '#type' => 'radios',
           '#title' => t($value['title']),

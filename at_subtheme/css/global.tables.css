@@ -63,7 +63,7 @@ tr.odd {
 /* Table row striping with classes and nth-child selector */
 tr.odd,
 tr.info,
-tbody tr:nth-child(2n+1) {
+tr:nth-child(2n+1) {
   background-color: #f5f5f5;
   background-color: rgba(0, 0, 0, 0.1);
 }

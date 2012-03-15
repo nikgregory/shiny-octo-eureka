@@ -5,7 +5,9 @@
 
 // Validate some stuff
 function at_theme_settings_validate($form, &$form_state) {
+
   $values = $form_state['values'];
+
   // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
@@ -21,7 +23,7 @@ function at_theme_settings_validate($form, &$form_state) {
     }
   }
   // Custom font stacks are "required" using form states also...
-  /*   
+  /*
   if ($values['enable_font_settings'] === 1) {
     $custom_font_stack_settings = array(
       'base_font_type'           => 'base_font_cfs',
@@ -45,12 +47,12 @@ function at_theme_settings_validate($form, &$form_state) {
         }
       }
     }
-  } 
+  }
   */
 }
 
-// Custom submit function - this mostly builds and saves stylesheets for various features such as the
-// responsive layout system and fonts.
+// Custom submit function - this mostly builds and saves stylesheets for 
+// various features such as the responsive layout and font styles.
 function at_theme_settings_submit($form, &$form_state) {
 
   // Setup some variables we're going to use a lot
@@ -59,6 +61,108 @@ function at_theme_settings_submit($form, &$form_state) {
   $is_default_layout = $values['global_default_layout'];
   $path_to_panels_css = drupal_get_path('theme', 'adaptivetheme') . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
+
+  // Set up the directory and variables, we will save the data here:
+  $id = $theme_name . '_files_' . substr(hash('sha256', serialize($theme_name) . microtime()), 0, 8);
+  $path  = 'public://adaptivetheme/' . $id;
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+  variable_set('theme_' . $theme_name . '_files_directory', $path);
+
+  // theme info config
+  $theme_settings = $values;
+  if ($theme_settings) {
+    $dynamic_settings_info = array();
+    $static_settings_info = array();
+    $lt = list_themes();
+    foreach ($lt as $key => $value) {
+      if ($theme_name == $key) {
+        $this_themes_info = $lt[$theme_name]->info;
+        foreach ($this_themes_info as $k => $v) {
+          if ($k == 'name') {
+            $static_settings_info[] = 'name = ' . $v;
+          }
+          if ($k == 'description') {
+            $v = $v ? $v : $theme_name. ' is rocking the hardest!';
+            $static_settings_info[] = 'description = ' . $v;
+          }
+          if ($k == 'base theme') {
+            $static_settings_info[] = 'base theme = ' . $v;
+          }
+          if ($k == 'release') {
+            $static_settings_info[] = 'release = ' . $v;
+          }
+          if ($k == 'core') {
+            $static_settings_info[] = 'core = 7.x';
+          }
+          if ($k == 'engine') {
+            $static_settings_info[] = 'engine = phptemplate';
+          }
+          if ($k == 'screenshot') {
+            $static_settings_info[] = 'screenshot = screenshot.png';
+          }
+          if ($k == 'stylesheets' && !empty($k)) {
+            foreach ($v as $media_target => $stylesheet_file) {
+              foreach ($stylesheet_file as $stylesheet_file_name => $stylesheet_file_path) {
+                $static_settings_info[] = 'stylesheets[' . $media_target . '][] = ' . $stylesheet_file_name;
+              }
+            }
+          }
+          if ($k == 'scripts' && !empty($k)) {
+             foreach ($v as $scripts => $file) {
+               $static_settings_info[] = 'scripts[] = ' . $file;
+             }
+          }
+          if ($k == 'regions') {
+            foreach ($v as $name => $label) {
+              $static_settings_info[] = 'regions[' . $name . '] = ' . $label;
+            }
+          }
+          if ($k == 'features') {
+            foreach ($v as $feature_key => $feature) {
+              $static_settings_info[] = 'features[] = ' . $feature;
+            }
+          }
+        }
+      }
+    }
+    if (!empty($static_settings_info)) {
+      $static_settings = implode("\n", $static_settings_info);
+    }
+    $exclusions = array(
+      'var',
+      'default_logo',
+      'logo_path',
+      'logo_upload',
+      'default_favicon',
+      'favicon_path',
+      'favicon_upload',
+      'at__active_tab',
+      'at-layout__active_tab',
+      'at-styles__active_tab',
+      'submit',
+      'form_build_id',
+      'form_token',
+      'form_id',
+      'check',
+      'output',
+      'op',
+    );
+    foreach ($theme_settings as $setting_name => $setting_value) {
+      if (!in_array($setting_name, $exclusions)) {
+        $setting_value = $setting_value ? $setting_value : "''";
+        $dynamic_settings_info[] = 'settings['. $setting_name .'] = ' . $setting_value;
+      }
+    }
+    if (!empty($dynamic_settings_info)) {
+      $dynamic_settings_info = $dynamic_settings_info ? $dynamic_settings_info : "''"; 
+      $dynamic_settings = implode("\n", $dynamic_settings_info);
+    }
+    if (!empty($static_settings_info) && !empty($dynamic_settings_info)) {
+      $sanitized_values = filter_xss($static_settings . "\n" . $dynamic_settings); /* could contain malicious data */
+      $filepath = "$path/$theme_name" . '_settings.info';
+      file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
+    }
+  }
 
   // Initialize the panels layout variable, this will by and large hold the panels layouts
   $panels_layout = '';
@@ -404,10 +508,6 @@ function at_theme_settings_submit($form, &$form_state) {
   // adaptivetheme_preprocess_html() will take care of loading the
   // right ones when they are needed.
 
-  // Set up the stream wrapper and create the directory
-  $path  = "public://at_css";
-  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
-
   // Set up variables for each layout, we already have the $default_layout but its not sanitized
   // $default_layout = $default_layout;
 
@@ -479,7 +579,7 @@ function at_theme_settings_submit($form, &$form_state) {
       $element  = $value['element']  ? $value['element'] : '';  // a key to use later
       $selector = $value['selector'] ? $value['selector'] : ''; // the selector to use when building the CSS
       $setting  = $value['setting']  ? $value['setting'] : '';  // the theme setting used to retrieve the font values
-      
+
       // We need to retrive this, its in a theme setting not in the font elements array
       if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
         $selector = filter_xss($values['selectors_css']); // user entered data
@@ -595,7 +695,7 @@ function at_theme_settings_submit($form, &$form_state) {
         }
       }
     }
- 
+
     $font_styles = implode("\n", $font_styles_data);
 
     $file_name = $theme_name . '_font_families.css';

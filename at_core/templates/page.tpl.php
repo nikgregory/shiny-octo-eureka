@@ -77,7 +77,7 @@
  * @see adaptivetheme_process_page()
  */
 ?>
-<div id="page" class="container">
+<div id="page" class="container <?php print $classes; ?>">
 
   <?php print render($page['leaderboard']); ?>
 
@@ -134,7 +134,9 @@
             <header id="main-content-header">
 
               <?php if (!$is_front && $title): ?>
-                <h1 id="page-title"><?php print $title; ?></h1>
+                <h1 id="page-title"<?php print $attributes; ?>>
+                  <?php print $title; ?>
+                </h1>
               <?php endif; ?>
 
               <?php if ($primary_local_tasks || $secondary_local_tasks || $action_links): ?>

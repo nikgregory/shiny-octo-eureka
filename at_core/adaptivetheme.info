@@ -6,6 +6,7 @@
   name        = AT Core
   description = AT Core holds the Layout Engine and all the style and "site tweak" tools. It does all the heavy lifting so you don't need to.
   core        = 7.x
+  release     = 7.x-3.x
   engine      = phptemplate
   screenshot  = screenshot.png
 
@@ -129,17 +130,24 @@
 
 ;----------// Global settings
   settings[production_mode]                = 0
-  settings[rebuild_theme_data]             = 0
+  settings[mobile_friendly_metatags]       = 1
+  settings[adaptivetheme_meta_viewport]    = 'width=device-width, initial-scale=1'
+  settings[adaptivetheme_meta_mobileoptimized]  = 'width'
+  settings[adaptivetheme_meta_handheldfriendly] = 'true'
+  settings[adaptivetheme_meta_apple_mobile_web_app_capable] = 'yes'
+  settings[chrome_edge]                    = 0
   settings[disable_responsive_styles]      = 0
   settings[load_respondjs]                 = 0
+  settings[load_html5js]                   = 1
   settings[enable_cascading_media_queries] = 0
   settings[cascade_media_query]            = 'only screen and (min-width:220px)'
   settings[global_default_layout]          = 'smartphone-portrait'
 
 ;----------// Debug
-  settings[expose_regions]   = 0
-  settings[load_all_panels]  = 0
-  settings[show_window_size] = 0
+  settings[expose_regions]     = 0
+  settings[load_all_panels]    = 0
+  settings[show_window_size]   = 0
+  settings[rebuild_theme_data] = 0
 
 ;----------// Site Tweaks
   settings[enable_font_settings]       = 0
@@ -150,28 +158,34 @@
   settings[enable_loginblock_settings] = 0
   
 ;----------// Fonts
-  setting[base_font_type]          = ''
-  setting[site_name_font_type]     = ''
-  setting[site_slogan_font_type]   = ''
-  setting[page_title_font_type]    = ''
-  setting[node_title_font_type]    = ''
-  setting[comment_title_font_type] = ''
-  setting[block_title_font_type]   = ''
-  settings[base_font]              = 'bf-sss'
-  settings[site_name_font]         = 'snf-sl'
-  settings[site_slogan_font]       = 'ssf-sl'
-  settings[main_menu_font]         = 'mmf-sl'
-  settings[page_title_font]        = 'ptf-sl'
-  settings[node_title_font]        = 'ntf-sl'
-  settings[comment_title_font]     = 'ctf-sl'
-  settings[block_title_font]       = 'btf-sl'
-  setting[base_font_size]          = '1.4em'
-  setting[site_name_font_size]     = '2.4em'
-  setting[site_slogan_font_size]   = '1.6em'
-  setting[page_title_font_size]    = '2em'
-  setting[node_title_font_size]    = '1.8em'
-  setting[comment_title_font_size] = '1.6em'
-  setting[block_title_font_size]   = '1.8em'
+  settings[base_font_type]          = 'wsf'
+  settings[site_name_font_type]     = 'wsf'
+  settings[site_slogan_font_type]   = 'wsf'
+  settings[page_title_font_type]    = 'wsf'
+  settings[node_title_font_type]    = 'wsf'
+  settings[comment_title_font_type] = 'wsf'
+  settings[block_title_font_type]   = 'wsf'
+  settings[base_font]               = 'bf-sss'
+  settings[site_name_font]          = 'snf-sl'
+  settings[site_slogan_font]        = 'ssf-sl'
+  settings[main_menu_font]          = 'mmf-sl'
+  settings[page_title_font]         = 'ptf-sl'
+  settings[node_title_font]         = 'ntf-sl'
+  settings[comment_title_font]      = 'ctf-sl'
+  settings[block_title_font]        = 'btf-sl'
+  settings[base_font_size]          = '1em'
+  settings[site_name_font_size]     = '2em'
+  settings[site_slogan_font_size]   = '1.2em'
+  settings[page_title_font_size]    = '2em'
+  settings[node_title_font_size]    = '1.6em'
+  settings[comment_title_font_size] = '1.4em'
+  settings[block_title_font_size]   = '1.4em'
+  settings[h1_font_size]            = '2em'
+  settings[h2_font_size]            = '1.6em'
+  settings[h3_font_size]            = '1.4em'
+  settings[h4_font_size]            = '1.2em'
+  settings[h5_font_size]            = '1em'
+  settings[h6_font_size]            = '1em'
 
 ;----------// Headings
   settings[page_title_case]         = 'ptc-n'

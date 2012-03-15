@@ -313,11 +313,44 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
 .font-element-wrapper option[value$=-ms]   {font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;}
 
 /* Heading styles for advanced themes */
-fieldset[id*=edit-titles] .form-type-radios {
-  width: 12em;
+.headings-styles-wrapper .form-type-radios,
+.headings-styles-wrapper .form-type-select {
+  min-width: 12em;
   float: left;
   clear: none;
+  padding: 0;
+  margin: 0;
 }
+.headings-styles-wrapper .form-type-select label {
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute;
+  overflow: 0;
+}
+#edit-site-name-font-style .form-type-select label {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+  padding-bottom: 0.5em;
+  display: block !important;
+}
+.headings-styles-wrapper .form-type-select select {
+  min-width: 8em;
+}
+.headings-styles-wrapper .fieldset-description {
+  float: left;
+  padding: 0;
+  width: 12em;
+}
+.headings-styles-wrapper .fieldset-wrapper {
+  padding: 0 15px;
+}
+#edit-site-name-font-style .fieldset-description {
+  padding-top: 2.2em;
+}
+
 
 /* Global settings form is ugly */
 #edit-global-settings .fieldset-description {
@@ -331,6 +364,14 @@ input[disabled] {
   background: #eee;
   border-color: #ccc;
   color: #666;
+}
+
+/* Meta tags */
+#edit-meta .form-type-textfield label {
+  width: 18em;
+}
+#edit-meta .form-type-textfield input {
+  width: 20em;
 }
 
 /* Seven tidy up */

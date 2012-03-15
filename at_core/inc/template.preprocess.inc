@@ -4,24 +4,21 @@
  *
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
-
 global $path_to_at_core;
-// This holds a misc group of functions called by preprocess functions
-include_once($path_to_at_core . '/inc/template.helpers.inc');
-// Get our config arrys
 include_once($path_to_at_core . '/inc/config.inc');
+include_once($path_to_at_core . '/inc/template.helpers.inc');
 
 /**
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-  global $theme_key, $language, $path_to_at_core, $theme_info;
-
-  //dsm($theme_info);
-
+  global $theme_key, $language, $path_to_at_core;
   $theme_name = $theme_key;
   $vars['base_path'] = base_path();
   $vars['path_to_adaptivetheme'] = $path_to_at_core;
+  $vars['polyfills_array'] = array();
+
+  // dsm($vars);
 
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -31,10 +28,17 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Clean up the lang attributes, great idea Zen
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
-  // add extra classes if set
+  // Add extra classes if set
   if (theme_get_setting('extra_page_classes', $theme_name) === 1) {
+
+    // Set a class based on the language
     if (function_exists('locale')) {
       $vars['classes_array'][] = 'lang-' . $vars['language']->language;
+    }
+
+    // Site name class, for multi-sites
+    if (!empty($vars['head_title_array']['name'])) {
+      $vars['classes_array'][] = 'site-name-' . drupal_html_class($vars['head_title_array']['name']);
     }
 
     // Classes for body element. Allows advanced theming based on context
@@ -72,12 +76,31 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // add a body class if the site name is hidden
+  // Headings classes, bizzarly these must be added in html.tpl.php, since title_attributes_array is useless
+  //if ($vars['menu_item']['title']) { // Leaving this check out for now, not sure if this is safe
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $settings_array = array(
+        'page_title_case',
+        'page_title_weight',
+        'page_title_alignment',
+        'page_title_shadow',
+      );
+      foreach ($settings_array as $setting) {
+        if ($heading_settings = theme_get_setting($setting, $theme_name)) {
+          $vars['classes_array'][] = $heading_settings;
+        }
+      }
+    }
+  //}
+  //dsm($vars['menu_item']['title']);
+
+  // Add a body class if the site name is hidden - state driven dynamic
+  // classes are very useful and AT does this a lot
   if (theme_get_setting('toggle_name', $theme_name) === 0) {
     $vars['classes_array'][] = 'site-name-hidden';
   }
 
-  // strip rubbish classes if extra classes not set
+  // Strip rubbish classes if extra classes not set
   if (theme_get_setting('extra_page_classes', $theme_name) === 0) {
     foreach ($vars['classes_array'] as $i => $class) {
       if (preg_match('/page*/', $class)) {
@@ -86,15 +109,13 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load Styles and JS
-  //$theme_name = $theme_key;
-
+  // Load CSS and JavaScript
   // Set the path to the directory where our CSS files are saved
-  $path = "public://at_css";
+  $path = variable_get('theme_' . $theme_name . '_files_directory');
   $file = '';
 
-  // Set a variable for the mode
-  $mode = theme_get_setting('production_mode');
+  // Set a variable for the mode, AT has 2 modes, production and development
+  $mode = theme_get_setting('production_mode', $theme_name);
 
   /**
    * Responsive Stylesheet Loader: Development Mode
@@ -170,9 +191,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // In layout.inc we built 3 layout stylesheets:
-  // 1. themeName.default.layout.css - this always loads, so we just load it
-  // 2. themeName.responsive.layout.css - only loads if responsive capability is enabled
-  // 3. themeName.lt-ie9.layout.css - only loads if responsive capability is enabled
+  // 1. themeName.default.layout.css
+  // 2. themeName.responsive.layout.css
+  // 3. themeName.lt-ie9.layout.css
   //
   // Now we need to load them, but only under certain conditions:
   // a. Is the default layout the standard layout?
@@ -197,7 +218,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Next we check if we need to load the responsive layout
+  // Next - check if we need to load the responsive layout
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
     $file = $theme_name . '.responsive.layout.css';
     if (!empty($file)) {
@@ -210,19 +231,6 @@ function adaptivetheme_preprocess_html(&$vars) {
         )
       );
     }
-  }
-
-  // If load_respondjs is enabled, load it
-  if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    drupal_add_js($path_to_at_core . '/js/respond.js',
-      array(
-        'type' => 'file',
-        'scope' => 'footer',
-        'group' => JS_THEME,
-        'preprocess' => TRUE,
-        'cache' => TRUE,
-      )
-    );
   }
 
   // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
@@ -251,43 +259,11 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load micro CSS files and body classes if settings are active
+  // Load micro CSS files if settings are active
   $settings_css = array();
-  $filepath = $path_to_at_core . '/css/';
-  // Headings
+  // Headings/titles
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.headings.css';
-    $settings_array = array(
-      'site_name_case',
-      'site_name_weight',
-      'site_name_alignment',
-      'site_name_shadow',
-      'site_slogan_case',
-      'site_slogan_weight',
-      'site_slogan_alignment',
-      'site_slogan_shadow',
-      'page_title_case',
-      'page_title_weight',
-      'page_title_alignment',
-      'page_title_shadow',
-      'node_title_case',
-      'node_title_weight',
-      'node_title_alignment',
-      'node_title_shadow',
-      'comment_title_case',
-      'comment_title_weight',
-      'comment_title_alignment',
-      'comment_title_shadow',
-      'block_title_case',
-      'block_title_weight',
-      'block_title_alignment',
-      'block_title_shadow',
-    );
-    foreach ($settings_array as $setting) {
-      if ($heading_setting = theme_get_setting($setting, $theme_name)) {
-        $vars['classes_array'][] = $heading_setting;
-      }
-    }
   }
   // Images
   if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
@@ -307,7 +283,6 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.login.css';
   }
-  // Load the micro styles
   if (!empty($settings_css)) {
     foreach ($settings_css as $cssfile) {
       drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
@@ -319,6 +294,15 @@ function adaptivetheme_preprocess_html(&$vars) {
         )
       );
     }
+  }
+
+  // If load_respondjs is enabled...
+  if (theme_get_setting('load_respondjs', $theme_name) === 1) {
+    $vars['polyfills_array'][] = $vars['base_path'] . $path_to_at_core .'/js/respond.js';
+  }
+  // If load_html5js is enabled...
+  if (theme_get_setting('load_html5js', $theme_name) === 1) {
+    $vars['polyfills_array'][] = $vars['base_path'] . $path_to_at_core .'/js/respond.js';
   }
 
   // Font loader
@@ -412,7 +396,7 @@ function adaptivetheme_preprocess_html(&$vars) {
  * Preprocess variables for page.tpl.php
  */
 function adaptivetheme_preprocess_page(&$vars) {
-  global $theme_key;
+  global $theme_key, $language, $path_to_at_core;
   $theme_name = $theme_key;
 
   // Set up logo element
@@ -449,6 +433,28 @@ function adaptivetheme_preprocess_page(&$vars) {
       'title' => t('Home page')),
     )
   ) : '';
+
+  // Headings
+  if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    $settings_array = array();
+    if ($vars['hide_site_name'] = FALSE) {
+      $settings_array[] = 'site_name_case';
+      $settings_array[] = 'site_name_weight';
+      $settings_array[] = 'site_name_alignment';
+      $settings_array[] = 'site_name_shadow';
+    }
+    if ($vars['site_slogan']) {
+      $settings_array[] = 'site_slogan_case';
+      $settings_array[] = 'site_slogan_weight';
+      $settings_array[] = 'site_slogan_alignment';
+      $settings_array[] = 'site_slogan_shadow';
+    }
+    foreach ($settings_array as $setting) {
+      if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+        $vars['classes_array'][] = $heading_setting;
+      }
+    }
+  }
 
   // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
@@ -571,8 +577,6 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
     $vars['classes_array'][] = 'menu-wrapper';
   }
-  
-  
 
   // Add extra classes if required
   if (theme_get_setting('extra_block_classes', $theme_name) === 1) {
@@ -591,6 +595,23 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
     // Delta
     $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
+  }
+
+  // Add title style classes
+  if (isset($vars['block']->subject)) {
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $settings_array = array(
+        'block_title_case',
+        'block_title_weight',
+        'block_title_alignment',
+        'block_title_shadow',
+      );
+      foreach ($settings_array as $setting) {
+        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+          $vars['classes_array'][] = $heading_setting;
+        }
+      }
+    }
   }
 
   // Add classes to theme the horizontal block option
@@ -653,7 +674,6 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
 }
 
-
 /**
  * Preprocess variables for node.tpl.php
  */
@@ -678,6 +698,23 @@ function adaptivetheme_preprocess_node(&$vars) {
     // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
     if ($vars['view_mode'] !== 'teaser') {
       $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
+    }
+  }
+
+  // Add title style classes
+  if (isset($vars['title'])) {
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $settings_array = array(
+        'node_title_case',
+        'node_title_weight',
+        'node_title_alignment',
+        'node_title_shadow',
+      );
+      foreach ($settings_array as $setting) {
+        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+          $vars['classes_array'][] = $heading_setting;
+        }
+      }
     }
   }
 
@@ -747,6 +784,23 @@ function adaptivetheme_preprocess_comment(&$vars) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 
+  // Add title style classes
+  if (theme_get_setting('comments_hide_title', $theme_name) !== 1) {
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $settings_array = array(
+        'comment_title_case',
+        'comment_title_weight',
+        'comment_title_alignment',
+        'comment_title_shadow',
+      );
+      foreach ($settings_array as $setting) {
+        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+          $vars['classes_array'][] = $heading_setting;
+        }
+      }
+    }
+  }
+
   // Classes for comment content
   $vars['content_attributes_array']['class'][] = 'comment-content';
 
@@ -769,6 +823,12 @@ function adaptivetheme_preprocess_comment(&$vars) {
   if ($vars['status'] === 'comment-unpublished') {
     $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
   }
+}
+
+/**
+ * Preprocess variables for the comment wrapper template.
+ */
+function adaptivetheme_preprocess_comment_wrapper(&$vars) {
 }
 
 /**

@@ -23,7 +23,7 @@
 //
 // To turn off support for IE6 or IE7, set those variables to false.
 //
-// Zen does not require special handling for IE8 or later. But Compass defines
+// AdaptiveTheme does not require special handling for IE8 or later. But Compass defines
 // more Legacy IE variables that you might find useful for your theme. See the
 // documentation for them at http://compass-style.org/reference/compass/support/
 $legacy-support-for-ie6: true;
@@ -37,7 +37,7 @@ $legacy-support-for-ie7: true;
 // First, let's create some font stacks.
 $sans-serif-small:            "Trebuchet MS", "Helvetica Neue", Arial, Helvetica, sans-serif;
 $sans-serif-large:            Verdana, Geneva, Arial, Helvetica, sans-serif;
-$sans-serif-arial-helvitica:  Arial, Helvetica, sans-serif;
+$sans-serif-arial-helvetica:  Arial, Helvetica, sans-serif;
 $calibri-candara:             Calibri, Candara, Arial, Helvetica, sans-serif;
 $serif-small:                 Garamond, Perpetua, "Times New Roman", serif;
 $serif-large:                 Georgia, Baskerville, Palatino, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
@@ -50,7 +50,6 @@ $font-body: $sans-serif-large;
 $font-monospace: $mono;
 
 
-
 //
 // Partials to be shared with all .scss files.
 //
@@ -60,5 +59,4 @@ $font-monospace: $mono;
 @import "compass/utilities/sprites"; // See http://compass-style.org/help/tutorials/spriting/
 @import "compass/css3";     // Use one CSS3 mixin instead of multiple vendor prefixes.
 
-
-@import "partial.custom"; // Import our custom mixins last.
+@import "custom"; // Import our custom mixins last.

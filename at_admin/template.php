@@ -1,22 +1,13 @@
 <?php
 /**
- * Override or insert variables into html templates.
- */
-function adaptivetheme_admin_preprocess_html(&$vars) {
-  //$vars['classes_array'][] = theme_get_setting('font_family');
-  //$vars['classes_array'][] = theme_get_setting('font_size'); 
-}
-
-/**
  * Override or insert variables into page templates.
  */
 function adaptivetheme_admin_preprocess_page(&$vars) {
   $vars['datetime_rfc'] = '';
   $vars['datetime_iso'] = '';
   $vars['datetime_rfc'] = date("r" , time()); // RFC2822 date format
-  $vars['datetime_iso'] = gmdate('Y-m-d\TH:i:s\Z'); // ISO 8601 date format   
+  $vars['datetime_iso'] = gmdate('Y-m-d\TH:i:s\Z'); // ISO 8601 date format
 }
-
 /**
  * Alter the search block form.
  */

@@ -1,0 +1,69 @@
+/**
+ * @file
+ * Node Styling
+ *
+ * Style anything that isn't in the $content variable.
+ */
+
+.node {
+  margin-bottom: 20px; }
+
+.preview .node {
+  /* background-color: #ffffea; */
+  /* Drupal core uses a #ffffea background */ }
+
+.node-promoted, .node-sticky {}
+
+.node-unpublished {
+  /* background-color: #fff4f4; */
+  /* Drupal core uses a #fff4f4 background */
+  p.unpublished {
+    height: 0;
+    overflow: visible;
+    color: #d8d8d8;
+    font-size: 75px;
+    line-height: 1;
+    font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    word-wrap: break-word;
+    /* A very nice CSS3 property */ } }
+
+.comment-unpublished p.unpublished {
+  height: 0;
+  overflow: visible;
+  color: #d8d8d8;
+  font-size: 75px;
+  line-height: 1;
+  font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  word-wrap: break-word;
+  /* A very nice CSS3 property */ }
+
+.lt-ie8 {
+  .node-unpublished > *, .comment-unpublished > * {
+    position: relative;
+    /* Otherwise these elements will appear below the "Unpublished" text. */ } }
+
+.node-by-viewer, .node-teaser {}
+
+/* Zebra stripe node lists */
+
+.node {
+  &.odd, &.even {} }
+
+/* All nodes are given a node-FOO class that describes the type of content that
+ * it is. If you create a new content type called "my-custom-type", it will
+ * receive a "node-my-custom-type" class.
+ */
+
+.node-page, .node-article, .node-book, .node-forum, .node-poll, h2.node-title {}
+
+.node {
+  .user-picture {}
+  .submitted {
+    .username, time {} }
+  .node-content, ul.links {} }

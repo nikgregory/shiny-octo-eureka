@@ -4,6 +4,9 @@
  * Adaptivetheme implementation to display the basic html structure of a single
  * Drupal page.
  *
+ * Adaptivetheme Variables:
+ * - $polyfills: polyfill scripts to support legacy browsers.
+ *
  * Variables:
  * - $css: An array of CSS files for the current page.
  * - $language: (object) The language the site is being displayed in.
@@ -49,18 +52,10 @@
 <!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html <?php print $html_attributes . $rdf_namespaces; ?>><!--<![endif]-->
 <head>
 <?php print $head; ?>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="MobileOptimized" content="width">
-<meta name="HandheldFriendly" content="true">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta http-equiv="cleartype" content="on">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title><?php print $head_title; ?></title>
 <?php print $styles; ?>
 <?php print $scripts; ?>
-<!--[if lt IE 9]>
-<script src="<?php print $base_path . $path_to_adaptivetheme; ?>/js/html5.js"></script>
-<![endif]-->
+<?php print $polyfills; ?>
 </head>
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div id="skip-link">

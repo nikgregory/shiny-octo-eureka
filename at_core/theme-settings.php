@@ -2,23 +2,16 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
-
-global $theme_key, $path_to_at_core;
+global $path_to_at_core;
 
 // Get our config arrys
 include_once($path_to_at_core . '/inc/config.inc');
-
-// Pull in the font lists
-if(theme_get_setting('enable_font_settings', $theme_key) === 1) {
-  include_once($path_to_at_core . '/inc/font.lists.inc');
-}
 
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-
-  global $path_to_at_core;
+  global $theme_key, $path_to_at_core;
 
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
@@ -37,6 +30,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $path_to_at_core . '/logo.png" /></a>';
   $layout_header .= '</div>';
 
+  
   $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout Settings'),
@@ -46,8 +40,10 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_tab' => 'defaults',
     '#attached' => array(
       'css' => array($path_to_at_core . '/css/at.settings.form.css'),
+      //'js'  => array($path_to_at_core . '/js/chosen.jquery.min.js' => array('type' => 'file', 'type' => JS_THEME)),
     ),
   );
+  
   include_once($path_to_at_core . '/inc/settings.pagelayout.inc');
   include_once($path_to_at_core . '/inc/settings.responsivepanels.inc');
   include_once($path_to_at_core . '/inc/settings.global.inc');
@@ -66,9 +62,15 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#suffix' => '</div>',
     '#default_tab' => 'defaults',
   );
+  if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {
+    include_once($path_to_at_core . '/inc/font.lists.inc');
+  }
+  // Heading styles
+  if(theme_get_setting('enable_heading_settings') === 1) {
+    include_once($path_to_at_core . '/inc/settings.headings.inc');
+  }
   // Fonts
   if(theme_get_setting('enable_font_settings') === 1) {
-    include_once($path_to_at_core . '/inc/font.lists.inc');
     include_once($path_to_at_core . '/inc/settings.fonts.inc');
   }
   // Heading styles
@@ -144,4 +146,4 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['#submit'][] = 'at_theme_settings_submit';
 }
 // Include custom form validation and submit functions
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/theme.settings.submit.inc');
+include_once($path_to_at_core . '/inc/theme.settings.submit.inc');

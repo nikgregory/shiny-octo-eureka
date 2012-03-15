@@ -7,15 +7,93 @@
  
 // hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {
-  $head_elements['system_meta_content_type']['#attributes'] = array(
-    'charset' => 'utf-8',
-  );
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  // charset utf-8
+  $head_elements['system_meta_content_type']['#attributes'] = array('charset' => 'utf-8');
+
+  // Viewport
+  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    if (theme_get_setting('mobile_friendly_metatags', $theme_name) === 1) {
+      // Viewport
+      $adaptivetheme_meta_viewport = theme_get_setting('adaptivetheme_meta_viewport', $theme_name);
+      $head_elements['adaptivetheme_meta_viewport'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'meta', 
+        '#attributes' => array(
+          'name' => 'viewport', 
+          'content' => $adaptivetheme_meta_viewport,
+        ),
+        '#weight' => 1,
+      );
+      // MobileOptimized
+      $adaptivetheme_meta_mobileoptimized = theme_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name);
+      $head_elements['adaptivetheme_meta_mobileoptimized'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'meta', 
+        '#attributes' => array(
+          'name' => "MobileOptimized", 
+          'content' => $adaptivetheme_meta_mobileoptimized,
+        ),
+        '#weight' => 2,
+      );
+      // HandheldFriendly
+      $adaptivetheme_meta_handheldfriendly = theme_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name);
+      $head_elements['adaptivetheme_meta_handheldfriendly'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'meta', 
+        '#attributes' => array(
+          'name' => "HandheldFriendly", 
+          'content' => $adaptivetheme_meta_handheldfriendly,
+        ),
+        '#weight' => 3,
+      );
+      // apple-mobile-web-app-capable
+      $adaptivetheme_meta_apple_mobile_web_app_capable = theme_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name);
+      $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'meta', 
+        '#attributes' => array(
+          'name' => "apple-mobile-web-app-capable", 
+          'content' => $adaptivetheme_meta_apple_mobile_web_app_capable,
+        ),
+        '#weight' => 4,
+      );
+    }
+  }
+  if (theme_get_setting('chrome_edge', $theme_name) === 1) {
+    // cleartype
+    $head_elements['adaptivetheme_meta_cleartype'] = array(
+      '#type' => 'html_tag', 
+      '#tag' => 'meta', 
+      '#attributes' => array(
+        'http-equiv' => "cleartype", 
+        'content' => "on",
+      ),
+      '#weight' => 5,
+    );
+    // X-UA-Compatible
+    $head_elements['adaptivetheme_meta_x_ua_compatible'] = array(
+      '#type' => 'html_tag', 
+      '#tag' => 'meta', 
+      '#attributes' => array(
+        'http-equiv' => "X-UA-Compatible", 
+        'content' => "IE=edge, chrome=1",
+      ),
+      '#weight' => 6,
+    );
+  }
+  // dsm($head_elements); 
 }
 
 // hook_js_alter(). Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
 function adaptivetheme_js_alter(&$javascript) {
+
   $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
+
+  // dsm($javascript);
 }
 
 // hook_page_alter()
