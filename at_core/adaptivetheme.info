@@ -13,6 +13,11 @@
 ;----------// Stylesheets
   stylesheets[screen, handheld][] = css/at.layout.css
 
+  
+;--// TEST FEATURE DETECTION
+  ;scripts[] = js/mqcheck.js
+  
+  
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second

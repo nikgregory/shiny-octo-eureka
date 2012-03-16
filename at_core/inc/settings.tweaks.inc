@@ -92,3 +92,16 @@
     '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
   );
+  // Change stuff
+  $form['at']['site-tweaks']['change-stuff'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Change Stuff'),
+    '#description' => t('<h3>Change Stuff</h3>'),
+  );
+  // Use the page full width wrappers template
+  $form['at']['site-tweaks']['change-stuff']['skip_link_target'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Modify the Skip link target'),
+    '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
+    '#default_value' => theme_get_setting('skip_link_target'),
+  );

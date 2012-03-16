@@ -318,3 +318,6 @@
 
   ; Extra markup
   settings[menu_item_span_elements] = 0
+  
+  ; Skip link
+  settings[skip_link_target] = '#main-content'

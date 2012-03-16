@@ -16,8 +16,9 @@ function adaptivetheme_process_html(&$vars) {
   $vars['polyfills'] = '';
   if (!empty($vars['polyfills_array'])) {
     $fills = array();
+    $query_string = variable_get('css_js_query_string', '0');
     foreach ($vars['polyfills_array'] as $key => $value) {
-      $fills[] = '<script src="' . $value . '</script>' . "\n";
+      $fills[] = '<script src="' . $value . '?' . $query_string . '"></script>' . "\n";
     }
     $fills = implode("\n", $fills);
     $vars['polyfills'] = '<!--[if lt IE 9]>' . "\n" . $fills . '<![endif]-->' . "\n";

@@ -27,6 +27,12 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Clean up the lang attributes, great idea Zen
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
+  
+  // Set the skip link target id
+  $vars['skip_link_target'] = '#main-content';
+  if (theme_get_setting('skip_link_target', $theme_name)) {
+    $vars['skip_link_target'] = theme_get_setting('skip_link_target', $theme_name);
+  }
 
   // Add extra classes if set
   if (theme_get_setting('extra_page_classes', $theme_name) === 1) {
@@ -298,11 +304,15 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // If load_respondjs is enabled...
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $vars['polyfills_array'][] = $vars['base_path'] . $path_to_at_core .'/js/respond.js';
+    $item = $path_to_at_core .'/js/respond.js';
+    $respondjs = file_create_url($item);
+    $vars['polyfills_array'][] = $respondjs;
   }
   // If load_html5js is enabled...
   if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $vars['polyfills_array'][] = $vars['base_path'] . $path_to_at_core .'/js/respond.js';
+    $item = $path_to_at_core .'/js/html5.js';
+    $html5js = file_create_url($item);
+    $vars['polyfills_array'][] = $html5js;
   }
 
   // Font loader
