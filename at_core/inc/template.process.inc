@@ -9,7 +9,7 @@
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
-  global $theme_key;
+  global $theme_key, $path_to_at_core;
   $theme_name = $theme_key;
 
   // Polyfills
@@ -18,16 +18,16 @@ function adaptivetheme_process_html(&$vars) {
     $fills = array();
     $query_string = variable_get('css_js_query_string', '0');
     foreach ($vars['polyfills_array'] as $key => $value) {
-      $fills[] = '<script src="' . $value . '?' . $query_string . '"></script>' . "\n";
+      $fills[] = "\n" . '<script src="' . $value . '?' . $query_string . '"></script>';
     }
     $fills = implode("\n", $fills);
-    $vars['polyfills'] = '<!--[if lt IE 9]>' . "\n" . $fills . '<![endif]-->' . "\n";
+    $vars['polyfills'] = '<!--[if lt IE 9]>' . $fills . "\n" . '<![endif]-->' . "\n";
   }
 
   // Load the panels test, more debugging tools...
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {
-       $panels_test = file_get_contents(drupal_get_path('theme', 'adaptivetheme') . '/layouts/panels_test.html');
+       $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
        $vars['page'] = $panels_test;
     }
   }
@@ -140,7 +140,7 @@ function adaptivetheme_process_block(&$vars) {
   if ($vars['block']->region === 'menu_bar') {
     // They are always menu blocks, right?
     $vars['tag'] = 'nav';
-    $vars['content_processed'] = $vars['content'];
+    $vars['content_processed'] = $vars['content']; // this could get a wrapper
   }
 
   // Now we know all the block $tag's, we can generate our wrapper

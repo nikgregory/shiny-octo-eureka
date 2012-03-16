@@ -302,17 +302,13 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // If load_respondjs is enabled...
+  // Set a variable for polyfills
+  $vars['polyfills_array'] = array();
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $item = $path_to_at_core .'/js/respond.js';
-    $respondjs = file_create_url($item);
-    $vars['polyfills_array'][] = $respondjs;
+    $vars['polyfills_array'][] = file_create_url($path_to_at_core . '/js/respond.js');
   }
-  // If load_html5js is enabled...
   if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $item = $path_to_at_core .'/js/html5.js';
-    $html5js = file_create_url($item);
-    $vars['polyfills_array'][] = $html5js;
+    $vars['polyfills_array'][] = file_create_url($path_to_at_core . '/js/html5.js');
   }
 
   // Font loader

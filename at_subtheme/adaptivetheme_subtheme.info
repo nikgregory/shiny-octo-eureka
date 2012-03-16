@@ -204,13 +204,13 @@
 
 
   ; Font type
-  settings[base_font_type]          = 'wsf'
-  settings[site_name_font_type]     = 'wsf'
-  settings[site_slogan_font_type]   = 'wsf'
-  settings[page_title_font_type]    = 'wsf'
-  settings[node_title_font_type]    = 'wsf'
-  settings[comment_title_font_type] = 'wsf'
-  settings[block_title_font_type]   = 'wsf'
+  settings[base_font_type]          = ''
+  settings[site_name_font_type]     = ''
+  settings[site_slogan_font_type]   = ''
+  settings[page_title_font_type]    = ''
+  settings[node_title_font_type]    = ''
+  settings[comment_title_font_type] = ''
+  settings[block_title_font_type]   = ''
 
 
   ; Fonts
