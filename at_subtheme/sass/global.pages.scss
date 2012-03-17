@@ -61,6 +61,32 @@ div.error, tr.error {}
   /* color: #e09010; */
   /* Drupal core uses a #e09010 background */ }
 
+.node-unpublished, .comment-unpublished /* Unpublished nodes */ {
+  /* background-color: #fff4f4; Drupal core uses a #fff4f4 background */ }
+
+.node-unpublished, .comment-unpublished {
+  /* background-color: #fff4f4; */
+  /* Drupal core uses a #fff4f4 background */
+  p.unpublished {
+    color: #fff;
+    color: rgba(239, 170, 170, 0.4);
+    font-family: Impact,"Arial Narrow",Helvetica,sans-serif;
+    font-size: 75px;
+    font-weight: bold;
+    height: 0;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    text-align: center;
+    text-transform: uppercase;
+    word-wrap: break-word; } }
+
+.lt-ie8 {
+  .node-unpublished > *, .comment-unpublished > * {
+    position: relative;
+    /* Otherwise these elements will appear below the "Unpublished" text. */ } }
+
 .region-help, .more-help-link, .region-content, .region-aside {}
 
 ul.links {

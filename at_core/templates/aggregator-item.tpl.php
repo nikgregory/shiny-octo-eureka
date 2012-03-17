@@ -18,9 +18,9 @@
  * @see adaptivetheme_preprocess_aggregator_item()
  */
 ?>
-<article class="feed-item">
+<article class="<?php print $classes; ?>">
   <header>
-    <h2 class="title feed-item-title">
+    <h2<?php print $title_attributes; ?>>
       <a href="<?php print $feed_url; ?>"><?php print $feed_title; ?></a>
     </h2>
     <p class="feed-item-meta">
@@ -31,11 +31,15 @@
     </p>
   </header>
   <?php if ($content) : ?>
-    <div class="content"><?php print $content; ?></div>
+    <div<?php print $content_attributes; ?>>
+      <?php print $content; ?>
+    </div>
   <?php endif; ?>
   <?php if ($categories): ?>
     <footer>
-      <p><strong><?php print t('Categories'); ?></strong> - <?php print implode(', ', $categories); ?></p>
+      <p class="feed-item-categories">
+        <strong><?php print t('Categories'); ?></strong> - <?php print implode(', ', $categories); ?>
+      </p>
     </footer>
   <?php endif; ?>
 </article>

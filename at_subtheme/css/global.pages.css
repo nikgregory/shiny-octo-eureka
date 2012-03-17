@@ -105,7 +105,7 @@ div.status /* Normal priority messages */ {
 
 div.warning,
 tr.warning /* Medium priority messages */ {
-  /* border: 1px solid #f0c020; */ /* Drupal core uses: 1px solid #f0c020 */
+  /* border: 1px solid #f0c020; Drupal core uses: 1px solid #f0c020 */
 }
 
 div.error,
@@ -113,11 +113,38 @@ tr.error /* High priority messages. See also the .error declaration below. */ {
 }
 
 .error /* Errors that are separate from div.messages status messages. */ {
-  /* color: #e55; */ /* Drupal core uses a #e55 background */
+  /* color: #e55; Drupal core uses a #e55 background */
 }
 
 .warning /* Warnings that are separate from div.messages status messages. */ {
-  /* color: #e09010; */ /* Drupal core uses a #e09010 background */
+  /* color: #e09010; Drupal core uses a #e09010 background */
+}
+
+.node-unpublished,
+.comment-unpublished /* Unpublished nodes */ {
+  /* background-color: #fff4f4; Drupal core uses a #fff4f4 background */
+}
+
+.node-unpublished p.unpublished,
+.comment-unpublished p.unpublished /* The word "Unpublished" displayed underneath the content. */ {
+  color: #fff;
+  color: rgba(239, 170, 170, 0.4);
+  font-family: Impact,"Arial Narrow",Helvetica,sans-serif;
+  font-size: 75px;
+  font-weight: bold;
+  height: 0;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.lt-ie8 .node-unpublished > *,
+.lt-ie8 .comment-unpublished > * {
+  position: relative; /* Otherwise these elements will appear below the "Unpublished" text. */
 }
 
 .region-help /* Help text on a page */ {

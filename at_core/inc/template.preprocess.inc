@@ -27,7 +27,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Clean up the lang attributes, great idea Zen
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
-  
+
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
   if (theme_get_setting('skip_link_target', $theme_name)) {
@@ -42,7 +42,8 @@ function adaptivetheme_preprocess_html(&$vars) {
       $vars['classes_array'][] = 'lang-' . $vars['language']->language;
     }
 
-    // Site name class, for multi-sites
+    // Site name class, for multi site installs that need to target styles
+    // at each site seperately (mitigates things like block-id classes)
     if (!empty($vars['head_title_array']['name'])) {
       $vars['classes_array'][] = 'site-name-' . drupal_html_class($vars['head_title_array']['name']);
     }
@@ -82,7 +83,8 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Headings classes, bizzarly these must be added in html.tpl.php, since title_attributes_array is useless
+  // Page title classes
+  // Oddly these must be added in html.tpl.php on body, since title_attributes_array is useless
   //if ($vars['menu_item']['title']) { // Leaving this check out for now, not sure if this is safe
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -98,7 +100,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   //}
-  //dsm($vars['menu_item']['title']);
+  //dsm($vars['menu_item']['title']); //dubug it
 
   // Add a body class if the site name is hidden - state driven dynamic
   // classes are very useful and AT does this a lot
@@ -123,38 +125,33 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Set a variable for the mode, AT has 2 modes, production and development
   $mode = theme_get_setting('production_mode', $theme_name);
 
-  /**
-   * Responsive Stylesheet Loader: Development Mode
-   *
-   * We only load these files if:
-   * - 1: We're not in production mode
-   * - 2: Responsiveness is not disabled
-   *
-   * When in production mode these files are aggregated into one file
-   * and loaded using load_subtheme_responsive_styles().
-   *
-   * You can disable responsive capability using the theme settings - look under
-   * the Global settings. Do not delete or alter this - use the theme setting!
-   */
-   if ($mode === 0) {
-     if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+  // Responsive Styles Loader: Development Mode
+  //
+  // These files are for "design style" only, the layout is handled
+  // seperately.
+  //
+  // We only load these files if:
+  // - 1: We're not in production mode
+  // - 2: Responsiveness is not disabled
+  //
+  // When in production mode these files are aggregated into one file
+  // and loaded using load_subtheme_responsive_styles().
+  //
+  // You can disable responsive capability using the theme settings - look under
+  // the Global settings. Do not delete or alter this - use the theme setting!
+  if ($mode === 0) {
+    if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
 
-      // Get the media query for each device group.
-      $smartphone_portrait_media_query  = theme_get_setting('smartphone_portrait_media_query', $theme_name);
-      $smartphone_landscape_media_query = theme_get_setting('smartphone_landscape_media_query', $theme_name);
-      $tablet_portrait_media_query      = theme_get_setting('tablet_portrait_media_query', $theme_name);
-      $tablet_landscape_media_query     = theme_get_setting('tablet_landscape_media_query', $theme_name);
-      $desktop_media_query              = theme_get_setting('bigscreen_media_query', $theme_name);
-
-      // Next build a keyed array of CSS file-names as key, and media query as value.
+      // Build a keyed array of CSS file-names as key, and media query as value.
       // The file names must match the files in your themes CSS directory, if
-      // you change them you must update to match.
+      // you change them you must update to match. theme_get_setting() caches and
+      // is quite cheap, in any case we're in development mode.
       $files = array(
-        'responsive.smartphone.portrait'  => $smartphone_portrait_media_query,
-        'responsive.smartphone.landscape' => $smartphone_landscape_media_query,
-        'responsive.tablet.portrait'      => $tablet_portrait_media_query,
-        'responsive.tablet.landscape'     => $tablet_landscape_media_query,
-        'responsive.desktop'              => $desktop_media_query,
+        'responsive.smartphone.portrait'  => theme_get_setting('smartphone_portrait_media_query', $theme_name),
+        'responsive.smartphone.landscape' => theme_get_setting('smartphone_landscape_media_query', $theme_name),
+        'responsive.tablet.portrait'      => theme_get_setting('tablet_portrait_media_query', $theme_name),
+        'responsive.tablet.landscape'     => theme_get_setting('tablet_landscape_media_query', $theme_name),
+        'responsive.desktop'              => theme_get_setting('bigscreen_media_query', $theme_name),
       );
 
       // Add the cascading stylesheet if enabled
@@ -165,7 +162,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
 
       // Loop over the files array and load each CSS.
-      // load_subtheme_responsive_styles() takes 3 arguements:
+      // load_subtheme_responsive_styles() takes three parameters:
       // - $css_file - the name of the css file
       // - $media_query - the media query from theme settings to use for the media attribute
       // - $theme_name - to generate the path-to-theme for drupal_add_css()
@@ -180,7 +177,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // In Production mode we only load one file for responsive styles.
   // We use a media query to prevent non media query browsers from downloading it.
   // The embedded media queries in this file take precedence always.
-  if ($mode === 1) {
+  else if ($mode === 1) {
     $file = $theme_name . '.responsive.styles.css';
     $media_query = 'only screen and (min-width:1px)';
     if (!empty($file)) {
@@ -196,6 +193,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
+  // Layout
   // In layout.inc we built 3 layout stylesheets:
   // 1. themeName.default.layout.css
   // 2. themeName.responsive.layout.css
@@ -243,7 +241,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // 1. Responsive capabilities are ON
   // 2. Mobile first is ON
   // 3. Respond.js is OFF
-  // Note this excludes IEMobile 7
+  // Note this excludes IEMobile 7, screw you IEMobile 7
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
     if (theme_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
       if (theme_get_setting('load_respondjs', $theme_name) === 0) {
@@ -311,12 +309,16 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['polyfills_array'][] = file_create_url($path_to_at_core . '/js/html5.js');
   }
 
-  // Font loader
-  // Adaptivetheme can load websafe fonts, Google fonts
-  // custom font stacks and integrate with @font-your-face module.
-  // All can be configured in the "Fonts" theme settings.
+  // Google Font loader
+  // Adaptivetheme can load websafe fonts, Google fonts, custom font 
+  // stacks and integrate with @font-your-face module. All can be 
+  // configured in the "Fonts" theme settings. Here we only need to 
+  // load Google webfonts. Websafe and custom fonts are stored in a 
+  // CSS file (in public files) and @font-your-face module takes
+  // care of loading its own fonts.
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
-    // Pull in the font lists
+
+    // Include the font lists, we need these for the font names
     include_once($path_to_at_core . '/inc/font.lists.inc');
 
     $used_fonts = array();
@@ -330,14 +332,15 @@ function adaptivetheme_preprocess_html(&$vars) {
         $setting = theme_get_setting($setting . '_gwf', $theme_name);
         // strip the element prefix
         $font = str_replace($element . '-', '', $setting);
-        // replace hyphens with spaces, now we have a lower case font name, no good,
+        // replace hyphens with spaces, now we have a lower case font name, still no good,
         // Google won't like it and will return the dreaded "font not supported" error
         $used_fonts[] = str_replace('-', ' ', $font);
       }
     }
     if (!empty($used_fonts)) {
       // Get the full list of font names, remember Google fonts are case sensitive, and
-      // you cannot just uppercase/ucfirst, font names are not consistant
+      // you cannot just uppercase/ucfirst, font names are not consistant! Got a better
+      // way of doing this? Please tell me about it!
       $google_fonts = google_font_names();
       // Populate a variable with lower cased font names
       $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
@@ -433,14 +436,19 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['visibility'] = '';
     $vars['hide_site_name'] = FALSE;
   }
-  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal')); /* Convert entitles if used, cunning... */
+  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
   $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
       'title' => t('Home page')),
     )
   ) : '';
 
-  // Headings
+  // Headings Classes 
+  // oh oh, whats this, a theme using the page $classes_array, unheard of!
+  // This is all about scope - its easy to set these on body, but thats the wrong scope
+  // imo. AT wants to target the right scope always and not abuse the body element. This 
+  // is not as DRY as it could be, particulary for blocks/nodes/comments etc but it does
+  // open the door for more granularity (i.e. target one block or block type).
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_array = array();
     if ($vars['hide_site_name'] = FALSE) {
@@ -464,17 +472,13 @@ function adaptivetheme_preprocess_page(&$vars) {
 
   // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
-    $text = t('Main menu');
-    if (module_exists('block')) {
-      $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
-    }
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('menu', 'primary-menu', 'clearfix'),
        ),
       'heading' => array(
-        'text' => $text,
+        'text' => t('Main menu'),
         'level' => 'h2',
         'class' => array('element-invisible'),
       )
@@ -514,7 +518,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   // Remove block system main, just from the front page
   if (drupal_is_front_page()) {
     if (theme_get_setting('unset_block_system_main_front', $theme_name) === 1) {
-      $vars['page']['content']['system_main'] = '';
+      $vars['page']['content']['system_main'] = ''; // Brutal but effective
     }
   }
 
@@ -541,7 +545,9 @@ function adaptivetheme_preprocess_region(&$vars) {
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
-  // Add classes to conditional stack regions
+  // Add classes to conditional stack regions in
+  // Gpanel regions, in Panels responsive layout
+  // plugins these are hard coded.
   $conditional_stack_regions = array(
     'three_25_25_50_top',
     'three_25_25_50_bottom',
@@ -603,7 +609,8 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
   }
 
-  // Add title style classes
+  // Add title style classes, these are loaded via the classes_arry and not title_attributes_array
+  // so we can style the whole block depending on the title styles.
   if (isset($vars['block']->subject)) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -628,7 +635,7 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['classes_array'][] = 'lb-s';
   }
 
-  // Give our block titles and content some class
+  // Give our block titles and content some additional class
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
@@ -688,7 +695,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $theme_name = $theme_key;
 
   // Extra classes if required
-  if (theme_get_setting('extra_article_classes', $theme_name)) {
+  if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
     // Zebra
     $vars['classes_array'][] = $vars['zebra'];
     // Langauge
@@ -707,7 +714,8 @@ function adaptivetheme_preprocess_node(&$vars) {
     }
   }
 
-  // Add title style classes
+  // Add title style classes, as per blocks these are added to classes_array not title_attraibutes_array
+  // so we can style the entire node based on how the title wants to be handled (such as alignmment)
   if (isset($vars['title'])) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -732,7 +740,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['content_attributes_array']['class'][] = 'node-content';
 
   // Build the submitted by and time elements
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, we need to build it
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, if you see a theme doing this blast them about it, it will give all your nodes the WRONG time stamp!
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
       array(
@@ -748,7 +756,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   // Unpublised?
   $vars['unpublished'] = '';
   if (!$vars['status']) {
-    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+    $vars['unpublished'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
   }
 }
 
@@ -758,6 +766,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 function adaptivetheme_preprocess_comment(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
+
   // Extra comment classes if required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 1) {
     // Zebra
@@ -785,6 +794,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   // Classes for comment title
   $vars['title_attributes_array']['class'][] = 'comment-title';
+
   // Title hidden?
   if (theme_get_setting('comments_hide_title', $theme_name) === 1) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
@@ -827,21 +837,17 @@ function adaptivetheme_preprocess_comment(&$vars) {
   // Unpublished?
   $vars['unpublished'] = '';
   if ($vars['status'] === 'comment-unpublished') {
-    $vars['unpublished'] = '<div class="unpublished">' . t('Unpublished') . '</div>';
+    $vars['unpublished'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
   }
-}
-
-/**
- * Preprocess variables for the comment wrapper template.
- */
-function adaptivetheme_preprocess_comment_wrapper(&$vars) {
 }
 
 /**
  * Preprocess variables for the search block form.
  */
 function adaptivetheme_preprocess_search_block_form(&$vars) {
-  // Changes the search form to use the "search" input element attribute
+  // Changes the search form to use the "search" input element attribute (HTML5)
+  // We have to replace the string because FAPI don't know what type=search is, i.e.
+  // no way we can do this in an alter hook
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
 
@@ -895,7 +901,10 @@ function adaptivetheme_preprocess_field(&$vars) {
   // add a view mode class to fields
   $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
 
-  // provide an variable we can use to test the view mode inside templates
+  // provide an variable we can use to test the view mode inside templates, I found
+  // $element['#view_mode'] impossible to get to inside the template, which may be a
+  // lack of understanding of render arrays and how we can access variables, or that
+  // Drupal theme layer is so horribly inconsistant it drives me insane.
   $vars['field_view_mode'] = $element['#view_mode'] ? $element['#view_mode'] : '';
 
   // enable captioning capability for image fields
@@ -916,7 +925,13 @@ function adaptivetheme_preprocess_field(&$vars) {
  */
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
+  // We want the same highly accurate time stamp feature as nodes and comments
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
+  
+  // Give our aggregator items some class
+  $vars['classes_array'][] = 'feed-item clearfix';
+  $vars['title_attributes_array']['class'][] = 'title feed-item-title';
+  $vars['content_attributes_array']['class'][] = 'content feed-item-content';
 }
 
 /**

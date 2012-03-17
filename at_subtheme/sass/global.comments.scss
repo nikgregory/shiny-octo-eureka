@@ -60,14 +60,6 @@
   // Drupal core will use a #ffffea background. See #1110842
   background-color: #ffffea; }
 
-// Unpublished comments
-.comment-unpublished {
-  // Drupal core uses a #fff4f4 background
-  // background-color: #fff4f4;
-
-  // The word "Unpublished" displayed underneath the content. See also the div.unpublished declaration in the nodes.css.
-  div.unpublished { } }
-
 // Comment is new for the current user
 .comment-new { }
 

@@ -34,13 +34,6 @@
 .comment.even /* An even-numbered comment in the list of comments */ {
 }
 
-.comment-unpublished /* Unpublished comments */ {
-  /* background-color: #fff4f4; */ /* Drupal core uses a #fff4f4 background */
-}
-
-.comment-unpublished div.unpublished /* The word "Unpublished" displayed underneath the content. See also the div.unpublished declaration in the nodes.css. */ {
-}
-
 .comment-new /* Comment is new for the current user */ {
 }
 

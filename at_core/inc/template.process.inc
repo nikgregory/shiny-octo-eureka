@@ -18,13 +18,13 @@ function adaptivetheme_process_html(&$vars) {
     $fills = array();
     $query_string = variable_get('css_js_query_string', '0');
     foreach ($vars['polyfills_array'] as $key => $value) {
-      $fills[] = "\n" . '<script src="' . $value . '?' . $query_string . '"></script>';
+      $fills[] = '<script src="' . $value . '?' . $query_string . '"></script>';
     }
     $fills = implode("\n", $fills);
-    $vars['polyfills'] = '<!--[if lt IE 9]>' . $fills . "\n" . '<![endif]-->' . "\n";
+    $vars['polyfills'] = '<!--[if lt IE 9]>' . "\n"  . $fills . "\n" . '<![endif]-->' . "\n";
   }
 
-  // Load the panels test, more debugging tools...
+  // Load the panels test
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {
        $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
@@ -56,7 +56,9 @@ function adaptivetheme_process_page(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Call our helper function to wrap menus in extra markup
+  // Call our helper function to wrap menus in extra markup, this is quite unfriendly
+  // way to do this, but in reality it appears not to matter that much, users seldom if ever
+  // need to modify this markup.
   if (!empty($vars['primary_navigation'])) {
     $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
   }
