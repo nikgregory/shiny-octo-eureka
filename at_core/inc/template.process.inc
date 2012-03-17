@@ -12,18 +12,8 @@ function adaptivetheme_process_html(&$vars) {
   global $theme_key, $path_to_at_core;
   $theme_name = $theme_key;
 
-  // Polyfills
-  $vars['polyfills'] = '';
-  if (!empty($vars['polyfills_array'])) {
-    $fills = array();
-    $query_string = variable_get('css_js_query_string', '0');
-    foreach ($vars['polyfills_array'] as $key => $value) {
-      $fills[] = '<script src="' . $value . '?' . $query_string . '"></script>';
-    }
-    $fills = implode("\n", $fills);
-    $vars['polyfills'] = '<!--[if lt IE 9]>' . "\n"  . $fills . "\n" . '<![endif]-->' . "\n";
-  }
-
+  //dsm($vars);
+  
   // Load the panels test
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {

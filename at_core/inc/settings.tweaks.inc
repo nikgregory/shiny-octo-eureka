@@ -16,7 +16,7 @@
     '#type' => 'checkbox',
     '#title' => t('Fonts'),
     '#default_value' => theme_get_setting('enable_font_settings'),
-    '#description' => t('Apply fonts to site elements - includes websafe font-stacks, Google fonts and @font-your-face integration.'),
+    '#description' => t('Apply fonts to site elements - includes websafe font-stacks, Google fonts and <a href="!link" target="_blank">@font-your-face</a> integration.', array('!link' => 'http://drupal.org/project/fontyourface')),
   );
   $form['at']['site-tweaks']['style-settings']['enable_heading_settings'] = array(
     '#type' => 'checkbox',
@@ -72,26 +72,6 @@
     '#default_value' => theme_get_setting('unset_block_system_main_front'),
     '#description' => t('Checking this setting will remove the Main content block from the front page only - useful for removing the welcome message and allowing use of another block.'),
   );
-  // Add stuff
-  $form['at']['site-tweaks']['add-stuff'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Add Stuff'),
-    '#description' => t('<h3>Add Stuff</h3>'),
-  );
-  // Use the page full width wrappers template
-  $form['at']['site-tweaks']['add-stuff']['page_full_width_wrappers'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Use page--full-width-wrappers.tpl.php by default'),
-    '#description' => t('This setting will load a page template will full width DIV wrappers - perfect for designs with 100% width sections, header or footer. Note that if you choose to use other page template suggestions you should use copies of page--full-width-wrappers.tpl.php, you will find this in adaptivetheme/at-core/templates.'),
-    '#default_value' => theme_get_setting('page_full_width_wrappers'),
-  );
-  // Add spans to theme_links
-  $form['at']['site-tweaks']['add-stuff']['menu_item_span_elements'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Wrap menu item text in SPAN tags - useful for certain theme or design related techniques'),
-    '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
-    '#default_value' => theme_get_setting('menu_item_span_elements'),
-  );
   // Change stuff
   $form['at']['site-tweaks']['change-stuff'] = array(
     '#type' => 'fieldset',
@@ -99,9 +79,48 @@
     '#description' => t('<h3>Change Stuff</h3>'),
   );
   // Use the page full width wrappers template
+  $form['at']['site-tweaks']['change-stuff']['page_full_width_wrappers'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use page--full-width-wrappers.tpl.php by default'),
+    '#description' => t('This setting will load a page template will full width DIV wrappers - perfect for designs with 100% width sections, header or footer. Note that if you choose to use other page template suggestions you should use copies of page--full-width-wrappers.tpl.php, you will find this in adaptivetheme/at-core/templates.'),
+    '#default_value' => theme_get_setting('page_full_width_wrappers'),
+  );
+  // Use the page full width wrappers template
   $form['at']['site-tweaks']['change-stuff']['skip_link_target'] = array(
     '#type' => 'textfield',
     '#title' => t('Modify the Skip link target'),
     '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
     '#default_value' => theme_get_setting('skip_link_target'),
+  );
+  // Add stuff
+  $form['at']['site-tweaks']['add-stuff'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Add Stuff'),
+    '#description' => t('<h3>Add Stuff</h3>'),
+  );
+  // Apple touch icon
+  $form['at']['site-tweaks']['add-stuff']['apple_touch_icon_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Apple touch icon'),
+    '#description' => t('Check this setting if you want to use an Apple touch icon for iOS and Android devices.'),
+    '#default_value' => theme_get_setting('apple_touch_icon_enable'),
+  );
+  $form['at']['site-tweaks']['add-stuff']['apple_touch_icon_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set the path to your custom Apple touch icon'),
+    '#description' => t('The path must be relative to your themes root folder.'),
+    '#field_prefix' => $theme_name . '/',
+    '#default_value' => theme_get_setting('apple_touch_icon_path'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="apple_touch_icon_enable"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  // Add spans to theme_links
+  $form['at']['site-tweaks']['add-stuff']['menu_item_span_elements'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Wrap menu item text in SPAN tags - useful for certain theme or design related techniques'),
+    '#description' => t('Note: this does not work for <a href="!link" target="_blank">Superfish menus</a>, which includes its own feature for doing this.', array('!link' => 'http://drupal.org/project/superfish')),
+    '#default_value' => theme_get_setting('menu_item_span_elements'),
   );

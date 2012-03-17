@@ -188,6 +188,10 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   display: table;
   width: 97%;
 }
+.panel-option-lists .fieldset-wrapper .fieldset-wrapper {
+    padding: 0;
+    margin-left: 3%;
+}
 .panel-option-lists .fieldset-wrapper > .form-item {
   display: table-row;
 }
@@ -300,6 +304,12 @@ fieldset#edit-font .fieldset-wrapper legend {
 fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
   padding-top: 35px;
 }
+#edit-font > .fieldset-wrapper > fieldset.collapsed {
+  background: transparent;
+}
+#edit-base-font {
+  margin-bottom: 11px;
+}
 
 /* style select list websafe fonts */
 .font-element-wrapper option[value$=-ssl] {font-family: Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;}
@@ -351,7 +361,6 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
   padding-top: 2.2em;
 }
 
-
 /* Global settings form is ugly */
 #edit-global-settings .fieldset-description {
   padding-bottom: 0;
@@ -381,4 +390,15 @@ input[disabled] {
 }
 .admin-theme-seven .panel-option-lists .form-type-radio {
   margin-right: 20px;
+}
+
+/* skinp link target/ Apple touch */
+.form-item-skip-link-target label,
+.form-item-apple-touch-icon-path label {
+  display: block;
+}
+
+/* Misc */
+.field-prefix {
+  color: #666;
 }

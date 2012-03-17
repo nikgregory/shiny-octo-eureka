@@ -7,7 +7,9 @@
 function at_theme_settings_validate($form, &$form_state) {
 
   $values = $form_state['values'];
-
+  $theme_name = $form_state['build_info']['args'][0];
+  
+  
   // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
@@ -22,6 +24,16 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
   }
+  
+  // Check if the apple touch icon path is correct
+  if ($values['apple_touch_icon_enable'] === 1) {
+    $path = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path'];
+    if (!file_exists($path)) {
+      form_set_error('apple_touch_icon_path', t('Ops! The Apple touch icon path is wrong, check the file exists or the path to the file is correct.'));
+    }
+  }
+  
+  
   // Custom font stacks are "required" using form states also...
   /*
   if ($values['enable_font_settings'] === 1) {

@@ -82,7 +82,7 @@
   $form['at-layout']['global-settings']['meta']['mobile_friendly_metatags'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable mobile friendly metatags'),
-    '#description' => t('TODO: add link to mobile metatags documentation.'),
+    //'#description' => t('Don\'t include quotes around the metatag content.'),
     '#default_value' => theme_get_setting('mobile_friendly_metatags'),
     '#states' => array(
       'invisible' => array(
@@ -159,6 +159,18 @@
     '#title' => t('Enable HTML5 support in IE8 and below'),
     '#description' => t('By checking this setting the site will load the <a href="!link3" target="_blank">html5shiv</a>.', array('!link3' => '//github.com/aFarkas/html5shiv')),
     '#default_value' => theme_get_setting('load_html5js'),
+  );
+  $form['at-layout']['global-settings']['polyfills']['load_boxsizinghtc'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Box Sizing HTC fix for IE'),
+    '#description' => t('A polyfill for <code>box-sizing: border-box</code> for IE6 and IE7. Read the usage docs: TODO insert link to docs.', array('!link3' => '//github.com/aFarkas/html5shiv')),
+    '#default_value' => theme_get_setting('load_boxsizinghtc'),
+  );
+  $form['at-layout']['global-settings']['polyfills']['load_scalefixjs'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Scalefix for iOS'),
+    '#description' => t('This prevents iOS from overscaling the page on orientation change while preserving accessibility (scaling capability).', array('!link3' => '//github.com/aFarkas/html5shiv')),
+    '#default_value' => theme_get_setting('load_scalefixjs'),
   );
 
   // Disable responsive layout

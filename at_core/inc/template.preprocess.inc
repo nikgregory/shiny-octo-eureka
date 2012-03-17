@@ -18,7 +18,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['path_to_adaptivetheme'] = $path_to_at_core;
   $vars['polyfills_array'] = array();
 
-  // dsm($vars);
+  //dsm($vars);
 
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -300,13 +300,69 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Set a variable for polyfills
+  // Polyfills
+  // Build an array of scripts to load. 
+  // You can easily add to this array in your own preprocess function and use the
+  // array keys provided, or add your own. By default AT will load for "lt ie9", 
+  // "lt ie8" and "all". If you add your own keys you have to process them as well, 
+  // there is no generic loader, see below.
   $vars['polyfills_array'] = array();
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $vars['polyfills_array'][] = file_create_url($path_to_at_core . '/js/respond.js');
+    $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
   }
   if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $vars['polyfills_array'][] = file_create_url($path_to_at_core . '/js/html5.js');
+    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
+  }
+  if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
+    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
+  }
+  if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
+    $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
+  }
+  
+  // Load Polyfills
+  if (!empty($vars['polyfills_array'])) {
+    
+    // We need the query string for cache control fingerprinting
+    $query_string = variable_get('css_js_query_string', '0');
+    
+    // all - no conditional comment needed, use drupal_add_js()
+    if (!empty($vars['polyfills_array']['all'])) {
+      foreach ($vars['polyfills_array']['all'] as $script) {
+        drupal_add_js($script,
+          array(
+            'type' => 'file',
+            'scope' => 'header',
+            'group' => JS_THEME,
+            'preprocess' => TRUE,
+            'cache' => TRUE,
+          )
+        );
+      }
+    }
+    // lt ie9 - need to build our own "scripts" variable ($vars['polyfills']) 
+    // wrapping the scripts in a conditional comments
+    if (!empty($vars['polyfills_array']['lt_ie9'])) {
+      $condition = 'lt IE 9';
+      foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
+        $script = file_create_url($ie9_polyfill);
+        $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+      }
+      $ie9_fills = implode("\n", $ie9_fills);
+      $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
+    }
+    // lt ie8 - same as for lt ie 9, add to the $vars['polyfills'] array
+    if (!empty($vars['polyfills_array']['lt_ie8'])) {
+      $condition = 'lt IE 8';
+      foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
+        $script = file_create_url($ie8_polyfill);
+        $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+      }
+      $ie8_fills = implode("\n", $ie8_fills);
+      $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
+    }
+    // Finally populate the $polyfills variable which is printed in html.tpl.php
+    $vars['polyfills'] = implode("\n", $vars['polyfills']);
   }
 
   // Google Font loader
@@ -399,7 +455,6 @@ function adaptivetheme_preprocess_html(&$vars) {
     );
   }
 }
-
 
 /**
  * Preprocess variables for page.tpl.php

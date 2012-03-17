@@ -22,6 +22,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // Get the admin theme so we can set a class for styling, Seven does mental things with forms in vertical tabs...
   $admin_theme = variable_get('admin_theme');
+  
+  // Get the active theme name, we might need it at some stage
+  $theme_name = $form_state['build_info']['args'][0];
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form

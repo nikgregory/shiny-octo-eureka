@@ -321,3 +321,8 @@
   
   ; Skip link
   settings[skip_link_target] = '#main-content'
+
+  ; Touch icons
+  settings[apple_touch_icon_enable] = 0
+  settings[apple_touch_icon_path] = 'touch-icon.png'
+  

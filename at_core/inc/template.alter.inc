@@ -7,7 +7,7 @@
  
 // hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {
-  global $theme_key;
+  global $theme_key, $path_to_at_core;
   $theme_name = $theme_key;
 
   // charset utf-8
@@ -84,6 +84,28 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       '#weight' => 6,
     );
   }
+  // Apple touch icons
+  if (theme_get_setting('apple_touch_icon_enable') === 1) {
+    $path = drupal_get_path('theme', $theme_name) .'/'. theme_get_setting('apple_touch_icon_path', $theme_name);
+    $touch_icon = file_create_url($path);
+    $head_elements['adaptivetheme_ios_touch_icon'] = array(
+      '#type' => 'html_tag', 
+      '#tag' => 'link', 
+      '#attributes' => array(
+        'href' => $touch_icon, 
+        'rel' => "apple-touch-icon",
+      ),
+    );
+    $head_elements['adaptivetheme_andriod_touch_icon'] = array(
+      '#type' => 'html_tag', 
+      '#tag' => 'link', 
+      '#attributes' => array(
+        'href' => $touch_icon, 
+        'rel' => "apple-touch-icon-processed",
+      ),
+    );
+  }
+
   // dsm($head_elements); 
 }
 
@@ -93,7 +115,7 @@ function adaptivetheme_js_alter(&$javascript) {
   $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
 
-  // dsm($javascript);
+  //dsm($javascript);
 }
 
 // hook_page_alter()
@@ -111,7 +133,7 @@ function adaptivetheme_page_alter(&$page) {
       }
     }
   }
-  // dsm($page);
+  //dsm($page);
 }
 
 /* debug
