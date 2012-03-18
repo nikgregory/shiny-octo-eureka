@@ -2,105 +2,146 @@
 // @file
 // Block Styling
 //
+
+
+// Main wrapper for most blocks - block_system_main does not have it
 .block {
-  margin-bottom: 20px; }
-.block-inner { }
+  margin-bottom: 20px;
+}
+
+
+// Inner wrapper for most block - block_system_main does not have it
+.block-inner {}
+
 
 // The first block in the region
-.block.first { }
+.block.first {}
+
 
 // The last block in the region
-.block.last  { }
+.block.last  {}
+
 
 // Zebra striping for each block in the region
-.block.odd { }
+.block.odd {}
+
 
 // Zebra striping for each block in the region
-.block.even { }
+.block.even {}
+
 
 // Block title
-h2.block-title { }
+h2.block-title {}
+
 
 // Block content wrapper
-.block-content { }
+.block-content {}
+
 
 // Block for the latest news items in the first category
-#block-aggregator-category-1  { }
+#block-aggregator-category-1 {}
+
 
 // Block for the latest news items in the first feed
-#block-aggregator-feed-1 { }
+#block-aggregator-feed-1 {}
+
 
 // First block created with "Add block" link
-#block-block-1 { }
+#block-block-1 {}
+
 
 // "Recent blog posts" block
-#block-blog-recent { }
+#block-blog-recent {}
+
 
 // "Book navigation" block for the current book's table of contents
-#block-book-navigation { }
+#block-book-navigation {}
+
 
 // "Recent comments" block
-#block-comment-recent { }
+#block-comment-recent {}
+
 
 // "Active forum topics" block
-#block-forum-active { }
+#block-forum-active {}
+
 
 // "New forum topics" block
-#block-forum-new { }
+#block-forum-new {}
+
 
 // Language switcher block
-#block-locale-language { }
+#block-locale-language {}
+
 
 // Custom menu block
-#block-menu-menu-NAME { }
+#block-menu-menu-NAME {}
+
 
 // "Recent content" block
-#block-node-recent { }
+#block-node-recent {}
+
 
 // "Syndicate" block for primary RSS feed; see also page.css's .feed-icon
-#block-node-syndicate { }
+#block-node-syndicate {}
+
 
 // "Most recent poll" block
-#block-poll-recent { }
+#block-poll-recent {}
+
 
 // "Author information" block for the profile of the page's author
-#block-profile-author-information { }
+#block-profile-author-information {}
+
 
 // "Search form" block
-#block-search-form { }
+#block-search-form {}
+
 
 // "Shortcuts" block
-#block-shortcut-shortcuts { }
+#block-shortcut-shortcuts {}
+
 
 // "Popular content" block
-#block-statistics-popular { }
+#block-statistics-popular {}
+
 
 // "Main menu" block
-#block-system-main-menu { }
+#block-system-main-menu {}
+
 
 // "Management" block for Drupal management menu
-#block-system-management { }
+#block-system-management {}
+
 
 // "Navigation" block for Drupal navigation menu
-#block-system-navigation { }
+#block-system-navigation {}
+
 
 // "User menu" block for Drupal user menu
-#block-system-user-menu { }
+#block-system-user-menu {}
+
 
 // "System help" block
 #block-system-help { }
 
+
 // "Main page content" block
 #block-system-main { }
+
 
 // "Powered by Drupal" block
 #block-system-powered-by { }
 
+
 // "User login form" block
 #block-user-login { }
+
 
 // "Who's new" block for a list of the newest users
 #block-user-new { }
 
+
 // "Who's online" block for a list of the online users
 #block-user-online { }
+

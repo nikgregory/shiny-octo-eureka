@@ -15,7 +15,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 
   // Viewport
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    if (theme_get_setting('mobile_friendly_metatags', $theme_name) === 1) {
+    if (theme_get_setting('enable_mobile_metatags', $theme_name) === 1) {
       // Viewport
       $adaptivetheme_meta_viewport = theme_get_setting('adaptivetheme_meta_viewport', $theme_name);
       $head_elements['adaptivetheme_meta_viewport'] = array(
@@ -85,7 +85,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
     );
   }
   // Apple touch icons
-  if (theme_get_setting('apple_touch_icon_enable') === 1) {
+  if (theme_get_setting('enable_apple_touch_icons') === 1) {
     // low
     $apple_touch_icon_path_l = theme_get_setting('apple_touch_icon_path_l', $theme_name);
     if (!empty($apple_touch_icon_path_l)) {

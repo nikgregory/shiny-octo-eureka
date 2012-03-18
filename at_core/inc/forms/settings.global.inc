@@ -2,7 +2,7 @@
   // Global Settings
   $form['at-layout']['global-settings'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Global Settings'),
+    '#title' => t('Settings'),
   );
   // Mode
   $form['at-layout']['global-settings']['mode'] = array(
@@ -73,92 +73,29 @@
       ),
     ),
   );
-  // Meta information
-  $form['at-layout']['global-settings']['meta'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Metatags'),
-    '#description' => t('<h3>Metatags</h3>'),
-  );
-  $form['at-layout']['global-settings']['meta']['mobile_friendly_metatags'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable mobile friendly metatags'),
-    //'#description' => t('Don\'t include quotes around the metatag content.'),
-    '#default_value' => theme_get_setting('mobile_friendly_metatags'),
-    '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
   
-  $form['at-layout']['global-settings']['meta']['adaptivetheme_meta_viewport'] = array(
-    '#type' => 'textfield',
-    '#title' => t('viewport'),
-    '#default_value' => theme_get_setting('adaptivetheme_meta_viewport'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="mobile_friendly_metatags"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at-layout']['global-settings']['meta']['adaptivetheme_meta_mobileoptimized'] = array(
-    '#type' => 'textfield',
-    '#title' => t('MobileOptimized'),
-    '#default_value' => theme_get_setting('adaptivetheme_meta_mobileoptimized'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="mobile_friendly_metatags"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at-layout']['global-settings']['meta']['adaptivetheme_meta_handheldfriendly'] = array(
-    '#type' => 'textfield',
-    '#title' => t('HandheldFriendly'),
-    '#default_value' => theme_get_setting('adaptivetheme_meta_handheldfriendly'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="mobile_friendly_metatags"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at-layout']['global-settings']['meta']['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
-    '#type' => 'textfield',
-    '#title' => t('apple-mobile-web-app-capable'),
-    '#default_value' => theme_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable'),
-    '#states' => array(
-      'visible' => array(
-        'input[name="mobile_friendly_metatags"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at-layout']['global-settings']['meta']['chrome_edge'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable Chrome Edge support for IE'),
-    '#description' => t('TODO: add link to Chrome Edge documentation.'),
-    '#default_value' => theme_get_setting('chrome_edge'),
-  );
   // Polyfills
   $form['at-layout']['global-settings']['polyfills'] = array(
     '#type' => 'fieldset',
     '#title' => t('Polyfills'),
     '#description' => t('<h3>Polyfills</h3>'),
-    '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['at-layout']['global-settings']['polyfills']['load_respondjs'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable media queries in IE8 and below'),
-    '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
-    '#default_value' => theme_get_setting('load_respondjs'),
   );
   $form['at-layout']['global-settings']['polyfills']['load_html5js'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable HTML5 support in IE8 and below'),
     '#description' => t('By checking this setting the site will load the <a href="!link3" target="_blank">html5shiv</a>.', array('!link3' => '//github.com/aFarkas/html5shiv')),
     '#default_value' => theme_get_setting('load_html5js'),
+  );
+  $form['at-layout']['global-settings']['polyfills']['load_respondjs'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable media queries in IE8 and below'),
+    '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
+    '#default_value' => theme_get_setting('load_respondjs'),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
   );
   $form['at-layout']['global-settings']['polyfills']['load_boxsizinghtc'] = array(
     '#type' => 'checkbox',
@@ -171,8 +108,12 @@
     '#title' => t('Enable Scalefix for iOS'),
     '#description' => t('This prevents iOS from overscaling the page on orientation change while preserving accessibility (scaling capability).', array('!link3' => '//github.com/aFarkas/html5shiv')),
     '#default_value' => theme_get_setting('load_scalefixjs'),
+    '#states' => array(
+      'invisible' => array(
+        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
+      ),
+    ),
   );
-
   // Disable responsive layout
   $form['at-layout']['global-settings']['disable-rs'] = array(
     '#type' => 'fieldset',

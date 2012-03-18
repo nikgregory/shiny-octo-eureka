@@ -293,7 +293,8 @@ video {
 .view-gmap img,
 .openlayers-map img,
 #getlocations_map_canvas img,
-#locationmap_map img {
+#locationmap_map img,
+.geofieldMap img {
   max-width: none !important;
 }
 

@@ -1,14 +1,18 @@
-<?php 
+<?php
+
+  // Breadcrumb settings
   $form['at']['breadcrumb'] = array(
-    '#type' => 'fieldset', 
+    '#type' => 'fieldset',
     '#title' => t('Breadcrumbs'),
-    '#weight' => 30,
+    '#description' => t('<h3>Breadcrumb Settings</h3>'),
+    '#weight' => -70,
   );
   $form['at']['breadcrumb']['bd'] = array(
     '#type' => 'fieldset',
     '#title' => t('Breadcrumbs'),
-    '#description' => t('<h3>Breadcrumb Settings</h3>'),
   );
+
+  // Display yes/no?
   $form['at']['breadcrumb']['bd']['breadcrumb_display'] = array(
     '#type' => 'select',
     '#title' => t('Show breadcrumbs'),
@@ -18,6 +22,8 @@
       'no' => t('No'),
     ),
   );
+
+  // Seperator
   $form['at']['breadcrumb']['bd']['breadcrumb_separator'] = array(
     '#type'  => 'textfield',
     '#title' => t('Separator'),
@@ -31,6 +37,8 @@
       ),
     ),
   );
+
+  // Home link
   $form['at']['breadcrumb']['bd']['breadcrumb_home'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show the homepage link'),

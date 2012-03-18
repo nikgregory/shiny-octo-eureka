@@ -194,13 +194,16 @@
   settings[rebuild_theme_data] = 0
 
 
-  ; Core Site Tweaks
+  ; Enable extensions
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0
   settings[enable_breadcrumb_settings] = 0
   settings[enable_search_settings]     = 0
   settings[enable_loginblock_settings] = 0
+  settings[enable_markup_overides]     = 0
+  settings[enable_mobile_metatags]     = 0
+  settings[enable_apple_touch_icons]   = 0
 
 
   ; Font type
@@ -324,8 +327,8 @@
 
   ; Touch icons
   settings[apple_touch_icon_enable] = 0
-  settings[apple_touch_icon_path_l] = 'img/touch-icon-l.png'
-  settings[apple_touch_icon_path_m] = 'img/touch-icon-m.png'
-  settings[apple_touch_icon_path_h] = 'img/touch-icon-h.png'
+  settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'
+  settings[apple_touch_icon_path_m] = 'images/touch-icon-m.png'
+  settings[apple_touch_icon_path_h] = 'images/touch-icon-h.png'
   
   

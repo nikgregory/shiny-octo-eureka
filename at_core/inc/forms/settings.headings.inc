@@ -1,13 +1,14 @@
 <?php
-/**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- */
+
+  // Title styles
   $form['at']['titles'] = array(
     '#type' => 'fieldset',
     '#title' => t('Title Styles'),
     '#description' => t('<h3>Title Styles</h3><p>Add extra styles to headings. Text shadows only work for CSS3 capable browsers such as Firefox, Safari, IE9 etc.</p>'),
-    '#weight' => 3,
+    '#weight' => -90,
   );
+
+  // Array of valid title types
   $headings_valid_types = array(
     'site_name',
     'site_slogan',
@@ -16,7 +17,10 @@
     'block_title',
     'comment_title',
   );
+
+  // Get the fonts list
   $form_elements = font_elements();
+
   foreach ($form_elements as $key => $value) {
 
     $heading = $key;
@@ -36,30 +40,39 @@
       $setting_alignment  = $setting . '_alignment';
       $setting_shadow     = $setting . '_shadow';
 
+      // Fieldset wrapper for each title
       $form['at']['titles']['' . $setting_container . '']  = array(
         '#type' => 'fieldset',
         '#title' => t($title),
         '#description' => t("<strong>$title</strong>"),
         '#attributes' => array('class' => array('headings-styles-wrapper')),
       );
+
+      // Case
       $form['at']['titles']['' . $setting_container . '']['' . $setting_case . ''] = array(
         '#type' => 'select',
         '#title' => t('Case'),
         '#default_value' => theme_get_setting($setting_case),
         '#options' => font_style_options('case', $element),
       );
+
+      // Weight
       $form['at']['titles']['' . $setting_container . '']['' . $setting_weight . ''] = array(
         '#type' => 'select',
         '#title' => t('Weight'),
         '#default_value' => theme_get_setting($setting_weight),
         '#options' => font_style_options('weight', $element),
       );
+
+      // Alignment
       $form['at']['titles']['' . $setting_container . '']['' . $setting_alignment . ''] = array(
         '#type' => 'select',
         '#title' => t('Alignment'),
         '#default_value' => theme_get_setting($setting_alignment),
         '#options' => font_style_options('alignment', $element),
       );
+
+      // Text shadow
       $form['at']['titles']['' . $setting_container . '']['' . $setting_shadow . ''] = array(
         '#type' => 'select',
         '#title' => t('Shadow'),

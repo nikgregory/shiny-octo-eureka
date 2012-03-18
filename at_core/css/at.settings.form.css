@@ -2,7 +2,7 @@
    This is crafted to work with Seven and AT Admin themes,
    other admin themes could spit the dummy with these styles. */
 .theme-settings-header {
-  background: #e7e7e7;
+  background: #e5e5e5;
   padding: 10px;
   -moz-border-radius: 3px 3px 0 0;
   -webkit-border-radius: 3px 3px 0 0;
@@ -27,14 +27,14 @@
   margin: 0 0 20px 15em;
 }
 div.vertical-tabs .vertical-tabs-panes {
-  min-height: 200px;
+  min-height: 100px;
 }
 .vertical-tabs-panes .form-item {
   clear: both;
 }
 .vertical-tabs-panes label {
   font-weight: 400;
-  margin: 0 0 5px;
+  margin: 5px 0;
   display: inline-block;
 }
 .vertical-tabs-panes select {
@@ -60,7 +60,7 @@ div.vertical-tabs .vertical-tabs-panes {
   width: auto;
 }
 .vertical-tabs-panes fieldset fieldset {
-  background: #f7f7f7;
+  background: #ededed;
   border: 0;
   margin: 1px 0;
 }
@@ -183,14 +183,35 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 }
 
 /* AT Panels */
+#edit-panels-wrapper,
+#edit-panels-wrapper .fieldset-wrapper {
+  background: transparent;
+  padding: 10px 0;
+}
+ #edit-panels-wrapper fieldset {
+  margin: 0 0 20px;
+  padding-bottom: 0;
+}
+#edit-panels-wrapper fieldset fieldset {
+  margin: 0;
+  padding-bottom: 0;
+}
+#edit-panels-wrapper  fieldset.collapsed  {
+  background: transparent;
+  overflow: hidden;
+  margin: 0 0 10px;
+}
+#edit-panels-wrapper  fieldset  fieldset.collapsed  {
+  margin: 0;
+}
 #edit-rpw > .fieldset-wrapper > .fieldset-description {}
 .panel-option-lists .fieldset-wrapper {
   display: table;
-  width: 97%;
+  width: 95%;
 }
 .panel-option-lists .fieldset-wrapper .fieldset-wrapper {
     padding: 0;
-    margin-left: 3%;
+    margin-left: 3.5%;
 }
 .panel-option-lists .fieldset-wrapper > .form-item {
   display: table-row;
@@ -381,9 +402,7 @@ input[disabled] {
   overflow: hidden;
 }
 #edit-site-tweaks .fieldset-wrapper legend {
-    display: block !important;
 }
-
 
 /* Meta tags */
 #edit-meta .form-type-textfield label {
@@ -403,10 +422,10 @@ input[disabled] {
 }
 
 /* skinp link target/ Apple touch */
-#edit-ati,
-#edit-ati .fieldset-wrapper {
-  margin: 0;
+#edit-ati .fieldset-description ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .form-item-skip-link-target label,

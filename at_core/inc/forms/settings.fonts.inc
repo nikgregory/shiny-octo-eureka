@@ -60,7 +60,7 @@
     '#title' => t('Fonts'),
     '#description' => $fonts_message,
     '#attributes' => array('class' => array('font-element-wrapper')),
-    '#weight' => 1,
+    '#weight' => -100,
   );
   // Base font - global font family unless overridden by a more specific selector
   $form['at']['font']['base-font'] = array (

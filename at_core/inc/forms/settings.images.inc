@@ -1,11 +1,14 @@
-<?php 
+<?php
+
   // Image styles
   $form['at']['images'] = array(
     '#type' => 'fieldset',
     '#title' => t('Image Settings'),
     '#description' => '<h3>Image Settings</h3>',
-    '#weight' => 40,
+    '#weight' => -80,
   );
+
+  // Alignment
   $form['at']['images']['alignment'] = array(
     '#type' => 'fieldset',
     '#title' => t('Image Alignment'),
@@ -22,6 +25,8 @@
       'ia-r' => t('Right'),
     ),
   );
+
+  // Captions
   $form['at']['images']['captions'] = array(
     '#type' => 'fieldset',
     '#title' => t('Image Captions'),

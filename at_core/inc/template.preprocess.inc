@@ -304,8 +304,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Build an array of scripts to load. 
   // You can easily add to this array in your own preprocess function and use the
   // array keys provided, or add your own. By default AT will load for "lt ie9", 
-  // "lt ie8" and "all". If you add your own keys you have to process them as well, 
+  // "lt ie8" and "all". If you add your own keys you have to process them as well,
   // there is no generic loader, see below.
+  $vars['polyfills'] = ''; /* Initialize always */
   $vars['polyfills_array'] = array();
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
     $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
@@ -319,9 +320,8 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
     $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
   }
-  
+
   // Load Polyfills
-  $vars['polyfills'] = '';
   if (!empty($vars['polyfills_array'])) {
     
     // We need the query string for cache control fingerprinting

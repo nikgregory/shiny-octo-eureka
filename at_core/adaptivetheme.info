@@ -154,13 +154,16 @@
   settings[show_window_size]   = 0
   settings[rebuild_theme_data] = 0
 
-;----------// Site Tweaks
+;----------// Extensions
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0
   settings[enable_breadcrumb_settings] = 0
   settings[enable_search_settings]     = 0
   settings[enable_loginblock_settings] = 0
+  settings[enable_markup_overides]     = 0
+  settings[enable_mobile_metatags]     = 0
+  settings[enable_apple_touch_icons]   = 0
   
 ;----------// Fonts
   settings[base_font_type]          = ''

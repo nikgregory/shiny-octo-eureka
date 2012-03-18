@@ -29,22 +29,6 @@ body.section-admin {
   }
 }
 
-/* Font settings */
-.fs-smallest {font-size: 0.833em;}
-.fs-small       {font-size: 0.917em;}
-.fs-medium     {font-size: 1em;}
-.fs-large       {font-size: 1.083em;}
-.fs-largest   {font-size: 1.167em;}
-body.ff-sss  {font-family: Candara, "Trebuchet MS", "Helvetica Neue", Arial, Helvetica, sans-serif;}
-body.ff-ssl  {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
-body.ff-a      {font-family: Arial, Helvetica, sans-serif;}
-body.ff-cc    {font-family: Calibri, Candara, Arial, Helvetica, sans-serif;}
-body.ff-m      {font-family: "Segoe UI", "Myriad Pro", Myriad, Arial, Helvetica, sans-serif;}
-body.ff-l      {font-family: "Lucida Sans Unicode", "Lucida Sans", "Lucida Grande", Geneva, sans-serif;}
-body.ff-ss    {font-family: Garamond, Perpetua, "Times New Roman", serif;}
-body.ff-sl    {font-family: Georgia, Baskerville, Palatino, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;}
-body.ff-ms    {font-family: Consolas, Monaco, "Courier New", Courier, monospace;}
-
 pre, code {
   font-family: Consolas, Monaco, "Courier New", Courier, monospace;
   background: #fff;
@@ -83,7 +67,7 @@ label {
   padding: 0;
 }
 label {
-  margin-bottom: 5px;
+  margin: 5px 0;
 }
 h3 {
   font-size: 1.12em;
@@ -1062,7 +1046,7 @@ form#views-add-display-form div.form-item {
 }
 .fieldset-block-info dt {
   font-size: .846em;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e5e5e5;
 }
 .fieldset-block-info dd {
   font-size: .923em;
@@ -1080,13 +1064,13 @@ fieldset {
   padding: 0 15px;
 }
 fieldset fieldset {
-  background: #fafafa;
+  background: #ededed;
 }
 fieldset fieldset .fieldset-wrapper {
   padding: 10px 15px;
 }
 fieldset fieldset fieldset {
-  background: #f3f2f2;
+  background: #ededed;
 }
 fieldset fieldset fieldset .fieldset-wrapper {
   padding: 10px 15px;
@@ -1136,7 +1120,7 @@ fieldset#edit-body-und-0-format {
 legend {
   font-size: 1em;
   border: 0;
-  background: #e7e7e7;
+  background: #d4d4d4;
   display: block;
   padding: 7px 1%;
   width: 98%;
@@ -1152,7 +1136,7 @@ fieldset legend a:hover,
 fieldset legend a:focus,
 fieldset legend a:active {
   font-weight: 600;
-  color: #494949;
+  color: #424242;
 }
 html.js fieldset.collapsible .fieldset-legend {
   padding-left: 17px;

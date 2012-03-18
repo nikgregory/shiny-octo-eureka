@@ -9,7 +9,6 @@ function at_theme_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
 
-
   // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
@@ -26,11 +25,11 @@ function at_theme_settings_validate($form, &$form_state) {
   }
 
   // Check if the apple touch icon path is correct
-  if ($values['apple_touch_icon_enable'] === 1) {
+  if ($values['enable_apple_touch_icons'] === 1) {
     // low
-    if (empty($values['apple_touch_icon_path_l'])) {
-        form_set_error('apple_touch_icon_path_l', t('Ops! The Apple touch 57x57 icon path is missing, you must enter a path or disable touch icons.'));
-    }
+    // if (empty($values['apple_touch_icon_path_l'])) {
+      // form_set_error('apple_touch_icon_path_l', t('Ops! The Apple touch 57x57 icon path is missing, you must enter a path or disable touch icons.'));
+    // }
     if (!empty($values['apple_touch_icon_path_l'])) {
       $l = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path_l'];
       if (!file_exists($l)) {

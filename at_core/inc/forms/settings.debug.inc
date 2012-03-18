@@ -25,16 +25,16 @@
     '#default_value' => theme_get_setting('show_window_size'),
   );
   // Rebuild theme data
-  $form['at-layout']['debug']['dev'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Rebuild Theme Data and Registry'),
-    '#description' => t('<h3>Rebuild Theme Data and Registry</h3><p>Enabling this setting will fire <code>system_rebuild_theme_data()</code> and <code>drupal_theme_rebuild()</code> on every page request. Disable this when your site is live - its a major performance overhead. TODO - insert link to docs.</p>'),
-  );
-  $form['at-layout']['debug']['dev']['rebuild_theme_data'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Rebuild theme data and the theme registry on every page request'),
-    '#default_value' => theme_get_setting('rebuild_theme_data'),
-  );
+  // $form['at-layout']['debug']['dev'] = array(
+    // '#type' => 'fieldset',
+    // '#title' => t('Rebuild Theme Data and Registry'),
+    // '#description' => t('<h3>Rebuild Theme Data and Registry</h3><p>Enabling this setting will fire <code>system_rebuild_theme_data()</code> and <code>drupal_theme_rebuild()</code> on every page request. Disable this when your site is live - <strong>this is a major performance overhead</strong>.</p>'),
+  // );
+  // $form['at-layout']['debug']['dev']['rebuild_theme_data'] = array(
+    // '#type' => 'checkbox',
+    // '#title' => t('Rebuild theme data and the theme registry on every page request'),
+    // '#default_value' => theme_get_setting('rebuild_theme_data'),
+  // );
   // All media queries for copy/pastings if you need them
   $queries = '';
   $mq = array();

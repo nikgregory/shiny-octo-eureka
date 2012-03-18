@@ -29,33 +29,32 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form
   $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. $admin_theme .'"><div class="layout-header theme-settings-header clearfix">';
-  $layout_header .= '<h1>' . t('Layout Settings') . '</h1>';
+  $layout_header .= '<h1>' . t('Layout') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $path_to_at_core . '/logo.png" /></a>';
   $layout_header .= '</div>';
 
   
   $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
-    '#description' => t('Layout Settings'),
+    '#description' => t('Layout'),
     '#prefix' => $layout_header,
     '#suffix' => '</div>',
     '#weight' => -10,
-    '#default_tab' => 'defaults',
     '#attached' => array(
       'css' => array($path_to_at_core . '/css/at.settings.form.css'),
       //'js'  => array($path_to_at_core . '/js/chosen.jquery.min.js' => array('type' => 'file', 'type' => JS_THEME)),
     ),
   );
   
-  include_once($path_to_at_core . '/inc/settings.pagelayout.inc');
-  include_once($path_to_at_core . '/inc/settings.responsivepanels.inc');
-  include_once($path_to_at_core . '/inc/settings.global.inc');
-  include_once($path_to_at_core . '/inc/settings.debug.inc');
+  include_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
+  include_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
+  include_once($path_to_at_core . '/inc/forms/settings.global.inc');
+  include_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
   // STYLE SETTINGS
   // Build a custom header for the style settings form
   $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
-  $styles_header .= '<h1>' . t('Style Settings') . '</h1>';
+  $styles_header .= '<h1>' . t('Extensions') . '</h1>';
   $styles_header .= '</div>';
 
   $form['at'] = array(
@@ -65,41 +64,55 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#suffix' => '</div>',
     '#default_tab' => 'defaults',
   );
+  // Font lists - we need these for both font and heading settings
   if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {
     include_once($path_to_at_core . '/inc/font.lists.inc');
   }
   // Heading styles
   if(theme_get_setting('enable_heading_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.headings.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
   }
   // Fonts
   if(theme_get_setting('enable_font_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.fonts.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
   }
   // Heading styles
   if(theme_get_setting('enable_heading_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.headings.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
   }
   // Breadcrumbs
   if (theme_get_setting('enable_breadcrumb_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.breadcrumbs.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
   }
   // Images
   if(theme_get_setting('enable_image_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.images.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.images.inc');
   }
   // Search Settings
   if (theme_get_setting('enable_search_settings') === 1) {
-    include_once($path_to_at_core . '/inc/settings.search.inc');
+    include_once($path_to_at_core . '/inc/forms/settings.search.inc');
   }
   // Horizonatal login block
   if (theme_get_setting('horizontal_login_block_enable') === 'on') {
     if (theme_get_setting('enable_loginblock_settings') === 1) {
-      include_once($path_to_at_core . '/inc/settings.loginblock.inc');
+      include_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
     }
   }
-  include_once($path_to_at_core . '/inc/settings.tweaks.inc');
-  include_once($path_to_at_core . '/inc/settings.classes.inc');
+  // modify output
+  if (theme_get_setting('enable_markup_overides') === 1) {
+    include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
+  }
+  // Metatags
+  if (theme_get_setting('enable_mobile_metatags') === 1) {
+    include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
+  }
+  // Touch icons
+  if (theme_get_setting('enable_apple_touch_icons') === 1) {
+    include_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
+  }
+
+  // Always include tweaks (extension settings)
+  include_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
 
   // Collapse annoying forms
   $form['theme_settings']['#collapsible'] = TRUE;
@@ -108,8 +121,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['logo']['#collapsed'] = TRUE;
   $form['favicon']['#collapsible'] = TRUE;
   $form['favicon']['#collapsed'] = TRUE;
-  
-
 
   /**
    * The following will be processed even if the theme is inactive.
