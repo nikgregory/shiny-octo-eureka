@@ -9,8 +9,10 @@
   // Enable extra style settings
   $form['at']['site-tweaks']['style-settings'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Styles'),
-    '#description' => t('<h3>Enable Stuff</h3><p>After enabling stuff new theme setting will be available, first enable, then enjoy...'),
+    '#title' => t('Enable'),
+    '#description' => t('<p>After enabling stuff new theme setting will be available, first enable, then enjoy...'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   $form['at']['site-tweaks']['style-settings']['enable_font_settings'] = array(
     '#type' => 'checkbox',
@@ -51,8 +53,9 @@
   // Hide or Remove Stuff
   $form['at']['site-tweaks']['hide-stuff'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Hide or Remove Stuff'),
-    '#description' => t('<h3>Hide or Remove Stuff</h3>'),
+    '#title' => t('Hide or Remove'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   $form['at']['site-tweaks']['hide-stuff']['comments_hide_title'] = array(
     '#type' => 'checkbox',
@@ -75,8 +78,9 @@
   // Change stuff
   $form['at']['site-tweaks']['change-stuff'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Change Stuff'),
-    '#description' => t('<h3>Change Stuff</h3>'),
+    '#title' => t('Change'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   // Use the page full width wrappers template
   $form['at']['site-tweaks']['change-stuff']['page_full_width_wrappers'] = array(
@@ -95,13 +99,14 @@
   // Add stuff
   $form['at']['site-tweaks']['add-stuff'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Add Stuff'),
-    '#description' => t('<h3>Add Stuff</h3>'),
+    '#title' => t('Add'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   // Apple touch icon
   $form['at']['site-tweaks']['add-stuff']['apple_touch_icon_enable'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable touch icons'),
+    '#title' => t('Apple touch icons'),
     '#description' => t('Check this setting if you want to use touch icons for iOS, Android and Nokia devices.'),
     '#default_value' => theme_get_setting('apple_touch_icon_enable'),
   );
@@ -146,8 +151,6 @@
       'visible' => array('input[name="apple_touch_icon_enable"]' => array('checked' => TRUE)),
     ),
   );
-  
-  
   // Add spans to theme_links
   $form['at']['site-tweaks']['add-stuff']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',

@@ -27,7 +27,7 @@
   margin: 0 0 20px 15em;
 }
 div.vertical-tabs .vertical-tabs-panes {
-  min-height: 300px;
+  min-height: 200px;
 }
 .vertical-tabs-panes .form-item {
   clear: both;
@@ -374,6 +374,16 @@ input[disabled] {
   border-color: #ccc;
   color: #666;
 }
+
+/* Tweaks fieldsets collapsed */
+#edit-site-tweaks fieldset.collapsed {
+  background: #fff;
+  overflow: hidden;
+}
+#edit-site-tweaks .fieldset-wrapper legend {
+    display: block !important;
+}
+
 
 /* Meta tags */
 #edit-meta .form-type-textfield label {
