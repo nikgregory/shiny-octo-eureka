@@ -321,6 +321,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
   
   // Load Polyfills
+  $vars['polyfills'] = '';
   if (!empty($vars['polyfills_array'])) {
     
     // We need the query string for cache control fingerprinting

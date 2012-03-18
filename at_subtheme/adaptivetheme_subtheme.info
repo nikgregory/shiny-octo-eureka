@@ -324,5 +324,8 @@
 
   ; Touch icons
   settings[apple_touch_icon_enable] = 0
-  settings[apple_touch_icon_path] = 'touch-icon.png'
+  settings[apple_touch_icon_path_l] = 'img/touch-icon-l.png'
+  settings[apple_touch_icon_path_m] = 'img/touch-icon-m.png'
+  settings[apple_touch_icon_path_h] = 'img/touch-icon-h.png'
+  
   

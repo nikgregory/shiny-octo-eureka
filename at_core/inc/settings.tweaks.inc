@@ -101,22 +101,53 @@
   // Apple touch icon
   $form['at']['site-tweaks']['add-stuff']['apple_touch_icon_enable'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable Apple touch icon'),
-    '#description' => t('Check this setting if you want to use an Apple touch icon for iOS and Android devices.'),
+    '#title' => t('Enable touch icons'),
+    '#description' => t('Check this setting if you want to use touch icons for iOS, Android and Nokia devices.'),
     '#default_value' => theme_get_setting('apple_touch_icon_enable'),
   );
-  $form['at']['site-tweaks']['add-stuff']['apple_touch_icon_path'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Set the path to your custom Apple touch icon'),
-    '#description' => t('The path must be relative to your themes root folder.'),
-    '#field_prefix' => $theme_name . '/',
-    '#default_value' => theme_get_setting('apple_touch_icon_path'),
+  $form['at']['site-tweaks']['add-stuff']['ati'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Touch icons paths'),
+    '#description' => t('<p>Different devices can support different sized touch icons:</p><ul><li>57x57 - non-retina iPhone, iPod Touch, Nokia and Android 2.1+ devices</li><li>72x72 - first gen iPad</li><li>114x114 - iPhone 4 with high-res retina display</li></ul><p>The path to each image must be relative to your themes root.</p>'),
     '#states' => array(
       'visible' => array(
         'input[name="apple_touch_icon_enable"]' => array('checked' => TRUE),
       ),
     ),
   );
+  $form['at']['site-tweaks']['add-stuff']['ati']['apple_touch_icon_path_l'] = array(
+    '#type' => 'textfield',
+    '#title' => t('57x57'),
+    '#description' => t('If you only enter a path for this size it will be used by all devices.'),
+    '#field_prefix' => $theme_name . '/',
+    '#default_value' => theme_get_setting('apple_touch_icon_path_l'),
+    '#states' => array(
+      'visible' => array('input[name="apple_touch_icon_enable"]' => array('checked' => TRUE)),
+      'required' => array('input[name="apple_touch_icon_enable"]' => array('checked' => TRUE)),
+    ),
+  );
+  $form['at']['site-tweaks']['add-stuff']['ati']['apple_touch_icon_path_m'] = array(
+    '#type' => 'textfield',
+    '#title' => t('72x72'),
+    '#description' => t('Apple touch icon for old iPads.'),
+    '#field_prefix' => $theme_name . '/',
+    '#default_value' => theme_get_setting('apple_touch_icon_path_m'),
+    '#states' => array(
+      'visible' => array('input[name="apple_touch_icon_enable"]' => array('checked' => TRUE)),
+    ),
+  );
+  $form['at']['site-tweaks']['add-stuff']['ati']['apple_touch_icon_path_h'] = array(
+    '#type' => 'textfield',
+    '#title' => t('114x114'),
+    '#description' => t('Apple touch icon for iPhone 4 with high-res retina display.'),
+    '#field_prefix' => $theme_name . '/',
+    '#default_value' => theme_get_setting('apple_touch_icon_path_h'),
+    '#states' => array(
+      'visible' => array('input[name="apple_touch_icon_enable"]' => array('checked' => TRUE)),
+    ),
+  );
+  
+  
   // Add spans to theme_links
   $form['at']['site-tweaks']['add-stuff']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',

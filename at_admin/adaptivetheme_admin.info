@@ -8,11 +8,11 @@
   engine      = phptemplate
   screenshot  = screenshot.png
 
- 
+
 ;----------// Stylesheets
   stylesheets[all][] = css/at_admin.css
 
-  
+
 ;----------// Regions
   regions[content]        = Main content
   regions[sidebar_first]  = Sidebar first
@@ -23,19 +23,19 @@
   regions[page_top]       = Page top
   regions[page_bottom]    = Page bottom
 
-  
+
 ;----------// Shortcut link
   settings[shortcut_module_link] = 1
 
-  
+
 ;----------// Features
   features[] = logo
   features[] = name
   features[] = favicon
   features[] = main_menu
   features[] = secondary_menu
-  
-  
+
+
 ;----------// Theme Settings
   ; Layout settings - Standard bigscreen
   settings[bigscreen_layout]         = 'three-col-grail'
@@ -75,7 +75,7 @@
   settings[tablet_portrait_max_width]      = 780
   settings[tablet_portrait_media_query]    = 'only screen and (min-width:481px) and (max-width:768px)'
 
-  
+
   ; Layout settings - Smartphone landscape
   settings[smartphone_landscape_layout]         = 'one-col-vert'
   settings[smartphone_landscape_page_unit]      = '%'
@@ -220,7 +220,7 @@
   settings[h4_font_size] = '1.2em'
   settings[h5_font_size] = '1em'
   settings[h6_font_size] = '1em'
-  
+
 
   ; Page title
   settings[page_title_case]      = 'ptc-n'
@@ -297,3 +297,10 @@
 
   ; Extra markup
   settings[menu_item_span_elements] = 0
+
+
+  ; Touch icons
+  settings[apple_touch_icon_enable] = 0
+  settings[apple_touch_icon_path_l] = ''
+  settings[apple_touch_icon_path_m] = ''
+  settings[apple_touch_icon_path_h] = ''

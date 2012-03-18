@@ -86,26 +86,64 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   }
   // Apple touch icons
   if (theme_get_setting('apple_touch_icon_enable') === 1) {
-    $path = drupal_get_path('theme', $theme_name) .'/'. theme_get_setting('apple_touch_icon_path', $theme_name);
-    $touch_icon = file_create_url($path);
-    $head_elements['adaptivetheme_ios_touch_icon'] = array(
-      '#type' => 'html_tag', 
-      '#tag' => 'link', 
-      '#attributes' => array(
-        'href' => $touch_icon, 
-        'rel' => "apple-touch-icon",
-      ),
-    );
-    $head_elements['adaptivetheme_andriod_touch_icon'] = array(
-      '#type' => 'html_tag', 
-      '#tag' => 'link', 
-      '#attributes' => array(
-        'href' => $touch_icon, 
-        'rel' => "apple-touch-icon-processed",
-      ),
-    );
+    // low
+    $apple_touch_icon_path_l = theme_get_setting('apple_touch_icon_path_l', $theme_name);
+    if (!empty($apple_touch_icon_path_l)) {
+      $l = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_l;
+      $touch_icon_l = file_create_url($l);
+      $head_elements['adaptivetheme_touch_icon_nokia'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'link',
+        '#weight' => -97,
+        '#attributes' => array(
+          'href' => $touch_icon_l, 
+          'rel' => "shortcut icon",
+        ),
+      );
+      $head_elements['adaptivetheme_touch_icon_low'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'link',
+        '#weight' => -98,
+        '#attributes' => array(
+          'href' => $touch_icon_l, 
+          'rel' => "apple-touch-icon-processed",
+        ),
+      );
+    }
+    // medium
+    $apple_touch_icon_path_m = theme_get_setting('apple_touch_icon_path_m', $theme_name);
+    if (!empty($apple_touch_icon_path_m)) {
+      $m = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_m;
+      $touch_icon_m = file_create_url($m);
+      $head_elements['adaptivetheme_touch_icon_medium'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'link',
+        '#weight' => -99,
+        '#attributes' => array(
+          'href' => $touch_icon_m, 
+          'rel' => "apple-touch-icon-processed",
+          'sizes' => "72x72",
+        ),
+      );
+    }
+    // high
+    $apple_touch_icon_path_h = theme_get_setting('apple_touch_icon_path_h', $theme_name);
+    if (!empty($apple_touch_icon_path_h)) {
+      $h = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_h;
+      $touch_icon_h = file_create_url($h);
+      $head_elements['adaptivetheme_touch_icon_high'] = array(
+        '#type' => 'html_tag', 
+        '#tag' => 'link',
+        '#weight' => -100,
+        '#attributes' => array(
+          'href' => $touch_icon_m, 
+          'rel' => "apple-touch-icon-processed",
+          'sizes' => "114x114",
+        ),
+      );
+    }
   }
-
+  
   // dsm($head_elements); 
 }
 

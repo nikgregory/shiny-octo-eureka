@@ -250,3 +250,9 @@
 
 ;----------// Markup
   settings[menu_item_span_elements] = 0
+  
+;----------// Touch icons
+  settings[apple_touch_icon_enable] = 0
+  settings[apple_touch_icon_path_l] = ''
+  settings[apple_touch_icon_path_m] = ''
+  settings[apple_touch_icon_path_h] = ''

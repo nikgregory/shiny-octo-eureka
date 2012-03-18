@@ -8,8 +8,8 @@ function at_theme_settings_validate($form, &$form_state) {
 
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
-  
-  
+
+
   // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
@@ -24,16 +24,35 @@ function at_theme_settings_validate($form, &$form_state) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
   }
-  
+
   // Check if the apple touch icon path is correct
   if ($values['apple_touch_icon_enable'] === 1) {
-    $path = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path'];
-    if (!file_exists($path)) {
-      form_set_error('apple_touch_icon_path', t('Ops! The Apple touch icon path is wrong, check the file exists or the path to the file is correct.'));
+    // low
+    if (empty($values['apple_touch_icon_path_l'])) {
+        form_set_error('apple_touch_icon_path_l', t('Ops! The Apple touch 57x57 icon path is missing, you must enter a path or disable touch icons.'));
+    }
+    if (!empty($values['apple_touch_icon_path_l'])) {
+      $l = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path_l'];
+      if (!file_exists($l)) {
+        form_set_error('apple_touch_icon_path_l', t('Ops! The Apple touch 57x57 icon path is not right, check the file exists or the path to the file is correct.'));
+      }
+    }
+    // medium
+    if (!empty($values['apple_touch_icon_path_m'])) {
+      $m = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path_m'];
+      if (!file_exists($m)) {
+        form_set_error('apple_touch_icon_path_m', t('Ops! The Apple touch 72x72 icon path is not right, check the file exists or the path to the file is correct.'));
+      }
+    }
+    // high
+    if (!empty($values['apple_touch_icon_path_h'])) {
+      $h = drupal_get_path('theme', $theme_name) .'/'. $values['apple_touch_icon_path_h'];
+      if (!file_exists($h)) {
+        form_set_error('apple_touch_icon_path_h', t('Ops! The Apple touch 114x114 icon path is not right, check the file exists or the path to the file is correct.'));
+      }
     }
   }
-  
-  
+
   // Custom font stacks are "required" using form states also...
   /*
   if ($values['enable_font_settings'] === 1) {
@@ -63,7 +82,7 @@ function at_theme_settings_validate($form, &$form_state) {
   */
 }
 
-// Custom submit function - this mostly builds and saves stylesheets for 
+// Custom submit function - this mostly builds and saves stylesheets for
 // various features such as the responsive layout and font styles.
 function at_theme_settings_submit($form, &$form_state) {
 
@@ -166,7 +185,7 @@ function at_theme_settings_submit($form, &$form_state) {
       }
     }
     if (!empty($dynamic_settings_info)) {
-      $dynamic_settings_info = $dynamic_settings_info ? $dynamic_settings_info : "''"; 
+      $dynamic_settings_info = $dynamic_settings_info ? $dynamic_settings_info : "''";
       $dynamic_settings = implode("\n", $dynamic_settings_info);
     }
     if (!empty($static_settings_info) && !empty($dynamic_settings_info)) {
