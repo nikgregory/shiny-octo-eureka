@@ -174,7 +174,7 @@
   ; Global settings
   settings[production_mode]                = 0
   settings[mobile_friendly_metatags]       = 1
-  settings[adaptivetheme_meta_viewport]    = 'width=device-width, initial-scale=1'
+  settings[adaptivetheme_meta_viewport]    = 'width=device-width'
   settings[adaptivetheme_meta_mobileoptimized]  = 'width'
   settings[adaptivetheme_meta_handheldfriendly] = 'true'
   settings[adaptivetheme_meta_apple_mobile_web_app_capable] = 'yes'
