@@ -1,14 +1,11 @@
 <?php
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- *
- * TODO: this file needs proper documentation.
  */
  
 // hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {
-  global $theme_key, $path_to_at_core;
-  $theme_name = $theme_key;
+  global $theme_name, $path_to_at_core;
 
   // charset utf-8
   $head_elements['system_meta_content_type']['#attributes'] = array('charset' => 'utf-8');
@@ -136,7 +133,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#tag' => 'link',
         '#weight' => -100,
         '#attributes' => array(
-          'href' => $touch_icon_m, 
+          'href' => $touch_icon_h, 
           'rel' => "apple-touch-icon-processed",
           'sizes' => "114x114",
         ),
@@ -147,12 +144,11 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   // dsm($head_elements); 
 }
 
-// hook_js_alter(). Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
+// hook_js_alter()
 function adaptivetheme_js_alter(&$javascript) {
-
+  // Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
   $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
-
   //dsm($javascript);
 }
 
@@ -183,6 +179,7 @@ function adaptivetheme_block_view_alter(&$data, $block) {
 
 // hook_form_FORM_alter().
 function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
+  // Collapse Noggin fieldset by default
   if ($form_id == 'system_theme_settings') {
     if (module_exists('noggin')) {  
       $form['noggin']['#collapsible'] = TRUE;
@@ -191,8 +188,11 @@ function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-// hook_form_FORM_ID_alter().
+// hook_form_FORM_ID_alter()
 function adaptivetheme_form_search_form_alter(&$form, $form_state) {
+  // The problem with Drupals standard Advanced search form is that each criterion 
+  // group is wrapped in a DIV, whereas it should be a fieldset with a legend, this
+  // is better semantics and improves accessibility by logically grouping field items.
   if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {
     // Keyword boxes:
     $form['advanced'] = array(

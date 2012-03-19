@@ -11,7 +11,12 @@ include_once($path_to_at_core . '/inc/config.inc');
  * Implements hook_form_system_theme_settings_alter().
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-  global $theme_key, $path_to_at_core;
+  global $path_to_at_core;
+
+  // $path_to_at_core is absolute and uses the DRUPAL_ROOT constant, because its twice
+  // as fast to use an abolute path for include's, however it will bork anything that
+  // needs relative paths like CSS and JS files loaded using drupal_add_css/js
+  $relative_path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
@@ -22,7 +27,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // Get the admin theme so we can set a class for styling, Seven does mental things with forms in vertical tabs...
   $admin_theme = variable_get('admin_theme');
-  
+
   // Get the active theme name, we might need it at some stage
   $theme_name = $form_state['build_info']['args'][0];
 
@@ -30,10 +35,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Build a custom header for the layout settings form
   $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. $admin_theme .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
-  $layout_header .= '<a href="http://adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $path_to_at_core . '/logo.png" /></a>';
+  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $relative_path_to_at_core . '/logo.png" /></a>';
   $layout_header .= '</div>';
 
-  
   $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout'),
@@ -41,18 +45,18 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#suffix' => '</div>',
     '#weight' => -10,
     '#attached' => array(
-      'css' => array($path_to_at_core . '/css/at.settings.form.css'),
+      'css' => array($relative_path_to_at_core . '/css/at.settings.form.css'),
       //'js'  => array($path_to_at_core . '/js/chosen.jquery.min.js' => array('type' => 'file', 'type' => JS_THEME)),
     ),
   );
-  
+  // Include layout forms, global settings and debug
   include_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
   include_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
   include_once($path_to_at_core . '/inc/forms/settings.global.inc');
   include_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
-  // STYLE SETTINGS
-  // Build a custom header for the style settings form
+  // EXTENSIONS
+  // Build a custom header for the Extensions settings form
   $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
   $styles_header .= '<h1>' . t('Extensions') . '</h1>';
   $styles_header .= '</div>';
@@ -62,7 +66,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#weight' => -9,
     '#prefix' => $styles_header,
     '#suffix' => '</div>',
-    '#default_tab' => 'defaults',
   );
   // Font lists - we need these for both font and heading settings
   if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {

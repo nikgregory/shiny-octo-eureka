@@ -9,8 +9,7 @@
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
-  global $theme_key, $path_to_at_core;
-  $theme_name = $theme_key;
+  global $theme_name, $path_to_at_core;
 
   //dsm($vars);
   
@@ -43,8 +42,7 @@ function adaptivetheme_process_html_tag(&$vars) {
  * Process variables for page.tpl.php
  */
 function adaptivetheme_process_page(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // Call our helper function to wrap menus in extra markup, this is quite unfriendly
   // way to do this, but in reality it appears not to matter that much, users seldom if ever
@@ -161,8 +159,7 @@ function adaptivetheme_process_block(&$vars) {
  * Process variables for node.tpl.php
  */
 function adaptivetheme_process_node(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
   // Strip default drupal classes if not required
   if (theme_get_setting('extra_article_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
@@ -186,8 +183,7 @@ function adaptivetheme_process_node(&$vars) {
  * Process variables for comment.tpl.php
  */
 function adaptivetheme_process_comment(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
   // Strip default drupal classes if not required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);

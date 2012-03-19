@@ -1,4 +1,5 @@
-<?php 
+<?php
+
   // DEBUG
   $form['at-layout']['debug'] = array(
     '#type' => 'fieldset',
@@ -9,22 +10,29 @@
     '#title' => t('Debug Layout'),
     '#description' => t('<h3>Debug Layout</h3>'),
   );
+
+  // Highlight regions
   $form['at-layout']['debug']['debug-layout']['expose_regions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Highlight regions'),
     '#default_value' => theme_get_setting('expose_regions'),
   );
+  
+  // Load all panels
   $form['at-layout']['debug']['debug-layout']['load_all_panels'] = array(
     '#type' => 'checkbox',
     '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels.'),
     '#default_value' => theme_get_setting('load_all_panels'),
   );
+  
+  // Window size bookmarklet
   $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show window size - appears in the bottom right corner.'),
     '#default_value' => theme_get_setting('show_window_size'),
   );
-  // Rebuild theme data
+  
+  // Rebuild theme data - pending removal, I just don't like this in a theme.
   // $form['at-layout']['debug']['dev'] = array(
     // '#type' => 'fieldset',
     // '#title' => t('Rebuild Theme Data and Registry'),
@@ -35,7 +43,8 @@
     // '#title' => t('Rebuild theme data and the theme registry on every page request'),
     // '#default_value' => theme_get_setting('rebuild_theme_data'),
   // );
-  // All media queries for copy/pastings if you need them
+
+  // All media queries
   $queries = '';
   $mq = array();
   $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . theme_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';

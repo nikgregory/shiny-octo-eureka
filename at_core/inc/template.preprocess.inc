@@ -4,7 +4,7 @@
  *
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
-global $path_to_at_core;
+global $path_to_at_core, $theme_name;
 include_once($path_to_at_core . '/inc/config.inc');
 include_once($path_to_at_core . '/inc/template.helpers.inc');
 
@@ -12,28 +12,36 @@ include_once($path_to_at_core . '/inc/template.helpers.inc');
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-  global $theme_key, $language, $path_to_at_core;
-  $theme_name = $theme_key;
+  global $theme_name, $language, $path_to_at_core;
+
+  // $path_to_at_core is absolute and uses the DRUPAL_ROOT constant, because its twice 
+  // as fast to use an abolute path for include's, however it will bork anything that 
+  // needs relative paths like CSS and JS files loaded using drupal_add_css/js
+  $relative_path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  
   $vars['base_path'] = base_path();
-  $vars['path_to_adaptivetheme'] = $path_to_at_core;
-  $vars['polyfills_array'] = array();
+
 
   //dsm($vars);
 
+  // DOCTYPE
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
   $vars['doctype'] = '<!DOCTYPE html>' . "\n";
   $vars['rdf_profile'] = '';
 
+  // html_attributes
   // Clean up the lang attributes, great idea Zen
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
+  // Skip link
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
   if (theme_get_setting('skip_link_target', $theme_name)) {
     $vars['skip_link_target'] = theme_get_setting('skip_link_target', $theme_name);
   }
 
+  // CLASSES
   // Add extra classes if set
   if (theme_get_setting('extra_page_classes', $theme_name) === 1) {
 
@@ -83,8 +91,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Page title classes
-  // Oddly these must be added in html.tpl.php on body, since title_attributes_array is useless
+  // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
   //if ($vars['menu_item']['title']) { // Leaving this check out for now, not sure if this is safe
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -100,7 +107,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       }
     }
   //}
-  //dsm($vars['menu_item']['title']); //dubug it
+  //dsm($vars['menu_item']['title']); // debug it
 
   // Add a body class if the site name is hidden - state driven dynamic
   // classes are very useful and AT does this a lot
@@ -289,7 +296,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
   if (!empty($settings_css)) {
     foreach ($settings_css as $cssfile) {
-      drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
+      drupal_add_css($relative_path_to_at_core . '/css/' . $cssfile, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
         //'weight' => -100,
@@ -309,16 +316,16 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['polyfills'] = ''; /* Initialize always */
   $vars['polyfills_array'] = array();
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
+    $vars['polyfills_array']['lt_ie9'][] = $relative_path_to_at_core . '/js/respond.js';
   }
   if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
+    $vars['polyfills_array']['lt_ie8'][] = $relative_path_to_at_core . '/js/html5.js';
   }
   if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
+    $vars['polyfills_array']['lt_ie8'][] = $relative_path_to_at_core . '/js/boxsizing.htc';
   }
   if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
-    $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
+    $vars['polyfills_array']['all'][] = $relative_path_to_at_core . '/js/scalefix.js';
   }
 
   // Load Polyfills
@@ -438,14 +445,14 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region
-  if (theme_get_setting('expose_regions', $theme_name) === 1) {
+  if (theme_get_setting('expose_regions', $theme_name) === 1 || theme_get_setting('load_all_panels', $theme_name) === 1) {
     $vars['classes_array'][] = 'debug-regions';
     $vars['classes_array'][] = 'debug-panels';
-    drupal_add_css($path_to_at_core . '/css/debug-regions.css');
+    drupal_add_css($relative_path_to_at_core . '/css/debug-regions.css');
   }
   // Load window size bookmarklet
   if (theme_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($path_to_at_core . '/js/window-size.js',
+    drupal_add_js($relative_path_to_at_core . '/js/window-size.js',
       array(
         'type' => 'file',
         'scope' => 'footer',
@@ -461,8 +468,7 @@ function adaptivetheme_preprocess_html(&$vars) {
  * Preprocess variables for page.tpl.php
  */
 function adaptivetheme_preprocess_page(&$vars) {
-  global $theme_key, $language, $path_to_at_core;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // Set up logo element
   $vars['site_logo'] = '';
@@ -636,8 +642,7 @@ function adaptivetheme_preprocess_region(&$vars) {
  * Preprocess variables for block.tpl.php
  */
 function adaptivetheme_preprocess_block(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region === 'menu_bar') {
@@ -747,8 +752,7 @@ function adaptivetheme_preprocess_block(&$vars) {
  * Preprocess variables for node.tpl.php
  */
 function adaptivetheme_preprocess_node(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
@@ -820,8 +824,7 @@ function adaptivetheme_preprocess_node(&$vars) {
  * Preprocess variables for comment.tpl.php
  */
 function adaptivetheme_preprocess_comment(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // Extra comment classes if required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 1) {
@@ -911,8 +914,7 @@ function adaptivetheme_preprocess_search_block_form(&$vars) {
  * Preprocess variables for search-result.tpl.php
  */
 function adaptivetheme_preprocess_search_result(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   // Modify search result view based on theme settings
   $result = $vars['result'];
@@ -949,8 +951,7 @@ function adaptivetheme_preprocess_search_result(&$vars) {
  * Preprocess variables for field.tpl.php
  */
 function adaptivetheme_preprocess_field(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
+  global $theme_name;
 
   $element = $vars['element'];
 
