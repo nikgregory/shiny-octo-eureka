@@ -33,11 +33,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form
-  $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. $admin_theme .'"><div class="layout-header theme-settings-header clearfix">';
+  $logo = file_create_url($relative_path_to_at_core . '/logo.png');
+  $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. drupal_html_class($admin_theme) .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
-  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $relative_path_to_at_core . '/logo.png" /></a>';
+  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
   $layout_header .= '</div>';
-
+  
   $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout'),
@@ -46,7 +47,6 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#weight' => -10,
     '#attached' => array(
       'css' => array($relative_path_to_at_core . '/css/at.settings.form.css'),
-      //'js'  => array($path_to_at_core . '/js/chosen.jquery.min.js' => array('type' => 'file', 'type' => JS_THEME)),
     ),
   );
   // Include layout forms, global settings and debug

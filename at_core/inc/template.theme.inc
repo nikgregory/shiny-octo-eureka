@@ -164,7 +164,7 @@ function adaptivetheme_links($vars) {
       if (!empty($heading['class'])) {
         $output .= drupal_attributes(array('class' => $heading['class']));
       }
-      $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
+      $output .= '>' . filter_xss($heading['text']) . '</' . $heading['level'] . '>';
     }
     $output .= '<ul' . drupal_attributes($attributes) . '>';
 
