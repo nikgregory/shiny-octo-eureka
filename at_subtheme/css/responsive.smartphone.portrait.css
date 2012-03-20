@@ -13,4 +13,5 @@
  */
 html /* Example style to show how to target a device range */ {
  font-size: 112.5%; /* Increase the default font size on small devices */
+ background: red;
 }

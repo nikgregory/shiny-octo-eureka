@@ -14,15 +14,13 @@ include_once($path_to_at_core . '/inc/template.helpers.inc');
 function adaptivetheme_preprocess_html(&$vars) {
   global $theme_name, $language, $path_to_at_core;
 
-  // $path_to_at_core is absolute and uses the DRUPAL_ROOT constant, because its twice 
-  // as fast to use an abolute path for include's, however it will bork anything that 
+  // $path_to_at_core is absolute and uses the DRUPAL_ROOT constant, because its twice
+  // as fast to use an abolute path for include's, however it will bork anything that
   // needs relative paths like CSS and JS files loaded using drupal_add_css/js
   $relative_path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-  
+
+  // Set a variable for the base path
   $vars['base_path'] = base_path();
-
-
-  //dsm($vars);
 
   // DOCTYPE
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
@@ -92,22 +90,20 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
-  //if ($vars['menu_item']['title']) { // Leaving this check out for now, not sure if this is safe
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = array(
-        'page_title_case',
-        'page_title_weight',
-        'page_title_alignment',
-        'page_title_shadow',
-      );
-      foreach ($settings_array as $setting) {
-        if ($heading_settings = theme_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_settings;
-        }
+  if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    $settings_array = &drupal_static(__FUNCTION__, array());
+    $settings_array = array(
+      'page_title_case',
+      'page_title_weight',
+      'page_title_alignment',
+      'page_title_shadow',
+    );
+    foreach ($settings_array as $setting) {
+      if ($heading_settings = theme_get_setting($setting, $theme_name)) {
+        $vars['classes_array'][] = $heading_settings;
       }
     }
-  //}
-  //dsm($vars['menu_item']['title']); // debug it
+  }
 
   // Add a body class if the site name is hidden - state driven dynamic
   // classes are very useful and AT does this a lot
@@ -125,14 +121,19 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Load CSS and JavaScript
+  // AT has two modes - Production and Development. Depending on the
+  // mode it will load different files. Production mode assume you
+  // have finished CSS development and will not need to update styles 
+  // in the responsive stylesheets, if you do you will need to switch
+  // back to Development mode and save the theme settings at least 
+  // once to re-write your $theme_name.responsive.styles.css 
+  // file which is in the public files system.
+  
   // Set the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
   $file = '';
 
-  // Set a variable for the mode, AT has 2 modes, production and development
-  $mode = theme_get_setting('production_mode', $theme_name);
-
-  // Responsive Styles Loader: Development Mode
+  // Development Mode
   //
   // These files are for "design style" only, the layout is handled
   // seperately.
@@ -146,7 +147,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   //
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
-  if ($mode === 0) {
+  if (theme_get_setting('production_mode', $theme_name) === 0) {
     if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
 
       // Build a keyed array of CSS file-names as key, and media query as value.
@@ -184,7 +185,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // In Production mode we only load one file for responsive styles.
   // We use a media query to prevent non media query browsers from downloading it.
   // The embedded media queries in this file take precedence always.
-  else if ($mode === 1) {
+  else if (theme_get_setting('production_mode', $theme_name) === 1) {
     $file = $theme_name . '.responsive.styles.css';
     $media_query = 'only screen and (min-width:1px)';
     if (!empty($file)) {
@@ -308,9 +309,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Polyfills
-  // Build an array of scripts to load. 
+  // Build an array of scripts to load.
   // You can easily add to this array in your own preprocess function and use the
-  // array keys provided, or add your own. By default AT will load for "lt ie9", 
+  // array keys provided, or add your own. By default AT will load for "lt ie9",
   // "lt ie8" and "all". If you add your own keys you have to process them as well,
   // there is no generic loader, see below.
   $vars['polyfills'] = ''; /* Initialize always */
@@ -330,10 +331,10 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Load Polyfills
   if (!empty($vars['polyfills_array'])) {
-    
+
     // We need the query string for cache control fingerprinting
     $query_string = variable_get('css_js_query_string', '0');
-    
+
     // all - no conditional comment needed, use drupal_add_js()
     if (!empty($vars['polyfills_array']['all'])) {
       foreach ($vars['polyfills_array']['all'] as $script) {
@@ -348,7 +349,7 @@ function adaptivetheme_preprocess_html(&$vars) {
         );
       }
     }
-    // lt ie9 - need to build our own "scripts" variable ($vars['polyfills']) 
+    // lt ie9 - need to build our own "scripts" variable ($vars['polyfills'])
     // wrapping the scripts in a conditional comments
     if (!empty($vars['polyfills_array']['lt_ie9'])) {
       $condition = 'lt IE 9';
@@ -374,10 +375,10 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Google Font loader
-  // Adaptivetheme can load websafe fonts, Google fonts, custom font 
-  // stacks and integrate with @font-your-face module. All can be 
-  // configured in the "Fonts" theme settings. Here we only need to 
-  // load Google webfonts. Websafe and custom fonts are stored in a 
+  // Adaptivetheme can load websafe fonts, Google fonts, custom font
+  // stacks and integrate with @font-your-face module. All can be
+  // configured in the "Fonts" theme settings. Here we only need to
+  // load Google webfonts. Websafe and custom fonts are stored in a
   // CSS file (in public files) and @font-your-face module takes
   // care of loading its own fonts.
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
@@ -505,10 +506,10 @@ function adaptivetheme_preprocess_page(&$vars) {
     )
   ) : '';
 
-  // Headings Classes 
+  // Headings Classes
   // oh oh, whats this, a theme using the page $classes_array, unheard of!
   // This is all about scope - its easy to set these on body, but thats the wrong scope
-  // imo. AT wants to target the right scope always and not abuse the body element. This 
+  // imo. AT wants to target the right scope always and not abuse the body element. This
   // is not as DRY as it could be, particulary for blocks/nodes/comments etc but it does
   // open the door for more granularity (i.e. target one block or block type).
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
@@ -603,36 +604,41 @@ function adaptivetheme_preprocess_page(&$vars) {
  * Preprocess variables for region.tpl.php
  */
 function adaptivetheme_preprocess_region(&$vars) {
+
   // Add a "sidebar" class to sidebar regions
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
   }
+
   // Add classes to conditional stack regions in
   // Gpanel regions, in Panels responsive layout
   // plugins these are hard coded.
-  $conditional_stack_regions = array(
-    'three_25_25_50_top',
-    'three_25_25_50_bottom',
-    'three_25_50_25_top',
-    'three_25_50_25_bottom',
-    'three_50_25_25_top',
-    'three_50_25_25_bottom',
-    'three_33_top',
-    'three_33_bottom',
-    'two_50_top',
-    'two_50_bottom',
-    'two_33_66_top',
-    'two_33_66_bottom',
-    'two_66_33_top',
-    'two_66_33_bottom',
-    'two_brick_top',
-    'two_brick_middle',
-    'two_brick_bottom',
-    'threecol_inset_left_top',
-    'threecol_inset_left_bottom',
-    'threecol_inset_right_top',
-    'threecol_inset_right_bottom',
-  );
+  $conditional_stack_regions = &drupal_static(__FUNCTION__, array());
+  if (empty($conditional_stack_regions)) {
+    $conditional_stack_regions = array(
+      'three_25_25_50_top',
+      'three_25_25_50_bottom',
+      'three_25_50_25_top',
+      'three_25_50_25_bottom',
+      'three_50_25_25_top',
+      'three_50_25_25_bottom',
+      'three_33_top',
+      'three_33_bottom',
+      'two_50_top',
+      'two_50_bottom',
+      'two_33_66_top',
+      'two_33_66_bottom',
+      'two_66_33_top',
+      'two_66_33_bottom',
+      'two_brick_top',
+      'two_brick_middle',
+      'two_brick_bottom',
+      'threecol_inset_left_top',
+      'threecol_inset_left_bottom',
+      'threecol_inset_right_top',
+      'threecol_inset_right_bottom',
+    );
+  }
   if (in_array($vars['region'], $conditional_stack_regions)){
     $vars['classes_array'][] = 'region-conditional-stack';
   }
@@ -672,6 +678,7 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   // Add title style classes, these are loaded via the classes_arry and not title_attributes_array
   // so we can style the whole block depending on the title styles.
+  $settings_array = &drupal_static(__FUNCTION__, array());
   if (isset($vars['block']->subject)) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -702,6 +709,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   $vars['content_attributes_array']['class'][] = 'content';
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
+  $roles = &drupal_static(__FUNCTION__, array());
   $roles = array(
     'complementary' => array(
       'aggregator',
@@ -776,6 +784,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   // Add title style classes, as per blocks these are added to classes_array not title_attraibutes_array
   // so we can style the entire node based on how the title wants to be handled (such as alignmment)
+  $settings_array = &drupal_static(__FUNCTION__, array());
   if (isset($vars['title'])) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -860,6 +869,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
   }
 
   // Add title style classes
+  $settings_array = &drupal_static(__FUNCTION__, array());
   if (theme_get_setting('comments_hide_title', $theme_name) !== 1) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = array(
@@ -984,7 +994,7 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
   // We want the same highly accurate time stamp feature as nodes and comments
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
-  
+
   // Give our aggregator items some class
   $vars['classes_array'][] = 'feed-item clearfix';
   $vars['title_attributes_array']['class'][] = 'title feed-item-title';

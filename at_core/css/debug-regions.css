@@ -65,30 +65,6 @@
   content: "#section-footer";
 }
 
-/*
-.debug-regions .section-inner {
-  outline: 1px solid #ddd;
-  background: #eee;
-  margin-bottom: 20px;
-  position: relative;
-}
-.debug-regions .section-inner:after {
-  content: "full width wrapper (#preface-ID > .section-inner)";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  color: #999;
-  background: #ddd;
-  border-radius: 0 6px 0 0;
-  padding: 3px 10px;
-  font-size: 0.823em;
-}
-*/
-
-.debug-regions {
-  font-size: 13px;
-}
-
 /* Region */
 .debug-regions .region,
 .debug-regions #menu-bar {

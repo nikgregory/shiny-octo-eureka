@@ -1,7 +1,8 @@
 <?php
   // I have thought about putting this into a config array like fonts and reponsive panels forms,
   // however each fieldset is very bespoke and it will be hard to generate this from a config array.
-  // bigscreen
+
+  // Bigscreen (standard-layout)
   $form['at-layout']['bigscreen'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Layout'),
@@ -142,7 +143,8 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-  // tablet
+
+  // Tablet
   $form['at-layout']['tablet'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Layout'),
@@ -153,7 +155,7 @@
       ),
     ),
   );
-  // landscape
+  // Tablet landscape
   $form['at-layout']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
@@ -252,7 +254,8 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-  // tablet portrait
+
+  // Tablet portrait
   $form['at-layout']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
@@ -355,7 +358,8 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-  // smartphone
+
+  // Smartphone
   $form['at-layout']['smartphone'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Layout'),
@@ -366,7 +370,8 @@
       ),
     ),
   );
-  // landscape
+
+  // Smartphone landscape
   $form['at-layout']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
@@ -470,7 +475,8 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-  // smartphone portrait
+
+  // Smartphone portrait
   $form['at-layout']['smartphone']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),

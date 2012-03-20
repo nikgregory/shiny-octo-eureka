@@ -149,7 +149,6 @@ function adaptivetheme_js_alter(&$javascript) {
   // Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
   $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
   $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
-  //dsm($javascript);
 }
 
 // hook_page_alter()
@@ -167,7 +166,6 @@ function adaptivetheme_page_alter(&$page) {
       }
     }
   }
-  //dsm($page);
 }
 
 /* debug

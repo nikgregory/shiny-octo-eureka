@@ -1,18 +1,19 @@
 /**
- * Import all the global styles into one file.
+ * Import all the global stylesheets into one file.
  * This is done purely as a house-keeping exercise and to make it easy
  * to unset one stylesheet by simply commenting it out.
  * 
  * When CSS aggregation is ON the @imports are resolved and only one
  * aggreated file is generated, so there is zero performance overhead
- * in using @import.
+ * in using @import. In other words this files content is replaced by
+ * all the CSS in the imported stylseheets, then compressed and cached 
+ * by Drupal in the public files directory.
  *
  * The modular structure is very similar to Zen and the actual CSS used in 
- * many of these files are a strait copy from the Zen theme - this is to 
- * provide a consistant themer experience for those who have used Zen. 
- * Adaptivetheme adds additional classes, makes minor adjustments to some 
- * classes and id's and adds tables.css and panels.css, otherwise its 
- * nearly identical to Zen. Shout it out for JohnAlbin, you rock man.
+ * some of these files is lifted from the Zen theme - this is to  provide 
+ * a consistant themer experience for those who have used Zen. Adaptivetheme 
+ * adds additional classes, makes minor adjustments to some classes, id's 
+ * and the actual styles, and adds base styles for tables and Panels.
  */
 
 @import "global.base.css";     /* Reset + additional styles to support modern web browsers */

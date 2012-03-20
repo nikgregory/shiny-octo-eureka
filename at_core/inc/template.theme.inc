@@ -9,16 +9,19 @@
  * Returns HTML for a breadcrumb trail.
  */
 function adaptivetheme_breadcrumb($vars) {
+  global $theme_name;
+
   $breadcrumb = $vars['breadcrumb'];
-  $show_breadcrumb = theme_get_setting('breadcrumb_display');
+  $show_breadcrumb = theme_get_setting('breadcrumb_display', $theme_name);
+
   if ($show_breadcrumb == 'yes') {
-    $show_breadcrumb_home = theme_get_setting('breadcrumb_home');
+    $show_breadcrumb_home = theme_get_setting('breadcrumb_home', $theme_name);
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
     }
     if (!empty($breadcrumb)) {
       $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-      $separator = filter_xss(theme_get_setting('breadcrumb_separator'));
+      $separator = filter_xss(theme_get_setting('breadcrumb_separator', $theme_name));
       $output = '';
       foreach ($breadcrumb as $key => $val) {
         if ($key == 0) {
@@ -31,6 +34,7 @@ function adaptivetheme_breadcrumb($vars) {
       return $heading . '<ol id="crumbs">' . $output . '</ol>';
     }
   }
+
   return '';
 }
 
@@ -38,6 +42,7 @@ function adaptivetheme_breadcrumb($vars) {
  * Returns HTML for a list or nested list of items.
  */
 function adaptivetheme_item_list($vars) {
+  global $theme_name;
   $items = $vars['items'];
   $title = $vars['title'];
   $type = $vars['type'];
@@ -70,11 +75,13 @@ function adaptivetheme_item_list($vars) {
       else {
         $data = $item;
       }
+
       if (count($children) > 0) {
         // Render nested list.
         $data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
       }
-      if (theme_get_setting('extra_item_list_classes')) {
+
+      if (theme_get_setting('extra_item_list_classes', $theme_name) === 1) {
         if ($i & 1) {
           $attributes['class'][] = 'odd';
         }
@@ -93,6 +100,7 @@ function adaptivetheme_item_list($vars) {
     $output .= "</$type>";
   }
   $output .= '</div>';
+
   return $output;
 }
 
@@ -105,12 +113,16 @@ if (!function_exists('dhtml_menu_init')) {
 
   // theme_menu_link
   function adaptivetheme_menu_link(array $vars) {
+    global $theme_name;
+
     $element = $vars['element'];
     $sub_menu = '';
+
     if ($element['#below']) {
       $sub_menu = drupal_render($element['#below']);
     }
-    if (theme_get_setting('extra_menu_classes') && !empty($element['#original_link'])) {
+
+    if (theme_get_setting('extra_menu_classes', $theme_name) === 1 && !empty($element['#original_link'])) {
       if (!empty($element['#original_link']['depth'])) {
         $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
       }
@@ -118,7 +130,8 @@ if (!function_exists('dhtml_menu_init')) {
         $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
       }
     }
-    if (theme_get_setting('menu_item_span_elements') && !empty($element['#title'])) {
+
+    if (theme_get_setting('menu_item_span_elements', $theme_name) === 1 && !empty($element['#title'])) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
@@ -131,10 +144,12 @@ if (!function_exists('dhtml_menu_init')) {
 
 // theme links
 function adaptivetheme_links($vars) {
+  global $language_url, $theme_name;
+
   $links = $vars['links'];
   $attributes = $vars['attributes'];
   $heading = $vars['heading'];
-  global $language_url;
+
   $output = '';
   if (count($links) > 0) {
     $output = '';
@@ -152,39 +167,38 @@ function adaptivetheme_links($vars) {
       $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
     }
     $output .= '<ul' . drupal_attributes($attributes) . '>';
+
     $num_links = count($links);
     $i = 1;
+
     foreach ($links as $key => $link) {
-      if (theme_get_setting('extra_menu_classes')) {
+
+      if (theme_get_setting('extra_menu_classes', $theme_name) === 1) {
         $class = array($key);
-      }
-      if (theme_get_setting('extra_menu_classes')) {
         if ($i == 1) {
           $class[] = 'first';
         }
         if ($i == $num_links) {
           $class[] = 'last';
         }
-      }
-      if (theme_get_setting('extra_menu_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
             && (empty($link['language']) || $link['language']->language == $language_url->language)) {
           $class[] = 'active';
         }
-      }
-      if (theme_get_setting('extra_menu_classes')) {
         $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
       }
+
       else {
         $output .= '<li>';
       }
       if (isset($link['href'])) {
-        if (theme_get_setting('menu_item_span_elements')) {
+        if (theme_get_setting('menu_item_span_elements', $theme_name) === 1) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
         $output .= l($link['title'], $link['href'], $link);
       }
+
       elseif (!empty($link['title'])) {
         if (empty($link['html'])) {
           $link['title'] = check_plain($link['title']);
@@ -200,6 +214,7 @@ function adaptivetheme_links($vars) {
     }
     $output .= '</ul>';
   }
+
   return $output;
 }
 
@@ -211,10 +226,12 @@ function adaptivetheme_links($vars) {
  */
 function adaptivetheme_field($vars) {
   $output = '';
+
   // Render the label, if it's not hidden.
   if (!$vars['label_hidden']) {
     $output .= '<h2 class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</h2>';
   }
+
   // Render the items.
   $output .= '<div class="field-items"' . $vars['content_attributes'] . '>';
   foreach ($vars['items'] as $delta => $item) {
@@ -222,49 +239,63 @@ function adaptivetheme_field($vars) {
     $output .= '<div class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</div>';
   }
   $output .= '</div>';
+
   // Render the top-level wrapper element.
   $tag = $vars['label_hidden'] ? 'div' : 'section';
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
+
   return $output;
 }
 
 // Output taxonomy term fields as unordered lists, this has been moved to a function in AT 7.x-3.x for performance reasons
 function adaptivetheme_field__taxonomy_term_reference($vars) {
   $output = '';
+
   // Render the label, if it's not hidden.
   if (!$vars['label_hidden']) {
     $output .= '<h2 class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</h2>';
   }
+
   // Render the items.
   $output .= '<ul class="field-items"' . $vars['content_attributes'] . '>';
   foreach ($vars['items'] as $delta => $item) {
     $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
     $output .= '<li class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</li>';
   }
+
   $output .= '</ul>';
   // Render the top-level wrapper element.
   $tag = $vars['label_hidden'] ? 'div' : 'section';
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
+
   return $output;
 }
 
 // Output image fields as figure with figcaption for captioning
 function adaptivetheme_field__image($vars) {
+  global $theme_name;
+
   // Check if image settings are enabled, otherwise captions might print unexpectedly
-  $image_settings_enabled = theme_get_setting('enable_image_settings') ? TRUE : FALSE;
-  $caption_full = theme_get_setting('image_caption_full') == 1 ? TRUE : FALSE;
-  $caption_teaser = theme_get_setting('image_caption_teaser') == 1 ? TRUE : FALSE;
+  $image_settings_enabled = theme_get_setting('enable_image_settings', $theme_name) === 1 ? TRUE : FALSE;
+  $caption_full = theme_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
+  $caption_teaser = theme_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
+
   $output = '';
+
   // Render the label, if it's not hidden.
   if (!$vars['label_hidden']) {
     $output .= '<h2 class="field-label"' . $vars['title_attributes'] . '>' . $vars['label'] . ':&nbsp;</h2>';
   }
+
   // Render the items.
   $output .= '<div class="field-items"' . $vars['content_attributes'] . '>';
+
   foreach ($vars['items'] as $delta => $item) {
+
     $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
     $output .= '<figure class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>';
     $output .= drupal_render($item);
+
     if (isset($item['#item']['title'])) {
       if ($vars['field_view_mode'] == 'full') {
         if ($caption_full == TRUE && $image_settings_enabled == TRUE) {
@@ -277,11 +308,15 @@ function adaptivetheme_field__image($vars) {
         }
       }
     }
+
     $output .= '</figure>';
   }
+
   $output .= '</div>';
+
   // Render the top-level wrapper element.
   $tag = $vars['label_hidden'] ? 'div' : 'section';
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
+
   return $output;
 }

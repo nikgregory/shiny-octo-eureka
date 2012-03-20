@@ -23,6 +23,7 @@ function _theme_menu_variables($menu, $type) {
 * that themes responsive stylesheets.
 */
 function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
+  $path_to_theme = &drupal_static(__FUNCTION__);
   $path_to_theme = drupal_get_path('theme', $theme_name);
   $filepath = $path_to_theme . '/css/' . $css_file;
   if (file_exists($filepath)) {

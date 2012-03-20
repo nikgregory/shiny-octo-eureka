@@ -18,7 +18,7 @@
   $form['at-layout']['global-settings']['mode']['production_mode'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Production Mode'),
-    '#description' => t('Enabling Production mode reduces HTTP requests by aggregating the responsive stylesheets into one CSS file and uses embedded media queries. TODO: add link to documentation.'),
+    '#description' => t('Enabling Production mode reduces HTTP requests by aggregating the responsive stylesheets into one CSS file and uses embedded media queries. Enable this after you have finished writing your CSS styles. If you later change any styles in the responsive stylesheets you will need re-save the theme settings to re-write the aggregated CSS file.'),
     '#default_value' => theme_get_setting('production_mode'),
   );
   // set default layout

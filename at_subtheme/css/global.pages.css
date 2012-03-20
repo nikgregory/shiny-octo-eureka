@@ -49,6 +49,22 @@ body {
 }
 
 
+/* Modify gutters */
+.block-inner,
+.pane-inner,
+div.messages,
+#branding,
+#primary-nav,
+#secondary-nav,
+#breadcrumb,
+#main-content,
+#attribution,
+.at-panel .rounded-corner {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
 /*
  * Branding
  */

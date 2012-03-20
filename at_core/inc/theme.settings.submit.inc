@@ -51,34 +51,6 @@ function at_theme_settings_validate($form, &$form_state) {
       }
     }
   }
-
-  // Custom font stacks are "required" using form states also...
-  /*
-  if ($values['enable_font_settings'] === 1) {
-    $custom_font_stack_settings = array(
-      'base_font_type'           => 'base_font_cfs',
-      'site_name_font_type'      => 'site_name_font_cfs',
-      'site_slogan_font_type'    => 'site_slogan_font_cfs',
-      'page_title_font_type'     => 'page_title_font_cfs',
-      'node_title_font_type'     => 'node_title_font_cfs',
-      'comment_title_font_type'  => 'comment_title_font_cfs',
-      'block_title_font_type'    => 'block_title_font_cfs',
-      'main_menu_font_type'      => 'main_menu_font_cfs',
-      'secondary_menu_font_type' => 'secondary_menu_font_cfs',
-      'block_menu_font_type'     => 'block_menu_font_cfs',
-      'content_headings_h1h4_font_type' => 'content_headings_h1h4_font_cfs',
-      'content_headings_h5h6_font_type' => 'content_headings_h5h6_font_cfs',
-    );
-    foreach ($custom_font_stack_settings as $key => $value) {
-      if ($values[$key] == 'cfs') {
-        if (empty($values[$value])) {
-          $setting_text = str_replace('_', ' ', str_replace('cfs', '', ucfirst($value)));
-          form_set_error($value, t("Ops, you need to enter some fonts for <b>$setting_text</b> (custom font stack), or choose a different type."));
-        }
-      }
-    }
-  }
-  */
 }
 
 // Custom submit function - this mostly builds and saves stylesheets for
@@ -89,16 +61,21 @@ function at_theme_settings_submit($form, &$form_state) {
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
   $is_default_layout = $values['global_default_layout'];
+  $default_layout = 'standard-layout'; // need this to support 7.x-2.x subthemes
   $path_to_panels_css = drupal_get_path('theme', 'adaptivetheme') . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
-  // Set up the directory and variables, we will save the data here:
+  // Set up our files directory we will save all generated files here. Files are never
+  // overwritten, however the files are really small - total around 25kb depending, of
+  // which around 8kb is never loaded - the Theme info config file, which is just a backup.
   $id = $theme_name . '_files_' . substr(hash('sha256', serialize($theme_name) . microtime()), 0, 8);
   $path  = 'public://adaptivetheme/' . $id;
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
   variable_set('theme_' . $theme_name . '_files_directory', $path);
 
-  // theme info config
+  // Theme info config - this is the info file backed up to a file. Its perfectly
+  // formatted and holds all current values - useful for migration or simply
+  // capturing the current theme settings as defaults, which is why I built it.
   $theme_settings = $values;
   if ($theme_settings) {
     $dynamic_settings_info = array();
@@ -194,6 +171,7 @@ function at_theme_settings_submit($form, &$form_state) {
     }
   }
 
+  // Layout
   // Initialize the panels layout variable, this will by and large hold the panels layouts
   $panels_layout = '';
   // $layouts will hold all the page level layouts
@@ -253,19 +231,6 @@ function at_theme_settings_submit($form, &$form_state) {
     $comment        = "/* Smartphone landscape $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
 
-    /*
-    if ($values['smartphone_landscape_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['smartphone_landscape_max_width'];
-      $max_width_unit = $values['smartphone_landscape_max_width_unit'];
-      if (!empty($max_width)) {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width: ' . $max_width . $max_width_unit . '}';
-      }
-      else {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width: ' . $page_width . $page_unit . '}';
-      }
-    }
-    */
-
     // Panels layouts
     $panel_settings = array(
       'smartphone_landscape_two_50',
@@ -320,19 +285,6 @@ function at_theme_settings_submit($form, &$form_state) {
     $comment        = "/* Tablet portrait $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
 
-    /*
-    if ($values['tablet_portrait_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['tablet_portrait_max_width'];
-      $max_width_unit = $values['tablet_portrait_max_width_unit'];
-      if (!empty($max_width)) {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $max_width . $max_width_unit . '}';
-      }
-      else {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $page_width . $page_unit . '}';
-      }
-    }
-    */
-
     // Panels layouts
     $panel_settings = array(
       'tablet_portrait_two_50',
@@ -386,19 +338,6 @@ function at_theme_settings_submit($form, &$form_state) {
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Tablet landscape $method */\n";
     $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
-
-    /*
-    if ($values['tablet_landscape_set_max_width'] == 1 && $page_unit == '%') {
-      $max_width = $values['tablet_landscape_max_width'];
-      $max_width_unit = $values['tablet_landscape_max_width_unit'];
-      if (!empty($max_width)) {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $max_width . $max_width_unit . '}';
-      }
-      else {
-        $width = "\n" . '.container {width:' . $page_width . $page_unit .';max-width:' . $page_width . $page_unit . '}';
-      }
-    }
-    */
 
     // panels layouts
     $panel_settings = array(
@@ -588,7 +527,9 @@ function at_theme_settings_submit($form, &$form_state) {
     $font_elements = font_elements();
 
     // Check if fontyourface is enabled, doing this in the loop will be expensive
+    $fontyourface = FALSE;
     if (module_exists('fontyourface')) {
+      static $fontyourface;
       $fontyourface = TRUE;
     }
 
@@ -725,7 +666,7 @@ function at_theme_settings_submit($form, &$form_state) {
         }
       }
     }
-
+    // finally implode the data into a variable, ready for printing to file
     $font_styles = implode("\n", $font_styles_data);
 
     $file_name = $theme_name . '_font_families.css';
@@ -738,8 +679,8 @@ function at_theme_settings_submit($form, &$form_state) {
 function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit) {
 
   // Set variables for language direction
-  $left = 'left';
-  $right = 'right';
+  static $left = 'left';
+  static $right = 'right';
 
   // build the $styles array
   $styles = array();
@@ -833,7 +774,7 @@ function build_font_families_css($element, $selector, $font_values) {
   switch ($element) {
     case $element:
       $css[] = $selector . '{' . $font_styles . '}';
-      break;
+    break;
   }
   $styles = implode("\n", $css);
   return $styles;
