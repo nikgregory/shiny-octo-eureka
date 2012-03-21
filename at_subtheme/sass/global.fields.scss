@@ -4,98 +4,137 @@
 //
 
 // Wrapper for any field.
-.field { }
+.field {}
+
 
 //
 // Field Labels
 //
 
 // Above and inline classes are on the field wrapper
-.field-label-above { }
+.field-label-above {}
+
 
 // When labels are set to inline in field display settings the clearfix class is automatically added
-.field-label-inline { }
+.field-label-inline {}
+
 
 // Labels are H2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues.
 h2.field-label {
   font-size: 1em;
   font-weight: 700;
   line-height: inherit;
-  margin: 0; }
+  margin: 0;
+}
+
 
 //
 // Field types (Core)
 //
 
 // Image fields use the <figure> and <figcaption> elements from HTML5.
-.field-type-image { }
+.field-type-image {
 
-.field {
+  // The .caption class is applied to all captions regardless of view mode.
+  .caption {}
+  
+  // View mode full.
+  .full-caption {}
+  
+  // View mode teaser.
+  .teaser-caption {}
+}
 
-// The .caption class is applied to all captions regardless of view mode.
-  .field .caption  { }
 
-// View mode full.
-  .field .full-caption { }
-
-// View mode teaser.
-  .field .teaser-caption { } }
-
-// Taxonomy fields are output as an unordered list in Adaptivetheme.
+// Taxonomy
 .field-type-taxonomy-term-reference {
+
   // The same bottom margin as p, blockquote, ul, ol and dl
-  margin-bottom: 1.5em; }
+  margin-bottom: 1.5em;
+  
+  &ul.field-items {
+    margin: 0;
+    padding: 0;
+  }
+  
+  &li.field-item {
+    display: inline;
+    list-style: none;
+    padding: 0 10px 0 0; /* LTR */ 
+  }
+}
 
-.field-type-taxonomy-term-reference ul.field-items {
-  margin: 0;
-  padding: 0; }
 
-.field-type-taxonomy-term-reference li.field-item {
-  display: inline;
-  list-style: none;
-  padding: 0 10px 0 0; /* LTR */ }
+// Text
+.field-type-text {}
 
-.field-type-text { }
 
-.field-type-text-long { }
+// Long text
+.field-type-text-long {}
 
-.field-type-text-with-summary { }
 
-.field-type-file { }
+// Text with summary
+.field-type-text-with-summary {}
 
-.field-type-number-integer { }
 
-.field-type-number-decimal { }
+// File
+.field-type-file {}
 
-.field-type-number-float { }
 
-.field-type-list-text { }
+// Number/Integer
+.field-type-number-integer {}
 
-.field-type-list-boolean { }
 
-.field-type-list-integer { }
+// Decimal
+.field-type-number-decimal {}
 
-.field-type-list-float { }
+
+// Number float
+.field-type-number-float {}
+
+
+// List
+.field-type-list-text {}
+
+
+// List boolean
+.field-type-list-boolean {}
+
+
+// List integer
+.field-type-list-integer {}
+
+
+// List float
+.field-type-list-float {}
+
 
 //
 // Field types (Contrib)
 //
 
-.field-type-datetime { }
+.field-type-datetime {}
 
-.field-type-node-reference { }
 
-.field-type-user-reference { }
+.field-type-node-reference {}
+
+
+.field-type-user-reference {}
+
 
 //
 // Named fields
 //
 
-.field-name-body { }
+.field-name-body {}
 
-.field-name-field-image { }
 
-.field-name-field-tags { }
+.field-name-field-image {}
+
+
+.field-name-field-tags {}
+
 
 // Underscores in field name are replaced with dashes.
-.field-name-field-FIELDNAME { }
+.field-name-field-FIELDNAME {}
+

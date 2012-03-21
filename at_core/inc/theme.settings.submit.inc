@@ -57,11 +57,13 @@ function at_theme_settings_validate($form, &$form_state) {
 // various features such as the responsive layout and font styles.
 function at_theme_settings_submit($form, &$form_state) {
 
-  // Setup some variables we're going to use a lot
+  // Set form_state values into one variable
   $values = $form_state['values'];
+
+  // Get the active theme name, $theme_key will return the admin theme
   $theme_name = $form_state['build_info']['args'][0];
-  $is_default_layout = $values['global_default_layout'];
-  $default_layout = 'standard-layout'; // need this to support 7.x-2.x subthemes
+
+  // Set up some paths we use to get and save files
   $path_to_panels_css = drupal_get_path('theme', 'adaptivetheme') . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
@@ -73,7 +75,7 @@ function at_theme_settings_submit($form, &$form_state) {
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
   variable_set('theme_' . $theme_name . '_files_directory', $path);
 
-  // Theme info config - this is the info file backed up to a file. Its perfectly
+  // Theme info config - this is theme info backed up to a file. Its perfectly
   // formatted and holds all current values - useful for migration or simply
   // capturing the current theme settings as defaults, which is why I built it.
   $theme_settings = $values;
@@ -172,12 +174,23 @@ function at_theme_settings_submit($form, &$form_state) {
   }
 
   // Layout
+  // Initialize the $is_default_layout variable, we use this to test against
+  $is_default_layout = $values['global_default_layout'];
+
+  // Need this to support 7.x-2.x subthemes which are all desktop first
+  $default_layout = 'standard-layout';
+  
   // Initialize the panels layout variable, this will by and large hold the panels layouts
   $panels_layout = '';
+
   // $layouts will hold all the page level layouts
   $layouts = array();
+
   // $responsive_styles will hold all the styles from the responsive stylesheets, wrapped in media queries.
   $responsive_styles = array();
+  
+  // Three of the five layouts write their Panels CSS dynamically, we need to add a float delcaration just for theme.
+  $float = '.at-panel .region {display:inline;float:left}';
 
   // If the cascade setting is true, load up these styles first
   if ($values['enable_cascading_media_queries'] === 1) {
@@ -185,7 +198,9 @@ function at_theme_settings_submit($form, &$form_state) {
     $responsive_styles[] = $responsive_css . "\n";
   }
 
-  // Smartphone layout - portrait, we only need the media query values
+  // Build layouts for each break-point
+
+  // Smartphone portrait - we only need the media query values
   if ($values['smartphone_portrait_media_query']) {
     $device_group   = 'smartphone';
     $sidebar_first  = 100;
@@ -217,7 +232,8 @@ function at_theme_settings_submit($form, &$form_state) {
 
     $layouts[] = $css;
   }
-  // Smartphone layout - landscape
+
+  // Smartphone landscape
   if ($values['smartphone_landscape_layout']) {
     $device_group   = 'smartphone';
     $sidebar_first  = $values['smartphone_landscape_sidebar_first'];
@@ -247,6 +263,7 @@ function at_theme_settings_submit($form, &$form_state) {
       'smartphone_landscape_inset_left',
       'smartphone_landscape_inset_right',
     );
+    // Get the CSS for these layouts
     $css_files = array();
     foreach ($panel_settings as $setting) {
       $option = $values[$setting];
@@ -256,11 +273,9 @@ function at_theme_settings_submit($form, &$form_state) {
     if ($values['load_respondjs'] === 1) {
       foreach ($panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
+        $css_files[] = drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
-    // These panel regions can float, add a single declaration to support floating regions
-    $float = '.at-panel .region {display:inline;float:left}';
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
@@ -271,6 +286,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
     $layouts[] = $css;
   }
+
   // Tablet layout - portrait
   if ($values['tablet_portrait_layout']) {
     $device_group   = 'tablet_portrait';
@@ -301,6 +317,7 @@ function at_theme_settings_submit($form, &$form_state) {
       'tablet_portrait_inset_left',
       'tablet_portrait_inset_right',
     );
+    // Get the CSS for these layouts
     $css_files = array();
     foreach ($panel_settings as $setting) {
       $option = $values[$setting];
@@ -313,8 +330,6 @@ function at_theme_settings_submit($form, &$form_state) {
         $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
-    // These panel regions can float, add a single declaration to support floating regions
-    $float = '.at-panel .region {display:inline;float:left}';
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
@@ -325,6 +340,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
     $layouts[] = $css;
   }
+
   // Tablet layout - landscape
   if ($values['tablet_landscape_layout']) {
     $device_group   = 'tablet_landscape';
@@ -367,9 +383,6 @@ function at_theme_settings_submit($form, &$form_state) {
         $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
       }
     }
-
-    // These panel regions can float, add a single declaration to support floating regions
-    $float = '.at-panel .region {display:inline;float:left}';
     $panels_layouts = $float . "\n" . implode("\n", $css_files);
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
@@ -380,7 +393,8 @@ function at_theme_settings_submit($form, &$form_state) {
 
     $layouts[] = $css;
   }
-  // Standard bigscreen layout
+
+  // Standard bigscreen layout - now we really get cracking...
   if ($values['bigscreen_layout']) {
     $device_group   = 'bigscreen';
     $sidebar_first  = $values['bigscreen_sidebar_first'];
@@ -422,7 +436,7 @@ function at_theme_settings_submit($form, &$form_state) {
     // Next we need to know if respond.js is loading or not, so we can setup variables for later on
     if ($values['load_respondjs'] === 0) {
       // respondjs is OFF, we need to load the IE stylesheet with the standard layout, width, panels
-      // layouts and tack the lt ie7 panels layout overrides on the end
+      // layouts and tack the lte ie7 panels layout overrides on the end
       $lt_ie9_css = $standard_layout_comment . implode("\n", $layout) . $width . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
     }
     if ($values['load_respondjs'] === 1) {
@@ -483,7 +497,8 @@ function at_theme_settings_submit($form, &$form_state) {
   // Next the responsive layout
   $responsive_layout_data = implode("\n", $layouts);
   $responsive_layout = $responsive_layout_data;
-  // Nuke $responsive_layout if we really don't need it
+  
+  // Nuke $responsive_layout if we really don't need it, yes, after all that we throw it away, ass about face but thats how it worked out
   if ($values['disable_responsive_styles'] == 1) {
     $responsive_layout = '/* Responsive capabilites are disabled, only the default layout is loading, we dont need this so its not loaded */';
   }
@@ -491,7 +506,7 @@ function at_theme_settings_submit($form, &$form_state) {
   // Finally for lt ie9
   $lt_ie9_layout = $lt_ie9_css;
 
-  // Not finished yet though, we need to aggregate the responsive stylesheets
+  // Not finished yet though, we need to aggregate the design stylesheets
   $responsive_css = implode("\n", $responsive_styles);
 
   // Build a keyed array: file names as key, layout data as value
@@ -512,8 +527,7 @@ function at_theme_settings_submit($form, &$form_state) {
   // Fonts
   // Save the font settings in a CSS file
 
-  // Only run this if fonts are actually enabled, otherwise we might get a
-  // a nasty error...
+  // Only run this if fonts are actually enabled
   if ($values['enable_font_settings'] === 1) {
 
     // $font_styles_data holds all data for the stylesheet
@@ -521,9 +535,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
     // Get the font elements array. Everything is built from the items in this
     // array, simply adding to it will generate new CSS, as long as the form
-    // items exist to collect the values - ideally the form itself should be
-    // generated from this array, although for now its hard coded.
-    // Note to self: generate ALL forms from multidimensional arrays...
+    // items exist to collect the values.
     $font_elements = font_elements();
 
     // Check if fontyourface is enabled, doing this in the loop will be expensive
@@ -541,7 +553,7 @@ function at_theme_settings_submit($form, &$form_state) {
     // @font-your-face. For websafe, google and font-your-face it needs to
     // find a match - where the setting matches a font in one of those
     // arrays. Custom stack is easier, we just take the value we are given.
-    // Once we know all the winners etc we format the values etc into CSS
+    // Once we know all the winners we format the values into CSS
     // using build_font_families_css(). In short this was not built for
     // performance and its pretty slow, but it does the job.
     foreach ($font_elements as $key => $value) {
@@ -553,7 +565,7 @@ function at_theme_settings_submit($form, &$form_state) {
 
       // We need to retrive this, its in a theme setting not in the font elements array
       if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
-        $selector = filter_xss($values['selectors_css']); // user entered data
+        $selector = filter_xss($values['selectors_css']); // sanitize user entered data
       }
 
       // Get the font type if isset, not all font settings have a type
@@ -675,7 +687,7 @@ function at_theme_settings_submit($form, &$form_state) {
   }
 }
 
-// Build the core layouts, this is called once per orientation, except for smartphone portrait which is hard coded
+// Build the core layouts, this is called once per orientation/break-point
 function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit) {
 
   // Set variables for language direction
@@ -758,7 +770,7 @@ function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit)
   return $styles;
 }
 
-// Build CSS and save it as a file, or not, I havent decided yet...
+// Build font family CSS
 function build_font_families_css($element, $selector, $font_values) {
   // Format values as valid CSS
   $font_styles = array();

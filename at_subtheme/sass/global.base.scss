@@ -75,7 +75,6 @@
 
 
 // Always apply your global font size the the HTML element, not body or #page
-
 html {
   line-height: 1.5;
   height: 100%;
@@ -93,6 +92,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+
 h1, h2, h3, h4, h5, h6,
 h1 img, h2 img, h3 img, h4 img, h5 img, h6 img,
 em, dfn, del, ins,
@@ -106,7 +106,6 @@ figure, figcaption {
 
 
 // Reset HTML5 elements
-
 article,
 aside,
 details,
@@ -123,7 +122,6 @@ section {
 
 
 // Default font sizes for headings, can be overridden in theme settings or set them here
-
 h1 {}
 h2 {}
 h3 {}
@@ -166,18 +164,23 @@ var {
 }
 
 
-blockquote, q {
+blockquote, 
+q {
   font-style: italic;
   quotes: "" "";
   &:before, &:after {
-    content: ""; }
+    content: ""; 
+  }
 }
 
 
 blockquote {
   margin: 0 0 1.5em;
   padding: 0 0 0 40px;
-  p { margin: 0; }
+  
+  p { 
+    margin: 0; 
+  }
 }
 
 
@@ -197,10 +200,12 @@ ol {
 
 
 .item-list {
+
   ul, ol {
     margin: 0 0 0 15px;
     padding: 0;
   }
+  
   ul li {
     margin: 0;
     padding: 0;
@@ -209,6 +214,7 @@ ol {
 
 
 ul, ol {
+
   ul, ol {
     &, .block &, .item-list & {
       margin-bottom: 0;
@@ -219,6 +225,7 @@ ul, ol {
 
 ul {
   list-style-type: disc;
+  
   ul ul {
     list-style-type: square;
   }
@@ -227,8 +234,11 @@ ul {
 
 ol {
   list-style-type: decimal;
+  
   ol {
+  
     list-style-type: lower-alpha;
+    
     ol {
       list-style-type: lower-roman;
     }
@@ -238,6 +248,7 @@ ol {
 
 ul ul {
   list-style-type: circle;
+  
   ul ul {
     list-style-type: circle;
   }
@@ -262,7 +273,6 @@ dd {
 //   the "dissappering images" bug in IE8.
 // - Google maps break also, see below for fixes.
 //
-
 img {
   max-width: 100%;
   height: auto;
@@ -271,7 +281,6 @@ img {
 
 
 // Ethan Marcotte - http://front.ie/l8rJaA
-
 img,
 embed,
 object,
@@ -281,7 +290,6 @@ video {
 
 
 // Disable flexiblity for IE8 and below
-
 .lt-ie9 {
   img,
   object,
@@ -293,7 +301,6 @@ video {
 
 
 // Override max-width 100% for map displays, as much as possible anyway...
-
 #map img,
 .gmap img,
 .view-gmap img,
@@ -306,14 +313,12 @@ video {
 
 
 // Improve IE's resizing of images
-
 svg:not(:root) {
   overflow: hidden;
 }
 
 
 // Corrects inline-block display not defined in IE6/7/8/9 & FF3
-
 audio,
 canvas,
 video {
@@ -324,14 +329,12 @@ video {
 
 
 // Prevents modern browsers from displaying 'audio' without controls
-
 audio:not([controls]) {
   display: none;
 }
 
 
 // Prevent overflowing content
-
 header[role=banner],
 .content-inner,
 .nav,
@@ -346,7 +349,6 @@ header[role=banner],
 
 
 // Helpful classes for hiding content
-
 .offscreen {
   position: absolute;
   top: -99999em;

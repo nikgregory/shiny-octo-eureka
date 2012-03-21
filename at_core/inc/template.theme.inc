@@ -16,19 +16,29 @@ function adaptivetheme_breadcrumb($vars) {
 
   if ($show_breadcrumb == 'yes') {
     $show_breadcrumb_home = theme_get_setting('breadcrumb_home', $theme_name);
+    
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
     }
+    
     if (!empty($breadcrumb)) {
       $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
       $separator = filter_xss(theme_get_setting('breadcrumb_separator', $theme_name));
+      
+      $class = 'crumb';
+      end($breadcrumb); 
+      $last = key($breadcrumb);
+      
       $output = '';
       foreach ($breadcrumb as $key => $val) {
+        if ($key == $last) {
+          $class = 'crumb crumb-last';
+        }
         if ($key == 0) {
-          $output .= '<li class="crumb">' . $val . '</li>';
+          $output .= '<li class="' . $class . ' crumb-first">' . $val . '</li>';
         }
         else {
-          $output .= '<li class="crumb"><span>' . $separator . '</span>' . $val . '</li>';
+          $output .= '<li class="' . $class . '"><span>' . $separator . '</span>' . $val . '</li>';
         }
       }
       return $heading . '<ol id="crumbs">' . $output . '</ol>';

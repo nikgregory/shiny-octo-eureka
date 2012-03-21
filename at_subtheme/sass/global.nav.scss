@@ -4,52 +4,74 @@
  */
 
 a {
-  &:link, &:visited, &:hover, &:active, &.active, &:active, &:focus {} }
 
-/* Global focus style for links. */
+  &:link,
+  &:visited {}
 
-/*
- * Primary, Secondary and Menu Bar region menus
- * Use one of the following id's for granular control:
- * #menu-bar (menu bar region)
- * #primary-menu (main menu)
- * #secondary-menu (secondary/user menu)
- * You can target all of these with .nav or div[id$="menu-bar"]
- */
+  &:active,
+  &.active {}
+
+  &:hover,
+  &:focus {}
+}
+
+
+//
+// Primary, Secondary and Menu Bar region menus
+// Use one of the following id's for granular control:
+// #menu-bar (menu bar region)
+// #primary-menu (main menu)
+// #secondary-menu (secondary/user menu)
+// You can target all of these with .nav or div[id$="menu-bar"]
+//
 
 .nav {
   clear: both;
   margin: 0;
+
   ul.menu {
-    margin: 0; }
+    margin: 0;
+  }
+
   li, .menu li {
     display: inline;
     float: left;
-    list-style: none; }
+    list-style: none;
+  }
+
   li a, .menu li a {
     display: block;
     white-space: nowrap;
-    padding: 0 10px; }
+    padding: 0 10px;
+  }
+
   ul {
     margin: 0;
     padding: 0;
+
     &.menu {
       margin: 0;
       padding: 0;
+
       li {
         margin: 0;
-        padding: 0; } } }
+        padding: 0;
+      }
+    }
+  }
+
   .block {
-    margin-bottom: 0; } }
+    margin-bottom: 0;
+  }
+}
 
-/* Menu bar block */
 
-/*
- * Superfish
- */
-
+//
+// Superfish
+//
 ul.sf-menu {
   margin-bottom: 0;
+
   a {
     border-left: 0;
     border-top: 0;
@@ -57,13 +79,27 @@ ul.sf-menu {
     text-decoration: none;
     height: 2.5em;
     line-height: 2.5em;
-    &:link, &:visited {} }
+
+    &:link,
+    &:visited {}
+  }
+
   li {
-    &:hover, &.sfHover {
-      outline: 0; } }
+    &:hover,
+    &.sfHover {
+      outline: 0;
+    }
+  }
+
   a {
-    &:focus, &:hover, &:active {
-      outline: 0; } } }
+    &:focus,
+    &:hover,
+    &:active {
+      outline: 0;
+    }
+  }
+}
+
 
 /* Prevent momentary display of sub menus
 ul.sf-vertical li ul,
@@ -73,120 +109,223 @@ ul.sf-navbar li ul ul {
 }
 */
 
-/* Superfish blocks */
 
+// Superfish blocks
 .block-superfish {
+
   .block-inner .content {}
+
   ul {
     margin: 0 !important;
     padding: 0 !important;
+
     ul {
       margin: 0 !important;
       padding: 0 !important;
+
       ul {
         margin: 0 !important;
         padding: 0 !important;
+
         ul {
           margin: 0 !important;
-          padding: 0 !important; } } } }
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+
   li {
     margin: 0 !important;
-    padding: 0 !important; } }
+    padding: 0 !important;
+  }
+}
 
-/* Vertical style */
 
+// Vertical style
 .sf-vertical {
   width: 100%;
+
   li {
     width: 100%;
+
     &.last {}
-    &:hover ul, &.sfHover ul {
+
+    &:hover ul,
+    &.sfHover ul {
       left: 100%;
       /* match ul width */
       top: 0;
       margin: 0;
-      padding: 0; }
+      padding: 0;
+    }
+
     a {
-      padding: 0 10px; } } }
+      padding: 0 10px;
+    }
+  }
+}
 
-/* Navbar style */
 
+// Navbar style
 .sf-navbar {
-  padding-bottom: 0 !important; }
+  padding-bottom: 0 !important;
+}
 
-/* Sensible padding for the default style */
+
+// Sensible padding for the default style
 
 .sf-menu.sf-style-default a {
-  padding: 0 10px; }
+  padding: 0 10px;
+}
 
-/*
- * Menus
- */
+
+//
+// Menus
+//
 
 ul.menu {
   margin-left: 15px;
+
   ul {
     margin-left: 15px;
+
     ul {
       margin-left: 15px;
+
       ul {
-        margin-left: 15px; } } }
+        margin-left: 15px;
+      }
+    }
+  }
+
   li {
     margin: 0;
-    &.collapsed, &.expanded, &.leaf {}
+
+    &.collapsed,
+    &.expanded,
+    &.leaf {}
+
     a {
-      &:link, &:visited, &:hover, &:focus, &:active {} }
-    &.active a, &.active-trail a, &.first, &.last {} } }
+
+      &:link,
+      &:visited {}
+
+      &:active,
+      &.active {}
+
+      &:hover,
+      &:focus {}
+    }
+
+    &.active a, &.active-trail a {}
+
+    &.first, &.last {}
+  }
+}
+
 
 .block .menu li.content {
-  padding: 0;
-  /* this class (if it exists) could be a problem so reset the padding */ }
+  padding: 0;  // this class (if it exists) could be a problem so reset the padding
+}
 
-/* Breadcrumbs as an ordered list */
 
+// Breadcrumbs as an ordered list
 #breadcrumb {
   padding-bottom: 1em;
+
   ol {
     margin: 0;
-    padding: 0; }
+    padding: 0;
+  }
+
   li {
     list-style: none;
-    display: inline; }
+    display: inline;
+  }
+
+  li.crumb-first {}
+
+  li.crumb-last {}
+
   a {
-    &:link, &:visited, &:hover, &:focus, &:active {} } }
 
-/* Pager */
+    &:link,
+    &:visited {}
 
+    &:active,
+    &.active {}
+
+    &:hover,
+    &:focus {}
+  }
+}
+
+
+// Pager
 ul.pager {
   clear: both;
   margin: 0;
-  text-align: center; }
+  text-align: center;
+}
+
 
 .item-list ul.pager li {
-  margin: 0; }
+  margin: 0;
+}
+
 
 ul.pager li {
   background-image: none;
   display: inline;
   list-style-type: none;
   padding: .5em;
+
   &.pager-current {
-    font-weight: 700; } }
+    font-weight: 700;
+  }
+}
+
 
 .block ul.pager li {
-  margin: 0; }
+  margin: 0;
+}
 
-/* Theme the various states of pager links. */
 
+// Theme the various states of pager links
 ul.pager li {
+
   a {
-    &:link, &:visited, &:hover, &:focus, &:active {} }
-  &.pager-item, &.first, &.last, &.pager-current, &.pager-first, &.pager-previous, &.pager-next, &.pager-last {} }
 
-/* Note: .pager-current is for the current page. */
+    &:link,
+    &:visited {}
 
-/* Skip Navigation */
+    &:active,
+    &.active {}
 
+    &:hover,
+    &:focus {}
+  }
+
+  &.pager-item {}
+
+  &.first {}
+
+  &.last {}
+
+  &.pager-current {}
+
+  &.pager-first {}
+
+  &.pager-previous {}
+
+  &.pager-next {}
+
+  &.pager-last {}
+}
+
+
+// Skip Navigation
 #skip-link {
   left: 50%;
   margin-left: -6.5em;
@@ -195,6 +334,7 @@ ul.pager li {
   position: absolute;
   width: 12em;
   z-index: 50;
+
   a {
     background: #444;
     background: rgba(0, 0, 0, 0.6);
@@ -204,7 +344,9 @@ ul.pager li {
     padding: 0;
     text-align: center;
     text-decoration: none;
-    &:link, &:visited {
+
+    &:link,
+    &:visited {
       background: #444;
       background: rgba(0, 0, 0, 0.6);
       color: #fff;
@@ -212,50 +354,77 @@ ul.pager li {
       line-height: 2;
       padding: 0;
       text-align: center;
-      text-decoration: none; }
-    &:hover, &:focus, &:active {
-      outline: 0; } } }
+      text-decoration: none;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+  }
+}
 
-/* Tabs */
 
+// Tabs, Action links
 #tasks {
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+}
+
 
 ul.primary {
   border-bottom-color: #ccc;
   margin: 1.5em 0 0;
   padding: 0 0 .2em .3em;
+
   li a {
     background-color: #f5f5f5;
     margin-right: .08em;
     border-color: #ccc;
-    padding: .1em 10px .2em; } }
+    padding: .1em 10px .2em;
+  }
+}
+
 
 .local-tasks ul.primary li {
   a:hover {
     background-color: #f7f7f7;
-    border-color: #ddd; }
+    border-color: #ddd;
+  }
+
   &.active a {
     background-color: #fff;
-    border-bottom-color: #fff; } }
+    border-bottom-color: #fff;
+  }
+}
+
 
 ul {
   &.secondary {
     border-bottom: 1px solid #ccc;
     margin: 1em 0 0;
     padding: 0 .3em 1em;
+
     li {
       border-right: 0;
       list-style: none;
       padding: 0 10px 0 0;
+
       a {
-        &:hover, &.active {
+        &:hover,
+        &.active {
           border-bottom: none;
-          text-decoration: underline; } } } }
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
   &.action-links {
     margin-left: 0;
     margin-right: 0;
     list-style: none;
-    li {} } }
 
-/* Action links */
+    li {}
+  }
+}
+

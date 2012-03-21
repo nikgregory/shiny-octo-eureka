@@ -19,7 +19,7 @@ include_once($path_to_at_core . '/inc/template.alter.inc');      // hook_alters
 include_once($path_to_at_core . '/inc/template.preprocess.inc'); // all preprocess functions
 include_once($path_to_at_core . '/inc/template.process.inc');    // all process functions
 
-// Hi-jinks to support 7.x-2.x sub-themes.
+// Hi-jinks to support 7.x-2.x sub-themes so they won't blow up.
 $lt = list_themes();
 foreach ($lt as $key => $value) {
   if ($theme_name == $key) {

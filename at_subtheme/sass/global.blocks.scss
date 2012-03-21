@@ -4,13 +4,13 @@
 //
 
 
-// Main wrapper for most blocks - block_system_main does not have it
+// Main wrapper for most blocks, block_system_main does not have it
 .block {
   margin-bottom: 20px;
 }
 
 
-// Inner wrapper for most block - block_system_main does not have it
+// Inner wrapper for most blocks, good for margin, padding and borders, block_system_main does not have it
 .block-inner {}
 
 
@@ -19,7 +19,7 @@
 
 
 // The last block in the region
-.block.last  {}
+.block.last {}
 
 
 // Zebra striping for each block in the region
@@ -123,25 +123,25 @@ h2.block-title {}
 
 
 // "System help" block
-#block-system-help { }
+#block-system-help {}
 
 
 // "Main page content" block
-#block-system-main { }
+#block-system-main {}
 
 
 // "Powered by Drupal" block
-#block-system-powered-by { }
+#block-system-powered-by {}
 
 
 // "User login form" block
-#block-user-login { }
+#block-user-login {}
 
 
 // "Who's new" block for a list of the newest users
-#block-user-new { }
+#block-user-new {}
 
 
 // "Who's online" block for a list of the online users
-#block-user-online { }
+#block-user-online {}
 

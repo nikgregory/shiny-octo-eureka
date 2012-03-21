@@ -8,6 +8,7 @@
   margin: 18px 0;
 }
 
+
 // Focus styles for accessibility and usabiltiy
 .form-text:focus,
 .form-checkbox:focus,
@@ -17,20 +18,27 @@
   background: #ffffdf;
 }
 
+
 textarea:focus {
   border: 1px solid #fc0;
   background: #fff;
 }
 
+
 .form-item {
+
   // Highlight the form elements that caused a form submission error
-  input.error, textarea.error, select.error {
+  input.error, 
+  textarea.error, 
+  select.error {
     border: 1px solid #c00;
   }
+  
   // The label for a form element
   label {
     display: block;
     font-weight: bold;
+    
     // The label for a radio button or checkbox
     &.option {
       display: inline;
@@ -39,10 +47,12 @@ textarea:focus {
   }
 }
 
+
 // The part of the label that indicates a required field
 .form-required {
   color: #c00;
 }
+
 
 // The descriptive help text (separate from the label)
 .form-item .description {
@@ -61,15 +71,20 @@ textarea:focus {
   margin: 0;
 }
 
+
 // The submit button
 .form-submit {}
 
+
 // Inline labels and form divs
 .container-inline {
-  div, label {
+
+  div, 
+  label {
     display: inline;
   }
 }
+
 
 // Fieldsets
 fieldset {
@@ -77,12 +92,15 @@ fieldset {
   border: 1px solid #dadada;
   margin: 10px 0;
   padding: 10px;
+  
   fieldset:last-child {
     margin-bottom: 0;
   }
 }
 
-legend, fieldset legend {
+
+legend, 
+fieldset legend {
   border: 0;
   display: block;
   font-weight: 400;
@@ -91,31 +109,39 @@ legend, fieldset legend {
   *margin-left: -7px;
 }
 
+
 html.js fieldset.collapsed {
   background: transparent;
   padding-top: 5px;
 }
 
-// Inputs
 
+// Inputs
 input {
   margin: 0;
   max-width: 100%;
-  &.text, &.title {
+  
+  &.text, 
+  &.title {
     border: 1px solid #ccc;
     margin: 0;
   }
 }
 
-textarea, select {
+
+textarea, 
+select {
   border: 1px solid #ccc;
   margin: 0;
 }
 
-button::-moz-focus-inner, input::-moz-focus-inner {
+
+button::-moz-focus-inner, 
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+
 
 button {
   cursor: pointer;
@@ -123,31 +149,41 @@ button {
   *overflow: visible;
 }
 
+
 input {
-  &[type="button"], &[type="reset"], &[type="submit"] {
+  &[type="button"], 
+  &[type="reset"], 
+  &[type="submit"] {
     cursor: pointer;
     -webkit-appearance: button;
     *overflow: visible;
   }
 }
 
+
 button[disabled] {
   cursor: default;
 }
 
+
 input {
+
   &[disabled] {
     cursor: default;
    }
-  &.text, &.title {
+   
+  &.text, 
+  &.title {
     padding: .5em;
   }
+  
   &.form-text {
     border: 1px solid #ccc;
     height: auto;
     padding: 0;
   }
 }
+
 
 textarea {
   border: 1px solid #ccc;
@@ -156,21 +192,27 @@ textarea {
   font: 1em normal Arial, Helvetica, sans-serif;
 }
 
+
 input {
   font: 1em normal Arial, Helvetica, sans-serif;
 }
+
 
 textarea {
   overflow: auto;
   vertical-align: top;
 }
 
+
 div.resizable-textarea textarea {
   margin-top: 0;
 }
 
+
 input {
-  &[type="checkbox"], &[type="radio"] {
+
+  &[type="checkbox"], 
+  &[type="radio"] {
     box-sizing: border-box;
     padding: 0;
     *height: 13px;
@@ -178,10 +220,12 @@ input {
   }
 }
 
+
 // Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
 [hidden] {
   display: none;
 }
+
 
 // Tips for Drupal's input formats
 .tips {
@@ -189,6 +233,7 @@ input {
   margin: 0 0 0 15px;
   padding: 0;
 }
+
 
 .field-type-text-long fieldset {
   padding: 10px 0;
@@ -198,9 +243,11 @@ input {
   }
 }
 
+
 fieldset .filter-help {
   padding: 0 15px 5px;
 }
+
 
 .filter-guidelines {
   font-size: .923em;
@@ -208,11 +255,10 @@ fieldset .filter-help {
   padding: 5px 18px 10px;
 }
 
-//
-// Password confirmation
-//
 
-.password-parent, .confirm-parent {
+// Password confirmation
+.password-parent, 
+.confirm-parent {
   margin: 0;
 }
 
@@ -222,36 +268,46 @@ fieldset .filter-help {
 
 #user-login-form {
   text-align: left; /* LTR */
+  
   ul {
     margin: 0;
     padding: 0;
   }
+  
   li {
+  
     &.openid-link {}
     &.user-link {}
   }
 }
 
+
 #user-login ul {
   margin: 0 0 5px;
+  
   li {
     margin: 0;
   }
 }
 
+
 #user-login-form {
+
   .item-list li {
     list-style: none;
     margin: 0;
   }
+  
   li.openid-link {
     background: none;
   }
 }
 
+
 #user-login li.openid-link {
   background: none;
 }
+
 
 //
 // OpenID
@@ -262,28 +318,36 @@ fieldset .filter-help {
 
 // OpenID creates a new ul above the login form's links.
 #user-login-form ul {
+
   // Position OpenID's ul next to the rest of the links.
   margin-bottom: 0;
 }
+
 
 // The "Log in using OpenID" link.
 html.js #user-login-form li.openid-link,
 #user-login-form li.openid-link {}
 
+
 // The "Cancel OpenID login" link.
 #user-login-form li.user-link {}
+
 
 html.js #user-login-form li.openid-link {
   cursor: pointer;
 }
 
+
 #user-login-form li {
-  &.openid-link, &.user-link {
+
+  &.openid-link, 
+  &.user-link {
     cursor: pointer;
   }
 }
 
 #user-login ul {}
+
 
 //
 // Search
@@ -304,6 +368,7 @@ input[type="search"] {
   margin-bottom: 20px;
 }
 
+
 //
 // Advanced search form
 //
@@ -311,28 +376,34 @@ input[type="search"] {
 fieldset#edit-advanced fieldset {
   float: left;
   margin: 0 10px 10px 0;
+  
   .fieldset-legend {
     background: none;
     padding-left: 1em;
   }
 }
 
+
 .advanced-search-submit {
   clear: both;
 }
+
 
 .search-advanced .criterion {
   float: none;
   margin: 0 5px;
 }
 
+
 #edit-keywords-fieldset .form-item:first-child {
   margin-top: 5px;
 }
 
+
 #search-form {
   margin: 10px 0;
 }
+
 
 //
 // Drupal admin tables
@@ -342,33 +413,42 @@ fieldset#edit-advanced fieldset {
 //
 
 form {
+
   th {
     text-align: left; /* LTR */
     padding-right: 1em; /* LTR */
     border-bottom: 3px solid #ccc;
   }
+  
   tbody {
     border-top: 1px solid #ccc;
   }
+  
   tr.even {
     background-color: #fff;
   }
+  
   table .item-list ul {
     margin: 0;
   }
 }
 
 .lt-ie8 tr {
-  &.even, &.odd {
-    th, td {
+
+  &.even, 
+  &.odd {
+  
+    th, 
+    td {
       // IE doesn't display borders on table rows
       border-bottom: 1px solid #ccc;
     }
   }
 }
 
-// Special case modules
 
+// Special case modules
 #devel-switch-user-form {
   margin-bottom: 0;
 }
+
