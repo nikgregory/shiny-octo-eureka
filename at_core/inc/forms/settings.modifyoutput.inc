@@ -73,7 +73,7 @@
     '#type' => 'checkbox',
     '#title' => t('Page classes'),
     '#description' => t('page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n)'),
-    '#default_value' => theme_get_setting('extra_page_classes') ? theme_get_setting('extra_page_classes') : 1,
+    '#default_value' => theme_get_setting('extra_page_classes'),
   );
 
   // Node
@@ -81,7 +81,7 @@
     '#type' => 'checkbox',
     '#title' => t('Node classes'),
     '#description' => t('promoted, sticky, preview, language, odd/even classes, user picture handling, and build mode classes'),
-    '#default_value' => theme_get_setting('extra_article_classes') ? theme_get_setting('extra_article_classes') : 1,
+    '#default_value' => theme_get_setting('extra_article_classes'),
   );
 
   // Comment
@@ -89,7 +89,7 @@
     '#type' => 'checkbox',
     '#title' => t('Comment classes '),
     '#description' => t('anonymous, author, viewer, new, odd/even classes and classes for hidden titles, user picture and signature handling'),
-    '#default_value' => theme_get_setting('extra_comment_classes') ? theme_get_setting('extra_comment_classes') : 1,
+    '#default_value' => theme_get_setting('extra_comment_classes'),
   );
 
   // Block
@@ -97,7 +97,7 @@
     '#type' => 'checkbox',
     '#title' => t('Blocks classes'),
     '#description' => t('odd/even (zebra classes), block region, delta and block count classes'),
-    '#default_value' => theme_get_setting('extra_block_classes') ? theme_get_setting('extra_block_classes') : 1,
+    '#default_value' => theme_get_setting('extra_block_classes'),
   );
 
   // Menu
@@ -105,7 +105,7 @@
     '#type' => 'checkbox',
     '#title' => t('Menus classes'),
     '#description' =>  t('menu link ID (mlid) and menu level (depth)'),
-    '#default_value' => theme_get_setting('extra_menu_classes') ? theme_get_setting('extra_menu_classes') : 1,
+    '#default_value' => theme_get_setting('extra_menu_classes'),
   );
 
   // Item lists
@@ -113,7 +113,7 @@
     '#type' => 'checkbox',
     '#title' => t('Item-lists classes'),
     '#description' => t('first, last and odd/even (zebra classes)'),
-    '#default_value' => theme_get_setting('extra_item_list_classes') ? theme_get_setting('extra_item_list_classes') : 1,
+    '#default_value' => theme_get_setting('extra_item_list_classes'),
   );
 
   // Accessibility
