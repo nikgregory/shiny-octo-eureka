@@ -1,5 +1,10 @@
 /**
- * Import all the global stylesheets into one file.
+ * Global Styles
+ *
+ * We use the "global" namespace to denote files that load for all 
+ * devices as opposed to CSS embedded in media queries.
+ *
+ * This file imports all the global stylesheets into one file.
  * This is done purely as a house-keeping exercise and to make it easy
  * to unset one stylesheet by simply commenting it out.
  * 

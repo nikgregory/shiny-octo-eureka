@@ -1,10 +1,10 @@
-/** 
- * responsive.cascade.css is for styles that will cascade and uses 
- * min-width only media queries. 
+/**
+ * responsive.cascade.css is for styles that will cascade and uses
+ * min-width only media queries.
  *
- * All the other responsive stylesheets use a stacking method (by 
- * default that is, you can change the media queries in theme settings), 
- * however this uses a waterfall method so we can leverage the cascade 
+ * All the other responsive stylesheets use a stacking method (by
+ * default that is, you can change the media queries in theme settings),
+ * however this uses a waterfall method so we can leverage the cascade
  * and inheritance for all browsers that support media queries, regardless
  * of screen size.
  *
