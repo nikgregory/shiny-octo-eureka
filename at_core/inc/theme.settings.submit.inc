@@ -208,7 +208,6 @@ function at_theme_settings_submit($form, &$form_state) {
     $media_query    = $values['smartphone_portrait_media_query'];
     $method         = 'one-col-stack';
     $sidebar_unit   = '%';
-    $page_unit      = '%';
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Smartphone portrait $method */\n";
     $width          = "\n" . '.container {width:100%}';
@@ -239,13 +238,14 @@ function at_theme_settings_submit($form, &$form_state) {
     $sidebar_first  = $values['smartphone_landscape_sidebar_first'];
     $sidebar_second = $values['smartphone_landscape_sidebar_second'];
     $media_query    = $values['smartphone_landscape_media_query'];
-    $page_width     = $values['smartphone_landscape_page_width'];
     $method         = $values['smartphone_landscape_layout'];
     $sidebar_unit   = $values['smartphone_landscape_sidebar_unit'];
-    $page_unit      = $values['smartphone_landscape_page_unit'];
     $layout         = at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit);
     $comment        = "/* Smartphone landscape $method */\n";
-    $width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
+    //$page_width     = $values['smartphone_landscape_page_width'];
+    //$page_unit      = $values['smartphone_landscape_page_unit'];
+    //$width          = "\n" . '.container {width:' . $page_width . $page_unit . '}';
+    $width          = "\n" . '.container {width:100%}';
 
     // Panels layouts
     $panel_settings = array(
@@ -710,7 +710,7 @@ function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit)
 .region-sidebar-first {width:' . $sidebar_first . ';margin-' . $left . ':-100%}
 .region-sidebar-second {width:' . $sidebar_second . ';margin-' . $left . ':-' . $pull_right . '}';
   }
-  if ($method === 'three-col-right') {
+  if ($method === 'two-sidebars-right') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
     $push_right     = $sidebar_second . $sidebar_unit;
     $push_left      = $sidebar_first . $sidebar_unit;
@@ -725,7 +725,7 @@ function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit)
 .region-sidebar-second {width:' . $sidebar_second . $sidebar_unit . ';margin-' . $left . ':-' . $right_margin . '}
 .sidebar-first .region-sidebar-first {width:' . $sidebar_first . $sidebar_unit . ';margin-' . $left . ':-' . $sidebar_first . $sidebar_unit . '}';
   }
-  if ($method === 'three-col-left') {
+  if ($method === 'two-sidebars-left') {
     $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
     $left_margin    = $sidebar_first . $sidebar_unit;
     $right_margin   = $sidebar_second . $sidebar_unit;
@@ -739,13 +739,25 @@ function at_layout_core($method, $sidebar_first, $sidebar_second, $sidebar_unit)
 .region-sidebar-second {width:' . $sidebar_second . $sidebar_unit . ';margin-' . $left . ':-100%}
 .two-sidebars .region-sidebar-second {width:' . $sidebar_second . $sidebar_unit . ';position:relative;' . $left . ':' . $push_right . '}';
   }
-  if ($method === 'two-col-stack') {
+  if ($method === 'two-sidebars-right-stack') {
     $push_right = $sidebar_first . $sidebar_unit;
     $styles[] = '
 #content-column,.content-column {float:left;clear:none}
 .two-sidebars .content-inner,.sidebar-first .content-inner {margin-' . $left . ': 0;margin-' . $right . ':' . $push_right . '}
 .sidebar-second .content-inner {margin-right:0;margin-left:0}
 .region-sidebar-first {width:' . $sidebar_first . $sidebar_unit . ';margin-' . $left . ':-' . $push_right . ';float:left;clear:none}
+.region-sidebar-second {width:100%;margin-left:0;margin-right:0;margin-top:20px;clear:both;overflow:hidden}
+.region-sidebar-second .block {float:left;clear:none}';
+  }
+  if ($method === 'two-sidebars-left-stack') {
+    $sidebar_first  = $sidebar_first . $sidebar_unit;
+    $push_left  = $sidebar_first;
+    $styles[] = '
+#content-column,.content-column,.region-sidebar-first {float:left;clear:none}
+.two-sidebars .content-inner {margin-' . $left . ':' . $push_left . ';margin-' . $right . ':0}
+.sidebar-first .content-inner {margin-' . $left . ':' . $push_left . ';margin-' . $right . ':0}
+.sidebar-second .content-inner {margin-' . $right . ':0;margin-' . $left . ':0}
+.region-sidebar-first {width:' . $sidebar_first . ';margin-' . $left . ':-100%}
 .region-sidebar-second {width:100%;margin-left:0;margin-right:0;margin-top:20px;clear:both;overflow:hidden}
 .region-sidebar-second .block {float:left;clear:none}';
   }

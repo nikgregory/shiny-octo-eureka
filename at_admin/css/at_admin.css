@@ -952,9 +952,12 @@ tr.even .ajax-new-content .form-item {
 .form-item textarea.error {
   padding: 2px;
 }
+abbr.form-required,
 span.form-required,
 span.marker {
-  color: #8a1f11;
+  border: 0;
+  color: #8a1a11;
+  font-weight: 700;
 }
 #node-admin-filter ul {
   padding: 4px 0;

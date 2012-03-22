@@ -23,8 +23,8 @@
     '#default_value' => theme_get_setting('bigscreen_layout'),
     '#options' => array(
       'three-col-grail' => t('<span>Standard three column</span>'),
-      'three-col-right' => t('<span>Two sidebars right</span>'),
-      'three-col-left'  => t('<span>Two sidebars left</span>'),
+      'two-sidebars-right' => t('<span>Two sidebars right</span>'),
+      'two-sidebars-left'  => t('<span>Two sidebars left</span>'),
     )
   );
   $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
@@ -143,7 +143,6 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-
   // Tablet
   $form['at-layout']['tablet'] = array(
     '#type' => 'fieldset',
@@ -171,9 +170,10 @@
     '#default_value' => theme_get_setting('tablet_landscape_layout'),
     '#options' => array(
       'three-col-grail' => t('<span>Standard three column</span>'),
-      'three-col-right' => t('<span>Two sidebar right</span>'),
-      'three-col-left'  => t('<span>Two sidebar left</span>'),
-      'two-col-stack'   => t('<span>Sidebar second stacked</span>'),
+      'two-sidebars-right' => t('<span>Two sidebars right</span>'),
+      'two-sidebars-left' => t('<span>Two sidebars left</span>'),
+      'two-sidebars-left-stack' => t('<span>Sidebar first left, second sidebar stacked</span>'),
+      'two-sidebars-right-stack' => t('<span>Sidebar first right, second sidebar stacked</span>'),
     )
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
@@ -207,8 +207,9 @@
     '#maxlenght' => 4,
     '#required' => TRUE,
     '#states' => array(
-      'disabled' => array(
-        'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
+      'invisible' => array(
+        array('input[name="tablet_landscape_layout"]' => array('value' => 'two-sidebars-left-stack')),
+        array('input[name="tablet_landscape_layout"]' => array('value' => 'two-sidebars-right-stack')),
       ),
     ),
   );
@@ -254,7 +255,6 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-
   // Tablet portrait
   $form['at-layout']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
@@ -270,9 +270,10 @@
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_portrait_layout'),
     '#options' => array(
+      'two-sidebars-left-stack' => t('<span>Sidebar first left, second sidebar stacked</span>'),
+      'two-sidebars-right-stack' => t('<span>Sidebar first right, second sidebar stacked</span>'),  
+      'one-col-vert' => t('<span>Sidebars wrapped</span>'),
       'one-col-stack' => t('<span>Sidebars stacked</span>'),
-      'one-col-vert'  => t('<span>Sidebars wrapped</span>'),
-      'two-col-stack' => t('<span>Second sidebar stacked</span>'),
     )
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
@@ -280,7 +281,7 @@
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      '!visible' => array(
+      'invisible' => array(
         'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
       ),
     ),
@@ -311,8 +312,9 @@
     '#maxlenght' => 4,
     '#required' => TRUE,
     '#states' => array(
-      'disabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
+      'invisible' => array(
+        array('input[name="tablet_portrait_layout"]' => array('value' => 'two-sidebars-left-stack')),
+        array('input[name="tablet_portrait_layout"]' => array('value' => 'two-sidebars-right-stack')),
       ),
     ),
   );
@@ -358,7 +360,6 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-
   // Smartphone
   $form['at-layout']['smartphone'] = array(
     '#type' => 'fieldset',
@@ -370,7 +371,6 @@
       ),
     ),
   );
-
   // Smartphone landscape
   $form['at-layout']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
@@ -386,8 +386,8 @@
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('smartphone_landscape_layout'),
     '#options' => array(
-      'one-col-stack' => t('<span>One column stacked</span>'),
       'one-col-vert'  => t('<span>Sidebars wrapped</span>'),
+      'one-col-stack' => t('<span>One column stacked</span>'),
     )
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
@@ -433,29 +433,29 @@
       ),
     ),
   );
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Set the page width'),
-    '#description' => t('<strong>Set the page width</strong>'),
-  );
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_unit'] = array(
-    '#type' => 'select',
-    '#title' => t('Unit'),
-    '#default_value' => theme_get_setting('smartphone_landscape_page_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
-  );
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_width'] = array(
-    '#type'  => 'textfield',
-    '#title' => t('Page width'),
-    '#default_value' => theme_get_setting('smartphone_landscape_page_width'),
-    '#size' => 4,
-    '#maxlenght' => 4,
-    '#required' => TRUE,
-  );
+  // $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper'] = array(
+    // '#type' => 'fieldset',
+    // '#title' => t('Set the page width'),
+    // '#description' => t('<strong>Set the page width</strong>'),
+  // );
+  // $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_unit'] = array(
+    // '#type' => 'select',
+    // '#title' => t('Unit'),
+    // '#default_value' => theme_get_setting('smartphone_landscape_page_unit'),
+    // '#options' => array(
+      // 'px' => 'px',
+      // '%' => '%',
+      // 'em' => 'em',
+    // ),
+  // );
+  // $form['at-layout']['smartphone']['landscape']['smartphone-landscape-page-width-wrapper']['smartphone_landscape_page_width'] = array(
+    // '#type'  => 'textfield',
+    // '#title' => t('Page width'),
+    // '#default_value' => theme_get_setting('smartphone_landscape_page_width'),
+    // '#size' => 4,
+    // '#maxlenght' => 4,
+    // '#required' => TRUE,
+  // );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Landscape Media Queries'),
@@ -475,7 +475,6 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-
   // Smartphone portrait
   $form['at-layout']['smartphone']['portrait'] = array(
     '#type' => 'fieldset',

@@ -119,7 +119,7 @@ fieldset.at-layout-form div.form-type-radio {
   float: left;
   margin: 0 30px 10px 0;
   text-align: center;
-  width: 80px;
+  width: 60px;
 }
 fieldset.at-layout-form div.form-type-radio input,
 fieldset.at-layout-form div[class*="set-max-width"] input  {
@@ -127,34 +127,31 @@ fieldset.at-layout-form div[class*="set-max-width"] input  {
 }
 fieldset.at-layout-form div.form-type-radio label,
 div.smartphone-portrait-layout  {
-  background: url(images/layouts.png);
+  background: url(images/page-layouts-sprite.png);
   background-repeat: no-repeat;
   margin-top: 4px;
-  height: 80px;
-  width: 80px;
-  text-indent: -99999em;
+  height: 60px;
+  width: 60px;
+  text-indent: 100%;
+  white-space: nowrap;
   overflow: hidden;
   display: block;
   float: none;
   text-align: center;
 }
-#edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-grail],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-grail]  {background-position: 0 0;}
-#edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-right],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-right]  {background-position: 0 -80px;}
-#edit-bigscreen-layout-wrapper .form-type-radio label[for=edit-bigscreen-layout-three-col-left],
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-three-col-left]  {background-position: 0 -160px;}
-#edit-tablet-landscape-layout-wrapper .form-type-radio  label[for=edit-tablet-landscape-layout-two-col-stack],
-#edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-two-col-stack]  {background-position: 0 -240px;}
-#edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-one-col-vert],
-#edit-smartphone-landscape-layout-wrapper .form-type-radio label[for=edit-smartphone-landscape-layout-one-col-vert]  {background-position: 0 -320px;}
-#edit-tablet-portrait-layout-wrapper .form-type-radio  label[for=edit-tablet-portrait-layout-one-col-stack],
-#edit-smartphone-landscape-layout-wrapper .form-type-radio label[for=edit-smartphone-landscape-layout-one-col-stack],
-div.smartphone-portrait-layout  {background-position: 0 -400px;}
+fieldset.at-layout-form .form-type-radio label[for$=three-col-grail]  {background-position: 0 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-right]  {background-position: -61px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-left]  {background-position: -122px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-left-stack]  {background-position: -183px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-right-stack]  {background-position: -244px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=one-col-stack] {background-position: -305px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=one-col-vert] {background-position: -367px 0;}
+div.smartphone-portrait-layout  {background-position: -305px 0;}
 div.smartphone-portrait-layout  {
   float: left;
   margin: 15px 15px 0 0;
 }
+
 fieldset#edit-portrait--2  .fieldset-description {
   overflow: hidden;
 }
@@ -437,4 +434,25 @@ input[disabled] {
 /* Misc */
 .field-prefix {
   color: #666;
+}
+
+/* Revert the decision to fix hidden fieldset legends in vertical tabs until
+   its safe to fix this properly, we have many workarounds for this that need to be
+   reverted and its not really safe to do that until we're well past 7.13 */
+fieldset.vertical-tabs-pane fieldset legend {
+  display: none;
+}
+
+/* Looks like some more inconsistant markup from Drupal, and in a point release, great! */ 
+abbr.form-required,
+span.form-required,
+span.marker {
+  border: 0;
+  color: #8a1a11;
+  font-weight: 700;
+}
+
+/* Oh no, doesnt stop there, just add some new margin top, why the fuck not? */
+div.vertical-tabs {
+  margin-top: 0;
 }
