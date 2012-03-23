@@ -101,7 +101,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     )
   );
 
-  // add a body class is the site name is hidden
+  // add a body class if the site name is hidden
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['classes_array'][] = 'site-name-hidden';
   }
@@ -135,6 +135,9 @@ function adaptivetheme_preprocess_page(&$vars) {
     'html' => TRUE,
     )
   ) : '';
+  // Provide forwards compatibility with 7.x-3.x sub-themes
+  $vars['site_logo'] = $vars['linked_site_logo'];
+  
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['visibility'] = 'element-invisible';
     $vars['hide_site_name'] = TRUE;
@@ -152,7 +155,10 @@ function adaptivetheme_preprocess_page(&$vars) {
 
   if (isset($vars['main_menu'])) {
 
-    $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
+    $text = t('Main menu');
+    if (module_exists('block')) {
+      $text = block_get_blocks_by_region('menu_bar') ? t('Navigation') : t('Main menu');
+    }
 
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
