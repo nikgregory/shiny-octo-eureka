@@ -86,3 +86,18 @@ tr.even td.active {
   background-color: #f7f7f7;
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+
+/*
+ * Forum tables
+ */
+
+/* Core sets white-space to nowrap, which makes no sense at all */
+#forum td.created, 
+#forum td.posts, 
+#forum td.topics, 
+#forum td.last-reply, 
+#forum td.replies, 
+#forum td.pager {
+  white-space: normal;
+}
