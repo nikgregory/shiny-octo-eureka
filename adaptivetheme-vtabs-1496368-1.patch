@@ -1,0 +1,17 @@
+diff --git a/at_core/inc/template.alter.inc b/at_core/inc/template.alter.inc
+index b9670a7..2af8dce 100755
+--- a/at_core/inc/template.alter.inc
++++ b/at_core/inc/template.alter.inc
+@@ -147,8 +147,10 @@ function adaptivetheme_html_head_alter(&$head_elements) {
+ // hook_js_alter()
+ function adaptivetheme_js_alter(&$javascript) {
+   // Use our own vesion of vertical-tabs.js for better error handling, see http://drupal.org/node/607752
+-  $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
+-  $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
++  if (isset($javascript['misc/vertical-tabs.js'])) {
++    $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
++    $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
++  }
+ }
+ 
+ // hook_page_alter()
