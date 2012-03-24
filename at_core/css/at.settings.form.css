@@ -24,7 +24,6 @@
   height: auto;
 }
 .admin-theme-adaptivetheme_admin div.vertical-tabs {
-  margin: 0 0 20px 15em;
 }
 div.vertical-tabs .vertical-tabs-panes {
   min-height: 100px;
@@ -77,7 +76,6 @@ fieldset.at-layout-form div.form-item[class*="-media-query"] .description {
   padding-top: 3px;
 }
 .vertical-tabs .form-type-textfield input {
-  width: auto;
 }
 
 /* Layout settings */

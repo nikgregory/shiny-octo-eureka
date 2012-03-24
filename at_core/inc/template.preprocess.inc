@@ -16,11 +16,6 @@ include_once($path_to_at_core . '/inc/template.helpers.inc');
 function adaptivetheme_preprocess_html(&$vars) {
   global $theme_name, $language, $path_to_at_core;
 
-  // $path_to_at_core is absolute and uses the DRUPAL_ROOT constant, because its twice
-  // as fast to use an abolute path for include's, however it will bork anything that
-  // needs relative paths like CSS and JS files loaded using drupal_add_css/js
-  $relative_path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
   // Set a variable for the base path
   $vars['base_path'] = base_path();
 
@@ -284,19 +279,19 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['polyfills_array'] = array();
   // Respond.js
   if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie9'][] = $relative_path_to_at_core . '/js/respond.js';
+    $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
   }
   // HTML5 Shiv
   if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $relative_path_to_at_core . '/js/html5.js';
+    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
   }
   // Boxsizing.htc
   if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $relative_path_to_at_core . '/js/boxsizing.htc';
+    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
   }
   // Scalefix.js
   if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
-    $vars['polyfills_array']['all'][] = $relative_path_to_at_core . '/js/scalefix.js';
+    $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
   }
   // More? Patches and feature request welcome!
 
@@ -443,7 +438,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
   if (!empty($settings_css)) {
     foreach ($settings_css as $cssfile) {
-      drupal_add_css($relative_path_to_at_core . '/css/' . $cssfile, array(
+      drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
         //'weight' => -100,
@@ -459,11 +454,11 @@ function adaptivetheme_preprocess_html(&$vars) {
   if (theme_get_setting('expose_regions', $theme_name) === 1 || theme_get_setting('load_all_panels', $theme_name) === 1) {
     $vars['classes_array'][] = 'debug-regions';
     $vars['classes_array'][] = 'debug-panels';
-    drupal_add_css($relative_path_to_at_core . '/css/debug-regions.css');
+    drupal_add_css($path_to_at_core . '/css/debug-regions.css');
   }
   // Load window size bookmarklet
   if (theme_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($relative_path_to_at_core . '/js/window-size.js',
+    drupal_add_js($path_to_at_core . '/js/window-size.js',
       array(
         'type' => 'file',
         'scope' => 'footer',

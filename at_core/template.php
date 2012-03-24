@@ -10,8 +10,8 @@ global $theme_name, $path_to_at_core;
 // global $theme_name and depending on the context populates it as needed.
 $theme_name = $GLOBALS['theme_key'];
 
-// Absolute path to AT core, used for include files only.
-$path_to_at_core = DRUPAL_ROOT . '/' . drupal_get_path('theme', 'adaptivetheme');
+// Path to AT core.
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 // Include the most essential files to make this mofo run.
 include_once($path_to_at_core . '/inc/template.theme.inc');      // theme function overrides

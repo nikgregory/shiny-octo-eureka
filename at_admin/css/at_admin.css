@@ -1831,6 +1831,31 @@ ul.action-links li a:focus {
   background: #eee;
 }
 
+
+/* Media query test for vertical tabs */
+
+/* Tablet landscape */
+@media only screen and (min-width:769px) and (max-width:1024px) {
+  div.vertical-tabs  {
+    margin-left: 200px;
+  }
+  .vertical-tabs ul.vertical-tabs-list {
+    margin-left: -200px;
+    width: 200px;
+  }
+}
+
+/* Standard layout */
+@media only screen and (min-width:1025px) {
+  div.vertical-tabs  {
+    margin-left: 300px;
+  }
+  .vertical-tabs ul.vertical-tabs-list {
+    margin-left: -300px;
+    width: 300px;
+  }
+}
+
 /* Helpful classes for hiding content */
 .offscreen {
   position: absolute;
@@ -1843,3 +1868,9 @@ ul.action-links li a:focus {
 .element-hidden {
   display: none;
 }
+
+/* Experimental */
+input[type="radio"], 
+input[type="checkbox"] {
+}
+
