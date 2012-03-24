@@ -23,10 +23,21 @@
 .block.even /* Zebra striping for each block in the region */ {
 }
 
-h2.block-title /* Block title */ {
+.block-title /* Block title */ {
 }
 
 .block-content /* Block content wrapper */ {
+}
+
+.block-content ul, 
+.block-content ol /* Match item list and block menu margin and padding */ {
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
+.block-content li  /* Match item list and block menu margin and padding */ {
+  margin: 0;
+  padding: 0;
 }
 
 #block-aggregator-category-1 /* Block for the latest news items in the first category */ {

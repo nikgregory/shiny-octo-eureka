@@ -11,15 +11,16 @@
 /* 
  * Field Lables
  */
-.field-label-above /* Above and inline classes are on the field wrapper */ {
+.field-label-above /* Above and inline classes are on the field wrapper. */ {
 }
 
-.field-label-inline /* When labels are set to inline in field display settings the clearfix class is automatically added */ {
+.field-label-inline /* When labels are set to inline in field display settings the clearfix class is automatically added. */ {
 }
 
-h2.field-label /* Lables are H2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues. */ {
+.field .field-label /* Lables are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues. */ {
   font-size: 1em;
   font-weight: 700;
+  font-family: inherit; /* Forces the h2 to inherit the global font family instead of the h2 font family. */
   line-height: inherit;
   margin: 0;
 }
@@ -31,7 +32,7 @@ h2.field-label /* Lables are H2 in Adaptivetheme. Use a strong selector to mitig
 
 /* Image fields use the <figure> and <figcaption> elements from HTML5. */
 .field-type-image {
-  margin-bottom: 1.5em; /* The same bottom margin as p, blockquote, ul, ol and dl */
+  margin-bottom: 1.5em; /* The same bottom margin as p, blockquote, ul, ol and dl. */
 }
 
 .field .caption  /* The .caption class is applied to all captions regardless of view mode. */ {
@@ -46,7 +47,7 @@ h2.field-label /* Lables are H2 in Adaptivetheme. Use a strong selector to mitig
 
 /* Taxonomy fields are output as an unordered list in Adaptivetheme. */
 .field-type-taxonomy-term-reference {
-  margin-bottom: 1.5em; /* The same bottom margin as p, blockquote, ul, ol and dl */
+  margin-bottom: 1.5em; /* The same bottom margin as p, blockquote, ul, ol and dl. */
 }
 
 .field-type-taxonomy-term-reference ul.field-items {

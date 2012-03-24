@@ -34,11 +34,26 @@
 
 
 // Block title
-h2.block-title {}
+.block-title {}
 
 
 // Block content wrapper
 .block-content {}
+
+
+ // Match item list and block menu margin and padding
+.block-content {
+
+   ul,
+   ol {
+    margin: 0 0 0 15px;
+    padding: 0;
+  }
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
 
 
 // Block for the latest news items in the first category

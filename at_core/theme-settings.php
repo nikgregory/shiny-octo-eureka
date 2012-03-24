@@ -160,8 +160,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   }
 
   // Custom validate and submit functions
-  $form['#validate'][] = 'at_theme_settings_validate';
-  $form['#submit'][] = 'at_theme_settings_submit';
+  $form['#validate'][] = 'at_core_settings_validate';
+  $form['#submit'][] = 'at_core_settings_submit';
 }
 // Include custom form validation and submit functions
-include_once($path_to_at_core . '/inc/theme.settings.submit.inc');
+include_once($path_to_at_core . '/inc/forms/at_core.validate.inc');
+include_once($path_to_at_core . '/inc/forms/at_core.submit.inc');

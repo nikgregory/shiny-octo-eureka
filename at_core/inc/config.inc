@@ -4,6 +4,21 @@
 // because we don't need a generic system, what we need is a bespoke
 // and highly optimised system that only supports what is needed.
 
+
+function page_layout() {
+  $layout_variables = array(
+    'layout',
+    'media_query',
+    'page_width',
+    'page_unit',
+    'sidebar_first',
+    'sidebar_second',
+    'sidebar_unit',
+  );
+  return $layout_variables;
+}
+
+
 // The panels array is used by the responsive panels sub-system
 function responsive_panels() {
   $panels = array(
@@ -153,7 +168,7 @@ function font_elements() {
   $elements = array(
     'base' => array(
       'type' => 'default',
-      'subtype' => '',
+      'subtype' => 'global',
       'element' => 'bf',
       'selector' => 'html',
       'setting' => 'base_font',
@@ -174,7 +189,7 @@ function font_elements() {
     ),
     'page_title' => array(
       'type' => 'title',
-      'subtype' => '',
+      'subtype' => 'global',
       'element' => 'pt',
       'selector' => '#page-title',
       'setting' => 'page_title_font',
@@ -195,7 +210,7 @@ function font_elements() {
     ),
     'block_title' => array(
       'type' => 'title',
-      'subtype' => '',
+      'subtype' => 'entity_title',
       'element' => 'bt',
       'selector' => '.block-title',
       'setting' => 'block_title_font',

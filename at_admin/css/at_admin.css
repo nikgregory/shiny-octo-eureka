@@ -1848,11 +1848,11 @@ ul.action-links li a:focus {
 /* Standard layout */
 @media only screen and (min-width:1025px) {
   div.vertical-tabs  {
-    margin-left: 300px;
+    margin-left: 240px;
   }
   .vertical-tabs ul.vertical-tabs-list {
-    margin-left: -300px;
-    width: 300px;
+    margin-left: -240px;
+    width: 240px;
   }
 }
 

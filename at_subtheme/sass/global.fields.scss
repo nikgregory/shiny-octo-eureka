@@ -22,10 +22,11 @@
 .field-label-inline {}
 
 
-// Labels are H2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues.
-h2.field-label {
+// Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues.
+.field .field-label {
   font-size: 1em;
   font-weight: 700;
+  font-family: inherit; // Forces the h2 to inherit the global font family instead of the h2 font family.
   line-height: inherit;
   margin: 0;
 }
