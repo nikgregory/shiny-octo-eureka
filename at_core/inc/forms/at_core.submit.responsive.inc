@@ -1,28 +1,25 @@
 <?php
   // Responsive Layouts and Styles
+
   $layout_variables = page_layout(); // Get the page layout config array
   $layouts = array(); // $layouts will hold all the page level layouts
+
   $is_default_layout = $values['global_default_layout']; // Initialize the $is_default_layout variable, we use this to test against
   $default_layout = 'standard-layout';  // Need this to support 7.x-2.x subthemes which are all desktop first
 
-  // Get the panels config array
-  $responsive_panels = responsive_panels();
+  $responsive_panels = responsive_panels(); // Get the panels config array
+  $float = ".at-panel .region {display:inline;float:left}"; // Some layouts generate their Panels CSS, we need to add a float delcaration for them
+  
+  $responsive_styles = array(); // Holds all the styles from the responsive stylesheets, wrapped in media queries
 
-  // Three of the five layouts write their Panels CSS dynamically, we need to add a float delcaration just for them.
-  $float = ".at-panel .region {display:inline;float:left}";
-
-  // $responsive_styles will hold all the styles from the responsive stylesheets, wrapped in media queries.
-  $responsive_styles = array();
-
-  // Get the panels subtypes settings, we will build our settings array from this
+  // Get the Panels subtypes settings
   foreach ($responsive_panels as $type => $subtypes) {
-    //dsm($subtypes);
     foreach ($subtypes as $subtype => $setting) {
       $panel_subtypes[] = $setting['setting'];
     }
   }
 
-  // If the cascade setting is true, load up these styles first
+  // If the Cascading media queries CSS file is enabled, load these styles first
   if ($values['enable_cascading_media_queries'] === 1) {
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.cascade.css', FALSE);
     $responsive_styles[] = $responsive_css . "\n";
@@ -35,8 +32,8 @@
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
-      if (isset($values["$device" .'_'. "$value"])) {
-        $smartphone_portrait_layout_data[$value] = $values["$device" .'_'. "$value"];
+      if (isset($values["$device" . '_' . "$value"])) {
+        $smartphone_portrait_layout_data[$value] = $values["$device" . '_' . "$value"];
       }
     }
     $layout = at_build_page_layout($smartphone_portrait_layout_data['layout'], $smartphone_portrait_layout_data['sidebar_first'], $smartphone_portrait_layout_data['sidebar_second'], $smartphone_portrait_layout_data['sidebar_unit']);
@@ -59,7 +56,7 @@
       $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
     }
 
-    // Get and wrap the responsive CSS in the relative media query
+    // Get and wrap the responsive CSS styles in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.portrait.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
@@ -73,8 +70,8 @@
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
-      if (isset($values["$device" .'_'. "$value"])) {
-        $smartphone_landscape_layout_data[$value] = $values["$device" .'_'. "$value"];
+      if (isset($values["$device" . '_' . "$value"])) {
+        $smartphone_landscape_layout_data[$value] = $values["$device" . '_' . "$value"];
       }
     }
     $layout = at_build_page_layout($smartphone_landscape_layout_data['layout'], $smartphone_landscape_layout_data['sidebar_first'], $smartphone_landscape_layout_data['sidebar_second'], $smartphone_landscape_layout_data['sidebar_unit']);
@@ -85,7 +82,6 @@
     $media_query = $smartphone_landscape_layout_data['media_query'];
 
     // Get the panel layout settings and CSS for these layouts
-    $device = 'smartphone_landscape';
     foreach ($panel_subtypes as $subtype) {
       $smartphone_landscape_panel_settings[] = $device . '_' . $subtype;
     }
@@ -99,7 +95,7 @@
     if ($values['load_respondjs'] === 1) {
       foreach ($smartphone_landscape_panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] = drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
+        $css_files[] = drupal_load_stylesheet($path_to_panels_css . 'ie/' . $option . '.css', FALSE);
       }
     }
 
@@ -107,7 +103,7 @@
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
-    // Get and wrap the responsive CSS in the relative media query
+    // Get and wrap the responsive CSS styles in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.landscape.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
@@ -121,8 +117,8 @@
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
-      if (isset($values["$device" .'_'. "$value"])) {
-        $tablet_portrait_layout_data[$value] = $values["$device" .'_'. "$value"];
+      if (isset($values["$device" . '_' . "$value"])) {
+        $tablet_portrait_layout_data[$value] = $values["$device" . '_' . "$value"];
       }
     }
     $layout = at_build_page_layout($tablet_portrait_layout_data['layout'], $tablet_portrait_layout_data['sidebar_first'], $tablet_portrait_layout_data['sidebar_second'], $tablet_portrait_layout_data['sidebar_unit']);
@@ -146,7 +142,7 @@
     if ($values['load_respondjs'] === 1) {
       foreach ($smartphone_landscape_panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
+        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . 'ie/' . $option . '.css', FALSE);
       }
     }
 
@@ -154,7 +150,7 @@
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
-     // Get and wrap the responsive CSS in the relative media query
+     // Get and wrap the responsive CSS styles in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.portrait.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
@@ -168,8 +164,8 @@
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
-      if (isset($values["$device" .'_'. "$value"])) {
-        $tablet_landscape_layout_data[$value] = $values["$device" .'_'. "$value"];
+      if (isset($values["$device" . '_' . "$value"])) {
+        $tablet_landscape_layout_data[$value] = $values["$device" . '_' . "$value"];
       }
     }
     $layout = at_build_page_layout($tablet_landscape_layout_data['layout'], $tablet_landscape_layout_data['sidebar_first'], $tablet_landscape_layout_data['sidebar_second'], $tablet_landscape_layout_data['sidebar_unit']);
@@ -193,7 +189,7 @@
     if ($values['load_respondjs'] === 1) {
       foreach ($tablet_landscape_panel_settings as $setting) {
         $option = $values[$setting];
-        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . '/ie/' . $option . '.css', FALSE);
+        $css_files[] =  drupal_load_stylesheet($path_to_panels_css . 'ie/' . $option . '.css', FALSE);
       }
     }
 
@@ -201,7 +197,7 @@
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
-     // Get and wrap the responsive CSS in the relative media query
+     // Get and wrap the responsive CSS styles in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.landscape.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
@@ -215,8 +211,8 @@
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
-      if (isset($values["$device" .'_'. "$value"])) {
-        $bigscreen_layout_data[$value] = $values["$device" .'_'. "$value"];
+      if (isset($values["$device" . '_' . "$value"])) {
+        $bigscreen_layout_data[$value] = $values["$device" . '_' . "$value"];
       }
     }
     $layout = at_build_page_layout($bigscreen_layout_data['layout'], $bigscreen_layout_data['sidebar_first'], $bigscreen_layout_data['sidebar_second'], $bigscreen_layout_data['sidebar_unit']);
@@ -229,10 +225,10 @@
     // Standard layout can have a max-width
     if ($values['bigscreen_set_max_width'] === 1 && $bigscreen_layout_data['page_unit'] === '%') {
       if (!empty($values['bigscreen_max_width'])) {
-        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
+        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] . ';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
       }
       else {
-        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
+        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] . ';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
       }
     }
 
@@ -240,7 +236,7 @@
     $panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'default.css', FALSE);
 
     // Get the lte ie7 panels layouts
-    $ie_panels_layouts = drupal_load_stylesheet($path_to_panels_css . '/ie/' . 'ie_defaults.css', FALSE);
+    $ie_panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'ie/' . 'ie_defaults.css', FALSE);
 
     // Build a $styles variable with the layout, width and default panels layouts
     $styles = implode("\n", $layout) . $width . "\n" . $panels_layouts;
@@ -289,7 +285,7 @@
       $default_layout = $comment . $styles . "\n" . $ie_panels_layouts;
     }
 
-     // Get and wrap the responsive CSS in the relative media query
+     // Get and wrap the responsive CSS styles in the relative media query
     $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
