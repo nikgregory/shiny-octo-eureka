@@ -1,13 +1,11 @@
 <?php
-global $path_to_at_core;
-
 // Helper functions for processing the page layout and font families
-include_once($path_to_at_core . '/inc/forms/settings.builders.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.builders.inc');
 
 // Custom submit function - this mostly builds and saves stylesheets for
 // various features such as the responsive layout and font styles.
 function at_core_settings_submit($form, &$form_state) {
-  global $path_to_at_core;
+  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   // Set form_state values into one variable
   $values = $form_state['values'];
@@ -16,7 +14,7 @@ function at_core_settings_submit($form, &$form_state) {
   $theme_name = $form_state['build_info']['args'][0];
 
   // Set up some paths we use to get and save files
-  $path_to_panels_css = drupal_get_path('theme', 'adaptivetheme') . '/layouts/css/';
+  $path_to_panels_css = $path_to_at_core . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
   // Set up our files directory for the generated files. Files are never

@@ -138,8 +138,8 @@ div.smartphone-portrait-layout  {
   text-align: center;
 }
 fieldset.at-layout-form .form-type-radio label[for$=three-col-grail]  {background-position: 0 0;}
-fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-right]  {background-position: -61px 0;}
-fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-left]  {background-position: -122px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-right]  {background-position: -122px 0;}
+fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-left]  {background-position: -61px 0;}
 fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-left-stack]  {background-position: -183px 0;}
 fieldset.at-layout-form .form-type-radio label[for$=two-sidebars-right-stack]  {background-position: -244px 0;}
 fieldset.at-layout-form .form-type-radio label[for$=one-col-stack] {background-position: -305px 0;}
@@ -440,8 +440,6 @@ input[disabled] {
 fieldset.vertical-tabs-pane fieldset legend {
   display: none;
 }
-
-/* Looks like some more inconsistant markup from Drupal, and in a point release, great! */ 
 abbr.form-required,
 span.form-required,
 span.marker {
@@ -449,8 +447,82 @@ span.marker {
   color: #8a1a11;
   font-weight: 700;
 }
-
-/* Oh no, doesnt stop there, just add some new margin top, why the fuck not? */
 div.vertical-tabs {
   margin-top: 0;
+}
+html.js fieldset.collapsible fieldset .fieldset-legend {
+    background-image: none;
+    padding-left: 0;
+}
+
+/* More bullshit to wrangel seven to look half decent */
+.admin-theme-seven div.smartphone-portrait-layout {
+  margin-top: 7px;
+}
+.admin-theme-seven fieldset,
+.admin-theme-seven .fieldset-wrapper,
+.admin-theme-seven legend
+.admin-theme-seven .fieldset-legend {  
+  margin: 0;
+  padding: 0;
+}
+.admin-theme-seven #edit-panels-wrapper > .fieldset-wrapper > fieldset {
+  margin: 0;
+  padding: 10px 0 0 0;
+  overflow: hidden;
+}
+.admin-theme-seven #edit-panels-wrapper fieldset fieldset .fieldset-wrapper,
+.admin-theme-seven fieldset.collapsible fieldset fieldset .fieldset-wrapper{
+  background: #f6f6f6;
+}
+.admin-theme-seven #edit-panels-wrapper fieldset fieldset .fieldset-wrapper {
+  padding-left: 20px;
+}
+.admin-theme-seven #edit-panels-wrapper fieldset > .fieldset-wrapper {
+  padding-top: 0;
+  margin-bottom: 20px;
+}
+.admin-theme-seven #edit-panels-wrapper fieldset > .fieldset-wrapper > fieldset {;
+}
+.admin-theme-seven #edit-panels-wrapper fieldset fieldset.collapsed {
+  margin: 0;
+  padding: 10px 0 0;
+}
+.admin-theme-seven  fieldset .fieldset-wrapper .fieldset-wrapper {
+  padding: 0;
+  margin: 0 15px;
+}
+.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset > .fieldset-wrapper {
+  margin: 0 15px;
+  padding: 5px 10px 0;
+  background: #f6f6f6;
+}
+.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset legend {
+  padding: 0;
+}
+.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset .fieldset-legend {
+  text-transform: none;
+  padding: 5px 0 5px 15px;
+}
+.admin-theme-seven  fieldset#edit-font .fieldset-wrapper legend {
+  display: block;
+  padding-top: 10px;
+  position: absolute;
+  top: 0;
+}
+.admin-theme-seven  fieldset#edit-font fieldset.collapsed legend,
+.admin-theme-seven  fieldset#edit-font fieldset[id$=font-selector] legend,
+.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-sizes] legend,
+.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-menus] legend,
+.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-css] legend {
+  position: static;
+}
+.admin-theme-seven  #edit-titles fieldset {
+  padding: 5px 0;
+}
+.admin-theme-seven  #edit-titles fieldset .fieldset-description {
+  padding: 3px 0;
+}
+.admin-theme-seven #edit-titles #edit-site-name-font-style .fieldset-description {
+  padding-top: 2.2em;
 }

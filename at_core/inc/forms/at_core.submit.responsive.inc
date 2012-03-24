@@ -36,15 +36,15 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" .'_'. "$value"])) {
-        $layout_data[$value] = $values["$device" .'_'. "$value"];
+        $smartphone_portrait_layout_data[$value] = $values["$device" .'_'. "$value"];
       }
     }
-    $layout = at_build_page_layout($layout_data['layout'], $layout_data['sidebar_first'], $layout_data['sidebar_second'], $layout_data['sidebar_unit']);
+    $layout = at_build_page_layout($smartphone_portrait_layout_data['layout'], $smartphone_portrait_layout_data['sidebar_first'], $smartphone_portrait_layout_data['sidebar_second'], $smartphone_portrait_layout_data['sidebar_unit']);
 
-    $method = $layout_data['layout'];
+    $method = $smartphone_portrait_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] . '}';
-    $media_query = $layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $smartphone_portrait_layout_data['page_width'] . $smartphone_portrait_layout_data['page_unit'] . '}';
+    $media_query = $smartphone_portrait_layout_data['media_query'];
 
     // If mobile first then smartphone portrait needs to do nothing, else its
     // problematic to set the layout later due to the cascade and inheritance
@@ -74,15 +74,15 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" .'_'. "$value"])) {
-        $layout_data[$value] = $values["$device" .'_'. "$value"];
+        $smartphone_landscape_layout_data[$value] = $values["$device" .'_'. "$value"];
       }
     }
-    $layout = at_build_page_layout($layout_data['layout'], $layout_data['sidebar_first'], $layout_data['sidebar_second'], $layout_data['sidebar_unit']);
+    $layout = at_build_page_layout($smartphone_landscape_layout_data['layout'], $smartphone_landscape_layout_data['sidebar_first'], $smartphone_landscape_layout_data['sidebar_second'], $smartphone_landscape_layout_data['sidebar_unit']);
 
-    $method = $layout_data['layout'];
+    $method = $smartphone_landscape_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] . '}';
-    $media_query = $layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $smartphone_landscape_layout_data['page_width'] . $smartphone_landscape_layout_data['page_unit'] . '}';
+    $media_query = $smartphone_landscape_layout_data['media_query'];
 
     // Get the panel layout settings and CSS for these layouts
     $device = 'smartphone_landscape';
@@ -122,15 +122,15 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" .'_'. "$value"])) {
-        $layout_data[$value] = $values["$device" .'_'. "$value"];
+        $tablet_portrait_layout_data[$value] = $values["$device" .'_'. "$value"];
       }
     }
-    $layout = at_build_page_layout($layout_data['layout'], $layout_data['sidebar_first'], $layout_data['sidebar_second'], $layout_data['sidebar_unit']);
+    $layout = at_build_page_layout($tablet_portrait_layout_data['layout'], $tablet_portrait_layout_data['sidebar_first'], $tablet_portrait_layout_data['sidebar_second'], $tablet_portrait_layout_data['sidebar_unit']);
 
-    $method = $layout_data['layout'];
+    $method = $tablet_portrait_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] . '}';
-    $media_query = $layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $tablet_portrait_layout_data['page_width'] . $tablet_portrait_layout_data['page_unit'] . '}';
+    $media_query = $tablet_portrait_layout_data['media_query'];
 
     // Get the panel layout settings and CSS for these layouts
     foreach ($panel_subtypes as $subtype) {
@@ -169,15 +169,15 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" .'_'. "$value"])) {
-        $layout_data[$value] = $values["$device" .'_'. "$value"];
+        $tablet_landscape_layout_data[$value] = $values["$device" .'_'. "$value"];
       }
     }
-    $layout = at_build_page_layout($layout_data['layout'], $layout_data['sidebar_first'], $layout_data['sidebar_second'], $layout_data['sidebar_unit']);
+    $layout = at_build_page_layout($tablet_landscape_layout_data['layout'], $tablet_landscape_layout_data['sidebar_first'], $tablet_landscape_layout_data['sidebar_second'], $tablet_landscape_layout_data['sidebar_unit']);
 
-    $method = $layout_data['layout'];
+    $method = $tablet_landscape_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] . '}';
-    $media_query = $layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $tablet_landscape_layout_data['page_width'] . $tablet_landscape_layout_data['page_unit'] . '}';
+    $media_query = $tablet_landscape_layout_data['media_query'];
 
     // Get the panel layout settings and CSS for these layouts
     foreach ($panel_subtypes as $subtype) {
@@ -211,28 +211,28 @@
   // Standard Layout (bigscreen)
   if ($values['bigscreen_layout']) {
 
-    $device = 'bigscreen_layout';
+    $device = 'bigscreen';
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" .'_'. "$value"])) {
-        $layout_data[$value] = $values["$device" .'_'. "$value"];
+        $bigscreen_layout_data[$value] = $values["$device" .'_'. "$value"];
       }
     }
-    $layout = at_build_page_layout($layout_data['layout'], $layout_data['sidebar_first'], $layout_data['sidebar_second'], $layout_data['sidebar_unit']);
+    $layout = at_build_page_layout($bigscreen_layout_data['layout'], $bigscreen_layout_data['sidebar_first'], $bigscreen_layout_data['sidebar_second'], $bigscreen_layout_data['sidebar_unit']);
 
-    $method = $layout_data['layout'];
+    $method = $bigscreen_layout_data['layout'];
     $comment = "/* $device $method */";
-    $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] . '}';
-    $media_query = $layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] . '}';
+    $media_query = $bigscreen_layout_data['media_query'];
 
     // Standard layout can have a max-width
-    if ($values['bigscreen_set_max_width'] === 1 && $layout_data['page_unit'] === '%') {
+    if ($values['bigscreen_set_max_width'] === 1 && $bigscreen_layout_data['page_unit'] === '%') {
       if (!empty($values['bigscreen_max_width'])) {
-        $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
+        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
       }
       else {
-        $width = "\n" . '.container {width:' . $layout_data['page_width'] . $layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
+        $width = "\n" . '.container {width:' . $bigscreen_layout_data['page_width'] . $bigscreen_layout_data['page_unit'] .';max-width:' . $values['bigscreen_max_width'] . $values['bigscreen_max_width_unit'] . '}';
       }
     }
 

@@ -2,16 +2,15 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
-global $path_to_at_core;
 
 // Get our config arrys
-include_once($path_to_at_core . '/inc/config.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/config.inc');
 
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
-  global $path_to_at_core;
+  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
@@ -28,7 +27,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form
-  $logo = file_create_url($path_to_at_core . '/logo.png');
+  $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
   $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. drupal_html_class($admin_theme) .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
@@ -41,7 +40,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#suffix' => '</div>',
     '#weight' => -10,
     '#attached' => array(
-      'css' => array($path_to_at_core . '/css/at.settings.form.css'),
+      'css' => array(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css'),
     ),
   );
   // Include layout forms, global settings and debug
@@ -164,5 +163,5 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['#submit'][] = 'at_core_settings_submit';
 }
 // Include custom form validation and submit functions
-include_once($path_to_at_core . '/inc/forms/at_core.validate.inc');
-include_once($path_to_at_core . '/inc/forms/at_core.submit.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');
