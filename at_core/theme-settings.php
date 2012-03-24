@@ -30,7 +30,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
   $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. drupal_html_class($admin_theme) .'"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
-  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
+  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
   $layout_header .= '</div>';
   
   $form['at-layout'] = array(

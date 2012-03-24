@@ -49,8 +49,8 @@
     // If mobile first then smartphone portrait needs to do nothing, else its
     // problematic to set the layout later due to the cascade and inheritance
     if ($is_default_layout === 'smartphone-portrait') {
-      $default_layout = '/* Smartphone portrait is default, you the man! */';
-      $css = "/* Smartphone portrait is default, you the man! */";
+      $default_layout = '/* Smartphone portrait is default, mobile first - you rock the hardest! */';
+      $css = "/* Smartphone portrait is default, mobile first - you rock the hardest! */";
     }
     else {
       // Smartphone portrait panels are all 100% width and stacked, we need to overpower the default layouts when in desktop first mode
