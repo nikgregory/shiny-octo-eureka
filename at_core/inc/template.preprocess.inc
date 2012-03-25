@@ -504,7 +504,7 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['visibility'] = '';
     $vars['hide_site_name'] = FALSE;
   }
-  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $sitename = variable_get('site_name', 'Drupal');
   $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
       'title' => t('Home page')),
@@ -973,7 +973,7 @@ function adaptivetheme_preprocess_search_result(&$vars) {
   }
   $vars['info_split'] = $info;
   $vars['info'] = implode(' - ', $info);
-  $vars['info_separator'] = filter_xss(theme_get_setting('search_info_separator', $theme_name));
+  $vars['info_separator'] = filter_xss_admin(theme_get_setting('search_info_separator', $theme_name)); // check_plain() encodes entitles, which we might want to use
 }
 
 /**

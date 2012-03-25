@@ -328,7 +328,7 @@
 
   // Loop over the array and save each file, and we're done!
   foreach ($files as $key => $value) {
-    $sanitized_values = filter_xss($value); // some data might be user entered, check_plain gave me encoding errors
+    $sanitized_values = filter_xss_admin($value); // Can contain user entered data, run final sanity checks
     $filepath = "$path/$key.css";
     file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
   }

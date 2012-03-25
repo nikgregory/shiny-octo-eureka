@@ -16,19 +16,19 @@ function adaptivetheme_breadcrumb($vars) {
 
   if ($show_breadcrumb == 'yes') {
     $show_breadcrumb_home = theme_get_setting('breadcrumb_home', $theme_name);
-    
+
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
     }
-    
+
     if (!empty($breadcrumb)) {
       $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-      $separator = filter_xss(theme_get_setting('breadcrumb_separator', $theme_name));
-      
+      $separator = filter_xss_admin(theme_get_setting('breadcrumb_separator', $theme_name));
+
       $class = 'crumb';
-      end($breadcrumb); 
+      end($breadcrumb);
       $last = key($breadcrumb);
-      
+
       $output = '';
       foreach ($breadcrumb as $key => $val) {
         if ($key == $last) {
@@ -174,7 +174,7 @@ function adaptivetheme_links($vars) {
       if (!empty($heading['class'])) {
         $output .= drupal_attributes(array('class' => $heading['class']));
       }
-      $output .= '>' . filter_xss($heading['text']) . '</' . $heading['level'] . '>';
+      $output .= '>' . filter_xss_admin($heading['text']) . '</' . $heading['level'] . '>'; // Core uses check_plain(), I think this is over the top, basic markup is OK
     }
     $output .= '<ul' . drupal_attributes($attributes) . '>';
 
