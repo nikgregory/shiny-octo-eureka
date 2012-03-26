@@ -6,10 +6,6 @@
  */
 global $path_to_at_core, $theme_name;
 
-// Include essential files
-include_once($path_to_at_core . '/inc/config.inc');
-include_once($path_to_at_core . '/inc/template.helpers.inc');
-
 /**
  * Preprocess variables for html.tpl.php
  */
@@ -26,7 +22,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['rdf_profile'] = '';
 
   // html_attributes
-  // Clean up the lang attributes, great idea Zen
+  // Clean up the lang attributes
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
   // Skip link
@@ -51,8 +47,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       $vars['classes_array'][] = 'site-name-' . drupal_html_class($vars['head_title_array']['name']);
     }
 
-    // Classes for body element. Allows advanced theming based on context
-    // (home page, node of certain type, etc.), cheers Zen.
+    // Classes for theming based on context
     if (!$vars['is_front']) {
       // Add unique class for each page.
       $path = drupal_get_path_alias($_GET['q']);
@@ -70,7 +65,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       $vars['classes_array'][] = drupal_html_class('section-' . $section);
     }
 
-    // Set classes for views and panels pages, thanks again Zen, you're amazing!
+    // Set classes for views and panels pages
     $vars['menu_item'] = menu_get_item();
     switch ($vars['menu_item']['page_callback']) {
       case 'views_page':
@@ -120,11 +115,11 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Load CSS and JavaScript
   // AT has two modes - Production and Development. Depending on the
   // mode it will load different files. Production mode assume you
-  // have finished CSS development and will not need to update styles 
-  // in the responsive stylesheets, if you do you will need to re-save 
-  // the theme settings at least once to re-write your 
+  // have finished CSS development and will not need to update styles
+  // in the responsive stylesheets, if you do you will need to re-save
+  // the theme settings at least once to re-write your
   // $theme_name.responsive.styles.css file which is in public files.
-  
+
   // Set the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
   $file = '';
@@ -343,7 +338,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // stacks and integrate with @font-your-face module. All can be
   // configured in the "Fonts" theme settings. Here we only need to
   // load Google webfonts. Websafe and custom fonts are stored in a
-  // generated CSS file (in public files) and @font-your-face module 
+  // generated CSS file (in public files) and @font-your-face module
   // takes care of loading its own fonts.
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
 
@@ -362,8 +357,8 @@ function adaptivetheme_preprocess_html(&$vars) {
         // strip the element prefix
         $font = str_replace($element . '-', '', $setting);
         // replace hyphens with spaces, now we have a lower case font name, still no good,
-        // Google won't like it and will return the dreaded "font not supported" error. If 
-        // you are wondering why I just don't loop over the fonts list and compare keys right 
+        // Google won't like it and will return the dreaded "font not supported" error. If
+        // you are wondering why I just don't loop over the fonts list and compare keys right
         // away its because its very expensive to do this for every element (18 of them).
         // Really this whole Google fonts thing is ugly, a hack and slow - should I remove it?
         $used_fonts[] = str_replace('-', ' ', $font);
@@ -421,13 +416,16 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Images
   if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.image.css';
-    $settings_array = array(
-      'image_caption_full',
-      'image_caption_teaser',
-      'image_alignment',
-      'image_alignment_teaser',
-    );
-    foreach ($settings_array as $setting) {
+    $image_settings_array = &drupal_static(__FUNCTION__, array());
+    if (empty($image_settings_array)) {
+      $image_settings_array = array(
+        'image_caption_full',
+        'image_caption_teaser',
+        'image_alignment',
+        'image_alignment_teaser',
+      );
+    }
+    foreach ($image_settings_array as $setting) {
       if ($image_setting = theme_get_setting($setting, $theme_name)) {
         $vars['classes_array'][] = $image_setting;
       }
@@ -519,20 +517,23 @@ function adaptivetheme_preprocess_page(&$vars) {
   // is not as DRY as it could be, particulary for blocks/nodes/comments etc but it does
   // open the door for more granularity (i.e. target one block or block type).
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-    $settings_array = array();
-    if ($vars['hide_site_name'] = FALSE) {
-      $settings_array[] = 'site_name_case';
-      $settings_array[] = 'site_name_weight';
-      $settings_array[] = 'site_name_alignment';
-      $settings_array[] = 'site_name_shadow';
+    $heading_settings_array = &drupal_static(__FUNCTION__, array());
+    if (empty($heading_settings_array)) {
+      $heading_settings_array = array();
+      if ($vars['hide_site_name'] = FALSE) {
+        $heading_settings_array[] = 'site_name_case';
+        $heading_settings_array[] = 'site_name_weight';
+        $heading_settings_array[] = 'site_name_alignment';
+        $heading_settings_array[] = 'site_name_shadow';
+      }
+      if ($vars['site_slogan']) {
+        $heading_settings_array[] = 'site_slogan_case';
+        $heading_settings_array[] = 'site_slogan_weight';
+        $heading_settings_array[] = 'site_slogan_alignment';
+        $heading_settings_array[] = 'site_slogan_shadow';
+      }
     }
-    if ($vars['site_slogan']) {
-      $settings_array[] = 'site_slogan_case';
-      $settings_array[] = 'site_slogan_weight';
-      $settings_array[] = 'site_slogan_alignment';
-      $settings_array[] = 'site_slogan_shadow';
-    }
-    foreach ($settings_array as $setting) {
+    foreach ($heading_settings_array as $setting) {
       if ($heading_setting = theme_get_setting($setting, $theme_name)) {
         $vars['classes_array'][] = $heading_setting;
       }
@@ -616,9 +617,7 @@ function adaptivetheme_preprocess_region(&$vars) {
     $vars['classes_array'][] = 'sidebar';
   }
 
-  // Add classes to conditional stack regions in
-  // Gpanel regions, in Panels responsive layout
-  // plugins these are hard coded.
+  // Add classes to conditional stack regions in Gpanel regions, in the Panels layout plugins these are hard coded.
   $conditional_stack_regions = &drupal_static(__FUNCTION__, array());
   if (empty($conditional_stack_regions)) {
     $conditional_stack_regions = array(
@@ -665,10 +664,10 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   // Add extra classes if required
   if (theme_get_setting('extra_block_classes', $theme_name) === 1) {
-  
+
     // Zebra
     $vars['classes_array'][] = $vars['block_zebra'];
-    
+
     // Position?
     if ($vars['block_id'] === 1) {
       $vars['classes_array'][] = 'first';
@@ -676,28 +675,30 @@ function adaptivetheme_preprocess_block(&$vars) {
     if (isset($vars['block']->last_in_region)) {
       $vars['classes_array'][] = 'last';
     }
-    
+
     // Count
     $vars['classes_array'][] = 'block-count-' . $vars['id'];
-    
+
     // Region
     $vars['classes_array'][] = drupal_html_class('block-region-' . $vars['block']->region);
-    
+
     // Delta
     $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
   }
 
   // Add title style classes, these are loaded via the classes_arry and not title_attributes_array
   // so we can style the whole block depending on the title styles.
-  $settings_array = &drupal_static(__FUNCTION__, array());
   if (isset($vars['block']->subject)) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = array(
-        'block_title_case',
-        'block_title_weight',
-        'block_title_alignment',
-        'block_title_shadow',
-      );
+      $settings_array = &drupal_static(__FUNCTION__, array());
+      if (empty($settings_array)) {
+        $settings_array = array(
+          'block_title_case',
+          'block_title_weight',
+          'block_title_alignment',
+          'block_title_shadow',
+        );
+      }
       foreach ($settings_array as $setting) {
         if ($heading_setting = theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
@@ -721,38 +722,40 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
   $roles = &drupal_static(__FUNCTION__, array());
-  $roles = array(
-    'complementary' => array(
-      'aggregator',
-      'help',
-      'locale',
-      'poll',
-      'profile',
-      'node' => array('syndicate'),
-      'system' => array('powered-by', 'help'),
-      'user' => array('new', 'online'),
-    ),
-    'navigation' => array(
-      'blog',
-      'book',
-      'comment',
-      'forum',
-      'menu',
-      'menu_block',
-      'node' => array('recent'),
-      'shortcut',
-      'statistics',
-      'system' => array_keys(menu_list_system_menus()),
-      'superfish',
-      'nice_menus',
-    ),
-    'search' => array(
-      'search',
-    ),
-    'form' => array(
-      'user' => array('login'),
-    ),
-  );
+  if (empty($roles)) {
+    $roles = array(
+      'complementary' => array(
+        'aggregator',
+        'help',
+        'locale',
+        'poll',
+        'profile',
+        'node' => array('syndicate'),
+        'system' => array('powered-by', 'help'),
+        'user' => array('new', 'online'),
+      ),
+      'navigation' => array(
+        'blog',
+        'book',
+        'comment',
+        'forum',
+        'menu',
+        'menu_block',
+        'node' => array('recent'),
+        'shortcut',
+        'statistics',
+        'system' => array_keys(menu_list_system_menus()),
+        'superfish',
+        'nice_menus',
+      ),
+      'search' => array(
+        'search',
+      ),
+      'form' => array(
+        'user' => array('login'),
+      ),
+    );
+  }
   foreach ($roles as $role => $module) {
     if (!is_array($role) && in_array($vars['block']->module, $module)) {
       $vars['attributes_array']['role'] = "$role";
@@ -775,22 +778,22 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
-  
+
     // Zebra
     $vars['classes_array'][] = $vars['zebra'];
-    
+
     // Langauge
     if (module_exists('translation')) {
       if ($vars['node']->language) {
         $vars['classes_array'][] = 'node-lang-' . $vars['node']->language;
       }
     }
-    
+
     // User picture?
     if ($vars['display_submitted'] && !empty($vars['picture'])) {
       $vars['classes_array'][] = 'node-with-picture';
     }
-    
+
     // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
     if ($vars['view_mode'] !== 'teaser') {
       $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
@@ -799,15 +802,17 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   // Add title style classes, as per blocks these are added to classes_array not title_attraibutes_array
   // so we can style the entire node based on how the title wants to be handled (such as alignmment)
-  $settings_array = &drupal_static(__FUNCTION__, array());
   if (isset($vars['title'])) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = array(
-        'node_title_case',
-        'node_title_weight',
-        'node_title_alignment',
-        'node_title_shadow',
-      );
+      $settings_array = &drupal_static(__FUNCTION__, array());
+      if (empty($settings_array)) {
+        $settings_array = array(
+          'node_title_case',
+          'node_title_weight',
+          'node_title_alignment',
+          'node_title_shadow',
+        );
+      }
       foreach ($settings_array as $setting) {
         if ($heading_setting = theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
@@ -824,7 +829,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['content_attributes_array']['class'][] = 'node-content';
 
   // Build the submitted by and time elements
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601, if you see a theme doing this blast them about it, it will give all your nodes the WRONG time stamp!
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601!
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
       array(
@@ -852,10 +857,10 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   // Extra comment classes if required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 1) {
-  
+
     // Zebra
     $vars['classes_array'][] = $vars['zebra'];
-    
+
     // Position?
     if ($vars['id'] === 1) {
       $vars['classes_array'][] = 'first';
@@ -863,17 +868,17 @@ function adaptivetheme_preprocess_comment(&$vars) {
     if ($vars['id'] === $vars['node']->comment_count) {
       $vars['classes_array'][] = 'last';
     }
-    
+
     // Title hidden?
     if (theme_get_setting('comments_hide_title', $theme_name) === 1) {
       $vars['classes_array'][] = 'comment-title-hidden';
     }
-    
+
     // User picture?
     if (isset($vars['picture'])) {
       $vars['classes_array'][] = 'comment-with-picture';
     }
-    
+
     // Signature?
     if (isset($vars['signature'])) {
       $vars['classes_array'][] = 'comment-with-signature';
@@ -889,15 +894,17 @@ function adaptivetheme_preprocess_comment(&$vars) {
   }
 
   // Add title style classes
-  $settings_array = &drupal_static(__FUNCTION__, array());
   if (theme_get_setting('comments_hide_title', $theme_name) !== 1) {
     if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = array(
-        'comment_title_case',
-        'comment_title_weight',
-        'comment_title_alignment',
-        'comment_title_shadow',
-      );
+      $settings_array = &drupal_static(__FUNCTION__, array());
+      if (empty($settings_array)) {
+        $settings_array = array(
+          'comment_title_case',
+          'comment_title_weight',
+          'comment_title_alignment',
+          'comment_title_shadow',
+        );
+      }
       foreach ($settings_array as $setting) {
         if ($heading_setting = theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;

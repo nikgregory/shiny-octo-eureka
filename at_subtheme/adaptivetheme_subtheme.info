@@ -12,10 +12,24 @@
 
 ;----------// Stylesheets
 
+  ; Globals CSS, loads all global.[type].css files in /css/
   stylesheets[screen, handheld][] = css/globals.css
 
-  ; Uncomment to load basic print styles
-  stylesheets[print][] = css/print.css
+  ; Print
+  ; Uncomment to load basic print styles.
+  ; stylesheets[print][] = css/print.css
+
+  ; Internet Explorer Stylesheets
+  ; AT can load IE stylesheets from the info file.
+  ;
+  ; Syntax: ie_stylesheets[media][condition] = path/to/file (path must be relative to your theme root)
+  ; 
+  ; For example if you want to load an IE stylesheet just for IE7 use the following (note: you need to create "ie7.css" in the /css/ directory):
+  ; ie_stylesheets[screen][IE 7] = css/ie7.css
+  ;
+  ; By default the sub-theme has one IE stylesheet which loads for "less than IE9" but "not IEMobile 7".
+  ; Uncomment the following to use the included IE styleseet:
+  ; ie_stylesheets[screen][(lt IE 9)&(!IEMobile 7)] = css/lt-ie9.css
 
 
 ;----------// Regions
@@ -90,7 +104,7 @@
   settings[tablet_portrait_sidebar_second] = 50
   settings[tablet_portrait_media_query]    = 'only screen and (min-width:481px) and (max-width:768px)'
 
-  
+
   ; Layout settings - Smartphone landscape
   settings[smartphone_landscape_layout]         = 'one-col-vert'
   settings[smartphone_landscape_page_unit]      = '%'
@@ -319,7 +333,7 @@
 
   ; Extra markup
   settings[menu_item_span_elements] = 0
-  
+
   ; Skip link
   settings[skip_link_target] = '#main-content'
 
@@ -328,5 +342,4 @@
   settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'
   settings[apple_touch_icon_path_m] = 'images/touch-icon-m.png'
   settings[apple_touch_icon_path_h] = 'images/touch-icon-h.png'
-  
-  
+

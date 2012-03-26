@@ -2,8 +2,33 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  *
- * Provides frequently used functions that don't fit logically anywhere else.
+ * Provides frequently used functions etc that don't fit logically anywhere else.
  */
+
+// AT leverages info file data if it exists to load various files and perform certain operations.
+$lt = list_themes();
+foreach ($lt as $key => $value) {
+  if ($theme_name == $key) {
+    $info = $lt[$theme_name]->info;
+
+    // Scan for the existence of a "release" key and conditionally load google.web.fonts.inc
+    if (!array_key_exists('release', $info) || ($info['release'] == '7.x-2.x')) {
+      include_once($path_to_at_core . '/inc/google.web.fonts.inc');
+    }
+    
+    // Scan for an "ie_stylesheets" key, and if it exists load the IE stylesheets
+    if (array_key_exists('ie_stylesheets', $info)) {
+      foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
+        foreach ($stylesheets as $condition => $path) {
+          $ie_style['media'] = $media;
+          $ie_style['condition'] = $condition;
+          $ie_style['path'] = $path;
+        }
+        load_subtheme_conditional_styles($ie_style, $theme_name);
+      }
+    }
+  }
+}
 
 // Helper function for theming main and secondary variables.
 function _theme_menu_variables($menu, $type) {
@@ -14,13 +39,13 @@ function _theme_menu_variables($menu, $type) {
 /**
 * Load sub-theme responsive stylesheets in link elements
 *
-* load_subtheme_responsive_styles() takes 3 arguements:
+* load_subtheme_responsive_styles() takes 3 parameters:
 * - $css_file - the name of the css file.
 * - $media_query - the media query from theme settings to use for the media attribute.
 * - $theme_name - to generate the path-to-theme for drupal_add_css().
 *
-* This is almost always called from a sub-themes template.php file to load
-* that themes responsive stylesheets.
+* This is almost always called from adaptivetheme_preprocess_html(), only in a rare instance
+* might this be called from a sub-theme (to load additional responsive stylesheets).
 */
 function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
   $path_to_theme = &drupal_static(__FUNCTION__);
@@ -38,8 +63,29 @@ function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
   }
 }
 
-// Load sub-theme media queries, 7.x-2.x backward compatibility,
-// this is never used by 7.x-3.x themes.
+/**
+* Load sub-theme IE stylesheets
+*
+* load_subtheme_conditional_styles() takes 2 parameters:
+* - $ie_style - an arry containing the media, condition and file path
+* - $theme_name - to generate the path-to-theme for drupal_add_css().
+*/
+function load_subtheme_conditional_styles($ie_style, $theme_name) {
+  $path_to_theme = drupal_get_path('theme', $theme_name);
+  $filepath = $path_to_theme . '/' . $ie_style['path'];
+  drupal_add_css($filepath, array(
+    'group' => CSS_THEME,
+    'browsers' => array(
+      'IE' => $ie_style['condition'],
+      '!IE' => FALSE,
+      ),
+    'media' => $ie_style['media'],
+    'preprocess' => TRUE,
+    )
+  );
+}
+
+// Load sub-theme media queries, 7.x-2.x backward compatibility
 function load_subtheme_media_queries($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $file) {
@@ -55,8 +101,8 @@ function load_subtheme_media_queries($files, $theme_name) {
   }
 }
 
-// Load subtheme IE stylesheets, $files is a keyed array of files,
-// keyed by conditional comment, $theme_name is the theme name.
+// Load subtheme IE stylesheets, 7.x-2.x backward compatibility 
+// $files is a keyed array of files, keyed by conditional comment, $theme_name is the theme name.
 function load_subtheme_ie_styles($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $key => $value) {
