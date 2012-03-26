@@ -9,7 +9,7 @@
 
   $responsive_panels = responsive_panels(); // Get the panels config array
   $float = ".at-panel .region {display:inline;float:left}"; // Some layouts generate their Panels CSS, we need to add a float delcaration for them
-  
+
   $responsive_styles = array(); // Holds all the styles from the responsive stylesheets, wrapped in media queries
 
   // Get the Panels subtypes settings

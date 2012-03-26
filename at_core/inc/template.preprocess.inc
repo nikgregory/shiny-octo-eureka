@@ -425,6 +425,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       'image_caption_full',
       'image_caption_teaser',
       'image_alignment',
+      'image_alignment_teaser',
     );
     foreach ($settings_array as $setting) {
       if ($image_setting = theme_get_setting($setting, $theme_name)) {
