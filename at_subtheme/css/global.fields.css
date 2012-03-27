@@ -122,3 +122,22 @@
 
 .field-name-field-FIELDNAME /* Underscores in field name are replaced with dashes. */ {
 }
+
+
+/* Image Alignment Theme Settings - included here so you can easily override them if required */
+
+.ia-n .field-type-image  /* Float none setting */ {
+}
+
+.ia-l .field-type-image  /* Float left setting */ {
+  margin: 0.5em 15px 1.5em 0;
+}
+
+.ia-c .field-type-image  /* Centered setting */ {
+  margin: 0.5em auto 1.5em;
+}
+
+.ia-r .field-type-image  /* Float right setting */ {
+  margin: 0.5em 0 1.5em 15px;
+}
+

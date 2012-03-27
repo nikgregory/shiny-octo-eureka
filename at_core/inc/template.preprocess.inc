@@ -433,46 +433,50 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load micro CSS files if settings are active
+  // Add theme setting classes and files if active
   $settings_css = array();
+  
   // Headings/titles
   if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.headings.css';
   }
+  
   // Images
   if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.image.css';
-    $image_settings_array = &drupal_static(__FUNCTION__, array());
-    if (empty($image_settings_array)) {
-      $image_settings_array = array(
-        'image_caption_full',
-        'image_caption_teaser',
-        'image_alignment',
-        'image_alignment_teaser',
-      );
-    }
+    $image_settings_array = array(
+      'image_caption_full',
+      'image_caption_teaser',
+      'image_alignment',
+      'image_alignment_teaser',
+    );
     foreach ($image_settings_array as $setting) {
       if ($image_setting = theme_get_setting($setting, $theme_name)) {
         $vars['classes_array'][] = $image_setting;
       }
     }
   }
+  
   // Login block
   if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.login.css';
   }
+  
+  // Load each stylesheet to support theme setting styles
   if (!empty($settings_css)) {
     foreach ($settings_css as $cssfile) {
       drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        //'weight' => -100,
         'media' => 'screen, handheld',
         'every_page' => TRUE,
         )
       );
     }
   }
+  
+  
+  
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region
