@@ -192,6 +192,7 @@
   settings[chrome_edge]                    = 0
   settings[disable_responsive_styles]      = 0
   settings[load_respondjs]                 = 0
+  settings[load_ltie8css]                  = 0
   settings[load_html5js]                   = 1
   settings[enable_cascading_media_queries] = 0
   settings[cascade_media_query]            = 'only screen and (min-width:220px)'

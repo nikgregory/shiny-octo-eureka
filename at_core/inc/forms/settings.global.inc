@@ -86,6 +86,12 @@
     '#description' => t('By checking this setting the site will load the <a href="!link3" target="_blank">html5shiv</a>.', array('!link3' => '//github.com/aFarkas/html5shiv')),
     '#default_value' => theme_get_setting('load_html5js'),
   );
+  $form['at-layout']['global-settings']['polyfills']['load_ltie8css'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable CSS rounding error fixes for IE7 and below'),
+    '#description' => t('This will load a stylesheet that fixes percentage rounding errors in IE6/7.'),
+    '#default_value' => theme_get_setting('load_ltie8css'),
+  );
   $form['at-layout']['global-settings']['polyfills']['load_respondjs'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable media queries in IE8 and below'),

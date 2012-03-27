@@ -243,12 +243,14 @@ function adaptivetheme_preprocess_html(&$vars) {
   // 2. Mobile first is ON
   // 3. Respond.js is OFF
   // Note this excludes IEMobile 7, screw you IEMobile 7
+  $load_ie8_css = TRUE; // Set to true, because most of the time this is likely to be the case.
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
     if (theme_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
       if (theme_get_setting('load_respondjs', $theme_name) === 0) {
-        $ie_file = $theme_name . '.lt-ie9.layout.css';
-        if (!empty($ie_file)) {
-          $ie_filepath = "$path/$ie_file";
+        $load_ie8_css = FALSE;
+        $ie_9_file = $theme_name . '.lt-ie9.layout.css';
+        if (!empty($ie_9_file)) {
+          $ie_filepath = "$path/$ie_9_file";
           drupal_add_css($ie_filepath, array(
             'group' => CSS_THEME,
             'media' => 'screen',
@@ -260,6 +262,29 @@ function adaptivetheme_preprocess_html(&$vars) {
             )
           );
         }
+      }
+    }
+  }
+
+  // The lt-ie8.layout.css file loads under the exact opposite conditions to the lt-ie9 file.
+  // In other words, when lt-ie9 is loading, this is not, when it isn't, this loads. This
+  // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
+  // default in theme settings, screw you IE7.
+  if ($load_ie8_css == TRUE) {
+    if (theme_get_setting('load_ltie8css', $theme_name) === 1) {
+      $ie_8_file = $theme_name . '.lt-ie8.layout.css';
+      if (!empty($ie_8_file)) {
+        $ie_filepath = "$path/$ie_8_file";
+        drupal_add_css($ie_filepath, array(
+          'group' => CSS_THEME,
+          'media' => 'screen',
+          'browsers' => array(
+            'IE' => 'lt IE 8',
+            '!IE' => FALSE,
+            ),
+          'preprocess' => TRUE,
+          )
+        );
       }
     }
   }
