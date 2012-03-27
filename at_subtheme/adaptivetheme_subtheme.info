@@ -335,9 +335,11 @@
   ; Extra markup
   settings[menu_item_span_elements] = 0
 
+  
   ; Skip link
   settings[skip_link_target] = '#main-content'
 
+  
   ; Touch icons
   settings[apple_touch_icon_enable] = 0
   settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'

@@ -8,7 +8,7 @@
 # This config file is borrowed from Zen, so thanks JohnAlbin for your hard work
 # in bringing such fine tools to Drupal so us mere mortals may benefit.
 
-# Change this to :development if you prefer working that way.
+# Change this to :development if you prefer working that way or need to use FireSass
 #environment = :development
 environment = :production
 
