@@ -545,7 +545,7 @@ function adaptivetheme_preprocess_page(&$vars) {
     $heading_settings_array = &drupal_static(__FUNCTION__, array());
     if (empty($heading_settings_array)) {
       $heading_settings_array = array();
-      if ($vars['hide_site_name'] = FALSE) {
+      if ($vars['hide_site_name'] == FALSE) {
         $heading_settings_array[] = 'site_name_case';
         $heading_settings_array[] = 'site_name_weight';
         $heading_settings_array[] = 'site_name_alignment';
@@ -643,8 +643,8 @@ function adaptivetheme_preprocess_region(&$vars) {
   }
 
   // Add classes to conditional stack regions in Gpanel regions, in the Panels layout plugins these are hard coded.
-  $conditional_stack_regions = &drupal_static(__FUNCTION__, array());
-  if (empty($conditional_stack_regions)) {
+  //$conditional_stack_regions = &drupal_static(__FUNCTION__, array());
+  //if (empty($conditional_stack_regions)) {
     $conditional_stack_regions = array(
       'three_25_25_50_top',
       'three_25_25_50_bottom',
@@ -668,7 +668,7 @@ function adaptivetheme_preprocess_region(&$vars) {
       'threecol_inset_right_top',
       'threecol_inset_right_bottom',
     );
-  }
+  //}
   if (in_array($vars['region'], $conditional_stack_regions)){
     $vars['classes_array'][] = 'region-conditional-stack';
   }
@@ -744,54 +744,65 @@ function adaptivetheme_preprocess_block(&$vars) {
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
-
-  // Add ARIA Roles to blocks, thank-you to Jacine http://drupal.org/user/88931 for cleaning up this code :)
-  $roles = &drupal_static(__FUNCTION__, array());
-  if (empty($roles)) {
-    $roles = array(
-      'complementary' => array(
-        'aggregator',
-        'help',
-        'locale',
-        'poll',
-        'profile',
-        'node' => array('syndicate'),
-        'system' => array('powered-by', 'help'),
-        'user' => array('new', 'online'),
-      ),
-      'navigation' => array(
-        'blog',
-        'book',
-        'comment',
-        'forum',
-        'menu',
-        'menu_block',
-        'node' => array('recent'),
-        'shortcut',
-        'statistics',
-        'system' => array_keys(menu_list_system_menus()),
-        'superfish',
-        'nice_menus',
-      ),
-      'search' => array(
-        'search',
-      ),
-      'form' => array(
-        'user' => array('login'),
-      ),
-    );
-  }
-  foreach ($roles as $role => $module) {
-    if (!is_array($role) && in_array($vars['block']->module, $module)) {
-      $vars['attributes_array']['role'] = "$role";
-    }
-    elseif (is_array($role)) {
-      foreach ($role as $module => $delta) {
-        if ($vars['block']->module == $module && in_array($vars['block']->delta, $delta)) {
-          $vars['attributes_array']['role'] = "$role";
-        }
+  
+  // Add Aria Roles via attributes
+  switch ($vars['block']->module) {
+    case 'system':
+      switch ($vars['block']->delta) {
+        case 'main':
+          // Note: the "main" role goes in the page.tpl, not here.
+          break;
+        case 'help':
+        case 'powered-by':
+          $vars['attributes_array']['role'] = 'complementary';
+          break;
+        default:
+          // Any other "system" block is a menu block.
+          $vars['attributes_array']['role'] = 'navigation';
+          break;
       }
-    }
+      break;
+    case 'menu':
+    case 'menu_block':
+    case 'blog':
+    case 'book':
+    case 'comment':
+    case 'forum':
+    case 'shortcut':
+    case 'statistics':
+      $vars['attributes_array']['role'] = 'navigation';
+      break;
+    case 'search':
+      $vars['attributes_array']['role'] = 'search';
+      break;
+    case 'help':
+    case 'aggregator':
+    case 'locale':
+    case 'poll':
+    case 'profile':
+      $vars['attributes_array']['role'] = 'complementary';
+      break;
+    case 'node':
+      switch ($vars['block']->delta) {
+        case 'syndicate':
+          $vars['attributes_array']['role'] = 'complementary';
+          break;
+        case 'recent':
+          $vars['attributes_array']['role'] = 'navigation';
+          break;
+      }
+      break;
+    case 'user':
+      switch ($vars['block']->delta) {
+        case 'login':
+          $vars['attributes_array']['role'] = 'form';
+          break;
+        case 'new':
+        case 'online':
+          $vars['attributes_array']['role'] = 'complementary';
+          break;
+      }
+      break;
   }
 }
 
