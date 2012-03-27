@@ -25,6 +25,327 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Clean up the lang attributes
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
+  // Responsive Styles
+  // AT has two modes - Production and Development. Depending on the
+  // mode it will load different files. Production mode assume you
+  // have finished CSS development and will not need to update styles
+  // in the responsive stylesheets, if you do you will need to re-save
+  // the theme settings at least once to re-write your
+  // $theme_name.responsive.styles.css file which is in public files.
+
+  // Set the path to the directory where our CSS files are saved
+  $path = variable_get('theme_' . $theme_name . '_files_directory');
+  $file = '';
+
+  // Development Mode
+  // These files are for "design style" only, the layout is handled
+  // seperately.
+  //
+  // We only load these files if:
+  // - 1: We're not in production mode
+  // - 2: Responsiveness is not disabled
+  //
+  // When in production mode these files are aggregated into one file
+  // and loaded using load_subtheme_responsive_styles().
+  //
+  // You can disable responsive capability using the theme settings - look under
+  // the Global settings. Do not delete or alter this - use the theme setting!
+  
+  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    if (theme_get_setting('production_mode', $theme_name) === 0) {
+      // Build a keyed array of CSS file-names as key, and media query as value.
+      // The file names must match the files in your themes CSS directory, if
+      // you change them you must update to match. theme_get_setting() caches and
+      // is extremely cheap, in any case we're in development mode.
+      $files = array(
+        'responsive.smartphone.portrait'  => theme_get_setting('smartphone_portrait_media_query', $theme_name),
+        'responsive.smartphone.landscape' => theme_get_setting('smartphone_landscape_media_query', $theme_name),
+        'responsive.tablet.portrait'      => theme_get_setting('tablet_portrait_media_query', $theme_name),
+        'responsive.tablet.landscape'     => theme_get_setting('tablet_landscape_media_query', $theme_name),
+        'responsive.desktop'              => theme_get_setting('bigscreen_media_query', $theme_name),
+      );
+
+      // Add the cascading stylesheet if enabled
+      if (theme_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
+        $cascade_media_query = theme_get_setting('cascade_media_query', $theme_name);
+        $item = array('responsive.cascade' => $cascade_media_query);
+        $files = array_merge($item, $files);
+      }
+
+      // Loop over the files array and load each CSS file.
+      // load_subtheme_responsive_styles() takes three parameters:
+      // - $css_file - the name of the css file
+      // - $media_query - the media query from theme settings to use for the media attribute
+      // - $theme_name - to generate the path-to-theme for drupal_add_css()
+      foreach ($files as $key => $value) {
+        $css_file = $key . '.css';
+        $media_query = $value;
+        load_subtheme_responsive_styles($css_file, $media_query, $theme_name);
+      }
+    }
+    
+    // Production Mode
+    // In Production mode we only load one file for our design styles.
+    // We use a media query to prevent non media query browsers from downloading it.
+    // The embedded media queries in this file take precedence always.
+    else if (theme_get_setting('production_mode', $theme_name) === 1) {
+      $file = $theme_name . '.responsive.styles.css';
+      $media_query = 'only screen and (min-width:1px)';
+      if (!empty($file)) {
+        $filepath = "$path/$file";
+        drupal_add_css($filepath, array(
+          'preprocess' =>  variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+          'group' => CSS_THEME,
+          'media' => $media_query,
+          'weight' => 99,
+          'every_page' => TRUE,
+          )
+        );
+      }
+    }
+  }
+
+  // Layout
+  // Each time you save the theme settings AT builds 3 layout stylesheets:
+  // 1. themeName.default.layout.css
+  // 2. themeName.responsive.layout.css
+  // 3. themeName.lt-ie9.layout.css
+  //
+  // Now we need to load them, but only under certain conditions:
+  // a. Is the default layout the standard layout?
+  // b. Is the responsive capability disabled?
+  //
+  // If either a or b equate to TRUE, then we are NOT doing mobile first.
+  // If a is FALSE then this is mobile first.
+  // If b is FALSE then we are doing responsive design.
+  
+  // First set a boolean to test which IE stylesheet to load.
+  $load_ie8_css = TRUE;
+
+  // Load the default layout if Standard layout is default or responsive styles are disabled.
+  if (theme_get_setting('global_default_layout', $theme_name) === 'standard-layout' || theme_get_setting('disable_responsive_styles', $theme_name) === 1) {
+    $file = $theme_name . '.default.layout.css';
+    if (!empty($file)) {
+      $filepath = "$path/$file";
+      drupal_add_css($filepath, array(
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        'media' => 'screen, handheld',
+        'every_page' => TRUE,
+        )
+      );
+    }
+  }
+
+  // Next - check if we need to load the responsive layout, so if responsiveness is not disabled, we load our responsive layout CSS.
+  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    $file = $theme_name . '.responsive.layout.css';
+    if (!empty($file)) {
+      $filepath = "$path/$file";
+      drupal_add_css($filepath, array(
+        'preprocess' => variable_get('preprocess_css', '') === 1 ? TRUE : FALSE,
+        'group' => CSS_THEME,
+        'media' => 'screen, handheld',
+        'every_page' => TRUE,
+        )
+      );
+    }
+  
+    // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
+    // 1. Responsive capabilities are ON
+    // 2. Mobile first is ON
+    // 3. Respond.js is OFF
+    // Note this excludes IEMobile 7, screw you IEMobile 7
+    if (theme_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
+      if (theme_get_setting('load_respondjs', $theme_name) === 0) {
+        $load_ie8_css = FALSE;
+        $ie_9_file = $theme_name . '.lt-ie9.layout.css';
+        if (!empty($ie_9_file)) {
+          $ie_filepath = "$path/$ie_9_file";
+          drupal_add_css($ie_filepath, array(
+            'group' => CSS_THEME,
+            'media' => 'screen',
+            'browsers' => array(
+              'IE' => '(lt IE 9)&(!IEMobile 7)',
+              '!IE' => FALSE,
+              ),
+            'preprocess' => TRUE,
+            )
+          );
+        }
+      }
+    }
+  }
+
+  // The lt-ie8.layout.css file loads under the exact opposite conditions to the lt-ie9 file.
+  // In other words, when lt-ie9 is loading, this is not, when it isn't, this loads. This
+  // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
+  // default in theme settings, screw you IE7.
+  if ($load_ie8_css == TRUE) {
+    if (theme_get_setting('load_ltie8css', $theme_name) === 1) {
+      $ie_8_file = $theme_name . '.lt-ie8.layout.css';
+      if (!empty($ie_8_file)) {
+        $ie_filepath = "$path/$ie_8_file";
+        drupal_add_css($ie_filepath, array(
+          'group' => CSS_THEME,
+          'media' => 'screen',
+          'browsers' => array(
+            'IE' => 'lt IE 8',
+            '!IE' => FALSE,
+            ),
+          'preprocess' => TRUE,
+          )
+        );
+      }
+    }
+  }
+
+  // Polyfills
+  // Build an array of scripts to load.
+  // You can easily add to this array in your own preprocess function and use the
+  // array keys provided, or add your own. By default AT will load for "lt ie9",
+  // "lt ie8" and "all". If you add your own keys you have to process them as well,
+  // there is no generic loader, see below.
+  $polly_wants_a_cracker = &drupal_static(__FUNCTION__, array());
+  if (empty($vars['polyfills'])) {
+    $vars['polyfills_array'] = array();
+    // Respond.js
+    if (theme_get_setting('load_respondjs', $theme_name) === 1) {
+      $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
+    }
+    // HTML5 Shiv
+    if (theme_get_setting('load_html5js', $theme_name) === 1) {
+      $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
+    }
+    // Boxsizing.htc
+    if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
+      $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
+    }
+    // Scalefix.js
+    if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
+      $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
+    }
+    // More? Patches and feature request welcome!
+
+    // Load Polyfills
+    if (!empty($vars['polyfills_array'])) {
+
+      // We need the default query string for cache control finger printing
+      $query_string = variable_get('css_js_query_string', '0');
+
+      // "all" - no conditional comment needed, use drupal_add_js()
+      if (!empty($vars['polyfills_array']['all'])) {
+        foreach ($vars['polyfills_array']['all'] as $script) {
+          drupal_add_js($script,
+            array(
+              'type' => 'file',
+              'scope' => 'header',
+              'group' => JS_THEME,
+              'preprocess' => TRUE,
+              'cache' => TRUE,
+            )
+          );
+        }
+      }
+      // "lt ie9" - need to build our own "scripts" variable ($vars['polyfills'])
+      // wrapping the scripts in a conditional comments
+      if (!empty($vars['polyfills_array']['lt_ie9'])) {
+        foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
+          $script = file_create_url($ie9_polyfill);
+          $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+        }
+        $ie9_fills = implode("\n", $ie9_fills);
+        $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
+      }
+      // "lt ie8" - same as for "lt ie9", add to the $vars['polyfills'] array
+      if (!empty($vars['polyfills_array']['lt_ie8'])) {
+        foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
+          $script = file_create_url($ie8_polyfill);
+          $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+        }
+        $ie8_fills = implode("\n", $ie8_fills);
+        $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
+      }
+      // Give polly a cracker
+      $polly_wants_a_cracker = implode("\n", $vars['polyfills']);
+    }
+  }
+  $vars['polyfills'] = $polly_wants_a_cracker;
+
+  // Google Font loader
+  // Adaptivetheme can load websafe fonts, Google fonts, custom font
+  // stacks and integrate with @font-your-face module. All can be
+  // configured in the "Fonts" theme settings. Here we only need to
+  // load Google webfonts. Websafe and custom fonts are stored in a
+  // generated CSS file (in public files) and @font-your-face module
+  // takes care of loading its own fonts.
+  if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
+
+    // Include the font lists, we need these for the font names
+    include_once($path_to_at_core . '/inc/font.lists.inc');
+
+    $used_fonts = array();
+    $font_elements = font_elements();
+    foreach ($font_elements as $key => $value) {
+      $setting = $value['setting'];
+      $element = $value['element'];
+      // Check if any elements are set to use a google font
+      if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
+        // Get the theme setting
+        $setting = theme_get_setting($setting . '_gwf', $theme_name);
+        // strip the element prefix
+        $font = str_replace($element . '-', '', $setting);
+        // replace hyphens with spaces, now we have a lower case font name, still no good,
+        // Google won't like it and will return the dreaded "font not supported" error. If
+        // you are wondering why I just don't loop over the fonts list and compare keys right
+        // away its because its very expensive to do this for every element (18 of them).
+        // Really this whole Google fonts thing is ugly, a hack and slow - should I remove it?
+        $used_fonts[] = str_replace('-', ' ', $font);
+      }
+    }
+    if (!empty($used_fonts)) {
+      // Get the full list of font names, remember Google fonts are case sensitive, and
+      // you cannot just uppercase/ucfirst, font names are not consistant! Got a better
+      // way of doing this? Please tell me about it!
+      $google_fonts = google_font_names();
+      // Populate a variable with lower cased font names
+      $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
+      // Now key the array with our lower case font names, and set that to a variable
+      $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
+      $used_google_fonts = array();
+      // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
+      foreach ($google_fonts_lower_case_keys as $k => $v) {
+        if (in_array($k, $used_fonts)) {
+          $used_google_fonts[] = $v; // at last, we have the right font name/s
+        }
+      }
+      // The same font can be used multiple times, but we only need to load it once
+      $array = array_unique($used_google_fonts);
+      // Implode the array, seperate font names with a pipe
+      $google_fonts = trim(implode('|', $array));
+      // No protocol for the URL, we need to support https also!
+      drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
+        'group' => CSS_THEME,
+        'type' => 'external',
+        'weight' => -100,
+        'preprocess' => FALSE,
+        )
+      );
+    }
+
+    // Load the Websafe and custom fonts CSS from public files
+    $fonts_css = $theme_name . '_font_families.css';
+    $fonts_css_filepath = "$path/$fonts_css";
+    drupal_add_css($fonts_css_filepath, array(
+      'preprocess' => TRUE,
+      'group' => CSS_THEME,
+      //'weight' => -100,
+      'media' => 'screen, handheld',
+      'every_page' => TRUE,
+      )
+    );
+  }
+
   // Skip link
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
@@ -110,326 +431,6 @@ function adaptivetheme_preprocess_html(&$vars) {
         unset($vars['classes_array'][$i]);
       }
     }
-  }
-
-  // Load CSS and JavaScript
-  // AT has two modes - Production and Development. Depending on the
-  // mode it will load different files. Production mode assume you
-  // have finished CSS development and will not need to update styles
-  // in the responsive stylesheets, if you do you will need to re-save
-  // the theme settings at least once to re-write your
-  // $theme_name.responsive.styles.css file which is in public files.
-
-  // Set the path to the directory where our CSS files are saved
-  $path = variable_get('theme_' . $theme_name . '_files_directory');
-  $file = '';
-
-  // Development Mode
-  //
-  // These files are for "design style" only, the layout is handled
-  // seperately.
-  //
-  // We only load these files if:
-  // - 1: We're not in production mode
-  // - 2: Responsiveness is not disabled
-  //
-  // When in production mode these files are aggregated into one file
-  // and loaded using load_subtheme_responsive_styles().
-  //
-  // You can disable responsive capability using the theme settings - look under
-  // the Global settings. Do not delete or alter this - use the theme setting!
-  if (theme_get_setting('production_mode', $theme_name) === 0) {
-    if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-
-      // Build a keyed array of CSS file-names as key, and media query as value.
-      // The file names must match the files in your themes CSS directory, if
-      // you change them you must update to match. theme_get_setting() caches and
-      // is extremely cheap, in any case we're in development mode.
-      $files = array(
-        'responsive.smartphone.portrait'  => theme_get_setting('smartphone_portrait_media_query', $theme_name),
-        'responsive.smartphone.landscape' => theme_get_setting('smartphone_landscape_media_query', $theme_name),
-        'responsive.tablet.portrait'      => theme_get_setting('tablet_portrait_media_query', $theme_name),
-        'responsive.tablet.landscape'     => theme_get_setting('tablet_landscape_media_query', $theme_name),
-        'responsive.desktop'              => theme_get_setting('bigscreen_media_query', $theme_name),
-      );
-
-      // Add the cascading stylesheet if enabled
-      if (theme_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
-        $cascade_media_query = theme_get_setting('cascade_media_query', $theme_name);
-        $item = array('responsive.cascade' => $cascade_media_query);
-        $files = array_merge($item, $files);
-      }
-
-      // Loop over the files array and load each CSS file.
-      // load_subtheme_responsive_styles() takes three parameters:
-      // - $css_file - the name of the css file
-      // - $media_query - the media query from theme settings to use for the media attribute
-      // - $theme_name - to generate the path-to-theme for drupal_add_css()
-      foreach ($files as $key => $value) {
-        $css_file = $key . '.css';
-        $media_query = $value;
-        load_subtheme_responsive_styles($css_file, $media_query, $theme_name);
-      }
-    }
-  }
-
-  // In Production mode we only load one file for our design styles.
-  // We use a media query to prevent non media query browsers from downloading it.
-  // The embedded media queries in this file take precedence always.
-  else if (theme_get_setting('production_mode', $theme_name) === 1) {
-    $file = $theme_name . '.responsive.styles.css';
-    $media_query = 'only screen and (min-width:1px)';
-    if (!empty($file)) {
-      $filepath = "$path/$file";
-      drupal_add_css($filepath, array(
-        'preprocess' =>  variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-        'group' => CSS_THEME,
-        'media' => $media_query,
-        'weight' => 99,
-        'every_page' => TRUE,
-        )
-      );
-    }
-  }
-
-  // Layout
-  // Each time you save the theme settings AT builds 3 layout stylesheets:
-  // 1. themeName.default.layout.css
-  // 2. themeName.responsive.layout.css
-  // 3. themeName.lt-ie9.layout.css
-  //
-  // Now we need to load them, but only under certain conditions:
-  // a. Is the default layout the standard layout?
-  // b. Is the responsive capability disabled?
-  //
-  // If either a or b equate to TRUE, then we are NOT doing mobile first.
-  // If a is FALSE then this is mobile first.
-  // If b is FALSE then we are doing responsive design.
-
-  // Load the default layout, but only if Standard layout is default, aka we
-  // we are doing desktop first, if not we leave this alone and move on
-  if (theme_get_setting('global_default_layout', $theme_name) === 'standard-layout') {
-    $file = $theme_name . '.default.layout.css';
-    if (!empty($file)) {
-      $filepath = "$path/$file";
-      drupal_add_css($filepath, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'media' => 'screen, handheld',
-        'every_page' => TRUE,
-        )
-      );
-    }
-  }
-
-  // Next - check if we need to load the responsive layout, so if responsiveness
-  // is not disabled, we load our responsive layout CSS
-  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    $file = $theme_name . '.responsive.layout.css';
-    if (!empty($file)) {
-      $filepath = "$path/$file";
-      drupal_add_css($filepath, array(
-        'preprocess' => variable_get('preprocess_css', '') === 1 ? TRUE : FALSE,
-        'group' => CSS_THEME,
-        'media' => 'screen, handheld',
-        'every_page' => TRUE,
-        )
-      );
-    }
-  }
-
-  // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
-  // 1. Responsive capabilities are ON
-  // 2. Mobile first is ON
-  // 3. Respond.js is OFF
-  // Note this excludes IEMobile 7, screw you IEMobile 7
-  $load_ie8_css = TRUE; // Set to true, because most of the time this is likely to be the case.
-  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    if (theme_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
-      if (theme_get_setting('load_respondjs', $theme_name) === 0) {
-        $load_ie8_css = FALSE;
-        $ie_9_file = $theme_name . '.lt-ie9.layout.css';
-        if (!empty($ie_9_file)) {
-          $ie_filepath = "$path/$ie_9_file";
-          drupal_add_css($ie_filepath, array(
-            'group' => CSS_THEME,
-            'media' => 'screen',
-            'browsers' => array(
-              'IE' => '(lt IE 9)&(!IEMobile 7)',
-              '!IE' => FALSE,
-              ),
-            'preprocess' => TRUE,
-            )
-          );
-        }
-      }
-    }
-  }
-
-  // The lt-ie8.layout.css file loads under the exact opposite conditions to the lt-ie9 file.
-  // In other words, when lt-ie9 is loading, this is not, when it isn't, this loads. This
-  // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
-  // default in theme settings, screw you IE7.
-  if ($load_ie8_css == TRUE) {
-    if (theme_get_setting('load_ltie8css', $theme_name) === 1) {
-      $ie_8_file = $theme_name . '.lt-ie8.layout.css';
-      if (!empty($ie_8_file)) {
-        $ie_filepath = "$path/$ie_8_file";
-        drupal_add_css($ie_filepath, array(
-          'group' => CSS_THEME,
-          'media' => 'screen',
-          'browsers' => array(
-            'IE' => 'lt IE 8',
-            '!IE' => FALSE,
-            ),
-          'preprocess' => TRUE,
-          )
-        );
-      }
-    }
-  }
-
-  // Polyfills
-  // Build an array of scripts to load.
-  // You can easily add to this array in your own preprocess function and use the
-  // array keys provided, or add your own. By default AT will load for "lt ie9",
-  // "lt ie8" and "all". If you add your own keys you have to process them as well,
-  // there is no generic loader, see below.
-  $vars['polyfills'] = ''; /* Initialize always */
-  $vars['polyfills_array'] = array();
-  // Respond.js
-  if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
-  }
-  // HTML5 Shiv
-  if (theme_get_setting('load_html5js', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
-  }
-  // Boxsizing.htc
-  if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
-    $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
-  }
-  // Scalefix.js
-  if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
-    $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
-  }
-  // More? Patches and feature request welcome!
-
-  // Load Polyfills
-  if (!empty($vars['polyfills_array'])) {
-
-    // We need the default query string for cache control finger printing
-    $query_string = variable_get('css_js_query_string', '0');
-
-    // "all" - no conditional comment needed, use drupal_add_js()
-    if (!empty($vars['polyfills_array']['all'])) {
-      foreach ($vars['polyfills_array']['all'] as $script) {
-        drupal_add_js($script,
-          array(
-            'type' => 'file',
-            'scope' => 'header',
-            'group' => JS_THEME,
-            'preprocess' => TRUE,
-            'cache' => TRUE,
-          )
-        );
-      }
-    }
-    // "lt ie9" - need to build our own "scripts" variable ($vars['polyfills'])
-    // wrapping the scripts in a conditional comments
-    if (!empty($vars['polyfills_array']['lt_ie9'])) {
-      foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
-        $script = file_create_url($ie9_polyfill);
-        $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-      }
-      $ie9_fills = implode("\n", $ie9_fills);
-      $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
-    }
-    // "lt ie8" - same as for "lt ie9", add to the $vars['polyfills'] array
-    if (!empty($vars['polyfills_array']['lt_ie8'])) {
-      foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
-        $script = file_create_url($ie8_polyfill);
-        $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-      }
-      $ie8_fills = implode("\n", $ie8_fills);
-      $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
-    }
-    // Finally populate the $polyfills variable which is printed in html.tpl.php
-    $vars['polyfills'] = implode("\n", $vars['polyfills']);
-  }
-
-  // Google Font loader
-  // Adaptivetheme can load websafe fonts, Google fonts, custom font
-  // stacks and integrate with @font-your-face module. All can be
-  // configured in the "Fonts" theme settings. Here we only need to
-  // load Google webfonts. Websafe and custom fonts are stored in a
-  // generated CSS file (in public files) and @font-your-face module
-  // takes care of loading its own fonts.
-  if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
-
-    // Include the font lists, we need these for the font names
-    include_once($path_to_at_core . '/inc/font.lists.inc');
-
-    $used_fonts = array();
-    $font_elements = font_elements();
-    foreach ($font_elements as $key => $value) {
-      $setting = $value['setting'];
-      $element = $value['element'];
-      // Check if any elements are set to use a google font
-      if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
-        // Get the theme setting
-        $setting = theme_get_setting($setting . '_gwf', $theme_name);
-        // strip the element prefix
-        $font = str_replace($element . '-', '', $setting);
-        // replace hyphens with spaces, now we have a lower case font name, still no good,
-        // Google won't like it and will return the dreaded "font not supported" error. If
-        // you are wondering why I just don't loop over the fonts list and compare keys right
-        // away its because its very expensive to do this for every element (18 of them).
-        // Really this whole Google fonts thing is ugly, a hack and slow - should I remove it?
-        $used_fonts[] = str_replace('-', ' ', $font);
-      }
-    }
-    if (!empty($used_fonts)) {
-      // Get the full list of font names, remember Google fonts are case sensitive, and
-      // you cannot just uppercase/ucfirst, font names are not consistant! Got a better
-      // way of doing this? Please tell me about it!
-      $google_fonts = google_font_names();
-      // Populate a variable with lower cased font names
-      $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
-      // Now key the array with our lower case font names, and set that to a variable
-      $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
-      $used_google_fonts = array();
-      // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
-      foreach ($google_fonts_lower_case_keys as $k => $v) {
-        if (in_array($k, $used_fonts)) {
-          $used_google_fonts[] = $v; // at last, we have the right font name/s
-        }
-      }
-      // The same font can be used multiple times, but we only need to load it once
-      $array = array_unique($used_google_fonts);
-      // Implode the array, seperate font names with a pipe
-      $google_fonts = trim(implode('|', $array));
-      // No protocol for the URL, we need to support https also!
-      drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
-        'group' => CSS_THEME,
-        'type' => 'external',
-        'weight' => -100,
-        'preprocess' => FALSE,
-        )
-      );
-    }
-
-    // Load the Websafe and custom fonts CSS from public files
-    $fonts_css = $theme_name . '_font_families.css';
-    $fonts_css_filepath = "$path/$fonts_css";
-    drupal_add_css($fonts_css_filepath, array(
-      'preprocess' => TRUE,
-      'group' => CSS_THEME,
-      //'weight' => -100,
-      'media' => 'screen, handheld',
-      'every_page' => TRUE,
-      )
-    );
   }
 
   // Load micro CSS files if settings are active

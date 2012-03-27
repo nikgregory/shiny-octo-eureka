@@ -52,7 +52,6 @@ function websafe_fonts_list($element) {
  */
 function font_your_face_fonts_list($element) {
   $fonts = array();
-
   if (module_exists('fontyourface')) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
     foreach ($enabled_fonts as $font) {
@@ -64,7 +63,6 @@ function font_your_face_fonts_list($element) {
       }
     }
   }
-
   return $fonts;
 }
 
@@ -89,11 +87,13 @@ function google_fonts_list($element) {
  */
 function google_font_names() {
   $google_font_names_array = &drupal_static(__FUNCTION__, array());
-  
+  // static variable empty?
   if (empty($google_font_names_array)) {
+    // try to get the list from the cache table
     if ($cache = cache_get('at_google_font_names')) {
       $google_font_names_array = $cache->data;
     }
+    // nope? now we foreced to rebuild it...
     else {
       $google_font_names_array = array(
         'Abel',
@@ -574,6 +574,7 @@ function google_font_names() {
         'Yesteryear',
         'Zeyada',
       );
+     // agressively cache this mofo...
      cache_set('at_google_font_names', $google_font_names_array, 'cache');
     }
   }
