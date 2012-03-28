@@ -206,71 +206,88 @@ function adaptivetheme_preprocess_html(&$vars) {
   // array keys provided, or add your own. By default AT will load for "lt ie9",
   // "lt ie8" and "all". If you add your own keys you have to process them as well,
   // there is no generic loader, see below.
-  $polly_wants_a_cracker = &drupal_static(__FUNCTION__, array());
-  if (empty($vars['polyfills'])) {
-    $vars['polyfills_array'] = array();
-    // Respond.js
-    if (theme_get_setting('load_respondjs', $theme_name) === 1) {
-      $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
-    }
-    // HTML5 Shiv
-    if (theme_get_setting('load_html5js', $theme_name) === 1) {
-      $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
-    }
-    // Boxsizing.htc
-    if (theme_get_setting('load_boxsizinghtc', $theme_name) === 1) {
-      $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
-    }
-    // Scalefix.js
-    if (theme_get_setting('load_scalefixjs', $theme_name) === 1) {
-      $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
-    }
-    // More? Patches and feature request welcome!
 
-    // Load Polyfills
-    if (!empty($vars['polyfills_array'])) {
-
-      // We need the default query string for cache control finger printing
-      $query_string = variable_get('css_js_query_string', '0');
-
-      // "all" - no conditional comment needed, use drupal_add_js()
-      if (!empty($vars['polyfills_array']['all'])) {
-        foreach ($vars['polyfills_array']['all'] as $script) {
-          drupal_add_js($script,
-            array(
-              'type' => 'file',
-              'scope' => 'header',
-              'group' => JS_THEME,
-              'preprocess' => TRUE,
-              'cache' => TRUE,
-            )
-          );
-        }
-      }
-      // "lt ie9" - need to build our own "scripts" variable ($vars['polyfills'])
-      // wrapping the scripts in a conditional comments
-      if (!empty($vars['polyfills_array']['lt_ie9'])) {
-        foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
-          $script = file_create_url($ie9_polyfill);
-          $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-        }
-        $ie9_fills = implode("\n", $ie9_fills);
-        $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
-      }
-      // "lt ie8" - same as for "lt ie9", add to the $vars['polyfills'] array
-      if (!empty($vars['polyfills_array']['lt_ie8'])) {
-        foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
-          $script = file_create_url($ie8_polyfill);
-          $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-        }
-        $ie8_fills = implode("\n", $ie8_fills);
-        $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
-      }
-      // Give polly a cracker
-      $polly_wants_a_cracker = implode("\n", $vars['polyfills']);
-    }
+  // Dont run this at all if none are enbabled
+  $polly_settings_array = array(
+    'load_respondjs',
+    'load_html5js',
+    'load_boxsizinghtc',
+    'load_scalefixjs',
+  );
+  foreach ($polly_settings_array as $polly_setting) {
+    $polly[$polly_setting] = theme_get_setting($polly_setting, $theme_name);
   }
-  $vars['polyfills'] = $polly_wants_a_cracker;
+  if (in_array(1, $polly)) {
+    $polly_wants_a_cracker = &drupal_static(__FUNCTION__, array());
+    if (empty($polly_wants_a_cracker)) {
+      $vars['polyfills_array'] = array();
+      // Respond.js
+      if ($polly['load_respondjs'] === 1 && theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+        $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
+      }
+      // HTML5 Shiv
+      if ($polly['load_html5js'] === 1) {
+        $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
+      }
+      // Boxsizing.htc
+      if ($polly['load_boxsizinghtc'] === 1) {
+        $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
+      }
+      // Scalefix.js
+      if ($polly['load_scalefixjs'] === 1) {
+        $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
+      }
+      // More? Patches and feature request welcome!
+
+      // Load Polyfills
+      if (!empty($vars['polyfills_array'])) {
+
+        // We need the default query string for cache control finger printing
+        $query_string = variable_get('css_js_query_string', '0');
+
+        // "all" - no conditional comment needed, use drupal_add_js()
+        if (!empty($vars['polyfills_array']['all'])) {
+          foreach ($vars['polyfills_array']['all'] as $script) {
+            drupal_add_js($script,
+              array(
+                'type' => 'file',
+                'scope' => 'header',
+                'group' => JS_THEME,
+                'preprocess' => TRUE,
+                'cache' => TRUE,
+              )
+            );
+          }
+        }
+        // "lt ie9" - need to build our own "scripts" variable ($vars['polyfills'])
+        // wrapping the scripts in a conditional comments
+        if (!empty($vars['polyfills_array']['lt_ie9'])) {
+          foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
+            $script = file_create_url($ie9_polyfill);
+            $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+          }
+          $ie9_fills = implode("\n", $ie9_fills);
+          $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
+        }
+        // "lt ie8" - same as for "lt ie9", add to the $vars['polyfills'] array
+        if (!empty($vars['polyfills_array']['lt_ie8'])) {
+          foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
+            $script = file_create_url($ie8_polyfill);
+            $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
+          }
+          $ie8_fills = implode("\n", $ie8_fills);
+          $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
+        }
+        // Give polly a cracker
+        $polly_wants_a_cracker = implode("\n", $vars['polyfills']);
+      }
+    }
+    
+    $vars['polyfills'] = $polly_wants_a_cracker;
+  }
+  else {
+    $vars['polyfills'] = '';
+  }
 
   // Google Font loader
   // Adaptivetheme can load websafe fonts, Google fonts, custom font
@@ -623,7 +640,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
 
   // Attribution variable used in admin theme and some others
-  $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+  $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
   // Work-around a stupid bug in Drupal 7
   if (arg(0) === 'user' && arg(1) === 'login') {
@@ -689,7 +706,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   if ($vars['block']->region === 'menu_bar') {
     // Hide titles, very unlikey to want it show, ever
     $vars['title_attributes_array']['class'][] = 'element-invisible';
-    $vars['classes_array'][] = 'menu-wrapper';
+    $vars['classes_array'][] = 'menu-wrapper menu-bar-wrapper clearfix';
   }
 
   // Add extra classes if required

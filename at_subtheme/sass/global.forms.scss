@@ -9,34 +9,7 @@
 // Wrapper for a form element (or group of form elements) and its label
 .form-item {
   margin: 18px 0;
-}
 
-
-// Focus styles for accessibility and usabiltiy
-.form-text:focus,
-.form-checkbox:focus,
-.form-radio:focus,
-.form-select:focus {
-  border: 1px solid #fc0;
-  background: #ffffdf;
-}
-
-
-textarea:focus {
-  border: 1px solid #fc0;
-  background: #fff;
-}
-
-
-.form-item {
-
-  // Highlight the form elements that caused a form submission error
-  input.error, 
-  textarea.error, 
-  select.error {
-    border: 1px solid #c00;
-  }
-  
   // The label for a form element
   label {
     display: block;
@@ -62,10 +35,12 @@ textarea:focus {
   font-size: .75em;
 }
 
+
 .form-type-radio .description,
 .form-type-checkbox .description {
   margin-left: 0;
 }
+
 
 // Pack groups of checkboxes and radio buttons closer together
 .form-checkboxes .form-item,
@@ -76,7 +51,8 @@ textarea:focus {
 
 
 // The submit button
-.form-submit {}
+.form-submit {
+}
 
 
 // Inline labels and form divs
@@ -89,7 +65,6 @@ textarea:focus {
 }
 
 
-// Fieldsets
 fieldset {
   background: transparent;
   border: 1px solid #dadada;
@@ -118,20 +93,6 @@ html.js fieldset.collapsed {
   padding-top: 5px;
 }
 
-
-// Inputs
-input {
-  margin: 0;
-  max-width: 100%;
-  
-  &.text, 
-  &.title {
-    border: 1px solid #ccc;
-    margin: 0;
-  }
-}
-
-
 textarea, 
 select {
   border: 1px solid #ccc;
@@ -153,7 +114,27 @@ button {
 }
 
 
+button[disabled] {
+  cursor: default;
+}
+
+
 input {
+  margin: 0;
+  max-width: 100%;
+
+  &[disabled] {
+    cursor: default;
+   }
+
+  &[type="checkbox"], 
+  &[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+    *height: 13px;
+    *width: 13px;
+  }
+  
   &[type="button"], 
   &[type="reset"], 
   &[type="submit"] {
@@ -164,39 +145,11 @@ input {
 }
 
 
-button[disabled] {
-  cursor: default;
-}
-
-
-input {
-
-  &[disabled] {
-    cursor: default;
-   }
-   
-  &.text, 
-  &.title {
-    padding: .5em;
-  }
-  
-  &.form-text {
-    border: 1px solid #ccc;
-    height: auto;
-    padding: 0;
-  }
-}
-
-
+input.form-text,
 textarea {
   border: 1px solid #ccc;
   height: auto;
   padding: 2px;
-  font: 1em normal Arial, Helvetica, sans-serif;
-}
-
-
-input {
   font: 1em normal Arial, Helvetica, sans-serif;
 }
 
@@ -211,16 +164,19 @@ div.resizable-textarea textarea {
   margin-top: 0;
 }
 
+// Focus styles for accessibility and usabiltiy
+.form-text:focus,
+.form-checkbox:focus,
+.form-radio:focus,
+.form-select:focus {
+  border: 1px solid #fc0;
+  background: #ffffdf;
+}
 
-input {
 
-  &[type="checkbox"], 
-  &[type="radio"] {
-    box-sizing: border-box;
-    padding: 0;
-    *height: 13px;
-    *width: 13px;
-  }
+textarea:focus {
+  border: 1px solid #fc0;
+  background: #fff;
 }
 
 
@@ -230,6 +186,14 @@ input {
 }
 
 
+// Highlight the form elements that caused a form submission error
+input.error, 
+textarea.error, 
+select.error {
+  border: 1px solid #c00;
+}
+
+  
 // Tips for Drupal's input formats
 .tips {
   font-size: .857em;
@@ -349,7 +313,9 @@ html.js #user-login-form li.openid-link {
   }
 }
 
-#user-login ul {}
+
+#user-login ul {
+}
 
 
 //

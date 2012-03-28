@@ -41,12 +41,45 @@ function adaptivetheme_breadcrumb($vars) {
           $output .= '<li class="' . $class . '"><span>' . $separator . '</span>' . $val . '</li>';
         }
       }
-      return $heading . '<ol id="crumbs">' . $output . '</ol>';
+      return '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">' . $heading . '<ol id="crumbs" class="clearfix">' . $output . '</ol></nav></div>';
     }
   }
 
   return '';
 }
+
+/**
+ * Returns HTML for status and/or error messages, grouped by type.
+ */
+function adaptivetheme_status_messages($vars) {
+  $display = $vars['display'];
+  $output = '';
+
+  $status_heading = array(
+    'status' => t('Status message'), 
+    'error' => t('Error message'), 
+    'warning' => t('Warning message'),
+  );
+  foreach (drupal_get_messages($display) as $type => $messages) {
+    $output .= "<div id=\"messages\"><div class=\"messages $type\">";
+    if (!empty($status_heading[$type])) {
+      $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>";
+    }
+    if (count($messages) > 1) {
+      $output .= " <ul>";
+      foreach ($messages as $message) {
+        $output .= '  <li>' . $message . "</li>";
+      }
+      $output .= " </ul>";
+    }
+    else {
+      $output .= $messages[0];
+    }
+    $output .= "</div></div>";
+  }
+  return $output;
+}
+
 
 /**
  * Returns HTML for a list or nested list of items.

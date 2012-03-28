@@ -315,14 +315,12 @@
   settings[horizontal_login_block_enable] = 'on'
 
 
-  ; Comments
-  settings[comments_hide_title] = 0
+  ; Design
+  settings[global_gutter_width]      = ''
+  settings[page_full_width_wrappers] = 0
+  settings[menu_item_span_elements]  = 0
 
-
-  ; Feed icons
-  settings[feed_icons] = 0
-
-
+  
   ; Extra CSS classes
   settings[extra_page_classes]      = 1
   settings[extra_article_classes]   = 1
@@ -330,16 +328,18 @@
   settings[extra_block_classes]     = 1
   settings[extra_menu_classes]      = 1
   settings[extra_item_list_classes] = 1
-
-
-  ; Extra markup
-  settings[menu_item_span_elements] = 0
-
+  
+  
+  ; Remove or Hide
+  settings[comments_hide_title]           = 0
+  settings[feed_icons]                    = 0
+  settings[unset_block_system_main_front] = 0
+  
   
   ; Skip link
   settings[skip_link_target] = '#main-content'
 
-  
+
   ; Touch icons
   settings[apple_touch_icon_enable] = 0
   settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'

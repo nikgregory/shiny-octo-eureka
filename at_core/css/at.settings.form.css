@@ -37,8 +37,7 @@ div.vertical-tabs .vertical-tabs-panes {
   display: inline-block;
 }
 .vertical-tabs-panes select {
-  width: auto;
-  max-width: 960px; /* Mitigate huge width when page is zoomed */
+  max-width: 480px; /* Mitigate huge width when page is zoomed */
 }
 #edit-font label {
   width: 10em;
@@ -117,7 +116,7 @@ fieldset.at-media-queries div.form-item {
 fieldset.at-media-queries div.form-item,
 fieldset.at-media-queries div.form-type-textfield input {
   width: 90%;
-  max-width: 960px;
+  max-width: 480px;
 }
 h4 {
   margin-bottom: 0;
@@ -337,7 +336,7 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
 /* Heading styles for advanced themes */
 .headings-styles-wrapper .form-type-radios,
 .headings-styles-wrapper .form-type-select {
-  min-width: 12em;
+  min-width: 10em;
   float: left;
   clear: none;
   padding: 0;
@@ -467,6 +466,16 @@ div.vertical-tabs {
 html.js fieldset.collapsible fieldset .fieldset-legend {
     background-image: none;
     padding-left: 0;
+}
+
+/* Gutter width setting */
+#edit-design .form-item-global-gutter-width label {
+  font-weight: 400;
+  display: inline;
+}
+#edit-design .form-item-global-gutter-width input {
+  width: 3em;
+  text-align: center;
 }
 
 /* Wrangel Seven to look half decent */

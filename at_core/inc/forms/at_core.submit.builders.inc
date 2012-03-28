@@ -7,7 +7,7 @@ function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar
   static $left = 'left';
   static $right = 'right';
 
-  // build the $styles array
+  $styles = array();
   if ($method === 'three-col-grail') {
     $sidebar_second = $sidebar_second . $sidebar_unit;
     $sidebar_first  = $sidebar_first . $sidebar_unit;
@@ -84,6 +84,7 @@ function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar
     $styles[] = '.region-sidebar-first,.region-sidebar-second {overflow:hidden;margin-top:20px;float:left;clear:none}';
     $styles[] = '.region-sidebar-first.block,.region-sidebar-second .block {width:100%}';
   }
+
   $output = implode('', $styles);
   return $output;
 }
@@ -91,6 +92,7 @@ function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar
 // Panels CSS builder, called once per orientation/break-point
 function build_panels_layout_css($panel_styles, $device_panels_data) {
   $output = '';
+
   foreach ($panel_styles as $panel_subtypes_data) {
     foreach($panel_subtypes_data as $panel_subtype => $panel_subtype_styles_data) {
       if (in_array($panel_subtype, $device_panels_data)) {
@@ -114,12 +116,15 @@ function build_panels_layout_css($panel_styles, $device_panels_data) {
     $merged_css = $css_styles;
     $these_selectors_styles[] = implode(',',$selector_array) . ' {' . $merged_css . '}';
   }
+
   $output = implode('', $these_selectors_styles);
   return $output;
 }
 
 // Build font family CSS
 function at_build_font_families($element, $selector, $font_values) {
+  $output = '';
+  
   // Format values as valid CSS
   $font_styles = array();
   if (!empty($font_values)) {
@@ -130,12 +135,14 @@ function at_build_font_families($element, $selector, $font_values) {
     $font_styles[] = $font_values['font_family'] ? 'font-family:' . $font_values['font_family'] : '';
   }
   $font_styles = implode('', $font_styles);
+
   $css = array();
   switch ($element) {
     case $element:
       $css[] = $selector . '{' . $font_styles . '}';
     break;
   }
-  $styles = implode("\n", $css);
-  return $styles;
+  
+  $output = implode("\n", $css);
+  return $output;
 }

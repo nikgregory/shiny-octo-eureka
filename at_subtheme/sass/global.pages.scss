@@ -127,6 +127,12 @@ ul.links {
 }
 
 
+// Search results are an ordered list so reset the margin
+.search-results {
+  margin: 0;
+}
+
+
 //
 // Regions
 //
@@ -142,6 +148,22 @@ ul.links {
 // Remove margin for nested regions, be very careful about overriding this, you could quickly bork the layout
 .region-inner .region-inner {
   margin: 0;
+}
+
+
+// This will globally change the gutter widths for you entire site, be careful!
+.block-inner,
+.pane-inner,
+div.messages,
+#branding,
+#primary-nav,
+#secondary-nav,
+#breadcrumb,
+#main-content,
+#attribution,
+.at-panel .rounded-corner {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 

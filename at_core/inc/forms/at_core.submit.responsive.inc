@@ -5,7 +5,6 @@
   $layouts = array(); // $layouts will hold all the page level layouts
 
   $is_default_layout = $values['global_default_layout']; // Initialize the $is_default_layout variable, we use this to test against
-  $default_layout = 'standard-layout';  // Need this to support 7.x-2.x subthemes which are all desktop first
 
   $responsive_panels = responsive_panels(); // Get the panels config array
   $float = ".at-panel .region {display:inline;float:left}"; // Some layouts generate their Panels CSS, we need to add a float delcaration for them
@@ -29,6 +28,13 @@
     $responsive_styles[] = $responsive_css . "\n";
   }
 
+  // Gutter width
+  $gutters = '';
+  if ($values['global_gutter_width']) {
+    $gutter = $values['global_gutter_width'] . 'px';
+    $gutters = "/* Gutters */" . "\n" .  "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;}#content .at-panel {margin-left:-$gutter;margin-right:-$gutter;}";
+  }
+
   // Smartphone Portrait
   if ($values['smartphone_portrait_media_query']) {
 
@@ -50,8 +56,7 @@
     // If mobile first then smartphone portrait needs to do nothing, else its
     // problematic to set the layout later due to the cascade and inheritance
     if ($is_default_layout === 'smartphone-portrait') {
-      $default_layout = '/* Smartphone portrait is default, mobile first dude - you rock the hardest! */';
-      $css = "/* Smartphone portrait is default, mobile first dude - you rock the hardest! */";
+      $css = "/* smartphone_portrait is default, mobile first dude - you rock the hardest! */";
     }
     else {
       // Smartphone portrait panels are all 100% width and stacked, we need to overpower the default layouts when in desktop first mode
@@ -215,91 +220,107 @@
       }
     }
 
- 
     // Load the default panels layouts
     $panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'default.css', FALSE);
-
-    // Get the lte ie7 panels layouts
-    $ie_panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'ie_defaults.css', FALSE);
 
     // Build a $styles variable with the layout, width and default panels layouts
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
 
- 
-    // Is respond.js disabled or enabled?
-    
-    // respondjs is OFF
-    if ($values['load_respondjs'] === 0) {
-     
-      if ($values['load_ltie8css'] === 0) {
-        // Dont add in the lt ie 8 guff, we no wanty
-        $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts;
-        $lt_ie8_css = '/* Support for IE6/7 rounding error fixes is OFF */';
-      }
-      else {
-        // load the IE stylesheet with the standard layout, width, panels layouts and the lte ie7 panels layouts
-        $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
-        $lt_ie8_css = '/* The IE6/7 panels layouts are loading in the lt IE9 CSS, to save an HTTP request hit on your server */';
-      }
- 
-    }
-    
-    // respondjs is ON
-    if ($values['load_respondjs'] === 1) {
-      
-      // Load a comment in the lt ie9 css file to tell the themer this file is not being used, we don't need it since respondjs is loading
-      $lt_ie9_css = '/* respond.js is loading so we dont load this file. IE6, 7 and 8 will rely on respond.js to work its magic */';
-      
-      // Load the IE6/7 panels overrides in a conditional stylesheet just for them
-      $lt_ie8_css = $ie_panels_layouts;
-    
-    }
 
+    // We need to do some conditional checks to account for AT's "Settings", namely:
+    // - is this mobile first or desktop first?
+    // - is the responsive capability disabled?
 
-    // Check the this is the default layout
+    
+    // Mobile first or Desktop first?
     if ($is_default_layout === 'standard-layout') {
-    
-      // IS the default layout === DESKTOP FIRST
-      // reset the IE styles variable to a comment, we don't need it if the standard layout is default
-      $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing desktop first design */';
 
-      // Load the IE6/7 panels overrides in a conditional stylesheet just for them
-      $lt_ie8_css = $ie_panels_layouts;
-      
-      // $css gets a comment that this is the default, and we load the layout
-      // $styles into $default_layout
+      // DESKTOP FIRST
+
+      // $css gets a comment that bigscreen is beign used as the "default layout"
       $css = '/* The standard layout is the default layout - this is a desktop first design */';
 
-      // Our default layout ready for priting into the file
-      $default_layout = $comment . $styles . "\n";
+      // Prepare a "default layout" for output to file, we must load this when desktop first is being used
+      $desktop_first_layout = $gutters . "\n" . $comment . $styles . "\n";
+
     }
-    
-    // IS NOT the default layout === MOIBLE FIRST
     else {
-      $mobile_first_styles = $styles . "\n";
-      $css = $comment . "\n" . '@media ' . $media_query . ' {' . $mobile_first_styles . '}';
+      
+      // MOIBLE FIRST
+      $css = $comment . "\n" . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
+      $desktop_first_layout = '/* Not likely, this is mobile first - this themer is rocking the hardest! */';
     }
 
-    // Is responsive capability on or off?
+
+    // Responsive capability OFF?
     if ($values['disable_responsive_styles'] === 1) {
     
-      // Its off, seriously, why are you using this theme?
-      $lt_ie9_css = '/* Responsive capabilites are disabled, we no longer need to load an IE specific layout */';
-      
-      // Load the IE6/7 panels overrides in a conditional stylesheet just for them
-      $lt_ie8_css = $ie_panels_layouts;
-      
-      $default_layout = $comment . $styles;
-      
+      // If its off we have to load something, so we choose to use the bigscreen layout and load that
+      $desktop_first_layout = $gutters . "\n" . $comment . $styles;
     }
-
-     // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
-    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
     // add $css to the layouts array
     $layouts[] = $css;
+  } 
+  //****** END bigscreen layout ******//
+
+  
+  
+  // Internet Exploder
+  // We only want to load what is absolutly required for IE, depending on the theme settings and what version we are targeting,
+  // remember, this only takes care of generating the stylesheets so what you see here are lots of messages being set for the
+  // themer to get a handle on what is going on, adaptivetheme_preprocess_html() is actually loading the right files under the
+  // right conditions.
+  
+  // $lt_ie9_css's assigned values all come from the bigscreen layout, since its the last layout to assign values to those variables
+  $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts;
+  
+  // Get the lt ie8 panels layouts if enabled
+  $lt_ie8_css = '/* IE6/7 percentage rounding error fixes are OFF */';
+  if ($values['load_ltie8css'] === 1) {
+    $ie_panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'ie_defaults.css', FALSE);
+    $lt_ie8_css = $ie_panels_layouts;
   }
+
+  // Respond.js is OFF
+  if ($values['load_respondjs'] === 0) {
+
+    // should we load the IE6/7 rounding error fixes?
+    if ($values['load_ltie8css'] === 1) {
+
+      // add the E6/7 rounding error fixes to $lt_ie9_css, set a message in $lt_ie8_css
+      $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
+      $lt_ie8_css = '/* The IE6/7 panels layouts are loading in the lt IE9 CSS, to save an HTTP request hit on your server */';
+  
+      // Desktop first?
+      if ($is_default_layout === 'standard-layout') {
+        // repopulate $lt_ie8_css
+        $lt_ie8_css = $ie_panels_layouts;
+      }
+    }
+  }
+
+  // Respond.js is ON
+  if ($values['load_respondjs'] === 1) {
+    $lt_ie9_css = '/* respond.js is loading so we dont load this file. IE6, 7 and 8 will rely on respond.js to work its magic */';
+  }
+
+  // Desktop first?
+  if ($is_default_layout === 'standard-layout') {
+    $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing desktop first design */';
+  }
+  
+  // Responsive capability OFF?
+  if ($values['disable_responsive_styles'] === 1) {
+    $lt_ie9_css = '/* Responsive capabilites are disabled, we no longer need to load an IE specific layout */';
+  }
+  
+
+  // Get and wrap the responsive CSS styles in the relative media query
+  $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
+  $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+  
+  
 
   // Generate the layout and responsive styles stylesheets
   // Here we generate five files:
@@ -310,32 +331,44 @@
   // 5. $theme_name.responsive.styles
   // adaptivetheme_preprocess_html() will take care of loading the right ones when they are needed.
 
-  // Set up variables for each layout, we already have the $default_layout
 
-  // Next the responsive layout
+  // responsive layout
   $responsive_layout_data = implode("\n", $layouts);
-  $responsive_layout = $responsive_layout_data;
+
+
+  // Prepend the gutters to the responsive layout if we're doing mobile first
+  if ($is_default_layout !== 'standard-layout') {
+    $responsive_layout = $gutters . "\n" . $responsive_layout_data;
+  }
+  else {
+    $responsive_layout = $responsive_layout_data;
+  }
+
 
   // Nuke $responsive_layout if we really don't need it
   if ($values['disable_responsive_styles'] == 1) {
-    $responsive_layout = '/* Responsive capabilites are disabled, only the default layout is loading, we dont need this so its not loaded */';
+    $responsive_layout = '/* Responsive capabilites are disabled, only the standard layout is loaded in themename.default.layout.css */';
   }
 
-  // Finally for IE
+
+  // IE assignments, not sure why I am doing this, could be that I meant to do something at this stage and have forgotton for now...
   $lt_ie9_layout = $lt_ie9_css;
   $lt_ie8_layout = $lt_ie8_css;
 
-  // Not finished yet though, we need to aggregate the design stylesheets
+
+  // Aggregate the design stylesheets
   $responsive_css = implode("\n", $responsive_styles);
+
 
   // Build a keyed array: file names as key, layout data as value
   $files = array(
-    "$theme_name.default.layout" => $default_layout,
+    "$theme_name.default.layout" => $desktop_first_layout,
     "$theme_name.responsive.layout" => $responsive_layout,
     "$theme_name.lt-ie9.layout" => $lt_ie9_layout,
     "$theme_name.lt-ie8.layout" => $lt_ie8_layout,
     "$theme_name.responsive.styles" => $responsive_css,
   );
+
 
   // Loop over the array and save each file, and we're done!
   foreach ($files as $key => $value) {

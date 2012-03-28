@@ -130,7 +130,8 @@ function adaptivetheme_process_block(&$vars) {
   if ($vars['block']->region === 'menu_bar') {
     // They are always menu blocks, right?
     $vars['tag'] = 'nav';
-    $vars['inner_prefix'] = '<div class="block-inner menu-wrapper clearfix">'; // backwards compatibility with 7.x-2.x themes
+    $vars['inner_prefix'] = '';
+    $vars['inner_suffix'] = '';
     $vars['content_processed'] = $vars['content']; // this could get a wrapper
   }
 

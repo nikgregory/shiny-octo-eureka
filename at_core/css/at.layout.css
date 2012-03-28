@@ -17,27 +17,6 @@ html, body {
   height: 1px;
 }
 
-/* Add gutters */
-.block-inner,
-.pane-inner,
-div.messages,
-#branding,
-#primary-nav,
-#secondary-nav,
-#breadcrumb,
-#main-content,
-#attribution,
-.at-panel .rounded-corner {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-/* AT Panels needs special margin wrangling when in the content region */
-#content .at-panel {
-  margin-left: -10px;
-  margin-right: -10px;
-}
-
 /* Ensure the content column is always the full width of its container */
 #content-column,
 .content-column {

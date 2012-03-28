@@ -137,6 +137,10 @@ textarea {
   padding: 2px;
 }
 
+html.js input.form-autocomplete {
+  background-position: 100% 4px; /* Adjust trobber background position when changing text field padding */
+}
+
 textarea,
 input {
   font: 1em normal Arial, Helvetica, sans-serif;

@@ -84,7 +84,7 @@
   <header id="header" class="clearfix" role="banner">
 
     <?php if ($site_logo || $site_name || $site_slogan): ?>
-      <div id="branding" class="clearfix">
+      <div id="branding" class="branding-elements clearfix">
 
         <?php if ($site_logo): ?>
           <div id="logo"><?php print $site_logo; ?></div>
@@ -112,9 +112,7 @@
   <?php if ($primary_navigation): print $primary_navigation; endif; ?>
   <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
 
-  <?php if ($breadcrumb): ?>
-    <nav id="breadcrumb"><?php print $breadcrumb; ?></nav>
-  <?php endif; ?>
+  <?php if ($breadcrumb): print $breadcrumb; endif; ?>
 
   <?php print $messages; ?>
   <?php print render($page['help']); ?>
