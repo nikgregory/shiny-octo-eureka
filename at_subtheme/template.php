@@ -8,22 +8,23 @@
  * 2. Uncomment the required function to use.
  */
 
+
 /**
  * Preprocess variables for the html template.
  */
+/* -- Delete this line to enable.
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
   global $theme_key;
 
-  // Add a class for the active theme name.
-  /* -- Delete this line to enable.
-  $vars['classes_array'][] = drupal_html_class($theme_key);
-  // */
+  // Add a body class for the active theme name.
+  // $vars['classes_array'][] = drupal_html_class($theme_key);
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
-  /* -- Delete this line to enable.
-  $vars['classes_array'][] = css_browser_selector();
-  // */
+  // $vars['classes_array'][] = css_browser_selector();
+
 }
+// */
+
 
 /**
  * Process variables for the html template.

@@ -50,7 +50,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   //
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
-  
+
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
     if (theme_get_setting('production_mode', $theme_name) === 0) {
       // Build a keyed array of CSS file-names as key, and media query as value.
@@ -80,10 +80,12 @@ function adaptivetheme_preprocess_html(&$vars) {
       foreach ($files as $key => $value) {
         $css_file = $key . '.css';
         $media_query = $value;
-        load_subtheme_responsive_styles($css_file, $media_query, $theme_name);
+        if (file_exists($css_file)) {
+          load_subtheme_responsive_styles($css_file, $media_query, $theme_name);
+        }
       }
     }
-    
+
     // Production Mode
     // In Production mode we only load one file for our design styles.
     // We use a media query to prevent non media query browsers from downloading it.
@@ -91,8 +93,8 @@ function adaptivetheme_preprocess_html(&$vars) {
     else if (theme_get_setting('production_mode', $theme_name) === 1) {
       $file = $theme_name . '.responsive.styles.css';
       $media_query = 'only screen and (min-width:1px)';
-      if (!empty($file)) {
-        $filepath = "$path/$file";
+      $filepath = "$path/$file";
+      if (file_exists($filepath)) {
         drupal_add_css($filepath, array(
           'preprocess' =>  variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
           'group' => CSS_THEME,
@@ -118,15 +120,15 @@ function adaptivetheme_preprocess_html(&$vars) {
   // If either a or b equate to TRUE, then we are NOT doing mobile first.
   // If a is FALSE then this is mobile first.
   // If b is FALSE then we are doing responsive design.
-  
+
   // First set a boolean to test which IE stylesheet to load.
   $load_ie8_css = TRUE;
 
   // Load the default layout if Standard layout is default or responsive styles are disabled.
   if (theme_get_setting('global_default_layout', $theme_name) === 'standard-layout' || theme_get_setting('disable_responsive_styles', $theme_name) === 1) {
     $file = $theme_name . '.default.layout.css';
-    if (!empty($file)) {
-      $filepath = "$path/$file";
+    $filepath = "$path/$file";
+    if (file_exists($filepath)) {
       drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
@@ -140,8 +142,8 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Next - check if we need to load the responsive layout, so if responsiveness is not disabled, we load our responsive layout CSS.
   if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
     $file = $theme_name . '.responsive.layout.css';
-    if (!empty($file)) {
-      $filepath = "$path/$file";
+    $filepath = "$path/$file";
+    if (file_exists($filepath)) {
       drupal_add_css($filepath, array(
         'preprocess' => variable_get('preprocess_css', '') === 1 ? TRUE : FALSE,
         'group' => CSS_THEME,
@@ -150,7 +152,7 @@ function adaptivetheme_preprocess_html(&$vars) {
         )
       );
     }
-  
+
     // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
     // 1. Responsive capabilities are ON
     // 2. Mobile first is ON
@@ -160,8 +162,8 @@ function adaptivetheme_preprocess_html(&$vars) {
       if (theme_get_setting('load_respondjs', $theme_name) === 0) {
         $load_ie8_css = FALSE;
         $ie_9_file = $theme_name . '.lt-ie9.layout.css';
-        if (!empty($ie_9_file)) {
-          $ie_filepath = "$path/$ie_9_file";
+        $ie_filepath = "$path/$ie_9_file";
+        if (file_exists($filepath)) {
           drupal_add_css($ie_filepath, array(
             'group' => CSS_THEME,
             'media' => 'screen',
@@ -184,8 +186,8 @@ function adaptivetheme_preprocess_html(&$vars) {
   if ($load_ie8_css == TRUE) {
     if (theme_get_setting('load_ltie8css', $theme_name) === 1) {
       $ie_8_file = $theme_name . '.lt-ie8.layout.css';
-      if (!empty($ie_8_file)) {
-        $ie_filepath = "$path/$ie_8_file";
+      $ie_filepath = "$path/$ie_8_file";
+      if (file_exists($filepath)) {
         drupal_add_css($ie_filepath, array(
           'group' => CSS_THEME,
           'media' => 'screen',
@@ -282,7 +284,7 @@ function adaptivetheme_preprocess_html(&$vars) {
         $polly_wants_a_cracker = implode("\n", $vars['polyfills']);
       }
     }
-    
+
     $vars['polyfills'] = $polly_wants_a_cracker;
   }
   else {
@@ -312,18 +314,13 @@ function adaptivetheme_preprocess_html(&$vars) {
         $setting = theme_get_setting($setting . '_gwf', $theme_name);
         // strip the element prefix
         $font = str_replace($element . '-', '', $setting);
-        // replace hyphens with spaces, now we have a lower case font name, still no good,
-        // Google won't like it and will return the dreaded "font not supported" error. If
-        // you are wondering why I just don't loop over the fonts list and compare keys right
-        // away its because its very expensive to do this for every element (18 of them).
-        // Really this whole Google fonts thing is ugly, a hack and slow - should I remove it?
+        // replace hyphens with spaces, now we have a lower case font name
         $used_fonts[] = str_replace('-', ' ', $font);
       }
     }
     if (!empty($used_fonts)) {
-      // Get the full list of font names, remember Google fonts are case sensitive, and
-      // you cannot just uppercase/ucfirst, font names are not consistant! Got a better
-      // way of doing this? Please tell me about it!
+      // Get the full list of font names, Google fonts are case sensitive, and
+      // you cannot just uppercase/ucfirst, font names are not consistant
       $google_fonts = google_font_names();
       // Populate a variable with lower cased font names
       $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
@@ -352,25 +349,24 @@ function adaptivetheme_preprocess_html(&$vars) {
 
     // Load the Websafe and custom fonts CSS from public files
     $fonts_css = $theme_name . '.fonts.css';
-    $fonts_css_filepath = "$path/$fonts_css";
-    if (is_file($fonts_css_filepath)) {
-      drupal_add_css($fonts_css_filepath, array(
+    $filepath = "$path/$fonts_css";
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        //'weight' => -100,
         'media' => 'screen, handheld',
         'every_page' => TRUE,
         )
       );
     }
   }
-  
+
   // Load the custom CSS if enabled
   if (theme_get_setting('enable_custom_css', $theme_name) === 1) {
     $custom_css = $theme_name . '.custom.css';
-    $custom_css_filepath = "$path/$custom_css";
-    if (is_file($custom_css_filepath)) {
-      drupal_add_css($custom_css_filepath, array(
+    $filepath = "$path/$custom_css";
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
         'weight' => 1000,
@@ -388,8 +384,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['skip_link_target'] = theme_get_setting('skip_link_target', $theme_name);
   }
 
-  // CLASSES
-  // Add extra classes if set
+  // Extra Classes
   if (theme_get_setting('extra_page_classes', $theme_name) === 1) {
 
     // Set a class based on the language
@@ -435,23 +430,8 @@ function adaptivetheme_preprocess_html(&$vars) {
         $vars['classes_array'][] = 'page-panels';
         break;
     }
-  }
 
-  // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
-  if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-    $settings_array = &drupal_static(__FUNCTION__, array());
-    $settings_array = array(
-      'page_title_case',
-      'page_title_weight',
-      'page_title_alignment',
-      'page_title_shadow',
-    );
-    foreach ($settings_array as $setting) {
-      if ($heading_settings = theme_get_setting($setting, $theme_name)) {
-        $vars['classes_array'][] = $heading_settings;
-      }
-    }
-  }
+  } // end extra classes
 
   // Add a body class if the site name is hidden - state driven dynamic
   // classes are very useful and AT does this a lot
@@ -459,56 +439,69 @@ function adaptivetheme_preprocess_html(&$vars) {
     $vars['classes_array'][] = 'site-name-hidden';
   }
 
-  // Strip rubbish classes if extra classes not set
-  if (theme_get_setting('extra_page_classes', $theme_name) === 0) {
-    foreach ($vars['classes_array'] as $i => $class) {
-      if (preg_match('/page*/', $class)) {
-        unset($vars['classes_array'][$i]);
-      }
-    }
-  }
+  // Extensions
+  if(theme_get_setting('enable_extensions', $theme_name) === 1) {
 
-  // Add theme setting classes and files if active
-  $settings_css = array();
-  
-  // Headings/titles
-  if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
-    $settings_css[] = 'at.settings.style.headings.css';
-  }
-  
-  // Images
-  if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
-    $settings_css[] = 'at.settings.style.image.css';
-    $image_settings_array = array(
-      'image_caption_full',
-      'image_caption_teaser',
-      'image_alignment',
-      'image_alignment_teaser',
-    );
-    foreach ($image_settings_array as $setting) {
-      if ($image_setting = theme_get_setting($setting, $theme_name)) {
-        $vars['classes_array'][] = $image_setting;
+    // Add theme setting classes and files if active
+    $settings_css = array();
+
+    // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $page_title_settings_array = array(
+        'page_title_case',
+        'page_title_weight',
+        'page_title_alignment',
+        'page_title_shadow',
+      );
+      foreach ($page_title_settings_array as $page_title_setting) {
+        if ($heading_settings = theme_get_setting($page_title_setting, $theme_name)) {
+          $vars['classes_array'][] = $heading_settings;
+        }
       }
     }
-  }
-  
-  // Login block
-  if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
-    $settings_css[] = 'at.settings.style.login.css';
-  }
-  
-  // Load each stylesheet to support theme setting styles
-  if (!empty($settings_css)) {
-    foreach ($settings_css as $cssfile) {
-      drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'media' => 'screen, handheld',
-        'every_page' => TRUE,
-        )
-      );
+
+    // Headings/titles
+    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $settings_css[] = 'at.settings.style.headings.css';
     }
-  }
+
+    // Images
+    if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
+      $settings_css[] = 'at.settings.style.image.css';
+      $image_settings_array = array(
+        'image_caption_full',
+        'image_caption_teaser',
+        'image_alignment',
+        'image_alignment_teaser',
+      );
+      foreach ($image_settings_array as $setting) {
+        if ($image_setting = theme_get_setting($setting, $theme_name)) {
+          $vars['classes_array'][] = $image_setting;
+        }
+      }
+    }
+
+    // Login block
+    if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
+      $settings_css[] = 'at.settings.style.login.css';
+    }
+
+    // Load each stylesheet to support theme setting styles
+    if (!empty($settings_css)) {
+      foreach ($settings_css as $cssfile) {
+        if (file_exists($cssfile)) {
+          drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
+            'preprocess' => TRUE,
+            'group' => CSS_THEME,
+            'media' => 'screen, handheld',
+            'every_page' => TRUE,
+            )
+          );
+        }
+      }
+    }
+
+  } // end extensions
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region
@@ -781,7 +774,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   $vars['title_attributes_array']['class'][] = 'block-title';
   $vars['content_attributes_array']['class'][] = 'block-content';
   $vars['content_attributes_array']['class'][] = 'content';
-  
+
   // Add Aria Roles via attributes
   switch ($vars['block']->module) {
     case 'system':

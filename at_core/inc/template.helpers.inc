@@ -48,9 +48,7 @@ function _theme_menu_variables($menu, $type) {
 * might this be called from a sub-theme (to load additional responsive stylesheets).
 */
 function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
-  $path_to_theme = &drupal_static(__FUNCTION__);
-  $path_to_theme = drupal_get_path('theme', $theme_name);
-  $filepath = $path_to_theme . '/css/' . $css_file;
+  $filepath = drupal_get_path('theme', $theme_name) . '/css/' . $css_file;
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
@@ -71,18 +69,19 @@ function load_subtheme_responsive_styles($css_file, $media_query, $theme_name) {
 * - $theme_name - to generate the path-to-theme for drupal_add_css().
 */
 function load_subtheme_conditional_styles($ie_style, $theme_name) {
-  $path_to_theme = drupal_get_path('theme', $theme_name);
-  $filepath = $path_to_theme . '/' . $ie_style['path'];
-  drupal_add_css($filepath, array(
-    'group' => CSS_THEME,
-    'browsers' => array(
-      'IE' => $ie_style['condition'],
-      '!IE' => FALSE,
-      ),
-    'media' => $ie_style['media'],
-    'preprocess' => TRUE,
-    )
-  );
+  $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
+  if (file_exists($filepath)) {
+    drupal_add_css($filepath, array(
+      'group' => CSS_THEME,
+      'browsers' => array(
+        'IE' => $ie_style['condition'],
+        '!IE' => FALSE,
+        ),
+      'media' => $ie_style['media'],
+      'preprocess' => TRUE,
+      )
+    );
+  }
 }
 
 // Load sub-theme media queries, 7.x-2.x backward compatibility
@@ -90,14 +89,16 @@ function load_subtheme_media_queries($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $file) {
     $filepath = $path_to_theme . '/css/' . $file;
-    drupal_add_css($filepath, array(
-      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-      'group' => CSS_THEME,
-      'media' => 'all',
-      'every_page' => TRUE,
-      'weight' => 99,
-      )
-    );
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
+        'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+        'group' => CSS_THEME,
+        'media' => 'all',
+        'every_page' => TRUE,
+        'weight' => 99,
+        )
+      );
+    }
   }
 }
 
@@ -107,16 +108,18 @@ function load_subtheme_ie_styles($files, $theme_name) {
   $path_to_theme = drupal_get_path('theme', $theme_name);
   foreach ($files as $key => $value) {
     $filepath = $path_to_theme . '/css/' . $value;
-    drupal_add_css($filepath, array(
-      'group' => CSS_THEME,
-      'browsers' => array(
-        'IE' => $key,
-        '!IE' => FALSE,
-        ),
-      'media' => 'screen',
-      'preprocess' => TRUE,
-      )
-    );
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
+        'group' => CSS_THEME,
+        'browsers' => array(
+          'IE' => $key,
+          '!IE' => FALSE,
+          ),
+        'media' => 'screen',
+        'preprocess' => TRUE,
+        )
+      );
+    }
   }
 }
 

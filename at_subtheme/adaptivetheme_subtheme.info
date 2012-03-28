@@ -15,16 +15,18 @@
   ; Globals CSS, loads all global.[type].css files in /css/
   stylesheets[screen, handheld][] = css/globals.css
 
+  
   ; Print
   ; Uncomment to load basic print styles.
   ; stylesheets[print][] = css/print.css
 
+  
   ; Internet Explorer Stylesheets
   ; AT can load IE stylesheets from the info file.
   ;
   ; Syntax: ie_stylesheets[media][condition] = path/to/file (path must be relative to your theme root)
   ; 
-  ; For example if you want to load an IE stylesheet just for IE7 use the following (note: you need to create "ie7.css" in the /css/ directory):
+  ; For example if you want to load a stylesheet just for IE7 use the following (note: you need to create "ie7.css" in the /css/ directory):
   ; ie_stylesheets[screen][IE 7] = css/ie7.css
   ;
   ; By default the sub-theme has one IE stylesheet which loads for "less than IE9" but "not IEMobile 7".
