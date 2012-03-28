@@ -1,13 +1,6 @@
 <?php
-/**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- *
- * This can probably be refactored to put everything inside a single foreach loop, which
- * was the original intention, but I ran out of time and did it wrong to begin with...
- * The data structure exists that will probably do it, font_elements(), which we use, 
- * but time was against me. It works and at least gets us away from hard coding every 
- * form element which is difficult to maintain and error prone.
- */
+
+  // Fonts
 
   // Get the font elements array, this holds options and settings for each font type
   $form_elements = font_elements();
@@ -62,6 +55,7 @@
     '#attributes' => array('class' => array('font-element-wrapper')),
     '#weight' => -100,
   );
+
   // Base font - global font family unless overridden by a more specific selector
   $form['at']['font']['base-font'] = array (
     '#type' => 'fieldset',
@@ -125,6 +119,7 @@
       )
     )
   );
+
   // Titles
   $form['at']['font']['titles'] = array (
     '#type' => 'fieldset',
@@ -204,6 +199,7 @@
       );
     }
   }
+
   // In Content Headings
   $form['at']['font']['headings'] = array (
     '#type' => 'fieldset',
@@ -282,6 +278,7 @@
       );
     }
   }
+
   // Size for in-content headings
   $form['at']['font']['headings']['sizes'] = array (
     '#type' => 'fieldset',
@@ -312,6 +309,7 @@
        );
     }
   }
+
   // Menus
   $form['at']['font']['menus'] = array (
     '#type' => 'fieldset',
@@ -391,6 +389,7 @@
       );
     }
   }
+
   // Custom CSS selectors
   $form['at']['font']['css'] = array (
     '#type' => 'fieldset',
@@ -441,7 +440,8 @@
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
     )
   );
-  // css selectors need a text field to enter stuff
+
+  // CSS selectors
   $form['at']['font']['css']['selectors_css'] = array(
     '#type' => 'textarea',
     '#title' => t('CSS'),

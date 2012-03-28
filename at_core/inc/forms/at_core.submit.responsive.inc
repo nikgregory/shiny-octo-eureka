@@ -271,7 +271,7 @@
   
   
   // Internet Exploder
-  // We only want to load what is absolutly required for IE, depending on the theme settings and what version we are targeting,
+  // We only want to load what is absolutely required for IE, depending on the theme settings and what version we are targeting,
   // remember, this only takes care of generating the stylesheets so what you see here are lots of messages being set for the
   // themer to get a handle on what is going on, adaptivetheme_preprocess_html() is actually loading the right files under the
   // right conditions.

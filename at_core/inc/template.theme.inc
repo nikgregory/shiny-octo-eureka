@@ -6,6 +6,18 @@
  */
 
 /**
+ * Implements hook_theme().
+ */
+function adaptivetheme_theme($existing, $type, $theme, $path) {
+  return array(
+    'menubar' => array(
+      'variables' => array('menu', 'type'),
+      'template' => 'templates/menubar',
+    ),
+  );
+}
+
+/**
  * Returns HTML for a breadcrumb trail.
  */
 function adaptivetheme_breadcrumb($vars) {
@@ -56,8 +68,8 @@ function adaptivetheme_status_messages($vars) {
   $output = '';
 
   $status_heading = array(
-    'status' => t('Status message'), 
-    'error' => t('Error message'), 
+    'status' => t('Status message'),
+    'error' => t('Error message'),
     'warning' => t('Warning message'),
   );
   foreach (drupal_get_messages($display) as $type => $messages) {
@@ -290,7 +302,8 @@ function adaptivetheme_field($vars) {
   return $output;
 }
 
-// Output taxonomy term fields as unordered lists, this has been moved to a function in AT 7.x-3.x for performance reasons
+// Taxonomy Fields
+// Output taxonomy term fields as unordered lists.
 function adaptivetheme_field__taxonomy_term_reference($vars) {
   $output = '';
 
@@ -314,7 +327,8 @@ function adaptivetheme_field__taxonomy_term_reference($vars) {
   return $output;
 }
 
-// Output image fields as figure with figcaption for captioning
+// Image Fields
+// Output image fields as figure with figcaption for captioning.
 function adaptivetheme_field__image($vars) {
   global $theme_name;
 
@@ -363,3 +377,24 @@ function adaptivetheme_field__image($vars) {
 
   return $output;
 }
+
+/*Speed tests
+  function adaptivetheme_block($vars) {
+  $output = '';
+  $output .= $vars['outer_prefix'] . $vars['inner_prefix'];
+  $output .= render($vars['title_prefix']);
+  if ($vars['title']) {
+    $output .= '<h2' . $vars['title_attributes'] . '>' . $vars['title'] . '</h2>';
+  }
+  $output .= render($vars['title_suffix']);
+  $output .= $vars['content_processed'];
+  $output .= $vars['inner_suffix'] . $vars['outer_suffix'];
+  return $output;
+}
+
+ function adaptivetheme_region($vars) {
+  $output = '';
+  $output .= $vars['outer_prefix'] . $vars['inner_prefix'] . $vars['content'] . $vars['inner_suffix'] . $vars['outer_suffix'];
+  return $output;
+}
+*/

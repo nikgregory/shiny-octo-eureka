@@ -46,12 +46,12 @@
   );
 
   // Search result settings
-  $form['at']['site-tweaks']['enable-stuff']['enable_search_settings'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Search result content'),
-    '#default_value' => theme_get_setting('enable_search_settings'),
-    '#description' => t('Enables the ability to modify the content of your search results.'),
-  );
+  // $form['at']['site-tweaks']['enable-stuff']['enable_search_settings'] = array(
+    // '#type' => 'checkbox',
+    // '#title' => t('Search result content'),
+    // '#default_value' => theme_get_setting('enable_search_settings'),
+    // '#description' => t('Enables the ability to modify the content of your search results.'),
+  // );
 
   // Login block options
   $form['at']['site-tweaks']['enable-stuff']['enable_loginblock_settings'] = array(

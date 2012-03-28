@@ -44,14 +44,12 @@ function adaptivetheme_process_html_tag(&$vars) {
 function adaptivetheme_process_page(&$vars) {
   global $theme_name;
 
-  // Call our helper function to wrap menus in extra markup, this is quite unfriendly
-  // way to do this, but in reality it appears not to matter that much, users seldom if ever
-  // need to modify this markup.
+  // theme the menu bars
   if (!empty($vars['primary_navigation'])) {
-    $vars['primary_navigation'] = _theme_menu_variables($vars['primary_navigation'], 'primary');
+    $vars['primary_navigation'] = theme('menubar', array('menu' => $vars['primary_navigation'], 'type' => 'primary'));
   }
   if (!empty($vars['secondary_navigation'])) {
-    $vars['secondary_navigation'] = _theme_menu_variables($vars['secondary_navigation'], 'secondary');
+    $vars['secondary_navigation'] = theme('menubar', array('menu' => $vars['secondary_navigation'], 'type' => 'secondary'));
   }
   
   // Generate the wrapper element for the main content
@@ -203,4 +201,13 @@ function adaptivetheme_process_comment(&$vars) {
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }
+}
+
+/**
+ * Process variables for menubar.tpl.php
+ */
+function adaptivetheme_process_menubar(&$vars) {
+  $vars['classes'] = implode(' ',$vars['classes_array']);
+  $vars['attributes'] = $vars['attributes_array'] ? drupal_attributes($vars['attributes_array']) : '';
+  $vars['content_attributes'] = $vars['content_attributes_array'] ? drupal_attributes($vars['content_attributes_array']) : '';
 }

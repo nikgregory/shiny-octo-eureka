@@ -1,8 +1,8 @@
 <?php
   // Automagical Info file builder
-  // Theme info config - this is theme info backed up to a file. Its perfectly
-  // formatted and holds all current values - useful for migration or simply
-  // capturing the current theme settings as defaults, which is why I built it.
+  // This is the theme info backed up to a file. Its formatted and holds all
+  // current values - useful for migration or simply capturing the current
+  // theme settings as defaults, which is why I built it.
   $theme_settings = $values;
   if ($theme_settings) {
     $dynamic_settings_info = array();
@@ -43,7 +43,7 @@
           }
           if ($k == 'scripts' && !empty($k)) {
              foreach ($v as $scripts => $file) {
-               $static_settings_info[] = 'scripts[] = ' . $file;
+               $static_settings_info[] = 'scripts[] = ' . $file; // $file always seems to give the full relative path... its annoying but I can live with it
              }
           }
           if ($k == 'regions') {
@@ -62,6 +62,7 @@
     if (!empty($static_settings_info)) {
       $static_settings = implode("\n", $static_settings_info);
     }
+    // Might need to check this and add some more exclusions
     $exclusions = array(
       'var',
       'default_logo',
@@ -82,17 +83,21 @@
       'op',
     );
     foreach ($theme_settings as $setting_name => $setting_value) {
-      if (!in_array($setting_name, $exclusions)) {
+      if (isset($setting_name) && !in_array($setting_name, $exclusions)) {
         $setting_value = $setting_value ? $setting_value : "''";
         $dynamic_settings_info[] = 'settings['. $setting_name .'] = ' . $setting_value;
       }
     }
     if (!empty($dynamic_settings_info)) {
+      // Interesting trivial fact about info files, if the line ends with an equals operator (=) then the line
+      // is not ended and the content of the next line will be assigned, therefor we can never leave an empty
+      // setting with a hanging equals, so we set an empty string. I still need to test this properly because
+      // it might be better, or even required to set it to a 0.
       $dynamic_settings_info = $dynamic_settings_info ? $dynamic_settings_info : "''";
       $dynamic_settings = implode("\n", $dynamic_settings_info);
     }
     if (!empty($static_settings_info) && !empty($dynamic_settings_info)) {
-      $sanitized_values = filter_xss_admin($static_settings . "\n" . $dynamic_settings); // Can contain user entered data, run a final sanity check
+      $sanitized_values = filter_xss_admin($static_settings . "\n" . $dynamic_settings); // Can contain user entered data, run a final sanity check, ott? Probably.
       $filepath = "$path/$theme_name" . '_settings.info';
       file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
     }

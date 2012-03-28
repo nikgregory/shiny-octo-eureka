@@ -22,10 +22,10 @@ function at_core_settings_validate($form, &$form_state) {
     if (empty($values['smartphone_landscape_sidebar_second'])) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
-  }  
+  }
 
   // Check if the apple touch icon path is correct
-  
+
   if(theme_get_setting('enable_extensions') === 1) {
     if ($values['enable_apple_touch_icons'] === 1) {
       // low

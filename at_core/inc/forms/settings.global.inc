@@ -1,9 +1,11 @@
-<?php 
+<?php
+
   // Global Settings
   $form['at-layout']['global-settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Settings'),
   );
+
   // Mode
   $form['at-layout']['global-settings']['mode'] = array(
     '#type' => 'fieldset',
@@ -21,7 +23,8 @@
     '#description' => t('Enabling Production mode reduces HTTP requests by aggregating the responsive stylesheets into one CSS file and uses embedded media queries. Enable this after you have finished writing your CSS styles. If you later change any styles in the responsive stylesheets you will need re-save the theme settings to re-write the aggregated CSS file.'),
     '#default_value' => theme_get_setting('production_mode'),
   );
-  // set default layout
+
+  // Set default layout
   $form['at-layout']['global-settings']['default-layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Mobile first or Mobile last'),
@@ -41,6 +44,7 @@
       'standard-layout'      => t('Desktop first'),
     ),
   );
+
   // Cascading media queries
   $form['at-layout']['global-settings']['cascading-mediaqueries'] = array(
     '#type' => 'fieldset',
@@ -57,7 +61,7 @@
     '#title'  => t('Enable the responsive.cascade.css file'),
     '#description' => t('Use <a href="http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack" target="_blank">overlapped media queries</a>. These are are in a seperate file: <code>themeName/css/responsive.cascade.css</code>, you must set the media queries in this file manually!'),
     '#default_value' => theme_get_setting('enable_cascading_media_queries'),
-    
+
   );
   $form['at-layout']['global-settings']['cascading-mediaqueries']['cascade_media_query'] = array(
     '#type' => 'textfield',
@@ -73,7 +77,7 @@
       ),
     ),
   );
-  
+
   // Polyfills
   $form['at-layout']['global-settings']['polyfills'] = array(
     '#type' => 'fieldset',
@@ -120,6 +124,7 @@
       ),
     ),
   );
+
   // Disable responsive layout
   $form['at-layout']['global-settings']['disable-rs'] = array(
     '#type' => 'fieldset',
@@ -132,6 +137,7 @@
     '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
     '#default_value' => theme_get_setting('disable_responsive_styles'),
   );
+
   // Enable extensions (really we just unhide the extensions)
   $form['at-layout']['global-settings']['extensions'] = array(
     '#type' => 'fieldset',

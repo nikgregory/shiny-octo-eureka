@@ -22,13 +22,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Get the active theme name, we might need it at some stage
   $theme_name = $form_state['build_info']['args'][0];
 
-  // Get the admin theme so we can set a class for styling, Seven does mental things with forms in vertical tabs...
+  // Get the admin theme so we can set a class for styling this form, variable_get() returns 0 if the admin theme is the default theme
   $admin_theme = variable_get('admin_theme') ? variable_get('admin_theme') : $theme_name;
+  $admin_theme_class = 'admin-theme-'. drupal_html_class($admin_theme);
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form
   $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
-  $layout_header  = '<div class="at-settings-form layout-settings-form admin-theme-'. drupal_html_class($admin_theme) .'"><div class="layout-header theme-settings-header clearfix">';
+  $layout_header  = '<div class="at-settings-form layout-settings-form ' . $admin_theme_class . '"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
   $layout_header .= '</div>';
@@ -53,7 +54,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   if(theme_get_setting('enable_extensions') === 1) {
 
     // Build a custom header for the Extensions settings form
-    $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
+    $styles_header  = '<div class="at-settings-form style-settings-form ' . $admin_theme_class . '"><div class="styles-header theme-settings-header clearfix">';
     $styles_header .= '<h1>' . t('Extensions') . '</h1>';
     $styles_header .= '</div>';
 
@@ -92,9 +93,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       include_once($path_to_at_core . '/inc/forms/settings.images.inc');
     }
     // Search Settings
-    if (theme_get_setting('enable_search_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.search.inc');
-    }
+    // if (theme_get_setting('enable_search_settings') === 1) {
+      // include_once($path_to_at_core . '/inc/forms/settings.search.inc');
+    // }
     // Horizonatal login block
     if (theme_get_setting('horizontal_login_block_enable') === 'on') {
       if (theme_get_setting('enable_loginblock_settings') === 1) {

@@ -12,14 +12,20 @@
     '#title' => t('Breadcrumbs'),
   );
 
-  // Display yes/no?
+  // Display?
   $form['at']['breadcrumb']['bd']['breadcrumb_display'] = array(
-    '#type' => 'select',
+    '#type' => 'checkbox',
     '#title' => t('Show breadcrumbs'),
     '#default_value' => theme_get_setting('breadcrumb_display'),
-    '#options' => array(
-      'yes' => t('Yes'),
-      'no' => t('No'),
+  );
+
+  // Home link?
+  $form['at']['breadcrumb']['bd']['breadcrumb_home'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the homepage link'),
+    '#default_value' => theme_get_setting('breadcrumb_home'),
+    '#states' => array(
+      'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
     ),
   );
 
@@ -32,22 +38,6 @@
     '#size' => 8,
     '#maxlength' => 10,
     '#states' => array(
-      'visible' => array(
-          '#edit-breadcrumb-display' => array('value' => 'yes'),
-      ),
-    ),
-  );
-
-  // Home link
-  $form['at']['breadcrumb']['bd']['breadcrumb_home'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show the homepage link'),
-    '#default_value' => theme_get_setting('breadcrumb_home'),
-    '#states' => array(
-      'visible' => array(
-          '#edit-breadcrumb-display' => array(
-            'value' => 'yes',
-          ),
-      ),
+      'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
     ),
   );

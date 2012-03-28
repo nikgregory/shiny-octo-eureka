@@ -30,12 +30,6 @@ foreach ($lt as $key => $value) {
   }
 }
 
-// Helper function for theming main and secondary variables.
-function _theme_menu_variables($menu, $type) {
-  $output = '<div id="' . $type . '-menu-bar" class="nav clearfix"><nav id="' . $type . '-menu" class="menu-wrapper ' . $type  . '-menu-wrapper clearfix" role="navigation">' . $menu . '</nav></div>';
-  return $output;
-}
-
 /**
 * Load sub-theme responsive stylesheets in link elements
 *

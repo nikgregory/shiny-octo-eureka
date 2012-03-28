@@ -1009,45 +1009,8 @@ function adaptivetheme_preprocess_comment(&$vars) {
 function adaptivetheme_preprocess_search_block_form(&$vars) {
   // Changes the search form to use the "search" input element attribute (HTML5)
   // We have to replace the string because FAPI don't know what type=search is, i.e.
-  // no way we can do this in an alter hook
+  // no way we can do this in a form alter hook.
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
-}
-
-/**
- * Preprocess variables for search-result.tpl.php
- */
-function adaptivetheme_preprocess_search_result(&$vars) {
-  global $theme_name;
-
-  // Modify search result view based on theme settings
-  $result = $vars['result'];
-  $vars['url'] = check_url($result['link']);
-  $vars['title'] = check_plain($result['title']);
-  $vars['snippet'] = '';
-  if (!empty($result['snippet']) && theme_get_setting('search_snippet', $theme_name) === 1) {
-    $vars['snippet'] = $result['snippet'];
-  }
-  $info = array();
-  if (!empty($result['type']) && theme_get_setting('search_info_type', $theme_name) === 1) {
-    $info['type'] = check_plain($result['type']);
-  }
-  if (!empty($result['user']) && theme_get_setting('search_info_user', $theme_name) === 1) {
-    $info['user'] = $result['user'];
-  }
-  if (!empty($result['date']) && theme_get_setting('search_info_date', $theme_name) === 1) {
-    $info['date'] = format_date($result['date'], 'small');
-  }
-  if (isset($result['extra']) && is_array($result['extra'])) {
-    if (!empty($result['extra'][0]) && theme_get_setting('search_info_comment', $theme_name) === 1) {
-      $info['comment'] = $result['extra'][0];
-    }
-    if (!empty($result['extra'][1]) && theme_get_setting('search_info_upload', $theme_name) === 1) {
-      $info['upload'] = $result['extra'][1];
-    }
-  }
-  $vars['info_split'] = $info;
-  $vars['info'] = implode(' - ', $info);
-  $vars['info_separator'] = filter_xss_admin(theme_get_setting('search_info_separator', $theme_name)); // check_plain() encodes entitles, which we might want to use
 }
 
 /**
@@ -1078,6 +1041,19 @@ function adaptivetheme_preprocess_field(&$vars) {
       $vars['image_caption_full'] = TRUE;
     }
   }
+}
+
+/**
+ * Preprocess variables for menubar.tpl.php
+ */
+function adaptivetheme_preprocess_menubar(&$vars) {
+  $type = $vars['type'];
+  $vars['menubar_id'] = $type . '-menu-bar';
+  $vars['classes_array'][] = 'nav clearfix';
+  $vars['content_attributes_array']['role'][] = 'navigation';
+  $vars['content_attributes_array']['class'][] = $type .'-menu-wrapper menu-wrapper clearfix';
+  $vars['attributes_array'] = '';
+  $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }
 
 /**

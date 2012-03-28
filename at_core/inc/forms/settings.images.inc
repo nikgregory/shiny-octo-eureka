@@ -1,4 +1,5 @@
 <?php
+
   // Image styles
   $form['at']['images'] = array(
     '#type' => 'fieldset',
@@ -6,11 +7,13 @@
     '#description' => '<h3>Image Settings</h3><p>Set alignment for image-field images on full and teaser view, and enable captions.',
     '#weight' => -80,
   );
+
   // Alignment
   $form['at']['images']['alignment'] = array(
     '#type' => 'fieldset',
     '#title' => t('Image Alignment'),
   );
+
   // Full
   $form['at']['images']['alignment']['image_alignment'] = array(
     '#type' => 'radios',
@@ -23,6 +26,7 @@
       'ia-r' => t('Right'),
     ),
   );
+
   // Teaser
   $form['at']['images']['alignment']['image_alignment_teaser'] = array(
     '#type' => 'radios',
@@ -36,6 +40,7 @@
       'iat-r' => t('Right'),
     ),
   );
+
   // Captions
   $form['at']['images']['captions'] = array(
     '#type' => 'fieldset',
