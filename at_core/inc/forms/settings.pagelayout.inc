@@ -1,6 +1,9 @@
 <?php
   // I have thought about putting this into a config array like fonts and reponsive panels forms,
   // however each fieldset is very bespoke and it will be hard to generate this from a config array.
+  
+  // Set a message for when responsive layout is turned off
+  $disable_message = t('<p>The responsive layout is disabled, only the Standard layout is now used.</p><p>To re-enable uncheck the "Disable responsive layout and styles" checkbox under the "Settings" tab.</p>');
 
   // Bigscreen (standard-layout)
   $form['at-layout']['bigscreen'] = array(
@@ -8,9 +11,7 @@
     '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
     '#attributes' => array(
-      'class' => array(
-        'at-layout-form',
-      ),
+      'class' => array('at-layout-form'),
     ),
   );
   $form['at-layout']['bigscreen']['bigscreen-layout-wrapper'] = array(
@@ -121,9 +122,7 @@
     '#title' => t('Standard Screen Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at-layout']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
@@ -141,16 +140,23 @@
     '#title' => t('Tablet Layout'),
     '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad have two orientations - landscape and portrait. You can configure a different layout for each orientation.</p>'),
     '#attributes' => array(
-      'class' => array(
-        'at-layout-form',
-      ),
+      'class' => array('at-layout-form'),
     ),
   );
+  // Disabled message
+  if(theme_get_setting('disable_responsive_styles') === 1) {
+    $form['at-layout']['tablet']['disabled'] = array(
+      '#markup' => '<div class="messages warning">'. $disable_message .'</div>',
+    );
+  }
   // Tablet landscape
   $form['at-layout']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape tablet</h4>'),
+    '#states' => array(
+      'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+    ),
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
@@ -252,6 +258,9 @@
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait tablet</h4>'),
+    '#states' => array(
+      'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+    ),
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
     '#type' => 'fieldset',
@@ -273,9 +282,7 @@
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
-      ),
+      'invisible' => array('input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack')),
     ),
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
@@ -338,9 +345,7 @@
     '#title' => t('Tablet Portrait Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
@@ -352,28 +357,30 @@
     '#size' => 100,
     '#required' => TRUE,
   );
-  
-  
-  
+
   // Smartphone
   $form['at-layout']['smartphone'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Layout'),
     '#description' => t('<h3>Smartphone Layout</h3><p>Smartphone devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
     '#attributes' => array(
-      'class' => array(
-        'at-layout-form',
-      ),
+      'class' => array('at-layout-form'),
     ),
   );
-  
-  
-  
+  // Disabled message
+  if(theme_get_setting('disable_responsive_styles') === 1) {
+    $form['at-layout']['smartphone']['disabled'] = array(
+      '#markup' => '<div class="messages warning">'. $disable_message .'</div>',
+    );
+  }
   // Smartphone landscape
   $form['at-layout']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape smartphone</h4>'),
+    '#states' => array(
+      'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+    ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
@@ -393,9 +400,7 @@
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      '!visible' => array(
-        'input[name="smartphone_landscape_layout"]' => array('value' => 'one-col-stack'),
-      ),
+      '!visible' => array('input[name="smartphone_landscape_layout"]' => array('value' => 'one-col-stack')),
     ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
@@ -414,9 +419,8 @@
     '#default_value' => theme_get_setting('smartphone_landscape_sidebar_first'),
     '#size' => 4,
     '#maxlenght' => 4,
-    '#states' => array('required' => array(
-        'input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE),
-      ),
+    '#states' => array(
+      'required' => array('input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE)),
     ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
@@ -426,9 +430,7 @@
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
-      'required' => array(
-        'input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE),
-      ),
+      'required' => array('input[id="edit-smartphone-landscape-layout-one-col-vert"]' => array('checked' => TRUE)),
     ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
@@ -436,9 +438,7 @@
     '#title' => t('Smartphone Landscape Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
@@ -464,15 +464,16 @@
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait smartphone</h4><div class="smartphone-portrait-layout">One column</div><p>The smartphone portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
+    '#states' => array(
+      'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+    ),
   );
   $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Portrait Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(

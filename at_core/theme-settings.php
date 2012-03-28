@@ -19,11 +19,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     return;
   }
 
-  // Get the admin theme so we can set a class for styling, Seven does mental things with forms in vertical tabs...
-  $admin_theme = variable_get('admin_theme');
-
   // Get the active theme name, we might need it at some stage
   $theme_name = $form_state['build_info']['args'][0];
+
+  // Get the admin theme so we can set a class for styling, Seven does mental things with forms in vertical tabs...
+  $admin_theme = variable_get('admin_theme') ? variable_get('admin_theme') : $theme_name;
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form
@@ -32,7 +32,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $layout_header .= '<h1>' . t('Layout') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
   $layout_header .= '</div>';
-  
+
   $form['at-layout'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout'),
@@ -50,67 +50,78 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   include_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
   // EXTENSIONS
-  // Build a custom header for the Extensions settings form
-  $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
-  $styles_header .= '<h1>' . t('Extensions') . '</h1>';
-  $styles_header .= '</div>';
+  if(theme_get_setting('enable_extensions') === 1) {
 
-  $form['at'] = array(
-    '#type' => 'vertical_tabs',
-    '#weight' => -9,
-    '#prefix' => $styles_header,
-    '#suffix' => '</div>',
-  );
-  // Font lists - we need these for both font and heading settings
-  if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {
-    include_once($path_to_at_core . '/inc/font.lists.inc');
-  }
-  // Heading styles
-  if(theme_get_setting('enable_heading_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
-  }
-  // Fonts
-  if(theme_get_setting('enable_font_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
-  }
-  // Heading styles
-  if(theme_get_setting('enable_heading_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
-  }
-  // Breadcrumbs
-  if (theme_get_setting('enable_breadcrumb_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
-  }
-  // Images
-  if(theme_get_setting('enable_image_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.images.inc');
-  }
-  // Search Settings
-  if (theme_get_setting('enable_search_settings') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.search.inc');
-  }
-  // Horizonatal login block
-  if (theme_get_setting('horizontal_login_block_enable') === 'on') {
-    if (theme_get_setting('enable_loginblock_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
+    // Build a custom header for the Extensions settings form
+    $styles_header  = '<div class="at-settings-form style-settings-form admin-theme-'. $admin_theme .'"><div class="styles-header theme-settings-header clearfix">';
+    $styles_header .= '<h1>' . t('Extensions') . '</h1>';
+    $styles_header .= '</div>';
+
+    $form['at'] = array(
+      '#type' => 'vertical_tabs',
+      '#weight' => -9,
+      '#prefix' => $styles_header,
+      '#suffix' => '</div>',
+      '#states' => array(
+        'visible' => array(':input[name="enable_extensions"]' => array('checked' => TRUE)),
+      ),
+    );
+
+    // Font lists - we need these for both font and heading settings
+    if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {
+      include_once($path_to_at_core . '/inc/font.lists.inc');
     }
-  }
-  // modify output
-  if (theme_get_setting('enable_markup_overides') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
-  }
-  // Metatags
-  if (theme_get_setting('enable_mobile_metatags') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
-  }
-  // Touch icons
-  if (theme_get_setting('enable_apple_touch_icons') === 1) {
-    include_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
+    // Heading styles
+    if(theme_get_setting('enable_heading_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
+    }
+    // Fonts
+    if(theme_get_setting('enable_font_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
+    }
+    // Heading styles
+    if(theme_get_setting('enable_heading_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
+    }
+    // Breadcrumbs
+    if (theme_get_setting('enable_breadcrumb_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
+    }
+    // Images
+    if(theme_get_setting('enable_image_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.images.inc');
+    }
+    // Search Settings
+    if (theme_get_setting('enable_search_settings') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.search.inc');
+    }
+    // Horizonatal login block
+    if (theme_get_setting('horizontal_login_block_enable') === 'on') {
+      if (theme_get_setting('enable_loginblock_settings') === 1) {
+        include_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
+      }
+    }
+    // modify output
+    if (theme_get_setting('enable_markup_overides') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
+    }
+    // Metatags
+    if (theme_get_setting('enable_mobile_metatags') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
+    }
+    // Touch icons
+    if (theme_get_setting('enable_apple_touch_icons') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
+    }
+    // Custom CSS
+    if (theme_get_setting('enable_custom_css') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
+    }
+
+    // Always include tweaks (extension settings)
+    include_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
   }
 
-  // Always include tweaks (extension settings)
-  include_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
-  
   // Include a hidden form field with the current release information
   $form['at-release'] = array(
     '#type' => 'hidden',

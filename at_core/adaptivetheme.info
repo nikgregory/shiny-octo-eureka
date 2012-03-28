@@ -13,11 +13,11 @@
 ;----------// Stylesheets
   stylesheets[screen, handheld][] = css/at.layout.css
 
-  
+
 ;--// TEST FEATURE DETECTION
   ;scripts[] = js/mqcheck.js
-  
-  
+
+
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
@@ -165,7 +165,8 @@
   settings[enable_markup_overides]     = 0
   settings[enable_mobile_metatags]     = 0
   settings[enable_apple_touch_icons]   = 0
-  
+  settings[enable_custom_css]          = 0
+
 ;----------// Fonts
   settings[base_font_type]          = ''
   settings[site_name_font_type]     = ''
@@ -213,7 +214,7 @@
   settings[block_title_weight]      = 'btw-b'
   settings[block_title_alignment]   = 'bta-l'
   settings[block_title_shadow]      = 'bts-n'
-  
+
 ;----------// Image
   settings[image_alignment]        = 'ia-l'
   settings[image_alignment_teaser] = 'iat-l'
@@ -255,9 +256,12 @@
 
 ;----------// Markup
   settings[menu_item_span_elements] = 0
-  
+
 ;----------// Touch icons
   settings[apple_touch_icon_enable] = 0
   settings[apple_touch_icon_path_l] = ''
   settings[apple_touch_icon_path_m] = ''
   settings[apple_touch_icon_path_h] = ''
+
+;----------// Custom CSS
+  settings[custom_css] = '/* Add any valid CSS declarations */'

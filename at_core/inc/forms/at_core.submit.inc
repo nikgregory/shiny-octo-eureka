@@ -32,8 +32,15 @@ function at_core_settings_submit($form, &$form_state) {
   // Include processing for page & panels layouts, and responsive styles
   include_once($path_to_at_core . '/inc/forms/at_core.submit.responsive.inc');
 
-  // Include processing for fonts
-  if ($values['enable_font_settings'] === 1) {
-    include_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
+  if(theme_get_setting('enable_extensions') === 1) {
+    // Include processing for fonts
+    if ($values['enable_font_settings'] === 1) {
+      include_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
+    }
+    
+    // Include processing for Custom CSS
+    if ($values['enable_custom_css'] === 1) {
+      include_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
+    }
   }
 }

@@ -184,6 +184,7 @@
   settings[enable_markup_overides]     = 1
   settings[enable_mobile_metatags]     = 1
   settings[enable_apple_touch_icons]   = 0
+  settings[enable_custom_css]          = 0
 
 
   ; Font type
@@ -309,3 +310,7 @@
   settings[apple_touch_icon_path_l] = 'touch-icon-l.png'
   settings[apple_touch_icon_path_m] = ''
   settings[apple_touch_icon_path_h] = ''
+
+  ; Custom CSS
+  settings[custom_css] = '/* Add any valid CSS declarations */'
+

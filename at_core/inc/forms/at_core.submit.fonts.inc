@@ -25,7 +25,7 @@
 
     // We need to retrive this, its in a theme setting not in the font elements array
     if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
-      $selector = $values['selectors_css']; // sanitize user entered data
+      $selector = filter_xss($values['selectors_css']); // sanitize user entered data, strip bad protocols
     }
 
     // Get the font type if isset, not all font settings have a type
@@ -84,7 +84,7 @@
 
     // Custom Font stacks (user entered data)
     if ($font_type === 'cfs') {
-      $font_values['font_family'] = $font_value; // check_plain can give weird encoding issues
+      $font_values['font_family'] = filter_xss($font_value); // sanitize user entered data, strip bad protocols
       $font_values['font_size']   = $font_size;
       // Add styles to the array for printing into the stylsheet
       $font_styles_data[] = at_build_font_families($element, $selector, $font_values);
@@ -137,8 +137,7 @@
   }
   // Prepare data ready for printing to file
   $font_styles = implode("\n", $font_styles_data);
-  $sanitized_font_styles = filter_xss_admin($font_styles); // Can contain user entered data, run a final sanity check
-  $file_name = $theme_name . '_font_families.css';
+  $file_name = $theme_name . '.fonts.css';
   $filepath = "$path/$file_name";
-  file_save_data($sanitized_font_styles, $filepath, FILE_EXISTS_REPLACE);
+  file_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);
  

@@ -351,16 +351,34 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
 
     // Load the Websafe and custom fonts CSS from public files
-    $fonts_css = $theme_name . '_font_families.css';
+    $fonts_css = $theme_name . '.fonts.css';
     $fonts_css_filepath = "$path/$fonts_css";
-    drupal_add_css($fonts_css_filepath, array(
-      'preprocess' => TRUE,
-      'group' => CSS_THEME,
-      //'weight' => -100,
-      'media' => 'screen, handheld',
-      'every_page' => TRUE,
-      )
-    );
+    if (is_file($fonts_css_filepath)) {
+      drupal_add_css($fonts_css_filepath, array(
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        //'weight' => -100,
+        'media' => 'screen, handheld',
+        'every_page' => TRUE,
+        )
+      );
+    }
+  }
+  
+  // Load the custom CSS if enabled
+  if (theme_get_setting('enable_custom_css', $theme_name) === 1) {
+    $custom_css = $theme_name . '.custom.css';
+    $custom_css_filepath = "$path/$custom_css";
+    if (is_file($custom_css_filepath)) {
+      drupal_add_css($custom_css_filepath, array(
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        'weight' => 1000,
+        'media' => 'screen, handheld',
+        'every_page' => TRUE,
+        )
+      );
+    }
   }
 
   // Skip link
@@ -491,9 +509,6 @@ function adaptivetheme_preprocess_html(&$vars) {
       );
     }
   }
-  
-  
-  
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region

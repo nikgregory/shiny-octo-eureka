@@ -87,6 +87,15 @@ div.smartphone-portrait-layout,
   overflow: hidden;
 }
 
+/* edit-disabled responsive layout disabled messages */
+.vertical-tabs-panes fieldset fieldset[id*="edit-disabled"], 
+.vertical-tabs-panes fieldset fieldset[id*="edit-disabled"] .fieldset-wrapper {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+} 
+
+
 /* Layout settings */
 .at-layout-form div.form-item {
   float: left;

@@ -132,3 +132,15 @@
     '#description' => t('By checking this setting the site will use only the Standard layout and the global styles. You can turn this back on at any time.'),
     '#default_value' => theme_get_setting('disable_responsive_styles'),
   );
+  // Enable extensions (really we just unhide the extensions)
+  $form['at-layout']['global-settings']['extensions'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Enable Extensions'),
+    '#description' => t('<h3>Enable Extensions</h3>'),
+  );
+  $form['at-layout']['global-settings']['extensions']['enable_extensions'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable extensions'),
+    '#description' => t('Extensions include many extras for configuring and styling your site and theme such as fonts, title styles, image alignment and captions, metatags &amp; touch icons for mobile and much more. Extensions can be enabled or disabled individually, so you only load what you need.'),
+    '#default_value' => theme_get_setting('enable_extensions'),
+  );

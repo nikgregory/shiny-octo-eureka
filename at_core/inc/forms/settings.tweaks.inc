@@ -84,3 +84,11 @@
     '#description' => t('Many additional options for adding, removing, hiding and changing site elements such as using 100% width header/section/footer wrappers, removing the RSS icon, hiding comment titles and more.'),
     '#default_value' => theme_get_setting('enable_markup_overides'),
   );
+
+  // Custom CSS
+  $form['at']['site-tweaks']['enable-stuff']['enable_custom_css'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Custom CSS'),
+    '#description' => t('Enter custom CSS rules for minor adjustment to your theme. Useful if you do not want to build a sub-theme and need modifications to survive theme upgrades if required.'),
+    '#default_value' => theme_get_setting('enable_custom_css'),
+  );
