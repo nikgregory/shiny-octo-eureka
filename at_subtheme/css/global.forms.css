@@ -43,7 +43,8 @@ textarea:focus {
 }
 
 .form-item .description /* The descriptive help text (separate from the label) */ {
-  font-size: .857em;
+  font-size: 0.8em;
+  color: #555;
 }
 
 .form-type-radio .description,

@@ -242,7 +242,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 .panel-option-lists .form-type-radio {
   clear: none;
   float: left;
-  margin: 0 30px 10px 0;
+  margin: 0 30px 10px 0 !important;
   text-align: center;
   width: 40px;
 }
@@ -252,7 +252,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   margin-top: 4px;
   height: 40px;
   width: 40px;
-  display: block;
+  display: block !important;
   float: none;
   text-align: center;
 }

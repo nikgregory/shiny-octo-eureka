@@ -19,7 +19,7 @@
     '#options' => array(
       'ia-n' => t('None'),
       'ia-l' => t('Left'),
-      'ia-c' => t('Centered'),
+      'ia-c' => t('Center'),
       'ia-r' => t('Right'),
     ),
   );
@@ -32,7 +32,7 @@
     '#options' => array(
       'iat-n' => t('None'),
       'iat-l' => t('Left'),
-      'iat-c' => t('Centered'),
+      'iat-c' => t('Center'),
       'iat-r' => t('Right'),
     ),
   );
