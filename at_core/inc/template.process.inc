@@ -204,10 +204,15 @@ function adaptivetheme_process_comment(&$vars) {
 }
 
 /**
- * Process variables for menubar.tpl.php
+ * Process variables for adaptivtheme_menubar()
  */
 function adaptivetheme_process_menubar(&$vars) {
+  // The default theme implementation is a function, so template_process() does
+  // not automatically run, so we need to flatten the classes and attributes
+  // here. For best performance, only call drupal_attributes() when needed, and
+  // note that template_preprocess_menubar() does not initialize the
+  // *_attributes_array variables.
   $vars['classes'] = implode(' ',$vars['classes_array']);
-  $vars['attributes'] = $vars['attributes_array'] ? drupal_attributes($vars['attributes_array']) : '';
-  $vars['content_attributes'] = $vars['content_attributes_array'] ? drupal_attributes($vars['content_attributes_array']) : '';
+  $vars['attributes'] = empty($vars['attributes_array']) ? '' : drupal_attributes($vars['attributes_array']);
+  $vars['content_attributes'] = empty($vars['content_attributes_array']) ? '' : drupal_attributes($vars['content_attributes_array']);
 }

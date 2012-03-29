@@ -11,10 +11,36 @@
 function adaptivetheme_theme($existing, $type, $theme, $path) {
   return array(
     'menubar' => array(
-      'variables' => array('menu', 'type'),
-      'template' => 'templates/menubar',
+      'render element' => 'element',
     ),
   );
+}
+
+/**
+ * Adativetheme implementation to display a menubar.
+ *
+ * The contents is normally one of Drupals magic menu variables, 
+ * such as the Main menu or User menu (secondary menu), but could
+ * be any menu you wish to wrap in navigation menu type markup
+ * and classes.
+ *
+ * Available variables:
+ * - $menubar_id: CSS id for theming the menubar
+ * - $menu: Holds the themed menu (normally using theme_links())
+ * - the usual $classes, $attributes, $content attributes etc
+ *
+ * @see adaptivetheme_preprocess_menubar()
+ * @see adaptivetheme_process_menubar()
+ */
+function adaptivetheme_menubar($vars) {
+  $output = '';
+
+  $output .= '<div id="' . $vars['menubar_id'] . '" class="' . $vars['classes'] . '"' . $vars['attributes'] . '>';
+  $output .= '<nav ' . $vars['content_attributes'] . '>';
+  $output .= $vars['menu'];
+  $output .= '</nav></div>';
+
+  return $output;
 }
 
 /**
