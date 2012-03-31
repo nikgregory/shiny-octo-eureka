@@ -81,7 +81,7 @@
 ;----------// Theme Settings
 
   ; Layout settings - Standard bigscreen
-  settings[bigscreen_layout]         = 'three-col-grail'
+  settings[bigscreen_layout]         = 'three_col_grail'
   settings[bigscreen_page_unit]      = '%'
   settings[bigscreen_sidebar_unit]   = '%'
   settings[bigscreen_max_width_unit] = 'px'
@@ -94,7 +94,7 @@
 
 
   ; Layout settings - Tablet landscape
-  settings[tablet_landscape_layout]         = 'three-col-grail'
+  settings[tablet_landscape_layout]         = 'three_col_grail'
   settings[tablet_landscape_page_unit]      = '%'
   settings[tablet_landscape_sidebar_unit]   = '%'
   settings[tablet_landscape_page_width]     = 100
@@ -104,7 +104,7 @@
 
 
   ; Layout settings - Tablet portrait
-  settings[tablet_portrait_layout]         = 'one-col-vert'
+  settings[tablet_portrait_layout]         = 'one_col_vert'
   settings[tablet_portrait_page_unit]      = '%'
   settings[tablet_portrait_sidebar_unit]   = '%'
   settings[tablet_portrait_page_width]     = 100
@@ -114,7 +114,7 @@
 
 
   ; Layout settings - Smartphone landscape
-  settings[smartphone_landscape_layout]         = 'one-col-vert'
+  settings[smartphone_landscape_layout]         = 'one_col_vert'
   settings[smartphone_landscape_page_unit]      = '%'
   settings[smartphone_landscape_sidebar_unit]   = '%'
   settings[smartphone_landscape_page_width]     = 100
@@ -124,7 +124,7 @@
 
 
   ; Layout settings - Smartphone portrait
-  settings[smartphone_portrait_layout]         = 'one-col-stack'
+  settings[smartphone_portrait_layout]         = 'one_col_stack'
   settings[smartphone_portrait_page_unit]      = '%'
   settings[smartphone_portrait_sidebar_unit]   = '%'
   settings[smartphone_portrait_page_width]     = 100

@@ -38,7 +38,7 @@
   plugins[panels][layouts] = layouts/panels
 
 ;----------// Layout settings - Standard bigscreen
-  settings[bigscreen_layout]         = 'three-col-grail'
+  settings[bigscreen_layout]         = 'three_col_grail'
   settings[bigscreen_page_unit]      = '%'
   settings[bigscreen_sidebar_unit]   = '%'
   settings[bigscreen_max_width_unit] = 'px'
@@ -50,7 +50,7 @@
   settings[bigscreen_media_query]    = 'only screen and (min-width:1025px)'
 
 ;----------// Layout settings - Tablet landscape
-  settings[tablet_landscape_layout]         = 'three-col-grail'
+  settings[tablet_landscape_layout]         = 'three_col_grail'
   settings[tablet_landscape_page_unit]      = '%'
   settings[tablet_landscape_sidebar_unit]   = '%'
   settings[tablet_landscape_max_width_unit] = 'px'
@@ -74,7 +74,7 @@
   settings[tablet_portrait_media_query]    = 'only screen and (min-width:481px) and (max-width:768px)'
 
 ;----------// Layout settings - Smartphone landscape
-  settings[smartphone_landscape_layout]         = 'one-col-vert'
+  settings[smartphone_landscape_layout]         = 'one_col_vert'
   settings[smartphone_landscape_page_unit]      = '%'
   settings[smartphone_landscape_sidebar_unit]   = '%'
   settings[smartphone_landscape_max_width_unit] = 'px'
