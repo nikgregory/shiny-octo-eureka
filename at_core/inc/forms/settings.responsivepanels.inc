@@ -2,7 +2,9 @@
 
   // Panel and Gpanel Reponsive Layout Settings
   // Build the settings form for responsive panels. This gets its data
-  // from responsive_panels() in config.inc
+  // from responsive_panels_data_structure() in config.inc, which in turn
+  // pulls its data directly from each Panels layout items array - which means
+  // this system is pluggable. TODO: write some docs about this...
 
   // Gpanels and Panels
   $form['at-layout']['panels'] = array(
@@ -35,32 +37,51 @@
   );
 
   // Get the configuration array for panel layouts
-  $rp = responsive_panels();
+  $rpl = responsive_panels_data_structure();
 
-  // Loop over the config array and build our form elements
+  // This is pretty ugly and will not be sustaintable, what I need is a function
+  // that sorts the layouts properly, alphabetical is no good, it needs to be in
+  // a very precise order to make sense in the UI.
+  if (isset($rpl['one'])) {
+    unset($rpl['one']);
+  }
+  if (isset($rpl['six'])) {
+   $six = $rpl['six']; unset($rpl['six']); $rpl['six'] = $six;
+  }
+  if (isset($rpl['inset'])) {
+  $inset = $rpl['inset']; unset($rpl['inset']); $rpl['inset'] = $inset;
+  }
+  
+  // Build the forms
   foreach ($devices as $device) {
     $title = str_replace('_', ' ', ucfirst($device));
+
     $form['at-layout']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
       '#title' => t($title),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-    foreach ($rp as $key => $value) {
-      $type = $key;
-      $form['at-layout']['panels']['panels-wrapper'][$device][$type] = array(
-        '#type' => 'fieldset',
-        '#title' => t($key),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-      );
-      foreach ($value as $key => $value) {
-        $form['at-layout']['panels']['panels-wrapper'][$device][$type][$device .'_'. $value['setting']] = array(
-          '#type' => 'radios',
-          '#title' => t($value['title']),
-          '#default_value' => theme_get_setting($device .'_'. $value['setting']),
-          '#options' => $value['options'],
+
+    if (isset($rpl)) {
+      foreach ($rpl as $group => $layouts) {
+        $form['at-layout']['panels']['panels-wrapper'][$device][$group] = array(
+          '#type' => 'fieldset',
+          '#title' => t($group),
+          '#collapsible' => TRUE,
+          '#collapsed' => TRUE,
         );
+
+        foreach ($layouts as $layout) {
+          foreach ($layout as $key => $value) {
+            $form['at-layout']['panels']['panels-wrapper'][$device][$group][$device .'_'. $value['theme']] = array(
+              '#type' => 'radios',
+              '#title' => t($value['title']),
+              '#default_value' => theme_get_setting($device .'_'. $value['theme']),
+              '#options' => $value['options'],
+            );
+          }
+        }
       }
     }
   }

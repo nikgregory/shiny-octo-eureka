@@ -13,11 +13,6 @@
 ;----------// Stylesheets
   stylesheets[screen, handheld][] = css/at.layout.css
 
-
-;--// TEST FEATURE DETECTION
-  ;scripts[] = js/mqcheck.js
-
-
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
   regions[sidebar_second]    = Sidebar second
@@ -34,7 +29,12 @@
   regions[page_top]          = Page top
   regions[page_bottom]       = Page bottom
 
-;----------// Panels layouts
+;----------// Layout plugins
+
+  ; AT Core page layout plugins
+  plugins[page_layout][layouts] = layouts/core
+  
+  ; Panels Module layouts
   plugins[panels][layouts] = layouts/panels
 
 ;----------// Layout settings - Standard bigscreen

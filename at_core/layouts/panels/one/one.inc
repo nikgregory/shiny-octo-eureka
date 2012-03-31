@@ -10,6 +10,7 @@ function adaptivetheme_one_panels_layouts() {
     'regions' => array(
       'one_main'  => t('Main'),
     ),
+    'type' => 'one',
   );
   return $items;
 }

@@ -1,6 +1,29 @@
 <?php
-  // I have thought about putting this into a config array like fonts and reponsive panels forms,
-  // however each fieldset is very bespoke and it will be hard to generate this from a config array.
+  
+  // $options for each device group need to come from the $page_layout plugin system
+  $layout_methods = responsive_page_layouts_data_structure($variable = 'device_groups');
+  foreach ($layout_methods as $method => $groups) {
+    foreach ($groups as $group) {
+      $these_groups[$group][] = $method;
+    }  
+  }
+  // Get options foreach group
+  foreach ($these_groups as $device_group => $options) {
+    foreach ($options as $option) {
+      if ($device_group === 'bigscreen') {
+        $bigscreen_options[$option] = ucfirst(str_replace('_', ' ', $option)); // human readable option names for accessibility
+      }
+      if ($device_group === 'tablet_landscape') {
+        $tablet_landscape_options[$option] = ucfirst(str_replace('_', ' ', $option));
+      }
+      if ($device_group === 'tablet_portrait') {
+        $tablet_portrait_options[$option] = ucfirst(str_replace('_', ' ', $option));
+      }
+      if ($device_group === 'smartphone_landscape') {
+        $smartphone_landscape_options[$option] = ucfirst(str_replace('_', ' ', $option));
+      }
+    }
+  }
   
   // Set a message for when responsive layout is turned off
   $disable_message = t('<p>The responsive layout is disabled, only the Standard layout is now used.</p><p>To re-enable uncheck the "Disable responsive layout and styles" checkbox under the "Settings" tab.</p>');
@@ -22,11 +45,7 @@
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('bigscreen_layout'),
-    '#options' => array(
-      'three-col-grail' => t('<span>Standard three column</span>'),
-      'two-sidebars-right' => t('<span>Two sidebars right</span>'),
-      'two-sidebars-left'  => t('<span>Two sidebars left</span>'),
-    )
+    '#options' => $bigscreen_options,
   );
   $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
     '#type' => 'fieldset',
@@ -166,13 +185,7 @@
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_landscape_layout'),
-    '#options' => array(
-      'three-col-grail' => t('<span>Standard three column</span>'),
-      'two-sidebars-right' => t('<span>Two sidebars right</span>'),
-      'two-sidebars-left' => t('<span>Two sidebars left</span>'),
-      'two-sidebars-left-stack' => t('<span>Sidebar first left, second sidebar stacked</span>'),
-      'two-sidebars-right-stack' => t('<span>Sidebar first right, second sidebar stacked</span>'),
-    )
+    '#options' => $tablet_landscape_options,
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -206,8 +219,8 @@
     '#required' => TRUE,
     '#states' => array(
       'invisible' => array(
-        array('input[name="tablet_landscape_layout"]' => array('value' => 'two-sidebars-left-stack')),
-        array('input[name="tablet_landscape_layout"]' => array('value' => 'two-sidebars-right-stack')),
+        array('input[name="tablet_landscape_layout"]' => array('value' => 'two_sidebars_left_stack')),
+        array('input[name="tablet_landscape_layout"]' => array('value' => 'two_sidebars_right_stack')),
       ),
     ),
   );
@@ -270,12 +283,7 @@
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('tablet_portrait_layout'),
-    '#options' => array(
-      'two-sidebars-left-stack' => t('<span>Sidebar first left, second sidebar stacked</span>'),
-      'two-sidebars-right-stack' => t('<span>Sidebar first right, second sidebar stacked</span>'),  
-      'one-col-vert' => t('<span>Sidebars wrapped</span>'),
-      'one-col-stack' => t('<span>Sidebars stacked</span>'),
-    )
+    '#options' => $tablet_portrait_options,
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
@@ -312,8 +320,8 @@
     '#required' => TRUE,
     '#states' => array(
       'invisible' => array(
-        array('input[name="tablet_portrait_layout"]' => array('value' => 'two-sidebars-left-stack')),
-        array('input[name="tablet_portrait_layout"]' => array('value' => 'two-sidebars-right-stack')),
+        array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_left_stack')),
+        array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_right_stack')),
       ),
     ),
   );
@@ -390,10 +398,7 @@
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => theme_get_setting('smartphone_landscape_layout'),
-    '#options' => array(
-      'one-col-vert'  => t('<span>Sidebars wrapped</span>'),
-      'one-col-stack' => t('<span>One column stacked</span>'),
-    )
+    '#options' => $smartphone_landscape_options,
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',

@@ -7,6 +7,7 @@
 
 // AT leverages custom info file data, if it exists, to load various files and perform certain operations.
 $lt = list_themes();
+//dsm($lt);
 foreach ($lt as $key => $value) {
   if ($theme_name == $key) {
     $info = $lt[$theme_name]->info;

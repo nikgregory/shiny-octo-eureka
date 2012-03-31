@@ -16,6 +16,26 @@ function adaptivetheme_two_brick_panels_layouts() {
       'two_brick_right_below' => t('Right below'),
       'two_brick_bottom'      => t('Bottom'),
     ),
+    // AT
+    'type' => 'two',
+    'options' => array(
+      'two-brick' => 'default',
+      'two-brick-stack' => 'stack',
+    ),
+    'styles' => array(
+      'two-brick' => array(
+        'css' => array(
+          'fn' => array('.two-brick .panel-row' => 'float:none'),
+          '50' => array('.two-brick .panel-row .region' => 'width:50%'),
+        ),
+      ),
+      'two-brick-stack' => array(
+        'css' => array(
+          'fdw' => array('.two-brick .region' => 'float:none;display:block;width:100%;clear:both'),
+        ),
+      ),
+    ),
   );
+
   return $items;
 }

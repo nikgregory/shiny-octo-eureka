@@ -13,6 +13,26 @@ function adaptivetheme_two_66_33_panels_layouts() {
       'two_66_33_second' => t('Right'),
       'two_66_33_bottom' => t('Bottom (conditional)'),
     ),
+    // AT
+    'type' => 'two',
+    'options' => array(
+      'two-66-33' => 'default',
+      'two-66-33-stack' => 'stack',
+    ),
+    'styles' => array(
+      'two-66-33' => array(
+        'css' => array(
+          '66' => array('.two-66-33 .region-two-66-33-first' => 'width:66.666666%'),
+          '33' => array('.two-66-33 .region-two-66-33-second' => 'width:33.333333%'),
+        ),
+      ),
+      'two-66-33-stack' => array(
+        'css' => array(
+          'fdw' => array('.two-66-33 .region' => 'float:none;display:block;width:100%;clear:both'),
+        ),
+      ),
+    ),
   );
+
   return $items;
 }

@@ -6,18 +6,20 @@
 
   $is_default_layout = $values['global_default_layout']; // Initialize the $is_default_layout variable, we use this to test against
 
-  $responsive_panels = responsive_panels(); // Get the panels config array
+  $rpl = responsive_panels_data_structure(); //responsive_panels(); // Get the panels config array
   $float = ".at-panel .region {display:inline;float:left}"; // Some layouts generate their Panels CSS, we need to add a float delcaration for them
 
   $responsive_styles = array(); // Holds all the styles from the responsive stylesheets, wrapped in media queries
 
-  // Get the Panels subtypes settings
-  foreach ($responsive_panels as $type => $subtypes) {
-    foreach ($subtypes as $subtype => $setting) {
-      $panel_subtypes[] = $setting['setting'];
-
-      if (array_key_exists('styles', $setting)) {
-        $panel_styles[] = $setting['styles'];
+  // Get the values for the panels layouts
+  unset($rpl['one']); // unset panels layout one, it has no layout data and we never use it
+  foreach ($rpl as $grouped => $panels_layout_groups) {
+    foreach ($panels_layout_groups as $panel_layout_group) {
+      foreach ($panel_layout_group as $group_items => $item_value) {
+        $panel_subtypes[] = $item_value['theme'];
+        if (array_key_exists('styles', $item_value)) {
+          $panel_styles[] = $item_value['styles'];
+        }
       }
     }
   }
@@ -29,7 +31,7 @@
   }
 
   // Gutter width
-  $gutters = '';
+  $gutters = "/* Gutters are not currently overridden in theme settings, but may be in theme CSS */";
   if(theme_get_setting('enable_extensions') === 1) {
     if ($values['enable_markup_overides'] === 1) {
       if ($values['global_gutter_width']) {
@@ -103,7 +105,7 @@
       $smartphone_landscape_panels_data[] = $option;
     }
     // Generate the panels layouts
-    $smartphone_landscape_panels_css = build_panels_layout_css($panel_styles, $smartphone_landscape_panels_data);
+    $smartphone_landscape_panels_css = at_build_panels_layout_css($panel_styles, $smartphone_landscape_panels_data);
 
     $panels_layouts = $float . $smartphone_landscape_panels_css;
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
@@ -138,12 +140,14 @@
     foreach ($panel_subtypes as $subtype) {
       $tablet_portrait_panel_settings[] = $device . '_' . $subtype;
     }
+
     foreach ($tablet_portrait_panel_settings as $setting) {
       $option = $values[$setting];
       $tablet_portrait_panels_data[] = $option;
     }
+
     // Generate the panels layouts
-    $tablet_portrait_panels_css = build_panels_layout_css($panel_styles, $tablet_portrait_panels_data);
+    $tablet_portrait_panels_css = at_build_panels_layout_css($panel_styles, $tablet_portrait_panels_data);
 
     $panels_layouts = $float . $tablet_portrait_panels_css;
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
@@ -183,7 +187,7 @@
       $tablet_landscape_panels_data[] = $option;
     }
     // Generate the panels layouts
-    $tablet_landscape_panels_css = build_panels_layout_css($panel_styles, $tablet_landscape_panels_data);
+    $tablet_landscape_panels_css = at_build_panels_layout_css($panel_styles, $tablet_landscape_panels_data);
 
     $panels_layouts = $float . $tablet_landscape_panels_css;
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
@@ -235,7 +239,7 @@
     // - is this mobile first or desktop first?
     // - is the responsive capability disabled?
 
-    
+
     // Mobile first or Desktop first?
     if ($is_default_layout === 'standard-layout') {
 
@@ -249,7 +253,7 @@
 
     }
     else {
-      
+
       // MOIBLE FIRST
       $css = $comment . "\n" . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
       $desktop_first_layout = '/* Not likely, this is mobile first - this themer is rocking the hardest! */';
@@ -258,27 +262,27 @@
 
     // Responsive capability OFF?
     if ($values['disable_responsive_styles'] === 1) {
-    
+
       // If its off we have to load something, so we choose to use the bigscreen layout and load that
       $desktop_first_layout = $gutters . "\n" . $comment . $styles;
     }
 
     // add $css to the layouts array
     $layouts[] = $css;
-  } 
+  }
   //****** END bigscreen layout ******//
 
-  
-  
+
+
   // Internet Exploder
   // We only want to load what is absolutely required for IE, depending on the theme settings and what version we are targeting,
   // remember, this only takes care of generating the stylesheets so what you see here are lots of messages being set for the
   // themer to get a handle on what is going on, adaptivetheme_preprocess_html() is actually loading the right files under the
   // right conditions.
-  
+
   // $lt_ie9_css's assigned values all come from the bigscreen layout, since its the last layout to assign values to those variables
   $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts;
-  
+
   // Get the lt ie8 panels layouts if enabled
   $lt_ie8_css = '/* IE6/7 percentage rounding error fixes are OFF */';
   if ($values['load_ltie8css'] === 1) {
@@ -295,7 +299,7 @@
       // add the E6/7 rounding error fixes to $lt_ie9_css, set a message in $lt_ie8_css
       $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts . "\n" . $ie_panels_layouts;
       $lt_ie8_css = '/* The IE6/7 panels layouts are loading in the lt IE9 CSS, to save an HTTP request hit on your server */';
-  
+
       // Desktop first?
       if ($is_default_layout === 'standard-layout') {
         // repopulate $lt_ie8_css
@@ -313,18 +317,17 @@
   if ($is_default_layout === 'standard-layout') {
     $lt_ie9_css = '/* The standard layout is the default layout, IE styles are not required because you are doing desktop first design */';
   }
-  
+
   // Responsive capability OFF?
   if ($values['disable_responsive_styles'] === 1) {
     $lt_ie9_css = '/* Responsive capabilites are disabled, we no longer need to load an IE specific layout */';
   }
-  
+
 
   // Get and wrap the responsive CSS styles in the relative media query
   $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
   $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
-  
-  
+
 
   // Generate the layout and responsive styles stylesheets
   // Here we generate five files:

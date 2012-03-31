@@ -14,6 +14,38 @@ function adaptivetheme_three_inset_right_panels_layouts() {
       'three_inset_right_inset'   => t('Inset'),
       'three_inset_right_bottom'  => t('Bottom (conditional)'),
     ),
+    // AT
+    'type' => 'inset',
+    'options' => array(
+      'three-inset-right' => 'default',
+      'three-inset-right-wrap' => 'wrap',
+      'three-inset-right-stack' => 'stack',
+    ),
+    'styles' => array(
+      'three-inset-right' => array(
+        'css' => array(
+          'fr' => array('.three-inset-right .region-three-inset-right-sidebar,.three-inset-right .inset-wrapper,.three-inset-right .region-three-inset-right-middle' => 'float:right'),
+          '25' => array('.three-inset-right .region-three-inset-right-sidebar' => 'width:25%'),
+          '75' => array('.three-inset-right .inset-wrapper' => 'width:75%'),
+          '33' => array('.three-inset-right .inset-wrapper div.region-three-inset-right-inset' => 'width:33.333333%'),
+          '66' => array('.three-inset-right .inset-wrapper div.region-three-inset-right-middle' => 'width:66.666666%'),
+          '100' => array('.three-inset-right .inset-wrapper .region' => 'width:100%'),
+        ),
+      ),
+      'three-inset-right-wrap' => array(
+        'css' => array(
+          '25fr' => array('.three-inset-right .region-three-inset-right-sidebar' => 'width:25%;float:right'),
+          '75fr' => array('.three-inset-right .inset-wrapper' => 'width:75%;float:right'),
+          'fdw' => array('.three-inset-right .inset-wrapper .region' => 'float:none;display:block;width:100%;clear:both'),
+        ),
+      ),
+      'three-inset-right-stack' => array(
+        'css' => array(
+          'fdw' => array('.three-inset-right .inset-wrapper,.three-inset-right .region' => 'float:none;display:block;width:100%;clear:both'),
+        ),
+      ),
+    ),
   );
+
   return $items;
 }
