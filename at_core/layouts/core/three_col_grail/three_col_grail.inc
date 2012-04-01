@@ -13,20 +13,25 @@
  * Usage:
  * The naming convetion here is very important, the function name must match the method name
  * and the array key. Do not add anything else to it. In the layout function simply append 
-_* "_layout", this gets called when the user submits the theme settings form.
+ * "_layout", this gets called when the user submits the theme settings form.
+ *
+ * TODO: allow form #states to be defined (UX issue), and possibly for templates to be loaded (TX issue).
+ * Template loading is hard and not something I had considered because of one simple fact - the plugins never
+ * run in the front end of the site, they are entirely an admin thing, adding templates would mean they have to 
+ * be called by the front end theme, not a big deal really, but requires special attention to performance.
  */
-function three_col_grail() {                     // function name must be the same as the method, and the array key
+function three_col_grail() {                     // function name must be the same as the method, and the array key (therefor use underscores etc and be a valid PHP funtion name)
   $page_layout['three_col_grail'] = array(       // array key
-    'title'     => t('Three Column Holy Grail'), // not optional needed for the UI
-    'category'  => t('AT Core layout'),          // not optional, this could get used but is currently not
-    'method'    => 'three_col_grail',            // method - not optional
+    'title'     => t('Three Column Holy Grail'), // needed for the UI, not optional
+    'category'  => t('AT Core layout'),          // this could get used but is currently not, include something but its not critical
+    'method'    => 'three_col_grail',            // method - must match the function name and the key, definitly not optional!
     'type'      => 'page_layout',                // tell the system this is a page_layout, not optional!
-    'icon'      => 'three-col-grail.png',        // optional, not currently used
-    'admin_css' => 'three-col-grail.css',        // optional, not currently used
+    'icon'      => 'three-col-grail.png',        // not optional, not currently used, is a TODO and will happen
+    'admin_css' => 'three-col-grail.css',        // optional, not currently used, maybe could be probably not
     'device_groups' => array(                    // define which device groups this layout can work with, can be one or more of
       'bigscreen',                               // bigscreen, tablet_landscape, tablet_portrait, smartphone_landscape. What you
       'tablet_landscape',                        // enter here will dictate the device groups it shows for in theme settings.
-     ),
+     ),                                          // device_groups is not optional, you must put something there!
   );
   return $page_layout;
 }
