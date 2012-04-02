@@ -55,7 +55,7 @@ function at_get_plugins($theme_name, $getpath = FALSE) {
           $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
           // Provide a way to skip out early with just the paths
           if ($getpath == TRUE) {
-            $plugins[$plugin_provider][$plugin_type][$type] = $plugin_provider;
+            $plugins[$plugin_provider][$plugin_type][$type] = $provider_path;
           }
           // Get all the plugin data
           else {
@@ -162,6 +162,16 @@ function at_get_plugins_paths() {
   $paths = at_get_plugins($theme_name, $getpath = TRUE);
   return $paths;
 }
+
+// For panels we need all the CSS files for the theme settings UI
+// function at_get_panels_admin_css() {
+
+  // $admin_css = at_get_plugins($theme_name);
+
+// }
+// global $theme_name;
+// $admin_css = at_get_plugins($theme_name, $getpath = TRUE);
+// dsm($admin_css);
 
 // this stuff working?
 // $thesepaths = at_get_plugins_paths();

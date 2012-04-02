@@ -1,14 +1,19 @@
 <?php
-  
-  // $options for each device group need to come from the $page_layout plugin system
+
+  // $options for each device group come from the "page_layout" plugins
   $layout_methods = responsive_page_layouts_data_structure($variable = 'device_groups');
-  foreach ($layout_methods as $method => $groups) {
+  foreach ($layout_methods as $methods => $groups) {
     foreach ($groups as $group) {
-      $these_groups[$group][] = $method;
-    }  
+      $these_groups[$group][] = $methods;
+    }
   }
-  // Get options foreach group
+
+  // Assign $options for each device group
   foreach ($these_groups as $device_group => $options) {
+
+    // About here we need to call a custom sort function, this is what we got for now
+    sort($options, SORT_NUMERIC);
+
     foreach ($options as $option) {
       if ($device_group === 'bigscreen') {
         $bigscreen_options[$option] = ucfirst(str_replace('_', ' ', $option)); // human readable option names for accessibility
@@ -25,6 +30,21 @@
     }
   }
   
+  // Load css for the layout sprite icons
+  $page_layout_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'page_layout');
+  // should probably use #attached
+  foreach ($page_layout_css_files as $filepath) {
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
+        'preprocess' => FALSE,
+        'group' => CSS_THEME,
+        'media' => 'screen',
+        'every_page' => FALSE,
+        )
+      );
+    }
+  }
+
   // Set a message for when responsive layout is turned off
   $disable_message = t('<p>The responsive layout is disabled, only the Standard layout is now used.</p><p>To re-enable uncheck the "Disable responsive layout and styles" checkbox under the "Settings" tab.</p>');
 

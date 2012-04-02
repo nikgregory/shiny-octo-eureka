@@ -50,3 +50,9 @@
   Most of the layouts are "stacked" meaning they have top and bottom regions - all
   top and bottom regions are collapsible.
 
+  # Developer Info
+  
+  Please see the five_5x20 plugin inc file for exstensive docs on the plugin structure
+  and various other details you will need to make your own plugin.
+ 
+ 

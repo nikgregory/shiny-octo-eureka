@@ -6,8 +6,6 @@ function two_sidebars_left() {
     'category'  => t('AT Core layout'),
     'method'    => 'two_sidebars_left',
     'type'      => 'page_layout',
-    'icon'      => 'two_sidebars_left.png',
-    'admin_css' => 'two_sidebars_left.css',
     'device_groups' => array(
       'bigscreen',
       'tablet_landscape',

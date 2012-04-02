@@ -8,8 +8,6 @@ function two_sidebars_left_stack() {
     'category'  => t('AT Core layout'),
     'method'    => 'two_sidebars_left_stack',
     'type'      => 'page_layout',
-    'icon'      => 'two_sidebars_left_stack.png',
-    'admin_css' => 'two_sidebars_left_stack.css',
     'device_groups' => array(
       //'bigscreen',
       'tablet_landscape',

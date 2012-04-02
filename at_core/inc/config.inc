@@ -37,10 +37,8 @@ function responsive_page_layouts_data_structure($variable = NULL) {
   $data_structure = at_load_plugins($theme_name, $plugin_type = 'page_layout');
 
   foreach ($data_structure as $plugin => $datum) {
-
     foreach ($datum as $method => $layout) {
-
-      if (isset($variable)) {
+      if (!empty($variable)) {
         foreach ($layout as $layout_item => $value) {
           if ($variable == $layout_item) {
             $page_data_structure[$method] = $value;
@@ -52,7 +50,7 @@ function responsive_page_layouts_data_structure($variable = NULL) {
       }
     }
   }
-
+  //dsm($page_data_structure);
   return $page_data_structure;
 }
 
@@ -78,6 +76,66 @@ function responsive_panels_data_structure() {
   return $panels_data_structure;
 }
 
+// return all the admin css files for a plugin type, this is used primarly
+// to theme the icons for each layout method. The icons are in sprites.
+function responsive_plugins_admin_css($theme_name, $plugin_type) {
+  $admin_css_files = array();
+
+  $plugin_paths = at_get_plugins($theme_name, $getpath = TRUE);
+
+  foreach ($plugin_paths as $providers => $provided_types) {
+    foreach ($provided_types as $provider => $type_path) {
+      if ($provider === $plugin_type) {
+        $admin_css_paths[$providers] = $type_path;
+      }
+    }
+  }
+
+  if ($plugin_type === 'panels') {
+    $rpl = responsive_panels_data_structure();
+    foreach ($rpl as $group => $layouts) {
+      foreach ($layouts as $layout) {
+        foreach ($layout as $layout_key => $value) {
+          if (isset($value['admin css'])) {
+            $css_files[$layout_key] = $value['admin css'];
+          }
+        }
+      }
+    }
+  }
+
+  if ($plugin_type === 'page_layout') {
+    $rpl = responsive_page_layouts_data_structure();
+    foreach ($rpl as $layout_method => $value) {
+      if (isset($value['admin css'])) {
+        $css_files[$layout_method] = $value['admin css'];
+      }
+    }
+  }
+
+  // else {
+    // $function = $plugin_type . '_data_structure';
+    // if (function_exists($function)) {
+      // $rpl = $function();
+    // }
+  // }
+
+  foreach ($admin_css_paths as $admin_css => $paths) {
+    foreach ($paths as $path) {
+      foreach ($css_files as $method_key => $file_name) {
+        if($method_key !== 'one') {
+          $admin_css_files[] = $path . '/' . $method_key . '/' . $file_name;
+        }
+      }
+    }
+  }
+
+  if (!isset($rpl)) {
+    return; // fail quietly
+  }
+
+  return $admin_css_files;
+}
 /**
  * The fonts array is used by the fonts sub-system to generate forms,
  * build stylesheets and load font styles.

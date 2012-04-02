@@ -26,8 +26,7 @@ function three_col_grail() {                     // function name must be the sa
     'category'  => t('AT Core layout'),          // this could get used but is currently not, include something but its not critical
     'method'    => 'three_col_grail',            // method - must match the function name and the key, definitly not optional!
     'type'      => 'page_layout',                // tell the system this is a page_layout, not optional!
-    'icon'      => 'three-col-grail.png',        // not optional, not currently used, is a TODO and will happen
-    'admin_css' => 'three-col-grail.css',        // optional, not currently used, maybe could be probably not
+    'admin css' => 'three_col_grail.admin.css',  // optional, in AT Core this file loads all the CSS for all layout sprites, icons must be 60x60px
     'device_groups' => array(                    // define which device groups this layout can work with, can be one or more of
       'bigscreen',                               // bigscreen, tablet_landscape, tablet_portrait, smartphone_landscape. What you
       'tablet_landscape',                        // enter here will dictate the device groups it shows for in theme settings.

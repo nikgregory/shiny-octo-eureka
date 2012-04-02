@@ -1,11 +1,75 @@
 <?php
+/**
+ * Implimentation of an Adaptivetheme Panels Layout Plugin
+ * A panels layout plugin on steroids.
+ *
+ * These plugins must use the function method - Panels can support two
+ * methods, one that uses a function name and one that simply defines
+ * a $plugins array. You just use the function method which requires
+ * correct naming of the function:
+ * function [theme name]_[plugin name]_panels_layouts()
+ *
+ * Adaptivetheme needs more data to build the actual CSS, it does not use
+ * Panels normal method of defining a static CSS file. The CSS must be built
+ * programmatically for each selected option when the user saves the theme
+ * settings. This is for two main reasons - first so we are optimizing the 
+ * CSS and not adding any duplicate CSS declarations, and secondly so we can
+ * easily insert the CSS into the right media query in the generated stylsheet.
+ *
+ * Adding Selectors and CSS Declarations:
+ * Each CSS declaration is an array, keyed by an "identifier". The array items
+ * are selector/css pairs. For example:
+ * '40' => array('.five-5x20 .row-1' => 'width:40%'),
+ * Here '40' is the identifier, '.five-5x20 .row-1' is the selector and 'width:40%'
+ * is the actual CSS style.
+ *
+ * Identifiers:
+ * Each identifier represents a CSS style. It's basically shorthand notation for the
+ * actual CSS. To ensure the CSS is optimized as much as possible you should use an 
+ * existing identifier if it exists, although you can use your own, just make sure
+ * to reused them as much as possible in order to get the smallest CSS files - 
+ * here is a full list of the existing identifiers used by AT Core Panels plugins:
+  
+ Basic Widths (all must be in percentages):
+ 
+ ID       CSS
+
+ '25'     'width:25%'
+ '33'     'width:33.333333%'
+ '40'     'width:40%'
+ '50'     'width:50%'
+ '60'     'width:60%'
+ '66'     'width:66.666666%'
+ '75'     'width:75%'
+ '100'    'width:100%'
+ 
+ Floats with widths:
+ 
+ '25fl'   'width:25%;float:left'
+ '25fr'   'width:25%;float:right'
+ '33fl'   'width:33.333333%;float:left'
+ '50fl'   'width:50%;float:left'
+ '75fl'   'width:75%;float:left'
+ '75fr'   'width:75%;float:right'
+ 
+ Floats:
+ 
+ 'fl'     'float:left'
+ 'fr'     'float:right'
+ 'fn'     'float:none'
+ 
+ Stacked Regions get a specail cased identifier:
+ 
+ 'fdw'    'float:none;display:block;width:100%;clear:both'
+
+ */
 function adaptivetheme_five_5x20_panels_layouts() {
   $items['five_5x20'] = array(
     'title'    => t('Five column 5x20'),
     'category' => t('AT Responsive Panels - 4,5,6 column'),
-    'icon'     => 'five_5x20.png',
+    'icon'     => 'five_5x20.png', // Used in Panels Admin only, AT Core uses a CSS sprite
     'theme'    => 'five_5x20',
-    'admin css' => 'five_5x20.admin.css',
+    'admin css' => 'five_5x20.admin.css', // This holds a basic layout for Panels Admin and the CSS for theme settings sprite, sprite icons must be 40x40px
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'five_first'  => t('Column 1'),
@@ -14,19 +78,20 @@ function adaptivetheme_five_5x20_panels_layouts() {
       'five_fourth' => t('Column 4'),
       'five_fifth'  => t('Column 5'),
     ),
-    // AT
-    'type' => 'five',
-    'options' => array(
-      'five-5x20' => 'default',
-      'five-5x20-2x3-grid' => '2/3 split grid',
+
+    // AT Added Array Items:
+    'type' => 'five',           // type dictates what group it will fall into in theme settings
+    'options' => array(         // the various layout options the user can choose in theme settings for each device group
+      'five-5x20' => 'default', // the key used here MUST match the key used in the 'styles', the first one must be called 'default'
+      'five-5x20-2x3-grid' => '2/3 split grid', // add extra methods if your plugin supports them (you must include CSS for these in 'styles'
       'five-5x20-1x2x2-grid' => 'stack',
       'five-5x20-stack-2' => 'Stack 50/50 bottom',
-      'five-5x20-stack' => 'stack',
+      'five-5x20-stack' => 'stack', // stack refers to all regions stacked, 100% width etc and use the 'fdw' identifier in 'styles'
     ),
-    'styles' => array(
-      'five-5x20' => array(
-        'css' => array(
-          '40' => array('.five-5x20 .row-1' => 'width:40%'),
+    'styles' => array(        // these items are used to programatically build and optimize the CSS for each break-point
+      'five-5x20' => array(   // this key must match the 'options' key, this is akin to a layout "method" or style for this layout option, the first one is always the default
+        'css' => array(       // you must have this css key for each method array
+          '40' => array('.five-5x20 .row-1' => 'width:40%'), // each item is keyed by an identifier, there is an existing list you should use if applicable
           '60' => array('.five-5x20 .row-2' => 'width:60%'),
           'fl' => array('.five-5x20 .panel-row' => 'float:left'),
           '50' => array('.five-5x20 .row-1 .region' => 'width:50%'),

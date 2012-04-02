@@ -2,9 +2,46 @@
 
   // Panel and Gpanel Reponsive Layout Settings
   // Build the settings form for responsive panels. This gets its data
-  // from responsive_panels_data_structure() in config.inc, which in turn
-  // pulls its data directly from each Panels layout items array - which means
-  // this system is pluggable. TODO: write some docs about this...
+  // via responsive_panels_data_structure() in config.inc, which pulls 
+  // its data from each Panels layout plugin.
+  
+  // Supported devices
+  $devices = array(
+    'tablet_landscape',
+    'tablet_portrait',
+    'smartphone_landscape',
+  );
+
+  // Get the configuration array for panel layouts
+  $rpl = responsive_panels_data_structure();
+
+  // This is pretty ugly and will not be sustaintable, what I need is a function
+  // that sorts the layouts properly, alphabetical is no good, it needs to be in
+  // a very precise order to make sense in the UI.
+  if (isset($rpl['one'])) {
+    unset($rpl['one']);
+  }
+  if (isset($rpl['six'])) {
+    $six = $rpl['six']; unset($rpl['six']); $rpl['six'] = $six;
+  }
+  if (isset($rpl['inset'])) {
+    $inset = $rpl['inset']; unset($rpl['inset']); $rpl['inset'] = $inset;
+  }
+
+  // We need the admin_css files for each plugin
+  $panels_admin_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'panels');
+  // should probably use #attached
+  foreach ($panels_admin_css_files as $filepath) {
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
+        'preprocess' => FALSE,
+        'group' => CSS_THEME,
+        'media' => 'screen',
+        'every_page' => FALSE,
+        )
+      );
+    }
+  }
 
   // Gpanels and Panels
   $form['at-layout']['panels'] = array(
@@ -29,40 +66,15 @@
     ),
   );
 
-  // Supported devices
-  $devices = array(
-    'tablet_landscape',
-    'tablet_portrait',
-    'smartphone_landscape',
-  );
-
-  // Get the configuration array for panel layouts
-  $rpl = responsive_panels_data_structure();
-
-  // This is pretty ugly and will not be sustaintable, what I need is a function
-  // that sorts the layouts properly, alphabetical is no good, it needs to be in
-  // a very precise order to make sense in the UI.
-  if (isset($rpl['one'])) {
-    unset($rpl['one']);
-  }
-  if (isset($rpl['six'])) {
-   $six = $rpl['six']; unset($rpl['six']); $rpl['six'] = $six;
-  }
-  if (isset($rpl['inset'])) {
-  $inset = $rpl['inset']; unset($rpl['inset']); $rpl['inset'] = $inset;
-  }
-  
   // Build the forms
   foreach ($devices as $device) {
     $title = str_replace('_', ' ', ucfirst($device));
-
     $form['at-layout']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
       '#title' => t($title),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
-
     if (isset($rpl)) {
       foreach ($rpl as $group => $layouts) {
         $form['at-layout']['panels']['panels-wrapper'][$device][$group] = array(
@@ -71,7 +83,6 @@
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
         );
-
         foreach ($layouts as $layout) {
           foreach ($layout as $key => $value) {
             $form['at-layout']['panels']['panels-wrapper'][$device][$group][$device .'_'. $value['theme']] = array(

@@ -7,7 +7,7 @@
 
 // AT leverages custom info file data, if it exists, to load various files and perform certain operations.
 $lt = list_themes();
-//dsm($lt);
+
 foreach ($lt as $key => $value) {
   if ($theme_name == $key) {
     $info = $lt[$theme_name]->info;
@@ -17,6 +17,7 @@ foreach ($lt as $key => $value) {
       include_once($path_to_at_core . '/inc/google.web.fonts.inc');
     }
 
+    // TODO - abstract to preprocess_html
     // Scan for an "ie_stylesheets" key, and if it exists load the IE stylesheets
     if (array_key_exists('ie_stylesheets', $info)) {
       foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
@@ -89,6 +90,15 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
  * "lt ie8" and "all". If you add your own keys you have to process them as well,
  * there is no generic loader. As you can see this is all very hard coded, but
  * could be made into a generic loader, and probably should be. Patches welcome!
+ * 
+ * TODO: make this use the plugins sytem and the info file for loading scripts: Issue http://drupal.org/node/1511424
+ * Notes for the todo:
+ *  - there are two types of polyfills - scripts and CSS
+ *  - there are two types of scripts and two types of CSS fills - those for IE and those for all
+ *  - the IE condition needs to be configurable (i.e. take any valid conditional comment)
+ *  - all polyfills need to be toggle-able in the UI, so on/off checkbox for each fill
+ *  - the plugin data structure needs to be the same as the others, so the generic at_get_plugins() and
+ *    other plugin system functions will just work strait off
  */
 function polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_at_core;
@@ -378,6 +388,16 @@ function minify_css($css) {
 	$css = str_replace( '} ', '}', $css );
 	$css = str_replace( ';}', '}', $css );
 	return trim( $css );
+}
+
+//
+// Functions to maintain 7.x-2.x backward compatibility, DO NOT use these for 7.x-3.x or greater.
+//
+
+// Helper function for theming main and secondary variables, 7.x-2.x backward compatibility
+function _theme_menu_variables($menu, $type) {
+  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav class="clearfix">' . $menu . '</nav></div>';
+  return $output;
 }
 
 // Load sub-theme media queries, 7.x-2.x backward compatibility

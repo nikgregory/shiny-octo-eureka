@@ -6,8 +6,6 @@ function one_col_vert() {
     'category'  => t('AT Core layout'),
     'method'    => 'one_col_vert',
     'type'      => 'page_layout',
-    'icon'      => 'one_col_vert.png',
-    'admin_css' => 'one_col_vert.css',
     'device_groups' => array(
       'tablet_portrait',
       'smartphone_landscape',

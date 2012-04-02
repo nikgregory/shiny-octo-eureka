@@ -7,8 +7,6 @@ function one_col_stack() {
     'category'  => t('AT Core layout'),
     'method'    => 'one_col_stack',
     'type'      => 'page_layout',
-    'icon'      => 'one_col_stack.png',
-    'admin_css' => 'one_col_stack.css',
     'device_groups' => array(
       'tablet_portrait',
       'smartphone_landscape',
