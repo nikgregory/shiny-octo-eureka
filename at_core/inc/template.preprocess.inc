@@ -370,16 +370,15 @@ function adaptivetheme_preprocess_html(&$vars) {
 
     // Load each stylesheet to support theme setting styles
     if (!empty($settings_css)) {
-      foreach ($settings_css as $cssfile) {
-        if (file_exists($cssfile)) {
-          drupal_add_css($path_to_at_core . '/css/' . $cssfile, array(
-            'preprocess' => TRUE,
-            'group' => CSS_THEME,
-            'media' => 'screen, handheld',
-            'every_page' => TRUE,
-            )
-          );
-        }
+      foreach ($settings_css as $css_file) {
+        $filepath = $path_to_at_core . '/css/' . $css_file;
+        drupal_add_css($filepath, array(
+          'preprocess' => TRUE,
+          'group' => CSS_THEME,
+          'media' => 'screen, handheld',
+          'every_page' => TRUE,
+          )
+        );
       }
     }
 

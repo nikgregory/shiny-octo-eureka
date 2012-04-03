@@ -4,7 +4,7 @@
  *
  * Provides frequently used functions etc that don't fit logically anywhere else.
  */
-global $theme_key, $theme_name;
+global $theme_key;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
@@ -83,6 +83,7 @@ function at_theme_script($filepath) {
 
   // We need the default query string for cache control finger printing
   $query_string = variable_get('css_js_query_string', '0');
+
   if (file_exists($filepath)) {
     $file = file_create_url($filepath);
     $script = '<script src="' . $file . '?' . $query_string . '"></script>';
