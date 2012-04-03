@@ -4,6 +4,9 @@
  *
  * Provides frequently used functions etc that don't fit logically anywhere else.
  */
+global $theme_key, $theme_name;
+$theme_name = $theme_key;
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 // Return the info file data for a particular theme, usually the active theme.
 function at_get_info($theme_name) {
@@ -138,11 +141,11 @@ function polly_wants_a_cracker($polly, $theme_name) {
       }
       // HTML5 Shiv
       if ($polly['load_html5js'] === 1) {
-        $crackers['ie']['lt IE 8'][] = 'js/html5.js';
+        $crackers['ie']['lt IE 9'][] = 'js/html5.js';
       }
       // Boxsizing.htc
       if ($polly['load_boxsizinghtc'] === 1) {
-        $crackers['ie']['lt IE 8'][] = 'js/boxsizing.htc';
+        $crackers['ie']['lt IE 9'][] = 'js/boxsizing.htc';
       }
       // Scalefix.js
       if ($polly['load_scalefixjs'] === 1) {
@@ -156,7 +159,7 @@ function polly_wants_a_cracker($polly, $theme_name) {
         $query_string = variable_get('css_js_query_string', '0');
 
         // "all" - no conditional comment needed, use drupal_add_js()
-        if ($crackers['all']) {
+         if (isset($crackers['all'])) {
           foreach ($crackers['all'] as $script) {
             drupal_add_js($path_to_at_core . '/' . $script,
               array(

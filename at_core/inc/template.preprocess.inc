@@ -85,7 +85,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       foreach ($files as $key => $value) {
         $filepath = drupal_get_path('theme', $theme_name) . '/css/' . $key . '.css';
         $media_query = $value;
-        load_subtheme_responsive_styles($filepath, $media_query, $theme_name);
+        load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 200);
       }
     }
 
@@ -96,7 +96,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     else if (theme_get_setting('production_mode', $theme_name) === 1) {
       $filepath = $path . '/' . $theme_name . '.responsive.styles.css';
       $media_query = 'only screen and (min-width:1px)';
-      load_subtheme_responsive_styles($filepath, $media_query, $theme_name);
+      load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 200);
     }
   }
 
@@ -138,7 +138,7 @@ function adaptivetheme_preprocess_html(&$vars) {
     // Responsiveness is not disabled, load the responsive layout
     $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
     $media_query = 'screen, handheld';
-    load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = -99);
+    load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 100);
 
     // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
     // 1. Responsive capabilities are ON
