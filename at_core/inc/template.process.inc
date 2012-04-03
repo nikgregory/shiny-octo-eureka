@@ -4,6 +4,9 @@
  *
  * If you need to add or modify process functions do it in your sub-theme.
  */
+global $theme_key, $theme_name;
+$theme_name = $theme_key;
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 /**
  * Process variables for html.tpl.php

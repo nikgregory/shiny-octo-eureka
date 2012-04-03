@@ -4,11 +4,11 @@
  */
 
 // Set globals for often used stuff.
-global $theme_name, $path_to_at_core;
+global $theme_key, $theme_name, $path_to_at_core;
 
 // $theme_key is not always what we need, so for consistancy AT uses its own
 // global $theme_name and depending on the context re-populates it as needed.
-$theme_name = $GLOBALS['theme_key'];
+$theme_name = $theme_key;
 
 // Path to AT core.
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');

@@ -1,7 +1,10 @@
 <?php
 // This file exists for backwards compatibility for pre 7.x-3.x themes
-global $path_to_at_core;
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/font.lists.inc');
+global $theme_key, $theme_name;
+$theme_name = $theme_key;
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+
+include_once($path_to_at_core . '/inc/font.lists.inc');
 
 // Backwards compatibility cruft for pre 7.x-3.x subthemes that have google fonts
 // We dont want them to use this but if saves the site blowing up if a user tries...

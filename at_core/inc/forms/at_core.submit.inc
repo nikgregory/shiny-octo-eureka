@@ -1,11 +1,14 @@
 <?php
+global $path_to_at_core;
+$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+
 // Helper functions for processing the page layout and font families
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.builders.inc');
+include_once($path_to_at_core . '/inc/forms/at_core.submit.builders.inc');
 
 // Custom submit function - this mostly builds and saves stylesheets for
 // various features such as the responsive layout and font styles.
 function at_core_settings_submit($form, &$form_state) {
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  global $path_to_at_core;
 
   // Set form_state values into one variable
   $values = $form_state['values'];
