@@ -1,15 +1,13 @@
 <?php
+// Originally this file contained very large multidimensional arrays that drove
+// the various sub-systems, however since I made the layout system pluggable its
+// a bit naked and lost its original purpose, it may be removed and these
+// functions shifted into the plugins.inc file.
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 include_once($path_to_at_core . '/inc/plugins.inc');
-
-// Originally this file contained very large multidimensional arrays that drove
-// the various sub-systems, however since I made the layout system pluggable its
-// a bit naked now, and lost its original purpose, it may be removed and these
-// functions shifted into the plugins.inc file, especially if I make the fonts
-// system and the Polyloader plugabble as well.
 
 // Base config for page layout builder
 function page_layout() {

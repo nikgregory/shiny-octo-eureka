@@ -8,6 +8,7 @@ global $theme_key;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
+
 // Return the info file data for a particular theme, usually the active theme.
 function at_get_info($theme_name) {
   $info = drupal_static(__FUNCTION__, array());
@@ -94,13 +95,15 @@ function at_theme_script($filepath) {
 
 // Return themed scripts in conditional comments
 function at_theme_conditional_scripts($ie_scripts) {
-  $themed_scripts = '';
-  $cc_scripts = array();
+  $themed_scripts = drupal_static(__FUNCTION__, array());
+  if (empty($themed_scripts)) {
+    $cc_scripts = array();
 
-  foreach ($ie_scripts as $conditional_comment => $conditional_scripts) {
-    $cc_scripts[] = '<!--[if ' . $conditional_comment . ']>' . "\n"  . $conditional_scripts . "\n" . '<![endif]-->' . "\n";
+    foreach ($ie_scripts as $conditional_comment => $conditional_scripts) {
+      $cc_scripts[] = '<!--[if ' . $conditional_comment . ']>' . "\n"  . $conditional_scripts . "\n" . '<![endif]-->' . "\n";
+    }
+    $themed_scripts = implode("\n", $cc_scripts);
   }
-  $themed_scripts = implode("\n", $cc_scripts);
 
   return $themed_scripts;
 }
@@ -126,13 +129,9 @@ function at_theme_conditional_scripts($ie_scripts) {
 function polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_at_core;
 
-  $baked_crackers = '';
-
-  if (in_array(1, $polly)) {
-
-    $polly_wants_a_cracker = &drupal_static(__FUNCTION__, array());
-
-    if (empty($polly_wants_a_cracker)) {
+  $baked_crackers = drupal_static(__FUNCTION__, array());
+  if (empty($baked_crackers)) {
+    if (in_array(1, $polly)) {
 
       $crackers = array();
 
@@ -195,45 +194,47 @@ function polly_wants_a_cracker($polly, $theme_name) {
 function load_google_fonts($theme_name) {
   global $path_to_at_core;
 
-  $google_fonts = '';
+  $google_fonts = drupal_static(__FUNCTION__, array());
+  if (empty($google_fonts)) {
 
-  // Include the font lists, we need these for the font names
-  include_once($path_to_at_core . '/inc/font.lists.inc');
+    // Include the font lists, we need these for the font names
+    include_once($path_to_at_core . '/inc/font.lists.inc');
 
-  $used_fonts = array();
-  $font_elements = font_elements();
-  foreach ($font_elements as $key => $value) {
-    $setting = $value['setting'];
-    $element = $value['element'];
-    // Check if any elements are set to use a google font
-    if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
-      // Get the theme setting
-      $setting = theme_get_setting($setting . '_gwf', $theme_name);
-      // strip the element prefix
-      $font = str_replace($element . '-', '', $setting);
-      // replace hyphens with spaces, now we have a lower case font name
-      $used_fonts[] = str_replace('-', ' ', $font);
-    }
-  }
-  if (!empty($used_fonts)) {
-    // Get the full list of font names, Google fonts are case sensitive, and
-    // you cannot just uppercase/ucfirst, font names are not consistant
-    $google_fonts = google_font_names();
-    // Populate a variable with lower cased font names
-    $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
-    // Now key the array with our lower case font names, and set that to a variable
-    $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
-    $used_google_fonts = array();
-    // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
-    foreach ($google_fonts_lower_case_keys as $k => $v) {
-      if (in_array($k, $used_fonts)) {
-        $used_google_fonts[] = $v; // at last, we have the right font name/s
+    $used_fonts = array();
+    $font_elements = font_elements();
+    foreach ($font_elements as $key => $value) {
+      $setting = $value['setting'];
+      $element = $value['element'];
+      // Check if any elements are set to use a google font
+      if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
+        // Get the theme setting
+        $setting = theme_get_setting($setting . '_gwf', $theme_name);
+        // strip the element prefix
+        $font = str_replace($element . '-', '', $setting);
+        // replace hyphens with spaces, now we have a lower case font name
+        $used_fonts[] = str_replace('-', ' ', $font);
       }
     }
-    // The same font can be used multiple times, but we only need to load it once
-    $array = array_unique($used_google_fonts);
-    // Implode the array, seperate font names with a pipe
-    $google_fonts = trim(implode('|', $array));
+    if (!empty($used_fonts)) {
+      // Get the full list of font names, Google fonts are case sensitive, and
+      // you cannot just uppercase/ucfirst, font names are not consistant
+      $google_fonts = google_font_names();
+      // Populate a variable with lower cased font names
+      $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
+      // Now key the array with our lower case font names, and set that to a variable
+      $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
+      $used_google_fonts = array();
+      // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
+      foreach ($google_fonts_lower_case_keys as $k => $v) {
+        if (in_array($k, $used_fonts)) {
+          $used_google_fonts[] = $v; // at last, we have the right font name/s
+        }
+      }
+      // The same font can be used multiple times, but we only need to load it once
+      $array = array_unique($used_google_fonts);
+      // Implode the array, seperate font names with a pipe
+      $google_fonts = trim(implode('|', $array));
+    }
   }
 
   return $google_fonts;
@@ -246,30 +247,32 @@ function load_google_fonts($theme_name) {
  * you have to call it in template_preprocess_html()
  */
 function get_color_scheme_name($theme_name) {
-  $scheme_name = '';
-  if (module_exists('color')) {
-    $info = color_get_info($theme_name);
-    $info['schemes'][''] = array('title' => t('Custom'), 'colors' => array());
-    $schemes = array();
-    foreach ($info['schemes'] as $key => $scheme) {
-      $schemes[$key] = $scheme['colors'];
-    }
-    $current_scheme = variable_get('color_' . $theme_name . '_palette', array());
-    foreach ($schemes as $key => $scheme) {
-      if ($current_scheme == $scheme) {
-        $scheme_name = $key;
-        break;
+  $scheme_name = drupal_static(__FUNCTION__, array());
+  if (empty($scheme_name)) {
+    if (module_exists('color')) {
+      $info = color_get_info($theme_name);
+      $info['schemes'][''] = array('title' => t('Custom'), 'colors' => array());
+      $schemes = array();
+      foreach ($info['schemes'] as $key => $scheme) {
+        $schemes[$key] = $scheme['colors'];
       }
-    }
-    if (empty($scheme_name)) {
-      if (empty($current_scheme)) {
-        $scheme_name = 'default';
+      $current_scheme = variable_get('color_' . $theme_name . '_palette', array());
+      foreach ($schemes as $key => $scheme) {
+        if ($current_scheme == $scheme) {
+          $scheme_name = $key;
+          break;
+        }
       }
-      else {
-        $scheme_name = 'custom';
+      if (empty($scheme_name)) {
+        if (empty($current_scheme)) {
+          $scheme_name = 'default';
+        }
+        else {
+          $scheme_name = 'custom';
+        }
       }
+      return $scheme_name;
     }
-    return $scheme_name;
   }
 }
 

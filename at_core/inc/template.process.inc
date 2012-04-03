@@ -8,32 +8,33 @@ global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
+
 /**
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
   global $theme_name, $path_to_at_core;
 
-  $vars['polyfills'] = '';
-  $ie_scripts = array();
   if (!empty($vars['polyfills_array'])) {
-    foreach ($vars['polyfills_array'] as $ke => $va) {
-      foreach ($va as $k => $v) {
-        $ies[$k][] = implode("\n", $v);
+    $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
+    if (empty($vars['polyfills'])) {
+      $ie_scripts = array();
+      if (!empty($vars['polyfills_array'])) {
+        foreach ($vars['polyfills_array'] as $ke => $va) {
+          foreach ($va as $k => $v) {
+            $ies[$k][] = implode("\n", $v);
+          }
+        }
       }
+      foreach ($ies as $kv => $kvp) {
+        $aus[$kv] = implode("\n", $kvp);
+      }
+      $vars['polyfills'] = at_theme_conditional_scripts($aus);
     }
   }
-  foreach ($ies as $kv => $kvp) {
-    $aus[$kv] = implode("\n", $kvp);
+  else {
+    $vars['polyfills'] = '';
   }
-  $vars['polyfills'] = at_theme_conditional_scripts($aus);
-
-
- // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_subtheme/myscript_lt-ie8.js?m1vpoh"></script>
- // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_core/js/html5.js?m1vpoh"></script>
- // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_core/js/boxsizing.htc?m1vpoh"></script>
-
-
 
   // Load the panels test
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {

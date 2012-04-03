@@ -308,3 +308,10 @@ ul.links li {
   background: #666; /* Debug style, is this working? */
   color: #fff; /* Debug style, is this working? */
 }
+
+
+/* Devel Module */
+.dev-query {
+  background: #eee;
+  padding: 30px;
+}

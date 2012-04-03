@@ -32,8 +32,8 @@
 
   // Gutter width
   $gutters = "/* Gutters are not currently overridden in theme settings, but may be in theme CSS */";
-  if($values['enable_extensions'] === 1) {
-    if ($values['enable_markup_overides'] === 1) {
+  if(isset($values['enable_extensions']) && $values['enable_extensions'] === 1) {
+    if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
       if (isset($values['global_gutter_width'])) {
         $gutter = $values['global_gutter_width'] . 'px';
         $gutters = "/* Gutters */" . "\n" .  "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;}#content .at-panel {margin-left:-$gutter;margin-right:-$gutter;}";

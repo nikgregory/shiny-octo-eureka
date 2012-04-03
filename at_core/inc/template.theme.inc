@@ -8,6 +8,7 @@ global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
+
 /**
  * Implements hook_theme().
  */

@@ -4,6 +4,7 @@ global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
+
 /**
  * Find and return all plugins
  *
@@ -22,47 +23,51 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
  *   the plugin directories are returned.
  */
 function at_get_plugins($theme_name, $getpath = FALSE) {
-  $plugins = array();
-  $lt = list_themes();
 
-  // First check for base themes and get info
-  $base_theme = array();
-  $ancestor = $theme_name;
-  while ($ancestor && isset($lt[$ancestor]->base_theme)) {
-    $ancestor = $lt[$ancestor]->base_theme;
-    $base_theme[] = $lt[$ancestor];
-  }
-  foreach ($base_theme as $base) {
-    $themes_names[$base->name] = $base->name;
-    $themes_info[$base->name] = $base->info;
-  }
+  $plugins = drupal_static(__FUNCTION__, array());
+  if (empty($plugins)) {
+  
+    $lt = list_themes();
 
-  // Now the active theme
-  $themes_names[$theme_name] = $theme_name;
-  $themes_info[$theme_name] = $lt[$theme_name]->info;
+    // First check for base themes and get info
+    $base_theme = array();
+    $ancestor = $theme_name;
+    while ($ancestor && isset($lt[$ancestor]->base_theme)) {
+      $ancestor = $lt[$ancestor]->base_theme;
+      $base_theme[] = $lt[$ancestor];
+    }
+    foreach ($base_theme as $base) {
+      $themes_names[$base->name] = $base->name;
+      $themes_info[$base->name] = $base->info;
+    }
 
-  // Look for and get all the plugins
-  if (!empty($themes_info)) {
-    foreach ($themes_info as $this_theme => $info) {
-      if (array_key_exists('plugins', $info)) {
-        foreach ($info['plugins'] as $plugin_type => $types) {
-          $plugins_list[$this_theme][$plugin_type] = $types;
+    // Now the active theme
+    $themes_names[$theme_name] = $theme_name;
+    $themes_info[$theme_name] = $lt[$theme_name]->info;
+
+    // Look for and get all the plugins
+    if (!empty($themes_info)) {
+      foreach ($themes_info as $this_theme => $info) {
+        if (array_key_exists('plugins', $info)) {
+          foreach ($info['plugins'] as $plugin_type => $types) {
+            $plugins_list[$this_theme][$plugin_type] = $types;
+          }
         }
       }
-    }
-    $extension = 'inc';
-    array_unique($plugins_list);
-    foreach ($plugins_list as $plugin_provider => $provider) {
-      foreach ($provider as $plugin_type => $types) {
-        foreach ($types as $type => $path) {
-          $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
-          // Provide a way to skip out early with just the paths
-          if ($getpath == TRUE) {
-            $plugins[$plugin_provider][$plugin_type][$type] = $provider_path;
-          }
-          // Get all the plugin data
-          else {
-            $plugins[$plugin_provider][$plugin_type][$type] = file_scan_directory($provider_path, '/\.' . $extension . '$/', array('key' => 'name'));
+      $extension = 'inc';
+      array_unique($plugins_list);
+      foreach ($plugins_list as $plugin_provider => $provider) {
+        foreach ($provider as $plugin_type => $types) {
+          foreach ($types as $type => $path) {
+            $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
+            // Provide a way to skip out early with just the paths
+            if ($getpath == TRUE) {
+              $plugins[$plugin_provider][$plugin_type][$type] = $provider_path;
+            }
+            // Get all the plugin data
+            else {
+              $plugins[$plugin_provider][$plugin_type][$type] = file_scan_directory($provider_path, '/\.' . $extension . '$/', array('key' => 'name'));
+            }
           }
         }
       }

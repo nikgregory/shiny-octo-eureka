@@ -5,7 +5,8 @@
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
- 
+
+
 // hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {
   global $theme_name, $path_to_at_core;
