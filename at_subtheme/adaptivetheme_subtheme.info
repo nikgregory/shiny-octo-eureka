@@ -15,23 +15,39 @@
   ; Globals CSS, loads all global.[type].css files in /css/
   stylesheets[screen, handheld][] = css/globals.css
 
-  
+
   ; Print
   ; Uncomment to load basic print styles.
   ; stylesheets[print][] = css/print.css
 
-  
+
   ; Internet Explorer Stylesheets
-  ; AT can load IE stylesheets from the info file.
+  ;
+  ; AT can load stylesheets in conditional comments from the info file.
   ;
   ; Syntax: ie_stylesheets[media][condition] = path/to/file (path must be relative to your theme root)
-  ; 
+  ;
   ; For example if you want to load a stylesheet just for IE7 use the following (note: you need to create "ie7.css" in the /css/ directory):
   ; ie_stylesheets[screen][IE 7] = css/ie7.css
   ;
   ; By default the sub-theme has one IE stylesheet which loads for "less than IE9" but "not IEMobile 7".
   ; Uncomment the following to use the included IE styleseet:
+
   ; ie_stylesheets[screen][(lt IE 9)&(!IEMobile 7)] = css/lt-ie9.css
+
+  
+;----------// Scripts
+
+  ; Internet Explorer Scripts
+  ;
+  ; AT can load scripts in conditional comments from the info file. If you are planning to use a polyfill be sure to check
+  ; the "Settings" tab in theme settings - this includes checkboxes to enable the HTML5 Shiv (on by default), Respond.js and
+  ; boxsizing.htc. See the js folder in at_core to view these scripts.
+  ;
+  ; Syntax: ie_scripts[condition] = path/to/file (path must be relative to your theme root)
+  ;
+  ; For example if you want to load a script just for IE 8 and below use the following as a guide:
+  ; ie_scripts[lte IE 8] = js/my-script.js
 
 
 ;----------// Regions
@@ -317,7 +333,7 @@
   settings[page_full_width_wrappers] = 0
   settings[menu_item_span_elements]  = 0
 
-  
+
   ; Extra CSS classes
   settings[extra_page_classes]      = 1
   settings[extra_article_classes]   = 1
@@ -325,14 +341,14 @@
   settings[extra_block_classes]     = 1
   settings[extra_menu_classes]      = 1
   settings[extra_item_list_classes] = 1
-  
-  
+
+
   ; Remove or Hide
   settings[comments_hide_title]           = 0
   settings[feed_icons]                    = 0
   settings[unset_block_system_main_front] = 0
-  
-  
+
+
   ; Skip link
   settings[skip_link_target] = '#main-content'
 

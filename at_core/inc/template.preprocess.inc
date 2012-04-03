@@ -15,6 +15,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Set a variable for the base path
   $vars['base_path'] = base_path();
 
+  // Get the info file data
+  $info = at_get_info($theme_name);
+
   // DOCTYPE
   // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
   // compatibility with pre 7.x-2.1 versions of html.tpl.php
@@ -160,41 +163,71 @@ function adaptivetheme_preprocess_html(&$vars) {
       $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
       $ie_style['media'] = 'screen';
       $ie_style['condition'] = 'lt IE 8';
-      load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
+      load_subtheme_conditional_styles($filepath, $ie_style);
+    }
+  }
+
+  // General IE stylesheets from the info file
+  if (array_key_exists('ie_stylesheets', $info)) {
+    foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
+      foreach ($stylesheets as $condition => $path) {
+        $ie_style['media'] = $media;
+        $ie_style['condition'] = $condition;
+        $ie_style['path'] = $path;
+      }
+      $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
+      // this will not return anything, load_subtheme_conditional_styles() will do the loading for us
+      load_subtheme_conditional_styles($filepath, $ie_style);
+    }
+  }
+
+  // Build an array of polyfilling scripts
+  $vars['polyfills_array'] = array();
+
+  // Info file loaded conditional scripts
+  $theme_path = drupal_get_path('theme', $theme_name);
+  if (array_key_exists('ie_scripts', $info)) {
+    foreach ($info['ie_scripts'] as $condition => $path) {
+      foreach ($path as $key => $value) {
+        $filepath = $theme_path . '/' . $value;
+        $vars['polyfills_array']['info'][$condition][] = at_theme_script($filepath);
+      }
     }
   }
 
   // Polyfills
-  // Build an array of scripts to load.
-  // You can easily add to this array in your own preprocess function and use the
-  // array keys provided, or add your own. By default AT will load for "lt ie9",
-  // "lt ie8" and "all". If you add your own keys you have to process them as well,
-  // there is no generic loader, see below.
-  $vars['polyfills'] = '';
   $polly_settings_array = array(
     'load_respondjs',
     'load_html5js',
     'load_boxsizinghtc',
-    'load_scalefixjs',
+    'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
   );
   foreach ($polly_settings_array as $polly_setting) {
     $polly[$polly_setting] = theme_get_setting($polly_setting, $theme_name);
   }
-  $vars['polyfills'] = polly_wants_a_cracker($polly, $theme_name);
+  $backed_crackers = polly_wants_a_cracker($polly, $theme_name);
+  foreach ($backed_crackers as $cupboard => $flavors) {
+    foreach ($flavors as $key => $value) {
+      $filepath = $path_to_at_core . '/' . $value;
+      $vars['polyfills_array']['at_core'][$cupboard][] = at_theme_script($filepath);
+    }
+  }
 
   // Load fonts
   if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
 
     // Google fonts
     $google_fonts = load_google_fonts($theme_name);
-    // No protocol, we need to support https also
-    drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
-      'group' => CSS_THEME,
-      'type' => 'external',
-      'weight' => -100,
-      'preprocess' => FALSE,
-      )
-    );
+    if (!empty($google_fonts)) {
+      // No protocol, we need to support https also
+      drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
+        'group' => CSS_THEME,
+        'type' => 'external',
+        'weight' => -100,
+        'preprocess' => FALSE,
+        )
+      );
+    }
 
     // Load the Websafe and custom fonts CSS from public files
     $filepath = $path . '/' . $theme_name . '.fonts.css';
@@ -349,6 +382,12 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
 
   } // end extensions
+
+  // Do some legacy stuff for 7.x-2.x themes that have google webfonts running on the old system
+  // Scan for the existence of a "release" key and conditionally load google.web.fonts.inc
+  if (!array_key_exists('release', $info) || ($info['release'] == '7.x-2.x')) {
+    include_once($path_to_at_core . '/inc/google.web.fonts.inc');
+  }
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region

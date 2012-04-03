@@ -11,8 +11,27 @@
 function adaptivetheme_process_html(&$vars) {
   global $theme_name, $path_to_at_core;
 
-  //dsm($vars);
-  
+  $vars['polyfills'] = '';
+  $ie_scripts = array();
+  if (!empty($vars['polyfills_array'])) {
+    foreach ($vars['polyfills_array'] as $ke => $va) {
+      foreach ($va as $k => $v) {
+        $ies[$k][] = implode("\n", $v);
+      }
+    }
+  }
+  foreach ($ies as $kv => $kvp) {
+    $aus[$kv] = implode("\n", $kvp);
+  }
+  $vars['polyfills'] = at_theme_conditional_scripts($aus);
+
+
+ // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_subtheme/myscript_lt-ie8.js?m1vpoh"></script>
+ // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_core/js/html5.js?m1vpoh"></script>
+ // <script src="http://127.0.0.1:8080/at7.3_dev/sites/all/themes/adaptivetheme/at_core/js/boxsizing.htc?m1vpoh"></script>
+
+
+
   // Load the panels test
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {
@@ -51,10 +70,10 @@ function adaptivetheme_process_page(&$vars) {
   if (!empty($vars['secondary_navigation'])) {
     $vars['secondary_navigation'] = theme('menubar', array('menu' => $vars['secondary_navigation'], 'type' => 'secondary'));
   }
-  
+
   // Generate the wrapper element for the main content
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
-  
+
   // Force full width wrapper template suggestion if enabled
   if (theme_get_setting('page_full_width_wrappers', $theme_name) === 1) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');

@@ -50,7 +50,7 @@ function responsive_page_layouts_data_structure($variable = NULL) {
       }
     }
   }
-  //dsm($page_data_structure);
+
   return $page_data_structure;
 }
 
@@ -76,7 +76,7 @@ function responsive_panels_data_structure() {
   return $panels_data_structure;
 }
 
-// return all the admin css files for a plugin type, this is used primarly
+// Return all the admin css files for a plugin type, this is used primarly
 // to theme the icons for each layout method. The icons are in sprites.
 function responsive_plugins_admin_css($theme_name, $plugin_type) {
   $admin_css_files = array();

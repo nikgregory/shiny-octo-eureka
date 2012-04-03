@@ -5,32 +5,19 @@
  * Provides frequently used functions etc that don't fit logically anywhere else.
  */
 
-// AT leverages custom info file data, if it exists, to load various files and perform certain operations.
-$lt = list_themes();
-
-foreach ($lt as $key => $value) {
-  if ($theme_name == $key) {
-    $info = $lt[$theme_name]->info;
-
-    // Scan for the existence of a "release" key and conditionally load google.web.fonts.inc
-    if (!array_key_exists('release', $info) || ($info['release'] == '7.x-2.x')) {
-      include_once($path_to_at_core . '/inc/google.web.fonts.inc');
-    }
-
-    // TODO - abstract to preprocess_html
-    // Scan for an "ie_stylesheets" key, and if it exists load the IE stylesheets
-    if (array_key_exists('ie_stylesheets', $info)) {
-      foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
-        foreach ($stylesheets as $condition => $path) {
-          $ie_style['media'] = $media;
-          $ie_style['condition'] = $condition;
-          $ie_style['path'] = $path;
-        }
-        $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-        load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
+// Return the info file data for a particular theme, usually the active theme.
+function at_get_info($theme_name) {
+  $info = drupal_static(__FUNCTION__, array());
+  if (empty($info)) {
+    $lt = list_themes();
+    foreach ($lt as $key => $value) {
+      if ($theme_name == $key) {
+        $info = $lt[$theme_name]->info;
       }
     }
   }
+
+  return $info;
 }
 
 /**
@@ -61,12 +48,12 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
 /**
  * Load sub-theme IE stylesheets
  *
- * load_subtheme_conditional_styles() takes 2 parameters:
+ * load_subtheme_conditional_styles() takes 3 parameters:
+ * - $filepath - path to the file
  * - $ie_style - an arry containing the media attribute value and the IE conditional
- * - $theme_name - to generate the path-to-theme for drupal_add_css().
  * - optional $weight parameter
  */
-function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0) {
+function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'group' => CSS_THEME,
@@ -83,6 +70,38 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
 }
 
 /**
+ * Return a themed script
+ *
+ * at_theme_script() takes 1 parameter:
+ * - $filepath - path to the file
+ */
+function at_theme_script($filepath) {
+  $script = '';
+
+  // We need the default query string for cache control finger printing
+  $query_string = variable_get('css_js_query_string', '0');
+  if (file_exists($filepath)) {
+    $file = file_create_url($filepath);
+    $script = '<script src="' . $file . '?' . $query_string . '"></script>';
+  }
+
+  return $script;
+}
+
+// Return themed scripts in conditional comments
+function at_theme_conditional_scripts($ie_scripts) {
+  $themed_scripts = '';
+  $cc_scripts = array();
+
+  foreach ($ie_scripts as $conditional_comment => $conditional_scripts) {
+    $cc_scripts[] = '<!--[if ' . $conditional_comment . ']>' . "\n"  . $conditional_scripts . "\n" . '<![endif]-->' . "\n";
+  }
+  $themed_scripts = implode("\n", $cc_scripts);
+
+  return $themed_scripts;
+}
+
+/**
  * Polyfills
  * Build an array of scripts to load.
  * You can easily add to this array in your own preprocess function and use the
@@ -90,7 +109,7 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
  * "lt ie8" and "all". If you add your own keys you have to process them as well,
  * there is no generic loader. As you can see this is all very hard coded, but
  * could be made into a generic loader, and probably should be. Patches welcome!
- * 
+ *
  * TODO: make this use the plugins sytem and the info file for loading scripts: Issue http://drupal.org/node/1511424
  * Notes for the todo:
  *  - there are two types of polyfills - scripts and CSS
@@ -103,40 +122,43 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
 function polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_at_core;
 
-  $vars['polyfills'] = '';
+  $baked_crackers = '';
 
   if (in_array(1, $polly)) {
+
     $polly_wants_a_cracker = &drupal_static(__FUNCTION__, array());
+
     if (empty($polly_wants_a_cracker)) {
-      $vars['polyfills_array'] = array();
+
+      $crackers = array();
+
       // Respond.js
       if ($polly['load_respondjs'] === 1 && theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-        $vars['polyfills_array']['lt_ie9'][] = $path_to_at_core . '/js/respond.js';
+        $crackers['ie']['lt IE 9'][] = 'js/respond.js';
       }
       // HTML5 Shiv
       if ($polly['load_html5js'] === 1) {
-        $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/html5.js';
+        $crackers['ie']['lt IE 8'][] = 'js/html5.js';
       }
       // Boxsizing.htc
       if ($polly['load_boxsizinghtc'] === 1) {
-        $vars['polyfills_array']['lt_ie8'][] = $path_to_at_core . '/js/boxsizing.htc';
+        $crackers['ie']['lt IE 8'][] = 'js/boxsizing.htc';
       }
       // Scalefix.js
       if ($polly['load_scalefixjs'] === 1) {
-        $vars['polyfills_array']['all'][] = $path_to_at_core . '/js/scalefix.js';
+        $crackers['all'][] = 'js/scalefix.js';
       }
-      // More? Patches and feature request welcome!
 
       // Load Polyfills
-      if (!empty($vars['polyfills_array'])) {
+      if (!empty($crackers)) {
 
         // We need the default query string for cache control finger printing
         $query_string = variable_get('css_js_query_string', '0');
 
         // "all" - no conditional comment needed, use drupal_add_js()
-        if (!empty($vars['polyfills_array']['all'])) {
-          foreach ($vars['polyfills_array']['all'] as $script) {
-            drupal_add_js($script,
+        if ($crackers['all']) {
+          foreach ($crackers['all'] as $script) {
+            drupal_add_js($path_to_at_core . '/' . $script,
               array(
                 'type' => 'file',
                 'scope' => 'header',
@@ -147,33 +169,14 @@ function polly_wants_a_cracker($polly, $theme_name) {
             );
           }
         }
-        // "lt ie9" - need to build our own "scripts" variable ($vars['polyfills'])
-        // wrapping the scripts in a conditional comments
-        if (!empty($vars['polyfills_array']['lt_ie9'])) {
-          foreach ($vars['polyfills_array']['lt_ie9'] as $ie9_polyfill) {
-            $script = file_create_url($ie9_polyfill);
-            $ie9_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-          }
-          $ie9_fills = implode("\n", $ie9_fills);
-          $vars['polyfills'][] = '<!--[if lt IE 9]>' . "\n"  . $ie9_fills . "\n" . '<![endif]-->' . "\n";
+        if ($crackers['ie']) {
+          $baked_crackers = $crackers['ie'];
         }
-        // "lt ie8" - same as for "lt ie9", add to the $vars['polyfills'] array
-        if (!empty($vars['polyfills_array']['lt_ie8'])) {
-          foreach ($vars['polyfills_array']['lt_ie8'] as $ie8_polyfill) {
-            $script = file_create_url($ie8_polyfill);
-            $ie8_fills[] = '<script src="' . $script . '?' . $query_string . '"></script>';
-          }
-          $ie8_fills = implode("\n", $ie8_fills);
-          $vars['polyfills'][] = '<!--[if lt IE 8]>' . "\n"  . $ie8_fills . "\n" . '<![endif]-->' . "\n";
-        }
-        // Give polly a cracker
-        $polly_wants_a_cracker = implode("\n", $vars['polyfills']);
       }
     }
-
-    $vars['polyfills'] = $polly_wants_a_cracker;
   }
-  return $vars['polyfills'];
+
+  return $baked_crackers;
 }
 
 /**
@@ -228,7 +231,7 @@ function load_google_fonts($theme_name) {
     // Implode the array, seperate font names with a pipe
     $google_fonts = trim(implode('|', $array));
   }
-  
+
   return $google_fonts;
 }
 
