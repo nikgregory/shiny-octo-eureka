@@ -12,6 +12,11 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 /**
  * Implements hook_theme()
  *
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ *
  * @see http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_theme/7
  */
 function adaptivetheme_theme($existing, $type, $theme, $path) {
