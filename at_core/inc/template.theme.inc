@@ -1,6 +1,6 @@
 <?php
 /**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
+ * Theme functions and overrides.
  *
  * If you need to add or modify theme functions do it in your sub-theme.
  */
@@ -10,7 +10,9 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 
 /**
- * Implements hook_theme().
+ * Implements hook_theme()
+ *
+ * @see http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_theme/7
  */
 function adaptivetheme_theme($existing, $type, $theme, $path) {
   return array(
@@ -21,17 +23,17 @@ function adaptivetheme_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Adativetheme implementation to display a menubar.
+ * Returns HTML for a menubar.
  *
- * The contents is normally one of Drupals magic menu variables, 
- * such as the Main menu or User menu (secondary menu), but could
- * be any menu you wish to wrap in navigation menu type markup
- * and classes.
+ * The contents is normally one of Drupals magic menu variables, such as the
+ * Main menu or User menu (secondary menu), but could be any menu you wish to
+ * wrap in navigation menu type markup and classes.
  *
- * Available variables:
- * - $menubar_id: CSS id for theming the menubar
- * - $menu: Holds the themed menu (normally using theme_links())
- * - the usual $classes, $attributes, $content attributes etc
+ * @param $vars
+ * An array containing:
+ *  - $menubar_id: CSS id for theming the menubar
+ *  - $menu: Holds the themed menu (normally using theme_links())
+ *  - the usual $classes, $attributes, $content attributes etc
  *
  * @see adaptivetheme_preprocess_menubar()
  * @see adaptivetheme_process_menubar()
@@ -49,6 +51,14 @@ function adaptivetheme_menubar($vars) {
 
 /**
  * Returns HTML for a breadcrumb trail.
+ *
+ * Adaptivetheme impliments breadcrumb trails as an ordered list, wrapping each
+ * crumb in li elements and the seperators in span elements to make life easier
+ * for themers.
+ *
+ * @param $vars
+ *   An associative array containing:
+ *   - breadcrumb: An array containing the breadcrumb links.
  */
 function adaptivetheme_breadcrumb($vars) {
   global $theme_name;
@@ -92,6 +102,17 @@ function adaptivetheme_breadcrumb($vars) {
 
 /**
  * Returns HTML for status and/or error messages, grouped by type.
+ *
+ * Adaptivetheme adds a div wrapper with CSS id.
+ *
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See http://www.w3.org/TR/WCAG-TECHS/H69.html
+ * for info.
+ *
+ * @param $vars
+ *   An associative array containing:
+ *   - display: (optional) Set to 'status' or 'error' to display only messages
+ *     of that type.
  */
 function adaptivetheme_status_messages($vars) {
   $display = $vars['display'];
@@ -122,9 +143,23 @@ function adaptivetheme_status_messages($vars) {
   return $output;
 }
 
-
 /**
  * Returns HTML for a list or nested list of items.
+ *
+ * Adaptivetheme overrides this in order to insert extra classes into list
+ * items, including first, last and odd/even zebra classes.
+ *
+ * @param $vars
+ *   An associative array containing:
+ *   - items: An array of items to be displayed in the list. If an item is a
+ *     string, then it is used as is. If an item is an array, then the "data"
+ *     element of the array is used as the contents of the list item. If an item
+ *     is an array with a "children" element, those children are displayed in a
+ *     nested list. All other elements are treated as attributes of the list
+ *     item element.
+ *   - title: The title of the list.
+ *   - type: The type of list to return (e.g. "ul", "ol").
+ *   - attributes: The attributes applied to the list element.
  */
 function adaptivetheme_item_list($vars) {
   global $theme_name;
@@ -189,14 +224,34 @@ function adaptivetheme_item_list($vars) {
   return $output;
 }
 
+// Dont run this if the DHTML module is running, it borks its output!
 if (!function_exists('dhtml_menu_init')) {
 
-  // theme_menu_tree
+  /**
+   * Returns HTML for a wrapper for a menu sub-tree.
+   *
+   * Adaptivetheme overrides this to insert the clearfix class.
+   *
+   * @param $vars
+   *   An associative array containing:
+   *   - tree: An HTML string containing the tree's items.
+   *
+   * @see template_preprocess_menu_tree()
+   */
   function adaptivetheme_menu_tree($vars) {
     return '<ul class="menu clearfix">' . $vars['tree'] . '</ul>';
   }
 
-  // theme_menu_link
+  /**
+   * Returns HTML for a menu link and submenu.
+   *
+   * Adaptivetheme overrides this to insert extra classes including a depth
+   * class and a menu id class. It can also wrap menu items in span elements.
+   *
+   * @param $vars
+   *   An associative array containing:
+   *   - element: Structured array data for a menu link.
+   */
   function adaptivetheme_menu_link(array $vars) {
     global $theme_name;
 
@@ -227,7 +282,45 @@ if (!function_exists('dhtml_menu_init')) {
 
 }
 
-// theme links
+/**
+ * Returns HTML for a set of links.
+ *
+ * Adaptivetheme overides this function in order to insert additional classes
+ * into link items. It can also wrap link items in span elements (wrapped around
+ * the actual link text inside the anchor element).
+ *
+ * @param $vars
+ *   An associative array containing:
+ *   - links: An associative array of links to be themed. The key for each link
+ *     is used as its CSS class. Each link should be itself an array, with the
+ *     following elements:
+ *     - title: The link text.
+ *     - href: The link URL. If omitted, the 'title' is shown as a plain text
+ *       item in the links list.
+ *     - html: (optional) Whether or not 'title' is HTML. If set, the title
+ *       will not be passed through check_plain().
+ *     - attributes: (optional) Attributes for the anchor, or for the <span> tag
+ *       used in its place if no 'href' is supplied. If element 'class' is
+ *       included, it must be an array of one or more class names.
+ *     If the 'href' element is supplied, the entire link array is passed to l()
+ *     as its $options parameter.
+ *   - attributes: A keyed array of attributes for the UL containing the
+ *     list of links.
+ *   - heading: (optional) A heading to precede the links. May be an associative
+ *     array or a string. If it's an array, it can have the following elements:
+ *     - text: The heading text.
+ *     - level: The heading level (e.g. 'h2', 'h3').
+ *     - class: (optional) An array of the CSS classes for the heading.
+ *     When using a string it will be used as the text of the heading and the
+ *     level will default to 'h2'. Headings should be used on navigation menus
+ *     and any list of links that consistently appears on multiple pages. To
+ *     make the heading invisible use the 'element-invisible' CSS class. Do not
+ *     use 'display:none', which removes it from screen-readers and assistive
+ *     technology. Headings allow screen-reader and keyboard only users to
+ *     navigate to or skip the links. See
+ *     http://juicystudio.com/article/screen-readers-display-none.php and
+ *     http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
+ */
 function adaptivetheme_links($vars) {
   global $language_url, $theme_name;
 
@@ -304,10 +397,67 @@ function adaptivetheme_links($vars) {
 }
 
 /**
- * Modify the output of theme_field to use H2 for field lables.
- * There is a mirror image of this code as a template file in the
- * templates directory, see field.tpl.php.txt (example file to use
- * for template suggestions).
+ * Returns HTML for a field.
+ *
+ * Adaptivetheme overrides this in order to better support HTML5 by setting the
+ * wrapper as section or div element depending on whether a title is used or not.
+ * Fields have no title, instead it treats the field lable as if it were a title
+ * and wraps it in h2 elements.
+ *
+ * This is the default theme implementation to display the value of a field.
+ * Theme developers who are comfortable with overriding theme functions may do
+ * so in order to customize this markup. This function can be overridden with
+ * varying levels of specificity. For example, for a field named 'body'
+ * displayed on the 'article' content type, any of the following functions will
+ * override this default implementation. The first of these functions that
+ * exists is used:
+ * - THEMENAME_field__body__article()
+ * - THEMENAME_field__article()
+ * - THEMENAME_field__body()
+ * - THEMENAME_field()
+ *
+ * Theme developers who prefer to customize templates instead of overriding
+ * functions may copy the "field.tpl.php" from the "modules/field/theme" folder
+ * of the Drupal installation to somewhere within the theme's folder and
+ * customize it, just like customizing other Drupal templates such as
+ * page.tpl.php or node.tpl.php. However, it takes longer for the server to
+ * process templates than to call a function, so for websites with many fields
+ * displayed on a page, this can result in a noticeable slowdown of the website.
+ * For these websites, developers are discouraged from placing a field.tpl.php
+ * file into the theme's folder, but may customize templates for specific
+ * fields. For example, for a field named 'body' displayed on the 'article'
+ * content type, any of the following templates will override this default
+ * implementation. The first of these templates that exists is used:
+ * - field--body--article.tpl.php
+ * - field--article.tpl.php
+ * - field--body.tpl.php
+ * - field.tpl.php
+ * So, if the body field on the article content type needs customization, a
+ * field--body--article.tpl.php file can be added within the theme's folder.
+ * Because it's a template, it will result in slightly more time needed to
+ * display that field, but it will not impact other fields, and therefore,
+ * is unlikely to cause a noticeable change in website performance. A very rough
+ * guideline is that if a page is being displayed with more than 100 fields and
+ * they are all themed with a template instead of a function, it can add up to
+ * 5% to the time it takes to display that page. This is a guideline only and
+ * the exact performance impact depends on the server configuration and the
+ * details of the website.
+ *
+ * @param $vars
+ *   An associative array containing:
+ *   - label_hidden: A boolean indicating to show or hide the field label.
+ *   - title_attributes: A string containing the attributes for the title.
+ *   - label: The label for the field.
+ *   - content_attributes: A string containing the attributes for the content's
+ *     div.
+ *   - items: An array of field items.
+ *   - item_attributes: An array of attributes for each item.
+ *   - classes: A string containing the classes for the wrapping div.
+ *   - attributes: A string containing the attributes for the wrapping div.
+ *
+ * @see template_preprocess_field()
+ * @see template_process_field()
+ * @see field.tpl.php
  */
 function adaptivetheme_field($vars) {
   $output = '';
@@ -332,8 +482,11 @@ function adaptivetheme_field($vars) {
   return $output;
 }
 
-// Taxonomy Fields
-// Output taxonomy term fields as unordered lists.
+/**
+ * Returns HTML for a taxonomy field.
+ *
+ * Output taxonomy term fields as unordered lists.
+ */
 function adaptivetheme_field__taxonomy_term_reference($vars) {
   $output = '';
 
@@ -357,8 +510,11 @@ function adaptivetheme_field__taxonomy_term_reference($vars) {
   return $output;
 }
 
-// Image Fields
-// Output image fields as figure with figcaption for captioning.
+/**
+ * Returns HTML for an image field.
+ *
+ * Output image fields as figure with figcaption for captioning.
+ */
 function adaptivetheme_field__image($vars) {
   global $theme_name;
 
