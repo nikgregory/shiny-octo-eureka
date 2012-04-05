@@ -1,9 +1,6 @@
 <?php
 /**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- */
-
- /**
+ * Font Elements Config Array.
  * The fonts array is used by the fonts sub-system to generate forms,
  * build stylesheets and load font styles.
  */
@@ -150,7 +147,12 @@ function font_elements() {
   return $elements_array;
 }
 
- // Return lists of font names keyed by element
+/**
+ * Return lists of font names keyed by element.
+ *
+ * @param $type
+ * @param $element
+ */
 function font_list($type, $element) {
   $font_list = array();
 
@@ -170,8 +172,13 @@ function font_list($type, $element) {
   return array_unique($font_list);
 }
 
-// Websafe fonts list. These stacks are my own and I spent years working with these, testing and checking
-// platform and browser support. The work very well accross platform.
+/**
+ * Websafe fonts list. These stacks are my own and I spent years working with
+ * these, testing and checking platform and browser support. The work very well
+ * accross platform.
+ *
+ * @param $element
+ */
 function websafe_fonts_list($element) {
   $fonts = &drupal_static(__FUNCTION__, array());
   $fonts = array(
@@ -191,11 +198,13 @@ function websafe_fonts_list($element) {
 }
 
 /**
- * @font-your-face
- * This requires the @font-your-face module to be enabled
- * and at least one font enabled and set to "add selector in theme CSS".
- * Adaptivetheme will pull the enabled fonts and allow them to be used
- * for styling elements in the site via theme settings.
+ * @font-your-face.
+ * This requires the @font-your-face module to be enabled and at least one font
+ * enabled and set to "add selector in theme CSS". Adaptivetheme will pull the
+ * enabled fonts and allow them to be used for styling elements in the site via
+ * each sub-themes appearance settings.
+ *
+ * @pararm $element
  */
 function font_your_face_fonts_list($element) {
   $fonts = array();
@@ -213,7 +222,11 @@ function font_your_face_fonts_list($element) {
   return $fonts;
 }
 
-// Build an array of Google web fonts
+/**
+ * Build an array of Google web fonts.
+ *
+ * @pararm $element
+ */
 function google_fonts_list($element) {
   $google_fonts = google_font_names();
   $fonts = array();
@@ -226,17 +239,17 @@ function google_fonts_list($element) {
 }
 
 /**
- * Basic Google Fonts
- * Google add new fonts on a regular basis and we will provide patches and updates
- * for this file periodically. For a more up to date approach use the @font-your-face 
- * module, especially if you need Greek, Cryillic or other variants.
- * Last update: 27/02/2012
+ * Basic Google Fonts.
+ * Google add new fonts on a regular basis and we will provide patches and
+ * updates for this file periodically. For a more up to date approach use the
+ * @font-your-face module, especially if you need Greek, Cryillic or other
+ * variants. Last update: 27/02/2012
  */
 function google_font_names() {
 
   $google_font_names_array = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_names_array)) {
-  
+
     // try to get the list from the cache table
     if ($cache = cache_get('at_google_font_names')) {
       $google_font_names_array = $cache->data;
@@ -722,17 +735,21 @@ function google_font_names() {
         'Yesteryear',
         'Zeyada',
       );
-     // agressively cache this mofo...
+     // Cache this to the cache table
      cache_set('at_google_font_names', $google_font_names_array, 'cache');
     }
   }
   return $google_font_names_array;
 }
 
-// Font size lists, hard coded for total control, used in forms.
-// While these values don't give super granular control over font
-// scales they are "good enough" for most users and provide a
-// useable tool that is easy to understand.
+/**
+ * Font size lists, hard coded for total control, used in forms.
+ * While these values don't give super granular control over font scales they
+ * are "good enough" for most users and provide a  useable tool that is easy to
+ * understand.
+ *
+ * @param $type
+ */
 function font_sizes($type) {
   $font_sizes = &drupal_static(__FUNCTION__, array());
   switch ($type) {
@@ -828,8 +845,13 @@ function font_sizes($type) {
   return $font_sizes;
 }
 
-// Return a list of line-heights.
-// Could add more types later (with value units)
+/**
+ * Return a list of line-heights.
+ * Note this is not used by the core theme but could be used by a sub-theme
+ * wanting to provide this feature.
+ *
+ * @param $type
+ */
 function line_heights($type) {
   $line_heights = &drupal_static(__FUNCTION__, array());
   switch ($type) {
@@ -894,7 +916,12 @@ function line_heights($type) {
   return $line_heights;
 }
 
-// Make some reusable lists of style options
+/**
+ * Reusable style options.
+ *
+ * @param $style
+ * @param $element
+ */
 function font_style_options($style, $element) {
   $options = &drupal_static(__FUNCTION__, array());
   switch ($style) {

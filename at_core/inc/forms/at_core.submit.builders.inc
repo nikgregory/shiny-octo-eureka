@@ -5,28 +5,60 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 include_once($path_to_at_core . '/inc/plugins.inc');
 
-// Page Layout Builder
-// As calls come in from the submit function they are dispatched to the right builder
+/**
+ * Page Layout CSS Builder.
+ * Unlike the Panels layouts which hold CSS in their data array the Page layout
+ * plugins each include a unique CSS builder function. This is required because
+ * page layouts are all bespoke and can accept arbitrary user input for the
+ * sidebar widths and must support three value units - pixles, em's and
+ * percentages.  In other words building a one-size-fits-all builder function
+ * would be overly complex and its far more flexible for themers to be able to
+ * define thier own.
+ *
+ * As values come in from the submit function they are dispatched to the right
+ * builder function.
+ *
+ * @param $method, tells the function which layout builder function to call.
+ * @param $sidebar_first, an arbitrary numeric value.
+ * @param $sidebar_second, an arbitrary numeric value.
+ * @param $sidebar_unit, one of px, em or %.
+ *
+ * @see three_col_grail_layout() for an example of a builder function with docs.
+ */
 function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar_unit) {
   global $theme_name;
   $output = '';
-  
-  // We need to invoke at_load_plugins() to get all the function for the methods
+
+  // We need to invoke at_load_plugins() to get the function names, this is
+  // rather expensive but we're in a submit function so IMO this is OK.
   at_load_plugins($theme_name, $plugin_type = 'page_layout');
-  
+
   $builder_functions = responsive_page_layouts_data_structure();
 
   foreach ($builder_functions as $function_prefix => $redundant_values) {
     if ($method === $function_prefix) {
       $function = $function_prefix . '_layout';
-      $output = $function($sidebar_first, $sidebar_second, $sidebar_unit);  
+      $output = $function($sidebar_first, $sidebar_second, $sidebar_unit);
     }
   }
 
   return $output;
 }
 
-// Panels CSS Builder, programatically builds and optimizes CSS
+/**
+ * Panels CSS Builder, programatically builds and optimizes CSS.
+ * Adaptivetheme panels layout plugins do not have CSS files, instead the CSS is
+ * held in the data structure inside the actual plugin inc file. This data is
+ * extracted, compared and output as highly optimized CSS with no repetition of
+ * style declarations. The output is embedded within media queries (or not,
+ * depending on theme settings) and printed to file.
+ *
+ * @param $panel_styles
+ * @param $device_panels_data
+ *
+ * @see adaptivetheme_five_5x20_panels_layouts() for an example of the CSS in
+ * the data array with good docs and guidelines.
+ */
 function at_build_panels_layout_css($panel_styles, $device_panels_data) {
   $output = '';
 
@@ -40,7 +72,7 @@ function at_build_panels_layout_css($panel_styles, $device_panels_data) {
               $declarations[$declaration_type] = array($declaration_type => $declaration);
             }
           }
-        }  
+        }
       }
     }
   }
@@ -51,17 +83,23 @@ function at_build_panels_layout_css($panel_styles, $device_panels_data) {
   }
   foreach ($these_groups as $css_styles => $selector_array) {
     $merged_css = $css_styles;
-    $these_selectors_styles[] = implode(',',$selector_array) . ' {' . $merged_css . '}';
+    $these_selectors_styles[] = implode(',', $selector_array) . ' {' . $merged_css . '}';
   }
 
   $output = implode('', $these_selectors_styles);
   return $output;
 }
 
-// Build font family CSS
+/**
+ * Build font family CSS.
+ *
+ * @param $element
+ * @param $selector
+ * @param $font_values
+ */
 function at_build_font_families($element, $selector, $font_values) {
   $output = '';
-  
+
   // Format values as valid CSS
   $font_styles = array();
   if (!empty($font_values)) {
@@ -79,7 +117,7 @@ function at_build_font_families($element, $selector, $font_values) {
       $css[] = $selector . '{' . $font_styles . '}';
     break;
   }
-  
+
   $output = implode("\n", $css);
   return $output;
 }

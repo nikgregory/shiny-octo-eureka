@@ -1,15 +1,18 @@
 <?php
 /**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- *
- * Provides frequently used functions etc that don't fit logically anywhere else.
+ * Provides frequently used functions that don't fit logically anywhere else.
  */
 global $theme_key;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 
-// Return the info file data for a particular theme, usually the active theme.
+/**
+ * Return the info file data for a particular theme, usually the active theme.
+ * Simple wrapper function for list_themes().
+ *
+ * @param $theme_name
+ */
 function at_get_info($theme_name) {
   $info = drupal_static(__FUNCTION__, array());
   if (empty($info)) {
@@ -25,16 +28,19 @@ function at_get_info($theme_name) {
 }
 
 /**
- * Load sub-theme Responsive stylesheets
+ * Load Sub-theme Responsive Stylesheets.
+ * Wrapper function for drupal_add_css() that takes advantage of Drupals's
+ * CSS aggregation logic to trick Drupal into always loading responsive
+ * stylesheets in link elements.
  *
- * load_subtheme_responsive_styles() takes 3 parameters:
- * - $css_file - the name of the css file.
- * - $media_query - the media query from theme settings to use for the media attribute.
- * - $theme_name - to generate the path-to-theme for drupal_add_css().
- * - optional $weight parameter
+ * This is almost always called from adaptivetheme_preprocess_html(), only in
+ * a rare instance might this be called from a sub-theme (to load additional
+ * responsive stylesheets).
  *
- * This is almost always called from adaptivetheme_preprocess_html(), only in a rare instance
- * might this be called from a sub-theme (to load additional responsive stylesheets).
+ * @param $filepath, path to the CSS file.
+ * @param $media_query, the media query from theme settings.
+ * @param $theme_name, usually the active theme.
+ * @param $weight, optional.
  */
 function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0) {
   if (file_exists($filepath)) {
@@ -50,12 +56,14 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
 }
 
 /**
- * Load sub-theme IE stylesheets
+ * Load Sub-theme IE Stylesheets.
+ * Wrapper function for drupal_add_css() that makes use the 'browser' option
+ * to load stylesheets for Internet Explorer.
  *
- * load_subtheme_conditional_styles() takes 3 parameters:
- * - $filepath - path to the file
- * - $ie_style - an arry containing the media attribute value and the IE conditional
- * - optional $weight parameter
+ * @param $filepath, path to the file.
+ * @param $ie_style, an arry containing the media attribute value and the IE
+ * conditional comment.
+ * @param $weight, optional.
  */
 function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
   if (file_exists($filepath)) {
@@ -75,9 +83,11 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
 
 /**
  * Return a themed script.
+ * Since Drupal 7 does not (yet) support the 'browser' option in drupal_add_js()
+ * Adaptivetheme provides a way to load scripts inside conditional comments.
+ * This function wraps a file in script elements and returns a string.
  *
  * @param $filepath, path to the file.
- * @return string
  */
 function at_theme_script($filepath) {
   $script = '';
@@ -94,9 +104,13 @@ function at_theme_script($filepath) {
 }
 
 /**
- * Return themed scripts in conditional comments.
- * @param $ie_scripts
- * @return array|string
+ * Return themed scripts in Conditional Comments.
+ * Since Drupal 7 does not (yet) support the 'browser' option in drupal_add_js()
+ * Adaptivetheme provides a way to load scripts inside conditional comments.
+ * This function will return a string for printing into a template, its
+ * akin to a real theme_function but its not.
+ *
+ * @param $ie_scripts, an array of themed scripts.
  */
 function at_theme_conditional_scripts($ie_scripts) {
   $themed_scripts = drupal_static(__FUNCTION__, array());
@@ -114,11 +128,15 @@ function at_theme_conditional_scripts($ie_scripts) {
 
 /**
  * Polyfills.
- * Build an array of scripts to load.
+ * This function does two seperate operations. First it attaches a condition
+ * to each Polyfill which can be either an IE conditional comment or 'all'.
+ * Polyfills with 'all' are loaded immediatly via drupal_add_js(), those with
+ * an IE CC are returned for further processing. This function is hard coded
+ * to support only those scripts supplied by the core theme, if you need to load
+ * a script for IE use the info file feature.
  *
  * @param $polly
  * @param $theme_name
- * @return array
  */
 function polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_at_core;
@@ -178,13 +196,13 @@ function polly_wants_a_cracker($polly, $theme_name) {
 
 /**
  * Google Font loader.
- * Adaptivetheme can load websafe fonts, Google fonts, custom font stacks and integrate with @font-your-face module.
- * All can be configured in the "Fonts" theme settings. Here we only need to load Google webfonts. Websafe and custom
- * fonts are stored in a generated CSS file (in public files) and @font-your-face module takes care of loading its
- * own fonts.
+ * Adaptivetheme can load websafe fonts, Google fonts, custom font stacks and
+ * integrate with @font-your-face module. All can be configured in the "Fonts"
+ * theme settings. Here we only need to load Google webfonts. Websafe and custom
+ * fonts are stored in a generated CSS file (in public files) and
+ * @font-your-face module takes care of loading its own fonts.
  *
  * @param $theme_name
- * @return array|string
  */
 function load_google_fonts($theme_name) {
   global $path_to_at_core;
@@ -236,12 +254,12 @@ function load_google_fonts($theme_name) {
 }
 
 /**
- * Process the color info and return the active color scheme, we use this to load a body class for the active color
- * scheme, very useful for CSS tweaks required for a particular scheme. This is not enabled by default, you have to
- * call it in template_preprocess_html()
+ * Process the color info and return the active color scheme. We use this to
+ * load a body class for the active color scheme, very useful for CSS tweaks
+ * required for a particular scheme. This is not enabled by default, you have to
+ * call it in template_preprocess_html().
  *
  * @param $theme_name
- * @return string
  */
 function get_color_scheme_name($theme_name) {
   $scheme_name = drupal_static(__FUNCTION__, array());
@@ -275,11 +293,10 @@ function get_color_scheme_name($theme_name) {
 
 /**
  * Add classes for platforms and browsers.
- * This is very simple and can never replace something like WURFL or Mobile Smart, in the future I intend to build a
- * module to replace this. Warning, this is not overly tested.
+ * This is very simple and can never replace something like WURFL or Mobile
+ * Smart, in the future I intend to build a module to replace this.
  *
  * @param null $ua
- * @return string
  */
 function css_browser_selector($ua = NULL) {
   if ($ua == NULL && !isset($_SERVER['HTTP_USER_AGENT'])) {

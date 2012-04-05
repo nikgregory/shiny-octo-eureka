@@ -1,7 +1,6 @@
 <?php
 /**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- *
+ * All Process functions for templates and theme fucntions.
  * If you need to add or modify process functions do it in your sub-theme.
  */
 global $theme_key, $theme_name;

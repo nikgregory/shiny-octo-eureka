@@ -1,7 +1,6 @@
 <?php
 /**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- *
+ * All Preprocess functions for templates and theme fucntions.
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
 global $theme_key, $theme_name;
@@ -22,22 +21,21 @@ function adaptivetheme_preprocess_html(&$vars) {
   $info = at_get_info($theme_name);
 
   // DOCTYPE
-  // AT no longer uses doctype switching or $rdf_profile, these maintain backwards
-  // compatibility with pre 7.x-2.1 versions of html.tpl.php
+  // AT no longer uses doctype switching or $rdf_profile, these maintain
+  // backwards compatibility with pre 7.x-2.1 versions of html.tpl.php
   $vars['doctype'] = '<!DOCTYPE html>' . "\n";
   $vars['rdf_profile'] = '';
 
-  // html_attributes
-  // Clean up the lang attributes
+  // Clean up the lang attributes.
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
-  // Responsive Styles
-  // AT has two modes - Production and Development. Depending on the
-  // mode it will load different files. Production mode assume you
-  // have finished CSS development and will not need to update styles
-  // in the responsive stylesheets, if you do you will need to re-save
-  // the theme settings at least once to re-write your
-  // $theme_name.responsive.styles.css file which is in public files.
+  // Responsive Styles.
+  // AT has two modes - Production and Development. Depending on the mode it
+  // will load different files. Production mode assume you have finished CSS
+  // development and will not need to update styles in the responsive
+  // stylesheets, if you do you will need to re-save the theme settings at
+  // least once to re-write your $theme_name.responsive.styles.css file which
+  // is in public files.
 
   // Set the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
@@ -61,8 +59,8 @@ function adaptivetheme_preprocess_html(&$vars) {
     if (theme_get_setting('production_mode', $theme_name) === 0) {
       // Build a keyed array of CSS file-names as key, and media query as value.
       // The file names must match the files in your themes CSS directory, if
-      // you change them you must update to match. theme_get_setting() caches and
-      // is extremely cheap, in any case we're in development mode.
+      // you change them you must update to match. theme_get_setting() caches
+      // and is extremely cheap, in any case we're in development mode.
       $files = drupal_static('adaptivetheme_preprocess_html_development_responsive_styles');
       if (empty($files)) {
         $files = array(
@@ -84,7 +82,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       // Loop over the files array and load each CSS file.
       // load_subtheme_responsive_styles() takes three parameters:
       // - $css_file - the name of the css file
-      // - $media_query - the media query from theme settings to use for the media attribute
+      // - $media_query - the media query from theme settings
       // - $theme_name - to generate the path-to-theme for drupal_add_css()
       foreach ($files as $key => $value) {
         $filepath = drupal_get_path('theme', $theme_name) . '/css/' . $key . '.css';
@@ -742,7 +740,7 @@ function adaptivetheme_preprocess_block(&$vars) {
  */
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme_name;
-  
+
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
 

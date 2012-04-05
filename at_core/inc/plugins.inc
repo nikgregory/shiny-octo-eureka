@@ -1,5 +1,7 @@
 <?php
-// AT's liteweight plugin sub-system.
+/**
+ * AT's liteweight plugin sub-system.
+ */
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
@@ -8,14 +10,17 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 /**
  * Find and return all plugins.
  *
- * This will search all base themes and the active theme for "plugins" in their info files, and return all plugins
- * directories. Info file entries must follow the Panels plugin structure i.e.
- * "plugins[plugin_type][type] = path/to/plugins". For example for AT page layouts we use:
- * "plugins[page_layout][layout] = layouts/core". Parts of this function are shamelessly ripped from Drupal core's
- * _drupal_theme_initialize() and CTools. AT cannot rely on CTools because themes cannot *require* dependancies.
+ * This will search all base themes and the active theme for "plugins" in their
+ * info files, and return all plugins directories. Info file entries must
+ * follow the Panels plugin structure i.e.:
+ * - "plugins[plugin_type][type] = path/to/plugins"
+ * For example for AT page layouts we use:
+ * - "plugins[page_layout][layout] = layouts/core"
+ * Parts of this function are shamelessly ripped from Drupal core's
+ * _drupal_theme_initialize() and CTools. AT cannot rely on CTools because
+ * themes cannot *require* dependancies.
  *
  * @param $theme_name, usually the active theme, required.
- * @return array
  */
 function at_get_plugins($theme_name) {
 
@@ -62,9 +67,13 @@ function at_get_plugins($theme_name) {
   return $plugins;
 }
 
-//
-// at_get_plugins_paths()
-//
+/**
+ * Return the paths to all plugin providers plugin directories, this usually
+ * means themes - both base themes and sub-themes that include plugin directory
+ * declarations in their info files.
+ *
+ * @param $theme_name
+ */
 function at_get_plugins_paths($theme_name) {
   $provider_paths = array();
   $plugins_list = at_get_plugins($theme_name);
@@ -82,11 +91,12 @@ function at_get_plugins_paths($theme_name) {
 }
 
 /**
- * Returns all files for plugins of a particular type, called from at_load_plugins(), cannot be cached else it will
- * return stale data - its always hit at least twice (since there are two types of plugins being called, usually).
+ * Returns all files for plugins of a particular type, called from
+ * at_load_plugins(), cannot be cached else it will return stale data - its
+ * always hit at least twice (since there are two types of plugins being
+ * called, usually).
  *
  * @param $theme_name
- * @return array
  */
 function at_get_plugins_files($theme_name) {
   $plugins_files = array();
@@ -108,13 +118,15 @@ function at_get_plugins_files($theme_name) {
 /**
  * Extract plugin data structures.
  *
- * In essence what this does is return the data strutures (arrays) for all plugins of a particular type. As of now only
- * two types are used by AT - "panels" and "page_layout". This is hard to cache because it takes the $plugin_type
- * parameter, so everything else that calls this is heavily cached instead.
+ * In essence what this does is return the data strutures (arrays) for all
+ * plugins of a particular type. As of now only two types are used by AT, being
+ * "panels" and "page_layout". This is hard to cache because it takes the
+ * $plugin_type parameter, so everything else that calls this is heavily cached
+ * instead. It does support an "everything else" plugin type, whatever that is.
  *
  * @param $theme_name, usually the active theme, required.
- * @param $plugin_type, the plugin type you need to return, usually one of "panels" or "page_layout", required.
- * @return array
+ * @param $plugin_type, the plugin type you need to return, usually one of
+ * "panels" or "page_layout", required.
  */
 function at_load_plugins($theme_name, $plugin_type) {
 
@@ -184,12 +196,10 @@ function at_load_plugins($theme_name, $plugin_type) {
 }
 
 /**
- * Calls the plugin system and retrives all the Page layouts.
- *
- * This is used in two places, in the page layouts form to retrieve the layout options for each device group and when
- * building the layout CSS in at_core.submit.builders.inc
- *
- * @return array
+ * Return Page layout data structures.
+ * This returns the full data structures for all page layout plugins. Because
+ * this can be a lot of data and appears to be computationally expensive to get
+ * it is cached in the cache table.
  */
 function responsive_page_layouts_data_structure() {
   global $theme_name;
@@ -216,10 +226,10 @@ function responsive_page_layouts_data_structure() {
 }
 
 /**
- * This is used to build the forms for responsive panels in theme settings.
- * Calls the plugin system and retrives all the Panels module layouts.
- *
- * @return array
+ * Return Panels layout data structures.
+ * This returns the full data structures for all Panels layout plugins. Because
+ * this can be a lot of data and appears to be computationally expensive to get
+ * it is cached in the cache table.
  */
 function responsive_panels_data_structure() {
   global $theme_name;
@@ -249,11 +259,15 @@ function responsive_panels_data_structure() {
   return $panels_data_structure;
 }
 
-//
-// responsive_panels_plugin_names()
-//
+/**
+ * Return just the plugin names.
+ * This is used primarily in one place - adaptivetheme_process_node() so we can
+ * search for matches against Display Suite template suggestions, sounds weird
+ * buts a work-around for a bug in Display Suite.
+ *
+ * @see adaptivetheme_process_node()
+ */
 function responsive_panels_plugin_names() {
-
   $plugin_names = drupal_static(__FUNCTION__, array());
   if (empty($plugin_names)) {
     $data_structure = responsive_panels_data_structure();
@@ -269,16 +283,17 @@ function responsive_panels_plugin_names() {
   return $plugin_names;
 }
 
-//
-// responsive_page_layouts_device_group_options()
-//
+/**
+ * Return option arrays for forms.
+ * Returns the options for radio lists in the page layout settings in the
+ * appearance theme settings.
+ *
+ * @param $theme_name
+ */
 function responsive_page_layouts_device_group_options($theme_name) {
-
   $device_group_options = drupal_static(__FUNCTION__, array());
   if (empty($device_group_options)) {
-    // $options for each device group come from the "page_layout" plugins
     $layout_methods = responsive_page_layouts_data_structure();
-
     foreach ($layout_methods as $method => $values) {
       foreach ($values as $key => $value) {
         if ($key == 'device_groups') {
@@ -297,12 +312,12 @@ function responsive_page_layouts_device_group_options($theme_name) {
 }
 
 /**
- * Return all the admin css files for a plugin type, this is used primarly to theme the icons for each layout method.
- * The icons are in sprites.
+ * Return all the admin css files for a plugin type, this is used primarly to
+ * theme the icons for each layout method. The icons are in sprites.
+ * TODO: add options for other plugin types, e.g. an "everything else" option.
  *
  * @param $theme_name
  * @param $plugin_type
- * @return array
  */
 function responsive_plugins_admin_css($theme_name, $plugin_type) {
   $admin_css_files = array();
@@ -329,6 +344,8 @@ function responsive_plugins_admin_css($theme_name, $plugin_type) {
     }
   }
 
+  // I have been lazy here, in fact only the three_col_grail layout sets
+  // an admin css file and returns all the CSS for all page layouts.
   if ($plugin_type === 'page_layout') {
     $rpl = responsive_page_layouts_data_structure();
     foreach ($rpl as $layout_method => $value) {
@@ -337,13 +354,6 @@ function responsive_plugins_admin_css($theme_name, $plugin_type) {
       }
     }
   }
-
-  // else {
-    // $function = $plugin_type . '_data_structure';
-    // if (function_exists($function)) {
-      // $rpl = $function();
-    // }
-  // }
 
   foreach ($admin_css_paths as $admin_css => $paths) {
     foreach ($paths as $path) {
@@ -363,7 +373,9 @@ function responsive_plugins_admin_css($theme_name, $plugin_type) {
 }
 
 /**
- * Base config for page layout builder
+ * Base config for page layout builder.
+ * This is used in at_core.submit.responsive.inc to help retrieve the form
+ * values for each device groups layout.
  */
 function page_layout() {
   $variables_array = array(
