@@ -8,19 +8,14 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 /**
  * Find and return all plugins
  *
- * This will search all base themes and the active theme
- * for "plugins" in their info files, and return all associated
- * plugins. Info file entries must follow the Panels plugin structure
- * i.e. "plugins[plugin_type][type] = path/to/plugins", for example for
- * AT page layouts we use: "plugins[page_layout][layout] = layouts/core".
- * Parts of this function are shamelessly ripped from Drupal core's
- * _drupal_theme_initialize() and CTools. AT cannot rely on CTools
- * because themes cannot *require* dependancies.
+ * This will search all base themes and the active theme for "plugins" in their info files, and return all plugins
+ * directories. Info file entries must follow the Panels plugin structure i.e.
+ * "plugins[plugin_type][type] = path/to/plugins". For example for AT page layouts we use:
+ * "plugins[page_layout][layout] = layouts/core". Parts of this function are shamelessly ripped from Drupal core's
+ * _drupal_theme_initialize() and CTools. AT cannot rely on CTools because themes cannot *require* dependancies.
  *
- * Parameters
- * - $theme_name, usually the active theme, required.
- * - $getpath, optional, if set to TRUE only the paths to
- *   the plugin directories are returned.
+ * @param $theme_name, usually the active theme, required.
+ * @return array
  */
 function at_get_plugins($theme_name) {
 
@@ -109,20 +104,15 @@ function at_get_plugins_files($theme_name) {
 /**
  * Extract plugin data structures
  *
- * In essence what this does is return the data strutures (arrays)
- * for all plugins of a particular type. If you just want everything
- * then call at_get_plugins(), this is one step further along for free.
- * Again, parts of this are ripped from CTools. As of now only two types
- * are used by AT - "panels" and "page_layout", however its possible
- * more could be used, such as "polyfill" and "font_family". This is not
- * entirely generic enough to handle anything, but can if you stick within
- * the conventions provided, aka "panels", "page_layout" and "everything
- * else".
+ * In essence what this does is return the data strutures (arrays) for all plugins of a particular type. If you just
+ * want everything then call at_get_plugins(), this is one step further along for free. Again, parts of this are ripped
+ * from CTools. As of now only two types are used by AT - "panels" and "page_layout", however its possible more could be
+ * used, such as "polyfill" and "font_family". This is not entirely generic enough to handle anything, but can if you
+ * stick within the conventions provided, aka "panels", "page_layout" and "everything else".
  *
- * Parameters
- * - $theme_name, usually the active theme, required.
- * - $plugin_type, the plugin type you need to return,
- *   usually one of "panels" or "page_layout", required.
+ * @param $theme_name, usually the active theme, required.
+ * @param $plugin_type, the plugin type you need to return, usually one of "panels" or "page_layout", required.
+ * @return array
  */
 function at_load_plugins($theme_name, $plugin_type) {
 
@@ -193,12 +183,11 @@ function at_load_plugins($theme_name, $plugin_type) {
 
 /**
  * Calls the plugin system and retrives all the Page layouts
- * Depending on how this function is called it will return different data.
- * For example you might just want the device groups:
- * $pagelayout = responsive_page_layouts_data_structure($variable = 'device_groups');
  *
- * This is used in two places, in the page layouts form to retrieve the layout options
- * for each device group and when building the layout CSS in at_core.submit.builders.inc
+ * This is used in two places, in the page layouts form to retrieve the layout options for each device group and when
+ * building the layout CSS in at_core.submit.builders.inc
+ *
+ * @return array
  */
 function responsive_page_layouts_data_structure() {
   global $theme_name;
@@ -227,6 +216,8 @@ function responsive_page_layouts_data_structure() {
 /**
  * This is used to build the forms for responsive panels in theme settings.
  * Calls the plugin system and retrives all the Panels module layouts.
+ *
+ * @return array
  */
 function responsive_panels_data_structure() {
   global $theme_name;
@@ -304,8 +295,12 @@ function responsive_page_layouts_device_group_options($theme_name) {
 }
 
 /**
- * Return all the admin css files for a plugin type, this is used primarly
- * to theme the icons for each layout method. The icons are in sprites.
+ * Return all the admin css files for a plugin type, this is used primarly to theme the icons for each layout method.
+ * The icons are in sprites.
+ *
+ * @param $theme_name
+ * @param $plugin_type
+ * @return array
  */
 function responsive_plugins_admin_css($theme_name, $plugin_type) {
   $admin_css_files = array();
