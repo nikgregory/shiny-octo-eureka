@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_three_inset_right_panels_layouts() {
   $items['three_inset_right'] = array(
-    'title'    => t('Three column inset right (conditional stack)'),
+    'title'    => t('Three column inset right'),
     'category' => t('AT Responsive Panels - Inset'),
     'icon'     => 'three_inset_right.png',
     'theme'    => 'three_inset_right',
@@ -48,4 +48,9 @@ function adaptivetheme_three_inset_right_panels_layouts() {
   );
 
   return $items;
+}
+
+function adaptivetheme_preprocess_three_inset_right(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
 }

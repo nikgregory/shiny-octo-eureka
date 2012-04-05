@@ -68,7 +68,7 @@
 
   // Build the forms
   foreach ($devices as $device) {
-    $title = str_replace('_', ' ', ucfirst($device));
+    $title = str_replace('_', ' ', drupal_ucfirst($device));
     $form['at-layout']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
       '#title' => t($title),

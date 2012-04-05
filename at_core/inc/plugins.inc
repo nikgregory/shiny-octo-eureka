@@ -22,59 +22,88 @@ $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
  * - $getpath, optional, if set to TRUE only the paths to
  *   the plugin directories are returned.
  */
-function at_get_plugins($theme_name, $getpath = FALSE) {
+function at_get_plugins($theme_name) {
 
   $plugins = drupal_static(__FUNCTION__, array());
   if (empty($plugins)) {
-  
-    $lt = list_themes();
-
-    // First check for base themes and get info
-    $base_theme = array();
-    $ancestor = $theme_name;
-    while ($ancestor && isset($lt[$ancestor]->base_theme)) {
-      $ancestor = $lt[$ancestor]->base_theme;
-      $base_theme[] = $lt[$ancestor];
+    if ($plugins_cache = cache_get('at_get_plugins_plugins')) {
+      $plugins = $plugins_cache->data;
     }
-    foreach ($base_theme as $base) {
-      $themes_names[$base->name] = $base->name;
-      $themes_info[$base->name] = $base->info;
-    }
+    else {
+      $lt = list_themes();
 
-    // Now the active theme
-    $themes_names[$theme_name] = $theme_name;
-    $themes_info[$theme_name] = $lt[$theme_name]->info;
-
-    // Look for and get all the plugins
-    if (!empty($themes_info)) {
-      foreach ($themes_info as $this_theme => $info) {
-        if (array_key_exists('plugins', $info)) {
-          foreach ($info['plugins'] as $plugin_type => $types) {
-            $plugins_list[$this_theme][$plugin_type] = $types;
-          }
-        }
+      // First check for base themes and get info
+      $base_theme = array();
+      $ancestor = $theme_name;
+      while ($ancestor && isset($lt[$ancestor]->base_theme)) {
+        $ancestor = $lt[$ancestor]->base_theme;
+        $base_theme[] = $lt[$ancestor];
       }
-      $extension = 'inc';
-      array_unique($plugins_list);
-      foreach ($plugins_list as $plugin_provider => $provider) {
-        foreach ($provider as $plugin_type => $types) {
-          foreach ($types as $type => $path) {
-            $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
-            // Provide a way to skip out early with just the paths
-            if ($getpath == TRUE) {
-              $plugins[$plugin_provider][$plugin_type][$type] = $provider_path;
-            }
-            // Get all the plugin data
-            else {
-              $plugins[$plugin_provider][$plugin_type][$type] = file_scan_directory($provider_path, '/\.' . $extension . '$/', array('key' => 'name'));
+      foreach ($base_theme as $base) {
+        $themes_names[$base->name] = $base->name;
+        $themes_info[$base->name] = $base->info;
+      }
+
+      // Now the active theme
+      $themes_names[$theme_name] = $theme_name;
+      $themes_info[$theme_name] = $lt[$theme_name]->info;
+
+      // Look for and get all the plugins
+      if (!empty($themes_info)) {
+        foreach ($themes_info as $this_theme => $info) {
+          if (array_key_exists('plugins', $info)) {
+            foreach ($info['plugins'] as $plugin_type => $types) {
+              $plugins_list[$this_theme][$plugin_type] = $types;
             }
           }
         }
+        array_unique($plugins_list);
+        $plugins = $plugins_list;
+      }
+    }
+    cache_set('at_get_plugins_plugins', $plugins, 'cache');
+  }
+
+  return $plugins;
+}
+
+//
+// at_get_plugins_paths()
+//
+function at_get_plugins_paths($theme_name) {
+  $provider_paths = array();
+  $plugins_list = at_get_plugins($theme_name);
+
+  foreach ($plugins_list as $plugin_provider => $provider) {
+    foreach ($provider as $plugin_type => $types) {
+      foreach ($types as $type => $path) {
+        $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
+        $provider_paths[$plugin_provider][$plugin_type][$type] = $provider_path;
       }
     }
   }
 
-  return $plugins;
+  return $provider_paths;
+}
+
+//
+// at_get_plugins_files()
+//
+function at_get_plugins_files($theme_name) {
+  $plugins_files = array();
+  $plugins_list = at_get_plugins($theme_name);
+
+  $extension = 'inc';
+  foreach ($plugins_list as $plugin_provider => $provider) {
+    foreach ($provider as $plugin_type => $types) {
+      foreach ($types as $type => $path) {
+        $provider_path = drupal_get_path('theme', $plugin_provider) . '/' . $path;
+        $plugins_files[$plugin_provider][$plugin_type][$type] = file_scan_directory($provider_path, '/\.' . $extension . '$/', array('key' => 'name'));
+      }
+    }
+  }
+
+  return $plugins_files;
 }
 
 /**
@@ -98,12 +127,10 @@ function at_get_plugins($theme_name, $getpath = FALSE) {
 function at_load_plugins($theme_name, $plugin_type) {
 
   $plugin_data_structures = array();
-  $plugins_list = at_get_plugins($theme_name);
+  $plugins_list = at_get_plugins_files($theme_name);
 
   foreach ($plugins_list as $plugin_provider => $plugin_types) {
-
     $plugin_providers[] = $plugin_provider;
-
     foreach ($plugin_types as $type => $plugins) {
       if ($type === $plugin_type) {
         foreach ($plugins as $ptypes => $plugin) {
@@ -143,6 +170,7 @@ function at_load_plugins($theme_name, $plugin_type) {
         $plugin_data_structures[] = $page_layout_function();
       }
     }
+
     // everything else
     else if ($plugin_type !== 'panels' && $plugin_type !== 'page_layout') {
       $identifier = $file_data->name;
@@ -163,23 +191,195 @@ function at_load_plugins($theme_name, $plugin_type) {
   return $plugin_data_structures;
 }
 
-// Wrapper for at_get_plugins() that returns only the paths 
-// of the active theme.
-function at_get_plugins_paths() {
+/**
+ * Calls the plugin system and retrives all the Page layouts
+ * Depending on how this function is called it will return different data.
+ * For example you might just want the device groups:
+ * $pagelayout = responsive_page_layouts_data_structure($variable = 'device_groups');
+ *
+ * This is used in two places, in the page layouts form to retrieve the layout options
+ * for each device group and when building the layout CSS in at_core.submit.builders.inc
+ */
+function responsive_page_layouts_data_structure() {
   global $theme_name;
-  $paths = at_get_plugins($theme_name, $getpath = TRUE);
-  return $paths;
+
+  $page_data_structure = drupal_static(__FUNCTION__, array());
+  if (empty($page_data_structure)) {
+    if ($cache = cache_get('at_page_layouts_data_structure')) {
+      $page_data_structure = $cache->data;
+    }
+    else {
+
+      $data_structure = at_load_plugins($theme_name, $plugin_type = 'page_layout');
+
+      foreach ($data_structure as $plugin => $datum) {
+        foreach ($datum as $method => $layout) {
+          $page_data_structure[$method] = $layout;
+        }
+      }
+      cache_set('at_page_layouts_data_structure', $page_data_structure, 'cache');
+    }
+  }
+
+  return $page_data_structure;
 }
 
-// For panels we need all the CSS files for the theme settings UI
-// function at_get_panels_admin_css() {
+/**
+ * This is used to build the forms for responsive panels in theme settings.
+ * Calls the plugin system and retrives all the Panels module layouts.
+ */
+function responsive_panels_data_structure() {
+  global $theme_name;
 
-  // $admin_css = at_get_plugins($theme_name);
+  $panels_data_structure = drupal_static(__FUNCTION__, array());
+  if (empty($panels_data_structure)) {
+    if ($cache = cache_get('at_panels_data_structure')) {
+      $panels_data_structure = $cache->data;
+    }
+    else {
 
-// }
-// global $theme_name;
-// $admin_css = at_get_plugins($theme_name, $getpath = TRUE);
-// dsm($admin_css);
+      $data_structure = at_load_plugins($theme_name, $plugin_type = 'panels');
+
+      foreach ($data_structure as $plugin => $datum) {
+        foreach ($datum as $key => $value) {
+          $type = $value['type'];
+          $panels_data_structure[$type][] = $datum;
+        }
+      }
+      if (empty($panels_data_structure)) {
+        return; // fail silently
+      }
+      cache_set('at_panels_data_structure', $panels_data_structure, 'cache');
+    }
+  }
+
+  return $panels_data_structure;
+}
+
+//
+// responsive_panels_plugin_names()
+//
+function responsive_panels_plugin_names() {
+
+  $plugin_names = drupal_static(__FUNCTION__, array());
+  if (empty($plugin_names)) {
+    $data_structure = responsive_panels_data_structure();
+    foreach ($data_structure as $key => $value) {
+      foreach ($value as $type => $sub_types) {
+        foreach ($sub_types as $k => $v) {
+          $plugin_names[] = $k;
+        }
+      }
+    }
+  }
+
+  return $plugin_names;
+}
+
+//
+// responsive_page_layouts_device_group_options()
+//
+function responsive_page_layouts_device_group_options($theme_name) {
+
+  $device_group_options = drupal_static(__FUNCTION__, array());
+  if (empty($device_group_options)) {
+    // $options for each device group come from the "page_layout" plugins
+    $layout_methods = responsive_page_layouts_data_structure();
+
+    foreach ($layout_methods as $method => $values) {
+      foreach ($values as $key => $value) {
+        if ($key == 'device_groups') {
+          $method_values[$method] = $value;
+        }
+      }
+    }
+    foreach ($method_values as $this_method => $these_values) {
+      foreach ($these_values as $k => $dv) {
+        $device_group_options[$dv][] = $this_method;
+      }
+    }
+  }
+
+  return $device_group_options;
+}
+
+/**
+ * Return all the admin css files for a plugin type, this is used primarly
+ * to theme the icons for each layout method. The icons are in sprites.
+ */
+function responsive_plugins_admin_css($theme_name, $plugin_type) {
+  $admin_css_files = array();
+  $plugin_paths = at_get_plugins_paths($theme_name);
+
+  foreach ($plugin_paths as $providers => $provided_types) {
+    foreach ($provided_types as $provider => $type_path) {
+      if ($provider === $plugin_type) {
+        $admin_css_paths[$providers] = $type_path;
+      }
+    }
+  }
+
+  if ($plugin_type === 'panels') {
+    $rpl = responsive_panels_data_structure();
+    foreach ($rpl as $group => $layouts) {
+      foreach ($layouts as $layout) {
+        foreach ($layout as $layout_key => $value) {
+          if (isset($value['admin css'])) {
+            $css_files[$layout_key] = $value['admin css'];
+          }
+        }
+      }
+    }
+  }
+
+  if ($plugin_type === 'page_layout') {
+    $rpl = responsive_page_layouts_data_structure();
+    foreach ($rpl as $layout_method => $value) {
+      if (isset($value['admin css'])) {
+        $css_files[$layout_method] = $value['admin css'];
+      }
+    }
+  }
+
+  // else {
+    // $function = $plugin_type . '_data_structure';
+    // if (function_exists($function)) {
+      // $rpl = $function();
+    // }
+  // }
+
+  foreach ($admin_css_paths as $admin_css => $paths) {
+    foreach ($paths as $path) {
+      foreach ($css_files as $method_key => $file_name) {
+        if($method_key !== 'one') {
+          $admin_css_files[] = $path . '/' . $method_key . '/' . $file_name;
+        }
+      }
+    }
+  }
+
+  if (!isset($rpl)) {
+    return; // fail quietly
+  }
+
+  return $admin_css_files;
+}
+
+/**
+ * Base config for page layout builder
+ */
+function page_layout() {
+  $variables_array = array(
+    'layout',
+    'media_query',
+    'page_width',
+    'page_unit',
+    'sidebar_first',
+    'sidebar_second',
+    'sidebar_unit',
+  );
+  return $variables_array;
+}
 
 // this stuff working?
 // $thesepaths = at_get_plugins_paths();

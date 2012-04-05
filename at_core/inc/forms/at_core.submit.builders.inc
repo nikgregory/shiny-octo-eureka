@@ -3,7 +3,7 @@ global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-include_once($path_to_at_core . '/inc/config.inc');
+include_once($path_to_at_core . '/inc/plugins.inc');
 
 // Page Layout Builder
 // As calls come in from the submit function they are dispatched to the right builder
@@ -11,12 +11,16 @@ function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar
   global $theme_name;
   $output = '';
   
-  $builder_functions = responsive_page_layouts_data_structure($variable = 'method');
+  // We need to invoke at_load_plugins() to get all the function for the methods
+  at_load_plugins($theme_name, $plugin_type = 'page_layout');
   
-  //$method = str_replace('-', '_', $method); // temp workaround
-  if (in_array($method, $builder_functions)) {
-    $function = $method . '_layout';
-    $output = $function($sidebar_first, $sidebar_second, $sidebar_unit);
+  $builder_functions = responsive_page_layouts_data_structure();
+
+  foreach ($builder_functions as $function_prefix => $redundant_values) {
+    if ($method === $function_prefix) {
+      $function = $function_prefix . '_layout';
+      $output = $function($sidebar_first, $sidebar_second, $sidebar_unit);  
+    }
   }
 
   return $output;

@@ -39,3 +39,8 @@ function adaptivetheme_two_brick_panels_layouts() {
 
   return $items;
 }
+
+function adaptivetheme_preprocess_two_brick(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
+}

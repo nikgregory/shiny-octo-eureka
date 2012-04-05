@@ -73,10 +73,8 @@ div.messages {
   margin-right: 10px;
 }
 
-/* AT Panels needs special margin wrangling when in the content region */
+/* AT Panels may need special margin wrangling when in the content region */
 #content .at-panel {
-  margin-left: -10px;
-  margin-right: -10px;
 }
 
 

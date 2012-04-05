@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_two_33_66_panels_layouts() {
   $items['two_33_66'] = array(
-    'title' => t('Two column 33/66 (conditional stack)'),
+    'title' => t('Two column 33/66'),
     'category' => t('AT Responsive Panels - 2 column'),
     'icon' => 'two_33_66.png',
     'theme' => 'two_33_66',
@@ -35,4 +35,9 @@ function adaptivetheme_two_33_66_panels_layouts() {
   );
 
   return $items;
+}
+
+function adaptivetheme_preprocess_two_33_66(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
 }

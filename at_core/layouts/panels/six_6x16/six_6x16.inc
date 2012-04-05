@@ -52,3 +52,8 @@ function adaptivetheme_six_6x16_panels_layouts() {
 
   return $items;
 }
+
+function adaptivetheme_preprocess_six_6x16(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
+}

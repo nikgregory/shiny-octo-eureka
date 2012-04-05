@@ -1,37 +1,33 @@
 <?php
-
-  // $options for each device group come from the "page_layout" plugins
-  $layout_methods = responsive_page_layouts_data_structure($variable = 'device_groups');
-  foreach ($layout_methods as $methods => $groups) {
-    foreach ($groups as $group) {
-      $these_groups[$group][] = $methods;
-    }
-  }
-
+  
+  // Get an array of device groups with option values
+  $device_group_options = responsive_page_layouts_device_group_options($theme_name);
+  
   // Assign $options for each device group
-  foreach ($these_groups as $device_group => $options) {
+  foreach ($device_group_options as $device_group => $options) {
 
     // About here we need to call a custom sort function, this is what we got for now
     sort($options, SORT_NUMERIC);
 
     foreach ($options as $option) {
       if ($device_group === 'bigscreen') {
-        $bigscreen_options[$option] = ucfirst(str_replace('_', ' ', $option)); // human readable option names for accessibility
+        $bigscreen_options[$option] = drupal_ucfirst(str_replace('_', ' ', $option)); // human readable option names for accessibility
       }
       if ($device_group === 'tablet_landscape') {
-        $tablet_landscape_options[$option] = ucfirst(str_replace('_', ' ', $option));
+        $tablet_landscape_options[$option] = drupal_ucfirst(str_replace('_', ' ', $option));
       }
       if ($device_group === 'tablet_portrait') {
-        $tablet_portrait_options[$option] = ucfirst(str_replace('_', ' ', $option));
+        $tablet_portrait_options[$option] = drupal_ucfirst(str_replace('_', ' ', $option));
       }
       if ($device_group === 'smartphone_landscape') {
-        $smartphone_landscape_options[$option] = ucfirst(str_replace('_', ' ', $option));
+        $smartphone_landscape_options[$option] = drupal_ucfirst(str_replace('_', ' ', $option));
       }
     }
   }
   
   // Load css for the layout sprite icons
   $page_layout_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'page_layout');
+  
   // should probably use #attached
   foreach ($page_layout_css_files as $filepath) {
     if (file_exists($filepath)) {

@@ -14,3 +14,8 @@ function adaptivetheme_one_panels_layouts() {
   );
   return $items;
 }
+
+function adaptivetheme_preprocess_one(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
+}

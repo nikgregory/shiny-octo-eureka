@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_three_25_25_50_panels_layouts() {
   $items['three_25_25_50'] = array(
-    'title'    => t('Three column 25/25/50 (conditional stack)'),
+    'title'    => t('Three column 25/25/50'),
     'category' => t('AT Responsive Panels - 3 column'),
     'icon'     => 'three_25_25_50.png',
     'theme'    => 'three_25_25_50',
@@ -50,4 +50,9 @@ function adaptivetheme_three_25_25_50_panels_layouts() {
   );
 
   return $items;
+}
+
+function adaptivetheme_preprocess_three_25_25_50(&$vars) {
+  $vars['panel_prefix'] = '';
+  $vars['panel_suffix'] = '';
 }

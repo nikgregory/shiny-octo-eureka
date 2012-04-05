@@ -14,7 +14,7 @@ $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 // Include the most essential files to make this mofo run.
-include_once($path_to_at_core . '/inc/config.inc');              // holds config arrays for the page layout, panels and fonts
+include_once($path_to_at_core . '/inc/plugins.inc');             // the plugin system with wrapper and helper functions
 include_once($path_to_at_core . '/inc/template.helpers.inc');    // drupal_add_css() wrappers and seldom used body class generators
 include_once($path_to_at_core . '/inc/template.theme.inc');      // theme function overrides
 include_once($path_to_at_core . '/inc/template.alter.inc');      // hook_alters

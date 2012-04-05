@@ -32,7 +32,7 @@
       $container = $value['setting'];  // the theme setting used to retrieve the font values, e.g. "site_name_font"
 
       $setting_container = str_replace('_', '-', $container) . '-style'; // a nicer string for fielset classes
-      $title = str_replace('_', ' ', ucfirst($heading)); // use the key for titles, it doesnt have "font" in it
+      $title = str_replace('_', ' ', drupal_ucfirst($heading)); // use the key for titles, it doesnt have "font" in it
 
       // Set easy reusable variables
       $setting_case       = $setting . '_case';

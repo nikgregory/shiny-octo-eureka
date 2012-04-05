@@ -743,6 +743,8 @@ function adaptivetheme_preprocess_block(&$vars) {
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme_name;
 
+  //dsm($vars);
+  
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
 

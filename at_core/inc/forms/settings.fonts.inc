@@ -138,7 +138,7 @@
       $setting  = $value['setting'];  // the theme setting used to retrieve the font values, e.g. "site_name_font"
 
       $setting_container = str_replace('_', '-', $setting) . '-selector'; // a nicer string for fielset classes
-      $title = str_replace('_', ' ', ucfirst($form_type)); // use the key for titles, it doesnt have "font" in it
+      $title = str_replace('_', ' ', drupal_ucfirst($form_type)); // use the key for titles, it doesnt have "font" in it
 
       // Set easy reusable variables
       $setting_type = $setting . '_type';
@@ -328,7 +328,7 @@
       $setting  = $value['setting'];  // the theme setting used to retrieve the font values, e.g. "site_name_font"
 
       $setting_container = str_replace('_', '-', $setting) . '-selector'; // a nicer string for fielset classes
-      $title = str_replace('_', ' ', ucfirst($form_type)); // use the key for titles, it doesnt have "font" in it
+      $title = str_replace('_', ' ', drupal_ucfirst($form_type)); // use the key for titles, it doesnt have "font" in it
 
       // Set easy reusable variables
       $setting_type = $setting . '_type';

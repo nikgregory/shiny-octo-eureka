@@ -4,7 +4,7 @@
  */
 
 // Get our config arrys
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/config.inc');
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
 
 /**
  * Implements hook_form_system_theme_settings_alter().
