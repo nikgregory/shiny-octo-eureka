@@ -52,7 +52,7 @@ function adaptivetheme_three_25_25_50_panels_layouts() {
   return $items;
 }
 
-function adaptivetheme_preprocess_three_25_25_50(&$vars) {
+function template_preprocess_three_25_25_50(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
 }

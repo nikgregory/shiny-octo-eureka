@@ -50,7 +50,7 @@ function adaptivetheme_three_inset_right_panels_layouts() {
   return $items;
 }
 
-function adaptivetheme_preprocess_three_inset_right(&$vars) {
+function template_preprocess_three_inset_right(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
 }

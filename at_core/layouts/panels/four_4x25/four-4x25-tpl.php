@@ -7,8 +7,8 @@
  * - $content: An array of content, each item in the array is keyed to one
  *   panel of the layout.
  * - $css_id: unique id if present.
- * - $panel_prefix: prints a wrapper when this template is used in certain context, 
- *   such as when rendered by Display Suite or other module - the wrapper is 
+ * - $panel_prefix: prints a wrapper when this template is used in certain context,
+ *   such as when rendered by Display Suite or other module - the wrapper is
  *   added by Adaptivetheme in the appropriate process function.
  * - $panel_suffix: closing element for the $prefix.
  *
@@ -30,7 +30,7 @@
         <?php print $content['four_second']; ?>
       </div>
     </div>
-  </div> 
+  </div>
   <div class="panel-row row-2 clearfix">
     <div class="region region-four-third">
       <div class="region-inner clearfix">

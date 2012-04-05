@@ -37,7 +37,7 @@ function adaptivetheme_two_66_33_panels_layouts() {
   return $items;
 }
 
-function adaptivetheme_preprocess_two_66_33(&$vars) {
+function template_preprocess_two_66_33(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
 }

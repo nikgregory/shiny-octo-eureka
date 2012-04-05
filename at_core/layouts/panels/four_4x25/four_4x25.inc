@@ -50,7 +50,7 @@ function adaptivetheme_four_4x25_panels_layouts() {
   return $items;
 }
 
-function adaptivetheme_preprocess_four_4x25(&$vars) {
+function template_preprocess_four_4x25(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
 }

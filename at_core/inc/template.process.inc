@@ -38,8 +38,8 @@ function adaptivetheme_process_html(&$vars) {
   // Load the panels test
   if (theme_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {
-       $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
-       $vars['page'] = $panels_test;
+      $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
+      $vars['page'] = $panels_test;
     }
   }
 }
@@ -215,6 +215,15 @@ function adaptivetheme_process_node(&$vars) {
       }
     }
   }
+
+  /* this does not work, its a test...
+  if (module_exists('panelizer')) {
+    if (isset($vars['node']->panelizer)) {
+      $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
+      $vars['panel_suffix'] = '</article>';
+    }
+  }
+  */
 }
 
 /**

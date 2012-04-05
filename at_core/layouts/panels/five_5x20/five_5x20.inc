@@ -12,7 +12,7 @@
  * Adaptivetheme needs more data to build the actual CSS, it does not use
  * Panels normal method of defining a static CSS file. The CSS must be built
  * programmatically for each selected option when the user saves the theme
- * settings. This is for two main reasons - first so we are optimizing the 
+ * settings. This is for two main reasons - first so we are optimizing the
  * CSS and not adding any duplicate CSS declarations, and secondly so we can
  * easily insert the CSS into the right media query in the generated stylsheet.
  *
@@ -25,13 +25,13 @@
  *
  * Identifiers:
  * Each identifier represents a CSS style. It's basically shorthand notation for the
- * actual CSS. To ensure the CSS is optimized as much as possible you should use an 
+ * actual CSS. To ensure the CSS is optimized as much as possible you should use an
  * existing identifier if it exists, although you can use your own, just make sure
- * to reused them as much as possible in order to get the smallest CSS files - 
+ * to reused them as much as possible in order to get the smallest CSS files -
  * here is a full list of the existing identifiers used by AT Core Panels plugins:
-  
+
  Basic Widths (all must be in percentages):
- 
+
  ID       CSS
 
  '25'     'width:25%'
@@ -42,24 +42,24 @@
  '66'     'width:66.666666%'
  '75'     'width:75%'
  '100'    'width:100%'
- 
+
  Floats with widths:
- 
+
  '25fl'   'width:25%;float:left'
  '25fr'   'width:25%;float:right'
  '33fl'   'width:33.333333%;float:left'
  '50fl'   'width:50%;float:left'
  '75fl'   'width:75%;float:left'
  '75fr'   'width:75%;float:right'
- 
+
  Floats:
- 
+
  'fl'     'float:left'
  'fr'     'float:right'
  'fn'     'float:none'
- 
+
  Stacked Regions get a specail cased identifier:
- 
+
  'fdw'    'float:none;display:block;width:100%;clear:both'
 
  */
@@ -129,10 +129,10 @@ function adaptivetheme_five_5x20_panels_layouts() {
 }
 
 // Preprocess variables for the plugin template.
-function adaptivetheme_preprocess_five_5x20(&$vars) {
+function template_preprocess_five_5x20(&$vars) {
   // We need to initialize these variables when Panels is displaying the template.
-  // Thse are used primarily when the template is being rendered via Display suite 
-  // as a "node" so we can programatically wrap the layout in <article> elements 
+  // Thse are used primarily when the template is being rendered via Display suite
+  // as a "node" so we can programatically wrap the layout in <article> elements
   // with appropriate classes and id.
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
