@@ -1,12 +1,12 @@
 <?php
-// AT's liteweight plugin sub-system
+// AT's liteweight plugin sub-system.
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 
 /**
- * Find and return all plugins
+ * Find and return all plugins.
  *
  * This will search all base themes and the active theme for "plugins" in their info files, and return all plugins
  * directories. Info file entries must follow the Panels plugin structure i.e.
@@ -81,9 +81,13 @@ function at_get_plugins_paths($theme_name) {
   return $provider_paths;
 }
 
-//
-// at_get_plugins_files()
-//
+/**
+ * Returns all files for plugins of a particular type, called from at_load_plugins(), cannot be cached else it will
+ * return stale data - its always hit at least twice (since there are two types of plugins being called, usually).
+ *
+ * @param $theme_name
+ * @return array
+ */
 function at_get_plugins_files($theme_name) {
   $plugins_files = array();
   $plugins_list = at_get_plugins($theme_name);
@@ -102,13 +106,11 @@ function at_get_plugins_files($theme_name) {
 }
 
 /**
- * Extract plugin data structures
+ * Extract plugin data structures.
  *
- * In essence what this does is return the data strutures (arrays) for all plugins of a particular type. If you just
- * want everything then call at_get_plugins(), this is one step further along for free. Again, parts of this are ripped
- * from CTools. As of now only two types are used by AT - "panels" and "page_layout", however its possible more could be
- * used, such as "polyfill" and "font_family". This is not entirely generic enough to handle anything, but can if you
- * stick within the conventions provided, aka "panels", "page_layout" and "everything else".
+ * In essence what this does is return the data strutures (arrays) for all plugins of a particular type. As of now only
+ * two types are used by AT - "panels" and "page_layout". This is hard to cache because it takes the $plugin_type
+ * parameter, so everything else that calls this is heavily cached instead.
  *
  * @param $theme_name, usually the active theme, required.
  * @param $plugin_type, the plugin type you need to return, usually one of "panels" or "page_layout", required.
@@ -182,7 +184,7 @@ function at_load_plugins($theme_name, $plugin_type) {
 }
 
 /**
- * Calls the plugin system and retrives all the Page layouts
+ * Calls the plugin system and retrives all the Page layouts.
  *
  * This is used in two places, in the page layouts form to retrieve the layout options for each device group and when
  * building the layout CSS in at_core.submit.builders.inc
@@ -375,10 +377,3 @@ function page_layout() {
   );
   return $variables_array;
 }
-
-// this stuff working?
-// $thesepaths = at_get_plugins_paths();
-// dsm($thesepaths);
-// global $theme_name;
-// $pl = at_load_plugins($theme_name, $plugin_type = 'page_layout');
-// dsm($pl);

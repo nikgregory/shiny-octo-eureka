@@ -74,10 +74,10 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
 }
 
 /**
- * Return a themed script
+ * Return a themed script.
  *
- * at_theme_script() takes 1 parameter:
- * - $filepath - path to the file
+ * @param $filepath, path to the file.
+ * @return string
  */
 function at_theme_script($filepath) {
   $script = '';
@@ -93,7 +93,11 @@ function at_theme_script($filepath) {
   return $script;
 }
 
-// Return themed scripts in conditional comments
+/**
+ * Return themed scripts in conditional comments.
+ * @param $ie_scripts
+ * @return array|string
+ */
 function at_theme_conditional_scripts($ie_scripts) {
   $themed_scripts = drupal_static(__FUNCTION__, array());
   if (empty($themed_scripts)) {
@@ -109,22 +113,12 @@ function at_theme_conditional_scripts($ie_scripts) {
 }
 
 /**
- * Polyfills
+ * Polyfills.
  * Build an array of scripts to load.
- * You can easily add to this array in your own preprocess function and use the
- * array keys provided, or add your own. By default AT will load for "lt ie9",
- * "lt ie8" and "all". If you add your own keys you have to process them as well,
- * there is no generic loader. As you can see this is all very hard coded, but
- * could be made into a generic loader, and probably should be. Patches welcome!
  *
- * TODO: make this use the plugins sytem and the info file for loading scripts: Issue http://drupal.org/node/1511424
- * Notes for the todo:
- *  - there are two types of polyfills - scripts and CSS
- *  - there are two types of scripts and two types of CSS fills - those for IE and those for all
- *  - the IE condition needs to be configurable (i.e. take any valid conditional comment)
- *  - all polyfills need to be toggle-able in the UI, so on/off checkbox for each fill
- *  - the plugin data structure needs to be the same as the others, so the generic at_get_plugins() and
- *    other plugin system functions will just work strait off
+ * @param $polly
+ * @param $theme_name
+ * @return array
  */
 function polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_at_core;
@@ -183,13 +177,14 @@ function polly_wants_a_cracker($polly, $theme_name) {
 }
 
 /**
- * Google Font loader
- * Adaptivetheme can load websafe fonts, Google fonts, custom font
- * stacks and integrate with @font-your-face module. All can be
- * configured in the "Fonts" theme settings. Here we only need to
- * load Google webfonts. Websafe and custom fonts are stored in a
- * generated CSS file (in public files) and @font-your-face module
- * takes care of loading its own fonts.
+ * Google Font loader.
+ * Adaptivetheme can load websafe fonts, Google fonts, custom font stacks and integrate with @font-your-face module.
+ * All can be configured in the "Fonts" theme settings. Here we only need to load Google webfonts. Websafe and custom
+ * fonts are stored in a generated CSS file (in public files) and @font-your-face module takes care of loading its
+ * own fonts.
+ *
+ * @param $theme_name
+ * @return array|string
  */
 function load_google_fonts($theme_name) {
   global $path_to_at_core;
@@ -241,10 +236,12 @@ function load_google_fonts($theme_name) {
 }
 
 /**
- * Process the color info and return the active color scheme, we use this
- * to load a body class for the active color scheme, very useful for CSS
- * tweaks required for a particular scheme. This is not enabled by default,
- * you have to call it in template_preprocess_html()
+ * Process the color info and return the active color scheme, we use this to load a body class for the active color
+ * scheme, very useful for CSS tweaks required for a particular scheme. This is not enabled by default, you have to
+ * call it in template_preprocess_html()
+ *
+ * @param $theme_name
+ * @return string
  */
 function get_color_scheme_name($theme_name) {
   $scheme_name = drupal_static(__FUNCTION__, array());
@@ -278,8 +275,11 @@ function get_color_scheme_name($theme_name) {
 
 /**
  * Add classes for platforms and browsers.
- * This is very simple and can never replace something like WURFL or Mobile Smart, in the future
- * I intend to build a module to replace this. Warning, this is not overly tested...
+ * This is very simple and can never replace something like WURFL or Mobile Smart, in the future I intend to build a
+ * module to replace this. Warning, this is not overly tested.
+ *
+ * @param null $ua
+ * @return string
  */
 function css_browser_selector($ua = NULL) {
   if ($ua == NULL && !isset($_SERVER['HTTP_USER_AGENT'])) {

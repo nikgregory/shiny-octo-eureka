@@ -10,7 +10,7 @@
 
 
 ;----------// Stylesheets
-  stylesheets[all][] = css/at_admin.css
+  stylesheets[screen][] = css/at_admin.css
 
 
 ;----------// Regions

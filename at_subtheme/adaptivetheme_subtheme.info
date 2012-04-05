@@ -13,7 +13,7 @@
 ;----------// Stylesheets
 
   ; Globals CSS, loads all global.[type].css files in /css/
-  stylesheets[screen, handheld][] = css/globals.css
+  stylesheets[screen][] = css/globals.css
 
 
   ; Print

@@ -11,7 +11,7 @@
   screenshot  = screenshot.png
 
 ;----------// Stylesheets
-  stylesheets[screen, handheld][] = css/at.layout.css
+  stylesheets[screen][] = css/at.layout.css
 
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first

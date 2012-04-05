@@ -145,8 +145,6 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       );
     }
   }
-  
-  // dsm($head_elements); 
 }
 
 // hook_js_alter()
@@ -174,13 +172,6 @@ function adaptivetheme_page_alter(&$page) {
     }
   }
 }
-
-/* debug
-function adaptivetheme_block_view_alter(&$data, $block) {
-  dsm($data);
-  dsm($block);
-} 
-*/
 
 // hook_form_FORM_alter().
 function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
@@ -302,3 +293,10 @@ function adaptivetheme_form_node_form_alter(&$form, &$form_state, $form_id) {
 function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
   $settings['bodyClass'] = 'wysiwygeditor';
 }
+
+/* debug
+function adaptivetheme_block_view_alter(&$data, $block) {
+  dsm($data);
+  dsm($block);
+}
+*/

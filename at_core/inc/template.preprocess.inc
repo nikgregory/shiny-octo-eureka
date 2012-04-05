@@ -97,9 +97,9 @@ function adaptivetheme_preprocess_html(&$vars) {
     // In Production mode we only load one file for our design styles.
     // We use a media query to prevent non media query browsers from downloading it.
     // The embedded media queries in this file take precedence always.
-    else if (theme_get_setting('production_mode', $theme_name) === 1) {
+    else {
       $filepath = $path . '/' . $theme_name . '.responsive.styles.css';
-      $media_query = 'only screen and (min-width:1px)';
+      $media_query = 'only screen'; // keyword "only" should hide this from older user agents
       load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 200);
     }
   }
@@ -129,7 +129,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        'media' => 'screen, handheld',
+        'media' => 'screen',
         'every_page' => TRUE,
         )
       );
@@ -141,7 +141,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
     // Responsiveness is not disabled, load the responsive layout
     $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
-    $media_query = 'screen, handheld';
+    $media_query = 'only screen'; // keyword "only" should hide this from older user agents
     load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 100);
 
     // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
@@ -244,7 +244,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       drupal_add_css($filepath, array(
         'preprocess' => TRUE,
         'group' => CSS_THEME,
-        'media' => 'screen, handheld',
+        'media' => 'screen',
         'every_page' => TRUE,
         )
       );
@@ -259,7 +259,7 @@ function adaptivetheme_preprocess_html(&$vars) {
         'preprocess' => TRUE,
         'group' => CSS_THEME,
         'weight' => 1000,
-        'media' => 'screen, handheld',
+        'media' => 'screen',
         'every_page' => TRUE,
         )
       );
@@ -382,7 +382,7 @@ function adaptivetheme_preprocess_html(&$vars) {
         drupal_add_css($filepath, array(
           'preprocess' => TRUE,
           'group' => CSS_THEME,
-          'media' => 'screen, handheld',
+          'media' => 'screen',
           'every_page' => TRUE,
           )
         );
@@ -742,8 +742,6 @@ function adaptivetheme_preprocess_block(&$vars) {
  */
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme_name;
-
-  //dsm($vars);
   
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
