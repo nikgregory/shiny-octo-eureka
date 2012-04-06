@@ -2,9 +2,9 @@
 
   // Panel and Gpanel Reponsive Layout Settings
   // Build the settings form for responsive panels. This gets its data
-  // via responsive_panels_data_structure() in config.inc, which pulls 
+  // via responsive_panels_data_structure() in config.inc, which pulls
   // its data from each Panels layout plugin.
-  
+
   // Supported devices
   $devices = array(
     'tablet_landscape',
@@ -30,16 +30,9 @@
 
   // We need the admin_css files for each plugin
   $panels_admin_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'panels');
-  // should probably use #attached
   foreach ($panels_admin_css_files as $filepath) {
     if (file_exists($filepath)) {
-      drupal_add_css($filepath, array(
-        'preprocess' => FALSE,
-        'group' => CSS_THEME,
-        'media' => 'screen',
-        'every_page' => FALSE,
-        )
-      );
+      $panels_css_files['css'][] = array('type' => 'file', 'data' => $filepath, 'weight' => 100);
     }
   }
 
@@ -48,6 +41,7 @@
     '#type' => 'fieldset',
     '#title' => t('Gpanels &amp; Panels'),
     '#description' => t('<h3>Gpanels &amp; Panels</h3><p>These settings apply to both <a href="!gpanels_link" target="_blank">Gpanels</a> and <a href="!panels_link" target="_blank">Panels module</a> layouts.</p><p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels')),
+    '#attached' => $panels_css_files,
   );
 
   // Disabled message

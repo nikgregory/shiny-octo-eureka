@@ -1,8 +1,8 @@
 <?php
-  
+
   // Get an array of device groups with option values
   $device_group_options = responsive_page_layouts_device_group_options($theme_name);
-  
+
   // Assign $options for each device group
   foreach ($device_group_options as $device_group => $options) {
 
@@ -24,20 +24,12 @@
       }
     }
   }
-  
+
   // Load css for the layout sprite icons
   $page_layout_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'page_layout');
-  
-  // should probably use #attached
   foreach ($page_layout_css_files as $filepath) {
     if (file_exists($filepath)) {
-      drupal_add_css($filepath, array(
-        'preprocess' => FALSE,
-        'group' => CSS_THEME,
-        'media' => 'screen',
-        'every_page' => FALSE,
-        )
-      );
+      $page_layout_css['css'][] = array('type' => 'file', 'data' => $filepath, 'weight' => 100);
     }
   }
 
@@ -49,6 +41,7 @@
     '#type' => 'fieldset',
     '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
+    '#attached' => $page_layout_css,
     '#attributes' => array(
       'class' => array('at-layout-form'),
     ),
