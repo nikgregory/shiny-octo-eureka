@@ -174,13 +174,16 @@ function adaptivetheme_preprocess_html(&$vars) {
   // General IE stylesheets from the info file
   if (array_key_exists('ie_stylesheets', $info)) {
     foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
+      // Set default value for media in case the themer forgets, all is an "assumed" value an not printed in the output.
+      if (is_numeric($media)) {
+        $media = 'all';
+      }
       foreach ($stylesheets as $condition => $path) {
         $ie_style['media'] = $media;
         $ie_style['condition'] = $condition;
         $ie_style['path'] = $path;
       }
       $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-      // this will not return anything, load_subtheme_conditional_styles() will do the loading for us
       load_subtheme_conditional_styles($filepath, $ie_style);
     }
   }
