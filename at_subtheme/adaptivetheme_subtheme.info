@@ -35,7 +35,7 @@
 
   ; ie_stylesheets[screen][(lt IE 9)&(!IEMobile 7)] = css/lt-ie9.css
 
-  
+
 ;----------// Scripts
 
   ; Internet Explorer Scripts
@@ -165,8 +165,8 @@
   settings[tablet_landscape_five_5x20] = 'five-5x20-2x3-grid'
   settings[tablet_landscape_six_6x16]  = 'six-6x16-3x2-grid'
 
-  settings[tablet_landscape_inset_left]  = 'three-inset-left'
-  settings[tablet_landscape_inset_right] = 'three-inset-right'
+  settings[tablet_landscape_three_inset_left]  = 'three-inset-left'
+  settings[tablet_landscape_three_inset_right] = 'three-inset-right'
 
 
   ; Responsive Panels - Tablet portrait
@@ -184,8 +184,8 @@
   settings[tablet_portrait_five_5x20] = 'five-5x20-1x2x2-grid'
   settings[tablet_portrait_six_6x16]  = 'six-6x16-2x3-grid'
 
-  settings[tablet_portrait_inset_left]  = 'three-inset-left-wrap'
-  settings[tablet_portrait_inset_right] = 'three-inset-right-wrap'
+  settings[tablet_portrait_three_inset_left]  = 'three-inset-left-wrap'
+  settings[tablet_portrait_three_inset_right] = 'three-inset-right-wrap'
 
 
   ; Responsive Panels - Smartphone landscape
@@ -203,8 +203,8 @@
   settings[smartphone_landscape_five_5x20] = 'five-5x20-stack'
   settings[smartphone_landscape_six_6x16]  = 'six-6x16-stack'
 
-  settings[smartphone_landscape_inset_left]  = 'three-inset-left-stack'
-  settings[smartphone_landscape_inset_right] = 'three-inset-right-stack'
+  settings[smartphone_landscape_three_inset_left]  = 'three-inset-left-stack'
+  settings[smartphone_landscape_three_inset_right] = 'three-inset-right-stack'
 
 
   ; Global settings
