@@ -69,9 +69,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     );
 
     // Font lists - we need these for both font and heading settings
-    if(theme_get_setting('enable_font_settings') === 1 || theme_get_setting('enable_heading_settings') === 1) {
-      include_once($path_to_at_core . '/inc/font.lists.inc');
-    }
+    include_once($path_to_at_core . '/inc/font.lists.inc');
+
     // Heading styles
     if(theme_get_setting('enable_heading_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.headings.inc');

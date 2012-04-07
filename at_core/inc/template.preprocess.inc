@@ -173,15 +173,16 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // General IE stylesheets from the info file
   if (array_key_exists('ie_stylesheets', $info)) {
+    $ie_style = '';
     foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
       // Set default value for media in case the themer forgets, all is an "assumed" value an not printed in the output.
       if (is_numeric($media)) {
         $media = 'all';
       }
-      foreach ($stylesheets as $condition => $path) {
+      foreach ($stylesheets as $condition => $ie_styles_path) {
         $ie_style['media'] = $media;
         $ie_style['condition'] = $condition;
-        $ie_style['path'] = $path;
+        $ie_style['path'] = $ie_styles_path;
       }
       $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
       load_subtheme_conditional_styles($filepath, $ie_style);
@@ -194,14 +195,15 @@ function adaptivetheme_preprocess_html(&$vars) {
     // Info file loaded conditional scripts
     $theme_path = drupal_get_path('theme', $theme_name);
     if (array_key_exists('ie_scripts', $info)) {
-      foreach ($info['ie_scripts'] as $condition => $path) {
-        foreach ($path as $key => $value) {
+      foreach ($info['ie_scripts'] as $condition => $ie_scripts_path) {
+        foreach ($ie_scripts_path as $key => $value) {
           $filepath = $theme_path . '/' . $value;
           $vars['polyfills_array']['info'][$condition][] = at_theme_script($filepath);
         }
       }
     }
     // AT Core Polyfills
+    $polly = '';
     $polly_settings_array = array(
       'load_respondjs',
       'load_html5js',
@@ -221,49 +223,51 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Load fonts
-  if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
+  if(theme_get_setting('enable_extensions', $theme_name) === 1) {
+    if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
 
-    // Google fonts
-    $google_fonts = drupal_static('adaptivetheme_preprocess_html_google_fonts', FALSE);
-    if (empty($google_fonts)) {
-      $google_fonts = load_google_fonts($theme_name);
-    }
-    if (!empty($google_fonts)) {
-      // No protocol, we need to support https also
-      drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
-        'group' => CSS_THEME,
-        'type' => 'external',
-        'weight' => -100,
-        'preprocess' => FALSE,
-        )
-      );
+      // Google fonts
+      $google_fonts = drupal_static('adaptivetheme_preprocess_html_google_fonts', FALSE);
+      if (empty($google_fonts)) {
+        $google_fonts = load_google_fonts($theme_name);
+      }
+      if (!empty($google_fonts)) {
+        // No protocol, we need to support https also
+        drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
+          'group' => CSS_THEME,
+          'type' => 'external',
+          'weight' => -100,
+          'preprocess' => FALSE,
+          )
+        );
+      }
+
+      // Load the fonts CSS from public files
+      $filepath = $path . '/' . $theme_name . '.fonts.css';
+      if (file_exists($filepath)) {
+        drupal_add_css($filepath, array(
+          'preprocess' => TRUE,
+          'group' => CSS_THEME,
+          'media' => 'screen',
+          'every_page' => TRUE,
+          )
+        );
+      }
     }
 
-    // Load the Websafe and custom fonts CSS from public files
-    $filepath = $path . '/' . $theme_name . '.fonts.css';
-    if (file_exists($filepath)) {
-      drupal_add_css($filepath, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'media' => 'screen',
-        'every_page' => TRUE,
-        )
-      );
-    }
-  }
-
-  // Load the custom CSS if enabled
-  if (theme_get_setting('enable_custom_css', $theme_name) === 1) {
-    $filepath = $path . '/' . $theme_name . '.custom.css';
-    if (file_exists($filepath)) {
-      drupal_add_css($filepath, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'weight' => 1000,
-        'media' => 'screen',
-        'every_page' => TRUE,
-        )
-      );
+    // Load the custom CSS if enabled
+    if (theme_get_setting('enable_custom_css', $theme_name) === 1) {
+      $filepath = $path . '/' . $theme_name . '.custom.css';
+      if (file_exists($filepath)) {
+        drupal_add_css($filepath, array(
+          'preprocess' => TRUE,
+          'group' => CSS_THEME,
+          'weight' => 1000,
+          'media' => 'screen',
+          'every_page' => TRUE,
+          )
+        );
+      }
     }
   }
 

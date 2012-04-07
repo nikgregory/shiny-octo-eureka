@@ -29,8 +29,12 @@
   // Do some stuff if @font-your-face is enabled
   if (module_exists('fontyourface')) {
     // add an option to the font type settings
-    $fyf_type = array ('fyf' => '@font-your-face');
-    $font_type_options = array_merge($font_type_options, $fyf_type);
+    $font_your_face_enabled = font_your_face_fonts_enabled();
+    if ($font_your_face_enabled == TRUE) {
+      $fyf_type = array ('fyf' => '@font-your-face');
+      $font_type_options = array_merge($font_type_options, $fyf_type);
+    }
+
     // Special message once font your face in installed
     $browse_fyf = l(t('@font-your-face library'), 'admin/appearance/fontyourface/browse', array('attributes' => array('target' => array('_blank'))));
     $settings_fyf = l(t('"add selector in theme CSS"'), 'admin/appearance/fontyourface', array('attributes' => array('target' => array('_blank'))));
@@ -97,16 +101,18 @@
       'required' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
     )
   );
-  $form['at']['font']['base-font']['base_font_fyf'] = array(
-    '#type' => 'select',
-    '#title' => t('Font'),
-    '#default_value' => theme_get_setting('base_font_fyf'),
-    '#options' => font_list('fyf', 'bf'),
-    '#states' => array (
-      'visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf')
+  if ($font_your_face_enabled == TRUE) {
+    $form['at']['font']['base-font']['base_font_fyf'] = array(
+      '#type' => 'select',
+      '#title' => t('Font'),
+      '#default_value' => theme_get_setting('base_font_fyf'),
+      '#options' => font_list('fyf', 'bf'),
+      '#states' => array (
+        'visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf')
+        )
       )
-    )
-  );
+    );
+  }
   $form['at']['font']['base-font']['base_font_size'] = array(
     '#type' => 'select',
     '#title' => t('Size'),
@@ -182,13 +188,15 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['titles'][$setting_container][$setting_yfy] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_yfy),
-        '#options' => font_list('fyf', $element),
-        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
-      );
+      if ($font_your_face_enabled == TRUE) {
+        $form['at']['font']['titles'][$setting_container][$setting_yfy] = array(
+          '#type' => 'select',
+          '#title' => t('Font'),
+          '#default_value' => theme_get_setting($setting_yfy),
+          '#options' => font_list('fyf', $element),
+          '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
+        );
+      }
       $form['at']['font']['titles'][$setting_container][$setting_size] = array(
         '#type' => 'select',
         '#title' => t('Size'),
@@ -269,13 +277,15 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_yfy),
-        '#options' => font_list('fyf', $element),
-        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
-      );
+      if ($font_your_face_enabled == TRUE) {
+        $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
+          '#type' => 'select',
+          '#title' => t('Font'),
+          '#default_value' => theme_get_setting($setting_yfy),
+          '#options' => font_list('fyf', $element),
+          '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
+        );
+      }
     }
   }
 
@@ -372,13 +382,15 @@
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_yfy] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_yfy),
-        '#options' => font_list('fyf', $element),
-        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
-      );
+      if ($font_your_face_enabled == TRUE) {
+        $form['at']['font']['menus'][$setting_container][$setting_yfy] = array(
+          '#type' => 'select',
+          '#title' => t('Font'),
+          '#default_value' => theme_get_setting($setting_yfy),
+          '#options' => font_list('fyf', $element),
+          '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
+        );
+      }
       $form['at']['font']['menus'][$setting_container][$setting_size] = array(
         '#type' => 'select',
         '#title' => t('Size'),
@@ -431,16 +443,17 @@
       'required' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
     )
   );
-  $form['at']['font']['css']['selectors_font_fyf'] = array(
-    '#type' => 'select',
-    '#title' => t('Font'),
-    '#default_value' => theme_get_setting('selectors_font_fyf'),
-    '#options' => font_list('fyf', 'css'),
-    '#states' => array (
-      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
-    )
-  );
-
+  if ($font_your_face_enabled == TRUE) {
+    $form['at']['font']['css']['selectors_font_fyf'] = array(
+      '#type' => 'select',
+      '#title' => t('Font'),
+      '#default_value' => theme_get_setting('selectors_font_fyf'),
+      '#options' => font_list('fyf', 'css'),
+      '#states' => array (
+        'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
+      )
+    );
+  }
   // CSS selectors
   $form['at']['font']['css']['selectors_css'] = array(
     '#type' => 'textarea',

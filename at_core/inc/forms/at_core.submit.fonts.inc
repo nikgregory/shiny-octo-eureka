@@ -9,11 +9,7 @@
   $font_elements = font_elements();
 
   // Check if fontyourface is enabled, doing this in the loop will be expensive
-  $fontyourface = FALSE;
-  if (module_exists('fontyourface')) {
-    static $fontyourface;
-    $fontyourface = TRUE;
-  }
+  $font_your_face_enabled = font_your_face_fonts_enabled();
 
   // Find the right font for each element
   foreach ($font_elements as $key => $value) {
@@ -107,7 +103,7 @@
     }
 
     // Font Your Face
-    if ($fontyourface === TRUE) {
+    if ($font_your_face_enabled === TRUE) {
       if ($font_type === 'fyf') {
         // pull the font list, we need to iterate over it
         $fyf_fonts = font_your_face_fonts_list($element); // this is a keyed array
@@ -140,4 +136,3 @@
   $file_name = $theme_name . '.fonts.css';
   $filepath = "$path/$file_name";
   file_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);
- 

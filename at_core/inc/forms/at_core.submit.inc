@@ -21,28 +21,28 @@ function at_core_settings_submit($form, &$form_state) {
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
   // Set up our files directory for the generated files. Files are never
-  // overwritten, however the files are really small - total around 25kb 
-  // depending, of which around 8kb is never loaded - the theme info 
+  // overwritten, however the files are really small - total around 25kb
+  // depending, of which around 8kb is never loaded - the theme info
   // config file, which is just a backup.
   $id = $theme_name . '_files_' . substr(hash('sha256', serialize($theme_name) . microtime()), 0, 8);
   $path  = 'public://adaptivetheme/' . $id;
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
   variable_set('theme_' . $theme_name . '_files_directory', $path);
-  
+
   // Include processing for automagical info builder
   include_once($path_to_at_core . '/inc/forms/at_core.submit.info.inc');
 
   // Include processing for page & panels layouts, and responsive styles
   include_once($path_to_at_core . '/inc/forms/at_core.submit.responsive.inc');
 
-  if(theme_get_setting('enable_extensions') === 1) {
+  if($values['enable_extensions'] === 1) {
     // Include processing for fonts
-    if ($values['enable_font_settings'] === 1) {
+    if (isset($values['enable_font_settings']) && $values['enable_font_settings'] === 1) {
       include_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
     }
-    
+
     // Include processing for Custom CSS
-    if ($values['enable_custom_css'] === 1) {
+    if (isset($values['enable_custom_css']) && $values['enable_custom_css'] === 1) {
       include_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
     }
   }

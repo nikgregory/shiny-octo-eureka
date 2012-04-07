@@ -158,15 +158,24 @@ function font_list($type, $element) {
 
   // websafe font list
   if ($type === 'wsf') {
-    $font_list = websafe_fonts_list($element);
+    $wsf_fonts = websafe_fonts_list($element);
+    if (!empty($wsf_fonts)) {
+      $font_list = $wsf_fonts;
+    }
   }
   // Google font list
   if ($type === 'gwf') {
-    $font_list = google_fonts_list($element);
+    $gwf_fonts = google_fonts_list($element);
+    if (!empty($gwf_fonts)) {
+      $font_list = $gwf_fonts;
+    }
   }
   // @font-your-face font list
   if ($type === 'fyf') {
-    $font_list = font_your_face_fonts_list($element);
+    $fyf_fonts = font_your_face_fonts_list($element);
+    if (!empty($fyf_fonts)) {
+      $font_list = $fyf_fonts;
+    }
   }
 
   return array_unique($font_list);
@@ -208,18 +217,45 @@ function websafe_fonts_list($element) {
  */
 function font_your_face_fonts_list($element) {
   $fonts = array();
-  if (module_exists('fontyourface')) {
+  $font_your_face_enabled = font_your_face_fonts_enabled();
+  if ($font_your_face_enabled == TRUE) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
-    foreach ($enabled_fonts as $font) {
-      // <none> is "-- add selector in theme CSS --" in fontyourface settings
-      if ($font->css_selector === '<none>') {
-        $key = drupal_html_class("$element-$font->name");
-        $value = $font->name;
-        $fonts[$key] = $value;
+    if (!empty($enabled_fonts)) {
+      foreach ($enabled_fonts as $font) {
+        // <none> is "-- add selector in theme CSS --" in fontyourface settings
+        if ($font->css_selector === '<none>') {
+          $key = drupal_html_class("$element-$font->name");
+          $value = $font->name;
+          $fonts[$key] = $value;
+        }
       }
     }
   }
   return $fonts;
+}
+
+/**
+ * Check if there are available fonts, return boolean.
+ * There are a number of places in forms and other functions we need to know
+ * if any font-your-face fonts are enabled and set to <none> and therefor
+ * available for use in the theme settings.
+ */
+function font_your_face_fonts_enabled() {
+  $fonts_enabled = FALSE;
+  if (module_exists('fontyourface')) {
+    $enabled_fonts = fontyourface_get_fonts('enabled = 1');
+    if (!empty($enabled_fonts)) {
+      foreach ($enabled_fonts as $font) {
+        if ($font->css_selector === '<none>') {
+          $fonts[] = $font;
+        }
+      }
+    }
+    if (!empty($fonts)) {
+      $fonts_enabled = TRUE;
+    }
+  }
+  return $fonts_enabled;
 }
 
 /**
@@ -246,15 +282,13 @@ function google_fonts_list($element) {
  * variants. Last update: 27/02/2012
  */
 function google_font_names() {
-
   $google_font_names_array = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_names_array)) {
-
-    // try to get the list from the cache table
+    // Try to get the list from the cache table.
     if ($cache = cache_get('at_google_font_names')) {
       $google_font_names_array = $cache->data;
     }
-    // nope?
+    // Nope?
     else {
       $google_font_names_array = array(
         'Abel',
@@ -735,7 +769,7 @@ function google_font_names() {
         'Yesteryear',
         'Zeyada',
       );
-     // Cache this to the cache table
+     // Cache this to the cache table.
      cache_set('at_google_font_names', $google_font_names_array, 'cache');
     }
   }
