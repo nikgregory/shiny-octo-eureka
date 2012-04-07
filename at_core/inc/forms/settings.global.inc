@@ -1,4 +1,7 @@
 <?php
+  /**
+   * TODO: review documentation and provide links to help pages.
+   */
 
   // Global Settings
   $form['at-layout']['global-settings'] = array(
@@ -12,9 +15,7 @@
     '#title' => t('Production Mode'),
     '#description' => t('<h3>Production Mode</h3>'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
+      'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
   );
   $form['at-layout']['global-settings']['mode']['production_mode'] = array(
@@ -30,14 +31,12 @@
     '#title' => t('Mobile first or Mobile last'),
     '#description' => t('<h3>Mobile first or Desktop first</h3>'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
+      'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
   );
   $form['at-layout']['global-settings']['default-layout']['global_default_layout'] = array(
     '#type' => 'radios',
-    '#description' => t('Adaptivetheme supports both mobile first and desktop first design approaches. Please review our documentation (TODO - insert link).'),
+    '#description' => t('Adaptivetheme supports both mobile first and desktop first design approaches.'),
     '#default_value' => theme_get_setting('global_default_layout'),
     '#options' => array(
       'smartphone-portrait'  => t('Mobile first'),
@@ -51,9 +50,7 @@
     '#title' => t('Cascading Media Queries'),
     '#description' => t('<h3>Cascading Media Queries</h3>'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
+      'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
   );
   $form['at-layout']['global-settings']['cascading-mediaqueries']['enable_cascading_media_queries'] = array(
@@ -69,12 +66,8 @@
     '#default_value' => theme_get_setting('cascade_media_query'),
     '#field_prefix' => '@media',
     '#states' => array(
-      'invisible' => array(
-        'input[name="production_mode"]' => array('checked' => TRUE),
-      ),
-      'disabled' => array(
-        'input[name="enable_cascading_media_queries"]' => array('checked' => FALSE),
-      ),
+      'invisible' => array('input[name="production_mode"]' => array('checked' => TRUE)),
+      'disabled' => array('input[name="enable_cascading_media_queries"]' => array('checked' => FALSE)),
     ),
   );
 
@@ -84,44 +77,82 @@
     '#title' => t('Polyfills'),
     '#description' => t('<h3>Polyfills</h3>'),
   );
+  // HTML5 shiv
   $form['at-layout']['global-settings']['polyfills']['load_html5js'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable HTML5 support in IE8 and below'),
-    '#description' => t('By checking this setting the site will load the <a href="!link3" target="_blank">html5shiv</a>.', array('!link3' => '//github.com/aFarkas/html5shiv')),
+    '#description' => t('By checking this setting the site will load the <a href="!link" target="_blank">html5shiv</a>.', array('!link' => '//github.com/aFarkas/html5shiv')),
     '#default_value' => theme_get_setting('load_html5js'),
   );
+  // Rounding error fix (CSS)
   $form['at-layout']['global-settings']['polyfills']['load_ltie8css'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable CSS rounding error fixes for IE7 and below'),
     '#description' => t('This will load a stylesheet that fixes percentage rounding errors in IE6/7.'),
     '#default_value' => theme_get_setting('load_ltie8css'),
   );
+  // Respond.js
   $form['at-layout']['global-settings']['polyfills']['load_respondjs'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable media queries in IE8 and below'),
+    '#title' => t('Enable media queries in IE6-8'),
     '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
     '#default_value' => theme_get_setting('load_respondjs'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
+      'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
   );
+  // Boxsizing.htc
   $form['at-layout']['global-settings']['polyfills']['load_boxsizinghtc'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable Box Sizing HTC fix for IE'),
-    '#description' => t('A polyfill for <code>box-sizing: border-box</code> for IE6 and IE7. Read the usage docs: TODO insert link to docs.', array('!link3' => '//github.com/aFarkas/html5shiv')),
+    '#title' => t('Enable Box Sizing HTC fix for IE6-7'),
+    '#description' => t('<a href="!link" target="_blank">Box Sizing HTC</a> enables CSS3 <code>box-sizing</code> for IE6-IE8.', array('!link' => '//github.com/Schepp/box-sizing-polyfill')),
     '#default_value' => theme_get_setting('load_boxsizinghtc'),
   );
+  // PIE
+  $form['at-layout']['global-settings']['polyfills']['pie']['load_pie'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable PIE for IE'),
+    '#description' => t('<a href="!link" target="_blank">PIE</a> enabes CSS3 backwards compatibility for IE. Turn PIE off if you are not using it, its 40kb.', array('!link' => 'http://css3pie.com')),
+    '#default_value' => theme_get_setting('load_pie'),
+  );
+  $form['at-layout']['global-settings']['polyfills']['pie']['pie_crust'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Additional options for PIE'),
+    '#states' => array(
+      'visible' => array('input[name="load_pie"]' => array('checked' => TRUE)),
+    ),
+  );
+  $form['at-layout']['global-settings']['polyfills']['pie']['pie_crust']['which_pie'] = array(
+    '#type' => 'select',
+    '#title' => t('Select which version of PIE to load'),
+    '#default_value' => theme_get_setting('which_pie'),
+    '#options' => array(
+      'PIE.htc' => 'PIE.htc',
+      'PIE.php' => 'PIE.php',
+      'PIE.js' => 'PIE.js',
+    ),
+  );
+  $form['at-layout']['global-settings']['polyfills']['pie']['pie_crust']['disble_pie_for_ie9'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable PIE for IE9'),
+    '#description' => t('IE9 supports some CSS3, optionally disable PIE support in IE9.'),
+    '#default_value' => theme_get_setting('disble_pie_for_ie9'),
+  );
+  // selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8
+  $form['at-layout']['global-settings']['polyfills']['load_selectivizr'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Selectivizr for IE6-8'),
+    '#description' => t('<a href="!link" target="_blank">Selectivizr</a> is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8.', array('!link' => 'http://selectivizr.com')),
+    '#default_value' => theme_get_setting('load_selectivizr'),
+  );
+  // Scalefix
   $form['at-layout']['global-settings']['polyfills']['load_scalefixjs'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Scalefix for iOS'),
-    '#description' => t('This prevents iOS from overscaling the page on orientation change while preserving accessibility (scaling capability).', array('!link3' => '//github.com/aFarkas/html5shiv')),
+    '#description' => t('Fixes the iOS Orientationchange zoom bug.'),
     '#default_value' => theme_get_setting('load_scalefixjs'),
     '#states' => array(
-      'invisible' => array(
-        'input[name="disable_responsive_styles"]' => array('checked' => TRUE),
-      ),
+      'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
   );
 

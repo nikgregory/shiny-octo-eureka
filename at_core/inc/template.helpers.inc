@@ -149,19 +149,29 @@ function polly_wants_a_cracker($polly, $theme_name) {
 
       // Respond.js
       if ($polly['load_respondjs'] === 1 && theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-        $crackers['ie']['lt IE 9'][] = 'js/respond.js';
+        $crackers['ie']['lt IE 9'][] = 'scripts/respond.js';
       }
       // HTML5 Shiv
       if ($polly['load_html5js'] === 1) {
-        $crackers['ie']['lt IE 9'][] = 'js/html5.js';
+        $crackers['ie']['lt IE 9'][] = 'scripts/html5.js';
       }
       // Boxsizing.htc
       if ($polly['load_boxsizinghtc'] === 1) {
-        $crackers['ie']['lt IE 9'][] = 'js/boxsizing.htc';
+        $crackers['ie']['lt IE 9'][] = 'scripts/boxsizing.htc';
+      }
+      // PIE
+      if ($polly['load_pie'] === 1) {
+        $pie = theme_get_setting('which_pie', $theme_name);
+        $pie_condition = theme_get_setting('disble_pie_for_ie9', $theme_name) ? 'lt IE 9' : 'lt IE 10';
+        $crackers['ie'][$pie_condition][] = 'scripts/' . $pie;
+      }
+      // Selectivizr
+      if ($polly['load_selectivizr'] === 1) {
+        $crackers['ie']['lt IE 9'][] = 'scripts/selectivizr.js';
       }
       // Scalefix.js
       if ($polly['load_scalefixjs'] === 1) {
-        $crackers['all'][] = 'js/scalefix.js';
+        $crackers['all'][] = 'scripts/scalefix.js';
       }
 
       // Load Polyfills

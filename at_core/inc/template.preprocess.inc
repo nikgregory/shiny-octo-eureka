@@ -208,6 +208,8 @@ function adaptivetheme_preprocess_html(&$vars) {
       'load_respondjs',
       'load_html5js',
       'load_boxsizinghtc',
+      'load_pie',
+      'load_selectivizr',
       'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
     );
     foreach ($polly_settings_array as $polly_setting) {
