@@ -34,11 +34,12 @@ function three_col_grail() {                     // - function name must be iden
       'tablet_landscape',                        //   What you enter here will dictate the device groups it shows for in theme settings.
      ),
   );
+
   return $page_layout;
 }
 
 /**
- * Define your custom layout.
+ * CSS Builder for the three_col_grail layout.
  * This does not have to be anything like this, but it must return a string of
  * CSS, thats about it, and only has 3 bits of data to work with that come
  * from the theme settings (what the user entered in the UI), of course you can
@@ -55,8 +56,6 @@ function three_col_grail() {                     // - function name must be iden
 
  */
 function three_col_grail_layout($sidebar_first, $sidebar_second, $sidebar_unit) {
-  $output = '';
-  $styles = array();
 
   // Set variables for language direction. In thoery a layout plugin could
   // be RTL compatible.
@@ -68,21 +67,20 @@ function three_col_grail_layout($sidebar_first, $sidebar_second, $sidebar_unit) 
   $sidebar_second = $sidebar_second . $sidebar_unit;
   $sidebar_first  = $sidebar_first . $sidebar_unit;
 
-  // Push and pull values if required, AT is a content source ordered layout
-  // and uses a negative margin layout system.
+  // Define margins/negative margins if required, AT is a content source
+  // ordered layout and uses a negative margin layout system.
   $push_right = $sidebar_second;
   $push_left  = $sidebar_first;
   $pull_right = $sidebar_second;
 
-  // Add to the $styles[] array, at_build_page_layout() will return the styles
-  // to the submit function for printing to file.
-  $styles[] = '#content-column,.content-column,div.sidebar {float:left;clear:none}';
-  $styles[] = '.two-sidebars .content-inner {margin-' . $left . ':' . $push_left . ';margin-' . $right . ':' . $push_right . '}';
-  $styles[] = '.sidebar-first .content-inner {margin-' . $left . ':' . $push_left . ';margin-' . $right . ':0}';
-  $styles[] = '.sidebar-second .content-inner {margin-' . $right . ': ' . $push_right . ';margin-' . $left . ':0}';
-  $styles[] = '.region-sidebar-first {width:' . $sidebar_first . ';margin-' . $left . ':-100%}';
-  $styles[] = '.region-sidebar-second {width:' . $sidebar_second . ';margin-' . $left . ':-' . $pull_right . '}';
+  $styles = <<<EOF
+#content-column,.content-column,div.sidebar {float: left; clear: none}
+.two-sidebars .content-inner {margin-$left: $push_left; margin-$right: $push_right}
+.sidebar-first .content-inner {margin-$left: $push_left; margin-$right: 0}
+.sidebar-second .content-inner {margin-$right: $push_right; margin-$left: 0}
+.region-sidebar-first {width: $sidebar_first; margin-$left: -100%}
+.region-sidebar-second {width: $sidebar_second; margin-$left: -$pull_right}
+EOF;
 
-  $output = implode('', $styles);
-  return $output;
+  return $styles;
 }

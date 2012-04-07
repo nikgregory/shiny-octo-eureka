@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_two_50_panels_layouts() {
   $items['two_50'] = array(
-    'title'    => t('Two column 50/50'),
+    'title'    => t('AT Two column 50/50'),
     'category' => t('AT Responsive Panels - 2 column'),
     'icon'     => 'two_50.png',
     'theme'    => 'two_50',

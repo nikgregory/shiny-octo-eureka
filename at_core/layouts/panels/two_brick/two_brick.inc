@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_two_brick_panels_layouts() {
   $items['two_brick'] = array(
-    'title'    => t('Two column brick'),
+    'title'    => t('AT Two column brick'),
     'category' => t('AT Responsive Panels - 2 column'),
     'icon'     => 'two_brick.png',
     'theme'    => 'two_brick',

@@ -3,18 +3,16 @@
  * All Preprocess functions for templates and theme fucntions.
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
-global $theme_key, $theme_name;
-$theme_name = $theme_key;
-$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 
 /**
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-  global $theme_name, $language, $path_to_at_core;
+  global $theme_key, $language;
+  $theme_name = $theme_key;
 
-  // Set a variable for the base path
+  // Set some paths
+  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
   $vars['base_path'] = base_path();
 
   // Get the info file data
@@ -429,7 +427,8 @@ function adaptivetheme_preprocess_html(&$vars) {
  * Preprocess variables for page.tpl.php
  */
 function adaptivetheme_preprocess_page(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // Set up logo element
   if (theme_get_setting('toggle_logo', $theme_name) === 1) {
@@ -616,7 +615,8 @@ function adaptivetheme_preprocess_region(&$vars) {
  * Preprocess variables for block.tpl.php
  */
 function adaptivetheme_preprocess_block(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region === 'menu_bar') {
@@ -748,7 +748,8 @@ function adaptivetheme_preprocess_block(&$vars) {
  * Preprocess variables for node.tpl.php
  */
 function adaptivetheme_preprocess_node(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
@@ -827,7 +828,8 @@ function adaptivetheme_preprocess_node(&$vars) {
  * Preprocess variables for comment.tpl.php
  */
 function adaptivetheme_preprocess_comment(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // Extra comment classes if required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 1) {
@@ -925,7 +927,8 @@ function adaptivetheme_preprocess_search_block_form(&$vars) {
  * Preprocess variables for field.tpl.php
  */
 function adaptivetheme_preprocess_field(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   $element = $vars['element'];
 

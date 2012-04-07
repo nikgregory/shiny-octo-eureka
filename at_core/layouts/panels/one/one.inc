@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_one_panels_layouts() {
   $items['one'] = array(
-    'title'    => t('One column'),
+    'title'    => t('AT One column'),
     'category' => t('AT Responsive Panels - 1 column'),
     'icon'     => 'one.png',
     'theme'    => 'one',

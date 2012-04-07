@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_three_3x33_panels_layouts() {
   $items['three_3x33'] = array(
-    'title'    => t('Three column 33/34/33'),
+    'title'    => t('AT Three column 33/34/33'),
     'category' => t('AT Responsive Panels - 3 column'),
     'icon'     => 'three_3x33.png',
     'theme'    => 'three_3x33',

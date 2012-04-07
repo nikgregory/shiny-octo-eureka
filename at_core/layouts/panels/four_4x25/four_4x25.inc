@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_four_4x25_panels_layouts() {
   $items['four_4x25'] = array(
-    'title'    => t('Four column 4x25'),
+    'title'    => t('AT Four column 4x25'),
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'four_4x25.png',
     'theme'    => 'four_4x25',

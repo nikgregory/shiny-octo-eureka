@@ -3,16 +3,16 @@
  * All Process functions for templates and theme fucntions.
  * If you need to add or modify process functions do it in your sub-theme.
  */
-global $theme_key, $theme_name;
-$theme_name = $theme_key;
-$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 
 /**
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
-  global $theme_name, $path_to_at_core;
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  // Set path to core files
+  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   if (!empty($vars['polyfills_array'])) {
     $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
@@ -64,7 +64,10 @@ function adaptivetheme_process_html_tag(&$vars) {
  * Process variables for page.tpl.php
  */
 function adaptivetheme_process_page(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  //dsm($vars);
 
   // theme the menu bars
   if (!empty($vars['primary_navigation'])) {
@@ -181,7 +184,9 @@ function adaptivetheme_process_block(&$vars) {
  * Process variables for node.tpl.php
  */
 function adaptivetheme_process_node(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
+
   // Strip default drupal classes if not required
   if (theme_get_setting('extra_article_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
@@ -230,7 +235,9 @@ function adaptivetheme_process_node(&$vars) {
  * Process variables for comment.tpl.php
  */
 function adaptivetheme_process_comment(&$vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
+
   // Strip default drupal classes if not required
   if (theme_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);

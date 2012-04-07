@@ -65,7 +65,7 @@
  */
 function adaptivetheme_five_5x20_panels_layouts() {
   $items['five_5x20'] = array(
-    'title'    => t('Five column 5x20'),
+    'title'    => t('AT Five column 5x20'),
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'five_5x20.png', // Used in Panels Admin only, AT Core uses a CSS sprite
     'theme'    => 'five_5x20',

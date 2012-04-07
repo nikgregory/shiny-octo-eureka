@@ -1,5 +1,9 @@
 <?php
-// Positions both sidebars to the right of the main content column.
+/**
+ * Implimentation of a Page Layout Plugin for Adaptivetheme.
+ *
+ * @see three_col_grail.inc for detailed documentation.
+ */
 function two_sidebars_right() {
   $page_layout['two_sidebars_right'] = array(
     'title'     => t('Two Sidebars Right'),
@@ -11,30 +15,40 @@ function two_sidebars_right() {
       'tablet_landscape',
      ),
   );
+
   return $page_layout;
 }
 
+/**
+ * CSS Builder for the two_sidebars_right layout.
+ * Positions both sidebars to the right of the main content column.
+ *
+ * @param $sidebar_first, an arbitary numeric value.
+ * @param $sidebar_second, an arbitary numeric value.
+ * @param $sidebar_unit, a value unit, one of px, em or %.
+ */
 function two_sidebars_right_layout($sidebar_first, $sidebar_second, $sidebar_unit) {
-  $output = '';
-  $styles = array();
 
   $left = 'left';
   $right = 'right';
 
   $content_margin = $sidebar_second + $sidebar_first . $sidebar_unit;
-  $push_right     = $sidebar_second . $sidebar_unit;
-  $push_left      = $sidebar_first . $sidebar_unit;
-  $left_margin    = $sidebar_second + $sidebar_first . $sidebar_unit;
-  $right_margin   = $sidebar_second . $sidebar_unit;
+  $sidebar_first  = $sidebar_first . $sidebar_unit;
+  $sidebar_second = $sidebar_second . $sidebar_unit;
+  $push_left      = $sidebar_first;
+  $push_right     = $sidebar_second;
+  $left_margin    = $content_margin;
+  $right_margin   = $sidebar_second;
 
-  $styles[] = '#content-column,.content-column,div.sidebar {float:left;clear:none}';
-  $styles[] = '.two-sidebars .content-inner {margin-' . $right . ':' . $content_margin . ';margin-' . $left . ':0}';
-  $styles[] = '.sidebar-first .content-inner {margin-' . $right . ':' . $push_left . ';margin-' . $left . ':0}';
-  $styles[] = '.sidebar-second .content-inner {margin-' . $right . ':' . $push_right . ';margin-' . $left . ':0}';
-  $styles[] = '.region-sidebar-first {width:' . $sidebar_first . $sidebar_unit . ';margin-' . $left . ':-' . $left_margin . '}';
-  $styles[] = '.region-sidebar-second {width:' . $sidebar_second . $sidebar_unit . ';margin-' . $left . ':-' . $right_margin . '}';
-  $styles[] = '.sidebar-first .region-sidebar-first {width:' . $sidebar_first . $sidebar_unit . ';margin-' . $left . ':-' . $sidebar_first . $sidebar_unit . '}';
+  $styles = <<<EOF
+#content-column,.content-column,div.sidebar {float: left; clear: none}
+.two-sidebars .content-inner {margin-$right: $content_margin; margin-$left: 0}
+.sidebar-first .content-inner {margin-$right: $push_left; margin-$left: 0}
+.sidebar-second .content-inner {margin-$right: $push_right; margin-$left: 0}
+.region-sidebar-first {width: $sidebar_first; margin-$left: -$left_margin}
+.region-sidebar-second {width: $sidebar_second; margin-$left: -$right_margin}
+.sidebar-first .region-sidebar-first {width: $sidebar_first; margin-$left: -$sidebar_first}
+EOF;
 
-  $output = implode('', $styles);
-  return $output;
+  return $styles;
 }

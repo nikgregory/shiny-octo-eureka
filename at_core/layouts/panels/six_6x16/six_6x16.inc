@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_six_6x16_panels_layouts() {
   $items['six_6x16'] = array(
-    'title'    => t('Six column 6x16'),
+    'title'    => t('AT Six column 6x16'),
     'category' => t('AT Responsive Panels - 4,5,6 column'),
     'icon'     => 'six_6x16.png',
     'theme'    => 'six_6x16',

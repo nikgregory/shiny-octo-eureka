@@ -82,18 +82,18 @@ fieldset.at-layout-form div.form-item[class*="-media-query"] .description {
 fieldset.at-layout-form div.form-type-radio label,
 div.smartphone-portrait-layout,
 .panel-option-lists .form-radios label  {
-  text-indent: 100%; 
+  text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
 }
 
 /* edit-disabled responsive layout disabled messages */
-.vertical-tabs-panes fieldset fieldset[id*="edit-disabled"], 
+.vertical-tabs-panes fieldset fieldset[id*="edit-disabled"],
 .vertical-tabs-panes fieldset fieldset[id*="edit-disabled"] .fieldset-wrapper {
   background: transparent;
   margin: 0;
   padding: 0;
-} 
+}
 
 
 /* Layout settings */
@@ -222,7 +222,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   vertical-align: middle;
 }
 .panel-option-lists .fieldset-wrapper > .form-item > label {
-  font-weight: 700;
+  font-weight: 400;
   width: 20%;
 }
 .panel-option-lists .fieldset-wrapper legend {
@@ -438,7 +438,7 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
 .admin-theme-seven fieldset,
 .admin-theme-seven .fieldset-wrapper,
 .admin-theme-seven legend
-.admin-theme-seven .fieldset-legend {  
+.admin-theme-seven .fieldset-legend {
   margin: 0;
   padding: 0;
 }
