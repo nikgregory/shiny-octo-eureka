@@ -163,6 +163,20 @@ function adaptivetheme_js_alter(&$javascript) {
 }
 
 /**
+ * hook_css_alter()
+ */
+/* Test for setting the weight for font-your-face css
+function adaptivetheme_css_alter(&$css) {
+  if (isset($css['sites/default/files/fontyourface/font.css'])) {
+    $css['sites/default/files/fontyourface/font.css']['media'] = 'screen';
+    $css['sites/default/files/fontyourface/font.css']['weight'] = -10000000;
+    $css['sites/default/files/fontyourface/font.css']['every_page'] = TRUE;
+  }
+  dsm($css);
+}
+*/
+
+/**
  * hook_page_alter()
  */
 function adaptivetheme_page_alter(&$page) {

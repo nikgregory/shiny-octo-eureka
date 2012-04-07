@@ -94,7 +94,7 @@
   $form['at']['font']['base-font']['base_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('base_font_cfs') ? theme_get_setting('base_font_cfs') : '',
+    '#default_value' => theme_get_setting('base_font_cfs'),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
@@ -181,7 +181,7 @@
       $form['at']['font']['titles'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
+        '#default_value' => theme_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -270,7 +270,7 @@
       $form['at']['font']['headings'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
+        '#default_value' => theme_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -375,7 +375,7 @@
       $form['at']['font']['menus'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs) ? theme_get_setting($setting_cfs) : '',
+        '#default_value' => theme_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -405,7 +405,7 @@
   // Custom CSS selectors
   $form['at']['font']['css'] = array (
     '#type' => 'fieldset',
-    '#title' => t('Custom CSS'),
+    '#title' => t('Custom Selectors'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -436,7 +436,7 @@
   $form['at']['font']['css']['selectors_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('selectors_font_cfs') ? theme_get_setting('selectors_font_cfs') : '',
+    '#default_value' => theme_get_setting('selectors_font_cfs'),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
@@ -457,9 +457,9 @@
   // CSS selectors
   $form['at']['font']['css']['selectors_css'] = array(
     '#type' => 'textarea',
-    '#title' => t('CSS'),
+    '#title' => t('CSS Selectors'),
     '#rows' => 3,
-    '#default_value' => theme_get_setting('selectors_css') ? theme_get_setting('selectors_css') : '',
+    '#default_value' => theme_get_setting('selectors_css'),
     '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>"),
     '#states' => array (
       'disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>')),

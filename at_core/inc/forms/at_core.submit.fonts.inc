@@ -19,9 +19,12 @@
     $selector = $value['selector'] ? $value['selector'] : ''; // the selector to use when building the CSS
     $setting  = $value['setting']  ? $value['setting'] : '';  // the theme setting used to retrieve the font values
 
-    // We need to retrive this, its in a theme setting not in the font elements array
+    // Deal with the custom CSS selectors.
     if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
       $selector = filter_xss($values['selectors_css']); // sanitize user entered data, strip bad protocols
+    }
+    if ($selector == 'custom_css' && empty($values['selectors_css'])) {
+      $selector = 'ruby ruby'; // Valid but highly unlikely to ever match anything
     }
 
     // Get the font type if isset, not all font settings have a type
