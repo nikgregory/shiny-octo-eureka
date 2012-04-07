@@ -1343,15 +1343,6 @@ ul.action-links li a:focus {
   padding: 5px 0;
 }
 
-/* Themes page */
-#system-themes-page .theme-info h3 {
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-#system-themes-page .theme-info .theme-description {
-  color: #666;
-}
-
 /* Block search */
 #block-search-form .block-inner {
   background: none;
@@ -1462,7 +1453,7 @@ ul.action-links li a:focus {
 }
 #overlay div.region-help,
 #overlay div.messages {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 /* Color form */
@@ -1485,6 +1476,54 @@ ul.action-links li a:focus {
 }
 #color_scheme_form .color-form .form-item {
   padding-left: 7px;
+}
+
+/* Themes list */
+.theme-selector .screenshot, .theme-selector .no-screenshot,
+.system-themes-list-enabled .theme-selector .screenshot,
+.system-themes-list-enabled .theme-selector .no-screenshot,
+.system-themes-list-disabled .theme-selector .screenshot,
+.system-themes-list-disabled .theme-selector .no-screenshot {
+  height: auto;
+  line-height: 1;
+  width: 140px;
+  float: left;
+  margin: 10px 20px 10px 10px;
+}
+.theme-default .screenshot {
+  border: 1px solid #E0E0D8;
+}
+.system-themes-list-disabled .theme-selector {
+  float: none;
+  padding: 0;
+  width: auto;
+  clear: both;
+  display: block;
+}
+.system-themes-list-disabled .theme-info {
+  min-height: 1px;
+}
+.theme-selector {
+  padding: 15px 0;
+}
+.system-themes-list-enabled .theme-default {
+  background-color: #f8fff0;
+  margin-top: 10px;
+}
+.system-themes-list-enabled .theme-info,
+.system-themes-list-disabled .theme-info {
+  padding: 8px;
+}
+#system-themes-page .theme-info h3 {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+#system-themes-page .theme-info .theme-description {
+  color: #666;
+}
+.system-themes-list-disabled h2 {
+  margin-bottom: 10px;
 }
 
 /* Vertical tabs */
@@ -1619,11 +1658,11 @@ ul.action-links li a:focus {
 
 /* Advanced help */
 .advanced-help-link {
-	-webkit-transition: none;
-	-moz-transition: none;
-	-o-transition: none;
-	-ms-transition: none;
-	transition: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  -ms-transition: none;
+  transition: none;
 }
 .views-ui-display-tab-bucket .advanced-help-link {
   margin-top: 6px;
@@ -1870,7 +1909,7 @@ ul.action-links li a:focus {
 }
 
 /* Experimental */
-input[type="radio"], 
+input[type="radio"],
 input[type="checkbox"] {
 }
 

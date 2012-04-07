@@ -157,7 +157,7 @@ function adaptivetheme_js_alter(&$javascript) {
   // Use our own vesion of vertical-tabs.js for better error handling
   // @see http://drupal.org/node/607752
   if (isset($javascript['misc/vertical-tabs.js'])) {
-    $file = drupal_get_path('theme', 'adaptivetheme') . '/js/vertical-tabs.js';
+    $file = drupal_get_path('theme', 'adaptivetheme') . '/scripts/vertical-tabs.js';
     $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
   }
 }

@@ -2,7 +2,7 @@
 <div id="page">
   <div class="topbar-wrapper"><div class="container">
     <div id="topbar" class="clearfix">
-      <nav id="breadcrumb" role="navigation"><?php print $breadcrumb; ?></nav>
+      <?php print $breadcrumb; ?>
       <?php if ($datetime_rfc): ?>
         <time datetime="<?php print $datetime_iso; ?>"><?php print $datetime_rfc; ?></time>
       <?php endif; ?>
@@ -27,7 +27,7 @@
       </nav>
     </div></div>
   <?php endif; ?>
-  <div class="content-columns"><div class="container clearfix">  
+  <div class="content-columns"><div class="container clearfix">
     <div id="columns"><div class="columns-inner clearfix">
       <div id="content-column"><div class="content-inner">
         <?php print render($page['highlighted']); ?>
