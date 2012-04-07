@@ -131,7 +131,7 @@ function adaptivetheme_five_5x20_panels_layouts() {
 // Preprocess variables for the plugin template.
 function template_preprocess_five_5x20(&$vars) {
   // We need to initialize these variables when Panels is displaying the template.
-  // Thse are used primarily when the template is being rendered via Display suite
+  // These are used primarily when the template is being rendered via Display suite
   // as a "node" so we can programatically wrap the layout in <article> elements
   // with appropriate classes and id.
   $vars['panel_prefix'] = '';
