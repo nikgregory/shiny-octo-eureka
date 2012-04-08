@@ -6,10 +6,10 @@
  */
 function two_sidebars_right() {
   $page_layout['two_sidebars_right'] = array(
-    'title'     => t('Two Sidebars Right'),
-    'category'  => t('AT Core layout'),
-    'method'    => 'two_sidebars_right',
-    'type'      => 'page_layout',
+    'title'    => t('Two Sidebars Right'),
+    'category' => t('AT Core layout'),
+    'method'   => 'two_sidebars_right',
+    'type'     => 'page_layout',
     'device_groups' => array(
       'bigscreen',
       'tablet_landscape',

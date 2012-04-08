@@ -6,10 +6,10 @@
  */
 function two_sidebars_left() {
   $page_layout['two_sidebars_left'] = array(
-    'title'     => t('Two Sidebars Left'),
-    'category'  => t('AT Core layout'),
-    'method'    => 'two_sidebars_left',
-    'type'      => 'page_layout',
+    'title'    => t('Two Sidebars Left'),
+    'category' => t('AT Core layout'),
+    'method'   => 'two_sidebars_left',
+    'type'     => 'page_layout',
     'device_groups' => array(
       'bigscreen',
       'tablet_landscape',

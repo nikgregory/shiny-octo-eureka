@@ -220,6 +220,12 @@ function adaptivetheme_process_node(&$vars) {
       }
     }
   }
+  /* This will replace the above code @see http://drupal.org/node/1514216
+  if (isset($vars['rendered_by_ds']) && $vars['rendered_by_ds'] == TRUE) {
+    $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
+    $vars['panel_suffix'] = '</article>';
+  }
+  */
 
   /* this does not work, its a test...
   if (module_exists('panelizer')) {

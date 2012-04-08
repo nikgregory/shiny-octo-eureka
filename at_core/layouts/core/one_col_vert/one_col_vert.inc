@@ -6,10 +6,10 @@
  */
 function one_col_vert() {
   $page_layout['one_col_vert'] = array(
-    'title'     => t('One Column Vertical Sidebars'),
-    'category'  => t('AT Core layout'),
-    'method'    => 'one_col_vert',
-    'type'      => 'page_layout',
+    'title'    => t('One Column Vertical Sidebars'),
+    'category' => t('AT Core layout'),
+    'method'   => 'one_col_vert',
+    'type'     => 'page_layout',
     'device_groups' => array(
       'tablet_portrait',
       'smartphone_landscape',

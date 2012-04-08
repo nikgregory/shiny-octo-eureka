@@ -6,10 +6,10 @@
  */
 function one_col_stack() {
   $page_layout['one_col_stack'] = array(
-    'title'     => t('One Column Stacked'),
-    'category'  => t('AT Core layout'),
-    'method'    => 'one_col_stack',
-    'type'      => 'page_layout',
+    'title'    => t('One Column Stacked'),
+    'category' => t('AT Core layout'),
+    'method'   => 'one_col_stack',
+    'type'     => 'page_layout',
     'device_groups' => array(
       'tablet_portrait',
       'smartphone_landscape',
