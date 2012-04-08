@@ -85,6 +85,14 @@
     '#default_value' => theme_get_setting('enable_markup_overides'),
   );
 
+  // Exclude CSS
+  $form['at']['site-tweaks']['enable-stuff']['enable_exclude_css'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Exclude CSS Files'),
+    '#description' => t('Options to unset (exclude) CSS files from loading in your theme - includes settings for Core modules, CSS added by Libaries and your own declared exclusions (see your themes info file under "Stylesheets").'),
+    '#default_value' => theme_get_setting('enable_exclude_css'),
+  );
+
   // Custom CSS
   $form['at']['site-tweaks']['enable-stuff']['enable_custom_css'] = array(
     '#type' => 'checkbox',

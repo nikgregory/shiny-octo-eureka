@@ -9,6 +9,12 @@ function at_core_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
 
+  // Remove some stuff we never use or need
+  if (isset($values['at__active_tab']) || isset($values['at-layout__active_tab'])) {
+    unset($values['at__active_tab']);
+    unset($values['at-layout__active_tab']);
+  }
+
   // Validate our form #state required fields, #states are UI only.
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {

@@ -10,6 +10,8 @@ include_once($path_to_at_core . '/inc/forms/at_core.submit.builders.inc');
 function at_core_settings_submit($form, &$form_state) {
   global $path_to_at_core;
 
+  //dsm($form_state);
+
   // Set form_state values into one variable
   $values = $form_state['values'];
 

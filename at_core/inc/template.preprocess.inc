@@ -7,7 +7,7 @@
 /**
  * Preprocess variables for html.tpl.php
  */
-function adaptivetheme_preprocess_html(&$vars) {
+function adaptivetheme_preprocess_html(&$vars, $hook) {
   global $theme_key, $language;
   $theme_name = $theme_key;
 
@@ -426,7 +426,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 /**
  * Preprocess variables for page.tpl.php
  */
-function adaptivetheme_preprocess_page(&$vars) {
+function adaptivetheme_preprocess_page(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -572,7 +572,7 @@ function adaptivetheme_preprocess_page(&$vars) {
 /**
  * Preprocess variables for region.tpl.php
  */
-function adaptivetheme_preprocess_region(&$vars) {
+function adaptivetheme_preprocess_region(&$vars, $hook) {
 
   // Add a "sidebar" class to sidebar regions
   if (strpos($vars['region'], 'sidebar_') === 0) {
@@ -614,7 +614,7 @@ function adaptivetheme_preprocess_region(&$vars) {
 /**
  * Preprocess variables for block.tpl.php
  */
-function adaptivetheme_preprocess_block(&$vars) {
+function adaptivetheme_preprocess_block(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -747,9 +747,12 @@ function adaptivetheme_preprocess_block(&$vars) {
 /**
  * Preprocess variables for node.tpl.php
  */
-function adaptivetheme_preprocess_node(&$vars) {
+function adaptivetheme_preprocess_node(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
+
+  // article class to attempt backwards compatibility
+  $vars['classes_array'][] = 'article';
 
   // Extra classes if required
   if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
@@ -827,7 +830,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 /**
  * Preprocess variables for comment.tpl.php
  */
-function adaptivetheme_preprocess_comment(&$vars) {
+function adaptivetheme_preprocess_comment(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -916,7 +919,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
 /**
  * Preprocess variables for the search block form.
  */
-function adaptivetheme_preprocess_search_block_form(&$vars) {
+function adaptivetheme_preprocess_search_block_form(&$vars, $hook) {
   // Changes the search form to use the "search" input element attribute (HTML5)
   // We have to replace the string because FAPI don't know what type=search is, i.e.
   // no way we can do this in a form alter hook.
@@ -957,7 +960,7 @@ function adaptivetheme_preprocess_field(&$vars) {
 /**
  * Preprocess variables for aggregator-item.tpl.php
  */
-function adaptivetheme_preprocess_aggregator_item(&$vars) {
+function adaptivetheme_preprocess_aggregator_item(&$vars, $hook) {
   $item = $vars['item'];
   // We want the same highly accurate time stamp feature as nodes and comments
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
@@ -971,14 +974,14 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
 /**
  * Preprocess variables for maintenance-page.tpl.php
  */
-function adaptivetheme_preprocess_maintenance_page(&$vars) {
+function adaptivetheme_preprocess_maintenance_page(&$vars, $hook) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
 
 /**
  * Preprocess variables for adaptivtheme_menubar()
  */
-function adaptivetheme_preprocess_menubar(&$vars) {
+function adaptivetheme_preprocess_menubar(&$vars, $hook) {
   $type = $vars['type'];
   $vars['menubar_id'] = $type . '-menu-bar';
   $vars['classes_array'][] = 'nav clearfix';

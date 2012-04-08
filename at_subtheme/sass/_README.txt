@@ -1,7 +1,8 @@
 ABOUT SASS AND COMPASS
 ----------------------
 
-This directory includes Sass versions of AT's CSS files.
+This directory includes Sass versions of AT's CSS files. All files use the SCSS
+syntax.
 
 Sass is a language that is just normal CSS plus some extra features, like
 variables, nested rules, math, mixins, etc. If your stylesheets are written in
@@ -35,6 +36,9 @@ wrong since it will be showing the generated CSS file's line numbers and not the
 line numbers of the source Sass files. To correct this problem, you can install
 the FireSass plug-in into Firefox.
   https://addons.mozilla.org/en-US/firefox/addon/firesass-for-firebug/
+
+If you do not want to use Ruby and the command line you can check out the Sassy
+project for Drupal: http://drupal.org/project/sassy
 
 
 MOVING YOUR CSS TO PRODUCTION

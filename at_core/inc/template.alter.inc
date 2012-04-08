@@ -165,16 +165,37 @@ function adaptivetheme_js_alter(&$javascript) {
 /**
  * hook_css_alter()
  */
-/* Test for setting the weight for font-your-face css
 function adaptivetheme_css_alter(&$css) {
-  if (isset($css['sites/default/files/fontyourface/font.css'])) {
-    $css['sites/default/files/fontyourface/font.css']['media'] = 'screen';
-    $css['sites/default/files/fontyourface/font.css']['weight'] = -10000000;
-    $css['sites/default/files/fontyourface/font.css']['every_page'] = TRUE;
+  global $theme_key;
+
+  // Get data from the cache, small risk of a cache miss... too critical?
+  if (theme_get_setting('enable_exclude_css') === 1) {
+    if ($cache = cache_get('at_get_css_files')) {
+      $css_data = $cache->data;
+    }
+    else {
+      return;
+    }
+    array_unique($css_data);
+    $_get_active_theme_data = array_pop($css_data);
+    if($_get_active_theme_data['type'] == 'theme') {
+      $theme_name = $_get_active_theme_data['source'];
+    }
+    else {
+      $theme_name = $theme_key; // ops, you're site may have just blown up...
+    }
+    // Never run this for adaptivetheme_admin theme
+    if ($theme_key !== 'adaptivetheme_admin') {
+      foreach ($css_data as $key => $value) {
+        $setting = 'unset_css_' . drupal_html_class($key);
+        if (theme_get_setting($setting, $theme_name) === 1) {
+          unset($css[$key]);
+          //dsm($css);
+        }
+      }
+    }
   }
-  dsm($css);
 }
-*/
 
 /**
  * hook_page_alter()

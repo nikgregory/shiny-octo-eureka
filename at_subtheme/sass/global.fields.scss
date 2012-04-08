@@ -41,10 +41,10 @@
 
   // The .caption class is applied to all captions regardless of view mode.
   .caption {}
-  
+
   // View mode full.
   .full-caption {}
-  
+
   // View mode teaser.
   .teaser-caption {}
 }
@@ -55,16 +55,16 @@
 
   // The same bottom margin as p, blockquote, ul, ol and dl
   margin-bottom: 1.5em;
-  
+
   &ul.field-items {
     margin: 0;
     padding: 0;
   }
-  
+
   &li.field-item {
     display: inline;
     list-style: none;
-    padding: 0 10px 0 0; /* LTR */ 
+    padding: 0 10px 0 0; /* LTR */
   }
 }
 

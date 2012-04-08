@@ -106,6 +106,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     if (theme_get_setting('enable_markup_overides') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
     }
+
+    // Exclude CSS
+    if (theme_get_setting('enable_exclude_css') === 1) {
+      include_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
+    }
+
     // Metatags
     if (theme_get_setting('enable_mobile_metatags') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');

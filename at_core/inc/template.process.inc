@@ -7,7 +7,7 @@
 /**
  * Process variables for html.tpl.php
  */
-function adaptivetheme_process_html(&$vars) {
+function adaptivetheme_process_html(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -47,7 +47,7 @@ function adaptivetheme_process_html(&$vars) {
 /**
  * Process variables for the html tag
  */
-function adaptivetheme_process_html_tag(&$vars) {
+function adaptivetheme_process_html_tag(&$vars, $hook) {
   $tag = &$vars['element'];
   if ($tag['#tag'] === 'style' || $tag['#tag'] === 'script') {
     // Remove redundant type attribute and CDATA comments.
@@ -63,7 +63,7 @@ function adaptivetheme_process_html_tag(&$vars) {
 /**
  * Process variables for page.tpl.php
  */
-function adaptivetheme_process_page(&$vars) {
+function adaptivetheme_process_page(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -90,7 +90,7 @@ function adaptivetheme_process_page(&$vars) {
 /**
  * Process variables for region.tpl.php
  */
-function adaptivetheme_process_region(&$vars) {
+function adaptivetheme_process_region(&$vars, $hook) {
   // Initialize and populate the outer wrapper variables
   $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
   $vars['outer_suffix'] = '</div>';
@@ -183,7 +183,7 @@ function adaptivetheme_process_block(&$vars) {
 /**
  * Process variables for node.tpl.php
  */
-function adaptivetheme_process_node(&$vars) {
+function adaptivetheme_process_node(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -240,7 +240,7 @@ function adaptivetheme_process_node(&$vars) {
 /**
  * Process variables for comment.tpl.php
  */
-function adaptivetheme_process_comment(&$vars) {
+function adaptivetheme_process_comment(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -266,7 +266,7 @@ function adaptivetheme_process_comment(&$vars) {
 /**
  * Process variables for adaptivtheme_menubar()
  */
-function adaptivetheme_process_menubar(&$vars) {
+function adaptivetheme_process_menubar(&$vars, $hook) {
   // The default theme implementation is a function, so template_process() does
   // not automatically run, so we need to flatten the classes and attributes
   // here. For best performance, only call drupal_attributes() when needed, and

@@ -14,11 +14,8 @@ $theme_name = $theme_key;
  * - "plugins[plugin_type][type] = path/to/plugins"
  * For example for AT page layouts we use:
  * - "plugins[page_layout][layout] = layouts/core"
- * Parts of this function are shamelessly ripped from Drupal core's
- * _drupal_theme_initialize() and CTools. AT cannot rely on CTools because
- * themes cannot *require* dependancies.
  *
- * @param $theme_name, usually the active theme, required.
+ * @param $theme_name, usually the active theme.
  */
 function at_get_plugins($theme_name) {
 
@@ -28,30 +25,18 @@ function at_get_plugins($theme_name) {
       $plugins = $plugins_cache->data;
     }
     else {
-      $lt = list_themes();
+      // We need some template helpers
+      include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
 
-      // First check for base themes and get info
-      $base_theme = array();
-      $ancestor = $theme_name;
-      while ($ancestor && isset($lt[$ancestor]->base_theme)) {
-        $ancestor = $lt[$ancestor]->base_theme;
-        $base_theme[] = $lt[$ancestor];
-      }
-      foreach ($base_theme as $base) {
-        $themes_names[$base->name] = $base->name;
-        $themes_info[$base->name] = $base->info;
-      }
-
-      // Now the active theme
-      $themes_names[$theme_name] = $theme_name;
-      $themes_info[$theme_name] = $lt[$theme_name]->info;
-
+      $themes_info = at_get_info_trail($theme_name);
       // Look for and get all the plugins
       if (!empty($themes_info)) {
-        foreach ($themes_info as $this_theme => $info) {
-          if (array_key_exists('plugins', $info)) {
-            foreach ($info['plugins'] as $plugin_type => $types) {
-              $plugins_list[$this_theme][$plugin_type] = $types;
+        foreach ($themes_info as $this_theme => $theme_info) {
+          foreach ($theme_info as $info) {
+            if (array_key_exists('plugins', $info)) {
+              foreach ($info['plugins'] as $plugin_type => $types) {
+                $plugins_list[$this_theme][$plugin_type] = $types;
+              }
             }
           }
         }
@@ -70,7 +55,7 @@ function at_get_plugins($theme_name) {
  * means themes - both base themes and sub-themes that include plugin directory
  * declarations in their info files.
  *
- * @param $theme_name
+ * @param $theme_name, ususally the active theme.
  */
 function at_get_plugins_paths($theme_name) {
   $provider_paths = array();
@@ -89,10 +74,9 @@ function at_get_plugins_paths($theme_name) {
 }
 
 /**
- * Returns all files for plugins of a particular type, called from
- * at_load_plugins(), cannot be cached else it will return stale data - its
- * always hit at least twice (since there are two types of plugins being
- * called, usually).
+ * Returns all files for plugins of a particular type.
+ * This is called from at_load_plugins(), cannot be cached else it will return
+ * stale data at some point.
  *
  * @param $theme_name
  */
@@ -122,9 +106,9 @@ function at_get_plugins_files($theme_name) {
  * $plugin_type parameter, so everything else that calls this is heavily cached
  * instead. It does support an "everything else" plugin type, whatever that is.
  *
- * @param $theme_name, usually the active theme, required.
+ * @param $theme_name, usually the active theme.
  * @param $plugin_type, the plugin type you need to return, usually one of
- * "panels" or "page_layout", required.
+ * "panels" or "page_layout".
  */
 function at_load_plugins($theme_name, $plugin_type) {
 
@@ -264,6 +248,8 @@ function responsive_panels_data_structure() {
  * buts a work-around for a bug in Display Suite.
  *
  * @see adaptivetheme_process_node()
+ * @see http://drupal.org/node/1514216
+ * TODO: marked for removal due to new features in Display Suite.
  */
 function responsive_panels_plugin_names() {
   $plugin_names = drupal_static(__FUNCTION__, array());
@@ -310,12 +296,13 @@ function responsive_page_layouts_device_group_options($theme_name) {
 }
 
 /**
- * Return all the admin css files for a plugin type, this is used primarly to
- * theme the icons for each layout method. The icons are in sprites.
- * TODO: add options for other plugin types, e.g. an "everything else" option.
+ * Return all the admin css files for a plugin type.
+ * Used primarly to theme the icons for each layout method. The icons are in
+ * sprites.
  *
  * @param $theme_name
  * @param $plugin_type
+ * TODO: add options for other plugin types, e.g. an "everything else" option.
  */
 function responsive_plugins_admin_css($theme_name, $plugin_type) {
   $admin_css_files = array();

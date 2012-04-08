@@ -66,7 +66,8 @@ function adaptivetheme_menubar($vars) {
  *   - breadcrumb: An array containing the breadcrumb links.
  */
 function adaptivetheme_breadcrumb($vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   $breadcrumb = $vars['breadcrumb'];
   $show_breadcrumb = theme_get_setting('breadcrumb_display', $theme_name);
@@ -167,7 +168,9 @@ function adaptivetheme_status_messages($vars) {
  *   - attributes: The attributes applied to the list element.
  */
 function adaptivetheme_item_list($vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
+
   $items = $vars['items'];
   $title = $vars['title'];
   $type = $vars['type'];
@@ -258,7 +261,8 @@ if (!function_exists('dhtml_menu_init')) {
    *   - element: Structured array data for a menu link.
    */
   function adaptivetheme_menu_link(array $vars) {
-    global $theme_name;
+    global $theme_key;
+    $theme_name = $theme_key;
 
     $element = $vars['element'];
     $sub_menu = '';
@@ -327,7 +331,8 @@ if (!function_exists('dhtml_menu_init')) {
  *     http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
  */
 function adaptivetheme_links($vars) {
-  global $language_url, $theme_name;
+  global $theme_key, $language_url;
+  $theme_name = $theme_key;
 
   $links = $vars['links'];
   $attributes = $vars['attributes'];

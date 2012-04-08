@@ -186,6 +186,7 @@
   settings[enable_markup_overides]     = 1
   settings[enable_mobile_metatags]     = 1
   settings[enable_apple_touch_icons]   = 0
+  settings[enable_exclude_css]         = 0
   settings[enable_custom_css]          = 0
 
 
