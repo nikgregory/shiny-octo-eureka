@@ -178,7 +178,7 @@ function adaptivetheme_css_alter(&$css) {
     }
     array_unique($css_data);
     $_get_active_theme_data = array_pop($css_data);
-    if($_get_active_theme_data['type'] == 'theme') {
+    if ($_get_active_theme_data['type'] == 'theme') {
       $theme_name = $_get_active_theme_data['source'];
     }
     else {
@@ -189,8 +189,9 @@ function adaptivetheme_css_alter(&$css) {
       foreach ($css_data as $key => $value) {
         $setting = 'unset_css_' . drupal_html_class($key);
         if (theme_get_setting($setting, $theme_name) === 1) {
-          unset($css[$key]);
-          //dsm($css);
+          if (isset($css[$key])) {
+            unset($css[$key]);
+          }
         }
       }
     }

@@ -3,7 +3,7 @@
     // We need some template helpers
     include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
 
-    // -- Die CSS DIE -- //
+    // -- DIE CSS DIE -- //
     $form['at']['cssexcludes'] = array(
       '#type' => 'fieldset',
       '#title' => t('Unset CSS'),
@@ -32,8 +32,21 @@
           '#type' => 'checkbox',
           '#title' => t("Unset: $key"),
           '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+          '#weight' => 0,
+          '#states' => array(
+            'checked' => array(':input[name="core_check_all"]' => array('checked' => TRUE)),
+            'unchecked' => array(':input[name="core_check_all"]' => array('checked' => FALSE)),
+          ),
         );
       }
+    }
+    if ($core_defined === TRUE) {
+      $form['at']['cssexcludes']['die-css-die']['core-excludes']['core_check_all'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('<strong>Unset All</strong>'),
+        '#default_value' => theme_get_setting('core_check_all') ? theme_get_setting('core_check_all') : 0,
+        '#weight' => -1,
+      );
     }
     if ($core_defined === FALSE) {
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes']['nothing_core_defined'] = array(
@@ -56,8 +69,21 @@
           '#type' => 'checkbox',
           '#title' => t("Unset: $key"),
           '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+          '#weight' => 0,
+          '#states' => array(
+            'checked' => array(':input[name="contrib_check_all"]' => array('checked' => TRUE)),
+            'unchecked' => array(':input[name="contrib_check_all"]' => array('checked' => FALSE)),
+          ),
         );
       }
+    }
+    if ($contrib_defined === TRUE) {
+      $form['at']['cssexcludes']['die-css-die']['contrib-excludes']['contrib_check_all'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('<strong>Unset All</strong>'),
+        '#default_value' => theme_get_setting('contrib_check_all') ? theme_get_setting('contrib_check_all') : 0,
+        '#weight' => -1,
+      );
     }
     if ($contrib_defined === FALSE) {
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes']['nothing_contrib_defined'] = array(
@@ -80,8 +106,21 @@
           '#type' => 'checkbox',
           '#title' => t("Unset: $key"),
           '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+          '#weight' => 0,
+          '#states' => array(
+            'checked' => array(':input[name="libraries_check_all"]' => array('checked' => TRUE)),
+            'unchecked' => array(':input[name="libraries_check_all"]' => array('checked' => FALSE)),
+          ),
         );
       }
+    }
+    if ($libraries_defined === TRUE) {
+      $form['at']['cssexcludes']['die-css-die']['libraries-excludes']['libraries_check_all'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('<strong>Unset All</strong>'),
+        '#default_value' => theme_get_setting('libraries_check_all') ? theme_get_setting('libraries_check_all') : 0,
+        '#weight' => -1,
+      );
     }
     if ($libraries_defined === FALSE) {
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes']['nothing_libraries_defined'] = array(
@@ -104,8 +143,21 @@
           '#type' => 'checkbox',
           '#title' => t("Unset: $key"),
           '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+          '#weight' => 0,
+          '#states' => array(
+            'checked' => array(':input[name="explicit_check_all"]' => array('checked' => TRUE)),
+            'unchecked' => array(':input[name="explicit_check_all"]' => array('checked' => FALSE)),
+          ),
         );
       }
+    }
+    if ($user_defined === TRUE) {
+      $form['at']['cssexcludes']['die-css-die']['explicit-excludes']['explicit_check_all'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('<strong>Unset All</strong>'),
+        '#default_value' => theme_get_setting('explicit_check_all') ? theme_get_setting('explicit_check_all') : 0,
+        '#weight' => -1,
+      );
     }
     if ($user_defined === FALSE) {
       $form['at']['cssexcludes']['die-css-die']['explicit-excludes']['nothing_user_defined'] = array(
