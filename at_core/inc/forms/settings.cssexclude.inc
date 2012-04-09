@@ -44,7 +44,7 @@
       $form['at']['cssexcludes']['die-css-die']['core-excludes']['core_check_all'] = array(
         '#type' => 'checkbox',
         '#title' => t('<strong>Unset All</strong>'),
-        '#default_value' => theme_get_setting('core_check_all') ? theme_get_setting('core_check_all') : 0,
+        '#default_value' => at_get_setting('core_check_all') ? at_get_setting('core_check_all') : 0,
         '#weight' => -1,
       );
     }
@@ -81,7 +81,7 @@
       $form['at']['cssexcludes']['die-css-die']['contrib-excludes']['contrib_check_all'] = array(
         '#type' => 'checkbox',
         '#title' => t('<strong>Unset All</strong>'),
-        '#default_value' => theme_get_setting('contrib_check_all') ? theme_get_setting('contrib_check_all') : 0,
+        '#default_value' => at_get_setting('contrib_check_all') ? at_get_setting('contrib_check_all') : 0,
         '#weight' => -1,
       );
     }
@@ -118,7 +118,7 @@
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes']['libraries_check_all'] = array(
         '#type' => 'checkbox',
         '#title' => t('<strong>Unset All</strong>'),
-        '#default_value' => theme_get_setting('libraries_check_all') ? theme_get_setting('libraries_check_all') : 0,
+        '#default_value' => at_get_setting('libraries_check_all') ? at_get_setting('libraries_check_all') : 0,
         '#weight' => -1,
       );
     }
@@ -155,7 +155,7 @@
       $form['at']['cssexcludes']['die-css-die']['explicit-excludes']['explicit_check_all'] = array(
         '#type' => 'checkbox',
         '#title' => t('<strong>Unset All</strong>'),
-        '#default_value' => theme_get_setting('explicit_check_all') ? theme_get_setting('explicit_check_all') : 0,
+        '#default_value' => at_get_setting('explicit_check_all') ? at_get_setting('explicit_check_all') : 0,
         '#weight' => -1,
       );
     }

@@ -36,7 +36,7 @@ function adaptivetheme_process_html(&$vars, $hook) {
   }
 
   // Load the panels test
-  if (theme_get_setting('load_all_panels', $theme_name) === 1) {
+  if (at_get_setting('load_all_panels', $theme_name) === 1) {
     if (drupal_is_front_page()) {
       $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
       $vars['page'] = $panels_test;
@@ -81,7 +81,7 @@ function adaptivetheme_process_page(&$vars, $hook) {
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 
   // Force full width wrapper template suggestion if enabled
-  if (theme_get_setting('page_full_width_wrappers', $theme_name) === 1) {
+  if (at_get_setting('page_full_width_wrappers', $theme_name) === 1) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
   }
 
@@ -188,7 +188,7 @@ function adaptivetheme_process_node(&$vars, $hook) {
   $theme_name = $theme_key;
 
   // Strip default drupal classes if not required
-  if (theme_get_setting('extra_article_classes', $theme_name) === 0) {
+  if (at_get_setting('extra_article_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
     if (in_array('node-sticky', $classes)) {
       $classes = str_replace('node-sticky', '', $classes);
@@ -245,7 +245,7 @@ function adaptivetheme_process_comment(&$vars, $hook) {
   $theme_name = $theme_key;
 
   // Strip default drupal classes if not required
-  if (theme_get_setting('extra_comment_classes', $theme_name) === 0) {
+  if (at_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
     if (in_array('comment-by-anonymous', $classes)) {
       $classes = str_replace('comment-by-anonymous', '', $classes);

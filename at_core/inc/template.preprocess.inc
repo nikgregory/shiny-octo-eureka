@@ -53,25 +53,25 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
 
-  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    if (theme_get_setting('production_mode', $theme_name) === 0) {
+  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    if (at_get_setting('production_mode', $theme_name) === 0) {
       // Build a keyed array of CSS file-names as key, and media query as value.
       // The file names must match the files in your themes CSS directory, if
-      // you change them you must update to match. theme_get_setting() caches
+      // you change them you must update to match. at_theme_get_setting() caches
       // and is extremely cheap, in any case we're in development mode.
       $files = drupal_static('adaptivetheme_preprocess_html_development_responsive_styles');
       if (empty($files)) {
         $files = array(
-          'responsive.smartphone.portrait'  => theme_get_setting('smartphone_portrait_media_query', $theme_name),
-          'responsive.smartphone.landscape' => theme_get_setting('smartphone_landscape_media_query', $theme_name),
-          'responsive.tablet.portrait'      => theme_get_setting('tablet_portrait_media_query', $theme_name),
-          'responsive.tablet.landscape'     => theme_get_setting('tablet_landscape_media_query', $theme_name),
-          'responsive.desktop'              => theme_get_setting('bigscreen_media_query', $theme_name),
+          'responsive.smartphone.portrait'  => at_get_setting('smartphone_portrait_media_query', $theme_name),
+          'responsive.smartphone.landscape' => at_get_setting('smartphone_landscape_media_query', $theme_name),
+          'responsive.tablet.portrait'      => at_get_setting('tablet_portrait_media_query', $theme_name),
+          'responsive.tablet.landscape'     => at_get_setting('tablet_landscape_media_query', $theme_name),
+          'responsive.desktop'              => at_get_setting('bigscreen_media_query', $theme_name),
         );
 
         // Add the cascading stylesheet if enabled
-        if (theme_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
-          $cascade_media_query = theme_get_setting('cascade_media_query', $theme_name);
+        if (at_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
+          $cascade_media_query = at_get_setting('cascade_media_query', $theme_name);
           $item = array('responsive.cascade' => $cascade_media_query);
           $files = array_merge($item, $files);
         }
@@ -118,7 +118,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   $load_ie8_css = TRUE;
 
   // Load the default layout if Standard layout is default or responsive styles are disabled
-  if (theme_get_setting('global_default_layout', $theme_name) === 'standard-layout' || theme_get_setting('disable_responsive_styles', $theme_name) === 1) {
+  if (at_get_setting('global_default_layout', $theme_name) === 'standard-layout' || at_get_setting('disable_responsive_styles', $theme_name) === 1) {
     $file = $theme_name . '.default.layout.css';
     $filepath = $path . '/' . $file;
     if (file_exists($filepath)) {
@@ -133,7 +133,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   }
 
   // Next - check if we need to load the responsive layout
-  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
 
     // Responsiveness is not disabled, load the responsive layout
     $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
@@ -145,8 +145,8 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
     // 2. Mobile first is ON
     // 3. Respond.js is OFF
     // Note this excludes IEMobile 7, screw you IEMobile 7
-    if (theme_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
-      if (theme_get_setting('load_respondjs', $theme_name) === 0) {
+    if (at_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
+      if (at_get_setting('load_respondjs', $theme_name) === 0) {
         $load_ie8_css = FALSE;
         $filepath = $path . '/' . $theme_name . '.lt-ie9.layout.css';
         $ie_style['media'] = 'screen';
@@ -161,7 +161,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
   // default in theme settings, screw you IE7.
   if ($load_ie8_css == TRUE) {
-    if (theme_get_setting('load_ltie8css', $theme_name) === 1) {
+    if (at_get_setting('load_ltie8css', $theme_name) === 1) {
       $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
       $ie_style['media'] = 'screen';
       $ie_style['condition'] = 'lt IE 8';
@@ -211,7 +211,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
       'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
     );
     foreach ($polly_settings_array as $polly_setting) {
-      $polly[$polly_setting] = theme_get_setting($polly_setting, $theme_name);
+      $polly[$polly_setting] = at_get_setting($polly_setting, $theme_name);
     }
     $backed_crackers = polly_wants_a_cracker($polly, $theme_name);
     foreach ($backed_crackers as $cupboard => $flavors) {
@@ -223,8 +223,8 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   }
 
   // Load fonts
-  if(theme_get_setting('enable_extensions', $theme_name) === 1) {
-    if (theme_get_setting('enable_font_settings', $theme_name) === 1) {
+  if(at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_font_settings', $theme_name) === 1) {
 
       // Google fonts
       $google_fonts = drupal_static('adaptivetheme_preprocess_html_google_fonts', FALSE);
@@ -256,7 +256,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
     }
 
     // Load the custom CSS if enabled
-    if (theme_get_setting('enable_custom_css', $theme_name) === 1) {
+    if (at_get_setting('enable_custom_css', $theme_name) === 1) {
       $filepath = $path . '/' . $theme_name . '.custom.css';
       if (file_exists($filepath)) {
         drupal_add_css($filepath, array(
@@ -274,12 +274,12 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // Skip link
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
-  if (theme_get_setting('skip_link_target', $theme_name)) {
-    $vars['skip_link_target'] = theme_get_setting('skip_link_target', $theme_name);
+  if (at_get_setting('skip_link_target', $theme_name)) {
+    $vars['skip_link_target'] = at_get_setting('skip_link_target', $theme_name);
   }
 
   // Extra Classes
-  if (theme_get_setting('extra_page_classes', $theme_name) === 1) {
+  if (at_get_setting('extra_page_classes', $theme_name) === 1) {
 
     // Set a class based on the language
     if (function_exists('locale')) {
@@ -329,18 +329,18 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
 
   // Add a body class if the site name is hidden - state driven dynamic
   // classes are very useful and AT does this a lot
-  if (theme_get_setting('toggle_name', $theme_name) === 0) {
+  if (at_get_setting('toggle_name', $theme_name) === 0) {
     $vars['classes_array'][] = 'site-name-hidden';
   }
 
   // Extensions
-  if(theme_get_setting('enable_extensions', $theme_name) === 1) {
+  if(at_get_setting('enable_extensions', $theme_name) === 1) {
 
     // Add theme setting classes and files if active
     $settings_css = array();
 
     // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $page_title_settings_array = array(
         'page_title_case',
         'page_title_weight',
@@ -348,19 +348,19 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
         'page_title_shadow',
       );
       foreach ($page_title_settings_array as $page_title_setting) {
-        if ($heading_settings = theme_get_setting($page_title_setting, $theme_name)) {
+        if ($heading_settings = at_theme_get_setting($page_title_setting, $theme_name)) {
           $vars['classes_array'][] = $heading_settings;
         }
       }
     }
 
     // Headings/titles
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_css[] = 'at.settings.style.headings.css';
     }
 
     // Images
-    if(theme_get_setting('enable_image_settings', $theme_name) === 1) {
+    if(at_get_setting('enable_image_settings', $theme_name) === 1) {
       $settings_css[] = 'at.settings.style.image.css';
       $image_settings_array = array(
         'image_caption_full',
@@ -369,14 +369,14 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
         'image_alignment_teaser',
       );
       foreach ($image_settings_array as $setting) {
-        if ($image_setting = theme_get_setting($setting, $theme_name)) {
+        if ($image_setting = at_theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $image_setting;
         }
       }
     }
 
     // Login block
-    if (theme_get_setting('enable_loginblock_settings', $theme_name) === 1) {
+    if (at_get_setting('enable_loginblock_settings', $theme_name) === 1) {
       $settings_css[] = 'at.settings.style.login.css';
     }
 
@@ -404,13 +404,13 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
 
   // Finally we do some debugging/development stuff
   // add a body class for exposing region
-  if (theme_get_setting('expose_regions', $theme_name) === 1 || theme_get_setting('load_all_panels', $theme_name) === 1) {
+  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
     $vars['classes_array'][] = 'debug-regions';
     $vars['classes_array'][] = 'debug-panels';
     drupal_add_css($path_to_at_core . '/css/debug-regions.css');
   }
   // Load window size bookmarklet
-  if (theme_get_setting('show_window_size', $theme_name) === 1) {
+  if (at_get_setting('show_window_size', $theme_name) === 1) {
     drupal_add_js($path_to_at_core . '/js/window-size.js',
       array(
         'type' => 'file',
@@ -431,7 +431,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   $theme_name = $theme_key;
 
   // Set up logo element
-  if (theme_get_setting('toggle_logo', $theme_name) === 1) {
+  if (at_get_setting('toggle_logo', $theme_name) === 1) {
     $vars['site_logo'] = drupal_static('adaptivetheme_preprocess_page_site_logo');
     if (empty($vars['site_logo'])) {
       $logo_path = check_url($vars['logo']);
@@ -462,7 +462,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   }
 
   // Hide the site name if toggled off, don't remove it
-  if (theme_get_setting('toggle_name', $theme_name) === 0) {
+  if (at_get_setting('toggle_name', $theme_name) === 0) {
     $vars['visibility'] = 'element-invisible';
     $vars['hide_site_name'] = TRUE;
   }
@@ -478,7 +478,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   // imo. AT wants to target the right scope always and not abuse the body element. This
   // is not as DRY as it could be, particulary for blocks/nodes/comments etc but it does
   // open the door for more granularity (i.e. target one block or block type).
-  if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+  if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
     $heading_settings_array = &drupal_static('adaptivetheme_preprocess_page_heading_settings');
     if (empty($heading_settings_array)) {
       $heading_settings_array = array();
@@ -496,7 +496,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
       }
     }
     foreach ($heading_settings_array as $setting) {
-      if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+      if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
         $vars['classes_array'][] = $heading_setting;
       }
     }
@@ -543,13 +543,13 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   }
 
   // Remove the infernal feed icons
-  if (theme_get_setting('feed_icons_hide', $theme_name) === 1) {
+  if (at_get_setting('feed_icons_hide', $theme_name) === 1) {
     $vars['feed_icons'] = '';
   }
 
   // Remove block system main, just from the front page
   if (drupal_is_front_page()) {
-    if (theme_get_setting('unset_block_system_main_front', $theme_name) === 1) {
+    if (at_get_setting('unset_block_system_main_front', $theme_name) === 1) {
       $vars['page']['content']['system_main'] = ''; // Brutal but effective
     }
   }
@@ -626,7 +626,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   }
 
   // Add extra classes if required
-  if (theme_get_setting('extra_block_classes', $theme_name) === 1) {
+  if (at_get_setting('extra_block_classes', $theme_name) === 1) {
 
     // Zebra
     $vars['classes_array'][] = $vars['block_zebra'];
@@ -652,7 +652,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   // Add title style classes, these are loaded via the classes_arry and not title_attributes_array
   // so we can style the whole block depending on the title styles.
   if (isset($vars['block']->subject)) {
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_block_heading_settings');
       if (empty($settings_array)) {
         $settings_array = array(
@@ -663,7 +663,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }
@@ -671,10 +671,10 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   }
 
   // Add classes to theme the horizontal block option
-  if (theme_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+  if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
     $vars['classes_array'][] = 'lb-h';
   }
-  if (theme_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+  if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
     $vars['classes_array'][] = 'lb-s';
   }
 
@@ -755,7 +755,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   $vars['classes_array'][] = 'article';
 
   // Extra classes if required
-  if (theme_get_setting('extra_article_classes', $theme_name) === 1) {
+  if (at_get_setting('extra_article_classes', $theme_name) === 1) {
 
     // Zebra
     $vars['classes_array'][] = $vars['zebra'];
@@ -781,7 +781,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   // Add title style classes, as per blocks these are added to classes_array not title_attraibutes_array
   // so we can style the entire node based on how the title wants to be handled (such as alignmment)
   if (isset($vars['title'])) {
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_node_heading_settings');
       if (empty($settings_array)) {
         $settings_array = array(
@@ -792,7 +792,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }
@@ -835,7 +835,7 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
   $theme_name = $theme_key;
 
   // Extra comment classes if required
-  if (theme_get_setting('extra_comment_classes', $theme_name) === 1) {
+  if (at_get_setting('extra_comment_classes', $theme_name) === 1) {
 
     // Zebra
     $vars['classes_array'][] = $vars['zebra'];
@@ -849,7 +849,7 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
     }
 
     // Title hidden?
-    if (theme_get_setting('comments_hide_title', $theme_name) === 1) {
+    if (at_get_setting('comments_hide_title', $theme_name) === 1) {
       $vars['classes_array'][] = 'comment-title-hidden';
     }
 
@@ -868,13 +868,13 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
   $vars['title_attributes_array']['class'][] = 'comment-title';
 
   // Title hidden?
-  if (theme_get_setting('comments_hide_title', $theme_name) === 1) {
+  if (at_get_setting('comments_hide_title', $theme_name) === 1) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
   }
 
   // Add title style classes
-  if (theme_get_setting('comments_hide_title', $theme_name) !== 1) {
-    if(theme_get_setting('enable_heading_settings', $theme_name) === 1) {
+  if (at_get_setting('comments_hide_title', $theme_name) !== 1) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_comment_heading_settings');
       if (empty($settings_array)) {
         $settings_array = array(
@@ -885,7 +885,7 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }
@@ -948,10 +948,10 @@ function adaptivetheme_preprocess_field(&$vars) {
   if ($element['#field_type'] === 'image') {
     $vars['image_caption_teaser'] = FALSE;
     $vars['image_caption_full'] = FALSE;
-    if (theme_get_setting('image_caption_teaser', $theme_name) === 1) {
+    if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
       $vars['image_caption_teaser'] = TRUE;
     }
-    if (theme_get_setting('image_caption_full', $theme_name) === 1) {
+    if (at_get_setting('image_caption_full', $theme_name) === 1) {
       $vars['image_caption_full'] = TRUE;
     }
   }

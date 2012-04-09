@@ -19,10 +19,10 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   // we do heavy sanity checking.
 
   // Viewport
-  if (theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    if (theme_get_setting('enable_mobile_metatags', $theme_name) === 1) {
+  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    if (at_get_setting('enable_mobile_metatags', $theme_name) === 1) {
       // Viewport
-      $adaptivetheme_meta_viewport = filter_xss_admin(theme_get_setting('adaptivetheme_meta_viewport', $theme_name));
+      $adaptivetheme_meta_viewport = filter_xss_admin(at_get_setting('adaptivetheme_meta_viewport', $theme_name));
       $head_elements['adaptivetheme_meta_viewport'] = array(
         '#type' => 'html_tag',
         '#tag' => 'meta',
@@ -33,7 +33,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => 1,
       );
       // MobileOptimized
-      $adaptivetheme_meta_mobileoptimized = filter_xss_admin(theme_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name));
+      $adaptivetheme_meta_mobileoptimized = filter_xss_admin(at_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name));
       $head_elements['adaptivetheme_meta_mobileoptimized'] = array(
         '#type' => 'html_tag',
         '#tag' => 'meta',
@@ -44,7 +44,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => 2,
       );
       // HandheldFriendly
-      $adaptivetheme_meta_handheldfriendly = filter_xss_admin(theme_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name));
+      $adaptivetheme_meta_handheldfriendly = filter_xss_admin(at_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name));
       $head_elements['adaptivetheme_meta_handheldfriendly'] = array(
         '#type' => 'html_tag',
         '#tag' => 'meta',
@@ -55,7 +55,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => 3,
       );
       // apple-mobile-web-app-capable
-      $adaptivetheme_meta_apple_mobile_web_app_capable = filter_xss_admin(theme_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name));
+      $adaptivetheme_meta_apple_mobile_web_app_capable = filter_xss_admin(at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name));
       $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
         '#type' => 'html_tag',
         '#tag' => 'meta',
@@ -67,7 +67,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       );
     }
   }
-  if (theme_get_setting('chrome_edge', $theme_name) === 1) {
+  if (at_get_setting('chrome_edge', $theme_name) === 1) {
     // cleartype
     $head_elements['adaptivetheme_meta_cleartype'] = array(
       '#type' => 'html_tag',
@@ -90,9 +90,9 @@ function adaptivetheme_html_head_alter(&$head_elements) {
     );
   }
   // Apple touch icons
-  if (theme_get_setting('enable_apple_touch_icons') === 1) {
+  if (at_get_setting('enable_apple_touch_icons') === 1) {
     // low
-    $apple_touch_icon_path_l = filter_xss_admin(theme_get_setting('apple_touch_icon_path_l', $theme_name));
+    $apple_touch_icon_path_l = filter_xss_admin(at_get_setting('apple_touch_icon_path_l', $theme_name));
     if (!empty($apple_touch_icon_path_l)) {
       $l = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_l;
       $touch_icon_l = file_create_url($l);
@@ -116,7 +116,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       );
     }
     // medium
-    $apple_touch_icon_path_m = filter_xss_admin(theme_get_setting('apple_touch_icon_path_m', $theme_name));
+    $apple_touch_icon_path_m = filter_xss_admin(at_get_setting('apple_touch_icon_path_m', $theme_name));
     if (!empty($apple_touch_icon_path_m)) {
       $m = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_m;
       $touch_icon_m = file_create_url($m);
@@ -132,7 +132,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       );
     }
     // high
-    $apple_touch_icon_path_h = filter_xss_admin(theme_get_setting('apple_touch_icon_path_h', $theme_name));
+    $apple_touch_icon_path_h = filter_xss_admin(at_get_setting('apple_touch_icon_path_h', $theme_name));
     if (!empty($apple_touch_icon_path_h)) {
       $h = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_h;
       $touch_icon_h = file_create_url($h);
@@ -169,7 +169,7 @@ function adaptivetheme_css_alter(&$css) {
   global $theme_key;
 
   // Never allow this to run in our admin theme and only if the extension is enabled.
-  if (theme_get_setting('enable_exclude_css') === 1 && $theme_key !== 'adaptivetheme_admin') {
+  if (at_get_setting('enable_exclude_css') === 1 && $theme_key !== 'adaptivetheme_admin') {
     // Get $css_data from the cache, we know with 100% certainty the cache data
     // has the right theme name, so give it a crack first.
     if ($cache = cache_get('at_get_css_files')) {

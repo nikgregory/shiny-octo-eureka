@@ -19,7 +19,7 @@
     '#type' => 'checkbox',
     '#title' => t('HTML5 support in IE'),
     '#description' => t('By checking this setting the site will load the <a href="!link" target="_blank">html5shiv</a>. Turning this off will be bad news for IE6-8.', array('!link' => '//github.com/aFarkas/html5shiv')),
-    '#default_value' => theme_get_setting('load_html5js'),
+    '#default_value' => at_get_setting('load_html5js'),
   );
 
   // Rounding error fix (CSS)
@@ -27,7 +27,7 @@
     '#type' => 'checkbox',
     '#title' => t('Fix CSS rounding errors in IE6-7'),
     '#description' => t('Load a stylesheet that fixes percentage rounding errors in IE6-7. You need this if you are using Gpanels or Panels layouts.'),
-    '#default_value' => theme_get_setting('load_ltie8css'),
+    '#default_value' => at_get_setting('load_ltie8css'),
   );
 
   // Respond.js
@@ -35,7 +35,7 @@
     '#type' => 'checkbox',
     '#title' => t('Media query support for IE6-8'),
     '#description' => t('By checking this setting IE6, 7 and 8 will rely on <a href="!link" target="_blank">respond.js</a> to set the layout.', array('!link' => '//github.com/scottjehl/Respond', '!link2' => '//github.com/scottjehl/Respond/issues')),
-    '#default_value' => theme_get_setting('load_respondjs'),
+    '#default_value' => at_get_setting('load_respondjs'),
     '#states' => array(
       'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
@@ -46,7 +46,7 @@
     '#type' => 'checkbox',
     '#title' => t('Box Sizing support for IE6-7'),
     '#description' => t('<a href="!link" target="_blank">Box Sizing HTC</a> enables CSS3 <code>box-sizing</code> for IE6-IE8.', array('!link' => '//github.com/Schepp/box-sizing-polyfill')),
-    '#default_value' => theme_get_setting('load_boxsizinghtc'),
+    '#default_value' => at_get_setting('load_boxsizinghtc'),
   );
 
   // PIE
@@ -54,7 +54,7 @@
     '#type' => 'checkbox',
     '#title' => t('PIE'),
     '#description' => t('<a href="!link" target="_blank">PIE</a> enabes CSS3 backwards compatibility for IE. Turn PIE off if you are not using it, its 40kb.', array('!link' => 'http://css3pie.com')),
-    '#default_value' => theme_get_setting('load_pie'),
+    '#default_value' => at_get_setting('load_pie'),
   );
   $form['at-layout']['polyfills']['fills']['pie']['pie_crust'] = array(
     '#type' => 'fieldset',
@@ -66,7 +66,7 @@
   $form['at-layout']['polyfills']['fills']['pie']['pie_crust']['which_pie'] = array(
     '#type' => 'select',
     '#title' => t('Select which version of PIE to load'),
-    '#default_value' => theme_get_setting('which_pie'),
+    '#default_value' => at_get_setting('which_pie'),
     '#options' => array(
       'PIE.htc' => 'PIE.htc - default',
       'PIE.php' => 'PIE.php - use if .htc does not work on your server',
@@ -77,7 +77,7 @@
     '#type' => 'checkbox',
     '#title' => t('Disable PIE for IE9'),
     '#description' => t('IE9 supports some CSS3, optionally disable PIE support in IE9.'),
-    '#default_value' => theme_get_setting('disble_pie_for_ie9'),
+    '#default_value' => at_get_setting('disble_pie_for_ie9'),
   );
 
   // selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8
@@ -85,7 +85,7 @@
     '#type' => 'checkbox',
     '#title' => t('Selectivizr'),
     '#description' => t('<a href="!link" target="_blank">Selectivizr</a> is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8.', array('!link' => 'http://selectivizr.com')),
-    '#default_value' => theme_get_setting('load_selectivizr'),
+    '#default_value' => at_get_setting('load_selectivizr'),
   );
 
   // Scalefix
@@ -93,7 +93,7 @@
     '#type' => 'checkbox',
     '#title' => t('Scalefix for iOS'),
     '#description' => t('Fixes the iOS Orientationchange zoom bug.'),
-    '#default_value' => theme_get_setting('load_scalefixjs'),
+    '#default_value' => at_get_setting('load_scalefixjs'),
     '#states' => array(
       'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),

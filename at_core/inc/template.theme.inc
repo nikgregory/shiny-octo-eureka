@@ -70,10 +70,10 @@ function adaptivetheme_breadcrumb($vars) {
   $theme_name = $theme_key;
 
   $breadcrumb = $vars['breadcrumb'];
-  $show_breadcrumb = theme_get_setting('breadcrumb_display', $theme_name);
+  $show_breadcrumb = at_get_setting('breadcrumb_display', $theme_name);
 
   if ($show_breadcrumb == 'yes') {
-    $show_breadcrumb_home = theme_get_setting('breadcrumb_home', $theme_name);
+    $show_breadcrumb_home = at_get_setting('breadcrumb_home', $theme_name);
 
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
@@ -81,7 +81,7 @@ function adaptivetheme_breadcrumb($vars) {
 
     if (!empty($breadcrumb)) {
       $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-      $separator = filter_xss_admin(theme_get_setting('breadcrumb_separator', $theme_name));
+      $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
 
       $class = 'crumb';
       end($breadcrumb);
@@ -209,7 +209,7 @@ function adaptivetheme_item_list($vars) {
         $data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
       }
 
-      if (theme_get_setting('extra_item_list_classes', $theme_name) === 1) {
+      if (at_get_setting('extra_item_list_classes', $theme_name) === 1) {
         if ($i & 1) {
           $attributes['class'][] = 'odd';
         }
@@ -271,7 +271,7 @@ if (!function_exists('dhtml_menu_init')) {
       $sub_menu = drupal_render($element['#below']);
     }
 
-    if (theme_get_setting('extra_menu_classes', $theme_name) === 1 && !empty($element['#original_link'])) {
+    if (at_get_setting('extra_menu_classes', $theme_name) === 1 && !empty($element['#original_link'])) {
       if (!empty($element['#original_link']['depth'])) {
         $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
       }
@@ -280,7 +280,7 @@ if (!function_exists('dhtml_menu_init')) {
       }
     }
 
-    if (theme_get_setting('menu_item_span_elements', $theme_name) === 1 && !empty($element['#title'])) {
+    if (at_get_setting('menu_item_span_elements', $theme_name) === 1 && !empty($element['#title'])) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
@@ -361,7 +361,7 @@ function adaptivetheme_links($vars) {
 
     foreach ($links as $key => $link) {
 
-      if (theme_get_setting('extra_menu_classes', $theme_name) === 1) {
+      if (at_get_setting('extra_menu_classes', $theme_name) === 1) {
         $class = array($key);
         if ($i == 1) {
           $class[] = 'first';
@@ -380,7 +380,7 @@ function adaptivetheme_links($vars) {
         $output .= '<li>';
       }
       if (isset($link['href'])) {
-        if (theme_get_setting('menu_item_span_elements', $theme_name) === 1) {
+        if (at_get_setting('menu_item_span_elements', $theme_name) === 1) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
@@ -529,9 +529,9 @@ function adaptivetheme_field__image($vars) {
   global $theme_name;
 
   // Check if image settings are enabled, otherwise captions might print unexpectedly
-  $image_settings_enabled = theme_get_setting('enable_image_settings', $theme_name) === 1 ? TRUE : FALSE;
-  $caption_full = theme_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
-  $caption_teaser = theme_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
+  $image_settings_enabled = at_get_setting('enable_image_settings', $theme_name) === 1 ? TRUE : FALSE;
+  $caption_full = at_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
+  $caption_teaser = at_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
 
   $output = '';
 

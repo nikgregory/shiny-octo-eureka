@@ -16,14 +16,14 @@
   $form['at']['breadcrumb']['bd']['breadcrumb_display'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show breadcrumbs'),
-    '#default_value' => theme_get_setting('breadcrumb_display'),
+    '#default_value' => at_get_setting('breadcrumb_display'),
   );
 
   // Home link?
   $form['at']['breadcrumb']['bd']['breadcrumb_home'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show the homepage link'),
-    '#default_value' => theme_get_setting('breadcrumb_home'),
+    '#default_value' => at_get_setting('breadcrumb_home'),
     '#states' => array(
       'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
     ),
@@ -34,7 +34,7 @@
     '#type'  => 'textfield',
     '#title' => t('Separator'),
     '#description' => t('Text only. Dont forget to include spaces.'),
-    '#default_value' => theme_get_setting('breadcrumb_separator'),
+    '#default_value' => at_get_setting('breadcrumb_separator'),
     '#size' => 8,
     '#maxlength' => 10,
     '#states' => array(

@@ -15,21 +15,21 @@
   $form['at-layout']['debug']['debug-layout']['expose_regions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Highlight regions'),
-    '#default_value' => theme_get_setting('expose_regions'),
+    '#default_value' => at_get_setting('expose_regions'),
   );
 
   // Load all panels
   $form['at-layout']['debug']['debug-layout']['load_all_panels'] = array(
     '#type' => 'checkbox',
     '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels.'),
-    '#default_value' => theme_get_setting('load_all_panels'),
+    '#default_value' => at_get_setting('load_all_panels'),
   );
 
   // Window size bookmarklet
   $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show window size - appears in the bottom right corner.'),
-    '#default_value' => theme_get_setting('show_window_size'),
+    '#default_value' => at_get_setting('show_window_size'),
   );
 
   // Rebuild theme data - pending removal, I just don't like this in a theme.
@@ -41,17 +41,17 @@
   // $form['at-layout']['debug']['dev']['rebuild_theme_data'] = array(
     // '#type' => 'checkbox',
     // '#title' => t('Rebuild theme data and the theme registry on every page request'),
-    // '#default_value' => theme_get_setting('rebuild_theme_data'),
+    // '#default_value' => at_get_setting('rebuild_theme_data'),
   // );
 
   // All media queries, wow this is kinda fugly, did I really do this, I must have been out with mortendk at dcamp or something
   $queries = '';
   $mq = array();
-  $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . theme_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';
-  $mq[] =  '/* Smartphone landscape */' . "\n" . '@media ' . theme_get_setting('smartphone_landscape_media_query') . ' {' . "\n" . '}';
-  $mq[] =  '/* Tablet portrait */' . "\n" . '@media ' . theme_get_setting('tablet_portrait_media_query') . ' {' . "\n" . '}';
-  $mq[] =  '/* Tablet landscape */' . "\n" . '@media ' . theme_get_setting('tablet_landscape_media_query') . ' {' . "\n" . '}';
-  $mq[] =  '/* Standard layout */' . "\n" . '@media ' . theme_get_setting('bigscreen_media_query') . ' {' . "\n" . '}';
+  $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . at_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';
+  $mq[] =  '/* Smartphone landscape */' . "\n" . '@media ' . at_get_setting('smartphone_landscape_media_query') . ' {' . "\n" . '}';
+  $mq[] =  '/* Tablet portrait */' . "\n" . '@media ' . at_get_setting('tablet_portrait_media_query') . ' {' . "\n" . '}';
+  $mq[] =  '/* Tablet landscape */' . "\n" . '@media ' . at_get_setting('tablet_landscape_media_query') . ' {' . "\n" . '}';
+  $mq[] =  '/* Standard layout */' . "\n" . '@media ' . at_get_setting('bigscreen_media_query') . ' {' . "\n" . '}';
   $queries = implode("\n\n", $mq);
   $form['at-layout']['debug']['mediaqueries'] = array(
     '#type' => 'fieldset',

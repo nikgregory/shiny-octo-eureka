@@ -18,7 +18,7 @@
   $form['at']['images']['alignment']['image_alignment'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Alignment - full view</strong>'),
-    '#default_value' => theme_get_setting('image_alignment'),
+    '#default_value' => at_get_setting('image_alignment'),
     '#options' => array(
       'ia-n' => t('None'),
       'ia-l' => t('Left'),
@@ -31,7 +31,7 @@
   $form['at']['images']['alignment']['image_alignment_teaser'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Alignment - teaser view</strong>'),
-    '#default_value' => theme_get_setting('image_alignment_teaser'),
+    '#default_value' => at_get_setting('image_alignment_teaser'),
     '#description' => t('This will only affect images added using an image-field. If you use another method such as embedding images directly into text areas this will not affect those images.'),
     '#options' => array(
       'iat-n' => t('None'),
@@ -50,11 +50,11 @@
   $form['at']['images']['captions']['image_caption_teaser'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show captions on teaser view'),
-    '#default_value' => theme_get_setting('image_caption_teaser'),
+    '#default_value' => at_get_setting('image_caption_teaser'),
   );
   $form['at']['images']['captions']['image_caption_full'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show captions on full view'),
     '#description' => t('Captions use the title attribute text. You must enable tiles in the field management options for your image fields.'),
-    '#default_value' => theme_get_setting('image_caption_full'),
+    '#default_value' => at_get_setting('image_caption_full'),
   );

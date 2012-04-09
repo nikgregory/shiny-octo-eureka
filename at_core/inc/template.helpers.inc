@@ -7,6 +7,104 @@ $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 /**
+ * AT's stripped down optimized version of theme_get_settings().
+ * Why? Because it wayfasterbetter, emphasis on the way-faster.
+ *
+ * @param $setting_name
+ * @param null $theme
+ */
+function at_get_setting($setting_name, $theme = NULL) {
+
+  $cache = &drupal_static(__FUNCTION__, array());
+
+  // If no key is given, use the current theme if we can determine it.
+  if (!isset($theme)) {
+    $theme = !empty($GLOBALS['theme_key']) ? $GLOBALS['theme_key'] : '';
+  }
+
+  if (empty($cache[$theme])) {
+
+    // Get the values for the theme-specific settings from the .info files
+    if ($theme) {
+      $themes = list_themes();
+      $theme_object = $themes[$theme];
+
+      // Create a list which includes the current theme and all its base themes.
+      if (isset($theme_object->base_themes)) {
+        $theme_keys = array_keys($theme_object->base_themes);
+        $theme_keys[] = $theme;
+      }
+      else {
+        $theme_keys = array($theme);
+      }
+
+      foreach ($theme_keys as $theme_key) {
+        if (!empty($themes[$theme_key]->info['settings'])) {
+          $cache[$theme] = $themes[$theme_key]->info['settings'];
+        }
+      }
+
+      // Get the saved theme-specific settings from the database.
+      $cache[$theme] = array_merge($cache[$theme], variable_get('theme_' . $theme . '_settings', array()));
+    }
+  }
+
+  return isset($cache[$theme][$setting_name]) ? $cache[$theme][$setting_name] : NULL;
+}
+
+/**
+ * Return the info file array for a particular theme, usually the active theme.
+ * Simple wrapper function for list_themes().
+ *
+ * @param $theme_name
+ */
+function at_get_info($theme_name) {
+
+  $info = drupal_static(__FUNCTION__, array());
+  if (empty($info)) {
+    $lt = list_themes();
+    foreach ($lt as $key => $value) {
+      if ($theme_name == $key) {
+        $info = $lt[$theme_name]->info;
+      }
+    }
+  }
+
+  return $info;
+}
+
+/**
+ * Return the all the info file data for a particular theme including base
+ * themes. Parts of this function are shamelessly ripped from Drupal core's
+ * _drupal_theme_initialize().
+ *
+ * @param $theme_name, usually the active theme.
+ */
+function at_get_info_trail($theme_name) {
+
+  $info_trail = drupal_static(__FUNCTION__, array());
+  if (empty($info_trail)) {
+    $lt = list_themes();
+
+    // First check for base themes and get info
+    $base_theme = array();
+    $ancestor = $theme_name;
+    while ($ancestor && isset($lt[$ancestor]->base_theme)) {
+      $ancestor = $lt[$ancestor]->base_theme;
+      $base_theme[] = $lt[$ancestor];
+    }
+    foreach ($base_theme as $base) {
+      $info_trail[$base->name]['info'] = $base->info;
+    }
+
+    // Now the active theme
+    $info_trail[$theme_name]['info'] = $lt[$theme_name]->info;
+  }
+
+  return $info_trail;
+}
+
+/**
  * Return lists of CSS files to Exclude.
  * This returns a very small amount of data (< 10kb), but is very expensive
  * to get which is why its cached in the database. Without caching the theme
@@ -100,58 +198,6 @@ function at_get_css_files($theme_name) {
   }
 
   return $styles;
-}
-
-/**
- * Return the info file data for a particular theme, usually the active theme.
- * Simple wrapper function for list_themes().
- *
- * @param $theme_name
- */
-function at_get_info($theme_name) {
-  $info = drupal_static(__FUNCTION__, array());
-  if (empty($info)) {
-    $lt = list_themes();
-    foreach ($lt as $key => $value) {
-      if ($theme_name == $key) {
-        $info = $lt[$theme_name]->info;
-      }
-    }
-  }
-
-  return $info;
-}
-
-/**
- * Return the all the info file data for a particular theme including base
- * themes. Parts of this function are shamelessly ripped from Drupal core's
- * _drupal_theme_initialize().
- *
- * @param $theme_name, usually the active theme.
- */
-function at_get_info_trail($theme_name) {
-  $info_trail = drupal_static(__FUNCTION__, array());
-  if (empty($info_trail)) {
-    $lt = list_themes();
-
-    // First check for base themes and get info
-    $base_theme = array();
-    $ancestor = $theme_name;
-    while ($ancestor && isset($lt[$ancestor]->base_theme)) {
-      $ancestor = $lt[$ancestor]->base_theme;
-      $base_theme[] = $lt[$ancestor];
-    }
-    foreach ($base_theme as $base) {
-      // $info_trail[$base->name]['name'] = $base->name;
-      $info_trail[$base->name]['info'] = $base->info;
-    }
-
-    // Now the active theme
-    // $info_trail[$theme_name]['name'] = $theme_name;
-    $info_trail[$theme_name]['info'] = $lt[$theme_name]->info;
-  }
-
-  return $info_trail;
 }
 
 /**
@@ -275,7 +321,7 @@ function polly_wants_a_cracker($polly, $theme_name) {
       $crackers = array();
 
       // Respond.js
-      if ($polly['load_respondjs'] === 1 && theme_get_setting('disable_responsive_styles', $theme_name) === 0) {
+      if ($polly['load_respondjs'] === 1 && at_get_setting('disable_responsive_styles', $theme_name) === 0) {
         $crackers['ie']['lt IE 9'][] = 'scripts/respond.js';
       }
       // HTML5 Shiv
@@ -288,8 +334,8 @@ function polly_wants_a_cracker($polly, $theme_name) {
       }
       // PIE
       if ($polly['load_pie'] === 1) {
-        $pie = theme_get_setting('which_pie', $theme_name);
-        $pie_condition = theme_get_setting('disble_pie_for_ie9', $theme_name) ? 'lt IE 9' : 'lt IE 10';
+        $pie = at_get_setting('which_pie', $theme_name);
+        $pie_condition = at_get_setting('disble_pie_for_ie9', $theme_name) ? 'lt IE 9' : 'lt IE 10';
         $crackers['ie'][$pie_condition][] = 'scripts/' . $pie;
       }
       // Selectivizr
@@ -538,20 +584,6 @@ function css_browser_selector($ua = NULL) {
     $b[] = 'linux';
   }
   return join(' ', $b);
-}
-
-// Might use one day, crufty and can live here for now
-function minify_css($css) {
-	$css = preg_replace( '#\s+#', ' ', $css );
-	$css = preg_replace( '#/\*.*?\*/#s', '', $css );
-	$css = str_replace( '; ', ';', $css );
-	$css = str_replace( ': ', ':', $css );
-	$css = str_replace( ' {', '{', $css );
-	$css = str_replace( '{ ', '{', $css );
-	$css = str_replace( ', ', ',', $css );
-	$css = str_replace( '} ', '}', $css );
-	$css = str_replace( ';}', '}', $css );
-	return trim( $css );
 }
 
 //

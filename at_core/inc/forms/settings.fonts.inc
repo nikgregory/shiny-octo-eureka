@@ -69,12 +69,12 @@
     '#type' => 'select',
     '#title' => t('Type'),
     '#options' => $font_type_options,
-    '#default_value' => theme_get_setting('base_font_type'),
+    '#default_value' => at_get_setting('base_font_type'),
   );
   $form['at']['font']['base-font']['base_font'] = array(
     '#type' => 'select',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('base_font'),
+    '#default_value' => at_get_setting('base_font'),
     '#options' => str_replace("'", "", font_list('wsf', 'bf')),
     '#states' => array (
       'visible' => array ('select[name="base_font_type"]' => array ('value' => '')
@@ -84,7 +84,7 @@
   $form['at']['font']['base-font']['base_font_gwf'] = array(
     '#type' => 'select',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('base_font_gwf'),
+    '#default_value' => at_get_setting('base_font_gwf'),
     '#options' => font_list('gwf', 'bf'),
     '#states' => array (
       'visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf')
@@ -94,7 +94,7 @@
   $form['at']['font']['base-font']['base_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('base_font_cfs'),
+    '#default_value' => at_get_setting('base_font_cfs'),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
@@ -105,7 +105,7 @@
     $form['at']['font']['base-font']['base_font_fyf'] = array(
       '#type' => 'select',
       '#title' => t('Font'),
-      '#default_value' => theme_get_setting('base_font_fyf'),
+      '#default_value' => at_get_setting('base_font_fyf'),
       '#options' => font_list('fyf', 'bf'),
       '#states' => array (
         'visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf')
@@ -118,7 +118,7 @@
     '#title' => t('Size'),
     '#options' => $font_sizes_p,
     '#description' => t('The default font size is set on the HTML element. All elements, margins, padding and widths using a relative unit such as em or % will scale relative to this value. Use "Not set" if you prefer to set this in your CSS. You can override this value in your responsive stylesheets also, to use a larger or smaller default size for different device types.'),
-    '#default_value' => theme_get_setting('base_font_size'),
+    '#default_value' => at_get_setting('base_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
     '#states' => array (
       'invisible' => array ('select[name="base_font_type"]' => array ('value' => '<none>')
@@ -413,12 +413,12 @@
     '#type' => 'select',
     '#title' => t('Type'),
     '#options' => $font_type_options,
-    '#default_value' => theme_get_setting('selectors_font_type')
+    '#default_value' => at_get_setting('selectors_font_type')
   );
   $form['at']['font']['css']['selectors_font'] = array(
     '#type' => 'select',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('selectors_font'),
+    '#default_value' => at_get_setting('selectors_font'),
     '#options' => font_list('wsf', 'css'),
     '#states' => array (
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => '')),
@@ -427,7 +427,7 @@
   $form['at']['font']['css']['selectors_font_gwf'] = array(
     '#type' => 'select',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('selectors_font_gwf'),
+    '#default_value' => at_get_setting('selectors_font_gwf'),
     '#options' => font_list('gwf', 'css'),
     '#states' => array (
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf')),
@@ -436,7 +436,7 @@
   $form['at']['font']['css']['selectors_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => theme_get_setting('selectors_font_cfs'),
+    '#default_value' => at_get_setting('selectors_font_cfs'),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
@@ -447,7 +447,7 @@
     $form['at']['font']['css']['selectors_font_fyf'] = array(
       '#type' => 'select',
       '#title' => t('Font'),
-      '#default_value' => theme_get_setting('selectors_font_fyf'),
+      '#default_value' => at_get_setting('selectors_font_fyf'),
       '#options' => font_list('fyf', 'css'),
       '#states' => array (
         'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
@@ -459,7 +459,7 @@
     '#type' => 'textarea',
     '#title' => t('CSS Selectors'),
     '#rows' => 3,
-    '#default_value' => theme_get_setting('selectors_css'),
+    '#default_value' => at_get_setting('selectors_css'),
     '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>"),
     '#states' => array (
       'disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>')),

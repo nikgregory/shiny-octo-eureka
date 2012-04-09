@@ -16,6 +16,6 @@
   $form['at']['login-block']['hlb']['horizontal_login_block'] = array(
     '#type' => 'checkbox',
     '#title' => t('Horizontal Login Block'),
-    '#default_value' => theme_get_setting('horizontal_login_block'),
+    '#default_value' => at_get_setting('horizontal_login_block'),
     '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
   );

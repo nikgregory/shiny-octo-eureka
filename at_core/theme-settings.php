@@ -3,8 +3,11 @@
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
 
-// Get our config arrys
+// Get our plugin system functions
 include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
+
+// We need some helpers
+include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
 
 /**
  * Implements hook_form_system_theme_settings_alter().
@@ -52,7 +55,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   include_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
   // EXTENSIONS
-  if(theme_get_setting('enable_extensions') === 1) {
+  if(at_get_setting('enable_extensions') === 1) {
 
     // Build a custom header for the Extensions settings form
     $styles_header  = '<div class="at-settings-form style-settings-form ' . $admin_theme_class . '"><div class="styles-header theme-settings-header clearfix">';
@@ -73,55 +76,55 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     include_once($path_to_at_core . '/inc/font.lists.inc');
 
     // Heading styles
-    if(theme_get_setting('enable_heading_settings') === 1) {
+    if(at_get_setting('enable_heading_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
     // Fonts
-    if(theme_get_setting('enable_font_settings') === 1) {
+    if(at_get_setting('enable_font_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
     }
     // Heading styles
-    if(theme_get_setting('enable_heading_settings') === 1) {
+    if(at_get_setting('enable_heading_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
     // Breadcrumbs
-    if (theme_get_setting('enable_breadcrumb_settings') === 1) {
+    if (at_get_setting('enable_breadcrumb_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
     }
     // Images
-    if(theme_get_setting('enable_image_settings') === 1) {
+    if(at_get_setting('enable_image_settings') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.images.inc');
     }
     // Search Settings
-    // if (theme_get_setting('enable_search_settings') === 1) {
+    // if (at_get_setting('enable_search_settings') === 1) {
       // include_once($path_to_at_core . '/inc/forms/settings.search.inc');
     // }
     // Horizonatal login block
-    if (theme_get_setting('horizontal_login_block_enable') === 'on') {
-      if (theme_get_setting('enable_loginblock_settings') === 1) {
+    if (at_get_setting('horizontal_login_block_enable') === 'on') {
+      if (at_get_setting('enable_loginblock_settings') === 1) {
         include_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
       }
     }
     // Modify output
-    if (theme_get_setting('enable_markup_overides') === 1) {
+    if (at_get_setting('enable_markup_overides') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
     }
 
     // Exclude CSS
-    if (theme_get_setting('enable_exclude_css') === 1) {
+    if (at_get_setting('enable_exclude_css') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
     }
 
     // Metatags
-    if (theme_get_setting('enable_mobile_metatags') === 1) {
+    if (at_get_setting('enable_mobile_metatags') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
     }
     // Touch icons
-    if (theme_get_setting('enable_apple_touch_icons') === 1) {
+    if (at_get_setting('enable_apple_touch_icons') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
     }
     // Custom CSS
-    if (theme_get_setting('enable_custom_css') === 1) {
+    if (at_get_setting('enable_custom_css') === 1) {
       include_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
     }
 

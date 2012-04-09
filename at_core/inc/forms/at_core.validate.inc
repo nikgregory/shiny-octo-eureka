@@ -32,7 +32,7 @@ function at_core_settings_validate($form, &$form_state) {
 
   // Check if the apple touch icon path is correct
 
-  if(theme_get_setting('enable_extensions') === 1) {
+  if(at_get_setting('enable_extensions') === 1) {
     if ($values['enable_apple_touch_icons'] === 1) {
       // low
       // if (empty($values['apple_touch_icon_path_l'])) {

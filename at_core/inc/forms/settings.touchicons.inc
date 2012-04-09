@@ -18,7 +18,7 @@
     '#title' => t('57x57'),
     '#description' => t('If you only enter a path for this size it will be used by all devices.'),
     '#field_prefix' => $theme_name . '/',
-    '#default_value' => theme_get_setting('apple_touch_icon_path_l'),
+    '#default_value' => at_get_setting('apple_touch_icon_path_l'),
     '#states' => array(
       'required' => array('input[name="enable_apple_touch_icons"]' => array('checked' => TRUE)),
     ),
@@ -30,7 +30,7 @@
     '#title' => t('72x72'),
     '#description' => t('Apple touch icon for old iPads.'),
     '#field_prefix' => $theme_name . '/',
-    '#default_value' => theme_get_setting('apple_touch_icon_path_m'),
+    '#default_value' => at_get_setting('apple_touch_icon_path_m'),
   );
 
   // High
@@ -39,5 +39,5 @@
     '#title' => t('114x114'),
     '#description' => t('Apple touch icon for iPhone 4 with high-res retina display.'),
     '#field_prefix' => $theme_name . '/',
-    '#default_value' => theme_get_setting('apple_touch_icon_path_h'),
+    '#default_value' => at_get_setting('apple_touch_icon_path_h'),
   );
