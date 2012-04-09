@@ -1,21 +1,21 @@
 /**
- * global.base.css 
+ * global.base.css
  * This is basically a big reset for html elements to set up global defaults.
  */
 
 /*
  * Fonts
  *
- * By default there is no global font size reset. A common 
- * method is to reset it to 62.5%, or 10px. This makes it very 
+ * By default there is no global font size reset. A common
+ * method is to reset it to 62.5%, or 10px. This makes it very
  * easy to calculate the required font sizes in em, for example:
  *
  * 1.6em = 16px
  * 2.4em = 24px
  *
  * In Adaptivetheme this should be applied to the HTML element,
- * so it will play nicely with the theme settings. If you use 
- * the body element or #page wrapper you will get unpredictable 
+ * so it will play nicely with the theme settings. If you use
+ * the body element or #page wrapper you will get unpredictable
  * font scaling issues.
  *
  * Font size chart from http://pxtoem.com/
@@ -47,9 +47,9 @@
  * webfonts and setting font sizes - you can enable these
  * under "Site Tweaks", simply enable the Fonts setting and
  * start using them. You can choose from standard websafe font
- * stacks, Google fonts, add your own custom stacks, and if you 
- * have @font-your-face module installed just set the font to 
- * "-- add selector in theme CSS --" and the font will automatically 
+ * stacks, Google fonts, add your own custom stacks, and if you
+ * have @font-your-face module installed just set the font to
+ * "-- add selector in theme CSS --" and the font will automatically
  * be available to you in theme settings.
  * @see http://drupal.org/project/fontyourface
  *
@@ -274,7 +274,7 @@ img {
 /* /ht Ethan Marcotte - http://front.ie/l8rJaA */
 img,
 embed,
-object, 
+object,
 video {
   max-width: 100%;
 }
@@ -331,6 +331,28 @@ header[role=banner],
 }
 
 /* Helpful classes for hiding content */
+.element-invisible {
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+}
+
+.element-invisible.element-focusable:active,
+.element-invisible.element-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static !important;
+  width: auto;
+}
+
 .offscreen {
   position: absolute;
   top: -99999em;
@@ -339,6 +361,7 @@ header[role=banner],
   overflow: hidden;
   outline: 0;
 }
+
 .element-hidden {
   display: none;
 }

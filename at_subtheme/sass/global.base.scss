@@ -167,12 +167,12 @@ var {
 }
 
 
-blockquote, 
+blockquote,
 q {
   font-style: italic;
   quotes: "" "";
   &:before, &:after {
-    content: ""; 
+    content: "";
   }
 }
 
@@ -180,9 +180,9 @@ q {
 blockquote {
   margin: 0 0 1.5em;
   padding: 0 0 0 40px;
-  
-  p { 
-    margin: 0; 
+
+  p {
+    margin: 0;
   }
 }
 
@@ -208,7 +208,7 @@ ol {
     margin: 0 0 0 15px;
     padding: 0;
   }
-  
+
   ul li {
     margin: 0;
     padding: 0;
@@ -228,7 +228,7 @@ ul, ol {
 
 ul {
   list-style-type: disc;
-  
+
   ul ul {
     list-style-type: square;
   }
@@ -237,11 +237,11 @@ ul {
 
 ol {
   list-style-type: decimal;
-  
+
   ol {
-  
+
     list-style-type: lower-alpha;
-    
+
     ol {
       list-style-type: lower-roman;
     }
@@ -251,7 +251,7 @@ ol {
 
 ul ul {
   list-style-type: circle;
-  
+
   ul ul {
     list-style-type: circle;
   }
@@ -284,7 +284,6 @@ img {
 
 
 // Ethan Marcotte - http://front.ie/l8rJaA
-img,
 embed,
 object,
 video {
@@ -352,6 +351,28 @@ header[role=banner],
 
 
 // Helpful classes for hiding content
+.element-invisible {
+  border: 0;
+  clip: rect(1px 1px 1px 1px); // IE6, IE7
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+}
+
+.element-invisible.element-focusable:active,
+.element-invisible.element-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static !important;
+  width: auto;
+}
+
 .offscreen {
   position: absolute;
   top: -99999em;
@@ -361,8 +382,6 @@ header[role=banner],
   outline: 0;
 }
 
-
 .element-hidden {
   display: none;
 }
-

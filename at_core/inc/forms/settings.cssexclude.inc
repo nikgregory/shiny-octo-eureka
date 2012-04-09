@@ -3,6 +3,9 @@
     // We need some template helpers
     include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
 
+    // Get the relevent CSS file data for building the form.
+    $css_data = at_get_css_files($theme_name);
+
     // -- DIE CSS DIE -- //
     $form['at']['cssexcludes'] = array(
       '#type' => 'fieldset',
@@ -13,9 +16,6 @@
       '#title' => t('Unset CSS'),
       '#description' => t('<h2>Unset CSS</h2><p>Stylesheet names are cached, if some are not showing in this list you may need to clear the cache.</p><p>In for some reason (it happens) the CSS files you want to unset never show here you can explicitly declare them in your info file as "unset_css", see your sub-themes info file under "Stylesheets" for instructions.</p>'),
     );
-
-    $css_data = at_get_css_files($theme_name);
-    array_unique($css_data);
 
     // Core
     $core_defined = FALSE;

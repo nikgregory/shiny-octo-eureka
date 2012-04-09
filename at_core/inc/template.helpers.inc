@@ -94,6 +94,7 @@ function at_get_css_files($theme_name) {
           }
         }
       }
+      array_unique($styles);
       cache_set('at_get_css_files', $styles, 'cache');
     }
   }
