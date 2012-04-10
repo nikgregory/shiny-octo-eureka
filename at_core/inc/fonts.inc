@@ -5,6 +5,7 @@
  * build stylesheets and load font styles.
  */
 function font_elements() {
+
   $elements_array = &drupal_static(__FUNCTION__, array());
   if (empty($elements_array)) {
     $elements_array = array(
@@ -189,19 +190,22 @@ function font_list($type, $element) {
  * @param $element
  */
 function websafe_fonts_list($element) {
+
   $fonts = &drupal_static(__FUNCTION__, array());
-  $fonts = array(
-    "$element-sss" => t("'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif"),
-    "$element-ssl" => t("Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif"),
-    "$element-a"   => t("Arial, Helvetica, sans-serif"),
-    "$element-cc"  => t("Calibri, Candara, Arial, Helvetica, sans-serif"),
-    "$element-m"   => t("'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif"),
-    "$element-l"   => t("'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif"),
-    "$element-i"   => t("Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif"),
-    "$element-ss"  => t("Garamond, Perpetua, 'Times New Roman', serif"),
-    "$element-sl"  => t("Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif"),
-    "$element-ms"  => t("Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif"),
-  );
+  if (empty($fonts)) {
+    $fonts = array(
+      "$element-sss" => t("'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif"),
+      "$element-ssl" => t("Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif"),
+      "$element-a"   => t("Arial, Helvetica, sans-serif"),
+      "$element-cc"  => t("Calibri, Candara, Arial, Helvetica, sans-serif"),
+      "$element-m"   => t("'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif"),
+      "$element-l"   => t("'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif"),
+      "$element-i"   => t("Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif"),
+      "$element-ss"  => t("Garamond, Perpetua, 'Times New Roman', serif"),
+      "$element-sl"  => t("Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif"),
+      "$element-ms"  => t("Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif"),
+    );
+  }
 
   return $fonts;
 }
@@ -216,21 +220,25 @@ function websafe_fonts_list($element) {
  * @pararm $element
  */
 function font_your_face_fonts_list($element) {
-  $fonts = array();
-  $font_your_face_enabled = font_your_face_fonts_enabled();
-  if ($font_your_face_enabled == TRUE) {
-    $enabled_fonts = fontyourface_get_fonts('enabled = 1');
-    if (!empty($enabled_fonts)) {
-      foreach ($enabled_fonts as $font) {
-        // <none> is "-- add selector in theme CSS --" in fontyourface settings
-        if ($font->css_selector === '<none>') {
-          $key = drupal_html_class("$element-$font->name");
-          $value = $font->name;
-          $fonts[$key] = $value;
+
+  $fonts = &drupal_static(__FUNCTION__, array());
+  if (empty($fonts)) {
+    $font_your_face_enabled = font_your_face_fonts_enabled();
+    if ($font_your_face_enabled == TRUE) {
+      $enabled_fonts = fontyourface_get_fonts('enabled = 1');
+      if (!empty($enabled_fonts)) {
+        foreach ($enabled_fonts as $font) {
+          // <none> is "-- add selector in theme CSS --" in fontyourface settings
+          if ($font->css_selector === '<none>') {
+            $key = drupal_html_class("$element-$font->name");
+            $value = $font->name;
+            $fonts[$key] = $value;
+          }
         }
       }
     }
   }
+
   return $fonts;
 }
 
@@ -241,6 +249,7 @@ function font_your_face_fonts_list($element) {
  * available for use in the theme settings.
  */
 function font_your_face_fonts_enabled() {
+
   $fonts_enabled = FALSE;
   if (module_exists('fontyourface')) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
@@ -255,6 +264,7 @@ function font_your_face_fonts_enabled() {
       $fonts_enabled = TRUE;
     }
   }
+
   return $fonts_enabled;
 }
 
@@ -264,13 +274,17 @@ function font_your_face_fonts_enabled() {
  * @pararm $element
  */
 function google_fonts_list($element) {
-  $google_fonts = google_font_names();
-  $fonts = array();
-  foreach ($google_fonts as $font) {
-    $key = drupal_html_class("$element-$font");
-    $value = $font;
-    $fonts[$key] = $value;
+
+  $fonts = &drupal_static(__FUNCTION__, array());
+  if (empty($fonts)) {
+    $google_fonts = google_font_names();
+    foreach ($google_fonts as $font) {
+      $key = drupal_html_class("$element-$font");
+      $value = $font;
+      $fonts[$key] = $value;
+    }
   }
+
   return $fonts;
 }
 
@@ -282,6 +296,7 @@ function google_fonts_list($element) {
  * variants. Last update: 27/02/2012
  */
 function google_font_names() {
+
   $google_font_names_array = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_names_array)) {
     // Try to get the list from the cache table.
@@ -773,6 +788,7 @@ function google_font_names() {
      cache_set('at_google_font_names', $google_font_names_array, 'cache');
     }
   }
+
   return $google_font_names_array;
 }
 
@@ -785,6 +801,7 @@ function google_font_names() {
  * @param $type
  */
 function font_sizes($type) {
+
   $font_sizes = &drupal_static(__FUNCTION__, array());
   switch ($type) {
     case ('em'):
@@ -887,6 +904,7 @@ function font_sizes($type) {
  * @param $type
  */
 function line_heights($type) {
+
   $line_heights = &drupal_static(__FUNCTION__, array());
   switch ($type) {
     case ('unitless'):
@@ -957,6 +975,7 @@ function line_heights($type) {
  * @param $element
  */
 function font_style_options($style, $element) {
+
   $options = &drupal_static(__FUNCTION__, array());
   switch ($style) {
     case ('case'):

@@ -46,6 +46,7 @@ function at_core_settings_submit($form, &$form_state) {
   if($values['enable_extensions'] === 1) {
     // Include processing for fonts
     if (isset($values['enable_font_settings']) && $values['enable_font_settings'] === 1) {
+      require_once($path_to_at_core . '/inc/fonts.inc');
       require_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
     }
     // Include processing for Custom CSS
