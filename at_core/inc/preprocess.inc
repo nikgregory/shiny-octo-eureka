@@ -27,399 +27,65 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // Clean up the lang attributes.
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
-  // Responsive Styles.
-  // AT has two modes - Production and Development. Depending on the mode it
-  // will load different files. Production mode assume you have finished CSS
-  // development and will not need to update styles in the responsive
-  // stylesheets, if you do you will need to re-save the theme settings at
-  // least once to re-write your $theme_name.responsive.styles.css file which
-  // is in public files.
-
   // Set the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
-  $file = '';
 
-  // Development Mode
-  // These files are for "design style" only, the layout is handled
-  // seperately.
-  //
-  // We only load these files if:
-  // - 1: We're not in production mode
-  // - 2: Responsiveness is not disabled
-  //
-  // When in production mode these files are aggregated into one file
-  // and loaded using load_subtheme_responsive_styles().
-  //
-  // You can disable responsive capability using the theme settings - look under
-  // the Global settings. Do not delete or alter this - use the theme setting!
+  // Load Extension Settings CSS
+  load_extensions_css($theme_name);
 
+  // Load Layout
+  load_layout_css($path, $theme_name);
+
+  // Load Responsive Styles.
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    if (at_get_setting('production_mode', $theme_name) === 0) {
-      // Build a keyed array of CSS file-names as key, and media query as value.
-      // The file names must match the files in your themes CSS directory, if
-      // you change them you must update to match. at_theme_get_setting() caches
-      // and is extremely cheap, in any case we're in development mode.
-      $files = drupal_static('adaptivetheme_preprocess_html_development_responsive_styles');
-      if (empty($files)) {
-        $files = array(
-          'responsive.smartphone.portrait'  => at_get_setting('smartphone_portrait_media_query', $theme_name),
-          'responsive.smartphone.landscape' => at_get_setting('smartphone_landscape_media_query', $theme_name),
-          'responsive.tablet.portrait'      => at_get_setting('tablet_portrait_media_query', $theme_name),
-          'responsive.tablet.landscape'     => at_get_setting('tablet_landscape_media_query', $theme_name),
-          'responsive.desktop'              => at_get_setting('bigscreen_media_query', $theme_name),
-        );
-
-        // Add the cascading stylesheet if enabled
-        if (at_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
-          $cascade_media_query = at_get_setting('cascade_media_query', $theme_name);
-          $item = array('responsive.cascade' => $cascade_media_query);
-          $files = array_merge($item, $files);
-        }
-      }
-
-      // Loop over the files array and load each CSS file.
-      // load_subtheme_responsive_styles() takes three parameters:
-      // - $css_file - the name of the css file
-      // - $media_query - the media query from theme settings
-      // - $theme_name - to generate the path-to-theme for drupal_add_css()
-      foreach ($files as $key => $value) {
-        $filepath = drupal_get_path('theme', $theme_name) . '/css/' . $key . '.css';
-        $media_query = $value;
-        load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 200);
-      }
-    }
-
-    // Production Mode
-    // In Production mode we only load one file for our design styles.
-    // We use a media query to prevent non media query browsers from downloading it.
-    // The embedded media queries in this file take precedence always.
-    else {
-      $filepath = $path . '/' . $theme_name . '.responsive.styles.css';
-      $media_query = 'only screen'; // keyword "only" should hide this from older user agents
-      load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 200);
-    }
+    load_responsive_css($path, $theme_name);
   }
 
-  // Layout
-  // Each time you save the theme settings AT builds 3 layout stylesheets:
-  // 1. themeName.default.layout.css
-  // 2. themeName.responsive.layout.css
-  // 3. themeName.lt-ie9.layout.css
-  //
-  // Now we need to load them, but only under certain conditions:
-  // a. Is the default layout the standard layout?
-  // b. Is the responsive capability disabled?
-  //
-  // If either a or b equate to TRUE, then we are NOT doing mobile first.
-  // If a is FALSE then this is mobile first.
-  // If b is FALSE then we are doing responsive design.
+  // Load fonts and/or Custom CSS
+  if(at_get_setting('enable_extensions', $theme_name) === 1) {
 
-  // First set a boolean to test which IE stylesheet to load.
-  $load_ie8_css = TRUE;
-
-  // Load the default layout if Standard layout is default or responsive styles are disabled
-  if (at_get_setting('global_default_layout', $theme_name) === 'standard-layout' || at_get_setting('disable_responsive_styles', $theme_name) === 1) {
-    $file = $theme_name . '.default.layout.css';
-    $filepath = $path . '/' . $file;
-    if (file_exists($filepath)) {
-      drupal_add_css($filepath, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'media' => 'screen',
-        'every_page' => TRUE,
-        )
-      );
+    if (at_get_setting('enable_font_settings', $theme_name) === 1) {
+      load_fonts($path, $theme_name);
     }
-  }
 
-  // Next - check if we need to load the responsive layout
-  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
-
-    // Responsiveness is not disabled, load the responsive layout
-    $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
-    $media_query = 'only screen'; // keyword "only" should hide this from older user agents
-    load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 100);
-
-    // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
-    // 1. Responsive capabilities are ON
-    // 2. Mobile first is ON
-    // 3. Respond.js is OFF
-    // Note this excludes IEMobile 7, screw you IEMobile 7
-    if (at_get_setting('global_default_layout', $theme_name) !== 'standard-layout') {
-      if (at_get_setting('load_respondjs', $theme_name) === 0) {
-        $load_ie8_css = FALSE;
-        $filepath = $path . '/' . $theme_name . '.lt-ie9.layout.css';
-        $ie_style['media'] = 'screen';
-        $ie_style['condition'] = '(lt IE 9)&(!IEMobile 7)';
-        load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
-      }
-    }
-  }
-
-  // The lt-ie8.layout.css file loads under the exact opposite conditions to the lt-ie9 file.
-  // In other words, when lt-ie9 is loading, this is not, when it isn't, this loads. This
-  // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
-  // default in theme settings, screw you IE7.
-  if ($load_ie8_css == TRUE) {
-    if (at_get_setting('load_ltie8css', $theme_name) === 1) {
-      $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
-      $ie_style['media'] = 'screen';
-      $ie_style['condition'] = 'lt IE 8';
-      load_subtheme_conditional_styles($filepath, $ie_style);
-    }
-  }
-
-  // General IE stylesheets from the info file
-  if (array_key_exists('ie_stylesheets', $info)) {
-    $ie_style = '';
-    foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
-      // Set default value for media in case the themer forgets, all is an "assumed" value an not printed in the output.
-      if (is_numeric($media)) {
-        $media = 'all';
-      }
-      foreach ($stylesheets as $condition => $ie_styles_path) {
-        $ie_style['media'] = $media;
-        $ie_style['condition'] = $condition;
-        $ie_style['path'] = $ie_styles_path;
-      }
-      $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-      load_subtheme_conditional_styles($filepath, $ie_style);
+    if (at_get_setting('enable_custom_css', $theme_name) === 1) {
+      load_custom_css($path, $theme_name);
     }
   }
 
   // Build an array of polyfilling scripts
-  $vars['polyfills_array'] = drupal_static('adaptivetheme_preprocess_html_polyfills_array');
-  if (empty($vars['polyfills_array'])) {
-    // Info file loaded conditional scripts
-    $theme_path = drupal_get_path('theme', $theme_name);
-    if (array_key_exists('ie_scripts', $info)) {
-      foreach ($info['ie_scripts'] as $condition => $ie_scripts_path) {
-        foreach ($ie_scripts_path as $key => $value) {
-          $filepath = $theme_path . '/' . $value;
-          $vars['polyfills_array']['info'][$condition][] = at_theme_script($filepath);
-        }
-      }
-    }
-    // AT Core Polyfills
-    $polly = '';
-    $polly_settings_array = array(
-      'load_respondjs',
-      'load_html5js',
-      'load_boxsizinghtc',
-      'load_pie',
-      'load_selectivizr',
-      'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
-    );
-    foreach ($polly_settings_array as $polly_setting) {
-      $polly[$polly_setting] = at_get_setting($polly_setting, $theme_name);
-    }
-    $backed_crackers = polly_wants_a_cracker($polly, $theme_name);
-    foreach ($backed_crackers as $cupboard => $flavors) {
-      foreach ($flavors as $key => $value) {
-        $filepath = $path_to_at_core . '/' . $value;
-        $vars['polyfills_array']['at_core'][$cupboard][] = at_theme_script($filepath);
-      }
-    }
-  }
+  $vars['polyfills_array'] = '';
+  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
 
-  // Load fonts
-  if(at_get_setting('enable_extensions', $theme_name) === 1) {
-    if (at_get_setting('enable_font_settings', $theme_name) === 1) {
-
-      // Google fonts
-      $google_fonts = drupal_static('adaptivetheme_preprocess_html_google_fonts', FALSE);
-      if (empty($google_fonts)) {
-        $google_fonts = load_google_fonts($theme_name);
-      }
-      if (!empty($google_fonts)) {
-        // No protocol, we need to support https also
-        drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
-          'group' => CSS_THEME,
-          'type' => 'external',
-          'weight' => -100,
-          'preprocess' => FALSE,
-          )
-        );
-      }
-
-      // Load the fonts CSS from public files
-      $filepath = $path . '/' . $theme_name . '.fonts.css';
-      if (file_exists($filepath)) {
-        drupal_add_css($filepath, array(
-          'preprocess' => TRUE,
-          'group' => CSS_THEME,
-          'media' => 'screen',
-          'every_page' => TRUE,
-          )
-        );
-      }
-    }
-
-    // Load the custom CSS if enabled
-    if (at_get_setting('enable_custom_css', $theme_name) === 1) {
-      $filepath = $path . '/' . $theme_name . '.custom.css';
-      if (file_exists($filepath)) {
-        drupal_add_css($filepath, array(
-          'preprocess' => TRUE,
-          'group' => CSS_THEME,
-          'weight' => 1000,
-          'media' => 'screen',
-          'every_page' => TRUE,
-          )
-        );
-      }
-    }
-  }
 
   // Skip link
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
   if (at_get_setting('skip_link_target', $theme_name)) {
-    $vars['skip_link_target'] = at_get_setting('skip_link_target', $theme_name);
+    $skip_link_target = at_get_setting('skip_link_target', $theme_name);
+    $vars['skip_link_target'] = check_plain($skip_link_target);
   }
 
-  // Extra Classes
-  if (at_get_setting('extra_page_classes', $theme_name) === 1) {
-
-    // Set a class based on the language
-    if (function_exists('locale')) {
-      $vars['classes_array'][] = 'lang-' . $vars['language']->language;
+  // Generate body classes
+  if ($html_classes = generate_html_classes($vars, $theme_name)) {
+    foreach ($html_classes as $class_name) {
+      $vars['classes_array'][] = $class_name;
     }
-
-    // Site name class, for multi site installs that need to target styles
-    // at each site seperately (mitigates things like block-id clashes)
-    if (!empty($vars['head_title_array']['name'])) {
-      $vars['classes_array'][] = 'site-name-' . drupal_html_class($vars['head_title_array']['name']);
-    }
-
-    // Classes for theming based on context
-    if (!$vars['is_front']) {
-      // Add unique class for each page.
-      $path = drupal_get_path_alias($_GET['q']);
-      // Add unique class for each website section.
-      list($section, ) = explode('/', $path, 2);
-      $arg = explode('/', $_GET['q']);
-      if ($arg[0] === 'node') {
-        if (isset($arg[1]) && $arg[1] === 'add') {
-          $section = 'node-add';
-        }
-        elseif (isset($arg[2]) && is_numeric($arg[1]) && ($arg[2] === 'edit' || $arg[2] === 'delete')) {
-          $section = 'node-' . $arg[2];
-        }
-      }
-      $vars['classes_array'][] = drupal_html_class('section-' . $section);
-    }
-
-    // Set classes for views and panels pages
-    $vars['menu_item'] = menu_get_item();
-    switch ($vars['menu_item']['page_callback']) {
-      case 'views_page':
-        // Is this a Views page?
-        $vars['classes_array'][] = 'page-views';
-        break;
-      case 'page_manager_page_execute':
-      case 'page_manager_node_view':
-      case 'page_manager_contact_site':
-        // Is this a Panels page?
-        $vars['classes_array'][] = 'page-panels';
-        break;
-    }
-
-  } // end extra classes
-
-  // Add a body class if the site name is hidden - state driven dynamic
-  // classes are very useful and AT does this a lot
-  if (at_get_setting('toggle_name', $theme_name) === 0) {
-    $vars['classes_array'][] = 'site-name-hidden';
   }
 
-  // Extensions
-  if(at_get_setting('enable_extensions', $theme_name) === 1) {
-
-    // Add theme setting classes and files if active
-    $settings_css = array();
-
-    // Page title classes - added in html.tpl.php on body, since title_attributes_array is useless
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $page_title_settings_array = array(
-        'page_title_case',
-        'page_title_weight',
-        'page_title_alignment',
-        'page_title_shadow',
-      );
-      foreach ($page_title_settings_array as $page_title_setting) {
-        if ($heading_settings = at_theme_get_setting($page_title_setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_settings;
-        }
-      }
-    }
-
-    // Headings/titles
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_css[] = 'at.settings.style.headings.css';
-    }
-
-    // Images
-    if(at_get_setting('enable_image_settings', $theme_name) === 1) {
-      $settings_css[] = 'at.settings.style.image.css';
-      $image_settings_array = array(
-        'image_caption_full',
-        'image_caption_teaser',
-        'image_alignment',
-        'image_alignment_teaser',
-      );
-      foreach ($image_settings_array as $setting) {
-        if ($image_setting = at_theme_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $image_setting;
-        }
-      }
-    }
-
-    // Login block
-    if (at_get_setting('enable_loginblock_settings', $theme_name) === 1) {
-      $settings_css[] = 'at.settings.style.login.css';
-    }
-
-    // Load each stylesheet to support theme setting styles
-    if (!empty($settings_css)) {
-      foreach ($settings_css as $css_file) {
-        $filepath = $path_to_at_core . '/css/' . $css_file;
-        drupal_add_css($filepath, array(
-          'preprocess' => TRUE,
-          'group' => CSS_THEME,
-          'media' => 'screen',
-          'every_page' => TRUE,
-          )
-        );
-      }
-    }
-
-  } // end extensions
-
-  // Do some legacy stuff for 7.x-2.x themes that have google webfonts running on the old system
-  // Scan for the existence of a "release" key and conditionally load google.web.fonts.inc
+  // Do some legacy stuff for 7.x-2.x themes that have google webfonts running
+  // on the old system. Scan for the existence of a "release" key and
+  // conditionally load google.web.fonts.inc
   if (!array_key_exists('release', $info) || ($info['release'] == '7.x-2.x')) {
     include_once($path_to_at_core . '/inc/google.web.fonts.inc');
   }
 
-  // Finally we do some debugging/development stuff
-  // add a body class for exposing region
-  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
-    $vars['classes_array'][] = 'debug-regions';
-    $vars['classes_array'][] = 'debug-panels';
-    drupal_add_css($path_to_at_core . '/css/debug-regions.css');
-  }
-  // Load window size bookmarklet
-  if (at_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($path_to_at_core . '/js/window-size.js',
-      array(
-        'type' => 'file',
-        'scope' => 'footer',
-        'group' => JS_THEME,
-        'preprocess' => TRUE,
-        'cache' => TRUE,
-      )
-    );
+  // Do some debugging/development stuff
+  if (
+    at_get_setting('expose_regions', $theme_name) === 1 ||
+    at_get_setting('load_all_panels', $theme_name) === 1 ||
+    at_get_setting('show_window_size', $theme_name) === 1) {
+    load_debuggers($theme_name);
   }
 }
 
@@ -496,7 +162,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
       }
     }
     foreach ($heading_settings_array as $setting) {
-      if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
+      if ($heading_setting = at_get_setting($setting, $theme_name)) {
         $vars['classes_array'][] = $heading_setting;
       }
     }
@@ -663,7 +329,7 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }
@@ -792,7 +458,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }
@@ -885,7 +551,7 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
         );
       }
       foreach ($settings_array as $setting) {
-        if ($heading_setting = at_theme_get_setting($setting, $theme_name)) {
+        if ($heading_setting = at_get_setting($setting, $theme_name)) {
           $vars['classes_array'][] = $heading_setting;
         }
       }

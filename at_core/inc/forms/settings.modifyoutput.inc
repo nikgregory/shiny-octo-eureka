@@ -95,6 +95,7 @@
     '#description' => t('first, last and odd/even (zebra classes)'),
     '#default_value' => at_get_setting('extra_item_list_classes'),
   );
+
   // Hide or Remove
   $form['at']['modify-output']['hide-remove'] = array(
     '#type' => 'fieldset',
@@ -131,6 +132,14 @@
     '#type' => 'fieldset',
     '#title' => t('Accessibility'),
     '#description' => t('<h3>Accessibility</h3>'),
+  );
+
+  // Use extra fieldsets in advanced serach form
+  $form['at']['modify-output']['a11y']['adv_search_extra_fieldsets'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use extra fieldset wrappers in the advanced search form'),
+    '#default_value' => at_get_setting('adv_search_extra_fieldsets'),
+    '#description' => t('The problem with Drupals standard Advanced search form is that each criterion group is wrapped in a DIV, whereas it should use fieldsets. Turning this on may cause issues with modules that modify the search form such as Search Config.'),
   );
 
   // Skip link target

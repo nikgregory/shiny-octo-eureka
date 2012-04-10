@@ -25,9 +25,6 @@ function at_get_plugins($theme_name) {
       $plugins = $plugins_cache->data;
     }
     else {
-      // We need some template helpers
-      include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
-
       $themes_info = at_get_info_trail($theme_name);
       // Look for and get all the plugins
       if (!empty($themes_info)) {

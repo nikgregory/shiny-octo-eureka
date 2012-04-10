@@ -1,7 +1,5 @@
 <?php
 
-  // Fonts
-
   // Get the font elements array, this holds options and settings for each font type
   $form_elements = font_elements();
 

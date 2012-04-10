@@ -1,9 +1,10 @@
 <?php
+
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-include_once($path_to_at_core . '/inc/plugins.inc');
+require_once($path_to_at_core . '/inc/plugins.inc');
 
 /**
  * Page Layout CSS Builder.

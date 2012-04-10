@@ -190,17 +190,11 @@ function adaptivetheme_process_node(&$vars, $hook) {
   // Strip default drupal classes if not required
   if (at_get_setting('extra_article_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
-    if (in_array('node-sticky', $classes)) {
-      $classes = str_replace('node-sticky', '', $classes);
-    }
-    if (in_array('node-promoted', $classes)) {
-      $classes = str_replace('node-promoted', '', $classes);
-    }
-    if (in_array('node-teaser', $classes)) {
-      $classes = str_replace('node-teaser', '', $classes);
-    }
-    if (in_array('node-preview', $classes)) {
-      $classes = str_replace('node-preview', '', $classes);
+    $striped_classes = array('node-sticky','node-promoted','node-teaser','node-preview');
+    foreach ($striped_classes as $class) {
+      if (in_array($class, $classes)) {
+        $classes = str_replace($class, '', $classes);
+      }
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }
@@ -247,17 +241,11 @@ function adaptivetheme_process_comment(&$vars, $hook) {
   // Strip default drupal classes if not required
   if (at_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
-    if (in_array('comment-by-anonymous', $classes)) {
-      $classes = str_replace('comment-by-anonymous', '', $classes);
-    }
-    if (in_array('comment-by-node-author', $classes)) {
-      $classes = str_replace('comment-by-node-author', '', $classes);
-    }
-    if (in_array('comment-by-viewer', $classes)) {
-      $classes = str_replace('comment-by-viewer', '', $classes);
-    }
-    if (in_array('comment-new', $classes)) {
-      $classes = str_replace('comment-new', '', $classes);
+    $striped_classes = array('comment-by-anonymous','comment-by-node-autho','comment-by-viewer','comment-new');
+    foreach ($striped_classes as $class) {
+      if (in_array($class, $classes)) {
+        $classes = str_replace($class, '', $classes);
+      }
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }

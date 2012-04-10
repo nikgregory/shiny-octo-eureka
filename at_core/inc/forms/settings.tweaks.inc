@@ -1,5 +1,4 @@
 <?php
-  // TODO: We need to check if this is an old theme, and not show stuff and throw a warning
 
   // Enable Extensions
   $form['at']['site-tweaks'] = array(
@@ -85,10 +84,10 @@
     '#default_value' => at_get_setting('enable_markup_overides'),
   );
 
-  // Exclude CSS
+  // Unset CSS
   $form['at']['site-tweaks']['enable-stuff']['enable_exclude_css'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Exclude CSS Files'),
+    '#title' => t('Unset CSS Files'),
     '#description' => t('Options to unset (exclude) CSS files from loading in your theme - includes settings for Core modules, CSS added by Libaries and your own declared exclusions (see your themes info file under "Stylesheets").'),
     '#default_value' => at_get_setting('enable_exclude_css'),
   );

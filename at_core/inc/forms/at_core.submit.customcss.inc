@@ -1,4 +1,5 @@
 <?php
+
   $custom_css = '';
   if (!empty($values['custom_css'])) {
     $custom_css = filter_xss($values['custom_css']); // sanitize user entered data, strip bad protocols

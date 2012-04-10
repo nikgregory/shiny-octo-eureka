@@ -1,12 +1,18 @@
 <?php
+
 global $path_to_at_core;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-// Helper functions for processing the page layout and font families
-include_once($path_to_at_core . '/inc/forms/at_core.submit.builders.inc');
+// Helper functions for processing the page layout and font families.
+require_once($path_to_at_core . '/inc/forms/at_core.submit.builders.inc');
 
-// Custom submit function - this mostly builds and saves stylesheets for
-// various features such as the responsive layout and font styles.
+/**
+ * Custom submit function - this mostly builds and saves stylesheets for
+ * various features such as the responsive layout and font styles.
+ *
+ * @param $form
+ * @param $form_state
+ */
 function at_core_settings_submit($form, &$form_state) {
   global $path_to_at_core;
 
@@ -32,20 +38,19 @@ function at_core_settings_submit($form, &$form_state) {
   variable_set('theme_' . $theme_name . '_files_directory', $path);
 
   // Include processing for automagical info builder
-  include_once($path_to_at_core . '/inc/forms/at_core.submit.info.inc');
+  require_once($path_to_at_core . '/inc/forms/at_core.submit.info.inc');
 
   // Include processing for page & panels layouts, and responsive styles
-  include_once($path_to_at_core . '/inc/forms/at_core.submit.responsive.inc');
+  require_once($path_to_at_core . '/inc/forms/at_core.submit.responsive.inc');
 
   if($values['enable_extensions'] === 1) {
     // Include processing for fonts
     if (isset($values['enable_font_settings']) && $values['enable_font_settings'] === 1) {
-      include_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
+      require_once($path_to_at_core . '/inc/forms/at_core.submit.fonts.inc');
     }
-
     // Include processing for Custom CSS
     if (isset($values['enable_custom_css']) && $values['enable_custom_css'] === 1) {
-      include_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
+      require_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
     }
   }
 }

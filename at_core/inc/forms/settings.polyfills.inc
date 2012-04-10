@@ -3,7 +3,7 @@
    * TODO: review documentation and provide links to help pages.
    */
 
-// Polyfills
+  // Polyfills
   $form['at-layout']['polyfills'] = array(
     '#type' => 'fieldset',
     '#title' => t('Polyfills'),

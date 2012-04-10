@@ -1,6 +1,4 @@
 <?php
-  // Fonts
-  // Save the font settings in a CSS file
 
   // $font_styles_data holds all data for the stylesheet
   $font_styles_data = array();

@@ -55,6 +55,19 @@ function adaptivetheme_menubar($vars) {
 }
 
 /**
+ * Helper function for theming main and secondary variables.
+ * Provides 7.x-2.x backward compatibility, not used in 7.x-3.x, instead we now
+ * use a proper theme function so themers can override it.
+ *
+ * @param $menu
+ * @param $type
+ */
+function _theme_menu_variables($menu, $type) {
+  $output = '<div id="' . $type . '-menu-bar" class="nav"><nav class="clearfix">' . $menu . '</nav></div>';
+  return $output;
+}
+
+/**
  * Returns HTML for a breadcrumb trail.
  *
  * Adaptivetheme impliments breadcrumb trails as an ordered list, wrapping each

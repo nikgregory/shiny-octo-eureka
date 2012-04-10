@@ -3,11 +3,11 @@
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
 
-// Get our plugin system functions
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
+// Get our plugin system functions.
+require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
 
-// We need some helpers
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
+// We need some getters.
+require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/get.inc');
 
 /**
  * Implements hook_form_system_theme_settings_alter().
@@ -48,11 +48,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     ),
   );
   // Include layout forms, global settings and debug
-  include_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
-  include_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
-  include_once($path_to_at_core . '/inc/forms/settings.global.inc');
-  include_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
-  include_once($path_to_at_core . '/inc/forms/settings.debug.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.global.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
   // EXTENSIONS
   if(at_get_setting('enable_extensions') === 1) {
@@ -72,64 +72,66 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       ),
     );
 
-    // Font lists - we need these for both font and heading settings
-    include_once($path_to_at_core . '/inc/font.lists.inc');
+    // Include the font functions if the Fonts or Headings extensions are active.
+    if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_heading_settings') === 1) {
+      include_once($path_to_at_core . '/inc/fonts.inc');
+    }
 
     // Heading styles
     if(at_get_setting('enable_heading_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
     // Fonts
     if(at_get_setting('enable_font_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
     }
     // Heading styles
     if(at_get_setting('enable_heading_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.headings.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
     // Breadcrumbs
     if (at_get_setting('enable_breadcrumb_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
     }
     // Images
     if(at_get_setting('enable_image_settings') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.images.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.images.inc');
     }
     // Search Settings
     // if (at_get_setting('enable_search_settings') === 1) {
-      // include_once($path_to_at_core . '/inc/forms/settings.search.inc');
+      // require_once($path_to_at_core . '/inc/forms/settings.search.inc');
     // }
     // Horizonatal login block
     if (at_get_setting('horizontal_login_block_enable') === 'on') {
       if (at_get_setting('enable_loginblock_settings') === 1) {
-        include_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
+        require_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
       }
     }
     // Modify output
     if (at_get_setting('enable_markup_overides') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
     }
 
     // Exclude CSS
     if (at_get_setting('enable_exclude_css') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
     }
 
     // Metatags
     if (at_get_setting('enable_mobile_metatags') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
     }
     // Touch icons
     if (at_get_setting('enable_apple_touch_icons') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
     }
     // Custom CSS
     if (at_get_setting('enable_custom_css') === 1) {
-      include_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
+      require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
     }
 
     // Always include tweaks (extension settings)
-    include_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
+    require_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
   }
 
   // Include a hidden form field with the current release information
@@ -184,5 +186,5 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['#submit'][] = 'at_core_settings_submit';
 }
 // Include custom form validation and submit functions
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
-include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');
+require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
+require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');

@@ -32,19 +32,8 @@
     '#default_value' => at_get_setting('show_window_size'),
   );
 
-  // Rebuild theme data - pending removal, I just don't like this in a theme.
-  // $form['at-layout']['debug']['dev'] = array(
-    // '#type' => 'fieldset',
-    // '#title' => t('Rebuild Theme Data and Registry'),
-    // '#description' => t('<h3>Rebuild Theme Data and Registry</h3><p>Enabling this setting will fire <code>system_rebuild_theme_data()</code> and <code>drupal_theme_rebuild()</code> on every page request. Disable this when your site is live - <strong>this is a major performance overhead</strong>.</p>'),
-  // );
-  // $form['at-layout']['debug']['dev']['rebuild_theme_data'] = array(
-    // '#type' => 'checkbox',
-    // '#title' => t('Rebuild theme data and the theme registry on every page request'),
-    // '#default_value' => at_get_setting('rebuild_theme_data'),
-  // );
-
-  // All media queries, wow this is kinda fugly, did I really do this, I must have been out with mortendk at dcamp or something
+  // All media queries, wow this is kinda fugly, did I really do this, I must
+  // have been out with mortendk at dcamp or something...
   $queries = '';
   $mq = array();
   $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . at_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';

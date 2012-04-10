@@ -1,6 +1,6 @@
 <?php
-  // Responsive Layouts and Styles
 
+  // Responsive Layouts and Styles
   $layout_variables = page_layout(); // Get the page layout config array
   $layouts = array(); // $layouts will hold all the page level layouts
 
@@ -272,8 +272,6 @@
   }
   //****** END bigscreen layout ******//
 
-
-
   // Internet Exploder
   // We only want to load what is absolutely required for IE, depending on the theme settings and what version we are targeting,
   // remember, this only takes care of generating the stylesheets so what you see here are lots of messages being set for the
@@ -323,11 +321,9 @@
     $lt_ie9_css = '/* Responsive capabilites are disabled, we no longer need to load an IE specific layout */';
   }
 
-
   // Get and wrap the responsive CSS styles in the relative media query
   $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
   $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
-
 
   // Generate the layout and responsive styles stylesheets
   // Here we generate five files:
@@ -338,10 +334,8 @@
   // 5. $theme_name.responsive.styles
   // adaptivetheme_preprocess_html() will take care of loading the right ones when they are needed.
 
-
   // responsive layout
   $responsive_layout_data = implode("\n", $layouts);
-
 
   // Prepend the gutters to the responsive layout if we're doing mobile first
   if ($is_default_layout !== 'standard-layout') {
@@ -351,21 +345,17 @@
     $responsive_layout = $responsive_layout_data;
   }
 
-
   // Nuke $responsive_layout if we really don't need it
   if ($values['disable_responsive_styles'] == 1) {
     $responsive_layout = '/* Responsive capabilites are disabled, only the standard layout is loaded in themename.default.layout.css */';
   }
 
-
   // IE assignments, not sure why I am doing this, could be that I meant to do something at this stage and have forgotton for now...
   $lt_ie9_layout = $lt_ie9_css;
   $lt_ie8_layout = $lt_ie8_css;
 
-
   // Aggregate the design stylesheets
   $responsive_css = implode("\n", $responsive_styles);
-
 
   // Build a keyed array: file names as key, layout data as value
   $files = array(
@@ -375,7 +365,6 @@
     "$theme_name.lt-ie8.layout" => $lt_ie8_layout,
     "$theme_name.responsive.styles" => $responsive_css,
   );
-
 
   // Loop over the array and save each file, and we're done!
   foreach ($files as $key => $value) {

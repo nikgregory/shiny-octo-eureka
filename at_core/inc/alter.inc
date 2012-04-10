@@ -176,10 +176,8 @@ function adaptivetheme_css_alter(&$css) {
       $css_data = $cache->data;
     }
     else {
-      // On a cache miss we call the function to generate the data again, this
-      // could be expensive and it could return the wrong data (rare), or this
-      // this time we get a cache hit and strike it lucky.
-      include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/template.helpers.inc');
+      // On the extreme unlikely chance the data is not in the cache or we
+      // drupal_set_message('Ignore this, its here for testing only during development :: cache miss in hook_css_alter() cache_get(), the data has been rebuilt (ignore if the cache was just cleared).', 'status');
       $css_data = at_get_css_files($theme_key);
     }
     // We need the right theme name to get the theme settings, technically we
@@ -244,83 +242,84 @@ function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   // criterion group is wrapped in a DIV, whereas it should be a fieldset with
   // a legend, this is better semantics and improves accessibility by
   // logically grouping field items.
-
-  if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {
-    // Keyword boxes:
-    $form['advanced'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Advanced search'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#attributes' => array('class' => array('search-advanced')),
-    );
-    $form['advanced']['keywords-fieldset'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Keywords'),
-      '#collapsible' => FALSE,
-    );
-    $form['advanced']['keywords-fieldset']['keywords'] = array(
-      '#prefix' => '<div class="criterion">',
-      '#suffix' => '</div>',
-    );
-    $form['advanced']['keywords-fieldset']['keywords']['or'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Containing any of the words'),
-      '#size' => 30,
-      '#maxlength' => 255,
-    );
-    $form['advanced']['keywords-fieldset']['keywords']['phrase'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Containing the phrase'),
-      '#size' => 30,
-      '#maxlength' => 255,
-    );
-    $form['advanced']['keywords-fieldset']['keywords']['negative'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Containing none of the words'),
-      '#size' => 30,
-      '#maxlength' => 255,
-    );
-    // Node types:
-    $types = array_map('check_plain', node_type_get_names());
-    $form['advanced']['types-fieldset'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Types'),
-      '#collapsible' => FALSE,
-    );
-    $form['advanced']['types-fieldset']['type'] = array(
-      '#type' => 'checkboxes',
-      '#prefix' => '<div class="criterion">',
-      '#suffix' => '</div>',
-      '#options' => $types,
-    );
-    $form['advanced']['submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Advanced search'),
-      '#prefix' => '<div class="action advanced-search-submit">',
-      '#suffix' => '</div>',
-      '#weight' => 99,
-    );
-    // Languages:
-    $language_options = array();
-    foreach (language_list('language') as $key => $entity) {
-      $language_options[$key] = $entity->name;
-    }
-    if (count($language_options) > 1) {
-      $form['advanced']['lang-fieldset'] = array(
+  if (at_get_setting('adv_search_extra_fieldsets') === 1) {
+    if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {
+      // Keyword boxes:
+      $form['advanced'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Languages'),
-        '#collapsible' => FALSE,
-        '#collapsed' => FALSE,
+        '#title' => t('Advanced search'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#attributes' => array('class' => array('search-advanced')),
       );
-      $form['advanced']['lang-fieldset']['language'] = array(
+      $form['advanced']['keywords-fieldset'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Keywords'),
+        '#collapsible' => FALSE,
+      );
+      $form['advanced']['keywords-fieldset']['keywords'] = array(
+        '#prefix' => '<div class="criterion">',
+        '#suffix' => '</div>',
+      );
+      $form['advanced']['keywords-fieldset']['keywords']['or'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Containing any of the words'),
+        '#size' => 30,
+        '#maxlength' => 255,
+      );
+      $form['advanced']['keywords-fieldset']['keywords']['phrase'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Containing the phrase'),
+        '#size' => 30,
+        '#maxlength' => 255,
+      );
+      $form['advanced']['keywords-fieldset']['keywords']['negative'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Containing none of the words'),
+        '#size' => 30,
+        '#maxlength' => 255,
+      );
+      // Node types:
+      $types = array_map('check_plain', node_type_get_names());
+      $form['advanced']['types-fieldset'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Types'),
+        '#collapsible' => FALSE,
+      );
+      $form['advanced']['types-fieldset']['type'] = array(
         '#type' => 'checkboxes',
         '#prefix' => '<div class="criterion">',
         '#suffix' => '</div>',
-        '#options' => $language_options,
+        '#options' => $types,
       );
+      $form['advanced']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Advanced search'),
+        '#prefix' => '<div class="action advanced-search-submit">',
+        '#suffix' => '</div>',
+        '#weight' => 99,
+      );
+      // Languages:
+      $language_options = array();
+      foreach (language_list('language') as $key => $entity) {
+        $language_options[$key] = $entity->name;
+      }
+      if (count($language_options) > 1) {
+        $form['advanced']['lang-fieldset'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Languages'),
+          '#collapsible' => FALSE,
+          '#collapsed' => FALSE,
+        );
+        $form['advanced']['lang-fieldset']['language'] = array(
+          '#type' => 'checkboxes',
+          '#prefix' => '<div class="criterion">',
+          '#suffix' => '</div>',
+          '#options' => $language_options,
+        );
+      }
+      $form['#validate'][] = 'node_search_validate';
     }
-    $form['#validate'][] = 'node_search_validate';
   }
 }
 

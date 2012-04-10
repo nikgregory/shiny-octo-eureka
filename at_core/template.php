@@ -5,18 +5,15 @@
 
 // Set globals for often used stuff.
 global $theme_key, $path_to_at_core;
-
-// $theme_key is not always what we need, so for consistancy AT uses its own
-// global $theme_name and depending on the context re-populates it as needed.
 $theme_key = $GLOBALS['theme_key'];
-
-// Path to AT core.
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-// Include the most essential files to make this mofo run.
-include_once($path_to_at_core . '/inc/plugins.inc');             // the plugin system with wrapper and helper functions
-include_once($path_to_at_core . '/inc/template.helpers.inc');    // drupal_add_css() wrappers and seldom used body class generators
-include_once($path_to_at_core . '/inc/template.theme.inc');      // theme function overrides
-include_once($path_to_at_core . '/inc/template.alter.inc');      // hook_alters
-include_once($path_to_at_core . '/inc/template.preprocess.inc'); // all preprocess functions
-include_once($path_to_at_core . '/inc/template.process.inc');    // all process functions
+// Let this bird fly...
+require_once($path_to_at_core . '/inc/get.inc');        // get theme info, settings, css etc
+require_once($path_to_at_core . '/inc/plugins.inc');    // the plugin system with wrapper and helper functions
+require_once($path_to_at_core . '/inc/generate.inc');    // misc infrequently used functions
+require_once($path_to_at_core . '/inc/load.inc');       // drupal_add_css() wrappers
+require_once($path_to_at_core . '/inc/alter.inc');      // hook_alters
+require_once($path_to_at_core . '/inc/preprocess.inc'); // all preprocess functions
+require_once($path_to_at_core . '/inc/process.inc');    // all process functions
+require_once($path_to_at_core . '/inc/theme.inc');      // theme function overrides

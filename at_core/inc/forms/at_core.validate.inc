@@ -1,9 +1,11 @@
 <?php
-/**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- */
 
-// Validate some stuff
+/**
+ * Validatation for theme settings.
+ *
+ * @param $form
+ * @param $form_state
+ */
 function at_core_settings_validate($form, &$form_state) {
 
   $values = $form_state['values'];
@@ -30,8 +32,7 @@ function at_core_settings_validate($form, &$form_state) {
     }
   }
 
-  // Check if the apple touch icon path is correct
-
+  // Apple touch icons
   if(at_get_setting('enable_extensions') === 1) {
     if ($values['enable_apple_touch_icons'] === 1) {
       // low
@@ -60,5 +61,4 @@ function at_core_settings_validate($form, &$form_state) {
       }
     }
   }
-
 }

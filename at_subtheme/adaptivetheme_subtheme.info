@@ -166,58 +166,49 @@
 
 
   ; Responsive Panels - Tablet landscape
-  settings[tablet_landscape_two_50]    = 'two-50'
-  settings[tablet_landscape_two_33_66] = 'two-33-66'
-  settings[tablet_landscape_two_66_33] = 'two-66-33'
-  settings[tablet_landscape_two_brick] = 'two-brick'
-
-  settings[tablet_landscape_three_3x33]     = 'three-3x33'
-  settings[tablet_landscape_three_25_50_25] = 'three-25-50-25'
-  settings[tablet_landscape_three_25_25_50] = 'three-25-25-50'
-  settings[tablet_landscape_three_50_25_25] = 'three-50-25-25'
-
-  settings[tablet_landscape_four_4x25] = 'four-4x25'
-  settings[tablet_landscape_five_5x20] = 'five-5x20-2x3-grid'
-  settings[tablet_landscape_six_6x16]  = 'six-6x16-3x2-grid'
-
+  settings[tablet_landscape_two_50]            = 'two-50'
+  settings[tablet_landscape_two_33_66]         = 'two-33-66'
+  settings[tablet_landscape_two_66_33]         = 'two-66-33'
+  settings[tablet_landscape_two_brick]         = 'two-brick'
+  settings[tablet_landscape_three_3x33]        = 'three-3x33'
+  settings[tablet_landscape_three_25_50_25]    = 'three-25-50-25'
+  settings[tablet_landscape_three_25_25_50]    = 'three-25-25-50'
+  settings[tablet_landscape_three_50_25_25]    = 'three-50-25-25'
+  settings[tablet_landscape_four_4x25]         = 'four-4x25'
+  settings[tablet_landscape_five_5x20]         = 'five-5x20-2x3-grid'
+  settings[tablet_landscape_six_6x16]          = 'six-6x16-3x2-grid'
   settings[tablet_landscape_three_inset_left]  = 'three-inset-left'
   settings[tablet_landscape_three_inset_right] = 'three-inset-right'
 
 
   ; Responsive Panels - Tablet portrait
-  settings[tablet_portrait_two_50]    = 'two-50'
-  settings[tablet_portrait_two_33_66] = 'two-33-66'
-  settings[tablet_portrait_two_66_33] = 'two-66-33'
-  settings[tablet_portrait_two_brick] = 'two-brick'
-
-  settings[tablet_portrait_three_3x33]     = 'three-3x33-stack-top'
-  settings[tablet_portrait_three_25_50_25] = 'three-25-50-25-stack-top'
-  settings[tablet_portrait_three_25_25_50] = 'three-25-25-50-stack-top'
-  settings[tablet_portrait_three_50_25_25] = 'three-50-25-25-stack-top'
-
-  settings[tablet_portrait_four_4x25] = 'four-4x25-2x2-grid'
-  settings[tablet_portrait_five_5x20] = 'five-5x20-1x2x2-grid'
-  settings[tablet_portrait_six_6x16]  = 'six-6x16-2x3-grid'
-
+  settings[tablet_portrait_two_50]            = 'two-50'
+  settings[tablet_portrait_two_33_66]         = 'two-33-66'
+  settings[tablet_portrait_two_66_33]         = 'two-66-33'
+  settings[tablet_portrait_two_brick]         = 'two-brick'
+  settings[tablet_portrait_three_3x33]        = 'three-3x33-stack-top'
+  settings[tablet_portrait_three_25_50_25]    = 'three-25-50-25-stack-top'
+  settings[tablet_portrait_three_25_25_50]    = 'three-25-25-50-stack-top'
+  settings[tablet_portrait_three_50_25_25]    = 'three-50-25-25-stack-top'
+  settings[tablet_portrait_four_4x25]         = 'four-4x25-2x2-grid'
+  settings[tablet_portrait_five_5x20]         = 'five-5x20-1x2x2-grid'
+  settings[tablet_portrait_six_6x16]          = 'six-6x16-2x3-grid'
   settings[tablet_portrait_three_inset_left]  = 'three-inset-left-wrap'
   settings[tablet_portrait_three_inset_right] = 'three-inset-right-wrap'
 
 
   ; Responsive Panels - Smartphone landscape
-  settings[smartphone_landscape_two_50]    = 'two-50-stack'
-  settings[smartphone_landscape_two_33_66] = 'two-33-66-stack'
-  settings[smartphone_landscape_two_66_33] = 'two-66-33-stack'
-  settings[smartphone_landscape_two_brick] = 'two-brick-stack'
-
-  settings[smartphone_landscape_three_3x33]     = 'three-3x33-stack'
-  settings[smartphone_landscape_three_25_50_25] = 'three-25-50-25-stack'
-  settings[smartphone_landscape_three_25_25_50] = 'three-25-25-50-stack'
-  settings[smartphone_landscape_three_50_25_25] = 'three-50-25-25-stack'
-
-  settings[smartphone_landscape_four_4x25] = 'four-4x25-stack'
-  settings[smartphone_landscape_five_5x20] = 'five-5x20-stack'
-  settings[smartphone_landscape_six_6x16]  = 'six-6x16-stack'
-
+  settings[smartphone_landscape_two_50]            = 'two-50-stack'
+  settings[smartphone_landscape_two_33_66]         = 'two-33-66-stack'
+  settings[smartphone_landscape_two_66_33]         = 'two-66-33-stack'
+  settings[smartphone_landscape_two_brick]         = 'two-brick-stack'
+  settings[smartphone_landscape_three_3x33]        = 'three-3x33-stack'
+  settings[smartphone_landscape_three_25_50_25]    = 'three-25-50-25-stack'
+  settings[smartphone_landscape_three_25_25_50]    = 'three-25-25-50-stack'
+  settings[smartphone_landscape_three_50_25_25]    = 'three-50-25-25-stack'
+  settings[smartphone_landscape_four_4x25]         = 'four-4x25-stack'
+  settings[smartphone_landscape_five_5x20]         = 'five-5x20-stack'
+  settings[smartphone_landscape_six_6x16]          = 'six-6x16-stack'
   settings[smartphone_landscape_three_inset_left]  = 'three-inset-left-stack'
   settings[smartphone_landscape_three_inset_right] = 'three-inset-right-stack'
 
@@ -368,8 +359,9 @@
   settings[unset_block_system_main_front] = 0
 
 
-  ; Skip link
+  ; Accessibility
   settings[skip_link_target] = '#main-content'
+  settings[adv_search_extra_fieldsets] = 0
 
 
   ; Mobile metatags
@@ -387,6 +379,7 @@
   settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'
   settings[apple_touch_icon_path_m] = 'images/touch-icon-m.png'
   settings[apple_touch_icon_path_h] = 'images/touch-icon-h.png'
+
 
   ; Custom CSS
   settings[custom_css] = ''

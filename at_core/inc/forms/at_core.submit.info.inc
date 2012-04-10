@@ -1,4 +1,5 @@
 <?php
+
   // Automagical Info file builder
   // This is the theme info backed up to a file. Its formatted and holds all
   // current values - useful for migration or simply capturing the current
