@@ -5,7 +5,7 @@ $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
 
-include_once($path_to_at_core . '/inc/font.lists.inc');
+include_once($path_to_at_core . '/inc/fonts.inc');
 
 // Backwards compatibility cruft for pre 7.x-3.x subthemes that have google fonts
 // We dont want them to use this but if saves the site blowing up if a user tries...

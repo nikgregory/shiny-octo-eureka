@@ -185,6 +185,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['#validate'][] = 'at_core_settings_validate';
   $form['#submit'][] = 'at_core_settings_submit';
 }
+
 // Include custom form validation and submit functions
 require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
 require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');

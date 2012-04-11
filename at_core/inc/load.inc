@@ -343,7 +343,7 @@ function load_debuggers($theme_name) {
 
   // Load window size bookmarklet
   if (at_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($path_to_at_core . '/js/window-size.js',
+    drupal_add_js($path_to_at_core . '/scripts/window-size.js',
       array(
       'type' => 'file',
       'scope' => 'footer',

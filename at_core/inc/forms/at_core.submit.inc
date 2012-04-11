@@ -54,4 +54,11 @@ function at_core_settings_submit($form, &$form_state) {
       require_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
     }
   }
+  
+  // Color inc save
+  if(module_exists('color')) {
+    if (isset($values['at-color']) && $values['at-color'] == TRUE) {
+      require_once($path_to_at_core . '/inc/forms/at_core.submit.color.inc');
+    }
+  }
 }
