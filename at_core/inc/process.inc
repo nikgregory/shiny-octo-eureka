@@ -67,8 +67,6 @@ function adaptivetheme_process_page(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  //dsm($vars);
-
   // theme the menu bars
   if (!empty($vars['primary_navigation'])) {
     $vars['primary_navigation'] = theme('menubar', array('menu' => $vars['primary_navigation'], 'type' => 'primary'));
@@ -85,6 +83,11 @@ function adaptivetheme_process_page(&$vars, $hook) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
   }
 
+  // Remove the breadcrumb from these two pages, its pointless and very annoying
+  // for designers.
+  if (arg(0) === 'user' && (arg(1) === 'password' || arg(1) === 'register')) {
+    $vars['breadcrumb'] = '';
+  }
 }
 
 /**

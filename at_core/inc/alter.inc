@@ -166,28 +166,23 @@ function adaptivetheme_js_alter(&$javascript) {
  * hook_css_alter()
  */
 function adaptivetheme_css_alter(&$css) {
-  global $theme_key;
+  global $theme_key, $language;
 
   // Never allow this to run in our admin theme and only if the extension is enabled.
   if (at_get_setting('enable_exclude_css') === 1 && $theme_key !== 'adaptivetheme_admin') {
-    // Get $css_data from the cache, we know with 100% certainty the cache data
-    // has the right theme name, so give it a crack first.
+    // Get $css_data from the cache
     if ($cache = cache_get('at_get_css_files')) {
       $css_data = $cache->data;
     }
     else {
-      // On the extreme unlikely chance the data is not in the cache or we
-      // drupal_set_message('Ignore this, its here for testing only during development :: cache miss in hook_css_alter() cache_get(), the data has been rebuilt (ignore if the cache was just cleared).', 'status');
       $css_data = at_get_css_files($theme_key);
     }
-    // We need the right theme name to get the theme settings, technically we
-    // don't but its faster and more reliable if you do, array_pop() is cheap.
+    // We need the right theme name to get the theme settings
     $_get_active_theme_data = array_pop($css_data);
     if ($_get_active_theme_data['type'] == 'theme') {
       $theme_name = $_get_active_theme_data['source'];
     }
     else {
-      // Again, this could be wrong, but as above its rare.
       $theme_name = $theme_key;
     }
     foreach ($css_data as $key => $value) {
@@ -195,6 +190,18 @@ function adaptivetheme_css_alter(&$css) {
       if (theme_get_setting($setting, $theme_name) === 1) {
         if (isset($css[$key])) {
           unset($css[$key]);
+        }
+      }
+    }
+    // Unset -rtl.css files if language dir is RTL
+    if ($language->dir === 'rtl') {
+      foreach ($css_data as $key => $value) {
+        $setting = 'unset_css_' . drupal_html_class($key);
+        if (theme_get_setting($setting, $theme_name) === 1) {
+          $key = str_replace('.css', '-rtl.css', $key);
+          if (isset($css[$key])) {
+            unset($css[$key]);
+          }
         }
       }
     }

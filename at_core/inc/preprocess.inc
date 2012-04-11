@@ -30,9 +30,6 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // Set the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
 
-  // Load Extension Settings CSS
-  load_extensions_css($theme_name);
-
   // Load Layout
   load_layout_css($path, $theme_name);
 
@@ -53,12 +50,13 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
     }
   }
 
+  // Load Extension Settings CSS
+  load_extensions_css($theme_name);
+
   // Build an array of polyfilling scripts
   $vars['polyfills_array'] = '';
   $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
 
-
-  // Skip link
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
   if (at_get_setting('skip_link_target', $theme_name)) {
@@ -80,7 +78,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
     include_once($path_to_at_core . '/inc/google.web.fonts.inc');
   }
 
-  // Do some debugging/development stuff
+  // Load debuggers if enabled.
   if (
     at_get_setting('expose_regions', $theme_name) === 1 ||
     at_get_setting('load_all_panels', $theme_name) === 1 ||
@@ -101,16 +99,10 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['site_logo'] = drupal_static('adaptivetheme_preprocess_page_site_logo');
     if (empty($vars['site_logo'])) {
       $logo_path = check_url($vars['logo']);
-      $logo_alt = check_plain(variable_get('site_name', 'Site logo'));
+      $logo_alt = check_plain(variable_get('site_name', t('Site logo')));
       $logo_vars = array('path' => $logo_path, 'alt' => $logo_alt, 'attributes' => array('class' => 'site-logo'));
       $logo_img = theme('image', $logo_vars);
-      $vars['site_logo'] = $logo_img ? l($logo_img, '<front>', array(
-        'attributes' => array(
-          'title' => t('Home page')
-        ),
-        'html' => TRUE,
-        )
-      ) : '';
+      $vars['site_logo'] = $logo_img ? l($logo_img, '<front>', array('attributes' => array('title' => t('Home page')), 'html' => TRUE)) : '';
     }
     // Maintain backwards compatibility with 7.x-2.x sub-themes
     $vars['logo_img'] = isset($logo_img) ? $logo_img : '';
@@ -137,29 +129,17 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['hide_site_name'] = FALSE;
   }
 
-
-  // Headings Classes
-  // oh oh, whats this, a theme using the page $classes_array, unheard of!
-  // This is all about scope - its easy to set these on body, but thats the wrong scope
-  // imo. AT wants to target the right scope always and not abuse the body element. This
-  // is not as DRY as it could be, particulary for blocks/nodes/comments etc but it does
-  // open the door for more granularity (i.e. target one block or block type).
+  // Site Name and Slogan classes
   if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
     $heading_settings_array = &drupal_static('adaptivetheme_preprocess_page_heading_settings');
     if (empty($heading_settings_array)) {
-      $heading_settings_array = array();
       if ($vars['hide_site_name'] == FALSE) {
-        $heading_settings_array[] = 'site_name_case';
-        $heading_settings_array[] = 'site_name_weight';
-        $heading_settings_array[] = 'site_name_alignment';
-        $heading_settings_array[] = 'site_name_shadow';
+        $sitename_classes = array('site_name_case', 'site_name_weight', 'site_name_alignment', 'site_name_shadow');
       }
       if ($vars['site_slogan']) {
-        $heading_settings_array[] = 'site_slogan_case';
-        $heading_settings_array[] = 'site_slogan_weight';
-        $heading_settings_array[] = 'site_slogan_alignment';
-        $heading_settings_array[] = 'site_slogan_shadow';
+        $slogan_classes = array('site_slogan_case', 'site_slogan_weight', 'site_slogan_alignment', 'site_slogan_shadow');
       }
+      $heading_settings_array = array_merge($sitename_classes, $slogan_classes);
     }
     foreach ($heading_settings_array as $setting) {
       if ($heading_setting = at_get_setting($setting, $theme_name)) {
@@ -223,15 +203,18 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   // Attribution variable used in admin theme and some others
   $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
-  // Work-around a stupid bug in Drupal 7
-  if (arg(0) === 'user' && arg(1) === 'login') {
-    drupal_set_title(t('User login'));
-  }
-  if (arg(0) === 'user' && arg(1) === 'password') {
-    drupal_set_title(t('Request new password'));
-  }
-  if (arg(0) === 'user' && arg(1) === 'register') {
-    drupal_set_title(t('Create new account'));
+  // Work-around a stupid bug in Drupal 7 which incorrectly sets the page title
+  // to "User account" for all three of these pages.
+  if (arg(0) === 'user') {
+    if (arg(1) === 'login' || arg(1) == '') {
+      drupal_set_title(t('User login'));
+    }
+    if (arg(1) === 'password') {
+      drupal_set_title(t('Request new password'));
+    }
+    if (arg(1) === 'register') {
+      drupal_set_title(t('Create new account'));
+    }
   }
 }
 
@@ -272,7 +255,7 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
       'threecol_inset_right_bottom',
     );
   }
-  if (in_array($vars['region'], $conditional_stack_regions)){
+  if (in_array($vars['region'], $conditional_stack_regions)) {
     $vars['classes_array'][] = 'region-conditional-stack';
   }
 }
@@ -315,18 +298,14 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
     $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
   }
 
-  // Add title style classes, these are loaded via the classes_arry and not title_attributes_array
-  // so we can style the whole block depending on the title styles.
+  // Add title style classes, these are loaded via the classes_array and not
+  // title_attributes_array so we can style the whole block depending on the
+  // title styles.
   if (isset($vars['block']->subject)) {
     if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_block_heading_settings');
       if (empty($settings_array)) {
-        $settings_array = array(
-          'block_title_case',
-          'block_title_weight',
-          'block_title_alignment',
-          'block_title_shadow',
-        );
+        $settings_array = array('block_title_case', 'block_title_weight', 'block_title_alignment', 'block_title_shadow');
       }
       foreach ($settings_array as $setting) {
         if ($heading_setting = at_get_setting($setting, $theme_name)) {
@@ -337,10 +316,16 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   }
 
   // Add classes to theme the horizontal block option
-  if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+  if (at_get_setting('horizontal_login_block', $theme_name) === 1 &&
+    $vars['block']->module === 'user' &&
+    $vars['block']->delta === 'login')
+    {
     $vars['classes_array'][] = 'lb-h';
   }
-  if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+  if (at_get_setting('slider_login_block', $theme_name) === 1 &&
+    $vars['block']->module === 'user' &&
+    $vars['block']->delta === 'login')
+    {
     $vars['classes_array'][] = 'lb-s';
   }
 
@@ -450,12 +435,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
     if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_node_heading_settings');
       if (empty($settings_array)) {
-        $settings_array = array(
-          'node_title_case',
-          'node_title_weight',
-          'node_title_alignment',
-          'node_title_shadow',
-        );
+        $settings_array = array('node_title_case', 'node_title_weight', 'node_title_alignment', 'node_title_shadow');
       }
       foreach ($settings_array as $setting) {
         if ($heading_setting = at_get_setting($setting, $theme_name)) {
@@ -543,12 +523,7 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
     if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $settings_array = &drupal_static('adaptivetheme_preprocess_comment_heading_settings');
       if (empty($settings_array)) {
-        $settings_array = array(
-          'comment_title_case',
-          'comment_title_weight',
-          'comment_title_alignment',
-          'comment_title_shadow',
-        );
+        $settings_array = array('comment_title_case', 'comment_title_weight', 'comment_title_alignment', 'comment_title_shadow');
       }
       foreach ($settings_array as $setting) {
         if ($heading_setting = at_get_setting($setting, $theme_name)) {
