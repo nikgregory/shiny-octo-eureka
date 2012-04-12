@@ -1,7 +1,4 @@
 <?php
-/**
- * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
- */
 
 // Get our plugin system functions.
 require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
@@ -135,7 +132,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   }
 
   // Include a hidden form field with the current release information
-  $form['at-release'] = array(
+  $form['at-release']['at_core'] = array(
     '#type' => 'hidden',
     '#default_value' => '7.x-3.x',
   );
