@@ -74,7 +74,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   // Do some legacy stuff for 7.x-2.x themes that have google webfonts running
   // on the old system. Scan for the existence of a "release" key and
   // conditionally load google.web.fonts.inc
-  if (!array_key_exists('release', $info) || ($info['release'] == '7.x-2.x')) {
+  if (!isset($info['release']) || $info['release'] === '7.x-2.x') {
     include_once($path_to_at_core . '/inc/google.web.fonts.inc');
   }
 
