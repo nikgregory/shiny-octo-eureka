@@ -183,9 +183,14 @@ function font_list($type, $element) {
 }
 
 /**
- * Websafe fonts list. These stacks are my own and I spent years working with
- * these, testing and checking platform and browser support. The work very well
- * accross platform.
+ * Websafe fonts list.
+ * These stacks are my own and I spent years working with these, testing and
+ * checking platform and browser support. The work very well accross platform.
+ * I love all these fonts and its no accident that 6 of the 10 stacks start
+ * with a Microsoft font. Whose says MS can't design a good font?
+ *
+ * Note, if you are going to *borrow* these and use them in your own theme, book,
+ * etc then do me the courtesy of attribution; you know who you are.
  *
  * @param $element
  */
