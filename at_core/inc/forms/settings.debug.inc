@@ -7,8 +7,8 @@
   );
   $form['at-layout']['debug']['debug-layout'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Debug Layout'),
-    '#description' => t('<h3>Debug Layout</h3>'),
+    '#title' => t('Debuggers'),
+    '#description' => t('<h3>Debuggers</h3>'),
   );
 
   // Highlight regions
@@ -21,15 +21,22 @@
   // Load all panels
   $form['at-layout']['debug']['debug-layout']['load_all_panels'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels.'),
+    '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels'),
     '#default_value' => at_get_setting('load_all_panels'),
   );
 
   // Window size bookmarklet
   $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Show window size - appears in the bottom right corner.'),
+    '#title' => t('Show window size - appears in the bottom right corner'),
     '#default_value' => at_get_setting('show_window_size'),
+  );
+
+  // Version test
+  $form['at-layout']['debug']['debug-layout']['atcore_version_test'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Sub-theme compatibility test'),
+    '#default_value' => at_get_setting('atcore_version_test'),
   );
 
   // All media queries, wow this is kinda fugly, did I really do this, I must
@@ -49,7 +56,7 @@
   );
   $form['at-layout']['debug']['mediaqueries']['check'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable the text field so I can copy this now.'),
+    '#title' => t('Enable the text field so I can copy this now'),
   );
   $form['at-layout']['debug']['mediaqueries']['output'] = array(
     '#type' => 'textarea',

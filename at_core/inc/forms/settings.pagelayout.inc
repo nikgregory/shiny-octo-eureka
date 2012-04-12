@@ -53,7 +53,7 @@
   $form['at-layout']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
-    '#default_value' => at_get_setting('bigscreen_layout'),
+    '#default_value' => str_replace('-', '_', at_get_setting('bigscreen_layout')), // avoid "illigal choice" errors in 7.x-2.x sub-themes.
     '#options' => $bigscreen_options,
   );
   $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
@@ -193,7 +193,7 @@
   $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
-    '#default_value' => at_get_setting('tablet_landscape_layout'),
+    '#default_value' => str_replace('-', '_', at_get_setting('tablet_landscape_layout')),
     '#options' => $tablet_landscape_options,
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
@@ -291,7 +291,7 @@
   $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
-    '#default_value' => at_get_setting('tablet_portrait_layout'),
+    '#default_value' => str_replace('-', '_', at_get_setting('tablet_portrait_layout')),
     '#options' => $tablet_portrait_options,
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
@@ -406,7 +406,7 @@
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
-    '#default_value' => at_get_setting('smartphone_landscape_layout'),
+    '#default_value' => str_replace('-', '_', at_get_setting('smartphone_landscape_layout')),
     '#options' => $smartphone_landscape_options,
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
@@ -521,5 +521,5 @@
   );
   $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_layout'] = array(
     '#type' => 'hidden',
-    '#default_value' => at_get_setting('smartphone_portrait_layout'),
+    '#default_value' => str_replace('-', '_', at_get_setting('smartphone_portrait_layout')),
   );
