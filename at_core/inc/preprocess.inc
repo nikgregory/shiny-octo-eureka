@@ -203,8 +203,8 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   // Attribution variable used in admin theme and some others
   $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 
-  // Work-around a stupid bug in Drupal 7 which incorrectly sets the page title
-  // to "User account" for all three of these pages.
+  // Work around a perculier bug/feature(?) in Drupal 7 which incorrectly sets
+  // the page title to "User account" for all three of these pages.
   if (arg(0) === 'user') {
     if (arg(1) === 'login' || arg(1) == '') {
       drupal_set_title(t('User login'));

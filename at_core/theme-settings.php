@@ -15,19 +15,21 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
   // theme and *not* the theme setting.
+  // @see http://drupal.org/node/943212
   if (isset($form_id)) {
     return;
   }
 
-  // Get the active theme name, we might need it at some stage
+  // Get the active theme name, we need it at some stage.
   $theme_name = $form_state['build_info']['args'][0];
 
-  // Get the admin theme so we can set a class for styling this form, variable_get() returns 0 if the admin theme is the default theme
+  // Get the admin theme so we can set a class for styling this form,
+  // variable_get() returns 0 if the admin theme is the default theme.
   $admin_theme = variable_get('admin_theme') ? variable_get('admin_theme') : $theme_name;
   $admin_theme_class = 'admin-theme-'. drupal_html_class($admin_theme);
 
   // LAYOUT SETTINGS
-  // Build a custom header for the layout settings form
+  // Build a custom header for the layout settings form.
   $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
   $layout_header  = '<div class="at-settings-form layout-settings-form ' . $admin_theme_class . '"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout, Global Settings &amp; Polyfills') . '</h1>';
@@ -44,7 +46,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'css' => array(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css'),
     ),
   );
-  // Include layout forms, global settings and debug
+  // Include layout forms, global settings and debug.
   require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
   require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
   require_once($path_to_at_core . '/inc/forms/settings.global.inc');
@@ -52,9 +54,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   require_once($path_to_at_core . '/inc/forms/settings.debug.inc');
 
   // EXTENSIONS
-  if(at_get_setting('enable_extensions') === 1) {
+  if (at_get_setting('enable_extensions') === 1) {
 
-    // Build a custom header for the Extensions settings form
+    // Build a custom header for the Extensions settings form.
     $styles_header  = '<div class="at-settings-form style-settings-form ' . $admin_theme_class . '"><div class="styles-header theme-settings-header clearfix">';
     $styles_header .= '<h1>' . t('Extensions') . '</h1>';
     $styles_header .= '</div>';
@@ -78,32 +80,34 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     if(at_get_setting('enable_heading_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
+
     // Fonts
     if(at_get_setting('enable_font_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
     }
+
     // Heading styles
     if(at_get_setting('enable_heading_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
+
     // Breadcrumbs
     if (at_get_setting('enable_breadcrumb_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
     }
+
     // Images
     if(at_get_setting('enable_image_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.images.inc');
     }
-    // Search Settings
-    // if (at_get_setting('enable_search_settings') === 1) {
-      // require_once($path_to_at_core . '/inc/forms/settings.search.inc');
-    // }
+
     // Horizonatal login block
     if (at_get_setting('horizontal_login_block_enable') === 'on') {
       if (at_get_setting('enable_loginblock_settings') === 1) {
         require_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
       }
     }
+
     // Modify output
     if (at_get_setting('enable_markup_overides') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
@@ -118,10 +122,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     if (at_get_setting('enable_mobile_metatags') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
     }
+
     // Touch icons
     if (at_get_setting('enable_apple_touch_icons') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
     }
+
     // Custom CSS
     if (at_get_setting('enable_custom_css') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
@@ -129,6 +135,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
     // Always include tweaks (extension settings)
     require_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
+
   }
 
   // Include a hidden form field with the current release information
@@ -146,6 +153,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $form['favicon']['#collapsed'] = TRUE;
 
   /**
+   * Originally posted by dvessel (http://drupal.org/user/56782).
    * The following will be processed even if the theme is inactive.
    * If you are on a theme specific settings page but it is not an active
    * theme (example.com/admin/apearance/settings/THEME_NAME), it will
@@ -162,6 +170,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
    * If 'child' was in focus it will invoke:
    * - parent_form_theme_settings()
    * - child_form_theme_settings()
+   *
+   *  @see http://drupal.org/node/943212
    */
   $form_themes = array();
   $themes = list_themes();
