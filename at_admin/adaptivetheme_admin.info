@@ -46,7 +46,7 @@
   settings[bigscreen_sidebar_first]  = 25
   settings[bigscreen_sidebar_second] = 25
   settings[bigscreen_set_max_width]  = 1
-  settings[bigscreen_max_width]      = 1140
+  settings[bigscreen_max_width]      = 1260
   settings[bigscreen_media_query]    = 'only screen and (min-width:1025px)'
 
 
@@ -168,6 +168,7 @@
 
 
   ; Extensions
+  settings[enable_extensions]          = 0
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0

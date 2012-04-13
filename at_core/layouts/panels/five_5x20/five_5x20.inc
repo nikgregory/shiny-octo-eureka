@@ -5,12 +5,12 @@
  *
  * These plugins must use the function method - Panels can support two
  * methods, one that uses a function name and one that simply defines
- * a $plugins array. You just use the function method which requires
+ * a $plugins array. You MUST use the function method, which requires
  * correct naming of the function:
  * function [theme name]_[plugin name]_panels_layouts()
  *
- * Adaptivetheme needs more data to build the actual CSS, it does not use
- * Panels normal method of defining a static CSS file. The CSS must be built
+ * Adaptivetheme needs more data to build the actual CSS since it does not use
+ * Panels normal method of defining a static CSS file. In AT the CSS is built
  * programmatically for each selected option when the user saves the theme
  * settings. This is for two main reasons - first so we are optimizing the
  * CSS and not adding any duplicate CSS declarations, and secondly so we can
@@ -27,7 +27,7 @@
  * Each identifier represents a CSS style. It's basically shorthand notation for the
  * actual CSS. To ensure the CSS is optimized as much as possible you should use an
  * existing identifier if it exists, although you can use your own, just make sure
- * to reused them as much as possible in order to get the smallest CSS files -
+ * to re-use them as much as possible in order to get the smallest CSS files -
  * here is a full list of the existing identifiers used by AT Core Panels plugins:
 
  Basic Widths (all must be in percentages):
@@ -67,9 +67,9 @@ function adaptivetheme_five_5x20_panels_layouts() {
   $items['five_5x20'] = array(
     'title'    => t('AT Five column 5x20'),
     'category' => t('AT Responsive Panels - 4,5,6 column'),
-    'icon'     => 'five_5x20.png', // Used in Panels Admin only, AT Core uses a CSS sprite
+    'icon'     => 'five_5x20.png', // Used in Panels Admin only. AT Core uses a CSS sprite for the icons in theme settings.
     'theme'    => 'five_5x20',
-    'admin css' => 'five_5x20.admin.css', // This holds a basic layout for Panels Admin and the CSS for theme settings sprite, sprite icons must be 40x40px
+    'admin css' => 'five_5x20.admin.css', // This holds a basic layout for Panels Admin and the CSS for theme settings sprite. Sprite icons must be 40px by 40px.
     'theme arguments' => array('id', 'content'),
     'regions' => array(
       'five_first'  => t('Column 1'),
@@ -79,19 +79,21 @@ function adaptivetheme_five_5x20_panels_layouts() {
       'five_fifth'  => t('Column 5'),
     ),
 
-    // AT Added Array Items:
-    'type' => 'five',           // type dictates what group it will fall into in theme settings
-    'options' => array(         // the various layout options the user can choose in theme settings for each device group
-      'five-5x20' => 'default', // the key used here MUST match the key used in the 'styles', the first one must be called 'default'
-      'five-5x20-2x3-grid' => '2/3 split grid', // add extra methods if your plugin supports them (you must include CSS for these in 'styles'
+    // The array items below are added by Adaptivetheme and are not normally present
+    // in a Panels layout plugin. AT uses these to build the theme settings and generate
+    // the CSS used when rendering the layout in the front end.
+    'type' => 'five',            // - type: dictates what group it will fall into in theme settings.
+    'options' => array(          // - options: the various layout options the user can choose in theme settings for each device group.
+      'five-5x20' => 'default',  // - option key: the key used here MUST match the key used in the 'styles', the first one must be called 'default'.
+      'five-5x20-2x3-grid' => '2/3 split grid',
       'five-5x20-1x2x2-grid' => 'stack',
       'five-5x20-stack-2' => 'Stack 50/50 bottom',
-      'five-5x20-stack' => 'stack', // stack refers to all regions stacked, 100% width etc and use the 'fdw' identifier in 'styles'
+      'five-5x20-stack' => 'stack', // stack should always refer to "all regions stacked", and use the 'fdw' identifier in 'styles'.
     ),
-    'styles' => array(        // these items are used to programatically build and optimize the CSS for each break-point
-      'five-5x20' => array(   // this key must match the 'options' key, this is akin to a layout "method" or style for this layout option, the first one is always the default
-        'css' => array(       // you must have this css key for each method array
-          '40' => array('.five-5x20 .row-1' => 'width:40%'), // each item is keyed by an identifier, there is an existing list you should use if applicable
+    'styles' => array(          // - styles: these items are used to programatically build and optimize the CSS for each break-point.
+      'five-5x20' => array(     // - styles keys: these key must match the 'options' keys, the first one must be the default.
+        'css' => array(         // - css: holds the array of CSS identifiers
+          '40' => array('.five-5x20 .row-1' => 'width:40%'), // selectors as keys, CSS as values, values should align to the the "css" array key identifiers.
           '60' => array('.five-5x20 .row-2' => 'width:60%'),
           'fl' => array('.five-5x20 .panel-row' => 'float:left'),
           '50' => array('.five-5x20 .row-1 .region' => 'width:50%'),

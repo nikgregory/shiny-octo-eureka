@@ -240,6 +240,7 @@
 
 
   ; Enable extensions
+  settings[enable_extensions]          = 0
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0
