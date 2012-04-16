@@ -268,16 +268,50 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
 #edit-base-font {
   margin-bottom: 11px;
 }
+
 /* style select list websafe fonts */
 .font-element-wrapper option[value$=-ssl] {font-family: Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;}
-.font-element-wrapper option[value$=-a]     {font-family: Arial, Helvetica, sans-serif;}
-.font-element-wrapper option[value$=-cc]   {font-family: Calibri, Candara, Arial, Helvetica, sans-serif;}
-.font-element-wrapper option[value$=-m]     {font-family: 'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif;}
-.font-element-wrapper option[value$=-l]     {font-family: 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-seri;}
-.font-element-wrapper option[value$=-i]    {font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;}
-.font-element-wrapper option[value$=-ss]   {font-family: Garamond, Perpetua, 'Times New Roman', serif;}
-.font-element-wrapper option[value$=-sl]   {font-family: Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;}
-.font-element-wrapper option[value$=-ms]   {font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;}
+.font-element-wrapper option[value$=-a]   {font-family: Arial, Helvetica, sans-serif;}
+.font-element-wrapper option[value$=-cc]  {font-family: Calibri, Candara, Arial, Helvetica, sans-serif;}
+.font-element-wrapper option[value$=-m]   {font-family: 'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif;}
+.font-element-wrapper option[value$=-l]   {font-family: 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-seri;}
+.font-element-wrapper option[value$=-i]   {font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;}
+.font-element-wrapper option[value$=-ss]  {font-family: Garamond, Perpetua, 'Times New Roman', serif;}
+.font-element-wrapper option[value$=-sl]  {font-family: Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;}
+.font-element-wrapper option[value$=-ms]  {font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;}
+
+/* Google font new styles */
+#edit-font fieldset[id$=-gwf-styles] .fieldset-wrapper,
+#edit-font fieldset[id$=-gwf-charsets] .fieldset-wrapper {
+  overflow: hidden;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#edit-font fieldset[id$=-gwf-styles] legend,
+#edit-font fieldset[id$=-gwf-charsets] legend {
+  display: none !important;
+}
+
+#edit-font fieldset[id$=-gwf-styles] div.form-type-checkbox,
+#edit-font fieldset[id$=-gwf-charsets] div.form-type-checkbox {
+ float: left;
+ clear: none;
+ margin-right: 20px;
+  padding: 7px 0 0 0;
+}
+
+#edit-font div.form-type-checkbox label {
+  width: auto;
+}
+
+#edit-base-font-gwf-charsets,
+#edit-base-font-gwf-charsets .fieldset-wrapper {
+}
+
+
+
+
 
 /* Heading styles for advanced themes */
 .headings-styles-wrapper .form-type-radios,
@@ -349,7 +383,6 @@ input[disabled] {
 }
 
 /* Image alignment options */
-
 #edit-alignment .description {
   clear: both;
 }
@@ -493,8 +526,12 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
 .admin-theme-seven  fieldset#edit-headings fieldset[id=edit-css] legend {
   position: static;
 }
+
+
+
+
 .admin-theme-seven  #edit-titles fieldset {
-  padding: 5px 0;
+  padding: 0;
 }
 .admin-theme-seven  #edit-titles fieldset .fieldset-description {
   padding: 3px 0;

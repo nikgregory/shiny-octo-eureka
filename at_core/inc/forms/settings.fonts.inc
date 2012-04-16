@@ -7,8 +7,12 @@
   $font_sizes_em = font_sizes('em');
   $font_sizes_p  = font_sizes('p');
 
+  // Get the google charsets and styles
+  $google_charsets = google_font_charsets();
+  $google_styles = google_font_styles();
+
   // Build a message for fonts depending on what is enabled
-  $fonts_message = t('<h3>Fonts</h3><p>First select the font type - websafe, google or custom, then select the font or enter your own <a href="!cfs" target="_blank">font-stack</a>. Adaptivetheme can also support any font supplied by the <a href="!module_fyf" target="_blank">@font-your-face module</a>, new settings and instructions will appear after you have installed @font-your-face. If you would like to preview Google fonts see: <a href="!gwf" target="_blank">google.com/webfonts</a>.</p>',
+  $fonts_message = t('<h3>Fonts</h3><p>First select the font type&thinsp;&mdash;&thinsp;websafe, google or custom&thinsp;&mdash;&thinsp;then select or enter the required information depending on the type. Adaptivetheme can also support any font supplied by the <a href="!module_fyf" target="_blank">@font-your-face module</a>, new settings and instructions will appear after you have installed @font-your-face.</p><p>To preview and gather required information for adding Google fonts see: <a href="!gwf" target="_blank">google.com/webfonts</a>. If you are adding extra styles or character sets these must exist for the specified font&thinsp;&mdash;&thinsp;use the <em>Quick-use</em> feature in Google fonts to check this information.</p>',
   array(
     '!gwf' => 'http://www.google.com/webfonts',
     '!cfs' => 'http://coding.smashingmagazine.com/2009/09/22/complete-guide-to-css-font-stacks/',
@@ -37,7 +41,7 @@
     // Special message once font your face in installed
     $browse_fyf = l(t('@font-your-face library'), 'admin/appearance/fontyourface/browse', array('attributes' => array('target' => array('_blank'))));
     $settings_fyf = l(t('"add selector in theme CSS"'), 'admin/appearance/fontyourface', array('attributes' => array('target' => array('_blank'))));
-    $fonts_message = t('<h3>Fonts</h3><p>First select the font type - websafe, google, custom or @font-your-face, then select your fonts or enter a custom <a href="!cfs" target="_blank">font-stack</a>. To use @font-your-face you must first enable fonts in the !browse_fyf, then set those fonts to !settings_fyf. When you have done this the @font-your-face fonts will be availble here for you to apply to your content and titles. If you would like to preview Google fonts see: <a href="!gwf" target="_blank">google.com/webfonts</a>, or use the @font-your-face preview feature.</p><p>Note: the @font-your-face integration has only been tested with Google and Font Squirrel, if you run into problems with other providers please submit an issue: http://drupal.org/project/issues/adaptivetheme',
+    $fonts_message = t('<h3>Fonts</h3><p>First select the font type&thinsp;&mdash;&thinsp;websafe, google, custom or @font-your-face&thinsp;&mdash;&thinsp;then select or enter the required information depending on the type. To use @font-your-face you must first enable fonts in the !browse_fyf, then set those fonts to !settings_fyf. When you have done this the @font-your-face fonts will be availble here for you to apply to your content and titles. @font-your-face integration has only been tested with Google and Font Squirrel.</p><p>To preview and gather required information for adding Google fonts see: <a href="!gwf" target="_blank">google.com/webfonts</a>. If you are adding extra styles or character sets these must exist for the specified font&thinsp;&mdash;&thinsp;use the <em>Quick-use</em> feature in Google fonts to check this information.</p>',
     array(
       '!gwf' => 'http://www.google.com/webfonts',
       '!cfs' => 'http://coding.smashingmagazine.com/2009/09/22/complete-guide-to-css-font-stacks/',
@@ -48,6 +52,7 @@
   }
 
   // Some re-usable strings, fixing things in multiple places annoys me
+  $google_font_description = t('Paste the Google font name, e.g. <code>Open Sans Condensed</code>. Only add one font.');
   $custom_stack_description = t("Enter a comma seperated list of fonts, with no trailing comma. Names with spaces should be wrapped in single quotes, for example <code>'Times New Roman'</code>.");
 
   // Fonts
@@ -75,21 +80,52 @@
     '#title' => t('Font'),
     '#default_value' => at_get_setting('base_font'),
     '#options' => str_replace("'", "", font_list('wsf', 'bf')),
-    '#states' => array (
-      'visible' => array ('select[name="base_font_type"]' => array ('value' => '')
-      )
-    )
+    '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => ''))),
   );
   $form['at']['font']['base-font']['base_font_gwf'] = array(
-    '#type' => 'select',
-    '#title' => t('Font'),
+    '#type' => 'textfield',
+    '#title' => t('Google Font Name'),
     '#default_value' => at_get_setting('base_font_gwf'),
-    '#options' => font_list('gwf', 'bf'),
-    '#states' => array (
-      'visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf')
-      )
-    )
+    '#description' => $google_font_description,
+    '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf'))),
   );
+  $form['at']['font']['base-font']['base_font_gwf_styles'] = array (
+    '#type' => 'fieldset',
+    '#title' => t('Add Google Font Styles'),
+    '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf'))),
+  );
+  $form['at']['font']['base-font']['base_font_gwf_styles']['base_font_gwf_add_styles'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Styles'),
+    '#default_value' => at_get_setting('base_font_gwf_add_styles'),
+  );
+  foreach ($google_styles as $style_key => $style_value) {
+    $form['at']['font']['base-font']['base_font_gwf_styles']["base_font_gwf_add_styles_$style_key"] = array(
+      '#type' => 'checkbox',
+      '#title' => t($style_value),
+      '#default_value' => at_get_setting("base_font_gwf_add_styles_$style_key"),
+      '#states' => array ('visible' => array ('input[name="base_font_gwf_add_styles"]' => array ('checked' => TRUE))),
+    );
+  }
+  $form['at']['font']['base-font']['base_font_gwf_charsets'] = array (
+    '#type' => 'fieldset',
+    '#title' => t('Add Google Font Character Sets'),
+    '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf'))),
+  );
+  $form['at']['font']['base-font']['base_font_gwf_charsets']['base_font_gwf_add_charsets'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Character Sets'),
+    '#default_value' => at_get_setting('base_font_gwf_add_charsets'),
+    '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf'))),
+  );
+  foreach ($google_charsets as $charset_key => $charset_value) {
+    $form['at']['font']['base-font']['base_font_gwf_charsets']["base_font_gwf_add_charsets_$charset_key"] = array(
+      '#type' => 'checkbox',
+      '#title' => t($charset_value),
+      '#default_value' => at_get_setting("base_font_gwf_add_charsets_$charset_key"),
+      '#states' => array ('visible' => array ('input[name="base_font_gwf_add_charsets"]' => array ('checked' => TRUE))),
+    );
+  }
   $form['at']['font']['base-font']['base_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
@@ -106,10 +142,7 @@
       '#title' => t('Font'),
       '#default_value' => at_get_setting('base_font_fyf'),
       '#options' => font_list('fyf', 'bf'),
-      '#states' => array (
-        'visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf')
-        )
-      )
+      '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'fyf'))),
     );
   }
   $form['at']['font']['base-font']['base_font_size'] = array(
@@ -119,10 +152,7 @@
     '#description' => t('The default font size is set on the HTML element. All elements, margins, padding and widths using a relative unit such as em or % will scale relative to this value. Use "Not set" if you prefer to set this in your CSS. You can override this value in your responsive stylesheets also, to use a larger or smaller default size for different device types.'),
     '#default_value' => at_get_setting('base_font_size'),
     '#attributes' => array('class' => array('font-size-wrapper')),
-    '#states' => array (
-      'invisible' => array ('select[name="base_font_type"]' => array ('value' => '<none>')
-      )
-    )
+    '#states' => array ('invisible' => array ('select[name="base_font_type"]' => array ('value' => '<none>'))),
   );
 
   // Titles
@@ -161,26 +191,66 @@
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
-        '#default_value' => theme_get_setting($setting_type),
+        '#default_value' => at_get_setting($setting_type),
       );
       $form['at']['font']['titles'][$setting_container][$setting] = array(
         '#type' => 'select',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting),
+        '#default_value' => at_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
       $form['at']['font']['titles'][$setting_container][$setting_gwf] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_gwf),
-        '#options' => font_list('gwf', $element),
+        '#type' => 'textfield',
+        '#title' => t('Google Font Name'),
+        '#default_value' => at_get_setting($setting_gwf),
+        '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
+      $title_styles_setting = $setting_gwf . '_add_styles';
+      $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_styles'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Styles'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_styles'][$title_styles_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Styles'),
+        '#default_value' => at_get_setting($title_styles_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_styles as $style_key => $style_value) {
+        $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_styles'][$title_styles_setting . '_' . $style_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($style_value),
+          '#default_value' => at_get_setting($title_styles_setting . '_' . $style_key),
+          '#states' => array ('visible' => array (":input[name=$title_styles_setting]" => array ('checked' => TRUE))),
+        );
+      }
+      $title_charsets_setting = $setting_gwf . '_add_charsets';
+      $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_charsets'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Character Sets'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_charsets'][$title_charsets_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Character Sets'),
+        '#default_value' => at_get_setting($title_charsets_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_charsets as $charset_key => $charset_value) {
+        $form['at']['font']['titles'][$setting_container][$setting_container . '_gwf_charsets'][$title_charsets_setting . '_' . $charset_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($charset_value),
+          '#default_value' => at_get_setting($title_charsets_setting . '_' . $charset_key),
+          '#states' => array ('visible' => array (":input[name=$title_charsets_setting]" => array ('checked' => TRUE))),
+        );
+      }
       $form['at']['font']['titles'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs),
+        '#default_value' => at_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -191,7 +261,7 @@
         $form['at']['font']['titles'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
           '#title' => t('Font'),
-          '#default_value' => theme_get_setting($setting_yfy),
+          '#default_value' => at_get_setting($setting_yfy),
           '#options' => font_list('fyf', $element),
           '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
         );
@@ -200,7 +270,7 @@
         '#type' => 'select',
         '#title' => t('Size'),
         '#options' => $font_sizes_em,
-        '#default_value' => theme_get_setting($setting_size),
+        '#default_value' => at_get_setting($setting_size),
         '#attributes' => array('class' => array('font-size-wrapper')),
         '#states' => array ('invisible' => array ('select[name=' . $setting_type . ']' => array ('value' => '<none>'))),
       );
@@ -250,26 +320,66 @@
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
-        '#default_value' => theme_get_setting($setting_type),
+        '#default_value' => at_get_setting($setting_type),
       );
       $form['at']['font']['headings'][$setting_container][$setting] = array(
         '#type' => 'select',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting),
+        '#default_value' => at_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
-      $form['at']['font']['headings'][$setting_container][$setting_gwf .''] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_gwf),
-        '#options' => font_list('gwf', $element),
+      $form['at']['font']['headings'][$setting_container][$setting_gwf] = array(
+        '#type' => 'textfield',
+        '#title' => t('Google Font Name'),
+        '#default_value' => at_get_setting($setting_gwf),
+        '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
+      $headings_styles_setting = $setting_gwf . '_add_styles';
+      $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_styles'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Styles'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_styles'][$headings_styles_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Styles'),
+        '#default_value' => at_get_setting($headings_styles_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_styles as $style_key => $style_value) {
+        $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_styles'][$headings_styles_setting . '_' . $style_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($style_value),
+          '#default_value' => at_get_setting($headings_styles_setting . '_' . $style_key),
+          '#states' => array ('visible' => array (":input[name=$headings_styles_setting]" => array ('checked' => TRUE))),
+        );
+      }
+      $headings_charsets_setting = $setting_gwf . '_add_charsets';
+      $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_charsets'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Character Sets'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_charsets'][$headings_charsets_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Character Sets'),
+        '#default_value' => at_get_setting($headings_charsets_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_charsets as $charset_key => $charset_value) {
+        $form['at']['font']['headings'][$setting_container][$setting_container . '_gwf_charsets'][$headings_charsets_setting . '_' . $charset_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($charset_value),
+          '#default_value' => at_get_setting($headings_charsets_setting . '_' . $charset_key),
+          '#states' => array ('visible' => array (":input[name=$headings_charsets_setting]" => array ('checked' => TRUE))),
+        );
+      }
       $form['at']['font']['headings'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs),
+        '#default_value' => at_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -280,7 +390,7 @@
         $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
           '#title' => t('Font'),
-          '#default_value' => theme_get_setting($setting_yfy),
+          '#default_value' => at_get_setting($setting_yfy),
           '#options' => font_list('fyf', $element),
           '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
         );
@@ -313,7 +423,7 @@
         '#type' => 'select',
         '#title' => t($element), // element as title is fine in this context
         '#options' => $font_sizes_em,
-        '#default_value' => theme_get_setting($setting_size),
+        '#default_value' => at_get_setting($setting_size),
         '#attributes' => array('class' => array('font-size-wrapper')),
        );
     }
@@ -355,26 +465,66 @@
         '#type' => 'select',
         '#title' => t('Type'),
         '#options' => $font_type_options,
-        '#default_value' => theme_get_setting($setting_type),
+        '#default_value' => at_get_setting($setting_type),
       );
       $form['at']['font']['menus'][$setting_container][$setting] = array(
         '#type' => 'select',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting),
+        '#default_value' => at_get_setting($setting),
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
-      $form['at']['font']['menus'][$setting_container][$setting_gwf .''] = array(
-        '#type' => 'select',
-        '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_gwf),
-        '#options' => font_list('gwf', $element),
+      $form['at']['font']['menus'][$setting_container][$setting_gwf] = array(
+        '#type' => 'textfield',
+        '#title' => t('Google Font Name'),
+        '#default_value' => at_get_setting($setting_gwf),
+        '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
+      $menus_styles_setting = $setting_gwf . '_add_styles';
+      $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_styles'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Styles'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_styles'][$menus_styles_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Styles'),
+        '#default_value' => at_get_setting($menus_styles_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_styles as $style_key => $style_value) {
+        $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_styles'][$menus_styles_setting . '_' . $style_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($style_value),
+          '#default_value' => at_get_setting($menus_styles_setting . '_' . $style_key),
+          '#states' => array ('visible' => array (":input[name=$menus_styles_setting]" => array ('checked' => TRUE))),
+        );
+      }
+      $menus_charsets_setting = $setting_gwf . '_add_charsets';
+      $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_charsets'] = array (
+        '#type' => 'fieldset',
+        '#title' => t('Add Google Font Character Sets'),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_charsets'][$menus_charsets_setting] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Character Sets'),
+        '#default_value' => at_get_setting($menus_charsets_setting),
+        '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
+      );
+      foreach ($google_charsets as $charset_key => $charset_value) {
+        $form['at']['font']['menus'][$setting_container][$setting_container . '_gwf_charsets'][$menus_charsets_setting . '_' . $charset_key] = array(
+          '#type' => 'checkbox',
+          '#title' => t($charset_value),
+          '#default_value' => at_get_setting($menus_charsets_setting . '_' . $charset_key),
+          '#states' => array ('visible' => array (":input[name=$menus_charsets_setting]" => array ('checked' => TRUE))),
+        );
+      }
       $form['at']['font']['menus'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => theme_get_setting($setting_cfs),
+        '#default_value' => at_get_setting($setting_cfs),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
@@ -385,7 +535,7 @@
         $form['at']['font']['menus'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
           '#title' => t('Font'),
-          '#default_value' => theme_get_setting($setting_yfy),
+          '#default_value' => at_get_setting($setting_yfy),
           '#options' => font_list('fyf', $element),
           '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'fyf'))),
         );
@@ -394,7 +544,7 @@
         '#type' => 'select',
         '#title' => t('Size'),
         '#options' => $font_sizes_em,
-        '#default_value' => theme_get_setting($setting_size),
+        '#default_value' => at_get_setting($setting_size),
         '#attributes' => array('class' => array('font-size-wrapper')),
         '#states' => array ('invisible' => array ('select[name=' . $setting_type . ']' => array ('value' => '<none>'))),
       );
@@ -419,19 +569,55 @@
     '#title' => t('Font'),
     '#default_value' => at_get_setting('selectors_font'),
     '#options' => font_list('wsf', 'css'),
-    '#states' => array (
-      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => '')),
-    )
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => ''))),
   );
   $form['at']['font']['css']['selectors_font_gwf'] = array(
-    '#type' => 'select',
-    '#title' => t('Font'),
+    '#type' => 'textfield',
+    '#title' => t('Google Font Name'),
     '#default_value' => at_get_setting('selectors_font_gwf'),
-    '#options' => font_list('gwf', 'css'),
-    '#states' => array (
-      'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf')),
-    )
+    '#description' => $google_font_description,
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
   );
+  $css_styles_setting = 'selectors_font_add_styles';
+  $form['at']['font']['css']['selectors_font_gwf_styles'] = array (
+    '#type' => 'fieldset',
+    '#title' => t('Add Google Font Styles'),
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
+  );
+  $form['at']['font']['css']['selectors_font_gwf_styles'][$css_styles_setting] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Styles'),
+    '#default_value' => at_get_setting($css_styles_setting),
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
+  );
+  foreach ($google_styles as $style_key => $style_value) {
+    $form['at']['font']['css']['selectors_font_gwf_styles'][$css_styles_setting . '_' . $style_key] = array(
+      '#type' => 'checkbox',
+      '#title' => t($style_value),
+      '#default_value' => at_get_setting($css_styles_setting . '_' . $style_key),
+      '#states' => array ('visible' => array (":input[name=$css_styles_setting]" => array ('checked' => TRUE))),
+    );
+  }
+  $css_charsets_setting = 'selectors_font_add_charsets';
+  $form['at']['font']['css']['selectors_font_gwf_charsets'] = array (
+    '#type' => 'fieldset',
+    '#title' => t('Add Google Font Character Sets'),
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
+  );
+  $form['at']['font']['css']['selectors_font_gwf_charsets'][$css_charsets_setting] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Character Sets'),
+    '#default_value' => at_get_setting($css_charsets_setting),
+    '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
+  );
+  foreach ($google_charsets as $charset_key => $charset_value) {
+    $form['at']['font']['css']['selectors_font_gwf_charsets'][$css_charsets_setting . '_' . $charset_key] = array(
+      '#type' => 'checkbox',
+      '#title' => t($charset_value),
+      '#default_value' => at_get_setting($css_charsets_setting . '_' . $charset_key),
+      '#states' => array ('visible' => array (":input[name=$css_charsets_setting]" => array ('checked' => TRUE))),
+    );
+  }
   $form['at']['font']['css']['selectors_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
@@ -448,9 +634,7 @@
       '#title' => t('Font'),
       '#default_value' => at_get_setting('selectors_font_fyf'),
       '#options' => font_list('fyf', 'css'),
-      '#states' => array (
-        'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf')),
-      )
+      '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf'))),
     );
   }
   // CSS selectors
@@ -460,7 +644,5 @@
     '#rows' => 3,
     '#default_value' => at_get_setting('selectors_css'),
     '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>"),
-    '#states' => array (
-      'disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>')),
-    )
+    '#states' => array ('disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>'))),
   );

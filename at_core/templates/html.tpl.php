@@ -5,9 +5,14 @@
  * Drupal page.
  *
  * Adaptivetheme Variables:
- * - $polyfills: polyfill scripts to support legacy browsers.
+ * - $html_attributes: lanaguge and language direction set to a variable for
+ *   easy printing.
+ * - $polyfills: prints IE conditional polyfill scripts enabled via theme
+ *   settings.
+ * - $skip_link_target: prints an ID for the skip navigation target, set in
+ *   theme settings.
  *
- * Variables:
+ * Available Variables:
  * - $css: An array of CSS files for the current page.
  * - $language: (object) The language the site is being displayed in.
  *   $language->language contains its textual representation.

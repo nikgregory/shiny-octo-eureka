@@ -89,16 +89,10 @@
 
     // Google Fonts
     if ($font_type === 'gwf') {
-      // Get the Google font list
-      $google_fonts = google_fonts_list($element);
-      // Loop over the Google font list and get a match, this is slow...
-      foreach ($google_fonts as $k => $v) {
-        if ($k == $font_value) {
-          $font_family = $v;
-        }
-      }
-      $font_values['font_family'] = $font_family;
+      $font_value = "'" . $font_value . "'";
+      $font_values['font_family'] = filter_xss($font_value); // sanitize user entered data, strip bad protocols
       $font_values['font_size']   = $font_size;
+
       // Add styles to the array for printing into the stylsheet
       $font_styles_data[] = at_build_font_families($element, $selector, $font_values);
     }

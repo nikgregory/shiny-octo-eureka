@@ -118,19 +118,19 @@ function font_elements() {
         'type' => 'menu',
         'subtype' => 'menu_variable',
         'element' => 'mm',
-        'selector' => '#menu-bar ul,#primary-menu ul',
+        'selector' => '#menu-bar ul,#primary-menu-bar ul',
         'setting' => 'main_menu_font',
       ),
       'secondary_menu' => array(
         'type' => 'menu',
         'subtype' => 'menu_variable',
         'element' => 'sm',
-        'selector' => '#secondary-menu ul',
+        'selector' => '#secondary-menu-bar ul,#menu-bar #block-system-user-menu ul',
         'setting' => 'secondary_menu_font',
       ),
-      'block_menu' => array(
+      'block_menus' => array(
         'type' => 'menu',
-        'subtype' => 'menu_block',
+        'subtype' => 'menu_blocks',
         'element' => 'bm',
         'selector' => 'nav.block ul',
         'setting' => 'block_menu_font',
@@ -273,10 +273,53 @@ function font_your_face_fonts_enabled() {
   return $fonts_enabled;
 }
 
+
+/**
+ * Google font charsets.
+ */
+function google_font_charsets() {
+  $charset_array = &drupal_static(__FUNCTION__, array());
+  if (empty($charset_array)) {
+    $charset_array = array(
+      'latin' => t('Latin'),
+      'latin-ext' => t('Latin extended'),
+      'greek' => t('Greek'),
+      'greek-ext' => t('Greek extended'),
+      'cyrillic' => t('Cyrillic'),
+      'cyrillic-ext' => t('Cyrillic extended'),
+      'khmer' => t('Khmer'),
+      'vietnamese' => t('Vietnamese'),
+    );
+  }
+
+  return $charset_array;
+}
+
+/**
+ * Google font styles.
+ */
+function google_font_styles() {
+  $styles_array = &drupal_static(__FUNCTION__, array());
+  if (empty($styles_array)) {
+    $styles_array = array(
+      '300' => t('Book 300'),
+      '300italic' => t('Book 300 Italic'),
+      '400' => t('Normal 400'),
+      '400italic' => t('Normal 400 Italic'),
+      '700' => t('Bold 700'),
+      '700italic' => t('Bold 700 Italic'),
+    );
+  }
+
+  return $styles_array;
+}
+
 /**
  * Build an array of Google web fonts.
+ * Deprecated.
  *
  * @pararm $element
+ * TODO: remove this function, first check everything is working in the new system.
  */
 function google_fonts_list($element) {
 

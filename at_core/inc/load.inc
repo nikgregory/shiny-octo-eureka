@@ -226,17 +226,15 @@ function load_extensions_css($theme_name) {
  */
 function load_fonts($path, $theme_name) {
   // Google fonts
-  $google_fonts = drupal_static(__FUNCTION__, array());
-  if (empty($google_fonts)) {
-    $google_fonts = load_google_fonts($theme_name);
+  $google_font_string = drupal_static(__FUNCTION__, array());
+  if (empty($google_font_string)) {
+    $google_font_string = load_google_fonts($theme_name);
   }
-  if (!empty($google_fonts)) {
-    // No protocol, we need to support https also
-    drupal_add_css('//fonts.googleapis.com/css?family=' . $google_fonts, array(
+  if (!empty($google_font_string)) {
+    drupal_add_css($google_font_string, array(
         'group' => CSS_THEME,
         'type' => 'external',
         'weight' => -100,
-        'preprocess' => FALSE,
       )
     );
   }
@@ -542,6 +540,85 @@ function polly_wants_a_cracker($polly, $theme_name) {
  * @param $theme_name
  */
 function load_google_fonts($theme_name) {
+
+  $google_font_string = drupal_static(__FUNCTION__, array());
+  if (empty($google_font_string)) {
+
+    $used_fonts = array();
+    $font_elements = font_elements();
+    $charsets = google_font_charsets();
+    $styles = google_font_styles();
+    $used_styles = array();
+    $used_charsets = array();
+
+    foreach ($font_elements as $key => $value) {
+      $setting = $value['setting'];
+      if (at_get_setting($setting . '_type', $theme_name) === 'gwf') {
+        $used_settings[] = $setting . '_gwf';
+        $font_name = at_get_setting($setting . '_gwf', $theme_name);
+        $used_font = str_replace(' ', '+', $font_name);
+        $used_fonts[] = $used_font;
+      }
+    }
+    if (!empty($used_fonts)) {
+      $used_fonts = array_unique($used_fonts);
+      $google_fonts = implode('|', $used_fonts);
+
+      foreach ($used_settings as $used_setting) {
+        // Styles
+        if (at_get_setting($used_setting . '_add_styles', $theme_name) === 1) {
+          foreach ($styles as $styles_key => $styles_value) {
+            if (at_get_setting($used_setting . '_add_styles_' . $styles_key, $theme_name)) {
+              $used_styles[] = $styles_key;
+            }
+          }
+        }
+        // Charsets
+        if (at_get_setting($used_setting . '_add_charsets', $theme_name) === 1) {
+          foreach ($charsets as $charset_key => $charset_value) {
+            if (at_get_setting($used_setting . '_add_charsets_' . $charset_key, $theme_name)) {
+              $used_charsets[] = $charset_key;
+            }
+          }
+        }
+      }
+      if (!empty($used_styles)) {
+        $styles_array = array_unique($used_styles);
+        $google_styles = ':' . implode(',', $styles_array);
+      }
+      else {
+        $google_styles = '';
+      }
+      if (!empty($used_charsets)) {
+        $charset_array = array_unique($used_charsets);
+        $google_charsets = '&subset=' . implode(',', $charset_array);
+      }
+      else {
+        $google_charsets = '';
+      }
+
+      // Build the final string
+      $google_font_string = '//fonts.googleapis.com/css?family=' . $google_fonts . $google_styles . $google_charsets;
+    }
+  }
+
+  return $google_font_string;
+}
+
+
+
+/**
+ * Google Font loader.
+ * Adaptivetheme can load websafe fonts, Google fonts, custom font stacks and
+ * integrate with @font-your-face module. All can be configured in the "Fonts"
+ * theme settings. Here we only need to load Google webfonts. Websafe and custom
+ * fonts are stored in a generated CSS file (in public files) and
+ * @font-your-face module takes care of loading its own fonts.
+ *
+ * @param $theme_name
+ * TODO: remove this function, first check everything is working in the new system.
+ */
+/*function _load_google_fonts($theme_name) {
   global $path_to_at_core;
 
   $google_fonts = drupal_static(__FUNCTION__, array());
@@ -585,7 +662,7 @@ function load_google_fonts($theme_name) {
   }
 
   return $google_fonts;
-}
+}*/
 
 //
 // Functions to maintain 7.x-2.x backward compatibility,
