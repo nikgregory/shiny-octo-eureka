@@ -281,37 +281,32 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
 .font-element-wrapper option[value$=-ms]  {font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;}
 
 /* Google font new styles */
+#edit-font fieldset[id$=-gwf-styles],
+#edit-font fieldset[id$=-gwf-charsets],
 #edit-font fieldset[id$=-gwf-styles] .fieldset-wrapper,
 #edit-font fieldset[id$=-gwf-charsets] .fieldset-wrapper {
   overflow: hidden;
   padding: 0 !important;
   margin: 0 !important;
 }
-
+#edit-font fieldset[id$=-gwf-charsets] {
+  margin-bottom: 20px !important;
+}
 #edit-font fieldset[id$=-gwf-styles] legend,
 #edit-font fieldset[id$=-gwf-charsets] legend {
   display: none !important;
 }
-
 #edit-font fieldset[id$=-gwf-styles] div.form-type-checkbox,
 #edit-font fieldset[id$=-gwf-charsets] div.form-type-checkbox {
- float: left;
- clear: none;
- margin-right: 20px;
+  float: left;
+  clear: none;
+  margin: 0 15px 0 0;
   padding: 7px 0 0 0;
 }
-
-#edit-font div.form-type-checkbox label {
+#system-theme-settings #edit-font div.form-type-textfield label,
+#system-theme-settings #edit-font div.form-type-checkbox label {
   width: auto;
 }
-
-#edit-base-font-gwf-charsets,
-#edit-base-font-gwf-charsets .fieldset-wrapper {
-}
-
-
-
-
 
 /* Heading styles for advanced themes */
 .headings-styles-wrapper .form-type-radios,
@@ -497,45 +492,45 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   margin: 0;
   padding: 10px 0 0;
 }
-.admin-theme-seven  fieldset .fieldset-wrapper .fieldset-wrapper {
+.admin-theme-seven fieldset .fieldset-wrapper .fieldset-wrapper {
   padding: 0;
   margin: 0 15px;
 }
-.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset > .fieldset-wrapper {
+.admin-theme-seven fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset > .fieldset-wrapper {
   margin: 0 15px;
   padding: 5px 10px 0;
   background: #f6f6f6;
 }
-.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset legend {
+.admin-theme-seven fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset legend {
   padding: 0;
 }
-.admin-theme-seven  fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset .fieldset-legend {
+.admin-theme-seven fieldset#edit-font fieldset > .fieldset-wrapper  > fieldset .fieldset-legend {
   text-transform: none;
   padding: 5px 0 5px 15px;
 }
-.admin-theme-seven  fieldset#edit-font .fieldset-wrapper legend {
+.admin-theme-seven fieldset#edit-font .fieldset-wrapper legend {
   display: block;
   padding-top: 10px;
   position: absolute;
   top: 0;
 }
-.admin-theme-seven  fieldset#edit-font fieldset.collapsed legend,
-.admin-theme-seven  fieldset#edit-font fieldset[id$=font-selector] legend,
-.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-sizes] legend,
-.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-menus] legend,
-.admin-theme-seven  fieldset#edit-headings fieldset[id=edit-css] legend {
+.admin-theme-seven fieldset#edit-font fieldset.collapsed legend,
+.admin-theme-seven fieldset#edit-font fieldset[id$=font-selector] legend,
+.admin-theme-seven fieldset#edit-headings fieldset[id=edit-sizes] legend,
+.admin-theme-seven fieldset#edit-headings fieldset[id=edit-menus] legend,
+.admin-theme-seven fieldset#edit-headings fieldset[id=edit-css] legend {
   position: static;
 }
-
-
-
-
-.admin-theme-seven  #edit-titles fieldset {
+.admin-theme-seven #edit-titles fieldset {
   padding: 0;
 }
-.admin-theme-seven  #edit-titles fieldset .fieldset-description {
+.admin-theme-seven #edit-titles fieldset .fieldset-description {
   padding: 3px 0;
 }
 .admin-theme-seven #edit-titles #edit-site-name-font-style .fieldset-description {
   padding-top: 2.2em;
+}
+.admin-theme-seven #edit-font fieldset[id$=-gwf-styles] .fieldset-wrapper,
+.admin-theme-seven #edit-font fieldset[id$=-gwf-charsets] .fieldset-wrapper {
+  padding: 0 10px 7px !important;
 }
