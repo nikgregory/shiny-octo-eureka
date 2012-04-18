@@ -401,33 +401,31 @@ ul.primary {
 }
 
 
-ul {
-  &.secondary {
-    border-bottom: 1px solid #ccc;
-    margin: 1em 0 0;
-    padding: 0 .3em 1em;
+ul.secondary {
+  border-bottom: 1px solid #ccc;
+  margin: 1em 0 0;
+  padding: 0 .3em 1em;
 
-    li {
-      border-right: 0;
-      list-style: none;
-      padding: 0 10px 0 0;
+  li {
+    border-right: 0;
+    list-style: none;
+    padding: 0 10px 0 0;
 
-      a {
-        &:hover,
-        &.active {
-          border-bottom: none;
-          text-decoration: underline;
-        }
+    a {
+      &:hover,
+      &.active {
+        border-bottom: none;
+        text-decoration: underline;
       }
     }
   }
-
-  &.action-links {
-    margin-left: 0;
-    margin-right: 0;
-    list-style: none;
-
-    li {}
-  }
 }
 
+
+ul.action-links {
+  margin-left: 0;
+  margin-right: 0;
+  list-style: none;
+
+  li {}
+}

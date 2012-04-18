@@ -82,7 +82,7 @@
             $form['at-layout']['panels']['panels-wrapper'][$device][$group][$device .'_'. $value['theme']] = array(
               '#type' => 'radios',
               '#title' => t($value['title']),
-              '#default_value' => theme_get_setting($device .'_'. $value['theme']),
+              '#default_value' => at_get_setting($device .'_'. $value['theme']),
               '#options' => $value['options'],
             );
           }

@@ -8,6 +8,7 @@ require_once($path_to_at_core . '/inc/plugins.inc');
 
 /**
  * Page Layout CSS Builder.
+ * 
  * Unlike the Panels layouts which hold CSS in their data array the Page layout
  * plugins each include a unique CSS builder function. This is required because
  * page layouts are all bespoke and can accept arbitrary user input for the
@@ -48,11 +49,13 @@ function at_build_page_layout($method, $sidebar_first, $sidebar_second, $sidebar
 
 /**
  * Panels CSS Builder, programatically builds and optimizes CSS.
+ * 
  * Adaptivetheme panels layout plugins do not have CSS files, instead the CSS is
  * held in the data structure inside the actual plugin inc file. This data is
- * extracted, compared and output as highly optimized CSS with no repetition of
- * style declarations. The output is embedded within media queries (or not,
- * depending on theme settings) and printed to file.
+ * extracted, compared and output for all panel layouts per device type. The CSS
+ * is highly optimized with no repetition of style declarations. The output is
+ * embedded within media queries (or not, depending on theme settings) and
+ * printed to file.
  *
  * @param $panel_styles
  * @param $device_panels_data

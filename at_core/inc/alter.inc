@@ -187,7 +187,7 @@ function adaptivetheme_css_alter(&$css) {
     }
     foreach ($css_data as $key => $value) {
       $setting = 'unset_css_' . drupal_html_class($key);
-      if (theme_get_setting($setting, $theme_name) === 1) {
+      if (at_get_setting($setting, $theme_name) === 1) {
         if (isset($css[$key])) {
           unset($css[$key]);
         }
@@ -197,7 +197,7 @@ function adaptivetheme_css_alter(&$css) {
     if ($language->dir === 'rtl') {
       foreach ($css_data as $key => $value) {
         $setting = 'unset_css_' . drupal_html_class($key);
-        if (theme_get_setting($setting, $theme_name) === 1) {
+        if (at_get_setting($setting, $theme_name) === 1) {
           $key = str_replace('.css', '-rtl.css', $key);
           if (isset($css[$key])) {
             unset($css[$key]);

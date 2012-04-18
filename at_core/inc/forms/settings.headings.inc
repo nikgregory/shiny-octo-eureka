@@ -52,7 +52,7 @@
       $form['at']['titles']['' . $setting_container . '']['' . $setting_case . ''] = array(
         '#type' => 'select',
         '#title' => t('Case'),
-        '#default_value' => theme_get_setting($setting_case),
+        '#default_value' => at_get_setting($setting_case),
         '#options' => font_style_options('case', $element),
       );
 
@@ -60,7 +60,7 @@
       $form['at']['titles']['' . $setting_container . '']['' . $setting_weight . ''] = array(
         '#type' => 'select',
         '#title' => t('Weight'),
-        '#default_value' => theme_get_setting($setting_weight),
+        '#default_value' => at_get_setting($setting_weight),
         '#options' => font_style_options('weight', $element),
       );
 
@@ -68,7 +68,7 @@
       $form['at']['titles']['' . $setting_container . '']['' . $setting_alignment . ''] = array(
         '#type' => 'select',
         '#title' => t('Alignment'),
-        '#default_value' => theme_get_setting($setting_alignment),
+        '#default_value' => at_get_setting($setting_alignment),
         '#options' => font_style_options('alignment', $element),
       );
 
@@ -76,7 +76,7 @@
       $form['at']['titles']['' . $setting_container . '']['' . $setting_shadow . ''] = array(
         '#type' => 'select',
         '#title' => t('Shadow'),
-        '#default_value' => theme_get_setting($setting_shadow),
+        '#default_value' => at_get_setting($setting_shadow),
         '#options' => font_style_options('shadow', $element),
       );
     }

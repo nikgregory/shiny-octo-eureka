@@ -69,7 +69,7 @@
       $form['at']['cssexcludes']['die-css-die']['contrib-excludes'][$setting] = array(
         '#type' => 'checkbox',
         '#title' => t("Unset: $key"),
-        '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+        '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('contrib-module-css-file')),
         '#weight' => 0,
       );
@@ -103,7 +103,7 @@
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes'][$setting] = array(
         '#type' => 'checkbox',
         '#title' => t("Unset: $key"),
-        '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+        '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('library-css-file')),
         '#weight' => 0,
       );
@@ -137,7 +137,7 @@
       $form['at']['cssexcludes']['die-css-die']['explicit-excludes'][$setting] = array(
         '#type' => 'checkbox',
         '#title' => t("Unset: $key"),
-        '#default_value' => theme_get_setting($setting) ? theme_get_setting($setting) : 0,
+        '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('user-defined-css-file')),
         '#weight' => 0,
       );

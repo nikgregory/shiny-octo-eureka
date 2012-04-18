@@ -17,13 +17,42 @@ function at_core_settings_validate($form, &$form_state) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - enter a value or deselect "Set a max width".'));
     }
   }
-  if ($values['smartphone_landscape_layout'] === 'one-col-vert') {
+  if ($values['smartphone_landscape_layout'] === 'one_col_vert') {
     if (empty($values['smartphone_landscape_sidebar_first'])) {
       form_set_error('smartphone_landscape_sidebar_first', t('Smartphone First Sidebar width is empty - enter a value or choose another layout.'));
     }
     if (empty($values['smartphone_landscape_sidebar_second'])) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
+  }
+
+  // See if we have any settings for panels layouts
+  $devices = array(
+    'tablet_landscape',
+    'tablet_portrait',
+    'smartphone_landscape',
+  );
+  $rpl = responsive_panels_data_structure();
+  if (isset($rpl['one'])) {
+    unset($rpl['one']);
+  }
+  $missing_panels_settings = array();
+  foreach ($devices as $device) {
+    if (isset($rpl)) {
+      foreach ($rpl as $group => $layouts) {
+        foreach ($layouts as $layout) {
+          foreach ($layout as $key => $value) {
+            if (empty($values[$device .'_'. $value['theme']])) {
+              $missing_panels_settings[] = str_replace('_', ' ', drupal_ucfirst($device)) . ' ' . $value['title'];
+            }
+          }
+        }
+      }
+    }
+  }
+  if (!empty($missing_panels_settings)) {
+    $missing_panels_settings = implode(', ', $missing_panels_settings);
+    drupal_set_message(t('<p>There are settings missing for the Panels layouts. Dont worry, you just need to add the default settings for Panels layouts to your themes info file and clear the cache, please see <a href="!link" target="_blank">this issue</a>. You can also try selecting a layout for each Panel layout and resaving, which will fix the issue and clear this warning, however, if you migrate you will want the settings in the info file. Fallback values for each missing setting are being used but these might not be optimal for your site.</p><p>Settings are missing for: ', array('!link' => 'http://drupal.org/node/1497224#at_build_panels_layout_css')) . $missing_panels_settings . '</p>', 'warning');
   }
 
   // Apple touch icons

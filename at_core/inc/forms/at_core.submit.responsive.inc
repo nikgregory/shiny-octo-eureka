@@ -100,10 +100,20 @@
     foreach ($panel_subtypes as $subtype) {
       $smartphone_landscape_panel_settings[] = $device . '_' . $subtype;
     }
+
     foreach ($smartphone_landscape_panel_settings as $setting) {
-      $option = $values[$setting];
+      if (!empty($values[$setting])) {
+        $option = $values[$setting];
+      }
+      else {
+        // Provide a fallback layout in case settings fail during submit
+        $smartphone_landscape_panel_substr_setting = substr($setting, 21);
+        $smartphone_landscape_panel_substr_setting = str_replace('_', '-', $smartphone_landscape_panel_substr_setting) . '-stack';
+        $option = $smartphone_landscape_panel_substr_setting;
+      }
       $smartphone_landscape_panels_data[] = $option;
     }
+
     // Generate the panels layouts
     $smartphone_landscape_panels_css = at_build_panels_layout_css($panel_styles, $smartphone_landscape_panels_data);
 
@@ -142,7 +152,15 @@
     }
 
     foreach ($tablet_portrait_panel_settings as $setting) {
-      $option = $values[$setting];
+      if (!empty($values[$setting])) {
+        $option = $values[$setting];
+      }
+      else {
+        // Provide a fallback layout in case settings fail during submit
+        $tablet_portrait_panel_substr_setting = substr($setting, 16);
+        $tablet_portrait_panel_substr_setting = str_replace('_', '-', $tablet_portrait_panel_substr_setting);
+        $option = $tablet_portrait_panel_substr_setting;
+      }
       $tablet_portrait_panels_data[] = $option;
     }
 
@@ -183,7 +201,15 @@
       $tablet_landscape_panel_settings[] = $device . '_' . $subtype;
     }
     foreach ($tablet_landscape_panel_settings as $setting) {
-      $option = $values[$setting];
+      if (!empty($values[$setting])) {
+        $option = $values[$setting];
+      }
+      else {
+        // Provide a fallback layout in case settings fail during submit
+        $tablet_landscape_panel_substr_setting = substr($setting, 17);
+        $tablet_landscape_panel_substr_setting = str_replace('_', '-', $tablet_landscape_panel_substr_setting);
+        $option = $tablet_landscape_panel_substr_setting;
+      }
       $tablet_landscape_panels_data[] = $option;
     }
     // Generate the panels layouts
