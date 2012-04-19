@@ -120,36 +120,38 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   }
 
   // Hide the site name if toggled off, don't remove it
+  $vars['visibility'] = '';
+  $vars['hide_site_name'] = FALSE;
   if (at_get_setting('toggle_name', $theme_name) === 0) {
     $vars['visibility'] = 'element-invisible';
     $vars['hide_site_name'] = TRUE;
   }
-  else {
-    $vars['visibility'] = '';
-    $vars['hide_site_name'] = FALSE;
-  }
 
   // Site Name and Slogan classes
-  if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-    $heading_settings_array = &drupal_static('adaptivetheme_preprocess_page_heading_settings');
-    $sitename_classes = array();
-    $slogan_classes = array();
-    if (empty($heading_settings_array)) {
-      if ($vars['hide_site_name'] == FALSE) {
-        $sitename_classes = array('site_name_case', 'site_name_weight', 'site_name_alignment', 'site_name_shadow');
-        $heading_settings_array = $sitename_classes;
-      }
-      if ($vars['site_slogan']) {
-        $slogan_classes = array('site_slogan_case', 'site_slogan_weight', 'site_slogan_alignment', 'site_slogan_shadow');
-        $heading_settings_array = array_merge($sitename_classes, $slogan_classes);
-      }
-    }
-    if (!empty($heading_settings_array)) {
-      foreach ($heading_settings_array as $setting) {
-        if ($heading_setting = at_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_setting;
+  if ($vars['hide_site_name'] === FALSE || $vars['site_slogan']) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $heading_settings_array = &drupal_static('adaptivetheme_preprocess_page_heading_settings');
+      if (empty($heading_settings_array)) {
+        $settings_array = array();
+        if ($vars['hide_site_name'] === FALSE) {
+          $settings_array[] = 'site_name_case';
+          $settings_array[] = 'site_name_weight';
+          $settings_array[] = 'site_name_alignment';
+          $settings_array[] = 'site_name_shadow';
+        }
+        if ($vars['site_slogan']) {
+          $settings_array[] = 'site_slogan_case';
+          $settings_array[] = 'site_slogan_weight';
+          $settings_array[] = 'site_slogan_alignment';
+          $settings_array[] = 'site_slogan_shadow';
+        }
+        foreach ($settings_array as $setting) {
+          if ($heading_setting = at_get_setting($setting, $theme_name)) {
+            $heading_settings_array[] = $heading_setting;
+          }
         }
       }
+      $vars['classes_array'][] = implode(' ', $heading_settings_array);
     }
   }
 
