@@ -315,7 +315,7 @@
 
 
   ; Block title
-  settings[block_title_case]      = 'btc-uc'
+  settings[block_title_case]      = 'btc-n'
   settings[block_title_weight]    = 'btw-b'
   settings[block_title_alignment] = 'bta-l'
   settings[block_title_shadow]    = 'bts-n'

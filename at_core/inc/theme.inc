@@ -72,7 +72,8 @@ function _theme_menu_variables($menu, $type) {
  *
  * Adaptivetheme impliments breadcrumb trails as an ordered list, wrapping each
  * crumb in li elements and the seperators in span elements to make life easier
- * for themers.
+ * for themers. Additionally .crumb, .crumb-first and .crumb-last classes are
+ * printed on the li elements.
  *
  * @param $vars
  *   An associative array containing:
@@ -83,12 +84,10 @@ function adaptivetheme_breadcrumb($vars) {
   $theme_name = $theme_key;
 
   $breadcrumb = $vars['breadcrumb'];
-  $show_breadcrumb = at_get_setting('breadcrumb_display', $theme_name);
 
-  if ($show_breadcrumb == 'yes') {
-    $show_breadcrumb_home = at_get_setting('breadcrumb_home', $theme_name);
+  if (at_get_setting('breadcrumb_display', $theme_name) === 1) {
 
-    if (!$show_breadcrumb_home) {
+    if (at_get_setting('breadcrumb_home', $theme_name) === 0) {
       array_shift($breadcrumb);
     }
 
@@ -101,8 +100,11 @@ function adaptivetheme_breadcrumb($vars) {
       $last = key($breadcrumb);
 
       $output = '';
+      $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">';
+      $output .= $heading;
+      $output .= '<ol id="crumbs" class="clearfix">';
       foreach ($breadcrumb as $key => $val) {
-        if ($key == $last) {
+        if ($key == $last && count($breadcrumb) != 1) {
           $class = 'crumb crumb-last';
         }
         if ($key == 0) {
@@ -112,11 +114,14 @@ function adaptivetheme_breadcrumb($vars) {
           $output .= '<li class="' . $class . '"><span>' . $separator . '</span>' . $val . '</li>';
         }
       }
-      return '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">' . $heading . '<ol id="crumbs" class="clearfix">' . $output . '</ol></nav></div>';
+      $output .= '</ol></nav></div>';
+
+      return $output;
     }
   }
-
-  return '';
+  else {
+    return;
+  }
 }
 
 /**

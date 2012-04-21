@@ -270,9 +270,9 @@
   settings[image_caption_teaser]   = 0
 
 ;----------// Breadcrumb
-  settings[breadcrumb_display]   = 'yes'
-  settings[breadcrumb_separator] = ' &#187; '
+  settings[breadcrumb_display]   = 1
   settings[breadcrumb_home]      = 0
+  settings[breadcrumb_separator] = ' &#187; '
 
 ;----------// Login block options
   settings[horizontal_login_block]        = 0
