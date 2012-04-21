@@ -13,7 +13,6 @@
     '#title' => t('Design'),
     '#description' => t('<h3>Design</h3>'),
   );
-
   // Adjust gutter width
   $form['at']['modify-output']['design']['global_gutter_width'] = array(
     '#type' => 'textfield',
@@ -24,7 +23,6 @@
     '#description' => t('Gutters are set using margin-left and margin-right. This will override the default 10px margins set in <code>global.page.css</code>.'),
     '#default_value' => at_get_setting('global_gutter_width'),
   );
-
   // Use the page full width wrappers template
   $form['at']['modify-output']['design']['page_full_width_wrappers'] = array(
     '#type' => 'checkbox',
@@ -32,7 +30,6 @@
     '#description' => t('This setting will load a page template will full width DIV wrappers - perfect for designs with 100% width sections, header or footer. Note that if you choose to use other page template suggestions you should use copies of page--full-width-wrappers.tpl.php, you will find this in adaptivetheme/at-core/templates.'),
     '#default_value' => at_get_setting('page_full_width_wrappers'),
   );
-
   // Add spans to theme_links
   $form['at']['modify-output']['design']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
@@ -41,60 +38,63 @@
     '#default_value' => at_get_setting('menu_item_span_elements'),
   );
 
-  // Extra CSS Classes
-  $form['at']['modify-output']['extra-classes'] = array(
+  // Breadcrumb settings
+  $form['at']['modify-output']['breadcrumb'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Extra Classes'),
-    '#description' => t('<h3>Extra CSS Classes</h3>'),
+    '#title' => t('Breadcrumbs'),
+    '#description' => t('<h3>Breadcrumb Settings</h3>'),
+  );
+  $form['at']['modify-output']['breadcrumb']['bd'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Breadcrumbs'),
+  );
+  // Display?
+  $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_display'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show breadcrumbs'),
+    '#default_value' => at_get_setting('breadcrumb_display'),
+  );
+  // Home link?
+  $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_home'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the homepage link'),
+    '#default_value' => at_get_setting('breadcrumb_home'),
+    '#states' => array(
+      'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
+    ),
+  );
+  // Seperator
+  $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_separator'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Separator'),
+    '#description' => t('Text only. Dont forget to include spaces.'),
+    '#default_value' => at_get_setting('breadcrumb_separator'),
+    '#size' => 8,
+    '#maxlength' => 10,
+    '#states' => array(
+      'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
+    ),
   );
 
-  // Page
-  $form['at']['modify-output']['extra-classes']['extra_page_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Page classes'),
-    '#description' => t('page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n)'),
-    '#default_value' => at_get_setting('extra_page_classes'),
-  );
-
-  // Node
-  $form['at']['modify-output']['extra-classes']['extra_article_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Node classes'),
-    '#description' => t('promoted, sticky, preview, language, odd/even classes, user picture handling, and build mode classes'),
-    '#default_value' => at_get_setting('extra_article_classes'),
-  );
-
-  // Comment
-  $form['at']['modify-output']['extra-classes']['extra_comment_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Comment classes '),
-    '#description' => t('anonymous, author, viewer, new, odd/even classes and classes for hidden titles, user picture and signature handling'),
-    '#default_value' => at_get_setting('extra_comment_classes'),
-  );
-
-  // Block
-  $form['at']['modify-output']['extra-classes']['extra_block_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Blocks classes'),
-    '#description' => t('odd/even (zebra classes), block region, delta and block count classes'),
-    '#default_value' => at_get_setting('extra_block_classes'),
-  );
-
-  // Menu
-  $form['at']['modify-output']['extra-classes']['extra_menu_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Menus classes'),
-    '#description' =>  t('menu link ID (mlid) and menu level (depth)'),
-    '#default_value' => at_get_setting('extra_menu_classes'),
-  );
-
-  // Item lists
-  $form['at']['modify-output']['extra-classes']['extra_item_list_classes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Item-lists classes'),
-    '#description' => t('first, last and odd/even (zebra classes)'),
-    '#default_value' => at_get_setting('extra_item_list_classes'),
-  );
+  // Login block options. There is also a slide-down block option, but I have never added it.
+  if (at_get_setting('horizontal_login_block_enable') === 'on') {
+    $form['at']['modify-output']['login-block'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Login Block'),
+      '#description' => t('<h3>Login Block Options</h3>'),
+    );
+    $form['at']['modify-output']['login-block']['hlb'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Login Block'),
+    );
+    // Horizonal login block
+    $form['at']['modify-output']['login-block']['hlb']['horizontal_login_block'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Horizontal Login Block'),
+      '#default_value' => at_get_setting('horizontal_login_block'),
+      '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophistocated approach than can be provided here.'),
+    );
+  }
 
   // Hide or Remove
   $form['at']['modify-output']['hide-remove'] = array(
@@ -102,15 +102,20 @@
     '#title' => t('Hide or Remove'),
     '#description' => t('<h3>Hide or Remove</h3>'),
   );
-
-  // Hide comment title
-  $form['at']['modify-output']['hide-remove']['comments_hide_title'] = array(
+  // Hide front page title
+  $form['at']['modify-output']['hide-remove']['frontpage_remove_title'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Hide the comment title'),
-    '#default_value' => at_get_setting('comments_hide_title'),
-    '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
+    '#title' => t('Remove the frontpage title'),
+    '#default_value' => at_get_setting('frontpage_remove_title'),
+    '#description' => t('Checking this setting will remove the page title from the front page.'),
   );
-
+  // Unset block system main front
+  $form['at']['modify-output']['hide-remove']['unset_block_system_main_front'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Do not display the Main content block on the front page'),
+    '#default_value' => at_get_setting('unset_block_system_main_front'),
+    '#description' => t('Checking this setting will remove the Main content block from the front page only - useful for removing the welcome message and allowing use of another block.'),
+  );
   // Hide RSS icons
   $form['at']['modify-output']['hide-remove']['feed_icons_hide'] = array(
     '#type' => 'checkbox',
@@ -118,13 +123,12 @@
     '#default_value' => at_get_setting('feed_icons_hide'),
     '#description' => t('Checking this setting will remove RSS feed icons. This will not affect the Syndicate block icon.'),
   );
-
-  // Unset block system main front
-  $form['at']['modify-output']['hide-remove']['unset_block_system_main_front'] = array(
+  // Hide comment title
+  $form['at']['modify-output']['hide-remove']['comments_hide_title'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Do not display the Main content block on the front page'),
-    '#default_value' => at_get_setting('unset_block_system_main_front'),
-    '#description' => t('Checking this setting will remove the Main content block from the front page only - useful for removing the welcome message and allowing use of another block.'),
+    '#title' => t('Hide the comment title'),
+    '#default_value' => at_get_setting('comments_hide_title'),
+    '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
   );
 
   // Accessibility
@@ -148,4 +152,53 @@
     '#title' => t('Skip to navigation target ID'),
     '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
     '#default_value' => at_get_setting('skip_link_target'),
+  );
+
+  // Extra CSS Classes
+  $form['at']['modify-output']['extra-classes'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Extra Classes'),
+    '#description' => t('<h3>Extra CSS Classes</h3>'),
+  );
+  // Page
+  $form['at']['modify-output']['extra-classes']['extra_page_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Page classes'),
+    '#description' => t('page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n)'),
+    '#default_value' => at_get_setting('extra_page_classes'),
+  );
+  // Node
+  $form['at']['modify-output']['extra-classes']['extra_article_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Node classes'),
+    '#description' => t('promoted, sticky, preview, language, odd/even classes, user picture handling, and build mode classes'),
+    '#default_value' => at_get_setting('extra_article_classes'),
+  );
+  // Comment
+  $form['at']['modify-output']['extra-classes']['extra_comment_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Comment classes '),
+    '#description' => t('anonymous, author, viewer, new, odd/even classes and classes for hidden titles, user picture and signature handling'),
+    '#default_value' => at_get_setting('extra_comment_classes'),
+  );
+  // Block
+  $form['at']['modify-output']['extra-classes']['extra_block_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Blocks classes'),
+    '#description' => t('odd/even (zebra classes), block region, delta and block count classes'),
+    '#default_value' => at_get_setting('extra_block_classes'),
+  );
+  // Menu
+  $form['at']['modify-output']['extra-classes']['extra_menu_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Menus classes'),
+    '#description' =>  t('menu link ID (mlid) and menu level (depth)'),
+    '#default_value' => at_get_setting('extra_menu_classes'),
+  );
+  // Item lists
+  $form['at']['modify-output']['extra-classes']['extra_item_list_classes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Item-lists classes'),
+    '#description' => t('first, last and odd/even (zebra classes)'),
+    '#default_value' => at_get_setting('extra_item_list_classes'),
   );

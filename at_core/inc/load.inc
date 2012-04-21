@@ -197,8 +197,10 @@ function load_extensions_css($theme_name) {
   if(at_get_setting('enable_image_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.image.css';
   }
-  if (at_get_setting('enable_loginblock_settings', $theme_name) === 1) {
-    $settings_css[] = 'at.settings.style.login.css';
+  if (at_get_setting('horizontal_login_block_enable', $theme_name) === 'on') {
+    if (at_get_setting('horizontal_login_block', $theme_name) === 1) {
+      $settings_css[] = 'at.settings.style.login.css';
+   }
   }
   if (!empty($settings_css)) {
     foreach ($settings_css as $css_file) {
@@ -604,8 +606,6 @@ function load_google_fonts($theme_name) {
 
   return $google_font_string;
 }
-
-
 
 /**
  * Google Font loader.

@@ -131,7 +131,7 @@
           <?php if ($title || $primary_local_tasks || $secondary_local_tasks || $action_links = render($action_links)): ?>
             <header id="main-content-header">
 
-              <?php if (!$is_front && $title): ?>
+              <?php if ($title): ?>
                 <h1 id="page-title"<?php print $attributes; ?>>
                   <?php print $title; ?>
                 </h1>

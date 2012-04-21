@@ -67,7 +67,7 @@ function adaptivetheme_process_page(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // theme the menu bars
+  // Theme the menu bars
   if (!empty($vars['primary_navigation'])) {
     $vars['primary_navigation'] = theme('menubar', array('menu' => $vars['primary_navigation'], 'type' => 'primary'));
   }
@@ -81,6 +81,11 @@ function adaptivetheme_process_page(&$vars, $hook) {
   // Force full width wrapper template suggestion if enabled
   if (at_get_setting('page_full_width_wrappers', $theme_name) === 1) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
+  }
+
+  // Remove the frontpage title if set in theme settings
+  if (at_get_setting('frontpage_remove_title') === 1 && $vars['is_front'] === TRUE) {
+    $vars['title'] = '';
   }
 
   // Remove the breadcrumb from these two pages, its pointless and very annoying

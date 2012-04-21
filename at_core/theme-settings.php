@@ -108,26 +108,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
 
-    // Breadcrumbs
-    if (at_get_setting('enable_breadcrumb_settings') === 1) {
-      require_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
+    // Modify output
+    if (at_get_setting('enable_markup_overides') === 1) {
+      require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
     }
 
     // Images
     if(at_get_setting('enable_image_settings') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.images.inc');
-    }
-
-    // Horizonatal login block
-    if (at_get_setting('horizontal_login_block_enable') === 'on') {
-      if (at_get_setting('enable_loginblock_settings') === 1) {
-        require_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
-      }
-    }
-
-    // Modify output
-    if (at_get_setting('enable_markup_overides') === 1) {
-      require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
     }
 
     // Exclude CSS
@@ -149,6 +137,18 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     if (at_get_setting('enable_custom_css') === 1) {
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
     }
+
+    // MOVED SETTINGS TO MODIFY OUTPUT
+    // Horizonatal login block
+    //if (at_get_setting('horizontal_login_block_enable') === 'on') {
+    //  if (at_get_setting('enable_loginblock_settings') === 1) {
+    //    require_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
+    //  }
+    //}
+    // Breadcrumbs
+    //if (at_get_setting('enable_breadcrumb_settings') === 1) {
+    //  require_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
+    //}
 
     // Always include tweaks (extension settings)
     require_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
