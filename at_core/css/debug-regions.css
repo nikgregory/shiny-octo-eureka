@@ -66,14 +66,18 @@
 }
 
 /* Region */
+.debug-regions #main-content #content,
 .debug-regions .region,
 .debug-regions #menu-bar {
-  background: rgba(255, 255, 0, 0.2);
+  background: #00B2EE;
   position: relative;
   min-height: 80px;
-  outline: 1px dotted #000;
-}
-.region-inner {
+  opacity: 0.7;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -ms-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
 }
 .debug-regions .region-three-inset-left-sidebar,
 .debug-regions .region-three-inset-left-sidebar .region-inner,
@@ -84,35 +88,43 @@
 #branding,
 .debug-regions .region-inner,
 .debug-regions #menu-bar .block {
-  opacity: 0.3;
 }
 .all-panel-layouts .at-panel {
   margin-bottom: 25px;
   background: #eee;
 }
-.debug-regions .all-panel-layouts .at-panel .region {
-}
+
+.debug-regions #main-content #content:hover,
 .debug-regions .region:hover,
 .debug-regions #menu-bar:hover {
-  outline: 1px dotted #000;
-  background: rgba(255, 255, 0, 0.5);
+  background: #00B2EE;
+  opacity: 0.95;
 }
-.debug-regions  .region:before,
+.debug-regions #main-content #content:before,
+.debug-regions .region:before,
 .debug-regions #menu-bar:before {
   font-size: 1em;
   font-weight: 700;
   position: absolute;
   z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  padding: 3px 0;
-  text-align: center;
+  left: 2px;
+  top: 2px;
+  padding: 5px 25px;
   color: #000;
+  background: #fff;
+  box-shadow: 0 3px 5px #666;
+}
+
+/* Guess what regions might be used, we cant know all... */
+.debug-regions #main-content #content:before {
+  content: "#content (main content region)";
 }
 .debug-regions .region:hover:before {}
 .debug-regions .region-top-bar:before {
   content: ".region-top-bar";
+}
+.debug-regions .region-leaderboard:before {
+  content: ".region-leaderboard";
 }
 .debug-regions .region-header-preface:before {
   content: ".region-header-preface";
@@ -159,6 +171,7 @@
 .debug-regions .region-footer:before {
   content: ".region-footer";
 }
+
 /* Panels */
 .debug-panels .at-panel {
   position: relative;
@@ -166,6 +179,7 @@
 .debug-panels .at-panel .region {
   background: rgba(255, 192, 203, 0.5);
   position: relative;
+  outline: 1px dotted #000;
 }
 .debug-panels .at-panel .region:hover {
   background: rgb(255, 192, 203);
@@ -189,9 +203,10 @@
   padding: 3px 0;
   text-align: center;
   color: #000;
+  background: transparent;
+  box-shadow: none;
 }
-.debug-panels .at-panel .region:hover:before {
-}
+
 /* One */
 .debug-panels .one-column:before {
   content: "ONE (.one-column)";
@@ -215,6 +230,7 @@
 .debug-panels .region-two-50-bottom:before {
   content: ".region-two-50-bottom";
 }
+
 /* Two 33 66 */
 .debug-panels .two-33-66:before {
   content: "TWO 33/66 (.two-33-66)";
@@ -231,6 +247,7 @@
 .debug-panels .region-two-33-66-bottom:before {
   content: ".region-two-33-66-bottom";
 }
+
 /* Two 66 33 */
 .debug-panels .two-66-33:before {
   content: "TWO 66/33 (.two-66-33)";
@@ -247,6 +264,7 @@
 .debug-panels .region-two-66-33-bottom:before {
   content: ".region-two-66-33-bottom";
 }
+
 /* Two brick */
 .debug-panels .two-brick:before {
   content: "TWO BRICK (.two-brick)";
@@ -272,6 +290,7 @@
 .debug-panels .region-two-brick-bottom:before {
   content: ".region-two-brick-bottom";
 }
+
 /* Three 3x33 */
 .debug-panels .three-3x33:before {
   content: "THREE 3x33 (.three-3x33)";
@@ -291,6 +310,7 @@
 .debug-panels .region-three-33-bottom:before {
   content: ".region-three-33-bottom";
 }
+
 /* Three 25-25-50 */
 .debug-panels .three-25-25-50:before {
   content: "THREE 25-25-50 (.three-25-25-50)";
@@ -310,6 +330,7 @@
 .debug-panels .region-three-25-25-50-bottom:before {
   content: ".region-three-25-25-50-bottom";
 }
+
 /* Three 25-50-25 */
 .debug-panels .three-25-50-25:before {
   content: "THREE 25-50-25 (.three-25-50-25)";
@@ -329,6 +350,7 @@
 .debug-panels .region-three-25-50-25-bottom:before {
   content: ".region-three-25-50-25-bottom";
 }
+
 /* Three 50-25-25 */
 .debug-panels .three-50-25-25:before {
   content: "THREE 50-25-25 (.three-50-25-25)";
@@ -348,6 +370,7 @@
 .debug-panels .region-three-50-25-25-bottom:before {
   content: ".region-three-50-25-25-bottom";
 }
+
 /* Four 4x25 */
 .debug-panels .four-4x25:before {
   content: "FOUR 4x25 (.four-4x25)";
@@ -364,6 +387,7 @@
 .debug-panels .region-four-fourth:before {
   content: ".region-four-fourth";
 }
+
 /* Five 5x20 */
 .debug-panels .five-5x20:before {
   content: "FIVE 5x20 (.five-5x20)";
@@ -383,6 +407,7 @@
 .debug-panels .region-five-fifth:before {
   content: ".region-five-fifth";
 }
+
 /* Six 6x16 */
 .debug-panels .six-6x16:before {
   content: "SIX 6x16 (.six-6x16)";
@@ -405,6 +430,7 @@
 .debug-panels .region-six-sixth:before {
   content: ".region-six-sixth";
 }
+
 /* Inset left */
 .three-inset-left:before {
   content: "INSET LEFT (.three-inset-left)";
@@ -424,6 +450,7 @@
 .region-three-inset-left-bottom:before {
   content: ".region-three-inset-left-bottom";
 }
+
 /* Inset right */
 .three-inset-right:before {
   content: "INSET RIGHT (.three-inset-right)";
@@ -443,6 +470,7 @@
 .region-three-inset-right-bottom:before {
   content: ".region-three-inset-right-bottom";
 }
+
 /* Reset for the block demo */
 .page-admin-structure-block-demo.debug-regions .region .block {
   opacity: 1;
@@ -460,6 +488,7 @@
   content: "" !important;
   display: none;
 }
+
 /* Hide panel labels on smaller screens */
 @media only screen and (max-width:1024px) {
   .debug-panels .at-panel:before {

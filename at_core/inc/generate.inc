@@ -21,6 +21,13 @@ function generate_html_classes(&$vars, $theme_name) {
       $classes_array[] = 'site-name-hidden';
     }
 
+    if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
+       $classes_array[] = 'debug-regions';
+    }
+    if (at_get_setting('load_all_panels', $theme_name) === 1 && drupal_is_front_page()) {
+       $classes_array[] = 'debug-panels';
+    }
+
     // Extra Classes
     if (at_get_setting('extra_page_classes', $theme_name) === 1) {
 

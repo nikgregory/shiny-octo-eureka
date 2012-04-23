@@ -195,7 +195,9 @@ function adaptivetheme_item_list($vars) {
   $attributes = $vars['attributes'];
 
   $output = '<div class="item-list">';
-  if (isset($title)) {
+
+  // Add !empty() check, otherwise its impossible to unset the title markup in alter.
+  if (isset($title) && !empty($title)) {
     $output .= '<h3>' . $title . '</h3>';
   }
 
