@@ -21,6 +21,7 @@ function generate_html_classes(&$vars, $theme_name) {
       $classes_array[] = 'site-name-hidden';
     }
 
+    // Add debugging classes
     if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
        $classes_array[] = 'debug-regions';
     }

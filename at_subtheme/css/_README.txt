@@ -14,7 +14,7 @@
 # Working with Responsive Design in Adaptivetheme
 
   The subtheme is designed to be "mobile first". In short this means to
-  first load a set of global styles, the progressively add styles for larger 
+  first load a set of global styles, the progressively add styles for larger
   devices using media queries.
 
   Its important to note that you do not have to follow a mobile first approach.
@@ -22,18 +22,18 @@
   in the global styles and then override them in media queries.
 
   You can do both in Adaptivetheme - it's merely a matter of where you place
-  the majority of your styles, and what theme settings you choose in the 
+  the majority of your styles, and what theme settings you choose in the
   Appearance settings for your sub-theme.
-  
-  Lets examine the CSS file structure of Adaptivetheme and look at how each 
-  file is loaded. From this you will be able to deduce what approach might work 
+
+  Lets examine the CSS file structure of Adaptivetheme and look at how each
+  file is loaded. From this you will be able to deduce what approach might work
   for you, and where you should be placing your CSS.
 
   ## Global Styles
 
   The global styles do not target any specific device - they always load for all
   devices, however you can unset each one or even all theme quite easily.
-  
+
   global.css holds an array of @imports that pull in all the others. You can use
   this to remove or comment out unwanted styles.
 
@@ -59,25 +59,25 @@
   In development mode the responsive stylesheets will load in individual link elements
   with the media query in media attribute. This allows them to load directly into the
   browser and you will see your CSS changes immediately, as per normal CSS development.
- 
-  There are six of these responsive stylesheets - one for each break point set in the 
+
+  There are six of these responsive stylesheets - one for each break point set in the
   theme settings:
-  
+
   responsive.smartphone.landscape.css
   responsive.smartphone.portrait.css
   responsive.tablet.landscape.css
   responsive.tablet.portrait.css
-  responsive.standard.bigscreen.css
+  responsive.desktop.css
 
   Its important to know that these files DO NOT contain the media queries (in case you
-  were looking for them), instead they load in the <link> elements media attribute - 
+  were looking for them), instead they load in the <link> elements media attribute -
   remember, these files only load when in Development Mode.
 
   When in production mode all the responsive stylesheets are aggregated into one file
-  and it uses embedded @media queries. 
-  
-  This file loads from your public files directory. AT does this, not Drupal core - 
-  it has nothing to do with Performance Settings or Core CSS aggregation (which you 
+  and it uses embedded @media queries.
+
+  This file loads from your public files directory. AT does this, not Drupal core -
+  it has nothing to do with Performance Settings or Core CSS aggregation (which you
   should also turn on when going live!).
 
   For a mobile first approach you will place minimal styles in the global stylesheets
@@ -137,4 +137,3 @@
   me very happy):
 
   http://drupal.org/project/issues/adaptivetheme
-

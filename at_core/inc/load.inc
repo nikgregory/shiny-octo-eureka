@@ -13,6 +13,26 @@ if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_headi
 }
 
 /**
+ * Set messages if files are not found
+ *
+ *  Adaptivetheme makes heavy use of generated CSS files, if one or more are not
+ *  found we set a message warning the user, and dump an error in watchdog.
+ *
+ * @param $filepath, path to the missing file.
+ * @param $theme_name, the active theme.
+ */
+function load_failure($filepath, $theme_name) {
+
+  $files_list = $filepath;
+  $message = t('<p>One or more CSS files were not found or does not exist: <em>!files_list</em>. Did you delete the public files directory or change a file name? Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>', array('!files_list' => $files_list, '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system'));
+
+  if (!empty($files_list)) {
+    watchdog($theme_name, 'CSS file missing or not found @filename', array('@filename' => $filepath), WATCHDOG_ERROR);
+    drupal_set_message($message, 'warning');
+  }
+}
+
+/**
  * Conditionally load stylesheets to set the layout.
  *
  * Each time you save the theme settings AT builds 3 layout stylesheets:
@@ -54,6 +74,9 @@ function load_layout_css($path, $theme_name) {
         )
       );
     }
+    else {
+      load_failure($filepath, $theme_name);
+    }
   }
 
   // Next - check if we need to load the responsive layout
@@ -62,7 +85,7 @@ function load_layout_css($path, $theme_name) {
     // Responsiveness is not disabled, load the responsive layout
     $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
     $media_query = 'only screen'; // keyword "only" should hide this from older user agents
-    load_subtheme_responsive_styles($filepath, $media_query, $weight = 0);
+    load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0);
 
     // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
     // 1. Responsive capabilities are ON
@@ -89,7 +112,7 @@ function load_layout_css($path, $theme_name) {
       $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
       $ie_style['media'] = 'screen';
       $ie_style['condition'] = 'lt IE 8';
-      load_subtheme_conditional_styles($filepath, $ie_style);
+      load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
     }
   }
 
@@ -107,7 +130,7 @@ function load_layout_css($path, $theme_name) {
         $ie_style['path'] = $ie_styles_path;
       }
       $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-      load_subtheme_conditional_styles($filepath, $ie_style);
+      load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
     }
   }
 }
@@ -252,6 +275,9 @@ function load_fonts($path, $theme_name) {
       )
     );
   }
+  else {
+    load_failure($filepath, $theme_name);
+  }
 }
 
 /**
@@ -271,6 +297,9 @@ function load_custom_css($path, $theme_name) {
       'every_page' => TRUE,
       )
     );
+  }
+  else {
+    load_failure($filepath, $theme_name);
   }
 }
 
@@ -367,9 +396,10 @@ function load_debuggers($theme_name) {
  *
  * @param $filepath, path to the CSS file.
  * @param $media_query, the media query from theme settings.
+ * @param $theme_name, the active theme.
  * @param $weight, optional.
  */
-function load_subtheme_responsive_styles($filepath, $media_query, $weight = 0) {
+function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0) {
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
@@ -379,6 +409,9 @@ function load_subtheme_responsive_styles($filepath, $media_query, $weight = 0) {
       'weight' => $weight,
       )
     );
+  }
+  else {
+    load_failure($filepath, $theme_name);
   }
 }
 
@@ -390,9 +423,10 @@ function load_subtheme_responsive_styles($filepath, $media_query, $weight = 0) {
  * @param $filepath, path to the file.
  * @param $ie_style, an arry containing the media attribute value and the IE
  * conditional comment.
+ * @param $theme_name, the active theme.
  * @param $weight, optional.
  */
-function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
+function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0) {
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'group' => CSS_THEME,
@@ -405,6 +439,9 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $weight = 0) {
       'weight' => $weight,
       )
     );
+  }
+  else {
+    load_failure($filepath, $theme_name);
   }
 }
 
@@ -683,6 +720,9 @@ function load_subtheme_media_queries($files, $theme_name) {
         )
       );
     }
+    else {
+      load_failure($filepath, $theme_name);
+    }
   }
 }
 
@@ -702,6 +742,9 @@ function load_subtheme_ie_styles($files, $theme_name) {
         'preprocess' => TRUE,
         )
       );
+    }
+    else {
+      load_failure($filepath, $theme_name);
     }
   }
 }

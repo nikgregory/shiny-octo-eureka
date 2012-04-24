@@ -80,9 +80,9 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
 
   // Load debuggers if enabled.
   if (
-    at_get_setting('expose_regions', $theme_name) === 1 ||
-    at_get_setting('load_all_panels', $theme_name) === 1 ||
-    at_get_setting('show_window_size', $theme_name) === 1) {
+  at_get_setting('expose_regions', $theme_name) === 1 ||
+  at_get_setting('load_all_panels', $theme_name) === 1 ||
+  at_get_setting('show_window_size', $theme_name) === 1) {
     load_debuggers($theme_name);
   }
 }
