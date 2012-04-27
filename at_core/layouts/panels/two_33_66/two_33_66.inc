@@ -22,13 +22,13 @@ function adaptivetheme_two_33_66_panels_layouts() {
     'styles' => array(
       'two-33-66' => array(
         'css' => array(
-          '33' => array('.two-33-66 .region-two-33-66-first' => 'width:33.333333%'),
-          '66' => array('.two-33-66 .region-two-33-66-second' => 'width:66.666666%'),
+          '33' => array('.two-33-66 > .region-two-33-66-first' => 'width:33.333333%'),
+          '66' => array('.two-33-66 > .region-two-33-66-second' => 'width:66.666666%'),
         ),
       ),
       'two-33-66-stack' => array(
         'css' => array(
-          'fdw' => array('.two-33-66 .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.two-33-66 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

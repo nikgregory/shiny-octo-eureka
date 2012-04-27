@@ -1,5 +1,11 @@
 /* Highlight regions for debugging the layout */
 
+body.debug-panels {
+  margin: 20px auto;
+  padding: 10px;
+  background: #fff;
+}
+
 /* Sections */
 #section-top,
 #section-header,
@@ -90,8 +96,9 @@
 .debug-regions #menu-bar .block {
 }
 .all-panel-layouts .at-panel {
-  margin-bottom: 25px;
-  background: #eee;
+  margin-top: 0 !important;
+  margin-bottom: 25px !important;
+  padding: 0 !important;
 }
 
 .debug-regions #main-content #content:hover,

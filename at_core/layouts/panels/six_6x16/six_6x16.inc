@@ -26,25 +26,25 @@ function adaptivetheme_six_6x16_panels_layouts() {
     'styles' => array(
       'six-6x16' => array(
         'css' => array(
-          '33fl' => array('.six-6x16 .panel-row' => 'width:33.333333%;float:left'),
-          '50' => array('.six-6x16 .region' => 'width:50%'),
+          '33fl' => array('.six-6x16 > .panel-row' => 'width:33.333333%;float:left'),
+          '50' => array('.six-6x16 > .panel-row > .region' => 'width:50%'),
         ),
       ),
       'six-6x16-3x2-grid' => array(
         'css' => array(
-          '33fl' => array('.six-6x16 .panel-row' => 'width:33.333333%;float:left'),
-          'fdw' => array('.six-6x16 .region' => 'float:none;display:block;width:100%;clear:both'),
+          '33fl' => array('.six-6x16 > .panel-row' => 'width:33.333333%;float:left'),
+          'fdw' => array('.six-6x16 > .panel-row > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'six-6x16-2x3-grid' => array(
         'css' => array(
-          'fdw' => array('.six-6x16 .panel-row' => 'float:none;display:block;width:100%;clear:both'),
-          '50fl' => array('.six-6x16 .region' => 'width:50%;float:left'),
+          'fdw' => array('.six-6x16 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
+          '50fl' => array('.six-6x16 > .panel-row > .region' => 'width:50%;float:left'),
         ),
       ),
       'six-6x16-stack' => array(
         'css' => array(
-          'fdw' => array('.six-6x16 .region,.six-6x16 .panel-row ' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.six-6x16 > .panel-row > .region,.six-6x16 > .panel-row ' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

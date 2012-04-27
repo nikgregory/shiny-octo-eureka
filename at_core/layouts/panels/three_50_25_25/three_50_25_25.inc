@@ -25,25 +25,25 @@ function adaptivetheme_three_50_25_25_panels_layouts() {
     'styles' => array(
       'three-50-25-25' => array(
         'css' => array(
-          '25' => array('.three-50-25-25 .region' => 'width:25%'),
-          '50' => array('.three-50-25-25 div.region-three-50-25-25-first' => 'width:50%'),
+          '25' => array('.three-50-25-25 > .region' => 'width:25%'),
+          '50' => array('.three-50-25-25 > div.region-three-50-25-25-first' => 'width:50%'),
         ),
       ),
       'three-50-25-25-stack-top' => array(
         'css' => array(
-          '50' => array('.three-50-25-25 .region-three-50-25-25-second,.three-50-25-25 .region-three-50-25-25-third' => 'width:50%'),
-          'fdw' => array('.three-50-25-25 .region-three-50-25-25-first' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.three-50-25-25 > .region-three-50-25-25-second,.three-50-25-25 .region-three-50-25-25-third' => 'width:50%'),
+          'fdw' => array('.three-50-25-25 > .region-three-50-25-25-first' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-50-25-25-stack-bottom' => array(
         'css' => array(
-          '50' => array('.three-50-25-25 .region' => 'width:50%'),
-          'fdw' => array('.three-50-25-25 .region-three-50-25-25-third' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.three-50-25-25 > .region' => 'width:50%'),
+          'fdw' => array('.three-50-25-25 > .region-three-50-25-25-third' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-50-25-25-stack' => array(
         'css' => array(
-          'fdw' => array('.three-50-25-25 .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.three-50-25-25 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

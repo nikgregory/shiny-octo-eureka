@@ -22,12 +22,12 @@ function adaptivetheme_two_50_panels_layouts() {
     'styles' => array(
       'two-50' => array(
         'css' => array(
-          '50' => array('.two-50 .region' => 'width:50%'),
+          '50' => array('.two-50 > .region' => 'width:50%'),
         ),
       ),
       'two-50-stack' => array(
         'css' => array(
-          'fdw' => array('.two-50 .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.two-50 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

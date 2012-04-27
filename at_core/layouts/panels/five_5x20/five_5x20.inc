@@ -93,35 +93,35 @@ function adaptivetheme_five_5x20_panels_layouts() {
     'styles' => array(          // - styles: these items are used to programatically build and optimize the CSS for each break-point.
       'five-5x20' => array(     // - styles keys: these key must match the 'options' keys, the first one must be the default.
         'css' => array(         // - css: holds the array of CSS identifiers
-          '40' => array('.five-5x20 .row-1' => 'width:40%'), // selectors as keys, CSS as values, values should align to the the "css" array key identifiers.
-          '60' => array('.five-5x20 .row-2' => 'width:60%'),
-          'fl' => array('.five-5x20 .panel-row' => 'float:left'),
-          '50' => array('.five-5x20 .row-1 .region' => 'width:50%'),
-          '33' => array('.five-5x20 .row-2 .region' => 'width:33.333333%'),
+          '40' => array('.five-5x20 > .row-1' => 'width:40%'), // selectors as keys, CSS as values, values should align to the the "css" array key identifiers.
+          '60' => array('.five-5x20 > .row-2' => 'width:60%'),
+          'fl' => array('.five-5x20 > .panel-row' => 'float:left'),
+          '50' => array('.five-5x20 > .row-1 > .region' => 'width:50%'),
+          '33' => array('.five-5x20 > .row-2 > .region' => 'width:33.333333%'),
         ),
       ),
       'five-5x20-2x3-grid' => array(
         'css' => array(
-          '33' => array('.five-5x20 .region' => 'width:33.333333%'),
-          '50' => array('.five-5x20 .row-1 .region-five-first,.five-5x20 .row-1 .region-five-second' => 'width:50%'),
-          'fdw' => array('.five-5x20 .panel-row' => 'float:none;display:block;width:100%;clear:both'),
+          '33' => array('.five-5x20 > .panel-row > .region' => 'width:33.333333%'),
+          '50' => array('.five-5x20 > .row-1 .region-five-first,.five-5x20 .row-1 .region-five-second' => 'width:50%'),
+          'fdw' => array('.five-5x20 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-1x2x2-grid' => array(
         'css' => array(
-          '50' => array('.five-5x20 .panel-row .region' => 'width:50%'),
-          'fdw' => array('.five-5x20 .panel-row,.five-5x20 .panel-row .region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.five-5x20 > .panel-row > .region' => 'width:50%'),
+          'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .panel-row > .region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-stack-2' => array(
         'css' => array(
-          '50' => array('.five-5x20 .row-1 .region' => 'width:50%'),
-          'fdw' => array('.five-5x20 .panel-row,.five-5x20 .row-2 .region' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.five-5x20 > .row-1 > .region' => 'width:50%'),
+          'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .row-2 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-stack' => array(
         'css' => array(
-          'fdw' => array('.five-5x20 .panel-row .region,.five-5x20 .panel-row' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.five-5x20 > .panel-row > .region,.five-5x20 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

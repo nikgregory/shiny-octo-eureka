@@ -25,24 +25,24 @@ function adaptivetheme_three_3x33_panels_layouts() {
     'styles' => array(
       'three-3x33' => array(
         'css' => array(
-          '33' => array('.three-3x33 .region' => 'width:33.333333%'),
+          '33' => array('.three-3x33 > .region' => 'width:33.333333%'),
         ),
       ),
        'three-3x33-stack-top' => array(
         'css' => array(
-          '50' => array('.three-3x33 .region' => 'width:50%'),
-          'fdw' => array('.three-3x33 .region-three-33-first' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.three-3x33 > .region' => 'width:50%'),
+          'fdw' => array('.three-3x33 > .region-three-33-first' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-3x33-stack-bottom' => array(
         'css' => array(
-          '50' => array('.three-3x33 .region' => 'width:50%'),
-          'fdw' => array('.three-3x33 .region-three-33-third' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.three-3x33 > .region' => 'width:50%'),
+          'fdw' => array('.three-3x33 > .region-three-33-third' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-3x33-stack' => array(
         'css' => array(
-          'fdw' => array('.three-3x33 .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.three-3x33 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

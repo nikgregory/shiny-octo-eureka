@@ -24,24 +24,24 @@ function adaptivetheme_four_4x25_panels_layouts() {
     'styles' => array(
       'four-4x25' => array(
         'css' => array(
-          '50fl' => array('.four-4x25 .region,.four-4x25 .panel-row' => 'width:50%;float:left'),
+          '50fl' => array('.four-4x25 > .panel-row > .region,.four-4x25 > .panel-row' => 'width:50%;float:left'),
         ),
       ),
       'four-4x25-right-stack' => array(
         'css' => array(
-          '50fl' => array('.four-4x25 .panel-row,.four-4x25 .row-2 .region' => 'width:50%;float:left'),
-          'fdw' => array('.four-4x25 .row-1 .region' => 'float:none;display:block;width:100%;clear:both'),
+          '50fl' => array('.four-4x25 > .panel-row,.four-4x25 > .row-2 > .region' => 'width:50%;float:left'),
+          'fdw' => array('.four-4x25 > .row-1 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'four-4x25-2x2-grid' => array(
         'css' => array(
-          '50' => array('.four-4x25 .region' => 'width:50%'),
-          'fdw' => array('.four-4x25 .panel-row' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.four-4x25 > .panel-row > .region' => 'width:50%'),
+          'fdw' => array('.four-4x25 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'four-4x25-stack' => array(
         'css' => array(
-          'fdw' => array('.four-4x25 .region,.four-4x25 .panel-row' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.four-4x25 > .panel-row > .region,.four-4x25 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),
