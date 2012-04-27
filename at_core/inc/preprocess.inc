@@ -233,6 +233,8 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
   // Add a "sidebar" class to sidebar regions
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
+    // Allow a region-specific template to override Zen's region--sidebar.
+    array_unshift($vars['theme_hook_suggestions'], 'region__sidebar');
   }
 
   // Add classes to conditional stack regions in Gpanel regions, in the Panels layout plugins these are hard coded.

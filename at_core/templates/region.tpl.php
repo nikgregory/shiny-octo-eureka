@@ -5,13 +5,39 @@
  *
  * The region template in Adaptivetheme is a little different to most other themes.
  * Instead of hard coding its markup Adaptivetheme generates it in
- * adaptivetheme_process_region(), conditionally printing outer and inner wrappers. 
- * 
+ * adaptivetheme_process_region(), conditionally printing outer and inner wrappers.
+ *
  * This allows the core theme to have just one region template instead of four.
  *
- * You can override this in your sub-theme with a normal region suggestion and use 
+ * You can override this in your sub-theme with a normal region suggestion and use
  * a standard region template if you prefer, or use your own themeName_process_region()
  * function to control the markup.
+ *
+ * For example you are use a template based on Drupal cores region.tpl.php in
+ * your template suggestion overides, such as the following:
+ *
+ * <?php if ($content): ?>
+ *   <div class="<?php print $classes; ?>">
+ *     <div class="region-inner clearfix">
+ *       <?php print $content; ?>
+ *     </div>
+ *   </div>
+ * <?php endif; ?>
+ *
+ * If you prefer to theme from process fucntions you can control the markup per
+ * region using something similar the follow example:
+ *
+ *  if ($vars['region'] === 'foobar_region') {
+ *    $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
+ *    $vars['inner_prefix'] = '<div class="region-inner clearfix">';
+ *    $vars['inner_suffix'] = '</div>';
+ *    $vars['outer_suffix'] = '</div>';
+ *  }
+ *
+ * Sidebar Region Template:
+ * - You can use a singlular region--sidebar.tpl.php template
+ *   file to theme both sidebars.
+ *
  *
  * Adativetheme supplied variables:
  * - $outer_prefix: Outer div with region classes.

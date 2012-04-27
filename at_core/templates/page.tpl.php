@@ -13,7 +13,7 @@
  * - $secondary_navigation: Themed Secondary/user menu.
  * - $primary_local_tasks: Split local tasks - primary.
  * - $secondary_local_tasks: Split local tasks - secondary.
- * - $tag: Generates the wrapper element for the main content.
+ * - $tag: Prints the wrapper element for the main content.
  *
  * General utility variables:
  * - $base_path: The base URL path of the Drupal installation. At the very
