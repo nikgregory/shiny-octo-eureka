@@ -83,6 +83,7 @@ if ($theme_settings) {
     'theme',
     'info',
     'at-layout__active_tab',
+    'at__active_tab',
   );
   foreach ($theme_settings as $setting_name => $setting_value) {
     if (isset($setting_name) && !in_array($setting_name, $exclusions)) {
