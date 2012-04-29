@@ -57,7 +57,7 @@ function at_core_settings_validate($form, &$form_state) {
 
   // Apple touch icons
   if(at_get_setting('enable_extensions') === 1) {
-    if ($values['enable_apple_touch_icons'] === 1) {
+    if (isset($values['enable_apple_touch_icons']) && $values['enable_apple_touch_icons'] === 1) {
       // low
       // if (empty($values['apple_touch_icon_path_l'])) {
         // form_set_error('apple_touch_icon_path_l', t('Ops! The Apple touch 57x57 icon path is missing, you must enter a path or disable touch icons.'));
