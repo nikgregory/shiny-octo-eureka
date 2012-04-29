@@ -21,7 +21,7 @@
     '#maxlength' => 2,
     '#field_suffix' => 'px',
     '#description' => t('Gutters are set using margin-left and margin-right. This will override the default 10px margins set in <code>global.page.css</code>.'),
-    '#default_value' => at_get_setting('global_gutter_width'),
+    '#default_value' => check_plain(at_get_setting('global_gutter_width')),
   );
   // Use the page full width wrappers template
   $form['at']['modify-output']['design']['page_full_width_wrappers'] = array(
@@ -68,7 +68,7 @@
     '#type'  => 'textfield',
     '#title' => t('Separator'),
     '#description' => t('Text only. Dont forget to include spaces.'),
-    '#default_value' => at_get_setting('breadcrumb_separator'),
+    '#default_value' => filter_xss_admin(at_get_setting('breadcrumb_separator')),
     '#size' => 8,
     '#maxlength' => 10,
     '#states' => array(
@@ -151,7 +151,7 @@
     '#type' => 'textfield',
     '#title' => t('Skip to navigation target ID'),
     '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
-    '#default_value' => at_get_setting('skip_link_target'),
+    '#default_value' => check_plain(at_get_setting('skip_link_target')),
   );
 
   // Extra CSS Classes

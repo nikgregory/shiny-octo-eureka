@@ -16,28 +16,28 @@
   $form['at']['meta']['mobile']['adaptivetheme_meta_viewport'] = array(
     '#type' => 'textfield',
     '#title' => t('viewport'),
-    '#default_value' => at_get_setting('adaptivetheme_meta_viewport'),
+    '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_viewport')),
   );
 
   // MobileOptimized
   $form['at']['meta']['mobile']['adaptivetheme_meta_mobileoptimized'] = array(
     '#type' => 'textfield',
     '#title' => t('MobileOptimized'),
-    '#default_value' => at_get_setting('adaptivetheme_meta_mobileoptimized'),
+    '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_mobileoptimized')),
   );
 
   // HandheldFriendly
   $form['at']['meta']['mobile']['adaptivetheme_meta_handheldfriendly'] = array(
     '#type' => 'textfield',
     '#title' => t('HandheldFriendly'),
-    '#default_value' => at_get_setting('adaptivetheme_meta_handheldfriendly'),
+    '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_handheldfriendly')),
   );
 
   // apple-mobile-web-app-capable
   $form['at']['meta']['mobile']['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
     '#type' => 'textfield',
     '#title' => t('apple-mobile-web-app-capable'),
-    '#default_value' => at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable'),
+    '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable')),
   );
 
   // Chrome Edge

@@ -34,7 +34,7 @@
 
       $form['at']['cssexcludes']['die-css-die']['core-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t("Unset: $key"),
+        '#title' => t('Unset: @key', array('@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('drupal-core-css-file')),
         '#weight' => 0,
@@ -68,7 +68,7 @@
       $setting = 'unset_css_' . drupal_html_class($key);
       $form['at']['cssexcludes']['die-css-die']['contrib-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t("Unset: $key"),
+        '#title' => t('Unset: @key', array('@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('contrib-module-css-file')),
         '#weight' => 0,
@@ -102,7 +102,7 @@
       $setting = 'unset_css_' . drupal_html_class($key);
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t("Unset: $key"),
+        '#title' => t('Unset: @key', array('@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('library-css-file')),
         '#weight' => 0,
@@ -136,7 +136,7 @@
       $setting = 'unset_css_' . drupal_html_class($key);
       $form['at']['cssexcludes']['die-css-die']['explicit-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t("Unset: $key"),
+        '#title' => t('Unset: @key', array('@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('user-defined-css-file')),
         '#weight' => 0,

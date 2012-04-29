@@ -82,10 +82,12 @@
     '#options' => str_replace("'", "", font_list('wsf', 'bf')),
     '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => ''))),
   );
+
+  // Google web font
   $form['at']['font']['base-font']['base_font_gwf'] = array(
     '#type' => 'textfield',
     '#title' => t('Google Font Name'),
-    '#default_value' => at_get_setting('base_font_gwf'),
+    '#default_value' => filter_xss_admin(at_get_setting('base_font_gwf')),
     '#description' => $google_font_description,
     '#states' => array ('visible' => array ('select[name="base_font_type"]' => array ('value' => 'gwf'))),
   );
@@ -126,16 +128,20 @@
       '#states' => array ('visible' => array ('input[name="base_font_gwf_add_charsets"]' => array ('checked' => TRUE))),
     );
   }
+
+  // Custom font stack
   $form['at']['font']['base-font']['base_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => at_get_setting('base_font_cfs'),
+    '#default_value' => filter_xss_admin(at_get_setting('base_font_cfs')),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
       'required' => array ('select[name="base_font_type"]' => array ('value' => 'cfs')),
     )
   );
+
+  // Font your face
   if ($font_your_face_enabled == TRUE) {
     $form['at']['font']['base-font']['base_font_fyf'] = array(
       '#type' => 'select',
@@ -200,10 +206,12 @@
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
+
+      // Google web fonts
       $form['at']['font']['titles'][$setting_container][$setting_gwf] = array(
         '#type' => 'textfield',
         '#title' => t('Google Font Name'),
-        '#default_value' => at_get_setting($setting_gwf),
+        '#default_value' => filter_xss_admin(at_get_setting($setting_gwf)),
         '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
@@ -247,16 +255,20 @@
           '#states' => array ('visible' => array (":input[name=$title_charsets_setting]" => array ('checked' => TRUE))),
         );
       }
+
+      // Custom font stack
       $form['at']['font']['titles'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => at_get_setting($setting_cfs),
+        '#default_value' => drupal_strip_dangerous_protocols(at_get_setting($setting_cfs)),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
+
+      // Font your face
       if ($font_your_face_enabled == TRUE) {
         $form['at']['font']['titles'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
@@ -329,10 +341,12 @@
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
+
+      // Google web fonts
       $form['at']['font']['headings'][$setting_container][$setting_gwf] = array(
         '#type' => 'textfield',
         '#title' => t('Google Font Name'),
-        '#default_value' => at_get_setting($setting_gwf),
+        '#default_value' => filter_xss_admin(at_get_setting($setting_gwf)),
         '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
@@ -376,16 +390,20 @@
           '#states' => array ('visible' => array (":input[name=$headings_charsets_setting]" => array ('checked' => TRUE))),
         );
       }
+
+      // Custom font stacks
       $form['at']['font']['headings'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => at_get_setting($setting_cfs),
+        '#default_value' => filter_xss_admin(at_get_setting($setting_cfs)),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
+
+      // Font your facec
       if ($font_your_face_enabled == TRUE) {
         $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
@@ -474,10 +492,12 @@
         '#options' => str_replace("'", "", font_list('wsf', $element)),
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => ''))),
       );
+
+      // Google web fonts
       $form['at']['font']['menus'][$setting_container][$setting_gwf] = array(
         '#type' => 'textfield',
         '#title' => t('Google Font Name'),
-        '#default_value' => at_get_setting($setting_gwf),
+        '#default_value' => filter_xss_admin(at_get_setting($setting_gwf)),
         '#description' => $google_font_description,
         '#states' => array ('visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'gwf'))),
       );
@@ -521,16 +541,20 @@
           '#states' => array ('visible' => array (":input[name=$menus_charsets_setting]" => array ('checked' => TRUE))),
         );
       }
+
+      // Custom font stacks
       $form['at']['font']['menus'][$setting_container][$setting_cfs] = array(
         '#type' => 'textfield',
         '#title' => t('Font'),
-        '#default_value' => at_get_setting($setting_cfs),
+        '#default_value' => filter_xss_admin(at_get_setting($setting_cfs)),
         '#description' => $custom_stack_description,
         '#states' => array (
           'visible' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
           'required' => array ('select[name=' . $setting_type . ']' => array ('value' => 'cfs')),
         ),
       );
+
+      // Font your face
       if ($font_your_face_enabled == TRUE) {
         $form['at']['font']['menus'][$setting_container][$setting_yfy] = array(
           '#type' => 'select',
@@ -571,10 +595,12 @@
     '#options' => font_list('wsf', 'css'),
     '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => ''))),
   );
+
+  // Google fonts
   $form['at']['font']['css']['selectors_font_gwf'] = array(
     '#type' => 'textfield',
     '#title' => t('Google Font Name'),
-    '#default_value' => at_get_setting('selectors_font_gwf'),
+    '#default_value' => filter_xss_admin(at_get_setting('selectors_font_gwf')),
     '#description' => $google_font_description,
     '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'gwf'))),
   );
@@ -618,16 +644,20 @@
       '#states' => array ('visible' => array (":input[name=$css_charsets_setting]" => array ('checked' => TRUE))),
     );
   }
+
+  // Custom font stacks
   $form['at']['font']['css']['selectors_font_cfs'] = array(
     '#type' => 'textfield',
     '#title' => t('Font'),
-    '#default_value' => at_get_setting('selectors_font_cfs'),
+    '#default_value' => filter_xss_admin(at_get_setting('selectors_font_cfs')),
     '#description' => $custom_stack_description,
     '#states' => array (
       'visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
       'required' => array ('select[name="selectors_font_type"]' => array ('value' => 'cfs')),
     )
   );
+
+  // Font your face
   if ($font_your_face_enabled == TRUE) {
     $form['at']['font']['css']['selectors_font_fyf'] = array(
       '#type' => 'select',
@@ -637,12 +667,13 @@
       '#states' => array ('visible' => array ('select[name="selectors_font_type"]' => array ('value' => 'fyf'))),
     );
   }
+
   // CSS selectors
   $form['at']['font']['css']['selectors_css'] = array(
     '#type' => 'textarea',
     '#title' => t('CSS Selectors'),
     '#rows' => 3,
-    '#default_value' => at_get_setting('selectors_css'),
-    '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>"),
+    '#default_value' => filter_xss_admin(at_get_setting('selectors_css')),
+    '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
     '#states' => array ('disabled' => array ('select[name="selectors_font_type"]' => array ('value' => '<none>'))),
   );

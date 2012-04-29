@@ -63,7 +63,7 @@
   $form['at-layout']['global-settings']['cascading-mediaqueries']['cascade_media_query'] = array(
     '#type' => 'textfield',
     '#description' => t('Enter the smallest min-width in your <code>responsive.cascade.css</code> file, this is used when loading the file in Development mode.'),
-    '#default_value' => at_get_setting('cascade_media_query'),
+    '#default_value' => check_plain(at_get_setting('cascade_media_query')),
     '#field_prefix' => '@media',
     '#states' => array(
       'invisible' => array('input[name="production_mode"]' => array('checked' => TRUE)),

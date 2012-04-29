@@ -117,6 +117,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   if (empty($vars['site_name'])) {
     $sitename = variable_get('site_name', 'Drupal');
     $vars['site_name'] = l($sitename, '<front>', array('attributes' => array('title' => t('Home page'))));
+    $vars['site_name_unlinked'] = $sitename;
   }
 
   // Hide the site name if toggled off, don't remove it
@@ -233,7 +234,7 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
   // Add a "sidebar" class to sidebar regions
   if (strpos($vars['region'], 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
-    // Allow a region-specific template to override Zen's region--sidebar.
+    // Allow a region-specific template to override the region--sidebar suggestion.
     array_unshift($vars['theme_hook_suggestions'], 'region__sidebar');
   }
 

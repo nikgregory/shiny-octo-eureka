@@ -35,7 +35,7 @@
   if(isset($values['enable_extensions']) && $values['enable_extensions'] === 1) {
     if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
       if (isset($values['global_gutter_width'])) {
-        $gutter = $values['global_gutter_width'] . 'px';
+        $gutter = check_plain($values['global_gutter_width']) . 'px';
         $gutters = "/* Gutters */" . "\n" .  "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;}"; // #content .at-panel {margin-left:-$gutter;margin-right:-$gutter;}
       }
     }
@@ -49,7 +49,7 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $smartphone_portrait_layout_data[$value] = $values["$device" . '_' . "$value"];
+        $smartphone_portrait_layout_data[$value] = filter_xss_admin($values["$device" . '_' . "$value"]);
       }
     }
     $layout = at_build_page_layout($smartphone_portrait_layout_data['layout'], $smartphone_portrait_layout_data['sidebar_first'], $smartphone_portrait_layout_data['sidebar_second'], $smartphone_portrait_layout_data['sidebar_unit']);
@@ -86,7 +86,7 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $smartphone_landscape_layout_data[$value] = $values["$device" . '_' . "$value"];
+        $smartphone_landscape_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
       }
     }
     $layout = at_build_page_layout($smartphone_landscape_layout_data['layout'], $smartphone_landscape_layout_data['sidebar_first'], $smartphone_landscape_layout_data['sidebar_second'], $smartphone_landscape_layout_data['sidebar_unit']);
@@ -136,7 +136,7 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $tablet_portrait_layout_data[$value] = $values["$device" . '_' . "$value"];
+        $tablet_portrait_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
       }
     }
     $layout = at_build_page_layout($tablet_portrait_layout_data['layout'], $tablet_portrait_layout_data['sidebar_first'], $tablet_portrait_layout_data['sidebar_second'], $tablet_portrait_layout_data['sidebar_unit']);
@@ -186,7 +186,7 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $tablet_landscape_layout_data[$value] = $values["$device" . '_' . "$value"];
+        $tablet_landscape_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
       }
     }
     $layout = at_build_page_layout($tablet_landscape_layout_data['layout'], $tablet_landscape_layout_data['sidebar_first'], $tablet_landscape_layout_data['sidebar_second'], $tablet_landscape_layout_data['sidebar_unit']);
@@ -234,7 +234,7 @@
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $bigscreen_layout_data[$value] = $values["$device" . '_' . "$value"];
+        $bigscreen_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
       }
     }
     $layout = at_build_page_layout($bigscreen_layout_data['layout'], $bigscreen_layout_data['sidebar_first'], $bigscreen_layout_data['sidebar_second'], $bigscreen_layout_data['sidebar_unit']);
@@ -255,7 +255,7 @@
     }
 
     // Load the default panels layouts
-    $panels_layouts = drupal_load_stylesheet($path_to_panels_css . 'default.css', FALSE);
+    $panels_layouts = file_get_contents($path_to_panels_css . 'default.css', FALSE);
 
     // Build a $styles variable with the layout, width and default panels layouts
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
@@ -358,7 +358,8 @@
   // 3. $theme_name.lt-ie9.layout
   // 4. $theme_name.lt-ie8.layout
   // 5. $theme_name.responsive.styles
-  // adaptivetheme_preprocess_html() will take care of loading the right ones when they are needed.
+  // adaptivetheme_preprocess_html() will take care of loading the right ones
+  // when they are needed.
 
   // responsive layout
   $responsive_layout_data = implode("\n", $layouts);
@@ -376,7 +377,8 @@
     $responsive_layout = '/* Responsive capabilites are disabled, only the standard layout is loaded in themename.default.layout.css */';
   }
 
-  // IE assignments, not sure why I am doing this, could be that I meant to do something at this stage and have forgotton for now...
+  // IE assignments, not sure why I am doing this, could be that I meant to do
+  // something at this stage and have forgotton for now...
   $lt_ie9_layout = $lt_ie9_css;
   $lt_ie8_layout = $lt_ie8_css;
 
@@ -394,7 +396,6 @@
 
   // Loop over the array and save each file, and we're done!
   foreach ($files as $key => $value) {
-    $sanitized_values = $value; // Can contain user entered data, run final sanity checks
     $filepath = "$path/$key.css";
-    file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
+    file_save_data($value, $filepath, FILE_EXISTS_REPLACE);
   }

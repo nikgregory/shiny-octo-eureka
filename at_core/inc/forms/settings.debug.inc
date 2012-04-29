@@ -39,8 +39,7 @@
     '#default_value' => at_get_setting('atcore_version_test'),
   );
 
-  // All media queries, wow this is kinda fugly, did I really do this, I must
-  // have been out with mortendk at dcamp or something...
+  // All media queries
   $queries = '';
   $mq = array();
   $mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . at_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';
@@ -49,6 +48,10 @@
   $mq[] =  '/* Tablet landscape */' . "\n" . '@media ' . at_get_setting('tablet_landscape_media_query') . ' {' . "\n" . '}';
   $mq[] =  '/* Standard layout */' . "\n" . '@media ' . at_get_setting('bigscreen_media_query') . ' {' . "\n" . '}';
   $queries = implode("\n\n", $mq);
+
+  // Sanity check
+  $queries = check_plain($queries);
+
   $form['at-layout']['debug']['mediaqueries'] = array(
     '#type' => 'fieldset',
     '#title' => t('<h3>All Media Queries - Copy Only!</h3>'),

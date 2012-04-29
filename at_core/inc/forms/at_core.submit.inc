@@ -28,10 +28,33 @@ function at_core_settings_submit($form, &$form_state) {
   $path_to_panels_css = $path_to_at_core . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
-  // Set up our files directory for the generated files. Files are never
-  // overwritten, however the files are really small - total around 25kb
-  // depending, of which around 8kb is never loaded - the theme info
-  // config file, which is just a backup.
+  // Potential files to remove
+  $rm_files = array(
+    $theme_name . '_color.inc',
+    $theme_name . '_settings.info',
+    $theme_name . '.default.layout.css',
+    $theme_name . '.lt-ie8.layout.css',
+    $theme_name . '.lt-ie9.layout.css',
+    $theme_name . '.responsive.layout.css',
+    $theme_name . '.responsive.styles.css',
+    $theme_name . '.fonts.css',
+    $theme_name . '.custom.css',
+  );
+
+  // Delete files and the directory
+  if ($old_path = variable_get('theme_' . $theme_name . '_files_directory')) {
+    foreach ($rm_files as $file) {
+      $filepath = $old_path . '/' . $file;
+      if (file_exists($filepath)) {
+        @drupal_unlink($filepath);
+      }
+    }
+    if (isset($old_path)) {
+      @drupal_rmdir($old_path);
+    }
+  }
+
+  // Set up the new files directory for the generated files.
   $id = $theme_name . '_files_' . substr(hash('sha256', serialize($theme_name) . microtime()), 0, 8);
   $path  = 'public://adaptivetheme/' . $id;
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
@@ -54,7 +77,7 @@ function at_core_settings_submit($form, &$form_state) {
       require_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
     }
   }
-  
+
   // Color inc save
   if(module_exists('color')) {
     if (isset($values['at-color']) && $values['at-color'] == TRUE) {

@@ -44,22 +44,6 @@
     '#description' => t('Set default image alignment and enable image captions.'),
   );
 
-  //// Breadcrumb display and seperator
-  //$form['at']['site-tweaks']['enable-stuff']['enable_breadcrumb_settings'] = array(
-  //  '#type' => 'checkbox',
-  //  '#title' => t('Breadcrumb display and seperator'),
-  //  '#default_value' => at_get_setting('enable_breadcrumb_settings'),
-  //  '#description' => t('Setting to customize the breadcrumb.'),
-  //);
-  //
-  //// Login block options
-  //$form['at']['site-tweaks']['enable-stuff']['enable_loginblock_settings'] = array(
-  //  '#type' => 'checkbox',
-  //  '#title' => t('Login block options'),
-  //  '#default_value' => at_get_setting('enable_loginblock_settings'),
-  //  '#description' => t('Stylize the login block - includes a setting for a horizonal form and other tweaks.'),
-  //);
-
   // Metatags for mobile
   $form['at']['site-tweaks']['enable-stuff']['enable_mobile_metatags'] = array(
     '#type' => 'checkbox',

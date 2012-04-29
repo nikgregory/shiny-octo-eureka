@@ -2,9 +2,13 @@
 /**
  * Saves a parsable inc file with the full color info array for the active theme.
  *
- * If a custom color scheme has been created in the UI it is injected into the schemes
- * array and saved. You must rename the Custom scheme and give it a unique array key before
- * using the generated file in your theme.
+ * If a custom color scheme has been created in the UI it is injected into the
+ * schemes array and saved. You must rename the Custom scheme and give it a
+ * unique array key before using the generated file in your theme.
+ * 
+ * Note that color module validates the input of the color form and this is not
+ * run if there is a problem, such the user inputting non hexadecimal CSS color
+ * strings, which color module validates to avoid XSS.
  */
 
 $palette = $form_state['values']['palette'];

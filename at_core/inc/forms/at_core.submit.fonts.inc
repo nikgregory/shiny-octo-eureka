@@ -19,7 +19,7 @@
 
     // Deal with the custom CSS selectors.
     if ($selector == 'custom_css' && !empty($values['selectors_css'])) {
-      $selector = filter_xss($values['selectors_css']); // sanitize user entered data, strip bad protocols
+      $selector = filter_xss($values['selectors_css']); // sanitize user entered data
     }
     if ($selector == 'custom_css' && empty($values['selectors_css'])) {
       $selector = 'ruby ruby'; // Valid but highly unlikely to ever match anything
@@ -81,16 +81,16 @@
 
     // Custom Font stacks (user entered data)
     if ($font_type === 'cfs') {
-      $font_values['font_family'] = filter_xss($font_value); // sanitize user entered data, strip bad protocols
+      $font_values['font_family'] = drupal_strip_dangerous_protocols($font_value); // sanitize user entered data
       $font_values['font_size']   = $font_size;
       // Add styles to the array for printing into the stylsheet
       $font_styles_data[] = at_build_font_families($element, $selector, $font_values);
     }
 
-    // Google Fonts
+    // Google Fonts (user entered data)
     if ($font_type === 'gwf') {
       $font_value = "'" . $font_value . "'";
-      $font_values['font_family'] = filter_xss($font_value); // sanitize user entered data, strip bad protocols
+      $font_values['font_family'] = filter_xss_admin($font_value); // sanitize user entered data
       $font_values['font_size']   = $font_size;
 
       // Add styles to the array for printing into the stylsheet

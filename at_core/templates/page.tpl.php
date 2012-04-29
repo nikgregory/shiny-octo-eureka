@@ -6,8 +6,10 @@
  * Available variables:
  *
  * Adaptivetheme supplied variables:
- * - $linked_site_logo: Themed logo.
- * - $hide_site_name: toggle_name boolean.
+ * - $site_logo: Themed logo - linked to front with alt attribute.
+ * - $site_name: Site name linked to the homepage.
+ * - $site_name_unlinked: Site name without any link.
+ * - $hide_site_name: Toggles the visibility of the site name.
  * - $visibility: Holds the class .element-invisible or is empty.
  * - $primary_navigation: Themed Main menu.
  * - $secondary_navigation: Themed Secondary/user menu.
@@ -29,8 +31,6 @@
  *   when linking to the front page. This includes the language domain or
  *   prefix.
  * - $logo: The path to the logo image, as defined in theme configuration.
- * - $site_name: The name of the site, empty when display has been disabled
- *   in theme settings.
  * - $site_slogan: The slogan of the site, empty when display has been disabled
  *   in theme settings.
  *
