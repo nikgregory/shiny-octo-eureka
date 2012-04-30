@@ -10,23 +10,6 @@
 }
 
 
-/* Focus styles for accessibility and usabiltiy */
-.form-text:focus,
-.form-checkbox:focus,
-.form-radio:focus,
-.form-select:focus {
-  border: 1px solid #fc0;
-  background: #ffffdf;
-}
-
-
-/* Focus styles textarea, keep it white for high readability */
-textarea:focus {
-  border: 1px solid #fc0;
-  background: #fff;
-}
-
-
 /* Highlight the form elements that caused a form submission error */
 .form-item input.error,
 .form-item textarea.error,
@@ -125,15 +108,6 @@ input {
 }
 
 
-input.text,
-input.title,
-textarea,
-select {
-  border: 1px solid #ccc;
-  margin: 0;
-}
-
-
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -150,23 +124,28 @@ input[type="submit"] {
 }
 
 
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+
 button[disabled],
 input[disabled] {
   cursor: default;
 }
 
 
-input.text,
-input.title {
-  padding: .5em;
-}
-
-
+/* Reset form-text, textarea and select */
 input.form-text,
-textarea {
-  border: 1px solid #ccc;
+textarea,
+select {
+  border-color: 1px solid #ccc;
   height: auto;
   padding: 2px;
+  font-family: inherit; /* inherit the default site font and not the browsers monospace font */
+  font-size: 1em;
 }
 
 
@@ -176,12 +155,7 @@ html.js input.form-autocomplete {
 }
 
 
-textarea,
-input {
-  font: 1em normal Arial, Helvetica, sans-serif;
-}
-
-
+/* Textarea */
 textarea {
   overflow: auto;
   vertical-align: top;
@@ -190,13 +164,6 @@ textarea {
 
 div.resizable-textarea textarea {
   margin-top: 0;
-}
-
-
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
 }
 
 

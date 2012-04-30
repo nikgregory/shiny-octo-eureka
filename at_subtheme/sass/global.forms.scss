@@ -14,7 +14,7 @@
   label {
     display: block;
     font-weight: bold;
-    
+
     // The label for a radio button or checkbox
     &.option {
       display: inline;
@@ -59,7 +59,7 @@
 // Inline labels and form divs
 .container-inline {
 
-  div, 
+  div,
   label {
     display: inline;
   }
@@ -71,14 +71,14 @@ fieldset {
   border: 1px solid #dadada;
   margin: 10px 0;
   padding: 10px;
-  
+
   fieldset:last-child {
     margin-bottom: 0;
   }
 }
 
 
-legend, 
+legend,
 fieldset legend {
   border: 0;
   display: block;
@@ -94,14 +94,8 @@ html.js fieldset.collapsed {
   padding-top: 5px;
 }
 
-textarea, 
-select {
-  border: 1px solid #ccc;
-  margin: 0;
-}
 
-
-button::-moz-focus-inner, 
+button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
@@ -120,6 +114,7 @@ button[disabled] {
 }
 
 
+// Input
 input {
   margin: 0;
   max-width: 100%;
@@ -128,16 +123,16 @@ input {
     cursor: default;
    }
 
-  &[type="checkbox"], 
+  &[type="checkbox"],
   &[type="radio"] {
     box-sizing: border-box;
     padding: 0;
     *height: 13px;
     *width: 13px;
   }
-  
-  &[type="button"], 
-  &[type="reset"], 
+
+  &[type="button"],
+  &[type="reset"],
   &[type="submit"] {
     cursor: pointer;
     -webkit-appearance: button;
@@ -146,15 +141,19 @@ input {
 }
 
 
+// Reset form-text, textarea and selects
 input.form-text,
-textarea {
+textarea,
+select {
   border: 1px solid #ccc;
   height: auto;
   padding: 2px;
-  font: 1em normal Arial, Helvetica, sans-serif;
+  font-family: inherit; // inherit the default site font and not the browsers monospace font
+  font-size: 1em;
 }
 
 
+// Textarea
 textarea {
   overflow: auto;
   vertical-align: top;
@@ -165,21 +164,6 @@ div.resizable-textarea textarea {
   margin-top: 0;
 }
 
-// Focus styles for accessibility and usabiltiy
-.form-text:focus,
-.form-checkbox:focus,
-.form-radio:focus,
-.form-select:focus {
-  border: 1px solid #fc0;
-  background: #ffffdf;
-}
-
-
-textarea:focus {
-  border: 1px solid #fc0;
-  background: #fff;
-}
-
 
 // Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
 [hidden] {
@@ -188,13 +172,13 @@ textarea:focus {
 
 
 // Highlight the form elements that caused a form submission error
-input.error, 
-textarea.error, 
+input.error,
+textarea.error,
 select.error {
   border: 1px solid #c00;
 }
 
-  
+
 // Tips for Drupal's input formats
 .tips {
   font-size: .857em;
@@ -225,10 +209,11 @@ fieldset .filter-help {
 
 
 // Password confirmation
-.password-parent, 
+.password-parent,
 .confirm-parent {
   margin: 0;
 }
+
 
 //
 // Drupal's default login form block
@@ -236,14 +221,14 @@ fieldset .filter-help {
 
 #user-login-form {
   text-align: left; /* LTR */
-  
+
   ul {
     margin: 0;
     padding: 0;
   }
-  
+
   li {
-  
+
     &.openid-link {}
     &.user-link {}
   }
@@ -252,7 +237,7 @@ fieldset .filter-help {
 
 #user-login ul {
   margin: 0 0 5px;
-  
+
   li {
     margin: 0;
   }
@@ -265,7 +250,7 @@ fieldset .filter-help {
     list-style: none;
     margin: 0;
   }
-  
+
   li.openid-link {
     background: none;
   }
@@ -308,7 +293,7 @@ html.js #user-login-form li.openid-link {
 
 #user-login-form li {
 
-  &.openid-link, 
+  &.openid-link,
   &.user-link {
     cursor: pointer;
   }
@@ -346,7 +331,7 @@ input[type="search"] {
 fieldset#edit-advanced fieldset {
   float: left;
   margin: 0 10px 10px 0;
-  
+
   .fieldset-legend {
     background: none;
     padding-left: 1em;
@@ -389,15 +374,15 @@ form {
     padding-right: 1em; /* LTR */
     border-bottom: 3px solid #ccc;
   }
-  
+
   tbody {
     border-top: 1px solid #ccc;
   }
-  
+
   tr.even {
     background-color: #fff;
   }
-  
+
   table .item-list ul {
     margin: 0;
   }
@@ -405,10 +390,10 @@ form {
 
 .lt-ie8 tr {
 
-  &.even, 
+  &.even,
   &.odd {
-  
-    th, 
+
+    th,
     td {
       // IE doesn't display borders on table rows
       border-bottom: 1px solid #ccc;
@@ -421,4 +406,3 @@ form {
 #devel-switch-user-form {
   margin-bottom: 0;
 }
-
