@@ -196,8 +196,7 @@ function adaptivetheme_item_list($vars) {
 
   $output = '<div class="item-list">';
 
-  // Add !empty() check, otherwise its impossible to unset the title markup in alter.
-  if (isset($title) && !empty($title)) {
+  if (isset($title) && $title !== '') {
     $output .= '<h3>' . $title . '</h3>';
   }
 
@@ -291,7 +290,7 @@ if (!function_exists('dhtml_menu_init')) {
       $sub_menu = drupal_render($element['#below']);
     }
 
-    if (at_get_setting('extra_menu_classes', $theme_name) === 1 && !empty($element['#original_link'])) {
+    if (at_get_setting('extra_menu_classes', $theme_name) !== 0 && !empty($element['#original_link'])) {
       if (!empty($element['#original_link']['depth'])) {
         $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
       }
@@ -300,7 +299,7 @@ if (!function_exists('dhtml_menu_init')) {
       }
     }
 
-    if (at_get_setting('menu_item_span_elements', $theme_name) === 1 && !empty($element['#title'])) {
+    if (at_get_setting('menu_item_span_elements', $theme_name) !== 0 && !empty($element['#title'])) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
@@ -506,7 +505,7 @@ function adaptivetheme_field($vars) {
   $output .= '</div>';
 
   // Render the top-level wrapper element.
-  $tag = $vars['label_hidden'] ? 'div' : 'section';
+  $tag = $vars['tag'];
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
 
   return $output;
@@ -533,8 +532,9 @@ function adaptivetheme_field__taxonomy_term_reference($vars) {
   }
 
   $output .= '</ul>';
+
   // Render the top-level wrapper element.
-  $tag = $vars['label_hidden'] ? 'div' : 'section';
+  $tag = $vars['tag'];
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
 
   return $output;
@@ -588,7 +588,7 @@ function adaptivetheme_field__image($vars) {
   $output .= '</div>';
 
   // Render the top-level wrapper element.
-  $tag = $vars['label_hidden'] ? 'div' : 'section';
+  $tag = $vars['tag'];
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
 
   return $output;

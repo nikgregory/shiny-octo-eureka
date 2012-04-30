@@ -6,72 +6,107 @@
  */
 
 
-.node /* Node wrapper */ {
+/* Node wrapper */
+.node  {
   margin-bottom: 20px;
 }
 
-.preview .node /* Preview of the content before submitting new or updated content */ {
+
+/* Preview of the content before submitting new or updated content */
+.preview .node {
   /* background-color: #ffffea; Drupal core uses a #ffffea background */
 }
 
-.node-promoted /* A node that has been promoted to the front page */ {
+
+/* A node that has been promoted to the front page */
+.node-promoted {
 }
 
-.node-sticky /* A sticky node (displayed before others in a list) */ {
+
+/* A sticky node (displayed before others in a list) */
+.node-sticky {
 }
 
-.node-by-viewer /* A node created by the current user */ {
+
+/* A node created by the current user */
+.node-by-viewer {
 }
 
-.node-teaser /* A node displayed as teaser */ {
+
+/* A node displayed as teaser */
+.node-teaser {
 }
+
 
 /* Zebra stripe node lists */
 .node.odd {
 }
 
+
 .node.even {
 }
 
 
-
-
-/* All nodes are given a node-FOO class that describes the type of content that
- * it is. If you create a new content type called "my-custom-type", it will
- * receive a "node-my-custom-type" class.
+/*
+ * All nodes are given a node-[content-tyopt] class. If you create a new content
+ * type called "my-custom-type", it will receive a "node-my-custom-type" class.
  */
-.node-page /* Page content node */ {
+
+/* Page content node */
+.node-page {
 }
 
-.node-article /* Article content node */ {
+
+/* Article content node */
+.node-article {
 }
 
-.node-book /* Book content node */ {
+
+/* Book content node */
+.node-book {
 }
 
-.node-forum /* Forum content node */ {
+
+/* Forum content node */
+.node-forum {
 }
 
-.node-poll /* Poll content node */ {
+
+/* Poll content node */
+.node-poll {
 }
 
-h2.node-title /* Node title */ {
+
+/* Node title */
+.node-title {
 }
 
-.node .user-picture /* The picture of the node author */ {
+
+/* The picture of the node author */
+.node .user-picture {
 }
 
-.node .submitted /* The "posted by" information */ {
+
+/* The "posted by" information */
+.node .submitted {
 }
 
-.node .submitted .username /* The "posted by" user */ {
+
+/* The "posted by" user */
+.node .submitted .username {
 }
 
-.node .submitted  time /* The "posted by" datetime wrapper */ {
+
+/* The "posted by" datetime wrapper */
+.node .submitted  time {
 }
 
-.node .node-content /* Node's content wrapper */ {
+
+/* Node's content wrapper */
+.node .node-content {
 }
 
-.node ul.links /* Node links. See also the ul.links declaration in the pages.css. */ {
+
+/* Node links. See also the ul.links declaration in the pages.css. */
+.node ul.links  {
 }

@@ -17,6 +17,7 @@ body {
   font-size: 11pt;
 }
 
+
 /* Links */
 a {
   background: transparent;
@@ -25,11 +26,13 @@ a {
   color: rgb(0, 0, 238);
 }
 
+
 a[href^="http://"]:after,
 a[href^="http://"]:visited:after {
   content:" (" attr(href) ") ";
   font-size: 10pt;
 }
+
 
 /* Strip backgrounds of likely candidates */
 header,
@@ -57,6 +60,7 @@ table {
   background:none !important;
 }
 
+
 /* Hide various parts of the site. */
 .sidebar,
 #breadcrumb,
@@ -77,20 +81,24 @@ ul.links a,
   display: none;
 }
 
+
 /* Display the main content region */
 .region-content {
   display: block !important;
 }
+
 
 /* Layout */
 #header {
   margin-bottom: 20px;
 }
 
+
 .content-inner {
   margin: 0 !important;
   padding: 0 !important;
- }
+}
+
 
 /* HTML elements */
 h1,
@@ -105,21 +113,26 @@ h6 {
   line-height: 1;
 }
 
+
 h1 {
   font-size: 14pt;
 }
+
 
 h2{
   font-size: 13pt;
 }
 
+
 h3{
   font-size: 12pt;
 }
 
-h4,h5,h6{
+
+h4, h5, h6{
   font-size: 11pt;
 }
+
 
 h1 a,
 h2 a,
@@ -133,14 +146,17 @@ h6 a,
   color: rgb(51, 51, 51);
 }
 
+
 hgroup a:link,
 hgroup a:visited {
   text-decoration: none;
 }
 
+
 #page-title {
   margin-top: 20px;
 }
+
 
 pre,
 code,
@@ -152,6 +168,7 @@ var {
   font-family: Consolas, "Lucida Console", Menlo, Monaco, "DejaVu Sans Mono", monospace, sans-serif; /* Safari hack */
 }
 
+
 blockquote {
   margin: 20px;
   padding: 10px;
@@ -160,20 +177,24 @@ blockquote {
   background: rgb(238, 238, 238);
 }
 
+
 hr {
   background-color: rgb(102, 102, 102);
 }
+
 
 /* Header, Logo, Site name */
 header {
   padding-bottom: 20px;
 }
 
+
 #logo img {
   padding: 0 10px 0 0;
   margin: 0 !important;
   float: none !important;
 }
+
 
 /* Images */
 img {
@@ -182,9 +203,11 @@ img {
   page-break-inside: avoid;
 }
 
+
 a img {
   border:none;
 }
+
 
 /* Table */
 table {
@@ -192,10 +215,12 @@ table {
   text-align: left;
 }
 
+
 th {
   border-bottom: 1px solid rgb(51, 51, 51);
   font-weight: 700;
 }
+
 
 td {
   border-bottom: 1px solid rgb(51, 51, 51);
@@ -205,27 +230,33 @@ th,td {
   padding: 4px 10px 4px 0;
 }
 
+
 tfoot {
   font-style: italic;
 }
+
 
 caption {
   margin-bottom: 10px;
   text-align: left;
 }
 
+
 thead {
   display: table-header-group;
 }
+
 
 tr {
   page-break-inside: avoid;
 }
 
+
 /* Forms */
 form {
   margin-bottom: 10px;
 }
+
 
 /* Poll module */
 .poll .text,
@@ -234,9 +265,11 @@ form {
   text-align: left;
 }
 
+
 .poll form {
   margin-bottom: 0;
 }
+
 
 /* Articles */
 .article {
@@ -244,6 +277,7 @@ form {
   overflow: hidden;
   page-break-inside: avoid;
 }
+
 
 .submitted,
 .submitted a {

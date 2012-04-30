@@ -228,15 +228,6 @@ function adaptivetheme_process_node(&$vars, $hook) {
     $vars['panel_suffix'] = '</article>';
   }
   */
-
-  /* this does not work, its a test...
-  if (module_exists('panelizer')) {
-    if (isset($vars['node']->panelizer)) {
-      $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
-      $vars['panel_suffix'] = '</article>';
-    }
-  }
-  */
 }
 
 /**
@@ -246,7 +237,7 @@ function adaptivetheme_process_comment(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Strip default drupal classes if not required
+  // Strip default drupal classes if not required.
   if (at_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
     $striped_classes = array('comment-by-anonymous','comment-by-node-autho','comment-by-viewer','comment-new');
@@ -256,6 +247,20 @@ function adaptivetheme_process_comment(&$vars, $hook) {
       }
     }
     $vars['classes'] = trim(implode(' ', $classes));
+  }
+}
+
+/**
+ * Process variables for field.tpl.php
+ */
+function adaptivetheme_process_field(&$vars) {
+
+ // In the context of HTML5 we need to account for sectioning, so this sets
+ // the top level element as either <section> (field label is showing) or <div>
+ // (field label is hidden).
+  $vars['tag'] = 'section';
+  if (isset($vars['label_hidden']) && $vars['label_hidden'] == TRUE) {
+    $vars['tag'] = 'div';
   }
 }
 

@@ -15,6 +15,7 @@ table {
   width: 100%;
 }
 
+
 table,
 thead,
 tbody,
@@ -24,9 +25,11 @@ td {
   border-color: #ccc;
 }
 
+
 table.sticky-header {
   z-index: 10;
 }
+
 
 table,
 td,
@@ -34,31 +37,37 @@ th {
   vertical-align: middle;
 }
 
+
 caption,
 th,
 td {
   text-align: left;
 }
 
+
 thead th {
   color: #494949;
   font-weight: 700;
 }
 
+
 td,
 th {
   border-bottom: 0;
   margin: 0;
-  padding: 5px 7px; /* Reset the padding on th and td to something more usable */
+  padding: 5px 7px;
 }
+
 
 tbody {
 }
+
 
 tr.even,
 tr.odd {
   border-bottom: 0;
 }
+
 
 /* Table row striping with classes and nth-child selector */
 tr.odd,
@@ -68,19 +77,24 @@ tr:nth-child(2n+1) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+
 tr.even {
   background-color: #fff;
 }
 
+
 tr.drag {
 }
+
 
 tr.drag-previous {
 }
 
+
 tr.odd td.active {
   background-color: #eee;
 }
+
 
 tr.even td.active {
   background-color: #f7f7f7;
@@ -93,11 +107,11 @@ tr.even td.active {
  */
 
 /* Core sets white-space to nowrap, which makes no sense at all */
-#forum td.created, 
-#forum td.posts, 
-#forum td.topics, 
-#forum td.last-reply, 
-#forum td.replies, 
+#forum td.created,
+#forum td.posts,
+#forum td.topics,
+#forum td.last-reply,
+#forum td.replies,
 #forum td.pager {
   white-space: normal;
 }

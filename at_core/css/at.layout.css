@@ -1,5 +1,6 @@
 /* Layout */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -33,11 +34,6 @@ html, body {
 .region-footer,
 #block-admin-display-form  {
   clear: both;
-}
-
-/* Strip block margin inside content column area. */
-.content-inner .block {
-  margin: 0;
 }
 
 /* Compass clearfix */

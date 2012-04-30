@@ -4,9 +4,11 @@
  */
 
 
-.form-item /* Wrapper for a form element (or group of form elements) and its label */ {
+/* Wrapper for a form element (or group of form elements) and its label */
+.form-item  {
   margin: 18px 0;
 }
+
 
 /* Focus styles for accessibility and usabiltiy */
 .form-text:focus,
@@ -17,53 +19,74 @@
   background: #ffffdf;
 }
 
+
+/* Focus styles textarea, keep it white for high readability */
 textarea:focus {
   border: 1px solid #fc0;
   background: #fff;
 }
 
+
+/* Highlight the form elements that caused a form submission error */
 .form-item input.error,
 .form-item textarea.error,
-.form-item select.error /* Highlight the form elements that caused a form submission error */ {
+.form-item select.error {
   border: 1px solid #c00;
 }
 
-.form-item label /* The label for a form element */ {
+
+/* The label for a form element */
+.form-item label {
   display: block;
   font-weight: bold;
 }
 
-.form-item label.option /* The label for a radio button or checkbox */ {
+
+/* The label for a radio button or checkbox */
+.form-item label.option {
   display: inline;
   font-weight: normal;
 }
 
-.form-required /* The part of the label that indicates a required field */ {
+
+/* The part of the label that indicates a required field */
+.form-required {
   color: #c00;
 }
 
-.form-item .description /* The descriptive help text (separate from the label) */ {
+
+/* The descriptive help text (separate from the label) */
+.form-item .description {
   font-size: 0.8em;
   color: #555;
 }
 
+
+/* Core indents descriptions and it looks bad, reset the margin */
 .form-type-radio .description,
 .form-type-checkbox .description {
   margin-left: 0;
 }
 
+
+/* Pack groups of checkboxes and radio buttons closer together */
 .form-checkboxes .form-item,
-.form-radios .form-item /* Pack groups of checkboxes and radio buttons closer together */ {
-  margin: 0; /* Drupal core uses "0.4em 0" */
+.form-radios .form-item  {
+  margin: 0;
 }
 
-.form-submit /* The submit button */ {
+
+/* The submit button */
+.form-submit {
 }
 
+
+/* Inline labels and form divs */
 .container-inline div,
-.container-inline label /* Inline labels and form divs */ {
+.container-inline label {
   display: inline;
 }
+
 
 /* Fieldsets */
 fieldset {
@@ -73,9 +96,11 @@ fieldset {
   padding: 10px;
 }
 
+
 fieldset fieldset:last-child {
   margin-bottom: 0;
 }
+
 
 legend,
 fieldset legend {
@@ -84,19 +109,21 @@ fieldset legend {
   font-weight: 400;
   padding: 0 10px 0 0;
   white-space: normal;
-  *margin-left: -7px;
 }
+
 
 html.js fieldset.collapsed {
   background: transparent;
   padding-top: 5px;
 }
 
+
 /* Inputs */
 input {
   margin: 0;
   max-width: 100%;
 }
+
 
 input.text,
 input.title,
@@ -106,11 +133,13 @@ select {
   margin: 0;
 }
 
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+
 
 button,
 input[type="button"],
@@ -118,18 +147,20 @@ input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
-  *overflow: visible;
 }
+
 
 button[disabled],
 input[disabled] {
   cursor: default;
 }
 
+
 input.text,
 input.title {
   padding: .5em;
 }
+
 
 input.form-text,
 textarea {
@@ -138,36 +169,42 @@ textarea {
   padding: 2px;
 }
 
+
+/* Adjust trobber background position when changing text field padding */
 html.js input.form-autocomplete {
-  background-position: 100% 4px; /* Adjust trobber background position when changing text field padding */
+  background-position: 100% 4px;
 }
+
 
 textarea,
 input {
   font: 1em normal Arial, Helvetica, sans-serif;
 }
 
+
 textarea {
   overflow: auto;
   vertical-align: top;
 }
 
+
 div.resizable-textarea textarea {
   margin-top: 0;
 }
+
 
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
-  *height: 13px;
-  *width: 13px;
 }
+
 
 /* Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4 */
 [hidden] {
   display: none;
 }
+
 
 /* Tips for Drupal's input formats */
 .tips  {
@@ -176,18 +213,22 @@ input[type="radio"] {
   padding: 0;
 }
 
+
 .field-type-text-long fieldset {
   padding: 10px 0;
 }
+
 
 .field-type-text-long fieldset .form-item {
   margin: 0;
   padding: 0 0 0 15px;
 }
 
+
 fieldset .filter-help {
   padding: 0 15px 5px;
 }
+
 
 .filter-guidelines {
   font-size: .923em;
@@ -212,27 +253,33 @@ fieldset .filter-help {
   text-align: left; /* LTR */
 }
 
+
 #user-login-form ul {
   margin: 0;
   padding: 0;
 }
 
+
 #user-login-form li.openid-link,
 #user-login-form li.user-link {
 }
+
 
 #user-login ul {
   margin: 0 0 5px;
 }
 
+
 #user-login ul li {
   margin: 0;
 }
+
 
 #user-login-form .item-list li {
   list-style: none;
   margin: 0;
 }
+
 
 #user-login-form li.openid-link,
 #user-login li.openid-link {
@@ -247,16 +294,22 @@ fieldset .filter-help {
  * styling of list items.
  */
 
-#user-login-form ul /* OpenID creates a new ul above the login form's links. */ {
-  margin-bottom: 0; /* Position OpenID's ul next to the rest of the links. */
+/* OpenID creates a new ul above the login form's links - position it correctly */
+#user-login-form ul  {
+  margin-bottom: 0;
 }
 
+
+/* The "Log in using OpenID" link */
 html.js #user-login-form li.openid-link,
-#user-login-form li.openid-link /* The "Log in using OpenID" link. */ {
+#user-login-form li.openid-link {
 }
 
-#user-login-form li.user-link /* The "Cancel OpenID login" link. */ {
+
+/* The "Cancel OpenID login" link */
+#user-login-form li.user-link {
 }
+
 
 html.js #user-login-form li.openid-link,
 #user-login-form li.openid-link,
@@ -264,12 +317,9 @@ html.js #user-login-form li.openid-link,
   cursor: pointer;
 }
 
+
 #user-login ul {
 }
-
-
-
-
 
 
 /*
@@ -282,10 +332,12 @@ input[type="search"] {
   box-sizing: content-box;
 }
 
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
+
 
 .panel-pane #search-block-form {
   margin-bottom: 20px;
@@ -300,23 +352,28 @@ fieldset#edit-advanced fieldset {
   margin: 0 10px 10px 0;
 }
 
+
 fieldset#edit-advanced fieldset .fieldset-legend {
   background: none;
   padding-left: 1em;
 }
 
+
 .advanced-search-submit {
   clear: both;
 }
+
 
 .search-advanced .criterion {
   float: none;
   margin: 0 5px;
 }
 
+
 #edit-keywords-fieldset .form-item:first-child {
   margin-top: 5px;
 }
+
 
 #search-form {
   margin: 10px 0;
@@ -336,23 +393,28 @@ form th {
   border-bottom: 3px solid #ccc;
 }
 
+
 form tbody {
   border-top: 1px solid #ccc;
 }
+
 
 form tr.even {
   background-color: #fff;
 }
 
+
 form table .item-list ul {
   margin: 0;
 }
 
+
+/* IE doesn't display borders on table rows */
 .lt-ie8 tr.even th,
 .lt-ie8 tr.even td,
 .lt-ie8 tr.odd th,
 .lt-ie8 tr.odd td {
-  border-bottom: 1px solid #ccc; /* IE doesn't display borders on table rows */
+  border-bottom: 1px solid #ccc;
 }
 
 

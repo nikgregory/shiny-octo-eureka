@@ -3,42 +3,55 @@
  * Views Styling
  */
 
- 
+
 /* Views */
 .view {
 }
 
+
 .view-content {
 }
+
 
 .views-row {
 }
 
+
 .views-row-odd {
 }
+
 
 .views-row-even {
 }
 
+
 .views-row-first {
 }
+
 
 .views-row-last {
 }
 
+
 .views-field {
 }
+
 
 .views-field-title {
 }
 
+
 .views-field .field-content {
 }
 
-.page-views /* Body class when viewing a Views page */ {
+
+/* Body class when viewing a Views page */
+.page-views {
 }
 
-.block-views /* Block class */ {
+
+/* Block class */
+.block-views {
 }
 
 
@@ -46,11 +59,14 @@
 .view-content .skin-default {
 }
 
+
 .view-content .skin-default img {
 }
 
+
 .views-slideshow-controls-top {
 }
+
 
 .views-slideshow-controls-bottom {
 }

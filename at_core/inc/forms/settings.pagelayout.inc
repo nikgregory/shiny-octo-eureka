@@ -33,6 +33,9 @@
     }
   }
 
+  // Unit options
+  $unit_options = array('%' => '%', 'px' => 'px', 'em' => 'em');
+
   // Set a message for when responsive layout is turned off
   $disable_message = t('<p>The responsive layout is disabled, only the Standard layout is now used.</p><p>To re-enable uncheck the "Disable responsive layout and styles" checkbox under the "Settings" tab.</p>');
 
@@ -65,11 +68,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_sidebar_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
     '#type' => 'textfield',
@@ -96,11 +95,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_page_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
     '#type'  => 'textfield',
@@ -126,10 +121,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_max_width_unit'),
-    '#options' => array(
-      'px' => 'px',
-      'em' => 'em',
-    ),
+    '#options' => array('px' => 'px', 'em' => 'em'),
     '#states' => array(
       'visible' => array('input[name="bigscreen_set_max_width"]' => array('checked' => TRUE)),
     ),
@@ -206,11 +198,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_landscape_sidebar_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
@@ -243,11 +231,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_landscape_page_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
     '#type'  => 'textfield',
@@ -308,11 +292,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_portrait_sidebar_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
     '#type' => 'textfield',
@@ -345,11 +325,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_portrait_page_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
     '#type'  => 'textfield',
@@ -423,11 +399,7 @@
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('smartphone_landscape_sidebar_unit'),
-    '#options' => array(
-      'px' => 'px',
-      '%' => '%',
-      'em' => 'em',
-    ),
+    '#options' => $unit_options,
   );
   $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
     '#type' => 'textfield',

@@ -145,9 +145,8 @@ ul.links {
 .region-inner {}
 
 
-// Remove margin for nested regions, be very careful about overriding this, you could quickly bork the layout
+// Regions can be nested, such as when using Panels
 .region-inner .region-inner {
-  margin: 0;
 }
 
 
@@ -214,7 +213,7 @@ div.messages,
 // Full Width Wrappers
 // These are used in the optional page--full-width-wrappers.tpl.php template.
 // All have internal .container classes. In the full width wrapper template the
-// .container classes set the width or max-width of the contained element - you 
+// .container classes set the width or max-width of the contained element - you
 // can style this but never add any width/margin/padding/borders etc to .container
 //
 
@@ -276,7 +275,7 @@ div.messages,
 
 // Footer wrapper
 #footer-wrapper {
-  // Debug styles, is this working
+  // Debug styles, is this working?
   background: #666;
   color: #fff;
 
@@ -292,53 +291,44 @@ div {
   &.messages {
     margin: 1.5em 0;
 
-    /* Drupal core uses "6px 0" margin */
     ul {
       margin-top: 0;
       margin-bottom: 0;
     }
   }
 
-  &.status {}
+  &.status {
+  }
 
   &.warning {
-    /* border: 1px solid #f0c020; */
-    /* Drupal core uses: 1px solid #f0c020 */
   }
 }
 
 tr.warning {
-  /* border: 1px solid #f0c020; */
-  /* Drupal core uses: 1px solid #f0c020 */
 }
 
 
 div.error,
-tr.error {}
+tr.error {
+}
 
 
 .error {
-  /* color: #e55; */
-  /* Drupal core uses a #e55 background */
 }
 
 
 .warning {
-  /* color: #e09010; */
-  /* Drupal core uses a #e09010 background */
 }
 
 
+// Unpublished nodes
 .node-unpublished,
-.comment-unpublished /* Unpublished nodes */ {
-  /* background-color: #fff4f4; Drupal core uses a #fff4f4 background */
+.comment-unpublished {
 }
 
 
 .node-unpublished,
 .comment-unpublished {
-  /* background-color: #fff4f4; */
-  /* Drupal core uses a #fff4f4 background */
 
   p.unpublished {
     color: #fff;
@@ -358,11 +348,12 @@ tr.error {}
 }
 
 
+// Otherwise these elements will appear below the "Unpublished" text
 .lt-ie8 {
   .node-unpublished > *,
   .comment-unpublished > * {
     position: relative;
-    /* Otherwise these elements will appear below the "Unpublished" text. */
+
   }
 }
 

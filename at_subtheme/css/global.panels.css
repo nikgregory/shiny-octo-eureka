@@ -3,9 +3,11 @@
  * Panels Styling
  */
 
- 
-.page-panels /* Body class when viewing a Panels page */ {
+
+/* Body class when viewing a Panels page */
+.page-panels  {
 }
+
 
 /*
  * AT Panels use different classes to the standard Panels layouts, instead
@@ -14,53 +16,74 @@
  * sets of classes below.
  */
 
-/* All Panels Layouts */
-.panel-display /* Main wrapper - this will work for AT Panels, Gpanels and Panels module layouts */ {
-}
-
-.panel-panel /* Main wrapper on each panel region - this will work for AT Panels, Gpanels and Panels module layouts */ {
-}
-
-.panel-panel .inside /* Inner wrapper on each panel region - this will work for AT Panels, Gpanels and Panels module layouts */ {
+/* Main wrapper - this will work for AT Panels, Gpanels and Panels module layouts */
+.panel-display  {
 }
 
 
-/* AT Panel and Gpanel Layouts */
-.at-panel /* Main wrapper - this only works for AT Panels and Gpanels */ {
+/* Main wrapper on each panel region - this will work for AT Panels, Gpanels and Panels module layouts */
+.panel-panel {
 }
 
-.at-panel .region /* Main wrapper on each panel region - this only works for AT Panels and Gpanels */ {
-}
 
-.at-panel .region-inner /* Inner wrapper on each panel region - this only works for AT Panels and Gpanels */ {
-}
-
-.at-panel .panel-row  /* Some AT Panels and Gpanels use row wrappers to help control the layout */ {
+/* Inner wrapper on each panel region - this will work for AT Panels, Gpanels and Panels module layouts */
+.panel-panel .inside  {
 }
 
 
 
 /*
+ * AT Panel and Gpanel Layouts
+ */
+
+/* Main wrapper - this only works for AT Panels and Gpanels */
+.at-panel {
+}
+
+
+/* Main wrapper on each panel region - this only works for AT Panels and Gpanels */
+.at-panel .region {
+}
+
+
+/* Inner wrapper on each panel region - this only works for AT Panels and Gpanels */
+.at-panel .region-inner {
+}
+
+
+/* Some AT Panels and Gpanels use row wrappers to help control the layout */
+.at-panel .panel-row {
+}
+
+
+/*
  * Panes
  */
+
 .panel-pane {
   margin-bottom: 20px;
 }
 
+
 .pane-inner {
 }
+
 
 .pane-title {
 }
 
+
 .pane-content {
 }
+
 
 .panel-pane .feed {
 }
 
+
 .panel-pane .links {
 }
+
 
 .panel-pane .more-link {
 }
@@ -69,9 +92,11 @@
 /*
  * Mini Panels
  */
+
 .block-panels_mini {
   padding: 0;
 }
+
 
 .block-panels-mini .block-inner  {
 }

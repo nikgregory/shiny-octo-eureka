@@ -4,119 +4,192 @@
  */
 
 
-.block /* Block wrapper */ {
+/* Block wrapper */
+.block {
   margin-bottom: 20px;
 }
 
+
+/* Block inner wrapper, used mainly for gutter margins */
 .block-inner {
 }
 
-.block.first /* The first block in the region */ {
+
+/* The first block in the region */
+.block.first {
 }
 
-.block.last /* The last block in the region */ {
+
+/* The last block in the region */
+.block.last {
 }
 
-.block.odd /* Zebra striping for each block in the region */ {
+
+/* Zebra striping for each block in the region */
+.block.odd {
 }
 
-.block.even /* Zebra striping for each block in the region */ {
+
+/* Zebra striping for each block in the region */
+.block.even {
 }
 
-.block-title /* Block title */ {
+
+/* Block title */
+.block-title {
 }
 
-.block-content /* Block content wrapper */ {
+
+/* Block content wrapper */
+.block-content {
 }
 
-.block-content ul, 
-.block-content ol /* Match item list and block menu margin and padding */ {
+
+/* Match item list and block menu margin and padding */
+.block-content ul,
+.block-content ol {
   margin: 0 0 0 15px;
   padding: 0;
 }
 
-.block-content li  /* Match item list and block menu margin and padding */ {
+
+/* Match item list and block menu margin and padding */
+.block-content li {
   margin: 0;
   padding: 0;
 }
 
-#block-aggregator-category-1 /* Block for the latest news items in the first category */ {
+
+/* Block for the latest news items in the first category */
+#block-aggregator-category-1 {
 }
 
-#block-aggregator-feed-1 /* Block for the latest news items in the first feed */ {
+
+/* Block for the latest news items in the first feed */
+#block-aggregator-feed-1 {
 }
 
-#block-block-1 /* First block created with "Add block" link */ {
+
+/* First block created with "Add block" link */
+#block-block-1 {
 }
 
-#block-blog-recent /* "Recent blog posts" block */ {
+
+/* "Recent blog posts" block */
+#block-blog-recent {
 }
 
-#block-book-navigation /* "Book navigation" block for the current book's table of contents */ {
+
+/* "Book navigation" block for the current book's table of contents */
+#block-book-navigation {
 }
 
-#block-comment-recent /* "Recent comments" block */ {
+
+/* "Recent comments" block */
+#block-comment-recent {
 }
 
-#block-forum-active /* "Active forum topics" block */ {
+
+/* "Active forum topics" block */
+#block-forum-active {
 }
 
-#block-forum-new /* "New forum topics" block */ {
+
+/* "New forum topics" block */
+#block-forum-new {
 }
 
-#block-locale-language /* Language switcher block */ {
+
+/* Language switcher block */
+#block-locale-language {
 }
 
-#block-menu-menu-NAME /* Custom menu block  */ {
+
+/* Custom menu block  */
+#block-menu-menu-NAME {
 }
 
-#block-node-recent /* "Recent content" block */ {
+
+/* "Recent content" block */
+#block-node-recent {
 }
 
-#block-node-syndicate /* "Syndicate" block for primary RSS feed; see also page.css's .feed-icon */ {
+
+/* "Syndicate" block for primary RSS feed; see also page.css's .feed-icon */
+#block-node-syndicate {
 }
 
-#block-poll-recent /* "Most recent poll" block */ {
+
+/* "Most recent poll" block */
+#block-poll-recent {
 }
 
-#block-profile-author-information /* "Author information" block for the profile of the page's author */ {
+
+/* "Author information" block for the profile of the page's author */
+#block-profile-author-information {
 }
 
-#block-search-form /* "Search form" block */ {
+
+/* "Search form" block */
+#block-search-form {
 }
 
-#block-shortcut-shortcuts /* "Shortcuts" block */ {
+
+/* "Shortcuts" block */
+#block-shortcut-shortcuts {
 }
 
-#block-statistics-popular /* "Popular content" block */ {
+
+/* "Popular content" block */
+#block-statistics-popular {
 }
 
-#block-system-main-menu /* "Main menu" block */ {
+
+/* "Main menu" block */
+#block-system-main-menu {
 }
 
-#block-system-management /* "Management" block for Drupal management menu */ {
+
+/* "Management" block for Drupal management menu */
+#block-system-management {
 }
 
-#block-system-navigation /* "Navigation" block for Drupal navigation menu */ {
+
+/* "Navigation" block for Drupal navigation menu */
+#block-system-navigation {
 }
 
-#block-system-user-menu /* "User menu" block for Drupal user menu */ {
+
+/* "User menu" block for Drupal user menu */
+#block-system-user-menu {
 }
 
-#block-system-help /* "System help" block */ {
+
+/* "System help" block */
+#block-system-help {
 }
 
-#block-system-main /* "Main page content" block */ {
+
+/* "Main page content" block */
+#block-system-main {
 }
 
-#block-system-powered-by /* "Powered by Drupal" block */ {
+
+/* "Powered by Drupal" block */
+#block-system-powered-by {
 }
 
-#block-user-login /* "User login form" block */ {
+
+/* "User login form" block */
+#block-user-login {
 }
 
-#block-user-new /* "Who's new" block for a list of the newest users */ {
+
+/* "Who's new" block for a list of the newest users */
+#block-user-new {
 }
 
-#block-user-online /* "Who's online" block for a list of the online users */ {
+
+/* "Who's online" block for a list of the online users */
+#block-user-online {
 }
