@@ -21,9 +21,10 @@
 //
 // To turn off support for IE6 or IE7, set those variables to false.
 //
-// AdaptiveTheme does not require special handling for IE8 or later. But Compass defines
-// more Legacy IE variables that you might find useful for your theme. See the
-// documentation for them at http://compass-style.org/reference/compass/support/
+// AdaptiveTheme does not require special handling for IE8 or later. But Compass
+// defines more Legacy IE variables that you might find useful for your theme.
+// See the documentation at http://compass-style.org/reference/compass/support/
+//
 $legacy-support-for-ie6: true;
 $legacy-support-for-ie7: true;
 
@@ -34,7 +35,6 @@ $legacy-support-for-ie7: true;
 // SCSS. These font stacks are an exact copy of the stacks found in AT Cores
 // theme settings for web safe fonts.
 //
-
 // First, let's create some font stacks.
 $sans-serif-small:            'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 $sans-serif-large:            Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;
@@ -48,14 +48,23 @@ $impact:                      Impact, Haettenschweiler, 'Franklin Gothic Bold', 
 $mono:                        Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
-$font-body: $sans-serif-large;
-$font-monospace: $mono;
+$font-body: $lucida;
+$font-headings: $impact;
+
+
+//
+// Gutters
+// Set a variable for the gutters. Adaptivetheme allows you to easly modify the
+// global gutter width for precise control over the design. Panel pages need
+// special gutter wrangling when a Panel is inside #content wrapper, so to ease
+// setting this we use a variable.
+//
+$gutter-width: 10px;
 
 
 //
 // Partials to be shared with all .scss files.
 //
-
 @import 'compass/support';                     // Add Compass' IE and vendor prefix support variables.
 @import 'compass/utilities/general/clearfix';  // Better than Drupal's clearfix.
 @import 'compass/utilities/sprites';           // See http://compass-style.org/help/tutorials/spriting/

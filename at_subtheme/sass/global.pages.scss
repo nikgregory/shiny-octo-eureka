@@ -150,7 +150,7 @@ ul.links {
 }
 
 
-// This will globally change the gutter widths for you entire site, be careful!
+// Set the gutter width for you entire site, $gutter-width is set in base.scss
 .block-inner,
 .pane-inner,
 div.messages,
@@ -161,13 +161,13 @@ div.messages,
 #main-content,
 #attribution,
 .at-panel .rounded-corner {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: $gutter-width;
+  margin-right: $gutter-width;
 }
-// Panel pages need negative margin equal to the gutter width applied to #content, this is taken care of in theme settings as per above for normal gutters
+// Panel pages need negative margin applied to #content equal to the gutter width
 .page-panels #content {
-  margin-left: -10px;
-  margin-right: -10px;
+  margin-left: -$gutter-width;
+  margin-right: -$gutter-width;
 }
 
 
