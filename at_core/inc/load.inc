@@ -28,7 +28,9 @@ function load_failure($filepath, $theme_name) {
 
   if (!empty($files_list)) {
     watchdog($theme_name, 'CSS file missing or not found @filename', array('@filename' => $filepath), WATCHDOG_ERROR);
-    drupal_set_message($message, 'warning');
+    if (user_is_logged_in()) {
+      drupal_set_message($message, 'warning');
+    }
   }
 }
 

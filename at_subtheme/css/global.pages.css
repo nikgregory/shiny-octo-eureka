@@ -17,7 +17,8 @@ body {
 }
 
 
-/* Page wrapper, includes the .container class which sets the overall page or section width */
+/* Page wrapper, includes the .container class which sets the overall page or
+   section width */
 #page  {
 }
 
@@ -37,12 +38,14 @@ body {
 }
 
 
-/* Wraps the main-content-header, the content region and feed-icons */
+/* Wraps the main-content-header, the content region and feed-icons. Use this
+   wrapper to style the entire main content column */
 #main-content  {
 }
 
 
-/* Wraps the content region */
+/* Wraps the content region, avoid applying styles to this wrapper, its used
+   mainly for position and invisible gutters and can be problematic to style */
 #content {
 }
 
@@ -52,7 +55,7 @@ body {
 }
 
 
-/* Region wrapper - anything that adds width or positioning can break the layout */
+/* Region wrapper, anything that adds width or positioning can break the layout! */
 .region {
 }
 
@@ -67,7 +70,8 @@ body {
 }
 
 
-/* Gutters - gutters set in theme settings will override these values: see Extensions > Modify Output > Design */
+/* Gutters - if gutters are set in theme settings they will override these
+   values: see Extensions > Modify Output > Design */
 #main-content,
 .block-inner,
 .pane-inner,
@@ -80,9 +84,15 @@ div.messages {
   margin-left: 10px;
   margin-right: 10px;
 }
+/* Panel pages need negative margin equal to the gutter width applied to #content,
+  this is taken care of in theme settings as per above for normal gutters */
+.page-panels #content {
+  margin-left: -10px;
+  margin-right: -10px;
+}
 
 
-/* AT Panels may need special margin wrangling when in the content region */
+/* AT Panels may need additional margin wrangling when in the content region */
 #content .at-panel {
 }
 
@@ -98,7 +108,8 @@ div.messages {
 }
 
 
-/* hgroup wrapper for website name and slogan, be careful with display properties as this can be hidden */
+/* hgroup wrapper for website name and slogan, be careful with display properties
+   as this can be hidden */
 #name-and-slogan {
 }
 
@@ -145,7 +156,8 @@ h1#page-title {
 }
 
 
-/* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */
+/* Important messages (status, warning, and error) for the user. See also the
+   declarations in messages.css. */
 div.messages  {
   margin: 1.5em 10px; /* Drupal core uses "6px 0" margin */
 }
@@ -292,7 +304,8 @@ ul.links li {
 
 
 /*
- * Full Width Wrappers - these are used in the optional page--full-width-wrappers.tpl.php template.
+ * Full Width Wrappers - these are used in the optional
+ * page--full-width-wrappers.tpl.php template.
  */
 
 #page-wrapper {
