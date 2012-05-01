@@ -37,7 +37,8 @@ function adaptivetheme_three_50_25_25_panels_layouts() {
       ),
       'three-50-25-25-stack-bottom' => array(
         'css' => array(
-          '50' => array('.three-50-25-25 > .region' => 'width:50%'),
+          '75' => array('.three-50-25-25 > div.region-three-50-25-25-first' => 'width:75%'),
+          '25' => array('.three-50-25-25 > div.region-three-50-25-25-second' => 'width:25%'),
           'fdw' => array('.three-50-25-25 > .region-three-50-25-25-third' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),

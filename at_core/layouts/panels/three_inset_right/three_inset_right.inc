@@ -1,7 +1,7 @@
 <?php
 function adaptivetheme_three_inset_right_panels_layouts() {
   $items['three_inset_right'] = array(
-    'title'    => t('AT Three column inset right'),
+    'title'    => t('AT Inset right'),
     'category' => t('AT Responsive Panels - Inset'),
     'icon'     => 'three_inset_right.png',
     'theme'    => 'three_inset_right',

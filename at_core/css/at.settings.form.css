@@ -211,7 +211,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 }
 .panel-option-lists .fieldset-wrapper .fieldset-wrapper {
   padding: 0;
-  margin-left: 3.5%;
+  margin-left: 2.5%;
 }
 .panel-option-lists .fieldset-wrapper > .form-item {
   display: table-row;
@@ -223,7 +223,7 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
 }
 .panel-option-lists .fieldset-wrapper > .form-item > label {
   font-weight: 400;
-  width: 20%;
+  width: 22.5%;
 }
 .panel-option-lists .fieldset-wrapper legend {
   display: block !important; /* need to show these no matter what */
