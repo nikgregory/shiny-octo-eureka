@@ -1801,6 +1801,87 @@ ul.action-links li a:focus {
 }
 
 /* Context module */
+table.context-admin td.ctools-export-ui-operations {
+  padding-top: 15px;
+}
+.context-plugin-title {
+	margin-top: 5px;
+}
+.page-admin-structure-context #edit-info {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.page-admin-structure-context .form-item-condition-mode {
+	padding: 0 15px;
+	margin: 0 0 30px;
+}
+.page-admin-structure-context .context-plugins {
+	margin: 0 10px 15px;
+}
+.page-admin-structure-context .buttons {
+	margin: 0 10px 15px;
+}
+.context-plugins .context-plugin-selector {
+	background: #f0f0f0;
+	width: 24%;
+	border-color: #fff;
+	border-style: solid solid none;
+	border-width: 1px 1px 0;
+}
+.page-admin-structure-context .context-plugins .context-plugin-forms {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	min-height: 148px;
+}
+.page-admin-structure-context .context-plugins .context-plugin-forms .context-plugin-form {
+  padding: 10px 10px 10px 20px;
+}
+.page-admin-structure-context .context-plugins .context-plugin-info {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 0 none;
+	min-height: 130px;
+}
+.page-admin-structure-context .context-plugin-list {
+	border-top: 0;
+	border-bottom: 0;
+	margin: 0;
+	padding: 0;
+}
+.page-admin-structure-context .context-plugin-list li a {
+	padding: 10px;
+	outline: 0;
+	background: #fff;
+}
+.page-admin-structure-context .context-plugin-list li a.active-form {
+  background: #fff;
+}
+.page-admin-structure-context .context-plugins .context-plugin-list li span.remove {
+	background: #ddd;
+	border-radius: 5px;
+	font-size: 0.8em;
+	font-weight: 400;
+	padding: 0 5px;
+	right: 10px;
+	top: 12px;
+}
+/* Very specific form items */
+.form-item-conditions-plugins-menu-values select {
+	min-height: 200px;
+}
+.context-plugin-form-block table {
+	border: 0;
+}
+.context-plugin-form-block tbody {
+  border-top: 0;
+}
+#context-blockform td.blocks, #context-blockform td.selector {
+	border: 0;
+	padding: 0 15px 10px 0;
+	width: 50%;
+}
+#context-blockform td.selector {
+	padding: 0 0 10px 0;
+}
 #context-blockform td.blocks, #context-blockform td.selector {
   vertical-align: top;
 }
@@ -1912,4 +1993,3 @@ ul.action-links li a:focus {
 input[type="radio"],
 input[type="checkbox"] {
 }
-
