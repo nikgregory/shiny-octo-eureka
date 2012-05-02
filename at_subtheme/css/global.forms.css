@@ -10,14 +10,6 @@
 }
 
 
-/* Highlight the form elements that caused a form submission error */
-.form-item input.error,
-.form-item textarea.error,
-.form-item select.error {
-  border: 1px solid #c00;
-}
-
-
 /* The label for a form element */
 .form-item label {
   display: block;
@@ -152,6 +144,23 @@ select {
 /* Adjust trobber background position when changing text field padding */
 html.js input.form-autocomplete {
   background-position: 100% 4px;
+}
+
+
+/* Highlight the form elements that caused a form submission error */
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 1px solid #ed541d;
+}
+
+
+/* Highlight vertical tabs that contain form errors */
+.vertical-tabs ul.vertical-tabs-list li.vertical-tab-button-error a {
+  color: #8c2e0b;
+  background: #fef5f1;
+  outline: 1px solid #ed541d;
+  margin-right: 1px;
 }
 
 

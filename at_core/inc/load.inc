@@ -231,11 +231,11 @@ function load_extensions_css($theme_name) {
     foreach ($settings_css as $css_file) {
       $filepath = $path_to_at_core . '/css/' . $css_file;
       drupal_add_css($filepath, array(
-          'preprocess' => TRUE,
-          'group' => CSS_THEME,
-          'media' => 'screen',
-          'every_page' => TRUE,
-          'weight' => -100,
+        'preprocess' => TRUE,
+        'group' => CSS_THEME,
+        'media' => 'screen',
+        'every_page' => TRUE,
+        'weight' => -100,
         )
       );
     }
@@ -259,9 +259,9 @@ function load_fonts($path, $theme_name) {
   }
   if (!empty($google_font_string)) {
     drupal_add_css($google_font_string, array(
-        'group' => CSS_THEME,
-        'type' => 'external',
-        'weight' => -100,
+      'group' => CSS_THEME,
+      'type' => 'external',
+      'weight' => -100,
       )
     );
   }
@@ -270,10 +270,10 @@ function load_fonts($path, $theme_name) {
   $filepath = $path . '/' . $theme_name . '.fonts.css';
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
-        'preprocess' => TRUE,
-        'group' => CSS_THEME,
-        'media' => 'screen',
-        'every_page' => TRUE,
+      'preprocess' => TRUE,
+      'group' => CSS_THEME,
+      'media' => 'screen',
+      'every_page' => TRUE,
       )
     );
   }
@@ -374,8 +374,7 @@ function load_debuggers($theme_name) {
 
   // Load window size bookmarklet
   if (at_get_setting('show_window_size', $theme_name) === 1) {
-    drupal_add_js($path_to_at_core . '/scripts/window-size.js',
-      array(
+    drupal_add_js($path_to_at_core . '/scripts/window-size.js', array(
       'type' => 'file',
       'scope' => 'footer',
       'group' => JS_THEME,
@@ -411,9 +410,6 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
       'weight' => $weight,
       )
     );
-  }
-  else {
-    load_failure($filepath, $theme_name);
   }
 }
 
@@ -549,13 +545,12 @@ function polly_wants_a_cracker($polly, $theme_name) {
         // "all" - no conditional comment needed, use drupal_add_js()
         if (isset($crackers['all'])) {
           foreach ($crackers['all'] as $script) {
-            drupal_add_js($path_to_at_core . '/' . $script,
-              array(
-                'type' => 'file',
-                'scope' => 'header',
-                'group' => JS_THEME,
-                'preprocess' => TRUE,
-                'cache' => TRUE,
+            drupal_add_js($path_to_at_core . '/' . $script, array(
+              'type' => 'file',
+              'scope' => 'header',
+              'group' => JS_THEME,
+              'preprocess' => TRUE,
+              'cache' => TRUE,
               )
             );
           }
