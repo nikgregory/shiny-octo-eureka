@@ -462,13 +462,27 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   $vars['title_attributes_array']['class'][] = 'node-title';
   $vars['content_attributes_array']['class'][] = 'node-content';
 
-  // Build the submitted by and time elements
+  // AT Core builds additional time and date variables for use in templates
+  
+  // datetime stamp formatted correctly to ISO8601
   $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601!
+
+  // Publication date, formatted with time element
+  $vars['publication_date'] = '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>';
+
+  // Last update variables
+  $vars['datetime_updated'] = format_date($vars['node']->changed, 'custom', 'Y-m-d\TH:i:s\Z');
+  $vars['custom_date_and_time'] = date('jS F, Y - g:ia', $vars['node']->changed);
+
+  // Last updated formatted in time element
+  $vars['last_update'] = '<time datetime="' . $vars['datetime_updated'] . '" pubdate="pubdate">' . $vars['custom_date_and_time'] . '</time>';
+
+  // Build the submitted variable used by default in node templates
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
     $vars['submitted'] = t('Submitted by !username on !datetime',
       array(
         '!username' => $vars['name'],
-        '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>',
+        '!datetime' => $vars['publication_date'],
       )
     );
   }

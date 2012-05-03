@@ -322,8 +322,8 @@
 
 
   ; Image alignment
-  settings[image_alignment]        = 'ia-l'
-  settings[image_alignment_teaser] = 'iat-l'
+  settings[image_alignment]        = 'ia-n'
+  settings[image_alignment_teaser] = 'iat-n'
   settings[image_caption_full]     = 0
   settings[image_caption_teaser]   = 0
 

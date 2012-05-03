@@ -4,7 +4,7 @@
   $form['at']['meta'] = array(
     '#type' => 'fieldset',
     '#title' => t('Metatags'),
-    '#description' => t('<h3>Metatags</h3><p>Configure meta tags for mobile devices.'),
+    '#description' => t('<h3>Metatags</h3><p>Configure metatags for mobile devices. To omit a metatag leave it empty.'),
     '#weight' => -40,
   );
   $form['at']['meta']['mobile'] = array(

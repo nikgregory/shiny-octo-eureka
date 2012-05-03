@@ -22,49 +22,53 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
     if (at_get_setting('enable_mobile_metatags', $theme_name) === 1) {
       // Viewport
-      $adaptivetheme_meta_viewport = check_plain(at_get_setting('adaptivetheme_meta_viewport', $theme_name));
-      $head_elements['adaptivetheme_meta_viewport'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => 'viewport',
-          'content' => $adaptivetheme_meta_viewport,
-        ),
-        '#weight' => 1,
-      );
+      if ($adaptivetheme_meta_viewport = at_get_setting('adaptivetheme_meta_viewport', $theme_name)) {
+        $head_elements['adaptivetheme_meta_viewport'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'viewport',
+            'content' => check_plain($adaptivetheme_meta_viewport),
+          ),
+          '#weight' => 1,
+        );
+	    }
       // MobileOptimized
-      $adaptivetheme_meta_mobileoptimized = check_plain(at_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name));
-      $head_elements['adaptivetheme_meta_mobileoptimized'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => "MobileOptimized",
-          'content' => $adaptivetheme_meta_mobileoptimized,
-        ),
-        '#weight' => 2,
-      );
+      if ($adaptivetheme_meta_mobileoptimized = at_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name)) {
+				$head_elements['adaptivetheme_meta_mobileoptimized'] = array(
+					'#type' => 'html_tag',
+					'#tag' => 'meta',
+					'#attributes' => array(
+						'name' => "MobileOptimized",
+						'content' => check_plain($adaptivetheme_meta_mobileoptimized),
+					),
+					'#weight' => 2,
+				);
+			}
       // HandheldFriendly
-      $adaptivetheme_meta_handheldfriendly = check_plain(at_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name));
-      $head_elements['adaptivetheme_meta_handheldfriendly'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => "HandheldFriendly",
-          'content' => $adaptivetheme_meta_handheldfriendly,
-        ),
-        '#weight' => 3,
-      );
+      if ($adaptivetheme_meta_handheldfriendly = at_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name)) {
+				$head_elements['adaptivetheme_meta_handheldfriendly'] = array(
+					'#type' => 'html_tag',
+					'#tag' => 'meta',
+					'#attributes' => array(
+						'name' => "HandheldFriendly",
+						'content' => check_plain($adaptivetheme_meta_handheldfriendly),
+					),
+					'#weight' => 3,
+				);
+			}
       // apple-mobile-web-app-capable
-      $adaptivetheme_meta_apple_mobile_web_app_capable = check_plain(at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name));
-      $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => "apple-mobile-web-app-capable",
-          'content' => $adaptivetheme_meta_apple_mobile_web_app_capable,
-        ),
-        '#weight' => 4,
-      );
+      if ($adaptivetheme_meta_apple_mobile_web_app_capable = at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name)) {
+				$head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
+					'#type' => 'html_tag',
+					'#tag' => 'meta',
+					'#attributes' => array(
+						'name' => "apple-mobile-web-app-capable",
+						'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
+					),
+					'#weight' => 4,
+				);
+			}
     }
   }
   if (at_get_setting('chrome_edge', $theme_name) === 1) {

@@ -3,6 +3,18 @@
  * @file
  * Adaptivetheme implementation to display a node.
  *
+ * Adaptivetheme variables:
+ * AT Core sets special time and date variables for use in templates:
+ * - $submitted: Submission information created from $name and $date during
+ *   adaptivetheme_preprocess_node(), uses the $publication_date variable.
+ * - $datetime: datetime stamp formatted correctly to ISO8601.
+ * - $publication_date: publication date, formatted with time element and 
+ *   pubdate attribute.
+ * - $datetime_updated: datetime stamp formatted correctly to ISO8601.
+ * - $last_update: last updated date/time, formatted with time element and 
+ *   pubdate attribute.
+ * - $custom_date_and_time: date time string used in $last_update.
+ *
  * Available variables:
  * - $title: the (sanitized) title of the node.
  * - $content: An array of node items. Use render($content) to print them all,
@@ -15,8 +27,6 @@
  * - $name: Themed username of node author output from theme_username().
  * - $node_url: Direct url of the current node.
  * - $display_submitted: Whether submission information should be displayed.
- * - $submitted: Submission information created from $name and $date during
- *   template_preprocess_node().
  * - $classes: String of classes that can be used to style contextually through
  *   CSS. It can be manipulated through the variable $classes_array from
  *   preprocess functions. The default values can be one or more of the
