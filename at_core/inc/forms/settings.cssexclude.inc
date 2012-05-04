@@ -31,10 +31,11 @@
     if ($value['type'] == 'unset_core') {
       $core_defined = TRUE;
       $setting = 'unset_css_' . drupal_html_class($key);
-
+      $title_parts = explode('/', $key);
+      $title = array_pop($title_parts);
       $form['at']['cssexcludes']['die-css-die']['core-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t('Unset: @key', array('@key' => $key)),
+        '#title' => t('<b>@title</b> <small>(@key)</small>', array('@title' => $title, '@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('drupal-core-css-file')),
         '#weight' => 0,
@@ -66,9 +67,11 @@
     if($value['type'] == 'contrib') {
       $contrib_defined = TRUE;
       $setting = 'unset_css_' . drupal_html_class($key);
+      $title_parts = explode('/', $key);
+      $title = array_pop($title_parts);
       $form['at']['cssexcludes']['die-css-die']['contrib-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t('Unset: @key', array('@key' => $key)),
+        '#title' => t('<b>@title</b> <small>(@key)</small>', array('@title' => $title, '@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('contrib-module-css-file')),
         '#weight' => 0,
@@ -100,9 +103,11 @@
     if($value['type'] == 'library') {
       $libraries_defined = TRUE;
       $setting = 'unset_css_' . drupal_html_class($key);
+      $title_parts = explode('/', $key);
+      $title = array_pop($title_parts);
       $form['at']['cssexcludes']['die-css-die']['libraries-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t('Unset: @key', array('@key' => $key)),
+        '#title' => t('<b>@title</b> <small>(@key)</small>', array('@title' => $title, '@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('library-css-file')),
         '#weight' => 0,
@@ -134,9 +139,11 @@
     if($value['type'] == 'user_defined') {
       $user_defined = TRUE;
       $setting = 'unset_css_' . drupal_html_class($key);
+      $title_parts = explode('/', $key);
+      $title = array_pop($title_parts);
       $form['at']['cssexcludes']['die-css-die']['explicit-excludes'][$setting] = array(
         '#type' => 'checkbox',
-        '#title' => t('Unset: @key', array('@key' => $key)),
+        '#title' => t('<b>@title</b> <small>(@key)</small>', array('@title' => $title, '@key' => $key)),
         '#default_value' => at_get_setting($setting) ? at_get_setting($setting) : 0,
         '#attributes' => array('class' => array('user-defined-css-file')),
         '#weight' => 0,
