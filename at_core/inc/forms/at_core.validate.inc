@@ -11,6 +11,13 @@ function at_core_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
 
+  // TODO: some of this validates radion buttons and was added to workaround
+  // Druapl 7's "validation error" bug if there was nothing set for a radio. I'll
+  // review these over time and see how it plays out. While technically we don't
+  // need this validation as a workaround post Drupal 7.14 it is a nice UX
+  // improvement and does prevent the user saving settings without something
+  // set and wondering why (wtf?) something isn't working as expected.
+
   // Certain things must be set so AT Core can build the layout
 
   // Design approach uses radios, if this becomes unset for some reason bad things can happen.
@@ -33,11 +40,31 @@ function at_core_settings_validate($form, &$form_state) {
   }
 
   // Validate our form #state required fields, #states are UI only.
+
+  // Bigscreen
+  if (empty($values['bigscreen_sidebar_first'])) {
+    form_set_error('bigscreen_sidebar_first', t('Standard Layout <em>First sidebar</em> is empty - please enter a value.'));
+  }
+  if (empty($values['bigscreen_sidebar_second'])) {
+    form_set_error('bigscreen_sidebar_second', t('Standard Layout <em>Second sidebar</em> is empty - please enter a value.'));
+  }
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - enter a value or deselect "Set a max width".'));
     }
   }
+
+  // Tablet
+  if (empty($values['tablet_landscape_sidebar_first'])) {
+    form_set_error('tablet_landscape_sidebar_first', t('Tablet Landscape <em>First sidebar</em> is empty - please enter a value.'));
+  }
+  if ($values['tablet_landscape_layout'] === 'three_col_grail' || $values['tablet_landscape_layout'] === 'two_sidebars_left' || $values['tablet_landscape_layout'] === 'two_sidebars_right') {
+    if (empty($values['tablet_landscape_sidebar_second'])) {
+      form_set_error('tablet_landscape_sidebar_second', t('Tablet Landscape <em>First second</em> is empty - please enter a value, the layout you selected requires values for both sidebars.'));
+    }
+  }
+
+  // Smartphone
   if ($values['smartphone_landscape_layout'] === 'one_col_vert') {
     if (empty($values['smartphone_landscape_sidebar_first'])) {
       form_set_error('smartphone_landscape_sidebar_first', t('Smartphone First Sidebar width is empty - enter a value or choose another layout.'));
@@ -101,9 +128,7 @@ function at_core_settings_validate($form, &$form_state) {
       }
     }
 
-    // Validate image alignment fields, if radio buttons come unset for some
-    // reason Drupal can throw validation errors, catch it here and warn the user
-    // they need to set a value.
+    // Validate image alignment options
     if (isset($values['enable_image_settings']) && $values['enable_image_settings'] === 1) {
       if (empty($values['image_alignment'])) {
         form_set_error('image_alignment',t('No setting detected for <b>image alignment</b>. Please review Image Settings and make a selection for "Alignment - full view" (you can select none).'));
