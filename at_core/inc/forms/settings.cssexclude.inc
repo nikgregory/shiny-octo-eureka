@@ -10,6 +10,7 @@
   $form['at']['cssexcludes'] = array(
     '#type' => 'fieldset',
     '#title' => t('Unset CSS'),
+    '#weight' => 20,
   );
   $form['at']['cssexcludes']['die-css-die'] = array(
     '#type' => 'fieldset',

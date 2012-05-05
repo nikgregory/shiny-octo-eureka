@@ -128,15 +128,18 @@ function at_core_settings_validate($form, &$form_state) {
       }
     }
 
-    // Validate image alignment options
-    if (isset($values['enable_image_settings']) && $values['enable_image_settings'] === 1) {
-      if (empty($values['image_alignment'])) {
-        form_set_error('image_alignment',t('No setting detected for <b>image alignment</b>. Please review Image Settings and make a selection for "Alignment - full view" (you can select none).'));
-      }
-      if (empty($values['image_alignment_teaser'])) {
-        form_set_error('image_alignment_teaser',t('No setting detected for <b>teaser image alignment</b>. Please review Image Settings and make a selection for "Alignment - teaser view" (you can select none).'));
-      }
+    // Warn users Global extensions are enabled, but no extensions are.
+    if (
+      $values['enable_font_settings'] == 0 &&
+      $values['enable_heading_settings'] == 0 &&
+      $values['enable_image_settings'] == 0 &&
+      $values['enable_exclude_css'] == 0 &&
+      $values['enable_apple_touch_icons'] == 0 &&
+      $values['enable_custom_css'] == 0 &&
+      $values['enable_markup_overides'] == 0
+      ) {
+      form_set_error('enable_extensions', t('No extensions enabled. You enabled the Extensions global setting but did not enable any extensions.'));
     }
-  }
 
+  }
 }

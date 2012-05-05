@@ -37,7 +37,7 @@
   }
 
   // Gpanels and Panels
-  $form['at-layout']['panels'] = array(
+  $form['at-settings']['panels'] = array(
     '#type' => 'fieldset',
     '#title' => t('Gpanels &amp; Panels'),
     '#description' => t('<h3>Gpanels &amp; Panels</h3><p>These settings apply to both <a href="!gpanels_link" target="_blank">Gpanels</a> and <a href="!panels_link" target="_blank">Panels module</a> layouts.</p><p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels')),
@@ -47,12 +47,12 @@
   // Disabled message
   $panels_disable_message = t('<p>The responsive layout is disabled, only the default layout for each Gpanel and Panel layout will be used.</p><p>To re-enable uncheck the "Disable responsive layout and styles" checkbox under the "Settings" tab.</p>');
   if(at_get_setting('disable_responsive_styles') === 1) {
-    $form['at-layout']['panels']['disabled'] = array(
+    $form['at-settings']['panels']['disabled'] = array(
       '#markup' => '<div class="messages warning">'. $panels_disable_message .'</div>',
     );
   }
 
-  $form['at-layout']['panels']['panels-wrapper'] = array(
+  $form['at-settings']['panels']['panels-wrapper'] = array(
     '#type' => 'fieldset',
     '#attributes' => array('class' => array('panel-option-lists')),
     '#states' => array(
@@ -63,7 +63,7 @@
   // Build the forms
   foreach ($devices as $device) {
     $title = str_replace('_', ' ', drupal_ucfirst($device));
-    $form['at-layout']['panels']['panels-wrapper'][$device] = array(
+    $form['at-settings']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
       '#title' => t($title),
       '#collapsible' => TRUE,
@@ -71,7 +71,7 @@
     );
     if (isset($rpl)) {
       foreach ($rpl as $group => $layouts) {
-        $form['at-layout']['panels']['panels-wrapper'][$device][$group] = array(
+        $form['at-settings']['panels']['panels-wrapper'][$device][$group] = array(
           '#type' => 'fieldset',
           '#title' => t($group),
           '#collapsible' => TRUE,
@@ -79,7 +79,7 @@
         );
         foreach ($layouts as $layout) {
           foreach ($layout as $key => $value) {
-            $form['at-layout']['panels']['panels-wrapper'][$device][$group][$device .'_'. $value['theme']] = array(
+            $form['at-settings']['panels']['panels-wrapper'][$device][$group][$device .'_'. $value['theme']] = array(
               '#type' => 'radios',
               '#title' => t($value['title']),
               '#default_value' => at_get_setting($device .'_'. $value['theme']),

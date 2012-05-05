@@ -46,7 +46,7 @@
    *
    ****************************************************************************/
 
-  $form['at-layout']['bigscreen'] = array(
+  $form['at-settings']['bigscreen'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
@@ -57,13 +57,13 @@
   );
 
   // Bigscreen Layout
-  $form['at-layout']['bigscreen']['bigscreen-layout-wrapper'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
 
   // Options
-  $form['at-layout']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-layout-wrapper']['bigscreen_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => str_replace('-', '_', at_get_setting('bigscreen_layout')), // avoid "illigal choice" errors in 7.x-2.x sub-themes.
@@ -71,14 +71,14 @@
   );
 
   // Sidebars
-  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-sidebar-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
   );
 
   // Units
-  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_unit'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_sidebar_unit'),
@@ -86,7 +86,7 @@
   );
 
   // Sidebar first
-  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => check_plain(at_get_setting('bigscreen_sidebar_first')),
@@ -102,7 +102,7 @@
   );
 
   // Sidebar second
-  $form['at-layout']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-sidebar-wrapper']['bigscreen_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => check_plain(at_get_setting('bigscreen_sidebar_second')),
@@ -118,14 +118,14 @@
   );
 
   // Page width
-  $form['at-layout']['bigscreen']['bigscreen-width-wrapper'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
 
   // Unit
-  $form['at-layout']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_unit'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_page_unit'),
@@ -133,7 +133,7 @@
   );
 
   // Width
-  $form['at-layout']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-width-wrapper']['bigscreen_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => check_plain(at_get_setting('bigscreen_page_width')),
@@ -143,7 +143,7 @@
   );
 
   // Max width
-  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-maxwidth-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
@@ -152,14 +152,14 @@
   );
 
   // Max width checkbox
-  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
     '#type' => 'checkbox',
     '#title' => t('Set a max width'),
     '#default_value' => at_get_setting('bigscreen_set_max_width'),
   );
 
   // Max width unit
-  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width_unit'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('bigscreen_max_width_unit'),
@@ -170,7 +170,7 @@
   );
 
   // Max width value
-  $form['at-layout']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
+  $form['at-settings']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Max width'),
     '#default_value' => check_plain(at_get_setting('bigscreen_max_width')),
@@ -183,7 +183,7 @@
   );
 
   // Media queries
-  $form['at-layout']['bigscreen']['media-queries-wrapper'] = array(
+  $form['at-settings']['bigscreen']['media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Screen Media Queries'),
     '#weight' => 1,
@@ -193,7 +193,7 @@
   );
 
   // Media query
-  $form['at-layout']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
+  $form['at-settings']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => check_plain(at_get_setting('bigscreen_media_query')),
@@ -210,7 +210,7 @@
    *
    ****************************************************************************/
 
-  $form['at-layout']['tablet'] = array(
+  $form['at-settings']['tablet'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Layout'),
     '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad have two orientations - landscape and portrait. You can configure a different layout for each orientation.</p>'),
@@ -221,7 +221,7 @@
 
   // Disabled message
   if(at_get_setting('disable_responsive_styles') === 1) {
-    $form['at-layout']['tablet']['disabled'] = array(
+    $form['at-settings']['tablet']['disabled'] = array(
       '#markup' => '<div class="messages warning">'. $disable_message .'</div>',
     );
   }
@@ -231,7 +231,7 @@
    * Tablet landscape
    ******************/
 
-  $form['at-layout']['tablet']['landscape'] = array(
+  $form['at-settings']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape tablet</h4>'),
@@ -241,13 +241,13 @@
   );
 
   // Tablet landscape Layout options
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
 
   // Options
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-layout-wrapper']['tablet_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => str_replace('-', '_', at_get_setting('tablet_landscape_layout')),
@@ -255,14 +255,14 @@
   );
 
   // Sidebars
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
   );
 
   // Units
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_unit'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_landscape_sidebar_unit'),
@@ -270,7 +270,7 @@
   );
 
   // Sidebar first
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => check_plain(at_get_setting('tablet_landscape_sidebar_first')),
@@ -288,7 +288,7 @@
   );
 
   // Sidebar second
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => check_plain(at_get_setting('tablet_landscape_sidebar_second')),
@@ -308,14 +308,14 @@
   );
 
   // Page width
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
 
   // Unit
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_unit'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_landscape_page_unit'),
@@ -323,7 +323,7 @@
   );
 
   // Width
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-page-width-wrapper']['tablet_landscape_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => check_plain(at_get_setting('tablet_landscape_page_width')),
@@ -333,7 +333,7 @@
   );
 
   // Media Queries
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Landscape Media Queries'),
     '#weight' => 1,
@@ -345,7 +345,7 @@
   );
 
   // Media query
-  $form['at-layout']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
+  $form['at-settings']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => check_plain(at_get_setting('tablet_landscape_media_query')),
@@ -360,7 +360,7 @@
    * Tablet portrait
    *****************/
 
-  $form['at-layout']['tablet']['portrait'] = array(
+  $form['at-settings']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait tablet</h4>'),
@@ -370,13 +370,13 @@
   );
 
   // Tablet portrait Layout options
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
 
   // Options
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-layout-wrapper']['tablet_portrait_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => str_replace('-', '_', at_get_setting('tablet_portrait_layout')),
@@ -384,7 +384,7 @@
   );
 
   // Tablet portrait Sidebars
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
@@ -394,7 +394,7 @@
   );
 
   // Units
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_portrait_sidebar_unit'),
@@ -402,7 +402,7 @@
   );
 
   // Sidebar first
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => check_plain(at_get_setting('tablet_portrait_sidebar_first')),
@@ -414,7 +414,7 @@
   );
 
   // Sidebar second
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => check_plain(at_get_setting('tablet_portrait_sidebar_second')),
@@ -426,14 +426,14 @@
   );
 
   // Tablet portrait Page width
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set the page width'),
     '#description' => t('<strong>Set the page width</strong>'),
   );
 
   // Unit
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_unit'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('tablet_portrait_page_unit'),
@@ -441,7 +441,7 @@
   );
 
   // Width
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-page-width-wrapper']['tablet_portrait_page_width'] = array(
     '#type'  => 'textfield',
     '#title' => t('Page width'),
     '#default_value' => check_plain(at_get_setting('tablet_portrait_page_width')),
@@ -452,7 +452,7 @@
 
 
   // Tablet portrait Media queries
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Portrait Media Queries'),
     '#weight' => 1,
@@ -462,7 +462,7 @@
   );
 
   // Media query
-  $form['at-layout']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
+  $form['at-settings']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => check_plain(at_get_setting('tablet_portrait_media_query')),
@@ -479,7 +479,7 @@
    *
    ****************************************************************************/
 
-  $form['at-layout']['smartphone'] = array(
+  $form['at-settings']['smartphone'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Layout'),
     '#description' => t('<h3>Smartphone Layout</h3><p>Smartphone devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
@@ -490,7 +490,7 @@
 
   // Disabled message
   if(at_get_setting('disable_responsive_styles') === 1) {
-    $form['at-layout']['smartphone']['disabled'] = array(
+    $form['at-settings']['smartphone']['disabled'] = array(
       '#markup' => '<div class="messages warning">'. $disable_message .'</div>',
     );
   }
@@ -500,7 +500,7 @@
    * Smartphone landscape
    **********************/
 
-  $form['at-layout']['smartphone']['landscape'] = array(
+  $form['at-settings']['smartphone']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
     '#description' => t('<h4>Landscape smartphone</h4>'),
@@ -509,19 +509,19 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-layout-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Choose sidebar layout'),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-layout-wrapper']['smartphone_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
     '#default_value' => str_replace('-', '_', at_get_setting('smartphone_landscape_layout')),
     '#options' => $smartphone_landscape_options,
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
@@ -530,14 +530,14 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
     '#default_value' => at_get_setting('smartphone_landscape_sidebar_unit'),
     '#options' => $unit_options,
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
     '#default_value' => check_plain(at_get_setting('smartphone_landscape_sidebar_first')),
@@ -548,7 +548,7 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
     '#default_value' => check_plain(at_get_setting('smartphone_landscape_sidebar_second')),
@@ -559,7 +559,7 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Landscape Media Queries'),
     '#weight' => 1,
@@ -568,7 +568,7 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
+  $form['at-settings']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => check_plain(at_get_setting('smartphone_landscape_media_query')),
@@ -579,11 +579,11 @@
   );
 
   // Pass hidden values to the sumbit function, these values are required but the user can't change them via the UI
-  $form['at-layout']['smartphone']['landscape']['hidden']['smartphone_landscape_page_width'] = array(
+  $form['at-settings']['smartphone']['landscape']['hidden']['smartphone_landscape_page_width'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain(at_get_setting('smartphone_landscape_page_width')),
   );
-  $form['at-layout']['smartphone']['landscape']['hidden']['smartphone_landscape_page_unit'] = array(
+  $form['at-settings']['smartphone']['landscape']['hidden']['smartphone_landscape_page_unit'] = array(
     '#type' => 'hidden',
     '#default_value' => at_get_setting('smartphone_landscape_page_unit'),
   );
@@ -593,7 +593,7 @@
    * Smartphone portrait
    *********************/
 
-  $form['at-layout']['smartphone']['portrait'] = array(
+  $form['at-settings']['smartphone']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
     '#description' => t('<h4>Portrait smartphone</h4><div class="smartphone-portrait-layout">One column</div><p>The smartphone portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
@@ -602,7 +602,7 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
+  $form['at-settings']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smartphone Portrait Media Queries'),
     '#weight' => 1,
@@ -611,7 +611,7 @@
     ),
   );
 
-  $form['at-layout']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
+  $form['at-settings']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
     '#default_value' => check_plain(at_get_setting('smartphone_portrait_media_query')),
@@ -621,32 +621,32 @@
   );
 
   // Pass hidden values to the sumbit function, these values are required but the user can't change them via the UI
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_page_width'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_page_width'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain(at_get_setting('smartphone_portrait_page_width')),
   );
 
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_page_unit'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_page_unit'] = array(
     '#type' => 'hidden',
     '#default_value' => at_get_setting('smartphone_portrait_page_unit'),
   );
 
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_first'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_first'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain(at_get_setting('smartphone_portrait_sidebar_first')),
   );
 
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_second'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_second'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain(at_get_setting('smartphone_portrait_sidebar_second')),
   );
 
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_unit'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_sidebar_unit'] = array(
     '#type' => 'hidden',
     '#default_value' => check_plain(at_get_setting('smartphone_portrait_sidebar_unit')),
   );
 
-  $form['at-layout']['smartphone']['portrait']['hidden']['smartphone_portrait_layout'] = array(
+  $form['at-settings']['smartphone']['portrait']['hidden']['smartphone_portrait_layout'] = array(
     '#type' => 'hidden',
     '#default_value' => str_replace('-', '_', at_get_setting('smartphone_portrait_layout')),
   );

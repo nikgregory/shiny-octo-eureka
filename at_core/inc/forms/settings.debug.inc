@@ -1,39 +1,39 @@
 <?php
 
   // DEBUG
-  $form['at-layout']['debug'] = array(
+  $form['at-settings']['debug'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Debug'),
+    '#title' => t('Debuggers'),
   );
-  $form['at-layout']['debug']['debug-layout'] = array(
+  $form['at-settings']['debug']['debug-layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Debuggers'),
     '#description' => t('<h3>Debuggers</h3>'),
   );
 
   // Highlight regions
-  $form['at-layout']['debug']['debug-layout']['expose_regions'] = array(
+  $form['at-settings']['debug']['debug-layout']['expose_regions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Highlight regions'),
     '#default_value' => at_get_setting('expose_regions'),
   );
 
   // Load all panels
-  $form['at-layout']['debug']['debug-layout']['load_all_panels'] = array(
+  $form['at-settings']['debug']['debug-layout']['load_all_panels'] = array(
     '#type' => 'checkbox',
     '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels'),
     '#default_value' => at_get_setting('load_all_panels'),
   );
 
   // Window size bookmarklet
-  $form['at-layout']['debug']['debug-layout']['show_window_size'] = array(
+  $form['at-settings']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show window size - appears in the bottom right corner'),
     '#default_value' => at_get_setting('show_window_size'),
   );
 
   // Version test
-  $form['at-layout']['debug']['debug-layout']['atcore_version_test'] = array(
+  $form['at-settings']['debug']['debug-layout']['atcore_version_test'] = array(
     '#type' => 'checkbox',
     '#title' => t('Sub-theme compatibility test'),
     '#default_value' => at_get_setting('atcore_version_test'),
@@ -52,20 +52,20 @@
   // Sanity check
   $queries = check_plain($queries);
 
-  $form['at-layout']['debug']['mediaqueries'] = array(
+  $form['at-settings']['debug']['mediaqueries'] = array(
     '#type' => 'fieldset',
     '#title' => t('<h3>All Media Queries - Copy Only!</h3>'),
-    '#description' => t('<h3>All Media Queries - Copy Only</h3><p>These are the media queries currently being used by your theme. This is provided so you may save a backup copy for reference. Do not enter anything here - this is display only!</p>'),
+    '#description' => t('<h3>All Media Queries - Copy Only</h3><p>This shows the media queries currently being used by your theme. This is provided so you may save a backup copy for reference. Do not enter anything here - this is display only!</p>'),
   );
-  $form['at-layout']['debug']['mediaqueries']['check'] = array(
+  $form['at-settings']['debug']['mediaqueries']['check'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable the text field so I can copy this now'),
   );
-  $form['at-layout']['debug']['mediaqueries']['output'] = array(
+  $form['at-settings']['debug']['mediaqueries']['output'] = array(
     '#type' => 'textarea',
     '#rows' => 18,
     '#default_value' => $queries ? $queries : '',
     '#states' => array(
-      'disabled' => array('input[name="check"]' => array('checked' => FALSE)),
+      'visible' => array('input[name="check"]' => array('checked' => TRUE)),
     ),
   );

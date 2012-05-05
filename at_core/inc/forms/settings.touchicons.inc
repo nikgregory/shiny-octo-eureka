@@ -5,7 +5,7 @@
     '#type' => 'fieldset',
     '#title' => t('Touch Icons'),
     '#description' => t('<h3>Touch Icons</h3><p>Different devices can support different sized touch icons:</p><ul><li>57x57 - non-retina iPhone, iPod Touch, Nokia and Android 2.1+ devices</li><li>72x72 - first gen iPad</li><li>114x114 - iPhone 4 with high-res retina display</li></ul><p>Enter the path to each touch icon. Paths must be relative to your theme folder.</p>'),
-    '#weight' => -30,
+    '#weight' => 10,
   );
   $form['at']['ati']['icon-paths'] = array(
     '#type' => 'fieldset',

@@ -4,7 +4,7 @@
   $form['at']['custom-styles'] = array(
     '#type' => 'fieldset',
     '#title' => t('Custom CSS'),
-    '#weight' => 100,
+    '#weight' => 30,
   );
   $form['at']['custom-styles']['custom_css'] = array(
     '#type' => 'textarea',

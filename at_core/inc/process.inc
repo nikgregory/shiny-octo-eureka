@@ -78,6 +78,15 @@ function adaptivetheme_process_page(&$vars, $hook) {
   // Generate the wrapper element for the main content
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 
+  // Add page template suggestions per node type, but make the suggestion weak
+  // so other suggestions can easily override it.
+  if (at_get_setting('page_content_type_suggestions', $theme_name) === 1) {
+    if (isset($vars['node'])) {
+      $suggestion = 'page__'. str_replace('_', '--', $vars['node']->type);
+      array_unshift($vars['theme_hook_suggestions'], $suggestion);
+    }
+  }
+
   // Force full width wrapper template suggestion if enabled
   if (at_get_setting('page_full_width_wrappers', $theme_name) === 1) {
     array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');

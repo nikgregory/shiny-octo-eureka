@@ -4,7 +4,7 @@
   $form['at']['modify-output'] = array(
     '#type' => 'fieldset',
     '#title' => t('Markup Overrides'),
-    '#weight' => -20,
+    '#weight' => 40,
   );
 
   // Design
@@ -30,6 +30,16 @@
     '#description' => t('This setting will load a page template will full width DIV wrappers - perfect for designs with 100% width sections, header or footer. Note that if you choose to use other page template suggestions you should use copies of page--full-width-wrappers.tpl.php, you will find this in adaptivetheme/at-core/templates.'),
     '#default_value' => at_get_setting('page_full_width_wrappers'),
   );
+
+  // Add page-[content-type] suggestions, all suggestions carry a performance
+  // overhead, so allow the user to choose this rather than doing to by default
+  $form['at']['modify-output']['design']['page_content_type_suggestions'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable page--[content-type].tpl.php suggestions'),
+    '#description' => t('If the node type is "blog" the template suggestion will be "page--blog.tpl.php". The content type suggestions are weak will be overridden by page--node or page--node-[nid] templates.'),
+    '#default_value' => at_get_setting('page_content_type_suggestions'),
+  );
+
   // Add spans to theme_links
   $form['at']['modify-output']['design']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',

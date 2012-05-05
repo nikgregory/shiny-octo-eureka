@@ -5,7 +5,7 @@
     '#type' => 'fieldset',
     '#title' => t('Image Settings'),
     '#description' => '<h3>Image Settings</h3><p>Set alignment for image-field images on full and teaser view, and enable captions.',
-    '#weight' => -80,
+    '#weight' => 0,
   );
 
   // Alignment

@@ -5,7 +5,7 @@
     '#type' => 'fieldset',
     '#title' => t('Title Styles'),
     '#description' => t('<h3>Title Styles</h3><p>Add extra styles to headings. Text shadows only work for CSS3 capable browsers such as Firefox, Safari, IE9 etc.</p>'),
-    '#weight' => -90,
+    '#weight' => -100,
   );
 
   // Array of valid title types

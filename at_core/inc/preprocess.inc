@@ -128,31 +128,45 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['hide_site_name'] = TRUE;
   }
 
-  // Site Name and Slogan classes
-  if ($vars['hide_site_name'] === FALSE || $vars['site_slogan']) {
+  // Site name classes
+  if ($vars['hide_site_name'] === FALSE) {
     if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $heading_settings_array = &drupal_static('adaptivetheme_preprocess_page_heading_settings');
-      if (empty($heading_settings_array)) {
-        $settings_array = array();
-        if ($vars['hide_site_name'] === FALSE) {
-          $settings_array[] = 'site_name_case';
-          $settings_array[] = 'site_name_weight';
-          $settings_array[] = 'site_name_alignment';
-          $settings_array[] = 'site_name_shadow';
-        }
-        if ($vars['site_slogan']) {
-          $settings_array[] = 'site_slogan_case';
-          $settings_array[] = 'site_slogan_weight';
-          $settings_array[] = 'site_slogan_alignment';
-          $settings_array[] = 'site_slogan_shadow';
-        }
-        foreach ($settings_array as $setting) {
-          if ($heading_setting = at_get_setting($setting, $theme_name)) {
-            $heading_settings_array[] = $heading_setting;
+      $site_name_settings = &drupal_static('adaptivetheme_preprocess_page_site_name_settings');
+      if (empty($site_name_settings)) {
+        $site_name_settings_array[] = 'site_name_case';
+        $site_name_settings_array[] = 'site_name_weight';
+        $site_name_settings_array[] = 'site_name_alignment';
+        $site_name_settings_array[] = 'site_name_shadow';
+        foreach ($site_name_settings_array as $site_name_setting) {
+          if ($site_name_setting = at_get_setting($site_name_setting, $theme_name)) {
+            $site_name_settings[] = $site_name_setting;
           }
         }
       }
-      $vars['classes_array'][] = implode(' ', $heading_settings_array);
+      if ($site_name_settings) {
+        $vars['classes_array'][] = implode(' ', $site_name_settings);
+      }
+    }
+  }
+
+  // Slogan classes
+  if ($vars['site_slogan']) {
+    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+      $site_slogan_settings = &drupal_static('adaptivetheme_preprocess_page_site_slogan_settings');
+      if (empty($site_slogan_settings)) {
+        $site_slogan_settings_array[] = 'site_slogan_case';
+        $site_slogan_settings_array[] = 'site_slogan_weight';
+        $site_slogan_settings_array[] = 'site_slogan_alignment';
+        $site_slogan_settings_array[] = 'site_slogan_shadow';
+        foreach ($site_slogan_settings_array as $site_slogan_setting) {
+          if ($site_slogan_setting = at_get_setting($site_slogan_setting, $theme_name)) {
+            $site_slogan_settings[] = $site_slogan_setting;
+          }
+        }
+      }
+      if ($site_slogan_settings) {
+        $vars['classes_array'][] = implode(' ', $site_slogan_settings);
+      }
     }
   }
 
@@ -463,7 +477,7 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   $vars['content_attributes_array']['class'][] = 'node-content';
 
   // AT Core builds additional time and date variables for use in templates
-  
+
   // datetime stamp formatted correctly to ISO8601
   $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601!
 
@@ -652,5 +666,6 @@ function adaptivetheme_preprocess_menubar(&$vars, $hook) {
   $vars['classes_array'][] = 'nav clearfix';
   $vars['content_attributes_array']['role'][] = 'navigation';
   $vars['content_attributes_array']['class'][] = $type .'-menu-wrapper menu-wrapper clearfix';
+  // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }

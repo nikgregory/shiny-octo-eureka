@@ -184,6 +184,7 @@
   settings[enable_cascading_media_queries] = 0
   settings[cascade_media_query]            = 'only screen and (min-width:220px)'
   settings[global_default_layout]          = 'smartphone-portrait'
+  settings[global_default_layout_disable]  = 0
 
   ; Global settings - Polyfills
   settings[load_html5js]       = 1
@@ -193,7 +194,7 @@
   settings[which_pie]          = 'PIE.htc'
   settings[disble_pie_for_ie9] = 0
   settings[load_selectivizr]   = 0
-  settings[load_scalefixjs]    = 0
+  settings[load_scalefixjs]    = 1
 
 ;----------// Debug
   settings[expose_regions]     = 0
@@ -202,7 +203,7 @@
   settings[rebuild_theme_data] = 0
 
 ;----------// Extensions
-  settings[enable_extensions]          = 0
+  settings[enable_extensions]          = 1
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0
@@ -210,7 +211,8 @@
   settings[enable_search_settings]     = 0
   settings[enable_loginblock_settings] = 0
   settings[enable_markup_overides]     = 0
-  settings[enable_mobile_metatags]     = 0
+  settings[enable_polyfills]           = 1
+  settings[enable_mobile_metatags]     = 1
   settings[enable_apple_touch_icons]   = 0
   settings[enable_exclude_css]         = 0
   settings[enable_custom_css]          = 0
@@ -279,9 +281,10 @@
   settings[horizontal_login_block_enable] = 'on'
 
 ;----------// Design
-  settings[global_gutter_width]      = ''
-  settings[page_full_width_wrappers] = 0
-  settings[menu_item_span_elements]  = 0
+  settings[global_gutter_width]           = ''
+  settings[page_full_width_wrappers]      = 0
+  settings[page_content_type_suggestions] = 0
+  settings[menu_item_span_elements]       = 0
 
 ;----------// CSS classes
   settings[extra_page_classes]      = 1
@@ -302,7 +305,7 @@
 
 ;----------// Mobile metatags
   settings[mobile_friendly_metatags] = 1
-  settings[adaptivetheme_meta_viewport] = 'width=device-width'
+  settings[adaptivetheme_meta_viewport] = 'width=device-width, initial-scale=1'
   settings[adaptivetheme_meta_mobileoptimized]  = 'width'
   settings[adaptivetheme_meta_handheldfriendly] = 'true'
   settings[adaptivetheme_meta_apple_mobile_web_app_capable] = 'yes'

@@ -388,6 +388,9 @@ input[disabled] {
   text-align: center;
   width: 50px;
 }
+#edit-alignment .form-type-radio input.form-radio {
+  margin-bottom: 4px;
+}
 #edit-alignment .form-type-radio label {
   background-image: url(images/image-alignment-sprite.png);
   background-repeat: no-repeat;

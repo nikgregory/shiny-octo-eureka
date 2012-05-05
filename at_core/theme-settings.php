@@ -49,11 +49,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   // Build a custom header for the layout settings form.
   $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
   $layout_header  = '<div class="at-settings-form layout-settings-form ' . $admin_theme_class . '"><div class="layout-header theme-settings-header clearfix">';
-  $layout_header .= '<h1>' . t('Layout, Global Settings &amp; Polyfills') . '</h1>';
+  $layout_header .= '<h1>' . t('Layout &amp; General Settings') . '</h1>';
   $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
   $layout_header .= '</div>';
 
-  $form['at-layout'] = array(
+  $form['at-settings'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout'),
     '#prefix' => $layout_header,
@@ -63,95 +63,76 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'css' => array(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css'),
     ),
   );
-  // Include layout forms, global settings and debug.
+  // Include layout forms, CSS, polyfills, extensions and debug.
   require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
   require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
   require_once($path_to_at_core . '/inc/forms/settings.global.inc');
   require_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
   require_once($path_to_at_core . '/inc/forms/settings.debug.inc');
+  require_once($path_to_at_core . '/inc/forms/settings.extensions.inc');
 
   // EXTENSIONS
-  if (at_get_setting('enable_extensions') === 1) {
+  $enable_extensions = isset($form_state['values']['enable_extensions']);
+  if (($enable_extensions && $form_state['values']['enable_extensions'] == 1) || (!$enable_extensions && $form['at-settings']['extend']['enable_extensions']['#default_value'] == 1)) {
 
     // Build a custom header for the Extensions settings form.
     $styles_header  = '<div class="at-settings-form style-settings-form ' . $admin_theme_class . '"><div class="styles-header theme-settings-header clearfix">';
     $styles_header .= '<h1>' . t('Extensions') . '</h1>';
     $styles_header .= '</div>';
 
-    $form['at'] = array(
-      '#type' => 'vertical_tabs',
+    $form['at'] = array('#type' => 'vertical_tabs',
       '#weight' => -9,
       '#prefix' => $styles_header,
       '#suffix' => '</div>',
-      '#states' => array(
-        'visible' => array(':input[name="enable_extensions"]' => array('checked' => TRUE)),
-      ),
     );
 
-    // Include the font functions if the Fonts or Headings extensions are active.
-    if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_heading_settings') === 1) {
-      include_once($path_to_at_core . '/inc/fonts.inc');
-    }
-
-    // Heading styles
-    if(at_get_setting('enable_heading_settings') === 1) {
-      require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
-    }
+    // Include fonts.inc by default, the conditional logic to wrap around this is
+    // too hairy to even comtemplate.
+    require_once($path_to_at_core . '/inc/fonts.inc');
 
     // Fonts
-    if(at_get_setting('enable_font_settings') === 1) {
+    $enable_font_settings = isset($form_state['values']['enable_font_settings']);
+    if (($enable_font_settings && $form_state['values']['enable_font_settings'] == 1) || (!$enable_font_settings && $form['at-settings']['extend']['enable']['enable_font_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
     }
 
     // Heading styles
-    if(at_get_setting('enable_heading_settings') === 1) {
+    $enable_heading_settings = isset($form_state['values']['enable_heading_settings']);
+    if (($enable_heading_settings && $form_state['values']['enable_heading_settings'] == 1) || (!$enable_heading_settings && $form['at-settings']['extend']['enable']['enable_heading_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
     }
 
-    // Modify output
-    if (at_get_setting('enable_markup_overides') === 1) {
-      require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
-    }
-
-    // Images
-    if(at_get_setting('enable_image_settings') === 1) {
+    // Image alignment
+    $enable_image_settings = isset($form_state['values']['enable_image_settings']);
+    if (($enable_image_settings && $form_state['values']['enable_image_settings'] == 1) || (!$enable_image_settings && $form['at-settings']['extend']['enable']['enable_image_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.images.inc');
     }
 
     // Exclude CSS
-    if (at_get_setting('enable_exclude_css') === 1) {
+    $enable_exclude_css = isset($form_state['values']['enable_exclude_css']);
+    if (($enable_exclude_css && $form_state['values']['enable_exclude_css'] == 1) || (!$enable_exclude_css && $form['at-settings']['extend']['enable']['enable_exclude_css']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
     }
 
-    // Metatags
-    if (at_get_setting('enable_mobile_metatags') === 1) {
-      require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
-    }
-
     // Touch icons
-    if (at_get_setting('enable_apple_touch_icons') === 1) {
+    $enable_apple_touch_icons = isset($form_state['values']['enable_apple_touch_icons']);
+    if (($enable_apple_touch_icons && $form_state['values']['enable_apple_touch_icons'] == 1) || (!$enable_apple_touch_icons && $form['at-settings']['extend']['enable']['enable_apple_touch_icons']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
     }
 
     // Custom CSS
-    if (at_get_setting('enable_custom_css') === 1) {
+    $enable_custom_css = isset($form_state['values']['enable_custom_css']);
+    if (($enable_custom_css && $form_state['values']['enable_custom_css'] == 1) || (!$enable_custom_css && $form['at-settings']['extend']['enable']['enable_custom_css']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
     }
 
-    // MOVED SETTINGS TO MODIFY OUTPUT
-    // Horizonatal login block
-    //if (at_get_setting('horizontal_login_block_enable') === 'on') {
-    //  if (at_get_setting('enable_loginblock_settings') === 1) {
-    //    require_once($path_to_at_core . '/inc/forms/settings.loginblock.inc');
-    //  }
-    //}
-    // Breadcrumbs
-    //if (at_get_setting('enable_breadcrumb_settings') === 1) {
-    //  require_once($path_to_at_core . '/inc/forms/settings.breadcrumbs.inc');
-    //}
-
-    // Always include tweaks (extension settings)
-    require_once($path_to_at_core . '/inc/forms/settings.tweaks.inc');
+    // Modify output
+   // if ($form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1 || $form_state['input']['enable_markup_overides'] == 1) {
+    $enable_markup_overides = isset($form_state['values']['enable_markup_overides']);
+    if (($enable_markup_overides && $form_state['values']['enable_markup_overides'] == 1) || (!$enable_markup_overides && $form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1)) {
+      require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
+    }
 
   }
 
