@@ -18,6 +18,9 @@ $classes[] = 'article';
 if ($vars['teaser']) {
   $classes[] = 'article-teaser';
 }
+if ($vars['page']) {
+  $classes[] = 'article-full';
+}
 $classes[] = 'article-type-'. $vars['node']->type;
 if (!$vars['status']) {
   $classes[] = 'article-unpublished';
