@@ -196,8 +196,9 @@ function adaptivetheme_css_alter(&$css) {
         }
       }
     }
-    // Unset -rtl.css files if language dir is RTL
-    if ($language->dir === 'rtl') {
+    // Unset -rtl.css files if language dir is RTL, in some contexts dir is
+		// unset, but I don't know if this is a core bug or not.
+    if (isset($language->dir) && $language->dir === 'rtl') {
       foreach ($css_data as $key => $value) {
         $setting = 'unset_css_' . drupal_html_class($key);
         if (at_get_setting($setting, $theme_name) === 1) {
