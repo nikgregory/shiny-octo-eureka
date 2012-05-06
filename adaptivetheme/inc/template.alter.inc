@@ -3,7 +3,7 @@
 /**
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE.
  */
- 
+
 // hook_html_head_alter().
 function adaptivetheme_html_head_alter(&$head_elements) {
   $head_elements['system_meta_content_type']['#attributes'] = array(

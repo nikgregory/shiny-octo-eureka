@@ -71,7 +71,8 @@ video {
 .openlayers-map img,
 #getlocations_map_canvas img,
 #locationmap_map img,
-.geofieldMap img {
+.geofieldMap img,
+.views_horizontal_slider img {
   max-width: none !important;
 }
 
