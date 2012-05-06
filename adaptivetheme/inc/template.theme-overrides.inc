@@ -108,6 +108,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
     $num_links = count($links);
     $i = 1;
     foreach ($links as $key => $link) {
+      $link_markup = '';
       $class = $key;
       if ($i == 1) {
         $class .= ' first';
@@ -130,7 +131,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
           $link['html'] = TRUE;
         }
-        $link = l($link['title'], $link['href'], $link);
+        $link_markup = l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {
         if (empty($link['html'])) {
@@ -140,14 +141,14 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
         if (isset($link['attributes'])) {
           $span_attributes = drupal_attributes($link['attributes']);
         }
-        $link = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
+        $link_markup = '<span'. $span_attributes .'>'. $link['title'] .'</span>';
       }
       else {
         $link = '';
       }
       $i++;
       $output .= '<li'. drupal_attributes(array('class' => $class)) .'>';
-      $output .= $link;
+      $output .= $link_markup;
       $output .= "</li>";
     }
     $output .= "</ul>";
