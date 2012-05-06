@@ -60,7 +60,21 @@
 
 
   // Node links. See also the ul.links declaration in the pages.css
-  ul.links {}
+  ul.links {
+
+    li {}
+    li a {}
+
+    // Classes to style individual links
+    li.node-read-more a {}
+    li.comment-add a {}
+    li.comment-comments a {}
+    li.comment-new-comments a {}
+    li.blog-sernames-blog a {}
+    li.print-html a {}
+    li.print-email a {}
+    li.print-pdf a {}
+  }
 }
 
 
@@ -84,4 +98,3 @@
 .node-forum {}
 
 .node-poll {}
-

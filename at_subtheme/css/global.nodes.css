@@ -110,3 +110,15 @@
 /* Node links. See also the ul.links declaration in the pages.css. */
 .node ul.links  {
 }
+
+
+/* Classes to style links */
+.node ul.links li a {}
+.node ul.links li.node-read-more a {}
+.node ul.links li.comment-add a {}
+.node ul.links li.comment-comments a {}
+.node ul.links li.comment-new-comments a {}
+.node ul.links li.blog-sernames-blog a {}
+.node ul.links li.print-html a {}
+.node ul.links li.print-email a {}
+.node ul.links li.print-pdf a {}
