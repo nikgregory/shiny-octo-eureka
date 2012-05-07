@@ -86,6 +86,7 @@ function adaptivetheme_preprocess_html(&$vars) {
       'group' => CSS_THEME,
       'media' => 'all',
       'every_page' => TRUE,
+      'weight' => 1000,
       )
     );
   }
@@ -137,7 +138,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   ) : '';
   // Provide forwards compatibility with 7.x-3.x sub-themes
   $vars['site_logo'] = $vars['linked_site_logo'];
-  
+
   if (theme_get_setting('toggle_name') == FALSE) {
     $vars['visibility'] = 'element-invisible';
     $vars['hide_site_name'] = TRUE;
