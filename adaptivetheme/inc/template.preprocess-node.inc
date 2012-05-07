@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 /**
  * @file
@@ -62,6 +62,7 @@ $vars['template_files'][] = 'node-'.$vars['node']->nid;
 $vars['terms'] = theme('links', $vars['taxonomy'], array('class' => 'links term-links'));
 $vars['links'] = theme('links', $vars['node']->links, array('class' => 'links link-links'));
 
+$vars['unpublished'] = '';
 if (!$vars['node']->status) {
   if ($vars['page']) {
     drupal_set_message(t('%title is currently unpublished', array('%title' => $vars['node']->title)), 'warning');

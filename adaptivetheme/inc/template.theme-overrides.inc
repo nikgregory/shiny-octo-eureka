@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 /**
  * @file
@@ -29,24 +29,6 @@ function adaptivetheme_breadcrumb($breadcrumb) {
 }
 
 /**
- * Theme a form button.
- */
-function adaptivetheme_button($element) {
-  if (isset($element['#attributes']['class'])) {
-    $element['#attributes']['class'] = 'form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
-  }
-  else {
-    $element['#attributes']['class'] = 'form-'. $element['#button_type'];
-  }
-  if (stristr($element['#attributes']['style'], 'display: none;') || stristr($element['#attributes']['class'], 'fivestar-submit')) {
-    return '<input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." />\n";
-  }
-  else {
-    return '<span class="button-wrapper '. $element['#id'] .'"><span class="button"><input type="submit" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ')  .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." /></span></span>\n";
-  }
-}
-
-/**
  * Format a group of form items.
  *
  * @param $element
@@ -67,7 +49,7 @@ function adaptivetheme_fieldset($element) {
     }
   }
   $css_class = 'fieldset-'. safe_string($element['#title']);
-  $element['#attributes']['class'] .= (!empty($element['#attributes']['class']) ? " " : "") . $css_class;
+  $element['#attributes']['class'] = ((isset($element['#attributes']['class']) && !empty($element['#attributes']['class'])) ? $element['#attributes']['class'].' ' : '') . $css_class;
   return '<fieldset'. drupal_attributes($element['#attributes']) .'>'. ($element['#title'] ? '<legend>'. $element['#title'] .'</legend>' : '') . ($element['#description'] ? '<div class="description">'. $element['#description'] .'</div>' : '') . $element['#children'] . $element['#value'] ."</fieldset>\n";
 }
 
@@ -80,7 +62,7 @@ function adaptivetheme_system_settings_form($form) {
     $form['theme_specific']['#title'] = t('Advanced theme settings');
     $form_elements = element_children($form);
     foreach ($form_elements as $element) {
-      if ($form[$element]['#type'] == 'fieldset') {
+      if (isset($form[$element]['#type']) && $form[$element]['#type'] == 'fieldset') {
         $form[$element]['#collapsible'] = TRUE;
         $form[$element]['#collapsed']   = TRUE;
         $form[$element]['#prefix'] = '<div class="'. safe_string($element) .'-settings-wrapper">';
@@ -123,7 +105,7 @@ function adaptivetheme_links($links, $attributes = array('class' => 'links')) {
         $class .= ' active';
       }
       if (isset($link['href'])) {
-        if (strpos($link['attributes']['class'], 'active-trail') !== FALSE && strpos($class, 'active') === FALSE) {
+        if (isset($link['attributes']['class']) && strpos($link['attributes']['class'], 'active-trail') !== FALSE && strpos($class, 'active') === FALSE) {
           $class .= ' active';
           $link['attributes']['class'] .= ' active';
         }

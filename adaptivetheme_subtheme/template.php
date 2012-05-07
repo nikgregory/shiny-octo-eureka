@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 if (db_is_active()) {
   include_once(drupal_get_path('theme', 'adaptivetheme') .'/inc/template.custom-functions.inc');

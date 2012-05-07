@@ -1,4 +1,4 @@
-/** 
+/**
  */
 
 /* Reset */
@@ -14,24 +14,38 @@ label,legend {
   padding: 0;
 }
 
-/* Accessibility helpers */
+/* Helpful classes for hiding content */
+.element-invisible {
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+}
+
+.element-invisible.element-focusable:active,
+.element-invisible.element-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static !important;
+  width: auto;
+}
+
 .offscreen {
   position: absolute;
-  top: -9999em;
-  left: auto;
+  top: -99999em;
   width: 1px;
   height: 1px;
   overflow: hidden;
+  outline: 0;
 }
+
 .element-hidden {
   display: none;
-}
-.element-invisible {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-}
-.element-focusable {
-  position: static !important;
-  clip: auto;
 }

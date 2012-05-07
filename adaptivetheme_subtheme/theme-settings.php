@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 // DONT TOUCH THIS LINE:
 include_once(drupal_get_path('theme', 'adaptivetheme') .'/theme-settings.php');

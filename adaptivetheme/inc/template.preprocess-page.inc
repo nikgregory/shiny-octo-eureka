@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 /**
  * @file
@@ -17,7 +17,7 @@ if ($vars['in_maintenance'] && !$vars['logged_in'] && arg(0) == 'user' && (!arg(
   $vars['title'] = drupal_set_title(t('User Login'));
 }
 
-if ($vars['content_front'] && $vars['is_front']) {
+if ($vars['is_front'] && isset($vars['content_front']) && $vars['content_front']) {
   $vars['content'] = $vars['content_front'];
 }
 
@@ -30,13 +30,14 @@ if (!$vars['show_blocks']) {
   $vars['right'] = '';
 }
 
+$vars['skip_nav_class'] = '';
 if (theme_get_setting('skip_navigation_display') == 'hide') {
   $vars['skip_nav_class'] = 'element-invisible';
 }
-if (theme_get_setting('skip_navigation_display') == 'show') {
+elseif (theme_get_setting('skip_navigation_display') == 'show') {
   $vars['skip_nav_class'] = 'show';
 }
-if (theme_get_setting('skip_navigation_display') == 'focus') {
+elseif (theme_get_setting('skip_navigation_display') == 'focus') {
   $vars['skip_nav_class'] = 'show-on-focus';
 }
 
@@ -100,6 +101,7 @@ if (theme_get_setting('extra_page_classes')) {
 }
 $vars['classes'] = trim(implode(' ', $classes));
 
+$vars['layout_settings'] = '';
 if (theme_get_setting('layout_enable_settings') == 'on') {
   $vars['at_layout_width'] = 'div.container{width:'. theme_get_setting('layout_width') .';}';
   $method = theme_get_setting('layout_method');

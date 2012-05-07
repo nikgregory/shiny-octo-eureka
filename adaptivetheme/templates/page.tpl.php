@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 /**
  * @file
@@ -145,11 +145,8 @@
     <?php if ($menu_bar || $primary_menu): ?>
       <div id="primary-menu" class="nav clearfix">
         <h2 class="element-invisible"><?php print t('Main Menu'); ?></h2>
-        <?php if ($menu_bar) { ?>
           <?php print $menu_bar; ?>
-        <?php } else if ($primary_menu) { ?>
           <?php print $primary_menu; ?>
-        <?php } ?>
       </div>
     <?php endif; ?>
 

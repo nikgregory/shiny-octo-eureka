@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 
 /**
  * @file
@@ -73,6 +73,7 @@ function adaptivetheme_settings($saved_settings, $subtheme_defaults = array()) {
     'style_enable_schemes'              => $settings['style_enable_schemes'],
   );
   // Output key value pairs formatted as settings
+	$output = '';
   foreach($exportable_settings as $key => $value) {
   	$value = filter_xss($value);
   	$output .= "settings[$key]=\"$value\"\n";
