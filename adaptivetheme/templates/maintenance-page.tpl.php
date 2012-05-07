@@ -1,4 +1,4 @@
-<?php // $Id$
+<?php
 // adaptivethemes.com
 /**
 * @file maintenance-page.tpl.php
