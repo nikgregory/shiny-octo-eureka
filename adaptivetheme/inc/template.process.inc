@@ -74,33 +74,45 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
-  // Load the media queries layout CSS files
+  // Load Layout CSS
   global $theme;
-  $filename = $theme . '_mediaqueries_css';
-  $file = variable_get($filename);
   $path = "public://at_css";
+
+  $responsive_css = $theme . '_responsive_layout_file_css';
+  $file = variable_get($responsive_css);
+
+  // Load the Responsive layout
   if (!empty($file)) {
     $filepath = $path . '/' . $file;
-    drupal_add_css($filepath, array(
-      'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
-      'group' => CSS_THEME,
-      'media' => 'all',
-      'every_page' => TRUE,
-      'weight' => 1000,
-      )
-    );
+    if (file_exists($filepath)) {
+      drupal_add_css($filepath, array(
+        'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
+        'group' => CSS_THEME,
+        'media' => 'all',
+        'every_page' => TRUE,
+        'weight' => 1000,
+        )
+      );
+    }
   }
 
-  // Ad respond.js to the footer to avoid crashes in IE8
-  drupal_add_js(drupal_get_path('theme', 'adaptivetheme') . '/js/respond.js',
-    array(
-      'type' => 'file',
-      'scope' => 'footer',
-      'group' => JS_THEME,
-      'preprocess' => TRUE,
-      'cache' => TRUE,
-    )
-  );
+  // Load the IE conditional layout
+  $ie_css = $theme . '_ltie9_layout_file_css';
+  $ie_file = variable_get($ie_css);
+  if (!empty($ie_file)) {
+    $ie_filepath = $path . '/' . $ie_file;
+    if (file_exists($ie_filepath)) {
+      drupal_add_css($ie_filepath, array(
+        'group' => CSS_THEME,
+        'browsers' => array(
+          'IE' => 'lt IE 9',
+          '!IE' => FALSE,
+          ),
+        'preprocess' => FALSE,
+        )
+      );
+    }
+  }
 
   // add a body class if the site name is hidden
   if (theme_get_setting('toggle_name') == FALSE) {

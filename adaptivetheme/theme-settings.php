@@ -731,7 +731,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       '#title' => t('Login Block'),
       '#description' => t('<h3>Login Block Options</h3>'),
     );
-    
+
     $form['at']['login-block']['hlb']['horizontal_login_block'] = array(
       '#type' => 'checkbox',
       '#title' => t('Horizontal Login Block'),
@@ -1013,25 +1013,38 @@ function at_theme_settings_submit($form, &$form_state) {
     }
 
     $styles = implode("\n", $layout) . $width;
+
+    // Set a variable for printing a special layout file for less than IE9
+    $iecomment = "/* Standard layout $method, for IE8 and below. Note that rounding errors may occur in IE7 and below. */\n";
+    $lt_ie9 = $iecomment . $styles;
+
     $css = $comment . '@media ' . $media_query . ' {' . "\n" . $styles . "\n" . '}';
     $layouts[] = check_plain($css);
   }
   $layout_data = implode("\n", $layouts);
 
+  // Build and save files
   $theme = $form_state['build_info']['args'][0];
-  $file  = $theme . '.responsive.layout.css';
   $path  = "public://at_css";
-  $data  = $layout_data;
-
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
 
-  $filepath = $path . '/' . $file;
-  file_save_data($data, $filepath, FILE_EXISTS_REPLACE);
-  //drupal_chmod($file);
+  // IE
+  $lt_ie9_layout_file     = $theme . '.lt-ie9.layout.css';
+  $lt_ie9_layout_data     = $lt_ie9;
+  $lt_ie9_layout_filepath = $path . '/' . $lt_ie9_layout_file;
+  file_save_data($lt_ie9_layout_data, $lt_ie9_layout_filepath, FILE_EXISTS_REPLACE);
 
-  // set variables so we can retrive them later to load the css file
-  variable_set($theme . '_mediaqueries_path', $path);
-  variable_set($theme . '_mediaqueries_css', $file);
+  // Responsive layout
+  $responsive_layout_file     = $theme . '.responsive.layout.css';
+  $responsive_layout_data     = $layout_data;
+  $responsive_layout_filepath = $path . '/' . $responsive_layout_file;
+  file_save_data($responsive_layout_data, $responsive_layout_filepath, FILE_EXISTS_REPLACE);
+
+  // set variables so we can retrive them later to load the css files
+  variable_set($theme . '_ltie9_layout_file_path', $path);
+  variable_set($theme . '_ltie9_layout_file_css', $lt_ie9_layout_file);
+  variable_set($theme . '_responsive_layout_file_path', $path);
+  variable_set($theme . '_responsive_layout_file_css', $responsive_layout_file);
 }
 
 // Process layout styles
