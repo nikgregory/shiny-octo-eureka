@@ -115,8 +115,9 @@
   settings[extra_menu_classes]      = 1
   settings[extra_item_list_classes] = 1
 
-  ; Extra markup
+  ; Markup
   settings[menu_item_span_elements] = 0
+  settings[frontpage_remove_title]  = 1
 
   ; Fonts
   settings[font_family] = 'ff-l'

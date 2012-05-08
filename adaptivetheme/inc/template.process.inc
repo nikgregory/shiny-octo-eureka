@@ -228,6 +228,14 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
 }
 
+// Process variables for page.tpl.php
+function adaptivetheme_process_page(&$vars) {
+  // Remove the frontpage title if set in theme settings
+  if (theme_get_setting('frontpage_remove_title') === 1 && $vars['is_front'] === TRUE) {
+    $vars['title'] = '';
+  }
+}
+
 // Preprocess variables for node.tpl.php
 function adaptivetheme_preprocess_node(&$vars) {
   global $theme, $user;

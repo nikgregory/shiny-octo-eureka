@@ -200,5 +200,6 @@
   settings[extra_menu_classes]      = 0
   settings[extra_item_list_classes] = 0
 
-  ; Extra markup
+  ; Markup
   settings[menu_item_span_elements] = 0
+  settings[frontpage_remove_title]  = 0

@@ -769,7 +769,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   );
   $form['at']['classes']['extra-classes']['extra_page_classes'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n).') . '</span>',
+    '#title' => t('Pages: ') . '<span class="description">' . t('add page-path, add/edit/delete (for workflow states), content type classes, section classes, site name class (useful for multisites) and a language class (i18n).') . '</span>',
     '#default_value' => theme_get_setting('extra_page_classes'),
   );
   $form['at']['classes']['extra-classes']['extra_article_classes'] = array(
@@ -803,17 +803,25 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Markup'),
     '#weight' => 101,
   );
-  $form['at']['markup']['menu-links'] = array(
+  $form['at']['markup']['modify-output'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Menu items markup'),
-    '#description' => t('<h3>Extra Markup Options</h3>'),
+    '#title' => t('Modify Output'),
+    '#description' => t('<h3>Modify Output</h3>'),
   );
   // Add spans to theme_links
-  $form['at']['markup']['menu-links']['menu_item_span_elements'] = array(
+  $form['at']['markup']['modify-output']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Wrap menu item text in SPAN tags - useful for certain theme or design related techniques'),
+    '#title' => t('Wrap menu item text in SPAN tags <small>(useful for certain design related techniques)</small>'),
     '#description' => t('Note: this does not work for Superfish menus, which includes its own feature for doing this.'),
     '#default_value' => theme_get_setting('menu_item_span_elements'),
+  );
+
+  // Hide front page title
+  $form['at']['markup']['modify-output']['frontpage_remove_title'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Remove the frontpage title'),
+    '#default_value' => theme_get_setting('frontpage_remove_title'),
+    '#description' => t('Checking this setting will remove the page title from the front page, for example if you set a node to be the front page content you may want to hide the title.'),
   );
 
   // The following will be processed even if the theme is inactive.
