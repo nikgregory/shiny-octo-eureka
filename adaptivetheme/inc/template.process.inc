@@ -39,6 +39,13 @@ function adaptivetheme_preprocess_html(&$vars) {
       $vars['classes_array'][] = 'lang-' . $vars['language']->language;
     }
 
+    // Site name class, for multi site installs that need to target styles
+    // at each site seperately (mitigates things like block-id clashes)
+    if (!empty($vars['head_title_array']['name'])) {
+      $head_title = check_plain($vars['head_title_array']['name']);
+      $vars['classes_array'][] = 'site-name-' . drupal_html_class($head_title);
+    }
+
     // Classes for body element. Allows advanced theming based on context
     // (home page, node of certain type, etc.), cheers Zen.
     if (!$vars['is_front']) {
