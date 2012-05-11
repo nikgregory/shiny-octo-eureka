@@ -206,13 +206,13 @@ tr.error  {
 /* The word "Unpublished" displayed underneath the content */
 .node-unpublished p.unpublished,
 .comment-unpublished p.unpublished {
-  color: #fff;
+  color: pink; /* target browsers that do not support rgba */
   color: rgba(239, 170, 170, 0.4);
-  font-family: Impact,"Arial Narrow",Helvetica,sans-serif;
-  font-size: 75px;
-  font-weight: bold;
-  height: 0;
+  font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+  font-size: 50px;
+  font-weight: 700;
   line-height: 1.2;
+  height: 0;
   margin: 0;
   padding: 0;
   overflow: visible;

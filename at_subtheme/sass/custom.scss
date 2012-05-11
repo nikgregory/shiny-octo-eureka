@@ -76,17 +76,19 @@
 
 // The word "Unpublished" displayed underneath unpublished nodes and comments.
 @mixin unpublished-div {
+  color: pink; // target browsers that do not support rgba
+  color: rgba(239, 170, 170, 0.4);
+  font-family: $impact;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.2;
   height: 0;
+  margin: 0;
+  padding: 0;
   overflow: visible;
-  color: #d8d8d8;
-  font-size: 75px;
-  line-height: 1;
-  font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
-  font-weight: bold;
-  text-transform: uppercase;
   text-align: center;
-  word-wrap: break-word; // A very nice CSS3 property
-
+  text-transform: uppercase;
+  word-wrap: break-word;
   @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
     .ie6-7 &>* {
       position: relative; // Otherwise these elements will appear below the "Unpublished" text.
