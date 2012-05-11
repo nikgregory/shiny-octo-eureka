@@ -50,7 +50,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $logo = file_create_url(drupal_get_path('theme', 'adaptivetheme') . '/logo.png');
   $layout_header  = '<div class="at-settings-form layout-settings-form ' . $admin_theme_class . '"><div class="layout-header theme-settings-header clearfix">';
   $layout_header .= '<h1>' . t('Layout &amp; General Settings') . '</h1>';
-  $layout_header .= '<a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a>';
+  $layout_header .= '<p class="docs-link"><a href="http://adaptivethemes.com/documentation/adaptivetheme-7x-3x" title="View online documentation" target="_blank">View online documentation</a></p>';
+  $layout_header .= '<p class="logo-link"><a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a></p>';
   $layout_header .= '</div>';
 
   $form['at-settings'] = array(
@@ -79,6 +80,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     // Build a custom header for the Extensions settings form.
     $styles_header  = '<div class="at-settings-form style-settings-form ' . $admin_theme_class . '"><div class="styles-header theme-settings-header clearfix">';
     $styles_header .= '<h1>' . t('Extensions') . '</h1>';
+    $styles_header .= '<p class="docs-link"><a href="http://adaptivethemes.com/documentation/extensions" title="View online documentation for Extensions" target="_blank">View online documentation</a></p>';
     $styles_header .= '</div>';
 
     $form['at'] = array('#type' => 'vertical_tabs',

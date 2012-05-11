@@ -96,7 +96,6 @@ html.js fieldset.collapsed {
 /* Inputs */
 input {
   margin: 0;
-  max-width: 100%;
 }
 
 
@@ -126,6 +125,12 @@ input[type="radio"] {
 button[disabled],
 input[disabled] {
   cursor: default;
+}
+
+
+/* Make sure text input fields never overflow their containers */
+input.form-text {
+  max-width: 100%;
 }
 
 

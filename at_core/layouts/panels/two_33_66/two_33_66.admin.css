@@ -4,8 +4,8 @@
 #panels-dnd-main .region-two-33-66-bottom {clear: both;}
 
 /* Two col sprite */
-[id^=edit-two] .form-type-radio label {background: url(twocol-sprite.png);}
-.form-type-radio label[for$=two-50] {background-position: 0 0;}
+[id^=edit-two] .form-type-radio label  {background: url(twocol-sprite.png);}
+.form-type-radio label[for$=two-50]    {background-position: 0 0;}
 .form-type-radio label[for$=two-66-33] {background-position: -41px 0;}
 .form-type-radio label[for$=two-33-66] {background-position: -82px 0;}
 .form-type-radio label[for$=two-brick] {background-position: -123px 0;}

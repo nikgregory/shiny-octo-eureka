@@ -15,9 +15,31 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   // charset utf-8
   $head_elements['system_meta_content_type']['#attributes'] = array('charset' => 'utf-8');
 
-  // This injects new meta tags for mobile, it uses all user entered data so
-  // we do heavy sanity checking.
-
+	// Metatags for mobile
+	// X-UA-Compatible
+  if (at_get_setting('chrome_edge', $theme_name) === 1) {
+    $head_elements['adaptivetheme_meta_x_ua_compatible'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => "X-UA-Compatible",
+        'content' => "IE=edge, chrome=1",
+      ),
+      '#weight' => 1,
+    );
+  }
+	// cleartype
+	if (at_get_setting('clear_type', $theme_name) === 1) {
+    $head_elements['adaptivetheme_meta_cleartype'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => "cleartype",
+        'content' => "on",
+      ),
+      '#weight' => 2,
+    );
+	}
   // Viewport
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
 		// Viewport
@@ -29,7 +51,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 					'name' => 'viewport',
 					'content' => check_plain($adaptivetheme_meta_viewport),
 				),
-				'#weight' => 1,
+				'#weight' => 3,
 			);
 		}
 		// MobileOptimized
@@ -41,7 +63,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 					'name' => "MobileOptimized",
 					'content' => check_plain($adaptivetheme_meta_mobileoptimized),
 				),
-				'#weight' => 2,
+				'#weight' => 4,
 			);
 		}
 		// HandheldFriendly
@@ -53,7 +75,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 					'name' => "HandheldFriendly",
 					'content' => check_plain($adaptivetheme_meta_handheldfriendly),
 				),
-				'#weight' => 3,
+				'#weight' => 5,
 			);
 		}
 		// apple-mobile-web-app-capable
@@ -65,32 +87,10 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 					'name' => "apple-mobile-web-app-capable",
 					'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
 				),
-				'#weight' => 4,
+				'#weight' => 6,
 			);
 		}
 	}
-  if (at_get_setting('chrome_edge', $theme_name) === 1) {
-    // cleartype
-    $head_elements['adaptivetheme_meta_cleartype'] = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-        'http-equiv' => "cleartype",
-        'content' => "on",
-      ),
-      '#weight' => 5,
-    );
-    // X-UA-Compatible
-    $head_elements['adaptivetheme_meta_x_ua_compatible'] = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-        'http-equiv' => "X-UA-Compatible",
-        'content' => "IE=edge, chrome=1",
-      ),
-      '#weight' => 6,
-    );
-  }
 
   // Apple touch icons
   if (at_get_setting('enable_apple_touch_icons') === 1) {
@@ -360,4 +360,364 @@ function adaptivetheme_form_node_form_alter(&$form, &$form_state, $form_id) {
  */
 function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
   $settings['bodyClass'] = 'wysiwygeditor';
+}
+
+/**
+ * Adaptivetheme implimentation of hook_menu_alter()
+ */
+function adaptivetheme_menu_alter(&$items) {
+	// Add a menu item to display all panels layouts on one page
+	$items['atcore-debug-panels']['title'] = t('AT Core Debug Panels');
+	$items['atcore-debug-panels']['type'] = MENU_CALLBACK;
+	$items['atcore-debug-panels']['page callback'] = 'at_debug_panels';
+	$items['atcore-debug-panels']['weight'] = 100;
+	$items['atcore-debug-panels']['access arguments'] = array('administer themes');
+}
+
+/**
+ * Callback function for at-core-debug-panels menu item.
+ */
+function at_debug_panels() {
+
+	$file = drupal_get_path('theme', 'adaptivetheme') . '/css/debug-panels.css';
+	drupal_add_css($file, array(
+		'preprocess' => FALSE,
+		'group' => CSS_THEME,
+		'media' => 'screen',
+		'every_page' => FALSE,
+		'weight' => 2000,
+		)
+	);
+
+  $output = <<<EOF
+<div class="all-panel-layouts debug-panels" style="font-size: 81.3%">
+
+    <div class="at-panel panel-display one-column clearfix">
+      <div class="region region-one-main">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display two-50 clearfix">
+      <div class="region region-two-50-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-50-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-50-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-50-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display two-33-66 clearfix">
+      <div class="region region-two-33-66-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-33-66-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-33-66-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-33-66-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display two-66-33 clearfix">
+      <div class="region region-two-66-33-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-66-33-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-66-33-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-two-66-33-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display two-brick clearfix">
+      <div class="region region-two-brick-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="panel-row row-1 clearfix">
+        <div class="region region-two-brick-left-above">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-two-brick-right-above">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="region region-two-brick-middle region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="panel-row row-2 clearfix">
+        <div class="region region-two-brick-left-below">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-two-brick-right-below">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="region region-two-brick-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display three-3x33 clearfix">
+      <div class="region region-three-33-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-33-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-33-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-33-third">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-33-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display three-25-50-25 clearfix">
+      <div class="region region-three-25-50-25-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-50-25-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-50-25-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-50-25-third">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-50-25-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display three-25-25-50 clearfix">
+      <div class="region region-three-25-25-50-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-25-50-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-25-50-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-25-50-third">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-25-25-50-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display three-50-25-25 clearfix">
+      <div class="region region-three-50-25-25-top region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-50-25-25-first">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-50-25-25-second">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-50-25-25-third">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="region region-three-50-25-25-bottom region-conditional-stack">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display four-4x25 clearfix">
+      <div class="panel-row row-1 clearfix">
+        <div class="region region-four-first">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-four-second">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="panel-row row-2 clearfix">
+        <div class="region region-four-third">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-four-fourth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display five-5x20 clearfix">
+      <div class="panel-row row-1 clearfix">
+        <div class="region region-five-first">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-five-second">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="panel-row row-2 clearfix">
+        <div class="region region-five-third">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-five-fourth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-five-fifth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-display six-6x16 multicolumn clearfix">
+      <div class="panel-row row-1 clearfix">
+        <div class="region region-six-first">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-six-second">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="panel-row row-2 clearfix">
+        <div class="region region-six-third">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-six-fourth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+      <div class="panel-row row-3 clearfix">
+        <div class="region region-six-fifth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-six-sixth">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-panel three-inset-left clearfix">
+      <div class="region region-three-inset-left-sidebar">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="inset-wrapper clearfix">
+        <div class="region region-three-inset-left-top region-conditional-stack">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-left-middle">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-left-inset">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-left-bottom region-conditional-stack">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-panel panel-panel three-inset-right clearfix">
+      <div class="region region-three-inset-right-sidebar">
+        <div class="region-inner clearfix">
+        </div>
+      </div>
+      <div class="inset-wrapper clearfix">
+        <div class="region region-three-inset-right-top region-conditional-stack">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-right-middle">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-right-inset">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+        <div class="region region-three-inset-right-bottom region-conditional-stack">
+          <div class="region-inner clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+EOF;
+
+  return $output;
 }

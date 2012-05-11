@@ -30,7 +30,6 @@
     '#description' => t('This setting will load a page template will full width DIV wrappers - perfect for designs with 100% width sections, header or footer. Note that if you choose to use other page template suggestions you should use copies of page--full-width-wrappers.tpl.php, you will find this in adaptivetheme/at-core/templates.'),
     '#default_value' => at_get_setting('page_full_width_wrappers'),
   );
-
   // Add page-[content-type] suggestions, all suggestions carry a performance
   // overhead, so allow the user to choose this rather than doing to by default
   $form['at']['modify-output']['design']['page_content_type_suggestions'] = array(
@@ -39,7 +38,6 @@
     '#description' => t('If the node type is "blog" the template suggestion will be "page--blog.tpl.php". The content type suggestions are weak will be overridden by page--node or page--node-[nid] templates.'),
     '#default_value' => at_get_setting('page_content_type_suggestions'),
   );
-
   // Add spans to theme_links
   $form['at']['modify-output']['design']['menu_item_span_elements'] = array(
     '#type' => 'checkbox',
@@ -117,7 +115,7 @@
     '#type' => 'checkbox',
     '#title' => t('Remove the frontpage title'),
     '#default_value' => at_get_setting('frontpage_remove_title'),
-    '#description' => t('Checking this setting will remove the page title from the front page.'),
+    '#description' => t('Checking this setting will remove the page title from the front page, for example if you set a node to be the front page content you may want to hide the title.'),
   );
   // Unset block system main front
   $form['at']['modify-output']['hide-remove']['unset_block_system_main_front'] = array(
@@ -174,7 +172,7 @@
   $form['at']['modify-output']['extra-classes']['extra_page_classes'] = array(
     '#type' => 'checkbox',
     '#title' => t('Page classes'),
-    '#description' => t('page-path, add/edit/delete (for workflow states), content type classes, section classes and a language class (i18n)'),
+    '#description' => t('page-path, add/edit/delete (for workflow states), content type classes, section classes, site name class (useful for multisites) and a language class (i18n)'),
     '#default_value' => at_get_setting('extra_page_classes'),
   );
   // Node

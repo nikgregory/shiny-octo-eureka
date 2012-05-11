@@ -79,6 +79,7 @@
 ?>
 <div id="page" class="container <?php print $classes; ?>">
 
+  <!-- region: Leaderboard -->
   <?php print render($page['leaderboard']); ?>
 
   <header id="header" class="clearfix" role="banner">
@@ -86,43 +87,55 @@
     <?php if ($site_logo || $site_name || $site_slogan): ?>
       <div id="branding" class="branding-elements clearfix">
 
+        <!-- Logo -->
         <?php if ($site_logo): ?>
           <div id="logo"><?php print $site_logo; ?></div>
         <?php endif; ?>
 
         <?php if ($site_name || $site_slogan): ?>
           <hgroup id="name-and-slogan"<?php if (!$site_slogan && $hide_site_name): ?> class="<?php print $visibility; ?>"<?php endif; ?>>
+
+            <!-- Site name -->
             <?php if ($site_name): ?>
               <h1 id="site-name"<?php if ($hide_site_name): ?> class="<?php print $visibility; ?>"<?php endif; ?>><?php print $site_name; ?></h1>
             <?php endif; ?>
+
+            <!-- Slogan -->
             <?php if ($site_slogan): ?>
               <h2 id="site-slogan"><?php print $site_slogan; ?></h2>
             <?php endif; ?>
+
           </hgroup>
         <?php endif; ?>
 
-      </div>
+      </div><!-- /end #branding -->
     <?php endif; ?>
 
+    <!-- region: Header -->
     <?php print render($page['header']); ?>
 
   </header>
 
+  <!-- Navigation elements -->
   <?php print render($page['menu_bar']); ?>
   <?php if ($primary_navigation): print $primary_navigation; endif; ?>
   <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
 
+  <!-- Breadcrumbs -->
   <?php if ($breadcrumb): print $breadcrumb; endif; ?>
 
+  <!-- Messages and Help -->
   <?php print $messages; ?>
   <?php print render($page['help']); ?>
 
+  <!-- region: Secondary Content -->
   <?php print render($page['secondary_content']); ?>
 
   <div id="columns" class="clearfix">
     <div id="content-column" role="main">
       <div class="content-inner">
 
+        <!-- region: Highlighted -->
         <?php print render($page['highlighted']); ?>
 
         <<?php print $tag; ?> id="main-content">
@@ -139,15 +152,19 @@
 
               <?php if ($primary_local_tasks || $secondary_local_tasks || $action_links): ?>
                 <div id="tasks">
+
                   <?php if ($primary_local_tasks): ?>
                     <ul class="tabs primary clearfix"><?php print render($primary_local_tasks); ?></ul>
                   <?php endif; ?>
+
                   <?php if ($secondary_local_tasks): ?>
                     <ul class="tabs secondary clearfix"><?php print render($secondary_local_tasks); ?></ul>
                   <?php endif; ?>
+
                   <?php if ($action_links = render($action_links)): ?>
                     <ul class="action-links clearfix"><?php print $action_links; ?></ul>
                   <?php endif; ?>
+
                 </div>
               <?php endif; ?>
 
@@ -155,30 +172,38 @@
           <?php endif; ?>
           <?php print render($title_suffix); ?>
 
+          <!-- region: Main Content -->
           <?php if ($content = render($page['content'])): ?>
             <div id="content">
               <?php print $content; ?>
             </div>
           <?php endif; ?>
 
-         <?php print $feed_icons; ?>
+          <!-- Feed icons (RSS, Atom icons etc -->
+          <?php print $feed_icons; ?>
 
-        </<?php print $tag; ?>>
+        </<?php print $tag; ?>><!-- /end #main-content -->
 
+        <!-- region: Content Aside -->
         <?php print render($page['content_aside']); ?>
 
-      </div>
-    </div>
+      </div><!-- /end .content-inner -->
+    </div><!-- /end #content-column -->
 
+    <!-- regions: Sidebar first and Sidebar second -->
     <?php $sidebar_first = render($page['sidebar_first']); print $sidebar_first; ?>
     <?php $sidebar_second = render($page['sidebar_second']); print $sidebar_second; ?>
 
-  </div>
+  </div><!-- /end #columns -->
 
+  <!-- region: Tertiary Content -->
   <?php print render($page['tertiary_content']); ?>
 
+  <!-- region: Footer -->
   <?php if ($page['footer']): ?>
-    <footer id="footer" class="clearfix" role="contentinfo"><?php print render($page['footer']); ?></footer>
+    <footer id="footer" class="clearfix" role="contentinfo">
+      <?php print render($page['footer']); ?>
+    </footer>
   <?php endif; ?>
 
 </div>

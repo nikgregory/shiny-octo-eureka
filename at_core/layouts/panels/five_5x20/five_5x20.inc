@@ -103,19 +103,19 @@ function adaptivetheme_five_5x20_panels_layouts() {
       'five-5x20-2x3-grid' => array(
         'css' => array(
           '33' => array('.five-5x20 > .panel-row > .region' => 'width:33.333333%'),
-          '50' => array('.five-5x20 > .row-1 .region-five-first,.five-5x20 .row-1 .region-five-second' => 'width:50%'),
+          '50' => array('.five-5x20 > .row-1 div.region-five-first,.five-5x20 .row-1 div.region-five-second' => 'width:50%'),
           'fdw' => array('.five-5x20 > .panel-row' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-1x2x2-grid' => array(
         'css' => array(
-          '50' => array('.five-5x20 > .panel-row > .region' => 'width:50%'),
-          'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .panel-row > .region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
+          '50' => array('.five-5x20 > .panel-row > div.region' => 'width:50%'),
+          'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .panel-row > div.region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-stack-2' => array(
         'css' => array(
-          '50' => array('.five-5x20 > .row-1 > .region' => 'width:50%'),
+          '50' => array('.five-5x20 > .row-1 > div.region' => 'width:50%'),
           'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .row-2 > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),

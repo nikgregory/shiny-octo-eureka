@@ -14,10 +14,37 @@
   font-size: 1.25em;
   text-shadow: 1px 1px 1px #fff;
 }
-.layout-header a {
-  display: block;
+p.docs-link {
+  float: left;
+  margin: 3px 10px 0;
+  padding: 0;
+}
+p.docs-link a {
+  width: 16px;
+  height: 16px;
+  display: block !important;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: url(images/help.png) no-repeat;
+  -webkit-transition: none 0 delay;
+  -moz-transition: none 0 delay;
+  -o-transition: none 0 delay;
+  -ms-transition: none 0 delay;
+  transition: none 0 delay;
+}
+p.docs-link a:hover,
+p.docs-link a:focus {
+  background-position: 0 -16px;
+}
+p.logo-link {
   float: right;
   width: 65px;
+  margin: 0;
+  padding: 0;
+}
+.layout-header a {
+  display: block;
 }
 .layout-header a img {
   width: 100%;

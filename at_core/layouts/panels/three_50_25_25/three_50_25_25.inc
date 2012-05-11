@@ -18,8 +18,8 @@ function adaptivetheme_three_50_25_25_panels_layouts() {
     'type' => 'three',
     'options' => array(
       'three-50-25-25' => 'default',
-      'three-50-25-25-stack-top' => 'stack bottom',
-      'three-50-25-25-stack-bottom' => 'stack top',
+      'three-50-25-25-stack-bottom' => 'stack bottom',
+      'three-50-25-25-stack-top' => 'stack top',
       'three-50-25-25-stack' => 'stack',
     ),
     'styles' => array(
@@ -29,17 +29,17 @@ function adaptivetheme_three_50_25_25_panels_layouts() {
           '50' => array('.three-50-25-25 > div.region-three-50-25-25-first' => 'width:50%'),
         ),
       ),
-      'three-50-25-25-stack-top' => array(
-        'css' => array(
-          '50' => array('.three-50-25-25 > .region-three-50-25-25-second,.three-50-25-25 .region-three-50-25-25-third' => 'width:50%'),
-          'fdw' => array('.three-50-25-25 > .region-three-50-25-25-first' => 'float:none;display:block;width:100%;clear:both'),
-        ),
-      ),
       'three-50-25-25-stack-bottom' => array(
         'css' => array(
           '75' => array('.three-50-25-25 > div.region-three-50-25-25-first' => 'width:75%'),
           '25' => array('.three-50-25-25 > div.region-three-50-25-25-second' => 'width:25%'),
           'fdw' => array('.three-50-25-25 > .region-three-50-25-25-third' => 'float:none;display:block;width:100%;clear:both'),
+        ),
+      ),
+      'three-50-25-25-stack-top' => array(
+        'css' => array(
+          '50' => array('.three-50-25-25 > .region-three-50-25-25-second,.three-50-25-25 .region-three-50-25-25-third' => 'width:50%'),
+          'fdw' => array('.three-50-25-25 > .region-three-50-25-25-first' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-50-25-25-stack' => array(

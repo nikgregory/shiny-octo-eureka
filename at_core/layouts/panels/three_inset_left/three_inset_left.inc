@@ -40,7 +40,7 @@ function adaptivetheme_three_inset_left_panels_layouts() {
       ),
       'three-inset-left-stack' => array(
         'css' => array(
-          'fdw' => array('.three-inset-left > .inset-wrapper,.three-inset-left > .inset-wrapper > .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.three-inset-left > .inset-wrapper,.three-inset-left > .inset-wrapper > .region,.three-inset-left > .region-three-inset-left-sidebar' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

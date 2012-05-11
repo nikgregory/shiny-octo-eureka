@@ -34,14 +34,6 @@ function adaptivetheme_process_html(&$vars, $hook) {
   else {
     $vars['polyfills'] = '';
   }
-
-  // Load the panels test
-  if (at_get_setting('load_all_panels', $theme_name) === 1) {
-    if (drupal_is_front_page()) {
-      $panels_test = file_get_contents($path_to_at_core . '/layouts/panels_test.html');
-      $vars['page'] = $panels_test;
-    }
-  }
 }
 
 /**
@@ -66,6 +58,11 @@ function adaptivetheme_process_html_tag(&$vars, $hook) {
 function adaptivetheme_process_page(&$vars, $hook) {
   global $theme_key;
   $theme_name = $theme_key;
+
+  // Site name, Slogan and hgroup attributes
+  $vars['site_name_attributes'] = empty($vars['site_name_attributes_array']) ? '' : drupal_attributes($vars['site_name_attributes_array']);
+  $vars['site_slogan_attributes'] = empty($vars['site_slogan_attributes_array']) ? '' : drupal_attributes($vars['site_slogan_attributes_array']);
+  $vars['hgroup_attributes'] = empty($vars['hgroup_attributes_array']) ? '' : drupal_attributes($vars['hgroup_attributes_array']);
 
   // Theme the menu bars
   if (!empty($vars['primary_navigation'])) {

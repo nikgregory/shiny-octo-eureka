@@ -41,7 +41,7 @@ function adaptivetheme_three_inset_right_panels_layouts() {
       ),
       'three-inset-right-stack' => array(
         'css' => array(
-          'fdw' => array('.three-inset-right > .inset-wrapper,.three-inset-right > .inset-wrapper > .region' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.three-inset-right > .inset-wrapper,.three-inset-right > .inset-wrapper > .region,.three-inset-right > .region-three-inset-right-sidebar' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
     ),

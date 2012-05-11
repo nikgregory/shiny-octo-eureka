@@ -368,7 +368,7 @@ function load_debuggers($theme_name) {
   $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   // Do some debugging/development stuff
-  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
+  if (at_get_setting('expose_regions', $theme_name) === 1) {
     drupal_add_css($path_to_at_core . '/css/debug-regions.css');
   }
 
@@ -640,63 +640,6 @@ function load_google_fonts($theme_name) {
 
   return $google_font_string;
 }
-
-/**
- * Google Font loader.
- * Adaptivetheme can load websafe fonts, Google fonts, custom font stacks and
- * integrate with @font-your-face module. All can be configured in the "Fonts"
- * theme settings. Here we only need to load Google webfonts. Websafe and custom
- * fonts are stored in a generated CSS file (in public files) and
- * @font-your-face module takes care of loading its own fonts.
- *
- * @param $theme_name
- * TODO: remove this function, first check everything is working in the new system.
- */
-/*function _load_google_fonts($theme_name) {
-  global $path_to_at_core;
-
-  $google_fonts = drupal_static(__FUNCTION__, array());
-  if (empty($google_fonts)) {
-
-    $used_fonts = array();
-    $font_elements = font_elements();
-    foreach ($font_elements as $key => $value) {
-      $setting = $value['setting'];
-      $element = $value['element'];
-      // Check if any elements are set to use a google font
-      if (theme_get_setting($setting . '_type', $theme_name) === 'gwf') {
-        // Get the theme setting
-        $setting = theme_get_setting($setting . '_gwf', $theme_name);
-        // strip the element prefix
-        $font = str_replace($element . '-', '', $setting);
-        // replace hyphens with spaces, now we have a lower case font name
-        $used_fonts[] = str_replace('-', ' ', $font);
-      }
-    }
-    if (!empty($used_fonts)) {
-      // Get the full list of font names, Google fonts are case sensitive, and
-      // you cannot just uppercase/ucfirst, font names are not consistant
-      $google_fonts = google_font_names();
-      // Populate a variable with lower cased font names
-      $google_fonts_lower_case = unserialize(strtolower(serialize($google_fonts)));
-      // Now key the array with our lower case font names, and set that to a variable
-      $google_fonts_lower_case_keys = array_combine($google_fonts_lower_case, $google_fonts);
-      $used_google_fonts = array();
-      // Now we can find a match, comparing our lowercase $used_fonts with the lower case keys
-      foreach ($google_fonts_lower_case_keys as $k => $v) {
-        if (in_array($k, $used_fonts)) {
-          $used_google_fonts[] = $v; // at last, we have the right font name/s
-        }
-      }
-      // The same font can be used multiple times, but we only need to load it once
-      $array = array_unique($used_google_fonts);
-      // Implode the array, seperate font names with a pipe
-      $google_fonts = trim(implode('|', $array));
-    }
-  }
-
-  return $google_fonts;
-}*/
 
 //
 // Functions to maintain 7.x-2.x backward compatibility,

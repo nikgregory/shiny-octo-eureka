@@ -158,11 +158,6 @@ h1#page-title {
 /* Hyperlinks */
 a {
   text-decoration: none;
-	-webkit-transition: all 0.3s ease-in-out;
-	-moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
 }
 a:active,
 a.active,
@@ -537,6 +532,11 @@ ul.primary li a {
   -webkit-border-top-left-radius: 6px;
   -webkit-border-top-right-radius: 6px;
   border-radius: 6px 6px 0 0;
+  -moz-transition: background 0.2s ease-in;
+  -webkit-transition: background 0.2s ease-in;
+	-o-transition: background 0.2s ease-in;
+	-ms-transition: background 0.2s ease-in;
+  transition: background 0.2s ease-in;
 }
 ul.primary li a:hover {
   background: #6e6e6e;
@@ -1281,9 +1281,11 @@ ul.action-links li a {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   border-radius: 12px;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
+  -moz-transition: background 0.2s ease-in;
+  -webkit-transition: background 0.2s ease-in;
+	-o-transition: background 0.2s ease-in;
+	-ms-transition: background 0.2s ease-in;
+  transition: background 0.2s ease-in;
 }
 ul.action-links li a:before {
   content: "+ ";

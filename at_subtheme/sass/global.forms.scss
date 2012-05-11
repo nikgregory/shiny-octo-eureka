@@ -117,7 +117,10 @@ button[disabled] {
 // Input
 input {
   margin: 0;
-  max-width: 100%;
+
+  .form-text {
+    max-width: 100%;
+  }
 
   &[disabled] {
     cursor: default;

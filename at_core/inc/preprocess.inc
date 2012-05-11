@@ -78,11 +78,8 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
     include_once($path_to_at_core . '/inc/google.web.fonts.inc');
   }
 
-  // Load debuggers if enabled.
-  if (
-  at_get_setting('expose_regions', $theme_name) === 1 ||
-  at_get_setting('load_all_panels', $theme_name) === 1 ||
-  at_get_setting('show_window_size', $theme_name) === 1) {
+  // Load debuggers if enabled. Panels page debugger is a menu item, see alter.inc
+  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('show_window_size', $theme_name) === 1) {
     load_debuggers($theme_name);
   }
 }
@@ -120,52 +117,29 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
     $vars['site_name_unlinked'] = $sitename;
   }
 
-  // Hide the site name if toggled off, don't remove it
+  // Site name visibility and other classes
+  $vars['site_name_attributes_array'] = array();
+
   $vars['visibility'] = '';
   $vars['hide_site_name'] = FALSE;
   if (at_get_setting('toggle_name', $theme_name) === 0) {
+    // Keep the visibility variable to maintain backwards compatibility
     $vars['visibility'] = 'element-invisible';
+    $vars['site_name_attributes_array']['class'][] = $vars['visibility'];
     $vars['hide_site_name'] = TRUE;
   }
 
-  // Site name classes
-  if ($vars['hide_site_name'] === FALSE) {
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $site_name_settings = &drupal_static('adaptivetheme_preprocess_page_site_name_settings');
-      if (empty($site_name_settings)) {
-        $site_name_settings_array[] = 'site_name_case';
-        $site_name_settings_array[] = 'site_name_weight';
-        $site_name_settings_array[] = 'site_name_alignment';
-        $site_name_settings_array[] = 'site_name_shadow';
-        foreach ($site_name_settings_array as $site_name_setting) {
-          if ($site_name_setting = at_get_setting($site_name_setting, $theme_name)) {
-            $site_name_settings[] = $site_name_setting;
-          }
-        }
-      }
-      if ($site_name_settings) {
-        $vars['classes_array'][] = implode(' ', $site_name_settings);
-      }
-    }
+  // hgroup attributes
+  $vars['hgroup_attributes_array'] = array();
+  if (!$vars['site_slogan'] && $vars['hide_site_name']) {
+    $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
   }
 
-  // Slogan classes
-  if ($vars['site_slogan']) {
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $site_slogan_settings = &drupal_static('adaptivetheme_preprocess_page_site_slogan_settings');
-      if (empty($site_slogan_settings)) {
-        $site_slogan_settings_array[] = 'site_slogan_case';
-        $site_slogan_settings_array[] = 'site_slogan_weight';
-        $site_slogan_settings_array[] = 'site_slogan_alignment';
-        $site_slogan_settings_array[] = 'site_slogan_shadow';
-        foreach ($site_slogan_settings_array as $site_slogan_setting) {
-          if ($site_slogan_setting = at_get_setting($site_slogan_setting, $theme_name)) {
-            $site_slogan_settings[] = $site_slogan_setting;
-          }
-        }
-      }
-      if ($site_slogan_settings) {
-        $vars['classes_array'][] = implode(' ', $site_slogan_settings);
+  // Generate page classes, in AT Core these are all Extensions
+  if(at_get_setting('enable_extensions', $theme_name) === 1) {
+    if ($page_classes = generate_page_classes($vars, $theme_name)) {
+      foreach ($page_classes as $class_name) {
+        $vars['classes_array'][] = $class_name;
       }
     }
   }
@@ -322,23 +296,6 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
     $vars['classes_array'][] = drupal_html_class('block-' . $vars['block']->delta);
   }
 
-  // Add title style classes, these are loaded via the classes_array and not
-  // title_attributes_array so we can style the whole block depending on the
-  // title styles.
-  if (isset($vars['block']->subject)) {
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = &drupal_static('adaptivetheme_preprocess_block_heading_settings');
-      if (empty($settings_array)) {
-        $settings_array = array('block_title_case', 'block_title_weight', 'block_title_alignment', 'block_title_shadow');
-      }
-      foreach ($settings_array as $setting) {
-        if ($heading_setting = at_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_setting;
-        }
-      }
-    }
-  }
-
   // Add classes to theme the horizontal block option
   if (at_get_setting('horizontal_login_block', $theme_name) === 1 &&
     $vars['block']->module === 'user' &&
@@ -453,28 +410,14 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
     }
   }
 
-  // Add title style classes, as per blocks these are added to classes_array not title_attraibutes_array
-  // so we can style the entire node based on how the title wants to be handled (such as alignmment)
-  if (isset($vars['title'])) {
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = &drupal_static('adaptivetheme_preprocess_node_heading_settings');
-      if (empty($settings_array)) {
-        $settings_array = array('node_title_case', 'node_title_weight', 'node_title_alignment', 'node_title_shadow');
-      }
-      foreach ($settings_array as $setting) {
-        if ($heading_setting = at_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_setting;
-        }
-      }
-    }
-  }
-
   // ARIA Role
   $vars['attributes_array']['role'][] = 'article';
 
   // Title and content classes
   $vars['title_attributes_array']['class'][] = 'node-title';
   $vars['content_attributes_array']['class'][] = 'node-content';
+
+  $vars['title_attributes_array']['rel'][] = 'nofollow';
 
   // AT Core builds additional time and date variables for use in templates
 
@@ -554,21 +497,6 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
   // Title hidden?
   if (at_get_setting('comments_hide_title', $theme_name) === 1) {
     $vars['title_attributes_array']['class'][] = 'element-invisible';
-  }
-
-  // Add title style classes
-  if (at_get_setting('comments_hide_title', $theme_name) !== 1) {
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
-      $settings_array = &drupal_static('adaptivetheme_preprocess_comment_heading_settings');
-      if (empty($settings_array)) {
-        $settings_array = array('comment_title_case', 'comment_title_weight', 'comment_title_alignment', 'comment_title_shadow');
-      }
-      foreach ($settings_array as $setting) {
-        if ($heading_setting = at_get_setting($setting, $theme_name)) {
-          $vars['classes_array'][] = $heading_setting;
-        }
-      }
-    }
   }
 
   // Classes for comment content

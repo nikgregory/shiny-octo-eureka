@@ -18,13 +18,6 @@
     '#default_value' => at_get_setting('expose_regions'),
   );
 
-  // Load all panels
-  $form['at-settings']['debug']['debug-layout']['load_all_panels'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Replace the front page with panels_test.html - useful for studying and debugging Responsive Panels'),
-    '#default_value' => at_get_setting('load_all_panels'),
-  );
-
   // Window size bookmarklet
   $form['at-settings']['debug']['debug-layout']['show_window_size'] = array(
     '#type' => 'checkbox',
@@ -37,6 +30,16 @@
     '#type' => 'checkbox',
     '#title' => t('Sub-theme compatibility test'),
     '#default_value' => at_get_setting('atcore_version_test'),
+  );
+
+  // Debug panels
+  $form['at-settings']['debug']['debug-panels'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('<h3>Debug Panels and Gpanels Layouts</h3>'),
+    '#description' => t('<h3>Debug Panels and Gpanels Layouts</h3>'),
+  );
+  $form['at-settings']['debug']['debug-panels']['options'] = array(
+     '#markup' => t('<p>Adaptivetheme generates a special page that shows all Panels and Gpanels layouts on one page. These will react to your theme settings as per normal&thinsp;&mdash;&thinsp;you can easily see how they change at different breakpoints (your media queries). Only users with "Administer Themes" permissions can view this page. </p><p><a href="!panels_layouts" target="_blank">View all panels layouts</a></p>', array('!panels_layouts' => base_path() . 'atcore-debug-panels')),
   );
 
   // All media queries

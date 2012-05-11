@@ -9,16 +9,16 @@
 // Wrapper for the list of comments and its title
 #comments {
   margin: 1.5em 0;
-  
-  
+
+
   // Heading for the list of comments
   h2 {
-  
-  
+
+
     // Heading for the list of comments
     &.comment-title {}
-    
-    
+
+
     // Heading for the comment form
     &.comment-form {}
   }
@@ -29,53 +29,51 @@
 .comment {
   margin-bottom: 20px;
 
-  
+
   // The first comment in the list of comments
   &.first {}
 
-  
+
   // The last comment in the list of comments
   &.last {}
 
-  
+
   // An odd-numbered comment in the list of comments
   &.odd {}
 
-  
+
   // An even-numbered comment in the list of comments
   &.even {}
 
-  
+
   // The picture of the comment author
   .user-picture {}
 
-  
+
   // The "posted by" information wrapper (uses the footer element)
   .submitted {
 
-  
+
     // Submitted by elements are wrapped in a paragraph, is the equivalent to .comment footer.submitted > p
     p {}
 
-    
+
     // Submitted by user name is wrapped in a span or an link depending on user permissions to view user profiles
     .username {}
 
-    
+
     // Submitted by time element
     time {
-      text-transform: uppercase;
-      font-size: 75%;
-    } 
+    }
   }
 
-  
+
   // The user's signature
   .user-signature {}
 
-  
+
   // Comment links. See also the ul.links declaration in the pages.css.
-  ul.links {} 
+  ul.links {}
 }
 
 // Preview of the comment before submitting new or updated comment
@@ -128,4 +126,3 @@ h3.comment-title {}
   // Drupal core uses a 25px left margin
   // margin-left: 25px;
 }
-
