@@ -1,5 +1,9 @@
 <?php
+
 /**
+ * @file
+ * Gpanel snippet for the two column 2x50 layout
+ *
  * Gpanels are drop in multi-column snippets for displaying blocks.
  * Most Gpanels are stacked, meaning they have top and bottom regions
  * by default, however you do not need to use them. You should always
@@ -23,7 +27,7 @@ regions[two_50_bottom] = 2x50 Gpanel bottom
 <!-- Two column 2x50 -->
 <?php if (
   $page['two_50_top'] ||
-  $page['two_50_first'] || 
+  $page['two_50_first'] ||
   $page['two_50_second'] ||
   $page['two_50_bottom']
   ): ?>

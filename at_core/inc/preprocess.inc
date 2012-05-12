@@ -1,5 +1,7 @@
 <?php
+
 /**
+ * @file
  * All Preprocess functions for templates and theme fucntions.
  * If you need to add or modify preprocess functions do it in your sub-theme.
  */
@@ -39,7 +41,7 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
   }
 
   // Load fonts and/or Custom CSS
-  if(at_get_setting('enable_extensions', $theme_name) === 1) {
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
 
     if (at_get_setting('enable_font_settings', $theme_name) === 1) {
       load_fonts($path, $theme_name);
@@ -136,7 +138,7 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
   }
 
   // Generate page classes, in AT Core these are all Extensions
-  if(at_get_setting('enable_extensions', $theme_name) === 1) {
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
     if ($page_classes = generate_page_classes($vars, $theme_name)) {
       foreach ($page_classes as $class_name) {
         $vars['classes_array'][] = $class_name;
@@ -297,16 +299,10 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
   }
 
   // Add classes to theme the horizontal block option
-  if (at_get_setting('horizontal_login_block', $theme_name) === 1 &&
-    $vars['block']->module === 'user' &&
-    $vars['block']->delta === 'login')
-    {
+  if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
     $vars['classes_array'][] = 'lb-h';
   }
-  if (at_get_setting('slider_login_block', $theme_name) === 1 &&
-    $vars['block']->module === 'user' &&
-    $vars['block']->delta === 'login')
-    {
+  if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
     $vars['classes_array'][] = 'lb-s';
   }
 
@@ -593,7 +589,7 @@ function adaptivetheme_preprocess_menubar(&$vars, $hook) {
   $vars['menubar_id'] = $type . '-menu-bar';
   $vars['classes_array'][] = 'nav clearfix';
   $vars['content_attributes_array']['role'][] = 'navigation';
-  $vars['content_attributes_array']['class'][] = $type .'-menu-wrapper menu-wrapper clearfix';
+  $vars['content_attributes_array']['class'][] = $type . '-menu-wrapper menu-wrapper clearfix';
   // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }

@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Implementation of hook_panels_layouts
+ */
 function adaptivetheme_six_6x16_panels_layouts() {
   $items['six_6x16'] = array(
     'title'    => t('AT Six column 6x16'),
@@ -15,7 +20,7 @@ function adaptivetheme_six_6x16_panels_layouts() {
       'six_fifth'  => t('Column 5'),
       'six_sixth'  => t('Column 6'),
     ),
-    // AT
+    // AT Core
     'type' => 'six',
     'options' => array(
       'six-6x16' => 'default',
@@ -53,6 +58,9 @@ function adaptivetheme_six_6x16_panels_layouts() {
   return $items;
 }
 
+/**
+ * Preprocess variables for six-6x16.tpl.php
+ */
 function template_preprocess_six_6x16(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';

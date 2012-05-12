@@ -1,5 +1,9 @@
 <?php
+
 /**
+ * @file
+ * Gpanel snippet for the two column brick layout
+ *
  * Gpanels are drop in multi-column snippets for displaying blocks.
  * Most Gpanels are stacked, meaning they have top and bottom regions
  * by default, however you do not need to use them. You should always
@@ -26,7 +30,7 @@ regions[two_brick_bottom]      = 2 col Brick bottom
 <!-- Two column brick -->
 <?php if (
   $page['two_brick_top'] ||
-  $page['two_brick_left_above'] || 
+  $page['two_brick_left_above'] ||
   $page['two_brick_right_above'] ||
   $page['two_brick_middle'] ||
   $page['two_brick_left_below'] ||

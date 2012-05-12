@@ -1,5 +1,9 @@
 <?php
+
 /**
+ * @file
+ * Gpanel snippet for the three inset right layout
+ *
  * Gpanels are drop in multi-column snippets for displaying blocks.
  * Most Gpanels are stacked, meaning they have top and bottom regions
  * by default, however you do not need to use them. You should always
@@ -24,7 +28,7 @@ regions[threecol_inset_right_bottom]  = 3 col Inset right - bottom
 <!-- Three col inset right -->
 <?php if (
   $page['threecol_inset_right_sidebar'] ||
-  $page['threecol_inset_right_top'] || 
+  $page['threecol_inset_right_top'] ||
   $page['threecol_inset_right_middle'] ||
   $page['threecol_inset_right_inset'] ||
   $page['threecol_inset_right_bottom']

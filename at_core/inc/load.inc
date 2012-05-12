@@ -1,8 +1,10 @@
 <?php
 /**
+ * @file
  * Provides frequently used functions that load something, ususally CSS or JS
  * files, or that provide assistance to those loaders.
  */
+
 global $theme_key;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
@@ -216,10 +218,10 @@ function load_extensions_css($theme_name) {
   $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   $settings_css = array();
-  if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+  if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.headings.css';
   }
-  if(at_get_setting('enable_image_settings', $theme_name) === 1) {
+  if (at_get_setting('enable_image_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.image.css';
   }
   if (at_get_setting('horizontal_login_block_enable', $theme_name) === 'on') {
@@ -480,7 +482,7 @@ function at_theme_conditional_scripts($ie_scripts) {
     $cc_scripts = array();
 
     foreach ($ie_scripts as $conditional_comment => $conditional_scripts) {
-      $cc_scripts[] = '<!--[if ' . $conditional_comment . ']>' . "\n"  . $conditional_scripts . "\n" . '<![endif]-->' . "\n";
+      $cc_scripts[] = '<!--[if ' . $conditional_comment . ']>' . "\n" . $conditional_scripts . "\n" . '<![endif]-->' . "\n";
     }
     $themed_scripts = implode("\n", $cc_scripts);
   }

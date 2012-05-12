@@ -1,10 +1,18 @@
 <?php
-// This file exists for backwards compatibility for pre 7.x-3.x themes
+
+/**
+ * @file
+ * Build CSS for Google fonts
+ *
+ * This file exists for backwards compatibility for pre 7.x-3.x themes, it is
+ * never used in 7.x-3.x themes or newer.
+ */
+
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-
+// Include the font definition arrays
 include_once($path_to_at_core . '/inc/fonts.inc');
 
 // Backwards compatibility cruft for pre 7.x-3.x subthemes that have google fonts

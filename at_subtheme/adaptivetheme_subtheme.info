@@ -91,7 +91,7 @@
 
 ;----------// Custom Page Layout Plugins
 
-  ; Dont uncomment this unless you are actually developing a page layout plugin,
+  ; Don't uncomment this unless you are actually developing a page layout plugin,
   ; it will add a layout to all device groups that does little else except provide
   ; and example page_layout plugin.
   ; plugins[page_layout][layouts] = custom_layouts

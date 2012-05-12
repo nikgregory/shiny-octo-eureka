@@ -18,7 +18,7 @@
  */
 ?>
 <?php print $panel_prefix; ?>
-<div class="at-panel panel-display five-5x20 clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="at-panel panel-display five-5x20 clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
   <div class="panel-row row-1 clearfix">
     <div class="region region-five-first">
       <div class="region-inner clearfix">

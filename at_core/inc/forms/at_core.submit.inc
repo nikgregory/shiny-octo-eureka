@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Process all form values. Uses multiple other include files and helper
+ * functions to handle various operations.
+ */
+
 global $path_to_at_core;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
@@ -66,7 +72,7 @@ function at_core_settings_submit($form, &$form_state) {
   // Include processing for page & panels layouts, and responsive styles
   require_once($path_to_at_core . '/inc/forms/at_core.submit.responsive.inc');
 
-  if($values['enable_extensions'] === 1) {
+  if ($values['enable_extensions'] === 1) {
     // Include processing for fonts
     if (isset($values['enable_font_settings']) && $values['enable_font_settings'] === 1) {
       require_once($path_to_at_core . '/inc/fonts.inc');
@@ -79,7 +85,7 @@ function at_core_settings_submit($form, &$form_state) {
   }
 
   // Color inc save
-  if(module_exists('color')) {
+  if (module_exists('color')) {
     if (isset($values['at-color']) && $values['at-color'] == TRUE) {
       require_once($path_to_at_core . '/inc/forms/at_core.submit.color.inc');
     }

@@ -1,5 +1,7 @@
 <?php
+
 /**
+ * @file
  * Generate or get classes, mainly classes used on the body element and called
  * via themename_preprocess_html().
  */
@@ -96,7 +98,7 @@ function generate_page_classes(&$vars, $theme_name) {
 
     // Site name classes
     if ($vars['hide_site_name'] === FALSE) {
-      if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+      if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
         $site_name_settings_array = array(
           'site_name_case',
           'site_name_weight',
@@ -113,7 +115,7 @@ function generate_page_classes(&$vars, $theme_name) {
 
     // Slogan classes
     if ($vars['site_slogan']) {
-      if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+      if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
         $site_slogan_settings_array= array(
           'site_slogan_case',
           'site_slogan_weight',
@@ -129,7 +131,7 @@ function generate_page_classes(&$vars, $theme_name) {
     }
 
     // Block title classes
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $block_title_settings_array = array(
         'block_title_case',
         'block_title_weight',
@@ -144,7 +146,7 @@ function generate_page_classes(&$vars, $theme_name) {
     }
 
     // Node title classes
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $node_title_settings_array = array(
         'node_title_case',
         'node_title_weight',
@@ -160,7 +162,7 @@ function generate_page_classes(&$vars, $theme_name) {
 
     // Comment title classes
     if (at_get_setting('comments_hide_title', $theme_name) !== 1) {
-      if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+      if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
         $comment_title_settings_array = array(
           'comment_title_case',
           'comment_title_weight',
@@ -176,7 +178,7 @@ function generate_page_classes(&$vars, $theme_name) {
     }
 
     // Page title classes
-    if(at_get_setting('enable_heading_settings', $theme_name) === 1) {
+    if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
       $page_title_settings_array = array(
         'page_title_case',
         'page_title_weight',
@@ -191,7 +193,7 @@ function generate_page_classes(&$vars, $theme_name) {
     }
 
     // Image alignment and caption classes
-    if(at_get_setting('enable_image_settings', $theme_name) === 1) {
+    if (at_get_setting('enable_image_settings', $theme_name) === 1) {
       $image_settings_array = array(
         'image_caption_full',
         'image_caption_teaser',
@@ -228,7 +230,7 @@ function css_browser_selector($ua = NULL) {
   $o = 'opera';
 
   $b = array();
-  if(!preg_match('/opera|webtv/i', $ua) && preg_match('/msie\s(\d)/', $ua, $array)) {
+  if (!preg_match('/opera|webtv/i', $ua) && preg_match('/msie\s(\d)/', $ua, $array)) {
     $b[] = 'ie ie' . $array[1];
   }
   elseif (strstr($ua, 'firefox')) {

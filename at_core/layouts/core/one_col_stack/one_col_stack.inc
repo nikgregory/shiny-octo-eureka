@@ -1,5 +1,7 @@
 <?php
+
 /**
+ * @file
  * Implimentation of a Page Layout Plugin for Adaptivetheme.
  *
  * @see three_col_grail.inc for detailed documentation.

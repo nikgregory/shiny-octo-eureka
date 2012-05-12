@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Implementation of hook_panels_layouts
+ */
 function adaptivetheme_three_inset_left_panels_layouts() {
   $items['three_inset_left'] = array(
     'title' => t('AT Inset left'),
@@ -14,7 +19,7 @@ function adaptivetheme_three_inset_left_panels_layouts() {
       'three_inset_left_inset'   => t('Inset'),
       'three_inset_left_bottom'  => t('Bottom (conditional)'),
     ),
-    // AT
+    // AT Core
     'type' => 'inset',
     'options' => array(
       'three-inset-left' => 'default',
@@ -49,6 +54,9 @@ function adaptivetheme_three_inset_left_panels_layouts() {
   return $items;
 }
 
+/**
+ * Preprocess variables for three-inset-left.tpl.php
+ */
 function template_preprocess_three_inset_left(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';

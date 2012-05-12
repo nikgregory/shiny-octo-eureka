@@ -1,7 +1,11 @@
 <?php
+
 /**
- * Provides frequently used functions that get theme info, settings etc.
+ * @file
+ * Provides frequently used functions that get theme info, settings and
+ * other data.
  */
+
 global $theme_key;
 $theme_name = $theme_key;
 
@@ -153,7 +157,7 @@ function at_get_css_files($theme_name) {
           $libraries[$lib] = $files;
         }
         foreach ($libraries as $lib_key => $library) {
-          if(is_array($library) && !empty($library)) {
+          if (is_array($library) && !empty($library)) {
             foreach ($library as $lib_file) {
               $styles[$lib_file->uri] = array(
                 'type' => 'library',
@@ -167,7 +171,7 @@ function at_get_css_files($theme_name) {
       // Theme info defined files
       $info_data = at_get_info_trail($theme_name);
       foreach ($info_data as $provider => $theme_info) {
-        foreach($theme_info as $this_info => $info) {
+        foreach ($theme_info as $this_info => $info) {
           if ($this_info == 'info') {
             // AT Core defined
             if (isset($info['unset_core'])) {

@@ -1,6 +1,9 @@
 <?php
+
 /**
+ * @file
  * All Process functions for templates and theme fucntions.
+ *
  * If you need to add or modify process functions do it in your sub-theme.
  */
 
@@ -79,7 +82,7 @@ function adaptivetheme_process_page(&$vars, $hook) {
   // so other suggestions can easily override it.
   if (at_get_setting('page_content_type_suggestions', $theme_name) === 1) {
     if (isset($vars['node'])) {
-      $suggestion = 'page__'. str_replace('_', '--', $vars['node']->type);
+      $suggestion = 'page__' . str_replace('_', '--', $vars['node']->type);
       array_unshift($vars['theme_hook_suggestions'], $suggestion);
     }
   }
@@ -204,7 +207,7 @@ function adaptivetheme_process_node(&$vars, $hook) {
   // Strip default drupal classes if not required
   if (at_get_setting('extra_article_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
-    $striped_classes = array('node-sticky','node-promoted','node-teaser','node-preview');
+    $striped_classes = array('node-sticky', 'node-promoted', 'node-teaser', 'node-preview');
     foreach ($striped_classes as $class) {
       if (in_array($class, $classes)) {
         $classes = str_replace($class, '', $classes);
@@ -246,7 +249,7 @@ function adaptivetheme_process_comment(&$vars, $hook) {
   // Strip default drupal classes if not required.
   if (at_get_setting('extra_comment_classes', $theme_name) === 0) {
     $classes = explode(' ', $vars['classes']);
-    $striped_classes = array('comment-by-anonymous','comment-by-node-autho','comment-by-viewer','comment-new');
+    $striped_classes = array('comment-by-anonymous', 'comment-by-node-autho', 'comment-by-viewer', 'comment-new');
     foreach ($striped_classes as $class) {
       if (in_array($class, $classes)) {
         $classes = str_replace($class, '', $classes);
@@ -279,7 +282,7 @@ function adaptivetheme_process_menubar(&$vars, $hook) {
   // here. For best performance, only call drupal_attributes() when needed, and
   // note that template_preprocess_menubar() does not initialize the
   // *_attributes_array variables.
-  $vars['classes'] = implode(' ',$vars['classes_array']);
+  $vars['classes'] = implode(' ', $vars['classes_array']);
   $vars['attributes'] = empty($vars['attributes_array']) ? '' : drupal_attributes($vars['attributes_array']);
   $vars['content_attributes'] = empty($vars['content_attributes_array']) ? '' : drupal_attributes($vars['content_attributes_array']);
 }

@@ -1,7 +1,10 @@
 <?php
+
 /**
+ * @file
  * General alters.
  */
+
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
@@ -15,8 +18,8 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   // charset utf-8
   $head_elements['system_meta_content_type']['#attributes'] = array('charset' => 'utf-8');
 
-	// Metatags for mobile
-	// X-UA-Compatible
+  // Metatags for mobile
+  // X-UA-Compatible
   if (at_get_setting('chrome_edge', $theme_name) === 1) {
     $head_elements['adaptivetheme_meta_x_ua_compatible'] = array(
       '#type' => 'html_tag',
@@ -28,8 +31,9 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       '#weight' => 1,
     );
   }
-	// cleartype
-	if (at_get_setting('clear_type', $theme_name) === 1) {
+
+  // cleartype
+  if (at_get_setting('clear_type', $theme_name) === 1) {
     $head_elements['adaptivetheme_meta_cleartype'] = array(
       '#type' => 'html_tag',
       '#tag' => 'meta',
@@ -39,65 +43,71 @@ function adaptivetheme_html_head_alter(&$head_elements) {
       ),
       '#weight' => 2,
     );
-	}
-  // Viewport
-  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
-		// Viewport
-		if ($adaptivetheme_meta_viewport = at_get_setting('adaptivetheme_meta_viewport', $theme_name)) {
-			$head_elements['adaptivetheme_meta_viewport'] = array(
-				'#type' => 'html_tag',
-				'#tag' => 'meta',
-				'#attributes' => array(
-					'name' => 'viewport',
-					'content' => check_plain($adaptivetheme_meta_viewport),
-				),
-				'#weight' => 3,
-			);
-		}
-		// MobileOptimized
-		if ($adaptivetheme_meta_mobileoptimized = at_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name)) {
-			$head_elements['adaptivetheme_meta_mobileoptimized'] = array(
-				'#type' => 'html_tag',
-				'#tag' => 'meta',
-				'#attributes' => array(
-					'name' => "MobileOptimized",
-					'content' => check_plain($adaptivetheme_meta_mobileoptimized),
-				),
-				'#weight' => 4,
-			);
-		}
-		// HandheldFriendly
-		if ($adaptivetheme_meta_handheldfriendly = at_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name)) {
-			$head_elements['adaptivetheme_meta_handheldfriendly'] = array(
-				'#type' => 'html_tag',
-				'#tag' => 'meta',
-				'#attributes' => array(
-					'name' => "HandheldFriendly",
-					'content' => check_plain($adaptivetheme_meta_handheldfriendly),
-				),
-				'#weight' => 5,
-			);
-		}
-		// apple-mobile-web-app-capable
-		if ($adaptivetheme_meta_apple_mobile_web_app_capable = at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name)) {
-			$head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
-				'#type' => 'html_tag',
-				'#tag' => 'meta',
-				'#attributes' => array(
-					'name' => "apple-mobile-web-app-capable",
-					'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
-				),
-				'#weight' => 6,
-			);
-		}
-	}
+  }
 
-  // Apple touch icons
+  // Don't add these if responsive styles are disabled
+  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
+
+    // Viewport
+    if ($adaptivetheme_meta_viewport = at_get_setting('adaptivetheme_meta_viewport', $theme_name)) {
+      $head_elements['adaptivetheme_meta_viewport'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'viewport',
+          'content' => check_plain($adaptivetheme_meta_viewport),
+        ),
+        '#weight' => 3,
+      );
+    }
+
+    // MobileOptimized
+    if ($adaptivetheme_meta_mobileoptimized = at_get_setting('adaptivetheme_meta_mobileoptimized', $theme_name)) {
+      $head_elements['adaptivetheme_meta_mobileoptimized'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => "MobileOptimized",
+          'content' => check_plain($adaptivetheme_meta_mobileoptimized),
+        ),
+        '#weight' => 4,
+      );
+    }
+
+    // HandheldFriendly
+    if ($adaptivetheme_meta_handheldfriendly = at_get_setting('adaptivetheme_meta_handheldfriendly', $theme_name)) {
+      $head_elements['adaptivetheme_meta_handheldfriendly'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => "HandheldFriendly",
+          'content' => check_plain($adaptivetheme_meta_handheldfriendly),
+        ),
+        '#weight' => 5,
+      );
+    }
+
+    // apple-mobile-web-app-capable
+    if ($adaptivetheme_meta_apple_mobile_web_app_capable = at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name)) {
+    $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => "apple-mobile-web-app-capable",
+        'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
+      ),
+      '#weight' => 6,
+      );
+    }
+  }
+
+  // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
   if (at_get_setting('enable_apple_touch_icons') === 1) {
+
     // low
     $apple_touch_icon_path_l = check_plain(at_get_setting('apple_touch_icon_path_l', $theme_name));
     if (!empty($apple_touch_icon_path_l)) {
-      $l = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_l;
+      $l = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_l;
       $touch_icon_l = file_create_url($l);
       $head_elements['adaptivetheme_touch_icon_nokia'] = array(
         '#type' => 'html_tag',
@@ -118,10 +128,11 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
+
     // medium
     $apple_touch_icon_path_m = check_plain(at_get_setting('apple_touch_icon_path_m', $theme_name));
     if (!empty($apple_touch_icon_path_m)) {
-      $m = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_m;
+      $m = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_m;
       $touch_icon_m = file_create_url($m);
       $head_elements['adaptivetheme_touch_icon_medium'] = array(
         '#type' => 'html_tag',
@@ -134,10 +145,11 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
+
     // high
     $apple_touch_icon_path_h = check_plain(at_get_setting('apple_touch_icon_path_h', $theme_name));
     if (!empty($apple_touch_icon_path_h)) {
-      $h = drupal_get_path('theme', $theme_name) .'/'. $apple_touch_icon_path_h;
+      $h = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_h;
       $touch_icon_h = file_create_url($h);
       $head_elements['adaptivetheme_touch_icon_high'] = array(
         '#type' => 'html_tag',
@@ -150,6 +162,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
+
   }
 }
 
@@ -173,6 +186,7 @@ function adaptivetheme_css_alter(&$css) {
 
   // Never allow this to run in our admin theme and only if the extension is enabled.
   if (at_get_setting('enable_exclude_css') === 1 && $theme_key !== 'adaptivetheme_admin') {
+
     // Get $css_data from the cache
     if ($cache = cache_get('at_get_css_files')) {
       $css_data = $cache->data;
@@ -196,8 +210,9 @@ function adaptivetheme_css_alter(&$css) {
         }
       }
     }
+
     // Unset -rtl.css files if language dir is RTL, in some contexts dir is
-		// unset, but I don't know if this is a core bug or not.
+    // unset, but I don't know if this is a core bug or not.
     if (isset($language->dir) && $language->dir === 'rtl') {
       foreach ($css_data as $key => $value) {
         $setting = 'unset_css_' . drupal_html_class($key);
@@ -216,9 +231,11 @@ function adaptivetheme_css_alter(&$css) {
  * hook_page_alter()
  */
 function adaptivetheme_page_alter(&$page) {
+
   // Look in each visible region for blocks.
   foreach (system_region_list($GLOBALS['theme'], REGIONS_VISIBLE) as $region => $name) {
     if (!empty($page[$region])) {
+
       // Find the last block in the region.
       $blocks = array_reverse(element_children($page[$region]));
       while ($blocks && !isset($page[$region][$blocks[0]]['#block'])) {
@@ -235,6 +252,7 @@ function adaptivetheme_page_alter(&$page) {
  * hook_form_FORM_alter()
  */
 function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
+
   // Collapse Noggin fieldset by default
   if ($form_id == 'system_theme_settings') {
     if (module_exists('noggin')) {
@@ -366,12 +384,12 @@ function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
  * Adaptivetheme implimentation of hook_menu_alter()
  */
 function adaptivetheme_menu_alter(&$items) {
-	// Add a menu item to display all panels layouts on one page
-	$items['atcore-debug-panels']['title'] = t('AT Core Debug Panels');
-	$items['atcore-debug-panels']['type'] = MENU_CALLBACK;
-	$items['atcore-debug-panels']['page callback'] = 'at_debug_panels';
-	$items['atcore-debug-panels']['weight'] = 100;
-	$items['atcore-debug-panels']['access arguments'] = array('administer themes');
+  // Add a menu item to display all panels layouts on one page
+  $items['atcore-debug-panels']['title'] = t('AT Core Debug Panels');
+  $items['atcore-debug-panels']['type'] = MENU_CALLBACK;
+  $items['atcore-debug-panels']['page callback'] = 'at_debug_panels';
+  $items['atcore-debug-panels']['weight'] = 100;
+  $items['atcore-debug-panels']['access arguments'] = array('administer themes');
 }
 
 /**
@@ -379,15 +397,15 @@ function adaptivetheme_menu_alter(&$items) {
  */
 function at_debug_panels() {
 
-	$file = drupal_get_path('theme', 'adaptivetheme') . '/css/debug-panels.css';
-	drupal_add_css($file, array(
-		'preprocess' => FALSE,
-		'group' => CSS_THEME,
-		'media' => 'screen',
-		'every_page' => FALSE,
-		'weight' => 2000,
-		)
-	);
+  $file = drupal_get_path('theme', 'adaptivetheme') . '/css/debug-panels.css';
+  drupal_add_css($file, array(
+    'preprocess' => FALSE,
+    'group' => CSS_THEME,
+    'media' => 'screen',
+    'every_page' => FALSE,
+    'weight' => 2000,
+    )
+  );
 
   $output = <<<EOF
 <div class="all-panel-layouts debug-panels" style="font-size: 81.3%">

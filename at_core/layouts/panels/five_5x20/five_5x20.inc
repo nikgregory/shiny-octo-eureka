@@ -1,7 +1,10 @@
 <?php
+
 /**
+ * @file
  * Implimentation of an Adaptivetheme Panels Layout Plugin
- * A panels layout plugin on steroids.
+ * A panels layout plugin on steroids and an implementation of
+ * hook_panels_layouts().
  *
  * These plugins must use the function method - Panels can support two
  * methods, one that uses a function name and one that simply defines
@@ -63,6 +66,7 @@
  'fdw'    'float:none;display:block;width:100%;clear:both'
 
  */
+
 function adaptivetheme_five_5x20_panels_layouts() {
   $items['five_5x20'] = array(
     'title'    => t('AT Five column 5x20'),
@@ -130,7 +134,9 @@ function adaptivetheme_five_5x20_panels_layouts() {
   return $items;
 }
 
-// Preprocess variables for the plugin template.
+/**
+ * Preprocess variables for five-5x20.tpl.php
+ */
 function template_preprocess_five_5x20(&$vars) {
   // We need to initialize these variables when Panels is displaying the template.
   // These are used primarily when the template is being rendered via Display suite
@@ -138,4 +144,8 @@ function template_preprocess_five_5x20(&$vars) {
   // with appropriate classes and id.
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
+
+  // Set up attributes array
+  $vars['attributes_array']['id'][] = $vars['css_id'];
+  //<?php if (!empty($css_id)) { print "id=\"$css_id\""; }
 }

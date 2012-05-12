@@ -1,5 +1,9 @@
 <?php
+
 /**
+ * @file
+ * Gpanel snippet for the three column 50/25/25 layout
+ *
  * Gpanels are drop in multi-column snippets for displaying blocks.
  * Most Gpanels are stacked, meaning they have top and bottom regions
  * by default, however you do not need to use them. You should always
@@ -23,9 +27,9 @@ regions[three_50_25_25_bottom] = 50-25-25 Gpanel bottom
 ?>
 <!-- Three column 50-25-25 -->
 <?php if (
-  $page['three_50_25_25_top'] || 
-  $page['three_50_25_25_first'] || 
-  $page['three_50_25_25_second'] || 
+  $page['three_50_25_25_top'] ||
+  $page['three_50_25_25_first'] ||
+  $page['three_50_25_25_second'] ||
   $page['three_50_25_25_third'] ||
   $page['three_50_25_25_bottom']
   ): ?>

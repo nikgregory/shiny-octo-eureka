@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Implementation of hook_panels_layouts
+ */
 function adaptivetheme_two_33_66_panels_layouts() {
   $items['two_33_66'] = array(
     'title' => t('AT Two column 33/66'),
@@ -13,7 +18,7 @@ function adaptivetheme_two_33_66_panels_layouts() {
       'two_33_66_second' => t('Right'),
       'two_33_66_bottom' => t('Bottom (conditional)'),
     ),
-    // AT
+    // AT Core
     'type' => 'two',
     'options' => array(
       'two-33-66' => 'default',
@@ -37,6 +42,9 @@ function adaptivetheme_two_33_66_panels_layouts() {
   return $items;
 }
 
+/**
+ * Preprocess variables for two-33-66.tpl.php
+ */
 function template_preprocess_two_33_66(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';

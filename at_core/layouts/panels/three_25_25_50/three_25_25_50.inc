@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Implementation of hook_panels_layouts
+ */
 function adaptivetheme_three_25_25_50_panels_layouts() {
   $items['three_25_25_50'] = array(
     'title'    => t('AT Three column 25/25/50'),
@@ -14,7 +19,7 @@ function adaptivetheme_three_25_25_50_panels_layouts() {
       'three_25_25_50_third'  => t('Right'),
       'three_25_25_50_bottom' => t('Bottom (conditional)'),
     ),
-    // AT
+    // AT Core
     'type' => 'three',
     'options' => array(
       'three-25-25-50' => 'default',
@@ -53,6 +58,9 @@ function adaptivetheme_three_25_25_50_panels_layouts() {
   return $items;
 }
 
+/**
+ * Preprocess variables for three-25-25-50.tpl.php
+ */
 function template_preprocess_three_25_25_50(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';

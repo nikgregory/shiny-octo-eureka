@@ -1,8 +1,14 @@
 <?php
-// Automagical Info file builder
-// This is the theme info backed up to a file. Its formatted and holds all
-// current values - useful for migration or simply capturing the current
-// theme settings as defaults, which is why I built it.
+
+/**
+ * @file
+ * Automagical Info file builder
+ *
+ * This is the theme info backed up to a file. Its formatted and holds all
+ * current values - useful for migration or simply capturing the current
+ * theme settings as defaults.
+ */
+
 $theme_settings = $values;
 if ($theme_settings) {
   $dynamic_settings_info = array();
@@ -16,7 +22,7 @@ if ($theme_settings) {
           $static_settings_info[] = 'name = ' . $v;
         }
         if ($k == 'description') {
-          $v = $v ? $v : $theme_name. ' is rocking the hardest!';
+          $v = $v ? $v : $theme_name . ' is rocking the hardest!';
           $static_settings_info[] = 'description = ' . $v;
         }
         if ($k == 'base theme') {
@@ -37,23 +43,23 @@ if ($theme_settings) {
         if ($k == 'stylesheets' && !empty($k)) {
           foreach ($v as $media_target => $stylesheet_file) {
             foreach ($stylesheet_file as $stylesheet_file_name => $stylesheet_file_path) {
-              $static_settings_info[] = 'stylesheets[' . $media_target . '][] = ' . $stylesheet_file_name;
+              $static_settings_info[] = "stylesheets[$media_target][] = $stylesheet_file_name";
             }
           }
         }
         if ($k == 'scripts' && !empty($k)) {
           foreach ($v as $script => $file) {
-            $static_settings_info[] = 'scripts[] = ' . $script;
+            $static_settings_info[] = "scripts[] = $script";
           }
         }
         if ($k == 'regions') {
           foreach ($v as $name => $label) {
-            $static_settings_info[] = 'regions[' . $name . '] = ' . $label;
+            $static_settings_info[] = "regions[$name] = $label";
           }
         }
         if ($k == 'features') {
           foreach ($v as $feature_key => $feature) {
-            $static_settings_info[] = 'features[] = ' . $feature;
+            $static_settings_info[] = "features[] = $feature";
           }
         }
       }
@@ -89,7 +95,7 @@ if ($theme_settings) {
   foreach ($theme_settings as $setting_name => $setting_value) {
     if (isset($setting_name) && !in_array($setting_name, $exclusions)) {
       $setting_value = $setting_value ? $setting_value : "''";
-      $dynamic_settings_info[] = 'settings['. $setting_name .'] = ' . $setting_value;
+      $dynamic_settings_info[] = "settings[$setting_name] = $setting_value";
     }
   }
   if (!empty($dynamic_settings_info)) {

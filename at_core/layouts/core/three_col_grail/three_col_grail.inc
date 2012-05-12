@@ -1,5 +1,7 @@
 <?php
+
 /**
+ * @file
  * Implimentation of a Page Layout Plugin for Adaptivetheme.
  *
  * This looks like a Panels layout plugin, but its not, its designed to work

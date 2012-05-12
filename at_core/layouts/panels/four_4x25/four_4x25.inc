@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ * Implementation of hook_panels_layouts
+ */
 function adaptivetheme_four_4x25_panels_layouts() {
   $items['four_4x25'] = array(
     'title'    => t('AT Four column 4x25'),
@@ -13,7 +18,7 @@ function adaptivetheme_four_4x25_panels_layouts() {
       'four_third'  => t('Column 3'),
       'four_fourth' => t('Column 4'),
     ),
-    // AT
+    // AT Core
     'type' => 'four',
     'options' => array(
       'four-4x25' => 'default',
@@ -50,6 +55,9 @@ function adaptivetheme_four_4x25_panels_layouts() {
   return $items;
 }
 
+/**
+ * Preprocess variables for four-4x25.tpl.php
+ */
 function template_preprocess_four_4x25(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';

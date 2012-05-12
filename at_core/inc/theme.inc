@@ -1,13 +1,15 @@
 <?php
+
 /**
- * Theme functions and overrides.
+ * @file
+ * Custom theme functions and theme function overrides.
  *
  * If you need to add or modify theme functions do it in your sub-theme.
  */
+
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 
 /**
  * Implements hook_theme()

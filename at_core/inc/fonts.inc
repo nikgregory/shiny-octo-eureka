@@ -1,6 +1,9 @@
 <?php
+
 /**
+ * @file
  * Font Elements Config Array.
+ *
  * The fonts array is used by the fonts sub-system to generate forms,
  * build stylesheets and load font styles.
  */

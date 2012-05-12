@@ -1,7 +1,10 @@
 <?php
+
 /**
+ * @file
  * AT's liteweight plugin sub-system.
  */
+
 global $theme_key;
 $theme_name = $theme_key;
 
@@ -155,7 +158,7 @@ function at_load_plugins($theme_name, $plugin_type) {
     }
 
     // everything else
-    else if ($plugin_type !== 'panels' && $plugin_type !== 'page_layout') {
+    elseif ($plugin_type !== 'panels' && $plugin_type !== 'page_layout') {
       $identifier = $file_data->name;
       $function = $identifier;
       if (function_exists($function)) {
@@ -340,7 +343,7 @@ function responsive_plugins_admin_css($theme_name, $plugin_type) {
   foreach ($admin_css_paths as $admin_css => $paths) {
     foreach ($paths as $path) {
       foreach ($css_files as $method_key => $file_name) {
-        if($method_key !== 'one') {
+        if ($method_key !== 'one') {
           $admin_css_files[] = $path . '/' . $method_key . '/' . $file_name;
         }
       }

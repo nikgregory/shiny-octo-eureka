@@ -18,7 +18,7 @@
  */
 ?>
 <?php print $panel_prefix; ?>
-<div class="at-panel panel-display two-66-33 clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="at-panel panel-display two-66-33 clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
   <?php if ($content['two_66_33_top']): ?>
     <div class="region region-two-66-33-top region-conditional-stack">
       <div class="region-inner clearfix">

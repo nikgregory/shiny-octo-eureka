@@ -1,13 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Page Layout CSS Builder.
+ */
+
 global $theme_key, $theme_name;
 $theme_name = $theme_key;
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 require_once($path_to_at_core . '/inc/plugins.inc');
 
 /**
- * Page Layout CSS Builder.
+ * Build Page Layouts
  *
  * Unlike the Panels layouts which hold CSS in their data array the Page layout
  * plugins each include a unique CSS builder function. This is required because
@@ -67,7 +71,7 @@ function at_build_panels_layout_css($panel_styles, $device_panels_data) {
   $output = '';
 
   foreach ($panel_styles as $panel_subtypes_data) {
-    foreach($panel_subtypes_data as $panel_subtype => $panel_subtype_styles_data) {
+    foreach ($panel_subtypes_data as $panel_subtype => $panel_subtype_styles_data) {
       if (in_array($panel_subtype, $device_panels_data)) {
         foreach ($panel_subtype_styles_data as $data_type_array) {
           foreach ($data_type_array as $declaration_type => $declaration_block) {
@@ -107,10 +111,12 @@ function at_build_font_families($element, $selector, $font_values) {
   // Format values as valid CSS
   $font_styles = array();
   if (!empty($font_values)) {
-    if ($font_values['font_size'] === '<none>') {$font_values['font_size'] = '';}
-    $font_styles[] = $font_values['font_style']  ? 'font-style:'  . $font_values['font_style'] . ';' : '';
+    if ($font_values['font_size'] === '<none>') {
+      $font_values['font_size'] = '';
+    }
+    $font_styles[] = $font_values['font_style'] ? 'font-style:' . $font_values['font_style'] . ';' : '';
     $font_styles[] = $font_values['font_weight'] ? 'font-weight:' . $font_values['font_weight'] . ';' : '';
-    $font_styles[] = $font_values['font_size']   ? 'font-size:'   . $font_values['font_size'] . ';' : '';
+    $font_styles[] = $font_values['font_size'] ? 'font-size:' . $font_values['font_size'] . ';' : '';
     $font_styles[] = $font_values['font_family'] ? 'font-family:' . $font_values['font_family'] : '';
   }
   $font_styles = implode('', $font_styles);

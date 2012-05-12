@@ -18,7 +18,7 @@
  */
 ?>
 <?php print $panel_prefix; ?>
-<div class="at-panel panel-display three-inset-right clearfix" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="at-panel panel-display three-inset-right clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
   <div class="region region-three-inset-right-sidebar">
     <div class="region-inner clearfix">
       <?php print $content['three_inset_right_sidebar']; ?>

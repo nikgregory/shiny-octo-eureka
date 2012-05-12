@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Implimentation of hook_form_system_theme_settings_alter()
+ *
+ * @param $form: Nested array of form elements that comprise the form.
+ * @param $form_state: A keyed array containing the current state of the form.
+ */
+
 // Get our plugin system functions.
 require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
 
@@ -31,19 +39,19 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       $version_message = t('<p>The version of your theme is not designed to run on <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. It will probably run, but your experience will not be optimal. You have three courses of action to choose from:</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme'));
       $version_message .= t('<ol><li>Downgrade Adaptivetheme to 7.x-2.x</li><li>Upgrade your theme to the 7.x-3.x branch&thinsp;&mdash;&thinsp;you will need to check if an upgrade exists.</li><li>Add the line <code>"release = 7.x-3.x"</code> (less quotes) to your sub-themes info file and clear the cache to make this message go away.</li></ol>');
       $version_message .= t('<p>You can turn off this message in the Debug settings, look for "Sub-theme compatibility test".</p>');
-      drupal_set_message($version_message, 'warning');
+      drupal_set_message(filter_xss_admin($version_message), 'warning');
     }
     // Celebrate the nouveau intelligentsia...
     if (isset($legacy_info['release']) && $legacy_info['release'] === '7.x-3.x') {
       $version_message = t('<p>This theme is compatible with <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. You are good to go! You can turn off this message in the Debug settings, look for "Sub-theme compatibility test".</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme'));
-      drupal_set_message($version_message, 'status');
+      drupal_set_message(filter_xss_admin($version_message), 'status');
     }
   }
 
   // Get the admin theme so we can set a class for styling this form,
   // variable_get() returns 0 if the admin theme is the default theme.
   $admin_theme = variable_get('admin_theme') ? variable_get('admin_theme') : $theme_name;
-  $admin_theme_class = 'admin-theme-'. drupal_html_class($admin_theme);
+  $admin_theme_class = 'admin-theme-' . drupal_html_class($admin_theme);
 
   // LAYOUT SETTINGS
   // Build a custom header for the layout settings form.
