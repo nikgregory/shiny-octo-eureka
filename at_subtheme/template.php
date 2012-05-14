@@ -29,6 +29,8 @@
 function adaptivetheme_subtheme_preprocess_html(&$vars) {
   global $theme_key;
 
+  // Two examples of adding custom classes to the body.
+  
   // Add a body class for the active theme name.
   // $vars['classes_array'][] = drupal_html_class($theme_key);
 
@@ -49,7 +51,7 @@ function adaptivetheme_subtheme_process_html(&$vars) {
 
 
 /**
- * Preprocess variables for the page templates.
+ * Override or insert variables for the page templates.
  */
 /* -- Delete this line if you want to use these functions
 function adaptivetheme_subtheme_preprocess_page(&$vars) {

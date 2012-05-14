@@ -323,9 +323,11 @@ html.js #user-login-form li.openid-link {
 
 input[type="search"] {
   -webkit-appearance: textfield;
+  -moz-appearance: textfield;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
+
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button {
     -webkit-appearance: none;

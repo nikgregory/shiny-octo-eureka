@@ -14,6 +14,7 @@ function two_sidebars_left_stack() {
     'type'     => 'page_layout',
     'device_groups' => array(
       'tablet_landscape',
+      'tablet_portrait',
      ),
   );
 
