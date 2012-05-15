@@ -84,7 +84,7 @@ $form['at-settings']['polyfills']['fills']['pie']['pie_crust']['disble_pie_for_i
   '#default_value' => at_get_setting('disble_pie_for_ie9'),
 );
 
-// selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8
+// Selectivizr
 $form['at-settings']['polyfills']['fills']['load_selectivizr'] = array(
   '#type' => 'checkbox',
   '#title' => t('Selectivizr'),

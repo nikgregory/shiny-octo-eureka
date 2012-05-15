@@ -44,8 +44,8 @@ foreach ($rpl as $grouped => $panels_layout_groups) {
 }
 
 // If the Cascading media queries CSS file is enabled, load these styles first
-if ($values['enable_cascading_media_queries'] === 1) {
-  $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.cascade.css', FALSE);
+if ($values['enable_custom_media_queries'] === 1) {
+  $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.custom.css', FALSE);
   $responsive_styles[] = $responsive_css . "\n";
 }
 

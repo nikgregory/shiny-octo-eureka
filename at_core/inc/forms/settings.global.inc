@@ -7,27 +7,49 @@
  * TODO: review documentation and provide links to help pages.
  */
 
+// Set variable for mode, we want to show a message based on this
+$mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
+$performance_settings_path = base_path() . 'admin/config/development/performance';
+
 // Global Settings
 $form['at-settings']['global-settings'] = array(
   '#type' => 'fieldset',
   '#title' => t('CSS'),
-  '#description' => t('<h3>CSS Global Settings</h3><p>These settings modify the way CSS is loaded and what is loaded. These are primarly set during development - do not change these unless you are actively developing or modifying your theme. If you need to globally unset core CSS or other CSS files use the <em>Unset CSS Files</em> extension.</p>'),
+  '#description' => t('<h3>CSS Global Settings</h3><p>These settings are primarly set during development - do not change these unless you are actively developing or modifying your theme. If you need to globally unset core CSS or other CSS files use the <em>Unset CSS Files</em> extension.</p>'),
 );
+
+// Set message depending on the mode
+if ($mode == TRUE) {
+  $mode_message = t('<p><a href="!settings_path" target="_blank">CSS aggregation</a> is ON. Changes to your themes responsive CSS files will not show until you <strong>re-save the theme settings</strong> (click "Save configuration" at the bottom of this form).</p><div class="description"><p>This is required to re-write the production version of the responsive styles and is a performance optimization in Adaptivetheme, which saves your site at least 4 HTTP requests.</p></div>', array('!settings_path' => $performance_settings_path));
+}
+elseif ($mode == FALSE) {
+  $mode_message = t('<p><a href="!settings_path" target="_blank">CSS aggregation</a> is OFF. Changes to your themes responsive CSS files will show automatically.</p><p><div class="description"><p>Note: when CSS aggregation is ON you need to re-save the theme settings if you make any changes to your themes responsive stylesheets. This is required to re-write the production version of the responsive styles and is a performance optimization in Adaptivetheme, which saves your site at least 4 HTTP requests.</p></div>', array('!settings_path' => $performance_settings_path));
+}
 
 // Mode
 $form['at-settings']['global-settings']['mode'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Production Mode'),
-  '#description' => t('<h3>Production Mode</h3>'),
+  '#title' => t('CSS Mode'),
+  '#description' => t('<h3>Mode</h3>') . $mode_message,
   '#states' => array(
     'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
   ),
 );
-$form['at-settings']['global-settings']['mode']['production_mode'] = array(
+
+// Custom media queries
+$form['at-settings']['global-settings']['custom-mediaqueries'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Custom Media Queries'),
+  '#description' => t('<h3>Custom Media Queries</h3>'),
+  '#states' => array(
+    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+  ),
+);
+$form['at-settings']['global-settings']['custom-mediaqueries']['enable_custom_media_queries'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Enable Production Mode'),
-  '#description' => t('Enabling Production mode reduces HTTP requests by aggregating the responsive stylesheets into one CSS file and uses embedded media queries. Enable this after you have finished writing your CSS styles. If you later change any styles in the responsive stylesheets you will need re-save the theme settings to re-write the aggregated CSS file.'),
-  '#default_value' => at_get_setting('production_mode'),
+  '#title'  => t('Enable the responsive.custom.css file'),
+  '#description' => t('Use this file if you need to use custom media queries, such as <a href="!zomigi" target="_blank">overlapped media queries</a>. This file is located here: <code>themeName/css/responsive.custom.css</code>. Adaptivetheme will load this file automagically when this setting enabled.', array('!zomigi' => 'http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack')),
+  '#default_value' => at_get_setting('enable_cascading_media_queries'),
 );
 
 // Set default layout
@@ -36,44 +58,25 @@ $form['at-settings']['global-settings']['default-layout'] = array(
   '#title' => t('Mobile first or Mobile last'),
   '#description' => t('<h3>Mobile first or Desktop first</h3>'),
   '#states' => array(
-    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+    'invisible' => array(
+      array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+      array('input[name="global_default_layout_disable"]' => array('value' => 1)),
+    ),
   ),
 );
 $form['at-settings']['global-settings']['default-layout']['global_default_layout'] = array(
   '#type' => 'radios',
-  '#description' => t('Adaptivetheme supports both mobile first and desktop first design approaches. This setting fundementally alters what CSS is loaded and how it is loaded. At the most basic level if you select Mobile first the Smartphone portrait layout will load as the default, if you select Desktop first the Standard layout will load as the default. Many other changes take place regarding loading of CSS for Internet Explorer, Responsive Gpanels and Panels as well. Please review the documentation. Do not change this if you are not sure what this does.'),
+  '#description' => t('<p>Adaptivetheme supports both mobile first and desktop first design approaches. Please review the <a href="!docs_link" target="_blank">online documentation</a>.</p><p>This setting fundementally alters what CSS is loaded and how it is loaded. At the most basic level if you select Mobile first the Smartphone portrait layout will load as the default, if you select Desktop first the Standard layout will load as the default. Many other changes take place regarding loading of CSS for Internet Explorer, Responsive Gpanels and Panels as well.</p> ', array('!docs_link' => 'http://adaptivethemes.com/documentation/mobile-first-design-with-adaptivetheme')),
   '#default_value' => at_get_setting('global_default_layout'),
   '#options' => array(
-    'smartphone-portrait'  => t('Mobile first'),
-    'standard-layout'      => t('Desktop first'),
+    'smartphone-portrait' => t('Mobile first'),
+    'standard-layout' => t('Desktop first'),
   ),
 );
-
-// Cascading media queries
-$form['at-settings']['global-settings']['cascading-mediaqueries'] = array(
-  '#type' => 'fieldset',
-  '#title' => t('Cascading Media Queries'),
-  '#description' => t('<h3>Cascading Media Queries</h3>'),
-  '#states' => array(
-    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
-  ),
-);
-$form['at-settings']['global-settings']['cascading-mediaqueries']['enable_cascading_media_queries'] = array(
-  '#type' => 'checkbox',
-  '#title'  => t('Enable the responsive.cascade.css file'),
-  '#description' => t('Use <a href="http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack" target="_blank">overlapped media queries</a>. These are are in a seperate file: <code>themeName/css/responsive.cascade.css</code>, you must set the media queries in this file manually!'),
-  '#default_value' => at_get_setting('enable_cascading_media_queries'),
-
-);
-$form['at-settings']['global-settings']['cascading-mediaqueries']['cascade_media_query'] = array(
-  '#type' => 'textfield',
-  '#description' => t('Enter the smallest min-width in your <code>responsive.cascade.css</code> file, this is used when loading the file in Development mode. Once you set Production mode (see above) this file is aggregated along with the responsive layout stylesheets.'),
-  '#default_value' => check_plain(at_get_setting('cascade_media_query')),
-  '#field_prefix' => '@media',
-  '#states' => array(
-    'invisible' => array('input[name="production_mode"]' => array('checked' => TRUE)),
-    'disabled' => array('input[name="enable_cascading_media_queries"]' => array('checked' => FALSE)),
-  ),
+// Hidden setting allows us to hide the method setting from the info file
+$form['at-settings']['global-settings']['default-layout']['global_default_layout_disable'] = array(
+  '#type' => 'hidden',
+  '#value' => at_get_setting('global_default_layout_disable'),
 );
 
 // Disable responsive layout

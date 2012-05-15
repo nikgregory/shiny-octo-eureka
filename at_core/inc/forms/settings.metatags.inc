@@ -20,6 +20,9 @@ $form['at-settings']['meta']['mobile']['adaptivetheme_meta_viewport'] = array(
   '#type' => 'textfield',
   '#title' => t('viewport'),
   '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_viewport')),
+  '#states' => array(
+    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+  ),
 );
 
 // MobileOptimized
@@ -27,6 +30,9 @@ $form['at-settings']['meta']['mobile']['adaptivetheme_meta_mobileoptimized'] = a
   '#type' => 'textfield',
   '#title' => t('MobileOptimized'),
   '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_mobileoptimized')),
+  '#states' => array(
+    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+  ),
 );
 
 // HandheldFriendly
@@ -34,6 +40,9 @@ $form['at-settings']['meta']['mobile']['adaptivetheme_meta_handheldfriendly'] = 
   '#type' => 'textfield',
   '#title' => t('HandheldFriendly'),
   '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_handheldfriendly')),
+  '#states' => array(
+    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+  ),
 );
 
 // apple-mobile-web-app-capable
@@ -41,6 +50,9 @@ $form['at-settings']['meta']['mobile']['adaptivetheme_meta_apple_mobile_web_app_
   '#type' => 'textfield',
   '#title' => t('apple-mobile-web-app-capable'),
   '#default_value' => check_plain(at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable')),
+  '#states' => array(
+    'invisible' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
+  ),
 );
 
 // Chrome Edge

@@ -179,12 +179,10 @@
   settings[smartphone_landscape_three_inset_right] = 'three-inset-right-stack'
 
 ;----------// Global settings
-  settings[production_mode]                = 0
-  settings[disable_responsive_styles]      = 0
-  settings[enable_cascading_media_queries] = 0
-  settings[cascade_media_query]            = 'only screen and (min-width:220px)'
-  settings[global_default_layout]          = 'smartphone-portrait'
-  settings[global_default_layout_disable]  = 0
+  settings[disable_responsive_styles]     = 0
+  settings[enable_custom_media_queries]   = 0
+  settings[global_default_layout]         = 'smartphone-portrait'
+  settings[global_default_layout_disable] = 1
 
   ; Global settings - Polyfills
   settings[load_html5js]       = 1

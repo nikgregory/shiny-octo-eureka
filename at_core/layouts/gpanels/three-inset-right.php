@@ -4,7 +4,7 @@
  * @file
  * Gpanel snippet for the three inset right layout
  *
- * Gpanels are drop in multi-column snippets for displaying blocks.
+ * Gpanels are drop in multi-umn snippets for displaying blocks.
  * Most Gpanels are stacked, meaning they have top and bottom regions
  * by default, however you do not need to use them. You should always
  * use all the horizonal regions or you might experience layout issues.
@@ -16,29 +16,29 @@
 
 Region Deinitions:
 
-; 3 col Inset Right
-regions[threecol_inset_right_sidebar] = 3 col Inset right - sidebar
-regions[threecol_inset_right_top]     = 3 col Inset right - top
-regions[threecol_inset_right_middle]  = 3 col Inset right - middle
-regions[threecol_inset_right_inset]   = 3 col Inset right - inset
-regions[threecol_inset_right_bottom]  = 3 col Inset right - bottom
+; 3  Inset Right
+regions[three_inset_right_sidebar] = 3  Inset right - sidebar
+regions[three_inset_right_top]     = 3  Inset right - top
+regions[three_inset_right_middle]  = 3  Inset right - middle
+regions[three_inset_right_inset]   = 3  Inset right - inset
+regions[three_inset_right_bottom]  = 3  Inset right - bottom
 
  */
 ?>
-<!-- Three col inset right -->
+<!-- Three  inset right -->
 <?php if (
-  $page['threecol_inset_right_sidebar'] ||
-  $page['threecol_inset_right_top'] ||
-  $page['threecol_inset_right_middle'] ||
-  $page['threecol_inset_right_inset'] ||
-  $page['threecol_inset_right_bottom']
+  $page['three_inset_right_sidebar'] ||
+  $page['three_inset_right_top'] ||
+  $page['three_inset_right_middle'] ||
+  $page['three_inset_right_inset'] ||
+  $page['three_inset_right_bottom']
   ): ?>
 <div class="at-panel gpanel panel-display three-inset-right clearfix">
-  <?php print $content['threecol_inset_right_sidebar']; ?>
+  <?php print $content['three_inset_right_sidebar']; ?>
   <div class="inset-wrapper clearfix">
-    <?php print $content['threecol_inset_right_top']; ?>
-    <?php print $content['threecol_inset_right_middle']; ?>
-    <?php print $content['threecol_inset_right_inset']; ?>
-    <?php print $content['threecol_inset_right_bottom']; ?>
+    <?php print $content['three_inset_right_top']; ?>
+    <?php print $content['three_inset_right_middle']; ?>
+    <?php print $content['three_inset_right_inset']; ?>
+    <?php print $content['three_inset_right_bottom']; ?>
   </div>
 </div>

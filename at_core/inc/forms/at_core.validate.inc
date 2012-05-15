@@ -13,15 +13,7 @@ function at_core_settings_validate($form, &$form_state) {
   $values = $form_state['values'];
   $theme_name = $form_state['build_info']['args'][0];
 
-  // TODO: some of this validates radion buttons and was added to workaround
-  // Druapl 7's "validation error" bug if there was nothing set for a radio. I'll
-  // review these over time and see how it plays out. While technically we don't
-  // need this validation as a workaround post Drupal 7.14 it is a nice UX
-  // improvement and does prevent the user saving settings without something
-  // set and wondering why (wtf?) something isn't working as expected.
-  // Certain things must be set so AT Core can build the layout
-
-  // Design approach uses radios, if this becomes unset for some reason bad
+  // "Design approach" uses radios, if this becomes unset for some reason bad
   // things can happen.
   if (empty($values['global_default_layout'])) {
     form_set_error('global_default_layout', t('No setting detected for the <b>design approach</b>. Please review "Settings > Mobile first or Desktop first" and select either Mobile first or Desktop first.'));
@@ -74,38 +66,6 @@ function at_core_settings_validate($form, &$form_state) {
     if (empty($values['smartphone_landscape_sidebar_second'])) {
       form_set_error('smartphone_landscape_sidebar_second', t('Smartphone Second Sidebar width is empty - enter a value or choose another layout.'));
     }
-  }
-
-  // See if we have any settings for panels layouts
-  $devices = array(
-    'tablet_landscape',
-    'tablet_portrait',
-    'smartphone_landscape',
-  );
-  $rpl = responsive_panels_data_structure();
-  if (isset($rpl['one'])) {
-    unset($rpl['one']);
-  }
-  $missing_panels_settings = array();
-  foreach ($devices as $device) {
-    if (isset($rpl)) {
-      foreach ($rpl as $group => $layouts) {
-        foreach ($layouts as $layout) {
-          foreach ($layout as $key => $value) {
-            if (empty($values[$device . '_' . $value['theme']])) {
-              $missing_panels_settings[] = str_replace('_', ' ', drupal_ucfirst($device)) . ' ' . $value['title'];
-            }
-          }
-        }
-      }
-    }
-  }
-  if (!empty($missing_panels_settings)) {
-    // Format missing panels settings as an item list, for better readability
-    $missing_panels_settings = theme('item_list', array('items' => $missing_panels_settings, 'title' => '', 'type' => 'ul'));
-    // Set a helpful message, this is far better than throwing a form error and
-    // potentially leaving the users site disabled
-    drupal_set_message(t('<p>There are settings missing for the Panels layouts. Fallback values for each missing setting are being used but these might not be optimal for your site.</p><p>Don\'t worry, you just need to add the default settings for Panels layouts to your themes info file and clear the cache, please see <a href="@issue_link" target="_blank">this issue</a>. You can also select a layout for each Panel layout and resave the theme settings, which will fix the issue and clear this warning.</p><p>Settings are missing for:</p>', array('@issue_link' => 'http://drupal.org/node/1497224#at_build_panels_layout_css')) . filter_xss_admin($missing_panels_settings), 'warning');
   }
 
   // Validate extensions

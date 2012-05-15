@@ -538,14 +538,13 @@ function adaptivetheme_preprocess_field(&$vars) {
 
   $element = $vars['element'];
 
-  // add a view mode class to fields
-  $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
-
-  // provide an variable we can use to test the view mode inside templates, I found
-  // $element['#view_mode'] impossible to get to inside the template, which may be a
-  // lack of understanding of render arrays and how we can access variables, or that
-  // Drupal theme layer is so horribly inconsistant it drives me insane.
-  $vars['field_view_mode'] = $element['#view_mode'] ? $element['#view_mode'] : '';
+  $vars['field_view_mode'] = '';
+  if (isset($element['#view_mode'])) {
+    // add a view mode class to fields
+    $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
+    // Set variable for view mode, appears to be not gettable in a template
+    $vars['field_view_mode'] = $element['#view_mode'];
+  }
 
   // enable captioning capability for image fields
   if ($element['#field_type'] === 'image') {

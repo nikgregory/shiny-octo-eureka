@@ -153,6 +153,10 @@ function load_layout_css($path, $theme_name) {
  * @param $theme_name
  */
 function load_responsive_css($path, $theme_name) {
+  
+  // Set the mode
+  $mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
+  
   // Development Mode
   // These files are for "design style" only, the layout is handled
   // seperately.
@@ -166,7 +170,11 @@ function load_responsive_css($path, $theme_name) {
   //
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
-  if (at_get_setting('production_mode', $theme_name) === 0) {
+
+  // Old, could be deprecated, using a different method for a test
+  //if (at_get_setting('production_mode', $theme_name) === 0) {
+  if ($mode == FALSE) {
+  
     // Build a keyed array of CSS file-names as key, and media query as value.
     // The file names must match the files in your themes CSS directory, if
     // you change them you must update to match.
@@ -179,9 +187,8 @@ function load_responsive_css($path, $theme_name) {
     );
 
     // Add the cascading stylesheet if enabled
-    if (at_get_setting('enable_cascading_media_queries', $theme_name) === 1) {
-      $cascade_media_query = at_get_setting('cascade_media_query', $theme_name);
-      $item = array('responsive.cascade' => $cascade_media_query);
+    if (at_get_setting('enable_custom_media_queries', $theme_name) === 1) {
+      $item = array('responsive.custom' => 'only screen');
       $files = array_merge($item, $files);
     }
 
@@ -201,7 +208,7 @@ function load_responsive_css($path, $theme_name) {
   // In Production mode we only load one file for our design styles.
   // We use a media query to prevent non media query browsers from downloading it.
   // The embedded media queries in this file take precedence always.
-  else {
+  elseif ($mode == TRUE) {
     $filepath = $path . '/' . $theme_name . '.responsive.styles.css';
     $media_query = 'only screen'; // keyword "only" should hide this from older user agents
     load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 100);

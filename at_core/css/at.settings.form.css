@@ -482,6 +482,14 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   text-align: center;
 }
 
+/* Mode message */
+#edit-mode {
+  
+}
+#edit-mode .fieldset-wrapper {
+ 
+}
+
 /* Wrangel Seven to look half decent */
 .admin-theme-seven .font-element-wrapper .fieldset-legend,
 .admin-theme-seven .panel-option-lists .fieldset-legend {
