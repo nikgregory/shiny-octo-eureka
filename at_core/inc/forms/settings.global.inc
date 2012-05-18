@@ -49,7 +49,7 @@ $form['at-settings']['global-settings']['custom-mediaqueries']['enable_custom_me
   '#type' => 'checkbox',
   '#title'  => t('Enable the responsive.custom.css file'),
   '#description' => t('Use this file if you need to use custom media queries, such as <a href="!zomigi" target="_blank">overlapped media queries</a>. This file is located here: <code>themeName/css/responsive.custom.css</code>. Adaptivetheme will load this file automagically when this setting enabled.', array('!zomigi' => 'http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack')),
-  '#default_value' => at_get_setting('enable_cascading_media_queries'),
+  '#default_value' => at_get_setting('enable_custom_media_queries'),
 );
 
 // Set default layout

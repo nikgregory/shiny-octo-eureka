@@ -93,18 +93,5 @@ function at_core_settings_validate($form, &$form_state) {
       }
     }
 
-    // Warn users Global extensions are enabled, but no extensions are.
-    if (
-      $values['enable_font_settings'] == 0 &&
-      $values['enable_heading_settings'] == 0 &&
-      $values['enable_image_settings'] == 0 &&
-      $values['enable_exclude_css'] == 0 &&
-      $values['enable_apple_touch_icons'] == 0 &&
-      $values['enable_custom_css'] == 0 &&
-      $values['enable_markup_overides'] == 0
-      ) {
-      form_set_error('enable_extensions', t('No extensions enabled. You enabled the Extensions global setting but did not enable any extensions.'));
-    }
-
   }
 }

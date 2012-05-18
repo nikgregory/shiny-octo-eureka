@@ -482,12 +482,32 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   text-align: center;
 }
 
-/* Mode message */
-#edit-mode {
-  
+/* Float block regions */
+#edit-float-region-blocks label {
+  min-width: 15em;
 }
-#edit-mode .fieldset-wrapper {
- 
+#edit-float-region-blocks .form-type-select,
+#edit-float-region-blocks .form-type-radios {
+  float: left;
+  clear: none;
+}
+#edit-float-region-blocks .form-type-radios * {
+  display: inline-block;
+  width: auto;
+  min-width: 0;
+}
+#edit-float-region-blocks .form-type-radios {
+  padding: 2px 10px 0 20px;
+}
+#edit-float-region-blocks .form-type-radios label {
+  margin-right: 5px;
+}
+#edit-float-region-blocks .form-type-radios > label:after {
+  content: ":";
+}
+#edit-float-region-blocks ol {
+  list-style: lower-roman;
+  margin-bottom: 20px;
 }
 
 /* Wrangel Seven to look half decent */

@@ -137,8 +137,13 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
     }
 
+    // Float Region blocks
+    $enable_float_region_blocks = isset($form_state['values']['enable_float_region_blocks']);
+    if (($enable_float_region_blocks && $form_state['values']['enable_float_region_blocks'] == 1) || (!$enable_float_region_blocks && $form['at-settings']['extend']['enable']['enable_float_region_blocks']['#default_value'] == 1)) {
+      require_once($path_to_at_core . '/inc/forms/settings.floatregionblocks.inc');
+    }
+
     // Modify output
-   // if ($form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1 || $form_state['input']['enable_markup_overides'] == 1) {
     $enable_markup_overides = isset($form_state['values']['enable_markup_overides']);
     if (($enable_markup_overides && $form_state['values']['enable_markup_overides'] == 1) || (!$enable_markup_overides && $form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');

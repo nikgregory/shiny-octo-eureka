@@ -220,15 +220,42 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
  * Preprocess variables for region.tpl.php
  */
 function adaptivetheme_preprocess_region(&$vars, $hook) {
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  $region = $vars['region'];
 
   // Add a "sidebar" class to sidebar regions
-  if (strpos($vars['region'], 'sidebar_') === 0) {
+  if (strpos($region, 'sidebar_') === 0) {
     $vars['classes_array'][] = 'sidebar';
     // Allow a region-specific template to override the region--sidebar suggestion.
     array_unshift($vars['theme_hook_suggestions'], 'region__sidebar');
   }
+  
+  // Float region block classes
+  if (at_get_setting('enable_float_region_blocks', $theme_name) === 1) {
 
-  // Add classes to conditional stack regions in Gpanel regions, in the Panels layout plugins these are hard coded.
+    // Make sure there is something set for the region, get the column count
+    if ($float_blocks_regions_class = at_get_setting('float_block_' . $region)) {
+
+      // Do nothing if its <none>
+      if ($float_blocks_regions_class !== '<none>') {
+
+        // Set a class for the number of columns selected, default to nothing
+        $float_blocks_regions_class = isset($float_blocks_regions_class) ? check_plain($float_blocks_regions_class) : '';
+        $vars['classes_array'][] = 'float-blocks-' . $float_blocks_regions_class;
+
+        // Add the float direction class, default to left if the setting fails
+        if ($float_block_direction_class = at_get_setting('float_block_direction_' . $region)) {
+          $float_block_direction_class = isset($float_block_direction_class) ? check_plain($float_block_direction_class) : 'left';
+          $vars['classes_array'][] = 'float-blocks-' . $float_block_direction_class;
+        }
+      }
+    }
+  }
+
+  // Add classes to conditional stack regions in Gpanel regions, in the Panels
+  // layout plugins these are hard coded.
   $conditional_stack_regions = &drupal_static(__FUNCTION__, array());
   if (empty($conditional_stack_regions)) {
     $conditional_stack_regions = array(
@@ -255,7 +282,7 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
       'threecol_inset_right_bottom',
     );
   }
-  if (in_array($vars['region'], $conditional_stack_regions)) {
+  if (in_array($region, $conditional_stack_regions)) {
     $vars['classes_array'][] = 'region-conditional-stack';
   }
 }

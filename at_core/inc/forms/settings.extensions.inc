@@ -77,6 +77,14 @@ $form['at-settings']['extend']['enable']['enable_custom_css'] = array(
   '#default_value' => at_get_setting('enable_custom_css'),
 );
 
+// Float Region blocks
+$form['at-settings']['extend']['enable']['enable_float_region_blocks'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Float Region blocks'),
+  '#description' => t('Float blocks in any region - this allows blocks to line up horizontally within a region, similar to a CSS grid or columns.'),
+  '#default_value' => at_get_setting('enable_float_region_blocks'),
+);
+
 // Markup overrides
 $form['at-settings']['extend']['enable']['enable_markup_overides'] = array(
   '#type' => 'checkbox',

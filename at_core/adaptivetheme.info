@@ -180,7 +180,7 @@
 
 ;----------// Global settings
   settings[disable_responsive_styles]     = 0
-  settings[enable_custom_media_queries]   = 0
+  settings[enable_custom_media_queries]   = 1
   settings[global_default_layout]         = 'smartphone-portrait'
   settings[global_default_layout_disable] = 1
 

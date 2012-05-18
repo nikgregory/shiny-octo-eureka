@@ -138,9 +138,9 @@ input.form-text {
 input.form-text,
 textarea,
 select {
-  border-color: 1px solid #ccc;
+  border: 1px solid #ccc;
   height: auto;
-  padding: 2px;
+  padding: 1px 2px;
   font-family: inherit; /* inherit the default site font and not the browsers monospace font */
   font-size: 1em;
 }
@@ -148,7 +148,10 @@ select {
 
 /* Adjust trobber background position when changing text field padding */
 html.js input.form-autocomplete {
-  background-position: 100% 4px;
+  background-position: 100% 5px;
+}
+html.js input.throbbing {
+  background-position: 100% -15px;
 }
 
 

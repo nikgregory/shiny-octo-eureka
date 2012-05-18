@@ -114,7 +114,7 @@ $panels_message = t('Adaptivetheme can support responsive Panels and Gpanel layo
 // No panels, but we have some Gpanels
 if ($panels == FALSE && !empty($active_gpanels)) {
   $panels_title = t('Gpanels');
-  $panels_message = t('<h3>Responsive Gpanels</h3><p>These settings apply to your themes <a href="!gpanels_link" target="_blank">Gpanel</a> layouts. If you add more Gpanels to your theme new settings will show up here. If you enable the <a href="!panels_link" target="_blank">Panels module</a> these settings will apply to Panels layouts as well.</p><p>Your theme currently uses the following Gpanel layouts - check your block settings to see where these are used on the page:</p>' . filter_xss_admin($used_gpanels) . '</p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels', '!panels_link' => 'http://drupal.org/project/panels',));
+  $panels_message = t('<h3>Responsive Gpanels</h3><p>These settings apply to your themes <a href="!gpanels_link" target="_blank">Gpanel</a> layouts. If you add more Gpanels to your theme new settings will show up here. If you enable the <a href="!panels_link" target="_blank">Panels module</a> these settings will apply to Panels layouts as well.</p><p>Your theme currently uses the following Gpanel layouts - check your block settings to see where these are used on the page:</p>' . filter_xss_admin($used_gpanels) . '</p><strong>Usage:</strong> select layout options for each mobile device orientation.</p>', array('!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels', '!panels_link' => 'http://drupal.org/project/panels'));
 }
 
 // Panels, but no Gpanels

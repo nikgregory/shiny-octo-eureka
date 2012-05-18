@@ -186,7 +186,7 @@ function load_responsive_css($path, $theme_name) {
       'responsive.desktop'              => at_get_setting('bigscreen_media_query', $theme_name),
     );
 
-    // Add the cascading stylesheet if enabled
+    // Add the custom responsive stylesheet if enabled
     if (at_get_setting('enable_custom_media_queries', $theme_name) === 1) {
       $item = array('responsive.custom' => 'only screen');
       $files = array_merge($item, $files);
@@ -225,12 +225,19 @@ function load_extensions_css($theme_name) {
   $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   $settings_css = array();
+  // Heading settings
   if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.headings.css';
   }
+  // Image alignment settings
   if (at_get_setting('enable_image_settings', $theme_name) === 1) {
     $settings_css[] = 'at.settings.style.image.css';
   }
+  // Float block settings
+  if (at_get_setting('enable_float_region_blocks', $theme_name) === 1) {
+    $settings_css[] = 'at.settings.style.floatblocks.css';
+  }
+  // Login block settings
   if (at_get_setting('horizontal_login_block_enable', $theme_name) === 'on') {
     if (at_get_setting('horizontal_login_block', $theme_name) === 1) {
       $settings_css[] = 'at.settings.style.login.css';
