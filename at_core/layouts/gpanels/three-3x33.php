@@ -17,11 +17,11 @@
 Region Deinitions:
 
 ; 3 col 3x33
-regions[three_33_top]    = 3x33 Gpanel top
-regions[three_33_first]  = 3x33 Gpanel left
-regions[three_33_second] = 3x33 Gpanel center
-regions[three_33_third]  = 3x33 Gpanel right
-regions[three_33_bottom] = 3x33 Gpanel bottom
+regions[three_33_top]    = AT Three column 3x33 - top
+regions[three_33_first]  = AT Three column 3x33 - left
+regions[three_33_second] = AT Three column 3x33 - center
+regions[three_33_third]  = AT Three column 3x33 - right
+regions[three_33_bottom] = AT Three column 3x33 - bottom
 
  */
 ?>

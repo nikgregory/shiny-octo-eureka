@@ -17,10 +17,10 @@
 Region Deinitions:
 
 ; 2 col 2x50
-regions[two_50_top]    = 2x50 Gpanel top
-regions[two_50_first]  = 2x50 Gpanel left
-regions[two_50_second] = 2x50 Gpanel right
-regions[two_50_bottom] = 2x50 Gpanel bottom
+regions[two_50_top]    = AT Two column 50/50 - top
+regions[two_50_first]  = AT Two column 50/50 - left
+regions[two_50_second] = AT Two column 50/50 - right
+regions[two_50_bottom] = AT Two column 50/50 - bottom
 
  */
 ?>

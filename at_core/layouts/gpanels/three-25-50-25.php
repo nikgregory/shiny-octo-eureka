@@ -17,11 +17,11 @@
 Region Deinitions:
 
 ; 3 col 25-50-25
-regions[three_25_50_25_top]    = 25-50-25 Gpanel top
-regions[three_25_50_25_first]  = 25-50-25 Gpanel left
-regions[three_25_50_25_second] = 25-50-25 Gpanel center
-regions[three_25_50_25_third]  = 25-50-25 Gpanel right
-regions[three_25_50_25_bottom] = 25-50-25 Gpanel bottom
+regions[three_25_50_25_top]    = AT Three column 25/50/25 - top
+regions[three_25_50_25_first]  = AT Three column 25/50/25 - left
+regions[three_25_50_25_second] = AT Three column 25/50/25 - center
+regions[three_25_50_25_third]  = AT Three column 25/50/25 - right
+regions[three_25_50_25_bottom] = AT Three column 25/50/25 - bottom
 
  */
 ?>

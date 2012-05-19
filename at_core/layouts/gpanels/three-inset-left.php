@@ -17,11 +17,11 @@
 Region Deinitions:
 
 ; 3  Inset Right
-regions[three_inset_left_sidebar] = 3  Inset left - sidebar
-regions[three_inset_left_top]     = 3  Inset left - top
-regions[three_inset_left_middle]  = 3  Inset left - middle
-regions[three_inset_left_inset]   = 3  Inset left - inset
-regions[three_inset_left_bottom]  = 3  Inset left - bottom
+regions[three_inset_left_sidebar] = AT Inset left - sidebar
+regions[three_inset_left_top]     = AT Inset left - top
+regions[three_inset_left_middle]  = AT Inset left - middle
+regions[three_inset_left_inset]   = AT Inset left - inset
+regions[three_inset_left_bottom]  = AT Inset left - bottom
 
  */
 ?>

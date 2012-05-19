@@ -17,7 +17,7 @@
 Region Deinitions:
 
 ; 1 col
-regions[one_main] = 1 col Gpanel
+regions[one_main] = AT One column
 
  */
 ?>

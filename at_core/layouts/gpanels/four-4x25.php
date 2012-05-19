@@ -17,10 +17,10 @@
 Region Deinitions:
 
 ; 4 col
-regions[four_first]  = 4col Gpanel - 1
-regions[four_second] = 4col Gpanel - 2
-regions[four_third]  = 4col Gpanel - 3
-regions[four_fourth] = 4col Gpanel - 4
+regions[four_first]  = AT Four column 4x25 - 1
+regions[four_second] = AT Four column 4x25 - 2
+regions[four_third]  = AT Four column 4x25 - 3
+regions[four_fourth] = AT Four column 4x25 - 4
 
  */
 ?>

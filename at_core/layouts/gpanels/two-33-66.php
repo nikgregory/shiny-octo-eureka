@@ -17,10 +17,10 @@
 Region Deinitions:
 
 ; 2 col 33-66
-regions[two_33_66_top]    = 33-66 Gpanel top
-regions[two_33_66_first]  = 33-66 Gpanel left
-regions[two_33_66_second] = 33-66 Gpanel right
-regions[two_33_66_bottom] = 33-66 Gpanel bottom
+regions[two_33_66_top]    = AT Two column 33/66 - top
+regions[two_33_66_first]  = AT Two column 33/66 - left
+regions[two_33_66_second] = AT Two column 33/66 - right
+regions[two_33_66_bottom] = AT Two column 33/66 - bottom
 
  */
 ?>

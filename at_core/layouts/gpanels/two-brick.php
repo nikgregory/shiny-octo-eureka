@@ -17,13 +17,13 @@
 Region Deinitions:
 
 ; 2 col 2x50
-regions[two_brick_top]         = 2 col Brick top
-regions[two_brick_left_above]  = 2 col Brick left above
-regions[two_brick_right_above] = 2 col Brick right above
-regions[two_brick_middle]      = 2 col Brick middle
-regions[two_brick_left_below]  = 2 col Brick left below
-regions[two_brick_right_below] = 2 col Brick right below
-regions[two_brick_bottom]      = 2 col Brick bottom
+regions[two_brick_top]         = AT Two column brick - top
+regions[two_brick_left_above]  = AT Two column brick - left above
+regions[two_brick_right_above] = AT Two column brick - right above
+regions[two_brick_middle]      = AT Two column brick - middle
+regions[two_brick_left_below]  = AT Two column brick - left below
+regions[two_brick_right_below] = AT Two column brick - right below
+regions[two_brick_bottom]      = AT Two column brick - bottom
 
  */
 ?>
