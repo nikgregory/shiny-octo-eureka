@@ -500,8 +500,10 @@ function adaptivetheme_preprocess_node(&$vars) {
     }
 
     // User picture?
-    if ($vars['display_submitted'] && !empty($vars['picture'])) {
-      $vars['classes_array'][] = 'node-with-picture';
+    if (at_get_setting('toggle_node_user_picture', $theme_name) === 1) {
+      if ($vars['display_submitted'] && !empty($vars['picture'])) {
+        $vars['classes_array'][] = 'node-with-picture';
+      }
     }
 
     // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
@@ -569,6 +571,8 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   global $theme_key;
   $theme_name = $theme_key;
+  
+  dsm($vars);
 
   // Extra comment classes if required
   if (at_get_setting('extra_comment_classes', $theme_name) === 1) {
@@ -590,12 +594,14 @@ function adaptivetheme_preprocess_comment(&$vars) {
     }
 
     // User picture?
-    if (isset($vars['picture'])) {
-      $vars['classes_array'][] = 'comment-with-picture';
+    if (at_get_setting('toggle_comment_user_picture', $theme_name) === 1) {
+      if (!empty($vars['picture'])) {
+        $vars['classes_array'][] = 'comment-with-picture';
+      }
     }
 
     // Signature?
-    if (isset($vars['signature'])) {
+    if (!empty($vars['signature'])) {
       $vars['classes_array'][] = 'comment-with-signature';
     }
   }
