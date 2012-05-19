@@ -571,8 +571,6 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   global $theme_key;
   $theme_name = $theme_key;
-  
-  dsm($vars);
 
   // Extra comment classes if required
   if (at_get_setting('extra_comment_classes', $theme_name) === 1) {
