@@ -437,6 +437,45 @@ function adaptivetheme_preprocess_block(&$vars) {
 }
 
 /**
+ * Preprocess variables for field.tpl.php
+ */
+function adaptivetheme_preprocess_field(&$vars) {
+
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  $element = $vars['element'];
+  
+ // In the context of HTML5 we need to account for sectioning, so this sets
+ // the top level element as either <section> if the field label is showing) or
+ // <div> if the field label is hidden.
+  $vars['tag'] = 'section';
+  if (isset($vars['label_hidden']) && $vars['label_hidden'] == TRUE) {
+    $vars['tag'] = 'div';
+  }
+
+  $vars['field_view_mode'] = '';
+  if (isset($element['#view_mode'])) {
+    // add a view mode class to fields
+    $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
+    // Set variable for view mode, appears to be not gettable in a template
+    $vars['field_view_mode'] = $element['#view_mode'];
+  }
+
+  // enable captioning capability for image fields
+  if ($element['#field_type'] === 'image') {
+    $vars['image_caption_teaser'] = FALSE;
+    $vars['image_caption_full'] = FALSE;
+    if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
+      $vars['image_caption_teaser'] = TRUE;
+    }
+    if (at_get_setting('image_caption_full', $theme_name) === 1) {
+      $vars['image_caption_full'] = TRUE;
+    }
+  }
+}
+
+/**
  * Preprocess variables for node.tpl.php
  */
 function adaptivetheme_preprocess_node(&$vars) {
@@ -610,37 +649,6 @@ function adaptivetheme_preprocess_search_block_form(&$vars) {
   // We have to replace the string because FAPI don't know what type=search is, i.e.
   // no way we can do this in a form alter hook.
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
-}
-
-/**
- * Preprocess variables for field.tpl.php
- */
-function adaptivetheme_preprocess_field(&$vars) {
-
-  global $theme_key;
-  $theme_name = $theme_key;
-
-  $element = $vars['element'];
-
-  $vars['field_view_mode'] = '';
-  if (isset($element['#view_mode'])) {
-    // add a view mode class to fields
-    $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
-    // Set variable for view mode, appears to be not gettable in a template
-    $vars['field_view_mode'] = $element['#view_mode'];
-  }
-
-  // enable captioning capability for image fields
-  if ($element['#field_type'] === 'image') {
-    $vars['image_caption_teaser'] = FALSE;
-    $vars['image_caption_full'] = FALSE;
-    if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
-      $vars['image_caption_teaser'] = TRUE;
-    }
-    if (at_get_setting('image_caption_full', $theme_name) === 1) {
-      $vars['image_caption_full'] = TRUE;
-    }
-  }
 }
 
 /**

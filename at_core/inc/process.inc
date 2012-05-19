@@ -144,7 +144,8 @@ function adaptivetheme_process_region(&$vars) {
 function adaptivetheme_process_block(&$vars) {
 
   // Now we know all the block $tag's, we can generate our wrapper, $tag is
-  // set in preprocess
+  // set in preprocess. We cant introduce these in preprocess due to attributes
+  // and classes not being flattened untill we hit process.
   $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
   $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
 
@@ -248,20 +249,6 @@ function adaptivetheme_process_comment(&$vars) {
   $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
   $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
   $vars['links_attributes'] = empty($vars['links_attributes_array']) ? '' : drupal_attributes($vars['links_attributes_array']);
-}
-
-/**
- * Process variables for field.tpl.php
- */
-function adaptivetheme_process_field(&$vars) {
-
- // In the context of HTML5 we need to account for sectioning, so this sets
- // the top level element as either <section> (field label is showing) or <div>
- // (field label is hidden).
-  $vars['tag'] = 'section';
-  if (isset($vars['label_hidden']) && $vars['label_hidden'] == TRUE) {
-    $vars['tag'] = 'div';
-  }
 }
 
 /**
