@@ -10,7 +10,8 @@
 /**
  * Process variables for html.tpl.php
  */
-function adaptivetheme_process_html(&$vars, $hook) {
+function adaptivetheme_process_html(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -42,9 +43,12 @@ function adaptivetheme_process_html(&$vars, $hook) {
 /**
  * Process variables for the html tag
  */
-function adaptivetheme_process_html_tag(&$vars, $hook) {
+function adaptivetheme_process_html_tag(&$vars) {
+
   $tag = &$vars['element'];
+
   if ($tag['#tag'] === 'style' || $tag['#tag'] === 'script') {
+
     // Remove redundant type attribute and CDATA comments.
     unset($tag['#attributes']['type'], $tag['#value_prefix'], $tag['#value_suffix']);
 
@@ -58,7 +62,8 @@ function adaptivetheme_process_html_tag(&$vars, $hook) {
 /**
  * Process variables for page.tpl.php
  */
-function adaptivetheme_process_page(&$vars, $hook) {
+function adaptivetheme_process_page(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -107,7 +112,8 @@ function adaptivetheme_process_page(&$vars, $hook) {
 /**
  * Process variables for region.tpl.php
  */
-function adaptivetheme_process_region(&$vars, $hook) {
+function adaptivetheme_process_region(&$vars) {
+
   // Initialize and populate the outer wrapper variables
   $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
   $vars['outer_suffix'] = '</div>';
@@ -136,48 +142,21 @@ function adaptivetheme_process_region(&$vars, $hook) {
  * Process variables for block.tpl.php
  */
 function adaptivetheme_process_block(&$vars) {
-  // Generate the wrapper element, if there's a title use section
-  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
 
-  // Search is never a section, its just a div
-  if ($vars['block_html_id'] === 'block-search-form') {
-    $vars['tag'] = 'div';
-  }
-
-  // Use a $title variable instead of $block->subject
-  $vars['title'] = $vars['block']->subject;
+  // Now we know all the block $tag's, we can generate our wrapper, $tag is
+  // set in preprocess
+  $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
+  $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
 
   // Wrap the content variable in a div with attributes
   $vars['content_processed'] = '<div' . $vars['content_attributes'] . '>' . $vars['content'] . '</div>';
 
-  // Initialize and populate the inner wrapper variables
-  $vars['inner_prefix'] = '<div class="block-inner clearfix">';
-  $vars['inner_suffix'] = '</div>';
-
-  // Use nav element for menu blocks and provide a suggestion for all of them
-  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
-  if (in_array($vars['block']->delta, $nav_blocks)) {
-    $vars['tag'] = 'nav';
-    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
-  }
-  $nav_modules = array('superfish', 'nice_menus');
-  if (in_array($vars['block']->module, $nav_modules)) {
-    $vars['tag'] = 'nav';
-    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
-  }
-
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region === 'menu_bar') {
-    // They are always menu blocks, right?
-    $vars['tag'] = 'nav';
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
-    $vars['content_processed'] = $vars['content']; // this could get a wrapper
+    $vars['content_processed'] = $vars['content']; // remove the default wrapper
   }
-
-  // Now we know all the block $tag's, we can generate our wrapper
-  $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
-  $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
 
   // Wait, some blocks look like shit with wrappers, blow them away...
   if ($vars['block_html_id'] === 'block-system-main') {
@@ -200,7 +179,8 @@ function adaptivetheme_process_block(&$vars) {
 /**
  * Process variables for node.tpl.php
  */
-function adaptivetheme_process_node(&$vars, $hook) {
+function adaptivetheme_process_node(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -215,6 +195,11 @@ function adaptivetheme_process_node(&$vars, $hook) {
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }
+  
+  // Flatten the additional wrapper attributes array
+  $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
+  $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
+  $vars['links_attributes'] = empty($vars['links_attributes_array']) ? '' : drupal_attributes($vars['links_attributes_array']);
 
   // If a panels layout is being used by Display Suite in a node, we wrap the
   // the layout in markup to make the themers life a little easier and remove
@@ -242,7 +227,8 @@ function adaptivetheme_process_node(&$vars, $hook) {
 /**
  * Process variables for comment.tpl.php
  */
-function adaptivetheme_process_comment(&$vars, $hook) {
+function adaptivetheme_process_comment(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -257,6 +243,11 @@ function adaptivetheme_process_comment(&$vars, $hook) {
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }
+
+  // Flatten the additional wrapper attributes array
+  $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
+  $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
+  $vars['links_attributes'] = empty($vars['links_attributes_array']) ? '' : drupal_attributes($vars['links_attributes_array']);
 }
 
 /**
@@ -276,7 +267,8 @@ function adaptivetheme_process_field(&$vars) {
 /**
  * Process variables for adaptivtheme_menubar()
  */
-function adaptivetheme_process_menubar(&$vars, $hook) {
+function adaptivetheme_process_menubar(&$vars) {
+
   // The default theme implementation is a function, so template_process() does
   // not automatically run, so we need to flatten the classes and attributes
   // here. For best performance, only call drupal_attributes() when needed, and

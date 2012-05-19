@@ -9,7 +9,8 @@
 /**
  * Preprocess variables for html.tpl.php
  */
-function adaptivetheme_preprocess_html(&$vars, $hook) {
+function adaptivetheme_preprocess_html(&$vars) {
+
   global $theme_key, $language;
   $theme_name = $theme_key;
 
@@ -89,7 +90,8 @@ function adaptivetheme_preprocess_html(&$vars, $hook) {
 /**
  * Preprocess variables for page.tpl.php
  */
-function adaptivetheme_preprocess_page(&$vars, $hook) {
+function adaptivetheme_preprocess_page(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -219,7 +221,8 @@ function adaptivetheme_preprocess_page(&$vars, $hook) {
 /**
  * Preprocess variables for region.tpl.php
  */
-function adaptivetheme_preprocess_region(&$vars, $hook) {
+function adaptivetheme_preprocess_region(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -290,9 +293,43 @@ function adaptivetheme_preprocess_region(&$vars, $hook) {
 /**
  * Preprocess variables for block.tpl.php
  */
-function adaptivetheme_preprocess_block(&$vars, $hook) {
+function adaptivetheme_preprocess_block(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
+
+  // Generate the wrapper element, if there's a title use section
+  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
+  
+  // Search is never a section, its just a div
+  if ($vars['block_html_id'] === 'block-search-form') {
+    $vars['tag'] = 'div';
+  }
+
+  // Use a $title variable instead of $block->subject
+  $vars['title'] = $vars['block']->subject;
+
+  // Initialize and populate the inner wrapper variables
+  $vars['inner_prefix'] = '<div class="block-inner clearfix">';
+  $vars['inner_suffix'] = '</div>';
+
+  // Use nav element for menu blocks and provide a suggestion for all of them
+  $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');
+  if (in_array($vars['block']->delta, $nav_blocks)) {
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
+  }
+  $nav_modules = array('superfish', 'nice_menus', 'menu_block');
+  if (in_array($vars['block']->module, $nav_modules)) {
+    $vars['tag'] = 'nav';
+    array_unshift($vars['theme_hook_suggestions'], 'block__menu');
+  }
+
+  // The menu bar region gets special treatment for the block template
+  if ($vars['block']->region === 'menu_bar') {
+    // They are always menu blocks, right?
+    $vars['tag'] = 'nav';
+  }
 
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region === 'menu_bar') {
@@ -402,7 +439,8 @@ function adaptivetheme_preprocess_block(&$vars, $hook) {
 /**
  * Preprocess variables for node.tpl.php
  */
-function adaptivetheme_preprocess_node(&$vars, $hook) {
+function adaptivetheme_preprocess_node(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -436,14 +474,22 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
   // ARIA Role
   $vars['attributes_array']['role'][] = 'article';
 
-  // Title and content classes
+  // Classes and attributes
   $vars['title_attributes_array']['class'][] = 'node-title';
   $vars['content_attributes_array']['class'][] = 'node-content';
-
   $vars['title_attributes_array']['rel'][] = 'nofollow';
+  
+  // header, submitted and links wrappers have their own attributes
+  $vars['header_attributes_array']['class'][] = 'node-header';
+  $vars['footer_attributes_array']['class'][] = 'submitted';
+  if ($vars['user_picture']) {
+    $vars['footer_attributes_array']['class'][] = 'with-user-picture';
+  }
+  $vars['links_attributes_array']['class'][] = 'clearfix';
 
+  //
   // AT Core builds additional time and date variables for use in templates
-
+  //
   // datetime stamp formatted correctly to ISO8601
   $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601!
 
@@ -480,7 +526,8 @@ function adaptivetheme_preprocess_node(&$vars, $hook) {
 /**
  * Preprocess variables for comment.tpl.php
  */
-function adaptivetheme_preprocess_comment(&$vars, $hook) {
+function adaptivetheme_preprocess_comment(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -524,6 +571,14 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
 
   // Classes for comment content
   $vars['content_attributes_array']['class'][] = 'comment-content';
+  
+  // header, submitted and links wrappers have their own attributes
+  $vars['header_attributes_array']['class'][] = 'comment-header';
+  $vars['footer_attributes_array']['class'][] = 'submitted';
+  if ($vars['picture']) {
+    $vars['footer_attributes_array']['class'][] = 'with-user-picture';
+  }
+  $vars['links_attributes_array']['class'][] = 'clearfix';
 
   // Build the submitted by and time elements
   $uri = entity_uri('comment', $vars['comment']);
@@ -549,7 +604,8 @@ function adaptivetheme_preprocess_comment(&$vars, $hook) {
 /**
  * Preprocess variables for the search block form.
  */
-function adaptivetheme_preprocess_search_block_form(&$vars, $hook) {
+function adaptivetheme_preprocess_search_block_form(&$vars) {
+
   // Changes the search form to use the "search" input element attribute (HTML5)
   // We have to replace the string because FAPI don't know what type=search is, i.e.
   // no way we can do this in a form alter hook.
@@ -560,6 +616,7 @@ function adaptivetheme_preprocess_search_block_form(&$vars, $hook) {
  * Preprocess variables for field.tpl.php
  */
 function adaptivetheme_preprocess_field(&$vars) {
+
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -589,8 +646,10 @@ function adaptivetheme_preprocess_field(&$vars) {
 /**
  * Preprocess variables for aggregator-item.tpl.php
  */
-function adaptivetheme_preprocess_aggregator_item(&$vars, $hook) {
+function adaptivetheme_preprocess_aggregator_item(&$vars) {
+
   $item = $vars['item'];
+
   // We want the same highly accurate time stamp feature as nodes and comments
   $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
 
@@ -603,19 +662,22 @@ function adaptivetheme_preprocess_aggregator_item(&$vars, $hook) {
 /**
  * Preprocess variables for maintenance-page.tpl.php
  */
-function adaptivetheme_preprocess_maintenance_page(&$vars, $hook) {
+function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }
 
 /**
  * Preprocess variables for adaptivtheme_menubar()
  */
-function adaptivetheme_preprocess_menubar(&$vars, $hook) {
+function adaptivetheme_preprocess_menubar(&$vars) {
+
   $type = $vars['type'];
+
   $vars['menubar_id'] = $type . '-menu-bar';
   $vars['classes_array'][] = 'nav clearfix';
   $vars['content_attributes_array']['role'][] = 'navigation';
   $vars['content_attributes_array']['class'][] = $type . '-menu-wrapper menu-wrapper clearfix';
+
   // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }
