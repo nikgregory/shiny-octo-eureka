@@ -111,6 +111,8 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
   else {
     $vars['site_logo'] = '';
+    $vars['logo_img'] = '';
+    $vars['linked_site_logo'] = '';
   }
 
   // Site name
@@ -138,6 +140,9 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (!$vars['site_slogan'] && $vars['hide_site_name']) {
     $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
   }
+
+  // Strip stupid contextual links region class, wtf?
+  $vars['classes_array'] = array_values(array_diff($vars['classes_array'], array('contextual-links-region')));
 
   // Generate page classes, in AT Core these are all Extensions
   if (at_get_setting('enable_extensions', $theme_name) === 1) {

@@ -921,8 +921,8 @@ input.form-radio {
   vertical-align: middle;
 }
 td div.description,
-.form-item .description {
-  font-size: 0.923em;
+.form-item .description,
+.description {
   padding: 4px 0;
   color: #666;
 }

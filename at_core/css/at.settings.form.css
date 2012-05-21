@@ -209,6 +209,19 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   padding-left: 25px;
 }
 
+/* Conditional messages for sidebars */
+fieldset[id*="message-wrapper"] {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+fieldset[id*="message-wrapper"] .fieldset-wrapper {
+  margin: 0 !important;
+  padding: 0;
+}
+fieldset[id*="message-wrapper"] .fieldset-wrapper .description {
+  padding-top: 4px;
+}
+
 /* AT Panels */
 #edit-panels-wrapper,
 #edit-panels-wrapper .fieldset-wrapper {
@@ -591,4 +604,7 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
 .admin-theme-seven #edit-font fieldset[id$=-gwf-styles] .fieldset-wrapper,
 .admin-theme-seven #edit-font fieldset[id$=-gwf-charsets] .fieldset-wrapper {
   padding: 0 10px 7px !important;
+}
+.admin-theme-seven fieldset[id*="message-wrapper"] .fieldset-wrapper .description {
+  padding-top: 7px;
 }

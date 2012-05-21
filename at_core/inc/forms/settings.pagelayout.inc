@@ -312,6 +312,21 @@ $form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrap
   ),
 );
 
+// Conditional messages for sidebar layouts
+$form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet-landscape-sidebar-message-wrapper'] = array(
+  '#type' => 'fieldset',
+  '#states' => array(
+    'invisible' => array(
+      array('input[name="tablet_landscape_layout"]' => array('value' => 'three_col_grail')),
+      array('input[name="tablet_landscape_layout"]' => array('value' => 'two_sidebars_left')),
+      array('input[name="tablet_landscape_layout"]' => array('value' => 'two_sidebars_right')),
+    ),
+  ),
+);
+$form['at-settings']['tablet']['landscape']['tablet-landscape-sidebar-width-wrapper']['tablet-landscape-sidebar-message-wrapper']['message'] = array(
+  '#markup' => t('<div class="description">In this layout <em>Second sidebar</em> wraps below.</div>'),
+);
+
 // Page width
 $form['at-settings']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
   '#type' => 'fieldset',
@@ -414,7 +429,14 @@ $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrappe
   '#size' => 4,
   '#maxlenght' => 4,
   '#states' => array(
-    'required' => array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_vert')),
+    'invisible' => array(
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_stack')),
+    ),
+    'required' => array(
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_vert')),
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_left_stack')),
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_right_stack')),
+    ),
   ),
 );
 
@@ -426,8 +448,29 @@ $form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrappe
   '#size' => 4,
   '#maxlenght' => 4,
   '#states' => array(
-    'required' => array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_vert')),
+    'invisible' => array(
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_stack')),
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_left_stack')),
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'two_sidebars_right_stack')),
+    ),
+    'required' => array(
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_vert')),
+    ),
   ),
+);
+
+// Conditional messages for sidebar layouts
+$form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet-portrait-sidebar-message-wrapper'] = array(
+  '#type' => 'fieldset',
+  '#states' => array(
+    'invisible' => array(
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_vert')),
+      array('input[name="tablet_portrait_layout"]' => array('value' => 'one_col_stack')),
+    ),
+  ),
+);
+$form['at-settings']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet-portrait-sidebar-message-wrapper']['message'] = array(
+  '#markup' => t('<div class="description">In this layout <em>Second sidebar</em> wraps below.</div>'),
 );
 
 // Tablet portrait Page width

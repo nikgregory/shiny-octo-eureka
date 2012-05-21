@@ -323,7 +323,7 @@ foreach ($form_elements as $key => $value) {
       $title = 'h1 to h4';
     }
     else {
-      $title = 'h1 and h6';
+      $title = 'h5 and h6';
     }
 
     // Set easy reusable variables
@@ -412,7 +412,7 @@ foreach ($form_elements as $key => $value) {
       ),
     );
 
-    // Font your facec
+    // Font your face
     if ($font_your_face_enabled == TRUE) {
       $form['at']['font']['headings'][$setting_container][$setting_yfy] = array(
         '#type' => 'select',
