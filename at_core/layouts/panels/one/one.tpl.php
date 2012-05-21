@@ -16,6 +16,13 @@
  * @see adaptivetheme_preprocess_node()
  * @see adaptivetheme_process_node()
  */
+
+// Ensure variables are always set. In the last hours before cutting a stable
+// release I found these are not set when inside a Field Collection using Display
+// Suite, even though they are initialized in the templates preprocess function.
+// This is a workaround, that may or may not go away.
+$panel_prefix = isset($panel_prefix) ? $panel_prefix : '';
+$panel_suffix = isset($panel_suffix) ? $panel_suffix : '';
 ?>
 <?php print $panel_prefix; ?>
 <div class="at-panel panel-display one-column clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
