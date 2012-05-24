@@ -127,6 +127,20 @@ ul.links {
 }
 
 
+// Aggregator feed source
+#aggregator .feed-source .feed-icon {
+  display: inline;
+  float: none;
+  margin-right: 10px;
+}
+
+.feed-details dt,
+.feed-details dd {
+  display: inline;
+  margin: 0;
+}
+
+
 // Search results are an ordered list so reset the margin
 .search-results {
   margin: 0;

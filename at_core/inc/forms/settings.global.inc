@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Generate form elments for the Global settings.
+ * Generate form elments for the Global CSS settings.
  *
  * TODO: review documentation and provide links to help pages.
  */
