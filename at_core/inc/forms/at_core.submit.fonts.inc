@@ -114,15 +114,16 @@ foreach ($font_elements as $key => $value) {
           $font_value = $v;
         }
       }
-      // Get the font objects from font-your-face, we need additional data out of each object
+      // Get the font objects from font-your-face, we need additional data out
+      // of each object
       $enabled_fonts = fontyourface_get_fonts('enabled = 1');
       foreach ($enabled_fonts as $font) {
         // we need to know if the $font_value matches a $font->name
         if ($font_value == $font->name) {
-          // Now we need a buch of variables to get the font family, font style and font weight
-          $font_values['font_family'] = $font->css_family ? $font->css_family : 'Arial';
-          $font_values['font_style']  = $font->css_style  ? $font->css_style  : 'normal';
-          $font_values['font_weight'] = $font->css_weight ? $font->css_weight : '400';
+          // Now we need a buch of variables to get the font family, style and weight
+          $font_values['font_family'] = $font->css_family ? $font->css_family : '';
+          $font_values['font_style']  = $font->css_style  ? $font->css_style  : '';
+          $font_values['font_weight'] = $font->css_weight ? $font->css_weight : '';
         }
       }
       // Load the font size

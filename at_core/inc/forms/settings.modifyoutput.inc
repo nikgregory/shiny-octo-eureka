@@ -79,10 +79,10 @@ $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_home'] = array(
 $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
-  '#description' => t('Text only. Dont forget to include spaces.'),
+  '#description' => t('Text, basic markup and html entities only. Dont forget to include spaces.'),
   '#default_value' => filter_xss_admin(at_get_setting('breadcrumb_separator')),
-  '#size' => 8,
-  '#maxlength' => 10,
+  '#size' => 25,
+  '#maxlength' => 60,
   '#states' => array(
     'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
   ),
