@@ -75,13 +75,22 @@ div.field {
 }
 
 
-.field-type-taxonomy-term-reference ul.field-items {
+.field-type-taxonomy-term-reference .field-items {
+}
+
+
+.field-type-taxonomy-term-reference .field-item {
+}
+
+
+/* Restyle the list when the label is inline */
+.field-type-taxonomy-term-reference.field-label-inline .field-items {
   margin: 0;
   padding: 0;
 }
 
 
-.field-type-taxonomy-term-reference li.field-item {
+.field-type-taxonomy-term-reference.field-label-inline .field-item {
   display: inline;
   list-style: none;
   padding: 0 10px 0 0; /* LTR */

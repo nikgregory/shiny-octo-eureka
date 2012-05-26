@@ -21,14 +21,18 @@
  */
 ?>
 <aside class="feed-source">
+
   <?php if ($source_description): ?>
     <header class="feed-description"><?php print $source_icon; ?><?php print $source_description; ?></header>
   <?php endif; ?>
+
   <?php print $source_image; ?>
+
   <dl class="feed-details">
     <dt class="feed-url"><?php print t('URL:'); ?></dt>
-    <dd class="clearfix"><?php print $source_url; ?></dd>
+      <dd class="clearfix"><?php print $source_url; ?></dd>
     <dt class="feed-updated"><?php print t('Updated:'); ?></dt>
-    <dd class="clearfix"><?php print $last_checked; ?></dd>
+      <dd class="clearfix"><?php print $last_checked; ?></dd>
   </dl>
+
 </aside>

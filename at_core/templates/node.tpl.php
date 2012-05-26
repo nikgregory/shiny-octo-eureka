@@ -88,12 +88,20 @@
  * @see adaptivetheme_preprocess_node()
  * @see adaptivetheme_process_node()
  */
+
+/**
+ * Hiding Content and Printing it Separately
+ *
+ * Use the hide() function to hide fields and other content, you can render it
+ * later using the render() function. Install the Devel module and use
+ * <?php print dsm($content); ?> to find variable names to hide() or render().
+ */
+hide($content['comments']);
+hide($content['links']);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
-  <?php print $unpublished; ?>
-
   <?php print render($title_prefix); ?>
+
   <?php if ($title && !$page): ?>
     <header<?php print $header_attributes; ?>>
       <?php if ($title): ?>
@@ -103,9 +111,8 @@
       <?php endif; ?>
     </header>
   <?php endif; ?>
-  <?php print render($title_suffix); ?>
 
-  <?php if ($display_submitted): ?>
+  <?php if(!empty($user_picture) || $display_submitted): ?>
     <footer<?php print $footer_attributes; ?>>
       <?php print $user_picture; ?>
       <p class="author-datetime"><?php print $submitted; ?></p>
@@ -113,11 +120,7 @@
   <?php endif; ?>
 
   <div<?php print $content_attributes; ?>>
-  <?php
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
+    <?php print render($content); ?>
   </div>
 
   <?php if ($links = render($content['links'])): ?>
@@ -126,4 +129,5 @@
 
   <?php print render($content['comments']); ?>
 
+  <?php print render($title_suffix); ?>
 </article>

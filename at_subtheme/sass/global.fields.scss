@@ -56,12 +56,13 @@
   // The same bottom margin as p, blockquote, ul, ol and dl
   margin-bottom: 1.5em;
 
-  &ul.field-items {
+  // Restyle the list when the label is inline
+  &.field-label-inline .field-items {
     margin: 0;
     padding: 0;
   }
 
-  &li.field-item {
+  &.field-label-inline .field-item {
     display: inline;
     list-style: none;
     padding: 0 10px 0 0; /* LTR */
@@ -148,21 +149,20 @@
 //
 
 // Float none setting
-.ia-n .field-type-image   {
-}
+.ia-n .field-type-image {}
 
 // Float left setting
-.ia-l .field-type-image   {
+.ia-l .field-type-image {
   margin: 0.5em 15px 1.5em 0;
 }
 
 // Centered setting
-.ia-c .field-type-image   {
+.ia-c .field-type-image {
   margin: 0.5em auto 1.5em;
 }
 
 // Float right setting
-.ia-r .field-type-image   {
+.ia-r .field-type-image {
   margin: 0.5em 0 1.5em 15px;
 }
 

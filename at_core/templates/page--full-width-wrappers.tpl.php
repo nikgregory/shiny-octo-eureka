@@ -183,6 +183,7 @@
           <<?php print $tag; ?> id="main-content">
 
             <?php print render($title_prefix); ?>
+
             <?php if ($title || $primary_local_tasks || $secondary_local_tasks || $action_links = render($action_links)): ?>
               <header id="main-content-header">
 
@@ -210,7 +211,6 @@
 
               </header>
             <?php endif; ?>
-            <?php print render($title_suffix); ?>
 
             <?php if ($content = render($page['content'])): ?>
               <div id="content">
@@ -219,6 +219,8 @@
             <?php endif; ?>
 
             <?php print $feed_icons; ?>
+
+            <?php print render($title_suffix); // Prints page level contextual links ?>
 
           </<?php print $tag; ?>>
 

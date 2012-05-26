@@ -562,10 +562,11 @@ function adaptivetheme_preprocess_node(&$vars) {
     $vars['submitted'] = '';
   }
 
-  // Unpublised?
-  $vars['unpublished'] = '';
+  // Unpublished?
+  $vars['unpublished'] = ''; // Initialize for backwards compatibility
   if (!$vars['status']) {
-    $vars['unpublished'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
+    // Use the title prefix to render the unpublished message
+    $vars['title_prefix']['unpublished']['#markup'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
   }
 }
 
@@ -643,9 +644,10 @@ function adaptivetheme_preprocess_comment(&$vars) {
   );
 
   // Unpublished?
-  $vars['unpublished'] = '';
+  $vars['unpublished'] = ''; // Initialize for backwards compatibility
   if ($vars['status'] === 'comment-unpublished') {
-    $vars['unpublished'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
+    // Use the title prefix to render the unpublished message
+    $vars['title_prefix']['unpublished']['#markup'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
   }
 }
 

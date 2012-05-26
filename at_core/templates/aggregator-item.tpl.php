@@ -19,6 +19,7 @@
  */
 ?>
 <article class="<?php print $classes; ?>">
+
   <header>
     <h2<?php print $title_attributes; ?>>
       <a href="<?php print $feed_url; ?>"><?php print $feed_title; ?></a>
@@ -30,11 +31,13 @@
       <time datetime="<?php print $datetime; ?>"><?php print $source_date; ?></time>
     </p>
   </header>
+
   <?php if ($content) : ?>
     <div<?php print $content_attributes; ?>>
       <?php print $content; ?>
     </div>
   <?php endif; ?>
+
   <?php if ($categories): ?>
     <footer>
       <p class="feed-item-categories">
@@ -42,4 +45,5 @@
       </p>
     </footer>
   <?php endif; ?>
+
 </article>
