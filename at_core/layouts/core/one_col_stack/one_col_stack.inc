@@ -32,11 +32,9 @@ function one_col_stack() {
  */
 function one_col_stack_layout($sidebar_first, $sidebar_second, $sidebar_unit) {
   $styles = <<<EOF
-.two-sidebars .content-inner,.one-sidebar .content-inner,.region-sidebar-first,.region-sidebar-second {margin-left: 0; margin-right: 0}
-.region-sidebar-first,.region-sidebar-second,.region-sidebar-first .block,.region-sidebar-second .block {width: 100%}
-.region-sidebar-second {width: 100%}
-.content-inner,.region-sidebar-first,.region-sidebar-second {float: none}
-.region-sidebar-first,.region-sidebar-second {clear: both}
+div#content-column,div.content-inner,.sidebar-first div.content-inner,.sidebar-second div.content-inner,.two-sidebars div.content-inner,div.sidebar,.sidebar-first div.sidebar,.sidebar-second div.sidebar,.two-sidebars div.sidebar,div.region .block {
+  float:none;clear:both;display:block;width:100%;margin-left:0;margin-right:0;
+}
 EOF;
 
   return $styles;

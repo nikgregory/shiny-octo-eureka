@@ -71,6 +71,11 @@ if ($values['smartphone_portrait_media_query']) {
       $smartphone_portrait_layout_data[$value] = filter_xss_admin($values["$device" . '_' . "$value"]);
     }
   }
+  // In smartphone portrait we invoke the layout builder, but the values are not
+  // used since the CSS is actually hard coded. I have done this because, at some
+  // stage in the future this layout might not be hard coded and we might really
+  // need to return a dynamically built layout. Note that $layout is only ever
+  // used in desktop first - never in mobile first.
   $layout = at_build_page_layout($smartphone_portrait_layout_data['layout'], $smartphone_portrait_layout_data['sidebar_first'], $smartphone_portrait_layout_data['sidebar_second'], $smartphone_portrait_layout_data['sidebar_unit']);
 
   $method = $smartphone_portrait_layout_data['layout'];
