@@ -13,4 +13,4 @@ if (!empty($values['custom_css'])) {
 
 $file_name = $theme_name . '.custom.css';
 $filepath = $path . '/' . $file_name;
-file_save_data($custom_css, $filepath, FILE_EXISTS_REPLACE);
+file_unmanaged_save_data($custom_css, $filepath, FILE_EXISTS_REPLACE);

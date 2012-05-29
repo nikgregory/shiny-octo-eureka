@@ -109,6 +109,6 @@ if ($theme_settings) {
   if (!empty($static_settings_info) && !empty($dynamic_settings_info)) {
     $sanitized_values = filter_xss_admin($static_settings . "\n" . $dynamic_settings); // run a final sanity check
     $filepath = $path . '/' . $theme_name . '_settings.info';
-    file_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
+    file_unmanaged_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
   }
 }

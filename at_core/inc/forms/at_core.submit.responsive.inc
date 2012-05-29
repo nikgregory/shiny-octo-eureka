@@ -416,5 +416,5 @@ $files = array(
 // Loop over the array and save each file, and we're done!
 foreach ($files as $key => $value) {
   $filepath = "$path/$key.css";
-  file_save_data($value, $filepath, FILE_EXISTS_REPLACE);
+  file_unmanaged_save_data($value, $filepath, FILE_EXISTS_REPLACE);
 }

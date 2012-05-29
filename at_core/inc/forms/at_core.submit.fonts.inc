@@ -139,4 +139,4 @@ $font_styles = implode("\n", $font_styles_data);
 $font_styles = preg_replace('/^[ \t]*[\r\n]+/m', '', $font_styles);
 $file_name = $theme_name . '.fonts.css';
 $filepath = "$path/$file_name";
-file_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);
+file_unmanaged_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);

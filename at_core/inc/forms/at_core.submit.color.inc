@@ -30,5 +30,5 @@ $color_info_export = implode('', $color_info);
 
 if (!empty($color_info_export)) {
   $filepath = $path . '/' . $theme_name . '_color.inc';
-  file_save_data($color_info_export, $filepath, FILE_EXISTS_REPLACE);
+  file_unmanaged_save_data($color_info_export, $filepath, FILE_EXISTS_REPLACE);
 }
