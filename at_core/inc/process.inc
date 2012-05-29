@@ -101,12 +101,6 @@ function adaptivetheme_process_page(&$vars) {
   if (at_get_setting('frontpage_remove_title') === 1 && $vars['is_front'] === TRUE) {
     $vars['title'] = '';
   }
-
-  // Remove the breadcrumb from these two pages, its pointless and very annoying
-  // for designers.
-  if (arg(0) === 'user' && (arg(1) === 'password' || arg(1) === 'register')) {
-    $vars['breadcrumb'] = '';
-  }
 }
 
 /**

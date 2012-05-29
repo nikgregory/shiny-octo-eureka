@@ -93,6 +93,12 @@ function adaptivetheme_breadcrumb($vars) {
       array_shift($breadcrumb);
     }
 
+    // Remove the rather pointless breadcrumbs for reset password and user
+    // register pages, they link to the page you are on.
+    if (arg(0) === 'user' && (arg(1) === 'password' || arg(1) === 'register')) {
+      array_pop($breadcrumb);
+    }
+
     if (!empty($breadcrumb)) {
       $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
       $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
