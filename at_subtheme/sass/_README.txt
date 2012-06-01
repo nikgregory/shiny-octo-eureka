@@ -1,4 +1,6 @@
-ABOUT SASS AND COMPASS
+
+
+About SASS and Compass
 ----------------------
 
 This directory includes Sass versions of AT's CSS files. All files use the SCSS
@@ -18,7 +20,8 @@ can easily convert Sass files into CSS.
 To learn more about Compass, visit: http://compass-style.org
 
 
-DEVELOPING WITH SASS AND COMPASS
+
+Developing with SASS and Compass
 --------------------------------
 
 To automatically generate the CSS versions of the scss while you are doing theme
@@ -41,8 +44,9 @@ If you do not want to use Ruby and the command line you can check out the Sassy
 project for Drupal: http://drupal.org/project/sassy
 
 
-MOVING YOUR CSS TO PRODUCTION
------------------------------
+
+Moving to Production
+--------------------
 
 Once you have finished your sub-theme development and are ready to move your CSS
 files to your production server, you'll need to tell sass to update all your CSS
@@ -58,3 +62,6 @@ to delete all the generated CSS files.
 - Regenerate all the CSS files by running: compass compile
 
 And don't forget to turn on Drupal's CSS aggregation. :-)
+
+
+
