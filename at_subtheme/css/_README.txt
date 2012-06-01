@@ -1,5 +1,6 @@
 
-# First read this about SASS, its very important!
+
+  ## First read this about SASS, its very important!
 
   There is more information regarding working with SASS in the SASS
   CSS folder _README, however, you need to be aware that if you set
@@ -11,7 +12,9 @@
   in which case you will want to keep it).
 
 
-# Working with Responsive Design in Adaptivetheme
+
+
+  ## Working with Responsive Design in Adaptivetheme
 
   The subtheme is designed to be "mobile first". In short this means to
   first load a set of global styles, the progressively add styles for larger
@@ -29,39 +32,60 @@
   file is loaded. From this you will be able to deduce what approach might work
   for you, and where you should be placing your CSS.
 
+
+
+
   ## Global Styles
 
   The global styles do not target any specific device - they always load for all
-  devices, however you can unset each one or even all theme quite easily.
+  devices, however you can unset each one indeviducally or all them.
 
-  global.css holds an array of @imports that pull in all the others. You can use
-  this to remove or comment out unwanted styles.
+  global.css holds an array of @imports that pull in all the others. You can
+  comment out unwanted stylesheets.
 
-  All the global stylesheets are prefixed with the name "global", for example
-  global.base.css, global.blocks.css and so on. The selectors are extensive
-  and you should delete unused selectors before going live to reduce CSS weight.
-  You can use cleancss.com or a better way is just use SASS does this for you.
+  All the global stylesheets are prefixed with the name "global", for example:
+
+  global.base.css
+  global.blocks.css
+
+  ...and so on.
+
+  The selectors are extensive and you should delete unused selectors before
+  going live to reduce CSS weight. You can use cleancss.com or a better way is
+  just use SASS, it does this for you.
 
   Each file includes a lot of comments and documentation, please review each of
   the global CSS files for more help.
 
   If you are doing mobile first then you will probably keep things to a minimum
-  in these files. If you are doing mobile last approach, then you will place the
-  majority of your CSS in these files.
+  in these files. "Minimum" is relative, this might still be a lot of CSS,
+  never-the-less its worth keeping in mind the mobile view of the site, and
+  avoid writing CSS rules that are clearly for larger width devices.
+
+
+
 
   ## Responsive Styles
 
-  Adaptivetheme 7.x-3.x has two "modes", a development mode and a production mode.
+  Adaptivetheme 7.x-3.x has two "modes" - Development mode and Production mode.
   Depending on what mode you are in the stylesheets will load differently.
 
-  To change the mode see the "Settings" tab in the Appearance settings for your theme.
+  Mode changes automatically depending on CSS aggregation settings. When CSS
+  aggregation is ON, the its in Production mode.
 
-  In development mode the responsive stylesheets will load in individual link elements
-  with the media query in media attribute. This allows them to load directly into the
-  browser and you will see your CSS changes immediately, as per normal CSS development.
+  If you don't know what CSS aggregation is, looke here:
+  admin/config/development/performance
 
-  There are six of these responsive stylesheets - one for each break point set in the
-  theme settings:
+  # Responsive Styles - Development mode
+
+  In Development mode (CSS aggregation OFF) the responsive stylesheets will load
+  in individual link elements with the media query in media attribute.
+
+  This allows them to load directly into the browser and you will see your CSS
+  changes immediately, as per normal CSS development.
+
+  There are five of these responsive stylesheets - one for each break point set
+  in the theme settings:
 
   responsive.smartphone.landscape.css
   responsive.smartphone.portrait.css
@@ -69,46 +93,57 @@
   responsive.tablet.portrait.css
   responsive.desktop.css
 
-  Its important to know that these files DO NOT contain the media queries (in case you
-  were looking for them), instead they load in the <link> elements media attribute -
-  remember, these files only load when in Development Mode.
+  Its important to know that these files DO NOT contain the media queries,
+  instead they load in the <link> elements media attribute - remember, these
+  files only load when in Development Mode.
 
-  When in production mode all the responsive stylesheets are aggregated into one file
-  and it uses embedded @media queries.
+  # Responsive Styles - Production mode
 
-  This file loads from your public files directory. AT does this, not Drupal core -
-  it has nothing to do with Performance Settings or Core CSS aggregation (which you
-  should also turn on when going live!).
+  When in production mode all the responsive stylesheets are aggregated into one
+  file and use embedded @media queries. AT Core will automatically aggregarte
+  the CSS from each of the development mode stylesheets and wrap it in the right
+  media query. This reduces the number of HTTP requests from 5 to 1.
 
-  For a mobile first approach you will place minimal styles in the global stylesheets
-  and instead place the majority of your CSS in the responsive stylesheets - progressively
-  enhancing the design for each device range. This is especially useful for avoiding
-  things such as large background images for small screens and for reducing the CSS
-  overhead for mobile connections.
+  # Important Note about CSS Aggreation and Responsive Stylesheets
 
-  ## Overlapping Media queries
-
-  By default the media queries in Adaptivetheme are "stacked", meaning they do not
-  overlap. This makes it very easy to target one set of devices and not have those
-  styles leak over into others. However it can also mean you need to duplicate a lot
-  of CSS that you would rather cascades. To achieve this  you can either modify the
-  media queries to only use a min-width, or you can use a special file called:
-
-  responsive.cascade.css
-
-  This file has embedded media queries which means you MUST set them yourself. Defaults
-  are provided.
-
-  Allowing styles to cascade can result in a huge saving on total CSS weight and speed
-  up development. It can also be harder to maintain and you really need to understand
-  cascade and inheritance, not to mention selector specificity, to a high degree.
+  Once you have CSS aggregation ON, and you make changes to any responsive
+  stylesheet, you MUST re-save the theme settings AND clear the sites cache. AT
+  Core will re-write the saved files, then clearning the cache tells Drupal to
+  use the new file.
 
 
-# Internet Explorer
 
-  AT can load IE conditional stylsheets from you sub-themes info file. Please see
-  adaptivetheme_subtheme.info. Its strait forward and the same as adding other
-  stylesheets.
+
+  ## Overlapping/Custom Media queries
+
+  By default the media queries in Adaptivetheme are "stacked", meaning they do
+  not overlap. This makes it very easy to target one set of device width and not
+  have those styles "leak" over into others. However it can also mean you may
+  need to duplicate CSS that you would rather have cascade.
+
+  To use custom media queries the sub-theme includes a special file called:
+
+  responsive.custom.css
+
+  To enable the use of this file in your theme see your theme settings:
+
+  Layout & General Settings > CSS > Custom Media Queries
+
+  This file has embedded media queries which means you MUST set them yourself.
+  Defaults are provided.
+
+  Allowing styles to cascade can result in a huge saving on total CSS weight and
+  speed up development.
+
+
+
+
+  ## Internet Explorer Styles and Scripts
+
+  AT can load conditional stylsheets and scripts from you sub-themes info file.
+
+  Please see adaptivetheme_subtheme.info - there are good docs and examples of
+  how to declare stylesheets and scripts for Internet Explorer.
 
   Adaptivetheme also includes special conditional classes on the HTML element
   which allow you to easily target styles at specific version of IE.
@@ -120,20 +155,27 @@
  .lt-ie8 (less than IE8)
  .lt-ie9 (less than IE9)
 
-  Use these if you only have a small number of overrides. They are useful especially
-  if you do not want to load a conditional stylesheet just for a few minor adjustments
-  or if you only want to load one conditional stylesheet yet target different versions
-  of IE in one file.
+  Use these if you only have a small number of overrides and do not want to load
+  a dedicated conditional stylesheet.
 
 
-# Support
 
-  Ping me on Skype if you really need help: jmburnz, otherwise support my work
-  by joining my theme club, it really does fund my contrib projects:
+  
+  ## Support
 
-  http://adaptivethemes.com/pricing
+  Ping me on Skype if you have life/death critical issues to report...
 
-  Or, you could get radical and file a support issue, even post a patch (which makes
-  me very happy):
+  Skype: jmburnz
+
+  Otherwise support my work by joining my theme club, it really does fund my
+  contrib projects:
+
+  http://adaptivethemes.com
+
+  Or, you could get radical and file a support issue, even post a patch (which
+  makes me very happy):
 
   http://drupal.org/project/issues/adaptivetheme
+
+
+
