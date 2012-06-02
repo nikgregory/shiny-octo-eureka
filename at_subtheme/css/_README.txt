@@ -14,6 +14,7 @@ you will want to keep it).
 
 
 
+
 Working with Responsive Design in Adaptivetheme
 -----------------------------------------------
 
@@ -46,8 +47,8 @@ comment out unwanted stylesheets.
 
 All the global stylesheets are prefixed with the name "global", for example:
 
-  global.base.css
-  global.blocks.css
+  - global.base.css
+  - global.blocks.css
 
 ...and so on.
 
@@ -65,6 +66,7 @@ avoid writing CSS rules that are clearly for larger width devices.
 
 
 
+
 Responsive Styles
 -----------------
 
@@ -76,7 +78,7 @@ aggregation is ON, the its in Production mode.
 
 If you don't know what CSS aggregation is, looke here:
 
-  admin/config/development/performance
+  ~/admin/config/development/performance
 
 
 ## Responsive Styles - Development mode
@@ -90,11 +92,11 @@ changes immediately, as per normal CSS development.
 There are five of these responsive stylesheets - one for each break point set
 in the theme settings:
 
-  responsive.smartphone.landscape.css
-  responsive.smartphone.portrait.css
-  responsive.tablet.landscape.css
-  responsive.tablet.portrait.css
-  responsive.desktop.css
+  - responsive.smartphone.landscape.css
+  - responsive.smartphone.portrait.css
+  - responsive.tablet.landscape.css
+  - responsive.tablet.portrait.css
+  - responsive.desktop.css
 
 Its important to know that these files DO NOT contain the media queries,
 instead they load in the <link> elements media attribute - remember, these
@@ -108,6 +110,16 @@ file and use embedded @media queries. AT Core will automatically aggregarte
 the CSS from each of the development mode stylesheets and wrap it in the right
 media query. This reduces the number of HTTP requests from 5 to 1.
 
+This file is always called:
+
+  - ThemeName.responsive.styles.css
+
+You will find this file at:
+
+  ~/[public files]/adaptivetheme/[ThemeName]/ThemeName.responsive.styles.css
+
+NOTE: please see the section below titled "Relative Paths in Responsive Styles".
+
 
 ## Important Note about CSS Aggreation and Responsive Stylesheets
 
@@ -115,6 +127,21 @@ Once you have CSS aggregation ON, and you make changes to any responsive
 stylesheet, you MUST re-save the theme settings AND clear the sites cache. AT
 Core will re-write the saved files, then clearning the cache tells Drupal to
 use the new file.
+
+
+## Relative Paths in Responsive Stylesheets
+
+When CSS aggregation is ON AT Core will load the production version of your
+responsive styles (see above "Production mode"). this file is loading from
+Public Files and not from within your theme so special handling is required for
+relative assets - AT Core will do this for you.
+
+AT Core will automatically re-write the relative paths to the files so they
+are relative to the site root. This is the same functionality as Drupal core
+CSS aggregation feature, so paths are not broken.
+
+If you use absolute paths these will not be altered.
+
 
 
 
@@ -142,6 +169,7 @@ speed up development.
 
 
 
+
 Internet Explorer Styles and Scripts
 ------------------------------------
 
@@ -165,6 +193,7 @@ a dedicated conditional stylesheet.
 
 
 
+
 Support
 -------
 
@@ -181,6 +210,7 @@ Or, you could get radical and file a support issue, even post a patch (which
 makes me very happy):
 
   http://drupal.org/project/issues/adaptivetheme
+
 
 
 

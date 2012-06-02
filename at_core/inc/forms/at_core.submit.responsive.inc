@@ -404,6 +404,12 @@ $lt_ie8_layout = $lt_ie8_css;
 // Aggregate the design stylesheets
 $responsive_css = implode("\n", $responsive_styles);
 
+// Regex relative paths. This mimics Drupal cores drupal_build_css_cache(), but
+// its not as powerful because assets must be relative to the theme root.
+$_base = base_path() . $path_to_responsive_css;
+_drupal_build_css_path(NULL, $_base);
+$responsive_css = preg_replace_callback('/url\(\s*[\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\s*\)/i', '_drupal_build_css_path', $responsive_css);
+
 // Build a keyed array: file names as key, layout data as value
 $files = array(
   "$theme_name.default.layout" => $desktop_first_layout,
