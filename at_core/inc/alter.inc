@@ -194,6 +194,7 @@ function adaptivetheme_css_alter(&$css) {
     else {
       $css_data = at_get_css_files($theme_key);
     }
+
     // We need the right theme name to get the theme settings
     $_get_active_theme_data = array_pop($css_data);
     if ($_get_active_theme_data['type'] == 'theme') {
@@ -202,6 +203,8 @@ function adaptivetheme_css_alter(&$css) {
     else {
       $theme_name = $theme_key;
     }
+
+    // Get the theme setting and unset files
     foreach ($css_data as $key => $value) {
       $setting = 'unset_css_' . drupal_html_class($key);
       if (at_get_setting($setting, $theme_name) === 1) {
