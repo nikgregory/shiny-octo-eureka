@@ -10,6 +10,7 @@
 
 // Supported devices
 $devices = array(
+  'bigscreen',
   'tablet_landscape',
   'tablet_portrait',
   'smartphone_landscape',
@@ -158,6 +159,10 @@ if ($panels == TRUE || !empty($active_gpanels)) {
   // Build the forms
   foreach ($devices as $device) {
     $title = str_replace('_', ' ', drupal_ucfirst($device));
+    // special case our bigscreen title, its a legacy thing
+    if ($device == 'bigscreen') {
+      $title = 'Standard layout';
+    }
     $form['at-settings']['panels']['panels-wrapper'][$device] = array(
       '#type' => 'fieldset',
       '#title' => t($title),

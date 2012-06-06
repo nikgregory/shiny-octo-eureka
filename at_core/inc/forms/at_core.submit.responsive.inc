@@ -279,8 +279,27 @@ if ($values['bigscreen_layout']) {
     }
   }
 
-  // Load the default panels layouts
-  $panels_layouts = file_get_contents($path_to_panels_css . 'default.css', FALSE);
+  // Get the panel layout settings
+  foreach ($panel_subtypes as $subtype) {
+    $bigscreen_panel_settings[] = $device . '_' . $subtype;
+  }
+  foreach ($bigscreen_panel_settings as $setting) {
+    if (!empty($values[$setting])) {
+      $option = $values[$setting];
+    }
+    else {
+      // Provide a fallback layout in case settings fail during submit
+      $bigscreen_panel_substr_setting = substr($setting, 16);
+      $bigscreen_panel_substr_setting = str_replace('_', '-', $bigscreen_panel_substr_setting);
+      $option = $bigscreen_panel_substr_setting;
+    }
+    $bigscreen_panels_data[] = $option;
+  }
+  // Generate the panels layouts
+  $bigscreen_panels_css = at_build_panels_layout_css($panel_styles, $bigscreen_panels_data);
+
+  // Prepend the float
+  $panels_layouts = $float . $tablet_landscape_panels_css;
 
   // Build a $styles variable with the layout, width and default panels layouts
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;

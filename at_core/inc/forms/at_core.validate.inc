@@ -16,31 +16,31 @@ function at_core_settings_validate($form, &$form_state) {
   // "Design approach" uses radios, if this becomes unset for some reason bad
   // things can happen.
   if (empty($values['global_default_layout'])) {
-    form_set_error('global_default_layout', t('No setting detected for the <b>design approach</b>. Please review "Settings > Mobile first or Desktop first" and select either Mobile first or Desktop first.'));
+    form_set_error('global_default_layout', t('No setting detected for <b>Mobile first or Desktop first</b>. Please review "Settings > Mobile first or Desktop first" and select an option.'));
   }
 
   // For each breakpoint we need to have a layout selected
   if (empty($values['bigscreen_layout'])) {
-    form_set_error('bigscreen_layout', t('No layout selection detected for the <b>Standard Layout</b>. Please review "Standard Layout > Choose sidebar positions" and make a selection.'));
+    form_set_error('bigscreen_layout', t('No layout selection detected for the <b>Standard Layout</b>. Please review "Standard Layout > Choose sidebar positions" and select an option.'));
   }
   if (empty($values['tablet_landscape_layout'])) {
-    form_set_error('tablet_landscape_layout', t('No layout selection detected for the <b>Tablet Landscape Layout</b>. Please review "Tablet Layout > Landscape > Choose sidebar positions" and make a selection.'));
+    form_set_error('tablet_landscape_layout', t('No layout selection detected for the <b>Tablet Landscape Layout</b>. Please review "Tablet Layout > Landscape > Choose sidebar positions" and select an option.'));
   }
   if (empty($values['tablet_portrait_layout'])) {
-    form_set_error('tablet_portrait_layout', t('No layout selection detected for the <b>Tablet Portrait Layout</b>. Please review "Tablet Layout > Portrait > Choose sidebar positions" and make a selection.'));
+    form_set_error('tablet_portrait_layout', t('No layout selection detected for the <b>Tablet Portrait Layout</b>. Please review "Tablet Layout > Portrait > Choose sidebar positions" and select an option.'));
   }
   if (empty($values['smartphone_landscape_layout'])) {
-    form_set_error('smartphone_landscape_layout', t('No layout selection detected for the <b>Smartphone Landscape Layout</b>. Please review "Smartphone Layout > Landscape > Choose sidebar positions" and make a selection.'));
+    form_set_error('smartphone_landscape_layout', t('No layout selection detected for the <b>Smartphone Landscape Layout</b>. Please review "Smartphone Layout > Landscape > Choose sidebar positions" and select an option.'));
   }
 
   // Validate our form #state required fields, #states are UI only.
 
   // Bigscreen
   if (empty($values['bigscreen_sidebar_first'])) {
-    form_set_error('bigscreen_sidebar_first', t('Standard Layout <em>First sidebar</em> is empty - please enter a value.'));
+    form_set_error('bigscreen_sidebar_first', t('Standard Layout <em>First sidebar</em> width is empty - you must enter a value.'));
   }
   if (empty($values['bigscreen_sidebar_second'])) {
-    form_set_error('bigscreen_sidebar_second', t('Standard Layout <em>Second sidebar</em> is empty - please enter a value.'));
+    form_set_error('bigscreen_sidebar_second', t('Standard Layout <em>Second sidebar</em> width is empty - you must enter a value.'));
   }
   if ($values['bigscreen_set_max_width'] === 1) {
     if (empty($values['bigscreen_max_width'])) {
@@ -50,11 +50,11 @@ function at_core_settings_validate($form, &$form_state) {
 
   // Tablet
   if (empty($values['tablet_landscape_sidebar_first'])) {
-    form_set_error('tablet_landscape_sidebar_first', t('Tablet Landscape <em>First sidebar</em> is empty - please enter a value.'));
+    form_set_error('tablet_landscape_sidebar_first', t('Tablet Landscape <em>First sidebar</em> width is empty - you must enter a value.'));
   }
   if ($values['tablet_landscape_layout'] === 'three_col_grail' || $values['tablet_landscape_layout'] === 'two_sidebars_left' || $values['tablet_landscape_layout'] === 'two_sidebars_right') {
     if (empty($values['tablet_landscape_sidebar_second'])) {
-      form_set_error('tablet_landscape_sidebar_second', t('Tablet Landscape <em>First second</em> is empty - please enter a value, the layout you selected requires values for both sidebars.'));
+      form_set_error('tablet_landscape_sidebar_second', t('Tablet Landscape <em>First sidebar</em> width is empty - you must enter a value. The layout you selected requires values for both sidebars.'));
     }
   }
 
