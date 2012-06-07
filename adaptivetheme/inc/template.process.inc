@@ -393,6 +393,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   if ($vars['block']->region == 'menu_bar') {
     $vars['theme_hook_suggestions'][] = 'block__menu_bar';
     $vars['title_attributes_array']['class'][] = 'element-invisible';
+    $vars['classes_array'][] = 'menu-wrapper';
   }
 
   // Provide template suggestions such as block--header--search, or block--menu-bar--menu
