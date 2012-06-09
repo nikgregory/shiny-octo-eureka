@@ -32,9 +32,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Standard Layout'),
     '#description' => t('<h3>Standard Layout</h3><p>The standard layout is for desktops, laptops and other large screen devices.'),
     '#attributes' => array(
-      'class' => array(
-        'at-layout-form',
-      ),
+      'class' => array('at-layout-form'),
     ),
   );
   $form['at']['bigscreen']['bigscreen-layout-wrapper'] = array(
@@ -101,9 +99,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
-      'visible' => array(
-        'select[name="bigscreen_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
-      ),
+      'visible' => array('select[name="bigscreen_page_unit"]' => array('value' => '%')),
     ),
   );
   $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_set_max_width'] = array(
@@ -117,9 +113,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('bigscreen_max_width_unit'),
     '#options' => $max_width_unit_options,
     '#states' => array(
-      'visible' => array(
-        'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="bigscreen_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['bigscreen']['bigscreen-maxwidth-wrapper']['bigscreen_max_width'] = array(
@@ -129,9 +123,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
-      'visible' => array(
-        'input[name="bigscreen_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="bigscreen_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['bigscreen']['media-queries-wrapper'] = array(
@@ -139,9 +131,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Standard Screen Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at']['bigscreen']['media-queries-wrapper']['bigscreen_media_query'] = array(
@@ -215,9 +205,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
     '#states' => array(
-      'disabled' => array(
-        'input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack'),
-      ),
+      'invisible' => array('input[name="tablet_landscape_layout"]' => array('value' => 'two-col-stack')),
     ),
   );
   $form['at']['tablet']['landscape']['tablet-landscape-page-width-wrapper'] = array(
@@ -243,9 +231,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
-      'visible' => array(
-        'select[name="tablet_landscape_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
-      ),
+      'visible' => array('select[name="tablet_landscape_page_unit"]' => array('value' => '%')),
     ),
   );
   $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_set_max_width'] = array(
@@ -259,9 +245,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_landscape_max_width_unit'),
     '#options' => $max_width_unit_options,
     '#states' => array(
-      'visible' => array(
-        'input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE)), 
     ),
   );
   $form['at']['tablet']['landscape']['tablet-landscape-page-max-width-wrapper']['tablet_landscape_max_width'] = array(
@@ -271,9 +255,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
-      'visible' => array(
-        'input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="tablet_landscape_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper'] = array(
@@ -281,9 +263,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Tablet Landscape Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at']['tablet']['landscape']['tablet-landscape-media-queries-wrapper']['tablet_landscape_media_query'] = array(
@@ -295,6 +275,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 100,
     '#required' => TRUE,
   );
+
   // tablet portrait
   $form['at']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
@@ -320,9 +301,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      '!visible' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack'),
-      ),
+      'invisible' => array('input[name="tablet_portrait_layout"]' => array('value' => 'one-col-stack')),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-sidebar-width-wrapper']['tablet_portrait_sidebar_unit'] = array(
@@ -347,9 +326,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#maxlenght' => 4,
     '#required' => TRUE,
     '#states' => array(
-      'disabled' => array(
-        'input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack'),
-      ),
+      'invisible' => array('input[name="tablet_portrait_layout"]' => array('value' => 'two-col-stack')),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-page-width-wrapper'] = array(
@@ -375,9 +352,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
-      'visible' => array(
-        'select[name="tablet_portrait_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
-      ),
+      'visible' => array('select[name="tablet_portrait_page_unit"]' => array('value' => '%')),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_set_max_width'] = array(
@@ -391,9 +366,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('tablet_portrait_max_width_unit'),
     '#options' => $max_width_unit_options,
     '#states' => array(
-      'visible' => array(
-        'input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-page-max-width-wrapper']['tablet_portrait_max_width'] = array(
@@ -403,9 +376,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
-      'visible' => array(
-        'input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="tablet_portrait_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper'] = array(
@@ -413,9 +384,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Tablet Portrait Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at']['tablet']['portrait']['tablet-portrait-media-queries-wrapper']['tablet_portrait_media_query'] = array(
@@ -435,9 +404,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Smartphone Layout'),
     '#description' => t('<h3>Smartphone Layout</h3><p>Smartphone devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
     '#attributes' => array(
-      'class' => array(
-        'at-layout-form',
-      ),
+      'class' => array('at-layout-form'),
     ),
   );
 
@@ -465,9 +432,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Set sidebar widths'),
     '#description' => t('<strong>Set the width of each sidebar</strong>'),
     '#states' => array(
-      '!visible' => array(
-        'input[name="smartphone_landscape_layout"]' => array('value' => 'one-col-stack'),
-      ),
+      'invisible' => array('input[name="smartphone_landscape_layout"]' => array('value' => 'one-col-stack')),
     ),
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-sidebar-width-wrapper']['smartphone_landscape_sidebar_unit'] = array(
@@ -515,9 +480,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#type' => 'fieldset',
     '#title' => t('Set a max width'),
     '#states' => array(
-      'visible' => array(
-        'select[name="smartphone_landscape_page_unit"]' => array('selected' => 'selected', 'value' => '%'),
-      ),
+      'visible' => array('select[name="smartphone_landscape_page_unit"]' => array('value' => '%')),
     ),
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_set_max_width'] = array(
@@ -531,9 +494,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#default_value' => theme_get_setting('smartphone_landscape_max_width_unit'),
     '#options' => $max_width_unit_options,
     '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-page-max-width-wrapper']['smartphone_landscape_max_width'] = array(
@@ -543,9 +504,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
-      'visible' => array(
-        'input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE),
-      ),
+      'visible' => array('input[name="smartphone_landscape_set_max_width"]' => array('checked' => TRUE)),
     ),
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper'] = array(
@@ -553,9 +512,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Smartphone Landscape Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at']['smartphone']['landscape']['smartphone-landscape-media-queries-wrapper']['smartphone_landscape_media_query'] = array(
@@ -579,9 +536,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Smartphone Portrait Media Queries'),
     '#weight' => 1,
     '#attributes' => array(
-      'class' => array(
-        'at-media-queries',
-      ),
+      'class' => array('at-media-queries'),
     ),
   );
   $form['at']['smartphone']['portrait']['smartphone-portrait-media-queries-wrapper']['smartphone_portrait_media_query'] = array(
@@ -622,9 +577,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#size' => 8,
     '#maxlength' => 10,
     '#states' => array(
-      'visible' => array(
-          '#edit-breadcrumb-display' => array('value' => 'yes'),
-      ),
+      'visible' => array('#edit-breadcrumb-display' => array('value' => 'yes')),
     ),
   );
   $form['at']['breadcrumb']['bd']['breadcrumb_home'] = array(
@@ -632,11 +585,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     '#title' => t('Show the homepage link'),
     '#default_value' => theme_get_setting('breadcrumb_home'),
     '#states' => array(
-      'visible' => array(
-          '#edit-breadcrumb-display' => array(
-            'value' => 'yes',
-          ),
-      ),
+      'visible' => array('#edit-breadcrumb-display' => array('value' => 'yes')),
     ),
   );
 
