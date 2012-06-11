@@ -5,9 +5,6 @@
  * Generate form elments for the Float Region Blocks settings.
  */
 
-// Get the active themes info array
-$info_array = at_get_info($theme_name);
-
 // Regions we don't want to include
 $unset_regions = array(
   'dashboard_main',
@@ -86,7 +83,9 @@ foreach ($regions as $region_name => $region_label) {
     '#title' => t('Float'),
     '#default_value' => at_get_setting('float_block_direction_' . $region_name) ? at_get_setting('float_block_direction_' . $region_name) : 'left',
     '#options' => $direction_options,
+    '#states' => array('invisible' => array('select[name=float_block_' . $region_name . ']' => array('value' => '<none>'))),
   );
+
   // Don't include this feature for now, its too late in the cycle, better to
   // work on a much improved way of doing this for a point release later on.
   //$form['at']['float-region-blocks']['region-options-' . $region_name]['float_block_breakpoint_' . $region_name] = array(

@@ -210,3 +210,23 @@ function at_get_css_files($theme_name) {
 
   return $styles;
 }
+
+/**
+ * Return a device context.
+ * Wrapper for browscap_get_browser().
+ */
+function at_get_browser() {
+
+  $is_mobile = &drupal_static(__FUNCTION__, array());
+  if (empty($is_mobile)) {
+    $is_mobile = FALSE;
+    if (function_exists('browscap_get_browser')) {
+      $browser = browscap_get_browser();
+      if ($browser['ismobiledevice'] == 1) {
+        $is_mobile = TRUE;
+      }
+    }
+  }
+
+  return $is_mobile;
+}

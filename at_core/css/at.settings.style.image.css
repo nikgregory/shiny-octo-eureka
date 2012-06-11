@@ -1,10 +1,9 @@
 /* Image Alignment */
 .field-type-image img {display:block}
-.ia-n .field-type-image,.iat-n .node-teaser .field-type-image {float:none}
-.ia-l .field-type-image,.iat-l .node-teaser .field-type-image {float:left}
-.ia-c .field-type-image,.iat-c .node-teaser .field-type-image {text-align:center;margin-left:auto;margin-right:auto}
-.ia-c .field-type-image img,.iat-c .node-teaser .field-type-image {text-align:center;margin-left:auto;margin-right:auto}
-.ia-r .field-type-image,.iat-r .node-teaser .field-type-image {float:right}
+.ia-l .field-type-image,.iat-l .field-type-image {float:left}
+.ia-c .field-type-image,.iat-c .field-type-image {text-align:center;margin-left:auto;margin-right:auto}
+.ia-c .field-type-image img,.iat-c .field-type-image {text-align:center;margin-left:auto;margin-right:auto}
+.ia-r .field-type-image,.iat-r .field-type-image {float:right}
 .field-type-image .field-label {margin-bottom:5px}
 /* Short codes */
 body .image-left,body div.image-left,body div.image-left .field-type-image {float:left;text-align:left}

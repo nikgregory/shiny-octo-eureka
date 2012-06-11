@@ -7,6 +7,15 @@
  */
 
 /**
+ * Preprocess variables for all templates.
+ */
+function adaptivetheme_preprocess(&$vars) {
+  // Provide a variable to all templates to test for a mobile context, this
+  // requires the Browscap module and returns TRUE or FALSE.
+  $vars['is_mobile'] = at_get_browser();
+}
+
+/**
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
@@ -514,6 +523,26 @@ function adaptivetheme_preprocess_node(&$vars) {
     // Class for each view mode, core assumes we only need to target teasers but neglects custom view modes or full
     if ($vars['view_mode'] !== 'teaser') {
       $vars['classes_array'][] = drupal_html_class('node-' . $vars['view_mode']);
+    }
+  }
+
+  // Image alignment and caption classes
+  if (at_get_setting('enable_image_settings', $theme_name) === 1) {
+    if ($vars['view_mode'] !== 'teaser') {
+      if ($image_caption_full = at_get_setting('image_caption_full', $theme_name)) {
+        $vars['classes_array'][] = $image_caption_full;
+      }
+      if ($image_alignment = at_get_setting('image_alignment', $theme_name)) {
+        $vars['classes_array'][] = $image_alignment;
+      }
+    }
+    if ($vars['view_mode'] == 'teaser') {
+      if ($image_caption_teaser = at_get_setting('image_caption_teaser', $theme_name)) {
+        $vars['classes_array'][] = $image_caption_teaser;
+      }
+      if ($image_alignment_teaser = at_get_setting('image_alignment_teaser', $theme_name)) {
+        $vars['classes_array'][] = $image_alignment_teaser;
+      }
     }
   }
 

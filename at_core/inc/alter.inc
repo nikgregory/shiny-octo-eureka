@@ -235,17 +235,45 @@ function adaptivetheme_css_alter(&$css) {
  */
 function adaptivetheme_page_alter(&$page) {
 
-  // Look in each visible region for blocks.
-  foreach (system_region_list($GLOBALS['theme'], REGIONS_VISIBLE) as $region => $name) {
+  // Is this a mobile context?
+  $page['is_mobile'] = at_get_browser();
+
+  // Get all the regions with blocks
+  $block_regions = &drupal_static(__FUNCTION__, array());
+  if (empty($blocks_regions)) {
+    $block_regions = system_region_list($GLOBALS['theme'], REGIONS_VISIBLE);
+  }
+
+  // Look in each visible region for blocks
+  foreach ($block_regions as $region => $name) {
     if (!empty($page[$region])) {
 
-      // Find the last block in the region.
+      // Find the last block in the region
       $blocks = array_reverse(element_children($page[$region]));
       while ($blocks && !isset($page[$region][$blocks[0]]['#block'])) {
         array_shift($blocks);
       }
       if ($blocks) {
         $page[$region][$blocks[0]]['#block']->last_in_region = TRUE;
+
+        // Alter regions and block visibility
+        if ($page['is_mobile'] == TRUE && $region !== 'content') {
+          // Get the target region if set, check blocks can move and its not set to unset
+          if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
+            foreach ($blocks as $block) {
+              // Move the blocks to the target region
+              $page[$target_region][$block] = $page[$region][$block];
+              // Unset the original block
+              unset($page[$region][$block]);
+            }
+            // Unset the region, all blocks are now moved
+            unset($page[$region]);
+          }
+          // Unset unwanted regions in mobile
+          if (at_get_setting('unset_' . $region) === 1) {
+            unset($page[$region]);
+          }
+        }
       }
     }
   }

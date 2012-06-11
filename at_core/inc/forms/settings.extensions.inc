@@ -77,6 +77,14 @@ $form['at-settings']['extend']['enable']['enable_custom_css'] = array(
   '#default_value' => at_get_setting('enable_custom_css'),
 );
 
+// Mobile regions and blocks
+$form['at-settings']['extend']['enable']['enable_context_regions'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Mobile Regions and Blocks'),
+  '#description' => t('Unset regions or move blocks to another region in mobile devices. Requires the <a href="!browscap_module" target="_blank">Browscap module</a> for mobile device detection.', array('!browscap_module' => 'http://drupal.org/project/browscap')),
+  '#default_value' => at_get_setting('enable_context_regions'),
+);
+
 // Float Region blocks
 $form['at-settings']['extend']['enable']['enable_float_region_blocks'] = array(
   '#type' => 'checkbox',

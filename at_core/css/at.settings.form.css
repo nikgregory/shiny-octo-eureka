@@ -495,6 +495,15 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   text-align: center;
 }
 
+/* Mobile Regions */
+#edit-context-regions fieldset legend {
+  display: block;
+  position: static;
+}
+#edit-context-regions fieldset .fieldset-wrapper {
+  margin-top: 30px;
+}
+
 /* Float block regions */
 #edit-float-region-blocks label {
   min-width: 15em;

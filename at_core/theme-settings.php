@@ -30,6 +30,9 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // Get the active theme name, we need it at some stage.
   $theme_name = $form_state['build_info']['args'][0];
+  
+  // Get the active themes info array
+  $info_array = at_get_info($theme_name);
 
   // Version messages
   if (at_get_setting('atcore_version_test', $theme_name) === 1) {
@@ -72,7 +75,8 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       'css' => array(drupal_get_path('theme', 'adaptivetheme') . '/css/at.settings.form.css'),
     ),
   );
-  // Include layout forms, CSS, polyfills, extensions and debug.
+
+  // Include all the default settings forms.
   require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
   require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
   require_once($path_to_at_core . '/inc/forms/settings.global.inc');
@@ -135,6 +139,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     $enable_custom_css = isset($form_state['values']['enable_custom_css']);
     if (($enable_custom_css && $form_state['values']['enable_custom_css'] == 1) || (!$enable_custom_css && $form['at-settings']['extend']['enable']['enable_custom_css']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
+    }
+
+    // Mobile regions and blocks
+    $enable_context_regions = isset($form_state['values']['enable_context_regions']);
+    if (($enable_context_regions && $form_state['values']['enable_context_regions'] == 1) || (!$enable_context_regions && $form['at-settings']['extend']['enable']['enable_context_regions']['#default_value'] == 1)) {
+      require_once($path_to_at_core . '/inc/forms/settings.contextregions.inc');
     }
 
     // Float Region blocks

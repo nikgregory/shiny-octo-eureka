@@ -191,21 +191,6 @@ function generate_page_classes(&$vars, $theme_name) {
         }
       }
     }
-
-    // Image alignment and caption classes
-    if (at_get_setting('enable_image_settings', $theme_name) === 1) {
-      $image_settings_array = array(
-        'image_caption_full',
-        'image_caption_teaser',
-        'image_alignment',
-        'image_alignment_teaser',
-      );
-      foreach ($image_settings_array as $setting) {
-        if ($image_setting = at_get_setting($setting, $theme_name)) {
-          $classes_array[] = $image_setting;
-        }
-      }
-    }
   }
 
   return $classes_array;
