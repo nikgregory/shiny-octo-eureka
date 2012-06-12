@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Adaptivetheme panel pane template
@@ -20,9 +21,9 @@
 <?php if ($pane_prefix): ?>
   <?php print $pane_prefix; ?>
 <?php endif; ?>
-<div class="<?php print $classes; ?>" <?php print $id; ?>>
+<?php $tag = $title ? 'section' : 'div'; ?>
+<<?php print $tag; ?> class="<?php print $classes; ?>" <?php print $id; ?>>
   <div class="pane-inner clearfix">
-
     <?php if ($admin_links): ?>
       <?php print $admin_links; ?>
     <?php endif; ?>
@@ -56,7 +57,7 @@
     <?php endif; ?>
     
   </div>
-</div>
+</<?php print $tag; ?>>
 <?php if ($pane_suffix): ?>
   <?php print $pane_suffix; ?>
 <?php endif; ?>

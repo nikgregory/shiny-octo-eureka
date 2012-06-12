@@ -97,7 +97,7 @@ function generate_page_classes(&$vars, $theme_name) {
   if (empty($classes_array)) {
 
     // Site name classes
-    if ($vars['hide_site_name'] === FALSE) {
+    if (isset($vars['hide_site_name']) && $vars['hide_site_name'] === FALSE) {
       if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
         $site_name_settings_array = array(
           'site_name_case',
@@ -114,7 +114,7 @@ function generate_page_classes(&$vars, $theme_name) {
     }
 
     // Slogan classes
-    if ($vars['site_slogan']) {
+    if (isset($vars['site_slogan'])) {
       if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
         $site_slogan_settings_array= array(
           'site_slogan_case',

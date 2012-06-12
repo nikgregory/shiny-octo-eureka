@@ -109,7 +109,6 @@
           </hgroup><!-- /end #name-and-slogan -->
         <?php endif; ?>
 
-
       </div><!-- /end #branding -->
     <?php endif; ?>
 
