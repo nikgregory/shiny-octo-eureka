@@ -248,7 +248,7 @@ function adaptivetheme_preprocess_region(&$vars) {
     // Allow a region-specific template to override the region--sidebar suggestion.
     array_unshift($vars['theme_hook_suggestions'], 'region__sidebar');
   }
-  
+
   // Float region block classes
   if (at_get_setting('enable_float_region_blocks', $theme_name) === 1) {
 
@@ -314,7 +314,7 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   // Generate the wrapper element, if there's a title use section
   $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
-  
+
   // Search is never a section, its just a div
   if ($vars['block_html_id'] === 'block-search-form') {
     $vars['tag'] = 'div';
@@ -459,7 +459,7 @@ function adaptivetheme_preprocess_field(&$vars) {
   $theme_name = $theme_key;
 
   $element = $vars['element'];
-  
+
  // In the context of HTML5 we need to account for sectioning, so this sets
  // the top level element as either <section> if the field label is showing) or
  // <div> if the field label is hidden.
@@ -553,7 +553,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['title_attributes_array']['class'][] = 'node-title';
   $vars['content_attributes_array']['class'][] = 'node-content';
   $vars['title_attributes_array']['rel'][] = 'nofollow';
-  
+
   // header, submitted and links wrappers have their own attributes
   $vars['header_attributes_array']['class'][] = 'node-header';
   $vars['footer_attributes_array']['class'][] = 'submitted';
@@ -649,7 +649,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
 
   // Classes for comment content
   $vars['content_attributes_array']['class'][] = 'comment-content';
-  
+
   // header, submitted and links wrappers have their own attributes
   $vars['header_attributes_array']['class'][] = 'comment-header';
   $vars['footer_attributes_array']['class'][] = 'submitted';

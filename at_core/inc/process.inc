@@ -190,7 +190,7 @@ function adaptivetheme_process_node(&$vars) {
     }
     $vars['classes'] = trim(implode(' ', $classes));
   }
-  
+
   // Flatten the additional wrapper attributes array
   $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
   $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
