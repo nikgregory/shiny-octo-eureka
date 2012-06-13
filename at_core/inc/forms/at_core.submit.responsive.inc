@@ -299,7 +299,7 @@ if ($values['bigscreen_layout']) {
   $bigscreen_panels_css = at_build_panels_layout_css($panel_styles, $bigscreen_panels_data);
 
   // Prepend the float
-  $panels_layouts = $float . $tablet_landscape_panels_css;
+  $panels_layouts = $float . $bigscreen_panels_css;
 
   // Build a $styles variable with the layout, width and default panels layouts
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
