@@ -298,7 +298,7 @@ if (!function_exists('dhtml_menu_init')) {
       $sub_menu = drupal_render($element['#below']);
     }
 
-    if (at_get_setting('extra_menu_classes', $theme_name) !== 0 && !empty($element['#original_link'])) {
+    if (at_get_setting('extra_menu_classes', $theme_name) == 1 && !empty($element['#original_link'])) {
       if (!empty($element['#original_link']['depth'])) {
         $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
       }
@@ -307,7 +307,7 @@ if (!function_exists('dhtml_menu_init')) {
       }
     }
 
-    if (at_get_setting('menu_item_span_elements', $theme_name) !== 0 && !empty($element['#title'])) {
+    if (at_get_setting('menu_item_span_elements', $theme_name) == 1 && !empty($element['#title'])) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
       $element['#localized_options']['html'] = TRUE;
     }
@@ -316,121 +316,6 @@ if (!function_exists('dhtml_menu_init')) {
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
 
-}
-
-/**
- * Returns HTML for a set of links.
- *
- * Adaptivetheme overides this function in order to insert additional classes
- * into link items. It can also wrap link items in span elements (wrapped around
- * the actual link text inside the anchor element).
- *
- * @param $vars
- *   An associative array containing:
- *   - links: An associative array of links to be themed. The key for each link
- *     is used as its CSS class. Each link should be itself an array, with the
- *     following elements:
- *     - title: The link text.
- *     - href: The link URL. If omitted, the 'title' is shown as a plain text
- *       item in the links list.
- *     - html: (optional) Whether or not 'title' is HTML. If set, the title
- *       will not be passed through check_plain().
- *     - attributes: (optional) Attributes for the anchor, or for the <span> tag
- *       used in its place if no 'href' is supplied. If element 'class' is
- *       included, it must be an array of one or more class names.
- *     If the 'href' element is supplied, the entire link array is passed to l()
- *     as its $options parameter.
- *   - attributes: A keyed array of attributes for the UL containing the
- *     list of links.
- *   - heading: (optional) A heading to precede the links. May be an associative
- *     array or a string. If it's an array, it can have the following elements:
- *     - text: The heading text.
- *     - level: The heading level (e.g. 'h2', 'h3').
- *     - class: (optional) An array of the CSS classes for the heading.
- *     When using a string it will be used as the text of the heading and the
- *     level will default to 'h2'. Headings should be used on navigation menus
- *     and any list of links that consistently appears on multiple pages. To
- *     make the heading invisible use the 'element-invisible' CSS class. Do not
- *     use 'display:none', which removes it from screen-readers and assistive
- *     technology. Headings allow screen-reader and keyboard only users to
- *     navigate to or skip the links. See
- *     http://juicystudio.com/article/screen-readers-display-none.php and
- *     http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
- */
-function adaptivetheme_links($vars) {
-  global $theme_key, $language_url;
-  $theme_name = $theme_key;
-
-  $links = $vars['links'];
-  $attributes = $vars['attributes'];
-  $heading = $vars['heading'];
-
-  $output = '';
-  if (count($links) > 0) {
-    $output = '';
-    if (!empty($heading)) {
-      if (is_string($heading)) {
-        $heading = array(
-          'text' => $heading,
-          'level' => 'h2',
-        );
-      }
-      $output .= '<' . $heading['level'];
-      if (!empty($heading['class'])) {
-        $output .= drupal_attributes(array('class' => $heading['class']));
-      }
-      $output .= '>' . filter_xss_admin($heading['text']) . '</' . $heading['level'] . '>'; // Core uses check_plain(), I think this is over the top, basic markup is OK
-    }
-    $output .= '<ul' . drupal_attributes($attributes) . '>';
-
-    $num_links = count($links);
-    $i = 1;
-
-    foreach ($links as $key => $link) {
-
-      if (at_get_setting('extra_menu_classes', $theme_name) === 1) {
-        $class = array($key);
-        if ($i == 1) {
-          $class[] = 'first';
-        }
-        if ($i == $num_links) {
-          $class[] = 'last';
-        }
-        if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
-            && (empty($link['language']) || $link['language']->language == $language_url->language)) {
-          $class[] = 'active';
-        }
-        $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
-      }
-
-      else {
-        $output .= '<li>';
-      }
-      if (isset($link['href'])) {
-        if (at_get_setting('menu_item_span_elements', $theme_name) === 1) {
-          $link['title'] = '<span>' . $link['title'] . '</span>';
-          $link['html'] = TRUE;
-        }
-        $output .= l($link['title'], $link['href'], $link);
-      }
-
-      elseif (!empty($link['title'])) {
-        if (empty($link['html'])) {
-          $link['title'] = check_plain($link['title']);
-        }
-        $span_attributes = '';
-        if (isset($link['attributes'])) {
-          $span_attributes = drupal_attributes($link['attributes']);
-        }
-        $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
-      }
-      $i++;
-      $output .= "</li>";
-    }
-    $output .= '</ul>';
-  }
-
-  return $output;
 }
 
 /**
