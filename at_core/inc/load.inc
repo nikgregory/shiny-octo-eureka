@@ -132,9 +132,9 @@ function load_layout_css($path, $theme_name) {
         $ie_style['media'] = $media;
         $ie_style['condition'] = $condition;
         $ie_style['path'] = $ie_styles_path;
+        $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
+        load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
       }
-      $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-      load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
     }
   }
 }

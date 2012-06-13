@@ -22,8 +22,6 @@ require_once($path_to_at_core . '/inc/forms/at_core.submit.builders.inc');
 function at_core_settings_submit($form, &$form_state) {
   global $path_to_at_core;
 
-  //dsm($form_state);
-
   // Set form_state values into one variable
   $values = $form_state['values'];
 
@@ -34,35 +32,23 @@ function at_core_settings_submit($form, &$form_state) {
   $path_to_panels_css = $path_to_at_core . '/layouts/css/';
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
 
-  // Potential files to remove
-  $rm_files = array(
-    $theme_name . '_color.inc',
-    $theme_name . '_settings.info',
-    $theme_name . '.default.layout.css',
-    $theme_name . '.lt-ie8.layout.css',
-    $theme_name . '.lt-ie9.layout.css',
-    $theme_name . '.responsive.layout.css',
-    $theme_name . '.responsive.styles.css',
-    $theme_name . '.fonts.css',
-    $theme_name . '.custom.css',
-  );
+  // Set values for our three possible paths to the generated files
+  $public_files = 'public://adaptivetheme/' . $theme_name . '_files';
+  $theme_directory = drupal_get_path('theme', $theme_name) . '/generated_files';
+  $custom_path = $values['custom_files_path'];
 
-  // Delete files and the directory
-  if ($old_path = variable_get('theme_' . $theme_name . '_files_directory')) {
-    foreach ($rm_files as $file) {
-      $filepath = $old_path . '/' . $file;
-      if (file_exists($filepath)) {
-        @drupal_unlink($filepath);
-      }
-    }
-    if (isset($old_path)) {
-      @drupal_rmdir($old_path);
-    }
+  // Set the path variable to the right path
+  if ($values['global_files_path'] === 'public_files') {
+    $path = $public_files;
+  }
+  elseif ($values['global_files_path'] === 'theme_directory') {
+    $path = $theme_directory;
+  }
+  elseif ($values['global_files_path'] === 'custom_path') {
+    $path = $custom_path;
   }
 
-  // Set up the new files directory for the generated files.
-  $id = $theme_name . '_files_' . substr(hash('sha256', serialize($theme_name) . microtime()), 0, 8);
-  $path  = 'public://adaptivetheme/' . $id;
+  // Set up the files directory for the generated files
   file_prepare_directory($path, FILE_CREATE_DIRECTORY);
   variable_set('theme_' . $theme_name . '_files_directory', $path);
 

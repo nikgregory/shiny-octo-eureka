@@ -64,7 +64,7 @@ $form['at-settings']['global-settings']['default-layout'] = array(
 $form['at-settings']['global-settings']['default-layout']['global_default_layout_toggle'] = array(
   '#type' => 'checkbox',
   '#title' => t('Change default layout method <small>(checking this will expose new settings)</small>'),
-  '#description' => t('<strong>Use with caution!</strong> If you are using a pre-styled sub-theme such as Pixture Reloaded, Sky, Corolla, AT Commerce or any of the commerical sub-themes you should NOT change this!'), 
+  '#description' => t('<strong>Use with caution!</strong> If you are using a pre-styled sub-theme such as Pixture Reloaded, Sky, Corolla, AT Commerce or any of the commerical sub-themes you should NOT change this!'),
   '#default_value' => at_get_setting('global_default_layout_toggle'),
 );
 $form['at-settings']['global-settings']['default-layout']['toggle'] = array(
@@ -81,6 +81,55 @@ $form['at-settings']['global-settings']['default-layout']['toggle']['global_defa
   '#options' => array(
     'smartphone-portrait' => t('Mobile first'),
     'standard-layout' => t('Desktop first'),
+  ),
+);
+
+// Path to Generated files
+$public_files = variable_get('file_public_path', conf_path() . '/files') . '/adaptivetheme/' . $theme_name . '_files/';
+$theme_directory = drupal_get_path('theme', $theme_name) . '/generated_files/';
+$form['at-settings']['global-settings']['files-path'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Path to Generated Files'),
+  '#description' => t('<h3>Path to Generated Files</h3>'),
+);
+$form['at-settings']['global-settings']['files-path']['global_files_path'] = array(
+  '#type' => 'select',
+  '#title' => t('By default the generated CSS files are saved in public files (see admin/config/media/file-system). You can change this to your theme directory or a custom directory.'),
+  '#default_value' => at_get_setting('global_files_path'),
+  '#options' => array(
+    'public_files' => t('Public files'),
+    'theme_directory' => t('Theme directory'),
+    'custom_path' => t('Custom path'),
+  ),
+);
+// Message for public files
+$form['at-settings']['global-settings']['files-path']['public_files_path'] = array(
+  '#type' => 'fieldset',
+  '#states' => array(
+    'visible' => array('select[name="global_files_path"]' => array('value' => 'public_files')),
+  ),
+);
+$form['at-settings']['global-settings']['files-path']['public_files_path']['message'] = array(
+  '#markup' => t('<div class="description">Files will be saved to: <code>!public_files</code></div>', array('!public_files' => $public_files)),
+);
+// message for theme dir
+$form['at-settings']['global-settings']['files-path']['theme_directory_files_path'] = array(
+  '#type' => 'fieldset',
+  '#states' => array(
+    'visible' => array('select[name="global_files_path"]' => array('value' => 'theme_directory')),
+  ),
+);
+$form['at-settings']['global-settings']['files-path']['theme_directory_files_path']['message'] = array(
+  '#markup' => t('<div class="description">Files will be saved to: <code>!theme_directory</code></div>', array('!theme_directory' => $theme_directory)),
+);
+// Text field for custom path
+$form['at-settings']['global-settings']['files-path']['custom_files_path'] = array(
+  '#type' => 'textfield',
+  '#title' => t('Enter the custom path:'),
+  '#default_value' => at_get_setting('custom_files_path'),
+  '#description' => t('This directory must exist and be writable by Drupal. This directory must be relative to the Drupal installation directory and be accessible over the web. Do not try to use something like <code>../mydir</code>, it will fail. Use someting like <code>sites/default/mydir</code>.'),
+  '#states' => array(
+    'visible' => array('select[name="global_files_path"]' => array('value' => 'custom_path')),
   ),
 );
 

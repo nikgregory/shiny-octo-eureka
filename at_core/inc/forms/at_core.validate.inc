@@ -70,7 +70,6 @@ function at_core_settings_validate($form, &$form_state) {
 
   // Validate extensions
   if (isset($values['enable_extensions']) && $values['enable_extensions'] === 1) {
-
     // Apple touch icon paths
     if (isset($values['enable_apple_touch_icons']) && $values['enable_apple_touch_icons'] === 1) {
       if (!empty($values['apple_touch_icon_path_l'])) {
@@ -92,6 +91,15 @@ function at_core_settings_validate($form, &$form_state) {
         }
       }
     }
+  }
 
+  // Check if the custom files directory exists
+  if ($values['global_files_path'] == 'cp') {
+    $directory = $values['custom_files_path'];
+    if (!is_dir($directory) && !drupal_mkdir($directory, NULL, TRUE)) {
+      // If the directory does not exists and cannot be created.
+      form_set_error('custom_files_path', t('The directory %directory does not exist and could not be created.', array('%directory' => $directory)));
+      watchdog('file system', 'The directory %directory does not exist and could not be created.', array('%directory' => $directory), WATCHDOG_ERROR);
+    } 
   }
 }

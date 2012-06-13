@@ -198,6 +198,7 @@
   settings[enable_custom_media_queries]   = 1
   settings[global_default_layout]         = 'smartphone-portrait'
   settings[global_default_layout_toggle]  = 0
+  settings[global_files_path]             = 'public_files'
 
 ;----------// Polyfills
   settings[load_html5js]       = 1
@@ -216,7 +217,7 @@
   settings[rebuild_theme_data] = 0
 
 ;----------// Extensions
-  settings[enable_extensions]          = 1
+  settings[enable_extensions]          = 0
   settings[enable_font_settings]       = 0
   settings[enable_heading_settings]    = 0
   settings[enable_image_settings]      = 0

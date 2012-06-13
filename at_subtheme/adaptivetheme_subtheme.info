@@ -234,6 +234,7 @@
   settings[enable_custom_media_queries]   = 1
   settings[global_default_layout]         = 'smartphone-portrait'
   settings[global_default_layout_toggle]  = 0
+  settings[global_files_path]             = 'public_files'
 
 
   ; Polyfills
@@ -270,6 +271,7 @@
   settings[enable_custom_css]          = 0
   settings[enable_float_region_blocks] = 0
   settings[enable_context_regions]     = 0
+
 
   ; Font type
   settings[base_font_type]          = ''

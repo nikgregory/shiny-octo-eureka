@@ -532,6 +532,18 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   margin-bottom: 20px;
 }
 
+/* Global CSS files path */
+#edit-files-path .form-item-global-files-path {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#edit-files-path fieldset .fieldset-wrapper {
+  margin: 0 0 20px;
+}
+#edit-files-path .form-item-global-files-path label {
+  margin-bottom: 10px;
+}
+
 /* Wrangel Seven to look half decent */
 .admin-theme-seven .font-element-wrapper .fieldset-legend,
 .admin-theme-seven .panel-option-lists .fieldset-legend {
