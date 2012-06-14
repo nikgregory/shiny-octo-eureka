@@ -94,7 +94,7 @@ function at_core_settings_validate($form, &$form_state) {
   }
 
   // Check if the custom files directory exists
-  if ($values['global_files_path'] == 'cp') {
+  if ($values['global_files_path'] == 'custom_path') {
     $directory = $values['custom_files_path'];
     if (!is_dir($directory) && !drupal_mkdir($directory, NULL, TRUE)) {
       // If the directory does not exists and cannot be created.
