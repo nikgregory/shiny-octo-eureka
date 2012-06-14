@@ -164,6 +164,10 @@ if ($values['tablet_portrait_layout']) {
       $tablet_portrait_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
     }
   }
+  // Workaround upgrade issues for some settings
+  if ($tablet_portrait_layout_data['layout'] == 'two_col_stack') {
+    $tablet_portrait_layout_data['layout'] = 'two_sidebars_right_stack';
+  }
   $layout = at_build_page_layout($tablet_portrait_layout_data['layout'], $tablet_portrait_layout_data['sidebar_first'], $tablet_portrait_layout_data['sidebar_second'], $tablet_portrait_layout_data['sidebar_unit']);
 
   $method = $tablet_portrait_layout_data['layout'];
@@ -213,6 +217,10 @@ if ($values['tablet_landscape_layout']) {
     if (isset($values["$device" . '_' . "$value"])) {
       $tablet_landscape_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
     }
+  }
+  // Workaround upgrade issues for some settings
+  if ($tablet_portrait_layout_data['layout'] == 'two_col_stack') {
+    $tablet_portrait_layout_data['layout'] = 'two_sidebars_right_stack';
   }
   $layout = at_build_page_layout($tablet_landscape_layout_data['layout'], $tablet_landscape_layout_data['sidebar_first'], $tablet_landscape_layout_data['sidebar_second'], $tablet_landscape_layout_data['sidebar_unit']);
 
