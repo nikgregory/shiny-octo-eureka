@@ -25,10 +25,9 @@ if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_headi
  */
 function load_failure($filepath, $theme_name) {
 
-  $files_list = $filepath;
-  $message = t('<p>One or more CSS files were not found or does not exist: <em>!files_list</em>. Did you delete the public files directory or change a file name? Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>', array('!files_list' => $files_list, '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system'));
+  $message = t('<p>One or more CSS files were not found or does not exist: <em>!files_list</em>. Did you delete the public files directory or change a file name? Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>', array('!files_list' => $filepath, '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system'));
 
-  if (!empty($files_list)) {
+  if (!empty($filepath)) {
     watchdog($theme_name, 'CSS file missing or not found @filename', array('@filename' => $filepath), WATCHDOG_ERROR);
     if (user_is_logged_in()) {
       drupal_set_message($message, 'warning');

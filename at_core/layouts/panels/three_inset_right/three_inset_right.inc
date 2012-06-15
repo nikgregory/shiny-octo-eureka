@@ -29,9 +29,8 @@ function adaptivetheme_three_inset_right_panels_layouts() {
     'styles' => array(
       'three-inset-right' => array(
         'css' => array(
-          'fr' => array('.three-inset-right > .region-three-inset-right-sidebar,.three-inset-right > .inset-wrapper,.three-inset-right > .inset-wrapper > .region-three-inset-right-middle' => 'float:right'),
           '25' => array('.three-inset-right > .region-three-inset-right-sidebar' => 'width:25%'),
-          '75' => array('.three-inset-right > .inset-wrapper' => 'width:75%'),
+          '75fl' => array('.three-inset-right > .inset-wrapper' => 'width:75%;float:left'),
           '33' => array('.three-inset-right > .inset-wrapper > div.region-three-inset-right-inset' => 'width:33.333333%'),
           '66' => array('.three-inset-right > .inset-wrapper > div.region-three-inset-right-middle' => 'width:66.666666%'),
           '100' => array('.three-inset-right > .inset-wrapper > .region' => 'width:100%'),
