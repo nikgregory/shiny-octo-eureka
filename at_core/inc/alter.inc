@@ -240,6 +240,7 @@ function adaptivetheme_page_alter(&$page) {
 
   // Get all the regions with blocks
   $block_regions = &drupal_static(__FUNCTION__, array());
+
   if (empty($blocks_regions)) {
     $block_regions = system_region_list($GLOBALS['theme'], REGIONS_VISIBLE);
   }
@@ -253,22 +254,52 @@ function adaptivetheme_page_alter(&$page) {
       while ($blocks && !isset($page[$region][$blocks[0]]['#block'])) {
         array_shift($blocks);
       }
+
       if ($blocks) {
         $page[$region][$blocks[0]]['#block']->last_in_region = TRUE;
 
-        // Alter regions and block visibility
+        // Alter regions and block visibility. Note that ideally this would all
+        // be better in hook_page_build(), however themes can't fire that hook.
         if ($page['is_mobile'] == TRUE && $region !== 'content') {
+
           // Get the target region if set, check blocks can move and its not set to unset
           if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
+
+            // Sanitize possible vector
+            $target_region = check_plain($target_region);
+
+            // Initialize the classes array
+            $classes = array();
+            
+            // Move each block
             foreach ($blocks as $block) {
+
+              // If the $target_region is empty the region markup does not print
+              // so we need to generate it manually. This is bad because it
+              // cannot account for region specific template suggestions and
+              // Adaptivethemes own region prefix and suffix wrappers.
+              if (empty($page[$target_region])) {
+                $classes[] = 'region';
+                $classes[] = 'region-' . $target_region;
+                if ($target_region == 'sidebar_first' || $target_region == 'sidebar_second') {
+                  $classes[] = 'sidebar';
+                }
+                $classes = implode(' ', $classes);
+                $page[$target_region]['#prefix'] = '<div class="' .  $classes . '"><div class="region-inner clearfix">';
+                $page[$target_region]['#suffix'] = '</div></div>';
+              }
+
               // Move the blocks to the target region
               $page[$target_region][$block] = $page[$region][$block];
+
               // Unset the original block
               unset($page[$region][$block]);
             }
+
             // Unset the region, all blocks are now moved
             unset($page[$region]);
           }
+
           // Unset unwanted regions in mobile
           if (at_get_setting('unset_' . $region) === 1) {
             unset($page[$region]);
@@ -416,7 +447,7 @@ function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
  */
 function adaptivetheme_menu_alter(&$items) {
   // Add a menu item to display all panels layouts on one page
-  $items['atcore-debug-panels']['title'] = t('AT Core Debug Panels');
+  $items['atcore-debug-panels']['title'] = t('Adaptivetheme Panels Test');
   $items['atcore-debug-panels']['type'] = MENU_CALLBACK;
   $items['atcore-debug-panels']['page callback'] = 'at_debug_panels';
   $items['atcore-debug-panels']['weight'] = 100;

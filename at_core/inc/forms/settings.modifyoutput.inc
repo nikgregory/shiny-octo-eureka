@@ -142,6 +142,13 @@ $form['at']['modify-output']['hide-remove']['comments_hide_title'] = array(
   '#default_value' => at_get_setting('comments_hide_title'),
   '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
 );
+// Remove menu link titles
+$form['at']['modify-output']['hide-remove']['unset_menu_titles'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Remove menu link titles'),
+  '#default_value' => at_get_setting('unset_menu_titles'),
+  '#description' => t('Checking this setting will remove all menu link titles (tool tips). This only works for menu blocks.'),
+);
 
 // Accessibility
 $form['at']['modify-output']['a11y'] = array(
@@ -149,7 +156,6 @@ $form['at']['modify-output']['a11y'] = array(
   '#title' => t('Accessibility'),
   '#description' => t('<h3>Accessibility</h3>'),
 );
-
 // Use extra fieldsets in advanced serach form
 $form['at']['modify-output']['a11y']['adv_search_extra_fieldsets'] = array(
   '#type' => 'checkbox',
@@ -157,13 +163,26 @@ $form['at']['modify-output']['a11y']['adv_search_extra_fieldsets'] = array(
   '#default_value' => at_get_setting('adv_search_extra_fieldsets'),
   '#description' => t('The problem with Drupals standard Advanced search form is that each criterion group is wrapped in a DIV, whereas it should use fieldsets. Turning this on may cause issues with modules that modify the search form such as Search Config.'),
 );
-
 // Skip link target
 $form['at']['modify-output']['a11y']['skip_link_target'] = array(
   '#type' => 'textfield',
   '#title' => t('Skip to navigation target ID'),
   '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
   '#default_value' => check_plain(at_get_setting('skip_link_target')),
+);
+
+// SEO/Authorship
+$form['at']['modify-output']['seo'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('SEO'),
+  '#description' => t('<h3>SEO</h3>'),
+);
+// Use extra fieldsets in advanced serach form
+$form['at']['modify-output']['seo']['rel_author'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Add rel=author to user names.'),
+  '#default_value' => at_get_setting('rel_author'),
+  '#description' => t('Add rel author to user names to support Googles <a href="!authorhship" target="_blank">Authorship</a> feature.', array('!authorhship' => 'http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1408986')),
 );
 
 // Extra CSS Classes
@@ -214,30 +233,3 @@ $form['at']['modify-output']['extra-classes']['extra_item_list_classes'] = array
   '#description' => t('first, last and odd/even (zebra classes)'),
   '#default_value' => at_get_setting('extra_item_list_classes'),
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

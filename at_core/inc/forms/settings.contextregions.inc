@@ -12,6 +12,7 @@ $unset_mobile_regions = array(
   'dashboard_inactive',
   'page_bottom',
   'page_top',
+  'menu_bar', // exclude the menu bar, it has bespoke region markup and moving something to this will end in tears.
   'content', // exclude the main content region, we don't want to unset this?
 );
 
@@ -34,7 +35,7 @@ array_reverse($move_regions_list);
 $form['at']['context-regions'] = array(
   '#type' => 'fieldset',
   '#title' => t('Mobile Regions (beta)'),
-  '#description' => t('<h3>Mobile Regions and Blocks <sup>(beta)</sup></h3><p>These settings allow you to either <abbr title="Unset means they won\'t print in the output at all, i.e. they are totally nuked">unset</abbr> regions in mobile devices, or move the regions blocks to another region when a mobile device is detected. Device detection is supplied by the Browscap module.</p><p>This feature should be considered beta at this time and has only been tested with the Drupal core block system, please post issues to the <a href="!issue_queue" target="_blank">issue queue</a>. Note that normal weight settings are lost when blocks are moved.</p>', array('!issue_queue' => 'http://drupal.org/project/issues/adaptivetheme')),
+  '#description' => t('<h3>Mobile Regions and Blocks <sup>(beta)</sup></h3><p>These settings allow you to either <abbr title="Unset means they won\'t print in the output at all, i.e. they are totally nuked">unset</abbr> regions in mobile devices, or move the regions blocks to another region when a mobile device is detected. Device detection is supplied by the Browscap module.</p><p>This feature should be considered beta at this time and has only been tested with the Drupal core block system, please post issues to the <a href="!issue_queue" target="_blank">issue queue</a>.</p><p>Caveats:<p><ol><li>Normal weight settings are lost when blocks are moved.</li><li>If the target region has no blocks by default, Adaptivetheme will generate the region markup. The markup is hard coded and does not account for modifications elsewhere in your theme, such as region template suggestion overrides.</li></ol>', array('!issue_queue' => 'http://drupal.org/project/issues/adaptivetheme')),
   '#weight' => 30,
 );
 if (!function_exists('browscap_get_browser')) {

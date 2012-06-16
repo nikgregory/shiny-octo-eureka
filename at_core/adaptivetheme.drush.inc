@@ -85,12 +85,13 @@ function drush_adaptivetheme($name = NULL, $machine_name = NULL) {
   drush_op('adaptivetheme_file_str_replace', $subtheme_path . '/theme-settings.php', 'adaptivetheme_subtheme', $machine_name);
   drush_op('adaptivetheme_file_str_replace', $subtheme_path . '/template.php', 'adaptivetheme_subtheme', $machine_name);
 
-
   // Notify user of the newly created theme.
   drush_print(dt('New Subtheme for "!name" created in: !path', array(
     '!name' => $name,
     '!path' => $subtheme_path,
   )));
+
+  //system_rebuild_theme_data(); // potentially execute this here, see http://drupal.org/node/1235942
 }
 
 /**

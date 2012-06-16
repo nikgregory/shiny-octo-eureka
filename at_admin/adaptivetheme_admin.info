@@ -311,6 +311,10 @@
   settings[adv_search_extra_fieldsets] = 0
 
 
+  ; SEO
+  settings[rel_author] = 0
+
+
   ; Mobile metatags
   settings[mobile_friendly_metatags] = 1
   settings[adaptivetheme_meta_viewport] = 'width=device-width, initial-scale=1'

@@ -312,9 +312,14 @@ if (!function_exists('dhtml_menu_init')) {
       $element['#localized_options']['html'] = TRUE;
     }
 
+    if (at_get_setting('unset_menu_titles', $theme_name) == 1 && !empty($element['#localized_options']['attributes']['title'])) {
+      unset($element['#localized_options']['attributes']['title']);
+    }
+
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
+
 
 }
 

@@ -729,3 +729,22 @@ function adaptivetheme_preprocess_menubar(&$vars) {
   // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }
+
+/**
+ * Preprocess variables for the username.
+ */
+function adaptivetheme_preprocess_username(&$vars) {
+
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  // Add rel=author for SEO and supporting search engines
+  if (at_get_setting('rel_author', $theme_name) === 1) {
+    if (isset($vars['link_path'])) {
+      $vars['link_attributes']['rel'][] = 'author';
+    }
+    else {
+      $vars['attributes_array']['rel'][] = 'author';
+    }
+  }
+}
