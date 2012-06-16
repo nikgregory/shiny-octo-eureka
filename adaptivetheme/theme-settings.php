@@ -796,10 +796,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 }
 
 function at_theme_settings_validate($form, &$form_state) {
-
   $values = $form_state['values'];
-  
-  dsm($values);
 
   // Validate max_width values seperatly, they need a condition that they are actually visible on the page
   if ($values['bigscreen_set_max_width'] == 1) {
