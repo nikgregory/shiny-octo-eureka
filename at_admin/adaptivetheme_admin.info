@@ -276,6 +276,7 @@
   ; Breadcrumb
   settings[breadcrumb_display]   = 1
   settings[breadcrumb_home]      = 0
+  settings[breadcrumb_label]     = 0
   settings[breadcrumb_separator] = ' &#187; '
 
 
