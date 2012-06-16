@@ -798,25 +798,27 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 function at_theme_settings_validate($form, &$form_state) {
 
   $values = $form_state['values'];
+  
+  dsm($values);
 
   // Validate max_width values seperatly, they need a condition that they are actually visible on the page
   if ($values['bigscreen_set_max_width'] == 1) {
-    if (empty($values['bigscreen_max_width']['#default_value'])) {
+    if (empty($values['bigscreen_max_width'])) {
       form_set_error('bigscreen_max_width', t('Standard layout max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
   if ($values['tablet_landscape_set_max_width'] == 1) {
-    if (empty($values['tablet_landscape_max_width']['#default_value'])) {
+    if (empty($values['tablet_landscape_max_width'])) {
       form_set_error('tablet_landscape_max_width', t('Tablet landscape layout max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
   if ($values['tablet_portrait_set_max_width'] == 1) {
-    if (empty($values['tablet_portrait_max_width']['#default_value'])) {
+    if (empty($values['tablet_portrait_max_width'])) {
       form_set_error('tablet_portrait_max_width', t('Tablet portrait max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
   if ($values['smartphone_landscape_set_max_width'] == 1) {
-    if (empty($values['smartphone_landscape_max_width']['#default_value'])) {
+    if (empty($values['smartphone_landscape_max_width'])) {
       form_set_error('smartphone_landscape_max_width', t('Smartphone landscape max-width is empty - you forgot to enter a value for the max width!'));
     }
   }
