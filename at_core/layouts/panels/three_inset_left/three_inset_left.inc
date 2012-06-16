@@ -39,9 +39,9 @@ function adaptivetheme_three_inset_left_panels_layouts() {
       ),
       'three-inset-left-wrap' => array(
         'css' => array(
-          '25' => array('.three-inset-left > .region-three-inset-left-sidebar' => 'width:25%'),
-          '75fl' => array('.three-inset-left > .inset-wrapper' => 'width:75%;float:left'),
-          'fdw' => array('.three-inset-left > .inset-wrapper > .region' => 'float:none;display:block;width:100%;clear:both'),
+          '25fr' => array('.three-inset-left > .region-three-inset-left-sidebar' => 'width:25%;float:right'),
+          '75fr' => array('.three-inset-left > .inset-wrapper' => 'width:75%;float:right'),
+          'fdw'  => array('.three-inset-left > .inset-wrapper > .region' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'three-inset-left-stack' => array(

@@ -972,6 +972,15 @@ div.resizable-textarea textarea {
   width: 98.5%;
   font-size: 1.231em;
 }
+
+
+
+
+
+
+
+
+
 input.form-submit,
 input.teaser-button {
   background-color: transparent;
@@ -995,6 +1004,8 @@ input.teaser-button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
+
+
 .ajax-new-content input.form-submit,
 .ajax-new-content input.teaser-button {
   margin: 3px 10px 3px 0;
@@ -1006,17 +1017,20 @@ input[value~=Update],
 input#edit-save.form-submit {
   background-image: url(images/green-button.png);
 }
+input[value~=Cancel],
 input#edit-delete.form-submit,
 #system-modules-uninstall input#edit-submit,
 #user-multiple-delete-confirm input#edit-submit {
   background-image: url(images/red-button.png);
 }
+
+
 input[value~=Update]:hover,
 input[value~=Save]:hover,
 #system-theme-settings input#edit-submit:hover,
 input.form-submit:hover,
 input.teaser-button:hover,
-input#edit-save.form-submit,
+input#edit-save.form-submit:hover,
 .node-form input#edit-submit.form-submit:hover,
 input#edit-delete.form-submit:hover,
 #system-modules-uninstall input#edit-submit:hover,
@@ -1024,6 +1038,13 @@ input#edit-delete.form-submit:hover,
   background-position: bottom;
   cursor: pointer;
 }
+
+
+
+
+
+
+
 #edit-views-apply,
 #edit-views-reset {
   margin-top: 20px;

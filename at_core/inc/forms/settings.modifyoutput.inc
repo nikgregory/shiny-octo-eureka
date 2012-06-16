@@ -56,18 +56,18 @@ $form['at']['modify-output']['breadcrumb'] = array(
   '#title' => t('Breadcrumbs'),
   '#description' => t('<h3>Breadcrumb Settings</h3>'),
 );
-$form['at']['modify-output']['breadcrumb']['bd'] = array(
+$form['at']['modify-output']['breadcrumb']['wrapper'] = array(
   '#type' => 'fieldset',
   '#title' => t('Breadcrumbs'),
 );
 // Display?
-$form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_display'] = array(
+$form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_display'] = array(
   '#type' => 'checkbox',
   '#title' => t('Show breadcrumbs'),
   '#default_value' => at_get_setting('breadcrumb_display'),
 );
 // Home link?
-$form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_home'] = array(
+$form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_home'] = array(
   '#type' => 'checkbox',
   '#title' => t('Show the homepage link'),
   '#default_value' => at_get_setting('breadcrumb_home'),
@@ -75,8 +75,17 @@ $form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_home'] = array(
     'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
   ),
 );
+// Label?
+$form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_label'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Show the "You are here" label'),
+  '#default_value' => at_get_setting('breadcrumb_label'),
+  '#states' => array(
+    'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
+  ),
+);
 // Seperator
-$form['at']['modify-output']['breadcrumb']['bd']['breadcrumb_separator'] = array(
+$form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
   '#description' => t('Text, basic markup and html entities only. Dont forget to include spaces.'),

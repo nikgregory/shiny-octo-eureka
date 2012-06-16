@@ -100,7 +100,14 @@ function adaptivetheme_breadcrumb($vars) {
     }
 
     if (!empty($breadcrumb)) {
-      $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+
+      if (at_get_setting('breadcrumb_label', $theme_name) === 1) {
+        $heading = '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
+      }
+      else {
+        $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+      }
+      
       $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
 
       $class = 'crumb';
@@ -319,8 +326,6 @@ if (!function_exists('dhtml_menu_init')) {
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
-
-
 }
 
 /**

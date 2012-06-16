@@ -257,6 +257,12 @@ ul.menu li.active-trail a {
 }
 
 
+/* If the label is set to show in theme settings the label class is added */
+#breadcrumb .breadcrumb-label {
+  font-size: 1em;
+}
+
+
 #breadcrumb ol {
   margin: 0;
   padding: 0;

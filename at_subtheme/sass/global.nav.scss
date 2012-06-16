@@ -104,15 +104,6 @@ ul.sf-menu {
 }
 
 
-/* Prevent momentary display of sub menus
-ul.sf-vertical li ul,
-ul.sf-horizontal li ul,
-ul.sf-navbar li ul ul {
-  display: none;
-}
-*/
-
-
 // Superfish blocks
 .block-superfish {
 
@@ -229,13 +220,19 @@ ul.menu {
 
 
 .block .menu li.content {
-  padding: 0;  // this class (if it exists) could be a problem so reset the padding
+  padding: 0;  // this class (if it exists) is a problem, so reset the padding
 }
 
 
 // Breadcrumbs as an ordered list
 #breadcrumb {
+
   padding-bottom: 1em;
+  
+  // If the label is set to show in theme settings the label class is added
+  .breadcrumb-label {
+    font-size: 1em;
+  }
 
   ol {
     margin: 0;
