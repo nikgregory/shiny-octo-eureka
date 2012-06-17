@@ -107,8 +107,13 @@ function adaptivetheme_breadcrumb($vars) {
       else {
         $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
       }
-      
+
       $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
+
+      // Push the page title onto the end of the breadcrumb array
+      if (at_get_setting('breadcrumb_title', $theme_name) === 1) {
+        $breadcrumb[] = '<span class="crumb-title">' . drupal_get_title() . '</span>';
+      }
 
       $class = 'crumb';
       end($breadcrumb);
@@ -126,7 +131,7 @@ function adaptivetheme_breadcrumb($vars) {
           $output .= '<li class="' . $class . ' crumb-first">' . $val . '</li>';
         }
         else {
-          $output .= '<li class="' . $class . '"><span>' . $separator . '</span>' . $val . '</li>';
+          $output .= '<li class="' . $class . '"><span class="crumb-sepreator">' . $separator . '</span>' . $val . '</li>';
         }
       }
       $output .= '</ol></nav></div>';

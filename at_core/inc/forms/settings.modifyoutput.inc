@@ -84,6 +84,15 @@ $form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_label'] = arra
     'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
   ),
 );
+// Page title?
+$form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_title'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Append the page title to the breadcrumb trail'),
+  '#default_value' => at_get_setting('breadcrumb_title'),
+  '#states' => array(
+    'visible' => array('input[name="breadcrumb_display"]' => array('checked' => TRUE)),
+  ),
+);
 // Seperator
 $form['at']['modify-output']['breadcrumb']['wrapper']['breadcrumb_separator'] = array(
   '#type'  => 'textfield',
