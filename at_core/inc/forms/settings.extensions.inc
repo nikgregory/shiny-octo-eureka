@@ -100,17 +100,17 @@ $form['at-settings']['extend']['enable']['enable_markup_overides'] = array(
   '#description' => t('Many additional options for adding, removing, hiding and changing site elements and markup - includes:
     <ul>
       <li>Set the gutter width</li>
-      <li>Use page--full-width-wrappers.tpl.php</li>
+      <li>Use page--full-width-wrappers.tpl.php for 100% width header and footer designs</li>
       <li>Enable page--[content-type].tpl.php suggestions</li>
       <li>Wrap menu item text in SPAN tags</li>
-      <li>Breadcrumb Settings - hide, show, hide home link, configure seperator</li>
+      <li>Breadcrumb Settings - hide, hide the home link, configure seperator, append the page title</li>
       <li>Horizontal Login Block</li>
       <li>Remove the frontpage title</li>
       <li>Do not display the Main content block on the front page</li>
       <li>Remove RSS feed icons</li>
       <li>Hide the comment title</li>
       <li>Remove menu link titles (tool tips)</li>
-      <li>Accessibility settings - set the skip to navigation target ID</li>
+      <li>Accessibility settings - set the skip navigation target ID, use extra fieldsets in the advanced search form</li>
       <li>Add rel=author to user names</li>
       <li>Add or remove CSS classes for pages, nodes, blocks, comments, menus and item lists</li>
     </ul>

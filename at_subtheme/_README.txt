@@ -1,6 +1,9 @@
 
 -- SUBTHEME SETUP --
 
+NOTE: if you use Drush you can generate a new subtheme with the adaptivetheme
+command: drush adaptivetheme "Foobar Theme" foobartheme
+
 1. Copy and paste adaptivetheme_subtheme, it doesn't matter where you place
    the copied version as long as its in a theme directory. For example if you
    are using sites/all/themes you can place it there - so you end up with:

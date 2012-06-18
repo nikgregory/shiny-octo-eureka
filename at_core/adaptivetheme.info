@@ -4,7 +4,7 @@
 
 ;----------// Theme Information
   name        = AT Core
-  description = AT Core holds the Layout Engine and all the style and "site tweak" tools. It does all the heavy lifting so you don't need to.
+  description = AT Core is the framework that drives the responsive layout system and provides an extensive set of tools for theme development. You do not need to enable this theme. Use the provided AT Subtheme to get started.
   core        = 7.x
   release     = 7.x-3.x
   engine      = phptemplate

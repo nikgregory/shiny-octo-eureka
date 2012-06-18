@@ -5,15 +5,12 @@
  * General alters.
  */
 
-global $theme_key, $theme_name;
-$theme_name = $theme_key;
-$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 /**
  * hook_html_head_alter()
  */
 function adaptivetheme_html_head_alter(&$head_elements) {
-  global $theme_name, $path_to_at_core;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // charset utf-8
   $head_elements['system_meta_content_type']['#attributes'] = array('charset' => 'utf-8');
@@ -182,7 +179,7 @@ function adaptivetheme_js_alter(&$javascript) {
  * hook_css_alter()
  */
 function adaptivetheme_css_alter(&$css) {
-  global $theme_key, $language;
+  global $theme_key;
 
   // Never allow this to run in our admin theme and only if the extension is enabled.
   if (at_get_setting('enable_exclude_css') === 1 && $theme_key !== 'adaptivetheme_admin') {
@@ -234,9 +231,20 @@ function adaptivetheme_css_alter(&$css) {
  * hook_page_alter()
  */
 function adaptivetheme_page_alter(&$page) {
-
   // Is this a mobile context?
   $page['is_mobile'] = at_get_browser();
+  
+  // Get the menu item
+  $menu_item = menu_get_item();
+
+  // Theme taxonomy term pages sensibly, remove redundant and potentially empty
+  // markup and wrap the node list in section elements with a class for theming.
+  if ($menu_item['tab_root'] == 'taxonomy/term/%') {
+    unset($page['content']['system_main']['term_heading']['#prefix']);
+    unset($page['content']['system_main']['term_heading']['#suffix']);
+    $page['content']['system_main']['nodes']['#prefix'] = '<section class="nodes">';
+    $page['content']['system_main']['nodes']['#suffix'] = '</section>';
+  }
 
   // Get all the regions with blocks
   $block_regions = &drupal_static(__FUNCTION__, array());
@@ -314,7 +322,6 @@ function adaptivetheme_page_alter(&$page) {
  * hook_form_FORM_alter()
  */
 function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
-
   // Collapse Noggin fieldset by default
   if ($form_id == 'system_theme_settings') {
     if (module_exists('noggin')) {
@@ -328,7 +335,6 @@ function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
  * hook_form_FORM_ID_alter()
  */
 function adaptivetheme_form_search_form_alter(&$form, $form_state) {
-
   // The problem with Drupals standard Advanced search form is that each
   // criterion group is wrapped in a DIV, whereas it should be a fieldset with
   // a legend, this is better semantics and improves accessibility by
@@ -458,7 +464,6 @@ function adaptivetheme_menu_alter(&$items) {
  * Callback function for at-core-debug-panels menu item.
  */
 function at_debug_panels() {
-
   $file = drupal_get_path('theme', 'adaptivetheme') . '/css/debug-panels.css';
   drupal_add_css($file, array(
     'preprocess' => FALSE,
@@ -468,10 +473,8 @@ function at_debug_panels() {
     'weight' => 2000,
     )
   );
-
   $output = <<<EOF
 <div class="all-panel-layouts debug-panels" style="font-size: 81.3%">
-
     <div class="at-panel panel-display one-column clearfix">
       <div class="region region-one-main">
         <div class="region-inner clearfix">
@@ -795,7 +798,6 @@ function at_debug_panels() {
         </div>
       </div>
     </div>
-
 </div>
 EOF;
 

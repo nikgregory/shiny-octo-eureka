@@ -8,10 +8,10 @@
  * - $submitted: Submission information created from $name and $date during
  *   adaptivetheme_preprocess_node(), uses the $publication_date variable.
  * - $datetime: datetime stamp formatted correctly to ISO8601.
- * - $publication_date: publication date, formatted with time element and 
+ * - $publication_date: publication date, formatted with time element and
  *   pubdate attribute.
  * - $datetime_updated: datetime stamp formatted correctly to ISO8601.
- * - $last_update: last updated date/time, formatted with time element and 
+ * - $last_update: last updated date/time, formatted with time element and
  *   pubdate attribute.
  * - $custom_date_and_time: date time string used in $last_update.
  *

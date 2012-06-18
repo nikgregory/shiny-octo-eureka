@@ -2,6 +2,8 @@
 /**
  * @file
  * Contains functions only needed for drush integration.
+ *
+ * Usage: drush adaptivetheme "Foobar Theme" foobartheme
  */
 
 /**

@@ -10,6 +10,7 @@
 // Set variable for mode, we want to show a message based on this
 $mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
 $performance_settings_path = base_path() . 'admin/config/development/performance';
+$file_settings_path = base_path() . 'admin/config/media/file-system';
 
 // Global Settings
 $form['at-settings']['global-settings'] = array(
@@ -94,7 +95,7 @@ $form['at-settings']['global-settings']['files-path'] = array(
 );
 $form['at-settings']['global-settings']['files-path']['global_files_path'] = array(
   '#type' => 'select',
-  '#title' => t('By default the generated CSS files are saved in public files (see admin/config/media/file-system). You can change this to your theme directory or a custom directory.'),
+  '#title' => t('By default the generated files are saved in <a href="!file_settings_path" target="_blank">public files</a>. You can change this to your theme directory or a custom directory. These files include all the generated CSS files, the info file backup and color scheme backups if you are using the Color module. For more information see the docs on the <a href="!file_generation_system" target="_blank">file generation system</a>.', array('!file_settings_path' => $file_settings_path, '!file_generation_system' => 'http://adaptivethemes.com/documentation/file-generation-system')),
   '#default_value' => at_get_setting('global_files_path'),
   '#options' => array(
     'public_files' => t('Public files'),
@@ -127,7 +128,7 @@ $form['at-settings']['global-settings']['files-path']['custom_files_path'] = arr
   '#type' => 'textfield',
   '#title' => t('Enter the custom path:'),
   '#default_value' => at_get_setting('custom_files_path'),
-  '#description' => t('This directory must exist and be writable by Drupal. This directory must be relative to the Drupal installation directory and be accessible over the web. Do not try to use something like <code>../mydir</code>, it will fail. Use someting like <code>sites/default/mydir</code>.'),
+  '#description' => t('This directory must exist and be writable by Drupal. This directory must be relative to the Drupal installation directory and be accessible over the web. Do not try to use something like <code>../css</code>, it will fail. Use someting like <code>sites/default/css</code>.'),
   '#states' => array(
     'visible' => array('select[name="global_files_path"]' => array('value' => 'custom_path')),
   ),

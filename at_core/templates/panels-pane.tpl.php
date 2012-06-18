@@ -55,7 +55,7 @@
         <?php print $more; ?>
       </div>
     <?php endif; ?>
-    
+
   </div>
 </<?php print $tag; ?>>
 <?php if ($pane_suffix): ?>

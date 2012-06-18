@@ -146,7 +146,7 @@ if(at_get_setting('disable_responsive_styles') === 1) {
 }
 
 $form['at-settings']['panels']['panels_test'] = array(
-  '#markup' => t('<p><a href="!panels_layouts" title="Use this for testing Panels and Gpanels layout settings" target="_blank">View all the panels/gpanels layouts</a></p>', array('!panels_layouts' => base_path() . 'atcore-debug-panels')),
+  '#markup' => t('<p><a href="!panels_layouts" title="Use this for testing Panels and Gpanels layout settings. Note: if you get a 404 clear the sites cache." target="_blank">View all the panels/gpanels layouts</a></p>', array('!panels_layouts' => base_path() . 'atcore-debug-panels')),
 );
 
 $form['at-settings']['panels']['panels-wrapper'] = array(

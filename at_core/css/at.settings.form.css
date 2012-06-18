@@ -543,6 +543,9 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
 #edit-files-path .form-item-global-files-path label {
   margin-bottom: 10px;
 }
+#edit-global-files-path {
+  display: block;
+}
 
 /* Wrangel Seven to look half decent */
 .admin-theme-seven .font-element-wrapper .fieldset-legend,
