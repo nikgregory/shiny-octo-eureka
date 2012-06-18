@@ -54,6 +54,13 @@ function at_get_setting($setting_name, $theme = NULL) {
 
       // Get the saved theme-specific settings from the database.
       $cache[$theme] = array_merge($cache[$theme], variable_get('theme_' . $theme . '_settings', array()));
+
+      // Type juggle numeric strings, cast to integer
+      foreach ($cache[$theme] as $setting_name => $setting_value) {
+        if (is_numeric($setting_value) && strlen($setting_value) == 1) {
+          $cache[$theme][$setting_name] = (int) $setting_value;
+        }
+      }
     }
   }
 

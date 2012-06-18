@@ -7,6 +7,14 @@
 // curly brackets:
 //   @include mix-in-name;
 
+// Markup free clearing
+// http://www.stubbornella.org/content/2012/05/02/cross-browser-debugging-css/
+@mixin cf {
+  overflow: hidden;   // New formatting context in better browsers
+  *overflow: visible; // Protect IE7 and older from the overflow property
+  *zoom: 1;           // Give IE hasLayout, a new formatting context equivalent
+}
+
 //
 // Image replacement
 // Kellum Method: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
@@ -20,11 +28,11 @@
   white-space: nowrap;
   overflow: hidden;
   // Additional helpers
-  border: 0;                     // Remove the default border from elements like button
+  border: 0;                     // Remove the default border from elements like <button>
   font: 0/0 a;                   // Crush the text down to take up no space
   text-shadow: none;             // Remove any text shadows
   color: transparent;            // Hide any residual text in Safari 4 and any mobile devices that may need it
-  background-color: transparent; // Hide the default background color on elements like button
+  background-color: transparent; // Hide the default background color on elements like <button>
 }
 
 // element-invisible improved and more robust
