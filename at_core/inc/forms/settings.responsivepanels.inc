@@ -130,7 +130,7 @@ foreach ($devices as $device) {
     '#title' => t($title),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#description' => t('Select the layouts you want to use when the site is being viewed in !device.', array('!device' => lcfirst($title))),
+    '#description' => t('Select the layouts you want to use when the site is being viewed in !device.', array('!device' => strtolower($title))),
   );
   if (isset($rpl)) {
     foreach ($rpl as $group => $layouts) {

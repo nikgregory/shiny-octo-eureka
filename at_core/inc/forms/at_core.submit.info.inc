@@ -93,16 +93,19 @@ if ($theme_settings) {
     'at__active_tab',
   );
   foreach ($theme_settings as $setting_name => $setting_value) {
-    if (isset($setting_name) && !in_array($setting_name, $exclusions)) {
-      $setting_value = $setting_value ? $setting_value : "''";
+    if ($setting_name == 'global_gutter_width') {
+      if (empty($setting_value)) {
+        $exclusions[] = 'global_gutter_width';
+      }
+    }
+    if (isset($setting_value) && $setting_value !== '<none>' && !in_array($setting_name, $exclusions)) {
+      if (empty($setting_value) && !is_numeric($setting_value)) {
+        $setting_value = "''";
+      }
       $dynamic_settings_info[] = "settings[$setting_name] = $setting_value";
     }
   }
   if (!empty($dynamic_settings_info)) {
-    // Interesting trivial fact about info files, if the line ends with an equals operator (=) then the line
-    // is not ended and the content of the next line will be assigned, therefor we can never leave an empty
-    // setting with a hanging equals, so we set an empty string. I still need to test this properly because
-    // it might be better, or even required to set it to a 0.
     $dynamic_settings_info = $dynamic_settings_info ? $dynamic_settings_info : "''";
     $dynamic_settings = implode("\n", $dynamic_settings_info);
   }
