@@ -19,12 +19,10 @@ function adaptivetheme_preprocess(&$vars) {
  * Preprocess variables for html.tpl.php
  */
 function adaptivetheme_preprocess_html(&$vars) {
-
   global $theme_key, $language;
   $theme_name = $theme_key;
 
-  // Set some paths
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  // Set variable for the base path
   $vars['base_path'] = base_path();
 
   // Get the info file data
@@ -39,7 +37,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Clean up the lang attributes.
   $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
 
-  // Set the path to the directory where our CSS files are saved
+  // Get the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
 
   // Load Layout
@@ -87,11 +85,11 @@ function adaptivetheme_preprocess_html(&$vars) {
   // on the old system. Scan for the existence of a "release" key and
   // conditionally load google.web.fonts.inc
   if (!isset($info['release']) || $info['release'] === '7.x-2.x') {
-    include_once($path_to_at_core . '/inc/google.web.fonts.inc');
+    include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/google.web.fonts.inc');
   }
 
   // Load debuggers if enabled. Panels page debugger is a menu item, see alter.inc
-  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('show_window_size', $theme_name) === 1) {
+  if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('show_window_size', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
     load_debuggers($theme_name);
   }
 }
@@ -100,7 +98,6 @@ function adaptivetheme_preprocess_html(&$vars) {
  * Preprocess variables for page.tpl.php
  */
 function adaptivetheme_preprocess_page(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -236,7 +233,6 @@ function adaptivetheme_preprocess_page(&$vars) {
  * Preprocess variables for region.tpl.php
  */
 function adaptivetheme_preprocess_region(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -308,7 +304,6 @@ function adaptivetheme_preprocess_region(&$vars) {
  * Preprocess variables for block.tpl.php
  */
 function adaptivetheme_preprocess_block(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -454,7 +449,6 @@ function adaptivetheme_preprocess_block(&$vars) {
  * Preprocess variables for field.tpl.php
  */
 function adaptivetheme_preprocess_field(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -487,13 +481,22 @@ function adaptivetheme_preprocess_field(&$vars) {
       $vars['image_caption_full'] = TRUE;
     }
   }
+  // taxonomy_term_reference
+  if ($element['#field_type'] === 'taxonomy_term_reference') {
+    foreach($element as $key => $value) {
+      if(is_numeric($key)) {
+        $element[$key]['#options']['attributes']['title'][] = 'fuku'; 
+      }
+    }
+    
+    $vars['term_description'] = '';
+  }
 }
 
 /**
  * Preprocess variables for node.tpl.php
  */
 function adaptivetheme_preprocess_node(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -603,7 +606,6 @@ function adaptivetheme_preprocess_node(&$vars) {
  * Preprocess variables for comment.tpl.php
  */
 function adaptivetheme_preprocess_comment(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -695,7 +697,6 @@ function adaptivetheme_preprocess_search_block_form(&$vars) {
  * Preprocess variables for aggregator-item.tpl.php
  */
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
-
   $item = $vars['item'];
 
   // We want the same highly accurate time stamp feature as nodes and comments
@@ -718,7 +719,6 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
  * Preprocess variables for adaptivtheme_menubar()
  */
 function adaptivetheme_preprocess_menubar(&$vars) {
-
   $type = $vars['type'];
 
   $vars['menubar_id'] = $type . '-menu-bar';
@@ -734,7 +734,6 @@ function adaptivetheme_preprocess_menubar(&$vars) {
  * Preprocess variables for the username.
  */
 function adaptivetheme_preprocess_username(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 

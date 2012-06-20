@@ -232,11 +232,17 @@ ul.menu {
   // If the label is set to show in theme settings the label class is added
   .breadcrumb-label {
     font-size: 1em;
+    display: inline;
+    padding-right: 10px;
   }
 
   ol {
     margin: 0;
     padding: 0;
+  }
+  
+  .with-breadcrumb-label ol {
+    display: inline;
   }
 
   li {

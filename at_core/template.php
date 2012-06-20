@@ -11,7 +11,6 @@ global $theme_key, $path_to_at_core;
 $theme_key = $GLOBALS['theme_key'];
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
-// Let this bird fly...
 require_once($path_to_at_core . '/inc/get.inc');        // get theme info, settings, css etc
 require_once($path_to_at_core . '/inc/plugins.inc');    // the plugin system with wrapper and helper functions
 require_once($path_to_at_core . '/inc/generate.inc');   // CSS class generators

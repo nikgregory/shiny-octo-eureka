@@ -174,10 +174,11 @@
 
 
   ; Debug
-  settings[expose_regions]     = 0
-  settings[load_all_panels]    = 0
-  settings[show_window_size]   = 0
-  settings[rebuild_theme_data] = 0
+  settings[expose_regions]              = 0
+  settings[load_all_panels]             = 0
+  settings[load_all_panels_no_sidebars] = 0
+  settings[show_window_size]            = 0
+  settings[rebuild_theme_data]          = 0
 
 
   ; Extensions

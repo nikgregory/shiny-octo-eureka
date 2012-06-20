@@ -100,11 +100,11 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 
   // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
   if (at_get_setting('enable_apple_touch_icons') === 1) {
-
+    $path_to_theme = drupal_get_path('theme', $theme_name);
     // low
     $apple_touch_icon_path_l = check_plain(at_get_setting('apple_touch_icon_path_l', $theme_name));
     if (!empty($apple_touch_icon_path_l)) {
-      $l = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_l;
+      $l = $path_to_theme . '/' . $apple_touch_icon_path_l;
       $touch_icon_l = file_create_url($l);
       $head_elements['adaptivetheme_touch_icon_nokia'] = array(
         '#type' => 'html_tag',
@@ -125,11 +125,10 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
-
     // medium
     $apple_touch_icon_path_m = check_plain(at_get_setting('apple_touch_icon_path_m', $theme_name));
     if (!empty($apple_touch_icon_path_m)) {
-      $m = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_m;
+      $m = $path_to_theme . '/' . $apple_touch_icon_path_m;
       $touch_icon_m = file_create_url($m);
       $head_elements['adaptivetheme_touch_icon_medium'] = array(
         '#type' => 'html_tag',
@@ -142,11 +141,10 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
-
     // high
     $apple_touch_icon_path_h = check_plain(at_get_setting('apple_touch_icon_path_h', $theme_name));
     if (!empty($apple_touch_icon_path_h)) {
-      $h = drupal_get_path('theme', $theme_name) . '/' . $apple_touch_icon_path_h;
+      $h = $path_to_theme . '/' . $apple_touch_icon_path_h;
       $touch_icon_h = file_create_url($h);
       $head_elements['adaptivetheme_touch_icon_high'] = array(
         '#type' => 'html_tag',
@@ -159,7 +157,6 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         ),
       );
     }
-
   }
 }
 
@@ -233,7 +230,7 @@ function adaptivetheme_css_alter(&$css) {
 function adaptivetheme_page_alter(&$page) {
   // Is this a mobile context?
   $page['is_mobile'] = at_get_browser();
-  
+
   // Get the menu item
   $menu_item = menu_get_item();
 
@@ -268,51 +265,64 @@ function adaptivetheme_page_alter(&$page) {
 
         // Alter regions and block visibility. Note that ideally this would all
         // be better in hook_page_build(), however themes can't fire that hook.
-        if ($page['is_mobile'] == TRUE && $region !== 'content') {
+        if (at_get_setting('enable_context_regions') === 1) {
+          if ($page['is_mobile'] == TRUE && $region !== 'content') {
 
-          // Get the target region if set, check blocks can move and its not set to unset
-          if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
+            // Get the target region if set, check blocks can move and its not set to unset
+            if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
 
-            // Sanitize possible vector
-            $target_region = check_plain($target_region);
+              // Sanitize possible vector
+              $target_region = check_plain($target_region);
 
-            // Initialize the classes array
-            $classes = array();
-            
-            // Move each block
-            foreach ($blocks as $block) {
+              // Initialize the classes array
+              $classes = array();
 
-              // If the $target_region is empty the region markup does not print
-              // so we need to generate it manually. This is bad because it
-              // cannot account for region specific template suggestions and
-              // Adaptivethemes own region prefix and suffix wrappers.
-              if (empty($page[$target_region])) {
-                $classes[] = 'region';
-                $classes[] = 'region-' . $target_region;
-                if ($target_region == 'sidebar_first' || $target_region == 'sidebar_second') {
-                  $classes[] = 'sidebar';
+              // Move each block
+              foreach ($blocks as $block) {
+
+                // If the $target_region is empty the region markup does not print
+                // so we need to generate it manually. This is bad because it
+                // cannot account for region specific template suggestions and
+                // Adaptivethemes own region prefix and suffix wrappers.
+                if (empty($page[$target_region])) {
+                  $classes[] = 'region';
+                  $classes[] = 'region-' . $target_region;
+                  if ($target_region == 'sidebar_first' || $target_region == 'sidebar_second') {
+                    $classes[] = 'sidebar';
+                  }
+                  $classes = implode(' ', $classes);
+                  $page[$target_region]['#prefix'] = '<div class="' .  $classes . '"><div class="region-inner clearfix">';
+                  $page[$target_region]['#suffix'] = '</div></div>';
                 }
-                $classes = implode(' ', $classes);
-                $page[$target_region]['#prefix'] = '<div class="' .  $classes . '"><div class="region-inner clearfix">';
-                $page[$target_region]['#suffix'] = '</div></div>';
+
+                // Move the blocks to the target region
+                $page[$target_region][$block] = $page[$region][$block];
+
+                // Unset the original block
+                unset($page[$region][$block]);
               }
 
-              // Move the blocks to the target region
-              $page[$target_region][$block] = $page[$region][$block];
-
-              // Unset the original block
-              unset($page[$region][$block]);
+              // Unset the region, all blocks are now moved
+              unset($page[$region]);
             }
 
-            // Unset the region, all blocks are now moved
-            unset($page[$region]);
-          }
-
-          // Unset unwanted regions in mobile
-          if (at_get_setting('unset_' . $region) === 1) {
-            unset($page[$region]);
+            // Unset unwanted regions in mobile
+            if (at_get_setting('unset_' . $region) === 1) {
+              unset($page[$region]);
+            }
           }
         }
+      }
+    }
+  }
+
+  // Run the panels test
+  if (theme_get_setting('load_all_panels') === 1) {
+    if (drupal_is_front_page()) {
+      $page['content']['#markup'] = at_debug_panels();
+      if (theme_get_setting('load_all_panels_no_sidebars') === 1) {
+        unset($page['sidebar_first']);
+        unset($page['sidebar_second']);
       }
     }
   }
@@ -449,32 +459,15 @@ function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
 }
 
 /**
- * Adaptivetheme implimentation of hook_menu_alter()
- */
-function adaptivetheme_menu_alter(&$items) {
-  // Add a menu item to display all panels layouts on one page
-  $items['atcore-debug-panels']['title'] = t('Adaptivetheme Panels Test');
-  $items['atcore-debug-panels']['type'] = MENU_CALLBACK;
-  $items['atcore-debug-panels']['page callback'] = 'at_debug_panels';
-  $items['atcore-debug-panels']['weight'] = 100;
-  $items['atcore-debug-panels']['access arguments'] = array('administer themes');
-}
-
-/**
- * Callback function for at-core-debug-panels menu item.
+ * Output for the debug panels test.
  */
 function at_debug_panels() {
-  $file = drupal_get_path('theme', 'adaptivetheme') . '/css/debug-panels.css';
-  drupal_add_css($file, array(
-    'preprocess' => FALSE,
-    'group' => CSS_THEME,
-    'media' => 'screen',
-    'every_page' => FALSE,
-    'weight' => 2000,
-    )
-  );
   $output = <<<EOF
-<div class="all-panel-layouts debug-panels" style="font-size: 81.3%">
+<div class="all-panel-layouts debug-panels">
+
+    <h1>Panels/Gpanels Layout Test</h1>
+    <p>To disable this test uncheck the theme setting <em>Debuggers > Load all panels in the front page content region</em></p>
+
     <div class="at-panel panel-display one-column clearfix">
       <div class="region region-one-main">
         <div class="region-inner clearfix">

@@ -89,7 +89,7 @@ foreach ($panels_admin_css_files as $filepath) {
 
 // Set title and message
 $panels_title = t('Panels &amp; Gpanels');
-$panels_message = t('Adaptivetheme supports responsive Panels and Gpanel layouts. To use this capability you can use the <a href="!panels_link" target="_blank">Panels module</a>, <a href="!ds_link" target="_blank">Display Suite</a> (with Panels) or Adaptivethemes native <a href="!gpanels_link" target="_blank">Gpanels</a> layouts.</p><p><b>Usage:</b> select options for each device range and layout type.</p>!gpanels_message', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels', '!ds_link' => 'http://drupal.org/project/ds', '!gpanels_message' => $used_gpanels));
+$panels_message = t('Adaptivetheme supports responsive Panels and Gpanel layouts. To use this capability you can use the <a href="!panels_link" target="_blank">Panels module</a>, <a href="!ds_link" target="_blank">Display Suite</a> (with Panels) or Adaptivethemes native <a href="!gpanels_link" target="_blank">Gpanels</a> layouts. To views all layouts on one page and test your settings you can enable the panels test, see the Debuggers tab.</p><p><b>Usage:</b> select options for each device range and layout type.</p>!gpanels_message', array('!panels_link' => 'http://drupal.org/project/panels', '!gpanels_link' => 'http://adaptivethemes.com/documentation/using-gpanels', '!ds_link' => 'http://drupal.org/project/ds', '!gpanels_message' => $used_gpanels));
 
 // Gpanels and Panels top level wrapper
 $form['at-settings']['panels'] = array(
@@ -107,10 +107,6 @@ if(at_get_setting('disable_responsive_styles') === 1) {
     '#markup' => '<div class="messages warning">' . $panels_disable_message . '</div>',
   );
 }
-
-$form['at-settings']['panels']['panels_test'] = array(
-  '#markup' => t('<p><a href="!panels_layouts" title="Use this for testing Panels and Gpanels layout settings. Note: if you get a 404 clear the sites cache." target="_blank">View all the panels/gpanels layouts</a></p>', array('!panels_layouts' => base_path() . 'atcore-debug-panels')),
-);
 
 $form['at-settings']['panels']['panels-wrapper'] = array(
   '#type' => 'fieldset',

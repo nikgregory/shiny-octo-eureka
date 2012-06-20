@@ -47,12 +47,10 @@ function adaptivetheme_theme($existing, $type, $theme, $path) {
  */
 function adaptivetheme_menubar($vars) {
   $output = '';
-
   $output .= '<div id="' . $vars['menubar_id'] . '" class="' . $vars['classes'] . '"' . $vars['attributes'] . '>';
   $output .= '<nav ' . $vars['content_attributes'] . '>';
   $output .= $vars['menu'];
   $output .= '</nav></div>';
-
   return $output;
 }
 
@@ -101,13 +99,6 @@ function adaptivetheme_breadcrumb($vars) {
 
     if (!empty($breadcrumb)) {
 
-      if (at_get_setting('breadcrumb_label', $theme_name) === 1) {
-        $heading = '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
-      }
-      else {
-        $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-      }
-
       $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
 
       // Push the page title onto the end of the breadcrumb array
@@ -120,8 +111,14 @@ function adaptivetheme_breadcrumb($vars) {
       $last = key($breadcrumb);
 
       $output = '';
-      $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">';
-      $output .= $heading;
+      if (at_get_setting('breadcrumb_label', $theme_name) === 1) {
+        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper with-breadcrumb-label clearfix" role="navigation">';
+        $output .= '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
+      }
+      else {
+        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">';
+        $output .= '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+      }
       $output .= '<ol id="crumbs" class="clearfix">';
       foreach ($breadcrumb as $key => $val) {
         if ($key == $last && count($breadcrumb) != 1) {

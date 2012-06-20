@@ -42,8 +42,19 @@ $form['at-settings']['debug']['debug-panels'] = array(
   '#title' => t('<h3>Debug Panels and Gpanels Layouts</h3>'),
   '#description' => t('<h3>Debug Panels and Gpanels Layouts</h3>'),
 );
-$form['at-settings']['debug']['debug-panels']['options'] = array(
-   '#markup' => t('<p>Adaptivetheme generates a special page that shows all Panels and Gpanels layouts on one page. These will react to your theme settings as per normal&thinsp;&mdash;&thinsp;you can easily see how they change at different breakpoints (your media queries). Only users with "Administer Themes" permissions can view this page. </p><p><a href="!panels_layouts" target="_blank">View all panels layouts</a></p>', array('!panels_layouts' => base_path() . 'atcore-debug-panels')),
+$form['at-settings']['debug']['debug-panels']['load_all_panels'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Load all panels in the front page content region'),
+  '#default_value' => at_get_setting('load_all_panels'),
+  '#description' => t('This will only load the layouts that ship with AT Core, the test is hard coded.'),
+);
+$form['at-settings']['debug']['debug-panels']['load_all_panels_no_sidebars'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Disable sidebars for the front page'),
+  '#default_value' => at_get_setting('load_all_panels_no_sidebars'),
+  '#states' => array(
+    'visible' => array('input[name="load_all_panels"]' => array('checked' => TRUE)),
+  ),
 );
 
 // All media queries

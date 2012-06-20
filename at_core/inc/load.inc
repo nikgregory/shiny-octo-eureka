@@ -387,6 +387,17 @@ function load_debuggers($theme_name) {
     drupal_add_css($path_to_at_core . '/css/debug-regions.css');
   }
 
+  if (at_get_setting('load_all_panels', $theme_name) === 1) {
+    drupal_add_css($path_to_at_core . '/css/debug-panels.css', array(
+      'preprocess' => FALSE,
+      'group' => CSS_THEME,
+      'media' => 'screen',
+      'every_page' => FALSE,
+      'weight' => 2000,
+      )
+    );
+  }
+
   // Load window size bookmarklet
   if (at_get_setting('show_window_size', $theme_name) === 1) {
     drupal_add_js($path_to_at_core . '/scripts/window-size.js', array(
