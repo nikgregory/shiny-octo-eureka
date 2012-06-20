@@ -85,9 +85,9 @@ function adaptivetheme_breadcrumb($vars) {
 
   $breadcrumb = $vars['breadcrumb'];
 
-  if (at_get_setting('breadcrumb_display', $theme_name) === 1) {
+  if (at_get_setting('breadcrumb_display', $theme_name) == 1) {
 
-    if (at_get_setting('breadcrumb_home', $theme_name) === 0) {
+    if (at_get_setting('breadcrumb_home', $theme_name) == 0) {
       array_shift($breadcrumb);
     }
 
@@ -102,7 +102,7 @@ function adaptivetheme_breadcrumb($vars) {
       $separator = filter_xss_admin(at_get_setting('breadcrumb_separator', $theme_name));
 
       // Push the page title onto the end of the breadcrumb array
-      if (at_get_setting('breadcrumb_title', $theme_name) === 1) {
+      if (at_get_setting('breadcrumb_title', $theme_name) == 1) {
         $breadcrumb[] = '<span class="crumb-title">' . drupal_get_title() . '</span>';
       }
 
@@ -111,7 +111,7 @@ function adaptivetheme_breadcrumb($vars) {
       $last = key($breadcrumb);
 
       $output = '';
-      if (at_get_setting('breadcrumb_label', $theme_name) === 1) {
+      if (at_get_setting('breadcrumb_label', $theme_name) == 1) {
         $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper with-breadcrumb-label clearfix" role="navigation">';
         $output .= '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
       }
@@ -245,7 +245,7 @@ function adaptivetheme_item_list($vars) {
         $data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
       }
 
-      if (at_get_setting('extra_item_list_classes', $theme_name) === 1) {
+      if (at_get_setting('extra_item_list_classes', $theme_name) == 1) {
         if ($i & 1) {
           $attributes['class'][] = 'odd';
         }
