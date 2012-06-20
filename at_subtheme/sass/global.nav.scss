@@ -234,6 +234,10 @@ ul.menu {
     font-size: 1em;
     display: inline;
     padding-right: 10px;
+
+    &:after {
+      content: ":";
+    }
   }
 
   ol {
