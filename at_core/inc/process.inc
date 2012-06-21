@@ -11,7 +11,6 @@
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -63,7 +62,6 @@ function adaptivetheme_process_html_tag(&$vars) {
  * Process variables for page.tpl.php
  */
 function adaptivetheme_process_page(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -83,23 +81,26 @@ function adaptivetheme_process_page(&$vars) {
   // Generate the wrapper element for the main content
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 
-  // Add page template suggestions per node type, but make the suggestion weak
-  // so other suggestions can easily override it.
-  if (at_get_setting('page_content_type_suggestions', $theme_name) === 1) {
-    if (isset($vars['node'])) {
-      $suggestion = 'page__' . str_replace('_', '--', $vars['node']->type);
-      array_unshift($vars['theme_hook_suggestions'], $suggestion);
+  // Process enabled Extensions
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      // Add page template suggestions per node type, but make the suggestion weak
+      // so other suggestions can easily override it.
+      if (at_get_setting('page_content_type_suggestions', $theme_name) === 1) {
+        if (isset($vars['node'])) {
+          $suggestion = 'page__' . str_replace('_', '--', $vars['node']->type);
+          array_unshift($vars['theme_hook_suggestions'], $suggestion);
+        }
+      }
+      // Force full width wrapper template suggestion if enabled
+      if (at_get_setting('page_full_width_wrappers', $theme_name) === 1) {
+        array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
+      }
+      // Remove the frontpage title if set in theme settings
+      if (at_get_setting('frontpage_remove_title') === 1 && $vars['is_front'] === TRUE) {
+        $vars['title'] = '';
+      }
     }
-  }
-
-  // Force full width wrapper template suggestion if enabled
-  if (at_get_setting('page_full_width_wrappers', $theme_name) === 1) {
-    array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
-  }
-
-  // Remove the frontpage title if set in theme settings
-  if (at_get_setting('frontpage_remove_title') === 1 && $vars['is_front'] === TRUE) {
-    $vars['title'] = '';
   }
 }
 
@@ -107,7 +108,6 @@ function adaptivetheme_process_page(&$vars) {
  * Process variables for region.tpl.php
  */
 function adaptivetheme_process_region(&$vars) {
-
   // Initialize and populate the outer wrapper variables
   $vars['outer_prefix'] = '<div class="' . $vars['classes'] . '">';
   $vars['outer_suffix'] = '</div>';
@@ -136,7 +136,6 @@ function adaptivetheme_process_region(&$vars) {
  * Process variables for block.tpl.php
  */
 function adaptivetheme_process_block(&$vars) {
-
   // Now we know all the block $tag's, we can generate our wrapper, $tag is
   // set in preprocess. We cant introduce these in preprocess due to attributes
   // and classes not being flattened untill we hit process.
@@ -175,7 +174,6 @@ function adaptivetheme_process_block(&$vars) {
  * Process variables for node.tpl.php
  */
 function adaptivetheme_process_node(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -223,7 +221,6 @@ function adaptivetheme_process_node(&$vars) {
  * Process variables for comment.tpl.php
  */
 function adaptivetheme_process_comment(&$vars) {
-
   global $theme_key;
   $theme_name = $theme_key;
 
@@ -249,7 +246,6 @@ function adaptivetheme_process_comment(&$vars) {
  * Process variables for adaptivtheme_menubar()
  */
 function adaptivetheme_process_menubar(&$vars) {
-
   // The default theme implementation is a function, so template_process() does
   // not automatically run, so we need to flatten the classes and attributes
   // here. For best performance, only call drupal_attributes() when needed, and

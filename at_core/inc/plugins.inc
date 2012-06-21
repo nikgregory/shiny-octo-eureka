@@ -1,12 +1,8 @@
 <?php
-
 /**
  * @file
  * AT's liteweight plugin sub-system.
  */
-
-global $theme_key;
-$theme_name = $theme_key;
 
 /**
  * Find and return all plugins.
@@ -21,7 +17,6 @@ $theme_name = $theme_key;
  * @param $theme_name, usually the active theme.
  */
 function at_get_plugins($theme_name) {
-
   $plugins = drupal_static(__FUNCTION__, array());
   if (empty($plugins)) {
     if ($plugins_cache = cache_get('at_get_plugins_plugins')) {
@@ -111,7 +106,6 @@ function at_get_plugins_files($theme_name) {
  * "panels" or "page_layout".
  */
 function at_load_plugins($theme_name, $plugin_type) {
-
   $plugin_data_structures = array();
   $plugins_list = at_get_plugins_files($theme_name);
 
@@ -184,7 +178,8 @@ function at_load_plugins($theme_name, $plugin_type) {
  * it is cached in the cache table.
  */
 function responsive_page_layouts_data_structure() {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   $page_data_structure = drupal_static(__FUNCTION__, array());
   if (empty($page_data_structure)) {
@@ -214,7 +209,8 @@ function responsive_page_layouts_data_structure() {
  * it is cached in the cache table.
  */
 function responsive_panels_data_structure() {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   $panels_data_structure = drupal_static(__FUNCTION__, array());
   if (empty($panels_data_structure)) {

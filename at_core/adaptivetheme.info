@@ -13,9 +13,8 @@
 ;----------// Stylesheets
   stylesheets[screen][] = css/at.layout.css
 
-  ; Stylesheets a themer may want to unset_core later - all cores CSS files,
-  ; except for overlay, these are commented out to prevent the themer blowing
-  ; up their site completely...
+  ; Stylesheets you may want to unset - includes all cores CSS files, except
+  ; for overlay.
 
   unset_core[modules/aggregator/aggregator.css]     = 'aggregator.css'
   unset_core[modules/block/block.css]               = 'block.css'
@@ -37,8 +36,6 @@
   unset_core[modules/menu/menu.css]                 = 'menu.css'
   unset_core[modules/node/node.css]                 = 'node.css'
   unset_core[modules/openid/openid.css]             = 'openid.css'
-  ;unset_core[modules/overlay/overlay-child.css]    = 'overlay-child.css'
-  ;unset_core[modules/overlay/overlay-parent.css]   = 'overlay-parent.css'
   unset_core[modules/poll/poll.css]                 = 'poll.css'
   unset_core[modules/profile/profile.css]           = 'profile.css'
   unset_core[modules/search/search.css]             = 'search.css'
@@ -56,7 +53,11 @@
   unset_core[modules/tracker/tracker.css]           = 'tracker.css'
   unset_core[modules/update/update.css]             = 'update.css'
   unset_core[modules/user/user.css]                 = 'user.css'
-
+  
+  ; Unsetting these could really do some damage, here for completedness, don't
+  ; unset unless you really know what you are doing.
+  ;unset_core[modules/overlay/overlay-child.css]    = 'overlay-child.css'
+  ;unset_core[modules/overlay/overlay-parent.css]   = 'overlay-parent.css'
 
 ;----------// Regions
   regions[sidebar_first]     = Sidebar first
@@ -208,7 +209,7 @@
   settings[which_pie]          = 'PIE.htc'
   settings[disble_pie_for_ie9] = 0
   settings[load_selectivizr]   = 0
-  settings[load_scalefixjs]    = 1
+  settings[load_scalefixjs]    = 0
 
 ;----------// Debug
   settings[expose_regions]              = 0

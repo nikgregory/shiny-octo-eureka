@@ -50,18 +50,17 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Load fonts and/or Custom CSS
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
-
+    // Fonts CSS
     if (at_get_setting('enable_font_settings', $theme_name) === 1) {
       load_fonts($path, $theme_name);
     }
-
+    // Custom CSS
     if (at_get_setting('enable_custom_css', $theme_name) === 1) {
       load_custom_css($path, $theme_name);
     }
+    // Load Extension Settings CSS
+    load_extensions_css($theme_name);
   }
-
-  // Load Extension Settings CSS
-  load_extensions_css($theme_name);
 
   // Build an array of polyfilling scripts
   $vars['polyfills_array'] = '';
@@ -147,17 +146,8 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
   }
 
-  // Strip stupid contextual links region class, wtf?
+  // Strip stupid contextual-links-region class, wtf?
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'], array('contextual-links-region')));
-
-  // Generate page classes, in AT Core these are all Extensions
-  if (at_get_setting('enable_extensions', $theme_name) === 1) {
-    if ($page_classes = generate_page_classes($vars, $theme_name)) {
-      foreach ($page_classes as $class_name) {
-        $vars['classes_array'][] = $class_name;
-      }
-    }
-  }
 
   // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
@@ -199,15 +189,26 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['search_box'] = '<div id="search-box">' . drupal_render($search_box) . '</div>';
   }
 
-  // Remove the infernal feed icons
-  if (at_get_setting('feed_icons_hide', $theme_name) === 1) {
-    $vars['feed_icons'] = '';
-  }
-
-  // Remove block system main, just from the front page
-  if (drupal_is_front_page()) {
-    if (at_get_setting('unset_block_system_main_front', $theme_name) === 1) {
-      $vars['page']['content']['system_main'] = ''; // Brutal but effective
+  // Process enabled Extensions
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    // Generate page classes, in AT Core these are all Extensions
+    if ($page_classes = generate_page_classes($vars, $theme_name)) {
+      foreach ($page_classes as $class_name) {
+        $vars['classes_array'][] = $class_name;
+      }
+    }
+    // Process modify markup settings
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      // Remove the infernal feed icons
+      if (at_get_setting('feed_icons_hide', $theme_name) === 1) {
+        $vars['feed_icons'] = '';
+      }
+      // Remove block system main, just from the front page
+      if (drupal_is_front_page()) {
+        if (at_get_setting('unset_block_system_main_front', $theme_name) === 1) {
+          $vars['page']['content']['system_main'] = ''; // Brutal but effective
+        }
+      }
     }
   }
 
@@ -246,22 +247,24 @@ function adaptivetheme_preprocess_region(&$vars) {
   }
 
   // Float region block classes
-  if (at_get_setting('enable_float_region_blocks', $theme_name) === 1) {
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_float_region_blocks', $theme_name) === 1) {
 
-    // Make sure there is something set for the region, get the column count
-    if ($float_blocks_regions_class = at_get_setting('float_block_' . $region)) {
+      // Make sure there is something set for the region, get the column count
+      if ($float_blocks_regions_class = at_get_setting('float_block_' . $region)) {
 
-      // Do nothing if its <none>
-      if ($float_blocks_regions_class !== '<none>') {
+        // Do nothing if its <none>
+        if ($float_blocks_regions_class !== '<none>') {
 
-        // Set a class for the number of columns selected, default to nothing
-        $float_blocks_regions_class = isset($float_blocks_regions_class) ? check_plain($float_blocks_regions_class) : '';
-        $vars['classes_array'][] = 'float-blocks-' . $float_blocks_regions_class;
+          // Set a class for the number of columns selected, default to nothing
+          $float_blocks_regions_class = isset($float_blocks_regions_class) ? check_plain($float_blocks_regions_class) : '';
+          $vars['classes_array'][] = 'float-blocks-' . $float_blocks_regions_class;
 
-        // Add the float direction class, default to left if the setting fails
-        if ($float_block_direction_class = at_get_setting('float_block_direction_' . $region)) {
-          $float_block_direction_class = isset($float_block_direction_class) ? check_plain($float_block_direction_class) : 'left';
-          $vars['classes_array'][] = 'float-blocks-' . $float_block_direction_class;
+          // Add the float direction class, default to left if the setting fails
+          if ($float_block_direction_class = at_get_setting('float_block_direction_' . $region)) {
+            $float_block_direction_class = isset($float_block_direction_class) ? check_plain($float_block_direction_class) : 'left';
+            $vars['classes_array'][] = 'float-blocks-' . $float_block_direction_class;
+          }
         }
       }
     }
@@ -372,11 +375,15 @@ function adaptivetheme_preprocess_block(&$vars) {
   }
 
   // Add classes to theme the horizontal block option
-  if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
-    $vars['classes_array'][] = 'lb-h';
-  }
-  if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
-    $vars['classes_array'][] = 'lb-s';
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+        $vars['classes_array'][] = 'lb-h';
+      }
+      if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
+        $vars['classes_array'][] = 'lb-s';
+      }
+    }
   }
 
   // Give our block titles and content some additional class
@@ -474,11 +481,15 @@ function adaptivetheme_preprocess_field(&$vars) {
   if ($element['#field_type'] === 'image') {
     $vars['image_caption_teaser'] = FALSE;
     $vars['image_caption_full'] = FALSE;
-    if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
-      $vars['image_caption_teaser'] = TRUE;
-    }
-    if (at_get_setting('image_caption_full', $theme_name) === 1) {
-      $vars['image_caption_full'] = TRUE;
+    if (at_get_setting('enable_extensions', $theme_name) === 1) {
+      if (at_get_setting('enable_image_settings', $theme_name) === 1) {
+        if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
+          $vars['image_caption_teaser'] = TRUE;
+        }
+        if (at_get_setting('image_caption_full', $theme_name) === 1) {
+          $vars['image_caption_full'] = TRUE;
+        }
+      }
     }
   }
   // taxonomy_term_reference
@@ -530,21 +541,23 @@ function adaptivetheme_preprocess_node(&$vars) {
   }
 
   // Image alignment and caption classes
-  if (at_get_setting('enable_image_settings', $theme_name) === 1) {
-    if ($vars['view_mode'] !== 'teaser') {
-      if ($image_caption_full = at_get_setting('image_caption_full', $theme_name)) {
-        $vars['classes_array'][] = $image_caption_full;
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_image_settings', $theme_name) === 1) {
+      if ($vars['view_mode'] !== 'teaser') {
+        if ($image_caption_full = at_get_setting('image_caption_full', $theme_name)) {
+          $vars['classes_array'][] = $image_caption_full;
+        }
+        if ($image_alignment = at_get_setting('image_alignment', $theme_name)) {
+          $vars['classes_array'][] = $image_alignment;
+        }
       }
-      if ($image_alignment = at_get_setting('image_alignment', $theme_name)) {
-        $vars['classes_array'][] = $image_alignment;
-      }
-    }
-    if ($vars['view_mode'] == 'teaser') {
-      if ($image_caption_teaser = at_get_setting('image_caption_teaser', $theme_name)) {
-        $vars['classes_array'][] = $image_caption_teaser;
-      }
-      if ($image_alignment_teaser = at_get_setting('image_alignment_teaser', $theme_name)) {
-        $vars['classes_array'][] = $image_alignment_teaser;
+      if ($vars['view_mode'] == 'teaser') {
+        if ($image_caption_teaser = at_get_setting('image_caption_teaser', $theme_name)) {
+          $vars['classes_array'][] = $image_caption_teaser;
+        }
+        if ($image_alignment_teaser = at_get_setting('image_alignment_teaser', $theme_name)) {
+          $vars['classes_array'][] = $image_alignment_teaser;
+        }
       }
     }
   }
@@ -569,13 +582,13 @@ function adaptivetheme_preprocess_node(&$vars) {
   // AT Core builds additional time and date variables for use in templates
   //
   // datetime stamp formatted correctly to ISO8601
-  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s\Z'); // PHP 'c' format is not proper ISO8601!
+  $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:sO'); // PHP 'c' format is not proper ISO8601!
 
   // Publication date, formatted with time element
   $vars['publication_date'] = '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>';
 
   // Last update variables
-  $vars['datetime_updated'] = format_date($vars['node']->changed, 'custom', 'Y-m-d\TH:i:s\Z');
+  $vars['datetime_updated'] = format_date($vars['node']->changed, 'custom', 'Y-m-d\TH:i:sO');
   $vars['custom_date_and_time'] = date('jS F, Y - g:ia', $vars['node']->changed);
 
   // Last updated formatted in time element
@@ -645,8 +658,12 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['title_attributes_array']['class'][] = 'comment-title';
 
   // Title hidden?
-  if (at_get_setting('comments_hide_title', $theme_name) === 1) {
-    $vars['title_attributes_array']['class'][] = 'element-invisible';
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      if (at_get_setting('comments_hide_title', $theme_name) === 1) {
+        $vars['title_attributes_array']['class'][] = 'element-invisible';
+      }
+    }
   }
 
   // Classes for comment content
@@ -686,7 +703,6 @@ function adaptivetheme_preprocess_comment(&$vars) {
  * Preprocess variables for the search block form.
  */
 function adaptivetheme_preprocess_search_block_form(&$vars) {
-
   // Changes the search form to use the "search" input element attribute (HTML5)
   // We have to replace the string because FAPI don't know what type=search is, i.e.
   // no way we can do this in a form alter hook.
@@ -698,10 +714,8 @@ function adaptivetheme_preprocess_search_block_form(&$vars) {
  */
 function adaptivetheme_preprocess_aggregator_item(&$vars) {
   $item = $vars['item'];
-
   // We want the same highly accurate time stamp feature as nodes and comments
-  $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:s\Z');
-
+  $vars['datetime'] = format_date($item->timestamp, 'custom', 'Y-m-d\TH:i:sO');
   // Give our aggregator items some class
   $vars['classes_array'][] = 'feed-item clearfix';
   $vars['title_attributes_array']['class'][] = 'title feed-item-title';
@@ -720,12 +734,10 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
  */
 function adaptivetheme_preprocess_menubar(&$vars) {
   $type = $vars['type'];
-
   $vars['menubar_id'] = $type . '-menu-bar';
   $vars['classes_array'][] = 'nav clearfix';
   $vars['content_attributes_array']['role'][] = 'navigation';
   $vars['content_attributes_array']['class'][] = $type . '-menu-wrapper menu-wrapper clearfix';
-
   // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }
@@ -736,14 +748,17 @@ function adaptivetheme_preprocess_menubar(&$vars) {
 function adaptivetheme_preprocess_username(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
-
   // Add rel=author for SEO and supporting search engines
-  if (at_get_setting('rel_author', $theme_name) === 1) {
-    if (isset($vars['link_path'])) {
-      $vars['link_attributes']['rel'][] = 'author';
-    }
-    else {
-      $vars['attributes_array']['rel'][] = 'author';
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      if (at_get_setting('rel_author', $theme_name) === 1) {
+        if (isset($vars['link_path'])) {
+          $vars['link_attributes']['rel'][] = 'author';
+        }
+        else {
+          $vars['attributes_array']['rel'][] = 'author';
+        }
+      }
     }
   }
 }

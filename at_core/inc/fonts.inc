@@ -8,7 +8,6 @@
  * build stylesheets and load font styles.
  */
 function font_elements() {
-
   $elements_array = &drupal_static(__FUNCTION__, array());
   if (empty($elements_array)) {
     $elements_array = array(
@@ -198,7 +197,6 @@ function font_list($type, $element) {
  * @param $element
  */
 function websafe_fonts_list($element) {
-
   $fonts = &drupal_static(__FUNCTION__, array());
   if (empty($fonts)) {
     $fonts = array(
@@ -228,7 +226,6 @@ function websafe_fonts_list($element) {
  * @pararm $element
  */
 function font_your_face_fonts_list($element) {
-
   $fonts = &drupal_static(__FUNCTION__, array());
   if (empty($fonts)) {
     $font_your_face_enabled = font_your_face_fonts_enabled();
@@ -257,7 +254,6 @@ function font_your_face_fonts_list($element) {
  * available for use in the theme settings.
  */
 function font_your_face_fonts_enabled() {
-
   $fonts_enabled = FALSE;
   if (module_exists('fontyourface')) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
@@ -325,7 +321,6 @@ function google_font_styles() {
  * TODO: remove this function, first check everything is working in the new system.
  */
 function google_fonts_list($element) {
-
   $fonts = &drupal_static(__FUNCTION__, array());
   if (empty($fonts)) {
     $google_fonts = google_font_names();
@@ -347,7 +342,6 @@ function google_fonts_list($element) {
  * variants. Last update: 27/02/2012
  */
 function google_font_names() {
-
   $google_font_names_array = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_names_array)) {
     // Try to get the list from the cache table.
@@ -1026,7 +1020,6 @@ function line_heights($type) {
  * @param $element
  */
 function font_style_options($style, $element) {
-
   $options = &drupal_static(__FUNCTION__, array());
   switch ($style) {
     case ('case'):

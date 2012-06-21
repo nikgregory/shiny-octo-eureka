@@ -51,14 +51,13 @@ if ($values['enable_custom_media_queries'] === 1) {
 
 // Gutter width
 $gutters = "/* Gutters are not currently overridden in theme settings, but may be in theme CSS */";
-if(isset($values['enable_extensions']) && $values['enable_extensions'] === 1) {
-  if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
-    if (isset($values['global_gutter_width'])) {
-      $gutter = check_plain($values['global_gutter_width']) . 'px';
-      $gutters = "/* Gutters */" . "\n" . "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;} .page-panels #content {margin-left:-$gutter;margin-right:-$gutter;}";
-    }
+if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
+  if (isset($values['global_gutter_width']) && is_numeric($values['global_gutter_width'])) {
+    $gutter = check_plain($values['global_gutter_width']) . 'px';
+    $gutters = "/* Gutters */" . "\n" . "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;} .page-panels #content {margin-left:-$gutter;margin-right:-$gutter;}";
   }
 }
+
 
 // Smartphone Portrait
 if ($values['smartphone_portrait_media_query']) {

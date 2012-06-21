@@ -114,7 +114,7 @@ function adaptivetheme_five_5x20_panels_layouts() {
       'five-5x20-1x2x2-grid' => array(
         'css' => array(
           '50' => array('.five-5x20 > .panel-row > div.region' => 'width:50%'),
-          'fdw' => array('.five-5x20 > .panel-row,.five-5x20 > .panel-row > div.region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
+          'fdw' => array('.five-5x20 > div.panel-row,.five-5x20 > div.panel-row > div.region-five-fifth' => 'float:none;display:block;width:100%;clear:both'),
         ),
       ),
       'five-5x20-stack-2' => array(

@@ -7,10 +7,6 @@
  * If you need to add or modify theme functions do it in your sub-theme.
  */
 
-global $theme_key, $theme_name;
-$theme_name = $theme_key;
-$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
 /**
  * Implements hook_theme()
  *
@@ -270,7 +266,6 @@ function adaptivetheme_item_list($vars) {
 
 // Dont run this if the DHTML module is running, it borks its output!
 if (!function_exists('dhtml_menu_init')) {
-
   /**
    * Returns HTML for a wrapper for a menu sub-tree.
    *
@@ -451,7 +446,8 @@ function adaptivetheme_field__taxonomy_term_reference($vars) {
  * Output image fields as figure with figcaption for captioning.
  */
 function adaptivetheme_field__image($vars) {
-  global $theme_name;
+  global $theme_key;
+  $theme_name = $theme_key;
 
   // Check if image settings are enabled, otherwise captions might print unexpectedly
   $image_settings_enabled = at_get_setting('enable_image_settings', $theme_name) === 1 ? TRUE : FALSE;

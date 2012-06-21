@@ -13,7 +13,6 @@
  * @param $theme_name, the active theme.
  */
 function generate_html_classes(&$vars, $theme_name) {
-
   $classes_array = &drupal_static(__FUNCTION__, array());
   if (empty($classes_array)) {
 
@@ -92,7 +91,6 @@ function generate_html_classes(&$vars, $theme_name) {
  * @param $theme_name, the active theme.
  */
 function generate_page_classes(&$vars, $theme_name) {
-
   $classes_array = &drupal_static(__FUNCTION__, array());
   if (empty($classes_array)) {
 
@@ -319,7 +317,6 @@ function css_browser_selector($ua = NULL) {
  * @param $theme_name
  */
 function get_color_scheme_name($theme_name) {
-
   $scheme_name = drupal_static(__FUNCTION__, array());
   if (empty($scheme_name)) {
     if (module_exists('color')) {

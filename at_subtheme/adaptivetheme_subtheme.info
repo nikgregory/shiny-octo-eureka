@@ -245,7 +245,7 @@
   settings[which_pie]          = 'PIE.htc'
   settings[disble_pie_for_ie9] = 0
   settings[load_selectivizr]   = 0
-  settings[load_scalefixjs]    = 1
+  settings[load_scalefixjs]    = 0
 
 
   ; Debug

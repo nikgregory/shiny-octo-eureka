@@ -6,9 +6,6 @@
  * other data.
  */
 
-global $theme_key;
-$theme_name = $theme_key;
-
 /**
  * Retrieve a setting for the current theme or for a given theme.
  *
@@ -22,7 +19,6 @@ $theme_name = $theme_key;
  * @see http://api.drupal.org/api/drupal/includes!theme.inc/function/theme_get_setting/7
  */
 function at_get_setting($setting_name, $theme = NULL) {
-
   $cache = &drupal_static(__FUNCTION__, array());
 
   // If no key is given, use the current theme if we can determine it.
@@ -67,7 +63,6 @@ function at_get_setting($setting_name, $theme = NULL) {
  * @param $theme_name
  */
 function at_get_info($theme_name) {
-
   $info = drupal_static(__FUNCTION__, array());
   if (empty($info)) {
     $lt = list_themes();
@@ -91,7 +86,6 @@ function at_get_info($theme_name) {
  * @param $theme_name, usually the active theme.
  */
 function at_get_info_trail($theme_name) {
-
   $info_trail = drupal_static(__FUNCTION__, array());
   if (empty($info_trail)) {
     $lt = list_themes();
@@ -125,7 +119,6 @@ function at_get_info_trail($theme_name) {
  * @param $theme_name, usually the active theme.
  */
 function at_get_css_files($theme_name) {
-
   $styles = &drupal_static(__FUNCTION__, array());
   if (empty($styles)) {
     if ($cache = cache_get('at_get_css_files')) {
@@ -216,7 +209,6 @@ function at_get_css_files($theme_name) {
  * Wrapper for browscap_get_browser().
  */
 function at_get_browser() {
-
   $is_mobile = &drupal_static(__FUNCTION__, array());
   if (empty($is_mobile)) {
     $is_mobile = FALSE;

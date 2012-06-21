@@ -5,15 +5,6 @@
  * files, or that provide assistance to those loaders.
  */
 
-global $theme_key;
-$theme_name = $theme_key;
-$path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
-// Include the font functions if the Fonts or Headings extensions are active.
-if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_heading_settings') === 1) {
-  include_once($path_to_at_core . '/inc/fonts.inc');
-}
-
 /**
  * Set messages if files are not found
  *
@@ -24,7 +15,6 @@ if (at_get_setting('enable_font_settings') === 1 || at_get_setting('enable_headi
  * @param $theme_name, the active theme.
  */
 function load_failure($filepath, $theme_name) {
-
   $message = t('<p>One or more CSS files were not found or does not exist: <em>!files_list</em>. Did you delete the public files directory or change a file name? You probably need to save the theme settings to generate the files. Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>', array('!files_list' => $filepath, '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system'));
 
   if (!empty($filepath)) {
@@ -87,10 +77,10 @@ function load_layout_css($path, $theme_name) {
 
     // Responsiveness is not disabled, load the responsive layout
     $filepath = $path . '/' . $theme_name . '.responsive.layout.css';
-    $media_query = 'only screen'; // keyword "only" should hide this from older user agents
+    $media_query = 'only screen'; // keyword "only" hide this from unsupporting user agents
     load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0);
 
-    // The lt-ie9.layout.css stylesheet loads under one very specific set of conditions:
+    // The lt-ie9.layout.css stylesheet loads under specific conditions:
     // 1. Responsive capabilities are ON
     // 2. Mobile first is ON
     // 3. Respond.js is OFF
@@ -106,10 +96,10 @@ function load_layout_css($path, $theme_name) {
     }
   }
 
-  // The lt-ie8.layout.css file loads under the exact opposite conditions to the lt-ie9 file.
-  // In other words, when lt-ie9 is loading, this is not, when it isn't, this loads. This
-  // file only ever holds panels layout overrides for legacy IE browsers and is disabled by
-  // default in theme settings, screw you IE7.
+  // The lt-ie8.layout.css file loads under the exact opposite conditions to the
+  // lt-ie9 file. In other words, when lt-ie9 is loading, this is not, when it
+  // isn't, this loads. This file only ever holds panels layout overrides for
+  // legacy IE browsers and is disabled by default in theme settings.
   if ($load_ie8_css == TRUE) {
     if (at_get_setting('load_ltie8css', $theme_name) === 1) {
       $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
@@ -123,7 +113,8 @@ function load_layout_css($path, $theme_name) {
   if (array_key_exists('ie_stylesheets', $info)) {
     $ie_style = '';
     foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
-      // Set default value for media in case the themer forgets, all is an "assumed" value an not printed in the output.
+      // Set default value for media in case the themer forgets, all is an
+      // "assumed" value and not printed in the output.
       if (is_numeric($media)) {
         $media = 'all';
       }
@@ -153,7 +144,7 @@ function load_layout_css($path, $theme_name) {
  */
 function load_responsive_css($path, $theme_name) {
   
-  // Set the mode
+  // Set the mode, when CSS is aggregated by Drupal Production mode is TRUE
   $mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
   
   // Development Mode
@@ -169,9 +160,6 @@ function load_responsive_css($path, $theme_name) {
   //
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
-
-  // Old, could be deprecated, using a different method for a test
-  //if (at_get_setting('production_mode', $theme_name) === 0) {
   if ($mode == FALSE) {
   
     // Build a keyed array of CSS file-names as key, and media query as value.
@@ -220,9 +208,7 @@ function load_responsive_css($path, $theme_name) {
  * @param $theme_name
  */
 function load_extensions_css($theme_name) {
-
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
-
+  global $path_to_at_core;
   $settings_css = array();
   // Heading settings
   if (at_get_setting('enable_heading_settings', $theme_name) === 1) {
@@ -280,7 +266,6 @@ function load_fonts($path, $theme_name) {
       )
     );
   }
-
   // Load the fonts CSS from public files
   $filepath = $path . '/' . $theme_name . '.fonts.css';
   if (file_exists($filepath)) {
@@ -326,9 +311,7 @@ function load_custom_css($path, $theme_name) {
  * @param $theme_name
  */
 function load_polyfills($theme_name) {
-
-  // Path to files
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  global $path_to_at_core;
 
   // Get the info file data
   $info = at_get_info($theme_name);
@@ -378,9 +361,7 @@ function load_polyfills($theme_name) {
  * @param $theme_name
  */
 function load_debuggers($theme_name) {
-
-  // Path to files
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  global $path_to_at_core;
 
   // Do some debugging/development stuff
   if (at_get_setting('expose_regions', $theme_name) === 1) {
@@ -602,7 +583,6 @@ function polly_wants_a_cracker($polly, $theme_name) {
  * @param $theme_name
  */
 function load_google_fonts($theme_name) {
-
   $google_font_string = drupal_static(__FUNCTION__, array());
   if (empty($google_font_string)) {
 

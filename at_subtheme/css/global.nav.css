@@ -246,6 +246,11 @@ ul.menu li.active-trail a {
 }
 
 
+/* Book navigation menu */
+.book-navigation .menu {
+  margin-left: 0;
+}
+
 
 /*
  * Adaptivetheme outputs breadcrumbs as an ordered list. This provides better
