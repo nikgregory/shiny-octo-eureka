@@ -93,7 +93,7 @@ function at_core_settings_validate($form, &$form_state) {
     }
     // Gutter value
     if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
-      if (isset($values['global_gutter_width']) && !is_numeric($values['global_gutter_width'])) {
+      if (!empty($values['global_gutter_width']) && !is_numeric($values['global_gutter_width'])) {
         $invalid_gutter_value = check_plain($values['global_gutter_width']);
         form_set_error('global_gutter_width', t('The gutter width is not valid: <b>!invalid_gutter_value</b> is not a usable value', array('!invalid_gutter_value' => $invalid_gutter_value)));
       }
