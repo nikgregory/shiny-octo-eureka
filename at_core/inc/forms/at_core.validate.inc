@@ -107,6 +107,6 @@ function at_core_settings_validate($form, &$form_state) {
       // If the directory does not exists and cannot be created.
       form_set_error('custom_files_path', t('The directory %directory does not exist and could not be created.', array('%directory' => $directory)));
       watchdog('file system', 'The directory %directory does not exist and could not be created.', array('%directory' => $directory), WATCHDOG_ERROR);
-    } 
+    }
   }
 }

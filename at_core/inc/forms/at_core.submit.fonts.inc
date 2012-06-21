@@ -134,9 +134,11 @@ foreach ($font_elements as $key => $value) {
   }
 }
 
-// Prepare data ready for printing to file
-$font_styles = implode("\n", $font_styles_data);
-$font_styles = preg_replace('/^[ \t]*[\r\n]+/m', '', $font_styles);
-$file_name = $theme_name . '.fonts.css';
-$filepath = "$path/$file_name";
-file_unmanaged_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);
+// Output data to file
+if (!empty($font_styles_data)) {
+  $font_styles = implode("\n", $font_styles_data);
+  $font_styles = preg_replace('/^[ \t]*[\r\n]+/m', '', $font_styles);
+  $file_name = $theme_name . '.fonts.css';
+  $filepath = "$path/$file_name";
+  file_unmanaged_save_data($font_styles, $filepath, FILE_EXISTS_REPLACE);
+}

@@ -496,10 +496,10 @@ function adaptivetheme_preprocess_field(&$vars) {
   if ($element['#field_type'] === 'taxonomy_term_reference') {
     foreach($element as $key => $value) {
       if(is_numeric($key)) {
-        $element[$key]['#options']['attributes']['title'][] = 'fuku'; 
+        $element[$key]['#options']['attributes']['title'][] = 'fuku';
       }
     }
-    
+
     $vars['term_description'] = '';
   }
 }

@@ -156,6 +156,8 @@ if ($font_your_face_enabled == TRUE) {
     '#states' => array('visible' => array('select[name="base_font_type"]' => array('value' => 'fyf'))),
   );
 }
+
+// Size
 $form['at']['font']['base-font']['base_font_size'] = array(
   '#type' => 'select',
   '#title' => t('Size'),
@@ -163,7 +165,7 @@ $form['at']['font']['base-font']['base_font_size'] = array(
   '#description' => t('The default font size is set on the HTML element. All elements, margins, padding and widths using a relative unit such as em or % will scale relative to this value. Use "Not set" if you prefer to set this in your CSS. You can override this value in your responsive stylesheets also, to use a larger or smaller default size for different device types.'),
   '#default_value' => at_get_setting('base_font_size'),
   '#attributes' => array('class' => array('font-size-wrapper')),
-  '#states' => array('invisible' => array('select[name="base_font_type"]' => array('value' => '<none>'))),
+  //'#states' => array('invisible' => array('select[name="base_font_type"]' => array('value' => '<none>'))),
 );
 
 // Titles
@@ -283,13 +285,15 @@ foreach ($form_elements as $key => $value) {
         '#states' => array('visible' => array('select[name=' . $setting_type . ']' => array('value' => 'fyf'))),
       );
     }
+
+    // Size
     $form['at']['font']['titles'][$setting_container][$setting_size] = array(
       '#type' => 'select',
       '#title' => t('Size'),
       '#options' => $font_sizes_em,
       '#default_value' => at_get_setting($setting_size),
       '#attributes' => array('class' => array('font-size-wrapper')),
-      '#states' => array('invisible' => array('select[name=' . $setting_type . ']' => array('value' => '<none>'))),
+      //'#states' => array('invisible' => array('select[name=' . $setting_type . ']' => array('value' => '<none>'))),
     );
   }
 }
@@ -582,13 +586,15 @@ foreach ($form_elements as $key => $value) {
         '#states' => array('visible' => array('select[name=' . $setting_type . ']' => array('value' => 'fyf'))),
       );
     }
+
+    // Size
     $form['at']['font']['menus'][$setting_container][$setting_size] = array(
       '#type' => 'select',
       '#title' => t('Size'),
       '#options' => $font_sizes_em,
       '#default_value' => at_get_setting($setting_size),
       '#attributes' => array('class' => array('font-size-wrapper')),
-      '#states' => array('invisible' => array('select[name=' . $setting_type . ']' => array('value' => '<none>'))),
+      //'#states' => array('invisible' => array('select[name=' . $setting_type . ']' => array('value' => '<none>'))),
     );
   }
 }

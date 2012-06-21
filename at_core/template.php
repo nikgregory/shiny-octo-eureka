@@ -5,8 +5,6 @@
  *
  * IMPORTANT WARNING: DO NOT MODIFY THIS FILE OR ANY OF THE INCLUDED FILES.
  */
-
-// Set globals for often used stuff.
 global $theme_key, $path_to_at_core;
 $theme_key = $GLOBALS['theme_key'];
 $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');

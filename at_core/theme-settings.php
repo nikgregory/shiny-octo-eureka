@@ -30,7 +30,7 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // Get the active theme name, we need it at some stage.
   $theme_name = $form_state['build_info']['args'][0];
-  
+
   // Get the active themes info array
   $info_array = at_get_info($theme_name);
 
@@ -39,14 +39,14 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     $legacy_info = at_get_info($theme_name);
     // Nag users of legacy sub-themes...
     if (!isset($legacy_info['release']) || $legacy_info['release'] === '7.x-2.x') {
-      $version_message = t('<p>The version of your theme is not designed to run on <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. It will probably run, but your experience will not be optimal. You have three courses of action to choose from:</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme'));
+      $version_message = t('<p>The version of your theme (@theme) is not designed to run on <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. It will probably run, but your experience will not be optimal. You have three courses of action to choose from:</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme', '@theme' => $theme_name));
       $version_message .= t('<ol><li>Downgrade Adaptivetheme to 7.x-2.x</li><li>Upgrade your theme to the 7.x-3.x branch&thinsp;&mdash;&thinsp;you will need to check if an upgrade exists.</li><li>Add the line <code>"release = 7.x-3.x"</code> (less quotes) to your sub-themes info file and clear the cache to make this message go away.</li></ol>');
       $version_message .= t('<p>You can turn off this message in the Debug settings, look for "Sub-theme compatibility test".</p>');
       drupal_set_message(filter_xss_admin($version_message), 'warning');
     }
     // Celebrate the nouveau intelligentsia...
     if (isset($legacy_info['release']) && $legacy_info['release'] === '7.x-3.x') {
-      $version_message = t('<p>This theme is compatible with <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. You are good to go! You can turn off this message in the Debug settings, look for "Sub-theme compatibility test".</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme'));
+      $version_message = t('<p>This theme (@theme) is compatible with <a href="!link_project" target="_blank">Adaptivetheme 7.x.3.x</a>. You are good to go! You can turn off this message in the Debug settings, look for "Sub-theme compatibility test".</p>', array('!link_project' => 'http://drupal.org/project/adaptivetheme', '@theme' => $theme_name));
       drupal_set_message(filter_xss_admin($version_message), 'status');
     }
   }
