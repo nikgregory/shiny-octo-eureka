@@ -241,10 +241,6 @@
   settings[load_html5js]       = 1
   settings[load_respondjs]     = 0
   settings[load_ltie8css]      = 0
-  settings[load_pie]           = 0
-  settings[which_pie]          = 'PIE.htc'
-  settings[disble_pie_for_ie9] = 0
-  settings[load_selectivizr]   = 0
   settings[load_scalefixjs]    = 0
 
 

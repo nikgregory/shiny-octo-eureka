@@ -547,6 +547,20 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   display: block;
 }
 
+/* PIE */
+#edit-pie-crust fieldset[id*=edit-pie-path] .fieldset-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+#edit-pie-crust .form-type-select {
+  margin-bottom: 0;
+}
+#edit-pie-crust fieldset[id*=edit-pie-path] p {
+  margin-top: 0;
+  padding: 0;
+}
+
 /* Wrangel Seven to look half decent */
 .admin-theme-seven .font-element-wrapper .fieldset-legend,
 .admin-theme-seven .panel-option-lists .fieldset-legend {

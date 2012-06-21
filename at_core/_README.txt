@@ -150,7 +150,7 @@ CSS classes. You must enable "Extensions" first to do this.
 Any problems please post an issue in the Adaptivethemes issue queue on Drupal.org:
 http://drupal.org/project/issues/adaptivetheme
 
-Maintainer:
+aintainer:
 * Jeff Burnz http://drupal.org/user/61393
 
 

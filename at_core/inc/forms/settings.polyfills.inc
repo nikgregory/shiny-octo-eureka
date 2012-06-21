@@ -45,53 +45,6 @@ $form['at-settings']['polyfills']['fills']['load_respondjs'] = array(
   ),
 );
 
-// Boxsizing.htc
-$form['at-settings']['polyfills']['fills']['load_boxsizinghtc'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Box Sizing support for IE6-7'),
-  '#description' => t('<a href="!link" target="_blank">Box Sizing HTC</a> enables CSS3 <code>box-sizing</code> for IE6-IE8.', array('!link' => '//github.com/Schepp/box-sizing-polyfill')),
-  '#default_value' => at_get_setting('load_boxsizinghtc'),
-);
-
-// PIE
-$form['at-settings']['polyfills']['fills']['pie']['load_pie'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('PIE'),
-  '#description' => t('<a href="!link" target="_blank">PIE</a> enabes CSS3 backwards compatibility for IE. Turn PIE off if you are not using it, its 40kb.', array('!link' => 'http://css3pie.com')),
-  '#default_value' => at_get_setting('load_pie'),
-);
-$form['at-settings']['polyfills']['fills']['pie']['pie_crust'] = array(
-  '#type' => 'fieldset',
-  '#title' => t('Additional options for PIE'),
-  '#states' => array(
-    'visible' => array('input[name="load_pie"]' => array('checked' => TRUE)),
-  ),
-);
-$form['at-settings']['polyfills']['fills']['pie']['pie_crust']['which_pie'] = array(
-  '#type' => 'select',
-  '#title' => t('Select which version of PIE to load'),
-  '#default_value' => at_get_setting('which_pie'),
-  '#options' => array(
-    'PIE.htc' => 'PIE.htc - default',
-    'PIE.php' => 'PIE.php - use if .htc does not work on your server',
-    'PIE.js' => 'PIE.js - js implimentation, see the PIE docs',
-  ),
-);
-$form['at-settings']['polyfills']['fills']['pie']['pie_crust']['disble_pie_for_ie9'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Disable PIE for IE9'),
-  '#description' => t('IE9 supports some CSS3, optionally disable PIE support in IE9.'),
-  '#default_value' => at_get_setting('disble_pie_for_ie9'),
-);
-
-// Selectivizr
-$form['at-settings']['polyfills']['fills']['load_selectivizr'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Selectivizr'),
-  '#description' => t('<a href="!link" target="_blank">Selectivizr</a> is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8.', array('!link' => 'http://selectivizr.com')),
-  '#default_value' => at_get_setting('load_selectivizr'),
-);
-
 // Scalefix
 $form['at-settings']['polyfills']['fills']['load_scalefixjs'] = array(
   '#type' => 'checkbox',

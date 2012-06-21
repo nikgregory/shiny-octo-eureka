@@ -23,7 +23,7 @@ first load a set of global styles, the progressively add styles for larger
 devices using media queries.
 
 Its important to note that you do not have to follow a mobile first approach.
-Many designers and themers simply load the majority of their themes design
+any designers and themers simply load the majority of their themes design
 in the global styles and then override them in media queries.
 
 You can do both in Adaptivetheme - it's merely a matter of where you place
@@ -73,7 +73,7 @@ Responsive Styles
 Adaptivetheme 7.x-3.x has two "modes" - Development mode and Production mode.
 Depending on what mode you are in the stylesheets will load differently.
 
-Mode changes automatically depending on CSS aggregation settings. When CSS
+ode changes automatically depending on CSS aggregation settings. When CSS
 aggregation is ON, the its in Production mode.
 
 If you don't know what CSS aggregation is, looke here:
