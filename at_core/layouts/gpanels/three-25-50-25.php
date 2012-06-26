@@ -33,7 +33,7 @@ regions[three_25_50_25_bottom] = AT Three column 25/50/25 - bottom
   $page['three_25_50_25_third'] ||
   $page['three_25_50_25_bottom']
   ): ?>
-  <div class="at-panel gpanel panel-display three-50-25-25 clearfix">
+  <div class="at-panel gpanel panel-display three-25-50-25 clearfix">
     <?php print render($page['three_25_50_25_top']); ?>
     <?php print render($page['three_25_50_25_first']); ?>
     <?php print render($page['three_25_50_25_second']); ?>

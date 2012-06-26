@@ -34,8 +34,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['doctype'] = '<!DOCTYPE html>' . "\n";
   $vars['rdf_profile'] = '';
 
-  // Clean up the lang attributes.
-  $vars['html_attributes'] = 'lang="' . $language->language . '" dir="' . $language->dir . '"';
+  // Use a proper attributes array for the html attributes
+  $vars['html_attributes_array']['lang'][] = $language->language;
+  $vars['html_attributes_array']['dir'][] = $language->dir;
 
   // Get the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
@@ -379,6 +380,7 @@ function adaptivetheme_preprocess_block(&$vars) {
     if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
       if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
         $vars['classes_array'][] = 'lb-h';
+        $vars['title_attributes_array']['class'][] = 'element-invisible';
       }
       if (at_get_setting('slider_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
         $vars['classes_array'][] = 'lb-s';

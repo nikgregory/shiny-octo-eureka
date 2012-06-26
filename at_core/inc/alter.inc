@@ -343,6 +343,7 @@ function adaptivetheme_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * hook_form_FORM_ID_alter()
+ * Modify the Advanced Search Form
  */
 function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   // The problem with Drupals standard Advanced search form is that each
@@ -431,7 +432,43 @@ function adaptivetheme_form_search_form_alter(&$form, $form_state) {
 }
 
 /**
+ * hook_form_FORM_ID_alter()
+ * Modify the User Login Block Form
+ */
+function adaptivetheme_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+  global $theme_key;
+  $theme_name = $theme_key;
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      if (at_get_setting('login_block_remove_links', $theme_name) === 1) {
+        // Remove the links
+        if (isset($form['links'])) {
+          unset($form['links']);
+        }
+      }
+      if (at_get_setting('login_block_remove_openid', $theme_name) === 1) {
+        if (module_exists('openid')) {
+          // Remove OpenID elements
+          unset($form['openid_links']);
+          unset($form['openid_identifier']);
+          unset($form['openid.return_to']);
+        }
+      }
+      if (at_get_setting('horizontal_login_block', $theme_name) === 1) {
+        // Move the links to the end of the form, so they are after the submit,
+        // OpenID really messes up the weight and I can't be bothered fighting
+        // Drupal to deal with it.
+        if (isset($form['links'])) {
+          $form['links']['#weight'] = 100;
+        }
+      }
+    }
+  }
+}
+
+/**
  * hook_form_BASE_FORM_ID_alter()
+ * Modify field classes on node forms.
  */
 function adaptivetheme_form_node_form_alter(&$form, &$form_state, $form_id) {
   // Remove if #1245218 is backported to D7 core.

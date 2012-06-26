@@ -11,11 +11,8 @@
  * Process variables for html.tpl.php
  */
 function adaptivetheme_process_html(&$vars) {
-  global $theme_key;
-  $theme_name = $theme_key;
-
-  // Set path to core files
-  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  // Flatten html attributes array
+  $vars['html_attributes'] = empty($vars['html_attributes_array']) ? '' : drupal_attributes($vars['html_attributes_array']);
 
   if (!empty($vars['polyfills_array'])) {
     $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
@@ -43,14 +40,10 @@ function adaptivetheme_process_html(&$vars) {
  * Process variables for the html tag
  */
 function adaptivetheme_process_html_tag(&$vars) {
-
   $tag = &$vars['element'];
-
   if ($tag['#tag'] === 'style' || $tag['#tag'] === 'script') {
-
     // Remove redundant type attribute and CDATA comments.
     unset($tag['#attributes']['type'], $tag['#value_prefix'], $tag['#value_suffix']);
-
     // Remove media="all" but leave others unaffected.
     if (isset($tag['#attributes']['media']) && $tag['#attributes']['media'] === 'all') {
       unset($tag['#attributes']['media']);
@@ -152,7 +145,7 @@ function adaptivetheme_process_block(&$vars) {
     $vars['content_processed'] = $vars['content']; // remove the default wrapper
   }
 
-  // Wait, some blocks look like shit with wrappers, blow them away...
+  // Some blocks look bad with wrappers so we strip them
   if ($vars['block_html_id'] === 'block-system-main') {
     $vars['outer_prefix'] = '';
     $vars['outer_suffix'] = '';

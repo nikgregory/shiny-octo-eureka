@@ -273,8 +273,10 @@
 
 
   ; Login block options
-  settings[horizontal_login_block]        = 0
   settings[horizontal_login_block_enable] = 'on'
+  settings[horizontal_login_block]    = 0
+  settings[login_block_remove_links]  = 0
+  settings[login_block_remove_openid] = 0
 
 
   ; Design

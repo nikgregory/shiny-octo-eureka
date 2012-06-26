@@ -53,7 +53,7 @@
   unset_core[modules/tracker/tracker.css]           = 'tracker.css'
   unset_core[modules/update/update.css]             = 'update.css'
   unset_core[modules/user/user.css]                 = 'user.css'
-  
+
   ; Unsetting these could really do some damage, here for completedness, don't
   ; unset unless you really know what you are doing.
   ;unset_core[modules/overlay/overlay-child.css]    = 'overlay-child.css'
@@ -289,8 +289,10 @@
   settings[breadcrumb_separator] = ' &#187; '
 
 ;----------// Login block options
-  settings[horizontal_login_block]        = 0
   settings[horizontal_login_block_enable] = 'on'
+  settings[horizontal_login_block]    = 0
+  settings[login_block_remove_links]  = 0
+  settings[login_block_remove_openid] = 0
 
 ;----------// Design
   settings[global_gutter_width]           = ''

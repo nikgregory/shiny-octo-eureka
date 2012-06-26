@@ -113,16 +113,26 @@ if (at_get_setting('horizontal_login_block_enable') === 'on') {
     '#title' => t('Login Block'),
     '#description' => t('<h3>Login Block Options</h3>'),
   );
-  $form['at']['modify-output']['login-block']['hlb'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Login Block'),
-  );
-  // Horizonal login block
-  $form['at']['modify-output']['login-block']['hlb']['horizontal_login_block'] = array(
+  // Login block links
+  $form['at']['modify-output']['login-block']['login_block_remove_links'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Horizontal Login Block'),
+    '#title' => t('Remove links'),
+    '#default_value' => at_get_setting('login_block_remove_links'),
+    '#description' => t('Remove the <em>Create new account</em> and <em>Request new password</em> links from the login block.'),
+  );
+  // Login block OpenID
+  $form['at']['modify-output']['login-block']['login_block_remove_openid'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Remove OpenID elements'),
+    '#default_value' => at_get_setting('login_block_remove_openid'),
+    '#description' => t('Remove the OpenID links and form elements from the login block.'),
+  );
+  // Horizontal login block
+  $form['at']['modify-output']['login-block']['horizontal_login_block'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Horizontal login block'),
     '#default_value' => at_get_setting('horizontal_login_block'),
-    '#description' => t('Checking this setting will enable a horizontal style login block (all elements on one line). Note that if you are using OpenID this does not work well and you will need a more sophisticated approach than can be provided here.'),
+    '#description' => t('Enable a horizontal style login block (all elements on one line). This does not work so well with OpenID and you should probably check the setting to remove OpendID elements.'),
   );
 }
 
