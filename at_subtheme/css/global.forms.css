@@ -6,21 +6,29 @@
 
 /* Wrapper for a form element (or group of form elements) and its label */
 .form-item  {
-  margin: 18px 0;
+  margin: 0 0 10px;
+  padding: 9px 0;
+}
+
+
+/* Handle nested form items like checkboxes and radios */
+.form-item .form-item {
+  border: 0;
+  margin: 0;
+  padding: 3px 0;
 }
 
 
 /* The label for a form element */
 .form-item label {
   display: block;
-  font-weight: bold;
 }
 
 
 /* The label for a radio button or checkbox */
 .form-item label.option {
   display: inline;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 
@@ -48,11 +56,6 @@
 .form-checkboxes .form-item,
 .form-radios .form-item  {
   margin: 0;
-}
-
-
-/* The submit button */
-.form-submit {
 }
 
 
@@ -93,9 +96,55 @@ html.js fieldset.collapsed {
 }
 
 
-/* Inputs */
-input {
-  margin: 0;
+/* Shared reset */
+select,
+textarea,
+input[type="radio"],
+input[type="checkbox"],
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="password"] {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 3px;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+
+
+/* Nice focus styles for inputs */
+select:focus,
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="password"]:focus {
+  border-color: #52a8ec;
+  border-color: rgba(82, 168, 236, .8);
+  outline: 0;
 }
 
 
@@ -106,6 +155,7 @@ input::-moz-focus-inner {
 }
 
 
+/* Better cursor defaults */
 button,
 input[type="button"],
 input[type="reset"],
@@ -115,16 +165,41 @@ input[type="submit"] {
 }
 
 
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-
 button[disabled],
 input[disabled] {
   cursor: default;
+}
+
+
+/* Position radios and checkboxes better */
+input[type="radio"],
+input[type="checkbox"] {
+  line-height: normal;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+
+/* Reset width of input buttons, radios, checkboxes */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+}
+
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  vertical-align: baseline;
+  *vertical-align: middle;
 }
 
 
@@ -135,14 +210,34 @@ input.form-text {
 
 
 /* Reset form-text, textarea and select */
-input.form-text,
+input[type="text"],
 textarea,
 select {
-  border: 1px solid #ccc;
   height: auto;
-  padding: 1px 2px;
   font-family: inherit; /* inherit the default site font and not the browsers monospace font */
   font-size: 1em;
+}
+
+
+/* Disabled and read-only inputs */
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  cursor: not-allowed;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+
+/* Explicitly reset the colors here */
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+input[type="radio"][readonly],
+input[type="checkbox"][readonly] {
+  background-color: transparent;
 }
 
 
@@ -150,6 +245,8 @@ select {
 html.js input.form-autocomplete {
   background-position: 100% 5px;
 }
+
+
 html.js input.throbbing {
   background-position: 100% -15px;
 }
@@ -179,6 +276,13 @@ textarea {
 }
 
 
+/* Equal to normal form element margin */
+div.resizable-textarea {
+  margin-bottom: 6px;
+}
+
+
+/* Strip any margin top */
 div.resizable-textarea textarea {
   margin-top: 0;
 }
@@ -192,7 +296,7 @@ div.resizable-textarea textarea {
 
 /* Tips for Drupal's input formats */
 .tips  {
-  font-size: .857em;
+  font-size: .85em;
   margin: 0 0 0 15px;
   padding: 0;
 }
@@ -215,7 +319,7 @@ fieldset .filter-help {
 
 
 .filter-guidelines {
-  font-size: .923em;
+  font-size: .9em;
   margin: 0;
   padding: 5px 18px 10px;
 }

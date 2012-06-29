@@ -76,22 +76,28 @@ body {}
 
 
 // Site name (h1)
-#site-name a {
+#site-name {
+  margin: 0;
 
-  &:link,
-  &:visited {
-    text-decoration: none;
-  }
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
+  a {
+  
+    &:link,
+    &:visited {
+      text-decoration: none;
+    }
+  
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 }
 
 
 // Site slogan (h2)
-#site-slogan {}
+#site-slogan {
+  margin: 0;
+}
 
 
 // Main content header wraps the page title, tabs and actions links (style nav elements in global.nav.scss)
@@ -99,7 +105,9 @@ body {}
 
 
 // The main page title (h1)
-#page-title {}
+#page-title {
+  margin: 0;
+}
 
 
 // Feed icon
@@ -373,6 +381,39 @@ tr.error {
   .comment-unpublished > * {
     position: relative;
 
+  }
+}
+
+
+//
+// Maintenance pages
+//
+.maintenance-page {
+  .container {
+    padding: 40px 0;
+  }
+
+  #site-name,
+  #page-title {
+    margin: 0;
+  }
+}
+
+
+.db-offline {
+  .container {
+    margin: 0 auto;
+    padding: 40px 0;
+    width: 100%;
+    max-width: 960px;
+  }
+
+  div.messages {
+    margin: 20px 0 0;
+  }
+
+  #content {
+    padding: 20px 0;
   }
 }
 

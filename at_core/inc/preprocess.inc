@@ -108,11 +108,10 @@ function adaptivetheme_preprocess_page(&$vars) {
       $logo_path = check_url($vars['logo']);
       $logo_alt = check_plain(variable_get('site_name', t('Site logo')));
       $logo_vars = array('path' => $logo_path, 'alt' => $logo_alt, 'attributes' => array('class' => 'site-logo'));
-      $logo_img = theme('image', $logo_vars);
-      $vars['site_logo'] = $logo_img ? l($logo_img, '<front>', array('attributes' => array('title' => t('Home page')), 'html' => TRUE)) : '';
+      $vars['logo_img'] = theme('image', $logo_vars);
+      $vars['site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('title' => t('Home page')), 'html' => TRUE)) : '';
     }
     // Maintain backwards compatibility with 7.x-2.x sub-themes
-    $vars['logo_img'] = isset($logo_img) ? $logo_img : '';
     $vars['linked_site_logo'] = $vars['site_logo'];
   }
   else {
@@ -124,9 +123,9 @@ function adaptivetheme_preprocess_page(&$vars) {
   // Site name
   $vars['site_name'] = &drupal_static('adaptivetheme_preprocess_page_site_name');
   if (empty($vars['site_name'])) {
-    $sitename = variable_get('site_name', 'Drupal');
-    $vars['site_name'] = l($sitename, '<front>', array('attributes' => array('title' => t('Home page'))));
-    $vars['site_name_unlinked'] = $sitename;
+    $vars['site_name_title'] = variable_get('site_name', 'Drupal');
+    $vars['site_name'] = l($vars['site_name_title'], '<front>', array('attributes' => array('title' => t('Home page'))));
+    $vars['site_name_unlinked'] = $vars['site_name_title'];
   }
 
   // Site name visibility and other classes
@@ -463,9 +462,8 @@ function adaptivetheme_preprocess_field(&$vars) {
 
   $element = $vars['element'];
 
- // In the context of HTML5 we need to account for sectioning, so this sets
- // the top level element as either <section> if the field label is showing) or
- // <div> if the field label is hidden.
+ // Set the top level element as either <section> (if the field label is showing),
+ // or <div> if the field label is hidden.
   $vars['tag'] = 'section';
   if (isset($vars['label_hidden']) && $vars['label_hidden'] == TRUE) {
     $vars['tag'] = 'div';
@@ -493,16 +491,6 @@ function adaptivetheme_preprocess_field(&$vars) {
         }
       }
     }
-  }
-  // taxonomy_term_reference
-  if ($element['#field_type'] === 'taxonomy_term_reference') {
-    foreach($element as $key => $value) {
-      if(is_numeric($key)) {
-        $element[$key]['#options']['attributes']['title'][] = 'fuku';
-      }
-    }
-
-    $vars['term_description'] = '';
   }
 }
 
@@ -725,13 +713,6 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
 }
 
 /**
- * Preprocess variables for maintenance-page.tpl.php
- */
-function adaptivetheme_preprocess_maintenance_page(&$vars) {
-  $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
-}
-
-/**
  * Preprocess variables for adaptivtheme_menubar()
  */
 function adaptivetheme_preprocess_menubar(&$vars) {
@@ -763,4 +744,57 @@ function adaptivetheme_preprocess_username(&$vars) {
       }
     }
   }
+}
+
+/**
+ * Preprocess variables for maintenance-page.tpl.php
+ */
+function adaptivetheme_preprocess_maintenance_page(&$vars) {
+  global $theme_key;
+  $theme_name = $theme_key;
+
+  // Get the path to the directory where our CSS files are saved
+  $path = variable_get('theme_' . $theme_name . '_files_directory');
+
+  // Load Layout
+  load_layout_css($path, $theme_name);
+
+  // Load Responsive Styles.
+  if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
+    load_responsive_css($path, $theme_name);
+  }
+
+  // Load fonts and/or Custom CSS
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    // Fonts CSS
+    if (at_get_setting('enable_font_settings', $theme_name) === 1) {
+      load_fonts($path, $theme_name);
+    }
+    // Custom CSS
+    if (at_get_setting('enable_custom_css', $theme_name) === 1) {
+      load_custom_css($path, $theme_name);
+    }
+    // Load Extension Settings CSS
+    load_extensions_css($theme_name);
+  }
+
+  // Build an array of polyfilling scripts
+  $vars['polyfills_array'] = '';
+  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
+
+  // Load the colors stylesheet for the active color scheme. This only works
+  // for maintenance mode, when there is a database error the default color
+  // scheme will be used.
+  if (module_exists('color')) {
+    $color_file = variable_get('color_' . $theme_name . '_stylesheets', NULL);
+    if (file_exists($color_file[0])) {
+      drupal_add_css($color_file[0], array(
+        'group' => CSS_THEME,
+        'weight' => 99,
+        )
+      );
+    }
+  }
+
+  $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
 }

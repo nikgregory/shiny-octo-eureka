@@ -203,7 +203,6 @@ $form['at-settings']['bigscreen']['media-queries-wrapper']['bigscreen_media_quer
   '#title' => t('Media query for this layout'),
   '#default_value' => check_plain(at_get_setting('bigscreen_media_query')),
   '#description' => t('Do not include @media, it\'s included automatically.'),
-  '#field_prefix' => '@media',
   '#size' => 100,
   '#required' => TRUE,
 );
@@ -370,7 +369,6 @@ $form['at-settings']['tablet']['landscape']['tablet-landscape-media-queries-wrap
   '#title' => t('Media query for this layout'),
   '#default_value' => check_plain(at_get_setting('tablet_landscape_media_query')),
   '#description' => t('Do not include @media, it\'s included automatically.'),
-  '#field_prefix' => '@media',
   '#size' => 100,
   '#required' => TRUE,
 );
@@ -515,7 +513,6 @@ $form['at-settings']['tablet']['portrait']['tablet-portrait-media-queries-wrappe
   '#title' => t('Media query for this layout'),
   '#default_value' => check_plain(at_get_setting('tablet_portrait_media_query')),
   '#description' => t('Do not include @media, it\'s included automatically.'),
-  '#field_prefix' => '@media',
   '#size' => 100,
   '#required' => TRUE,
 );
@@ -621,7 +618,6 @@ $form['at-settings']['smartphone']['landscape']['smartphone-landscape-media-quer
   '#title' => t('Media query for this layout'),
   '#default_value' => check_plain(at_get_setting('smartphone_landscape_media_query')),
   '#description' => t('Do not include @media, it\'s included automatically.'),
-  '#field_prefix' => '@media',
   '#size' => 100,
   '#required' => TRUE,
 );
@@ -664,7 +660,6 @@ $form['at-settings']['smartphone']['portrait']['smartphone-portrait-media-querie
   '#title' => t('Media query for this layout'),
   '#default_value' => check_plain(at_get_setting('smartphone_portrait_media_query')),
   '#description' => t('Do not include @media, it\'s included automatically.'),
-  '#field_prefix' => '@media',
   '#size' => 100,
 );
 

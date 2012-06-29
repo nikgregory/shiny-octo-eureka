@@ -21,6 +21,13 @@
       font-weight: normal;
     }
   }
+  
+  // Nested form items like checkboxes and radios
+  .form-item {
+    border: 0;
+    margin: 0;
+    padding: 3px 0;
+  }
 }
 
 
@@ -48,11 +55,6 @@
 .form-radios .form-item {
   // Drupal core uses "0.4em 0"
   margin: 0;
-}
-
-
-// The submit button
-.form-submit {
 }
 
 
@@ -95,6 +97,40 @@ html.js fieldset.collapsed {
 }
 
 
+// Shared reset
+select,
+textarea,
+input[type="radio"],
+input[type="checkbox"],
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="password"] {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 4px;
+  margin-top: 3px;
+  margin-bottom: 6px;
+
+  &:focus {
+    border-color: #52a8ec;
+    border-color: rgba(82, 168, 236, .8);
+    outline: 0;
+  }
+}
+
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -102,68 +138,120 @@ input::-moz-focus-inner {
 }
 
 
-button {
+// Better cursor defaults
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
-  *overflow: visible;
 }
 
 
-button[disabled] {
+button[disabled],
+input[disabled] {
   cursor: default;
 }
 
 
-// Input
-input {
-  margin: 0;
-
-  .form-text {
-    max-width: 100%;
-  }
-
-  &[disabled] {
-    cursor: default;
-   }
-
-  &[type="checkbox"],
-  &[type="radio"] {
-    box-sizing: border-box;
-    padding: 0;
-    *height: 13px;
-    *width: 13px;
-  }
-
-  &[type="button"],
-  &[type="reset"],
-  &[type="submit"] {
-    cursor: pointer;
-    -webkit-appearance: button;
-    *overflow: visible;
-  }
+// Position radios and checkboxes better
+input[type="radio"],
+input[type="checkbox"] {
+  line-height: normal;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
 }
 
 
-// Reset form-text, textarea and selects
-input.form-text,
+// Reset width of input buttons, radios, checkboxes
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+}
+
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+
+// Make sure text input fields never overflow their containers
+input.form-text {
+  max-width: 100%;
+}
+
+
+// Reset form-text, textarea and select
+input[type="text"],
 textarea,
 select {
-  border: 1px solid #ccc;
   height: auto;
-  padding: 1px 2px;
   font-family: inherit; // inherit the default site font and not the browsers monospace font
   font-size: 1em;
 }
 
 
-// Adjust trobber background position when changing text field padding
-html.js input.form-autocomplete {
-  background-position: 100% 5px;
+// Disabled and read-only inputs
+input,
+select,
+textarea {
+  &[disabled],
+  &[readonly] {
+    cursor: not-allowed;
+    background-color: #eee;
+    border-color: #ddd;
+  }
 }
 
 
-html.js input.throbbing {
-  background-position: 100% -15px;
+// Explicitly reset the colors here
+input[type="radio"],
+input[type="checkbox"] {
+  &[disabled],
+  &[readonly] {
+    background-color: transparent;
+  }
+}
+
+
+// Adjust trobber background position when changing text field padding
+html.js input {
+  &.form-autocomplete {
+    background-position: 100% 5px;
+  }
+  &.throbbing {
+    background-position: 100% -15px;
+  }
+}
+
+
+// Highlight the form elements that caused a form submission error
+.form-item input,
+.form-item textarea,
+.form-item select {
+  &.error {
+    border: 1px solid #ed541d;
+  }
+}
+
+
+// Highlight vertical tabs that contain form errors
+.vertical-tabs ul.vertical-tabs-list li.vertical-tab-button-error a {
+  color: #8c2e0b;
+  background: #fef5f1;
+  outline: 1px solid #ed541d;
+  margin-right: 1px;
 }
 
 
@@ -174,8 +262,13 @@ textarea {
 }
 
 
-div.resizable-textarea textarea {
-  margin-top: 0;
+// Equal to normal form element margin
+div.resizable-textarea {
+  margin-bottom: 6px;
+  
+  textarea {
+    margin-top: 0;
+  }
 }
 
 
@@ -205,7 +298,7 @@ div.resizable-textarea textarea {
 
 // Tips for Drupal's input formats
 .tips {
-  font-size: .857em;
+  font-size: .85em;
   margin: 0 0 0 15px;
   padding: 0;
 }
@@ -226,7 +319,7 @@ fieldset .filter-help {
 
 
 .filter-guidelines {
-  font-size: .923em;
+  font-size: .9em;
   margin: 0;
   padding: 5px 18px 10px;
 }
@@ -389,15 +482,12 @@ fieldset#edit-advanced fieldset {
 //
 // Drupal admin tables
 //
-// We overrode these styles in html-reset.css, but restore them for the admin
-// section of the site.
-//
 
 form {
 
   th {
-    text-align: left; /* LTR */
-    padding-right: 1em; /* LTR */
+    text-align: left;
+    padding-right: 1em;
     border-bottom: 3px solid #ccc;
   }
 

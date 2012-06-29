@@ -51,9 +51,10 @@ td {
 }
 
 
-thead th {
-  color: #494949;
+thead tr {
   font-weight: 700;
+  background-color: #f2f2f2;
+  background-color: rgba(0, 0, 0, .15);
 }
 
 
@@ -71,13 +72,11 @@ tbody {}
 tr {
 
   &.even {
-    border-bottom: 0;
-    background-color: #fff;
   }
 
   &.info,
   &.odd,
-  &:nth-child(2n+1)  {
+  &:nth-child(2n+2)  {
     border-bottom: 0;
     background-color: #f5f5f5;
     background-color: rgba(0, 0, 0, 0.1);
@@ -104,7 +103,6 @@ tr {
 
 // Core sets white-space to nowrap, which makes no sense at all
 #forum td {
-
   .created,
   .posts,
   .topics,

@@ -104,7 +104,7 @@ $form['at-settings']['extend']['enable']['enable_markup_overides'] = array(
       <li>Enable page--[content-type].tpl.php suggestions</li>
       <li>Wrap menu item text in SPAN tags</li>
       <li>Breadcrumb Settings - hide, hide the home link, configure seperator, append the page title</li>
-      <li>Horizontal Login Block</li>
+      <li>Login Block - hide links, hide OpenID links, horizontal login block</li>
       <li>Remove the frontpage title</li>
       <li>Do not display the Main content block on the front page</li>
       <li>Remove RSS feed icons</li>

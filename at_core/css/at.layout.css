@@ -24,18 +24,6 @@ body {
   width: 100%;
 }
 
-/* Clear floating elements :: legacy, this is really no longer required */
-.clear,
-#columns,
-#breadcrumb,
-#crumbs,
-.region-secondary-content,
-.region-tertiary-content,
-.region-footer,
-#block-admin-display-form  {
-  clear: both;
-}
-
 /* Compass clearfix */
 .clearfix:after {
   content: "";

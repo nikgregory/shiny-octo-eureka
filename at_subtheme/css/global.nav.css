@@ -175,6 +175,7 @@ ul.menu ul,
 ul.menu ul ul,
 ul.menu ul ul ul {
   margin-left: 15px;
+  margin-bottom: 0;
 }
 
 

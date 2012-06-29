@@ -132,8 +132,8 @@
   <!-- region: Secondary Content -->
   <?php print render($page['secondary_content']); ?>
 
-  <div id="columns" class="clearfix">
-    <div id="content-column" role="main">
+  <div id="columns" class="columns clearfix">
+    <div id="content-column" class="content-column" role="main">
       <div class="content-inner">
 
         <!-- region: Highlighted -->

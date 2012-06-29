@@ -80,7 +80,7 @@ function adaptivetheme_process_page(&$vars) {
       // Add page template suggestions per node type, but make the suggestion weak
       // so other suggestions can easily override it.
       if (at_get_setting('page_content_type_suggestions', $theme_name) === 1) {
-        if (isset($vars['node'])) {
+        if ($vars['node']) {
           $suggestion = 'page__' . str_replace('_', '--', $vars['node']->type);
           array_unshift($vars['theme_hook_suggestions'], $suggestion);
         }
@@ -247,4 +247,31 @@ function adaptivetheme_process_menubar(&$vars) {
   $vars['classes'] = implode(' ', $vars['classes_array']);
   $vars['attributes'] = empty($vars['attributes_array']) ? '' : drupal_attributes($vars['attributes_array']);
   $vars['content_attributes'] = empty($vars['content_attributes_array']) ? '' : drupal_attributes($vars['content_attributes_array']);
+}
+
+/**
+ * Process variables for maintenance-page.tpl.php
+ */
+function adaptivetheme_process_maintenance_page(&$vars) {
+  // Load polyfills for the maintenance page, its HTML5 also
+  if (!empty($vars['polyfills_array'])) {
+    $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
+    if (empty($vars['polyfills'])) {
+      $ie_scripts = array();
+      if (!empty($vars['polyfills_array'])) {
+        foreach ($vars['polyfills_array'] as $ke => $va) {
+          foreach ($va as $k => $v) {
+            $ies[$k][] = implode("\n", $v);
+          }
+        }
+      }
+      foreach ($ies as $kv => $kvp) {
+        $aus[$kv] = implode("\n", $kvp);
+      }
+      $vars['polyfills'] = at_theme_conditional_scripts($aus);
+    }
+  }
+  else {
+    $vars['polyfills'] = '';
+  }
 }

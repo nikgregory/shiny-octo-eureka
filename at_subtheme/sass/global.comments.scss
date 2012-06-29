@@ -16,11 +16,15 @@
 
 
     // Heading for the list of comments
-    &.comment-title {}
+    &.comment-title {
+      margin: 0;
+    }
 
 
     // Heading for the comment form
-    &.comment-form {}
+    &.comment-form {
+      margin: 0;
+    }
   }
 }
 
@@ -112,7 +116,9 @@
 
 
 // Comment title
-h3.comment-title {}
+.comment-title {
+  margin: 0;
+}
 
 
 // "New" marker for comments that are new for the current user

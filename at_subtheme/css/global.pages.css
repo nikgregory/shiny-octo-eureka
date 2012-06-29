@@ -116,6 +116,7 @@ div.messages {
 
 /* The name of the website */
 #site-name {
+  margin: 0;
 }
 
 
@@ -133,6 +134,7 @@ div.messages {
 
 /* The slogan (or tagline) of a website. */
 #site-slogan {
+  margin: 0;
 }
 
 
@@ -152,14 +154,15 @@ div.messages {
 
 
 /* The title of the page. */
-h1#page-title {
+#page-title {
+  margin: 0;
 }
 
 
 /* Important messages (status, warning, and error) for the user. See also the
    declarations in messages.css. */
 div.messages  {
-  margin: 1.5em 10px; /* Drupal core uses "6px 0" margin */
+  margin: 15px 10px; /* Drupal core uses "6px 0" margin */
 }
 
 
@@ -364,8 +367,53 @@ ul.links li {
 }
 
 
+/* Maintenance pages */
+.maintenance-page .container {
+  padding: 40px 0;
+}
+
+
+.maintenance-page #site-name,
+.maintenance-page #page-title {
+  margin: 0;
+}
+
+
+.db-offline .container {
+  margin: 0 auto;
+  padding: 40px 0;
+  width: 100%;
+  max-width: 960px;
+}
+
+
+.db-offline div.messages {
+  margin: 20px 0 0;
+}
+
+
+.db-offline #content {
+  padding: 20px 0;
+}
+
+
 /* Devel Module */
 .dev-query {
   background: #eee;
   padding: 30px;
 }
+
+
+/* Styleguide module tweaks */
+#styleguide-header {
+  padding: 0 10px;
+}
+
+
+#styleguide-header .item-list {
+  font-family: inherit;
+  margin: 0 20px 20px 0;
+  min-height: 260px;
+  width: auto;
+}
+

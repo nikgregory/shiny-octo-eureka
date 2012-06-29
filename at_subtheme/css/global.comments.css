@@ -12,11 +12,13 @@
 
 /* Heading for the list of comments */
 #comments h2.comment-title {
+  margin: 0;
 }
 
 
 /* Heading for the comment form */
 #comments h2.comment-form {
+  margin: 0;
 }
 
 
@@ -88,7 +90,8 @@
 
 
 /* Comment title */
-h3.comment-title {
+.comment-title {
+  margin: 0;
 }
 
 

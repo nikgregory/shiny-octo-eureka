@@ -86,22 +86,10 @@ html {
 
 body {
   min-height: 100%;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-
-h1,h2,h3,h4,h5,h6,
-h1 img,h2 img,h3 img,h4 img,h5 img,h6 img,
-em,dfn,del,ins,
-a,
-tbody,tfoot,thead,tr,
-ul,li,
-label,legend,
-figure,figcaption {
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 
@@ -121,24 +109,40 @@ section {
 }
 
 
-/* Default font sizes for headings, can be overridden in theme settings or set them here */
+/* Default sizes and margins for headings. Size can be overridden in theme settings */
 h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
 
 h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
 }
 
 
 h3 {
+  font-size: 1.2em;
+  margin: 1em 0;
 }
 
 
 h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
 }
 
 
-h5, h6 {
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+
+h6 {
+  font-size: 0.75em;
+  margin: 2.33em 0;
 }
 
 
@@ -148,7 +152,8 @@ a img {
 }
 
 
-p {
+p,
+pre {
   margin: 0 0 1.5em;
   padding: 0;
 }
@@ -173,14 +178,19 @@ samp,
 kbd,
 var {
   font-size: 1em;
-  font-family: Consolas, "Lucida Console", Menlo, Monaco, "DejaVu Sans Mono", monospace, sans-serif; /* sans-serif Safari hack */
+  font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;
 }
 
 
-blockquote,
-q {
-  font-style: italic;
-  quotes: "" "";
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+abbr[title] {
+  border-bottom: 1px dotted;
 }
 
 
@@ -190,20 +200,58 @@ blockquote {
 }
 
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-}
-
-
 blockquote p {
   margin: 0;
 }
 
 
+q {
+  quotes: none;
+}
+
+
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+
+small {
+  font-size: 0.75em;
+}
+
+
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+
+sup {
+  top: -0.5em;
+}
+
+
+sub {
+  bottom: -0.25em;
+}
+
+
+figure,
+figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+
+b,
 strong,
+label,
+dt,
 dfn,
 caption,
 th {
@@ -211,6 +259,7 @@ th {
 }
 
 
+dd,
 ul,
 ol {
   margin: 0 0 1.5em 40px;
@@ -228,63 +277,6 @@ ol {
 .item-list ul li {
   margin: 0;
   padding: 0;
-}
-
-
-ul ul,
-ul ol,
-ol ol,
-ol ul,
-.block ul ul,
-.block ul ol,
-.block ol ol,
-.block ol ul,
-.item-list ul ul,
-.item-list ul ol,
-.item-list ol ol,
-.item-list ol ul {
-  margin-bottom: 0;
-}
-
-
-ul {
-  list-style-type: disc;
-}
-
-
-ul ul ul {
-  list-style-type: square;
-}
-
-
-ol {
-  list-style-type: decimal;
-}
-
-
-ol ol {
-  list-style-type: lower-alpha;
-}
-
-
-ol ol ol {
-  list-style-type: lower-roman;
-}
-
-
-ul ul,
-ul ul ul ul {
-  list-style-type: circle;
-}
-
-
-dt {
-  font-weight: 700;
-}
-
-
-dd {
-  margin: 0 0 1.5em 40px;
 }
 
 
@@ -404,7 +396,7 @@ header[role=banner],
   height: 1px;
   overflow: hidden;
   padding: 0;
-  position: absolute !important;
+  position: absolute;
   width: 1px;
 }
 
@@ -414,7 +406,7 @@ header[role=banner],
   clip: auto;
   height: auto;
   overflow: visible;
-  position: static !important;
+  position: static;
   width: auto;
 }
 
@@ -434,3 +426,4 @@ header[role=banner],
 .element-hidden {
   display: none;
 }
+
