@@ -12,7 +12,7 @@ $device_group_options = responsive_page_layouts_device_group_options($theme_name
 foreach ($device_group_options as $device_group => $options) {
 
   // About here we need to call a custom sort function, this is what we got for now
-  sort($options, SORT_NUMERIC);
+  sort($options, SORT_STRING);
 
   foreach ($options as $option) {
     if ($device_group === 'bigscreen') {
@@ -30,7 +30,7 @@ foreach ($device_group_options as $device_group => $options) {
   }
 }
 
-// CSS for the layout sprite icons
+// CSS for page layout icons
 $page_layout_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'page_layout');
 foreach ($page_layout_css_files as $filepath) {
   if (file_exists($filepath)) {

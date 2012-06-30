@@ -293,8 +293,7 @@ function responsive_page_layouts_device_group_options($theme_name) {
 
 /**
  * Return all the admin css files for a plugin type.
- * Used primarly to theme the icons for each layout method. The icons are in
- * sprites.
+ * Used primarly to theme the icons for each layout method.
  *
  * @param $theme_name
  * @param $plugin_type

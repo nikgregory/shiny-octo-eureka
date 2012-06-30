@@ -58,32 +58,22 @@ $form['at-settings']['debug']['debug-panels']['load_all_panels_no_sidebars'] = a
 );
 
 // All media queries
-$queries = '';
-$mq = array();
-$mq[] =  '/* Smartphone portrait */' . "\n" . '@media ' . at_get_setting('smartphone_portrait_media_query') . ' {' . "\n" . '}';
-$mq[] =  '/* Smartphone landscape */' . "\n" . '@media ' . at_get_setting('smartphone_landscape_media_query') . ' {' . "\n" . '}';
-$mq[] =  '/* Tablet portrait */' . "\n" . '@media ' . at_get_setting('tablet_portrait_media_query') . ' {' . "\n" . '}';
-$mq[] =  '/* Tablet landscape */' . "\n" . '@media ' . at_get_setting('tablet_landscape_media_query') . ' {' . "\n" . '}';
-$mq[] =  '/* Standard layout */' . "\n" . '@media ' . at_get_setting('bigscreen_media_query') . ' {' . "\n" . '}';
-$queries = implode("\n\n", $mq);
+$queries  = '<dl>';
+$queries .= '<dt>Standard layout</dt><dd>@media ' . at_get_setting('bigscreen_media_query') . '</dd>';
+$queries .= '<dt>Tablet landscape</dt><dd>@media ' . at_get_setting('tablet_landscape_media_query') . '</dd>';
+$queries .= '<dt>Tablet portrait</dt><dd>@media ' . at_get_setting('tablet_portrait_media_query') . '</dd>';
+$queries .= '<dt>Smartphone landscape</dt><dd>@media ' . at_get_setting('smartphone_landscape_media_query') . '</dd>';
+$queries .= '<dt>Smartphone portrait</dt><dd>@media ' . at_get_setting('smartphone_portrait_media_query') . '</dd>';
+$queries .= '</dl>';
 
 // Sanity check
-$queries = check_plain($queries);
+$queries = filter_xss($queries);
 
 $form['at-settings']['debug']['mediaqueries'] = array(
   '#type' => 'fieldset',
-  '#title' => t('<h3>All Media Queries - Copy Only!</h3>'),
-  '#description' => t('<h3>All Media Queries - Copy Only</h3><p>This shows the media queries currently being used by your theme. This is provided so you may save a backup copy for reference. Do not enter anything here - this is display only!</p>'),
-);
-$form['at-settings']['debug']['mediaqueries']['check'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Enable the text field so I can copy this now'),
+  '#title' => t('<h3>All Media Queries</h3>'),
+  '#description' => t('<h3>All Media Queries</h3><p>This shows the media queries currently being used by your theme. This is provided so you can easily save a backup copy for reference.</p>'),
 );
 $form['at-settings']['debug']['mediaqueries']['output'] = array(
-  '#type' => 'textarea',
-  '#rows' => 18,
-  '#default_value' => $queries ? $queries : '',
-  '#states' => array(
-    'visible' => array('input[name="check"]' => array('checked' => TRUE)),
-  ),
+  '#markup' => $queries ? $queries : '',
 );

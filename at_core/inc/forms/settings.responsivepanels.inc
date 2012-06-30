@@ -3,9 +3,6 @@
 /**
  * @file
  * Generate form elments for the Panel and Gpanel Reponsive Layout settings.
- *
- * This gets its data via responsive_panels_data_structure() in config.inc,
- * which pulls its data from each Panels layout plugin.
  */
 
 // Supported devices
@@ -29,7 +26,8 @@ $active_gpanels_arrays = array();
 // Get the active themes info array
 $info_array = at_get_info($theme_name);
 
-// Build a keyed array of the regions, we need to reset the keys for array_intersect()
+// Build a keyed array of the regions, we need to reset the keys for
+// array_intersect() to figure out which Gpanels are being used
 foreach ($info_array['regions'] as $key => $value) {
   $theme_regions[] = $key;
 }
@@ -45,6 +43,8 @@ foreach ($gpanel_regions as $gpanel => $gpanel_array) {
     $active_gpanels_arrays[] = $gpanel_array;
   }
 }
+
+// Make certain we only list each Gpanel once
 array_unique($active_gpanels);
 
 // Make a list of all active Gpanel titles, if any
@@ -79,7 +79,7 @@ if (isset($rpl['inset'])) {
   $inset = $rpl['inset']; unset($rpl['inset']); $rpl['inset'] = $inset;
 }
 
-// We need the admin_css files for each plugin
+// Get the admin css files for each plugin
 $panels_admin_css_files = responsive_plugins_admin_css($theme_name, $plugin_type = 'panels');
 foreach ($panels_admin_css_files as $filepath) {
   if (file_exists($filepath)) {
@@ -153,10 +153,3 @@ foreach ($devices as $device) {
     }
   }
 }
-
-//if ($panels == TRUE || !empty($active_gpanels)) {
-//  $active_panels_layouts = 0;
-//}
-//if ($panels == FALSE && empty($active_gpanels)) {
-//  $active_panels_layouts = 1;
-//}

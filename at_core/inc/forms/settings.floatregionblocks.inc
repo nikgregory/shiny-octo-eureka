@@ -12,7 +12,7 @@ $unset_regions = array(
   'dashboard_inactive',
   'page_bottom',
   'page_top',
-  'content', // exclude the main content region, we dont use block or region wrappers in AT
+  'content', // exclude the main content region
 );
 
 // Prepare regions
@@ -46,13 +46,14 @@ $direction_options = array(
   'right' => t('Right'),
 );
 
-$breakpoints = array(
-  '<none>' => t('none - I can handle this in CSS'),
-  'smartphone_portrait' => t('Smartphone Portrait'),
-  'smartphone_landscape' => t('Smartphone Landscape'),
-  'tablet_portrait' => t('Tablet Portrait'),
-  'tablet_landscape' => t('Tablet Landscape'),
-);
+// Don't include this feature for now, its too late in the cycle
+// $breakpoints = array(
+//   '<none>' => t('none - I can handle this in CSS'),
+//   'smartphone_portrait' => t('Smartphone Portrait'),
+//   'smartphone_landscape' => t('Smartphone Landscape'),
+//   'tablet_portrait' => t('Tablet Portrait'),
+//   'tablet_landscape' => t('Tablet Landscape'),
+// );
 
 // Top level wrapper fieldset
 $form['at']['float-region-blocks'] = array(
@@ -64,10 +65,10 @@ $form['at']['float-region-blocks'] = array(
 
 // Build form elements for each region
 foreach ($regions as $region_name => $region_label) {
-  
+
   $title = check_plain($region_label);
   $region_name = check_plain($region_name);
-  
+
   $form['at']['float-region-blocks']['region-options-' . $region_name] = array(
     '#type' => 'fieldset',
     '#title' => t("Options for the $title region"),

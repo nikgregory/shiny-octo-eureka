@@ -486,9 +486,32 @@ ul.action-links li {
 }
 
 
+/* Book navigation */
+.book-navigation {
+}
+
+
+.book-navigation .page-links {
+}
+
+
+.book-navigation .page-previous {
+}
+
+
+.book-navigation .page-next {
+}
+
+
+.book-navigation .page-up {
+  /* Prevent text wrapping to a new line, assumes English "up" is used (two characters) */
+  min-width: 2em;
+  white-space: nowrap;
+}
+
+
 /* Admin menu overrides */
 #admin-menu {
   margin: 0;
   padding: 0;
 }
-

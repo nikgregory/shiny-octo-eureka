@@ -547,18 +547,18 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   display: block;
 }
 
-/* PIE */
-#edit-pie-crust fieldset[id*=edit-pie-path] .fieldset-wrapper {
-  margin: 0;
-  padding: 0;
+/* Debugger media queries dl */
+#edit-mediaqueries dl {
+  padding: 20px 20px 0;
+  background: #fff;
+  border: 1px solid #ccc;
 }
-
-#edit-pie-crust .form-type-select {
-  margin-bottom: 0;
+#edit-mediaqueries dl dt {
+  font-weight: 700;
 }
-#edit-pie-crust fieldset[id*=edit-pie-path] p {
-  margin-top: 0;
-  padding: 0;
+#edit-mediaqueries dl dd {
+  margin-bottom: 20px;
+  margin-left: 0;
 }
 
 /* Wrangel Seven to look half decent */

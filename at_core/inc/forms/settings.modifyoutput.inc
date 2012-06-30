@@ -166,7 +166,7 @@ $form['at']['modify-output']['hide-remove']['feed_icons_hide'] = array(
 // Hide comment title
 $form['at']['modify-output']['hide-remove']['comments_hide_title'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Hide the comment title'),
+  '#title' => t('Hide comment titles'),
   '#default_value' => at_get_setting('comments_hide_title'),
   '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
 );

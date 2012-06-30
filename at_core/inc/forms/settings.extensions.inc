@@ -34,7 +34,7 @@ $form['at-settings']['extend']['enable']['enable_font_settings'] = array(
   '#type' => 'checkbox',
   '#title' => t('Fonts'),
   '#default_value' => at_get_setting('enable_font_settings'),
-  '#description' => t('Apply fonts to site elements (page, titles, headings). Supports websafe, custom and Google fonts, and <a href="!link" target="_blank">@font-your-face</a> integration.', array('!link' => 'http://drupal.org/project/fontyourface')),
+  '#description' => t('Apply fonts to site elements (page, titles, headings, menus and custom selectors). Supports websafe, custom and Google fonts, and <a href="!link" target="_blank">@font-your-face</a> integration.', array('!link' => 'http://drupal.org/project/fontyourface')),
 );
 
 // Title styles
@@ -108,7 +108,7 @@ $form['at-settings']['extend']['enable']['enable_markup_overides'] = array(
       <li>Remove the frontpage title</li>
       <li>Do not display the Main content block on the front page</li>
       <li>Remove RSS feed icons</li>
-      <li>Hide the comment title</li>
+      <li>Hide comment titles</li>
       <li>Remove menu link titles (tool tips)</li>
       <li>Accessibility settings - set the skip navigation target ID, use extra fieldsets in the advanced search form</li>
       <li>Add rel=author to user names</li>

@@ -208,18 +208,30 @@ a:focus {
   line-height: 1.5;
 }
 #topbar time {
-  float: right; /* LTR */
+  float: right;
 }
 #breadcrumb {
-  float: left; /* LTR */
-  margin: 0;
+  float: left;
 }
-ol#crumbs {
+#breadcrumb ol {
   margin: 0;
   padding: 0;
-  list-style: none;
 }
-ol#crumbs li {
+#breadcrumb .breadcrumb-label {
+  font-size: 1em;
+  display: inline;
+  padding-right: 10px;
+  font-weight: 700;
+  color: #e7e7e7;
+}
+#breadcrumb .breadcrumb-label:after {
+  content: ":";
+}
+#breadcrumb .with-breadcrumb-label ol {
+  display: inline;
+}
+#breadcrumb li {
+  list-style: none;
   display: inline;
 }
 #topbar time,
@@ -232,6 +244,9 @@ ol#crumbs a:hover,
 ol#crumbs a:focus,
 ol#crumbs a:active {
   color: #fff;
+}
+.crumb-title {
+  font-style: italic;
 }
 
 /* Pager */
