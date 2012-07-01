@@ -111,7 +111,7 @@ $form['at-settings']['global-settings']['files-path']['public_files_path'] = arr
   ),
 );
 $form['at-settings']['global-settings']['files-path']['public_files_path']['message'] = array(
-  '#markup' => t('<div class="description">Files will be saved to: <code>!public_files</code></div>', array('!public_files' => $public_files)),
+  '#markup' => t('<div class="description">Files will be saved to: <code>@public_files</code></div>', array('@public_files' => $public_files)),
 );
 // message for theme dir
 $form['at-settings']['global-settings']['files-path']['theme_directory_files_path'] = array(
@@ -121,7 +121,7 @@ $form['at-settings']['global-settings']['files-path']['theme_directory_files_pat
   ),
 );
 $form['at-settings']['global-settings']['files-path']['theme_directory_files_path']['message'] = array(
-  '#markup' => t('<div class="description">Files will be saved to: <code>!theme_directory</code></div>', array('!theme_directory' => $theme_directory)),
+  '#markup' => t('<div class="description">Files will be saved to: <code>@theme_directory</code></div>', array('@theme_directory' => $theme_directory)),
 );
 // Text field for custom path
 $form['at-settings']['global-settings']['files-path']['custom_files_path'] = array(

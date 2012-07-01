@@ -49,6 +49,19 @@ if ($values['enable_custom_media_queries'] === 1) {
   $responsive_styles[] = $responsive_css . "\n";
 }
 
+// Set variables for respond.js
+$load_respondjs = FALSE;
+if ($values['load_respondjs'] === 1) {
+  $load_respondjs = TRUE;
+}
+
+// Set variables for onmediaquery.js and media_queries.js
+$responsive_js_css = '';
+$responsive_js = FALSE;
+if ($values['load_onmediaqueryjs'] === 1 && $values['disable_responsive_styles'] === 0) {
+  $responsive_js = TRUE;
+}
+
 // Gutter width
 $gutters = "/* Gutters are not currently overridden in theme settings, but may be in theme CSS */";
 if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
@@ -57,7 +70,6 @@ if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'
     $gutters = "/* Gutters */" . "\n" . "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;} .page-panels #content {margin-left:-$gutter;margin-right:-$gutter;}";
   }
 }
-
 
 // Smartphone Portrait
 if ($values['smartphone_portrait_media_query']) {
@@ -82,16 +94,33 @@ if ($values['smartphone_portrait_media_query']) {
   $width = "\n" . '.container {width:' . $smartphone_portrait_layout_data['page_width'] . $smartphone_portrait_layout_data['page_unit'] . '}';
   $media_query = $smartphone_portrait_layout_data['media_query'];
 
+  if ($responsive_js == TRUE) {
+    $responsive_js_css = 'html {font-family: smartphone_portrait} /* Font family for media_queries.js */';
+  }
+
   // If mobile first then smartphone portrait needs to do nothing, else its
   // problematic to set the layout later due to the cascade and inheritance
   if ($is_default_layout === 'smartphone-portrait') {
-    $css = "/* smartphone_portrait is default, mobile first dude - you rock the hardest! */";
+    $css = '';
+    // If responsive js is TRUE we output the media query with CSS styles
+    if ($responsive_js == TRUE) {
+      $css = $comment . '@media ' . $media_query . ' {' . "\n" . $responsive_js_css . "\n" . '}';
+    }
   }
   else {
     // Smartphone portrait panels are all 100% width and stacked, we need to
     // overpower the default layouts when in desktop first mode
     $smartphone_portrait_panels_layout = '.at-panel .region,.at-panel .panel-row,.at-panel .panel-row .region,.at-panel .inset-wrapper{float:none;display:block;width:100%}';
+
+    // Build the styles string
     $styles = $width . "\n" . $layout . "\n" . $smartphone_portrait_panels_layout;
+
+    // Reset styles if we are loading responsive js
+    if ($responsive_js == TRUE) {
+      $styles = "\n" . $responsive_js_css . "\n" . $width . "\n" . $layout . "\n" . $smartphone_portrait_panels_layout;
+    }
+
+    // CSS wrapped in the media query
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
   }
 
@@ -140,9 +169,18 @@ if ($values['smartphone_landscape_layout']) {
 
   // Generate the panels layouts
   $smartphone_landscape_panels_css = at_build_panels_layout_css($panel_styles, $smartphone_landscape_panels_data);
-
   $panels_layouts = $float . $smartphone_landscape_panels_css;
+
+  // Build the styles string
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
+
+  // Reset styles if we are loading responsive js
+  if ($responsive_js == TRUE) {
+    $responsive_js_css = "\n" . 'html {font-family: smartphone_landscape} /* Font family for media_queries.js */';
+    $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
+  }
+
+  // CSS wrapped in the media query
   $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
   // Get and wrap the responsive CSS styles in the relative media query
@@ -194,9 +232,18 @@ if ($values['tablet_portrait_layout']) {
 
   // Generate the panels layouts
   $tablet_portrait_panels_css = at_build_panels_layout_css($panel_styles, $tablet_portrait_panels_data);
-
   $panels_layouts = $float . $tablet_portrait_panels_css;
+
+  // Build the styles string
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
+
+  // Reset styles if we are loading responsive js
+  if ($responsive_js == TRUE) {
+    $responsive_js_css = "\n" . 'html {font-family: tablet_portrait} /* Font family for media_queries.js */';
+    $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
+  }
+
+  // CSS wrapped in the media query
   $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
    // Get and wrap the responsive CSS styles in the relative media query
@@ -246,9 +293,18 @@ if ($values['tablet_landscape_layout']) {
   }
   // Generate the panels layouts
   $tablet_landscape_panels_css = at_build_panels_layout_css($panel_styles, $tablet_landscape_panels_data);
-
   $panels_layouts = $float . $tablet_landscape_panels_css;
+
+  // Build the styles string
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
+
+  // Reset styles if we are loading responsive js
+  if ($responsive_js == TRUE) {
+    $responsive_js_css = "\n" . 'html {font-family: tablet_landscape} /* Font family for media_queries.js */';
+    $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
+  }
+
+  // CSS wrapped in the media query
   $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
    // Get and wrap the responsive CSS styles in the relative media query
@@ -308,8 +364,17 @@ if ($values['bigscreen_layout']) {
   // Prepend the float
   $panels_layouts = $float . $bigscreen_panels_css;
 
-  // Build a $styles variable with the layout, width and default panels layouts
+  // Build the styles string
   $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
+
+  // Reset styles if we are loading responsive js
+  if ($responsive_js == TRUE) {
+    $responsive_js_css = "\n" . 'html {font-family: standard} /* Font family for media_queries.js */';
+    $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
+  }
+
+  // CSS wrapped in the media query
+  // $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
   // We need to do some conditional checks to account for the users settings:
   // - is this mobile first or desktop first?
@@ -318,10 +383,13 @@ if ($values['bigscreen_layout']) {
   // Mobile first or Desktop first?
   if ($is_default_layout === 'standard-layout') {
     // DESKTOP FIRST
-    // $css gets a comment that bigscreen is beign used as the "default layout"
-    $css = '/* The standard layout is the default layout - this is a desktop first design */';
-    // Prepare a "default layout" for output to file, we must load this when
-    //desktop first is being used
+    // Just the responsive js font family
+    $css = '';
+    if ($responsive_js == TRUE) {
+      $css = $comment . "\n" . '@media ' . $media_query . ' {' . $responsive_js_css . "\n" . '}';
+    }
+
+    // Prepare a "default layout" for output to file when desktop first
     $desktop_first_layout = $gutters . "\n" . $comment . $styles . "\n";
   }
   else {
@@ -329,6 +397,7 @@ if ($values['bigscreen_layout']) {
     $css = $comment . "\n" . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
     $desktop_first_layout = '/* Not likely, this is mobile first - this themer is rocking the hardest! */';
   }
+
   // Responsive capability OFF?
   if ($values['disable_responsive_styles'] === 1) {
     // If its off we have to load something, so we choose to use the bigscreen
@@ -352,6 +421,11 @@ if ($values['bigscreen_layout']) {
 // the last layout to assign values to those variables
 $lt_ie9_css = $comment . $width . "\n" . $layout . "\n" . $panels_layouts;
 
+// Reset $lt_ie9_css if we are loading responsive js
+if ($responsive_js == TRUE) {
+  $lt_ie9_css = $comment . $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
+}
+
 // Get the lt ie8 panels layouts if enabled
 $lt_ie8_css = '/* IE6/7 percentage rounding error fixes are OFF */';
 if ($values['load_ltie8css'] === 1) {
@@ -360,7 +434,7 @@ if ($values['load_ltie8css'] === 1) {
 }
 
 // Respond.js is OFF
-if ($values['load_respondjs'] === 0) {
+if ($load_respondjs == FALSE) {
 
   // should we load the IE6/7 rounding error fixes?
   if ($values['load_ltie8css'] === 1) {
@@ -378,7 +452,7 @@ if ($values['load_respondjs'] === 0) {
 }
 
 // Respond.js is ON
-if ($values['load_respondjs'] === 1) {
+if ($load_respondjs == TRUE) {
   $lt_ie9_css = '/* respond.js is loading so we dont load this file. IE6, 7 and 8 will rely on respond.js to work its magic */';
 }
 

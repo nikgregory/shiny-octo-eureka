@@ -77,7 +77,9 @@
 //
 
 
-// Always apply your global font size the the HTML element, not body or #page
+// Always apply your global font size the the html element, not body or #page.
+// If you are using the themes Responsive JS feature (media_queries.js) do not
+// set a font-family on the html element, use body.
 html {
   line-height: 1.5; // Unitless line-heights scale
   height: 100%;

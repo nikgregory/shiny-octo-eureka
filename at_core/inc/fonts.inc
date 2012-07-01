@@ -15,7 +15,7 @@ function font_elements() {
         'type' => 'default',
         'subtype' => 'global',
         'element' => 'bf',
-        'selector' => 'html',
+        'selector' => 'body',
         'setting' => 'base_font',
       ),
       'site_name' => array(

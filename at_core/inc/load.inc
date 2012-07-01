@@ -325,7 +325,7 @@ function load_polyfills($theme_name) {
       foreach ($info['ie_scripts'] as $condition => $ie_scripts_path) {
         foreach ($ie_scripts_path as $key => $value) {
           $filepath = $theme_path . '/' . $value;
-          $polyfills_array['info'][$condition][] = at_theme_script($filepath);
+          $polyfills_array['info'][$condition][] = at_theme_conditional_script($filepath);
         }
       }
     }
@@ -334,10 +334,8 @@ function load_polyfills($theme_name) {
     $polly_settings_array = array(
       'load_respondjs',
       'load_html5js',
-      'load_boxsizinghtc',
-      'load_pie',
-      'load_selectivizr',
       'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
+      'load_onmediaqueryjs', // loaded directly by polly_wants_a_cracker(), its never returned
     );
     foreach ($polly_settings_array as $polly_setting) {
       $polly[$polly_setting] = at_get_setting($polly_setting, $theme_name);
@@ -346,7 +344,7 @@ function load_polyfills($theme_name) {
     foreach ($backed_crackers as $cupboard => $flavors) {
       foreach ($flavors as $key => $value) {
         $filepath = $path_to_at_core . '/' . $value;
-        $polyfills_array['at_core'][$cupboard][] = at_theme_script($filepath);
+        $polyfills_array['at_core'][$cupboard][] = at_theme_conditional_script($filepath);
       }
     }
   }
@@ -451,6 +449,32 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
 }
 
 /**
+ * Load scripts from the sub-theme
+ * Wrapper function for drupal_add_js(). In the core theme this is only used to
+ * load media_queries.js if the Responsive JavaScript plugin is enabled in theme
+ * settings. You can call this in your subtheme.
+ *
+ * @param $filepath, path to the file.
+ * @param $theme_name, the active theme.
+ * @param $scope, header or footer.
+ * @param $weight, optional.
+ */
+function at_load_subtheme_script($filepath, $theme_name, $scope, $weight = NULL) {
+  $filepath = drupal_get_path('theme', $theme_name) . '/' . $filepath;
+  if (file_exists($filepath)) {
+    drupal_add_js($filepath, array(
+      'type' => 'file',
+      'scope' => $scope,
+      'group' => JS_THEME,
+      'weight' => $weight,
+      'preprocess' => TRUE,
+      'cache' => TRUE,
+      )
+    );
+  }
+}
+
+/**
  * Return a themed script.
  * Since Drupal 7 does not (yet) support the 'browser' option in drupal_add_js()
  * Adaptivetheme provides a way to load scripts inside conditional comments.
@@ -458,7 +482,7 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
  *
  * @param $filepath, path to the file.
  */
-function at_theme_script($filepath) {
+function at_theme_conditional_script($filepath) {
   $script = '';
 
   // We need the default query string for cache control finger printing
@@ -527,6 +551,10 @@ function polly_wants_a_cracker($polly, $theme_name) {
       // Scalefix.js
       if ($polly['load_scalefixjs'] === 1) {
         $crackers['all'][] = 'scripts/scalefix.js';
+      }
+      // OnMediaQuery.js
+      if ($polly['load_onmediaqueryjs'] === 1) {
+        $crackers['all'][] = 'scripts/onmediaquery.js';
       }
 
       // Load Polyfills
