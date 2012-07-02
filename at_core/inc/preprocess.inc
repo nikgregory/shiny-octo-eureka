@@ -38,6 +38,14 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['html_attributes_array']['lang'][] = $language->language;
   $vars['html_attributes_array']['dir'][] = $language->dir;
 
+  // Convert RDF Namespaces into structured data using drupal_attributes.
+  $vars['rdf_namespaces'] = array();
+  if (function_exists('rdf_get_namespaces')) {
+    foreach (rdf_get_namespaces() as $prefix => $uri) {
+      $vars['rdf_namespaces_array']['xmlns:' . $prefix][] = $uri;
+    }
+  }
+
   // Get the path to the directory where our CSS files are saved
   $path = variable_get('theme_' . $theme_name . '_files_directory');
 
@@ -207,12 +215,6 @@ function adaptivetheme_preprocess_page(&$vars) {
       // Remove the infernal feed icons
       if (at_get_setting('feed_icons_hide', $theme_name) === 1) {
         $vars['feed_icons'] = '';
-      }
-      // Remove block system main, just from the front page
-      if (drupal_is_front_page()) {
-        if (at_get_setting('unset_block_system_main_front', $theme_name) === 1) {
-          $vars['page']['content']['system_main'] = ''; // Brutal but effective
-        }
       }
     }
   }

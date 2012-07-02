@@ -228,6 +228,9 @@ function adaptivetheme_css_alter(&$css) {
  * hook_page_alter()
  */
 function adaptivetheme_page_alter(&$page) {
+  global $theme_key;
+  $theme_name = $theme_key;
+
   // Is this a mobile context?
   $page['is_mobile'] = at_get_browser();
 
@@ -241,6 +244,17 @@ function adaptivetheme_page_alter(&$page) {
     unset($page['content']['system_main']['term_heading']['#suffix']);
     $page['content']['system_main']['nodes']['#prefix'] = '<section class="nodes">';
     $page['content']['system_main']['nodes']['#suffix'] = '</section>';
+  }
+
+  if (at_get_setting('enable_extensions', $theme_name) === 1) {
+    if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      // Remove block system main, just from the front page
+      if (drupal_is_front_page()) {
+        if (at_get_setting('unset_block_system_main_front', $theme_name) === 1) {
+          $page['content']['system_main']['#access'] = FALSE; // Brutal but effective
+        }
+      }
+    }
   }
 
   // Get all the regions with blocks
@@ -263,52 +277,54 @@ function adaptivetheme_page_alter(&$page) {
       if ($blocks) {
         $page[$region][$blocks[0]]['#block']->last_in_region = TRUE;
 
-        // Alter regions and block visibility. Note that ideally this would all
-        // be better in hook_page_build(), however themes can't fire that hook.
-        if (at_get_setting('enable_context_regions') === 1) {
-          if ($page['is_mobile'] == TRUE && $region !== 'content') {
+        if (at_get_setting('enable_extensions', $theme_name) === 1) {
+          // Alter regions and block visibility. Note that ideally this would all
+          // be better in hook_page_build(), however themes can't fire that hook.
+          if (at_get_setting('enable_context_regions') === 1) {
+            if ($page['is_mobile'] == TRUE && $region !== 'content') {
 
-            // Get the target region if set, check blocks can move and its not set to unset
-            if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
+              // Get the target region if set, check blocks can move and its not set to unset
+              if (($target_region = at_get_setting('move_' . $region)) && ($target_region !== 'do_not_move') && (at_get_setting('unset_' . $region) !== 1)) {
 
-              // Sanitize possible vector
-              $target_region = check_plain($target_region);
+                // Sanitize possible vector
+                $target_region = check_plain($target_region);
 
-              // Initialize the classes array
-              $classes = array();
+                // Initialize the classes array
+                $classes = array();
 
-              // Move each block
-              foreach ($blocks as $block) {
+                // Move each block
+                foreach ($blocks as $block) {
 
-                // If the $target_region is empty the region markup does not print
-                // so we need to generate it manually. This is bad because it
-                // cannot account for region specific template suggestions and
-                // Adaptivethemes own region prefix and suffix wrappers.
-                if (empty($page[$target_region])) {
-                  $classes[] = 'region';
-                  $classes[] = 'region-' . $target_region;
-                  if ($target_region == 'sidebar_first' || $target_region == 'sidebar_second') {
-                    $classes[] = 'sidebar';
+                  // If the $target_region is empty the region markup does not print
+                  // so we need to generate it manually. This is bad because it
+                  // cannot account for region specific template suggestions and
+                  // Adaptivethemes own region prefix and suffix wrappers.
+                  if (empty($page[$target_region])) {
+                    $classes[] = 'region';
+                    $classes[] = 'region-' . $target_region;
+                    if ($target_region == 'sidebar_first' || $target_region == 'sidebar_second') {
+                      $classes[] = 'sidebar';
+                    }
+                    $classes = implode(' ', $classes);
+                    $page[$target_region]['#prefix'] = '<div class="' .  $classes . '"><div class="region-inner clearfix">';
+                    $page[$target_region]['#suffix'] = '</div></div>';
                   }
-                  $classes = implode(' ', $classes);
-                  $page[$target_region]['#prefix'] = '<div class="' .  $classes . '"><div class="region-inner clearfix">';
-                  $page[$target_region]['#suffix'] = '</div></div>';
+
+                  // Move the blocks to the target region
+                  $page[$target_region][$block] = $page[$region][$block];
+
+                  // Unset the original block
+                  unset($page[$region][$block]);
                 }
 
-                // Move the blocks to the target region
-                $page[$target_region][$block] = $page[$region][$block];
-
-                // Unset the original block
-                unset($page[$region][$block]);
+                // Unset the region, all blocks are now moved
+                unset($page[$region]);
               }
 
-              // Unset the region, all blocks are now moved
-              unset($page[$region]);
-            }
-
-            // Unset unwanted regions in mobile
-            if (at_get_setting('unset_' . $region) === 1) {
-              unset($page[$region]);
+              // Unset unwanted regions in mobile
+              if (at_get_setting('unset_' . $region) === 1) {
+                unset($page[$region]);
+              }
             }
           }
         }
