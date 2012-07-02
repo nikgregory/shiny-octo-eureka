@@ -610,6 +610,11 @@ function adaptivetheme_preprocess_node(&$vars) {
     // Use the title prefix to render the unpublished message
     $vars['title_prefix']['unpublished']['#markup'] = '<p class="unpublished">' . t('Unpublished') . '</p>';
   }
+
+  // Add nofollow to Book module print/export links
+  if ($vars['content']['links']['book']['#links']['book_printer']) {
+    $vars['content']['links']['book']['#links']['book_printer']['attributes']['rel'][] = 'nofollow';
+  }
 }
 
 /**
