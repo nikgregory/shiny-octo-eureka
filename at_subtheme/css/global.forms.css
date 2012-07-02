@@ -325,6 +325,14 @@ fieldset .filter-help {
 }
 
 
+/* Remove margin and padding when filter tips are showing */
+.text-format-wrapper .form-item,
+.text-format-wrapper div.resizable-textarea {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
 /*
  * Password confirmation
  */
