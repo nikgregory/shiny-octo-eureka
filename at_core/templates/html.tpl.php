@@ -11,6 +11,8 @@
  *   settings.
  * - $skip_link_target: prints an ID for the skip navigation target, set in
  *   theme settings.
+ * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
+ *   devices. Use to test for a mobile context.
  *
  * Available Variables:
  * - $css: An array of CSS files for the current page.
