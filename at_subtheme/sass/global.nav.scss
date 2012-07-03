@@ -381,33 +381,43 @@ ul.pager li {
 }
 
 
-// Tabs, Action links
+// Tabs
 #tasks {
-  margin-bottom: 1em;
+  margin-bottom: 15px;
 }
 
 
 ul.primary {
-  border-bottom-color: #ccc;
-  margin: 1.5em 0 0;
-  padding: 0 0 .2em .3em;
+  border-bottom-color:#ccc;
+  margin: 20px 0 0;
+  padding: 0 0 0 5px;
 
-  li a {
-    background-color: #f5f5f5;
-    margin-right: .08em;
-    border-color: #ccc;
-    padding: .1em 10px .2em;
+  li {
+    display: block;
+    float: left;
+    margin: 0 1px -1px;
+    
+    a {
+      background-color: #f5f5f5;
+      border-color: #ccc;
+      margin-right: 1px;
+      padding: 0 10px;
+      display: block;
+      float: left;
+      height: 1.5em;
+      line-height: 1.5em;
+      
+      &:hover,
+      &:focus {
+        background-color: #eee;
+        border-color: #ccc;
+      }
+    }
   }
-}
 
-
-.local-tasks ul.primary li {
-  a:hover {
-    background-color: #f7f7f7;
-    border-color: #ddd;
-  }
-
-  &.active a {
+  li.active a,
+  li.active a:hover,
+  li.active a:focus {
     background-color: #fff;
     border-bottom-color: #fff;
   }
@@ -435,6 +445,7 @@ ul.secondary {
 }
 
 
+// Action links
 ul.action-links {
   margin-left: 0;
   margin-right: 0;

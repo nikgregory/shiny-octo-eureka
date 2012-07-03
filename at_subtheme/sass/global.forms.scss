@@ -40,21 +40,21 @@
 // The descriptive help text (separate from the label)
 .form-item .description {
   font-size: 0.8em;
-  color: #555;
+  color: #4d4d4d;
 }
 
 
 .form-type-radio .description,
 .form-type-checkbox .description {
-  margin-left: 0;
+  margin-left: 2em;
 }
 
 
 // Pack groups of checkboxes and radio buttons closer together
-.form-checkboxes .form-item,
-.form-radios .form-item {
-  // Drupal core uses "0.4em 0"
-  margin: 0;
+.form-type-checkbox,
+.form-type-radios {
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 
@@ -75,7 +75,7 @@ fieldset {
   padding: 10px;
 
   fieldset:last-child {
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
 }
 
@@ -100,8 +100,6 @@ html.js fieldset.collapsed {
 // Shared reset
 select,
 textarea,
-input[type="radio"],
-input[type="checkbox"],
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -119,7 +117,6 @@ input[type="color"],
 input[type="password"] {
   display: inline-block;
   border: 1px solid #ccc;
-  padding: 4px;
   margin-top: 3px;
   margin-bottom: 6px;
 
@@ -157,12 +154,19 @@ input[disabled] {
 // Position radios and checkboxes better
 input[type="radio"],
 input[type="checkbox"] {
+  display: inline-block;
   line-height: normal;
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 0;
   vertical-align: baseline;
   *vertical-align: middle;
+
+  &:focus {
+    border-color: #52a8ec;
+    border-color: rgba(82, 168, 236, .8);
+    outline: 0;
+  }
 }
 
 
@@ -178,8 +182,7 @@ input[type="checkbox"] {
 
 button,
 input,
-select,
-textarea {
+select {
   font-size: 100%;
   vertical-align: baseline;
   *vertical-align: middle;
@@ -257,6 +260,7 @@ html.js input {
 
 // Textarea
 textarea {
+  font-size: 100%;
   overflow: auto;
   vertical-align: top;
 }
@@ -511,19 +515,6 @@ form {
 
   table .item-list ul {
     margin: 0;
-  }
-}
-
-.lt-ie8 tr {
-
-  &.even,
-  &.odd {
-
-    th,
-    td {
-      // IE doesn't display borders on table rows
-      border-bottom: 1px solid #ccc;
-    }
   }
 }
 

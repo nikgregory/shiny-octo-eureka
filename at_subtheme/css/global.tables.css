@@ -102,6 +102,15 @@ tr.even td.active {
 }
 
 
+/* IE doesn't display borders on table rows */
+.lt-ie8 tr.even th,
+.lt-ie8 tr.even td,
+.lt-ie8 tr.odd th,
+.lt-ie8 tr.odd td {
+  border-bottom: 1px solid #ccc;
+}
+
+
 /*
  * Forum tables
  */

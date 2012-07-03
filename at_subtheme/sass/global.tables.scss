@@ -97,6 +97,20 @@ tr {
 }
 
 
+.lt-ie8 tr {
+
+  &.even,
+  &.odd {
+
+    th,
+    td {
+      // IE doesn't display borders on table rows
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
+
+
 //
 // Forum tables
 //

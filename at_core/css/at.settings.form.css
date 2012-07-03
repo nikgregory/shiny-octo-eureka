@@ -112,6 +112,7 @@ div.smartphone-portrait-layout,
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
+  text-indent: -1000px\9; /* IE */
 }
 
 /* edit-disabled responsive layout disabled messages */
@@ -140,7 +141,7 @@ fieldset.at-layout-form div.form-item input {
 }
 fieldset.at-layout-form select {
   width: 4em;
-   max-width: 100px;
+  max-width: 100px;
 }
 fieldset.at-layout-form div.form-type-checkbox label,
 fieldset.at-media-queries div.form-type-textfield label {
