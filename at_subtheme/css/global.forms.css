@@ -118,6 +118,9 @@ input[type='password'] {
   border: 1px solid #ccc;
   margin-top: 3px;
   margin-bottom: 6px;
+  height: auto;
+  font-family: inherit !important; /* inherit the default site font and not the browsers monospace font */
+  font-size: 1em;
 }
 
 
@@ -206,12 +209,10 @@ input.form-text {
 
 
 /* Reset form-text, textarea and select */
+input[type="search"],
 input[type='text'],
-textarea,
-select {
-  height: auto;
-  font-family: inherit !important; /* inherit the default site font and not the browsers monospace font */
-  font-size: 1em;
+textarea {
+
 }
 
 

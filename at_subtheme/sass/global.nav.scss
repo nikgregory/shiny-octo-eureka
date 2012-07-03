@@ -30,7 +30,7 @@ a {
 
 .nav {
   clear: both;
-  margin: 0;
+  margin: 10px 0;
 
   ul.menu {
     margin: 0;
@@ -233,7 +233,7 @@ ul.menu {
 // Breadcrumbs as an ordered list
 #breadcrumb {
 
-  padding-bottom: 1em;
+  margin: 10px 0;
   
   // If the label is set to show in theme settings the label class is added
   .breadcrumb-label {
@@ -389,7 +389,7 @@ ul.pager li {
 
 ul.primary {
   border-bottom-color:#ccc;
-  margin: 20px 0 0;
+  margin: 20px 0;
   padding: 0 0 0 5px;
 
   li {
@@ -447,8 +447,7 @@ ul.secondary {
 
 // Action links
 ul.action-links {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 20px 0 0;
   list-style: none;
 
   li {}

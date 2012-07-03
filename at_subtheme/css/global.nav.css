@@ -30,7 +30,7 @@ a:focus {}
 
 .nav {
   clear:both;
-  margin: 0;
+  margin: 10px 0;
 }
 
 
@@ -259,7 +259,7 @@ ul.menu li.active-trail a {
  * basically a menu displayed inline, so we mark it up like a real menu.
  */
 #breadcrumb {
-  padding-bottom: 20px;
+  margin: 10px 0;
 }
 
 
@@ -428,7 +428,7 @@ ul.pager li.pager-last {
 
 ul.primary {
   border-bottom-color:#ccc;
-  margin: 20px 0 0;
+  margin: 20px 0;
   padding: 0 0 0 5px;
 }
 
@@ -490,8 +490,7 @@ ul.secondary li a.active {
 
 /* Action links */
 ul.action-links {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 20px 0 0;
   list-style: none;
 }
 
