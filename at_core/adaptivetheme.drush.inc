@@ -67,7 +67,7 @@ function drush_adaptivetheme($name = NULL, $machine_name = NULL) {
   array_pop($subtheme_path);
   $subtheme_path = implode('/', $subtheme_path) . '/' . str_replace('_', '-', $machine_name);
 
-  // Make a fresh copy of the original starter kit.
+  // Make a fresh copy of the original subtheme.
   drush_op('adaptivetheme_copy', $adaptivetheme_path . '/../' .'at_subtheme', $subtheme_path);
 
   // Rename the .info file.

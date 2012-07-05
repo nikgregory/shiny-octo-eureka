@@ -12,12 +12,11 @@
 
 ;----------// Stylesheets
 
-  ; Globals CSS, loads all global.[type].css files in /css/
-  stylesheets[screen][] = css/globals.css
+  ; See each stylesheet for extensive documentation and help.
+  stylesheets[screen][] = css/global.base.css
+  stylesheets[screen][] = css/global.styles.css
 
-
-  ; Print
-  ; Uncomment to load basic print styles.
+  ; Print - uncomment to load basic print styles.
   ; stylesheets[print][] = css/print.css
 
 

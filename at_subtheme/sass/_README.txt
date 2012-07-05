@@ -45,7 +45,7 @@ project for Drupal: http://drupal.org/project/sassy
 
 
 
-oving to Production
+Moving to Production
 --------------------
 
 Once you have finished your sub-theme development and are ready to move your CSS

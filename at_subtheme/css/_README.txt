@@ -55,17 +55,20 @@ Global Styles
 -------------
 
 The global styles do not target any specific device - they always load for all
-devices, however you can unset each one individually or all them.
+devices.
 
-global.css holds an array of @imports that pull in all the others. You can
-comment out unwanted stylesheets.
-
-All the global stylesheets are prefixed with the name "global", for example:
+There are two main global stylesheets:
 
   - global.base.css
-  - global.blocks.css
+  - global.styles.css
+  
+global.base.css - this holds a few imoportant declarations that should probably
+not be removed, however you can modify them, such as gutter width and flexibile
+image/media styles.
 
-...and so on.
+global.styles.css - includes a slighly modified normalize reset and many empty
+selectors for elements and drupal classes and id's. If you prefer you can delete
+everything in global.styles.css and start with a clean slate.
 
 The selectors are extensive and you should delete unused selectors before
 going live to reduce CSS weight. You can use cleancss.com or a better way is

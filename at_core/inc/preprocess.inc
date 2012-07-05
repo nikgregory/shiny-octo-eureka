@@ -141,9 +141,8 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['site_name_unlinked'] = $vars['site_name_title'];
   }
 
-  // Site name visibility and other classes
+  // Site name visibility and other classes and variables
   $vars['site_name_attributes_array'] = array();
-
   $vars['visibility'] = '';
   $vars['hide_site_name'] = FALSE;
   if (at_get_setting('toggle_name', $theme_name) === 0) {
