@@ -163,10 +163,11 @@
 
 
   ; Polyfills
-  settings[load_html5js]       = 1
-  settings[load_respondjs]     = 0
-  settings[load_ltie8css]      = 0
-  settings[load_scalefixjs]    = 0
+  settings[load_html5js]        = 1
+  settings[load_onmediaqueryjs] = 0
+  settings[load_respondjs]      = 0
+  settings[load_ltie8css]       = 0
+  settings[load_scalefixjs]     = 0
 
 
   ; Debug

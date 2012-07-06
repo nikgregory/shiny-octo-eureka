@@ -24,23 +24,28 @@
   ;
   ; AT can load stylesheets in conditional comments from the info file.
   ;
-  ; Syntax: ie_stylesheets[media][condition] = path/to/file (path must be relative to your theme root)
+  ; Syntax: ie_stylesheets[media][condition][] = path/to/file (path must be
+  ; relative to your theme root)
   ;
-  ; For example if you want to load a stylesheet just for IE7 use the following (note: you need to create "ie7.css" in the /css/ directory):
-  ; ie_stylesheets[screen][IE 7] = css/ie7.css
+  ; For example if you want to load a stylesheet just for IE7 use the
+  ; following (note: you need to create "ie7.css" in the /css/ directory):
+  ; ie_stylesheets[screen][IE 7][] = css/ie7.css
   ;
-  ; By default the sub-theme has one IE stylesheet which loads for "less than IE9" but "not IEMobile 7".
+  ; By default the sub-theme has one IE stylesheet which loads for
+  ; "less than IE9" but "not IEMobile 7".
   ; Uncomment the following to use the included IE styleseet:
 
-  ; ie_stylesheets[screen][(lt IE 9)&(!IEMobile 7)] = css/lt-ie9.css
+  ;ie_stylesheets[screen][(lt IE 9)&(!IEMobile 7)][] = css/lt-ie9.css
 
 
   ; Unset Module CSS or other Stylesheets
   ;
-  ; In your theme settings you can unset many stylesheets using the Unset CSS Extension. If for some
-  ; reason the file you want to unset is not showing, you can explicitly declare it here. Once you have
-  ; finished adding your declarations you must clear the sites cache, then go to your theme settings and
-  ; check the checkbox for the file, then save the theme settings and the file will be unset thereafter.
+  ; In your theme settings you can unset many stylesheets using the Unset CSS
+  ; Extension. If for some reason the file you want to unset is not showing,
+  ; you can explicitly declare it here. Once you have finished adding your
+  ; declarations you must clear the sites cache, then go to your theme settings
+  ; and check the checkbox for the file, then save the theme settings and the
+  ; file will be unset thereafter.
   ;
   ; Follow the syntax:
   ;
@@ -55,13 +60,15 @@
 
   ; Internet Explorer Scripts
   ;
-  ; AT can load scripts in conditional comments from the info file. If you are planning to use a polyfill be sure to check
-  ; the "Settings" tab in theme settings - this includes checkboxes to enable the HTML5 Shiv (on by default), Respond.js and
-  ; boxsizing.htc. See the js folder in at_core to view these scripts.
+  ; AT can load scripts in conditional comments from the info file. If you are
+  ; planning to use a polyfill be sure to check the "Settings" tab in theme
+  ; settings for existing Polyfills.
   ;
-  ; Syntax: ie_scripts[condition] = path/to/file (path must be relative to your theme root)
+  ; Syntax: ie_scripts[condition] = path/to/file (path must be relative to your
+  ; theme root)
   ;
-  ; For example if you want to load a script just for IE 8 and below use the following as a guide:
+  ; For example if you want to load a script just for IE 8 and below use the
+  ; following as a guide:
 
   ; ie_scripts[lte IE 8] = js/my-script.js
 
@@ -86,15 +93,15 @@
 
 ;----------// Gpanel Regions
 
-  ; If you are using Gpanels copy and paste the region definitions here. You will find them
-  ; in each layout PHP file in adaptivetheme/layouts/gpanels
+  ; If you are using Gpanels copy and paste the region definitions here. You
+  ; will find them in each layout PHP file in adaptivetheme/layouts/gpanels
 
 
 ;----------// Custom Page Layout Plugins
 
-  ; Don't uncomment this unless you are actually developing a page layout plugin,
-  ; it will add a layout to all device groups that does little else except provide
-  ; and example page_layout plugin.
+  ; Don't uncomment this unless you are actually developing a page layout
+  ; plugin, it will add a layout to all device groups that does little else
+  ; except provide and example page_layout plugin.
 
   ; plugins[page_layout][layouts] = custom_layouts
 
@@ -375,6 +382,7 @@
   settings[comments_hide_title]           = 0
   settings[feed_icons]                    = 0
   settings[unset_block_system_main_front] = 0
+  settings[unset_menu_titles]             = 0
 
 
   ; Accessibility

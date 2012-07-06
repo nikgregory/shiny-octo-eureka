@@ -91,7 +91,7 @@ function load_layout_css($path, $theme_name) {
         $filepath = $path . '/' . $theme_name . '.lt-ie9.layout.css';
         $ie_style['media'] = 'screen';
         $ie_style['condition'] = '(lt IE 9)&(!IEMobile 7)';
-        load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
+        load_conditional_styles($filepath, $ie_style, $theme_name);
       }
     }
   }
@@ -105,26 +105,7 @@ function load_layout_css($path, $theme_name) {
       $filepath = $path . '/' . $theme_name . '.lt-ie8.layout.css';
       $ie_style['media'] = 'screen';
       $ie_style['condition'] = 'lt IE 8';
-      load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
-    }
-  }
-
-  // General IE stylesheets from the info file
-  if (array_key_exists('ie_stylesheets', $info)) {
-    $ie_style = '';
-    foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
-      // Set default value for media in case the themer forgets, all is an
-      // "assumed" value and not printed in the output.
-      if (is_numeric($media)) {
-        $media = 'all';
-      }
-      foreach ($stylesheets as $condition => $ie_styles_path) {
-        $ie_style['media'] = $media;
-        $ie_style['condition'] = $condition;
-        $ie_style['path'] = $ie_styles_path;
-        $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-        load_subtheme_conditional_styles($filepath, $ie_style, $theme_name);
-      }
+      load_conditional_styles($filepath, $ie_style, $theme_name);
     }
   }
 }
@@ -143,10 +124,10 @@ function load_layout_css($path, $theme_name) {
  * @param $theme_name
  */
 function load_responsive_css($path, $theme_name) {
-  
+
   // Set the mode, when CSS is aggregated by Drupal Production mode is TRUE
   $mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
-  
+
   // Development Mode
   // These files are for "design style" only, the layout is handled
   // seperately.
@@ -161,7 +142,7 @@ function load_responsive_css($path, $theme_name) {
   // You can disable responsive capability using the theme settings - look under
   // the Global settings. Do not delete or alter this - use the theme setting!
   if ($mode == FALSE) {
-  
+
     // Build a keyed array of CSS file-names as key, and media query as value.
     // The file names must match the files in your themes CSS directory, if
     // you change them you must update to match.
@@ -419,6 +400,42 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
 }
 
 /**
+ * Build arrays of conditional styles to load
+ * Sub-themes can declare conditional stylesheets in the info file, we need to
+ * get this info file data and process it.
+ *
+ * @param $theme_name, the active theme.
+ */
+function load_subtheme_conditional_styles($theme_name) {
+  $info = drupal_static(__FUNCTION__, array());
+  if (empty($info)) {
+    // Get the info file data
+    $info = at_get_info($theme_name);
+  
+    // General IE stylesheets from the info file
+    if (array_key_exists('ie_stylesheets', $info)) {
+      $ie_style = '';
+      foreach ($info['ie_stylesheets'] as $media => $stylesheets) {
+        // Set default value for media in case the themer forgets, all is an
+        // "assumed" value and not printed in the output.
+        if (is_numeric($media)) {
+          $media = 'all';
+        }
+        foreach ($stylesheets as $condition => $file) {
+          foreach($file as $ie_styles_path) {
+            $ie_style['media'] = $media;
+            $ie_style['condition'] = $condition;
+            $ie_style['path'] = $ie_styles_path;
+            $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
+            load_conditional_styles($filepath, $ie_style, $theme_name);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Load Sub-theme IE Stylesheets.
  * Wrapper function for drupal_add_css() that makes use the 'browser' option
  * to load stylesheets for Internet Explorer.
@@ -429,7 +446,7 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
  * @param $theme_name, the active theme.
  * @param $weight, optional.
  */
-function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0) {
+function load_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0) {
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'group' => CSS_THEME,
@@ -459,7 +476,7 @@ function load_subtheme_conditional_styles($filepath, $ie_style, $theme_name, $we
  * @param $scope, header or footer.
  * @param $weight, optional.
  */
-function at_load_subtheme_script($filepath, $theme_name, $scope, $weight = NULL) {
+function load_subtheme_script($filepath, $theme_name, $scope, $weight = NULL) {
   $filepath = drupal_get_path('theme', $theme_name) . '/' . $filepath;
   if (file_exists($filepath)) {
     drupal_add_js($filepath, array(

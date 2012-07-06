@@ -1,6 +1,6 @@
 /**
  * global.styles.css
- * 
+ *
  * Styles you add here will load for all device sizes, they are "global", as
  * opposed to "responsive" styles, which only load for a given breakpoint (media
  * query) that you set in theme settings. See the README for more details.
@@ -17,7 +17,7 @@
  *
  * The approach with normalize is to modify it to suit your design, rather than
  * overriding its defaults.
- * 
+ *
  * Additionally there are many empty selectors and base styles to act as a guide
  * or examples of how you can style Drupal. Nothing is set in stone, you can
  * change anything you want, even delete all of it and start with your own
@@ -87,11 +87,19 @@ audio:not([controls]) {
    Base
    ========================================================================== */
 
-/* Always apply your global font size the the html element, not body or #page.
-   If you are using the themes Responsive JS feature (media_queries.js) do not
-   set a font-family on the html element, use body. */
-
-/**
+/*
+ * Notes for the HTML and BODY elements:
+ *
+ * Font Family:
+ * If you are using the themes Responsive JS feature (media_queries.js) do not
+ * set a font-family on the html element, use body.
+ *
+ * Font Size:
+ * Default font size set in theme settings applies to the body elemet, using any
+ * thing other than the 100% reset on the HTML element will result in odd font
+ * sizing - only apply a global font size to the body element, or just use the
+ * theme settings.
+ *
  * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
  *    http://clagnut.com/blog/348/#c790
  * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
@@ -107,6 +115,9 @@ html {
   overflow-y: scroll;
 }
 
+
+/* NOTE: Default font size set in theme settings applies to the body element
+   so be carefu. */
 
 /**
  * 1. Addresses margins handled incorrectly in IE6/7
@@ -124,7 +135,7 @@ body {
 
 /**
  * Addresses font-family inconsistency between 'textarea' and other form elements.
- * 
+ *
  * EDIT: removed html element from this stack, it does not play with AT's theme
  * settings for fonts and Responsive JavaScript implementations.
  */
@@ -165,56 +176,20 @@ a:active {
    Typography
    ========================================================================== */
 
-/*
- * Fonts
- *
- * By default there is no global font size reset. A common
- * method is to reset it to 62.5%, or 10px. This makes it very
- * easy to calculate the required font sizes in em, for example:
- *
- * 1.6em = 16px
- * 2.4em = 24px
- *
- * In Adaptivetheme this should be applied to the HTML element,
- * so it will play nicely with the theme settings. If you use
- * the body element or #page wrapper you will get unpredictable
- * font scaling issues.
- *
- * Font size chart from http://pxtoem.com/
- *
- * 6px	 0.6em	 60%	 5pt
- * 7px	 0.7em	 70%	 5pt
- * 8px	 0.8em	 80%	 6pt
- * 9px	 0.9em	 90%	 7pt
- * 10px	 1em	   100%	 8pt
- * 11px	 1.1em	 110%	 8pt
- * 12px	 1.2em	 120%	 9pt
- * 13px	 1.3em	 130%	 10pt
- * 14px	 1.4em	 140%	 11pt
- * 15px	 1.5em	 150%	 11pt
- * 16px	 1.6em	 160%	 12pt
- * 17px	 1.7em	 170%	 13pt
- * 18px	 1.8em	 180%	 14pt
- * 19px	 1.9em	 190%	 14pt
- * 20px	 2em	   200%	 15pt
- * 21px	 2.1em	 210%	 16pt
- * 22px	 2.2em	 220%	 17pt
- * 23px	 2.3em	 230%	 17pt
- * 24px	 2.4em	 240%	 18pt
- *
- *
+/**
  * Font Theme Settings
  *
- * Adaptivetheme includes powerful theme settings for adding
- * webfonts and setting font sizes - you can enable these
- * under "Site Tweaks", simply enable the Fonts setting and
- * start using them. You can choose from standard websafe font
- * stacks, Google fonts, add your own custom stacks, and if you
- * have @font-your-face module installed just set the font to
- * "-- add selector in theme CSS --" and the font will automatically
- * be available to you in theme settings.
- * @see http://drupal.org/project/fontyourface
+ * Adaptivetheme includes powerful theme settings for adding webfonts and
+ * setting font sizes - you can enable these under "Site Tweaks", simply enable
+ * the Fonts setting and start using them. You can choose from standard websafe
+ * font stacks, Google fonts, add your own custom stacks, and if you have
+ * @font-your-face module installed just set the font to...
  *
+ * "-- add selector in theme CSS --"
+ *
+ * ...and the font will automatically be available to you in theme settings.
+ *
+ * @see http://drupal.org/project/fontyourface
  *
  * Font Stacks
  *
@@ -1029,7 +1004,7 @@ ul.links li {
 .feed-details dd {
   display: inline;
   margin: 0;
-} 
+}
 
 
 /* Search results are an ordered list so we reset the margin */

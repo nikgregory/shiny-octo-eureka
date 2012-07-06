@@ -71,6 +71,9 @@ function adaptivetheme_preprocess_html(&$vars) {
     load_extensions_css($theme_name);
   }
 
+  // Load conditional styles
+  load_subtheme_conditional_styles($theme_name);
+
   // Load specific subtheme scripts
   if (at_get_setting('load_onmediaqueryjs', $theme_name) === 1) {
     at_load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
