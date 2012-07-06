@@ -9,7 +9,7 @@
 
     <?php foreach ($items as $delta => $item) : ?>
 
-      <li class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
+      <li title="<?php print $item['#options']['entity']->description; ?>" class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
         <?php print render($item); ?>
       </li>
 

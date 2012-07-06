@@ -166,7 +166,7 @@ function adaptivetheme_preprocess_page(&$vars) {
     $vars['visibility'] = '';
     $vars['hide_site_name'] = FALSE;
   }
-  $sitename = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $sitename = variable_get('site_name', 'Drupal');
   $vars['site_name'] = $sitename ? l($sitename, '<front>', array(
     'attributes' => array(
       'title' => t('Home page')),

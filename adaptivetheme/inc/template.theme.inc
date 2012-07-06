@@ -111,8 +111,13 @@ if (!function_exists('dhtml_menu_init')) {
     if ($element['#below']) {
       $sub_menu = drupal_render($element['#below']);
     }
-    if (theme_get_setting('extra_menu_classes')) {
-      $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
+    if (theme_get_setting('extra_menu_classes') == 1 && !empty($element['#original_link'])) {
+      if (!empty($element['#original_link']['depth'])) {
+        $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
+      }
+      if (!empty($element['#original_link']['mlid'])) {
+        $element['#attributes']['class'][] = 'menu-item-' . $element['#original_link']['mlid'];
+      }
     }
     if (theme_get_setting('menu_item_span_elements')) {
       $element['#title'] = '<span>' . $element['#title'] . '</span>';
@@ -121,7 +126,6 @@ if (!function_exists('dhtml_menu_init')) {
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
-
 }
 
 // theme links
