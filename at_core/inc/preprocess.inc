@@ -42,8 +42,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['rdf_namespaces'] = array();
   if (function_exists('rdf_get_namespaces')) {
     foreach (rdf_get_namespaces() as $prefix => $uri) {
-      $vars['rdf_namespaces_array']['xmlns:' . $prefix][] = $uri;
+      $prefixes[] = $prefix . ': ' . $uri;
     }
+    $vars['rdf_namespaces_array']['prefix'] = implode(' ', $prefixes);
   }
 
   // Get the path to the directory where our CSS files are saved
