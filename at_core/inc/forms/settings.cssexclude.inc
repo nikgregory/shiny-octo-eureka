@@ -11,6 +11,9 @@ include_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/get.inc');
 // Get the relevent CSS file data for building the form.
 $css_data = at_get_css_files($theme_name);
 
+// regex pattern
+$pattern = '/[^a-zA-Z0-9-]+/';
+
 // -- DIE CSS DIE -- //
 $form['at']['cssexcludes'] = array(
   '#type' => 'fieldset',
@@ -36,7 +39,7 @@ $form['at']['cssexcludes']['die-css-die']['core-excludes'] = array(
 foreach ($css_data as $key => $value) {
   if ($value['type'] == 'unset_core') {
     $core_defined = TRUE;
-    $setting = 'unset_css_' . drupal_html_class($key);
+    $setting = 'unset_css_' . preg_replace($pattern, '_', $key);
     $title_parts = explode('/', $key);
     $title = array_pop($title_parts);
     $form['at']['cssexcludes']['die-css-die']['core-excludes'][$setting] = array(
@@ -72,7 +75,7 @@ $form['at']['cssexcludes']['die-css-die']['contrib-excludes'] = array(
 foreach ($css_data as $key => $value) {
   if ($value['type'] == 'contrib') {
     $contrib_defined = TRUE;
-    $setting = 'unset_css_' . drupal_html_class($key);
+    $setting = 'unset_css_' . preg_replace($pattern, '_', $key);
     $title_parts = explode('/', $key);
     $title = array_pop($title_parts);
     $form['at']['cssexcludes']['die-css-die']['contrib-excludes'][$setting] = array(
@@ -108,7 +111,7 @@ $form['at']['cssexcludes']['die-css-die']['libraries-excludes'] = array(
 foreach ($css_data as $key => $value) {
   if ($value['type'] == 'library') {
     $libraries_defined = TRUE;
-    $setting = 'unset_css_' . drupal_html_class($key);
+    $setting = 'unset_css_' . preg_replace($pattern, '_', $key);
     $title_parts = explode('/', $key);
     $title = array_pop($title_parts);
     $form['at']['cssexcludes']['die-css-die']['libraries-excludes'][$setting] = array(
@@ -144,7 +147,7 @@ $form['at']['cssexcludes']['die-css-die']['explicit-excludes'] = array(
 foreach ($css_data as $key => $value) {
   if ($value['type'] == 'user_defined') {
     $user_defined = TRUE;
-    $setting = 'unset_css_' . drupal_html_class($key);
+    $setting = 'unset_css_' . preg_replace($pattern, '_', $key);
     $title_parts = explode('/', $key);
     $title = array_pop($title_parts);
     $form['at']['cssexcludes']['die-css-die']['explicit-excludes'][$setting] = array(

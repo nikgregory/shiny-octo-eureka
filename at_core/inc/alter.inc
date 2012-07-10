@@ -200,7 +200,7 @@ function adaptivetheme_css_alter(&$css) {
 
     // Get the theme setting and unset files
     foreach ($css_data as $key => $value) {
-      $setting = 'unset_css_' . drupal_html_class($key);
+      $setting = 'unset_css_' . preg_replace('/[^a-zA-Z0-9-]+/', '_', $key);
       if (at_get_setting($setting, $theme_name) === 1) {
         if (isset($css[$key])) {
           unset($css[$key]);
@@ -212,7 +212,7 @@ function adaptivetheme_css_alter(&$css) {
     // unset, but I don't know if this is a core bug or not.
     if (isset($language->dir) && $language->dir === 'rtl') {
       foreach ($css_data as $key => $value) {
-        $setting = 'unset_css_' . drupal_html_class($key);
+        $setting = 'unset_css_' . preg_replace('/[^a-zA-Z0-9-]+/', '_', $key);
         if (at_get_setting($setting, $theme_name) === 1) {
           $key = str_replace('.css', '-rtl.css', $key);
           if (isset($css[$key])) {
