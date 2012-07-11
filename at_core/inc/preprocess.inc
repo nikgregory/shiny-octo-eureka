@@ -322,16 +322,23 @@ function adaptivetheme_preprocess_block(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Generate the wrapper element, if there's a title use section
-  $vars['block']->subject ? $vars['tag'] = 'section' : $vars['tag'] = 'div';
+  // Block subject, under certain conditions, is not set
+  $vars['tag'] = 'div';
+  $vars['title'] = '';
+  if (isset($vars['block']->subject)) {
+    if (!empty($vars['block']->subject)) {
+      // Generate the wrapper element, if there's a title use section
+      $vars['tag'] = 'section';
+
+      // Use a $title variable instead of $block->subject
+      $vars['title'] = $vars['block']->subject;
+    }
+  }
 
   // Search is never a section, its just a div
   if ($vars['block_html_id'] === 'block-search-form') {
     $vars['tag'] = 'div';
   }
-
-  // Use a $title variable instead of $block->subject
-  $vars['title'] = $vars['block']->subject;
 
   // Initialize and populate the inner wrapper variables
   $vars['inner_prefix'] = '<div class="block-inner clearfix">';
