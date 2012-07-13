@@ -100,6 +100,18 @@ function adaptivetheme_process_page(&$vars) {
       }
     }
   }
+
+  // Page template suggestions for Panels pages
+  if (module_exists('page_manager')) {
+    if($panel_page = page_manager_get_current_page()) {
+      // add a generic suggestion for all panel pages
+      $suggestions[] = 'page__panels';
+      // add the panel page machine name to the template suggestions
+      $suggestions[] = 'page__' . $panel_page['name'];
+      // merge the suggestions in to the existing suggestions (as more specific than the existing suggestions)
+      $vars['theme_hook_suggestions'] = array_merge($vars['theme_hook_suggestions'], $suggestions);
+    }
+  }
 }
 
 /**

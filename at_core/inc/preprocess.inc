@@ -625,7 +625,7 @@ function adaptivetheme_preprocess_node(&$vars) {
 
   // Add nofollow to Book module print/export links
   if (isset($vars['content']['links']['book']['#links']['book_printer'])) {
-    $vars['content']['links']['book']['#links']['book_printer']['attributes']['rel'][] = 'nofollow';
+    $vars['content']['links']['book']['#links']['book_printer']['attributes'] = array('rel' => array('nofollow'));
   }
 }
 

@@ -502,8 +502,12 @@ html.js fieldset.collapsible fieldset .fieldset-legend {
   position: static;
 }
 #edit-context-regions fieldset .fieldset-wrapper {
-  margin-top: 30px;
+  padding: 30px 15px 15px 1px;
 }
+.admin-theme-adaptivetheme-admin #edit-context-regions fieldset .fieldset-wrapper {
+  padding-left: 15px;
+}
+
 
 /* Float block regions */
 #edit-float-region-blocks label {

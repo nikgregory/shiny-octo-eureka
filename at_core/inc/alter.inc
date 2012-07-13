@@ -275,12 +275,15 @@ function adaptivetheme_page_alter(&$page) {
       }
 
       if ($blocks) {
+        
+        // Set a bool for the last class for blocks feature
         $page[$region][$blocks[0]]['#block']->last_in_region = TRUE;
 
+        // Alter regions and block visibility. Note that ideally this would all
+        // be better in hook_page_build(), however themes can't fire that hook.
         if (at_get_setting('enable_extensions', $theme_name) === 1) {
-          // Alter regions and block visibility. Note that ideally this would all
-          // be better in hook_page_build(), however themes can't fire that hook.
           if (at_get_setting('enable_context_regions') === 1) {
+
             if ($page['is_mobile'] == TRUE && $region !== 'content') {
 
               // Get the target region if set, check blocks can move and its not set to unset
