@@ -18,6 +18,7 @@ if ($theme_settings) {
     if ($theme_name == $key) {
       $this_themes_info = $lt[$theme_name]->info;
       foreach ($this_themes_info as $k => $v) {
+        // Basic info - name, desc, base theme, release, core, engine and screenshot
         if ($k == 'name') {
           $static_settings_info[] = 'name = ' . $v;
         }
@@ -40,6 +41,7 @@ if ($theme_settings) {
         if ($k == 'screenshot') {
           $static_settings_info[] = 'screenshot = screenshot.png';
         }
+        // Stylesheets
         if ($k == 'stylesheets' && !empty($k)) {
           foreach ($v as $media_target => $stylesheet_file) {
             foreach ($stylesheet_file as $stylesheet_file_name => $stylesheet_file_path) {
@@ -47,16 +49,37 @@ if ($theme_settings) {
             }
           }
         }
+        // IE Stylesheets
+        if ($k == 'ie_stylesheets' && !empty($k)) {
+          foreach ($v as $media_target => $condition) {
+            foreach ($condition as $conditional_comment => $condition_file) {
+              foreach ($condition_file as $conditional_file_path) {
+                $static_settings_info[] = "ie_stylesheets[$media_target][$conditional_comment][] = $conditional_file_path";
+              }
+            }
+          }
+        }
+        // Scripts
         if ($k == 'scripts' && !empty($k)) {
           foreach ($v as $script => $file) {
             $static_settings_info[] = "scripts[] = $script";
           }
         }
+        // IE Scripts
+        if ($k == 'ie_scripts' && !empty($k)) {
+          foreach ($v as $condition => $condition_file) {
+            foreach ($condition_file as $conditional_file_path) {
+              $static_settings_info[] = "ie_scripts[$condition][] = $conditional_file_path";
+            }
+          }
+        }
+        // Regions
         if ($k == 'regions') {
           foreach ($v as $name => $label) {
             $static_settings_info[] = "regions[$name] = $label";
           }
         }
+        // Features
         if ($k == 'features') {
           foreach ($v as $feature_key => $feature) {
             $static_settings_info[] = "features[] = $feature";
@@ -110,8 +133,8 @@ if ($theme_settings) {
     $dynamic_settings = implode("\n", $dynamic_settings_info);
   }
   if (!empty($static_settings_info) && !empty($dynamic_settings_info)) {
-    $sanitized_values = filter_xss_admin($static_settings . "\n" . $dynamic_settings); // run a final sanity check
+    $combined_values = $static_settings . "\n" . $dynamic_settings; // ideally run a sanity check but all of them convert entities, which won't work for code
     $filepath = $path . '/' . $theme_name . '_settings.info';
-    file_unmanaged_save_data($sanitized_values, $filepath, FILE_EXISTS_REPLACE);
+    file_unmanaged_save_data($combined_values, $filepath, FILE_EXISTS_REPLACE);
   }
 }

@@ -1,13 +1,27 @@
 <?php
+
 /**
  * Override or insert variables into page templates.
  */
 function adaptivetheme_admin_preprocess_page(&$vars) {
-  $vars['datetime_rfc'] = '';
-  $vars['datetime_iso'] = '';
-  $vars['datetime_rfc'] = date("r" , time()); // RFC2822 date format
-  $vars['datetime_iso'] = gmdate('Y-m-d\TH:i:s\Z'); // ISO 8601 date format
+  // RFC2822 date format
+  if ($rfc = date("r" , time())) {
+    $vars['datetime_rfc'] = t('@time', array('@time' => $rfc));
+  }
+  else {
+    $rfc = '';
+    $vars['datetime_rfc'] = '';
+  }
+  // ISO 8601 date format
+  if ($iso = gmdate('Y-m-d\TH:i:sO')) {
+    $vars['datetime_iso'] = $iso;
+  }
+  else {
+    $iso = '';
+    $vars['datetime_iso'] = '';
+  }
 }
+
 /**
  * Alter the search block form.
  */

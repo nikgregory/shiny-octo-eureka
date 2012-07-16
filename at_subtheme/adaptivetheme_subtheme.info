@@ -64,13 +64,13 @@
   ; planning to use a polyfill be sure to check the "Settings" tab in theme
   ; settings for existing Polyfills.
   ;
-  ; Syntax: ie_scripts[condition] = path/to/file (path must be relative to your
+  ; Syntax: ie_scripts[condition][] = path/to/file (path must be relative to your
   ; theme root)
   ;
   ; For example if you want to load a script just for IE 8 and below use the
   ; following as a guide:
 
-  ; ie_scripts[lte IE 8] = js/my-script.js
+  ; ie_scripts[lte IE 8][] = js/my-script.js
 
 
 ;----------// Regions

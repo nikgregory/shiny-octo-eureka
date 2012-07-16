@@ -72,7 +72,7 @@ video {
 }
 
 
-/* Override max-width 100% for map displays */
+/* Override max-width 100% for moduels and widgets where this fails */
 #map img,
 .gmap img,
 .view-gmap img,
@@ -80,7 +80,8 @@ video {
 #getlocations_map_canvas img,
 #locationmap_map img,
 .geofieldMap img,
-.views_horizontal_slider img {
+.views_horizontal_slider img,
+.field-widget-imagefield-crop-widget img {
   max-width: none !important;
 }
 

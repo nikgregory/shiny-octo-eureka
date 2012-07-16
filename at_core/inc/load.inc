@@ -411,7 +411,7 @@ function load_subtheme_conditional_styles($theme_name) {
   if (empty($info)) {
     // Get the info file data
     $info = at_get_info($theme_name);
-  
+
     // General IE stylesheets from the info file
     if (array_key_exists('ie_stylesheets', $info)) {
       $ie_style = '';
