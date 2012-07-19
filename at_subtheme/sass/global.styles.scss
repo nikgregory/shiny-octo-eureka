@@ -4,7 +4,7 @@
 
 //
 // global.styles.css
-// 
+//
 // Styles you add here will load for all device sizes, they are "global", as
 // opposed to "responsive" styles, which only load for a given breakpoint (media
 // query) that you set in theme settings. See the README for more details.
@@ -16,7 +16,7 @@
 // The first part of this file is normalize.css with a few modifications to make
 // it work with the Adaptivetheme theme settings, these are commented and there
 // are only a few minor changes.
-// 
+//
 // Additionally there are many empty selectors and base styles to act as a guide
 // or examples of how you can style Drupal. Nothing is set in stone, you can
 // change anything you want, even delete all of it and start with your own
@@ -120,7 +120,7 @@ body {
 
 //
 // Addresses font-family inconsistency between 'textarea' and other form elements.
-// 
+//
 // EDIT: removed html element from this stack, it does not play with AT's theme
 // settings for fonts and Responsive JavaScript implementations.
 //
@@ -789,12 +789,12 @@ tr {
   margin: 0;
 
   a {
-  
+
     &:link,
     &:visited {
       text-decoration: none;
     }
-  
+
     &:hover,
     &:focus {
       text-decoration: underline;
@@ -1336,7 +1336,7 @@ ul.menu {
 #breadcrumb {
 
   margin: 10px 0;
-  
+
   // If the label is set to show in theme settings the label class is added
   .breadcrumb-label {
     font-size: 1em;
@@ -1352,7 +1352,7 @@ ul.menu {
     margin: 0;
     padding: 0;
   }
-  
+
   .with-breadcrumb-label ol {
     display: inline;
   }
@@ -1498,7 +1498,7 @@ ul.primary {
     display: block;
     float: left;
     margin: 0 1px -1px;
-    
+
     a {
       background-color: #f5f5f5;
       border-color: #ccc;
@@ -1508,7 +1508,7 @@ ul.primary {
       float: left;
       height: 1.5em;
       line-height: 1.5em;
-      
+
       &:hover,
       &:focus {
         background-color: #eee;
@@ -1564,7 +1564,7 @@ ul.action-links {
   .page-previous {}
 
   .page-next {}
-  
+
   .page-up {
     // Prevent text wrapping to a new line, assumes English "up" is used (two characters)
     min-width: 2em;
@@ -1595,12 +1595,12 @@ ul.action-links {
 
 
 // Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues.
-.field .field-label {
+.field-label {
   font-size: 1em;
   font-weight: 700;
   font-family: inherit; // Forces the h2 to inherit the global font family instead of the h2 font family.
   line-height: inherit;
-  margin: 0;
+  margin-bottom: 0;
 }
 
 
@@ -1723,19 +1723,22 @@ ul.action-links {
 // Float none setting
 .ia-n .field-type-image {}
 
-// Float left setting
-.ia-l .field-type-image {
-  margin: 0.5em 15px 1.5em 0;
+
+/* Float left setting */
+.ia-l .field-type-image img {
+  margin: 5px 20px 15px 0;
 }
 
-// Centered setting
-.ia-c .field-type-image {
-  margin: 0.5em auto 1.5em;
+
+/* Centered setting */
+.ia-c .field-type-image img {
+  margin: 5px auto 15px;
 }
 
-// Float right setting
-.ia-r .field-type-image {
-  margin: 0.5em 0 1.5em 15px;
+
+/* Float right setting */
+.ia-r .field-type-image img {
+  margin: 5px 0 15px 20px;
 }
 
 
@@ -2155,7 +2158,7 @@ ul.action-links {
 // Styleguide module tweaks
 #styleguide-header {
   padding: 0 10px;
-  
+
   .item-list {
      font-family: inherit;
      margin: 0 20px 20px 0;

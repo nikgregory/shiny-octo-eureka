@@ -1666,12 +1666,12 @@ div.field {
 
 
 /* Lables are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues */
-.field .field-label  {
+.field-label {
   font-size: 1em;
   font-weight: 700;
   font-family: inherit;
   line-height: inherit;
-  margin: 0;
+  margin-bottom: 0;
 }
 
 
@@ -1681,7 +1681,6 @@ div.field {
 
 /* Image fields use the <figure> and <figcaption> elements from HTML5 */
 .field-type-image {
-  margin-bottom: 1.5em;
 }
 
 
@@ -1820,20 +1819,20 @@ div.field {
 
 
 /* Float left setting */
-.ia-l .field-type-image {
-  margin: 0.5em 15px 1.5em 0;
+.ia-l .field-type-image img {
+  margin: 5px 20px 15px 0;
 }
 
 
 /* Centered setting */
-.ia-c .field-type-image {
-  margin: 0.5em auto 1.5em;
+.ia-c .field-type-image img {
+  margin: 5px auto 15px;
 }
 
 
 /* Float right setting */
-.ia-r .field-type-image {
-  margin: 0.5em 0 1.5em 15px;
+.ia-r .field-type-image img {
+  margin: 5px 0 15px 20px;
 }
 
 

@@ -11,6 +11,28 @@ body.section-admin {
   padding: 0;
 }
 
+/* If gutters are set in theme settings they will override these
+   values: see Extensions > Modify Output > Design */
+#main-content,
+.block-inner,
+.pane-inner,
+.menu-wrapper,
+.branding-elements,
+.breadcrumb-wrapper,
+.attribution,
+.at-panel .rounded-corner,
+div.messages {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Panel pages need negative margin equal to the gutter width applied to #content,
+  this is taken care of in theme settings as per above for normal gutters */
+.page-panels #content {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
 /* Wrangle things in small views */
 @media only screen and (min-width:320px) and (max-width:768px) {
   body.admin-menu {
@@ -101,13 +123,13 @@ h1#page-title {
 .content-header {
   background: #eee;
 }
-#banner {
+#main-content-header {
   padding-top: 20px;
   position: relative;
   min-height: 50px;
 }
 #topbar,
-#banner {
+#main-content-header {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -567,6 +589,17 @@ ul.primary li.active a:focus {
   color: #6e6e6e;
   text-decoration: none !important;
 }
+
+@media only screen and (max-width: 600px) {
+  ul.primary li a {
+    float: none;
+    margin-bottom: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+  }
+}
+
 .secondary-tasks-wrapper {
   background: #fff;
 }

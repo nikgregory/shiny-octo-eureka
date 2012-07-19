@@ -20,6 +20,9 @@ function adaptivetheme_admin_preprocess_page(&$vars) {
     $iso = '';
     $vars['datetime_iso'] = '';
   }
+  
+  $vars['content_header_attributes_array']['class'][] = 'branding-elements';
+  $vars['content_header_attributes_array']['role'][] = 'banner';
 }
 
 /**
