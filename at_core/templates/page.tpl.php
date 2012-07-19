@@ -18,6 +18,8 @@
  * - $tag: Prints the wrapper element for the main content.
  * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
  *   devices. Use to test for a mobile context.
+ * - *_attributes: attributes for various site elements, usually holds id, class
+ *   or role attributes.
  *
  * General utility variables:
  * - $base_path: The base URL path of the Drupal installation. At the very
@@ -63,7 +65,7 @@
  *   in the page's path (e.g. node/12345 and node/12345/revisions, but not
  *   comment/reply/12345).
  *
- * Regions:
+ * Core Regions:
  * - $page['help']: Dynamic help text, mostly for admin pages.
  * - $page['highlighted']: Items for the highlighted content region.
  * - $page['content']: The main content of the current page.
@@ -71,6 +73,13 @@
  * - $page['sidebar_second']: Items for the second sidebar.
  * - $page['header']: Items for the header region.
  * - $page['footer']: Items for the footer region.
+ *
+ * Adaptivetheme Regions:
+ * - $page['leaderboard']: full width at the very top of the page
+ * - $page['menu_bar']: menu blocks placed here will be styled horizontal
+ * - $page['secondary_content']: full width just above the main columns
+ * - $page['content_aside']: like a main content bottom region
+ * - $page['tertiary_content']: full width just above the footer
  *
  * @see template_preprocess()
  * @see template_preprocess_page()
@@ -84,11 +93,11 @@
   <!-- region: Leaderboard -->
   <?php print render($page['leaderboard']); ?>
 
-  <header id="header" class="clearfix" role="banner">
+  <header<?php print $header_attributes; ?>>
 
     <?php if ($site_logo || $site_name || $site_slogan): ?>
       <!-- start: Branding -->
-      <div id="branding" class="branding-elements clearfix">
+      <div<?php print $branding_attributes; ?>>
 
         <?php if ($site_logo): ?>
           <div id="logo">
@@ -98,14 +107,14 @@
 
         <?php if ($site_name || $site_slogan): ?>
           <!-- start: Site name and Slogan hgroup -->
-          <hgroup id="name-and-slogan"<?php print $hgroup_attributes; ?>>
+          <hgroup<?php print $hgroup_attributes; ?>>
 
             <?php if ($site_name): ?>
-              <h1 id="site-name"<?php print $site_name_attributes; ?>><?php print $site_name; ?></h1>
+              <h1<?php print $site_name_attributes; ?>><?php print $site_name; ?></h1>
             <?php endif; ?>
 
             <?php if ($site_slogan): ?>
-              <h2 id="site-slogan"<?php print $site_slogan_attributes; ?>><?php print $site_slogan; ?></h2>
+              <h2<?php print $site_slogan_attributes; ?>><?php print $site_slogan; ?></h2>
             <?php endif; ?>
 
           </hgroup><!-- /end #name-and-slogan -->
@@ -146,10 +155,10 @@
           <?php print render($title_prefix); // Does nothing by default in D7 core ?>
 
           <?php if ($title || $primary_local_tasks || $secondary_local_tasks || $action_links = render($action_links)): ?>
-            <header id="main-content-header">
+            <header<?php print $content_header_attributes; ?>>
 
               <?php if ($title): ?>
-                <h1 id="page-title"<?php print $attributes; ?>>
+                <h1 id="page-title">
                   <?php print $title; ?>
                 </h1>
               <?php endif; ?>
@@ -206,7 +215,7 @@
 
   <!-- region: Footer -->
   <?php if ($page['footer']): ?>
-    <footer id="footer" class="clearfix" role="contentinfo">
+    <footer<?php print $footer_attributes; ?>>
       <?php print render($page['footer']); ?>
     </footer>
   <?php endif; ?>

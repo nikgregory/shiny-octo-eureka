@@ -26,7 +26,7 @@
 <?php endif; ?>
 <?php $tag = $title ? 'section' : 'div'; ?>
 <<?php print $tag; ?> class="<?php print $classes; ?>" <?php print $id; ?>>
-  <div class="pane-inner clearfix">
+  <div class="block-inner clearfix">
     <?php if ($admin_links): ?>
       <?php print $admin_links; ?>
     <?php endif; ?>
@@ -43,14 +43,14 @@
       </div>
     <?php endif; ?>
 
-    <div class="pane-content">
+    <div class="block-content">
       <?php print render($content); ?>
     </div>
 
     <?php if ($links): ?>
-      <div class="links">
+      <nav class="links">
         <?php print $links; ?>
-      </div>
+      </nav>
     <?php endif; ?>
 
     <?php if ($more): ?>

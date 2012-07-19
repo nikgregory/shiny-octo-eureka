@@ -63,10 +63,15 @@ function adaptivetheme_process_page(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Site name, Slogan and hgroup attributes
+  // Attributes
+  $vars['page_attributes'] = empty($vars['page_attributes_array']) ? '' : drupal_attributes($vars['page_attributes_array']);
+  $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
+  $vars['branding_attributes'] = empty($vars['branding_attributes_array']) ? '' : drupal_attributes($vars['branding_attributes_array']);
+  $vars['hgroup_attributes'] = empty($vars['hgroup_attributes_array']) ? '' : drupal_attributes($vars['hgroup_attributes_array']);
   $vars['site_name_attributes'] = empty($vars['site_name_attributes_array']) ? '' : drupal_attributes($vars['site_name_attributes_array']);
   $vars['site_slogan_attributes'] = empty($vars['site_slogan_attributes_array']) ? '' : drupal_attributes($vars['site_slogan_attributes_array']);
-  $vars['hgroup_attributes'] = empty($vars['hgroup_attributes_array']) ? '' : drupal_attributes($vars['hgroup_attributes_array']);
+  $vars['content_header_attributes'] = empty($vars['content_header_attributes_array']) ? '' : drupal_attributes($vars['content_header_attributes_array']);
+  $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
 
   // Theme the menu bars
   if (!empty($vars['primary_navigation'])) {

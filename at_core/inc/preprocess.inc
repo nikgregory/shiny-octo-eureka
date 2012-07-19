@@ -154,18 +154,10 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (at_get_setting('toggle_name', $theme_name) === 0) {
     // Keep the visibility variable to maintain backwards compatibility
     $vars['visibility'] = 'element-invisible';
+    $vars['site_name_attributes_array']['id'][] = 'site-name';
     $vars['site_name_attributes_array']['class'][] = $vars['visibility'];
     $vars['hide_site_name'] = TRUE;
   }
-
-  // hgroup attributes
-  $vars['hgroup_attributes_array'] = array();
-  if (!$vars['site_slogan'] && $vars['hide_site_name']) {
-    $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
-  }
-
-  // Strip stupid contextual-links-region class, wtf?
-  $vars['classes_array'] = array_values(array_diff($vars['classes_array'], array('contextual-links-region')));
 
   // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
@@ -223,6 +215,44 @@ function adaptivetheme_preprocess_page(&$vars) {
       }
     }
   }
+
+  // Strip stupid contextual-links-region class, wtf?
+  $vars['classes_array'] = array_values(array_diff($vars['classes_array'], array('contextual-links-region')));
+  
+  // page attributes
+  $vars['page_attributes_array']['id'][] = 'page';
+  $vars['page_attributes_array']['class'] = $vars['classes_array'];
+
+  // header attributes
+  $vars['header_attributes_array']['id'][] = 'header';
+  $vars['header_attributes_array']['class'][] = 'clearfix';
+  $vars['header_attributes_array']['role'][] = 'banner';
+
+  // hgroup attributes
+  $vars['hgroup_attributes_array'] = array();
+  if (!$vars['site_slogan'] && $vars['hide_site_name']) {
+    $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
+  }
+
+  // branding attributes
+  $vars['branding_attributes_array']['id'][] = 'branding';
+  $vars['branding_attributes_array']['class'][] = 'branding-elements';
+  $vars['branding_attributes_array']['class'][] = 'clearfix';
+
+  // hgroup attributes
+  $vars['hgroup_attributes_array']['id'][] = 'name-and-slogan';
+
+  // Site slogan attributes
+  $vars['site_slogan_attributes_array']['id'][] = 'site-slogan';
+  
+  // main content header attributes
+  $vars['content_header_attributes_array']['id'][] = 'main-content-header';
+  $vars['content_header_attributes_array']['class'][] = 'clearfix';
+
+  // footer attributes
+  $vars['footer_attributes_array']['id'][] = 'footer';
+  $vars['footer_attributes_array']['class'][] = 'clearfix';
+  $vars['footer_attributes_array']['role'][] = 'contentinfo';
 
   // Attribution variable used in admin theme and some others
   $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
