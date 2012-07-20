@@ -1190,8 +1190,17 @@ fieldset legend a:active {
   font-weight: 600;
   color: #424242;
 }
-html.js fieldset.collapsible .fieldset-legend {
-  padding-left: 17px;
+html.js fieldset span.fieldset-legend {
+  background-image: none !important;
+  padding-left: 0 !important;
+}
+html.js fieldset.collapsible .fieldset-legend a {
+  background: url('images/menu-expanded.png') no-repeat scroll 5px 65% transparent;
+  padding-left: 15px;
+}
+html.js fieldset.collapsed .fieldset-legend a {
+  background-image: url('images/menu-collapsed.png');
+  background-position: 5px 50%;
 }
 html.js #edit-css-settings > legend > .fieldset-legend {
   padding-left: 0;
@@ -2044,3 +2053,16 @@ table.context-admin td.ctools-export-ui-operations {
 input[type="radio"],
 input[type="checkbox"] {
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
