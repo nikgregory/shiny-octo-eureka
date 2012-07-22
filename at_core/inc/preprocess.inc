@@ -520,7 +520,11 @@ function adaptivetheme_preprocess_panels_pane(&$vars) {
     $vars['classes_array'][] = 'no-title';
   }
   $vars['classes_array'][] = 'block';
+
+  // Use the attributes arrays to add classes.
   $vars['title_attributes_array']['class'][] = 'block-title';
+  $vars['attributes_array']['class'] = $vars['classes_array'];
+  $vars['content_attributes_array']['class'][] = 'block-content';
 }
 
 /**

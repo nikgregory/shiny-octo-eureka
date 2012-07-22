@@ -1,7 +1,12 @@
 <?php
 /**
  * @file
- * Adaptivetheme panel pane template
+ * Adaptivetheme panel pane template.
+ *
+ * This template has block type classes to they react to styles applied to blocks,
+ * saving the trouble of having to style multiple selectors to target blocks
+ * and panel panes. This template also makes use the attributes arrays for the
+ * wrapper and content wrapper.
  *
  * Adaptivetheme variables:
  * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
@@ -25,7 +30,7 @@
 <?php if ($pane_prefix): ?>
   <?php print $pane_prefix; ?>
 <?php endif; ?>
-<<?php print $tag; ?> class="<?php print $classes; ?>" <?php print $id; ?>>
+<<?php print $tag . $attributes . $id; ?>>
   <div class="block-inner clearfix">
     <?php if ($admin_links): ?>
       <?php print $admin_links; ?>
@@ -43,7 +48,7 @@
       </div>
     <?php endif; ?>
 
-    <div class="block-content">
+    <div<?php print $content_attributes; ?>>
       <?php print render($content); ?>
     </div>
 
