@@ -365,6 +365,10 @@ function adaptivetheme_preprocess_block(&$vars) {
       // Use a $title variable instead of $block->subject
       $vars['title'] = $vars['block']->subject;
     }
+    else {
+      // Set a class so we can theme when there is no title
+      $vars['classes_array'][] = 'no-title';
+    }
   }
 
   // Search is never a section, its just a div
@@ -512,6 +516,9 @@ function adaptivetheme_preprocess_panels_pane(&$vars) {
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 
   // Add the same classes as blocks
+  if (empty($vars['title'])) {
+    $vars['classes_array'][] = 'no-title';
+  }
   $vars['classes_array'][] = 'block';
   $vars['title_attributes_array']['class'][] = 'block-title';
 }
