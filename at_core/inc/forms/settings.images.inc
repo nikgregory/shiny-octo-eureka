@@ -62,3 +62,16 @@ $form['at']['images']['captions']['image_caption_full'] = array(
   '#description' => t('Captions use the title attribute text. You must enable tiles in the field management options for your image fields.'),
   '#default_value' => at_get_setting('image_caption_full'),
 );
+
+// Teaser
+$form['at']['images']['teaser'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Teaser Image Fields'),
+  '#description' => t('<strong>Show only one image field image on teasers</strong>'),
+);
+$form['at']['images']['teaser']['image_teaser'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Show the first image only on teasers'),
+  '#description' => t('Useful for when you have a multivalue image field and you only want the first image to show on teasers.'),
+  '#default_value' => at_get_setting('image_teaser'),
+);

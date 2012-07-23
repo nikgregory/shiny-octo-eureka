@@ -50,7 +50,7 @@ $form['at-settings']['extend']['enable']['enable_image_settings'] = array(
   '#type' => 'checkbox',
   '#title' => t('Image alignment and captions'),
   '#default_value' => at_get_setting('enable_image_settings'),
-  '#description' => t('Set default image alignment and enable image captions.'),
+  '#description' => t('Set default image alignment, image captions and teaser image view.'),
 );
 
 // Apple touch icons

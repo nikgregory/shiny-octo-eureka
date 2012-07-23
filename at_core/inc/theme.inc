@@ -582,18 +582,25 @@ function adaptivetheme_field__image($vars) {
   foreach ($vars['items'] as $delta => $item) {
 
     $classes = 'field-item ' . ($delta % 2 ? 'odd' : 'even');
-    $output .= '<figure class="' . $classes . '"' . $vars['item_attributes'][$delta] . '>';
+    $output .= '<figure class="clearfix ' . $classes . '"' . $vars['item_attributes'][$delta] .'>';
     $output .= drupal_render($item);
 
-    if (isset($item['#item']['title'])) {
+    if (isset($item['#item']['title']) && $image_settings_enabled == TRUE) {
+      // Ouch this is ugly, please tell me how to get the image style width?
+      $styles = '';
+      $width = 'auto';
+      preg_match('/< *img[^>]*width *= *["\']?([^"\']*)/i', $item['#children'], $matches);
+      $width = $matches[1] . 'px';
+      $styles = 'style="width:' . $width . ';"';
+
       if ($vars['field_view_mode'] == 'full') {
-        if ($caption_full == TRUE && $image_settings_enabled == TRUE) {
-          $output .= '<figcaption class="caption full-caption">' . $item['#item']['title'] . '</figcaption>';
+        if ($caption_full == TRUE) {
+          $output .= '<figcaption class="caption full-caption"' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
         }
       }
       if ($vars['field_view_mode'] == 'teaser') {
-        if ($caption_teaser == TRUE && $image_settings_enabled == TRUE) {
-          $output .= '<figcaption class="caption teaser-caption">' . $item['#item']['title'] . '</figcaption>';
+        if ($caption_teaser == TRUE) {
+          $output .= '<figcaption class="caption teaser-caption"' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
         }
       }
     }

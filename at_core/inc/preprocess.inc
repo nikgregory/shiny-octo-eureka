@@ -357,6 +357,7 @@ function adaptivetheme_preprocess_block(&$vars) {
   // Block subject, under certain conditions, is not set
   $vars['tag'] = 'div';
   $vars['title'] = '';
+
   if (isset($vars['block']->subject)) {
     if (!empty($vars['block']->subject)) {
       // Generate the wrapper element, if there's a title use section
@@ -365,10 +366,14 @@ function adaptivetheme_preprocess_block(&$vars) {
       // Use a $title variable instead of $block->subject
       $vars['title'] = $vars['block']->subject;
     }
+    // subject can be set and empty, i.e. using <none>
     else {
-      // Set a class so we can theme when there is no title
       $vars['classes_array'][] = 'no-title';
     }
+  }
+  // sometimes subject is not set at all
+  else {
+    $vars['classes_array'][] = 'no-title';
   }
 
   // Search is never a section, its just a div
@@ -551,12 +556,26 @@ function adaptivetheme_preprocess_field(&$vars) {
     $vars['field_view_mode'] = $element['#view_mode'];
   }
 
-  // enable captioning capability for image fields
+  // Image fields
   if ($element['#field_type'] === 'image') {
+
+    // Set some vars for image captioning, these always need to be initialized
     $vars['image_caption_teaser'] = FALSE;
     $vars['image_caption_full'] = FALSE;
+
+    // Dont run anything if extensions or image settings are disabled
     if (at_get_setting('enable_extensions', $theme_name) === 1) {
       if (at_get_setting('enable_image_settings', $theme_name) === 1) {
+
+        // Reduce number of images in teaser view mode to single image
+        if (at_get_setting('image_teaser', $theme_name) === 1) {
+          if ($element['#view_mode'] == 'teaser') {
+            $item = reset($vars['items']);
+            $vars['items'] = array($item);
+          }
+        }
+
+        // Captions
         if (at_get_setting('image_caption_teaser', $theme_name) === 1) {
           $vars['image_caption_teaser'] = TRUE;
         }
