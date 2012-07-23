@@ -826,6 +826,16 @@ function adaptivetheme_preprocess_username(&$vars) {
 }
 
 /**
+ * Preprocess variables for theme_image()
+ */
+function adaptivetheme_preprocess_image(&$vars) {
+  // Add a class to image elements based on the image style
+  if (isset($vars['style_name'])) {
+    $vars['attributes']['class'][] = 'image-style-' . drupal_html_class($vars['style_name']);
+  }
+}
+
+/**
  * Preprocess variables for maintenance-page.tpl.php
  */
 function adaptivetheme_preprocess_maintenance_page(&$vars) {
