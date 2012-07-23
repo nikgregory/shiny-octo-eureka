@@ -259,11 +259,12 @@
   settings[block_title_shadow]    = 'bts-n'
 
 
-  ; Image alignment
+  ; Images
   settings[image_alignment]        = 'ia-l'
   settings[image_alignment_teaser] = 'iat-l'
   settings[image_caption_full]     = 0
   settings[image_caption_teaser]   = 0
+  settings[image_teaser]           = 1
 
 
   ; Breadcrumb
