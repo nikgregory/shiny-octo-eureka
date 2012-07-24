@@ -564,10 +564,14 @@ function adaptivetheme_field__image($vars) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Check if image settings are enabled, otherwise captions might print unexpectedly
+  // Check if image settings are enabled
   $image_settings_enabled = at_get_setting('enable_image_settings', $theme_name) === 1 ? TRUE : FALSE;
-  $caption_full = at_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
-  $caption_teaser = at_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
+  
+  // Check if captions are enabled for full and/or teaser view modes
+  if ($image_settings_enabled == TRUE) {
+    $caption_full = at_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
+    $caption_teaser = at_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
+  }
 
   $output = '';
 
@@ -585,7 +589,8 @@ function adaptivetheme_field__image($vars) {
     $output .= '<figure class="clearfix ' . $classes . '"' . $vars['item_attributes'][$delta] .'>';
     $output .= drupal_render($item);
 
-    if (isset($item['#item']['title']) && $image_settings_enabled == TRUE) {
+    // Captions
+    if (isset($item['#item']['title']) && !empty($item['#item']['title']) && $image_settings_enabled == TRUE) {
       // Ouch this is ugly, please tell me how to get the image style width?
       $styles = '';
       $width = 'auto';

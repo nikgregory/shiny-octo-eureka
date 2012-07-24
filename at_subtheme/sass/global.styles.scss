@@ -1717,27 +1717,31 @@ ul.action-links {
 
 
 //
-// Image Alignment Theme Settings - included here so you can easily override them if required
+// Image Alignment Theme Settings - included here so you can easily override them if required, t is for teaser
 //
 
 // Float none setting
-.ia-n .field-type-image {}
+.ia-n .field-type-image,
+.iat-n .field-type-image {}
 
 
 /* Float left setting */
-.ia-l .field-type-image img {
+.ia-l .field-type-image figure,
+.iat-l .field-type-image figure {
   margin: 5px 20px 15px 0;
 }
 
 
 /* Centered setting */
-.ia-c .field-type-image img {
+.ia-c .field-type-image figure,
+.iat-c .field-type-image figure {
   margin: 5px auto 15px;
 }
 
 
 /* Float right setting */
-.ia-r .field-type-image img {
+.ia-r .field-type-image figure,
+.iat-r .field-type-image figure {
   margin: 5px 0 15px 20px;
 }
 
