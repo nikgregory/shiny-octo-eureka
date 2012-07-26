@@ -33,12 +33,13 @@ regions[three_inset_right_bottom]  = AT Inset right - bottom
   $page['three_inset_right_inset'] ||
   $page['three_inset_right_bottom']
   ): ?>
-<div class="at-panel gpanel panel-display three-inset-right clearfix">
-  <?php print $content['three_inset_right_sidebar']; ?>
-  <div class="inset-wrapper clearfix">
-    <?php print $content['three_inset_right_top']; ?>
-    <?php print $content['three_inset_right_middle']; ?>
-    <?php print $content['three_inset_right_inset']; ?>
-    <?php print $content['three_inset_right_bottom']; ?>
+  <div class="at-panel gpanel panel-display three-inset-right clearfix">
+    <?php print $content['three_inset_right_sidebar']; ?>
+    <div class="inset-wrapper clearfix">
+      <?php print $content['three_inset_right_top']; ?>
+      <?php print $content['three_inset_right_middle']; ?>
+      <?php print $content['three_inset_right_inset']; ?>
+      <?php print $content['three_inset_right_bottom']; ?>
+    </div>
   </div>
-</div>
+<?php endif; ?>

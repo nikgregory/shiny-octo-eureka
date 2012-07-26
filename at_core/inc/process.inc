@@ -168,9 +168,7 @@ function adaptivetheme_process_block(&$vars) {
   }
 
   // Some blocks look bad with wrappers so we strip them
-  if ($vars['block_html_id'] === 'block-system-main') {
-    $vars['outer_prefix'] = '';
-    $vars['outer_suffix'] = '';
+  if ($vars['block']->region === 'content') {
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
     $vars['content_processed'] = $vars['content'];

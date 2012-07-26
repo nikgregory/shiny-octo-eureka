@@ -874,7 +874,6 @@ tr.even td.active {
 /* Important messages (status, warning, and error) for the user. See also the
    declarations in messages.css. */
 div.messages  {
-  margin: 15px 10px; /* Drupal core uses "6px 0" margin */
 }
 
 

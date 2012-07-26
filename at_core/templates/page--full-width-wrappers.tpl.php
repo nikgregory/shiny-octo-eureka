@@ -161,9 +161,7 @@
     <?php if ($breadcrumb): ?>
       <div id="breadcrumb-wrapper">
         <div class="container clearfix">
-          <section id="breadcrumb" class="clearfix">
-            <?php print $breadcrumb; ?>
-          </section>
+          <?php print $breadcrumb; ?>
         </div>
       </div>
     <?php endif; ?>

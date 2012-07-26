@@ -9,8 +9,8 @@
 
 // Set variable for mode, we want to show a message based on this
 $mode = variable_get('preprocess_css', '') == 1 ? TRUE : FALSE;
-$performance_settings_path = base_path() . 'admin/config/development/performance';
-$file_settings_path = base_path() . 'admin/config/media/file-system';
+$performance_settings_path = url('admin/config/development/performance');
+$file_settings_path = url('admin/config/media/file-system');
 
 // Global Settings
 $form['at-settings']['global-settings'] = array(
