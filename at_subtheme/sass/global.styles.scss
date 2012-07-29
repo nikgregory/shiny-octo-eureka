@@ -1,5 +1,5 @@
 
-// _base.scss imports _custom.scss and other partials.
+// _base.scss imports _custom.scss (variables and mixins) and other partials.
 @import "base";
 
 /*
@@ -26,63 +26,6 @@
  * helper classes and base styles.
  */
 
-/*
- * Fonts
- *
- * By default there is no global font size reset. A common
- * method is to reset it to 62.5%, or 10px. This makes it very
- * easy to calculate the required font sizes in em, for example:
- *
- * 1.6em = 16px
- * 2.4em = 24px
- *
- * In Adaptivetheme this should be applied to the HTML element,
- * so it will play nicely with the theme settings. If you use
- * the body element or #page wrapper you will get unpredictable
- * font scaling issues.
- *
- * Font size chart from http: *pxtoem.com/
- *
- * 6px	 0.6em	 60%	 5pt
- * 7px	 0.7em	 70%	 5pt
- * 8px	 0.8em	 80%	 6pt
- * 9px	 0.9em	 90%	 7pt
- * 10px	 1em	   100%	 8pt
- * 11px	 1.1em	 110%	 8pt
- * 12px	 1.2em	 120%	 9pt
- * 13px	 1.3em	 130%	 10pt
- * 14px	 1.4em	 140%	 11pt
- * 15px	 1.5em	 150%	 11pt
- * 16px	 1.6em	 160%	 12pt
- * 17px	 1.7em	 170%	 13pt
- * 18px	 1.8em	 180%	 14pt
- * 19px	 1.9em	 190%	 14pt
- * 20px	 2em	   200%	 15pt
- * 21px	 2.1em	 210%	 16pt
- * 22px	 2.2em	 220%	 17pt
- * 23px	 2.3em	 230%	 17pt
- * 24px	 2.4em	 240%	 18pt
- *
- *
- * Font Theme Settings
- *
- * Adaptivetheme includes powerful theme settings for adding
- * webfonts and setting font sizes - you can enable these
- * under "Site Tweaks", simply enable the Fonts setting and
- * start using them. You can choose from standard websafe font
- * stacks, Google fonts, add your own custom stacks, and if you
- * have @font-your-face module installed just set the font to
- * "-- add selector in theme CSS --" and the font will automatically
- * be available to you in theme settings.
- * @see http: *drupal.org/project/fontyourface
- *
- *
- * Font Stacks
- *
- * See _base.scss partial for font stack variables.
- */
-
-
 /* =============================================================================
  *   Base
  * ========================================================================== */
@@ -95,9 +38,14 @@
  * element as these can be overridden using font theme settings.
  */
 
-html {}
+html {
+  background: $page;
+}
 
-body {}
+body {
+  font-family: $sans-serif-small; // Set from _custom.scss font variables
+  font-size: 87.5%;
+}
 
 
 /* =============================================================================
@@ -186,15 +134,12 @@ acronym {}
 
 pre,
 code,
-tt {}
-
-
-p code {}
-
-
+tt,
 samp,
 kbd,
-var {}
+var {
+  font-family: $mono;
+}
 
 
 /* =============================================================================
@@ -281,7 +226,7 @@ var {}
  */
 #header-wrapper {
   /* Debug styles, is this working */
-  background: #ddd;
+  background: $debug;
   .container {}
 }
 
@@ -339,8 +284,7 @@ var {}
  */
 #footer-wrapper {
   /* Debug styles, is this working? */
-  background: #666;
-  color: #fff;
+  background: $debug;
 
   .container {}
 }
@@ -568,6 +512,8 @@ ul.links {
  * ========================================================================== */
 
 a {
+  text-decoration: none;
+
   &:link,
   &:visited {}
 
@@ -575,7 +521,9 @@ a {
   &.active {}
 
   &:hover,
-  &:focus {}
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 
@@ -931,7 +879,7 @@ ul.pager li {
   a {
     background: #444;
     background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    color: $page;
     display: block;
     line-height: 2;
     padding: 0;
@@ -942,7 +890,7 @@ ul.pager li {
     &:visited {
       background: #444;
       background: rgba(0, 0, 0, 0.6);
-      color: #fff;
+      color: $page;
       display: block;
       line-height: 2;
       padding: 0;
@@ -968,7 +916,7 @@ ul.pager li {
 
 
 ul.primary {
-  border-bottom-color:#ccc;
+  border-bottom-color: $border;
   margin: 20px 0;
   padding: 0 0 0 5px;
 
@@ -978,8 +926,8 @@ ul.primary {
     margin: 0 1px -1px;
 
     a {
-      background-color: #f5f5f5;
-      border-color: #ccc;
+      background-color: $ultralight;
+      border-color: $border;
       margin-right: 1px;
       padding: 0 10px;
       display: block;
@@ -989,23 +937,25 @@ ul.primary {
 
       &:hover,
       &:focus {
-        background-color: #eee;
-        border-color: #ccc;
+        background-color: $light;
+        border-color: $border;
       }
     }
   }
 
-  li.active a,
-  li.active a:hover,
-  li.active a:focus {
-    background-color: #fff;
-    border-bottom-color: #fff;
+  li.active {
+    a,
+    a:hover,
+    a:focus {
+      background-color: $page;
+      border-bottom-color: $page;
+    }
   }
 }
 
 
 ul.secondary {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $border;
   margin: 1em 0 0;
   padding: 0 .3em 1em;
 
@@ -1636,7 +1586,7 @@ ul.action-links {
  * "New" marker for comments that are new for the current user
  */
 .new {
-  color: #c00;
+  color: $highlight;
 }
 
 
@@ -1645,6 +1595,92 @@ ul.action-links {
  */
 .indented {
   margin-left: 40px;
+}
+
+
+/* =============================================================================
+ *   Forms
+ * ========================================================================== */
+
+/*
+ * Wrapper for a form element (or group of form elements) and its label
+ */
+.form-item { 
+
+  input.error,
+  textarea.error,
+  select.error {
+    border: 1px solid $highlight;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  label.option { 
+  }
+
+  .description {
+    font-size: 0.85em;
+  }
+
+  &.form-checkboxes ,
+  &.form-radios {
+  }
+}
+
+
+/*
+ * Highlight marks and form required mark
+ */
+.marker,
+.form-required {
+  color: $highlight;
+}
+
+
+/*
+ * The submit button
+ */
+.form-submit { 
+}
+
+
+.container-inline {
+  div,
+  label {
+    display: inline;
+  }
+}
+
+/*
+ * Define consistent borders
+ */
+fieldset {
+  border: 1px solid $border;
+}
+
+/*
+ * Tips for Drupal's input formats
+ */
+.tips { 
+}
+
+
+/*
+ * Buttons used by contrib modules like Media
+ */
+a.button { 
+  @include appearance(button);
+}
+
+
+/*
+ * Password confirmation
+ */
+.password-parent,
+.confirm-parent {
+  margin: 0;
 }
 
 
@@ -1669,7 +1705,7 @@ tbody,
 tr,
 th,
 td {
-  border-color: #ccc;
+  border-color: $border;
 }
 
 
@@ -1689,7 +1725,7 @@ td {
 
 thead tr {
   font-weight: 700;
-  background-color: #e5e5e5;
+  background-color: $medium_dark;
 }
 
 
@@ -1705,22 +1741,22 @@ tbody {}
 
 
 tbody tr {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid $border;
 }
 
 
 tr {
 
   &.odd {
-    background: #fff;
+    background: $page;
   }
 
   /* Table row striping */
   &.info,
-  &.odd,
+  &.even,
   &:nth-child(2n+2)  {
     border-bottom: 0;
-    background-color: #f5f5f5;
+    background-color: $ultralight;
   }
 
   &.drag {}
@@ -1728,11 +1764,11 @@ tr {
   &.drag-previous {}
 
   &.odd td.active {
-    background-color: #eee;
+    background-color: $light;
   }
 
   &.even td.active {
-    background-color: #ebebeb;
+    background-color: $medium_light;
   }
 }
 
@@ -1814,29 +1850,7 @@ tr.error {
 .comment-unpublished {
 
   p.unpublished {
-    color: #fff;
-    color: rgba(239, 170, 170, 0.4);
-    font-family: Impact,"Arial Narrow",Helvetica,sans-serif;
-    font-size: 75px;
-    font-weight: bold;
-    height: 0;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-    overflow: visible;
-    text-align: center;
-    text-transform: uppercase;
-    word-wrap: break-word;
-  }
-}
-
-/*
- * Otherwise these elements will appear below the "Unpublished" text
- */
-.lt-ie8 {
-  .node-unpublished > *,
-  .comment-unpublished > * {
-    position: relative;
+    @include unpublished;
   }
 }
 
@@ -1892,7 +1906,7 @@ tr.error {
  * Devel Module
  */
 .dev-query {
-  background: #eee;
+  background: $light;
   padding: 30px;
 }
 

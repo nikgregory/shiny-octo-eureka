@@ -14,68 +14,8 @@
  * Nothing is set in stone and you can change anything - even delete all of it
  * and start with your own clean slate.
  *
- * To FORCE PRINT all selectors you can search and replace a single { (opening
- * curly brace) and insert an empty comment. This is very useful in conjuction
- * with FireSass: https://addons.mozilla.org/en-US/firefox/addon/firesass-for-firebug/
- *
  * See global.base also which includes normalize.css and some additional
  * helper classes and base styles.
- */
-
-/*
- * Fonts
- *
- * By default there is no global font size reset. A common
- * method is to reset it to 62.5%, or 10px. This makes it very
- * easy to calculate the required font sizes in em, for example:
- *
- * 1.6em = 16px
- * 2.4em = 24px
- *
- * In Adaptivetheme this should be applied to the HTML element,
- * so it will play nicely with the theme settings. If you use
- * the body element or #page wrapper you will get unpredictable
- * font scaling issues.
- *
- * Font size chart from http: *pxtoem.com/
- *
- * 6px	 0.6em	 60%	 5pt
- * 7px	 0.7em	 70%	 5pt
- * 8px	 0.8em	 80%	 6pt
- * 9px	 0.9em	 90%	 7pt
- * 10px	 1em	   100%	 8pt
- * 11px	 1.1em	 110%	 8pt
- * 12px	 1.2em	 120%	 9pt
- * 13px	 1.3em	 130%	 10pt
- * 14px	 1.4em	 140%	 11pt
- * 15px	 1.5em	 150%	 11pt
- * 16px	 1.6em	 160%	 12pt
- * 17px	 1.7em	 170%	 13pt
- * 18px	 1.8em	 180%	 14pt
- * 19px	 1.9em	 190%	 14pt
- * 20px	 2em	   200%	 15pt
- * 21px	 2.1em	 210%	 16pt
- * 22px	 2.2em	 220%	 17pt
- * 23px	 2.3em	 230%	 17pt
- * 24px	 2.4em	 240%	 18pt
- *
- *
- * Font Theme Settings
- *
- * Adaptivetheme includes powerful theme settings for adding
- * webfonts and setting font sizes - you can enable these
- * under "Site Tweaks", simply enable the Fonts setting and
- * start using them. You can choose from standard websafe font
- * stacks, Google fonts, add your own custom stacks, and if you
- * have @font-your-face module installed just set the font to
- * "-- add selector in theme CSS --" and the font will automatically
- * be available to you in theme settings.
- * @see http: *drupal.org/project/fontyourface
- *
- *
- * Font Stacks
- *
- * See _base.scss partial for font stack variables.
  */
 
 /* =============================================================================
@@ -90,9 +30,15 @@
  * element as these can be overridden using font theme settings.
  */
 
-html {}
+html {
+  background: #fff;
+}
 
-body {}
+
+body {
+  font-family: "Trebuchet MS", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 87.5%;
+}
 
 
 /* =============================================================================
@@ -155,13 +101,12 @@ acronym {}
 
 pre,
 code,
-tt {}
-
-p code {}
-
+tt,
 samp,
 kbd,
-var {}
+var {
+  font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;
+}
 
 
 /* =============================================================================
@@ -234,7 +179,7 @@ var {}
  */
 #header-wrapper {
   /* Debug styles, is this working */
-  background: #ddd;
+  background: rgba(255, 192, 203, 0.5);
 }
 #header-wrapper .container {}
 
@@ -279,8 +224,7 @@ var {}
  */
 #footer-wrapper {
   /* Debug styles, is this working? */
-  background: #666;
-  color: #fff;
+  background: rgba(255, 192, 203, 0.5);
 }
 #footer-wrapper .container {}
 
@@ -494,7 +438,9 @@ a:active,
 a.active {}
 
 a:hover,
-a:focus {}
+a:focus {
+  text-decoration: underline;
+}
 
 
 /* =============================================================================
@@ -836,7 +782,7 @@ ul.pager li.pager-last {}
 
 #skip-link a {
   background: #444;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   color: #fff;
   display: block;
   line-height: 2;
@@ -848,7 +794,7 @@ ul.pager li.pager-last {}
 #skip-link a:link,
 #skip-link a:visited {
   background: #444;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   color: #fff;
   display: block;
   line-height: 2;
@@ -1488,6 +1434,82 @@ ul.action-links li {}
 
 
 /* =============================================================================
+ *   Forms
+ * ========================================================================== */
+
+/*
+ * Wrapper for a form element (or group of form elements) and its label
+ */
+.form-item {}
+
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 1px solid #c00;
+}
+
+.form-item label {
+  font-weight: 700;
+}
+
+.form-item label.option {}
+
+/*
+ * Highlight marks and form required mark
+ */
+.marker,
+.form-required {
+  color: #c00;
+}
+
+.form-item .description {
+  font-size: 0.85em;
+}
+
+.form-checkboxes .form-item,
+.form-radios .form-item {}
+
+/*
+ * The submit button
+ */
+.form-submit {}
+
+.container-inline div,
+.container-inline label {
+  display: inline;
+}
+
+/*
+ * Define consistent borders
+ */
+fieldset {
+  border: 1px solid #ccc;
+}
+
+/*
+ * Tips for Drupal's input formats
+ */
+.tips {}
+
+/*
+ * Buttons used by contrib modules like Media
+ */
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
+
+/*
+ * Password confirmation
+ */
+.password-parent,
+.confirm-parent {
+  margin: 0;
+}
+
+
+/* =============================================================================
  *   Tables
  * ========================================================================== */
 
@@ -1525,7 +1547,7 @@ td {
 thead tr {
   font-weight: 700;
   background-color: #e5e5e5;
-  
+
 }
 
 td,
@@ -1590,6 +1612,7 @@ tr.even td.active {
   white-space: normal;
 }
 
+
 /* =============================================================================
  *   Messages
  * ========================================================================== */
@@ -1625,7 +1648,7 @@ tr.error {}
 
 .node-unpublished p.unpublished,
 .comment-unpublished p.unpublished {
-  color: #fff;
+  color: pink;
   color: rgba(239, 170, 170, 0.4);
   font-family: Impact,"Arial Narrow",Helvetica,sans-serif;
   font-size: 75px;

@@ -2,10 +2,11 @@
  * @file
  * global.base
  *
- * - Gutter widths, see $gutter-width in _base.scss
+ * - normalize with small modifications for Drupal and AT: http://necolas.github.com/normalize.css/
+ * - Gutter widths, see $gutter-width in _custom.scss
  * - Default container alignment.
  * - Flexible images and media declarations.
- * - Copies of the SCSS mixins for reference, which includes improved
+ * - Copies of the SCSS mixins for reference, which includes an improved
  *   element-invisible and focusable styles.
  */
 /* =============================================================================
@@ -169,7 +170,7 @@ abbr[title] {
  */
 b,
 strong {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 blockquote {
@@ -196,7 +197,7 @@ mark {
  */
 p,
 pre {
-  margin: 1em 0;
+  margin: 0 0 1.5em;
 }
 
 /*
@@ -339,7 +340,6 @@ form {
  * Define consistent border, margin, and padding
  */
 fieldset {
-  border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
