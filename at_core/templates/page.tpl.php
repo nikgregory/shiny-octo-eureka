@@ -186,7 +186,7 @@
 
           <!-- region: Main Content -->
           <?php if ($content = render($page['content'])): ?>
-            <div id="content">
+            <div id="content" class="region">
               <?php print $content; ?>
             </div>
           <?php endif; ?>

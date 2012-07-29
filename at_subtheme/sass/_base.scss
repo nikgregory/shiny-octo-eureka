@@ -71,4 +71,4 @@ $gutter-width: 10px;
 @import 'compass/css3';                        // Use one CSS3 mixin instead of multiple vendor prefixes.
 
 // Import custom partial - mixins and variables defined for your theme
-@import "_custom.scss";
+@import 'custom';
