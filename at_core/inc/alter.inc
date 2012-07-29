@@ -121,7 +121,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => -98,
         '#attributes' => array(
           'href' => $touch_icon_l,
-          'rel' => "apple-touch-icon-processed",
+          'rel' => "apple-touch-icon-precomposed",
         ),
       );
     }
@@ -136,7 +136,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => -99,
         '#attributes' => array(
           'href' => $touch_icon_m,
-          'rel' => "apple-touch-icon-processed",
+          'rel' => "apple-touch-icon-precomposed",
           'sizes' => "72x72",
         ),
       );
@@ -152,7 +152,7 @@ function adaptivetheme_html_head_alter(&$head_elements) {
         '#weight' => -100,
         '#attributes' => array(
           'href' => $touch_icon_h,
-          'rel' => "apple-touch-icon-processed",
+          'rel' => "apple-touch-icon-precomposed",
           'sizes' => "114x114",
         ),
       );
