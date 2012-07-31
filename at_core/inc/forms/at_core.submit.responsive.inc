@@ -67,7 +67,7 @@ $gutters = "/* Gutters are not currently overridden in theme settings, but may b
 if (isset($values['enable_markup_overides']) && $values['enable_markup_overides'] === 1) {
   if (isset($values['global_gutter_width']) && is_numeric($values['global_gutter_width'])) {
     $gutter = check_plain($values['global_gutter_width']) . 'px';
-    $gutters = "/* Gutters */" . "\n" . "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,div.messages {margin-left:$gutter;margin-right:$gutter;} #content .panel-display,#content .panel-flexible {margin-left:-$gutter;margin-right:-$gutter;}";
+    $gutters = "/* Gutters */" . "\n" . "#main-content,.block-inner,.pane-inner,.menu-wrapper,.branding-elements,.breadcrumb-wrapper,.attribution,.at-panel .rounded-corner,.block-panels-mini > .block-title,div.messages {margin-left:$gutter;margin-right:$gutter;} #content .panel-display,#content .panel-flexible {margin-left:-$gutter;margin-right:-$gutter;}";
   }
 }
 
