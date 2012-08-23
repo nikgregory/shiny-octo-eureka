@@ -37,6 +37,7 @@
 
 
 ;----------// Theme Settings
+
   ; Layout settings - Standard bigscreen
   settings[bigscreen_layout]         = 'three_col_grail'
   settings[bigscreen_page_unit]      = '%'
