@@ -680,7 +680,7 @@ tbody {
 }
 td,th {
   margin: 0;
-  padding: 0.85em 0.6em;
+  padding: 10px 7px;
 }
 th.active a {
   padding-right: 25px;
@@ -710,11 +710,6 @@ tr:first-child td.container {
 }
 #block-admin-display-form tr .block {
   background: transparent;
-}
-tr.draggable td.block {
-  padding: 10px 0 0 6px;
-}
-.draggable a.tabledrag-handle {
 }
 body div.tabledrag-changed-warning {
   margin: 0 0 10px 0;
@@ -771,7 +766,7 @@ tr.even td.active {
   background: none;
 }
 a.tabledrag-handle .handle {
-  margin-top: 2px;
+  margin-top: -0.42em;
 }
 #system-modules table th {
   min-width: 60px;
