@@ -848,9 +848,20 @@ function adaptivetheme_preprocess_username(&$vars) {
  * Preprocess variables for theme_image()
  */
 function adaptivetheme_preprocess_image(&$vars) {
+  // Initialize the variable if there isn't one
+  if (!isset($vars['attributes']['class'])) {
+    $vars['attributes']['class'] = '';
+  }
   // Add a class to image elements based on the image style
   if (isset($vars['style_name'])) {
-    $vars['attributes']['class'][] = 'image-style-' . drupal_html_class($vars['style_name']);
+    $style_name_class = drupal_html_class($vars['style_name']);
+    if (is_array($vars['attributes']['class'])) {
+      $vars['attributes']['class'][] = 'image-style-' . $style_name_class;
+    }
+    else {
+      // Assume it's a string, workaround for Media module bug: http://drupal.org/node/1722146
+      $vars['attributes']['class'] .= ' ' . 'image-style-' . $style_name_class;
+    }
   }
 }
 
