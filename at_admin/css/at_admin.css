@@ -104,6 +104,7 @@ p {
 h1#page-title {
   font-size: 1.33em;
   padding: 0;
+  display: inline-block;
 }
 #footer {
   margin-left: 10px;
@@ -127,11 +128,6 @@ h1#page-title {
   padding-top: 20px;
   position: relative;
   min-height: 50px;
-}
-#topbar,
-#main-content-header {
-  padding-left: 10px;
-  padding-right: 10px;
 }
 #page-footer {
   background: #fff;
@@ -531,10 +527,7 @@ div.admin .right {
   color: #222;
 }
 div.add-or-remove-shortcuts  {
-  padding-top:0;
-  position:absolute;
-  right:20px;
-  top:33%;
+  display: inline-block;
 }
 .admin-panel ul li {
   color: #555;
