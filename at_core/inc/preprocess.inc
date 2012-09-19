@@ -651,7 +651,7 @@ function adaptivetheme_preprocess_node(&$vars) {
   // Classes and attributes
   $vars['title_attributes_array']['class'][] = 'node-title';
   $vars['content_attributes_array']['class'][] = 'node-content';
-  $vars['title_attributes_array']['rel'][] = 'nofollow';
+  $vars['title_attributes_array']['rel'][] = 'bookmark';
 
   // header, submitted and links wrappers have their own attributes
   $vars['header_attributes_array']['class'][] = 'node-header';

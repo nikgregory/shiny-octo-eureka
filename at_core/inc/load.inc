@@ -368,6 +368,14 @@ function load_debuggers($theme_name) {
       'cache' => TRUE,
       )
     );
+    drupal_add_css($path_to_at_core . '/css/debug-windowsize.css', array(
+      'preprocess' => FALSE,
+      'group' => CSS_THEME,
+      'media' => 'screen',
+      'every_page' => FALSE,
+      'weight' => 2000,
+      )
+    );
   }
 }
 
