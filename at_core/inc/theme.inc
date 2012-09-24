@@ -99,7 +99,9 @@ function adaptivetheme_breadcrumb($vars) {
 
       // Push the page title onto the end of the breadcrumb array
       if (at_get_setting('breadcrumb_title', $theme_name) == 1) {
-        $breadcrumb[] = '<span class="crumb-title">' . drupal_get_title() . '</span>';
+        if ($page_title = drupal_get_title()) {
+          $breadcrumb[] = '<span class="crumb-title">' . $page_title . '</span>';
+        }
       }
 
       $class = 'crumb';
