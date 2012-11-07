@@ -1006,8 +1006,13 @@ ul.action-links {
 /*
  * When labels are set to inline in field display settings the clearfix class is automatically added
  */
-.field-label-inline {}
-
+.field-label-inline {
+  
+  /* Remove the margin on inline field lables to preserve vertical formatting */
+  .field-label {
+    margin: 0;
+  }
+}
 
 /*
  * Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues

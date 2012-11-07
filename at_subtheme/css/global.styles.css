@@ -906,6 +906,10 @@ ul.action-links li {}
  */
 .field-label-inline {}
 
+.field-label-inline .field-label {
+  margin: 0;
+}
+
 /*
  * Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues
  */
@@ -916,6 +920,8 @@ ul.action-links li {}
   line-height: inherit;
   margin-bottom: 0;
 }
+
+
 
 
 /*
