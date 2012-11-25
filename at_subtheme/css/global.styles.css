@@ -1036,11 +1036,6 @@ ul.action-links li {}
  */
 .field-name-field-FIELDNAME {}
 
-
-.field-type-media .draggable img {
-  max-width: none;
-}
-
 /*
  * Image Alignment Theme Settings - included here so you can easily override
  */
