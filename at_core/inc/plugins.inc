@@ -425,21 +425,21 @@ function gpanel_regions() {
       'three_inset_right' => array(
         'title' => t('AT Inset right'),
         'regions' => array(
-          'threecol_inset_right_sidebar',
-          'threecol_inset_right_top',
-          'threecol_inset_right_middle',
-          'threecol_inset_right_inset',
-          'threecol_inset_right_bottom',
+          'three_inset_right_sidebar',
+          'three_inset_right_top',
+          'three_inset_right_middle',
+          'three_inset_right_inset',
+          'three_inset_right_bottom',
         ),
       ),
       'three_inset_left' => array(
         'title' => t('AT Inset left'),
         'regions' => array(
-          'threecol_inset_left_sidebar',
-          'threecol_inset_left_top',
-          'threecol_inset_left_middle',
-          'threecol_inset_left_inset',
-          'threecol_inset_left_bottom',
+          'three_inset_left_sidebar',
+          'three_inset_left_top',
+          'three_inset_left_middle',
+          'three_inset_left_inset',
+          'three_inset_left_bottom',
         ),
       ),
       'three_50_25_25' => array(
