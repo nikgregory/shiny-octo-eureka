@@ -129,9 +129,10 @@ function adaptivetheme_preprocess_page(&$vars) {
     if (empty($vars['site_logo'])) {
       $logo_path = check_url($vars['logo']);
       $logo_alt = check_plain(variable_get('site_name', t('Site logo')));
+      $logo_title = at_get_setting('logo_title') ? $logo_alt : t('Home page');
       $logo_vars = array('path' => $logo_path, 'alt' => $logo_alt, 'attributes' => array('class' => 'site-logo'));
       $vars['logo_img'] = theme('image', $logo_vars);
-      $vars['site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('title' => t('Home page')), 'html' => TRUE)) : '';
+      $vars['site_logo'] = $vars['logo_img'] ? l($vars['logo_img'], '<front>', array('attributes' => array('title' => $logo_title), 'html' => TRUE)) : '';
     }
     // Maintain backwards compatibility with 7.x-2.x sub-themes
     $vars['linked_site_logo'] = $vars['site_logo'];
