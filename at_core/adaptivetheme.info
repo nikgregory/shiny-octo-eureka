@@ -340,6 +340,3 @@
 
 ;----------// Custom CSS
   settings[custom_css] = ''
-
-
-version = "7.x-3.1"
