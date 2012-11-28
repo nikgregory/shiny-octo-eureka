@@ -30,6 +30,17 @@ function generate_html_classes(&$vars, $theme_name) {
        $classes_array[] = 'debug-panels';
     }
 
+    // Base theme class, I use these to aid in debugging clients themes, you
+    // could use them to hook a specific minor version, note that version is
+    // only included in Drupal.org archives, its missing when you clone GIT.
+    $info = at_get_info('adaptivetheme');
+    if (isset($info['release'])) {
+      $classes_array[] = 'at-release-' . $info['release'];
+    }
+    if (isset($info['version'])) {
+      $classes_array[] = 'at-version-' . $info['version'];
+    }
+
     // Extra Classes
     if (at_get_setting('extra_page_classes', $theme_name) === 1) {
 

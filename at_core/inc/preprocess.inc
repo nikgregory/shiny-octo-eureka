@@ -385,9 +385,9 @@ function adaptivetheme_preprocess_block(&$vars) {
     $vars['tag'] = 'div';
   }
 
-  // Initialize and populate the inner wrapper variables
-  $vars['inner_prefix'] = '<div class="block-inner clearfix">';
-  $vars['inner_suffix'] = '</div>';
+  // Block inner attributes
+  $vars['block_inner_attributes_array']['class'][] = 'block-inner';
+  $vars['block_inner_attributes_array']['class'][] = 'clearfix';
 
   // Use nav element for menu blocks and provide a suggestion for all of them
   $nav_blocks = array('navigation', 'main-menu', 'management', 'user-menu');

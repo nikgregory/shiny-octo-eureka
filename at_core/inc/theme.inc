@@ -126,7 +126,7 @@ function adaptivetheme_breadcrumb($vars) {
           $output .= '<li class="' . $class . ' crumb-first">' . $val . '</li>';
         }
         else {
-          $output .= '<li class="' . $class . '"><span class="crumb-sepreator">' . $separator . '</span>' . $val . '</li>';
+          $output .= '<li class="' . $class . '"><span class="crumb-separator">' . $separator . '</span>' . $val . '</li>';
         }
       }
       $output .= '</ol></nav></div>';
