@@ -10,9 +10,12 @@
  * Preprocess variables for all templates.
  */
 function adaptivetheme_preprocess(&$vars) {
-  // Provide a variable to all templates to test for a mobile context, this
-  // requires the Browscap module and returns TRUE or FALSE.
-  $vars['is_mobile'] = at_get_browser();
+  // Provide variables to all templates to test for a mobile and tablet context, this
+  // requires the Mobile Detect or Browscap modules.  TRUE/FALSE mean the feature
+  // was detected; NULL means the feature could not be properly detected.
+  $browser = at_get_browser(); 
+  $vars['is_mobile'] = $browser['is_mobile'];
+  $vars['is_tablet'] = $browser['is_tablet'];
 }
 
 /**

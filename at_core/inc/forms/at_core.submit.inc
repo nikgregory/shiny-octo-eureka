@@ -68,6 +68,10 @@ function at_core_settings_submit($form, &$form_state) {
     if (isset($values['enable_custom_css']) && $values['enable_custom_css'] === 1) {
       require_once($path_to_at_core . '/inc/forms/at_core.submit.customcss.inc');
     }
+    // Set variables for device detection environment
+    variable_set('at_detection', $values['detection'] ? $values['detection'] : FALSE);
+    variable_set('at_browscap_detect', $values['browscap_detect'] ? $values['browscap_detect'] : FALSE);
+    variable_set('at_mobile_detect', $values['mobile_detect'] ? $values['mobile_detect'] : FALSE);
   }
 
   // Color inc save
