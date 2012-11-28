@@ -210,19 +210,24 @@ function at_get_css_files($theme_name) {
  * browscap_get_browser().
  */
 function at_get_browser() {
+  $browser = &drupal_static(__FUNCTION__, array());
   if (empty($browser)) {
     $browser['is_mobile'] = NULL;
     $browser['is_tablet'] = NULL;
 
     if (function_exists('mobile_detect_get_object')) {
       $detect = mobile_detect_get_object();
-      $browser['is_mobile'] = $detect->isMobile();
-      $browser['is_tablet'] = $detect->isTablet();
+      if ($detect) {
+        $browser['is_mobile'] = $detect->isMobile();
+        $browser['is_tablet'] = $detect->isTablet();
+      }
     }
     else if (function_exists('browscap_get_browser')) {
       $browscap = browscap_get_browser();
-      if ($browscap['ismobiledevice'] == 1) {
-        $browser['is_mobile'] = TRUE;
+      if ($browscap) {
+        if ($browscap['ismobiledevice'] == TRUE) {
+          $browser['is_mobile'] = TRUE;
+        }
       }
     }
   }

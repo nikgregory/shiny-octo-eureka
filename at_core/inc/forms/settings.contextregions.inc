@@ -45,37 +45,37 @@ $form['at']['context-regions'] = array(
 );
 
 // Set various messages based on what detection modules are installed, we can leverage both Browscap (legacy reasons) and Mobile Detect
-if (!function_exists('browscap_get_browser') || !function_exists('mobile_detect_get_object')) {
+if (!function_exists('browscap_get_browser') && !function_exists('mobile_detect_get_object')) {
   $form['at']['context-regions']['requirements'] = array(
     '#markup' => t('<p><strong>Detection:</strong> <span class="no-detection">No detection module installed.</span> Please install either the Browscap or Mobile Detect module.</p>
       <ul>
       <li><a href="!browscap_module" target="_blank">Browscap module</a>: allows you to hide or move blocks for all mobile devices.</li>
-      <li><a href="!mobiledetect_module" target="_blank">Mobile Detect module</a>: allows a more granular approach, you can hide regions in mobile phones only, or tablet devices, or both.</li>
+      <li><a href="!mobiledetect_module" target="_blank">Mobile Detect module</a>: allows you to hide regions in all just Smartphones or all mobile devices.</li>
     </ul>', array('!browscap_module' => 'http://drupal.org/project/browscap', '!mobiledetect_module' => 'http://drupal.org/project/mobile_detect')),
   );
 }
-if (function_exists('browscap_get_browser') || !function_exists('mobile_detect_get_object')) {
+if (function_exists('browscap_get_browser') && !function_exists('mobile_detect_get_object')) {
   $detection = TRUE;
   $browscap_detect = TRUE;
   $form['at']['context-regions']['requirements'] = array(
-    '#markup' => t('<p><strong>Detection:</strong> <span class="detection">Browsecap</span></p>
-      <p>You can also use the <a href="!mobiledetect_module" target="_blank">Mobile Detect module</a> which allows a more granular approach, you can hide regions in mobile phones only, or tablet devices, or both.</p>
+    '#markup' => t('<p><strong>Detection module:</strong> <span class="detection">Browscap</span></p>
+      <p>Alternatively use the <a href="!mobiledetect_module" target="_blank">Mobile Detect module</a> which allows you to hide regions in all just Smartphones or all mobile devices.</p>
     </ul>', array('!mobiledetect_module' => 'http://drupal.org/project/mobile_detect')),
   );
 }
-if (function_exists('mobile_detect_get_object') || !function_exists('browscap_get_browser')) {
+if (function_exists('mobile_detect_get_object') && !function_exists('browscap_get_browser')) {
   $detection = TRUE;
   $mobile_detect = TRUE;
   $form['at']['context-regions']['requirements'] = array(
-    '#markup' => t('<p><strong>Detection:</strong> <span class="detection">Mobile Detect</span></p>'),
+    '#markup' => t('<p><strong>Detection module:</strong> <span class="detection">Mobile Detect</span></p>'),
   );
 }
-if (function_exists('browscap_get_browser') || function_exists('mobile_detect_get_object')) {
+if (function_exists('browscap_get_browser') && function_exists('mobile_detect_get_object')) {
   $detection = TRUE;
   $mobile_detect = TRUE;
   $browscap_detect = FALSE;
   $form['at']['context-regions']['requirements'] = array(
-    '#markup' => t('<p><strong>Detection:</strong> <span class="detection">Mobile Detect</span>. You have both the Browscap and Mobile Detect modules installed, in this case the Mobile Detect module is being used.</p>'),
+    '#markup' => t('<p><strong>Detection module:</strong> <span class="detection">Mobile Detect</span>. You have both the Browscap and Mobile Detect modules installed, in this case the Mobile Detect module is being used.</p>'),
   );
 }
 
