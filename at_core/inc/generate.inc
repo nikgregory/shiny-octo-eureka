@@ -56,22 +56,10 @@ function generate_html_classes(&$vars, $theme_name) {
         $classes_array[] = 'site-name-' . drupal_html_class($head_title);
       }
 
-      // Classes for theming based on context
+      // Classes for theming based on section
       if (!$vars['is_front']) {
-        // Add unique class for each page.
-        $path = drupal_get_path_alias($_GET['q']);
-        // Add unique class for each website section.
+        $path = drupal_get_path_alias(check_plain($_GET['q']));
         list($section, ) = explode('/', $path, 2);
-        $arg = explode('/', $_GET['q']);
-        if ($arg[0] === 'node') {
-          if (isset($arg[1]) && $arg[1] === 'add') {
-            $section = 'node-add';
-          }
-          elseif (isset($arg[2]) && is_numeric($arg[1]) && ($arg[2] === 'edit' || $arg[2] === 'delete')) {
-            $section = 'node-' . $arg[2];
-          }
-        }
-        $section = check_plain($section);
         $classes_array[] = drupal_html_class('section-' . $section);
       }
     }
