@@ -7,17 +7,12 @@
  * @param $form: Nested array of form elements that comprise the form.
  * @param $form_state: A keyed array containing the current state of the form.
  */
-
-// Get our plugin system functions.
-require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
-
-// We need some getters.
-require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/get.inc');
-
-/**
- * Implements hook_form_system_theme_settings_alter().
- */
 function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
+  // Get our plugin system functions.
+  require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/plugins.inc');
+
+  // We need some getters.
+  require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/get.inc');
   $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
 
   // General "alters" use a form id. Settings should not be set here. The only
@@ -78,12 +73,25 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
 
   // Include all the default settings forms.
   require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
+  at_core_page_layout_form($form, $theme_name);
+
   require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
+  at_core_responsive_panels_form($form, $theme_name);
+
   require_once($path_to_at_core . '/inc/forms/settings.global.inc');
+  at_core_global_form($form, $theme_name);
+
   require_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
+  at_core_polyfills_form($form, $theme_name);
+
   require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
+  at_core_metatags_form($form);
+
   require_once($path_to_at_core . '/inc/forms/settings.debug.inc');
+  at_core_debug_form($form);
+
   require_once($path_to_at_core . '/inc/forms/settings.extensions.inc');
+  at_core_extensions_form($form);
 
   // EXTENSIONS
   $enable_extensions = isset($form_state['values']['enable_extensions']);
@@ -109,56 +117,64 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     $enable_font_settings = isset($form_state['values']['enable_font_settings']);
     if (($enable_font_settings && $form_state['values']['enable_font_settings'] == 1) || (!$enable_font_settings && $form['at-settings']['extend']['enable']['enable_font_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.fonts.inc');
+      at_core_fonts_form($form);
     }
 
     // Heading styles
     $enable_heading_settings = isset($form_state['values']['enable_heading_settings']);
     if (($enable_heading_settings && $form_state['values']['enable_heading_settings'] == 1) || (!$enable_heading_settings && $form['at-settings']['extend']['enable']['enable_heading_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.headings.inc');
+      at_core_headings_form($form);
     }
 
     // Image alignment
     $enable_image_settings = isset($form_state['values']['enable_image_settings']);
     if (($enable_image_settings && $form_state['values']['enable_image_settings'] == 1) || (!$enable_image_settings && $form['at-settings']['extend']['enable']['enable_image_settings']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.images.inc');
+      at_core_images_form($form);
     }
 
     // Exclude CSS
     $enable_exclude_css = isset($form_state['values']['enable_exclude_css']);
     if (($enable_exclude_css && $form_state['values']['enable_exclude_css'] == 1) || (!$enable_exclude_css && $form['at-settings']['extend']['enable']['enable_exclude_css']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.cssexclude.inc');
+      at_core_css_exclude_form($form, $theme_name);
     }
 
     // Touch icons
     $enable_apple_touch_icons = isset($form_state['values']['enable_apple_touch_icons']);
     if (($enable_apple_touch_icons && $form_state['values']['enable_apple_touch_icons'] == 1) || (!$enable_apple_touch_icons && $form['at-settings']['extend']['enable']['enable_apple_touch_icons']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.touchicons.inc');
+      at_core_touch_icons_form($form, $theme_name);
     }
 
     // Custom CSS
     $enable_custom_css = isset($form_state['values']['enable_custom_css']);
     if (($enable_custom_css && $form_state['values']['enable_custom_css'] == 1) || (!$enable_custom_css && $form['at-settings']['extend']['enable']['enable_custom_css']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.customcss.inc');
+      at_core_custom_css_form($form);
     }
 
     // Mobile regions and blocks
     $enable_context_regions = isset($form_state['values']['enable_context_regions']);
     if (($enable_context_regions && $form_state['values']['enable_context_regions'] == 1) || (!$enable_context_regions && $form['at-settings']['extend']['enable']['enable_context_regions']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.contextregions.inc');
+      at_core_context_regions_form($form, $info_array);
     }
 
     // Float Region blocks
     $enable_float_region_blocks = isset($form_state['values']['enable_float_region_blocks']);
     if (($enable_float_region_blocks && $form_state['values']['enable_float_region_blocks'] == 1) || (!$enable_float_region_blocks && $form['at-settings']['extend']['enable']['enable_float_region_blocks']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.floatregionblocks.inc');
+      at_core_float_region_blocks_form($form, $info_array);
     }
 
     // Modify output
     $enable_markup_overides = isset($form_state['values']['enable_markup_overides']);
     if (($enable_markup_overides && $form_state['values']['enable_markup_overides'] == 1) || (!$enable_markup_overides && $form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
+      at_core_modify_output_form($form);
     }
-
   }
 
   // Include a hidden form field with the current release information
@@ -211,11 +227,11 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     }
   }
 
+  // Include custom form validation and submit functions
+  require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
+  require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');
+
   // Custom validate and submit functions
   $form['#validate'][] = 'at_core_settings_validate';
   $form['#submit'][] = 'at_core_settings_submit';
 }
-
-// Include custom form validation and submit functions
-require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.validate.inc');
-require_once(drupal_get_path('theme', 'adaptivetheme') . '/inc/forms/at_core.submit.inc');

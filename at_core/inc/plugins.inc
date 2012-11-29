@@ -23,6 +23,7 @@ function at_get_plugins($theme_name) {
       $plugins = $plugins_cache->data;
     }
     else {
+      $plugins_list = array();
       $themes_info = at_get_info_trail($theme_name);
       // Look for and get all the plugins
       if (!empty($themes_info)) {
@@ -108,7 +109,7 @@ function at_get_plugins_files($theme_name) {
 function at_load_plugins($theme_name, $plugin_type) {
   $plugin_data_structures = array();
   $plugins_list = at_get_plugins_files($theme_name);
-
+  $plugins_array = array();
   foreach ($plugins_list as $plugin_provider => $plugin_types) {
     $plugin_providers[] = $plugin_provider;
     foreach ($plugin_types as $type => $plugins) {
@@ -187,9 +188,7 @@ function responsive_page_layouts_data_structure() {
       $page_data_structure = $cache->data;
     }
     else {
-
       $data_structure = at_load_plugins($theme_name, $plugin_type = 'page_layout');
-
       foreach ($data_structure as $plugin => $datum) {
         foreach ($datum as $method => $layout) {
           $page_data_structure[$method] = $layout;
@@ -211,29 +210,28 @@ function responsive_page_layouts_data_structure() {
 function responsive_panels_data_structure() {
   global $theme_key;
   $theme_name = $theme_key;
-
   $panels_data_structure = drupal_static(__FUNCTION__, array());
   if (empty($panels_data_structure)) {
     if ($cache = cache_get('at_panels_data_structure')) {
       $panels_data_structure = $cache->data;
     }
     else {
-
       $data_structure = at_load_plugins($theme_name, $plugin_type = 'panels');
-
+      // If this theme doesn't define any Panels layouts, use those
+      // provided by at_core.
+      if (empty($data_structure)) {
+        $data_structure = at_load_plugins('adaptivetheme', $plugin_type = 'panels');
+      }
       foreach ($data_structure as $plugin => $datum) {
         foreach ($datum as $key => $value) {
           $type = $value['type'];
           $panels_data_structure[$type][] = $datum;
         }
       }
-      if (empty($panels_data_structure)) {
-        return; // fail silently
-      }
+
       cache_set('at_panels_data_structure', $panels_data_structure, 'cache');
     }
   }
-
   return $panels_data_structure;
 }
 
