@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * AT's liteweight plugin sub-system.
@@ -177,10 +178,15 @@ function at_load_plugins($theme_name, $plugin_type) {
  * This returns the full data structures for all page layout plugins. Because
  * this can be a lot of data and appears to be computationally expensive to get
  * it is cached in the cache table.
+ *
+ * @param $theme_name, the active theme.
  */
-function responsive_page_layouts_data_structure() {
-  global $theme_key;
-  $theme_name = $theme_key;
+function responsive_page_layouts_data_structure($theme_name = NULL) {
+  // Use the passed in theme_name, else grab it from the global variable
+  if ($theme_name == NULL) {
+    global $theme_key;
+    $theme_name = $theme_key;
+  }
 
   $page_data_structure = drupal_static(__FUNCTION__, array());
   if (empty($page_data_structure)) {
