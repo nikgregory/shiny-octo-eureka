@@ -6,6 +6,7 @@
  * Available variables:
  * - $content: An array of content, each item in the array is keyed to one
  *   panel of the layout.
+ * - $classes: classes set in preprocess
  * - $css_id: unique id if present.
  * - $panel_prefix: prints a wrapper when this template is used in certain context,
  *   such as when rendered by Display Suite or other module - the wrapper is
@@ -25,7 +26,7 @@ $panel_prefix = isset($panel_prefix) ? $panel_prefix : '';
 $panel_suffix = isset($panel_suffix) ? $panel_suffix : '';
 ?>
 <?php print $panel_prefix; ?>
-<div class="at-panel panel-display three-25-50-25 clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
+<div class="<?php print $classes; ?>" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
   <?php if ($content['three_25_50_25_top']): ?>
     <div class="region region-three-25-50-25-top region-conditional-stack">
       <div class="region-inner clearfix">

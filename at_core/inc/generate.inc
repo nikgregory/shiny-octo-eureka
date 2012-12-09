@@ -349,3 +349,19 @@ function get_color_scheme_name($theme_name) {
 
   return $scheme_name;
 }
+
+/**
+ * Generate default classes for Panels layouts
+ * Done because for some unknown reason setting these
+ * in template_preprocess does not work, aka the variable
+ * does not appear in the panel layout preprocess function.
+ */
+function panels_classes_array() {
+  $output = array(
+    'at-panel',
+    'panel-display',
+    'clearfix',
+  );
+
+  return $output;
+}

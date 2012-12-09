@@ -145,7 +145,10 @@ function template_preprocess_five_5x20(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
 
-  // Set up attributes array
-  $vars['attributes_array']['id'][] = $vars['css_id'];
-  //<?php if (!empty($css_id)) { print "id=\"$css_id\""; }
+  // Set classes
+  if ($panels_classes = panels_classes_array()) {
+    foreach($panels_classes as $panels_class) {
+      $vars['classes_array'][] = $panels_class;
+    }
+  }
 }

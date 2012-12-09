@@ -61,4 +61,11 @@ function adaptivetheme_three_inset_left_panels_layouts() {
 function template_preprocess_three_inset_left(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
+
+  // Set classes
+  if ($panels_classes = panels_classes_array()) {
+    foreach($panels_classes as $panels_class) {
+      $vars['classes_array'][] = $panels_class;
+    }
+  }
 }

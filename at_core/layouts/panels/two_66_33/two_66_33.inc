@@ -48,4 +48,11 @@ function adaptivetheme_two_66_33_panels_layouts() {
 function template_preprocess_two_66_33(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
+
+  // Set classes
+  if ($panels_classes = panels_classes_array()) {
+    foreach($panels_classes as $panels_class) {
+      $vars['classes_array'][] = $panels_class;
+    }
+  }
 }
