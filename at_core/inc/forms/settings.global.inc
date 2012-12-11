@@ -78,7 +78,7 @@ function at_core_global_form(&$form, $theme_name) {
   $form['at-settings']['global-settings']['default-layout']['toggle']['global_default_layout'] = array(
     '#type' => 'radios',
     '#description' => t('<p>Adaptivetheme supports both mobile first and desktop first design approaches. Please review the <a href="!docs_link" target="_blank">online documentation</a>.</p><p>This setting fundementally alters what CSS is loaded and how it is loaded. At the most basic level if you select Mobile first the Smartphone portrait layout will load as the default, if you select Desktop first the Standard layout will load as the default. Many other changes take place regarding loading of CSS for Internet Explorer, Responsive Gpanels and Panels as well.</p> ', array('!docs_link' => 'http://adaptivethemes.com/documentation/mobile-first-design-with-adaptivetheme')),
-    '#default_value' => at_get_setting('global_default_layout'),
+    '#default_value' => at_get_setting('global_default_layout') ? at_get_setting('global_default_layout') : 'standard-layout',
     '#options' => array(
       'smartphone-portrait' => t('Mobile first'),
       'standard-layout' => t('Desktop first'),

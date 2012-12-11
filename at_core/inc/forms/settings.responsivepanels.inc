@@ -4,7 +4,7 @@
  * @file
  * Generate form elments for the Panel and Gpanel Reponsive Layout settings.
  */
-function at_core_responsive_panels_form(&$form, $theme_name) {
+function at_core_responsive_panels_form(&$form, $theme_name, $info_array) {
   // Supported devices
   $devices = array(
     'bigscreen',
@@ -22,9 +22,6 @@ function at_core_responsive_panels_form(&$form, $theme_name) {
   // Set variables here for active Gpanels, we need to test on this later
   $active_gpanels = array();
   $active_gpanels_arrays = array();
-
-  // Get the active themes info array
-  $info_array = at_get_info($theme_name);
 
   // Build a keyed array of the regions, we need to reset the keys for
   // array_intersect() to figure out which Gpanels are being used
