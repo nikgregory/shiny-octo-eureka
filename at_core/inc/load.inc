@@ -289,16 +289,14 @@ function at_load_custom_css($path, $theme_name) {
 /**
  * Load Polyfill Scripts
  * Conditional scripts are returned to the preprocess function - in AT Core that
- * means:
- * - adaptivetheme_preprocess_html()
- * - adaptivetheme_preprocess_maintenance_page()
- * There are two sources for conditioanl scripts - the subtheme info file and
- * AT Core itself (html5.js and respond.js).
-
-
- * ... thereafter printed in the relevant template via the $polyfills variable.
+ * means adaptivetheme_preprocess_html() and adaptivetheme_preprocess_maintenance_page().
+ * There are two sources for conditional scripts - the subtheme info file and
+ * AT Core itself can load html5.js and respond.js.
  * Unconditional scripts (those not printed within an IE conditioanl comment)
- * load directly via drupal_add_js in this function.
+ * load directly via drupal_add_js in this function, while the conditional scripts
+ * are returned as an array to preprocess, then rendered in process. This is done
+ * to allow themers to manipulate the data structure in preprocess if they feel
+ * the need to.
  *
  * @param $theme_name
  */
@@ -312,9 +310,10 @@ function at_load_polyfills($theme_name) {
   $polyfills = drupal_static('adaptivetheme_preprocess_html_polyfills_array');
   if (empty($polyfills)) {
 
-    // Info file loaded conditional scripts
     $theme_path = drupal_get_path('theme', $theme_name);
+    $polyfills_array = array();
 
+    // Info file loaded conditional scripts
     if (array_key_exists('ie_scripts', $info)) {
       foreach ($info['ie_scripts'] as $condition => $ie_scripts_path) {
         foreach ($ie_scripts_path as $key => $value) {

@@ -26,6 +26,10 @@ var queries = [
     callback: function() {
       // Debug
       console.log('smartphone');
+
+      // Example: this will remove the search block in smartphones
+      // element = document.getElementById("block-search-form");
+      // element.parentNode.removeChild(element);
     }
   },
   // portrait only
