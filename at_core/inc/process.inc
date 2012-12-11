@@ -19,25 +19,9 @@ function adaptivetheme_process_html(&$vars) {
   // comment for IE.
   $vars['rdf_namespaces'] = empty($vars['rdf_namespaces_array']) ? '' : drupal_attributes($vars['rdf_namespaces_array']);
 
-  if (!empty($vars['polyfills_array'])) {
-    $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
-    if (empty($vars['polyfills'])) {
-      $ie_scripts = array();
-      if (!empty($vars['polyfills_array'])) {
-        foreach ($vars['polyfills_array'] as $ke => $va) {
-          foreach ($va as $k => $v) {
-            $ies[$k][] = implode("\n", $v);
-          }
-        }
-      }
-      foreach ($ies as $kv => $kvp) {
-        $aus[$kv] = implode("\n", $kvp);
-      }
-      $vars['polyfills'] = at_theme_conditional_scripts($aus);
-    }
-  }
-  else {
-    $vars['polyfills'] = '';
+  // Render polyfills
+  if ($vars['polyfills']) {
+    $vars['polyfills'] = drupal_render($vars['polyfills']);
   }
 }
 
@@ -156,10 +140,10 @@ function adaptivetheme_process_block(&$vars) {
   // and classes not being flattened untill we hit process.
   $vars['outer_prefix'] = '<' . $vars['tag'] . ' id="' . $vars['block_html_id'] . '" class="' . $vars['classes'] . '" ' . $vars['attributes'] . '>';
   $vars['outer_suffix'] = '</' . $vars['tag'] . '>';
-  
+
   // Block inner attributes
   $vars['block_inner_attributes'] = empty($vars['block_inner_attributes_array']) ? '' : drupal_attributes($vars['block_inner_attributes_array']);
-  
+
   // Populate the default inner wrappers
   $vars['inner_prefix'] = '<div' . $vars['block_inner_attributes'] . '>';
   $vars['inner_suffix'] = '</div>';
@@ -280,25 +264,8 @@ function adaptivetheme_process_menubar(&$vars) {
  * Process variables for maintenance-page.tpl.php
  */
 function adaptivetheme_process_maintenance_page(&$vars) {
-  // Load polyfills for the maintenance page, its HTML5 also
-  if (!empty($vars['polyfills_array'])) {
-    $vars['polyfills'] = drupal_static('adaptivetheme_process_html_polyfills');
-    if (empty($vars['polyfills'])) {
-      $ie_scripts = array();
-      if (!empty($vars['polyfills_array'])) {
-        foreach ($vars['polyfills_array'] as $ke => $va) {
-          foreach ($va as $k => $v) {
-            $ies[$k][] = implode("\n", $v);
-          }
-        }
-      }
-      foreach ($ies as $kv => $kvp) {
-        $aus[$kv] = implode("\n", $kvp);
-      }
-      $vars['polyfills'] = at_theme_conditional_scripts($aus);
-    }
-  }
-  else {
-    $vars['polyfills'] = '';
+  // Render polyfills
+  if ($vars['polyfills']) {
+    $vars['polyfills'] = drupal_render($vars['polyfills']);
   }
 }

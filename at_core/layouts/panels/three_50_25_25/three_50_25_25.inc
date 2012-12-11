@@ -66,7 +66,7 @@ function template_preprocess_three_50_25_25(&$vars) {
   $vars['panel_suffix'] = '';
 
   // Set classes
-  if ($panels_classes = panels_classes_array()) {
+  if ($panels_classes = at_panels_classes_array()) {
     foreach($panels_classes as $panels_class) {
       $vars['classes_array'][] = $panels_class;
     }

@@ -70,7 +70,7 @@
   ; For example if you want to load a script just for IE 8 and below use the
   ; following as a guide:
 
-  ; ie_scripts[lte IE 8][] = js/my-script.js
+  ; ie_scripts[lte IE 8][] = scripts/my-script.js
 
 
 ;----------// Regions

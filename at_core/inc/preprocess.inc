@@ -54,40 +54,39 @@ function adaptivetheme_preprocess_html(&$vars) {
   $path = variable_get('theme_' . $theme_name . '_files_directory');
 
   // Load Layout
-  load_layout_css($path, $theme_name);
+  at_load_layout_css($path, $theme_name);
 
   // Load Responsive Styles.
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    load_responsive_css($path, $theme_name);
+    at_load_responsive_css($path, $theme_name);
   }
 
   // Load fonts and/or Custom CSS
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
     // Fonts CSS
     if (at_get_setting('enable_font_settings', $theme_name) === 1) {
-      load_fonts($path, $theme_name);
+      at_load_fonts($path, $theme_name);
     }
     // Custom CSS
     if (at_get_setting('enable_custom_css', $theme_name) === 1) {
-      load_custom_css($path, $theme_name);
+      at_load_custom_css($path, $theme_name);
     }
     // Load Extension Settings CSS
-    load_extensions_css($theme_name);
+    at_load_extensions_css($theme_name);
   }
 
   // Load conditional stylesheets declared in the info file
   if (isset($info['ie_stylesheets'])) {
-    load_subtheme_conditional_styles($theme_name);
+    at_load_subtheme_conditional_styles($theme_name);
   }
 
   // Load specific subtheme scripts
   if (at_get_setting('load_onmediaqueryjs', $theme_name) === 1) {
-    load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
+    at_load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
   }
 
-  // Build an array of polyfilling scripts
-  $vars['polyfills_array'] = '';
-  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
+  // Load polyfills
+  $vars['polyfills'] = at_load_polyfills($theme_name, $vars);
 
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
@@ -97,7 +96,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   }
 
   // Generate body classes
-  if ($html_classes = generate_html_classes($vars, $theme_name)) {
+  if ($html_classes = at_generate_html_classes($vars, $theme_name)) {
     foreach ($html_classes as $class_name) {
       $vars['classes_array'][] = $class_name;
     }
@@ -112,7 +111,7 @@ function adaptivetheme_preprocess_html(&$vars) {
 
   // Load debuggers if enabled. Panels page debugger is a menu item, see alter.inc
   if (at_get_setting('expose_regions', $theme_name) === 1 || at_get_setting('show_window_size', $theme_name) === 1 || at_get_setting('load_all_panels', $theme_name) === 1) {
-    load_debuggers($theme_name);
+    at_load_debuggers($theme_name);
   }
 }
 
@@ -205,7 +204,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   // Process enabled Extensions
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
     // Generate page classes, in AT Core these are all Extensions
-    if ($page_classes = generate_page_classes($vars, $theme_name)) {
+    if ($page_classes = at_generate_page_classes($vars, $theme_name)) {
       foreach ($page_classes as $class_name) {
         $vars['classes_array'][] = $class_name;
       }
@@ -889,30 +888,29 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
   $path = variable_get('theme_' . $theme_name . '_files_directory');
 
   // Load Layout
-  load_layout_css($path, $theme_name);
+  at_load_layout_css($path, $theme_name);
 
   // Load Responsive Styles.
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
-    load_responsive_css($path, $theme_name);
+    at_load_responsive_css($path, $theme_name);
   }
 
   // Load fonts and/or Custom CSS
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
     // Fonts CSS
     if (at_get_setting('enable_font_settings', $theme_name) === 1) {
-      load_fonts($path, $theme_name);
+      at_load_fonts($path, $theme_name);
     }
     // Custom CSS
     if (at_get_setting('enable_custom_css', $theme_name) === 1) {
-      load_custom_css($path, $theme_name);
+      at_load_custom_css($path, $theme_name);
     }
     // Load Extension Settings CSS
-    load_extensions_css($theme_name);
+    at_load_extensions_css($theme_name);
   }
 
-  // Build an array of polyfilling scripts
-  $vars['polyfills_array'] = '';
-  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
+  // Load polyfills
+  $vars['polyfills'] = at_load_polyfills($theme_name, $vars);
 
   // Load the colors stylesheet for the active color scheme. This only works
   // for maintenance mode, when there is a database error the default color

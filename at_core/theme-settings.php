@@ -88,6 +88,12 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   require_once($path_to_at_core . '/inc/forms/settings.global.inc');
   at_core_global_form($form, $theme_name);
 
+  require_once($path_to_at_core . '/inc/forms/settings.filemanagement.inc');
+  at_core_filemanagement_form($form, $theme_name);
+
+  require_once($path_to_at_core . '/inc/forms/settings.css.inc');
+  at_core_css_form($form, $theme_name);
+
   require_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
   at_core_polyfills_form($form, $theme_name);
 

@@ -86,14 +86,14 @@ function adaptivetheme_html_head_alter(&$head_elements) {
 
     // apple-mobile-web-app-capable
     if ($adaptivetheme_meta_apple_mobile_web_app_capable = at_get_setting('adaptivetheme_meta_apple_mobile_web_app_capable', $theme_name)) {
-    $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-        'name' => "apple-mobile-web-app-capable",
-        'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
-      ),
-      '#weight' => 6,
+      $head_elements['adaptivetheme_meta_apple_mobile_web_app_capable'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => "apple-mobile-web-app-capable",
+          'content' => check_plain($adaptivetheme_meta_apple_mobile_web_app_capable),
+        ),
+        '#weight' => 6,
       );
     }
   }
@@ -164,11 +164,24 @@ function adaptivetheme_html_head_alter(&$head_elements) {
  * hook_js_alter()
  */
 function adaptivetheme_js_alter(&$javascript) {
+  global $theme_key;
+
   // Use our own vesion of vertical-tabs.js for better error handling
   // @see http://drupal.org/node/607752
   if (isset($javascript['misc/vertical-tabs.js'])) {
     $file = drupal_get_path('theme', 'adaptivetheme') . '/scripts/vertical-tabs.js';
     $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
+  }
+
+  // Combine JS files into one per type
+  if (at_get_setting('combine_js_files', $theme_key) === 1) {
+    uasort($javascript, 'drupal_sort_css_js');
+    $weight = 0;
+    foreach ($javascript as $name => $script) {
+      $javascript[$name]['group'] = -100;
+      $javascript[$name]['weight'] = ++$weight;
+      $javascript[$name]['every_page'] = 1;
+    }
   }
 }
 
@@ -221,6 +234,26 @@ function adaptivetheme_css_alter(&$css) {
         }
       }
     }
+  }
+
+  // Combine CSS files into one per type
+  if (at_get_setting('combine_css_files', $theme_key) === 1) {
+    uasort($css, 'drupal_sort_css_js');
+    $print = array();
+    $weight = 0;
+    foreach ($css as $name => $style) {
+      // Leave  the conditional stylesheets untouched
+      if ($css[$name]['browsers']['!IE']) {
+        $css[$name]['group'] = 0;
+        $css[$name]['weight'] = ++$weight;
+        $css[$name]['every_page'] = TRUE;
+      }
+      if ($css[$name]['media'] == 'print') {
+        $print[$name] = $css[$name];
+        unset($css[$name]);
+      }
+    }
+    $css = array_merge($css, $print);
   }
 }
 
