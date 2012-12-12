@@ -54,8 +54,7 @@ function at_load_layout_css($path, $theme_name) {
   $load_ie8_css = TRUE;
 
   // Load the default layout if Standard layout is default or responsive styles are disabled
-  if (
-    at_get_setting('global_default_layout', $theme_name) === 'standard-layout' || at_get_setting('disable_responsive_styles', $theme_name) === 1) {
+  if (at_get_setting('global_default_layout', $theme_name) === 'standard-layout' || at_get_setting('disable_responsive_styles', $theme_name) === 1) {
     $file = $theme_name . '.default.layout.css';
     $filepath = $path . '/' . $file;
     if (file_exists($filepath)) {
@@ -147,8 +146,8 @@ function at_load_responsive_css($path, $theme_name) {
     // you change them you must update to match.
     $files = array(
       // Maintian backwards compatibility with older themes that use smartphone
-      'responsive.smartphone.portrait'  => at_get_setting('smalltouch_portrait_media_query', $theme_name),
-      'responsive.smartphone.landscape' => at_get_setting('smalltouch_landscape_media_query', $theme_name),
+      'responsive.smartphone.portrait'  => at_get_setting('smartphone_portrait_media_query', $theme_name),
+      'responsive.smartphone.landscape' => at_get_setting('smartphone_landscape_media_query', $theme_name),
       // Standard files for the 7.x-3.2 and beyond
       'responsive.smalltouch.portrait'  => at_get_setting('smalltouch_portrait_media_query', $theme_name),
       'responsive.smalltouch.landscape' => at_get_setting('smalltouch_landscape_media_query', $theme_name),
