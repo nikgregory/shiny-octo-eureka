@@ -213,7 +213,7 @@
   settings[tablet_landscape_three_25_25_50]    = 'three-25-25-50'
   settings[tablet_landscape_three_50_25_25]    = 'three-50-25-25'
   settings[tablet_landscape_four_4x25]         = 'four-4x25'
-  settings[tablet_landscape_five_5x20]         = 'five-5x20-2x3-grid'
+  settings[tablet_landscape_five_5x20]         = 'five-5x20'
   settings[tablet_landscape_six_6x16]          = 'six-6x16-3x2-grid'
   settings[tablet_landscape_three_inset_left]  = 'three-inset-left'
   settings[tablet_landscape_three_inset_right] = 'three-inset-right'
@@ -323,6 +323,20 @@
   settings[h4_font_size] = '1.2em'
   settings[h5_font_size] = '1em'
   settings[h6_font_size] = '1em'
+
+
+  ; Site name
+  settings[site_name_case]      = 'snc-n'
+  settings[site_name_weight]    = 'snw-b'
+  settings[site_name_alignment] = 'sna-l'
+  settings[site_name_shadow]    = 'sns-n'
+
+
+  ; Site slogan
+  settings[site_slogan_case]      = 'ssc-n'
+  settings[site_slogan_weight]    = 'ssw-b'
+  settings[site_slogan_alignment] = 'ssa-l'
+  settings[site_slogan_shadow]    = 'sss-n'
 
 
   ; Page title

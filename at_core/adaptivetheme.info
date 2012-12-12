@@ -150,8 +150,8 @@
   settings[bigscreen_three_25_25_50]    = 'three-25-25-50'
   settings[bigscreen_three_50_25_25]    = 'three-50-25-25'
   settings[bigscreen_four_4x25]         = 'four-4x25'
-  settings[bigscreen_five_5x20]         = 'five-5x20-2x3-grid'
-  settings[bigscreen_six_6x16]          = 'six-6x16-3x2-grid'
+  settings[bigscreen_five_5x20]         = 'five-5x20'
+  settings[bigscreen_six_6x16]          = 'six-6x16'
   settings[bigscreen_three_inset_left]  = 'three-inset-left'
   settings[bigscreen_three_inset_right] = 'three-inset-right'
 
@@ -166,7 +166,7 @@
   settings[tablet_landscape_three_25_25_50]    = 'three-25-25-50'
   settings[tablet_landscape_three_50_25_25]    = 'three-50-25-25'
   settings[tablet_landscape_four_4x25]         = 'four-4x25'
-  settings[tablet_landscape_five_5x20]         = 'five-5x20-2x3-grid'
+  settings[tablet_landscape_five_5x20]         = 'five-5x20'
   settings[tablet_landscape_six_6x16]          = 'six-6x16-3x2-grid'
   settings[tablet_landscape_three_inset_left]  = 'three-inset-left'
   settings[tablet_landscape_three_inset_right] = 'three-inset-right'
@@ -274,7 +274,15 @@
   settings[h6_font_size]             = '1em'
 
 
-;----------// Headings
+;----------// Title Styles
+  settings[site_name_case]          = 'snc-n'
+  settings[site_name_weight]        = 'snw-b'
+  settings[site_name_alignment]     = 'sna-l'
+  settings[site_name_shadow]        = 'sns-n'
+  settings[site_slogan_case]        = 'ssc-n'
+  settings[site_slogan_weight]      = 'ssw-b'
+  settings[site_slogan_alignment]   = 'ssa-l'
+  settings[site_slogan_shadow]      = 'sss-n'
   settings[page_title_case]         = 'ptc-n'
   settings[page_title_weight]       = 'ptw-b'
   settings[page_title_alignment]    = 'pta-l'
@@ -287,11 +295,10 @@
   settings[comment_title_weight]    = 'ctw-b'
   settings[comment_title_alignment] = 'cta-l'
   settings[comment_title_shadow]    = 'cts-n'
-  settings[block_title_case]        = 'btc-uc'
+  settings[block_title_case]        = 'btc-n'
   settings[block_title_weight]      = 'btw-b'
   settings[block_title_alignment]   = 'bta-l'
   settings[block_title_shadow]      = 'bts-n'
-
 
 ;----------// Images
   settings[image_alignment]        = 'ia-l'
