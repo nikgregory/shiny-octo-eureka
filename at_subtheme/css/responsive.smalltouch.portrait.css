@@ -7,7 +7,8 @@
  *
  * - Read the _README file in this directory, it contains useful help and other information.
  */
-/* Increase the body font size on small devices */
-html {
-  font-size: 112.5%;
+
+/* Increase the default font size on small touch devices */
+body {
+  font-size: 100%;
 }

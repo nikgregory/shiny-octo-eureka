@@ -107,7 +107,7 @@ fieldset.at-layout-form div.form-item[class*="-media-query"] .description {
 /* Hide text in form labels where needed
    Kellum Method: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement */
 fieldset.at-layout-form div.form-type-radio label,
-div.smartphone-portrait-layout,
+div.smalltouch-portrait-layout,
 .panel-option-lists .form-radios label  {
   text-indent: 100%;
   white-space: nowrap;
@@ -170,7 +170,7 @@ fieldset.at-layout-form div[class*="set-max-width"] input  {
   width: auto;
 }
 fieldset.at-layout-form div.form-type-radio label,
-div.smartphone-portrait-layout  {
+div.smalltouch-portrait-layout  {
   background-repeat: no-repeat;
   margin-top: 4px;
   height: 60px;
@@ -179,7 +179,7 @@ div.smartphone-portrait-layout  {
   float: none;
   text-align: center;
 }
-div.smartphone-portrait-layout  {
+div.smalltouch-portrait-layout  {
   float: left;
   margin: 15px 15px 0 0;
 }
@@ -608,7 +608,7 @@ div[class*=form-item-move-region-options] label:first-child {
 .admin-theme-seven .panel-option-lists .form-type-radio {
   margin-right: 20px;
 }
-.admin-theme-seven div.smartphone-portrait-layout {
+.admin-theme-seven div.smalltouch-portrait-layout {
   margin-top: 7px;
 }
 .admin-theme-seven fieldset,

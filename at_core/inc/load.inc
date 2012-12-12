@@ -16,8 +16,26 @@
  * @param $theme_name, the active theme.
  */
 function at_load_failure($filepath, $theme_name) {
-  $message = t('<p>One or more CSS files were not found or does not exist: <em>!files_list</em>. Did you delete the public files directory or change a file name? You probably need to save the theme settings to generate the files. Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>', array('!files_list' => $filepath, '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system'));
-
+  $smalltouch_message = '';
+  $standard_message = '';
+  if (strpos($filepath, 'smalltouch') !== FALSE) {
+    $smalltouch_message = t('<p>Smalltouch CSS files were not detected. If you just upgraded to the latest version of AT you need to change the name of the old responsive smartphone CSS files to responsive.smalltouch.landscape.css and responsive.smalltouch.portrait.css.</p>');
+  }
+  else {
+    $standard_message = t('<p>Did you delete any files or change a file name? You may need to save the theme settings, or check all files names are correct in your theme.</p>');
+  }
+  $message = t('
+    <p>One or more CSS files were not found or does not exist: <em>!files_list</em>.</p>
+    !smalltouch_message
+    !standard_message
+    <p>Please view the <a href="!docs_link" target="_blank">online documentation</a>.</p>',
+    array(
+      '!files_list' => $filepath,
+      '!smalltouch_message' => $smalltouch_message,
+      '!standard_message' => $standard_message,
+      '!docs_link' => 'http://adaptivethemes.com/documentation/file-generation-system',
+    )
+  );
   if (!empty($filepath)) {
     watchdog($theme_name, 'CSS file missing or not found @filename', array('@filename' => $filepath), WATCHDOG_ERROR);
     if (user_is_logged_in()) {
@@ -55,8 +73,7 @@ function at_load_layout_css($path, $theme_name) {
 
   // Load the default layout if Standard layout is default or responsive styles are disabled
   if (
-    at_get_setting('global_default_layout', $theme_name) === 'standard-layout' ||
-    at_get_setting('disable_responsive_styles', $theme_name) === 1) {
+    at_get_setting('global_default_layout', $theme_name) === 'standard-layout' || at_get_setting('disable_responsive_styles', $theme_name) === 1) {
     $file = $theme_name . '.default.layout.css';
     $filepath = $path . '/' . $file;
     if (file_exists($filepath)) {
@@ -147,8 +164,8 @@ function at_load_responsive_css($path, $theme_name) {
     // The file names must match the files in your themes CSS directory, if
     // you change them you must update to match.
     $files = array(
-      'responsive.smartphone.portrait'  => at_get_setting('smartphone_portrait_media_query', $theme_name),
-      'responsive.smartphone.landscape' => at_get_setting('smartphone_landscape_media_query', $theme_name),
+      'responsive.smalltouch.portrait'  => at_get_setting('smalltouch_portrait_media_query', $theme_name),
+      'responsive.smalltouch.landscape' => at_get_setting('smalltouch_landscape_media_query', $theme_name),
       'responsive.tablet.portrait'      => at_get_setting('tablet_portrait_media_query', $theme_name),
       'responsive.tablet.landscape'     => at_get_setting('tablet_landscape_media_query', $theme_name),
       'responsive.desktop'              => at_get_setting('bigscreen_media_query', $theme_name),
@@ -452,6 +469,9 @@ function at_load_subtheme_responsive_styles($filepath, $media_query, $theme_name
       'weight' => $weight,
       )
     );
+  }
+  else {
+    at_load_failure($filepath, $theme_name);
   }
 }
 

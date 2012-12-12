@@ -21,7 +21,7 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
   $values = $form_state['values'];
 
   // Initialize
-  $smartphone_landscape_panels_data = array();
+  $smalltouch_landscape_panels_data = array();
 
   // Get the page layout config array
   $layout_variables = page_layout();
@@ -84,36 +84,36 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     }
   }
 
-  // Smartphone Portrait
-  if ($values['smartphone_portrait_media_query']) {
+  // Smalltouch Portrait
+  if ($values['smalltouch_portrait_media_query']) {
 
-    $device = 'smartphone_portrait';
+    $device = 'smalltouch_portrait';
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $smartphone_portrait_layout_data[$value] = filter_xss_admin($values["$device" . '_' . "$value"]);
+        $smalltouch_portrait_layout_data[$value] = filter_xss_admin($values["$device" . '_' . "$value"]);
       }
     }
-    // In smartphone portrait we invoke the layout builder, but the values are not
+    // In smalltouch portrait we invoke the layout builder, but the values are not
     // used since the CSS is actually hard coded. I have done this because, at some
     // stage in the future this layout might not be hard coded and we might really
     // need to return a dynamically built layout. Note that $layout is only ever
     // used in desktop first - never in mobile first.
-    $layout = at_build_page_layout($smartphone_portrait_layout_data['layout'], $smartphone_portrait_layout_data['sidebar_first'], $smartphone_portrait_layout_data['sidebar_second'], $smartphone_portrait_layout_data['sidebar_unit'], $theme_name);
+    $layout = at_build_page_layout($smalltouch_portrait_layout_data['layout'], $smalltouch_portrait_layout_data['sidebar_first'], $smalltouch_portrait_layout_data['sidebar_second'], $smalltouch_portrait_layout_data['sidebar_unit'], $theme_name);
 
-    $method = $smartphone_portrait_layout_data['layout'];
+    $method = $smalltouch_portrait_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $smartphone_portrait_layout_data['page_width'] . $smartphone_portrait_layout_data['page_unit'] . '}';
-    $media_query = $smartphone_portrait_layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $smalltouch_portrait_layout_data['page_width'] . $smalltouch_portrait_layout_data['page_unit'] . '}';
+    $media_query = $smalltouch_portrait_layout_data['media_query'];
 
     if ($responsive_js == TRUE) {
-      $responsive_js_css = 'html {font-family: smartphone_portrait} /* Font family for media_queries.js */';
+      $responsive_js_css = 'html {font-family: smalltouch_portrait} /* Font family for media_queries.js */';
     }
 
-    // If mobile first then smartphone portrait needs to do nothing, else its
+    // If mobile first then smalltouch portrait needs to do nothing, else its
     // problematic to set the layout later due to the cascade and inheritance
-    if ($is_default_layout === 'smartphone-portrait') {
+    if ($is_default_layout === 'smalltouch-portrait') {
       $css = '';
       // If responsive js is TRUE we output the media query with CSS styles
       if ($responsive_js == TRUE) {
@@ -121,16 +121,16 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
       }
     }
     else {
-      // Smartphone portrait panels are all 100% width and stacked, we need to
+      // Smalltouch portrait panels are all 100% width and stacked, we need to
       // overpower the default layouts when in desktop first mode
-      $smartphone_portrait_panels_layout = '.at-panel .region,.at-panel .panel-row,.at-panel .panel-row .region,.at-panel .inset-wrapper{float:none;display:block;width:100%}';
+      $smalltouch_portrait_panels_layout = '.at-panel .region,.at-panel .panel-row,.at-panel .panel-row .region,.at-panel .inset-wrapper{float:none;display:block;width:100%}';
 
       // Build the styles string
-      $styles = $width . "\n" . $layout . "\n" . $smartphone_portrait_panels_layout;
+      $styles = $width . "\n" . $layout . "\n" . $smalltouch_portrait_panels_layout;
 
       // Reset styles if we are loading responsive js
       if ($responsive_js == TRUE) {
-        $styles = "\n" . $responsive_js_css . "\n" . $width . "\n" . $layout . "\n" . $smartphone_portrait_panels_layout;
+        $styles = "\n" . $responsive_js_css . "\n" . $width . "\n" . $layout . "\n" . $smalltouch_portrait_panels_layout;
       }
 
       // CSS wrapped in the media query
@@ -138,58 +138,58 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     }
 
     // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.portrait.css', FALSE);
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smalltouch.portrait.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
     $layouts[] = $css;
   }
 
-  // Smartphone Landscape
-  if ($values['smartphone_landscape_layout']) {
+  // Smalltouch Landscape
+  if ($values['smalltouch_landscape_layout']) {
 
-    $device = 'smartphone_landscape';
+    $device = 'smalltouch_landscape';
 
     // Build an array of page layout settings values
     foreach ($layout_variables as $key => $value) {
       if (isset($values["$device" . '_' . "$value"])) {
-        $smartphone_landscape_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
+        $smalltouch_landscape_layout_data[$value] = check_plain($values["$device" . '_' . "$value"]);
       }
     }
-    $layout = at_build_page_layout($smartphone_landscape_layout_data['layout'], $smartphone_landscape_layout_data['sidebar_first'], $smartphone_landscape_layout_data['sidebar_second'], $smartphone_landscape_layout_data['sidebar_unit'], $theme_name);
+    $layout = at_build_page_layout($smalltouch_landscape_layout_data['layout'], $smalltouch_landscape_layout_data['sidebar_first'], $smalltouch_landscape_layout_data['sidebar_second'], $smalltouch_landscape_layout_data['sidebar_unit'], $theme_name);
 
-    $method = $smartphone_landscape_layout_data['layout'];
+    $method = $smalltouch_landscape_layout_data['layout'];
     $comment = "/* $device $method */\n";
-    $width = "\n" . '.container {width:' . $smartphone_landscape_layout_data['page_width'] . $smartphone_landscape_layout_data['page_unit'] . '}';
-    $media_query = $smartphone_landscape_layout_data['media_query'];
+    $width = "\n" . '.container {width:' . $smalltouch_landscape_layout_data['page_width'] . $smalltouch_landscape_layout_data['page_unit'] . '}';
+    $media_query = $smalltouch_landscape_layout_data['media_query'];
 
     // Get the panel layout settings
     foreach ($panel_subtypes as $subtype) {
-      $smartphone_landscape_panel_settings[] = $device . '_' . $subtype;
+      $smalltouch_landscape_panel_settings[] = $device . '_' . $subtype;
     }
 
-    foreach ($smartphone_landscape_panel_settings as $setting) {
+    foreach ($smalltouch_landscape_panel_settings as $setting) {
       if (!empty($values[$setting])) {
         $option = $values[$setting];
       }
       else {
         // Provide a fallback layout in case settings fail during submit
-        $smartphone_landscape_panel_substr_setting = substr($setting, 21);
-        $smartphone_landscape_panel_substr_setting = str_replace('_', '-', $smartphone_landscape_panel_substr_setting) . '-stack';
-        $option = $smartphone_landscape_panel_substr_setting;
+        $smalltouch_landscape_panel_substr_setting = substr($setting, 21);
+        $smalltouch_landscape_panel_substr_setting = str_replace('_', '-', $smalltouch_landscape_panel_substr_setting) . '-stack';
+        $option = $smalltouch_landscape_panel_substr_setting;
       }
-      $smartphone_landscape_panels_data[] = $option;
+      $smalltouch_landscape_panels_data[] = $option;
     }
 
     // Generate the panels layouts
-    $smartphone_landscape_panels_css = at_build_panels_layout_css($panel_styles, $smartphone_landscape_panels_data);
-    $panels_layouts = $float . $smartphone_landscape_panels_css;
+    $smalltouch_landscape_panels_css = at_build_panels_layout_css($panel_styles, $smalltouch_landscape_panels_data);
+    $panels_layouts = $float . $smalltouch_landscape_panels_css;
 
     // Build the styles string
     $styles = $width . "\n" . $layout . "\n" . $panels_layouts;
 
     // Reset styles if we are loading responsive js
     if ($responsive_js == TRUE) {
-      $responsive_js_css = "\n" . 'html {font-family: smartphone_landscape} /* Font family for media_queries.js */';
+      $responsive_js_css = "\n" . 'html {font-family: smalltouch_landscape} /* Font family for media_queries.js */';
       $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
     }
 
@@ -197,7 +197,7 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
     // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smartphone.landscape.css', FALSE);
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smalltouch.landscape.css', FALSE);
     $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
 
     $layouts[] = $css;

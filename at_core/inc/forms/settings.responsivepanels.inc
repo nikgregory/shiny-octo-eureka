@@ -10,7 +10,7 @@ function at_core_responsive_panels_form(&$form, $theme_name, $info_array) {
     'bigscreen',
     'tablet_landscape',
     'tablet_portrait',
-    'smartphone_landscape',
+    'smalltouch_landscape',
   );
 
   // Get the configuration array for panel layouts

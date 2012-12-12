@@ -330,7 +330,7 @@ function adaptivetheme_page_alter(&$page) {
 
             // UNSET
             if (at_get_setting('unset_' . $region) === 1) {
-              if (at_get_setting('unset_options_' . $region) == 'unset_smartphone') {
+              if (at_get_setting('unset_options_' . $region) == 'unset_smalltouch') {
                 if ($page['is_mobile'] === TRUE && $page['is_tablet'] === FALSE) {
                   unset($page[$region]);
                 }
@@ -345,7 +345,7 @@ function adaptivetheme_page_alter(&$page) {
 
             // MOVE
             if (at_get_setting('move_region_' . $region) === 1) {
-              if (at_get_setting('move_options_' . $region) == 'move_smartphone') {
+              if (at_get_setting('move_options_' . $region) == 'move_smalltouch') {
                 if ($page['is_mobile'] === TRUE && $page['is_tablet'] === FALSE) {
                   $page = at_move_regions($page, $region, $blocks);
                 }

@@ -16,36 +16,35 @@
  * IMPORTANT: do not rename or move this file, or change the directory name!
  */
 var queries = [
-  // README! The following are examples, remove what you don't need!
+
+  // README! The following are examples, remove what you don't need, for example
+  // unless you ar using them remove all the calls to console.log()
 
 
-  // Smartphone
+  // Smalltouch
   {
-    context: ['smartphone_portrait', 'smartphone_landscape'],
+    context: ['smalltouch_portrait', 'smalltouch_landscape'],
     call_in_each_context: false,
     callback: function() {
-      // Debug
-      console.log('smartphone');
+      // console.log('smalltouch');
 
-      // Example: this will remove the search block in smartphones
+      // Example: this will remove the search block in smalltouch devices
       // element = document.getElementById("block-search-form");
       // element.parentNode.removeChild(element);
     }
   },
-  // portrait only
+  // Smalltouch portrait only
   {
-    context: 'smartphone_portrait',
+    context: 'smalltouch_portrait',
     callback: function() {
-      // Debug
-      console.log('smartphone portrait');
+      //console.log('smalltouch portrait');
     }
   },
-  // landscape only
+  // Smalltouch landscape only
   {
-    context: 'smartphone_landscape',
+    context: 'smalltouch_landscape',
     callback: function() {
-      // Debug
-      console.log('smartphone_landscape ');
+      // console.log('smalltouch_landscape ');
     }
   },
 
@@ -55,34 +54,31 @@ var queries = [
     context: ['tablet_portrait', 'tablet_landscape'],
     call_in_each_context: false,
     callback: function() {
-      // Debug
-      console.log('tablet');
+      // console.log('tablet');
     }
   },
-  // portrait only
+  // Tablet portrait only
   {
     context: 'tablet_portrait',
     callback: function() {
-      // Debug
-      console.log('tablet_portrait');
+      // console.log('tablet_portrait');
     }
   },
-  // landscape only
+  // Tablet landscape only
   {
     context: 'tablet_landscape',
     callback: function() {
-      // Debug
-      console.log('tablet_landscape');
+      // console.log('tablet_landscape');
     }
   },
 
 
-  // Standard desktop context
+  // Standard desktop
   {
     context: 'standard',
     callback: function() {
       // Debug
-      console.log('standard desktop');
+      // console.log('standard desktop');
     }
   },
 ];
