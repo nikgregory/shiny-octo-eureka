@@ -35,14 +35,14 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
   // Get the panels config array
   $rpl = responsive_panels_data_structure();
 
-  // Not all layouts generate their Panels CSS, we need to add a float delcaration
-  // those that do
+  // We need to add a float to some panels layouts in certain instances
   $float = ".at-panel .region {display:inline;float:left}";
 
   // Holds all styles from the responsive stylesheets
   $responsive_styles = array();
   $panel_subtypes = array();
   $panel_styles = array();
+
   // Get the values for the panels layouts
   unset($rpl['one']); // unset panels layout one, it has no layout data
   foreach ($rpl as $grouped => $panels_layout_groups) {
@@ -58,8 +58,10 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
 
   // If the Cascading media queries CSS file is enabled, load these styles first
   if ($values['enable_custom_media_queries'] === 1) {
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.custom.css', FALSE);
-    $responsive_styles[] = $responsive_css . "\n";
+    if (file_exists($path_to_responsive_css . 'responsive.custom.css')) {
+      $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.custom.css', FALSE);
+      $responsive_styles[] = $responsive_css . "\n";
+    }
   }
 
   // Set variables for respond.js
@@ -138,8 +140,18 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     }
 
     // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smalltouch.portrait.css', FALSE);
-    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    $responsive_smalltouch_portrait_css = '';
+    if (file_exists($path_to_responsive_css . 'responsive.smalltouch.portrait.css')) {
+      $responsive_smalltouch_portrait_css = $path_to_responsive_css . 'responsive.smalltouch.portrait.css';
+    }
+    // Legacy support for pre 7.x-3.2 subthemes
+    elseif (file_exists($path_to_responsive_css . 'responsive.smartphone.portrait.css')) {
+      $responsive_smalltouch_portrait_css = $path_to_responsive_css . 'responsive.smartphone.portrait.css';
+    }
+    if (!empty($responsive_smalltouch_portrait_css)) {
+      $responsive_css = drupal_load_stylesheet($responsive_smalltouch_portrait_css, FALSE);
+      $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    }
 
     $layouts[] = $css;
   }
@@ -197,8 +209,18 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
     // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.smalltouch.landscape.css', FALSE);
-    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    $responsive_smalltouch_landscape_css = '';
+    if (file_exists($path_to_responsive_css . 'responsive.smalltouch.landscape.css')) {
+      $responsive_smalltouch_landscape_css = $path_to_responsive_css . 'responsive.smalltouch.landscape.css';
+    }
+    // Legacy support for pre 7.x-3.2 subthemes
+    elseif (file_exists($path_to_responsive_css . 'responsive.smartphone.landscape.css')) {
+      $responsive_smalltouch_landscape_css = $path_to_responsive_css . 'responsive.smartphone.landscape.css';
+    }
+    if (!empty($responsive_smalltouch_landscape_css)) {
+      $responsive_css = drupal_load_stylesheet($responsive_smalltouch_landscape_css, FALSE);
+      $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    }
 
     $layouts[] = $css;
   }
@@ -262,8 +284,10 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
      // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.portrait.css', FALSE);
-    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    if (file_exists($path_to_responsive_css . 'responsive.tablet.portrait.css')) {
+      $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.portrait.css', FALSE);
+      $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    }
 
     $layouts[] = $css;
   }
@@ -323,8 +347,10 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
     $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
      // Get and wrap the responsive CSS styles in the relative media query
-    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.landscape.css', FALSE);
-    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    if (file_exists($path_to_responsive_css . 'responsive.tablet.landscape.css')) {
+      $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.tablet.landscape.css', FALSE);
+      $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+    }
 
     $layouts[] = $css;
   }
@@ -387,9 +413,6 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
       $responsive_js_css = "\n" . 'html {font-family: standard} /* Font family for media_queries.js */';
       $styles = $responsive_js_css . $width . "\n" . $layout . "\n" . $panels_layouts;
     }
-
-    // CSS wrapped in the media query
-    // $css = $comment . '@media ' . $media_query . ' {' . $styles . "\n" . '}';
 
     // We need to do some conditional checks to account for the users settings:
     // - is this mobile first or desktop first?
@@ -482,8 +505,10 @@ function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
   }
 
   // Get and wrap the responsive CSS styles in the relative media query
-  $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
-  $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+  if (file_exists($path_to_responsive_css . 'responsive.desktop.css')) {
+    $responsive_css = drupal_load_stylesheet($path_to_responsive_css . 'responsive.desktop.css', FALSE);
+    $responsive_styles[] = '@media ' . $media_query . ' {' . "\n" . $responsive_css . "\n" . '}';
+  }
 
   // Generate the layout and responsive styles stylesheets
   // Here we generate five files:
