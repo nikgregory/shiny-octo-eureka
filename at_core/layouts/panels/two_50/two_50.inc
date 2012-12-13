@@ -49,9 +49,7 @@ function template_preprocess_two_50(&$vars) {
   $vars['panel_suffix'] = '';
 
   // Set classes
-  if ($panels_classes = at_panels_classes_array()) {
-    foreach($panels_classes as $panels_class) {
-      $vars['classes_array'][] = $panels_class;
-    }
-  }
+  $vars['classes_array'][] = 'at-panel';
+  $vars['classes_array'][] = 'panel-display';
+  $vars['classes_array'][] = 'clearfix';
 }
