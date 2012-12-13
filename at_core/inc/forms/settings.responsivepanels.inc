@@ -137,10 +137,15 @@ function at_core_responsive_panels_form(&$form, $theme_name, $info_array) {
           foreach ($layouts as $layout) {
             foreach ($layout as $key => $value) {
               if (isset($value['theme'])) {
+                $default_value = at_get_setting($device . '_' . $value['theme']);
+                // Add a check for backwards compatibility with pre 7.x-3.2 themes
+                if ($device == 'smalltouch_landscape') {
+                  $default_value = at_get_setting('smalltouch_landscape_' . $value['theme']) ? at_get_setting('smalltouch_landscape_' . $value['theme']) : at_get_setting('smartphone_landscape_' . $value['theme']);
+                }
                 $form['at-settings']['panels']['panels-wrapper'][$device][$group][$device . '_' . $value['theme']] = array(
                   '#type' => 'radios',
                   '#title' => t($value['title']),
-                  '#default_value' => at_get_setting($device . '_' . $value['theme']),
+                  '#default_value' => $default_value,
                   '#options' => $value['options'],
                 );
               }

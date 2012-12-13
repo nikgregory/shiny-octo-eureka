@@ -133,7 +133,7 @@ function at_core_context_regions_form(&$form, $info_array) {
           '#type' => 'radios',
           '#title' => t('Hide region options'),
           '#options' => array(
-            'unset_smalltouch' => t('Hide in Smalltouchs'),
+            'unset_smalltouch' => t('Hide in Smalltouch devicess'),
             'unset_all_devices' => t('Hide in all mobile devices'),
           ),
           '#default_value' => at_get_setting('unset_options_' . $mobile_region_name) ? at_get_setting('unset_options_' . $mobile_region_name) : 'unset_smalltouch',

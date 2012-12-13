@@ -39,10 +39,15 @@ function at_core_global_form(&$form, $theme_name) {
       'visible' => array('input[name="global_default_layout_toggle"]' => array('checked' => TRUE)),
     ),
   );
+  // Backwards compatibility with pre 7.x-3.x themes
+  $global_default_layout_default_value = at_get_setting('global_default_layout') ? at_get_setting('global_default_layout') : 'standard-layout';
+  if ($global_default_layout_default_value == 'smartphone-portrait') {
+    $global_default_layout_default_value = 'smalltouch-portrait';
+  }
   $form['at-settings']['global-settings']['default-layout']['toggle']['global_default_layout'] = array(
     '#type' => 'radios',
     '#description' => t('<p>Adaptivetheme supports both mobile first and desktop first design approaches. Please review the <a href="!docs_link" target="_blank">online documentation</a>.</p><p>This setting fundementally alters what CSS is loaded and how it is loaded. At the most basic level if you select Mobile first the Smalltouch portrait layout will load as the default, if you select Desktop first the Standard layout will load as the default. Many other changes take place regarding loading of CSS for Internet Explorer, Responsive Gpanels and Panels as well.</p> ', array('!docs_link' => 'http://adaptivethemes.com/documentation/mobile-first-design-with-adaptivetheme')),
-    '#default_value' => at_get_setting('global_default_layout') ? at_get_setting('global_default_layout') : 'standard-layout',
+    '#default_value' => $global_default_layout_default_value,
     '#options' => array(
       'smalltouch-portrait' => t('Mobile first'),
       'standard-layout' => t('Desktop first'),

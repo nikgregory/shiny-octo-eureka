@@ -555,7 +555,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['landscape']['smalltouch-landscape-layout-wrapper']['smalltouch_landscape_layout'] = array(
     '#type' => 'radios',
     '#title' => t('<strong>Choose sidebar positions</strong>'),
-    '#default_value' => str_replace('-', '_', at_get_setting('smalltouch_landscape_layout')),
+    '#default_value' => at_get_setting('smalltouch_landscape_layout') ? str_replace('-', '_', at_get_setting('smalltouch_landscape_layout')) : str_replace('-', '_', at_get_setting('smartphone_landscape_layout')),
     '#options' => $smalltouch_landscape_options,
   );
 
@@ -571,14 +571,14 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['landscape']['smalltouch-landscape-sidebar-width-wrapper']['smalltouch_landscape_sidebar_unit'] = array(
     '#type' => 'select',
     '#title' => t('Unit'),
-    '#default_value' => at_get_setting('smalltouch_landscape_sidebar_unit'),
+    '#default_value' => at_get_setting('smalltouch_landscape_sidebar_unit') ? at_get_setting('smalltouch_landscape_sidebar_unit') : at_get_setting('smartphone_landscape_sidebar_unit'),
     '#options' => $unit_options,
   );
 
   $form['at-settings']['smalltouch']['landscape']['smalltouch-landscape-sidebar-width-wrapper']['smalltouch_landscape_sidebar_first'] = array(
     '#type' => 'textfield',
     '#title' => t('First sidebar'),
-    '#default_value' => check_plain(at_get_setting('smalltouch_landscape_sidebar_first')),
+    '#default_value' => at_get_setting('smalltouch_landscape_sidebar_first') ? check_plain(at_get_setting('smalltouch_landscape_sidebar_first')) : check_plain(at_get_setting('smartphone_landscape_sidebar_first')),
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
@@ -589,7 +589,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['landscape']['smalltouch-landscape-sidebar-width-wrapper']['smalltouch_landscape_sidebar_second'] = array(
     '#type' => 'textfield',
     '#title' => t('Second sidebar'),
-    '#default_value' => check_plain(at_get_setting('smalltouch_landscape_sidebar_second')),
+    '#default_value' => at_get_setting('smalltouch_landscape_sidebar_second') ? check_plain(at_get_setting('smalltouch_landscape_sidebar_second')) : check_plain(at_get_setting('smartphone_landscape_sidebar_second')),
     '#size' => 4,
     '#maxlenght' => 4,
     '#states' => array(
@@ -609,7 +609,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['landscape']['smalltouch-landscape-media-queries-wrapper']['smalltouch_landscape_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
-    '#default_value' => check_plain(at_get_setting('smalltouch_landscape_media_query')),
+    '#default_value' => at_get_setting('smalltouch_landscape_media_query') ? check_plain(at_get_setting('smalltouch_landscape_media_query')) : check_plain(at_get_setting('smartphone_landscape_media_query')),
     '#description' => t('Do not include @media, it\'s included automatically.'),
     '#size' => 100,
     '#required' => TRUE,
@@ -618,11 +618,11 @@ function at_core_page_layout_form(&$form, $theme_name) {
   // Pass hidden values to the sumbit function, these values are required but the user can't change them via the UI
   $form['at-settings']['smalltouch']['landscape']['hidden']['smalltouch_landscape_page_width'] = array(
     '#type' => 'hidden',
-    '#default_value' => check_plain(at_get_setting('smalltouch_landscape_page_width')),
+    '#default_value' => at_get_setting('smalltouch_landscape_page_width') ? check_plain(at_get_setting('smalltouch_landscape_page_width')) : check_plain(at_get_setting('smartphone_landscape_page_width')),
   );
   $form['at-settings']['smalltouch']['landscape']['hidden']['smalltouch_landscape_page_unit'] = array(
     '#type' => 'hidden',
-    '#default_value' => at_get_setting('smalltouch_landscape_page_unit'),
+    '#default_value' => at_get_setting('smalltouch_landscape_page_unit') ? at_get_setting('smalltouch_landscape_page_unit') : at_get_setting('smartphone_landscape_page_unit'),
   );
 
   /**********************
@@ -650,7 +650,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['portrait']['smalltouch-portrait-media-queries-wrapper']['smalltouch_portrait_media_query'] = array(
     '#type' => 'textfield',
     '#title' => t('Media query for this layout'),
-    '#default_value' => check_plain(at_get_setting('smalltouch_portrait_media_query')),
+    '#default_value' => at_get_setting('smalltouch_portrait_media_query') ? check_plain(at_get_setting('smalltouch_portrait_media_query')) : check_plain(at_get_setting('smartphone_portrait_media_query')),
     '#description' => t('Do not include @media, it\'s included automatically.'),
     '#size' => 100,
   );
@@ -658,31 +658,31 @@ function at_core_page_layout_form(&$form, $theme_name) {
   // Pass hidden values to the sumbit function, these values are required but the user can't change them via the UI
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_page_width'] = array(
     '#type' => 'hidden',
-    '#default_value' => check_plain(at_get_setting('smalltouch_portrait_page_width')),
+    '#default_value' => at_get_setting('smalltouch_portrait_page_width') ? check_plain(at_get_setting('smalltouch_portrait_page_width')) : check_plain(at_get_setting('smartphone_portrait_page_width')),
   );
 
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_page_unit'] = array(
     '#type' => 'hidden',
-    '#default_value' => at_get_setting('smalltouch_portrait_page_unit'),
+    '#default_value' => at_get_setting('smalltouch_portrait_page_unit') ? at_get_setting('smalltouch_portrait_page_unit') : at_get_setting('smartphone_portrait_page_unit'),
   );
 
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_sidebar_first'] = array(
     '#type' => 'hidden',
-    '#default_value' => check_plain(at_get_setting('smalltouch_portrait_sidebar_first')),
+    '#default_value' => at_get_setting('smalltouch_portrait_sidebar_first') ? check_plain(at_get_setting('smalltouch_portrait_sidebar_first')) : check_plain(at_get_setting('smartphone_portrait_sidebar_first')),
   );
 
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_sidebar_second'] = array(
     '#type' => 'hidden',
-    '#default_value' => check_plain(at_get_setting('smalltouch_portrait_sidebar_second')),
+    '#default_value' => at_get_setting('smalltouch_portrait_sidebar_second') ? check_plain(at_get_setting('smalltouch_portrait_sidebar_second')) : check_plain(at_get_setting('smartphone_portrait_sidebar_second')),
   );
 
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_sidebar_unit'] = array(
     '#type' => 'hidden',
-    '#default_value' => check_plain(at_get_setting('smalltouch_portrait_sidebar_unit')),
+    '#default_value' => at_get_setting('smalltouch_portrait_sidebar_unit') ? check_plain(at_get_setting('smalltouch_portrait_sidebar_unit')) : check_plain(at_get_setting('smartphone_portrait_sidebar_unit')),
   );
 
   $form['at-settings']['smalltouch']['portrait']['hidden']['smalltouch_portrait_layout'] = array(
     '#type' => 'hidden',
-    '#default_value' => str_replace('-', '_', at_get_setting('smalltouch_portrait_layout')),
+    '#default_value' => at_get_setting('smalltouch_portrait_layout') ? str_replace('-', '_', at_get_setting('smalltouch_portrait_layout')) : str_replace('-', '_', at_get_setting('smartphone_portrait_layout')),
   );
 }
