@@ -209,6 +209,9 @@ fieldset#edit-portrait--2 > .fieldset-wrapper {
   background: url(images/warning.png) no-repeat left center;
   padding-left: 25px;
 }
+.field-description-info {
+  color: #666;
+}
 
 /* Conditional messages for sidebars */
 fieldset[id*="message-wrapper"] {

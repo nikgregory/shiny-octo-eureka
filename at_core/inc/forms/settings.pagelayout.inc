@@ -215,7 +215,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['tablet'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Layout'),
-    '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad have two orientations - landscape and portrait. You can configure a different layout for each orientation.</p>'),
+    '#description' => t('<h3>Tablet Layout</h3><p>Tablet devices such as iPad, Android and Windows tablets have two orientations - landscape and portrait, which can also be thought of as wide and narrow tablets. You can configure a different layout for each orientation.</p>'),
     '#attributes' => array(
       'class' => array('at-layout-form'),
     ),
@@ -235,7 +235,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['tablet']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
-    '#description' => t('<h4>Landscape tablet</h4>'),
+    '#description' => t('<h4>Landscape tablet <span class="field-description-info">(wide)</span></h4>'),
     '#states' => array(
       'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
@@ -370,6 +370,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
     '#required' => TRUE,
   );
 
+
   /******************
    * Tablet portrait
    *****************/
@@ -377,7 +378,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['tablet']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
-    '#description' => t('<h4>Portrait tablet</h4>'),
+    '#description' => t('<h4>Portrait tablet <span class="field-description-info">(narrow)</span></h4>'),
     '#states' => array(
       'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
@@ -512,6 +513,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
     '#required' => TRUE,
   );
 
+
   /*****************************************************************************
    *
    * Smalltouch
@@ -521,7 +523,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch'] = array(
     '#type' => 'fieldset',
     '#title' => t('Smalltouch Layout'),
-    '#description' => t('<h3>Smalltouch Layout</h3><p>Smalltouch devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait. You can configure a layout for landscape orientation only - portrait orientation always displays in one column with sidebars stacked below the main content.</p>'),
+    '#description' => t('<h3>Smalltouch Layout</h3><p>Smalltouch devices such as iPhone, Android and Windows phones have two orientations - landscape and portrait, which can also be thought of as wide and arrow smalltouch devices. You can configure a layout for landscape orientation only - portrait orientation (narrow) will always display in one column (all regions full width and stacked) with sidebars below the main content.</p>'),
     '#attributes' => array(
       'class' => array('at-layout-form'),
     ),
@@ -541,7 +543,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['landscape'] = array(
     '#type' => 'fieldset',
     '#title' => t('Landscape'),
-    '#description' => t('<h4>Landscape smalltouch</h4>'),
+    '#description' => t('<h4>Landscape smalltouch <span class="field-description-info">(wide)</span></h4>'),
     '#states' => array(
       'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
@@ -612,7 +614,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
     '#default_value' => at_get_setting('smalltouch_landscape_media_query') ? check_plain(at_get_setting('smalltouch_landscape_media_query')) : check_plain(at_get_setting('smartphone_landscape_media_query')),
     '#description' => t('Do not include @media, it\'s included automatically.'),
     '#size' => 100,
-    '#required' => TRUE,
+    //'#required' => TRUE,
   );
 
   // Pass hidden values to the sumbit function, these values are required but the user can't change them via the UI
@@ -632,7 +634,7 @@ function at_core_page_layout_form(&$form, $theme_name) {
   $form['at-settings']['smalltouch']['portrait'] = array(
     '#type' => 'fieldset',
     '#title' => t('Portrait'),
-    '#description' => t('<h4>Portrait smalltouch</h4><div class="smalltouch-portrait-layout">One column</div><p>The smalltouch portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
+    '#description' => t('<h4>Portrait smalltouch <span class="field-description-info">(narrow)</span></h4><div class="smalltouch-portrait-layout">One column</div><p>The smalltouch portrait layout always displays in one column with sidebars stacked horizontally below the main content. All widths are always 100%.</p>'),
     '#states' => array(
       'disabled' => array('input[name="disable_responsive_styles"]' => array('checked' => TRUE)),
     ),
