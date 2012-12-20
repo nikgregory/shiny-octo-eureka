@@ -368,7 +368,7 @@ function at_load_polyfills($theme_name) {
           $ie_script = array(
             '#type' => 'markup',
             '#markup' => implode("\n", $scripts),
-            '#prefix' => "<!--[" . $conditional_comment . "]>\n",
+            '#prefix' => "<!--[if " . $conditional_comment . "]>\n",
             '#suffix' => "\n<![endif]-->\n",
           );
           $polyfills[$conditional_comment] = $ie_script;
