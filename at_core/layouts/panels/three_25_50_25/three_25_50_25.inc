@@ -65,9 +65,4 @@ function adaptivetheme_three_25_50_25_panels_layouts() {
 function template_preprocess_three_25_50_25(&$vars) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
-
-  // Set classes
-  $vars['classes_array'][] = 'at-panel';
-  $vars['classes_array'][] = 'panel-display';
-  $vars['classes_array'][] = 'clearfix';
 }

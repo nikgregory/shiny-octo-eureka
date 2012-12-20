@@ -198,27 +198,13 @@ function adaptivetheme_process_node(&$vars) {
   $vars['footer_attributes'] = empty($vars['footer_attributes_array']) ? '' : drupal_attributes($vars['footer_attributes_array']);
   $vars['links_attributes'] = empty($vars['links_attributes_array']) ? '' : drupal_attributes($vars['links_attributes_array']);
 
-  // If a panels layout is being used by Display Suite in a node, we wrap the
+  // If a panels layout is being rendered by Display Suite in a node we wrap the
   // the layout in markup to make the themers life a little easier and remove
   // the requirement to add a DS template override.
-  if (module_exists('ds')) {
-    $panels_data = drupal_static(__FUNCTION__, array());
-    if (empty($panels_data)) {
-      $panels_data = responsive_panels_plugin_names();
-    }
-    foreach ($panels_data as $plugin => $name) {
-      if (in_array($name, $vars['theme_hook_suggestions'])) {
-        $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
-        $vars['panel_suffix'] = '</article>';
-      }
-    }
-  }
-  /* This will replace the above code @see http://drupal.org/node/1514216
   if (isset($vars['rendered_by_ds']) && $vars['rendered_by_ds'] == TRUE) {
     $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
     $vars['panel_suffix'] = '</article>';
   }
-  */
 }
 
 /**

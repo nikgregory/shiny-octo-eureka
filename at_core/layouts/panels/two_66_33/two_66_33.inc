@@ -45,12 +45,7 @@ function adaptivetheme_two_66_33_panels_layouts() {
 /**
  * Preprocess variables for two-66-33.php
  */
-function template_preprocess_two_66_33(&$vars) {
+function template_preprocess_two_66_33(&$vars, $hook) {
   $vars['panel_prefix'] = '';
   $vars['panel_suffix'] = '';
-
-  // Set classes
-  $vars['classes_array'][] = 'at-panel';
-  $vars['classes_array'][] = 'panel-display';
-  $vars['classes_array'][] = 'clearfix';
 }
