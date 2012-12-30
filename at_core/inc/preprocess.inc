@@ -102,6 +102,22 @@ function adaptivetheme_preprocess_html(&$vars) {
     }
   }
 
+  // Add layout settings as JS settings
+  $layout_settings_array = array(
+    'bigscreen_layout',
+    'tablet_landscape_layout',
+    'tablet_portrait_layout',
+    'smalltouch_landscape_layout',
+    'smalltouch_portrait_layout',
+  );
+  foreach ($layout_settings_array as $layout_setting) {
+    $setting = at_get_setting($layout_setting, $theme_name);
+    if ($setting) {
+      $setting = str_replace('_', '-', $setting);
+      drupal_add_js(array('adaptivetheme_layout_settings' => array($layout_setting => $setting)), 'setting');
+    }
+  }
+
   // Do some legacy stuff for 7.x-2.x themes that have google webfonts running
   // on the old system. Scan for the existence of a "release" key and
   // conditionally load google.web.fonts.inc
@@ -216,6 +232,10 @@ function adaptivetheme_preprocess_page(&$vars) {
         $vars['feed_icons'] = '';
       }
     }
+  }
+
+  if (at_get_setting('page_full_width_wrappers', $theme_name) == 0) {
+    $vars['classes_array'][] = 'container';
   }
 
   // Strip stupid contextual-links-region class, wtf?
@@ -865,15 +885,11 @@ function adaptivetheme_preprocess_image(&$vars) {
     $style_name_class = drupal_html_class($vars['style_name']);
   }
 
-  // In the first instance we assume class attributes is an array, as it should be,
-  // and add the image style class
+  // Check if the class attributes is an array. If we don't do this check and
+  // the class attribute is string it can cause a fatal error.
+  // See http://drupal.org/node/1722146 for an example
   if (is_array($vars['attributes']['class'])) {
     $vars['attributes']['class'][] = 'image-style-' . $style_name_class;
-  }
-  else {
-    // Else it's a string, workaround for Media module bug: http://drupal.org/node/1722146
-    // and User Badges bug: http://drupal.org/node/1748394
-    $vars['attributes']['class'] .= ' image-style-' . $style_name_class;
   }
 }
 
@@ -927,4 +943,11 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
   }
 
   $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+}
+
+/**
+ * Process variables for user-profile.tpl.php
+ */
+function adaptivetheme_preprocess_user_profile(&$vars) {
+  $vars['classes_array'][] = 'profile';
 }

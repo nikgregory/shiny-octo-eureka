@@ -101,6 +101,7 @@ function adaptivetheme_process_page(&$vars) {
       $vars['theme_hook_suggestions'] = array_merge($vars['theme_hook_suggestions'], $suggestions);
     }
   }
+  
 }
 
 /**
@@ -202,7 +203,7 @@ function adaptivetheme_process_node(&$vars) {
   // the layout in markup to make the themers life a little easier and remove
   // the requirement to add a DS template override.
   if (isset($vars['rendered_by_ds']) && $vars['rendered_by_ds'] == TRUE) {
-    $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' clearfix"' . $vars['attributes'] . '>';
+    $vars['panel_prefix'] = '<article id="node-' . $vars['node']->nid . '" class="' . $vars['classes'] . ' rendered-by-ds clearfix"' . $vars['attributes'] . '>';
     $vars['panel_suffix'] = '</article>';
   }
 }
@@ -253,5 +254,18 @@ function adaptivetheme_process_maintenance_page(&$vars) {
   // Render polyfills
   if ($vars['polyfills']) {
     $vars['polyfills'] = drupal_render($vars['polyfills']);
+  }
+}
+
+/**
+ * Process variables for user-profile.tpl.php
+ */
+function adaptivetheme_process_user_profile(&$vars) {
+  // If a panels layout is rendered by Display Suite in a user profile we wrap the
+  // the layout in markup to make the themers life a little easier and remove
+  // the requirement to add a DS template override.
+  if (isset($vars['rendered_by_ds']) && $vars['rendered_by_ds'] == TRUE) {
+    $vars['panel_prefix'] = '<article id="user-' . $vars['user']->uid . '" class="' . $vars['classes'] . ' rendered-by-ds clearfix"' . $vars['attributes'] . '>';
+    $vars['panel_suffix'] = '</article>';
   }
 }

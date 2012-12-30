@@ -84,6 +84,7 @@ div.vertical-tabs .vertical-tabs-panes {
   float: none;
   width: auto;
 }
+.no-extensions-enabled,
 .vertical-tabs-panes fieldset fieldset {
   background: #ededed;
   border: 0;
@@ -101,7 +102,8 @@ fieldset.at-layout-form div.form-item  label[for*="-media-query"] {
 fieldset.at-layout-form div.form-item[class*="-media-query"] .description {
   padding-top: 3px;
 }
-.vertical-tabs .form-type-textfield input {
+.no-extensions-enabled {
+  padding: 10px;
 }
 
 /* Hide text in form labels where needed

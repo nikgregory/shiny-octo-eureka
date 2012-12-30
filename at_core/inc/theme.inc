@@ -78,7 +78,6 @@ function _theme_menu_variables($menu, $type) {
 function adaptivetheme_breadcrumb($vars) {
   global $theme_key;
   $theme_name = $theme_key;
-
   $breadcrumb = $vars['breadcrumb'];
 
   if (at_get_setting('breadcrumb_display', $theme_name) == 1) {

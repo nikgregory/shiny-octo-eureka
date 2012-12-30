@@ -67,6 +67,22 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
   $layout_header .= '<p class="logo-link"><a href="http://adaptivethemes.com" title="Adaptivethemes.com - Rocking the hardest since 2006" target="_blank"><img class="at-logo" src="' . $logo . '" /></a></p>';
   $layout_header .= '</div>';
 
+  // INCLUDES
+  $includes_array = array(
+    'pagelayout',
+    'responsivepanels',
+    'global',
+    'filemanagement',
+    'css',
+    'polyfills',
+    'metatags',
+    'debug',
+    'extensions',
+  );
+  foreach ($includes_array as $include_file) {
+    require_once($path_to_at_core . '/inc/forms/settings.' . $include_file . '.inc');
+  }
+
   $form['at-settings'] = array(
     '#type' => 'vertical_tabs',
     '#description' => t('Layout'),
@@ -78,32 +94,15 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     ),
   );
 
-  // Include all the default settings forms.
-  require_once($path_to_at_core . '/inc/forms/settings.pagelayout.inc');
+  // Call all the default settings forms.
   at_core_page_layout_form($form, $theme_name);
-
-  require_once($path_to_at_core . '/inc/forms/settings.responsivepanels.inc');
   at_core_responsive_panels_form($form, $theme_name, $info_array);
-
-  require_once($path_to_at_core . '/inc/forms/settings.global.inc');
   at_core_global_form($form, $theme_name);
-
-  require_once($path_to_at_core . '/inc/forms/settings.filemanagement.inc');
   at_core_filemanagement_form($form, $theme_name);
-
-  require_once($path_to_at_core . '/inc/forms/settings.css.inc');
   at_core_css_form($form, $theme_name);
-
-  require_once($path_to_at_core . '/inc/forms/settings.polyfills.inc');
   at_core_polyfills_form($form, $theme_name);
-
-  require_once($path_to_at_core . '/inc/forms/settings.metatags.inc');
   at_core_metatags_form($form);
-
-  require_once($path_to_at_core . '/inc/forms/settings.debug.inc');
   at_core_debug_form($form);
-
-  require_once($path_to_at_core . '/inc/forms/settings.extensions.inc');
   at_core_extensions_form($form);
 
   // EXTENSIONS
@@ -187,6 +186,19 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
     if (($enable_markup_overides && $form_state['values']['enable_markup_overides'] == 1) || (!$enable_markup_overides && $form['at-settings']['extend']['enable']['enable_markup_overides']['#default_value'] == 1)) {
       require_once($path_to_at_core . '/inc/forms/settings.modifyoutput.inc');
       at_core_modify_output_form($form);
+    }
+
+    // Print a message if no extensions are enbabled, this is quite hard to detect
+    // so we hack it by counting the elements in the array, if there are 4 or less
+    // we assume no extensions are enabled.
+    $count = count($form['at']);
+    if ($count <= 4) {
+      $form['at']['no_extensions_enabled'] = array(
+        '#type' => 'markup',
+        '#markup' => t('No extensions are currently active. Enable Extensions by clicking the Extensions tab above and checking the required extensions, then save the configuration.'),
+        '#prefix' => '<div class="no-extensions-enabled">',
+        '#suffix' => '</div>',
+      );
     }
   }
 
