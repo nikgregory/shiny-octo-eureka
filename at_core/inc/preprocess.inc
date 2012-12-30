@@ -284,7 +284,8 @@ function adaptivetheme_preprocess_page(&$vars) {
 
   // Work around a perculier bug/feature(?) in Drupal 7 which incorrectly sets
   // the page title to "User account" for all three of these pages.
-  if (arg(0) === 'user') {
+  $title = drupal_get_title();
+  if (arg(0) === 'user' && $title == t('User account')) {
     if (arg(1) === 'login' || arg(1) == '') {
       drupal_set_title(t('User login'));
     }
