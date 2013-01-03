@@ -170,13 +170,14 @@ function adaptivetheme_preprocess_page(&$vars) {
 
   // Build a variable for the main menu
   if (isset($vars['main_menu'])) {
+    $main_menu_title = at_get_setting('menu_button_link_text') ? at_get_setting('menu_button_link_text') : t('Main menu');
     $vars['primary_navigation'] = theme('links', array(
       'links' => $vars['main_menu'],
       'attributes' => array(
         'class' => array('menu', 'primary-menu', 'clearfix'),
        ),
       'heading' => array(
-        'text' => t('Main menu'),
+        'text' => $main_menu_title,
         'level' => 'h2',
         'class' => array('element-invisible'),
       )
@@ -191,7 +192,7 @@ function adaptivetheme_preprocess_page(&$vars) {
         'class' => array('menu', 'secondary-menu', 'clearfix'),
       ),
       'heading' => array(
-        'text' => t('Secondary navigation'),
+        'text' => t('Secondary menu'),
         'level' => 'h2',
         'class' => array('element-invisible'),
       )
