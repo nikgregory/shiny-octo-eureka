@@ -174,6 +174,13 @@ function adaptivetheme_form_system_theme_settings_alter(&$form, &$form_state, $f
       at_core_context_regions_form($form, $info_array);
     }
 
+    // Menu toggle
+    $enable_menu_toggle = isset($form_state['values']['enable_menu_toggle']);
+    if (($enable_menu_toggle && $form_state['values']['enable_menu_toggle'] == 1) || (!$enable_context_regions && $form['at-settings']['extend']['enable']['enable_menu_toggle']['#default_value'] == 1)) {
+      require_once($path_to_at_core . '/inc/forms/settings.menutoggle.inc');
+      at_core_menu_toggle_form($form);
+    }
+
     // Float Region blocks
     $enable_float_region_blocks = isset($form_state['values']['enable_float_region_blocks']);
     if (($enable_float_region_blocks && $form_state['values']['enable_float_region_blocks'] == 1) || (!$enable_float_region_blocks && $form['at-settings']['extend']['enable']['enable_float_region_blocks']['#default_value'] == 1)) {

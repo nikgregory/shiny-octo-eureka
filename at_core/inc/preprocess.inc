@@ -56,12 +56,15 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Load Layout
   at_load_layout_css($path, $theme_name);
 
+  // Add layout settings as JS settings
+  at_load_layout_js_settings($theme_name);
+
   // Load Responsive Styles.
   if (at_get_setting('disable_responsive_styles', $theme_name) === 0) {
     at_load_responsive_css($path, $theme_name);
   }
 
-  // Load fonts and/or Custom CSS
+  // Load fonts and/or Custom CSS and the menu toggle files
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
     // Fonts CSS
     if (at_get_setting('enable_font_settings', $theme_name) === 1) {
@@ -70,6 +73,10 @@ function adaptivetheme_preprocess_html(&$vars) {
     // Custom CSS
     if (at_get_setting('enable_custom_css', $theme_name) === 1) {
       at_load_custom_css($path, $theme_name);
+    }
+    // Load the menu toggle js and css files
+    if (at_get_setting('enable_menu_toggle', $theme_name) === 1) {
+      at_load_menu_toggle($path, $theme_name);
     }
     // Load Extension Settings CSS
     at_load_extensions_css($theme_name);
@@ -99,22 +106,6 @@ function adaptivetheme_preprocess_html(&$vars) {
   if ($html_classes = at_generate_html_classes($vars, $theme_name)) {
     foreach ($html_classes as $class_name) {
       $vars['classes_array'][] = $class_name;
-    }
-  }
-
-  // Add layout settings as JS settings
-  $layout_settings_array = array(
-    'bigscreen_layout',
-    'tablet_landscape_layout',
-    'tablet_portrait_layout',
-    'smalltouch_landscape_layout',
-    'smalltouch_portrait_layout',
-  );
-  foreach ($layout_settings_array as $layout_setting) {
-    $setting = at_get_setting($layout_setting, $theme_name);
-    if ($setting) {
-      $setting = str_replace('_', '-', $setting);
-      drupal_add_js(array('adaptivetheme_layout_settings' => array($layout_setting => $setting)), 'setting');
     }
   }
 

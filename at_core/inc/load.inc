@@ -646,6 +646,69 @@ function at_load_google_fonts($theme_name) {
   return $google_font_string;
 }
 
+/**
+ * Return JS and CSS for the Menu Toggle for mobile.
+ */
+function at_load_layout_js_settings($theme_name) {
+  $layout_settings_array = array(
+    'bigscreen_layout',
+    'tablet_landscape_layout',
+    'tablet_portrait_layout',
+    'smalltouch_landscape_layout',
+    'smalltouch_portrait_layout',
+  );
+  foreach ($layout_settings_array as $layout_setting) {
+    $setting = at_get_setting($layout_setting, $theme_name);
+    if ($setting) {
+      $setting = str_replace('_', '-', $setting);
+      drupal_add_js(array($theme_name . '_layout_settings' => array($layout_setting => $setting)), 'setting');
+    }
+  }
+}
+
+/**
+ * Return JS and CSS for the Menu Toggle for mobile.
+ */
+function at_load_menu_toggle($path, $theme_name) {
+  // Add JS settings, we can leverage these with responsive JS if we want to
+  $menu_toggle_settings_array = array(
+    'menu_toggle_smalltouch_portrait',
+    'menu_toggle_smalltouch_landscape',
+    'menu_toggle_tablet_portrait',
+    'menu_toggle_tablet_landscape',
+  );
+  foreach ($menu_toggle_settings_array as $menu_toggle_setting) {
+    if (at_get_setting($menu_toggle_setting, $theme_name) == 1) {
+      $setting = $menu_toggle_setting;
+      drupal_add_js(array($theme_name . '_menu_toggle_settings' => array($setting => 'active')), 'setting');
+    }
+  }
+
+  // Load the JS file
+  $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+  drupal_add_js($path_to_at_core . '/scripts/menu-toggle.js', array(
+    'type' => 'file',
+    'scope' => 'header',
+    'group' => JS_THEME,
+    'preprocess' => TRUE,
+    'cache' => TRUE,
+    )
+  );
+
+  // Load the generated CSS
+  $filepath = $path . '/' . $theme_name . '.menutoggle.css';
+  if (file_exists($filepath)) {
+    drupal_add_css($filepath, array(
+      'preprocess' => TRUE,
+      'group' => CSS_THEME,
+      'media' => 'all',
+      'every_page' => TRUE,
+      'weight' => 99,
+      )
+    );
+  }
+}
+
 //
 // Functions to maintain 7.x-2.x backward compatibility,
 // DO NOT use these for 7.x-3.x or greater.

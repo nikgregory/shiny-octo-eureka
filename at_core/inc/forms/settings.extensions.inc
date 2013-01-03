@@ -85,6 +85,14 @@ function at_core_extensions_form(&$form) {
     '#default_value' => at_get_setting('enable_context_regions'),
   );
 
+  // Menu Toggle
+  $form['at-settings']['extend']['enable']['enable_menu_toggle'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Mobile Menu Toggle'),
+    '#description' => t('Collapse the Main menu (or menu block in Menu Bar region) into a clickable link/button.'),
+    '#default_value' => at_get_setting('enable_menu_toggle'),
+  );
+
   // Float Region blocks
   $form['at-settings']['extend']['enable']['enable_float_region_blocks'] = array(
     '#type' => 'checkbox',

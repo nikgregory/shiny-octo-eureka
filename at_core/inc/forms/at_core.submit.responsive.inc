@@ -10,15 +10,12 @@
  * responsive styles (the aggregated styles with embedded media queries) and a
  * default layout CSS file (for when desktop first method has been selected).
  */
-function at_core_submit_reponsive(&$form_state, $theme_name, $path) {
+function at_core_submit_reponsive($values, $theme_name, $path) {
   global $path_to_at_core;
 
   // Set up some paths we use to get and save files
   $path_to_responsive_css = drupal_get_path('theme', $theme_name) . '/css/';
   $path_to_panels_css = $path_to_at_core . '/layouts/css/';
-
-  // Set form state values to an easy to remember variable
-  $values = $form_state['values'];
 
   // Initialize
   $smalltouch_landscape_panels_data = array();
