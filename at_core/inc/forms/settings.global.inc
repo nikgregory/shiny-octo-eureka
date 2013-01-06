@@ -57,8 +57,8 @@ function at_core_global_form(&$form, $theme_name) {
   // Disable responsive layout
   $form['at-settings']['global-settings']['disable-rs'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Disable Responsive CSS'),
-    '#description' => t('<h3>Disable Responsive CSS</h3>'),
+    '#title' => t('Disable Responsive Layout'),
+    '#description' => t('<h3>Disable Responsive Layout</h3>'),
   );
   $form['at-settings']['global-settings']['disable-rs']['disable_responsive_styles'] = array(
     '#type' => 'checkbox',

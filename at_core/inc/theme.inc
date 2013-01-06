@@ -117,15 +117,15 @@ function adaptivetheme_breadcrumb($vars) {
         $output .= '<h2 class="element-invisible">' . t('You are here') . '</h2>';
       }
       $output .= '<ol id="crumbs" class="clearfix">';
-      foreach ($breadcrumb as $key => $val) {
+      foreach ($breadcrumb as $key => $crumb) {
         if ($key == $last && count($breadcrumb) != 1) {
           $class = 'crumb crumb-last';
         }
         if ($key == 0) {
-          $output .= '<li class="' . $class . ' crumb-first">' . $val . '</li>';
+          $output .= '<li class="' . $class . ' crumb-first">' . $crumb . '</li>';
         }
         else {
-          $output .= '<li class="' . $class . '"><span class="crumb-separator">' . $separator . '</span>' . $val . '</li>';
+          $output .= '<li class="' . $class . '"><span class="crumb-separator">' . $separator . '</span>' . $crumb . '</li>';
         }
       }
       $output .= '</ol></nav></div>';

@@ -939,8 +939,22 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
 }
 
 /**
- * Process variables for user-profile.tpl.php
+ * Preprocess variables for user-profile.tpl.php
  */
 function adaptivetheme_preprocess_user_profile(&$vars) {
   $vars['classes_array'][] = 'profile';
+}
+
+/**
+ * Preprocess variables for breadcrumbs
+ */
+function adaptivetheme_preprocess_breadcrumb(&$vars) {
+  // Add Google rich snippets to breadcrumbs using RDFa
+  if (module_exists('rdf')) {
+    $rich_snippet = 'rel="v:url" property="v:title" ';
+    foreach ($vars['breadcrumb'] as $key => $breadcrumb) {
+      $breadcrumb = substr_replace($breadcrumb, $rich_snippet, 3, 0);
+      $vars['breadcrumb'][$key] = '<span typeof="v:Breadcrumb">' . $breadcrumb . '</span>';
+    }
+  }
 }

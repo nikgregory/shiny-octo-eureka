@@ -81,7 +81,7 @@ function at_core_filemanagement_form(&$form, $theme_name) {
   $form['at-settings']['file-management']['aggregation-overrides'] = array(
     '#type' => 'fieldset',
     '#title' => t('Combine Aggregated Files'),
-    '#description' => t('<h3>Combine Aggregated Files <sup>(beta)</sup></h3><p>When CSS aggregation is on Drupal aggregates CSS and JS files by group. These settings will override this and create one CSS stylesheet per type and only one JavaScript file. This reduces HTTP requests and improves site performance. Note: this is beta and while well tested you should check your site carefully, both the style and behavior.</p>'),
+    '#description' => t('<h3>Combine Aggregated Files <sup>(beta)</sup></h3><p>When CSS aggregation is on Drupal aggregates CSS and JS files by group. These settings will override this and create one CSS stylesheet per type and only one JavaScript file. This reduces HTTP requests and improves site performance. Note: this is beta and while well tested you should check your site carefully, both the style and behavior.</p><p>Warning: Internet Explorer cannot handle more than 4095 selectors in one stylesheet - combining CSS files using this setting could result in more than 4095 selectors. If you see probems such as no style in IE then turn this off.</p>'),
   );
   // Combine CSS
   $form['at-settings']['file-management']['aggregation-overrides']['combine_css_files'] = array(

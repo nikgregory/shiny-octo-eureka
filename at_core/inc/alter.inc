@@ -236,7 +236,7 @@ function adaptivetheme_css_alter(&$css) {
     }
   }
 
-  // Combine CSS files into one per type
+  // Combine CSS files into one per type, this is not perfect
   if (at_get_setting('combine_css_files', $theme_key) === 1) {
     uasort($css, 'drupal_sort_css_js');
     $print = array();
@@ -245,7 +245,7 @@ function adaptivetheme_css_alter(&$css) {
       // Leave  the conditional stylesheets untouched
       if ($css[$name]['browsers']['!IE']) {
         $css[$name]['group'] = 0;
-        $css[$name]['weight'] = ++$weight;
+        $css[$name]['weight'] = $weight++;
         $css[$name]['every_page'] = TRUE;
       }
       if ($css[$name]['media'] == 'print') {
