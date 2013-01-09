@@ -226,10 +226,6 @@ function adaptivetheme_preprocess_page(&$vars) {
     }
   }
 
-  if (at_get_setting('page_full_width_wrappers', $theme_name) == 0) {
-    $vars['classes_array'][] = 'container';
-  }
-
   // Strip stupid contextual-links-region class, wtf?
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'], array('contextual-links-region')));
 
