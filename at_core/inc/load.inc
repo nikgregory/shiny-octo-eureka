@@ -146,8 +146,8 @@ function at_load_responsive_css($path, $theme_name) {
     // you change them you must update to match.
     $files = array(
       // Maintian backwards compatibility with older themes that use smartphone
-      'responsive.smartphone.portrait'  => at_get_setting('smartphone_portrait_media_query', $theme_name),
-      'responsive.smartphone.landscape' => at_get_setting('smartphone_landscape_media_query', $theme_name),
+      'responsive.smartphone.portrait'  => at_get_setting('smalltouch_portrait_media_query', $theme_name) ? at_get_setting('smalltouch_portrait_media_query', $theme_name) : at_get_setting('smartphone_portrait_media_query', $theme_name),
+      'responsive.smartphone.landscape' => at_get_setting('smalltouch_landscape_media_query', $theme_name) ? at_get_setting('smalltouch_landscape_media_query', $theme_name) : at_get_setting('smartphone_landscape_media_query', $theme_name),
       // Standard files for the 7.x-3.2 and beyond
       'responsive.smalltouch.portrait'  => at_get_setting('smalltouch_portrait_media_query', $theme_name),
       'responsive.smalltouch.landscape' => at_get_setting('smalltouch_landscape_media_query', $theme_name),

@@ -329,6 +329,13 @@ if (!function_exists('dhtml_menu_init')) {
       unset($element['#localized_options']['attributes']['title']);
     }
 
+    // Possible feature to show menu descriptions in span elements
+    //if ($element['#original_link']['menu_name'] == "main-menu" && isset($element['#localized_options']['attributes']['title'])){
+    //  $element['#title'] = '<span class="title">' . $element['#title'] . '</span>';
+    //  $element['#title'] .= '<span class="description">' . $element['#localized_options']['attributes']['title'] . '</span>';
+    //  $element['#localized_options']['html'] = TRUE;
+    //}
+
     $output = l($element['#title'], $element['#href'], $element['#localized_options']);
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
   }
@@ -398,29 +405,26 @@ function adaptivetheme_links($vars) {
     $i = 1;
 
     foreach ($links as $key => $link) {
+
+      // Extra menu classes
       if (at_get_setting('extra_menu_classes')) {
         $class = array($key);
-      }
-      if (at_get_setting('extra_menu_classes')) {
         if ($i == 1) {
           $class[] = 'first';
         }
         if ($i == $num_links) {
           $class[] = 'last';
         }
-      }
-      if (at_get_setting('extra_menu_classes')) {
         if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
             && (empty($link['language']) || $link['language']->language == $language_url->language)) {
           $class[] = 'active';
         }
-      }
-      if (at_get_setting('extra_menu_classes')) {
         $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
       }
       else {
         $output .= '<li>';
       }
+
       if (isset($link['href'])) {
         if (at_get_setting('menu_item_span_elements')) {
           $link['title'] = '<span>' . $link['title'] . '</span>';
