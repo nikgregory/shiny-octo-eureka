@@ -53,6 +53,9 @@ function at_core_submit_menu_toggle($values, $theme_name, $path) {
 
   // Bigscreen is always inactive
   $menu_toggle_css[] = '@media ' . $bigscreen_media_query . ' {' . "\n" . $menu_toggle_css_inactive . "\n" . '}';
+  
+  // Contextual links can get messed up, add a brutal override to make sure that does not happen
+  $menu_toggle_css[] = '.at-mt .at-menu-toggle div.contextual-links-wrapper ul.contextual-links{display:none}';
 
   $menu_toggle_css_processed = implode("\n", $menu_toggle_css);
   $file_name = $theme_name . '.menutoggle.css';
