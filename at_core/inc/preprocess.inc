@@ -13,7 +13,7 @@ function adaptivetheme_preprocess(&$vars) {
   // Provide variables to all templates to test for a mobile and tablet context, this
   // requires the Mobile Detect or Browscap modules.  TRUE/FALSE mean the feature
   // was detected; NULL means the feature could not be properly detected.
-  $browser = at_get_browser(); 
+  $browser = at_get_browser();
   $vars['is_mobile'] = $browser['is_mobile'];
   $vars['is_tablet'] = $browser['is_tablet'];
 }
@@ -417,9 +417,13 @@ function adaptivetheme_preprocess_block(&$vars) {
 
   // The menu bar region gets special treatment for the block template
   if ($vars['block']->region === 'menu_bar') {
-    // Hide titles, very unlikey to want it show, ever
-    $vars['title_attributes_array']['class'][] = 'element-invisible';
-    $vars['classes_array'][] = 'menu-wrapper menu-bar-wrapper clearfix';
+    // Hide title with element invisible unless the menu toggle is active
+    if (at_get_setting('enable_menu_toggle', $theme_name) === 0) {
+      $vars['title_attributes_array']['class'][] = 'element-invisible';
+    }
+    $vars['classes_array'][] = 'menu-wrapper';
+    $vars['classes_array'][] = 'menu-bar-wrapper';
+    $vars['classes_array'][] = 'clearfix';
   }
 
   // Add extra classes if required
@@ -868,7 +872,7 @@ function adaptivetheme_preprocess_image(&$vars) {
   // Some modules set the style name even when its empty, such as User Badges
   // module, so initialize the class name variable with a "none" class
   $style_name_class = 'none';
-  
+
   // If there really is a style name use it for the class
   if (isset($vars['style_name']) && !empty($vars['style_name'])) {
     $style_name_class = drupal_html_class($vars['style_name']);
