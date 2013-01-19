@@ -50,7 +50,7 @@ function at_core_context_regions_form(&$form, $info_array) {
       '#markup' => t('<p><strong>Detection:</strong> <span class="no-detection">No detection module installed.</span> Please install either the Browscap or Mobile Detect module.</p>
         <ul>
         <li><a href="!browscap_module" target="_blank">Browscap module</a>: allows you to hide or move blocks for all mobile devices.</li>
-        <li><a href="!mobiledetect_module" target="_blank">Mobile Detect module</a>: allows you to hide regions in all just Smalltouchs or all mobile devices.</li>
+        <li><a href="!mobiledetect_module" target="_blank">Mobile Detect module</a>: allows you to hide regions in all just smalltouch devices (exclude tablets) or all mobile devices (smalltouch and tablets).</li>
       </ul>', array('!browscap_module' => 'http://drupal.org/project/browscap', '!mobiledetect_module' => 'http://drupal.org/project/mobile_detect')),
     );
   }

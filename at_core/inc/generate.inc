@@ -188,6 +188,11 @@ function at_generate_page_classes(&$vars, $theme_name) {
         }
       }
     }
+
+    // Page class for at menu toggle
+    if (at_get_setting('enable_menu_toggle', $theme_name) === 1) {
+      $classes_array[] = 'at-mt';
+    }
   }
 
   return $classes_array;

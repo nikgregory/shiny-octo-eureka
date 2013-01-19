@@ -95,7 +95,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Load polyfills
   $vars['polyfills'] = at_load_polyfills($theme_name, $vars);
 
-  // Set the skip link target id
+  // Set the skip navigation target ID
   $vars['skip_link_target'] = '#main-content';
   if (at_get_setting('skip_link_target', $theme_name)) {
     $skip_link_target = at_get_setting('skip_link_target', $theme_name);
@@ -206,7 +206,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   // Add back the $search_box var to D7
   if (module_exists('search')) {
     $search_box = drupal_get_form('search_form');
-    $vars['search_box'] = '<div id="search-box">' . drupal_render($search_box) . '</div>';
+    $vars['search_box'] = '<div id="search-box" role="search">' . drupal_render($search_box) . '</div>';
   }
 
   // Process enabled Extensions
