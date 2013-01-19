@@ -9,24 +9,28 @@ function at_core_menu_toggle_form(&$form) {
     '#type' => 'fieldset',
     '#title' => t('Mobile Menu Toggle'),
     '#weight' => 30,
-    '#description' => t('<h2>Menu Toggle for Mobile</h2><p>The Menu Toggle will hide the main menu (either a block in the Menu bar region, or the Main menu) and a single clickable link will appear. Clicking this link toggles the menu open and closed - suitable for mobile devices.</p><p>Superfish: if you start using the Superfish module you should re-save the theme settings so this will work correctly (extra CSS is added only if the module is enabled). Also enable the sf-Touchscreen plugin, which is a setting in the block configuration for your Superfish menu block.</p>'),
+    '#description' => t('<h2>Menu Toggle for Mobile</h2><p>The Menu Toggle will hide the main menu (either a block in the Menu bar region, or the Main menu) and a single clickable link will appear. Clicking this link toggles the menu open and closed - suitable for mobile devices.</p><p>Superfish: if you start using the Superfish module you should re-save the theme settings so this will work correctly (extra CSS is added only if the module is enabled). Also enable the sf-Touchscreen plugin, which is a setting in the block configuration for your Superfish menu block.</p><p><strong>Smalltouch/smartphone</strong> breakpoints are supported by default, you can select additional devices/breakpoints.'),
   );
-  // Toggle on existing breakpoints
+
+  // Select additional breakpoints
   $form['at']['menu-toggle']['breakpoints'] = array(
     '#type' => 'fieldset',
     '#title' => t('Breakpoints'),
-    '#description' => t('<strong>Select which devices/breakpoints you want to use the toggle menu for.</strong>'),
+    '#description' => t('<strong>Select additional devices/breakpoints you want to use the toggle menu for.</strong>'),
   );
-  $form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_portrait'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Apply to Smalltouch Portrait'),
-    '#default_value' => at_get_setting('menu_toggle_smalltouch_portrait') ? at_get_setting('menu_toggle_smalltouch_portrait') : 1,
-  );
-  $form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_landscape'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Apply to Smalltouch Landscape'),
-    '#default_value' => at_get_setting('menu_toggle_smalltouch_landscape') ? at_get_setting('menu_toggle_smalltouch_landscape') : 1,
-  );
+
+  // Deprecate selection for smalltouch, these enable by default
+  //$form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_portrait'] = array(
+  //  '#type' => 'checkbox',
+  //  '#title' => t('Apply to Smalltouch Portrait'),
+  //  '#default_value' => at_get_setting('menu_toggle_smalltouch_portrait') ? at_get_setting('menu_toggle_smalltouch_portrait') : 1,
+  //);
+  //$form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_landscape'] = array(
+  //  '#type' => 'checkbox',
+  //  '#title' => t('Apply to Smalltouch Landscape'),
+  //  '#default_value' => at_get_setting('menu_toggle_smalltouch_landscape') ? at_get_setting('menu_toggle_smalltouch_landscape') : 1,
+  //);
+
   $form['at']['menu-toggle']['breakpoints']['menu_toggle_tablet_portrait'] = array(
     '#type' => 'checkbox',
     '#title' => t('Apply to Tablet Portrait'),
@@ -37,6 +41,7 @@ function at_core_menu_toggle_form(&$form) {
     '#title' => t('Apply to Tablet Landscape'),
     '#default_value' => at_get_setting('menu_toggle_tablet_landscape') ? at_get_setting('menu_toggle_tablet_landscape') : 0,
   );
+
   // Customize toggle link text
   $form['at']['menu-toggle']['main-menu-title'] = array(
     '#type' => 'fieldset',

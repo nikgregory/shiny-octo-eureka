@@ -26,21 +26,11 @@ function at_core_submit_menu_toggle($values, $theme_name, $path) {
   $comment = "/* Menu toggle is using the media queries from the standard, tablet and smalltouch layout settings */\n";
 
   // Smalltouch portrait
-  if (isset($values['menu_toggle_smalltouch_portrait']) && $values['menu_toggle_smalltouch_portrait'] == 1) {
-    $smalltouch_portrait_css = $menu_toggle_css_active . $menu_toggle_superfish_css;
-  }
-  else {
-    $smalltouch_portrait_css = $menu_toggle_css_inactive;
-  }
+  $smalltouch_portrait_css = $menu_toggle_css_active . $menu_toggle_superfish_css;
   $menu_toggle_css[] = $comment . '@media ' . $smalltouch_portrait_media_query . ' {' . "\n" . $smalltouch_portrait_css . "\n" . '}';
 
   // Smalltouch landscape
-  if (isset($values['menu_toggle_smalltouch_landscape']) && $values['menu_toggle_smalltouch_landscape'] == 1) {
-    $smalltouch_landscape_css = $menu_toggle_css_active . $menu_toggle_superfish_css;
-  }
-  else {
-    $smalltouch_landscape_css = $menu_toggle_css_inactive;
-  }
+  $smalltouch_landscape_css = $menu_toggle_css_active . $menu_toggle_superfish_css;
   $menu_toggle_css[] = '@media ' . $smalltouch_landscape_media_query . ' {' . "\n" . $smalltouch_landscape_css . "\n" . '}';
 
   // Tablet portrait

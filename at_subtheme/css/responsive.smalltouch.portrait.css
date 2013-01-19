@@ -20,18 +20,18 @@ body {
  *   relevant responsive stylesheets as required. Modify to suit your design.
  * ========================================================================== */
 /* The toggle link */
-.at-menu-toggle h2 {
+.at-mt .at-menu-toggle h2 {
   margin-bottom: 5px;
 }
 
-.at-menu-toggle h2 a {
+.at-mt .at-menu-toggle h2 a {
   background: #eee;
   border: 2px solid #ccc;
   padding: 2px 10px;
 }
 
 /* Menu items */
-.at-menu-toggle ul.menu li a {
+.at-mt .at-menu-toggle ul.menu li a {
   background: #eee;
   border-bottom: 1px solid #fff;
 }

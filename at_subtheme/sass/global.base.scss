@@ -551,7 +551,8 @@ table {
 .at-panel .rounded-corner,
 .block-panels-mini > .block-title,
 .rendered-by-ds .panel-display .region-inner,
-div.messages {
+div.messages,
+.at-gutter {
   margin-left: $gutter-width;
   margin-right: $gutter-width;
 }
