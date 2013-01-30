@@ -713,6 +713,8 @@ ul.menu li.last {}
 #breadcrumb a:hover,
 #breadcrumb a:focus {}
 
+#breadcrumb .crumb-separator {}
+
 
 /* =============================================================================
  *   Pagers
