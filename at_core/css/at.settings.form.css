@@ -363,7 +363,7 @@ fieldset#edit-font .fieldset-wrapper .fieldset-wrapper {
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
-  overflow: 0;
+  overflow: hidden;
 }
 #edit-site-name-font-style .form-type-select label {
   position: static !important;
@@ -540,7 +540,7 @@ div[class*=form-item-move-region-options] label:first-child {
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
-  overflow: 0;
+  overflow: hidden;
 }
 
 
