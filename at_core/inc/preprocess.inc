@@ -41,6 +41,9 @@ function adaptivetheme_preprocess_html(&$vars) {
   $vars['html_attributes_array']['lang'][] = $language->language;
   $vars['html_attributes_array']['dir'][] = $language->dir;
 
+  // You can add more attributes to the html elment, for example in a sub-theme you can do this:
+  //$vars['html_attributes_array']['xmlns:og'][] = 'http://opengraphprotocol.org/schema/';
+
   // Convert RDF Namespaces into structured data using drupal_attributes.
   $vars['rdf_namespaces'] = array();
   if (function_exists('rdf_get_namespaces')) {
@@ -951,9 +954,20 @@ function adaptivetheme_preprocess_user_profile(&$vars) {
 function adaptivetheme_preprocess_breadcrumb(&$vars) {
   // Add Google rich snippets to breadcrumbs using RDFa
   if (module_exists('rdf')) {
-    $rich_snippet = 'rel="v:url" property="v:title" ';
+    $snippet_url = ' rel="v:url" ';
+    $snippet_title = ' property="v:title" ';
     foreach ($vars['breadcrumb'] as $key => $breadcrumb) {
-      $breadcrumb = substr_replace($breadcrumb, $rich_snippet, 3, 0);
+      preg_match_all('/<([\w]+)[^>]*>.*?<\/\\1>/', $breadcrumb, $matches);
+      if (count($matches[0]) > 0) {
+        $snippet = $snippet_title;
+        if ($matches[1][count($matches[1]) - 1] == 'a') {
+          $snippet = $snippet_url . $snippet_title;
+        }
+        $breadcrumb = substr_replace($breadcrumb, $snippet, strlen($matches[1][count($matches[1]) - 1]) + 1, 0);
+      }
+      else {
+        $breadcrumb = '<span ' . $snippet_title . '>' . $breadcrumb . '</span>';
+      }
       $vars['breadcrumb'][$key] = '<span typeof="v:Breadcrumb">' . $breadcrumb . '</span>';
     }
   }

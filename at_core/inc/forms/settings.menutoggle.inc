@@ -19,26 +19,17 @@ function at_core_menu_toggle_form(&$form) {
     '#description' => t('<strong>Select additional devices/breakpoints you want to use the toggle menu for.</strong>'),
   );
 
-  // Deprecate selection for smalltouch, these enable by default
-  //$form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_portrait'] = array(
-  //  '#type' => 'checkbox',
-  //  '#title' => t('Apply to Smalltouch Portrait'),
-  //  '#default_value' => at_get_setting('menu_toggle_smalltouch_portrait') ? at_get_setting('menu_toggle_smalltouch_portrait') : 1,
-  //);
-  //$form['at']['menu-toggle']['breakpoints']['menu_toggle_smalltouch_landscape'] = array(
-  //  '#type' => 'checkbox',
-  //  '#title' => t('Apply to Smalltouch Landscape'),
-  //  '#default_value' => at_get_setting('menu_toggle_smalltouch_landscape') ? at_get_setting('menu_toggle_smalltouch_landscape') : 1,
-  //);
-
   $form['at']['menu-toggle']['breakpoints']['menu_toggle_tablet_portrait'] = array(
     '#type' => 'checkbox',
     '#title' => t('Apply to Tablet Portrait'),
     '#default_value' => at_get_setting('menu_toggle_tablet_portrait') ? at_get_setting('menu_toggle_tablet_portrait') : 0,
+    '#states' => array(
+      'disabled' => array('input[name=menu_toggle_tablet_landscape]' => array('checked' => TRUE)),
+    ),
   );
   $form['at']['menu-toggle']['breakpoints']['menu_toggle_tablet_landscape'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Apply to Tablet Landscape'),
+    '#title' => t('Apply to all Tablet breakpoints'),
     '#default_value' => at_get_setting('menu_toggle_tablet_landscape') ? at_get_setting('menu_toggle_tablet_landscape') : 0,
   );
 
