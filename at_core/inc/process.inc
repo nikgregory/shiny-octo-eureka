@@ -158,6 +158,12 @@ function adaptivetheme_process_block(&$vars) {
     $vars['inner_suffix'] = '';
     $vars['content_processed'] = $vars['content']; // remove the default wrapper
   }
+  // Navigation or menu blocks get special treatment in these regions
+  if ($vars['block']->region === 'leaderboard' || $vars['block']->region === 'header') {
+    if ($vars['tag'] == 'nav') {
+      $vars['content_processed'] = $vars['content']; // remove the default wrapper
+    }
+  }
 
   // Some blocks look bad with wrappers so we strip them
   if ($vars['block']->region === 'content') {
@@ -169,6 +175,8 @@ function adaptivetheme_process_block(&$vars) {
     $vars['inner_prefix'] = '';
     $vars['inner_suffix'] = '';
   }
+
+  //dsm($vars);
 
   // Provide additional suggestions so the block__menu suggestion can be overridden easily
   $vars['theme_hook_suggestions'][] = 'block__' . $vars['block']->region . '__' . $vars['block']->module;

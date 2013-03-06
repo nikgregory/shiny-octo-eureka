@@ -685,6 +685,30 @@ ul.sf-menu {
 
 
 /* =============================================================================
+ *   Menu Toggles
+ * ========================================================================== */
+// .at-mt is a page class
+.at-mt {
+  .at-menu-toggle,
+  .at-menu-toggle ul,
+  .at-menu-toggle ul.menu {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+  }
+
+  .at-menu-toggle-button {
+    margin: 0;
+  }
+
+  .at-menu-toggle ul a {
+    padding: 0 10px;
+    white-space: nowrap;
+  }
+}
+
+
+/* =============================================================================
  *   Menus, usually blocks
  * ========================================================================== */
 
