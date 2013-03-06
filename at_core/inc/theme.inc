@@ -42,6 +42,9 @@ function adaptivetheme_theme($existing, $type, $theme, $path) {
  * @see adaptivetheme_process_menubar()
  */
 function adaptivetheme_menubar($vars) {
+
+  dsm($vars);
+
   $output = '';
   $output .= '<div id="' . $vars['menubar_id'] . '" class="' . $vars['classes'] . '"' . $vars['attributes'] . '>';
   $output .= '<nav ' . $vars['content_attributes'] . '>';

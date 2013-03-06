@@ -833,10 +833,14 @@ function adaptivetheme_preprocess_aggregator_item(&$vars) {
  */
 function adaptivetheme_preprocess_menubar(&$vars) {
   $type = $vars['type'];
+  // menu bar id
   $vars['menubar_id'] = $type . '-menu-bar';
-  $vars['classes_array'][] = 'nav clearfix';
+  // Add classes to the main wrapper
+  $vars['classes_array'] = array('nav', 'clearfix');
+  // Add classes to the inner wrapper
+  $vars['content_attributes_array']['class'] = array($type . '-menu-wrapper', 'menu-wrapper', 'clearfix');
+  // Set aria role
   $vars['content_attributes_array']['role'][] = 'navigation';
-  $vars['content_attributes_array']['class'][] = $type . '-menu-wrapper menu-wrapper clearfix';
   // Add suggstions per menu type
   $vars['theme_hook_suggestions'][] = 'menubar__' . $type;
 }

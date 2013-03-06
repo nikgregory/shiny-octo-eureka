@@ -356,12 +356,11 @@
 
 ;----------// Mobile metatags
   settings[mobile_friendly_metatags] = 1
-  settings[adaptivetheme_meta_viewport] = 'width=device-width, initial-scale=1'
+  settings[adaptivetheme_meta_viewport] = 'width=device-width, initial-scale=1.0, user-scalable=yes'
   settings[adaptivetheme_meta_mobileoptimized]  = 'width'
   settings[adaptivetheme_meta_handheldfriendly] = 'true'
-  settings[adaptivetheme_meta_apple_mobile_web_app_capable] = 'yes'
-  settings[chrome_edge] = 0
-  settings[clear_type]  = 0
+  settings[adaptivetheme_meta_ie_document_mode] = ''
+  settings[adaptivetheme_meta_clear_type] = 0
 
 
 ;----------// Touch icons
