@@ -51,13 +51,13 @@ function at_core_menu_toggle_form(&$form) {
   $form['at']['menu-toggle']['menus-regions']['core']['menu_toggle_main_menu'] = array(
     '#type' => 'checkbox',
     '#title' => t('Main Menu'),
-    '#default_value' => at_get_setting('menu_toggle_main_menu'),
+    '#default_value' => at_get_setting('menu_toggle_main_menu') ? at_get_setting('menu_toggle_main_menu') : 1,
   );
   // Core secondary menu
   $form['at']['menu-toggle']['menus-regions']['core']['menu_toggle_secondary_menu'] = array(
     '#type' => 'checkbox',
     '#title' => t('Secondary menu'),
-    '#default_value' => at_get_setting('menu_toggle_secondary_menu'),
+    '#default_value' => at_get_setting('menu_toggle_secondary_menu') ? at_get_setting('menu_toggle_secondary_menu') : 1,
   );
 
   // Regions
@@ -83,7 +83,7 @@ function at_core_menu_toggle_form(&$form) {
   $form['at']['menu-toggle']['menus-regions']['regions']['menu_toggle_menu_bar'] = array(
     '#type' => 'checkbox',
     '#title' => t('Menu Bar'),
-    '#default_value' => at_get_setting('menu_toggle_menu_bar'),
+    '#default_value' => at_get_setting('menu_toggle_menu_bar') ? at_get_setting('menu_toggle_menu_bar') : 1,
   );
 
   // Customize toggle link text
