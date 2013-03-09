@@ -340,6 +340,10 @@ function at_load_polyfills($theme_name) {
     if (at_get_setting('load_onmediaqueryjs') === 1) {
       $polyfills_array['all'][] = 'scripts/onmediaquery.js';
     }
+    if (at_get_setting('load_matchmediajs') === 1) {
+      $polyfills_array['all'][] = 'scripts/matchMedia.addListener.js';
+      $polyfills_array['all'][] = 'scripts/matchMedia.js';
+    }
 
     // Load Polyfills
     if (!empty($polyfills_array)) {
@@ -700,6 +704,7 @@ function at_load_menu_toggle($path, $theme_name) {
     'type' => 'file',
     'scope' => 'header',
     'group' => JS_THEME,
+    'weight'=> 999,
     'preprocess' => TRUE,
     'cache' => TRUE,
     )

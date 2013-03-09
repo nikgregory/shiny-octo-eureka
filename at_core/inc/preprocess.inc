@@ -793,13 +793,20 @@ function adaptivetheme_preprocess_comment(&$vars) {
   }
   $vars['links_attributes_array']['class'][] = 'clearfix';
 
-  // Build the submitted by and time elements
+  // Build the submitted by, permalink, title and time elements
   $uri = entity_uri('comment', $vars['comment']);
   $uri['options'] += array('attributes' => array('rel' => 'bookmark'));
   $vars['title'] = l($vars['comment']->subject, $uri['path'], $uri['options']);
-  $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']); // Permalinks are embedded in the time element, aka Wordpress
+
+  // Don't rebuild the permalink variable if Advanced Forum is enabled
+  if (!module_exists('advanced_forum')) {
+    $vars['permalink'] = l(t('Permalink'), $uri['path'], $uri['options']);
+  }
+
   $vars['created'] = '<span class="date-time permalink">' . l($vars['created'], $uri['path'], $uri['options']) . '</span>';
+
   $vars['datetime'] = format_date($vars['comment']->created, 'custom', 'Y-m-d\TH:i:s\Z'); // Generate the timestamp, PHP "c" format is wrong
+
   $vars['submitted'] = t('Submitted by !username on !datetime',
     array(
       '!username' => $vars['author'],
