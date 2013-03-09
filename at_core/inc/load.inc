@@ -341,8 +341,8 @@ function at_load_polyfills($theme_name) {
       $polyfills_array['all'][] = 'scripts/onmediaquery.js';
     }
     if (at_get_setting('load_matchmediajs') === 1) {
-      $polyfills_array['all'][] = 'scripts/matchMedia.addListener.js';
       $polyfills_array['all'][] = 'scripts/matchMedia.js';
+      $polyfills_array['all'][] = 'scripts/matchMedia.addListener.js';
     }
 
     // Load Polyfills

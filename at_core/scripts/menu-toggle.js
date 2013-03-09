@@ -36,7 +36,7 @@
 
         // Toggle menus open or closed
         $(".at-menu-toggle-button-link").click(function() {
-          $(this).parent().next().slideToggle('fast');
+          $(this).parent().next().slideToggle(100, 'swing');
           return false;
         });
 
