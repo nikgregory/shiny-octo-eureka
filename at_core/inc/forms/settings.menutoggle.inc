@@ -9,7 +9,7 @@ function at_core_menu_toggle_form(&$form) {
     '#type' => 'fieldset',
     '#title' => t('Mobile Menu Toggle'),
     '#weight' => 30,
-    '#description' => t('<h2>Menu Toggle for Mobile</h2><p>The Menu Toggle will hide selected menus and a single clickable link will appear. Clicking this link toggles the menu open and closed - suitable for mobile devices. Smalltouch/smartphone breakpoints are supported by default.</p><p><strong>Superfish:</strong> if you start using the Superfish module you should re-save the theme settings. Also enable the sf-Touchscreen plugin for your Superfish menu block.</p><p><strong>Polyfills:</strong> for this to work in older browsers and Adroid 2 you need to enable the matchMedia polyfill (see the Polyfills tab).</p>'),
+    '#description' => t('<h2>Menu Toggle for Mobile</h2><p>The Menu Toggle will hide selected menus and a single clickable link will appear. Clicking this link toggles the menu open and closed - suitable for mobile devices. Smalltouch/smartphone breakpoints are supported by default.</p><p><strong>Superfish:</strong> if you start using the Superfish module you should re-save the theme settings. Also enable the sf-Touchscreen plugin for your Superfish menu block.</p><p><strong>Polyfills:</strong> for this to work in older browsers (such as IE8 and below) and Android 2 you need to enable the matchMedia polyfill (see the Polyfills tab).</p>'),
   );
 
   // Select additional breakpoints
