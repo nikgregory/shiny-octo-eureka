@@ -1,0 +1,40 @@
+
+<aside class="status-block status">
+  <h2>Help Document Status</h2>
+  <p><b>Status:</b> Up to date</p>
+  <p><b>Last updated:</b> Oct 10th 2013</p>
+</aside>
+
+<h1>Libraries</h1>
+
+<p>All Adaptivetheme sub-themes include a nifty Libraries feature that allows you to simply drop JS and CSS files into the /libraries/ folder in your sub-theme and they will instantly appear in the Libraries tab in your themes Appearance settings. You can toggle them on and off and Adaptivetheme will take care of loading them for you. This is great for things like jQuery plugins or other scripts. The library feature also allows you to toggle Drupal core libraries, such as jQuery, jQuery UI, Backbone and Underscore.</p>
+
+<p>This help section explains how to use the Libraries feature and how to add a library to your theme.</p>
+
+<hr>
+
+
+<h2>What is a Library?</h2>
+
+<p>A library is either an JS or CSS files (or both). For example a jQuery plugin can be a library. For example Drupal core treats all its jQuery plugins as libraries. To create a library simply create a folder and place your files inside that folder - the only requirement is that they are all directly in the root of that folder, not in sub-folders.</p>
+
+<h2>How to install a Library?</h2>
+
+<p>Take the folder of files you just created and place them in the /libraries/ directory in your sub-theme. Then go to your themes Appearance settings and open the Libraries tab, then the "ThemeName Libraries" field, you will see your library here with a checkbox so you can toggle it on or off. To toggle it on check the box and save the configuration.</p>
+
+<p>Note that libraries are inherited by sub-themes automatically. You do not need to repeatedly copy and paste libraries if you create sub sub-themes for example.</p>
+
+
+<h2>Drupal Core Libraries</h2>
+
+<p>Drupal core actually provides many libraries and none are loaded by default on any page in Drupal, ever, not even jQuery. You will see in the Libraries tab of your sub-theme a field for Drupal core libraries - here are listed all the commonly used libraries for front end development that Drupal provides. If your library has a hard dependency such as jQuery you should turn it on here. Your plugin might be working when you are logged in because jQuery is loading for the Toolbar, but logout and it might not be, so make sure you get your dependencies loading as well.</p>
+
+<h2>How does this differ from using hook_library_info() and drupal_add_library()</h2>
+
+<p>Firstly this does use both those functions, however its usage of hook_library_info() is much simplified and does not offer the ability to set hard dependencies, browser options, versions and other advanced features. It's a simple automated approach that works most of the time for average requirements. If you need advanced options I suggest adding your libraries manually in your own hook_library_info(), or look into using the very good Libraries API module (which does allow you to set dependencies using an info file to declare such things).</p>
+
+<h2>How are the library files actually loaded?</h2>
+
+<p>AT Core loads the files in hook_page_alter() using #attached.</p>
+
+

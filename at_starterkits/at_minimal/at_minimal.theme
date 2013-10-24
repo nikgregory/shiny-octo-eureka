@@ -1,0 +1,156 @@
+<?php
+
+use Drupal\Core\Template\Attribute;
+use Drupal\at_core\Theme\ThemeInfo;
+use Drupal\at_core\Library\ThemeLibraries;
+
+/**
+ * TODO:
+ * The preprocess layer is set to be removed in Drupal 9, and is proposed to
+ * deprecate in Drupal 8 and introduce a new phase hook_theme_prepare().
+ * This file currently uses several preprocess functions so when the new hook
+ * lands in core we'll need to look at updating.
+ *
+ * SEE: https://drupal.org/node/2035055 (and keep an eye on it!)
+ * SEE: Remove Preprocess Layer (Drupal 9 issue) https://drupal.org/node/2060783
+ */
+
+/**
+ * Preprocess variables for html templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_minimal_preprocess_html(&$variables) {
+  global $theme;
+
+  // Add an id to the body element.
+  $variables['attributes']['id'][] = 'adaptivetheme';
+
+  // Add a "site name" body classes for advanced theming of multi-sites.
+  if ($variables['head_title_array']['name']) {
+    $variables['attributes']['class'][] = 'site-name-' . drupal_html_class($variables['head_title_array']['name']);
+  }
+
+  // Add a selected-layout class for advanced theming of layouts and template suggestions.
+  if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
+    if ($master_layout = at_core_theme_get_setting('settings.template_suggestion_page', $theme)) {
+      if ($variables['page']['#selected_layout']) {
+        $variables['attributes']['class'][] = 'layout-' . drupal_html_class($variables['page']['#selected_layout']);
+      }
+    }
+  }
+}
+
+/**
+ * Preprocess variables for node templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_minimal_preprocess_node(&$variables) {
+  // Initialize attributes for the node footer.
+  $variables['footer_attributes'] = new Attribute(array('class' => array()));
+
+  // Set classes for node title and footer.
+  $variables['title_attributes']['class'][]   = 'node-title';
+  $variables['footer_attributes']['class'][]  = 'node-footer';
+
+  // Set a class on the node footer if there is a user picture.
+  if (isset($variables['user_picture']['user_picture'])) {
+    $variables['footer_attributes']['class'][] = 'node-user-picture';
+  }
+}
+
+/**
+ * Preprocess variables for comment templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_minimal_preprocess_comment(&$variables) {
+  // Initialize attributes for the comment footer.
+  $variables['footer_attributes'] = new Attribute(array('class' => array()));
+
+  // Set classes for comment title and footer.
+  $variables['title_attributes']['class'][] = 'comment-title';
+  $variables['footer_attributes']['class'][] = 'comment-footer';
+
+  // Set a class on the comment footer if there is a user picture.
+  if (isset($variables['user_picture']['user_picture'])) {
+    $variables['footer_attributes']['class'][] = 'comment-user-picture';
+  }
+}
+
+/**
+ * Preprocess variables for block templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_minimal_preprocess_block(&$variables) {
+  // Set a class for block titles.
+  $variables['title_attributes']['class'][] = 'block-title';
+}
+
+/**
+ * Implements hook_library_info().
+ * Registers this themes libraries.
+ *
+ * @return array
+ *  Library names and files.
+ */
+function at_minimal_library_info() {
+  global $theme;
+  $libraries = array();
+
+  /**
+   * Automated library info.
+   * Adapativetheme scans the /libraries/ folder in your theme
+   * looking for sub-folders that hold JS and CSS files, if found
+   * it will add them here as libraries - you can enable them in
+   * theme settings. See the README in the libraries folder.
+   *
+   * If you need to set dependancies or advanced options like
+   * browser settings then add and load your library manually.
+   * So far I have not been able to get drupal_get_library()
+   * to return a result in theme-settings.php, which is probably
+   * a bug in Drupal 8. Do not store manually added libraries
+   * in the /libraries/ folder in your theme, or else Adaptivetheme
+   * will find them and add them (again) here.
+   */
+  if (at_core_theme_get_setting('settings.libraries_enable', $theme) == 1) {
+    $themeInfo = new ThemeInfo($theme);
+    $info      = $themeInfo->getThemeInfo('info');
+    $version   = $info['version'];
+
+    $library_object = new ThemeLibraries($theme);
+    $library_assets = $library_object->getLibraryFiles();
+
+    if (!empty($library_assets)) {
+      foreach ($library_assets[$theme] as $library_name => $types) {
+        $libraries[$library_name]['version'] = $version;
+        foreach ($types as $type => $asset_files) {
+          if ($type == 'css') {
+            foreach ($asset_files as $key => $file_path) {
+              $css[$library_name][$file_path] = array('group' => CSS_AGGREGATE_THEME);
+              foreach ($css as $library_name => $values) {
+                $libraries[$library_name]['css'] = $values;
+              }
+            }
+          }
+          if ($type == 'js') {
+            foreach ($asset_files as $key => $file_path) {
+              $js[$library_name][$file_path] = array('group' => JS_THEME);
+              foreach ($js as $library_name => $values) {
+                $libraries[$library_name]['js'] = $values;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return $libraries;
+}

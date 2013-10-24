@@ -1,0 +1,21 @@
+//
+// Starterkit Internet Explorer 8 Layout
+//
+// Import globals and layout partials.
+//
+// This file compiles directly into layout-starterkit-IE8.css and is loaded if
+// required (if the user checks the box to load support for IE8).
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "global";
+
+/* Header (2 regions) */
+.page-row-header {
+  @import 'ELF/two/two-3-9';
+}
+
+/* Main (4 regions) */
+.page-row-main {
+  @import 'ELF/four/content-priority/four-cp-12--3-6-3';
+}

@@ -1,0 +1,9 @@
+// Neutralize the Toolbar, it's flipping left behaviour is
+// an enormous PITA for theme development. Uncomment to use.
+#toolbar-administration {
+  display: none;
+}
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}

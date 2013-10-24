@@ -1,0 +1,66 @@
+//
+// Style content types, otherwise knows as "node types" in Drupal speak.
+//
+// ---------------------------------------------------------------------------
+// Imports
+@import "base";
+
+
+.node {}
+.node-title {}
+
+
+// Node author name and date details.
+.node-submitted {
+
+  .user-name {}
+  .date-time {}
+}
+
+
+// Node <footer> wraps the user picture and comment-submitted elements.
+.node-footer {
+
+  // User picture.
+  .field-type-image {
+
+    img {}
+  }
+
+  // Conditional class: if user picture?
+  &.node-user-picture {}
+}
+
+
+// Content types usually include a type class on their wrapper, you can
+// use this class to add custom styles to each content type. In a standard
+// install of Drupal two content types are created.
+.node-article {}
+.node-page {}
+
+// Installing the Forum modue creates a forum topic content type.
+.node-forum {}
+
+
+
+// Node Fields
+// All content types contain a numer of fields, such as body, images,
+// taxonomy terms and whatever the site builder has added. There are hundreds
+// of possible classes for targeting fields - type, name, lable settings etc,
+// so we only list a few commonly used classes.
+
+// Example of a named field, in this case body.
+.field-name-body {}
+
+// Field type classes - image and taxonomy terms.
+.field-type-image {}
+.field-type-taxonomy-term-reference {}
+
+
+// If the content type supports comments it will include a comments field.
+// Theses could be styled here or in the _comments partial.
+.field-node-comment {}
+
+
+
+

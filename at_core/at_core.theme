@@ -1,0 +1,359 @@
+<?php
+
+use Drupal\Core\Language\Language;
+use Drupal\Core\Theme\ThemeSettings;
+use Drupal\at_core\Theme\ThemeInfo;
+use Drupal\at_core\Library\SystemLibraries;
+use Drupal\at_core\Layout\PageLayout;
+use Drupal\at_core\Layout\LayoutAttributes;
+
+/**
+ * TODO:
+ * The preprocess layer is set to be removed in Drupal 9, and is proposed to
+ * deprecate in Drupal 8 and introduce a new phase hook_theme_prepare().
+ * This file currently uses several preprocess functions so when the new hook
+ * lands in core we'll need to look at updating.
+ *
+ * SEE: https://drupal.org/node/2035055 (and keep an eye on it!)
+ * SEE: Remove Preprocess Layer (Drupal 9 issue) https://drupal.org/node/2060783
+ */
+
+/**
+ * Retrieves a setting for the current theme or for a given theme.
+ * This is a cut down modified version of Drupal cores own
+ * theme_get_setting().
+ *
+ * @param $setting_name
+ *   The name of the setting to be retrieved.
+ *
+ * @param $theme
+ *   The name of a given theme; defaults to the current theme.
+ *
+ * @return
+ *   The value of the requested setting, NULL if the setting does not exist.
+ */
+function at_core_theme_get_setting($setting_name, $theme = NULL) {
+  $cache = &drupal_static(__FUNCTION__, array());
+
+  // If no key is given, use the current theme if we can determine it.
+  if (!isset($theme)) {
+    $theme = !empty($GLOBALS['theme_key']) ? $GLOBALS['theme_key'] : '';
+  }
+
+  if (empty($cache[$theme])) {
+    // Create a theme settings object.
+    $cache[$theme] = new ThemeSettings($theme);
+
+    if ($theme) {
+      // Get the saved theme-specific settings from the configuration system.
+      $cache[$theme]->mergeData(\Drupal::config($theme . '.settings')->get());
+    }
+
+    //var_dump($cache[$theme]);
+  }
+
+  return $cache[$theme]->get($setting_name);
+}
+
+/**
+ * Implements hook_library_info().
+ */
+function at_core_library_info() {
+  global $theme;
+
+  // Window Size.
+  $path =  drupal_get_path('theme', 'at_core');
+  $libraries['window_size'] = array(
+    'title' => 'Window Size',
+    'version' => '1.x',
+    'js' => array(
+      $path . '/scripts/window-size/window-size.js' => array(
+        'group' => JS_THEME,
+      ),
+    ),
+    'css' => array(
+      $path . '/scripts/window-size/window-size.css' => array(
+        'every_page' => TRUE,
+        'group' => CSS_AGGREGATE_THEME,
+      ),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery.once'),
+    ),
+  );
+
+  // Live Reload
+  if (at_core_theme_get_setting("settings.livereload", $theme)) {
+    $livereload_snippet = '';
+    if (at_core_theme_get_setting("settings.livereload_snippet", $theme)) {
+      $livereload_snippet = at_core_theme_get_setting("settings.livereload_snippet", $theme);
+    }
+    $libraries['livereload'] = array(
+      'title' => 'Live Reload',
+      'version' => '1.x',
+      'js' => array(
+        $livereload_snippet => array(
+          'type' => 'inline',
+        ),
+      ),
+    );
+  }
+
+  // IE9.js External Script
+  $libraries['ie9js'] = array(
+    'title' => 'ie9js',
+    'version' => '2.1',
+    'js' => array(
+      'http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js' => array(
+        'type' => 'external',
+        'browsers' => array(
+          'IE' => 'lte IE 8',
+          '!IE' => FALSE,
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * TODO: keep on on core regarding the alter hook and suggestions.
+ * https://drupal.org/node/2100775
+ * TODO: What about Superfish?
+ */
+function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  // Add a suggestion for system menu blocks. We want all "menu" type blocks to
+  // use the same menu--block.html.twig template because these use the html5
+  // <nav> element as the main wrapper. It needs to be weak so it can be easily
+  // overridden by more specific suggestions, so we use array_splice to move it
+  // just after block__system but before the much more specific suggestions.
+  if (in_array('block__system_menu_block', $suggestions)) {
+    array_splice($suggestions, 1, 0, 'block__menu');
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * TODO: keep on on core regarding the alter hook and suggestions.
+ * https://drupal.org/node/2100775
+ */
+function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  global $theme;
+
+  // Add content type suggestions. array_splice should be safe here because
+  // page__node is always a suggestion for node pages, aka there is always one
+  // default suggestion.
+  if ($node = menu_get_object()) {
+    array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
+  }
+
+  // Show template suggestions if Devel is installed and the user enables the
+  // setting to show page template suggestions.
+  if (theme_get_setting('settings.show_page_suggestions', $theme) == 1) {
+    if ($suggestions) {
+      $these_suggestions = implode("<br>", $suggestions);
+      drupal_set_message(t('Template suggestions for this page:<br>!these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('!these_suggestions' => $these_suggestions)), 'status');
+    }
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function at_core_page_alter(&$page) {
+  global $theme;
+
+  // Attach libraries.
+  if (at_core_theme_get_setting('settings.libraries_enable', $theme) == 1) {
+    $libraries = array();
+    $themeInfo = new ThemeInfo($theme);
+    $baseThemes = $themeInfo->getThemeInfo('base_themes');
+
+    $libraries[$theme] = drupal_get_library($theme);
+
+    foreach ($baseThemes as $base_theme => $name) {
+      $libraries[$base_theme] = drupal_get_library($base_theme);
+    }
+    foreach ($libraries as $theme_key => $base_theme_library) {
+      if (!empty($base_theme_library)) {
+        foreach ($base_theme_library as $library => $data) {
+          $library_setting = str_replace('.', '_', strtolower($library));
+          if (at_core_theme_get_setting("settings.library_$library_setting", $theme) == 1) {
+            $page['#attached']['library'][] = array($theme_key, $library);
+          }
+        }
+      }
+    }
+
+    // Attach Drupal core libraries.
+    $system_libraries = new SystemLibraries();
+    $libraries = ($system_libraries->getDrupalCoreSystemLibraries());
+
+    foreach ($libraries as $key => $value) {
+      $library_setting = str_replace('.', '_', strtolower($key));
+      if (at_core_theme_get_setting("settings.drupal_core_$library_setting", $theme) == 1) {
+        $page['#attached']['library'][] = array('system', $key);
+      }
+    }
+  }
+
+  // Attach developer settings libraries, CSS files etc.
+  if (at_core_theme_get_setting("settings.show_window_size", $theme) == 1) {
+    $page['#attached']['library'][] = array('at_core', 'window_size');
+  }
+  if (at_core_theme_get_setting("settings.livereload", $theme) == 1) {
+    $page['#attached']['library'][] = array('at_core', 'livereload');
+  }
+  if (at_core_theme_get_setting('settings.devel_layout', $theme) == 1) {
+    $page['#attached']['css'][] = array('data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-layout.css');
+  }
+  if (at_core_theme_get_setting('settings.nuke_toolbar', $theme) == 1) {
+    $page['#attached']['css'][] = array('data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/nuetralize-toolbar.css');
+  }
+
+  // Attach the selected layout.
+  if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
+    if ($master_layout = at_core_theme_get_setting('settings.template_suggestion_page', $theme)) {
+
+      // Pass the selected layout into page so we can use this in preprocess also.
+      // We assume master layout as a default.
+      $page['#selected_layout'] = $master_layout;
+
+      // Get theme registry, we need to find the used template suggestion for a page.
+      $hooks = theme_get_registry(FALSE);
+      $info = array();
+
+      // Get page template suggestions. Set these as a page level variable so
+      // sub-themes can leverage them also in hook_page_alter().
+      if ($page_suggestions = theme_get_suggestions(arg(), 'page')) {
+        $page['theme_hook_suggestions'] = $page_suggestions;
+      }
+
+      $suggestions = array();
+      if (!empty($page['theme_hook_suggestions'])) {
+        $suggestions = $page['theme_hook_suggestions'];
+      }
+      if (!empty($page['theme_hook_suggestion'])) {
+        $suggestions[] = $page['theme_hook_suggestion'];
+      }
+      foreach (array_reverse($suggestions) as $suggestion) {
+        if ($suggestion_layout = at_core_theme_get_setting("settings.template_suggestion_$suggestion", $theme)) {
+          // If we get a match on break, re-assign selected layout.
+          $page['#selected_layout'] = $suggestion_layout;
+        }
+        if (isset($hooks[$suggestion])) {
+          $info = $hooks[$suggestion];
+          break;
+        }
+      }
+
+      // Set path to the selected layout.
+      $file_path = drupal_get_path('theme', $theme) . '/layouts/' . $page['#selected_layout'];
+
+      // Instantiate new PageLayout object, what we need here are the paths
+      // to the CSS files.
+      $layout_data = new PageLayout($theme, $page['#selected_layout']);
+      $layouts = $layout_data->buildLayoutDataArrays();
+
+      $page['#attached']['css'][] = array(
+        'type' => 'file',
+        'data' => $file_path . '/' . $layouts['css']['styles'],
+        'group' => CSS_AGGREGATE_THEME,
+      );
+
+      // Attach the no media queries CSS for IE8 if enabled.
+      if (at_core_theme_get_setting('settings.layouts_no_mq_' . $page['#selected_layout'], $theme) == 1) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $file_path . '/' . $layouts['css']['no_mq'],
+          'browsers' => array(
+            'IE' => 'IE 8',
+            '!IE' => FALSE,
+          ),
+          'group' => CSS_AGGREGATE_THEME,
+        );
+        // Attach IE9.js if IE8 support is set. This is rather brutal because
+        // the user can't disable this. We polyfill because all the shipped
+        // layouts use :last-child and other pseudo selectors not supported by
+        // IE8. Still, the user could use something else, what exactly I don't
+        // know because Selectivzr and jQuery is not enough.
+        $page['#attached']['library'][] = array('at_core', 'ie9js');
+      }
+    }
+  }
+}
+
+/**
+ * Preprocess variables for html templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_core_preprocess_html(&$variables) {
+  $language_interface = Drupal::languageManager()->getLanguage();
+
+  // Re-usable variables for the h5bp type conditional classes. Attributes can
+  // only be used once (one time) in a template, so we need to set re-usable
+  // variables for the html conditional classes in html.html.twig.
+  $variables['lang'] = $language_interface->id;
+  $variables['dir'] = $language_interface->dir ? 'ltr' : 'rtl';
+
+  // Remove Drupal core "layout" body classes.
+  //
+  // These are replaced by Adaptivethemes dynamic row classes which provides
+  // classes for the region count and region source order in use in each row,
+  // on the current page.
+  //
+  // For example if your source order is:
+  //
+  //    region_first  : 1 in the source order
+  //    region_second : 2 in the source order
+  //    region_third  : 3 in the source order
+  //
+  // But only region_first and region_third are active on the page, the
+  // classes will be:
+  //
+  //    .active-regions-1-3 : the source order of the regions
+  //    .active-count-2     : the total number of active regions
+  //
+  // These give you control over the entire page layout, for example to provide
+  // collaspible regions in any row, or to content source order any row.
+  $remove = array('one-sidebar','two-sidebars','sidebar_first','sidebar-second','no-sidebars');
+  $variables['attributes']['class'] = array_values(array_diff($variables['attributes']['class'], $remove));
+}
+
+/**
+ * Preprocess variables for page templates.
+ *
+ * SEE: https://drupal.org/node/2035055 for updating to hook_theme_prepare() if
+ * or when that lands.
+ */
+function at_core_preprocess_page(&$variables) {
+  global $theme;
+
+  if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
+    // Set a variable that holds an array of the active visible regions in the
+    // page. Hidden regions are not our concern. Technically we only need this
+    // if layouts are being used so is disabled unless layouts are enabled.
+    $regions = system_region_list($theme, REGIONS_VISIBLE);
+    $variables['active_regions'] = array();
+    foreach ($regions as $region_name => $region_label) {
+      if (!empty($variables['page'][$region_name])) {
+        $variables['active_regions'][] = $region_name;
+      }
+    }
+
+    // Row attributes. Here we instantiate a LayoutAttributes object, and call
+    // the rowAttributes method which will return an array of row attributes for
+    // all the active rows. We set advanced classes on rows for theming layouts.
+    if (!empty($variables['active_regions'])) {
+      if ($selected_layout = at_core_theme_get_setting('settings.layout_master_layout')) {
+        $layout_attr = new LayoutAttributes($theme, $selected_layout, $variables['active_regions']);
+        $row_attributes = $layout_attr->rowAttributes();
+        $variables += $row_attributes;
+      }
+    }
+  }
+}

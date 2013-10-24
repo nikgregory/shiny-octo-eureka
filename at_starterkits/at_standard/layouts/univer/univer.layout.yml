@@ -1,0 +1,64 @@
+# Univer Configuration.
+# Here we define rows, regions, and declare files used by our layout
+
+# All layouts in a series must have the same regions.
+series: 'Site Builder'
+
+# Optional description.
+description: 'The universal, classic three column layout. Extra regions for slideshows and other features, footer columns and a split header layout with topbar. Dedicated regions for menubar and messages. Nineteen regions total. Responsive, content source ordered, mobile first, all regions collaspible.'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# Rows. Required.
+rows:
+  header:           # row names. 'header', 'main' and 'footer' will use their html5 counterparts.
+    attributes:     # row attributes. Set id, role or classes, or any other valid html attributes. Optional.
+      role: banner
+    regions:        # regions. At least one region per row is required.
+      header_first: 'Header first'
+      header_second: 'Header second'
+      header_third: 'Header third'
+  menubar:
+    attributes:
+      role: navigation
+    regions:
+      menubar: 'Menu bar'
+  messages:
+    regions:
+      messages: 'Messages'
+  features:
+    regions:
+      features_first: 'Features first'
+      features_second: 'Features second'
+      features_third: 'Features third'
+      features_fourth: 'Features fourth'
+  main:
+    attributes:
+      role: main
+      id: main-content
+    regions:
+      highlighted: 'Highlighted'
+      content: 'Main content'
+      sidebar_first: 'Sidebar first'
+      sidebar_second: 'Sidebar second'
+  tertiary:
+    regions:
+      tertiary_first: 'Tertiary first'
+      tertiary_second: 'Tertiary second'
+      tertiary_third: 'Tertiary third'
+      tertiary_fourth: 'Tertiary fourth'
+  footer:
+    attributes:
+      role: contentinfo
+    regions:
+      footer: 'Footer'
+
+# Layout CSS files, a main CSS file and optionally one for IE8.
+# Note the keys styles: and no_mq: are the only two keys you can use here.
+css:
+  styles: univer.css
+  no_mq: univer-ie8.css
+
+# Screeshot image is used in theme settings only, optional.
+screenshot: univer.png

@@ -1,0 +1,52 @@
+//
+// Metro Layout.
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global styles.
+@import "global";
+
+
+/* Narrow screens only. */
+@media #{$narrow} {
+
+  /* Features (4 regions) and Main (4 regions) */
+  .page-row-features,
+  .page-row-main {
+    @import "ELF/four/split-rows/four-sr-12--6-6--12";
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row-tertiary {
+    @import "ELF/four/split-rows/four-sr-6-6--6-6";
+  }
+}
+
+
+/* Narrows and wide screens (and up) */
+@media #{$narrow-wide} {
+
+  /* Header (3 regions) */
+  .page-row-header {
+    @import "ELF/three/split-rows/three-sr-12--6-6";
+  }
+}
+
+
+/* Wide screens and up. */
+@media #{$wide} {
+
+  /* Features (4 regions) and Main (4 regions) */
+  .page-row-features {
+    @import "ELF/four/split-rows/four-sr-12--4-4-4";
+  }
+
+  .page-row-main {
+    @import "ELF/four/content-priority/four-cp-inset-left";
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row-tertiary {
+    @import "ELF/four/four-3-3-3-3";
+  }
+}

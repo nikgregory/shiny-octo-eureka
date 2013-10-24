@@ -1,0 +1,67 @@
+{#
+/**
+ * Univer Layout
+ * Generated on: Tue, 15 Oct 13 20:28:59 +0200
+ */
+#}
+{{ messages }}
+{% if header__regions.active == true %}
+<header{{ header__attributes }}>
+  <div class="container">
+    {{ page.header_first }}
+    {{ page.header_second }}
+    {{ page.header_third }}
+  </div>
+</header>
+{% endif %}
+{% if menubar__regions.active == true %}
+<div{{ menubar__attributes }}>
+  <div class="container">
+    {{ page.menubar }}
+  </div>
+</div>
+{% endif %}
+{% if messages__regions.active == true %}
+<div{{ messages__attributes }}>
+  <div class="container">
+    {{ page.messages }}
+  </div>
+</div>
+{% endif %}
+{% if features__regions.active == true %}
+<div{{ features__attributes }}>
+  <div class="container">
+    {{ page.features_first }}
+    {{ page.features_second }}
+    {{ page.features_third }}
+    {{ page.features_fourth }}
+  </div>
+</div>
+{% endif %}
+{% if main__regions.active == true %}
+<main{{ main__attributes }}>
+  <div class="container">
+    {{ page.highlighted }}
+    {{ page.content }}
+    {{ page.sidebar_first }}
+    {{ page.sidebar_second }}
+  </div>
+</main>
+{% endif %}
+{% if tertiary__regions.active == true %}
+<div{{ tertiary__attributes }}>
+  <div class="container">
+    {{ page.tertiary_first }}
+    {{ page.tertiary_second }}
+    {{ page.tertiary_third }}
+    {{ page.tertiary_fourth }}
+  </div>
+</div>
+{% endif %}
+{% if footer__regions.active == true %}
+<footer{{ footer__attributes }}>
+  <div class="container">
+    {{ page.footer }}
+  </div>
+</footer>
+{% endif %}

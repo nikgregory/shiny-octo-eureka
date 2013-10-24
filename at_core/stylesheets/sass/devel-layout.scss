@@ -1,0 +1,339 @@
+// Wrangle regions for debugging layouts, toggle this in theme settings.
+
+// Neutralize Toolbar.
+#toolbar-administration {
+  display: none;
+}
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+// Remove unwanted page elements.
+.messages,
+.visually-hidden,
+.region-page-top,
+.region-page-bottom {
+  display: none !important;
+}
+
+[class*="page-row-"] {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .container {
+    padding: 20px 0 10px 0;
+  }
+
+  // Stripe rows with color.
+  background-color: ghostwhite;
+  &:nth-child(2n+1) {
+    background-color: lavender ;
+  }
+
+  .region {
+    margin-bottom: 10px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.65);
+    //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    font: 12px/1 Arial;
+
+    .block {
+      height: 40px;
+      width: 100%;
+    }
+    .block > * {
+      display: none !important;
+    }
+
+    &:before {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    // Show regions source order.
+    &:first-child {
+      &:before {
+        content: "Region 1";
+      }
+    }
+    &:nth-child(2) {
+      &:before {
+        content: "Region 2";
+      }
+    }
+    &:nth-child(3) {
+      &:before {
+        content: "Region 3";
+      }
+    }
+    &:nth-child(4) {
+      //clear: both;
+      &:before {
+        content: "Region 4";
+      }
+    }
+    &:nth-child(5) {
+      &:before {
+        content: "Region 5";
+      }
+    }
+    &:nth-child(6) {
+      &:before {
+        content: "Region 6";
+      }
+    }
+    &:nth-child(7) {
+      &:before {
+        content: "Region 7";
+      }
+    }
+    &:nth-child(8) {
+      &:before {
+        content: "Region 8";
+      }
+    }
+    &:nth-child(9) {
+      &:before {
+        content: "Region 9";
+      }
+    }
+    &:nth-child(10) {
+      &:before {
+        content: "Region 10";
+      }
+    }
+    &:nth-child(11) {
+      &:before {
+        content: "Region 11";
+      }
+    }
+    &:nth-child(12) {
+      &:before {
+        content: "Region 12";
+      }
+    }
+    &:nth-child(13) {
+      &:before {
+        content: "Region 13";
+      }
+    }
+    &:nth-child(14) {
+      &:before {
+        content: "Region 14";
+      }
+    }
+    &:nth-child(15) {
+      &:before {
+        content: "Region 15";
+      }
+    }
+    &:nth-child(16) {
+      &:before {
+        content: "Region 16";
+      }
+    }
+    &:nth-child(17) {
+      &:before {
+        content: "Region 17";
+      }
+    }
+    &:nth-child(18) {
+      &:before {
+        content: "Region 18";
+      }
+    }
+    &:nth-child(19) {
+      &:before {
+        content: "Region 19";
+      }
+    }
+    &:nth-child(20) {
+      &:before {
+        content: "Region 20";
+      }
+    }
+  }
+}
+
+
+
+// Overrides for screenshots etc
+html, body {
+  background: #fff !important;
+  padding: 20px 0;
+}
+[class*="page-row-"] {
+  background: #fff !important;
+  padding: 5px 0;
+
+  .container {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .region {
+    height: 40px;
+    margin: 0 0 12px;
+    &:before {
+      content: "" !important;
+    }
+  }
+}
+.page-row-two-one,
+.page-row-three-one,
+.page-row-four-one {
+  margin-top: 40px;
+}
+
+
+// METRO
+.layout-metro {
+  .page-row-header {
+    .region {
+      &:nth-child(2),
+      &:last-child {
+        height: 100px;
+      }
+    }
+  }
+  .page-row-main {
+    .region-highlighted {
+      height: 100px;
+    }
+    .region-content {
+      height: 190px;
+    }
+    .region-sidebar-first {
+      height: 190px;
+    }
+    .region-sidebar-second {
+      height: 300px;
+    }
+  }
+  .page-row-features,
+  .page-row-tertiary {
+    .region {
+      height: 80px;
+    }
+  }
+  .page-row-features {
+    .region:first-child {
+      height: 100px;
+    }
+  }
+}
+
+
+// PUBLISHER
+.layout-publisher {
+  .page-row-header {
+    .region {
+      &:nth-child(2),
+      &:last-child {
+        height: 100px;
+      }
+    }
+  }
+  .page-row-main {
+    .region-highlighted {
+      height: 70px;
+    }
+    .region-content {
+      height: 220px;
+    }
+    .region-sidebar-first {
+      height: 220px;
+    }
+    .region-sidebar-second {
+      height: 220px;
+    }
+  }
+  .page-row-features,
+  .page-row-tertiary {
+    .region {
+      height: 90px;
+    }
+  }
+  .page-row-features {
+    .region:first-child {
+      height: 80px;
+    }
+  }
+}
+
+
+// UNIVER
+.layout-univer {
+  .page-row-header {
+    .region {
+      &:nth-child(2),
+      &:last-child {
+        height: 100px;
+      }
+    }
+  }
+  .page-row-main {
+    .region-highlighted {
+      height: 70px;
+    }
+    .region-content {
+      height: 220px;
+    }
+    .region-sidebar-first {
+      height: 220px;
+    }
+    .region-sidebar-second {
+      height: 220px;
+    }
+  }
+  .page-row-features,
+  .page-row-tertiary {
+    .region {
+      height: 90px;
+    }
+  }
+  .page-row-features {
+    .region:first-child {
+      height: 80px;
+    }
+  }
+}
+
+
+// Minima
+.layout-minima {
+  .page-row-header {
+    .region {
+      height: 100px;
+    }
+  }
+  .page-row-main {
+    .region-highlighted {
+      height: 70px;
+    }
+    .region-content {
+      height: 220px;
+    }
+    .region-sidebar-first {
+      height: 220px;
+    }
+    .region-sidebar-second {
+      height: 220px;
+    }
+  }
+  .page-row-features,
+  .page-row-tertiary {
+    .region {
+      height: 90px;
+    }
+  }
+  .page-row-features {
+    .region:first-child {
+      height: 80px;
+    }
+  }
+}
+

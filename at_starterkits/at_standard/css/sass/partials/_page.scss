@@ -1,0 +1,62 @@
+//
+// Style common page elements such as tabs, action links, pagers and
+// things like the main background color (html and body element styles).
+//
+// TODO: check selectors after everything becomes a block:
+// - https://drupal.org/node/507488
+// ---------------------------------------------------------------------------
+@import "base";
+
+
+// Wrappers.
+html {}
+body {}
+
+
+// Tabs.
+.tabs {
+
+  &.primary {
+
+    li {
+
+      a {
+
+        &.active {}
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+
+  &.secondary {
+
+    li {
+
+      a {
+
+        &.active {}
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+}
+
+
+// Pager - used for pagination type navigation.
+.item-list .pager {
+
+  li {
+
+    &.pager-current {}
+
+    a {
+
+      &:hover,
+      &:focus {}
+    }
+  }
+}
+
+

@@ -1,0 +1,6 @@
+name: 'AT Core: Sub-theme Generator'
+type: theme
+description: 'When enbabled click the settings link to use the Sub-theme Generator.'
+core: 8.x
+settings:
+  show_window_size: '0'

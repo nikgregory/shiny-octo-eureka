@@ -1,0 +1,72 @@
+
+<aside class="status-block">
+  <h3>Help Document Status</h3>
+  <p><b>Status:</b> Deprecated, Needs Update</p>
+  <p><b>Last updated:</b> Oct 10th 2013</p>
+</aside>
+
+
+<h1>CSS Files</h1>
+
+<p>While a layouts main yml file defines the markup, it also declares CSS files that will be used to provide the actual CSS layout. This help section discusses CSS files only - specifics about writing CSS is handled in seperate sections.</p>
+
+<hr>
+
+<h2>File Names and Types</h2>
+
+<p>Layouts generally declare two CSS files - a main layout CSS file and a <em>no media query</em> fallback CSS file for Internet Explorer 8.</p>
+
+<p>The actual path to these files is declared in <b>my-layout.layout.yml</b>, and are relative to the layouts root folder. For example if you declare in your layout:</p>
+
+<pre class="code-block">
+css:
+  styles: my-layout.css
+  no_mq: my-layout-ie8.css
+</pre>
+
+<p>The files would be located here (assuming your theme is in the root theme directory and not a sub-site):</p>
+
+<pre class="code-block">
+themes/my-theme/layouts/my-layout/my-layout.css
+themes/my-theme/layouts/my-layout/my-layout-ie8.css
+</pre>
+
+
+<h2>Loading CSS Files</h2>
+
+<p>Adaptivetheme will load the CSS files when required. You do not have to load CSS files yourself and you should not declare these in your themes info file. This applies to generated template suggestions also - Adaptivetheme intelligently knows what template is being loaded and automatically loads the corresponding CSS file if that template suggestion has a different layout.</p>
+
+
+<h2>CSS and Preprocessors</h2>
+
+<p>Layouts are agnostic when it comes to how CSS is written. Each Layout is a stand alone instance and completely encapsulated. This frees you to use any CSS preprocessor, SASS/LESS/Stylus Framework, or none at all and write old school CSS.</p>
+
+<p>The layouts that ship with Adaptivetheme out of the box all use <a href="https://github.com/ericam/susy/tree/susy-next" target="_blank">Susy Next</a>. The Easy Layout Framework (ELF) used in all "Site Builder" series layouts is built directly on top of Susy Next.</p>
+
+<p>Not using Susy and don't want to? Then I strongly suggest you start with the <code>minima-layout-kit</code> (found in the at_minimal sub-theme), it's the least opinionated about what framework it uses.</p>
+
+
+<h3>Default SASS Struture</h3>
+
+<p>There are two patials in the /sass/ directory, while CSS files are compiled to root (as set in the config.rb for the layout).</p>
+
+<pre class="code-block">
+_base.scss - @imports plugins and sets base variables including breakpoints
+_global.scss - declares global styles applicable to all breakpoints
+</pre>
+
+<p>The main .scss files are also in the /sass/ directory:</p>
+
+<pre class="code-block">
+my-layout.scss - main layout declarations in media queries
+my-layout-ie8.scss - fallback layout for IE8
+</pre>
+
+<p>This is how its setup by default, however you can change this if you want. It's just a starting point and how the shipped layouts are structured.</p>
+
+<p>There are comments and help in each of the SASS partials, I suggest opening those files and ready through them.</p>
+
+
+<h3>Getting Started with SASS</h3>
+
+<p>For SASS beginners see the section below on Getting Started with SASS.</p>

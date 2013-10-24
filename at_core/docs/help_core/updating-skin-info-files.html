@@ -1,0 +1,41 @@
+<div id="updating-skin-info-files">
+
+  <h1>Updating Skin Info Files</h1>
+
+  <p>Skin generated sub-themes need to have their info.yml files checked and updated. Specifically you need to look at the stylesheet and script declarations.</p>
+  <p>Note that the Generator Wizard may take care of these clean-ups in the future, right now these are the only caveats to creating new "Skin type" sub-themes. </p>
+
+  <hr>
+
+  <h2>Stylesheets</h2>
+
+  <p>By default your Skin generated sub-themes info.yml file will have a direct copy of it's base themes stylesheet declarations, which will probably look something like this:</p>
+
+  <pre>
+  stylesheets:
+    all:
+      - assets/css/layout.css
+      - assets/css/screen.css
+  </pre>
+
+  <p>If you leave it like this your Skin theme will override the base themes styles - entirely. This is Drupal core behaviour and is well documented here: <a href="https://drupal.org/node/263967" target="_blank">Overriding style sheets from modules and base themes</a>.</p>
+
+  <p>If you do not want this to happen, you will need to change the name of the stylesheets.</p>
+
+  <p><strong >To Update the Stylesheet declarations:</strong></p>
+
+  <ol>
+  <li>Locate the info.yml file in your themes root, always named [themeName].info.yml</li>
+  <li>Change or remove the declarations you want to affect. For example you probably want to remove assets/css/layout.css so your Skin theme gets all the base themes layout.</li>
+  <li>Next, locate the actual CSS files in assets/css/ and update the name changes there also, or remove files you are not using.</li>
+  <li>Clear the sites cache</li>
+  </ol>
+
+
+  <hr>
+
+  <h2>Scripts</h2>
+
+  <p>All script declarations have been copied over as well, however its unlikely you would want to declare these - you can simply remove all script declarations as your Skin them will inherit any scripts automatically from the base theme.</p>
+
+</div>

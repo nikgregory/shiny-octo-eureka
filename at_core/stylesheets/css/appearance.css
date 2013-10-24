@@ -1,0 +1,234 @@
+#block-help {
+  display: none;
+}
+
+/* Layout */
+#edit-layouts .table-layouts img {
+  display: block;
+  max-width: 200px;
+  max-height: 240px;
+  height: auto;
+}
+#edit-layouts .table-layouts .field-series,
+#edit-layouts .table-layouts .field-name {
+  font-weight: 700;
+}
+#edit-layouts .table-layouts .field-name {
+  font-size: 1.154em;
+}
+
+#edit-select {
+  border-top: 1px solid #bfbfba;
+}
+
+#edit-select-type {
+  padding-top: 1em;
+}
+
+.form-item-layout-type-select {
+  display: inline;
+}
+
+#edit-default-layout {
+  color: #666666;
+  float: right;
+  font-size: 0.923em;
+  line-height: 1.231em;
+  padding: 10px 0;
+  min-width: 211px;
+}
+
+#edit-default-not-set,
+#edit-default-set,
+#edit-none-set {
+  border-top: 1px solid #bfbfba;
+  border-bottom: 1px solid #bfbfba;
+  margin: 10px 0 20px;
+  padding: 10px;
+}
+
+#edit-default-not-set {
+  background-color: #fcf4f2;
+  color: #a51b00;
+}
+
+#edit-none-set {
+  background-color: #f3faef;
+  color: #325e1c;
+}
+
+#edit-default-set {
+  background: #F7FCFF;
+}
+#edit-default-set ol {
+  margin: 10px 0 0 0;
+  padding: 0 0 0 20px;
+}
+#edit-default-set ol, #edit-default-set p {
+  font-size: 0.923em;
+  line-height: 1.231em;
+}
+
+#edit-layout {
+  padding-top: 1em;
+}
+
+#edit-suggestions {
+  padding-top: 0;
+  padding: 10px;
+  background: #F7FCFF;
+  border-top: 1px solid #bfbfba;
+  border-bottom: 1px solid #bfbfba;
+  margin: 10px 0 20px;
+}
+#edit-suggestions label {
+  padding-bottom: 10px;
+}
+#edit-suggestions .description {
+  margin-top: 20px;
+}
+#edit-suggestions ol {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+#edit-options,
+.form-item-layout-suggestion,
+#edit-no-mq-css {
+  clear: both;
+}
+
+#edit-no-base-layout {
+  border: 1px solid #b3b2ad;
+  border-color: #f4daa6;
+  color: #734c00;
+  background-color: #fdf8ed;
+  padding: 10px;
+}
+
+#edit-options .form-disabled {
+  background: #f7f7f7;
+  margin: 0;
+  padding: 1em 0;
+}
+
+#edit-jquery .form-type-checkbox .description {
+  font-size: 0.8em;
+}
+
+#edit-drupal-core .form-type-checkbox {
+  margin-bottom: 0;
+}
+#edit-drupal-core small {
+  display: block;
+  margin-left: 2em;
+}
+#edit-drupal-core small:before {
+  content: "- ";
+}
+
+@media (max-width: 48em) {
+  #edit-layouts .form-radios label {
+    max-width: 120px;
+  }
+}
+@media (max-width: 56em) {
+  #edit-default-layout {
+    float: none;
+    clear: both;
+    margin: 0;
+    padding: 0 0 10px;
+  }
+}
+#edit-help h2, #edit-help h3, #edit-help h4,
+#edit-subtheming-help h2,
+#edit-subtheming-help h3,
+#edit-subtheming-help h4 {
+  margin: 2em 0 0;
+  padding-bottom: 0;
+}
+#edit-help ol, #edit-help ul,
+#edit-subtheming-help ol,
+#edit-subtheming-help ul {
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+#edit-help-menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+code, pre, kbd {
+  font-size: 1em !important;
+}
+
+code {
+  font-weight: 700;
+}
+
+pre code {
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+
+pre {
+  background: #F7F7F7;
+  border: 1px solid #cccccc;
+  font-weight: 400;
+  margin: 0 0 1em;
+  padding: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+pre.code-block {
+  background: #F7F7F7;
+  border: 1px solid #cccccc;
+  font-weight: 400;
+  margin: 0;
+  padding: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.status-block {
+  float: right;
+  width: 200px;
+  padding: 10px;
+  margin: 0 0 10px 20px;
+}
+.status-block.warning {
+  background: #FDF8ED;
+  color: #734C00;
+}
+.status-block.status {
+  background: #f3faef;
+  color: #325e1c;
+}
+.status-block h2 {
+  font-size: 1em !important;
+}
+.status-block p, .status-block h2 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.layout-structure-screenshot {
+  background-image: url("../../docs/help_subtheme/layout-structure.png");
+  max-width: 308px;
+  min-height: 163px;
+}
+
+blockquote {
+  border-left: 10px solid #a6a5a1;
+  padding-left: 10px;
+}

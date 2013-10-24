@@ -1,0 +1,59 @@
+//
+// Import required plugins and define base variables.
+//
+// Don't write any actual styles here, its just for configuration and imports.
+// ---------------------------------------------------------------------------
+
+// Import compass plugins
+@import "compass/support";
+@import "compass/utilities";
+@import "compass/css3";
+
+
+// Import Susy
+@import "susy";
+
+
+// Set the grid.
+//
+// Because we use the Susy magic grid we will get a max-width of 1180px, and when
+// the screen is smaller than this it will be fluid. All values are in ems which
+// are far more suited to responsive design than hard pixel widths. ems give much
+// improved line length control and the layout responds to font size changes.
+@include set-grid(12 (5em 1.25em) after);
+
+
+// Susy container style - magic has a max-width and is fluid below that width.
+$container-style : magic;
+
+
+// Set variables for the flow direction for ltr (left to right languages).
+$flow: ltr;
+$to: to($flow);
+$from: from($flow);
+
+
+// Breakpoints
+//
+// SEE: univer.scss where these breakpoint are used.
+//
+// These breakpoints use ems, which mean they are dependant on the base font size,
+// so any pixel equivalents stated here assume base font size of 16px. Change then
+// to suit your requirements.
+//
+//   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint.
+//   $narrow-wide - 45em (720px) and up, cascading breakpoint.
+//   $wide        - 60em (960px) and up, cascading breakpoint.
+//
+// Schema:
+//
+//   |<-- 45em         60em -->|
+//   |<-- narrow ------------->|
+//   |<-- narrow wide ------------------------------------------------------->
+//                             |<--- wide ----------------------------------->
+//
+$narrow      : "all and (min-width: 45em) and (max-width: 60em)";
+$narrow-wide : "all and (min-width: 45em)"; // Allow layout to cascade into wide.
+$wide        : "all and (min-width: 60em)";
+
+

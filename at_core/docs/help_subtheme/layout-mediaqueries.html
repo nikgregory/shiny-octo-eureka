@@ -1,0 +1,89 @@
+
+
+<aside class="status-block status">
+  <h2>Help Document Status</h2>
+  <p><b>Status:</b> Up to date</p>
+  <p><b>Last updated:</b> Oct 21st 2013</p>
+</aside>
+
+<h1>Media Queries</h1>
+
+<p>This document covers how media queries are declared and used in this theme. This is not a guide to general use of media queries, it assumes you know the basics.</p>
+
+<hr>
+
+<h2>Three Breakpoints</h2>
+
+<p>By default all Adaptivetheme layouts use three media queries, or "breakpoints". These are declared as variables in each layouts _base.scss partial, i.e.:</p>
+
+<pre class="code-block">
+$narrow      : "all and (min-width: 45em) and (max-width: 60em)";
+$narrow-wide : "all and (min-width: 45em)";
+$wide        : "all and (min-width: 60em)";
+</pre>
+
+<p>$narrow isolates styles withing a range - 45 to 60em.</p>
+
+<p>$narrow-wide styles begin at 45em and continue to be used by all screen sizes over that width.</p>
+
+<p>$wide starts at 60em and is used for all screens over that size.</p>
+
+<p>Lets look at how that actually works in practice:</p>
+
+<pre class="code-block">
+|<-- 45em         60em -->|
+|<-- narrow ------------->|
+|<-- narrow wide ------------------------------------------------------->
+                          |<--- wide ----------------------------------->
+</pre>
+
+
+<h2>Usage</h2>
+
+<p>The standard approach used in all default layouts is to wrap all declarations in a single media query for each breakpoint, rather than embedding media queries within the declarations themselves. This makes it a lot easier to build out the IE8 stylesheet without relying on additional SASS plugins.</p>
+
+<p>Breakpoints are used in the main .scss file for your layout. For example lets look at the elf-layout-kit.scss file - we have removed declarations for clarity, what we are looking at is how the breakpoint varaibles are being used:</p>
+
+<pre class="code-block">
+// Narrow
+@media #{$narrow} {
+}
+
+// Narrow Wide
+@media #{$narrow-wide} {
+}
+
+// Wide
+@media #{$wide} {
+}
+</pre>
+
+<p>If you read the section on the ELF you will see we use these breakpoints when importing ELF layout partials. If you take a look at the Minima layout included in the at_minimal sub-theme you will see we declare layout directly within these breakpoints rather than using @import (because that layout does not use the ELF). It's up to you.</p>
+
+<p>SASS geeks will see that we are using the #{} interpolation syntax here to include the breakpoint variables as an "expression" in the @media directive.</p>
+
+<h2>Which Breakpoint to Use?</h2>
+
+<p>Approach it like this:</p>
+
+<ol>
+  <li>To affect ONLY smaller screens like tablets, use the "narrow" breakpoint.</li>
+  <li>To affect tablets AND wider screens use "narrow-wide"</li>
+  <li>To affect ONLY wide screens use "wide".</li>
+</ol>
+
+<p>A common mistake is to apply a snippet to "narrow-wide" and then try to override it in "wide". Instead move the narrow-wide snippet to the "narrow" breakpoint.</p>
+
+
+<h2>Why Ems?</h2>
+
+<p>Ems are the perfect compliment to a fluid grid approach in responsive design. They allow the layout to change depending on the users font-size setting - for example if the user needs to zoom the page the layout can react (change) to that input, for example, move a sidebar below the content to give longer line lengths (they are zooming the page to get bigger text, so we give them more room to read it).</p>
+
+<p>This behavior happens automatically in Adaptivetheme layouts, as the font-size increases breakpoints will be trigged and the layout will change (in most modern browsers).</p>
+
+<p>Ems give us truly responsive capabilities where the user takes back some control of what they are viewing - i.e. responding to the users needs, as opposed to them just viewing what we think they should.</p>
+
+
+<h2>Modifying Breakpoints</h2>
+
+<p>These breakpoints are a starting point, they may or may not suit your site (they are pretty good defaults for most). Consider your sites requirements, you may need to add new breakpoints, or change the existing breakpoints to suit your sites content.</p>

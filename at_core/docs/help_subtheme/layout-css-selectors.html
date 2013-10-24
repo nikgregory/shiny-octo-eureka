@@ -1,0 +1,120 @@
+
+<aside class="status-block status">
+  <h2>Help Document Status</h2>
+  <p><b>Status:</b> Up to date</p>
+  <p><b>Last updated:</b> Oct 21st 2013</p>
+</aside>
+
+<h1>Layout CSS Selectors</h1>
+
+<p>Here we discuss the selectors used in Adaptivetheme and how they are generated and applied to a row. Rows are the main wrappers around a group of regions. Each row carries layout selectors (both static and dynamcially generated classes) that we use to apply layout styles to the regions printing in the page.</p>
+
+<p>Each row has two types of selectors - static selectors that never change, and dynamic selectors that change depending on <em>how many regions are active</em>, and <em>which regions are active</em>.</p>
+
+<p>If you are familiar with Drupal theming you can think of these row selectors and replacements for Drupals "body layout classes", where Drupal core adds classes like "one-sidebar, two-sidebars" to the body element, except Adaptivetheme applies these to every row, for every region in the layout - given you full layout control.</p>
+
+<hr>
+
+<h2>Static Row Selectors:</h2>
+
+<p>Static selectors always print on the row - they never change. There is always a <code>page-row-[row name]</code> class, and attributes like id or ARIA role.</p>
+
+<p>For a row called "main" with four regions and the role attribute "main" the static selectors will be:</p>
+
+<pre class="code-block">
+.page-row-main
+[role="main"]
+</pre>
+
+<h3>Dynamic Row Selectors:</h3>
+
+<p>There are two dynamic selectors - one tells us <em>how many</em> regions are priting and the other tells us <em>which</em> regions are priting. This second class returns "which regions" based on the original source order in the template.</p>
+
+<pre class="code-block">
+.active-count-[]   // e.g. .active-count-3 (three regions are priting)
+.active-regions-[] // e.g. .active-regions-2-3 (follows the source order - see the following examples to understand how this works)
+</pre>
+
+<p>We use the source order as a class hook because it allows us to decouple layout CSS from actual region names. Lets look at a concrete example.</p>
+
+<p>In our "main" row we could have four regions, e.g. (pseudo code for clarity, imagine this is the markup in your actual page):</p>
+
+<pre class="code-block">
+main
+  region-main-one   (1 in the source order)
+  region-main-two   (2 in the source order)
+  region-main-three (3 in the source order)
+  region-main-four  (4 in the source order)
+</pre>
+
+<p>Lets say only two of those are actually being used on a page, e.g. region-main-two (2) and region-main-three (3). If you study the output (using firebug or similar) for the row you will see the dynamic classes are applied like this:</p>
+
+<pre class="code-block">
+class="page-row-main active-count-2 active-regions-2-3"
+</pre>
+
+<p>Here we can see:</p>
+
+<pre class="code-block">
+active-count-2      // two regions are active
+active-regions-2-3  // "region-main-two" and "region-main-three" are the active regions (being 2 and 3 in the source order)
+</pre>
+
+<p>So the CSS declaration <code>.active-regions-2-3 {}</code> allows you to apply a row layout specifically for this situation where only those two particular regions are printing. This is exactly like Drupal cores "two-sidebars" body class, except you have them on every row (and for any number of regions). They're also agnostic about region names, unlike Drupal core that is bound to hard coded region names like "sidebar-first".</p>
+
+
+<h3>When to use .active-count or active-regions?</h3>
+
+<p>Use <code>.active-count-[]</code> when your needs are simple and you do not need to know which of the regions are actually printing. See the <code>_4-4-4.scss</code> partial in the ELF.</p>
+
+<p>Use <code>.active-regions-[]</code> when you must know exactly which regions are printing, for example when building layouts with sophistocated collaspible region features and doing content source ordered layout.</p>
+
+
+<h2>Combine Static and Dynamic Selectors</h2>
+
+<p>The modus operandi for this theme are concatenated selectors, primarily because dynamic classes are not unique. They must be made unique through concatenation, e.g.:</p>
+
+<pre class="code-block">
+.page-row-main.active-regions-2-3 {}  // Concatenate the unique row class and the dynamic row class to target a specific row
+</pre>
+
+<p>A more full example would be something like this:</p>
+
+<pre class="code-block">
+// SASS example
+.page-row-main {
+  &.active-regions-2-3 {
+    .region-main-two {
+      float: left;
+      width: 60%;
+    }
+    .region-main-three {
+      float: right;
+      width: 40%;
+    }
+  }
+}
+
+// CSS example
+.page-row-main.active-regions-2-3 .region-main-two { float: left; width: 60%; }
+.page-row-main.active-regions-2-3 .region-main-three { float: right; width: 40%; }
+</pre>
+
+<p>The main concept here is that layout is loosely coupled i.e. you can develop abstract layout objects and bind them to specicifc instances through concantenation - this is preciely how the ELF works (Easy Layout Framework), and is very much an Object Orientated CSS concept. The ELF goes further by not using actual region names (the above examples do), instead using the first, last and nth child pseudo selectors to target items in the source order.</p>
+
+
+<h2>Body layout-[name] selector</h2>
+
+<p>Adaptivetheme prints the name of the layout being used on the body element. This gives you another tool to leverage when building layout CSS, however it's probably most useful when actually styling a layout rather than the positioning of major elements like regions. This body class is not used by any Adaptivetheme core layout, but it's there if you need it.</p>
+
+<p>For example if you are using the Minima layout from the AT Minimal starterkit theme, the body class is:</p>
+
+<pre class="code-block">
+.layout-minima
+</pre>
+
+
+
+
+
+

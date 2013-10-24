@@ -1,0 +1,56 @@
+# Minima Layout Kit Configuration.
+
+# Declare a "series" label for your layout. All layouts in a series
+# must have the same regions, however they can be in different rows and
+# have different attributes. Required.
+series: 'Minima Layout Kit'
+
+# Optional description.
+description: 'Bare minimum layout kit.'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# Remove "hidden: true"" when creating your own layout, this hides it one the
+# appearance settings page for your theme.
+hidden: true
+
+# Rows. Required.
+rows:
+  header:           # row names. 'header', 'main' and 'footer' will use their html5 counterparts.
+    attributes:     # row attributes. Set id, role or classes, or any other valid html attributes. Optional.
+      role: banner
+    regions:        # regions. At least one region per row is required.
+      header_first: 'Header first'
+      header_second: 'Header second'
+  menubar:
+    attributes:
+      role: navigation
+    regions:
+      menubar: 'Menu bar'
+  messages:
+    regions:
+      messages: 'Messages'
+  main:
+    attributes:
+      role: main
+      id: main-content
+    regions:
+      highlighted: 'Highlighted'
+      content: 'Main content'
+      sidebar_first: 'Sidebar first'
+      sidebar_second: 'Sidebar second'
+  footer:
+    attributes:
+      role: contentinfo
+    regions:
+      footer: 'Footer'
+
+# Layout CSS files, a main CSS file and optionally one for IE8.
+# Note the keys styles: and no_mq: are the only two keys you can use here.
+css:
+  styles: minima-layout-kit.css
+  no_mq: minima-layout-kit-ie8.css
+
+# Screeshot image is used in theme settings only, optional.
+screenshot: minima-layout-kit.png

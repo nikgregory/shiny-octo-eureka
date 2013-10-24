@@ -1,0 +1,48 @@
+//
+// Starterkit Layout - Main Layout File.
+//
+// Here we place the main layout selectors and import or define styles for
+// each row and region.
+//
+// Like most other Adaptivetheme layouts this uses the ELF and imports
+// precomposed layout partials.
+//
+// If you want or need clean slate consider using the minimal-layout-kit found
+// in the at_minimal starterkit sub-theme.
+//
+// ---------------------------------------------------------------------------
+
+
+// Import base config and global style partials.
+@import "global";
+
+
+// Narrow styles
+@media #{$narrow} {
+
+  /* Main (4 regions) */
+  .page-row-main {
+    @import 'ELF/four/split-rows/four-sr-12--9-3--12';
+  }
+}
+
+
+// Narrow Wide Styles
+@media #{$narrow-wide} {
+
+  /* Header (2 regions) */
+  .page-row-header {
+    @import 'ELF/two/two-3-9';
+  }
+}
+
+
+// Wide Styles
+@media #{$wide} {
+
+  /* Main (4 regions) */
+  .page-row-main {
+    @import 'ELF/four/content-priority/four-cp-12--3-6-3';
+  }
+}
+

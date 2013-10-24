@@ -1,0 +1,46 @@
+//
+// Search
+//
+// In Drupal search really comprises of three things:
+// - the search block and form
+// - the advanced search form
+// - search results pages
+//
+// See _forms.scss, you may end up styling many form elements there.
+// ---------------------------------------------------------------------------
+@import "base";
+
+
+// Search Block & Form
+.block-search {}
+
+
+// The search-block-form form element.
+#search-block-form {}
+
+
+// The input text field and label.
+.form-item-search-block-form {
+  label {}
+  input {}
+}
+
+
+// The search block form submit, this is kinda of cludgey to get to,
+// here are some options.
+.block-search {
+  .button {}
+  [type="submit"] {}
+}
+
+
+
+// Advanced Search Form.
+
+
+
+
+// Search Results.
+
+
+

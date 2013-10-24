@@ -1,0 +1,32 @@
+//
+// Global layout declarations.
+//
+// These styles are not constrained by media queries and are used in all
+// compiled stylesheets.
+// ---------------------------------------------------------------------------
+
+// Import base.
+@import "base";
+
+
+// Set the Susy container on .container, this controls the max-width. The
+// .container class is set on each rows inner div wrapper to constrain the
+// the max-width of a group of regions and frees the main row wrapper to be
+// full width. The hide arguement is hiding the grid, you can "show" it also.
+.container {
+  //@include container(show-columns);
+  @include container(hide);
+}
+
+
+// We need some padding to avoid chome collisions.
+[class*="page-row-"] {
+  padding: 0 .625em; // half the default gutter width
+}
+
+
+// Set box-sizing to border-box by default.
+* {
+  @include box-sizing(border-box);
+}
+

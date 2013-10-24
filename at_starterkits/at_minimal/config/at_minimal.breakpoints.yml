@@ -1,0 +1,3 @@
+narrow: '(min-width: 45em) and (max-width: 60em)'
+narrow-wide: '(min-width: 45em)'
+wide: '(min-width: 60em)'

@@ -1,0 +1,175 @@
+#block-help {
+  display: none;
+}
+
+code, pre, kbd {
+  font-size: 1em !important;
+}
+
+code {
+  font-weight: 700;
+}
+
+#edit-help .form-wrapper {
+  margin-bottom: 3em;
+  padding-bottom: 3em;
+}
+#edit-help h2 {
+  margin-top: 1em;
+  padding-bottom: 0.5em;
+}
+#edit-help ol, #edit-help ul {
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+#edit-help-menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#edit-layouts .table-layouts img {
+  display: block;
+  max-width: 200px;
+  max-height: 240px;
+  height: auto;
+}
+#edit-layouts .table-layouts .field-series,
+#edit-layouts .table-layouts .field-name {
+  font-weight: 700;
+}
+#edit-layouts .table-layouts .field-name {
+  font-size: 1.154em;
+}
+#edit-layouts .row-series {
+  padding: 10px;
+  background: #F2F2F0;
+}
+#edit-layouts .default-series {
+  background-color: #E6E5E1;
+}
+#edit-layouts .form-radios input {
+  float: left;
+  margin-top: 2px;
+  padding: 3px;
+}
+#edit-layouts h4 {
+  font-size: 1.025em;
+  margin-bottom: 5px;
+}
+#edit-layouts .form-radios label {
+  display: block;
+  height: auto;
+  max-width: 200px;
+}
+#edit-layouts .form-radios label h3 {
+  font-weight: 700;
+  display: inline;
+  padding-left: 10px;
+}
+#edit-layouts .form-radios label p {
+  clear: both;
+}
+#edit-layouts .form-radios label ul {
+  margin: 0 0 10px;
+  padding: 0;
+}
+#edit-layouts .form-radios label ul li {
+  list-style: none;
+}
+#edit-layouts .form-radios label img {
+  max-width: 100%;
+  height: auto;
+}
+#edit-layouts .form-type-radio {
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #b3b2ad;
+  padding: 9px;
+  background: #fff;
+}
+
+#edit-select-type {
+  float: left;
+  width: 100%;
+  margin-bottom: 3em;
+  padding-top: 1em;
+}
+
+.form-item-layout-type-select {
+  display: inline;
+}
+
+#edit-default-layout {
+  color: #666666;
+  display: inline;
+  font-size: 0.923em;
+  line-height: 1.231em;
+  margin: 22px 0 0 15px;
+  padding: 10px 0;
+}
+
+#edit-default-not-set,
+#edit-default-set,
+#edit-none-set {
+  clear: both;
+  padding-top: 5px;
+}
+
+#edit-layout {
+  padding-top: 1em;
+}
+
+#edit-suggestions {
+  padding-top: 2em;
+}
+
+#edit-options,
+.form-item-layout-suggestion,
+#edit-no-mq-css {
+  clear: both;
+}
+
+#edit-no-base-layout {
+  border: 1px solid #b3b2ad;
+  border-color: #f4daa6;
+  color: #734c00;
+  background-color: #fdf8ed;
+  padding: 10px;
+}
+
+#edit-options .form-disabled {
+  background: #f7f7f7;
+  margin: 0;
+  padding: 1em 0;
+}
+
+#edit-jquery .form-type-checkbox .description {
+  font-size: 0.8em;
+}
+
+#edit-drupal-core .form-type-checkbox {
+  margin-bottom: 0;
+}
+#edit-drupal-core small {
+  display: block;
+  margin-left: 2em;
+}
+#edit-drupal-core small:before {
+  content: "- ";
+}
+
+@media (max-width: 48em) {
+  #edit-layouts .form-radios label {
+    max-width: 120px;
+  }
+}
+@media (max-width: 56em) {
+  #edit-default-layout {
+    float: none;
+    clear: both;
+    margin: 0;
+    padding: 0 0 10px;
+  }
+}

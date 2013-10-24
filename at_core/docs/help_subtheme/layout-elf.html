@@ -1,0 +1,163 @@
+
+<aside class="status-block status">
+  <h2>Help Document Status</h2>
+  <p><b>Status:</b> Up to date</p>
+  <p><b>Last updated:</b> Oct 21st 2013</p>
+</aside>
+
+
+<h1>ELF</h1>
+
+<p>Usage of the ELF is 100% optional. It was built to power Adaptivetheme shipped layouts and for all the open source ELF layouts available on Github. You can use any layout framework that supports semantic grids with Adaptivtheme - it's entirely agnostic in this regard. Note the ELF library is built with <a href="http://oddbird.net/2013/09/05/susy-alpha-4/" target="_blank">Susy Next</a> - a SASS based layout framework.</p>
+
+<p>The Easy Layout Framework is a library of precomposed SASS "snippets" arranged in partials. Each partial is a different layout. The basic idea is to copy and paste a partials contents or use @import. Typically we use @import as this is a cleaner way to organize our SASS stylehseets.</p>
+
+<p>There are layout partials for two, three and four column (region) layouts, and are steadily being added to during development of Adaptivetheme for Drupal 8.</p>
+
+<p>The ELF was designed for speed of development, and "easy" as in <em>easy once you know how</em>. I suggest reading the basic usage guide and then experimenting thereafter, and by all means post an issue to the Adpativetheme issue queue on Drupal.org if you need help.</p>
+
+<p>For SASS beginners see the section below on Getting Started with SASS.</p>
+
+<hr/>
+
+
+<h2>ELF Requirements</h2>
+
+<p>ELF has some hard requirements - these must be installed in your computer in some way, either by directly installing the gems or by using an application such as Scout. The requirements are:
+
+<ul>
+  <li>SASS</li>
+  <li>Compass</li>
+  <li>Susy 2.0.0.alpha.4 (Susy Next will ship before Drupal 8)</li>
+</ul>
+
+<p>See the config.rb if you are using one of the startkit layouts, in particular the standard version.</p>
+
+<h2>How To Select Layout Partials</h2>
+
+<p>Always match the row region count to the partial region count. For example if your row has three regions, select partials from the ELF/three/ directory. There are different types of layouts - some split regions over multiple lines (rows within a page row), and some are content source orderd - the so called "content priority" layouts.</p>
+
+<h2>Basic Usage</h2>
+
+<p>Partials are desgined to be imported directly into .page-row-[row-name] declarations. So in your main SCSS file, e.g. my-layout.scss (which compiles into the main CSS file for your layout) you place .page-row-[row-name] selectors and import a layout partial, for example:</p>
+
+<pre class="code-block">
+.page-row-header {
+  @import "ELF/two/two-3-9";  // import the _two-3-9.scss layout partial
+}
+</pre>
+
+<p>The SASS declarations are designed to be "region name agnostic" meaning no region names are ever declared in a partial, instead the ELF relies on psuedo selectors to match region source order.</p>
+
+<p>All partial declarations are designed to reference the parent selector using the ampersand (&) character, to concantenate the "active-region-[count]" or "active-count-[count]" classes with your row selector class, in other words to create a chained selecor which is unique in the stylesheet.</p>
+
+<p>For example:</p>
+
+<pre class="code-block">
+&.active-count-2 {
+  .region {
+    &:first-child {
+      @include span(3 of 12);
+    }
+    &:last-child {
+      @include span(9 omega of 12);
+    }
+  }
+}
+</pre>
+
+<p>By importing the partial directly into the row class declaration and concantenating selectors we isolate the layout CSS within this row. The above examples compile to this:</p>
+
+<pre class="code-block">
+.page-row-header.active-count-2 .region:first-child {
+  width: 23.7288136%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.page-row-header.active-count-2 .region:last-child {
+  width: 74.5762712%;
+  float: right;
+}
+</pre>
+
+<p>See further examples below - they show how this is used in real layouts. Typically declarations would be inside media queries for modern browsers, whereas in the IE8 SCSS file you would not use media queries and only provide a basic non-responsive type layout.</p>
+
+<p>With this basic usage guide you can now go ahead and experiement. It's all you really need to know to get started using the EFL.</p>
+
+
+<hr>
+
+<h2>How the ELF Works</h2>
+
+<p>The following documentation delves in deeper into how the ELF is constructed and how it works.</p>
+
+<h2>Snippet Types</h2>
+
+<p>ELF snippet layouts are all based on a 12 column grid. You will see numbers used in the snippet names - these always add up to 12, or multiples of 12.</p>
+
+<p>There are at least three types of snippets:</p>
+
+<p>Standard snippets keep all the regions on one "line" and always add up to 12.</p>
+
+<p><b>split-row</b> snippets span more than one line - this means some regions will wrap to a new line. These always add up to multiples of 12, for example 24, 36 etc.</p>
+
+<p><b>content-priority</b> snippets employ content source ordering techniques. These also will add up to multiples of 12, or have specific names, such as _inset-left.scss.</p>
+
+<h2>Snippet Naming Conventions</h2>
+
+<pre class="code-block">
+_[region count] : the number of regions in your row, e.g. two, three or four
+sr, cp          : sr is "split row" and cp is "content priority"
+2, 3, 4 etc     : the number of grid columns applied to each region
+12              : 12 means the region spans the full width (all 12 grid columns)
+--              : a double hyphen is where a split row layout breaks to a new line
+</pre>
+
+<p>For example:</p>
+
+<pre class="code-block">
+_two-8-4.scss: two regions, first region is 8 grid columns, second region will be 4 grid columns.
+
+_three-6-6--12.scss: three regions, first and second region are 6 grid columns, split, the last region is full width.
+
+_four-12--4-4-4.scss: four regions, first region is full width, split, the last three regions are all 4 grid columns.
+</pre>
+
+<p>Take some time to study the file names used in the ELF library - also look at the SASS files in each of the shipped layouts (Univer, Metro and Publisher) to see how these have been used.</p>
+
+
+<h2>Real World Usage Example</a></h2>
+
+<p>This example examines the elf-layout-kit layout. Open the main SCSS file for the elf-layout-kit - this is called <code>elf-layout-kit.scss</code></p>
+
+<p>Here we can see how the layout is importing ELF snippets into page row declarations, which are also embedded within media quries (the subject of the next section). This is a complete layout - as you can see just three snippets are imported:</p>
+
+<pre class="code-block">
+@import "global";
+
+// Narrow styles
+@media #{$narrow} {
+  /* Main (4 regions) */
+  .page-row-main {
+    @import 'ELF/four/split-rows/four-sr-12--9-3--12';
+  }
+}
+
+// Narrow Wide Styles
+@media #{$narrow-wide} {
+  /* Header (2 regions) */
+  .page-row-header {
+    @import 'ELF/two/two-3-9';
+  }
+}
+
+// Wide Styles
+@media #{$wide} {
+  /* Main (4 regions) */
+  .page-row-main {
+    @import 'ELF/four/content-priority/four-cp-12--3-6-3';
+  }
+}
+</pre>
+
+<p>One of the powerful features of the ELF is the ability to set one layout in the narrow breakpoint and another in wide. For example you can use the two-4-8 layout in narrow, and the two-3-9 layout in wide - having the effect of making the first region relatively more narrow in wider screens.</p>
