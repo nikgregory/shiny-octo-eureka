@@ -90,6 +90,8 @@ class Generator {
         $fileStrReplace->fileStrReplace($theme_file, $subtheme_type, $machine_name);
         $fileStrReplace->fileStrReplace($info_file, $friendly_name_needle, $friendly_name);
 
+        $fileStrReplace->fileStrReplace($info_file, 'hidden: true', 'hidden: false');
+
         $description = $description ?: 'Sub theme of AT Core';
         $fileStrReplace->fileStrReplace($info_file, $description_needle, $description);
       }
