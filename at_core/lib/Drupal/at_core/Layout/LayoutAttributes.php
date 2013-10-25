@@ -19,6 +19,11 @@ class LayoutAttributes extends PageLayout {
 
     $layout_data = self::buildLayoutDataArrays();
 
+    // If rows are empty return early.
+    if (empty($layout_data['rows'])) {
+      return;
+    }
+
     // Discard CSS key and build array of rows with region and attribute values.
     foreach ($layout_data['rows'] as $row => $regions) {
       $rows[$row] = $regions;

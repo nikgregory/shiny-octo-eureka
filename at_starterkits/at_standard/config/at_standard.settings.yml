@@ -59,3 +59,4 @@ settings:
   drupal_core_jquery_ui_touch-punch: 0
   drupal_core_underscore: 0
   drupal_core_backbone: 0
+  template_suggestion_page: univer

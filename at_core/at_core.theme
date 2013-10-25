@@ -352,7 +352,15 @@ function at_core_preprocess_page(&$variables) {
       if ($selected_layout = at_core_theme_get_setting('settings.layout_master_layout')) {
         $layout_attr = new LayoutAttributes($theme, $selected_layout, $variables['active_regions']);
         $row_attributes = $layout_attr->rowAttributes();
-        $variables += $row_attributes;
+
+        // Check if we have attributes, if for some reason we do not this will
+        // cause a fatal error.
+        if (empty($row_attributes)) {
+          drupal_set_message(t('No layout set, you need to set a layout for the default page or template suggestion in use - visit the Appearance settings page for your theme and set a layout.'), 'error');
+        }
+        else {
+          $variables += $row_attributes;
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 shortcut_module_link: '0'
 settings:
   layouts_enable: 1
-  layout_master_layout: minima
+  layout_master_layout: sparta
   layouts_no_mq_minima: 1
   show_page_suggestions: 0
   disable_backups: 0
@@ -57,3 +57,4 @@ settings:
   drupal_core_jquery_ui_touch-punch: 0
   drupal_core_underscore: 0
   drupal_core_backbone: 0
+  template_suggestion_page: sparta
