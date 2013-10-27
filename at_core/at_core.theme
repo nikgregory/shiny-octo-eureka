@@ -278,7 +278,7 @@ function at_core_page_alter(&$page) {
         // the user can't disable this. We polyfill because all the shipped
         // layouts use :last-child and other pseudo selectors not supported by
         // IE8. Still, the user could use something else, what exactly I don't
-        // know because Selectivzr and jQuery is not enough.
+        // know because Selectivzr depending on jQuery is rubbish.
         $page['#attached']['library'][] = array('at_core', 'ie9js');
       }
     }
@@ -334,9 +334,7 @@ function at_core_preprocess_page(&$variables) {
   global $theme;
 
   if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
-    // Set a variable that holds an array of the active visible regions in the
-    // page. Hidden regions are not our concern. Technically we only need this
-    // if layouts are being used so is disabled unless layouts are enabled.
+    // Set a variable that holds an array of the active visible regions.
     $regions = system_region_list($theme, REGIONS_VISIBLE);
     $variables['active_regions'] = array();
     foreach ($regions as $region_name => $region_label) {
@@ -345,16 +343,13 @@ function at_core_preprocess_page(&$variables) {
       }
     }
 
-    // Row attributes. Here we instantiate a LayoutAttributes object, and call
-    // the rowAttributes method which will return an array of row attributes for
-    // all the active rows. We set advanced classes on rows for theming layouts.
+    // Set advanced classes on rows for theming layouts.
     if (!empty($variables['active_regions'])) {
       if ($selected_layout = at_core_theme_get_setting('settings.layout_master_layout')) {
         $layout_attr = new LayoutAttributes($theme, $selected_layout, $variables['active_regions']);
         $row_attributes = $layout_attr->rowAttributes();
 
-        // Check if we have attributes, if for some reason we do not this will
-        // cause a fatal error.
+        // Check if we have attributes to avoid a fatal error.
         if (empty($row_attributes)) {
           drupal_set_message(t('No layout set, you need to set a layout for the default page or template suggestion in use - visit the Appearance settings page for your theme and set a layout.'), 'error');
         }

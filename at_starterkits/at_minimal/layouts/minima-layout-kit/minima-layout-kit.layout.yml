@@ -1,9 +1,15 @@
 # Minima Layout Kit Configuration.
 
+# Human readable layout name. Required.
+name: 'Minima Layout Kit'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_layout'
+
 # Declare a "series" label for your layout. All layouts in a series
 # must have the same regions, however they can be in different rows and
 # have different attributes. Required.
-series: 'Minima Layout Kit'
+series: 'Minima Layouts'
 
 # Optional description.
 description: 'Bare minimum layout kit.'

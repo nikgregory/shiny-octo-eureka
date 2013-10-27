@@ -1,9 +1,15 @@
 # Sparta Configuration.
 
+# Human readable layout name. Required.
+name: 'Sparta'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_layout'
+
 # Declare a "series" label for your layout. All layouts in a series
 # must have the same regions, however they can be in different rows and
 # have different attributes. Required.
-series: 'Pro Themer'
+series: 'Minima Layouts'
 
 # Optional description.
 description: 'A spartan layout with only nine regions. Uses a simple CSS layout built with Susy Next.'
