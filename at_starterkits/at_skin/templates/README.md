@@ -8,11 +8,9 @@ SEE: at_core/templates/README.md for more information on AT Cores templates and 
 
 ---
 
-## Included Template Overrides
+## Skin theme templates
 
-### page.html.twig
-
-* In Adaptivetheme sub-themes page.html.twig is generated - this means it can be overwritten when saving the theme settings. A backup is always stored in your themes /backup/ directory. Backups are time stamped and never removed, so if you get a build up you can manaually clear them out.
+Skin themes ship with an emtpy templates directory. The directory is entirely overwritten with the source themes (base themes) templates.
 
 ---
 

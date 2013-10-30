@@ -40,22 +40,14 @@ class LayoutGenerator extends PageLayout {
     return $regions;
   }
 
-  // TODO remove if we never use hasChangedLayout
-  public function hasLayoutChanged() {
-    $hasChanged = FALSE;
-    $current_layout = theme_get_setting('settings.layout_master_layout', $this->theme);
-
-    if ($current_layout != $this->selected_layout) {
-      $hasChanged = TRUE;
-    }
-
-    return $hasChanged;
-  }
-
   // Save the info file with new regions list
-  public function saveLayoutRegionsList($disable_backups = '') {
-    $path = drupal_get_path('theme', $this->theme);
-    $info_file = $this->theme . '.info.yml';
+  public function saveLayoutRegionsList($target, $disable_backups = '') {
+    //$path = drupal_get_path('theme', $this->theme);
+    //$info_file = $this->theme . '.info.yml';
+
+    $path = drupal_get_path('theme', $target);
+    $info_file = $target . '.info.yml';
+
     $file_path = $path . '/' . $info_file;
 
     // Create a backup.
@@ -128,8 +120,10 @@ class LayoutGenerator extends PageLayout {
   }
 
   // Save the output of formatPageMarkup()
-  public function savePageTemplate($suggestion = '', $disable_backups = '') {
-    $path = drupal_get_path('theme', $this->theme);
+  public function savePageTemplate($target, $suggestion = '', $disable_backups = '') {
+    //$path = drupal_get_path('theme', $this->theme);
+
+    $path = drupal_get_path('theme', $target);
 
     // Set the template file, either it's page or a page suggestion.
     if (!empty($suggestion)) {
@@ -139,10 +133,10 @@ class LayoutGenerator extends PageLayout {
       $template_file = 'page.html.twig';
     }
 
-    // Set the template path know we know what template file to use.
+    // Set the template path.
     $template_path = $path . '/templates/'. $template_file;
 
-    // Create a backup.
+    // Create a backup. Add a date string, similar to how Backup and Migrate works.
     if ($disable_backups != TRUE) {
       $backup_path = self::backupPrepareDirs($path, 'backup', 'templates');
       $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
@@ -153,6 +147,7 @@ class LayoutGenerator extends PageLayout {
       }
     }
 
+    // Write the template file.
     $page_markup = self::formatPageMarkup();
     file_unmanaged_save_data($page_markup, $template_path, FILE_EXISTS_REPLACE);
   }

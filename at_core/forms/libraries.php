@@ -31,7 +31,6 @@ $form['libraries']['enable']['libraries_disabled'] = array(
   ),
 );
 
-
 // Theme Libraries
 $theme_name = str_replace('_', ' ', ucfirst($theme));
 $form['libraries']['theme'] = array(
@@ -43,22 +42,27 @@ $form['libraries']['theme'] = array(
     'visible' => array('input[name="settings_libraries_enable"]' => array('checked' => TRUE)),
   ),
 );
+// Libraries can be inherited, so we print all libraries from the active theme and base
+// themes, but not at_core.
+if (!empty($libraries)) {
+  foreach ($libraries as $theme_library => $theme_library_data) {
+    foreach ($theme_library_data as $library => $data) {
 
-if (!empty($libraries[$theme])) {
-  foreach ($libraries[$theme] as $library => $data) {
-    // dots trigger a new array in CMI settings
-    $library_setting = str_replace('.', '_', strtolower($library));
-    $form['libraries']['theme'][$library_setting] = array(
-      '#type' => 'details',
-      '#title' => t($library),
-      '#collapsed' => TRUE,
-      '#collapsible' => TRUE,
-    );
-    $form['libraries']['theme'][$library_setting]["settings_library_$library_setting"] = array(
-      '#type' => 'checkbox',
-      '#title' => t($library),
-      '#default_value' => theme_get_setting("settings.library_$library_setting", $theme),
-    );
+      // dots trigger a new array in CMI settings
+      $library_setting = str_replace('.', '_', strtolower($library));
+
+      $form['libraries']['theme'][$library_setting] = array(
+        '#type' => 'details',
+        '#title' => t($library),
+        '#collapsed' => TRUE,
+        '#collapsible' => TRUE,
+      );
+      $form['libraries']['theme'][$library_setting]["settings_library_$library_setting"] = array(
+        '#type' => 'checkbox',
+        '#title' => t($library),
+        '#default_value' => theme_get_setting("settings.library_$library_setting", $theme),
+      );
+    }
   }
 }
 else {

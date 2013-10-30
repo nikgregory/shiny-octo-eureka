@@ -1,0 +1,69 @@
+//
+// Utility mixins
+//
+// ---------------------------------------------------------------------------
+
+// Markup free clearing
+// http://www.stubbornella.org/content/2012/05/02/cross-browser-debugging-css/
+@mixin cf {
+  overflow: hidden;   // New formatting context in better browsers
+  *overflow: visible; // Protect IE7 and older from the overflow property
+  *zoom: 1;           // Give IE hasLayout, a new formatting context equivalent
+}
+
+// Image replacement
+// Kellum Method: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
+// Extended by HTML5BP http://html5boilerplate.com/docs/css/
+@mixin ir {
+  display: block !important;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-color: transparent;
+}
+
+// Hide content but maintain accessibility
+@mixin visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+
+// Turns off the element-invisible effect
+@mixin visually-hidden-off {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+}
+
+// Visually hidden but focusable, e.g. skip links
+@mixin visually-hidden-focusable {
+  @extend visually-hidden;
+  &.focusable {
+    &:active,
+    &:focus {
+      @include visually-hidden-off;
+    }
+  }
+}
+
+// Shift content offscreen, can be usefull when you reall need to do this
+@mixin offscreen {
+  position: absolute;
+  top: -99999em;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  outline: 0;
+}

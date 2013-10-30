@@ -1,14 +1,31 @@
 <?php
 
 use Drupal\at_core\Layout\LayoutSettings;
+use Drupal\at_core\Theme\ThemeSettingsInfo;
 
-// Layouts Form
-//----------------------------------------------------------------------
+$themeInfo = new ThemeSettingsInfo($theme);
+$providers = $themeInfo->baseThemeInfo('base_themes');
 
+// Unset at_core, it has no layouts.
+unset($providers['at_core']);
+
+// Push the current theme into the array, if it has layouts we need them.
+$providers[$theme] = $theme;
+
+foreach ($providers as $key => $provider_name) {
+  $layout_config[$key] = new LayoutSettings($key);
+  $options_data[$key]  = $layout_config[$key]->layoutOptions();
+
+  $layout_config[$key] = new LayoutSettings($key);
+  $settings_data[$key] = $layout_config[$key]->settingsPrepareData();
+}
+
+//$options_data  = $layout_config->layoutOptions();
+//dsm($options_data);
 // Get the layout configuration for all available layouts.
-$layout_config = new LayoutSettings($theme);
-$settings_data = $layout_config->settingsPrepareData();
-$options_data  = $layout_config->layoutOptions();
+//$layout_config = new LayoutSettings($theme);
+//$settings_data = $layout_config->settingsPrepareData();
+//dsm($settings_data);
 
 $form['layouts'] = array(
   '#type' => 'details',
@@ -67,10 +84,20 @@ $form['layouts']['select']['select_type']['layout_type_select'] = array(
 
 // Default layout and Series message.
 if ($default_layout = theme_get_setting('settings.template_suggestion_page', $theme)) {
-  if ($settings_data) {
-    $default_series = $settings_data[$default_layout]['series'];
 
-    $default_series_markup = t('<label>Current default layout:</label> <em>!default_layout</em> from the <em>!default_series</em> series.', array('!default_layout' => ucfirst($default_layout), '!default_series' => $default_series));
+  // Dig deep for the current default layout series key
+  if ($settings_data) {
+    foreach ($settings_data as $theme_name => $layouts) {
+      foreach ($layouts as $layout_name => $layout_data) {
+        if ($default_layout == $layout_name) {
+          $default_series = $layout_data['series'];
+          $default_provider = $theme_name;
+          break;
+        }
+      }
+    }
+
+    $default_series_markup = t('<label>Current default layout:</label> <em>!default_layout</em> from the <em>!default_series</em> series.<br>(Provided by !default_provider)', array('!default_layout' => ucfirst($default_layout), '!default_series' => $default_series, '!default_provider' => $default_provider));
   }
 }
 else {
@@ -175,38 +202,45 @@ $form['layouts']['select']['layout'] = array(
 $layout_series_header = array(
   'name' => t('Name'),
   'series' => t('Series'),
+  'provider' => t('Provider'),
   'version' =>  t('Version'),
   'desc' => t('Description'),
   'screenshot' => t('Screenshot'),
 );
-foreach ($options_data as $series => $options) {
-  if ($series == 'not-set') {
-    drupal_set_message(t('Series not set for one or more layouts - this could cause issues when setting layouts for template suggestions. If you have set a series check the layout name is identical for both the layout folder and the layout.yml file.'), 'warning');
-  }
-  foreach ($options as $option) {
-    $row_class = 'table-row-'. drupal_html_class($option['name']);
-    $name_key = str_replace(' ', '_', strtolower($option['name']));
-    $table_options_data[$name_key] = array(
-      'name' => array('data' => $option['name'], 'class' => array('field-name')),
-      'series' => array('data' => $option['series'], 'class' => array('field-series')),
-      'version' => array('data' => $option['version'], 'class' => array('field-version')),
-      'desc' => array('data' => $option['desc'], 'class' => array('field-desc')),
-      'screenshot' => array('data' => $option['screenshot'], 'class' => array('field-screenshot')),
-      '#attributes' => array('class' => array($row_class)),
-    );
+foreach ($providers as $key => $provider_name) {
+  foreach ($options_data[$key] as $series => $options) {
+    if ($series == 'not-set') {
+      drupal_set_message(t('Series not set for one or more layouts - this could cause issues when setting layouts for template suggestions. If you have set a series check the layout name is identical for both the layout folder and the layout.yml file.'), 'warning');
+    }
+    foreach ($options as $option) {
+      $row_class = 'table-row-'. drupal_html_class($option['name']);
+      $name_key = str_replace(' ', '_', strtolower($option['name']));
+      $table_options_data[$name_key] = array(
+        'name' => array('data' => $option['name'], 'class' => array('field-name')),
+        'series' => array('data' => $option['series'], 'class' => array('field-series')),
+
+        'provider' => array('data' => $provider_name, 'class' => array('field-provider')),
+
+        'version' => array('data' => $option['version'], 'class' => array('field-version')),
+        'desc' => array('data' => $option['desc'], 'class' => array('field-desc')),
+        'screenshot' => array('data' => $option['screenshot'], 'class' => array('field-screenshot')),
+        '#attributes' => array('class' => array($row_class)),
+      );
+    }
   }
 }
+
 $form['layouts']['select']['layout']['title'] = array(
   '#type' => 'container',
   '#markup' => t('<h3>Select Layout</h3>'),
 );
-$form['layouts']['select']['layout']['settings_layout_master_layout'] = array(
+$form['layouts']['select']['layout']['settings_selected_layout'] = array(
   '#title' => t('Select Layout'),
   '#type' => 'tableselect',
   '#header' => $layout_series_header,
   '#options' => $table_options_data,
   '#multiple' => FALSE,
-  '#default_value' => theme_get_setting('settings.layout_master_layout', $theme),
+  '#default_value' => theme_get_setting('settings.selected_layout', $theme),
   '#attributes' => array('class' => array('table-layouts')),
 );
 
@@ -227,25 +261,32 @@ $form['layouts']['select']['options']['no_mq_css'] = array(
   '#markup' => t('If you require support for IE8 check the option for your chosen layout or layouts. Only layouts that include support for IE8 are listed here.</p>'),
 );
 
-if ($settings_data) {
-  foreach ($settings_data as $layout_name => $values) {
-    if (isset($values['css']['no_mq'])) {
-      $layout_title = drupal_ucfirst($layout_name);
-      $form['layouts']['select']['options']['no_mq_css']["settings_layouts_no_mq_$layout_name"] = array(
-        '#type' => 'checkbox',
-        '#title' => t('!layout', array('!layout' => $layout_title)),
-        '#default_value' => theme_get_setting("settings.layouts_no_mq_$layout_name", $theme),
-        '#attributes' => array('class' => array('no-mq-file-checkbox')),
-        '#states' => array(
-          'visible' => array(
-             //':input[name="settings_layout_master_layout"]' => array('value' => $layout_name),
-          ),
-        ),
-      );
-    }
+//if ($settings_data) {
+  //foreach ($settings_data as $layout_name => $values) {
 
-    // Build the selectors lists, we use them later in the form.
-    $selectors[$layout_name] = $layout_config->formatSelectors($layout_name);
+
+if ($settings_data) {
+  foreach ($settings_data as $theme_name => $layouts) {
+    foreach ($layouts as $layout_name => $layout_data) {
+
+      if (isset($layout_data['css']['no_mq'])) {
+        $layout_title = drupal_ucfirst($layout_name);
+        $form['layouts']['select']['options']['no_mq_css']["settings_layouts_no_mq_$layout_name"] = array(
+          '#type' => 'checkbox',
+          '#title' => t('!layout', array('!layout' => $layout_title)),
+          '#default_value' => theme_get_setting("settings.layouts_no_mq_$layout_name", $theme),
+          '#attributes' => array('class' => array('no-mq-file-checkbox')),
+          '#states' => array(
+            'visible' => array(
+               //':input[name="settings_selected_layout"]' => array('value' => $layout_name),
+            ),
+          ),
+        );
+      }
+
+      // Build the selectors lists, we use them later in the form.
+      $selectors[$layout_name] = $layout_config[$theme_name]->formatSelectors($layout_name);
+    }
   }
 }
 

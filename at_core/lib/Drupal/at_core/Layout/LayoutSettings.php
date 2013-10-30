@@ -78,16 +78,22 @@ class LayoutSettings extends PageLayout {
     $options = array();
     $screenshot_link_title = t('Enlarge');
     foreach ($options_data as $layout => $values) {
+
+      // Fallback name in case name: key isset but empty for some reason.
       $layout_label = drupal_ucfirst($layout);
+
+      // Prepare variables for the screenshot.
       $screenshot_path = base_path() . $this->layouts_path . $layout . '/' . $values['screenshot'];
       $screenshot_title = t('Screenshot for !layout_label', array('!layout_label' => $layout_label));
 
+      // Build the layout options
       $output = array();
-      $output['name']       = $layout_label;
+      $output['name']       = isset($values['name']) ? $values['name'] : $layout_label;
       $output['desc']       = isset($values['description']) ? $values['description'] : '';
       $output['series']     = isset($values['series'])      ? $values['series'] : 'not-set';
       $output['version']    = isset($values['version'])     ? $values['version'] : '';
       $output['screenshot'] = isset($values['screenshot'])  ? '<a title="' . $screenshot_title . '" href="' . $screenshot_path . '" rel="lightbox"><img title="' . $screenshot_link_title . '" src="' . $screenshot_path . '" alt="'. $layout_label . '" /></a>' : '';
+
       // Build the final structure for output.
       $options[$output['series']][$layout] = $output;
     }

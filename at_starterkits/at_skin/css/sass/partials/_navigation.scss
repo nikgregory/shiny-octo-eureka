@@ -1,0 +1,48 @@
+//
+// Style menu blocks and other primay navigation elements such as the Menu bar
+// region and blocks.
+//
+// ---------------------------------------------------------------------------
+@import "base";
+
+
+// Menus
+// ---------------------------------------------------------------------------
+ul.menu {
+  li {
+
+    a {
+
+      &:hover,
+      &:focus {}
+    }
+  }
+}
+
+
+// Menu Bar menus
+// ---------------------------------------------------------------------------
+.region-menu-bar {
+
+  .block {}
+
+  .menu {
+    margin: 0;
+
+    li {
+      float: left;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      padding: 5px 10px;
+      display: block;
+
+      &:hover,
+      &:focus {}
+    }
+  }
+}
+

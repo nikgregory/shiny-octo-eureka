@@ -1,4 +1,4 @@
-shortcut_module_link: '0'
+shortcut_module_link: 0
 settings:
   layouts_enable: 1
   layout_master_layout: sparta
@@ -58,3 +58,7 @@ settings:
   drupal_core_underscore: 0
   drupal_core_backbone: 0
   template_suggestion_page: sparta
+  selected_layout: sparta
+  layouts_no_mq_sparta: 0
+  default_layout_provider: at_minimal
+  template_suggestion_provider_page: at_minimal

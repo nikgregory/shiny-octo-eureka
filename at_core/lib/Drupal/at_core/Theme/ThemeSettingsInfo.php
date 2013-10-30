@@ -52,6 +52,7 @@ class ThemeSettingsInfo extends ThemeInfo {
     // These are just generator "templates, not to be used directly.
     unset($base_themes['at_standard']);
     unset($base_themes['at_minimal']);
+    unset($base_themes['at_skin']);
     return $base_themes;
   }
 

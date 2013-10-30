@@ -17,9 +17,11 @@ class FileStripReplace {
    *   The replacement string.
    */
   public function fileStrReplace($file_path, $find, $replace) {
-    $file_contents = file_get_contents($file_path);
-    $file_contents = str_replace($find, $replace, $file_contents);
-    file_put_contents($file_path, $file_contents);
+    if (file_exists($file_path)) {
+      $file_contents = file_get_contents($file_path);
+      $file_contents = str_replace($find, $replace, $file_contents);
+      file_put_contents($file_path, $file_contents);
+    }
   }
 
 } // end class

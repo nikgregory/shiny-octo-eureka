@@ -39,6 +39,10 @@ class ThemeLibraries {
 
     // Build paths to retrieve library files from.
     $paths[$this->theme] = drupal_get_path('theme', $this->theme) . '/libraries/';
+
+    // For now we unset any at_core libraries, this could change in the future.
+    unset($baseThemes['at_core']);
+
     foreach ($baseThemes as $key => $base_theme_name) {
       $paths[$key] = drupal_get_path('theme', $key) . '/libraries/';
     }

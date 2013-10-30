@@ -50,6 +50,7 @@ class PageLayout {
 
   // Extract rows and regions, css files for the selected layout.
   public function buildLayoutDataArrays() {
+    // Return cache data so we avoid glob/scandir on every page load, this is pretty quick.
     if ($cache = cache()->get("$this->theme:$this->selected_layout")) {
       $selected = $cache->data;
     }
@@ -66,7 +67,7 @@ class PageLayout {
         cache()->set("$this->theme:$this->selected_layout", $selected);
       }
       else {
-        return;
+        return; // selected layout not found or not readable etc.
       }
     }
 
