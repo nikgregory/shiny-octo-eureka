@@ -5,7 +5,7 @@ base theme: at_core
 subtheme type: at_skin
 description: ''
 core: 8.x
-#hidden: true
+hidden: true
 stylesheets:
   all:
     - 'css/skin.css'

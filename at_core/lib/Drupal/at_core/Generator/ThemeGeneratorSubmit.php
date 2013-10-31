@@ -9,7 +9,7 @@ use Drupal\at_core\Helpers\FileStripReplace;
 use Drupal\at_core\Helpers\RemoveDirectory;
 use Drupal\at_core\Helpers\BuildInfoFile;
 
-class Generator {
+class ThemeGeneratorSubmit {
 
   /**
    * Generate a sub-theme.
@@ -17,7 +17,7 @@ class Generator {
    * Need to validate some of this stuff and write proper error handling for when things
    * go wrong, rather than just saying hooray, it worked, when no, it did not...
    */
-  public function generateSubtheme($values) {
+  public function generateTheme($values) {
 
     // Prepare form values and set them into variables.
     $machine_name      = $values['generate']['generate_machine_name'];
