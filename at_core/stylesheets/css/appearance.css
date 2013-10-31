@@ -3,18 +3,33 @@
 }
 
 /* Layout */
+#edit-layouts .table-layouts .field-hidden {
+  display: none;
+}
+#edit-layouts .table-layouts td {
+  vertical-align: top;
+  padding: 20px 10px;
+}
 #edit-layouts .table-layouts img {
   display: block;
   max-width: 200px;
   max-height: 240px;
   height: auto;
 }
-#edit-layouts .table-layouts .field-series,
-#edit-layouts .table-layouts .field-name {
+#edit-layouts .table-layouts h3 {
+  margin: 0 0 1.15em;
+}
+#edit-layouts .table-layouts dl {
+  white-space: nowrap;
+  min-width: 15em;
+}
+#edit-layouts .table-layouts dl dt {
+  float: left;
+  width: 5.5em;
   font-weight: 700;
 }
-#edit-layouts .table-layouts .field-name {
-  font-size: 1.154em;
+#edit-layouts .table-layouts dl dd {
+  margin: 0;
 }
 
 #edit-select {

@@ -27,6 +27,7 @@ function at_core_settings_form_validate(&$form, &$form_state) {
 
         // Get the providers for both selected and default layouts, the can be different.
         $selected_layout_provider = $form['layouts']['select']['layout']['settings_selected_layout']['#options'][$selected_layout]['provider']['data'];
+
         $default_layout_provider = $form['layouts']['select']['layout']['settings_selected_layout']['#options'][$default_layout]['provider']['data'];
 
         // Get the selected layout data

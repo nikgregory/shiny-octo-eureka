@@ -12,6 +12,10 @@ unset($providers['at_core']);
 // Push the current theme into the array, if it has layouts we need them.
 $providers[$theme] = $theme;
 
+// Bit of a hack, the classes were built to handle one provider, later it was
+// decided to allow sub-themes to inherit base theme layouts, so we need to
+// loop and instantiate foreach provider. The classes could be modified to
+// take an array of providers.
 foreach ($providers as $key => $provider_name) {
   $layout_config[$key] = new LayoutSettings($key);
   $options_data[$key]  = $layout_config[$key]->layoutOptions();
@@ -19,13 +23,6 @@ foreach ($providers as $key => $provider_name) {
   $layout_config[$key] = new LayoutSettings($key);
   $settings_data[$key] = $layout_config[$key]->settingsPrepareData();
 }
-
-//$options_data  = $layout_config->layoutOptions();
-//dsm($options_data);
-// Get the layout configuration for all available layouts.
-//$layout_config = new LayoutSettings($theme);
-//$settings_data = $layout_config->settingsPrepareData();
-//dsm($settings_data);
 
 $form['layouts'] = array(
   '#type' => 'details',
@@ -71,7 +68,7 @@ $form['layouts']['select'] = array(
   ),
 );
 
-// Select layout type (default, suggestion or disable layout generation)
+// Select Layout Type container.
 $form['layouts']['select']['select_type'] = array(
   '#type' => 'container',
 );
@@ -97,7 +94,7 @@ if ($default_layout = theme_get_setting('settings.template_suggestion_page', $th
       }
     }
 
-    $default_series_markup = t('<label>Current default layout:</label> <em>!default_layout</em> from the <em>!default_series</em> series.<br>(Provided by !default_provider)', array('!default_layout' => ucfirst($default_layout), '!default_series' => $default_series, '!default_provider' => $default_provider));
+    $default_series_markup = t('<label>Current default layout:</label> <em>!default_layout</em> from the <em>!default_series</em> series.', array('!default_layout' => ucfirst($default_layout), '!default_series' => $default_series, '!default_provider' => $default_provider));
   }
 }
 else {
@@ -108,7 +105,6 @@ else {
     '#markup' => $series_not_set_markup,
   );
 }
-
 
 // -- none -- message.
 $form['layouts']['select']['select_type']['none_set'] = array(
@@ -121,7 +117,7 @@ $form['layouts']['select']['select_type']['none_set'] = array(
   ),
 );
 
-// Default layout message.
+// Default Layout container and Help.
 $form['layouts']['select']['select_type']['default_set'] = array(
   '#type' => 'container',
   '#markup' => t('
@@ -137,7 +133,7 @@ $form['layouts']['select']['select_type']['default_set'] = array(
   ),
 );
 
-// Default layout not set message.
+// Default Layout "not set" message.
 $form['layouts']['select']['select_type']['default_not_set'] = array(
   '#type' => 'container',
   '#markup' => t('First set the default page layout - no default page layout detected.'),
@@ -146,30 +142,19 @@ $form['layouts']['select']['select_type']['default_not_set'] = array(
   ),
 );
 
-// Enter the suggestion if default layout detected.
+// Suggestions container.
 $form['layouts']['select']['select_type']['suggestions'] = array(
   '#type' => 'container',
-  '#markup' => t('
-    <label>Add or Change a Template Suggestion</label>
-  '),
-  '#states' => array(
-    'visible' => array('select[name="layout_type_select"]' => array('value' => 'default_layout')),
-  ),
+  '#markup' => t('<label>Add or Change a Template Suggestion</label>'),
   '#states' => array(
     'visible' => array('select[name="layout_type_select"]' => array('value' => 'template_suggestion')),
   ),
 );
 
-if (isset($default_series)) {
-  $suggestion_series_message = $default_series;
-}
-else {
-  $suggestion_series_message = '';
-}
-
+// Suggestions input and help.
+$suggestion_series_message = isset($default_series) ? $default_series : '-- not set --';
 $form['layouts']['select']['select_type']['suggestions']['template_suggestion_name'] = array(
   '#type' => 'textfield',
-  //'#title' => t('Enter Template Suggestion'),
   '#size' => 20,
   '#field_prefix' => 'page--',
   '#field_suffix' => '.html.twig',
@@ -183,7 +168,7 @@ $form['layouts']['select']['select_type']['suggestions']['template_suggestion_na
     <p>See the Help tab section "Using Layouts" for more information on template suggestions.</p>', array('!suggestion_series_message' => $suggestion_series_message)),
 );
 
-
+// Print the default layout and series message above the table.
 if (isset($default_series_markup)) {
   $form['layouts']['select']['select_type']['default_layout'] = array(
     '#type' => 'container',
@@ -191,37 +176,41 @@ if (isset($default_series_markup)) {
   );
 }
 
-
-// Layouts table
+// Layouts table container.
 $form['layouts']['select']['layout'] = array(
   '#type' => 'container',
   '#states' => array(
     'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
   ),
 );
+
+// Prepare table select headers.
 $layout_series_header = array(
-  'name' => t('Name'),
-  'series' => t('Series'),
-  'provider' => t('Provider'),
-  'version' =>  t('Version'),
-  'desc' => t('Description'),
-  'screenshot' => t('Screenshot'),
+  'name' => array('data' => t('Name'), 'class' => array('field-name')),
+  'provider' => array('data' => t('Provider'), 'class' => array('field-providers field-hidden')),
+  'desc' => array('data' => t('Description'), 'class' => array('field-desc')),
+  'screenshot' => array('data' => t('Screenshot'), 'class' => array('field-screenshot')),
 );
-foreach ($providers as $key => $provider_name) {
-  foreach ($options_data[$key] as $series => $options) {
+
+// Prepare table select data.
+foreach ($providers as $provider_key => $provider_name) {
+  foreach ($options_data[$provider_key] as $series => $options) {
     if ($series == 'not-set') {
       drupal_set_message(t('Series not set for one or more layouts - this could cause issues when setting layouts for template suggestions. If you have set a series check the layout name is identical for both the layout folder and the layout.yml file.'), 'warning');
     }
     foreach ($options as $option) {
       $row_class = 'table-row-'. drupal_html_class($option['name']);
       $name_key = str_replace(' ', '_', strtolower($option['name']));
+
+      $meta  = '<dl class="layout-meta">';
+      $meta .= '<dt>Series:</dt><dd>' . $option['series'] . '</dd>';
+      $meta .= '<dt>Version:</dt><dd>' . $option['version'] . '</dd>';
+      $meta .= '<dt>Provider:</dt><dd>' . $provider_name . '</dd>';
+      $meta .= '</dl>';
+
       $table_options_data[$name_key] = array(
-        'name' => array('data' => $option['name'], 'class' => array('field-name')),
-        'series' => array('data' => $option['series'], 'class' => array('field-series')),
-
-        'provider' => array('data' => $provider_name, 'class' => array('field-provider')),
-
-        'version' => array('data' => $option['version'], 'class' => array('field-version')),
+        'name' => array('data' => '<h3>'. $option['name'] . '</h3>' . $meta, 'class' => array('field-name')),
+        'provider' => array('data' => $provider_key, 'class' => array('field-providers field-hidden')),
         'desc' => array('data' => $option['desc'], 'class' => array('field-desc')),
         'screenshot' => array('data' => $option['screenshot'], 'class' => array('field-screenshot')),
         '#attributes' => array('class' => array($row_class)),
@@ -230,10 +219,13 @@ foreach ($providers as $key => $provider_name) {
   }
 }
 
+// Captions do not appear to be supported for table select, use container to emulate.
 $form['layouts']['select']['layout']['title'] = array(
   '#type' => 'container',
   '#markup' => t('<h3>Select Layout</h3>'),
 );
+
+// Print the layouts table select data.
 $form['layouts']['select']['layout']['settings_selected_layout'] = array(
   '#title' => t('Select Layout'),
   '#type' => 'tableselect',
@@ -244,7 +236,7 @@ $form['layouts']['select']['layout']['settings_selected_layout'] = array(
   '#attributes' => array('class' => array('table-layouts')),
 );
 
-// Options.
+// Internet Explorer Options.
 $form['layouts']['select']['options'] = array(
   '#type' => 'details',
   '#title' => t('Internet Explorer Options'),
@@ -255,16 +247,13 @@ $form['layouts']['select']['options'] = array(
   ),
 );
 
-// Add a checkbox for each layouts IE8/No Media queries toggle.
+// Help message for IE8 options.
 $form['layouts']['select']['options']['no_mq_css'] = array(
   '#type' => 'container',
   '#markup' => t('If you require support for IE8 check the option for your chosen layout or layouts. Only layouts that include support for IE8 are listed here.</p>'),
 );
 
-//if ($settings_data) {
-  //foreach ($settings_data as $layout_name => $values) {
-
-
+// Add an IE8 togggle setting foreach layout.
 if ($settings_data) {
   foreach ($settings_data as $theme_name => $layouts) {
     foreach ($layouts as $layout_name => $layout_data) {
@@ -276,15 +265,10 @@ if ($settings_data) {
           '#title' => t('!layout', array('!layout' => $layout_title)),
           '#default_value' => theme_get_setting("settings.layouts_no_mq_$layout_name", $theme),
           '#attributes' => array('class' => array('no-mq-file-checkbox')),
-          '#states' => array(
-            'visible' => array(
-               //':input[name="settings_selected_layout"]' => array('value' => $layout_name),
-            ),
-          ),
         );
       }
 
-      // Build the selectors lists, we use them later in the form.
+      // Piggy back on the loop logic and build the selectors lists, we use them later in the form.
       $selectors[$layout_name] = $layout_config[$theme_name]->formatSelectors($layout_name);
     }
   }
@@ -301,6 +285,8 @@ $form['layouts']['selectors'] = array(
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
 );
+
+// Loop selectors and implode values.
 foreach ($selectors as $layout_name => $css_selectors) {
   foreach($css_selectors as $thiskey => $thesevalues) {
     foreach ($thesevalues as $key => $values) {
@@ -308,6 +294,8 @@ foreach ($selectors as $layout_name => $css_selectors) {
     }
   }
 }
+
+// Print selectors foreach layout in a details element.
 foreach ($these_selectors as $layout_name => $selector_strings) {
   $form['layouts']['selectors'][$layout_name] = array(
     '#type' => 'details',
@@ -322,7 +310,7 @@ foreach ($these_selectors as $layout_name => $selector_strings) {
   );
 }
 
-// Advanced settings
+// Advanced settings - only Backup for now, could be more later.
 $form['layouts']['advanced'] = array(
   '#type' => 'details',
   '#title' => t('Backups'),
@@ -345,7 +333,7 @@ $form['layouts']['advanced']['settings_disable_backups'] = array(
 // need this to get the "series" key for the page.html.twig layout to compare it to
 // the series key for any suggestions - these must match, aka a suggestion cannot select
 // a layout from another series. This criteria is imposed to prevent users blowing up
-// their sites - Layouts in a series all have the same regions (or a subset, maybe, TBC).
+// their sites - Layouts in a series all have the same regions.
 $form['layouts']['select']['settings_template_suggestion_page'] = array(
   '#type' => 'hidden',
   '#default_value' => $default_layout,

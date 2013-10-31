@@ -12,6 +12,15 @@
 
   .table-layouts {
 
+    .field-hidden {
+      display: none;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 20px 10px;
+    }
+
     img {
       display: block;
       max-width: 200px;
@@ -19,13 +28,23 @@
       height: auto;
     }
 
-    .field-series,
-    .field-name {
-      font-weight: 700;
+    h3 {
+      margin: 0 0 1.15em;
     }
 
-    .field-name {
-      font-size: 1.154em;
+    dl {
+      white-space: nowrap;
+      min-width: 15em;
+
+      dt {
+        float: left;
+        width: 5.5em;
+        font-weight: 700;
+      }
+
+      dd {
+        margin: 0;
+      }
     }
   }
 }
