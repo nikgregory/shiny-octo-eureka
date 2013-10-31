@@ -1,6 +1,6 @@
  // Style the theme settings page.
 @import "compass/css3";
-
+@import "utility";
 
 #block-help {
   display: none;
@@ -26,6 +26,23 @@
       max-width: 200px;
       max-height: 240px;
       height: auto;
+    }
+
+    .field-screenshot {
+      a {
+        color: #747474;
+        &:hover,
+        &:focus {
+          color: #595959;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .plus-icon {
+      text-align: left;
+      font-size: 0.8em;
+      display: block;
     }
 
     h3 {

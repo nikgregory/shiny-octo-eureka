@@ -16,6 +16,18 @@
   max-height: 240px;
   height: auto;
 }
+#edit-layouts .table-layouts .field-screenshot a {
+  color: #747474;
+}
+#edit-layouts .table-layouts .field-screenshot a:hover, #edit-layouts .table-layouts .field-screenshot a:focus {
+  color: #595959;
+  text-decoration: none;
+}
+#edit-layouts .table-layouts .plus-icon {
+  text-align: left;
+  font-size: 0.8em;
+  display: block;
+}
 #edit-layouts .table-layouts h3 {
   margin: 0 0 1.15em;
 }

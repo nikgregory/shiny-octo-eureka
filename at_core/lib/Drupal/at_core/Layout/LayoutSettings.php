@@ -85,6 +85,7 @@ class LayoutSettings extends PageLayout {
       // Prepare variables for the screenshot.
       $screenshot_path = base_path() . $this->layouts_path . $layout . '/' . $values['screenshot'];
       $screenshot_title = t('Screenshot for !layout_label', array('!layout_label' => $layout_label));
+      $screenshot_enlarge_text = t('View larger');
 
       // Build the layout options
       $output = array();
@@ -92,7 +93,7 @@ class LayoutSettings extends PageLayout {
       $output['desc']       = isset($values['description']) ? $values['description'] : '';
       $output['series']     = isset($values['series'])      ? $values['series'] : 'not-set';
       $output['version']    = isset($values['version'])     ? $values['version'] : '';
-      $output['screenshot'] = isset($values['screenshot'])  ? '<a title="' . $screenshot_title . '" href="' . $screenshot_path . '" rel="lightbox"><img title="' . $screenshot_link_title . '" src="' . $screenshot_path . '" alt="'. $layout_label . '" /></a>' : '';
+      $output['screenshot'] = isset($values['screenshot'])  ? '<a title="' . $screenshot_title . '" href="' . $screenshot_path . '" rel="lightbox"><img src="' . $screenshot_path . '" alt="'. $layout_label . '" /><i class="plus-icon">' . $screenshot_enlarge_text . '</i></a>' : '';
 
       // Build the final structure for output.
       $options[$output['series']][$layout] = $output;
