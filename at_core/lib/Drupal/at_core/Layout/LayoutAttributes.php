@@ -58,10 +58,13 @@ class LayoutAttributes extends PageLayout {
       $total_region_count[$row_key]['total_count'] = count($row_values['regions']);
 
       // Intersect all-regions with active-regions; only set attributes for visible active-regions.
-      foreach ($row_values['regions'] as $region_key => $region_name) {
-        $row_values[] = $region_key;
+      if (!empty($row_values['regions'])) {
+        foreach ($row_values['regions'] as $region_key => $region_name) {
+          $new_row_values[$row_key][] = $region_key;
+        }
       }
-      $row_region_intersect[$row_key] = array_intersect($row_values, $this->regions);
+
+      $row_region_intersect[$row_key] = array_intersect($new_row_values[$row_key], $this->regions);
     }
 
     // Set additional attributes for rows.
@@ -70,10 +73,10 @@ class LayoutAttributes extends PageLayout {
       // Set a boolean for active regions, assume false.
       $variables[$row_region_key . '__regions']['active'] = FALSE;
 
-      // Count how many active regions.
-      $count = count($row_region_values);
-
       if (!empty($row_region_intersect[$row_region_key])) {
+
+        // Count how many active regions.
+        $count = count($row_region_values);
 
         // If active regions set to true to print the row, basically a catch all condition.
         $variables[$row_region_key . '__regions']['active'] = TRUE;
