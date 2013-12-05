@@ -172,7 +172,8 @@ function adaptivetheme_js_alter(&$javascript) {
     $javascript['misc/vertical-tabs.js'] = drupal_js_defaults($file);
   }
 
-  // Combine JS files into one per type
+  // Combine JS files into one per type, this is a bit mad and
+  // we probably shouldn't encourage such things :)
   if (at_get_setting('combine_js_files', $theme_key) === 1) {
     uasort($javascript, 'drupal_sort_css_js');
     $weight = 0;
@@ -372,6 +373,8 @@ function adaptivetheme_page_alter(&$page) {
       }
     }
   }
+
+  //kpr($page);
 }
 
 // Abstrat move regions processing
@@ -438,7 +441,9 @@ function adaptivetheme_form_search_form_alter(&$form, $form_state) {
   // The problem with Drupals standard Advanced search form is that each
   // criterion group is wrapped in a DIV, whereas it should be a fieldset with
   // a legend, this is better semantics and improves accessibility by
-  // logically grouping field items.
+  // logically grouping field items. We make this optional via a theme setting,
+  // beacuse some people bitched that it broke some modules that require
+  // crappy markup.
   if (at_get_setting('adv_search_extra_fieldsets') === 1) {
     if (isset($form['module']) && $form['module']['#value'] == 'node' && user_access('use advanced search')) {
       // Keyword boxes:
@@ -585,7 +590,9 @@ function adaptivetheme_wysiwyg_editor_settings_alter(&$settings, &$context) {
 }
 
 /**
- * Output for the debug panels test.
+ * Output for the debug panels test. This is pretty sucky because its
+ * hard coded and therefor does not include any custom Panels layout
+ * plugins you might include in a subtheme, bad eh?
  */
 function at_debug_panels() {
   $output = <<<EOF

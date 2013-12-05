@@ -206,7 +206,7 @@ function at_get_css_files($theme_name) {
 
 /**
  * Return a device context.
- * Wrapper for mobile_detect_get_object and
+ * Wrapper for mobile_detect_get_object() and
  * browscap_get_browser().
  */
 function at_get_browser() {
@@ -234,3 +234,4 @@ function at_get_browser() {
 
   return $browser;
 }
+

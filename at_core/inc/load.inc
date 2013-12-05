@@ -698,8 +698,20 @@ function at_load_menu_toggle($path, $theme_name) {
   }
   drupal_add_js(array('adaptivetheme' => $cfg), 'setting');
 
-  // Load the JS file
   $path_to_at_core = drupal_get_path('theme', 'adaptivetheme');
+
+  // Load additional plugins
+  drupal_add_js($path_to_at_core . '/scripts/outside-events.js', array(
+    'type' => 'file',
+    'scope' => 'header',
+    'group' => JS_THEME,
+    'weight'=> 999,
+    'preprocess' => TRUE,
+    'cache' => TRUE,
+    )
+  );
+
+  // Load the JS file
   drupal_add_js($path_to_at_core . '/scripts/menu-toggle.js', array(
     'type' => 'file',
     'scope' => 'header',

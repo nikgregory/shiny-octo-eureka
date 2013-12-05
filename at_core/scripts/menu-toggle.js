@@ -36,10 +36,13 @@
 
         // Toggle menus open or closed
         $(".at-menu-toggle-button-link").click(function() {
-          $(this).parent().siblings('.menu-toggle').slideToggle(100, 'swing');
-          return false;
+          $(this).parent().siblings('.menu-toggle').slideToggle(100, 'swing').toggleClass('menu-toggle-open');
         });
 
+        // Close if clicked outside (inc another toggle menu)
+        $(".at-menu-toggle-button-link").bind('clickoutside', function(event) {
+          $(this).parent().siblings('.menu-toggle').slideUp(100, 'swing').removeClass('menu-toggle-open');
+        });
       }
 
       //console.log(themeSettings);

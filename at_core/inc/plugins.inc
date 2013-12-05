@@ -37,7 +37,7 @@ function at_get_plugins($theme_name) {
             }
           }
         }
-        array_unique($plugins_list);
+
         $plugins = $plugins_list;
       }
     }
@@ -333,7 +333,8 @@ function responsive_plugins_admin_css($theme_name, $plugin_type) {
 /**
  * Base config for page layout builder.
  * This is used in at_core.submit.responsive.inc to help retrieve the form
- * values for each device groups layout.
+ * values for each device groups layout. Not really part of the plugin
+ * system and can't recall why I put it here :/
  */
 function page_layout() {
   $variables_array = array(
@@ -349,7 +350,8 @@ function page_layout() {
 }
 
 /**
- * Return an array of standard gpanel regions
+ * Return an array of standard gpanel regions. Not really part of the plugin
+ * system and can't recall why I put it here :/
  */
 function gpanel_regions() {
   $gpanel_regions_array = drupal_static(__FUNCTION__, array());

@@ -1,0 +1,71 @@
+diff --git a/at_core/inc/preprocess.inc b/at_core/inc/preprocess.inc
+index c2da3d3..48f7ce9 100755
+--- a/at_core/inc/preprocess.inc
++++ b/at_core/inc/preprocess.inc
+@@ -183,6 +183,7 @@ function adaptivetheme_preprocess_page(&$vars) {
+         'text' => $main_menu_title,
+         'level' => 'h2',
+         'class' => array('element-invisible'),
++        'id'    => 'primary-menu',
+       )
+     ));
+   }
+@@ -198,6 +199,7 @@ function adaptivetheme_preprocess_page(&$vars) {
+         'text' => t('Secondary menu'),
+         'level' => 'h2',
+         'class' => array('element-invisible'),
++        'id'    => 'secondary-menu',
+       )
+     ));
+   }
+@@ -540,6 +542,12 @@ function adaptivetheme_preprocess_block(&$vars) {
+       }
+       break;
+   }
++
++  if ($vars['block']->subject && !empty($vars['attributes_array']['role'])) {
++    $vars['title_attributes_array']['id'] = drupal_html_id($vars['block']->subject);
++    $vars['attributes_array']['aria-describedby'] =  $vars['title_attributes_array']['id'];
++  }
++  
+ }
+ 
+ /**
+diff --git a/at_core/inc/process.inc b/at_core/inc/process.inc
+index 3f1c95e..bf86395 100755
+--- a/at_core/inc/process.inc
++++ b/at_core/inc/process.inc
+@@ -59,10 +59,10 @@ function adaptivetheme_process_page(&$vars) {
+ 
+   // Theme the menu bars
+   if (!empty($vars['primary_navigation'])) {
+-    $vars['primary_navigation'] = theme('menubar', array('menu' => $vars['primary_navigation'], 'type' => 'primary'));
++    $vars['primary_navigation'] = theme('menubar', array('menu' => $vars['primary_navigation'], 'type' => 'primary', 'aria-labelledby' => 'primary-menu'));
+   }
+   if (!empty($vars['secondary_navigation'])) {
+-    $vars['secondary_navigation'] = theme('menubar', array('menu' => $vars['secondary_navigation'], 'type' => 'secondary'));
++    $vars['secondary_navigation'] = theme('menubar', array('menu' => $vars['secondary_navigation'], 'type' => 'secondary', 'aria-labelledby' => 'secondary-menu'));
+   }
+ 
+   // Generate the wrapper element for the main content
+diff --git a/at_core/inc/theme.inc b/at_core/inc/theme.inc
+index 439918f..cfce452 100755
+--- a/at_core/inc/theme.inc
++++ b/at_core/inc/theme.inc
+@@ -112,12 +112,12 @@ function adaptivetheme_breadcrumb($vars) {
+ 
+       $output = '';
+       if (at_get_setting('breadcrumb_label', $theme_name) == 1) {
+-        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper with-breadcrumb-label clearfix" role="navigation">';
+-        $output .= '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
++        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper with-breadcrumb-label clearfix" role="navigation" aria-labelledby="breadcrumb-label">';
++        $output .= '<h2 id="breadcrumb-label" class="breadcrumb-label">' . t('You are here') . '</h2>';
+       }
+       else {
+-        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation">';
+-        $output .= '<h2 class="element-invisible">' . t('You are here') . '</h2>';
++        $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper clearfix" role="navigation" aria-labelledby="breadcrumb-label">';
++        $output .= '<h2 id="breadcrumb-label" class="element-invisible">' . t('You are here') . '</h2>';
+       }
+       $output .= '<ol id="crumbs" class="clearfix">';
+       foreach ($breadcrumb as $key => $crumb) {
