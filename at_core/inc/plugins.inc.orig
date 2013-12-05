@@ -18,7 +18,7 @@
  * @param $theme_name, usually the active theme.
  */
 function at_get_plugins($theme_name) {
-  $plugins = &drupal_static(__FUNCTION__, array());
+  $plugins = drupal_static(__FUNCTION__, array());
   if (empty($plugins)) {
     if ($plugins_cache = cache_get('at_get_plugins_plugins')) {
       $plugins = $plugins_cache->data;
@@ -129,6 +129,7 @@ function at_load_plugins($theme_name, $plugin_type) {
   }
 
   foreach ($plugin_files as $file_data) {
+
     include_once(DRUPAL_ROOT . '/' . $file_data->uri);
 
     // panels
