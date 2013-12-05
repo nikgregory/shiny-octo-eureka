@@ -4,11 +4,6 @@
 
       var activeTheme = Drupal.settings["ajaxPageState"]["theme"];
       var themeSettings = Drupal.settings['adaptivetheme'];
-
-      if (typeof themeSettings[activeTheme] == 'undefined') {
-        return;
-      }
-
       var mtsTP = themeSettings[activeTheme]['menu_toggle_settings']['tablet_portrait'];
       var mtsTL = themeSettings[activeTheme]['menu_toggle_settings']['tablet_landscape'];
 
