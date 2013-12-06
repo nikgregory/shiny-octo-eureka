@@ -2,6 +2,10 @@
   Drupal.behaviors.ATmenuToggle = {
     attach: function (context, settings) {
 
+      if ($.browser.msie && parseFloat($.browser.version) <= 8) {
+        return;
+      }
+
       var activeTheme = Drupal.settings["ajaxPageState"]["theme"];
       var themeSettings = Drupal.settings['adaptivetheme'];
 
