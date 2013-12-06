@@ -100,59 +100,81 @@ function adaptivetheme_html_head_alter(&$head_elements) {
   // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
   if (at_get_setting('enable_apple_touch_icons') === 1) {
     $path_to_theme = drupal_get_path('theme', $theme_name);
-    // low
-    $apple_touch_icon_path_l = check_plain(at_get_setting('apple_touch_icon_path_l', $theme_name));
-    if (!empty($apple_touch_icon_path_l)) {
-      $l = $path_to_theme . '/' . $apple_touch_icon_path_l;
-      $touch_icon_l = file_create_url($l);
+
+    $rel = 'apple-touch-icon';
+    if (at_get_setting('enable_apple_touch_icon_precomposed') === 1) {
+      $rel = 'apple-touch-icon-precomposed';
+    }
+
+    // Apple default icon and Nokia shortcut icon.
+    $icon_path_default = check_plain(at_get_setting('icon_path_default', $theme_name));
+    if (!empty($icon_path_default)) {
+      $default_icon_path = $path_to_theme . '/' . $icon_path_default;
+      $default_icon_url = file_create_url($default_icon_path);
       $head_elements['adaptivetheme_touch_icon_nokia'] = array(
         '#type' => 'html_tag',
         '#tag' => 'link',
         '#weight' => -97,
         '#attributes' => array(
-          'href' => $touch_icon_l,
+          'href' => $default_icon_url,
           'rel' => "shortcut icon",
         ),
       );
-      $head_elements['adaptivetheme_touch_icon_low'] = array(
+      $head_elements['adaptivetheme_touch_icon_default'] = array(
         '#type' => 'html_tag',
         '#tag' => 'link',
         '#weight' => -98,
         '#attributes' => array(
-          'href' => $touch_icon_l,
-          'rel' => "apple-touch-icon-precomposed",
+          'href' => $default_icon_url,
+          'rel' => $rel,
         ),
       );
     }
-    // medium
-    $apple_touch_icon_path_m = check_plain(at_get_setting('apple_touch_icon_path_m', $theme_name));
-    if (!empty($apple_touch_icon_path_m)) {
-      $m = $path_to_theme . '/' . $apple_touch_icon_path_m;
-      $touch_icon_m = file_create_url($m);
-      $head_elements['adaptivetheme_touch_icon_medium'] = array(
+    // iPad (standard display).
+    $apple_touch_icon_path_ipad = check_plain(at_get_setting('apple_touch_icon_path_ipad', $theme_name));
+    if (!empty($apple_touch_icon_path_ipad)) {
+      $ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad;
+      $ipad_icon_url = file_create_url($ipad_icon_path);
+      $head_elements['adaptivetheme_touch_icon_ipad'] = array(
         '#type' => 'html_tag',
         '#tag' => 'link',
         '#weight' => -99,
         '#attributes' => array(
-          'href' => $touch_icon_m,
-          'rel' => "apple-touch-icon-precomposed",
-          'sizes' => "72x72",
+          'href' => $ipad_icon_url,
+          'rel' => $rel,
+          'sizes' => "76x76",
         ),
       );
     }
-    // high
-    $apple_touch_icon_path_h = check_plain(at_get_setting('apple_touch_icon_path_h', $theme_name));
-    if (!empty($apple_touch_icon_path_h)) {
-      $h = $path_to_theme . '/' . $apple_touch_icon_path_h;
-      $touch_icon_h = file_create_url($h);
-      $head_elements['adaptivetheme_touch_icon_high'] = array(
+    // iPhone retina.
+    $apple_touch_icon_path_iphone_retina = check_plain(at_get_setting('apple_touch_icon_path_iphone_retina', $theme_name));
+    if (!empty($apple_touch_icon_path_iphone_retina)) {
+      $iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina;
+      $iphone_retina_icon_url = file_create_url($iphone_retina_icon_path);
+      $head_elements['adaptivetheme_touch_icon_iphone_retina'] = array(
         '#type' => 'html_tag',
         '#tag' => 'link',
         '#weight' => -100,
         '#attributes' => array(
-          'href' => $touch_icon_h,
-          'rel' => "apple-touch-icon-precomposed",
-          'sizes' => "114x114",
+          'href' => $iphone_retina_icon_url,
+          'rel' => $rel,
+          'sizes' => "120x120",
+        ),
+      );
+    }
+    // iPad retina.
+    $apple_touch_icon_path_ipad_retina = check_plain(at_get_setting('apple_touch_icon_path_ipad_retina', $theme_name));
+    if (!empty($apple_touch_icon_path_ipad_retina)) {
+      $ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina;
+      $ipad_retina_icon_url = file_create_url($ipad_retina_icon_path);
+      $head_elements['adaptivetheme_touch_icon_ipad_retina'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -100,
+        '#attributes' => array(
+          'href' => $ipad_retina_icon_url,
+          'rel' => $rel,
+          'sizes' => "152x152",
         ),
       );
     }

@@ -434,20 +434,22 @@
 
 
   ; Mobile metatags
-  settings[mobile_friendly_metatags] = 1
-  settings[adaptivetheme_meta_viewport] = 'width=device-width, initial-scale=1.0, user-scalable=yes'
+  settings[mobile_friendly_metatags]            = 1
+  settings[adaptivetheme_meta_viewport]         = 'width=device-width, initial-scale=1.0, user-scalable=yes'
   settings[adaptivetheme_meta_mobileoptimized]  = 'width'
   settings[adaptivetheme_meta_handheldfriendly] = 'true'
   settings[adaptivetheme_meta_apple_mobile_web_app_capable] = 'yes'
   settings[adaptivetheme_meta_ie_document_mode] = ''
-  settings[adaptivetheme_meta_clear_type] = 0
+  settings[adaptivetheme_meta_clear_type]       = 0
 
 
   ; Touch icons
   settings[apple_touch_icon_enable] = 0
-  settings[apple_touch_icon_path_l] = 'images/touch-icon-l.png'
-  settings[apple_touch_icon_path_m] = 'images/touch-icon-m.png'
-  settings[apple_touch_icon_path_h] = 'images/touch-icon-h.png'
+  settings[icon_path_default]                   = 'images/default-60x60.png'
+  settings[apple_touch_icon_path_ipad]          = 'images/ipad-standard-76x76.png'
+  settings[apple_touch_icon_path_iphone_retina] = 'images/iphone-retina-120x120.png'
+  settings[apple_touch_icon_path_ipad_retina]   = 'images/ipad-retina-152x152.png'
+  settings[icon_rel] = 0
 
 
   ; Custom CSS
