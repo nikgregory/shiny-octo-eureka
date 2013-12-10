@@ -127,7 +127,7 @@
               <?php endif; ?>
 
               <?php if ($site_name || $site_slogan): ?>
-                <!-- start: Site name and Slogan hgroup -->
+                <!-- start: Site name and Slogan -->
                 <div<?php print $hgroup_attributes; ?>>
 
                   <?php if ($site_name): ?>
