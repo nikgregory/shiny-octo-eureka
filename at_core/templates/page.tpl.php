@@ -111,7 +111,7 @@
 
           <?php if ($site_name || $site_slogan): ?>
             <!-- !Site name and Slogan -->
-            <div<?php print $site_name_slogan_attributes; ?>>
+            <div<?php print $hgroup_attributes; ?>>
 
               <?php if ($site_name): ?>
                 <h1<?php print $site_name_attributes; ?>><?php print $site_name; ?></h1>

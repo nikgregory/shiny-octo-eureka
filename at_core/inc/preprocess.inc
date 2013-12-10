@@ -253,12 +253,13 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['branding_attributes_array']['class'][] = 'clearfix';
 
   // site name and slogan attributes (wrapper div)
-  $vars['site_name_slogan_attributes_array'] = array();
+  // hgroup maintains BC layer for pre 7.x-3.2 themes
+  $vars['hgroup_attributes_array'] = array();
   if (!$vars['site_slogan'] && $vars['hide_site_name']) {
-    $vars['site_name_slogan_attributes_array']['class'][] = $vars['visibility'];
+    $vars['hgroup_attributes_array']['class'][] = $vars['visibility'];
   }
-  $vars['site_name_slogan_attributes_array']['class'][] = 'h-group';
-  $vars['site_name_slogan_attributes_array']['id'][] = 'name-and-slogan';
+  $vars['hgroup_attributes_array']['class'][] = 'h-group';
+  $vars['hgroup_attributes_array']['id'][] = 'name-and-slogan';
 
   // site name attributes
   $vars['site_name_attributes_array']['id'][] = 'site-name';
