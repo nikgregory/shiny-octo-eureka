@@ -997,7 +997,7 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
     }
   }
 
-  $vars['attribution'] = "<small id=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Themes</a></small>";
+  $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Theme by Adaptivethemes.com</a></small>";
 }
 
 /**
