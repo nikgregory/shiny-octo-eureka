@@ -277,7 +277,10 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['footer_attributes_array']['role'][] = 'contentinfo';
 
   // Attribution variable used in admin theme and some others
-  $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Theme by Adaptivethemes.com</a></small>";
+  $vars['attribution'] = '';
+  if (at_get_setting('attribution_toggle', $theme_name) === 1) {
+    $vars['attribution'] = "<small class=\"attribution\">Premium Drupal Theme by <a href=\"http://adaptivethemes.com\">Adaptivethemes.com</a></small>";
+  }
 
   // Work around a perculier bug/feature(?) in Drupal 7 which incorrectly sets
   // the page title to "User account" for all three of these pages.
@@ -997,7 +1000,11 @@ function adaptivetheme_preprocess_maintenance_page(&$vars) {
     }
   }
 
-  $vars['attribution'] = "<small class=\"attribution\"><a href=\"http://adaptivethemes.com\">Premium Drupal Theme by Adaptivethemes.com</a></small>";
+  // Attribution variable used in admin theme and some others
+  $vars['attribution'] = '';
+  if (at_get_setting('attribution_toggle', $theme_name) === 1) {
+    $vars['attribution'] = "<small class=\"attribution\">Premium Drupal Theme by <a href=\"http://adaptivethemes.com\">Adaptivethemes.com</a></small>";
+  }
 }
 
 /**

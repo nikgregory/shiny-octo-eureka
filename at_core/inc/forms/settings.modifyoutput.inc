@@ -268,4 +268,17 @@ function at_core_modify_output_form(&$form) {
     '#description' => t('first, last and odd/even (zebra classes)'),
     '#default_value' => at_get_setting('extra_item_list_classes'),
   );
+
+  // Attribution
+  $form['at']['modify-output']['attribution'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Attribution'),
+    '#description' => t('<h3>Attribution</h3>'),
+  );
+  $form['at']['modify-output']['attribution']['attribution_toggle'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show attribution message'),
+    '#description' => t('Displays a message and link for Adaptivethemes.com'),
+    '#default_value' => at_get_setting('attribution_toggle'),
+  );
 }
