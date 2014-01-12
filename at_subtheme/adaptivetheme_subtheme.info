@@ -433,6 +433,18 @@
   settings[rel_author] = 0
 
 
+  ; Mobile metu toggle
+  settings[menu_toggle_tablet_portrait]  = 1
+  settings[menu_toggle_tablet_landscape] = 0
+  settings[menu_toggle_main_menu]        = 1
+  settings[menu_toggle_secondary_menu]   = 1
+  settings[menu_toggle_leaderboard]      = 0
+  settings[menu_toggle_header]           = 0
+  settings[menu_toggle_menu_bar]         = 1
+  settings[menu_toggle_main_menu_title] = Main menu
+  settings[menu_toggle_secondary_menu_title] = User menu
+
+
   ; Mobile metatags
   settings[mobile_friendly_metatags]            = 1
   settings[adaptivetheme_meta_viewport]         = 'width=device-width, initial-scale=1.0, user-scalable=yes'
