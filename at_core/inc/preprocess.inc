@@ -134,7 +134,7 @@ function adaptivetheme_preprocess_page(&$vars) {
 
   // Set up logo element
   if (at_get_setting('toggle_logo', $theme_name) === 1) {
-    $vars['site_logo'] = drupal_static('adaptivetheme_preprocess_page_site_logo');
+    $vars['site_logo'] = &drupal_static('adaptivetheme_preprocess_page_site_logo');
     if (empty($vars['site_logo'])) {
       $logo_image_path = check_url($vars['logo']);
       $logo_image_alt = check_plain(variable_get('site_name', t('Home page')));
@@ -157,7 +157,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   }
 
   // Site name
-  $vars['site_name'] = drupal_static('adaptivetheme_preprocess_page_site_name');
+  $vars['site_name'] = &drupal_static('adaptivetheme_preprocess_page_site_name');
   if (empty($vars['site_name'])) {
     $vars['site_name_title'] = variable_get('site_name', 'Drupal');
     $vars['site_name'] = l($vars['site_name_title'], '<front>', array('attributes' => array('title' => t('Home page'))));

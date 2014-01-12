@@ -237,7 +237,7 @@ function at_load_extensions_css($theme_name) {
  */
 function at_load_fonts($path, $theme_name) {
   // Google fonts
-  $google_font_string = drupal_static(__FUNCTION__, array());
+  $google_font_string = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_string)) {
     $google_font_string = at_load_google_fonts($theme_name);
   }
@@ -309,7 +309,7 @@ function at_load_polyfills($theme_name) {
   $info = at_get_info($theme_name);
 
   // Build an array of polyfilling scripts
-  $polyfills = drupal_static('adaptivetheme_preprocess_html_polyfills_array');
+  $polyfills = &drupal_static('adaptivetheme_preprocess_html_polyfills_array');
   if (empty($polyfills)) {
 
     $theme_path = drupal_get_path('theme', $theme_name);
@@ -469,7 +469,7 @@ function at_load_subtheme_responsive_styles($filepath, $media_query, $theme_name
  * @param $theme_name, the active theme.
  */
 function at_load_subtheme_conditional_styles($theme_name) {
-  $info = drupal_static(__FUNCTION__, array());
+  $info = &drupal_static(__FUNCTION__, array());
   if (empty($info)) {
     // Get the info file data
     $info = at_get_info($theme_name);
@@ -586,7 +586,7 @@ function at_theme_conditional_script($filepath) {
  * @param $theme_name
  */
 function at_load_google_fonts($theme_name) {
-  $google_font_string = drupal_static(__FUNCTION__, array());
+  $google_font_string = &drupal_static(__FUNCTION__, array());
   if (empty($google_font_string)) {
 
     $used_fonts = array();

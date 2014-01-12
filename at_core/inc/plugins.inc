@@ -187,9 +187,9 @@ function responsive_page_layouts_data_structure($theme_name = NULL) {
     $theme_name = $theme_key;
   }
 
-  $page_data_structure = drupal_static(__FUNCTION__, array());
+  $page_data_structure = &drupal_static(__FUNCTION__, array());
   if (empty($page_data_structure)) {
-    if ($cache = cache_get('at_page_layouts_data_structure')) {
+    if ($cache = cache_get('at_page_layouts_data_structure') && !empty($cache->data)) {
       $page_data_structure = $cache->data;
     }
     else {
@@ -215,7 +215,7 @@ function responsive_page_layouts_data_structure($theme_name = NULL) {
 function responsive_panels_data_structure() {
   global $theme_key;
   $theme_name = $theme_key;
-  $panels_data_structure = drupal_static(__FUNCTION__, array());
+  $panels_data_structure = &drupal_static(__FUNCTION__, array());
   if (empty($panels_data_structure)) {
     if ($cache = cache_get('at_panels_data_structure')) {
       $panels_data_structure = $cache->data;
@@ -248,7 +248,7 @@ function responsive_panels_data_structure() {
  * @param $theme_name
  */
 function responsive_page_layouts_device_group_options($theme_name) {
-  $device_group_options = drupal_static(__FUNCTION__, array());
+  $device_group_options = &drupal_static(__FUNCTION__, array());
   if (empty($device_group_options)) {
     $layout_methods = responsive_page_layouts_data_structure();
     foreach ($layout_methods as $method => $values) {
@@ -353,7 +353,7 @@ function page_layout() {
  * system and can't recall why I put it here :/
  */
 function gpanel_regions() {
-  $gpanel_regions_array = drupal_static(__FUNCTION__, array());
+  $gpanel_regions_array = &drupal_static(__FUNCTION__, array());
   if (empty($gpanel_regions_array)) {
     $gpanel_regions_array = array(
       'one' => array(
