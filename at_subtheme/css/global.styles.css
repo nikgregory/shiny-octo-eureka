@@ -472,13 +472,6 @@ a:focus {
  *   Primary, Secondary and Menu Bar region menus
  * ========================================================================== */
 
-/*
- * Use one of the following id's for granular control:
- *  - #menu-bar (menu bar region)
- *  - #primary-menu (main menu)
- *  - #secondary-menu (secondary/user menu)
- * You can target all of these with .nav or div[id$="menu-bar"]
- */
 .nav {
   clear: both;
   margin: 10px 0;
