@@ -475,6 +475,15 @@ function adaptivetheme_preprocess_block(&$vars) {
   // Add classes to theme the horizontal block option
   if (at_get_setting('enable_extensions', $theme_name) === 1) {
     if (at_get_setting('enable_markup_overides', $theme_name) === 1) {
+      // Change the user menu title to the user name.
+      if (at_get_setting('user_block_user_name', $theme_name) === 1) {
+        if ($vars['block']->module == 'system' && $vars['block']->delta == 'user-menu') {
+          if (user_is_logged_in()) {
+            $vars['title'] = check_plain($user->name);
+          }
+        }
+      }
+      // Horizontal block classes.
       if (at_get_setting('horizontal_login_block', $theme_name) === 1 && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
         $vars['classes_array'][] = 'lb-h';
         $vars['title_attributes_array']['class'][] = 'element-invisible';
@@ -493,13 +502,6 @@ function adaptivetheme_preprocess_block(&$vars) {
   if ($vars['block']->subject && !empty($vars['attributes_array']['role'])) {
     $vars['title_attributes_array']['id'] = drupal_html_id($vars['block']->subject);
     $vars['attributes_array']['aria-describedby'] = $vars['title_attributes_array']['id'];
-  }
-
-  // Change the user menu title to the user name.
-  if ($vars['block']->module == 'system' && $vars['block']->delta == 'user-menu') {
-    if (user_is_logged_in()) {
-      $vars['title'] = check_plain($user->name);
-    }
   }
 
   // Add Aria Roles via attributes

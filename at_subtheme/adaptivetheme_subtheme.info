@@ -401,6 +401,10 @@
   settings[login_block_remove_openid] = 0
 
 
+  ; User block
+  settings[user_block_user_name] = 1
+
+
   ; Design
   settings[global_gutter_width]           = ''
   settings[page_full_width_wrappers]      = 0
