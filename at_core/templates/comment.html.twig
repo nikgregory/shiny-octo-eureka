@@ -63,22 +63,39 @@
  * @ingroup themeable
  */
 #}
-<article class="{{ attributes.class }}"{{ attributes }}>
+{# Hide stuff so we can render it later. #}
+{% hide(content.links) %}
+<article class="{{ attributes.class }} clearfix"{{ attributes }}>
 
   {{ title_prefix }}
-  {% if new %}
-    <mark class="new">{{ new }}</mark>
-  {% endif %}
+  <header>
+    {#
+    Hide the "new" indicator by default, let a piece of JavaScript ask
+    the server which comments are new for the user. Rendering the final
+    "new" indicator here would break the render cache.
+    #}
+    <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
-  <h3 class="{{ title_attributes.class }}"{{ title_attributes }}>{{ title }}</h3>
+    <h3{{ title_attributes }}>{{ title }}</h3>
+
+    <div{{ submitted_attributes }}>
+      {{ user_picture }}
+      <div class="comment__meta">
+        {{ submitted }}
+      </div>
+    </div>
+
+  </header>
   {{ title_suffix }}
 
-  <footer class="{{ footer_attributes.class }}"{{ footer_attributes }}>
-    {{ user_picture }}
-    {# This should use {% trans %} when escaping issues are resolved #}
-    <p class="comment-submitted">
-      Submitted by {{ author }} on <time class="date-time">{{ created }}</time>
-    </p>
+  {{ content }}
+
+  <footer{{ footer_attributes }}>
+    {% if signature %}
+      <p class="comment__user-signature">
+        {{ signature }}
+      </p>
+    {% endif %}
 
     {#
       Indicate the semantic relationship between parent and child comments
@@ -86,23 +103,10 @@
       reader without this information.
     #}
     {% if parent %}
-      <p class="parent visually-hidden">{{ parent }}</p>
+      <p class="comment__parent visually-hidden">{{ parent }}</p>
     {% endif %}
 
-    {% if permalink %}
-      <p class="comment-permalink">{{ permalink }}</p>
-    {% endif %}
+    {{ content.links }}
   </footer>
 
-  {# We hide the links now so that we can render them later. #}
-  {% hide(content.links) %}
-  {{ content }}
-
-  {% if signature %}
-    <div class="comment-user-signature">
-      {{ signature }}
-    </div>
-  {% endif %}
-
-  {{ content.links }}
 </article>

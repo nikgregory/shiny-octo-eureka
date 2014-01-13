@@ -31,7 +31,14 @@
  */
 #}
 <div class="{{ attributes.class }}"{{ attributes }}>
+
   {% for delta, item in items %}
-    {{ item }}
+    <figure role="group">
+      {{ item }}
+      {% if item['#item'].title and item['#captions'] == true %}
+        <figcaption style="max-width:{{ item['#item'].image_style_width }}px">{{ item['#item'].title }}</figcaption>
+      {% endif %}
+    </figure>
   {% endfor %}
+
 </div>

@@ -34,7 +34,7 @@ class FileGlobber {
    */
   public function globFiles() {
     $scan_directories = self::scanDirs();
-    $files = array();
+
     if (isset($scan_directories)) {
       foreach ($scan_directories as $directory) {
         $glob_path = $this->path . $directory;
@@ -42,6 +42,7 @@ class FileGlobber {
           if (isset($this->types)) {
             foreach ($this->types as $type) {
               $files[$directory][$type] = array_filter(glob($glob_path . "/*.$type"), 'is_file');
+              //$files[$directory][$type] = new \GlobIterator($glob_path . "/*.$type");
             }
           }
         }

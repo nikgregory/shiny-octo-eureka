@@ -10,58 +10,70 @@
 
 
 // Main section wrapper around the comments list
-// ---------------------------------------------------------------------------
-.comment-wrapper {}
+.comments__wrapper {}
 
 
+// Comment form - basic classes only, see _form-styles.scss
+.comment-form {}
+.comments__title {}
+.comments__title--form {}
 
-// Generic comment classes
-// The comment <article> wrapper can have many classes, look out for them,
-// for example you can style author comments with .by-node-author {}
-// ---------------------------------------------------------------------------
+
+// Comment wrapper
 .comment {}
-.comment-title {}
 
+// Authors
+.by-anonymous {}
+.by-viewer {}
+.comment--by-node-author {}
 
-// New comments are flagged with a mark element
-mark.new {}
-
-
-// Comment author name and date details
-.comment-submitted {
-
-  .user-name {}
-  .date-time {}
+// Unpublished status message
+.comment--unpublished {
+  background-color: #fff4f4;
+  p.unpublished {
+    @include font-size(32px);
+  }
 }
 
 
-// Comment <footer> wraps the user picture and comment-submitted elements
-.comment-footer {
+// Header
+.comment__header {}
+.comment__title {}
+.comment__new {}
 
-  // User picture
-  .field-type-image {
 
+// Submitted
+.comment__meta {}
+
+.comment__author {
+  display: inline;
+}
+
+.comment__datetime {}
+
+.comment__submitted {
+  // User picture.
+  .field-type--image {
     img {}
   }
 
   // Conditional class: if user picture?
-  &.comment-user-picture {}
+  &.comment__submitted--user-picture {}
 }
 
 
-// Permalink for each comment
-.comment-permalink {}
-
+// Footer
+.comment__footer {
+  .links {}
+}
 
 // User signiture
-.comment-user-signature {}
+.comment__user-signature {}
 
 
+// Comment fields.
+.field-name--comment-body {}
 
-
-// Comment fields
-// ---------------------------------------------------------------------------
-.field-name-comment-body {}
 
 
 

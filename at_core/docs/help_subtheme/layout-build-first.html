@@ -1,8 +1,8 @@
 
 <aside class="status-block status">
   <h2>Help Document Status</h2>
-  <p><b>Status:</b> Up to date</p>
-  <p><b>Last update:</b> Oct 22nd 2013</p>
+  <p><b>Status:</b> Outdated</p>
+  <p><b>Last update:</b> Dec 4th 2013</p>
 </aside>
 
 
@@ -77,20 +77,20 @@ elf-layout-kit.png
 
 <p>Here we step through the file one item (or key) at a time and discuss. Follow this carefully, once you have done this you will understand how this file works and this task will become fast and easy in the future. Its not complicated, but you need to be accurate.</p>
 
-<h3>Change the 'series' name:</h3>
+<h3>Change the 'plugin' name:</h3>
 
 <p>Note:</p>
 
 <ul>
-<li>All layouts must belong to a series (even if there is only one layout in the series).</li>
-<li>All layouts in a series MUST have the same regions.</li>
-<li>If this is the first layout in the series and you plan on changing the regions and rows, create a new series.</li>
+<li>All layouts must belong to a plugin (even if there is only one layout in the plugin).</li>
+<li>All layouts in a plugin MUST have the same regions.</li>
+<li>If this is the first layout in the plugin and you plan on changing the regions and rows, create a new plugin.</li>
 </ul>
 
-<p>The main thing is that all layouts in a series have the same reigons - the only real difference between layouts in a series is their CSS layout. We'll deal with  writing CSS later, for now choose a series.</p>
+<p>The main thing is that all layouts in a plugin have the same reigons - the only real difference between layouts in a plugin is their CSS layout. We'll deal with  writing CSS later, for now choose a plugin.</p>
 
 <pre class="code-block">
-series: 'My Series'
+plugin: 'My Plugin'
 </pre>
 
 <h3>Optional description:</h3>
@@ -166,6 +166,6 @@ screenshot: [my-layout].png
 
 <p>After you have saved your new layout visit the Appearance settings for your theme. Assuming you have enabled layouts you will see the new layout in the "Select Layout" table.</p>
 
-<p>Follow the steps to apply your layout as "Default" (replaces page.html.twig) or use it in a template suggestion. Note that template suggestion layouts must be from the same series as the default layout.</p>
+<p>Follow the steps to apply your layout as "Default" (replaces page.html.twig) or use it in a template suggestion. Note that template suggestion layouts must be from the same plugin as the default layout.</p>
 
 <p>See the guide on "Generating Layouts" for more details.</p>

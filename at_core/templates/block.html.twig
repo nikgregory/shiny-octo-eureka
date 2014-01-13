@@ -40,9 +40,7 @@
  * @ingroup themeable
  */
 #}
-{# If the block has a label use the section element, otherwise use div. #}
-{% set element = label ? 'section' : 'div' %}
-<{{ element }} id="{{ attributes.id }}" class="{{ attributes.class }}"{{ attributes }}>
+<{{ html_element }} id="{{ attributes.id }}" class="{{ attributes.class }}"{{ attributes }}>
 
   {{ title_prefix }}
   {% if label %}
@@ -52,4 +50,4 @@
 
   {{ content }}
 
-</{{ element }}>
+</{{ html_element }}>

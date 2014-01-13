@@ -1,0 +1,314 @@
+
+// Layouts
+
+#edit-layouts {
+  padding: 0;
+  border: 1px solid #BFBFBA;
+  background: #FCFCFA;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .details-wrapper {
+    padding: 0;
+  }
+
+  #edit-adv-options {
+    .details-wrapper {
+      padding: 0.5em 1em;
+    }
+
+    #edit-selectors details .details-wrapper {
+      padding: 0;
+    }
+
+    pre {
+      background: #F5F5F2;
+      border-top: 1px solid #ccc;
+      font-weight: 400;
+      margin: 0;
+      padding: 1em 0.5em;
+      //@include border-radius(4px);
+    }
+  }
+
+  .submit--layout {
+    background: #FCFCFA;
+    border-top: 1px solid #BFBFBA;
+    clear: both;
+    margin: 0;
+    padding: 1em 0.5em;
+    position: relative;
+    z-index: 10;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-size: 1em;
+    text-transform: uppercase;
+  }
+
+  .fieldset-wrapper {
+    overflow: hidden;
+  }
+
+  #edit-layouts--description,
+  #edit-layouts-enable-container {
+    padding: 0 0.5em;
+  }
+
+  #edit-settings-layouts-disabled {
+    font-size: 0.923em;
+    line-height: 1.295em;
+  }
+
+  #edit-layouts-enable-container {
+    margin-bottom: 10px;
+  }
+
+  .form-item-settings-layouts-enable {
+    margin: 0;
+  }
+
+  // master column layout
+  .layouts-column {
+    float: left;
+    border: 0;
+    margin: 0;
+	  margin-bottom: -99999px;
+	  padding-bottom: 99999px;
+	  border-top: 1px solid #BFBFBA;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .layouts-column-one {
+    width: 30%;
+  }
+
+  .layouts-column-two {
+    width: 40%;
+    border-left: 1px solid #BFBFBA;
+    border-right: 1px solid #BFBFBA;
+
+    details {
+      border: 0 none;
+      margin: 0;
+    }
+  }
+
+  .layouts-column-three {
+    width: 30%;
+  }
+
+  .table-layouts {
+    width: 100%;
+
+    .field-hidden {
+      display: none;
+    }
+
+    .collapse-processed > summary {
+      padding-left: 0;
+      padding-right: 0.5em;
+    }
+
+    details > .details-wrapper {
+      padding: 0;
+    }
+
+    tbody > tr > td {
+      width: 13px;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 20px 10px;
+
+    }
+
+    img {
+      display: block;
+      max-width: 100px;
+      max-height: 140px;
+      height: auto;
+    }
+
+    .field-name,
+    .field-desc {
+      min-width: 18em;
+    }
+
+    .field-screenshot {
+      width: 100px;
+      a {
+        color: #747474;
+        &:hover,
+        &:focus {
+          color: #595959;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .plus-icon {
+      text-align: left;
+      font-size: 0.8em;
+      display: block;
+    }
+
+    h3 {
+      margin: 0 0 1.15em;
+    }
+  }
+
+  dl {
+    white-space: nowrap;
+    min-width: 15em;
+
+    dt {
+      float: left;
+      width: 5.5em;
+      font-weight: 700;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  .current-default-layout-meta {
+    font-size: 0.923em;
+    line-height: 1.295em;
+  }
+}
+
+
+#edit-manage-suggestions {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.form-item-layout-type-select {
+  display: inline;
+}
+
+#edit-default-not-set,
+#edit-default-set,
+#edit-none-set {
+  border-top: 1px solid #BFBFBA;
+  border-bottom: 1px solid #BFBFBA;
+  margin: 10px 0 20px;
+  padding: 10px;
+}
+
+// error
+#edit-default-not-set {
+  background-color: #fcf4f2;
+  color: #a51b00;
+}
+
+// status
+#edit-none-set {
+  background-color: #f3faef;
+  color: #325e1c;
+}
+
+// warning
+#edit-default-set {
+  background: #F7FCFF;
+
+  ol {
+    margin: 10px 0 0 0;
+    padding: 0 0 0 20px;
+  }
+
+  ol, p {
+    font-size: 0.923em;
+    line-height: 1.231em;
+  }
+}
+
+
+#edit-suggestions {
+  padding-top: 0;
+  padding: 10px;
+  background: #F7FCFF;
+  border-top: 1px solid #BFBFBA;
+  border-bottom: 1px solid #BFBFBA;
+  margin: 10px 0 20px;
+
+  label {
+    padding-bottom: 10px
+  }
+
+  .description {
+    margin-top: 20px;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0 0 0 20px;
+  }
+}
+
+
+#edit-options,
+.form-item-layout-suggestion,
+#edit-no-mq-css {
+  clear: both;
+}
+
+
+#edit-no-base-layout {
+  border: 1px solid #B3B2AD;
+  border-color: #f4daa6;
+  color: #734c00;
+  background-color: #fdf8ed;
+  padding: 10px;
+}
+
+
+#edit-options {
+  .form-disabled {
+    background: #f7f7f7;
+    margin: 0;
+    padding: 1em 0;
+  }
+}
+
+
+#edit-max-width {
+  .form-item-settings-max-width-value,
+  .form-item-settings-max-width-unit {
+    display: inline-block;
+    margin-right: 3px;
+  }
+}
+
+.layout-structure-screenshot {
+  background-image: url('../../docs/help_subtheme/layout-structure.png');
+  max-width: 308px;
+  min-height: 163px;
+}
+
+@media (max-width: 48em) {
+  #edit-layouts {
+    .form-radios label {
+      max-width: 120px;
+    }
+  }
+}
+
+@media (max-width: 56em) {
+  #edit-default-layout {
+    float: none;
+    clear: both;
+    margin: 0;
+    padding: 0 0 10px;
+  }
+}
+

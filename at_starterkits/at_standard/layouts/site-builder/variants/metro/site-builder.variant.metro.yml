@@ -1,0 +1,21 @@
+# Metro CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Metro'
+
+# All layout variants are type 'at_layout_variant'. Required.
+type: 'at_layout_variant'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: metro.css
+  no_mq: metro-ie8.css
+
+# Desc
+description: 'Main content regions configured to display a sidebar (left), main feature and two sub-feature columns. Extra regions for slideshows and other features (above the main content regions), footer columns and a split header layout with topbar. Dedicated regions for menubar and messages. Nineteen regions total. Responsive, content source ordered, mobile first, all regions collaspible.'
+
+# Screenshot
+screenshot: metro.png

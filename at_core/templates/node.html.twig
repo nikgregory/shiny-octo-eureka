@@ -82,33 +82,40 @@
  * @ingroup themeable
  */
 #}
-<article id="node-{{ node.id }}" class="{{ attributes.class }} clearfix"{{ attributes }}>
+{# Hide stuff so we can render it later. #}
+{% hide(content.links) %}
+{% hide(content.comment) %}
+<article id="{{ attributes.id }}" class="{{ attributes.class }} clearfix"{{ attributes }}>
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ node_url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+  <header class="node__header">
+    {{ title_prefix }}
+    {% if label %}
+      {% if page %}
+        <h1{{ title_attributes }}>{{ label }}</h1>
+      {% else %}
+        <h2{{ title_attributes }}><a href="{{ node_url }}" rel="bookmark">{{ label }}</a></h2>
+      {% endif %}
+    {% endif %}
+    {{ title_suffix }}
 
-  {% if display_submitted %}
+    {% if display_submitted %}
+      <div{{ submitted_attributes }}>
+        {{ user_picture }}
+        <div class="node__meta">
+          {{ submitted }}
+        </div>
+      </div>
+    {% endif %}
+  </header>
+
+  {{ content }}
+
+  {% if content.links %}
     <footer{{ footer_attributes }}>
-      {{ user_picture }}
-      {# This should use {% trans %} when escaping issues are resolved #}
-      <p class="node-submitted">
-        {% trans %}Submitted by {{ name|passthrough }} on <time>{{ date }}</time>{% endtrans %}
-      </p>
+      {{ content.links }}
     </footer>
   {% endif %}
 
-  {# Hide the comments and links using the hide() function. #}
-  {% hide(content.comments) %}
-  {% hide(content.links) %}
-  {{ content }}
-
-  {# Add back the links and comments. #}
-  {{ content.links }}
-  {{ content.comments }}
+  {{ content.comment }}
 
 </article>

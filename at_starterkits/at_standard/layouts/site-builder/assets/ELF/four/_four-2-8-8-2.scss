@@ -1,0 +1,46 @@
+//
+// Four Regions 2-4-4-2
+//
+// First region  : 2 grid columns.
+// Second region : 4 grid columns.
+// Third region  : 4 grid columns.
+// Fourth region : 2 grid columns.
+//
+// - when only two regions are active each region is 6 grid columns.
+// - when only three regions are active each region is 4 grid columns.
+// ---------------------------------------------------------------------------
+
+
+&.active-count--2 {
+  .region {
+    @include span(6 of 12);
+  }
+}
+
+
+&.active-count--3 {
+  .region {
+    @include span(4 of 12);
+  }
+}
+
+
+&.active-count--4 {
+  .region {
+    @include span(4 of 12);
+
+    &:first-child,
+    &:last-child {
+      @include span(2 of 12);
+    }
+  }
+}
+
+
+&.total-regions-4 {
+  .region {
+    &:last-child {
+      @include omega;
+    }
+  }
+}

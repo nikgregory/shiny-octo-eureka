@@ -30,15 +30,18 @@
  * @ingroup themeable
  */
 #}
+
+{# {{ dump() }} #}
+
 <div class="{{ attributes.class }}"{{ attributes }}>
 
   {% if not label_hidden %}
-    <h3 class="field-label"{{ title_attributes }}>{{ label }}</h3>
+    <h3 class="field__label"{{ title_attributes }}>{{ label }}</h3>
   {% endif %}
 
-  <div class="field-items"{{ content_attributes }}>
+  <div class="field__items"{{ content_attributes }}>
     {% for delta, item in items %}
-      <div class="field-item {{ cycle(["even", "odd"], delta) }}"{{ item_attributes[delta] }}>
+      <div class="field__item"{{ item_attributes[delta] }}>
         {{ item }}
       </div>
     {% endfor %}

@@ -67,3 +67,25 @@
   overflow: hidden;
   outline: 0;
 }
+
+// The word "Unpublished" displayed on unpublished nodes and comments
+@mixin unpublished {
+  color: rgba(239, 170, 170, 0.4);
+  font-family: $impact;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 10px 0;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+
+
+
+
+
+
+

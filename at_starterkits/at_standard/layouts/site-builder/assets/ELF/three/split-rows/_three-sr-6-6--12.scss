@@ -1,0 +1,41 @@
+//
+// Three Regions split 6-6--12
+//
+// When three regions are active the last two regions wrap to a second line,
+// allowing the first region to be full width.
+//
+// First region  : 6 grid columns
+// Second region : 6 grid columns.
+// -- break to new line --
+// Third region  : 12 grid columns.
+//
+// When only two regions are active each region is 6 grid columns.
+// ---------------------------------------------------------------------------
+
+
+// Two active regions.
+&.active-count--2 {
+  .region {
+    @include span(6 of 12);
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}
+
+
+// Three active regions.
+&.active-count--3 {
+  .region {
+    &:first-child {
+      @include span(6 of 12);
+    }
+    &:nth-child(2) {
+      @include span(6 omega of 12);
+    }
+    &:last-child {
+      clear: both;
+    }
+  }
+}

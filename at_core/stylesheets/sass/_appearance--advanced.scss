@@ -1,0 +1,172 @@
+
+// Advanced settings (Extensions)
+
+#edit-advanced-settings {
+
+  &> .details-wrapper {
+    padding: 0;
+  }
+
+  .vertical-tabs {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .submit--advanced-settings {
+    padding: 0 0.5em;
+  }
+}
+
+
+// Fonts
+#edit-font-settings {
+
+  fieldset {
+    border-bottom: 1px solid #BFBFBA;
+    padding-bottom: 1em;
+
+    .fieldset-description h3 {
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+    }
+  }
+
+}
+
+
+
+/* Image alignment options */
+#edit-image-settings {
+
+  .description,
+  .form-type-radios {
+    clear: both;
+  }
+
+  details details {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .form-type-radios {
+    label {
+      margin-bottom: 5px;
+    }
+  }
+
+  .form-type-radio {
+    clear: none;
+    float: left;
+    margin: 0 30px 10px 0;
+    text-align: center;
+    width: 50px;
+
+    input.form-radio {
+      margin-bottom: 4px;
+    }
+
+    label {
+      background-image: url(image-alignment-sprite.png);
+      background-repeat: no-repeat;
+      display: table-cell;
+      font-size: 0.8em;
+      height: 80px;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
+      vertical-align: bottom;
+      width: 50px;
+
+      &[for$=-none]   {background-position: 0 0;}
+      &[for$=-left]   {background-position: -50px 0;}
+      &[for$=-center] {background-position: -100px 0;}
+      &[for$=-right]  {background-position: -150px 0;}
+    }
+  }
+}
+
+
+
+// Titles
+#edit-titles-settings {
+
+  .titles-styles-wrapper {
+    .fieldset-description {
+      float: left;
+      padding: 0;
+      width: 12em;
+    }
+
+    .form-type-select {
+      clear: none;
+      float: left;
+      margin: 0 10px 0 0;
+    }
+    .form-select {
+      min-width: 8em;
+    }
+  }
+
+  .form-type-select {
+    min-width: 8em;
+
+    label {
+      clip: rect(1px, 1px, 1px, 1px);
+      overflow: hidden;
+      position: absolute;
+    }
+  }
+
+  #edit-site-name-font-style {
+    .form-type-select label {
+      clip: auto;
+      display: block !important;
+      height: auto;
+      overflow: auto;
+      padding-bottom: 0.5em;
+      position: static !important;
+      width: auto;
+    }
+
+    .fieldset-description {
+      padding-top: 2.2em;
+    }
+  }
+}
+
+
+
+// Touch icons
+#edit-touch-icons-settings {
+
+  .form-type-textfield {
+    margin-bottom: 20px;
+  }
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  .field-prefix {
+    color: #666;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

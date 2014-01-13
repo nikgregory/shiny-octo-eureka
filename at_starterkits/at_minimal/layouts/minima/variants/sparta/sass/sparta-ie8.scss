@@ -1,0 +1,161 @@
+//
+// Internet Explorer 8 Layout
+//
+// Note this file uses many unsupported pseudo selectors such as nth-child and
+// last-child. If you want to support IE8 turn on support for it in your
+// themes Appearance settings (under Options, below the layouts table). Doing
+// so will load IE9js from Googles CDN to polyfill selector support for IE8 as
+// well as this file.
+//
+// These selectors are used because the SASS is basically a strait copy from the
+// the main SCSS file with media queries removed (with the unrequired responsive
+// styles removed also), effectively this is the same layout all wide screens
+// would get.
+//
+// Note that since this theme is in development (Drupal 8 is not released yet)
+// we are using IE9js and it is not heavily tested. Using selectivzr is not
+// really an option because its support with jQuery is poor. Another option
+// is rewriting this layout using the IE supported method of using first-child,
+// for example where we use nth-child or last-child instead use:
+//
+//   :first-child + div {}
+//   :first-child + div + div {}
+//   ... and so on.
+//
+// That is a reasonable solution, however the ELF used in AT Standards layouts
+// would need to be rewritten substantially to use that method. I don't want to
+// do that for one (rapidly) dying browser.
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "../../../assets/global";
+
+
+/* Header (2 regions) */
+.page-row__header {
+
+  &.active-count--2 {
+    .region {
+        @include span(6 of 12);
+
+      &:last-child {
+        @include omega;
+      }
+    }
+  }
+}
+
+
+/* Main (4 regions) */
+.page-row__main {
+
+  // Third and fourth are active.
+  &.active-regions--3-4 {
+    .region {
+      @include span(6 of 12);
+
+      &:last-child {
+        @include omega;
+      }
+    }
+  }
+
+  // Second and third.
+  &.active-regions--2-3 {
+    .region {
+      &:first-child {
+        @include push(3 of 12);
+        @include span(9 of 12);
+      }
+      &:last-child {
+        @include pull(12 of 12);
+        @include span(3 of 12);
+      }
+    }
+  }
+
+  // Second and fourth.
+  &.active-regions--2-4 {
+    .region {
+      &:first-child {
+        @include span(9 of 12);
+      }
+      &:last-child {
+        @include span(3 omega of 12);
+      }
+    }
+  }
+
+  // First, second and third.
+  &.active-regions--1-2-3 {
+    .region {
+      &:nth-child(2) {
+        @include push(3 of 12);
+        @include span(9 of 12);
+      }
+      &:last-child {
+        @include pull(12 of 12);
+        @include span(3 of 12);
+      }
+    }
+  }
+
+  // First, third and fourth.
+  &.active-regions--1-2-4 {
+    .region {
+      &:nth-child(2) {
+        @include span(6 of 12);
+      }
+      &:last-child {
+        @include span(6 omega of 12);
+      }
+    }
+  }
+
+  // First, third and fourth.
+  &.active-regions--1-3-4 {
+    .region {
+      &:nth-child(2) {
+        @include span(9 of 12);
+      }
+      &:last-child {
+        @include span(3 omega of 12);
+      }
+    }
+  }
+
+  // Two, three and four (classic layout)
+  &.active-regions--2-3-4 {
+    .region {
+      &:first-child {
+        @include span(6 of 12);
+        @include push(3 of 12);
+      }
+      &:nth-child(2) {
+        @include span(3 of 12);
+        @include pull(9 of 12);
+      }
+      &:last-child {
+        @include span(3 omega of 12);
+      }
+    }
+  }
+
+  // All regions active.
+  &.active-count--4 {
+    .region {
+      &:nth-child(2) {
+        @include span(6 of 12);
+        @include push(3 of 12);
+      }
+      &:nth-child(3) {
+        @include span(3 of 12);
+        @include pull(9 of 12);
+      }
+      &:last-child {
+        @include span(3 omega of 12);
+      }
+    }
+  }
+}

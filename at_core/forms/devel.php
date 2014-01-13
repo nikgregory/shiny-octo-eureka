@@ -1,11 +1,10 @@
 <?php
 
-// DEVEL
-//----------------------------------------------------------------------
+// Development settings
 $form['devel'] = array(
   '#type' => 'details',
   '#title' => t('Devel'),
-  '#group' => 'atsettings',
+  '#group' => 'at_settings',
   '#description' => t('See the Help tab section "Developer Tools".'),
 );
 

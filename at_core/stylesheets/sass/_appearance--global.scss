@@ -1,0 +1,56 @@
+
+// Global styles for appearance.
+
+#block-seven-help,
+legend {
+  @include visually-hidden;
+}
+
+fieldset {
+  margin: 0;
+  border: 0;
+}
+
+.form-type-vertical-tabs {
+  fieldset {
+    padding: 0;
+  }
+}
+
+details {
+  margin: 0.5em 0;
+  border-radius: 4px;
+  background: #FCFCFA;
+
+  details {
+    background: inherit;
+  }
+}
+
+blockquote {
+  border-left: 10px solid #A6A5A1;
+  padding-left: 10px;
+}
+
+code, pre, kbd {
+  font-size: 1em !important;
+}
+
+code {
+  font-weight: 700;
+}
+
+pre code {
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+
+pre.code-block {
+  background: #F5F5F2;
+  border: 1px solid #ccc;
+  font-weight: 400;
+  margin: 0;
+  padding: 20px;
+  @include border-radius(4px);
+}

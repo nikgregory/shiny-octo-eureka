@@ -2,7 +2,7 @@
 // Blocks
 //
 // Mainly these will be module blocks and custom blocks
-// added by the site builder. Includes classes for a lot of Drupal cores
+// added by the site builder. Includes classes for some of Drupal cores
 // standard blocks also - however search and menu blocks have their
 // own partials.
 //
@@ -33,17 +33,22 @@
 // Here are a few examples of what to look out for:
 // ---------------------------------------------------------------------------
 
-// All Drupal core Views module blocks
+// All Drupal core Views module blocks.
 .block-views {}
 
 
-// All Drupal core System module blocks
+// All Drupal core System module blocks.
 .block-system {}
 
 
-// The Main Content block of the site
+// The Main Content block of the site.
 #block-content {}
 
 
-// System module generated Footer block
+// System module generated Footer block.
 #block-footer {}
+
+
+
+
+

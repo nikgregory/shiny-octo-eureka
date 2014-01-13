@@ -1,3 +1,3 @@
 # Vendor CSS Files
 
-Here you can place vendor stylesheets, for example you might place your jQuery UI styles here.
+Use this directory for vendor stylesheets, for example you might place your jQuery UI styles here or fully override Drupal core stylesheets.

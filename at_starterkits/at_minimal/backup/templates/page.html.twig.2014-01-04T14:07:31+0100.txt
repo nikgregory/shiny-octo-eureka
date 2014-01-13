@@ -1,0 +1,46 @@
+{#
+/**
+ * Sparta Layout
+ * Generated on: Wed, 30 Oct 13 19:09:35 +0100
+ */
+#}
+{{ messages }}
+{% if header__regions.active == true %}
+<header{{ header__attributes }}>
+  <div class="container">
+    {{ page.header_first }}
+    {{ page.header_second }}
+  </div>
+</header>
+{% endif %}
+{% if menubar__regions.active == true %}
+<div{{ menubar__attributes }}>
+  <div class="container">
+    {{ page.menubar }}
+  </div>
+</div>
+{% endif %}
+{% if messages__regions.active == true %}
+<div{{ messages__attributes }}>
+  <div class="container">
+    {{ page.messages }}
+  </div>
+</div>
+{% endif %}
+{% if main__regions.active == true %}
+<main{{ main__attributes }}>
+  <div class="container">
+    {{ page.highlighted }}
+    {{ page.content }}
+    {{ page.sidebar_first }}
+    {{ page.sidebar_second }}
+  </div>
+</main>
+{% endif %}
+{% if footer__regions.active == true %}
+<footer{{ footer__attributes }}>
+  <div class="container">
+    {{ page.footer }}
+  </div>
+</footer>
+{% endif %}

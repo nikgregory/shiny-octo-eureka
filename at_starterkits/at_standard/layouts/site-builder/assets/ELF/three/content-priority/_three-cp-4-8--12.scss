@@ -1,0 +1,62 @@
+//
+// Main Content 4-8--12 Source Ordered
+//
+// Sets the first region to 8 cols, the second region to 4 which is pulled
+// to the right (as a right sidebar, while the third region is 12 columns and
+// wraps below. Useful for narrow or narrow wide screens as a way of moving
+// the second sidebar below the main content.
+//
+// Note this REQUIRES specially named regions - content, sidebar-first, and
+// sidebar-second, this is because when doing source ordering you have to know
+// the names of the active regions.
+//
+// ---------------------------------------------------------------------------
+//
+// This layout will place the first region in source order between the
+// following two. For example, if we have the source order:
+//
+//   - first
+//   - second
+//   - third
+//
+// But you want it to appear like this:
+//
+//   -------------------------------------
+//  |    second    |         first       |
+//   -------------------------------------
+//  |                third               |
+//   -------------------------------------
+//
+// This is mostly used when you want sidebars either side of a main content
+// region, but have them below the main content in the source order.
+
+&.active-regions--1-2 {
+  .region {
+    &:first-child {
+      @include push(4 of 12);
+      @include span(8 of 12);
+    }
+    &:last-child {
+      @include pull(12 of 12);
+      @include span(4 of 12);
+    }
+  }
+}
+
+
+&.active-regions--1-2-3 {
+  .region {
+    &:first-child {
+      @include span(8 of 12);
+      @include push(4 of 12);
+    }
+    &:nth-child(2) {
+      @include span(4 of 12);
+      @include pull(12 of 12);
+    }
+    &:last-child {
+      clear: both;
+    }
+  }
+}
+

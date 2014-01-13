@@ -14,26 +14,36 @@ class LayoutGeneratorSubmit {
   public function generateLayout($theme, $values) {
 
     // Master layout selected?
-    if ($values['settings_selected_layout']) {
+    $values_selected_layout = '';
+    if ($values['settings_master_layout']) {
+      $values_selected_layout = $values['settings_selected_layout_' . $values['settings_master_layout']];
+    }
 
-      // Assign selected layout.
-      $selected_layout = $values['settings_selected_layout'];
+    if (!empty($values_selected_layout)) {
+
+      // Selected layout.
+      $selected_layout = $values_selected_layout; //$values['settings_selected_layout'];
 
       // Providers.
-      $selected_layout_provider = $values['selected_layout_provider'];
-      $default_layout_provider = $values['default_layout_provider'];
+      $selected_provider = $values['selected_layout_provider'];
+      $default_provider  = $values['default_layout_provider'];
 
-      // Set a theme setting for the default layout provider.
-      $values['settings_default_layout_provider'] = $default_layout_provider;
-      $values['settings_template_suggestion_provider_page'] = $default_layout_provider;
+      // Plugins
+      $selected_plugin = $values['selected_layout_plugin'];
+      $default_plugin  = $values['default_layout_plugin'];
+
+      // Set a theme setting for the default page layout provider and plugin.
+      $values['settings_default_layout_provider'] = $default_provider;
+      $values['settings_template_suggestion_provider_page'] = $default_provider;
+      $values["settings_template_suggestion_plugin_page"] = $selected_plugin;
 
       // Clear the selected layout cache bin.
-      if ($cache = cache()->get("$selected_layout_provider:$selected_layout")) {
-        cache()->delete("$selected_layout_provider:$selected_layout");
+      if ($cache = cache()->get("$selected_provider:$selected_layout")) {
+        cache()->delete("$selected_provider:$selected_layout");
       }
 
       // Instantiate LayoutGenerator object.
-      $generateLayout = new LayoutGenerator($selected_layout_provider, $selected_layout);
+      $generateLayout = new LayoutGenerator($selected_provider, $selected_plugin, $selected_layout);
 
       // Check if this is a suggestion.
       $suggestion = '';
@@ -45,30 +55,28 @@ class LayoutGeneratorSubmit {
         $clean_suggestion = strtr($suggestion, '-', '_');
         $values["settings_template_suggestion_page__$clean_suggestion"] = $selected_layout;
 
-        // Do the same for the template suggestion provider.
-        $values["settings_template_suggestion_provider_page__$clean_suggestion"] = $selected_layout_provider;
-
-        // Set a file name for messages
-        $template_file_name = 'page--' . $suggestion . '.html.twig';
-
-      }
-      else {
-        // Save a setting for the default page temlate layout.
-        $values["settings_template_suggestion_page"] = $selected_layout;
+        // Do the same for the template suggestion provider and plugin.
+        $values["settings_template_suggestion_provider_page__$clean_suggestion"] = $selected_provider;
+        $values["settings_template_suggestion_plugin_page__$clean_suggestion"] = $selected_plugin;
 
         // Set a file name for messages.
+        $template_file_name = 'page--' . $suggestion . '.html.twig';
+      }
+      else {
+        // Not a suggestion, set the root template name for default page layout message.
         $template_file_name = 'page.html.twig';
       }
 
-      // If backups are disabled don't create any.
-      $disable_backups = FALSE;
-      if ($values['settings_disable_backups'] == 1) {
-        $disable_backups = TRUE;
+      // Set variable for backups.
+      $enable_backups = FALSE;
+      if ($values['settings_enable_backups'] == 1 &&
+          $values['layout_type_select'] != 'disable_layout_generation') {
+        $enable_backups = TRUE;
       }
 
       // Do the heavy lifting.
-      $generateLayout->saveLayoutRegionsList($theme, $disable_backups);
-      $generateLayout->savePageTemplate($theme, $suggestion, $disable_backups);
+      $generateLayout->saveLayoutRegionsList($theme, $enable_backups);
+      $generateLayout->savePageTemplate($theme, $suggestion, $enable_backups);
 
       // check if the file exists and if so set a message.
       $file_path = drupal_get_path('theme', $theme) . '/templates/' . $template_file_name;
@@ -79,6 +87,9 @@ class LayoutGeneratorSubmit {
         drupal_set_message(t('The template file could not be saved to <code>!file_path</code>, check permissions and try again.', array('!file_path' => $file_path)), 'error');
       }
     }
+
+    // Return values so they are merged and written into configuration.
+    return $values;
   }
 
 }  // end class

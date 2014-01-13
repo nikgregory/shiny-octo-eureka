@@ -21,7 +21,7 @@
  */
 #}
 {% if content %}
-  <div class="{{ attributes.class }}"{{ attributes }}>
+  <{{ html_element }} class="{{ attributes.class }}"{{ attributes }}>
     {{ content }}
-  </div>
+  </{{ html_element }}>
 {% endif %}

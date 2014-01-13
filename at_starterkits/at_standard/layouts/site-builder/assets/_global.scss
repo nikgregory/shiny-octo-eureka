@@ -1,0 +1,31 @@
+//
+// Global layout declarations.
+//
+// These styles are not constrained by media queries and are used in all
+// compiled stylesheets.
+// ---------------------------------------------------------------------------
+
+// Import base.
+@import "base";
+
+
+// Set the Susy container on .regions, this controls the max-width. The
+// .regions class is set on each rows inner <div> wrapper to constrain the
+// the max-width of a group of regions and frees the main row wrapper to be
+// full width. The hide arguement is hiding the grid, you can "show" it also.
+.regions {
+  //@include container(show-columns);
+  @include container(hide);
+}
+
+
+// We need some padding to avoid chome collisions.
+[class*="page-row__"] {
+  padding: 0 .25em; // same as the default gutter width, giving us 0.5em total breathing room.
+}
+
+
+// Set a default margin for page rows with just one region, or when all regions are stacked.
+.region {
+   @include gutters(split);
+}

@@ -1,0 +1,72 @@
+//
+// Four Regions 12--3-9--12
+//
+// Double split row type layout. This layout splits 4 regions over 3 rows.
+//
+// Appearance:
+//
+//   -------------------------------------
+//  | First (12)                          |
+//  |-------------------------------------|
+//  | Second (3) | Third (9)              |
+//  |-------------------------------------|
+//  | Fourth (12)                         |
+//   -------------------------------------
+//  Key: region (grid columns)
+//
+// ---------------------------------------------------------------------------
+
+
+// Two active regions.
+&.active-regions--2-3 {
+  .region {
+    &:first-child {
+      @include span(3 of 12);
+    }
+    &:last-child {
+      @include span(9 omega of 12);
+    }
+  }
+}
+
+// Three active regions.
+&.active-regions--1-2-3 {
+  .region {
+    &:nth-child(2) {
+      @include span(3 of 12);
+    }
+    &:last-child {
+      @include span(9 omega of 12);
+    }
+  }
+}
+
+&.active-regions--2-3-4 {
+  .region {
+    &:first-child {
+      @include span(3 of 12);
+    }
+    &:nth-child(2) {
+      @include span(9 omega of 12);
+    }
+    &:last-child {
+      clear: both;
+    }
+  }
+}
+
+// Four active regions.
+&.active-count--4 {
+  .region {
+    &:nth-child(2) {
+      @include span(3 of 12);
+    }
+    &:nth-child(3) {
+      @include span(9 omega of 12);
+    }
+    &:last-child {
+      clear: both;
+    }
+  }
+}
+

@@ -1,0 +1,83 @@
+//
+// Four Regions split 12--4-4-4
+//
+// When three regions are active the last two regions wrap to a second line,
+// allowing the first region to be full width.
+//
+// First region  : 12 grid columns (full width)
+// -- break to new line --
+// Second region : 4 grid columns.
+// Third region  : 4 grid columns.
+// Fourth region : 4 grid columns.
+//
+// ---------------------------------------------------------------------------
+
+
+// Two active regions.
+&.active-regions--1-2,
+&.active-regions--1-3,
+&.active-regions--1-4 {
+  .region {
+   // width: 100%;
+   // clear: both;
+  }
+}
+
+&.active-regions--2-3,
+&.active-regions--2-4,
+&.active-regions--3-4 {
+  .region {
+    @include span(6 of 12);
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}
+
+
+// Three active regions.
+&.active-regions--1-2-3,
+&.active-regions--1-2-4 {
+  .region {
+    &:first-child {
+     // width: 100%;
+     // clear: both;
+    }
+    &:nth-child(2) {
+      @include span(6 of 12);
+    }
+    &:last-child {
+      @include span(6 omega of 12);
+    }
+  }
+}
+
+&.active-regions--2-3-4 {
+  .region {
+    @include span(4 of 12);
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}
+
+
+// Four active regions.
+&.active-count--4 {
+  .region {
+    &:first-child {
+     // width: 100%;
+     // clear: both;
+    }
+    &:nth-child(2),
+    &:nth-child(3) {
+      @include span(4 of 12);
+    }
+    &:last-child {
+      @include span(4 omega of 12);
+    }
+  }
+}
+

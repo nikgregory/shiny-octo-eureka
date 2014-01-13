@@ -11,38 +11,68 @@ use Drupal\at_core\Helpers\FileGlobber;
 
 class PageLayout {
 
-  // Theme name.
+  // The active theme name.
   protected $theme;
 
-  // Active regions in a page, passed from page $variables['active_regions'].
+  // Active regions in the current page.
   protected $active_regions;
 
-  // The user selected layout, usually passed from the saved theme setting.
+  // The currently selected layout.
   protected $selected_layout;
 
+  // The plugin the selected layout belongs to.
+  protected $selected_plugin;
+
   // Constructor.
-  public function __construct($theme, $selected_layout = '', $active_regions = array()) {
+  public function __construct($theme, $selected_plugin = '', $selected_layout = '', $active_regions = array()) {
     $this->theme = $theme;
+    $this->selected_plugin = $selected_plugin;
     $this->selected_layout = $selected_layout;
     $this->regions = $active_regions;
-    $this->layouts_path = drupal_get_path('theme', $this->theme) . '/layouts/';
+    $this->plugin_path = drupal_get_path('theme', $this->theme) . '/layouts/';
   }
 
   // Scan for layout directories.
   public function getLayoutDirs() {
-    $scan = new FileGlobber($this->layouts_path, NULL);
-    $layout_directories = $scan->scanDirs();
+    $scan = new FileGlobber($this->plugin_path, NULL);
+    $layout_plugins = $scan->scanDirs();
 
-    return $layout_directories;
+    return $layout_plugins;
+  }
+
+  // Scan for layout for CSS layouts.
+  // TODO: can this be merged with getLayoutDirs() into a more generic method?
+  public function getCSSLayoutDirs($css_layouts_path) {
+    $scan = new FileGlobber($css_layouts_path, NULL);
+    $css_layouts = $scan->scanDirs();
+
+    return $css_layouts;
   }
 
   // Parse layout yml files and store the arrays.
   public function parseLayoutConfig() {
     $config_data = array();
-    $layouts = self::getLayoutDirs();
-    foreach ($layouts as $layout) {
-      $config_file = $this->layouts_path . $layout . '/' . $layout . '.layout.yml';
-      $config_data[$layout] = drupal_parse_info_file($config_file);
+    $layout_plugins = self::getLayoutDirs();
+
+    foreach ($layout_plugins as $plugin) {
+      // First parse the main layout yml file
+      $config_file = $this->plugin_path . $plugin . '/' . $plugin . '.layout.yml';
+      $config_data[$plugin] = drupal_parse_info_file($config_file);
+
+      // Get the CSS layouts path from the main layout yml file.
+      if ($config_data[$plugin]['css_layouts_path']) {
+        $css_layouts_path = $this->plugin_path . $plugin . '/' . $config_data[$plugin]['css_layouts_path'];
+
+        // We need to scan directories to get all CSS layouts.
+        $css_layouts = self::getCSSLayoutDirs($css_layouts_path);
+
+        // Now parse each CSS layouts yml and add them the configuration array.
+        foreach ($css_layouts as $css_layout) {
+          $css_config_file = $css_layouts_path . '/' . $css_layout . '/' . $plugin . '.variant.' . $css_layout . '.yml';
+
+          $config_data[$plugin]['css_layouts'][$css_layout] = drupal_parse_info_file($css_config_file);
+        }
+      }
     }
 
     return $config_data;
@@ -52,26 +82,29 @@ class PageLayout {
   public function buildLayoutDataArrays() {
     // Return cache data so we avoid glob/scandir on every page load, this is pretty quick.
     if ($cache = cache()->get("$this->theme:$this->selected_layout")) {
-      $selected = $cache->data;
+      $layout = $cache->data;
     }
     else {
-      $layouts = self::parseLayoutConfig();
+      $plugins = self::parseLayoutConfig();
+      $selected_plugin = $plugins[$this->selected_plugin];
+      $css_layouts_path = $selected_plugin['css_layouts_path'];
+
+      $layout = array();
       if (!empty($this->selected_layout)) {
-        $selected['description'] = $layouts[$this->selected_layout]['description'];
-        $selected['version'] = $layouts[$this->selected_layout]['version'];
-        $selected['series'] = $layouts[$this->selected_layout]['series'];
-        $selected['rows'] = $layouts[$this->selected_layout]['rows'];
-        $selected['css'] = $layouts[$this->selected_layout]['css'];
+        $layout['version'] = $selected_plugin['version'];
+        $layout['rows']    = $selected_plugin['rows'];
+        $layout['css_layout']      = $selected_plugin['css_layouts'][$this->selected_layout]['css'];
+        $layout['css_layout_path'] = $selected_plugin['css_layouts_path'];
       }
-      if (!empty($selected)) {
-        cache()->set("$this->theme:$this->selected_layout", $selected);
+      if (!empty($layout)) {
+        cache()->set("$this->theme:$this->selected_layout", $layout);
       }
       else {
         return; // selected layout not found or not readable etc.
       }
     }
 
-    return $selected;
+    return $layout;
   }
 
 } // end class

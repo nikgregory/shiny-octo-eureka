@@ -1,0 +1,61 @@
+# Site Builder Layout Plugin.
+
+# Human readable layout name. Required.
+name: 'Site Builder'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_layout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# Path to CSS layout variants. Required.
+css_layouts_path: 'variants'
+
+# Rows. Required.
+rows:
+  header:           # row name. 'header' and 'footer' will use their html5 counterparts.
+    attributes:     # attributes key. Set id, role or classes, or any other valid html attributes. Optional.
+      role: banner  # attribute_type: attribute value
+    regions:        # regions key
+      header_first: 'Header first' # region_machine_name: 'Friendly name'
+      header_second: 'Header second'
+      header_third: 'Header third'
+  menubar:
+    attributes:
+      role: navigation
+    regions:
+      menubar: 'Menu bar'
+  messages:
+    regions:
+      messages: 'Messages'
+  features:
+    attributes:
+      role: region
+    regions:
+      features_first: 'Features first'
+      features_second: 'Features second'
+      features_third: 'Features third'
+      features_fourth: 'Features fourth'
+  main:
+    attributes:
+      id: main-content
+      role: region
+    regions:
+      highlighted: 'Highlighted'
+      content: 'Main content' # region 'content' uses <main> element wrappers and role="main"
+      sidebar_first: 'Sidebar first'
+      sidebar_second: 'Sidebar second'
+  tertiary:
+    attributes:
+      role: region
+    regions:
+      tertiary_first: 'Tertiary first'
+      tertiary_second: 'Tertiary second'
+      tertiary_third: 'Tertiary third'
+      tertiary_fourth: 'Tertiary fourth'
+  footer:
+    attributes:
+      role: contentinfo
+    regions:
+      footer: 'Footer'

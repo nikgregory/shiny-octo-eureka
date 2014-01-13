@@ -1,0 +1,54 @@
+//
+// Four Regions 6-6--6-6
+//
+// Offset grid type layout.
+//
+// First region  : 6 grid columns.
+// Second region : 6 grid columns.
+// -- break to new line --
+// Third region  : 6 grid columns.
+// Fourth region : 6 grid columns.
+//
+// - when two regions are active the first is 6 columns, the second 6 columns.
+// - when three regions are active the third active region is 12 columns.
+// ---------------------------------------------------------------------------
+
+
+&.active-count--2 {
+  .region {
+    @include span(6 of 12);
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}
+
+
+&.active-count--3 {
+  .region {
+    &:first-child {
+      @include span(6 of 12);
+    }
+    &:nth-child(2) {
+      @include span(6 omega of 12);
+    }
+    &:last-child {
+     // width: 100%;
+     // clear: both;
+    }
+  }
+}
+
+
+&.active-count--4 {
+  .region {
+    &:nth-child(2n+1) {
+      @include span(6 of 12);
+    }
+    &:nth-child(2n+2) {
+      @include span(6 omega of 12);
+    }
+  }
+}
+

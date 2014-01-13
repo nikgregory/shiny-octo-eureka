@@ -4,7 +4,7 @@
 $form['subtheme_help'] = array(
   '#type' => 'details',
   '#title' => t('Help'),
-  '#group' => 'atsettings',
+  '#group' => 'settings',
   //'#description' => t('Help docs to get you on the right track.'),
 );
 

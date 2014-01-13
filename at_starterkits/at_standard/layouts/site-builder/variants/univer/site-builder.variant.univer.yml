@@ -1,0 +1,21 @@
+# Metro CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Univer'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: univer.css
+  no_mq: univer-ie8.css
+
+# Desc
+description: 'The universal, classic three column layout. Extra regions for slideshows and other features, footer columns and a split header layout with topbar. Dedicated regions for menubar and messages. Nineteen regions total. Responsive, content source ordered, mobile first, all regions collaspible.'
+
+# Screenshot
+screenshot: univer.png

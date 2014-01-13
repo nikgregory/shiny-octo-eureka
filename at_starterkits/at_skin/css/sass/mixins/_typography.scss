@@ -16,18 +16,3 @@ $modern-myriad:               'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica
 $lucida:                      'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif;
 $impact:                      Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
 $mono:                        Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;
-
-
-// Fonts in rems with px fallback
-@mixin font-size($size, $is-important: false) {
-  $size: if(unitless($size), $size, $size / 1px);
-
-  @if $is-important {
-    font-size: $size + px !important;
-    font-size: ($size / strip-units($base-font-size)) + rem !important;
-  } @else {
-    font-size: $size + px;
-    font-size: ($size / strip-units($base-font-size)) + rem;
-  }
-}
-

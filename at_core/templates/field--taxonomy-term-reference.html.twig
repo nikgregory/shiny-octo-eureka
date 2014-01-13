@@ -33,12 +33,12 @@
 <div class="{{ attributes.class }}"{{ attributes }}>
 
   {% if not label_hidden %}
-    <h3 class="field-label"{{ title_attributes }}>{{ label }}</h3>
+    <h3 class="field__label"{{ title_attributes }}>{{ label }}</h3>
   {% endif %}
 
-  <ul class="field-items"{{ content_attributes }}>
+  <ul class="field__items"{{ content_attributes }}>
     {% for delta, item in items %}
-      <li class="field-item {{ cycle(["even", "odd"], delta) }}"{{ item_attributes[delta] }}>
+      <li class="field__item--{{ delta }}"{{ item_attributes[delta] }}>
         {{ item }}
       </li>
     {% endfor %}

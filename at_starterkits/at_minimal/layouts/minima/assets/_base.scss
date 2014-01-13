@@ -1,0 +1,48 @@
+//
+// Import required plugins and define base variables.
+//
+// Don't write any actual styles here, its just for configuration and imports.
+// ---------------------------------------------------------------------------
+
+// Import Compass Plugins
+@import "compass/utilities";
+@import "compass/css3";
+
+
+// Import Susy
+@import "susy";
+
+
+// Susy Global Settings
+// 12 x 5.25, content box = 75em (1200px assuming 16px global font size) overall width.
+// Using border-box this shrinks to 73.75/1180px.
+$susy: (
+  columns: 12,
+  gutters: .25,
+  column-width: 5em,
+  gutter-position: split,
+  global-box-sizing: content-box,
+);
+
+
+// Breakpoints
+//
+// These breakpoints use ems, which mean they are dependant on the base font size,
+// so any pixel equivalents stated here assume base font size of 16px. Change then
+// to suit your requirements.
+//
+//   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint.
+//   $narrow-wide - 45em (720px) and up, cascading breakpoint.
+//   $wide        - 60em (960px) and up, cascading breakpoint.
+//
+// Schema:
+//
+//   |<-- 45em         60em -->|
+//   |<-- narrow ------------->|
+//   |<-- narrow wide ------------------------------------------------------->
+//                             |<--- wide ----------------------------------->
+//
+$narrow      : "all and (min-width: 45em) and (max-width: 60em)";
+$narrow-wide : "all and (min-width: 45em)"; // Allow layout to cascade into wide.
+$wide        : "all and (min-width: 60em)";
+

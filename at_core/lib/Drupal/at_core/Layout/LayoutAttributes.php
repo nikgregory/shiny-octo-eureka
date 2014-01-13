@@ -28,7 +28,7 @@ class LayoutAttributes extends PageLayout {
     foreach ($layout_data['rows'] as $row => $regions) {
       $rows[$row] = $regions;
 
-      // Set an increment value for each region in a row.
+      // Set an increment value for each region in a row. "rso" is "row source order".
       $i = 1;
       foreach ($regions['regions'] as $rg_key => $rg_value) {
         $rso[$row][$rg_key] = $i++;
@@ -38,7 +38,7 @@ class LayoutAttributes extends PageLayout {
     foreach ($rows as $row_key => $row_values) {
       // Instantiate attribute object arrays per row.
       $variables[$row_key . '__attributes'] = new Attribute(array('class' => array()));
-      $variables[$row_key . '__attributes']['class'][] = 'page-row-'. str_replace('_', '-', $row_key);
+      $variables[$row_key . '__attributes']['class'][] = 'page-row__'. str_replace('_', '-', $row_key);
 
       // Set row attributes as defined in the layout configuration yml file.
       if (isset($row_values['attributes'])) {
@@ -82,10 +82,10 @@ class LayoutAttributes extends PageLayout {
         $variables[$row_region_key . '__regions']['active'] = TRUE;
 
         // Total count class.
-        $variables[$row_region_key . '__attributes']['class'][] = 'total-count-' . $total_region_count[$row_region_key]['total_count'];
+        $variables[$row_region_key . '__attributes']['class'][] = 'total-count--' . $total_region_count[$row_region_key]['total_count'];
 
         // Region count class.
-        $variables[$row_region_key . '__attributes']['class'][] = 'active-count-'. $count;
+        $variables[$row_region_key . '__attributes']['class'][] = 'active-count--'. $count;
 
         // Active region classes.
         foreach ($row_region_values as $region_class) {
@@ -102,7 +102,7 @@ class LayoutAttributes extends PageLayout {
       // is a powerful class that will be used for any order columns type layout with minimal CSS and classes, think of this
       // like Drupals "two-sidebars" type class but automated for any row and an any number of regions.
       if (isset($rso_count_class[$row_region_key])) {
-        $variables[$row_region_key . '__attributes']['class'][] =  'active-regions-' . implode('-', $rso_count_class[$row_region_key]);
+        $variables[$row_region_key . '__attributes']['class'][] =  'active-regions--' . implode('-', $rso_count_class[$row_region_key]);
       }
 
     }

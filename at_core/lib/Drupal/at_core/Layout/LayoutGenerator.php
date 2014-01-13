@@ -9,20 +9,10 @@ namespace Drupal\at_core\Layout;
 
 use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Helpers\BuildInfoFile;
+use Drupal\at_core\Helpers\FileSavePrepare;
 
 // Fired during theme settings submit.
 class LayoutGenerator extends PageLayout {
-
-  // Prepare directories for backups, cause yeh know, we really oughta.
-  public function backupPrepareDirs($path, $directory, $subdirectory) {
-    $backup_path = $path . '/' . $directory . '/' . $subdirectory;
-
-    if (!file_exists($backup_path)) {
-      file_prepare_directory($backup_path, FILE_CREATE_DIRECTORY);
-    }
-
-    return $backup_path;
-  }
 
   // Format the regions array for printing in info.yml files
   public function formatLayoutRegions() {
@@ -40,25 +30,27 @@ class LayoutGenerator extends PageLayout {
     return $regions;
   }
 
-  // Save the info file with new regions list
-  public function saveLayoutRegionsList($target, $disable_backups = '') {
-    //$path = drupal_get_path('theme', $this->theme);
-    //$info_file = $this->theme . '.info.yml';
-
+  // Save the info file with new regions list and create a backup.
+  public function saveLayoutRegionsList($target, $enable_backups = '') {
     $path = drupal_get_path('theme', $target);
     $info_file = $target . '.info.yml';
-
     $file_path = $path . '/' . $info_file;
 
     // Create a backup.
-    if ($disable_backups != TRUE) {
-      $backup_path = self::backupPrepareDirs($path, 'backup', 'info');
+    if ($enable_backups == TRUE) {
+      $fileSavePrepare = new FileSavePrepare();
+      $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'info'));
+
+      //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
       $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
 
-      if (file_exists($file_path)) {
-        copy($file_path, $backup_path . '/' . $info_file);
-        rename($backup_path . '/' . $info_file, $backup_path . '/' . $backup_file);
-      }
+      $file_paths = array(
+       'copy_source' => $file_path,
+       'copy_dest' => $backup_path . '/' . $info_file,
+       'rename_oldname' => $backup_path . '/' . $info_file,
+       'rename_newname' => $backup_path . '/' . $backup_file,
+      );
+      $backupInfo = $fileSavePrepare->copyRename($file_paths);
     }
 
     // Parse the current info file.
@@ -84,19 +76,20 @@ class LayoutGenerator extends PageLayout {
     // Format twig markup.
     foreach ($layouts['rows'] as $row => $values) {
       foreach ($values['regions'] as $region_name => $region_value) {
-        $row_regions[$row][] = '    {{ page.' . $region_name . ' }}';
+        $row_regions[$row][] = '      {{ page.' . $region_name . ' }}';
       }
       $wrapper_element = 'div';
-      if ($row == 'header' || $row == 'main' || $row == 'footer') {
+      //if ($row == 'header' || $row == 'main' || $row == 'footer') {
+      if ($row == 'header' || $row == 'footer') {
         $wrapper_element = $row;
       }
-      $output[$row]['prefix'] = '{% if '. $row . '__regions.active == true %}';
-      $output[$row]['wrapper_open'] =  '<'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
-      $output[$row]['container_open'] = '  <div class="container">';
+      $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+      $output[$row]['wrapper_open'] =  '  <'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
+      $output[$row]['container_open'] = '    <div class="regions">';
       $output[$row]['regions'] = implode("\n", $row_regions[$row]);
-      $output[$row]['container_close'] = '  </div>';
-      $output[$row]['wrapper_close'] = '</' . $wrapper_element . '>';
-      $output[$row]['suffix'] = '{% endif %}' . "\n";
+      $output[$row]['container_close'] = '    </div>';
+      $output[$row]['wrapper_close'] = '  </' . $wrapper_element . '>';
+      $output[$row]['suffix'] = '  {% endif %}' . "\n";
     }
 
     // Doc block
@@ -111,18 +104,19 @@ class LayoutGenerator extends PageLayout {
 
     // Final preparations.
     $page_rows[] = $docblock;
-    $page_rows[] = '{{ messages }}' . "\n"; // TODO Remove if messages becomes a block: https://drupal.org/node/507488
+    $page_rows[] = '<div{{ attributes }}>' . "\n";
+    $page_rows[] = '  {{ messages }}' . "\n"; // TODO Remove if messages becomes a block: https://drupal.org/node/507488
     foreach ($output as $row_output) {
       $page_rows[] = implode("\n", $row_output);
     }
+    $page_rows[] = '</div>';
 
     return $page_rows;
   }
 
   // Save the output of formatPageMarkup()
-  public function savePageTemplate($target, $suggestion = '', $disable_backups = '') {
-    //$path = drupal_get_path('theme', $this->theme);
-
+  public function savePageTemplate($target, $suggestion = '', $enable_backups = '') {
+    // Path to target theme where the template will be saved.
     $path = drupal_get_path('theme', $target);
 
     // Set the template file, either it's page or a page suggestion.
@@ -136,15 +130,21 @@ class LayoutGenerator extends PageLayout {
     // Set the template path.
     $template_path = $path . '/templates/'. $template_file;
 
-    // Create a backup. Add a date string, similar to how Backup and Migrate works.
-    if ($disable_backups != TRUE) {
-      $backup_path = self::backupPrepareDirs($path, 'backup', 'templates');
+    // Create a backup.
+    if ($enable_backups == TRUE) {
+      $fileSavePrepare = new FileSavePrepare();
+      $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'templates'));
+
+      //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
       $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
 
-      if (file_exists($template_path)) {
-        copy($template_path, $backup_path . '/'. $template_file);
-        rename($backup_path . '/' . $template_file, $backup_path . '/' . $backup_file);
-      }
+      $file_paths = array(
+       'copy_source' => $template_path,
+       'copy_dest' => $backup_path . '/' . $template_file,
+       'rename_oldname' => $backup_path . '/' . $template_file,
+       'rename_newname' => $backup_path . '/' . $backup_file,
+      );
+      $backupTemplate = $fileSavePrepare->copyRename($file_paths);
     }
 
     // Write the template file.

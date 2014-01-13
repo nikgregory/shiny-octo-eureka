@@ -1,0 +1,33 @@
+//
+// Starterkit Internet Explorer 8 Layout
+//
+// Import globals and layout partials. For IE8 we only import the narrow-wide and
+// wide layouts and of course there are no media queries.
+//
+// This file compiles directly into layout-starterkit_IE8.css and is loaded if
+// required (if the user checks the box to load support for IE8).
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "../../../assets/global";
+
+
+// Header (3 regions)
+.page-row__header {
+  @import "../../../assets/ELF/three/split-rows/three-sr-12--6-6";
+}
+
+// Features (4 regions)
+.page-row__features {
+  @import "../../../assets/ELF/four/split-rows/four-sr-12--4-4-4";
+}
+
+// Main (4 regions)
+.page-row__main {
+  @import "../../../assets/ELF/four/content-priority/four-cp-12--3-6-3";
+}
+
+// Tertiary (4 regions)
+.page-row__tertiary {
+  @import "../../../assets/ELF/four/four-3-3-3-3";
+}

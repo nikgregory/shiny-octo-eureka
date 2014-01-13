@@ -1,0 +1,12 @@
+id: theme.at_core.at_core
+uuid: 7f6492dc-028c-47e9-bb00-c280cc2158jb
+name: at_core
+label: Adaptivetheme
+breakpoint_ids:
+  - theme.at_core.mobile
+  - theme.at_core.narrow
+  - theme.at_core.wide
+source: at_core
+sourceType: theme
+status: true
+langcode: en

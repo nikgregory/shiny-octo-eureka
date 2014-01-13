@@ -1,0 +1,12 @@
+id: theme.at_core.wide
+uuid: 42288274-fd42-49cc-bb0d-131c13e2b4jb
+name: wide
+label: Wide
+mediaQuery: 'all and (min-width: 60em)'
+source: at_core
+sourceType: theme
+weight: 2
+multipliers:
+  1x: 1x
+status: true
+langcode: en

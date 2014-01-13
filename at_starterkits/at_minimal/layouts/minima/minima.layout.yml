@@ -1,0 +1,44 @@
+# Minima Configuration.
+
+# Human readable layout name. Required.
+name: 'Minima'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_layout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# Path to CSS layout variants. Required.
+css_layouts_path: 'variants'
+
+# Rows. Required.
+rows:
+  header:           # row names. 'header', 'main' and 'footer' will use their html5 counterparts.
+    attributes:     # row attributes. Set id, role or classes, or any other valid html attributes. Optional.
+      role: banner
+    regions:        # regions. At least one region per row is required.
+      header_first: 'Header first'
+      header_second: 'Header second'
+  menubar:
+    attributes:
+      role: navigation
+    regions:
+      menubar: 'Menu bar'
+  messages:
+    regions:
+      messages: 'Messages'
+  main:
+    attributes:
+      role: main
+      id: main-content
+    regions:
+      highlighted: 'Highlighted'
+      content: 'Main content'
+      sidebar_first: 'Sidebar first'
+      sidebar_second: 'Sidebar second'
+  footer:
+    attributes:
+      role: contentinfo
+    regions:
+      footer: 'Footer'

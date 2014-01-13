@@ -10,7 +10,7 @@ $form['generate'] = array(
   '#type' => 'details',
   '#title' => 'Generate Themes',
   '#group' => 'atsettings',
-  '#description' => t('Use this form to generate a new theme. See the Help tab for information on Starterkit types, Clones, Skins and other documentation.'),
+  '#description' => t('Use this form to generate a new sub-theme. See the Help tab for information.'),
   '#tree' => TRUE,
 );
 
@@ -70,7 +70,7 @@ $form['generate']['generate_clone_source'] = array(
   '#title' => t('Theme to clone'),
   '#options' => $sourceThemeOptions,
   '#default_value' => '',
-  '#description' => t('Clones are direct copies of existing sub-themes. You should use a unique name and optionally enter a new description and version string.'),
+  '#description' => t('Clones are direct copies of existing sub-themes. You should use a unique name.'),
   '#states' => array(
     'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_clone')),
   ),
@@ -80,7 +80,7 @@ $form['generate']['generate_skin_base'] = array(
   '#title' => t('Skin base theme'),
   '#options' => $sourceThemeOptions,
   '#default_value' => '',
-  '#description' => t('Skins are sub sub-themes. Select an existing sub-theme to use as the base.'),
+  '#description' => t('Skins are sub-sub-themes. Select an existing sub-theme to use as the base.'),
   '#states' => array(
     'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_skin')),
   ),
@@ -107,7 +107,7 @@ $form['generate']['generate_description'] = array(
   '#type' => 'textfield',
   '#title' => t('Enter a brief description'),
   '#default_value' => '',
-  '#description' => t('Descriptions are used on the Appearance list page. If nothing is entered a generic description will be used.'),
+  '#description' => t('Descriptions are used on the Appearance list page. If nothing is entered a generic description is used.'),
 );
 
 // Version.
@@ -115,5 +115,5 @@ $form['generate']['generate_version'] = array(
   '#type' => 'textfield',
   '#title' => t('Enter a version string'),
   '#default_value' => '',
-  '#description' => t('User numbers, hyphens and periods only. E.g. 8.0-1.0. If no version is entered a default will be used.'),
+  '#description' => t('Numbers, hyphens and periods only. E.g. 8.0-1.0. If no version is entered a default is used.'),
 );

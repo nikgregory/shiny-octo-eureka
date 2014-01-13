@@ -1,13 +1,10 @@
 //
-// Style menu blocks and other primay navigation elements such as the Menu bar
-// region and blocks.
-//
+// Style menu blocks and other primary navigation elements
 // ---------------------------------------------------------------------------
 @import "base";
 
 
-// Menus
-// ---------------------------------------------------------------------------
+// Menus.
 ul.menu {
   li {
 
@@ -20,9 +17,10 @@ ul.menu {
 }
 
 
-// Menu Bar menus
-// ---------------------------------------------------------------------------
-.region-menu-bar {
+// Menu Bar menus.
+// If you are using a menubar region in your layout (all Adapativetheme
+// layouts have this region by default) you can use these selectors.
+.region-menubar {
 
   .block {}
 

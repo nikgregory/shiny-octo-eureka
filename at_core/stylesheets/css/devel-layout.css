@@ -106,12 +106,12 @@ body {
 }
 
 html, body {
-  background: white !important;
+  background: #fff !important;
   padding: 20px 0;
 }
 
 [class*="page-row-"] {
-  background: white !important;
+  background: #fff !important;
   padding: 5px 0;
 }
 [class*="page-row-"] .container {

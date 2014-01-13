@@ -1,0 +1,53 @@
+//
+// Publisher Layout.
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "../../../assets/global";
+
+
+/* Narrow screens only. */
+@media #{$narrow} {
+
+  /* Features (4 regions) */
+  .page-row__features {
+    @import "../../../assets/ELF/four/split-rows/four-sr-12--6-6--12";
+  }
+
+  /* Main (4 regions) */
+  .page-row__main {
+    @import "../../../assets/ELF/four/split-rows/four-sr-12--9-3--12";
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row__tertiary {
+    @import "../../../assets/ELF/four/split-rows/four-sr-6-6--6-6";
+  }
+}
+
+
+/* Narrows and wide screens (and up) */
+@media #{$narrow-wide} {
+
+  /* Header (3 regions) */
+  .page-row__header {
+    @import "../../../assets/ELF/three/split-rows/three-sr-12--6-6";
+  }
+}
+
+
+/* Wide screens and up. */
+@media #{$wide} {
+
+  /* Features (4 regions) and Main (4 regions) */
+  .page-row__features,
+  .page-row__main {
+    @import "../../../assets/ELF/four/split-rows/four-sr-12--6-3-3";
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row__tertiary {
+    @import "../../../assets/ELF/four/four-3-3-3-3";
+  }
+}

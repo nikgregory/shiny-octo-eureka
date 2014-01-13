@@ -39,7 +39,7 @@ class ThemeInfo {
    */
   public function __construct($theme) {
     $this->theme = $theme;
-    $this->data = list_themes();
+    $this->data = \Drupal::service('theme_handler')->listInfo();
   }
 
   /**
