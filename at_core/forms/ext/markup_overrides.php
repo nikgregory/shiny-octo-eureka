@@ -18,6 +18,7 @@ $form['markup_overrides']['markup_overrides_settings'] = array(
 );
 
 
+/*
 // Design
 $form['markup_overrides']['markup_overrides_settings']['design'] = array(
   '#type' => 'fieldset',
@@ -32,6 +33,7 @@ $form['markup_overrides']['markup_overrides_settings']['design']['settings_menu_
   '#description' => t('Note: this does not work for <a href="!link" target="_blank">Superfish menus</a>, which includes its own feature for doing this.', array('!link' => 'http://drupal.org/project/superfish')),
   '#default_value' => theme_get_setting('settings.menu_item_span_elements'),
 );
+*/
 
 
 // Breadcrumbs
@@ -79,37 +81,39 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'][
 
 
 // Login block.
-if (theme_get_setting('horizontal_login_block_enable') === 'on') {
-  $form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Login Block'),
-    '#description' => t('<h3>Login Block Options</h3>'),
-  );
+$form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Login Block'),
+  '#description' => t('<h3>Login Block Options</h3>'),
+);
 
-  // Login block links
-  $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_login_block_remove_links'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Remove links'),
-    '#default_value' => theme_get_setting('settings.login_block_remove_links'),
-    '#description' => t('Remove the <em>Create new account</em> and <em>Request new password</em> links from the login block.'),
-  );
+// Login block placeholder labels.
+$form['markup_overrides']['markup_overrides_settings']['login-block']['settings_login_block_placeholder_labels'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Placeholder labels'),
+  '#default_value' => theme_get_setting('settings.login_block_placeholder_labels'),
+  '#description' => t('Use html5 placeholder labels instead of real labels.'),
+);
 
-  // Login block OpenID
-  $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_login_block_remove_openid'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Remove OpenID elements'),
-    '#default_value' => theme_get_setting('settings.login_block_remove_openid'),
-    '#description' => t('Remove the OpenID links and form elements from the login block.'),
-  );
+// Horizontal login block
+$form['markup_overrides']['markup_overrides_settings']['login-block']['settings_horizontal_login_block'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Horizontal login block'),
+  '#default_value' => theme_get_setting('settings.horizontal_login_block'),
+  '#description' => t('Enable a horizontal style login block (all elements on one line). This setting automatically removes links.'),
+);
 
-  // Horizontal login block
-  $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_horizontal_login_block'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Horizontal login block'),
-    '#default_value' => theme_get_setting('settings.horizontal_login_block'),
-    '#description' => t('Enable a horizontal style login block (all elements on one line). This does not work so well with OpenID and you should probably check the setting to remove OpendID elements.'),
-  );
-}
+// Login block links
+$form['markup_overrides']['markup_overrides_settings']['login-block']['settings_login_block_remove_links'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Remove links'),
+  '#default_value' => theme_get_setting('settings.login_block_remove_links'),
+  '#description' => t('Remove the <em>Create new account</em> and <em>Request new password</em> links from the login block.'),
+  '#states' => array(
+    'checked' => array('input[name="settings_horizontal_login_block"]' => array('checked' => TRUE)),
+    'disabled' => array('input[name="settings_horizontal_login_block"]' => array('checked' => TRUE)),
+  ),
+);
 
 
 // Hide or Remove
@@ -130,10 +134,11 @@ $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_
 // Remove menu link titles
 $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_unset_menu_titles'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Remove menu link titles'),
+  '#title' => t('Remove menu link titles (tooltips)'),
   '#default_value' => theme_get_setting('settings.unset_menu_titles'),
-  '#description' => t('Checking this setting will remove all menu link titles (tool tips). This only works for menu blocks.'),
+  '#description' => t('Checking this setting will remove menu link title attributes rendered via <code>theme_menu_link()</code>, such as menu block links.'),
 );
+
 
 
 // Accessibility
@@ -143,6 +148,7 @@ $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
   '#description' => t('<h3>Accessibility</h3>'),
 );
 
+/*
 // Use extra fieldsets in advanced serach form
 $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_adv_search_extra_fieldsets'] = array(
   '#type' => 'checkbox',
@@ -150,16 +156,20 @@ $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_adv_sea
   '#default_value' => theme_get_setting('settings.adv_search_extra_fieldsets'),
   '#description' => t('The problem with Drupals standard Advanced search form is that each criterion group is wrapped in a DIV, whereas it should use fieldsets. Turning this on may cause issues with modules that modify the search form such as Search Config.'),
 );
+*/
 
 // Skip link target
 $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_link_target'] = array(
   '#type' => 'textfield',
   '#title' => t('Skip to navigation target ID'),
-  '#description' => t('If your main content is not in the Main Content region you can change the skip link target ID to match.'),
+  '#description' => t('By default the skip link target is <code>#main-content</code>, you can alter that here if you need to.'),
+  '#size' => 25,
+  '#maxlength' => 60,
   '#default_value' => check_plain(theme_get_setting('settings.skip_link_target')),
 );
 
 
+/*
 // SEO/Authorship
 $form['markup_overrides']['markup_overrides_settings']['seo'] = array(
   '#type' => 'fieldset',
@@ -182,6 +192,7 @@ $form['markup_overrides']['markup_overrides_settings']['seo']['settings_logo_tit
   '#default_value' => theme_get_setting('settings.logo_title'),
   '#description' => t('By default the text "Home page" is used for the tool tip. This option overrides this with the site name.'),
 );
+*/
 
 
 // Attribution

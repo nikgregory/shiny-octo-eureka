@@ -27,28 +27,35 @@ function at_core_submit_advanced_settings(&$form, &$form_state) {
       require_once($at_core_path . '/forms/ext/titles_submit.php');
     }
 
-    // Submit handler for fonts.
+    // Submit handler for Fonts.
     if (isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) {
       at_core_submit_fonts($values, $theme, $generated_files_path);
     }
 
-    // Submit handler for titles.
+    // Submit handler for Titles.
     if (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1) {
       at_core_submit_titles($values, $theme, $generated_files_path);
     }
 
-    // Submit handler for images.
+    // Submit handler for Images.
     if (isset($values['settings_enable_images']) && $values['settings_enable_images'] === 1) {
       require_once($at_core_path . '/forms/ext/images_submit.php');
       at_core_submit_images($values, $theme, $generated_files_path);
     }
 
-    // Submit handler for breadcrumbs.
+    // Submit handler for Markup Overrides.
     if (isset($values['settings_enable_markup_overrides']) && $values['settings_enable_markup_overrides'] === 1) {
-      if (($values['settings_breadcrumb_title'] &&  $values['settings_breadcrumb_title'] === 1) || !empty($values['settings_breadcrumb_separator'])) {
+
+      // Breadcrumbs
+      if ((isset($values['settings_breadcrumb_title']) && $values['settings_breadcrumb_title'] === 1) || !empty($values['settings_breadcrumb_separator'])) {
         require_once($at_core_path . '/forms/ext/breadcrumb_submit.php');
         at_core_submit_breadcrumb($values, $theme, $generated_files_path);
-        //kpr($values);
+      }
+
+      // Login block.
+      if (isset($values['settings_horizontal_login_block']) && $values['settings_horizontal_login_block'] === 1) {
+        require_once($at_core_path . '/forms/ext/login_block_submit.php');
+        at_core_submit_login_block($values, $theme, $generated_files_path);
       }
     }
 
@@ -64,6 +71,8 @@ function at_core_submit_advanced_settings(&$form, &$form_state) {
   $config = \Drupal::config($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config)->save();
+
+  drupal_set_message(t('Advanced settings configuration has been saved.'), 'status');
 }
 
 

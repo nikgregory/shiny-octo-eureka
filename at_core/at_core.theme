@@ -17,8 +17,6 @@ if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
   require_once(drupal_get_path('theme', 'at_core') . '/forms/ext/fonts.inc');
 }
 
-
-
 /**
  * TODO:
  * The preprocess layer is set to be removed in Drupal 9, and is proposed to
@@ -63,6 +61,43 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
   }
 
   return $cache[$theme]->get($setting_name);
+}
+
+/**
+* Returns HTML for a menu link and submenu.
+*
+* @param $variables
+* An associative array containing:
+* - element: Structured array data for a menu link.
+*/
+function at_core_menu_link(array $variables) {
+  global $theme;
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  // Add extra classes for menu depth and mlid (menu id).
+  if (!empty($element['#original_link']['depth'])) {
+    $element['#attributes']['class'][] = 'menu-depth--' . $element['#original_link']['depth'];
+  }
+  if (!empty($element['#original_link']['mlid'])) {
+    $element['#attributes']['class'][] = 'menu-item__' . $element['#original_link']['mlid'];
+  }
+
+  // Remove link attribute title (tooltips).
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+      if (at_core_theme_get_setting('settings.unset_menu_titles', $theme) === 1) {
+        unset($element['#localized_options']['attributes']['title']);
+      }
+    }
+  }
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
 /**
@@ -473,9 +508,10 @@ function at_core_page_alter(&$page) {
     }
 
 
-    // Markup overrides
+    // Markup overrides.
     if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
-      // Breadcrumbs
+
+      // Breadcrumbs.
       if (at_core_theme_get_setting('settings.breadcrumb_label', $theme) === 1 || at_core_theme_get_setting('settings.breadcrumb_separator', $theme) === 1) {
         $breadcrumb_file = $generated_css_file_path . '/' . $theme . '--breadcrumb.css';
         $page['#attached']['css'][$breadcrumb_file] = array(
@@ -484,8 +520,19 @@ function at_core_page_alter(&$page) {
           'group' => CSS_AGGREGATE_THEME,
         );
       }
-    }
 
+      // Login block.
+      if ($GLOBALS['user']->isAuthenticated() == FALSE) {
+        if (at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
+          $login_block_file = $generated_css_file_path . '/' . $theme . '--login-block.css';
+          $page['#attached']['css'][$login_block_file] = array(
+            'type' => 'file',
+            'data' => $login_block_file,
+            'group' => CSS_AGGREGATE_THEME,
+          );
+        }
+      }
+    }
 
     // A external link to Google web fonts.
     // TODO add extra checks so this is not run often, consider adding "allowable font types" in theme settings?
@@ -501,11 +548,34 @@ function at_core_page_alter(&$page) {
 }
 
 /**
+ * hook_form_FORM_ID_alter()
+ * Modify the User Login Block Form
+ */
+function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
+  global $theme;
+
+  // Login block mods.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+
+      // Placeholders.
+      if (at_core_theme_get_setting('settings.login_block_placeholder_labels', $theme) === 1) {
+        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+        $form['name']['#title_display'] = 'invisible';
+        $form['pass']['#title_display'] = 'invisible';
+      }
+    }
+  }
+}
+
+/**
  * Preprocess variables for html templates.
  *
  * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_html(&$variables) {
+  global $theme;
   $language_interface = Drupal::languageManager()->getLanguage();
 
   // Re-usable variables for the h5bp type conditional classes. Attributes can
@@ -517,6 +587,12 @@ function at_core_preprocess_html(&$variables) {
   // Add a "site name" body classes for advanced theming of multi-sites.
   if ($variables['head_title_array']['name']) {
     $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
+  }
+
+  // Set the skip navigation target ID
+  $variables['skip_link_target'] = '#main-content';
+  if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
+    $variables['skip_link_target'] = check_plain($skip_link_target);
   }
 }
 
@@ -546,8 +622,7 @@ function at_core_preprocess_page(&$variables) {
   drupal_render($css);
   */
 
-  //kpr($variables);
-
+  // Layouts.
   if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
     // Set a variable that holds an array of the active visible regions.
     $regions = system_region_list($theme, REGIONS_VISIBLE);
@@ -668,6 +743,8 @@ function at_core_preprocess_comment_wrapper(&$variables) {
  * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_comment(&$variables) {
+  global $theme;
+
   $comment = $variables['elements']['#comment'];
 
   // Initialize new attribute arrays.
@@ -682,6 +759,15 @@ function at_core_preprocess_comment(&$variables) {
   // Set a class on the comment footer if there is a user picture.
   if (isset($variables['user_picture']['user_picture'])) {
     $variables['submitted_attributes']['class'][] = 'comment__submitted--user-picture';
+  }
+
+  // Hide comment titles.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+      if (at_core_theme_get_setting('settings.comments_hide_title', $theme) === 1) {
+        $variables['title_attributes']['class'][] = 'visually-hidden';
+      }
+    }
   }
 
   // Unpublished status message.
@@ -724,10 +810,29 @@ function at_core_preprocess_comment(&$variables) {
  * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_block(&$variables) {
+ global $theme;
+
+  // Conditional markup, need to see if this affects caching and if so, think about that a lot.
   $variables['html_element'] = 'div';
   if (!empty($variables['label'])) {
     $variables['html_element'] = 'section';
     $variables['title_attributes']['class'][] = 'block__title';
+  }
+
+  // Remove login block links.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+      if (at_core_theme_get_setting('settings.login_block_remove_links', $theme) === 1 || at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
+        if ($variables['plugin_id'] == 'user_login_block') {
+          unset($variables['content']['user_links']);
+
+          // Add class for horizontal login.
+          if (at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
+            $variables['attributes']['class'][] = 'block-login--horizontal';
+          }
+        }
+      }
+    }
   }
 }
 
@@ -783,7 +888,12 @@ function at_core_preprocess_field(&$variables) {
   }
 }
 
-
+/**
+ * Preprocess variables for breadcrumb templates.
+ *
+ * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
+ * SEE: https://drupal.org/node/1987398 field.module - Convert theme_ functions to Twig
+ */
 function at_core_preprocess_breadcrumb(&$variables) {
   global $theme;
 
@@ -820,8 +930,6 @@ function at_core_preprocess_breadcrumb(&$variables) {
     }
   }
 }
-
-
 
 // Check views preprocess functions we need.
 /*

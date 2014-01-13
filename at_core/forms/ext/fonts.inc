@@ -13,7 +13,7 @@ function at_build_font_families($element, $selector, $font_values) {
   // Format values as valid CSS
   $font_styles = array();
   if (!empty($font_values)) {
-    if (isset($font_values['font_size'])) {
+    if (!empty($font_values['font_size'])) {
       $font_styles[] = 'font-size:' . $font_values['font_size'] . 'px;';
       $font_styles[] = 'font-size:'. $font_values['font_size'] / 16 . 'rem;';
     }
