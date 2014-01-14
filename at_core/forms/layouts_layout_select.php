@@ -10,16 +10,14 @@ $form['layouts']['layout_select'] = array(
   ),
 );
 
-// Page layout options
+// Page layout options.
 foreach ($providers as $provider_key => $provider_name) {
   foreach ($options_data[$provider_key] as $plugin => $options) {
     $master_layout_options[$plugin] = $plugin;
   }
 }
 
-// Suggestion layout options
-//$suggestions_layout_options[$default_plugin_key] = $default_plugin_key;
-
+// Master layout plugin.
 $form['layouts']['layout_select']['settings_master_layout'] = array(
   '#type' => 'select',
   '#title' => t('<h3>Layout</h3>'),
@@ -37,9 +35,7 @@ $layout_plugin_header = array(
 
 // Prepare table select data.
 foreach ($providers as $provider_key => $provider_name) {
-
   if (!empty($options_data[$provider_key])) {
-
     foreach ($options_data[$provider_key] as $plugin => $options) {
 
       if ($plugin == 'not-set') {
@@ -106,10 +102,3 @@ foreach ($providers as $provider_key => $provider_name) {
     }
   }
 }
-
-// edit-settings-selected-layout-site-builder-metro
-
-// settings_selected_layout_site-builder
-
-
-
