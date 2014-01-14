@@ -17,7 +17,7 @@ $form['layouts']['adv_options']['select']['max_width'] = array(
   '#title' => t('Max Width'),
   '#collapsed' => TRUE,
   '#collapsible' => TRUE,
-  '#description' => t('<p>All Adaptivetheme supplied layouts have a max-width set in em (all use the Susy Magic grid), here you can override the max-width value and unit. Percent (%) will give a fluid layout, all other units result in an elastic type layout.</p>'),
+  '#description' => t('<p>Adaptivetheme supplied layouts have a max-width set in em. You can override the max-width value and unit. Percent (%) will give a fluid layout, all other units result in an elastic type layout. This is a global setting that applies to all templates.</p>'),
 );
 
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable'] = array(

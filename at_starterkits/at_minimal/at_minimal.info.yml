@@ -1,9 +1,10 @@
 name: 'AT Minimal'
-type: 'theme'
-base theme: 'at_core'
-subtheme type: 'at_minimal'
+type: theme
+base theme: at_core
+subtheme type: at_minimal
 description: 'Minimal starter theme with one simple layout. A clean slate for theme developers.'
-core: '8.x'
+core: 8.x
+hidden: true
 stylesheets:
   all:
     - 'css/styles.css'

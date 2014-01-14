@@ -8,6 +8,7 @@ use Drupal\at_core\Helpers\FileRename;
 use Drupal\at_core\Helpers\FileStripReplace;
 use Drupal\at_core\Helpers\RemoveDirectory;
 use Drupal\at_core\Helpers\BuildInfoFile;
+use Drupal\Component\Uuid;
 
 class ThemeGeneratorSubmit {
 
@@ -61,19 +62,31 @@ class ThemeGeneratorSubmit {
       // Set paths to each file we need to modify or delete.
       $info_file           = "$target/$machine_name.info.yml";
       $theme_file          = "$target/$machine_name.theme";
-
-      //$breakpoints_file    = "$target/config/$machine_name.breakpoints.yml";
-
-      $settings_file       = "$target/config/$machine_name.settings.yml";
       $theme_settings_file = "$target/theme-settings.php";
+      $settings_file       = "$target/config/$machine_name.settings.yml"; // used in skins
 
       // Only Standard type themes have theme-settings.php
-      if ($subtheme_type == 'at_standard') {
-        $fileStrReplace->fileStrReplace($theme_settings_file, $subtheme_type, $machine_name);
-      }
+      //if ($subtheme_type == 'at_standard') {
+      //  $fileStrReplace->fileStrReplace($theme_settings_file, $subtheme_type, $machine_name);
+      //}
 
       // Standard, Minimal and Clones
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
+
+        $configuration_files = array(
+          'block.block.atblockssitebranding.yml',
+          'block.block.atblocksstatusmessages.yml',
+          'block.block.atblockspagetitle.yml',
+          'block.block.' . $subtheme_type . '_search.yml',
+          'block.block.' . $subtheme_type . '_content.yml',
+          'block.block.' . $subtheme_type . '_footer.yml',
+          'block.block.' . $subtheme_type . '_powered.yml',
+          'block.block.' . $subtheme_type . '_breadcrumbs.yml',
+          'block.block.' . $subtheme_type . '_help.yml',
+          'block.block.' . $subtheme_type . '_login.yml',
+          'block.block.' . $subtheme_type . '_tools.yml',
+          $subtheme_type . '.settings.yml',
+        );
 
         // Set variables and perform operations depending on the type and options.
         if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
@@ -101,13 +114,19 @@ class ThemeGeneratorSubmit {
         $renameFile->fileRename("$target/$source_theme.info.yml", $info_file);
 
         //$renameFile->fileRename("$target/config/$source_theme.breakpoints.yml", $breakpoints_file);
+        //$renameFile->fileRename("$target/config/$source_theme.settings.yml", $settings_file);
 
-        $renameFile->fileRename("$target/config/$source_theme.settings.yml", $settings_file);
+        // Rename and strip replace strings in all config files.
+        foreach ($configuration_files as $old_file) {
+          $new_file = str_replace($source_theme, $machine_name, $old_file);
+          $renameFile->fileRename("$target/config/$old_file", "$target/config/$new_file");
+          $fileStrReplace->fileStrReplace("$target/config/$new_file", $source_theme, $machine_name);
+        }
 
-        // Strip replace strings in files (if they exist).
+        // Strip replace strings in files (if they exist) in theme.yml and theme-settings.php
         $fileStrReplace->fileStrReplace($theme_file, $source_theme, $machine_name);
         $fileStrReplace->fileStrReplace($theme_settings_file, $source_theme, $machine_name);
-        $fileStrReplace->fileStrReplace($settings_file, $source_theme, $machine_name);
+
 
         // Check and set description and version.
         $description = $description ?: $generic_decription;
@@ -115,11 +134,12 @@ class ThemeGeneratorSubmit {
 
         // Parse, rebuild and save the themes info.yml file.
         $theme_info_data = drupal_parse_info_file($info_file);
-        $theme_info_data['name'] = $friendly_name;
-        $theme_info_data['type'] = 'theme';  // make dam sure this is set
+        $theme_info_data['name']        = $friendly_name;
+        $theme_info_data['type']        = 'theme';
         $theme_info_data['description'] = $description;
-        $theme_info_data['version'] = $version;
+        $theme_info_data['version']     = $version;
         unset($theme_info_data['hidden']);
+
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
         file_unmanaged_save_data($rebuilt_info, $info_file, FILE_EXISTS_REPLACE);
       }
@@ -137,12 +157,10 @@ class ThemeGeneratorSubmit {
         $themeInfo = new ThemeSettingsInfo($skin_base_theme);
         $baseThemeInfo = ($themeInfo->baseThemeInfo('info'));
         $description = $description ?: 'Sub theme of ' . $baseThemeInfo['name'];
+        $version = $version ?: '8.x-1.0';
 
         // Rename files
         $renameFile->fileRename("$target/at_skin.info.yml", $info_file);
-
-        //$renameFile->fileRename("$target/config/at_skin.breakpoints.yml", $breakpoints_file);
-
         $renameFile->fileRename("$target/config/at_skin.settings.yml", $settings_file);
 
         // Parse the source base themes info.yml file and extract regions
@@ -151,12 +169,15 @@ class ThemeGeneratorSubmit {
 
         // Parse, rebuild and save the themes info.yml file.
         $theme_info_data = drupal_parse_info_file($info_file);
-        $theme_info_data['name'] = $friendly_name;
-        $theme_info_data['type'] = 'theme'; // make dam sure this is set
-        $theme_info_data['base theme'] = $skin_base_theme;
+        $theme_info_data['name']        = $friendly_name;
+        $theme_info_data['type']        = 'theme';
+        $theme_info_data['base theme']  = $skin_base_theme;
         $theme_info_data['description'] = $description;
-        $theme_info_data['regions'] = $base_theme_info_data['regions'];
-        $theme_info_data['version'] = $version;
+        $theme_info_data['regions']     = $base_theme_info_data['regions'];
+        $theme_info_data['features']    = $base_theme_info_data['features'];
+        $theme_info_data['version']     = $version;
+        unset($theme_info_data['hidden']);
+
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
         file_unmanaged_save_data($rebuilt_info, $info_file, FILE_EXISTS_REPLACE);
 

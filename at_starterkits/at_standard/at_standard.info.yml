@@ -1,9 +1,10 @@
 name: 'AT Standard'
-type: 'theme'
-base theme: 'at_core'
-subtheme type: 'at_standard'
+type: theme
+base theme: at_core
+subtheme type: at_standard
 description: 'Practical starter theme for site builders, themers, and rapid prototyping.'
-core: '8.x'
+core: 8.x
+hidden: true
 stylesheets:
   all:
     - 'css/styles.css'

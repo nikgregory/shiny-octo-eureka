@@ -24,20 +24,22 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $themeInfo = new ThemeInfo($theme);
   $getThemeInfo = ($themeInfo->getThemeInfo('info'));
 
-  // File and theme paths.
-  $machinenamejs = drupal_add_library('system', 'drupal.machine-name');
+  // Common paths.
   $at_core_path  = drupal_get_path('theme', 'at_core');
   $subtheme_path = drupal_get_path('theme', $theme);
 
-  // Attach some CSS to style appearance settings pages.
-  $form['#attached']['css'] = array(
-    $at_core_path . '/stylesheets/css/appearance.css',
-    $at_core_path . '/stylesheets/css/slimbox2/slimbox2.css',
-  );
-
-  // Attach our simple lightbox effect for screenshots
-  $form['#attached']['js'] = array(
-    $at_core_path . '/scripts/slimbox2/slimbox2.js',
+  // Attached required CSS and JS libraries and files.
+  $form['#attached'] = array(
+    'library' => array(
+      'system' => 'drupal.machine-name',
+    ),
+   'js' => array(
+      $at_core_path . '/scripts/slimbox2/slimbox2.js',
+    ),
+    'css' => array(
+      $at_core_path . '/stylesheets/css/appearance.css',
+      $at_core_path . '/stylesheets/css/slimbox2/slimbox2.css',
+    ),
   );
 
   // AT Core
@@ -69,6 +71,17 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // AT Subtheme
   else {
+
+    // Temp message for AT Blocks module.
+    // \Drupal::moduleHandler()->moduleExists($module)
+    if (module_exists('at_blocks')) {
+      drupal_set_message(t('<p>This theme requires the <a href="!atblocks" target="_blank">AT Blocks</a> module to show Logo, Site name, Slogan (collectively known as "Branding"), Page title, Messages (in a block), Tabs and Action links (if required).</p><p>If Drupal 8 ships with these things as blocks the module will be retired, however for now during development it\'s the only way to show these items because AT expects everything to be a block (except messages, unless you use the block). AT does not print page template variables for these items - only regions. Please help in the Drupal core issues to convert these site elements into blocks:</p>
+      <ul>
+        <li><a href="https://drupal.org/node/1053648" target="_blank">Convert site elements (site name, slogan, site logo) into blocks</a></li>
+        <li><a href="https://drupal.org/node/507488" target="_blank">Convert page elements (title, tabs, actions, messages) into blocks</a></li>
+      </ul>
+      <p>This message will go away when you install AT Blocks module.</p>', array('!atblocks' => 'https://drupal.org/project/at_blocks')), 'status');
+    }
 
     // Layouts.
     include_once($at_core_path . '/forms/layouts.php');
