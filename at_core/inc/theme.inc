@@ -153,36 +153,35 @@ function adaptivetheme_breadcrumb($vars) {
  *     of that type.
  */
 function adaptivetheme_status_messages($vars) {
-  $display = $vars['display'];
+  $display = drupal_get_messages($vars['display']);
   $output = '';
 
-  $status_heading = array(
-    'status' => t('Status message'),
-    'error' => t('Error message'),
-    'warning' => t('Warning message'),
-  );
-
-  $output .= "<div id=\"messages\">";
-
-  foreach (drupal_get_messages($display) as $type => $messages) {
-    $output .= "<div class=\"messages $type\">";
-    if (!empty($status_heading[$type])) {
-      $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>";
-    }
-    if (count($messages) > 1) {
-      $output .= " <ul>";
-      foreach ($messages as $message) {
-        $output .= '  <li>' . $message . "</li>";
+  if (count($display) > 0) {
+    $status_heading = array(
+      'status' => t('Status message'),
+      'error' => t('Error message'),
+      'warning' => t('Warning message'),
+    );
+    $output .= "<div id=\"messages\">";
+    foreach ($display as $type => $messages) {
+      $output .= "<div class=\"messages $type\">";
+      if (!empty($status_heading[$type])) {
+        $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>";
       }
-      $output .= " </ul>";
-    }
-    else {
-      $output .= $messages[0];
+      if (count($messages) > 1) {
+        $output .= " <ul>";
+        foreach ($messages as $message) {
+          $output .= '  <li class="message-item">' . $message . "</li>";
+        }
+        $output .= " </ul>";
+      }
+      else {
+        $output .= $messages[0];
+      }
+      $output .= "</div>";
     }
     $output .= "</div>";
   }
-
-  $output .= "</div>";
 
   return $output;
 }
