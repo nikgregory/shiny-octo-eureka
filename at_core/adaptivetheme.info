@@ -117,7 +117,7 @@
   settings[tablet_portrait_page_width]     = 100
   settings[tablet_portrait_sidebar_first]  = 50
   settings[tablet_portrait_sidebar_second] = 50
-  settings[tablet_portrait_media_query]    = 'only screen and (min-width:481px) and (max-width:768px)'
+  settings[tablet_portrait_media_query]    = 'only screen and (min-width:581px) and (max-width:768px)'
 
 
   ; Layout settings - Smalltouch landscape
@@ -127,7 +127,7 @@
   settings[smalltouch_landscape_page_width]     = 100
   settings[smalltouch_landscape_sidebar_first]  = 50
   settings[smalltouch_landscape_sidebar_second] = 50
-  settings[smalltouch_landscape_media_query]    = 'only screen and (min-width:321px) and (max-width:480px)'
+  settings[smalltouch_landscape_media_query]    = 'only screen and (min-width:321px) and (max-width:580px)'
 
 
   ; Layout settings - Smalltouch portrait
