@@ -39,8 +39,12 @@ class FileSavePrepare {
    *  - rename_newname => "the new file name"
    */
   public function copyRename($file_paths) {
-    copy($file_paths['copy_source'], $file_paths['copy_dest']);
-    rename($file_paths['rename_oldname'], $file_paths['rename_newname']);
+    if (file_exists($file_paths['copy_source'])) {
+      copy($file_paths['copy_source'], $file_paths['copy_dest']);
+    }
+    if (file_exists($file_paths['rename_oldname'])) {
+      rename($file_paths['rename_oldname'], $file_paths['rename_newname']);
+    }
   }
 
 } // end class

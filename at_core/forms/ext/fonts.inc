@@ -52,7 +52,7 @@ function font_elements() {
         'type' => 'default',
         'subtype' => 'global',
         'element' => 'bf',
-        'selector' => 'html',
+        'selector' => 'html,.ui-widget', // add the jQuery UI widget selector
         'setting' => 'base_font',
       ),
       'site_name' => array(

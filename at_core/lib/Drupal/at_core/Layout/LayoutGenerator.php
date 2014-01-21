@@ -73,6 +73,12 @@ class LayoutGenerator extends PageLayout {
     $layouts = self::buildLayoutDataArrays();
     $output = array();
 
+    $messages = '  {{ messages }}';
+    // module_exists is deprecated: https://api.drupal.org/api/drupal/core!includes!bootstrap.inc/function/module_exists/8
+    if (module_exists('at_blocks')) {
+      $messages = '  {# /* AT Blocks module installed, messages variable omitted. TODO: Remove this comment if messages becomes a block: https://drupal.org/node/507488 */ #}';
+    }
+
     // Format twig markup.
     foreach ($layouts['rows'] as $row => $values) {
       foreach ($values['regions'] as $region_name => $region_value) {
@@ -105,7 +111,7 @@ class LayoutGenerator extends PageLayout {
     // Final preparations.
     $page_rows[] = $docblock;
     $page_rows[] = '<div{{ attributes }}>' . "\n";
-    $page_rows[] = '  {{ messages }}' . "\n"; // TODO Remove if messages becomes a block: https://drupal.org/node/507488
+    $page_rows[] = $messages . "\n"; // TODO Remove if messages becomes a block: https://drupal.org/node/507488
     foreach ($output as $row_output) {
       $page_rows[] = implode("\n", $row_output);
     }

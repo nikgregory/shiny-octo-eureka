@@ -56,6 +56,9 @@ function at_core_submit_layouts(&$form, &$form_state) {
 
   // Messages
   if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] === 1 && $values['layout_type_select'] != 'disable_layout_generation') {
-    drupal_set_message(t('You generated a new layout - you may need to clear the cache for Drupal to see new theme data (such as yml file definitions). Go to the Performance Settings page in Configuration (admin/config/development/performance) and clear the cache.'), 'warning');
+    if (module_exists('at_blocks')) {
+      drupal_set_message(t('AT Blocks module is installed, the <code>{{ messages }}</code> variable has been omitted from the generated template. To view site messages in this theme you must enable the <b>Atblocks Status Messages</b> block in the <a href="!blocksettings">Block layout</a> settings.', array('!blocksettings' => base_path() . 'admin/structure/block')), 'warning');
+    }
+    drupal_set_message(t('You generated a new layout - you may need to clear the cache from the <a href="!performancesettings">Performance settings</a> page for Drupal to see new theme data (such as yml file definitions), .', array('!performancesettings' => base_path() . 'admin/config/development/performance')), 'warning');
   }
 }
