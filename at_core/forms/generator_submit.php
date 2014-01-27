@@ -18,7 +18,9 @@ function at_core_submit_generator(&$form, &$form_state) {
   }
 
   //drupal_theme_rebuild();
-  system_list_reset();
+  //system_list_reset();
+
+  drupal_flush_all_caches();
 
   // Messages
   if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
