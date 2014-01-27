@@ -576,11 +576,11 @@ function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
  */
 function at_core_preprocess_html(&$variables) {
   global $theme;
-  $language_interface = Drupal::languageManager()->getLanguage();
 
   // Re-usable variables for the h5bp type conditional classes. Attributes can
   // only be used once (one time) in a template, so we need to set re-usable
   // variables for the html conditional classes in html.html.twig.
+  $language_interface = \Drupal::service('language_manager')->getCurrentLanguage();
   $variables['lang'] = $language_interface->id;
   $variables['dir'] = $language_interface->dir ? 'ltr' : 'rtl';
 
