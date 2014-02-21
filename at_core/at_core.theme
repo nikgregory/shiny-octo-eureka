@@ -275,7 +275,6 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  * TODO: keep on on core regarding the alter hook and suggestions - https://drupal.org/node/2100775
- * TODO: remplace menu_get_object() - https://drupal.org/node/2095959
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   global $theme;
@@ -283,7 +282,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   // Add content type suggestions. array_splice should be safe here because
   // page__node is always a suggestion for node pages, aka there is always one
   // default suggestion.
-  if ($node = menu_get_object()) {
+  if ($node = \Drupal::request()->attributes->get('node')) {
     array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
   }
 
