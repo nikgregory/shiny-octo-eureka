@@ -74,7 +74,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
     // Temp message for AT Blocks module.
     // \Drupal::moduleHandler()->moduleExists($module)
-    if (!module_exists('at_blocks')) {
+    if (!\Drupal::moduleHandler()->moduleExists('at_blocks')) {
       drupal_set_message(t('<p>This theme requires the <a href="!atblocks" target="_blank">AT Blocks</a> module to show Logo, Site name, Slogan (collectively known as "Branding"), Page title, Messages (in a block), Tabs and Action links (if required).</p><p>If Drupal 8 ships with these things as blocks the module will be retired, however for now during development it\'s the only way to show these items because AT expects everything to be a block (except messages, unless you use the block). AT does not print page template variables for these items - only regions. Please help in the Drupal core issues to convert these site elements into blocks:</p>
       <ul>
         <li><a href="https://drupal.org/node/1053648" target="_blank">Convert site elements (site name, slogan, site logo) into blocks</a></li>

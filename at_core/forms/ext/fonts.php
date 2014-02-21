@@ -37,7 +37,7 @@ $font_type_options = array(
 
 // Do some stuff if @font-your-face is enabled
 $font_your_face_enabled = FALSE;
-if (module_exists('fontyourface')) {
+if (\Drupal::moduleHandler()->moduleExists('fontyourface')) {
   // add an option to the font type settings
   $font_your_face_enabled = font_your_face_fonts_enabled();
   if ($font_your_face_enabled == TRUE) {

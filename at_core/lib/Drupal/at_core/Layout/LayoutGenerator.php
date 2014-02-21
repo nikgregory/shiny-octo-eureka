@@ -74,8 +74,7 @@ class LayoutGenerator extends PageLayout {
     $output = array();
 
     $messages = '  {{ messages }}';
-    // module_exists is deprecated: https://api.drupal.org/api/drupal/core!includes!bootstrap.inc/function/module_exists/8
-    if (module_exists('at_blocks')) {
+    if (\Drupal::moduleHandler()->moduleExists('at_blocks')) {
       $messages = '  {# /* AT Blocks module installed, messages variable omitted. TODO: Remove this comment if messages becomes a block: https://drupal.org/node/507488 */ #}';
     }
 

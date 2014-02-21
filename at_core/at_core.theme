@@ -581,8 +581,8 @@ function at_core_preprocess_html(&$variables) {
   // only be used once (one time) in a template, so we need to set re-usable
   // variables for the html conditional classes in html.html.twig.
   $language_interface = \Drupal::service('language_manager')->getCurrentLanguage();
-  $variables['lang'] = $language_interface->id;
-  $variables['dir'] = $language_interface->dir ? 'ltr' : 'rtl';
+  $variables['lang'] = $language_interface->id ? $language_interface->id : 'en';
+  $variables['dir'] = $language_interface->dir ? $language_interface->dir : 'ltr';
 
   // Add a "site name" body classes for advanced theming of multi-sites.
   if ($variables['head_title_array']['name']) {
@@ -594,6 +594,9 @@ function at_core_preprocess_html(&$variables) {
   if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
     $variables['skip_link_target'] = check_plain($skip_link_target);
   }
+
+ // kpr($language_interface);
+ // kpr($variables);
 }
 
 /**
@@ -669,6 +672,8 @@ function at_core_preprocess_region(&$variables) {
     $variables['html_element'] = 'main';
     $variables['attributes']['role'][] = 'main';
   }
+
+  //kpr($variables);
 }
 
 /**

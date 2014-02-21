@@ -292,7 +292,7 @@ function font_your_face_fonts_list($element) {
  */
 function font_your_face_fonts_enabled() {
   $fonts_enabled = FALSE;
-  if (module_exists('fontyourface')) {
+  if (\Drupal::moduleHandler()->moduleExists('fontyourface')) {
     $enabled_fonts = fontyourface_get_fonts('enabled = 1');
     if (!empty($enabled_fonts)) {
       foreach ($enabled_fonts as $font) {
