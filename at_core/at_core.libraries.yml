@@ -1,0 +1,17 @@
+# Window size widget
+window_size:
+  version: 1.1
+  js:
+    scripts/window-size/window-size.js: { every_page: true }
+  css:
+    component:
+      scripts/window-size/window-size.css: {}
+  dependencies:
+   - core/jquery.once
+
+# IE9.js
+ie9js:
+  remote: https://code.google.com/p/ie7-js/
+  version: 2.1
+  js:
+    http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }

@@ -21,9 +21,8 @@ $form['markup_overrides']['markup_overrides_settings'] = array(
 /*
 // Design
 $form['markup_overrides']['markup_overrides_settings']['design'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Design'),
-  '#description' => t('<h3>Design</h3>'),
 );
 
 // Add spans to theme_links
@@ -38,9 +37,8 @@ $form['markup_overrides']['markup_overrides_settings']['design']['settings_menu_
 
 // Breadcrumbs
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Breadcrumbs'),
-  '#description' => t('<h3>Breadcrumb Settings</h3>'),
 );
 
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'] = array(
@@ -82,9 +80,8 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'][
 
 // Login block.
 $form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Login Block'),
-  '#description' => t('<h3>Login Block Options</h3>'),
 );
 
 // Login block placeholder labels.
@@ -118,9 +115,8 @@ $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_
 
 // Hide or Remove
 $form['markup_overrides']['markup_overrides_settings']['hide-remove'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Hide or Remove'),
-  '#description' => t('<h3>Hide or Remove</h3>'),
 );
 
 // Hide comment title
@@ -143,9 +139,8 @@ $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_
 
 // Accessibility
 $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Accessibility'),
-  '#description' => t('<h3>Accessibility</h3>'),
 );
 
 /*
@@ -197,9 +192,8 @@ $form['markup_overrides']['markup_overrides_settings']['seo']['settings_logo_tit
 
 // Attribution
 $form['markup_overrides']['markup_overrides_settings']['attribution'] = array(
-  '#type' => 'fieldset',
+  '#type' => 'details',
   '#title' => t('Attribution'),
-  '#description' => t('<h3>Attribution</h3>'),
 );
 
 $form['markup_overrides']['markup_overrides_settings']['attribution']['settings_attribution_toggle'] = array(

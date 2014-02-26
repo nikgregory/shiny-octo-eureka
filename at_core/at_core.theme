@@ -100,68 +100,6 @@ function at_core_menu_link(array $variables) {
   return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
-/**
- * Implements hook_library_info().
- * TODO: convert to yml https://drupal.org/node/2148679
- */
-function at_core_library_info() {
-  global $theme;
-
-  // Window Size.
-  $path =  drupal_get_path('theme', 'at_core');
-  $libraries['window_size'] = array(
-    'title' => 'Window Size',
-    'version' => '1.x',
-    'js' => array(
-      $path . '/scripts/window-size/window-size.js' => array(
-        'group' => JS_THEME,
-      ),
-    ),
-    'css' => array(
-      $path . '/scripts/window-size/window-size.css' => array(
-        'every_page' => TRUE,
-        'group' => CSS_AGGREGATE_THEME,
-      ),
-    ),
-    'dependencies' => array(
-      array('system', 'jquery.once'),
-    ),
-  );
-
-  // Live Reload
-  if (at_core_theme_get_setting("settings.livereload", $theme)) {
-    $livereload_snippet = '';
-    if (at_core_theme_get_setting("settings.livereload_snippet", $theme)) {
-      $livereload_snippet = at_core_theme_get_setting("settings.livereload_snippet", $theme);
-    }
-    $libraries['livereload'] = array(
-      'title' => 'Live Reload',
-      'version' => '1.x',
-      'js' => array(
-        $livereload_snippet => array(
-          'type' => 'inline',
-        ),
-      ),
-    );
-  }
-
-  // IE9.js External Script
-  $libraries['ie9js'] = array(
-    'title' => 'ie9js',
-    'version' => '2.1',
-    'js' => array(
-      'http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js' => array(
-        'type' => 'external',
-        'browsers' => array(
-          'IE' => 'lte IE 8',
-          '!IE' => FALSE,
-        ),
-      ),
-    ),
-  );
-
-  return $libraries;
-}
 
 /**
  * hook_html_head_alter()
@@ -311,23 +249,6 @@ function at_core_page_alter(&$page) {
     $themeInfo = new ThemeInfo($theme);
     $baseThemes = $themeInfo->getThemeInfo('base_themes');
 
-    $libraries[$theme] = drupal_get_library($theme);
-
-    foreach ($baseThemes as $base_theme => $name) {
-      $libraries[$base_theme] = drupal_get_library($base_theme);
-    }
-
-    foreach ($libraries as $theme_key => $base_theme_library) {
-      if (!empty($base_theme_library)) {
-        foreach ($base_theme_library as $library => $data) {
-          $library_setting = str_replace('.', '_', strtolower($library));
-          if (at_core_theme_get_setting("settings.library_$library_setting", $theme) === 1) {
-            $page['#attached']['library'][] = array($theme_key, $library);
-          }
-        }
-      }
-    }
-
     // Attach Drupal core libraries.
     $system_libraries = new SystemLibraries();
     $drupal_core_libraries = $system_libraries->getDrupalCoreSystemLibraries();
@@ -335,26 +256,42 @@ function at_core_page_alter(&$page) {
     foreach ($drupal_core_libraries as $key => $value) {
       $library_setting = str_replace('.', '_', strtolower($key));
       if (at_core_theme_get_setting("settings.drupal_core_$library_setting", $theme) === 1) {
-        $page['#attached']['library'][] = array('system', $key);
+        $page['#attached']['library'][] = array('core', $key);
       }
     }
   }
 
-  // Attach developer settings libraries, CSS files etc.
+  // Attach Windowsize library
   if (at_core_theme_get_setting("settings.show_window_size", $theme) === 1) {
     $page['#attached']['library'][] = array('at_core', 'window_size');
   }
+
+  // Attach Livereload snippet (inline)
   if (at_core_theme_get_setting("settings.livereload", $theme) === 1) {
-    $page['#attached']['library'][] = array('at_core', 'livereload');
+    $livereload_snippet = '';
+    if (at_core_theme_get_setting("settings.livereload_snippet", $theme)) {
+      $livereload_snippet = at_core_theme_get_setting("settings.livereload_snippet", $theme);
+    }
+    $page['#attached']['js'][] = array(
+      'data' => $livereload_snippet,
+      'type' => 'inline',
+    );
   }
+
+  // Attach devel_layout and nuke_toolbar CSS files.
   if (at_core_theme_get_setting('settings.devel_layout', $theme) === 1) {
-    $page['#attached']['css'][] = array('data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-layout.css');
+    $page['#attached']['css'][] = array(
+      'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-layout.css',
+      'group' => CSS_AGGREGATE_THEME,
+      'weight' => CSS_COMPONENT,
+    );
   }
   if (at_core_theme_get_setting('settings.nuke_toolbar', $theme) === 1) {
     $page['#attached']['css'][] = array(
       'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/nuetralize-toolbar.css',
-      'weight' => 99,
-      );
+      'group' => CSS_AGGREGATE_THEME,
+      'weight' => CSS_COMPONENT,
+    );
   }
 
   // Attach the selected layout.
@@ -420,6 +357,7 @@ function at_core_page_alter(&$page) {
         'type' => 'file',
         'data' => $data,
         'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_LAYOUT,
       );
 
       // No media queries CSS for IE8 (if enabled).
@@ -434,6 +372,7 @@ function at_core_page_alter(&$page) {
             '!IE' => FALSE,
           ),
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_LAYOUT,
         );
         // Attach IE9.js if IE8 support is set. This is rather brutal because
         // the user can't disable this. We polyfill because all the shipped
@@ -452,6 +391,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $max_width_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_LAYOUT,
         );
       }
     }
@@ -468,6 +408,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $fonts_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_SKIN,
         );
       }
     }
@@ -480,6 +421,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $titles_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_SKIN,
         );
       }
     }
@@ -492,6 +434,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $images_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_SKIN,
         );
       }
     }
@@ -503,9 +446,9 @@ function at_core_page_alter(&$page) {
         'type' => 'file',
         'data' => $custom_css_file,
         'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_SKIN,
       );
     }
-
 
     // Markup overrides.
     if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
@@ -517,6 +460,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $breadcrumb_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_SKIN,
         );
       }
 
@@ -528,6 +472,7 @@ function at_core_page_alter(&$page) {
             'type' => 'file',
             'data' => $login_block_file,
             'group' => CSS_AGGREGATE_THEME,
+            'weight' => CSS_SKIN,
           );
         }
       }
@@ -540,7 +485,7 @@ function at_core_page_alter(&$page) {
       $page['#attached']['css'][$google_font] = array(
         'type' => 'external',
         'data' => $google_font,
-        'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_SKIN,
       );
     }
   }
@@ -593,9 +538,6 @@ function at_core_preprocess_html(&$variables) {
   if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
     $variables['skip_link_target'] = check_plain($skip_link_target);
   }
-
- // kpr($language_interface);
- // kpr($variables);
 }
 
 /**
@@ -671,8 +613,6 @@ function at_core_preprocess_region(&$variables) {
     $variables['html_element'] = 'main';
     $variables['attributes']['role'][] = 'main';
   }
-
-  //kpr($variables);
 }
 
 /**

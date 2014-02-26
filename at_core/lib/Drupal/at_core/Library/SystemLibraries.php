@@ -21,7 +21,7 @@ class SystemLibraries {
    *  The module or theme whose library info data we want
    */
   public function __construct() {
-    $this->data = drupal_get_library('system');
+    $this->data = drupal_get_library('core');
   }
 
   /**
