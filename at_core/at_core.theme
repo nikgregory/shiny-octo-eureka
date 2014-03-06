@@ -245,9 +245,9 @@ function at_core_page_alter(&$page) {
 
   // Attach libraries.
   if (at_core_theme_get_setting('settings.libraries_enable', $theme) === 1) {
-    $libraries = array();
-    $themeInfo = new ThemeInfo($theme);
-    $baseThemes = $themeInfo->getThemeInfo('base_themes');
+    //$libraries = array();
+    //$themeInfo = new ThemeInfo($theme);
+    //$baseThemes = $themeInfo->getThemeInfo('base_themes');
 
     // Attach Drupal core libraries.
     $system_libraries = new SystemLibraries();
@@ -308,12 +308,15 @@ function at_core_page_alter(&$page) {
       // Assume the root page templates layout plugin as the default plugin.
       $page['#selected_plugin'] = at_core_theme_get_setting('settings.template_suggestion_plugin_page', $theme);
 
+
       // Get theme registry, we need to determine the template suggestion for the current page.
       $theme_registry = theme_get_registry(FALSE);
       $info = array();
 
       // Get page template suggestions. Set these as a page variables so
       // sub-themes can leverage them also in hook_page_alter().
+      // Deprecate this feature because it causes a render array warning, dang nabbit.
+      /*
       if ($page_suggestions = theme_get_suggestions(arg(), 'page')) {
         $page['theme_hook_suggestions'] = $page_suggestions;
       }
@@ -325,22 +328,26 @@ function at_core_page_alter(&$page) {
       if (!empty($page['theme_hook_suggestion'])) {
         $suggestions[] = $page['theme_hook_suggestion'];
       }
-      foreach (array_reverse($suggestions) as $suggestion) {
-        // We need three settings to set the layout - the provider (the active theme or a base theme),
-        // the plugin (a layout plugin name) and the actual CSS layout set for this suggestion.
-        // Note in theme settings the root hook "page" is treated as a suggestion.
-        if ($suggestion_provider = at_core_theme_get_setting("settings.template_suggestion_provider_$suggestion", $theme)) {
-          $page['#selected_provider'] = $suggestion_provider;
-        }
-        if ($suggestion_plugin = at_core_theme_get_setting("settings.template_suggestion_plugin_$suggestion", $theme)) {
-          $page['#selected_plugin'] = $suggestion_plugin;
-        }
-        if ($suggestion_layout = at_core_theme_get_setting("settings.template_suggestion_$suggestion", $theme)) {
-          $page['#selected_layout'] = $suggestion_layout;
-        }
-        if ($theme_registry->has($suggestion)) {
-          $info = $theme_registry->get($suggestion);
-          break;
+      */
+
+      if ($suggestions = theme_get_suggestions(arg(), 'page')) {
+        foreach (array_reverse($suggestions) as $suggestion) {
+          // We need three settings to set the layout - the provider (the active theme or a base theme),
+          // the plugin (a layout plugin name) and the actual CSS layout set for this suggestion.
+          // Note in theme settings the root hook "page" is treated as a suggestion.
+          if ($suggestion_provider = at_core_theme_get_setting("settings.template_suggestion_provider_$suggestion", $theme)) {
+            $page['#selected_provider'] = $suggestion_provider;
+          }
+          if ($suggestion_plugin = at_core_theme_get_setting("settings.template_suggestion_plugin_$suggestion", $theme)) {
+            $page['#selected_plugin'] = $suggestion_plugin;
+          }
+          if ($suggestion_layout = at_core_theme_get_setting("settings.template_suggestion_$suggestion", $theme)) {
+            $page['#selected_layout'] = $suggestion_layout;
+          }
+          if ($theme_registry->has($suggestion)) {
+            $info = $theme_registry->get($suggestion);
+            break;
+          }
         }
       }
 
@@ -356,6 +363,7 @@ function at_core_page_alter(&$page) {
       $page['#attached']['css'][$data] = array(
         'type' => 'file',
         'data' => $data,
+        'every_page' => FALSE,
         'group' => CSS_AGGREGATE_THEME,
         'weight' => CSS_LAYOUT,
       );
@@ -548,6 +556,8 @@ function at_core_preprocess_html(&$variables) {
 function at_core_preprocess_page(&$variables) {
   global $theme;
 
+  $page = $variables['page'];
+
   // Test should we move CSS loading from hook_page_alter() to preprocess or perhpas hook_theme_prepare() etc.
   /*
   $file = drupal_get_path('theme', 'at_core') . '/stylesheets/css/show-regions.css';
@@ -568,23 +578,27 @@ function at_core_preprocess_page(&$variables) {
 
   // Layouts.
   if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
+
     // Set a variable that holds an array of the active visible regions.
     $regions = system_region_list($theme, REGIONS_VISIBLE);
-    $variables['active_regions'] = array();
+
+    $variables['#active_regions'] = array();
+
     foreach ($regions as $region_name => $region_label) {
-      if (!empty($variables['page'][$region_name])) {
-        $variables['active_regions'][] = $region_name;
+      if (!empty($page[$region_name])) {
+        $variables['#active_regions'][] = $region_name;
       }
     }
 
     // Set advanced classes on rows for theming layouts.
-    if (!empty($variables['active_regions'])) {
-      if ($selected_layout = $variables['page']['#selected_layout']) {
+    if (!empty($variables['#active_regions'])) {
+      if ($selected_layout = $page['#selected_layout']) {
+
         // Add a layout id to the page wrapper.
-        $variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($variables['page']['#selected_plugin']);
+        $variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($page['#selected_plugin']);
         $variables['attributes']['class'][] = 'page-layout__variant--' . drupal_html_class($selected_layout);
 
-        $layout_attr = new LayoutAttributes($variables['page']['#selected_provider'], $variables['page']['#selected_plugin'], $selected_layout, $variables['active_regions']);
+        $layout_attr = new LayoutAttributes($page['#selected_provider'], $page['#selected_plugin'], $selected_layout, $variables['#active_regions']);
         $row_attributes = $layout_attr->rowAttributes();
 
         // Check if we have attributes to avoid a fatal error.
