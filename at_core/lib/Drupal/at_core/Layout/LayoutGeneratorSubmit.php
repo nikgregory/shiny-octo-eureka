@@ -38,8 +38,8 @@ class LayoutGeneratorSubmit {
       $values["settings_template_suggestion_plugin_page"] = $selected_plugin;
 
       // Clear the selected layout cache bin.
-      if ($cache = cache()->get("$selected_provider:$selected_layout")) {
-        cache()->delete("$selected_provider:$selected_layout");
+      if ($cache = \Drupal::cache()->get("$selected_provider:$selected_layout")) {
+        \Drupal::cache()->delete("$selected_provider:$selected_layout");
       }
 
       // Instantiate LayoutGenerator object.

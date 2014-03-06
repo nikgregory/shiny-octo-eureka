@@ -16,7 +16,7 @@ class ThemeSettingsConfig {
    * have custom settings that you probably very much need in config.
    */
   public function settingsConvertToConfig(array $values, Config $config) {
-    $config = config($values['config_key']);
+    $config = \Drupal::config($values['config_key']);
     foreach ($values as $key => $value) {
       if (substr($key, 0, 9) == 'settings_') {
         $config->set('settings.' . drupal_substr($key, 9), $value);

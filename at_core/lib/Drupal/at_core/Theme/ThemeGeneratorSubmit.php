@@ -9,6 +9,7 @@ use Drupal\at_core\Helpers\FileStripReplace;
 use Drupal\at_core\Helpers\RemoveDirectory;
 use Drupal\at_core\Helpers\BuildInfoFile;
 use Drupal\Component\Uuid;
+use Symfony\Component\Yaml\Parser;
 
 class ThemeGeneratorSubmit {
 
@@ -85,6 +86,7 @@ class ThemeGeneratorSubmit {
           'block.block.' . $subtheme_type . '_help.yml',
           'block.block.' . $subtheme_type . '_login.yml',
           'block.block.' . $subtheme_type . '_tools.yml',
+          'block.block.' . $subtheme_type . '.branding.yml',
           $subtheme_type . '.settings.yml',
         );
 
@@ -133,11 +135,18 @@ class ThemeGeneratorSubmit {
         $version = $version ?: '8.x-1.0';
 
         // Parse, rebuild and save the themes info.yml file.
-        $theme_info_data = drupal_parse_info_file($info_file);
-        $theme_info_data['name']        = $friendly_name;
+        $parser = new Parser();
+        $theme_info_data = $parser->parse(file_get_contents($info_file));
+
+        $theme_info_data['name']        = "'" . $friendly_name . "'";
         $theme_info_data['type']        = 'theme';
-        $theme_info_data['description'] = $description;
+        $theme_info_data['description'] = "'" . $description . "'";
         $theme_info_data['version']     = $version;
+
+        foreach($theme_info_data['regions'] as $region_key => $region_name) {
+          $theme_info_data['regions'][$region_key] = "'" . $region_name . "'";
+        }
+
         unset($theme_info_data['hidden']);
 
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
@@ -168,14 +177,21 @@ class ThemeGeneratorSubmit {
         $base_theme_info_data = drupal_parse_info_file($base_theme_info);
 
         // Parse, rebuild and save the themes info.yml file.
-        $theme_info_data = drupal_parse_info_file($info_file);
-        $theme_info_data['name']        = $friendly_name;
+        $parser = new Parser();
+        $theme_info_data = $parser->parse(file_get_contents($info_file));
+
+        $theme_info_data['name']        = "'" . $friendly_name . "'";
         $theme_info_data['type']        = 'theme';
         $theme_info_data['base theme']  = $skin_base_theme;
-        $theme_info_data['description'] = $description;
+        $theme_info_data['description'] = "'" . $description . "'";
         $theme_info_data['regions']     = $base_theme_info_data['regions'];
         $theme_info_data['features']    = $base_theme_info_data['features'];
         $theme_info_data['version']     = $version;
+
+        foreach($theme_info_data['regions'] as $region_key => $region_name) {
+          $theme_info_data['regions'][$region_key] = "'" . $region_name . "'";
+        }
+
         unset($theme_info_data['hidden']);
 
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);

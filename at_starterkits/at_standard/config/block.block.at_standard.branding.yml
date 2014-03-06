@@ -1,12 +1,11 @@
-id: at_standard_help
+id: at_standard.branding
 weight: 0
-status: true
+status: 1
 langcode: en
-theme: at_standard
-region: messages
-plugin: system_help_block
+region: header_second
+plugin: system_branding_block
 settings:
-  label: 'System Help'
+  label: 'Page Site Branding'
   module: system
   label_display: 0
   cache: -1
@@ -15,9 +14,8 @@ visibility:
     visibility: 0
     pages: ''
   role:
-    roles: {  }
+    roles: { }
   node_type:
     types:
       article: 0
       page: 0
-  visibility__active_tab: edit-visibility-path

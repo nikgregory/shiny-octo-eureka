@@ -408,7 +408,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $fonts_file,
           'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_SKIN,
+          'weight' => CSS_THEME,
         );
       }
     }
@@ -421,7 +421,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $titles_file,
           'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_SKIN,
+          'weight' => CSS_THEME,
         );
       }
     }
@@ -434,7 +434,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $images_file,
           'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_SKIN,
+          'weight' => CSS_THEME,
         );
       }
     }
@@ -446,7 +446,7 @@ function at_core_page_alter(&$page) {
         'type' => 'file',
         'data' => $custom_css_file,
         'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_SKIN,
+        'weight' => CSS_THEME,
       );
     }
 
@@ -460,7 +460,7 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $breadcrumb_file,
           'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_SKIN,
+          'weight' => CSS_THEME,
         );
       }
 
@@ -472,7 +472,7 @@ function at_core_page_alter(&$page) {
             'type' => 'file',
             'data' => $login_block_file,
             'group' => CSS_AGGREGATE_THEME,
-            'weight' => CSS_SKIN,
+            'weight' => CSS_THEME,
           );
         }
       }
@@ -485,7 +485,7 @@ function at_core_page_alter(&$page) {
       $page['#attached']['css'][$google_font] = array(
         'type' => 'external',
         'data' => $google_font,
-        'weight' => CSS_SKIN,
+        'weight' => CSS_THEME,
       );
     }
   }

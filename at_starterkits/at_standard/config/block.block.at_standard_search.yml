@@ -6,7 +6,7 @@ theme: at_standard
 region: sidebar_second
 plugin: search_form_block
 settings:
-  label: Search
+  label: 'Search'
   module: search
   label_display: visible
   cache: -1
@@ -18,6 +18,6 @@ visibility:
     roles: {  }
   node_type:
     types:
-      article: '0'
-      page: '0'
+      article: 0
+      page: 0
   visibility__active_tab: edit-visibility-path

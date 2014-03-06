@@ -10,6 +10,7 @@ namespace Drupal\at_core\Layout;
 use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Helpers\BuildInfoFile;
 use Drupal\at_core\Helpers\FileSavePrepare;
+use Symfony\Component\Yaml\Parser;
 
 // Fired during theme settings submit.
 class LayoutGenerator extends PageLayout {
@@ -54,7 +55,9 @@ class LayoutGenerator extends PageLayout {
     }
 
     // Parse the current info file.
-    $theme_info_data = drupal_parse_info_file($file_path);
+    //$theme_info_data = drupal_parse_info_file($file_path);
+    $parser = new Parser();
+    $theme_info_data = $parser->parse(file_get_contents($file_path));
 
     // Get the regions list and insert them into the info array.
     $regions = self::formatLayoutRegions();

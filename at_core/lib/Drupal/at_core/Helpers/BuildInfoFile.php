@@ -24,7 +24,7 @@ class BuildInfoFile {
         $info .= self::buildInfoFile($value, (!$prefix ? '  ' : $prefix = '  '));
       }
       else {
-        $info .= is_int($key) ? $prefix . '  - ' . "'$value'\n" : $prefix . $key . ": '$value'\n";
+        $info .= is_int($key) ? $prefix . '  - ' . "$value\n" : $prefix . $key . ": $value\n";
       }
     }
     return $info;

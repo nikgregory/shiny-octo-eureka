@@ -305,7 +305,9 @@ foreach ($form_elements as $key => $value) {
     $form['fonts']['font_settings']['titles'][$settings_container][$settings_cfs] = array(
       '#type' => 'textfield',
       '#title' => t('Font'),
-      '#default_value' => drupal_strip_dangerous_protocols(theme_get_setting('settings. ' . $settings_cfs)),
+      //'#default_value' => drupal_strip_dangerous_protocols(theme_get_setting('settings. ' . $settings_cfs)),
+
+      '#default_value' => check_plain(theme_get_setting('settings. ' . $settings_cfs)),
       '#description' => $custom_stack_description,
       '#states' => array(
         'visible' => array('select[name="settings_' . $settings_type . '"]' => array('value' => 'cfs')),

@@ -8,6 +8,8 @@
 namespace Drupal\at_core\Layout;
 
 use Drupal\at_core\Helpers\FileGlobber;
+use Drupal\Core\Cache;
+use Symfony\Component\Yaml\Parser;
 
 class PageLayout {
 
@@ -57,7 +59,9 @@ class PageLayout {
     foreach ($layout_plugins as $plugin) {
       // First parse the main layout yml file
       $config_file = $this->plugin_path . $plugin . '/' . $plugin . '.layout.yml';
-      $config_data[$plugin] = drupal_parse_info_file($config_file);
+
+      $parser = new Parser();
+      $config_data[$plugin] = $parser->parse(file_get_contents($config_file));
 
       // Get the CSS layouts path from the main layout yml file.
       if ($config_data[$plugin]['css_layouts_path']) {
@@ -70,7 +74,7 @@ class PageLayout {
         foreach ($css_layouts as $css_layout) {
           $css_config_file = $css_layouts_path . '/' . $css_layout . '/' . $plugin . '.variant.' . $css_layout . '.yml';
 
-          $config_data[$plugin]['css_layouts'][$css_layout] = drupal_parse_info_file($css_config_file);
+          $config_data[$plugin]['css_layouts'][$css_layout] = $parser->parse(file_get_contents($css_config_file));
         }
       }
     }
@@ -81,9 +85,10 @@ class PageLayout {
   // Extract rows and regions, css files for the selected layout.
   public function buildLayoutDataArrays() {
     // Return cache data so we avoid glob/scandir on every page load, this is pretty quick.
-    if ($cache = cache()->get("$this->theme:$this->selected_layout")) {
+    if ($cache = \Drupal::cache()->get("$this->theme:$this->selected_layout")) {
       $layout = $cache->data;
     }
+
     else {
       $plugins = self::parseLayoutConfig();
       $selected_plugin = $plugins[$this->selected_plugin];
@@ -97,7 +102,7 @@ class PageLayout {
         $layout['css_layout_path'] = $selected_plugin['css_layouts_path'];
       }
       if (!empty($layout)) {
-        cache()->set("$this->theme:$this->selected_layout", $layout);
+        \Drupal::cache()->set("$this->theme:$this->selected_layout", $layout);
       }
       else {
         return; // selected layout not found or not readable etc.
