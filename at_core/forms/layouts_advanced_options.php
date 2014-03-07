@@ -2,13 +2,16 @@
 
 $form['layouts']['adv_options'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Advanced'),
-  '#description' => t('<h3>Advanced</h3>'),
+  '#title' => t('Options'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-three')),
   '#states' => array(
     //'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
+);
+
+$form['layouts']['adv_options']['description'] = array(
+  '#markup' => t('<h3>Options</h3>'),
 );
 
 // Max width.
@@ -83,6 +86,23 @@ if ($settings_data) {
   }
 }
 
+// Backups.
+$form['layouts']['adv_options']['backups'] = array(
+  '#type' => 'details',
+  '#title' => t('Backups'),
+  '#description' => t('Adaptivetheme can automatically save backups for page templates and your themes info.yml file, since both of these can change when you save a layout. Backups are saved to your themes "backup" folder.'),
+  '#collapsed' => TRUE,
+  '#collapsible' => TRUE,
+);
+
+// Disable backups.
+$form['layouts']['adv_options']['backups']['settings_enable_backups'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Enable backups'),
+  '#default_value' => theme_get_setting("settings.enable_backups", $theme),
+  '#description' => t('Warning: unchecking this option will disable backups.'),
+);
+
 // Layout Selectors.
 $form['layouts']['adv_options']['selectors'] = array(
   '#type' => 'details',
@@ -117,19 +137,3 @@ foreach ($these_selectors as $plugin_name => $selector_strings) {
   );
 }
 
-// Advanced settings - only Backup for now, could be more later.
-$form['layouts']['adv_options']['advanced'] = array(
-  '#type' => 'details',
-  '#title' => t('Backups'),
-  '#description' => t('Adaptivetheme can automatically save backups for page templates and your themes info.yml file, since both of these can change when you save a layout. Backups are saved to your themes "backup" folder.'),
-  '#collapsed' => TRUE,
-  '#collapsible' => TRUE,
-);
-
-// Disable backups.
-$form['layouts']['adv_options']['advanced']['settings_enable_backups'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Enable backups'),
-  '#default_value' => theme_get_setting("settings.enable_backups", $theme),
-  '#description' => t('Warning: unchecking this option will disable backups.'),
-);

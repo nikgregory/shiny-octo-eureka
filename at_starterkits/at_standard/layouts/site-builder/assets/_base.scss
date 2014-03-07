@@ -22,7 +22,14 @@ $susy: (
   column-width: 5em,
   gutter-position: split,
   global-box-sizing: content-box,
+  flow: ltr,
 );
+
+
+// Set variables for the flow direction for ltr (left to right languages).
+$flow-direction: susy-get(flow, $susy) !global;
+$flow-to: to($flow-direction);
+$flow-from: from($flow-direction);
 
 
 // Breakpoints

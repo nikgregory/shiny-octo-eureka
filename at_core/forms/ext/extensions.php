@@ -14,8 +14,13 @@ $form['ext'] = array(
 $form['ext']['ext_settings'] = array(
   '#type' => 'fieldset',
   '#title' => t('Extensions'),
-  '#description' => t('<h3>Enable Additional Features</h3><p>Extensions include many extras for configuring and styling your site. Enabled extensions will appear in new vertical tabs below the main setting. Extensions can be enabled or disabled individually, so you only load what you need. Disabling the global setting will globally disable most extensions, but not enable them.</p><p>Once you have enabled an extension you will need to configure its settings, then save the theme settings again (to save its configuration).</p>'),
 );
+
+
+$form['ext']['ext_settings']['description'] = array(
+  '#markup' => t('<h3>Enable Additional Features</h3><p>Extensions include many extras for configuring and styling your site. Enabled extensions will appear in new vertical tabs below the main setting. Extensions can be enabled or disabled individually, so you only load what you need. Disabling the global setting will globally disable most extensions, but not enable them.</p><p>Once you have enabled an extension you will need to configure its settings, then save the theme settings again (to save its configuration).</p>'),
+);
+
 
 // Enable extensions, the extension settings are hidden by default to ease the
 // the UI clutter, this setting is also used as a global enable/disable for any

@@ -596,7 +596,7 @@ function at_core_preprocess_page(&$variables) {
 
         // Add a layout id to the page wrapper.
         $variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($page['#selected_plugin']);
-        $variables['attributes']['class'][] = 'page-layout__variant--' . drupal_html_class($selected_layout);
+        $variables['attributes']['class'][] = 'page-layout-variant--' . drupal_html_class($selected_layout);
 
         $layout_attr = new LayoutAttributes($page['#selected_provider'], $page['#selected_plugin'], $selected_layout, $variables['#active_regions']);
         $row_attributes = $layout_attr->rowAttributes();

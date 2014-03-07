@@ -93,7 +93,7 @@ class LayoutGenerator extends PageLayout {
       }
       $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
       $output[$row]['wrapper_open'] =  '  <'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
-      $output[$row]['container_open'] = '    <div class="regions">';
+      $output[$row]['container_open'] = '    <div class="regions regions__' . $row . '">';
       $output[$row]['regions'] = implode("\n", $row_regions[$row]);
       $output[$row]['container_close'] = '    </div>';
       $output[$row]['wrapper_close'] = '  </' . $wrapper_element . '>';

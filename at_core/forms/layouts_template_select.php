@@ -18,24 +18,19 @@ else {
 
 $form['layouts']['template_select'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Templates'),
+  '#title' => t('Manage Templates'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-one')),
   '#states' => array(
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
 );
 
-// Wrapper to completely hide or show layout options.
-$form['layouts']['template_select']['select'] = array(
-  '#type' => 'container',
-);
-
 // Select Layout Type container.
-$form['layouts']['template_select']['select']['select_type'] = array(
+$form['layouts']['template_select']['select_type'] = array(
   '#type' => 'container',
 );
 
-$form['layouts']['template_select']['select']['select_type']['layout_type_select'] = array(
+$form['layouts']['template_select']['select_type']['layout_type_select'] = array(
   '#type' => 'select',
   '#title' => t('<h3>Templates</h3>'),
   '#options' => $type_options,
@@ -69,7 +64,7 @@ if ($default_layout = theme_get_setting('settings.template_suggestion_page', $th
 }
 else {
   $plugin_not_set_markup = t('Current default layout: No default set. Choose a CSS layout for the default layout and save this form.');
-  $form['layouts']['template_select']['select']['select_type']['default_layout'] = array(
+  $form['layouts']['template_select']['select_type']['default_layout'] = array(
     '#type' => 'container',
     '#markup' => $plugin_not_set_markup,
   );
@@ -89,7 +84,7 @@ $form['layouts']['template_select']['select']['select_type']['none_set'] = array
 */
 
 // Default Layout container and Help.
-$form['layouts']['template_select']['select']['select_type']['default_set'] = array(
+$form['layouts']['template_select']['select_type']['default_set'] = array(
   '#type' => 'container',
   '#markup' => t('
     <label>Default Layout for page.html.twig</label>
@@ -105,7 +100,7 @@ $form['layouts']['template_select']['select']['select_type']['default_set'] = ar
 );
 
 // Default Layout "not set" message.
-$form['layouts']['template_select']['select']['select_type']['default_not_set'] = array(
+$form['layouts']['template_select']['select_type']['default_not_set'] = array(
   '#type' => 'container',
   '#markup' => t('First set the default page layout - no default page layout detected.'),
   '#states' => array(
@@ -114,7 +109,7 @@ $form['layouts']['template_select']['select']['select_type']['default_not_set'] 
 );
 
 // Suggestions container.
-$form['layouts']['template_select']['select']['select_type']['suggestions'] = array(
+$form['layouts']['template_select']['select_type']['suggestions'] = array(
   '#type' => 'container',
   '#markup' => t('<label>Add or Modify a Suggestion</label>'),
   '#states' => array(
@@ -124,7 +119,7 @@ $form['layouts']['template_select']['select']['select_type']['suggestions'] = ar
 
 // Suggestions input and help.
 $suggestion_plugin_message = isset($default_plugin) ? $default_plugin : '-- not set --';
-$form['layouts']['template_select']['select']['select_type']['suggestions']['template_suggestion_name'] = array(
+$form['layouts']['template_select']['select_type']['suggestions']['template_suggestion_name'] = array(
   '#type' => 'textfield',
   '#size' => 20,
   '#field_prefix' => 'page--',
@@ -141,7 +136,7 @@ $form['layouts']['template_select']['select']['select_type']['suggestions']['tem
 
 // Print the default layout and plugin message above the table.
 if (isset($default_plugin_markup)) {
-  $form['layouts']['template_select']['select']['select_type']['default_layout'] = array(
+  $form['layouts']['template_select']['select_type']['default_layout'] = array(
     '#type' => 'container',
     '#markup' => $default_plugin_markup,
   );
@@ -168,13 +163,16 @@ foreach ($config as $key => $value) {
   }
 }
 
-$form['layouts']['template_select']['select']['select_type']['manage_suggestions'] = array(
+$form['layouts']['template_select']['select_type']['manage_suggestions'] = array(
   '#type' => 'fieldset',
-  '#description' => t('<h5>Generated Suggestions</h5>'),
+);
+
+$form['layouts']['template_select']['select_type']['manage_suggestions']['description'] = array(
+  '#markup' => t('<h5>Generated Suggestions</h5>'),
 );
 
 if (!empty($manage_suggestions_data)) {
-  $form['layouts']['template_select']['select']['select_type']['manage_suggestions']['delete_suggestions'] = array(
+  $form['layouts']['template_select']['select_type']['manage_suggestions']['delete_suggestions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Manage Suggestions'),
     '#default_value' => FALSE,
@@ -182,7 +180,7 @@ if (!empty($manage_suggestions_data)) {
   );
 }
 
-$form['layouts']['template_select']['select']['select_type']['manage_suggestions']['wrapper'] = array(
+$form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper'] = array(
   '#type' => 'container',
   '#attributes' => array('class' => array('delete_suggestions-container')),
   '#states' => array(
@@ -191,7 +189,7 @@ $form['layouts']['template_select']['select']['select_type']['manage_suggestions
 );
 
 // Print the layouts table select data.
-$form['layouts']['template_select']['select']['select_type']['manage_suggestions']['wrapper']['delete_suggestions_table'] = array(
+$form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper']['delete_suggestions_table'] = array(
   '#title' => t('Manage Suggestions'),
   '#type' => 'tableselect',
   '#header' => $manage_suggestions_header,
@@ -201,7 +199,7 @@ $form['layouts']['template_select']['select']['select_type']['manage_suggestions
 );
 
 if (empty($manage_suggestions_data)) {
-  $form['layouts']['template_select']['select']['select_type']['manage_suggestions']['wrapper']['no_suggestions'] = array(
+  $form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper']['no_suggestions'] = array(
     '#type' => 'container',
     '#markup' => t('<p class="description"><i>No suggestions have been generated. To generate a suggestion select type "Template suggestion", configure options and save.</i></p>'),
     '#states' => array(

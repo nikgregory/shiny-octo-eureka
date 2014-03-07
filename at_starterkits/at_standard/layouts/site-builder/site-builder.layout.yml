@@ -6,7 +6,7 @@ name: 'Site Builder'
 # All layouts are type 'at_layout'. Required.
 type: 'at_layout'
 
-# Optional version string.
+# Version string. Optional.
 version: '8.x-1.0-dev'
 
 # Path to CSS layout variants. Required.

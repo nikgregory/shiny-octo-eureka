@@ -44,10 +44,10 @@ class LayoutSettings extends PageLayout {
             $selectors['selectors'][$row_key]['comment'] = '/* ' . ucfirst($row_key) . ' (' .  $trc_label . ') */';
 
             // Row class selectors.
-            $selectors['selectors'][$row_key]['row'] = '.page-row-' . str_replace('_', '-', $row_key) . ' {}';
+            $selectors['selectors'][$row_key]['row'] = '.page-row__' . str_replace('_', '-', $row_key) . ' {}';
             foreach ($row_name['regions'] as $region_key => $region_names) {
               //$selectors['selectors'][$row_key]['count'] = '.total-regions-' . $region_count . ' {}';
-              $selectors['selectors'][$row_key][$region_key] =  '.' . str_replace('_', '-', $region_key) . ' {}';
+              $selectors['selectors'][$row_key][$region_key] =  '.region__' . str_replace('_', '-', $region_key) . ' {}';
             }
           }
           else {

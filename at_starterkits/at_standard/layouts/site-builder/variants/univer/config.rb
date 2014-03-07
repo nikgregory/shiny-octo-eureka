@@ -1,4 +1,6 @@
 
+# Univer Layout Variant Config
+
 # Required plugins
 # -----------------------------------------------------------------------------
 # The default layouts that ship with the Adaptivetheme are built using Susy 2,
@@ -8,8 +10,8 @@
 # compass with throw an error, hopefully. Scout and Codekit should also pick this
 # up and install the right gems. A bundle Gemfile is included so you can run
 # bundle install.
-gem "susy", "~> 2.0.0.beta.3"
-gem "compass", "~> 1.0.0.alpha.17"
+gem "susy", "~> 2.0.0.rc.2"
+gem "compass", "~> 1.0.0.alpha.18"
 
 require "susy"
 require "compass"

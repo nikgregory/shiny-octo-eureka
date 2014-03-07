@@ -90,7 +90,7 @@
       @include span(last 8);
     }
     &:nth-child(2) {
-      //clear: $to;
+      clear: $flow-to;
       @include span(8 at 5 isolate);
     }
     &:last-child {
@@ -126,8 +126,7 @@
       @include span(last 8);
     }
     &:nth-child(2) {
-      //clear: $to;
-
+      clear: $flow-to;
       @include span(4 at 5 isolate);
     }
     &:nth-child(3) {
