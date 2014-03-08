@@ -38,8 +38,11 @@ $form['images'] = array(
 $form['images']['image-settings'] = array(
   '#type' => 'fieldset',
   '#title' => t('Image Settings'),
-  '#description' => '<h3>Image Settings</h3><p>Set alignment, caption display and image count per content type and display modes.</p>',
   '#weight' => 0,
+);
+
+$form['images']['image-settings']['description'] = array(
+  '#markup' => '<h3>Image Settings</h3><p>Set alignment, caption display and image count per content type and display modes.</p>',
 );
 
 // Loop node types and set form elements for each type.
@@ -67,7 +70,7 @@ foreach ($node_types as $nt) {
   foreach ($node_view_modes as $display_mode) {
 
     // View mode labels.
-    $display_mode_label = $display_mode['label'];
+    $display_mode_label = t('Display mode: ') . $display_mode['label'];
     $display_mode_id = str_replace('.', '_', $display_mode['id']);
 
     // Alignment setting.
@@ -124,61 +127,3 @@ foreach ($node_types as $nt) {
     );
   }
 }
-
-
-
-
-
-
-
-// Full
-/*
-$form['images']['image-settings']['alignment']['image_alignment'] = array(
-  '#type' => 'radios',
-  '#title' => t('<strong>Alignment - full view</strong>'),
-  '#default_value' => theme_get_setting('image_alignment'),
-  '#options' => array(
-    'ia-n' => t('None'),
-    'ia-l' => t('Left'),
-    'ia-c' => t('Center'),
-    'ia-r' => t('Right'),
-  ),
-);
-*/
-
-
-// Captions. TODO deal with captions in due course
-/*
-$form['images']['image-settings']['captions'] = array(
-  '#type' => 'fieldset',
-  '#title' => t('Image Captions'),
-  '#description' => t('<strong>Display the image title as a caption</strong>'),
-);
-$form['images']['image-settings']['captions']['image_caption_teaser'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Show captions on teaser view'),
-  '#default_value' => theme_get_setting('image_caption_teaser'),
-);
-$form['images']['image-settings']['captions']['image_caption_full'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Show captions on full view'),
-  '#description' => t('Captions use the title attribute text. You must enable tiles in the field management options for your image fields.'),
-  '#default_value' => theme_get_setting('image_caption_full'),
-);
-*/
-
-// TODO Restrict image count per view mode
-/*
-$form['images']['image-settings']['teaser'] = array(
-  '#type' => 'fieldset',
-  '#title' => t('Teaser Image Fields'),
-  '#description' => t('<strong>Show only one image field image on teasers</strong>'),
-);
-$form['images']['image-settings']['teaser']['image_teaser'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Show the first image only on teasers'),
-  '#description' => t('Useful for when you have a multivalue image field and you only want the first image to show on teasers.'),
-  '#default_value' => theme_get_setting('image_teaser'),
-);
-*/
-

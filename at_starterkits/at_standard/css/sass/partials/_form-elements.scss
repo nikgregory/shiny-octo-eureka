@@ -1,0 +1,253 @@
+//
+// Style form elements and buttons.
+//
+// ---------------------------------------------------------------------------
+@import "base";
+
+/* Form Elements
+-----------------------------------------------------------------------------*/
+
+.form-item {
+  margin: 0 0 1em;
+}
+
+input {
+  max-width: 100%; // Flexible inputs for responsive/elastic design.
+}
+
+input, select, button, textarea {
+  //@include font-size(16px);
+}
+
+input:not([type]),
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="week"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+select,
+textarea {
+  // Colours
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.8);
+
+  // Box model
+  padding: 0.3em 0.4em;
+
+  // Border radius
+  @include border-radius(3px);
+
+  // Shadows
+  @include box-shadow(rgba(0,0,0,0.1) 0 1px 2px inset);
+
+  // Transitions
+  @include transition(all, .15s, linear);
+
+  // Box sizing
+  @include box-sizing(border-box);
+
+  &:focus {
+    outline: 0;
+    outline: thin dotted \9; // IE6-9
+    border-color: #aaa;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: #ebebeb;
+    color: #666;
+  }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 0.5em 0;
+  display: inline-block;
+}
+
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: 1px auto #666;
+}
+
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  background: #eee;
+  color: #777;
+  border-color: #ccc;
+}
+
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
+}
+
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus {
+}
+
+input[type="file"]:focus:invalid:focus,
+input[type="radio"]:focus:invalid:focus,
+input[type="checkbox"]:focus:invalid:focus {
+}
+
+select {
+  &[multiple] {
+    height: auto;
+  }
+}
+
+label {
+  //@include font-size(14px); // set the font size for labels
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline;
+  position: relative;
+  bottom: 1px;
+  padding: 1px 4px 2px 0;
+
+  // Use a background color
+  // padding: 1px 4px 2px;
+  // color: #fff;
+  // background: #2ba6cb;
+}
+
+[dir="rtl"] label {
+  padding: 1px 0 2px 4px;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0.35em 0 0.75em;
+  border: 0;
+}
+
+legend {
+}
+
+textarea {
+  resize: vertical; // Allow only vertical resizing of textareas.
+}
+
+.tips li {
+  list-style: none;
+}
+
+/* Buttons */
+.button {
+  //Cursor
+  cursor: pointer;
+
+  // Text styles
+  text-align: center;
+  text-decoration: none;
+
+  // Font
+  font-weight: bold;
+
+  // Colours
+  color: #666;
+  background: #ebebeb;
+  border: 1px solid #ccc;
+
+  // Box model
+  padding: 0.3em 0.6em;
+  margin: 0 0 0 3px;
+  width: auto;
+  display: inline-block;
+  position: relative;
+
+  // Border radius
+  @include border-radius(3px);
+
+  // Shadows
+  @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
+
+  // Transitions
+  @include transition(background-color, .15s, ease-in-out);
+
+  // Pseudo styles
+  &:hover,
+  &:focus {
+    color: #333;
+    background-color: #e8e8e8;
+  }
+
+  &:active {
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 0 inset);
+  }
+
+  &[disabled] {
+    opacity: 0.8;
+    cursor: default;
+    @include box-shadow(none);
+
+    &:hover {
+      color: #666;
+    }
+  }
+}
+
+/* Drop buttons */
+.js .dropbutton-widget {
+  background-color: #fff;
+  border: 1px solid #ccc;
+
+  /* Border radius */
+  @include border-radius(3px);
+
+  &:hover {
+  }
+}
+
+.dropbutton .dropbutton-action > * {
+  padding: 0.3em 0.6em;
+  white-space: nowrap;
+}
+
+.dropbutton .secondary-action {
+  border-top: 1px solid #e5e5e5;
+
+  input {
+    border: 0;
+    background: #fff;
+  }
+}
+
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #e5e5e5;
+
+ .dropbutton-action > * {
+    margin-right: 0;
+    border: 0;
+  }
+
+  .dropbutton-action .button {
+    @include border-radius(3px 0 0 3px);
+  }
+}
+
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-left: 1px solid #e5e5e5;
+  border-right: 0 none;
+
+  .dropbutton-action > * {
+    margin-left: 0;
+  }
+}

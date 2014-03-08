@@ -66,9 +66,12 @@ $custom_stack_description = t("Enter a comma seperated list of fonts, with no tr
 $form['fonts']['font_settings'] = array(
   '#type' => 'fieldset',
   '#title' => t('Fonts'),
-  '#description' => $fonts_message,
   '#attributes' => array('class' => array('font-element-wrapper')),
   '#weight' => -110,
+);
+
+$form['fonts']['font_settings']['description'] = array(
+  '#markup' => $fonts_message,
 );
 
 

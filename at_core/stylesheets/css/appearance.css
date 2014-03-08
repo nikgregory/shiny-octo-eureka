@@ -344,6 +344,15 @@ pre.code-block {
   padding: 0;
   margin: 0;
 }
+#edit-image-settings details fieldset legend {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+  font-family: inherit;
+  padding: 0 0 15px;
+}
 #edit-image-settings .form-type-radios label {
   margin-bottom: 5px;
 }

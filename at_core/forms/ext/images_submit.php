@@ -33,20 +33,26 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
 
       if (isset($values['settings_image_alignment_' . $node_type . '_' .  $display_mode_id])) {
         $bundle_data[$node_type]['selector'] = $node_type_selector;
-        $bundle_data[$node_type][$display_mode_id]['align'] = $values['settings_image_alignment_' . $node_type . '_' .  $display_mode_id];
-        $bundle_data[$node_type][$display_mode_id]['selector'] = $display_mode_selector;
+        $bundle_data[$node_type][$display_mode_id]['align'] = (string) $values['settings_image_alignment_' . $node_type . '_' .  $display_mode_id];
+        $bundle_data[$node_type][$display_mode_id]['selector'] = (string) $display_mode_selector;
       }
     }
   }
 
   // Format CSS.
   if (!empty($bundle_data)) {
+    $view_mode_selector = '';
+    $declaration = '';
     foreach ($bundle_data as $bundle_key => $bundle_values) {
       foreach ($bundle_values as $view_mode_key => $view_mode_values) {
-        $view_mode_selector = $view_mode_values['selector'];
-        $declaration = 'float:' . $view_mode_values['align'];
-        if ($view_mode_values['align'] == 'center') {
-          $declaration = 'margin-left:auto;margin-right:auto;text-align:center';
+        if (isset($view_mode_values['selector'])) {
+          $view_mode_selector = $view_mode_values['selector'];
+        }
+        if (isset($view_mode_values['align'])) {
+          $declaration = 'float:' . $view_mode_values['align'];
+          if ($view_mode_values['align'] == 'center') {
+            $declaration = 'margin-left:auto;margin-right:auto;text-align:center';
+          }
         }
         $css[$bundle_key][$view_mode_key] = $bundle_values['selector'] . $view_mode_selector . ' .field-type--image{' .  $declaration . '}';
       }

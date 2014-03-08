@@ -6,6 +6,9 @@
 @import "base";
 
 
+/* Content Types
+-----------------------------------------------------------------------------*/
+
 .node {}
 
 
@@ -57,8 +60,6 @@
   // Conditional class: if user picture?
   &.node__submitted--user-picture {}
 }
-
-
 
 
 // Footer wraps links.

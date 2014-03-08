@@ -48,10 +48,18 @@
     clear: both;
   }
 
-  details details {
-    border: 0;
-    padding: 0;
-    margin: 0;
+  details {
+    details {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    fieldset legend {
+      @include visually-hidden-off;
+      font-family: inherit;
+      padding: 0 0 15px;
+    }
   }
 
   .form-type-radios {
@@ -59,6 +67,7 @@
       margin-bottom: 5px;
     }
   }
+
 
   .form-type-radio {
     clear: none;

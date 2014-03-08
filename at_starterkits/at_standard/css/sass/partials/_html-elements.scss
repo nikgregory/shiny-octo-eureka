@@ -1,14 +1,14 @@
 //
-// Similar to main.css from h5bp, with some additions for headings, links
-// flexible images and inputs.
+// Set base defaults for HTML elements.
+// This is designed to work in conjunction with normalize which is loaded by
+// Drupal core by default. Note that form elememts are not included here, see
+// _form-elements.scss.
 //
 // ---------------------------------------------------------------------------
 @import "base";
 
-
-div.regions {
-  max-width: 85% ;
-}
+/* HTML Elements
+-----------------------------------------------------------------------------*/
 
 html {
   @include font-size(16px);
@@ -101,22 +101,3 @@ img,
 video {
   vertical-align: middle;
 }
-
-/* Remove default fieldset styles. */
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-/* Allow only vertical resizing of textareas. */
-textarea {
-  resize: vertical;
-}
-
-/* Keep form elements from overflowing their containers. */
-input {
-  max-width: 100%;
-  @include box-sizing(border-box);
-}
-

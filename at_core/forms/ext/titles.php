@@ -15,8 +15,11 @@ $form['titles'] = array(
 $form['titles']['titles_settings'] = array(
   '#type' => 'fieldset',
   '#title' => t('Titles'),
-  '#description' => t('<h3>Title Styles</h3><p>Set case, weight and alignment for site name and slogan, page, node, block and comment titles.</p><p>Note: the <em>page title</em> style will be used on full node views.'),
   '#weight' => -100,
+);
+
+$form['titles']['titles_settings']['description'] = array(
+  '#markup' => t('<h3>Title Styles</h3><p>Set case, weight and alignment for site name and slogan, page, node, block and comment titles.</p><p>Note: the <em>page title</em> style will be used on full node views.'),
 );
 
 // Array of valid title types

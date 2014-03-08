@@ -7,20 +7,32 @@
 // ---------------------------------------------------------------------------
 @import "base";
 
-// All forum pages
+/* Forums
+-----------------------------------------------------------------------------*/
+
 .page-forum {
 
   table {}
+
   thead {}
+
   th {}
+
   tbody {}
+
   tr {}
+
   td {
    &.forum {}
+
    .icon {}
+
    .name {}
+
    &.topics {}
+
    &.posts {}
+
    &.last-reply {}
   }
 }
@@ -31,7 +43,4 @@
 
 // Specific Forum ID, each forum has an ID, the first is 0
 #forum-0 {}
-
-
-
 
