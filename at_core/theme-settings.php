@@ -31,9 +31,9 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
     'library' => array(
-      'system' => 'drupal.machine-name',
+      'system' => 'core/drupal.machine-name',
     ),
-   'js' => array(
+    'js' => array(
       $at_core_path . '/scripts/slimbox2/slimbox2.js',
     ),
     'css' => array(
