@@ -18,3 +18,18 @@
   };
 
 })(jQuery);
+
+//
+//function jqUpdateSize(){
+//    // Get the dimensions of the viewport
+//    var width = $(window).width();
+//    var height = $(window).height();
+//
+//    $('#jqWidth').html(width);
+//    $('#jqHeight').html(height);
+//};
+//
+//$(document).ready(jqUpdateSize);    // When the page first loads
+//$(window).resize(jqUpdateSize);     // When the browser changes size
+
+

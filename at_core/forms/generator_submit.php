@@ -20,10 +20,8 @@ function at_core_submit_generator(&$form, &$form_state) {
   //drupal_theme_rebuild();
   //system_list_reset();
 
-  drupal_flush_all_caches();
-
   // Messages
-  if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
-    drupal_set_message(t('You generated a theme - you may need to clear the cache for Drupal to see your new theme. Go to the Performance Settings page in Configuration (admin/config/development/performance) and clear the cache.'), 'warning');
-  }
+  //if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
+  //  drupal_set_message(t('Remember, you have to clear the cache now - go to the Performance Settings page in Configuration (admin/config/development/performance) and clear the cache.'), 'warning');
+  //}
 }

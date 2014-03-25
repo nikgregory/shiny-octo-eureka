@@ -54,9 +54,33 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
     // Create a theme settings object.
     $cache[$theme] = new ThemeSettings($theme);
 
+    // Get the values for the theme-specific settings from the .info.yml files
+    // of the theme and all its base themes.
+    if ($theme) {
+      $themes = list_themes();
+      $theme_object = $themes[$theme];
+
+      // Create a list which includes the current theme and all its base themes.
+      if (isset($theme_object->base_themes)) {
+        $theme_keys = array_keys($theme_object->base_themes);
+        $theme_keys[] = $theme;
+      }
+      else {
+        $theme_keys = array($theme);
+      }
+      foreach ($theme_keys as $theme_key) {
+        if (!empty($themes[$theme_key]->info['settings'])) {
+          $cache[$theme]->merge($themes[$theme_key]->info['settings']);
+        }
+      }
+    }
+
+    // Get the global settings from configuration.
+    $cache[$theme]->merge(\Drupal::config('system.theme.global')->get());
+
     if ($theme) {
       // Get the saved theme-specific settings from the configuration system.
-      $cache[$theme]->mergeData(\Drupal::config($theme . '.settings')->get());
+      $cache[$theme]->merge(\Drupal::config($theme . '.settings')->get());
     }
   }
 
@@ -244,6 +268,10 @@ function at_core_page_alter(&$page) {
   $generated_css_file_path = drupal_get_path('theme', $theme) . '/generated_css';
 
   // Attach libraries.
+
+  //$element['#attached']['library'][] = 'core/drupal.machine-name';
+  //$element['#attached']['js'][] = $js_settings;
+
   if (at_core_theme_get_setting('settings.libraries_enable', $theme) === 1) {
     //$libraries = array();
     //$themeInfo = new ThemeInfo($theme);
@@ -256,14 +284,14 @@ function at_core_page_alter(&$page) {
     foreach ($drupal_core_libraries as $key => $value) {
       $library_setting = str_replace('.', '_', strtolower($key));
       if (at_core_theme_get_setting("settings.drupal_core_$library_setting", $theme) === 1) {
-        $page['#attached']['library'][] = array('core', $key);
+        $page['#attached']['library'][] = 'core/' . $key;
       }
     }
   }
 
   // Attach Windowsize library
   if (at_core_theme_get_setting("settings.show_window_size", $theme) === 1) {
-    $page['#attached']['library'][] = array('at_core', 'window_size');
+    $page['#attached']['library'][] = 'at_core/at.window_size';
   }
 
   // Attach Livereload snippet (inline)
@@ -387,7 +415,7 @@ function at_core_page_alter(&$page) {
         // layouts use :last-child and other pseudo selectors not supported by
         // IE8. Still, the user could use something else, what exactly I don't
         // know because jQuery Selectivzr depending is not reliable.
-        $page['#attached']['library'][] = array('at_core', 'ie9js');
+        $page['#attached']['library'][] = 'at_core/at.ie9js';
       }
     }
 
@@ -497,6 +525,8 @@ function at_core_page_alter(&$page) {
       );
     }
   }
+
+  //kpr($page);
 }
 
 /**
@@ -577,7 +607,7 @@ function at_core_preprocess_page(&$variables) {
   */
 
   // Layouts.
-  if (at_core_theme_get_setting('settings.layouts_enable', $theme) == 1) {
+  if (at_core_theme_get_setting('settings.layouts_enable', $theme)) {
 
     // Set a variable that holds an array of the active visible regions.
     $regions = system_region_list($theme, REGIONS_VISIBLE);
@@ -611,6 +641,8 @@ function at_core_preprocess_page(&$variables) {
       }
     }
   }
+
+  //kpr($variables);kpr($variables);
 }
 
 /**
@@ -684,6 +716,8 @@ function at_core_preprocess_node(&$variables) {
       '!datetime' => $variables['date'],
     ));
   }
+
+  //dsm($variables);
 }
 
 /**

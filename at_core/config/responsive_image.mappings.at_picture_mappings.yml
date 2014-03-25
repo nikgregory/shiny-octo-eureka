@@ -1,5 +1,4 @@
-id: at_picture_mappings
-uuid: ac4e5326-a8ef-4921-974e-7896d2049621
+id: at_responsive_image_mappings
 label: 'AT Picture Mappings'
 mappings:
   theme.at_core.mobile:

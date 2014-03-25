@@ -1,16 +1,17 @@
 # Window size widget
-window_size:
+at.window_size:
   version: 1.1
-  js:
-    scripts/window-size/window-size.js: { every_page: true }
   css:
     component:
       scripts/window-size/window-size.css: {}
+  js:
+    scripts/window-size/window-size.js: {}
   dependencies:
-   - core/jquery.once
+    - core/jquery
+    - core/jquery.once
 
 # IE9.js
-ie9js:
+at.ie9js:
   remote: https://code.google.com/p/ie7-js/
   version: 2.1
   js:

@@ -6,10 +6,6 @@
 @import "base";
 
 
-div.regions {
-  max-width: 85% ;
-}
-
 html {
   @include font-size(16px);
   line-height: 1.625;
@@ -119,4 +115,3 @@ input {
   max-width: 100%;
   @include box-sizing(border-box);
 }
-

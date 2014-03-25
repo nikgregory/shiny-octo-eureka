@@ -75,18 +75,18 @@ class ThemeGeneratorSubmit {
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
 
         $configuration_files = array(
-          'block.block.atblockssitebranding.yml',
-          'block.block.atblocksstatusmessages.yml',
-          'block.block.atblockspagetitle.yml',
-          'block.block.' . $subtheme_type . '_search.yml',
-          'block.block.' . $subtheme_type . '_content.yml',
-          'block.block.' . $subtheme_type . '_footer.yml',
-          'block.block.' . $subtheme_type . '_powered.yml',
-          'block.block.' . $subtheme_type . '_breadcrumbs.yml',
-          'block.block.' . $subtheme_type . '_help.yml',
-          'block.block.' . $subtheme_type . '_login.yml',
-          'block.block.' . $subtheme_type . '_tools.yml',
-          'block.block.' . $subtheme_type . '.branding.yml',
+          //'block.block.atblockssitebranding.yml',
+          //'block.block.atblocksstatusmessages.yml',
+          //'block.block.atblockspagetitle.yml',
+          //'block.block.' . $subtheme_type . '_search.yml',
+          //'block.block.' . $subtheme_type . '_content.yml',
+          //'block.block.' . $subtheme_type . '_footer.yml',
+          //'block.block.' . $subtheme_type . '_powered.yml',
+          //'block.block.' . $subtheme_type . '_breadcrumbs.yml',
+          //'block.block.' . $subtheme_type . '_help.yml',
+          //'block.block.' . $subtheme_type . '_login.yml',
+          //'block.block.' . $subtheme_type . '_tools.yml',
+          //'block.block.' . $subtheme_type . '.branding.yml',
           $subtheme_type . '.settings.yml',
         );
 
@@ -147,10 +147,17 @@ class ThemeGeneratorSubmit {
           $theme_info_data['regions'][$region_key] = "'" . $region_name . "'";
         }
 
+        // don't hide this new sub-theme
         unset($theme_info_data['hidden']);
 
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
         file_unmanaged_save_data($rebuilt_info, $info_file, FILE_EXISTS_REPLACE);
+
+        // try to clear all caches etc
+        //if (file_exists($info_file)) {
+        //  drupal_flush_all_caches();
+        //  drupal_set_message(t('Caches cleared.'));
+        //}
       }
 
       // Skins
@@ -214,15 +221,20 @@ class ThemeGeneratorSubmit {
         file_unmanaged_save_data($base_theme_settings, $settings_file, FILE_EXISTS_REPLACE);
       }
 
-      // Set messages, however we may need more validation that we are doing
-      // now before we say a definitive Congrats!
+      // Reset the themes list, see if we can get this to show up without having the clear the cache manually.
+      system_list_reset();
+
+      // Set messages, however we may need more validation?
       //----------------------------------------------------------------------
       $generated_path = drupal_get_path('theme', $machine_name);
 
-      drupal_set_message(t("Congrats! Your new theme <b>!theme_name</b> (machine name: <em>\"!machine_name\"</em>) has been generated in <em>\"!theme_path\"</em>. Enable your theme on the Appearance page (click the 'List' tab above), then click the settings link for your theme to configure it. There you will find a new Help tab to guide your setup and theme development.", array(
+      //<p>Before you can use your new theme go to <a href=\"!performance_settings\" target=\"_blank\">Performance Settings</a> and clear all caches.</p>
+
+      drupal_set_message(t("<p>A new theme <b>!theme_name</b> (machine name: <em>\"!machine_name\"</em>) has been generated.</p>", array(
         '!theme_name' => $friendly_name,
         '!machine_name' => $machine_name,
         '!theme_path' => $generated_path,
+        '!performance_settings' => base_path() . 'admin/config/development/performance',
         )), 'status');
 
         // Warn about stylesheets in the new skin theme

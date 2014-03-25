@@ -59,7 +59,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
 // iPad retina
 $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch_icon_path_ipad_retina'] = array(
   '#type' => 'textfield',
-  '#title' => t('iPad Retina: 156x156'),
+  '#title' => t('iPad Retina: 152x152'),
   '#description' => t('Apple touch icon for iPads with retina displays.'),
   '#field_prefix' => $theme_name . '/',
   '#default_value' => check_plain(theme_get_setting('settings.apple_touch_icon_path_ipad_retina')),
@@ -71,17 +71,3 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#description' => t('Use precomposed if you want to remove icon effects in iOS6 or below. The default is <code>apple-touch-icon</code>. '),
   '#default_value' => check_plain(theme_get_setting('settings.apple_touch_icon_precomposed')),
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-

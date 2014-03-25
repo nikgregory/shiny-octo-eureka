@@ -82,9 +82,6 @@
  * @ingroup themeable
  */
 #}
-{# Hide stuff so we can render it later. #}
-{% hide(content.links) %}
-{% hide(content.comment) %}
 <article id="{{ attributes.id }}" class="{{ attributes.class }} clearfix"{{ attributes }}>
 
   <header class="node__header">
@@ -108,7 +105,9 @@
     {% endif %}
   </header>
 
-  {{ content }}
+  <div class="node__content clearfix"{{ content_attributes }}>
+    {{ content|without('links', 'comment') }}
+  </div>
 
   {% if content.links %}
     <footer{{ footer_attributes }}>
