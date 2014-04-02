@@ -1,3 +1,17 @@
 /**
  * Pagers.
  */
+
+.item-list .pager {
+
+  li {
+
+    &.pager-current {}
+
+    a {
+
+      &:hover,
+      &:focus {}
+    }
+  }
+}

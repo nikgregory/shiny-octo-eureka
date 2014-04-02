@@ -16,7 +16,7 @@ class RecursiveCopy {
    * @param $ignore
    *   Regex to filter out files we don't want.
    */
-  public function recursiveCopy($source, $target, $ignore = '/^(\.(\.)?|CVS|\.svn|\.git|\.DS_Store)$/') {
+  public function recursiveCopy($source, $target, $ignore = '/^(\.(\.)?|CVS|\.sass-cache|\.svn|\.git|\.DS_Store)$/') {
     $dir = opendir($source);
     @mkdir($target);
     while($file = readdir($dir)) {

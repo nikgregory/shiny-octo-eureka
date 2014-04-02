@@ -16,33 +16,33 @@
  * Typography.
  */
 html {
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.625;
+  font-family: sans-serif;
+  line-height: 1.618;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+  font-weight: 400;
 }
 
 h1 {
-  font-size: 32px;
-  font-size: 2rem;
+  font-size: 36.6524764px;
+  font-size: 2.2907798rem;
 }
 
 h2 {
-  font-size: 24px;
-  font-size: 1.5rem;
+  font-size: 27.1934953px;
+  font-size: 1.6995935rem;
 }
 
 h3 {
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 22.652476px;
+  font-size: 1.4157798rem;
 }
 
 h4 {
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 16.8065043px;
+  font-size: 1.0504065rem;
 }
 
 h5 {
@@ -51,8 +51,8 @@ h5 {
 }
 
 h6 {
-  font-size: 12px;
-  font-size: 0.75rem;
+  font-size: 8.6524758px;
+  font-size: 0.5407797rem;
 }
 
 a {

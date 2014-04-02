@@ -1,0 +1,28 @@
+/**
+ * Messages
+ */
+
+.messages {
+  border-width: 1px;
+  @include border-radius(3px);
+}
+
+[class*="messages--"],
+[dir="rtl"] [class*="messages--"] {
+  box-shadow: none;
+}
+
+.messages--status,
+[dir="rtl"] .messages--status {
+  border-color: #c9e1bd;
+}
+
+.messages--warning,
+[dir="rtl"] .messages--warning {
+  border-color: #f4daa6;
+}
+
+.messages--error,
+[dir="rtl"] .messages--error {
+  border-color: #f9c9bf;
+}

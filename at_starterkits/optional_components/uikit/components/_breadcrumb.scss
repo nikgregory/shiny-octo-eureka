@@ -1,3 +1,25 @@
 /**
  * Breadcrumb.
  */
+
+.breadcrumb {
+  ol {
+  }
+  li {
+    &:before {
+      // content: " » "; // Seperator
+    }
+    &:first-child:before {}
+  }
+}
+
+.breadcrumb__title {
+  float: left;
+  font-size: 1em;
+  padding: 0 0.4em 0 0;
+}
+
+[dir="rtl"] .breadcrumb__title {
+  float: right;
+  padding: 0 0 0 0.4em;
+}

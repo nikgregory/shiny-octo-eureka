@@ -1,11 +1,5 @@
-//
+
 // Variable Settings.
-//
-
-// Compass
-
-
-
 
 
 // Breakpoints
@@ -16,29 +10,51 @@ $narrow-wide : "all and (min-width: 45em)"; // Allow styles to cascade into wide
 $wide        : "all and (min-width: 60em)";
 
 
-// Colors
+// Modular Scale
+// http://www.modularscale.com by Tim Brown
+// https://github.com/scottkellum/modular-scale
+$ms-base: 14px 44px;
+$ms-ratio: $golden;
 
 
+// Sizing variables
+$xxxx-large: ms(5);
+$xxx-large:  ms(4);
+$xx-large:   ms(3);
+$x-large:    ms(2);
+$large:      ms(1);
+$medium:     ms(0);
+$small:      ms(-1);
 
-// Spacing
+
+// Font Weights
+$font-weight-bold:     700;
+$font-weight-semibold: 600;
+$font-weight-normal:   400;
+$font-weight-light:    300;
 
 
+// Vertical Rhythm Spacing
+$base-line-height: 1.618;
+$rhythm-spacing:   .168;
+$rhythm-height:    .711;
 
-// etc
+
+// Fonts
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
+$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+$sans-serif:      sans-serif;
+$serif:           serif;
+
+$base-font-family: $sans-serif;
+$font-monospace:   $courier;
+
+$font-smoothing: antialiased;
 
 
-
-// Type
-$base-font-size: 100%;
-$base-line-height: 1;
-
-$sans-serif-small: 'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-$sans-serif-large: Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;
-$sans-serif-arial-helvetica: Arial, Helvetica, sans-serif;
-$calibri-candara: Calibri, Candara, Arial, Helvetica, sans-serif;
-$serif-small: Garamond, Perpetua, 'Times New Roman', serif;
-$serif-large: Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;
-$modern-myriad: 'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif;
-$lucida: 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif;
-$impact: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
-$mono: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;

@@ -3,3 +3,32 @@
  *  - primary and secondary tabs
  *  - other tab modules or implimentation such as Quicktabs
  */
+
+.tabs {
+
+  &.primary {
+
+    li {
+
+      a {
+
+        &.active {}
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+
+  &.secondary {
+
+    li {
+
+      a {
+
+        &.active {}
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+}

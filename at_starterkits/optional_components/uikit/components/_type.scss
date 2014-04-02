@@ -1,3 +1,75 @@
 /**
  * Typography.
  */
+
+html {
+  font-family: $base-font-family;
+  line-height: $base-line-height;
+}
+
+// Compass headings() mixin, takes a range, e.g. headings(2,6) or all
+#{headings(all)} {
+  margin: 0;
+  font-weight: $font-weight-normal;
+}
+
+
+// Reset heading font sizes in px and rem.
+h1 {
+  @include font-size($xxx-large);
+}
+
+h2 {
+  @include font-size($xx-large);
+}
+
+h3 {
+  @include font-size($x-large);
+}
+
+h4 {
+  @include font-size($large);
+}
+
+h5 {
+  @include font-size($medium);
+}
+
+h6 {
+  @include font-size($small);
+}
+
+a {
+  text-decoration: none;
+
+  &:link,
+  &:visited {}
+
+  &:active,
+  &.active {}
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+
+
+

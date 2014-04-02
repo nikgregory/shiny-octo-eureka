@@ -317,14 +317,14 @@ function google_font_charsets() {
   $charset_array = &drupal_static(__FUNCTION__, array());
   if (empty($charset_array)) {
     $charset_array = array(
-      'latin' => t('Latin'),
-      'latin-ext' => t('Latin extended'),
-      'greek' => t('Greek'),
-      'greek-ext' => t('Greek extended'),
-      'cyrillic' => t('Cyrillic'),
+      'latin'        => t('Latin'),
+      'latin-ext'    => t('Latin extended'),
+      'greek'        => t('Greek'),
+      'greek-ext'    => t('Greek extended'),
+      'cyrillic'     => t('Cyrillic'),
       'cyrillic-ext' => t('Cyrillic extended'),
-      'khmer' => t('Khmer'),
-      'vietnamese' => t('Vietnamese'),
+      'khmer'        => t('Khmer'),
+      'vietnamese'   => t('Vietnamese'),
     );
   }
 
@@ -338,16 +338,56 @@ function google_font_styles() {
   $styles_array = &drupal_static(__FUNCTION__, array());
   if (empty($styles_array)) {
     $styles_array = array(
-      '300' => t('Book 300'),
+      '300'       => t('Book 300'),
       '300italic' => t('Book 300 Italic'),
-      '400' => t('Normal 400'),
+      '400'       => t('Normal 400'),
       '400italic' => t('Normal 400 Italic'),
-      '700' => t('Bold 700'),
+      '700'       => t('Bold 700'),
       '700italic' => t('Bold 700 Italic'),
     );
   }
 
   return $styles_array;
+}
+
+/**
+ * Google font effects.
+ */
+function google_font_effects() {
+  $effects_array = &drupal_static(__FUNCTION__, array());
+  if (empty($effects_array)) {
+    $effects_array = array(
+      'anaglyph'        => 'Anaglyph',
+      'brick-sign'      => 'Brick Sign',
+      'canvas-print'    => 'Canvas Print',
+      'crackle'         => 'Crackle',
+      'decaying'        => 'Decaying',
+      'destruction'     => 'Destruction',
+      'distressed'      => 'Distressed',
+      'distressed-wood' => 'Distressed Wood',
+      'emboss'          => 'Emboss',
+      'fire'            => 'Fire',
+      'fire-animation'  => 'Fire Animation',
+      'fragile'         => 'Fragile',
+      'grass'           => 'Grass',
+      'ice'             => 'Ice',
+      'mitosis'         => 'Mitosis',
+      'neon'            => 'Neon',
+      'outline'         => 'Outline',
+      'putting-green'   => 'Putting Green',
+      'scuffed-steel'   => 'Scuffed Steel',
+      'shadow-multiple' => 'Shadow Multiple',
+      'splintered'      => 'Splintered',
+      'static'          => 'Static',
+      'stonewash'       => 'Stonewash',
+      '3d'              => 'Three Dimensional',
+      '3d-float'        => 'Three Dimensional Float',
+      'vintage'         => 'Vintage',
+      'wallpaper'       => 'Wallpaper',
+    );
+  }
+
+  return $effects_array;
 }
 
 /**
@@ -397,16 +437,40 @@ function font_style_options($style) {
  *
  * @param $theme_name
  */
+
+/*
+
+ multiple fonts
+ http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans
+
+ with styles
+ http://fonts.googleapis.com/css?family=Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans
+
+ styles abbreviated
+ http://fonts.googleapis.com/css?family=Cantarell:i|Droid+Serif:700
+
+ Script set
+ http://fonts.googleapis.com/css?family=Philosopher&subset=latin,cyrillic
+
+ effects
+ http://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple|3d-float
+
+*/
+
 function at_core_load_google_fonts($theme) {
   $google_font_string = &drupal_static(__FUNCTION__);
   if (empty($google_font_string)) {
 
     $used_fonts = array();
+
     $font_elements = font_elements();
     $charsets = google_font_charsets();
     $styles = google_font_styles();
+    $effects = google_font_effects();
+
     $used_styles = array();
     $used_charsets = array();
+    $used_effects = array();
 
     foreach ($font_elements as $key => $value) {
       $setting = 'settings.' . $value['setting'];
@@ -422,8 +486,15 @@ function at_core_load_google_fonts($theme) {
       $used_fonts = array_unique($used_fonts);
       $google_fonts = implode('|', $used_fonts);
 
+      //kpr($used_settings);
+
       foreach ($used_settings as $used_setting) {
-        // Extended styles
+
+        $used_setting = str_replace('.', '_', $used_setting);
+
+        //kpr($used_setting);
+
+        // Styles   base_font_gwf_add_styles_700italic: 1
         if (at_core_theme_get_setting($used_setting . '_add_styles', $theme) == 1) {
           foreach ($styles as $styles_key => $styles_value) {
             if (at_core_theme_get_setting($used_setting . '_add_styles_' . $styles_key, $theme)) {
@@ -431,7 +502,7 @@ function at_core_load_google_fonts($theme) {
             }
           }
         }
-        // Extended charsets
+        // Charsets  base_font_gwf_add_charsets_latin: 1
         if (at_core_theme_get_setting($used_setting . '_add_charsets', $theme) == 1) {
           foreach ($charsets as $charset_key => $charset_value) {
             if (at_core_theme_get_setting($used_setting . '_add_charsets_' . $charset_key, $theme)) {
@@ -439,21 +510,40 @@ function at_core_load_google_fonts($theme) {
             }
           }
         }
+        // Effects
+        if (at_core_theme_get_setting($used_setting . '_add_effects', $theme) == 1) {
+          foreach ($effects as $effect_key => $effect_value) {
+            if (at_core_theme_get_setting($used_setting . '_add_effects_' . $effect_key, $theme)) {
+              $used_effects[] = $effect_key;
+            }
+          }
+        }
       }
+
+
+/*
+      kpr($used_fonts);
+      kpr($used_styles);
+      kpr($used_charsets);
+*/
+
+
+
+      $google_styles = '';
+      $google_charsets = '';
+      $google_effects = '';
 
       if (!empty($used_styles)) {
         $styles_array = array_unique($used_styles);
         $google_styles = ':' . implode(',', $styles_array);
       }
-      else {
-        $google_styles = '';
-      }
       if (!empty($used_charsets)) {
         $charset_array = array_unique($used_charsets);
         $google_charsets = '&subset=' . implode(',', $charset_array);
       }
-      else {
-        $google_charsets = '';
+      if (!empty($used_effects)) {
+        $effects_array = array_unique($used_effects);
+        $google_effects = '&effect=' . implode('|', $effects_array);
       }
 
       // Build the final string

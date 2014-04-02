@@ -1,5 +1,20 @@
-/* HTML Elements
------------------------------------------------------------------------------*/
+/**
+ * Breadcrumb.
+ */
+.breadcrumb__title {
+  float: left;
+  font-size: 1em;
+  padding: 0 0.4em 0 0;
+}
+
+[dir="rtl"] .breadcrumb__title {
+  float: right;
+  padding: 0 0 0 0.4em;
+}
+
+/**
+ * Typography.
+ */
 html {
   font-size: 16px;
   font-size: 1rem;
@@ -47,12 +62,6 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* Flexible images */
-img {
-  height: auto;
-  max-width: 100%;
-}
-
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -68,6 +77,11 @@ img {
   text-shadow: none;
 }
 
+/**
+ * Page.
+ * - html/page
+ * - page-row styles
+ */
 /* A better looking default horizontal rule */
 hr {
   display: block;
@@ -78,19 +92,39 @@ hr {
   padding: 0;
 }
 
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
+/**
+ * Tabs.
+ *  - primary and secondary tabs
+ *  - other tab modules or implimentation such as Quicktabs
  */
-audio,
-canvas,
-img,
-video {
-  vertical-align: middle;
+/**
+ * Pagers.
+ */
+/**
+ * Tables.
+ */
+/**
+ * Navigation.
+ *  - navbar menu
+ *  - drop menu
+ */
+.region-menubar .menu {
+  margin: 0;
+}
+.region-menubar .menu li {
+  float: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.region-menubar .menu a {
+  padding: 5px 10px;
+  display: block;
 }
 
-/* Form Elements
------------------------------------------------------------------------------*/
+/**
+ * Forms.
+ */
 .form-item {
   margin: 0 0 1em;
 }
@@ -320,19 +354,40 @@ textarea {
   margin-left: 0;
 }
 
-/* Page Styles
------------------------------------------------------------------------------*/
-.breadcrumb__title {
-  float: left;
-  font-size: 1em;
-  padding: 0 0.4em 0 0;
+/**
+ * Labels.
+ * -  for example "new" mark on comments, tags etc.
+ */
+/**
+ * Buttons.
+ */
+/**
+ * Images/Media.
+ */
+/* Flexible images */
+img {
+  height: auto;
+  max-width: 100%;
 }
 
-[dir="rtl"] .breadcrumb__title {
-  float: right;
-  padding: 0 0 0 0.4em;
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
 }
 
+/**
+ * Webfonts.
+ *  - @font-face declarations for webfonts.
+ */
+/**
+ * Messages
+ */
 .messages {
   border-width: 1px;
   -moz-border-radius: 3px;
@@ -360,26 +415,22 @@ textarea {
   border-color: #f9c9bf;
 }
 
-/* Blocks
------------------------------------------------------------------------------*/
-/* Search
------------------------------------------------------------------------------*/
-.region-menubar .menu {
-  margin: 0;
-}
-.region-menubar .menu li {
-  float: left;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.region-menubar .menu a {
-  padding: 5px 10px;
-  display: block;
-}
-
-/* Content Types
------------------------------------------------------------------------------*/
+/**
+ * Blocks.
+ */
+/**
+ * Book.
+ * - book nodes
+ * - book navigation ('previous', 'up', and 'next', and the list of child nodes)
+ * - book navigation block
+ */
+/**
+ * Forums.
+ * - see table.scss for generic table styles.
+ */
+/**
+ * Node types (content types).
+ */
 .node--unpublished {
   background-color: #fff4f4;
 }
@@ -392,8 +443,9 @@ textarea {
   display: inline;
 }
 
-/* Comments
------------------------------------------------------------------------------*/
+/**
+ * Comments.
+ */
 .comment--unpublished {
   background-color: #fff4f4;
 }
@@ -406,10 +458,23 @@ textarea {
   display: inline;
 }
 
-/* Forums
------------------------------------------------------------------------------*/
-/* Print
------------------------------------------------------------------------------*/
+/**
+ * Poll.
+ * - poll page
+ * - poll block
+ */
+/**
+ * Search.
+ * - search block and form
+ * - advanced search form
+ * - search results pages
+ */
+/**
+ * Views.
+ */
+/**
+ * Print.
+ */
 @media print {
   * {
     background: transparent !important;

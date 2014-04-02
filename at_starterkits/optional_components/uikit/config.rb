@@ -2,6 +2,7 @@
 # Required plugins
 # -----------------------------------------------------------------------------
 require "compass"
+require "modular-scale"
 
 
 # Directory paths
