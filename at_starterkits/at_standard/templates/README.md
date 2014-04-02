@@ -1,5 +1,7 @@
 # Templates
 
+WARNING: do not change the directory structure - the layout generation system relies on the location of page.html.twig: `templates/page/page.html.twig`
+
 Here you can place template overrides and suggestions. By default only page.html.twig is included, unless you choose to include all AT Cores template overrides during when generating a new sub-theme (or you copy them in manually).
 
 Note that all AT Core templates are used by this sub-theme due to Drupals template inheritance feature - sub-themes automatically use any template in the base theme, unless overridden in the sub-theme.

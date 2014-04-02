@@ -5,6 +5,7 @@ namespace Drupal\at_core\Theme;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 use Drupal\at_core\Helpers\RecursiveCopy;
 use Drupal\at_core\Helpers\FileRename;
+use Drupal\at_core\Helpers\FileSavePrepare;
 use Drupal\at_core\Helpers\FileStripReplace;
 use Drupal\at_core\Helpers\RemoveDirectory;
 use Drupal\at_core\Helpers\BuildInfoFile;
@@ -21,15 +22,29 @@ class ThemeGeneratorSubmit {
    */
   public function generateTheme($values) {
 
+    // Instantiate helpers
+    $recursiveCopy   = new RecursiveCopy();
+    $renameFile      = new FileRename();
+    $fileStrReplace  = new FileStripReplace();
+    $fileSavePrepare = new FileSavePrepare();
+    $removeDirectory = new RemoveDirectory();
+    $rebuildInfo     = new BuildInfoFile();
+
     // Prepare form values and set them into variables.
-    $machine_name      = $values['generate']['generate_machine_name'];
-    $friendly_name     = check_plain($values['generate']['generate_friendly_name']);
-    $subtheme_type     = $values['generate']['generate_type'];
-    $skin_base_theme   = $values['generate']['generate_skin_base'] ?: 0;
-    $clone_source      = $values['generate']['generate_clone_source'] ?: '';
-    $include_templates = $values['generate']['generate_templates'];
-    $description       = preg_replace('/[^A-Za-z0-9. ]/', '', $values['generate']['generate_description']);
-    $version           = $values['generate']['generate_version'];
+    $machine_name    = $values['generate']['generate_machine_name'];
+    $friendly_name   = check_plain($values['generate']['generate_friendly_name']);
+    $subtheme_type   = $values['generate']['generate_type'];
+    $skin_base_theme = $values['generate']['generate_skin_base'] ?: 0;
+    $clone_source    = $values['generate']['generate_clone_source'] ?: '';
+
+    // Optional extras
+    $templates     = $values['generate']['options']['generate_templates'];
+    $uikit         = $values['generate']['options']['generate_uikit'];
+    $color         = $values['generate']['options']['generate_color'];
+    $dottheme_file = $values['generate']['options']['generate_themefile'];
+    $settings_file = $values['generate']['options']['generate_themesettingsfile'];
+    $description   = preg_replace('/[^A-Za-z0-9. ]/', '', $values['generate']['options']['generate_description']);
+    $version       = $values['generate']['options']['generate_version'];
 
     // Path to at core.
     $path = drupal_get_path('theme', 'at_core');
@@ -37,86 +52,98 @@ class ThemeGeneratorSubmit {
     // Path to where we will save the cloned theme.
     $target = $path . '/../../' . $machine_name;
 
-    // Instantiate helpers
-    $recursiveCopy   = new RecursiveCopy();
-    $renameFile      = new FileRename();
-    $fileStrReplace  = new FileStripReplace();
-    $removeDirectory = new RemoveDirectory();
-    $rebuildInfo     = new BuildInfoFile();
+    // Variables for kit sourced themes.
+    if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
 
-    // Path to the source theme.
-    if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_skin') {
       $source = $path . '/../at_starterkits/' . $subtheme_type;
+
+      $uikit_dir_path = $path . '/../at_starterkits/optional_components/uikit';
+      $color_dir_path = $path . '/../at_starterkits/optional_components/color';
+
+      $theme_file_path = $path . '/../at_starterkits/optional_components/THEMENAME.theme';
+      $theme_settings_file_path = $path . '/../at_starterkits/optional_components/theme-settings.php';
     }
-    // Clone is a copy of an existing theme.
+
+    // Variables for Clones.
     else if ($subtheme_type == 'at_clone') {
       $clone_source_theme = drupal_get_path('theme', $clone_source);
       $source = $clone_source_theme;
+
+      $theme_file_path = "$target/$machine_name.theme";
+      $theme_settings_file_path = "$target/theme-settings.php";
     }
 
     // Begin generation
+    //------------------------------------------------------------------------------------------------
     if (is_dir($source)) {
 
       // Copy theme to new directory
       $recursiveCopy->recursiveCopy($source, $target);
 
       // Set paths to each file we need to modify or delete.
-      $info_file           = "$target/$machine_name.info.yml";
-      $theme_file          = "$target/$machine_name.theme";
-      $theme_settings_file = "$target/theme-settings.php";
-      $settings_file       = "$target/config/$machine_name.settings.yml"; // used in skins
+      $info_file  = "$target/$machine_name.info.yml";
 
-      // Only Standard type themes have theme-settings.php
-      //if ($subtheme_type == 'at_standard') {
-      //  $fileStrReplace->fileStrReplace($theme_settings_file, $subtheme_type, $machine_name);
-      //}
+      // Config
+      $settings_file = "$target/config/$machine_name.settings.yml"; // used in skins
 
       // Standard, Minimal and Clones
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
 
         $configuration_files = array(
-          //'block.block.atblockssitebranding.yml',
-          //'block.block.atblocksstatusmessages.yml',
-          //'block.block.atblockspagetitle.yml',
-          //'block.block.' . $subtheme_type . '_search.yml',
-          //'block.block.' . $subtheme_type . '_content.yml',
-          //'block.block.' . $subtheme_type . '_footer.yml',
-          //'block.block.' . $subtheme_type . '_powered.yml',
-          //'block.block.' . $subtheme_type . '_breadcrumbs.yml',
-          //'block.block.' . $subtheme_type . '_help.yml',
-          //'block.block.' . $subtheme_type . '_login.yml',
-          //'block.block.' . $subtheme_type . '_tools.yml',
-          //'block.block.' . $subtheme_type . '.branding.yml',
           $subtheme_type . '.settings.yml',
         );
 
         // Set variables and perform operations depending on the type and options.
         if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
+
           $source_theme = $subtheme_type;
           $generic_decription = 'Sub theme of AT Core';
 
-          // Copy over templates if this option is checked.
-          if ($include_templates == 1) {
-            $templates = array_filter(glob("$path/templates/*.twig"), 'is_file');
-            foreach ($templates as $key => $template_path) {
-              $template_file = file_get_contents($template_path);
-              $template_path_parts = explode('/', $template_path);
-              $file_name = array_pop($template_path_parts);
-              file_unmanaged_save_data($template_file, "$target/templates/$file_name", FILE_EXISTS_REPLACE);
-            }
+          // Templates.
+          if ($templates == 1) {
+            $recursiveCopy->recursiveCopy("$path/templates", "$target/templates");
+          }
+
+          // UI Kit.
+          if ($uikit == 1) {
+            $recursiveCopy->recursiveCopy($uikit_dir_path, "$target/css/uikit");
+          }
+
+          // Color.
+          if ($color == 1) {
+            $recursiveCopy->recursiveCopy($color_dir_path, "$target/color");
+          }
+
+          // THEMENAME.theme
+          if ($dottheme_file == 1) {
+            $file_paths['copy_source'] = $theme_file_path;
+            $file_paths['copy_dest']   = "$target/THEMENAME.theme";
+            $file_paths['rename_oldname'] = "$target/THEMENAME.theme";
+            $file_paths['rename_newname'] = "$target/$machine_name.theme";
+
+            $fileSavePrepare->copyRename($file_paths);
+            $fileStrReplace->fileStrReplace("$target/$machine_name.theme", 'THEMEMNAME', $machine_name);
+          }
+
+          // theme-settings.php
+          if ($settings_file == 1) {
+            copy($theme_settings_file_path, "$target/theme-settings.php");
+            $fileStrReplace->fileStrReplace("$target/theme-settings.php", 'THEMEMNAME', $machine_name);
           }
         }
-        elseif ($subtheme_type == 'at_clone') {
+
+        // Clone only
+        else if ($subtheme_type == 'at_clone') {
           $source_theme = $clone_source;
           $generic_decription = "Clone of $clone_source";
+
+          // Rename dot theme file.
+          $renameFile->fileRename("$target/$source_theme.theme", $theme_file);
+
+          // Strip replace machine names.
+          $fileStrReplace->fileStrReplace($theme_file_path, $source_theme, $machine_name);
+          $fileStrReplace->fileStrReplace($theme_settings_file_path, $source_theme, $machine_name);
         }
-
-        // Rename copied files.
-        $renameFile->fileRename("$target/$source_theme.theme", $theme_file);
-        $renameFile->fileRename("$target/$source_theme.info.yml", $info_file);
-
-        //$renameFile->fileRename("$target/config/$source_theme.breakpoints.yml", $breakpoints_file);
-        //$renameFile->fileRename("$target/config/$source_theme.settings.yml", $settings_file);
 
         // Rename and strip replace strings in all config files.
         foreach ($configuration_files as $old_file) {
@@ -125,10 +152,8 @@ class ThemeGeneratorSubmit {
           $fileStrReplace->fileStrReplace("$target/config/$new_file", $source_theme, $machine_name);
         }
 
-        // Strip replace strings in files (if they exist) in theme.yml and theme-settings.php
-        $fileStrReplace->fileStrReplace($theme_file, $source_theme, $machine_name);
-        $fileStrReplace->fileStrReplace($theme_settings_file, $source_theme, $machine_name);
-
+        // Info file
+        $renameFile->fileRename("$target/$source_theme.info.yml", $info_file);
 
         // Check and set description and version.
         $description = $description ?: $generic_decription;
@@ -152,12 +177,6 @@ class ThemeGeneratorSubmit {
 
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
         file_unmanaged_save_data($rebuilt_info, $info_file, FILE_EXISTS_REPLACE);
-
-        // try to clear all caches etc
-        //if (file_exists($info_file)) {
-        //  drupal_flush_all_caches();
-        //  drupal_set_message(t('Caches cleared.'));
-        //}
       }
 
       // Skins
@@ -245,11 +264,15 @@ class ThemeGeneratorSubmit {
             )), 'warning');
         }
       }
+
       else {
-      // TODO check if this is validated, really this should be in validation.
-      $source = 'adaptivetheme/at_starterkits/' . $subtheme_type;
-      drupal_set_message(t("An error occurred and processing did not complete. The source directory '!dir' does not exist or is not readable.", array('!dir' => $source)), 'error');
+        // TODO check if this is validated, really this should be in validation.
+
+        kpr($source);
+
+        $source = $path . '/../at_starterkits/' . $subtheme_type;
+        drupal_set_message(t("An error occurred and processing did not complete. The source directory '!dir' does not exist or is not readable.", array('!dir' => $source)), 'error');
+      }
     }
-  }
 
 } // end class

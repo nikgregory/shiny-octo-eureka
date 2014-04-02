@@ -136,7 +136,7 @@ class LayoutGenerator extends PageLayout {
     }
 
     // Set the template path.
-    $template_path = $path . '/templates/'. $template_file;
+    $template_path = $path . '/templates/page/'. $template_file;
 
     // Create a backup.
     if ($enable_backups == TRUE) {

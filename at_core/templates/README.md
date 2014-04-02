@@ -24,7 +24,7 @@ The final two of these are most useful when making a lot of changes to templates
 
 Adaptivetheme includes a bunch of template overrides and suggestions to make theming a bit easiser.
 
-This is a list of changes made compared to Drupal core:
+This is a list of changes made compared to Drupal core (may not be complete list of changes, you should double check):
 
 ### html.html.twig
 * Splits out `{{ attributes.class }}` so you can add classes without using preprocess functions.

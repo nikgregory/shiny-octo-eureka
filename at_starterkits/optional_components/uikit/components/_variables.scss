@@ -1,0 +1,44 @@
+//
+// Variable Settings.
+//
+
+// Compass
+
+
+
+
+
+// Breakpoints
+// Defaults par with all AT provided Layouts and Breakpoints module config (e.g. for Responsive Picture module).
+// Useage: @media #{$narrow} {}
+$narrow      : "all and (min-width: 45em) and (max-width: 60em)";
+$narrow-wide : "all and (min-width: 45em)"; // Allow styles to cascade into wide.
+$wide        : "all and (min-width: 60em)";
+
+
+// Colors
+
+
+
+// Spacing
+
+
+
+// etc
+
+
+
+// Type
+$base-font-size: 100%;
+$base-line-height: 1;
+
+$sans-serif-small: 'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$sans-serif-large: Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;
+$sans-serif-arial-helvetica: Arial, Helvetica, sans-serif;
+$calibri-candara: Calibri, Candara, Arial, Helvetica, sans-serif;
+$serif-small: Garamond, Perpetua, 'Times New Roman', serif;
+$serif-large: Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;
+$modern-myriad: 'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif;
+$lucida: 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif;
+$impact: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+$mono: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;

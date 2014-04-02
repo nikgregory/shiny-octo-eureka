@@ -65,7 +65,7 @@ active-regions-2-3  // "region-main-two" and "region-main-three" are the active 
 
 <h3>When to use .active-count or active-regions?</h3>
 
-<p>Use <code>.active-count-[]</code> when your needs are simple and you do not need to know which of the regions are actually printing. See the <code>_4-4-4.scss</code> partial in the ELF.</p>
+<p>Use <code>.active-count-[]</code> when your needs are simple and you do not need to know which of the regions are actually printing. See the <code>_4-4-4.scss</code> partial in the susy-panels.</p>
 
 <p>Use <code>.active-regions-[]</code> when you must know exactly which regions are printing, for example when building layouts with sophistocated collaspible region features and doing content source ordered layout.</p>
 
@@ -100,7 +100,7 @@ active-regions-2-3  // "region-main-two" and "region-main-three" are the active 
 .page-row-main.active-regions-2-3 .region-main-three { float: right; width: 40%; }
 </pre>
 
-<p>The main concept here is that layout is loosely coupled i.e. you can develop abstract layout objects and bind them to specicifc instances through concantenation - this is preciely how the ELF works (Easy Layout Framework), and is very much an Object Orientated CSS concept. The ELF goes further by not using actual region names (the above examples do), instead using the first, last and nth child pseudo selectors to target items in the source order.</p>
+<p>The main concept here is that layout is loosely coupled i.e. you can develop abstract layout objects and bind them to specicifc instances through concantenation - this is preciely how the susy-panels works (Easy Layout Framework), and is very much an Object Orientated CSS concept. The susy-panels goes further by not using actual region names (the above examples do), instead using the first, last and nth child pseudo selectors to target items in the source order.</p>
 
 
 <h2>Body layout-[name] selector</h2>

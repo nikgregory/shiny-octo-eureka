@@ -1,0 +1,28 @@
+//
+// Two Regions 3-9
+//
+// First region  : 3 grid columns.
+// Second region : 9 grid columns.
+//
+// Actual Source Order:
+//
+//  - first
+//  - second
+//
+// Appearance:
+//
+//  ------------------------------------------------
+//  |   first (3)  |            second (9)         |
+//  ------------------------------------------------
+//  Key: region-name (grid columns)
+
+&.active-count--2 {
+  .region {
+    &:first-child {
+      @include span(3 of 12);
+    }
+    &:last-child {
+      @include span(9 omega of 12);
+    }
+  }
+}

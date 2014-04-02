@@ -16,8 +16,8 @@ Sass::Script::Number.precision = 7
 # -----------------------------------------------------------------------------
 # Set the Environment Variable
 # Using :development enables the use of FireSass.
-#environment = :development
-environment = :production
+environment = :development
+#environment = :production
 
 
 # You can select your preferred output style here (:expanded, :nested, :compact

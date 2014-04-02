@@ -69,8 +69,7 @@ class LayoutGeneratorSubmit {
 
       // Set variable for backups.
       $enable_backups = FALSE;
-      if ($values['settings_enable_backups'] == 1 &&
-          $values['layout_type_select'] != 'disable_layout_generation') {
+      if ($values['settings_enable_backups'] == 1 && $values['layout_type_select'] != 'disable_layout_generation') {
         $enable_backups = TRUE;
       }
 

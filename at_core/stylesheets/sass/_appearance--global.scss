@@ -1,6 +1,10 @@
 
 // Global styles for appearance.
 
+#system-theme-settings .form-item {
+  //margin: 20px 0 2px;
+}
+
 #block-seven-help,
 legend {
   @include visually-hidden;
@@ -9,6 +13,10 @@ legend {
 fieldset {
   margin: 0;
   border: 0;
+}
+
+#system-theme-settings label {
+  margin: 0 0 3px;
 }
 
 .form-type-vertical-tabs {

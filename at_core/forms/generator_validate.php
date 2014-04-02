@@ -9,6 +9,7 @@ function at_core_validate_generator(&$form, &$form_state) {
   $values = $form_state['values'];
 
   // Validate Theme Generator.
+
   if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
     $machine_name  = $values['generate']['generate_machine_name'];
     $path   = drupal_get_path('theme', 'at_core');
@@ -34,4 +35,5 @@ function at_core_validate_generator(&$form, &$form_state) {
       form_set_error('', $form_state, t('The target directory is not writable, please check permissions on the <code>/themes/</code> directory where Adaptivetheme is located.'));
     }
   }
+
 }
