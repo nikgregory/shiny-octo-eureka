@@ -1,0 +1,37 @@
+/**
+ * Webfonts
+ */
+
+/**
+ * Font Awesome - http://fortawesome.github.io
+ *
+ * Import Font Awesome from the Bootstrap CDN.
+ *
+ * To find all icon codes see the Font Awesome cheatsheet -
+ * http://fortawesome.github.io/Font-Awesome/cheatsheet/
+ *
+ * See the messages partial for an example of this being used to load icons
+ * for status messages.
+ *
+ * If you want to use the full power of Font Awesome you can download it,
+ * extract the archive and rename it to "font-awesome" and place it in
+ * the uikit/fonts directory. If using SASS then change the $fa-font-path
+ * variable from the CDN to the local path, otherwise update the src paths
+ * manually (if using conventional CSS).
+*/
+
+//$fa-font-path: "uikit/fonts/font-awesome/fonts/" !default; // if you download and install use the local path
+$fa-font-path:   "//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts" !default; // for referencing Bootstrap CDN font files directly
+$fa-version:     "4.0.3" !default;
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

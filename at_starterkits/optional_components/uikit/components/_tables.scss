@@ -1,3 +1,158 @@
 /**
  * Tables.
  */
+
+table {
+  margin: $medium 0;
+  padding: 0;
+  width: 100%;
+  border: $border-width $border-style $border-color;
+
+
+  // Prevent the sticky header from hiding behind other content.
+  &.sticky-header {
+    z-index: 10;
+  }
+
+  // Views tables can take caption, summary and description.
+  .view-table__caption--text {
+    @include adjust-font-size-to($large);
+  }
+
+  .view-table__details,
+  .view-table__details--summary {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+// tr, takes extensive styles if enabled in variables.scss.
+tr {
+  // Row striping (zebra).
+  @if $table-row-striping == true {
+    &.odd {
+      background: $table-row-odd-color;
+    }
+
+    &.info,
+    &.even,
+    &:nth-child(2n+2)  {
+      background: $table-row-even-color;
+    }
+  }
+
+  // Hover color.
+  @if $tr-hover == true {
+    &:hover {
+      background: $tr-hover-color;
+    }
+  }
+
+  // Column striping, applies to the active column in sortable tables.
+  @if $table-col-striping == true {
+    &.odd td.active {
+      background: $table-col-odd-color;
+    }
+    &.even td.active {
+      background: $table-col-even-color;
+    }
+  }
+}
+
+
+// Align captions and cell content.
+caption,
+th,
+td {
+  //text-align: left; /* LTR */
+}
+
+[dir*="rtl"] {
+  caption,
+  th,
+  td {
+    //text-align: right;
+  }
+}
+
+
+// thead.
+thead {
+  tr {
+    font-weight: $font-weight-semibold;
+    color: $thead-text-color;
+    background-color: $thead-background-color;
+  }
+
+  .active img {
+    display: inline;
+  }
+}
+
+
+// tbody.
+tbody {
+  tr {
+    border-top: $border-width $border-style $border-color;
+  }
+}
+
+
+// td, th.
+td,
+th {
+  padding: $small;
+  vertical-align: middle;
+}
+
+
+// Data tables, display all borders.
+@if $table-cell-borders == true {
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    border: $border-width $border-style $border-color;
+  }
+}
+
+
+/**
+ * TableDrag behavior.
+ *
+ * @see tabledrag.js
+ */
+tr {
+  &.drag {
+    background-color: #fffff0;
+
+    &-previous {
+      background-color: #ffd;
+    }
+  }
+}
+
+body div.tabledrag-changed-warning {
+  margin-bottom: 0.5em;
+}
+
+
+/**
+ * TableSelect behavior.
+ *
+ * @see tableselect.js
+*/
+tr.selected td {
+  background: #ffc;
+}
+
+td,
+th {
+  &.checkbox {
+    text-align: center;
+  }
+}
+

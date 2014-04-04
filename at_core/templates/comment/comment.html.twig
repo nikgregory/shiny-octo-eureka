@@ -63,8 +63,6 @@
  * @ingroup themeable
  */
 #}
-{# Hide stuff so we can render it later. #}
-{% hide(content.links) %}
 <article class="{{ attributes.class }} clearfix"{{ attributes }}>
 
   {{ title_prefix }}
@@ -88,7 +86,7 @@
   </header>
   {{ title_suffix }}
 
-  {{ content }}
+  {{ content|without('links') }}
 
   <footer{{ footer_attributes }}>
     {% if signature %}

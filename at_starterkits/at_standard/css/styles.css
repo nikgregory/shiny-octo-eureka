@@ -1,60 +1,101 @@
+html {
+  font-size: 87.5%;
+  line-height: 1.5714286em;
+}
+
 /**
- * Breadcrumb.
+ * Webfonts
  */
-.breadcrumb__title {
-  float: left;
-  font-size: 1em;
-  padding: 0 0.4em 0 0;
+/**
+ * Font Awesome - http://fortawesome.github.io
+ *
+ * Import Font Awesome from the Bootstrap CDN.
+ *
+ * To find all icon codes see the Font Awesome cheatsheet -
+ * http://fortawesome.github.io/Font-Awesome/cheatsheet/
+ *
+ * See the messages partial for an example of this being used to load icons
+ * for status messages.
+ *
+ * If you want to use the full power of Font Awesome you can download it,
+ * extract the archive and rename it to "font-awesome" and place it in
+ * the uikit/fonts directory. If using SASS then change the $fa-font-path
+ * variable from the CDN to the local path, otherwise update the src paths
+ * manually (if using conventional CSS).
+*/
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?v=4.0.3");
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3") format("embedded-opentype"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.woff?v=4.0.3") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.ttf?v=4.0.3") format("truetype"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
-
-[dir="rtl"] .breadcrumb__title {
-  float: right;
-  padding: 0 0 0 0.4em;
-}
-
 /**
  * Typography.
  */
-html {
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.625;
+body {
+  color: black;
 }
 
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+h1, h2, h3 {
+  font-weight: 400;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+}
+
+/**
+ * Scale and line heigth set with Modular Scale and Vertical Rythm.
+ * By default the base font size is 14px, line height 22px and
+ * 44px set for the Modular Scale important font size.
+ * ms(0) is medium, and we increment the scale up or down 1 and set
+ * into variables, which are then processed by adjust-font-size-to()
+ * to generate font sizes in em and set a relative line-height.
+ * SEE: _variables.scss
+ */
 h1 {
-  font-size: 32px;
-  font-size: 2rem;
+  font-size: 2.618034em;
+  line-height: 1.2004646em;
 }
 
 h2 {
-  font-size: 24px;
-  font-size: 1.5rem;
+  font-size: 1.9423925em;
+  line-height: 1.618034em;
 }
 
 h3 {
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 1.618034em;
+  line-height: 1.9423925em;
 }
 
 h4 {
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 1.2004646em;
+  line-height: 1.309017em;
 }
 
 h5 {
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 1em;
+  line-height: 1.5714286em;
 }
 
 h6 {
-  font-size: 12px;
-  font-size: 0.75rem;
+  font-size: 0.618034em;
+  line-height: 2.5426249em;
 }
 
+/* Paragraph */
+p {
+  font-size: 1em;
+  line-height: 1.5714286em;
+}
+
+/* Links */
 a {
   text-decoration: none;
 }
@@ -62,7 +103,21 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-/*
+/* Lists */
+ul,
+ol {
+  margin: 0 0 14px;
+  padding: 0 0 0 16.8065043px;
+  text-align: left;
+}
+
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding: 0 16.8065043px 0 0;
+  text-align: right;
+}
+
+/**
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
@@ -77,32 +132,102 @@ a:hover, a:focus {
   text-shadow: none;
 }
 
+/* Webfont smoothing */
+:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /**
  * Page.
- * - html/page
+ * - generic page styles, misc global elements
  * - page-row styles
  */
+/* html and body */
+html,
+body {
+  height: 100%;
+}
+
+/**
+ * Page Rows - these match the Site Builder layout.
+ * You can find your layouts page row and region classes by viewing the theme
+ * settings and looking under Layouts > Options > Layout Selectors.
+ *
+ * Do not add layout to .regions directly, instead if you want to modify the layout
+ * you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
+ */
+.page-row__header {
+  padding: 14px 0;
+}
+
 /* A better looking default horizontal rule */
 hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
+  border-top: 1px solid gainsboro;
+  margin: 14px 0;
   padding: 0;
 }
 
 /**
- * Tabs.
- *  - primary and secondary tabs
- *  - other tab modules or implimentation such as Quicktabs
+ * Publishing status.
  */
+[class*="unpublished"] {
+  background-color: #fff4f4;
+}
+[class*="unpublished"] p.unpublished {
+  font-size: 3.1428571em;
+  line-height: 1.5em;
+  font-family: Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+  text-align: center;
+  color: #ffdbdb;
+}
+
+[class*="preview"] {
+  background-color: #ffffea;
+}
+
 /**
- * Pagers.
+ * Markup generated by theme_item_list().
  */
+.item-list ul {
+  padding: 0;
+}
+.item-list li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item-list li li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+
 /**
- * Tables.
+ * Markup generated by links.html.twig.
  */
+ul.inline, ul.links.inline {
+  padding: 0;
+}
+ul.inline li {
+  display: inline-block;
+  margin: 0 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+ul.inline li li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+
+[dir="rtl"] ul.inline li {
+  margin: 0 0 0 14px;
+}
+
 /**
  * Navigation.
  *  - navbar menu
@@ -123,7 +248,234 @@ hr {
 }
 
 /**
- * Forms.
+ * Markup generated by theme_menu_tree().
+ */
+.menu {
+  list-style: none;
+  padding: 0;
+}
+.menu li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.menu .menu {
+  padding: 0 0 0 16.8065043px;
+}
+.menu li:before {
+  font-family: FontAwesome, sans-serif;
+  display: inline-block;
+  padding: 0 1px;
+  width: 14px;
+  content: "\f0da";
+  speak: none;
+}
+.menu li.expanded:before {
+  content: "\f0d7";
+}
+
+[dir="rtl"] .menu li:before {
+  content: "\f0d9";
+}
+
+/**
+ * Breadcrumb.
+ */
+.breadcrumb {
+  margin: 14px 0;
+}
+.breadcrumb__title {
+  font-size: inherit;
+}
+.breadcrumb__title,
+.breadcrumb ol,
+.breadcrumb li {
+  display: inline-block;
+}
+.breadcrumb ol {
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.breadcrumb li:before {
+  content: "\f054";
+  font-family: FontAwesome, sans-serif;
+  font-size: 8.6524758px;
+  display: inline-block;
+  padding: 0 4px 0 1px;
+}
+.breadcrumb li:first-child:before {
+  content: none;
+}
+
+[dir="rtl"] .breadcrumb li:before {
+  content: "\f053";
+}
+
+/**
+ * Tabs.
+ *  - primary and secondary tabs
+ *  - other tab modules or implimentation such as Quicktabs
+ */
+/* Local task tabs, e.g. node View Edit Delete etc */
+.tabs {
+  margin: 14px 0;
+  padding: 0;
+  display: table;
+  list-style: none;
+}
+.tabs li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.tabs > li {
+  display: table-cell;
+}
+.tabs.primary {
+  background: #75af35;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.tabs.primary li:first-child a {
+  -moz-border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.tabs.primary li:last-child a {
+  -moz-border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 4px 4px 0;
+}
+.tabs.primary a {
+  display: block;
+  padding: 8.6524758px 16.8065043px;
+  color: white;
+}
+.tabs.primary a.active {
+  background: #466920;
+}
+.tabs.primary a.active:hover, .tabs.primary a.active:focus {
+  background: #466920;
+}
+.tabs.primary a:hover, .tabs.primary a:focus {
+  background: #82c33b;
+  text-decoration: none;
+}
+.tabs.secondary li {
+  padding: 0 14px 0 0;
+}
+
+[dir="rtl"] .tabs.secondary li {
+  padding: 0 0 0 14px;
+}
+
+/**
+ * Pagers.
+ */
+/**
+ * Markup generated by pager.html.twig.
+ */
+.item-list .pager {
+  clear: both;
+  text-align: center;
+}
+
+.item-list .pager li {
+  background-image: none;
+  display: inline;
+  list-style-type: none;
+  padding: 0.5em;
+}
+
+.pager-current {
+  font-weight: bold;
+}
+
+/**
+ * Tables.
+ */
+table {
+  margin: 14px 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid gainsboro;
+}
+table.sticky-header {
+  z-index: 10;
+}
+table .view-table__caption--text {
+  font-size: 1.2004646em;
+  line-height: 1.309017em;
+}
+table .view-table__details,
+table .view-table__details--summary {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+thead tr {
+  font-weight: 600;
+  color: black;
+  background-color: #ededed;
+}
+thead .active img {
+  display: inline;
+}
+
+tbody tr {
+  border-top: 1px solid gainsboro;
+}
+
+td,
+th {
+  padding: 8.6524758px;
+  vertical-align: middle;
+}
+
+/**
+ * TableDrag behavior.
+ *
+ * @see tabledrag.js
+ */
+tr.drag {
+  background-color: #fffff0;
+}
+tr.drag-previous {
+  background-color: #ffd;
+}
+
+body div.tabledrag-changed-warning {
+  margin-bottom: 0.5em;
+}
+
+/**
+ * TableSelect behavior.
+ *
+ * @see tableselect.js
+*/
+tr.selected td {
+  background: #ffc;
+}
+
+td.checkbox,
+th.checkbox {
+  text-align: center;
+}
+
+/**
+ * Forms. -- lot of work to do here, this is a work in progress.
  */
 .form-item {
   margin: 0 0 1em;
@@ -265,6 +617,350 @@ textarea {
   list-style: none;
 }
 
+/**
+ * Markup generated by Form API.
+ */
+.form-item,
+.form-actions {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+tr.odd .form-item,
+tr.even .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.form-composite > .fieldset-wrapper > .description,
+.form-item .description {
+  font-size: 0.85em;
+}
+
+label.option {
+  display: inline;
+  font-weight: normal;
+}
+
+.form-composite > legend,
+h4.label {
+  font-size: inherit;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.form-checkboxes .form-item,
+.form-radios .form-item {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 2.4em;
+}
+
+.marker,
+.form-required {
+  color: #e00;
+}
+
+abbr.form-required, abbr.tabledrag-changed, abbr.ajax-changed {
+  border-bottom: none;
+}
+
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 2px solid red;
+}
+
+.button,
+.image-button {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.button:first-child,
+.image-button:first-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/**
+ * Inline items.
+ */
+.container-inline label:after {
+  content: ':';
+}
+
+.form-type-radios .container-inline label:after {
+  content: none;
+}
+
+.form-type-radios .container-inline .form-type-radio {
+  margin: 0 1em;
+}
+
+.container-inline .form-actions,
+.container-inline.form-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/**
+ * Show buttons as links.
+ */
+button.link {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+label button.link {
+  font-weight: bold;
+}
+
+/*
+ * Autocomplete.
+ *
+ * @see autocomplete.js
+ */
+/* Suggestion list */
+.ui-autocomplete li.ui-menu-item a.ui-state-focus, .autocomplete li.ui-menu-item a.ui-state-hover {
+  background: #0072b9;
+  color: #fff;
+  margin: 0;
+}
+
+/**
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @thanks http://nicolasgallagher.com/css-background-image-hacks/
+ */
+details {
+  border: 1px solid #ccc;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+details > .details-wrapper {
+  padding: 0.5em 1.5em;
+}
+
+/* @todo Regression: The summary of uncollapsible details are no longer
+     vertically aligned with the .details-wrapper in browsers without native
+     details support. */
+summary {
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+}
+
+.collapse-processed > summary {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.collapse-processed > summary:before {
+  background: url(../../../misc/menu-expanded.png) 0px 100% no-repeat;
+  /* LTR */
+  content: "";
+  float: left;
+  height: 1em;
+  width: 1em;
+}
+
+[dir="rtl"] .collapse-processed > summary:before {
+  background-position: 100% 100%;
+  float: right;
+}
+
+.collapse-processed:not([open]) > summary:before {
+  background-position: 25% 35%;
+  /* LTR */
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+[dir="rtl"] .collapse-processed:not([open]) > summary:before {
+  background-position: 75% 35%;
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* Form display */
+form .field-edit-link {
+  margin: 0 0.3em;
+}
+
+form .field-multiple-table {
+  margin: 0;
+}
+
+form .field-multiple-table .field-multiple-drag {
+  width: 30px;
+  padding-right: 0;
+  /*LTR*/
+}
+
+[dir="rtl"] form .field-multiple-table .field-multiple-drag {
+  padding-left: 0;
+}
+
+form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-right: .5em;
+  /*LTR*/
+}
+
+[dir="rtl"] form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-left: .5em;
+}
+
+form .field-add-more-submit {
+  margin: .5em 0 0;
+}
+
+/**
+ * Progress bar.
+ *
+ * @see progress.js
+ */
+.progress__track {
+  border-color: #b3b3b3;
+  border-radius: 10em;
+  background-color: #f2f1eb;
+  background-image: -webkit-linear-gradient(#e7e7df, #f0f0f0);
+  background-image: -moz-linear-gradient(#e7e7df, #f0f0f0);
+  background-image: -o-linear-gradient(#e7e7df, #f0f0f0);
+  background-image: linear-gradient(#e7e7df, #f0f0f0);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.progress__bar {
+  border: 1px #07629a solid;
+  background: #057ec9;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.15)), -webkit-linear-gradient(left top, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.15)), -moz-linear-gradient(left top, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.15)), -o-linear-gradient(left top, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), linear-gradient(to right bottom, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
+  background-size: 40px 40px;
+  margin-top: -1px;
+  margin-left: -1px;
+  padding: 0 1px;
+  height: 16px;
+  border-radius: 10em;
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  -webkit-transition: width 0.5s ease-out;
+  -moz-transition: width 0.5s ease-out;
+  -ms-transition: width 0.5s ease-out;
+  -o-transition: width 0.5s ease-out;
+  transition: width 0.5s ease-out;
+}
+
+/**
+ * Progress bar animations.
+ */
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, -80px 0;
+  }
+}
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, -80px 0;
+  }
+}
+@-o-keyframes animate-stripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, -80px 0;
+  }
+}
+@-ms-keyframes animate-stripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, -80px 0;
+  }
+}
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, -80px 0;
+  }
+}
+/**
+ * Labels.
+ * -  for example "new" mark on comments, tags etc.
+ */
+/**
+ * Markup generated by theme_more_link().
+ */
+.more-link {
+  text-align: right;
+  /* LTR */
+}
+
+[dir="rtl"] .more-link {
+  text-align: left;
+}
+
+/**
+ * More help link style.
+ */
+.more-help-link {
+  text-align: right;
+  /* LTR */
+}
+
+[dir="rtl"] .more-help-link {
+  text-align: left;
+}
+
+.more-help-link a {
+  background: url(../../../misc/help.png) 0 50% no-repeat;
+  /* LTR - broken link to image, change to webfont icon */
+  padding: 1px 0 1px 20px;
+  /* LTR */
+}
+
+[dir="rtl"] .more-help-link a {
+  background-position: 100% 50%;
+  padding: 1px 20px 1px 0;
+}
+
+/**
+ * Buttons.
+ */
 /* Buttons */
 .button {
   cursor: pointer;
@@ -355,12 +1051,52 @@ textarea {
 }
 
 /**
- * Labels.
- * -  for example "new" mark on comments, tags etc.
+ * Styles for link buttons and action links.
  */
-/**
- * Buttons.
- */
+.action-links {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+
+.action-links li {
+  display: inline-block;
+  margin: 0 0.3em;
+}
+
+.action-links li:first-child {
+  margin-left: 0;
+  /* LTR */
+}
+
+[dir="rtl"] .action-links li:first-child {
+  margin-left: 0.3em;
+  margin-right: 0;
+}
+
+.button-action {
+  display: inline-block;
+  line-height: 160%;
+  padding: 0.2em 0.5em 0.3em;
+  text-decoration: none;
+}
+
+.button-action:before {
+  content: '+';
+  font-weight: 900;
+  margin-left: -0.1em;
+  /* LTR */
+  padding-right: 0.2em;
+  /* LTR */
+}
+
+[dir="rtl"] .button-action:before {
+  margin-left: 0;
+  margin-right: -0.1em;
+  padding-left: 0.2em;
+  padding-right: 0;
+}
+
 /**
  * Images/Media.
  */
@@ -382,37 +1118,249 @@ video {
 }
 
 /**
- * Webfonts.
- *  - @font-face declarations for webfonts.
- */
-/**
  * Messages
  */
 .messages {
-  border-width: 1px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 16.8065043px;
+  margin: 16.8065043px 0;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.messages + .messages {
+  margin-top: 16.8065043px;
+}
+.messages .container {
+  padding: 0 8.6524758px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-[class*="messages--"],
-[dir="rtl"] [class*="messages--"] {
-  box-shadow: none;
+.messages__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.messages__list + .messages__item {
+  margin-top: 8.6524758px;
+}
+
+/* Success */
+.messages--status,
+table tr.ok {
+  background-color: #f3faef;
 }
 
 .messages--status,
-[dir="rtl"] .messages--status {
-  border-color: #c9e1bd;
+.ok {
+  color: #325e1c;
+}
+
+.messages--status {
+  background-image: none;
+}
+
+/* Warning */
+.messages--warning,
+table tr.warning {
+  background-color: #fdf8ed;
 }
 
 .messages--warning,
-[dir="rtl"] .messages--warning {
-  border-color: #f4daa6;
+.warning {
+  color: #734c00;
+}
+
+.messages--warning {
+  background-image: none;
+}
+
+/* Error */
+.messages--error,
+table tr.error {
+  background-color: #fcf4f2;
 }
 
 .messages--error,
-[dir="rtl"] .messages--error {
-  border-color: #f9c9bf;
+.error {
+  color: #a51b00;
+}
+
+.messages--error {
+  background-image: none;
+}
+
+/* RTL */
+[dir="rtl"] .messages {
+  text-align: right;
+}
+
+/* Message icons (Font Awesome) */
+.messages .icon:before {
+  font-family: FontAwesome, sans-serif;
+  display: inline-block;
+  padding: 0 0.75em 0 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[dir="rtl"] .messages .icon:before {
+  padding: 0 0 0 0.75em;
+}
+
+.icon-status:before {
+  content: "\f118";
+}
+
+.icon-warning:before {
+  content: "\f071";
+}
+
+.icon-error:before {
+  content: "\f119";
+}
+
+/*
+ * Fields.
+ */
+/* Field display */
+.field .field-label {
+  font-weight: bold;
+}
+
+.field-label-inline .field-label,
+.field-label-inline .field-items {
+  float: left;
+  /*LTR*/
+  padding-right: 0.5em;
+}
+
+[dir="rtl"] .field-label-inline .field-label,
+[dir="rtl"] .field-label-inline .field-items {
+  float: right;
+  padding-left: 0.5em;
+}
+
+/*
+ * Above and inline classes are on the field wrapper
+ */
+/*
+ * When labels are set to inline in field display settings the clearfix class is automatically added
+ */
+.field-label-inline {
+  /* Remove the margin on inline field lables to preserve vertical formatting */
+}
+.field-label-inline .field-label {
+  margin: 0;
+}
+
+/*
+ * Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues
+ */
+.field-label {
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+}
+
+/*
+ * Field types (Core)
+ */
+/*
+ * Image fields use the <figure> and <figcaption> elements from HTML5
+ */
+/*
+ * Taxonomy
+ */
+.field-type-taxonomy-term-reference {
+  /* The same bottom margin as p, blockquote, ul, ol and dl */
+  margin-bottom: 1.5em;
+}
+.field-type-taxonomy-term-reference.field-label-inline .field-items {
+  margin: 0;
+  padding: 0;
+}
+.field-type-taxonomy-term-reference.field-label-inline .field-item {
+  display: inline;
+  list-style: none;
+  padding: 0 10px 0 0;
+}
+
+/*
+ * Text
+ */
+/*
+ * Long text
+ */
+/*
+ * Text with summary
+ */
+/*
+ * File
+ */
+/*
+ * Number/Integer
+ */
+/*
+ * Decimal
+ */
+/*
+ * Number float
+ */
+/*
+ * List
+ */
+/*
+ * List boolean
+ */
+/*
+ * List integer
+ */
+/*
+ * List float
+ */
+/*
+ * Field types (Contrib)
+ */
+/*
+ * Named fields
+ */
+/*
+ * Underscores in field name are replaced with dashes
+ */
+/*
+ * Image Alignment Theme Settings - included here so you can easily override
+ */
+/*
+ * Float none setting
+ */
+/*
+ * Float left setting
+ */
+.ia-l .field-type-image figure,
+.iat-l .field-type-image figure {
+  margin: 5px 20px 15px 0;
+}
+
+/*
+ * Centered setting
+ */
+.ia-c .field-type-image figure,
+.iat-c .field-type-image figure {
+  margin: 5px auto 15px;
+}
+
+/*
+ * Float right setting
+ */
+.ia-r .field-type-image figure,
+.iat-r .field-type-image figure {
+  margin: 5px 0 15px 20px;
 }
 
 /**
@@ -431,29 +1379,17 @@ video {
 /**
  * Node types (content types).
  */
-.node--unpublished {
-  background-color: #fff4f4;
-}
-.node--unpublished p.unpublished {
-  font-size: 48px;
-  font-size: 3rem;
-}
-
 .node__author {
   display: inline;
+}
+
+.node__submitted article:empty {
+  display: none;
 }
 
 /**
  * Comments.
  */
-.comment--unpublished {
-  background-color: #fff4f4;
-}
-.comment--unpublished p.unpublished {
-  font-size: 32px;
-  font-size: 2rem;
-}
-
 .comment__author {
   display: inline;
 }

@@ -1,5 +1,10 @@
-
 // Variable Settings.
+
+
+// Import plugins
+@import "compass";
+@import 'modular-scale';
+
 
 
 // Breakpoints
@@ -10,14 +15,33 @@ $narrow-wide : "all and (min-width: 45em)"; // Allow styles to cascade into wide
 $wide        : "all and (min-width: 60em)";
 
 
+
+// Typography
+// Compass Vertical Rhythm is used in conjunction with Modular Scale.
+// MS provides the scale, while VR sets adjusted font sizes, border thickness and line heights.
+// WARNING: I have encountered bugs in Compass adjust-font-size-to when em is used, this mixin is used
+// to set line-height for headings in _type.scss.
+$base-font-size: 14px;
+$base-line-height: 22px;
+$important-font-size: 44px;
+
+
+
+// Establish baseline
+// This might freak out if you use em as the base-font-size unit, unless you !default it, in which
+// case everything will freak out and all text will be tiny.
+@include establish-baseline;
+
+
+
 // Modular Scale
-// http://www.modularscale.com by Tim Brown
-// https://github.com/scottkellum/modular-scale
-$ms-base: 14px 44px;
+$ms-base: $base-font-size $important-font-size;
 $ms-ratio: $golden;
 
 
+
 // Sizing variables
+// Used throughout the system to set font, button and input sizes, and set margins and padding.
 $xxxx-large: ms(5);
 $xxx-large:  ms(4);
 $xx-large:   ms(3);
@@ -27,6 +51,7 @@ $medium:     ms(0);
 $small:      ms(-1);
 
 
+
 // Font Weights
 $font-weight-bold:     700;
 $font-weight-semibold: 600;
@@ -34,27 +59,143 @@ $font-weight-normal:   400;
 $font-weight-light:    300;
 
 
-// Vertical Rhythm Spacing
-$base-line-height: 1.618;
-$rhythm-spacing:   .168;
-$rhythm-height:    .711;
+
+// Font Families
+$times-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:       Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:     Georgia, "Times New Roman", "DejaVu Serif", serif;
+$verdana:     Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:      Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:   Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial:       Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$impact:      Impact, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+$courier:     "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+$sans-serif:  sans-serif;
+$serif:       serif;
 
 
-// Fonts
-$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
-$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
-$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
-$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
-$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
-$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
-$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
-$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
-$sans-serif:      sans-serif;
-$serif:           serif;
 
-$base-font-family: $sans-serif;
-$font-monospace:   $courier;
+// Set default font families.
+$font-family:    $sans-serif;
+$font-monospace: $courier;
 
-$font-smoothing: antialiased;
+
+
+// Spacing
+$default-padding: 0;
+$default-margin: 0;
+
+
+
+// Borders
+$border-radius: 4px;
+$border-width: 1px;
+$border-style: solid;
+
+
+
+// Colors
+
+// Main colors
+$background-color: #fff;
+$primary-color:    #5B8829;
+$secondary-color:  #666;
+$tertiary-color:   #999;
+
+
+
+// Text colors
+$text-color: #000;
+$text-background-color: #f5f5f5;
+
+
+
+// Border colors
+$border-color: darken($text-background-color, 10%);
+
+
+
+// Zebra
+$odd-color:  transparent;
+$even-color: $text-background-color;
+
+
+
+// Tab colors (Local tasks)
+$tabs-background-color: lighten($primary-color, 10%);
+$tab-hover-color:       lighten($tabs-background-color, 5%);
+$tab-active-color:      darken($primary-color, 8%);
+$tab-border-color:      darken($primary-color, 10%);
+$tab-text-color:        #fff;
+
+
+
+// Table colors
+
+// table borders
+$table-cell-borders: false; // set to true if you want borders on every cell
+$table-border-color: $border-color;
+
+
+// thead
+$thead-background-color: darken($text-background-color, 3%);
+$thead-text-color:       $text-color;
+
+
+// row striping
+$table-row-striping:   false;
+$table-row-odd-color:  $odd-color;
+$table-row-even-color: $even-color;
+
+
+// col striping, applies to the active column in sortable tables.
+$table-col-striping:   false;
+$table-col-odd-color:  $text-background-color;
+$table-col-even-color: darken($text-background-color, 2%);
+
+
+// tr hover
+$tr-hover: false;
+$tr-hover-color: darken($text-background-color, 3%);
+
+
+
+// Navbar colors
+$navbar-background: $secondary-color;
+
+
+
+// Message colors
+$success-text-color:       #325e1c;
+$success-border-color:     #c9e1bd;
+$success-background-color: #f3faef;
+
+$warning-text-color:       #734c00;
+$warning-border-color:     #f4daa6;
+$warning-background-color: #fdf8ed;
+
+$error-text-color:       #a51b00;
+$error-border-color:     #f9c9bf;
+$error-background-color: #fcf4f2;
+
+$unpublished-color: #fff4f4;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

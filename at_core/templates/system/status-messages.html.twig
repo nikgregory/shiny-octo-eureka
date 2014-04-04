@@ -25,9 +25,11 @@
 #}
 {% for type, messages in message_list %}
   <div class="messages messages--{{ type }}" role="contentinfo" aria-label="{{ status_headings[type] }}">
-    {% if type == 'error' %}
-      <div role="alert">
-    {% endif %}
+
+    <div class="container" {% if type == 'error' %} role="alert" {% endif %}>
+
+      <span class="icon icon-{{ type }}" aria-hidden="true"></span>
+
       {% if status_headings[type] %}
         <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
       {% endif %}
@@ -40,8 +42,8 @@
       {% else %}
         {{ messages.0 }}
       {% endif %}
-    {% if type == 'error' %}
-      </div>
-    {% endif %}
+
+    </div>
+
   </div>
 {% endfor %}

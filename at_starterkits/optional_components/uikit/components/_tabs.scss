@@ -4,17 +4,47 @@
  *  - other tab modules or implimentation such as Quicktabs
  */
 
+/* Local task tabs, e.g. node View Edit Delete etc */
 .tabs {
+  margin: $medium 0;
+  padding: 0;
+  display: table;
+  @include no-bullets;
+
+  > li {
+    display: table-cell;
+  }
 
   &.primary {
+    background: $tabs-background-color;
+    @include border-radius($border-radius);
 
-    li {
+    li:first-child a {
+      @include border-radius($border-radius 0 0 $border-radius);
+    }
 
-      a {
+    li:last-child a {
+      @include border-radius(0 $border-radius $border-radius 0);
+    }
 
-        &.active {}
+    a {
+      display: block;
+      padding: $small $large;
+      color: $tab-text-color;
+
+      &.active {
+        background: $tab-active-color;
+
         &:hover,
-        &:focus {}
+        &:focus {
+          background: $tab-active-color;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        background: $tab-hover-color;
+        text-decoration: none;
       }
     }
   }
@@ -22,6 +52,7 @@
   &.secondary {
 
     li {
+      padding: 0 $medium 0 0; // LTR
 
       a {
 
@@ -32,3 +63,43 @@
     }
   }
 }
+
+[dir="rtl"] .tabs.secondary li {
+  padding: 0 0 0 $medium;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

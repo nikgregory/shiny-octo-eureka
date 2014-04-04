@@ -15,15 +15,6 @@
 .node--promoted {}
 .node--sticky {}
 
-// Unpublished status message
-.node--unpublished {
-  background-color: #fff4f4;
-
-  p.unpublished {
-    @include font-size(48px);
-  }
-}
-
 
 // View modes
 .view-mode--full {}
@@ -52,6 +43,11 @@
 
   // Conditional class: if user picture?
   &.node__submitted--user-picture {}
+
+  // Remove potentially empty article element.
+  article:empty {
+    display: none;
+  }
 }
 
 

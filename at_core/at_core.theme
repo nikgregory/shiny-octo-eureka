@@ -773,9 +773,9 @@ function at_core_preprocess_comment(&$variables) {
 
   // Reset the title to be the permalink.
   $permalink_uri = $comment->permalink();
-  $permalink_uri['options']['attributes']['class'][] = 'comment__permalink';
-  $permalink_uri['options']['attributes']['rel'][] = 'bookmark';
-  $variables['title'] = l($comment->subject->value, $permalink_uri['path'], $permalink_uri['options']);
+  //$permalink_uri['options']['attributes']['class'][] = 'comment__permalink';
+  //$permalink_uri['options']['attributes']['rel'][] = 'bookmark';
+  //$variables['title'] = l($comment->subject->value, $permalink_uri['path'], $permalink_uri['options']);
 
   // Reset submitted variable.
   if (!empty($variables['submitted'])) {
@@ -894,6 +894,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
 
   // Set attributes.
   $variables['attributes']['class'][] = 'breadcrumb';
+  $variables['attributes']['class'][] = 'clearfix';
   $variables['attributes']['role'][] = 'navigation';
 
   // Theme settings.
@@ -917,7 +918,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
 
       // Page title
       if (at_core_theme_get_setting('settings.breadcrumb_title', $theme) === 1) {
-        $variables['breadcrumb'][] = strip_tags(drupal_get_title());
+        //$variables['breadcrumb'][] = strip_tags(drupal_get_title());
       }
     }
   }

@@ -30,17 +30,17 @@
   {% if caption_needed %}
     <caption class="view-table__caption">
     {% if caption %}
-      {{ caption }}
+      <span class="view-table__caption--text">{{ caption }}</span>
     {% else %}
       {{ title }}
     {% endif %}
     {% if (summary is not empty) or (description is not empty) %}
       <details class="view-table__details">
         {% if summary is not empty %}
-          <summary class="view-table__summary">{{ summary }}</summary>
+          <summary class="view-table__details--summary">{{ summary }}</summary>
         {% endif %}
         {% if description is not empty %}
-          {{ description }}
+          <div class="view-table__details--description">{{ description }}</div>
         {% endif %}
       </details>
     {% endif %}

@@ -3,26 +3,119 @@
  */
 
 .messages {
-  border-width: 1px;
-  @include border-radius(3px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: $large;
+  margin: $large 0;
+  @include border-radius();
+
+  &+ .messages {
+    margin-top: $large;
+  }
+
+  .container {
+    padding: 0 $small;
+    @include box-sizing(border-box);
+  }
 }
 
-[class*="messages--"],
-[dir="rtl"] [class*="messages--"] {
-  box-shadow: none;
+.messages__list {
+  list-style: none;
+  padding: $default-padding;
+  margin: $default-margin;
+
+  &+ .messages__item {
+    margin-top: $small;
+  }
+}
+
+
+/* Success */
+.messages--status,
+table tr.ok {
+  background-color: $success-background-color;
 }
 
 .messages--status,
-[dir="rtl"] .messages--status {
-  border-color: #c9e1bd;
+.ok {
+  color: $success-text-color;
+}
+
+.messages--status {
+  background-image: none;
+}
+
+
+/* Warning */
+.messages--warning,
+table tr.warning {
+  background-color: $warning-background-color;
 }
 
 .messages--warning,
-[dir="rtl"] .messages--warning {
-  border-color: #f4daa6;
+.warning {
+  color: $warning-text-color;
+}
+
+.messages--warning {
+  background-image: none;
+}
+
+
+/* Error */
+.messages--error,
+table tr.error {
+  background-color: $error-background-color;
 }
 
 .messages--error,
-[dir="rtl"] .messages--error {
-  border-color: #f9c9bf;
+.error {
+  color: $error-text-color;
 }
+
+.messages--error {
+  background-image: none;
+}
+
+
+/* RTL */
+[dir="rtl"] .messages {
+  text-align: right;
+}
+
+
+/* Message icons (Font Awesome) */
+.messages .icon:before {
+  font-family: FontAwesome, sans-serif;
+  display: inline-block;
+  padding: 0 0.75em 0 0;
+  @include font-smoothing();
+}
+
+[dir="rtl"] .messages .icon:before {
+  padding: 0 0 0 0.75em;
+}
+
+.icon-status:before {
+  content: "\f118"; // fa-smile-o
+}
+
+.icon-warning:before {
+  content: "\f071";  // fa-exclamation-triangle
+}
+
+.icon-error:before {
+  content: "\f119"; // fa-frown-o
+}
+
+
+
+
+
+
+
+
+
+
+
+

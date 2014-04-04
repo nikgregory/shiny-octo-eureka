@@ -3,23 +3,42 @@
  */
 
 .breadcrumb {
-  ol {
+  margin: $medium 0;
+
+  &__title {
+    font-size: inherit;
   }
+
+  &__title,
+  ol,
   li {
+    display: inline-block;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    @include no-bullets;
+    margin: 0;
+    padding: 0;
+
     &:before {
-      // content: " » "; // Seperator
+      content: "\f054"; // LTR, fa-chevron-right
+      font-family: FontAwesome, sans-serif;
+      font-size: $small;
+      display: inline-block;
+      padding: 0 4px 0 1px;
     }
-    &:first-child:before {}
+
+    &:first-child:before {
+      content: none;
+    }
   }
 }
 
-.breadcrumb__title {
-  float: left;
-  font-size: 1em;
-  padding: 0 0.4em 0 0;
-}
-
-[dir="rtl"] .breadcrumb__title {
-  float: right;
-  padding: 0 0 0 0.4em;
+[dir="rtl"] .breadcrumb li:before {
+  content: "\f053"; // RTL, fa-chevron-left
 }

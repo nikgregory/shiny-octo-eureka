@@ -15,18 +15,12 @@
 // Comment wrapper
 .comment {}
 
+
 // Authors
 .by-anonymous {}
 .by-viewer {}
 .comment--by-node-author {}
 
-// Unpublished status message
-.comment--unpublished {
-  background-color: #fff4f4;
-  p.unpublished {
-    @include font-size(32px);
-  }
-}
 
 
 // Header
