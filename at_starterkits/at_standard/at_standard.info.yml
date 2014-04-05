@@ -9,11 +9,11 @@ stylesheets:
   all:
     - 'css/styles.css'
 regions:
+  messages: 'Messages'
   header_first: 'Header first'
   header_second: 'Header second'
   header_third: 'Header third'
-  menubar: 'Menu bar'
-  messages: 'Messages'
+  navbar: 'Nav bar'
   features_first: 'Features first'
   features_second: 'Features second'
   features_third: 'Features third'

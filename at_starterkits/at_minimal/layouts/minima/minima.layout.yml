@@ -20,11 +20,11 @@ rows:
     regions:        # regions. At least one region per row is required.
       header_first: 'Header first'
       header_second: 'Header second'
-  menubar:
+  navbar:
     attributes:
       role: navigation
     regions:
-      menubar: 'Menu bar'
+      navbar: 'Nav bar'
   messages:
     regions:
       messages: 'Messages'

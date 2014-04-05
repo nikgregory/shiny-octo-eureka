@@ -12,26 +12,35 @@ version: '8.x-1.0-dev'
 # Path to CSS layout variants. Required.
 css_layouts_path: 'variants'
 
-# Rows. Required.
+# Rows. Required. The row array items are used to generate the page.html.twig
+# markup, which is generated when you select a layout and save the theme settings.
+# A new version of page.html.twig is saved to the templates directory in your theme,
+# this can be either page.html.twig or a suggestion. Backups are kept unless disabled.
 rows:
-  header:           # row name. 'header' and 'footer' will use their html5 counterparts.
-    attributes:     # attributes key. Set id, role or classes, or any other valid html attributes. Optional.
-      role: banner  # attribute_type: attribute value
-    regions:        # regions key
-      header_first: 'Header first' # region_machine_name: 'Friendly name'
+  messages:          # row key (name)
+    attributes:      # attributes key. Set id, role or classes, or any other valid html attributes. Optional.
+      role: region   # attribute_type: attribute value.
+      id: messages
+    regions:         # use the key "regions" to declare this rows regions using the standard Drupal schema: machine_name: 'Friendly name'.
+      messages: 'Messages'
+  header:            # using "header" as a row key will force the system to use a <header> wrapper element.
+    attributes:
+      role: banner
+      id: masthead
+    regions:
+      header_first: 'Header first'
       header_second: 'Header second'
       header_third: 'Header third'
-  menubar:
+  navbar:
     attributes:
       role: navigation
+      id: navbar
     regions:
-      menubar: 'Menu bar'
-  messages:
-    regions:
-      messages: 'Messages'
+      navbar: 'Nav bar'
   features:
     attributes:
       role: region
+      id: features
     regions:
       features_first: 'Features first'
       features_second: 'Features second'
@@ -39,23 +48,25 @@ rows:
       features_fourth: 'Features fourth'
   main:
     attributes:
-      id: main-content
       role: region
+      id: main-content
     regions:
       highlighted: 'Highlighted'
-      content: 'Main content' # region 'content' uses <main> element wrappers and role="main"
+      content: 'Main content' # region 'content' uses <main> element wrappers and role="main".
       sidebar_first: 'Sidebar first'
       sidebar_second: 'Sidebar second'
   tertiary:
     attributes:
       role: region
+      id: tertiary
     regions:
       tertiary_first: 'Tertiary first'
       tertiary_second: 'Tertiary second'
       tertiary_third: 'Tertiary third'
       tertiary_fourth: 'Tertiary fourth'
-  footer:
+  footer: # using "footer" as a row key will force the system to use a <footer> wrapper element.
     attributes:
       role: contentinfo
+      id: footer
     regions:
       footer: 'Footer'

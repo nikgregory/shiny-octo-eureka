@@ -64,6 +64,7 @@ class LayoutAttributes extends PageLayout {
         }
       }
 
+      // intersect
       $row_region_intersect[$row_key] = array_intersect($new_row_values[$row_key], $this->regions);
     }
 
@@ -104,7 +105,6 @@ class LayoutAttributes extends PageLayout {
       if (isset($rso_count_class[$row_region_key])) {
         $variables[$row_region_key . '__attributes']['class'][] =  'active-regions--' . implode('-', $rso_count_class[$row_region_key]);
       }
-
     }
 
     return $variables;

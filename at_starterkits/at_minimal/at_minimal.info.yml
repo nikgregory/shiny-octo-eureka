@@ -11,7 +11,7 @@ stylesheets:
 regions:
   header_first: 'Header first'
   header_second: 'Header second'
-  menubar: 'Menu bar'
+  navbar: 'Nav bar'
   messages: 'Messages'
   highlighted: 'Highlighted'
   content: 'Main content'
