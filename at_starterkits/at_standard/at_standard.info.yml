@@ -10,6 +10,7 @@ stylesheets:
     - 'css/styles.css'
 stylesheets-remove:
   - system.theme.css
+  - normalize.css
 regions:
   messages: 'Messages'
   header_first: 'Header first'
