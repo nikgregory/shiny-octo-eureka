@@ -1,226 +1,215 @@
-/*
+/**
  * Fields.
  */
 
+$field-taxonomy-as-labels: false;
+$field-taxonomy-icons:     false;
 
 
-/* Field display */
-.field .field-label {
-  font-weight: bold;
-}
-.field-label-inline .field-label,
-.field-label-inline .field-items {
-  float:left; /*LTR*/
-  padding-right: 0.5em;
-}
-[dir="rtl"] .field-label-inline .field-label,
-[dir="rtl"] .field-label-inline .field-items {
-  float: right;
-  padding-left: 0.5em;
+.field {
+  .field__items {}
+  .field__item {}
 }
 
+.field .field__label {
+  font-family: inherit;
+  font-weight: $font-weight-semibold;
+  @include adjust-font-size-to($medium);
+}
 
-
-
-
-
-
-
-.field {}
-
-
-/*
- * Above and inline classes are on the field wrapper
- */
-.field-label-above {}
-
-
-/*
- * When labels are set to inline in field display settings the clearfix class is automatically added
- */
-.field-label-inline {
-
-  /* Remove the margin on inline field lables to preserve vertical formatting */
-  .field-label {
+.field-label--inline {
+  // Remove the margin on inline field lables to preserve vertical formatting.
+  .field__label {
     margin: 0;
+  }
+
+  .field__label {
+    float: left; // LTR
+    @include output-rhythm(padding, 0 $small 0 0); // LTR
+  }
+
+  .field__items {
+    overflow: hidden; // dangerous if field items should overflow
   }
 }
 
-/*
- * Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues
- */
-.field-label {
-  font-size: 1em;
-  font-weight: 700;
-  font-family: inherit;
-  line-height: inherit;
-  margin-bottom: 0;
+[dir="rtl"] .field-label--inline .field__label,
+[dir="rtl"] .field-label--inline .field__items {
+  float: right;
+  @include output-rhythm(padding, 0 0 0 $small);
 }
 
+.field-label--above {}
 
-/*
+
+/**
  * Field types (Core)
  */
 
-/*
+/**
  * Image fields use the <figure> and <figcaption> elements from HTML5
  */
-.field-type-image {
 
-  .caption {}
+.field-type--image {
 
-  .full-caption {}
+  figcaption {
+    @include adjust-font-size-to($medium/1.25);
+  }
 
-  .teaser-caption {}
+  /**
+   * Image Alignment Theme Settings
+   * - settings are applied using the Image extension in theme settings, where you can
+   *   set image alignment per node type and view mode.
+   */
+  // Possible LTR/RTL issue here.
+  &.field-align--none figure,
+  &.field-align--left figure {
+    @include output-rhythm(margin, 5px $medium $medium 0);
+
+    figcaption {
+      text-align: left;
+    }
+  }
+
+  &.field-align--center figure {
+    @include output-rhythm(margin, 0 auto $medium);
+
+    figcaption {
+      text-align: center;
+    }
+  }
+
+  &.field-align--right figure {
+    @include output-rhythm(margin, 5px 0 $medium $medium);
+
+    figcaption {
+      text-align: left;
+    }
+  }
 }
 
 
-/*
+/**
  * Taxonomy
  */
-.field-type-taxonomy-term-reference {
+.field-type--taxonomy-term-reference {
+  @include output-rhythm(margin, $medium 0);
 
-  /* The same bottom margin as p, blockquote, ul, ol and dl */
-  margin-bottom: 1.5em;
+  @if ($field-taxonomy-as-labels == true) {
+    span {
+      display: inline-block;
+      background: lighten($text-background-color, 5%);
+      color: $text-color;
+      border: $border-width $border-style $border-color;
+      margin: 0 3px 3px 0; // LTR
+      @include border-radius($border-radius);
+      @include output-rhythm(padding, 0 $small);
 
-  &.field-label-inline .field-items {
+      &:hover,
+      &:focus {
+        background: $text-background-color;
+      }
+
+      a {
+        color: $text-color;
+        display: inline-block;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span {
+      margin: 0 0 3px 3px;
+    }
+  }
+
+  @if ($field-taxonomy-icons == true) {
+    span {
+      display: inline-block;
+
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: "\f02b"; // fa-tag
+        display: inline-block;
+        @include output-rhythm(margin, 0 $small 0 0); // LTR
+        speak: none; // not well supported but we have it in case it is and the font is not using the PUA.
+      }
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span:before {
+      @include output-rhythm(margin, 0 0 0 $small);
+    }
+  }
+
+  @if ($field-taxonomy-as-labels == false and $field-taxonomy-icons == false) {
+    li {
+      @include output-rhythm(margin, 0 $small 0 0); // LTR
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference li {
+      @include output-rhythm(margin, 0 0 0 $small);
+    }
+  }
+
+  .field__items {
     margin: 0;
     padding: 0;
+    @include no-bullets;
   }
 
-  &.field-label-inline .field-item {
-    display: inline;
-    list-style: none;
-    padding: 0 10px 0 0;
+  &.field-label--inline li {
+    float: left;  // LTR
+  }
+
+  @at-root [dir="rtl"] .field-type--taxonomy-term-reference.field-label--inline li {
+    float: right;
   }
 }
 
 
-/*
- * Text
- */
-.field-type-text {}
+// Text
+.field-type--text {}
 
 
-/*
- * Long text
- */
-.field-type-text-long {}
+// Long text
+.field-type-text--long {}
 
 
-/*
- * Text with summary
- */
-.field-type-text-with-summary {}
+// Text with summary
+.field-type--text-with-summary {}
 
 
-/*
- * File
- */
-.field-type-file {}
+// File
+.field-type--file {}
 
 
-/*
- * Number/Integer
- */
-.field-type-number-integer {}
+// Number/Integer
+.field-type--number-integer {}
 
 
-/*
- * Decimal
- */
-.field-type-number-decimal {}
+// Decimal
+.field-type--number-decimal {}
 
 
-/*
- * Number float
- */
-.field-type-number-float {}
+// Number float
+.field-type--number-float {}
 
 
-/*
- * List
- */
-.field-type-list-text {}
+// List
+.field-type--list-text {}
 
 
-/*
- * List boolean
- */
-.field-type-list-boolean {}
+// List boolean
+.field-type--list-boolean {}
 
 
-/*
- * List integer
- */
-.field-type-list-integer {}
+// List integer
+.field-type--list-integer {}
 
 
-/*
- * List float
- */
-.field-type-list-float {}
+// List float
+.field-type--list-float {}
 
-
-/*
- * Field types (Contrib)
- */
-.field-type-datetime {}
-
-.field-type-node-reference {}
-
-.field-type-user-reference {}
-
-
-/*
- * Named fields
- */
-.field-name-body {}
-
-.field-name-field-image {}
-
-.field-name-field-tags {}
-
-
-/*
- * Underscores in field name are replaced with dashes
- */
-.field-name-field-FIELDNAME {}
-
-
-/*
- * Image Alignment Theme Settings - included here so you can easily override
- */
-
-/*
- * Float none setting
- */
-.ia-n .field-type-image,
-.iat-n .field-type-image {}
-
-
-/*
- * Float left setting
- */
-.ia-l .field-type-image figure,
-.iat-l .field-type-image figure {
-  margin: 5px 20px 15px 0;
-}
-
-
-/*
- * Centered setting
- */
-.ia-c .field-type-image figure,
-.iat-c .field-type-image figure {
-  margin: 5px auto 15px;
-}
-
-
-/*
- * Float right setting
- */
-.ia-r .field-type-image figure,
-.iat-r .field-type-image figure {
-  margin: 5px 0 15px 20px;
-}

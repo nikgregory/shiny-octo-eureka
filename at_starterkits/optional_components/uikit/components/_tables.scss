@@ -2,12 +2,36 @@
  * Tables.
  */
 
+// borders
+$table-cell-borders:     false; // set to true if you want borders on every cell
+$table-border-color:     $border-color;
+
+// thead
+$thead-background-color: darken($text-background-color, 3%);
+$thead-text-color:       $text-color;
+
+// row striping
+$table-row-striping:     false;
+$table-row-odd-color:    $odd-color;
+$table-row-even-color:   $even-color;
+
+// col striping, applies to the active column in sortable tables.
+$table-col-striping:     false;
+$table-col-odd-color:    $text-background-color;
+$table-col-even-color:   darken($text-background-color, 2%);
+
+// hover
+$tr-hover:               false;
+$tr-hover-color:         darken($text-background-color, 3%);
+
+
 table {
-  margin: $medium 0;
+  @include output-rhythm(margin, $medium 0);
   padding: 0;
   width: 100%;
+  border-collapse: collapse;
   border: $border-width $border-style $border-color;
-
+  border-spacing: 0;
 
   // Prevent the sticky header from hiding behind other content.
   &.sticky-header {
@@ -15,21 +39,31 @@ table {
   }
 
   // Views tables can take caption, summary and description.
-  .view-table__caption--text {
+  caption {
     @include adjust-font-size-to($large);
+  }
+
+  .view-table__details {
+    padding: 0;
+    @include output-rhythm(margin, $medium 0);
+    @include adjust-font-size-to($medium);
   }
 
   .view-table__details,
   .view-table__details--summary {
     border: 0;
-    margin: 0;
-    padding: 0;
+  }
+
+  .view-table__details--description {
+    font-style: italic;
   }
 }
 
 
 // tr, takes extensive styles if enabled in variables.scss.
 tr {
+  border: $border-width $border-style $border-color;
+
   // Row striping (zebra).
   @if $table-row-striping == true {
     &.odd {
@@ -92,19 +126,24 @@ thead {
 }
 
 
-// tbody.
-tbody {
-  tr {
-    border-top: $border-width $border-style $border-color;
-  }
+// tr, td and th border properties.
+tr,
+td,
+th {
+  border-style: $border-style;
+  border-color: $border-color;
 }
 
 
 // td, th.
 td,
 th {
-  padding: $small;
+  @include output-rhythm(padding, $small);
   vertical-align: middle;
+
+  @if $table-cell-borders == false {
+    border-width: 0;
+  }
 }
 
 
@@ -115,7 +154,7 @@ th {
   tr,
   th,
   td {
-    border: $border-width $border-style $border-color;
+    border-width: $border-width;
   }
 }
 
@@ -127,12 +166,18 @@ th {
  */
 tr {
   &.drag {
-    background-color: #fffff0;
+    background-color: #fffff1;
 
     &-previous {
       background-color: #ffd;
     }
   }
+}
+
+a.tabledrag-handle .handle {
+  height: auto;
+  margin: -0.2em 0.5em 0;
+  width: auto;
 }
 
 body div.tabledrag-changed-warning {

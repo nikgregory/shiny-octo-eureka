@@ -5,7 +5,9 @@
 /* Flexible images */
 img {
   height: auto;
+  line-height: 0;
   max-width: 100%;
+  display: inline-block;
 }
 
 /*

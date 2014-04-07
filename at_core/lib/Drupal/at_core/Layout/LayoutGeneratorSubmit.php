@@ -78,7 +78,7 @@ class LayoutGeneratorSubmit {
       $generateLayout->savePageTemplate($theme, $suggestion, $enable_backups);
 
       // check if the file exists and if so set a message.
-      $file_path = drupal_get_path('theme', $theme) . '/templates/' . $template_file_name;
+      $file_path = drupal_get_path('theme', $theme) . '/templates/page/' . $template_file_name;
       if (file_exists($file_path)) {
         drupal_set_message(t('Success - template file has been saved to <code>!file_path</code>.', array('!file_path' => $file_path)), 'status');
       }

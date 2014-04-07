@@ -10,9 +10,13 @@
 @import 'modular-scale';
 
 
-// UI Kit
+// UI Kit Base
 @import "components/utility";
 @import "components/variables";
+@import "components/normalize";
+
+
+// UI Kit Styles
 @import "components/webfonts";
 @import "components/type";
 @import "components/page";

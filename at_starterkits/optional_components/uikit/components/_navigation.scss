@@ -4,8 +4,14 @@
  *  - drop menu
  */
 
+// Navbar colors
+$navbar-background: $secondary-color;
+
+
+
+
 // Menu Bar menus. TODO: NEEDS WORK, like changing to region-navbar
-.region-menubar {
+.region-navbar {
 
   .block {}
 
@@ -20,7 +26,7 @@
     }
 
     a {
-      padding: 5px 10px;
+      @include output-rhythm(padding, $small $large);
       display: block;
 
       &:hover,
@@ -38,17 +44,17 @@
   padding: 0;
 
   .menu {
-    padding: 0 0 0 $large;
+    @include output-rhythm(padding, 0 0 0 $large);
   }
 
   li {
     &:before {
       font-family: FontAwesome, sans-serif;
-      display: inline-block;
-      padding: 0 1px;
-      width: $medium;
       content: "\f0da"; // LTR, fa-caret-right
-      speak: none;
+      display: inline-block;
+      @include output-rhythm(width, $medium);
+      padding: 0 1px; // tiny bit of horizontal breething room
+      speak: none; // not well supported but we have it in case it is and the font is not using the PUA.
     }
 
     &.expanded:before {

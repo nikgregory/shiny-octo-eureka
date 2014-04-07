@@ -2,43 +2,60 @@
  * Messages
  */
 
+// Success (status)
+$status-text:      $success-text-color;
+$status-border:     $success-border-color;
+$status-background: $success-background-color;
+
+// Warning
+$warning-text:       $warning-text-color;
+$warning-border:     $warning-border-color;
+$warning-background: $warning-background-color;
+
+// Error
+$error-text:         $error-text-color;
+$error-border:       $error-border-color;
+$error-background:   $error-background-color;
+
+
 .messages {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  padding: $large;
-  margin: $large 0;
+  @include output-rhythm(padding, $medium);
+  @include output-rhythm(margin, $medium 0);
   @include border-radius();
 
   &+ .messages {
     margin-top: $large;
+    @include margin-leader(1, $medium);
   }
 
   .container {
-    padding: 0 $small;
     @include box-sizing(border-box);
   }
 }
 
 .messages__list {
   list-style: none;
+  overflow: hidden;
   padding: $default-padding;
   margin: $default-margin;
 
   &+ .messages__item {
-    margin-top: $small;
+    @include margin-leader(1, $medium);
   }
 }
 
 
-/* Success */
+/* Success (status) */
 .messages--status,
 table tr.ok {
-  background-color: $success-background-color;
+  background-color: $status-background;
 }
 
 .messages--status,
 .ok {
-  color: $success-text-color;
+  color: $status-text;
 }
 
 .messages--status {
@@ -49,12 +66,12 @@ table tr.ok {
 /* Warning */
 .messages--warning,
 table tr.warning {
-  background-color: $warning-background-color;
+  background-color: $warning-background;
 }
 
 .messages--warning,
 .warning {
-  color: $warning-text-color;
+  color: $warning-text;
 }
 
 .messages--warning {
@@ -65,12 +82,12 @@ table tr.warning {
 /* Error */
 .messages--error,
 table tr.error {
-  background-color: $error-background-color;
+  background-color: $error-background;
 }
 
 .messages--error,
 .error {
-  color: $error-text-color;
+  color: $error-text;
 }
 
 .messages--error {
@@ -87,13 +104,14 @@ table tr.error {
 /* Message icons (Font Awesome) */
 .messages .icon:before {
   font-family: FontAwesome, sans-serif;
-  display: inline-block;
-  padding: 0 0.75em 0 0;
-  @include font-smoothing();
+  float: left;
+  vertical-align: top;
+  @include output-rhythm(padding, 0 $small 0 0); // LTR
 }
 
 [dir="rtl"] .messages .icon:before {
-  padding: 0 0 0 0.75em;
+  @include output-rhythm(padding, 0 0 0 $small);
+  float: right;
 }
 
 .icon-status:before {
@@ -107,9 +125,6 @@ table tr.error {
 .icon-error:before {
   content: "\f119"; // fa-frown-o
 }
-
-
-
 
 
 

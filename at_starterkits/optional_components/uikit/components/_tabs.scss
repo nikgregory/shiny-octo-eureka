@@ -2,104 +2,283 @@
  * Tabs.
  *  - primary and secondary tabs
  *  - other tab modules or implimentation such as Quicktabs
+ *
+ * NOTES:
+ * - when $tabs-as-tabs and $tab-text-align is center will fail, until: https://drupal.org/node/1898478
  */
+
+$tabs-as-buttons:             false;
+$tabs-as-button-group:        false;
+$tabs-as-tabs:                true;
+
+$tabs-alignment:              left;
+$tab-text-align:              center;
+
+$tab-text-color:              $text-color;
+$tab-text-hover-color:        $text-color;
+$tab-text-active-color:       $text-color;
+
+$tab-background-color:        lighten($text-background-color, 5%);
+$tab-background-hover-color:  $text-background-color;
+$tab-background-active-color: $text-background-color; // $tabs-as-tabs active tab will always be the page background.
+
+$tab-borders:                 true;
+$tab-border-width:            $border-width;
+$tab-border-style:            $border-style;
+$tab-border-color:            $border-color;
+$tab-border-radius:           $border-radius; // px value
+
+$tabs-fullwidth:              false;
+$tab-highlights:              true; // false will remove text and box shadows, i.e. a more flat UI
+
+
+// We need better markup to make all these style options work, this is a hack.
+// SEE: https://drupal.org/node/1898478
+// TODO: wait for the template issue to resolve so we can change the markup.
+#block-atblockslocaltasks {
+  display: table;
+  width: 100%;
+  @include clearfix;
+  @include output-rhythm(margin, $medium 0);
+}
+
 
 /* Local task tabs, e.g. node View Edit Delete etc */
 .tabs {
-  margin: $medium 0;
+  margin: 0;
   padding: 0;
-  display: table;
-  @include no-bullets;
+  list-style: none;
 
-  > li {
-    display: table-cell;
+  // If full width stretch the tabs container
+  @if ($tabs-fullwidth == true) {
+    width: 100%;
   }
 
-  &.primary {
-    background: $tabs-background-color;
-    @include border-radius($border-radius);
+  // Align all tabs center
+  @if ($tabs-alignment == center) {
+    margin: 0 auto;
+  }
 
-    li:first-child a {
-      @include border-radius($border-radius 0 0 $border-radius);
+  // Float tabs right
+  @if ($tabs-alignment == right) {
+    float: right;
+  }
+
+  // If no tab style is set to true
+  @if ($tabs-as-button-group == false and $tabs-as-buttons == false and $tabs-as-tabs == false) {
+    li {
+      display: inline-block;
+      @include output-rhythm(padding, 0 $medium 0 0); // LTR
     }
 
-    li:last-child a {
-      @include border-radius(0 $border-radius $border-radius 0);
+    @at-root {
+      [dir*="rtl"] .tabs li {
+        @include output-rhythm(padding, 0 0 0 $medium);
+      }
+    }
+  }
+
+  // If any tab style is set to true
+  @if ($tabs-as-button-group == true or $tabs-as-buttons == true or $tabs-as-tabs == true) {
+    display: table;
+
+    li {
+      display: table-cell;
+
+      a {
+        text-align: $tab-text-align;
+        display: block;
+        line-height: 1; // custom line-height
+        @include output-rhythm(padding, $x-small $large);
+        @include transition(background-color, .15s, ease-in-out);
+
+        // Add tab highlight shadows
+        @if ($tab-highlights == true) {
+          @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
+
+          &:active {
+            @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 0 inset);
+          }
+        }
+      }
     }
 
-    a {
+    // $tabs-as-tabs hack for border bottom
+    // SEE: https://drupal.org/node/1898478
+    // TODO: wait for the template issue to resolve so we can change the markup.
+    @if ($tabs-as-tabs == true) {
       display: block;
-      padding: $small $large;
-      color: $tab-text-color;
+      li {
+        display: inline-block;
+      }
+    }
 
-      &.active {
-        background: $tab-active-color;
+    // Primary Tabs
+    &.primary {
 
-        &:hover,
-        &:focus {
-          background: $tab-active-color;
+      // Tabs as Button-group
+      @if ($tabs-as-button-group == true) {
+        @if ($tab-borders == true) {
+          a {
+            border-width: $tab-border-width 0 $tab-border-width $tab-border-width;
+            border-style: $tab-border-style;
+            border-color: $tab-border-color;
+          }
+        }
+
+        li {
+          margin: 0;
+
+          &:first-child a {
+            @include border-radius($tab-border-radius 0 0 $tab-border-radius);
+          }
+
+          &:last-child a {
+            @if ($tab-borders == true) {
+              border-width: $tab-border-width;
+              border-style: $tab-border-style;
+              border-color: $tab-border-color;
+            }
+
+            @include border-radius(0 $tab-border-radius $tab-border-radius 0);
+          }
         }
       }
 
-      &:hover,
-      &:focus {
-        background: $tab-hover-color;
-        text-decoration: none;
+      // Tabs as Buttons
+      @if ($tabs-as-buttons == true) {
+        li {
+          padding-right: 3px; // LTR
+
+          &:last-child {
+            padding-right: 0; // LTR
+          }
+        }
+
+        @at-root [dir="rtl"] .tabs.primary li {
+          padding-right: 0;
+          padding-left: 3px;
+        }
+
+        a {
+          @if ($tab-borders == true) {
+            border: $tab-border-width $tab-border-style $tab-border-color;
+          }
+
+          @include border-radius($tab-border-radius);
+        }
+      }
+
+      // Tabs as Button Group or Buttons
+      @if ($tabs-as-button-group == true or $tabs-as-buttons == true) {
+        a {
+          color: $tab-text-color;
+          background: $tab-background-color;
+
+          &:hover,
+          &:focus {
+            color: $tab-text-hover-color;
+            background: $tab-background-hover-color;
+            text-decoration: none;
+          }
+
+          &.active {
+            color: $tab-text-active-color;
+            background: $tab-background-active-color;
+
+            &:hover,
+            &:focus {
+              color: $tab-text-hover-color;
+              background: $tab-background-hover-color;
+            }
+          }
+        }
+      }
+
+      // Tabs as Tabs
+      @if ($tabs-as-tabs == true) {
+
+        // Bogus border bottom workaround: TODO: fix when all menus are twig templates.
+        &:after {
+          content: "-";
+          height: 1px;
+          line-height: 1px;
+          font-size: 1px;
+          overflow: hidden;
+          width: 100%;
+          clear: both;
+          display: block;
+          padding: 0;
+          margin: -1px 0 0 0;
+          background: $tab-border-color;  // special case
+        }
+
+        a {
+          color: $tab-text-color;
+          background: $tab-background-color;
+          border: $tab-border-width $tab-border-style $tab-border-color;
+          border-right: 0;
+          @include output-rhythm(padding, $small $large);
+
+          &:hover,
+          &:focus {
+            color: $tab-text-hover-color;
+            background: $tab-background-hover-color;
+            text-decoration: none;
+          }
+
+          &.active {
+            color: $tab-text-active-color;
+            background: none;
+            border-bottom-color: $background-color;  // page background color.
+
+            &:hover,
+            &:focus {
+              color: $tab-text-hover-color;
+              background: none;
+            }
+          }
+        }
+
+        li {
+          &:first-child a {
+            margin-left: 2px; // LTR
+            @include border-radius($tab-border-radius 0 0 0);
+          }
+
+          &:last-child a {
+            @if ($tab-borders == true) {
+              border-right: $tab-border-width $tab-border-style $tab-border-color;
+            }
+
+            @include border-radius(0 $tab-border-radius 0 0);
+          }
+        }
+
+        @at-root [dir="rtl"] .tabs.primary li:first-child a {
+          margin-left: 0;
+          margin-right: 2px;
+        }
       }
     }
-  }
 
-  &.secondary {
+    // Secondary tabs
+    &.secondary {
+      li {
+        @include output-rhythm(padding, $medium $medium 0 0);
 
-    li {
-      padding: 0 $medium 0 0; // LTR
+        a {
+          padding: 0;
 
-      a {
+          &.active {}
+          &:hover,
+          &:focus {}
+        }
+      }
 
-        &.active {}
-        &:hover,
-        &:focus {}
+      @at-root [dir="rtl"] .tabs.secondary li {
+        @include output-rhythm(padding, $medium 0 0 $medium);
       }
     }
   }
 }
-
-[dir="rtl"] .tabs.secondary li {
-  padding: 0 0 0 $medium;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

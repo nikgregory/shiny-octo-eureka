@@ -6,42 +6,71 @@
 @import 'modular-scale';
 
 
+// Optional map of minimum browser versions to support. For example, to
+// remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
+// to '8'.
+$browser-minimum-versions: (
+  'chrome':  null,
+  'firefox': null,
+  'ie':      8,
+  'safari':  null,
+  'opera':   null
+) !default;
+
 
 // Breakpoints
-// Defaults par with all AT provided Layouts and Breakpoints module config (e.g. for Responsive Picture module).
+// Defaults par with all AT provided Layouts and Breakpoints module
+// config (e.g. for Responsive Picture module).
 // Useage: @media #{$narrow} {}
 $narrow      : "all and (min-width: 45em) and (max-width: 60em)";
 $narrow-wide : "all and (min-width: 45em)"; // Allow styles to cascade into wide.
 $wide        : "all and (min-width: 60em)";
 
 
-
 // Typography
 // Compass Vertical Rhythm is used in conjunction with Modular Scale.
-// MS provides the scale, while VR sets adjusted font sizes, border thickness and line heights.
-// WARNING: I have encountered bugs in Compass adjust-font-size-to when em is used, this mixin is used
-// to set line-height for headings in _type.scss.
-$base-font-size: 14px;
-$base-line-height: 22px;
-$important-font-size: 44px;
+//
+//  https://github.com/chriseppstein/compass/blob/1.0.0.alpha.19/core/stylesheets/compass/typography/_vertical_rhythm.scss
+//  -- link to modular scale stuff--
+//
+// MS provides the scale, while VR sets adjusted font sizes, border
+// thickness and line heights.
+// WARNING: I have encountered bugs in Compass adjust-font-size-to
+// when em is used, this mixin is used to set line-height for headings
+// in _type.scss.
+$base-font-size:      16px;
+$base-line-height:    24px;
+$important-font-size: 48px;
 
+
+// TODO: revisit later for Compass support for px fallbacks.
+$rhythm-unit: 'rem';
 
 
 // Establish baseline
-// This might freak out if you use em as the base-font-size unit, unless you !default it, in which
-// case everything will freak out and all text will be tiny.
+// This might freak out if you use em as the base-font-size unit,
+// unless you !default it, in which case everything will freak out
+// and all text will be tiny.
 @include establish-baseline;
 
 
+// this seems buggy right now?
+//@include debug-vertical-alignment($img: false);
+
 
 // Modular Scale
-$ms-base: $base-font-size $important-font-size;
+$ms-base:  $base-font-size $important-font-size;
 $ms-ratio: $golden;
 
 
-
-// Sizing variables
-// Used throughout the system to set font, button and input sizes, and set margins and padding.
+// Modular Scale size variables.
+// The output is always a px value. We use Compass mixins and some
+// internal functions to convert to rem where required, or simply use
+// the variable if you want a px value.
+// For example headings use the compass mixin: adjust-font-size-to()
+// which returns both the font-size and line-height in rem.
+// Adaptivetheme UI Kit has it's own pxtorem function which you can
+// call anywhere you need rem, e.g. pxtorem($medium).
 $xxxx-large: ms(5);
 $xxx-large:  ms(4);
 $xx-large:   ms(3);
@@ -49,7 +78,7 @@ $x-large:    ms(2);
 $large:      ms(1);
 $medium:     ms(0);
 $small:      ms(-1);
-
+$x-small:    ms(-2);
 
 
 // Font Weights
@@ -57,7 +86,6 @@ $font-weight-bold:     700;
 $font-weight-semibold: 600;
 $font-weight-normal:   400;
 $font-weight-light:    300;
-
 
 
 // Font Families
@@ -74,45 +102,56 @@ $sans-serif:  sans-serif;
 $serif:       serif;
 
 
-
 // Set default font families.
-$font-family:    $sans-serif;
-$font-monospace: $courier;
-
+$base-font-family: $sans-serif;
+$font-monospace:   $courier;
 
 
 // Spacing
 $default-padding: 0;
-$default-margin: 0;
-
+$default-margin:  0;
 
 
 // Borders
 $border-radius: 4px;
-$border-width: 1px;
-$border-style: solid;
-
+$border-width:  1px;
+$border-style:  solid;
 
 
 // Colors
 
 // Main colors
 $background-color: #fff;
-$primary-color:    #5B8829;
+$primary-color:    #333;
 $secondary-color:  #666;
 $tertiary-color:   #999;
 
 
-
 // Text colors
-$text-color: #000;
-$text-background-color: #f5f5f5;
-
+$text-color:            #000;
+$text-background-color: #eee;
 
 
 // Border colors
-$border-color: darken($text-background-color, 10%);
+$border-color: #ccc;
 
+
+// Success
+$success-text-color:       #325e1c;
+$success-border-color:     #c9e1bd;
+$success-background-color: #f3faef;
+
+
+// Warning
+$warning-text-color:       #734c00;
+$warning-border-color:     #f4daa6;
+$warning-background-color: #fdf8ed;
+
+
+// Error
+$error-text-color:         #a51b00;
+$error-border-color:       #f9c9bf;
+$error-background-color:   #fcf4f2;
 
 
 // Zebra
@@ -120,82 +159,30 @@ $odd-color:  transparent;
 $even-color: $text-background-color;
 
 
-
-// Tab colors (Local tasks)
-$tabs-background-color: lighten($primary-color, 10%);
-$tab-hover-color:       lighten($tabs-background-color, 5%);
-$tab-active-color:      darken($primary-color, 8%);
-$tab-border-color:      darken($primary-color, 10%);
-$tab-text-color:        #fff;
-
-
-
-// Table colors
-
-// table borders
-$table-cell-borders: false; // set to true if you want borders on every cell
-$table-border-color: $border-color;
-
-
-// thead
-$thead-background-color: darken($text-background-color, 3%);
-$thead-text-color:       $text-color;
-
-
-// row striping
-$table-row-striping:   false;
-$table-row-odd-color:  $odd-color;
-$table-row-even-color: $even-color;
-
-
-// col striping, applies to the active column in sortable tables.
-$table-col-striping:   false;
-$table-col-odd-color:  $text-background-color;
-$table-col-even-color: darken($text-background-color, 2%);
-
-
-// tr hover
-$tr-hover: false;
-$tr-hover-color: darken($text-background-color, 3%);
-
-
-
-// Navbar colors
-$navbar-background: $secondary-color;
-
-
-
-// Message colors
-$success-text-color:       #325e1c;
-$success-border-color:     #c9e1bd;
-$success-background-color: #f3faef;
-
-$warning-text-color:       #734c00;
-$warning-border-color:     #f4daa6;
-$warning-background-color: #fdf8ed;
-
-$error-text-color:       #a51b00;
-$error-border-color:     #f9c9bf;
-$error-background-color: #fcf4f2;
-
+// Global unpublished background
 $unpublished-color: #fff4f4;
 
 
+// Global gradients
+// Provides simple linear gradient start and stop values.
+
+// Text background color gradient, might be used on buttons,
+// table headers, tabs etc.
+$text-background-gradient-start: darken($text-background-color, 5%);
+$text-background-gradient-stop:  lighten($text-background-color, 5%);
 
 
+// Primary color gradient
+$primary-gradient-start: $primary-color;
+$primary-gradient-stop:  lighten($primary-color, 10%);
 
 
+// Secondary color gradient
+$secondary-gradient-start: $secondary-color;
+$secondary-gradient-stop:  lighten($secondary-color, 10%);
 
 
-
-
-
-
-
-
-
-
-
-
-
+// Tertiary color gradient
+$tertiary-gradient-start: $tertiary-color;
+$tertiary-gradient-stop:  lighten($tertiary-color, 10%);
 

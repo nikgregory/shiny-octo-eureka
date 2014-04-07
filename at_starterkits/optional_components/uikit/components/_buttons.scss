@@ -1,91 +1,129 @@
 /**
- * Buttons.
+ * Buttons
+ * - applies to elements with class "button", includes styles for:
+ *   - input buttons
+ *   - anchor links styled as buttons
+ *   - drop buttons
+ *   - action link buttons
  */
+
+$button-text-align:              center;
+
+$button-text-color:              $text-color;
+$button-text-hover-color:        $text-color;
+
+$button-background-color:        lighten($text-background-color, 5%);
+$button-background-hover-color:  $text-background-color;
+
+$button-borders:                 true;
+$button-border-width:            $border-width;
+$button-border-style:            $border-style;
+$button-border-color:            $border-color;
+$button-border-radius:           $border-radius; // px value
+
+$button-highlights:              true; // false will remove text and box shadows, i.e. a more flat UI
 
 
 /* Buttons */
 .button {
-  //Cursor
   cursor: pointer;
-
-  // Text styles
-  text-align: center;
   text-decoration: none;
 
-  // Font
-  font-weight: bold;
+  text-align: $button-text-align;
+  font-weight: $font-weight-normal;
 
-  // Colours
-  color: #666;
-  background: #ebebeb;
-  border: 1px solid #ccc;
+  color: $button-text-color;
+  background: $button-background-color;
 
-  // Box model
-  padding: 0.3em 0.6em;
-  margin: 0 0 0 3px;
   width: auto;
   display: inline-block;
   position: relative;
+  margin: 0 3px 0 0; // LTR
 
-  // Border radius
-  @include border-radius(3px);
-
-  // Shadows
-  @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
-
-  // Transitions
+  @include output-rhythm(padding, $x-small $large);
+  @include border-radius($button-border-radius);
   @include transition(background-color, .15s, ease-in-out);
 
-  // Pseudo styles
-  &:hover,
-  &:focus {
-    color: #333;
-    background-color: #e8e8e8;
+  // Add border
+  @if ($button-borders == true) {
+    border: $button-border-width $button-border-style $button-border-color;
   }
 
-  &:active {
-    @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 0 inset);
+  // Add button highlight shadows
+  @if ($button-highlights == true) {
+    @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
+
+    &:active {
+      @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 0 inset);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken($button-background-color, 3%);
   }
 
   &[disabled] {
-    opacity: 0.8;
+    opacity: 0.7;
     cursor: default;
     @include box-shadow(none);
 
     &:hover {
-      color: #666;
+      color: darken($button-text-color, 2%);
     }
   }
 }
 
+[dir="rtl"] .button {
+  margin: 0 0 0 3px;
+}
+
+// Primary button
+.button--primary {
+  background: darken($button-background-color, 3%);
+}
+
 /* Drop buttons */
 .js .dropbutton-widget {
-  background-color: #fff;
-  border: 1px solid #ccc;
-
-  /* Border radius */
-  @include border-radius(3px);
-
-  &:hover {
-  }
+  background-color: $background-color;
+  border: $button-border-width $button-border-style $button-border-color;
+  @include border-radius($button-border-radius);
 }
 
-.dropbutton .dropbutton-action > * {
-  padding: 0.3em 0.6em;
-  white-space: nowrap;
+.js .dropbutton-wrapper {
+  display: block;
+  min-height: 3em;
+  position: relative;
 }
 
-.dropbutton .secondary-action {
-  border-top: 1px solid #e5e5e5;
-
+.dropbutton {
   input {
-    border: 0;
-    background: #fff;
+    text-align: left; // LTR
+  }
+
+  .dropbutton-action > * {
+    @include output-rhythm(padding, $x-small $large);
+    white-space: nowrap;
+  }
+
+  .secondary-action {
+    border-top: $button-border-width $button-border-style $button-border-color;
+
+    input {
+      border: 0;
+      background: $background-color;
+      width: 100%;
+
+      &:hover,
+      &:focus {
+        background-color: darken($button-background-color, 3%);
+      }
+    }
   }
 }
 
 .dropbutton-multiple .dropbutton {
-  border-right: 1px solid #e5e5e5;
+  border-right: $button-border-width $button-border-style $button-border-color;
 
  .dropbutton-action > * {
     margin-right: 0;
@@ -93,18 +131,48 @@
   }
 
   .dropbutton-action .button {
-    @include border-radius(3px 0 0 3px);
+    @include border-radius($button-border-radius 0 0 $button-border-radius);
   }
 }
 
-[dir="rtl"] .dropbutton-multiple .dropbutton {
-  border-left: 1px solid #e5e5e5;
-  border-right: 0 none;
 
-  .dropbutton-action > * {
-    margin-left: 0;
+[dir="rtl"] {
+  .dropbutton {
+    margin: 0 3px 0 0;
+
+    input {
+      text-align: right;
+    }
+  }
+
+  .dropbutton-multiple .dropbutton {
+    border-left: $button-border-width $button-border-style $button-border-color;;
+    border-right: 0;
+
+    .dropbutton-action > * {
+      margin-left: 0;
+    }
   }
 }
+
+
+
+/**
+ * Show buttons as links.
+ */
+button.link {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+label button.link {
+  font-weight: bold;
+}
+
 
 
 /**
@@ -115,29 +183,35 @@
   padding: 0;
   margin: 1em 0;
 }
+
 .action-links li {
   display: inline-block;
   margin: 0 0.3em;
 }
+
 .action-links li:first-child {
   margin-left: 0; /* LTR */
 }
+
 [dir="rtl"] .action-links li:first-child {
   margin-left: 0.3em;
   margin-right: 0;
 }
+
 .button-action {
   display: inline-block;
   line-height: 160%;
   padding: 0.2em 0.5em 0.3em;
   text-decoration: none;
 }
+
 .button-action:before {
   content: '+';
   font-weight: 900;
   margin-left: -0.1em; /* LTR */
   padding-right: 0.2em; /* LTR */
 }
+
 [dir="rtl"] .button-action:before {
   margin-left: 0;
   margin-right: -0.1em;

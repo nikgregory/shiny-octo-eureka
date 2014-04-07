@@ -571,6 +571,10 @@ function at_core_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
   }
 
+  // Add theme name class, using this for debugging in development since I switch
+  // themes a lot and need to know which one I am looking at, could be removed later on?
+  $variables['attributes']['class'][] = 'theme-name--' . drupal_html_class($theme);
+
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#main-content';
   if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
@@ -837,9 +841,13 @@ function at_core_preprocess_block(&$variables) {
 function at_core_preprocess_field(&$variables) {
   global $theme;
 
-  $variables['attributes']['class'] = str_replace('field-name-', 'field-name--', $variables['attributes']['class']);
-  $variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
-  $variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
+  /* Think about this later, means to put a class foreach taxonomy term that is unique so we can
+     add icons for specific terms
+  if ($variables['element']['#field_type'] == 'taxonomy_term_reference') {
+    foreach ($variables['items'] as $item_key => $item_value) {
+    }
+  }
+  */
 
   // Set variables for image fields.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
@@ -852,6 +860,7 @@ function at_core_preprocess_field(&$variables) {
 
         $caption_setting = at_core_theme_get_setting('settings.image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode, $theme);
         $image_count_setting = at_core_theme_get_setting('settings.image_count_' . $node_type . '_' . $entity_type . '_' . $view_mode, $theme);
+        $alignment_setting = at_core_theme_get_setting('settings.image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode, $theme);
 
         // Reset items array to first item only.
         if ($image_count_setting == 1) {
@@ -865,12 +874,12 @@ function at_core_preprocess_field(&$variables) {
             if (!empty($item['#image_style'])) {
               $style = entity_load('image_style', $item['#image_style']);
               $dimensions = array(
-                'width' => $item['#item']['width'],
-                'height' => $item['#item']['height'],
+                'width' => $item['#item']->width,
+                'height' => $item['#item']->height,
               );
               $style->transformDimensions($dimensions);
-              $variables['items'][$key]['#item']['image_style_width'] = $dimensions['width'];
-              $variables['items'][$key]['#item']['image_style_height'] = $dimensions['height'];
+              $variables['items'][$key]['#item']->image_style_width = $dimensions['width'];
+              $variables['items'][$key]['#item']->image_style_height = $dimensions['height'];
             }
             $variables['items'][$key]['#captions'] = TRUE;
           }
@@ -878,6 +887,15 @@ function at_core_preprocess_field(&$variables) {
       }
     }
   }
+
+  if (isset($alignment_setting)) {
+    $variables['attributes']['class'][] = 'field-align--' . $alignment_setting;
+  }
+
+  // This might be breaking the attributes system, need to reasses how we are modifying these classes.
+  $variables['attributes']['class'] = str_replace('field-name-', 'field-name--', $variables['attributes']['class']);
+  $variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
+  $variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
 }
 
 /**
@@ -896,32 +914,40 @@ function at_core_preprocess_breadcrumb(&$variables) {
   $variables['attributes']['class'][] = 'breadcrumb';
   $variables['attributes']['class'][] = 'clearfix';
   $variables['attributes']['role'][] = 'navigation';
+  $variables['title_attributes']['class'][] = 'visually-hidden';
 
   // Theme settings.
-  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
-    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) == 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) == 1) {
 
       // Show or hide the label.
-      if (at_core_theme_get_setting('settings.breadcrumb_label', $theme) === 1) {
-        $variables['title_attributes']['class'] = 'breadcrumb__title';
-      }
-      else {
-        $variables['title_attributes']['class'] = 'visually-hidden';
+      if (at_core_theme_get_setting('settings.breadcrumb_label', $theme) == 1) {
+        $variables['title_attributes']['class'][] = 'breadcrumb__title';
+
+        //$variables['title_attributes']['class'][] = 'visually-hidden-off';
+        $variables['title_attributes']['class'] = str_replace('visually-hidden', '', $variables['title_attributes']['class']);
       }
 
       // Show or hide the Home link.
-      if (at_core_theme_get_setting('settings.breadcrumb_home', $theme) === 0) {
+      if (at_core_theme_get_setting('settings.breadcrumb_home', $theme) == 0) {
         if (in_array('<a href="/">Home</a>', $variables['breadcrumb'])) {
           array_shift($variables['breadcrumb']);
         }
       }
 
       // Page title
-      if (at_core_theme_get_setting('settings.breadcrumb_title', $theme) === 1) {
-        //$variables['breadcrumb'][] = strip_tags(drupal_get_title());
+      if (at_core_theme_get_setting('settings.breadcrumb_title', $theme) == 1) {
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+          $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+          if (isset($title)) {
+            $variables['breadcrumb'][] = strip_tags($title);
+          }
+        }
       }
     }
   }
+
+  //kpr($variables);
 }
 
 // Check views preprocess functions we need.

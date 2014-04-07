@@ -20,9 +20,9 @@ body {
 }
 
 /**
- * Scale and line heigth set with Modular Scale and Vertical Rythm.
- * By default the base font size is 14px, line height 22px and
- * 44px set for the Modular Scale important font size.
+ * Scale and line heigth set with Modular Scale and Vertical Rhythm.
+ * By default the base font size is 16px, line height 24px and
+ * 48px set for the Modular Scale important font size.
  * ms(0) is medium, and we increment the scale up or down 1 and set
  * into variables, which are then processed by adjust-font-size-to()
  * to generate font sizes in em and set a relative line-height.
@@ -58,13 +58,17 @@ p {
   @include adjust-font-size-to($medium);
 }
 
+p,
+dl,
+multicol {
+  display: block;
+  @include output-rhythm(margin, $medium 0);
+}
+
 
 /* Links */
 a {
   text-decoration: none;
-
-  // Enable transitions on links.
-  //@include transition(background-color 100ms ease 25ms ease-out, color 100ms ease 25ms ease-out);
 
   &:link,
   &:visited {}
@@ -82,15 +86,27 @@ a {
 /* Lists */
 ul,
 ol {
-  margin: 0 0 $medium;
-  padding: 0 0 0 $large;
+  @include output-rhythm(margin, 0 0 $medium);
+  @include output-rhythm(padding, 0 0 0 $large); // LTR
   text-align: left; // LTR
 }
 
 [dir="rtl"] ul,
 [dir="rtl"] ol {
-  padding: 0 $large 0 0;
+  @include output-rhythm(padding, 0 $large 0 0);
   text-align: right;
+}
+
+dt {
+  font-weight: $font-weight-semibold;
+}
+
+dd {
+  @include output-rhythm(margin, 0 0 0 $medium); // LTR
+}
+
+[dir="rtl"] dd {
+  @include output-rhythm(margin, 0 $medium 0 0);
 }
 
 

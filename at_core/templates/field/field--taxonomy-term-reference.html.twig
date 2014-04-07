@@ -39,7 +39,7 @@
   <ul class="field__items"{{ content_attributes }}>
     {% for delta, item in items %}
       <li class="field__item--{{ delta }}"{{ item_attributes[delta] }}>
-        {{ item }}
+        <span>{{ item }}</span>
       </li>
     {% endfor %}
   </ul>
