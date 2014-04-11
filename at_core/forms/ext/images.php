@@ -19,15 +19,13 @@ $node_types = node_type_get_types();
 
 // View or "Display modes", the search display mode is still problematic so we will exclude it for now,
 // please see: https://drupal.org/node/1166114
-$node_view_modes = entity_get_view_modes('node');
+//$node_view_modes = \Drupal::entityManager()->getViewModeOptions('node', TRUE);
+$node_view_modes = \Drupal::entityManager()->getViewModes('node');
 
 // Unset unwanted view modes
 unset($node_view_modes['rss']);
 unset($node_view_modes['search_index']);
 unset($node_view_modes['search_result']);
-
-
-//kpr($node_view_modes);
 
 $form['images'] = array(
   '#type' => 'details',

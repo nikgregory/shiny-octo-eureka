@@ -12,7 +12,7 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
 
   // View or "Display modes", the search display mode is still problematic so we will exclude it for now,
   // please see: https://drupal.org/node/1166114
-  $node_view_modes = entity_get_view_modes('node');
+  $node_view_modes = \Drupal::entityManager()->getViewModes('node');
 
   // Unset unwanted view modes
   unset($node_view_modes['rss']);
