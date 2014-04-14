@@ -10,15 +10,11 @@ namespace Drupal\at_core\Library;
 // Methods to return libraries data
 class SystemLibraries {
 
-  protected $data;
+  //protected $data;
+  //protected $library;
 
   /**
-   * Constructs a library.
-   *
-   * @param string $theme
-   *  The theme name
-   * @param string $extension
-   *  The module or theme whose library info data we want
+   * Construct
    */
   public function __construct() {
     $library_discovery = \Drupal::service('library.discovery');

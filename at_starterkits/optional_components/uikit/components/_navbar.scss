@@ -1,0 +1,186 @@
+/**
+ * Navigation.
+ *  - navbar menu
+ *  - drop menu
+ */
+
+$navbar-menu-background: $background-color;
+
+$navbar-item-border-width:  $border-width;
+$navbar-item-border-style:  $border-style;
+$navbar-item-border-color:  $border-color;
+$navbar-item-border-radius: $border-radius;
+
+$navbar-item-background-color: $text-background-color;
+
+// Simple handling for nested menus in the navbar without JS.
+// This only really works for two levels, with more levels you could
+// style it, however I would suggest using the Flexnav plugin that ships
+// with this theme to style the menu and comment out this file in _styles.scss
+
+@media #{$mobile} {
+
+  #nav {
+    display: block;
+    opacity: 1;
+    height: auto;
+    background: #ddd;
+    margin-top: 2.5em;
+    @include transition(all, 1s, ease-in);
+
+    &.menu_closed ul.menu {
+      position: absolute;
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  .navbar-menu {
+    padding: 0;
+    position: absolute;
+    right: 0.6em;
+    top: 0.6em;
+    z-index: 99;
+
+    &.has-title {
+      position: static;
+      right: auto;
+      top: auto;
+
+      .navbar-menu__title {
+        float: none;
+        @include adjust-font-size-to($medium);
+
+        a {
+          width: auto;
+
+          &:after {
+            float: right; // LTR
+          }
+        }
+      }
+
+      #nav {
+        margin-top: 0;
+      }
+    }
+
+    .navbar-menu__title {
+      float: right; // LTR
+      background: #333;
+      font-size: 1em;
+      height: 2.5em;
+      line-height: normal;
+
+      a {
+        color: #fff;
+        display: block;
+        //line-height: normal;
+        text-decoration: none;
+        height: 2.5em;
+        width: 2.5em;
+        padding: 0.5em;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+
+        &:after {
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: 80% auto;
+          content: "";
+          display: block;
+          width: 1.5em;
+          height: 1.5em;
+          background-image: url("images/hamburger.svg");
+        }
+      }
+    }
+  }
+
+  @at-root .no-svg .navbar-menu .navbar-menu__title a:after {
+    background-image: url("images/hamburger.png");
+  }
+
+
+  .contextual-render-processed {
+    display: none !important;
+  }
+
+  .navbar-menu__menu {
+    a {
+      @include output-rhythm(padding-right, 12px);
+    }
+  }
+
+}
+
+
+@media #{$narrow_wide} {
+
+  #nav {
+    display: block !important;
+  }
+
+  .navbar-menu__title {
+    @include visually-hidden;
+  }
+
+  .navbar-menu__menu {
+    background: darken($navbar-item-background-color, 5%);
+
+    .menu {
+      position: relative;
+
+      > li {
+        text-align: center;
+        z-index: 100;
+
+        a {
+         @include transition(all, .2s, ease-in);
+        }
+      }
+
+      li {
+        display: inline-block;
+        position: relative;
+        @include output-rhythm(min-width, 192px);
+
+        ul {
+          position: absolute;
+          overflow: hidden;
+          height: 0;
+          opacity: 0;
+          background: $navbar-menu-background;
+          @include transition(height, .3s, ease-in);
+
+          li {
+            text-align: left; // LTR
+          }
+        }
+
+        &:hover ul,
+        &:focus ul {
+          display: block;
+          opacity: 1;
+          height: auto;
+        }
+      }
+
+      a {
+        @include output-rhythm(padding, $xx-small $large);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+

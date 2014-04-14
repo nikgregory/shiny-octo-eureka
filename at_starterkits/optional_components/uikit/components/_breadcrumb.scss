@@ -2,8 +2,18 @@
  * Breadcrumb.
  */
 
+$breadcrumb-link-color:               $link-color;
+$breadcrumb-link-active-color:        $breadcrumb-link-color;
+$breadcrumb-link-hover-color:         $breadcrumb-link-color;
+
+$breadcrumb-link-visited-color:       $link-visited-color;
+$breadcrumb-link-visited-hover-color: $breadcrumb-link-visited-color;
+
+$breadcrumb-seperator-color:          $border-color;
+
+
 .breadcrumb {
-  margin: $medium 0;
+  @include output-rhythm(margin, $medium 0);
 
   &__title {
     font-size: inherit;
@@ -13,32 +23,54 @@
   ol,
   li {
     display: inline-block;
-  }
-
-  ol {
     margin: 0;
     padding: 0;
   }
 
   li {
     @include no-bullets;
-    margin: 0;
-    padding: 0;
 
     &:before {
-      content: "\f054"; // LTR, fa-chevron-right
+      content: "\f105";  // fa-angle-right
       font-family: FontAwesome, sans-serif;
-      font-size: $small;
+      color: $breadcrumb-seperator-color;
       display: inline-block;
-      padding: 0 4px 0 1px;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      @include output-rhythm(width, $medium);
     }
 
     &:first-child:before {
       content: none;
     }
   }
+
+  a {
+    //color: $breadcrumb-link-color;
+    //text-decoration: none;
+
+    &:link,
+    &:visited {
+      //color: $breadcrumb-link-visited-color;
+    }
+
+    &:active,
+    &.active {
+      //color: $breadcrumb-link-active-color;
+    }
+
+    &:hover,
+    &:focus {
+      //color: $breadcrumb-link-hover-color;
+      //text-decoration: underline;
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .breadcrumb li:before {
+    content: "\f104"; // RTL, fa-angle-left
+  }
 }
 
-[dir="rtl"] .breadcrumb li:before {
-  content: "\f053"; // RTL, fa-chevron-left
-}
+

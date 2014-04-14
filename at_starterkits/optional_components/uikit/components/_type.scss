@@ -68,16 +68,22 @@ multicol {
 
 /* Links */
 a {
+  //color: $link-color;
   text-decoration: none;
 
   &:link,
-  &:visited {}
+  &:visited {
+    //color: $link-visited-color;
+  }
 
   &:active,
-  &.active {}
+  &.active {
+    //color: $link-active-color;
+  }
 
   &:hover,
   &:focus {
+    //color: $link-hover-color;
     text-decoration: underline;
   }
 }
@@ -88,13 +94,11 @@ ul,
 ol {
   @include output-rhythm(margin, 0 0 $medium);
   @include output-rhythm(padding, 0 0 0 $large); // LTR
-  text-align: left; // LTR
 }
 
 [dir="rtl"] ul,
 [dir="rtl"] ol {
   @include output-rhythm(padding, 0 $large 0 0);
-  text-align: right;
 }
 
 dt {
@@ -130,19 +134,4 @@ dd {
 :before {
   @include font-smoothing();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

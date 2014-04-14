@@ -14,6 +14,15 @@ body {
   @include box-sizing(border-box);
 }
 
+
+/**
+ * Root page wrapper, we set relative to make it easier to use absolute positioning and ensure
+ * items do not go under the toolbar or other items in the page-top region.
+ */
+.page-root {
+  position: relative;
+}
+
 /**
  * Page Rows - these match the Site Builder layout.
  * You can find your layouts page row and region classes by viewing the theme

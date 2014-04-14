@@ -8,9 +8,9 @@ require "susy"
 
 # Directory paths
 # -----------------------------------------------------------------------------
-css_dir = "../"
 sass_dir = "/"
-images_dir = "images"
+css_dir = "../css/"
+images_dir = "../css/images"
 
 
 # SASS core

@@ -94,6 +94,8 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
 * An associative array containing:
 * - element: Structured array data for a menu link.
 */
+
+/* Remove when menus become twig templates.
 function at_core_menu_link(array $variables) {
   global $theme;
   $element = $variables['element'];
@@ -121,8 +123,33 @@ function at_core_menu_link(array $variables) {
   }
 
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
-  return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+  return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
 }
+*/
+
+/* Uncomment when menu functions become twig templates.
+function at_core_preprocess_menu_link(&$variables) {
+  global $theme;
+
+  // Add extra classes for menu depth and mlid (menu id).
+  if (!empty($variables['element']['#original_link']->depth)) {
+    //dsm($variables);
+    $variables['attributes']['class'][] = 'menu-depth--' . $variables['element']['#original_link']->depth;
+  }
+  if (!empty($variables['element']['#original_link']->mlid)) {
+    $variables['attributes']['class'][] = 'menu-item__' . $variables['element']['#original_link']->mlid;
+  }
+
+  // Remove link attribute title (tooltips).
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+      if (at_core_theme_get_setting('settings.unset_menu_titles', $theme) === 1) {
+        unset($variables['element']['#localized_options']['attributes']['title']);
+      }
+    }
+  }
+}
+*/
 
 
 /**
@@ -232,7 +259,21 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   if (in_array('block__system_menu_block', $suggestions)) {
     array_splice($suggestions, 1, 0, 'block__menu');
   }
+
+  // Get the region for each block from config and provide a plugin id / region suggestion.
+  $config = \Drupal::config('block.block.' . $variables['elements']['#block']->id);
+  $region = $config->get('region');
+  if (!empty($region)) {
+    $suggestions[] = 'block__' . $variables['elements']['#plugin_id'] . '__' . $region;
+
+    // Provide one more special case for the navbar region.
+    if (in_array('block__menu', $suggestions) && $region == 'navbar') {
+      $suggestions[] = 'block__menu__navbar';
+    }
+  }
 }
+
+
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -321,6 +362,19 @@ function at_core_page_alter(&$page) {
       'weight' => CSS_COMPONENT,
     );
   }
+
+  // Attach Menu Toggle library
+  if (at_core_theme_get_setting("settings.theme_library_at_menu_toggle", $theme) === 1) {
+    $page['#attached']['library'][] = 'at_core/at.menu_toggle';
+  }
+
+  //$page['#attached']['library'][] = 'at_core/at.flexnav';
+
+  // ##################################################################################################
+  // TODO - automated loading for theme trail libraries, the menu toggle is hard coded for now (above).
+  // ##################################################################################################
+
+
 
   // Attach the selected layout.
   if (at_core_theme_get_setting('settings.layouts_enable', $theme) === 1) {
@@ -631,6 +685,7 @@ function at_core_preprocess_page(&$variables) {
         // Add a layout id to the page wrapper.
         $variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($page['#selected_plugin']);
         $variables['attributes']['class'][] = 'page-layout-variant--' . drupal_html_class($selected_layout);
+        $variables['attributes']['class'][] = 'page-root';
 
         $layout_attr = new LayoutAttributes($page['#selected_provider'], $page['#selected_plugin'], $selected_layout, $variables['#active_regions']);
         $row_attributes = $layout_attr->rowAttributes();
@@ -812,6 +867,7 @@ function at_core_preprocess_block(&$variables) {
   $variables['html_element'] = 'div';
   if (!empty($variables['label'])) {
     $variables['html_element'] = 'section';
+    $variables['attributes']['class'][] = 'has-title';
     $variables['title_attributes']['class'][] = 'block__title';
   }
 
@@ -830,6 +886,8 @@ function at_core_preprocess_block(&$variables) {
       }
     }
   }
+
+  //kpr($variables);
 }
 
 /**

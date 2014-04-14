@@ -33,8 +33,8 @@ regions:
   page_top: 'Page top'
   page_bottom: 'Page bottom'
 features:
-    - 'node_user_picture'
-    - 'comment_user_picture'
-    - 'comment_user_verification'
-    - 'favicon'
-    - 'logo'
+  - 'node_user_picture'
+  - 'comment_user_picture'
+  - 'comment_user_verification'
+  - 'favicon'
+  - 'logo'

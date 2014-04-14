@@ -32,13 +32,10 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['#attached'] = array(
     'library' => array(
       'system' => 'core/drupal.machine-name',
-    ),
-    'js' => array(
-      $at_core_path . '/scripts/slimbox2/slimbox2.js',
+      'at_core' => 'at_core/at.slimbox2',
     ),
     'css' => array(
       $at_core_path . '/stylesheets/css/appearance.css',
-      $at_core_path . '/stylesheets/css/slimbox2/slimbox2.css',
     ),
   );
 

@@ -19,12 +19,31 @@ $browser-minimum-versions: (
 
 
 // Breakpoints
-// Defaults par with all AT provided Layouts and Breakpoints module
-// config (e.g. for Responsive Picture module).
-// Useage: @media #{$narrow} {}
+//
+// These breakpoints use ems, which mean they are dependant on the base font size,
+// so any pixel equivalents stated here assume base font size of 16px. Change them
+// to suit your requirements.
+//
+//   $mobile      - 0 to 45em, contain styles, mobile/small screens only.
+//   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint for phablets/small tablets.
+//   $narrow-wide - 45em (720px) and up.
+//   $wide        - 60em (960px) and up.
+//   $huge        - 120em (1920px) and up, for large monitors with big resolution.
+//
+// Schema:
+//
+// |-- $mobile -->|
+//                |<-- $narrow -->|
+//                |--- $narrow wide ------------------------------------------------->
+//                                |--- $wide ---------------------------------------->
+//                                                              |--- $huge ---------->
+//
+$mobile      : "all and (max-width: 45em)";
 $narrow      : "all and (min-width: 45em) and (max-width: 60em)";
-$narrow-wide : "all and (min-width: 45em)"; // Allow styles to cascade into wide.
+$narrow-wide : "all and (min-width: 45em)";
 $wide        : "all and (min-width: 60em)";
+$huge        : "all and (min-width: 120em)";
+
 
 
 // Typography
@@ -33,17 +52,15 @@ $wide        : "all and (min-width: 60em)";
 //  https://github.com/chriseppstein/compass/blob/1.0.0.alpha.19/core/stylesheets/compass/typography/_vertical_rhythm.scss
 //  -- link to modular scale stuff--
 //
-// MS provides the scale, while VR sets adjusted font sizes, border
-// thickness and line heights.
-// WARNING: I have encountered bugs in Compass adjust-font-size-to
-// when em is used, this mixin is used to set line-height for headings
-// in _type.scss.
+// MS provides the scale, while VR sets adjusted font sizes and line heights.
+// px are used here, these are converted to rem with px fallback (IE8 support)
+// when called using one of Vertical Rhythms mixins or functions.
 $base-font-size:      16px;
 $base-line-height:    24px;
 $important-font-size: 48px;
 
 
-// TODO: revisit later for Compass support for px fallbacks.
+// Set the vertical rhythm unit, we use rem by default.
 $rhythm-unit: 'rem';
 
 
@@ -79,6 +96,7 @@ $large:      ms(1);
 $medium:     ms(0);
 $small:      ms(-1);
 $x-small:    ms(-2);
+$xx-small:   ms(-3);
 
 
 // Font Weights
@@ -113,12 +131,11 @@ $default-margin:  0;
 
 
 // Borders
-$border-radius: 4px;
 $border-width:  1px;
 $border-style:  solid;
+$border-color:  #ccc;
+$border-radius: 4px;
 
-
-// Colors
 
 // Main colors
 $background-color: #fff;
@@ -132,34 +149,38 @@ $text-color:            #000;
 $text-background-color: #eee;
 
 
-// Border colors
-$border-color: #ccc;
+// Link colors
+$link-color:               #00e;
+$link-hover-color:         $link-color;
+$link-active-color:        $link-color;
+$link-visited-color:       #55198b;
+$link-visited-hover-color: $link-visited-color;
 
 
-// Success
+// Success colors
 $success-text-color:       #325e1c;
 $success-border-color:     #c9e1bd;
 $success-background-color: #f3faef;
 
 
-// Warning
+// Warning colors
 $warning-text-color:       #734c00;
 $warning-border-color:     #f4daa6;
 $warning-background-color: #fdf8ed;
 
 
-// Error
+// Error colors
 $error-text-color:         #a51b00;
 $error-border-color:       #f9c9bf;
 $error-background-color:   #fcf4f2;
 
 
-// Zebra
+// Zebra striping colors
 $odd-color:  transparent;
 $even-color: $text-background-color;
 
 
-// Global unpublished background
+// Unpublished status background color
 $unpublished-color: #fff4f4;
 
 

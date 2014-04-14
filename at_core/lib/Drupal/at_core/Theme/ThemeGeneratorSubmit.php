@@ -106,7 +106,7 @@ class ThemeGeneratorSubmit {
 
           // UI Kit.
           if ($uikit == 1) {
-            $recursiveCopy->recursiveCopy($uikit_dir_path, "$target/css/uikit");
+            $recursiveCopy->recursiveCopy($uikit_dir_path, "$target/uikit");
           }
 
           // Color.

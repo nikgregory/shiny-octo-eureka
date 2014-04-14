@@ -35,20 +35,25 @@ $flow-from: from($flow-direction);
 // Breakpoints
 //
 // These breakpoints use ems, which mean they are dependant on the base font size,
-// so any pixel equivalents stated here assume base font size of 16px. Change then
+// so any pixel equivalents stated here assume base font size of 16px. Change them
 // to suit your requirements.
 //
-//   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint.
-//   $narrow-wide - 45em (720px) and up, cascading breakpoint.
-//   $wide        - 60em (960px) and up, cascading breakpoint.
+//   $mobile      - 0 to 45em, contain styles, mobile/small screens only.
+//   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint for phablets/small tablets.
+//   $narrow-wide - 45em (720px) and up.
+//   $wide        - 60em (960px) and up.
+//   $huge        - 120em (1920px) and up, for large monitors with big resolution.
 //
 // Schema:
 //
-//   |<-- 45em         60em -->|
-//   |<-- narrow ------------->|
-//   |<-- narrow wide ------------------------------------------------------->
-//                             |<--- wide ----------------------------------->
+// |-- $mobile -->|
+//                |<-- $narrow -->|
+//                |--- $narrow wide ------------------------------------------------->
+//                                |--- $wide ---------------------------------------->
+//                                                              |--- $huge ---------->
 //
+$mobile      : "all and (max-width: 45em)";
 $narrow      : "all and (min-width: 45em) and (max-width: 60em)";
-$narrow-wide : "all and (min-width: 45em)"; // Allow layout to cascade into wide.
+$narrow-wide : "all and (min-width: 45em)";
 $wide        : "all and (min-width: 60em)";
+$huge        : "all and (min-width: 120em)";

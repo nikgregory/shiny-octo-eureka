@@ -7,7 +7,7 @@ $table-cell-borders:     false; // set to true if you want borders on every cell
 $table-border-color:     $border-color;
 
 // thead
-$thead-background-color: darken($text-background-color, 3%);
+$thead-background-color: $text-background-color;
 $thead-text-color:       $text-color;
 
 // row striping
@@ -29,9 +29,7 @@ table {
   @include output-rhythm(margin, $medium 0);
   padding: 0;
   width: 100%;
-  border-collapse: collapse;
   border: $border-width $border-style $border-color;
-  border-spacing: 0;
 
   // Prevent the sticky header from hiding behind other content.
   &.sticky-header {
@@ -138,7 +136,7 @@ th {
 // td, th.
 td,
 th {
-  @include output-rhythm(padding, $small);
+  @include output-rhythm(padding, $xx-small);
   vertical-align: middle;
 
   @if $table-cell-borders == false {

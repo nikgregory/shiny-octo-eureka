@@ -15,20 +15,18 @@ $button-text-hover-color:        $text-color;
 $button-background-color:        lighten($text-background-color, 5%);
 $button-background-hover-color:  $text-background-color;
 
-$button-borders:                 true;
 $button-border-width:            $border-width;
 $button-border-style:            $border-style;
 $button-border-color:            $border-color;
-$button-border-radius:           $border-radius; // px value
-
-$button-highlights:              true; // false will remove text and box shadows, i.e. a more flat UI
+$button-border-radius:           $border-radius;
 
 
 /* Buttons */
 .button {
   cursor: pointer;
-  text-decoration: none;
 
+  line-height: normal;
+  text-decoration: none;
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
 
@@ -40,23 +38,13 @@ $button-highlights:              true; // false will remove text and box shadows
   position: relative;
   margin: 0 3px 0 0; // LTR
 
-  @include output-rhythm(padding, $x-small $large);
+  border: $button-border-width $button-border-style $button-border-color;
+
+  @include output-rhythm(padding, $xx-small $medium);
   @include border-radius($button-border-radius);
   @include transition(background-color, .15s, ease-in-out);
+  @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
 
-  // Add border
-  @if ($button-borders == true) {
-    border: $button-border-width $button-border-style $button-border-color;
-  }
-
-  // Add button highlight shadows
-  @if ($button-highlights == true) {
-    @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
-
-    &:active {
-      @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 0 inset);
-    }
-  }
 
   &:hover,
   &:focus {
@@ -72,16 +60,19 @@ $button-highlights:              true; // false will remove text and box shadows
       color: darken($button-text-color, 2%);
     }
   }
+
+  // RTL
+  @at-root [dir="rtl"] .button {
+    margin: 0 0 0 3px;
+  }
 }
 
-[dir="rtl"] .button {
-  margin: 0 0 0 3px;
-}
 
 // Primary button
 .button--primary {
   background: darken($button-background-color, 3%);
 }
+
 
 /* Drop buttons */
 .js .dropbutton-widget {
@@ -92,8 +83,14 @@ $button-highlights:              true; // false will remove text and box shadows
 
 .js .dropbutton-wrapper {
   display: block;
-  min-height: 3em;
+  min-height: 2em;
+  margin-right: 3px; // LTR
   position: relative;
+}
+
+[dir="rtl"] .js .dropbutton-wrapper {
+  margin-right: 0;
+  margin-left: 3px;
 }
 
 .dropbutton {
@@ -102,8 +99,9 @@ $button-highlights:              true; // false will remove text and box shadows
   }
 
   .dropbutton-action > * {
-    @include output-rhythm(padding, $x-small $large);
     white-space: nowrap;
+    line-height: normal; // some drop buttons are links
+    @include output-rhythm(padding, $xx-small $medium);
   }
 
   .secondary-action {
@@ -120,8 +118,20 @@ $button-highlights:              true; // false will remove text and box shadows
       }
     }
   }
+
+  // RTL
+  @at-root [dir="rtl"] {
+    .dropbutton {
+      margin: 0 3px 0 0;
+
+      input {
+        text-align: right;
+      }
+    }
+  }
 }
 
+// Dropbutton Multiple
 .dropbutton-multiple .dropbutton {
   border-right: $button-border-width $button-border-style $button-border-color;
 
@@ -133,28 +143,19 @@ $button-highlights:              true; // false will remove text and box shadows
   .dropbutton-action .button {
     @include border-radius($button-border-radius 0 0 $button-border-radius);
   }
-}
 
+  // RTL
+  @at-root [dir="rtl"] {
+    .dropbutton-multiple .dropbutton {
+      border-left: $button-border-width $button-border-style $button-border-color;;
+      border-right: 0;
 
-[dir="rtl"] {
-  .dropbutton {
-    margin: 0 3px 0 0;
-
-    input {
-      text-align: right;
-    }
-  }
-
-  .dropbutton-multiple .dropbutton {
-    border-left: $button-border-width $button-border-style $button-border-color;;
-    border-right: 0;
-
-    .dropbutton-action > * {
-      margin-left: 0;
+      .dropbutton-action > * {
+        margin-left: 0;
+      }
     }
   }
 }
-
 
 
 /**
@@ -174,47 +175,66 @@ label button.link {
 }
 
 
-
 /**
- * Styles for link buttons and action links.
+ * Styles for link buttons and action links. TODO.
  */
+#block-atblocksmenuactions {
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    @include no-bullets;
+  }
+}
+
 .action-links {
   list-style: none;
   padding: 0;
-  margin: 1em 0;
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    display: inline-block;
+    margin: 0 $small;
+
+    &:first-child {
+      margin-left: 0; /* LTR */
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .action-links li:first-child {
+    margin-left: $small;
+    margin-right: 0;
+  }
 }
 
-.action-links li {
-  display: inline-block;
-  margin: 0 0.3em;
-}
 
-.action-links li:first-child {
-  margin-left: 0; /* LTR */
-}
-
-[dir="rtl"] .action-links li:first-child {
-  margin-left: 0.3em;
-  margin-right: 0;
-}
-
+// Action button
 .button-action {
-  display: inline-block;
-  line-height: 160%;
-  padding: 0.2em 0.5em 0.3em;
-  text-decoration: none;
+  &:before {
+    content: '\f067';
+    font-family: FontAwesome, sans-serif;
+    font-size: $small;
+    display: inline-block;
+    padding: 0 4px 0 0;
+    vertical-align: middle;
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .button-action:before {
+    padding: 0 0 0 4px;
+  }
 }
 
-.button-action:before {
-  content: '+';
-  font-weight: 900;
-  margin-left: -0.1em; /* LTR */
-  padding-right: 0.2em; /* LTR */
-}
 
-[dir="rtl"] .button-action:before {
-  margin-left: 0;
-  margin-right: -0.1em;
-  padding-left: 0.2em;
-  padding-right: 0;
-}
+
+
+
+
+
+
+
+
+
+
+
+

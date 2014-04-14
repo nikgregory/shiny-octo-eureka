@@ -3,9 +3,9 @@ at.window_size:
   version: 1.1
   css:
     component:
-      scripts/window-size/window-size.css: {}
+      libraries/window-size/window-size.css: {}
   js:
-    scripts/window-size/window-size.js: {}
+    libraries/window-size/window-size.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -16,3 +16,45 @@ at.ie9js:
   version: 2.1
   js:
     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+
+# Menu toggle
+at.menu_toggle:
+  version: 1.0
+  js:
+    libraries/menu-toggle/menu-toggle.js: {}
+  dependencies:
+    - core/jquery
+    - core/matchmedia
+
+# Flexnav
+#at.flexnav:
+#  version: 1.0
+#  css:
+#    component:
+#      libraries/flexnav/flexnav.css: {}
+#  js:
+#    libraries/flexnav/flexnav.js: {}
+
+# Matchmedia AddListener
+at.addListener:
+  version: 1.0
+  js:
+    libraries/matchMediaaddListener/matchMedia.addListener.js: {}
+  dependencies:
+   - core/matchmedia
+
+# Scalefix
+at.scalefix:
+  version: 1.0
+  js:
+    libraries/scalefix/scalefix.js: {}
+
+
+# Slimbox
+at.slimbox2:
+  version: 2.0
+  css:
+    component:
+      libraries/slimbox2/css/slimbox2.css: {}
+  js:
+    libraries/slimbox2/slimbox2.js: {}
