@@ -68,9 +68,23 @@ $button-border-radius:           $border-radius;
 }
 
 
+// Extend only class for primary, action button and "publish" dropbutton styles,
+// or for any other button that needs highlighting on the page.
+%highlight_button {
+  color: #fff;
+  background: #9DC44D;
+  border-color: #5B8829;
+
+  &:hover,
+  &:focus {
+    background-color: darken(#9DC44D, 10%);
+  }
+}
+
 // Primary button
 .button--primary {
-  background: darken($button-background-color, 3%);
+  // Set distinct colors.
+  @extend %highlight_button;
 }
 
 
@@ -144,6 +158,13 @@ $button-border-radius:           $border-radius;
     @include border-radius($button-border-radius 0 0 $button-border-radius);
   }
 
+  .publish {
+    .button {
+      // Set distinct colors.
+      @extend %highlight_button;
+    }
+  }
+
   // RTL
   @at-root [dir="rtl"] {
     .dropbutton-multiple .dropbutton {
@@ -210,6 +231,15 @@ label button.link {
 
 // Action button
 .button-action {
+
+  // Set distinct colors.
+  @extend %highlight_button;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
   &:before {
     content: '\f067';
     font-family: FontAwesome, sans-serif;

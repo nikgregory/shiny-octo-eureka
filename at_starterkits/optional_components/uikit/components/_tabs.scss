@@ -1,14 +1,8 @@
 /**
  * Tabs.
- *  - primary and secondary tabs
+ *  - Implimentation of tabbed boxes
  *  - other tab modules or implimentation such as Quicktabs
- *
- * TODO: consider a cleaner simpler style as a default, and change this file name to local-tasks(?), local tasks is not a "tabbed UI"
- * in the classic sense, calling them "tabs" is a Drupalism and should be deprecated.
- * We will have a tabbed UI style, but for real tabs, as in a JS driven tabs.
  */
-
-$tabs-alignment:              left;
 
 $tab-text-color:              $text-color;
 $tab-text-hover-color:        $text-color;
@@ -16,118 +10,132 @@ $tab-text-active-color:       $text-color;
 
 $tab-background-color:        lighten($text-background-color, 5%);
 $tab-background-hover-color:  $text-background-color;
-$tab-background-active-color: $text-background-color; // $tabs-as-tabs active tab will always be the page background.
+$tab-background-active-color: $text-background-color;
 
 $tab-border-width:            $border-width;
 $tab-border-style:            $border-style;
 $tab-border-color:            $border-color;
-$tab-border-radius:           $border-radius; // px value
+$tab-border-radius:           $border-radius;
 
 
-/* Local task tabs, e.g. node View Edit Delete etc */
-.local-tasks--menu {
+/*
+
+TODO: decided on a basic implimentation, make it generic enough to use for quicktabs
+and other modules as well as simple html in a block or node.
+
+Potential implimentation of tabbed boxes using sections and :target in CSS3 only,
+possible with small helper JS to smooth things over?
+
+SEE: http://blogs.sitepointstatic.com/examples/tech/css3-target/tabs.html
+
+I would prefer a dl/dt/dd structure like Foundation.
+
+
+<article class="tabs">
+
+	<section id="tab1">
+		<h2><a href="#tab1">Tab 1</a></h2>
+		<p>This content appears on tab 1.</p>
+	</section>
+
+	<section id="tab2">
+		<h2><a href="#tab2">Tab 2</a></h2>
+		<p>This content appears on tab 2.</p>
+	</section>
+
+	<section id="tab3">
+		<h2><a href="#tab3">Tab 3</a></h2>
+		<p>This content appears on tab 3.</p>
+	</section>
+
+</article>
+*/
+
+
+/*
+article.tabs {
+  display: block;
+  height: 15em;
+  margin: 2em auto;
+  position: relative;
+  width: 40em;
+}
+
+article.tabs section {
+  background-color: #DDDDDD;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  display: block;
+  height: 12em;
+  left: 0;
+  padding: 10px 20px;
+  position: absolute;
+  top: 1.8em;
+  z-index: 0;
+}
+
+article.tabs section:first-child {
+  z-index: 1;
+}
+
+article.tabs section h2 {
+  background-color: #DDDDDD;
+  border-radius: 5px 5px 0 0;
+  color: #999999;
+  font-size: 1em;
+  font-weight: normal;
+  height: 1.8em;
+  left: 10px;
+  margin: 0;
   padding: 0;
-  list-style: none;
-  @include output-rhythm(margin, $medium 0);
-
-  // Using attribute selectors adds specificity, so normal ul padding
-  // overrides .tabs padding and margin etc.
-  @at-root {
-    [dir="rtl"] .local-tasks--menu {
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  li {
-    display: inline-block;
-  }
-
-  a {
-    display: block;
-    line-height: 1;
-  }
+  position: absolute;
+  top: -1.8em;
+  width: 120px;
 }
 
-
-// Primary Tabs
-.local-tasks__primary {
-  border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-
-  li {
-    margin-bottom: -1px;
-
-    &:first-child a {
-      @include border-radius($tab-border-radius 0 0 0); // LTR
-    }
-
-    &:last-child a {
-      @include border-radius(0 $tab-border-radius 0 0); // LTR
-    }
-  }
-
-  a {
-    color: $tab-text-color;
-    background: $tab-background-color;
-    border: $tab-border-width $tab-border-style $tab-border-color;
-    margin-right: -1px;
-
-    @include output-rhythm(padding, $xx-small $medium);
-    @include transition(background-color, .15s, ease-in-out);
-    @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
-
-    &:hover,
-    &:focus {
-      color: $tab-text-hover-color;
-      background: $tab-background-hover-color;
-      text-decoration: none;
-    }
-
-    &.active {
-      color: $tab-text-active-color;
-      background: none;
-      border-bottom-color: $background-color;
-
-      &:hover,
-      &:focus {
-        color: $tab-text-hover-color;
-        background: none;
-      }
-    }
-  }
-
-  @at-root [dir="rtl"] .local-tasks__primary {
-    a {
-      margin-left: -1px;
-      margin-right: 0;
-    }
-
-    li:first-child a {
-      margin-left: -1px;
-      @include border-radius(0 $tab-border-radius 0 0);
-    }
-
-    li:last-child a {
-      @include border-radius($tab-border-radius 0 0 0);
-    }
-  }
+article.tabs section:nth-child(2) h2 {
+  left: 132px;
 }
 
-
-// Secondary tabs
-.local-tasks__secondary {
-  li {}
-
-  a {
-    @include output-rhythm(padding, $x-small $medium);
-
-    &.active {}
-    &:hover,
-    &:focus {}
-  }
-
-  @at-root [dir="rtl"] .local-tasks__secondary li {
-    @include output-rhythm(padding, $medium 0 0 $medium);
-  }
+article.tabs section:nth-child(3) h2 {
+  left: 254px;
 }
+
+article.tabs section h2 a {
+  color: inherit;
+  display: block;
+  line-height: 1.8em;
+  outline: 0 none;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+article.tabs section, article.tabs section h2 {
+  transition: all 500ms ease 0s;
+}
+
+article.tabs section:target, article.tabs section:target h2 {
+  background-color: #FFFFFF;
+  color: #333333;
+  z-index: 2;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -38,11 +38,11 @@ $browser-minimum-versions: (
 //                                |--- $wide ---------------------------------------->
 //                                                              |--- $huge ---------->
 //
-$mobile      : "all and (max-width: 45em)";
-$narrow      : "all and (min-width: 45em) and (max-width: 60em)";
-$narrow-wide : "all and (min-width: 45em)";
-$wide        : "all and (min-width: 60em)";
-$huge        : "all and (min-width: 120em)";
+$mobile      : "(max-width: 60em)";
+$narrow      : "(min-width: 45em) and (max-width: 60em)";
+$narrow-wide : "(min-width: 45em)";
+$wide        : "(min-width: 60em)";
+$huge        : "(min-width: 120em)";
 
 
 

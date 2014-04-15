@@ -62,6 +62,9 @@ body {
 .page-row__footer {}
 
 
+[class*="page-row__"]:not(.page-row__navbar) li a:after {
+  content: "";
+}
 
 
 /* A better looking default horizontal rule */

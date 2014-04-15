@@ -2,6 +2,8 @@
  * Navigation.
  *  - navbar menu
  *  - drop menu
+ *
+ * Maybe dependant on the Menu twig patch: https://drupal.org/node/1898478
  */
 
 $navbar-menu-background: $background-color;
@@ -114,12 +116,41 @@ $navbar-item-background-color: $text-background-color;
     a {
       @include output-rhythm(padding-right, 12px);
     }
+
+    .menu li.expanded li > a:before {
+      font-family: FontAwesome, sans-serif;
+      content: "\f148";
+      float: left; // LTR
+      padding: 3px 3px 0 1px; // LTR
+      text-align: inherit;
+      @include output-rhythm(width, $medium);
+      @include transform(rotate(90deg));
+    }
+    .menu li.collapsed > a:after,
+    .menu li.expanded > a:after {
+      display: none !important;
+    }
+
+    .menu .menu ul {
+      padding: 0 0 0 1.1459rem;
+    }
   }
+
+/*
+<div id="nav" class="navbar-menu__menu">
+  <ul class="menu">
+    <li class="expanded">
+      <a data-drupal-link-system-path="node/1" title="" href="/node/1">Good Times</a>
+        <ul class="menu">
+          <li class="leaf">
+            <a data-drupal-link-system-path="node/3" href="/node/3">Scales and Elements</a>
+          </li>
+*/
 
 }
 
 
-@media #{$narrow_wide} {
+@media #{$wide} {
 
   #nav {
     display: block !important;
@@ -147,7 +178,7 @@ $navbar-item-background-color: $text-background-color;
       li {
         display: inline-block;
         position: relative;
-        @include output-rhythm(min-width, 192px);
+        @include output-rhythm(min-width, 240px);
 
         ul {
           position: absolute;
@@ -162,13 +193,15 @@ $navbar-item-background-color: $text-background-color;
           }
         }
 
-        &:hover ul,
-        &:focus ul {
+        &:hover > ul,
+        &:focus > ul {
           display: block;
           opacity: 1;
           height: auto;
+          overflow: visible;
         }
       }
+
 
       a {
         @include output-rhythm(padding, $xx-small $large);

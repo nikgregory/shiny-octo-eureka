@@ -283,6 +283,9 @@ settings:
   drupal_core_jquery_ui_touch-punch: 0
   drupal_core_underscore: 0
   drupal_core_backbone: 0
+  theme_library_at_ie9js: 0
+  theme_library_at_menu_toggle: 1
+  theme_library_at_scalefix: 0
   custom_css: '/* Custom CSS */'
 features:
   logo: 1
