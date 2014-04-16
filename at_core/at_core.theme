@@ -764,8 +764,16 @@ function at_core_preprocess_node(&$variables) {
   $variables['footer_attributes']['class'][] = 'node__footer';
 
   // Set a class on the node footer if there is a user picture.
-  if (isset($variables['user_picture']['user_picture'])) {
-    $variables['submitted_attributes']['class'][] = 'node__submitted--user-picture';
+  $user_picture = user_view($node->getOwner(), 'compact');
+
+  // Get rid of the user article wrapper when there is a user picture and
+  // output nothing when there isn't.
+  if (array_key_exists('#items', $user_picture['user_picture'])) {
+    $variables['user_picture'] = $user_picture['user_picture'];
+    $variables['submitted_attributes']['class'][] = 'node__submitted--has-user-picture';
+  }
+  else {
+    $variables['user_picture'] = array();
   }
 
   // Reset submitted variable.
@@ -776,7 +784,7 @@ function at_core_preprocess_node(&$variables) {
     ));
   }
 
-  //dsm($variables);
+  //kpr($variables);
 }
 
 /**
