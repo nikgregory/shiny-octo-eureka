@@ -730,7 +730,7 @@ function at_core_preprocess_node(&$variables) {
 
   // Initialize new attribute arrays.
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
-  $variables['submitted_attributes'] = new Attribute(array('class' => array()));
+
 
   // Modify attributes to BEM
   $variables['attributes']['class'] = str_replace('node-', 'node--', $variables['attributes']['class']);
@@ -760,28 +760,44 @@ function at_core_preprocess_node(&$variables) {
 
   // Set classes for node title, submitted and footer.
   $variables['title_attributes']['class'][] = 'node__title';
-  $variables['submitted_attributes']['class'][] = 'node__submitted';
   $variables['footer_attributes']['class'][] = 'node__footer';
 
-  // Set a class on the node footer if there is a user picture.
-  $user_picture = user_view($node->getOwner(), 'compact');
 
-  // Get rid of the user article wrapper when there is a user picture and
-  // output nothing when there isn't.
-  if (array_key_exists('#items', $user_picture['user_picture'])) {
-    $variables['user_picture'] = $user_picture['user_picture'];
-    $variables['submitted_attributes']['class'][] = 'node__submitted--has-user-picture';
-  }
-  else {
-    $variables['user_picture'] = array();
-  }
+  // Totally rework how submitted and user picture work, core is a bit whacky right, hopefully
+  // this gets cleaned up in https://drupal.org/node/2004252 or a follow up issue.
+  if ($variables['display_submitted']) {
 
-  // Reset submitted variable.
-  if (!empty($variables['submitted'])) {
-    $variables['submitted'] = t('Submitted by <address class="node__author" rel="author">!username</address> on <time class="node__datetime">!datetime</time>', array(
-      '!username' => $variables['name'],
-      '!datetime' => $variables['date'],
-    ));
+    // Initialize new attributes array.
+    $variables['submitted_attributes'] = new Attribute(array('class' => array()));
+
+    // Add attribute classes.
+    $variables['submitted_attributes']['class'][] = 'node__submitted';
+
+    if (theme_get_setting('features.node_user_picture')) {
+      // Set a class on the node footer if there is a user picture.
+      $user_picture = user_view($node->getOwner(), 'compact');
+
+      // Get rid of the user article wrapper when there is a user picture and
+      // output nothing when there isn't.
+      if (array_key_exists('#items', $user_picture['user_picture'])) {
+        $variables['user_picture'] = $user_picture['user_picture'];
+        $variables['submitted_attributes']['class'][] = 'node__submitted--has-user-picture';
+      }
+      else {
+        $variables['user_picture'] = array();
+      }
+    }
+    else {
+      $variables['user_picture'] = array();
+    }
+
+    // Reset submitted variable.
+    if (!empty($variables['submitted'])) {
+      $variables['submitted'] = t('Submitted by <address class="node__author" rel="author">!username</address> on <time class="node__datetime">!datetime</time>', array(
+        '!username' => $variables['name'],
+        '!datetime' => $variables['date'],
+      ));
+    }
   }
 
   //kpr($variables);
@@ -805,6 +821,7 @@ function at_core_preprocess_comment(&$variables) {
   global $theme;
 
   $comment = $variables['elements']['#comment'];
+  $account = comment_prepare_author($comment);
 
   // Initialize new attribute arrays.
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
@@ -815,10 +832,28 @@ function at_core_preprocess_comment(&$variables) {
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
   $variables['footer_attributes']['class'][] = 'comment__footer';
 
-  // Set a class on the comment footer if there is a user picture.
-  if (isset($variables['user_picture']['user_picture'])) {
-    $variables['submitted_attributes']['class'][] = 'comment__submitted--user-picture';
+  // Clean up user picture and add has class.
+  if (theme_get_setting('features.comment_user_picture')) {
+    $user_picture = user_view($account, 'compact');
+
+    // Get rid of the user article wrapper when there is a user picture and
+    // output nothing when there isn't.
+    if (array_key_exists('#items', $user_picture['user_picture'])) {
+      $variables['user_picture'] = $user_picture['user_picture'];
+      $variables['submitted_attributes']['class'][] = 'comment__submitted--has-user-picture';
+    }
+    else {
+      $variables['user_picture'] = array();
+    }
   }
+  else {
+    $variables['user_picture'] = array();
+  }
+
+  // Set a class on the comment footer if there is a user picture.
+  //if (isset($variables['user_picture']['user_picture'])) {
+  //  $variables['submitted_attributes']['class'][] = 'comment__submitted--user-picture';
+  //}
 
   // Hide comment titles.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
