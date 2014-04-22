@@ -490,7 +490,7 @@ function at_core_page_alter(&$page) {
   // Load generated CSS files from Advanced settings - fonts, titles, image styles, custom css etc.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
 
-    // Fonts CSS.
+    // Fonts.
     if (at_core_theme_get_setting('settings.enable_fonts', $theme) === 1) {
       $fonts_file = $generated_css_file_path . '/' . $theme . '--fonts.css';
       if (file_exists($fonts_file)) {
@@ -498,6 +498,26 @@ function at_core_page_alter(&$page) {
           'type' => 'file',
           'data' => $fonts_file,
           'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+
+      // Google font.
+      if (at_core_theme_get_setting('settings.font_google', $theme)) {
+        $google_font_path = check_url(at_core_theme_get_setting('settings.font_google', $theme));
+        $google_font_path_fixed = '//' . str_replace('&amp;', '&', $google_font_path);
+        $page['#attached']['css'][$google_font_path_fixed] = array(
+          'data' => $google_font_path_fixed,
+          'type' => 'external',
+        );
+      }
+
+      // Typekit script.
+      if (at_core_theme_get_setting('settings.font_typekit', $theme)) {
+        $typekit_script_path = '//' . at_core_theme_get_setting('settings.font_typekit', $theme);
+        $page['#attached']['js'][] = array(
+          'data' => $typekit_script_path,
+          'type' => 'external',
           'weight' => CSS_THEME,
         );
       }
@@ -567,20 +587,7 @@ function at_core_page_alter(&$page) {
         }
       }
     }
-
-    // A external link to Google web fonts.
-    // TODO add extra checks so this is not run often, consider adding "allowable font types" in theme settings?
-    $google_font = at_core_load_google_fonts($theme);
-    if (!empty($google_font)) {
-      $page['#attached']['css'][$google_font] = array(
-        'type' => 'external',
-        'data' => $google_font,
-        'weight' => CSS_THEME,
-      );
-    }
   }
-
-  //kpr($page);
 }
 
 /**
