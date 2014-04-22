@@ -32,8 +32,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
     }
 
     // Custom selectors, reset the selectors variable if we have custom selectors.
-    if ($font_key == 'custom_selectors' && $values['settings_font_custom_selectors']) {
-      $fonts[$font_key]['selectors'] = $values['settings_custom_selectors'] ? $values['settings_custom_selectors'] : 'ruby ruby';
+    if ($font_key == 'custom_selectors' && !empty($values['settings_font_custom_selectors']) && !empty($values['settings_custom_selectors'])) {
+      $fonts[$font_key]['selectors'] = $values['settings_custom_selectors']; // ? $values['settings_custom_selectors'] : 'ruby ruby'
     }
 
     // Size
@@ -69,10 +69,13 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   if (!empty($fonts)) {
     $font_styles = array();
     foreach ($fonts as $key => $values) {
-      if (isset($values)) {
+      if (isset($values['family']) || isset($values['size'])) {
         $font_style  = $values['selectors'] . '{';
-        $font_style .= $values['family'];
-        // Size is optional
+
+        if (isset($values['family'])) {
+          $font_style .= $values['family'];
+        }
+
         if (isset($values['size'])) {
           $font_style .= $values['size'];
         }

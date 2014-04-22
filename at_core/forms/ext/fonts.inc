@@ -5,6 +5,7 @@
  */
 function websafe_fonts() {
   $websafe_fonts = array(
+    'none'       => '-- none --',
     'arial'       => 'Arial, Helvetica, "Nimbus Sans L", sans-serif',
     'helvetica'   => 'Helvetica, Arial, "Nimbus Sans L", sans-serif',
     'verdana'     => 'Verdana, Tahoma, "DejaVu Sans", sans-serif',

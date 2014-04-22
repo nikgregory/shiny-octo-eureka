@@ -18,7 +18,7 @@
   "components/webfonts",
   "components/type",
   "components/page",
-  "components/messages.scss",
+  "components/messages",
   "components/menus",
   "components/navbar",
   "components/breadcrumb",
@@ -35,6 +35,7 @@
 
 // Drupaly things.
 @import
+  "components/drupal/branding",
   "components/drupal/fields",
   "components/drupal/blocks",
   "components/drupal/book",

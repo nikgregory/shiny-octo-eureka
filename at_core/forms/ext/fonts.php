@@ -103,6 +103,7 @@ $form['fonts']['apply'] = array(
   '#title' => t('Apply Fonts'),
 );
 
+
 // Build form
 foreach ($font_elements as $font_element_key => $font_element_values) {
 
@@ -121,30 +122,34 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   );
 
   // Websafe font message
-  $form['fonts']['apply'][$font_element_key]['websafe_font_default'] = array(
-    '#type' => 'container',
-    '#markup' => t('Current Websafe stack: <code>' . $selected_websafe_stack . '</code>'),
-    '#states' => array(
-      'visible' => array(
-        'select[name="settings_font_' . $font_element_key . '"]' => array(
-          'value' => 'websafe',
+  if (isset($selected_websafe_stack) && $selected_websafe_stack !== 'none') {
+    $form['fonts']['apply'][$font_element_key]['websafe_font_default'] = array(
+      '#type' => 'container',
+      '#markup' => t('Current Websafe stack: <code>' . $selected_websafe_stack . '</code>'),
+      '#states' => array(
+        'visible' => array(
+          'select[name="settings_font_' . $font_element_key . '"]' => array(
+            'value' => 'websafe',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   // Custom stack message
-  $form['fonts']['apply'][$font_element_key]['customstack_font_default'] = array(
-    '#type' => 'container',
-    '#markup' => t('Current Custom stack: <code>' . $selected_customstack . '</code>'),
-    '#states' => array(
-      'visible' => array(
-        'select[name="settings_font_' . $font_element_key . '"]' => array(
-          'value' => 'customstack',
+  if (isset($selected_customstack)) {
+    $form['fonts']['apply'][$font_element_key]['customstack_font_default'] = array(
+      '#type' => 'container',
+      '#markup' => t('Current Custom stack: <code>' . $selected_customstack . '</code>'),
+      '#states' => array(
+        'visible' => array(
+          'select[name="settings_font_' . $font_element_key . '"]' => array(
+            'value' => 'customstack',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   // Google font
   $form['fonts']['apply'][$font_element_key]['settings_font_google_' . $font_element_key] = array(

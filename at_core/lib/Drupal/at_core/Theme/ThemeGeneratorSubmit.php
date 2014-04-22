@@ -84,7 +84,7 @@ class ThemeGeneratorSubmit {
       $info_file  = "$target/$machine_name.info.yml";
 
       // Config
-      $settings_file = "$target/config/$machine_name.settings.yml"; // used in skins
+      $settings_file = "$target/config/install/$machine_name.settings.yml"; // used in skins
 
       // Standard, Minimal and Clones
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
@@ -148,8 +148,8 @@ class ThemeGeneratorSubmit {
         // Rename and strip replace strings in all config files.
         foreach ($configuration_files as $old_file) {
           $new_file = str_replace($source_theme, $machine_name, $old_file);
-          $renameFile->fileRename("$target/config/$old_file", "$target/config/$new_file");
-          $fileStrReplace->fileStrReplace("$target/config/$new_file", $source_theme, $machine_name);
+          $renameFile->fileRename("$target/config/install/$old_file", "$target/config/install/$new_file");
+          $fileStrReplace->fileStrReplace("$target/config/install/$new_file", $source_theme, $machine_name);
         }
 
         // Info file
@@ -196,7 +196,7 @@ class ThemeGeneratorSubmit {
 
         // Rename files
         $renameFile->fileRename("$target/at_skin.info.yml", $info_file);
-        $renameFile->fileRename("$target/config/at_skin.settings.yml", $settings_file);
+        $renameFile->fileRename("$target/config/install/at_skin.settings.yml", $settings_file);
 
         // Parse the source base themes info.yml file and extract regions
         $base_theme_info = $base_theme_path . "/$skin_base_theme.info.yml";
@@ -236,7 +236,7 @@ class ThemeGeneratorSubmit {
         //$base_theme_breakpoints = file_get_contents("$base_theme_path/config/$skin_base_theme.breakpoints.yml");
         //file_unmanaged_save_data($base_theme_breakpoints, $breakpoints_file, FILE_EXISTS_REPLACE);
 
-        $base_theme_settings = file_get_contents("$base_theme_path/config/$skin_base_theme.settings.yml");
+        $base_theme_settings = file_get_contents("$base_theme_path/config/install/$skin_base_theme.settings.yml");
         file_unmanaged_save_data($base_theme_settings, $settings_file, FILE_EXISTS_REPLACE);
       }
 

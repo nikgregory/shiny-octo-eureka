@@ -8,7 +8,6 @@ use Drupal\at_core\Library\SystemLibraries;
 use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Layout\LayoutAttributes;
-
 use Drupal\image\Entity\ImageStyle;
 
 // TODO convert to Class with methods?
@@ -16,17 +15,6 @@ global $theme;
 if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
   require_once(drupal_get_path('theme', 'at_core') . '/forms/ext/fonts.inc');
 }
-
-/**
- * TODO:
- * The preprocess layer is set to be removed in Drupal 9, and is proposed to
- * deprecate in Drupal 8 and introduce a new phase hook_theme_prepare().
- * This file currently uses several preprocess functions so when the new hook
- * lands in core we'll need to look at updating.
- *
- * SEE: https://drupal.org/node/2035055 (and keep an eye on it!)
- * SEE: Remove Preprocess Layer (Drupal 9 issue) https://drupal.org/node/2060783
- */
 
 /**
  * Retrieves a setting for the current theme or for a given theme.
@@ -95,7 +83,7 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
 * - element: Structured array data for a menu link.
 */
 
-/* Remove when menus become twig templates.
+/* Remove when menus become twig templates.*/
 function at_core_menu_link(array $variables) {
   global $theme;
   $element = $variables['element'];
@@ -125,9 +113,9 @@ function at_core_menu_link(array $variables) {
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
 }
-*/
 
-/* Uncomment when menu functions become twig templates.
+
+/* Uncomment when menu functions become twig templates.*/
 function at_core_preprocess_menu_link(&$variables) {
   global $theme;
 
@@ -149,7 +137,7 @@ function at_core_preprocess_menu_link(&$variables) {
     }
   }
 }
-*/
+
 
 
 /**
@@ -614,8 +602,6 @@ function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Preprocess variables for html templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_html(&$variables) {
   global $theme;
@@ -645,8 +631,6 @@ function at_core_preprocess_html(&$variables) {
 
 /**
  * Preprocess variables for page templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_page(&$variables) {
   global $theme;
@@ -707,14 +691,10 @@ function at_core_preprocess_page(&$variables) {
       }
     }
   }
-
-  //kpr($variables);kpr($variables);
 }
 
 /**
  * Preprocess variables for region templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_region(&$variables) {
   // Set a class for block titles.
@@ -729,8 +709,6 @@ function at_core_preprocess_region(&$variables) {
 
 /**
  * Preprocess variables for node templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -806,14 +784,10 @@ function at_core_preprocess_node(&$variables) {
       ));
     }
   }
-
-  //kpr($variables);
 }
 
 /**
  * Preprocess variables for comment templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_comment_wrapper(&$variables) {
   $variables['attributes']['class'] = str_replace('comment-wrapper', 'comments__wrapper', $variables['attributes']['class']);
@@ -821,8 +795,6 @@ function at_core_preprocess_comment_wrapper(&$variables) {
 
 /**
  * Preprocess variables for comment templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_comment(&$variables) {
   global $theme;
@@ -907,8 +879,6 @@ function at_core_preprocess_comment(&$variables) {
 
 /**
  * Preprocess variables for block templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  */
 function at_core_preprocess_block(&$variables) {
  global $theme;
@@ -936,14 +906,10 @@ function at_core_preprocess_block(&$variables) {
       }
     }
   }
-
-  //kpr($variables);
 }
 
 /**
  * Preprocess variables for field templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
  * SEE: https://drupal.org/node/1987398 field.module - Convert theme_ functions to Twig
  */
 function at_core_preprocess_field(&$variables) {
@@ -1008,9 +974,7 @@ function at_core_preprocess_field(&$variables) {
 
 /**
  * Preprocess variables for breadcrumb templates.
- *
- * SEE: https://drupal.org/node/2035055 hook_theme_prepare()
- * SEE: https://drupal.org/node/1987398 field.module - Convert theme_ functions to Twig
+ * SEE: https://drupal.org/node/1987398 field.module - Convert theme_functions to Twig
  */
 function at_core_preprocess_breadcrumb(&$variables) {
   global $theme;
