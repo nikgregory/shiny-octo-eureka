@@ -4,3 +4,4 @@ description: 'Includes all critical dependancies and the sub-theme generator. Yo
 core: 8.x
 settings:
   show_window_size: '0'
+base: only

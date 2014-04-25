@@ -66,45 +66,40 @@
 <article class="{{ attributes.class }} clearfix"{{ attributes }}>
 
   {{ title_prefix }}
-  <header>
-    {#
-    Hide the "new" indicator by default, let a piece of JavaScript ask
-    the server which comments are new for the user. Rendering the final
-    "new" indicator here would break the render cache.
-    #}
-    <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+  {#
+  Hide the "new" indicator by default, let a piece of JavaScript ask
+  the server which comments are new for the user. Rendering the final
+  "new" indicator here would break the render cache.
+  #}
+  <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
-    <h3{{ title_attributes }}>{{ title }}</h3>
+  <h3{{ title_attributes }}>{{ title }}</h3>
 
-    <div{{ submitted_attributes }}>
-      {{ user_picture }}
-      <div class="comment__meta">
-        {{ submitted }}
-      </div>
+  <div{{ submitted_attributes }}>
+    {{ user_picture }}
+    <div class="comment__meta">
+      {{ submitted }}
     </div>
-
-  </header>
+  </div>
   {{ title_suffix }}
 
   {{ content|without('links') }}
 
-  <footer{{ footer_attributes }}>
-    {% if signature %}
-      <p class="comment__user-signature">
-        {{ signature }}
-      </p>
-    {% endif %}
+  {% if signature %}
+    <p class="comment__user-signature">
+      {{ signature }}
+    </p>
+  {% endif %}
 
-    {#
-      Indicate the semantic relationship between parent and child comments
-      for accessibility. The list is difficult to navigate in a screen
-      reader without this information.
-    #}
-    {% if parent %}
-      <p class="comment__parent visually-hidden">{{ parent }}</p>
-    {% endif %}
+  {#
+    Indicate the semantic relationship between parent and child comments
+    for accessibility. The list is difficult to navigate in a screen
+    reader without this information.
+  #}
+  {% if parent %}
+    <p class="comment__parent visually-hidden">{{ parent }}</p>
+  {% endif %}
 
-    {{ content.links }}
-  </footer>
+  {{ content.links }}
 
 </article>

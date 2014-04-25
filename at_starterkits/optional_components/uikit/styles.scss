@@ -23,7 +23,6 @@
   "components/navbar",
   "components/breadcrumb",
   "components/pagers",
-  "components/local-task-tabs",
   "components/tables",
   "components/forms",
   "components/progress-bars",
@@ -36,14 +35,16 @@
 // Drupaly things.
 @import
   "components/drupal/branding",
-  "components/drupal/fields",
-  "components/drupal/blocks",
+  "components/drupal/local-tasks",
+  "components/drupal/field",
+  "components/drupal/block",
   "components/drupal/book",
-  "components/drupal/forums",
-  "components/drupal/nodes",
-  "components/drupal/comments",
+  "components/drupal/forum",
+  "components/drupal/node",
+  "components/drupal/comment",
   "components/drupal/poll",
   "components/drupal/search",
+  "components/drupal/user-profile",
   "components/drupal/views";
 
 

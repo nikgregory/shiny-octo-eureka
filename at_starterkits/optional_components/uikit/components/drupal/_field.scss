@@ -1,5 +1,8 @@
 /**
  * Fields.
+ * - By default we pretty much stick to field-type and field element styles (such as
+ *   .field-label's). You could style specific instances of fields here, or do that
+ *   in an entity stylesheet, for example _node.scss.
  */
 
 $field-taxonomy-as-labels: false;
@@ -51,6 +54,10 @@ $field-taxonomy-icons:     false;
  */
 
 .field-type--image {
+
+  figure {
+    margin: 0;
+  }
 
   figcaption {
     @include adjust-font-size-to($medium/1.25);

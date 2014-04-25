@@ -1018,9 +1018,21 @@ function at_core_preprocess_breadcrumb(&$variables) {
       }
     }
   }
-
-  //kpr($variables);
 }
+
+
+/**
+ * Preprocess variables for user templates.
+ */
+function at_core_preprocess_user(&$variables) {
+  // Add a proper label for user profiles.
+  $user = $variables['elements']['#user'];
+  $variables['label'] = $user->getUsername();
+  $variables['title_attributes']['class'][] = 'user__title';
+}
+
+
+
 
 // Check views preprocess functions we need.
 /*

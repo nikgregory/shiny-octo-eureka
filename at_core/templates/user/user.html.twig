@@ -9,6 +9,8 @@
  * e.g., example.com/user/123. 123 being the user's ID.
  *
  * Available variables:
+ * - label: the users name set as a title. Adaptivetheme moves the h1 inside
+ *   the article element for proper outlines.
  * - content: A list of content items. Use 'content' to print all content, or
  *   print a subset such as 'content.field_example'.
  * - Field variables: For each field instance attached to the user a
@@ -18,6 +20,7 @@
  *   variables. Otherwise they will have to explicitly specify the desired
  *   field language, e.g. account.field_example.en, thus overriding any
  *   language negotiation rule that was previously applied.
+ * - title_attributes: HTML attributes set on the label wrapper markup.
  * - attributes: HTML attributes for the container element.
  *
  * @see template_preprocess_user()
@@ -25,8 +28,12 @@
  * @ingroup themeable
  */
 #}
-{% if content %}
-  <article{{ attributes }}>
+<article{{ attributes }}>
+  {% if label %}
+    <h1{{ title_attributes }}>{{ label }}</h1>
+  {% endif %}
+
+  {% if content %}
     {{- content -}}
-  </article>
-{% endif %}
+  {% endif %}
+</article>

@@ -1,4 +1,11 @@
 {#
+
+ TXT file for now, otherwise it messes up the local tasks, when menu functions are
+ converted to twig we can renabled this template.
+
+#}
+
+{#
 /**
  * @file
  * Default theme implementation for a local task link.
