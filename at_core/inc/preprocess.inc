@@ -720,14 +720,14 @@ function adaptivetheme_preprocess_node(&$vars) {
   $vars['datetime'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:sO'); // PHP 'c' format is not proper ISO8601!
 
   // Publication date, formatted with time element
-  $vars['publication_date'] = '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['date'] . '</time>';
+  $vars['publication_date'] = '<time datetime="' . $vars['datetime'] . '">' . $vars['date'] . '</time>';
 
   // Last update variables
   $vars['datetime_updated'] = format_date($vars['node']->changed, 'custom', 'Y-m-d\TH:i:sO');
   $vars['custom_date_and_time'] = date('jS F, Y - g:ia', $vars['node']->changed);
 
   // Last updated formatted in time element
-  $vars['last_update'] = '<time datetime="' . $vars['datetime_updated'] . '" pubdate="pubdate">' . $vars['custom_date_and_time'] . '</time>';
+  $vars['last_update'] = '<time datetime="' . $vars['datetime_updated'] . '">' . $vars['custom_date_and_time'] . '</time>';
 
   // Build the submitted variable used by default in node templates
   if (variable_get('node_submitted_' . $vars['node']->type, TRUE)) {
@@ -835,7 +835,7 @@ function adaptivetheme_preprocess_comment(&$vars) {
   $vars['submitted'] = t('Submitted by !username on !datetime',
     array(
       '!username' => $vars['author'],
-      '!datetime' => '<time datetime="' . $vars['datetime'] . '" pubdate="pubdate">' . $vars['created'] . '</time>',
+      '!datetime' => '<time datetime="' . $vars['datetime'] . '">' . $vars['created'] . '</time>',
     )
   );
 

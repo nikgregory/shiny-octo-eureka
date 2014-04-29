@@ -625,12 +625,12 @@ function adaptivetheme_field__image($vars) {
 
       if ($vars['field_view_mode'] == 'full') {
         if ($caption_full == TRUE) {
-          $output .= '<figcaption class="caption full-caption"' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
+          $output .= '<figcaption class="caption full-caption" ' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
         }
       }
       if ($vars['field_view_mode'] == 'teaser') {
         if ($caption_teaser == TRUE) {
-          $output .= '<figcaption class="caption teaser-caption"' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
+          $output .= '<figcaption class="caption teaser-caption" ' . $styles .'>' . $item['#item']['title'] . '</figcaption>';
         }
       }
     }
