@@ -16,7 +16,7 @@
 //  ------------------------------------------------
 //  Key: region-name (grid columns)
 
-&.active-count--2 {
+&.active-region-count--2 {
   .region {
       @include span(6 of 12);
 

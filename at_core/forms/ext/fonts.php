@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\Xss;
 
 /**
  * @file
@@ -93,7 +94,7 @@ $form['fonts']['setup']['settings_font_typekit'] = array(
 $form['fonts']['setup']['settings_font_customstack'] = array(
   '#type' => 'textfield',
   '#title' => t('Custom stack'),
-  '#default_value' => filter_xss_admin(theme_get_setting('settings.font_customstack')),
+  '#default_value' => Xss::filterAdmin(theme_get_setting('settings.font_customstack')),
   '#description' => t('Enter a comma seperated list of fonts. Quote font names with spaces, e.g. <code>"Times New Roman", Garamond, sans-serif</code>'),
 );
 
@@ -215,7 +216,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#type' => 'textarea',
       '#title' => t('Custom Selectors'),
       '#rows' => 3,
-      '#default_value' => filter_xss_admin(theme_get_setting('settings.custom_selectors')),
+      '#default_value' => Xss::filterAdmin(theme_get_setting('settings.custom_selectors')),
       '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
       '#states' => array(
         'disabled' => array('select[name="settings_selectors_font_type"]' => array('value' => '<none>')),

@@ -70,7 +70,7 @@ $form['layouts']['template_select']['select']['settings_template_suggestion_page
 );
 
 // Submit button for layouts.
-/*
+
 $form['layouts']['actions'] = array(
   '#type' => 'actions',
   '#attributes' => array('class' => array('submit--layout')),
@@ -87,10 +87,6 @@ $form['layouts']['actions']['submit'] = array(
     'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
   ),
 );
-*/
-
-$form['#validate'][] = 'at_core_validate_layouts';
-$form['#submit'][] = 'at_core_submit_layouts';
 
 // Layout submit handlers.
 include_once(drupal_get_path('theme', 'at_core') . '/forms/layouts_validate.php');

@@ -6,6 +6,7 @@ use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\Layout\LayoutSettings;
 
+
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
  *
@@ -104,14 +105,16 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     $form['favicon']['#group'] = 'basic_settings';
 
     // buttons don't work with #group, move it the hard way.
-     /*
+
     $form['actions']['#type'] = $form['basic_settings']['actions']['#type'] = 'actions';
     $form['actions']['submit']['#type'] = $form['basic_settings']['actions']['submit']['#type'] = 'submit';
     $form['actions']['submit']['#value'] = $form['basic_settings']['actions']['submit']['#value'] = t('Save basic settings');
     $form['actions']['submit']['#button_type'] = $form['basic_settings']['actions']['submit']['#button_type'] = 'primary';
     unset($form['actions']);
-    */
+
   }
+
+  //kpr($form['actions']);
 }
 
 

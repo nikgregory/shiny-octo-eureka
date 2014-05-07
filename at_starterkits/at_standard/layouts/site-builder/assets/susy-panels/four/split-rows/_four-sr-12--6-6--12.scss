@@ -22,7 +22,7 @@
 //
 
 // Second and third is a special case.
-&.active-regions--2-3 {
+&.has-regions--2-3 {
   .region {
     &:first-child {
       @include span(6 of 12);
@@ -38,7 +38,7 @@
 //
 
 // First, second and third.
-&.active-regions--1-2-3 {
+&.has-regions--1-2-3 {
   .region {
     &:nth-child(2) {
       @include span(6 of 12);
@@ -50,7 +50,7 @@
 }
 
 // Second, third and fourth.
-&.active-regions--2-3-4 {
+&.has-regions--2-3-4 {
   .region {
     &:first-child {
       @include span(6 of 12);
@@ -66,7 +66,7 @@
 
 
 // All regions.
-&.active-count--4 {
+&.active-region-count--4 {
   .region {
     &:nth-child(2) {
       @include span(6 of 12);

@@ -15,7 +15,7 @@
 
 
 // Two active regions.
-&.active-count--2 {
+&.active-region-count--2 {
   .region {
     @include span(4 of 12);
 
@@ -27,7 +27,7 @@
 
 
 // Three active regions.
-&.active-count--3 {
+&.active-region-count--3 {
   .region {
     &:first-child {
       @include span(4 of 12);

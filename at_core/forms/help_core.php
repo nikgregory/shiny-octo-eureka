@@ -12,15 +12,17 @@ $form['help'] = array(
   '#group' => 'atsettings',
   '#tree' => TRUE,
 );
+
+// TODO - do we need sanity checks anywhere here on the output?
 $form['help']['menu'] = array(
   '#type' => 'container',
-  '#markup' => filter_xss_admin($help_menu),
+  '#markup' => Xss::filterAdmin($help_menu),
 );
 $form['help']['subtheme_types'] = array(
   '#type' => 'container',
-  '#markup' => filter_xss_admin($subtheme_types),
+  '#markup' => Xss::filterAdmin($subtheme_types),
 );
 $form['help']['updating_skins'] = array(
   '#type' => 'container',
-  '#markup' => filter_xss_admin($updating_skins),
+  '#markup' => Xss::filterAdmin($updating_skins),
 );

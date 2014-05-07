@@ -14,7 +14,7 @@
 // ---------------------------------------------------------------------------
 
 
-&.active-count--2 {
+&.active-region-count--2 {
   .region {
     &:first-child {
       @include span(4 of 12);
@@ -27,7 +27,7 @@
 }
 
 
-&.active-count--3 {
+&.active-region-count--3 {
   .region {
     &:first-child {
       @include span(4 of 12);
@@ -44,7 +44,7 @@
 }
 
 
-&.active-count--4 {
+&.active-region-count--4 {
   .region {
     @include span(8 of 12);
 

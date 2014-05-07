@@ -24,15 +24,15 @@
 //
 
 // First and one of second, third or fourth.
-&.active-regions--1-2,
-&.active-regions--1-3,
-&.active-regions--1-4 {
+&.has-regions--1-2,
+&.has-regions--1-3,
+&.has-regions--1-4 {
   .region {
   }
 }
 
 // Third and fourth are active.
-&.active-regions--3-4 {
+&.has-regions--3-4 {
   .region {
     @include span(6 of 12);
 
@@ -47,7 +47,7 @@
 //
 
 // Second and third.
-&.active-regions--2-3 {
+&.has-regions--2-3 {
   .region {
     &:first-child {
       @include push(3 of 12);
@@ -61,7 +61,7 @@
 }
 
 // Second and fourth.
-&.active-regions--2-4 {
+&.has-regions--2-4 {
   .region {
     &:first-child {
       @include span(9 of 12);
@@ -78,7 +78,7 @@
 //
 
 // First, second and third.
-&.active-regions--1-2-3 {
+&.has-regions--1-2-3 {
   .region {
     &:nth-child(2) {
       @include push(3 of 12);
@@ -92,7 +92,7 @@
 }
 
 // First, third and fourth.
-&.active-regions--1-2-4 {
+&.has-regions--1-2-4 {
   .region {
     &:nth-child(2) {
       @include span(6 of 12);
@@ -104,7 +104,7 @@
 }
 
 // First, third and fourth.
-&.active-regions--1-3-4 {
+&.has-regions--1-3-4 {
   .region {
     &:nth-child(2) {
       @include span(9 of 12);
@@ -116,7 +116,7 @@
 }
 
 // Two, three and four (classic layout)
-&.active-regions--2-3-4 {
+&.has-regions--2-3-4 {
   .region {
     &:first-child {
       @include span(6 of 12);
@@ -134,7 +134,7 @@
 
 
 // All regions active.
-&.active-count--4 {
+&.active-region-count--4 {
   .region {
     &:nth-child(2) {
       @include span(6 of 12);

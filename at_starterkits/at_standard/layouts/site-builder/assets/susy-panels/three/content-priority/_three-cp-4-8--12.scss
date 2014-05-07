@@ -30,7 +30,7 @@
 // This is mostly used when you want sidebars either side of a main content
 // region, but have them below the main content in the source order.
 
-&.active-regions--1-2 {
+&.has-regions--1-2 {
   .region {
     &:first-child {
       @include push(4 of 12);
@@ -44,7 +44,7 @@
 }
 
 
-&.active-regions--1-2-3 {
+&.has-regions--1-2-3 {
   .region {
     &:first-child {
       @include span(8 of 12);

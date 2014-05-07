@@ -1,0 +1,57 @@
+//
+// Tester Layout.
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "../../../assets/global";
+
+
+/* Narrow screens only. */
+@media #{$narrow} {
+
+  /* Features (4 regions) */
+  .page-row__features {
+
+  }
+
+  /* Main (4 regions) */
+  .page-row__main {
+
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row__tertiary {
+
+  }
+}
+
+
+/* Narrows and wide screens (and up) */
+@media #{$narrow-wide} {
+
+  /* Header (3 regions) */
+  .page-row__header {
+
+  }
+}
+
+
+/* Wide screens and up. */
+@media #{$wide} {
+
+  /* Features (4 regions) */
+  .page-row__features {
+    @import "../../../assets/susy-panels/four/four-5-3-2-2";
+  }
+
+  /* Main (4 regions) */
+  .page-row__main {
+    @import "../../../assets/susy-panels/four/four-4-2-2-4";
+  }
+
+  /* Tertiary (4 regions) */
+  .page-row__tertiary {
+     @import "../../../assets/susy-panels/four/four-2-2-3-5";
+  }
+}

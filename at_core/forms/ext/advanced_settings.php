@@ -49,7 +49,7 @@ include_once($at_core_path . '/forms/devel.php');
 // include_once($at_core_path . '/forms/help_subtheme.php');
 
 // Submit button for advanced settings.
-/*
+
 $form['advanced_settings']['actions'] = array(
   '#type' => 'actions',
   '#attributes' => array('class' => array('submit--advanced-settings')),
@@ -62,11 +62,37 @@ $form['advanced_settings']['actions']['submit'] = array(
   '#attributes' => array('class' => array('button--primary')),
   '#weight' => -10000,
 );
-*/
 
-$form['#validate'][] = 'at_core_validate_advanced_settings';
-$form['#submit'][] = 'at_core_submit_advanced_settings';
+
+//$form['#validate'][] = 'at_core_validate_advanced_settings';
+//$form['#submit'][] = 'at_core_submit_advanced_settings';
+
+//$form['actions']['submit']['#validate'][] = 'at_core_validate_advanced_settings';
+//$form['actions']['submit']['#submit'][] = 'at_core_submit_advanced_settings';
+
 
 // Submit handlers for the advanced settings.
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/advanced_settings_validate.php');
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/advanced_settings_submit.php');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

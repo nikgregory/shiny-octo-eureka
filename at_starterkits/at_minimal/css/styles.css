@@ -1093,106 +1093,6 @@ table tr.error {
 }
 
 /**
- * Tabs.
- *  - primary and secondary tabs
- *  - other tab modules or implimentation such as Quicktabs
- *
- * Currently dependant on the Menu twig patch: https://drupal.org/node/1898478
- *
- * TODO: consider a cleaner simpler style as a default, and change this file name to local-tasks(?), local tasks is not a "tabbed UI"
- * in the classic sense, calling them "tabs" is a Drupalism and should be deprecated.
- * We will have a tabbed UI style, but for real tabs, as in a JS driven tabs.
- */
-/* Local task tabs, e.g. node View Edit Delete etc */
-.local-tasks--menu {
-  padding: 0;
-  list-style: none;
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-[dir="rtl"] .local-tasks--menu {
-  margin: 0;
-  padding: 0;
-}
-.local-tasks--menu li {
-  display: inline-block;
-}
-.local-tasks--menu a {
-  display: block;
-  line-height: 1;
-}
-
-.local-tasks__primary {
-  border-bottom: 1px solid #cccccc;
-}
-.local-tasks__primary li {
-  margin-bottom: -1px;
-}
-.local-tasks__primary li:first-child a {
-  -moz-border-radius: 4px 0 0 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 0;
-}
-.local-tasks__primary li:last-child a {
-  -moz-border-radius: 0 4px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 0 0;
-}
-.local-tasks__primary a {
-  color: black;
-  background: #fbfbfb;
-  border: 1px solid #cccccc;
-  margin-right: -1px;
-  padding: 7px 16px;
-  padding: 0.4376941rem 1rem;
-  -moz-transition: background-color, 0.15s, ease-in-out;
-  -o-transition: background-color, 0.15s, ease-in-out;
-  -webkit-transition: background-color, 0.15s, ease-in-out;
-  transition: background-color, 0.15s, ease-in-out;
-  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-}
-.local-tasks__primary a:hover, .local-tasks__primary a:focus {
-  color: black;
-  background: #eeeeee;
-  text-decoration: none;
-}
-.local-tasks__primary a.active {
-  color: black;
-  background: none;
-  border-bottom-color: white;
-}
-.local-tasks__primary a.active:hover, .local-tasks__primary a.active:focus {
-  color: black;
-  background: none;
-}
-[dir="rtl"] .local-tasks__primary a {
-  margin-left: -1px;
-  margin-right: 0;
-}
-[dir="rtl"] .local-tasks__primary li:first-child a {
-  margin-left: -1px;
-  -moz-border-radius: 0 4px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 0 0;
-}
-[dir="rtl"] .local-tasks__primary li:last-child a {
-  -moz-border-radius: 4px 0 0 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 0;
-}
-
-.local-tasks__secondary a {
-  padding: 10px 16px;
-  padding: 0.618034rem 1rem;
-}
-[dir="rtl"] .local-tasks__secondary li {
-  padding: 16px 0 0 16px;
-  padding: 1rem 0 0 1rem;
-}
-
-/**
  * Tables.
  */
 table {
@@ -2189,7 +2089,119 @@ video {
 }
 
 /**
+ * Masthead.
+ * - style branding elements
+ * - CSS to support features: pinned/sticky header
+ */
+.site__slogan {
+  margin-top: 0;
+}
+
+/**
+ * Tabs.
+ *  - primary and secondary tabs
+ *  - other tab modules or implimentation such as Quicktabs
+ *
+ * Currently dependant on the Menu twig patch: https://drupal.org/node/1898478
+ *
+ * TODO: consider a cleaner simpler style as a default, and change this file name to local-tasks(?), local tasks is not a "tabbed UI"
+ * in the classic sense, calling them "tabs" is a Drupalism and should be deprecated.
+ * We will have a tabbed UI style, but for real tabs, as in a JS driven tabs.
+ */
+/* Local task tabs, e.g. node View Edit Delete etc */
+.local-tasks--menu {
+  padding: 0;
+  list-style: none;
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+[dir="rtl"] .local-tasks--menu {
+  margin: 0;
+  padding: 0;
+}
+.local-tasks--menu li {
+  display: inline-block;
+}
+.local-tasks--menu a {
+  display: block;
+  line-height: 1;
+}
+
+.local-tasks__primary {
+  border-bottom: 1px solid #cccccc;
+}
+.local-tasks__primary li {
+  margin-bottom: -1px;
+}
+.local-tasks__primary li:first-child a {
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 0;
+}
+.local-tasks__primary li:last-child a {
+  -moz-border-radius: 0 4px 0 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 4px 0 0;
+}
+.local-tasks__primary a {
+  color: black;
+  background: #fbfbfb;
+  border: 1px solid #cccccc;
+  margin-right: -1px;
+  padding: 7px 16px;
+  padding: 0.4376941rem 1rem;
+  -moz-transition: background-color, 0.15s, ease-in-out;
+  -o-transition: background-color, 0.15s, ease-in-out;
+  -webkit-transition: background-color, 0.15s, ease-in-out;
+  transition: background-color, 0.15s, ease-in-out;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+}
+.local-tasks__primary a:hover, .local-tasks__primary a:focus {
+  color: black;
+  background: #eeeeee;
+  text-decoration: none;
+}
+.local-tasks__primary a.active {
+  color: black;
+  background: none;
+  border-bottom-color: white;
+}
+.local-tasks__primary a.active:hover, .local-tasks__primary a.active:focus {
+  color: black;
+  background: none;
+}
+[dir="rtl"] .local-tasks__primary a {
+  margin-left: -1px;
+  margin-right: 0;
+}
+[dir="rtl"] .local-tasks__primary li:first-child a {
+  margin-left: -1px;
+  -moz-border-radius: 0 4px 0 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 4px 0 0;
+}
+[dir="rtl"] .local-tasks__primary li:last-child a {
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 0;
+}
+
+.local-tasks__secondary a {
+  padding: 10px 16px;
+  padding: 0.618034rem 1rem;
+}
+[dir="rtl"] .local-tasks__secondary li {
+  padding: 16px 0 0 16px;
+  padding: 1rem 0 0 1rem;
+}
+
+/**
  * Fields.
+ * - By default we pretty much stick to field-type and field element styles (such as
+ *   .field-label's). You could style specific instances of fields here, or do that
+ *   in an entity stylesheet, for example _node.scss.
  */
 .field .field__label {
   font-family: inherit;
@@ -2231,6 +2243,9 @@ video {
    * - settings are applied using the Image extension in theme settings, where you can
    *   set image alignment per node type and view mode.
    */
+}
+.field-type--image figure {
+  margin: 0;
 }
 .field-type--image figcaption {
   font-size: 13px;
@@ -2312,8 +2327,10 @@ video {
   display: inline;
 }
 
-.node__submitted article:empty {
-  display: none;
+.node__header,
+.node__content {
+  overflow: hidden;
+  *zoom: 1;
 }
 
 /**
@@ -2333,6 +2350,10 @@ video {
  * - search block and form
  * - advanced search form
  * - search results pages
+ */
+/**
+ * User.
+ * - user profile pages.
  */
 /**
  * Views.

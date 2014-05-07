@@ -11,21 +11,24 @@
 // ---------------------------------------------------------------------------
 
 
-&.active-count--2 {
+// Two active regions.
+&.active-region-count--2 {
   .region {
     @include span(6 of 12);
   }
 }
 
 
-&.active-count--3 {
+// Three active regions.
+&.active-region-count--3 {
   .region {
     @include span(4 of 12);
   }
 }
 
 
-&.active-count--4 {
+// Four active regions.
+&.active-region-count--4 {
   .region {
     @include span(4 of 12);
 
@@ -33,12 +36,7 @@
     &:last-child {
       @include span(2 of 12);
     }
-  }
-}
 
-
-&.total-regions-4 {
-  .region {
     &:last-child {
       @include omega;
     }

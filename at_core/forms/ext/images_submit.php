@@ -24,12 +24,12 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
   foreach ($node_types as $nt) {
 
     $node_type = $nt->type;
-    $node_type_selector = '.node--' . $node_type;
+    $node_type_selector = '.node--type-' . $node_type;
 
     foreach ($node_view_modes as $display_mode) {
 
       $display_mode_id = str_replace('.', '_', $display_mode['id']);
-      $display_mode_selector = '.view-mode--' . substr($display_mode['id'], 5);
+      $display_mode_selector = '.node--view-mode-' . substr($display_mode['id'], 5);
 
       if (isset($values['settings_image_alignment_' . $node_type . '_' .  $display_mode_id])) {
         $bundle_data[$node_type]['selector'] = $node_type_selector;
@@ -54,7 +54,7 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
             $declaration = 'margin-left:auto;margin-right:auto;text-align:center';
           }
         }
-        $css[$bundle_key][$view_mode_key] = $bundle_values['selector'] . $view_mode_selector . ' .field-type--image{' .  $declaration . '}';
+        $css[$bundle_key][$view_mode_key] = $bundle_values['selector'] . $view_mode_selector . ' .node__content .field-type--image{' .  $declaration . '}';
       }
       unset($css[$bundle_key]['selector']);
     }

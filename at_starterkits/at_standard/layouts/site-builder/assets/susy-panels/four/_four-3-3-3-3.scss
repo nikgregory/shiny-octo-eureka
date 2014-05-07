@@ -11,21 +11,21 @@
 // ---------------------------------------------------------------------------
 
 
-&.active-count--2 {
+&.active-region-count--2 {
   .region {
     @include span(6 of 12);
   }
 }
 
 
-&.active-count--3 {
+&.active-region-count--3 {
   .region {
     @include span(4 of 12);
   }
 }
 
 
-&.active-count--4 {
+&.active-region-count--4 {
   .region {
     @include span(3 of 12);
 

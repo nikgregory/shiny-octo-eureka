@@ -5,52 +5,46 @@
  *
  * Available variables:
  * - node: Full node entity.
- *   - id: The node ID
+ *   - id: The node ID.
  *   - bundle: The type of the node, for example, "page" or "article".
  *   - authorid: The user ID of the node author.
- *   - createdtime: Formatted creation date. Preprocess functions can reformat it by
- *     calling format_date() with the desired parameters on
+ *   - createdtime: Formatted creation date. Preprocess functions can
+ *     reformat it by calling format_date() with the desired parameters on
  *     $variables['node']->getCreatedTime().
  *   - promoted: Whether the node is promoted to the front page.
  *   - sticky: Whether the node is 'sticky'. Sticky nodes are ordered above
  *     other non-sticky nodes in teaser listings
  *   - published: Whether the node is published.
- *   - comment: A value representing the comment status of the current node. May
- *     be one of the following:
- *     - 0: The comment form and any existing comments are hidden.
- *     - 1: Comments are closed. No new comments may be posted, but existing
- *       comments are displayed.
- *     - 2: Comments are open on this node.
- *   - comment_count: Number of comments attached to the node.
  * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
- *   {% hide(content.field_example) %} to temporarily suppress the printing
- *   of a given element.
- * - user_picture: The node author's picture from user-picture.html.twig.
+ *   {{ content|without('field_example') %} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
  * - date: Formatted creation date. Preprocess functions can reformat it by
  *   calling format_date() with the desired parameters on
  *   $variables['created'].
- * - name: Themed username of node author output from theme_username().
- * - node_url: Direct URL of the current node.
+ * - author_name: Themed username of node author output from theme_username().
+ * - url: Direct URL of the current node.
  * - display_submitted: Whether submission information should be displayed.
- * - submitted: Submission information created from name and date during
- *   template_preprocess_node().
  * - attributes: HTML attributes for the containing element.
  *   The attributes.class element may contain one or more of the following
  *   classes:
  *   - node: The current template type (also known as a "theming hook").
- *   - node-[type]: The current node type. For example, if the node is a
- *     "Article" it would result in "node-article". Note that the machine
+ *   - node--[type]: The current node type. For example, if the node is a
+ *     "Article" it would result in "node--article". Note that the machine
  *     name will often be in a short form of the human readable label.
- *   - view-mode-[view_mode]: The View Mode of the node; for example, a teaser
- *     would result in: "view-mode-teaser", and full: "view-mode-full".
- *   - preview: Whether a node is in preview mode.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   - node--preview: Whether a node is in preview mode.
  *   The following are controlled through the node publishing options.
- *   - promoted: Appears on nodes promoted to the front page.
- *   - sticky: Appears on nodes ordered above other non-sticky nodes in teaser
- *     listings.
- *   - unpublished: Appears on unpublished nodes visible only to site admins.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
  * - title_prefix: Additional output populated by modules, intended to be
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
@@ -74,39 +68,39 @@
  * language negotiation rule that may have been applied previously.
  *
  * @see template_preprocess_node()
- *
- * @todo Remove the id attribute (or make it a class), because if that gets
- *   rendered twice on a page this is invalid CSS for example: two lists
- *   in different view modes.
+ * @see at_core_preprocess_node()
  *
  * @ingroup themeable
  */
 #}
-<article class="{{ attributes.class }} clearfix"{{ attributes }}>
+<article{{ attributes }}>
 
-  <header class="node__header">
+  <header{{ header_attributes }}>
     {{ title_prefix }}
     {% if label %}
       {% if page %}
         <h1{{ title_attributes }}>{{ label }}</h1>
       {% else %}
-        <h2{{ title_attributes }}><a href="{{ node_url }}" rel="bookmark">{{ label }}</a></h2>
+        <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
       {% endif %}
     {% endif %}
     {{ title_suffix }}
 
     {% if display_submitted %}
-      <div{{ submitted_attributes }}>
-        {{ user_picture }}
-        <div class="node__meta">
-          {{ submitted }}
+      <div{{ meta_attributes }}>
+        {{ author_picture }}
+        <div{{ submitted_attributes }}>
+          {% trans %}
+            By <address{{ author_attributes|passthrough }}>{{ author_name|passthrough }}</address> on <time class="node__date">{{ date }}</time>
+          {% endtrans %}
+          {{ metadata }}
         </div>
       </div>
     {% endif %}
   </header>
 
-  <div class="node__content clearfix"{{ content_attributes }}>
-    {{ content|without('links', 'comment') }}
+  <div{{ content_attributes }}>
+    {{ content|without('comment', 'links') }}
   </div>
 
   {% if content.links %}

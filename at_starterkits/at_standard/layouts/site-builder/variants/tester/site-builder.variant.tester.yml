@@ -1,0 +1,21 @@
+# Tester CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Tester'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: tester.css
+  no_mq: tester-ie8.css
+
+# Desc
+description: 'A test layout for prototyping and testing Susy Panels.'
+
+# Screenshot
+screenshot: univer.png

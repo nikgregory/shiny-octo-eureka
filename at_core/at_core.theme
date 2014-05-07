@@ -261,8 +261,6 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   }
 }
 
-
-
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  * TODO: keep on on core regarding the alter hook and suggestions - https://drupal.org/node/2100775
@@ -714,19 +712,20 @@ function at_core_preprocess_node(&$variables) {
   $node = $variables['node'];
 
   // Initialize new attribute arrays.
+  $variables['header_attributes'] = new Attribute(array('class' => array()));
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
 
 
   // Modify attributes to BEM
-  $variables['attributes']['class'] = str_replace('node-', 'node--', $variables['attributes']['class']);
-  if ($node->isPromoted()) {
-    $variables['attributes']['class'] = str_replace('promoted', 'node--promoted', $variables['attributes']['class']);
-  }
-  if ($node->isSticky()) {
-    $variables['attributes']['class'] = str_replace('sticky', 'node--sticky', $variables['attributes']['class']);
-  }
+  //$variables['attributes']['class'] = str_replace('node-', 'node--', $variables['attributes']['class']);
+  //if ($node->isPromoted()) {
+  //  $variables['attributes']['class'] = str_replace('promoted', 'node--promoted', $variables['attributes']['class']);
+  //}
+  //if ($node->isSticky()) {
+  //  $variables['attributes']['class'] = str_replace('sticky', 'node--sticky', $variables['attributes']['class']);
+  //}
   if (!$node->isPublished()) {
-    $variables['attributes']['class'] = str_replace('unpublished', 'node--unpublished', $variables['attributes']['class']);
+    //$variables['attributes']['class'] = str_replace('unpublished', 'node--unpublished', $variables['attributes']['class']);
 
     // Unpublished status message.
     $variables['title_prefix']['status'] = array(
@@ -735,56 +734,54 @@ function at_core_preprocess_node(&$variables) {
       '#suffix' => '</p>',
     );
   }
-  if (isset($variables['preview'])) {
-    $variables['attributes']['class'] = str_replace('preview', 'node--preview', $variables['attributes']['class']);
-  }
-  $variables['attributes']['class'] = str_replace('view-mode-', 'view-mode--', $variables['attributes']['class']);
+  //if (isset($variables['preview'])) {
+  //  $variables['attributes']['class'] = str_replace('preview', 'node--preview', $variables['attributes']['class']);
+  //}
+  //$variables['attributes']['class'] = str_replace('view-mode-', 'view-mode--', $variables['attributes']['class']);
 
   // Set ID
-  $variables['attributes']['id'] = 'node__' . $node->id();
+  //$variables['attributes']['id'] = 'node__' . $node->id();
 
-  // Set classes for node title, submitted and footer.
+  // Set attribute classes.
+  $variables['header_attributes']['class'][] = 'node__header';
   $variables['title_attributes']['class'][] = 'node__title';
+  $variables['content_attributes']['class'][] = 'node__content';
   $variables['footer_attributes']['class'][] = 'node__footer';
 
 
-  // Totally rework how submitted and user picture work, core is a bit whacky right, hopefully
-  // this gets cleaned up in https://drupal.org/node/2004252 or a follow up issue.
+  // SEE https://drupal.org/node/2004252 or a follow up issue.
   if ($variables['display_submitted']) {
 
-    // Initialize new attributes array.
-    $variables['submitted_attributes'] = new Attribute(array('class' => array()));
+    // Add a class to the header if submitted is active, so we can theme dynamcially.
+    $variables['header_attributes']['class'][] = 'node__header--has-meta';
 
-    // Add attribute classes.
+    // Initialize new attributes arrays.
+    $variables['meta_attributes'] = new Attribute(array('class' => array()));
+    $variables['meta_attributes']['class'][] = 'node__meta';
+
+    $variables['submitted_attributes'] = new Attribute(array('class' => array()));
     $variables['submitted_attributes']['class'][] = 'node__submitted';
 
-    if (theme_get_setting('features.node_user_picture')) {
-      // Set a class on the node footer if there is a user picture.
-      $user_picture = user_view($node->getOwner(), 'compact');
+    // Node author classes
+    $variables['author_attributes']['class'] = array();
+    $variables['author_attributes']['class'][] = 'node__author';
 
-      // Get rid of the user article wrapper when there is a user picture and
-      // output nothing when there isn't.
-      if (array_key_exists('#items', $user_picture['user_picture'])) {
-        $variables['user_picture'] = $user_picture['user_picture'];
-        $variables['submitted_attributes']['class'][] = 'node__submitted--has-user-picture';
-      }
-      else {
-        $variables['user_picture'] = array();
-      }
+    // Seriously, we actually need to do this?
+    $rdf_module = \Drupal::moduleHandler()->moduleExists('rdf');
+    if ($rdf_module == FALSE) {
+      $variables['author_attributes']['rel'] = array();
     }
-    else {
-      $variables['user_picture'] = array();
-    }
+    $variables['author_attributes']['rel'][] = 'author';
 
-    // Reset submitted variable.
-    if (!empty($variables['submitted'])) {
-      $variables['submitted'] = t('Submitted by <address class="node__author" rel="author">!username</address> on <time class="node__datetime">!datetime</time>', array(
-        '!username' => $variables['name'],
-        '!datetime' => $variables['date'],
-      ));
+    // add a class if author picture is printing.
+    if (!empty($variables['author_picture'])) {
+      $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
     }
   }
+
+  //kpr($variables);
 }
+
 
 /**
  * Preprocess variables for comment templates.
@@ -1031,8 +1028,26 @@ function at_core_preprocess_user(&$variables) {
   $variables['title_attributes']['class'][] = 'user__title';
 }
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
+ * we can remove this.
+ */
+function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
+}
 
 
+
+
+
+
+
+/*
+function at_core_user_view_alter(&$build, \Drupal\user\UserInterface $account, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  kpr($build);
+}
+*/
 
 // Check views preprocess functions we need.
 /*
@@ -1040,7 +1055,6 @@ function at_core_preprocess_views_view(&$variables) {
   //kpr($variables);
 }
 */
-
 
 /**
  * Preprocess variables for user templates.

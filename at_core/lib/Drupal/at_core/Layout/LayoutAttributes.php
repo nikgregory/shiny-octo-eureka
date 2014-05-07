@@ -83,10 +83,10 @@ class LayoutAttributes extends PageLayout {
         $variables[$row_region_key . '__regions']['active'] = TRUE;
 
         // Total count class.
-        $variables[$row_region_key . '__attributes']['class'][] = 'total-count--' . $total_region_count[$row_region_key]['total_count'];
+        //$variables[$row_region_key . '__attributes']['class'][] = 'total-count--' . $total_region_count[$row_region_key]['total_count'];
 
         // Region count class.
-        $variables[$row_region_key . '__attributes']['class'][] = 'active-count--'. $count;
+        $variables[$row_region_key . '__attributes']['class'][] = 'active-region-count--'. $count;
 
         // Active region classes.
         foreach ($row_region_values as $region_class) {
@@ -103,7 +103,7 @@ class LayoutAttributes extends PageLayout {
       // is a powerful class that will be used for any order columns type layout with minimal CSS and classes, think of this
       // like Drupals "two-sidebars" type class but automated for any row and an any number of regions.
       if (isset($rso_count_class[$row_region_key])) {
-        $variables[$row_region_key . '__attributes']['class'][] =  'active-regions--' . implode('-', $rso_count_class[$row_region_key]);
+        $variables[$row_region_key . '__attributes']['class'][] =  'has-regions--' . implode('-', $rso_count_class[$row_region_key]);
       }
     }
 
