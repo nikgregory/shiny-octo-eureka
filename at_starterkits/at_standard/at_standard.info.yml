@@ -1,40 +1,39 @@
-name: 'AT Standard'
+name: AT Standard
 type: theme
 base theme: at_core
 subtheme type: at_standard
-description: 'Practical starter theme for site builders, themers, and rapid prototyping.'
+description: Practical starter theme for site builders, themers, and rapid prototyping.
 core: 8.x
-hidden: true
 stylesheets:
   all:
-    - 'css/styles.css'
+    - css/styles.css
 stylesheets-remove:
-  - system.theme.css
-  - normalize.css
+    - system.theme.css
+    - normalize.css
 regions:
-  messages: 'Messages'
-  header_first: 'Header first'
-  header_second: 'Header second'
-  header_third: 'Header third'
-  navbar: 'Nav bar'
-  features_first: 'Features first'
-  features_second: 'Features second'
-  features_third: 'Features third'
-  features_fourth: 'Features fourth'
-  highlighted: 'Highlighted'
-  content: 'Main content'
-  sidebar_first: 'Sidebar first'
-  sidebar_second: 'Sidebar second'
-  tertiary_first: 'Tertiary first'
-  tertiary_second: 'Tertiary second'
-  tertiary_third: 'Tertiary third'
-  tertiary_fourth: 'Tertiary fourth'
-  footer: 'Footer'
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
+  messages: Messages
+  header_first: Header first
+  header_second: Header second
+  header_third: Header third
+  navbar: Nav bar
+  features_first: Features first
+  features_second: Features second
+  features_third: Features third
+  features_fourth: Features fourth
+  highlighted: Highlighted
+  content: Main content
+  sidebar_first: Sidebar first
+  sidebar_second: Sidebar second
+  tertiary_first: Tertiary first
+  tertiary_second: Tertiary second
+  tertiary_third: Tertiary third
+  tertiary_fourth: Tertiary fourth
+  footer: Footer
+  page_top: Page top
+  page_bottom: Page bottom
 features:
-  - 'node_user_picture'
-  - 'comment_user_picture'
-  - 'comment_user_verification'
-  - 'favicon'
-  - 'logo'
+    - node_user_picture
+    - comment_user_picture
+    - comment_user_verification
+    - favicon
+    - logo

@@ -7,6 +7,8 @@ use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\Layout\LayoutSettings;
 
 
+// at_core
+
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
  *
@@ -24,6 +26,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Instantiate our Theme info object.
   $themeInfo = new ThemeInfo($theme);
   $getThemeInfo = ($themeInfo->getThemeInfo('info'));
+  //kpr($getThemeInfo);
 
   // Common paths.
   $at_core_path  = drupal_get_path('theme', 'at_core');
@@ -43,75 +46,66 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // AT Core
   if ($theme == 'at_core') {
 
-    $form['atsettings'] = array(
-      '#type' => 'vertical_tabs',
+    $form['at_core']['message'] = array(
+      '#type' => 'container',
+      '#markup' => t('AT Core has no configuration and cannot be used as a front end theme - it is a base them only. Use the <b>AT Theme Generator</b> to generate or clone a theme to get started.'),
     );
-
-    // Generator.
-    include_once($at_core_path . '/forms/generator.php');
-
-    // Help (at_core).
-    include_once($at_core_path . '/forms/help_core.php');
 
     // Hide form items.
     $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
     $form['logo']['#attributes']['class'] = array('visually-hidden');
     $form['favicon']['#attributes']['class'] = array('visually-hidden');
-
-    // Modify the submit.
-    $form['actions']['submit']['#value'] = t('Generate theme');
-    $form['actions']['submit']['#validate'][] = 'at_core_validate_generator';
-    $form['actions']['submit']['#submit'][] = 'at_core_submit_generator';
-
-    include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_validate.php');
-    include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_submit.php');
+    $form['actions']['#attributes']['class'] = array('visually-hidden');
   }
 
   // AT Subtheme
-  else {
+  if (isset($getThemeInfo['subtheme type'])) {
+    if ($getThemeInfo['subtheme type'] != 'at_generator') {
 
-    // Temp message for AT Blocks module.
-    // \Drupal::moduleHandler()->moduleExists($module)
-    if (!\Drupal::moduleHandler()->moduleExists('at_blocks')) {
-      drupal_set_message(t('<p>This theme requires the <a href="!atblocks" target="_blank">AT Blocks</a> module to show Logo, Site name, Slogan (collectively known as "Branding"), Page title, Messages (in a block), Tabs and Action links (if required).</p><p>If Drupal 8 ships with these things as blocks the module will be retired, however for now during development it\'s the only way to show these items because AT expects everything to be a block (except messages, unless you use the block). AT does not print page template variables for these items - only regions. Please help in the Drupal core issues to convert these site elements into blocks:</p>
-      <ul>
-        <li><a href="https://drupal.org/node/1053648" target="_blank">Convert site elements (site name, slogan, site logo) into blocks</a></li>
-        <li><a href="https://drupal.org/node/507488" target="_blank">Convert page elements (title, tabs, actions, messages) into blocks</a></li>
-      </ul>
-      <p>This message will go away when you install AT Blocks module.</p>', array('!atblocks' => 'https://drupal.org/project/at_blocks')), 'status');
+      // Temp message for AT Blocks module.
+      // \Drupal::moduleHandler()->moduleExists($module)
+/*
+      if (!\Drupal::moduleHandler()->moduleExists('at_blocks')) {
+        drupal_set_message(t('<p>This theme requires the <a href="!atblocks" target="_blank">AT Blocks</a> module to show Logo, Site name, Slogan (collectively known as "Branding"), Page title, Messages (in a block), Tabs and Action links (if required).</p><p>If Drupal 8 ships with these things as blocks the module will be retired, however for now during development it\'s the only way to show these items because AT expects everything to be a block (except messages, unless you use the block). AT does not print page template variables for these items - only regions. Please help in the Drupal core issues to convert these site elements into blocks:</p>
+        <ul>
+          <li><a href="https://drupal.org/node/1053648" target="_blank">Convert site elements (site name, slogan, site logo) into blocks</a></li>
+          <li><a href="https://drupal.org/node/507488" target="_blank">Convert page elements (title, tabs, actions, messages) into blocks</a></li>
+        </ul>
+        <p>This message will go away when you install AT Blocks module.</p>', array('!atblocks' => 'https://drupal.org/project/at_blocks')), 'status');
+      }
+*/
+
+      // Layouts.
+      include_once($at_core_path . '/forms/layouts.php');
+
+      // Advanced settings (extensions).
+      include_once($at_core_path . '/forms/ext/advanced_settings.php');
+
+      // Basic settings - move into details wrapper and collapse.
+      $form['basic_settings'] = array(
+        '#type' => 'details',
+        '#title' => 'Basic Settings',
+        '#collapsed' => TRUE,
+        //'#weight' => 100,
+      );
+      $form['theme_settings']['#collapsible'] = TRUE;
+      $form['theme_settings']['#collapsed'] = TRUE;
+      $form['theme_settings']['#group'] = 'basic_settings';
+      $form['logo']['#collapsible'] = TRUE;
+      $form['logo']['#collapsed'] = TRUE;
+      $form['logo']['#group'] = 'basic_settings';
+      $form['favicon']['#collapsible'] = TRUE;
+      $form['favicon']['#collapsed'] = TRUE;
+      $form['favicon']['#group'] = 'basic_settings';
+
+      // buttons don't work with #group, move it the hard way.
+
+      $form['actions']['#type'] = $form['basic_settings']['actions']['#type'] = 'actions';
+      $form['actions']['submit']['#type'] = $form['basic_settings']['actions']['submit']['#type'] = 'submit';
+      $form['actions']['submit']['#value'] = $form['basic_settings']['actions']['submit']['#value'] = t('Save basic settings');
+      $form['actions']['submit']['#button_type'] = $form['basic_settings']['actions']['submit']['#button_type'] = 'primary';
+      unset($form['actions']);
     }
-
-    // Layouts.
-    include_once($at_core_path . '/forms/layouts.php');
-
-    // Advanced settings (extensions).
-    include_once($at_core_path . '/forms/ext/advanced_settings.php');
-
-    // Basic settings - move into details wrapper and collapse.
-    $form['basic_settings'] = array(
-      '#type' => 'details',
-      '#title' => 'Basic Settings',
-      '#collapsed' => TRUE,
-      //'#weight' => 100,
-    );
-    $form['theme_settings']['#collapsible'] = TRUE;
-    $form['theme_settings']['#collapsed'] = TRUE;
-    $form['theme_settings']['#group'] = 'basic_settings';
-    $form['logo']['#collapsible'] = TRUE;
-    $form['logo']['#collapsed'] = TRUE;
-    $form['logo']['#group'] = 'basic_settings';
-    $form['favicon']['#collapsible'] = TRUE;
-    $form['favicon']['#collapsed'] = TRUE;
-    $form['favicon']['#group'] = 'basic_settings';
-
-    // buttons don't work with #group, move it the hard way.
-
-    $form['actions']['#type'] = $form['basic_settings']['actions']['#type'] = 'actions';
-    $form['actions']['submit']['#type'] = $form['basic_settings']['actions']['submit']['#type'] = 'submit';
-    $form['actions']['submit']['#value'] = $form['basic_settings']['actions']['submit']['#value'] = t('Save basic settings');
-    $form['actions']['submit']['#button_type'] = $form['basic_settings']['actions']['submit']['#button_type'] = 'primary';
-    unset($form['actions']);
-
   }
 
   //kpr($form['actions']);

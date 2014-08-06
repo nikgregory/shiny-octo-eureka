@@ -1,0 +1,75 @@
+<?php
+
+use Drupal\Core\Config\Config;
+use Drupal\at_core\Theme\ThemeInfo;
+use Drupal\at_core\Theme\ThemeSettingsConfig;
+
+// at_generator
+
+
+/**
+ * Implimentation of hook_form_system_theme_settings_alter()
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ *
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
+ */
+function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
+
+  // Set the theme name.
+  $theme = $form_state['build_info']['args'][0];
+
+  // Instantiate our Theme info object.
+  $themeInfo = new ThemeInfo($theme);
+  $getThemeInfo = ($themeInfo->getThemeInfo('info'));
+
+  // Common paths.
+  $at_core_path  = drupal_get_path('theme', 'at_core');
+  $subtheme_path = drupal_get_path('theme', $theme);
+
+  // Attached required CSS and JS libraries and files.
+  $form['#attached'] = array(
+    'library' => array(
+      'system' => 'core/drupal.machine-name',
+    ),
+    'css' => array(
+      $at_core_path . '/stylesheets/css/appearance.css',
+    ),
+  );
+
+  $form['atsettings'] = array(
+    '#type' => 'vertical_tabs',
+  );
+
+  // Generator.
+  include_once($at_core_path . '/forms/generator.php');
+
+  // Help (at_core).
+  include_once($at_core_path . '/forms/help_core.php');
+
+  // Hide form items.
+  $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
+  $form['logo']['#attributes']['class'] = array('visually-hidden');
+  $form['favicon']['#attributes']['class'] = array('visually-hidden');
+
+  // Modify the submit.
+  $form['actions']['submit']['#value'] = t('Generate theme');
+  $form['actions']['submit']['#validate'][] = 'at_core_validate_generator';
+  $form['actions']['submit']['#submit'][] = 'at_core_submit_generator';
+
+  include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_validate.php');
+  include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_submit.php');
+
+}
+
+
+
+
+
+
+
+
+
+

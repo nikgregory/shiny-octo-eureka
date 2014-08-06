@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\SafeMarkup;
+
 $form['layouts']['layout_select'] = array(
   '#type' => 'fieldset',
   '#title' => t('Select Layouts'),
@@ -65,12 +67,27 @@ foreach ($providers as $provider_key => $provider_name) {
         $meta .= '</div>';
         $meta .= '</details>';
 
+        // SafeMarkup is a bit of a cheat here, but it was quick and effective.
         $table_options_data[$plugin][$name_key] = array(
-          'name'        => array('data' => '<h3>'. $options_data['name'] . '</h3>' . $meta, 'class' => array('field-name')),
-          'provider'    => array('data' => $provider_key, 'class' => array('field-providers field-hidden')),
-          'plugin'      => array('data' => $plugin, 'class' => array('field-plugin field-hidden')),
-          'screenshot'  => array('data' => $options_data['screenshot'], 'class' => array('field-screenshot')),
-          '#attributes' => array('class' => array($row_class)),
+          'name' => array(
+            'data' => SafeMarkup::set('<h3>'. $options_data['name'] . '</h3>' . $meta),
+            'class' => array('field-name'),
+          ),
+          'provider' => array(
+            'data' => $provider_key,
+            'class' => array('field-providers field-hidden'),
+          ),
+          'plugin' => array(
+            'data' => $plugin,
+            'class' => array('field-plugin field-hidden'),
+          ),
+          'screenshot' => array(
+            'data' => SafeMarkup::set($options_data['screenshot']),
+            'class' => array('field-screenshot'),
+          ),
+          '#attributes' => array(
+            'class' => array($row_class),
+          ),
         );
       }
 

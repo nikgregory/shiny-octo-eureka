@@ -10,6 +10,7 @@ use Drupal\at_core\Helpers\FileStripReplace;
 use Drupal\at_core\Helpers\RemoveDirectory;
 use Drupal\at_core\Helpers\BuildInfoFile;
 use Drupal\Component\Uuid;
+use Drupal\Component\Utility\String;
 use Symfony\Component\Yaml\Parser;
 
 class ThemeGeneratorSubmit {
@@ -22,6 +23,8 @@ class ThemeGeneratorSubmit {
    */
   public function generateTheme($values) {
 
+    //kpr($values);
+
     // Instantiate helpers
     $recursiveCopy   = new RecursiveCopy();
     $renameFile      = new FileRename();
@@ -32,7 +35,7 @@ class ThemeGeneratorSubmit {
 
     // Prepare form values and set them into variables.
     $machine_name    = $values['generate']['generate_machine_name'];
-    $friendly_name   = check_plain($values['generate']['generate_friendly_name']);
+    $friendly_name   = String::checkPlain($values['generate']['generate_friendly_name']);
     $subtheme_type   = $values['generate']['generate_type'];
     $skin_base_theme = $values['generate']['generate_skin_base'] ?: 0;
     $clone_source    = $values['generate']['generate_clone_source'] ?: '';
@@ -157,7 +160,7 @@ class ThemeGeneratorSubmit {
 
         // Check and set description and version.
         $description = $description ?: $generic_decription;
-        $version = $version ?: '8.x-1.0';
+        $version = $version ?: '8.0.x';
 
         // Parse, rebuild and save the themes info.yml file.
         $parser = new Parser();
@@ -192,7 +195,7 @@ class ThemeGeneratorSubmit {
         $themeInfo = new ThemeSettingsInfo($skin_base_theme);
         $baseThemeInfo = ($themeInfo->baseThemeInfo('info'));
         $description = $description ?: 'Sub theme of ' . $baseThemeInfo['name'];
-        $version = $version ?: '8.x-1.0';
+        $version = $version ?: '8.0.x';
 
         // Rename files
         $renameFile->fileRename("$target/at_skin.info.yml", $info_file);

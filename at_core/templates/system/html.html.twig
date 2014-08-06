@@ -30,15 +30,16 @@
 <!--[if IE 8]><html class="lt-ie9" lang="{{ lang }}" dir="{{ dir }}"><![endif]-->
 <!--[if gt IE 8]><!--><html{{ html_attributes }}><!--<![endif]-->
   <head>
-    {{ head }}
+    {{ page.head }}
     <title>{{ head_title }}</title>
-    {{ styles }}
-    {{ scripts }}
+    {{ page.styles }}
+    {{ page.scripts }}
   </head>
-  <body class="{{ attributes.class }}"{{ attributes }}>
-    <a href="{{ skip_link_target }}" class="visually-hidden focusable">{{ 'Skip to main content'|t }}</a>
+  <body{{ attributes }}>
+    <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
-    {{ page }}
+    {{ page.content }}
     {{ page_bottom }}
+    {{ page.scripts('footer') }}
   </body>
 </html>

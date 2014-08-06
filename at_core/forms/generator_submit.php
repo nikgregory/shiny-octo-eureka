@@ -12,9 +12,12 @@ function at_core_submit_generator(&$form, &$form_state) {
   $values = $form_state['values'];
 
   // Generate a new theme.
-  if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
+  if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_generator') {
     $generateTheme = new ThemeGeneratorSubmit();
     $generateTheme->generateTheme($values);
+  }
+  else {
+    drupal_set_message(t('Bummer, something went wrong.'));
   }
 
   //drupal_theme_rebuild();

@@ -9,6 +9,11 @@ use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Layout\LayoutAttributes;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\Component\Utility\String;
+
+
+use Drupal\node\NodeInterface;
+
 
 // TODO convert to Class with methods?
 global $theme;
@@ -84,6 +89,7 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
 */
 
 /* Remove when menus become twig templates.*/
+/*
 function at_core_menu_link(array $variables) {
   global $theme;
   $element = $variables['element'];
@@ -113,9 +119,11 @@ function at_core_menu_link(array $variables) {
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
 }
+*/
 
 
 /* Uncomment when menu functions become twig templates.*/
+/*
 function at_core_preprocess_menu_link(&$variables) {
   global $theme;
 
@@ -137,6 +145,7 @@ function at_core_preprocess_menu_link(&$variables) {
     }
   }
 }
+*/
 
 
 
@@ -165,7 +174,7 @@ function at_core_html_head_alter(&$head_elements) {
       $rel = 'apple-touch-icon-precomposed';
     }
     // Apple default icon and Nokia shortcut icon.
-    $icon_path_default = check_plain(at_core_theme_get_setting('settings.icon_path_default', $theme));
+    $icon_path_default = String::checkPlain(at_core_theme_get_setting('settings.icon_path_default', $theme));
     if (!empty($icon_path_default)) {
       $default_icon = file_create_url($default_icon_path = $path_to_theme . '/' . $icon_path_default);
       $head_elements['at_core_touch_icon_nokia'] = array(
@@ -188,7 +197,7 @@ function at_core_html_head_alter(&$head_elements) {
       );
     }
     // iPad (standard display).
-    $apple_touch_icon_path_ipad = check_plain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad', $theme));
+    $apple_touch_icon_path_ipad = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad', $theme));
     if (!empty($apple_touch_icon_path_ipad)) {
       $head_elements['at_core_touch_icon_ipad'] = array(
         '#type' => 'html_tag',
@@ -202,7 +211,7 @@ function at_core_html_head_alter(&$head_elements) {
       );
     }
     // iPhone retina.
-    $apple_touch_icon_path_iphone_retina = check_plain(at_core_theme_get_setting('settings.apple_touch_icon_path_iphone_retina', $theme));
+    $apple_touch_icon_path_iphone_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_iphone_retina', $theme));
     if (!empty($apple_touch_icon_path_iphone_retina)) {
       $head_elements['at_core_touch_icon_iphone_retina'] = array(
         '#type' => 'html_tag',
@@ -216,7 +225,7 @@ function at_core_html_head_alter(&$head_elements) {
       );
     }
     // iPad retina.
-    $apple_touch_icon_path_ipad_retina = check_plain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad_retina', $theme));
+    $apple_touch_icon_path_ipad_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad_retina', $theme));
     if (!empty($apple_touch_icon_path_ipad_retina)) {
       $head_elements['at_core_touch_icon_ipad_retina'] = array(
         '#type' => 'html_tag',
@@ -398,7 +407,11 @@ function at_core_page_alter(&$page) {
       }
       */
 
-      if ($suggestions = theme_get_suggestions(arg(), 'page')) {
+
+      // need to see what is in current_path and if this will actually work consistantly
+      $path_args = explode('/', current_path());
+
+      if ($suggestions = theme_get_suggestions($path_args, 'page')) {
         foreach (array_reverse($suggestions) as $suggestion) {
           // We need three settings to set the layout - the provider (the active theme or a base theme),
           // the plugin (a layout plugin name) and the actual CSS layout set for this suggestion.
@@ -711,33 +724,18 @@ function at_core_preprocess_region(&$variables) {
 function at_core_preprocess_node(&$variables) {
   $node = $variables['node'];
 
-  // Initialize new attribute arrays.
+  // Header and Footer attributes.
   $variables['header_attributes'] = new Attribute(array('class' => array()));
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
 
-
-  // Modify attributes to BEM
-  //$variables['attributes']['class'] = str_replace('node-', 'node--', $variables['attributes']['class']);
-  //if ($node->isPromoted()) {
-  //  $variables['attributes']['class'] = str_replace('promoted', 'node--promoted', $variables['attributes']['class']);
-  //}
-  //if ($node->isSticky()) {
-  //  $variables['attributes']['class'] = str_replace('sticky', 'node--sticky', $variables['attributes']['class']);
-  //}
+  // Unpublished status message.
   if (!$node->isPublished()) {
-    //$variables['attributes']['class'] = str_replace('unpublished', 'node--unpublished', $variables['attributes']['class']);
-
-    // Unpublished status message.
     $variables['title_prefix']['status'] = array(
       '#markup' => t('Node unpublished'),
       '#prefix' => '<p class="unpublished clearfix" aria-label="Status message" role="contentinfo">',
       '#suffix' => '</p>',
     );
   }
-  //if (isset($variables['preview'])) {
-  //  $variables['attributes']['class'] = str_replace('preview', 'node--preview', $variables['attributes']['class']);
-  //}
-  //$variables['attributes']['class'] = str_replace('view-mode-', 'view-mode--', $variables['attributes']['class']);
 
   // Set ID
   //$variables['attributes']['id'] = 'node__' . $node->id();
@@ -1038,6 +1036,19 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
 }
 
 
+
+
+
+/**
+ * Implements hook_node_links_alter().
+ */
+function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {
+/*
+  kpr($node_links);
+  kpr($node);
+  kpr($context);
+*/
+}
 
 
 

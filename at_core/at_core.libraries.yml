@@ -13,6 +13,10 @@ at.window_size:
 # IE9.js
 at.ie9js:
   remote: https://code.google.com/p/ie7-js/
+  license:
+    name: MIT
+    url: https://code.google.com/p/ie7-js/source/browse/version/2.1(beta4)/LICENSE
+    gpl-compatible: true
   version: 2.1
   js:
     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }

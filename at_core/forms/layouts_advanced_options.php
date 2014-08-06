@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\String;
+
 $form['layouts']['adv_options'] = array(
   '#type' => 'fieldset',
   '#title' => t('Options'),
@@ -34,7 +36,7 @@ $form['layouts']['adv_options']['select']['max_width']['settings_max_width_value
   '#title' => t('Value'),
   '#size' => 4,
   '#maxlength' => 4,
-  '#default_value' => check_plain(theme_get_setting('settings.max_width_value')),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.max_width_value')),
   '#states' => array(
     'disabled' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
   ),

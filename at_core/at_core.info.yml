@@ -2,6 +2,7 @@ name: 'AT Core'
 type: theme
 description: 'Includes all critical dependancies and the sub-theme generator. You MUST enable this theme FIRST or your sub-theme will cause a fatal error when enabled.'
 core: 8.x
+hidden: true
 settings:
   show_window_size: '0'
-base: only
+  base: only

@@ -18,16 +18,17 @@ $font_elements = font_elements();
 $font_options = array(
   'none' => t('-- none --'),
 );
-if (theme_get_setting('settings.base_websafe')) {
+
+if (theme_get_setting('settings.font_websafe')) {
   $font_options['websafe'] = t('Websafe stack');
 }
-if (theme_get_setting('settings.base_google')) {
+if (theme_get_setting('settings.font_google')) {
   $font_options['google'] = t('Google font');
 }
-if (theme_get_setting('settings.base_typekit')) {
+if (theme_get_setting('settings.font_typekit')) {
   $font_options['typekit'] = t('Typekit');
 }
-if (theme_get_setting('settings.base_customstack')) {
+if (theme_get_setting('settings.font_customstack')) {
   $font_options['customstack'] = t('Custom stack');
 }
 
@@ -190,7 +191,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#field_suffix' => 'px (coverted to rem with px fallback)',
       '#size' => 3,
       '#maxlength' => 3,
-      '#default_value' => check_plain(theme_get_setting('settings.font_size_' . $font_element_key)),
+      '#default_value' => String::checkPlain(theme_get_setting('settings.font_size_' . $font_element_key)),
       '#attributes' => array('class' => array('font-option')),
     );
   }

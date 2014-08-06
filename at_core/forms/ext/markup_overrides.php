@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\String;
+
 /**
  * @file
  * Generate form elments for the Modify Output settings.
@@ -160,7 +162,7 @@ $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_li
   '#description' => t('By default the skip link target is <code>#main-content</code>, you can alter that here if you need to.'),
   '#size' => 25,
   '#maxlength' => 60,
-  '#default_value' => check_plain(theme_get_setting('settings.skip_link_target')),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.skip_link_target')),
 );
 
 

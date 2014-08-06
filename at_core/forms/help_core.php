@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\Xss;
+
 // Help
 //----------------------------------------------------------------------
 $help_menu      = file_get_contents($at_core_path . '/docs/help_core/index.html');
