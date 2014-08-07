@@ -3,7 +3,7 @@
   margin-left: auto;
   margin-right: auto;
 }
-.regions::after {
+.regions:after {
   content: " ";
   display: block;
   clear: both;

@@ -10,10 +10,8 @@
 # compass with throw an error, hopefully. Scout and Codekit should also pick this
 # up and install the right gems. A bundle Gemfile is included so you can run
 # bundle install.
-gem "susy", "~> 2.1.0"
-
+gem "susy", "~> 2.1.2"
 require "susy"
-
 
 
 # Directory paths

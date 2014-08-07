@@ -24,6 +24,7 @@ $form-item-border-style:            $border-style;
 $form-item-border-color:            $border-color;
 $form-item-border-radius:           $border-radius;
 
+$form-item-marker-color:            #e00; // bright red, typically styles the asterisk (*) on required form fields.
 
 
 .form-item {
@@ -223,11 +224,16 @@ h4.label {
   padding: 0;
 }
 
+.marker {
+  color: $form-item-marker-color;
+}
 
-// Labels
-.marker,
-.form-required {
-  color: #e00; // very bright red
+.form-required:after {
+  color: $form-item-marker-color;
+  /* Use a Unicode symbol to prevent screen readers from announcing the text. */
+  content: " \204E ";
+  line-height: 1;
+  vertical-align: super;
 }
 
 

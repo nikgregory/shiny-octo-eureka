@@ -103,7 +103,6 @@
     {{ content|without('comment', 'links') }}
   </div>
 
-
   {% if content.links is not empty %}
     <footer{{ footer_attributes }}>
       {{ content.links }}
@@ -113,51 +112,3 @@
   {{ content.comment }}
 
 </article>
-
-{#
-# full view mode
-<drupal:render-cache-placeholder
-
-callback="\Drupal\node\NodeViewBuilder::renderLinks"
-
-context="node_entity_id:1;view_mode:full;langcode:en;in_preview:;token:HU42gOcq7EvJyrxaUg6yEdOg-sRtHY1GFFdzz4N5257S5d4zvxezgNt6dMrlAB63cVtR7BxMJw;"
-
-token="HU42gOcq7EvJyrxaUg6yEdOg-sRtHY1GFFdzz4N5257S5d4zvxezgNt6dMrlAB63cVtR7BxMJw" />
-
-
-# teaser view mode
-<drupal:render-cache-placeholder
-
-callback="\Drupal\node\NodeViewBuilder::renderLinks"
-
-context="node_entity_id:1;view_mode:teaser;langcode:en;in_preview:;token:xujh6dC3A_I5rDMZitZSLLcw5sOIaTGqHCOUc-LJKvc90hcUBXQzn7g_BROsYgUWJxx4WC3zJg;"
-
-token="xujh6dC3A_I5rDMZitZSLLcw5sOIaTGqHCOUc-LJKvc90hcUBXQzn7g_BROsYgUWJxx4WC3zJg" />
-
-
-#}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

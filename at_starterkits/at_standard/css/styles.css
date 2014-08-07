@@ -1491,9 +1491,16 @@ h4.label {
   padding: 0;
 }
 
-.marker,
-.form-required {
+.marker {
   color: #e00;
+}
+
+.form-required:after {
+  color: #e00;
+  /* Use a Unicode symbol to prevent screen readers from announcing the text. */
+  content: " \204E ";
+  line-height: 1;
+  vertical-align: super;
 }
 
 abbr.form-required, abbr.tabledrag-changed, abbr.ajax-changed {
