@@ -225,5 +225,5 @@ $form['generate']['options']['generate_version'] = array(
   '#type' => 'textfield',
   '#title' => t('Version string'),
   '#default_value' => '',
-  '#description' => t('Numbers, hyphens and periods only. E.g. 8.x-1.0'),
+  '#description' => t('Numbers, hyphens and periods only. E.g. 8.0.0'),
 );

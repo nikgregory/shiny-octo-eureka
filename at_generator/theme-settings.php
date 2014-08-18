@@ -4,9 +4,6 @@ use Drupal\Core\Config\Config;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
-// at_generator
-
-
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
  *
@@ -63,13 +60,3 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
   include_once($at_generator_path . '/forms/generator_validate.php');
   include_once($at_generator_path . '/forms/generator_submit.php');
 }
-
-
-
-
-
-
-
-
-
-

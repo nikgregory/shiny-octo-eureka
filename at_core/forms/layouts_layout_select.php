@@ -19,10 +19,12 @@ foreach ($providers as $provider_key => $provider_name) {
   }
 }
 
+//kpr($master_layout_options);
+
 // Master layout plugin.
 $form['layouts']['layout_select']['settings_master_layout'] = array(
   '#type' => 'select',
-  '#title' => t('<h3>Layout</h3>'),
+  '#title' => t('<h3>Layout Plugins</h3>'),
   '#options' => $master_layout_options,
   '#default_value' => theme_get_setting('settings.master_layout', $theme),
 );

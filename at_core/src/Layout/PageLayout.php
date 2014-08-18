@@ -65,20 +65,21 @@ class PageLayout {
 
       // Get the CSS variants path from the main layout yml file.
       if ($config_data[$plugin]['css_layouts_path']) {
-        $css_layouts_path = $this->plugin_path . $plugin . '/' . $config_data[$plugin]['css_layouts_path'];
+        $css_layouts_path[$plugin] = $this->plugin_path . $plugin . '/' . $config_data[$plugin]['css_layouts_path'];
 
         // We need to scan directories to get all CSS layouts.
-        $css_layouts = self::getCSSLayoutDirs($css_layouts_path);
+        $css_layouts[$plugin] = self::getCSSLayoutDirs($css_layouts_path[$plugin]);
 
         // Now parse each CSS layouts yml and add them the configuration array.
-        foreach ($css_layouts as $css_layout) {
-          $css_config_file = $css_layouts_path . '/' . $css_layout . '/' . $plugin . '.variant.' . $css_layout . '.yml';
+        foreach ($css_layouts[$plugin] as $css_layout) {
+          $css_config_file[$css_layout] = $css_layouts_path[$plugin] . '/' . $css_layout . '/' . $plugin . '.variant.' . $css_layout . '.yml';
 
-          $config_data[$plugin]['css_layouts'][$css_layout] = $parser->parse(file_get_contents($css_config_file));
+          $config_data[$plugin]['css_layouts'][$css_layout] = $parser->parse(file_get_contents($css_config_file[$css_layout]));
         }
       }
     }
 
+    //kpr($config_data);
     return $config_data;
   }
 

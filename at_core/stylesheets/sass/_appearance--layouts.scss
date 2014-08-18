@@ -185,11 +185,18 @@
   }
 }
 
-
+// Manage suggestions
 #edit-manage-suggestions {
   border: 0;
   padding: 0;
   margin: 0;
+}
+
+// The select all input is not disabled by #states, just hide it for now.
+.table-suggestions {
+  .select-all input {
+    display: none;
+  }
 }
 
 .form-item-layout-type-select {

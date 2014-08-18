@@ -59,10 +59,8 @@ class ThemeGeneratorSubmit {
 
     // Variables for kit sourced themes.
     if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
-
       $uikit_dir_path = $path . '/../at_starterkits/optional_components/uikit';
       $color_dir_path = $path . '/../at_starterkits/optional_components/color';
-
       $theme_file_path = $path . '/../at_starterkits/optional_components/THEMENAME.theme';
       $theme_settings_file_path = $path . '/../at_starterkits/optional_components/theme-settings.php';
     }
@@ -71,7 +69,6 @@ class ThemeGeneratorSubmit {
     else if ($subtheme_type == 'at_clone') {
       $clone_source_theme = drupal_get_path('theme', $clone_source);
       $source = $clone_source_theme;
-
       $theme_file_path = "$target/$machine_name.theme";
       $theme_settings_file_path = "$target/theme-settings.php";
     }
@@ -92,9 +89,7 @@ class ThemeGeneratorSubmit {
       // Standard, Minimal and Clones
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
 
-        $configuration_files = array(
-          $subtheme_type . '.settings.yml',
-        );
+        $configuration_files = array($subtheme_type . '.settings.yml');
 
         // Set variables and perform operations depending on the type and options.
         if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
@@ -186,6 +181,7 @@ class ThemeGeneratorSubmit {
             "css/styles.css",
           ),
         );
+
         if ($color == 1) {
           $theme_info_data['stylesheets'] = array(
             'all' => array(
@@ -241,8 +237,6 @@ class ThemeGeneratorSubmit {
         $parser = new Parser();
         $theme_info_data = $parser->parse(file_get_contents($base_theme_info));
 
-        //kpr($theme_info_data);
-
         $theme_info_data['name']           = "'$friendly_name'";
         $theme_info_data['type']           = "theme";
         $theme_info_data['base theme']     = $skin_base_theme;
@@ -281,32 +275,19 @@ class ThemeGeneratorSubmit {
       //----------------------------------------------------------------------
       $generated_path = drupal_get_path('theme', $machine_name);
 
-      //<p>Before you can use your new theme go to <a href=\"!performance_settings\" target=\"_blank\">Performance Settings</a> and clear all caches.</p>
+      drupal_set_message(t("<p>A new theme <b>!theme_name</b> (machine name: <em>\"!machine_name\"</em>) has been generated.</p>", array('!theme_name' => $friendly_name, '!machine_name' => $machine_name, '!theme_path' => $generated_path, '!performance_settings' => base_path() . 'admin/config/development/performance')), 'status');
 
-      drupal_set_message(t("<p>A new theme <b>!theme_name</b> (machine name: <em>\"!machine_name\"</em>) has been generated.</p>", array(
-        '!theme_name' => $friendly_name,
-        '!machine_name' => $machine_name,
-        '!theme_path' => $generated_path,
-        '!performance_settings' => base_path() . 'admin/config/development/performance',
-        )), 'status');
-
-        // Warn about stylesheets in the new skin theme
-        if ($subtheme_type == 'at_skin') {
-          drupal_set_message(t('Skin themes do not inherit theme <em>settings</em>, this is important for things like Layout and Library settings. After you enable your new theme be sure to check and configure it\'s settings.', array(
-            '!theme_path' => $generated_path,
-            '!machine_name' => $machine_name,
-            )), 'warning');
-        }
-      }
-
-      else {
-        // TODO check if this is validated, really this should be in validation.
-
-        //kpr($source);
-
-        $source = $path . '/../at_starterkits/' . $subtheme_type;
-        drupal_set_message(t("An error occurred and processing did not complete. The source directory '!dir' does not exist or is not readable.", array('!dir' => $source)), 'error');
+      // Warn about stylesheets in the new skin theme
+      if ($subtheme_type == 'at_skin') {
+        drupal_set_message(t('Skin themes do not inherit theme <em>settings</em>, this is important for things like Layout and Library settings. After you enable your new theme be sure to check and configure it\'s settings.', array('!theme_path' => $generated_path, '!machine_name' => $machine_name)), 'warning');
       }
     }
 
+    else {
+      // TODO check if this is validated, really this should be in validation.
+      $source = $path . '/../at_starterkits/' . $subtheme_type;
+      drupal_set_message(t("An error occurred and processing did not complete. The source directory '!dir' does not exist or is not readable.", array('!dir' => $source)), 'error');
+    }
+  }
 } // end class
+

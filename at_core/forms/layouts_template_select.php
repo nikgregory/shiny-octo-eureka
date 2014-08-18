@@ -56,7 +56,7 @@ if ($default_layout = theme_get_setting('settings.template_suggestion_page', $th
     $default_plugin_markup = '<h5>' . t('Current default page.html.twig layout:') . '</h5>';
     $default_plugin_markup .= '<dl class="layout-meta current-default-layout-meta">';
     //$default_plugin_markup .= '<dt>' . t('Template') . '</dt><dd>page.html.twig</dd>';
-    $default_plugin_markup .= '<dt>' . t('Layout') . '</dt><dd>'. mb_strtoupper($default_plugin) . '</dd>';
+    $default_plugin_markup .= '<dt>' . t('Plugin') . '</dt><dd>'. mb_strtoupper($default_plugin) . '</dd>';
     $default_plugin_markup .= '<dt>' . t('Variant') . '</dt><dd>'. mb_strtoupper($default_layout) . '</dd>';
     $default_plugin_markup .= '<dt>' . t('Provider') . '</dt><dd>'. $default_provider . '</dd>';
     $default_plugin_markup .= '</dl>';
@@ -69,6 +69,8 @@ else {
     '#markup' => $plugin_not_set_markup,
   );
 }
+
+//kpr($layout_values);
 
 // -- none -- message.
 /*
@@ -194,8 +196,11 @@ $form['layouts']['template_select']['select_type']['manage_suggestions']['wrappe
   '#type' => 'tableselect',
   '#header' => $manage_suggestions_header,
   '#options' => $manage_suggestions_data,
-  '#multiple' => TRUE,
+  //'#multiple' => TRUE,
   '#attributes' => array('class' => array('table-suggestions')),
+  '#states' => array(
+    'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+  ),
 );
 
 if (empty($manage_suggestions_data)) {
@@ -207,7 +212,3 @@ if (empty($manage_suggestions_data)) {
     ),
   );
 }
-
-
-
-

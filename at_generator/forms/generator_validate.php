@@ -2,7 +2,6 @@
 
 /**
  * Validate form values.
- * TODO: form_set_error is deprecated, but I am not sure how to use setErrorByName(), SEE https://drupal.org/node/2145007
  */
 function at_generator_validate_generator(&$form, &$form_state) {
   $theme  = $form_state['build_info']['args'][0];
@@ -29,11 +28,10 @@ function at_generator_validate_generator(&$form, &$form_state) {
 
     // Check if directories and files exist and are readable/writable etc.
     if (!file_exists($source) && !is_readable($source)) {
-      form_set_error('', $form_state, t('The Starterkit or base theme (if you are generating a Skin) can not be found or is not readable - check permissions or perhaps you moved things around?'));
+      $form_state->setErrorByName('', t('The Starterkit or base theme (if you are generating a Skin) can not be found or is not readable - check permissions or perhaps you moved things around?'));
     }
     if (!is_writable(dirname($target))) {
-      form_set_error('', $form_state, t('The target directory is not writable, please check permissions on the <code>/themes/</code> directory where Adaptivetheme is located.'));
+      $form_state->setErrorByName('', t('The target directory is not writable, please check permissions on the <code>/themes/</code> directory where Adaptivetheme is located.'));
     }
   }
-
 }

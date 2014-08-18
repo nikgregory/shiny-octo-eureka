@@ -106,3 +106,24 @@ class LayoutSettings extends PageLayout {
   }
 
 }  // end class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

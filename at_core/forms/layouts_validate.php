@@ -5,13 +5,10 @@ use Drupal\at_core\Layout\LayoutSettings;
 
 /**
  * Validate form values.
- * TODO: form_set_error is deprecated, but I am not sure how to use setErrorByName(), SEE https://drupal.org/node/2145007
  */
 function at_core_validate_layouts(&$form, &$form_state) {
   $theme  = $form_state['build_info']['args'][0];
   $values = $form_state['values'];
-
-  //kpr($values);
 
   // Validate Layout Generator.
   if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] == 1) {
@@ -49,11 +46,11 @@ function at_core_validate_layouts(&$form, &$form_state) {
 
           // Did the user enter a template suggestion?
           if (empty($values['template_suggestion_name'])) {
-            form_set_error('template_suggestion_name', $form_state, t("No suggestion was provided."));
+            $form_state->setErrorByName('template_suggestion_name', t("No suggestion was provided."));
           }
 
-          if ($selected_plugin !== $default_plugin) {
-            form_set_error('settings_selected_layout', $form_state, t("Template suggestion layout must belong to the same <b>Plugin</b> as the default layout."));
+          if ($selected_plugin != $default_plugin) {
+            $form_state->setErrorByName('settings_master_layout', t("<strong>Template suggestion layout plugin (%selected_plugin) does not match the default layout plugin.</strong><p>The template suggestion layout must belong to the same <b>plugin</b> as the default layout. Either change the default <em>page.html.twig</em> layout first, or select a layout from the default plugin.</p>", array('%default_plugin' => $default_plugin, '%selected_plugin' => $selected_plugin)));
           }
         }
 
@@ -67,17 +64,15 @@ function at_core_validate_layouts(&$form, &$form_state) {
         }
         else {
           $layout_file_name = strtolower($selected_plugin) . '.layout.yml';
-          form_set_error('', $form_state, t("The <code>content</code> region does not exist and is a required region for Drupal. <code>!layout_file_name</code> must define at least one region with the machine name <code>content</code>, for example <code>content: 'Main Content'</code>. Update your layout and clear the site cache before trying again.", array('!layout_file_name' => $layout_file_name)));
+          $form_state->setErrorByName('', t("The <code>content</code> region does not exist and is a required region for Drupal. <code>!layout_file_name</code> must define at least one region with the machine name <code>content</code>, for example <code>content: 'Main Content'</code>. Update your layout and clear the site cache before trying again.", array('!layout_file_name' => $layout_file_name)));
         }
       }
 
       if (isset($values['settings_max_width_enable']) && $values['settings_max_width_enable'] === 1) {
         if (empty($values['settings_max_width_value'])) {
-          form_set_error('settings_max_width_value', $form_state, t("No value entered for the max-width setting."));
+          $form_state->setErrorByName('settings_max_width_value', t("No value entered for the max-width setting."));
         }
-
       }
-
     }
   }
 
@@ -101,10 +96,10 @@ function at_core_validate_layouts(&$form, &$form_state) {
 
     // Check if directories and files exist and are readable/writable etc.
     if (!file_exists($source) && !is_readable($source)) {
-      form_set_error('', $form_state, t('The Starterkit or base theme (if you are generating a Skin) can not be found or is not readable - check permissions or perhaps you moved things around?'));
+      $form_state->setErrorByName('', t('The Starterkit or base theme (if you are generating a Skin) can not be found or is not readable - check permissions or perhaps you moved things around?'));
     }
     if (!is_writable(dirname($target))) {
-      form_set_error('', $form_state, t('The target directory is not writable, please check permissions on the <code>/themes/</code> directory where Adaptivetheme is located.'));
+      $form_state->setErrorByName('', t('The target directory is not writable, please check permissions on the <code>/themes/</code> directory where Adaptivetheme is located.'));
     }
   }
 }
