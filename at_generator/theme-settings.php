@@ -27,6 +27,7 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Common paths.
   $at_core_path  = drupal_get_path('theme', 'at_core');
+  $at_generator_path = drupal_get_path('theme', 'at_generator');
   $subtheme_path = drupal_get_path('theme', $theme);
 
   // Attached required CSS and JS libraries and files.
@@ -44,10 +45,10 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
   );
 
   // Generator.
-  include_once($at_core_path . '/forms/generator.php');
+  include_once($at_generator_path . '/forms/generator.php');
 
   // Help (at_core).
-  include_once($at_core_path . '/forms/help_core.php');
+  //include_once($at_generator_path . '/forms/help_core.php');
 
   // Hide form items.
   $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
@@ -56,12 +57,11 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Modify the submit.
   $form['actions']['submit']['#value'] = t('Generate theme');
-  $form['actions']['submit']['#validate'][] = 'at_core_validate_generator';
-  $form['actions']['submit']['#submit'][] = 'at_core_submit_generator';
+  $form['actions']['submit']['#validate'][] = 'at_generator_validate_generator';
+  $form['actions']['submit']['#submit'][] = 'at_generator_submit_generator';
 
-  include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_validate.php');
-  include_once(drupal_get_path('theme', 'at_core') . '/forms/generator_submit.php');
-
+  include_once($at_generator_path . '/forms/generator_validate.php');
+  include_once($at_generator_path . '/forms/generator_submit.php');
 }
 
 

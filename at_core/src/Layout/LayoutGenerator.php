@@ -22,11 +22,11 @@ class LayoutGenerator extends PageLayout {
 
     foreach ($layouts['rows'] as $row => $values) {
       foreach ($values['regions'] as $region_name => $region_value) {
-        $regions[$region_name] = $region_value;
+        $regions[$region_name] = "'" . $region_value . "'";
       }
     }
-    $regions['page_top'] = 'Page top';
-    $regions['page_bottom'] = 'Page bottom';
+    $regions['page_top'] = "'" . 'Page top' . "'";
+    $regions['page_bottom'] = "'" . 'Page bottom' . "'";
 
     return $regions;
   }
@@ -63,6 +63,11 @@ class LayoutGenerator extends PageLayout {
     $regions = self::formatLayoutRegions();
     $theme_info_data['regions'] = $regions;
 
+    // During the parse get contents single quotes are stripped from
+    // strings, we have to add them back because they might have spaces.
+    $theme_info_data['name'] = "'" . $theme_info_data['name'] . "'";
+    $theme_info_data['description'] = "'" . $theme_info_data['description'] . "'";
+
     // Prepare the array for printing in yml format.
     $buildInfo = new BuildInfoFile();
     $rebuilt_info = $buildInfo->buildInfoFile($theme_info_data);
@@ -76,30 +81,6 @@ class LayoutGenerator extends PageLayout {
     $layouts = self::buildLayoutDataArrays();
     $output = array();
 
-    $messages = '  {{ messages }}';
-    if (\Drupal::moduleHandler()->moduleExists('at_blocks')) {
-      $messages = '  {# /* AT Blocks module installed, messages variable omitted. TODO: Remove this comment if messages becomes a block: https://drupal.org/node/507488 */ #}';
-    }
-
-    // Format twig markup.
-    foreach ($layouts['rows'] as $row => $values) {
-      foreach ($values['regions'] as $region_name => $region_value) {
-        $row_regions[$row][] = '      {{ page.' . $region_name . ' }}';
-      }
-      $wrapper_element = 'div';
-      //if ($row == 'header' || $row == 'main' || $row == 'footer') {
-      if ($row == 'header' || $row == 'footer') {
-        $wrapper_element = $row;
-      }
-      $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
-      $output[$row]['wrapper_open'] =  '  <'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
-      $output[$row]['container_open'] = '    <div class="regions regions__' . $row . '">';
-      $output[$row]['regions'] = implode("\n", $row_regions[$row]);
-      $output[$row]['container_close'] = '    </div>';
-      $output[$row]['wrapper_close'] = '  </' . $wrapper_element . '>';
-      $output[$row]['suffix'] = '  {% endif %}' . "\n";
-    }
-
     // Doc block
     $doc = array();
     $doc[] = '{#';
@@ -110,16 +91,45 @@ class LayoutGenerator extends PageLayout {
     $doc[] = '#}' . "\n";
     $docblock = implode("\n", $doc);
 
-    // Final preparations.
-    $page_rows[] = $docblock;
-    $page_rows[] = '<div{{ attributes }}>' . "\n";
-    $page_rows[] = $messages . "\n"; // TODO Remove if messages becomes a block: https://drupal.org/node/507488
-    foreach ($output as $row_output) {
-      $page_rows[] = implode("\n", $row_output);
-    }
-    $page_rows[] = '</div>';
+    // Template path
+    $template_file = $this->plugin_path . $this->selected_plugin . '/' . $layouts['template'];
 
-    return $page_rows;
+    // Get the template file, if not found attempt to generate template code programmatically.
+    if (file_exists($template_file)) {
+      $template = file_get_contents($template_file);
+    }
+    else {
+      foreach ($layouts['rows'] as $row => $values) {
+        foreach ($values['regions'] as $region_name => $region_value) {
+          $row_regions[$row][] = '      {{ page.' . $region_name . ' }}';
+        }
+        $wrapper_element = 'div';
+        if ($row == 'header' || $row == 'footer') {
+          $wrapper_element = $row;
+        }
+        $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+        $output[$row]['wrapper_open'] =  '  <'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
+        $output[$row]['container_open'] = '    <div class="regions regions__' . $row . '">';
+        $output[$row]['regions'] = implode("\n", $row_regions[$row]);
+        $output[$row]['container_close'] = '    </div>';
+        $output[$row]['wrapper_close'] = '  </' . $wrapper_element . '>';
+        $output[$row]['suffix'] = '  {% endif %}' . "\n";
+      }
+      $generated[] = "{# No template file found - template code programmatically generated. #}" . "\n";
+      $generated[] = '<div{{ attributes }}>'. "\n";
+      $generated[] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
+      $generated[] = "  {{ messages }}" . "\n";
+      foreach ($output as $row_output) {
+        $generated[] = implode("\n", $row_output);
+      }
+      $generated[] = '</div>';
+      $template = implode($generated);
+    }
+
+    $template_markup[] = $docblock;
+    $template_markup[] = $template;
+
+    return $template_markup;
   }
 
   // Save the output of formatPageMarkup()

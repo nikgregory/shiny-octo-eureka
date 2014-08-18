@@ -10,10 +10,7 @@ use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Layout\LayoutAttributes;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Component\Utility\String;
-
-
 use Drupal\node\NodeInterface;
-
 
 // TODO convert to Class with methods?
 global $theme;

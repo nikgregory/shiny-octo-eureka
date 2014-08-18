@@ -1,7 +1,10 @@
 // UI Kit Color Module enabled, compiles to colors.css
 
+// Requirements.
+@import "compass";
 
-// UI Kit
-//@import "components/utility";
-//@import "components/variables";
-//@import "components/colors";
+// UI Kit Base.
+@import "components/variables";
+
+// Colors component partial.
+@import "components/colors";

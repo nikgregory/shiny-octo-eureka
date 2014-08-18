@@ -63,7 +63,7 @@ class PageLayout {
       $parser = new Parser();
       $config_data[$plugin] = $parser->parse(file_get_contents($config_file));
 
-      // Get the CSS layouts path from the main layout yml file.
+      // Get the CSS variants path from the main layout yml file.
       if ($config_data[$plugin]['css_layouts_path']) {
         $css_layouts_path = $this->plugin_path . $plugin . '/' . $config_data[$plugin]['css_layouts_path'];
 
@@ -96,10 +96,11 @@ class PageLayout {
 
       $layout = array();
       if (!empty($this->selected_layout)) {
-        $layout['version'] = $selected_plugin['version'];
-        $layout['rows']    = $selected_plugin['rows'];
+        $layout['version']         = $selected_plugin['version'];
+        $layout['rows']            = $selected_plugin['rows'];
         $layout['css_layout']      = $selected_plugin['css_layouts'][$this->selected_layout]['css'];
         $layout['css_layout_path'] = $selected_plugin['css_layouts_path'];
+        $layout['template']        = $this->selected_plugin . '.html.twig';
       }
       if (!empty($layout)) {
         \Drupal::cache()->set("$this->theme:$this->selected_layout", $layout);

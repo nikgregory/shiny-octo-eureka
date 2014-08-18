@@ -1,0 +1,80 @@
+<div{{ attributes }}>
+
+  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}
+  {{ messages }}
+
+  {% if messages__regions.active == true %}
+  <div{{ messages__attributes }}>
+    <div class="regions regions__messages">
+      {{ page.messages }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if header__regions.active == true %}
+  <header{{ header__attributes }}>
+    <div class="regions">
+      {{ page.header_first }}
+      {{ page.header_second }}
+      {{ page.header_third }}
+    </div>
+  </header>
+  {% endif %}
+
+  {% if menubar__regions.active == true %}
+  <div{{ menubar__attributes }}>
+    <div class="regions">
+      {{ page.menubar }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if messages__regions.active == true %}
+  <div{{ messages__attributes }}>
+    <div class="regions">
+      {{ page.messages }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if features__regions.active == true %}
+  <div{{ features__attributes }}>
+    <div class="regions">
+      {{ page.features_first }}
+      {{ page.features_second }}
+      {{ page.features_third }}
+      {{ page.features_fourth }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if main__regions.active == true %}
+  <div{{ main__attributes }}>
+    <div class="regions">
+      {{ page.highlighted }}
+      {{ page.content }}
+      {{ page.sidebar_first }}
+      {{ page.sidebar_second }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if tertiary__regions.active == true %}
+  <div{{ tertiary__attributes.row }}>
+    <div class="regions">
+      {{ page.tertiary_first }}
+      {{ page.tertiary_second }}
+      {{ page.tertiary_third }}
+      {{ page.tertiary_fourth }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if footer__regions.active == true %}
+  <footer{{ footer__attributes }}>
+    <div class="regions">
+      {{ page.footer }}
+    </div>
+  </footer>
+  {% endif %}
+</div>

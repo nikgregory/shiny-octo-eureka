@@ -85,21 +85,18 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       $form['basic_settings'] = array(
         '#type' => 'details',
         '#title' => 'Basic Settings',
-        '#collapsed' => TRUE,
+        '#open' => FALSE,
         //'#weight' => 100,
       );
-      $form['theme_settings']['#collapsible'] = TRUE;
-      $form['theme_settings']['#collapsed'] = TRUE;
+
+      $form['theme_settings']['#open'] = FALSE;
       $form['theme_settings']['#group'] = 'basic_settings';
-      $form['logo']['#collapsible'] = TRUE;
-      $form['logo']['#collapsed'] = TRUE;
+      $form['logo']['#open'] = FALSE;
       $form['logo']['#group'] = 'basic_settings';
-      $form['favicon']['#collapsible'] = TRUE;
-      $form['favicon']['#collapsed'] = TRUE;
+      $form['favicon']['#open'] = FALSE;
       $form['favicon']['#group'] = 'basic_settings';
 
       // buttons don't work with #group, move it the hard way.
-
       $form['actions']['#type'] = $form['basic_settings']['actions']['#type'] = 'actions';
       $form['actions']['submit']['#type'] = $form['basic_settings']['actions']['submit']['#type'] = 'submit';
       $form['actions']['submit']['#value'] = $form['basic_settings']['actions']['submit']['#value'] = t('Save basic settings');
@@ -108,7 +105,33 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     }
   }
 
-  //kpr($form['actions']);
+  // Modify the color scheme form.
+  if (\Drupal::moduleHandler()->moduleExists('color')) {
+    if (isset($form_state['build_info']['args'][0]) && ($theme = $form_state['build_info']['args'][0]) && color_get_info($theme) && function_exists('gd_info')) {
+      $form['#process'][] = 'at_core_make_collapsible';
+    }
+  }
+  //kpr($form);
+}
+
+
+// Helper function to modify the color scheme form.
+function at_core_make_collapsible($form) {
+  $form['color']['#open'] = FALSE;
+
+  $form['color']['actions'] = array(
+    '#type' => 'actions',
+    '#attributes' => array('class' => array('submit--color-scheme')),
+  );
+
+  $form['color']['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save color scheme'),
+    '#button_type' => 'primary',
+    '#weight' => 100,
+  );
+
+  return $form;
 }
 
 

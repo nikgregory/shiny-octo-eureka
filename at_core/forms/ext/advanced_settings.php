@@ -5,7 +5,7 @@ $form['advanced_settings'] = array(
   '#type' => 'details',
   '#title' => t('Advanced settings'),
   '#weight' => -199,
-  '#collapsed' => TRUE,
+  '#open' => FALSE,
 );
 
 $form['advanced_settings']['at_settings'] = array(

@@ -1,6 +1,6 @@
 name: 'AT Theme Generator'
 type: theme
-description: 'Enable this extension if you want to generate a new sub-theme or clone an existing Adaptivetheme based sub-theme.'
+description: 'Enable this extension if you want to generate a new sub-theme or clone an existing AT sub-theme.'
 core: 8.x
 base theme: at_core
 subtheme type: at_generator

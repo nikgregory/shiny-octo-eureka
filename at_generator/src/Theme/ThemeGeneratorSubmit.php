@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\at_core\Theme;
+namespace Drupal\at_generator\Theme;
 
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 use Drupal\at_core\Helpers\RecursiveCopy;
@@ -22,8 +22,6 @@ class ThemeGeneratorSubmit {
    * go wrong, rather than just saying hooray, it worked, when no, it did not...
    */
   public function generateTheme($values) {
-
-    //kpr($values);
 
     // Instantiate helpers
     $recursiveCopy   = new RecursiveCopy();
@@ -48,6 +46,7 @@ class ThemeGeneratorSubmit {
     $settings_file = $values['generate']['options']['generate_themesettingsfile'];
     $description   = preg_replace('/[^A-Za-z0-9. ]/', '', $values['generate']['options']['generate_description']);
     $version       = $values['generate']['options']['generate_version'];
+    $sass_partials = $values['generate']['generate_skin_sass']; // used by skins only.
 
     // Path to at core.
     $path = drupal_get_path('theme', 'at_core');
@@ -55,10 +54,11 @@ class ThemeGeneratorSubmit {
     // Path to where we will save the cloned theme.
     $target = $path . '/../../' . $machine_name;
 
+    // Source theme
+    $source = $path . '/../at_starterkits/' . $subtheme_type;
+
     // Variables for kit sourced themes.
     if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {
-
-      $source = $path . '/../at_starterkits/' . $subtheme_type;
 
       $uikit_dir_path = $path . '/../at_starterkits/optional_components/uikit';
       $color_dir_path = $path . '/../at_starterkits/optional_components/color';
@@ -116,6 +116,15 @@ class ThemeGeneratorSubmit {
           if ($color == 1) {
             $recursiveCopy->recursiveCopy($color_dir_path, "$target/color");
           }
+          if ($color == 0) {
+            $removeDirectory->removeDirectory("$target/css/colors.css");
+
+            // UIKit can be enabled, if so remove the color css/scss files.
+            if ($uikit == 1) {
+              $removeDirectory->removeDirectory("$target/uikit/colors.scss");
+              $removeDirectory->removeDirectory("$target/uikit/components/_colors.scss");
+            }
+          }
 
           // THEMENAME.theme
           if ($dottheme_file == 1) {
@@ -166,13 +175,28 @@ class ThemeGeneratorSubmit {
         $parser = new Parser();
         $theme_info_data = $parser->parse(file_get_contents($info_file));
 
-        $theme_info_data['name']        = "'" . $friendly_name . "'";
-        $theme_info_data['type']        = 'theme';
-        $theme_info_data['description'] = "'" . $description . "'";
+        $theme_info_data['name']        = "'$friendly_name'";
+        $theme_info_data['type']        = "theme";
+        $theme_info_data['description'] = "'$description'";
         $theme_info_data['version']     = $version;
 
+        // Build css file arrray
+        $theme_info_data['stylesheets'] = array(
+          'all' => array(
+            "css/styles.css",
+          ),
+        );
+        if ($color == 1) {
+          $theme_info_data['stylesheets'] = array(
+            'all' => array(
+              "css/styles.css",
+              "css/colors.css",
+            ),
+          );
+        }
+
         foreach($theme_info_data['regions'] as $region_key => $region_name) {
-          $theme_info_data['regions'][$region_key] = "'" . $region_name . "'";
+          $theme_info_data['regions'][$region_key] = "'$region_name'";
         }
 
         // don't hide this new sub-theme
@@ -183,61 +207,68 @@ class ThemeGeneratorSubmit {
       }
 
       // Skins
-      // Skins are unique in that they are half clone half starterkit. First we copy the
-      // at_skins starterkit then overwrite files with those from the base theme. We need
-      // to do this so regions, page template and so on are preserved.
+      // Skins are a sub-theme of an existing sub-theme (i.e. a sub-sub-theme). The existing sub-theme
+      // becomes the "base theme". I have not tested with sub-sub-sub themes at all, but it will probably work.
+      // Their CSS and/or SASS files are blank, they provide no style by default, merely
+      // a way of overriding or adding styles to those inherited from the base theme.
       if ($subtheme_type == 'at_skin') {
 
         // Set the base theme path, we need to it later.
         $base_theme_path = drupal_get_path('theme', $skin_base_theme);
 
-        // Set the description.
+        // Get base theme info.
         $themeInfo = new ThemeSettingsInfo($skin_base_theme);
         $baseThemeInfo = ($themeInfo->baseThemeInfo('info'));
-        $description = $description ?: 'Sub theme of ' . $baseThemeInfo['name'];
+
+        // Set the description, version etc.
+        $description = $description ?: 'Sub theme of ' . $baseThemeInfo['name'] . ' (Skin theme)';
         $version = $version ?: '8.0.x';
 
         // Rename files
         $renameFile->fileRename("$target/at_skin.info.yml", $info_file);
         $renameFile->fileRename("$target/config/install/at_skin.settings.yml", $settings_file);
 
-        // Parse the source base themes info.yml file and extract regions
+        // Rename SASS and CSS files.
+        $sass_file = "$target/css/sass/$machine_name.scss";
+        $css_file = "$target/css/$machine_name.css";
+        $renameFile->fileRename("$target/css/sass/at_skin.scss", $sass_file);
+        $renameFile->fileRename("$target/css/at_skin.css", $css_file);
+
+        // Parse the source base themes info.yml file and extract data.
         $base_theme_info = $base_theme_path . "/$skin_base_theme.info.yml";
-        $base_theme_info_data = drupal_parse_info_file($base_theme_info);
 
         // Parse, rebuild and save the themes info.yml file.
         $parser = new Parser();
-        $theme_info_data = $parser->parse(file_get_contents($info_file));
+        $theme_info_data = $parser->parse(file_get_contents($base_theme_info));
 
-        $theme_info_data['name']        = "'" . $friendly_name . "'";
-        $theme_info_data['type']        = 'theme';
-        $theme_info_data['base theme']  = $skin_base_theme;
-        $theme_info_data['description'] = "'" . $description . "'";
-        $theme_info_data['regions']     = $base_theme_info_data['regions'];
-        $theme_info_data['features']    = $base_theme_info_data['features'];
-        $theme_info_data['version']     = $version;
+        //kpr($theme_info_data);
 
+        $theme_info_data['name']           = "'$friendly_name'";
+        $theme_info_data['type']           = "theme";
+        $theme_info_data['base theme']     = $skin_base_theme;
+        $theme_info_data['subtheme type']  = "at_skin";
+        $theme_info_data['description']    = "'$description'";
+        $theme_info_data['version']        = $version;
+        $theme_info_data['stylesheets']    = array('all' => array("css/$machine_name.css"));
+
+        // Regions are not inherited
         foreach($theme_info_data['regions'] as $region_key => $region_name) {
-          $theme_info_data['regions'][$region_key] = "'" . $region_name . "'";
+          $theme_info_data['regions'][$region_key] = "'$region_name'";
         }
 
+        // Unset stuff we either don't need or should be inherited from the base theme.
         unset($theme_info_data['hidden']);
+        unset($theme_info_data['libraries']); // probably not required by sub-sub themes?
+        unset($theme_info_data['stylesheets-remove']); // again, should not be reqiured, needs testing
+
+        // Remove sass partials if not required.
+        if ($sass_partials == 0) {
+          $removeDirectory->removeDirectory("$target/css/sass");
+          $removeDirectory->removeDirectory("$target/css/config.rb");
+        }
 
         $rebuilt_info = $rebuildInfo->buildInfoFile($theme_info_data);
         file_unmanaged_save_data($rebuilt_info, $info_file, FILE_EXISTS_REPLACE);
-
-        // TODO: this is potentially inadequate or not even required?
-        // E.g. Source themes could have many page suggestions, we might
-        // need to copy in the entire templates directory to make sure
-        // everything works - needs testing.
-        // Copy the page.html.twig file from the source base theme.
-        //$base_theme_page_template = "$base_theme_path/templates/page.html.twig";
-        //$skin_theme_page_template = "$target/templates/page.html.twig";
-        //file_unmanaged_save_data($base_theme_page_template, $skin_theme_page_template, FILE_EXISTS_REPLACE);
-
-        // Copy and replace the breakpoints and settings files.
-        //$base_theme_breakpoints = file_get_contents("$base_theme_path/config/$skin_base_theme.breakpoints.yml");
-        //file_unmanaged_save_data($base_theme_breakpoints, $breakpoints_file, FILE_EXISTS_REPLACE);
 
         $base_theme_settings = file_get_contents("$base_theme_path/config/install/$skin_base_theme.settings.yml");
         file_unmanaged_save_data($base_theme_settings, $settings_file, FILE_EXISTS_REPLACE);
@@ -261,7 +292,7 @@ class ThemeGeneratorSubmit {
 
         // Warn about stylesheets in the new skin theme
         if ($subtheme_type == 'at_skin') {
-          drupal_set_message(t('Skin themes do not inherit theme <em>settings<em>, this is important for things like Layout and Library settings you may need - after you enable your new theme be sure to configure it\'s settings. You may need to update your info file: <b>!theme_path/!machine_name.info.yml</b>. Please see the Help tab section <b>Updating Skin Type Sub-themes</b>.', array(
+          drupal_set_message(t('Skin themes do not inherit theme <em>settings</em>, this is important for things like Layout and Library settings. After you enable your new theme be sure to check and configure it\'s settings.', array(
             '!theme_path' => $generated_path,
             '!machine_name' => $machine_name,
             )), 'warning');
@@ -271,7 +302,7 @@ class ThemeGeneratorSubmit {
       else {
         // TODO check if this is validated, really this should be in validation.
 
-        kpr($source);
+        //kpr($source);
 
         $source = $path . '/../at_starterkits/' . $subtheme_type;
         drupal_set_message(t("An error occurred and processing did not complete. The source directory '!dir' does not exist or is not readable.", array('!dir' => $source)), 'error');

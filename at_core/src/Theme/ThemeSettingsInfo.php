@@ -54,6 +54,7 @@ class ThemeSettingsInfo extends ThemeInfo {
     unset($base_themes['at_minimal']);
     unset($base_themes['at_skin']);
     unset($base_themes['at_starterkit']);
+    unset($base_themes['at_generator']);
 
     return $base_themes;
   }

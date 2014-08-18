@@ -2,3 +2,25 @@
  * Colors.
  * - used for color module support, place all colors to be modified by Color module here.
  */
+
+html,
+body {
+  background: #ffffff;
+}
+
+body {
+  color: #3b3b3b;
+}
+
+.page-row__header {
+  background-color: #0779bf;
+}
+
+.page-row__footer {
+  background-color: #292929;
+}
+
+.site__branding-text,
+.site__branding-text a {
+  color: #fffeff;
+}

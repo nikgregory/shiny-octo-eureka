@@ -1,29 +1,22 @@
 # Site Builder Layout Plugin.
 
-# Human readable layout name. Required.
-name: 'Site Builder'
+name: 'Site Builder'         # Human readable layout name. Required.
+type: 'at_layout'            # All layouts are type 'at_layout'. Required.
+version: '8.x-1.0-dev'       # Version string. Optional.
+css_layouts_path: 'variants' # Path to CSS layout variants. All layouts require at least one variant.
 
-# All layouts are type 'at_layout'. Required.
-type: 'at_layout'
-
-# Version string. Optional.
-version: '8.x-1.0-dev'
-
-# Path to CSS layout variants. Required.
-css_layouts_path: 'variants'
-
-# Rows. Required. The row array items are used to generate the page.html.twig
-# markup, which is generated when you select a layout and save the theme settings.
-# A new version of page.html.twig is saved to the templates directory in your theme,
-# this can be either page.html.twig or a suggestion. Backups are kept unless disabled.
+# Rows. Required!
+# Here we declare all rows and their regions. AT Core uses this to setup regions in the themes
+# info file, and to build the layout CSS classes. Here you must at least declare regions,
+# optionally you can add attributes (which are printed on the row HTML wrapper).
 rows:
   messages:          # row key (name)
-    attributes:      # attributes key. Set id, role or classes, or any other valid html attributes. Optional.
-      role: region   # attribute_type: attribute value.
+    attributes:      # attributes key. Set id, role, classes etc. Optional.
+      role: region
       id: messages
-    regions:         # use the key "regions" to declare this rows regions using the standard Drupal schema: machine_name: 'Friendly name'.
+    regions:         # use the key "regions" to declare row regions.
       messages: 'Messages'
-  header:            # using "header" as a row key will force the system to use a <header> wrapper element.
+  header:
     attributes:
       role: banner
       id: masthead
@@ -52,7 +45,7 @@ rows:
       id: main-content
     regions:
       highlighted: 'Highlighted'
-      content: 'Main content' # region 'content' uses <main> element wrappers and role="main".
+      content: 'Main content'
       sidebar_first: 'Sidebar first'
       sidebar_second: 'Sidebar second'
   tertiary:
@@ -64,7 +57,7 @@ rows:
       tertiary_second: 'Tertiary second'
       tertiary_third: 'Tertiary third'
       tertiary_fourth: 'Tertiary fourth'
-  footer: # using "footer" as a row key will force the system to use a <footer> wrapper element.
+  footer:
     attributes:
       role: contentinfo
       id: footer

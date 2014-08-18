@@ -7,7 +7,7 @@ core: 8.x
 hidden: true
 stylesheets:
   all:
-    - 'css/styles.css'
+    - css/styles.css
 stylesheets-remove:
   - system.theme.css
   - normalize.css
@@ -24,8 +24,8 @@ regions:
   page_top: 'Page top'
   page_bottom: 'Page bottom'
 features:
-  - 'node_user_picture'
-  - 'comment_user_picture'
-  - 'comment_user_verification'
-  - 'favicon'
-  - 'logo'
+  - node_user_picture
+  - comment_user_picture
+  - comment_user_verification
+  - favicon
+  - logo

@@ -1,4 +1,4 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\000038}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\000038}}
 #block-seven-help,
 legend {
   position: absolute !important;
@@ -11,57 +11,57 @@ legend {
   font: 0/0 a;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000313}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000313}}
 fieldset {
   margin: 0;
   border: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000318}}
 #system-theme-settings label {
   margin: 0 0 3px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000323}}
 .form-type-vertical-tabs fieldset {
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000328}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000328}}
 details {
   margin: 0.5em 0;
   border-radius: 4px;
   background: #FCFCFA;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000333}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000333}}
 details details {
   background: inherit;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000338}}
 blockquote {
   border-left: 10px solid #A6A5A1;
   padding-left: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000343}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000343}}
 code, pre, kbd {
   font-size: 1em !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000347}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000347}}
 code {
   font-weight: 700;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000351}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000351}}
 pre code {
   font-weight: 400;
   padding: 0;
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--global\.scss}line{font-family:\0000357}}
 pre.code-block {
   background: #F5F5F2;
   border: 1px solid #ccc;
@@ -73,7 +73,7 @@ pre.code-block {
   border-radius: 4px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\000034}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\000034}}
 #edit-layouts {
   padding: 0;
   border: 1px solid #BFBFBA;
@@ -81,19 +81,19 @@ pre.code-block {
   border-radius: 4px;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000311}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000311}}
 #edit-layouts .details-wrapper {
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000316}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000316}}
 #edit-layouts #edit-adv-options .details-wrapper {
   padding: 0.5em 1em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000320}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000320}}
 #edit-layouts #edit-adv-options #edit-selectors details .details-wrapper {
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000324}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000324}}
 #edit-layouts #edit-adv-options pre {
   background: #F5F5F2;
   border-top: 1px solid #ccc;
@@ -101,7 +101,7 @@ pre.code-block {
   margin: 0;
   padding: 1em 0.5em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000334}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000334}}
 #edit-layouts .submit--layout {
   background: #FCFCFA;
   border-top: 1px solid #BFBFBA;
@@ -111,7 +111,7 @@ pre.code-block {
   position: relative;
   z-index: 10;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000344}}
 #edit-layouts h2,
 #edit-layouts h3,
 #edit-layouts h4,
@@ -119,29 +119,29 @@ pre.code-block {
   font-size: 1em;
   text-transform: uppercase;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000352}}
 #edit-layouts .fieldset-wrapper {
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000356}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000356}}
 #edit-layouts #edit-layouts--description,
 #edit-layouts #edit-layouts-enable-container {
   padding: 0 0.5em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000361}}
 #edit-layouts #edit-settings-layouts-disabled {
   font-size: 0.923em;
   line-height: 1.295em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000366}}
 #edit-layouts #edit-layouts-enable-container {
   margin-bottom: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000370}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000370}}
 #edit-layouts .form-item-settings-layouts-enable {
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000375}}
 #edit-layouts .layouts-column {
   float: left;
   border: 0;
@@ -153,120 +153,120 @@ pre.code-block {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000387}}
 #edit-layouts .layouts-column-one {
   width: 30%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000391}}
 #edit-layouts .layouts-column-two {
   width: 40%;
   border-left: 1px solid #BFBFBA;
   border-right: 1px solid #BFBFBA;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\0000396}}
 #edit-layouts .layouts-column-two details {
   border: 0 none;
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003102}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003102}}
 #edit-layouts .layouts-column-three {
   width: 30%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003106}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003106}}
 #edit-layouts .table-layouts {
   width: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003109}}
 #edit-layouts .table-layouts .field-hidden {
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003113}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003113}}
 #edit-layouts .table-layouts .collapse-processed > summary {
   padding-left: 0;
   padding-right: 0.5em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003118}}
 #edit-layouts .table-layouts details > .details-wrapper {
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003122}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003122}}
 #edit-layouts .table-layouts tbody > tr > td {
   width: 13px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003126}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003126}}
 #edit-layouts .table-layouts td {
   vertical-align: top;
   padding: 20px 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003132}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003132}}
 #edit-layouts .table-layouts img {
   display: block;
   max-width: 100px;
   max-height: 140px;
   height: auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003139}}
 #edit-layouts .table-layouts .field-name,
 #edit-layouts .table-layouts .field-desc {
   min-width: 18em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003144}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003144}}
 #edit-layouts .table-layouts .field-screenshot {
   width: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003146}}
 #edit-layouts .table-layouts .field-screenshot a {
   color: #747474;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003148}}
 #edit-layouts .table-layouts .field-screenshot a:hover, #edit-layouts .table-layouts .field-screenshot a:focus {
   color: #595959;
   text-decoration: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003156}}
 #edit-layouts .table-layouts .plus-icon {
   text-align: left;
   font-size: 0.8em;
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003162}}
 #edit-layouts .table-layouts h3 {
   margin: 0 0 1.15em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003167}}
 #edit-layouts dl {
   white-space: nowrap;
   min-width: 15em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003171}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003171}}
 #edit-layouts dl dt {
   float: left;
   width: 5.5em;
   font-weight: 700;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003177}}
 #edit-layouts dl dd {
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003182}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003182}}
 #edit-layouts .current-default-layout-meta {
   font-size: 0.923em;
   line-height: 1.295em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003189}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003189}}
 #edit-manage-suggestions {
   border: 0;
   padding: 0;
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003195}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003195}}
 .form-item-layout-type-select {
   display: inline;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003199}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003199}}
 #edit-default-not-set,
 #edit-default-set,
 #edit-none-set {
@@ -276,34 +276,34 @@ pre.code-block {
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003209}}
 #edit-default-not-set {
   background-color: #fcf4f2;
   color: #a51b00;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003215}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003215}}
 #edit-none-set {
   background-color: #f3faef;
   color: #325e1c;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003221}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003221}}
 #edit-default-set {
   background: #F7FCFF;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003224}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003224}}
 #edit-default-set ol {
   margin: 10px 0 0 0;
   padding: 0 0 0 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003229}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003229}}
 #edit-default-set ol, #edit-default-set p {
   font-size: 0.923em;
   line-height: 1.231em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003236}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003236}}
 #edit-suggestions {
   padding-top: 0;
   padding: 10px;
@@ -312,28 +312,28 @@ pre.code-block {
   border-bottom: 1px solid #BFBFBA;
   margin: 10px 0 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003244}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003244}}
 #edit-suggestions label {
   padding-bottom: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003248}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003248}}
 #edit-suggestions .description {
   margin-top: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003252}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003252}}
 #edit-suggestions ol {
   margin: 0;
   padding: 0 0 0 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003259}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003259}}
 #edit-options,
 .form-item-layout-suggestion,
 #edit-no-mq-css {
   clear: both;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003266}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003266}}
 #edit-no-base-layout {
   border: 1px solid #B3B2AD;
   border-color: #f4daa6;
@@ -342,21 +342,21 @@ pre.code-block {
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003276}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003276}}
 #edit-options .form-disabled {
   background: #f7f7f7;
   margin: 0;
   padding: 1em 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003285}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003285}}
 #edit-max-width .form-item-settings-max-width-value,
 #edit-max-width .form-item-settings-max-width-unit {
   display: inline-block;
   margin-right: 3px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003292}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003292}}
 .layout-structure-screenshot {
   background-image: url("../../docs/help_subtheme/layout-structure.png");
   max-width: 308px;
@@ -364,13 +364,13 @@ pre.code-block {
 }
 
 @media (max-width: 48em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003300}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003300}}
   #edit-layouts .form-radios label {
     max-width: 120px;
   }
 }
 @media (max-width: 56em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003307}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--layouts\.scss}line{font-family:\00003307}}
   #edit-default-layout {
     float: none;
     clear: both;
@@ -378,51 +378,51 @@ pre.code-block {
     padding: 0 0 10px;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\000036}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\000036}}
 #edit-advanced-settings > .details-wrapper {
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000310}}
 #edit-advanced-settings .vertical-tabs {
   /*
       border-left: 0;
       border-right: 0;
   */
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000317}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000317}}
 #edit-advanced-settings .submit--advanced-settings {
   padding: 0 0.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000326}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000326}}
 #edit-font-settings fieldset {
   border-bottom: 1px solid #BFBFBA;
   padding-bottom: 1em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000330}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000330}}
 #edit-font-settings fieldset .fieldset-description h3 {
   font-size: 1em;
   text-transform: uppercase;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000335}}
 #edit-font-settings fieldset fieldset {
   border: 0;
   padding: 0;
 }
 
 /* Image alignment options */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000348}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000348}}
 #edit-image-settings .description,
 #edit-image-settings .form-type-radios {
   clear: both;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000354}}
 #edit-image-settings details details {
   border: 0;
   padding: 0;
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000360}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000360}}
 #edit-image-settings details fieldset legend {
   position: static !important;
   clip: auto;
@@ -435,11 +435,11 @@ pre.code-block {
   font-family: inherit;
   padding: 0 0 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000368}}
 #edit-image-settings .form-type-radios label {
   margin-bottom: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000374}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000374}}
 #edit-image-settings .form-type-radio {
   clear: none;
   float: left;
@@ -447,11 +447,11 @@ pre.code-block {
   text-align: center;
   width: 50px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000381}}
 #edit-image-settings .form-type-radio input.form-radio {
   margin-bottom: 4px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000385}}
 #edit-image-settings .form-type-radio label {
   background-image: url(image-alignment-sprite.png);
   background-repeat: no-repeat;
@@ -464,50 +464,50 @@ pre.code-block {
   vertical-align: bottom;
   width: 50px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000397}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000397}}
 #edit-image-settings .form-type-radio label[for$=-none] {
   background-position: 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000398}}
 #edit-image-settings .form-type-radio label[for$=-left] {
   background-position: -50px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\0000399}}
 #edit-image-settings .form-type-radio label[for$=-center] {
   background-position: -100px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003100}}
 #edit-image-settings .form-type-radio label[for$=-right] {
   background-position: -150px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003111}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003111}}
 #edit-titles-settings .titles-styles-wrapper .fieldset-description {
   float: left;
   padding: 0;
   width: 12em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003117}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003117}}
 #edit-titles-settings .titles-styles-wrapper .form-type-select {
   clear: none;
   float: left;
   margin: 0 10px 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003122}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003122}}
 #edit-titles-settings .titles-styles-wrapper .form-select {
   min-width: 8em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003127}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003127}}
 #edit-titles-settings .form-type-select {
   min-width: 8em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003130}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003130}}
 #edit-titles-settings .form-type-select label {
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
   position: absolute;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003138}}
 #edit-titles-settings #edit-site-name-font-style .form-type-select label {
   clip: auto;
   display: block !important;
@@ -517,36 +517,36 @@ pre.code-block {
   position: static !important;
   width: auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003148}}
 #edit-titles-settings #edit-site-name-font-style .fieldset-description {
   padding-top: 2.2em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003159}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003159}}
 #edit-touch-icons-settings .form-type-textfield {
   margin-bottom: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003163}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003163}}
 #edit-touch-icons-settings label {
   margin-bottom: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--advanced\.scss}line{font-family:\00003167}}
 #edit-touch-icons-settings .field-prefix {
   color: #666;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\000034}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\000034}}
 #edit-basic-settings {
   overflow: hidden;
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\000039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\000039}}
 .theme-settings-bottom {
   clear: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000313}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000313}}
 #system-theme-settings .vertical-tabs,
 #system-theme-settings .form-type-vertical-tabs {
   /*
@@ -555,32 +555,32 @@ pre.code-block {
   */
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000323}}
 #edit-jquery .form-type-checkbox .description {
   font-size: 0.8em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000330}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000330}}
 #edit-drupal-core .form-type-checkbox {
   margin-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000334}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000334}}
 #edit-drupal-core small {
   display: block;
   margin-left: 2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--basic\.scss}line{font-family:\0000338}}
 #edit-drupal-core small:before {
   content: "- ";
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\000037}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\000037}}
 #edit-help h1,
 #edit-subtheme-help h1 {
   font-size: 1.25em;
   text-transform: uppercase;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000312}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000312}}
 #edit-help h2, #edit-help h3, #edit-help h4,
 #edit-subtheme-help h2,
 #edit-subtheme-help h3,
@@ -590,7 +590,7 @@ pre.code-block {
   font-size: 1em;
   text-transform: uppercase;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000319}}
 #edit-help ol, #edit-help ul,
 #edit-subtheme-help ol,
 #edit-subtheme-help ul {
@@ -598,51 +598,57 @@ pre.code-block {
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000325}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000325}}
 #edit-help-menu li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000331}}
 .status-block {
   float: right;
   width: 200px;
   padding: 10px;
   margin: 0 0 10px 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000337}}
 .status-block.warning {
   background: #FDF8ED;
   color: #734C00;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000344}}
 .status-block.status {
   background: #f3faef;
   color: #325e1c;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000352}}
 .status-block h2 {
   font-size: 1em !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000356}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--help\.scss}line{font-family:\0000356}}
 .status-block p, .status-block h2 {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\000034}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\000034}}
 #edit-generate-options {
   margin-top: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\000038}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\000038}}
 #edit-generate-generate-type {
   min-width: 200px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\0000312}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--generator\.scss}line{font-family:\0000312}}
 .generate-type__description {
   margin-top: -10px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal80x\/drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/_appearance--color\.scss}line{font-family:\000034}}
+#color_scheme_form h2,
+#color_scheme_form #preview {
+  display: none;
 }

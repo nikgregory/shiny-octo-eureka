@@ -26,7 +26,7 @@ $form['layouts'] = array(
   '#type' => 'details',
   '#title' => t('Layouts'),
   //'#description' => t('<h2>Layout</h2>'),
-  '#collapsed'=> TRUE,
+  '#open'=> FALSE,
   '#attributes' => array('class' => array('clearfix')),
   '#weight' => -300,
 );
