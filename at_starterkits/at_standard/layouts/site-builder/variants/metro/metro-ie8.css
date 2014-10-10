@@ -3,10 +3,53 @@
   margin-left: auto;
   margin-right: auto;
 }
-.regions::after {
+.regions:after {
   content: " ";
   display: block;
   clear: both;
+}
+head {
+  display: block;
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  z-index: 999;
+  color: #333;
+  background: rgba(255, 255, 255, 0.25);
+}
+head:before {
+  content: "|||";
+  display: block;
+  padding: 5px 10px;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+head:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: red;
+}
+head:hover ~ .regions, head:hover ~ body .regions {
+  position: relative;
+}
+head:hover ~ .regions:before, head:hover ~ body .regions:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  content: " ";
+  z-index: 998;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIxMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSIxMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iOTAlIiBzdG9wLWNvbG9yPSIjMjYyNjI2IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjkwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(10%, rgba(0, 0, 0, 0)), color-stop(10%, rgba(0, 0, 0, 0.25)), color-stop(90%, rgba(38, 38, 38, 0.25)), color-stop(90%, rgba(0, 0, 0, 0)));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.25) 10%, rgba(38, 38, 38, 0.25) 90%, rgba(0, 0, 0, 0) 90%);
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.25) 10%, rgba(38, 38, 38, 0.25) 90%, rgba(0, 0, 0, 0) 90%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.25) 10%, rgba(38, 38, 38, 0.25) 90%, rgba(0, 0, 0, 0) 90%);
+  background-size: 8.3333333%;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-position: left top;
 }
 
 [class*="page-row__"] {

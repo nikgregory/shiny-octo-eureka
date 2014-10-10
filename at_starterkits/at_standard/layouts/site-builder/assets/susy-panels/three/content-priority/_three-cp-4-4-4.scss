@@ -43,7 +43,7 @@
       @include span(8 of 12);
     }
     &:last-child {
-      @include span(4 omega of 12);
+      @include span(4 of 12 last);
     }
   }
 }
@@ -55,7 +55,7 @@
       @include span(6 of 12);
     }
     &:last-child {
-      @include span(6 omega of 12);
+      @include span(6 of 12 last);
     }
   }
 }
@@ -72,7 +72,7 @@
       @include pull(8 of 12);
     }
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }

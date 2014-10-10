@@ -1,7 +1,7 @@
 
 # Required plugins
 # -----------------------------------------------------------------------------
-require "compass" # conider deprecating compass and use bourbon, or nothing at all, instead use libsass/grunt etc
+require "compass"
 require "modular-scale"
 require "susy"
 

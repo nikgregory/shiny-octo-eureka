@@ -15,7 +15,7 @@
     @include span(6 of 12);
 
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }
@@ -30,7 +30,7 @@
       @include span(8 of 12);
     }
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }

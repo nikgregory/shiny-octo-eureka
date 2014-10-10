@@ -22,7 +22,7 @@
       @include span(5 of 12);
     }
     &:last-child {
-      @include span(7 omega of 12);
+      @include span(7 of 12 last);
     }
   }
 }

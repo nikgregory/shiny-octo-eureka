@@ -34,7 +34,7 @@
     }
 
     &:first-child + div {
-      @include span(8 omega of 12);
+      @include span(8 of 12 last);
     }
 
     &:last-child {
@@ -54,7 +54,7 @@
     }
 
     &:first-child + div {
-      @include omega;
+      @include last;
     }
   }
 }
@@ -63,7 +63,7 @@
 &.total-regions-4 {
   .region {
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }

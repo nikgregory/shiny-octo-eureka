@@ -38,7 +38,7 @@
     }
 
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }

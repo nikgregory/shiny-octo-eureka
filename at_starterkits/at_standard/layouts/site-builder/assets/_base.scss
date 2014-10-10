@@ -23,6 +23,15 @@ $susy: (
   gutter-position: split,
   global-box-sizing: content-box,
   flow: ltr,
+
+  /*
+  debug: (
+    image: show-columns,
+    color: rgba(0,0,0,0.25),
+    output: overlay,
+    toggle: bottom left,
+  ),
+  */
 );
 
 

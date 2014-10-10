@@ -15,7 +15,7 @@
 // full width. The hide arguement is hiding the grid, you can "show" it also.
 .regions {
   //@include container(show-columns);
-  @include container(hide);
+  @include container();
 }
 
 

@@ -19,7 +19,7 @@
     @include span(6 of 12);
 
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }
@@ -32,7 +32,7 @@
       @include span(6 of 12);
     }
     &:nth-child(2) {
-      @include span(6 omega of 12);
+      @include span(6 of 12 last);
     }
     &:last-child {
       clear: both;

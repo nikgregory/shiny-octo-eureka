@@ -31,8 +31,8 @@
       @include span(8 of 12);
     }
     &:last-child {
-      @include span(4 of 12);
-      @include omega;
+      @include span(4 of 12 last);
+      //@include omega;
     }
   }
 }
@@ -44,7 +44,7 @@
     @include span(6 of 12);
 
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }
@@ -75,14 +75,13 @@
       @include span(6 of 12);
     }
     &:last-child {
-      @include omega;
+      @include last;
     }
   }
 }
 
 
 // First and fourth plus second or third are active.
-// $to is a flow direction variable, see _base.scss
 &.has-regions--1-2-4,
 &.has-regions--1-3-4 {
   .region {
@@ -108,11 +107,11 @@
       @include span(4 of 12);
     }
     &:nth-child(2) {
-      @include span(4 omega of 12);
+      @include span(4 of 12 last);
     }
     &:last-child {
       @include span(4 of 12);
-      @include pull(8 of 12);
+      //@include pull(4 of 12);
     }
   }
 }
