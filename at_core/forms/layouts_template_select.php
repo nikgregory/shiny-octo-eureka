@@ -196,7 +196,7 @@ $form['layouts']['template_select']['select_type']['manage_suggestions']['wrappe
   '#type' => 'tableselect',
   '#header' => $manage_suggestions_header,
   '#options' => $manage_suggestions_data,
-  //'#multiple' => TRUE,
+  '#multiple' => TRUE,
   '#attributes' => array('class' => array('table-suggestions')),
   '#states' => array(
     'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),

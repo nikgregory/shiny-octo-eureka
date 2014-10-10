@@ -4,11 +4,11 @@
  * Validate form values.
  */
 function at_generator_validate_generator(&$form, &$form_state) {
-  $theme  = $form_state['build_info']['args'][0];
-  $values = $form_state['values'];
+  $build_info = $form_state->getBuildInfo();
+  $values = $form_state->getValues();
+  $theme = $build_info['args'][0];
 
   // Validate Theme Generator.
-
   if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_core') {
     $machine_name  = $values['generate']['generate_machine_name'];
     $path   = drupal_get_path('theme', 'at_core');

@@ -26,12 +26,14 @@ class ThemeSettingsConfig {
     if (isset($values['delete_suggestions'])) {
       if ($values['delete_suggestions'] == 1 && !empty($values['delete_suggestions_table'])) {
         foreach ($values['delete_suggestions_table'] as $config_key => $config_value) {
-           $suggestion = drupal_substr($config_key, 20);
-           $suggestion_provider = 'settings.template_suggestion_provider_' . $suggestion;
-           $suggestion_plugin = 'settings.template_suggestion_plugin_' . $suggestion;
-           $config->clear('settings.' . $config_key);
-           $config->clear($suggestion_provider);
-           $config->clear($suggestion_plugin);
+          if ($config_value !== 0) {
+            $suggestion = drupal_substr($config_key, 20);
+            $suggestion_provider = 'settings.template_suggestion_provider_' . $suggestion;
+            $suggestion_plugin = 'settings.template_suggestion_plugin_' . $suggestion;
+            $config->clear('settings.' . $config_key);
+            $config->clear($suggestion_provider);
+            $config->clear($suggestion_plugin);
+          }
         }
       }
     }

@@ -9,8 +9,9 @@ use Drupal\at_core\Helpers\FileSavePrepare;
  * Form submit handler for the theme settings form.
  */
 function at_core_submit_layouts(&$form, &$form_state) {
-  $theme  = $form_state['build_info']['args'][0];
-  $values = $form_state['values'];
+  $build_info = $form_state->getBuildInfo();
+  $values = $form_state->getValues();
+  $theme = $build_info['args'][0];
 
   // Path to save generated CSS files.
   $theme_path = drupal_get_path('theme', $theme);
@@ -30,12 +31,14 @@ function at_core_submit_layouts(&$form, &$form_state) {
   // Delete suggestion files, TODO create new helper class/method for this:
   if (isset($values['delete_suggestions'])) {
     if ($values['delete_suggestions'] === 1 && !empty($values['delete_suggestions_table'])) {
-      $templates_directory = drupal_get_path('theme', $theme) . '/templates/';
+      $templates_directory = drupal_get_path('theme', $theme) . '/templates/page/';
       foreach ($values['delete_suggestions_table'] as $config_key => $config_value) {
-        $suggestion = str_replace('_', '-', drupal_substr($config_key, 20));
-        $file_path = $templates_directory . $suggestion . '.html.twig';
-        if (file_exists($file_path)) {
-          unlink($file_path);
+        if ($config_value !== 0) {
+          $suggestion = str_replace('_', '-', drupal_substr($config_key, 20));
+          $file_path = $templates_directory . $suggestion . '.html.twig';
+          if (file_exists($file_path)) {
+            unlink($file_path);
+          }
         }
       }
     }

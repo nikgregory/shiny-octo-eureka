@@ -7,8 +7,9 @@ use Drupal\at_core\Layout\LayoutSettings;
  * Validate form values.
  */
 function at_core_validate_layouts(&$form, &$form_state) {
-  $theme  = $form_state['build_info']['args'][0];
-  $values = $form_state['values'];
+  $build_info = $form_state->getBuildInfo();
+  $values = $form_state->getValues();
+  $theme = $build_info['args'][0];
 
   // Validate Layout Generator.
   if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] == 1) {
@@ -30,16 +31,24 @@ function at_core_validate_layouts(&$form, &$form_state) {
         $default_provider = $form['layouts']['layout_select']['variants_' . $plugin]['settings_selected_layout_' . $plugin]['#options'][$default_layout]['provider']['data'];
 
         // Pass data into form values, we need these during submit.
-        $form_state['values']['selected_layout_plugin'] = $selected_plugin;
-        $form_state['values']['selected_layout_provider'] = $selected_provider;
+        //$form_state['values']['selected_layout_plugin'] = $selected_plugin;
+        //$form_state['values']['selected_layout_provider'] = $selected_provider;
+        $form_state->setValue('selected_layout_plugin', $selected_plugin);
+        $form_state->setValue('selected_layout_provider', $selected_provider);
 
-        $form_state['values']['default_layout_plugin'] = $default_plugin;
-        $form_state['values']['default_layout_provider'] = $default_provider;
+        ///$form_state['values']['default_layout_plugin'] = $default_plugin;
+        //$form_state['values']['default_layout_provider'] = $default_provider;
+        $form_state->setValue('default_layout_plugin', $default_plugin);
+        $form_state->setValue('default_layout_provider', $default_provider);
 
         // Reset the suggestion_page selected layout if we are processing the default layout.
         if ($values['layout_type_select'] == 'default_layout') {
-          $form_state['values']['settings_template_suggestion_page'] = $selected_layout;
+          //$form_state['values']['settings_template_suggestion_page'] = $selected_layout;
+
+          $form_state->setValue('settings_template_suggestion_page', $selected_layout);
         }
+
+
 
         // Validate suggestions if template_suggestion is selected.
         if ($values['layout_type_select'] == 'template_suggestion') {

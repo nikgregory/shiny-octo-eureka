@@ -32,8 +32,11 @@ if ($form['ext']['ext_settings']['settings_enable_extensions']['#default_value']
     'markup_overrides'
   );
 
+  // get form values
+  $values = $form_state->getValues();
+
   foreach ($extensions_array as $extension) {
-    $form_state_value = isset($form_state['values']["settings_enable_$extension"]);
+    $form_state_value = isset($values["settings_enable_$extension"]);
     $form_value = $form['ext']['ext_settings']['enable_ext']["settings_enable_$extension"]['#default_value'];
     if (($form_state_value && $form_state_value == 1) ||
        (!$form_state_value && $form_value == 1)) {

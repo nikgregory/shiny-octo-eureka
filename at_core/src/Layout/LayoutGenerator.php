@@ -94,11 +94,16 @@ class LayoutGenerator extends PageLayout {
     // Template path
     $template_file = $this->plugin_path . $this->selected_plugin . '/' . $layouts['template'];
 
+    //kpr($layouts);
+    //kpr($template_file);
+
     // Get the template file, if not found attempt to generate template code programmatically.
     if (file_exists($template_file)) {
       $template = file_get_contents($template_file);
+      //kpr($template);
     }
     else {
+
       foreach ($layouts['rows'] as $row => $values) {
         foreach ($values['regions'] as $region_name => $region_value) {
           $row_regions[$row][] = '      {{ page.' . $region_name . ' }}';
@@ -115,6 +120,7 @@ class LayoutGenerator extends PageLayout {
         $output[$row]['wrapper_close'] = '  </' . $wrapper_element . '>';
         $output[$row]['suffix'] = '  {% endif %}' . "\n";
       }
+
       $generated[] = "{# No template file found - template code programmatically generated. #}" . "\n";
       $generated[] = '<div{{ attributes }}>'. "\n";
       $generated[] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";

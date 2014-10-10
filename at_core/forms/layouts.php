@@ -84,6 +84,18 @@ $form['layouts']['actions']['submit'] = array(
   '#button_type' => 'primary',
   '#states' => array(
     'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
+    //'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+  ),
+);
+
+$form['layouts']['actions']['delete_suggestions']['submit'] = array(
+  '#type' => 'submit',
+  '#value' => t('Delete suggestions'),
+  '#validate'=> array('at_core_validate_layouts'),
+  '#submit'=> array('at_core_submit_layouts'),
+  '#button_type' => 'secondary',
+  '#states' => array(
+    //'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
     'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
   ),
 );

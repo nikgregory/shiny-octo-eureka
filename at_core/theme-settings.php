@@ -18,7 +18,8 @@ use Drupal\at_core\Layout\LayoutSettings;
 function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Set the theme name.
-  $theme = $form_state['build_info']['args'][0];
+  $build_info = $form_state->getBuildInfo();
+  $theme = $build_info['args'][0];
 
   // Instantiate our Theme info object.
   $themeInfo = new ThemeInfo($theme);
@@ -50,12 +51,16 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
     $form['logo']['#attributes']['class'] = array('visually-hidden');
     $form['favicon']['#attributes']['class'] = array('visually-hidden');
-    $form['actions']['#attributes']['class'] = array('visually-hidden');
+    //$form['actions']['#attributes']['class'] = array('visually-hidden');
   }
 
   // AT Subtheme
   if (isset($getThemeInfo['subtheme type'])) {
     if ($getThemeInfo['subtheme type'] != 'at_generator') {
+
+      // Get the themes configuration
+      $config = \Drupal::config($theme . '.settings')->get('settings');
+      //kpr($config);
 
       // Layouts.
       include_once($at_core_path . '/forms/layouts.php');
@@ -89,7 +94,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Modify the color scheme form.
   if (\Drupal::moduleHandler()->moduleExists('color')) {
-    if (isset($form_state['build_info']['args'][0]) && ($theme = $form_state['build_info']['args'][0]) && color_get_info($theme) && function_exists('gd_info')) {
+    if (isset($build_info['args'][0]) && ($theme = $build_info['args'][0]) && color_get_info($theme) && function_exists('gd_info')) {
       $form['#process'][] = 'at_core_make_collapsible';
     }
   }

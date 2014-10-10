@@ -8,8 +8,10 @@ use Drupal\at_core\Helpers\FileSavePrepare;
  * Form submit handler for the theme settings form.
  */
 function at_core_submit_advanced_settings(&$form, &$form_state) {
-  $theme  = $form_state['build_info']['args'][0];
-  $values = $form_state['values'];
+  $build_info = $form_state->getBuildInfo();
+  $values = $form_state->getValues();
+
+  $theme = $build_info['args'][0];
   $at_core_path = drupal_get_path('theme', 'at_core');
 
   // Path to save generated CSS files.

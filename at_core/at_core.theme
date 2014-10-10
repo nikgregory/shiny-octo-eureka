@@ -13,7 +13,7 @@ use Drupal\Component\Utility\String;
 use Drupal\node\NodeInterface;
 
 // TODO convert to Class with methods?
-global $theme;
+$theme = \Drupal::theme()->getActiveTheme()->getName();
 if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
   require_once(drupal_get_path('theme', 'at_core') . '/forms/ext/fonts.inc');
 }
@@ -37,7 +37,7 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
 
   // If no key is given, use the current theme if we can determine it.
   if (!isset($theme)) {
-    $theme = !empty($GLOBALS['theme_key']) ? $GLOBALS['theme_key'] : '';
+    $theme = \Drupal::theme()->getActiveTheme()->getName();
   }
 
   if (empty($cache[$theme])) {
@@ -88,7 +88,7 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
 /* Remove when menus become twig templates.*/
 /*
 function at_core_menu_link(array $variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
   $element = $variables['element'];
   $sub_menu = '';
 
@@ -122,7 +122,7 @@ function at_core_menu_link(array $variables) {
 /* Uncomment when menu functions become twig templates.*/
 /*
 function at_core_preprocess_menu_link(&$variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   // Add extra classes for menu depth and mlid (menu id).
   if (!empty($variables['element']['#original_link']->depth)) {
@@ -144,99 +144,6 @@ function at_core_preprocess_menu_link(&$variables) {
 }
 */
 
-
-
-/**
- * hook_html_head_alter()
- */
-function at_core_html_head_alter(&$head_elements) {
-  global $theme;
-
-  // cleartype
-  $head_elements['at_core_meta_clear_type'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'meta',
-    '#attributes' => array(
-      'http-equiv' => "cleartype",
-      'content' => "on",
-    ),
-    '#weight' => -998,
-  );
-
-  // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
-  if (at_core_theme_get_setting('settings.enable_touch_icons') === 1) {
-    $path_to_theme = drupal_get_path('theme', $theme);
-    $rel = 'apple-touch-icon';
-    if (at_core_theme_get_setting('settings.apple_touch_icon_precomposed') === 1) {
-      $rel = 'apple-touch-icon-precomposed';
-    }
-    // Apple default icon and Nokia shortcut icon.
-    $icon_path_default = String::checkPlain(at_core_theme_get_setting('settings.icon_path_default', $theme));
-    if (!empty($icon_path_default)) {
-      $default_icon = file_create_url($default_icon_path = $path_to_theme . '/' . $icon_path_default);
-      $head_elements['at_core_touch_icon_nokia'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#weight' => -97,
-        '#attributes' => array(
-          'href' => $default_icon,
-          'rel' => "shortcut icon",
-        ),
-      );
-      $head_elements['at_core_touch_icon_default'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#weight' => -98,
-        '#attributes' => array(
-          'href' => $default_icon,
-          'rel' => $rel,
-        ),
-      );
-    }
-    // iPad (standard display).
-    $apple_touch_icon_path_ipad = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad', $theme));
-    if (!empty($apple_touch_icon_path_ipad)) {
-      $head_elements['at_core_touch_icon_ipad'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#weight' => -99,
-        '#attributes' => array(
-          'href' => file_create_url($ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad),
-          'rel' => $rel,
-          'sizes' => "76x76",
-        ),
-      );
-    }
-    // iPhone retina.
-    $apple_touch_icon_path_iphone_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_iphone_retina', $theme));
-    if (!empty($apple_touch_icon_path_iphone_retina)) {
-      $head_elements['at_core_touch_icon_iphone_retina'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#weight' => -100,
-        '#attributes' => array(
-          'href' => file_create_url($iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina),
-          'rel' => $rel,
-          'sizes' => "120x120",
-        ),
-      );
-    }
-    // iPad retina.
-    $apple_touch_icon_path_ipad_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad_retina', $theme));
-    if (!empty($apple_touch_icon_path_ipad_retina)) {
-      $head_elements['at_core_touch_icon_ipad_retina'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#weight' => -100,
-        '#attributes' => array(
-          'href' => file_create_url($ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina),
-          'rel' => $rel,
-          'sizes' => "152x152",
-        ),
-      );
-    }
-  }
-}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -272,7 +179,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
  * TODO: keep on on core regarding the alter hook and suggestions - https://drupal.org/node/2100775
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   // Add content type suggestions. array_splice should be safe here because
   // page__node is always a suggestion for node pages, aka there is always one
@@ -291,20 +198,179 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   }
 }
 
+
+
+
+
 /**
  * Implements hook_page_alter().
  */
 function at_core_page_alter(&$page) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+}
+
+
+
+
+
+
+/**
+ * hook_form_FORM_ID_alter()
+ * Modify the User Login Block Form
+ */
+function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Login block mods.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
+
+      // Placeholders.
+      if (at_core_theme_get_setting('settings.login_block_placeholder_labels', $theme) === 1) {
+        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+        $form['name']['#title_display'] = 'invisible';
+        $form['pass']['#title_display'] = 'invisible';
+      }
+    }
+  }
+}
+
+
+/**
+ * Preprocess variables for html templates.
+ */
+function at_core_preprocess_html(&$variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Re-usable variables for the h5bp type conditional classes. Attributes can
+  // only be used once (one time) in a template, so we need to set re-usable
+  // variables for the html conditional classes in html.html.twig.
+  $language_interface = \Drupal::service('language_manager')->getCurrentLanguage();
+  $variables['lang'] = $language_interface->id ? $language_interface->id : 'en';
+  $variables['dir'] = $language_interface->dir ? $language_interface->dir : 'ltr';
+
+  // Add a "site name" body classes for advanced theming of multi-sites.
+  if ($variables['head_title_array']['name']) {
+    $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
+  }
+
+  // Add theme name class, using this for debugging in development since I switch
+  // themes a lot and need to know which one I am looking at, could be removed later on?
+  $variables['attributes']['class'][] = 'theme-name--' . drupal_html_class($theme);
+
+  // Set the skip navigation target ID
+  $variables['skip_link_target'] = '#main-content';
+  if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
+    $variables['skip_link_target'] = check_plain($skip_link_target);
+  }
+}
+
+
+/**
+ * Preprocess variables for page templates.
+ */
+function at_core_preprocess_page(&$variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Meta tags probably need to move to preprocess and use #attached, but I couldn't actually get that to work.
+  // This should supposedly work - https://www.drupal.org/node/2160069, but nope.
+  // cleartype
+  $head_elements['at_core_meta_clear_type'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'http-equiv' => "cleartype",
+      'content' => "on",
+    ),
+    '#weight' => -998,
+  );
+  drupal_add_html_head($head_elements['at_core_meta_clear_type'], 'at_core_meta_clear_type');
+
+  // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
+  if (at_core_theme_get_setting('settings.enable_touch_icons') === 1) {
+    $path_to_theme = drupal_get_path('theme', $theme);
+    $rel = 'apple-touch-icon';
+    if (at_core_theme_get_setting('settings.apple_touch_icon_precomposed') === 1) {
+      $rel = 'apple-touch-icon-precomposed';
+    }
+    // Apple default icon and Nokia shortcut icon.
+    $icon_path_default = String::checkPlain(at_core_theme_get_setting('settings.icon_path_default', $theme));
+    if (!empty($icon_path_default)) {
+      $default_icon = file_create_url($default_icon_path = $path_to_theme . '/' . $icon_path_default);
+      $head_elements['at_core_touch_icon_nokia'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -97,
+        '#attributes' => array(
+          'href' => $default_icon,
+          'rel' => "shortcut icon",
+        ),
+      );
+      drupal_add_html_head($head_elements['at_core_touch_icon_nokia'], 'at_core_touch_icon_nokia');
+
+      $head_elements['at_core_touch_icon_default'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -98,
+        '#attributes' => array(
+          'href' => $default_icon,
+          'rel' => $rel,
+        ),
+      );
+      drupal_add_html_head($head_elements['at_core_touch_icon_default'], 'at_core_touch_icon_default');
+    }
+    // iPad (standard display).
+    $apple_touch_icon_path_ipad = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad', $theme));
+    if (!empty($apple_touch_icon_path_ipad)) {
+      $head_elements['at_core_touch_icon_ipad'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -99,
+        '#attributes' => array(
+          'href' => file_create_url($ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad),
+          'rel' => $rel,
+          'sizes' => "76x76",
+        ),
+      );
+      drupal_add_html_head($head_elements['at_core_touch_icon_ipad'], 'at_core_touch_icon_ipad');
+    }
+    // iPhone retina.
+    $apple_touch_icon_path_iphone_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_iphone_retina', $theme));
+    if (!empty($apple_touch_icon_path_iphone_retina)) {
+      $head_elements['at_core_touch_icon_iphone_retina'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -100,
+        '#attributes' => array(
+          'href' => file_create_url($iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina),
+          'rel' => $rel,
+          'sizes' => "120x120",
+        ),
+      );
+      drupal_add_html_head($head_elements['at_core_touch_icon_iphone_retina'], 'at_core_touch_icon_iphone_retina');
+    }
+    // iPad retina.
+    $apple_touch_icon_path_ipad_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad_retina', $theme));
+    if (!empty($apple_touch_icon_path_ipad_retina)) {
+      $head_elements['at_core_touch_icon_ipad_retina'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#weight' => -100,
+        '#attributes' => array(
+          'href' => file_create_url($ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina),
+          'rel' => $rel,
+          'sizes' => "152x152",
+        ),
+      );
+      drupal_add_html_head($head_elements['at_core_touch_icon_ipad_retina'], 'at_core_touch_icon_ipad_retina');
+    }
+  }
 
   // Get the path to the directory where our CSS files are saved
   $generated_css_file_path = drupal_get_path('theme', $theme) . '/generated_css';
 
-  // Attach libraries.
-
-  //$element['#attached']['library'][] = 'core/drupal.machine-name';
-  //$element['#attached']['js'][] = $js_settings;
-
+  // Attach libraries
   if (at_core_theme_get_setting('settings.libraries_enable', $theme) === 1) {
     //$libraries = array();
     //$themeInfo = new ThemeInfo($theme);
@@ -317,14 +383,14 @@ function at_core_page_alter(&$page) {
     foreach ($drupal_core_libraries as $key => $value) {
       $library_setting = str_replace('.', '_', strtolower($key));
       if (at_core_theme_get_setting("settings.drupal_core_$library_setting", $theme) === 1) {
-        $page['#attached']['library'][] = 'core/' . $key;
+        $variables['#attached']['library'][] = 'core/' . $key;
       }
     }
   }
 
   // Attach Windowsize library
   if (at_core_theme_get_setting("settings.show_window_size", $theme) === 1) {
-    $page['#attached']['library'][] = 'at_core/at.window_size';
+    $variables['#attached']['library'][] = 'at_core/at.window_size';
   }
 
   // Attach Livereload snippet (inline)
@@ -333,7 +399,7 @@ function at_core_page_alter(&$page) {
     if (at_core_theme_get_setting("settings.livereload_snippet", $theme)) {
       $livereload_snippet = at_core_theme_get_setting("settings.livereload_snippet", $theme);
     }
-    $page['#attached']['js'][] = array(
+    $variables['#attached']['js'][] = array(
       'data' => $livereload_snippet,
       'type' => 'inline',
     );
@@ -341,14 +407,14 @@ function at_core_page_alter(&$page) {
 
   // Attach devel_layout and nuke_toolbar CSS files.
   if (at_core_theme_get_setting('settings.devel_layout', $theme) === 1) {
-    $page['#attached']['css'][] = array(
+    $variables['#attached']['css'][] = array(
       'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-layout.css',
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_COMPONENT,
     );
   }
   if (at_core_theme_get_setting('settings.nuke_toolbar', $theme) === 1) {
-    $page['#attached']['css'][] = array(
+    $variables['#attached']['css'][] = array(
       'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/nuetralize-toolbar.css',
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_COMPONENT,
@@ -357,15 +423,14 @@ function at_core_page_alter(&$page) {
 
   // Attach Menu Toggle library
   if (at_core_theme_get_setting("settings.theme_library_at_menu_toggle", $theme) === 1) {
-    $page['#attached']['library'][] = 'at_core/at.menu_toggle';
+    $variables['#attached']['library'][] = 'at_core/at.menu_toggle';
   }
 
-  //$page['#attached']['library'][] = 'at_core/at.flexnav';
+  //$variables['#attached']['library'][] = 'at_core/at.flexnav';
 
   // ##################################################################################################
   // TODO - automated loading for theme trail libraries, the menu toggle is hard coded for now (above).
   // ##################################################################################################
-
 
 
   // Attach the selected layout.
@@ -386,24 +451,6 @@ function at_core_page_alter(&$page) {
       // Get theme registry, we need to determine the template suggestion for the current page.
       $theme_registry = theme_get_registry(FALSE);
       $info = array();
-
-      // Get page template suggestions. Set these as a page variables so
-      // sub-themes can leverage them also in hook_page_alter().
-      // Deprecate this feature because it causes a render array warning, dang nabbit.
-      /*
-      if ($page_suggestions = theme_get_suggestions(arg(), 'page')) {
-        $page['theme_hook_suggestions'] = $page_suggestions;
-      }
-
-      $suggestions = array();
-      if (!empty($page['theme_hook_suggestions'])) {
-        $suggestions = $page['theme_hook_suggestions'];
-      }
-      if (!empty($page['theme_hook_suggestion'])) {
-        $suggestions[] = $page['theme_hook_suggestion'];
-      }
-      */
-
 
       // need to see what is in current_path and if this will actually work consistantly
       $path_args = explode('/', current_path());
@@ -438,7 +485,7 @@ function at_core_page_alter(&$page) {
 
       // Main CSS layout file
       $data = $file_path . '/' . $layouts['css_layout']['styles'];
-      $page['#attached']['css'][$data] = array(
+      $variables['#attached']['css'][$data] = array(
         'type' => 'file',
         'data' => $data,
         'every_page' => FALSE,
@@ -450,7 +497,7 @@ function at_core_page_alter(&$page) {
       if (at_core_theme_get_setting('settings.layouts_no_mq_' . $page['#selected_layout'], $theme) === 1) {
         // IE Layout file
         $ie_data = $file_path . '/' . $layouts['css_layout']['no_mq'];
-        $page['#attached']['css'][$ie_data] = array(
+        $variables['#attached']['css'][$ie_data] = array(
           'type' => 'file',
           'data' => $ie_data,
           'browsers' => array(
@@ -464,8 +511,9 @@ function at_core_page_alter(&$page) {
         // the user can't disable this. We polyfill because all the shipped
         // layouts use :last-child and other pseudo selectors not supported by
         // IE8. Still, the user could use something else, what exactly I don't
-        // know because jQuery Selectivzr depending is not reliable.
-        $page['#attached']['library'][] = 'at_core/at.ie9js';
+        // know because jQuery Selectivzr is not reliable and theres not a lot else
+        // out there.
+        $variables['#attached']['library'][] = 'at_core/at.ie9js';
       }
     }
 
@@ -473,7 +521,7 @@ function at_core_page_alter(&$page) {
     if (at_core_theme_get_setting('settings.max_width_enable')) {
       $max_width_file = $generated_css_file_path . '/' . $theme . '--max-width.css';
       if (file_exists($max_width_file)) {
-        $page['#attached']['css'][$max_width_file] = array(
+        $variables['#attached']['css'][$max_width_file] = array(
           'type' => 'file',
           'data' => $max_width_file,
           'group' => CSS_AGGREGATE_THEME,
@@ -490,7 +538,7 @@ function at_core_page_alter(&$page) {
     if (at_core_theme_get_setting('settings.enable_fonts', $theme) === 1) {
       $fonts_file = $generated_css_file_path . '/' . $theme . '--fonts.css';
       if (file_exists($fonts_file)) {
-        $page['#attached']['css'][$fonts_file] = array(
+        $variables['#attached']['css'][$fonts_file] = array(
           'type' => 'file',
           'data' => $fonts_file,
           'group' => CSS_AGGREGATE_THEME,
@@ -502,7 +550,7 @@ function at_core_page_alter(&$page) {
       if (at_core_theme_get_setting('settings.font_google', $theme)) {
         $google_font_path = check_url(at_core_theme_get_setting('settings.font_google', $theme));
         $google_font_path_fixed = '//' . str_replace('&amp;', '&', $google_font_path);
-        $page['#attached']['css'][$google_font_path_fixed] = array(
+        $variables['#attached']['css'][$google_font_path_fixed] = array(
           'data' => $google_font_path_fixed,
           'type' => 'external',
         );
@@ -511,7 +559,7 @@ function at_core_page_alter(&$page) {
       // Typekit script.
       if (at_core_theme_get_setting('settings.font_typekit', $theme)) {
         $typekit_script_path = '//' . at_core_theme_get_setting('settings.font_typekit', $theme);
-        $page['#attached']['js'][] = array(
+        $variables['#attached']['js'][] = array(
           'data' => $typekit_script_path,
           'type' => 'external',
           'weight' => CSS_THEME,
@@ -523,7 +571,7 @@ function at_core_page_alter(&$page) {
     if (at_core_theme_get_setting('settings.enable_titles', $theme) === 1) {
       $titles_file = $generated_css_file_path . '/' . $theme . '--titles.css';
       if (file_exists($titles_file)) {
-        $page['#attached']['css'][$titles_file] = array(
+        $variables['#attached']['css'][$titles_file] = array(
           'type' => 'file',
           'data' => $titles_file,
           'group' => CSS_AGGREGATE_THEME,
@@ -536,7 +584,7 @@ function at_core_page_alter(&$page) {
     if (at_core_theme_get_setting('settings.enable_images', $theme) === 1) {
       $images_file = $generated_css_file_path . '/' . $theme . '--images.css';
       if (file_exists($images_file)) {
-        $page['#attached']['css'][$images_file] = array(
+        $variables['#attached']['css'][$images_file] = array(
           'type' => 'file',
           'data' => $images_file,
           'group' => CSS_AGGREGATE_THEME,
@@ -548,7 +596,7 @@ function at_core_page_alter(&$page) {
     // Custom CSS.
     if (at_core_theme_get_setting('settings.enable_custom_css', $theme) === 1) {
       $custom_css_file = $generated_css_file_path . '/' . $theme . '--custom-css.css';
-      $page['#attached']['css'][$custom_css_file] = array(
+      $variables['#attached']['css'][$custom_css_file] = array(
         'type' => 'file',
         'data' => $custom_css_file,
         'group' => CSS_AGGREGATE_THEME,
@@ -562,7 +610,7 @@ function at_core_page_alter(&$page) {
       // Breadcrumbs.
       if (at_core_theme_get_setting('settings.breadcrumb_label', $theme) === 1 || at_core_theme_get_setting('settings.breadcrumb_separator', $theme) === 1) {
         $breadcrumb_file = $generated_css_file_path . '/' . $theme . '--breadcrumb.css';
-        $page['#attached']['css'][$breadcrumb_file] = array(
+        $variables['#attached']['css'][$breadcrumb_file] = array(
           'type' => 'file',
           'data' => $breadcrumb_file,
           'group' => CSS_AGGREGATE_THEME,
@@ -574,7 +622,7 @@ function at_core_page_alter(&$page) {
       if ($GLOBALS['user']->isAuthenticated() == FALSE) {
         if (at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
           $login_block_file = $generated_css_file_path . '/' . $theme . '--login-block.css';
-          $page['#attached']['css'][$login_block_file] = array(
+          $variables['#attached']['css'][$login_block_file] = array(
             'type' => 'file',
             'data' => $login_block_file,
             'group' => CSS_AGGREGATE_THEME,
@@ -584,86 +632,8 @@ function at_core_page_alter(&$page) {
       }
     }
   }
-}
 
-/**
- * hook_form_FORM_ID_alter()
- * Modify the User Login Block Form
- */
-function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
-  global $theme;
-
-  // Login block mods.
-  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
-    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
-
-      // Placeholders.
-      if (at_core_theme_get_setting('settings.login_block_placeholder_labels', $theme) === 1) {
-        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-        $form['name']['#title_display'] = 'invisible';
-        $form['pass']['#title_display'] = 'invisible';
-      }
-    }
-  }
-}
-
-/**
- * Preprocess variables for html templates.
- */
-function at_core_preprocess_html(&$variables) {
-  global $theme;
-
-  // Re-usable variables for the h5bp type conditional classes. Attributes can
-  // only be used once (one time) in a template, so we need to set re-usable
-  // variables for the html conditional classes in html.html.twig.
-  $language_interface = \Drupal::service('language_manager')->getCurrentLanguage();
-  $variables['lang'] = $language_interface->id ? $language_interface->id : 'en';
-  $variables['dir'] = $language_interface->dir ? $language_interface->dir : 'ltr';
-
-  // Add a "site name" body classes for advanced theming of multi-sites.
-  if ($variables['head_title_array']['name']) {
-    $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
-  }
-
-  // Add theme name class, using this for debugging in development since I switch
-  // themes a lot and need to know which one I am looking at, could be removed later on?
-  $variables['attributes']['class'][] = 'theme-name--' . drupal_html_class($theme);
-
-  // Set the skip navigation target ID
-  $variables['skip_link_target'] = '#main-content';
-  if ($skip_link_target = at_core_theme_get_setting('settings.skip_link_target', $theme)) {
-    $variables['skip_link_target'] = check_plain($skip_link_target);
-  }
-}
-
-/**
- * Preprocess variables for page templates.
- */
-function at_core_preprocess_page(&$variables) {
-  global $theme;
-
-  $page = $variables['page'];
-
-  // Test should we move CSS loading from hook_page_alter() to preprocess or perhpas hook_theme_prepare() etc.
-  /*
-  $file = drupal_get_path('theme', 'at_core') . '/stylesheets/css/show-regions.css';
-  $css = array(
-    '#attached' => array(
-      'css' => array(
-        $file => array (
-          'type' => 'file',
-          'data' => $file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => -999,
-        ),
-      ),
-    ),
-  );
-  drupal_render($css);
-  */
-
-  // Layouts.
+  // Layouts attributes
   if (at_core_theme_get_setting('settings.layouts_enable', $theme)) {
 
     // Set a variable that holds an array of the active visible regions.
@@ -672,7 +642,7 @@ function at_core_preprocess_page(&$variables) {
     $variables['#active_regions'] = array();
 
     foreach ($regions as $region_name => $region_label) {
-      if (!empty($page[$region_name])) {
+      if (!empty($variables['page'][$region_name])) {
         $variables['#active_regions'][] = $region_name;
       }
     }
@@ -691,7 +661,7 @@ function at_core_preprocess_page(&$variables) {
 
         // Check if we have attributes to avoid a fatal error.
         if (empty($row_attributes)) {
-          drupal_set_message(t('No layout set, you need to set a layout for the default page or template suggestion in use - visit the Appearance settings page for your theme and set a layout.'), 'error');
+          //drupal_set_message(t('No layout set, you need to set a layout for the default page or template suggestion in use - visit the Appearance settings page for your theme and set a layout.'), 'error');
         }
         else {
           $variables += $row_attributes;
@@ -720,6 +690,8 @@ function at_core_preprocess_region(&$variables) {
  */
 function at_core_preprocess_node(&$variables) {
   $node = $variables['node'];
+
+  //var_dump($variables);
 
   // Header and Footer attributes.
   $variables['header_attributes'] = new Attribute(array('class' => array()));
@@ -789,7 +761,7 @@ function at_core_preprocess_comment_wrapper(&$variables) {
  * Preprocess variables for comment templates.
  */
 function at_core_preprocess_comment(&$variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   $comment = $variables['elements']['#comment'];
   $account = comment_prepare_author($comment);
@@ -873,7 +845,7 @@ function at_core_preprocess_comment(&$variables) {
  * Preprocess variables for block templates.
  */
 function at_core_preprocess_block(&$variables) {
- global $theme;
+ $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   // Conditional markup, need to see if this affects caching and if so, think about that a lot.
   $variables['html_element'] = 'div';
@@ -905,7 +877,7 @@ function at_core_preprocess_block(&$variables) {
  * SEE: https://drupal.org/node/1987398 field.module - Convert theme_ functions to Twig
  */
 function at_core_preprocess_field(&$variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   /* Think about this later, means to put a class foreach taxonomy term that is unique so we can
      add icons for specific terms
@@ -969,7 +941,7 @@ function at_core_preprocess_field(&$variables) {
  * SEE: https://drupal.org/node/1987398 field.module - Convert theme_functions to Twig
  */
 function at_core_preprocess_breadcrumb(&$variables) {
-  global $theme;
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   // New attributes array for breadcrumb title.
   $variables['title_attributes'] = new Attribute(array('class' => array()));

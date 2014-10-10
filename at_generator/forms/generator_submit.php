@@ -8,8 +8,9 @@ use Drupal\at_generator\Theme\ThemeGeneratorSubmit;
  * Form submit handler for the theme settings form.
  */
 function at_generator_submit_generator(&$form, &$form_state) {
-  $theme  = $form_state['build_info']['args'][0];
-  $values = $form_state['values'];
+  $build_info = $form_state->getBuildInfo();
+  $values = $form_state->getValues();
+  $theme = $build_info['args'][0];
 
   // Generate a new theme.
   if (!empty($values['generate']['generate_machine_name']) && $theme == 'at_generator') {

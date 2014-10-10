@@ -16,7 +16,8 @@ use Drupal\at_core\Theme\ThemeSettingsConfig;
 function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Set the theme name.
-  $theme = $form_state['build_info']['args'][0];
+  $build_info = $form_state->getBuildInfo();
+  $theme = $build_info['args'][0];
 
   // Instantiate our Theme info object.
   $themeInfo = new ThemeInfo($theme);
@@ -54,8 +55,8 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Modify the submit.
   $form['actions']['submit']['#value'] = t('Generate theme');
-  $form['actions']['submit']['#validate'][] = 'at_generator_validate_generator';
-  $form['actions']['submit']['#submit'][] = 'at_generator_submit_generator';
+  $form['#validate'][] = 'at_generator_validate_generator';
+  $form['#submit'][] = 'at_generator_submit_generator';
 
   include_once($at_generator_path . '/forms/generator_validate.php');
   include_once($at_generator_path . '/forms/generator_submit.php');
