@@ -9,6 +9,7 @@ $form['ext'] = array(
   '#type' => 'details',
   '#title' => t('Extensions'),
   '#group' => 'at_settings',
+  '#weight' => 1000,
 );
 
 $form['ext']['ext_settings'] = array(
@@ -104,3 +105,12 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_markup_overrides'] =
     '),
   '#default_value' => theme_get_setting('settings.enable_markup_overrides', $theme),
 );
+
+// Devel
+$form['ext']['ext_settings']['enable_ext']['settings_enable_devel'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Devel'),
+  '#description' => t('Settings to help with theme development.'),
+  '#default_value' => theme_get_setting('settings.enable_devel', $theme),
+);
+

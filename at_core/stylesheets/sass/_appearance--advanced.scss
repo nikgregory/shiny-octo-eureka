@@ -105,48 +105,11 @@
 
 
 // Titles
-#edit-titles-settings {
-
-  .titles-styles-wrapper {
-    .fieldset-description {
-      float: left;
-      padding: 0;
-      width: 12em;
-    }
-
-    .form-type-select {
-      clear: none;
-      float: left;
-      margin: 0 10px 0 0;
-    }
-    .form-select {
-      min-width: 8em;
-    }
-  }
-
-  .form-type-select {
-    min-width: 8em;
-
+#edit-titles {
+  details {
     label {
-      clip: rect(1px, 1px, 1px, 1px);
-      overflow: hidden;
-      position: absolute;
-    }
-  }
-
-  #edit-site-name-font-style {
-    .form-type-select label {
-      clip: auto;
-      display: block !important;
-      height: auto;
-      overflow: auto;
-      padding-bottom: 0.5em;
-      position: static !important;
-      width: auto;
-    }
-
-    .fieldset-description {
-      padding-top: 2.2em;
+      display: inline-block;
+      width: 8em;
     }
   }
 }

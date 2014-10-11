@@ -12,6 +12,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Component\Utility\String;
 use Drupal\node\NodeInterface;
 
+
 // TODO convert to Class with methods?
 $theme = \Drupal::theme()->getActiveTheme()->getName();
 if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {

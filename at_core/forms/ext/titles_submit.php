@@ -8,14 +8,7 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
   $titles_styles = array();
 
   // Array of valid title types
-  $titles_valid_types = array(
-    'site_name',
-    'site_slogan',
-    'page_title',
-    'node_title',
-    'block_title',
-    'comment_title',
-  );
+  $titles_valid_types = title_valid_type_options();
 
   // Get the font elements array.
   $font_elements = font_elements();
@@ -27,24 +20,33 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
       $case = 'text-transform:';
       $weight = 'font-weight:';
       $alignment = 'text-align:';
-      if (isset($values['settings_' . $font_element_key . '_case']) && $values['settings_' . $font_element_key . '_case'] == 'small-caps') {
-        $case = 'font-variant:';
-      }
       // Selector
-      if (isset($font_element_value['selector'])) {
+      if (!empty($font_element_value['selector'])) {
         $css[$font_element_key]['selector'] = $font_element_value['selector'];
       }
-      // Case
-      if (isset($values['settings_' . $font_element_key . '_case'])) {
-        $css[$font_element_key]['styles']['case'] = $case . $values['settings_' . $font_element_key . '_case'];
+
+      //var_dump($values['settings_titles_' . $font_element_key . '_case']);
+
+      // Case or Font variant: small-caps is a font-variant, set properties and values accordingly.
+      // We need to set tranform and variant explicitly so selectors can override each other, without
+      // any nasty inheritance issues, such as when .page__title overrides h1.
+      if (!empty($values['settings_titles_' . $font_element_key . '_case'])) {
+        if ($values['settings_titles_' . $font_element_key . '_case'] == 'small-caps') {
+          $css[$font_element_key]['styles']['font_variant'] = 'font-variant:' . $values['settings_titles_' . $font_element_key . '_case'];
+          $css[$font_element_key]['styles']['text_transform'] = 'text-transform:none';
+        }
+        else {
+          $css[$font_element_key]['styles']['case'] = $case . $values['settings_titles_' . $font_element_key . '_case'];
+          $css[$font_element_key]['styles']['font_variant'] = 'font-variant:normal';
+        }
       }
       // Weight
-      if (isset($values['settings_' . $font_element_key . '_weight'])) {
-        $css[$font_element_key]['styles']['weight'] = $weight . $values['settings_' . $font_element_key . '_weight'];
+      if (!empty($values['settings_titles_' . $font_element_key . '_weight'])) {
+        $css[$font_element_key]['styles']['weight'] = $weight . $values['settings_titles_' . $font_element_key . '_weight'];
       }
       // Alignment
-      if (isset($values['settings_' . $font_element_key . '_alignment'])) {
-        $css[$font_element_key]['styles']['align'] = $alignment . $values['settings_' . $font_element_key . '_alignment'];
+      if (!empty($values['settings_titles_' . $font_element_key . '_alignment'])) {
+        $css[$font_element_key]['styles']['align'] = $alignment . $values['settings_titles_' . $font_element_key . '_alignment'];
       }
     }
   }

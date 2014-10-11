@@ -62,11 +62,13 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       $config = \Drupal::config($theme . '.settings')->get('settings');
       //kpr($config);
 
-      // Layouts.
-      include_once($at_core_path . '/forms/layouts.php');
+
 
       // Advanced settings (extensions).
       include_once($at_core_path . '/forms/ext/advanced_settings.php');
+
+      // Layouts.
+      include_once($at_core_path . '/forms/layouts.php');
 
       // Basic settings - move into details wrapper and collapse.
       $form['basic_settings'] = array(

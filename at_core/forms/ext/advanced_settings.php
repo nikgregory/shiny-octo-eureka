@@ -4,13 +4,12 @@
 $form['advanced_settings'] = array(
   '#type' => 'details',
   '#title' => t('Advanced settings'),
-  '#weight' => -199,
-  '#open' => FALSE,
+  '#weight' => -201,
+  '#open' => TRUE,
 );
 
 $form['advanced_settings']['at_settings'] = array(
   '#type' => 'vertical_tabs',
-  '#weight' => -200,
 );
 
 // Extensions
@@ -29,7 +28,8 @@ if ($form['ext']['ext_settings']['settings_enable_extensions']['#default_value']
     'touch_icons',
     'libraries',
     'custom_css',
-    'markup_overrides'
+    'markup_overrides',
+    'devel',
   );
 
   // get form values
@@ -44,9 +44,6 @@ if ($form['ext']['ext_settings']['settings_enable_extensions']['#default_value']
     }
   }
 }
-
-// Development.
-include_once($at_core_path . '/forms/devel.php');
 
 // Help (sub-theme). TODO: rethink where help goes.
 // include_once($at_core_path . '/forms/help_subtheme.php');

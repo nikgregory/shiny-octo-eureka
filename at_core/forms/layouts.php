@@ -28,7 +28,7 @@ $form['layouts'] = array(
   //'#description' => t('<h2>Layout</h2>'),
   '#open'=> FALSE,
   '#attributes' => array('class' => array('clearfix')),
-  '#weight' => -300,
+  '#weight' => -200,
 );
 
 // Enable layouts, this is a master setting that totally disables the page layout system.

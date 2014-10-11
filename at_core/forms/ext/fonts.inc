@@ -45,7 +45,7 @@ function font_elements() {
       ),
       'pagetitle' => array(
         'label' => 'Page title',
-        'selector' => '.view-mode--full .node__title, .page__title',
+        'selector' => '.view-mode--full .node__title, .page__title, .user__title',
       ),
       'nodetitle' => array(
         'label' => 'Node title',
@@ -57,7 +57,7 @@ function font_elements() {
       ),
       'blocktitle' => array(
         'label' => 'Block title',
-        'selector' => '.block__title',
+        'selector' => '.block__title, .pane__title',
       ),
       'navbar' => array(
         'label' => 'Navbar',
@@ -123,7 +123,7 @@ function font_elements() {
  * @param $style
  * @param $element
  */
-function font_style_options($style) {
+function title_style_options($style) {
   $options = &drupal_static(__FUNCTION__, array());
   switch ($style) {
     case ('case'):
@@ -138,8 +138,10 @@ function font_style_options($style) {
     break;
     case ('weight'):
       $options = array(
-        '400' => t('Normal'),
         '700' => t('Bold'),
+        '600' => t('Semibold'),
+        '400' => t('Normal'),
+        '300' => t('Light'),
       );
     break;
     case ('alignment'):
@@ -154,3 +156,24 @@ function font_style_options($style) {
   return $options;
 }
 
+/**
+ * Reusable valid type options for titles.
+ */
+function title_valid_type_options() {
+  $options = array(
+    'sitename',
+    'siteslogan',
+    'pagetitle',
+    'nodetitle',
+    'blocktitle',
+    'commenttitle',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+  );
+
+  return $options;
+}
