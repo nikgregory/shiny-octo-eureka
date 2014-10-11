@@ -1,0 +1,14 @@
+id: at_minimal_search
+theme: at_minimal
+weight: -1
+status: true
+langcode: en
+region: sidebar_second
+plugin: search_form_block
+settings:
+  label: Search
+  id: search_form_block
+  provider: search
+  label_display: 0
+  cache:
+    max_age: 0

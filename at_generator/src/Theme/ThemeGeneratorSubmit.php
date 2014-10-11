@@ -89,7 +89,19 @@ class ThemeGeneratorSubmit {
       // Standard, Minimal and Clones
       if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_clone') {
 
-        $configuration_files = array($subtheme_type . '.settings.yml');
+        $configuration_files = array(
+          $subtheme_type . '.settings.yml',
+          //'block.block.' . $subtheme_type . '_account_menu.yml',
+          'block.block.' . $subtheme_type . '_branding.yml',
+          'block.block.' . $subtheme_type . '_content.yml',
+          'block.block.' . $subtheme_type . '_breadcrumbs.yml',
+          'block.block.' . $subtheme_type . '_footer.yml',
+          'block.block.' . $subtheme_type . '_help.yml',
+          'block.block.' . $subtheme_type . '_login.yml',
+          'block.block.' . $subtheme_type . '_main_menu.yml',
+          'block.block.' . $subtheme_type . '_search.yml',
+          'block.block.' . $subtheme_type . '_tools.yml',
+        );
 
         // Set variables and perform operations depending on the type and options.
         if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal') {

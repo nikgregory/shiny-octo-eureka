@@ -1,0 +1,13 @@
+id: at_minimal_content
+theme: at_minimal
+weight: 0
+status: true
+langcode: en
+region: content
+plugin: system_main_block
+settings:
+  label: 'Main page content'
+  provider: system
+  label_display: 0
+  cache:
+    max_age: 0
