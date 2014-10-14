@@ -25,8 +25,7 @@ foreach ($providers as $key => $provider_name) {
 $form['layouts'] = array(
   '#type' => 'details',
   '#title' => t('Layouts'),
-  //'#description' => t('<h2>Layout</h2>'),
-  '#open'=> FALSE,
+  '#open'=> TRUE,
   '#attributes' => array('class' => array('clearfix')),
   '#weight' => -200,
 );
@@ -70,7 +69,6 @@ $form['layouts']['template_select']['select']['settings_template_suggestion_page
 );
 
 // Submit button for layouts.
-
 $form['layouts']['actions'] = array(
   '#type' => 'actions',
   '#attributes' => array('class' => array('submit--layout')),
@@ -83,22 +81,22 @@ $form['layouts']['actions']['submit'] = array(
   '#submit'=> array('at_core_submit_layouts'),
   '#button_type' => 'primary',
   '#states' => array(
-    'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
-    //'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+    'disabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
   ),
 );
 
-$form['layouts']['actions']['delete_suggestions']['submit'] = array(
-  '#type' => 'submit',
-  '#value' => t('Delete suggestions'),
-  '#validate'=> array('at_core_validate_layouts'),
-  '#submit'=> array('at_core_submit_layouts'),
-  '#button_type' => 'secondary',
-  '#states' => array(
-    //'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
-    'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
-  ),
-);
+if (!empty($manage_suggestions_data)) {
+  $form['layouts']['actions']['delete_suggestions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete suggestions'),
+    '#validate'=> array('at_core_validate_layouts'),
+    '#submit'=> array('at_core_submit_layouts'),
+    '#button_type' => 'secondary',
+    '#states' => array(
+      'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+    ),
+  );
+}
 
 // Layout submit handlers.
 include_once(drupal_get_path('theme', 'at_core') . '/forms/layouts_validate.php');

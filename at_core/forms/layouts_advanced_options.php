@@ -7,7 +7,7 @@ $form['layouts']['adv_options'] = array(
   '#title' => t('Options'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-three')),
   '#states' => array(
-    //'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
+    'disabled' => array('select[name="layout_type_select"]' => array('value' => 'disable_layout_generation')),
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
 );

@@ -130,8 +130,8 @@ $form['layouts']['template_select']['select_type']['suggestions']['template_sugg
     <ol>
       <li>Enter the template suggestion (new, or modify/overwrite an existing suggestion).</li>
       <li>Select a layout and variant- these must be from the <b>!suggestion_plugin_message Plugin</b> (suggestions must use the same layout plugin as the default layout).</li>
-      <li>Configure Internet Explorer Options.</li>
-      <li>Save the configuration.</li>
+      <li>Configure "Options".</li>
+      <li>Save the layout settings.</li>
     </ol>
     <p>See the Help tab section "Using Layouts".</p>', array('!suggestion_plugin_message' => $suggestion_plugin_message)),
 );
@@ -165,45 +165,44 @@ foreach ($config as $key => $value) {
   }
 }
 
-$form['layouts']['template_select']['select_type']['manage_suggestions'] = array(
-  '#type' => 'fieldset',
-);
-
-$form['layouts']['template_select']['select_type']['manage_suggestions']['description'] = array(
-  '#markup' => t('<h5>Generated Suggestions</h5>'),
-);
-
 if (!empty($manage_suggestions_data)) {
+  $form['layouts']['template_select']['select_type']['manage_suggestions'] = array(
+    '#type' => 'fieldset',
+  );
+
+  $form['layouts']['template_select']['select_type']['manage_suggestions']['description'] = array(
+    '#markup' => t('<h5>Generated Suggestions</h5>'),
+  );
+
   $form['layouts']['template_select']['select_type']['manage_suggestions']['delete_suggestions'] = array(
     '#type' => 'checkbox',
     '#title' => t('Manage Suggestions'),
     '#default_value' => FALSE,
-    '#description' => t('Check this to manage suggestions. Delete suggestions by checking the box next to existing suggestions and saving the configuration. There is no undo or confirmation screen. Use with caution.'),
+    '#description' => t('Delete suggestions by checking the box next to the suggestion and click "Delete Suggestions".'),
   );
-}
 
-$form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper'] = array(
-  '#type' => 'container',
-  '#attributes' => array('class' => array('delete_suggestions-container')),
-  '#states' => array(
-    'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
-  ),
-);
+  $form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('delete_suggestions-container')),
+    '#states' => array(
+      'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+    ),
+  );
 
-// Print the layouts table select data.
-$form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper']['delete_suggestions_table'] = array(
-  '#title' => t('Manage Suggestions'),
-  '#type' => 'tableselect',
-  '#header' => $manage_suggestions_header,
-  '#options' => $manage_suggestions_data,
-  '#multiple' => TRUE,
-  '#attributes' => array('class' => array('table-suggestions')),
-  '#states' => array(
-    'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
-  ),
-);
+  // Print the layouts table select data.
+  $form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper']['delete_suggestions_table'] = array(
+    '#title' => t('Manage Suggestions'),
+    '#type' => 'tableselect',
+    '#header' => $manage_suggestions_header,
+    '#options' => $manage_suggestions_data,
+    '#multiple' => TRUE,
+    '#attributes' => array('class' => array('table-suggestions')),
+    '#states' => array(
+      'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+    ),
+  );
 
-if (empty($manage_suggestions_data)) {
+  /*
   $form['layouts']['template_select']['select_type']['manage_suggestions']['wrapper']['no_suggestions'] = array(
     '#type' => 'container',
     '#markup' => t('<p class="description"><i>No suggestions have been generated. To generate a suggestion select type "Template suggestion", configure options and save.</i></p>'),
@@ -211,4 +210,5 @@ if (empty($manage_suggestions_data)) {
       'invisible' => array('select[name="layout_type_select"]' => array('value' => 'template_suggestion')),
     ),
   );
+  */
 }

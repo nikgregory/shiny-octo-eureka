@@ -1,15 +1,12 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\000034}}
 #toolbar-administration {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\000037}}
 body {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000313}}
 .messages,
 .visually-hidden,
 .region-page-top,
@@ -17,273 +14,212 @@ body {
   display: none !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000320}}
 [class*="page-row__"] {
   padding-top: 0;
   padding-bottom: 0;
   background-color: ghostwhite;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000324}}
-[class*="page-row__"] .container {
+[class*="page-row__"] .regions {
   padding: 20px 0 10px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000330}}
 [class*="page-row__"]:nth-child(2n+1) {
   background-color: lavender;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000334}}
 [class*="page-row__"] .region {
   margin-bottom: 10px;
   position: relative;
   background: rgba(0, 0, 0, 0.65);
   font: 12px/1 Arial;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000341}}
 [class*="page-row__"] .region .block {
   height: 40px;
   width: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000345}}
-[class*="page-row__"] .region .block > * {
+[class*="page-row__"] .region .block * {
   display: none !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000349}}
 [class*="page-row__"] .region:before {
   position: absolute;
   top: 3px;
   left: 3px;
   color: rgba(255, 255, 255, 0.5);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000358}}
 [class*="page-row__"] .region:first-child:before {
   content: "Region 1";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000363}}
 [class*="page-row__"] .region:nth-child(2):before {
   content: "Region 2";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000368}}
 [class*="page-row__"] .region:nth-child(3):before {
   content: "Region 3";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000374}}
 [class*="page-row__"] .region:nth-child(4):before {
   content: "Region 4";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000379}}
 [class*="page-row__"] .region:nth-child(5):before {
   content: "Region 5";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000384}}
 [class*="page-row__"] .region:nth-child(6):before {
   content: "Region 6";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000389}}
 [class*="page-row__"] .region:nth-child(7):before {
   content: "Region 7";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000394}}
 [class*="page-row__"] .region:nth-child(8):before {
   content: "Region 8";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\0000399}}
 [class*="page-row__"] .region:nth-child(9):before {
   content: "Region 9";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003104}}
 [class*="page-row__"] .region:nth-child(10):before {
   content: "Region 10";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003109}}
 [class*="page-row__"] .region:nth-child(11):before {
   content: "Region 11";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003114}}
 [class*="page-row__"] .region:nth-child(12):before {
   content: "Region 12";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003119}}
 [class*="page-row__"] .region:nth-child(13):before {
   content: "Region 13";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003124}}
 [class*="page-row__"] .region:nth-child(14):before {
   content: "Region 14";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003129}}
 [class*="page-row__"] .region:nth-child(15):before {
   content: "Region 15";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003134}}
 [class*="page-row__"] .region:nth-child(16):before {
   content: "Region 16";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003139}}
 [class*="page-row__"] .region:nth-child(17):before {
   content: "Region 17";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003144}}
 [class*="page-row__"] .region:nth-child(18):before {
   content: "Region 18";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003149}}
 [class*="page-row__"] .region:nth-child(19):before {
   content: "Region 19";
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003154}}
 [class*="page-row__"] .region:nth-child(20):before {
   content: "Region 20";
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003164}}
 html, body {
   background: #fff !important;
   padding: 20px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003168}}
 [class*="page-row-"] {
   background: #fff !important;
   padding: 5px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003172}}
 [class*="page-row-"] .container {
   padding: 0;
   margin: 0 auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003177}}
 [class*="page-row-"] .region {
   height: 40px;
   margin: 0 0 12px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003180}}
 [class*="page-row-"] .region:before {
   content: "" !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003185}}
 .page-row-two-one,
 .page-row-three-one,
 .page-row-four-one {
   margin-top: 40px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003196}}
 .layout-metro .page-row-header .region:nth-child(2), .layout-metro .page-row-header .region:last-child {
   height: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003203}}
 .layout-metro .page-row-main .region-highlighted {
   height: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003206}}
 .layout-metro .page-row-main .region-content {
   height: 190px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003209}}
 .layout-metro .page-row-main .region-sidebar-first {
   height: 190px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003212}}
 .layout-metro .page-row-main .region-sidebar-second {
   height: 300px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003218}}
 .layout-metro .page-row-features .region,
 .layout-metro .page-row-tertiary .region {
   height: 80px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003223}}
 .layout-metro .page-row-features .region:first-child {
   height: 100px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003234}}
 .layout-publisher .page-row-header .region:nth-child(2), .layout-publisher .page-row-header .region:last-child {
   height: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003241}}
 .layout-publisher .page-row-main .region-highlighted {
   height: 70px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003244}}
 .layout-publisher .page-row-main .region-content {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003247}}
 .layout-publisher .page-row-main .region-sidebar-first {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003250}}
 .layout-publisher .page-row-main .region-sidebar-second {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003256}}
 .layout-publisher .page-row-features .region,
 .layout-publisher .page-row-tertiary .region {
   height: 90px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003261}}
 .layout-publisher .page-row-features .region:first-child {
   height: 80px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003272}}
 .layout-univer .page-row-header .region:nth-child(2), .layout-univer .page-row-header .region:last-child {
   height: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003279}}
 .layout-univer .page-row-main .region-highlighted {
   height: 70px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003282}}
 .layout-univer .page-row-main .region-content {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003285}}
 .layout-univer .page-row-main .region-sidebar-first {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003288}}
 .layout-univer .page-row-main .region-sidebar-second {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003294}}
 .layout-univer .page-row-features .region,
 .layout-univer .page-row-tertiary .region {
   height: 90px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003299}}
 .layout-univer .page-row-features .region:first-child {
   height: 80px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003309}}
 .layout-minima .page-row-header .region {
   height: 100px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003314}}
 .layout-minima .page-row-main .region-highlighted {
   height: 70px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003317}}
 .layout-minima .page-row-main .region-content {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003320}}
 .layout-minima .page-row-main .region-sidebar-first {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003323}}
 .layout-minima .page-row-main .region-sidebar-second {
   height: 220px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003329}}
 .layout-minima .page-row-features .region,
 .layout-minima .page-row-tertiary .region {
   height: 90px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/jmburnz\/Sites\/contrib\/drupal8\/Drupal\/themes\/adaptivetheme\/at_core\/stylesheets\/sass\/devel-layout\.scss}line{font-family:\00003334}}
 .layout-minima .page-row-features .region:first-child {
   height: 80px;
 }

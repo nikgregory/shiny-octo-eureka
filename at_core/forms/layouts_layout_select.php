@@ -117,6 +117,8 @@ foreach ($providers as $provider_key => $provider_name) {
         '#multiple' => FALSE,
         '#default_value' => theme_get_setting('settings.selected_layout_' . $plugin, $theme),
         '#attributes' => array('class' => array('table-layouts')),
+        '#prefix' => '<div class="select-layout-table-wrapper">',
+        '#suffix' => '</div>',
       );
     }
   }

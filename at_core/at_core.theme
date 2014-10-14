@@ -274,6 +274,8 @@ function at_core_preprocess_html(&$variables) {
 function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
+  //var_dump($variables['page']['highlighted']);
+
   // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
   $head_elements = array();
   if (at_core_theme_get_setting('settings.enable_touch_icons') === 1) {
@@ -295,8 +297,6 @@ function at_core_preprocess_page(&$variables) {
           'rel' => "shortcut icon",
         ),
       );
-     // _drupal_add_html_head($head_elements['at_core_touch_icon_nokia'], 'at_core_touch_icon_nokia');
-
       $head_elements['at_core_touch_icon_default'] = array(
         '#type' => 'html_tag',
         '#tag' => 'link',
@@ -306,7 +306,6 @@ function at_core_preprocess_page(&$variables) {
           'rel' => $rel,
         ),
       );
-     // _drupal_add_html_head($head_elements['at_core_touch_icon_default'], 'at_core_touch_icon_default');
     }
     // iPad (standard display).
     $apple_touch_icon_path_ipad = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad', $theme));
@@ -321,7 +320,6 @@ function at_core_preprocess_page(&$variables) {
           'sizes' => "76x76",
         ),
       );
-     // _drupal_add_html_head($head_elements['at_core_touch_icon_ipad'], 'at_core_touch_icon_ipad');
     }
     // iPhone retina.
     $apple_touch_icon_path_iphone_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_iphone_retina', $theme));
@@ -336,7 +334,6 @@ function at_core_preprocess_page(&$variables) {
           'sizes' => "120x120",
         ),
       );
-     // _drupal_add_html_head($head_elements['at_core_touch_icon_iphone_retina'], 'at_core_touch_icon_iphone_retina');
     }
     // iPad retina.
     $apple_touch_icon_path_ipad_retina = String::checkPlain(at_core_theme_get_setting('settings.apple_touch_icon_path_ipad_retina', $theme));
@@ -351,7 +348,6 @@ function at_core_preprocess_page(&$variables) {
           'sizes' => "152x152",
         ),
       );
-      //_drupal_add_html_head($head_elements['at_core_touch_icon_ipad_retina'], 'at_core_touch_icon_ipad_retina');
     }
   }
   // Load touch icons

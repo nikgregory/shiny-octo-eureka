@@ -12,6 +12,25 @@
     padding: 0;
   }
 
+  // Be very obvious with disabled forms
+  .form-disabled,
+  .layouts-column.form-disabled {
+    background: #f5f5f2;
+
+    label, h2, h3, p, div, a, span, em, li, td, th {
+      color: #737373;
+    }
+
+    *:hover {
+      background: #f5f5f2;
+    }
+
+    *:before,
+    img {
+      opacity: 0.5;
+    }
+  }
+
   #edit-adv-options {
     .details-wrapper {
       padding: 0.5em 1em;
@@ -71,36 +90,52 @@
     margin: 0;
   }
 
-  // master column layout
+  .form-item-settings-master-layout {
+    border-bottom: 1px solid #BFBFBA;
+    margin: 0 0 10px;
+    padding: 0 1px 10px;
+  }
+
   .layouts-column {
-    float: left;
     border: 0;
     margin: 0;
-	  margin-bottom: -99999px;
-	  padding-bottom: 99999px;
 	  border-top: 1px solid #BFBFBA;
+	  box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
 
-  .layouts-column-one {
-    width: 30%;
-  }
-
   .layouts-column-two {
-    width: 40%;
-    border-left: 1px solid #BFBFBA;
-    border-right: 1px solid #BFBFBA;
-
     details {
       border: 0 none;
       margin: 0;
     }
   }
 
-  .layouts-column-three {
-    width: 30%;
+  // master column layout
+  @media all and (min-width: 60em) {
+    .layouts-column {
+      float: left;
+  	  margin-bottom: -99999px;
+  	  padding-bottom: 99999px;
+    }
+
+    .layouts-column-one,
+    .layouts-column-three {
+      width: 25%;
+    }
+
+    .layouts-column-two {
+      width: 50%;
+      border-left: 1px solid #BFBFBA;
+      border-right: 1px solid #BFBFBA;
+    }
+  }
+
+  .select-layout-table-wrapper {
+    max-height: 720px;
+    overflow: scroll;
   }
 
   .table-layouts {

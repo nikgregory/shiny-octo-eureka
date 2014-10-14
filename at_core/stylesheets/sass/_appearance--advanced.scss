@@ -8,10 +8,16 @@
   }
 
   .vertical-tabs {
-/*
-    border-left: 0;
-    border-right: 0;
-*/
+    border-radius: 0;
+    border-left: 0 none;
+    border-right: 0 none;
+  }
+
+  .vertical-tabs-list {
+    width: 25%;
+  }
+  .vertical-tabs-panes {
+    margin: 0 0 0 25%;
   }
 
   .submit--advanced-settings {

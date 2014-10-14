@@ -31,17 +31,12 @@
  */
 #}
 <div{{ attributes }}>
-
   {% if not label_hidden %}
-    <h3 class="field__label"{{ title_attributes }}>{{ label }}</h3>
+    <h3{{ title_attributes.addClass('field__label') }}>{{ label }}</h3>
   {% endif %}
-
-  <ul class="field__items"{{ content_attributes }}>
-    {% for delta, item in items %}
-      <li class="field__item--{{ delta }}"{{ item_attributes[delta] }}>
-        <span>{{ item }}</span>
-      </li>
+  <ul{{ content_attributes.addClass('field__items') }}>
+    {% for item in items %}
+      <li{{ item.attributes.addClass('field__item') }}><span>{{ item.content }}</span></li>
     {% endfor %}
   </ul>
-
 </div>

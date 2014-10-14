@@ -23,7 +23,6 @@ rows:
     regions:
       header_first: 'Header first'
       header_second: 'Header second'
-      header_third: 'Header third'
   navbar:
     attributes:
       role: navigation
@@ -38,7 +37,6 @@ rows:
       features_first: 'Features first'
       features_second: 'Features second'
       features_third: 'Features third'
-      features_fourth: 'Features fourth'
   main:
     attributes:
       role: region
@@ -56,7 +54,6 @@ rows:
       tertiary_first: 'Tertiary first'
       tertiary_second: 'Tertiary second'
       tertiary_third: 'Tertiary third'
-      tertiary_fourth: 'Tertiary fourth'
   footer:
     attributes:
       role: contentinfo

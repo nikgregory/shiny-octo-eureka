@@ -21,7 +21,7 @@ body {
   padding-top: 0;
   padding-bottom: 0;
 
-  .container {
+  .regions {
     padding: 20px 0 10px 0;
   }
 
@@ -42,7 +42,7 @@ body {
       height: 40px;
       width: 100%;
     }
-    .block > * {
+    .block * {
       display: none !important;
     }
 

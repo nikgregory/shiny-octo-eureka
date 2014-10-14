@@ -65,7 +65,10 @@
 #}
 <article{{ attributes }}>
 
-  {{ title_prefix }}
+  {% if title %}
+    {{ title_prefix }}
+  {% endif %}
+
   {#
   Hide the "new" indicator by default, let a piece of JavaScript ask
   the server which comments are new for the user. Rendering the final
@@ -73,7 +76,10 @@
   #}
   <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
-  <h3{{ title_attributes }}>{{ title }}</h3>
+  {% if title %}
+    <h3{{ title_attributes }}>{{ title }}</h3>
+    {{ title_suffix }}
+  {% endif %}
 
   <div{{ submitted_attributes }}>
     {{ user_picture }}
@@ -81,25 +87,28 @@
       {{ submitted }}
     </div>
   </div>
-  {{ title_suffix }}
 
-  {{ content|without('links') }}
+  <div{{ content_attributes }}>
+    {#
+      Indicate the semantic relationship between parent and child comments
+      for accessibility. The list is difficult to navigate in a screen
+      reader without this information.
+    #}
+    {% if parent %}
+      <p class="comment__parent visually-hidden">{{ parent }}</p>
+    {% endif %}
 
-  {% if signature %}
-    <p class="comment__user-signature">
-      {{ signature }}
-    </p>
+    {{ content|without('links') }}
+
+    {% if signature %}
+      <p class="comment__user-signature">
+        {{ signature }}
+      </p>
+    {% endif %}
+  </div>
+
+  {% if content.links %}
+    {{ content.links }}
   {% endif %}
-
-  {#
-    Indicate the semantic relationship between parent and child comments
-    for accessibility. The list is difficult to navigate in a screen
-    reader without this information.
-  #}
-  {% if parent %}
-    <p class="comment__parent visually-hidden">{{ parent }}</p>
-  {% endif %}
-
-  {{ content.links }}
 
 </article>

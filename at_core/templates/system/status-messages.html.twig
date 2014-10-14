@@ -17,6 +17,8 @@
  * - status_headings: List of all status types.
  * - display: (optional) May have a value of 'status' or 'error' when only
  *   displaying messages of that specific type.
+ * - attributes: HTML attributes for the element, including:
+ *   - class: HTML classes.
  *
  * @see template_preprocess_status_messages()
  *
@@ -24,9 +26,15 @@
  */
 #}
 {% for type, messages in message_list %}
-  <div class="messages messages--{{ type }}" role="contentinfo" aria-label="{{ status_headings[type] }}">
+  {%
+    set classes = [
+      'messages',
+      'messages--' ~ type,
+    ]
+  %}
+  <div class="{{ attributes.addClass(classes).class }}" role="contentinfo" aria-label="{{ status_headings[type] }}">
 
-    <div class="messages__container" {% if type == 'error' %} role="alert" {% endif %}>
+    <div class="messages__container"{% if type == 'error' %} role="alert"{% endif %}>
 
       {% if status_headings[type] %}
         <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
@@ -41,10 +49,12 @@
           {% endfor %}
         </ul>
       {% else %}
-        <div class="messages__list">{{ messages.0 }}</div>
+        <div class="messages__list">{{ messages|first }}</div>
       {% endif %}
 
     </div>
 
   </div>
+  {# Remove type specific classes. #}
+  {{ attributes.removeClass(classes) }}
 {% endfor %}

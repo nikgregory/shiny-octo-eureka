@@ -51,7 +51,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
     $form['logo']['#attributes']['class'] = array('visually-hidden');
     $form['favicon']['#attributes']['class'] = array('visually-hidden');
-    //$form['actions']['#attributes']['class'] = array('visually-hidden');
+    $form['actions']['#attributes']['class'] = array('visually-hidden');
   }
 
   // AT Subtheme
@@ -60,9 +60,6 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
       // Get the themes configuration
       $config = \Drupal::config($theme . '.settings')->get('settings');
-      //kpr($config);
-
-
 
       // Advanced settings (extensions).
       include_once($at_core_path . '/forms/ext/advanced_settings.php');

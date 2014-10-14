@@ -40,7 +40,13 @@
  * @ingroup themeable
  */
 #}
-<nav{{ attributes }}>
+{%
+  set classes = [
+    'block',
+    'block--' ~ configuration.provider|clean_class,
+  ]
+%}
+<nav{{ attributes.addClass(classes) }}>
 
   {{ title_prefix }}
   {% if label %}
