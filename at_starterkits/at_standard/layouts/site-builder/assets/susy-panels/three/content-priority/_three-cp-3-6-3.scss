@@ -1,5 +1,5 @@
 //
-// Priority Content 3-6-3
+// Three Regions Priority Content 3-6-3
 //
 // Source ordered layout for content priotization. Sets the first region to
 // 6 cols, the second and third regions to 3 cols.
@@ -16,11 +16,9 @@
 // But you want it to appear like this:
 //
 //   ------------------------------------------------------
-//  |      second      |      first      |      third      |
+//  |   second   |            first           |   third    |
 //   ------------------------------------------------------
-//
-// This is mostly used when you want "sidebars" either side of a content
-// region, but have them below the main content in the source order.
+
 
 // Region first and second are active.
 &.has-regions--1-2 {

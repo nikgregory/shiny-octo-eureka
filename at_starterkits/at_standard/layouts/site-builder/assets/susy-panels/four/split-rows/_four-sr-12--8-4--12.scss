@@ -50,7 +50,7 @@
       @include span(4 of 12 last);
     }
     &:last-child {
-     clear: both;
+      clear: both;
     }
   }
 }
@@ -65,7 +65,7 @@
       @include span(4 of 12 last);
     }
     &:last-child {
-     clear: both;
+      clear: both;
     }
   }
 }

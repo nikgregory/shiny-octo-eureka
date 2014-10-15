@@ -1,7 +1,7 @@
 //
 // Import required plugins and define base variables.
 //
-// Don't write any actual styles here, its just for configuration and imports.
+// Don't write any actual styles here, it's just for configuration and imports.
 // ---------------------------------------------------------------------------
 
 // Import Compass Plugins
@@ -20,18 +20,17 @@ $susy: (
   columns: 12,
   gutters: .25,
   column-width: 5em,
-  gutter-position: split,
-  global-box-sizing: content-box,
+  gutter-position: after,
+  global-box-sizing: border-box,
   flow: ltr,
 
-  /*
   debug: (
     image: show-columns,
     color: rgba(0,0,0,0.25),
     output: overlay,
     toggle: bottom left,
   ),
-  */
+
 );
 
 

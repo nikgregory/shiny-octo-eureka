@@ -4,8 +4,6 @@
 // First region  : 6 grid columns.
 // Second region : 4 grid columns.
 // Third region  : 2 grid columns.
-//
-// When only two regions are active each region is 6 grid columns.
 // ---------------------------------------------------------------------------
 
 
@@ -24,14 +22,16 @@
 // Three active regions.
 &.active-region-count--3 {
   .region {
-    @include span(4 of 12);
-
     &:first-child {
-      @include span(2 of 12);
+      @include span(6 of 12);
+    }
+
+    &:nth-child(2) {
+      @include span(4 of 12);
     }
 
     &:last-child {
-      @include span(6 of 12 last);
+      @include span(2 of 12 last);
     }
   }
 }

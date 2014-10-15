@@ -1,0 +1,21 @@
+# Univer 84 CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Univer 84'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: univer_84.css
+  no_mq: univer_84-ie8.css
+
+# Desc
+description: 'Same overall layout as Univer 66, but in a 8-2-2/8-4 configuration.'
+
+# Screenshot
+screenshot: univer_84.png

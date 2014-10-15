@@ -46,12 +46,23 @@ $form['devel']['settings_livereload_snippet'] = array(
   ),
 );
 
-// Paint regions and rows.
+// Debug layout
 $form['devel']['settings_devel_layout'] = array(
   '#type' => 'checkbox',
   '#title' => t('Debug Layout'),
   '#default_value' => theme_get_setting('settings.devel_layout', $theme),
-  '#description' => t('Paint regions and rows with color, remove all content and hide the toolbar - purely for use when developing layouts, works very well with LiveReload.'),
+  '#description' => t('An agressive option that removes all content, hides the toolbar, and colorizes page rows and regions. Works with LiveReload.'),
+);
+
+// Colorize regions.
+$form['devel']['settings_devel_color_regions'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Colorize regions'),
+  '#default_value' => theme_get_setting('settings.devel_color_region', $theme),
+  '#description' => t('Add background color to regions. Also adds a margin-bottom for visual seperation.'),
+  '#states' => array(
+    'disabled' => array('input[name="settings_devel_layout"]' => array('checked' => TRUE)),
+  ),
 );
 
 // Neutralize Toolbar.

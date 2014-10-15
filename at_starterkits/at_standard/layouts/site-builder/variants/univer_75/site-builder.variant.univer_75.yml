@@ -1,0 +1,21 @@
+# Univer 75 CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Univer 75'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: univer_75.css
+  no_mq: univer_75-ie8.css
+
+# Desc
+description: 'Same overall layout as Univer 66, but in a 7-3-2/9-3/7-5 configuration.'
+
+# Screenshot
+screenshot: univer_75.png

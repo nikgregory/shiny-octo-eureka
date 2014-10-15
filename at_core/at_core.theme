@@ -395,7 +395,7 @@ function at_core_preprocess_page(&$variables) {
     );
   }
 
-  // Attach devel_layout and nuke_toolbar CSS files.
+  // Attach devel_layout CSS file.
   if (at_core_theme_get_setting('settings.devel_layout', $theme) === 1) {
     $variables['#attached']['css'][] = array(
       'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-layout.css',
@@ -403,6 +403,15 @@ function at_core_preprocess_page(&$variables) {
       'weight' => CSS_COMPONENT,
     );
   }
+  // Attach devel_colorize-regions CSS file.
+  if (at_core_theme_get_setting('settings.devel_color_regions', $theme) === 1 && at_core_theme_get_setting('settings.devel_layout', $theme) === 0) {
+    $variables['#attached']['css'][] = array(
+      'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/devel-colorize-regions.css',
+      'group' => CSS_AGGREGATE_THEME,
+      'weight' => CSS_COMPONENT,
+    );
+  }
+  // Attach nuke_toolbar CSS file.
   if (at_core_theme_get_setting('settings.nuke_toolbar', $theme) === 1) {
     $variables['#attached']['css'][] = array(
       'data' => drupal_get_path('theme', 'at_core') . '/stylesheets/css/nuetralize-toolbar.css',

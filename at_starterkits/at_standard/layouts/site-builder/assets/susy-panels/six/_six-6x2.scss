@@ -1,0 +1,49 @@
+//
+// Six regions, 2 grid cols each.
+//
+
+// Two active regions.
+&.active-region-count--2 {
+  .region {
+    @include span(6 of 12);
+  }
+}
+
+// Three active regions.
+&.active-region-count--3 {
+  .region {
+    @include span(4 of 12);
+  }
+}
+
+// Four active regions.
+&.active-region-count--4 {
+  .region {
+    @include span(3 of 12);
+  }
+}
+
+// Five active regions.
+&.active-region-count--5 {
+  .region {
+    @include span(2 of 12);
+
+    &:nth-child(3) {
+      @include span(3 of 12);
+    }
+  }
+}
+
+// Six active regions.
+&.active-region-count--6 {
+  .region {
+    @include span(2 of 12);
+  }
+}
+
+// The last region in the source is always the :last-child.
+.region {
+  &:last-child {
+    @include last;
+  }
+}

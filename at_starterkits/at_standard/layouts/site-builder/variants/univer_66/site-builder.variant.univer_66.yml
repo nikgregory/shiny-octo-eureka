@@ -1,0 +1,21 @@
+# Univer 66 CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Univer 66'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: univer_66.css
+  no_mq: univer_66-ie8.css
+
+# Desc
+description: 'Classic three column layout in a 6-3-3 configuration (main content 6 grid cols, sidebars 3 grid cols each). Responsive, content source ordered, mobile first, all regions collaspible.'
+
+# Screenshot
+screenshot: univer_66.png

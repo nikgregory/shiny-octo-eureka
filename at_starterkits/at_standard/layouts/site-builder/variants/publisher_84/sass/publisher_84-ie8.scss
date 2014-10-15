@@ -1,0 +1,27 @@
+//
+// Publisher 84 Internet Explorer 8 Layout
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "global";
+
+
+.page-row__header {
+  @import "susy-panels/two/two-8-4";
+}
+
+/* Features (3 regions) */
+.page-row__features {
+  @import "susy-panels/three/three-8-2-2";
+}
+
+/* Main (4 regions). The first region is the "Highlighed" region, which is always full width. */
+.page-row__main {
+   @import "susy-panels/four/split-rows/four-sr-12--8-2-2";
+}
+
+/* Tertiary (3 regions) */
+.page-row__tertiary {
+  @import "susy-panels/three/three-2-2-8";
+}

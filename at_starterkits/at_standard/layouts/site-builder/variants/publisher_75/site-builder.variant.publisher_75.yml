@@ -1,0 +1,21 @@
+# Publisher CSS Layout.
+
+# Human readable CSS layout name. Required.
+name: 'Publisher 75'
+
+# All layouts are type 'at_layout'. Required.
+type: 'at_csslayout'
+
+# Optional version string.
+version: '8.x-1.0-dev'
+
+# CSS files
+css:
+  styles: publisher_75.css
+  no_mq: publisher_75-ie8.css
+
+# Desc
+description: 'Same overall layout as the Publisher 66 variant, but with an asymetric 7-5 layout.'
+
+# Screenshot
+screenshot: publisher_75.png

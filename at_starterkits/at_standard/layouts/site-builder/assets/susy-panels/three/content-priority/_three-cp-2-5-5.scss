@@ -1,0 +1,35 @@
+//
+// Three Regions 2-5-5
+//
+// First region  : 2 grid columns.
+// Second region : 5 grid columns.
+// Third region  : 5 grid columns.
+// ---------------------------------------------------------------------------
+
+
+// Two active regions.
+&.active-region-count--2 {
+  .region {
+    @include span(5 of 12);
+
+    &:last-child {
+      @include span(7 of 12 last);
+    }
+  }
+}
+
+
+// Three active regions.
+&.active-region-count--3 {
+  .region {
+    @include span(5 of 12);
+
+    &:first-child {
+      @include span(2 of 12);
+    }
+
+    &:last-child {
+      @include last;
+    }
+  }
+}

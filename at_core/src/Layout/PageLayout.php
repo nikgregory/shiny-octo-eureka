@@ -32,6 +32,7 @@ class PageLayout {
     $this->selected_layout = $selected_layout;
     $this->regions = $active_regions;
     $this->plugin_path = drupal_get_path('theme', $this->theme) . '/layouts/';
+    $this->cid = "$theme:$selected_plugin:$selected_layout";
   }
 
   // Scan for layout directories.
@@ -85,8 +86,9 @@ class PageLayout {
 
   // Extract rows and regions, css files for the selected layout.
   public function buildLayoutDataArrays() {
-    // Return cache data so we avoid glob/scandir on every page load, this is pretty quick.
-    if ($cache = \Drupal::cache()->get("$this->theme:$this->selected_layout")) {
+
+    // TODO: should we use default bin or discovery etc?
+    if ($cache = \Drupal::cache()->get($this->cid)) {
       $layout = $cache->data;
     }
 
@@ -104,7 +106,7 @@ class PageLayout {
         $layout['template']        = $this->selected_plugin . '.html.twig';
       }
       if (!empty($layout)) {
-        \Drupal::cache()->set("$this->theme:$this->selected_layout", $layout);
+        \Drupal::cache()->set($this->cid, $layout);
       }
       else {
         return; // selected layout not found or not readable etc.

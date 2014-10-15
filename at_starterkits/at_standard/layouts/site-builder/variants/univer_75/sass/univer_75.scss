@@ -1,0 +1,61 @@
+//
+// Univer 75 Layout.
+//
+// ---------------------------------------------------------------------------
+
+// Import base config and global style partials.
+@import "global";
+
+
+/* Narrow screens only. */
+@media #{$narrow} {
+
+  /* Header (2 regions) */
+  .page-row__header {
+    @import "susy-panels/two/two-7-5";
+  }
+
+  /* Features (3 regions) */
+  .page-row__features {
+    @import "susy-panels/three/split-rows/three-sr-12--7-5";
+  }
+
+  /* Main (4 regions) */
+  .page-row__main {
+    @import "susy-panels/four/split-rows/four-sr-12--12--5-7";
+  }
+
+  /* Tertiary (3 regions) */
+  .page-row__tertiary {
+    @import "susy-panels/three/split-rows/three-sr-12--5-7";
+  }
+}
+
+
+/* Narrow and wide screens (and up) */
+@media #{$narrow-wide} {}
+
+
+/* Wide screens (and up). */
+@media #{$wide} {
+
+  /* Header (2 regions) */
+  .page-row__header {
+    @import "susy-panels/two/two-9-3";
+  }
+
+  /* Features (3 regions) */
+  .page-row__features {
+    @import "susy-panels/three/split-rows/three-sr-12--9-3";
+  }
+
+  /* Main (4 regions). The first region is the "Highlighed" region, which is always full width. */
+  .page-row__main {
+     @import "susy-panels/four/content-priority/four-cp-12--2-7-3";
+  }
+
+  /* Tertiary (3 regions) */
+  .page-row__tertiary {
+    @import "susy-panels/three/content-priority/three-cp-2-7-3";
+  }
+}
