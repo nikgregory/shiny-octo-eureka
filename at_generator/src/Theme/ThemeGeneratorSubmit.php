@@ -124,13 +124,13 @@ class ThemeGeneratorSubmit {
             $recursiveCopy->recursiveCopy($color_dir_path, "$target/color");
           }
           if ($color == 0) {
-            $removeDirectory->removeDirectory("$target/css/colors.css");
+            //$removeDirectory->removeDirectory("$target/css/colors.css");
 
             // UIKit can be enabled, if so remove the color css/scss files.
-            if ($uikit == 1) {
-              $removeDirectory->removeDirectory("$target/uikit/colors.scss");
-              $removeDirectory->removeDirectory("$target/uikit/components/_colors.scss");
-            }
+            //if ($uikit == 1) {
+              //$removeDirectory->removeDirectory("$target/uikit/colors.scss");
+              //$removeDirectory->removeDirectory("$target/uikit/components/_colors.scss");
+            //}
           }
 
           // THEMENAME.theme
@@ -194,6 +194,7 @@ class ThemeGeneratorSubmit {
           ),
         );
 
+        /*
         if ($color == 1) {
           $theme_info_data['stylesheets'] = array(
             'all' => array(
@@ -202,6 +203,7 @@ class ThemeGeneratorSubmit {
             ),
           );
         }
+        */
 
         foreach($theme_info_data['regions'] as $region_key => $region_name) {
           $theme_info_data['regions'][$region_key] = "'$region_name'";

@@ -86,18 +86,17 @@ class PageLayout {
 
   // Extract rows and regions, css files for the selected layout.
   public function buildLayoutDataArrays() {
+    $layout = array();
 
     // TODO: should we use default bin or discovery etc?
     if ($cache = \Drupal::cache()->get($this->cid)) {
       $layout = $cache->data;
     }
-
-    else {
+    if (empty($layout)) {
       $plugins = self::parseLayoutConfig();
       $selected_plugin = $plugins[$this->selected_plugin];
       $css_layouts_path = $selected_plugin['css_layouts_path'];
 
-      $layout = array();
       if (!empty($this->selected_layout)) {
         $layout['version']         = $selected_plugin['version'];
         $layout['rows']            = $selected_plugin['rows'];

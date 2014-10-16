@@ -244,13 +244,6 @@ function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
-  // Re-usable variables for the h5bp type conditional classes. Attributes can
-  // only be used once (one time) in a template, so we need to set re-usable
-  // variables for the html conditional classes in html.html.twig.
-  $language_interface = \Drupal::service('language_manager')->getCurrentLanguage();
-  $variables['lang'] = $language_interface->id ? $language_interface->id : 'en';
-  $variables['dir'] = $language_interface->dir ? $language_interface->dir : 'ltr';
-
   // Add a "site name" body classes for advanced theming of multi-sites.
   if ($variables['head_title_array']['name']) {
     $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);

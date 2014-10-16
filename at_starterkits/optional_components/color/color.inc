@@ -23,10 +23,10 @@ $info = array(
       'colors' => array(
         'header'   => '#0779bf',
         'body'     => '#ffffff',
-        'borders'  => '#f9f9f9',
+        'borders'  => '#cccccc',
         'footer'   => '#292929',
-        'text'     => '#3b3b3b',
-        'link'     => '#0071B3',
+        'text'     => '#000000',
+        'link'     => '#0000ee',
         'branding' => '#fffeff',
       ),
     ),
@@ -57,8 +57,11 @@ $info = array(
   ),
 
   // CSS files (excluding @import) to rewrite with new color scheme.
+  // In AT we just use the standard styles.css file output from the UI Kit, this way
+  // we don't need to maintain a seperate color stylesheet, and we only load one CSS
+  // file for all styles.
   'css' => array(
-    'css/colors.css',
+    'css/styles.css',
   ),
 
   // Files to copy.
