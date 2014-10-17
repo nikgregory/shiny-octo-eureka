@@ -68,22 +68,22 @@ multicol {
 
 /* Links */
 a {
-  //color: $link-color;
+  color: $link-color;
   text-decoration: none;
 
   &:link,
   &:visited {
-    //color: $link-visited-color;
+    color: $link-visited-color;
   }
 
   &:active,
   &.active {
-    //color: $link-active-color;
+    color: $link-active-color;
   }
 
   &:hover,
   &:focus {
-    //color: $link-hover-color;
+    color: $link-hover-color;
     text-decoration: underline;
   }
 }

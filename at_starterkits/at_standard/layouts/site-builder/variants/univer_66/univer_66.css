@@ -147,13 +147,11 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
     margin-right: 0;
   }
   .page-row__main.has-regions--2-3 .region:first-child {
-    margin-left: 25.4237288%;
     width: 74.5762712%;
     float: right;
     margin-right: 0;
   }
   .page-row__main.has-regions--2-3 .region:last-child {
-    margin-left: -101.6949153%;
     width: 23.7288136%;
     float: left;
     margin-right: 1.6949153%;

@@ -6,190 +6,271 @@
  * Maybe dependant on the Menu twig patch: https://drupal.org/node/1898478
  */
 
-$navbar-menu-background: $background-color;
+$navbar-menu-background:    $page-row-navbar-background-color;
 
 $navbar-item-border-width:  $border-width;
 $navbar-item-border-style:  $border-style;
 $navbar-item-border-color:  $border-color;
 $navbar-item-border-radius: $border-radius;
 
-$navbar-item-background-color: $text-background-color;
+.region__navbar {
+  background: $navbar-menu-background;
 
-// Simple handling for nested menus in the navbar without JS.
-// This only really works for two levels, with more levels you could
-// style it, however I would suggest using the Flexnav plugin that ships
-// with this theme to style the menu and comment out this file in _styles.scss
+  .menu {
+    position: relative;
+    font-size: 0; // remove extra margin added by using inline-block on li
 
-@media #{$mobile} {
-
-  #nav {
-    display: block;
-    opacity: 1;
-    height: auto;
-    background: #ddd;
-    margin-top: 2.5em;
-    @include transition(all, 1s, ease-in);
-
-    &.menu_closed ul.menu {
-      position: absolute;
-      overflow: hidden;
-      height: 0;
-      opacity: 0;
-    }
-  }
-
-  .navbar-menu {
-    padding: 0;
-    position: absolute;
-    right: 0.6em;
-    top: 0.6em;
-    z-index: 99;
-
-    &.has-title {
-      position: static;
-      right: auto;
-      top: auto;
-
-      .navbar-menu__title {
-        float: none;
-        @include adjust-font-size-to($medium);
-
-        a {
-          width: auto;
-
-          &:after {
-            float: right; // LTR
-          }
-        }
-      }
-
-      #nav {
-        margin-top: 0;
-      }
-    }
-
-    .navbar-menu__title {
-      float: right; // LTR
-      background: #333;
-      font-size: 1em;
-      height: 2.5em;
-      line-height: normal;
+    > li {
+      z-index: 100;
 
       a {
-        color: #fff;
-        display: block;
-        //line-height: normal;
-        text-decoration: none;
-        height: 2.5em;
-        width: 2.5em;
-        padding: 0.5em;
+        @include transition(all, .2s, ease-in);
 
         &:hover,
         &:focus {
           text-decoration: none;
+          background: lighten($navbar-menu-background, 3%);
         }
+      }
+    }
 
-        &:after {
-          background-position: center center;
-          background-repeat: no-repeat;
-          background-size: 80% auto;
-          content: "";
-          display: block;
-          width: 1.5em;
-          height: 1.5em;
-          background-image: url("images/hamburger.svg");
+    li {
+      position: relative;
+      vertical-align: middle;
+      background: $navbar-menu-background;
+      @include adjust-font-size-to($medium); // explicitly set the font-size since the container is font-size 0
+
+      &:hover > ul,
+      &:focus > ul {}
+    }
+
+    a {
+      color: $page-row-navbar-color;
+    }
+  }
+}
+
+@media #{$mobile} {
+
+  // Basic styles for mobile.
+  .region__navbar {
+    // Nuke contextual links in mobile view.
+    .contextual-region {
+      position: static !important;
+      .contextual {
+        @include visually-hidden;
+      }
+    }
+
+    .menu {
+      li {
+        a:after {
+          content: '';
+        }
+        ul {
+          @include output-rhythm(padding, 0);
+
+          ul {
+            @include output-rhythm(padding, 0 0 0 $medium); // LTR
+          }
+
+          a {
+            @include output-rhythm(padding, $xx-small);
+
+            &:after {
+              font-family: FontAwesome, sans-serif;
+              float: left; // LTR
+              @include output-rhythm(padding, 0 $large 0 0);
+              text-align: right; // LTR
+              content: "\f105"; // LTR
+              @include output-rhythm(width, $medium);
+            }
+          }
         }
       }
     }
   }
 
-  @at-root .no-svg .navbar-menu .navbar-menu__title a:after {
-    background-image: url("images/hamburger.png");
-  }
-
-
-  .contextual-render-processed {
-    display: none !important;
-  }
-
-  .navbar-menu__menu {
-    a {
-      @include output-rhythm(padding-right, 12px);
-    }
-
-    .menu li.expanded li > a:before {
-      font-family: FontAwesome, sans-serif;
-      content: "\f148";
-      float: left; // LTR
-      padding: 3px 3px 0 1px; // LTR
-      text-align: inherit;
-      @include output-rhythm(width, $medium);
-      @include transform(rotate(90deg));
-    }
-    .menu li.collapsed > a:after,
-    .menu li.expanded > a:after {
-      display: none !important;
-    }
-
-    .menu .menu ul {
-      padding: 0 0 0 1.1459rem;
+  .menu-style-tile {
+    .region__navbar {
+      .block-menu__title {
+        @include visually-hidden;
+      }
+      .block-menu__content {
+        // do nothing?
+      }
     }
   }
 
-/*
-<div id="nav" class="navbar-menu__menu">
-  <ul class="menu">
-    <li class="expanded">
-      <a data-drupal-link-system-path="node/1" title="" href="/node/1">Good Times</a>
-        <ul class="menu">
-          <li class="leaf">
-            <a data-drupal-link-system-path="node/3" href="/node/3">Scales and Elements</a>
-          </li>
-*/
+  // Toggle links styles for slidedown and offcanvas styles.
+  .menu-style-slidedown,
+  .menu-style-offcanvas {
+    .region__navbar {
+      .block-menu__title {
+        @include adjust-font-size-to($medium);
+        @include output-rhythm(padding, $xx-small 0);
+        cursor: pointer;
 
+        &:after {
+          font-family: FontAwesome, sans-serif;
+          content: "\f0c9";
+          @include output-rhythm(width, $medium);
+        }
+      }
+    }
+  }
+
+  // Slidedown styles.
+  .menu-style-slidedown {
+    .region__navbar {
+      .block-menu__content {
+        @include visually-hidden;
+        @include opacity(.3);
+        @include transition(all, .2s, ease);
+      }
+    }
+    &.menu-expanded .region__navbar {
+      .block-menu__title {
+        &:after {
+          float: right; // LTR
+          text-align: right; // LTR
+        }
+      }
+
+      .block-menu__content {
+        @include visually-hidden-off;
+        @include opacity(1);
+        @include output-rhythm(padding, 0 0 $xx-small);
+      }
+    }
+  }
+
+  // Off canvas styles.
+  .menu-style-offcanvas {
+    .region__navbar {
+      .block-menu__content {
+        position: absolute;
+        top: 0;
+        width: 240px;
+        @include output-rhythm(padding, 0 0 $xx-small);
+      }
+    }
+
+    .page-root {
+      @include transition(all, .2s, ease-in-out);
+    }
+
+    &.offcanvas-left .region__navbar {
+      .block-menu__title {
+        &:after {
+          float: left; // LTR
+          text-align: left; // LTR
+          @include output-rhythm(margin, -1px $small 0 0);
+        }
+      }
+      .block-menu__content {
+        left: 0;
+        @include transform(translate3d(-240px, 0, 0));
+      }
+    }
+
+    &.offcanvas-right .region__navbar {
+      .block-menu__title {
+        text-align: right;
+        &:after {
+          float: right;
+          text-align: right;
+          @include output-rhythm(margin, -1px 0 0 $small);
+        }
+      }
+      .block-menu__content {
+        right: 0;
+        @include transform(translate3d(240px, 0, 0));
+      }
+    }
+
+    &.menu-expanded.offcanvas-left .page-root {
+      @include transform(translate3d(240px, 0, 0));
+    }
+
+    &.menu-expanded.offcanvas-right .page-root {
+      @include transform(translate3d(-240px, 0, 0));
+    }
+  }
 }
 
-
 @media #{$wide} {
+  .region__navbar {
+     background: $navbar-menu-background;
 
-  #nav {
-    display: block !important;
+    .block-menu__title {
+      @include visually-hidden;
+    }
   }
 
-  .navbar-menu__title {
-    @include visually-hidden;
-  }
-
-  .navbar-menu__menu {
-    background: darken($navbar-item-background-color, 5%);
+  .region__navbar {
+    background: $navbar-menu-background;
 
     .menu {
       position: relative;
+      font-size: 0; // remove extra margin added by using inline-block on li
 
       > li {
         text-align: center;
-        z-index: 100;
+        border-left: 1px dotted rgba(255,255,255,0.3);
+
+        &:last-child {
+          border-right: 1px dotted rgba(255,255,255,0.3);
+        }
 
         a {
-         @include transition(all, .2s, ease-in);
+          &:hover,
+          &:focus {
+          }
         }
       }
 
       li {
         display: inline-block;
-        position: relative;
-        @include output-rhythm(min-width, 240px);
+        min-width: 10em;
 
         ul {
           position: absolute;
           overflow: hidden;
           height: 0;
           opacity: 0;
-          background: $navbar-menu-background;
           @include transition(height, .3s, ease-in);
 
           li {
             text-align: left; // LTR
+
+            &.expanded > a:after {
+              content: "\f105"; // fa-angle-down
+            }
+
+            ul {
+              left: 100%;
+              top: 0;
+
+              li {
+                &.expanded > a:after {
+                  content: "\f107"; // fa-angle-down
+                }
+              }
+
+              a {
+                color: green !important;
+              }
+
+              ul {
+                left: 0;
+                top: auto;
+
+                a {
+                  color: pink !important;
+                }
+              }
+            }
           }
         }
 
@@ -201,19 +282,10 @@ $navbar-item-background-color: $text-background-color;
           overflow: visible;
         }
       }
-
-
-      a {
-        @include output-rhythm(padding, $xx-small $large);
-      }
+    }
+    a {
+      @include output-rhythm(padding, $xx-small $large);
     }
   }
 }
-
-
-
-
-
-
-
 

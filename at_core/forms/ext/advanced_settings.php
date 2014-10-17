@@ -25,6 +25,7 @@ if ($form['ext']['ext_settings']['settings_enable_extensions']['#default_value']
     'fonts',
     'titles',
     'images',
+    'responsive_menus',
     'touch_icons',
     'libraries',
     'custom_css',

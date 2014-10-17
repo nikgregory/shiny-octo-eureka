@@ -1,9 +1,9 @@
 shortcut_module_link: 0
 settings:
   layouts_enable: 1
-  template_suggestion_page: univer
+  template_suggestion_page: univer_66
   master_layout: site-builder
-  selected_layout_minima: univer
+  selected_layout_minima: univer_66
   max_width_enable: 0
   max_width_value: ''
   max_width_unit: ''
@@ -28,7 +28,7 @@ settings:
   default_layout_provider: at_standard
   template_suggestion_provider_page: at_standard
   template_suggestion_plugin_page: site-builder
-  selected_layout_site-builder: univer
+  selected_layout_site-builder: univer_66
   breadcrumb_label: 0
   breadcrumb_home: 0
   breadcrumb_title: 0

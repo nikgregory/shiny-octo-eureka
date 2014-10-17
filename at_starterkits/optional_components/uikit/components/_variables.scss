@@ -145,7 +145,7 @@ $tertiary-color:   #999;
 
 
 // Text colors
-$text-color:            #000;
+$text-color:            #333;
 $text-background-color: #eee;
 
 
@@ -206,4 +206,46 @@ $secondary-gradient-stop:  lighten($secondary-color, 10%);
 // Tertiary color gradient
 $tertiary-gradient-start: $tertiary-color;
 $tertiary-gradient-stop:  lighten($tertiary-color, 10%);
+
+
+
+// Colors by page row. By default these match the site-builder
+// layout plugin rows.
+
+// Header
+$page-row-header-background-color: #c0c0c0;
+$page-row-header-color: #fff;
+
+// Navbar
+$page-row-navbar-background-color: $primary-color;
+$page-row-navbar-color: #fff;
+
+// Messages
+$page-row-messages-background-color: $background-color;
+$page-row-messages-color: $text-color;
+
+// Features
+$page-row-features-background-color: $background-color;
+$page-row-features-color: $text-color;
+
+// Main
+$page-row-main-background-color: $background-color;
+$page-row-main-color: $text-color;
+
+// Tertiary
+$page-row-tertiary-background-color: $background-color;
+$page-row-tertiary-color: $text-color;
+
+// Footer
+$page-row-footer-background-color: #696969;
+$page-row-footer-color: #fff;
+
+// Full width background toggle
+$page-row-backgrounds-full-width: true !default;
+
+
+
+
+
+
 

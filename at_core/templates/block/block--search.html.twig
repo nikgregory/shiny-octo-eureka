@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a block menu when placed in the navbar.
+ * Default theme implementation to display a block.
  *
  * Available variables:
  * - plugin_id: The ID of the block implementation.
@@ -39,24 +39,23 @@
  *
  * @ingroup themeable
  */
-
-
- Leave this template special cased until we get the menu twig patch committed to core, then we can start
- messing about with this again (attributes and markup etc).
-
 #}
-<nav id="{{ attributes.id }}" class="{{ attributes.class }} navbar-menu"{{ attributes }}>
+{%
+  set classes = [
+    'block',
+    'block--' ~ configuration.provider|clean_class,
+  ]
+%}
+<{{ html_element }}{{ attributes.addClass(classes).removeClass('container-inline') }}>
+
   {{ title_prefix }}
-  <h2 class="navbar-menu__title">
-    <a aria-label="{{ 'Main menu'|t }}" class="navbar-menu__toggle-link" href="#">
-      {% if label %}
-        {{ label }}
-      {% endif %}
-    </a>
-  </h2>
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
   {{ title_suffix }}
 
-  <div id="nav" class="navbar-menu__menu">
-   {{ content }}
-  </div>
-</nav>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+
+</{{ html_element }}>

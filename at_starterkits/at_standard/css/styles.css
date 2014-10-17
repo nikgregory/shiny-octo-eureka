@@ -420,7 +420,7 @@ th {
  * Typography.
  */
 body {
-  color: black;
+  color: #333;
 }
 
 /* Headings */
@@ -505,9 +505,17 @@ multicol {
 
 /* Links */
 a {
+  color: #00e;
   text-decoration: none;
 }
+a:link, a:visited {
+  color: #55198b;
+}
+a:active, a.active {
+  color: #00e;
+}
 a:hover, a:focus {
+  color: #00e;
   text-decoration: underline;
 }
 
@@ -570,6 +578,7 @@ dd {
 html,
 body {
   height: 100%;
+  background-color: #333;
 }
 
 * {
@@ -584,6 +593,7 @@ body {
  */
 .page-root {
   position: relative;
+  background-color: #fff;
 }
 
 /**
@@ -594,8 +604,34 @@ body {
  * Do not add layout to .regions directly, instead if you want to modify the layout
  * you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
  */
-.page-row__header {
+.regions {
   padding: 16px 0;
+  padding: 1rem 0;
+}
+
+.region {
+  -moz-transition: all, 0.2s, ease-in;
+  -o-transition: all, 0.2s, ease-in;
+  -webkit-transition: all, 0.2s, ease-in;
+  transition: all, 0.2s, ease-in;
+}
+
+.page-row__header {
+  background-color: #c0c0c0;
+  color: #fff;
+}
+
+.page-row__navbar {
+  background-color: #333;
+  color: #fff;
+}
+.page-row__navbar .regions {
+  padding: 0;
+}
+
+.page-row__footer {
+  background-color: #696969;
+  color: #fff;
 }
 
 [class*="page-row__"]:not(.page-row__navbar) li a:after {
@@ -607,7 +643,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   margin: 16px 0;
   padding: 0;
 }
@@ -842,131 +878,79 @@ table tr.error {
  *
  * Maybe dependant on the Menu twig patch: https://drupal.org/node/1898478
  */
+.region__navbar {
+  background: #333;
+}
+.region__navbar .menu {
+  position: relative;
+  font-size: 0;
+}
+.region__navbar .menu > li {
+  z-index: 100;
+}
+.region__navbar .menu > li a {
+  -moz-transition: all, 0.2s, ease-in;
+  -o-transition: all, 0.2s, ease-in;
+  -webkit-transition: all, 0.2s, ease-in;
+  transition: all, 0.2s, ease-in;
+}
+.region__navbar .menu > li a:hover, .region__navbar .menu > li a:focus {
+  text-decoration: none;
+  background: #3b3b3b;
+}
+.region__navbar .menu li {
+  position: relative;
+  vertical-align: middle;
+  background: #333;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+.region__navbar .menu a {
+  color: #fff;
+}
+
 @media (max-width: 60em) {
-  #nav {
-    display: block;
-    opacity: 1;
-    height: auto;
-    background: #ddd;
-    margin-top: 2.5em;
-    -moz-transition: all, 1s, ease-in;
-    -o-transition: all, 1s, ease-in;
-    -webkit-transition: all, 1s, ease-in;
-    transition: all, 1s, ease-in;
+  .region__navbar .contextual-region {
+    position: static !important;
   }
-  #nav.menu_closed ul.menu {
-    position: absolute;
+  .region__navbar .contextual-region .contextual {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
-    height: 0;
-    opacity: 0;
-  }
-
-  .navbar-menu {
+    height: 1px;
+    width: 1px;
     padding: 0;
-    position: absolute;
-    right: 0.6em;
-    top: 0.6em;
-    z-index: 99;
+    word-wrap: normal;
+    font: 0/0 a;
   }
-  .navbar-menu.has-title {
-    position: static;
-    right: auto;
-    top: auto;
+  .region__navbar .menu li a:after {
+    content: '';
   }
-  .navbar-menu.has-title .navbar-menu__title {
-    float: none;
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 24px;
-    line-height: 1.5rem;
+  .region__navbar .menu li ul {
+    padding: 0;
   }
-  .navbar-menu.has-title .navbar-menu__title a {
-    width: auto;
+  .region__navbar .menu li ul ul {
+    padding: 0 0 0 16px;
+    padding: 0 0 0 1rem;
   }
-  .navbar-menu.has-title .navbar-menu__title a:after {
-    float: right;
+  .region__navbar .menu li ul a {
+    padding: 7px;
+    padding: 0.4376941rem;
   }
-  .navbar-menu.has-title #nav {
-    margin-top: 0;
-  }
-  .navbar-menu .navbar-menu__title {
-    float: right;
-    background: #333;
-    font-size: 1em;
-    height: 2.5em;
-    line-height: normal;
-  }
-  .navbar-menu .navbar-menu__title a {
-    color: #fff;
-    display: block;
-    text-decoration: none;
-    height: 2.5em;
-    width: 2.5em;
-    padding: 0.5em;
-  }
-  .navbar-menu .navbar-menu__title a:hover, .navbar-menu .navbar-menu__title a:focus {
-    text-decoration: none;
-  }
-  .navbar-menu .navbar-menu__title a:after {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 80% auto;
-    content: "";
-    display: block;
-    width: 1.5em;
-    height: 1.5em;
-    background-image: url("images/hamburger.svg");
-  }
-
-  .no-svg .navbar-menu .navbar-menu__title a:after {
-    background-image: url("images/hamburger.png");
-  }
-  .contextual-render-processed {
-    display: none !important;
-  }
-
-  .navbar-menu__menu a {
-    padding-right: 12px;
-    padding-right: 0.75rem;
-  }
-  .navbar-menu__menu .menu li.expanded li > a:before {
+  .region__navbar .menu li ul a:after {
     font-family: FontAwesome, sans-serif;
-    content: "\f148";
     float: left;
-    padding: 3px 3px 0 1px;
-    text-align: inherit;
+    padding: 0 18px 0 0;
+    padding: 0 1.145898rem 0 0;
+    text-align: right;
+    content: "\f105";
     width: 16px;
     width: 1rem;
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-  }
-  .navbar-menu__menu .menu li.collapsed > a:after,
-  .navbar-menu__menu .menu li.expanded > a:after {
-    display: none !important;
-  }
-  .navbar-menu__menu .menu .menu ul {
-    padding: 0 0 0 1.1459rem;
   }
 
-  /*
-  <div id="nav" class="navbar-menu__menu">
-    <ul class="menu">
-      <li class="expanded">
-        <a data-drupal-link-system-path="node/1" title="" href="/node/1">Good Times</a>
-          <ul class="menu">
-            <li class="leaf">
-              <a data-drupal-link-system-path="node/3" href="/node/3">Scales and Elements</a>
-            </li>
-  */
-}
-@media (min-width: 60em) {
-  #nav {
-    display: block !important;
-  }
-
-  .navbar-menu__title {
+  .menu-style-tile .region__navbar .block-menu__title {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
@@ -977,49 +961,185 @@ table tr.error {
     font: 0/0 a;
   }
 
-  .navbar-menu__menu {
-    background: #e1e1e1;
+  .menu-style-slidedown .region__navbar .block-menu__title,
+  .menu-style-offcanvas .region__navbar .block-menu__title {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 24px;
+    line-height: 1.5rem;
+    padding: 7px 0;
+    padding: 0.4376941rem 0;
+    cursor: pointer;
   }
-  .navbar-menu__menu .menu {
+  .menu-style-slidedown .region__navbar .block-menu__title:after,
+  .menu-style-offcanvas .region__navbar .block-menu__title:after {
+    font-family: FontAwesome, sans-serif;
+    content: "\f0c9";
+    width: 16px;
+    width: 1rem;
+  }
+
+  .menu-style-slidedown .region__navbar .block-menu__content {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    word-wrap: normal;
+    font: 0/0 a;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+    -moz-transition: all, 0.2s, ease;
+    -o-transition: all, 0.2s, ease;
+    -webkit-transition: all, 0.2s, ease;
+    transition: all, 0.2s, ease;
+  }
+  .menu-style-slidedown.menu-expanded .region__navbar .block-menu__title:after {
+    float: right;
+    text-align: right;
+  }
+  .menu-style-slidedown.menu-expanded .region__navbar .block-menu__content {
+    position: static !important;
+    clip: auto;
+    overflow: visible;
+    height: auto;
+    width: auto;
+    font-family: inherit;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    padding: 0 0 7px;
+    padding: 0 0 0.4376941rem;
+  }
+
+  .menu-style-offcanvas .region__navbar .block-menu__content {
+    position: absolute;
+    top: 0;
+    width: 240px;
+    padding: 0 0 7px;
+    padding: 0 0 0.4376941rem;
+  }
+  .menu-style-offcanvas .page-root {
+    -moz-transition: all, 0.2s, ease-in-out;
+    -o-transition: all, 0.2s, ease-in-out;
+    -webkit-transition: all, 0.2s, ease-in-out;
+    transition: all, 0.2s, ease-in-out;
+  }
+  .menu-style-offcanvas.offcanvas-left .region__navbar .block-menu__title:after {
+    float: left;
+    text-align: left;
+    margin: -1px 10px 0 0;
+    margin: -0.0625rem 0.618034rem 0 0;
+  }
+  .menu-style-offcanvas.offcanvas-left .region__navbar .block-menu__content {
+    left: 0;
+    -moz-transform: translate3d(-240px, 0, 0);
+    -ms-transform: translate3d(-240px, 0, 0);
+    -webkit-transform: translate3d(-240px, 0, 0);
+    transform: translate3d(-240px, 0, 0);
+  }
+  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__title {
+    text-align: right;
+  }
+  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__title:after {
+    float: right;
+    text-align: right;
+    margin: -1px 0 0 10px;
+    margin: -0.0625rem 0 0 0.618034rem;
+  }
+  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__content {
+    right: 0;
+    -moz-transform: translate3d(240px, 0, 0);
+    -ms-transform: translate3d(240px, 0, 0);
+    -webkit-transform: translate3d(240px, 0, 0);
+    transform: translate3d(240px, 0, 0);
+  }
+  .menu-style-offcanvas.menu-expanded.offcanvas-left .page-root {
+    -moz-transform: translate3d(240px, 0, 0);
+    -ms-transform: translate3d(240px, 0, 0);
+    -webkit-transform: translate3d(240px, 0, 0);
+    transform: translate3d(240px, 0, 0);
+  }
+  .menu-style-offcanvas.menu-expanded.offcanvas-right .page-root {
+    -moz-transform: translate3d(-240px, 0, 0);
+    -ms-transform: translate3d(-240px, 0, 0);
+    -webkit-transform: translate3d(-240px, 0, 0);
+    transform: translate3d(-240px, 0, 0);
+  }
+}
+@media (min-width: 60em) {
+  .region__navbar {
+    background: #333;
+  }
+  .region__navbar .block-menu__title {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    word-wrap: normal;
+    font: 0/0 a;
+  }
+
+  .region__navbar {
+    background: #333;
+  }
+  .region__navbar .menu {
     position: relative;
+    font-size: 0;
   }
-  .navbar-menu__menu .menu > li {
+  .region__navbar .menu > li {
     text-align: center;
-    z-index: 100;
+    border-left: 1px dotted rgba(255, 255, 255, 0.3);
   }
-  .navbar-menu__menu .menu > li a {
-    -moz-transition: all, 0.2s, ease-in;
-    -o-transition: all, 0.2s, ease-in;
-    -webkit-transition: all, 0.2s, ease-in;
-    transition: all, 0.2s, ease-in;
+  .region__navbar .menu > li:last-child {
+    border-right: 1px dotted rgba(255, 255, 255, 0.3);
   }
-  .navbar-menu__menu .menu li {
+  .region__navbar .menu li {
     display: inline-block;
-    position: relative;
-    min-width: 240px;
-    min-width: 15rem;
+    min-width: 10em;
   }
-  .navbar-menu__menu .menu li ul {
+  .region__navbar .menu li ul {
     position: absolute;
     overflow: hidden;
     height: 0;
     opacity: 0;
-    background: white;
     -moz-transition: height, 0.3s, ease-in;
     -o-transition: height, 0.3s, ease-in;
     -webkit-transition: height, 0.3s, ease-in;
     transition: height, 0.3s, ease-in;
   }
-  .navbar-menu__menu .menu li ul li {
+  .region__navbar .menu li ul li {
     text-align: left;
   }
-  .navbar-menu__menu .menu li:hover > ul, .navbar-menu__menu .menu li:focus > ul {
+  .region__navbar .menu li ul li.expanded > a:after {
+    content: "\f105";
+  }
+  .region__navbar .menu li ul li ul {
+    left: 100%;
+    top: 0;
+  }
+  .region__navbar .menu li ul li ul li.expanded > a:after {
+    content: "\f107";
+  }
+  .region__navbar .menu li ul li ul a {
+    color: green !important;
+  }
+  .region__navbar .menu li ul li ul ul {
+    left: 0;
+    top: auto;
+  }
+  .region__navbar .menu li ul li ul ul a {
+    color: pink !important;
+  }
+  .region__navbar .menu li:hover > ul, .region__navbar .menu li:focus > ul {
     display: block;
     opacity: 1;
     height: auto;
     overflow: visible;
   }
-  .navbar-menu__menu .menu a {
+  .region__navbar a {
     padding: 7px 18px;
     padding: 0.4376941rem 1.145898rem;
   }
@@ -1052,7 +1172,7 @@ table tr.error {
 .breadcrumb li:before {
   content: "\f105";
   font-family: FontAwesome, sans-serif;
-  color: #cccccc;
+  color: #ccc;
   display: inline-block;
   padding: 0;
   margin: 0;
@@ -1069,8 +1189,6 @@ table tr.error {
 
 /**
  * Pagers.
- *
- * TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
  */
 .item-list .pager {
   clear: both;
@@ -1100,7 +1218,7 @@ table {
   margin: 1rem 0;
   padding: 0;
   width: 100%;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
 }
 table.sticky-header {
   z-index: 10;
@@ -1129,13 +1247,13 @@ table .view-table__details--description {
 }
 
 tr {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
 }
 
 thead tr {
   font-weight: 600;
-  color: black;
-  background-color: #eeeeee;
+  color: #333;
+  background-color: #eee;
 }
 thead .active img {
   display: inline;
@@ -1145,7 +1263,7 @@ tr,
 td,
 th {
   border-style: solid;
-  border-color: #cccccc;
+  border-color: #ccc;
 }
 
 td,
@@ -1259,9 +1377,9 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   line-height: normal;
-  color: #333333;
-  border: 1px solid #cccccc;
-  background-color: white;
+  color: #666666;
+  border: 1px solid #ccc;
+  background-color: #fff;
   padding: 7px 10px;
   padding: 0.4376941rem 0.618034rem;
   -moz-border-radius: 4px;
@@ -1308,8 +1426,8 @@ input[type="tel"]:focus,
 input[type="color"]:focus {
   outline: 0;
   outline: thin dotted \9;
-  border-color: #cccccc;
-  color: black;
+  border-color: #ccc;
+  color: #333;
 }
 select:not([type])[disabled], select[type="text"][disabled], select[type="password"][disabled], select[type="email"][disabled], select[type="url"][disabled], select[type="date"][disabled], select[type="month"][disabled], select[type="time"][disabled], select[type="datetime"][disabled], select[type="datetime-local"][disabled], select[type="week"][disabled], select[type="number"][disabled], select[type="search"][disabled], select[type="tel"][disabled], select[type="color"][disabled],
 textarea:not([type])[disabled],
@@ -1406,7 +1524,7 @@ input[type="tel"][disabled]:hover,
 input[type="tel"][disabled]:focus,
 input[type="color"][disabled]:hover,
 input[type="color"][disabled]:focus {
-  color: black;
+  color: #333;
 }
 select[type="checkbox"], select[type="radio"],
 textarea[type="checkbox"],
@@ -1421,8 +1539,8 @@ input[type="radio"] {
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  background: #eeeeee;
-  color: black;
+  background: #eee;
+  color: #333;
 }
 
 select {
@@ -1465,14 +1583,14 @@ textarea {
 
 .tips {
   font-size: 0.85em;
-  color: #737373;
+  color: #a6a6a6;
 }
 .tips li {
   list-style: none;
 }
 
 .description {
-  color: #737373;
+  color: #a6a6a6;
   font-size: 0.85em;
 }
 
@@ -1587,7 +1705,7 @@ form .field-add-more-submit {
  * @thanks http://nicolasgallagher.com/css-background-image-hacks/
  */
 details {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1690,7 +1808,6 @@ summary {
   0% {
     background-position: 0 0, 0 0;
   }
-
   100% {
     background-position: 0 0, -80px 0;
   }
@@ -1699,7 +1816,6 @@ summary {
   0% {
     background-position: 0 0, 0 0;
   }
-
   100% {
     background-position: 0 0, -80px 0;
   }
@@ -1708,7 +1824,6 @@ summary {
   0% {
     background-position: 0 0, 0 0;
   }
-
   100% {
     background-position: 0 0, -80px 0;
   }
@@ -1717,7 +1832,6 @@ summary {
   0% {
     background-position: 0 0, 0 0;
   }
-
   100% {
     background-position: 0 0, -80px 0;
   }
@@ -1726,7 +1840,6 @@ summary {
   0% {
     background-position: 0 0, 0 0;
   }
-
   100% {
     background-position: 0 0, -80px 0;
   }
@@ -1852,13 +1965,13 @@ article.tabs section:target, article.tabs section:target h2 {
   text-decoration: none;
   text-align: center;
   font-weight: 400;
-  color: black;
+  color: #333;
   background: #fbfbfb;
   width: auto;
   display: inline-block;
   position: relative;
   margin: 0 3px 0 0;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   padding: 7px 16px;
   padding: 0.4376941rem 1rem;
   -moz-border-radius: 4px;
@@ -1883,7 +1996,7 @@ article.tabs section:target, article.tabs section:target h2 {
   box-shadow: none;
 }
 .button[disabled]:hover {
-  color: black;
+  color: #2e2e2e;
 }
 [dir="rtl"] .button {
   margin: 0 0 0 3px;
@@ -1900,8 +2013,8 @@ article.tabs section:target, article.tabs section:target h2 {
 
 /* Drop buttons */
 .js .dropbutton-widget {
-  background-color: white;
-  border: 1px solid #cccccc;
+  background-color: #fff;
+  border: 1px solid #ccc;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1929,11 +2042,11 @@ article.tabs section:target, article.tabs section:target h2 {
   padding: 0.4376941rem 1rem;
 }
 .dropbutton .secondary-action {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
 }
 .dropbutton .secondary-action input {
   border: 0;
-  background: white;
+  background: #fff;
   width: 100%;
 }
 .dropbutton .secondary-action input:hover, .dropbutton .secondary-action input:focus {
@@ -1947,7 +2060,7 @@ article.tabs section:target, article.tabs section:target h2 {
 }
 
 .dropbutton-multiple .dropbutton {
-  border-right: 1px solid #cccccc;
+  border-right: 1px solid #ccc;
 }
 .dropbutton-multiple .dropbutton .dropbutton-action > * {
   margin-right: 0;
@@ -1959,7 +2072,7 @@ article.tabs section:target, article.tabs section:target h2 {
   border-radius: 4px 0 0 4px;
 }
 [dir="rtl"] .dropbutton-multiple .dropbutton {
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #ccc;
   border-right: 0;
 }
 [dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
@@ -2096,12 +2209,10 @@ video {
 }
 
 /**
- * Masthead.
- * - style branding elements
- * - CSS to support features: pinned/sticky header
+ * Branding styles, primarily to style the branding block output.
  */
 .site__slogan {
-  margin-top: 0;
+  margin: 0;
 }
 
 /**
@@ -2135,7 +2246,7 @@ video {
 }
 
 .local-tasks__primary {
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
 }
 .local-tasks__primary li {
   margin-bottom: -1px;
@@ -2151,9 +2262,9 @@ video {
   border-radius: 0 4px 0 0;
 }
 .local-tasks__primary a {
-  color: black;
+  color: #333;
   background: #fbfbfb;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   margin-right: -1px;
   padding: 7px 16px;
   padding: 0.4376941rem 1rem;
@@ -2166,17 +2277,17 @@ video {
   box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
 }
 .local-tasks__primary a:hover, .local-tasks__primary a:focus {
-  color: black;
-  background: #eeeeee;
+  color: #333;
+  background: #eee;
   text-decoration: none;
 }
 .local-tasks__primary a.active {
-  color: black;
+  color: #333;
   background: none;
-  border-bottom-color: white;
+  border-bottom-color: #fff;
 }
 .local-tasks__primary a.active:hover, .local-tasks__primary a.active:focus {
-  color: black;
+  color: #333;
   background: none;
 }
 [dir="rtl"] .local-tasks__primary a {
@@ -2334,10 +2445,8 @@ video {
   display: inline;
 }
 
-.node__header,
-.node__content {
-  overflow: hidden;
-  *zoom: 1;
+.node__submitted article:empty {
+  display: none;
 }
 
 /**
@@ -2358,6 +2467,26 @@ video {
  * - advanced search form
  * - search results pages
  */
+.block--search div,
+.search-form .form-wrapper div {
+  display: inline-block;
+  margin: 0 0 7px;
+  margin: 0 0 0.4376941rem;
+}
+
+.search-form .container-inline label {
+  display: block;
+  margin: 0 0 7px;
+  margin: 0 0 0.4376941rem;
+}
+
+.search-results {
+  padding: 0;
+}
+.search-results p {
+  margin: 0;
+}
+
 /**
  * User.
  * - user profile pages.

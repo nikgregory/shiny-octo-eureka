@@ -58,7 +58,7 @@ $form['devel']['settings_devel_layout'] = array(
 $form['devel']['settings_devel_color_regions'] = array(
   '#type' => 'checkbox',
   '#title' => t('Colorize regions'),
-  '#default_value' => theme_get_setting('settings.devel_color_region', $theme),
+  '#default_value' => theme_get_setting('settings.devel_color_regions', $theme),
   '#description' => t('Add background color to regions. Also adds a margin-bottom for visual seperation.'),
   '#states' => array(
     'disabled' => array('input[name="settings_devel_layout"]' => array('checked' => TRUE)),

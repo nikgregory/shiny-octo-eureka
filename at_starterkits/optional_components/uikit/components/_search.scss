@@ -1,0 +1,80 @@
+/**
+ * Search.
+ * - search block and form
+ * - advanced search form
+ * - search results pages
+ */
+
+// Search Block & advanced search form.
+.block--search,
+.search-form .form-wrapper {
+
+  // AT removes the container-inline class from search block as this adds unwanted
+  // display: inline styles, instead we use inline-block so we can add vertical
+  // margin and or padding etc.
+  div {
+    display: inline-block;
+    @include output-rhythm(margin, 0 0 $xx-small);
+  }
+}
+
+// Search form on the /search page
+.search-form .container-inline label {
+  display: block;
+  @include output-rhythm(margin, 0 0 $xx-small);
+}
+
+
+
+
+// Block search
+.block--search {}
+
+
+// Search block form element id.
+#search-block-form {}
+
+
+// Search text field and button.
+.block--search {
+  .form-search {}
+  .button {}
+}
+
+
+// Full structure of the form.
+.form-type-search {
+  //visually-hidden by default
+  label {}
+
+  input.form-search {}
+
+  .form-actions {
+    input.button {}
+  }
+}
+
+
+
+// Advanced Search Form.
+#edit-advanced {}
+
+
+
+// Search Results. Order list.
+.search-results {
+  padding: 0;
+
+  li {}
+
+  // search-snippet & search-info
+  p {
+    margin: 0;
+  }
+
+  .title {}
+  .search-snippet-info {}
+  .search-snippet {}
+  .search-info {}
+}
+

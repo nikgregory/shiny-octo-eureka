@@ -22,22 +22,13 @@ at.ie9js:
     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
 # Menu toggle
-at.menu_toggle:
+at.responsive_menus:
   version: 1.0
   js:
-    libraries/menu-toggle/menu-toggle.js: {}
+    libraries/responsive_menus/responsive_menus.js: {}
   dependencies:
     - core/jquery
     - core/matchmedia
-
-# Flexnav
-#at.flexnav:
-#  version: 1.0
-#  css:
-#    component:
-#      libraries/flexnav/flexnav.css: {}
-#  js:
-#    libraries/flexnav/flexnav.js: {}
 
 # Matchmedia AddListener
 at.addListener:
@@ -52,7 +43,6 @@ at.scalefix:
   version: 1.0
   js:
     libraries/scalefix/scalefix.js: {}
-
 
 # Slimbox
 at.slimbox2:

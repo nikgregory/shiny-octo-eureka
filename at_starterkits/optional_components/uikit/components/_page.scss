@@ -4,10 +4,19 @@
  * - page-row styles
  */
 
+// Full width background toggle
+$page-row-backgrounds-full-width: true;
+
+// .regions padding. If page row backgrounds are set on .regions
+// we need some padding.
+$regions-padding: $medium;
+
+
 /* html and body */
 html,
 body {
   height: 100%;
+  background-color: $page-row-navbar-background-color;
 }
 
 * {
@@ -21,6 +30,7 @@ body {
  */
 .page-root {
   position: relative;
+  background-color: $background-color;
 }
 
 /**
@@ -32,34 +42,72 @@ body {
  * you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
  */
 
-// Header (3 regions)
+// Set global styles for .regions.
+.regions {
+  @include output-rhythm(padding, $regions-padding 0);
+}
+
+// Animate regions for that app effect :)
+.region {
+  @include transition(all, .2s, ease-in);
+}
+
+// Header
 .page-row__header {
-  padding: $medium 0;
+  @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
+
+  @if $page-row-backgrounds-full-width == false {
+    .regions {
+      @include output-rhythm(padding, $regions-padding);
+    }
+  }
 }
 
 
-// Menubar (1 region)
-.page-row__menubar {}
+// Menubar
+.page-row__navbar {
+  @include page-row-colors($page-row-navbar-background-color, $page-row-navbar-color, $page-row-backgrounds-full-width);
+
+  .regions {
+    padding: 0;
+  }
+}
 
 
-// Messages (1 region)
-.page-row__messages {}
+// Messages
+.page-row__messages {
+  .regions {}
+}
 
 
-// Features (4 regions)
-.page-row__features {}
+// Features
+.page-row__features {
+  .regions {}
+}
 
 
 // Main (4 regions)
-.page-row__main {}
+.page-row__main {
+  .regions {}
+}
 
 
 // Tertiary (4 regions)
-.page-row__tertiary {}
+.page-row__tertiary {
+  .regions {}
+}
 
 
 // Footer (1 region)
-.page-row__footer {}
+.page-row__footer {
+  @include page-row-colors($page-row-footer-background-color, $page-row-footer-color, $page-row-backgrounds-full-width);
+
+  @if $page-row-backgrounds-full-width == false {
+    .regions {
+      @include output-rhythm(padding, $regions-padding);
+    }
+  }
+}
 
 
 [class*="page-row__"]:not(.page-row__navbar) li a:after {

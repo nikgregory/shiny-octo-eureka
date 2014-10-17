@@ -44,6 +44,7 @@
   overflow: visible;
   height: auto;
   width: auto;
+  font-family: inherit;
 }
 
 // Visually hidden but focusable, e.g. skip links
@@ -81,7 +82,6 @@
   word-wrap: break-word;
 }
 
-
 // Font smoothing
 @mixin font-smoothing($value: antialiased) {
   @if $value == antialiased {
@@ -94,24 +94,31 @@
   }
 }
 
-
 // Convert font-size from px to rem with px fallback
-//
 // @param $size - the value in pixel you want to convert
-//
 // e.g. p {@include fontSize(12px);}
-//
 // https://github.com/stubbornella/oocss/blob/master/oocss/src/components/utils/_fontSize.scss
-// Function for converting a px based font-size to rem.
-@function pxtorem($size) {
+@function calculateRem($size) {
   $remSize: $size / 16px;
-  // Default font size on html element is 100%, equivalent to 16px;
+  //Default font size on html element is 100%, equivalent to 16px;
   @return #{$remSize}rem;
 }
-
 // Mixin that will include the fall back px declaration as well as the calculated rem value.
-//@mixin font-size($size) {
-//  font-size: $size;
-//  font-size: calculateRem($size);
-//}
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
 
+// Small mixin to help with page background colors.
+@mixin page-row-colors($background-color, $color, $page-row-backgrounds-full-width) {
+  @if $page-row-backgrounds-full-width {
+    background-color: $background-color;
+    color: $color;
+  }
+  @else {
+    .regions {
+      background-color: $background-color;
+      color: $color;
+    }
+  }
+}

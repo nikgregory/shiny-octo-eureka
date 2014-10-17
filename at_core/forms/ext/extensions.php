@@ -46,7 +46,7 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_fonts'] = array(
   '#type' => 'checkbox',
   '#title' => t('Fonts'),
   '#default_value' => theme_get_setting('settings.enable_fonts', $theme),
-  '#description' => t('Apply fonts to site elements (page, titles, headings, menus and custom selectors). Supports websafe, custom and Google fonts, and <a href="!link" target="_blank">@font-your-face</a> integration.', array('!link' => 'http://drupal.org/project/fontyourface')),
+  '#description' => t('Apply fonts to site elements (page, titles, headings, menus and custom selectors). Supports websafe, custom stacks, Google fonts, and <a href="!link" target="_blank">Typekit fonts</a>.', array('!link' => 'https://typekit.com/')),
 );
 
 // Title styles
@@ -63,6 +63,15 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_images'] = array(
   '#title' => t('Image alignment and captions'),
   '#default_value' => theme_get_setting('settings.enable_images', $theme),
   '#description' => t('Set default image alignment, image captions and teaser image view.'),
+);
+
+
+// Menus
+$form['ext']['ext_settings']['enable_ext']['settings_enable_responsive_menus'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Responsive menus'),
+  '#description' => t('Select responsive menu styles.'),
+  '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
 );
 
 // Touch icons

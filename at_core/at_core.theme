@@ -121,7 +121,7 @@ function at_core_menu_link(array $variables) {
 
 
 /* Uncomment when menu functions become twig templates.*/
-/*
+
 function at_core_preprocess_menu_link(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
@@ -143,7 +143,8 @@ function at_core_preprocess_menu_link(&$variables) {
     }
   }
 }
-*/
+
+
 
 
 /**
@@ -152,28 +153,9 @@ function at_core_preprocess_menu_link(&$variables) {
  * https://drupal.org/node/2100775
  * TODO: What about Superfish?
  */
-function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-  // Add a suggestion for system menu blocks. We want all "menu" type blocks to
-  // use the same menu--block.html.twig template because these use the html5
-  // <nav> element as the main wrapper. It needs to be weak so it can be easily
-  // overridden by more specific suggestions, so we use array_splice to move it
-  // just after block__system but before the much more specific suggestions.
-  if (in_array('block__system_menu_block', $suggestions)) {
-    array_splice($suggestions, 1, 0, 'block__menu');
-  }
+//function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {}
 
-  // Get the region for each block from config and provide a plugin id / region suggestion.
-  $config = \Drupal::config('block.block.' . $variables['elements']['#block']->id);
-  $region = $config->get('region');
-  if (!empty($region)) {
-    $suggestions[] = 'block__' . $variables['elements']['#plugin_id'] . '__' . $region;
 
-    // Provide one more special case for the navbar region.
-    if (in_array('block__menu', $suggestions) && $region == 'navbar') {
-      $suggestions[] = 'block__menu__navbar';
-    }
-  }
-}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -198,20 +180,6 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
     }
   }
 }
-
-
-
-
-
-/**
- * Implements hook_page_alter().
- */
-function at_core_page_alter(&$page) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-}
-
-
-
 
 
 
@@ -268,6 +236,25 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   //var_dump($variables['page']['highlighted']);
+
+  // Add the responsive menu styles settings.
+  if (at_core_theme_get_setting('settings.enable_responsive_menus', $theme) === 1) {
+    $menu_style = at_core_theme_get_setting('settings.responsive_menu_style', $theme);
+    $settings = array('responsive_menu_style' => $menu_style);
+    $settings['offcanvas_position'] = NULL;
+
+    if ($menu_style == 'offcanvas') {
+      $offcanvas_position = at_core_theme_get_setting('settings.responsive_menu_offcanvas_position', $theme);
+      $settings['offcanvas_position'] = $offcanvas_position;
+    }
+    $variables['#attached']['js'][] = array(
+      'data' => array($theme => $settings),
+      'type' => 'setting',
+    );
+
+    // Load the required lib automatically.
+    $variables['#attached']['library'][] = 'at_core/at.responsive_menus';
+  }
 
   // Apple touch icons - low, medium and high (see the Apple docs on touch icons)
   $head_elements = array();
@@ -414,9 +401,9 @@ function at_core_preprocess_page(&$variables) {
   }
 
   // Attach Menu Toggle library
-  if (at_core_theme_get_setting("settings.theme_library_at_menu_toggle", $theme) === 1) {
-    $variables['#attached']['library'][] = 'at_core/at.menu_toggle';
-  }
+  //if (at_core_theme_get_setting("settings.theme_library_at_menu_toggle", $theme) === 1) {
+  //  $variables['#attached']['library'][] = 'at_core/at.menu_toggle';
+  //}
 
   //$variables['#attached']['library'][] = 'at_core/at.flexnav';
 
@@ -844,7 +831,7 @@ function at_core_preprocess_block(&$variables) {
   if (!empty($variables['label'])) {
     $variables['html_element'] = 'section';
     $variables['attributes']['class'][] = 'has-title';
-    $variables['title_attributes']['class'][] = 'block__title';
+    //$variables['title_attributes']['class'][] = 'block__title';
   }
 
   // Remove login block links.
@@ -862,6 +849,8 @@ function at_core_preprocess_block(&$variables) {
       }
     }
   }
+
+  ///var_dump($variables);
 }
 
 /**
