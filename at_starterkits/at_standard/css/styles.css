@@ -707,6 +707,15 @@ ul.inline li li {
   margin: 0 0 0 16px;
 }
 
+.attribution {
+  background-color: #333;
+  font-size: 10px;
+  font-size: 0.618034rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
 /**
  * Messages
  */
@@ -911,7 +920,7 @@ table tr.error {
   color: #fff;
 }
 
-@media (max-width: 60em) {
+@media all and (max-width: 60em) {
   .region__navbar .contextual-region {
     position: static !important;
   }
@@ -979,6 +988,10 @@ table tr.error {
     width: 1rem;
   }
 
+  .menu-style-slidedown .region__navbar .block-menu__title:after {
+    float: right;
+    text-align: right;
+  }
   .menu-style-slidedown .region__navbar .block-menu__content {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
@@ -994,10 +1007,6 @@ table tr.error {
     -o-transition: all, 0.2s, ease;
     -webkit-transition: all, 0.2s, ease;
     transition: all, 0.2s, ease;
-  }
-  .menu-style-slidedown.menu-expanded .region__navbar .block-menu__title:after {
-    float: right;
-    text-align: right;
   }
   .menu-style-slidedown.menu-expanded .region__navbar .block-menu__content {
     position: static !important;
@@ -1015,9 +1024,16 @@ table tr.error {
   .menu-style-offcanvas .region__navbar .block-menu__content {
     position: absolute;
     top: 0;
-    width: 240px;
     padding: 0 0 7px;
     padding: 0 0 0.4376941rem;
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    word-wrap: normal;
+    font: 0/0 a;
   }
   .menu-style-offcanvas .page-root {
     -moz-transition: all, 0.2s, ease-in-out;
@@ -1054,11 +1070,22 @@ table tr.error {
     -webkit-transform: translate3d(240px, 0, 0);
     transform: translate3d(240px, 0, 0);
   }
+  .menu-style-offcanvas.menu-expanded .page-root {
+    position: fixed;
+  }
+  .menu-style-offcanvas.menu-expanded .page-root .block-menu__content {
+    clip: auto;
+    overflow: visible;
+    height: auto;
+    font-family: inherit;
+    width: 240px;
+  }
   .menu-style-offcanvas.menu-expanded.offcanvas-left .page-root {
     -moz-transform: translate3d(240px, 0, 0);
     -ms-transform: translate3d(240px, 0, 0);
     -webkit-transform: translate3d(240px, 0, 0);
     transform: translate3d(240px, 0, 0);
+    position: fixed;
   }
   .menu-style-offcanvas.menu-expanded.offcanvas-right .page-root {
     -moz-transform: translate3d(-240px, 0, 0);
@@ -1067,7 +1094,7 @@ table tr.error {
     transform: translate3d(-240px, 0, 0);
   }
 }
-@media (min-width: 60em) {
+@media all and (min-width: 60em) {
   .region__navbar {
     background: #333;
   }
@@ -1085,63 +1112,78 @@ table tr.error {
   .region__navbar {
     background: #333;
   }
-  .region__navbar .menu {
+  .region__navbar .menu-level-1 {
     position: relative;
     font-size: 0;
   }
-  .region__navbar .menu > li {
+  .region__navbar .menu-level-1 > li {
     text-align: center;
     border-left: 1px dotted rgba(255, 255, 255, 0.3);
   }
-  .region__navbar .menu > li:last-child {
+  .region__navbar .menu-level-1 > li:last-child {
     border-right: 1px dotted rgba(255, 255, 255, 0.3);
   }
-  .region__navbar .menu li {
-    display: inline-block;
-    min-width: 10em;
+  .region__navbar .menu-level-1 li {
+    float: left;
+    width: 12em;
   }
-  .region__navbar .menu li ul {
-    position: absolute;
+  .region__navbar .menu-level-1 li.collapsed > a:after {
+    content: '';
+  }
+  .region__navbar .menu-level-1 li ul {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
-    height: 0;
-    opacity: 0;
-    -moz-transition: height, 0.3s, ease-in;
-    -o-transition: height, 0.3s, ease-in;
-    -webkit-transition: height, 0.3s, ease-in;
-    transition: height, 0.3s, ease-in;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    word-wrap: normal;
+    font: 0/0 a;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+    -moz-transition: all, 0.2s, ease;
+    -o-transition: all, 0.2s, ease;
+    -webkit-transition: all, 0.2s, ease;
+    transition: all, 0.2s, ease;
   }
-  .region__navbar .menu li ul li {
+  .region__navbar .menu-level-1 li ul li {
     text-align: left;
+    background: #3b3b3b;
   }
-  .region__navbar .menu li ul li.expanded > a:after {
-    content: "\f105";
+  .region__navbar .menu-level-1 li ul li:hover, .region__navbar .menu-level-1 li ul li:focus {
+    background: #404040;
   }
-  .region__navbar .menu li ul li ul {
-    left: 100%;
-    top: 0;
+  .region__navbar .menu-level-1 li:hover > ul, .region__navbar .menu-level-1 li:focus > ul {
+    display: block;
+    opacity: 1;
+    clip: auto;
+    overflow: visible;
+    height: auto;
+    width: auto;
+    font-family: inherit;
   }
-  .region__navbar .menu li ul li ul li.expanded > a:after {
-    content: "\f107";
-  }
-  .region__navbar .menu li ul li ul a {
-    color: green !important;
-  }
-  .region__navbar .menu li ul li ul ul {
+  .region__navbar .odd ul {
     left: 0;
     top: auto;
   }
-  .region__navbar .menu li ul li ul ul a {
-    color: pink !important;
+  .region__navbar .odd ul > .expanded > a:after {
+    content: "\f105";
   }
-  .region__navbar .menu li:hover > ul, .region__navbar .menu li:focus > ul {
-    display: block;
-    opacity: 1;
-    height: auto;
-    overflow: visible;
+  .region__navbar .odd ul .odd {
+    left: 100%;
+    top: 0;
+  }
+  .region__navbar .odd ul .odd > .expanded > a:after {
+    content: "\f107";
   }
   .region__navbar a {
     padding: 7px 18px;
     padding: 0.4376941rem 1.145898rem;
+    position: relative;
+  }
+  .region__navbar a:after {
+    position: absolute;
+    right: 16px;
   }
 }
 /**
@@ -1846,110 +1888,179 @@ summary {
 }
 /**
  * Tabs.
- *  - Implimentation of tabbed boxes
- *  - other tab modules or implimentation such as Quicktabs
+ *  - styles for tabs such as local tasks, other tabbed UI like
+ *    quicktabs could be applied here.
+ *
+ * Uses placeholders to easily extend required styles.
  */
-/*
-
-TODO: decided on a basic implimentation, make it generic enough to use for quicktabs
-and other modules as well as simple html in a block or node.
-
-Potential implimentation of tabbed boxes using sections and :target in CSS3 only,
-possible with small helper JS to smooth things over?
-
-SEE: http://blogs.sitepointstatic.com/examples/tech/css3-target/tabs.html
-
-I would prefer a dl/dt/dd structure like Foundation.
-
-
-<article class="tabs">
-
-	<section id="tab1">
-		<h2><a href="#tab1">Tab 1</a></h2>
-		<p>This content appears on tab 1.</p>
-	</section>
-
-	<section id="tab2">
-		<h2><a href="#tab2">Tab 2</a></h2>
-		<p>This content appears on tab 2.</p>
-	</section>
-
-	<section id="tab3">
-		<h2><a href="#tab3">Tab 3</a></h2>
-		<p>This content appears on tab 3.</p>
-	</section>
-
-</article>
-*/
-/*
-article.tabs {
-  display: block;
-  height: 15em;
-  margin: 2em auto;
-  position: relative;
-  width: 40em;
-}
-
-article.tabs section {
-  background-color: #DDDDDD;
-  border-radius: 5px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  display: block;
-  height: 12em;
-  left: 0;
-  padding: 10px 20px;
-  position: absolute;
-  top: 1.8em;
-  z-index: 0;
-}
-
-article.tabs section:first-child {
-  z-index: 1;
-}
-
-article.tabs section h2 {
-  background-color: #DDDDDD;
-  border-radius: 5px 5px 0 0;
-  color: #999999;
-  font-size: 1em;
-  font-weight: normal;
-  height: 1.8em;
-  left: 10px;
-  margin: 0;
+.tabs.primary {
   padding: 0;
-  position: absolute;
-  top: -1.8em;
-  width: 120px;
+  list-style: none;
+  margin: 16px 0;
+  margin: 1rem 0;
 }
-
-article.tabs section:nth-child(2) h2 {
-  left: 132px;
+.tabs.primary {
+  *zoom: 1;
 }
-
-article.tabs section:nth-child(3) h2 {
-  left: 254px;
+.tabs.primary:before, .tabs.primary:after {
+  content: "";
+  display: table;
 }
-
-article.tabs section h2 a {
-  color: inherit;
+.tabs.primary:after {
+  clear: both;
+}
+@media all and (min-width: 60em) {
+  .tabs.primary {
+    border-bottom: 1px solid #ccc;
+  }
+}
+.tabs.primary li {
   display: block;
-  line-height: 1.8em;
-  outline: 0 none;
-  text-align: center;
+}
+@media all and (max-width: 45em) {
+  .tabs.primary li:first-child a {
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px 0 0;
+  }
+  .tabs.primary li:last-child a {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0;
+    border-radius: 0 0 4px 4px;
+    border-bottom: 1px solid #ccc;
+  }
+}
+@media all and (min-width: 60em) {
+  .tabs.primary li {
+    float: left;
+    margin-bottom: -1px;
+  }
+  .tabs.primary li:first-child a {
+    -moz-border-radius: 4px 0 0 0;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 0 0 0;
+  }
+  .tabs.primary li:last-child a {
+    -moz-border-radius: 0 4px 0 0;
+    -webkit-border-radius: 0;
+    border-radius: 0 4px 0 0;
+  }
+}
+.tabs.primary a {
+  display: block;
+  line-height: 1;
+  color: #333;
+  background: #fbfbfb;
+  border: 1px solid #ccc;
+  padding: 7px 16px;
+  padding: 0.4376941rem 1rem;
+  -moz-transition: background-color, 0.15s, ease-in-out;
+  -o-transition: background-color, 0.15s, ease-in-out;
+  -webkit-transition: background-color, 0.15s, ease-in-out;
+  transition: background-color, 0.15s, ease-in-out;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+}
+@media all and (min-width: 60em) {
+  .tabs.primary a {
+    margin-right: -1px;
+  }
+}
+@media all and (max-width: 45em) {
+  .tabs.primary a {
+    border-bottom: 0;
+  }
+}
+.tabs.primary a:hover, .tabs.primary a:focus {
+  color: #333;
+  background: #eee;
   text-decoration: none;
-  width: 100%;
+}
+.tabs.primary a.active {
+  color: #333;
+  background: none;
+  border-bottom-color: #fff;
+}
+.tabs.primary a.active:hover, .tabs.primary a.active:focus {
+  color: #333;
+  background: none;
 }
 
-article.tabs section, article.tabs section h2 {
-  transition: all 500ms ease 0s;
+[dir="rtl"] .tabs.primary {
+  padding: 0;
+}
+[dir="rtl"] .tabs.primary a {
+  margin-left: -1px;
+  margin-right: 0;
+}
+[dir="rtl"] .tabs.primary li {
+  float: right;
+}
+[dir="rtl"] .tabs.primary li:first-child a {
+  margin-left: -1px;
+  -moz-border-radius: 0 4px 0 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 4px 0 0;
+}
+[dir="rtl"] .tabs.primary li:last-child a {
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 0;
 }
 
-article.tabs section:target, article.tabs section:target h2 {
-  background-color: #FFFFFF;
-  color: #333333;
-  z-index: 2;
+.tabs.secondary {
+  padding: 0;
+  list-style: none;
+  margin: 16px 0;
+  margin: 1rem 0;
 }
-*/
+.tabs.secondary {
+  *zoom: 1;
+}
+.tabs.secondary:before, .tabs.secondary:after {
+  content: "";
+  display: table;
+}
+.tabs.secondary:after {
+  clear: both;
+}
+.tabs.secondary li {
+  display: block;
+  float: left;
+  margin: 0 7px;
+  margin: 0 0.4376941rem;
+}
+.tabs.secondary a {
+  display: block;
+  line-height: 1;
+  color: #333;
+  padding: 7px 16px;
+  padding: 0.4376941rem 1rem;
+  -moz-transition: background-color, 0.15s, ease-in-out;
+  -o-transition: background-color, 0.15s, ease-in-out;
+  -webkit-transition: background-color, 0.15s, ease-in-out;
+  transition: background-color, 0.15s, ease-in-out;
+}
+.tabs.secondary a:hover, .tabs.secondary a:focus {
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+.tabs.secondary a.active {
+  border-bottom: 1px solid #ccc;
+}
+.tabs.secondary a.active:hover, .tabs.secondary a.active:focus {
+  color: #333;
+}
+
+[dir="rtl"] .tabs.secondary {
+  padding: 0;
+}
+[dir="rtl"] .tabs.secondary li {
+  float: right;
+}
+
 /**
  * Buttons
  * - applies to elements with class "button", includes styles for:
@@ -2216,106 +2327,6 @@ video {
 }
 
 /**
- * Tabs.
- *  - primary and secondary tabs
- *  - other tab modules or implimentation such as Quicktabs
- *
- * Currently dependant on the Menu twig patch: https://drupal.org/node/1898478
- *
- * TODO: consider a cleaner simpler style as a default, and change this file name to local-tasks(?), local tasks is not a "tabbed UI"
- * in the classic sense, calling them "tabs" is a Drupalism and should be deprecated.
- * We will have a tabbed UI style, but for real tabs, as in a JS driven tabs.
- */
-/* Local task tabs, e.g. node View Edit Delete etc */
-.local-tasks--menu {
-  padding: 0;
-  list-style: none;
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-[dir="rtl"] .local-tasks--menu {
-  margin: 0;
-  padding: 0;
-}
-.local-tasks--menu li {
-  display: inline-block;
-}
-.local-tasks--menu a {
-  display: block;
-  line-height: 1;
-}
-
-.local-tasks__primary {
-  border-bottom: 1px solid #ccc;
-}
-.local-tasks__primary li {
-  margin-bottom: -1px;
-}
-.local-tasks__primary li:first-child a {
-  -moz-border-radius: 4px 0 0 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 0;
-}
-.local-tasks__primary li:last-child a {
-  -moz-border-radius: 0 4px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 0 0;
-}
-.local-tasks__primary a {
-  color: #333;
-  background: #fbfbfb;
-  border: 1px solid #ccc;
-  margin-right: -1px;
-  padding: 7px 16px;
-  padding: 0.4376941rem 1rem;
-  -moz-transition: background-color, 0.15s, ease-in-out;
-  -o-transition: background-color, 0.15s, ease-in-out;
-  -webkit-transition: background-color, 0.15s, ease-in-out;
-  transition: background-color, 0.15s, ease-in-out;
-  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-}
-.local-tasks__primary a:hover, .local-tasks__primary a:focus {
-  color: #333;
-  background: #eee;
-  text-decoration: none;
-}
-.local-tasks__primary a.active {
-  color: #333;
-  background: none;
-  border-bottom-color: #fff;
-}
-.local-tasks__primary a.active:hover, .local-tasks__primary a.active:focus {
-  color: #333;
-  background: none;
-}
-[dir="rtl"] .local-tasks__primary a {
-  margin-left: -1px;
-  margin-right: 0;
-}
-[dir="rtl"] .local-tasks__primary li:first-child a {
-  margin-left: -1px;
-  -moz-border-radius: 0 4px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 0 0;
-}
-[dir="rtl"] .local-tasks__primary li:last-child a {
-  -moz-border-radius: 4px 0 0 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 0;
-}
-
-.local-tasks__secondary a {
-  padding: 10px 16px;
-  padding: 0.618034rem 1rem;
-}
-[dir="rtl"] .local-tasks__secondary li {
-  padding: 16px 0 0 16px;
-  padding: 1rem 0 0 1rem;
-}
-
-/**
  * Fields.
  * - By default we pretty much stick to field-type and field element styles (such as
  *   .field-label's). You could style specific instances of fields here, or do that
@@ -2366,10 +2377,12 @@ video {
   margin: 0;
 }
 .field-type--image figcaption {
-  font-size: 13px;
-  font-size: 0.8rem;
-  line-height: 24px;
-  line-height: 1.5rem;
+  font-size: 12px;
+  font-size: 0.7692308rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  padding: 7px 0;
+  padding: 0.4376941rem 0;
 }
 .field-type--image.field-align--none figure, .field-type--image.field-align--left figure {
   margin: 5px 16px 16px 0;
@@ -2449,18 +2462,41 @@ video {
   display: none;
 }
 
+.node__footer {
+  clear: both;
+}
+.node__footer {
+  *zoom: 1;
+}
+.node__footer:before, .node__footer:after {
+  content: "";
+  display: table;
+}
+.node__footer:after {
+  clear: both;
+}
+
 /**
  * Comments.
  */
+.field-node--comment {
+  clear: both;
+}
+.field-node--comment {
+  *zoom: 1;
+}
+.field-node--comment:before, .field-node--comment:after {
+  content: "";
+  display: table;
+}
+.field-node--comment:after {
+  clear: both;
+}
+
 .comment__author {
   display: inline;
 }
 
-/**
- * Poll.
- * - poll page
- * - poll block
- */
 /**
  * Search.
  * - search block and form

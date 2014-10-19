@@ -6,19 +6,20 @@
 
 
 // Content types
-.node--article {}
-.node--page {}
-.node--forum {}
+.node--type-article {}
+.node--type-page {}
+.node--type-forum {}
 
 
 // States
 .node--promoted {}
 .node--sticky {}
+.node--unpublished {}
 
 
 // View modes
-.view-mode--full {}
-.view-mode--teaser {}
+.node--view-mode-full {}
+.node--view-mode-teaser {}
 
 
 // Header - includes title (h1 full, h2 teaser), user picture, author and date.
@@ -52,20 +53,10 @@
 
 
 // Footer wraps links.
-.node-footer {
+.node__footer {
+  @include clearfix-micro;
+  clear: both;
+
   .links {}
 }
 
-
-// Field class examples (standard installation profile for article content type)
-[class*="field-node--"] {}
-
-// Image field
-.field-node--field-image {}
-.field-name--field-image {}
-.field-type--image {}
-
-// Text field
-.field-node--body {}
-.field-name--body {}
-.field-type--text-with-summary {}

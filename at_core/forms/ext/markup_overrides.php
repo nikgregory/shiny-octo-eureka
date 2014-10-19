@@ -19,7 +19,6 @@ $form['markup_overrides']['markup_overrides_settings'] = array(
   '#weight' => 40,
 );
 
-
 /*
 // Design
 $form['markup_overrides']['markup_overrides_settings']['design'] = array(
@@ -35,7 +34,6 @@ $form['markup_overrides']['markup_overrides_settings']['design']['settings_menu_
   '#default_value' => theme_get_setting('settings.menu_item_span_elements'),
 );
 */
-
 
 // Breadcrumbs
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(
@@ -78,7 +76,6 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'][
   '#size' => 25,
   '#maxlength' => 60,
 );
-
 
 // Login block.
 $form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
@@ -130,14 +127,14 @@ $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_
 );
 
 // Remove menu link titles
+/*
 $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_unset_menu_titles'] = array(
   '#type' => 'checkbox',
   '#title' => t('Remove menu link titles (tooltips)'),
   '#default_value' => theme_get_setting('settings.unset_menu_titles'),
   '#description' => t('Checking this setting will remove menu link title attributes rendered via <code>theme_menu_link()</code>, such as menu block links.'),
 );
-
-
+*/
 
 // Accessibility
 $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
@@ -165,7 +162,6 @@ $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_li
   '#default_value' => String::checkPlain(theme_get_setting('settings.skip_link_target')),
 );
 
-
 /*
 // SEO/Authorship
 $form['markup_overrides']['markup_overrides_settings']['seo'] = array(
@@ -190,7 +186,6 @@ $form['markup_overrides']['markup_overrides_settings']['seo']['settings_logo_tit
   '#description' => t('By default the text "Home page" is used for the tool tip. This option overrides this with the site name.'),
 );
 */
-
 
 // Attribution
 $form['markup_overrides']['markup_overrides_settings']['attribution'] = array(

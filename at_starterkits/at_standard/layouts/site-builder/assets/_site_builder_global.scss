@@ -1,12 +1,10 @@
 //
 // Global layout declarations.
 //
-// These styles are not constrained by media queries and are used in all
-// compiled stylesheets.
 // ---------------------------------------------------------------------------
 
 // Import base.
-@import "base";
+@import "site_builder_base";
 
 
 // Set the Susy container on .regions, this controls the max-width. The
@@ -17,8 +15,15 @@
   @include container();
 }
 
+// Apply a micro clearfix globally, this ensures dynamic height content
+// does not disrupt the layout in unexpected ways.
+.regions,
+.region {
+  @include clearfix-micro;
+}
 
-// We need some padding to avoid chome collisions.
+
+// We need some padding to avoid browser chrome collisions.
 [class*="page-row__"] {
   padding: 0 gutters();
 }

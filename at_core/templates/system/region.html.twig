@@ -1,9 +1,13 @@
 {#
 /**
  * @file
- * Default theme implementation to display a region.
+ * Adaptivetheme implementation to display a region.
+ * AT sets the wrapper element in preprocess. For example by default
+ * the main content region will get the <main> element.
  *
  * Available variables:
+ * - html_element: div or html5 element such as main, section etc. Set
+ *   in preprocess.
  * - content: The content for this region, typically blocks.
  * - attributes: HTML attributes for the region div, including:
  *   - class: Classes that can be used to style contextually through CSS,

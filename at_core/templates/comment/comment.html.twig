@@ -77,18 +77,18 @@
   <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
   {% if title %}
-    <h3{{ title_attributes }}>{{ title }}</h3>
+    <h3{{ title_attributes.addClass('comment__title') }}>{{ title }}</h3>
     {{ title_suffix }}
   {% endif %}
 
-  <div{{ submitted_attributes }}>
+  <div{{ submitted_attributes.addClass('comment__submitted') }}>
     {{ user_picture }}
     <div class="comment__meta">
       {{ submitted }}
     </div>
   </div>
 
-  <div{{ content_attributes }}>
+  <div{{ content_attributes.addClass('comment__content').removeClass('content') }}>
     {#
       Indicate the semantic relationship between parent and child comments
       for accessibility. The list is difficult to navigate in a screen

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a block.
+ * Adaptivetheme implementation to display the main content block.
  *
  * Available variables:
  * - plugin_id: The ID of the block implementation.
@@ -46,16 +46,10 @@
     'block--' ~ configuration.provider|clean_class,
   ]
 %}
-<{{ html_element }}{{ attributes.addClass(classes).removeClass('container-inline') }}>
+<div{{ attributes.addClass(classes) }}>
 
   {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
+  {{ content }}
   {{ title_suffix }}
 
-  {% block content %}
-    {{ content }}
-  {% endblock %}
-
-</{{ html_element }}>
+</div>

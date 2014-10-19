@@ -1,8 +1,12 @@
 /**
  * Tabs.
- *  - Implimentation of tabbed boxes
- *  - other tab modules or implimentation such as Quicktabs
+ *  - styles for tabs such as local tasks, other tabbed UI like
+ *    quicktabs could be applied here.
+ *
+ * Uses placeholders to easily extend required styles.
  */
+
+$tabs-alignment:              left;
 
 $tab-text-color:              $text-color;
 $tab-text-hover-color:        $text-color;
@@ -18,124 +22,180 @@ $tab-border-color:            $border-color;
 $tab-border-radius:           $border-radius;
 
 
-/*
-
-TODO: decided on a basic implimentation, make it generic enough to use for quicktabs
-and other modules as well as simple html in a block or node.
-
-Potential implimentation of tabbed boxes using sections and :target in CSS3 only,
-possible with small helper JS to smooth things over?
-
-SEE: http://blogs.sitepointstatic.com/examples/tech/css3-target/tabs.html
-
-I would prefer a dl/dt/dd structure like Foundation.
-
-
-<article class="tabs">
-
-	<section id="tab1">
-		<h2><a href="#tab1">Tab 1</a></h2>
-		<p>This content appears on tab 1.</p>
-	</section>
-
-	<section id="tab2">
-		<h2><a href="#tab2">Tab 2</a></h2>
-		<p>This content appears on tab 2.</p>
-	</section>
-
-	<section id="tab3">
-		<h2><a href="#tab3">Tab 3</a></h2>
-		<p>This content appears on tab 3.</p>
-	</section>
-
-</article>
-*/
-
-
-/*
-article.tabs {
-  display: block;
-  height: 15em;
-  margin: 2em auto;
-  position: relative;
-  width: 40em;
-}
-
-article.tabs section {
-  background-color: #DDDDDD;
-  border-radius: 5px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  display: block;
-  height: 12em;
-  left: 0;
-  padding: 10px 20px;
-  position: absolute;
-  top: 1.8em;
-  z-index: 0;
-}
-
-article.tabs section:first-child {
-  z-index: 1;
-}
-
-article.tabs section h2 {
-  background-color: #DDDDDD;
-  border-radius: 5px 5px 0 0;
-  color: #999999;
-  font-size: 1em;
-  font-weight: normal;
-  height: 1.8em;
-  left: 10px;
-  margin: 0;
+// Tabs as tabs, classic Drupalish tabs, i.e local tasks.
+// In mobile screen width they collapse into a stacked list of tabish buttons.
+%tabs-as-tabs {
   padding: 0;
-  position: absolute;
-  top: -1.8em;
-  width: 120px;
+  list-style: none;
+  @include output-rhythm(margin, $medium 0);
+  @include clearfix-micro;
+
+  @media #{$wide} {
+    border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+  }
+
+  li {
+    display: block;
+
+    @media #{$mobile} {
+      &:first-child a {
+        @include border-radius($tab-border-radius $tab-border-radius 0 0);
+      }
+
+      &:last-child a {
+        @include border-radius(0 0 $tab-border-radius $tab-border-radius);
+        border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+      }
+    }
+
+    @media #{$wide} {
+      float: left; // LTR
+      margin-bottom: -1px;
+
+      &:first-child a {
+        @include border-radius($tab-border-radius 0 0 0); // LTR
+      }
+
+      &:last-child a {
+        @include border-radius(0 $tab-border-radius 0 0); // LTR
+      }
+    }
+  }
+
+  a {
+    display: block;
+    line-height: 1;
+    color: $tab-text-color;
+    background: $tab-background-color;
+    border: $tab-border-width $tab-border-style $tab-border-color;
+    @include output-rhythm(padding, $xx-small $medium);
+    @include transition(background-color, .15s, ease-in-out);
+    @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
+
+    @media #{$wide} {
+      margin-right: -1px;
+    }
+
+    @media #{$mobile} {
+      border-bottom: 0;
+    }
+
+    &:hover,
+    &:focus {
+      color: $tab-text-hover-color;
+      background: $tab-background-hover-color;
+      text-decoration: none;
+    }
+
+    &.active {
+      color: $tab-text-active-color;
+      background: none;
+      border-bottom-color: $background-color;
+
+      &:hover,
+      &:focus {
+        color: $tab-text-hover-color;
+        background: none;
+      }
+    }
+  }
 }
 
-article.tabs section:nth-child(2) h2 {
-  left: 132px;
+// Tabs as tabs RTL
+%tabs-as-tabs-rtl {
+  padding: 0;
+
+  a {
+    margin-left: -1px;
+    margin-right: 0;
+  }
+
+  li {
+    float: right;
+
+    &:first-child a {
+      margin-left: -1px;
+      @include border-radius(0 $tab-border-radius 0 0);
+    }
+
+    &:last-child a {
+      @include border-radius($tab-border-radius 0 0 0);
+    }
+  }
 }
 
-article.tabs section:nth-child(3) h2 {
-  left: 254px;
+
+
+// Tabs as horizontal links, i.e. like Seven themes secondary tasks
+%tabs-horizontal-links {
+  padding: 0;
+  list-style: none;
+  //border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+
+  @include output-rhythm(margin, $medium 0);
+  @include clearfix-micro;
+
+  li {
+    display: block;
+    float: left; // LTR
+    @include output-rhythm(margin, 0 $xx-small);
+  }
+
+  a {
+    display: block;
+    line-height: 1;
+    color: $tab-text-color;
+
+    @include output-rhythm(padding, $xx-small $medium);
+    @include transition(background-color, .15s, ease-in-out);
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: $tab-text-hover-color;
+      border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+    }
+
+    &.active {
+      border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+
+      &:hover,
+      &:focus {
+        color: $tab-text-hover-color;
+      }
+    }
+  }
 }
 
-article.tabs section h2 a {
-  color: inherit;
-  display: block;
-  line-height: 1.8em;
-  outline: 0 none;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
+// Tabs as horizontal links RTL
+%tabs-horizontal-links-rtl {
+  padding: 0;
+
+  li {
+    float: right;
+  }
 }
 
-article.tabs section, article.tabs section h2 {
-  transition: all 500ms ease 0s;
+
+
+
+// Primary local tasks, probably needs updating when local-tasks block lands:
+.tabs.primary {
+  @extend %tabs-as-tabs;
+
+  @at-root [dir="rtl"] .tabs.primary {
+    @extend %tabs-as-tabs-rtl;
+  }
 }
 
-article.tabs section:target, article.tabs section:target h2 {
-  background-color: #FFFFFF;
-  color: #333333;
-  z-index: 2;
+// Secondary local tasks.
+.tabs.secondary {
+  @extend %tabs-horizontal-links;
+
+  @at-root [dir="rtl"] .tabs.secondary {
+    @extend %tabs-horizontal-links-rtl;
+  }
 }
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

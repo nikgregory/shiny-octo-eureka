@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation for a menu block.
+ * Adaptivetheme implementation to display the search block.
  *
  * Available variables:
  * - plugin_id: The ID of the block implementation.
@@ -21,6 +21,13 @@
  * - content: The content of this block.
  * - attributes: HTML attributes for the containing element.
  *   - id: A valid HTML ID and guaranteed unique.
+ *   - class: Classes that can be used to style contextually through
+ *     CSS. These can be manipulated through preprocess functions. The default
+ *     values can be one or more of the following:
+ *     - block: The current template type, i.e., "theming hook".
+ *     - block-[module]: The module generating the block. For example, the user
+ *       module is responsible for handling the default user navigation block.
+ *       In that case the class would be 'block-user'.
  * - title_attributes: HTML attributes for the title element.
  * - content_attributes: HTML attributes for the content element.
  * - title_prefix: Additional output populated by modules, intended to be
@@ -28,14 +35,7 @@
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
  *
- * Headings should be used on navigation menus that consistently appear on
- * multiple pages. When this menu block's label is configured to not be
- * displayed, it is automatically made invisible using the 'visually-hidden' CSS
- * class, which still keeps it visible for screen-readers and assistive
- * technology. Headings allow screen-reader and keyboard only users to navigate
- * to or skip the links.
- * See http://juicystudio.com/article/screen-readers-display-none.php and
- * http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
+ * @see template_preprocess_block()
  *
  * @ingroup themeable
  */
@@ -43,23 +43,22 @@
 {%
   set classes = [
     'block',
-    'block-menu',
-    'navigation',
-    'menu--' ~ derivative_plugin_id|clean_class,
+    'block--' ~ configuration.provider|clean_class,
+    'block--' ~ plugin_id|clean_class,
   ]
 %}
-{% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
-  {# Label. If not displayed, we still provide it for screen readers. #}
-  {% if not configuration.label_display %}
-    {% set title_attributes = title_attributes.addClass('visually-hidden') %}
-  {% endif %}
+<{{ html_element }}{{ attributes.addClass(classes).removeClass('container-inline') }}>
+
   {{ title_prefix }}
-  <h2 id="{{ heading_id }}"{{ title_attributes.addClass('block-menu__title') }}>{{ configuration.label }}</h2>
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
   {{ title_suffix }}
 
-  {# Menu. #}
   {% block content %}
-    <div class="block-menu__content">{{ content }}</div>
+    <div{{ content_attributes.addClass('block__content') }}>
+      {{ content }}
+    </div>
   {% endblock %}
-</nav>
+
+</{{ html_element }}>

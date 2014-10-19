@@ -2,29 +2,28 @@
  * Comments.
  */
 
-// Main section wrapper around the comments list
-.comments__wrapper {}
+// Typically comments are attached to nodes - this is the main
+// wrapper around comments and the comment form in nodes, on
+// a standard Drupal install.
+.field-node--comment {
+  @include clearfix-micro;
+  clear: both;
+}
+
+.comment-field__title {} // typically this says 'Comments'.
 
 
-// Comment form - basic classes only, see _form-styles.scss
-.comment-form {}
-.comments__title {}
-.comments__title--form {}
-
-
-// Comment wrapper
+// Comments are articles, they all have the base class of .comment:
 .comment {}
 
 
-// Authors
+// Author based classes.
 .by-anonymous {}
 .by-viewer {}
 .comment--by-node-author {}
 
 
-
-// Header
-.comment__header {}
+// Title and New
 .comment__title {}
 .comment__new {}
 
@@ -49,14 +48,24 @@
 }
 
 
-// Footer
-.comment__footer {
+// Comment content wrapper.
+.comment__content {}
+
+
+// Links
+.comment {
   .links {}
 }
+
 
 // User signiture
 .comment__user-signature {}
 
 
-// Comment fields.
-.field-name--comment-body {}
+// Comment form - basic classes only, see _form-styles.scss
+.comment-form-wrapper {}
+.comment-form__title {}
+.comment-form {}
+
+
+

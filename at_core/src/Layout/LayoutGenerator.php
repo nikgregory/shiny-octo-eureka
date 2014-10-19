@@ -128,6 +128,7 @@ class LayoutGenerator extends PageLayout {
       foreach ($output as $row_output) {
         $generated[] = implode("\n", $row_output);
       }
+      $generated[] = "  {{ attribution }}" . "\n";
       $generated[] = '</div>';
       $template = implode($generated);
     }

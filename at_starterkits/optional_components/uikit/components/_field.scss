@@ -60,7 +60,8 @@ $field-taxonomy-icons:     false;
   }
 
   figcaption {
-    @include adjust-font-size-to($medium/1.25);
+    @include adjust-font-size-to($medium/1.3, .75);
+    @include output-rhythm(padding, $xx-small 0);
   }
 
   /**

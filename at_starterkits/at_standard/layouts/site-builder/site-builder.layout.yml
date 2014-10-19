@@ -16,6 +16,12 @@ rows:
       id: messages
     regions:         # use the key "regions" to declare row regions.
       messages: 'Messages'
+  leaderboard:
+    attributes:
+      role: region
+      id: leaderboard
+    regions:
+      messages: 'Leaderboard'
   header:
     attributes:
       role: banner
@@ -28,7 +34,7 @@ rows:
       role: navigation
       id: navbar
     regions:
-      navbar: 'Nav bar'
+      navbar: 'Navbar'
   features:
     attributes:
       role: region

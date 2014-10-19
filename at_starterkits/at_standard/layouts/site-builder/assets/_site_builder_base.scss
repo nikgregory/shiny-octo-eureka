@@ -5,9 +5,7 @@
 // ---------------------------------------------------------------------------
 
 // Import Compass Plugins
-@import "compass/utilities";
-@import "compass/css3";
-
+@import "compass";
 
 // Import Susy
 @import "susy";
@@ -46,7 +44,8 @@ $flow-from: from($flow-direction);
 // so any pixel equivalents stated here assume base font size of 16px. Change them
 // to suit your requirements.
 //
-//   $mobile      - 0 to 45em, contain styles, mobile/small screens only.
+//   $mobile      - 0 to 45em, mobile screens.
+//   $mobile-wide - 0 to 60em, wide mobile screens.
 //   $narrow      - 45em and max-width 60em (720px to 960px), isolatation breakpoint for phablets/small tablets.
 //   $narrow-wide - 45em (720px) and up.
 //   $wide        - 60em (960px) and up.
@@ -54,13 +53,16 @@ $flow-from: from($flow-direction);
 //
 // Schema:
 //
+// Schema:
 // |-- $mobile -->|
+// |-- $mobile-wide ------------->|
 //                |<-- $narrow -->|
-//                |--- $narrow wide ------------------------------------------------->
+//                |--- $narrow-wide ------------------------------------------------->
 //                                |--- $wide ---------------------------------------->
 //                                                              |--- $huge ---------->
 //
 $mobile      : "all and (max-width: 45em)";
+$mobile-wide : "all and (max-width: 60em)";
 $narrow      : "all and (min-width: 45em) and (max-width: 60em)";
 $narrow-wide : "all and (min-width: 45em)";
 $wide        : "all and (min-width: 60em)";

@@ -78,73 +78,12 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
   return $cache[$theme]->get($setting_name);
 }
 
-/**
-* Returns HTML for a menu link and submenu.
-*
-* @param $variables
-* An associative array containing:
-* - element: Structured array data for a menu link.
-*/
 
-/* Remove when menus become twig templates.*/
-/*
-function at_core_menu_link(array $variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $element = $variables['element'];
-  $sub_menu = '';
-
-  // Add extra classes for menu depth and mlid (menu id).
-  if (!empty($element['#original_link']['depth'])) {
-    $element['#attributes']['class'][] = 'menu-depth--' . $element['#original_link']['depth'];
-  }
-  if (!empty($element['#original_link']['mlid'])) {
-    $element['#attributes']['class'][] = 'menu-item__' . $element['#original_link']['mlid'];
-  }
-
-  // Remove link attribute title (tooltips).
-  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
-    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
-      if (at_core_theme_get_setting('settings.unset_menu_titles', $theme) === 1) {
-        unset($element['#localized_options']['attributes']['title']);
-      }
-    }
-  }
-
-  if ($element['#below']) {
-    $sub_menu = drupal_render($element['#below']);
-  }
-
-  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
-  return '<li' . new Attribute($element['#attributes']) . '>' . $output . $sub_menu . "</li>";
+/* Preprocess variables for the menu template.
+function at_core_preprocess_menu(&$variables) {
+  var_dump($variables['items']);
 }
 */
-
-
-/* Uncomment when menu functions become twig templates.*/
-
-function at_core_preprocess_menu_link(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-  // Add extra classes for menu depth and mlid (menu id).
-  if (!empty($variables['element']['#original_link']->depth)) {
-    //dsm($variables);
-    $variables['attributes']['class'][] = 'menu-depth--' . $variables['element']['#original_link']->depth;
-  }
-  if (!empty($variables['element']['#original_link']->mlid)) {
-    $variables['attributes']['class'][] = 'menu-item__' . $variables['element']['#original_link']->mlid;
-  }
-
-  // Remove link attribute title (tooltips).
-  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
-    if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
-      if (at_core_theme_get_setting('settings.unset_menu_titles', $theme) === 1) {
-        unset($variables['element']['#localized_options']['attributes']['title']);
-      }
-    }
-  }
-}
-
-
 
 
 /**
@@ -236,6 +175,8 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   //var_dump($variables['page']['highlighted']);
+  //$reg = theme_get_registry(FALSE);
+  //var_dump($reg);
 
   // Add the responsive menu styles settings.
   if (at_core_theme_get_setting('settings.enable_responsive_menus', $theme) === 1) {
@@ -510,7 +451,10 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
-  // Load generated CSS files from Advanced settings - fonts, titles, image styles, custom css etc.
+  // Initialise attribution variable.
+  $variables['attribution'] = '';
+
+  // Process extension settings.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
 
     // Fonts.
@@ -609,6 +553,12 @@ function at_core_preprocess_page(&$variables) {
           );
         }
       }
+
+      // Set attribution.
+      if (at_core_theme_get_setting('settings.attribution_toggle', $theme) === 1) {
+        $variables['attribution'] = '<div class="attribution"><a href="http://adaptivethemes.com" target="_blank">Design by Adaptivethemes.com</a></div>';
+      }
+
     }
   }
 
@@ -654,9 +604,7 @@ function at_core_preprocess_page(&$variables) {
  * Preprocess variables for region templates.
  */
 function at_core_preprocess_region(&$variables) {
-  // Set a class for block titles.
   $variables['attributes']['class'] = str_replace('region-', 'region__', $variables['attributes']['class']);
-
   $variables['html_element'] = 'div';
   if ($variables['region'] == 'content') {
     $variables['html_element'] = 'main';
@@ -670,8 +618,6 @@ function at_core_preprocess_region(&$variables) {
 function at_core_preprocess_node(&$variables) {
   $node = $variables['node'];
 
-  //var_dump($variables);
-
   // Header and Footer attributes.
   $variables['header_attributes'] = new Attribute(array('class' => array()));
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
@@ -684,9 +630,6 @@ function at_core_preprocess_node(&$variables) {
       '#suffix' => '</p>',
     );
   }
-
-  // Set ID
-  //$variables['attributes']['id'] = 'node__' . $node->id();
 
   // Set attribute classes.
   $variables['header_attributes']['class'][] = 'node__header';
@@ -724,17 +667,8 @@ function at_core_preprocess_node(&$variables) {
       $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
     }
   }
-
-  //kpr($variables);
 }
 
-
-/**
- * Preprocess variables for comment templates.
- */
-function at_core_preprocess_comment_wrapper(&$variables) {
-  $variables['attributes']['class'] = str_replace('comment-wrapper', 'comments__wrapper', $variables['attributes']['class']);
-}
 
 /**
  * Preprocess variables for comment templates.
@@ -747,12 +681,7 @@ function at_core_preprocess_comment(&$variables) {
 
   // Initialize new attribute arrays.
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
-  $variables['footer_attributes'] = new Attribute(array('class' => array()));
-
-  // Set classes for comment title, submitted and footer.
-  $variables['title_attributes']['class'][] = 'comment__title';
-  $variables['submitted_attributes']['class'][] = 'comment__submitted';
-  $variables['footer_attributes']['class'][] = 'comment__footer';
+  //$variables['footer_attributes'] = new Attribute(array('class' => array()));
 
   // Clean up user picture and add has class.
   if (theme_get_setting('features.comment_user_picture')) {
@@ -772,11 +701,6 @@ function at_core_preprocess_comment(&$variables) {
     $variables['user_picture'] = array();
   }
 
-  // Set a class on the comment footer if there is a user picture.
-  //if (isset($variables['user_picture']['user_picture'])) {
-  //  $variables['submitted_attributes']['class'][] = 'comment__submitted--user-picture';
-  //}
-
   // Hide comment titles.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
     if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
@@ -795,12 +719,6 @@ function at_core_preprocess_comment(&$variables) {
     );
   }
 
-  // Reset the title to be the permalink.
-  $permalink_uri = $comment->permalink();
-  //$permalink_uri['options']['attributes']['class'][] = 'comment__permalink';
-  //$permalink_uri['options']['attributes']['rel'][] = 'bookmark';
-  //$variables['title'] = l($comment->subject->value, $permalink_uri['path'], $permalink_uri['options']);
-
   // Reset submitted variable.
   if (!empty($variables['submitted'])) {
     $variables['submitted'] = t('Submitted by <address class="comment__author" rel="author">!username</address> on <time class="comment__datetime">!datetime</time>', array(
@@ -810,7 +728,7 @@ function at_core_preprocess_comment(&$variables) {
   }
 
   // Remove clearfix, we add this in the template so themes can easily remove it.
-  $variables['attributes']['class'] = array_values(array_diff($variables['attributes']['class'], array('clearfix')));
+  //$variables['attributes']['class'] = array_values(array_diff($variables['attributes']['class'], array('clearfix')));
 
   // Assume all other classes are modifiers and are not prefixed.
   foreach ($variables['attributes']['class'] as $class) {
@@ -819,6 +737,7 @@ function at_core_preprocess_comment(&$variables) {
     }
   }
 }
+
 
 /**
  * Preprocess variables for block templates.
@@ -831,7 +750,6 @@ function at_core_preprocess_block(&$variables) {
   if (!empty($variables['label'])) {
     $variables['html_element'] = 'section';
     $variables['attributes']['class'][] = 'has-title';
-    //$variables['title_attributes']['class'][] = 'block__title';
   }
 
   // Remove login block links.
@@ -849,9 +767,8 @@ function at_core_preprocess_block(&$variables) {
       }
     }
   }
-
-  ///var_dump($variables);
 }
+
 
 /**
  * Preprocess variables for field templates.
@@ -889,18 +806,33 @@ function at_core_preprocess_field(&$variables) {
 
         // Captions.
         if ($caption_setting == 1) {
-          foreach ($variables['items'] as $key => $item) {
-            if (!empty($item['#image_style'])) {
-              $style = entity_load('image_style', $item['#image_style']);
-              $dimensions = array(
-                'width' => $item['#item']->width,
-                'height' => $item['#item']->height,
+          foreach ($variables['items'] as $delta => $item) {
+            $values = $item['content']['#item']->getValue();
+            if (!empty($values['title'])) {
+
+              //var_dump($item);
+
+              $variables['items'][$delta]['caption'] = array(
+                'show' => TRUE,
+                'title' => $values['title'],
               );
-              $style->transformDimensions($dimensions);
-              $variables['items'][$key]['#item']->image_style_width = $dimensions['width'];
-              $variables['items'][$key]['#item']->image_style_height = $dimensions['height'];
+
+              if (!empty($item['content']['#image_style'])) {
+                $style = entity_load('image_style', $item['content']['#image_style']);
+                $dimensions = array(
+                  'width' => $values['width'],    //$item['#item']->width,
+                  'height' => $values['height'],  // $item['#item']->height,
+                );
+                $style->transformDimensions($dimensions);
+                $variables['items'][$delta]['caption']['width'] = $dimensions['width'] . 'px';
+                $variables['items'][$delta]['caption']['height'] = $dimensions['height'] . 'px';
+              }
             }
-            $variables['items'][$key]['#captions'] = TRUE;
+            else {
+              $variables['items'][$delta]['caption'] = array(
+                'show' => FALSE,
+              );
+            }
           }
         }
       }
@@ -916,6 +848,7 @@ function at_core_preprocess_field(&$variables) {
   $variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
   $variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
 }
+
 
 /**
  * Preprocess variables for breadcrumb templates.
@@ -976,6 +909,7 @@ function at_core_preprocess_user(&$variables) {
   $variables['title_attributes']['class'][] = 'user__title';
 }
 
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
@@ -986,42 +920,8 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
 }
 
 
-
-
-
-/**
- * Implements hook_node_links_alter().
- */
-function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {
-/*
-  kpr($node_links);
-  kpr($node);
-  kpr($context);
-*/
-}
-
-
-
-
-
-/*
-function at_core_user_view_alter(&$build, \Drupal\user\UserInterface $account, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-  kpr($build);
-}
-*/
-
-// Check views preprocess functions we need.
-/*
-function at_core_preprocess_views_view(&$variables) {
-  //kpr($variables);
-}
-*/
-
-/**
- * Preprocess variables for user templates.
- */
-/*
-function at_core_preprocess_user(&$variables) {
-  //$variables['view_mode'] = $variables['elements']['#view_mode'];
-}
-*/
+// Functions for tests and possible future usage.
+//function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
+//function at_core_user_view_alter(&$build, \Drupal\user\UserInterface $account, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {}
+//function at_core_preprocess_views_view(&$variables) {}
+//function at_core_preprocess_user(&$variables) {}

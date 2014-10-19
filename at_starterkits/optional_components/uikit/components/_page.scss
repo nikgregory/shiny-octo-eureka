@@ -19,6 +19,7 @@ body {
   background-color: $page-row-navbar-background-color;
 }
 
+
 * {
   @include box-sizing(border-box);
 }
@@ -32,6 +33,7 @@ body {
   position: relative;
   background-color: $background-color;
 }
+
 
 /**
  * Page Rows - these match the Site Builder layout.
@@ -47,10 +49,12 @@ body {
   @include output-rhythm(padding, $regions-padding 0);
 }
 
+
 // Animate regions for that app effect :)
 .region {
   @include transition(all, .2s, ease-in);
 }
+
 
 // Header
 .page-row__header {
@@ -206,7 +210,11 @@ ul {
 }
 
 
-
+.attribution {
+  background-color: $page-row-navbar-background-color;
+  @include adjust-font-size-to($small);
+  text-align: center;
+}
 
 
 

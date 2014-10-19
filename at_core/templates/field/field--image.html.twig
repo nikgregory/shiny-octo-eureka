@@ -1,7 +1,8 @@
 {#
 /**
  * @file
- * Default theme implementation for a field.
+ * Adaptivetheme implementation for an image field.
+ * AT can print captions on images, see your theme settings.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -21,11 +22,11 @@
  * - title_attributes: HTML attributes for the title.
  * - label: The label for the field.
  * - content_attributes: HTML attributes for the content.
- * - items: List of all the field items.
- * - item_attributes: List of HTML attributes for each item.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
  *
  * @see template_preprocess_field()
- * @see theme_field()
  *
  * @ingroup themeable
  */
@@ -33,10 +34,16 @@
 <div{{ attributes }}>
 
   {% for delta, item in items %}
-    <figure role="group">
-      {{ item }}
-      {% if item['#item'].title and item['#captions'] == true %}
-        <figcaption property="schema:description" style="max-width:{{ item['#item'].image_style_width }}px">{{ item['#item'].title }}</figcaption>
+    {% if item.caption.show == true %}
+      <figure{{ item.attributes.addClass.addClass('image-count-' ~ (delta + 1)) }} role="group" style="max-width:{{ item.caption.width }}">
+    {% else %}
+      <figure{{ item.attributes.addClass.addClass('image-count-' ~ (delta + 1)) }} role="group">
+    {% endif %}
+
+      {{ item.content }}
+
+      {% if item.caption.show == true %}
+        <figcaption property="schema:description">{{ item.caption.title }}</figcaption>
       {% endif %}
     </figure>
   {% endfor %}

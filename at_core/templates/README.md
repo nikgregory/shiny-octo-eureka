@@ -10,11 +10,11 @@ If you manually create a sub-theme you can pick and choose which templates you w
 
 ## Developing with Twig
 
-Please see your sites settings.php file, there are three important settings you can uncomment to aid in twig template editing:
+Please see your sites services.yml file, there are three important settings you can modify to aid in twig template editing:
 
-$settings['twig_debug'] = TRUE;
-$settings['twig_auto_reload'] = TRUE;
-$settings['twig_cache'] = FALSE;
+  debug: false
+  auto_reload: null
+  cache: true
 
 The final two of these are most useful when making a lot of changes to templates - normally changes will not show until you clear the sites cache.
 

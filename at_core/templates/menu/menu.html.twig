@@ -1,7 +1,10 @@
 {#
 /**
  * @file
- * Default theme implementation to display a menu.
+ * Adaptivetheme implementation to display a menu.
+ * AT adds extra classes including menu-level, and odd
+ * even classes for granular theming of nested menus where
+ * nth-child() or other pseudo classes are tricky.
  *
  * Available variables:
  * - menu_name: The machine name of the menu.
@@ -27,9 +30,9 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('menu menu-level-0') }}>
+      <ul{{ attributes.addClass('menu', 'odd' ,'menu-level-1') }}>
     {% else %}
-      <ul class="menu {{ 'menu-level-' ~ menu_level }}">
+      <ul class="menu {{ cycle(["odd", "even"], menu_level) }} {{ 'menu-level-' ~ (menu_level + 1) }}">
     {% endif %}
       {% for item in items %}
         {% spaceless %}

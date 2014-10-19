@@ -27,33 +27,38 @@ $local-task-border-radius:           $border-radius;
 
 
 /* Local task tabs, e.g. node View Edit Delete etc */
-.local-tasks--menu {
+
+.tabs {
   padding: 0;
   list-style: none;
   @include output-rhythm(margin, $medium 0);
-
-  // Using attribute selectors adds specificity, so normal ul padding
-  // overrides .tabs padding and margin etc.
-  @at-root {
-    [dir="rtl"] .local-tasks--menu {
-      margin: 0;
-      padding: 0;
-    }
-  }
+  @include clearfix-micro;
 
   li {
-    display: inline-block;
+    display: block;
+    float: left; // LTR
+    @include font-size($medium);
   }
 
   a {
     display: block;
     line-height: 1;
   }
+
+  @at-root {
+    [dir="rtl"] .tabs {
+      padding: 0;
+
+      li {
+        float: right;
+      }
+    }
+  }
 }
 
 
 // Primary local tasks
-.local-tasks__primary {
+.tabs.primary {
   border-bottom: $local-task-border-width $local-task-border-style $local-task-border-color;
 
   li {
@@ -98,7 +103,7 @@ $local-task-border-radius:           $border-radius;
     }
   }
 
-  @at-root [dir="rtl"] .local-tasks__primary {
+  @at-root [dir="rtl"] .tabs.primary {
     a {
       margin-left: -1px;
       margin-right: 0;
@@ -117,7 +122,7 @@ $local-task-border-radius:           $border-radius;
 
 
 // Secondary local tasks
-.local-tasks__secondary {
+.tabs.secondary {
   li {}
 
   a {
@@ -132,4 +137,25 @@ $local-task-border-radius:           $border-radius;
     @include output-rhythm(padding, $medium 0 0 $medium);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

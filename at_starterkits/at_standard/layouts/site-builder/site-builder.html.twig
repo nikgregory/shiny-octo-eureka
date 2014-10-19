@@ -5,8 +5,16 @@
 
   {% if messages__regions.active == true %}
   <div{{ messages__attributes }}>
-    <div class="regions regions__messages">
+    <div class="regions">
       {{ page.messages }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if leaderboard__regions.active == true %}
+  <div{{ leaderboard__attributes }}>
+    <div class="regions">
+      {{ page.leaderboard }}
     </div>
   </div>
   {% endif %}
@@ -20,18 +28,10 @@
   </header>
   {% endif %}
 
-  {% if menubar__regions.active == true %}
-  <div{{ menubar__attributes }}>
+  {% if navbar__regions.active == true %}
+  <div{{ navbar__attributes }}>
     <div class="regions">
-      {{ page.menubar }}
-    </div>
-  </div>
-  {% endif %}
-
-  {% if messages__regions.active == true %}
-  <div{{ messages__attributes }}>
-    <div class="regions">
-      {{ page.messages }}
+      {{ page.navbar }}
     </div>
   </div>
   {% endif %}
@@ -74,4 +74,6 @@
     </div>
   </footer>
   {% endif %}
+
+  {{ attribution }}
 </div>

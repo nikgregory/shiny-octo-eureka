@@ -1,17 +1,21 @@
 // Full Stack UI Kit, compiles to css/styles.css
 
-// Requirements.
-@import
-  "compass",
-  'modular-scale';
+// Layouts base. By default this takes the site-builder plugin
+// base so we can use it's susy container and all susy-panels.
+@import "site_builder_base";
 
+// Uncomment compass if you remove "site_builder_base".
+//@import "compass";
+
+// We use modular scale to set variables for font sizes,
+// line-height, margin, padding etc.
+@import 'modular-scale';
 
 // UI Kit Base.
 @import
-  "components/utility",
   "components/variables",
+  "components/utility",
   "components/normalize";
-
 
 // UI Kit Styles.
 @import
@@ -29,24 +33,17 @@
   "components/tabs",
   "components/buttons",
   "components/labels",
-  "components/images";
-
-
-// Drupaly things.
-@import
+  "components/images",
   "components/branding",
-  "components/local-tasks",
   "components/field",
   "components/block",
   "components/book",
   "components/forum",
   "components/node",
   "components/comment",
-  "components/poll",
   "components/search",
   "components/user-profile",
   "components/views";
-
 
 // Print styles.
 @import "components/print";

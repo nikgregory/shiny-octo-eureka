@@ -33,7 +33,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_icon_path_d
   '#type' => 'textfield',
   '#title' => t('Default: 60x60'),
   '#description' => t('If you only enter a path for this size it will be used by all devices.'),
-  '#field_prefix' => $theme_name . '/',
+  '#field_prefix' => $theme . '/',
   '#default_value' => String::checkPlain(theme_get_setting('settings.icon_path_default')),
   '#states' => array(
     'required' => array('input[name="enable_apple_touch_icons"]' => array('checked' => TRUE)),
@@ -45,7 +45,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#type' => 'textfield',
   '#title' => t('iPad: 76x76'),
   '#description' => t('Apple touch icon for older iPads with standard displays.'),
-  '#field_prefix' => $theme_name . '/',
+  '#field_prefix' => $theme . '/',
   '#default_value' => String::checkPlain(theme_get_setting('settings.apple_touch_icon_path_ipad')),
 );
 
@@ -54,7 +54,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#type' => 'textfield',
   '#title' => t('iPhone Retina: 120x120'),
   '#description' => t('Apple touch icon for iPhones with retina displays.'),
-  '#field_prefix' => $theme_name . '/',
+  '#field_prefix' => $theme . '/',
   '#default_value' => String::checkPlain(theme_get_setting('settings.apple_touch_icon_path_iphone_retina')),
 );
 
@@ -63,7 +63,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#type' => 'textfield',
   '#title' => t('iPad Retina: 152x152'),
   '#description' => t('Apple touch icon for iPads with retina displays.'),
-  '#field_prefix' => $theme_name . '/',
+  '#field_prefix' => $theme . '/',
   '#default_value' => String::checkPlain(theme_get_setting('settings.apple_touch_icon_path_ipad_retina')),
 );
 
