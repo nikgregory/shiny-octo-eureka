@@ -1,9 +1,7 @@
 /**
- * Fields.
- * - By default we pretty much stick to field-type and field element styles (such as
- *   .field-label's). You could style specific instances of fields here, or do that
- *   in an entity stylesheet, for example _node.scss.
- */
+ * Fields
+ *  - Note that AT changes field image and taxonomy term reference fields.
+ ========================================================================== */
 
 $field-taxonomy-as-labels: false;
 $field-taxonomy-icons:     false;
@@ -46,10 +44,6 @@ $field-taxonomy-icons:     false;
 
 
 /**
- * Field types (Core)
- */
-
-/**
  * Image fields use the <figure> and <figcaption> elements from HTML5
  */
 
@@ -67,9 +61,9 @@ $field-taxonomy-icons:     false;
   /**
    * Image Alignment Theme Settings
    * - settings are applied using the Image extension in theme settings, where you can
-   *   set image alignment per node type and view mode.
+   *   set image alignment and captions per node type and view mode.
    */
-  // Possible LTR/RTL issue here.
+  // TODO LTR/RTL issue here.
   &.field-align--none figure,
   &.field-align--left figure {
     @include output-rhythm(margin, 5px $medium $medium 0);
@@ -143,7 +137,6 @@ $field-taxonomy-icons:     false;
         content: "\f02b"; // fa-tag
         display: inline-block;
         @include output-rhythm(margin, 0 $small 0 0); // LTR
-        speak: none; // not well supported but we have it in case it is and the font is not using the PUA.
       }
     }
 

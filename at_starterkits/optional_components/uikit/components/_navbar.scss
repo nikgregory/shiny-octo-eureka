@@ -1,24 +1,16 @@
 /**
- * Navigation.
- *  - navbar menu
- *  - drop menu
- *
- * Maybe dependant on the Menu twig patch: https://drupal.org/node/1898478
- */
+ * Navbar
+ *  - navbar often require special styling to support menu styles. By default
+ *    AT uses a CSS3 dropmenu. Place a standard menu block in the navbar
+ *    region and set levels to expanded and these will be dropdowns.
+ ========================================================================== */
 
-$navbar-menu-background:    $page-row-navbar-background-color;
-
-$navbar-item-border-width:  $border-width;
-$navbar-item-border-style:  $border-style;
-$navbar-item-border-color:  $border-color;
-$navbar-item-border-radius: $border-radius;
-
+// Global styles for the navbar region.
 .region__navbar {
-  background: $navbar-menu-background;
+  background: inherit;
 
   .menu {
     position: relative;
-    font-size: 0; // remove extra margin added by using inline-block on li
 
     > li {
       z-index: 100;
@@ -29,7 +21,7 @@ $navbar-item-border-radius: $border-radius;
         &:hover,
         &:focus {
           text-decoration: none;
-          background: lighten($navbar-menu-background, 3%);
+          background: lighten($navbar-menu-background, $lighten);
         }
       }
     }
@@ -47,12 +39,12 @@ $navbar-item-border-radius: $border-radius;
   }
 }
 
-@media #{$mobile-wide} {
 
-  // Basic styles for mobile.
+// Mobile to tablet sizes.
+@media #{$mobile-tablet} {
+
   .region__navbar {
-
-    // Nuke contextual links in mobile view.
+    // Remove contextual links, they can get in the way of responsive menu styles.
     .contextual-region {
       position: static !important;
       .contextual {
@@ -60,263 +52,50 @@ $navbar-item-border-radius: $border-radius;
       }
     }
 
-    .menu {
-      li {
-        a:after {
-          content: '';
-        }
-        ul {
-          @include output-rhythm(padding, 0);
+    // Set custom styles for each menu type, such as colors, backgrounds etc.
+    .menu-style-slidedown {}
+    .menu-style-offcanvas {}
 
-          ul {
-            @include output-rhythm(padding, 0 0 0 $medium); // LTR
-          }
-
-          a {
-            @include output-rhythm(padding, $xx-small);
-
-            &:after {
-              font-family: FontAwesome, sans-serif;
-              float: left; // LTR
-              @include output-rhythm(padding, 0 $large 0 0);
-              text-align: right; // LTR
-              content: "\f105"; // LTR
-              @include output-rhythm(width, $medium);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .menu-style-tile {
-    .region__navbar {
-      .block-menu__title {
-        @include visually-hidden;
-      }
+    .menu-style-tiles {
       .block-menu__content {
-        // do nothing?
-      }
-    }
-  }
-
-  // Toggle links styles for slidedown and offcanvas styles.
-  .menu-style-slidedown,
-  .menu-style-offcanvas {
-    .region__navbar {
-      .block-menu__title {
-        @include adjust-font-size-to($medium);
         @include output-rhythm(padding, $xx-small 0);
-        cursor: pointer;
+      }
 
-        &:after {
-          font-family: FontAwesome, sans-serif;
-          content: "\f0c9";
-          @include output-rhythm(width, $medium);
+      .menu-level-1 {
+        > li {
+          //border: $responsive-item-border-width $responsive-item-border-style $responsive-item-border-color;
+          //@include border-radius($responsive-item-border-radius);
+          @include output-rhythm(margin, $xx-small 0);
         }
       }
-    }
-  }
-
-  // Slidedown styles.
-  .menu-style-slidedown {
-    .region__navbar {
-      .block-menu__title {
-        &:after {
-          float: right; // LTR
-          text-align: right; // LTR
-        }
-      }
-      .block-menu__content {
-        @include visually-hidden;
-        @include opacity(.3);
-        @include transition(all, .2s, ease);
-      }
-    }
-    &.menu-expanded .region__navbar {
-      .block-menu__content {
-        @include visually-hidden-off;
-        @include opacity(1);
-        @include output-rhythm(padding, 0 0 $xx-small);
-      }
-    }
-  }
-
-  // Off canvas styles.
-  // Set to 240px width, adjust to suit your theme.
-  .menu-style-offcanvas {
-    .region__navbar {
-      .block-menu__content {
-        position: absolute;
-        top: 0;
-        @include output-rhythm(padding, 0 0 $xx-small);
-        @include visually-hidden;
-      }
-    }
-
-    .page-root {
-      @include transition(all, .2s, ease-in-out);
-    }
-
-   // off left
-    &.offcanvas-left .region__navbar {
-      .block-menu__title {
-        &:after {
-          float: left; // LTR
-          text-align: left; // LTR
-          @include output-rhythm(margin, -1px $small 0 0);
-        }
-      }
-      .block-menu__content {
-        left: 0;
-        @include transform(translate3d(-240px, 0, 0));
-      }
-    }
-
-    // off right
-    &.offcanvas-right .region__navbar {
-      .block-menu__title {
-        text-align: right;
-        &:after {
-          float: right;
-          text-align: right;
-          @include output-rhythm(margin, -1px 0 0 $small);
-        }
-      }
-      .block-menu__content {
-        right: 0;
-        @include transform(translate3d(240px, 0, 0));
-      }
-    }
-
-    &.menu-expanded {
-      .page-root {
-        position: fixed;
-
-        .block-menu__content {
-          clip: auto;
-          overflow: visible;
-          height: auto;
-          font-family: inherit;
-          width: 240px;
-        }
-      }
-    }
-
-    // on left
-    &.menu-expanded.offcanvas-left .page-root {
-      @include transform(translate3d(240px, 0, 0));
-      position: fixed;
-    }
-
-    // on right
-    &.menu-expanded.offcanvas-right .page-root {
-      @include transform(translate3d(-240px, 0, 0));
     }
   }
 }
 
-@media #{$wide} {
+
+// Widescreen and up.
+@media #{$widescreen} {
+
   .region__navbar {
      background: $navbar-menu-background;
 
     .block-menu__title {
-      @include visually-hidden;
+      @include visually-hidden; // Always hide titles in widescreen.
     }
-  }
 
-  .region__navbar {
-    background: $navbar-menu-background;
+    // Drop menu mixin
+    @include dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true);
 
-    .menu-level-1 {
-      position: relative;
-      font-size: 0; // remove extra margin added by using inline-block on li
-
-      > li {
-        text-align: center;
-        border-left: 1px dotted rgba(255,255,255,0.3);
-
-        &:last-child {
-          border-right: 1px dotted rgba(255,255,255,0.3);
-        }
-
-        a {
-          &:hover,
-          &:focus {}
-        }
-      }
-
+    // The dropmenu mixin gives the bahaviour and basic styles, we have to add
+    // things like borders or override things like the hover colors, or hack the
+    // mixin directly, or just copy past the entire contents into a selector.
+    .block-menu__content {
       li {
-        float: left;
-        width: 12em; // adjust width to suit requirements.
+        text-align: center;
 
-        &.collapsed > a:after {
-          content: '';
+        &.expanded li {
+          text-align: left;
         }
-
-        ul {
-          @include visually-hidden;
-          @include opacity(.3);
-          @include transition(all, .2s, ease);
-
-          li {
-            text-align: left; // LTR
-            background: lighten($navbar-menu-background, 3%);
-
-            &:hover,
-            &:focus {
-              background: lighten($navbar-menu-background, 5%);
-            }
-          }
-        }
-
-        &:hover > ul,
-        &:focus > ul {
-          display: block;
-          opacity: 1;
-          clip: auto;
-          overflow: visible;
-          height: auto;
-          width: auto;
-          font-family: inherit;
-        }
-      }
-    }
-
-    .odd {
-
-      // Down
-      ul {
-        left: 0;
-        top: auto;
-
-        //> li {background-color: pink;}
-
-        > .expanded > a:after {
-          content: "\f105"; // In the down UL, li items with sub-menus have right pointing arrows.
-        }
-
-        // Accross
-        .odd {
-          left: 100%;
-          top: 0;
-
-          //> li {background-color: yellow;}
-
-          > .expanded > a:after {
-            content: "\f107"; // In the flyout UL, li items with sub-menus have down pointing arrows.
-          }
-        }
-      }
-    }
-
-    a {
-      @include output-rhythm(padding, $xx-small $large);
-      position: relative;
-
-      &:after {
-        position: absolute;
-        right: $medium;
       }
     }
   }

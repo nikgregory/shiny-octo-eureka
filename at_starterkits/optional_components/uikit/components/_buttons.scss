@@ -1,32 +1,20 @@
 /**
  * Buttons
- * - applies to elements with class "button", includes styles for:
- *   - input buttons
- *   - anchor links styled as buttons
- *   - drop buttons
- *   - action link buttons
- */
-
-$button-text-align:              center;
-
-$button-text-color:              $text-color;
-$button-text-hover-color:        $text-color;
-
-$button-background-color:        lighten($text-background-color, 5%);
-$button-background-hover-color:  $text-background-color;
-
-$button-border-width:            $border-width;
-$button-border-style:            $border-style;
-$button-border-color:            $border-color;
-$button-border-radius:           $border-radius;
-
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
 
 /* Buttons */
 .button {
   cursor: pointer;
+  white-space: nowrap;
 
   line-height: normal;
   text-decoration: none;
+
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
 
@@ -36,7 +24,6 @@ $button-border-radius:           $border-radius;
   width: auto;
   display: inline-block;
   position: relative;
-  margin: 0 3px 0 0; // LTR
 
   border: $button-border-width $button-border-style $button-border-color;
 
@@ -45,10 +32,10 @@ $button-border-radius:           $border-radius;
   @include transition(background-color, .15s, ease-in-out);
   @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
 
-
   &:hover,
   &:focus {
-    background-color: darken($button-background-color, 3%);
+    background-color: darken($button-background-color, $darken);
+    text-decoration: none;
   }
 
   &[disabled] {
@@ -57,34 +44,22 @@ $button-border-radius:           $border-radius;
     @include box-shadow(none);
 
     &:hover {
-      color: darken($button-text-color, 2%);
+      color: darken($button-text-color, $darken);
     }
   }
 
   // RTL
-  @at-root [dir="rtl"] .button {
-    margin: 0 0 0 3px;
-  }
-}
-
-
-// Extend only class for primary, action button and "publish" dropbutton styles,
-// or for any other button that needs highlighting on the page.
-%highlight_button {
-  color: #fff;
-  background: #9DC44D;
-  border-color: #5B8829;
-
-  &:hover,
-  &:focus {
-    background-color: darken(#9DC44D, 10%);
-  }
+  @at-root [dir="rtl"] .button {}
 }
 
 // Primary button
 .button--primary {
-  // Set distinct colors.
-  @extend %highlight_button;
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+}
+
+// Danger button, e.g. delete buttons often have this class.
+.button--danger {
+  @include button-variant($error-text-color, $error-background-color, $error-border-color);
 }
 
 
@@ -98,13 +73,13 @@ $button-border-radius:           $border-radius;
 .js .dropbutton-wrapper {
   display: block;
   min-height: 2em;
-  margin-right: 3px; // LTR
+  margin-right: 4px; // LTR
   position: relative;
 }
 
 [dir="rtl"] .js .dropbutton-wrapper {
   margin-right: 0;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 
 .dropbutton {
@@ -146,34 +121,42 @@ $button-border-radius:           $border-radius;
 }
 
 // Dropbutton Multiple
-.dropbutton-multiple .dropbutton {
-  border-right: $button-border-width $button-border-style $button-border-color;
+.dropbutton-multiple {
+  .dropbutton {
+    border-right: $button-border-width $button-border-style $button-border-color;
 
- .dropbutton-action > * {
-    margin-right: 0;
-    border: 0;
-  }
+   .dropbutton-action > * {
+      margin-right: 0;
+      border: 0;
+    }
 
-  .dropbutton-action .button {
-    @include border-radius($button-border-radius 0 0 $button-border-radius);
-  }
+    .dropbutton-action .button {
+      @include border-radius($button-border-radius 0 0 $button-border-radius);
+    }
 
-  .publish {
-    .button {
-      // Set distinct colors.
-      @extend %highlight_button;
+    .publish {
+      .button {
+        width: 100%;
+        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+      }
+    }
+
+    // RTL
+    @at-root [dir="rtl"] {
+      .dropbutton-multiple .dropbutton {
+        border-left: $button-border-width $button-border-style $button-border-color;;
+        border-right: 0;
+
+        .dropbutton-action > * {
+          margin-left: 0;
+        }
+      }
     }
   }
 
-  // RTL
-  @at-root [dir="rtl"] {
-    .dropbutton-multiple .dropbutton {
-      border-left: $button-border-width $button-border-style $button-border-color;;
-      border-right: 0;
-
-      .dropbutton-action > * {
-        margin-left: 0;
-      }
+  &.open {
+    .dropbutton-action .button {
+      @include border-radius($button-border-radius 0 0 0);
     }
   }
 }
@@ -199,6 +182,7 @@ label button.link {
 /**
  * Styles for link buttons and action links. TODO.
  */
+/*
 #block-atblocksmenuactions {
   @include output-rhythm(margin, $medium 0);
 
@@ -217,7 +201,7 @@ label button.link {
     margin: 0 $small;
 
     &:first-child {
-      margin-left: 0; /* LTR */
+      margin-left: 0; // LTR
     }
   }
 
@@ -227,18 +211,12 @@ label button.link {
     margin-right: 0;
   }
 }
+*/
 
 
 // Action button
 .button-action {
-
-  // Set distinct colors.
-  @extend %highlight_button;
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
 
   &:before {
     content: '\f067';

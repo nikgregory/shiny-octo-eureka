@@ -4,7 +4,7 @@
 // ---------------------------------------------------------------------------
 
 // Import base.
-@import "site_builder_base";
+@import "site-builder-base";
 
 
 // Set the Susy container on .regions, this controls the max-width. The
@@ -12,18 +12,12 @@
 // the max-width of a group of regions, while the main row wrapper is always
 // full width.
 .regions {
-  @include container();
-}
-
-// Apply a micro clearfix globally, this ensures dynamic height content
-// does not disrupt the layout in unexpected ways.
-.regions,
-.region {
-  @include clearfix-micro;
+  @include container($site-builder);
 }
 
 
 // We need some padding to avoid browser chrome collisions.
 [class*="page-row__"] {
-  padding: 0 gutters();
+  //padding: 0 gutters();
+  padding: 0 1.25em;
 }

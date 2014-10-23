@@ -29,6 +29,10 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $at_core_path  = drupal_get_path('theme', 'at_core');
   $subtheme_path = drupal_get_path('theme', $theme);
 
+  // Get the active themes regions so we can use this in
+  // various other places.
+  $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
+
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
     'library' => array(

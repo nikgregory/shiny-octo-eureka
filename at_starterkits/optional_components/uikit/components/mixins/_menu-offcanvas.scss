@@ -1,0 +1,97 @@
+
+
+// Off Canvas
+//
+// Do NOT @include into a selector, these must apply to the body element where
+// classes are set for the offcanvas animation (uses CSS3 translate).
+// The idea is that you @include into a breakpoint, so an oridinary menu/dropmenu
+// will be offcanvas style in small screens.
+
+@mixin offcanvas($offcanvas-width: 240px) {
+  .menu-style-offcanvas {
+    .responsive-menu-region {
+      .block-menu__title {
+        @include adjust-font-size-to($medium);
+        @include output-rhythm(padding, $xx-small 0);
+        cursor: pointer;
+
+        &:after {
+          font-family: FontAwesome, sans-serif;
+          content: "\f0c9";
+          @include output-rhythm(width, $medium);
+        }
+      }
+
+      .block-menu__content {
+        position: absolute;
+        top: 0;
+        @include output-rhythm(padding, 0 0 $xx-small);
+        @include visually-hidden;
+      }
+    }
+
+    .page-root {
+      @include transition(all, .2s, ease-in-out);
+    }
+
+   // off left
+    &.offcanvas-left .responsive-menu-region {
+      .block-menu__title {
+        &:after {
+          float: left; // LTR
+          text-align: left; // LTR
+          @include output-rhythm(margin, -1px $small 0 0);
+        }
+      }
+      .block-menu__content {
+        left: 0;
+        @include transform(translate3d(-$offcanvas-width, 0, 0));
+      }
+    }
+
+    // off right
+    &.offcanvas-right .responsive-menu-region {
+      .block-menu__title {
+        text-align: right;
+        &:after {
+          float: right;
+          text-align: right;
+          @include output-rhythm(margin, -1px 0 0 $small);
+        }
+      }
+      .block-menu__content {
+        right: 0;
+        @include transform(translate3d($offcanvas-width, 0, 0));
+      }
+    }
+
+    &.menu-expanded {
+      .page-root {
+        position: fixed;
+
+        .block-menu__content {
+          clip: auto;
+          overflow: visible;
+          height: auto;
+          font-family: inherit;
+          font-size: inherit;
+          width: $offcanvas-width;
+        }
+      }
+    }
+
+    // on left
+    &.menu-expanded.offcanvas-left .page-root {
+      @include transform(translate3d($offcanvas-width, 0, 0));
+      position: fixed;
+    }
+
+    // on right
+    &.menu-expanded.offcanvas-right .page-root {
+      @include transform(translate3d(-$offcanvas-width, 0, 0));
+    }
+  }
+}
+
+
+

@@ -7,12 +7,15 @@
   Drupal.behaviors.atWindowSize = {
     attach: function (context) {
       $('body', context).once('window-size-indicator', function () {
-        var $indicator = $('<div class="window-size-indicator" />').appendTo(this);
+        var $indicator_px = $('<div class="window-size-indicator wsi_px" />').appendTo(this);
+        var $indicator_em = $('<div class="window-size-indicator wsi_em" />').appendTo(this);
 
         // Bind to the window.resize event to continuously update the width.
         $(window).bind('resize.window-size-indicator', function () {
-          $indicator.text($(this).width() + 'px');
+          $indicator_px.text($(this).width() + ' px');
+          $indicator_em.text($(this).width() /16 + ' em');
         }).trigger('resize.window-size-indicator');
+
       });
     }
   };

@@ -1,0 +1,21 @@
+/**
+ * Responsive menu styles. Import into breakpoints.
+ *  - slidedown
+ *  - off canvas
+ *  - tiles
+ *
+ * Set the breakpoint and import the menu style into that breakpoint, then
+ * visit your theme settings and configure options.
+ *
+ * Responsive styles are a combination of three things:
+ *  1. Sass/CSS defined here (with breakpoints etc).
+ *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
+ *  3. Theme settings as set in your themes Advanced extention settings.
+ ========================================================================== */
+
+@media #{$mobile-tablet} {
+  @include offcanvas($offcanvas-width: 240px);
+  @include slidedown;
+  @include tiles;
+}
+

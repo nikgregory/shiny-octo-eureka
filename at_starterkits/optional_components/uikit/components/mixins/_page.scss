@@ -1,0 +1,29 @@
+// basic mixins to help styling page elements such as rows, region etc.
+
+// Small mixin to help with page background colors.
+@mixin page-row-colors($background-color, $color, $page-row-backgrounds-full-width) {
+  @if $page-row-backgrounds-full-width {
+    background-color: $background-color;
+    color: $color;
+  }
+  @else {
+    .regions {
+      background-color: $background-color;
+      color: $color;
+    }
+  }
+}
+
+// The word "Unpublished" displayed on unpublished nodes and comments
+@mixin unpublished {
+  color: rgba(239, 170, 170, 0.4);
+  font-family: $impact;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 10px 0;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}

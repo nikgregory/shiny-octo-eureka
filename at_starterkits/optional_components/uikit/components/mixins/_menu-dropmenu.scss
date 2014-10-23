@@ -1,0 +1,108 @@
+//
+// CSS only Drop menus.
+// Like most mixins in the UIKit you can and should hack the mixin to suit your design.
+//
+@mixin dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true) {
+
+  .block-menu {
+    background: $drop-menu-background;
+
+    a {
+      @include output-rhythm(padding, $xx-small $large);
+      position: relative;
+
+      &:after {
+        position: absolute;
+        $flow-to: $medium;
+      }
+    }
+
+    .menu-level-1 {
+      position: relative;
+
+      > li {
+        &:first-child {}
+        &:last-child {}
+
+        a {
+          &:hover,
+          &:focus {}
+        }
+      }
+
+      li {
+        float: $flow-from; // LTR
+        width: $dropmenu-item-width;
+
+        &.expanded > a:after {
+          @if $dropmenu-arrows == true {
+            content: "\f107";
+          }
+        }
+
+        &.collapsed > a:after {
+          content: '';
+        }
+
+        ul {
+          @include visually-hidden;
+          @include opacity(.3);
+          @include transition(all, .2s, ease);
+
+          li {
+            background: lighten($drop-menu-background, $lighten);
+
+            &:hover,
+            &:focus {
+              background: lighten($drop-menu-background, $lighten-more);
+            }
+          }
+        }
+
+        &:hover > ul,
+        &:focus > ul {
+          display: block;
+          opacity: 1;
+          clip: auto;
+          overflow: visible;
+          height: auto;
+          width: auto;
+          font-family: inherit;
+        }
+      }
+    }
+
+    .odd {
+      // Down
+      ul {
+        $flow-from: 0;
+        top: auto;
+        //> li {background-color: pink;}
+
+        > .expanded > a:after {
+          @if $dropmenu-arrows == true {
+            content: "\f105"; // In the down UL, li items with sub-menus have right pointing arrows.
+          }
+        }
+
+        // Accross
+        .odd {
+          $flow-from: 100%; // LTR
+          top: 0;
+          //> li {background-color: yellow;}
+
+          > .expanded > a:after {
+            @if $dropmenu-arrows == true {
+              content: "\f107"; // In the flyout UL, li items with sub-menus have down pointing arrows.
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+

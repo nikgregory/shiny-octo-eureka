@@ -1,0 +1,148 @@
+//
+// List items as buttons and button groups.
+//
+// By default these inherit most button global styles, e.g. if you set
+// $button-border-width in variables.scss it will apply here unless
+// overridden in the file you are calling the mixin from.
+//
+
+
+//
+// List items as buttons.
+//
+@mixin list-style-buttons($list_selector) {
+
+  #{$list_selector} {
+    @include list-horizontal($margin: (t: 0, r: $xxxx-small, b: 0, l: 0));  // LTR
+
+    li {
+
+      a {
+        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+
+        border-width: $button-border-width;
+        border-style: $button-border-style;
+
+        text-align: $button-text-align;
+        text-decoration: none;
+        font-weight: $font-weight-normal;
+        line-height: 1;
+
+        width: auto;
+        display: block;
+        position: relative;
+
+        @include output-rhythm(padding, $xx-small $medium);
+        @include border-radius($button-border-radius);
+        @include transition(background-color, .15s, ease-in-out);
+        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+      }
+    }
+  }
+
+  // Use .page-root to increase the specificity as a safety margin.
+  @at-root [dir="rtl"] .page-root #{$list_selector} {
+    @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: $xxxx-small));
+  }
+}
+
+
+//
+// List items as a buttons-group, horizontal.
+//
+@mixin list-style-button-group-horizontal($list_selector) {
+
+  #{$list_selector} {
+    @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
+
+    li {
+      // LTR, RTL
+      @if $flow-from == left {
+        &:first-child a {
+          @include border-radius($button-border-radius 0 0 $button-border-radius);
+        }
+        &:last-child a {
+          @include border-radius(0 $button-border-radius $button-border-radius 0);
+        }
+      }
+      @else if $flow-from == right {
+        &:first-child a {
+          @include border-radius(0 $button-border-radius $button-border-radius 0);
+        }
+        &:last-child a {
+          @include border-radius($button-border-radius 0 0 $button-border-radius);
+        }
+      }
+
+      a {
+        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+
+        border-width: $button-border-width;
+        border-style: $button-border-style;
+
+        margin-#{$flow-to}: -$tab-border-width;  // LTR, RTL
+
+        text-align: $button-text-align;
+        text-decoration: none;
+        font-weight: $font-weight-normal;
+        line-height: 1;
+
+        width: auto;
+        display: block;
+        position: relative;
+
+        @include output-rhythm(padding, $xx-small $medium);
+        @include transition(background-color, .15s, ease-in-out);
+        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+      }
+    }
+  }
+}
+
+
+//
+// List items as a buttons-group, vertically.
+//
+@mixin list-style-button-group-vertical($list_selector) {
+
+  #{$list_selector} {
+    padding: 0;
+    @include no-bullets;
+    @include clearfix-micro;
+
+    li {
+      &:first-child a {
+        @include border-radius($button-border-radius $button-border-radius 0 0);
+      }
+      &:last-child a {
+        @include border-radius(0 0 $button-border-radius $button-border-radius);
+      }
+
+      a {
+        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+
+        border-width: $button-border-width;
+        border-style: $button-border-style;
+
+        margin-bottom: -$tab-border-width;
+
+        text-align: $flow-from;
+        text-decoration: none;
+        font-weight: $font-weight-normal;
+        line-height: 1;
+
+        width: auto;
+        display: block;
+        position: relative;
+
+        @include output-rhythm(padding, $xx-small $medium);
+        @include transition(background-color, .15s, ease-in-out);
+        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+      }
+    }
+  }
+}
+
+
+
+

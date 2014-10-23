@@ -1,8 +1,8 @@
 /**
- * Images/Media.
- */
+ * Images/Media
+ ========================================================================== */
 
-/* Flexible images */
+// Flexible images
 img {
   height: auto;
   line-height: 0;
@@ -10,13 +10,26 @@ img {
   display: inline-block;
 }
 
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
+
+// Remove the gap between images, videos, audio and canvas and the bottom of
+// their containers: h5bp.com/i/440
 audio,
 canvas,
 img,
 video {
   vertical-align: middle;
+}
+
+
+// Set styles for Drupal core data-align classes.
+img.align-left {
+  @include output-rhythm(margin, $xx-small $medium $medium 0);
+}
+
+img.align-right {
+  @include output-rhythm(margin, $xxxx-small 0 $medium $medium);
+}
+
+img.align-center {
+  @include output-rhythm(margin, $xxxx-small auto $medium);
 }

@@ -1,22 +1,7 @@
 /**
  * Messages
- */
-
-// Success (status)
-$status-text:      $success-text-color;
-$status-border:     $success-border-color;
-$status-background: $success-background-color;
-
-// Warning
-$warning-text:       $warning-text-color;
-$warning-border:     $warning-border-color;
-$warning-background: $warning-background-color;
-
-// Error
-$error-text:         $error-text-color;
-$error-border:       $error-border-color;
-$error-background:   $error-background-color;
-
+ *  - style system messages such as status, warning and error.
+ ========================================================================== */
 
 .messages {
   word-wrap: break-word;
@@ -38,8 +23,8 @@ $error-background:   $error-background-color;
 .messages__list {
   list-style: none;
   overflow: hidden;
-  padding: $default-padding;
-  margin: $default-margin;
+  padding: 0;
+  margin: 0;
 
   &+ .messages__item {
     @include margin-leader(1, $medium);
@@ -50,12 +35,12 @@ $error-background:   $error-background-color;
 /* Success (status) */
 .messages--status,
 table tr.ok {
-  background-color: $status-background;
+  background-color: $success-background-color;
 }
 
 .messages--status,
 .ok {
-  color: $status-text;
+  color: $success-text-color;
 }
 
 .messages--status {
@@ -66,12 +51,12 @@ table tr.ok {
 /* Warning */
 .messages--warning,
 table tr.warning {
-  background-color: $warning-background;
+  background-color: $warning-background-color;
 }
 
 .messages--warning,
 .warning {
-  color: $warning-text;
+  color: $warning-text-color;
 }
 
 .messages--warning {
@@ -79,15 +64,16 @@ table tr.warning {
 }
 
 
+
 /* Error */
 .messages--error,
 table tr.error {
-  background-color: $error-background;
+  background-color: $error-background-color;
 }
 
 .messages--error,
 .error {
-  color: $error-text;
+  color: $error-text-color;
 }
 
 .messages--error {

@@ -1,8 +1,15 @@
 /**
- * Node types (content types).
- */
+ * Content Types (nodes)
+ *  - in Drupal a content type is a bunch of fields we use to enter and display
+ *    content, such as pages, blog posts, forum posts and so on. Each of those
+ *    is usually a content type you create in the Drupal admin.
+ *  - an instance of a content type (e.g. a single blog post) is called a node,
+ *    the root template is called node.html.twg and the base selector is .node {}
+ ========================================================================== */
 
-.node {}
+.node {
+  @include clearfix-micro;
+}
 
 
 // Content types

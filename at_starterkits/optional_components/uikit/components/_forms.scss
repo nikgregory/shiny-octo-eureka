@@ -1,31 +1,12 @@
 /**
- * Forms.
- * This probably seems like a lot - remember AT unsets system.theme.css and
- * gives you control over all form elements, so we have to set styles for
- * all drupals complex forms, this makes the theme totally usable in admin.
+ * Forms
+ *  - This probably seems like a lot - remember AT unsets system.theme.css and
+ *    gives you complete control over all form elements.
  *
- * - NOTES:
- *   - input type submit is treated as a 'button', see _buttons.scss
- *   - for drop buttons see _buttons.scss
- */
-
-$form-item-text-align:              center;
-
-$form-item-text-color:              lighten($text-color, 20%); // If text is #000, lighten 20% is #333
-$form-item-text-focus-color:        $text-color;
-
-$form-item-help-color:              lighten($text-color, 45%);
-
-$form-item-background-color:        #fff;
-$form-item-background-focus-color:  lighten($text-background-color, 5%);
-
-$form-item-border-width:            $border-width;
-$form-item-border-style:            $border-style;
-$form-item-border-color:            $border-color;
-$form-item-border-radius:           $border-radius;
-
-$form-item-marker-color:            #e00; // bright red, typically styles the asterisk (*) on required form fields.
-
+ * Note:
+ *  - input type submit is treated as a 'button', see _buttons.scss
+ *  - for drop buttons see _buttons.scss
+ ========================================================================== */
 
 .form-item {
   @include output-rhythm(margin, 0 0 $medium);
@@ -34,6 +15,13 @@ $form-item-marker-color:            #e00; // bright red, typically styles the as
 
 .form-actions {
   @include output-rhythm(margin, $medium 0);
+}
+
+
+// Input radios can collapse in flexible tables, yes really, in Firefox they
+// can end up being tiny little dots!
+input {
+  min-width: 13px;
 }
 
 

@@ -4,11 +4,11 @@
 // ---------------------------------------------------------------------------
 
 // Import base config and global style partials.
-@import "site_builder_global";
+@import "site-builder-global";
 
 
 /* Narrow screens only. */
-@media #{$narrow} {
+@media #{$tablet-isolate} {
 
   /* Main (4 regions) */
   .page-row__main {
@@ -18,7 +18,7 @@
 
 
 /* Narrow and wide screens (and up) */
-@media #{$narrow-wide} {
+@media #{$tablet} {
 
   /* Header (3 regions) */
   .page-row__header {
@@ -38,7 +38,7 @@
 
 
 /* Wide screens (and up). */
-@media #{$wide} {
+@media #{$widescreen} {
 
   /* Main (4 regions). The first region is the "Highlighed" region, which is always full width. */
   .page-row__main {

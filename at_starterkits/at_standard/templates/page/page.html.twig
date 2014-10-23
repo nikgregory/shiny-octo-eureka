@@ -1,7 +1,7 @@
 {#
 /**
  * Univer_66 Layout
- * Generated on: Sun, 19 Oct 14 11:06:12 +0200
+ * Generated on: Wed, 22 Oct 14 10:59:26 +0200
  */
 #}
 <div{{ attributes }}>
@@ -11,8 +11,16 @@
 
   {% if messages__regions.active == true %}
   <div{{ messages__attributes }}>
-    <div class="regions regions__messages">
+    <div class="regions">
       {{ page.messages }}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if leaderboard__regions.active == true %}
+  <div{{ leaderboard__attributes }}>
+    <div class="regions">
+      {{ page.leaderboard }}
     </div>
   </div>
   {% endif %}
@@ -34,14 +42,6 @@
   </div>
   {% endif %}
 
-  {% if messages__regions.active == true %}
-  <div{{ messages__attributes }}>
-    <div class="regions">
-      {{ page.messages }}
-    </div>
-  </div>
-  {% endif %}
-
   {% if features__regions.active == true %}
   <div{{ features__attributes }}>
     <div class="regions">
@@ -50,6 +50,12 @@
       {{ page.features_third }}
     </div>
   </div>
+  {% endif %}
+
+  {% if tabs %}
+    <div class="page-row__temporary-tabs">
+      <div class="regions">{{ tabs }}</div>
+    </div>
   {% endif %}
 
   {% if main__regions.active == true %}
@@ -81,6 +87,5 @@
   </footer>
   {% endif %}
 
-  {{ attribution|passthrough }}
-
+  {{ attribution }}
 </div>

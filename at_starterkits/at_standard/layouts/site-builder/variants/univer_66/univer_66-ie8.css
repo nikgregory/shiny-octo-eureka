@@ -1,5 +1,5 @@
 .regions {
-  max-width: 73.75em;
+  max-width: 75em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -53,7 +53,7 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
 }
 
 [class*="page-row__"] {
-  padding: 0 1.6949153%;
+  padding: 0 1.25em;
 }
 
 /* Header (3 regions) */

@@ -1,6 +1,8 @@
 /**
- * Comments.
- */
+ * Comments
+ *  - comment field (holds comment title, form, comments etc)
+ *  - styles for comments
+ ========================================================================== */
 
 // Typically comments are attached to nodes - this is the main
 // wrapper around comments and the comment form in nodes, on
@@ -14,7 +16,9 @@
 
 
 // Comments are articles, they all have the base class of .comment:
-.comment {}
+.comment {
+  @include clearfix-micro;
+}
 
 
 // Author based classes.

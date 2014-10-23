@@ -1,12 +1,15 @@
 /**
- * Typography.
- */
+ * Type
+ *  - styles most typographic related html elements.
+ *  - adds pre-styled selectors for lists.
+ *  - also includes misc other elements such as hr.
+ ========================================================================== */
 
 body {
   color: $text-color;
 }
 
-/* Headings */
+// Headings.
 #{headings(all)} {
   margin: 0;
 }
@@ -28,32 +31,21 @@ body {
  * to generate font sizes in em and set a relative line-height.
  * SEE: _variables.scss
  */
-h1 {
-  @include adjust-font-size-to($xxx-large);
-}
+h1, .h1 {@include adjust-font-size-to($xxx-large)}
+h2, .h2 {@include adjust-font-size-to($xx-large)}
+h3, .h3 {@include adjust-font-size-to($x-large)}
+h4, .h4 {@include adjust-font-size-to($large)}
+h5, .h5 {@include adjust-font-size-to($medium)}
+h6, .h6 {@include adjust-font-size-to($small)}
 
-h2 {
-  @include adjust-font-size-to($xx-large);
-}
-
-h3 {
-  @include adjust-font-size-to($x-large);
-}
-
-h4 {
-  @include adjust-font-size-to($large);
-}
-
-h5 {
-  @include adjust-font-size-to($medium);
-}
-
-h6 {
-  @include adjust-font-size-to($small);
-}
+// Using the small element to control font size, and idea lifted from Bootstrap.
+h1 small, .h1 small {@include adjust-font-size-to($x-large)}
+h2 small, .h2 small {@include adjust-font-size-to($large)}
+h3 small, .h3 small,
+h4 small, .h4 small {@include adjust-font-size-to($medium)}
 
 
-/* Paragraph */
+// Paragraph.
 p {
   @include adjust-font-size-to($medium);
 }
@@ -66,14 +58,14 @@ multicol {
 }
 
 
-/* Links */
+// Links.
 a {
   color: $link-color;
   text-decoration: none;
 
   &:link,
   &:visited {
-    color: $link-visited-color;
+    color: $link-color; // or use $link-visited-color
   }
 
   &:active,
@@ -89,16 +81,94 @@ a {
 }
 
 
-/* Lists */
+// Lists.
 ul,
 ol {
   @include output-rhythm(margin, 0 0 $medium);
   @include output-rhythm(padding, 0 0 0 $large); // LTR
+
+  @at-root [dir="rtl"] ul, [dir="rtl"] ol {
+    @include output-rhythm(padding, 0 $large 0 0);
+  }
 }
 
-[dir="rtl"] ul,
-[dir="rtl"] ol {
-  @include output-rhythm(padding, 0 $large 0 0);
+// Simple horizontal list, see: mixins/_list.scss.
+.list-horizontal {
+  @include list-horizontal();
+}
+
+
+// Simple horizontal list, see: mixins/_list.scss.
+.list-multicolumn {
+  padding: 0;
+  @include no-bullets;
+  @include clearfix-micro;
+
+  > li {
+    font-weight: $font-weight-bold;
+  }
+
+  ul, ol {
+    font-weight: $font-weight-normal;
+    padding: 0;
+  }
+}
+@media #{$tablet} {
+  @include list-multicolumn('.list-multicolumn', 12em);
+}
+
+
+// Links inline, e.g. node and comment "links".
+ul {
+  &.inline,
+  &.links.inline {
+    padding: 0;
+  }
+
+  &.inline {
+    @include list-horizontal($margin: (t: 0, r: $medium, b: 0, l: 0));
+
+    a {
+      &:hover,
+      &:focus {}
+    }
+  }
+
+  @at-root [dir="rtl"] ul.inline li {
+    margin: 0 0 0 $medium;
+  }
+}
+
+
+// Item lists are frequently used in Drupal by Views and
+// other modules that need to output a list of something,
+// sometimes with a title. We zero everything else as a
+// reset since item-lists are not usually bulletted etc.
+.item-list {
+
+  .title {}
+
+  ul,
+  ol, {
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    @include no-bullets;
+  }
+
+  a {
+    &:hover,
+    &:focus {}
+  }
+}
+
+
+// Definition lists.
+dl {
+  @include output-rhythm(margin, $medium 0);
 }
 
 dt {
@@ -107,10 +177,108 @@ dt {
 
 dd {
   @include output-rhythm(margin, 0 0 0 $medium); // LTR
+
+  @at-root [dir="rtl"] dd {
+    @include output-rhythm(margin, 0 $medium 0 0);
+  }
 }
 
-[dir="rtl"] dd {
-  @include output-rhythm(margin, 0 $medium 0 0);
+
+// Horizontal description lists, adjust the media query to suit.
+@media #{$tablet} {
+  .dl-horizontal {
+    dt {
+      float: $flow-from;
+      clear: $flow-from;
+      text-align: $flow-from;
+      width: 11em;
+
+      &:after {
+        content: ":";
+      }
+    }
+    dd {
+      margin-#{$flow-from}: 12em;
+      @include cf;
+    }
+  }
+}
+
+
+// Blockquotes, Bootstrap style.
+blockquote {
+  @include output-rhythm(padding, $medium);
+  @include output-rhythm(margin, 0 0 $medium);
+  border-#{$flow-from}: 5px solid $border-color; // RTL is border-left, i.e. $flow-from is left etc.
+
+  p {
+    @include adjust-font-size-to($large);
+    font-weight: $font-weight-light;
+
+    &:first-child {
+      margin-top: 0;
+
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: "\f10d";  // open quote
+
+        color: $border-color;
+        display: inline-block;
+        padding: 0 5px 0 0;  // LTR
+        margin: 0;
+        text-align: left;
+
+        @include output-rhythm(width, $large);
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  small {
+    display: block;
+    @include adjust-font-size-to($small);
+    color: lighten($text-color, $lighten-more);
+
+    &:before {
+      content: '\2014 \00A0';// EM DASH, NBSP
+    }
+  }
+
+  // Float right with text-align: right
+  &.pull-right {
+    padding-#{$flow-to}: gutters();
+    padding-#{$flow-from}: 0;
+    border-#{$flow-to}: 5px solid $border-color;
+    border-#{$flow-from}: 0;
+
+    p,
+    small {
+      text-align: #{$flow-to};
+    }
+
+    small {
+      &:before {
+        content: '';
+      }
+      &:after {
+        content: '\00A0 \2014';// NBSP, EM DASH
+      }
+    }
+  }
+}
+
+
+// A better looking default horizontal rule
+hr {
+  display: block;
+  height: $border-width;
+  border: 0;
+  border-top: $border-width $border-style $border-color;
+  margin: $medium 0;
+  padding: 0;
 }
 
 
@@ -120,12 +288,12 @@ dd {
  * Customize the background color to match your design.
  */
 ::-moz-selection {
-  background: #b3d4fc;
+  background: $selection-color;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: $selection-color;
   text-shadow: none;
 }
 

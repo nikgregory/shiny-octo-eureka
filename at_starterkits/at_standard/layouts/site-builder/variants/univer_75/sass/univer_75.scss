@@ -4,11 +4,11 @@
 // ---------------------------------------------------------------------------
 
 // Import base config and global style partials.
-@import "site_builder_global";
+@import "site-builder-global";
 
 
 /* Narrow screens only. */
-@media #{$narrow} {
+@media #{$tablet-isolate} {
 
   /* Header (2 regions) */
   .page-row__header {
@@ -33,11 +33,11 @@
 
 
 /* Narrow and wide screens (and up) */
-@media #{$narrow-wide} {}
+@media #{$tablet} {}
 
 
 /* Wide screens (and up). */
-@media #{$wide} {
+@media #{$widescreen} {
 
   /* Header (2 regions) */
   .page-row__header {

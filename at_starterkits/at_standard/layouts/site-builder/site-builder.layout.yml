@@ -21,7 +21,7 @@ rows:
       role: region
       id: leaderboard
     regions:
-      messages: 'Leaderboard'
+      leaderboard: 'Leaderboard'
   header:
     attributes:
       role: banner

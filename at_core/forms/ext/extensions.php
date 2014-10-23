@@ -102,14 +102,13 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_custom_css'] = array
 $form['ext']['ext_settings']['enable_ext']['settings_enable_markup_overrides'] = array(
   '#type' => 'checkbox',
   '#title' => t('Markup overrides'),
-  '#description' => t('Many additional options for adding, removing, hiding and changing site elements and markup - includes:
+  '#description' => t('Many additional options for adding, removing, hiding and changing site elements and markup - includes settings and options for:
     <ul>
-      <li>Breadcrumb Settings - hide, hide the home link, configure seperator, append the page title</li>
-      <li>Login Block - hide links, hide OpenID links, horizontal login block</li>
-      <li>Hide comment titles</li>
-      <li>Remove menu link titles (tool tips)</li>
-      <li>Accessibility settings - set the skip navigation target ID, use extra fieldsets in the advanced search form</li>
-      <li>Add rel=author to user names</li>
+      <li>Breadcrumbs</li>
+      <li>Login block</li>
+      <li>Comment titles</li>
+      <li>Skip link target</li>
+      <li>Attribution</li>
     </ul>
     '),
   '#default_value' => theme_get_setting('settings.enable_markup_overrides', $theme),

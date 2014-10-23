@@ -1,30 +1,31 @@
 // Full Stack UI Kit, compiles to css/styles.css
 
-// Layouts base. By default this takes the site-builder plugin
-// base so we can use it's susy container and all susy-panels.
-@import "site_builder_base";
+// Layouts base.
+// WARNING: if you change to your own layout plugin you must
+// include flow-direction variables or you will get compile
+// errors. $flow-to and $flow-from must be set.
+// See: layouts/site-builder/assets/_site_builder_base.scss
+@import "site-builder-base";
 
-// Uncomment compass if you remove "site_builder_base".
-//@import "compass";
-
-// We use modular scale to set variables for font sizes,
-// line-height, margin, padding etc.
+// Modular Scale.
 @import 'modular-scale';
 
-// UI Kit Base.
-@import
-  "components/variables",
-  "components/utility",
-  "components/normalize";
+// UI Kit Variables.
+@import "components/variables";
+
+// UI Kit Mixins.
+@import "components/mixins/mixins";
 
 // UI Kit Styles.
 @import
+  "components/normalize",
   "components/webfonts",
   "components/type",
   "components/page",
   "components/messages",
   "components/menus",
   "components/navbar",
+  "components/responsive-menus",
   "components/breadcrumb",
   "components/pagers",
   "components/tables",
@@ -43,7 +44,8 @@
   "components/comment",
   "components/search",
   "components/user-profile",
-  "components/views";
+  "components/views",
+  "components/utility";
 
 // Print styles.
 @import "components/print";

@@ -1,28 +1,7 @@
 /**
- * Tables.
- */
-
-// borders
-$table-cell-borders:     false; // set to true if you want borders on every cell
-$table-border-color:     $border-color;
-
-// thead
-$thead-background-color: $text-background-color;
-$thead-text-color:       $text-color;
-
-// row striping
-$table-row-striping:     false;
-$table-row-odd-color:    $odd-color;
-$table-row-even-color:   $even-color;
-
-// col striping, applies to the active column in sortable tables.
-$table-col-striping:     false;
-$table-col-odd-color:    $text-background-color;
-$table-col-even-color:   darken($text-background-color, 2%);
-
-// hover
-$tr-hover:               false;
-$tr-hover-color:         darken($text-background-color, 3%);
+ * Tables
+ *  - inlcudes all table elements and table drag selectors.
+ ========================================================================== */
 
 
 table {

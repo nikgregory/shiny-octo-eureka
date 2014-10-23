@@ -1,16 +1,8 @@
 /**
- * Breadcrumb.
- */
+ * Breadcrumbs
+ ========================================================================== */
 
-$breadcrumb-link-color:               $link-color;
-$breadcrumb-link-active-color:        $breadcrumb-link-color;
-$breadcrumb-link-hover-color:         $breadcrumb-link-color;
-
-$breadcrumb-link-visited-color:       $link-visited-color;
-$breadcrumb-link-visited-hover-color: $breadcrumb-link-visited-color;
-
-$breadcrumb-seperator-color:          $border-color;
-
+// Note: breadcrumb is really just a list-style with font icon :after etc, convert to use existing mixins.
 
 .breadcrumb {
   @include output-rhythm(margin, $medium 0);
@@ -31,13 +23,15 @@ $breadcrumb-seperator-color:          $border-color;
     @include no-bullets;
 
     &:before {
-      content: "\f105";  // fa-angle-right
       font-family: FontAwesome, sans-serif;
+      content: "\f105";  // fa-angle-right
+
       color: $breadcrumb-seperator-color;
       display: inline-block;
       padding: 0;
       margin: 0;
       text-align: center;
+
       @include output-rhythm(width, $medium);
     }
 

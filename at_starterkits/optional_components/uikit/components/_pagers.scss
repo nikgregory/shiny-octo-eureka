@@ -1,6 +1,9 @@
 /**
- * Pagers.
- */
+ * Pagers
+ ========================================================================== */
+
+// Pagers are just a list-style with something else maybe, like a webfont icon etc
+// no big deal so we should refactor to use existing mixins.
 
 .item-list .pager {
   clear: both;

@@ -389,9 +389,8 @@ th {
   padding: 0;
 }
 
-/**
- * Webfonts
- */
+/* Webfonts
+   ========================================================================== */
 /**
  * Font Awesome - http://fortawesome.github.io
  *
@@ -417,13 +416,15 @@ th {
   font-style: normal;
 }
 /**
- * Typography.
- */
+ * Type
+ *  - styles most typographic related html elements.
+ *  - adds pre-styled selectors for lists.
+ *  - also includes misc other elements such as hr.
+ ========================================================================== */
 body {
-  color: #333;
+  color: #333333;
 }
 
-/* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
@@ -445,49 +446,70 @@ h4, h5, h6 {
  * to generate font sizes in em and set a relative line-height.
  * SEE: _variables.scss
  */
-h1 {
+h1, .h1 {
   font-size: 42px;
   font-size: 2.618034rem;
   line-height: 48px;
   line-height: 3rem;
 }
 
-h2 {
+h2, .h2 {
   font-size: 30px;
   font-size: 1.854102rem;
   line-height: 48px;
   line-height: 3rem;
 }
 
-h3 {
+h3, .h3 {
   font-size: 26px;
   font-size: 1.618034rem;
   line-height: 48px;
   line-height: 3rem;
 }
 
-h4 {
+h4, .h4 {
   font-size: 18px;
   font-size: 1.145898rem;
   line-height: 24px;
   line-height: 1.5rem;
 }
 
-h5 {
+h5, .h5 {
   font-size: 16px;
   font-size: 1rem;
   line-height: 24px;
   line-height: 1.5rem;
 }
 
-h6 {
+h6, .h6 {
   font-size: 10px;
   font-size: 0.618034rem;
   line-height: 24px;
   line-height: 1.5rem;
 }
 
-/* Paragraph */
+h1 small, .h1 small {
+  font-size: 26px;
+  font-size: 1.618034rem;
+  line-height: 48px;
+  line-height: 3rem;
+}
+
+h2 small, .h2 small {
+  font-size: 18px;
+  font-size: 1.145898rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+
+h3 small, .h3 small,
+h4 small, .h4 small {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+
 p {
   font-size: 16px;
   font-size: 1rem;
@@ -503,23 +525,21 @@ multicol {
   margin: 1rem 0;
 }
 
-/* Links */
 a {
-  color: #00e;
+  color: #0000ee;
   text-decoration: none;
 }
 a:link, a:visited {
-  color: #55198b;
+  color: #0000ee;
 }
 a:active, a.active {
-  color: #00e;
+  color: #0000ee;
 }
 a:hover, a:focus {
-  color: #00e;
+  color: #0000ee;
   text-decoration: underline;
 }
 
-/* Lists */
 ul,
 ol {
   margin: 0 0 16px;
@@ -527,11 +547,145 @@ ol {
   padding: 0 0 0 18px;
   padding: 0 0 0 1.145898rem;
 }
-
-[dir="rtl"] ul,
-[dir="rtl"] ol {
+[dir="rtl"] ul, [dir="rtl"] ol {
   padding: 0 18px 0 0;
   padding: 0 1.145898rem 0 0;
+}
+
+.list-horizontal {
+  padding: 0;
+  list-style: none;
+}
+.list-horizontal li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.list-horizontal {
+  *zoom: 1;
+}
+.list-horizontal:before, .list-horizontal:after {
+  content: "";
+  display: table;
+}
+.list-horizontal:after {
+  clear: both;
+}
+.list-horizontal li {
+  float: left;
+  margin: 0 16px 0 16px;
+  margin: 0 1rem 0 1rem;
+}
+.list-horizontal ul,
+.list-horizontal ol {
+  display: none;
+}
+
+.list-multicolumn {
+  padding: 0;
+  list-style: none;
+}
+.list-multicolumn li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.list-multicolumn {
+  *zoom: 1;
+}
+.list-multicolumn:before, .list-multicolumn:after {
+  content: "";
+  display: table;
+}
+.list-multicolumn:after {
+  clear: both;
+}
+.list-multicolumn > li {
+  font-weight: 700;
+}
+.list-multicolumn ul, .list-multicolumn ol {
+  font-weight: 400;
+  padding: 0;
+}
+
+@media all and (min-width: 45em) {
+  .list-multicolumn {
+    padding: 0;
+  }
+  .list-multicolumn {
+    *zoom: 1;
+  }
+  .list-multicolumn:before, .list-multicolumn:after {
+    content: "";
+    display: table;
+  }
+  .list-multicolumn:after {
+    clear: both;
+  }
+  .list-multicolumn > li {
+    width: 12em;
+    float: left;
+  }
+  .list-multicolumn ul, .list-multicolumn ol {
+    padding: 0;
+  }
+  .list-multicolumn a {
+    display: block;
+  }
+}
+ul.inline, ul.links.inline {
+  padding: 0;
+}
+ul.inline {
+  padding: 0;
+  list-style: none;
+}
+ul.inline li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+ul.inline {
+  *zoom: 1;
+}
+ul.inline:before, ul.inline:after {
+  content: "";
+  display: table;
+}
+ul.inline:after {
+  clear: both;
+}
+ul.inline li {
+  float: left;
+  margin: 0 16px 0 0;
+  margin: 0 1rem 0 0;
+}
+ul.inline ul,
+ul.inline ol {
+  display: none;
+}
+[dir="rtl"] ul.inline li {
+  margin: 0 0 0 16px;
+}
+
+.item-list ul,
+.item-list ol {
+  padding: 0;
+}
+.item-list li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item-list li li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+
+dl {
+  margin: 16px 0;
+  margin: 1rem 0;
 }
 
 dt {
@@ -542,10 +696,94 @@ dd {
   margin: 0 0 0 16px;
   margin: 0 0 0 1rem;
 }
-
 [dir="rtl"] dd {
   margin: 0 16px 0 0;
   margin: 0 1rem 0 0;
+}
+
+@media all and (min-width: 45em) {
+  .dl-horizontal dt {
+    float: left;
+    clear: left;
+    text-align: left;
+    width: 11em;
+  }
+  .dl-horizontal dt:after {
+    content: ":";
+  }
+  .dl-horizontal dd {
+    margin-left: 12em;
+    overflow: hidden;
+    *overflow: visible;
+    *zoom: 1;
+  }
+}
+blockquote {
+  padding: 16px;
+  padding: 1rem;
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+  border-left: 5px solid #cccccc;
+}
+blockquote p {
+  font-size: 18px;
+  font-size: 1.145898rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  font-weight: 300;
+}
+blockquote p:first-child {
+  margin-top: 0;
+}
+blockquote p:first-child:before {
+  font-family: FontAwesome, sans-serif;
+  content: "\f10d";
+  color: #cccccc;
+  display: inline-block;
+  padding: 0 5px 0 0;
+  margin: 0;
+  text-align: left;
+  width: 18px;
+  width: 1.145898rem;
+}
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+blockquote small {
+  display: block;
+  font-size: 10px;
+  font-size: 0.618034rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  color: #404040;
+}
+blockquote small:before {
+  content: '\2014 \00A0';
+}
+blockquote.pull-right {
+  padding-right: 5.2631579%;
+  padding-left: 0;
+  border-right: 5px solid #cccccc;
+  border-left: 0;
+}
+blockquote.pull-right p,
+blockquote.pull-right small {
+  text-align: right;
+}
+blockquote.pull-right small:before {
+  content: '';
+}
+blockquote.pull-right small:after {
+  content: '\00A0 \2014';
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 16px 0;
+  padding: 0;
 }
 
 /**
@@ -570,15 +808,14 @@ dd {
 }
 
 /**
- * Page.
- * - generic page styles, misc global elements
- * - page-row styles
- */
-/* html and body */
+ * Page
+ *  - mainly for markup that is printed directly in page.html.twig and
+ *    .region {}
+ ========================================================================== */
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: #333333;
 }
 
 * {
@@ -587,23 +824,11 @@ body {
   box-sizing: border-box;
 }
 
-/**
- * Root page wrapper, we set relative to make it easier to use absolute positioning and ensure
- * items do not go under the toolbar or other items in the page-top region.
- */
 .page-root {
   position: relative;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
-/**
- * Page Rows - these match the Site Builder layout.
- * You can find your layouts page row and region classes by viewing the theme
- * settings and looking under Layouts > Options > Layout Selectors.
- *
- * Do not add layout to .regions directly, instead if you want to modify the layout
- * you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
- */
 .regions {
   padding: 16px 0;
   padding: 1rem 0;
@@ -615,15 +840,25 @@ body {
   -webkit-transition: all, 0.2s, ease-in;
   transition: all, 0.2s, ease-in;
 }
+.region {
+  *zoom: 1;
+}
+.region:before, .region:after {
+  content: "";
+  display: table;
+}
+.region:after {
+  clear: both;
+}
 
 .page-row__header {
   background-color: #c0c0c0;
-  color: #fff;
+  color: #ffffff;
 }
 
 .page-row__navbar {
-  background-color: #333;
-  color: #fff;
+  background-color: #333333;
+  color: #ffffff;
 }
 .page-row__navbar .regions {
   padding: 0;
@@ -631,84 +866,11 @@ body {
 
 .page-row__footer {
   background-color: #696969;
-  color: #fff;
-}
-
-[class*="page-row__"]:not(.page-row__navbar) li a:after {
-  content: "";
-}
-
-/* A better looking default horizontal rule */
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 16px 0;
-  padding: 0;
-}
-
-/**
- * Publishing status.
- */
-[class*="unpublished"] {
-  background-color: #fff4f4;
-}
-[class*="unpublished"] p.unpublished {
-  font-size: 48px;
-  font-size: 3rem;
-  line-height: 72px;
-  line-height: 4.5rem;
-  font-family: Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
-  text-align: center;
-  color: #ffdbdb;
-}
-
-[class*="preview"] {
-  background-color: #ffffea;
-}
-
-/**
- * Markup generated by theme_item_list().
- */
-.item-list ul {
-  padding: 0;
-}
-.item-list li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.item-list li li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-}
-
-/**
- * Markup generated by links.html.twig.
- */
-ul.inline, ul.links.inline {
-  padding: 0;
-}
-ul.inline li {
-  display: inline-block;
-  margin: 0 16px 0 0;
-  padding: 0;
-  list-style: none;
-}
-ul.inline li li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-}
-
-[dir="rtl"] ul.inline li {
-  margin: 0 0 0 16px;
+  color: #ffffff;
 }
 
 .attribution {
-  background-color: #333;
+  background-color: #333333;
   font-size: 10px;
   font-size: 0.618034rem;
   line-height: 24px;
@@ -718,7 +880,8 @@ ul.inline li li {
 
 /**
  * Messages
- */
+ *  - style system messages such as status, warning and error.
+ ========================================================================== */
 .messages {
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -831,12 +994,10 @@ table tr.error {
 
 /**
  * Menus
- *
- * TODO, review after commit: Menu twig patch: https://drupal.org/node/1898478
- */
-/**
- * Markup generated by theme_menu_tree().
- */
+ *  - style Drupal core block menus.
+ *  - for the drop menu and other responsive menus see the mixins and the
+ *    _navbar.scss partial.
+ ========================================================================== */
 .menu {
   padding: 0;
   margin: 0;
@@ -846,6 +1007,9 @@ table tr.error {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0;
+}
+.menu .menu {
+  padding-left: 16px;
 }
 .menu li.collapsed > a:after, .menu li.expanded > a:after {
   font-family: FontAwesome, sans-serif;
@@ -881,18 +1045,16 @@ table tr.error {
 }
 
 /**
- * Navigation.
- *  - navbar menu
- *  - drop menu
- *
- * Maybe dependant on the Menu twig patch: https://drupal.org/node/1898478
- */
+ * Navbar
+ *  - navbar often require special styling to support menu styles. By default
+ *    AT uses a CSS3 dropmenu. Place a standard menu block in the navbar
+ *    region and set levels to expanded and these will be dropdowns.
+ ========================================================================== */
 .region__navbar {
-  background: #333;
+  background: inherit;
 }
 .region__navbar .menu {
   position: relative;
-  font-size: 0;
 }
 .region__navbar .menu > li {
   z-index: 100;
@@ -910,17 +1072,17 @@ table tr.error {
 .region__navbar .menu li {
   position: relative;
   vertical-align: middle;
-  background: #333;
+  background: #333333;
   font-size: 16px;
   font-size: 1rem;
   line-height: 24px;
   line-height: 1.5rem;
 }
 .region__navbar .menu a {
-  color: #fff;
+  color: #ffffff;
 }
 
-@media all and (max-width: 60em) {
+@media all and (max-width: 65em) {
   .region__navbar .contextual-region {
     position: static !important;
   }
@@ -934,32 +1096,20 @@ table tr.error {
     word-wrap: normal;
     font: 0/0 a;
   }
-  .region__navbar .menu li a:after {
-    content: '';
+  .region__navbar .menu-style-tiles .block-menu__content {
+    padding: 7px 0;
+    padding: 0.4376941rem 0;
   }
-  .region__navbar .menu li ul {
-    padding: 0;
+  .region__navbar .menu-style-tiles .menu-level-1 > li {
+    margin: 7px 0;
+    margin: 0.4376941rem 0;
   }
-  .region__navbar .menu li ul ul {
-    padding: 0 0 0 16px;
-    padding: 0 0 0 1rem;
+}
+@media all and (min-width: 65em) {
+  .region__navbar {
+    background: #333333;
   }
-  .region__navbar .menu li ul a {
-    padding: 7px;
-    padding: 0.4376941rem;
-  }
-  .region__navbar .menu li ul a:after {
-    font-family: FontAwesome, sans-serif;
-    float: left;
-    padding: 0 18px 0 0;
-    padding: 0 1.145898rem 0 0;
-    text-align: right;
-    content: "\f105";
-    width: 16px;
-    width: 1rem;
-  }
-
-  .menu-style-tile .region__navbar .block-menu__title {
+  .region__navbar .block-menu__title {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
@@ -969,30 +1119,31 @@ table tr.error {
     word-wrap: normal;
     font: 0/0 a;
   }
-
-  .menu-style-slidedown .region__navbar .block-menu__title,
-  .menu-style-offcanvas .region__navbar .block-menu__title {
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 24px;
-    line-height: 1.5rem;
-    padding: 7px 0;
-    padding: 0.4376941rem 0;
-    cursor: pointer;
+  .region__navbar .block-menu {
+    background: #333333;
   }
-  .menu-style-slidedown .region__navbar .block-menu__title:after,
-  .menu-style-offcanvas .region__navbar .block-menu__title:after {
-    font-family: FontAwesome, sans-serif;
-    content: "\f0c9";
-    width: 16px;
-    width: 1rem;
+  .region__navbar .block-menu a {
+    padding: 7px 18px;
+    padding: 0.4376941rem 1.145898rem;
+    position: relative;
   }
-
-  .menu-style-slidedown .region__navbar .block-menu__title:after {
-    float: right;
-    text-align: right;
+  .region__navbar .block-menu a:after {
+    position: absolute;
   }
-  .menu-style-slidedown .region__navbar .block-menu__content {
+  .region__navbar .block-menu .menu-level-1 {
+    position: relative;
+  }
+  .region__navbar .block-menu .menu-level-1 li {
+    float: left;
+    width: 12em;
+  }
+  .region__navbar .block-menu .menu-level-1 li.expanded > a:after {
+    content: "\f107";
+  }
+  .region__navbar .block-menu .menu-level-1 li.collapsed > a:after {
+    content: '';
+  }
+  .region__navbar .block-menu .menu-level-1 li ul {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
@@ -1008,20 +1159,71 @@ table tr.error {
     -webkit-transition: all, 0.2s, ease;
     transition: all, 0.2s, ease;
   }
-  .menu-style-slidedown.menu-expanded .region__navbar .block-menu__content {
-    position: static !important;
+  .region__navbar .block-menu .menu-level-1 li ul li {
+    background: #3b3b3b;
+  }
+  .region__navbar .block-menu .menu-level-1 li ul li:hover, .region__navbar .block-menu .menu-level-1 li ul li:focus {
+    background: #404040;
+  }
+  .region__navbar .block-menu .menu-level-1 li:hover > ul, .region__navbar .block-menu .menu-level-1 li:focus > ul {
+    display: block;
+    opacity: 1;
     clip: auto;
     overflow: visible;
     height: auto;
     width: auto;
     font-family: inherit;
-    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-    opacity: 1;
-    padding: 0 0 7px;
-    padding: 0 0 0.4376941rem;
   }
-
-  .menu-style-offcanvas .region__navbar .block-menu__content {
+  .region__navbar .block-menu .odd ul {
+    top: auto;
+  }
+  .region__navbar .block-menu .odd ul > .expanded > a:after {
+    content: "\f105";
+  }
+  .region__navbar .block-menu .odd ul .odd {
+    top: 0;
+  }
+  .region__navbar .block-menu .odd ul .odd > .expanded > a:after {
+    content: "\f107";
+  }
+  .region__navbar .block-menu__content li {
+    text-align: center;
+  }
+  .region__navbar .block-menu__content li.expanded li {
+    text-align: left;
+  }
+}
+/**
+ * Responsive menu styles. Import into breakpoints.
+ *  - slidedown
+ *  - off canvas
+ *  - tiles
+ *
+ * Set the breakpoint and import the menu style into that breakpoint, then
+ * visit your theme settings and configure options.
+ *
+ * Responsive styles are a combination of three things:
+ *  1. Sass/CSS defined here (with breakpoints etc).
+ *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
+ *  3. Theme settings as set in your themes Advanced extention settings.
+ ========================================================================== */
+@media all and (max-width: 65em) {
+  .menu-style-offcanvas .responsive-menu-region .block-menu__title {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 24px;
+    line-height: 1.5rem;
+    padding: 7px 0;
+    padding: 0.4376941rem 0;
+    cursor: pointer;
+  }
+  .menu-style-offcanvas .responsive-menu-region .block-menu__title:after {
+    font-family: FontAwesome, sans-serif;
+    content: "\f0c9";
+    width: 16px;
+    width: 1rem;
+  }
+  .menu-style-offcanvas .responsive-menu-region .block-menu__content {
     position: absolute;
     top: 0;
     padding: 0 0 7px;
@@ -1041,29 +1243,29 @@ table tr.error {
     -webkit-transition: all, 0.2s, ease-in-out;
     transition: all, 0.2s, ease-in-out;
   }
-  .menu-style-offcanvas.offcanvas-left .region__navbar .block-menu__title:after {
+  .menu-style-offcanvas.offcanvas-left .responsive-menu-region .block-menu__title:after {
     float: left;
     text-align: left;
     margin: -1px 10px 0 0;
     margin: -0.0625rem 0.618034rem 0 0;
   }
-  .menu-style-offcanvas.offcanvas-left .region__navbar .block-menu__content {
+  .menu-style-offcanvas.offcanvas-left .responsive-menu-region .block-menu__content {
     left: 0;
     -moz-transform: translate3d(-240px, 0, 0);
     -ms-transform: translate3d(-240px, 0, 0);
     -webkit-transform: translate3d(-240px, 0, 0);
     transform: translate3d(-240px, 0, 0);
   }
-  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__title {
+  .menu-style-offcanvas.offcanvas-right .responsive-menu-region .block-menu__title {
     text-align: right;
   }
-  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__title:after {
+  .menu-style-offcanvas.offcanvas-right .responsive-menu-region .block-menu__title:after {
     float: right;
     text-align: right;
     margin: -1px 0 0 10px;
     margin: -0.0625rem 0 0 0.618034rem;
   }
-  .menu-style-offcanvas.offcanvas-right .region__navbar .block-menu__content {
+  .menu-style-offcanvas.offcanvas-right .responsive-menu-region .block-menu__content {
     right: 0;
     -moz-transform: translate3d(240px, 0, 0);
     -ms-transform: translate3d(240px, 0, 0);
@@ -1078,6 +1280,7 @@ table tr.error {
     overflow: visible;
     height: auto;
     font-family: inherit;
+    font-size: inherit;
     width: 240px;
   }
   .menu-style-offcanvas.menu-expanded.offcanvas-left .page-root {
@@ -1093,44 +1296,25 @@ table tr.error {
     -webkit-transform: translate3d(-240px, 0, 0);
     transform: translate3d(-240px, 0, 0);
   }
-}
-@media all and (min-width: 60em) {
-  .region__navbar {
-    background: #333;
-  }
-  .region__navbar .block-menu__title {
-    position: absolute !important;
-    clip: rect(1px, 1px, 1px, 1px);
-    overflow: hidden;
-    height: 1px;
-    width: 1px;
-    padding: 0;
-    word-wrap: normal;
-    font: 0/0 a;
-  }
 
-  .region__navbar {
-    background: #333;
+  .menu-style-slidedown .responsive-menu-region .block-menu__title {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 24px;
+    line-height: 1.5rem;
+    padding: 7px 0;
+    padding: 0.4376941rem 0;
+    cursor: pointer;
   }
-  .region__navbar .menu-level-1 {
-    position: relative;
-    font-size: 0;
+  .menu-style-slidedown .responsive-menu-region .block-menu__title:after {
+    font-family: FontAwesome, sans-serif;
+    content: "\f0c9";
+    width: 16px;
+    width: 1rem;
+    float: right;
+    text-align: right;
   }
-  .region__navbar .menu-level-1 > li {
-    text-align: center;
-    border-left: 1px dotted rgba(255, 255, 255, 0.3);
-  }
-  .region__navbar .menu-level-1 > li:last-child {
-    border-right: 1px dotted rgba(255, 255, 255, 0.3);
-  }
-  .region__navbar .menu-level-1 li {
-    float: left;
-    width: 12em;
-  }
-  .region__navbar .menu-level-1 li.collapsed > a:after {
-    content: '';
-  }
-  .region__navbar .menu-level-1 li ul {
+  .menu-style-slidedown .responsive-menu-region .block-menu__content {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
@@ -1146,49 +1330,79 @@ table tr.error {
     -webkit-transition: all, 0.2s, ease;
     transition: all, 0.2s, ease;
   }
-  .region__navbar .menu-level-1 li ul li {
-    text-align: left;
-    background: #3b3b3b;
-  }
-  .region__navbar .menu-level-1 li ul li:hover, .region__navbar .menu-level-1 li ul li:focus {
-    background: #404040;
-  }
-  .region__navbar .menu-level-1 li:hover > ul, .region__navbar .menu-level-1 li:focus > ul {
-    display: block;
+  .menu-style-slidedown .responsive-menu-region .block.menu-expanded .block-menu__content {
+    position: static !important;
+    clip: auto;
+    overflow: visible;
+    height: auto;
+    width: auto;
+    font-family: inherit;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
+    padding: 0 0 7px;
+    padding: 0 0 0.4376941rem;
+  }
+
+  .menu-style-tiles .responsive-menu-region .block-menu__title,
+  .menu-style-tiles .responsive-menu-region .menu-level-2 {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    word-wrap: normal;
+    font: 0/0 a;
+  }
+  .menu-style-tiles .responsive-menu-region .block-menu__content {
+    overflow: hidden;
+    *overflow: visible;
+    *zoom: 1;
+  }
+  .menu-style-tiles.tiles-count-2 .responsive-menu-region .menu-level-1 > li {
+    width: 152.6315789%;
+    float: left;
+    margin-right: 5.2631579%;
+  }
+  .menu-style-tiles.tiles-count-2 .responsive-menu-region .menu-level-1 > li:nth-child(2n) {
+    margin-right: 0;
+  }
+  .menu-style-tiles.tiles-count-3 .responsive-menu-region .menu-level-1 > li {
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .menu-style-tiles.tiles-count-3 .responsive-menu-region .menu-level-1 > li:nth-child(3n) {
+    margin-right: 0;
+  }
+  .menu-style-tiles.tiles-count-4 .responsive-menu-region .menu-level-1 > li {
+    width: 73.6842105%;
+    float: left;
+    margin-right: 5.2631579%;
+  }
+  .menu-style-tiles.tiles-count-4 .responsive-menu-region .menu-level-1 > li:nth-child(4n) {
+    margin-right: 0;
+  }
+  .menu-style-tiles.tiles-submenus-true .responsive-menu-region .menu-level-2 {
+    position: static !important;
     clip: auto;
     overflow: visible;
     height: auto;
     width: auto;
     font-family: inherit;
   }
-  .region__navbar .odd ul {
-    left: 0;
-    top: auto;
-  }
-  .region__navbar .odd ul > .expanded > a:after {
-    content: "\f105";
-  }
-  .region__navbar .odd ul .odd {
-    left: 100%;
-    top: 0;
-  }
-  .region__navbar .odd ul .odd > .expanded > a:after {
-    content: "\f107";
-  }
-  .region__navbar a {
-    padding: 7px 18px;
-    padding: 0.4376941rem 1.145898rem;
-    position: relative;
-  }
-  .region__navbar a:after {
-    position: absolute;
-    right: 16px;
+  .menu-style-tiles.tiles-submenus-true .responsive-menu-region .menu-level-1 .menu li {
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    clear: both;
   }
 }
 /**
- * Breadcrumb.
- */
+ * Breadcrumbs
+ ========================================================================== */
 .breadcrumb {
   margin: 16px 0;
   margin: 1rem 0;
@@ -1212,9 +1426,9 @@ table tr.error {
   margin-left: 0;
 }
 .breadcrumb li:before {
-  content: "\f105";
   font-family: FontAwesome, sans-serif;
-  color: #ccc;
+  content: "\f105";
+  color: #cccccc;
   display: inline-block;
   padding: 0;
   margin: 0;
@@ -1230,8 +1444,8 @@ table tr.error {
 }
 
 /**
- * Pagers.
- */
+ * Pagers
+ ========================================================================== */
 .item-list .pager {
   clear: both;
   text-align: center;
@@ -1253,14 +1467,15 @@ table tr.error {
 }
 
 /**
- * Tables.
- */
+ * Tables
+ *  - inlcudes all table elements and table drag selectors.
+ ========================================================================== */
 table {
   margin: 16px 0;
   margin: 1rem 0;
   padding: 0;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
 }
 table.sticky-header {
   z-index: 10;
@@ -1289,13 +1504,13 @@ table .view-table__details--description {
 }
 
 tr {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
 }
 
 thead tr {
   font-weight: 600;
-  color: #333;
-  background-color: #eee;
+  color: #333333;
+  background-color: #eeeeee;
 }
 thead .active img {
   display: inline;
@@ -1305,7 +1520,7 @@ tr,
 td,
 th {
   border-style: solid;
-  border-color: #ccc;
+  border-color: #cccccc;
 }
 
 td,
@@ -1353,15 +1568,14 @@ th.checkbox {
 }
 
 /**
- * Forms.
- * This probably seems like a lot - remember AT unsets system.theme.css and
- * gives you control over all form elements, so we have to set styles for
- * all drupals complex forms, this makes the theme totally usable in admin.
+ * Forms
+ *  - This probably seems like a lot - remember AT unsets system.theme.css and
+ *    gives you complete control over all form elements.
  *
- * - NOTES:
- *   - input type submit is treated as a 'button', see _buttons.scss
- *   - for drop buttons see _buttons.scss
- */
+ * Note:
+ *  - input type submit is treated as a 'button', see _buttons.scss
+ *  - for drop buttons see _buttons.scss
+ ========================================================================== */
 .form-item {
   margin: 0 0 16px;
   margin: 0 0 1rem;
@@ -1370,6 +1584,10 @@ th.checkbox {
 .form-actions {
   margin: 16px 0;
   margin: 1rem 0;
+}
+
+input {
+  min-width: 13px;
 }
 
 input,
@@ -1420,8 +1638,8 @@ input[type="tel"],
 input[type="color"] {
   line-height: normal;
   color: #666666;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
   padding: 7px 10px;
   padding: 0.4376941rem 0.618034rem;
   -moz-border-radius: 4px;
@@ -1468,8 +1686,8 @@ input[type="tel"]:focus,
 input[type="color"]:focus {
   outline: 0;
   outline: thin dotted \9;
-  border-color: #ccc;
-  color: #333;
+  border-color: #cccccc;
+  color: #333333;
 }
 select:not([type])[disabled], select[type="text"][disabled], select[type="password"][disabled], select[type="email"][disabled], select[type="url"][disabled], select[type="date"][disabled], select[type="month"][disabled], select[type="time"][disabled], select[type="datetime"][disabled], select[type="datetime-local"][disabled], select[type="week"][disabled], select[type="number"][disabled], select[type="search"][disabled], select[type="tel"][disabled], select[type="color"][disabled],
 textarea:not([type])[disabled],
@@ -1566,7 +1784,7 @@ input[type="tel"][disabled]:hover,
 input[type="tel"][disabled]:focus,
 input[type="color"][disabled]:hover,
 input[type="color"][disabled]:focus {
-  color: #333;
+  color: #333333;
 }
 select[type="checkbox"], select[type="radio"],
 textarea[type="checkbox"],
@@ -1581,8 +1799,8 @@ input[type="radio"] {
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  background: #eee;
-  color: #333;
+  background: #eeeeee;
+  color: #333333;
 }
 
 select {
@@ -1652,11 +1870,11 @@ h4.label {
 }
 
 .marker {
-  color: #e00;
+  color: #ee0000;
 }
 
 .form-required:after {
-  color: #e00;
+  color: #ee0000;
   /* Use a Unicode symbol to prevent screen readers from announcing the text. */
   content: " \204E ";
   line-height: 1;
@@ -1747,7 +1965,7 @@ form .field-add-more-submit {
  * @thanks http://nicolasgallagher.com/css-background-image-hacks/
  */
 details {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1807,9 +2025,10 @@ summary {
  * Progress bar.
  *
  * @see progress.js
-  *
- * TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
- */
+ *
+ * TODO: fix this stuff up, its just a copy/paste from system.theme.css
+ * at the moment.
+ ========================================================================== */
 .progress__track {
   border-color: #b3b3b3;
   border-radius: 10em;
@@ -1887,202 +2106,271 @@ summary {
   }
 }
 /**
- * Tabs.
+ * Tabs
  *  - styles for tabs such as local tasks, other tabbed UI like
  *    quicktabs could be applied here.
- *
- * Uses placeholders to easily extend required styles.
- */
-.tabs.primary {
-  padding: 0;
-  list-style: none;
+ ========================================================================== */
+.page-row__temporary-tabs {
   margin: 16px 0;
   margin: 1rem 0;
 }
-.tabs.primary {
-  *zoom: 1;
-}
-.tabs.primary:before, .tabs.primary:after {
-  content: "";
-  display: table;
-}
-.tabs.primary:after {
-  clear: both;
-}
-@media all and (min-width: 60em) {
-  .tabs.primary {
-    border-bottom: 1px solid #ccc;
+@media all and (max-width: 65em) {
+  .page-row__temporary-tabs ul.tabs.primary {
+    padding: 0;
+    list-style: none;
   }
-}
-.tabs.primary li {
-  display: block;
-}
-@media all and (max-width: 45em) {
-  .tabs.primary li:first-child a {
+  .page-row__temporary-tabs ul.tabs.primary li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+  }
+  .page-row__temporary-tabs ul.tabs.primary {
+    *zoom: 1;
+  }
+  .page-row__temporary-tabs ul.tabs.primary:before, .page-row__temporary-tabs ul.tabs.primary:after {
+    content: "";
+    display: table;
+  }
+  .page-row__temporary-tabs ul.tabs.primary:after {
+    clear: both;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li:first-child a {
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 0 0;
   }
-  .tabs.primary li:last-child a {
+  .page-row__temporary-tabs ul.tabs.primary li:last-child a {
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0;
     border-radius: 0 0 4px 4px;
-    border-bottom: 1px solid #ccc;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li a {
+    color: #333333;
+    background-color: #fbfbfb;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-style: solid;
+    margin-bottom: -1px;
+    text-align: left;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 1;
+    width: auto;
+    display: block;
+    position: relative;
+    padding: 7px 16px;
+    padding: 0.4376941rem 1rem;
+    -moz-transition: background-color, 0.15s, ease-in-out;
+    -o-transition: background-color, 0.15s, ease-in-out;
+    -webkit-transition: background-color, 0.15s, ease-in-out;
+    transition: background-color, 0.15s, ease-in-out;
+    -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li a:link, .page-row__temporary-tabs ul.tabs.primary li a:visited {
+    color: #333333;
+    background-color: #fbfbfb;
+    border-color: #cccccc;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li a:hover, .page-row__temporary-tabs ul.tabs.primary li a:focus, .page-row__temporary-tabs ul.tabs.primary li a:active, .page-row__temporary-tabs ul.tabs.primary li a.active {
+    color: #333333;
+    background-color: #eeeeee;
+    border-color: #b3b3b3;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary {
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary {
+    *zoom: 1;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary:before, .page-row__temporary-tabs ul.tabs.secondary:after {
+    content: "";
+    display: table;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary:after {
+    clear: both;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a {
+    display: inline-block;
+    line-height: 1;
+    color: #333333;
+    border-bottom: 1px solid transparent;
+    padding: 10px 16px 7px 0;
+    padding: 0.618034rem 1rem 0.4376941rem 0;
+    -moz-transition: background-color, 0.15s, ease-out;
+    -o-transition: background-color, 0.15s, ease-out;
+    -webkit-transition: background-color, 0.15s, ease-out;
+    transition: background-color, 0.15s, ease-out;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a:hover, .page-row__temporary-tabs ul.tabs.secondary a:focus {
+    text-decoration: none;
+    color: #333333;
+    border-bottom: 1px solid #cccccc;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a.active {
+    border-bottom: 1px solid #cccccc;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a.active:hover, .page-row__temporary-tabs ul.tabs.secondary a.active:focus {
+    color: #333333;
   }
 }
-@media all and (min-width: 60em) {
-  .tabs.primary li {
+@media all and (min-width: 65em) {
+  .page-row__temporary-tabs ul.tabs.primary {
+    border-bottom: 1px solid #cccccc;
+    padding: 0;
+    list-style: none;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+  }
+  .page-row__temporary-tabs ul.tabs.primary {
+    *zoom: 1;
+  }
+  .page-row__temporary-tabs ul.tabs.primary:before, .page-row__temporary-tabs ul.tabs.primary:after {
+    content: "";
+    display: table;
+  }
+  .page-row__temporary-tabs ul.tabs.primary:after {
+    clear: both;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li {
     float: left;
+    margin: 0 0 0 0;
+  }
+  .page-row__temporary-tabs ul.tabs.primary ul,
+  .page-row__temporary-tabs ul.tabs.primary ol {
+    display: none;
+  }
+  .page-row__temporary-tabs ul.tabs.primary li {
     margin-bottom: -1px;
   }
-  .tabs.primary li:first-child a {
+  .page-row__temporary-tabs ul.tabs.primary li:first-child a {
     -moz-border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px;
     border-radius: 4px 0 0 0;
   }
-  .tabs.primary li:last-child a {
+  .page-row__temporary-tabs ul.tabs.primary li:last-child a {
     -moz-border-radius: 0 4px 0 0;
     -webkit-border-radius: 0;
     border-radius: 0 4px 0 0;
   }
-}
-.tabs.primary a {
-  display: block;
-  line-height: 1;
-  color: #333;
-  background: #fbfbfb;
-  border: 1px solid #ccc;
-  padding: 7px 16px;
-  padding: 0.4376941rem 1rem;
-  -moz-transition: background-color, 0.15s, ease-in-out;
-  -o-transition: background-color, 0.15s, ease-in-out;
-  -webkit-transition: background-color, 0.15s, ease-in-out;
-  transition: background-color, 0.15s, ease-in-out;
-  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-}
-@media all and (min-width: 60em) {
-  .tabs.primary a {
+  .page-row__temporary-tabs ul.tabs.primary a {
+    display: block;
+    line-height: 1;
+    color: #333333;
+    background: #fbfbfb;
+    border: 1px solid #cccccc;
+    padding: 7px 16px;
+    padding: 0.4376941rem 1rem;
+    -moz-transition: background-color, 0.15s, ease-in-out;
+    -o-transition: background-color, 0.15s, ease-in-out;
+    -webkit-transition: background-color, 0.15s, ease-in-out;
+    transition: background-color, 0.15s, ease-in-out;
+    -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
     margin-right: -1px;
   }
-}
-@media all and (max-width: 45em) {
-  .tabs.primary a {
-    border-bottom: 0;
+  .page-row__temporary-tabs ul.tabs.primary a:hover, .page-row__temporary-tabs ul.tabs.primary a:focus {
+    color: #333333;
+    background: #eeeeee;
+    text-decoration: none;
   }
-}
-.tabs.primary a:hover, .tabs.primary a:focus {
-  color: #333;
-  background: #eee;
-  text-decoration: none;
-}
-.tabs.primary a.active {
-  color: #333;
-  background: none;
-  border-bottom-color: #fff;
-}
-.tabs.primary a.active:hover, .tabs.primary a.active:focus {
-  color: #333;
-  background: none;
-}
-
-[dir="rtl"] .tabs.primary {
-  padding: 0;
-}
-[dir="rtl"] .tabs.primary a {
-  margin-left: -1px;
-  margin-right: 0;
-}
-[dir="rtl"] .tabs.primary li {
-  float: right;
-}
-[dir="rtl"] .tabs.primary li:first-child a {
-  margin-left: -1px;
-  -moz-border-radius: 0 4px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 0 0;
-}
-[dir="rtl"] .tabs.primary li:last-child a {
-  -moz-border-radius: 4px 0 0 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 0;
-}
-
-.tabs.secondary {
-  padding: 0;
-  list-style: none;
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-.tabs.secondary {
-  *zoom: 1;
-}
-.tabs.secondary:before, .tabs.secondary:after {
-  content: "";
-  display: table;
-}
-.tabs.secondary:after {
-  clear: both;
-}
-.tabs.secondary li {
-  display: block;
-  float: left;
-  margin: 0 7px;
-  margin: 0 0.4376941rem;
-}
-.tabs.secondary a {
-  display: block;
-  line-height: 1;
-  color: #333;
-  padding: 7px 16px;
-  padding: 0.4376941rem 1rem;
-  -moz-transition: background-color, 0.15s, ease-in-out;
-  -o-transition: background-color, 0.15s, ease-in-out;
-  -webkit-transition: background-color, 0.15s, ease-in-out;
-  transition: background-color, 0.15s, ease-in-out;
-}
-.tabs.secondary a:hover, .tabs.secondary a:focus {
-  text-decoration: none;
-  color: #333;
-  border-bottom: 1px solid #ccc;
-}
-.tabs.secondary a.active {
-  border-bottom: 1px solid #ccc;
-}
-.tabs.secondary a.active:hover, .tabs.secondary a.active:focus {
-  color: #333;
-}
-
-[dir="rtl"] .tabs.secondary {
-  padding: 0;
-}
-[dir="rtl"] .tabs.secondary li {
-  float: right;
+  .page-row__temporary-tabs ul.tabs.primary a.active {
+    color: #333333;
+    background: none;
+    border-bottom-color: #ffffff;
+  }
+  .page-row__temporary-tabs ul.tabs.primary a.active:hover, .page-row__temporary-tabs ul.tabs.primary a.active:focus {
+    color: #333333;
+    background: none;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary {
+    padding: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary {
+    *zoom: 1;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary:before, .page-row__temporary-tabs ul.tabs.secondary:after {
+    content: "";
+    display: table;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary:after {
+    clear: both;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary li {
+    float: left;
+    margin: 0 7px 0 7px;
+    margin: 0 0.4376941rem 0 0.4376941rem;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary ul,
+  .page-row__temporary-tabs ul.tabs.secondary ol {
+    display: none;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a {
+    display: block;
+    line-height: 1;
+    color: #333333;
+    border-bottom: 1px solid transparent;
+    padding: 7px 16px;
+    padding: 0.4376941rem 1rem;
+    -moz-transition: background-color, 0.15s, ease-in-out;
+    -o-transition: background-color, 0.15s, ease-in-out;
+    -webkit-transition: background-color, 0.15s, ease-in-out;
+    transition: background-color, 0.15s, ease-in-out;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a:hover, .page-row__temporary-tabs ul.tabs.secondary a:focus {
+    text-decoration: none;
+    color: #333333;
+    border-bottom: 1px solid #cccccc;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a.active {
+    border-bottom: 1px solid #cccccc;
+  }
+  .page-row__temporary-tabs ul.tabs.secondary a.active:hover, .page-row__temporary-tabs ul.tabs.secondary a.active:focus {
+    color: #333333;
+  }
 }
 
 /**
  * Buttons
- * - applies to elements with class "button", includes styles for:
- *   - input buttons
- *   - anchor links styled as buttons
- *   - drop buttons
- *   - action link buttons
- */
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
 /* Buttons */
 .button {
   cursor: pointer;
+  white-space: nowrap;
   line-height: normal;
   text-decoration: none;
   text-align: center;
   font-weight: 400;
-  color: #333;
+  color: #333333;
   background: #fbfbfb;
   width: auto;
   display: inline-block;
   position: relative;
-  margin: 0 3px 0 0;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   padding: 7px 16px;
   padding: 0.4376941rem 1rem;
   -moz-border-radius: 4px;
@@ -2098,6 +2386,7 @@ summary {
 }
 .button:hover, .button:focus {
   background-color: #f3f3f3;
+  text-decoration: none;
 }
 .button[disabled] {
   opacity: 0.7;
@@ -2107,25 +2396,45 @@ summary {
   box-shadow: none;
 }
 .button[disabled]:hover {
-  color: #2e2e2e;
-}
-[dir="rtl"] .button {
-  margin: 0 0 0 3px;
+  color: #2b2b2b;
 }
 
-.button--primary, .dropbutton-multiple .dropbutton .publish .button, .button-action {
-  color: #fff;
-  background: #9DC44D;
-  border-color: #5B8829;
+.button--primary {
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
 }
-.button--primary:hover, .dropbutton-multiple .dropbutton .publish .button:hover, .button-action:hover, .button--primary:focus, .dropbutton-multiple .dropbutton .publish .button:focus, .button-action:focus {
-  background-color: #82a737;
+.button--primary:link, .button--primary:visited {
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
+}
+.button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
+  color: #ffffff;
+  background-color: #91ba3e;
+  border-color: #41611d;
+}
+
+.button--danger {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:link, .button--danger:visited {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:hover, .button--danger:focus, .button--danger:active, .button--danger.active {
+  color: #a51b00;
+  background-color: #f7e2dd;
+  border-color: #f5a290;
 }
 
 /* Drop buttons */
 .js .dropbutton-widget {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -2134,13 +2443,13 @@ summary {
 .js .dropbutton-wrapper {
   display: block;
   min-height: 2em;
-  margin-right: 3px;
+  margin-right: 4px;
   position: relative;
 }
 
 [dir="rtl"] .js .dropbutton-wrapper {
   margin-right: 0;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 
 .dropbutton input {
@@ -2153,11 +2462,11 @@ summary {
   padding: 0.4376941rem 1rem;
 }
 .dropbutton .secondary-action {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
 }
 .dropbutton .secondary-action input {
   border: 0;
-  background: #fff;
+  background: #ffffff;
   width: 100%;
 }
 .dropbutton .secondary-action input:hover, .dropbutton .secondary-action input:focus {
@@ -2171,7 +2480,7 @@ summary {
 }
 
 .dropbutton-multiple .dropbutton {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #cccccc;
 }
 .dropbutton-multiple .dropbutton .dropbutton-action > * {
   margin-right: 0;
@@ -2182,12 +2491,33 @@ summary {
   -webkit-border-radius: 4px;
   border-radius: 4px 0 0 4px;
 }
+.dropbutton-multiple .dropbutton .publish .button {
+  width: 100%;
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
+}
+.dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
+}
+.dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
+  color: #ffffff;
+  background-color: #91ba3e;
+  border-color: #41611d;
+}
 [dir="rtl"] .dropbutton-multiple .dropbutton {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #cccccc;
   border-right: 0;
 }
 [dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
   margin-left: 0;
+}
+.dropbutton-multiple.open .dropbutton-action .button {
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 0;
 }
 
 /**
@@ -2209,40 +2539,50 @@ label button.link {
 /**
  * Styles for link buttons and action links. TODO.
  */
+/*
 #block-atblocksmenuactions {
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-#block-atblocksmenuactions li {
-  list-style: none;
-}
-#block-atblocksmenuactions li li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    @include no-bullets;
+  }
 }
 
 .action-links {
   list-style: none;
   padding: 0;
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-.action-links li {
-  display: inline-block;
-  margin: 0 9.8885438px;
-}
-.action-links li:first-child {
-  margin-left: 0;
-  /* LTR */
-}
-[dir="rtl"] .action-links li:first-child {
-  margin-left: 9.8885438px;
-  margin-right: 0;
-}
+  @include output-rhythm(margin, $medium 0);
 
-.button-action:hover, .button-action:focus {
-  text-decoration: none;
+  li {
+    display: inline-block;
+    margin: 0 $small;
+
+    &:first-child {
+      margin-left: 0; // LTR
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .action-links li:first-child {
+    margin-left: $small;
+    margin-right: 0;
+  }
+}
+*/
+.button-action {
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
+}
+.button-action:link, .button-action:visited {
+  color: #ffffff;
+  background-color: #9dc44d;
+  border-color: #5b8829;
+}
+.button-action:hover, .button-action:focus, .button-action:active, .button-action.active {
+  color: #ffffff;
+  background-color: #91ba3e;
+  border-color: #41611d;
 }
 .button-action:before {
   content: '\f067';
@@ -2258,10 +2598,10 @@ label button.link {
 
 /**
  * Labels.
- * -  for example "new" mark on comments, tags etc.
+ *  -  for example "new" mark on comments, tags etc.
  *
- * TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
- */
+ *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
+ ========================================================================== */
 /**
  * Markup generated by theme_more_link().
  */
@@ -2289,18 +2629,17 @@ label button.link {
 .more-help-link a {
   /* background: url(../../../misc/help.png) 0 50% no-repeat; LTR - broken link to image, change to webfont icon */
   /* padding: 1px 0 1px 20px; LTR */
+  /*
+  @at-root [dir="rtl"] .more-help-link a {
+    background-position: 100% 50%;
+    padding: 1px 20px 1px 0;
+  }
+  */
 }
 
-/*
-[dir="rtl"] .more-help-link a {
-  background-position: 100% 50%;
-  padding: 1px 20px 1px 0;
-}
-*/
 /**
- * Images/Media.
- */
-/* Flexible images */
+ * Images/Media
+ ========================================================================== */
 img {
   height: auto;
   line-height: 0;
@@ -2308,10 +2647,6 @@ img {
   display: inline-block;
 }
 
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
 audio,
 canvas,
 img,
@@ -2319,19 +2654,33 @@ video {
   vertical-align: middle;
 }
 
+img.align-left {
+  margin: 7px 16px 16px 0;
+  margin: 0.4376941rem 1rem 1rem 0;
+}
+
+img.align-right {
+  margin: 4px 0 16px 16px;
+  margin: 0.2705098rem 0 1rem 1rem;
+}
+
+img.align-center {
+  margin: 4px auto 16px;
+  margin: 0.2705098rem auto 1rem;
+}
+
 /**
- * Branding styles, primarily to style the branding block output.
- */
+ * Branding styles
+ *  - Drupal core branding block.
+ ========================================================================== */
 .site__slogan {
   margin: 0;
 }
 
 /**
- * Fields.
- * - By default we pretty much stick to field-type and field element styles (such as
- *   .field-label's). You could style specific instances of fields here, or do that
- *   in an entity stylesheet, for example _node.scss.
- */
+ * Fields
+ *  - Note that AT changes field image and taxonomy term reference fields.
+ ========================================================================== */
 .field .field__label {
   font-family: inherit;
   font-weight: 600;
@@ -2361,16 +2710,13 @@ video {
 }
 
 /**
- * Field types (Core)
- */
-/**
  * Image fields use the <figure> and <figcaption> elements from HTML5
  */
 .field-type--image {
   /**
    * Image Alignment Theme Settings
    * - settings are applied using the Image extension in theme settings, where you can
-   *   set image alignment per node type and view mode.
+   *   set image alignment and captions per node type and view mode.
    */
 }
 .field-type--image figure {
@@ -2439,21 +2785,37 @@ video {
 }
 
 /**
- * Blocks.
- */
+ * Blocks
+ ========================================================================== */
 /**
- * Book.
- * - book nodes
- * - book navigation ('previous', 'up', and 'next', and the list of child nodes)
- * - book navigation block
- */
+ * Book
+ *  - book nodes
+ *  - book navigation ('previous', 'up', and 'next', and the list of child nodes)
+ *  - book navigation block
+ ========================================================================== */
 /**
- * Forums.
- * - see table.scss for generic table styles.
- */
+ * Forums
+ *  - see table.scss for generic table styles.
+ ========================================================================== */
 /**
- * Node types (content types).
- */
+ * Content Types (nodes)
+ *  - in Drupal a content type is a bunch of fields we use to enter and display
+ *    content, such as pages, blog posts, forum posts and so on. Each of those
+ *    is usually a content type you create in the Drupal admin.
+ *  - an instance of a content type (e.g. a single blog post) is called a node,
+ *    the root template is called node.html.twg and the base selector is .node {}
+ ========================================================================== */
+.node {
+  *zoom: 1;
+}
+.node:before, .node:after {
+  content: "";
+  display: table;
+}
+.node:after {
+  clear: both;
+}
+
 .node__author {
   display: inline;
 }
@@ -2477,8 +2839,10 @@ video {
 }
 
 /**
- * Comments.
- */
+ * Comments
+ *  - comment field (holds comment title, form, comments etc)
+ *  - styles for comments
+ ========================================================================== */
 .field-node--comment {
   clear: both;
 }
@@ -2493,16 +2857,27 @@ video {
   clear: both;
 }
 
+.comment {
+  *zoom: 1;
+}
+.comment:before, .comment:after {
+  content: "";
+  display: table;
+}
+.comment:after {
+  clear: both;
+}
+
 .comment__author {
   display: inline;
 }
 
 /**
- * Search.
- * - search block and form
- * - advanced search form
- * - search results pages
- */
+ * Search
+ *  - search block and form
+ *  - advanced search form
+ *  - search results pages
+ ========================================================================== */
 .block--search div,
 .search-form .form-wrapper div {
   display: inline-block;
@@ -2524,15 +2899,55 @@ video {
 }
 
 /**
- * User.
- * - user profile pages.
- */
+ * User Profiles
+ *  - user profile pages.
+ ========================================================================== */
 /**
  * Views.
  */
+.views-row {
+  *zoom: 1;
+}
+.views-row:before, .views-row:after {
+  content: "";
+  display: table;
+}
+.views-row:after {
+  clear: both;
+}
+
 /**
- * Print.
- */
+ * Utility/Misc
+ * - misc utility classes that don't really fit anywhere else.
+ ========================================================================== */
+[class*="unpublished"] {
+  background-color: #fff4f4;
+}
+[class*="unpublished"] p.unpublished {
+  font-size: 48px;
+  font-size: 3rem;
+  line-height: 72px;
+  line-height: 4.5rem;
+  font-family: Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+  text-align: center;
+  color: #ffdbdb;
+}
+
+[class*="preview"] {
+  background-color: #ffffea;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+/**
+ * Print
+ ========================================================================== */
 @media print {
   * {
     background: transparent !important;

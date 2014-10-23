@@ -1,0 +1,77 @@
+// Tiles
+// this applies to the body element, can this be changed, looks like our new JS does note require body classes
+// for tiles or slidedown, only the offcanvas style (to toggle the page-root animation).
+
+@mixin tiles {
+  .menu-style-tiles {
+
+    // By default submenus are hidden.
+    .responsive-menu-region {
+      .block-menu__title,
+      .menu-level-2 {
+        @include visually-hidden;
+      }
+
+      .block-menu__content {
+        @include cf;
+      }
+    }
+
+    &.tiles-count-2 {
+      .responsive-menu-region {
+        .menu-level-1 {
+          > li {
+            @include span(6); // Use Susy to set width and float direction.
+
+            &:nth-child(2n) {
+              margin-#{$flow-to}: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &.tiles-count-3 {
+      .responsive-menu-region {
+        .menu-level-1 {
+          > li {
+            @include span(4);
+
+            &:nth-child(3n) {
+              margin-#{$flow-to}: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &.tiles-count-4 {
+      .responsive-menu-region {
+        .menu-level-1 {
+          > li {
+            @include span(3);
+
+            &:nth-child(4n) {
+              margin-#{$flow-to}: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &.tiles-submenus-true {
+      .responsive-menu-region {
+        .menu-level-2 {
+          @include visually-hidden-off;
+        }
+        .menu-level-1 .menu {
+          li {
+            @include span(12 of 12);
+            clear: both;
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -53,7 +53,7 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
 }
 
 [class*="page-row__"] {
-  padding: 0 1.6949153%;
+  padding: 0 1.25em;
 }
 
 /* Header (2 regions) */
@@ -101,13 +101,11 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
   margin-right: 0;
 }
 .page-row__main.has-regions--2-3 .region:first-child {
-  margin-left: 33.8983051%;
   width: 66.1016949%;
   float: right;
   margin-right: 0;
 }
 .page-row__main.has-regions--2-3 .region:last-child {
-  margin-left: -101.6949153%;
   width: 32.2033898%;
   float: left;
   margin-right: 1.6949153%;

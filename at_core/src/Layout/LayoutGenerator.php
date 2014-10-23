@@ -94,9 +94,6 @@ class LayoutGenerator extends PageLayout {
     // Template path
     $template_file = $this->plugin_path . $this->selected_plugin . '/' . $layouts['template'];
 
-    //kpr($layouts);
-    //kpr($template_file);
-
     // Get the template file, if not found attempt to generate template code programmatically.
     if (file_exists($template_file)) {
       $template = file_get_contents($template_file);
@@ -112,7 +109,16 @@ class LayoutGenerator extends PageLayout {
         if ($row == 'header' || $row == 'footer') {
           $wrapper_element = $row;
         }
-        $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+
+
+        // Temporarily add tabs, we can remove this later when the tabs become a block.
+        if ($row == 'main') {
+          $output[$row]['prefix'] = '  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+        }
+        else {
+          $output[$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+        }
+
         $output[$row]['wrapper_open'] =  '  <'. $wrapper_element . '{{ ' .  $row . '__attributes }}>';
         $output[$row]['container_open'] = '    <div class="regions regions__' . $row . '">';
         $output[$row]['regions'] = implode("\n", $row_regions[$row]);
@@ -125,6 +131,7 @@ class LayoutGenerator extends PageLayout {
       $generated[] = '<div{{ attributes }}>'. "\n";
       $generated[] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
       $generated[] = "  {{ messages }}" . "\n";
+
       foreach ($output as $row_output) {
         $generated[] = implode("\n", $row_output);
       }

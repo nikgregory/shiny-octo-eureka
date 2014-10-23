@@ -10,10 +10,11 @@
 
 /* -- Delete this line to enable.
 function THEMENAME_form_system_theme_settings_alter(&$form, &$form_state) {
-  //$theme = $form_state['build_info']['args'][0];
+  // $build_info = $form_state->getBuildInfo();
+  // $theme = $build_info['args'][0];
 
-  //$form['#validate'][] = 'THEMENAME_settings_form_validate';
-  //$form['#submit'][] = 'THEMENAME_settings_form_submit';
+  // $form['#validate'][] = 'THEMENAME_settings_form_validate';
+  // $form['#submit'][] = 'THEMENAME_settings_form_submit';
 }
 // */
 

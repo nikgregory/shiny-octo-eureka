@@ -1,0 +1,89 @@
+//
+// Import required plugins and define base variables.
+//
+// Don't write any actual styles here, it's just for configuration and imports.
+// ---------------------------------------------------------------------------
+
+// Requirements
+@import "compass";
+@import "susy";
+
+
+// Susy defaults
+// http://susy.readthedocs.org/en/latest/settings/#global-defaults
+$susy: (
+  global-box-sizing: border-box,
+
+  debug: (
+    image: show-columns,
+    color: rgba(0,0,0,0.25),
+    output: overlay,
+    toggle: bottom left,
+  ),
+);
+
+
+// site-builder container
+$site-builder: (
+  container: 75em,  // default max-width (1200px)
+  columns: 12,      // number of grid columns (the context)
+  gutters: .25,     // gutter width is 1/4 of one grid column
+);
+
+
+// Flow Direction
+// Set variables for the flow direction. These variables are used
+// in some layouts to account for RTL languages. They're also used
+// extensively in the UIKit. You can switch to a fully RTL compatible
+// theme by changing the $susy "flow" setting to "rtl". You must
+// re-compile your CSS for this to take affect.
+$flow-direction: susy-get(flow, $susy) !global;
+$flow-to: to($flow-direction);
+$flow-from: from($flow-direction);
+
+
+// Breakpoints
+//
+// These breakpoints use ems, which mean they are dependant on the base font size,
+// so any pixel equivalents stated here assume base font size of 16px. Change them
+// to suit your requirements.
+//
+//
+//   $mobile          - 0 to 45em (0 to 720px), small screens only.
+//   $mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+//
+//   $tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+//   $tablet          - 45em (720px) and up.
+//
+//   $widescreen      - 65em (1040px) and up.
+//
+//   $huge            - 120em (1920px) and up, for big resolution.
+//
+//
+// Here you can see how each breakpoint cascades or isolates. The first 3 are effectively
+// isolation breakpoints, however we allow $mobile-tablet to cascade into $tablet-isolate
+// and $tablet. The last 3 all cascade.
+//
+// Most layouts for AT use $tablet-isolate, $tablet and/or $widescreen breakpoints only.
+//
+// | $mobile ------>|
+// | $mobile-tablet -------------------->|
+//                  | $tablet-isolate -->|
+//                  | $tablet ----------------------------------------------------->
+//                                       | $widescreen ---------------------------->
+//                                                                   | $huge ------>
+//
+$mobile          : "all and (max-width: 45em)";
+$mobile-tablet   : "all and (max-width: 65em)";
+$tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
+$tablet          : "all and (min-width: 45em)";
+$widescreen      : "all and (min-width: 65em)";
+$huge            : "all and (min-width: 120em)";
+
+
+
+
+
+
+
+

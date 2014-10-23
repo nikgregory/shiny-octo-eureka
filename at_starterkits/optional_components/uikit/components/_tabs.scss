@@ -1,201 +1,23 @@
 /**
- * Tabs.
+ * Tabs
  *  - styles for tabs such as local tasks, other tabbed UI like
  *    quicktabs could be applied here.
- *
- * Uses placeholders to easily extend required styles.
- */
-
-$tabs-alignment:              left;
-
-$tab-text-color:              $text-color;
-$tab-text-hover-color:        $text-color;
-$tab-text-active-color:       $text-color;
-
-$tab-background-color:        lighten($text-background-color, 5%);
-$tab-background-hover-color:  $text-background-color;
-$tab-background-active-color: $text-background-color;
-
-$tab-border-width:            $border-width;
-$tab-border-style:            $border-style;
-$tab-border-color:            $border-color;
-$tab-border-radius:           $border-radius;
+ ========================================================================== */
 
 
-// Tabs as tabs, classic Drupalish tabs, i.e local tasks.
-// In mobile screen width they collapse into a stacked list of tabish buttons.
-%tabs-as-tabs {
-  padding: 0;
-  list-style: none;
+// Primary local tasks. TODO may need updating when local-tasks block lands.
+// Remove when local tasks becomes a block.
+.page-row__temporary-tabs {
   @include output-rhythm(margin, $medium 0);
-  @include clearfix-micro;
 
-  @media #{$wide} {
-    border-bottom: $tab-border-width $tab-border-style $tab-border-color;
+  @media #{$mobile-tablet} {
+    @include list-style-button-group-vertical('ul.tabs.primary');
+    @include list-style-seven-vertical('ul.tabs.secondary');
   }
 
-  li {
-    display: block;
-
-    @media #{$mobile} {
-      &:first-child a {
-        @include border-radius($tab-border-radius $tab-border-radius 0 0);
-      }
-
-      &:last-child a {
-        @include border-radius(0 0 $tab-border-radius $tab-border-radius);
-        border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-      }
-    }
-
-    @media #{$wide} {
-      float: left; // LTR
-      margin-bottom: -1px;
-
-      &:first-child a {
-        @include border-radius($tab-border-radius 0 0 0); // LTR
-      }
-
-      &:last-child a {
-        @include border-radius(0 $tab-border-radius 0 0); // LTR
-      }
-    }
-  }
-
-  a {
-    display: block;
-    line-height: 1;
-    color: $tab-text-color;
-    background: $tab-background-color;
-    border: $tab-border-width $tab-border-style $tab-border-color;
-    @include output-rhythm(padding, $xx-small $medium);
-    @include transition(background-color, .15s, ease-in-out);
-    @include box-shadow(rgba(255, 255, 255, 0.5) 0 1px 0 inset);
-
-    @media #{$wide} {
-      margin-right: -1px;
-    }
-
-    @media #{$mobile} {
-      border-bottom: 0;
-    }
-
-    &:hover,
-    &:focus {
-      color: $tab-text-hover-color;
-      background: $tab-background-hover-color;
-      text-decoration: none;
-    }
-
-    &.active {
-      color: $tab-text-active-color;
-      background: none;
-      border-bottom-color: $background-color;
-
-      &:hover,
-      &:focus {
-        color: $tab-text-hover-color;
-        background: none;
-      }
-    }
+  @media #{$widescreen} {
+    @include list-style-tab-group('ul.tabs.primary');
+    @include list-style-seven-horizontal('ul.tabs.secondary');
   }
 }
-
-// Tabs as tabs RTL
-%tabs-as-tabs-rtl {
-  padding: 0;
-
-  a {
-    margin-left: -1px;
-    margin-right: 0;
-  }
-
-  li {
-    float: right;
-
-    &:first-child a {
-      margin-left: -1px;
-      @include border-radius(0 $tab-border-radius 0 0);
-    }
-
-    &:last-child a {
-      @include border-radius($tab-border-radius 0 0 0);
-    }
-  }
-}
-
-
-
-// Tabs as horizontal links, i.e. like Seven themes secondary tasks
-%tabs-horizontal-links {
-  padding: 0;
-  list-style: none;
-  //border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-
-  @include output-rhythm(margin, $medium 0);
-  @include clearfix-micro;
-
-  li {
-    display: block;
-    float: left; // LTR
-    @include output-rhythm(margin, 0 $xx-small);
-  }
-
-  a {
-    display: block;
-    line-height: 1;
-    color: $tab-text-color;
-
-    @include output-rhythm(padding, $xx-small $medium);
-    @include transition(background-color, .15s, ease-in-out);
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-      color: $tab-text-hover-color;
-      border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-    }
-
-    &.active {
-      border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-
-      &:hover,
-      &:focus {
-        color: $tab-text-hover-color;
-      }
-    }
-  }
-}
-
-// Tabs as horizontal links RTL
-%tabs-horizontal-links-rtl {
-  padding: 0;
-
-  li {
-    float: right;
-  }
-}
-
-
-
-
-// Primary local tasks, probably needs updating when local-tasks block lands:
-.tabs.primary {
-  @extend %tabs-as-tabs;
-
-  @at-root [dir="rtl"] .tabs.primary {
-    @extend %tabs-as-tabs-rtl;
-  }
-}
-
-// Secondary local tasks.
-.tabs.secondary {
-  @extend %tabs-horizontal-links;
-
-  @at-root [dir="rtl"] .tabs.secondary {
-    @extend %tabs-horizontal-links-rtl;
-  }
-}
-
-
 

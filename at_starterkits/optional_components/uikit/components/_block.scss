@@ -1,9 +1,13 @@
 /**
- * Blocks.
- */
+ * Blocks
+ ========================================================================== */
 
 .block {}
-.block-title {}
+
+.block__title {}
+.block__content {}
+
+
 
 
 // Most blocks have a class indicating what module generated the block, e.g.
@@ -35,3 +39,4 @@
 
 // System module generated Footer block.
 #block-footer {}
+
