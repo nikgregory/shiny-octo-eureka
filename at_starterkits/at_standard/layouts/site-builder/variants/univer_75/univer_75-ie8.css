@@ -1,5 +1,5 @@
 .regions {
-  max-width: 73.75em;
+  max-width: 75em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -53,7 +53,11 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
 }
 
 [class*="page-row__"] {
-  padding: 0 1.25em;
+  padding: 0 2vw;
+}
+
+[class*="page-row__"] {
+  padding: 0 2%;
 }
 
 /* Header (2 regions) */
@@ -163,7 +167,7 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
   width: 15.2542373%;
   float: left;
   margin-right: 1.6949153%;
-  margin-left: -59.3220339%;
+  margin-left: -76.2711864%;
 }
 .page-row__main.has-regions--2-3-4 .region:last-child {
   width: 23.7288136%;

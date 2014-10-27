@@ -32,13 +32,20 @@ $form['ext']['ext_settings']['settings_enable_extensions'] = array(
   '#default_value' => theme_get_setting('settings.enable_extensions', $theme),
 );
 
-
 $form['ext']['ext_settings']['enable_ext'] = array(
   '#type' => 'fieldset',
   '#title' => t('Extensions'),
   '#states' => array(
     'invisible' => array('input[name="settings_enable_extensions"]' => array('checked' => FALSE)),
   ),
+);
+
+// Menus
+$form['ext']['ext_settings']['enable_ext']['settings_enable_responsive_menus'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Responsive menus'),
+  '#description' => t('Select responsive menu styles.'),
+  '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
 );
 
 // Fonts
@@ -65,15 +72,6 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_images'] = array(
   '#description' => t('Set default image alignment, image captions and teaser image view.'),
 );
 
-
-// Menus
-$form['ext']['ext_settings']['enable_ext']['settings_enable_responsive_menus'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Responsive menus'),
-  '#description' => t('Select responsive menu styles.'),
-  '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
-);
-
 // Touch icons
 $form['ext']['ext_settings']['enable_ext']['settings_enable_touch_icons'] = array(
   '#type' => 'checkbox',
@@ -88,6 +86,14 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_libraries'] = array(
   '#title' => t('Libraries'),
   '#description' => t('Load Drupal core libraries (JavaScripts).'),
   '#default_value' => theme_get_setting('settings.enable_libraries', $theme),
+);
+
+// Classitis
+$form['ext']['ext_settings']['enable_ext']['settings_enable_classitis'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Classitis'),
+  '#description' => t('Enter classes for page rows, regions, blocks, and per node type.'),
+  '#default_value' => theme_get_setting('settings.enable_classitis', $theme),
 );
 
 // Custom CSS

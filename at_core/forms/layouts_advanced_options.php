@@ -22,7 +22,7 @@ $form['layouts']['adv_options']['select']['max_width'] = array(
   '#title' => t('Max Width'),
   '#collapsed' => TRUE,
   '#collapsible' => TRUE,
-  '#description' => t('<p>Adaptivetheme supplied layouts have a max-width set in em. You can override the max-width value and unit. Percent (%) will give a fluid layout, all other units result in an elastic type layout. This is a global setting that applies to all templates.</p>'),
+  '#description' => t('<p>Override the max-width value and unit. Percent (%) and viewport width (vw) will give a fluid layout.</p>'),
 );
 
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable'] = array(
@@ -42,10 +42,18 @@ $form['layouts']['adv_options']['select']['max_width']['settings_max_width_value
   ),
 );
 
+$max_width_units = array(
+  'em'  => 'em',
+  'rem' => 'rem',
+  '%'   => '%',
+  'vw'  => 'vw',
+  'px'  => 'px',
+);
+
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_unit'] = array(
   '#type' => 'select',
   '#title' => t('Unit'),
-  '#options' => array('em' => 'em', 'rem' => 'rem', '%' => '%', 'px' => 'px'),
+  '#options' => $max_width_units,
   '#default_value' => theme_get_setting('settings.max_width_unit'),
   '#states' => array(
     'disabled' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),

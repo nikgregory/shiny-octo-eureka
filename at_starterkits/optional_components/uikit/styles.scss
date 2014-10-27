@@ -8,10 +8,12 @@
 @import "site-builder-base";
 
 // Modular Scale.
-@import 'modular-scale';
+@import "modular-scale";
 
 // UI Kit Variables.
-@import "components/variables";
+@import
+  "components/font-awesome/variables",
+  "components/variables";
 
 // UI Kit Mixins.
 @import "components/mixins/mixins";
@@ -24,7 +26,6 @@
   "components/page",
   "components/messages",
   "components/menus",
-  "components/navbar",
   "components/responsive-menus",
   "components/breadcrumb",
   "components/pagers",
@@ -45,7 +46,8 @@
   "components/search",
   "components/user-profile",
   "components/views",
-  "components/utility";
+  "components/utility",
+  "components/classitis";
 
 // Print styles.
 @import "components/print";

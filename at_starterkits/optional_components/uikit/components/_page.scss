@@ -4,13 +4,6 @@
  *    .region {}
  ========================================================================== */
 
-// Full width background toggle
-$page-row-backgrounds-full-width: true;
-
-// If page row backgrounds are set on .regions we need some horizontal padding.
-$regions-padding: $medium;
-
-
 // html and body
 html,
 body {
@@ -31,14 +24,18 @@ body {
 // If you are using offcanvas menu, it's the page-root that pushes over, not body.
 .page-root {
   position: relative;
-  background-color: $background-color;
+  background-color: $page-root-background;
 }
 
+// We need some padding to avoid browser collisions.
+[class*="page-row__"] {
+  padding: 0 2vw;
+}
 
 // Regions
 //  - .regions is the main wrapper selector for all regions within a page-row.
 .regions {
-  @include output-rhythm(padding, $regions-padding 0);
+  background-color: $regions-background;
 }
 
 
@@ -49,10 +46,17 @@ body {
 //  - apply a micro clearfix globally, this ensures dynamic height content
 //    does not disrupt the layout in unexpected ways.
 .region {
+  padding: $small 0;
   @include transition(all, .2s, ease-in);
   @include clearfix-micro;
 }
 
+// Remove layout form hidden regions.
+.region__page-top,
+.region__page-bottom {
+  padding: 0;
+  margin: 0;
+}
 
 
 //  Page Rows - these match the Site Builder layout.
@@ -79,11 +83,7 @@ body {
 .page-row__header {
   @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
 
-  @if $page-row-backgrounds-full-width == false {
-    .regions {
-      @include output-rhythm(padding, $regions-padding);
-    }
-  }
+  .regions {}
 }
 
 
@@ -92,7 +92,7 @@ body {
   @include page-row-colors($page-row-navbar-background-color, $page-row-navbar-color, $page-row-backgrounds-full-width);
 
   .regions {
-    padding: 0; // highly unlikely we want padding set here.
+    padding: 0;
   }
 }
 
@@ -119,12 +119,10 @@ body {
 .page-row__footer {
   @include page-row-colors($page-row-footer-background-color, $page-row-footer-color, $page-row-backgrounds-full-width);
 
-  @if $page-row-backgrounds-full-width == false {
-    .regions {
-      @include output-rhythm(padding, $regions-padding);
-    }
-  }
+  .regions {}
 }
+
+
 
 
 // Theme attribution message. This is a toggle setting in the advanced theme

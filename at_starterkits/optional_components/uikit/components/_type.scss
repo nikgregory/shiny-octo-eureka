@@ -5,13 +5,30 @@
  *  - also includes misc other elements such as hr.
  ========================================================================== */
 
+html {
+  font-size: 100%;
+  line-height: 1.5;
+}
+
 body {
   color: $text-color;
+}
+
+// Margin reset.
+ul,ol,dd,dl,
+p,figure,
+pre,table,fieldset,hr,
+form {
+  margin: 0 0 1.5rem;
 }
 
 // Headings.
 #{headings(all)} {
   margin: 0;
+}
+
+#{headings(1,4)} {
+
 }
 
 #{headings(1,3)} {
@@ -31,51 +48,63 @@ body {
  * to generate font sizes in em and set a relative line-height.
  * SEE: _variables.scss
  */
-h1, .h1 {@include adjust-font-size-to($xxx-large)}
-h2, .h2 {@include adjust-font-size-to($xx-large)}
-h3, .h3 {@include adjust-font-size-to($x-large)}
-h4, .h4 {@include adjust-font-size-to($large)}
-h5, .h5 {@include adjust-font-size-to($medium)}
-h6, .h6 {@include adjust-font-size-to($small)}
+h1, .h1 {@include font-size($xxx-large)}
+h2, .h2 {@include font-size($xx-large)}
+h3, .h3 {@include font-size($x-large)}
+h4, .h4 {@include font-size($large)}
+h5, .h5 {@include font-size($medium)}
+h6, .h6 {@include font-size($small)}
 
 // Using the small element to control font size, and idea lifted from Bootstrap.
-h1 small, .h1 small {@include adjust-font-size-to($x-large)}
-h2 small, .h2 small {@include adjust-font-size-to($large)}
+h1 small, .h1 small {@include font-size($x-large)}
+h2 small, .h2 small {@include font-size($large)}
 h3 small, .h3 small,
-h4 small, .h4 small {@include adjust-font-size-to($medium)}
+h4 small, .h4 small {@include font-size($medium)}
 
 
 // Paragraph.
 p {
-  @include adjust-font-size-to($medium);
+  @include font-size($medium);
 }
 
 p,
 dl,
 multicol {
   display: block;
-  @include output-rhythm(margin, $medium 0);
+}
+
+
+// Debug
+body > pre,
+.xdebug-var-dump {
+  color: $background-color;
+}
+
+.page-root {
+  .xdebug-var-dump {
+    color: $text-color;
+  }
 }
 
 
 // Links.
 a {
-  color: $link-color;
+  //color: $link-color;
   text-decoration: none;
 
   &:link,
   &:visited {
-    color: $link-color; // or use $link-visited-color
+    //color: $link-color; // or use $link-visited-color
   }
 
   &:active,
   &.active {
-    color: $link-active-color;
+    //color: $link-active-color;
   }
 
   &:hover,
   &:focus {
-    color: $link-hover-color;
+    //color: $link-hover-color;
     text-decoration: underline;
   }
 }
@@ -84,8 +113,7 @@ a {
 // Lists.
 ul,
 ol {
-  @include output-rhythm(margin, 0 0 $medium);
-  @include output-rhythm(padding, 0 0 0 $large); // LTR
+  @include output-rhythm(padding, 0 0 0 $medium); // LTR
 
   @at-root [dir="rtl"] ul, [dir="rtl"] ol {
     @include output-rhythm(padding, 0 $large 0 0);
@@ -113,6 +141,7 @@ ol {
     padding: 0;
   }
 }
+
 @media #{$tablet} {
   @include list-multicolumn('.list-multicolumn', 12em);
 }
@@ -167,19 +196,18 @@ ul {
 
 
 // Definition lists.
-dl {
-  @include output-rhythm(margin, $medium 0);
-}
+dl {}
 
 dt {
   font-weight: $font-weight-semibold;
 }
 
 dd {
-  @include output-rhythm(margin, 0 0 0 $medium); // LTR
+  @include output-rhythm(margin-left, $medium); // LTR
 
   @at-root [dir="rtl"] dd {
-    @include output-rhythm(margin, 0 $medium 0 0);
+    margin-left: 0;
+    @include output-rhythm(margin-right, $medium);
   }
 }
 
@@ -208,8 +236,7 @@ dd {
 // Blockquotes, Bootstrap style.
 blockquote {
   @include output-rhythm(padding, $medium);
-  @include output-rhythm(margin, 0 0 $medium);
-  border-#{$flow-from}: 5px solid $border-color; // RTL is border-left, i.e. $flow-from is left etc.
+  border-#{$flow-from}: 5px solid $border-color; // LTR
 
   p {
     @include adjust-font-size-to($large);
@@ -220,14 +247,12 @@ blockquote {
 
       &:before {
         font-family: FontAwesome, sans-serif;
-        content: "\f10d";  // open quote
-
+        content: $fa-var-quote-left;  // LTR
         color: $border-color;
         display: inline-block;
         padding: 0 5px 0 0;  // LTR
         margin: 0;
-        text-align: left;
-
+        text-align: $flow-from; // LTR
         @include output-rhythm(width, $large);
       }
     }
@@ -243,7 +268,7 @@ blockquote {
     color: lighten($text-color, $lighten-more);
 
     &:before {
-      content: '\2014 \00A0';// EM DASH, NBSP
+      content: '\2014 \00A0'; // EM DASH, NBSP
     }
   }
 
@@ -264,7 +289,7 @@ blockquote {
         content: '';
       }
       &:after {
-        content: '\00A0 \2014';// NBSP, EM DASH
+        content: '\00A0 \2014'; // NBSP, EM DASH
       }
     }
   }

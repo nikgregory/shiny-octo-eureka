@@ -55,21 +55,25 @@ input {
   &[type="tel"],
   &[type="color"] {
     line-height: normal;
-    color: $form-item-text-color;
-    border: $form-item-border-width $form-item-border-style $form-item-border-color;
-    background-color: $form-item-background-color;
-
+    color: $form-text-color;
+    border: $form-border-width $form-border-style $form-border-color;
+    background-color: $form-background-color;
 
     @include output-rhythm(padding, $xx-small $x-small);
-    @include border-radius($form-item-border-radius);
+    @include border-radius($form-border-radius);
     @include transition(all, .15s, linear);
     @include box-shadow(rgba(0,0,0,0.1) 0 1px 2px inset);
 
     &:focus {
       outline: 0;
-      outline: thin dotted \9; // IE6-9
-      border-color: $form-item-border-color;
-      color: $form-item-text-focus-color;
+      outline: thin dotted \9; // IE9
+      border-color: $form-border-color;
+      color: $form-text-focus-color;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $form-background-focus-color;
     }
 
     &[disabled] {
@@ -78,7 +82,7 @@ input {
 
       &:hover,
       &:focus {
-        color: $form-item-text-focus-color;
+        color: $form-text-focus-color;
       }
     }
   }
@@ -120,12 +124,12 @@ select {
 // Select. TODO: js to control selects, i.e. transform into div and list elements.
 select {
   /*
-  border: $form-item-border-width $form-item-border-style $form-item-border-color;
-  background-color: $form-item-background-color;
-  color: $form-item-text-color;
+  border: $form-border-width $form-border-style $form-border-color;
+  background-color: $form-background-color;
+  color: $form-text-color;
 
   @include output-rhythm(padding, $xx-small $x-small);
-  @include border-radius($form-item-border-radius);
+  @include border-radius($form-border-radius);
   @include appearance(none);
   */
 
@@ -177,7 +181,7 @@ textarea {
 // Tips
 .tips {
   font-size: 0.85em;
-  color: $form-item-help-color;
+  color: $form-help-color;
 
   li {
     list-style: none;
@@ -187,7 +191,7 @@ textarea {
 
 // Form item descriptions
 .description {
-  color: $form-item-help-color;
+  color: $form-help-color;
   font-size: 0.85em;
 }
 
@@ -213,11 +217,11 @@ h4.label {
 }
 
 .marker {
-  color: $form-item-marker-color;
+  color: $form-marker-color;
 }
 
 .form-required:after {
-  color: $form-item-marker-color;
+  color: $form-marker-color;
   /* Use a Unicode symbol to prevent screen readers from announcing the text. */
   content: " \204E ";
   line-height: 1;
@@ -249,7 +253,7 @@ abbr {
 .form-type-radio,
 .form-type-checkbox {
   .description {
-    margin-left: 2.4em;
+    margin-#{$flow-from}: 2.4em;
   }
 }
 
@@ -284,11 +288,12 @@ abbr {
 
 // Adjust specific form field types
 form {
+  // Form field image
   .field-type-image {
     .image-preview {
       padding: 0;
-      margin: 0 $medium $medium 0; // LTR
       background: transparent;
+      @include output-rhythm(margin, 0 $medium $medium 0); // LTR
     }
 
     .image-widget-data {
@@ -297,11 +302,12 @@ form {
       }
     }
   }
-}
 
+  @at-root [dir="rtl"] form .field-type-image .image-preview {
+    @include output-rhythm(margin, 0 0 $medium $medium);
+  }
 
-// Table drag styles
-form {
+  // Table drag styles
   .field-edit-link {
     margin: 0 0.3em;
   }
@@ -322,14 +328,14 @@ form {
   .field-add-more-submit {
     margin: .5em 0 0;
   }
-}
 
-// RTL for table drag
-[dir="rtl"] form .field-multiple-table .field-multiple-drag {
-  padding-left: 0;
+  // RTL for table drag
+  @at-root [dir="rtl"] form .field-multiple-table .field-multiple-drag {
+    padding-left: 0;
 
-  .tabledrag-handle {
-    padding-left: .5em;
+    .tabledrag-handle {
+      padding-left: .5em;
+    }
   }
 }
 
@@ -355,8 +361,8 @@ form {
  * @thanks http://nicolasgallagher.com/css-background-image-hacks/
  */
 details {
-  border: $form-item-border-width $form-item-border-style $form-item-border-color;
-  @include border-radius($border-radius);
+  border: $form-border-width $form-border-style $form-border-color;
+  //@include border-radius($border-radius);
   @include output-rhythm(margin, $medium 0);
 
   > .details-wrapper {
@@ -379,7 +385,7 @@ summary {
 
     &:before {
       font-family: FontAwesome, sans-serif;
-      content: "\f0d7"; // fa-caret-down
+      content: $form-details-summary-open;
       float: left;
       margin: -1px 0 0;
       @include output-rhythm(height, $medium);
@@ -389,7 +395,7 @@ summary {
 }
 
 .collapse-processed:not([open]) > summary:before {
-  content: "\f0da"; // LTR, fa-caret-right
+  content: $form-details-summary-closed;
 }
 
 
@@ -400,7 +406,7 @@ summary {
   }
 
   .collapse-processed:not([open]) > summary:before {
-    content: "\f0d9"; // RTL, fa-caret-left
+    content: $form-details-summary-closed-rtl;
   }
 }
 

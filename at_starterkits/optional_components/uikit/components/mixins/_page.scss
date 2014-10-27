@@ -5,11 +5,16 @@
   @if $page-row-backgrounds-full-width {
     background-color: $background-color;
     color: $color;
+
+    .regions {
+      background-color: inherit; // override the default bg for regions
+    }
   }
   @else {
     .regions {
       background-color: $background-color;
       color: $color;
+      padding: $regions-padding;
     }
   }
 }

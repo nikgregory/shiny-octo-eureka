@@ -31,5 +31,5 @@ img.align-right {
 }
 
 img.align-center {
-  @include output-rhythm(margin, $xxxx-small auto $medium);
+  @include output-rhythm(margin, $xxxx-small 0 $medium);
 }

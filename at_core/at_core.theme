@@ -10,6 +10,7 @@ use Drupal\at_core\Layout\PageLayout;
 use Drupal\at_core\Layout\LayoutAttributes;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\Tags;
 use Drupal\node\NodeInterface;
 
 
@@ -152,6 +153,8 @@ function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
+  //var_dump($variables);
+
   // Add a "site name" body classes for advanced theming of multi-sites.
   if ($variables['head_title_array']['name']) {
     $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
@@ -242,116 +245,6 @@ function at_core_preprocess_page(&$variables) {
     );
   }
 
-  // Attach Menu Toggle library
-  //if (at_core_theme_get_setting("settings.theme_library_at_menu_toggle", $theme) === 1) {
-  //  $variables['#attached']['library'][] = 'at_core/at.menu_toggle';
-  //}
-
-  //$variables['#attached']['library'][] = 'at_core/at.flexnav';
-
-  // ##################################################################################################
-  // TODO - automated loading for theme trail libraries, the menu toggle is hard coded for now (above).
-  // ##################################################################################################
-
-
-  // Attach the selected layout.
-  if (at_core_theme_get_setting('settings.layouts_enable', $theme) === 1) {
-
-    if ($default_layout = at_core_theme_get_setting('settings.template_suggestion_page', $theme)) {
-
-      // Assume the root page templates layout as the default layout.
-      $page['#selected_layout'] = $default_layout;
-
-      // Assume the root page templates layout provider as the default provider.
-      $page['#selected_provider'] = at_core_theme_get_setting('settings.template_suggestion_provider_page', $theme);
-
-      // Assume the root page templates layout plugin as the default plugin.
-      $page['#selected_plugin'] = at_core_theme_get_setting('settings.template_suggestion_plugin_page', $theme);
-
-
-      // Get theme registry, we need to determine the template suggestion for the current page.
-      $theme_registry = theme_get_registry(FALSE);
-      $info = array();
-
-      // need to see what is in current_path and if this will actually work consistantly
-      $path_args = explode('/', current_path());
-
-      if ($suggestions = theme_get_suggestions($path_args, 'page')) {
-        foreach (array_reverse($suggestions) as $suggestion) {
-          // We need three settings to set the layout - the provider (the active theme or a base theme),
-          // the plugin (a layout plugin name) and the actual CSS layout set for this suggestion.
-          // Note in theme settings the root hook "page" is treated as a suggestion.
-          if ($suggestion_provider = at_core_theme_get_setting("settings.template_suggestion_provider_$suggestion", $theme)) {
-            $page['#selected_provider'] = $suggestion_provider;
-          }
-          if ($suggestion_plugin = at_core_theme_get_setting("settings.template_suggestion_plugin_$suggestion", $theme)) {
-            $page['#selected_plugin'] = $suggestion_plugin;
-          }
-          if ($suggestion_layout = at_core_theme_get_setting("settings.template_suggestion_$suggestion", $theme)) {
-            $page['#selected_layout'] = $suggestion_layout;
-          }
-          if ($theme_registry->has($suggestion)) {
-            $info = $theme_registry->get($suggestion);
-            break;
-          }
-        }
-      }
-
-      // Instantiate new PageLayout object, we paths to CSS files.
-      $layout_data = new PageLayout($page['#selected_provider'], $page['#selected_plugin'], $page['#selected_layout']);
-      $layouts = $layout_data->buildLayoutDataArrays();
-
-      // Set path to the selected layout CSS.
-      $file_path = drupal_get_path('theme', $page['#selected_provider']) . '/layouts/' . $page['#selected_plugin'] . '/' . $layouts['css_layout_path'] . '/' . $page['#selected_layout'];
-
-      // Main CSS layout file
-      $data = $file_path . '/' . $layouts['css_layout']['styles'];
-      $variables['#attached']['css'][$data] = array(
-        'type' => 'file',
-        'data' => $data,
-        'every_page' => FALSE,
-        'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_LAYOUT,
-      );
-
-      // No media queries CSS for IE8 (if enabled).
-      if (at_core_theme_get_setting('settings.layouts_no_mq_' . $page['#selected_layout'], $theme) === 1) {
-        // IE Layout file
-        $ie_data = $file_path . '/' . $layouts['css_layout']['no_mq'];
-        $variables['#attached']['css'][$ie_data] = array(
-          'type' => 'file',
-          'data' => $ie_data,
-          'browsers' => array(
-            'IE' => 'IE 8',
-            '!IE' => FALSE,
-          ),
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_LAYOUT,
-        );
-        // Attach IE9.js if IE8 support is set. This is rather brutal because
-        // the user can't disable this. We polyfill because all the shipped
-        // layouts use :last-child and other pseudo selectors not supported by
-        // IE8. Still, the user could use something else, what exactly I don't
-        // know because jQuery Selectivzr is not reliable and theres not a lot else
-        // out there.
-        $variables['#attached']['library'][] = 'at_core/at.ie9js';
-      }
-    }
-
-    // Max width override - need this to ideally load after the main layout CSS files.
-    if (at_core_theme_get_setting('settings.max_width_enable')) {
-      $max_width_file = $generated_css_file_path . '/' . $theme . '--max-width.css';
-      if (file_exists($max_width_file)) {
-        $variables['#attached']['css'][$max_width_file] = array(
-          'type' => 'file',
-          'data' => $max_width_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_LAYOUT,
-        );
-      }
-    }
-  }
-
   // Initialise attribution variable.
   $variables['attribution'] = '';
 
@@ -360,28 +253,51 @@ function at_core_preprocess_page(&$variables) {
 
     // Add the responsive menu styles settings.
     if (at_core_theme_get_setting('settings.enable_responsive_menus', $theme) === 1) {
-      $menu_style = at_core_theme_get_setting('settings.responsive_menu_style', $theme);
-      $settings = array('responsive_menu_style' => $menu_style);
+
+      $settings = array();
+
+      // Region
+      if ($responsive_menu_region = at_core_theme_get_setting('settings.responsive_menu_region', $theme)) {
+         $settings['responsive_menu_region'] = 'region__' . str_replace('_', '-', $responsive_menu_region);
+      }
+
+      //var_dump($settings);
+
+      $menu_style_default = at_core_theme_get_setting('settings.responsive_menu_default_style', $theme);
+      $menu_style_default_breakpoint = at_core_theme_get_setting('settings.responsive_menu_default_breakpoint', $theme);
+
+      $menu_style_responsive = at_core_theme_get_setting('settings.responsive_menu_responsive_style', $theme);
+      $menu_style_responsive_breakpoint = at_core_theme_get_setting('settings.responsive_menu_responsive_breakpoint', $theme);
+
+      $settings['menu_style_default']['style'] = $menu_style_default;
+      $settings['menu_style_default']['breakpoint'] = $menu_style_default_breakpoint;
+
+      $settings['menu_style_responsive']['style'] = $menu_style_responsive;
+      $settings['menu_style_responsive']['breakpoint'] = $menu_style_responsive_breakpoint;
 
       // Off canvas
-      if ($menu_style == 'offcanvas') {
-        $settings['offcanvas_position'] = 'left';
-        $settings['offcanvas_position'] = at_core_theme_get_setting('settings.responsive_menu_offcanvas_position', $theme);
+      if ($menu_style_default == 'offcanvas') {
+        $settings['menu_style_default']['options']['offcanvas_position'] = at_core_theme_get_setting('settings.responsive_menu_default_offcanvas_position', $theme);
       }
 
       // Tiles
-      if ($menu_style == 'tiles') {
-        $settings['tiles_count'] = 1;
-        $settings['tiles_submenus'] = FALSE;
-        $settings['tiles_count'] = at_core_theme_get_setting('settings.responsive_menu_tiles_count', $theme);
-        $settings['tiles_submenus'] = at_core_theme_get_setting('settings.responsive_menu_tiles_submenus', $theme);
+      if ($menu_style_default == 'tiles') {
+        $settings['menu_style_default']['options']['tiles_count'] = at_core_theme_get_setting('settings.responsive_menu_default_tiles_count', $theme);
+        $settings['menu_style_default']['options']['tiles_submenus'] = at_core_theme_get_setting('settings.responsive_menu_default_tiles_submenus', $theme);
       }
 
-      // Regions
-      if ($responsive_menu_region = at_core_theme_get_setting('settings.responsive_menu_region', $theme)) {
-         $settings['responsive_menu_region'] = 'region__' . $responsive_menu_region;
+      // Off canvas
+      if ($menu_style_responsive == 'offcanvas') {
+        $settings['menu_style_responsive']['options']['offcanvas_position'] = at_core_theme_get_setting('settings.responsive_menu_responsive_offcanvas_position', $theme);
       }
 
+      // Tiles
+      if ($menu_style_responsive == 'tiles') {
+        $settings['menu_style_responsive']['options']['tiles_count'] = at_core_theme_get_setting('settings.responsive_menu_responsive_tiles_count', $theme);
+        $settings['menu_style_responsive']['options']['tiles_submenus'] = at_core_theme_get_setting('settings.responsive_menu_responsive_tiles_submenus', $theme);
+      }
+
+      //var_dump($settings);
       $variables['#attached']['js'][] = array(
         'data' => array($theme => $settings),
         'type' => 'setting',
@@ -572,13 +488,107 @@ function at_core_preprocess_page(&$variables) {
       if (at_core_theme_get_setting('settings.attribution_toggle', $theme) === 1) {
         $variables['attribution'] = '<div class="attribution"><a href="http://adaptivethemes.com" target="_blank">Design by Adaptivethemes.com</a></div>';
       }
-
     }
   }
 
-  // Layouts attributes
-  if (at_core_theme_get_setting('settings.layouts_enable', $theme)) {
+  // Attach the selected layout.
+  if (at_core_theme_get_setting('settings.layouts_enable', $theme) === 1) {
 
+    if ($default_layout = at_core_theme_get_setting('settings.template_suggestion_page', $theme)) {
+
+      // Assume the root page templates layout as the default layout.
+      $page['#selected_layout'] = $default_layout;
+
+      // Assume the root page templates layout provider as the default provider.
+      $page['#selected_provider'] = at_core_theme_get_setting('settings.template_suggestion_provider_page', $theme);
+
+      // Assume the root page templates layout plugin as the default plugin.
+      $page['#selected_plugin'] = at_core_theme_get_setting('settings.template_suggestion_plugin_page', $theme);
+
+
+      // Get theme registry, we need to determine the template suggestion for the current page.
+      $theme_registry = theme_get_registry(FALSE);
+      $info = array();
+
+      // need to see what is in current_path and if this will actually work consistantly
+      $path_args = explode('/', current_path());
+
+      if ($suggestions = theme_get_suggestions($path_args, 'page')) {
+        foreach (array_reverse($suggestions) as $suggestion) {
+          // We need three settings to set the layout - the provider (the active theme or a base theme),
+          // the plugin (a layout plugin name) and the actual CSS layout set for this suggestion.
+          // Note in theme settings the root hook "page" is treated as a suggestion.
+          if ($suggestion_provider = at_core_theme_get_setting("settings.template_suggestion_provider_$suggestion", $theme)) {
+            $page['#selected_provider'] = $suggestion_provider;
+          }
+          if ($suggestion_plugin = at_core_theme_get_setting("settings.template_suggestion_plugin_$suggestion", $theme)) {
+            $page['#selected_plugin'] = $suggestion_plugin;
+          }
+          if ($suggestion_layout = at_core_theme_get_setting("settings.template_suggestion_$suggestion", $theme)) {
+            $page['#selected_layout'] = $suggestion_layout;
+          }
+          if ($theme_registry->has($suggestion)) {
+            $info = $theme_registry->get($suggestion);
+            break;
+          }
+        }
+      }
+
+      // Instantiate new PageLayout object, we need paths to CSS files.
+      $layout_data = new PageLayout($page['#selected_provider'], $page['#selected_plugin'], $page['#selected_layout']);
+      $layouts = $layout_data->buildLayoutDataArrays();
+
+      // Set path to the selected layout CSS.
+      $file_path = drupal_get_path('theme', $page['#selected_provider']) . '/layouts/' . $page['#selected_plugin'] . '/' . $layouts['css_layout_path'] . '/' . $page['#selected_layout'];
+
+      // Main CSS layout file
+      $data = $file_path . '/' . $layouts['css_layout']['styles'];
+      $variables['#attached']['css'][$data] = array(
+        'type' => 'file',
+        'data' => $data,
+        'every_page' => FALSE,
+        'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_LAYOUT,
+      );
+
+      // No media queries CSS for IE8 (if enabled).
+      if (at_core_theme_get_setting('settings.layouts_no_mq_' . $page['#selected_layout'], $theme) === 1) {
+        // IE Layout file
+        $ie_data = $file_path . '/' . $layouts['css_layout']['no_mq'];
+        $variables['#attached']['css'][$ie_data] = array(
+          'type' => 'file',
+          'data' => $ie_data,
+          'browsers' => array(
+            'IE' => 'IE 8',
+            '!IE' => FALSE,
+          ),
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_LAYOUT,
+        );
+        // Attach IE9.js if IE8 support is set. This is rather brutal because
+        // the user can't disable this. We polyfill because all the shipped
+        // layouts use :last-child and other pseudo selectors not supported by
+        // IE8. Still, the user could use something else, what exactly I don't
+        // know because jQuery Selectivzr is not reliable and theres not a lot else
+        // out there.
+        $variables['#attached']['library'][] = 'at_core/at.ie9js';
+      }
+    }
+
+    // Max width override - need this to ideally load after the main layout CSS files.
+    if (at_core_theme_get_setting('settings.max_width_enable')) {
+      $max_width_file = $generated_css_file_path . '/' . $theme . '--max-width.css';
+      if (file_exists($max_width_file)) {
+        $variables['#attached']['css'][$max_width_file] = array(
+          'type' => 'file',
+          'data' => $max_width_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_LAYOUT,
+        );
+      }
+    }
+
+    // Layouts attributes
     // Set a variable that holds an array of the active visible regions.
     $regions = system_region_list($theme, REGIONS_VISIBLE);
 
@@ -618,11 +628,25 @@ function at_core_preprocess_page(&$variables) {
  * Preprocess variables for region templates.
  */
 function at_core_preprocess_region(&$variables) {
-  $variables['attributes']['class'] = str_replace('region-', 'region__', $variables['attributes']['class']);
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Set wrapper element.
   $variables['html_element'] = 'div';
   if ($variables['region'] == 'content') {
     $variables['html_element'] = 'main';
     $variables['attributes']['role'][] = 'main';
+  }
+
+  // Classitis classes.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_classitis', $theme) === 1) {
+      if ($classes = at_core_theme_get_setting('settings.page_classes_region_' . $variables['region'], $theme)) {
+        $classitis = Tags::explode($classes);
+        foreach ($classitis as $class) {
+          $variables['attributes']['class'][] = $class;
+        }
+      }
+    }
   }
 }
 
@@ -630,7 +654,20 @@ function at_core_preprocess_region(&$variables) {
  * Preprocess variables for node templates.
  */
 function at_core_preprocess_node(&$variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
   $node = $variables['node'];
+
+  // Classitis classes.
+  if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+    if (at_core_theme_get_setting('settings.enable_classitis', $theme) === 1) {
+      if ($classes = at_core_theme_get_setting('settings.nodetype_classes_' . $node->getType(), $theme)) {
+        $classitis = Tags::explode($classes);
+        foreach ($classitis as $class) {
+          $variables['attributes']['class'][] = $class;
+        }
+      }
+    }
+  }
 
   // Header and Footer attributes.
   $variables['header_attributes'] = new Attribute(array('class' => array()));
@@ -757,7 +794,7 @@ function at_core_preprocess_comment(&$variables) {
  * Preprocess variables for block templates.
  */
 function at_core_preprocess_block(&$variables) {
- $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
   // Conditional markup, need to see if this affects caching and if so, think about that a lot.
   $variables['html_element'] = 'div';
@@ -766,8 +803,10 @@ function at_core_preprocess_block(&$variables) {
     $variables['attributes']['class'][] = 'has-title';
   }
 
-  // Remove login block links.
+  // Theme settings.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
+
+    // Remove login block links.
     if (at_core_theme_get_setting('settings.enable_markup_overrides', $theme) === 1) {
       if (at_core_theme_get_setting('settings.login_block_remove_links', $theme) === 1 || at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
         if ($variables['plugin_id'] == 'user_login_block') {
@@ -777,6 +816,18 @@ function at_core_preprocess_block(&$variables) {
           if (at_core_theme_get_setting('settings.horizontal_login_block', $theme) === 1) {
             $variables['attributes']['class'][] = 'block-login--horizontal';
           }
+        }
+      }
+    }
+
+    //var_dump($variables['elements']['#id']);
+
+    // Classitis classes.
+    if (at_core_theme_get_setting('settings.enable_classitis', $theme) === 1) {
+      if ($classes = at_core_theme_get_setting('settings.block_classes_' . $variables['elements']['#id'], $theme)) {
+        $classitis = Tags::explode($classes);
+        foreach ($classitis as $class) {
+          $variables['attributes']['class'][] = $class;
         }
       }
     }
@@ -790,14 +841,6 @@ function at_core_preprocess_block(&$variables) {
  */
 function at_core_preprocess_field(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-  /* Think about this later, means to put a class foreach taxonomy term that is unique so we can
-     add icons for specific terms
-  if ($variables['element']['#field_type'] == 'taxonomy_term_reference') {
-    foreach ($variables['items'] as $item_key => $item_value) {
-    }
-  }
-  */
 
   // Set variables for image fields.
   if (at_core_theme_get_setting('settings.enable_extensions', $theme) === 1) {
@@ -824,8 +867,6 @@ function at_core_preprocess_field(&$variables) {
             $values = $item['content']['#item']->getValue();
             if (!empty($values['title'])) {
 
-              //var_dump($item);
-
               $variables['items'][$delta]['caption'] = array(
                 'show' => TRUE,
                 'title' => $values['title'],
@@ -834,8 +875,8 @@ function at_core_preprocess_field(&$variables) {
               if (!empty($item['content']['#image_style'])) {
                 $style = entity_load('image_style', $item['content']['#image_style']);
                 $dimensions = array(
-                  'width' => $values['width'],    //$item['#item']->width,
-                  'height' => $values['height'],  // $item['#item']->height,
+                  'width' => $values['width'],
+                  'height' => $values['height'],
                 );
                 $style->transformDimensions($dimensions);
                 $variables['items'][$delta]['caption']['width'] = $dimensions['width'] . 'px';

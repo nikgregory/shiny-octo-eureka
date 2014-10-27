@@ -7,7 +7,8 @@
 // The idea is that you @include into a breakpoint, so an oridinary menu/dropmenu
 // will be offcanvas style in small screens.
 
-@mixin offcanvas($offcanvas-width: 240px) {
+@mixin offcanvas {
+
   .menu-style-offcanvas {
     .responsive-menu-region {
       .block-menu__title {
@@ -17,7 +18,7 @@
 
         &:after {
           font-family: FontAwesome, sans-serif;
-          content: "\f0c9";
+          content: $menu-hamburger;
           @include output-rhythm(width, $medium);
         }
       }
@@ -37,31 +38,32 @@
    // off left
     &.offcanvas-left .responsive-menu-region {
       .block-menu__title {
+        text-align: left;  // LTR
         &:after {
           float: left; // LTR
           text-align: left; // LTR
-          @include output-rhythm(margin, -1px $small 0 0);
+          @include output-rhythm(margin, 0 $small 0 $medium); // LTR
         }
       }
       .block-menu__content {
         left: 0;
-        @include transform(translate3d(-$offcanvas-width, 0, 0));
+        @include transform(translate3d(-15em, 0, 0));
       }
     }
 
     // off right
     &.offcanvas-right .responsive-menu-region {
       .block-menu__title {
-        text-align: right;
+        text-align: right;  // LTR
         &:after {
-          float: right;
-          text-align: right;
-          @include output-rhythm(margin, -1px 0 0 $small);
+          float: right;  // LTR
+          text-align: right;  // LTR
+          @include output-rhythm(margin, 0 $medium 0 $small);
         }
       }
       .block-menu__content {
         right: 0;
-        @include transform(translate3d($offcanvas-width, 0, 0));
+        @include transform(translate3d(15em, 0, 0));
       }
     }
 
@@ -75,20 +77,20 @@
           height: auto;
           font-family: inherit;
           font-size: inherit;
-          width: $offcanvas-width;
+          width: 15em;
         }
       }
     }
 
     // on left
     &.menu-expanded.offcanvas-left .page-root {
-      @include transform(translate3d($offcanvas-width, 0, 0));
+      @include transform(translate3d(15em, 0, 0));
       position: fixed;
     }
 
     // on right
     &.menu-expanded.offcanvas-right .page-root {
-      @include transform(translate3d(-$offcanvas-width, 0, 0));
+      @include transform(translate3d(-15em, 0, 0));
     }
   }
 }

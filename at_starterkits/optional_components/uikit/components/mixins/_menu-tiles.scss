@@ -3,10 +3,12 @@
 // for tiles or slidedown, only the offcanvas style (to toggle the page-root animation).
 
 @mixin tiles {
+
   .menu-style-tiles {
 
     // By default submenus are hidden.
     .responsive-menu-region {
+
       .block-menu__title,
       .menu-level-2 {
         @include visually-hidden;
@@ -15,13 +17,17 @@
       .block-menu__content {
         @include cf;
       }
+
+      .menu li.expanded > a:after {
+        content: none;
+      }
     }
 
-    &.tiles-count-2 {
+    &.tiles-count-two {
       .responsive-menu-region {
         .menu-level-1 {
           > li {
-            @include span(6); // Use Susy to set width and float direction.
+            @include span(6 of 12); // Use Susy to set width and float direction.
 
             &:nth-child(2n) {
               margin-#{$flow-to}: 0;
@@ -31,11 +37,11 @@
       }
     }
 
-    &.tiles-count-3 {
+    &.tiles-count-three {
       .responsive-menu-region {
         .menu-level-1 {
           > li {
-            @include span(4);
+            @include span(4 of 12);
 
             &:nth-child(3n) {
               margin-#{$flow-to}: 0;
@@ -45,11 +51,11 @@
       }
     }
 
-    &.tiles-count-4 {
+    &.tiles-count-four {
       .responsive-menu-region {
         .menu-level-1 {
           > li {
-            @include span(3);
+            @include span(3 of 12);
 
             &:nth-child(4n) {
               margin-#{$flow-to}: 0;

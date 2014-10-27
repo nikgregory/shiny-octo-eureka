@@ -3,50 +3,45 @@
  *  - Note that AT changes field image and taxonomy term reference fields.
  ========================================================================== */
 
-$field-taxonomy-as-labels: false;
-$field-taxonomy-icons:     false;
-
-
 .field {
   .field__items {}
   .field__item {}
 }
 
+
+// Labels
 .field .field__label {
   font-family: inherit;
   font-weight: $font-weight-semibold;
   @include adjust-font-size-to($medium);
 }
 
+
+// Label inline
 .field-label--inline {
   // Remove the margin on inline field lables to preserve vertical formatting.
   .field__label {
     margin: 0;
-  }
-
-  .field__label {
-    float: left; // LTR
+    display: inline-block;
     @include output-rhythm(padding, 0 $small 0 0); // LTR
   }
 
   .field__items {
-    overflow: hidden; // dangerous if field items should overflow
+    display: inline-block;
+  }
+
+  @at-root [dir="rtl"] .field-label--inline .field__label, [dir="rtl"] .field-label--inline .field__items {
+    @include output-rhythm(padding, 0 0 0 $small);
   }
 }
 
-[dir="rtl"] .field-label--inline .field__label,
-[dir="rtl"] .field-label--inline .field__items {
-  float: right;
-  @include output-rhythm(padding, 0 0 0 $small);
-}
 
+// Label above
 .field-label--above {}
 
 
-/**
- * Image fields use the <figure> and <figcaption> elements from HTML5
- */
-
+// Image fields
+// AT uses <figure> as the image field wrapper and <figcaption> for image captions.
 .field-type--image {
 
   figure {
@@ -63,18 +58,20 @@ $field-taxonomy-icons:     false;
    * - settings are applied using the Image extension in theme settings, where you can
    *   set image alignment and captions per node type and view mode.
    */
-  // TODO LTR/RTL issue here.
+  // TODO - use drupal align classes instead?
   &.field-align--none figure,
   &.field-align--left figure {
-    @include output-rhythm(margin, 5px $medium $medium 0);
+    @include output-rhythm(margin, 5px $medium $medium 0); // LTR
 
     figcaption {
-      text-align: left;
+      text-align: left; // LTR
     }
   }
 
   &.field-align--center figure {
-    @include output-rhythm(margin, 0 auto $medium);
+    margin-left: auto;
+    margin-right: auto;
+    @include output-rhythm(margin-bottom, $medium);
 
     figcaption {
       text-align: center;
@@ -82,25 +79,54 @@ $field-taxonomy-icons:     false;
   }
 
   &.field-align--right figure {
-    @include output-rhythm(margin, 5px 0 $medium $medium);
+    @include output-rhythm(margin, 5px 0 $medium $medium); // LTR
 
     figcaption {
-      text-align: left;
+      text-align: left; // LTR
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .field-type--image {
+    &.field-align--none figure,
+    &.field-align--left figure {
+      @include output-rhythm(margin, 5px 0 $medium $medium);
+
+      figcaption {
+        text-align: right;
+      }
+    }
+
+    &.field-align--right figure {
+      @include output-rhythm(margin, 5px $medium $medium 0);
+
+      figcaption {
+        text-align: right;
+      }
     }
   }
 }
 
 
-/**
- * Taxonomy
- */
+// Taxonomy term reference fields
 .field-type--taxonomy-term-reference {
   @include output-rhythm(margin, $medium 0);
 
-  @if ($field-taxonomy-as-labels == true) {
+  @if $field-taxonomy-label-as-icon == true {
+    .field__label {
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: $field-taxonomy-label-icon;
+        display: inline-block;
+        @include output-rhythm(margin, 0 $small 0 0); // LTR
+      }
+    }
+  }
+
+  @if ($field-taxonomy-item-as-labels == true) {
     span {
       display: inline-block;
-      background: lighten($text-background-color, 5%);
+      background: lighten($text-background-color, $lighten-more);
       color: $text-color;
       border: $border-width $border-style $border-color;
       margin: 0 3px 3px 0; // LTR
@@ -128,13 +154,13 @@ $field-taxonomy-icons:     false;
     }
   }
 
-  @if ($field-taxonomy-icons == true) {
+  @if ($field-taxonomy-item-icons == true) {
     span {
       display: inline-block;
 
       &:before {
         font-family: FontAwesome, sans-serif;
-        content: "\f02b"; // fa-tag
+        content: $field-taxonomy-item-icon;
         display: inline-block;
         @include output-rhythm(margin, 0 $small 0 0); // LTR
       }
@@ -145,8 +171,8 @@ $field-taxonomy-icons:     false;
     }
   }
 
-  @if ($field-taxonomy-as-labels == false and $field-taxonomy-icons == false) {
-    li {
+  @if ($field-taxonomy-item-as-labels == false and $field-taxonomy-item-icons == false) {
+    .field__item {
       @include output-rhythm(margin, 0 $small 0 0); // LTR
     }
 
@@ -156,17 +182,22 @@ $field-taxonomy-icons:     false;
   }
 
   .field__items {
+    padding: 0;
+  }
+
+  .field__item {
     margin: 0;
     padding: 0;
+    display: inline-block;
     @include no-bullets;
   }
 
-  &.field-label--inline li {
-    float: left;  // LTR
+  &.field-label--inline .field__item {
+    //float: left;  // LTR
   }
 
-  @at-root [dir="rtl"] .field-type--taxonomy-term-reference.field-label--inline li {
-    float: right;
+  @at-root [dir="rtl"] .field-type--taxonomy-term-reference.field-label--inline .field__item {
+    //float: right;
   }
 }
 
@@ -213,4 +244,3 @@ $field-taxonomy-icons:     false;
 
 // List float
 .field-type--list-float {}
-

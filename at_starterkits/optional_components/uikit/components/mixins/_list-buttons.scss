@@ -7,18 +7,15 @@
 //
 
 
-//
 // List items as buttons.
-//
 @mixin list-style-buttons($list_selector) {
 
   #{$list_selector} {
     @include list-horizontal($margin: (t: 0, r: $xxxx-small, b: 0, l: 0));  // LTR
 
     li {
-
       a {
-        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, $button-border-color);
 
         border-width: $button-border-width;
         border-style: $button-border-style;
@@ -47,9 +44,7 @@
 }
 
 
-//
 // List items as a buttons-group, horizontal.
-//
 @mixin list-style-button-group-horizontal($list_selector) {
 
   #{$list_selector} {
@@ -75,7 +70,7 @@
       }
 
       a {
-        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, $button-border-color);
 
         border-width: $button-border-width;
         border-style: $button-border-style;
@@ -119,7 +114,7 @@
       }
 
       a {
-        @include button-variant($button-text-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, $button-border-color);
 
         border-width: $button-border-width;
         border-style: $button-border-style;

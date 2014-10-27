@@ -8,7 +8,10 @@
 // Primary local tasks. TODO may need updating when local-tasks block lands.
 // Remove when local tasks becomes a block.
 .page-row__temporary-tabs {
-  @include output-rhythm(margin, $medium 0);
+
+  .regions {
+    padding: $small 0;
+  }
 
   @media #{$mobile-tablet} {
     @include list-style-button-group-vertical('ul.tabs.primary');

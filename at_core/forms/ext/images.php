@@ -14,19 +14,6 @@ $image_alignment_options = array(
   'right'  => t('Right'),
 );
 
-// Get node types (bundles).
-$node_types = node_type_get_types();
-
-// View or "Display modes", the search display mode is still problematic so we will exclude it for now,
-// please see: https://drupal.org/node/1166114
-//$node_view_modes = \Drupal::entityManager()->getViewModeOptions('node', TRUE);
-$node_view_modes = \Drupal::entityManager()->getViewModes('node');
-
-// Unset unwanted view modes
-unset($node_view_modes['rss']);
-unset($node_view_modes['search_index']);
-unset($node_view_modes['search_result']);
-
 $form['images'] = array(
   '#type' => 'details',
   '#title' => t('Image Settings'),

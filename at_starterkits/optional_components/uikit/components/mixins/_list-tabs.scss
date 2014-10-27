@@ -25,7 +25,7 @@
       display: block;
       line-height: 1;
 
-      color: $tab-text-color;
+      color: $tab-color;
       background: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
       @include border-radius($tab-border-radius $tab-border-radius 0 0);
@@ -36,19 +36,19 @@
 
       &:hover,
       &:focus {
-        color: $tab-text-hover-color;
+        color: $tab-hover-color;
         background: $tab-background-hover-color;
         text-decoration: none;
       }
 
       &.active {
-        color: $tab-text-active-color;
+        color: $tab-active-color;
         background: none;
         border-bottom-color: $background-color;
 
         &:hover,
         &:focus {
-          color: $tab-text-hover-color;
+          color: $tab-hover-color;
           background: none;
         }
       }
@@ -92,7 +92,7 @@
       display: block;
       line-height: 1;
 
-      color: $tab-text-color;
+      color: $tab-color;
       background: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
 
@@ -104,19 +104,19 @@
 
       &:hover,
       &:focus {
-        color: $tab-text-hover-color;
+        color: $tab-hover-color;
         background: $tab-background-hover-color;
         text-decoration: none;
       }
 
       &.active {
-        color: $tab-text-active-color;
+        color: $tab-active-color;
         background: none;
         border-bottom-color: $background-color;
 
         &:hover,
         &:focus {
-          color: $tab-text-hover-color;
+          color: $tab-hover-color;
           background: none;
         }
       }

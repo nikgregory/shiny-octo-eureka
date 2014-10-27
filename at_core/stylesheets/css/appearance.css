@@ -464,6 +464,66 @@ pre.code-block {
   color: #666;
 }
 
+#edit-responsive-menus .responsive-menu-styles,
+#edit-responsive-menus .responsive-menu-options {
+  clear: none !important;
+  width: 48%;
+}
+#edit-responsive-menus .clearfix {
+  border-top: 1px solid #ccc;
+}
+#edit-responsive-menus .responsive-menu-styles {
+  float: left;
+}
+#edit-responsive-menus .responsive-menu-styles .form-type-select {
+  margin: 1em 0 2em;
+}
+#edit-responsive-menus .responsive-menu-options {
+  float: right;
+  margin: 2.5em 0 1em;
+}
+#edit-responsive-menus .responsive-menu-options fieldset legend {
+  clip: auto;
+  display: block;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  height: auto;
+  margin: 0 0 1em;
+  overflow: visible;
+  position: static !important;
+  width: 100%;
+}
+#edit-responsive-menus .responsive-menu-options fieldset legend:after {
+  content: ":";
+}
+#edit-responsive-menus .responsive-menu-options fieldset fieldset legend {
+  display: none;
+}
+#edit-responsive-menus .responsive-menu-options fieldset fieldset legend:after {
+  content: "";
+}
+
+#edit-block-classes label span {
+  font-weight: 400;
+}
+
+#edit-classes dt {
+  font-weight: bold;
+}
+@media screen and (min-width: 75em) {
+  #edit-classes dl.class-list dt {
+    float: left;
+    clear: left;
+    text-align: left;
+    width: 30%;
+  }
+  #edit-classes dl.class-list dd {
+    margin-left: 35%;
+    overflow: hidden;
+  }
+}
+
 #edit-basic-settings {
   overflow: hidden;
   padding: 0;

@@ -5,7 +5,6 @@
 
 
 table {
-  @include output-rhythm(margin, $medium 0);
   padding: 0;
   width: 100%;
   border: $border-width $border-style $border-color;
@@ -22,7 +21,7 @@ table {
 
   .view-table__details {
     padding: 0;
-    @include output-rhythm(margin, $medium 0);
+    @include output-rhythm(margin, 0 0 $medium);
     @include adjust-font-size-to($medium);
   }
 

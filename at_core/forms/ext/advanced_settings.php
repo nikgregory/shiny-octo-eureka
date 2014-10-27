@@ -22,12 +22,13 @@ if ($form['ext']['ext_settings']['settings_enable_extensions']['#default_value']
   include_once($at_core_path . '/forms/ext/fonts.inc');
 
   $extensions_array = array(
+    'responsive_menus',
     'fonts',
     'titles',
     'images',
-    'responsive_menus',
     'touch_icons',
     'libraries',
+    'classitis',
     'custom_css',
     'markup_overrides',
     'devel',

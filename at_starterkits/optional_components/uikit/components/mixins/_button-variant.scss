@@ -19,6 +19,6 @@
   &.active {
     color: $text-color;
     background-color: darken($background-color, $darken-more);
-    border-color: darken($border-color, $darken-most);
+    border-color: darken($border-color, $darken-more);
   }
 }

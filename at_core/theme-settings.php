@@ -33,6 +33,25 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // various other places.
   $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
+  // Active themes active blocks
+  $theme_blocks = _block_rehash($theme);
+
+  // Get breakpoints.
+  $theme_breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($theme);
+
+  // Get node types (bundles).
+  $node_types = node_type_get_types();
+
+  // View or "Display modes", the search display mode is still problematic so we will exclude it for now,
+  // please see: https://drupal.org/node/1166114
+  //$node_view_modes = \Drupal::entityManager()->getViewModeOptions('node', TRUE);
+  $node_view_modes = \Drupal::entityManager()->getViewModes('node');
+
+  // Unset unwanted view modes
+  unset($node_view_modes['rss']);
+  unset($node_view_modes['search_index']);
+  unset($node_view_modes['search_result']);
+
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
     'library' => array(

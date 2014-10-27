@@ -14,10 +14,3 @@
 .regions {
   @include container($site-builder);
 }
-
-
-// We need some padding to avoid browser chrome collisions.
-[class*="page-row__"] {
-  //padding: 0 gutters();
-  padding: 0 1.25em;
-}

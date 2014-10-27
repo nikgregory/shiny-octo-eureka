@@ -7,7 +7,6 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   @include output-rhythm(padding, $medium);
-  @include output-rhythm(margin, $medium 0);
   @include border-radius();
 
   &+ .messages {
@@ -87,7 +86,7 @@ table tr.error {
 }
 
 
-/* Message icons (Font Awesome) */
+/* Message icons */
 .messages .icon:before {
   font-family: FontAwesome, sans-serif;
   float: left;
@@ -101,18 +100,16 @@ table tr.error {
 }
 
 .icon-status:before {
-  content: "\f118"; // fa-smile-o
+  content: $messages-icon-status;
 }
 
 .icon-warning:before {
-  content: "\f071";  // fa-exclamation-triangle
+  content: $messages-icon-warning ;
 }
 
 .icon-error:before {
-  content: "\f119"; // fa-frown-o
+  content: $messages-icon-error;
 }
-
-
 
 
 

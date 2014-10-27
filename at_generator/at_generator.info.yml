@@ -4,5 +4,3 @@ description: 'Enable this extension if you want to generate a new sub-theme or c
 core: 8.x
 base theme: at_core
 subtheme type: at_generator
-settings:
-  show_window_size: '0'

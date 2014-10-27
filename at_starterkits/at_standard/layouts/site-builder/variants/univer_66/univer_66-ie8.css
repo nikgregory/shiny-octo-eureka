@@ -53,7 +53,11 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
 }
 
 [class*="page-row__"] {
-  padding: 0 1.25em;
+  padding: 0 2vw;
+}
+
+[class*="page-row__"] {
+  padding: 0 2%;
 }
 
 /* Header (3 regions) */

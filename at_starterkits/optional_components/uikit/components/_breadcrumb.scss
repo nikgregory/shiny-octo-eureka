@@ -2,7 +2,17 @@
  * Breadcrumbs
  ========================================================================== */
 
-// Note: breadcrumb is really just a list-style with font icon :after etc, convert to use existing mixins.
+
+
+// !!!!!!!!!!!
+//
+//   Note: breadcrumb is really just a list-style with font icon :after etc, convert to use existing mixins.
+//
+// !!!!!!!!!!!
+
+
+
+
 
 .breadcrumb {
   @include output-rhythm(margin, $medium 0);
@@ -41,8 +51,8 @@
   }
 
   a {
-    //color: $breadcrumb-link-color;
-    //text-decoration: none;
+    color: $breadcrumb-color;
+    text-decoration: none;
 
     &:link,
     &:visited {

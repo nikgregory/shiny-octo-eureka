@@ -140,9 +140,94 @@
 
 
 
+// Resp menus
+#edit-responsive-menus {
+
+  .responsive-menu-styles,
+  .responsive-menu-options {
+    clear: none !important;
+    width: 48%;
+  }
+
+  .clearfix {
+    border-top: 1px solid #ccc;
+  }
+
+  .responsive-menu-styles {
+    float: left;
+
+    .form-type-select {
+      margin: 1em 0 2em;
+    }
+  }
+
+  .responsive-menu-options {
+    float: right;
+
+    margin: 2.5em 0 1em;
+
+    legend {
+
+    }
+
+    fieldset legend {
+      clip: auto;
+      display: block;
+      font-family: inherit;
+      font-size: 1em;
+      font-weight: 700;
+      height: auto;
+      margin: 0 0 1em;
+      overflow: visible;
+      //padding: 1em 0 0;
+      position: static !important;
+      width: 100%;
+      &:after {
+        content: ":";
+      }
+    }
+
+    fieldset fieldset legend {
+      display: none;
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
 
 
+// Classitis
 
+#edit-block-classes {
+  label {
+    span {
+      font-weight: 400;
+    }
+  }
+}
+
+#edit-classes {
+
+  dt {
+    font-weight: bold;
+  }
+
+  @media screen and (min-width: 75em) {
+    dl.class-list {
+      dt {
+        float: left;
+        clear: left;
+        text-align: left;
+        width: 30%;
+      }
+      dd {
+        margin-left: 35%;
+        overflow: hidden;
+      }
+    }
+  }
+}
 
 
 

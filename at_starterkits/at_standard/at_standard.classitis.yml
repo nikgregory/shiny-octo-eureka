@@ -1,0 +1,67 @@
+textalign:
+  name: 'Text Align'
+  description: ''
+  classes:
+    text_align_center:
+      class: ta-center
+      description: 'Align text centered.'
+    text_align_left:
+      class: ta-left
+      description: 'Align text left.'
+    text_align_right:
+      class: ta-right
+      description: 'Align text right.'
+    text_align_justify:
+      class: ta-justify
+      description: 'Align text justified.'
+
+position:
+  name: Positioning
+  description: 'Float elements left or right. Do not use on Page rows or regions (you will break the layout).'
+  classes:
+    pull_left:
+      class: pull-left
+      description: 'Float element left.'
+    pull_right:
+      class: pull-right
+      description: 'Float element right.'
+    centered:
+      class: center-element
+      description: 'Center the element horizontally. Combine with a layout-column to add a width.'
+
+layout:
+  name: 'Layout columns'
+  description: 'Set a width on an element. Do not use on Page rows or regions (you will break the layout). These are most useful or blocks or other elements within the page (for example you can apply these to elements in a node). All layout-column classes are full width in mobile, which is determined by your theme.'
+  classes:
+    layout-column-quarter:
+      class: lc-quarter
+      description: 'Element will be one quarter the container width.'
+    layout-column-half:
+      class: lc-half
+      description: 'Element will be one half the container width.'
+    layout-column-three-quarters:
+      class: lc-three-quarters
+      description: 'Element will be three quarters the container width.'
+    layout-column-third:
+      class: lc-third
+      description: 'Element will be one third the container width.'
+    layout-column-two-thirds:
+      class: lc-two-thirds
+      description: 'Element will be two thirds the container width.'
+
+
+
+
+
+
+
+
+
+
+
+#font-awesome:
+#  name: 'Font Awesome'
+#  classes:
+#    arrow_down:
+#      class: 'fa-arrow-down'
+#      description: 'Arrow down'

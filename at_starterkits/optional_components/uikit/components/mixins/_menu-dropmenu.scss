@@ -4,96 +4,100 @@
 //
 @mixin dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true) {
 
-  .block-menu {
-    background: $drop-menu-background;
+  .menu-style-dropmenu {
+    .responsive-menu-region {
 
-    a {
-      @include output-rhythm(padding, $xx-small $large);
-      position: relative;
-
-      &:after {
-        position: absolute;
-        $flow-to: $medium;
+      .block-menu__title {
+        @include visually-hidden;
       }
-    }
 
-    .menu-level-1 {
-      position: relative;
-
-      > li {
-        &:first-child {}
-        &:last-child {}
-
+      .block-menu {
         a {
-          &:hover,
-          &:focus {}
-        }
-      }
+          position: relative;
+          @include output-rhythm(padding, $xx-small $large);
 
-      li {
-        float: $flow-from; // LTR
-        width: $dropmenu-item-width;
-
-        &.expanded > a:after {
-          @if $dropmenu-arrows == true {
-            content: "\f107";
+          &:after {
+            position: absolute;
+            @include output-rhythm(right, $medium); // LTR
           }
         }
 
-        &.collapsed > a:after {
-          content: '';
-        }
+        .menu-level-1 {
+          position: relative;
 
-        ul {
-          @include visually-hidden;
-          @include opacity(.3);
-          @include transition(all, .2s, ease);
+          > li {
+            &:first-child {}
+            &:last-child {}
+
+            a {
+              &:hover,
+              &:focus {}
+            }
+          }
 
           li {
-            background: lighten($drop-menu-background, $lighten);
+            float: left; // LTR
+            width: $dropmenu-item-width;
 
-            &:hover,
-            &:focus {
-              background: lighten($drop-menu-background, $lighten-more);
+            @if $dropmenu-arrows == true {
+              &.expanded > a:after {
+                content: $menu-arrow-down;
+              }
+
+              &.collapsed > a:after {
+                content: '';
+              }
+            }
+
+            ul {
+              @include visually-hidden;
+              @include opacity(.3);
+              @include transition(all, .2s, ease);
+
+              li {
+                &:hover,
+                &:focus {}
+              }
+            }
+
+            // visusally-hidden-off but without the positioning.
+            &:hover > ul,
+            &:focus > ul {
+              display: block;
+              opacity: 1;
+              clip: auto;
+              overflow: visible;
+              height: auto;
+              width: auto;
+              font-family: inherit;
             }
           }
         }
 
-        &:hover > ul,
-        &:focus > ul {
-          display: block;
-          opacity: 1;
-          clip: auto;
-          overflow: visible;
-          height: auto;
-          width: auto;
-          font-family: inherit;
-        }
-      }
-    }
-
-    .odd {
-      // Down
-      ul {
-        $flow-from: 0;
-        top: auto;
-        //> li {background-color: pink;}
-
-        > .expanded > a:after {
-          @if $dropmenu-arrows == true {
-            content: "\f105"; // In the down UL, li items with sub-menus have right pointing arrows.
-          }
-        }
-
-        // Accross
         .odd {
-          $flow-from: 100%; // LTR
-          top: 0;
-          //> li {background-color: yellow;}
+          // Down
+          ul {
+            left: 0; // LTR
+            top: auto;
+            //> li a {background-color: pink;}
 
-          > .expanded > a:after {
-            @if $dropmenu-arrows == true {
-              content: "\f107"; // In the flyout UL, li items with sub-menus have down pointing arrows.
+            > .expanded > a:after {
+              @if $dropmenu-arrows == true {
+                content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
+              }
+            }
+
+            // Accross
+            .odd {
+              left: 100%; // LTR
+              top: 0;
+              //> li a {background-color: yellow;}
+
+              > .expanded > a:after {
+                @if $dropmenu-arrows == true {
+                  content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
+                }
+              }
             }
           }
         }

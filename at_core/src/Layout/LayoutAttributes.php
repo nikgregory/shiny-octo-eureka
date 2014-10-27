@@ -7,6 +7,7 @@
 
 namespace Drupal\at_core\Layout;
 
+use Drupal\Component\Utility\Tags;
 use Drupal\Core\Template\Attribute;
 use Drupal\at_core\Layout\PageLayout;
 
@@ -39,6 +40,18 @@ class LayoutAttributes extends PageLayout {
       // Instantiate attribute object arrays per row.
       $variables[$row_key . '__attributes'] = new Attribute(array('class' => array()));
       $variables[$row_key . '__attributes']['class'][] = 'page-row__'. str_replace('_', '-', $row_key);
+
+      // Add theme setting defined classes if Classitis is enabled.
+      if (at_core_theme_get_setting('settings.enable_extensions') === 1) {
+        if (at_core_theme_get_setting('settings.enable_classitis') === 1) {
+          if ($classes = at_core_theme_get_setting('settings.page_classes_row_' . $row_key)) {
+            $classitis = Tags::explode($classes);
+            foreach ($classitis as $class) {
+              $variables[$row_key . '__attributes']['class'][] = $class;
+            }
+          }
+        }
+      }
 
       // Set row attributes as defined in the layout configuration yml file.
       if (isset($row_values['attributes'])) {

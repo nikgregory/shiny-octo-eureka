@@ -11,7 +11,7 @@
     @include adjust-font-size-to($xxxx-large);
     font-family: $impact;
     text-align: center;;
-    color: darken($unpublished-color, 5%);
+    color: darken($unpublished-color, $darken-more);
   }
 }
 
@@ -19,14 +19,4 @@
 // Preview
 [class*="preview"] {
   background-color: #ffffea;
-}
-
-
-// Pull classes you can use to position elements.
-.pull-right {
-  float: right;
-}
-
-.pull-left {
-  float: left;
 }

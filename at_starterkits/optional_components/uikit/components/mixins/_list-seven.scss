@@ -22,7 +22,7 @@
     a {
       display: block;
       line-height: 1;
-      color: $list-text-color;
+      color: $list-color;
 
       border-bottom: $list-border-width $list-border-style transparent;
 
@@ -32,7 +32,7 @@
       &:hover,
       &:focus {
         text-decoration: none;
-        color: $list-text-hover-color;
+        color: $list-hover-color;
         border-bottom: $list-border-width $list-border-style $list-border-color;
       }
 
@@ -41,7 +41,7 @@
 
         &:hover,
         &:focus {
-          color: $list-text-hover-color;
+          color: $list-hover-color;
         }
       }
     }
@@ -73,7 +73,7 @@
     a {
       display: inline-block;
       line-height: 1;
-      color: $list-text-color;
+      color: $list-color;
       border-bottom: $list-border-width $list-border-style transparent;
 
       @include output-rhythm(padding, $small $medium $xx-small 0); // LTR
@@ -82,7 +82,7 @@
       &:hover,
       &:focus {
         text-decoration: none;
-        color: $list-text-hover-color;
+        color: $list-hover-color;
         border-bottom: $list-border-width $list-border-style $list-border-color;
       }
 
@@ -91,7 +91,7 @@
 
         &:hover,
         &:focus {
-          color: $list-text-hover-color;
+          color: $list-hover-color;
         }
       }
     }

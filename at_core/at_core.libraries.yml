@@ -21,14 +21,35 @@ at.ie9js:
   js:
     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
+# Match Height
+at.matchheight:
+  version: 0.5.2
+  js:
+    libraries/matchHeight/jquery.matchHeight-min.js: {}
+  dependencies:
+    - core/jquery
+
+# enquire.js
+at.enquire:
+  version: 2.1.2
+  js:
+    libraries/enquire/enquire.js: {}
+  dependencies:
+    - core/matchmedia
+
 # Menu toggle
 at.responsive_menus:
   version: 1.0
   js:
     libraries/responsive_menus/responsive_menus.js: {}
   dependencies:
+    - core/modernizr
     - core/jquery
+    - core/drupal
+    - core/drupalSettings
     - core/matchmedia
+    - at_core/at.enquire
+    - at_core/at.matchheight
 
 # Matchmedia AddListener
 at.addListener:

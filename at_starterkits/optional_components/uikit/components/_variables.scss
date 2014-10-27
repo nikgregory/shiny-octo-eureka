@@ -8,7 +8,7 @@
 $browser-minimum-versions: (
   'chrome'  : null,
   'firefox' : null,
-  'ie'      : 8,
+  'ie'      : 9,
   'safari'  : null,
   'opera'   : null
 ) !default;
@@ -65,15 +65,15 @@ $browser-minimum-versions: (
 //  https://github.com/chriseppstein/compass/blob/1.0.0.alpha.19/core/stylesheets/compass/typography/_vertical_rhythm.scss
 //  -- link to modular scale stuff--
 //
-// MS provides the scale, while VR sets adjusted font sizes and line heights.
-// px are used here, these are converted to rem with px fallback (IE8 support)
-// when called using one of Vertical Rhythms mixins or functions.
+// MS provides the scale, while Vertical Rhythm sets adjusted font sizes and line heights.
+// From these numbers you will get a base line-height of 1.5
 
-$base-font-size      : 16px;
-$base-line-height    : 24px;
-$important-font-size : 48px;
+$base-font-size       : 16px;
+$base-line-height     : 24px;
+$important-font-size  : 48px;
 
-$rhythm-unit         : 'rem';
+$rhythm-unit          : 'rem';
+$rem-with-px-fallback : true;  // set to true to support IE8
 
 
 // Establish baseline
@@ -81,7 +81,7 @@ $rhythm-unit         : 'rem';
 // This might freak out if you use em as the base-font-size unit,
 // unless you !default it, in which case everything will freak out
 // and all text will be tiny.
-@include establish-baseline;
+//@include establish-baseline;
 
 
 // Modular Scale
@@ -109,6 +109,7 @@ $ms-ratio : $golden;
 // Throughout the UIKit you will see other Compass mixins used to return
 // px and rem units, such as consistantly using output-rhythm() to
 // achieve full browser support.
+
 $xxxx-large : ms(5);
 $xxx-large  : ms(4);
 $xx-large   : ms(3);
@@ -150,18 +151,16 @@ $base-font-family : $sans-serif;
 $font-monospace   : $courier;
 
 
-// Spacing
-// -----------------------------------------------------------------------------
-$default-padding : 0;
-$default-margin  : 0;
-
+//
+// Global styles.
+//
 
 // Borders
 // -----------------------------------------------------------------------------
-$border-width  : 1px;
-$border-style  : solid;
-$border-color  : #cccccc;
-$border-radius : 4px;
+$border-width                : 1px;
+$border-style                : solid;
+$border-color                : #cccccc;
+$border-radius               : 4px;
 
 
 // Main colors
@@ -233,186 +232,288 @@ $unpublished-color           : #fff4f4;
 
 // Lighten and Darken values
 // -----------------------------------------------------------------------------
-$lighten      : 3%;
-$lighten-more : 5%;
-$lighten-most : 10%;
-$darken       : 3%;
-$darken-more  : 5%;
-$darken-most  : 10%;
+$lighten                     : 3%;
+$lighten-more                : 5%;
+$lighten-most                : 10%;
+$darken                      : 3%;
+$darken-more                 : 5%;
+$darken-most                 : 10%;
 
 
-// Forms
+// Gradients
 // -----------------------------------------------------------------------------
-$form-item-text-align             : center;
-$form-item-text-color             : lighten($text-color, 20%); // If text is #000, lighten 20% is #333
-$form-item-text-focus-color       : $text-color;
-$form-item-help-color             : lighten($text-color, 45%);
-$form-item-background-color       : #ffffff;
-$form-item-background-focus-color : lighten($text-background-color, $lighten-more);
-$form-item-border-width           : $border-width;
-$form-item-border-style           : $border-style;
-$form-item-border-color           : $border-color;
-$form-item-border-radius          : $border-radius;
-$form-item-marker-color           : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
+$text-gradient-start         : darken($text-background-color, $darken-more);
+$text-gradient-stop          : lighten($text-background-color, $lighten-more);
 
+$primary-gradient-start      : $primary-color;
+$primary-gradient-stop       : lighten($primary-color, $lighten-most);
+
+$secondary-gradient-start    : $secondary-color;
+$secondary-gradient-stop     : lighten($secondary-color, $lighten-most);
+
+$tertiary-gradient-start     : $tertiary-color;
+$tertiary-gradient-stop      : lighten($tertiary-color, $lighten-most);
+
+
+//
+// Set variables for component partials and mixins.
+//
 
 // Menus
 // -----------------------------------------------------------------------------
-$menu-background            : $background-color;
-$menu-item-border-width     : $border-width;
-$menu-item-border-style     : $border-style;
-$menu-item-border-color     : $border-color;
-$menu-item-border-radius    : $border-radius;
-$menu-item-background-color : $text-background-color;
+$menu-text-align                  : $flow-from; // ltr or from-left
+
+$menu-color                       : $link-color;
+$menu-hover-color                 : $link-hover-color;
+$menu-active-color                : $link-active-color;
+
+$menu-border-color                : $border-color;
+$menu-border-hover-color          : $border-color;
+$menu-border-active-color         : $border-color;
+
+$menu-background-color            : $background-color;
+$menu-background-hover-color      : lighten($text-background-color, $lighten);
+$menu-background-active-color     : lighten($text-background-color, $lighten);
+
+$menu-border-width                : $border-width;
+$menu-border-style                : $border-style;
+$menu-border-radius               : $border-radius;
+
+$menu-arrows                      : true;
 
 
-// Navbar (region)
+// Responsive menus
 // -----------------------------------------------------------------------------
-$navbar-menu-background    : $primary-color;
-$navbar-item-border-width  : $border-width;
-$navbar-item-border-style  : $border-style;
-$navbar-item-border-color  : rgba(255, 255, 255, 0.3);
-$navbar-item-border-radius : $border-radius;
+$resp-menu-color                  : inherit;
+$resp-menu-background-color       : inherit;
+
+$resp-menu-hover-color            : inherit;
+$resp-menu-active-color           : inherit;
+
+$resp-menu-hover-background-color  : rgba(255,255,255,0.3);
+$resp-menu-active-background-color : rgba(255,255,255,0.3);
 
 
 // Drop menu
 // -----------------------------------------------------------------------------
-$drop-menu-background   : $navbar-menu-background;
-$drop-item-border-width : $navbar-item-border-width;
-$drop-item-border-style : $navbar-item-border-style;
-$drop-item-border-color : $navbar-item-border-color;
-$dropmenu-selector      : '.region__navbar';
+$dropmenu-item-width              : 12em;
+$dropmenu-arrows                  : true;
 
 
 // Buttons
 // -----------------------------------------------------------------------------
-$button-text-align             : center;
-$button-text-color             : $text-color;
-$button-text-hover-color       : $text-color;
-$button-background-color       : lighten($text-background-color, $lighten-more);
-$button-background-hover-color : $text-background-color;
-$button-border-width           : $border-width;
-$button-border-style           : $border-style;
-$button-border-color           : $border-color;
-$button-border-radius          : $border-radius;
+$button-text-align                : center;
+
+$button-color                     : $text-color;
+$button-hover-color               : $text-color;
+
+$button-border-color              : $border-color;
+$button-border-hover-color        : darken($button-border-color, $darken);
+
+$button-background-color          : lighten($text-background-color, $lighten-more);
+$button-background-hover-color    : darken($button-background-color, $darken);
+
+$button-border-width              : $border-width;
+$button-border-style              : $border-style;
+$button-border-radius             : $border-radius;
 
 
 // Tabs
 // -----------------------------------------------------------------------------
-$tab-text-align              : center;
-$tab-text-color              : $text-color;
-$tab-text-hover-color        : $text-color;
-$tab-text-active-color       : $text-color;
-$tab-background-color        : lighten($text-background-color, $lighten-more);
-$tab-background-hover-color  : $text-background-color;
-$tab-background-active-color : $text-background-color;
-$tab-border-width            : $border-width;
-$tab-border-style            : $border-style;
-$tab-border-color            : $border-color;
-$tab-border-radius           : $border-radius;
+$tab-text-align                   : center;
+
+$tab-color                        : $text-color;
+$tab-hover-color                  : $text-color;
+$tab-active-color                 : $text-color;
+
+$tab-border-color                 : $border-color;
+$tab-border-hover-color           : $border-color;
+$tab-border-active-color          : $border-color;
+
+$tab-background-color             : lighten($text-background-color, $lighten-more);
+$tab-background-hover-color       : $text-background-color;
+$tab-background-active-color      : $text-background-color;
+
+$tab-border-width                 : $border-width;
+$tab-border-style                 : $border-style;
+$tab-border-radius                : $border-radius;
 
 
 // Lists
 // -----------------------------------------------------------------------------
-$list-text-align              : center;
-$list-text-color              : $text-color;
-$list-text-hover-color        : $text-color;
-$list-text-active-color       : $text-color;
-$list-background-color        : lighten($text-background-color, $lighten-more);
-$list-background-hover-color  : $text-background-color;
-$list-background-active-color : $text-background-color;
-$list-border-width            : $border-width;
-$list-border-style            : $border-style;
-$list-border-color            : $border-color;
-$list-border-radius           : $border-radius;
+$list-text-align                  : center;
+
+$list-color                       : $text-color;
+$list-hover-color                 : $text-color;
+$list-active-color                : $text-color;
+
+$list-border-color                : $border-color;
+$list-border-hover-color          : $border-color;
+$list-border-active-color         : $border-color;
+
+$list-background-color            : lighten($text-background-color, $lighten-more);
+$list-background-hover-color      : $text-background-color;
+$list-background-active-color     : $text-background-color;
+
+$list-border-width                : $border-width;
+$list-border-style                : $border-style;
+$list-border-radius               : $border-radius;
+
+
+// Forms
+// -----------------------------------------------------------------------------
+$form-text-align                  : center;
+
+$form-text-color                  : lighten($text-color, 20%); // If text is #000, lighten 20% is #333
+$form-text-focus-color            : $text-color;
+
+$form-border-color                : $border-color;
+$form-border-focus-color          : $border-color;
+
+$form-background-color            : #ffffff;
+$form-background-focus-color      : lighten($text-background-color, $lighten-more);
+
+$form-help-color                  : lighten($text-color, 45%);
+$form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
+
+$form-border-width                : $border-width;
+$form-border-style                : $border-style;
+$form-border-radius               : $border-radius;
 
 
 // Breadcrumbs
 // -----------------------------------------------------------------------------
-$breadcrumb-link-color               : $link-color;
-$breadcrumb-link-active-color        : $link-color;
-$breadcrumb-link-hover-color         : $link-color;
-$breadcrumb-link-visited-color       : $link-visited-color;
-$breadcrumb-link-visited-hover-color : $link-visited-color;
-$breadcrumb-seperator-color          : $border-color;
+$breadcrumb-color                 : $link-color;
+
+$breadcrumb-hover-color           : $link-color;
+$breadcrumb-active-color          : $link-color;
+
+$breadcrumb-visited-color         : $link-visited-color;
+$breadcrumb-visited-hover-color   : $link-visited-color;
+
+$breadcrumb-seperator-color       : $border-color;
 
 
 // Tables
 // -----------------------------------------------------------------------------
-$table-cell-borders       : false; // set to true if you want borders on every cell
-$table-border-color       : $border-color;
+$table-cell-borders               : false; // set to true if you want borders on every cell
+$table-border-color               : $border-color;
 
 // thead
-$thead-background-color   : $text-background-color;
-$thead-text-color         : $text-color;
+$thead-background-color           : $text-background-color;
+$thead-text-color                 : $text-color;
 
 // row striping
-$table-row-striping       : false;
-$table-row-odd-color      : $odd-color;
-$table-row-even-color     : $even-color;
+$table-row-striping               : false;
+$table-row-odd-color              : $odd-color;
+$table-row-even-color             : $even-color;
 
 // col striping, applies to the active column in sortable tables.
-$table-col-striping       : false;
-$table-col-odd-color      : $text-background-color;
-$table-col-even-color     : darken($text-background-color, 2%);
+$table-col-striping               : false;
+$table-col-odd-color              : $text-background-color;
+$table-col-even-color             : darken($text-background-color, 2%);
 
 // hover
-$tr-hover                 : false;
-$tr-hover-color           : darken($text-background-color, $darken);
+$tr-hover                         : false;
+$tr-hover-color                   : darken($text-background-color, $darken);
 
 
-// Global gradients
+// Fields
 // -----------------------------------------------------------------------------
-// Text background color gradient, might be used on buttons,
-// table headers, tabs etc.
-$text-background-gradient-start : darken($text-background-color, $darken-more);
-$text-background-gradient-stop  : lighten($text-background-color, $lighten-more);
+// By default we only have settings for taxonomy term reference fields.
+$field-taxonomy-item-as-labels    : true;
 
-// Primary color gradient
-$primary-gradient-start: $primary-color;
-$primary-gradient-stop:  lighten($primary-color, $lighten-most);
+$field-taxonomy-item-icons        : false;
+$field-taxonomy-item-icon         : $fa-var-tag;
 
-// Secondary color gradient
-$secondary-gradient-start: $secondary-color;
-$secondary-gradient-stop:  lighten($secondary-color, $lighten-most);
+$field-taxonomy-label-as-icon     : true; // Label must not be hidden in field display settings.
+$field-taxonomy-label-icon        : $fa-var-tags;
 
-// Tertiary color gradient
-$tertiary-gradient-start: $tertiary-color;
-$tertiary-gradient-stop:  lighten($tertiary-color, $lighten-most);
+
+// Page & Regions
+// -----------------------------------------------------------------------------
+$page-text-color                  : $text-color;
+$page-background-color            : $primary-color;
+$page-root-background             : #ffffff; // body inner wrapper
+$regions-background               : #ffffff; // we set a default so we can have colored .page-root.
 
 
 // Page Row colors (for site-builder layout plugin)
 // -----------------------------------------------------------------------------
-// Header
-$page-row-header-background-color      : #c0c0c0;
-$page-row-header-color                 : #ffffff;
-
-// Navbar
-$page-row-navbar-background-color      : $navbar-menu-background;
-$page-row-navbar-color                 : #ffffff;
-
-// Messages
-$page-row-messages-background-color    : $background-color;
-$page-row-messages-color               : $text-color;
-
-// Features
-$page-row-features-background-color    : $background-color;
-$page-row-features-color               : $text-color;
-
-// Main
-$page-row-main-background-color        : $background-color;
-$page-row-main-color                   : $text-color;
-
-// Tertiary
-$page-row-tertiary-background-color    : $background-color;
-$page-row-tertiary-color               : $text-color;
-
-// Footer
-$page-row-footer-background-color      : #696969;
-$page-row-footer-color                 : #ffffff;
+// @include these in the page-row-color mixin from _page.scss using the
+// .page-row__[row name] selectors, e.g.:
+//
+//  .page-row__header {
+//    @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
+//  }
 
 // Full width background toggle
-$page-row-backgrounds-full-width: true !default;
+$page-row-backgrounds-full-width    : true;
+$regions-padding                    : $medium;
+
+// Header
+$page-row-header-background-color   : $primary-color;
+$page-row-header-color              : #ffffff;
+
+// Navbar
+$page-row-navbar-background-color   : $secondary-color;
+$page-row-navbar-color              : #ffffff;
+
+// Messages
+$page-row-messages-background-color : $background-color;
+$page-row-messages-color            : $text-color;
+
+// Features
+$page-row-features-background-color : $background-color;
+$page-row-features-color            : $text-color;
+
+// Main
+$page-row-main-background-color     : $background-color;
+$page-row-main-color                : $text-color;
+
+// Tertiary
+$page-row-tertiary-background-color : $background-color;
+$page-row-tertiary-color            : $text-color;
+
+// Footer
+$page-row-footer-background-color   : $secondary-color;
+$page-row-footer-color              : #ffffff;
+
+
+// Icons
+// -----------------------------------------------------------------------------
+// AT uses Font Awesome by default for all icons, including replacing Drupal
+// core icons for things like details summery, action links and messages.
+
+$messages-icon-status            : $fa-var-smile-o;
+$messages-icon-warning           : $fa-var-exclamation-triangle;
+$messages-icon-error             : $fa-var-frown-o;
+
+$button-action-icon              : $fa-var-plus;
+
+$menu-arrow-left                 : $fa-var-angle-left;
+$menu-arrow-right                : $fa-var-angle-right;
+$menu-arrow-up                   : $fa-var-angle-up;
+$menu-arrow-down                 : $fa-var-angle-down;
+
+$menu-hamburger                  : $fa-var-bars;
+
+$form-details-summary-open       : $fa-var-caret-down;
+$form-details-summary-closed     : $fa-var-caret-right;
+$form-details-summary-closed-rtl : $fa-var-caret-left;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -25,7 +25,12 @@
 
 
 // View modes
-.node--view-mode-full {}
+.node--view-mode-full {
+  .node__title {
+    @include output-rhythm(margin, 0 0 $medium);
+  }
+}
+
 .node--view-mode-teaser {}
 
 
@@ -35,7 +40,9 @@
 
 
 // Author name and date details.
-.node__meta {}
+.node__meta {
+  @include output-rhythm(margin, $medium 0);
+}
 
 .node__author {
   display: inline;

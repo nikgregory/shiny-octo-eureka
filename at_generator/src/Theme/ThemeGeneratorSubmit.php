@@ -83,6 +83,9 @@ class ThemeGeneratorSubmit {
       // Set paths to each file we need to modify or delete.
       $info_file  = "$target/$machine_name.info.yml";
 
+      // Set paths to each file we need to modify or delete.
+      $breakpoints_file  = "$target/$machine_name.breakpoints.yml";
+
       // Config
       $settings_file = "$target/config/install/$machine_name.settings.yml"; // used in skins
 
@@ -173,6 +176,10 @@ class ThemeGeneratorSubmit {
 
         // Info file
         $renameFile->fileRename("$target/$source_theme.info.yml", $info_file);
+
+        // Breakpoints file
+        $renameFile->fileRename("$target/$source_theme.breakpoints.yml", $breakpoints_file);
+        $fileStrReplace->fileStrReplace("$target/$machine_name.breakpoints.yml", $source_theme, $machine_name);
 
         // Check and set description and version.
         $description = $description ?: $generic_decription;

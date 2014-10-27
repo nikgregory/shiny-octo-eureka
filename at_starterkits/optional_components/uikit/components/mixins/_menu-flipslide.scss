@@ -1,0 +1,131 @@
+//
+// FlipSlide
+//
+// Do NOT @include into a selector, these must apply to the body element (looks like this can be changed so we don't need to rely in the body selector?)
+//
+// Hamburder type menu that shows the top level items horizonatally. When the menu is expanded the top leve items show vertically with sub-menus
+// displayed horizontally.
+//
+
+@mixin flipslide {
+
+  .menu-style-flipslide {
+    .responsive-menu-region {
+
+      position: relative;
+
+      .block-menu__title {
+        cursor: pointer;
+        display: table;
+        font-size: 1rem;
+        line-height: 1.5;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 3rem;
+        z-index: 200;
+        @include output-rhythm(padding, $xx-small);
+
+        span {
+          @include visually-hidden;
+        }
+
+        &:after {
+          font-family: FontAwesome, sans-serif;
+          content: $menu-hamburger;
+          @include output-rhythm(width, $medium);
+        }
+      }
+
+      .block-menu__content {
+        @include transition(all, .2s, ease);
+
+        .menu-level-1 > li {
+          float: left;
+
+          > a:after {
+            content: "";
+            @include visually-hidden;
+          }
+        }
+
+        .menu-level-2 {
+          @include visually-hidden;
+          @include opacity(.3);
+        }
+      }
+    }
+
+    .responsive-menu-region .block.menu-expanded  {
+      .block-menu__content {
+        padding: 0;
+        margin: 0;
+
+        .menu li.expanded > a:after {
+          content: $menu-arrow-left; // LTR
+        }
+
+        .menu-level-1 > li {
+          float: none;
+          @include clearfix-micro;
+          margin-right: 3rem;
+          border-bottom: 1px solid rgba(255,255,255,0.4);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          a {
+            float: left;
+          }
+
+          > a {
+            width: 12em;
+            background-color: rgba(255,255,255,0.3);
+          }
+        }
+        .menu-level-2 {
+          @include visually-hidden-off;
+          @include opacity(1);
+          float: left;
+
+          ul, ol {
+            padding: 0;
+          }
+
+          li,
+          ul {
+            float: left;
+
+            a {
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

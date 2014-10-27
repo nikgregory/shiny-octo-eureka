@@ -6,6 +6,9 @@
 // Import base config and global style partials.
 @import "site-builder-global";
 
+[class*="page-row__"] {
+  padding: 0 2%;
+}
 
 .page-row__header {
   @import "susy-panels/two/two-8-4";

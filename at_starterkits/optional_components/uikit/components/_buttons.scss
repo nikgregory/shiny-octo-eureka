@@ -7,7 +7,6 @@
  *  - action link buttons
  ========================================================================== */
 
-/* Buttons */
 .button {
   cursor: pointer;
   white-space: nowrap;
@@ -18,7 +17,7 @@
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
 
-  color: $button-text-color;
+  color: $button-color;
   background: $button-background-color;
 
   width: auto;
@@ -34,7 +33,8 @@
 
   &:hover,
   &:focus {
-    background-color: darken($button-background-color, $darken);
+    color: $button-hover-color;
+    background-color: $button-background-hover-color;
     text-decoration: none;
   }
 
@@ -44,7 +44,7 @@
     @include box-shadow(none);
 
     &:hover {
-      color: darken($button-text-color, $darken);
+      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
     }
   }
 
@@ -95,15 +95,17 @@
 
   .secondary-action {
     border-top: $button-border-width $button-border-style $button-border-color;
+    @include border-radius(0 0 0 $button-border-radius);
 
-    input {
+    .button {
       border: 0;
       background: $background-color;
       width: 100%;
 
       &:hover,
       &:focus {
-        background-color: darken($button-background-color, 3%);
+        @include border-radius(0 0 0 $button-border-radius);
+        background-color: $button-background-hover-color;
       }
     }
   }
@@ -157,6 +159,21 @@
   &.open {
     .dropbutton-action .button {
       @include border-radius($button-border-radius 0 0 0);
+    }
+  }
+
+  // Include secondary actions after "open" so
+  // the styles cascade properly.
+  .dropbutton {
+    .secondary-action {
+      .button {
+        @include border-radius(0 0 0 $button-border-radius);
+
+        &:hover,
+        &:focus {
+          @include border-radius(0 0 0 $button-border-radius);
+        }
+      }
     }
   }
 }
@@ -219,9 +236,9 @@ label button.link {
   @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
 
   &:before {
-    content: '\f067';
+    content: $button-action-icon;
     font-family: FontAwesome, sans-serif;
-    font-size: $small;
+    @include font-size($small);
     display: inline-block;
     padding: 0 4px 0 0;
     vertical-align: middle;

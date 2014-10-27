@@ -39,9 +39,7 @@
     {% else %}
       <figure{{ item.attributes.addClass.addClass('image-count-' ~ (delta + 1)) }} role="group">
     {% endif %}
-
       {{ item.content }}
-
       {% if item.caption.show == true %}
         <figcaption property="schema:description">{{ item.caption.title }}</figcaption>
       {% endif %}
