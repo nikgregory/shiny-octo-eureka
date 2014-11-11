@@ -46,18 +46,26 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Active themes active blocks
   $theme_blocks = _block_rehash($theme);
 
-  // Get breakpoint groups.
-  $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
+  // Check for breakpoints module and set a warning and a flag to disable much of the theme settings if its not available
+  $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
 
-  // Set breakpoint options, we use these in layout and other extensions like Responsive menus.
-  foreach ($breakpoint_groups as $group_key => $group_values) {
-    $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_values);
-  }
+  if ($breakpoints_module == TRUE) {
+    // Get breakpoint groups.
+    $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
 
-  foreach($breakpoints as $group => $breakpoint_values)  {
-    if ($breakpoint_values !== array()) {
-      $breakpoint_options[$group] = $group;
+    // Set breakpoint options, we use these in layout and other extensions like Responsive menus.
+    foreach ($breakpoint_groups as $group_key => $group_values) {
+      $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_values);
     }
+
+    foreach($breakpoints as $group => $breakpoint_values)  {
+      if ($breakpoint_values !== array()) {
+        $breakpoint_options[$group] = $group;
+      }
+    }
+  }
+  else {
+    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="!extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('!extendpage' => base_path() . 'admin/modules')), 'warning');
   }
 
   // Get node types (bundles).

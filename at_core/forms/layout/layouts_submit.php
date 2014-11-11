@@ -56,7 +56,7 @@ function at_core_submit_layouts(&$form, &$form_state) {
   if (isset($values['settings_max_width_enable']) && $values['settings_max_width_enable'] === 1) {
     $max_width_css = 'div.regions{max-width:' . $values['settings_max_width_value'] . $values['settings_max_width_unit'] . '}';
     $file_name = $theme . '--max-width.css';
-    $filepath = $generated_files_path . '/' . $file_name;
+    $filepath = $values['settings_generated_files_path'] . '/' . $file_name;
     file_unmanaged_save_data($max_width_css, $filepath, FILE_EXISTS_REPLACE);
   }
 
