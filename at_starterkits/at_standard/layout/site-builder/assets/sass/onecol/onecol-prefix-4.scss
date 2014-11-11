@@ -1,0 +1,8 @@
+@import "../site-builder-base";
+//
+// Prefix four
+//
+
+.onecol-prefix-4 .region {
+  @include prefix(4 of 12);
+}

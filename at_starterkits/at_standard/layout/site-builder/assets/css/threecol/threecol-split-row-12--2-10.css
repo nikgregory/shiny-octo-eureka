@@ -1,0 +1,20 @@
+.threecol-split-row-12--2-10 .has-regions--2-3 .region {
+  width: 15.2542373%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-split-row-12--2-10 .has-regions--2-3 .region:last-child {
+  width: 83.0508475%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-split-row-12--2-10 .active-region-count--3 .region:nth-child(2) {
+  width: 15.2542373%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-split-row-12--2-10 .active-region-count--3 .region:last-child {
+  width: 83.0508475%;
+  float: right;
+  margin-right: 0;
+}

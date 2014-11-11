@@ -35,6 +35,8 @@ class FileGlobber {
   public function globFiles() {
     $scan_directories = self::scanDirs();
 
+    //kpr($scan_directories);
+
     if (isset($scan_directories)) {
       foreach ($scan_directories as $directory) {
         $glob_path = $this->path . $directory;

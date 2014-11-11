@@ -1,10 +1,13 @@
 <?php
 
 use Drupal\Core\Config\Config;
+
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
-use Drupal\at_core\Layout\LayoutSettings;
+use Drupal\at_core\Helpers\FileSavePrepare;
+use Drupal\at_core\Layout\Layout;
+use Drupal\at_core\Breakpoints\ATBreakpoints;
 
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
@@ -23,11 +26,18 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Instantiate our Theme info object.
   $themeInfo = new ThemeInfo($theme);
-  $getThemeInfo = ($themeInfo->getThemeInfo('info'));
+  $getThemeInfo = $themeInfo->getThemeInfo('info');
+
+  // Get this themes config settings
+  $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Common paths.
   $at_core_path  = drupal_get_path('theme', 'at_core');
   $subtheme_path = drupal_get_path('theme', $theme);
+
+  // Path to save generated CSS files.
+  $fileSavePrepare = new FileSavePrepare();
+  $generated_files_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($subtheme_path, 'generated_css'));
 
   // Get the active themes regions so we can use this in
   // various other places.
@@ -36,8 +46,19 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Active themes active blocks
   $theme_blocks = _block_rehash($theme);
 
-  // Get breakpoints.
-  $theme_breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($theme);
+  // Get breakpoint groups.
+  $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
+
+  // Set breakpoint options, we use these in layout and other extensions like Responsive menus.
+  foreach ($breakpoint_groups as $group_key => $group_values) {
+    $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_values);
+  }
+
+  foreach($breakpoints as $group => $breakpoint_values)  {
+    if ($breakpoint_values !== array()) {
+      $breakpoint_options[$group] = $group;
+    }
+  }
 
   // Get node types (bundles).
   $node_types = node_type_get_types();
@@ -52,14 +73,14 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   unset($node_view_modes['search_index']);
   unset($node_view_modes['search_result']);
 
+
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
-    'library' => array(
-      'system' => 'core/drupal.machine-name',
-      'at_core' => 'at_core/at.slimbox2',
-    ),
     'css' => array(
       $at_core_path . '/stylesheets/css/appearance.css',
+    ),
+    'js' => array(
+      $at_core_path . '/scripts/appearance.js',
     ),
   );
 
@@ -79,16 +100,21 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // AT Subtheme
   if (isset($getThemeInfo['subtheme type'])) {
+
     if ($getThemeInfo['subtheme type'] != 'at_generator') {
 
-      // Get the themes configuration
-      $config = \Drupal::config($theme . '.settings')->get('settings');
+      // Pass in the generated files path to values and settings.
+      $form['at']['settings_generated_files_path'] = array(
+        '#type' => 'hidden',
+        '#value' => $generated_files_path,
+      );
 
       // Advanced settings (extensions).
       include_once($at_core_path . '/forms/ext/advanced_settings.php');
 
       // Layouts.
-      include_once($at_core_path . '/forms/layouts.php');
+      //include_once($at_core_path . '/forms/row-layouts/row_layouts.php');
+      include_once($at_core_path . '/forms/layout/layouts.php');
 
       // Basic settings - move into details wrapper and collapse.
       $form['basic_settings'] = array(

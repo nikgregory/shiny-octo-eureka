@@ -1,27 +1,16 @@
-# Window size widget
-at.window_size:
-  version: 1.1
+# Window size widget (AT Core)
+at.windowsize:
+  version: 1.0.0
   css:
     component:
-      libraries/window-size/window-size.css: {}
+      libraries/windowSize/at.windowSize.css: {}
   js:
-    libraries/window-size/window-size.js: {}
+    libraries/windowSize/at.windowSize.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
 
-# IE9.js
-at.ie9js:
-  remote: https://code.google.com/p/ie7-js/
-  license:
-    name: MIT
-    url: https://code.google.com/p/ie7-js/source/browse/version/2.1(beta4)/LICENSE
-    gpl-compatible: true
-  version: 2.1
-  js:
-    http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
-
-# Match Height
+# matchHeight
 at.matchheight:
   version: 0.5.2
   js:
@@ -29,7 +18,7 @@ at.matchheight:
   dependencies:
     - core/jquery
 
-# enquire.js
+# enquire
 at.enquire:
   version: 2.1.2
   js:
@@ -37,11 +26,19 @@ at.enquire:
   dependencies:
     - core/matchmedia
 
-# Menu toggle
-at.responsive_menus:
-  version: 1.0
+# doubleTapToGo
+at.doubletaptogo:
+  version: 1.0.0
   js:
-    libraries/responsive_menus/responsive_menus.js: {}
+    libraries/doubleTapToGo/doubleTapToGo.js: {}
+  dependencies:
+    - core/jquery
+
+# Responsive Menus (AT Core)
+at.responsivemenus:
+  version: 1.0.0
+  js:
+    libraries/responsiveMenus/at.responsiveMenus.js: {}
   dependencies:
     - core/modernizr
     - core/jquery
@@ -49,27 +46,47 @@ at.responsive_menus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
-    - at_core/at.matchheight
 
-# Matchmedia AddListener
-at.addListener:
-  version: 1.0
+#- at_core/at.matchheight
+
+# Respond TODO: test with respond, I have deprecated loading Ie8 specific stylesheets for now, I might bring this back
+# however in the new layout system this is a huge pita, its much easier to load respond for the dwindling numbers of IE8 users.
+at.respond:
+  version: 1.0.0
   js:
-    libraries/matchMediaaddListener/matchMedia.addListener.js: {}
+    libraries/respond/respond.js: { every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+
+#{ every_page: true, browsers: { IE: 'lte IE 8', '!IE': false }
+
+# Selectivizr TODO: test with IE8, layout and UIKit are critical, at least basic support must be had with both respond and either
+# IE9js or Selectivizr + yui3 (jQuery 2 does not support IE8)
+at.selectivizr:
+  version: 1.0.2
+  js:
+    libraries/selectivizr/selectivizr-min.js: { every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
   dependencies:
-   - core/matchmedia
+    - at_core/at.yui3
 
-# Scalefix
-at.scalefix:
-  version: 1.0
+# test with YUI3 for selectivizr and rewrite responsiveMenu.js to not rely on jQuery, so maybe IE8 will run without errors.
+at.yui3:
+  remote: https://github.com/yui/yui3
+  license:
+    name: BSD
+    url: https://github.com/yui/yui3/blob/master/LICENSE.md
+    gpl-compatible: true
+  version: 3.18.0
   js:
-    libraries/scalefix/scalefix.js: {}
+    http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
-# Slimbox
-at.slimbox2:
-  version: 2.0
-  css:
-    component:
-      libraries/slimbox2/css/slimbox2.css: {}
-  js:
-    libraries/slimbox2/slimbox2.js: {}
+# IE9.js TODO: possibly deprecated pending testing with Selectivzr, in the past I did not have a lot of joy
+# running Selectivzr on jQuery, however the CSS has changed a bit and we could plausibly get away with it.
+# IE9.js is a fantastic script that just "works", but it's big and no longer maintained.
+# at.ie9js:
+#   remote: https://code.google.com/p/ie7-js/
+#   license:
+#     name: MIT
+#     url: https://code.google.com/p/ie7-js/source/browse/version/2.1(beta4)/LICENSE
+#     gpl-compatible: true
+#   version: 2.1
+#   js:
+#     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }

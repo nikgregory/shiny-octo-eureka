@@ -1,0 +1,8 @@
+@import "../site-builder-base";
+//
+// suffix four
+//
+
+.onecol-suffix-4 .region {
+  @include suffix(4 of 12);
+}

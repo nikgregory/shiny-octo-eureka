@@ -1,0 +1,25 @@
+.threecol-source-ordered-3-5-4 .active-region-count--2 .region {
+  width: 66.1016949%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-source-ordered-3-5-4 .active-region-count--2 .region:last-child {
+  width: 32.2033898%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-source-ordered-3-5-4 .active-region-count--3 .region:first-child {
+  width: 23.7288136%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-source-ordered-3-5-4 .active-region-count--3 .region:nth-child(2) {
+  width: 40.6779661%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-source-ordered-3-5-4 .active-region-count--3 .region:last-child {
+  width: 32.2033898%;
+  float: right;
+  margin-right: 0;
+}

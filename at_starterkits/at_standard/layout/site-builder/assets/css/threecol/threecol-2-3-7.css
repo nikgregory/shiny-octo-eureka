@@ -1,0 +1,25 @@
+.threecol-2-3-7 .active-region-count--2 .region {
+  width: 40.6779661%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-2-3-7 .active-region-count--2 .region:last-child {
+  width: 57.6271186%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-2-3-7 .active-region-count--3 .region:first-child {
+  width: 15.2542373%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-2-3-7 .active-region-count--3 .region:nth-child(2) {
+  width: 23.7288136%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-2-3-7 .active-region-count--3 .region:last-child {
+  width: 57.6271186%;
+  float: right;
+  margin-right: 0;
+}

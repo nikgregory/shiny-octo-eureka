@@ -1,17 +1,21 @@
 <?php
-use Drupal\at_core\Layout\LayoutSettings;
+
+use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
+
 use Drupal\Component\Utility\Xss;
 use Symfony\Component\Yaml\Parser;
 
-$classitis_yml = $subtheme_path . '/' . $theme . '.classitis.yml';
+$layout_data = new LayoutCompatible($theme);
+$layout_compatible_data = $layout_data->getCompatibleLayout();
+$layout_config = $layout_compatible_data['layout_config'];
 
+// TODO: search base themes, we need all declarations from all base themes, they can all potentially work.
+$classitis_yml = $subtheme_path . '/' . $theme . '.classitis.yml';
 if (file_exists($classitis_yml)) {
   $classitis_parser = new Parser();
   $classitis = $classitis_parser->parse(file_get_contents($classitis_yml));
-
 }
-
 
 /**
  * @file
@@ -31,23 +35,11 @@ $form['classitis']['page_classes'] = array(
 );
 
 // Rows
-$provider = theme_get_setting('settings.template_suggestion_provider_page', $theme);
-$plugin = theme_get_setting('settings.template_suggestion_plugin_page', $theme);
-$layout_config_classitis = new LayoutSettings($provider);
-$settings_data_classitis = $layout_config_classitis->settingsPrepareData();
-
-foreach ($settings_data_classitis as $settings_data_key =>  $settings_data_value ) {
-  if ($settings_data_key == $plugin) {
-    foreach ($settings_data_value['rows'] as $row_key => $row_value) {
-      $row_data[$row_key] = $row_value;
-    }
-  }
-}
 $form['classitis']['page_classes']['rows'] = array(
   '#type' => 'details',
   '#title' => t('Rows'),
 );
-foreach ($row_data as $row_data_key => $row_data_value) {
+foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
   $form['classitis']['page_classes']['rows']['settings_page_classes_row_' . $row_data_key] = array(
     '#type' => 'textfield',
     '#title' => t('page-row__' . $row_data_key),
@@ -99,55 +91,28 @@ foreach ($node_types as $nt) {
 
 
 // Actual classes you can apply that are included in the theme.
-$form['classitis']['classes'] = array(
-  '#type' => 'details',
-  '#title' => t('Classes'),
-);
-
-$class_output = array();
-
-foreach ($classitis as $class_type => $class_values) {
-
-  $form['classitis']['classes'][$class_type] = array(
-    '#type' => 'fieldset',
-    '#title' => t($class_values['name']),
-    '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_values['description'] .'</p>'),
+if (!empty($classitis)) {
+  $form['classitis']['classes'] = array(
+    '#type' => 'details',
+    '#title' => t('Classes'),
   );
+  $class_output = array();
+  foreach ($classitis as $class_type => $class_values) {
 
-  foreach ($class_values['classes'] as $class_key => $class_data) {
-    $class_name =  Xss::filterAdmin($class_data['class']);
-    $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '</dd>';
+    $form['classitis']['classes'][$class_type] = array(
+      '#type' => 'fieldset',
+      '#title' => t($class_values['name']),
+      '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_values['description'] .'</p>'),
+    );
+
+    foreach ($class_values['classes'] as $class_key => $class_data) {
+      $class_name =  Xss::filterAdmin($class_data['class']);
+      $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '</dd>';
+    }
+
+    $form['classitis']['classes'][$class_type]['classlist'] = array(
+      '#markup' => '<dl class="class-list ' . $class_type . '">' . implode('', $class_output[$class_type]) . '</dl>',
+    );
   }
 
-  $form['classitis']['classes'][$class_type]['classlist'] = array(
-    '#markup' => '<dl class="class-list ' . $class_type . '">' . implode('', $class_output[$class_type]) . '</dl>',
-  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

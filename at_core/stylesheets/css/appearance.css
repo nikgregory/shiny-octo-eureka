@@ -164,89 +164,89 @@ pre.code-block {
   border: 0 none;
   margin: 0;
 }
+#edit-layouts .breakpoint-group-values {
+  margin: 0;
+  padding: 0;
+  font-size: 0.923em;
+  line-height: 1.295em;
+  color: #666;
+}
+#edit-layouts dl dt {
+  font-weight: 700;
+}
+#edit-layouts dl dd {
+  margin: 0;
+  margin-bottom: 0.5em;
+}
 @media all and (min-width: 60em) {
   #edit-layouts .layouts-column {
     float: left;
     margin-bottom: -99999px;
     padding-bottom: 99999px;
   }
-  #edit-layouts .layouts-column-one,
-  #edit-layouts .layouts-column-three {
+  #edit-layouts .layouts-column-onethird {
+    width: 34%;
+  }
+  #edit-layouts .layouts-column-twothirds {
+    width: 66%;
+  }
+  #edit-layouts .layouts-column-onequarter {
     width: 25%;
   }
-  #edit-layouts .layouts-column-two {
+  #edit-layouts .layouts-column-half {
     width: 50%;
-    border-left: 1px solid #BFBFBA;
+  }
+  #edit-layouts .layouts-column-threequarters {
+    width: 75%;
+  }
+  #edit-layouts .column-select-layouts {
     border-right: 1px solid #BFBFBA;
   }
+  #edit-layouts .css-layout-options {
+    float: right;
+  }
 }
-#edit-layouts .select-layout-table-wrapper {
-  max-height: 720px;
-  overflow: scroll;
-}
-#edit-layouts .table-layouts {
-  width: 100%;
-}
-#edit-layouts .table-layouts .field-hidden {
-  display: none;
-}
-#edit-layouts .table-layouts .collapse-processed > summary {
-  padding-left: 0;
-  padding-right: 0.5em;
-}
-#edit-layouts .table-layouts details > .details-wrapper {
+#edit-layouts #edit-layout-select fieldset {
+  background: none repeat scroll 0 0 transparent;
+  line-height: 1;
+  margin: 0 0 10px;
   padding: 0;
 }
-#edit-layouts .table-layouts tbody > tr > td {
-  width: 13px;
-}
-#edit-layouts .table-layouts td {
-  vertical-align: top;
-  padding: 20px 10px;
-}
-#edit-layouts .table-layouts img {
-  display: block;
-  max-width: 100px;
-  max-height: 140px;
-  height: auto;
-}
-#edit-layouts .table-layouts .field-name,
-#edit-layouts .table-layouts .field-desc {
-  min-width: 18em;
-}
-#edit-layouts .table-layouts .field-screenshot {
-  width: 100px;
-}
-#edit-layouts .table-layouts .field-screenshot a {
-  color: #747474;
-}
-#edit-layouts .table-layouts .field-screenshot a:hover, #edit-layouts .table-layouts .field-screenshot a:focus {
-  color: #595959;
-  text-decoration: none;
-}
-#edit-layouts .table-layouts .plus-icon {
-  text-align: left;
-  font-size: 0.8em;
-  display: block;
-}
-#edit-layouts .table-layouts h3 {
-  margin: 0 0 1.15em;
-}
-#edit-layouts dl {
-  white-space: nowrap;
-  min-width: 15em;
-}
-#edit-layouts dl dt {
+#edit-layouts #edit-layout-select .form-type-select {
+  width: 75%;
   float: left;
-  width: 5.5em;
-  font-weight: 700;
-}
-#edit-layouts dl dd {
   margin: 0;
+  padding: 0;
 }
-#edit-layouts .current-default-layout-meta {
-  font-size: 0.923em;
-  line-height: 1.295em;
+#edit-layouts #edit-layout-select .form-type-select label {
+  float: left;
+  width: 10em;
+}
+#edit-layouts #edit-layout-select details .details-wrapper {
+  padding: 10px;
+}
+#edit-layouts #edit-layout-select details details {
+  margin: 10px 0;
+  border: 0;
+  background-color: #F5F5F5;
+  padding: 5px;
+}
+#edit-layouts #edit-layout-select .css-layout-options .region {
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 1.69492%;
+  -moz-transition: all, 0.2s, ease-in;
+  -o-transition: all, 0.2s, ease-in;
+  -webkit-transition: all, 0.2s, ease-in;
+  transition: all, 0.2s, ease-in;
+}
+#edit-layouts #edit-layout-select .css-layout-options .region span {
+  display: block;
+  background-color: #B2B2B2;
+  font-size: 0.8rem;
+  height: 1.5em;
+  padding: 0.3em 0 0 0.45em;
+  color: #F5F5F5;
 }
 
 #edit-manage-suggestions {
@@ -295,12 +295,7 @@ pre.code-block {
 }
 
 #edit-suggestions {
-  padding-top: 0;
-  padding: 10px;
   background: #F7FCFF;
-  border-top: 1px solid #BFBFBA;
-  border-bottom: 1px solid #BFBFBA;
-  margin: 10px 0 20px;
 }
 #edit-suggestions label {
   padding-bottom: 10px;
@@ -471,6 +466,9 @@ pre.code-block {
 }
 #edit-responsive-menus .clearfix {
   border-top: 1px solid #ccc;
+}
+#edit-responsive-menus select {
+  max-width: 18em;
 }
 #edit-responsive-menus .responsive-menu-styles {
   float: left;

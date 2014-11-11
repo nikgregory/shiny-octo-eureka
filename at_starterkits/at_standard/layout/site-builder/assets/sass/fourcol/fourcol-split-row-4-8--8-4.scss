@@ -1,0 +1,60 @@
+@import "site-builder-base";
+//
+// Four Regions 4-8--8-4
+//
+// Offset grid type layout.
+//
+// First region  : 4 grid columns.
+// Second region : 8 grid columns.
+// -- break to new line --
+// Third region  : 8 grid columns.
+// Fourth region : 4 grid columns.
+//
+// ---------------------------------------------------------------------------
+
+.fourcol-split-row-4-8--8-4 {
+
+  .active-region-count--2 {
+    .region {
+      &:first-child {
+        @include span(4 of 12);
+      }
+
+      &:last-child {
+        @include span(8 of 12 last);
+      }
+    }
+  }
+
+
+  .active-region-count--3 {
+    .region {
+      &:first-child {
+        @include span(4 of 12);
+      }
+
+      &:nth-child(2) {
+        @include span(8 of 12 last);
+      }
+    }
+  }
+
+
+  .active-region-count--4 {
+    .region {
+      @include span(8 of 12);
+
+      &:first-child,
+      &:last-child {
+        @include span(4 of 12);
+      }
+
+      &:last-child, // Needs testing for the double float right layout here, could be angry...
+      &:nth-child(2) {
+        @include last;
+      }
+    }
+  }
+}
+
+

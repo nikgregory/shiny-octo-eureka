@@ -128,3 +128,10 @@ $form['ext']['ext_settings']['enable_ext']['settings_enable_devel'] = array(
   '#default_value' => theme_get_setting('settings.enable_devel', $theme),
 );
 
+// Legacy browser support
+$form['ext']['ext_settings']['enable_ext']['settings_enable_legacy_browsers'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Legacy Browsers'),
+  '#description' => t('Settings to support legacy browsers such as IE8.'),
+  '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
+);

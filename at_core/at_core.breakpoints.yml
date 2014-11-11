@@ -1,0 +1,125 @@
+#
+# Breakpoints - Simple
+#
+# These breakpoints use ems, which mean they are dependant on the base font size,
+# so any pixel equivalents stated here assume base font size of 16px. Change them
+# to suit your requirements.
+#
+#   mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+#   tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+#   widescreen      - 65em (1040px) and up.
+#
+# | mobile-tablet ------------------->|
+#                 | tablet-isolate -->|
+#                                     | widescreen ---------------------------->
+#
+# mobile-tablet   : "all and (max-width: 65em)";
+# tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
+# widescreen      : "all and (min-width: 65em)";
+#
+at_core.simple.mobile-tablet:
+  label: Mobile-tablet
+  mediaQuery: 'all and (max-width: 65em)'
+  weight: 0
+  multipliers:
+    - 1x
+  group: at_core.simple
+at_core.simple.tablet-isolate:
+  label: Tablet-isolate
+  mediaQuery: 'all and (min-width: 45em) and (max-width: 65em)'
+  weight: 1
+  multipliers:
+    - 1x
+  group: at_core.simple
+at_core.simple.widescreen:
+  label: Widescreen
+  mediaQuery: 'all and (min-width: 65em)'
+  weight: 2
+  multipliers:
+    - 1x
+  group: at_core.simple
+#
+# Breakpoints - Advanced
+#
+# These breakpoints use ems, which mean they are dependant on the base font size,
+# so any pixel equivalents stated here assume base font size of 16px. Change them
+# to suit your requirements.
+#
+#   mobile          - 0 to 45em (0 to 720px), small screens only.
+#   mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+#
+#   tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+#   tablet          - 45em (720px) and up.
+#
+#   widescreen      - 65em (1040px) and up.
+#
+#   huge            - 120em (1920px) and up, for big resolution.
+#
+# Here you can see how each breakpoint cascades or isolates. The first 3 are effectively
+# isolation breakpoints, however we allow $mobile-tablet to cascade into $tablet-isolate
+# and $tablet. The last 3 all cascade.
+#
+# Most layouts for AT use tablet-isolate, tablet and/or widescreen breakpoints only.
+#
+# | mobile ------>|
+# | mobile-tablet ------------------->|
+#                 | tablet-isolate -->|
+#                 | tablet ---------------------------------------------------->
+#                                     | widescreen ---------------------------->
+#                                                                   | huge ---->
+#
+# mobile          : "all and (max-width: 45em)";
+# mobile-tablet   : "all and (max-width: 65em)";
+# tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
+# tablet          : "all and (min-width: 45em)";
+# widescreen      : "all and (min-width: 65em)";
+# huge            : "all and (min-width: 120em)";
+#
+at_core.advanced.mobile:
+  label: Mobile
+  description: 'The mobile breakpoint uses max-width and will apply for all screens up to 45em.'
+  mediaQuery: 'all and (max-width: 45em)'
+  weight: 0
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.mobile_tablet:
+  label: Mobile-tablet
+  description: 'The mobile-tablet breakpoint uses max-width and will apply for all screens up to 65em. This will cascade into the tablet breakpoint, and can override the mobile breakpoint.'
+  mediaQuery: 'all and (max-width: 65em)'
+  weight: 1
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.tablet_isolate:
+  label: Tablet-isolate
+  description: 'The tablet-isolate breakpoint uses a min and max width to isolate styles between these two widths.'
+  mediaQuery: 'all and (min-width: 45em) and (max-width: 65em)'
+  weight: 2
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.tablet:
+  label: Tablet
+  description: 'The tablet breakpoint uses min-width and will apply for all screens over 45em. This will cascade into the widescreen breakpoint.'
+  mediaQuery: 'all and (min-width: 45em)'
+  weight: 3
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.widescreen:
+  label: Widescreen
+  description: 'The widescreen breakpoint uses min-width and will apply for all screens over 65em. This can override the tablet breakpoint.'
+  mediaQuery: 'all and (min-width: 65em)'
+  weight: 4
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.huge:
+  label: Huge
+  description: 'The huge breakpoint is for very large screens, for example projection screens or very high resolution monitors.'
+  mediaQuery: 'all and (min-width: 120em)'
+  weight: 5
+  multipliers:
+    - 1x
+  group: at_core.advanced

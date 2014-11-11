@@ -1,0 +1,44 @@
+.fourcol-split-row-12--4-4-4 .has-regions--2-3 .region,
+.fourcol-split-row-12--4-4-4 .has-regions--2-4 .region,
+.fourcol-split-row-12--4-4-4 .has-regions--3-4 .region {
+  width: 49.1525424%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.fourcol-split-row-12--4-4-4 .has-regions--2-3 .region:last-child,
+.fourcol-split-row-12--4-4-4 .has-regions--2-4 .region:last-child,
+.fourcol-split-row-12--4-4-4 .has-regions--3-4 .region:last-child {
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--4-4-4 .has-regions--1-2-3 .region:nth-child(2),
+.fourcol-split-row-12--4-4-4 .has-regions--1-2-4 .region:nth-child(2) {
+  width: 49.1525424%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.fourcol-split-row-12--4-4-4 .has-regions--1-2-3 .region:last-child,
+.fourcol-split-row-12--4-4-4 .has-regions--1-2-4 .region:last-child {
+  width: 49.1525424%;
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--4-4-4 .has-regions--2-3-4 .region {
+  width: 32.2033898%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.fourcol-split-row-12--4-4-4 .has-regions--2-3-4 .region:last-child {
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--4-4-4 .active-region-count--4 .region:nth-child(2), .fourcol-split-row-12--4-4-4 .active-region-count--4 .region:nth-child(3) {
+  width: 32.2033898%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.fourcol-split-row-12--4-4-4 .active-region-count--4 .region:last-child {
+  width: 32.2033898%;
+  float: right;
+  margin-right: 0;
+}

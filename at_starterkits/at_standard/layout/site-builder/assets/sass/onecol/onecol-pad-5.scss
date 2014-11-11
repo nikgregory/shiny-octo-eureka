@@ -1,0 +1,8 @@
+@import "../site-builder-base";
+//
+// pad five
+//
+
+.onecol-pad-5 .region {
+  @include pad(5 of 12);
+}

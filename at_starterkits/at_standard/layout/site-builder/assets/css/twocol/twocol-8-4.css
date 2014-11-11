@@ -1,0 +1,10 @@
+.twocol-8-4 .active-region-count--2 .region {
+  width: 66.1016949%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.twocol-8-4 .active-region-count--2 .region:last-child {
+  width: 32.2033898%;
+  float: right;
+  margin-right: 0;
+}

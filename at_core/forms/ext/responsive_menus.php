@@ -2,6 +2,16 @@
 
 use Drupal\Component\Utility\String;
 
+$responsive_menu_breakpoint_group = theme_get_setting('settings.responsive_menu_breakpoint_group', $theme);
+$responsive_menu_breakpoints = $breakpoints[$responsive_menu_breakpoint_group];
+
+//kpr($responsive_menu_breakpoints);
+
+// build options
+foreach ($responsive_menu_breakpoints as $rmb_key => $rmb_value) {
+  $rmb_group_options[$rmb_value->getMediaQuery()] = $rmb_value->getLabel() . ': ' . $rmb_value->getMediaQuery();
+}
+
 // menu style options
 $responsive_menu_options = array(
   'none' => t('-- none --'),
@@ -13,11 +23,6 @@ $responsive_menu_options = array(
   'offcanvas'  => t('Off canvas'),
   'tiles'      => t('Tiles'),
 );
-
-// breakpoint options
-foreach ($theme_breakpoints as $bpid => $bpvalue) {
-  $breakpoint_options[$bpvalue->getMediaQuery()] = $bpvalue->getLabel() . ' - ' . $bpvalue->getMediaQuery();
-}
 
 $tiles_count = array(
   'two' => 2,
@@ -42,6 +47,15 @@ $form['responsive_menus']['settings_responsive_menu_region'] = array(
   '#description' => t('Menu blocks placed in this region will inherit the styles as configured below.'),
 );
 
+// Regions
+$form['responsive_menus']['settings_responsive_menu_breakpoint_group'] = array(
+  '#type' => 'select',
+  '#title' => t('Breakpoint group'),
+  '#options' => $breakpoint_options,
+  '#default_value' => $responsive_menu_breakpoint_group,
+  '#description' => t('Select the Breakpoint group. Save the Advanced settings for this to take effect, then configure your menus.'),
+);
+
 
 //
 // DEFAULT
@@ -50,6 +64,9 @@ $form['responsive_menus']['default'] = array(
   '#type' => 'fieldset',
   '#title' => t('Default Style'),
   '#attributes' => array('class' => array('clearfix')),
+  '#states' => array(
+    'enabled' => array('select[name="settings_responsive_menu_breakpoint_group"]' => array('value' => $responsive_menu_breakpoint_group)),
+  ),
 );
 
 $form['responsive_menus']['default']['styles'] = array(
@@ -68,7 +85,7 @@ $form['responsive_menus']['default']['styles']['settings_responsive_menu_default
 $form['responsive_menus']['default']['styles']['settings_responsive_menu_default_breakpoint'] = array(
   '#type' => 'select',
   '#title' => t('Default Style Breakpoint'),
-  '#options' => $breakpoint_options,
+  '#options' => $rmb_group_options,
   '#default_value' => theme_get_setting('settings.responsive_menu_default_breakpoint', $theme),
   '#description' => t('Set the breakpoint the default style will show. Do not allow this to bleed or cascade into the Responsive breakpoint.'),
   '#states' => array(
@@ -77,6 +94,8 @@ $form['responsive_menus']['default']['styles']['settings_responsive_menu_default
     ),
   ),
 );
+
+
 
 //
 // Default Options
@@ -207,6 +226,9 @@ $form['responsive_menus']['responsive'] = array(
   '#type' => 'fieldset',
   '#title' => t('Responisve Style'),
   '#attributes' => array('class' => array('clearfix')),
+  '#states' => array(
+    'enabled' => array('select[name="settings_responsive_menu_breakpoint_group"]' => array('value' => $responsive_menu_breakpoint_group)),
+  ),
 );
 
 $form['responsive_menus']['responsive']['styles'] = array(
@@ -225,7 +247,7 @@ $form['responsive_menus']['responsive']['styles']['settings_responsive_menu_resp
 $form['responsive_menus']['responsive']['styles']['settings_responsive_menu_responsive_breakpoint'] = array(
   '#type' => 'select',
   '#title' => t('Responsive Style Breakpoint'),
-  '#options' => $breakpoint_options,
+  '#options' => $rmb_group_options,
   '#default_value' => theme_get_setting('settings.responsive_menu_responsive_breakpoint', $theme),
   '#description' => t('Set the breakpoint the responsive style will show. Do not allow this to bleed or cascade into the Default breakpoint.'),
   '#states' => array(

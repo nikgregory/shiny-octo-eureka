@@ -1,66 +1,56 @@
 {#
 /**
- * Univer_66 Layout
- * Generated on: Wed, 22 Oct 14 10:59:26 +0200
+ * site-builder-rowstyles for the page template.
+ * Generated on: Tue, 11 Nov 14 14:41:43 +0100
  */
 #}
+{# No template file found - template code programmatically generated. #}
 <div{{ attributes }}>
-
   {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}
   {{ messages }}
-
   {% if messages__regions.active == true %}
-  <div{{ messages__attributes }}>
-    <div class="regions">
+  <div class="page-row__messages">
+    <div{{ messages__attributes }}>
       {{ page.messages }}
     </div>
   </div>
   {% endif %}
-
   {% if leaderboard__regions.active == true %}
-  <div{{ leaderboard__attributes }}>
-    <div class="regions">
+  <div class="page-row__leaderboard">
+    <div{{ leaderboard__attributes }}>
       {{ page.leaderboard }}
     </div>
   </div>
   {% endif %}
-
   {% if header__regions.active == true %}
-  <header{{ header__attributes }}>
-    <div class="regions">
+  <header class="page-row__header">
+    <div{{ header__attributes }}>
       {{ page.header_first }}
       {{ page.header_second }}
     </div>
   </header>
   {% endif %}
-
   {% if navbar__regions.active == true %}
-  <div{{ navbar__attributes }}>
-    <div class="regions">
+  <div class="page-row__navbar">
+    <div{{ navbar__attributes }}>
       {{ page.navbar }}
     </div>
   </div>
   {% endif %}
-
   {% if features__regions.active == true %}
-  <div{{ features__attributes }}>
-    <div class="regions">
+  <div class="page-row__features">
+    <div{{ features__attributes }}>
       {{ page.features_first }}
       {{ page.features_second }}
       {{ page.features_third }}
     </div>
   </div>
   {% endif %}
+  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}
 
-  {% if tabs %}
-    <div class="page-row__temporary-tabs">
-      <div class="regions">{{ tabs }}</div>
-    </div>
-  {% endif %}
-
-  {% if main__regions.active == true %}
-  <div{{ main__attributes }}>
-    <div class="regions">
+{% if main__regions.active == true %}
+  <div class="page-row__main">
+    <div{{ main__attributes }}>
       {{ page.highlighted }}
       {{ page.content }}
       {{ page.sidebar_first }}
@@ -68,24 +58,21 @@
     </div>
   </div>
   {% endif %}
-
   {% if tertiary__regions.active == true %}
-  <div{{ tertiary__attributes }}>
-    <div class="regions">
+  <div class="page-row__tertiary">
+    <div{{ tertiary__attributes }}>
       {{ page.tertiary_first }}
       {{ page.tertiary_second }}
       {{ page.tertiary_third }}
     </div>
   </div>
   {% endif %}
-
   {% if footer__regions.active == true %}
-  <footer{{ footer__attributes }}>
-    <div class="regions">
+  <footer class="page-row__footer">
+    <div{{ footer__attributes }}>
       {{ page.footer }}
     </div>
   </footer>
   {% endif %}
-
   {{ attribution }}
 </div>

@@ -16,6 +16,7 @@ class FileSavePrepare {
     if (!file_exists($directory_path)) {
       file_prepare_directory($directory_path, FILE_CREATE_DIRECTORY);
     }
+
     return $directory_path;
   }
 

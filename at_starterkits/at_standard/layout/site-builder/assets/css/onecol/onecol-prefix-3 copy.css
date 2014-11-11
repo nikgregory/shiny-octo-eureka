@@ -1,0 +1,21 @@
+/*
+Errno::ENOENT: No such file or directory - /Users/jmburnz/Sites/contrib/drupal80x/drupal-8beta/drupal/themes/testone/layout/site-builder-rowstyles/assets/sass/onecol/onecol-prefix-3 copy.scss
+
+Backtrace:
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:481:in `read'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:481:in `update_stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:469:in `on_file_changed'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.6/lib/sass/plugin/compiler.rb:328:in `block in watch'
+/Library/Ruby/Gems/2.0.0/gems/listen-2.7.0/lib/listen/listener.rb:143:in `call'
+/Library/Ruby/Gems/2.0.0/gems/listen-2.7.0/lib/listen/listener.rb:143:in `block in _wait_for_changes'
+/Library/Ruby/Gems/2.0.0/gems/listen-2.7.0/lib/listen/listener.rb:138:in `loop'
+/Library/Ruby/Gems/2.0.0/gems/listen-2.7.0/lib/listen/listener.rb:138:in `_wait_for_changes'
+/Library/Ruby/Gems/2.0.0/gems/listen-2.7.0/lib/listen/listener.rb:42:in `block in start'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Errno::ENOENT: No such file or directory - /Users/jmburnz/Sites/contrib/drupal80x/drupal-8beta/drupal/themes/testone/layout/site-builder-rowstyles/assets/sass/onecol/onecol-prefix-3 copy.scss"; }

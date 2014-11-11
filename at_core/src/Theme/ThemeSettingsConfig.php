@@ -8,6 +8,7 @@
 namespace Drupal\at_core\Theme;
 
 use Drupal\Core\Config\Config;
+use Drupal\Component\Utility\Unicode;
 
 class ThemeSettingsConfig {
 
@@ -18,26 +19,20 @@ class ThemeSettingsConfig {
   public function settingsConvertToConfig(array $values, Config $config) {
     $config = \Drupal::config($values['config_key']);
     foreach ($values as $key => $value) {
+      // Save settings as config
       if (substr($key, 0, 9) == 'settings_') {
-        $config->set('settings.' . drupal_substr($key, 9), $value);
+        $config_key = Unicode::substr($key, 9);
+        $config->set('settings.' . $config_key, $value)->save();
       }
-    }
-    // Clear template suggestion settings from configuration when suggestions are deleted via the UI.
-    if (isset($values['delete_suggestions'])) {
-      if ($values['delete_suggestions'] == 1 && !empty($values['delete_suggestions_table'])) {
-        foreach ($values['delete_suggestions_table'] as $config_key => $config_value) {
-          if ($config_value !== 0) {
-            $suggestion = drupal_substr($config_key, 20);
-            $suggestion_provider = 'settings.template_suggestion_provider_' . $suggestion;
-            $suggestion_plugin = 'settings.template_suggestion_plugin_' . $suggestion;
-            $config->clear('settings.' . $config_key);
-            $config->clear($suggestion_provider);
-            $config->clear($suggestion_plugin);
-          }
+      // Delete suggestions config settings. We do not remove all the suggestions settings
+      // because later on if the suggestion is recreated there will be settings for it already,
+      // which is kind of nice for the user should they accidentally delete a suggestion.
+      if (substr($key, 0, 18) == 'delete_suggestion_') {
+        $delete_suggestion_key = 'settings.suggestion_' . Unicode::substr($key, 18);
+        if ($value == 1) {
+          $config->clear($delete_suggestion_key, $value)->save();
         }
       }
     }
-    return $config;
   }
-
-} // end class
+}

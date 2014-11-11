@@ -1,0 +1,51 @@
+@import "../site-builder-base";
+//
+// Three Regions 3-3-6
+//
+//   - first (widest region)
+//   - second (narrow region)
+//   - third (narrow region)
+//
+// But you want it to appear like this:
+//
+//   ------------------------------------------------------
+//  |   second    |    third     |          first          |
+//   ------------------------------------------------------
+
+.threecol-reverse-float-3-3-6 {
+
+  // Region first and second OR third are active.
+  .has-regions--1-2,
+  .has-regions--1-3 {
+    .region {
+      @include span(6 of 12);
+
+      &:first-child {
+        @include last;
+      }
+    }
+  }
+
+  // Region second and third are active.
+  .has-regions--2-3 {
+    .region {
+      @include span(6 of 12);
+
+      &:last-child {
+        @include last;
+      }
+    }
+  }
+
+  // All 3col regions are active.
+  .active-region-count--3 {
+    .region {
+      @include span(3 of 12);
+
+      &:first-child {
+        @include span(6 of 12 last);
+      }
+    }
+  }
+}
+

@@ -1,0 +1,423 @@
+<?php
+
+/**
+ * @file
+ * Contains \Drupal\at_core\Layout\LayoutGenerator
+ */
+
+namespace Drupal\at_core\Layout;
+
+use Drupal\at_core\Layout\Layout;
+use Drupal\at_core\Layout\LayoutCompatible;
+
+use Drupal\at_core\Helpers\BuildInfoFile;
+use Drupal\at_core\Helpers\FileSavePrepare;
+
+use Symfony\Component\Yaml\Parser;
+
+
+class LayoutSubmit implements LayoutSubmitInterface {
+
+  // The active theme name.
+  protected $theme_name;
+
+  // Form state values.
+  protected $values;
+
+  // Constructor
+  public function __construct($theme_name, $values) {
+    $this->theme_name = $theme_name;
+
+    $layout_data = new LayoutCompatible($this->theme_name);
+    $layout_compatible_data = $layout_data->getCompatibleLayout();
+
+    $this->layout_config = $layout_compatible_data['layout_config'];
+    $this->css_config = $layout_compatible_data['css_config'];
+
+    $this->layout_name = $layout_compatible_data['layout_name'];
+    $this->layout_path = drupal_get_path('theme', $this->layout_config['layout_provider']) . '/layout/' . $this->layout_name;
+
+    $this->form_values = $values;
+  }
+
+  // Save the layout CSS for each suggestion. This is all a bit crazy, but yeah, it does actually work.
+  public function saveLayoutSuggestionsCSS() {
+
+    $breakpoints_group = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($this->form_values['settings_breakpoint_group_layout']);
+    $generated_files_path = $this->form_values['settings_generated_files_path'];
+
+    foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
+      foreach ($breakpoints_group as $breakpoint_id => $breakpoint_value) {
+        foreach ($this->layout_config['rows'] as $row_key => $row_values) {
+          $css_data[$suggestion_key][$breakpoint_value->getLabel()]['query'] = $breakpoint_value->getMediaQuery();
+          if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key])) {
+            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key];
+          }
+          else {
+            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = 'not_set';
+          }
+        }
+      }
+    }
+
+    $output = array();
+    $css_rows = array();
+    $css_file = array();
+    $path_to_css_files = $this->layout_path . '/' . $this->css_config['css_files_path'];
+
+    foreach ($css_data as $suggestion => $breakpoints) {
+      foreach ($breakpoints as $breakpoint_keys => $breakpoint_values) {
+        foreach ($breakpoint_values['rows'] as $row_keys => $row_values) {
+          if ($row_values == 'not_set') {
+            continue;
+          }
+          foreach ($this->css_config['css'] as $css_key => $css_values) {
+            if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css')) {
+              $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css');
+              $replace_class = 'page-row__' . $row_keys;
+              if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
+                $file = str_replace($row_values, $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
+                $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
+              }
+            }
+          }
+        }
+
+        if (!empty($css_rows[$suggestion][$breakpoint_keys])) {
+          $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . ' {';
+          $output[$suggestion][] =  implode('', $css_rows[$suggestion][$breakpoint_keys]);
+          $output[$suggestion][] = '}';
+        }
+      }
+    }
+
+    // Get the layouts global CSS if any.
+    $global_css = '';
+    if ($this->css_config['css_global_layout']) {
+      $global_css = file_get_contents($path_to_css_files . '/' . $this->css_config['css_global_layout']);
+    }
+
+    foreach ($output as $suggestion => $css) {
+      if (!empty($file_content)) {
+        $file_name = $this->theme_name . '--layout__' . str_replace('_', '-', $suggestion) . '.css';
+        $filepath = "$generated_files_path/$file_name";
+        file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
+      }
+    }
+  }
+
+
+  // Save regions to the theme info file, these can change if a new row is added.
+  public function saveLayoutRegions() {
+
+    $regions = array();
+
+    foreach ($this->layout_config['rows'] as $row => $row_values) {
+      foreach ($row_values['regions'] as $region_name => $region_value) {
+        $regions[$region_name] = "'" . $region_value . "'";
+      }
+    }
+
+    $regions['page_top'] = "'" . 'Page top' . "'";
+    $regions['page_bottom'] = "'" . 'Page bottom' . "'";
+
+
+    $path = drupal_get_path('theme', $this->theme_name);
+    $info_file = $this->theme_name . '.info.yml';
+    $file_path = $path . '/' . $info_file;
+
+
+    // Create a backup.
+    if ($this->form_values['settings_enable_backups'] == 1) {
+      $fileSavePrepare = new FileSavePrepare();
+      $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'info'));
+
+      //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
+      $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
+
+      $file_paths = array(
+       'copy_source' => $file_path,
+       'copy_dest' => $backup_path . '/' . $info_file,
+       'rename_oldname' => $backup_path . '/' . $info_file,
+       'rename_newname' => $backup_path . '/' . $backup_file,
+      );
+      $backupInfo = $fileSavePrepare->copyRename($file_paths);
+    }
+
+    // Parse the current info file.
+    //$theme_info_data = drupal_parse_info_file($file_path);
+    $parser = new Parser();
+    $theme_info_data = $parser->parse(file_get_contents($file_path));
+
+    $theme_info_data['regions'] = $regions;
+
+
+    // During the parse get contents single quotes are stripped from
+    // strings, we have to add them back because they might have spaces.
+    $theme_info_data['name'] = "'" . $theme_info_data['name'] . "'";
+    $theme_info_data['description'] = "'" . $theme_info_data['description'] . "'";
+
+    // Prepare the array for printing in yml format.
+    $buildInfo = new BuildInfoFile();
+    $rebuilt_info = $buildInfo->buildInfoFile($theme_info_data);
+
+    // Replace the existing info.yml file.
+    file_unmanaged_save_data($rebuilt_info, $file_path, FILE_EXISTS_REPLACE);
+  }
+
+
+
+  // Save each suggestion template, these are saved every time the layout settings
+  // are saved because the rows and regions might change, so we resave every template.
+  public function saveLayoutSuggestionsMarkup() {
+
+    $template_suggestions = array();
+
+    if (!empty($this->form_values['settings_suggestions'])) {
+      $template_suggestions = $this->form_values['settings_suggestions'];
+    }
+
+    if (!empty($this->form_values['ts_name'])) {
+      $template_suggestions['page__' . $this->form_values['ts_name']] = 'page__' . $this->form_values['ts_name'];
+    }
+
+    // Template path
+    $template_file = $this->layout_path . '/' . $this->layout_name . '.html.twig';
+
+    // Path to target theme where the template will be saved.
+    $path = drupal_get_path('theme', $this->theme_name);
+
+    $template_directory = $path . '/templates/page';
+
+    if (!file_exists($path . '/templates')) {
+      drupal_mkdir($path . '/templates');
+    }
+    if (!file_exists($template_directory)) {
+      drupal_mkdir($template_directory);
+    }
+
+    // We have to save every template every time, in case a row has been added to the layout, all template MUST update.
+    // This could be changed later to only do this IF a row has been added, we're not that flash right now :)
+    foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
+
+      $output = array();
+
+      // Doc block
+      $doc = array();
+      $doc[$suggestion_key][] = '{#';
+      $doc[$suggestion_key][] = '/**';
+      $doc[$suggestion_key][] = ' * ' . $this->layout_name . ' for the ' . $suggestion_key . ' template.';
+      $doc[$suggestion_key][] = ' * Generated on: ' . date(DATE_RFC822);
+      $doc[$suggestion_key][] = ' */';
+      $doc[$suggestion_key][] = '#}' . "\n";
+      $docblock[$suggestion_key] = implode("\n", $doc[$suggestion_key]);
+
+      // Get the template file, if not found attempt to generate template code programmatically.
+      if (file_exists($template_file)) {
+        $template = file_get_contents($template_file);
+      }
+      else {
+
+        foreach ($this->layout_config['rows'] as $row => $row_values) {
+
+          foreach ($row_values['regions'] as $region_name => $region_value) {
+            $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_name . ' }}';
+          }
+
+          $wrapper_element[$suggestion_key] = 'div';
+
+          if ($row == 'header' || $row == 'footer') {
+            $wrapper_element[$suggestion_key] = $row;
+          }
+
+          // Temporarily add tabs, we can remove this later when the tabs become a block.
+          if ($row == 'main') {
+            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+          }
+          else {
+            $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+          }
+
+          // move the dynamic region classes to the regions wrapper, hard code the page-row class
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page-row__' . $row . '">';
+          $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
+          $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
+          $output[$suggestion_key][$row]['container_close'] = '    </div>';
+          $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
+          $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
+        }
+
+        $generated[$suggestion_key][] = "{# No template file found - template code programmatically generated. #}" . "\n";
+        $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
+        $generated[$suggestion_key][] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
+        $generated[$suggestion_key][] = "  {{ messages }}" . "\n";
+
+        foreach ($output[$suggestion_key] as $row_output) {
+          $generated[$suggestion_key][] = implode("\n", $row_output);
+        }
+        $generated[$suggestion_key][] = "  {{ attribution }}" . "\n";
+        $generated[$suggestion_key][] = '</div>';
+        $template[$suggestion_key] = implode($generated[$suggestion_key]);
+      }
+
+      // Prepend the docblock to the template markup.
+      $template_markup[$suggestion_key] = $docblock[$suggestion_key] . $template[$suggestion_key];
+
+      // Set the template file, either it's page or a page suggestion.
+      if ($suggestion_key !== 'page') {
+        $template_file = str_replace('_', '-', $suggestion_key) . '.html.twig';
+      }
+      else {
+        $template_file = 'page.html.twig';
+      }
+
+      // Set the template path.
+      $template_path = $template_directory . '/' . $template_file;
+
+      // Build array of files to be saved.
+      $templates[$suggestion_key]['markup'] = $template_markup[$suggestion_key];
+      $templates[$suggestion_key]['template_path'] = $template_path;
+
+
+      // Create a backup.
+      /*
+      if ($this->form_values['settings_enable_backups'] == 1) {
+        $fileSavePrepare = new FileSavePrepare();
+        $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'templates'));
+
+        //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
+        $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
+
+        $file_paths = array(
+         'copy_source' => $template_path,
+         'copy_dest' => $backup_path . '/' . $template_file,
+         'rename_oldname' => $backup_path . '/' . $template_file,
+         'rename_newname' => $backup_path . '/' . $backup_file,
+        );
+
+        $backupTemplate = $fileSavePrepare->copyRename($file_paths);
+      }
+      */
+    }
+
+    foreach ($templates as $suggestion => $template_values) {
+      file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
+    }
+  }
+
+}
+
+
+
+
+
+      // check if the file exists and if so set a message.
+      /*
+      $file_path = drupal_get_path('theme', $theme) . '/templates/page/' . $template_file_name;
+      if (file_exists($file_path)) {
+        drupal_set_message(t('Success - template file has been saved to <code>!file_path</code>.', array('!file_path' => $file_path)), 'status');
+      }
+      else {
+        drupal_set_message(t('The template file could not be saved to <code>!file_path</code>, check permissions and try again.', array('!file_path' => $file_path)), 'error');
+      }
+      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //public function generateLayout($theme, $this->form_values) {
+
+/*
+    $generateLayout = new LayoutGenerator();
+
+    // Set variable for backups.
+    $enable_backups = FALSE;
+    if ($this->form_values['settings_enable_backups'] == 1) {
+      $enable_backups = TRUE;
+    }
+
+    // Has the user entered a new template suggestion name?
+    if (!empty($this->form_values['ts_name'])) {
+
+      $suggestion = $this->form_values['ts_name'];
+
+      // Create a setting for each new template suggestion
+      $clean_suggestion = strtr($suggestion, '-', '_');
+      $this->form_values["settings_suggestion_page__$clean_suggestion"] = $clean_suggestion;
+
+
+      // Set a file name for messages.
+      $template_file_name = 'page--' . $suggestion . '.html.twig';
+
+
+      // We can do this here now, but later on if we add a system for allowing adding of rows, we have to resave all the templates in one go.
+      $generateLayout->savePageTemplate($theme, $suggestion, $enable_backups);
+
+
+
+      // Resave the info file, this might change a region name etc.
+      $generateLayout->saveLayoutRegionsList($theme, $enable_backups);
+
+
+
+      // check if the file exists and if so set a message.
+      $file_path = drupal_get_path('theme', $theme) . '/templates/page/' . $template_file_name;
+      if (file_exists($file_path)) {
+        drupal_set_message(t('Success - template file has been saved to <code>!file_path</code>.', array('!file_path' => $file_path)), 'status');
+      }
+      else {
+        drupal_set_message(t('The template file could not be saved to <code>!file_path</code>, check permissions and try again.', array('!file_path' => $file_path)), 'error');
+      }
+    }
+*/
+
+    /*
+    $theme_breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($theme);
+    $layout_config = $this->form_values['settings_layoutconfig'];
+    $css_config = $this->form_values['settings_cssconfig'];
+    $compatible_layout = $this->form_values['settings_compatible_layout'];
+
+    foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
+      foreach ($theme_breakpoints as $breakpoint_id => $breakpoint_value) {
+        foreach ($layout_config['rows'] as $row_key => $row_values) {
+          $css_data[$suggestion_key][$breakpoint_value->getLabel()]['query'] = $breakpoint_value->getMediaQuery();
+          if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key])) {
+            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key];
+          }
+        }
+      }
+    }
+
+    $generated_files_path = $this->form_values['settings_generated_files_path'];
+    $generateLayout->saveCSSLayout($theme, $css_data, $css_config, $compatible_layout, $generated_files_path);
+    */
+
+    // Return all the values so we can merge in any changes for configuration.
+    //return $this->form_values;
+  //}

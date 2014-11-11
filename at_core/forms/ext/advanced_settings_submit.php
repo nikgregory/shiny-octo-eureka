@@ -15,9 +15,12 @@ function at_core_submit_advanced_settings(&$form, &$form_state) {
   $at_core_path = drupal_get_path('theme', 'at_core');
 
   // Path to save generated CSS files.
-  $theme_path = drupal_get_path('theme', $theme);
-  $fileSavePrepare = new FileSavePrepare();
-  $generated_files_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($theme_path, 'generated_css'));
+  //$theme_path = drupal_get_path('theme', $theme);
+  //$fileSavePrepare = new FileSavePrepare();
+  //$generated_files_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($theme_path, 'generated_css'));
+
+  $generated_files_path = $values['settings_generated_files_path'];
+
 
   if ($values['settings_enable_extensions'] === 1) {
 
@@ -72,7 +75,7 @@ function at_core_submit_advanced_settings(&$form, &$form_state) {
   //$config = config($theme . '_settings');
   $config = \Drupal::config($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
-  $convertToConfig->settingsConvertToConfig($values, $config)->save();
+  $convertToConfig->settingsConvertToConfig($values, $config);
 
   drupal_set_message(t('Advanced settings configuration has been saved.'), 'status');
 }

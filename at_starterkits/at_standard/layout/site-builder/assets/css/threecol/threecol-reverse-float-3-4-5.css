@@ -1,0 +1,45 @@
+.threecol-reverse-float-3-4-5 .has-regions--1-2 .region:first-child {
+  width: 74.5762712%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-reverse-float-3-4-5 .has-regions--1-2 .region:last-child {
+  width: 23.7288136%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-reverse-float-3-4-5 .has-regions--1-3 .region:first-child {
+  width: 66.1016949%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-reverse-float-3-4-5 .has-regions--1-3 .region:last-child {
+  width: 32.2033898%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-reverse-float-3-4-5 .has-regions--2-3 .region {
+  width: 32.2033898%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-reverse-float-3-4-5 .has-regions--2-3 .region:last-child {
+  width: 66.1016949%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-reverse-float-3-4-5 .active-region-count--3 .region:first-child {
+  width: 40.6779661%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-reverse-float-3-4-5 .active-region-count--3 .region:nth-child(2) {
+  width: 23.7288136%;
+  float: left;
+  margin-right: 1.6949153%;
+}
+.threecol-reverse-float-3-4-5 .active-region-count--3 .region:nth-child(3) {
+  width: 32.2033898%;
+  float: left;
+  margin-right: 1.6949153%;
+}
