@@ -9,12 +9,12 @@
  */
 
 /* -- Delete this line to enable.
-function THEMENAME_form_system_theme_settings_alter(&$form, &$form_state) {
+function HOOK_form_system_theme_settings_alter(&$form, &$form_state) {
   // $build_info = $form_state->getBuildInfo();
   // $theme = $build_info['args'][0];
 
-  // $form['#validate'][] = 'THEMENAME_settings_form_validate';
-  // $form['#submit'][] = 'THEMENAME_settings_form_submit';
+  // $form['#validate'][] = 'HOOK_settings_form_validate';
+  // $form['#submit'][] = 'HOOK_settings_form_submit';
 }
 // */
 
@@ -23,7 +23,7 @@ function THEMENAME_form_system_theme_settings_alter(&$form, &$form_state) {
  * Form validation handler for the theme settings form.
  */
 /* -- Delete this line to enable.
-function THEMENAME_settings_form_validate($form, &$form_state) {
+function HOOK_settings_form_validate($form, &$form_state) {
 
 }
 // */
@@ -33,7 +33,7 @@ function THEMENAME_settings_form_validate($form, &$form_state) {
  * Form submit handler for the theme settings form.
  */
  /* -- Delete this line to enable.
-function THEMENAME_settings_form_submit($form, &$form_state) {
+function HOOK_settings_form_submit($form, &$form_state) {
 
 }
 // */

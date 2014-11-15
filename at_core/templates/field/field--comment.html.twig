@@ -1,7 +1,10 @@
 {#
 /**
  * @file
- * Default theme override for comment fields.
+ * Adaptivetheme override for comment fields.
+ *
+ * Note: This template currently uses a workaround to prevent the display
+ * of the field title when there are no comments: see https://www.drupal.org/node/2375981
  *
  * Available variables:
  * - attributes: HTML attributes for the containing element.
@@ -23,7 +26,8 @@
  */
 #}
 <section{{ attributes }}>
-  {% if comments and not label_hidden %}
+
+  {% if comments.1 and not label_hidden %}
     {{ title_prefix }}
     <h2{{ title_attributes.addClass('comment-field__title').removeClass('title') }}>{{ label }}</h2>
     {{ title_suffix }}

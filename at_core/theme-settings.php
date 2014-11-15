@@ -5,7 +5,9 @@ use Drupal\Core\Config\Config;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
-use Drupal\at_core\Helpers\FileSavePrepare;
+
+use Drupal\at_core\File\DirectoryOperations;
+
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Breakpoints\ATBreakpoints;
 
@@ -36,8 +38,8 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $subtheme_path = drupal_get_path('theme', $theme);
 
   // Path to save generated CSS files.
-  $fileSavePrepare = new FileSavePrepare();
-  $generated_files_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($subtheme_path, 'generated_css'));
+  $directoryOperations = new DirectoryOperations();
+  $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = array($subtheme_path, '/css/generated'));
 
   // Get the active themes regions so we can use this in
   // various other places.
@@ -173,4 +175,3 @@ function at_core_make_collapsible($form) {
 
   return $form;
 }
-

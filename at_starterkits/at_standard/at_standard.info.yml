@@ -10,8 +10,9 @@ stylesheets:
   all:
     - css/styles.css
 stylesheets-remove:
-    - system.theme.css
     - normalize.css
+    - system.theme.css
+    - file.formatter.generic.css
 regions:
   messages: 'Messages'
   leaderboard: 'Leaderboard'

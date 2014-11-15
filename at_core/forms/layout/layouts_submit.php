@@ -5,7 +5,6 @@ use Drupal\Component\Utility\Unicode;
 
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutSubmit;
-use Drupal\at_core\Helpers\FileSavePrepare;
 
 /**
  * Form submit handler for the theme settings form.
@@ -70,5 +69,3 @@ function at_core_submit_layouts(&$form, &$form_state) {
   }
   */
 }
-
-

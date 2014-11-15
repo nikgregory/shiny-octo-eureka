@@ -9,9 +9,8 @@ namespace Drupal\at_core\Layout;
 
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutCompatible;
-
-use Drupal\at_core\Helpers\BuildInfoFile;
-use Drupal\at_core\Helpers\FileSavePrepare;
+use Drupal\at_core\File\FileOperations;
+use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
@@ -159,8 +158,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     // Create a backup.
     if ($this->form_values['settings_enable_backups'] == 1) {
-      $fileSavePrepare = new FileSavePrepare();
-      $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'info'));
+      $fileOperations = new FileOperations();
+      $backup_path = $fileOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'info'));
 
       //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
       $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
@@ -171,7 +170,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
        'rename_oldname' => $backup_path . '/' . $info_file,
        'rename_newname' => $backup_path . '/' . $backup_file,
       );
-      $backupInfo = $fileSavePrepare->copyRename($file_paths);
+      $backupInfo = $fileOperations->fileCopyRename($file_paths);
     }
 
     // Parse the current info file.
@@ -188,8 +187,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
     $theme_info_data['description'] = "'" . $theme_info_data['description'] . "'";
 
     // Prepare the array for printing in yml format.
-    $buildInfo = new BuildInfoFile();
-    $rebuilt_info = $buildInfo->buildInfoFile($theme_info_data);
+    $buildInfo = new FileOperations();
+    $rebuilt_info = $buildInfo->fileBuildInfoYml($theme_info_data);
 
     // Replace the existing info.yml file.
     file_unmanaged_save_data($rebuilt_info, $file_path, FILE_EXISTS_REPLACE);
@@ -320,8 +319,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
-        $fileSavePrepare = new FileSavePrepare();
-        $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'templates'));
+        $fileOperations = new FileOperations();
+        $backup_path = $fileOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
 
         //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
         $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
@@ -333,7 +332,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
          'rename_newname' => $backup_path . '/' . $backup_file,
         );
 
-        $backupTemplate = $fileSavePrepare->copyRename($file_paths);
+        $backupTemplate = $fileOperations->fileCopyRename($file_paths);
       }
     }
 
@@ -352,4 +351,3 @@ class LayoutSubmit implements LayoutSubmitInterface {
   }
 
 }
-

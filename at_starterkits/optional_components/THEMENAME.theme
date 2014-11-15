@@ -4,7 +4,7 @@
  * Preprocess variables for html templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_html(&$variables) {
+function HOOK_preprocess_html(&$variables) {
 }
 // */
 
@@ -12,7 +12,7 @@ function THEMENAME_preprocess_html(&$variables) {
  * Preprocess variables for page templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_page(&$variables) {
+function HOOK_preprocess_page(&$variables) {
 }
 // */
 
@@ -20,7 +20,7 @@ function THEMENAME_preprocess_page(&$variables) {
  * Preprocess variables for field templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_field(&$variables) {
+function HOOK_preprocess_field(&$variables) {
 }
 // */
 
@@ -28,7 +28,7 @@ function THEMENAME_preprocess_field(&$variables) {
  * Preprocess variables for node templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_node(&$variables) {
+function HOOK_preprocess_node(&$variables) {
 }
 // */
 
@@ -36,7 +36,7 @@ function THEMENAME_preprocess_node(&$variables) {
  * Preprocess variables for comment templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_comment(&$variables) {
+function HOOK_preprocess_comment(&$variables) {
 }
 // */
 
@@ -44,6 +44,6 @@ function THEMENAME_preprocess_comment(&$variables) {
  * Preprocess variables for block templates.
  */
 /* -- Delete this line if you want to use this function
-function THEMENAME_preprocess_block(&$variables) {
+function HOOK_preprocess_block(&$variables) {
 }
 // */

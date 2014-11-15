@@ -2,7 +2,6 @@
 
 use Drupal\Core\Config\Config;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
-use Drupal\at_core\Helpers\FileSavePrepare;
 
 /**
  * Form submit handler for the theme settings form.
@@ -10,17 +9,11 @@ use Drupal\at_core\Helpers\FileSavePrepare;
 function at_core_submit_extension_settings(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
-
   $theme = $build_info['args'][0];
   $at_core_path = drupal_get_path('theme', 'at_core');
 
   // Path to save generated CSS files.
-  //$theme_path = drupal_get_path('theme', $theme);
-  //$fileSavePrepare = new FileSavePrepare();
-  //$generated_files_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($theme_path, 'generated_css'));
-
   $generated_files_path = $values['settings_generated_files_path'];
-
 
   if ($values['settings_enable_extensions'] === 1) {
 
@@ -79,29 +72,3 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
 
   drupal_set_message(t('Extensions configuration saved.'), 'status');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

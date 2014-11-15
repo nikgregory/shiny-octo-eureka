@@ -114,7 +114,7 @@ function at_core_preprocess_page(&$variables) {
   // Commonly used paths, just set these all up now.
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
 
-  $generated_files_path = $path_to_theme . '/generated_css';
+  $generated_files_path = $path_to_theme . '/css/generated';
   $path_to_at_core = drupal_get_path('theme', 'at_core');
 
 
@@ -815,9 +815,9 @@ function at_core_preprocess_field(&$variables) {
 
   // This might be breaking the attributes system, need to reasses how we are modifying these classes.
   // TODO: review all field classes in templates.
-  $variables['attributes']['class'] = str_replace('field-name-', 'field-name--', $variables['attributes']['class']);
-  $variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
-  $variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
+  //$variables['attributes']['class'] = str_replace('field-name-', 'field-name--', $variables['attributes']['class']);
+  //$variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
+  //$variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
 }
 
 
@@ -962,4 +962,3 @@ function at_core_theme_get_setting($setting_name, $theme = NULL) {
   return $cache[$theme]->get($setting_name);
 }
 */
-
