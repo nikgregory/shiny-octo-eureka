@@ -3,7 +3,7 @@ theme: at_minimal
 weight: 0
 status: true
 langcode: en
-region: header_second
+region: header_first
 plugin: system_branding_block
 settings:
   label: 'Page Site Branding'

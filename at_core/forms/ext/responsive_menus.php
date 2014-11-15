@@ -33,22 +33,28 @@ $tiles_count = array(
 // Development settings
 $form['responsive_menus'] = array(
   '#type' => 'details',
-  '#title' => t('Menus'),
-  '#group' => 'at_settings',
-  '#description' => t('<h3>Responsive Menu Blocks</h3><p>Select options for each style and the region you want to use for responsive menu blocks.</p>'),
+  '#title' => t('Responisve Menus'),
+  '#group' => 'extension_settings',
+  '#description' => t('<h3>Responsive Menus</h3><p>First select the region - place a standard menu block in this region. Then select the Breakpoint group, normally this will be the same as your layout Breakpoint group, however you can use any group. If you change the group you must save the settings for this to take effect. Finally configure the style and actual breakpoint for default and responsive menu styles. It\'s best to use a mobile-first approach where the "default" style applies to small screens, and the "responsive" style to larger screens.</p>'),
+);
+
+
+$form['responsive_menus']['global_defaults'] = array(
+  '#type' => 'fieldset',
+  '#attributes' => array('class' => array('clearfix')),
 );
 
 // Regions
-$form['responsive_menus']['settings_responsive_menu_region'] = array(
+$form['responsive_menus']['global_defaults']['settings_responsive_menu_region'] = array(
   '#type' => 'select',
-  '#title' => t('Responsive menu region'),
+  '#title' => t('Region'),
   '#options' => $theme_regions,
   '#default_value' => theme_get_setting('settings.responsive_menu_region', $theme),
   '#description' => t('Menu blocks placed in this region will inherit the styles as configured below.'),
 );
 
-// Regions
-$form['responsive_menus']['settings_responsive_menu_breakpoint_group'] = array(
+// Breakpoint group
+$form['responsive_menus']['global_defaults']['settings_responsive_menu_breakpoint_group'] = array(
   '#type' => 'select',
   '#title' => t('Breakpoint group'),
   '#options' => $breakpoint_options,
@@ -62,7 +68,7 @@ $form['responsive_menus']['settings_responsive_menu_breakpoint_group'] = array(
 //
 $form['responsive_menus']['default'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Default Style'),
+  '#title' => t('Default menu settings'),
   '#attributes' => array('class' => array('clearfix')),
   '#states' => array(
     'enabled' => array('select[name="settings_responsive_menu_breakpoint_group"]' => array('value' => $responsive_menu_breakpoint_group)),
@@ -82,9 +88,10 @@ $form['responsive_menus']['default']['styles']['settings_responsive_menu_default
   '#description' => t('Set the default style for your navbar menu.'),
 );
 
+/*
 $form['responsive_menus']['default']['styles']['settings_responsive_menu_default_breakpoint'] = array(
   '#type' => 'select',
-  '#title' => t('Default Style Breakpoint'),
+  '#title' => t('Default breakpoint'),
   '#options' => $rmb_group_options,
   '#default_value' => theme_get_setting('settings.responsive_menu_default_breakpoint', $theme),
   '#description' => t('Set the breakpoint the default style will show. Do not allow this to bleed or cascade into the Responsive breakpoint.'),
@@ -94,8 +101,7 @@ $form['responsive_menus']['default']['styles']['settings_responsive_menu_default
     ),
   ),
 );
-
-
+*/
 
 //
 // Default Options
@@ -146,7 +152,7 @@ $form['responsive_menus']['default']['options']['responsive_menu_dropmenu_wrappe
   ),
 );
 $form['responsive_menus']['default']['options']['responsive_menu_dropmenu_wrapper']['responsive_menu_dropmenu'] = array(
-  '#markup' => t('Drop menus will show sub-menus (on hover or touch) when expanded. Set items to expanded in the menu settings.'),
+  '#markup' => t('Drop menus will show sub-menus (on hover or touch) when expanded. Set items to expanded in the menu settings and the max levels to display in the block configuration.'),
 );
 
 // slidedown
@@ -158,9 +164,8 @@ $form['responsive_menus']['default']['options']['responsive_menu_slidedown_wrapp
   ),
 );
 $form['responsive_menus']['default']['options']['responsive_menu_slidedown_wrapper']['responsive_menu_slidedown'] = array(
-  '#markup' => t('Slide down menus show expanded sub-menus.'),
+  '#markup' => t('Standard mobile/hamburger slide down menu.'),
 );
-
 
 // flipslide
 $form['responsive_menus']['default']['options']['responsive_menu_flipslide_wrapper'] = array(
@@ -171,10 +176,8 @@ $form['responsive_menus']['default']['options']['responsive_menu_flipslide_wrapp
   ),
 );
 $form['responsive_menus']['default']['options']['responsive_menu_flipslide_wrapper']['responsive_menu_flipslide'] = array(
-  '#markup' => t('Flip slide shows top level items when collapsed. When expanded the top level items flip to one side (vertical) and the sub-menus appear horizontally.'),
+  '#markup' => t('Flip the top level horizontal menu items to vertical and show sub-menus horizontally.'),
 );
-
-
 
 // Offcanvas options
 $form['responsive_menus']['default']['options']['responsive_menu_offcanvas_wrapper'] = array(
@@ -183,6 +186,9 @@ $form['responsive_menus']['default']['options']['responsive_menu_offcanvas_wrapp
   '#states' => array(
     'visible' => array(':input[name="settings_responsive_menu_default_style"]' => array('value' => 'offcanvas')),
   ),
+);
+$form['responsive_menus']['default']['options']['responsive_menu_offcanvas_wrapper']['responsive_menu_offcanvas'] = array(
+  '#markup' => t('Off canvas menu position.'),
 );
 $form['responsive_menus']['default']['options']['responsive_menu_offcanvas_wrapper']['settings_responsive_menu_default_offcanvas_position'] = array(
   '#type' => 'radios',
@@ -219,12 +225,13 @@ $form['responsive_menus']['default']['options']['responsive_menu_tiles_wrapper']
   '#description' => t('This setting will show the sub-menus for each top level item within the tile. Tiles will be equal-height to the height of the tallest tile.'),
 );
 
+
 //
 // RESPONISVE
 //
 $form['responsive_menus']['responsive'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Responisve Style'),
+  '#title' => t('Responisve menu settings'),
   '#attributes' => array('class' => array('clearfix')),
   '#states' => array(
     'enabled' => array('select[name="settings_responsive_menu_breakpoint_group"]' => array('value' => $responsive_menu_breakpoint_group)),
@@ -246,7 +253,7 @@ $form['responsive_menus']['responsive']['styles']['settings_responsive_menu_resp
 
 $form['responsive_menus']['responsive']['styles']['settings_responsive_menu_responsive_breakpoint'] = array(
   '#type' => 'select',
-  '#title' => t('Responsive Style Breakpoint'),
+  '#title' => t('Responsive breakpoint'),
   '#options' => $rmb_group_options,
   '#default_value' => theme_get_setting('settings.responsive_menu_responsive_breakpoint', $theme),
   '#description' => t('Set the breakpoint the responsive style will show. Do not allow this to bleed or cascade into the Default breakpoint.'),
@@ -306,7 +313,7 @@ $form['responsive_menus']['responsive']['options']['responsive_menu_dropmenu_wra
   ),
 );
 $form['responsive_menus']['responsive']['options']['responsive_menu_dropmenu_wrapper']['responsive_menu_dropmenu'] = array(
-  '#markup' => t('Drop menus will show sub-menus (on hover or touch) when expanded. Set items to expanded in the menu settings.'),
+  '#markup' => t('Drop menus will show sub-menus (on hover or touch) when expanded. Set items to expanded in the menu settings and the max levels to display in the block configuration.'),
 );
 
 // slidedown
@@ -318,7 +325,7 @@ $form['responsive_menus']['responsive']['options']['responsive_menu_slidedown_wr
   ),
 );
 $form['responsive_menus']['responsive']['options']['responsive_menu_slidedown_wrapper']['responsive_menu_slidedown'] = array(
-  '#markup' => t('Slide down menus show expanded sub-menus.'),
+  '#markup' => t('Standard mobile/hamburger slide down menu.'),
 );
 
 // flipslide
@@ -330,7 +337,7 @@ $form['responsive_menus']['responsive']['options']['responsive_menu_flipslide_wr
   ),
 );
 $form['responsive_menus']['responsive']['options']['responsive_menu_flipslide_wrapper']['responsive_menu_flipslide'] = array(
-  '#markup' => t('Flip slide shows top level items when collapsed. When expanded the top level items flip to one side (vertical) and the sub-menus appear horizontally.'),
+  '#markup' => t('Flip the top level horizontal menu items to vertical and show sub-menus horizontally.'),
 );
 
 // Offcanvas options
@@ -341,6 +348,9 @@ $form['responsive_menus']['responsive']['options']['responsive_menu_offcanvas_wr
     'visible' => array(':input[name="settings_responsive_menu_responsive_style"]' => array('value' => 'offcanvas')),
   ),
 );
+$form['responsive_menus']['responsive']['options']['responsive_menu_offcanvas_wrapper']['responsive_menu_offcanvas'] = array(
+  '#markup' => t('Off canvas menu position.'),
+);
 $form['responsive_menus']['responsive']['options']['responsive_menu_offcanvas_wrapper']['settings_responsive_menu_responsive_offcanvas_position'] = array(
   '#type' => 'radios',
   '#title' => t('Off Canvas position'),
@@ -348,7 +358,7 @@ $form['responsive_menus']['responsive']['options']['responsive_menu_offcanvas_wr
     'offcanvas-left' => t('Left'),
     'offcanvas-right' => t('Right'),
   ),
-  '#default_value' => theme_get_setting('settings.responsive_menu_default_offcanvas_position', $theme),
+  '#default_value' => theme_get_setting('settings.responsive_menu_responsive_offcanvas_position', $theme),
   '#description' => t('Choose which side of the page the menu will slide in from.'),
 );
 

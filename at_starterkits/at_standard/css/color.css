@@ -1,0 +1,179 @@
+/**
+ * Page
+ *  - mainly for markup that is printed directly in page.html.twig and
+ *    .region {}
+ ========================================================================== */
+html,
+body {
+  background-color: #666666;
+}
+
+.page-root {
+  background-color: #ffffff;
+}
+
+.regions {
+  background-color: #ffffff;
+}
+
+.page-row__header {
+  background-color: #333333;
+  color: #ffffff;
+}
+.page-row__header .regions {
+  background-color: inherit;
+}
+
+.page-row__navbar {
+  background-color: #666666;
+  color: #ffffff;
+}
+.page-row__navbar .regions {
+  background-color: inherit;
+}
+
+.page-row__footer {
+  background-color: #666666;
+  color: #ffffff;
+}
+.page-row__footer .regions {
+  background-color: inherit;
+}
+
+.attribution {
+  background-color: #666666;
+}
+
+/**
+ * Type
+ *  - styles most typographic related html elements.
+ *  - adds pre-styled selectors for lists.
+ *  - also includes misc other elements such as hr.
+ ========================================================================== */
+body {
+  color: #333333;
+}
+
+body > pre,
+.xdebug-var-dump {
+  color: #ffffff;
+}
+
+.page-root .xdebug-var-dump {
+  color: #333333;
+}
+
+blockquote {
+  border-left: 5px solid #cccccc;
+}
+blockquote p:first-child:before {
+  color: #cccccc;
+}
+blockquote small {
+  color: #404040;
+}
+
+hr {
+  border-top: 1px solid #cccccc;
+}
+
+/**
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+}
+
+::selection {
+  background: #b3d4fc;
+}
+
+/**
+ * Branding styles
+ *  - Drupal core branding block.
+ ========================================================================== */
+/**
+ * Blocks
+ ========================================================================== */
+/**
+ * Menus
+ *  - style Drupal core block menus.
+ *  - for the drop menu and other responsive menus see the mixins and the
+ *    _navbar.scss partial.
+ ========================================================================== */
+/**
+ * Responsive menu styles. Import into breakpoints.
+ *  - slidedown
+ *  - off canvas
+ *  - tiles
+ *
+ * Set the breakpoint and import the menu style into that breakpoint, then
+ * visit your theme settings and configure options.
+ *
+ * Responsive styles are a combination of three things:
+ *  1. Sass/CSS defined here (with breakpoints etc).
+ *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
+ *  3. Theme settings as set in your themes Advanced extention settings.
+ ========================================================================== */
+.responsive-menu-region,
+.responsive-menu-region .block,
+.responsive-menu-region .block * {
+  background-color: inherit;
+  color: inherit;
+}
+
+.responsive-menu-region .menu li.active-trail > a {
+  color: inherit;
+  background: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a {
+  color: inherit;
+  background: inherit;
+}
+.responsive-menu-region .menu a:hover, .responsive-menu-region .menu a:focus {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a.active {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a.active[href="/"] {
+  background-color: transparent;
+}
+.responsive-menu-region .menu a.active[href="/"]:hover, .responsive-menu-region .menu a.active[href="/"]:focus {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.menu-style-tiles .responsive-menu-region .menu-level-1 > li {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/**
+ * Tables
+ *  - inlcudes all table elements and table drag selectors.
+ ========================================================================== */
+table {
+  border: 1px solid #cccccc;
+}
+
+tr {
+  border: 1px solid #cccccc;
+}
+
+thead tr {
+  color: #333333;
+  background-color: #eeeeee;
+}
+thead .active img {
+  display: inline;
+}
+
+tr,
+td,
+th {
+  border-color: #cccccc;
+}

@@ -399,8 +399,8 @@ th {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?v=4.0.3");
-  src: url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3") format("embedded-opentype"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.woff?v=4.0.3") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.ttf?v=4.0.3") format("truetype"), url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular") format("svg");
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0");
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0") format("embedded-opentype"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0") format("truetype"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -518,6 +518,10 @@ a {
 }
 a:hover, a:focus {
   text-decoration: underline;
+}
+
+small {
+  font-size: smaller;
 }
 
 ul,
@@ -1185,6 +1189,54 @@ table tr.error {
 }
 .menu-style-dropmenu .responsive-menu-region .block-menu .odd ul .odd > .expanded > a:after {
   content: "";
+}
+
+.menu-style-horizontal .responsive-menu-region .block-menu__title {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu a {
+  padding: 7px 18px;
+  padding: 0.4376941rem 1.145898rem;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu a:before, .menu-style-horizontal .responsive-menu-region .block-menu a:after {
+  content: "";
+  float: none;
+  width: 0;
+  padding: 0;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 {
+  padding: 0;
+  list-style: none;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 {
+  *zoom: 1;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1:before, .menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1:after {
+  content: "";
+  display: table;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1:after {
+  clear: both;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 li {
+  float: left;
+  margin: 0 0 0 0;
+}
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 ul,
+.menu-style-horizontal .responsive-menu-region .block-menu .menu-level-1 ol {
+  display: none;
 }
 
 .menu-style-offcanvas .responsive-menu-region .block-menu__title {
@@ -3013,6 +3065,109 @@ img.align-center {
 }
 
 /**
+ * File icons.
+ ========================================================================== */
+.file {
+  display: block;
+}
+.file a {
+  text-decoration: none;
+  -ms-word-break: break-all;
+  /* Be VERY careful with this, breaks normal words wh_erever */
+  word-break: break-all;
+  /* Non standard for webkit */
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+.file a:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  color: #333333;
+  padding-right: 0.5em;
+}
+
+.file--general a:before {
+  content: "";
+}
+
+.file--package-x-generic a:before {
+  content: "";
+}
+
+.file--x-office-spreadsheet a:before {
+  content: "";
+}
+
+.file--x-office-document a:before {
+  content: "";
+}
+
+.file--x-office-presentation a:before {
+  content: "";
+}
+
+.file--text-x-script a:before,
+.file--text-html a:before {
+  content: "";
+}
+
+.file [href*='.js']:before,
+.file [href*='.css']:before,
+.file [href*='.scss']:before,
+.file [href*='.sass']:before,
+.file [href*='.less']:before,
+.file [href*='.rb']:before,
+.file [href*='.php']:before,
+.file [href*='.inc']:before,
+.file [href*='.htm']:before,
+.file [href*='.html']:before,
+.file [href*='.xml']:before,
+.file [href*='.twig']:before,
+.file [href*='.theme']:before,
+.file [href*='.module']:before,
+.file [href*='.config']:before,
+.file [href*='.install']:before,
+.file [href*='.yml']:before,
+.file [href*='.json']:before,
+.file [href*='.sh']:before {
+  content: "";
+}
+
+.file--text-plain a:before {
+  content: "";
+}
+
+.file--application-pdf a:before {
+  content: "";
+}
+
+.file--application-octet-stream a:before {
+  content: "";
+}
+
+.file--application-x-executable a:before {
+  content: "";
+}
+
+.file--audio a:before {
+  content: "";
+}
+
+.file--video a:before {
+  content: "";
+}
+
+.file--text a:before {
+  content: "";
+}
+
+.file--image a:before {
+  content: "";
+}
+
+/**
  * Blocks
  ========================================================================== */
 /**
@@ -3154,6 +3309,19 @@ img.align-center {
   clear: both;
 }
 
+.views-view-grid .views-col {
+  padding-right: 18px;
+  padding-right: 1.145898rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.145898rem;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.views-view-grid .views-col:last-child {
+  padding-right: 0;
+}
+
 /**
  * Utility/Misc
  * - misc utility classes that don't really fit anywhere else.
@@ -3229,6 +3397,179 @@ img.align-center {
 
   .lc-two-thirds {
     width: 66.6667%;
+  }
+}
+[class*="grid-block-"] .block {
+  border: 1px solid #ccc;
+  background: #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+@media all and (min-width: 45em) {
+  .grid-block-2 .block {
+    width: 49.1525424%;
+    float: left;
+  }
+  .grid-block-2 .block:nth-child(2n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  .grid-block-2 .block:nth-child(2n + 2) {
+    margin-left: 50.8474576%;
+    margin-right: -100%;
+    clear: none;
+  }
+
+  .grid-block-3 .block {
+    width: 32.2033898%;
+    float: left;
+  }
+  .grid-block-3 .block:nth-child(3n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  .grid-block-3 .block:nth-child(3n + 2) {
+    margin-left: 33.8983051%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-3 .block:nth-child(3n + 3) {
+    margin-left: 67.7966102%;
+    margin-right: -100%;
+    clear: none;
+  }
+
+  .grid-block-4 .block {
+    width: 23.7288136%;
+    float: left;
+  }
+  .grid-block-4 .block:nth-child(4n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  .grid-block-4 .block:nth-child(4n + 2) {
+    margin-left: 25.4237288%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-4 .block:nth-child(4n + 3) {
+    margin-left: 50.8474576%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-4 .block:nth-child(4n + 4) {
+    margin-left: 76.2711864%;
+    margin-right: -100%;
+    clear: none;
+  }
+
+  .grid-block-6 .block {
+    width: 15.2542373%;
+    float: left;
+  }
+  .grid-block-6 .block:nth-child(6n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  .grid-block-6 .block:nth-child(6n + 2) {
+    margin-left: 16.9491525%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-6 .block:nth-child(6n + 3) {
+    margin-left: 33.8983051%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-6 .block:nth-child(6n + 4) {
+    margin-left: 50.8474576%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-6 .block:nth-child(6n + 5) {
+    margin-left: 67.7966102%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-6 .block:nth-child(6n + 6) {
+    margin-left: 84.7457627%;
+    margin-right: -100%;
+    clear: none;
+  }
+
+  .grid-block-12 .block {
+    width: 6.779661%;
+    float: left;
+  }
+  .grid-block-12 .block:nth-child(12n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+  .grid-block-12 .block:nth-child(12n + 2) {
+    margin-left: 8.4745763%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 3) {
+    margin-left: 16.9491525%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 4) {
+    margin-left: 25.4237288%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 5) {
+    margin-left: 33.8983051%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 6) {
+    margin-left: 42.3728814%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 7) {
+    margin-left: 50.8474576%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 8) {
+    margin-left: 59.3220339%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 9) {
+    margin-left: 67.7966102%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 10) {
+    margin-left: 76.2711864%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 11) {
+    margin-left: 84.7457627%;
+    margin-right: -100%;
+    clear: none;
+  }
+  .grid-block-12 .block:nth-child(12n + 12) {
+    margin-left: 93.220339%;
+    margin-right: -100%;
+    clear: none;
   }
 }
 /**

@@ -89,6 +89,7 @@
 
 // Include all responsive menu mixins to generate the markup.
 @include dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true);
+@include horizontal-menu;
 @include offcanvas;
 @include flipslide;
 @include slidedown;

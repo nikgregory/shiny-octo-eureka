@@ -1,4 +1,4 @@
-// Shortcodes to support theme settings.
+// Classitis
 
 .ta-center,
 .ta-center * {
@@ -25,7 +25,9 @@
   margin-right: auto;
 }
 
+// Layout columns and pull classes
 @media #{$tablet} {
+
   .pull-right,
   [dir="rtl"] .pull-left {
     float: right;
@@ -56,3 +58,61 @@
     width: 66.6667%;
   }
 }
+
+// Grid blocks
+
+[class*="grid-block-"] .block {
+  border: 1px solid #ccc;
+  background: #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+@media #{$tablet} {
+
+  .grid-block-2 {
+    .block {
+      @include gallery(6 of 12);
+    }
+  }
+
+  .grid-block-3 {
+    .block {
+      @include gallery(4 of 12);
+    }
+  }
+
+  .grid-block-4 {
+    .block {
+      @include gallery(3 of 12);
+    }
+  }
+
+  .grid-block-6 {
+    .block {
+      @include gallery(2 of 12);
+    }
+  }
+
+  .grid-block-12 {
+    .block {
+      @include gallery(1 of 12);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,17 @@ langcode: en
 region: sidebar_first
 plugin: 'system_menu_block:tools'
 settings:
+  visibility:
+    request_path:
+      id: request_path
+      pages: ''
+      negate: false
+    user_role:
+      id: user_role
+      roles:
+        authenticated: authenticated
+        administrator: administrator
+      negate: false
   label: Tools
   id: 'system_menu_block:tools'
   provider: system

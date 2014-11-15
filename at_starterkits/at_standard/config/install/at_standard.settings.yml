@@ -56,6 +56,11 @@ settings:
   responsive_menu_responsive_offcanvas_position: offcanvas-left
   responsive_menu_responsive_tiles_count: two
   responsive_menu_responsive_tiles_submenus: 0
+  icon_path_default: ico/default-60x60.png
+  apple_touch_icon_path_ipad: ico/ipad-standard-76x76.png
+  apple_touch_icon_path_iphone_retina: ico/iphone-retina-120x120.png
+  apple_touch_icon_path_ipad_retina: ico/ipad-retina-152x152.png
+  apple_touch_icon_precomposed: 0
 features:
   logo: 1
   node_user_picture: 1

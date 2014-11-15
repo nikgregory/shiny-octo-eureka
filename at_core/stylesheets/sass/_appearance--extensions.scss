@@ -1,16 +1,20 @@
+// Extensions
 
-// Advanced settings (Extensions)
-
-#edit-advanced-settings {
+#edit-extensions {
 
   &> .details-wrapper {
     padding: 0;
   }
 
+  details .details-wrapper {
+    padding: 0.35em 0.65em 0.75em;
+  }
+
   .vertical-tabs {
     border-radius: 0;
-    border-left: 0 none;
-    border-right: 0 none;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
   }
 
   .vertical-tabs-list {
@@ -20,32 +24,18 @@
     margin: 0 0 0 25%;
   }
 
-  .submit--advanced-settings {
-    padding: 0 0.5em;
-  }
+  .submit--advanced-settings {}
 }
 
 
 // Fonts
-#edit-font-settings {
-
-  fieldset {
-    border-bottom: 1px solid #BFBFBA;
-    padding-bottom: 1em;
-
-    .fieldset-description h3 {
-      font-size: 1em;
-      text-transform: uppercase;
-    }
-
-    fieldset {
-      border: 0;
-      padding: 0;
+#edit-fonts {
+  .form-type-number {
+    input {
+      max-width: 6em;
     }
   }
-
 }
-
 
 
 /* Image alignment options */
@@ -112,6 +102,7 @@
 
 // Titles
 #edit-titles {
+
   details {
     label {
       display: inline-block;
@@ -143,6 +134,16 @@
 // Resp menus
 #edit-responsive-menus {
 
+  .form-item-settings-responsive-menu-region,
+  .form-item-settings-responsive-menu-breakpoint-group {
+    float: left;
+    margin-bottom: 2em;
+    margin-right: 1.5em;
+  }
+
+  #edit-default,
+  #edit-responsive {}
+
   .responsive-menu-styles,
   .responsive-menu-options {
     clear: none !important;
@@ -167,29 +168,11 @@
 
   .responsive-menu-options {
     float: right;
+    background: #F5F5F5;
+    padding: 1em;
 
-    margin: 2.5em 0 1em;
-
-    legend {
-
-    }
-
-    fieldset legend {
-      clip: auto;
-      display: block;
-      font-family: inherit;
-      font-size: 1em;
-      font-weight: 700;
-      height: auto;
-      margin: 0 0 1em;
-      overflow: visible;
-      //padding: 1em 0 0;
-      position: static !important;
-      width: 100%;
-      &:after {
-        content: ":";
-      }
-    }
+    legend {}
+    fieldset legend {}
 
     fieldset fieldset legend {
       display: none;
@@ -201,8 +184,7 @@
 }
 
 
-// Classitis
-
+// Add Classes
 #edit-block-classes {
   label {
     span {
@@ -212,11 +194,9 @@
 }
 
 #edit-classes {
-
   dt {
     font-weight: bold;
   }
-
   @media screen and (min-width: 75em) {
     dl.class-list {
       dt {
@@ -232,6 +212,43 @@
     }
   }
 }
+
+
+// Developer settings
+#edit-devel {
+
+   label {
+     font-weight: bold;
+   }
+
+  .description {
+    @include visually-hidden-off; // the one place to show descriptions by default, you really need to know this shit.
+    color: #777;
+    font-size: 0.9em;
+  }
+
+  .details-wrapper {
+    padding: 0.35em 0.65em 0.75em;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

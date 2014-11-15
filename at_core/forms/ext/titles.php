@@ -8,7 +8,7 @@
 $form['titles'] = array(
   '#type' => 'details',
   '#title' => t('Titles'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 $form['titles']['description'] = array(

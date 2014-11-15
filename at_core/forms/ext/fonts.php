@@ -49,7 +49,7 @@ if ($customstack = theme_get_setting('settings.font_customstack')) {
 $form['fonts'] = array(
   '#type' => 'details',
   '#title' => t('Fonts'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 // FONT Setup
@@ -61,7 +61,7 @@ $form['fonts']['setup'] = array(
 // Help
 $form['fonts']['setup']['help'] = array(
   '#type' => 'container',
-  '#markup' => t('First set the fonts you want to use in your site and save the theme settings. Then apply fonts to specific elements.'),
+  '#markup' => t('First set the fonts you want to use in your site and save the Extension settings. Then apply fonts to specific elements.'),
 );
 
 // FONT Setup: Websafe font
@@ -186,13 +186,16 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   // Font size
   if ($font_element_key !== 'h1h4' && $font_element_key !== 'h5h6') {
     $form['fonts']['apply'][$font_element_key]['settings_font_size_' . $font_element_key] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => t('Size'),
-      '#field_suffix' => 'px (coverted to rem with px fallback)',
-      '#size' => 3,
-      '#maxlength' => 3,
+      '#field_suffix' => 'px <small>(coverted to rem with px fallback)</small>',
       '#default_value' => String::checkPlain(theme_get_setting('settings.font_size_' . $font_element_key)),
-      '#attributes' => array('class' => array('font-option')),
+      '#attributes' => array(
+        'min' => 0,
+        'max' => 999,
+        'step' => 1,
+        'class' => array('font-option')
+      ),
     );
   }
 

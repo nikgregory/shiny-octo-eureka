@@ -61,11 +61,11 @@ class LayoutCompatible implements LayoutCompatibleInterface {
         // Push additional information about the layout, this is very useful later on.
         if (isset($layout_markup[$key]['rows'])) {
           $layout_markup[$key]['layout'] = $compatible_layout;
-          $layout_markup[$key]['layout_provider'] = $provider_name;
+          $layout_markup[$key]['layout_provider'] = $key;
         }
         if (isset($layout_css[$key]['css'])) {
           $layout_css[$key]['layout'] = $compatible_layout;
-          $layout_css[$key]['layout_provider'] = $provider_name;
+          $layout_css[$key]['layout_provider'] = $key;
         }
       }
 

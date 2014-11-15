@@ -10,7 +10,7 @@ use Drupal\Component\Utility\Xss;
 $form['custom-styles'] = array(
   '#type' => 'details',
   '#title' => t('Custom CSS'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 $form['custom-styles']['settings_custom_css'] = array(

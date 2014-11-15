@@ -14,7 +14,7 @@ use Drupal\Component\Utility\String;
 $form['touch_icons'] = array(
   '#type' => 'details',
   '#title' => t('Touch Icons'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 $form['touch_icons']['touch_icons_settings'] = array(

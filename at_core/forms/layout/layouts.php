@@ -17,6 +17,8 @@ $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 $css_config = $layout_compatible_data['css_config'];
 
+//kpr($css_config);
+
 // Prepare variables for getting the visual layout thingee CSS file.
 $provider_path = drupal_get_path('theme', $css_config['layout_provider']) . '/layout/' . $css_config['layout'];
 
@@ -38,11 +40,12 @@ foreach ($config as $config_key => $config_value) {
   }
 }
 
+$layouts_form_open = theme_get_setting('settings.layouts_form_open', $theme);
 
 $form['layouts'] = array(
   '#type' => 'details',
   '#title' => t('Layouts'),
-  '#open'=> TRUE,
+  '#open'=> $layouts_form_open,
   '#attributes' => array('class' => array('clearfix')),
   '#weight' => -200,
 );
@@ -57,21 +60,33 @@ $form['layouts']['#attached'] = array(
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(
   '#type' => 'container',
+  '#attributes' => array('class' => array('subsystem-enabled-container', 'layouts-column-onequarter'))
+);
+
+$form['layouts']['layouts-enable-container']['settings_layouts_form_open'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Keep open'),
+  '#default_value' => $layouts_form_open,
+  '#states' => array(
+    'disabled' => array('input[name="settings_layouts_enable"]' => array('checked' => FALSE)),
+  ),
 );
 
 $form['layouts']['layouts-enable-container']['settings_layouts_enable'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Enable Layouts'),
+  '#title' => t('Enable'),
   '#default_value' => theme_get_setting('settings.layouts_enable', $theme),
 );
 
+/*
 $form['layouts']['layouts-enable-container']['settings_layouts_disabled'] = array(
   '#type' => 'container',
-  '#markup' => t('Enable and configure layouts. Diabling this option assumes your theme will load it\'s own CSS layout. Previously generated templates will continure to be used by your theme, however no CSS layout will load for those templates.'),
+  '#markup' => t('Disabling the Layout system assumes you will take care of writing and loading layout CSS. Previously generated page  template suggestions will continue to be used.'),
   '#states' => array(
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => FALSE)),
   ),
 );
+*/
 
 //
 // Layout SELECT
@@ -81,6 +96,10 @@ $form['layouts']['layout_select'] = array(
   '#type' => 'fieldset',
   '#title' => t('Select Layouts'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-threequarters', 'column-select-layouts')),
+  '#states' => array(
+    //'enabled' => array('select[name="settings_breakpoint_group"]' => array('value' => $breakpoints_group_layout)),
+    'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
+  ),
 );
 
 // Push hidden settings into the form so they can be used during submit, to build the css output, saves us
@@ -211,7 +230,7 @@ $form['layouts']['layout_select']['suggestions']['ts_name'] = array(
     <ol>
       <li>Enter the template suggestion. Only enter the modifier, e.g. for "page--front" enter "front" (without quotes).</li>
       <li>Save the layout settings.</li>
-      <li>After saving the new suggestion you can configure a layout for it, otherwise it will use the default layout.</li>
+      <li>After saving the suggestion configure a layout for it. If no layout is set it will use the default layout.</li>
     </ol><p>Find page suggestions by turning on the Devel extension in Advanced settings and enable the option: <em>Show Page Suggestions</em>. Reload a page in the site and the suggestions will be shown in the messages area.</p>'),
 );
 
@@ -277,11 +296,14 @@ $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enabl
 );
 
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_value'] = array(
-  '#type' => 'textfield',
+  '#type' => 'number',
   '#title' => t('Value'),
-  '#size' => 4,
-  '#maxlength' => 4,
   '#default_value' => String::checkPlain(theme_get_setting('settings.max_width_value')),
+  '#attributes' => array(
+    'min' => 0,
+    'max' => 9999,
+    'step' => 1,
+  ),
   '#states' => array(
     'disabled' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
   ),
@@ -371,9 +393,11 @@ $form['layouts']['actions']['submit'] = array(
   //'#validate'=> array('at_core_validate_layouts'),
   '#submit'=> array('at_core_submit_layouts'),
   '#button_type' => 'primary',
+/*
   '#states' => array(
-    'disabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
+    'disabled' => array('input[name="settings_layouts_enable"]' => array('checked' => FALSE)),
   ),
+*/
 );
 
 /*

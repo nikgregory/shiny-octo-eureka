@@ -1,0 +1,34 @@
+//
+// Basic horizontal menu. This will hide all submenus no matter what, it has the advantage
+// over the drop menu of not requiring a width on menu items or arrows etc.
+// Like most mixins in the UIKit you can and should hack the mixin to suit your design.
+//
+@mixin horizontal-menu {
+
+  .menu-style-horizontal {
+    .responsive-menu-region {
+
+      .block-menu__title {
+        @include visually-hidden;
+      }
+
+      .block-menu {
+        a {
+          @include output-rhythm(padding, $xx-small $large);
+
+          &:before,
+          &:after {
+            content: "";
+            float: none;
+            width: 0;
+            padding: 0;
+          }
+        }
+
+        .menu-level-1 {
+          @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
+        }
+      }
+    }
+  }
+}

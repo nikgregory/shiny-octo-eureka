@@ -46,6 +46,7 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+    - at_core/at.doubletaptogo
 
 #- at_core/at.matchheight
 

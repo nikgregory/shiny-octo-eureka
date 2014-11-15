@@ -13,6 +13,7 @@ use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Helpers\BuildInfoFile;
 use Drupal\at_core\Helpers\FileSavePrepare;
 
+use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
 
 
@@ -85,7 +86,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
         if (!empty($css_rows[$suggestion][$breakpoint_keys])) {
           $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . ' {';
-          $output[$suggestion][] =  implode('', $css_rows[$suggestion][$breakpoint_keys]);
+          $output[$suggestion][] =  implode($css_rows[$suggestion][$breakpoint_keys]);
           $output[$suggestion][] = '}';
         }
       }
@@ -97,12 +98,41 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $global_css = file_get_contents($path_to_css_files . '/' . $this->css_config['css_global_layout']);
     }
 
+    $max_width_override = '';
+    if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
+      $max_width_override = 'div.regions{max-width:' . trim($this->form_values['settings_max_width_value']) . $this->form_values['settings_max_width_unit'] . '}';
+    }
+
+    // Dont regenerate CSS files to be removed.
+    foreach ($this->form_values as $values_key => $values_value) {
+      if (substr($values_key, 0, 18) === 'delete_suggestion_') {
+        if ($values_value === 1) {
+          $delete_suggestion_keys[] = Unicode::substr($values_key, 18);
+        }
+      }
+    }
+    if (!empty($delete_suggestion_keys)) {
+      foreach ($delete_suggestion_keys as $template_to_remove) {
+        unset($output[$template_to_remove]);
+      }
+    }
+
+    $saved_css = array();
     foreach ($output as $suggestion => $css) {
-      if (!empty($file_content)) {
+      if (!empty($css)) {
+        $file_content = $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
         $file_name = $this->theme_name . '--layout__' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
+        if (file_exists($filepath)) {
+          $saved_css[] = '<li>' . $filepath . '</li>';
+        }
       }
+    }
+
+    if (!empty($saved_css)) {
+      $saved_css_message = '<ul>' . implode($saved_css) . '</ul>';
+      drupal_set_message(t('The following layout CSS files were generated: !saved_css', array('!saved_css' => $saved_css_message)), 'status');
     }
   }
 
@@ -181,6 +211,20 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $template_suggestions['page__' . $this->form_values['ts_name']] = 'page__' . $this->form_values['ts_name'];
     }
 
+    // Don't regenerate templates to be deleted.
+    foreach ($this->form_values as $values_key => $values_value) {
+      if (substr($values_key, 0, 18) === 'delete_suggestion_') {
+        if ($values_value === 1) {
+          $delete_suggestion_keys[] = Unicode::substr($values_key, 18);
+        }
+      }
+    }
+    if (!empty($delete_suggestion_keys)) {
+      foreach ($delete_suggestion_keys as $template_to_remove) {
+        unset($template_suggestions[$template_to_remove]);
+      }
+    }
+
     // Template path
     $template_file = $this->layout_path . '/' . $this->layout_name . '.html.twig';
 
@@ -217,19 +261,14 @@ class LayoutSubmit implements LayoutSubmitInterface {
         $template = file_get_contents($template_file);
       }
       else {
-
         foreach ($this->layout_config['rows'] as $row => $row_values) {
-
           foreach ($row_values['regions'] as $region_name => $region_value) {
             $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_name . ' }}';
           }
-
           $wrapper_element[$suggestion_key] = 'div';
-
           if ($row == 'header' || $row == 'footer') {
             $wrapper_element[$suggestion_key] = $row;
           }
-
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
             $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
@@ -237,7 +276,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
           }
-
           // move the dynamic region classes to the regions wrapper, hard code the page-row class
           $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page-row__' . $row . '">';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
@@ -255,6 +293,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         foreach ($output[$suggestion_key] as $row_output) {
           $generated[$suggestion_key][] = implode("\n", $row_output);
         }
+
         $generated[$suggestion_key][] = "  {{ attribution }}" . "\n";
         $generated[$suggestion_key][] = '</div>';
         $template[$suggestion_key] = implode($generated[$suggestion_key]);
@@ -280,7 +319,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
 
       // Create a backup.
-      /*
       if ($this->form_values['settings_enable_backups'] == 1) {
         $fileSavePrepare = new FileSavePrepare();
         $backup_path = $fileSavePrepare->prepareDirectories($backup_file_path = array($path, 'backup', 'templates'));
@@ -297,127 +335,21 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
         $backupTemplate = $fileSavePrepare->copyRename($file_paths);
       }
-      */
     }
 
+    $saved_templates = array();
     foreach ($templates as $suggestion => $template_values) {
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
+      if (file_exists($templates[$suggestion]['template_path'])) {
+        $saved_templates[] = '<li>' . $templates[$suggestion]['template_path'] . '</li>';
+      }
+    }
+
+    if (!empty($saved_templates)) {
+      $saved_templates_message = '<ul>' . implode($saved_templates) . '</ul>';
+      drupal_set_message(t('The following templates were generated: !saved_templates', array('!saved_templates' => $saved_templates_message)), 'status');
     }
   }
 
 }
 
-
-
-
-
-      // check if the file exists and if so set a message.
-      /*
-      $file_path = drupal_get_path('theme', $theme) . '/templates/page/' . $template_file_name;
-      if (file_exists($file_path)) {
-        drupal_set_message(t('Success - template file has been saved to <code>!file_path</code>.', array('!file_path' => $file_path)), 'status');
-      }
-      else {
-        drupal_set_message(t('The template file could not be saved to <code>!file_path</code>, check permissions and try again.', array('!file_path' => $file_path)), 'error');
-      }
-      */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //public function generateLayout($theme, $this->form_values) {
-
-/*
-    $generateLayout = new LayoutGenerator();
-
-    // Set variable for backups.
-    $enable_backups = FALSE;
-    if ($this->form_values['settings_enable_backups'] == 1) {
-      $enable_backups = TRUE;
-    }
-
-    // Has the user entered a new template suggestion name?
-    if (!empty($this->form_values['ts_name'])) {
-
-      $suggestion = $this->form_values['ts_name'];
-
-      // Create a setting for each new template suggestion
-      $clean_suggestion = strtr($suggestion, '-', '_');
-      $this->form_values["settings_suggestion_page__$clean_suggestion"] = $clean_suggestion;
-
-
-      // Set a file name for messages.
-      $template_file_name = 'page--' . $suggestion . '.html.twig';
-
-
-      // We can do this here now, but later on if we add a system for allowing adding of rows, we have to resave all the templates in one go.
-      $generateLayout->savePageTemplate($theme, $suggestion, $enable_backups);
-
-
-
-      // Resave the info file, this might change a region name etc.
-      $generateLayout->saveLayoutRegionsList($theme, $enable_backups);
-
-
-
-      // check if the file exists and if so set a message.
-      $file_path = drupal_get_path('theme', $theme) . '/templates/page/' . $template_file_name;
-      if (file_exists($file_path)) {
-        drupal_set_message(t('Success - template file has been saved to <code>!file_path</code>.', array('!file_path' => $file_path)), 'status');
-      }
-      else {
-        drupal_set_message(t('The template file could not be saved to <code>!file_path</code>, check permissions and try again.', array('!file_path' => $file_path)), 'error');
-      }
-    }
-*/
-
-    /*
-    $theme_breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($theme);
-    $layout_config = $this->form_values['settings_layoutconfig'];
-    $css_config = $this->form_values['settings_cssconfig'];
-    $compatible_layout = $this->form_values['settings_compatible_layout'];
-
-    foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
-      foreach ($theme_breakpoints as $breakpoint_id => $breakpoint_value) {
-        foreach ($layout_config['rows'] as $row_key => $row_values) {
-          $css_data[$suggestion_key][$breakpoint_value->getLabel()]['query'] = $breakpoint_value->getMediaQuery();
-          if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key])) {
-            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key];
-          }
-        }
-      }
-    }
-
-    $generated_files_path = $this->form_values['settings_generated_files_path'];
-    $generateLayout->saveCSSLayout($theme, $css_data, $css_config, $compatible_layout, $generated_files_path);
-    */
-
-    // Return all the values so we can merge in any changes for configuration.
-    //return $this->form_values;
-  //}

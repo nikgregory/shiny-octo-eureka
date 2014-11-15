@@ -10,7 +10,7 @@ use Drupal\Component\Utility\String;
 $form['markup_overrides'] = array(
   '#type' => 'details',
   '#title' => t('Markup Overrides'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 $form['markup_overrides']['markup_overrides_settings'] = array(

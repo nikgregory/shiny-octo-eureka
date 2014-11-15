@@ -109,7 +109,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // AT Subtheme
   if (isset($getThemeInfo['subtheme type'])) {
 
-    if ($getThemeInfo['subtheme type'] != 'at_generator') {
+    if ($getThemeInfo['subtheme type'] !== 'at_generator') {
 
       // Pass in the generated files path to values and settings.
       $form['at']['settings_generated_files_path'] = array(
@@ -117,11 +117,10 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
         '#value' => $generated_files_path,
       );
 
-      // Advanced settings (extensions).
-      include_once($at_core_path . '/forms/ext/advanced_settings.php');
+      // Extension settings.
+      include_once($at_core_path . '/forms/ext/extension_settings.php');
 
       // Layouts.
-      //include_once($at_core_path . '/forms/row-layouts/row_layouts.php');
       include_once($at_core_path . '/forms/layout/layouts.php');
 
       // Basic settings - move into details wrapper and collapse.

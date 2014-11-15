@@ -35,17 +35,10 @@
           // setup fires strait away, but if there is a match it will fire immediatly after.
           $(document.body).addClass(responsiveMenus['default']['style']);
 
-          // doubletaptogo for drop and slidedown menus
-          if(responsiveMenus['default']['style'] == 'menu-style-dropmenu' || responsiveMenus['default']['style'] == 'menu-style-slidedown') {
-            $(menu + ' li:has(ul)' ).doubleTapToGo();
-          }
-
-          // Check if default is offcanvas and add the default position
           if (responsiveMenus['default']['style'] == 'menu-style-offcanvas') {
             $(document.body).addClass(responsiveMenus['default']['offcanvas_position']);
           }
 
-          // Check if default is tiles, add option classes accordingly
           if (responsiveMenus['default']['style'] == 'menu-style-tiles') {
             $(document.body).addClass(responsiveMenus['default']['tiles_count']);
 
@@ -65,11 +58,6 @@
 
             // Default and responsive are different menu styles
             if(responsiveMenus['responsive']['style'] !== responsiveMenus['default']['style']) {
-
-              // doubletaptogo for drop and slidedown menus
-              if(responsiveMenus['responsive']['style'] == 'menu-style-dropmenu' || responsiveMenus['responsive']['style'] == 'menu-style-slidedown') {
-                $(menu + ' li:has(ul)' ).doubleTapToGo();
-              }
 
               // Remove default menu style, add responisve menu style
               $(document.body).removeClass(responsiveMenus['default']['style']).addClass(responsiveMenus['responsive']['style']);
@@ -100,7 +88,14 @@
 
                   // They are different, remove default and add responsive
                   $(document.body).removeClass(responsiveMenus['default']['offcanvas_position']).addClass(responsiveMenus['responsive']['offcanvas_position']);
+
                 }
+
+                //else {
+                  // do nothing, setup has already added the correct offcanvas position
+                  // They are the same, add default offcanvas position
+                  //$(document.body).addClass(responsiveMenus['default']['offcanvas_position']);
+                //}
               }
 
               // Check if the responsive style is tiles
@@ -111,7 +106,23 @@
 
                   // They are different, remove default add responsive
                   $(document.body).removeClass(responsiveMenus['default']['tiles_count']).addClass(responsiveMenus['responsive']['tiles_count']);
+
                 }
+
+                //else {
+                  // do nothing, setup has already added the correct tiles count
+                  // They are the same, add default tiles count
+                  //$(document.body).addClass(responsiveMenus['responsive']['tiles_count']);
+                //}
+
+                // Check if tiles submenus is set
+                //if(responsiveMenus['responsive']['tiles_submenus']) {
+
+                  // If either of these are true add the sub menus class
+                  //if(responsiveMenus['default']['tiles_submenus'] || responsiveMenus['responsive']['tiles_submenus']) {
+                   // $(document.body).addClass('tiles-submenus-true');
+                  //}
+                //}
               }
             }
           }
@@ -156,7 +167,14 @@
 
                 // They are different, remove responsive and add default
                 $(document.body).removeClass(responsiveMenus['responsive']['offcanvas_position']).addClass(responsiveMenus['default']['offcanvas_position']);
+
               }
+
+              //else {
+                // do nothing, setup has already added the correct offcanvas position and match did not remove it
+                // They are the same, add default offcanvas position
+                //$(document.body).addClass(responsiveMenus['default']['offcanvas_position']);
+              //}
             }
 
             // Check if the default style is tiles
@@ -167,7 +185,23 @@
 
                 // They are different, remove responsive add default
                 $(document.body).removeClass(responsiveMenus['responsive']['tiles_count']).addClass(responsiveMenus['default']['tiles_count']);
+
               }
+
+              //else {
+                // do nothing, setup has already added the correct tiles count and match did not remove it
+                // They are the same, add default tiles count
+                //$(document.body).addClass(responsiveMenus['responsive']['tiles_count']);
+              //}
+
+              // Check if tiles submenus is set
+              //if(responsiveMenus['default']['tiles_submenus']) {
+                // If either of these are true add the sub menus class
+                //if(responsiveMenus['default']['tiles_submenus'] || responsiveMenus['responsive']['tiles_submenus']) {
+                  //$(document.body).addClass('tiles-submenus-true');
+                //}
+              //}
+
             }
           }
         }
@@ -189,3 +223,18 @@
   };
 
 }(jQuery, Drupal, drupalSettings));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

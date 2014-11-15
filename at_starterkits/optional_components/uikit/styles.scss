@@ -1,10 +1,7 @@
 // Full Stack UI Kit, compiles to css/styles.css
 
 // Layouts base.
-// WARNING: if you change to your own layout plugin you must
-// include flow-direction variables or you will get compile
-// errors. $flow-to and $flow-from must be set.
-// See: layouts/site-builder/assets/_site_builder_base.scss
+// See: layout/site-builder/assets/sass/_site-builder-base.scss
 @import "site-builder-base";
 
 // Modular Scale.
@@ -38,6 +35,7 @@
   "components/images",
   "components/branding",
   "components/field",
+  "components/file",
   "components/block",
   "components/book",
   "components/forum",

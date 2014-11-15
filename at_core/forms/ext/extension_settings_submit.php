@@ -7,7 +7,7 @@ use Drupal\at_core\Helpers\FileSavePrepare;
 /**
  * Form submit handler for the theme settings form.
  */
-function at_core_submit_advanced_settings(&$form, &$form_state) {
+function at_core_submit_extension_settings(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
 
@@ -77,7 +77,7 @@ function at_core_submit_advanced_settings(&$form, &$form_state) {
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
 
-  drupal_set_message(t('Advanced settings configuration has been saved.'), 'status');
+  drupal_set_message(t('Extensions configuration saved.'), 'status');
 }
 
 

@@ -37,7 +37,10 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   // setting to show page template suggestions.
   if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
     if ($suggestions) {
-      $these_suggestions = implode("<br>", $suggestions);
+      foreach ($suggestions as $suggestion_name) {
+        $formatted_suggestions[] = '<div>' . str_replace('_', '-', $suggestion_name) . '</div>';
+      }
+      $these_suggestions = implode($formatted_suggestions);
       drupal_set_message(t('Template suggestions for this page:<br>!these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('!these_suggestions' => $these_suggestions)), 'status');
     }
   }
@@ -191,57 +194,53 @@ function at_core_preprocess_page(&$variables) {
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
 
-      $drupalSettings = array();
+      // If both styles are set to --none-- do nothing.
+      //if ($config['responsive_menu_default_style'] !== 'none' xor $config['responsive_menu_responsive_style'] !== 'none') {
 
-      // Region
-      if (isset($config['responsive_menu_region'])) {
-        $drupalSettings['responsive_menu_region'] = 'region__' . str_replace('_', '-', $config['responsive_menu_region']);
+        $drupalSettings = array();
+
+        // Region
+        if (isset($config['responsive_menu_region'])) {
+          $drupalSettings['responsive_menus']['region'] = 'region__' . str_replace('_', '-', $config['responsive_menu_region']);
+        }
+
+        // Breakpoint
+        if (isset($config['responsive_menu_responsive_breakpoint'])) {
+          $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
+        }
+
+        // Loop the config settings and build an array for drupalSettings.
+        foreach (array('default', 'responsive') as $style) {
+          if (isset($config['responsive_menu_' . $style . '_style'])) {
+
+            // Style
+            $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
+
+            // If Off Canvas
+            if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
+              $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
+            }
+
+            // If Tiles
+            if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
+              $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
+              if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
+                $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
+              }
+            }
+          }
+        }
+
+        // Attach JS settings.
+        $variables['#attached']['js'][] = array(
+          'data' => array($theme => $drupalSettings),
+          'type' => 'setting',
+        );
+
+        // Load the responsive menus libarary.
+        $variables['#attached']['library'][] = 'at_core/at.responsivemenus';
       }
-
-      // Set menu style default.
-      if (isset($config['responsive_menu_default_style'])) {
-        $drupalSettings['menu_style_default']['style'] = $config['responsive_menu_default_style'];
-        $drupalSettings['menu_style_default']['breakpoint'] = $config['responsive_menu_default_breakpoint'];
-
-        // If Off canvas
-        if ($config['responsive_menu_default_style'] == 'offcanvas') {
-          $drupalSettings['menu_style_default']['options']['offcanvas_position'] = $config['responsive_menu_default_offcanvas_position'];
-        }
-
-        // If Tiles
-        if ($config['responsive_menu_default_style'] == 'tiles') {
-          $drupalSettings['menu_style_default']['options']['tiles_count'] = $config['responsive_menu_default_tiles_count'];
-          $drupalSettings['menu_style_default']['options']['tiles_submenus'] = $config['responsive_menu_default_tiles_submenus'];
-        }
-      }
-
-      // Set menu style responsive.
-      if (isset($config['responsive_menu_responsive_style'])) {
-        $drupalSettings['menu_style_responsive']['style'] = $config['responsive_menu_responsive_style'];
-        $drupalSettings['menu_style_responsive']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
-
-        // If Off canvas
-        if ($config['responsive_menu_default_style'] == 'offcanvas') {
-          $drupalSettings['menu_style_responsive']['options']['offcanvas_position'] = $config['responsive_menu_responsive_offcanvas_position'];
-        }
-
-        // If Tiles
-        if ($config['responsive_menu_default_style'] == 'tiles') {
-          $drupalSettings['menu_style_responsive']['options']['tiles_count'] = $config['responsive_menu_responsive_tiles_count'];
-          $drupalSettings['menu_style_responsive']['options']['tiles_submenus'] = $config['responsive_menu_responsive_tiles_submenus'];
-        }
-      }
-
-      // Attach JS settings.
-      $variables['#attached']['js'][] = array(
-        'data' => array($theme => $drupalSettings),
-        'type' => 'setting',
-      );
-
-      // Load the required lib automatically.
-      $variables['#attached']['library'][] = 'at_core/at.responsivemenus';
-    }
-
+    //}
 
     // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
     if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
@@ -391,12 +390,27 @@ function at_core_preprocess_page(&$variables) {
     // Custom CSS.
     if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
       $custom_css_file = $generated_files_path . '/' . $theme . '--custom-css.css';
-      $variables['#attached']['css'][$custom_css_file] = array(
-        'type' => 'file',
-        'data' => $custom_css_file,
-        'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_THEME,
-      );
+      if (file_exists($custom_css_file)) {
+        $variables['#attached']['css'][$custom_css_file] = array(
+          'type' => 'file',
+          'data' => $custom_css_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+    }
+
+    // Show grid.
+    if (isset($config['show_grid']) && $config['show_grid'] === 1) {
+      $show_grid_file = $path_to_theme . '/css/show-grid.css';
+      if (file_exists($show_grid_file)) {
+        $variables['#attached']['css'][$show_grid_file] = array(
+          'type' => 'file',
+          'data' => $show_grid_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
     }
 
     // Markup overrides.
@@ -487,19 +501,6 @@ function at_core_preprocess_page(&$variables) {
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_LAYOUT,
     );
-
-    // Max width override - need this to ideally load after the main layout CSS files.
-    if (!empty($config['max_width_enable'])) {
-      $max_width_file = $generated_files_path . '/' . $theme . '--max-width.css';
-      if (file_exists($max_width_file)) {
-        $variables['#attached']['css'][$max_width_file] = array(
-          'type' => 'file',
-          'data' => $max_width_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_LAYOUT,
-        );
-      }
-    }
   }
 
   // Layouts attributes
@@ -512,8 +513,10 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
+  //kpr($variables['page']);
+
   if (!empty($variables['#active_regions'])) {
-    $variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($layout_css);
+    //$variables['attributes']['id'][] = 'page-layout--' . drupal_html_class($layout_css);
     $variables['attributes']['class'][] = 'page-root';
 
     $layout_loaded = new LayoutLoad($theme, $variables['#active_regions']);

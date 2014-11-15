@@ -1,3 +1,24 @@
+#system-theme-settings .vertical-tabs,
+#system-theme-settings .form-type-vertical-tabs {
+  margin: 0;
+  padding: 0;
+  clear: both;
+}
+
+#system-theme-settings .form-actions {
+  background: none repeat scroll 0 0 #fcfcfa;
+  border-top: 1px solid #bfbfba;
+  clear: both;
+  margin: 0;
+  padding: 1em 0.5em;
+  position: relative;
+  z-index: 10;
+}
+
+details > .details-wrapper {
+  padding: 0;
+}
+
 #block-seven-help,
 legend {
   position: absolute !important;
@@ -62,15 +83,69 @@ pre.code-block {
   border-radius: 4px;
 }
 
+.form-item .description {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+
+.subsystem-enabled-container {
+  box-sizing: border-box;
+  float: right;
+  margin-top: -1.75em;
+  padding: 0;
+}
+.subsystem-enabled-container .form-type-checkbox {
+  display: block;
+  float: right;
+  margin: 0;
+  padding-right: 10px;
+}
+
+.layouts-column {
+  border: 0;
+  margin: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@media all and (min-width: 60em) {
+  #system-theme-settings .layouts-column {
+    float: left;
+  }
+  #system-theme-settings .layouts-column-onethird {
+    width: 34%;
+  }
+  #system-theme-settings .layouts-column-twothirds {
+    width: 66%;
+  }
+  #system-theme-settings .layouts-column-onequarter {
+    width: 25%;
+  }
+  #system-theme-settings .layouts-column-half {
+    width: 50%;
+  }
+  #system-theme-settings .layouts-column-threequarters {
+    width: 75%;
+  }
+  #system-theme-settings .column-select-layouts {
+    border-right: 1px solid #BFBFBA;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+  }
+  #system-theme-settings .css-layout-options {
+    float: right;
+  }
+}
 #edit-layouts {
   padding: 0;
-  border: 1px solid #BFBFBA;
-  background: #FCFCFA;
-  border-radius: 4px;
   overflow: hidden;
-}
-#edit-layouts .details-wrapper {
-  padding: 0;
 }
 #edit-layouts .form-disabled,
 #edit-layouts .layouts-column.form-disabled {
@@ -100,6 +175,10 @@ pre.code-block {
 #edit-layouts .layouts-column.form-disabled img {
   opacity: 0.5;
 }
+#edit-layouts #edit-layouts-enable-container label,
+#edit-layouts #edit-layouts-enable-container .form-disabled {
+  background: transparent !important;
+}
 #edit-layouts #edit-adv-options .details-wrapper {
   padding: 0.5em 1em;
 }
@@ -112,6 +191,9 @@ pre.code-block {
   font-weight: 400;
   margin: 0;
   padding: 1em 0.5em;
+}
+#edit-layouts #edit-settings-max-width-value {
+  max-width: 6em;
 }
 #edit-layouts .submit--layout {
   background: #FCFCFA;
@@ -132,33 +214,17 @@ pre.code-block {
 #edit-layouts .fieldset-wrapper {
   overflow: hidden;
 }
-#edit-layouts #edit-layouts--description,
-#edit-layouts #edit-layouts-enable-container {
-  padding: 0 0.5em;
-}
 #edit-layouts #edit-settings-layouts-disabled {
   font-size: 0.923em;
   line-height: 1.295em;
-}
-#edit-layouts #edit-layouts-enable-container {
-  margin-bottom: 10px;
+  color: #777;
 }
 #edit-layouts .form-item-settings-layouts-enable {
   margin: 0;
 }
-#edit-layouts .form-item-settings-master-layout {
-  border-bottom: 1px solid #BFBFBA;
-  margin: 0 0 10px;
-  padding: 0 1px 10px;
-}
 #edit-layouts .layouts-column {
-  border: 0;
-  margin: 0;
   border-top: 1px solid #BFBFBA;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  margin-top: 0;
 }
 #edit-layouts .layouts-column-two details {
   border: 0 none;
@@ -178,33 +244,8 @@ pre.code-block {
   margin: 0;
   margin-bottom: 0.5em;
 }
-@media all and (min-width: 60em) {
-  #edit-layouts .layouts-column {
-    float: left;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-  }
-  #edit-layouts .layouts-column-onethird {
-    width: 34%;
-  }
-  #edit-layouts .layouts-column-twothirds {
-    width: 66%;
-  }
-  #edit-layouts .layouts-column-onequarter {
-    width: 25%;
-  }
-  #edit-layouts .layouts-column-half {
-    width: 50%;
-  }
-  #edit-layouts .layouts-column-threequarters {
-    width: 75%;
-  }
-  #edit-layouts .column-select-layouts {
-    border-right: 1px solid #BFBFBA;
-  }
-  #edit-layouts .css-layout-options {
-    float: right;
-  }
+#edit-layouts .column-select-layouts {
+  clear: right;
 }
 #edit-layouts #edit-layout-select fieldset {
   background: none repeat scroll 0 0 transparent;
@@ -212,15 +253,17 @@ pre.code-block {
   margin: 0 0 10px;
   padding: 0;
 }
-#edit-layouts #edit-layout-select .form-type-select {
-  width: 75%;
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-#edit-layouts #edit-layout-select .form-type-select label {
-  float: left;
-  width: 10em;
+@media all and (min-width: 60em) {
+  #edit-layouts #edit-layout-select .form-type-select {
+    width: 75%;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  #edit-layouts #edit-layout-select .form-type-select label {
+    float: left;
+    width: 10em;
+  }
 }
 #edit-layouts #edit-layout-select details .details-wrapper {
   padding: 10px;
@@ -228,8 +271,7 @@ pre.code-block {
 #edit-layouts #edit-layout-select details details {
   margin: 10px 0;
   border: 0;
-  background-color: #F5F5F5;
-  padding: 5px;
+  padding: 0;
 }
 #edit-layouts #edit-layout-select .css-layout-options .region {
   box-sizing: border-box;
@@ -249,14 +291,19 @@ pre.code-block {
   color: #F5F5F5;
 }
 
+/*
+// Manage suggestions
 #edit-manage-suggestions {
   border: 0;
   padding: 0;
   margin: 0;
 }
 
-.table-suggestions .select-all input {
-  display: none;
+// The select all input is not disabled by #states, just hide it for now.
+.table-suggestions {
+  .select-all input {
+    display: none;
+  }
 }
 
 .form-item-layout-type-select {
@@ -271,29 +318,34 @@ pre.code-block {
   margin: 10px 0 20px;
   padding: 10px;
 }
-
+*/
+/*
 #edit-default-not-set {
   background-color: #fcf4f2;
   color: #a51b00;
 }
-
+*/
+/*
 #edit-none-set {
   background-color: #f3faef;
   color: #325e1c;
 }
 
+// warning
 #edit-default-set {
   background: #F7FCFF;
-}
-#edit-default-set ol {
-  margin: 10px 0 0 0;
-  padding: 0 0 0 20px;
-}
-#edit-default-set ol, #edit-default-set p {
-  font-size: 0.923em;
-  line-height: 1.231em;
-}
 
+  ol {
+    margin: 10px 0 0 0;
+    padding: 0 0 0 20px;
+  }
+
+  ol, p {
+    font-size: 0.923em;
+    line-height: 1.231em;
+  }
+}
+*/
 #edit-suggestions {
   background: #F7FCFF;
 }
@@ -301,6 +353,15 @@ pre.code-block {
   padding-bottom: 10px;
 }
 #edit-suggestions .description {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: normal;
+  font-size: 0.9em;
   margin-top: 20px;
 }
 #edit-suggestions ol {
@@ -314,14 +375,6 @@ pre.code-block {
   clear: both;
 }
 
-#edit-no-base-layout {
-  border: 1px solid #B3B2AD;
-  border-color: #f4daa6;
-  color: #734c00;
-  background-color: #fdf8ed;
-  padding: 10px;
-}
-
 #edit-options .form-disabled {
   background: #f7f7f7;
   margin: 0;
@@ -332,12 +385,6 @@ pre.code-block {
 #edit-max-width .form-item-settings-max-width-unit {
   display: inline-block;
   margin-right: 3px;
-}
-
-.layout-structure-screenshot {
-  background-image: url("../../docs/help_subtheme/layout-structure.png");
-  max-width: 308px;
-  min-height: 163px;
 }
 
 @media (max-width: 48em) {
@@ -353,35 +400,27 @@ pre.code-block {
     padding: 0 0 10px;
   }
 }
-#edit-advanced-settings > .details-wrapper {
+#edit-extensions > .details-wrapper {
   padding: 0;
 }
-#edit-advanced-settings .vertical-tabs {
-  border-radius: 0;
-  border-left: 0 none;
-  border-right: 0 none;
+#edit-extensions details .details-wrapper {
+  padding: 0.35em 0.65em 0.75em;
 }
-#edit-advanced-settings .vertical-tabs-list {
+#edit-extensions .vertical-tabs {
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+#edit-extensions .vertical-tabs-list {
   width: 25%;
 }
-#edit-advanced-settings .vertical-tabs-panes {
+#edit-extensions .vertical-tabs-panes {
   margin: 0 0 0 25%;
 }
-#edit-advanced-settings .submit--advanced-settings {
-  padding: 0 0.5em;
-}
 
-#edit-font-settings fieldset {
-  border-bottom: 1px solid #BFBFBA;
-  padding-bottom: 1em;
-}
-#edit-font-settings fieldset .fieldset-description h3 {
-  font-size: 1em;
-  text-transform: uppercase;
-}
-#edit-font-settings fieldset fieldset {
-  border: 0;
-  padding: 0;
+#edit-fonts .form-type-number input {
+  max-width: 6em;
 }
 
 /* Image alignment options */
@@ -459,6 +498,12 @@ pre.code-block {
   color: #666;
 }
 
+#edit-responsive-menus .form-item-settings-responsive-menu-region,
+#edit-responsive-menus .form-item-settings-responsive-menu-breakpoint-group {
+  float: left;
+  margin-bottom: 2em;
+  margin-right: 1.5em;
+}
 #edit-responsive-menus .responsive-menu-styles,
 #edit-responsive-menus .responsive-menu-options {
   clear: none !important;
@@ -478,22 +523,8 @@ pre.code-block {
 }
 #edit-responsive-menus .responsive-menu-options {
   float: right;
-  margin: 2.5em 0 1em;
-}
-#edit-responsive-menus .responsive-menu-options fieldset legend {
-  clip: auto;
-  display: block;
-  font-family: inherit;
-  font-size: 1em;
-  font-weight: 700;
-  height: auto;
-  margin: 0 0 1em;
-  overflow: visible;
-  position: static !important;
-  width: 100%;
-}
-#edit-responsive-menus .responsive-menu-options fieldset legend:after {
-  content: ":";
+  background: #F5F5F5;
+  padding: 1em;
 }
 #edit-responsive-menus .responsive-menu-options fieldset fieldset legend {
   display: none;
@@ -522,21 +553,39 @@ pre.code-block {
   }
 }
 
+#edit-devel label {
+  font-weight: bold;
+}
+#edit-devel .description {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: normal;
+  color: #777;
+  font-size: 0.9em;
+}
+#edit-devel .details-wrapper {
+  padding: 0.35em 0.65em 0.75em;
+}
+
 #edit-basic-settings {
   overflow: hidden;
   padding: 0;
 }
+#edit-basic-settings details {
+  margin-left: 0.625em;
+  margin-right: 0.625em;
+}
+#edit-basic-settings details .details-wrapper {
+  padding: 10px;
+}
 
 .theme-settings-bottom {
   clear: none;
-}
-
-#system-theme-settings .vertical-tabs,
-#system-theme-settings .form-type-vertical-tabs {
-  /*
-    margin: 0;
-    border-radius: 0;
-  */
 }
 
 #edit-jquery .form-type-checkbox .description {

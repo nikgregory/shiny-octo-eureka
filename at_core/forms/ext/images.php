@@ -17,7 +17,7 @@ $image_alignment_options = array(
 $form['images'] = array(
   '#type' => 'details',
   '#title' => t('Image Settings'),
-  '#group' => 'at_settings',
+  '#group' => 'extension_settings',
 );
 
 $form['images']['image-settings'] = array(

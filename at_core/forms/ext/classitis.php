@@ -24,8 +24,8 @@ if (file_exists($classitis_yml)) {
 
 $form['classitis'] = array(
   '#type' => 'details',
-  '#title' => t('Classitis'),
-  '#group' => 'at_settings',
+  '#title' => t('CSS Classes'),
+  '#group' => 'extension_settings',
   '#description' => t('<h3>Add Classes</h3><p>Enter comma seperated lists of class names. <b>Clear the cache</b> after adding classes.</p>'),
 );
 
