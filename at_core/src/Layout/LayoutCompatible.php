@@ -92,4 +92,3 @@ class LayoutCompatible implements LayoutCompatibleInterface {
   }
 
 }
-

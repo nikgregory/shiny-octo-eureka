@@ -1,0 +1,14 @@
+{
+  "name": "site-builder",
+  "version": "8.0.0",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-contrib-compass": "~0.2.0"
+  },
+  "engines": {
+    "node": "0.10.26",
+    "npm":  "1.4.3"
+  }
+}

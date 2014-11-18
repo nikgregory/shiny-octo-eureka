@@ -43,10 +43,11 @@
 {%
   set classes = [
     'block',
-    'block--' ~ configuration.provider|clean_class,
-    'block--' ~ plugin_id|clean_class,
+    'block-search',
+    label ? 'has-title',
   ]
 %}
+{% set html_element = label ? 'section' : 'div' %}
 <{{ html_element }}{{ attributes.addClass(classes).removeClass('container-inline') }}>
 
   {{ title_prefix }}

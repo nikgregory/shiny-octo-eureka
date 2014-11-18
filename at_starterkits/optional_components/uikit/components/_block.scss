@@ -2,12 +2,16 @@
  * Blocks
  ========================================================================== */
 
+// Almost everything in Druapl 8 is a block, so these classes are very generic
+// and it can be dangerous to add styles like font-size or colors.
 .block {}
-
 .block__title {}
+
+// The block has a title.
+.block.has-title {}
+
+// Note, Menu blocks use .block-menu__content, see below.
 .block__content {}
-
-
 
 
 // Most blocks have a class indicating what module generated the block, e.g.
@@ -25,18 +29,23 @@
 // Here are a few examples of what to look out for:
 // ---------------------------------------------------------------------------
 
-// All Drupal core Views module blocks.
+// The Main Content block of the site.
+.block-main-content {}
+
+
+// Menu Blocks
+.block-menu {}
+.block-menu__content {}
+
+
+// All Views module blocks.
 .block-views {}
 
 
-// All Drupal core System module blocks.
+// All System module blocks.
 .block-system {}
 
 
-// The Main Content block of the site.
-#block-content {}
 
 
-// System module generated Footer block.
-#block-footer {}
 

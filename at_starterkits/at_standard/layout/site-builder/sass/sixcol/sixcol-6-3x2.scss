@@ -1,0 +1,64 @@
+@import "../site-builder-base";
+//
+// Six regions, 3x2
+//
+
+.sixcol-6-3x2 {
+
+  // Two active regions.
+  .active-region-count--2 {
+    .region {
+      @include span(6 of 12);
+    }
+
+    &:last-child {
+      @include last;
+    }
+  }
+
+
+  // Three active regions.
+  .active-region-count--3 {
+    .region {
+      &:first-child {
+        @include span(6 of 12);
+      }
+
+      &:nth-child(2) {
+        @include span(6 of 12 last);
+      }
+
+      &:last-child {
+        clear: both;
+      }
+    }
+  }
+
+
+  // Five active regions.
+  .active-region-count--5 {
+    .region {
+      @include span(6 of 12);
+
+      &:nth-child(2n) {
+        @include last;
+      }
+
+      &:last-child {
+        @include span(12 of 12);
+        clear: both;
+      }
+    }
+  }
+
+
+  // Four or Six active regions.
+  .active-region-count--4,
+  .active-region-count--6 {
+    .region {
+      @include gallery(4 of 12);
+    }
+  }
+}
+
+

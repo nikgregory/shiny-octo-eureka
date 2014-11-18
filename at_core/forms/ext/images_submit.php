@@ -54,7 +54,7 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
             $declaration = 'margin-left:auto;margin-right:auto;text-align:center';
           }
         }
-        $css[$bundle_key][$view_mode_key] = $bundle_values['selector'] . $view_mode_selector . ' .node__content .field-type--image{' .  $declaration . '}';
+        $css[$bundle_key][$view_mode_key] = $bundle_values['selector'] . $view_mode_selector . ' .node__content .field-type-image{' .  $declaration . '}';
       }
       unset($css[$bundle_key]['selector']);
     }

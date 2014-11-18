@@ -16,13 +16,12 @@ images_dir = "../css/images"
 # Add the layouts assets directory, we can import base and any susy-panel for
 # use in the UIKit. Change this if you are using a different layout plugin.
 # -----------------------------------------------------------------------------
-add_import_path "../layout/site-builder/assets/sass"
+add_import_path "../../layout/site-builder/sass"
 
 
 # SASS core
 # -----------------------------------------------------------------------------
-# Versions of Chrome need precision 7 to counter rounding errors.
-Sass::Script::Number.precision = 7
+Sass::Script::Number.precision = 5
 
 
 # Output style and comments

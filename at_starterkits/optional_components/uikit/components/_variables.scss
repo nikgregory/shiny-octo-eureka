@@ -2,18 +2,6 @@
 // Variable Settings.
 //
 
-// Optional map of minimum browser versions to support. For example, to
-// remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
-// to '8'.
-$browser-minimum-versions: (
-  'chrome'  : null,
-  'firefox' : null,
-  'ie'      : 9,
-  'safari'  : null,
-  'opera'   : null
-) !default;
-
-
 // Breakpoints
 // -----------------------------------------------------------------------------
 //
@@ -152,14 +140,14 @@ $font-monospace   : $courier;
 
 
 //
-// Global styles.
+// Colors, borders etc.
 //
 
 // Borders
 // -----------------------------------------------------------------------------
 $border-width                : 1px;
 $border-style                : solid;
-$border-color                : #cccccc;
+$border-color                : #dcdcdc;
 $border-radius               : 4px;
 
 
@@ -173,16 +161,16 @@ $tertiary-color              : #999999;
 
 // Text colors
 // -----------------------------------------------------------------------------
-$text-color                  : #333333;
+$text-color                  : #363636;
 $text-background-color       : #eeeeee;
 
 
 // Link colors
 // -----------------------------------------------------------------------------
-$link-color                  : #0000ee;
+$link-color                  : #0066cc;
 $link-hover-color            : $link-color;
 $link-active-color           : $link-color;
-$link-visited-color          : #55198b;
+$link-visited-color          : #0066cc;
 $link-visited-hover-color    : $link-visited-color;
 
 
@@ -209,9 +197,13 @@ $error-background-color      : #fcf4f2;
 
 // Highlight colors
 // -----------------------------------------------------------------------------
-$hightlight-text-color       : #ffffff;
-$hightlight-background-color : #9dc44d;
-$hightlight-border-color     : #5b8829;
+//$hightlight-text-color       : #fffffe;
+//$hightlight-background-color : #9dc44d;
+//$hightlight-border-color     : #5b8829;
+
+$hightlight-text-color       : $background-color;
+$hightlight-background-color : $primary-color;
+$hightlight-border-color     : $tertiary-color;
 
 
 // Selection color
@@ -259,6 +251,56 @@ $tertiary-gradient-stop      : lighten($tertiary-color, $lighten-most);
 // Set variables for component partials and mixins.
 //
 
+// Page & Regions
+// -----------------------------------------------------------------------------
+$page-text-color       : $text-color;
+$page-background-color : $primary-color;
+$page-root-background  : #ffffff; // body inner wrapper
+$regions-background    : #ffffff; // we set a default so we can have colored .page-root.
+
+
+// Page Row colors (for site-builder layout plugin)
+// -----------------------------------------------------------------------------
+// @include these in the page-row-color mixin from _page.scss using the
+// .page-row__[row name] selectors, e.g.:
+//
+//  .page-row__header {
+//    @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
+//  }
+
+// Full width background toggle
+$page-row-backgrounds-full-width    : true;
+$regions-padding                    : $medium;
+
+// Header
+$page-row-header-background-color   : $primary-color;
+$page-row-header-color              : #ffffff;
+
+// Navbar
+$page-row-navbar-background-color   : $secondary-color;
+$page-row-navbar-color              : #ffffff;
+
+// Messages
+$page-row-messages-background-color : $background-color;
+$page-row-messages-color            : $text-color;
+
+// Features
+$page-row-features-background-color : $tertiary-color;
+$page-row-features-color            : $text-color;
+
+// Main
+$page-row-main-background-color     : $background-color;
+$page-row-main-color                : $text-color;
+
+// Tertiary
+$page-row-tertiary-background-color : $tertiary-color;
+$page-row-tertiary-color            : $text-color;
+
+// Footer
+$page-row-footer-background-color   : $secondary-color;
+$page-row-footer-color              : #ffffff;
+
+
 // Menus
 // -----------------------------------------------------------------------------
 $menu-text-align                  : $flow-from; // ltr or from-left
@@ -272,8 +314,10 @@ $menu-border-hover-color          : $border-color;
 $menu-border-active-color         : $border-color;
 
 $menu-background-color            : $background-color;
-$menu-background-hover-color      : lighten($text-background-color, $lighten);
-$menu-background-active-color     : lighten($text-background-color, $lighten);
+$menu-background-hover-color      : $text-background-color;
+$menu-background-active-color     : $text-background-color;
+//$menu-background-hover-color      : lighten($text-background-color, $lighten);
+//$menu-background-active-color     : lighten($text-background-color, $lighten);
 
 $menu-border-width                : $border-width;
 $menu-border-style                : $border-style;
@@ -308,8 +352,11 @@ $button-color                     : $text-color;
 $button-hover-color               : $text-color;
 
 $button-border-color              : $border-color;
+//$button-border-hover-color        : $button-border-color;
 $button-border-hover-color        : darken($button-border-color, $darken);
 
+//$button-background-color          : $text-background-color;
+//$button-background-hover-color    : $button-background-color;
 $button-background-color          : lighten($text-background-color, $lighten-more);
 $button-background-hover-color    : darken($button-background-color, $darken);
 
@@ -330,7 +377,9 @@ $tab-border-color                 : $border-color;
 $tab-border-hover-color           : $border-color;
 $tab-border-active-color          : $border-color;
 
+//$tab-background-color             : $text-background-color;
 $tab-background-color             : lighten($text-background-color, $lighten-more);
+
 $tab-background-hover-color       : $text-background-color;
 $tab-background-active-color      : $text-background-color;
 
@@ -351,7 +400,9 @@ $list-border-color                : $border-color;
 $list-border-hover-color          : $border-color;
 $list-border-active-color         : $border-color;
 
+//$list-background-color            : $text-background-color;
 $list-background-color            : lighten($text-background-color, $lighten-more);
+
 $list-background-hover-color      : $text-background-color;
 $list-background-active-color     : $text-background-color;
 
@@ -364,15 +415,19 @@ $list-border-radius               : $border-radius;
 // -----------------------------------------------------------------------------
 $form-text-align                  : center;
 
+//$form-text-color                  : $text-color; // If text is #000, lighten 20% is #333
 $form-text-color                  : lighten($text-color, 20%); // If text is #000, lighten 20% is #333
+
 $form-text-focus-color            : $text-color;
 
-$form-border-color                : $border-color;
+$form-border-color                : #E5E5E5; //$border-color;
 $form-border-focus-color          : $border-color;
 
 $form-background-color            : #ffffff;
+//$form-background-focus-color      : $background-color;
 $form-background-focus-color      : lighten($text-background-color, $lighten-more);
 
+//$form-help-color                  : $text-color;
 $form-help-color                  : lighten($text-color, 45%);
 $form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
 
@@ -411,10 +466,12 @@ $table-row-even-color             : $even-color;
 // col striping, applies to the active column in sortable tables.
 $table-col-striping               : false;
 $table-col-odd-color              : $text-background-color;
+//$table-col-even-color             : $text-background-color; // TODO - strategy for column striping even color
 $table-col-even-color             : darken($text-background-color, 2%);
 
 // hover
 $tr-hover                         : false;
+//$tr-hover-color                   : $text-background-color; // TODO - strategy for table row hover color
 $tr-hover-color                   : darken($text-background-color, $darken);
 
 
@@ -428,56 +485,6 @@ $field-taxonomy-item-icon         : $fa-var-tag;
 
 $field-taxonomy-label-as-icon     : true; // Label must not be hidden in field display settings.
 $field-taxonomy-label-icon        : $fa-var-tags;
-
-
-// Page & Regions
-// -----------------------------------------------------------------------------
-$page-text-color                  : $text-color;
-$page-background-color            : $primary-color;
-$page-root-background             : #ffffff; // body inner wrapper
-$regions-background               : #ffffff; // we set a default so we can have colored .page-root.
-
-
-// Page Row colors (for site-builder layout plugin)
-// -----------------------------------------------------------------------------
-// @include these in the page-row-color mixin from _page.scss using the
-// .page-row__[row name] selectors, e.g.:
-//
-//  .page-row__header {
-//    @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
-//  }
-
-// Full width background toggle
-$page-row-backgrounds-full-width    : true;
-$regions-padding                    : $medium;
-
-// Header
-$page-row-header-background-color   : $primary-color;
-$page-row-header-color              : #ffffff;
-
-// Navbar
-$page-row-navbar-background-color   : $secondary-color;
-$page-row-navbar-color              : #ffffff;
-
-// Messages
-$page-row-messages-background-color : $background-color;
-$page-row-messages-color            : $text-color;
-
-// Features
-$page-row-features-background-color : $background-color;
-$page-row-features-color            : $text-color;
-
-// Main
-$page-row-main-background-color     : $background-color;
-$page-row-main-color                : $text-color;
-
-// Tertiary
-$page-row-tertiary-background-color : $background-color;
-$page-row-tertiary-color            : $text-color;
-
-// Footer
-$page-row-footer-background-color   : $secondary-color;
-$page-row-footer-color              : #ffffff;
 
 
 // Icons
@@ -503,21 +510,18 @@ $form-details-summary-closed     : $fa-var-caret-right;
 $form-details-summary-closed-rtl : $fa-var-caret-left;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Browser Versions
+// -----------------------------------------------------------------------------
+// Optional map of minimum browser versions to support. For example, to
+// remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
+// to '8'.
+$browser-minimum-versions: (
+  'chrome'  : null,
+  'firefox' : null,
+  'ie'      : 9,
+  'safari'  : null,
+  'opera'   : null
+) !default;
 
 
 

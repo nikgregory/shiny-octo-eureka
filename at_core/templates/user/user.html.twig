@@ -28,11 +28,13 @@
  */
 #}
 <article{{ attributes.addClass('profile') }}>
+
   {% if label %}
-    <h1{{ title_attributes }}>{{ label }}</h1>
+    <h1{{ title_attributes.addClass('user__title') }}>{{ label }}</h1>
   {% endif %}
 
   {% if content %}
     {{- content -}}
   {% endif %}
+
 </article>

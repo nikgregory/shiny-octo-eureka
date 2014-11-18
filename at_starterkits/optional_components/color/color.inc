@@ -3,65 +3,48 @@
 /**
  * @file
  * Lists available colors and color schemes for the AT Starterkit.
+ * By default the color scheme relies almost entirely on shift, so the user
+ * sets the base color which shifts unmatched colors.
  */
 
 $info = array(
   // Available colors and color labels used in theme.
   'fields' => array(
-    'header'   => t('Header'),
-    'body'     => t('Body'),
-    'borders'  => t('Borders'),
-    'footer'   => t('Footer'),
-    'text'     => t('Text'),
-    'link'     => t('Links'),
-    'branding' => t('Branding'),
+    'base' => t('Base'),
+    'text' => t('Text color'),
+    'link' => t('Link color'),
   ),
   // Pre-defined color schemes.
   'schemes' => array(
     'default' => array(
-      'title' => t('Blue Lagoon (default)'),
+      'title' => t('Carbon Neutral'),
       'colors' => array(
-        'header'   => '#0779bf',
-        'body'     => '#ffffff',
-        'borders'  => '#cccccc',
-        'footer'   => '#292929',
-        'text'     => '#000000',
-        'link'     => '#0000ee',
-        'branding' => '#fffeff',
+        'base' => '#000000',
+        'text' => '#555555', // $text-color
+        'link' => '#0066cc', // $link-color
       ),
     ),
-    'firehouse' => array(
-      'title' => t('Firehouse'),
+    'goodearth' => array(
+      'title' => t('The Good Earth'),
       'colors' => array(
-        'header'   => '#cd2d2d',
-        'body'     => '#ffffff',
-        'borders'  => '#ededed',
-        'footer'   => '#1f1d1c',
-        'text'     => '#3b3b3b',
-        'link'     => '#d6121f',
-        'branding' => '#fffeff',
+        'base' => '#4ba943',
+        'text' => '#555555',
+        'link' => '#8dd087',
       ),
     ),
-    'slate' => array(
-      'title' => t('Slate'),
+    'tippingpoint' => array(
+      'title' => t('Tipping Point'),
       'colors' => array(
-        'header'   => '#4a4a4a',
-        'body'     => '#ffffff',
-        'borders'  => '#d0d0d0',
-        'footer'   => '#161617',
-        'text'     => '#3b3b3b',
-        'link'     => '#0073b6',
-        'branding' => '#ffffff',
+        'base' => '#e65200',
+        'text' => '#777777',
+        'link' => '#ff792f',
       ),
     ),
   ),
 
   // CSS files (excluding @import) to rewrite with new color scheme.
-  // In AT we just use the standard styles.css file output from the UI Kit, this way
-  // we don't need to maintain a seperate color stylesheet, and we only load one CSS
-  // file for all styles.
   'css' => array(
-    'css/styles.css',
+    'styles/css/colors.css',
   ),
 
   // Files to copy.
@@ -77,7 +60,7 @@ $info = array(
       // Direction of gradient ('vertical' or 'horizontal').
       'direction' => 'vertical',
       // Keys of colors to use for the gradient.
-      'colors' => array('header', 'body'),
+      'colors' => array('base', 'text'),
     ),
   ),
 );

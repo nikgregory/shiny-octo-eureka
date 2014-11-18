@@ -1,0 +1,43 @@
+@import "../site-builder-base";
+//
+// Four Regions 3-3-3-3
+//
+// First region  : 3 grid columns.
+// Second region : 3 grid columns.
+// Third region  : 3 grid columns.
+// Fourth region : 3 grid columns.
+//
+// ---------------------------------------------------------------------------
+
+.fourcol-3-3-3-3 {
+
+  // Two active regions.
+  .active-region-count--2 {
+    .region {
+      @include span(6 of 12);
+    }
+  }
+
+
+  // Three active regions.
+  .active-region-count--3 {
+    .region {
+      @include span(4 of 12);
+    }
+  }
+
+
+  // Four active regions.
+  .active-region-count--4 {
+    .region {
+      @include span(3 of 12);
+    }
+  }
+
+
+  // Last child is always last.
+  .regions:not(.active-region-count--1) .region:last-child {
+    @include last;
+  }
+}
+

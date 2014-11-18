@@ -1,0 +1,6 @@
+base:
+  version: 8.0.x
+  css:
+    theme:
+      styles/css/styles.css: {}
+      styles/css/colors.css: {}

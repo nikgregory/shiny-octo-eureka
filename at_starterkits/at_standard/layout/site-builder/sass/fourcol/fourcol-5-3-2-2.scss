@@ -1,0 +1,65 @@
+@import "../site-builder-base";
+//
+// Four Regions 5-3-2-2
+//
+// First region  : 5 grid columns.
+// Second region : 3 grid columns.
+// Third region  : 2 grid columns.
+// Fourth region : 2 grid columns.
+//
+// ---------------------------------------------------------------------------
+
+.fourcol-5-3-2-2 {
+
+  // Two active regions.
+  .active-region-count--2 {
+    .region {
+      @include span(5 of 12);
+
+      &:last-child {
+        @include span(7 of 12);
+      }
+    }
+  }
+
+
+  // Three active regions.
+  .active-region-count--3 {
+    .region {
+      @include span(3 of 12);
+
+      &:first-child {
+        @include span(5 of 12);
+      }
+
+      &:last-child {
+        @include span(4 of 12);
+      }
+    }
+  }
+
+
+  // Four active regions.
+  .active-region-count--4 {
+    .region {
+      @include span(2 of 12);
+
+      &:first-child {
+        @include span(5 of 12);
+
+        + div {
+          @include span(3 of 12);
+        }
+      }
+
+      &:last-child {
+        @include span(2 of 12);
+      }
+    }
+  }
+
+  // Last child is always last.
+  .regions:not(.active-region-count--1) .region:last-child {
+    @include last;
+  }
+}

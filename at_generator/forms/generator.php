@@ -10,7 +10,7 @@ $form['generate'] = array(
   '#type' => 'details',
   '#title' => 'Generate Themes',
   '#group' => 'atsettings',
-  '#description' => t('Use this form to generate a new sub-theme. See the Help tab for information.'),
+  '#description' => t('Use this form to generate a new sub-theme. NOTE: The Minimal kit and the ability to clone is temporarily disabled - no biggie, these will be back soon!'),
   '#tree' => TRUE,
 );
 
@@ -45,14 +45,14 @@ $form['generate']['generate_machine_name'] = array(
 
 $generate_type_options = array(
   'at_standard' => t('Standard kit'),
-  'at_minimal' => t('Minimal kit'),
+  //'at_minimal' => t('Minimal kit'),
 );
 
 if (!empty($sourceThemeOptions)) {
   $generate_type_options = array(
     'at_standard' => t('Standard kit'),
-    'at_minimal' => t('Minimal kit'),
-    'at_clone' => t('Clone'),
+    //'at_minimal' => t('Minimal kit'),
+    //'at_clone' => t('Clone'),
     'at_skin' => t('Skin'),
   );
 }
@@ -66,7 +66,7 @@ $form['generate']['generate_type'] = array(
 
 $form['generate']['generate_type_description_standard_kit'] = array(
   '#type' => 'container',
-  '#markup' => t('Standard kit includes the Site Builder layout plugin with 18 regions, 3 layout variants, and is built with SASS/Susy.'),
+  '#markup' => t('Standard kit includes an advanced layout and is designed to fully support the UIKit.'),
   '#attributes' => array('class' => array('generate-type__description')),
   '#states' => array(
     'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_standard')),

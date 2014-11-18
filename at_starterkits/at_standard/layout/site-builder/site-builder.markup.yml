@@ -11,13 +11,11 @@ version: '8.x-1.0-dev'                  # Version string. Optional.
 rows:
   messages:          # row key (name)
     attributes:      # attributes key. Set id, role, classes etc. Optional.
-      role: region
       id: messages
     regions:         # use the key "regions" to declare row regions.
       messages: 'Messages'
   leaderboard:
     attributes:
-      role: region
       id: leaderboard
     regions:
       leaderboard: 'Leaderboard'
@@ -30,13 +28,11 @@ rows:
       header_second: 'Header second'
   navbar:
     attributes:
-      role: navigation
       id: navbar
     regions:
       navbar: 'Navbar'
   features:
     attributes:
-      role: region
       id: features
     regions:
       features_first: 'Features first'
@@ -44,21 +40,26 @@ rows:
       features_third: 'Features third'
   main:
     attributes:
-      role: region
       id: main-content
     regions:
-      highlighted: 'Highlighted'
       content: 'Main content'
       sidebar_first: 'Sidebar first'
       sidebar_second: 'Sidebar second'
-  tertiary:
+  subfeatures:
     attributes:
-      role: region
-      id: tertiary
+      id: sub-features
     regions:
-      tertiary_first: 'Tertiary first'
-      tertiary_second: 'Tertiary second'
-      tertiary_third: 'Tertiary third'
+      subfeatures_first: 'Sub-features first'
+      subfeatures_second: 'Sub-features second'
+      subfeatures_third: 'Sub-features third'
+  footercols:
+    attributes:
+      id: footer-cols
+    regions:
+      footercol_first: 'Footer col first'
+      footercol_second: 'Footer col second'
+      footercol_third: 'Footer col third'
+      footercol_fourth: 'Footer col fourth'
   footer:
     attributes:
       role: contentinfo

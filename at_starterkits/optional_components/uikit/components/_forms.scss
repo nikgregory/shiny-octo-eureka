@@ -178,6 +178,15 @@ textarea {
 }
 
 
+// Filters and tips
+.filter-wrapper {
+  border-color: $form-border-color;
+  border-style: $form-border-style;
+  border-width: $form-border-width;
+  border-top: 0;
+}
+
+
 // Tips
 .tips {
   font-size: 0.85em;
@@ -249,9 +258,17 @@ abbr {
 }
 
 
-// Radio and Checkbox descriptions
+// Radio and Checkboxes
+.form-checkboxes,
+.form-radios {
+  @include output-rhythm(margin, 0 0 $medium);
+}
+
+
 .form-type-radio,
 .form-type-checkbox {
+  margin: 0;
+
   .description {
     margin-#{$flow-from}: 2.4em;
   }
@@ -274,6 +291,8 @@ abbr {
 
 // Container inline
 .container-inline {
+  display: inline-block;
+
   label:after {
     content: ':';
   }
@@ -362,7 +381,7 @@ form {
  */
 details {
   border: $form-border-width $form-border-style $form-border-color;
-  //@include border-radius($border-radius);
+  @include border-radius($border-radius);
   @include output-rhythm(margin, $medium 0);
 
   > .details-wrapper {

@@ -49,8 +49,34 @@ layout:
       class: lc-two-thirds
       description: 'Element will be two thirds the container width.'
 
-
-
+grid-blocks:
+  name: Block Grid
+  description: 'Layout blocks in a grid. Apply to full width regions only. A good alternative is to build a View with the format "Grid".'
+  classes:
+    grid-block-two:
+      class: 'grid-block-2'
+      description: 'Two grid columns.'
+    grid-block-three:
+      class: 'grid-block-3'
+      description: 'Three grid columns.'
+    grid-block-four:
+      class: 'grid-block-4'
+      description: 'Four grid columns.'
+    grid-block-five:
+      class: 'grid-block-5'
+      description: 'Five grid columns.'
+    grid-block-six:
+      class: 'grid-block-6'
+      description: 'Six grid columns.'
+    grid-block-eight:
+      class: 'grid-block-8'
+      description: 'Eight grid columns.'
+    grid-block-ten:
+      class: 'grid-block-10'
+      description: 'Ten grid columns.'
+    grid-block-twelve:
+      class: 'grid-block-12'
+      description: 'Twelve grid columns.'
 
 
 

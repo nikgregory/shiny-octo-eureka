@@ -5,7 +5,14 @@
 
 .block--system-branding-block {}
 
-.site__branding-text {}
+.site__branding-text {
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
 
 .site__logo {}
 

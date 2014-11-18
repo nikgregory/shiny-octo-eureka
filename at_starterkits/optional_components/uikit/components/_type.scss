@@ -17,8 +17,8 @@ body {
 // Margin reset.
 ul,ol,dd,dl,
 p,figure,
-pre,table,fieldset,hr,
-form {
+pre,table,hr,
+form,fieldset {
   margin: 0 0 1.5rem;
 }
 
@@ -33,6 +33,7 @@ form {
 
 #{headings(1,3)} {
   font-weight: $font-weight-normal;
+  line-height: 1.25;
 }
 
 #{headings(4,6)} {

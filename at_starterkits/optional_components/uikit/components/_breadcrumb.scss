@@ -2,16 +2,10 @@
  * Breadcrumbs
  ========================================================================== */
 
-
-
-// !!!!!!!!!!!
-//
-//   Note: breadcrumb is really just a list-style with font icon :after etc, convert to use existing mixins.
-//
-// !!!!!!!!!!!
-
-
-
+// Block wrapper for breadcrumbs
+.block-system-breadcrumb-block {
+  .block__content {}
+}
 
 
 .breadcrumb {

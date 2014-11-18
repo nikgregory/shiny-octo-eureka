@@ -8,7 +8,7 @@
 html,
 body {
   height: 100%;
-  background-color: $page-row-navbar-background-color; // this matches the navbar for offcanvas menus.
+  background-color: $page-background-color; // this matches the navbar for offcanvas menus.
 }
 
 
@@ -24,7 +24,7 @@ body {
 // If you are using offcanvas menu, it's the page-root that pushes over, not body.
 .page-root {
   position: relative;
-  background-color: $page-root-background;
+  //background-color: $page-root-background;
 }
 
 // We need some padding to avoid browser collisions.
@@ -35,7 +35,7 @@ body {
 // Regions
 //  - .regions is the main wrapper selector for all regions within a page-row.
 .regions {
-  background-color: $regions-background;
+  //background-color: $regions-background;
 }
 
 
@@ -81,7 +81,7 @@ body {
 
 // Header
 .page-row__header {
-  @include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
+  //@include page-row-colors($page-row-header-background-color, $page-row-header-color, $page-row-backgrounds-full-width);
 
   .regions {}
 }
@@ -89,7 +89,7 @@ body {
 
 // Navbar
 .page-row__navbar {
-  @include page-row-colors($page-row-navbar-background-color, $page-row-navbar-color, $page-row-backgrounds-full-width);
+  //@include page-row-colors($page-row-navbar-background-color, $page-row-navbar-color, $page-row-backgrounds-full-width);
 
   .regions {
     padding: 0;
@@ -117,7 +117,7 @@ body {
 
 // Footer
 .page-row__footer {
-  @include page-row-colors($page-row-footer-background-color, $page-row-footer-color, $page-row-backgrounds-full-width);
+  //@include page-row-colors($page-row-footer-background-color, $page-row-footer-color, $page-row-backgrounds-full-width);
 
   .regions {}
 }
@@ -128,7 +128,7 @@ body {
 // Theme attribution message. This is a toggle setting in the advanced theme
 // settings, you can turn it on/off using the Markup overrides extension.
 .attribution {
-  background-color: $page-row-navbar-background-color;
+  //background-color: $page-row-navbar-background-color;
   @include adjust-font-size-to($small);
   text-align: center;
 }

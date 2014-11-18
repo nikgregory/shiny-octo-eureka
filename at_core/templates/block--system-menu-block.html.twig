@@ -44,8 +44,8 @@
   set classes = [
     'block',
     'block-menu',
-    'navigation',
-    'menu--' ~ derivative_plugin_id|clean_class,
+    'block-menu--' ~ derivative_plugin_id|clean_class,
+    label ? 'has-title',
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}

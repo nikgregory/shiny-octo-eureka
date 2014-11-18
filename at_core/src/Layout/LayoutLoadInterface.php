@@ -7,7 +7,6 @@ interface LayoutLoadInterface {
   // Returns the active regions when a page is loaded.
   public function activeRegions();
 
-
   // Builds and returns layout attributes when a page is loaded.
   public function rowAttributes();
 

@@ -8,6 +8,8 @@
  ========================================================================== */
 
 .button {
+  opacity: 0.9;
+
   cursor: pointer;
   white-space: nowrap;
 
@@ -33,6 +35,8 @@
 
   &:hover,
   &:focus {
+    opacity: 1;
+
     color: $button-hover-color;
     background-color: $button-background-hover-color;
     text-decoration: none;

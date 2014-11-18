@@ -1,0 +1,25 @@
+// This file is only for color module enabled themes.
+
+// Layouts base.
+// See: layout/site-builder/assets/sass/_site-builder-base.scss
+@import "site-builder-base";
+
+// Modular Scale.
+@import "modular-scale";
+
+// UI Kit Variables.
+@import
+  "components/font-awesome/variables",
+  "components/variables";
+
+// UI Kit Mixins.
+@import "components/mixins/mixins";
+
+// UI Kit Components.
+@import "components/colors";
+
+// Tabs are an entirely special case beacuse the styles are so
+// different it may be impossible to style them all with one set
+// of color overrides, we may have to import here and special case
+// on a theme by theme basis.
+@import "components/tabs";

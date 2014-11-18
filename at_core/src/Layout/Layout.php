@@ -17,14 +17,11 @@ use Symfony\Component\Yaml\Parser;
 
 class Layout implements LayoutInterface {
 
-
   // The active theme name.
   protected $theme_name;
 
-
   // This themes layout name.
   protected $layout_name;
-
 
   // Constructor
   public function __construct($theme_name, $layout_name) {
@@ -33,7 +30,6 @@ class Layout implements LayoutInterface {
     $this->layout_path = drupal_get_path('theme', $this->theme_name) . '/layout/' . $this->layout_name;
     $this->layout_cid = $this->theme_name . ':' . $this->layout_name;
   }
-
 
   // Returns layout configuration of a type (normally markup or css yml config).
   // looks for cached config first, if none we parse the respective yml file.
@@ -59,14 +55,12 @@ class Layout implements LayoutInterface {
     return $config_data;
   }
 
-
   // Returns a layout markup object.
   public function getLayoutMarkup() {
     $layout_markup = $this->getLayoutConfig(LayoutInterface::LayoutMarkup);
 
     return $layout_markup;
   }
-
 
   // Returns a layout CSS object.
   public function getLayoutCSS() {
@@ -76,33 +70,3 @@ class Layout implements LayoutInterface {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

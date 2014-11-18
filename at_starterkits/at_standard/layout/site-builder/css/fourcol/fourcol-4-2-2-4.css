@@ -1,0 +1,24 @@
+.fourcol-4-2-2-4 .active-region-count--2 .region {
+  width: 49.15254%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-4-2-2-4 .active-region-count--3 .region {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-4-2-2-4 .active-region-count--4 .region {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-4-2-2-4 .active-region-count--4 .region:first-child, .fourcol-4-2-2-4 .active-region-count--4 .region:last-child {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-4-2-2-4 .regions:not(.active-region-count--1) .region:last-child {
+  float: right;
+  margin-right: 0;
+}

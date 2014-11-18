@@ -1,8 +1,8 @@
 # This works a bit like a libraries yml file, it declares all the css files available to the layout, but in a structured way
 # that can be used by the system.
 
-css_files_path: 'assets/css'                             # Path to CSS layout files.
-css_form_styles_path: 'assets/css/site-builder-form.css' # Path to the CSS used in Appearance settings form.
+css_files_path: 'css'                             # Path to CSS layout files.
+css_form_styles_path: 'css/site-builder-form.css' # Path to the CSS used in Appearance settings form.
 css_global_layout: 'site-builder-global.css'             # Sets global CSS for the layout. Path must be relative to "css_files_path".
 
 # CSS key holds all CSS files for this layout. Keyed by directory path (a folder).
@@ -137,7 +137,18 @@ css:
       - fourcol-source-ordered-12--3-6-3
       - fourcol-source-ordered-12--3-9--12
       - fourcol-source-ordered-inset-left
+  fivecol:
+    regions: 5
+    files:
+      - fivecol-5x2
+      - fivecol-2-3-2-3-2
+      - fivecol-6-6--4-4-4
+      - fivecol-6-6-6-6--12
+      - fivecol-12--6-6-6-6
+      - fivecol-source-ordered-2-2-4-2-2
   sixcol:
     regions: 6
     files:
       - sixcol-6x2
+      - sixcol-6-2x3
+      - sixcol-6-3x2

@@ -1,0 +1,49 @@
+.fourcol-5-3-2-2 .active-region-count--2 .region {
+  width: 40.67797%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--2 .region:last-child {
+  width: 57.62712%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--3 .region {
+  width: 23.72881%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--3 .region:first-child {
+  width: 40.67797%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--3 .region:last-child {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--4 .region {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--4 .region:first-child {
+  width: 40.67797%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--4 .region:first-child + div {
+  width: 23.72881%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .active-region-count--4 .region:last-child {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-5-3-2-2 .regions:not(.active-region-count--1) .region:last-child {
+  float: right;
+  margin-right: 0;
+}

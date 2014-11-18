@@ -6,39 +6,23 @@
  ========================================================================== */
 
 // Search Block & advanced search form.
-.block--search,
-.search-form .form-wrapper {
+.block-search {
 
   // AT removes the container-inline class from search block as this adds unwanted
   // display: inline styles, instead we use inline-block so we can add vertical
   // margin and or padding etc.
-  div {
+ .form-type-search,
+ .form-actions {
     display: inline-block;
-    @include output-rhythm(margin, 0 0 $xx-small);
+    @include output-rhythm(margin, $xx-small 0);
   }
 }
+
 
 // Search form on the /search page
 .search-form .container-inline label {
   display: block;
-  @include output-rhythm(margin, 0 0 $xx-small);
-}
-
-
-
-
-// Block search
-.block--search {}
-
-
-// Search block form element id.
-#search-block-form {}
-
-
-// Search text field and button.
-.block--search {
-  .form-search {}
-  .button {}
+  @include output-rhythm(margin, $xx-small 0);
 }
 
 
@@ -57,7 +41,13 @@
 
 
 // Advanced Search Form.
-#edit-advanced {}
+#edit-advanced {
+  .details-wrapper {
+    > fieldset > legend {
+      display: none; // Remove redundant legends. This is a bit dangerous.
+    }
+  }
+}
 
 
 

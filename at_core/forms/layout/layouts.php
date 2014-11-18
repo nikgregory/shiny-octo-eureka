@@ -169,7 +169,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
         if ($reg_count[$row_key] > 1) {
           for ($i=0; $i<$reg_count[$row_key]; $i++) {
-            $regions_markup[$row_key][] .= '<div class="region"><span>R' . $reg_num++ . '</span></div>';
+            $regions_markup[$row_key][] = '<div class="region"><span>R' . $reg_num++ . '</span></div>';
           }
           $markup[$row_key] = implode('', $regions_markup[$row_key]);
         }

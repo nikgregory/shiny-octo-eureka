@@ -76,8 +76,8 @@ class ThemeGeneratorSubmit {
       // Info file
       $info_file = "$target/$machine_name.info.yml";
 
-      // Breakpoints, could move to AT Core, pending.
-      //$breakpoints_file  = "$target/$machine_name.breakpoints.yml";
+      // Libraries file
+      $library_file  = "$target/$machine_name.libraries.yml";
 
       // Classitis file.
       $classitis_file = "$target/$machine_name.classitis.yml";
@@ -115,7 +115,7 @@ class ThemeGeneratorSubmit {
 
           // UI Kit.
           if ($uikit === 1) {
-            $directoryOperations->directoryRecursiveCopy($uikit_dir_path, "$target/uikit");
+            $directoryOperations->directoryRecursiveCopy($uikit_dir_path, "$target/styles/uikit");
           }
 
           // Color.
@@ -123,16 +123,15 @@ class ThemeGeneratorSubmit {
             $directoryOperations->directoryRecursiveCopy($color_dir_path, "$target/color");
           }
           if ($color === 0) {
+            // Remove the colors.css file
+            $directoryOperations->directoryRemove("$target/styles/css/colors.css");
+            $directoryOperations->directoryRemove("$target/styles/css/colors-reference.css");
 
-            // TODO, remove since color is moved to optional components
-
-            //$directoryOperations->directoryRemove("$target/css/colors.css");
-
-            // UIKit can be enabled, if so remove the color css/scss files.
-            //if ($uikit == 1) {
-              //$directoryOperations->directoryRemove("$target/uikit/colors.scss");
-              //$directoryOperations->directoryRemove("$target/uikit/components/_colors.scss");
-            //}
+            // Remove the color scss files.
+            if ($uikit == 1) {
+              $directoryOperations->directoryRemove("$target/styles/uikit/colors.scss");
+              $directoryOperations->directoryRemove("$target/styles/uikit/components/_colors.scss");
+            }
           }
 
           // THEMENAME.theme
@@ -179,9 +178,11 @@ class ThemeGeneratorSubmit {
         // Classitis file
         $fileOperations->fileRename("$target/$source_theme.classitis.yml", $classitis_file);
 
-        // Breakpoints file
-        //$fileOperations->fileRename("$target/$source_theme.breakpoints.yml", $breakpoints_file);
-        //$fileOperations->fileStrReplace("$target/$machine_name.breakpoints.yml", $source_theme, $machine_name);
+        // libraries file
+        $fileOperations->fileRename("$target/$source_theme.libraries.yml", $library_file);
+        if ($color === 0) {
+          $fileOperations->fileStrReplace("$target/$source_theme.libraries.yml", 'styles/css/colors.css: {}', '');
+        }
 
         // Check and set description and version.
         $description = $description ?: $generic_decription;
@@ -196,14 +197,19 @@ class ThemeGeneratorSubmit {
         $theme_info_data['description'] = "'$description'";
         $theme_info_data['version']     = $version;
 
+
+        $theme_info_data['libraries'] = array(
+          "$machine_name/base",
+        );
+
+
         // Build css file arrray
+        /*
         $theme_info_data['stylesheets'] = array(
           'all' => array(
             "css/styles.css",
           ),
         );
-
-        /*
         if ($color == 1) {
           $theme_info_data['stylesheets'] = array(
             'all' => array(
@@ -213,6 +219,7 @@ class ThemeGeneratorSubmit {
           );
         }
         */
+
 
         foreach($theme_info_data['regions'] as $region_key => $region_name) {
           $theme_info_data['regions'][$region_key] = "'$region_name'";

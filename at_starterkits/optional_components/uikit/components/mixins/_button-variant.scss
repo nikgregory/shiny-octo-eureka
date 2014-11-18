@@ -4,6 +4,7 @@
   color: $text-color;
   background-color: $background-color;
   border-color: $border-color;
+  //opacity: 0.9;
 
   // Buttons can be links.
   &:link,
@@ -18,6 +19,10 @@
   &:active,
   &.active {
     color: $text-color;
+    background-color: $background-color;
+    border-color: $border-color;
+    //opacity: 1;
+
     background-color: darken($background-color, $darken-more);
     border-color: darken($border-color, $darken-more);
   }

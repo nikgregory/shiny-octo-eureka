@@ -42,7 +42,7 @@
 
 // Image fields
 // AT uses <figure> as the image field wrapper and <figcaption> for image captions.
-.field-type--image {
+.field-type-image {
 
   figure {
     margin: 0;
@@ -86,6 +86,17 @@
     }
   }
 
+  // If there is not image style set Firefox and other browsers will not respect max-width 100% inside a float.
+  // This can happen if the user does not set a style, so we are protecting the site from breaking.
+  &.float-none {
+    float: none !important;
+
+    figure {
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+
   // RTL
   @at-root [dir="rtl"] .field-type--image {
     &.field-align--none figure,
@@ -109,7 +120,7 @@
 
 
 // Taxonomy term reference fields
-.field-type--taxonomy-term-reference {
+.field-type-taxonomy-term-reference {
   @include output-rhythm(margin, $medium 0);
 
   @if $field-taxonomy-label-as-icon == true {

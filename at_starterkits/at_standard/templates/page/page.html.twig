@@ -1,7 +1,7 @@
 {#
 /**
- * site-builder-rowstyles for the page template.
- * Generated on: Tue, 11 Nov 14 14:41:43 +0100
+ * site-builder for the page template.
+ * Generated on: Tue, 18 Nov 14 20:25:15 +0100
  */
 #}
 {# No template file found - template code programmatically generated. #}
@@ -51,19 +51,28 @@
 {% if main__regions.active == true %}
   <div class="page-row__main">
     <div{{ main__attributes }}>
-      {{ page.highlighted }}
       {{ page.content }}
       {{ page.sidebar_first }}
       {{ page.sidebar_second }}
     </div>
   </div>
   {% endif %}
-  {% if tertiary__regions.active == true %}
-  <div class="page-row__tertiary">
-    <div{{ tertiary__attributes }}>
-      {{ page.tertiary_first }}
-      {{ page.tertiary_second }}
-      {{ page.tertiary_third }}
+  {% if subfeatures__regions.active == true %}
+  <div class="page-row__subfeatures">
+    <div{{ subfeatures__attributes }}>
+      {{ page.subfeatures_first }}
+      {{ page.subfeatures_second }}
+      {{ page.subfeatures_third }}
+    </div>
+  </div>
+  {% endif %}
+  {% if footercols__regions.active == true %}
+  <div class="page-row__footercols">
+    <div{{ footercols__attributes }}>
+      {{ page.footercol_first }}
+      {{ page.footercol_second }}
+      {{ page.footercol_third }}
+      {{ page.footercol_fourth }}
     </div>
   </div>
   {% endif %}
