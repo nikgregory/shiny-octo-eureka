@@ -33,16 +33,18 @@ settings:
   page_Tablet-isolate_header: twocol-6-6
   page_Tablet-isolate_navbar: ''
   page_Tablet-isolate_features: threecol-split-row-12--6-6
-  page_Tablet-isolate_main: fourcol-split-row-12--12--6-6
+  page_Tablet-isolate_main: threecol-split-row-12--6-6
   page_Tablet-isolate_tertiary: ''
+  page_Tablet-isolate_footercols: fourcol-split-row-6-6--6-6
   page_Tablet-isolate_footer: ''
   page_Widescreen_messages: ''
   page_Widescreen_leaderboard: ''
   page_Widescreen_header: twocol-6-6
   page_Widescreen_navbar: ''
-  page_Widescreen_features: threecol-source-ordered-3-6-3
-  page_Widescreen_main: fourcol-source-ordered-12--3-6-3
+  page_Widescreen_features: threecol-source-ordered-2-8-2
+  page_Widescreen_main: threecol-source-ordered-3-6-3
   page_Widescreen_tertiary: threecol-4-4-4
+  page_Widescreen_footercols: fourcol-3-3-3-3
   page_Widescreen_footer: ''
   responsive_menu_region: navbar
   responsive_menu_breakpoint_group: at_core.simple
