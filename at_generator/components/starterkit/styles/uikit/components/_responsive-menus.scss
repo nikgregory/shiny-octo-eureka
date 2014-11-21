@@ -13,8 +13,15 @@
  *  3. Theme settings as set in your themes Advanced extention settings.
  ========================================================================== */
 
+// Hide the menu until the JS is loaded, on some pages such as "create new account"
+// this can take a split second longer than usual, so this prevents a FOUC.
+body.no-fouc .responsive-menu-region .block-menu__content {
+  display: none;
+}
+
+
 // Aggressively force the menu to inherit the page-row/regions background,
-// this saves us a lot of messing about.
+// this gives us some pretty usable styles for free.
 .responsive-menu-region,
 .responsive-menu-region .block,
 .responsive-menu-region .block * {

@@ -12,19 +12,23 @@
       var activeTheme = drupalSettings['ajaxPageState']['theme'];
       var responsiveMenus = drupalSettings[activeTheme]['responsive_menus'];
 
-      //console.log(responsiveMenus);
-
-      // Region
-      var activeRegionClass = '.' + responsiveMenus['region'];
-      $(activeRegionClass).addClass('responsive-menu-region');
-
-      // Menu and toggle link variables
-      var menu   = activeRegionClass + ' .block-menu__content'; // wrapper element around the root ul.menu
-      var toggle = activeRegionClass + ' .block-menu__title';   // the toggle link
+      var menu   = '.responsive-menu-region .block-menu__content'; // wrapper element around the root ul.menu
+      var toggle = '.responsive-menu-region .block-menu__title';   // the toggle link
 
       // Clicking outside the menu will hide it.
       $('.page-root', context).on('touchstart click', function(){
         $(document.body).removeClass('menu-expanded');
+      });
+
+      // Remove the visually-hidden class from block titles, in case the user forgets to set the title to show.
+      // Add a span, we use this for styling some menu style toggle links, e.g. Flip Slide style.
+      $(toggle).removeClass('visually-hidden').wrapInner('<span class="title-inner" />').end();
+
+      $(toggle, context).on('touchstart click', function(e) {
+        $(this).parent('.responsive-menu-region .block-menu').toggleClass('menu-expanded');
+        $(this).parent('.responsive-menu-region .block-menu').siblings('.block-menu').removeClass('menu-expanded');
+        $(document.body).toggleClass('menu-expanded');
+        e.stopPropagation();
       });
 
       enquire
@@ -33,7 +37,7 @@
         setup: function() {
 
           // setup fires strait away, but if there is a match it will fire immediatly after.
-          $(document.body).addClass(responsiveMenus['default']['style']);
+          $(document.body).addClass(responsiveMenus['default']['style']).removeClass('no-fouc');
 
           // doubletaptogo for drop and slidedown menus
           if(responsiveMenus['default']['style'] == 'menu-style-dropmenu' || responsiveMenus['default']['style'] == 'menu-style-slidedown') {
@@ -171,18 +175,6 @@
             }
           }
         }
-      });
-
-      // Remove the visually-hidden class from block titles, in case the user forgets to set the title to show.
-      // Add a span, we use this for styling some menu style toggle links, e.g. Flip Slide style.
-      $(toggle).removeClass('visually-hidden').wrapInner('<span class="title-inner" />').end();
-
-
-      $(toggle, context).on('touchstart click', function(e) {
-        $(this).parent(activeRegionClass + ' .block-menu').toggleClass('menu-expanded');
-        $(this).parent(activeRegionClass + ' .block-menu').siblings('.block-menu').removeClass('menu-expanded');
-        $('body').toggleClass('menu-expanded');
-        e.stopPropagation();
       });
 
     }
