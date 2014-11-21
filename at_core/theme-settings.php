@@ -90,7 +90,6 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   unset($node_view_modes['search_index']);
   unset($node_view_modes['search_result']);
 
-
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
     'css' => array(
