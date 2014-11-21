@@ -39,6 +39,15 @@ class FileOperations implements FileOperationsInterface {
   /**
    * {@inheritdoc}
    */
+  public function fileReplace($data, $file_path) {
+    if (file_exists($file_path)) {
+      file_unmanaged_save_data($data, $file_path, FILE_EXISTS_REPLACE);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function fileBuildInfoYml(array $data, $prefix = NULL) {
     $info = '';
     foreach ($data as $key => $value) {
@@ -52,5 +61,4 @@ class FileOperations implements FileOperationsInterface {
     }
     return $info;
   }
-
 }

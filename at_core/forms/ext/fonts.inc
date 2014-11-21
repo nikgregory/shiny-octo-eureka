@@ -33,15 +33,15 @@ function font_elements() {
     $elements_array = array(
       'base' => array(
         'label' => 'Base',
-        'selector' => 'html,.ui-widget,p',
+        'selector' => 'html,p',
       ),
       'sitename' => array(
         'label' => 'Site name',
-        'selector' => '.site__name',
+        'selector' => '.site-name',
       ),
       'siteslogan' => array(
         'label' => 'Site slogan',
-        'selector' => '.site__slogan',
+        'selector' => '.site-slogan',
       ),
       'pagetitle' => array(
         'label' => 'Page title',

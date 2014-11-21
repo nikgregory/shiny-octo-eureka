@@ -37,9 +37,11 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $at_core_path  = drupal_get_path('theme', 'at_core');
   $subtheme_path = drupal_get_path('theme', $theme);
 
-  // Path to save generated CSS files.
-  $directoryOperations = new DirectoryOperations();
-  $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = array($subtheme_path, 'styles/css/generated'));
+  // Path to save generated CSS files. We don't want this happening for at_core or the generator.
+  if (isset($getThemeInfo['subtheme type']) && $getThemeInfo['subtheme type'] === 'adaptive_subtheme') {
+    $directoryOperations = new DirectoryOperations();
+    $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = array($subtheme_path, 'styles/css/generated'));
+  }
 
   // Get the active themes regions so we can use this in
   // various other places.
@@ -52,12 +54,17 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
 
   if ($breakpoints_module == TRUE) {
-    // Get breakpoint groups.
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
+
+    // Unset core breakpoint groups due to notices and other issues, until this is resolved:
+    // SEE: https://www.drupal.org/node/2379283
+    unset($breakpoint_groups['toolbar']);
+    unset($breakpoint_groups['seven']);
+    unset($breakpoint_groups['bartik']);
 
     // Set breakpoint options, we use these in layout and other extensions like Responsive menus.
     foreach ($breakpoint_groups as $group_key => $group_values) {
-      $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_values);
+      $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
     }
 
     foreach($breakpoints as $group => $breakpoint_values)  {
@@ -87,7 +94,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Attached required CSS and JS libraries and files.
   $form['#attached'] = array(
     'css' => array(
-      $at_core_path . '/stylesheets/css/appearance.css',
+      $at_core_path . '/styles/css/appearance.css',
     ),
     'js' => array(
       $at_core_path . '/scripts/appearance.js',
@@ -111,7 +118,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // AT Subtheme
   if (isset($getThemeInfo['subtheme type'])) {
 
-    if ($getThemeInfo['subtheme type'] !== 'at_generator') {
+    if ($getThemeInfo['subtheme type'] !== 'adaptive_generator') {
 
       // Pass in the generated files path to values and settings.
       $form['at']['settings_generated_files_path'] = array(
@@ -130,7 +137,6 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
         '#type' => 'details',
         '#title' => 'Basic Settings',
         '#open' => FALSE,
-        //'#weight' => 100,
       );
 
       $form['theme_settings']['#open'] = FALSE;
@@ -161,12 +167,10 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 // Helper function to modify the color scheme form.
 function at_core_make_collapsible($form) {
   $form['color']['#open'] = FALSE;
-
   $form['color']['actions'] = array(
     '#type' => 'actions',
     '#attributes' => array('class' => array('submit--color-scheme')),
   );
-
   $form['color']['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save color scheme'),

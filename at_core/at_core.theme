@@ -26,15 +26,12 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Add content type suggestions. array_splice should be safe here because
-  // page__node is always a suggestion for node pages, aka there is always one
-  // default suggestion.
+  // Add content type suggestions.
   if ($node = \Drupal::request()->attributes->get('node')) {
     array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
   }
 
-  // Show template suggestions if Devel is installed and the user enables the
-  // setting to show page template suggestions.
+  // Show template suggestions.
   if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
     if ($suggestions) {
       foreach ($suggestions as $suggestion_name) {
@@ -104,7 +101,6 @@ function at_core_preprocess_page(&$variables) {
 
   // Commonly used paths, just set these all up now.
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
-
   $path_to_at_core = drupal_get_path('theme', 'at_core');
 
   if (!empty($config['generated_files_path'])) {
@@ -151,7 +147,7 @@ function at_core_preprocess_page(&$variables) {
   // Attach devel_layout CSS file.
   if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
     $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/stylesheets/css/devel-layout.css',
+      'data' => $path_to_at_core . '/styles/css/devel-layout.css',
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_COMPONENT,
     );
@@ -160,7 +156,7 @@ function at_core_preprocess_page(&$variables) {
   // Attach devel_colorize-regions CSS file.
   if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
     $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/stylesheets/css/devel-colorize-regions.css',
+      'data' => $path_to_at_core . '/styles/css/devel-colorize-regions.css',
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_COMPONENT,
     );
@@ -169,7 +165,7 @@ function at_core_preprocess_page(&$variables) {
   // Attach nuke_toolbar CSS file.
   if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
     $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/stylesheets/css/nuetralize-toolbar.css',
+      'data' => $path_to_at_core . '/styles/css/nuetralize-toolbar.css',
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_COMPONENT,
     );
@@ -189,54 +185,49 @@ function at_core_preprocess_page(&$variables) {
 
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+      $drupalSettings = array();
 
-      // If both styles are set to --none-- do nothing.
-      //if ($config['responsive_menu_default_style'] !== 'none' xor $config['responsive_menu_responsive_style'] !== 'none') {
+      // Region
+      if (isset($config['responsive_menu_region'])) {
+        $drupalSettings['responsive_menus']['region'] = 'region__' . str_replace('_', '-', $config['responsive_menu_region']);
+      }
 
-        $drupalSettings = array();
+      // Breakpoint
+      if (isset($config['responsive_menu_responsive_breakpoint'])) {
+        $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
+      }
 
-        // Region
-        if (isset($config['responsive_menu_region'])) {
-          $drupalSettings['responsive_menus']['region'] = 'region__' . str_replace('_', '-', $config['responsive_menu_region']);
-        }
+      // Loop the config settings and build an array for drupalSettings.
+      foreach (array('default', 'responsive') as $style) {
+        if (isset($config['responsive_menu_' . $style . '_style'])) {
 
-        // Breakpoint
-        if (isset($config['responsive_menu_responsive_breakpoint'])) {
-          $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
-        }
+          // Style
+          $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
 
-        // Loop the config settings and build an array for drupalSettings.
-        foreach (array('default', 'responsive') as $style) {
-          if (isset($config['responsive_menu_' . $style . '_style'])) {
+          // If Off Canvas
+          if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
+            $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
+          }
 
-            // Style
-            $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
-
-            // If Off Canvas
-            if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
-              $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
-            }
-
-            // If Tiles
-            if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
-              $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
-              if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
-                $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
-              }
+          // If Tiles
+          if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
+            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
+            if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
+              $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
             }
           }
         }
-
-        // Attach JS settings.
-        $variables['#attached']['js'][] = array(
-          'data' => array($theme => $drupalSettings),
-          'type' => 'setting',
-        );
-
-        // Load the responsive menus libarary.
-        $variables['#attached']['library'][] = 'at_core/at.responsivemenus';
       }
-    //}
+
+      // Attach JS settings.
+      $variables['#attached']['js'][] = array(
+        'data' => array($theme => $drupalSettings),
+        'type' => 'setting',
+      );
+
+      // Load the responsive menus libarary.
+      $variables['#attached']['library'][] = 'at_core/at.responsivemenus';
+    }
 
     // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
     if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
@@ -325,11 +316,11 @@ function at_core_preprocess_page(&$variables) {
     }
 
     // Load Generated Styles.
-    $load_failure = FALSE;
+    $load_failure = array();
+    $load_failure['fail'] = FALSE;
 
     // Fonts.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
-
       $fonts_file = $generated_files_path . '/' . $theme . '--fonts.css';
       if (file_exists($fonts_file)) {
         $variables['#attached']['css'][$fonts_file] = array(
@@ -340,7 +331,8 @@ function at_core_preprocess_page(&$variables) {
         );
       }
       else {
-        $load_failure[] = TRUE;
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $fonts_file;
       }
 
       // Google font.
@@ -376,7 +368,8 @@ function at_core_preprocess_page(&$variables) {
         );
       }
       else {
-        $load_failure[] = TRUE;
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $titles_file;
       }
     }
 
@@ -392,7 +385,8 @@ function at_core_preprocess_page(&$variables) {
         );
       }
       else {
-        $load_failure[] = TRUE;
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $images_file;
       }
     }
 
@@ -408,7 +402,8 @@ function at_core_preprocess_page(&$variables) {
         );
       }
       else {
-        $load_failure[] = TRUE;
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $custom_css_file;
       }
     }
 
@@ -440,7 +435,8 @@ function at_core_preprocess_page(&$variables) {
           );
         }
         else {
-          $load_failure[] = TRUE;
+          $load_failure['fail'] = TRUE;
+          $load_failure['files'][] = $breadcrumb_file;
         }
       }
 
@@ -457,7 +453,8 @@ function at_core_preprocess_page(&$variables) {
             );
           }
           else {
-            $load_failure[] = TRUE;
+            $load_failure['fail'] = TRUE;
+            $load_failure['files'][] = $login_block_file;
           }
         }
       }
@@ -468,38 +465,41 @@ function at_core_preprocess_page(&$variables) {
       }
     }
 
-    if ($load_failure == TRUE) {
-      drupal_set_message(t('Generated CSS files not found, try saving your themes Appearance settings.'), 'error');
+    // Print a message if required files do not exist.
+    if ($load_failure['fail'] == TRUE) {
+      $item_list = array(
+        '#theme' => 'item_list',
+        '#items' => $load_failure['files'],
+      );
+      $failed_files_list = drupal_render($item_list);
+      drupal_set_message(t('<p>One or more generated CSS files not found:</p> !failuers <p>Go to this themes Appearance settings and click <em>Save extension settings</em> to generate new files.</p>', array('!failuers' => $failed_files_list)), 'error');
     }
   }
 
-  // Process the layout.
+  // Layout
+  // This determines the page suggestion for the current page and checks if there is an
+  // existing config key for that suggestion, if so assume a css file exists and try to
+  // load it.
   if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
 
-    // Get theme registry, we need to determine the template suggestion for the current page
+    // Get theme registry.
     $theme_registry = \Drupal::service('theme.registry')->getRuntime();
 
-    // Get the current path, we need this for theme_get_suggestions()
-    //$path_args = explode('/', current_path());
-
+    // Is this the front page or?
     if (\Drupal::service('path.matcher')->isFrontPage()) {
       $page_args = [''];
     }
     else {
       $page_args = explode('/', Url::fromRoute('<current>')->getInternalPath());
     }
-    // Push in node type as an arg, which it never is, but we need this to check if a suggestion exists
-    // since AT adds this suggestion in hook_theme_suggestions_hook_alter() so users might use it.
+
+    // Add node type suggestion
     if (isset($variables['node'])) {
       $page_args[] = $variables['node']->getType();
     }
 
-    //$test_args = system_theme_suggestions_page($variables);
-    //kpr($config['suggestions']);
-    //$module_handler = \Drupal::moduleHandler();
-    //$invoke_all_suggestions = $module_handler->invokeAll('theme_suggestions_page', array($variables));
-    //kpr($invoke_all_suggestions);
-
+    // Get page suggestions, loop, check for a config key, then break
+    // if/when we have a match.
     if ($suggestions = theme_get_suggestions($page_args, 'page', '__')) {
       foreach ($suggestions as $suggestion) {
         if (isset($config['suggestions'][$suggestion])) {
@@ -507,12 +507,14 @@ function at_core_preprocess_page(&$variables) {
           $suggestions_layout = str_replace('_', '-', $suggestions_layout);
         }
         if ($theme_registry->has($suggestion)) {
-
           break;
         }
       }
     }
 
+    // Check if a file exists for this suggestion and build a path.
+    // If there is not suggestion layout for this suggestion load
+    // the default page suggestion layout.
     if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '--layout__'  . $suggestions_layout . '.css')) {
       $layout = $generated_files_path . '/' . $theme . '--layout__'  . $suggestions_layout . '.css';
     }
@@ -520,7 +522,7 @@ function at_core_preprocess_page(&$variables) {
       $layout = $generated_files_path . '/' . $theme . '--layout__page.css';
     }
 
-    // Main CSS layout file
+    // Attach the layout.
     $variables['#attached']['css'][$layout] = array(
       'type' => 'file',
       'data' => $layout,
@@ -530,33 +532,45 @@ function at_core_preprocess_page(&$variables) {
     );
   }
 
-  // Layouts attributes
+  // Layout Attributes
+  // Add dynamic classes to each region wrapper (.regions).
+  // This adds two classes to every wrapper:
+  //  - "arc--[n]" describes the number of active regions in this row, e.g. "arc-2".
+  //  - "hr--[n-n etc]" describes the active regions by source order, so if there are
+  //    3 regions and the first and third regions are active the class is "hr--1-3".
   $regions = system_region_list($theme, REGIONS_VISIBLE);
   $active_regions = array();
 
+  // This is bad, Drupal can populate the region but not print anything, perhaps
+  // due to user permissions, such as the Tools and Search blocks on a standard install.
+  // In effect this breaks the layout, or at the very least disturbs the layout by giving
+  // false positives, which results in the wrong layout classes being generated.
+  // This is a critical issue in D8 (and D7 also): https://www.drupal.org/node/953034
   foreach ($regions as $region_name => $region_label) {
     if (!empty($variables['page'][$region_name])) {
-      $active_regions[] = $region_name;
+      // Call drupal_render() to determine the regions visibility.
+      if ($region = drupal_render($variables['page'][$region_name])) {
+        $active_regions[] = $region_name;
+      }
     }
   }
 
   if (!empty($active_regions)) {
     $variables['attributes']['class'][] = 'page-root';
 
+    // This is where the heavy lifting takes place.
     $layout_loaded = new LayoutLoad($theme, $active_regions);
     $row_attributes = $layout_loaded->rowAttributes();
 
     // Check if we have attributes to avoid a fatal error.
     if (empty($row_attributes)) {
-      drupal_set_message(t('Bummer, something went wrong. Check the themes Appearance settings, maybe the layout is borked or has been disabled?'), 'error');
+      drupal_set_message(t('Bummer, something went wrong. Check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
     }
     else {
       $variables += $row_attributes;
     }
   }
 }
-
-
 
 /**
  * Preprocess variables for region templates.
@@ -592,6 +606,8 @@ function at_core_preprocess_node(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
+
+  //kpr($variables);
 
   // Classitis classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -789,11 +805,9 @@ function at_core_preprocess_field(&$variables) {
         // Captions.
         if (isset($config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode]) && $config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode] === 1) {
           foreach ($variables['items'] as $delta => $item) {
-
             $values = $item['content']['#item']->getValue();
 
             if (!empty($values['title'])) {
-
               $variables['items'][$delta]['caption'] = array(
                 'show' => TRUE,
                 'title' => $values['title'],
@@ -823,11 +837,8 @@ function at_core_preprocess_field(&$variables) {
           $variables['attributes']['class'][] = 'field-align--' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
         }
 
+        // This is quite aggressive and it may be better to let the site fail?
         foreach ($variables['items'] as $delta => $item) {
-          // If the image style is not set, set a class, this can mess with our floats.
-
-          //kpr($item);
-
           if (empty($item['content']['#image_style'])) {
             $variables['attributes']['class'][] = 'float-none';
           }
@@ -835,11 +846,6 @@ function at_core_preprocess_field(&$variables) {
       }
     }
   }
-  // This might be breaking the attributes system, need to reasses how we are modifying these classes.
-  // TODO: review all field classes in templates.
-  //$variables['attributes']['class'] = str_replace('field-name-', 'field-name--', $variables['attributes']['class']);
-  //$variables['attributes']['class'] = str_replace('field-type-', 'field-type--', $variables['attributes']['class']);
-  //$variables['attributes']['class'] = str_replace('field-label-', 'field-label--', $variables['attributes']['class']);
 }
 
 
@@ -856,8 +862,6 @@ function at_core_preprocess_breadcrumb(&$variables) {
 
   // Set attributes.
   $variables['breadcrumb_title_hidden'] = TRUE;
-
-  //kpr($variables);
 
   // Theme settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -915,6 +919,5 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
 
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
-//function at_core_user_view_alter(&$build, \Drupal\user\UserInterface $account, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {}
 //function at_core_preprocess_views_view(&$variables) {}
 //function at_core_preprocess_user(&$variables) {}

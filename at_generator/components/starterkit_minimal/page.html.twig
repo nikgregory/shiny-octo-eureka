@@ -1,0 +1,56 @@
+{#
+/**
+ * Minimal sub-theme type default template.
+ */
+#}
+<div{{ attributes }}>
+  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}
+  {{ messages }}
+  {% if messages__regions.active == true %}
+  <div class="page-row__messages">
+    <div{{ messages__attributes }}>
+      {{ page.messages }}
+    </div>
+  </div>
+  {% endif %}
+  {% if header__regions.active == true %}
+  <header class="page-row__header">
+    <div{{ header__attributes }}>
+      {{ page.header_first }}
+      {{ page.header_second }}
+    </div>
+  </header>
+  {% endif %}
+  {% if navbar__regions.active == true %}
+  <div class="page-row__navbar">
+    <div{{ navbar__attributes }}>
+      {{ page.navbar }}
+    </div>
+  </div>
+  {% endif %}
+  {% if highlighted__regions.active == true %}
+  <div class="page-row__highlighted">
+    <div{{ highlighted__attributes }}>
+      {{ page.highlighted }}
+    </div>
+  </div>
+  {% endif %}
+  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}
+  {% if main__regions.active == true %}
+  <div class="page-row__main">
+    <div{{ main__attributes }}>
+      {{ page.content }}
+      {{ page.sidebar_first }}
+      {{ page.sidebar_second }}
+    </div>
+  </div>
+  {% endif %}
+  {% if footer__regions.active == true %}
+  <footer class="page-row__footer">
+    <div{{ footer__attributes }}>
+      {{ page.footer }}
+    </div>
+  </footer>
+  {% endif %}
+  {{ attribution }}
+</div>

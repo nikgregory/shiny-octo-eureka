@@ -32,12 +32,11 @@
  */
 #}
 <div{{ attributes }}>
-
   {% for delta, item in items %}
     {% if item.caption.show == true %}
-      <figure{{ item.attributes.addClass.addClass('image-count-' ~ (delta + 1)) }} role="group" style="max-width:{{ item.caption.width }}">
+      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1)) }} role="group" style="max-width:{{ item.caption.width }}">
     {% else %}
-      <figure{{ item.attributes.addClass.addClass('image-count-' ~ (delta + 1)) }} role="group">
+      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1)) }}>
     {% endif %}
       {{ item.content }}
       {% if item.caption.show == true %}
@@ -45,5 +44,4 @@
       {% endif %}
     </figure>
   {% endfor %}
-
 </div>

@@ -135,82 +135,87 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
     );
   }
 
-  foreach ($layout_breakpoints as $layout_breakpoint_id => $layout_breakpoint_value) {
+  if (!empty($layout_breakpoints)) {
+    foreach ($layout_breakpoints as $layout_breakpoint_id => $layout_breakpoint_value) {
 
-    $breakpoint_layout_label = $layout_breakpoint_value->getLabel();
-    $breakpoint_layout_mediaquery = $layout_breakpoint_value->getMediaQuery();
+      $breakpoint_layout_label = $layout_breakpoint_value->getLabel();
+      $breakpoint_layout_mediaquery = $layout_breakpoint_value->getMediaQuery();
 
-    $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label] = array(
-      '#type' => 'details',
-      '#title' => t($breakpoint_layout_label . ' <small>' . $breakpoint_layout_mediaquery . '</small>'),
-      '#attributes' => array('class' => array('clearfix')),
-    );
+      $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label] = array(
+        '#type' => 'details',
+        '#title' => t($breakpoint_layout_label . ' <small>' . $breakpoint_layout_mediaquery . '</small>'),
+        '#attributes' => array('class' => array('clearfix')),
+      );
 
-    foreach ($layout_config['rows'] as $row_key => $row_values) {
+      if (!empty($layout_config['rows'])) {
+        foreach ($layout_config['rows'] as $row_key => $row_values) {
 
-      // CSS files
-      $reg_count[$row_key] = count($row_values['regions']);
+          // CSS files
+          $reg_count[$row_key] = count($row_values['regions']);
 
-      foreach ($css_config['css'] as $css_key => $css_values) {
-        if ($css_values['regions'] == $reg_count[$row_key]) {
-          foreach ($css_values['files'] as $css_file) {
-            $css_options[$row_key][$css_file] = $css_file; // convert to associative array, we need the key
+          foreach ($css_config['css'] as $css_key => $css_values) {
+            if ($css_values['regions'] == $reg_count[$row_key]) {
+              foreach ($css_values['files'] as $css_file) {
+                $css_options[$row_key][$css_file] = $css_file; // convert to associative array, we need the key
+              }
+            }
+          }
+
+          // Only print rows that have more than 1 region.
+          if ($reg_count[$row_key] >= 1) {
+
+            // Build markup for the visual display thingee.
+            $regions_markup = array();
+            $markup[$row_key] = '';
+            $reg_num = 1;
+
+            if ($reg_count[$row_key] > 1) {
+              for ($i=0; $i<$reg_count[$row_key]; $i++) {
+                $regions_markup[$row_key][] = '<div class="region"><span>R' . $reg_num++ . '</span></div>';
+              }
+              $markup[$row_key] = implode('', $regions_markup[$row_key]);
+            }
+            else {
+              $markup[$row_key] = '<div class="region"><span>R1</span></div>';
+            }
+
+            // Try to inherit the default page layout, by default.
+            if (NULL !== theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key)) {
+              $row_default_value = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key);
+            }
+            else {
+              $row_default_value = theme_get_setting('settings.page_' . $breakpoint_layout_label . '_' . $row_key);
+            }
+
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key] = array(
+              '#type' => t('fieldset'),
+              '#title' => t($row_key),
+            );
+
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key] = array(
+              '#type' => t('select'),
+              '#empty_option' => '--none--',
+              '#title' => t(ucfirst($row_key)),
+              '#options' => $css_options[$row_key],
+              '#default_value' => $row_default_value,
+            );
+
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'] = array(
+              '#type' => t('container'),
+              '#attributes' => array('class' => array('css-layout-options', 'layouts-column-onequarter', 'pull-right')),
+            );
+
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_label . '-' . $row_key . '-row_region_markup'] = array(
+              '#type' => t('container'),
+              '#markup' => '<div class="regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
+              '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),
+            );
           }
         }
-      }
-
-      // Only print rows that have more than 1 region.
-      if ($reg_count[$row_key] >= 1) {
-
-        // Build markup for the visual display thingee.
-        $regions_markup = array();
-        $markup[$row_key] = '';
-        $reg_num = 1;
-
-        if ($reg_count[$row_key] > 1) {
-          for ($i=0; $i<$reg_count[$row_key]; $i++) {
-            $regions_markup[$row_key][] = '<div class="region"><span>R' . $reg_num++ . '</span></div>';
-          }
-          $markup[$row_key] = implode('', $regions_markup[$row_key]);
-        }
-        else {
-          $markup[$row_key] = '<div class="region"><span>R1</span></div>';
-        }
-
-        // Try to inherit the default page layout, by default.
-        if (NULL !== theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key)) {
-          $row_default_value = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key);
-        }
-        else {
-          $row_default_value = theme_get_setting('settings.page_' . $breakpoint_layout_label . '_' . $row_key);
-        }
-
-        $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key] = array(
-          '#type' => t('fieldset'),
-          '#title' => t($row_key),
-        );
-
-        $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key] = array(
-          '#type' => t('select'),
-          '#empty_option' => '--none--',
-          '#title' => t(ucfirst($row_key)),
-          '#options' => $css_options[$row_key],
-          '#default_value' => $row_default_value,
-        );
-
-        $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'] = array(
-          '#type' => t('container'),
-          '#attributes' => array('class' => array('css-layout-options', 'layouts-column-onequarter', 'pull-right')),
-        );
-
-        $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_label . '-' . $row_key . '-row_region_markup'] = array(
-          '#type' => t('container'),
-          '#markup' => '<div class="regions"><div class="active-region-count--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
-          '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),
-        );
       }
     }
   }
+
 }
 
 // Suggestions container.
@@ -418,4 +423,3 @@ if (!empty($manage_suggestions_data)) {
 // Layout submit handlers.
 //include_once(drupal_get_path('theme', 'at_core') . '/forms/layout/layouts_validate.php');
 include_once(drupal_get_path('theme', 'at_core') . '/forms/layout/layouts_submit.php');
-

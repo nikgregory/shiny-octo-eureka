@@ -45,7 +45,13 @@ class LayoutCompatible implements LayoutCompatibleInterface {
       // This is critical to restrict the theme to use only the layout specified in the info file,
       // because there can be many layouts sprinkled throughout the base_theme tree, but not
       // all might be compatible and a theme can only use ONE layout at a time.
-      $compatible_layout = $info_layout['layout'];
+      if (!empty($info_layout['layout'])) {
+        $compatible_layout = $info_layout['layout'];
+      }
+      else {
+        drupal_set_message('"layout" not delcared in info file. Adaptivetheme requires a compatible layout to be declared in your theme info file e.g. "layout: site-builder". Add the declaration, clear the cache and try again.');
+      }
+
 
       // Push the current theme into the array - if it has a layout we will use it.
       $providers[$this->theme_name] = $this->theme_name;

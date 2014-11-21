@@ -1,0 +1,129 @@
+/**
+ * Messages
+ *  - style system messages such as status, warning and error.
+ ========================================================================== */
+
+.messages {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  @include output-rhythm(padding, $medium);
+  @include border-radius();
+
+  &+ .messages {
+    margin-top: $large;
+    @include margin-leader(1, $medium);
+  }
+
+  .container {
+    @include box-sizing(border-box);
+  }
+}
+
+.messages__list {
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+
+  &+ .messages__item {
+    @include margin-leader(1, $medium);
+  }
+
+  .item-list ul {
+    @include output-rhythm(margin, $large $xx-large);
+
+    li {
+      list-style: square;
+    }
+  }
+}
+
+
+/* Success (status) */
+.messages--status,
+table tr.ok {
+  background-color: $success-background-color;
+}
+
+.messages--status,
+.ok {
+  color: $success-text-color;
+}
+
+.messages--status {
+  background-image: none;
+}
+
+
+/* Warning */
+.messages--warning,
+table tr.warning {
+  background-color: $warning-background-color;
+}
+
+.messages--warning,
+.warning {
+  color: $warning-text-color;
+}
+
+.messages--warning {
+  background-image: none;
+}
+
+
+
+/* Error */
+.messages--error,
+table tr.error {
+  background-color: $error-background-color;
+}
+
+.messages--error,
+.error {
+  color: $error-text-color;
+}
+
+.messages--error {
+  background-image: none;
+}
+
+
+/* RTL */
+[dir="rtl"] .messages {
+  text-align: right;
+}
+
+
+/* Message icons */
+.messages .icon:before {
+  font-family: FontAwesome, sans-serif;
+  float: left;
+  vertical-align: top;
+  @include output-rhythm(padding, 0 $small 0 0); // LTR
+}
+
+[dir="rtl"] .messages .icon:before {
+  @include output-rhythm(padding, 0 0 0 $small);
+  float: right;
+}
+
+.icon-status:before {
+  content: $messages-icon-status;
+}
+
+.icon-warning:before {
+  content: $messages-icon-warning ;
+}
+
+.icon-error:before {
+  content: $messages-icon-error;
+}
+
+
+// Devel query messages
+.dev-query {color: #fff;}
+
+
+
+
+

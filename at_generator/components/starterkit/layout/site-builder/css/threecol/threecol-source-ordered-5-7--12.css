@@ -1,0 +1,8 @@
+.regions { max-width: 75em; margin-left: auto; margin-right: auto; }
+.regions:after { content: " "; display: block; clear: both; }
+
+.threecol-source-ordered-5-7--12 .hr--1-2 .region:first-child { margin-left: 42.37288%; width: 57.62712%; float: left; margin-right: 1.69492%; }
+.threecol-source-ordered-5-7--12 .hr--1-2 .region:last-child { margin-left: -101.69492%; width: 40.67797%; float: left; margin-right: 1.69492%; }
+.threecol-source-ordered-5-7--12 .arc--3 .region:first-child { width: 57.62712%; float: left; margin-right: 1.69492%; margin-left: 42.37288%; }
+.threecol-source-ordered-5-7--12 .arc--3 .region:nth-child(2) { width: 40.67797%; float: left; margin-right: 1.69492%; margin-left: -101.69492%; }
+.threecol-source-ordered-5-7--12 .arc--3 .region:last-child { clear: both; }

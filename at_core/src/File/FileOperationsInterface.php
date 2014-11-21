@@ -8,9 +8,9 @@ interface FileOperationsInterface {
   /**
    * Rename old file to new file.
    *
-   * @param $old_file
+   * @param string $old_file
    *   Source file to be renamed.
-   * @param $new_file
+   * @param string $new_file
    *   The new file name.
    */
   public function fileRename($old_file, $new_file);
@@ -30,7 +30,7 @@ interface FileOperationsInterface {
   /**
    * Copy and rename a file.
    *
-   * @param $file_paths
+   * @param array $file_paths
    *   Associative array:
    *    - copy_source => "path to the source file"
    *    - copy_dest => "the destination path"
@@ -38,6 +38,16 @@ interface FileOperationsInterface {
    *    - rename_newname => "the new file name"
    */
   public function fileCopyRename($file_paths);
+
+  /**
+   * Replace old file content with new content.
+   *
+   * @param string $file_path
+   *   Path to file to be replaced.
+   * @param string $data
+   *   Content to replace old file contents.
+   */
+  public function fileReplace($data, $file_path);
 
   /**
    * Generate an .info.yml file that can be parsed by drupal_parse_info_file().

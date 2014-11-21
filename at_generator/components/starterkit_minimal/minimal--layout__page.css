@@ -1,0 +1,26 @@
+.regions { max-width: 75em; margin-left: auto; margin-right: auto; }
+.regions:after { content: " "; display: block; clear: both; }
+
+@media all and (min-width: 45em) and (max-width: 65em) {
+.page-row__header .arc--2 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.page-row__header .arc--2 .region:last-child { float: right; margin-right: 0; }
+.page-row__main .hr--2-3 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.page-row__main .hr--2-3 .region:last-child { float: right; margin-right: 0; }
+.page-row__main .arc--3 .region:nth-child(2) { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.page-row__main .arc--3 .region:last-child { width: 49.15254%; float: right; margin-right: 0; }
+
+}
+@media all and (min-width: 65em) {
+.page-row__header .arc--2 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.page-row__header .arc--2 .region:last-child { float: right; margin-right: 0; }
+.page-row__main .hr--1-2 .region:first-child { margin-left: 33.89831%; width: 66.10169%; float: left; margin-right: 1.69492%; }
+.page-row__main .hr--1-2 .region:last-child { margin-left: -101.69492%; width: 32.20339%; float: left; margin-right: 1.69492%; }
+.page-row__main .hr--1-3 .region:first-child { width: 66.10169%; float: left; margin-right: 1.69492%; }
+.page-row__main .hr--1-3 .region:last-child { width: 32.20339%; float: right; margin-right: 0; }
+.page-row__main .hr--2-3 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.page-row__main .hr--2-3 .region:last-child { float: right; margin-right: 0; }
+.page-row__main .arc--3 .region:first-child { width: 49.15254%; float: left; margin-right: 1.69492%; margin-left: 25.42373%; }
+.page-row__main .arc--3 .region:nth-child(2) { width: 23.72881%; float: left; margin-right: 1.69492%; margin-left: -76.27119%; }
+.page-row__main .arc--3 .region:last-child { width: 23.72881%; float: right; margin-right: 0; }
+
+}

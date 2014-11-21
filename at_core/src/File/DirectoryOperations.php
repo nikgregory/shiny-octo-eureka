@@ -59,4 +59,37 @@ class DirectoryOperations implements DirectoryOperationsInterface {
     return rmdir($directory);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function directoryScan($path) {
+    $scan_directories = array();
+    if (file_exists($path)) {
+      $scan_directories = preg_grep('/^([^.])/', scandir($path));
+    }
+
+    return $scan_directories;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function directoryGlob($path, array $types) {
+    $scan_directories = self::directoryScan($path);
+    if (isset($scan_directories)) {
+      foreach ($scan_directories as $directory) {
+        $glob_path = $types . $directory;
+        if (is_dir($glob_path)) {
+          if (isset($types)) {
+            foreach ($types as $type) {
+              $files[$directory][$type] = array_filter(glob($glob_path . "/*.$type"), 'is_file');
+            }
+          }
+        }
+      }
+    }
+
+    return $files;
+  }
+
 }

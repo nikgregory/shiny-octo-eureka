@@ -1,0 +1,46 @@
+# Site Builder Layout Plugin.
+
+name: 'Site Builder Row Styles - Mininal' # Human readable layout name. Required.
+type: 'at_layout'                         # All layouts are type 'at_layout'. Required.
+version: '8.x-1.0-dev'                    # Version string. Optional.
+
+# Rows. Required!
+# Here we declare all rows and their regions. AT Core uses this to setup regions in the themes
+# info file, and to build the layout CSS classes. Here you must at least declare regions,
+# optionally you can add attributes (which are printed on the row HTML wrapper).
+rows:
+  messages:          # row key (name)
+    attributes:      # attributes key. Set id, role, classes etc. Optional.
+      id: messages
+    regions:         # use the key "regions" to declare row regions.
+      messages: 'Messages'
+  header:
+    attributes:
+      role: banner
+      id: masthead
+    regions:
+      header_first: 'Header first'
+      header_second: 'Header second'
+  navbar:
+    attributes:
+      id: navbar
+    regions:
+      navbar: 'Navbar'
+  highlighted:
+    attributes:
+      id: highlighted
+    regions:
+      highlighted: 'Highlighted'
+  main:
+    attributes:
+      id: main-content
+    regions:
+      content: 'Main content'
+      sidebar_first: 'Sidebar first'
+      sidebar_second: 'Sidebar second'
+  footer:
+    attributes:
+      role: contentinfo
+      id: footer
+    regions:
+      footer: 'Footer'

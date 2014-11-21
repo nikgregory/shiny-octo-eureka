@@ -1,0 +1,5 @@
+.fourcol-6-2-2-2 .arc--2 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.fourcol-6-2-2-2 .arc--3 .region { width: 32.20339%; float: left; margin-right: 1.69492%; }
+.fourcol-6-2-2-2 .arc--4 .region { width: 15.25424%; float: left; margin-right: 1.69492%; }
+.fourcol-6-2-2-2 .arc--4 .region:first-child { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.fourcol-6-2-2-2 .regions:not(.arc--1) .region:last-child { float: right; margin-right: 0; }

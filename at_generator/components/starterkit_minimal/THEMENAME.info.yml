@@ -1,0 +1,28 @@
+name: 'THEMENAME'
+type: theme
+base theme: at_core
+subtheme type: adaptive_subtheme
+layout: site-builder
+description: 'Minimal starter theme with a simple layout and no extra CSS or features. A clean slate for hard core theme developers.'
+core: 8.x
+hidden: true
+libraries:
+  - THEMENAME/base
+regions:
+  header_first: 'Header first'
+  header_second: 'Header second'
+  navbar: 'Nav bar'
+  messages: 'Messages'
+  highlighted: 'Highlighted'
+  content: 'Main content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+features:
+  - node_user_picture
+  - comment_user_picture
+  - comment_user_verification
+  - favicon
+  - logo

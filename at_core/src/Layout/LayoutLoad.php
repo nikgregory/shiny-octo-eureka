@@ -122,8 +122,8 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
           // If active regions set to true to print the row, basically a catch all condition.
           $variables[$row_region_key . '__regions']['active'] = TRUE;
 
-          // Region count class.
-          $variables[$row_region_key . '__attributes']['class'][] = 'active-region-count--'. $count;
+          // Region count class. "arc" is "active region count"
+          $variables[$row_region_key . '__attributes']['class'][] = 'arc--'. $count;
 
           // Active region classes.
           foreach ($row_region_values as $region_class) {
@@ -137,8 +137,9 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // rso, or "region source order" tells us which regions are actually printing based on the original source order, this
       // is a powerful class that will be used for any order columns type layout with minimal CSS and classes, think of this
       // like Drupals "two-sidebars" type class but automated for any row and any number of regions.
+      // The class hr is "has regions".
       if (isset($rso_count_class[$row_region_key])) {
-        $variables[$row_region_key . '__attributes']['class'][] =  'has-regions--' . implode('-', $rso_count_class[$row_region_key]);
+        $variables[$row_region_key . '__attributes']['class'][] =  'hr--' . implode('-', $rso_count_class[$row_region_key]);
       }
     }
 
@@ -146,4 +147,3 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
   }
 
 }
-

@@ -63,12 +63,11 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
       $output['figcaption_style'] = 'figcaption{margin-left:auto;margin-right:auto}';
     }
 
-    // Output data to file.
     $image_styles = implode("\n", $output);
-    if (!empty($image_styles)) {
-      $file_name = $theme . '--images.css';
-      $filepath = "$generated_files_path/$file_name";
-      file_unmanaged_save_data($image_styles, $filepath, FILE_EXISTS_REPLACE);
-    }
   }
+
+  $image_styles = $image_styles ? $image_styles : '/** No image styles set **/';
+  $file_name = $theme . '--images.css';
+  $filepath = "$generated_files_path/$file_name";
+  file_unmanaged_save_data($image_styles, $filepath, FILE_EXISTS_REPLACE);
 }

@@ -36,4 +36,19 @@ interface DirectoryOperationsInterface {
    */
   public function directoryRemove($directory);
 
+  /**
+   * Scan directorys.
+   *
+   * @return array
+   *   Directories below the path.
+   */
+  public function directoryScan($path);
+
+  /**
+   * Recursively glob files below the path
+   * of a specified type.
+   *
+   * @return array globbed files
+   */
+  public function directoryGlob($path, array $types);
 }

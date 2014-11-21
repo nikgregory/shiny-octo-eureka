@@ -26,7 +26,6 @@
  */
 #}
 <section{{ attributes }}>
-
   {% if comments.1 and not label_hidden %}
     {{ title_prefix }}
     <h2{{ title_attributes.addClass('comment-field__title').removeClass('title') }}>{{ label }}</h2>
@@ -41,5 +40,4 @@
       {{ comment_form }}
     </div>
   {% endif %}
-
 </section>

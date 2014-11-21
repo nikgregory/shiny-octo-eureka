@@ -8,9 +8,9 @@ $sourceThemeOptions = $themeSettingsInfo->baseThemeOptions();
 
 $form['generate'] = array(
   '#type' => 'details',
-  '#title' => 'Generate Themes',
-  '#group' => 'atsettings',
-  '#description' => t('Use this form to generate a new sub-theme. NOTE: The Minimal kit and the ability to clone is temporarily disabled - no biggie, these will be back soon!'),
+  '#title' => 'Generator',
+  '#group' => 'generator',
+  //'#description' => t('Use this form to generate a new sub-theme.'),
   '#tree' => TRUE,
 );
 
@@ -44,16 +44,16 @@ $form['generate']['generate_machine_name'] = array(
 );
 
 $generate_type_options = array(
-  'at_standard' => t('Standard kit'),
-  //'at_minimal' => t('Minimal kit'),
+  'standard' => t('Standard kit'),
+  'minimal' => t('Minimal kit'),
 );
 
 if (!empty($sourceThemeOptions)) {
   $generate_type_options = array(
-    'at_standard' => t('Standard kit'),
-    //'at_minimal' => t('Minimal kit'),
-    //'at_clone' => t('Clone'),
-    'at_skin' => t('Skin'),
+    'standard' => t('Standard kit'),
+    'minimal' => t('Minimal kit'),
+    'clone' => t('Clone'),
+    'skin' => t('Skin'),
   );
 }
 
@@ -66,19 +66,19 @@ $form['generate']['generate_type'] = array(
 
 $form['generate']['generate_type_description_standard_kit'] = array(
   '#type' => 'container',
-  '#markup' => t('Standard kit includes an advanced layout and is designed to fully support the UIKit.'),
+  '#markup' => t('Standard kit includes an advanced layout and is designed to fully support the UIKit and Color module (both optional).'),
   '#attributes' => array('class' => array('generate-type__description')),
   '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_standard')),
+    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'standard')),
   ),
 );
 
 $form['generate']['generate_type_description_minimal_kit'] = array(
   '#type' => 'container',
-  '#markup' => t('Minimal kit includes the Mimina layout plugin with 9 regions (similar to Stark), 1 layout variant, and is built with conventional CSS.'),
+  '#markup' => t('Minimal kit includes Drupal core regions only, no UIKit styles, no Color module option. This is a very basic "layout only" theme.'),
   '#attributes' => array('class' => array('generate-type__description')),
   '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_minimal')),
+    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'minimal')),
   ),
 );
 
@@ -87,9 +87,9 @@ $form['generate']['generate_clone_source'] = array(
   '#title' => t('Clone source'),
   '#options' => $sourceThemeOptions,
   '#default_value' => '',
-  '#description' => t('Clones are direct copies of existing sub-themes. You should use a unique name.'),
+  '#description' => t('Clones are direct copies of existing sub-themes. Use a unique name.'),
   '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_clone')),
+    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'clone')),
   ),
 );
 
@@ -100,29 +100,31 @@ $form['generate']['generate_skin_base'] = array(
   '#default_value' => '',
   '#description' => t('Skins are sub-sub-themes. Select an existing sub-theme to use as the base.'),
   '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_skin')),
+    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
   ),
 );
 
+/*
 $form['generate']['generate_skin_sass'] = array(
   '#type' => 'checkbox',
   '#title' => t('Include SASS partials'),
   '#default_value' => 0,
   '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'at_skin')),
+    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
   ),
 );
+*/
 
 // Options
 $form['generate']['options'] = array(
-  '#type' => 'details',
+  '#type' => 'fieldset',
   '#title' => t('Options'),
   '#states' => array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
-        array('value' => 'at_clone'),
+        array('value' => 'standard'),
+        array('value' => 'minimal'),
+        array('value' => 'clone'),
         array('value' => 'skin'),
       ),
     ),
@@ -138,8 +140,8 @@ $form['generate']['options']['generate_templates'] = array(
   '#states' => array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
+        array('value' => 'standard'),
+        array('value' => 'minimal'),
       ),
     ),
   ),
@@ -154,8 +156,8 @@ $form['generate']['options']['generate_uikit'] = array(
   '#states' => array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
+        array('value' => 'standard'),
+        //array('value' => 'minimal'),
       ),
     ),
   ),
@@ -173,8 +175,8 @@ $form['generate']['options']['generate_color'] = array(
     ),
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
+        array('value' => 'standard'),
+        //array('value' => 'minimal'),
       ),
     ),
   ),
@@ -183,14 +185,14 @@ $form['generate']['options']['generate_color'] = array(
 // themeName.theme file
 $form['generate']['options']['generate_themefile'] = array(
   '#type' => 'checkbox',
-  '#title' => t('.theme'),
+  '#title' => t('themename.theme'),
   '#default_value' => 0,
   '#description' => t('Include a [theme_name].theme file. Includes a subset of commonly used preprocess functions.'),
   '#states' => array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
+        array('value' => 'standard'),
+        array('value' => 'minimal'),
       ),
     ),
   ),
@@ -205,8 +207,8 @@ $form['generate']['options']['generate_themesettingsfile'] = array(
   '#states' => array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
-        array('value' => 'at_standard'),
-        array('value' => 'at_minimal'),
+        array('value' => 'standard'),
+        array('value' => 'minimal'),
       ),
     ),
   ),

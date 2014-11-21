@@ -34,11 +34,11 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
       'system' => 'core/drupal.machine-name',
     ),
     'css' => array(
-      $at_core_path . '/stylesheets/css/appearance.css',
+      $at_generator_path . '/styles/css/appearance--generator.css',
     ),
   );
 
-  $form['atsettings'] = array(
+  $form['generator'] = array(
     '#type' => 'vertical_tabs',
   );
 
