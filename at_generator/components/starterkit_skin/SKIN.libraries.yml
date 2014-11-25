@@ -1,0 +1,5 @@
+base:
+  version: 0.0.1
+  css:
+    component:
+      styles/css/components/theme.css: { every_page: true }

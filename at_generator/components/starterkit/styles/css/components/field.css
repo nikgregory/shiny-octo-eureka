@@ -1,0 +1,26 @@
+/**
+ * Fields
+ *  - Base styles for all fields.
+ ========================================================================== */
+.field .field__label {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+
+.field-label--inline .field__label {
+  margin: 0;
+  display: inline-block;
+  padding: 0 10px 0 0;
+  padding: 0 0.61803rem 0 0;
+}
+.field-label--inline .field__items {
+  display: inline-block;
+}
+[dir="rtl"] .field-label--inline .field__label, [dir="rtl"] .field-label--inline .field__items {
+  padding: 0 0 0 10px;
+  padding: 0 0 0 0.61803rem;
+}

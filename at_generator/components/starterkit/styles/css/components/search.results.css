@@ -1,0 +1,12 @@
+/**
+ * Search
+ *  - search block and form
+ *  - advanced search form
+ *  - search results pages
+ ========================================================================== */
+.search-results {
+  padding: 0;
+}
+.search-results p {
+  margin: 0;
+}

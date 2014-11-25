@@ -1,0 +1,25 @@
+@import "partials/base";
+
+/**
+ * Tabs (local tasks)
+ ========================================================================== */
+
+// Fix and repair when local tasks become a block.
+.page__temporary-tabs {
+
+  .regions {
+    padding: $small 0;
+  }
+
+  // Here we call mixins that automagically apply styles to list items.
+  @media #{$mobile-tablet} {
+    @include list-style-button-group-vertical('ul.tabs.primary');
+    @include list-style-seven-vertical('ul.tabs.secondary');
+  }
+
+  @media #{$widescreen} {
+    @include list-style-tab-group('ul.tabs.primary');
+    @include list-style-seven-horizontal('ul.tabs.secondary');
+  }
+}
+

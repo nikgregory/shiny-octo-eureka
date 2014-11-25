@@ -1,0 +1,64 @@
+/**
+ * Page
+ *  - mainly for markup that is printed directly in page.html.twig and
+ *    .region {}
+ ========================================================================== */
+html,
+body {
+  height: 100%;
+  background-color: #333333;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.page {
+  position: relative;
+}
+
+[class*="page__"] {
+  padding: 0 2vw;
+}
+
+.region {
+  padding: 9.88854px 0;
+  -moz-transition: all, 0.2s, ease-in;
+  -o-transition: all, 0.2s, ease-in;
+  -webkit-transition: all, 0.2s, ease-in;
+  transition: all, 0.2s, ease-in;
+}
+.region {
+  *zoom: 1;
+}
+.region:before, .region:after {
+  content: "";
+  display: table;
+}
+.region:after {
+  clear: both;
+}
+
+.region__page-top,
+.region__page-bottom {
+  padding: 0;
+  margin: 0;
+}
+
+.page__navbar .regions {
+  padding: 0;
+}
+
+.attribution {
+  font-size: 10px;
+  font-size: 0.61803rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  text-align: center;
+}

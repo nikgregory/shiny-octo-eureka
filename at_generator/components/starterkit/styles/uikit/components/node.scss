@@ -1,0 +1,78 @@
+@import "partials/base";
+
+/**
+ * Content Types (nodes)
+ *  - in Drupal a content type is a bunch of fields we use to enter and display
+ *    content, such as pages, blog posts, forum posts and so on. Each of those
+ *    is usually a content type you create in the Drupal admin.
+ *  - an instance of a content type (e.g. a single blog post) is called a node,
+ *    the root template is called node.html.twg and the base selector is .node {}
+ ========================================================================== */
+
+.node {
+  @include clearfix-micro;
+}
+
+
+// Content types
+.node--type-article {}
+.node--type-page {}
+.node--type-forum {}
+
+
+// States
+.node--promoted {}
+.node--sticky {}
+.node--unpublished {}
+
+
+// View modes
+.node--view-mode-full {
+  .node__title {
+    @include output-rhythm(margin, 0 0 $medium);
+  }
+}
+
+.node--view-mode-teaser {}
+
+
+// Header - includes title (h1 full, h2 teaser), user picture, author and date.
+.node__header
+.node__title {}
+
+
+// Author name and date details.
+.node__meta {
+  @include output-rhythm(margin, $medium 0);
+}
+
+.node__author {
+  display: inline;
+}
+
+.node__datetime {}
+
+.node__submitted {
+  // User picture.
+  .field-type--image {
+    img {}
+  }
+
+  // Conditional class: if user picture?
+  &.node__submitted--user-picture {}
+
+  // Remove potentially empty article element.
+  article:empty {
+    display: none;
+  }
+}
+
+
+// Footer wraps links.
+.node__footer {
+  @include clearfix-micro;
+  clear: both;
+
+  .links {}
+}
+

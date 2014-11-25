@@ -1,0 +1,465 @@
+@charset "UTF-8";
+/**
+ * Forms
+ *  - This probably seems like a lot - remember AT unsets system.theme.css and
+ *    gives you complete control over all form elements.
+ *
+ * Note:
+ *  - input type submit is treated as a 'button', see _buttons.scss
+ *  - for drop buttons see _buttons.scss
+ ========================================================================== */
+.form-item {
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+}
+
+.form-actions {
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+
+input {
+  min-width: 13px;
+}
+
+input,
+select,
+button,
+textarea {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+
+input:invalid,
+button:invalid,
+.button:invalid,
+select:invalid,
+textarea:invalid {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+input:focus,
+button:focus,
+.button:focus,
+select:focus,
+textarea:focus {
+  -moz-box-shadow: #06f 0 0 5px 0;
+  -webkit-box-shadow: #06f 0 0 5px 0;
+  box-shadow: #06f 0 0 5px 0;
+  z-index: 1;
+}
+
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  padding: 7px 10px;
+  padding: 0.43769rem 0.61803rem;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-transition: all, 0.15s, linear;
+  -o-transition: all, 0.15s, linear;
+  -webkit-transition: all, 0.15s, linear;
+  transition: all, 0.15s, linear;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+  max-width: 100%;
+  line-height: normal;
+  color: #505050;
+  border: 1px solid #E5E5E5;
+  background-color: #ffffff;
+}
+textarea:focus,
+select:focus,
+input[type="date"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="email"]:focus,
+input[type="month"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="text"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+input[type="week"]:focus {
+  outline: 0;
+  outline: thin dotted \9;
+  border-color: #E5E5E5;
+  color: #363636;
+}
+textarea:hover, textarea:focus,
+select:hover,
+select:focus,
+input[type="date"]:hover,
+input[type="date"]:focus,
+input[type="datetime"]:hover,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:hover,
+input[type="datetime-local"]:focus,
+input[type="email"]:hover,
+input[type="email"]:focus,
+input[type="month"]:hover,
+input[type="month"]:focus,
+input[type="number"]:hover,
+input[type="number"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input[type="search"]:hover,
+input[type="search"]:focus,
+input[type="tel"]:hover,
+input[type="tel"]:focus,
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="time"]:hover,
+input[type="time"]:focus,
+input[type="url"]:hover,
+input[type="url"]:focus,
+input[type="week"]:hover,
+input[type="week"]:focus {
+  background-color: #fbfbfb;
+}
+textarea[disabled],
+select[disabled],
+input[type="date"][disabled],
+input[type="datetime"][disabled],
+input[type="datetime-local"][disabled],
+input[type="email"][disabled],
+input[type="month"][disabled],
+input[type="number"][disabled],
+input[type="password"][disabled],
+input[type="search"][disabled],
+input[type="tel"][disabled],
+input[type="text"][disabled],
+input[type="time"][disabled],
+input[type="url"][disabled],
+input[type="week"][disabled] {
+  cursor: not-allowed;
+}
+textarea[disabled]:hover, textarea[disabled]:focus,
+select[disabled]:hover,
+select[disabled]:focus,
+input[type="date"][disabled]:hover,
+input[type="date"][disabled]:focus,
+input[type="datetime"][disabled]:hover,
+input[type="datetime"][disabled]:focus,
+input[type="datetime-local"][disabled]:hover,
+input[type="datetime-local"][disabled]:focus,
+input[type="email"][disabled]:hover,
+input[type="email"][disabled]:focus,
+input[type="month"][disabled]:hover,
+input[type="month"][disabled]:focus,
+input[type="number"][disabled]:hover,
+input[type="number"][disabled]:focus,
+input[type="password"][disabled]:hover,
+input[type="password"][disabled]:focus,
+input[type="search"][disabled]:hover,
+input[type="search"][disabled]:focus,
+input[type="tel"][disabled]:hover,
+input[type="tel"][disabled]:focus,
+input[type="text"][disabled]:hover,
+input[type="text"][disabled]:focus,
+input[type="time"][disabled]:hover,
+input[type="time"][disabled]:focus,
+input[type="url"][disabled]:hover,
+input[type="url"][disabled]:focus,
+input[type="week"][disabled]:hover,
+input[type="week"][disabled]:focus {
+  color: #363636;
+}
+
+button[disabled],
+input[disabled],
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled],
+a.button_disabled {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: 0.7;
+  user-select: none;
+  color: #888;
+  cursor: default;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  display: inline-block;
+  position: relative;
+  bottom: 1px;
+}
+
+.form-checkboxes,
+.form-radios {
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+}
+
+.form-type-radio,
+.form-type-checkbox {
+  margin: 0;
+}
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 2.4em;
+}
+
+.form-type-radios .container-inline label:after {
+  content: none;
+}
+.form-type-radios .container-inline .form-type-radio {
+  margin: 0 16px;
+  margin: 0 1rem;
+}
+
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  background: #eeeeee;
+  color: #363636;
+}
+
+textarea,
+select[size],
+select[multiple] {
+  height: auto;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #505050;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #505050;
+}
+
+input.placeholder_text,
+textarea.placeholder_text {
+  color: #505050;
+}
+
+label {
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  display: block;
+}
+label.option {
+  font-weight: normal;
+  display: inline;
+  padding: 0 3px;
+}
+
+fieldset,
+fieldset.form-item {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.filter-wrapper {
+  border-color: #E5E5E5;
+  border-style: solid;
+  border-width: 1px;
+  border-top: 0;
+}
+
+.tips {
+  font-size: 0.85em;
+  color: darkgray;
+}
+.tips li {
+  list-style: none;
+}
+
+.description {
+  color: darkgray;
+  font-size: 0.85em;
+}
+
+tr.odd .form-item,
+tr.even .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.form-composite > legend,
+h4.label {
+  font-size: inherit;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.marker {
+  color: #ee0000;
+}
+
+.form-required:after {
+  color: #ee0000;
+  /* Use a Unicode symbol to prevent screen readers from announcing the text. */
+  content: " \204E ";
+  line-height: 1;
+  vertical-align: super;
+}
+
+abbr.form-required, abbr.tabledrag-changed, abbr.ajax-changed {
+  border-bottom: none;
+}
+
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 2px solid red;
+}
+
+.container-inline {
+  display: inline-block;
+}
+.container-inline label:after {
+  content: ':';
+}
+.container-inline .form-actions, .container-inline.form-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+form .field-type-image .image-preview {
+  padding: 0;
+  background: transparent;
+  margin: 0 16px 16px 0;
+  margin: 0 1rem 1rem 0;
+}
+form .field-type-image .image-widget-data > div:first-child {
+  margin-top: 0;
+}
+[dir="rtl"] form .field-type-image .image-preview {
+  margin: 0 0 16px 16px;
+  margin: 0 0 1rem 1rem;
+}
+form .field-edit-link {
+  margin: 0 0.3em;
+}
+form .field-multiple-table {
+  margin: 0;
+}
+form .field-multiple-table .field-multiple-drag {
+  width: 30px;
+  padding-right: 0;
+}
+form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-right: .5em;
+}
+form .field-add-more-submit {
+  margin: .5em 0 0;
+}
+[dir="rtl"] form .field-multiple-table .field-multiple-drag {
+  padding-left: 0;
+}
+[dir="rtl"] form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-left: .5em;
+}
+
+/*
+ * Autocomplete.
+ *
+ * @see autocomplete.js
+ */
+/* Suggestion list */
+.ui-autocomplete li.ui-menu-item a.ui-state-focus,
+.autocomplete li.ui-menu-item a.ui-state-hover {
+  background: #0072b9;
+  color: #fff;
+  margin: 0;
+}
+
+/**
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @thanks http://nicolasgallagher.com/css-background-image-hacks/
+ */
+details {
+  border: 1px solid #E5E5E5;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+details > .details-wrapper {
+  margin: 16px;
+  margin: 1rem;
+}
+
+/* @todo Regression: The summary of uncollapsible details are no longer
+     vertically aligned with the .details-wrapper in browsers without native
+     details support. */
+summary {
+  cursor: pointer;
+  padding: 10px;
+  padding: 0.61803rem;
+}
+
+.collapse-processed > summary {
+  padding: 10px;
+  padding: 0.61803rem;
+}
+.collapse-processed > summary:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  float: left;
+  margin: -1px 0 0;
+  height: 16px;
+  height: 1rem;
+  width: 16px;
+  width: 1rem;
+}
+
+.collapse-processed:not([open]) > summary:before {
+  content: "";
+}
+
+[dir="rtl"] .collapse-processed > summary:before {
+  float: right;
+}
+[dir="rtl"] .collapse-processed:not([open]) > summary:before {
+  content: "";
+}
+
+.block-list-secondary {
+  border-bottom-width: 1px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 10px;
+  padding: 0 0.61803rem;
+}

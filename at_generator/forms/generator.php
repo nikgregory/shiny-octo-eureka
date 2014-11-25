@@ -45,13 +45,13 @@ $form['generate']['generate_machine_name'] = array(
 
 $generate_type_options = array(
   'standard' => t('Standard kit'),
-  'minimal' => t('Minimal kit'),
+  //'minimal' => t('Minimal kit'),
 );
 
 if (!empty($sourceThemeOptions)) {
   $generate_type_options = array(
     'standard' => t('Standard kit'),
-    'minimal' => t('Minimal kit'),
+    //'minimal' => t('Minimal kit'),
     'clone' => t('Clone'),
     'skin' => t('Skin'),
   );
@@ -73,6 +73,7 @@ $form['generate']['generate_type_description_standard_kit'] = array(
   ),
 );
 
+/*
 $form['generate']['generate_type_description_minimal_kit'] = array(
   '#type' => 'container',
   '#markup' => t('Minimal kit includes Drupal core regions only, no UIKit styles, no Color module option. This is a very basic "layout only" theme.'),
@@ -81,6 +82,7 @@ $form['generate']['generate_type_description_minimal_kit'] = array(
     'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'minimal')),
   ),
 );
+*/
 
 $form['generate']['generate_clone_source'] = array(
   '#type' => 'select',
@@ -123,7 +125,7 @@ $form['generate']['options'] = array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
         array('value' => 'standard'),
-        array('value' => 'minimal'),
+        //array('value' => 'minimal'),
         array('value' => 'clone'),
         array('value' => 'skin'),
       ),
@@ -141,7 +143,7 @@ $form['generate']['options']['generate_templates'] = array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
         array('value' => 'standard'),
-        array('value' => 'minimal'),
+        //array('value' => 'minimal'),
       ),
     ),
   ),
@@ -182,7 +184,9 @@ $form['generate']['options']['generate_color'] = array(
   ),
 );
 
+// This becomes mandatory with the new asset management system.
 // themeName.theme file
+/*
 $form['generate']['options']['generate_themefile'] = array(
   '#type' => 'checkbox',
   '#title' => t('themename.theme'),
@@ -197,6 +201,7 @@ $form['generate']['options']['generate_themefile'] = array(
     ),
   ),
 );
+*/
 
 // theme-settings.php file
 $form['generate']['options']['generate_themesettingsfile'] = array(
@@ -208,7 +213,7 @@ $form['generate']['options']['generate_themesettingsfile'] = array(
     'visible' => array(
       'select[name="generate[generate_type]"]' => array(
         array('value' => 'standard'),
-        array('value' => 'minimal'),
+        //array('value' => 'minimal'),
       ),
     ),
   ),

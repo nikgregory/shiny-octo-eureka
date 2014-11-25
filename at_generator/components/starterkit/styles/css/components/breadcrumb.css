@@ -1,0 +1,46 @@
+/**
+ * Breadcrumbs
+ ========================================================================== */
+.breadcrumb {
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+.breadcrumb__title {
+  font-size: inherit;
+}
+.breadcrumb__title,
+.breadcrumb ol,
+.breadcrumb li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li {
+  list-style: none;
+}
+.breadcrumb li li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.breadcrumb li:before {
+  font-family: FontAwesome, sans-serif;
+  content: "\f105";
+  color: #dcdcdc;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 16px;
+  width: 1rem;
+}
+.breadcrumb li:first-child:before {
+  content: none;
+}
+.breadcrumb a {
+  color: #0066cc;
+  text-decoration: none;
+}
+[dir="rtl"] .breadcrumb li:before {
+  content: "\f104";
+}

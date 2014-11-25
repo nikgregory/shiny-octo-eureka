@@ -7,21 +7,21 @@
   {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}
   {{ messages }}
   {% if messages__regions.active == true %}
-  <div class="page-row__messages">
+  <div class="page__messages">
     <div{{ messages__attributes }}>
       {{ page.messages }}
     </div>
   </div>
   {% endif %}
   {% if leaderboard__regions.active == true %}
-  <div class="page-row__leaderboard">
+  <div class="page__leaderboard">
     <div{{ leaderboard__attributes }}>
       {{ page.leaderboard }}
     </div>
   </div>
   {% endif %}
   {% if header__regions.active == true %}
-  <header class="page-row__header">
+  <header class="page__header">
     <div{{ header__attributes }}>
       {{ page.header_first }}
       {{ page.header_second }}
@@ -29,14 +29,14 @@
   </header>
   {% endif %}
   {% if navbar__regions.active == true %}
-  <div class="page-row__navbar">
+  <div class="page__navbar">
     <div{{ navbar__attributes }}>
       {{ page.navbar }}
     </div>
   </div>
   {% endif %}
   {% if features__regions.active == true %}
-  <div class="page-row__features">
+  <div class="page__features">
     <div{{ features__attributes }}>
       {{ page.features_first }}
       {{ page.features_second }}
@@ -44,9 +44,9 @@
     </div>
   </div>
   {% endif %}
-  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}
+  {% if tabs %}<div class="page__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}
   {% if main__regions.active == true %}
-  <div class="page-row__main">
+  <div class="page__main">
     <div{{ main__attributes }}>
       {{ page.content }}
       {{ page.sidebar_first }}
@@ -55,7 +55,7 @@
   </div>
   {% endif %}
   {% if subfeatures__regions.active == true %}
-  <div class="page-row__subfeatures">
+  <div class="page__subfeatures">
     <div{{ subfeatures__attributes }}>
       {{ page.subfeatures_first }}
       {{ page.subfeatures_second }}
@@ -64,7 +64,7 @@
   </div>
   {% endif %}
   {% if footercols__regions.active == true %}
-  <div class="page-row__footercols">
+  <div class="page__footercols">
     <div{{ footercols__attributes }}>
       {{ page.footercol_first }}
       {{ page.footercol_second }}
@@ -74,7 +74,7 @@
   </div>
   {% endif %}
   {% if footer__regions.active == true %}
-  <footer class="page-row__footer">
+  <footer class="page__footer">
     <div{{ footer__attributes }}>
       {{ page.footer }}
     </div>

@@ -1,8 +1,8 @@
 // basic mixins to help styling page elements such as rows, region etc.
 
 // Small mixin to help with page background colors.
-@mixin page-row-colors($background-color, $color, $page-row-backgrounds-full-width) {
-  @if $page-row-backgrounds-full-width {
+@mixin page-row-colors($background-color, $color, $page-row-fullwidth) {
+  @if $page-row-fullwidth {
     background-color: $background-color;
     color: $color;
 

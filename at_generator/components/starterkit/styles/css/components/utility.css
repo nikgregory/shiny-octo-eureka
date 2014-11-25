@@ -1,0 +1,20 @@
+/**
+ * Utility/Misc
+ * - misc utility classes that don't really fit anywhere else.
+ ========================================================================== */
+[class*="unpublished"] {
+  background-color: #fff4f4;
+}
+[class*="unpublished"] p.unpublished {
+  font-size: 48px;
+  font-size: 3rem;
+  line-height: 72px;
+  line-height: 4.5rem;
+  font-family: Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+  text-align: center;
+  color: #ffdbdb;
+}
+
+[class*="preview"] {
+  background-color: #ffffea;
+}

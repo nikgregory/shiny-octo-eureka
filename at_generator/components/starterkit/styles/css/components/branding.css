@@ -1,0 +1,15 @@
+/**
+ * Branding styles
+ *  - Drupal core branding block.
+ ========================================================================== */
+.site-branding-text a:hover, .site-branding-text a:focus {
+  text-decoration: none;
+}
+
+.site-name {
+  font-weight: 700;
+}
+
+.site-slogan {
+  margin: 0;
+}

@@ -1,6 +1,9 @@
 name: 'AT Core'
 type: theme
-description: 'Base theme for all AT sub-themes.'
+description: 'Base theme only - do not set to default. Use the AT Theme Generator to generate or clone a theme to get started.'
 core: 8.x
-hidden: true
+#hidden: true
 base theme: classy
+
+# decide if this should be hidden or not, being hidden we can never uninstall
+# which does not seem fair on end users.

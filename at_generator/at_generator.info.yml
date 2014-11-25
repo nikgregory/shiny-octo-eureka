@@ -1,6 +1,6 @@
 name: 'AT Theme Generator'
 type: theme
-description: 'Enable if you want to generate a new sub-theme or clone an existing AT sub-theme.'
+description: 'Tools for generating new sub-themes. Use this to create new themes, or clone and skin existing themes. Click "Settings" to use the generator. It is safe to uninstall this tool after you have generated your theme.'
 core: 8.x
 base theme: at_core
 subtheme type: adaptive_generator

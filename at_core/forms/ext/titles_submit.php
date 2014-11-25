@@ -63,7 +63,7 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
       // Output data to file.
       $titles_styles = implode("\n", $output);
       if (!empty($titles_styles)) {
-        $file_name = $theme . '--titles.css';
+        $file_name = $theme . '.titles.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($titles_styles, $filepath, FILE_EXISTS_REPLACE);
       }

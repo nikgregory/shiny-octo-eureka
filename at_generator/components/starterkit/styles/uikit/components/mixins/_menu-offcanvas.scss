@@ -24,8 +24,8 @@
       }
 
       .block-menu__content {
-        background-color: $page-background-color;
-        color: $page-root-background;
+        background-color: $body-background-color;
+        color: $page-background-color;
         position: absolute;
         top: 0;
         @include output-rhythm(padding, 0 0 $xx-small);
@@ -33,7 +33,7 @@
       }
     }
 
-    .page-root {
+    > .page {
       @include transition(all, .2s, ease-in-out);
     }
 
@@ -70,7 +70,7 @@
     }
 
     &.menu-expanded {
-      .page-root {
+      > .page {
         position: fixed;
 
         .block-menu__content {
@@ -85,13 +85,13 @@
     }
 
     // on left
-    &.menu-expanded.offcanvas-left .page-root {
+    &.menu-expanded.offcanvas-left > .page {
       @include transform(translate3d(15em, 0, 0));
       position: fixed;
     }
 
     // on right
-    &.menu-expanded.offcanvas-right .page-root {
+    &.menu-expanded.offcanvas-right > .page {
       @include transform(translate3d(-15em, 0, 0));
     }
   }

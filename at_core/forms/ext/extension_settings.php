@@ -92,12 +92,12 @@ $form['enable_extensions']['settings_enable_touch_icons'] = array(
   '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
 );
 
-// Classitis
-$form['enable_extensions']['settings_enable_classitis'] = array(
+// shortcodes
+$form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#type' => 'checkbox',
   '#title' => t('Add Classes'),
   '#description' => t('Enter classes for page rows, regions, blocks, and per node type.'),
-  '#default_value' => theme_get_setting('settings.enable_classitis', $theme),
+  '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
 // Custom CSS
@@ -145,7 +145,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'titles',
     'images',
     'touch_icons',
-    'classitis',
+    'shortcodes',
     'custom_css',
     'markup_overrides',
     'devel',

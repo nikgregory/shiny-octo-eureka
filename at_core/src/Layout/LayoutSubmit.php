@@ -74,7 +74,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
           foreach ($this->css_config['css'] as $css_key => $css_values) {
             if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css')) {
               $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css');
-              $replace_class = 'page-row__' . $row_keys;
+              $replace_class = 'page__' . $row_keys;
               if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
                 $file = str_replace($row_values, $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
                 $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
@@ -116,11 +116,14 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
     }
 
+    // Add the time so we can tract it.
+    $time = '/* Generated on: ' . date(DATE_RFC822) . ' */';
+
     $saved_css = array();
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
-        $file_content = $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
-        $file_name = $this->theme_name . '--layout__' . str_replace('_', '-', $suggestion) . '.css';
+        $file_content = $time ."\n". $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
+        $file_name = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
         if (file_exists($filepath)) {
@@ -270,13 +273,13 @@ class LayoutSubmit implements LayoutSubmitInterface {
           }
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page-row__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
           }
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
           }
           // move the dynamic region classes to the regions wrapper, hard code the page-row class
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page-row__' . $row . '">';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page__' . $row . '">';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
           $output[$suggestion_key][$row]['container_close'] = '    </div>';

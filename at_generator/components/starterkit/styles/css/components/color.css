@@ -1,0 +1,670 @@
+/**
+ * Page
+ *  - mainly for markup that is printed directly in page.html.twig and
+ *    .region {}
+ ========================================================================== */
+html,
+body {
+  background-color: #333333;
+}
+
+.page {
+  background-color: #ffffff;
+}
+
+.regions {
+  background-color: #ffffff;
+}
+
+.page__header {
+  background-color: #333333;
+  color: #ffffff;
+}
+.page__header .regions {
+  background-color: inherit;
+}
+
+.page__navbar {
+  background-color: #666666;
+  color: #ffffff;
+  color: #ffffff;
+}
+.page__navbar .regions {
+  background-color: inherit;
+}
+.page__navbar a,
+.page__navbar .menu a {
+  color: inherit;
+}
+
+.page__features {
+  background-color: #999999;
+  color: #363636;
+}
+.page__features .regions {
+  background-color: inherit;
+}
+
+.page__tertiary {
+  background-color: #999999;
+  color: #363636;
+}
+.page__tertiary .regions {
+  background-color: inherit;
+}
+
+.page__footer {
+  background-color: #666666;
+  color: #ffffff;
+  color: #ffffff;
+}
+.page__footer .regions {
+  background-color: inherit;
+}
+.page__footer a,
+.page__footer .menu a {
+  color: inherit;
+}
+
+.attribution {
+  background-color: #666666;
+}
+
+/**
+ * Type
+ *  - styles most typographic related html elements.
+ *  - adds pre-styled selectors for lists.
+ *  - also includes misc other elements such as hr.
+ ========================================================================== */
+body {
+  color: #363636;
+}
+
+body > pre,
+.xdebug-var-dump {
+  color: #ffffff;
+}
+
+.page .xdebug-var-dump {
+  color: #363636;
+}
+
+a {
+  color: #0066cc;
+}
+a:link, a:visited {
+  color: #0066cc;
+}
+a:active, a.active {
+  color: #0066cc;
+}
+a:hover, a:focus {
+  color: #0066cc;
+}
+
+blockquote {
+  border-left: 5px solid #dcdcdc;
+}
+blockquote p:first-child:before {
+  color: #dcdcdc;
+}
+blockquote small {
+  color: #434343;
+}
+
+hr {
+  border-top: 1px solid #dcdcdc;
+}
+
+/**
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+}
+
+::selection {
+  background: #b3d4fc;
+}
+
+/**
+ * Branding styles
+ *  - Drupal core branding block.
+ ========================================================================== */
+.site-branding-text a {
+  color: #ffffff;
+}
+
+/**
+ * Blocks
+ ========================================================================== */
+/**
+ * Menus
+ *  - style Drupal core block menus.
+ *  - for the drop menu and other responsive menus see the mixins and the
+ *    _navbar.scss partial.
+ ========================================================================== */
+.menu li.collapsed > a:after, .menu li.expanded > a:after {
+  color: #363636;
+}
+.menu a {
+  color: #0066cc;
+}
+.menu a:hover, .menu a:focus {
+  color: #0066cc;
+}
+.menu a.active {
+  color: #0066cc;
+}
+
+/**
+ * Responsive menu styles. Import into breakpoints.
+ *  - slidedown
+ *  - off canvas
+ *  - tiles
+ *
+ * Set the breakpoint and import the menu style into that breakpoint, then
+ * visit your theme settings and configure options.
+ *
+ * Responsive styles are a combination of three things:
+ *  1. Sass/CSS defined here (with breakpoints etc).
+ *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
+ *  3. Theme settings as set in your themes Advanced extention settings.
+ ========================================================================== */
+.responsive-menu-region,
+.responsive-menu-region .block,
+.responsive-menu-region .block * {
+  background-color: inherit;
+  color: inherit;
+}
+
+.responsive-menu-region .menu li.active-trail > a {
+  color: inherit;
+  background: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a {
+  color: inherit;
+  background: inherit;
+}
+.responsive-menu-region .menu a:hover, .responsive-menu-region .menu a:focus {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a.active {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.responsive-menu-region .menu a.active[href="/"] {
+  background-color: transparent;
+}
+.responsive-menu-region .menu a.active[href="/"]:hover, .responsive-menu-region .menu a.active[href="/"]:focus {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.menu-style-tiles .responsive-menu-region .menu-level-1 > li {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/**
+ * Tables
+ *  - inlcudes all table elements and table drag selectors.
+ ========================================================================== */
+table {
+  border: 1px solid #dcdcdc;
+}
+
+tr {
+  border: 1px solid #dcdcdc;
+}
+
+thead tr {
+  color: #363636;
+  background-color: #eeeeee;
+}
+thead .active img {
+  display: inline;
+}
+
+tr,
+td,
+th {
+  border-color: #dcdcdc;
+}
+
+/**
+ * Buttons
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
+.button {
+  color: #363636;
+  background: #fbfbfb;
+  border: 1px solid #dcdcdc;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+}
+.button:hover, .button:focus {
+  color: #363636;
+  background-color: #f3f3f3;
+}
+.button[disabled]:hover {
+  color: #2e2e2e;
+}
+
+.button--primary {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button--primary:link, .button--primary:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+
+.button--danger {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:link, .button--danger:visited {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:hover, .button--danger:focus, .button--danger:active, .button--danger.active {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+  background-color: #f7e2dd;
+  border-color: #f7b5a8;
+}
+
+/* Drop buttons */
+.js .dropbutton-widget {
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+}
+
+.dropbutton .secondary-action {
+  border-top: 1px solid #dcdcdc;
+}
+.dropbutton .secondary-action .button {
+  background: #ffffff;
+}
+.dropbutton .secondary-action .button:hover, .dropbutton .secondary-action .button:focus {
+  background-color: #f3f3f3;
+}
+
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #dcdcdc;
+}
+.dropbutton-multiple .dropbutton .publish .button {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-left: 1px solid #dcdcdc;
+}
+
+/**
+ * Styles for link buttons and action links. TODO.
+ */
+/*
+#block-atblocksmenuactions {
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    @include no-bullets;
+  }
+}
+
+.action-links {
+  list-style: none;
+  padding: 0;
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    display: inline-block;
+    margin: 0 $small;
+
+    &:first-child {
+      margin-left: 0; // LTR
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .action-links li:first-child {
+    margin-left: $small;
+    margin-right: 0;
+  }
+}
+*/
+.button-action {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button-action:link, .button-action:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button-action:hover, .button-action:focus, .button-action:active, .button-action.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+
+/**
+ * Forms
+ *  - This probably seems like a lot - remember AT unsets system.theme.css and
+ *    gives you complete control over all form elements.
+ *
+ * Note:
+ *  - input type submit is treated as a 'button', see _buttons.scss
+ *  - for drop buttons see _buttons.scss
+ ========================================================================== */
+select:not([type]), select[type="text"], select[type="password"], select[type="email"], select[type="url"], select[type="date"], select[type="month"], select[type="time"], select[type="datetime"], select[type="datetime-local"], select[type="week"], select[type="number"], select[type="search"], select[type="tel"], select[type="color"],
+textarea:not([type]),
+textarea[type="text"],
+textarea[type="password"],
+textarea[type="email"],
+textarea[type="url"],
+textarea[type="date"],
+textarea[type="month"],
+textarea[type="time"],
+textarea[type="datetime"],
+textarea[type="datetime-local"],
+textarea[type="week"],
+textarea[type="number"],
+textarea[type="search"],
+textarea[type="tel"],
+textarea[type="color"],
+input:not([type]),
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="week"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  color: #505050;
+  border: 1px solid #E5E5E5;
+  background-color: #ffffff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
+}
+select:not([type]):focus, select[type="text"]:focus, select[type="password"]:focus, select[type="email"]:focus, select[type="url"]:focus, select[type="date"]:focus, select[type="month"]:focus, select[type="time"]:focus, select[type="datetime"]:focus, select[type="datetime-local"]:focus, select[type="week"]:focus, select[type="number"]:focus, select[type="search"]:focus, select[type="tel"]:focus, select[type="color"]:focus,
+textarea:not([type]):focus,
+textarea[type="text"]:focus,
+textarea[type="password"]:focus,
+textarea[type="email"]:focus,
+textarea[type="url"]:focus,
+textarea[type="date"]:focus,
+textarea[type="month"]:focus,
+textarea[type="time"]:focus,
+textarea[type="datetime"]:focus,
+textarea[type="datetime-local"]:focus,
+textarea[type="week"]:focus,
+textarea[type="number"]:focus,
+textarea[type="search"]:focus,
+textarea[type="tel"]:focus,
+textarea[type="color"]:focus,
+input:not([type]):focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus {
+  border-color: #E5E5E5;
+  color: #363636;
+}
+select:not([type]):hover, select:not([type]):focus, select[type="text"]:hover, select[type="text"]:focus, select[type="password"]:hover, select[type="password"]:focus, select[type="email"]:hover, select[type="email"]:focus, select[type="url"]:hover, select[type="url"]:focus, select[type="date"]:hover, select[type="date"]:focus, select[type="month"]:hover, select[type="month"]:focus, select[type="time"]:hover, select[type="time"]:focus, select[type="datetime"]:hover, select[type="datetime"]:focus, select[type="datetime-local"]:hover, select[type="datetime-local"]:focus, select[type="week"]:hover, select[type="week"]:focus, select[type="number"]:hover, select[type="number"]:focus, select[type="search"]:hover, select[type="search"]:focus, select[type="tel"]:hover, select[type="tel"]:focus, select[type="color"]:hover, select[type="color"]:focus,
+textarea:not([type]):hover,
+textarea:not([type]):focus,
+textarea[type="text"]:hover,
+textarea[type="text"]:focus,
+textarea[type="password"]:hover,
+textarea[type="password"]:focus,
+textarea[type="email"]:hover,
+textarea[type="email"]:focus,
+textarea[type="url"]:hover,
+textarea[type="url"]:focus,
+textarea[type="date"]:hover,
+textarea[type="date"]:focus,
+textarea[type="month"]:hover,
+textarea[type="month"]:focus,
+textarea[type="time"]:hover,
+textarea[type="time"]:focus,
+textarea[type="datetime"]:hover,
+textarea[type="datetime"]:focus,
+textarea[type="datetime-local"]:hover,
+textarea[type="datetime-local"]:focus,
+textarea[type="week"]:hover,
+textarea[type="week"]:focus,
+textarea[type="number"]:hover,
+textarea[type="number"]:focus,
+textarea[type="search"]:hover,
+textarea[type="search"]:focus,
+textarea[type="tel"]:hover,
+textarea[type="tel"]:focus,
+textarea[type="color"]:hover,
+textarea[type="color"]:focus,
+input:not([type]):hover,
+input:not([type]):focus,
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input[type="email"]:hover,
+input[type="email"]:focus,
+input[type="url"]:hover,
+input[type="url"]:focus,
+input[type="date"]:hover,
+input[type="date"]:focus,
+input[type="month"]:hover,
+input[type="month"]:focus,
+input[type="time"]:hover,
+input[type="time"]:focus,
+input[type="datetime"]:hover,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:hover,
+input[type="datetime-local"]:focus,
+input[type="week"]:hover,
+input[type="week"]:focus,
+input[type="number"]:hover,
+input[type="number"]:focus,
+input[type="search"]:hover,
+input[type="search"]:focus,
+input[type="tel"]:hover,
+input[type="tel"]:focus,
+input[type="color"]:hover,
+input[type="color"]:focus {
+  background-color: #fbfbfb;
+}
+select:not([type])[disabled], select[type="text"][disabled], select[type="password"][disabled], select[type="email"][disabled], select[type="url"][disabled], select[type="date"][disabled], select[type="month"][disabled], select[type="time"][disabled], select[type="datetime"][disabled], select[type="datetime-local"][disabled], select[type="week"][disabled], select[type="number"][disabled], select[type="search"][disabled], select[type="tel"][disabled], select[type="color"][disabled],
+textarea:not([type])[disabled],
+textarea[type="text"][disabled],
+textarea[type="password"][disabled],
+textarea[type="email"][disabled],
+textarea[type="url"][disabled],
+textarea[type="date"][disabled],
+textarea[type="month"][disabled],
+textarea[type="time"][disabled],
+textarea[type="datetime"][disabled],
+textarea[type="datetime-local"][disabled],
+textarea[type="week"][disabled],
+textarea[type="number"][disabled],
+textarea[type="search"][disabled],
+textarea[type="tel"][disabled],
+textarea[type="color"][disabled],
+input:not([type])[disabled],
+input[type="text"][disabled],
+input[type="password"][disabled],
+input[type="email"][disabled],
+input[type="url"][disabled],
+input[type="date"][disabled],
+input[type="month"][disabled],
+input[type="time"][disabled],
+input[type="datetime"][disabled],
+input[type="datetime-local"][disabled],
+input[type="week"][disabled],
+input[type="number"][disabled],
+input[type="search"][disabled],
+input[type="tel"][disabled],
+input[type="color"][disabled] {
+  opacity: 0.7;
+}
+select:not([type])[disabled]:hover, select:not([type])[disabled]:focus, select[type="text"][disabled]:hover, select[type="text"][disabled]:focus, select[type="password"][disabled]:hover, select[type="password"][disabled]:focus, select[type="email"][disabled]:hover, select[type="email"][disabled]:focus, select[type="url"][disabled]:hover, select[type="url"][disabled]:focus, select[type="date"][disabled]:hover, select[type="date"][disabled]:focus, select[type="month"][disabled]:hover, select[type="month"][disabled]:focus, select[type="time"][disabled]:hover, select[type="time"][disabled]:focus, select[type="datetime"][disabled]:hover, select[type="datetime"][disabled]:focus, select[type="datetime-local"][disabled]:hover, select[type="datetime-local"][disabled]:focus, select[type="week"][disabled]:hover, select[type="week"][disabled]:focus, select[type="number"][disabled]:hover, select[type="number"][disabled]:focus, select[type="search"][disabled]:hover, select[type="search"][disabled]:focus, select[type="tel"][disabled]:hover, select[type="tel"][disabled]:focus, select[type="color"][disabled]:hover, select[type="color"][disabled]:focus,
+textarea:not([type])[disabled]:hover,
+textarea:not([type])[disabled]:focus,
+textarea[type="text"][disabled]:hover,
+textarea[type="text"][disabled]:focus,
+textarea[type="password"][disabled]:hover,
+textarea[type="password"][disabled]:focus,
+textarea[type="email"][disabled]:hover,
+textarea[type="email"][disabled]:focus,
+textarea[type="url"][disabled]:hover,
+textarea[type="url"][disabled]:focus,
+textarea[type="date"][disabled]:hover,
+textarea[type="date"][disabled]:focus,
+textarea[type="month"][disabled]:hover,
+textarea[type="month"][disabled]:focus,
+textarea[type="time"][disabled]:hover,
+textarea[type="time"][disabled]:focus,
+textarea[type="datetime"][disabled]:hover,
+textarea[type="datetime"][disabled]:focus,
+textarea[type="datetime-local"][disabled]:hover,
+textarea[type="datetime-local"][disabled]:focus,
+textarea[type="week"][disabled]:hover,
+textarea[type="week"][disabled]:focus,
+textarea[type="number"][disabled]:hover,
+textarea[type="number"][disabled]:focus,
+textarea[type="search"][disabled]:hover,
+textarea[type="search"][disabled]:focus,
+textarea[type="tel"][disabled]:hover,
+textarea[type="tel"][disabled]:focus,
+textarea[type="color"][disabled]:hover,
+textarea[type="color"][disabled]:focus,
+input:not([type])[disabled]:hover,
+input:not([type])[disabled]:focus,
+input[type="text"][disabled]:hover,
+input[type="text"][disabled]:focus,
+input[type="password"][disabled]:hover,
+input[type="password"][disabled]:focus,
+input[type="email"][disabled]:hover,
+input[type="email"][disabled]:focus,
+input[type="url"][disabled]:hover,
+input[type="url"][disabled]:focus,
+input[type="date"][disabled]:hover,
+input[type="date"][disabled]:focus,
+input[type="month"][disabled]:hover,
+input[type="month"][disabled]:focus,
+input[type="time"][disabled]:hover,
+input[type="time"][disabled]:focus,
+input[type="datetime"][disabled]:hover,
+input[type="datetime"][disabled]:focus,
+input[type="datetime-local"][disabled]:hover,
+input[type="datetime-local"][disabled]:focus,
+input[type="week"][disabled]:hover,
+input[type="week"][disabled]:focus,
+input[type="number"][disabled]:hover,
+input[type="number"][disabled]:focus,
+input[type="search"][disabled]:hover,
+input[type="search"][disabled]:focus,
+input[type="tel"][disabled]:hover,
+input[type="tel"][disabled]:focus,
+input[type="color"][disabled]:hover,
+input[type="color"][disabled]:focus {
+  color: #363636;
+}
+
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  background: #eeeeee;
+  color: #363636;
+}
+
+.filter-wrapper {
+  border-color: #E5E5E5;
+  border-style: solid;
+  border-width: 1px;
+  border-top: 0;
+}
+
+.tips {
+  color: darkgray;
+}
+
+.description {
+  color: darkgray;
+}
+
+.marker {
+  color: #ee0000;
+}
+
+.form-required:after {
+  color: #ee0000;
+}
+
+/**
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @thanks http://nicolasgallagher.com/css-background-image-hacks/
+ */
+details {
+  border: 1px solid #E5E5E5;
+}

@@ -1,0 +1,238 @@
+@charset "UTF-8";
+/**
+ * Base
+ * - set element global styles, bascially whenever this element appears
+ * it should look like this by default.
+ ========================================================================== */
+html {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  color: #363636;
+}
+
+ul, ol, dd, dl,
+p, figure,
+pre, table, hr,
+form, fieldset {
+  margin: 0 0 18px;
+  margin: 0 0 1.1459rem;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary,
+p,
+dl,
+hr,
+multicol {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+}
+
+/**
+ * Scale and line heigth set with Modular Scale and Vertical Rhythm.
+ * By default the base font size is 16px, line height 24px and
+ * 48px set for the Modular Scale important font size.
+ * ms(0) is medium, and we increment the scale up or down 1 and set
+ * into variables, which are then processed by adjust-font-size-to()
+ * to generate font sizes in em and set a relative line-height.
+ * SEE: _variables.scss
+ */
+h1, .h1 {
+  font-size: 41.88854px;
+  font-size: 2.61803rem;
+}
+
+h2, .h2 {
+  font-size: 29.66563px;
+  font-size: 1.8541rem;
+}
+
+h3, .h3 {
+  font-size: 25.88854px;
+  font-size: 1.61803rem;
+}
+
+h4, .h4 {
+  font-size: 18.33437px;
+  font-size: 1.1459rem;
+}
+
+h5, .h5 {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+h6, .h6 {
+  font-size: 9.88854px;
+  font-size: 0.61803rem;
+}
+
+h1 small, .h1 small {
+  font-size: 25.88854px;
+  font-size: 1.61803rem;
+}
+
+h2 small, .h2 small {
+  font-size: 18.33437px;
+  font-size: 1.1459rem;
+}
+
+h3 small, .h3 small,
+h4 small, .h4 small {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+p {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+body > pre,
+.xdebug-var-dump {
+  color: #ffffff;
+}
+
+.page-root .xdebug-var-dump {
+  color: #363636;
+}
+
+a {
+  text-decoration: none;
+  background: transparent;
+}
+a:active, a:hover {
+  outline: 0;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+small {
+  font-size: smaller;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+ul,
+ol {
+  padding: 0 0 0 16px;
+  padding: 0 0 0 1rem;
+}
+[dir="rtl"] ul, [dir="rtl"] ol {
+  padding: 0 18px 0 0;
+  padding: 0 1.1459rem 0 0;
+}
+
+blockquote {
+  padding: 16px;
+  padding: 1rem;
+  border-left: 5px solid #dcdcdc;
+}
+blockquote p {
+  font-size: 18px;
+  font-size: 1.1459rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  font-weight: 300;
+}
+blockquote p:first-child {
+  margin-top: 0;
+}
+blockquote p:first-child:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  color: #dcdcdc;
+  display: inline-block;
+  padding: 0 5px 0 0;
+  margin: 0;
+  text-align: left;
+  width: 18px;
+  width: 1.1459rem;
+}
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+blockquote small {
+  display: block;
+  font-size: 10px;
+  font-size: 0.61803rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  color: #434343;
+}
+blockquote small:before {
+  content: '\2014 \00A0';
+}
+blockquote.pull-right {
+  padding-right: 5.26316%;
+  padding-left: 0;
+  border-right: 5px solid #dcdcdc;
+  border-left: 0;
+}
+blockquote.pull-right p,
+blockquote.pull-right small {
+  text-align: right;
+}
+blockquote.pull-right small:before {
+  content: '';
+}
+blockquote.pull-right small:after {
+  content: '\00A0 \2014';
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dcdcdc;
+  margin: 16px 0;
+  padding: 0;
+}
+
+/* Webfont smoothing */
+:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

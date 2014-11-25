@@ -1,0 +1,40 @@
+@import "partials/base";
+
+/**
+ * Forums
+ *  - see table.scss for generic table styles.
+ ========================================================================== */
+
+.page-forum {
+
+  table {}
+
+  thead {}
+
+  th {}
+
+  tbody {}
+
+  tr {}
+
+  td {
+   &.forum {}
+
+   .icon {}
+
+   .name {}
+
+   &.topics {}
+
+   &.posts {}
+
+   &.last-reply {}
+  }
+}
+
+
+// Set on the div wrapper around forum the main forum table.
+#forum {}
+
+// Specific Forum ID, each forum has an ID, the first is 0
+#forum-0 {}

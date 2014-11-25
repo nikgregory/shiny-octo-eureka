@@ -8,8 +8,8 @@ require "susy"
 
 # Directory paths
 # -----------------------------------------------------------------------------
-sass_dir = "/"
-css_dir = "../css/"
+sass_dir = "/components"
+css_dir = "../css/components"
 images_dir = "../css/images"
 
 

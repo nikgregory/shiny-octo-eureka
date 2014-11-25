@@ -1,0 +1,140 @@
+@import "partials/base";
+
+/**
+ * Responsive menu styles. Import into breakpoints.
+ *  - slidedown
+ *  - off canvas
+ *  - tiles
+ *
+ * Set the breakpoint and import the menu style into that breakpoint, then
+ * visit your theme settings and configure options.
+ *
+ * Responsive styles are a combination of three things:
+ *  1. Sass/CSS defined here (with breakpoints etc).
+ *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
+ *  3. Theme settings as set in your themes Advanced extention settings.
+ ========================================================================== */
+
+// Hide the menu until the JS is loaded, on some pages such as "create new account"
+// this can take a split second longer than usual, so this prevents a FOUC.
+body.no-fouc .responsive-menu-region .block-menu__content {
+  display: none;
+}
+
+
+// Aggressively force the menu to inherit the page/regions background,
+// this gives us some pretty usable styles for free.
+.responsive-menu-region,
+.responsive-menu-region .block,
+.responsive-menu-region .block * {
+  background-color: inherit;
+  color: inherit;
+}
+
+
+// Global styles for the navbar region.
+.responsive-menu-region {
+  padding: 0;
+
+  // Visually hide contextual links, they can get in the way of responsive menu styles.
+  .contextual-region {
+    position: static;
+    .contextual {
+      @include visually-hidden;
+    }
+  }
+
+  .menu {
+    position: relative;
+
+
+    > li {
+      z-index: 100;
+    }
+
+    li {
+      position: relative;
+      vertical-align: middle;
+      @include adjust-font-size-to($medium); // explicitly set the font-size since the container is font-size 0
+
+      &.active-trail > a {
+        color: $resp-menu-active-color;
+        background: $resp-menu-active-background-color;
+      }
+    }
+
+    a {
+      color: $resp-menu-color;
+      background: $resp-menu-background-color;
+
+      @include transition(all, .2s, ease-in);
+
+      &:hover,
+      &:focus {
+        color: $resp-menu-hover-color;
+        background-color: $resp-menu-hover-background-color;
+        text-decoration: none;
+      }
+
+      &.active {
+        color: $resp-menu-active-color;
+        background-color: $resp-menu-active-background-color;
+
+        &[href="/"] {
+          background-color: transparent; // Match Drupal base path for frontpage/home links
+
+          &:hover,
+          &:focus {
+            color: $resp-menu-hover-color;
+            background-color: $resp-menu-hover-background-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// Include all responsive menu mixins to generate the markup.
+@include dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true);
+@include horizontal-menu;
+@include offcanvas;
+@include flipslide;
+@include slidedown;
+@include tiles;
+
+
+// Customize responsive menus for this theme.
+.menu-style-dropmenu {
+  .responsive-menu-region {
+    .block-menu__content {
+      li {
+        text-align: center;
+
+        &.expanded li {
+          text-align: $flow-from; // LTR
+        }
+      }
+    }
+  }
+}
+
+.menu-style-tiles {
+  .responsive-menu-region {
+    .block-menu__content {
+      @include output-rhythm(padding, $xx-small 0);
+    }
+
+    .menu-level-1 {
+      > li {
+        @include output-rhythm(margin, $xx-small 0);
+        background-color: $resp-menu-active-background-color;
+      }
+    }
+  }
+}
+
+
+
+
+

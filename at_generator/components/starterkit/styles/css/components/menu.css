@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/**
+ * Menus
+ *  - style Drupal core block menus.
+ *  - for the drop menu and other responsive menus see the mixins and the
+ *    _navbar.scss partial.
+ ========================================================================== */
+.menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.menu li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.menu li {
+  text-align: left;
+}
+.menu li.collapsed > a:after, .menu li.expanded > a:after {
+  font-family: FontAwesome, sans-serif;
+  float: right;
+  padding: 0 1px;
+  text-align: right;
+  width: 16px;
+  width: 1rem;
+}
+.menu li.collapsed > a:after {
+  content: "";
+}
+.menu li.expanded > a:after {
+  content: "";
+}
+.menu a {
+  display: block;
+  padding: 7px;
+  padding: 0.43769rem;
+}
+.menu a:hover, .menu a:focus {
+  text-decoration: none;
+}
+.menu .menu {
+  padding-left: 16px;
+  padding-left: 1rem;
+}
+[dir="rtl"] .menu li.collapsed > a:after {
+  content: "";
+}
+
+.toolbar li a:after {
+  display: none !important;
+}

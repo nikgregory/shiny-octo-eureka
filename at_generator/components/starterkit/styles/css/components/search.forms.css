@@ -1,0 +1,21 @@
+/**
+ * Search forms
+ * - search block form
+ * - advanced search form
+ ========================================================================== */
+.block-search .form-type-search,
+.block-search .form-actions {
+  display: inline-block;
+  margin: 7px 0;
+  margin: 0.43769rem 0;
+}
+
+.search-form .container-inline label {
+  display: block;
+  margin: 7px 0;
+  margin: 0.43769rem 0;
+}
+
+#edit-advanced .details-wrapper > fieldset > legend {
+  display: none;
+}

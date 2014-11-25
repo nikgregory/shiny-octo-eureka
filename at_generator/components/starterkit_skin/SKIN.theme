@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * AT Asset Management
+ *
+ * Here we use three hooks to control page CSS, JS and library assets.
+ * - hook_css_alter()
+ * - hook_js_alter()
+ * - hook_page_attachments_alter()
+ */
+
+/**
+ * Alter CSS files before they are output on the page.
+ *
+ * @param $css
+ *   An array of all CSS items (files and inline CSS) being requested on the page.
+ *
+ * @see _drupal_add_css()
+ * @see drupal_get_css()
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_css_alter(&$css) {
+  // Individual CSS files to remove.
+  // Sometimes we don't want to remove the entire library as it may
+  // load dependancies we need, so we can use this more granular
+  // approach to remove individual CSS assets.
+  $remove = array(
+    'normalize.css',
+  );
+  foreach ($remove as $file) {
+    if (array_key_exists($file, $css)) {
+      unset($css[$file]);
+    }
+  }
+}
+// */
+
+/**
+ * Perform necessary alterations to the JavaScript before it is presented on
+ * the page.
+ *
+ * @param $javascript
+ *   An array of all JavaScript being presented on the page.
+ *
+ * @see _drupal_add_js()
+ * @see drupal_get_js()
+ * @see drupal_js_defaults()
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_js_alter(&$js) {
+  // Individual JavaScript files to remove.
+  // Sometimes we don't want to remove the entire library as it may
+  // load dependancies we need, so we can use this more granular
+  // approach to remove individual JS assets.
+  $remove = array(
+    'jquery.js'
+  );
+  foreach ($remove as $file) {
+    if (array_key_exists($file, $css)) {
+      unset($css[$file]);
+    }
+  }
+}
+// */
+
+/**
+ * Alter attachments (typically assets) to a page before it is rendered.
+ *
+ * Use this hook when you want to remove or alter attachments on the page, or
+ * add attachments to the page that depend on another module's attachments (this
+ * hook runs after hook_page_attachments().
+ *
+ * @param array &$page
+ *   An empty renderable array representing the page.
+ *
+ * @see hook_page_attachments_alter()
+ */
+
+function HOOK_page_attachments_alter(array &$page) {
+  $theme = 'HOOK';
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Load this themes base library.
+  $page['#attached']['library'][] = "$theme/base";
+
+  // Libraries dependant on theme configuration.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+      $page['#attached']['library'][] = 'at_core/at.responsivemenus';
+    }
+
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+      $page['#attached']['library'][] = "$theme/shortcodes";
+    }
+  }
+
+  // Remove libraries.
+  // Use this to remove entire libraries. You need to check
+  // the library as it may be loading dependancies you might need.
+  // A more granular appraoch is remove individual js or css files.
+  /* -- Delete this line to use.
+  $remove_libraries = array(
+    'system/base',
+  );
+
+  foreach ($remove_libraries as $remove_library) {
+    if (in_array($remove_library, $page['#attached']['library'])) {
+      $index = array_search($remove_library, $page['#attached']['library']);
+      unset($page['#attached']['library'][$index]);
+    }
+  }
+  // */
+}
+
+/**
+ * Preprocess variables for html templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_html(&$variables) {
+}
+// */
+
+/**
+ * Preprocess variables for page templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_page(&$variables) {
+}
+// */
+
+/**
+ * Preprocess variables for field templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_field(&$variables) {
+}
+// */
+
+/**
+ * Preprocess variables for node templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_node(&$variables) {
+}
+// */
+
+/**
+ * Preprocess variables for comment templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_comment(&$variables) {
+}
+// */
+
+/**
+ * Preprocess variables for block templates.
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_preprocess_block(&$variables) {
+}
+// */

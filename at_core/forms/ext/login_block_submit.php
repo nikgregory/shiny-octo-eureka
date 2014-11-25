@@ -32,7 +32,7 @@ function at_core_submit_login_block($values, $theme, $generated_files_path) {
   display:inline;
 }";
 
-  $file_name = $theme . '--login-block.css';
+  $file_name = $theme . '.login-block.css';
   $filepath = $generated_files_path . '/' . $file_name;
   file_unmanaged_save_data($login_block_css, $filepath, FILE_EXISTS_REPLACE);
 }

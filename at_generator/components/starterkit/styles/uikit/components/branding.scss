@@ -1,0 +1,30 @@
+@import "partials/base";
+
+/**
+ * Branding styles
+ *  - Drupal core branding block.
+ ========================================================================== */
+
+.block--system-branding-block {}
+
+.site-branding-text {
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.site-logo {}
+
+.site-name {
+  font-weight: 700;
+}
+
+.site-slogan {
+  margin: 0;
+}
+
+
+

@@ -6,12 +6,6 @@ layout: site-builder
 description: 'Practical starter theme for site builders, themers, and rapid prototyping.'
 core: 8.x
 hidden: true
-libraries:
-  - THEMENAME/base
-stylesheets-remove:
-    - normalize.css
-    - system.theme.css
-    - file.formatter.generic.css
 regions:
   messages: 'Messages'
   leaderboard: 'Leaderboard'

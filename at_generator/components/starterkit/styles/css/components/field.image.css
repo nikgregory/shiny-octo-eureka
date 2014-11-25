@@ -1,0 +1,65 @@
+/**
+ * Field Image
+ ========================================================================== */
+.field-type-image {
+  /**
+   * Image Alignment Theme Settings
+   * - settings are applied using the Image extension in theme settings, where you can
+   *   set image alignment and captions per node type and view mode.
+   */
+}
+.field-type-image figure {
+  margin: 0;
+}
+.field-type-image figcaption {
+  font-size: 12px;
+  font-size: 0.76923rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  padding: 7px 0;
+  padding: 0.43769rem 0;
+}
+.field-type-image.field-align--none figure, .field-type-image.field-align--left figure {
+  margin: 5px 16px 16px 0;
+  margin: 0.3125rem 1rem 1rem 0;
+}
+.field-type-image.field-align--none figure figcaption, .field-type-image.field-align--left figure figcaption {
+  text-align: left;
+}
+.field-type-image.field-align--center figure {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.field-type-image.field-align--center figure figcaption {
+  text-align: center;
+}
+.field-type-image.field-align--right figure {
+  margin: 5px 0 16px 16px;
+  margin: 0.3125rem 0 1rem 1rem;
+}
+.field-type-image.field-align--right figure figcaption {
+  text-align: left;
+}
+.field-type-image.float-none {
+  float: none !important;
+}
+.field-type-image.float-none figure {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+[dir="rtl"] .field-type--image.field-align--none figure, [dir="rtl"] .field-type--image.field-align--left figure {
+  margin: 5px 0 16px 16px;
+  margin: 0.3125rem 0 1rem 1rem;
+}
+[dir="rtl"] .field-type--image.field-align--none figure figcaption, [dir="rtl"] .field-type--image.field-align--left figure figcaption {
+  text-align: right;
+}
+[dir="rtl"] .field-type--image.field-align--right figure {
+  margin: 5px 16px 16px 0;
+  margin: 0.3125rem 1rem 1rem 0;
+}
+[dir="rtl"] .field-type--image.field-align--right figure figcaption {
+  text-align: right;
+}

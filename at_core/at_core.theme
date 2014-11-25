@@ -19,6 +19,371 @@ use Drupal\node\NodeInterface;
 
 
 /**
+ * Alter attachments (typically assets) to a page before it is rendered.
+ *
+ * Use this hook when you want to remove or alter attachments on the page, or
+ * add attachments to the page that depend on another module's attachments (this
+ * hook runs after hook_page_attachments().
+ *
+ * @param array &$page
+ *   An empty renderable array representing the page.
+ *
+ * @see hook_page_attachments_alter()
+ */
+function at_core_page_attachments_alter(array &$page) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Common paths.
+  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
+  $path_to_at_core = drupal_get_path('theme', 'at_core');
+
+  if (!empty($config['generated_files_path'])) {
+    $generated_files_path = $config['generated_files_path'];
+  }
+  else {
+    drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
+  }
+
+  // Process extension settings.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+
+    // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
+    if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
+      $head_elements = array();
+
+      $rel = 'apple-touch-icon';
+      if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
+        $rel = 'apple-touch-icon-precomposed';
+      }
+
+      // Apple default icon and Nokia shortcut icon.
+      if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
+        $icon_path_default = String::checkPlain($config['icon_path_default']);
+        $default_icon = file_create_url($path_to_theme . '/' . $icon_path_default);
+        $head_elements['at_core_touch_icon_nokia'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => -97,
+          '#attributes' => array(
+            'href' => $default_icon,
+            'rel' => "shortcut icon",
+          ),
+        );
+        $head_elements['at_core_touch_icon_default'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => -98,
+          '#attributes' => array(
+            'href' => $default_icon,
+            'rel' => $rel,
+          ),
+        );
+      }
+
+      // iPad (standard display).
+      if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
+        $apple_touch_icon_path_ipad = String::checkPlain($config['apple_touch_icon_path_ipad']);
+        $head_elements['at_core_touch_icon_ipad'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => -99,
+          '#attributes' => array(
+            'href' => file_create_url($ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad),
+            'rel' => $rel,
+            'sizes' => "76x76",
+          ),
+        );
+      }
+
+      // iPhone retina.
+      if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
+        $apple_touch_icon_path_iphone_retina = String::checkPlain($config['apple_touch_icon_path_iphone_retina']);
+        $head_elements['at_core_touch_icon_iphone_retina'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => -100,
+          '#attributes' => array(
+            'href' => file_create_url($iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina),
+            'rel' => $rel,
+            'sizes' => "120x120",
+          ),
+        );
+      }
+
+      // iPad retina.
+      if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
+        $apple_touch_icon_path_ipad_retina = String::checkPlain($config['apple_touch_icon_path_ipad_retina']);
+        $head_elements['at_core_touch_icon_ipad_retina'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => -100,
+          '#attributes' => array(
+            'href' => file_create_url($ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina),
+            'rel' => $rel,
+            'sizes' => "152x152",
+          ),
+        );
+      }
+
+      // Load touch icons.
+      if (!empty($head_elements)) {
+        foreach ($head_elements as $head_element_key => $head_element_value) {
+          $page['#attached']['html_head'][] = [$head_element_value, $head_element_key];
+        }
+      }
+    }
+
+    // Load Generated Styles.
+    $load_failure = array();
+    $load_failure['fail'] = FALSE;
+
+    // Fonts.
+    if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+      $fonts_file = $generated_files_path . '/' . $theme . '.fonts.css';
+      if (file_exists($fonts_file)) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $fonts_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+      else {
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $fonts_file;
+      }
+
+      // Google font.
+      if (!empty($config['font_google'])) {
+        $google_font_path = check_url($config['font_google']);
+        $google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
+        $page['#attached']['css'][] = array(
+          'data' => $google_font_path_fixed,
+          'type' => 'external',
+        );
+      }
+
+      // Typekit script.
+      if (!empty($config['font_typekit'])) {
+        $typekit_script_path = '//' . check_url($config['font_typekit']);
+        $page['#attached']['js'][] = array(
+          'data' => $typekit_script_path,
+          'type' => 'external',
+          'weight' => CSS_THEME,
+        );
+      }
+    }
+
+    // Titles CSS.
+    if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
+      $titles_file = $generated_files_path . '/' . $theme . '.titles.css';
+      if (file_exists($titles_file)) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $titles_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+      else {
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $titles_file;
+      }
+    }
+
+    // Images CSS.
+    if (isset($config['enable_images']) && $config['enable_images'] === 1) {
+      $images_file = $generated_files_path . '/' . $theme . '.images.css';
+      if (file_exists($images_file)) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $images_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+      else {
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $images_file;
+      }
+    }
+
+    // Custom CSS.
+    if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
+      $custom_css_file = $generated_files_path . '/' . $theme . '.custom-css.css';
+      if (file_exists($custom_css_file)) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $custom_css_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+      else {
+        $load_failure['fail'] = TRUE;
+        $load_failure['files'][] = $custom_css_file;
+      }
+    }
+
+    // Show grid.
+    if (isset($config['show_grid']) && $config['show_grid'] === 1) {
+      $show_grid_file = $path_to_theme . '/styles/css/show-grid.css';
+      if (file_exists($show_grid_file)) {
+        $page['#attached']['css'][] = array(
+          'type' => 'file',
+          'data' => $show_grid_file,
+          'group' => CSS_AGGREGATE_THEME,
+          'weight' => CSS_THEME,
+        );
+      }
+    }
+
+    // Markup overrides.
+    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+
+      // Breadcrumbs.
+      if ($config['breadcrumb_label'] === 1 || $config['breadcrumb_separator'] === 1) {
+        $breadcrumb_file = $generated_files_path . '/' . $theme . '.breadcrumb.css';
+        if (file_exists($breadcrumb_file)) {
+          $page['#attached']['css'][] = array(
+            'type' => 'file',
+            'data' => $breadcrumb_file,
+            'group' => CSS_AGGREGATE_THEME,
+            'weight' => CSS_THEME,
+          );
+        }
+        else {
+          $load_failure['fail'] = TRUE;
+          $load_failure['files'][] = $breadcrumb_file;
+        }
+      }
+
+      // Login block.
+      if (\Drupal::currentUser()->isAuthenticated() === FALSE) {
+        if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
+          $login_block_file = $generated_files_path . '/' . $theme . '.login-block.css';
+          if (file_exists($login_block_file)) {
+            $page['#attached']['css'][] = array(
+              'type' => 'file',
+              'data' => $login_block_file,
+              'group' => CSS_AGGREGATE_THEME,
+              'weight' => CSS_THEME,
+            );
+          }
+          else {
+            $load_failure['fail'] = TRUE;
+            $load_failure['files'][] = $login_block_file;
+          }
+        }
+      }
+    }
+
+    // Print a message if required files do not exist.
+    if ($load_failure['fail'] == TRUE) {
+      $item_list = array(
+        '#theme' => 'item_list',
+        '#items' => $load_failure['files'],
+      );
+      $failed_files_list = drupal_render($item_list);
+      drupal_set_message(t('<p>One or more generated CSS files not found:</p> !failuers <p>Go to this themes Appearance settings and click <em>Save extension settings</em> to generate new files.</p>', array('!failuers' => $failed_files_list)), 'error');
+    }
+
+    // ########################################################################
+    // TODO: Convert all AT Core Extension scripts and files to libraries!
+    // ########################################################################
+
+    // Attach Windowsize library
+    if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
+      $page['#attached']['library'][] = 'at_core/at.windowsize';
+    }
+
+    // Attach Livereload snippet (inline)
+    if (isset($config['livereload']) && $config['livereload'] === 1) {
+      $livereload_snippet = '';
+      if (isset($config['livereload_snippet'])) {
+        $page['#attached']['js'][] = array(
+          'data' => $config['livereload_snippet'],
+          'type' => 'inline',
+        );
+      }
+    }
+
+    // Attach devel_layout CSS file.
+    if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
+      $page['#attached']['css'][] = array(
+        'data' => $path_to_at_core . '/styles/css/devel-layout.css',
+        'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_COMPONENT,
+      );
+    }
+
+    // Attach devel_colorize-regions CSS file.
+    if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
+      $page['#attached']['css'][] = array(
+        'data' => $path_to_at_core . '/styles/css/devel-colorize-regions.css',
+        'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_COMPONENT,
+      );
+    }
+
+    // Attach nuke_toolbar CSS file.
+    if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
+      $page['#attached']['css'][] = array(
+        'data' => $path_to_at_core . '/styles/css/nuetralize-toolbar.css',
+        'group' => CSS_AGGREGATE_THEME,
+        'weight' => CSS_COMPONENT,
+      );
+    }
+
+    // Attach polyfills to support IE8.
+    if ((isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) && (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1)) {
+      $page['#attached']['library'][] = 'at_core/at.respond';
+      $page['#attached']['library'][] = 'at_core/at.selectivizr'; // AT Loads yui3 library remotely because it supports IE8 and Selectivizr runs way better on yui3.
+    }
+
+    // Add the responsive menu styles settings.
+    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+      $drupalSettings = array();
+
+      // Breakpoint
+      if (isset($config['responsive_menu_responsive_breakpoint'])) {
+        $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
+      }
+
+      // Loop the config settings and build an array for drupalSettings.
+      foreach (array('default', 'responsive') as $style) {
+        if (isset($config['responsive_menu_' . $style . '_style'])) {
+
+          // Style
+          $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
+
+          // If Off Canvas
+          if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
+            $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
+          }
+
+          // If Tiles
+          if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
+            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
+            if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
+              $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
+            }
+          }
+        }
+      }
+
+      // Attach JS settings.
+      $page['#attached']['js'][] = array(
+        'data' => array($theme => $drupalSettings),
+        'type' => 'setting',
+      );
+    }
+  }
+}
+
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter().
  * TODO: keep on on core regarding the alter hook and suggestions - https://drupal.org/node/2100775
  */
@@ -110,10 +475,7 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Commonly used paths, just set these all up now.
-  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
-  $path_to_at_core = drupal_get_path('theme', 'at_core');
-
+  // Commonly used paths
   if (!empty($config['generated_files_path'])) {
     $generated_files_path = $config['generated_files_path'];
   }
@@ -121,369 +483,17 @@ function at_core_preprocess_page(&$variables) {
     drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
   }
 
-  // Attach libraries
-  if (isset($config['libraries_enable']) && $config['libraries_enable'] === 1) {
-    //$libraries = array();
-    //$themeInfo = new ThemeInfo($theme);
-    //$baseThemes = $themeInfo->getThemeInfo('base_themes');
-
-    // Attach Drupal core libraries.
-    $system_libraries = new SystemLibraries();
-    $drupal_core_libraries = $system_libraries->getDrupalCoreSystemLibraries();
-
-    foreach ($drupal_core_libraries as $key => $value) {
-      $library_setting = str_replace('.', '_', strtolower($key));
-      if (isset($config["drupal_core_$library_setting"]) && $config["drupal_core_$library_setting"] === 1) {
-        $variables['#attached']['library'][] = 'core/' . $key;
-      }
-    }
-  }
-
-  // Attach Windowsize library
-  if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
-    $variables['#attached']['library'][] = 'at_core/at.windowsize';
-  }
-
-  // Attach Livereload snippet (inline)
-  if (isset($config['livereload']) && $config['livereload'] === 1) {
-    $livereload_snippet = '';
-    if (isset($config['livereload_snippet'])) {
-      $variables['#attached']['js'][] = array(
-        'data' => $config['livereload_snippet'],
-        'type' => 'inline',
-      );
-    }
-  }
-
-  // Attach devel_layout CSS file.
-  if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
-    $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/styles/css/devel-layout.css',
-      'group' => CSS_AGGREGATE_THEME,
-      'weight' => CSS_COMPONENT,
-    );
-  }
-
-  // Attach devel_colorize-regions CSS file.
-  if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
-    $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/styles/css/devel-colorize-regions.css',
-      'group' => CSS_AGGREGATE_THEME,
-      'weight' => CSS_COMPONENT,
-    );
-  }
-
-  // Attach nuke_toolbar CSS file.
-  if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
-    $variables['#attached']['css'][] = array(
-      'data' => $path_to_at_core . '/styles/css/nuetralize-toolbar.css',
-      'group' => CSS_AGGREGATE_THEME,
-      'weight' => CSS_COMPONENT,
-    );
-  }
-
   // Initialise attribution variable.
   $variables['attribution'] = '';
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-
-    // Attach polyfills to support IE8.
-    if ((isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) && (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1)) {
-      $variables['#attached']['library'][] = 'at_core/at.respond';
-      $variables['#attached']['library'][] = 'at_core/at.selectivizr'; // AT Loads yui3 library remotely because it supports IE8 and Selectivizr runs way better on yui3.
-    }
-
-    // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-      $drupalSettings = array();
-
-      // Region
-      //if (isset($config['responsive_menu_region'])) {
-      //  $drupalSettings['responsive_menus']['region'] = 'region__' . str_replace('_', '-', $config['responsive_menu_region']);
-      //}
-
-      // Breakpoint
-      if (isset($config['responsive_menu_responsive_breakpoint'])) {
-        $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
-      }
-
-      // Loop the config settings and build an array for drupalSettings.
-      foreach (array('default', 'responsive') as $style) {
-        if (isset($config['responsive_menu_' . $style . '_style'])) {
-
-          // Style
-          $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
-
-          // If Off Canvas
-          if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
-            $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
-          }
-
-          // If Tiles
-          if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
-            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
-            if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
-              $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
-            }
-          }
-        }
-      }
-
-      // Attach JS settings.
-      $variables['#attached']['js'][] = array(
-        'data' => array($theme => $drupalSettings),
-        'type' => 'setting',
-      );
-
-      // Load the responsive menus libarary.
-      $variables['#attached']['library'][] = 'at_core/at.responsivemenus';
-    }
-
-    // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
-    if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
-      $head_elements = array();
-
-      $rel = 'apple-touch-icon';
-      if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
-        $rel = 'apple-touch-icon-precomposed';
-      }
-
-      // Apple default icon and Nokia shortcut icon.
-      if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $icon_path_default = String::checkPlain($config['icon_path_default']);
-        $default_icon = file_create_url($path_to_theme . '/' . $icon_path_default);
-        $head_elements['at_core_touch_icon_nokia'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -97,
-          '#attributes' => array(
-            'href' => $default_icon,
-            'rel' => "shortcut icon",
-          ),
-        );
-        $head_elements['at_core_touch_icon_default'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -98,
-          '#attributes' => array(
-            'href' => $default_icon,
-            'rel' => $rel,
-          ),
-        );
-      }
-
-      // iPad (standard display).
-      if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $apple_touch_icon_path_ipad = String::checkPlain($config['apple_touch_icon_path_ipad']);
-        $head_elements['at_core_touch_icon_ipad'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -99,
-          '#attributes' => array(
-            'href' => file_create_url($ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad),
-            'rel' => $rel,
-            'sizes' => "76x76",
-          ),
-        );
-      }
-
-      // iPhone retina.
-      if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $apple_touch_icon_path_iphone_retina = String::checkPlain($config['apple_touch_icon_path_iphone_retina']);
-        $head_elements['at_core_touch_icon_iphone_retina'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -100,
-          '#attributes' => array(
-            'href' => file_create_url($iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina),
-            'rel' => $rel,
-            'sizes' => "120x120",
-          ),
-        );
-      }
-
-      // iPad retina.
-      if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $apple_touch_icon_path_ipad_retina = String::checkPlain($config['apple_touch_icon_path_ipad_retina']);
-        $head_elements['at_core_touch_icon_ipad_retina'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -100,
-          '#attributes' => array(
-            'href' => file_create_url($ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina),
-            'rel' => $rel,
-            'sizes' => "152x152",
-          ),
-        );
-      }
-
-      // Load touch icons.
-      if (!empty($head_elements)) {
-        foreach ($head_elements as $head_element_key => $head_element_value) {
-          $variables['#attached']['html_head'][] = [$head_element_value, $head_element_key];
-        }
-      }
-    }
-
-    // Load Generated Styles.
-    $load_failure = array();
-    $load_failure['fail'] = FALSE;
-
-    // Fonts.
-    if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
-      $fonts_file = $generated_files_path . '/' . $theme . '--fonts.css';
-      if (file_exists($fonts_file)) {
-        $variables['#attached']['css'][$fonts_file] = array(
-          'type' => 'file',
-          'data' => $fonts_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-      else {
-        $load_failure['fail'] = TRUE;
-        $load_failure['files'][] = $fonts_file;
-      }
-
-      // Google font.
-      if (!empty($config['font_google'])) {
-        $google_font_path = check_url($config['font_google']);
-        $google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
-        $variables['#attached']['css'][$google_font_path_clean] = array(
-          'data' => $google_font_path_fixed,
-          'type' => 'external',
-        );
-      }
-
-      // Typekit script.
-      if (!empty($config['font_typekit'])) {
-        $typekit_script_path = '//' . check_url($config['font_typekit']);
-        $variables['#attached']['js'][] = array(
-          'data' => $typekit_script_path,
-          'type' => 'external',
-          'weight' => CSS_THEME,
-        );
-      }
-    }
-
-    // Titles CSS.
-    if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
-      $titles_file = $generated_files_path . '/' . $theme . '--titles.css';
-      if (file_exists($titles_file)) {
-        $variables['#attached']['css'][$titles_file] = array(
-          'type' => 'file',
-          'data' => $titles_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-      else {
-        $load_failure['fail'] = TRUE;
-        $load_failure['files'][] = $titles_file;
-      }
-    }
-
-    // Images CSS.
-    if (isset($config['enable_images']) && $config['enable_images'] === 1) {
-      $images_file = $generated_files_path . '/' . $theme . '--images.css';
-      if (file_exists($images_file)) {
-        $variables['#attached']['css'][$images_file] = array(
-          'type' => 'file',
-          'data' => $images_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-      else {
-        $load_failure['fail'] = TRUE;
-        $load_failure['files'][] = $images_file;
-      }
-    }
-
-    // Custom CSS.
-    if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
-      $custom_css_file = $generated_files_path . '/' . $theme . '--custom-css.css';
-      if (file_exists($custom_css_file)) {
-        $variables['#attached']['css'][$custom_css_file] = array(
-          'type' => 'file',
-          'data' => $custom_css_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-      else {
-        $load_failure['fail'] = TRUE;
-        $load_failure['files'][] = $custom_css_file;
-      }
-    }
-
-    // Show grid.
-    if (isset($config['show_grid']) && $config['show_grid'] === 1) {
-      $show_grid_file = $path_to_theme . '/styles/css/show-grid.css';
-      if (file_exists($show_grid_file)) {
-        $variables['#attached']['css'][$show_grid_file] = array(
-          'type' => 'file',
-          'data' => $show_grid_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-    }
-
     // Markup overrides.
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-
-      // Breadcrumbs.
-      if ($config['breadcrumb_label'] === 1 || $config['breadcrumb_separator'] === 1) {
-        $breadcrumb_file = $generated_files_path . '/' . $theme . '--breadcrumb.css';
-        if (file_exists($breadcrumb_file)) {
-          $variables['#attached']['css'][$breadcrumb_file] = array(
-            'type' => 'file',
-            'data' => $breadcrumb_file,
-            'group' => CSS_AGGREGATE_THEME,
-            'weight' => CSS_THEME,
-          );
-        }
-        else {
-          $load_failure['fail'] = TRUE;
-          $load_failure['files'][] = $breadcrumb_file;
-        }
-      }
-
-      // Login block.
-      if (\Drupal::currentUser()->isAuthenticated() === FALSE) {
-        if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-          $login_block_file = $generated_files_path . '/' . $theme . '--login-block.css';
-          if (file_exists($login_block_file)) {
-            $variables['#attached']['css'][$login_block_file] = array(
-              'type' => 'file',
-              'data' => $login_block_file,
-              'group' => CSS_AGGREGATE_THEME,
-              'weight' => CSS_THEME,
-            );
-          }
-          else {
-            $load_failure['fail'] = TRUE;
-            $load_failure['files'][] = $login_block_file;
-          }
-        }
-      }
-
       // Set attribution.
       if (isset($config['attribution_toggle']) && $config['attribution_toggle'] === 1) {
         $variables['attribution'] = '<div class="attribution"><a href="http://adaptivethemes.com" target="_blank">Design by Adaptivethemes.com</a></div>';
       }
-    }
-
-    // Print a message if required files do not exist.
-    if ($load_failure['fail'] == TRUE) {
-      $item_list = array(
-        '#theme' => 'item_list',
-        '#items' => $load_failure['files'],
-      );
-      $failed_files_list = drupal_render($item_list);
-      drupal_set_message(t('<p>One or more generated CSS files not found:</p> !failuers <p>Go to this themes Appearance settings and click <em>Save extension settings</em> to generate new files.</p>', array('!failuers' => $failed_files_list)), 'error');
     }
   }
 
@@ -497,7 +507,10 @@ function at_core_preprocess_page(&$variables) {
     $theme_registry = \Drupal::service('theme.registry')->getRuntime();
 
     // Is this the front page or?
-    if (\Drupal::service('path.matcher')->isFrontPage()) {
+    //if (\Drupal::service('path.matcher')->isFrontPage()) {
+    //$path = \Drupal::request()->getPathInfo();
+    //$root_path = explode('/', $path)[1];
+    if ($variables['is_front'] === TRUE) {
       $page_args = [''];
     }
     else {
@@ -526,18 +539,18 @@ function at_core_preprocess_page(&$variables) {
     // Check if a file exists for this suggestion and build a path.
     // If there is not suggestion layout for this suggestion load
     // the default page suggestion layout.
-    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '--layout__'  . $suggestions_layout . '.css')) {
-      $layout = $generated_files_path . '/' . $theme . '--layout__'  . $suggestions_layout . '.css';
+    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
+      $layout = $generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css';
     }
     else {
-      $layout = $generated_files_path . '/' . $theme . '--layout__page.css';
+      $layout = $generated_files_path . '/' . $theme . '.layout.page.css';
     }
 
     // Attach the layout.
-    $variables['#attached']['css'][$layout] = array(
+    $variables['#attached']['css'][] = array(
       'type' => 'file',
       'data' => $layout,
-      'every_page' => FALSE,
+      'every_page' => TRUE,
       'group' => CSS_AGGREGATE_THEME,
       'weight' => CSS_LAYOUT,
     );
@@ -567,7 +580,7 @@ function at_core_preprocess_page(&$variables) {
   }
 
   if (!empty($active_regions)) {
-    $variables['attributes']['class'][] = 'page-root';
+    $variables['attributes']['class'][] = 'page';
 
     // This is where the heavy lifting takes place.
     $layout_loaded = new LayoutLoad($theme, $active_regions);
@@ -597,7 +610,7 @@ function at_core_preprocess_region(&$variables) {
     $variables['attributes']['role'][] = 'main';
   }
 
-  // Classitis classes.
+  // shortcodes classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
     // Add the responsive menu styles settings.
@@ -610,10 +623,10 @@ function at_core_preprocess_region(&$variables) {
       }
     }
 
-    if (isset($config['enable_classitis']) && $config['enable_classitis'] === 1) {
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
-        $classitis = Tags::explode($config['page_classes_region_' . $variables['region']]);
-        foreach ($classitis as $class) {
+        $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
+        foreach ($shortcodes as $class) {
           $variables['attributes']['class'][] = $class;
         }
       }
@@ -631,12 +644,12 @@ function at_core_preprocess_node(&$variables) {
 
   //kpr($variables);
 
-  // Classitis classes.
+  // shortcodes classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_classitis']) && $config['enable_classitis'] === 1) {
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['nodetype_classes_' . $node->getType()])) {
-        $classitis = Tags::explode($config['nodetype_classes_' . $node->getType()]);
-        foreach ($classitis as $class) {
+        $shortcodes = Tags::explode($config['nodetype_classes_' . $node->getType()]);
+        foreach ($shortcodes as $class) {
           $variables['attributes']['class'][] = $class;
         }
       }
@@ -787,11 +800,11 @@ function at_core_preprocess_block(&$variables) {
       }
     }
 
-    // Classitis classes.
-    if (isset($config['enable_classitis']) && $config['enable_classitis'] === 1) {
+    // shortcodes classes.
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
-        $classitis = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
-        foreach ($classitis as $class) {
+        $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
+        foreach ($shortcodes as $class) {
           $variables['attributes']['class'][] = $class;
         }
       }

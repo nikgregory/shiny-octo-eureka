@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/**
+ * Messages
+ *  - style system messages such as status, warning and error.
+ ========================================================================== */
+.messages {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 16px;
+  padding: 1rem;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.messages + .messages {
+  margin-top: 18.33437px;
+  margin-top: 24px;
+  margin-top: 1.5rem;
+}
+.messages .container {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.messages__list {
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+.messages__list + .messages__item {
+  margin-top: 24px;
+  margin-top: 1.5rem;
+}
+.messages__list .item-list ul {
+  margin: 18px 30px;
+  margin: 1.1459rem 1.8541rem;
+}
+.messages__list .item-list ul li {
+  list-style: square;
+}
+
+/* Success (status) */
+.messages--status,
+table tr.ok {
+  background-color: #f3faef;
+}
+
+.messages--status,
+.ok {
+  color: #325e1c;
+}
+
+.messages--status {
+  background-image: none;
+}
+
+/* Warning */
+.messages--warning,
+table tr.warning {
+  background-color: #fdf8ed;
+}
+
+.messages--warning,
+.warning {
+  color: #734c00;
+}
+
+.messages--warning {
+  background-image: none;
+}
+
+/* Error */
+.messages--error,
+table tr.error {
+  background-color: #fcf4f2;
+}
+
+.messages--error,
+.error {
+  color: #a51b00;
+}
+
+.messages--error {
+  background-image: none;
+}
+
+/* RTL */
+[dir="rtl"] .messages {
+  text-align: right;
+}
+
+/* Message icons */
+.messages .icon:before {
+  font-family: FontAwesome, sans-serif;
+  float: left;
+  vertical-align: top;
+  padding: 0 10px 0 0;
+  padding: 0 0.61803rem 0 0;
+}
+
+[dir="rtl"] .messages .icon:before {
+  padding: 0 0 0 10px;
+  padding: 0 0 0 0.61803rem;
+  float: right;
+}
+
+.icon-status:before {
+  content: "";
+}
+
+.icon-warning:before {
+  content: "";
+}
+
+.icon-error:before {
+  content: "";
+}
+
+.dev-query {
+  color: #fff;
+}

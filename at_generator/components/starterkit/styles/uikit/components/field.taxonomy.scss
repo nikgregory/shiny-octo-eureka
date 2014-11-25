@@ -1,0 +1,98 @@
+@import "partials/base";
+
+/**
+ * Field Taxonomy Reference
+ ========================================================================== */
+
+.field-type-taxonomy-term-reference {
+  @include output-rhythm(margin, $medium 0);
+
+  @if $field-taxonomy-label-as-icon == true {
+    .field__label {
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: $field-taxonomy-label-icon;
+        display: inline-block;
+        @include output-rhythm(margin, 0 $small 0 0); // LTR
+      }
+    }
+  }
+
+  @if ($field-taxonomy-item-as-labels == true) {
+    span {
+      display: inline-block;
+      background: lighten($text-background-color, $lighten-more);
+      color: $text-color;
+      border: $border-width $border-style $border-color;
+      margin: 0 3px 3px 0; // LTR
+      @include border-radius($border-radius);
+      @include output-rhythm(padding, 0 $small);
+
+      &:hover,
+      &:focus {
+        background: $text-background-color;
+      }
+
+      a {
+        color: $text-color;
+        display: inline-block;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span {
+      margin: 0 0 3px 3px;
+    }
+  }
+
+  @if ($field-taxonomy-item-icons == true) {
+    span {
+      display: inline-block;
+
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: $field-taxonomy-item-icon;
+        display: inline-block;
+        @include output-rhythm(margin, 0 $small 0 0); // LTR
+      }
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span:before {
+      @include output-rhythm(margin, 0 0 0 $small);
+    }
+  }
+
+  @if ($field-taxonomy-item-as-labels == false and $field-taxonomy-item-icons == false) {
+    .field__item {
+      @include output-rhythm(margin, 0 $small 0 0); // LTR
+    }
+
+    @at-root [dir="rtl"] .field-type--taxonomy-term-reference li {
+      @include output-rhythm(margin, 0 0 0 $small);
+    }
+  }
+
+  .field__items {
+    padding: 0;
+  }
+
+  .field__item {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    @include no-bullets;
+  }
+
+  &.field-label--inline .field__item {
+    //float: left;  // LTR
+  }
+
+  @at-root [dir="rtl"] .field-type--taxonomy-term-reference.field-label--inline .field__item {
+    //float: right;
+  }
+}
+

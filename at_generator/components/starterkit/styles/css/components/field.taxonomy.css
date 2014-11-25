@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/**
+ * Field Taxonomy Reference
+ ========================================================================== */
+.field-type-taxonomy-term-reference {
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+.field-type-taxonomy-term-reference .field__label:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  display: inline-block;
+  margin: 0 10px 0 0;
+  margin: 0 0.61803rem 0 0;
+}
+.field-type-taxonomy-term-reference span {
+  display: inline-block;
+  background: #fbfbfb;
+  color: #363636;
+  border: 1px solid #dcdcdc;
+  margin: 0 3px 3px 0;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0 10px;
+  padding: 0 0.61803rem;
+}
+.field-type-taxonomy-term-reference span:hover, .field-type-taxonomy-term-reference span:focus {
+  background: #eeeeee;
+}
+.field-type-taxonomy-term-reference span a {
+  color: #363636;
+  display: inline-block;
+}
+.field-type-taxonomy-term-reference span a:hover, .field-type-taxonomy-term-reference span a:focus {
+  text-decoration: none;
+}
+[dir="rtl"] .field-type--taxonomy-term-reference span {
+  margin: 0 0 3px 3px;
+}
+.field-type-taxonomy-term-reference .field__items {
+  padding: 0;
+}
+.field-type-taxonomy-term-reference .field__item {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  list-style: none;
+}
+.field-type-taxonomy-term-reference .field__item li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}

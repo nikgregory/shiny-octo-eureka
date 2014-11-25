@@ -88,7 +88,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   }
 
   $output = $output ? $output : '/** No fonts styles set **/';
-  $file_name = $theme . '--fonts.css';
+  $file_name = $theme . '.fonts.css';
   $filepath = "$generated_files_path/$file_name";
   file_unmanaged_save_data($output, $filepath, FILE_EXISTS_REPLACE);
 }

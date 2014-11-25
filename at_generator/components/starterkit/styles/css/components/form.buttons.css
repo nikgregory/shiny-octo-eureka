@@ -1,0 +1,274 @@
+@charset "UTF-8";
+/**
+ * Buttons
+ * We include button styling seperate (from _forms.scss) mainly because the form
+ * styles are quite long already and we often want to add unique button variants.
+ *
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
+button,
+.button {
+  padding: 7px 16px;
+  padding: 0.43769rem 1rem;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-transition: background-color, 0.15s, ease-in-out;
+  -o-transition: background-color, 0.15s, ease-in-out;
+  -webkit-transition: background-color, 0.15s, ease-in-out;
+  transition: background-color, 0.15s, ease-in-out;
+  line-height: normal;
+  color: #363636;
+  background: #fbfbfb;
+  border: 1px solid #dcdcdc;
+  opacity: 0.9;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 400;
+  width: auto;
+  display: inline-block;
+  position: relative;
+}
+button:hover, button:focus,
+.button:hover,
+.button:focus {
+  opacity: 1;
+  color: #363636;
+  background-color: #f3f3f3;
+  text-decoration: none;
+}
+button[disabled]:hover,
+.button[disabled]:hover {
+  color: #2e2e2e;
+}
+
+.button--primary {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button--primary:link, .button--primary:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+
+.button--danger {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:link, .button--danger:visited {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+}
+.button--danger:hover, .button--danger:focus, .button--danger:active, .button--danger.active {
+  color: #a51b00;
+  background-color: #fcf4f2;
+  border-color: #f9c9bf;
+  background-color: #f7e2dd;
+  border-color: #f7b5a8;
+}
+
+/* Drop buttons */
+.js .dropbutton-widget {
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.js .dropbutton-wrapper {
+  display: block;
+  min-height: 2em;
+  margin-right: 4px;
+  position: relative;
+}
+
+[dir="rtl"] .js .dropbutton-wrapper {
+  margin-right: 0;
+  margin-left: 4px;
+}
+
+.dropbutton input {
+  text-align: left;
+}
+.dropbutton .dropbutton-action > * {
+  white-space: nowrap;
+  line-height: normal;
+  padding: 7px 16px;
+  padding: 0.43769rem 1rem;
+}
+.dropbutton .secondary-action {
+  border-top: 1px solid #dcdcdc;
+  -moz-border-radius: 0 0 0 4px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 0 4px;
+}
+.dropbutton .secondary-action .button {
+  border: 0;
+  background: #ffffff;
+  width: 100%;
+}
+.dropbutton .secondary-action .button:hover, .dropbutton .secondary-action .button:focus {
+  -moz-border-radius: 0 0 0 4px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 0 4px;
+  background-color: #f3f3f3;
+}
+[dir="rtl"] .dropbutton {
+  margin: 0 3px 0 0;
+}
+[dir="rtl"] .dropbutton input {
+  text-align: right;
+}
+
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #dcdcdc;
+}
+.dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0;
+  border: 0;
+}
+.dropbutton-multiple .dropbutton .dropbutton-action .button {
+  -moz-border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.dropbutton-multiple .dropbutton .publish .button {
+  width: 100%;
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-left: 1px solid #dcdcdc;
+  border-right: 0;
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-left: 0;
+}
+.dropbutton-multiple.open .dropbutton-action .button {
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 0;
+}
+.dropbutton-multiple .dropbutton .secondary-action .button {
+  -moz-border-radius: 0 0 0 4px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 0 4px;
+}
+.dropbutton-multiple .dropbutton .secondary-action .button:hover, .dropbutton-multiple .dropbutton .secondary-action .button:focus {
+  -moz-border-radius: 0 0 0 4px;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 0 4px;
+}
+
+/**
+ * Show buttons as links.
+ */
+button.link {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+label button.link {
+  font-weight: bold;
+}
+
+/**
+ * Styles for link buttons and action links. TODO.
+ */
+/*
+#block-atblocksmenuactions {
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    @include no-bullets;
+  }
+}
+
+.action-links {
+  list-style: none;
+  padding: 0;
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    display: inline-block;
+    margin: 0 $small;
+
+    &:first-child {
+      margin-left: 0; // LTR
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .action-links li:first-child {
+    margin-left: $small;
+    margin-right: 0;
+  }
+}
+*/
+.button-action {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button-action:link, .button-action:visited {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+}
+.button-action:hover, .button-action:focus, .button-action:active, .button-action.active {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #999999;
+  background-color: #262626;
+  border-color: #8c8c8c;
+}
+.button-action:before {
+  content: "";
+  font-family: FontAwesome, sans-serif;
+  font-size: 9.88854px;
+  font-size: 0.61803rem;
+  display: inline-block;
+  padding: 0 4px 0 0;
+  vertical-align: middle;
+}
+[dir="rtl"] .button-action:before {
+  padding: 0 0 0 4px;
+}

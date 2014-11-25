@@ -44,7 +44,7 @@
       &.active {
         color: $tab-active-color;
         background: none;
-        border-bottom-color: $background-color;
+        border-bottom-color: $page-background-color;
 
         &:hover,
         &:focus {
@@ -112,7 +112,7 @@
       &.active {
         color: $tab-active-color;
         background: none;
-        border-bottom-color: $background-color;
+        border-bottom-color: $page-background-color;
 
         &:hover,
         &:focus {

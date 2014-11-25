@@ -42,10 +42,10 @@ interface FileOperationsInterface {
   /**
    * Replace old file content with new content.
    *
-   * @param string $file_path
-   *   Path to file to be replaced.
    * @param string $data
    *   Content to replace old file contents.
+   * @param string $file_path
+   *   Path to file to be replaced.
    */
   public function fileReplace($data, $file_path);
 
