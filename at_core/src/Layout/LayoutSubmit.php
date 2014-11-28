@@ -127,21 +127,24 @@ class LayoutSubmit implements LayoutSubmitInterface {
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
         if (file_exists($filepath)) {
-          $saved_css[] = '<li>' . $filepath . '</li>';
+          $saved_css[] = $filepath;
         }
       }
     }
 
     if (!empty($saved_css)) {
-      $saved_css_message = '<ul>' . implode($saved_css) . '</ul>';
-      drupal_set_message(t('The following layout CSS files were generated: !saved_css', array('!saved_css' => $saved_css_message)), 'status');
+      $saved_css_message_list = array(
+        '#theme' => 'item_list',
+        '#items' => $saved_css,
+      );
+      $saved_css_message = drupal_render($saved_css_message_list);
+      drupal_set_message(t('The following layout <b>CSS files</b> were generated: !saved_css', array('!saved_css' => $saved_css_message)), 'status');
     }
   }
 
 
   // Save regions to the theme info file, these can change if a new row is added.
   public function saveLayoutRegions() {
-
     $regions = array();
 
     foreach ($this->layout_config['rows'] as $row => $row_values) {
@@ -153,11 +156,9 @@ class LayoutSubmit implements LayoutSubmitInterface {
     $regions['page_top'] = "'" . 'Page top' . "'";
     $regions['page_bottom'] = "'" . 'Page bottom' . "'";
 
-
     $path = drupal_get_path('theme', $this->theme_name);
     $info_file = $this->theme_name . '.info.yml';
     $file_path = $path . '/' . $info_file;
-
 
     // Create a backup.
     if ($this->form_values['settings_enable_backups'] == 1) {
@@ -180,9 +181,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
     //$theme_info_data = drupal_parse_info_file($file_path);
     $parser = new Parser();
     $theme_info_data = $parser->parse(file_get_contents($file_path));
-
     $theme_info_data['regions'] = $regions;
-
 
     // During the parse get contents single quotes are stripped from
     // strings, we have to add them back because they might have spaces.
@@ -198,11 +197,9 @@ class LayoutSubmit implements LayoutSubmitInterface {
   }
 
 
-
   // Save each suggestion template, these are saved every time the layout settings
   // are saved because the rows and regions might change, so we resave every template.
   public function saveLayoutSuggestionsMarkup() {
-
     $template_suggestions = array();
 
     if (!empty($this->form_values['settings_suggestions'])) {
@@ -343,14 +340,17 @@ class LayoutSubmit implements LayoutSubmitInterface {
     foreach ($templates as $suggestion => $template_values) {
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
-        $saved_templates[] = '<li>' . $templates[$suggestion]['template_path'] . '</li>';
+        $saved_templates[] = $templates[$suggestion]['template_path'];
       }
     }
 
     if (!empty($saved_templates)) {
-      $saved_templates_message = '<ul>' . implode($saved_templates) . '</ul>';
-      drupal_set_message(t('The following templates were generated: !saved_templates', array('!saved_templates' => $saved_templates_message)), 'status');
+      $saved_templates_message_list = array(
+        '#theme' => 'item_list',
+        '#items' => $saved_templates,
+      );
+      $saved_templates_message = drupal_render($saved_templates_message_list);
+      drupal_set_message(t('The following <b>templates</b> were generated: !saved_templates', array('!saved_templates' => $saved_templates_message)), 'status');
     }
   }
-
 }

@@ -78,16 +78,6 @@ $form['layouts']['layouts-enable-container']['settings_layouts_enable'] = array(
   '#default_value' => theme_get_setting('settings.layouts_enable', $theme),
 );
 
-/*
-$form['layouts']['layouts-enable-container']['settings_layouts_disabled'] = array(
-  '#type' => 'container',
-  '#markup' => t('Disabling the Layout system assumes you will take care of writing and loading layout CSS. Previously generated page  template suggestions will continue to be used.'),
-  '#states' => array(
-    'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => FALSE)),
-  ),
-);
-*/
-
 //
 // Layout SELECT
 // ---------------------------------------------------------------------------------
@@ -395,31 +385,11 @@ $form['layouts']['actions'] = array(
 $form['layouts']['actions']['submit'] = array(
   '#type' => 'submit',
   '#value' => t('Save layout settings'),
-  //'#validate'=> array('at_core_validate_layouts'),
+  '#validate'=> array('at_core_validate_layouts'),
   '#submit'=> array('at_core_submit_layouts'),
   '#button_type' => 'primary',
-/*
-  '#states' => array(
-    'disabled' => array('input[name="settings_layouts_enable"]' => array('checked' => FALSE)),
-  ),
-*/
 );
 
-/*
-if (!empty($manage_suggestions_data)) {
-  $form['layouts']['actions']['delete_suggestions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Delete suggestions'),
-    '#validate'=> array('at_core_validate_layouts'),
-    '#submit'=> array('at_core_submit_layouts'),
-    '#button_type' => 'secondary',
-    '#states' => array(
-      'enabled' => array('input[name="delete_suggestions"]' => array('checked' => TRUE)),
-    ),
-  );
-}
-*/
-
 // Layout submit handlers.
-//include_once(drupal_get_path('theme', 'at_core') . '/forms/layout/layouts_validate.php');
+include_once(drupal_get_path('theme', 'at_core') . '/forms/layout/layouts_validate.php');
 include_once(drupal_get_path('theme', 'at_core') . '/forms/layout/layouts_submit.php');

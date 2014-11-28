@@ -90,15 +90,8 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   unset($node_view_modes['search_index']);
   unset($node_view_modes['search_result']);
 
-  // Attached required CSS and JS libraries and files.
-  $form['#attached'] = array(
-    'css' => array(
-      $at_core_path . '/styles/css/appearance.css',
-    ),
-    'js' => array(
-      $at_core_path . '/scripts/appearance.js',
-    ),
-  );
+  // Attached required CSS and JS.
+  $form['#attached']['library'][] = 'at_core/at.appearance_settings';
 
   // AT Core
   if ($theme == 'at_core') {

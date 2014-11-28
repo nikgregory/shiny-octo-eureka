@@ -19,29 +19,35 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $px_size = '';
   $rem_size = '';
 
-  // Set the base font size, we need this to calculate rem sizes.
-  if (!empty($values['settings_font_size_base'])) {
-    $base_size = $values['settings_font_size_base'];
-  }
+/*
+  $line_height_multiplier = $values['font_lineheight_multiplier_default'];
+  $values['font_lineheight_multiplier_large'];
+  $values['font_lineheight_multiplier_large_size'];
+*/
 
   foreach ($font_elements as $font_key => $font_values) {
 
     // Get the selectors for each element.
-    if ($values['settings_font_' . $font_key] !== 'none') {
-      $fonts[$font_key]['selectors'] = $font_values['selector'];
-    }
+    $fonts[$font_key]['selectors'] = $font_values['selector'];
 
     // Custom selectors, reset the selectors variable if we have custom selectors.
     if ($font_key == 'custom_selectors' && !empty($values['settings_font_custom_selectors']) && !empty($values['settings_custom_selectors'])) {
       $fonts[$font_key]['selectors'] = $values['settings_custom_selectors']; // ? $values['settings_custom_selectors'] : 'ruby ruby'
     }
 
-    // Size
+    // Size/Line height
     if (!empty($values['settings_font_size_' . $font_key])) {
-      $px_size = $values['settings_font_size_' . $font_key] . 'px';
-      $rem_size = $values['settings_font_size_' . $font_key] / $base_size . 'rem';
+      $px_size = $values['settings_font_size_' . $font_key];
+      $rem_size = $values['settings_font_size_' . $font_key] / $base_size;
 
-      $fonts[$font_key]['size'] = 'font-size:' . $px_size . ';font-size:' . $rem_size . ';';
+      // line-height multipliers are a bit magical, but "pretty good" defaults.
+      $line_height_multiplier = $values['settings_font_lineheight_multiplier_default'];
+      if ($px_size >= $values['settings_font_lineheight_multiplier_large_size']) {
+        $line_height_multiplier = $values['settings_font_lineheight_multiplier_large'];
+      }
+
+      $fonts[$font_key]['size'] = 'font-size:' . ceil($px_size) . 'px; font-size:' . round($rem_size, 3) . 'rem;';
+      $fonts[$font_key]['lineheight'] = 'line-height:' . ceil($px_size * $line_height_multiplier) . 'px; line-height:' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
     // Websafe
@@ -79,6 +85,11 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
         if (isset($values['size'])) {
           $font_style .= $values['size'];
         }
+
+        if (isset($values['lineheight'])) {
+          $font_style .= $values['lineheight'];
+        }
+
         $font_style .= '}';
         $font_styles[] = $font_style;
       }

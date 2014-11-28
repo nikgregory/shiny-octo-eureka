@@ -28,15 +28,43 @@
   text-align: left;
 }
 
+
+// Override core filter.admin style since we don't really want to unset
+// the entire stylesheet, just replace the help icon with font-awesome.
+.filter-help a:after {
+  position: static;
+  top: auto;
+  right: auto; /* LTR */
+  display: block;
+  width: auto;
+  height: auto;
+  background: transparent;
+  margin: 0;
+}
+
+[dir="rtl"] .filter-help a:after {
+  left: auto;
+}
+
+.filter-help a,
 .more-help-link a {
-  /* background: url(../../../misc/help.png) 0 50% no-repeat; LTR - broken link to image, change to webfont icon */
-  /* padding: 1px 0 1px 20px; LTR */
-  /*
-  @at-root [dir="rtl"] .more-help-link a {
-    background-position: 100% 50%;
-    padding: 1px 20px 1px 0;
+  background: transparent;
+  margin-#{$flow-to}: 0;
+
+  &:after {
+    font-family: FontAwesome, sans-serif;
+    float: $flow-to; // LTR
+    padding: 0 1px;
+    text-align: $flow-to; // LTR
+    content: $fa-var-question-circle;
+    color: $border-color;
+    @include output-rhythm(width, $medium);
   }
-  */
+
+  @at-root [dir="rtl"] .more-help-link a {
+    background: transparent;
+  }
+
 }
 
 

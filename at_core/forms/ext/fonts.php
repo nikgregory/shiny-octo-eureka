@@ -55,7 +55,7 @@ $form['fonts'] = array(
 // FONT Setup
 $form['fonts']['setup'] = array(
   '#type' => 'details',
-  '#title' => t('Fonts'),
+  '#title' => t('Fonts Setup'),
 );
 
 // Help
@@ -99,17 +99,64 @@ $form['fonts']['setup']['settings_font_customstack'] = array(
   '#description' => t('Enter a comma seperated list of fonts. Quote font names with spaces, e.g. <code>"Times New Roman", Garamond, sans-serif</code>'),
 );
 
+$form['fonts']['setup']['lineheight'] = array(
+  '#type' => 'details',
+  '#title' => t('Line height mulipliers'),
+  '#description' => t('Multipliers are used to calculate the line-height for each font size. Normally this value will be between 1.0 and 3.0.'),
+);
+
+$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_default'] = array(
+  '#type' => 'number',
+  '#title' => t('Default'),
+  '#max-lenght' => 3,
+  '#step' => 0.1,
+  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_default'),
+  '#attributes' => array(
+    'min' => 1,
+    'max' => 10,
+    'step' => 0.1,
+    'class' => array('font-option')
+  ),
+);
+
+$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large'] = array(
+  '#type' => 'number',
+  '#title' => t('Large font multiplier'),
+  '#max-lenght' => 3,
+  '#step' => 0.1,
+  '#description' => t('Large fonts usually require a smaller multiplier.'),
+  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_large'),
+  '#attributes' => array(
+    'min' => 1,
+    'max' => 10,
+    'step' => 0.1,
+    'class' => array('font-option')
+  ),
+);
+
+$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large_size'] = array(
+  '#type' => 'number',
+  '#title' => t('Large font size'),
+  '#field_suffix' => 'px',
+  '#max-lenght' => 2,
+  '#description' => t('What is considerd a large font?'),
+  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_large_size'),
+  '#attributes' => array(
+    'min' => 1,
+    'max' => 99,
+    'step' => 1,
+    'class' => array('font-option')
+  ),
+);
+
 // APPLY Fonts
 $form['fonts']['apply'] = array(
   '#type' => 'details',
   '#title' => t('Apply Fonts'),
 );
 
-
 // Build form
 foreach ($font_elements as $font_element_key => $font_element_values) {
-
-  //kpr($font_element_key);
 
   $form['fonts']['apply'][$font_element_key] = array(
     '#type' => 'details',
@@ -188,7 +235,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     $form['fonts']['apply'][$font_element_key]['settings_font_size_' . $font_element_key] = array(
       '#type' => 'number',
       '#title' => t('Size'),
-      '#field_suffix' => 'px <small>(coverted to rem with px fallback)</small>',
+      '#field_suffix' => 'px <small>(coverts to rem)</small>',
       '#default_value' => String::checkPlain(theme_get_setting('settings.font_size_' . $font_element_key)),
       '#attributes' => array(
         'min' => 0,
@@ -199,23 +246,8 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     );
   }
 
-  // Line-height
-  /*
-  if ($font_element_key == 'base') {
-    $form['fonts']['apply'][$font_element_key]['settings_font_lineheight_' . $font_element_key] = array(
-      '#type' => 'textfield',
-      '#title' => t('Line height'),
-      '#field_suffix' => 'px (coverted to rem with px fallback)',
-      '#size' => 3,
-      '#maxlength' => 3,
-      '#default_value' => check_plain(theme_get_setting('settings.font_lineheight_' . $font_element_key)),
-      '#attributes' => array('class' => array('font-option')),
-    );
-  }
-  */
-
   // Custom selectors has a textarea.
-  if ($font_element_key == 'custom_selectors') {
+  if ($font_element_key === 'custom_selectors') {
     $form['fonts']['apply']['custom_selectors']['settings_custom_selectors'] = array(
       '#type' => 'textarea',
       '#title' => t('Custom Selectors'),

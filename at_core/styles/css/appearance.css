@@ -25,8 +25,6 @@ pre code { font-weight: 400; padding: 0; margin: 0; }
 
 pre.code-block { background: #F5F5F2; border: 1px solid #ccc; font-weight: 400; margin: 0; padding: 20px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
-.form-item .description { position: absolute !important; clip: rect(1px, 1px, 1px, 1px); overflow: hidden; height: 1px; width: 1px; padding: 0; word-wrap: normal; font: 0/0 a; }
-
 .subsystem-enabled-container { box-sizing: border-box; float: right; margin-top: -1.75em; padding: 0; }
 .subsystem-enabled-container .form-type-checkbox { display: block; float: right; margin: 0; padding-right: 10px; }
 

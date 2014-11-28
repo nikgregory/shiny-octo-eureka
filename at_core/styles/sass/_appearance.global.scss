@@ -85,7 +85,7 @@ pre.code-block {
 // Hide visually all descriptions by default, this massively cleans up the form but leaves
 // important non-visual clues and directions for unsighted users.
 .form-item .description {
-  @include visually-hidden;
+  //@include visually-hidden;
 }
 
 .subsystem-enabled-container {

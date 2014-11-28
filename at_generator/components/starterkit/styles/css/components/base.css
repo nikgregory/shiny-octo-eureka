@@ -78,29 +78,21 @@ fieldset {
 }
 
 /* line 55, ../../uikit/components/partials/_base.elements.scss */
-p,
-dl,
-hr,
-multicol {
-  display: block;
-}
-
-/* line 64, ../../uikit/components/partials/_base.elements.scss */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-/* line 72, ../../uikit/components/partials/_base.elements.scss */
+/* line 63, ../../uikit/components/partials/_base.elements.scss */
 h1, h2, h3 {
   font-weight: 400;
 }
 
-/* line 76, ../../uikit/components/partials/_base.elements.scss */
+/* line 68, ../../uikit/components/partials/_base.elements.scss */
 h4, h5, h6 {
   font-weight: 600;
 }
 
-/* line 81, ../../uikit/components/partials/_base.elements.scss */
+/* line 73, ../../uikit/components/partials/_base.elements.scss */
 h1, .h1 {
   font-size: 42px;
   font-size: 2.61803rem;
@@ -108,7 +100,7 @@ h1, .h1 {
   line-height: 3rem;
 }
 
-/* line 82, ../../uikit/components/partials/_base.elements.scss */
+/* line 74, ../../uikit/components/partials/_base.elements.scss */
 h2, .h2 {
   font-size: 29px;
   font-size: 1.82838rem;
@@ -116,7 +108,7 @@ h2, .h2 {
   line-height: 2.25rem;
 }
 
-/* line 83, ../../uikit/components/partials/_base.elements.scss */
+/* line 75, ../../uikit/components/partials/_base.elements.scss */
 h3, .h3 {
   font-size: 26px;
   font-size: 1.61803rem;
@@ -124,7 +116,7 @@ h3, .h3 {
   line-height: 1.875rem;
 }
 
-/* line 84, ../../uikit/components/partials/_base.elements.scss */
+/* line 76, ../../uikit/components/partials/_base.elements.scss */
 h4, .h4 {
   font-size: 18px;
   font-size: 1.13rem;
@@ -132,7 +124,7 @@ h4, .h4 {
   line-height: 1.5rem;
 }
 
-/* line 85, ../../uikit/components/partials/_base.elements.scss */
+/* line 77, ../../uikit/components/partials/_base.elements.scss */
 h5, .h5 {
   font-size: 16px;
   font-size: 1rem;
@@ -140,7 +132,7 @@ h5, .h5 {
   line-height: 1.5rem;
 }
 
-/* line 86, ../../uikit/components/partials/_base.elements.scss */
+/* line 78, ../../uikit/components/partials/_base.elements.scss */
 h6, .h6 {
   font-size: 11px;
   font-size: 0.69838rem;
@@ -148,7 +140,7 @@ h6, .h6 {
   line-height: 1.125rem;
 }
 
-/* line 90, ../../uikit/components/partials/_base.elements.scss */
+/* line 82, ../../uikit/components/partials/_base.elements.scss */
 h1 small, .h1 small {
   font-size: 26px;
   font-size: 1.61803rem;
@@ -156,7 +148,7 @@ h1 small, .h1 small {
   line-height: 1.875rem;
 }
 
-/* line 91, ../../uikit/components/partials/_base.elements.scss */
+/* line 83, ../../uikit/components/partials/_base.elements.scss */
 h2 small, .h2 small {
   font-size: 18px;
   font-size: 1.13rem;
@@ -164,7 +156,7 @@ h2 small, .h2 small {
   line-height: 1.5rem;
 }
 
-/* line 92, ../../uikit/components/partials/_base.elements.scss */
+/* line 84, ../../uikit/components/partials/_base.elements.scss */
 h3 small, .h3 small,
 h4 small, .h4 small {
   font-size: 16px;
@@ -173,7 +165,7 @@ h4 small, .h4 small {
   line-height: 1.5rem;
 }
 
-/* line 101, ../../uikit/components/partials/_base.elements.scss */
+/* line 93, ../../uikit/components/partials/_base.elements.scss */
 img {
   height: auto;
   line-height: 0;
@@ -181,7 +173,7 @@ img {
   display: inline-block;
 }
 
-/* line 111, ../../uikit/components/partials/_base.elements.scss */
+/* line 103, ../../uikit/components/partials/_base.elements.scss */
 audio,
 canvas,
 img,
@@ -189,45 +181,45 @@ video {
   vertical-align: middle;
 }
 
-/* line 120, ../../uikit/components/partials/_base.elements.scss */
+/* line 112, ../../uikit/components/partials/_base.elements.scss */
 body > pre,
 .xdebug-var-dump {
   color: #ffffff;
 }
 
-/* line 126, ../../uikit/components/partials/_base.elements.scss */
+/* line 118, ../../uikit/components/partials/_base.elements.scss */
 .page-root .xdebug-var-dump {
   color: #363636;
 }
 
-/* line 133, ../../uikit/components/partials/_base.elements.scss */
+/* line 125, ../../uikit/components/partials/_base.elements.scss */
 a {
   text-decoration: none;
 }
-/* line 151, ../../uikit/components/partials/_base.elements.scss */
+/* line 143, ../../uikit/components/partials/_base.elements.scss */
 a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* line 160, ../../uikit/components/partials/_base.elements.scss */
+/* line 152, ../../uikit/components/partials/_base.elements.scss */
 ul,
 ol {
   padding: 0 0 0 16px;
   padding: 0 0 0 1rem;
 }
-/* line 164, ../../uikit/components/partials/_base.elements.scss */
+/* line 156, ../../uikit/components/partials/_base.elements.scss */
 [dir="rtl"] ul, [dir="rtl"] ol {
   padding: 0 18px 0 0;
   padding: 0 1.13rem 0 0;
 }
 
-/* line 171, ../../uikit/components/partials/_base.elements.scss */
+/* line 163, ../../uikit/components/partials/_base.elements.scss */
 blockquote {
   padding: 16px;
   padding: 1rem;
   border-left: 5px solid #dcdcdc;
 }
-/* line 175, ../../uikit/components/partials/_base.elements.scss */
+/* line 167, ../../uikit/components/partials/_base.elements.scss */
 blockquote p {
   font-size: 18px;
   font-size: 1.13rem;
@@ -235,11 +227,11 @@ blockquote p {
   line-height: 1.5rem;
   font-weight: 300;
 }
-/* line 179, ../../uikit/components/partials/_base.elements.scss */
+/* line 171, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child {
   margin-top: 0;
 }
-/* line 182, ../../uikit/components/partials/_base.elements.scss */
+/* line 174, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child:before {
   font-family: FontAwesome, sans-serif;
   content: "";
@@ -251,11 +243,11 @@ blockquote p:first-child:before {
   width: 18px;
   width: 1.13rem;
 }
-/* line 194, ../../uikit/components/partials/_base.elements.scss */
+/* line 186, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:last-child {
   margin-bottom: 0;
 }
-/* line 199, ../../uikit/components/partials/_base.elements.scss */
+/* line 191, ../../uikit/components/partials/_base.elements.scss */
 blockquote small {
   display: block;
   font-size: 11px;
@@ -264,32 +256,32 @@ blockquote small {
   line-height: 1.125rem;
   color: #434343;
 }
-/* line 204, ../../uikit/components/partials/_base.elements.scss */
+/* line 196, ../../uikit/components/partials/_base.elements.scss */
 blockquote small:before {
   content: '\2014 \00A0';
 }
-/* line 210, ../../uikit/components/partials/_base.elements.scss */
+/* line 202, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right {
   padding-right: 5.26316%;
   padding-left: 0;
   border-right: 5px solid #dcdcdc;
   border-left: 0;
 }
-/* line 216, ../../uikit/components/partials/_base.elements.scss */
+/* line 208, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right p,
 blockquote.pull-right small {
   text-align: right;
 }
-/* line 222, ../../uikit/components/partials/_base.elements.scss */
+/* line 214, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:before {
   content: '';
 }
-/* line 225, ../../uikit/components/partials/_base.elements.scss */
+/* line 217, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:after {
   content: '\00A0 \2014';
 }
 
-/* line 234, ../../uikit/components/partials/_base.elements.scss */
+/* line 226, ../../uikit/components/partials/_base.elements.scss */
 hr {
   height: 1px;
   border: 0;
@@ -299,7 +291,7 @@ hr {
 }
 
 /* Webfont smoothing */
-/* line 244, ../../uikit/components/partials/_base.elements.scss */
+/* line 236, ../../uikit/components/partials/_base.elements.scss */
 :before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -430,12 +422,11 @@ input[type="week"] {
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
   max-width: 100%;
   box-sizing: border-box;
-  line-height: normal;
   color: #505050;
   border: 1px solid #E5E5E5;
   background-color: #ffffff;
 }
-/* line 45, ../../uikit/components/partials/_base.form.scss */
+/* line 43, ../../uikit/components/partials/_base.form.scss */
 textarea:focus,
 select:focus,
 input[type="date"]:focus,
@@ -456,7 +447,7 @@ input[type="week"]:focus {
   border-color: #E5E5E5;
   color: #363636;
 }
-/* line 52, ../../uikit/components/partials/_base.form.scss */
+/* line 50, ../../uikit/components/partials/_base.form.scss */
 textarea:hover, textarea:focus,
 select:hover,
 select:focus,
@@ -488,7 +479,7 @@ input[type="week"]:hover,
 input[type="week"]:focus {
   background-color: #fbfbfb;
 }
-/* line 57, ../../uikit/components/partials/_base.form.scss */
+/* line 55, ../../uikit/components/partials/_base.form.scss */
 textarea[disabled],
 select[disabled],
 input[type="date"][disabled],
@@ -506,7 +497,7 @@ input[type="url"][disabled],
 input[type="week"][disabled] {
   cursor: not-allowed;
 }
-/* line 60, ../../uikit/components/partials/_base.form.scss */
+/* line 58, ../../uikit/components/partials/_base.form.scss */
 textarea[disabled]:hover, textarea[disabled]:focus,
 select[disabled]:hover,
 select[disabled]:focus,
@@ -539,52 +530,47 @@ input[type="week"][disabled]:focus {
   color: #363636;
 }
 
-/* line 70, ../../uikit/components/partials/_base.form.scss */
+/* line 68, ../../uikit/components/partials/_base.form.scss */
 input {
   min-width: 13px;
 }
 
-/* line 77, ../../uikit/components/partials/_base.form.scss */
+/* line 75, ../../uikit/components/partials/_base.form.scss */
 input[type="checkbox"], input[type="radio"] {
   display: inline-block;
   position: relative;
   bottom: 1px;
 }
 
-/* line 92, ../../uikit/components/partials/_base.form.scss */
-textarea {
-  resize: vertical;
-}
-
-/* line 104, ../../uikit/components/partials/_base.form.scss */
+/* line 96, ../../uikit/components/partials/_base.form.scss */
 textarea,
 select[size],
 select[multiple] {
   height: auto;
 }
 
-/* line 112, ../../uikit/components/partials/_base.form.scss */
+/* line 104, ../../uikit/components/partials/_base.form.scss */
 label {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   display: block;
 }
-/* line 119, ../../uikit/components/partials/_base.form.scss */
+/* line 111, ../../uikit/components/partials/_base.form.scss */
 label.option {
   font-weight: normal;
   display: inline;
   padding: 0 3px;
 }
 
-/* line 128, ../../uikit/components/partials/_base.form.scss */
+/* line 120, ../../uikit/components/partials/_base.form.scss */
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* line 139, ../../uikit/components/partials/_base.form.scss */
+/* line 131, ../../uikit/components/partials/_base.form.scss */
 details {
   border: 1px solid #E5E5E5;
   border-radius: 4px;
@@ -592,14 +578,14 @@ details {
   margin: 1rem 0;
 }
 
-/* line 147, ../../uikit/components/partials/_base.form.scss */
+/* line 139, ../../uikit/components/partials/_base.form.scss */
 summary {
   cursor: pointer;
   padding: 10px;
   padding: 0.61803rem;
 }
 
-/* line 157, ../../uikit/components/partials/_base.form.scss */
+/* line 149, ../../uikit/components/partials/_base.form.scss */
 input[readonly],
 select[readonly],
 textarea[readonly] {
@@ -607,7 +593,7 @@ textarea[readonly] {
   color: #363636;
 }
 
-/* line 165, ../../uikit/components/partials/_base.form.scss */
+/* line 157, ../../uikit/components/partials/_base.form.scss */
 button[disabled],
 input[disabled],
 select[disabled],
@@ -628,7 +614,7 @@ a.button_disabled {
   -khtml-user-select: none;
 }
 
-/* line 189, ../../uikit/components/partials/_base.form.scss */
+/* line 181, ../../uikit/components/partials/_base.form.scss */
 input:invalid,
 button:invalid,
 .button:invalid,
@@ -637,19 +623,19 @@ textarea:invalid {
   box-shadow: none;
 }
 
-/* line 198, ../../uikit/components/partials/_base.form.scss */
+/* line 190, ../../uikit/components/partials/_base.form.scss */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #505050;
 }
 
-/* line 203, ../../uikit/components/partials/_base.form.scss */
+/* line 195, ../../uikit/components/partials/_base.form.scss */
 input:-moz-placeholder,
 textarea:-moz-placeholder {
   color: #505050;
 }
 
-/* line 208, ../../uikit/components/partials/_base.form.scss */
+/* line 200, ../../uikit/components/partials/_base.form.scss */
 input.placeholder_text,
 textarea.placeholder_text {
   color: #505050;
@@ -2042,6 +2028,81 @@ table tr.error {
 /* line 18, ../../uikit/components/partials/_component.page.pagers.scss */
 .item-list .pager li.pager-current {
   font-weight: bold;
+}
+
+/**
+ * Labels.
+ *  -  for example "new" mark on comments, tags etc.
+ *
+ *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
+ ========================================================================== */
+/**
+ * Markup generated by theme_more_link().
+ */
+/* line 12, ../../uikit/components/partials/_component.labels.scss */
+.more-link {
+  text-align: right
+  /* LTR */
+}
+
+/* line 16, ../../uikit/components/partials/_component.labels.scss */
+[dir="rtl"] .more-link {
+  text-align: left;
+}
+
+/**
+ * More help link style.
+ */
+/* line 23, ../../uikit/components/partials/_component.labels.scss */
+.more-help-link {
+  text-align: right
+  /* LTR */
+}
+
+/* line 27, ../../uikit/components/partials/_component.labels.scss */
+[dir="rtl"] .more-help-link {
+  text-align: left;
+}
+
+/* line 34, ../../uikit/components/partials/_component.labels.scss */
+.filter-help a:after {
+  position: static;
+  top: auto;
+  right: auto;
+  /* LTR */
+  display: block;
+  width: auto;
+  height: auto;
+  background: transparent;
+  margin: 0;
+}
+
+/* line 45, ../../uikit/components/partials/_component.labels.scss */
+[dir="rtl"] .filter-help a:after {
+  left: auto;
+}
+
+/* line 49, ../../uikit/components/partials/_component.labels.scss */
+.filter-help a,
+.more-help-link a {
+  background: transparent;
+  margin-right: 0;
+}
+/* line 54, ../../uikit/components/partials/_component.labels.scss */
+.filter-help a:after,
+.more-help-link a:after {
+  font-family: FontAwesome, sans-serif;
+  float: right;
+  padding: 0 1px;
+  text-align: right;
+  content: "";
+  color: #dcdcdc;
+  width: 16px;
+  width: 1rem;
+}
+/* line 64, ../../uikit/components/partials/_component.labels.scss */
+[dir="rtl"] .more-help-link a {
+  background: transparent;
 }
 
 /**

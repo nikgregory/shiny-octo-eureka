@@ -87,3 +87,34 @@ at.yui3:
 #   version: 2.1
 #   js:
 #     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+
+# AT Core libs for theme dev.
+at.devel_colorize_layout:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/devel.colorize.layout.css: { every_page: true }
+
+at.devel_colorize_regions:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/devel.colorize.regions.css: { every_page: true }
+
+at.devel_nuke_toolbar:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/devel.nuke.toolbar.css: { every_page: true }
+
+# Appearance settings libraries
+at.appearance_settings:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/appearance.css: {}
+  js:
+    scripts/appearance.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

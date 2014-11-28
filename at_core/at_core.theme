@@ -291,10 +291,6 @@ function at_core_page_attachments_alter(array &$page) {
       drupal_set_message(t('<p>One or more generated CSS files not found:</p> !failuers <p>Go to this themes Appearance settings and click <em>Save extension settings</em> to generate new files.</p>', array('!failuers' => $failed_files_list)), 'error');
     }
 
-    // ########################################################################
-    // TODO: Convert all AT Core Extension scripts and files to libraries!
-    // ########################################################################
-
     // Attach Windowsize library
     if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
       $page['#attached']['library'][] = 'at_core/at.windowsize';
@@ -313,29 +309,17 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Attach devel_layout CSS file.
     if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
-      $page['#attached']['css'][] = array(
-        'data' => $path_to_at_core . '/styles/css/devel-layout.css',
-        'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_COMPONENT,
-      );
+       $page['#attached']['library'][] = 'at_core/at.devel_colorize_layout';
     }
 
     // Attach devel_colorize-regions CSS file.
     if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
-      $page['#attached']['css'][] = array(
-        'data' => $path_to_at_core . '/styles/css/devel-colorize-regions.css',
-        'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_COMPONENT,
-      );
+      $page['#attached']['library'][] = 'at_core/at.devel_colorize_regions';
     }
 
     // Attach nuke_toolbar CSS file.
     if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
-      $page['#attached']['css'][] = array(
-        'data' => $path_to_at_core . '/styles/css/nuetralize-toolbar.css',
-        'group' => CSS_AGGREGATE_THEME,
-        'weight' => CSS_COMPONENT,
-      );
+      $page['#attached']['library'][] = 'at_core/at.devel_nuke_toolbar';
     }
 
     // Attach polyfills to support IE8.
@@ -509,9 +493,6 @@ function at_core_preprocess_page(&$variables) {
     $theme_registry = \Drupal::service('theme.registry')->getRuntime();
 
     // Is this the front page or?
-    //if (\Drupal::service('path.matcher')->isFrontPage()) {
-    //$path = \Drupal::request()->getPathInfo();
-    //$root_path = explode('/', $path)[1];
     if ($variables['is_front'] === TRUE) {
       $page_args = [''];
     }
@@ -519,7 +500,7 @@ function at_core_preprocess_page(&$variables) {
       $page_args = explode('/', Url::fromRoute('<current>')->getInternalPath());
     }
 
-    // Add node type suggestion
+    // Add node type suggestion.
     if (isset($variables['node'])) {
       $page_args[] = $variables['node']->getType();
     }
@@ -538,9 +519,7 @@ function at_core_preprocess_page(&$variables) {
       }
     }
 
-    // Check if a file exists for this suggestion and build a path.
-    // If there is not suggestion layout for this suggestion load
-    // the default page suggestion layout.
+    // If there is no layout for this suggestion load the default.
     if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
       $layout = $generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css';
     }

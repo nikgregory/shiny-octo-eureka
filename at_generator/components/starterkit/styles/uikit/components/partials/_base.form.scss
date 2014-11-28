@@ -27,7 +27,6 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-
   @include output-rhythm(padding, $xx-small $x-small);
 
   border-radius: $form-border-radius;
@@ -37,7 +36,6 @@ input[type="week"] {
   max-width: 100%;
   box-sizing: border-box;
 
-  line-height: normal;
   color: $form-text-color;
   border: $form-border-width $form-border-style $form-border-color;
   background-color: $form-background-color;
@@ -85,12 +83,6 @@ input {
   &[type="file"]:focus,
   &[type="radio"]:focus,
   &[type="checkbox"]:focus {}
-}
-
-
-// Textarea
-textarea {
-  resize: vertical; // Allow only vertical resizing of textareas.
 }
 
 

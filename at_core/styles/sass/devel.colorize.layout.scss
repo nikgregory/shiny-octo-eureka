@@ -17,12 +17,13 @@ body {
   display: none !important;
 }
 
-[class*="page-row__"] {
+[class*="page__"] {
   padding-top: 0;
   padding-bottom: 0;
 
   .regions {
     padding: 20px 0 10px 0;
+    background: transparent;
   }
 
   // Stripe rows with color.

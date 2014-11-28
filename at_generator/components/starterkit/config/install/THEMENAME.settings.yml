@@ -65,6 +65,17 @@ settings:
   generated_files_path: themes/THEMENAME/styles/css/generated
   extensions_form_open: 0
   layouts_form_open: 0
+  font_size_base: '16'
+  font_size_sitename: '36'
+  font_size_h1: '42'
+  font_size_h2: '30'
+  font_size_h3: '26'
+  font_size_h4: '18'
+  font_size_h5: '16'
+  font_size_h6: '11'
+  font_lineheight_multiplier_default: '1.5'
+  font_lineheight_multiplier_large: '1.2'
+  font_lineheight_multiplier_large_size: '24'
 features:
   logo: 1
   node_user_picture: 1

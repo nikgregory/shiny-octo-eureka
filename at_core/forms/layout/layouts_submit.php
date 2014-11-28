@@ -61,11 +61,4 @@ function at_core_submit_layouts(&$form, &$form_state) {
   $config = \Drupal::config($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
-
-  // Messages
-  /*
-  if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] === 1 && $values['layout_type_select'] != 'disable_layout_generation') {
-    drupal_set_message(t('You generated a new layout - you may need to clear the cache from the <a href="!performancesettings">Performance settings</a> page for Drupal to see new theme data (such as yml file definitions), .', array('!performancesettings' => base_path() . 'admin/config/development/performance')), 'warning');
-  }
-  */
 }
