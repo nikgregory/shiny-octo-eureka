@@ -4,8 +4,8 @@
 //
 @mixin dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true) {
 
-  .menu-style-dropmenu {
-    .responsive-menu-region {
+  .ms-dropmenu {
+    .rmr {
 
       .block-menu__title {
         @include visually-hidden;
@@ -51,8 +51,10 @@
 
             ul {
               @include visually-hidden;
-              @include opacity(.3);
-              @include transition(all, .2s, ease);
+              opacity: 0.3;
+              //@include opacity(.3);  // test with IE without compass mixin?
+
+              transition: all, .2s, ease;
 
               li {
                 &:hover,
@@ -105,8 +107,3 @@
     }
   }
 }
-
-
-
-
-

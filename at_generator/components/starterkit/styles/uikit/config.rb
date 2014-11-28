@@ -1,5 +1,7 @@
+# UIKit Compass/SASS configuration.
+# NOTE: grunt will take its compass options from this file.
 
-# Required plugins
+# Required
 # -----------------------------------------------------------------------------
 require "compass"
 require "modular-scale"
@@ -19,39 +21,55 @@ images_dir = "../css/images"
 add_import_path "../../layout/site-builder/sass"
 
 
-# SASS core
+# Precision
 # -----------------------------------------------------------------------------
 Sass::Script::Number.precision = 5
 
 
-# Output style and comments
+# Environment
 # -----------------------------------------------------------------------------
-# Set the Environment Variable
-# Using :development enables the use of FireSass.
-#environment = :development
-environment = :production
+environment = :development
+#environment = :production
 
 
+# Output Style
+# -----------------------------------------------------------------------------
 # You can select your preferred output style here (:expanded, :nested, :compact
-# or :compressed).
-output_style = (environment == :production) ? :expanded : :expanded
+# or :compressed). :expanded is closest to Drupal coding standards and it is
+# not necessary to compress in the preprocessor since Drupal will do this for
+# us using its own aggregation and compression systems.
+output_style = :expanded
 
 
-# To enable relative paths to assets via compass helper functions.
+# Assets
+# -----------------------------------------------------------------------------
 relative_assets = true
 
 
-# Conditionally enable line comments when in development mode.
-line_comments = (environment == :production) ? false : true
+# Line Comments
+# -----------------------------------------------------------------------------
+line_comments = (environment == :development) ? true : false
 
 
-# Output debugging info in development mode.
-sass_options = (environment == :production) ? {} : {:debug_info => true}
+# Sourcemaps.
+# -----------------------------------------------------------------------------
+sourcemap = (environment == :development) ? true : false
 
 
-# Pass options to sass.
-# - For development, we turn on the FireSass-compatible debug_info.
-# - For production, we force the CSS to be regenerated even though the source
-#   scss may not have changed, since we want the CSS to be compressed and have
-#   the debug info removed.
-sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
+# FireSass
+#sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
+
+
+# Autoprefixer
+# -----------------------------------------------------------------------------
+# Post process for autoprefixer: https://github.com/postcss/autoprefixer#compass
+# I have not been able to figure out how to autoprefix with sourcemaps using the gem,
+# instead I suggest using grunt, which works just fine. The inlining does work, but
+# no browser I tried could actually read it, patches and or advice welcome.
+# require "autoprefixer-rails"
+# on_stylesheet_saved do |file|
+# css = File.read(file)
+# File.open(file, 'w') do |io|
+#   io << AutoprefixerRails.process(css)
+# end
+# end

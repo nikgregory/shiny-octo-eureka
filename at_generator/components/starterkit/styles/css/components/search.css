@@ -1,0 +1,43 @@
+/* line 106, ../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 100%;
+  line-height: 0.375em;
+}
+
+/**
+ * Search results pages
+ ========================================================================== */
+/* line 6, ../../uikit/components/partials/_component.search.results.scss */
+.search-results {
+  padding: 0;
+}
+/* line 12, ../../uikit/components/partials/_component.search.results.scss */
+.search-results p {
+  margin: 0;
+}
+
+/**
+ * Search forms
+ * - search block form
+ * - advanced search form
+ ========================================================================== */
+/* line 13, ../../uikit/components/partials/_component.search.forms.scss */
+.block-search .form-type-search,
+.block-search .form-actions {
+  display: inline-block;
+  margin: 7px 0;
+  margin: 0.43162rem 0;
+}
+
+/* line 22, ../../uikit/components/partials/_component.search.forms.scss */
+.search-form .container-inline label {
+  display: block;
+  margin: 7px 0;
+  margin: 0.43162rem 0;
+}
+
+/* line 45, ../../uikit/components/partials/_component.search.forms.scss */
+#edit-advanced .details-wrapper > fieldset > legend {
+  display: none;
+}
+/*# sourceMappingURL=search.css.map */

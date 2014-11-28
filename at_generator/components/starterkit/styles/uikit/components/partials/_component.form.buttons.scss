@@ -1,0 +1,243 @@
+/**
+ * Buttons
+ * We include button styling seperate (from _forms.scss) mainly because the form
+ * styles are quite long already and we often want to add unique button variants.
+ *
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
+
+button,
+.button {
+
+  @include output-rhythm(padding, $xx-small $medium);
+
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  border-radius: $button-border-radius;
+  transition: background-color, .15s, ease-in-out;
+
+  line-height: normal;
+  color: $button-color;
+  background: $button-background-color;
+  border: $button-border-width $button-border-style $button-border-color;
+
+  opacity: 0.9;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  text-decoration: none;
+  text-align: $button-text-align;
+  font-weight: $font-weight-normal;
+
+  width: auto;
+  display: inline-block;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    color: $button-hover-color;
+    background-color: $button-background-hover-color;
+    text-decoration: none;
+  }
+
+  &[disabled] {
+    &:hover {
+      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
+    }
+  }
+}
+
+// Primary button
+.button--primary {
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+}
+
+// Danger button, e.g. delete buttons often have this class.
+.button--danger {
+  @include button-variant($error-text-color, $error-background-color, $error-border-color);
+}
+
+
+/* Drop buttons */
+.js .dropbutton-widget {
+  background-color: $page-background-color;
+  border: $button-border-width $button-border-style $button-border-color;
+  border-radius: $button-border-radius;
+}
+
+.js .dropbutton-wrapper {
+  display: block;
+  min-height: 2em;
+  margin-right: 4px; // LTR
+  position: relative;
+}
+
+[dir="rtl"] .js .dropbutton-wrapper {
+  margin-right: 0;
+  margin-left: 4px;
+}
+
+.dropbutton {
+  input {
+    text-align: left; // LTR
+  }
+
+  .dropbutton-action > * {
+    white-space: nowrap;
+    line-height: normal; // some drop buttons are links
+    @include output-rhythm(padding, $xx-small $medium);
+  }
+
+  .secondary-action {
+    border-top: $button-border-width $button-border-style $button-border-color;
+    border-radius: 0 0 0 $button-border-radius;
+
+    .button {
+      border: 0;
+      background: $page-background-color;
+      width: 100%;
+
+      &:hover,
+      &:focus {
+        border-radius: 0 0 0 $button-border-radius;
+        background-color: $button-background-hover-color;
+      }
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] {
+    .dropbutton {
+      margin: 0 3px 0 0;
+
+      input {
+        text-align: right;
+      }
+    }
+  }
+}
+
+// Dropbutton Multiple
+.dropbutton-multiple {
+  .dropbutton {
+    border-right: $button-border-width $button-border-style $button-border-color;
+
+   .dropbutton-action > * {
+      margin-right: 0;
+      border: 0;
+    }
+
+    .dropbutton-action .button {
+      border-radius: $button-border-radius 0 0 $button-border-radius;
+    }
+
+    .publish {
+      .button {
+        width: 100%;
+        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+      }
+    }
+
+    // RTL
+    @at-root [dir="rtl"] {
+      .dropbutton-multiple .dropbutton {
+        border-left: $button-border-width $button-border-style $button-border-color;;
+        border-right: 0;
+
+        .dropbutton-action > * {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &.open {
+    .dropbutton-action .button {
+      border-radius: $button-border-radius 0 0 0;
+    }
+  }
+
+  // Include secondary actions after "open" so
+  // the styles cascade properly.
+  .dropbutton {
+    .secondary-action {
+      .button {
+        border-radius: 0 0 0 $button-border-radius;
+
+        &:hover,
+        &:focus {
+          border-radius: 0 0 0 $button-border-radius;
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Show buttons as links.
+ */
+button.link {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+label button.link {
+  font-weight: bold;
+}
+
+
+/**
+ * Styles for link buttons and action links. TODO.
+ */
+/*
+.action-links {
+  list-style: none;
+  padding: 0;
+  @include output-rhythm(margin, $medium 0);
+
+  li {
+    display: inline-block;
+    margin: 0 $small;
+
+    &:first-child {
+      margin-left: 0; // LTR
+    }
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .action-links li:first-child {
+    margin-left: $small;
+    margin-right: 0;
+  }
+}
+*/
+
+
+// Action button
+.button-action {
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+
+  &:before {
+    content: $button-action-icon;
+    font-family: FontAwesome, sans-serif;
+    @include adjust-font-size-to($small);
+    display: inline-block;
+    padding: 0 4px 0 0;
+    vertical-align: middle;
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .button-action:before {
+    padding: 0 0 0 4px;
+  }
+}

@@ -1,15 +1,3 @@
-@import "partials/base";
+@import "partials/global/base";
 
-/**
- * Book
- *  - book nodes
- *  - book navigation ('previous', 'up', and 'next', and the list of child nodes)
- *  - book navigation block
- ========================================================================== */
-
-
-
-
-
-
-
+@import "partials/component.book.navigation";

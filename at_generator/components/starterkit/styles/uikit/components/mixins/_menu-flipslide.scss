@@ -9,8 +9,8 @@
 
 @mixin flipslide {
 
-  .menu-style-flipslide {
-    .responsive-menu-region {
+  .ms-flipslide {
+    .rmr {
 
       position: relative;
 
@@ -38,7 +38,7 @@
       }
 
       .block-menu__content {
-        @include transition(all, .2s, ease);
+        transition: all, .2s, ease;
 
         .menu-level-1 > li {
           float: left;
@@ -51,12 +51,13 @@
 
         .menu-level-2 {
           @include visually-hidden;
-          @include opacity(.3);
+          opacity: 0.3;
+          //@include opacity(.3); // Test with IE without compass mixin
         }
       }
     }
 
-    .responsive-menu-region .block.menu-expanded  {
+    .rmr .block.rm-is-open  {
       .block-menu__content {
         padding: 0;
         margin: 0;
@@ -86,7 +87,8 @@
         }
         .menu-level-2 {
           @include visually-hidden-off;
-          @include opacity(1);
+          opacity: 1;
+          //@include opacity(1);
           float: left;
 
           ul, ol {
@@ -106,26 +108,3 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

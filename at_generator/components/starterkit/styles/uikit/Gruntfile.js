@@ -1,7 +1,14 @@
 module.exports = function(grunt) {
-  // Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		autoprefixer: {
+      css: {
+        src: '../css/components/**.css',
+        options: {
+          map: true
+        }
+      }
+		},
 		compass: {
 			dist: {
 				options: {
@@ -11,13 +18,13 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			css: {
-				files: '**/*.scss',
-				tasks: ['compass']
+			scss: {
+				files: 'components/**/*.scss',
+				tasks: ['compass:dist', 'autoprefixer:css']
 			}
 		}
 	});
-	// Load plugins.
+	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['watch']);

@@ -1,5 +1,3 @@
-
-
 // Off Canvas
 //
 // Do NOT @include into a selector, these must apply to the body element where
@@ -9,8 +7,8 @@
 
 @mixin offcanvas {
 
-  .menu-style-offcanvas {
-    .responsive-menu-region {
+  .ms-offcanvas {
+    .rmr {
       .block-menu__title {
         @include adjust-font-size-to($medium);
         @include output-rhythm(padding, $xx-small 0);
@@ -34,11 +32,11 @@
     }
 
     > .page {
-      @include transition(all, .2s, ease-in-out);
+      transition: all, .2s, ease-in-out;
     }
 
    // off left
-    &.offcanvas-left .responsive-menu-region {
+    &.offcanvas-left .rmr {
       .block-menu__title {
         text-align: left;  // LTR
         &:after {
@@ -49,12 +47,12 @@
       }
       .block-menu__content {
         left: 0;
-        @include transform(translate3d(-15em, 0, 0));
+        transform: translate(-15em, 0);
       }
     }
 
     // off right
-    &.offcanvas-right .responsive-menu-region {
+    &.offcanvas-right .rmr {
       .block-menu__title {
         text-align: right;  // LTR
         &:after {
@@ -65,11 +63,11 @@
       }
       .block-menu__content {
         right: 0;
-        @include transform(translate3d(15em, 0, 0));
+        transform: translate(15em, 0);
       }
     }
 
-    &.menu-expanded {
+    &.rm-is-open {
       > .page {
         position: fixed;
 
@@ -85,17 +83,14 @@
     }
 
     // on left
-    &.menu-expanded.offcanvas-left > .page {
-      @include transform(translate3d(15em, 0, 0));
+    &.rm-is-open.offcanvas-left > .page {
+      transform: translate(15em, 0);
       position: fixed;
     }
 
     // on right
-    &.menu-expanded.offcanvas-right > .page {
-      @include transform(translate3d(-15em, 0, 0));
+    &.rm-is-open.offcanvas-right > .page {
+      transform: translate(-15em, 0);
     }
   }
 }
-
-
-

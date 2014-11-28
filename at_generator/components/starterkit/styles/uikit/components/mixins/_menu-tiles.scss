@@ -4,10 +4,10 @@
 
 @mixin tiles {
 
-  .menu-style-tiles {
+  .ms-tiles {
 
     // By default submenus are hidden.
-    .responsive-menu-region {
+    .rmr {
 
       .block-menu__title,
       .menu-level-2 {
@@ -23,8 +23,8 @@
       }
     }
 
-    &.tiles-count-two {
-      .responsive-menu-region {
+    &.tc-two {
+      .rmr {
         .menu-level-1 {
           > li {
             @include span(6 of 12); // Use Susy to set width and float direction.
@@ -37,8 +37,8 @@
       }
     }
 
-    &.tiles-count-three {
-      .responsive-menu-region {
+    &.tc-three {
+      .rmr {
         .menu-level-1 {
           > li {
             @include span(4 of 12);
@@ -51,8 +51,8 @@
       }
     }
 
-    &.tiles-count-four {
-      .responsive-menu-region {
+    &.tc-four {
+      .rmr {
         .menu-level-1 {
           > li {
             @include span(3 of 12);
@@ -66,7 +66,7 @@
     }
 
     &.tiles-submenus-true {
-      .responsive-menu-region {
+      .rmr {
         .menu-level-2 {
           @include visually-hidden-off;
         }

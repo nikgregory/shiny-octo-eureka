@@ -1,0 +1,75 @@
+/**
+ * Comments
+ *  - comment field (holds comment title, form, comments etc)
+ *  - styles for comments
+ ========================================================================== */
+
+// Typically comments are attached to nodes - this is the main
+// wrapper around comments and the comment form in nodes, on
+// a standard Drupal install.
+.field-node--comment {
+  @include clearfix-micro;
+  clear: both;
+}
+
+.comment-field__title {} // typically this says 'Comments'.
+
+
+// Comments are articles, they all have the base class of .comment:
+.comment {
+  @include clearfix-micro;
+}
+
+
+// Author based classes.
+.by-anonymous {}
+.by-viewer {}
+.comment--by-node-author {}
+
+
+// Title and New
+.comment__title {}
+.comment__new {}
+
+
+// Submitted
+.comment__meta {}
+
+.comment__author {
+  display: inline;
+}
+
+.comment__datetime {}
+
+.comment__submitted {
+  // User picture.
+  .field-type--image {
+    img {}
+  }
+
+  // Conditional class: if user picture?
+  &.comment__submitted--user-picture {}
+}
+
+
+// Comment content wrapper.
+.comment__content {}
+
+
+// Links
+.comment {
+  .links {}
+}
+
+
+// User signiture
+.comment__user-signature {}
+
+
+// Comment form - basic classes only, see _form-styles.scss
+.comment-form-wrapper {}
+.comment-form__title {}
+.comment-form {}
+
+
+

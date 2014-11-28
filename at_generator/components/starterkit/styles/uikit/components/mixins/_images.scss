@@ -1,5 +1,3 @@
-
-
 // Image replacement
 // Kellum Method: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
 // Extended by HTML5BP http://html5boilerplate.com/docs/css/
@@ -13,24 +11,4 @@
   text-shadow: none;
   color: transparent;
   background-color: transparent;
-}
-
-// SVG with png and retina screen fallbacks.
-$image-path: 'images' !default;
-$fallback-extension: 'png' !default;
-$retina-suffix: '@2x';
-@mixin background-image($name, $size:false){
-  background-image: url(#{$image-path}/#{$name}.svg);
-
-  @if($size) {
-    background-size: $size;
-  }
-
-  .no-svg & {
-    background-image: url(#{$image-path}/#{$name}.#{$fallback-extension});
-
-    @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-      background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
-    }
-  }
 }

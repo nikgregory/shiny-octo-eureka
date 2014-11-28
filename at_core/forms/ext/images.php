@@ -1,7 +1,5 @@
 <?php
 
-//use Drupal\Core\Entity;
-
 /**
  * @file
  * Generate form elments for the Image styles settings.

@@ -1,0 +1,28 @@
+/**
+ * Pagers
+ ========================================================================== */
+
+// Pagers are just a list-style with something else maybe, like a webfont icon etc
+// no big deal so we should refactor to use existing mixins.
+
+.item-list .pager {
+  clear: both;
+  text-align: center;
+
+  li {
+    background-image: none;
+    display: inline;
+    @include no-bullets;
+    @include output-rhythm(padding, $small);
+
+    &.pager-current {
+      font-weight: bold;
+    }
+
+    a {
+
+      &:hover,
+      &:focus {}
+    }
+  }
+}

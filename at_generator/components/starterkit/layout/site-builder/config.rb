@@ -1,16 +1,8 @@
+# Site Builder Compass/SASS Configuration
+# NOTE: grunt will take its compass options from this file.
 
-# Site Builder SASS Configuration
-
-# Required plugins
+# Required
 # -----------------------------------------------------------------------------
-# The default layouts that ship with the Adaptivetheme are built using Susy 2,
-# Visit susy.oddbird.net.
-
-# Declare the required gems and versions. If the right version is not installed
-# compass with throw an error, hopefully. Scout and Codekit should also pick this
-# up and install the right gems. You can also use Grunt or Bunlder to install
-# required dependancies.
-gem "susy", "~> 2.1.3"
 require "susy"
 
 
@@ -20,35 +12,34 @@ css_dir = "/css"
 sass_dir = "/sass"
 
 
-# SASS core
+# Precision
 # -----------------------------------------------------------------------------
 Sass::Script::Number.precision = 5
 
 
-# Output style and comments
+# Environment
 # -----------------------------------------------------------------------------
-# Set the Environment Variable
-# Using :development enables the use of FireSass.
 #environment = :development
 environment = :production
 
 
-# You can select your preferred output style here (:expanded, :nested, :compact
-# or :compressed).
-output_style = (environment == :production) ? :compact : :expanded
+# Output Style
+# -----------------------------------------------------------------------------
+# Drupal will aggregate and compress stylesheets, we only need expanded, or
+# nested if that's how you roll.
+output_style = :expanded
 
 
-# Conditionally enable line comments when in development mode.
-line_comments = (environment == :production) ? false : true
+# Line Comments
+# -----------------------------------------------------------------------------
+line_comments = (environment == :development) ? true : false
 
 
-# Output debugging info in development mode.
-sass_options = (environment == :production) ? {} : {:debug_info => true}
+# Sourcemaps
+# -----------------------------------------------------------------------------
+#sourcemap = (environment == :development) ? true : false
 
 
-# Pass options to sass.
-# - For development, we turn on the FireSass-compatible debug_info.
-# - For production, we force the CSS to be regenerated even though the source
-#   scss may not have changed, since we want the CSS to be compressed and have
-#   the debug info removed.
-sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
+# FireSass
+# -----------------------------------------------------------------------------
+#sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}

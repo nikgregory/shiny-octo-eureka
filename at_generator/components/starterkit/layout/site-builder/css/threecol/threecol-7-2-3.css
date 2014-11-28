@@ -1,5 +1,25 @@
-.threecol-7-2-3 .arc--2 .region { width: 57.62712%; float: left; margin-right: 1.69492%; }
-.threecol-7-2-3 .arc--2 .region:last-child { width: 40.67797%; float: right; margin-right: 0; }
-.threecol-7-2-3 .arc--3 .region:first-child { width: 57.62712%; float: left; margin-right: 1.69492%; }
-.threecol-7-2-3 .arc--3 .region:nth-child(2) { width: 15.25424%; float: left; margin-right: 1.69492%; }
-.threecol-7-2-3 .arc--3 .region:last-child { width: 23.72881%; float: right; margin-right: 0; }
+.threecol-7-2-3 .arc--2 .region {
+  width: 57.62712%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.threecol-7-2-3 .arc--2 .region:last-child {
+  width: 40.67797%;
+  float: right;
+  margin-right: 0;
+}
+.threecol-7-2-3 .arc--3 .region:first-child {
+  width: 57.62712%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.threecol-7-2-3 .arc--3 .region:nth-child(2) {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.threecol-7-2-3 .arc--3 .region:last-child {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}

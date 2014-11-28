@@ -1,6 +1,64 @@
+/* line 106, ../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 100%;
+  line-height: 0.375em;
+}
+
 /**
  * Book
- *  - book nodes
- *  - book navigation ('previous', 'up', and 'next', and the list of child nodes)
- *  - book navigation block
+ * Set styles for book navigation.
  ========================================================================== */
+/* line 7, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-navigation .menu {
+  padding-bottom: 0;
+  padding-top: 1em;
+}
+
+/* line 13, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-navigation .book-pager {
+  margin: 0;
+  overflow: auto;
+  padding: 0.5em 0;
+}
+
+/* line 20, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-pager li {
+  display: inline-block;
+  list-style-type: none;
+  vertical-align: top;
+}
+
+/* line 27, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-pager .previous {
+  text-align: left;
+  /* LTR */
+  width: 45%;
+}
+
+/* line 33, ../../uikit/components/partials/_component.book.navigation.scss */
+[dir="rtl"] .book-pager .previous {
+  float: right;
+  text-align: right;
+}
+
+/* line 39, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-pager .up {
+  text-align: center;
+  width: 8%;
+}
+
+/* line 45, ../../uikit/components/partials/_component.book.navigation.scss */
+.book-pager .next {
+  float: right;
+  /* LTR */
+  text-align: right;
+  /* LTR */
+  width: 45%;
+}
+
+/* line 52, ../../uikit/components/partials/_component.book.navigation.scss */
+[dir="rtl"] .book-pager .next {
+  float: left;
+  text-align: left;
+}
+/*# sourceMappingURL=book.css.map */

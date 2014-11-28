@@ -36,10 +36,12 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     }
 
     // Submit handler for Images.
+    /*
     if (isset($values['settings_enable_images']) && $values['settings_enable_images'] === 1) {
       require_once($at_core_path . '/forms/ext/images_submit.php');
       at_core_submit_images($values, $theme, $generated_files_path);
     }
+    */
 
     // Submit handler for Markup Overrides.
     if (isset($values['settings_enable_markup_overrides']) && $values['settings_enable_markup_overrides'] === 1) {

@@ -30,9 +30,10 @@
         position: relative;
 
         @include output-rhythm(padding, $xx-small $medium);
-        @include border-radius($button-border-radius);
-        @include transition(background-color, .15s, ease-in-out);
-        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+
+        border-radius: $button-border-radius;
+        transition: background-color, .15s, ease-in-out;
+        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
       }
     }
   }
@@ -54,18 +55,18 @@
       // LTR, RTL
       @if $flow-from == left {
         &:first-child a {
-          @include border-radius($button-border-radius 0 0 $button-border-radius);
+          border-radius: $button-border-radius 0 0 $button-border-radius;
         }
         &:last-child a {
-          @include border-radius(0 $button-border-radius $button-border-radius 0);
+          border-radius: 0 $button-border-radius $button-border-radius 0;
         }
       }
       @else if $flow-from == right {
         &:first-child a {
-          @include border-radius(0 $button-border-radius $button-border-radius 0);
+          border-radius: 0 $button-border-radius $button-border-radius 0;
         }
         &:last-child a {
-          @include border-radius($button-border-radius 0 0 $button-border-radius);
+          border-radius: $button-border-radius 0 0 $button-border-radius;
         }
       }
 
@@ -87,8 +88,9 @@
         position: relative;
 
         @include output-rhythm(padding, $xx-small $medium);
-        @include transition(background-color, .15s, ease-in-out);
-        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+
+        transition: background-color, .15s, ease-in-out;
+        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
       }
     }
   }
@@ -102,15 +104,15 @@
 
   #{$list_selector} {
     padding: 0;
-    @include no-bullets;
+    list-style: none;
     @include clearfix-micro;
 
     li {
       &:first-child a {
-        @include border-radius($button-border-radius $button-border-radius 0 0);
+        border-radius: $button-border-radius $button-border-radius 0 0;
       }
       &:last-child a {
-        @include border-radius(0 0 $button-border-radius $button-border-radius);
+        border-radius: 0 0 $button-border-radius $button-border-radius;
       }
 
       a {
@@ -131,13 +133,10 @@
         position: relative;
 
         @include output-rhythm(padding, $xx-small $medium);
-        @include transition(background-color, .15s, ease-in-out);
-        @include box-shadow(rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset);
+
+        transition: background-color, .15s, ease-in-out;
+        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
       }
     }
   }
 }
-
-
-
-

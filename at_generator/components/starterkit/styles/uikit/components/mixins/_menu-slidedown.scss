@@ -9,8 +9,8 @@
 //
 
 @mixin slidedown {
-  .menu-style-slidedown {
-    .responsive-menu-region {
+  .ms-slidedown {
+    .rmr {
       .block-menu__title {
         @include adjust-font-size-to($medium);
         @include output-rhythm(padding, $xx-small 0);
@@ -27,19 +27,19 @@
 
       .block-menu__content {
         @include visually-hidden;
-        @include opacity(.3);
-        @include transition(all, .2s, ease);
+        opacity: 0.3;
+        //@include opacity(.3); // Test with IE and no compass
+        transition: all, .2s, ease;
       }
     }
 
-    .responsive-menu-region .block.menu-expanded  {
+    .rmr .block.rm-is-open  {
       .block-menu__content {
         @include visually-hidden-off;
-        @include opacity(1);
+        opacity: 1;
+        //@include opacity(1); // Test with IE and no compass
         @include output-rhythm(padding, 0 0 $xx-small);
       }
     }
   }
 }
-
-

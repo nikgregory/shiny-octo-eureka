@@ -1,2 +1,10 @@
-.twocol-9-3 .arc--2 .region { width: 74.57627%; float: left; margin-right: 1.69492%; }
-.twocol-9-3 .arc--2 .region:last-child { width: 23.72881%; float: right; margin-right: 0; }
+.twocol-9-3 .arc--2 .region {
+  width: 74.57627%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.twocol-9-3 .arc--2 .region:last-child {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}

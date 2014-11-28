@@ -1,0 +1,111 @@
+/**
+ * Print
+ ========================================================================== */
+
+@media print {
+
+  * {
+    background: transparent !important;
+    color: #000 !important; /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Hide this stuff
+  .node__footer,
+  ul.links,
+  .comment-form-wrapper,
+  .region--page-top,
+  .region--page-bottom,
+  .contextual,
+  .page__temporary-tabs,
+  .tabs,
+  .regions-navbar,
+  .rmr,
+  [class*="region--sidebar-"] {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    float: none !important;
+  }
+
+  .page__main .region--content,
+  .block-main-content,
+  article {
+    margin: 0 !important;
+    width: 100% !important;
+    float: none !important;
+  }
+
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+
+  a[href]:after {
+    //content: " (" attr(href) ")";
+  }
+
+
+  abbr[title]:after {
+    //content: " (" attr(title) ")";
+  }
+
+
+  /* Don't show links for images, or javascript/internal links */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+
+  thead {
+    display: table-header-group; /* h5bp.com/t */
+  }
+
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+
+  img {
+    max-width: 100% !important;
+  }
+
+
+  @page {
+    //margin: 0.5cm;
+  }
+
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

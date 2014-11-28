@@ -5,9 +5,8 @@
 //
 @mixin horizontal-menu {
 
-  .menu-style-horizontal {
-    .responsive-menu-region {
-
+  .ms-horizontal {
+    .rmr {
       .block-menu__title {
         @include visually-hidden;
       }

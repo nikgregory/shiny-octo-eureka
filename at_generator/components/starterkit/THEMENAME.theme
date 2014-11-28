@@ -24,12 +24,10 @@ function HOOK_css_alter(&$css) {
   // load dependancies we need, so we can use this more granular
   // approach to remove individual CSS assets.
   $remove = array(
-    'book.admin.css',
     'book.theme.css',
     'comment.theme.css',
     'file.formatter.generic.css',
     'forum.module.css',
-    'normalize.css',
     'search.theme.css',
     'system.theme.css',
     'taxonomy.module.css',

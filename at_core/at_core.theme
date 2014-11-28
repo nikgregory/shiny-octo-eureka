@@ -193,6 +193,7 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Images CSS.
+    /*
     if (isset($config['enable_images']) && $config['enable_images'] === 1) {
       $images_file = $generated_files_path . '/' . $theme . '.images.css';
       if (file_exists($images_file)) {
@@ -208,6 +209,7 @@ function at_core_page_attachments_alter(array &$page) {
         $load_failure['files'][] = $images_file;
       }
     }
+    */
 
     // Custom CSS.
     if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
@@ -356,7 +358,7 @@ function at_core_page_attachments_alter(array &$page) {
         if (isset($config['responsive_menu_' . $style . '_style'])) {
 
           // Style
-          $drupalSettings['responsive_menus'][$style]['style'] = 'menu-style-' . $config['responsive_menu_' . $style . '_style'];
+          $drupalSettings['responsive_menus'][$style]['style'] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
 
           // If Off Canvas
           if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
@@ -365,7 +367,7 @@ function at_core_page_attachments_alter(array &$page) {
 
           // If Tiles
           if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
-            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tiles-count-' . $config['responsive_menu_' . $style . '_tiles_count'];
+            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tc-' . $config['responsive_menu_' . $style . '_tiles_count'];
             if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
               $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
             }
@@ -610,19 +612,20 @@ function at_core_preprocess_region(&$variables) {
     $variables['attributes']['role'][] = 'main';
   }
 
-  // shortcodes classes.
+  // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
       if (isset($config['responsive_menu_region'])) {
         if ($variables['region'] == $config['responsive_menu_region']) {
-          $variables['attributes']['class'][] = 'responsive-menu-region';
+          $variables['attributes']['class'][] = 'rmr';
 
         }
       }
     }
 
+    // shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
         $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
@@ -641,8 +644,6 @@ function at_core_preprocess_node(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
-
-  //kpr($variables);
 
   // shortcodes classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -784,6 +785,7 @@ function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
     // Remove login block links.
@@ -800,7 +802,7 @@ function at_core_preprocess_block(&$variables) {
       }
     }
 
-    // shortcodes classes.
+    // Shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
         $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
@@ -821,7 +823,7 @@ function at_core_preprocess_field(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Set variables for image fields.
+  // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_images']) && $config['enable_images'] === 1) {
 
@@ -869,7 +871,7 @@ function at_core_preprocess_field(&$variables) {
 
         // Image align class
         if (!empty($config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode])) {
-          $variables['attributes']['class'][] = 'field-align--' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
+          $variables['attributes']['class'][] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
         }
 
         // This is quite aggressive and it may be better to let the site fail?

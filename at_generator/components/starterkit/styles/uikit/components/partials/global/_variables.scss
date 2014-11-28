@@ -1,0 +1,522 @@
+//
+// Variable Settings.
+//
+
+// Breakpoints
+// -----------------------------------------------------------------------------
+//
+// NOTE: these are the same breakpoints as used in the Site-Builder layout
+// plugin, they are imported in "site_builder_base", however you can override them
+// here or set new breakpoints specific to your design.
+//
+// These breakpoints use ems, which mean they are dependant on the base font size,
+// so any pixel equivalents stated here assume base font size of 16px. Change them
+// to suit your requirements.
+//
+//
+//   $mobile          - 0 to 45em (0 to 720px), small screens only.
+//   $mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+//
+//   $tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+//   $tablet          - 45em (720px) and up.
+//
+//   $widescreen      - 65em (1040px) and up.
+//
+//   $huge            - 120em (1920px) and up, for big resolution.
+//
+//
+// Here you can see how each breakpoint cascades or isolates. The first 3 are effectively
+// isolation breakpoints, however we allow $mobile-tablet to cascade into $tablet-isolate
+// and $tablet. The last 3 all cascade.
+//
+// Most layouts for AT use $tablet-isolate, $tablet and/or $widescreen breakpoints only.
+//
+// | $mobile ------>|
+// | $mobile-tablet -------------------->|
+//                  | $tablet-isolate -->|
+//                  | $tablet ----------------------------------------------------->
+//                                       | $widescreen ---------------------------->
+//                                                                   | $huge ------>
+//
+// $mobile          : "all and (max-width: 45em)";
+// $mobile-tablet   : "all and (max-width: 65em)";
+// $tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
+// $tablet          : "all and (min-width: 45em)";
+// $widescreen      : "all and (min-width: 65em)";
+// $huge            : "all and (min-width: 120em)";
+
+
+// Vertical Rhythm
+// -----------------------------------------------------------------------------
+// Compass Vertical Rhythm is used in conjunction with Modular Scale.
+//
+//  https://github.com/chriseppstein/compass/blob/1.0.0.alpha.19/core/stylesheets/compass/typography/_vertical_rhythm.scss
+//  -- link to modular scale stuff--
+//
+// MS provides the scale, while Vertical Rhythm sets adjusted font sizes and line heights.
+// From these numbers you will get a base line-height of 1.5
+
+$base-font-size       : 16px;
+$base-line-height     : 6px;   // set adjust-leading-to(4); on body!
+
+$rhythm-unit          : 'rem';
+$rem-with-px-fallback : true;  // set to true to support IE8, Opera Mini etc.
+
+
+// Establish baseline
+// -----------------------------------------------------------------------------
+@include establish-baseline;
+
+
+// Modular Scale
+// -----------------------------------------------------------------------------
+$ms-base  : $base-font-size ($base-font-size * 1.130);
+$ms-ratio : $phi;
+
+
+// Modular Scale size variables.
+// -----------------------------------------------------------------------------
+// The output is always a px value. We use Compass mixins and some
+// internal functions to convert to rem where required, or simply use
+// the variable if you want a pixel value.
+//
+// For example we use the compass mixin: adjust-font-size-to()
+// which returns both the font-size and line-height in rem with a px
+// fallback for browsers that do not support rem units.
+//
+// The UIKit has it's own font-size() mixin which will do the same but
+// without the line-height, e.g.:
+//
+// .selector {@include font-size($medium);} will return:
+// .selector {font-size: 16px; font-size: 1rem;}
+//
+// Throughout the UIKit you will see other Compass mixins used to return
+// px and rem units, such as consistantly using output-rhythm() to
+// achieve full browser support.
+
+$xxxx-large : ms(5);
+$xxx-large  : ms(4);
+$xx-large   : ms(3);
+$x-large    : ms(2);
+$large      : ms(1);
+$medium     : ms(0);
+$small      : ms(-1);
+$x-small    : ms(-2);
+$xx-small   : ms(-3);
+$xxx-small  : ms(-4);
+$xxxx-small : ms(-5);
+
+
+// Font Weights
+// -----------------------------------------------------------------------------
+$font-weight-bold     : 700;
+$font-weight-semibold : 600;
+$font-weight-normal   : 400;
+$font-weight-light    : 300;
+
+
+// Font Families
+// -----------------------------------------------------------------------------
+$times-roman : "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times       : Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia     : Georgia, "Times New Roman", "DejaVu Serif", serif;
+$verdana     : Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma      : Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica   : Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial       : Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$impact      : Impact, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+$courier     : "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+$sans-serif  : sans-serif;
+$serif       : serif;
+
+
+// Set default font families.
+$base-font-family : $sans-serif;
+$font-monospace   : $courier;
+
+
+//
+// Colors, borders etc.
+//
+
+// Borders
+// -----------------------------------------------------------------------------
+$border-width                : 1px;
+$border-style                : solid;
+$border-color                : #dcdcdc;
+$border-radius               : 4px;
+
+
+// Main colors
+// -----------------------------------------------------------------------------
+$page-background-color            : #ffffff;
+$primary-color               : #333333;
+$secondary-color             : #666666;
+$tertiary-color              : #999999;
+
+
+// Text colors
+// -----------------------------------------------------------------------------
+$text-color                  : #363636;
+$text-background-color       : #eeeeee;
+
+
+// Link colors
+// -----------------------------------------------------------------------------
+$link-color                  : #0066cc;
+$link-hover-color            : $link-color;
+$link-active-color           : $link-color;
+$link-visited-color          : #0066cc;
+$link-visited-hover-color    : $link-visited-color;
+
+
+// Success colors
+// -----------------------------------------------------------------------------
+$success-text-color          : #325e1c;
+$success-border-color        : #c9e1bd;
+$success-background-color    : #f3faef;
+
+
+// Warning colors
+// -----------------------------------------------------------------------------
+$warning-text-color          : #734c00;
+$warning-border-color        : #f4daa6;
+$warning-background-color    : #fdf8ed;
+
+
+// Error colors
+// -----------------------------------------------------------------------------
+$error-text-color            : #a51b00;
+$error-border-color          : #f9c9bf;
+$error-background-color      : #fcf4f2;
+
+
+// Highlight colors
+// -----------------------------------------------------------------------------
+//$hightlight-text-color       : #fffffe;
+//$hightlight-background-color : #9dc44d;
+//$hightlight-border-color     : #5b8829;
+
+$hightlight-text-color       : $page-background-color;
+$hightlight-background-color : $primary-color;
+$hightlight-border-color     : $tertiary-color;
+
+
+// Selection color
+// -----------------------------------------------------------------------------
+$selection-color             : #b3d4fc;
+
+
+// Zebra striping colors
+// -----------------------------------------------------------------------------
+$odd-color                   : transparent;
+$even-color                  : $text-background-color;
+
+
+// Unpublished status background color
+// -----------------------------------------------------------------------------
+$unpublished-color           : #fff4f4;
+
+
+// Lighten and Darken values
+// -----------------------------------------------------------------------------
+$lighten                     : 3%;
+$lighten-more                : 5%;
+$lighten-most                : 10%;
+$darken                      : 3%;
+$darken-more                 : 5%;
+$darken-most                 : 10%;
+
+
+// Gradients
+// -----------------------------------------------------------------------------
+$text-gradient-start         : darken($text-background-color, $darken-more);
+$text-gradient-stop          : lighten($text-background-color, $lighten-more);
+
+$primary-gradient-start      : $primary-color;
+$primary-gradient-stop       : lighten($primary-color, $lighten-most);
+
+$secondary-gradient-start    : $secondary-color;
+$secondary-gradient-stop     : lighten($secondary-color, $lighten-most);
+
+$tertiary-gradient-start     : $tertiary-color;
+$tertiary-gradient-stop      : lighten($tertiary-color, $lighten-most);
+
+
+//
+// Set variables for component partials and mixins.
+//
+
+// Page & Regions
+// -----------------------------------------------------------------------------
+$body-background-color    : $primary-color;
+$page-background-color    : #ffffff; // body inner wrapper
+$regions-background-color : #ffffff; // we set a default so we can have colored .page-root.
+
+
+// Page Row colors (for site-builder layout plugin)
+// -----------------------------------------------------------------------------
+// @include these in the page-color mixin from _page.scss using the
+// .page__[row name] selectors, e.g.:
+//
+//  .page__header {
+//    @include page-colors($page-header-background-color, $page-header-color, $page-backgrounds-full-width);
+//  }
+
+// Full width background toggle
+$page-row-fullwidth             : true;
+$regions-padding                : $medium;
+
+// Header
+$page-header-background-color   : $primary-color;
+$page-header-color              : #ffffff;
+
+// Navbar
+$page-navbar-background-color   : $secondary-color;
+$page-navbar-color              : #ffffff;
+
+// Messages
+$page-messages-background-color : $page-background-color;
+$page-messages-color            : $text-color;
+
+// Features
+$page-features-background-color : $tertiary-color;
+$page-features-color            : $text-color;
+
+// Main
+$page-main-background-color     : $page-background-color;
+$page-main-color                : $text-color;
+
+// Tertiary
+$page-tertiary-background-color : $tertiary-color;
+$page-tertiary-color            : $text-color;
+
+// Footer
+$page-footer-background-color   : $secondary-color;
+$page-footer-color              : #ffffff;
+
+
+// Menus
+// -----------------------------------------------------------------------------
+$menu-text-align                  : $flow-from; // ltr or from-left
+
+$menu-color                       : $link-color;
+$menu-hover-color                 : $link-hover-color;
+$menu-active-color                : $link-active-color;
+
+$menu-border-color                : $border-color;
+$menu-border-hover-color          : $border-color;
+$menu-border-active-color         : $border-color;
+
+$menu-background-color            : $page-background-color;
+$menu-background-hover-color      : $text-background-color;
+$menu-background-active-color     : $text-background-color;
+//$menu-background-hover-color      : lighten($text-background-color, $lighten);
+//$menu-background-active-color     : lighten($text-background-color, $lighten);
+
+$menu-border-width                : $border-width;
+$menu-border-style                : $border-style;
+$menu-border-radius               : $border-radius;
+
+$menu-arrows                      : true;
+
+
+// Responsive menus
+// -----------------------------------------------------------------------------
+$resp-menu-color                  : inherit;
+$resp-menu-background-color       : inherit;
+
+$resp-menu-hover-color            : inherit;
+$resp-menu-active-color           : inherit;
+
+$resp-menu-hover-background-color  : rgba(255,255,255,0.3);
+$resp-menu-active-background-color : rgba(255,255,255,0.3);
+
+
+// Drop menu
+// -----------------------------------------------------------------------------
+$dropmenu-item-width              : 12em;
+$dropmenu-arrows                  : true;
+
+
+// Buttons
+// -----------------------------------------------------------------------------
+$button-text-align                : center;
+
+$button-color                     : $text-color;
+$button-hover-color               : $text-color;
+
+$button-border-color              : $border-color;
+//$button-border-hover-color        : $button-border-color;
+$button-border-hover-color        : darken($button-border-color, $darken);
+
+//$button-background-color          : $text-background-color;
+//$button-background-hover-color    : $button-background-color;
+$button-background-color          : lighten($text-background-color, $lighten-more);
+$button-background-hover-color    : darken($button-background-color, $darken);
+
+$button-border-width              : $border-width;
+$button-border-style              : $border-style;
+$button-border-radius             : $border-radius;
+
+
+// Tabs
+// -----------------------------------------------------------------------------
+$tab-text-align                   : center;
+
+$tab-color                        : $text-color;
+$tab-hover-color                  : $text-color;
+$tab-active-color                 : $text-color;
+
+$tab-border-color                 : $border-color;
+$tab-border-hover-color           : $border-color;
+$tab-border-active-color          : $border-color;
+
+//$tab-background-color             : $text-background-color;
+$tab-background-color             : lighten($text-background-color, $lighten-more);
+
+$tab-background-hover-color       : $text-background-color;
+$tab-background-active-color      : $text-background-color;
+
+$tab-border-width                 : $border-width;
+$tab-border-style                 : $border-style;
+$tab-border-radius                : $border-radius;
+
+
+// Lists
+// -----------------------------------------------------------------------------
+$list-text-align                  : center;
+
+$list-color                       : $text-color;
+$list-hover-color                 : $text-color;
+$list-active-color                : $text-color;
+
+$list-border-color                : $border-color;
+$list-border-hover-color          : $border-color;
+$list-border-active-color         : $border-color;
+
+//$list-background-color            : $text-background-color;
+$list-background-color            : lighten($text-background-color, $lighten-more);
+
+$list-background-hover-color      : $text-background-color;
+$list-background-active-color     : $text-background-color;
+
+$list-border-width                : $border-width;
+$list-border-style                : $border-style;
+$list-border-radius               : $border-radius;
+
+
+// Forms
+// -----------------------------------------------------------------------------
+$form-text-align                  : center;
+
+//$form-text-color                  : $text-color; // If text is #000, lighten 20% is #333
+$form-text-color                  : lighten($text-color, $lighten-most); // If text is #000, lighten 20% is #333
+
+$form-text-focus-color            : $text-color;
+
+$form-border-color                : #E5E5E5; //$border-color;
+$form-border-focus-color          : $border-color;
+
+$form-background-color            : #ffffff;
+//$form-background-focus-color      : $page-background-color;
+$form-background-focus-color      : lighten($text-background-color, $lighten-more);
+
+//$form-help-color                  : $text-color;
+$form-help-color                  : lighten($text-color, 45%);
+$form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
+
+$form-border-width                : $border-width;
+$form-border-style                : $border-style;
+$form-border-radius               : $border-radius;
+
+
+// Breadcrumbs
+// -----------------------------------------------------------------------------
+$breadcrumb-color                 : $link-color;
+
+$breadcrumb-hover-color           : $link-color;
+$breadcrumb-active-color          : $link-color;
+
+$breadcrumb-visited-color         : $link-visited-color;
+$breadcrumb-visited-hover-color   : $link-visited-color;
+
+$breadcrumb-seperator-color       : $border-color;
+
+
+// Tables
+// -----------------------------------------------------------------------------
+$table-cell-borders               : false; // set to true if you want borders on every cell
+$table-border-color               : $border-color;
+
+// thead
+$thead-background-color           : $text-background-color;
+$thead-text-color                 : $text-color;
+
+// row striping
+$table-row-striping               : false;
+$table-row-odd-color              : $odd-color;
+$table-row-even-color             : $even-color;
+
+// col striping, applies to the active column in sortable tables.
+$table-col-striping               : false;
+$table-col-odd-color              : $text-background-color;
+//$table-col-even-color             : $text-background-color; // TODO - strategy for column striping even color
+$table-col-even-color             : darken($text-background-color, 2%);
+
+// hover
+$tr-hover                         : false;
+//$tr-hover-color                   : $text-background-color; // TODO - strategy for table row hover color
+$tr-hover-color                   : darken($text-background-color, $darken);
+
+
+// Fields
+// -----------------------------------------------------------------------------
+// By default we only have settings for taxonomy term reference fields.
+$field-taxonomy-item-as-labels    : true;
+
+$field-taxonomy-item-icons        : false;
+$field-taxonomy-item-icon         : $fa-var-tag;
+
+$field-taxonomy-label-as-icon     : true; // Label must not be hidden in field display settings.
+$field-taxonomy-label-icon        : $fa-var-tags;
+
+
+// Icons
+// -----------------------------------------------------------------------------
+// AT uses Font Awesome by default for all icons, including replacing Drupal
+// core icons for things like details summery, action links and messages.
+
+$messages-icon-status            : $fa-var-smile-o;
+$messages-icon-warning           : $fa-var-exclamation-triangle;
+$messages-icon-error             : $fa-var-frown-o;
+
+$button-action-icon              : $fa-var-plus;
+
+$menu-arrow-left                 : $fa-var-angle-left;
+$menu-arrow-right                : $fa-var-angle-right;
+$menu-arrow-up                   : $fa-var-angle-up;
+$menu-arrow-down                 : $fa-var-angle-down;
+
+$menu-hamburger                  : $fa-var-bars;
+
+$form-details-summary-open       : $fa-var-caret-down;
+$form-details-summary-closed     : $fa-var-caret-right;
+$form-details-summary-closed-rtl : $fa-var-caret-left;
+
+
+// Browser Versions
+// -----------------------------------------------------------------------------
+// Optional map of minimum browser versions to support. For example, to
+// remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
+// to '8'.
+$browser-minimum-versions: (
+  'chrome'  : null,
+  'firefox' : null,
+  'ie'      : 9,
+  'safari'  : null,
+  'opera'   : null
+) !default;
+
+
+

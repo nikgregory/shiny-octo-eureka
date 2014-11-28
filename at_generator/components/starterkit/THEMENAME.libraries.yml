@@ -3,31 +3,7 @@ base:
   version: 0.0.1
   css:
     component:
-      styles/css/components/normalize.css: { every_page: true }
-      styles/css/components/webfonts.css: { every_page: true }
       styles/css/components/base.css: { every_page: true }
-      styles/css/components/page.css: { every_page: true }
-      styles/css/components/branding.css: { every_page: true }
-      styles/css/components/messages.css: { every_page: true }
-      styles/css/components/tabs.css: { every_page: true }
-      styles/css/components/breadcrumb.css: { every_page: true }
-      styles/css/components/pagers.css: { every_page: true }
-      styles/css/components/image.css: { every_page: true }
-      styles/css/components/tables.css: { every_page: true }
-      styles/css/components/list-styles.css: { every_page: true }
-      styles/css/components/form.css: { every_page: true }
-      styles/css/components/form.buttons.css: { every_page: true }
-      styles/css/components/form.progress-bar.css: { every_page: true }
-      styles/css/components/field.css: { every_page: true }
-      styles/css/components/field.file.css: { every_page: true }
-      styles/css/components/field.image.css: { every_page: true }
-      styles/css/components/menu.css: { every_page: true }
-      styles/css/components/views.css: { every_page: true }
-      styles/css/components/block.css: { every_page: true }
-      styles/css/components/node.css: { every_page: true }
-      styles/css/components/user-profile.css: { every_page: true }
-      styles/css/components/utility.css: { every_page: true }
-      styles/css/components/print.css: { every_page: true }
 
 # Book
 book:
@@ -62,7 +38,7 @@ responsive_menus:
   version: 0.0.1
   css:
     component:
-      styles/css/components/menu.responsive-menus.css: { every_page: true }
+      styles/css/components/responsive-menus.css: { every_page: true }
   dependencies:
     - at_core/at.responsivemenus
 
@@ -71,8 +47,7 @@ search:
   version: 0.0.1
   css:
     component:
-      styles/css/components/search.forms.css: { every_page: true }
-      styles/css/components/search.results.css: { every_page: true }
+      styles/css/components/search.css: { every_page: true }
 
 # Shortcodes
 shortcodes:
@@ -86,4 +61,4 @@ taxonomy:
   version: 0.0.1
   css:
     component:
-      styles/css/components/field.taxonomy.css: { every_page: true }
+      styles/css/components/taxonomy.css: { every_page: true }

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation for the basic structure of a single Drupal page.
+ * Adaptivetheme implementation for the basic structure of a single Drupal page.
  *
  * Variables:
  * - css: A list of CSS files for the current page.
@@ -29,16 +29,16 @@
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
-    {{ page.head }}
+    {{ head }}
     <title>{{ head_title }}</title>
-    {{ page.styles }}
-    {{ page.scripts }}
+    {{ styles }}
+    {{ scripts }}
   </head>
   <body{{ attributes }}>
     <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
-    {{ page.content }}
+    {{ page }}
     {{ page_bottom }}
-    {{ page.scripts('footer') }}
+    {{ scripts_bottom }}
   </body>
 </html>

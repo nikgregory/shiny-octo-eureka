@@ -1,10 +1,46 @@
-.fourcol-split-row-12--9-3--12 .hr--2-3 .region { width: 74.57627%; float: left; margin-right: 1.69492%; }
-.fourcol-split-row-12--9-3--12 .hr--2-3 .region:last-child { width: 23.72881%; float: right; margin-right: 0; }
-.fourcol-split-row-12--9-3--12 .hr--1-2-3 .region:nth-child(2) { width: 74.57627%; float: left; margin-right: 1.69492%; }
-.fourcol-split-row-12--9-3--12 .hr--1-2-3 .region:last-child { width: 23.72881%; float: right; margin-right: 0; }
-.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:first-child { width: 74.57627%; float: left; margin-right: 1.69492%; }
-.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:nth-child(2) { width: 23.72881%; float: right; margin-right: 0; }
-.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:last-child { clear: both; }
-.fourcol-split-row-12--9-3--12 .arc--4 .region:nth-child(2) { width: 74.57627%; float: left; margin-right: 1.69492%; }
-.fourcol-split-row-12--9-3--12 .arc--4 .region:nth-child(3) { width: 23.72881%; float: right; margin-right: 0; }
-.fourcol-split-row-12--9-3--12 .arc--4 .region:last-child { clear: both; }
+.fourcol-split-row-12--9-3--12 .hr--2-3 .region {
+  width: 74.57627%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-split-row-12--9-3--12 .hr--2-3 .region:last-child {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--9-3--12 .hr--1-2-3 .region:nth-child(2) {
+  width: 74.57627%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-split-row-12--9-3--12 .hr--1-2-3 .region:last-child {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:first-child {
+  width: 74.57627%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:nth-child(2) {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--9-3--12 .hr--2-3-4 .region:last-child {
+  clear: both;
+}
+.fourcol-split-row-12--9-3--12 .arc--4 .region:nth-child(2) {
+  width: 74.57627%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-split-row-12--9-3--12 .arc--4 .region:nth-child(3) {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}
+.fourcol-split-row-12--9-3--12 .arc--4 .region:last-child {
+  clear: both;
+}

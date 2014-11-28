@@ -12,12 +12,12 @@
       var activeTheme = drupalSettings['ajaxPageState']['theme'];
       var responsiveMenus = drupalSettings[activeTheme]['responsive_menus'];
 
-      var menu   = '.responsive-menu-region .block-menu__content'; // wrapper element around the root ul.menu
-      var toggle = '.responsive-menu-region .block-menu__title';   // the toggle link
+      var menu   = '.rmr .block-menu__content'; // wrapper element around the root ul.menu
+      var toggle = '.rmr .block-menu__title';   // the toggle link
 
       // Clicking outside the menu will hide it.
-      $('.page-root', context).on('touchstart click', function(){
-        $(document.body).removeClass('menu-expanded');
+      $('body > .page', context).on('touchstart click', function(){
+        $(document.body).removeClass('rm-is-open');
       });
 
       // Remove the visually-hidden class from block titles, in case the user forgets to set the title to show.
@@ -25,9 +25,9 @@
       $(toggle).removeClass('visually-hidden').wrapInner('<span class="title-inner" />').end();
 
       $(toggle, context).on('touchstart click', function(e) {
-        $(this).parent('.responsive-menu-region .block-menu').toggleClass('menu-expanded');
-        $(this).parent('.responsive-menu-region .block-menu').siblings('.block-menu').removeClass('menu-expanded');
-        $(document.body).toggleClass('menu-expanded');
+        $(this).parent('.rmr .block-menu').toggleClass('rm-is-open');
+        $(this).parent('.rmr .block-menu').siblings('.block-menu').removeClass('rm-is-open');
+        $(document.body).toggleClass('rm-is-open');
         e.stopPropagation();
       });
 
@@ -40,17 +40,17 @@
           $(document.body).addClass(responsiveMenus['default']['style']).removeClass('no-fouc');
 
           // doubletaptogo for drop and slidedown menus
-          if(responsiveMenus['default']['style'] == 'menu-style-dropmenu' || responsiveMenus['default']['style'] == 'menu-style-slidedown') {
+          if(responsiveMenus['default']['style'] == 'ms-dropmenu' || responsiveMenus['default']['style'] == 'ms-slidedown') {
             $(menu + ' li:has(ul)' ).doubleTapToGo();
           }
 
           // Check if default is offcanvas and add the default position
-          if (responsiveMenus['default']['style'] == 'menu-style-offcanvas') {
+          if (responsiveMenus['default']['style'] == 'ms-offcanvas') {
             $(document.body).addClass(responsiveMenus['default']['offcanvas_position']);
           }
 
           // Check if default is tiles, add option classes accordingly
-          if (responsiveMenus['default']['style'] == 'menu-style-tiles') {
+          if (responsiveMenus['default']['style'] == 'ms-tiles') {
             $(document.body).addClass(responsiveMenus['default']['tiles_count']);
 
             if (responsiveMenus['default']['tiles_submenus']) {
@@ -65,13 +65,13 @@
           // onload, strait after setup, then listens for future matches.
 
           // On run a match if responsive style is not none.
-          if(responsiveMenus['responsive']['style'] !== 'menu-style-none') {
+          if(responsiveMenus['responsive']['style'] !== 'ms-none') {
 
             // Default and responsive are different menu styles
             if(responsiveMenus['responsive']['style'] !== responsiveMenus['default']['style']) {
 
               // doubletaptogo for drop and slidedown menus
-              if(responsiveMenus['responsive']['style'] == 'menu-style-dropmenu' || responsiveMenus['responsive']['style'] == 'menu-style-slidedown') {
+              if(responsiveMenus['responsive']['style'] == 'ms-dropmenu' || responsiveMenus['responsive']['style'] == 'ms-slidedown') {
                 $(menu + ' li:has(ul)' ).doubleTapToGo();
               }
 
@@ -79,12 +79,12 @@
               $(document.body).removeClass(responsiveMenus['default']['style']).addClass(responsiveMenus['responsive']['style']);
 
               // Check if the responsive style is offcanvas and add the offcanvas position
-              if(responsiveMenus['responsive']['style'] == 'menu-style-offcanvas') {
+              if(responsiveMenus['responsive']['style'] == 'ms-offcanvas') {
                 $(document.body).addClass(responsiveMenus['responsive']['offcanvas_position']);
               }
 
               // Check if the responsive style is tiles and add option classes
-              if(responsiveMenus['responsive']['style'] == 'menu-style-tiles') {
+              if(responsiveMenus['responsive']['style'] == 'ms-tiles') {
                 $(document.body).addClass(responsiveMenus['responsive']['tiles_count']);
 
                 if(responsiveMenus['responsive']['tiles_submenus']) {
@@ -97,7 +97,7 @@
               // need to check if the options are the same and add/remove classes accordingly.
 
               // Check if the responsive style is offcanvas
-              if(responsiveMenus['responsive']['style'] == 'menu-style-offcanvas') {
+              if(responsiveMenus['responsive']['style'] == 'ms-offcanvas') {
 
                 // Check if default offcanvas position is the same as the responisve offcanvas position
                 if(responsiveMenus['default']['offcanvas_position'] != responsiveMenus['responsive']['offcanvas_position']) {
@@ -108,7 +108,7 @@
               }
 
               // Check if the responsive style is tiles
-              if (responsiveMenus['responsive']['style'] == 'menu-style-tiles') {
+              if (responsiveMenus['responsive']['style'] == 'ms-tiles') {
 
                 // Check if default offcanvas position is the same as the responsive offcanvas position
                 if(responsiveMenus['default']['tiles_count'] != responsiveMenus['responsive']['tiles_count']) {
@@ -135,12 +135,12 @@
             $(document.body).removeClass(responsiveMenus['responsive']['style']);
 
             // Check if the default style is offcanvas and add the offcanvas position
-            if(responsiveMenus['default']['style'] == 'menu-style-offcanvas') {
+            if(responsiveMenus['default']['style'] == 'ms-offcanvas') {
               $(document.body).addClass(responsiveMenus['default']['offcanvas_position']);
             }
 
             // Check if the default style is tiles and add option classes
-            if(responsiveMenus['default']['style'] == 'menu-style-tiles') {
+            if(responsiveMenus['default']['style'] == 'ms-tiles') {
               $(document.body).addClass(responsiveMenus['default']['tiles_count']);
 
               if(responsiveMenus['default']['tiles_submenus']) {
@@ -153,7 +153,7 @@
             // need to check if the options are the same and add/remove classes accordingly.
 
             // Check if the responsive style is offcanvas
-            if(responsiveMenus['default']['style'] == 'menu-style-offcanvas') {
+            if(responsiveMenus['default']['style'] == 'ms-offcanvas') {
 
               // Check if default offcanvas position is the same as the responisve offcanvas position
               if(responsiveMenus['default']['offcanvas_position'] != responsiveMenus['responsive']['offcanvas_position']) {
@@ -164,7 +164,7 @@
             }
 
             // Check if the default style is tiles
-            if (responsiveMenus['default']['style'] == 'menu-style-tiles') {
+            if (responsiveMenus['default']['style'] == 'ms-tiles') {
 
               // Check if default offcanvas position is the same as the responsive offcanvas position
               if(responsiveMenus['default']['tiles_count'] != responsiveMenus['responsive']['tiles_count']) {

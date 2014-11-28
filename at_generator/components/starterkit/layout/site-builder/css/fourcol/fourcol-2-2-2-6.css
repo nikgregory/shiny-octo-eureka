@@ -1,5 +1,24 @@
-.fourcol-2-2-2-6 .arc--2 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.fourcol-2-2-2-6 .arc--3 .region { width: 32.20339%; float: left; margin-right: 1.69492%; }
-.fourcol-2-2-2-6 .arc--4 .region { width: 15.25424%; float: left; margin-right: 1.69492%; }
-.fourcol-2-2-2-6 .arc--4 .region:last-child { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.fourcol-2-2-2-6 .regions:not(.arc--1) .region:last-child { float: right; margin-right: 0; }
+.fourcol-2-2-2-6 .arc--2 .region {
+  width: 49.15254%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-2-2-2-6 .arc--3 .region {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-2-2-2-6 .arc--4 .region {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-2-2-2-6 .arc--4 .region:last-child {
+  width: 49.15254%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.fourcol-2-2-2-6 .regions:not(.arc--1) .region:last-child {
+  float: right;
+  margin-right: 0;
+}
