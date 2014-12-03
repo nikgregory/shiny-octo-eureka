@@ -2,11 +2,21 @@
  * Tabs (local tasks)
  ========================================================================== */
 
+ul.tabs {
+  margin: 0;
+  padding: 0;
+}
+
 // Fix and repair when local tasks become a block.
 .page__temporary-tabs {
 
+  // Temp solution until tabs become a block...
   .regions {
-    @include output-rhythm(padding, $medium 0);
+    @include output-rhythm(padding, $x-large 0);
+  }
+
+  ul.tabs.primary {
+    margin-bottom: 0;
   }
 
   // Here we call mixins that automagically apply styles to list items.
@@ -21,6 +31,3 @@
   }
 }
 
-.page__temporary-tabs ul.tabs.primary {
-  margin-bottom: 0;
-}

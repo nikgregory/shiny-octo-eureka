@@ -16,8 +16,8 @@
 @mixin list-style-seven-horizontal($list_selector) {
 
   #{$list_selector} {
-    padding: 0;
     @include list-horizontal($margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
+    padding: 0;
 
     a {
       display: block;
@@ -56,7 +56,6 @@
 @mixin list-style-seven-vertical($list_selector) {
 
   #{$list_selector} {
-    padding: 0;
     @include no-bullets;
     @include clearfix-micro;
 

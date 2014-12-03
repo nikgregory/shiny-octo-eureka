@@ -1,7 +1,10 @@
 /**
  * Color
- * Colorize elements. This file is only required if you are using the color
- * module.
+ ========================================================================== */
+
+
+/**
+ * base.elements
  ========================================================================== */
 
 // html and body
@@ -11,107 +14,8 @@ body {
 }
 
 
-// Page wrapper.
-.page {
-  background-color: $page-background-color;
-}
-
-
-// Regions
-//  - .regions is the main wrapper selector for all regions within a page.
-.regions {
-  background-color: $regions-background-color;
-}
-
-
-//  Page Rows - these match the Site Builder layout.
-//  You can find your layouts page row and region classes by viewing the theme
-//  settings and looking under Layouts > Options > Layout Selectors.
-//
-//  Do not add layout to .regions directly, instead if you want to modify the layout
-//  you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
-
-// Messages
-.page__messages {}
-
-
-// Messages
-.page__leaderboard {}
-
-
-// Header
-.page__header {
-  @include page-row-colors($page-header-background-color, $page-header-color, $page-row-fullwidth);
-}
-
-
-// Navbar
-.page__navbar {
-  @include page-row-colors($page-navbar-background-color, $page-navbar-color, $page-row-fullwidth);
-  color: $page-background-color;
-
-  a,
-  .menu a {
-    color: inherit;
-  }
-}
-
-
-// Features
-.page__features {
-  @include page-row-colors($page-features-background-color, $page-features-color, $page-row-fullwidth);
-}
-
-
-// Main
-.page__main {}
-
-
-// Tertiary
-.page__tertiary {
-  @include page-row-colors($page-tertiary-background-color, $page-tertiary-color , $page-row-fullwidth);
-}
-
-// Footer
-.page__footer {
-  @include page-row-colors($page-footer-background-color, $page-footer-color, $page-row-fullwidth);
-  color: $page-background-color;
-
-  a,
-  .menu a {
-    color: inherit;
-  }
-}
-
-// Theme attribution message. This is a toggle setting in the advanced theme
-// settings, you can turn it on/off using the Markup overrides extension.
-.attribution {
-  background-color: $page-navbar-background-color;
-}
-
-
-/**
- * Type
- *  - styles most typographic related html elements.
- *  - adds pre-styled selectors for lists.
- *  - also includes misc other elements such as hr.
- ========================================================================== */
-
 body {
   color: $text-color;
-}
-
-
-// Debug
-body > pre,
-.xdebug-var-dump {
-  color: $page-background-color;
-}
-
-.page {
-  .xdebug-var-dump {
-    color: $text-color;
-  }
 }
 
 
@@ -138,7 +42,7 @@ a {
 
 // Blockquotes, Bootstrap style.
 blockquote {
-  border-#{$flow-from}: 5px solid $border-color; // LTR
+  border-color: $border-color; // LTR
 
   p {
     &:first-child {
@@ -152,12 +56,16 @@ blockquote {
     color: lighten($text-color, $lighten-more);
   }
 
+  // Float right with text-align: right
+  &.pull-right {
+    border-#{$flow-to}-color: $border-color; // TODO check concantenation is OK
+  }
 }
 
 
 // A better looking default horizontal rule
 hr {
-  border-top: $border-width $border-style $border-color;
+  border-color: $border-color;
 }
 
 
@@ -176,6 +84,89 @@ hr {
 
 
 /**
+ * Page
+ *  - mainly for markup that is printed directly in page.html.twig and
+ *    .region {}
+ ========================================================================== */
+
+// Page wrapper.
+.page {
+  background-color: $page-background-color;
+}
+
+
+// Regions
+//  - .regions is the main wrapper selector for all regions within a page.
+.regions {
+  //background-color: $regions-background-color;
+}
+
+
+//  Page Rows - these match the Site Builder layout.
+
+// Messages
+.page__messages {}
+
+
+// Messages
+.page__leaderboard {}
+
+
+// Header
+.page__header {
+  @include page-row-colors($page-header-background-color, $page-header-color, $page-row-fullwidth);
+}
+
+
+// Navbar
+.page__navbar {
+  @include page-row-colors($page-navbar-background-color, $page-navbar-color, $page-row-fullwidth);
+
+  a,
+  .menu a {
+    color: inherit;
+  }
+}
+
+
+// Features
+.page__features {
+  @include page-row-colors($page-features-background-color, $page-features-color, $page-row-fullwidth);
+}
+
+
+// Main
+.page__main {}
+
+
+// Tertiary
+.page__tertiary {
+  @include page-row-colors($page-tertiary-background-color, $page-tertiary-color , $page-row-fullwidth);
+}
+
+// Footer
+.page__footer {
+  @include page-row-colors($page-footer-background-color, $page-footer-color, $page-row-fullwidth);
+
+  a,
+  .menu a {
+    color: inherit;
+
+    &:hover,
+    &:focus {
+      color: inherit;
+    }
+  }
+}
+
+// Theme attribution message. This is a toggle setting in the advanced theme
+// settings, you can turn it on/off using the Markup overrides extension.
+.attribution {
+  background-color: $page-navbar-background-color;
+}
+
+
+/**
  * Branding styles
  *  - Drupal core branding block.
  ========================================================================== */
@@ -183,17 +174,12 @@ hr {
 .block--system-branding-block {}
 
 .site-branding-text {
-
   a {
-    color: $page-background-color;
   }
-
 }
 
 .site-logo {}
-
 .site-name {}
-
 .site-slogan {}
 
 
@@ -202,7 +188,6 @@ hr {
  ========================================================================== */
 
 .block {}
-
 .block__title {}
 
 
@@ -258,13 +243,27 @@ hr {
 
 
 /**
- * Responsive menu styles. Import into breakpoints.
- *  - slidedown
- *  - off canvas
- *  - tiles
+ * Responsive menu styles.
  *
- * Set the breakpoint and import the menu style into that breakpoint, then
- * visit your theme settings and configure options.
+ * Mixins provide the basic struture and a base style (not much), the rest
+ * is up to you, add colors, borders, padding and so on. Icons such as
+ * the hamburger and arrows are set in variables in _variables.scss, and you
+ * use the color varaibles for menus from there also.
+ *
+ * Menu styles are set in Appearance settings using the Responsive Menus extension.
+ * There you select a block, breakpoint, a default style and a responsive style.
+ * You can safely remove mixins from this file if you not going to use them later
+ * on, and want to save a few bytes in stylsheet size.
+ *
+ * Each mixin takes one or more parameters. Use these to customize the basic struture
+ * of the menu, or call options, for example you can place the offcanvas menu on the
+ * left or right.
+ *
+ * Do not import into breakpoints unless you are not using the Responsive Menu
+ * settings in Appearance Extensions, in which case you will need to load the
+ * at_core/at.responsivemenus library and provide it's required drupalSettings.
+ *
+ * Breakpoints are handled in matchMedia using Enquire.
  *
  * Responsive styles are a combination of three things:
  *  1. Sass/CSS defined here (with breakpoints etc).
@@ -272,19 +271,28 @@ hr {
  *  3. Theme settings as set in your themes Advanced extention settings.
  ========================================================================== */
 
+
 // Aggressively force the menu to inherit the page/regions background,
-// this saves us a lot of messing about.
-.rmr,
-.rmr .block,
-.rmr .block * {
+// this gives us some pretty usable styles for free.
+.rm-block,
+.rm-block * {
   background-color: inherit;
   color: inherit;
 }
 
 
-// Global styles for the navbar region.
-.rmr {
+// Provide a consistant style for visible click handles.
+.rm-toggle  {
+  span {
+    background: transparent;
+  }
+}
 
+
+// Provide a reasonbly consistant menu style accross all menu types,
+// you may need to tweak some types due to the differences in layout
+// and overall design of the menu.
+.rm-block__content {
   .menu {
     li {
       &.active-trail > a {
@@ -296,6 +304,11 @@ hr {
     a {
       color: $resp-menu-color;
       background: $resp-menu-background-color;
+
+      &:active {
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+        opacity: 0.9;
+      }
 
       &:hover,
       &:focus {
@@ -323,8 +336,47 @@ hr {
 
 
 // Customize responsive menus for this theme.
+.ms-dropmenu {
+  .rm-block__content {
+    a {
+      &:after {
+      }
+    }
+
+    li {
+      &.expanded li {
+      }
+    }
+  }
+}
+
+
+.ms-horizontal {
+  .rm-block__content {
+    a {
+      &:before,
+      &:after {
+      }
+    }
+  }
+}
+
+
+.ms-offcanvas {
+  .rm-block__content {
+    opacity: .001;
+    background-color: $body-background-color;
+    color: $page-background-color;
+  }
+
+  > .page,
+  .rm-block__content {
+  }
+}
+
+
 .ms-tiles {
-  .rmr {
+  .rm-block__content {
     .menu-level-1 {
       > li {
         background-color: $resp-menu-active-background-color;
@@ -334,20 +386,60 @@ hr {
 }
 
 
-/**
- * Tables
- *  - inlcudes all table elements and table drag selectors.
- ========================================================================== */
+.ms-flipslide {
+  &.rm-is-open {
+    .rm-block__content {
+      .menu-level-1 > li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
+        &:last-child {
+        }
 
-table {
-  border: $border-width $border-style $border-color;
+        > a {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+  }
 }
 
 
+/**
+ * Breadcrumbs
+ ========================================================================== */
+
+.breadcrumb {
+  li {
+    &:before {
+      color: $breadcrumb-seperator-color;
+    }
+  }
+
+  a {
+    color: $breadcrumb-color;
+    text-decoration: none;
+  }
+}
+
+
+/**
+ * Tables
+ * Base styles.
+ ========================================================================== */
+
+table {
+  border-color: $border-color;
+}
+
+
+/**
+ * Table Theme
+ * Style Drupal selectors for tables.
+ ========================================================================== */
+
 // tr, takes extensive styles if enabled in variables.scss.
 tr {
-  border: $border-width $border-style $border-color;
+  border-color: $border-color;
 
   // Row striping (zebra).
   @if $table-row-striping == true {
@@ -381,10 +473,8 @@ tr {
 }
 
 
-// Align captions and cell content.
-caption,
-th,
-td {}
+// Captions and cell content.
+caption {}
 
 
 // thead.
@@ -392,10 +482,6 @@ thead {
   tr {
     color: $thead-text-color;
     background-color: $thead-background-color;
-  }
-
-  .active img {
-    display: inline;
   }
 }
 
@@ -405,131 +491,6 @@ tr,
 td,
 th {
   border-color: $border-color;
-}
-
-
-/**
- * Buttons
- *  - applies to elements with class "button", includes styles for:
- *  - input buttons
- *  - anchor links styled as buttons
- *  - drop buttons
- *  - action link buttons
- ========================================================================== */
-
-.button {
-  color: $button-color;
-  background: $button-background-color;
-  border: $button-border-width $button-border-style $button-border-color;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-
-  &:hover,
-  &:focus {
-    color: $button-hover-color;
-    background-color: $button-background-hover-color;
-  }
-
-  &[disabled] {
-    &:hover {
-      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
-    }
-  }
-}
-
-// Primary button
-.button--primary {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
-}
-
-// Danger button, e.g. delete buttons often have this class.
-.button--danger {
-  @include button-variant($error-text-color, $error-background-color, $error-border-color);
-}
-
-
-/* Drop buttons */
-.js .dropbutton-widget {
-  background-color: $page-background-color;
-  border: $button-border-width $button-border-style $button-border-color;
-}
-
-.dropbutton {
-
-  .secondary-action {
-    border-top: $button-border-width $button-border-style $button-border-color;
-
-    .button {
-
-      background: $page-background-color;
-
-      &:hover,
-      &:focus {
-        background-color: $button-background-hover-color;
-      }
-    }
-  }
-}
-
-// Dropbutton Multiple
-.dropbutton-multiple {
-  .dropbutton {
-    border-right: $button-border-width $button-border-style $button-border-color;
-
-    .publish {
-      .button {
-        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
-      }
-    }
-
-    // RTL
-    @at-root [dir="rtl"] {
-      .dropbutton-multiple .dropbutton {
-        border-left: $button-border-width $button-border-style $button-border-color;;
-      }
-    }
-  }
-
-}
-
-
-/**
- * Styles for link buttons and action links. TODO.
- */
-/*
-#block-atblocksmenuactions {
-  @include output-rhythm(margin, $medium 0);
-
-  li {
-    @include no-bullets;
-  }
-}
-
-.action-links {
-  list-style: none;
-  padding: 0;
-  @include output-rhythm(margin, $medium 0);
-
-  li {
-    display: inline-block;
-    margin: 0 $small;
-
-    &:first-child {
-      margin-left: 0; // LTR
-    }
-  }
-
-  // RTL
-  @at-root [dir="rtl"] .action-links li:first-child {
-    margin-left: $small;
-    margin-right: 0;
-  }
-}
-*/
-
-
-// Action button
-.button-action {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
 }
 
 
@@ -544,49 +505,56 @@ th {
  ========================================================================== */
 
 // Select, Textarea and most input types
-select,
+// Select, Textarea and most input types
 textarea,
-input {
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
 
-  &:not([type]),
-  &[type="text"],
-  &[type="password"],
-  &[type="email"],
-  &[type="url"],
-  &[type="date"],
-  &[type="month"],
-  &[type="time"],
-  &[type="datetime"],
-  &[type="datetime-local"],
-  &[type="week"],
-  &[type="number"],
-  &[type="search"],
-  &[type="tel"],
-  &[type="color"] {
-    color: $form-text-color;
-    border: $form-border-width $form-border-style $form-border-color;
-    background-color: $form-background-color;
-    box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
+  color: $form-text-color;
+  border-color: $form-border-color;
+  background-color: $form-background-color;
 
-    &:focus {
-      border-color: $form-border-color;
-      color: $form-text-focus-color;
-    }
+  box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
 
+  &:focus {
+    border-color: $form-border-color;
+    color: $form-text-focus-color;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $form-background-focus-color;
+  }
+
+  &[disabled] {
     &:hover,
     &:focus {
-      background-color: $form-background-focus-color;
-    }
-
-    &[disabled] {
-      opacity: 0.7;
-
-      &:hover,
-      &:focus {
-        color: $form-text-focus-color;
-      }
+      color: $form-text-focus-color;
     }
   }
+}
+
+
+/**
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @thanks http://nicolasgallagher.com/css-background-image-hacks/
+ */
+details {
+  border-color: $form-border-color;
 }
 
 
@@ -601,12 +569,43 @@ textarea {
 }
 
 
+// Disabled
+button[disabled],
+input[disabled],
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled],
+a.button_disabled {
+  background: $text-background-color;
+  color: $text-color;
+}
+
+
+// Placeholders
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: $form-text-color;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: $form-text-color;
+}
+
+input.placeholder_text,
+textarea.placeholder_text {
+  color: $form-text-color;
+}
+
+
+/**
+ * Form Theme
+ ========================================================================== */
+
 // Filters and tips
 .filter-wrapper {
   border-color: $form-border-color;
-  border-style: $form-border-style;
-  border-width: $form-border-width;
-  border-top: 0;
 }
 
 
@@ -632,12 +631,262 @@ textarea {
 }
 
 
-/**
- * Collapsible details.
- *
- * @see collapse.js
- * @thanks http://nicolasgallagher.com/css-background-image-hacks/
- */
-details {
-  border: $form-border-width $form-border-style $form-border-color;
+// Errors.
+.form-item {
+  input.error,
+  textarea.error,
+  select.error {
+    border-color: $error-border-color;
+  }
 }
+
+
+/**
+ * Buttons
+ * We include button styling seperate (from _forms.scss) mainly because the form
+ * styles are quite long already and we often want to add unique button variants.
+ *
+ *  - applies to elements with class "button", includes styles for:
+ *  - input buttons
+ *  - anchor links styled as buttons
+ *  - drop buttons
+ *  - action link buttons
+ ========================================================================== */
+
+button,
+.button {
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  color: $button-color;
+  background: $button-background-color;
+  border-color: $button-border-color;
+  opacity: 0.9;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    color: $button-hover-color;
+    background-color: $button-background-hover-color;
+  }
+
+  &[disabled] {
+    &:hover {
+      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
+    }
+  }
+}
+
+
+// Primary button
+.button--primary {
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+}
+
+
+// Danger button, e.g. delete buttons often have this class.
+.button--danger {
+  @include button-variant($error-text-color, transparent, transparent);
+}
+
+
+// Action button
+.button-action {
+  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+}
+
+
+/* Drop buttons */
+.js .dropbutton-widget {
+  background-color: $page-background-color;
+  border-color: $button-border-color;
+
+}
+
+.dropbutton {
+  .secondary-action {
+    border-top-color: $button-border-color;
+
+    .button {
+      background: $page-background-color;
+
+      &:hover,
+      &:focus {
+      }
+    }
+  }
+
+  .dropbutton-toggle {
+    button {
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+}
+
+
+// Dropbutton Multiple
+.dropbutton-multiple {
+  .dropbutton {
+    border-right-color: $button-border-color;
+
+    .publish {
+      .button {
+        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+      }
+    }
+
+    // RTL
+    @at-root [dir="rtl"] {
+      .dropbutton-multiple .dropbutton {
+        border-left-color: $button-border-color;
+      }
+    }
+  }
+
+  &.open {
+    .dropbutton-action .button {
+      border-radius: $button-border-radius 0 0 0;
+    }
+  }
+
+  // Include secondary actions after "open" so
+  // the styles cascade properly.
+  .dropbutton {
+    .secondary-action {
+      .button {
+        border-radius: 0 0 0 $button-border-radius;
+
+        &:hover,
+        &:focus {
+          border-radius: 0 0 0 $button-border-radius;
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * File icons
+ * AT unsets Drupal core file field CSS for image icons and replaces them
+ * with FontAwesome icons.
+ ========================================================================== */
+
+.file {
+  a:before {
+    color: $text-color;
+  }
+}
+
+
+/**
+ * Field Taxonomy Reference
+ ========================================================================== */
+
+.field-type-taxonomy-term-reference {
+  @if ($field-taxonomy-item-as-labels == true) {
+    span {
+      background: lighten($text-background-color, $lighten-more);
+      color: $text-color;
+      border-color: $border-color;
+
+      &:hover,
+      &:focus {
+        background: $text-background-color;
+      }
+
+      a {
+        color: $text-color;
+
+        &:hover,
+        &:focus {
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Labels.
+ *  -  for example "new" mark on comments, tags etc.
+ *
+ *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
+ ========================================================================== */
+
+.filter-help a,
+.more-help-link a {
+  &:after {
+    color: $border-color;
+  }
+}
+
+
+/**
+ * Messages
+ *  - style system messages such as status, warning and error.
+ ========================================================================== */
+
+/* Success (status) */
+.messages--status,
+table tr.ok {
+  background-color: $success-background-color;
+}
+
+.messages--status,
+.ok {
+  color: $success-text-color;
+}
+
+
+/* Warning */
+.messages--warning,
+table tr.warning {
+  background-color: $warning-background-color;
+}
+
+.messages--warning,
+.warning {
+  color: $warning-text-color;
+}
+
+
+/* Error */
+.messages--error,
+table tr.error {
+  background-color: $error-background-color;
+}
+
+.messages--error,
+.error {
+  color: $error-text-color;
+}
+
+
+// Devel query messages
+.dev-query {
+  color: $page-background-color;
+}
+
+
+// xdebug-var-dump
+body > pre,
+.xdebug-var-dump {
+  color: $page-background-color;
+}
+
+
+.page {
+  .xdebug-var-dump {
+    color: $text-color;
+  }
+}
+
+
+// SASS errors
+body {
+  &:before {
+    color: $error-text-color;
+  }
+}
+

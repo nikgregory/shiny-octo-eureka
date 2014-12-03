@@ -7,89 +7,87 @@
 // displayed horizontally.
 //
 
-@mixin flipslide {
+@mixin flipslide($col-width: 12em, $arrows: true) {
 
   .ms-flipslide {
-    .rmr {
 
+    .rm-region,
+    .rm-block {
       position: relative;
+    }
 
-      .block-menu__title {
-        cursor: pointer;
-        display: table;
-        font-size: 1rem;
-        line-height: 1.5;
-        position: absolute;
-        right: 0;
-        text-align: center;
-        width: 3rem;
-        z-index: 200;
-        @include output-rhythm(padding, $xx-small);
+    .rm-toggle {
+      position: absolute;
+      #{$flow-to}: 0;
+      z-index: 200;
+      padding: 0;
 
-        span {
-          @include visually-hidden;
-        }
-
-        &:after {
-          font-family: FontAwesome, sans-serif;
-          content: $menu-hamburger;
-          @include output-rhythm(width, $medium);
-        }
+      &:after {
+        display: block;
+        font-family: FontAwesome, sans-serif;
+        content: $menu-hamburger;
+        @include output-rhythm(width, $medium);
+        @include output-rhythm(padding, $xx-small $medium);
       }
 
-      .block-menu__content {
-        transition: all, .2s, ease;
-
-        .menu-level-1 > li {
-          float: left;
-
-          > a:after {
-            content: "";
-            @include visually-hidden;
-          }
-        }
-
-        .menu-level-2 {
-          @include visually-hidden;
-          opacity: 0.3;
-          //@include opacity(.3); // Test with IE without compass mixin
-        }
+      span {
+        @include visually-hidden;
       }
     }
 
-    .rmr .block.rm-is-open  {
-      .block-menu__content {
+    .rm-block__content {
+      transition: $transition_global;
+
+      .menu-level-1 > li {
+        float: #{$flow-from};
+
+        > a:after {
+          content: "";
+          display: none;
+        }
+      }
+
+      .menu-level-2 {
+        display: none;
+        opacity: 0.001;
+      }
+    }
+
+    // Menu is open
+    &.rm-is-open {
+
+      .rm-block__content {
         padding: 0;
         margin: 0;
 
-        .menu li.expanded > a:after {
-          content: $menu-arrow-left; // LTR
+        @if $arrows == true {
+          .menu li.expanded > a:after {
+            content: $menu-arrow-left;
+          }
         }
 
         .menu-level-1 > li {
           float: none;
+          margin-right: 3.5rem;
           @include clearfix-micro;
-          margin-right: 3rem;
-          border-bottom: 1px solid rgba(255,255,255,0.4);
 
           &:last-child {
             border-bottom: none;
           }
 
           a {
-            float: left;
+            float: #{$flow-from};
           }
 
           > a {
-            width: 12em;
-            background-color: rgba(255,255,255,0.3);
+            width: $col-width;
           }
         }
+
         .menu-level-2 {
-          @include visually-hidden-off;
+          display: block;
+          float: #{$flow-from};
           opacity: 1;
-          //@include opacity(1);
-          float: left;
 
           ul, ol {
             padding: 0;
@@ -97,7 +95,7 @@
 
           li,
           ul {
-            float: left;
+            float: #{$flow-from};
 
             a {
               width: auto;

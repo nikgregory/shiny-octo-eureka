@@ -3,30 +3,17 @@
 // over the drop menu of not requiring a width on menu items or arrows etc.
 // Like most mixins in the UIKit you can and should hack the mixin to suit your design.
 //
-@mixin horizontal-menu {
+@mixin horizontal($arrows: false) {
 
   .ms-horizontal {
-    .rmr {
-      .block-menu__title {
-        @include visually-hidden;
-      }
 
-      .block-menu {
-        a {
-          @include output-rhythm(padding, $xx-small $large);
+    .rm-toggle {
+      @include visually-hidden;
+    }
 
-          &:before,
-          &:after {
-            content: "";
-            float: none;
-            width: 0;
-            padding: 0;
-          }
-        }
-
-        .menu-level-1 {
-          @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
-        }
+    .rm-block__content {
+      .menu-level-1 {
+        @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
       }
     }
   }

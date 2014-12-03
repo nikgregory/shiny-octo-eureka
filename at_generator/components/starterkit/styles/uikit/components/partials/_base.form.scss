@@ -27,29 +27,23 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-  @include output-rhythm(padding, $xx-small $x-small);
-
-  border-radius: $form-border-radius;
-  transition: all, .15s, linear;
-  box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
 
   max-width: 100%;
   box-sizing: border-box;
+  @include output-rhythm(padding, $xx-small $x-small);
 
-  color: $form-text-color;
-  border: $form-border-width $form-border-style $form-border-color;
-  background-color: $form-background-color;
+  border-radius: $form-border-radius;
+  border: $form-border-width $form-border-style;
+
+  transition: $transition_global;
 
   &:focus {
     outline: 0;
     outline: thin dotted \9; // IE9
-    border-color: $form-border-color;
-    color: $form-text-focus-color;
   }
 
   &:hover,
   &:focus {
-    background-color: $form-background-focus-color;
   }
 
   &[disabled] {
@@ -57,7 +51,6 @@ input[type="week"] {
 
     &:hover,
     &:focus {
-      color: $form-text-focus-color;
     }
   }
 }
@@ -67,6 +60,8 @@ input[type="week"] {
 // a min-width for all inputs as all are unsuable smaller than this.
 input {
   min-width: 13px;
+  line-height: 1; // reset line-height
+  vertical-align: baseline; // make sure this happens
 }
 
 
@@ -129,7 +124,7 @@ legend {}
 
 
 details {
-  border: $form-border-width $form-border-style $form-border-color;
+  border: $form-border-width $form-border-style;
   border-radius: $border-radius;
 
   @include output-rhythm(margin, $medium 0);
@@ -147,8 +142,6 @@ input,
 select,
 textarea {
   &[readonly] {
-    background: $text-background-color;
-    color: $text-color;
   }
 }
 
@@ -164,11 +157,7 @@ a.button_disabled {
   box-shadow: none;
   opacity: 0.7;
   user-select: none;
-  color: #888;
   cursor: default;
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
 }
 
 
@@ -189,15 +178,28 @@ textarea {
 // Placeholders
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: $form-text-color;
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: $form-text-color;
 }
 
 input.placeholder_text,
 textarea.placeholder_text {
-  color: $form-text-color;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

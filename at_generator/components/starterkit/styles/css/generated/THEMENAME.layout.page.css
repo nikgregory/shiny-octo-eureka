@@ -1,4 +1,4 @@
-/* Generated on: Fri, 28 Nov 14 17:18:13 +0100 */
+/* Generated on: Sun, 30 Nov 14 01:30:21 +0100 */
 .regions {
   max-width: 75em;
   margin-left: auto;
@@ -10,7 +10,7 @@
   clear: both;
 }
 
-@media all and (min-width: 45em) and (max-width: 65em) {
+@media all and (min-width: 45em) and (max-width: 60em) {
 .page__header .arc--2 .region {
   width: 49.15254%;
   float: left;
@@ -89,7 +89,7 @@
 }
 
 }
-@media all and (min-width: 65em) {
+@media all and (min-width: 60em) {
 .page__header .arc--2 .region {
   width: 49.15254%;
   float: left;

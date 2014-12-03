@@ -1,104 +1,103 @@
 //
-// CSS only Drop menus.
-// Like most mixins in the UIKit you can and should hack the mixin to suit your design.
+// Accessible CSS only Drop menus.
+// The hidden state does not use display properties, instead we toggle
+// visually-hidden on :hover
 //
-@mixin dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true) {
+//
+@mixin dropmenu($item-width: 12em, $arrows: true) {
 
   .ms-dropmenu {
-    .rmr {
 
-      .block-menu__title {
-        @include visually-hidden;
+    .rm-toggle {
+      @include visually-hidden;
+    }
+
+    .rm-block__content {
+      /*
+      a {
+        position: relative;
+        @include output-rhythm(padding, $xx-small $large);
+
+        &:after {
+          position: absolute;
+          @include output-rhythm(right, $medium); // LTR
+        }
       }
+      */
 
-      .block-menu {
-        a {
-          position: relative;
-          @include output-rhythm(padding, $xx-small $large);
+      .menu-level-1 {
+        position: relative;
 
-          &:after {
-            position: absolute;
-            @include output-rhythm(right, $medium); // LTR
+        > li {
+          &:first-child {}
+          &:last-child {}
+
+          a {
+            &:hover,
+            &:focus {}
           }
         }
 
-        .menu-level-1 {
-          position: relative;
+        li {
+          float: left; // LTR
+          width: $item-width;
 
-          > li {
-            &:first-child {}
-            &:last-child {}
+          @if $arrows == true {
+            &.expanded > a:after {
+              content: $menu-arrow-down;
+            }
 
-            a {
+            &.collapsed > a:after {
+              content: '';
+            }
+          }
+
+          ul {
+            @include visually-hidden;
+            transition: $transition_global;
+
+            li {
               &:hover,
               &:focus {}
             }
           }
 
-          li {
-            float: left; // LTR
-            width: $dropmenu-item-width;
-
-            @if $dropmenu-arrows == true {
-              &.expanded > a:after {
-                content: $menu-arrow-down;
-              }
-
-              &.collapsed > a:after {
-                content: '';
-              }
-            }
-
-            ul {
-              @include visually-hidden;
-              opacity: 0.3;
-              //@include opacity(.3);  // test with IE without compass mixin?
-
-              transition: all, .2s, ease;
-
-              li {
-                &:hover,
-                &:focus {}
-              }
-            }
-
-            // visusally-hidden-off but without the positioning.
-            &:hover > ul,
-            &:focus > ul {
-              display: block;
-              opacity: 1;
-              clip: auto;
-              overflow: visible;
-              height: auto;
-              width: auto;
-              font-family: inherit;
-            }
+          // visusally-hidden-off but without positioning.
+          &:hover > ul,
+          &:focus > ul {
+            display: block;
+            opacity: 1;
+            clip: auto;
+            overflow: visible;
+            height: auto;
+            width: auto;
+            font-family: inherit;
           }
         }
+      }
 
-        .odd {
-          // Down
-          ul {
-            left: 0; // LTR
-            top: auto;
-            //> li a {background-color: pink;}
+      .odd {
+        // Down
+        ul {
+          left: 0; // LTR
+          top: auto;
+          //> li a {background-color: pink;}
 
+          @if $arrows == true {
             > .expanded > a:after {
-              @if $dropmenu-arrows == true {
-                content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
-              }
+              content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
             }
+          }
 
-            // Accross
-            .odd {
-              left: 100%; // LTR
-              top: 0;
-              //> li a {background-color: yellow;}
+          // Accross
+          .odd {
+            left: 100%; // LTR
+            top: 0;
+            //> li a {background-color: yellow;}
 
+            @if $arrows == true {
               > .expanded > a:after {
-                @if $dropmenu-arrows == true {
-                  content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
-                }
+                content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
               }
             }
           }

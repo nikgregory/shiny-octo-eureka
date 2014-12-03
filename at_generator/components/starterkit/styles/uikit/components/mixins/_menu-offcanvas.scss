@@ -1,96 +1,58 @@
 // Off Canvas
-//
-// Do NOT @include into a selector, these must apply to the body element where
-// classes are set for the offcanvas animation (uses CSS3 translate).
-// The idea is that you @include into a breakpoint, so an oridinary menu/dropmenu
-// will be offcanvas style in small screens.
+@mixin offcanvas($oc-position: left, $width: 15em, $arrows: false) {
 
-@mixin offcanvas {
+  $pad-dir: padding-right;
+  $transform_block: translate(-#{$width}, 0);
+  $transform_page: translate($width, 0);
+
+  @if $oc-position == right {
+    $pad-dir: padding-left;
+    $transform_block: translate($width, 0);
+    $transform_page: translate(-#{$width}, 0);
+  }
 
   .ms-offcanvas {
-    .rmr {
-      .block-menu__title {
-        @include adjust-font-size-to($medium);
-        @include output-rhythm(padding, $xx-small 0);
-        cursor: pointer;
-
-        &:after {
-          font-family: FontAwesome, sans-serif;
-          content: $menu-hamburger;
-          @include output-rhythm(width, $medium);
-        }
-      }
-
-      .block-menu__content {
-        background-color: $body-background-color;
-        color: $page-background-color;
-        position: absolute;
-        top: 0;
-        @include output-rhythm(padding, 0 0 $xx-small);
-        @include visually-hidden;
-      }
-    }
 
     > .page {
-      transition: all, .2s, ease-in-out;
+      transition: $transition_global;
     }
 
-   // off left
-    &.offcanvas-left .rmr {
-      .block-menu__title {
-        text-align: left;  // LTR
-        &:after {
-          float: left; // LTR
-          text-align: left; // LTR
-          @include output-rhythm(margin, 0 $small 0 $medium); // LTR
-        }
-      }
-      .block-menu__content {
-        left: 0;
-        transform: translate(-15em, 0);
+    .rm-toggle {
+      float: $oc-position;
+
+      &:before {
+        font-family: FontAwesome, sans-serif;
+        content: $menu-hamburger;
+        @include output-rhythm(width, $medium);
+        @include output-rhythm($pad-dir, $xx-small);
       }
     }
 
-    // off right
-    &.offcanvas-right .rmr {
-      .block-menu__title {
-        text-align: right;  // LTR
-        &:after {
-          float: right;  // LTR
-          text-align: right;  // LTR
-          @include output-rhythm(margin, 0 $medium 0 $small);
-        }
-      }
-      .block-menu__content {
-        right: 0;
-        transform: translate(15em, 0);
-      }
+    .rm-block__content {
+      opacity: .001;
+      #{$oc-position}: 0;
+      transform: $transform_block;
+      transition: $transition_global;
     }
 
+    // Menu is open.
     &.rm-is-open {
       > .page {
         position: fixed;
+      }
 
-        .block-menu__content {
-          clip: auto;
-          overflow: visible;
-          height: auto;
-          font-family: inherit;
-          font-size: inherit;
-          width: 15em;
-        }
+      .rm-block__content {
+        opacity: 1;
+        display: block;
+        width: $width;
+        position: absolute;
+        top: 0;
+
       }
     }
 
-    // on left
-    &.rm-is-open.offcanvas-left > .page {
-      transform: translate(15em, 0);
-      position: fixed;
-    }
-
-    // on right
-    &.rm-is-open.offcanvas-right > .page {
-      transform: translate(-15em, 0);
+    &.rm-is-open > .page {
+      transform: $transform_page;
     }
   }
 }

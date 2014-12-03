@@ -19,21 +19,18 @@
   @if ($field-taxonomy-item-as-labels == true) {
     span {
       display: inline-block;
-      background: lighten($text-background-color, $lighten-more);
-      color: $text-color;
-      border: $border-width $border-style $border-color;
       margin: 0 3px 3px 0; // LTR
-      border-radius: $border-radius;
       
+      border: $border-width $border-style;
+      border-radius: $border-radius;
+
       @include output-rhythm(padding, 0 $small);
 
       &:hover,
       &:focus {
-        background: $text-background-color;
       }
 
       a {
-        color: $text-color;
         display: inline-block;
 
         &:hover,
@@ -83,7 +80,7 @@
     margin: 0;
     padding: 0;
     display: inline-block;
-    @include no-bullets;
+    list-style: none;
   }
 
   &.field-label--inline .field__item {

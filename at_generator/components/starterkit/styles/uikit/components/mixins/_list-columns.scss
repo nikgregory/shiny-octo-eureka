@@ -11,7 +11,7 @@
 @mixin list-multicolumn($list_selector, $col_width: 12em) {
 
   #{$list_selector} {
-    padding: 0;
+    @include no-bullets;
     @include clearfix-micro;
 
     > li {

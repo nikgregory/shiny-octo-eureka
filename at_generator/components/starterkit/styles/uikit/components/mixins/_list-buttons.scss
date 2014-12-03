@@ -103,8 +103,7 @@
 @mixin list-style-button-group-vertical($list_selector) {
 
   #{$list_selector} {
-    padding: 0;
-    list-style: none;
+    @include no-bullets;
     @include clearfix-micro;
 
     li {

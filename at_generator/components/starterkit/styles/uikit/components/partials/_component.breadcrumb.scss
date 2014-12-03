@@ -24,13 +24,11 @@
   }
 
   li {
-    @include no-bullets;
+    list-style: none;
 
     &:before {
       font-family: FontAwesome, sans-serif;
       content: "\f105";  // fa-angle-right
-
-      color: $breadcrumb-seperator-color;
       display: inline-block;
       padding: 0;
       margin: 0;
@@ -45,22 +43,18 @@
   }
 
   a {
-    color: $breadcrumb-color;
     text-decoration: none;
 
     &:link,
     &:visited {
-      //color: $breadcrumb-link-visited-color;
     }
 
     &:active,
     &.active {
-      //color: $breadcrumb-link-active-color;
     }
 
     &:hover,
     &:focus {
-      //color: $breadcrumb-link-hover-color;
       //text-decoration: underline;
     }
   }
@@ -70,5 +64,3 @@
     content: "\f104"; // RTL, fa-angle-left
   }
 }
-
-

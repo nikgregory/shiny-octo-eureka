@@ -5,36 +5,46 @@
 # so any pixel equivalents stated here assume base font size of 16px. Change them
 # to suit your requirements.
 #
-#   mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
-#   tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
-#   widescreen      - 65em (1040px) and up.
+#   mobile-tablet   - 0 to 60em (0 to 960px), mobile and most tablets.
+#   tablet-isolate  - 45em and max-width 60em (720px to 960px), isolatate tablets.
+#   widescreen      - 60em (960px) and up.
+#   maxwidth        - 0 to 75em (0 to 1200px), match the themes max-width CSS value.
 #
 # | mobile-tablet ------------------->|
 #                 | tablet-isolate -->|
 #                                     | widescreen ---------------------------->
+# | max-width ------------------------------------>|
 #
-# mobile-tablet   : "all and (max-width: 65em)";
-# tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
-# widescreen      : "all and (min-width: 65em)";
+# mobile-tablet   : "all and (max-width: 60em)";
+# tablet-isolate  : "all and (min-width: 45em) and (max-width: 60em)";
+# widescreen      : "all and (min-width: 60em)";
+# maxwidth        : "all and (max-width: 75em)";
 #
 at_core.simple.mobile-tablet:
   label: Mobile-tablet
-  mediaQuery: 'all and (max-width: 65em)'
+  mediaQuery: 'all and (max-width: 60em)'
   weight: 0
   multipliers:
     - 1x
   group: at_core.simple
 at_core.simple.tablet-isolate:
   label: Tablet-isolate
-  mediaQuery: 'all and (min-width: 45em) and (max-width: 65em)'
+  mediaQuery: 'all and (min-width: 45em) and (max-width: 60em)'
   weight: 1
   multipliers:
     - 1x
   group: at_core.simple
 at_core.simple.widescreen:
   label: Widescreen
-  mediaQuery: 'all and (min-width: 65em)'
+  mediaQuery: 'all and (min-width: 60em)'
   weight: 2
+  multipliers:
+    - 1x
+  group: at_core.simple
+at_core.simple.maxwidth:
+  label: Max-width
+  mediaQuery: 'all and (max-width: 75em)'
+  weight: 3
   multipliers:
     - 1x
   group: at_core.simple
@@ -46,12 +56,14 @@ at_core.simple.widescreen:
 # to suit your requirements.
 #
 #   mobile          - 0 to 45em (0 to 720px), small screens only.
-#   mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+#   mobile-tablet   - 0 to 60em (0 to 960px), mobile and most tablets.
 #
-#   tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+#   tablet-isolate  - 45em and max-width 60em (720px to 960px), isolatate tablets.
 #   tablet          - 45em (720px) and up.
 #
-#   widescreen      - 65em (1040px) and up.
+#   widescreen      - 60em (960px) and up.
+#
+#   maxwidth        - 0 to 75em (0 to 1200px), match the themes max-width CSS value.
 #
 #   huge            - 120em (1920px) and up, for big resolution.
 #
@@ -66,13 +78,15 @@ at_core.simple.widescreen:
 #                 | tablet-isolate -->|
 #                 | tablet ---------------------------------------------------->
 #                                     | widescreen ---------------------------->
+# | max-width ------------------------------------>|
 #                                                                   | huge ---->
 #
 # mobile          : "all and (max-width: 45em)";
-# mobile-tablet   : "all and (max-width: 65em)";
-# tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
+# mobile-tablet   : "all and (max-width: 60em)";
+# tablet-isolate  : "all and (min-width: 45em) and (max-width: 60em)";
 # tablet          : "all and (min-width: 45em)";
-# widescreen      : "all and (min-width: 65em)";
+# widescreen      : "all and (min-width: 60em)";
+# maxwidth        : "all and (max-width: 75em)";
 # huge            : "all and (min-width: 120em)";
 #
 at_core.advanced.mobile:
@@ -85,8 +99,8 @@ at_core.advanced.mobile:
   group: at_core.advanced
 at_core.advanced.mobile_tablet:
   label: Mobile-tablet
-  description: 'The mobile-tablet breakpoint uses max-width and will apply for all screens up to 65em. This will cascade into the tablet breakpoint, and can override the mobile breakpoint.'
-  mediaQuery: 'all and (max-width: 65em)'
+  description: 'The mobile-tablet breakpoint uses max-width and will apply for all screens up to 60em. This will cascade into the tablet breakpoint, and can override the mobile breakpoint.'
+  mediaQuery: 'all and (max-width: 60em)'
   weight: 1
   multipliers:
     - 1x
@@ -94,7 +108,7 @@ at_core.advanced.mobile_tablet:
 at_core.advanced.tablet_isolate:
   label: Tablet-isolate
   description: 'The tablet-isolate breakpoint uses a min and max width to isolate styles between these two widths.'
-  mediaQuery: 'all and (min-width: 45em) and (max-width: 65em)'
+  mediaQuery: 'all and (min-width: 45em) and (max-width: 60em)'
   weight: 2
   multipliers:
     - 1x
@@ -109,9 +123,17 @@ at_core.advanced.tablet:
   group: at_core.advanced
 at_core.advanced.widescreen:
   label: Widescreen
-  description: 'The widescreen breakpoint uses min-width and will apply for all screens over 65em. This can override the tablet breakpoint.'
-  mediaQuery: 'all and (min-width: 65em)'
+  description: 'The widescreen breakpoint uses min-width and will apply for all screens over 60em. This can override the tablet breakpoint.'
+  mediaQuery: 'all and (min-width: 60em)'
   weight: 4
+  multipliers:
+    - 1x
+  group: at_core.advanced
+at_core.advanced.maxwidth:
+  label: Max-width
+  description: 'The max-width breakpoint uses max-width 75em, which by default matches AT Layouts max-width CSS value.'
+  mediaQuery: 'all and (max-width: 75em)'
+  weight: 5
   multipliers:
     - 1x
   group: at_core.advanced
@@ -119,7 +141,7 @@ at_core.advanced.huge:
   label: Huge
   description: 'The huge breakpoint is for very large screens, for example projection screens or very high resolution monitors.'
   mediaQuery: 'all and (min-width: 120em)'
-  weight: 5
+  weight: 6
   multipliers:
     - 1x
   group: at_core.advanced

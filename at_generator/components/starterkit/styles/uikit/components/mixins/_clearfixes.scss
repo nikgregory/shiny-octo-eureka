@@ -1,10 +1,8 @@
 
 // Markup free clearing
-// http://www.stubbornella.org/content/2012/05/02/cross-browser-debugging-css/
 @mixin cf {
-  overflow: hidden;   // New formatting context in better browsers
-  *overflow: visible; // Protect IE7 and older from the overflow property
-  *zoom: 1;           // Give IE hasLayout, a new formatting context equivalent
+  overflow: hidden;  // New formatting context in better browsers
+  zoom: 1;           // Give IE hasLayout, a new formatting context equivalent
 }
 
 // Float clearing.
@@ -14,7 +12,7 @@
 // @see http://nicolasgallagher.com/micro-clearfix-hack
 @mixin clearfix-micro {
   & {
-    *zoom: 1;
+    zoom: 1;
   }
   &:before,
   &:after {

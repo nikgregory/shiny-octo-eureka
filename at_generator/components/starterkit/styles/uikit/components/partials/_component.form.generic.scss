@@ -28,7 +28,6 @@
 
 // Filters and tips
 .filter-wrapper {
-  border-color: $form-border-color;
   border-style: $form-border-style;
   border-width: $form-border-width;
   border-top: 0;
@@ -47,7 +46,6 @@
 .tips,
 .description {
   @include adjust-font-size-to($small);
-  color: $form-help-color;
 }
 
 
@@ -63,13 +61,11 @@ h4.label,
 
 // Marker
 .marker {
-  color: $form-marker-color;
 }
 
 
 // Form required.
 .form-required:after {
-  color: $form-marker-color;
   content: " \204E "; // Use a Unicode symbol to prevent screen readers from announcing the text.
   line-height: 1;
   vertical-align: super;
@@ -91,7 +87,7 @@ abbr {
   input.error,
   textarea.error,
   select.error {
-    border: 2px solid $error-border-color;
+    border: $border-width $border-style;
   }
 }
 
@@ -182,7 +178,7 @@ form {
 // Autocomplete.
 .ui-autocomplete li.ui-menu-item a.ui-state-focus,
 .autocomplete li.ui-menu-item a.ui-state-hover {
-  background: #0072b9;
+  background: #0072b9; // TODO check background color
   color: #fff;
   margin: 0;
 }
@@ -232,4 +228,18 @@ details {
   border-bottom-width: 1px;
   box-sizing: border-box;
   @include output-rhythm(padding, 0 $small);
+}
+
+
+// Extend reset-appearance class
+.reset-appearance {
+  transition: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  &:hover,
+  &:focus {
+    background: none;
+    color: inherit;
+  }
 }

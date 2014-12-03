@@ -8,14 +8,12 @@
 .menu {
   padding: 0;
   margin: 0;
-  @include no-bullets;
+  list-style: none;
 
   li {
     text-align: $menu-text-align;
 
     &.active-trail > a {
-      //color: $menu-active-color;
-      //background-color: $menu-background-active-color;
     }
 
     // If menu arrows are true, add font-awesome and icons for
@@ -41,22 +39,15 @@
   }
 
   a {
-    //color: $menu-color;
-    //background-color: $menu-background-color;
-
     display: block;
     @include output-rhythm(padding, $xx-small);
 
     &:hover,
     &:focus {
-      //color: $menu-hover-color;
-      //background-color: $menu-background-hover-color;
       text-decoration: none;
     }
 
     &.active {
-      //color: $menu-active-color;
-      //background-color: $menu-background-active-color;
     }
   }
 
@@ -87,4 +78,3 @@
     display: none !important;
   }
 }
-

@@ -51,13 +51,9 @@ relative_assets = true
 line_comments = (environment == :development) ? true : false
 
 
-# Sourcemaps.
+# Sourcemaps
 # -----------------------------------------------------------------------------
 sourcemap = (environment == :development) ? true : false
-
-
-# FireSass
-#sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
 
 
 # Autoprefixer

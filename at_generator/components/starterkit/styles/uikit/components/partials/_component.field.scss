@@ -12,10 +12,11 @@
 
 
 // Labels
-.field .field__label {
+.field__label {
   font-family: inherit;
   font-weight: $font-weight-semibold;
   @include adjust-font-size-to($medium);
+  margin: 0;
 }
 
 

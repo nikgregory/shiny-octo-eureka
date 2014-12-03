@@ -12,61 +12,71 @@
 
 button,
 .button {
-
   @include output-rhythm(padding, $xx-small $medium);
+  width: auto;
+  position: relative;
 
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   border-radius: $button-border-radius;
+  border: $button-border-width $button-border-style;
+
   transition: background-color, .15s, ease-in-out;
 
-  line-height: normal;
-  color: $button-color;
-  background: $button-background-color;
-  border: $button-border-width $button-border-style $button-border-color;
-
-  opacity: 0.9;
-
   cursor: pointer;
-  white-space: nowrap;
 
   text-decoration: none;
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
-
-  width: auto;
-  display: inline-block;
-  position: relative;
+  line-height: 1;
+  white-space: nowrap;
 
   &:hover,
   &:focus {
-    opacity: 1;
-    color: $button-hover-color;
-    background-color: $button-background-hover-color;
     text-decoration: none;
   }
 
   &[disabled] {
     &:hover {
-      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
     }
   }
 }
 
+
+//
+// Button variants are primarly changes in colors, so are set in _theme.color.scss using the
+// button-variant() mixin.
+//
+
 // Primary button
 .button--primary {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
 }
 
 // Danger button, e.g. delete buttons often have this class.
 .button--danger {
-  @include button-variant($error-text-color, $error-background-color, $error-border-color);
+}
+
+// Action button
+// - are links with an icon, and we add an icon for extra visibility.
+.button-action {
+
+  &:before {
+    content: $button-action-icon;
+    font-family: FontAwesome, sans-serif;
+    @include adjust-font-size-to($small);
+    display: inline-block;
+    padding: 0 4px 0 0;
+    vertical-align: middle;
+  }
+
+  // RTL
+  @at-root [dir="rtl"] .button-action:before {
+    padding: 0 0 0 4px;
+  }
 }
 
 
 /* Drop buttons */
 .js .dropbutton-widget {
-  background-color: $page-background-color;
-  border: $button-border-width $button-border-style $button-border-color;
+  border: $button-border-width $button-border-style;
   border-radius: $button-border-radius;
 }
 
@@ -94,18 +104,23 @@ button,
   }
 
   .secondary-action {
-    border-top: $button-border-width $button-border-style $button-border-color;
+    border-top: $button-border-width $button-border-style;
     border-radius: 0 0 0 $button-border-radius;
 
     .button {
       border: 0;
-      background: $page-background-color;
       width: 100%;
 
       &:hover,
       &:focus {
         border-radius: 0 0 0 $button-border-radius;
-        background-color: $button-background-hover-color;
+      }
+    }
+  }
+
+  .dropbutton-toggle {
+    button {
+      &:hover {
       }
     }
   }
@@ -122,10 +137,11 @@ button,
   }
 }
 
+
 // Dropbutton Multiple
 .dropbutton-multiple {
   .dropbutton {
-    border-right: $button-border-width $button-border-style $button-border-color;
+    border-right: $button-border-width $button-border-style;
 
    .dropbutton-action > * {
       margin-right: 0;
@@ -139,14 +155,13 @@ button,
     .publish {
       .button {
         width: 100%;
-        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
       }
     }
 
     // RTL
     @at-root [dir="rtl"] {
       .dropbutton-multiple .dropbutton {
-        border-left: $button-border-width $button-border-style $button-border-color;;
+        border-left: $button-border-width $button-border-style;
         border-right: 0;
 
         .dropbutton-action > * {
@@ -221,23 +236,3 @@ label button.link {
   }
 }
 */
-
-
-// Action button
-.button-action {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
-
-  &:before {
-    content: $button-action-icon;
-    font-family: FontAwesome, sans-serif;
-    @include adjust-font-size-to($small);
-    display: inline-block;
-    padding: 0 4px 0 0;
-    vertical-align: middle;
-  }
-
-  // RTL
-  @at-root [dir="rtl"] .button-action:before {
-    padding: 0 0 0 4px;
-  }
-}

@@ -1,9 +1,3 @@
-/* line 106, ../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
-html {
-  font-size: 100%;
-  line-height: 0.375em;
-}
-
 /**
  * Shortcodes
  * Styles applied via AT Extension "Shortcodes", small snippets of CSS
@@ -13,25 +7,25 @@ html {
 /* line 8, ../../uikit/components/partials/_theme.shortcodes.scss */
 .ta-center,
 .ta-center * {
-  text-align: center !important;
+  text-align: center;
 }
 
 /* line 13, ../../uikit/components/partials/_theme.shortcodes.scss */
 .ta-left,
 .ta-left * {
-  text-align: left !important;
+  text-align: left;
 }
 
 /* line 18, ../../uikit/components/partials/_theme.shortcodes.scss */
 .ta-right,
 .ta-right * {
-  text-align: right !important;
+  text-align: right;
 }
 
 /* line 23, ../../uikit/components/partials/_theme.shortcodes.scss */
 .ta-justify
 .ta-justify * {
-  text-align: justify !important;
+  text-align: justify;
 }
 
 /* line 28, ../../uikit/components/partials/_theme.shortcodes.scss */
@@ -78,16 +72,8 @@ html {
     width: 66.6667%;
   }
 }
-/* line 69, ../../uikit/components/partials/_theme.shortcodes.scss */
-[class*="grid-block-"] .block {
-  border: 1px solid #ccc;
-  background: #eee;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
 @media all and (min-width: 45em) {
-  /* line 79, ../../uikit/components/partials/_theme.shortcodes.scss */
+  /* line 71, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-2 .block {
     width: 49.15254%;
     float: left;
@@ -106,7 +92,7 @@ html {
     clear: none;
   }
 
-  /* line 85, ../../uikit/components/partials/_theme.shortcodes.scss */
+  /* line 77, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-3 .block {
     width: 32.20339%;
     float: left;
@@ -131,7 +117,7 @@ html {
     clear: none;
   }
 
-  /* line 91, ../../uikit/components/partials/_theme.shortcodes.scss */
+  /* line 83, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-4 .block {
     width: 23.72881%;
     float: left;
@@ -162,7 +148,7 @@ html {
     clear: none;
   }
 
-  /* line 97, ../../uikit/components/partials/_theme.shortcodes.scss */
+  /* line 89, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-6 .block {
     width: 15.25424%;
     float: left;
@@ -205,7 +191,7 @@ html {
     clear: none;
   }
 
-  /* line 103, ../../uikit/components/partials/_theme.shortcodes.scss */
+  /* line 95, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-12 .block {
     width: 6.77966%;
     float: left;
@@ -284,4 +270,13 @@ html {
     clear: none;
   }
 }
+/*
+[class*="grid-block-"] .block {
+  border: 1px solid #ccc;
+  background: #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+*/
+
 /*# sourceMappingURL=shortcodes.css.map */

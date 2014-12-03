@@ -270,13 +270,13 @@ class LayoutSubmit implements LayoutSubmitInterface {
           }
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page__temporary-tabs"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page__temporary-tabs page-row"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
           }
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
           }
           // move the dynamic region classes to the regions wrapper, hard code the page-row class
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page__' . $row . '">';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page__' . $row . ' page-row">';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
           $output[$suggestion_key][$row]['container_close'] = '    </div>';

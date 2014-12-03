@@ -57,7 +57,6 @@
     padding: 0 1px;
     text-align: $flow-to; // LTR
     content: $fa-var-question-circle;
-    color: $border-color;
     @include output-rhythm(width, $medium);
   }
 
@@ -66,6 +65,3 @@
   }
 
 }
-
-
-

@@ -62,3 +62,11 @@ taxonomy:
   css:
     component:
       styles/css/components/taxonomy.css: { every_page: true }
+
+# Subtheme scripts
+scripts:
+  version: 0.0.1
+  js:
+    scripts/scripts.js: {}
+  dependencies:
+    - at_core/at_fastclick: {}

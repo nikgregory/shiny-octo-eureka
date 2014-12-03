@@ -10,18 +10,16 @@
 // offcanvas responsive menu, it's the page wrapper that pushes over, not body.
 .page {
   position: relative;
-  //background-color: $page-background;
 }
 
 // We need some padding to avoid browser collisions.
-[class*="page__"] {
+.page-row {
   padding: 0 2vw;
 }
 
 // Regions
 //  - .regions is the main wrapper selector for all regions within a page.
 .regions {
-  //background-color: $regions-background;
 }
 
 
@@ -32,8 +30,8 @@
 //  - apply a micro clearfix globally, this ensures dynamic height content
 //    does not disrupt the layout in unexpected ways.
 .region {
-  transition: all, .2s, ease-in;
-  @include output-rhythm(padding, $medium 0);
+  transition: $transition_global;
+  @include output-rhythm(padding, $x-large 0);
   @include clearfix-micro;
 }
 
@@ -67,19 +65,13 @@
 
 // Header
 .page__header {
-  //@include page-row-colors($page-header-background-color, $page-header-color, $page-row-fullwidth);
-
   .regions {}
 }
 
 
 // Navbar
 .page__navbar {
-  //@include page-row-colors($page-navbar-background-color, $page-navbar-color, $page-row-fullwidth);
-
-  .regions {
-    padding: 0;
-  }
+  .regions {}
 }
 
 
@@ -103,8 +95,6 @@
 
 // Footer
 .page__footer {
-  //@include page-row-colors($page-footer-background-color, $page-footer-color, $page-row-fullwidth);
-
   .regions {}
 }
 
@@ -112,7 +102,6 @@
 // Theme attribution message. This is a toggle setting in the advanced theme
 // settings, you can turn it on/off using the Markup overrides extension.
 .attribution {
-  //background-color: $page-navbar-background-color;
   @include adjust-font-size-to($small);
   text-align: center;
 }

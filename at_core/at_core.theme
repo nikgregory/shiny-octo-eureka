@@ -193,6 +193,7 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Images CSS.
+    // TODO - needs more testing since we moved to a class attr only approach, rather than writing CSS.
     /*
     if (isset($config['enable_images']) && $config['enable_images'] === 1) {
       $images_file = $generated_files_path . '/' . $theme . '.images.css';
@@ -325,7 +326,7 @@ function at_core_page_attachments_alter(array &$page) {
     // Attach polyfills to support IE8.
     if ((isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) && (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1)) {
       $page['#attached']['library'][] = 'at_core/at.respond';
-      $page['#attached']['library'][] = 'at_core/at.selectivizr'; // AT Loads yui3 library remotely because it supports IE8 and Selectivizr runs way better on yui3.
+      $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
     }
 
     // Add the responsive menu styles settings.
@@ -333,29 +334,14 @@ function at_core_page_attachments_alter(array &$page) {
       $drupalSettings = array();
 
       // Breakpoint
-      if (isset($config['responsive_menu_responsive_breakpoint'])) {
-        $drupalSettings['responsive_menus']['breakpoint'] = $config['responsive_menu_responsive_breakpoint'];
+      if (isset($config['responsive_menu_breakpoint'])) {
+        $drupalSettings['rm']['bp'] = $config['responsive_menu_breakpoint'];
       }
 
       // Loop the config settings and build an array for drupalSettings.
       foreach (array('default', 'responsive') as $style) {
         if (isset($config['responsive_menu_' . $style . '_style'])) {
-
-          // Style
-          $drupalSettings['responsive_menus'][$style]['style'] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
-
-          // If Off Canvas
-          if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
-            $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
-          }
-
-          // If Tiles
-          if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
-            $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tc-' . $config['responsive_menu_' . $style . '_tiles_count'];
-            if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
-              $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
-            }
-          }
+          $drupalSettings['rm'][$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
         }
       }
 
@@ -367,6 +353,26 @@ function at_core_page_attachments_alter(array &$page) {
     }
   }
 }
+
+
+
+// If Off Canvas
+/*
+if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
+  $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
+}
+*/
+
+// If Tiles
+/*
+if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
+  $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tc-' . $config['responsive_menu_' . $style . '_tiles_count'];
+  if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
+    $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
+  }
+}
+*/
+
 
 
 /**
@@ -497,8 +503,13 @@ function at_core_preprocess_page(&$variables) {
       $page_args = [''];
     }
     else {
-      $page_args = explode('/', Url::fromRoute('<current>')->getInternalPath());
+      //$page_args = explode('/', Url::fromRoute('<current>')->getInternalPath()); // getInternalPath deprecated?
+      $page_args = explode('/', Url::fromRoute('<current>'));
     }
+
+    //$otherargs = explode('/', Url::fromRoute('<current>'));
+    //var_dump($page_args);
+    //var_dump($otherargs);
 
     // Add node type suggestion.
     if (isset($variables['node'])) {
@@ -593,17 +604,6 @@ function at_core_preprocess_region(&$variables) {
 
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-
-    // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-      if (isset($config['responsive_menu_region'])) {
-        if ($variables['region'] == $config['responsive_menu_region']) {
-          $variables['attributes']['class'][] = 'rmr';
-
-        }
-      }
-    }
-
     // shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
@@ -766,6 +766,16 @@ function at_core_preprocess_block(&$variables) {
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    // Responsive menu block.
+    if (isset($config['responsive_menu_block'])) {
+      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
+        $variables['attributes']['class'][] = 'rm-block';
+        $variables['title_attributes']['class'][] = 'rm-toggle';
+        $variables['title_attributes']['aria-controls'][] = 'rm-content';
+        $variables['content_attributes']['id'][] = 'rm-content';
+        $variables['content_attributes']['class'][] = 'rm-block__content';
+      }
+    }
 
     // Remove login block links.
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
@@ -936,4 +946,4 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
 //function at_core_preprocess_views_view(&$variables) {}
-//function at_core_preprocess_user(&$variables) {}
+//function at_core_preprocess_menu(&$variables) {}

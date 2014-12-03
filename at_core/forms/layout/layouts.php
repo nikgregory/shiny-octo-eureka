@@ -281,7 +281,7 @@ $form['layouts']['adv_options']['select']['max_width'] = array(
   '#title' => t('Max Width'),
   '#collapsed' => TRUE,
   '#collapsible' => TRUE,
-  '#description' => t('<p>Override the max-width value and unit. Percent (%) and viewport width (vw) will give a fluid layout.</p>'),
+  '#description' => t('<p>Override the max-width value and unit. Percent (%) and viewport width (vw) will give a fluid layout.</p><p>Warning - if you change this and you are using the <em>Max-width</em> breakpoint you may need to adjust that breakpoint or set your own in a <code>!themename.breakpoints.yml</code> file inside your theme root and use those instead.', array('!themename' => $theme)),
 );
 
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable'] = array(

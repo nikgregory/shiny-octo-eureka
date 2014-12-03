@@ -28,11 +28,11 @@ table {
 
 
 // tr, takes extensive styles if enabled in variables.scss.
+// color is applied in _theme.color.scss to most of these selectors.
 tr {
   // Row striping (zebra).
   @if $table-row-striping == true {
     &.odd {
-      background: $table-row-odd-color;
     }
 
     // nth-child class will capture tables in content that do not
@@ -40,24 +40,20 @@ tr {
     &.info,
     &.even,
     &:nth-child(2n+2)  {
-      background: $table-row-even-color;
     }
   }
 
   // Hover color.
   @if $tr-hover == true {
     &:hover {
-      background: $tr-hover-color;
     }
   }
 
   // Column striping, applies to the active column in sortable tables.
   @if $table-col-striping == true {
     &.odd td.active {
-      background: $table-col-odd-color;
     }
     &.even td.active {
-      background: $table-col-even-color;
     }
   }
 }

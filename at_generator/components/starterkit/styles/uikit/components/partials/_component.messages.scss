@@ -41,47 +41,45 @@
 /* Success (status) */
 .messages--status,
 table tr.ok {
-  background-color: $success-background-color;
 }
 
 .messages--status,
 .ok {
-  color: $success-text-color;
 }
 
 .messages--status {
-  background-image: none;
 }
 
 
 /* Warning */
 .messages--warning,
 table tr.warning {
-  background-color: $warning-background-color;
 }
 
 .messages--warning,
 .warning {
-  color: $warning-text-color;
 }
 
 .messages--warning {
-  background-image: none;
 }
-
 
 
 /* Error */
 .messages--error,
 table tr.error {
-  background-color: $error-background-color;
 }
 
 .messages--error,
 .error {
-  color: $error-text-color;
 }
 
+.messages--error {
+}
+
+
+// All, background image?
+.messages--status,
+.messages--warning,
 .messages--error {
   background-image: none;
 }
@@ -120,4 +118,18 @@ table tr.error {
 
 
 // Devel query messages
-.dev-query {color: #fff;}
+.dev-query {}
+
+// xdebug-var-dump
+body > pre,
+.xdebug-var-dump {}
+
+.page {
+  .xdebug-var-dump {}
+}
+
+// SASS errors
+body {
+  &:before {}
+}
+

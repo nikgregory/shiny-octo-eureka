@@ -8,36 +8,34 @@
 // style like an overlay (no reflow or pushing etc).
 //
 
-@mixin slidedown {
+@mixin slidedown($arrows: false) {
+
   .ms-slidedown {
-    .rmr {
-      .block-menu__title {
-        @include adjust-font-size-to($medium);
-        @include output-rhythm(padding, $xx-small 0);
-        cursor: pointer;
 
-        &:after {
-          font-family: FontAwesome, sans-serif;
-          content: $menu-hamburger;
-          @include output-rhythm(width, $medium);
-          float: right; // LTR
-          text-align: right; // LTR
-        }
-      }
+    .rm-toggle {
+      float: #{$flow-from};
+      margin-#{$flow-from}: 0;
+      padding-#{$flow-from}: 0;
 
-      .block-menu__content {
-        @include visually-hidden;
-        opacity: 0.3;
-        //@include opacity(.3); // Test with IE and no compass
-        transition: all, .2s, ease;
+      &:after {
+        font-family: FontAwesome, sans-serif;
+        content: $menu-hamburger;
+        @include output-rhythm(width, $medium);
+        @include output-rhythm(padding-left, $xx-small);
       }
     }
 
-    .rmr .block.rm-is-open  {
-      .block-menu__content {
-        @include visually-hidden-off;
+    .rm-block__content {
+      display: none;
+      clear: both;
+      opacity: 0.001;
+      transition: $transition_global;
+    }
+
+    &.rm-is-open {
+      .rm-block__content {
+        display: block;
         opacity: 1;
-        //@include opacity(1); // Test with IE and no compass
         @include output-rhythm(padding, 0 0 $xx-small);
       }
     }

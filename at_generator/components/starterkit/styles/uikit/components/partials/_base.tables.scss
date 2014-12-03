@@ -6,7 +6,7 @@
 table {
   padding: 0;
   width: 100%;
-  border: $border-width $border-style $border-color;
+  border: $border-width $border-style;
   border-collapse: collapse;
 
   caption {
@@ -17,7 +17,7 @@ table {
 
 // tr, takes extensive styles if enabled in variables.scss.
 tr {
-  border: $border-width $border-style $border-color;
+  border: $border-width $border-style;
 }
 
 
@@ -41,8 +41,6 @@ td {
 thead {
   tr {
     font-weight: $font-weight-semibold;
-    color: $thead-text-color;
-    background-color: $thead-background-color;
   }
 }
 
@@ -52,7 +50,6 @@ tr,
 td,
 th {
   border-style: $border-style;
-  border-color: $border-color;
 }
 
 
@@ -62,4 +59,3 @@ th {
   @include output-rhythm(padding, $xx-small);
   vertical-align: middle;
 }
-

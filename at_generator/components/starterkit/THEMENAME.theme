@@ -121,6 +121,10 @@ function HOOK_page_attachments_alter(array &$page) {
   // from this library (as declared in color.inc etc).
   $page['#attached']['library'][] = "$theme/color";
 
+  // Subtheme JS library script, by defualt this loads two dependancies (in the chain)
+  // - jQuery and Fastclick, the script itself intializes Fastclick on document.body.
+  $page['#attached']['library'][] = "$theme/scripts";
+
   // Remove libraries.
   // Use this to remove entire libraries. You need to check
   // the library as it may be loading dependancies you might need.

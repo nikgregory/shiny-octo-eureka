@@ -17,7 +17,8 @@
 .site-logo {}
 
 .site-name {
-  font-weight: 700;
+  font-weight: $font-weight-bold;
+  margin: 0;
 }
 
 .site-slogan {

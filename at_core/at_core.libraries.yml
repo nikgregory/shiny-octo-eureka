@@ -34,6 +34,14 @@ at.doubletaptogo:
   dependencies:
     - core/jquery
 
+# Fastclick
+at.fastclick:
+  version: 1.0.3
+  js:
+    libraries/fastclick/fastclick.js: {}
+  dependencies:
+    - core/jquery
+
 # Responsive Menus (AT Core)
 at.responsivemenus:
   version: 1.0.0
@@ -46,7 +54,7 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
-    - at_core/at.doubletaptogo
+    #- at_core/at.doubletaptogo
 
 #- at_core/at.matchheight
 

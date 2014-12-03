@@ -1,9 +1,3 @@
-/* line 106, ../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
-html {
-  font-size: 100%;
-  line-height: 0.375em;
-}
-
 /**
  * Search results pages
  ========================================================================== */
@@ -40,4 +34,5 @@ html {
 #edit-advanced .details-wrapper > fieldset > legend {
   display: none;
 }
+
 /*# sourceMappingURL=search.css.map */

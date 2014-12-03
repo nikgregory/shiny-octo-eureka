@@ -1,9 +1,3 @@
-/* line 106, ../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
-html {
-  font-size: 100%;
-  line-height: 0.375em;
-}
-
 /**
  * Comments
  *  - comment field (holds comment title, form, comments etc)
@@ -13,30 +7,30 @@ html {
 .field-node--comment {
   clear: both;
 }
-/* line 16, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 14, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment {
-  *zoom: 1;
+  zoom: 1;
 }
-/* line 19, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 17, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment:before, .field-node--comment:after {
   content: "";
   display: table;
 }
-/* line 24, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 22, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment:after {
   clear: both;
 }
 
-/* line 16, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 14, ../../uikit/components/mixins/_clearfixes.scss */
 .comment {
-  *zoom: 1;
+  zoom: 1;
 }
-/* line 19, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 17, ../../uikit/components/mixins/_clearfixes.scss */
 .comment:before, .comment:after {
   content: "";
   display: table;
 }
-/* line 24, ../../uikit/components/mixins/_clearfixes.scss */
+/* line 22, ../../uikit/components/mixins/_clearfixes.scss */
 .comment:after {
   clear: both;
 }
@@ -45,4 +39,5 @@ html {
 .comment__author {
   display: inline;
 }
+
 /*# sourceMappingURL=comments.css.map */

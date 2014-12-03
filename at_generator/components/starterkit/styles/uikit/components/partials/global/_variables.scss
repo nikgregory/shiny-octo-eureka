@@ -5,9 +5,10 @@
 // Breakpoints
 // -----------------------------------------------------------------------------
 //
-// NOTE: these are the same breakpoints as used in the Site-Builder layout
-// plugin, they are imported in "site_builder_base", however you can override them
-// here or set new breakpoints specific to your design.
+// Adaptivetheme ships with two breakpoint module groups - simple and advanced.
+// The simple group is a subset of the advanced group (declared below).
+//
+// SEE: adaptivetheme/at_core/at_core.breakpoints.yml
 //
 // These breakpoints use ems, which mean they are dependant on the base font size,
 // so any pixel equivalents stated here assume base font size of 16px. Change them
@@ -15,12 +16,14 @@
 //
 //
 //   $mobile          - 0 to 45em (0 to 720px), small screens only.
-//   $mobile-tablet   - 0 to 65em (0 to 1040px), mobile and most tablets.
+//   $mobile-tablet   - 0 to 65em (0 to 960px), mobile and most tablets.
 //
-//   $tablet-isolate  - 45em and max-width 65em (720px to 1040px), isolatate tablets.
+//   $tablet-isolate  - 45em and max-width 65em (720px to 960px), isolatate tablets.
 //   $tablet          - 45em (720px) and up.
 //
-//   $widescreen      - 65em (1040px) and up.
+//   $widescreen      - 65em (960px) and up.
+//
+//   maxwidth        - 0 to 75em (0 to 1200px), match the themes max-width CSS value.
 //
 //   $huge            - 120em (1920px) and up, for big resolution.
 //
@@ -36,14 +39,16 @@
 //                  | $tablet-isolate -->|
 //                  | $tablet ----------------------------------------------------->
 //                                       | $widescreen ---------------------------->
+// | max-width ------------------------------------>|
 //                                                                   | $huge ------>
 //
-// $mobile          : "all and (max-width: 45em)";
-// $mobile-tablet   : "all and (max-width: 65em)";
-// $tablet-isolate  : "all and (min-width: 45em) and (max-width: 65em)";
-// $tablet          : "all and (min-width: 45em)";
-// $widescreen      : "all and (min-width: 65em)";
-// $huge            : "all and (min-width: 120em)";
+$mobile          : "all and (max-width: 45em)";
+$mobile-tablet   : "all and (max-width: 60em)";
+$tablet-isolate  : "all and (min-width: 45em) and (max-width: 60em)";
+$tablet          : "all and (min-width: 45em)";
+$widescreen      : "all and (min-width: 60em)";
+$maxwidth        : "all and (max-width: 75em)";
+$huge            : "all and (min-width: 120em)";
 
 
 // Vertical Rhythm
@@ -61,11 +66,6 @@ $base-line-height     : 6px;   // set adjust-leading-to(4); on body!
 
 $rhythm-unit          : 'rem';
 $rem-with-px-fallback : true;  // set to true to support IE8, Opera Mini etc.
-
-
-// Establish baseline
-// -----------------------------------------------------------------------------
-@include establish-baseline;
 
 
 // Modular Scale
@@ -149,7 +149,6 @@ $border-radius               : 4px;
 
 // Main colors
 // -----------------------------------------------------------------------------
-$page-background-color       : #ffffff;
 $primary-color               : #333333;
 $secondary-color             : #666666;
 $tertiary-color              : #999999;
@@ -197,7 +196,7 @@ $error-background-color      : #fcf4f2;
 //$hightlight-background-color : #9dc44d;
 //$hightlight-border-color     : #5b8829;
 
-$hightlight-text-color       : $page-background-color;
+$hightlight-text-color       : #fffffe;
 $hightlight-background-color : $primary-color;
 $hightlight-border-color     : $tertiary-color;
 
@@ -228,19 +227,9 @@ $darken-more                 : 5%;
 $darken-most                 : 10%;
 
 
-// Gradients
+// Global Transition
 // -----------------------------------------------------------------------------
-$text-gradient-start         : darken($text-background-color, $darken-more);
-$text-gradient-stop          : lighten($text-background-color, $lighten-more);
-
-$primary-gradient-start      : $primary-color;
-$primary-gradient-stop       : lighten($primary-color, $lighten-most);
-
-$secondary-gradient-start    : $secondary-color;
-$secondary-gradient-stop     : lighten($secondary-color, $lighten-most);
-
-$tertiary-gradient-start     : $tertiary-color;
-$tertiary-gradient-stop      : lighten($tertiary-color, $lighten-most);
+$transition_global: all, .15s, ease;
 
 
 //
@@ -250,8 +239,8 @@ $tertiary-gradient-stop      : lighten($tertiary-color, $lighten-most);
 // Page & Regions
 // -----------------------------------------------------------------------------
 $body-background-color    : $primary-color;
-$page-background-color    : #ffffff; // body inner wrapper
-$regions-background-color : #ffffff; // we set a default so we can have colored .page-root.
+$page-background-color    : #f7f7f7;                 // Applies to .page, the body inner wrapper
+$regions-background-color : $page-background-color;  // we set a default so we can have colored .page
 
 
 // Page Row colors (for site-builder layout plugin)
@@ -268,8 +257,8 @@ $page-row-fullwidth             : true;
 $regions-padding                : $medium;
 
 // Header
-$page-header-background-color   : $primary-color;
-$page-header-color              : #ffffff;
+$page-header-background-color   : #ffffff;
+$page-header-color              : $text-color;
 
 // Navbar
 $page-navbar-background-color   : $secondary-color;
@@ -423,7 +412,7 @@ $form-background-color            : #ffffff;
 $form-background-focus-color      : lighten($text-background-color, $lighten-more);
 
 //$form-help-color                  : $text-color;
-$form-help-color                  : lighten($text-color, 45%);
+$form-help-color                  : lighten($text-color, $lighten-most);
 $form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
 
 $form-border-width                : $border-width;
@@ -473,12 +462,12 @@ $tr-hover-color                   : darken($text-background-color, $darken);
 // Fields
 // -----------------------------------------------------------------------------
 // By default we only have settings for taxonomy term reference fields.
-$field-taxonomy-item-as-labels    : true;
+$field-taxonomy-item-as-labels    : false;
 
 $field-taxonomy-item-icons        : false;
 $field-taxonomy-item-icon         : $fa-var-tag;
 
-$field-taxonomy-label-as-icon     : true; // Label must not be hidden in field display settings.
+$field-taxonomy-label-as-icon     : false; // Label must not be hidden in field display settings.
 $field-taxonomy-label-icon        : $fa-var-tags;
 
 
@@ -506,6 +495,9 @@ $form-details-summary-closed-rtl : $fa-var-caret-left;
 
 
 // Browser Versions
+// NOTE: by default the UIKit does not use any Compass vendor prefixing, instead
+// the CSS files are post processed using autofixer (grunt-autoprefixer). You
+// need to use Grunt if you want automated prefixing.
 // -----------------------------------------------------------------------------
 // Optional map of minimum browser versions to support. For example, to
 // remove support for IE 7 and earlier, set $browser-minimum-versions['ie']

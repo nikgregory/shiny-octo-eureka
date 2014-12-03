@@ -1,83 +1,55 @@
+//
 // Tiles
-// this applies to the body element, can this be changed, looks like our new JS does note require body classes
-// for tiles or slidedown, only the offcanvas style (to toggle the page-root animation).
+//
+// Parameters
+// - $tile_count: whole number, must be a factor of the $context
+// - $context: whole number, a $susy container, can be 8, 10 or 12 (or whatever if you write a new container).
+// - $arrows: boolean
+//
+@mixin tiles($context: 12, $tile_count: 2, $arrows: false) {
 
-@mixin tiles {
+  $span: $context/$tile_count;
 
   .ms-tiles {
 
-    // By default submenus are hidden.
-    .rmr {
-
+    // By default block title and all submenus are hidden.
+    .rm-block {
       .block-menu__title,
       .menu-level-2 {
         @include visually-hidden;
       }
+    }
 
-      .block-menu__content {
-        @include cf;
+    .rm-block__content {
+      @include cf;
+
+      .menu-level-1 {
+        > li {
+
+          @if $context == 12 {
+            @include with-layout($container-12) {
+              @include gallery($span of 12);
+            }
+          }
+          @else if $context == 10 {
+            @include with-layout($container-10) {
+              @include gallery($span of 10);
+            }
+          }
+          @else if $context == 8 {
+            @include with-layout($container-8) {
+              @include gallery($span of 8);
+            }
+          }
+          @else {
+            @warn "You must use a valid context, by defualt 8, 10 or 12 are supported and the title_count must be a factor of the context.";
+          }
+        }
       }
 
       .menu li.expanded > a:after {
         content: none;
       }
     }
-
-    &.tc-two {
-      .rmr {
-        .menu-level-1 {
-          > li {
-            @include span(6 of 12); // Use Susy to set width and float direction.
-
-            &:nth-child(2n) {
-              margin-#{$flow-to}: 0;
-            }
-          }
-        }
-      }
-    }
-
-    &.tc-three {
-      .rmr {
-        .menu-level-1 {
-          > li {
-            @include span(4 of 12);
-
-            &:nth-child(3n) {
-              margin-#{$flow-to}: 0;
-            }
-          }
-        }
-      }
-    }
-
-    &.tc-four {
-      .rmr {
-        .menu-level-1 {
-          > li {
-            @include span(3 of 12);
-
-            &:nth-child(4n) {
-              margin-#{$flow-to}: 0;
-            }
-          }
-        }
-      }
-    }
-
-    &.tiles-submenus-true {
-      .rmr {
-        .menu-level-2 {
-          @include visually-hidden-off;
-        }
-        .menu-level-1 .menu {
-          li {
-            @include span(12 of 12);
-            clear: both;
-          }
-        }
-      }
-    }
   }
 }
-

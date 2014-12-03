@@ -4,10 +4,13 @@
  * it should look like this by default.
  ========================================================================== */
 
+// Establish baseline
+@include establish-baseline;
+
+
 html,
 body {
   height: 100%;
-  background-color: $body-background-color; // this matches the navbar for offcanvas menus.
 }
 
 
@@ -18,13 +21,7 @@ html {
 
 
 body {
-  color: $text-color;
   @include adjust-font-size-to($medium);
-
-  // SASS debug error output
-  &:before {
-    color: $error-text-color;
-  }
 }
 
 
@@ -53,7 +50,7 @@ fieldset {
 
 // Headings.
 #{headings(all)} {
-  margin: 0;
+  @include output-rhythm(margin, 0 0 $medium);
 }
 
 
@@ -108,23 +105,10 @@ video {
 }
 
 
-// Debug
-body > pre,
-.xdebug-var-dump {
-  color: $page-background-color;
-}
-
-.page-root {
-  .xdebug-var-dump {
-    color: $text-color;
-  }
-}
-
-
 // Links.
 a {
-  //color: $link-color;
   text-decoration: none;
+  cursor: pointer;
 
   &:active,
   &:hover {
@@ -132,17 +116,14 @@ a {
 
   &:link,
   &:visited {
-    //color: $link-color; // or use $link-visited-color
   }
 
   &:active,
   &.active {
-    //color: $link-active-color;
   }
 
   &:hover,
   &:focus {
-    //color: $link-hover-color;
     text-decoration: underline;
   }
 }
@@ -162,7 +143,7 @@ ol {
 // Blockquotes, Bootstrap style.
 blockquote {
   @include output-rhythm(padding, $medium);
-  border-#{$flow-from}: 5px solid $border-color; // LTR
+  border-#{$flow-from}: 5px solid; // LTR
 
   p {
     @include adjust-font-size-to($large);
@@ -174,7 +155,6 @@ blockquote {
       &:before {
         font-family: FontAwesome, sans-serif;
         content: $fa-var-quote-left;  // LTR
-        color: $border-color;
         display: inline-block;
         padding: 0 5px 0 0;  // LTR
         margin: 0;
@@ -191,7 +171,6 @@ blockquote {
   small {
     display: block;
     @include adjust-font-size-to($small);
-    color: lighten($text-color, $lighten-more);
 
     &:before {
       content: '\2014 \00A0'; // EM DASH, NBSP
@@ -202,7 +181,7 @@ blockquote {
   &.pull-right {
     padding-#{$flow-to}: gutters();
     padding-#{$flow-from}: 0;
-    border-#{$flow-to}: 5px solid $border-color;
+    border-#{$flow-to}: 5px solid;
     border-#{$flow-from}: 0;
 
     p,
@@ -226,9 +205,15 @@ blockquote {
 hr {
   height: $border-width;
   border: 0;
-  border-top: $border-width $border-style $border-color;
+  border-top: $border-width $border-style;
   padding: 0;
   box-sizing: border-box;
+}
+
+
+/* Set hidden styles for non-supporting browers */
+*[hidden] {
+  display: none;
 }
 
 
@@ -236,4 +221,3 @@ hr {
 :before {
   @include font-smoothing();
 }
-
