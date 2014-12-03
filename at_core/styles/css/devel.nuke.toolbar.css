@@ -1,3 +1,11 @@
-#toolbar-administration { display: none; }
+/* line 2, ../sass/devel.nuke.toolbar.scss */
+#toolbar-administration {
+  display: none;
+}
 
-body { padding: 0 !important; margin: 0 !important; }
+/* line 5, ../sass/devel.nuke.toolbar.scss */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/*# sourceMappingURL=devel.nuke.toolbar.css.map */

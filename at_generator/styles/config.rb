@@ -4,42 +4,36 @@ css_dir = "css"
 sass_dir = "sass"
 
 
-
-# SASS core
+# Precision
 # -----------------------------------------------------------------------------
-# Chrome needs a precision of 7 to round properly
-Sass::Script::Number.precision = 7
+Sass::Script::Number.precision = 5
 
 
-
-# Output style and comments
+# Environment
 # -----------------------------------------------------------------------------
-# Set the Environment Variable
-# Using :development enables the use of FireSass.
-#environment = :development
-environment = :production
+environment = :development
+#environment = :production
 
 
+# Output Style
+# -----------------------------------------------------------------------------
 # You can select your preferred output style here (:expanded, :nested, :compact
-# or :compressed).
-output_style = (environment == :production) ? :compact : :expanded
+# or :compressed). :expanded is closest to Drupal coding standards and it is
+# not necessary to compress in the preprocessor since Drupal will do this for
+# us using its own aggregation and compression systems.
+output_style = :expanded
 
 
-# To enable relative paths to assets via compass helper functions.
+# Assets
+# -----------------------------------------------------------------------------
 relative_assets = true
 
 
-# Conditionally enable line comments when in development mode.
-line_comments = (environment == :production) ? false : true
+# Line Comments
+# -----------------------------------------------------------------------------
+line_comments = (environment == :development) ? true : false
 
 
-# Output debugging info in development mode.
-sass_options = (environment == :production) ? {} : {:debug_info => true}
-
-
-# Pass options to sass.
-# - For development, we turn on the FireSass-compatible debug_info.
-# - For production, we force the CSS to be regenerated even though the source
-#   scss may not have changed, since we want the CSS to be compressed and have
-#   the debug info removed.
-sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
+# Sourcemaps
+# -----------------------------------------------------------------------------
+sourcemap = (environment == :development) ? true : false

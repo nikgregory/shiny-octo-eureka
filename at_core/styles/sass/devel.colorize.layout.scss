@@ -1,4 +1,4 @@
-// Wrangle regions for debugging layouts, toggle this in theme settings.
+// Wrangle regions for debugging layouts.
 
 // Neutralize Toolbar.
 #toolbar-administration {
@@ -17,7 +17,7 @@ body {
   display: none !important;
 }
 
-[class*="page__"] {
+.page-row {
   padding-top: 0;
   padding-bottom: 0;
 
@@ -36,13 +36,13 @@ body {
     margin-bottom: 10px;
     position: relative;
     background: rgba(0, 0, 0, 0.65);
-    //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     font: 12px/1 Arial;
 
     .block {
       height: 40px;
       width: 100%;
     }
+
     .block * {
       display: none !important;
     }
@@ -54,7 +54,11 @@ body {
       color: rgba(255, 255, 255, 0.5);
     }
 
-    // Show regions source order.
+    // Show regions source order. The core layout system only
+    // supports up to 6 regions per row, but I still include
+    // CSS here for up to 12, just in case you are building your
+    // own layout plugin and it has a crazy number of regions in
+    // a row.
     &:first-child {
       &:before {
         content: "Region 1";
@@ -71,7 +75,6 @@ body {
       }
     }
     &:nth-child(4) {
-      //clear: both;
       &:before {
         content: "Region 4";
       }
@@ -116,57 +119,17 @@ body {
         content: "Region 12";
       }
     }
-    &:nth-child(13) {
-      &:before {
-        content: "Region 13";
-      }
-    }
-    &:nth-child(14) {
-      &:before {
-        content: "Region 14";
-      }
-    }
-    &:nth-child(15) {
-      &:before {
-        content: "Region 15";
-      }
-    }
-    &:nth-child(16) {
-      &:before {
-        content: "Region 16";
-      }
-    }
-    &:nth-child(17) {
-      &:before {
-        content: "Region 17";
-      }
-    }
-    &:nth-child(18) {
-      &:before {
-        content: "Region 18";
-      }
-    }
-    &:nth-child(19) {
-      &:before {
-        content: "Region 19";
-      }
-    }
-    &:nth-child(20) {
-      &:before {
-        content: "Region 20";
-      }
-    }
   }
 }
 
 
-
 // Overrides for screenshots etc
+/*
 html, body {
   background: #fff !important;
   padding: 20px 0;
 }
-[class*="page-row-"] {
+.page-row {
   background: #fff !important;
   padding: 5px 0;
 
@@ -188,153 +151,6 @@ html, body {
 .page-row-four-one {
   margin-top: 40px;
 }
+*/
 
-
-// METRO
-.layout-metro {
-  .page-row-header {
-    .region {
-      &:nth-child(2),
-      &:last-child {
-        height: 100px;
-      }
-    }
-  }
-  .page-row-main {
-    .region-highlighted {
-      height: 100px;
-    }
-    .region-content {
-      height: 190px;
-    }
-    .region-sidebar-first {
-      height: 190px;
-    }
-    .region-sidebar-second {
-      height: 300px;
-    }
-  }
-  .page-row-features,
-  .page-row-tertiary {
-    .region {
-      height: 80px;
-    }
-  }
-  .page-row-features {
-    .region:first-child {
-      height: 100px;
-    }
-  }
-}
-
-
-// PUBLISHER
-.layout-publisher {
-  .page-row-header {
-    .region {
-      &:nth-child(2),
-      &:last-child {
-        height: 100px;
-      }
-    }
-  }
-  .page-row-main {
-    .region-highlighted {
-      height: 70px;
-    }
-    .region-content {
-      height: 220px;
-    }
-    .region-sidebar-first {
-      height: 220px;
-    }
-    .region-sidebar-second {
-      height: 220px;
-    }
-  }
-  .page-row-features,
-  .page-row-tertiary {
-    .region {
-      height: 90px;
-    }
-  }
-  .page-row-features {
-    .region:first-child {
-      height: 80px;
-    }
-  }
-}
-
-
-// UNIVER
-.layout-univer {
-  .page-row-header {
-    .region {
-      &:nth-child(2),
-      &:last-child {
-        height: 100px;
-      }
-    }
-  }
-  .page-row-main {
-    .region-highlighted {
-      height: 70px;
-    }
-    .region-content {
-      height: 220px;
-    }
-    .region-sidebar-first {
-      height: 220px;
-    }
-    .region-sidebar-second {
-      height: 220px;
-    }
-  }
-  .page-row-features,
-  .page-row-tertiary {
-    .region {
-      height: 90px;
-    }
-  }
-  .page-row-features {
-    .region:first-child {
-      height: 80px;
-    }
-  }
-}
-
-
-// Minima
-.layout-minima {
-  .page-row-header {
-    .region {
-      height: 100px;
-    }
-  }
-  .page-row-main {
-    .region-highlighted {
-      height: 70px;
-    }
-    .region-content {
-      height: 220px;
-    }
-    .region-sidebar-first {
-      height: 220px;
-    }
-    .region-sidebar-second {
-      height: 220px;
-    }
-  }
-  .page-row-features,
-  .page-row-tertiary {
-    .region {
-      height: 90px;
-    }
-  }
-  .page-row-features {
-    .region:first-child {
-      height: 80px;
-    }
-  }
-}
 

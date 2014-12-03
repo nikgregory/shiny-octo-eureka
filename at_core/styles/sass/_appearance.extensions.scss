@@ -55,7 +55,6 @@
 
     fieldset legend {
       @include visually-hidden-off;
-      font-family: inherit;
       padding: 0 0 15px;
     }
   }
@@ -84,8 +83,6 @@
       display: table-cell;
       font-size: 0.8em;
       height: 80px;
-      margin-top: 0;
-      margin-bottom: 0;
       text-align: center;
       vertical-align: bottom;
       width: 50px;
@@ -222,37 +219,12 @@
    }
 
   .description {
-    @include visually-hidden-off; // the one place to show descriptions by default, you really need to know this shit.
+    //@include visually-hidden-off;
     color: #777;
-    font-size: 0.9em;
   }
 
   .details-wrapper {
     padding: 0.35em 0.65em 0.75em;
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

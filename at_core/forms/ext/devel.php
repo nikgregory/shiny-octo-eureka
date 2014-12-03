@@ -31,7 +31,7 @@ $form['devel']['settings_show_grid'] = array(
   '#type' => 'checkbox',
   '#title' => t('Show the grid'),
   '#default_value' => theme_get_setting('settings.show_grid', $theme),
-  '#description' => t('Show the grid. Your theme must include a CSS file named "show-grid.css" in the /css folder which should load the grid CSS or image file. All UIKit based themes have this file and will show a toggle icon in the bottom left corner of the screen - hover to icon to show the grid as an overlay.'),
+  '#description' => t('Show the grid. Your theme must include a CSS file named "show-grid.css" in the /css folder which should load the grid CSS or image file. All UIKit based themes have this file and will show a toggle icon in the bottom left corner of the screen - hover the icon to show the grid as an overlay. The default CSS grid overlay is not exact. Browsers have extra trouble with sub-pixel rounding on background images. This is meant for rough debugging, not for pixel-perfect measurements.'),
 );
 
 // Debug layout
