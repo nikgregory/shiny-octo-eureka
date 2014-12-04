@@ -14,42 +14,14 @@ settings:
   enable_legacy_browsers: 0
   suggestions:
     page: page
-  breakpoint_group_layout: at_core.simple
   max_width_enable: 0
   max_width_value: ''
   max_width_unit: em
   enable_backups: 0
-  page_Mobile-tablet_messages: ''
-  page_Mobile-tablet_leaderboard: ''
-  page_Mobile-tablet_header: ''
-  page_Mobile-tablet_navbar: ''
-  page_Mobile-tablet_features: ''
-  page_Mobile-tablet_main: ''
-  page_Mobile-tablet_subfeatures: ''
-  page_Mobile-tablet_footercols: ''
-  page_Mobile-tablet_footer: ''
-  page_Tablet-isolate_messages: ''
-  page_Tablet-isolate_leaderboard: ''
-  page_Tablet-isolate_header: twocol-6-6
-  page_Tablet-isolate_navbar: ''
-  page_Tablet-isolate_features: threecol-split-row-12--6-6
-  page_Tablet-isolate_main: threecol-split-row-12--6-6
-  page_Tablet-isolate_subfeatures: ''
-  page_Tablet-isolate_footercols: fourcol-split-row-6-6--6-6
-  page_Tablet-isolate_footer: ''
-  page_Widescreen_messages: ''
-  page_Widescreen_leaderboard: ''
-  page_Widescreen_header: twocol-6-6
-  page_Widescreen_navbar: ''
-  page_Widescreen_features: threecol-source-ordered-2-8-2
-  page_Widescreen_main: threecol-source-ordered-3-6-3
-  page_Widescreen_subfeatures: threecol-4-4-4
-  page_Widescreen_footercols: fourcol-3-3-3-3
-  page_Widescreen_footer: ''
-  responsive_menu_region: navbar
+  responsive_menu_block: THEMENAME_main_menu
   responsive_menu_default_style: horizontal
   responsive_menu_responsive_style: slidedown
-  responsive_menu_breakpoint_group: at_core.simple
+  responsive_menu_breakpoint_group: at_core.responsive_menus
   responsive_menu_breakpoint: 'all and (max-width: 75em)'
   icon_path_default: images/touch-icons/default-60x60.png
   apple_touch_icon_path_ipad: images/touch-icons/ipad-standard-76x76.png
@@ -70,6 +42,26 @@ settings:
   font_lineheight_multiplier_default: '1.5'
   font_lineheight_multiplier_large: '1.2'
   font_lineheight_multiplier_large_size: '24'
+  enable_shortcodes: 0
+  breakpoint_group_layout: at_core.simple
+  page_tabletisolate_messages: ''
+  page_tabletisolate_leaderboard: ''
+  page_tabletisolate_header: twocol-6-6
+  page_tabletisolate_navbar: ''
+  page_tabletisolate_features: threecol-split-row-12--6-6
+  page_tabletisolate_main: threecol-split-row-12--6-6
+  page_tabletisolate_subfeatures: ''
+  page_tabletisolate_footercols: fourcol-split-row-6-6--6-6
+  page_tabletisolate_footer: ''
+  page_wide_messages: ''
+  page_wide_leaderboard: ''
+  page_wide_header: twocol-6-6
+  page_wide_navbar: ''
+  page_wide_features: threecol-source-ordered-2-8-2
+  page_wide_main: threecol-source-ordered-3-6-3
+  page_wide_subfeatures: threecol-source-ordered-4-4-4
+  page_wide_footercols: fourcol-3-3-3-3
+  page_wide_footer: ''
 features:
   logo: 1
   node_user_picture: 1

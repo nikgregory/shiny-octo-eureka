@@ -131,7 +131,10 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
       $breakpoint_layout_label = $layout_breakpoint_value->getLabel();
       $breakpoint_layout_mediaquery = $layout_breakpoint_value->getMediaQuery();
 
-      $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label] = array(
+      // There is probably a way to get the bp machine name but I could not find a method.
+      $breakpoint_layout_key = strtolower(preg_replace("/\W|_/", "", $breakpoint_layout_label));
+
+      $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key] = array(
         '#type' => 'details',
         '#title' => t($breakpoint_layout_label . ' <small>' . $breakpoint_layout_mediaquery . '</small>'),
         '#attributes' => array('class' => array('clearfix')),
@@ -170,19 +173,19 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             }
 
             // Try to inherit the default page layout, by default.
-            if (NULL !== theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key)) {
-              $row_default_value = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key);
+            if (NULL !== theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key)) {
+              $row_default_value = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key);
             }
             else {
-              $row_default_value = theme_get_setting('settings.page_' . $breakpoint_layout_label . '_' . $row_key);
+              $row_default_value = theme_get_setting('settings.page_' . $breakpoint_layout_key . '_' . $row_key);
             }
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key] = array(
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key] = array(
               '#type' => t('fieldset'),
               '#title' => t($row_key),
             );
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_label . '_' . $row_key] = array(
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key] = array(
               '#type' => t('select'),
               '#empty_option' => '--none--',
               '#title' => t(ucfirst($row_key)),
@@ -190,12 +193,12 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
               '#default_value' => $row_default_value,
             );
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'] = array(
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'] = array(
               '#type' => t('container'),
               '#attributes' => array('class' => array('css-layout-options', 'layouts-column-onequarter', 'pull-right')),
             );
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_label][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_label . '-' . $row_key . '-row_region_markup'] = array(
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = array(
               '#type' => t('container'),
               '#markup' => '<div class="regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
               '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),

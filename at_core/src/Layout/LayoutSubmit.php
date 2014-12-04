@@ -49,12 +49,14 @@ class LayoutSubmit implements LayoutSubmitInterface {
     foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
       foreach ($breakpoints_group as $breakpoint_id => $breakpoint_value) {
         foreach ($this->layout_config['rows'] as $row_key => $row_values) {
-          $css_data[$suggestion_key][$breakpoint_value->getLabel()]['query'] = $breakpoint_value->getMediaQuery();
-          if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key])) {
-            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_value->getLabel() .'_'. $row_key];
+          // match the key set in the form, hacking on get label
+          $breakpoint_layout_key = strtolower(preg_replace("/\W|_/", "", $breakpoint_value->getLabel()));
+          $css_data[$suggestion_key][$breakpoint_layout_key]['query'] = $breakpoint_value->getMediaQuery();
+          if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key])) {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key];
           }
           else {
-            $css_data[$suggestion_key][$breakpoint_value->getLabel()]['rows'][$row_key] = 'not_set';
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key] = 'not_set';
           }
         }
       }
