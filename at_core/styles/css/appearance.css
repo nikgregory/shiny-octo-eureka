@@ -506,83 +506,39 @@ pre.code-block {
   color: #666;
 }
 
-/* line 134, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .form-item-settings-responsive-menu-region,
-#edit-responsive-menus .form-item-settings-responsive-menu-breakpoint-group {
-  float: left;
-  margin-bottom: 2em;
-  margin-right: 1.5em;
-}
-/* line 144, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-styles,
-#edit-responsive-menus .responsive-menu-options {
-  clear: none !important;
-  width: 48%;
-}
-/* line 150, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .clearfix {
-  border-top: 1px solid #ccc;
-}
-/* line 154, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus select {
-  max-width: 18em;
-}
-/* line 158, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-styles {
-  float: left;
-}
-/* line 161, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-styles .form-type-select {
-  margin: 1em 0 2em;
-}
-/* line 166, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-options {
-  float: right;
-  background: #F5F5F5;
-  padding: 1em;
-}
-/* line 174, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-options fieldset fieldset legend {
-  display: none;
-}
-/* line 176, ../sass/_appearance.extensions.scss */
-#edit-responsive-menus .responsive-menu-options fieldset fieldset legend:after {
-  content: "";
-}
-
-/* line 187, ../sass/_appearance.extensions.scss */
+/* line 138, ../sass/_appearance.extensions.scss */
 #edit-block-classes label span {
   font-weight: 400;
 }
 
-/* line 194, ../sass/_appearance.extensions.scss */
+/* line 145, ../sass/_appearance.extensions.scss */
 #edit-classes dt {
   font-weight: bold;
 }
 @media screen and (min-width: 75em) {
-  /* line 199, ../sass/_appearance.extensions.scss */
+  /* line 150, ../sass/_appearance.extensions.scss */
   #edit-classes dl.class-list dt {
     float: left;
     clear: left;
     text-align: left;
     width: 30%;
   }
-  /* line 205, ../sass/_appearance.extensions.scss */
+  /* line 156, ../sass/_appearance.extensions.scss */
   #edit-classes dl.class-list dd {
     margin-left: 35%;
     overflow: hidden;
   }
 }
 
-/* line 217, ../sass/_appearance.extensions.scss */
+/* line 168, ../sass/_appearance.extensions.scss */
 #edit-devel label {
   font-weight: bold;
 }
-/* line 221, ../sass/_appearance.extensions.scss */
+/* line 172, ../sass/_appearance.extensions.scss */
 #edit-devel .description {
   color: #777;
 }
-/* line 226, ../sass/_appearance.extensions.scss */
+/* line 176, ../sass/_appearance.extensions.scss */
 #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;
 }

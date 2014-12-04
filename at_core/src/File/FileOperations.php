@@ -61,4 +61,30 @@ class FileOperations implements FileOperationsInterface {
     }
     return $info;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function fileCompare($afile, $bfile) {
+    // Check if filesize is different
+    if(filesize($afile) !== filesize($bfile))
+      return false;
+
+    // Check if content is different
+    $aopen = fopen($afile, 'rb');
+    $bopen = fopen($bfile, 'rb');
+
+    $result = true;
+    while(!feof($aopen)) {
+      if(fread($aopen, 8192) != fread($bopen, 8192)) {
+        $result = false;
+        break;
+      }
+    }
+
+    fclose($aopen);
+    fclose($bopen);
+
+    return $result;
+  }
 }

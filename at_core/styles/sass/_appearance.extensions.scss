@@ -127,57 +127,8 @@
 }
 
 
-
 // Resp menus
 #edit-responsive-menus {
-
-  .form-item-settings-responsive-menu-region,
-  .form-item-settings-responsive-menu-breakpoint-group {
-    float: left;
-    margin-bottom: 2em;
-    margin-right: 1.5em;
-  }
-
-  #edit-default,
-  #edit-responsive {}
-
-  .responsive-menu-styles,
-  .responsive-menu-options {
-    clear: none !important;
-    width: 48%;
-  }
-
-  .clearfix {
-    border-top: 1px solid #ccc;
-  }
-
-  select {
-    max-width: 18em;
-  }
-
-  .responsive-menu-styles {
-    float: left;
-
-    .form-type-select {
-      margin: 1em 0 2em;
-    }
-  }
-
-  .responsive-menu-options {
-    float: right;
-    background: #F5F5F5;
-    padding: 1em;
-
-    legend {}
-    fieldset legend {}
-
-    fieldset fieldset legend {
-      display: none;
-      &:after {
-        content: "";
-      }
-    }
-  }
 }
 
 
@@ -219,7 +170,6 @@
    }
 
   .description {
-    //@include visually-hidden-off;
     color: #777;
   }
 

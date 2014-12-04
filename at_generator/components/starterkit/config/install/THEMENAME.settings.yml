@@ -47,16 +47,10 @@ settings:
   page_Widescreen_footercols: fourcol-3-3-3-3
   page_Widescreen_footer: ''
   responsive_menu_region: navbar
+  responsive_menu_default_style: horizontal
+  responsive_menu_responsive_style: slidedown
   responsive_menu_breakpoint_group: at_core.simple
-  responsive_menu_default_style: slidedown
-  responsive_menu_default_offcanvas_position: offcanvas-left
-  responsive_menu_default_tiles_count: two
-  responsive_menu_default_tiles_submenus: 0
-  responsive_menu_responsive_style: horizontal
-  responsive_menu_responsive_breakpoint: 'all and (min-width: 65em)'
-  responsive_menu_responsive_offcanvas_position: offcanvas-left
-  responsive_menu_responsive_tiles_count: two
-  responsive_menu_responsive_tiles_submenus: 0
+  responsive_menu_breakpoint: 'all and (max-width: 75em)'
   icon_path_default: images/touch-icons/default-60x60.png
   apple_touch_icon_path_ipad: images/touch-icons/ipad-standard-76x76.png
   apple_touch_icon_path_iphone_retina: images/touch-icons/iphone-retina-120x120.png

@@ -4,7 +4,6 @@ namespace Drupal\at_core\File;
 
 interface FileOperationsInterface {
 
-
   /**
    * Rename old file to new file.
    *
@@ -62,5 +61,17 @@ interface FileOperationsInterface {
    * @see drupal_parse_info_file()
    */
   public function fileBuildInfoYml(array $data, $prefix = NULL);
+
+  /**
+   * Compare two files. First compare file size, then
+   * compare their contents. Return true if the files
+   * are the same, otherwise false.
+   *
+   * @param string $afile
+   *   Path to 'a' file.
+   * @param string $bfile
+   *   Path to 'b' file.
+   */
+  public function fileCompare($afile, $bfile);
 
 }
