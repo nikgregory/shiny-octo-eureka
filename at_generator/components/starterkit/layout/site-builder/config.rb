@@ -8,8 +8,8 @@ require "susy"
 
 # Directory paths
 # -----------------------------------------------------------------------------
-css_dir = "/css"
-sass_dir = "/sass"
+css_dir = "css"
+sass_dir = "sass"
 
 
 # Precision
@@ -32,14 +32,9 @@ output_style = :expanded
 
 # Line Comments
 # -----------------------------------------------------------------------------
-line_comments = (environment == :development) ? true : false
+#line_comments = (environment == :development) ? true : false
 
 
 # Sourcemaps
 # -----------------------------------------------------------------------------
 #sourcemap = (environment == :development) ? true : false
-
-
-# FireSass
-# -----------------------------------------------------------------------------
-#sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}

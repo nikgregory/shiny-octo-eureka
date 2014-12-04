@@ -267,9 +267,9 @@ class ThemeGeneratorSubmit {
 
 
     // Libraries
-    $theme_info_data['libraries'] = array(
-      "$machine_name/base",
-    );
+    //$theme_info_data['libraries'] = array(
+    //  "$machine_name/base",
+    //);
 
 
     // Regions

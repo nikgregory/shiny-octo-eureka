@@ -162,8 +162,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     // Create a backup.
     if ($this->form_values['settings_enable_backups'] == 1) {
+
       $fileOperations = new FileOperations();
-      $backup_path = $fileOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'info'));
+      $directoryOperations = new DirectoryOperations();
+
+      $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'info'));
 
       //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
       $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
@@ -319,8 +322,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
+
         $fileOperations = new FileOperations();
-        $backup_path = $fileOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
+        $directoryOperations = new DirectoryOperations();
+
+        $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
 
         //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
         $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
