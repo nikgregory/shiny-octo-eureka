@@ -36,7 +36,7 @@ $info = array(
       'title' => t('Tipping Point'),
       'colors' => array(
         'base' => '#e65200',
-        'text' => '#777777',
+        'text' => '#1b1918',
         'link' => '#ff792f',
       ),
     ),
@@ -48,19 +48,8 @@ $info = array(
   ),
 
   // Files to copy.
-  'copy' => array(
-    'logo.png',
-  ),
+  'copy' => array(),
 
   // Gradient definitions.
-  'gradients' => array(
-    array(
-      // (x, y, width, height).
-      'dimension' => array(0, 0, 0, 0),
-      // Direction of gradient ('vertical' or 'horizontal').
-      'direction' => 'vertical',
-      // Keys of colors to use for the gradient.
-      'colors' => array('base', 'text'),
-    ),
-  ),
+  'gradients' => array(),
 );

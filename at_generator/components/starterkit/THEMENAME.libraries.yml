@@ -3,42 +3,35 @@ base:
   version: 0.0.1
   css:
     component:
-      styles/css/components/base.css: { every_page: true }
+      styles/css/components/base.css: {}
 
 # Book
 book:
   version: 0.0.1
   css:
     component:
-      styles/css/components/book.css: { every_page: true }
-
-# Color
-color:
-  version: 0.0.1
-  css:
-    component:
-      styles/css/components/color.css: { every_page: true }
+      styles/css/components/book.css: {}
 
 # Comment
 comment:
   version: 0.0.1
   css:
     component:
-      styles/css/components/comment.css: { every_page: true }
+      styles/css/components/comment.css: {}
 
 # Forum
 forum:
   version: 0.0.1
   css:
     component:
-      styles/css/components/forum.css: { every_page: true }
+      styles/css/components/forum.css: {}
 
 # Responsive Menus
 responsive_menus:
   version: 0.0.1
   css:
     component:
-      styles/css/components/responsive-menus.css: { every_page: true }
+      styles/css/components/responsive-menus.css: {}
   dependencies:
     - at_core/at.responsivemenus
 
@@ -47,21 +40,28 @@ search:
   version: 0.0.1
   css:
     component:
-      styles/css/components/search.css: { every_page: true }
-
-# Shortcodes
-shortcodes:
-  version: 0.0.1
-  css:
-    component:
-      styles/css/components/shortcodes.css: { every_page: true }
+      styles/css/components/search.css: {}
 
 # Taxonomy
 taxonomy:
   version: 0.0.1
   css:
     component:
-      styles/css/components/taxonomy.css: { every_page: true }
+      styles/css/components/taxonomy.css: {}
+
+# Color
+color:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/components/color.css: {}
+
+# Shortcodes
+shortcodes:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/components/shortcodes.css: {}
 
 # Subtheme scripts
 scripts:

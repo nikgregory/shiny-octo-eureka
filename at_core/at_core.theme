@@ -355,24 +355,31 @@ function at_core_page_attachments_alter(array &$page) {
 }
 
 
+/**
+ * Alter CSS files before they are output on the page.
+ *
+ * @param $css
+ *   An array of all CSS items (files and inline CSS) being requested on the page.
+ *
+ * @see _drupal_add_css()
+ * @see drupal_get_css()
+ */
+function at_core_css_alter(&$css) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
 
-// If Off Canvas
-/*
-if ($config['responsive_menu_' . $style . '_style'] === 'offcanvas' && isset($config['responsive_menu_' . $style . '_offcanvas_position'])) {
-  $drupalSettings['responsive_menus'][$style]['offcanvas_position'] = $config['responsive_menu_' . $style . '_offcanvas_position'];
-}
-*/
-
-// If Tiles
-/*
-if ($config['responsive_menu_' . $style . '_style'] === 'tiles') {
-  $drupalSettings['responsive_menus'][$style]['tiles_count'] = 'tc-' . $config['responsive_menu_' . $style . '_tiles_count'];
-  if (isset($config['responsive_menu_' . $style . '_tiles_submenus'])) {
-    $drupalSettings['responsive_menus'][$style]['tiles_submenus'] = 'tiles-submenus-true';
+  // Drupal is stupid, again, so we have to load our own colorized CSS file, for f'ks sake.
+  if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
+    $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
+    if (!empty($color_paths)) {
+      foreach ($color_paths as $color_path) {
+        $basename_color_path = drupal_basename($color_path);
+        if (array_key_exists($basename_color_path, $css)) {
+          $css[$basename_color_path]['data'] = $color_path;
+        }
+      }
+    }
   }
 }
-*/
-
 
 
 /**

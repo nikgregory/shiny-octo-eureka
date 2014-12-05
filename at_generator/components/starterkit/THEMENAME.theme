@@ -10,64 +10,6 @@
  */
 
 /**
- * Alter CSS files before they are output on the page.
- *
- * @param $css
- *   An array of all CSS items (files and inline CSS) being requested on the page.
- *
- * @see _drupal_add_css()
- * @see drupal_get_css()
- */
-function HOOK_css_alter(&$css) {
-  // Individual CSS files to remove.
-  // Sometimes we don't want to remove the entire library as it may
-  // load dependancies we need, so we can use this more granular
-  // approach to remove individual CSS assets.
-  $remove = array(
-    'book.theme.css',
-    'comment.theme.css',
-    'file.formatter.generic.css',
-    'forum.module.css',
-    'search.theme.css',
-    'system.theme.css',
-    'taxonomy.module.css',
-  );
-  foreach ($remove as $file) {
-    if (array_key_exists($file, $css)) {
-      unset($css[$file]);
-    }
-  }
-}
-
-/**
- * Perform necessary alterations to the JavaScript before it is presented on
- * the page.
- *
- * @param $javascript
- *   An array of all JavaScript being presented on the page.
- *
- * @see _drupal_add_js()
- * @see drupal_get_js()
- * @see drupal_js_defaults()
- */
-/* -- Delete this line if you want to use this function
-function HOOK_js_alter(&$js) {
-  // Individual JavaScript files to remove.
-  // Sometimes we don't want to remove the entire library as it may
-  // load dependancies we need, so we can use this more granular
-  // approach to remove individual JS assets.
-  $remove = array(
-    'jquery.js'
-  );
-  foreach ($remove as $file) {
-    if (array_key_exists($file, $css)) {
-      unset($css[$file]);
-    }
-  }
-}
-// */
-
-/**
  * Alter attachments (typically assets) to a page before it is rendered.
  *
  * Use this hook when you want to remove or alter attachments on the page, or
@@ -142,6 +84,64 @@ function HOOK_page_attachments_alter(array &$page) {
   }
   // */
 }
+
+/**
+ * Alter CSS files before they are output on the page.
+ *
+ * @param $css
+ *   An array of all CSS items (files and inline CSS) being requested on the page.
+ *
+ * @see _drupal_add_css()
+ * @see drupal_get_css()
+ */
+function HOOK_css_alter(&$css) {
+  // Individual CSS files to remove.
+  // Sometimes we don't want to remove the entire library as it may
+  // load dependancies we need, so we can use this more granular
+  // approach to remove individual CSS assets.
+  $remove = array(
+    'book.theme.css',
+    'comment.theme.css',
+    'file.formatter.generic.css',
+    'forum.module.css',
+    'search.theme.css',
+    'system.theme.css',
+    'taxonomy.module.css',
+  );
+  foreach ($remove as $file) {
+    if (array_key_exists($file, $css)) {
+      unset($css[$file]);
+    }
+  }
+}
+
+/**
+ * Perform necessary alterations to the JavaScript before it is presented on
+ * the page.
+ *
+ * @param $javascript
+ *   An array of all JavaScript being presented on the page.
+ *
+ * @see _drupal_add_js()
+ * @see drupal_get_js()
+ * @see drupal_js_defaults()
+ */
+/* -- Delete this line if you want to use this function
+function HOOK_js_alter(&$js) {
+  // Individual JavaScript files to remove.
+  // Sometimes we don't want to remove the entire library as it may
+  // load dependancies we need, so we can use this more granular
+  // approach to remove individual JS assets.
+  $remove = array(
+    'jquery.js'
+  );
+  foreach ($remove as $file) {
+    if (array_key_exists($file, $css)) {
+      unset($css[$file]);
+    }
+  }
+}
+// */
 
 /**
  * Preprocess variables for html templates.
