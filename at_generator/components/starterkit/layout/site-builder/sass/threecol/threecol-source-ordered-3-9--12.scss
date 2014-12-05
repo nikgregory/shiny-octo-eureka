@@ -1,6 +1,6 @@
 @import "../site-builder-base";
 //
-// Main Content 4-8--12 Source Ordered
+// Main Content 3-9--12 Source Ordered
 //
 // This layout floats the first region right.
 //
@@ -16,17 +16,17 @@
 //  |                third               |
 //   -------------------------------------
 
-.threecol-source-ordered-4-8--12 {
+.threecol-source-ordered-3-9--12 {
 
   // Region first and second are active.
   .hr--1-2 {
     .region {
       &:first-child {
-        @include span(8 of 12 last);
+        @include span(9 of 12 last);
       }
 
       &:last-child {
-        @include span(4 of 12);
+        @include span(3 of 12);
       }
     }
   }
@@ -43,11 +43,11 @@
   .arc--3 {
     .region {
       &:first-child {
-        @include span(8 of 12 last);
+        @include span(9 of 12 last);
       }
 
       &:nth-child(2) {
-        @include span(4 of 12);
+        @include span(3 of 12);
       }
 
       &:last-child {

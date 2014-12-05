@@ -19,6 +19,7 @@ rows:
       id: leaderboard
     regions:
       leaderboard: 'Leaderboard'
+      leaderboardtwo: 'Leaderboard two'
   header:
     attributes:
       role: banner
@@ -59,7 +60,7 @@ rows:
       footercol_first: 'Footer col first'
       footercol_second: 'Footer col second'
       footercol_third: 'Footer col third'
-      footercol_fourth: 'Footer col fourth'
+      #footercol_fourth: 'Footer col fourth'
   footer:
     attributes:
       role: contentinfo

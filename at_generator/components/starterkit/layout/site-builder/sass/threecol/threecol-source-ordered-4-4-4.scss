@@ -28,12 +28,10 @@
   .hr--1-2 {
     .region {
       &:first-child {
-        @include push(4 of 12);
-        @include span(8 of 12);
+        @include span(8 of 12 last);
       }
 
       &:last-child {
-        @include pull(12 of 12);
         @include span(4 of 12);
       }
     }
