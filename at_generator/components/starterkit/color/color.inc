@@ -3,8 +3,9 @@
 /**
  * @file
  * Lists available colors and color schemes for the AT Starterkit.
- * By default the color scheme relies almost entirely on shift, so the user
- * sets the base color which shifts unmatched colors.
+ * By default the color scheme relies almost entirely on color
+ * shift, where the user changes the base color and all other
+ * unspecified colors shift relative to the new base.
  */
 
 $info = array(

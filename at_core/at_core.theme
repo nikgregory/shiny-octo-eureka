@@ -310,7 +310,7 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Attach devel_layout CSS file.
     if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
-       $page['#attached']['library'][] = 'at_core/at.devel_colorize_layout';
+       $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
     }
 
     // Attach devel_colorize-regions CSS file.
@@ -445,14 +445,14 @@ function at_core_preprocess_html(&$variables) {
   }
 
   // Set the skip navigation target ID
-  $variables['skip_link_target'] = '#main-content';
+  $variables['skip_link_target'] = '#block-' . $theme . '-content';
 
   // Extensions
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
-    // Override skip navigation target with a theme setting.
-    if (isset($config['skip_link_target']) && $config['skip_link_target'] !== '#main-content') {
-      $variables['skip_link_target'] = String::checkPlain($config['skip_link_target']);
+    // Skip navigation target setting.
+    if (isset($config['skip_link_target'])) {
+      $variables['skip_link_target'] = '#' . String::checkPlain($config['skip_link_target']);
     }
 
     // Add the responsive menu styles settings.

@@ -105,12 +105,19 @@ $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
 );
 
 // Skip link target
+if (!empty(theme_get_setting('settings.skip_link_target'))) {
+  $skip_link_setting = String::checkPlain(theme_get_setting('settings.skip_link_target'));
+}
+else {
+  $skip_link_setting = 'block-' . $theme . '-content'; // try to provide the most likely match.
+}
 $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_link_target'] = array(
   '#type' => 'textfield',
   '#title' => t('Skip to navigation target ID'),
-  '#description' => t('By default the skip link target is <code>#main-content</code>, you can alter that here if you need to.'),
-  '#size' => 25,
-  '#maxlength' => 60,
+  '#description' => t('By default the skip link target is <code>!skiplink</code>. If you need to change this do not include the pound symbol.', array('!skiplink' =>$skip_link_setting)),
+  '#size' => 60,
+  '#maxlength' => 255,
+  '#field_prefix' => '#',
   '#default_value' => String::checkPlain(theme_get_setting('settings.skip_link_target')),
 );
 

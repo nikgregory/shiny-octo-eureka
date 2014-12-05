@@ -6,7 +6,9 @@
 // -----------------------------------------------------------------------------
 //
 // Adaptivetheme ships with two breakpoint module groups - simple and advanced.
-// The simple group is a subset of the advanced group (declared below).
+// The simple group is a subset of the advanced group and uses just two breakpoints,
+// tablet-isolate and widescreen. Below is a list of all breakpoints included with
+// AT Core (usable by all sub-themes in layout theme settings and here).
 //
 // SEE: adaptivetheme/at_core/at_core.breakpoints.yml
 //
@@ -14,41 +16,47 @@
 // so any pixel equivalents stated here assume base font size of 16px. Change them
 // to suit your requirements.
 //
+//   mobile-isolate - 0 to 45em (0 to 720px), small screens only.
+//   tablet-isolate - 45.063em and max-width 65em (721px to 960px), isolatate tablets.
+//   wide-isolate   - 60.063em and max-width 120em (961px to 1920px), isolatate tablets.
+//   wide           - 60.063em (961px) and up.
+//   huge           - 120.063em (1921px) and up, for big resolution.
 //
-//   $mobile          - 0 to 45em (0 to 720px), small screens only.
-//   $mobile-tablet   - 0 to 65em (0 to 960px), mobile and most tablets.
+// Here you can see how each breakpoint cascades or isolates. Most of the time
+// a layout will use tablet-isolate and widescreen OR tablet-isolate, widescreen-isolate
+// and huge.
 //
-//   $tablet-isolate  - 45em and max-width 65em (720px to 960px), isolatate tablets.
-//   $tablet          - 45em (720px) and up.
-//
-//   $widescreen      - 65em (960px) and up.
-//
-//   maxwidth        - 0 to 75em (0 to 1200px), match the themes max-width CSS value.
-//
-//   $huge            - 120em (1920px) and up, for big resolution.
-//
-//
-// Here you can see how each breakpoint cascades or isolates. The first 3 are effectively
-// isolation breakpoints, however we allow $mobile-tablet to cascade into $tablet-isolate
-// and $tablet. The last 3 all cascade.
-//
-// Most layouts for AT use $tablet-isolate, $tablet and/or $widescreen breakpoints only.
-//
-// | $mobile ------>|
-// | $mobile-tablet -------------------->|
-//                  | $tablet-isolate -->|
-//                  | $tablet ----------------------------------------------------->
-//                                       | $widescreen ---------------------------->
-// | max-width ------------------------------------>|
+// | $mobile-isolate -->|
+//                      | $tablet-isolate -->|
+//                                           | $wide-isolate ------->|
+//                                           | $wide ------------------------------>
 //                                                                   | $huge ------>
 //
-$mobile          : "all and (max-width: 45em)";
-$mobile-tablet   : "all and (max-width: 60em)";
-$tablet-isolate  : "all and (min-width: 45em) and (max-width: 60em)";
-$tablet          : "all and (min-width: 45em)";
-$widescreen      : "all and (min-width: 60em)";
-$maxwidth        : "all and (max-width: 75em)";
-$huge            : "all and (min-width: 120em)";
+$mobile-isolate : "all and (max-width: 45em)";
+$tablet-isolate : "all and (min-width: 45.063em) and (max-width: 60em)";
+$wide-isolate   : "all and (min-width: 60.063em) and (max-width: 120em)";
+$wide           : "all and (min-width: 60.063em)";
+$huge           : "all and (min-width: 120.063em)";
+
+
+// Breakpoints - Responsive Menus
+//
+// Responisve breakpoints differ in that they are all max-width. In other words they are
+// effectively a "desktop first" strategy. The concept is that we set the responsive menu
+// to activate up to a certain width, after that the default menu is activated.
+//
+// The "max-width" breakpoint is a special case in that it exactly matches the CSS "max-width"
+// of the default layout settings. AT sub-themes are set to use this breakpoint by default
+// for responsive menus (see Responsive Menu extension in Appearance settings).
+//
+//   mobile    - 0 to 60em (0 to 960px)
+//   max-width - 0 to 75em (0 to 1200px)
+//
+// | mobile ------------->|
+// | maxwidth ------------------------------->|
+//
+$mobile    : "all and (max-width: 60em)";
+$max-width : "all and (max-width: 75em)";
 
 
 // Vertical Rhythm

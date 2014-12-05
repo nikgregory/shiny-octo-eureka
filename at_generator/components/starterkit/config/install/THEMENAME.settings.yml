@@ -12,6 +12,7 @@ settings:
   enable_markup_overrides: 0
   enable_devel: 0
   enable_legacy_browsers: 0
+  skip_link_target: block-THEMENAME-content
   suggestions:
     page: page
   max_width_enable: 0

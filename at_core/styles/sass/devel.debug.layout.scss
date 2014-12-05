@@ -10,6 +10,7 @@ body {
 }
 
 // Remove unwanted page elements.
+.page__temporary-tabs,
 .messages,
 .visually-hidden,
 .region-page-top,
@@ -28,9 +29,9 @@ body {
 
   // Stripe rows with color.
   background-color: ghostwhite;
-  &:nth-child(2n+1) {
-    background-color: lavender ;
-  }
+  //&:nth-child(2n+1) {
+  //   background-color: lavender ;
+  //}
 
   .region {
     margin-bottom: 10px;
@@ -38,12 +39,7 @@ body {
     background: rgba(0, 0, 0, 0.65);
     font: 12px/1 Arial;
 
-    .block {
-      height: 0;
-      width: 100%;
-      overflow: hidden;
-    }
-
+    .block,
     .block * {
       display: none !important;
     }

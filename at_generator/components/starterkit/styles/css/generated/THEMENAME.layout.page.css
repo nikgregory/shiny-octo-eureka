@@ -1,4 +1,4 @@
-/* Generated on: Thu, 04 Dec 14 22:38:09 +0100 */
+/* Generated on: Thu, 04 Dec 14 21:22:46 +0100 */
 .regions {
   max-width: 75em;
   margin-left: auto;
@@ -10,254 +10,196 @@
   clear: both;
 }
 
-@media all and (min-width: 45em) and (max-width: 60em) {
-.page__header .arc--2 .region {
-  width: 49.15254%;
+@media all and (min-width: 45.063em) and (max-width: 60em) {
+.page__features .arc--2 .region {
+  width: 32.20339%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__header .arc--2 .region:last-child {
-  float: right;
-  margin-right: 0;
-}
-.page__features .hr--2-3 .region {
-  width: 49.15254%;
+.page__features .arc--3 .region {
+  width: 15.25424%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__features .hr--2-3 .region:last-child {
-  float: right;
-  margin-right: 0;
-}
-.page__features .arc--3 .region:nth-child(2) {
-  width: 49.15254%;
-  float: left;
-  margin-right: 1.69492%;
-}
+.page__features .arc--2 .region:last-child,
 .page__features .arc--3 .region:last-child {
-  width: 49.15254%;
+  width: 66.10169%;
   float: right;
   margin-right: 0;
 }
-.page__main .hr--2-3 .region {
-  width: 49.15254%;
+.page__main .arc--2 .region {
+  width: 40.67797%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__main .hr--2-3 .region:last-child {
-  float: right;
-  margin-right: 0;
+.page__main .arc--3 .region:first-child {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
 }
 .page__main .arc--3 .region:nth-child(2) {
-  width: 49.15254%;
+  width: 23.72881%;
   float: left;
   margin-right: 1.69492%;
 }
+.page__main .arc--2 .region:last-child,
 .page__main .arc--3 .region:last-child {
-  width: 49.15254%;
+  width: 57.62712%;
   float: right;
   margin-right: 0;
 }
-.page__footercols .arc--2 .region {
+.page__subfeatures .arc--2 .region {
   width: 49.15254%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__footercols .arc--2 .region:last-child {
-  float: right;
-  margin-right: 0;
-}
-.page__footercols .arc--3 .region:first-child {
-  width: 49.15254%;
+.page__subfeatures .arc--3 .region:first-child {
+  width: 15.25424%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__footercols .arc--3 .region:nth-child(2) {
-  width: 49.15254%;
-  float: right;
-  margin-right: 0;
-}
-.page__footercols .arc--4 .region:nth-child(2n+1) {
-  width: 49.15254%;
+.page__subfeatures .arc--3 .region:nth-child(2) {
+  width: 32.20339%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__footercols .arc--4 .region:nth-child(2n+2) {
+.page__subfeatures .arc--2 .region:last-child,
+.page__subfeatures .arc--3 .region:last-child {
   width: 49.15254%;
   float: right;
   margin-right: 0;
 }
 
 }
-@media all and (min-width: 60.063em) {
-.page__header .arc--2 .region {
-  width: 49.15254%;
+@media all and (min-width: 60.063em) and (max-width: 120em) {
+.page__features .arc--2 .region {
+  width: 40.67797%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__header .arc--2 .region:last-child {
+.page__features .arc--2 .region:last-child {
+  width: 57.62712%;
   float: right;
   margin-right: 0;
 }
-.page__features .hr--1-2 .region:first-child {
-  margin-left: 33.89831%;
-  width: 66.10169%;
+.page__features .arc--3 .region {
+  width: 40.67797%;
   float: left;
   margin-right: 1.69492%;
-}
-.page__features .hr--1-2 .region:last-child {
-  margin-left: -101.69492%;
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__features .hr--1-3 .region:first-child {
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__features .hr--1-3 .region:last-child {
-  width: 32.20339%;
-  float: right;
-  margin-right: 0;
-}
-.page__features .hr--2-3 .region:first-child {
-  width: 49.15254%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__features .hr--2-3 .region:last-child {
-  width: 49.15254%;
-  float: right;
-  margin-right: 0;
 }
 .page__features .arc--3 .region:first-child {
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-  margin-left: 16.94915%;
-}
-.page__features .arc--3 .region:nth-child(2) {
   width: 15.25424%;
   float: left;
   margin-right: 1.69492%;
-  margin-left: -84.74576%;
 }
 .page__features .arc--3 .region:last-child {
-  width: 15.25424%;
   float: right;
   margin-right: 0;
 }
-.page__main .hr--1-2 .region:first-child {
-  margin-left: 33.89831%;
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__main .hr--1-2 .region:last-child {
-  margin-left: -101.69492%;
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__main .hr--1-3 .region:first-child {
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__main .hr--1-3 .region:last-child {
-  width: 32.20339%;
-  float: right;
-  margin-right: 0;
-}
-.page__main .hr--2-3 .region {
-  width: 49.15254%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__main .hr--2-3 .region:last-child {
+.page__main .arc--2 .region:last-child {
   float: right;
   margin-right: 0;
 }
 .page__main .arc--3 .region:first-child {
-  width: 49.15254%;
+  width: 15.25424%;
   float: left;
   margin-right: 1.69492%;
-  margin-left: 25.42373%;
-}
-.page__main .arc--3 .region:nth-child(2) {
-  width: 23.72881%;
-  float: left;
-  margin-right: 1.69492%;
-  margin-left: -76.27119%;
 }
 .page__main .arc--3 .region:last-child {
-  width: 23.72881%;
-  float: right;
-  margin-right: 0;
-}
-.page__subfeatures .hr--1-2 .region:first-child {
-  margin-left: 33.89831%;
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__subfeatures .hr--1-2 .region:last-child {
-  margin-left: -101.69492%;
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__subfeatures .hr--1-3 .region:first-child {
-  width: 66.10169%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__subfeatures .hr--1-3 .region:last-child {
   width: 32.20339%;
   float: right;
   margin-right: 0;
 }
-.page__subfeatures .hr--2-3 .region {
+.page__main .arc--2 .region,
+.page__main .arc--3 .region:nth-child(2) {
   width: 49.15254%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__subfeatures .hr--2-3 .region:last-child {
+.page__subfeatures .arc--2 .region:last-child {
+  width: 40.67797%;
+  float: right;
+  margin-right: 0;
+}
+.page__subfeatures .arc--3 .region:first-child {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__subfeatures .arc--3 .region:last-child {
+  width: 23.72881%;
+  float: right;
+  margin-right: 0;
+}
+.page__subfeatures .arc--2 .region,
+.page__subfeatures .arc--3 .region:nth-child(2) {
+  width: 57.62712%;
+  float: left;
+  margin-right: 1.69492%;
+}
+
+}
+@media all and (min-width: 120.063em) {
+.page__features .arc--2 .region {
+  width: 49.15254%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__features .arc--3 .region {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__features .arc--3 .region:nth-child(2) {
+  width: 66.10169%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__features .regions:not(.arc--1) .region:last-child {
+  float: right;
+  margin-right: 0;
+}
+.page__main .arc--2 .region {
+  width: 40.67797%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__main .arc--2 .region:last-child {
+  width: 57.62712%;
+  float: right;
+  margin-right: 0;
+}
+.page__main .arc--3 .region:first-child {
+  width: 23.72881%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__main .arc--3 .region:nth-child(2) {
+  width: 15.25424%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__main .arc--3 .region:last-child {
+  width: 57.62712%;
+  float: right;
+  margin-right: 0;
+}
+.page__subfeatures .arc--2 .region {
+  width: 49.15254%;
+  float: left;
+  margin-right: 1.69492%;
+}
+.page__subfeatures .arc--2 .region:last-child {
   float: right;
   margin-right: 0;
 }
 .page__subfeatures .arc--3 .region {
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__subfeatures .arc--3 .region:first-child {
-  margin-left: 33.89831%;
-}
-.page__subfeatures .arc--3 .region:nth-child(2) {
-  margin-left: -67.79661%;
-}
-.page__subfeatures .arc--3 .region:last-child {
-  float: right;
-  margin-right: 0;
-}
-.page__footercols .arc--2 .region {
-  width: 49.15254%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__footercols .arc--3 .region {
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%;
-}
-.page__footercols .arc--4 .region {
   width: 23.72881%;
   float: left;
   margin-right: 1.69492%;
 }
-.page__footercols .regions:not(.arc--1) .region:last-child {
+.page__subfeatures .arc--3 .region:last-child {
+  width: 49.15254%;
   float: right;
   margin-right: 0;
 }

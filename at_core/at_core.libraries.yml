@@ -97,11 +97,11 @@ at.yui3:
 #     http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
 # AT Core libs for theme dev.
-at.devel_colorize_layout:
+at.devel_debug_layout:
   version: 0.0.1
   css:
     theme:
-      styles/css/devel.colorize.layout.css: { every_page: true }
+      styles/css/devel.debug.layout.css: { every_page: true }
 
 at.devel_colorize_regions:
   version: 0.0.1

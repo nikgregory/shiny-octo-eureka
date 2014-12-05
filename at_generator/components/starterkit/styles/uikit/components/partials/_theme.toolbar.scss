@@ -1,0 +1,34 @@
+/**
+ * Toolbar
+ * Drupal core does a poor job of protecting the toolbar items, so we isolate
+ * and override the CSS. The ID should be enough specificity to do the job.
+ ========================================================================== */
+
+#toolbar-administration {
+
+  // We really really don't want content after links.
+  a:after {
+    display: none !important;
+  }
+
+  .toolbar-menu-administration {
+
+    ul {
+      padding: 0;
+    }
+
+    a {
+      color: #434343;
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+  }
+
+  .level-3 ul {
+    padding-#{$flow-from}: 1rem;
+  }
+
+  .toolbar-tray-horizontal a {
+    padding-#{$flow-to}: 1em;
+  }
+}
