@@ -54,9 +54,6 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
-    #- at_core/at.doubletaptogo
-
-#- at_core/at.matchheight
 
 # Respond TODO: test with respond, I have deprecated loading Ie8 specific stylesheets for now, I might bring this back
 # however in the new layout system this is a huge pita, its much easier to load respond for the dwindling numbers of IE8 users.

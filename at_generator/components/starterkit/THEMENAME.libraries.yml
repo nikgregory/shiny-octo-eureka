@@ -69,4 +69,4 @@ scripts:
   js:
     scripts/scripts.js: {}
   dependencies:
-    - at_core/at_fastclick: {}
+    - at_core/at.fastclick
