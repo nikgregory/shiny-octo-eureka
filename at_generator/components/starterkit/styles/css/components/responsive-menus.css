@@ -163,38 +163,36 @@
   word-wrap: normal;
   font: 0/0 a;
 }
-/* line 15, ../../uikit/components/mixins/_menu-dropmenu.scss */
-.ms-dropmenu .rm-block__content {
-      /*
-      a {
-        position: relative;
-        @include output-rhythm(padding, $xx-small $large);
-
-        &:after {
-          position: absolute;
-          @include output-rhythm(right, $medium); // LTR
-        }
-      }
-      */
+/* line 17, ../../uikit/components/mixins/_menu-dropmenu.scss */
+.ms-dropmenu .rm-block__content a {
+  position: relative;
+  padding: 7px 18px;
+  padding: 0.43162rem 1.13rem;
 }
-/* line 28, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 21, ../../uikit/components/mixins/_menu-dropmenu.scss */
+.ms-dropmenu .rm-block__content a:after {
+  position: absolute;
+  right: 16px;
+  right: 1rem;
+}
+/* line 27, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 {
   position: relative;
 }
-/* line 41, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 40, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 li {
   float: left;
   width: 12em;
 }
-/* line 46, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 45, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 li.expanded > a:after {
   content: "";
 }
-/* line 50, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 49, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 li.collapsed > a:after {
   content: '';
 }
-/* line 55, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 54, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 li ul {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
@@ -207,7 +205,7 @@
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-/* line 66, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 65, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .menu-level-1 li:hover > ul, .ms-dropmenu .rm-block__content .menu-level-1 li:focus > ul {
   display: block;
   opacity: 1;
@@ -217,21 +215,21 @@
   width: auto;
   font-family: inherit;
 }
-/* line 81, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 80, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .odd ul {
   left: 0;
   top: auto;
 }
-/* line 87, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 86, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .odd ul > .expanded > a:after {
   content: "";
 }
-/* line 93, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 92, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .odd ul .odd {
   left: 100%;
   top: 0;
 }
-/* line 99, ../../uikit/components/mixins/_menu-dropmenu.scss */
+/* line 98, ../../uikit/components/mixins/_menu-dropmenu.scss */
 .ms-dropmenu .rm-block__content .odd ul .odd > .expanded > a:after {
   content: "";
 }
@@ -467,20 +465,21 @@
   display: none;
 }
 
-/* line 49, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 47, ../../uikit/components/partials/_component.menu.responsive.scss */
 .no-fouc .rm-block .block-menu__content {
   display: none;
 }
 
-/* line 56, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 53, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-region {
   padding: 0;
+  margin: 0;
 }
-/* line 60, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 58, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-region .contextual-region {
   position: static;
 }
-/* line 62, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 60, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-region .contextual-region .contextual {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
@@ -492,7 +491,13 @@
   font: 0/0 a;
 }
 
-/* line 70, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 67, ../../uikit/components/partials/_component.menu.responsive.scss */
+.rm-block {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 73, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-toggle {
   font-size: 16px;
   font-size: 1rem;
@@ -504,15 +509,15 @@
   cursor: pointer;
 }
 
-/* line 89, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 92, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-block__content .menu {
   position: relative;
 }
-/* line 92, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 95, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-block__content .menu > li {
   z-index: 100;
 }
-/* line 96, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 99, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-block__content .menu li {
   position: relative;
   vertical-align: middle;
@@ -521,43 +526,43 @@
   line-height: 24px;
   line-height: 1.5rem;
 }
-/* line 105, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 108, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-block__content .menu a {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-/* line 111, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 114, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-block__content .menu a:hover, .rm-block__content .menu a:focus {
   text-decoration: none;
 }
 
-/* line 132, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 135, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-dropmenu .rm-block__content a {
   position: relative;
   padding: 7px 18px;
   padding: 0.43162rem 1.13rem;
 }
-/* line 136, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 139, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-dropmenu .rm-block__content a:after {
   position: absolute;
   right: 16px;
   right: 1rem;
 }
-/* line 142, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 145, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-dropmenu .rm-block__content li {
   text-align: center;
 }
-/* line 145, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 148, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-dropmenu .rm-block__content li.expanded li {
   text-align: left;
 }
 
-/* line 155, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 158, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-horizontal .rm-block__content a {
   padding: 7px 18px;
   padding: 0.43162rem 1.13rem;
 }
-/* line 158, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 161, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-horizontal .rm-block__content a:before, .ms-horizontal .rm-block__content a:after {
   content: "";
   float: none;
@@ -565,33 +570,32 @@
   padding: 0;
 }
 
-/* line 171, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 174, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-offcanvas .rm-block__content {
   display: none;
   padding: 0 0 7px;
   padding: 0 0 0.43162rem;
 }
-/* line 176, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 179, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-offcanvas > .page,
 .ms-offcanvas .rm-block__content {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
 
-/* line 184, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 187, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-tiles .rm-block__content {
   padding: 7px 0;
   padding: 0.43162rem 0;
 }
-/* line 188, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 191, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-tiles .rm-block__content .menu-level-1 > li {
   margin: 7px 0;
   margin: 0.43162rem 0;
 }
 
-/* line 201, ../../uikit/components/partials/_component.menu.responsive.scss */
+/* line 204, ../../uikit/components/partials/_component.menu.responsive.scss */
 .ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li:last-child {
   border-bottom: none;
 }
-
 /*# sourceMappingURL=responsive-menus.css.map */

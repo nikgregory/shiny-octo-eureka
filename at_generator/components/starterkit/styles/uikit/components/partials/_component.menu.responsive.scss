@@ -42,8 +42,6 @@
 @include horizontal($arrows: false);
 
 
-
-
 // Hide the menu until the JS is loaded, on some pages such as "create new account"
 // this can take a split second longer than usual, so this prevents a FOUC.
 .no-fouc .rm-block .block-menu__content {
@@ -51,10 +49,10 @@
 }
 
 
-
 // Global styles for the navbar region.
 .rm-region {
   padding: 0;
+  margin: 0;
 
   // Visually hide contextual links, they can get in the way of responsive menu styles.
   .contextual-region {
@@ -65,6 +63,11 @@
   }
 }
 
+
+.rm-block {
+  margin: 0;
+  padding: 0;
+}
 
 // Provide a consistant style for visible click handles.
 .rm-toggle  {

@@ -129,20 +129,21 @@ a {
 }
 
 
-// Lists.
+// Equalize margins for indented elements.
 ul,
-ol {
-  @include output-rhythm(padding, 0 0 0 $medium); // LTR
-
-  @at-root [dir="rtl"] ul, [dir="rtl"] ol {
-    @include output-rhythm(padding, 0 $large 0 0);
-  }
+ol,
+dl {
+  @include output-rhythm(padding-#{$flow-from}, $xxxx-large); // LTR
+  padding-#{$flow-to}: 0;
 }
 
 
 // Blockquotes, Bootstrap style.
 blockquote {
   @include output-rhythm(padding, $medium);
+  @include output-rhythm(margin-#{$flow-from}, $xxxx-large); // LTR, match list indent.
+
+  margin-#{$flow-to}: 0;
   border-#{$flow-from}: 5px solid; // LTR
 
   p {

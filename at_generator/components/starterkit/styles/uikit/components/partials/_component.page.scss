@@ -1,7 +1,7 @@
 /**
  * Page
  *  - mainly for markup that is printed directly in page.html.twig and
- *    .region {}
+ *    .l-r {}
  ========================================================================== */
 
 // Page wrapper
@@ -13,31 +13,31 @@
 }
 
 // We need some padding to avoid browser collisions.
-.page-row {
+.l-pr {
   padding: 0 2vw;
 }
 
-// Regions
-//  - .regions is the main wrapper selector for all regions within a page.
-.regions {
+// Regions wrapper
+//  - .l-rw is the main wrapper selector for all regions within a page.
+.l-rw {
 }
 
 
 // Region
-//  - .region is the global selector for all regions, each region also includes
-//    a region-name selector, e.g. .region__sidebar-first {}
+//  - .l-r is the global selector for all regions, each region also includes
+//    a region-name selector, e.g. .l-r__sidebar-first {}
 //  - animate regions for that smooth flow effect, e.g. on orientation change.
 //  - apply a micro clearfix globally, this ensures dynamic height content
 //    does not disrupt the layout in unexpected ways.
-.region {
+.l-r {
   transition: $transition_global;
-  @include output-rhythm(padding, $x-large 0);
   @include clearfix-micro;
 }
 
-// Remove layout form hidden regions.
-.region--page-top,
-.region--page-bottom {
+// Remove layout form hidden regions. These regions have no row, so
+// they get a basic region class unlike theme regions.
+.page-top,
+.page-bottom {
   padding: 0;
   margin: 0;
 }
@@ -47,55 +47,59 @@
 //  You can find your layouts page row and region classes by viewing the theme
 //  settings and looking under Layouts > Options > Layout Selectors.
 //
-//  Do not add layout to .regions directly, instead if you want to modify the layout
+//  Do not add layout to .l-rw directly, instead if you want to modify the layout
 //  you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
 
 
 // Messages
-.page__messages {
-  .regions {}
+.pr-messages {
+  .l-rw {}
 }
 
 
 // Messages
-.page__leaderboard {
-  .regions {}
+.pr-leaderboard {
+  .l-rw {}
 }
 
 
 // Header
-.page__header {
-  .regions {}
+.pr-header {
+  .l-rw {}
 }
 
 
 // Navbar
-.page__navbar {
-  .regions {}
+.pr-navbar {
+  .l-rw {
+    .l-r {
+      //padding: 0;
+    }
+  }
 }
 
 
 // Features
-.page__features {
-  .regions {}
+.pr-features {
+  .l-rw {}
 }
 
 
 // Main
-.page__main {
-  .regions {}
+.pr-main {
+  .l-rw {}
 }
 
 
 // Tertiary
-.page__tertiary {
-  .regions {}
+.pr-tertiary {
+  .l-rw {}
 }
 
 
 // Footer
-.page__footer {
-  .regions {}
+.pr-footer {
+  .l-rw {}
 }
 
 

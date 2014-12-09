@@ -7,10 +7,10 @@
 @import "site-builder-base";
 
 
-// Set the Susy container on .regions, this controls the max-width. The
-// .regions class is set on each rows inner <div> wrapper to constrain the
+// Set the Susy container on .l-rw, this controls the max-width. The
+// .l-rw class is set on each rows inner wrapper to constrain the
 // the max-width of a group of regions, while the main row wrapper is always
 // full width.
-.regions {
+.l-rw {
   @include container($container-12);
 }

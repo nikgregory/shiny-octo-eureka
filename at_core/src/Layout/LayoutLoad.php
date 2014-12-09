@@ -40,6 +40,28 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
     return $this->active_regions;
   }
 
+  // Returns the row name for a region.
+  public function regionAttributes($region) {
+    $region_row = '';
+    $config_settings = \Drupal::config($this->theme_name . '.settings')->get('settings');
+
+    // If rows are empty return early.
+    if (empty($this->layout_config['rows'])) {
+      return;
+    }
+
+    foreach ($this->layout_config['rows'] as $row => $regions) {
+      foreach ($regions['regions'] as $region_key => $region_name) {
+        if ($region_key == $region) {
+          $region_row = $row;
+          break;
+        }
+      }
+    }
+
+    return $region_row;
+  }
+
   // Return row attributes
   public function rowAttributes() {
     $variables = array();
@@ -85,8 +107,9 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
         $variables[$row_region_key . '__attributes'] = new Attribute(array('class' => array()));
 
         // Add the row class in page generate, shift the attributes to the regions wrapper
+        $variables[$row_region_key . '__attributes']['class'][] = 'l-rw';  // rw = region wrapper
         $variables[$row_region_key . '__attributes']['class'][] = 'regions';
-        $variables[$row_region_key . '__attributes']['class'][] = 'regions-'. str_replace('_', '-', $row_region_key);
+        $variables[$row_region_key . '__attributes']['class'][] = 'pr-'. str_replace('_', '-', $row_region_key) . '__rw'; // pr = page row
 
         // Add theme setting defined classes if Classitis is enabled.
         if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {

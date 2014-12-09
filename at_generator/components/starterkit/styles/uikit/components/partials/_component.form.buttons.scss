@@ -12,9 +12,12 @@
 
 button,
 .button {
-  @include output-rhythm(padding, $xx-small $medium);
+  max-width: 100%;
   width: auto;
   position: relative;
+  box-sizing: border-box;
+  @include output-rhythm(height, $form_input_button_select_height);
+  @include output-rhythm(padding, 0 $x-small);
 
   border-radius: $button-border-radius;
   border: $button-border-width $button-border-style;
@@ -95,12 +98,13 @@ button,
 .dropbutton {
   input {
     text-align: left; // LTR
+    @include output-rhythm(height, $form_input_button_select_height -$button-border-width * 2);
   }
 
   .dropbutton-action > * {
     white-space: nowrap;
     line-height: normal; // some drop buttons are links
-    @include output-rhythm(padding, $xx-small $medium);
+    @include output-rhythm(padding, 0 $x-small);
   }
 
   .secondary-action {
@@ -111,6 +115,7 @@ button,
       border: 0;
       width: 100%;
 
+
       &:hover,
       &:focus {
         border-radius: 0 0 0 $button-border-radius;
@@ -120,7 +125,14 @@ button,
 
   .dropbutton-toggle {
     button {
-      &:hover {
+      background: none;
+      box-shadow: none;
+
+      &:hover,
+      &:focus,
+      &:actived {
+        background: none;
+        box-shadow: none;
       }
     }
   }

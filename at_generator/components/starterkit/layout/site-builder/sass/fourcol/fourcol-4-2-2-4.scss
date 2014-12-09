@@ -12,35 +12,26 @@
 .fourcol-4-2-2-4 {
 
   // Two active regions.
-  .arc--2 {
-    .region {
-      @include span(6 of 12);
-    }
+  .arc--2 .l-r {
+    @include span(6 of 12);
   }
-
-
-  // Three active regions.
-  .arc--3 {
-    .region {
-      @include span(4 of 12);
-    }
-  }
-
 
   // Four active regions.
   .arc--4 {
-    .region {
+    .l-r {
       @include span(2 of 12);
-
-      &:first-child,
-      &:last-child {
-        @include span(4 of 12);
-      }
     }
   }
 
+  // Three or four active regions.
+  .arc--3 .l-r,
+  .arc--4 .l-r:first-child,
+  .arc--4 .l-r:last-child {
+    @include span(4 of 12);
+  }
+
   // Last child is always last.
-  .regions:not(.arc--1) .region:last-child {
+  .l-rw:not(.arc--1) .l-r:last-child {
     @include last;
   }
 }

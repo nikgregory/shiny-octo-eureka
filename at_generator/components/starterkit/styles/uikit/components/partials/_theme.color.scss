@@ -86,7 +86,7 @@ hr {
 /**
  * Page
  *  - mainly for markup that is printed directly in page.html.twig and
- *    .region {}
+ *    .l-r {}
  ========================================================================== */
 
 // Page wrapper.
@@ -96,8 +96,8 @@ hr {
 
 
 // Regions
-//  - .regions is the main wrapper selector for all regions within a page.
-.regions {
+//  - .l-rw is the main wrapper selector for all regions within a page.
+.l-rw {
   //background-color: $regions-background-color;
 }
 
@@ -105,21 +105,21 @@ hr {
 //  Page Rows - these match the Site Builder layout.
 
 // Messages
-.page__messages {}
+.pr-messages {}
 
 
 // Messages
-.page__leaderboard {}
+.pr-leaderboard {}
 
 
 // Header
-.page__header {
+.pr-header {
   @include page-row-colors($page-header-background-color, $page-header-color, $page-row-fullwidth);
 }
 
 
 // Navbar
-.page__navbar {
+.pr-navbar {
   @include page-row-colors($page-navbar-background-color, $page-navbar-color, $page-row-fullwidth);
 
   a,
@@ -130,22 +130,22 @@ hr {
 
 
 // Features
-.page__features {
+.pr-features {
   @include page-row-colors($page-features-background-color, $page-features-color, $page-row-fullwidth);
 }
 
 
 // Main
-.page__main {}
+.pr-main {}
 
 
 // Tertiary
-.page__tertiary {
+.pr-tertiary {
   @include page-row-colors($page-tertiary-background-color, $page-tertiary-color , $page-row-fullwidth);
 }
 
 // Footer
-.page__footer {
+.pr-footer {
   @include page-row-colors($page-footer-background-color, $page-footer-color, $page-row-fullwidth);
 
   a,
@@ -521,12 +521,14 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-
   color: $form-text-color;
   border-color: $form-border-color;
   background-color: $form-background-color;
 
-  box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
+  @if $form-box-shadow == true {
+    box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
+  }
+
 
   &:focus {
     border-color: $form-border-color;
@@ -655,11 +657,15 @@ textarea.placeholder_text {
 
 button,
 .button {
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   color: $button-color;
   background: $button-background-color;
   border-color: $button-border-color;
   opacity: 0.9;
+
+  @if $button-box-shadow == true {
+    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  }
+
 
   &:hover,
   &:focus {

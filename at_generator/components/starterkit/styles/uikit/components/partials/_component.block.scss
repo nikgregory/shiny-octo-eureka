@@ -5,7 +5,10 @@
 
 // Almost everything in Druapl 8 is a block, so these classes are very generic
 // and it can be dangerous to add styles like font-size or colors.
-.block {}
+.block {
+  @include output-rhythm(padding, $x-large 0);
+}
+
 .block__title {}
 
 // The block has a title.

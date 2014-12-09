@@ -21,12 +21,12 @@
   .node__footer,
   ul.links,
   .comment-form-wrapper,
-  .region--page-top,
-  .region--page-bottom,
+  .l-r--page-top,
+  .l-r--page-bottom,
   .contextual,
-  .page__temporary-tabs,
+  .pr-temporary-tabs,
   .tabs,
-  .regions-navbar,
+  .l-rw-navbar,
   .rmr,
   [class*="region--sidebar-"] {
     display: none;
@@ -35,7 +35,7 @@
     float: none;
   }
 
-  .page__main .region--content,
+  .pr-main .l-r--content,
   .block-main-content,
   article {
     margin: 0;

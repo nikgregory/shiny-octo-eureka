@@ -34,11 +34,11 @@ a:hover, a:focus {
 
 /* line 44, ../../uikit/components/partials/_theme.color.scss */
 blockquote {
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 /* line 49, ../../uikit/components/partials/_theme.color.scss */
 blockquote p:first-child:before {
-  color: #dcdcdc;
+  color: #cccccc;
 }
 /* line 55, ../../uikit/components/partials/_theme.color.scss */
 blockquote small {
@@ -46,12 +46,12 @@ blockquote small {
 }
 /* line 60, ../../uikit/components/partials/_theme.color.scss */
 blockquote.pull-right {
-  border-right-color: #dcdcdc;
+  border-right-color: #cccccc;
 }
 
 /* line 67, ../../uikit/components/partials/_theme.color.scss */
 hr {
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 
 /**
@@ -75,7 +75,7 @@ hr {
 /**
  * Page
  *  - mainly for markup that is printed directly in page.html.twig and
- *    .region {}
+ *    .l-r {}
  ========================================================================== */
 /* line 93, ../../uikit/components/partials/_theme.color.scss */
 .page {
@@ -83,68 +83,68 @@ hr {
 }
 
 /* line 116, ../../uikit/components/partials/_theme.color.scss */
-.page__header {
+.pr-header {
   background-color: #ffffff;
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.page__header .regions {
+.pr-header .l-rw {
   background-color: inherit;
 }
 
 /* line 122, ../../uikit/components/partials/_theme.color.scss */
-.page__navbar {
+.pr-navbar {
   background-color: #666666;
   color: #ffffff;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.page__navbar .regions {
+.pr-navbar .l-rw {
   background-color: inherit;
 }
 /* line 125, ../../uikit/components/partials/_theme.color.scss */
-.page__navbar a,
-.page__navbar .menu a {
+.pr-navbar a,
+.pr-navbar .menu a {
   color: inherit;
 }
 
 /* line 133, ../../uikit/components/partials/_theme.color.scss */
-.page__features {
-  background-color: #999999;
+.pr-features {
+  background-color: #d3d3d3;
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.page__features .regions {
+.pr-features .l-rw {
   background-color: inherit;
 }
 
 /* line 143, ../../uikit/components/partials/_theme.color.scss */
-.page__tertiary {
-  background-color: #999999;
+.pr-tertiary {
+  background-color: #d3d3d3;
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.page__tertiary .regions {
+.pr-tertiary .l-rw {
   background-color: inherit;
 }
 
 /* line 148, ../../uikit/components/partials/_theme.color.scss */
-.page__footer {
+.pr-footer {
   background-color: #666666;
   color: #ffffff;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.page__footer .regions {
+.pr-footer .l-rw {
   background-color: inherit;
 }
 /* line 151, ../../uikit/components/partials/_theme.color.scss */
-.page__footer a,
-.page__footer .menu a {
+.pr-footer a,
+.pr-footer .menu a {
   color: inherit;
 }
 /* line 155, ../../uikit/components/partials/_theme.color.scss */
-.page__footer a:hover, .page__footer a:focus,
-.page__footer .menu a:hover,
-.page__footer .menu a:focus {
+.pr-footer a:hover, .pr-footer a:focus,
+.pr-footer .menu a:hover,
+.pr-footer .menu a:focus {
   color: inherit;
 }
 
@@ -284,7 +284,7 @@ hr {
  ========================================================================== */
 /* line 413, ../../uikit/components/partials/_theme.color.scss */
 .breadcrumb li:before {
-  color: #dcdcdc;
+  color: #cccccc;
 }
 /* line 418, ../../uikit/components/partials/_theme.color.scss */
 .breadcrumb a {
@@ -298,7 +298,7 @@ hr {
  ========================================================================== */
 /* line 430, ../../uikit/components/partials/_theme.color.scss */
 table {
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 
 /**
@@ -307,20 +307,20 @@ table {
  ========================================================================== */
 /* line 441, ../../uikit/components/partials/_theme.color.scss */
 tr {
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 
 /* line 482, ../../uikit/components/partials/_theme.color.scss */
 thead tr {
   color: #363636;
-  background-color: #eeeeee;
+  background-color: #ededed;
 }
 
 /* line 490, ../../uikit/components/partials/_theme.color.scss */
 tr,
 td,
 th {
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 
 /**
@@ -349,11 +349,10 @@ input[type="time"],
 input[type="url"],
 input[type="week"] {
   color: #505050;
-  border-color: #E5E5E5;
+  border-color: #cccccc;
   background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset;
 }
-/* line 531, ../../uikit/components/partials/_theme.color.scss */
+/* line 533, ../../uikit/components/partials/_theme.color.scss */
 textarea:focus,
 select:focus,
 input[type="date"]:focus,
@@ -369,10 +368,10 @@ input[type="text"]:focus,
 input[type="time"]:focus,
 input[type="url"]:focus,
 input[type="week"]:focus {
-  border-color: #E5E5E5;
+  border-color: #cccccc;
   color: #363636;
 }
-/* line 536, ../../uikit/components/partials/_theme.color.scss */
+/* line 538, ../../uikit/components/partials/_theme.color.scss */
 textarea:hover, textarea:focus,
 select:hover,
 select:focus,
@@ -402,9 +401,9 @@ input[type="url"]:hover,
 input[type="url"]:focus,
 input[type="week"]:hover,
 input[type="week"]:focus {
-  background-color: #fbfbfb;
+  background-color: white;
 }
-/* line 542, ../../uikit/components/partials/_theme.color.scss */
+/* line 544, ../../uikit/components/partials/_theme.color.scss */
 textarea[disabled]:hover, textarea[disabled]:focus,
 select[disabled]:hover,
 select[disabled]:focus,
@@ -443,20 +442,20 @@ input[type="week"][disabled]:focus {
  * @see collapse.js
  * @thanks http://nicolasgallagher.com/css-background-image-hacks/
  */
-/* line 556, ../../uikit/components/partials/_theme.color.scss */
+/* line 558, ../../uikit/components/partials/_theme.color.scss */
 details {
-  border-color: #E5E5E5;
+  border-color: #cccccc;
 }
 
-/* line 565, ../../uikit/components/partials/_theme.color.scss */
+/* line 567, ../../uikit/components/partials/_theme.color.scss */
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  background: #eeeeee;
+  background: #ededed;
   color: #363636;
 }
 
-/* line 573, ../../uikit/components/partials/_theme.color.scss */
+/* line 575, ../../uikit/components/partials/_theme.color.scss */
 button[disabled],
 input[disabled],
 select[disabled],
@@ -464,23 +463,23 @@ select[disabled] option,
 select[disabled] optgroup,
 textarea[disabled],
 a.button_disabled {
-  background: #eeeeee;
+  background: #ededed;
   color: #363636;
 }
 
-/* line 586, ../../uikit/components/partials/_theme.color.scss */
+/* line 588, ../../uikit/components/partials/_theme.color.scss */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #505050;
 }
 
-/* line 591, ../../uikit/components/partials/_theme.color.scss */
+/* line 593, ../../uikit/components/partials/_theme.color.scss */
 input:-moz-placeholder,
 textarea:-moz-placeholder {
   color: #505050;
 }
 
-/* line 596, ../../uikit/components/partials/_theme.color.scss */
+/* line 598, ../../uikit/components/partials/_theme.color.scss */
 input.placeholder_text,
 textarea.placeholder_text {
   color: #505050;
@@ -489,32 +488,32 @@ textarea.placeholder_text {
 /**
  * Form Theme
  ========================================================================== */
-/* line 607, ../../uikit/components/partials/_theme.color.scss */
+/* line 609, ../../uikit/components/partials/_theme.color.scss */
 .filter-wrapper {
-  border-color: #E5E5E5;
+  border-color: #cccccc;
 }
 
-/* line 613, ../../uikit/components/partials/_theme.color.scss */
+/* line 615, ../../uikit/components/partials/_theme.color.scss */
 .tips {
   color: #505050;
 }
 
-/* line 619, ../../uikit/components/partials/_theme.color.scss */
+/* line 621, ../../uikit/components/partials/_theme.color.scss */
 .description {
   color: #505050;
 }
 
-/* line 624, ../../uikit/components/partials/_theme.color.scss */
+/* line 626, ../../uikit/components/partials/_theme.color.scss */
 .marker {
   color: #ee0000;
 }
 
-/* line 629, ../../uikit/components/partials/_theme.color.scss */
+/* line 631, ../../uikit/components/partials/_theme.color.scss */
 .form-required:after {
   color: #ee0000;
 }
 
-/* line 636, ../../uikit/components/partials/_theme.color.scss */
+/* line 638, ../../uikit/components/partials/_theme.color.scss */
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
@@ -532,49 +531,48 @@ textarea.placeholder_text {
  *  - drop buttons
  *  - action link buttons
  ========================================================================== */
-/* line 656, ../../uikit/components/partials/_theme.color.scss */
+/* line 658, ../../uikit/components/partials/_theme.color.scss */
 button,
 .button {
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   color: #363636;
-  background: #fbfbfb;
-  border-color: #dcdcdc;
+  background: #fafafa;
+  border-color: #cccccc;
   opacity: 0.9;
 }
-/* line 664, ../../uikit/components/partials/_theme.color.scss */
+/* line 670, ../../uikit/components/partials/_theme.color.scss */
 button:hover, button:focus,
 .button:hover,
 .button:focus {
   opacity: 1;
   color: #363636;
-  background-color: #f3f3f3;
+  background-color: #f2f2f2;
 }
-/* line 672, ../../uikit/components/partials/_theme.color.scss */
+/* line 678, ../../uikit/components/partials/_theme.color.scss */
 button[disabled]:hover,
 .button[disabled]:hover {
   color: #2e2e2e;
 }
 
-/* line 680, ../../uikit/components/partials/_theme.color.scss */
+/* line 686, ../../uikit/components/partials/_theme.color.scss */
 .button--primary {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .button--primary:link, .button--primary:visited {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
   color: #fffffe;
   background-color: #262626;
-  border-color: #8c8c8c;
+  border-color: #c6c6c6;
 }
 
-/* line 686, ../../uikit/components/partials/_theme.color.scss */
+/* line 692, ../../uikit/components/partials/_theme.color.scss */
 .button--danger {
   color: #a51b00;
   background-color: transparent;
@@ -593,82 +591,82 @@ button[disabled]:hover,
   border-color: transparent;
 }
 
-/* line 692, ../../uikit/components/partials/_theme.color.scss */
+/* line 698, ../../uikit/components/partials/_theme.color.scss */
 .button-action {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .button-action:link, .button-action:visited {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .button-action:hover, .button-action:focus, .button-action:active, .button-action.active {
   color: #fffffe;
   background-color: #262626;
-  border-color: #8c8c8c;
+  border-color: #c6c6c6;
 }
 
 /* Drop buttons */
-/* line 698, ../../uikit/components/partials/_theme.color.scss */
+/* line 704, ../../uikit/components/partials/_theme.color.scss */
 .js .dropbutton-widget {
   background-color: #f7f7f7;
-  border-color: #dcdcdc;
+  border-color: #cccccc;
 }
 
-/* line 705, ../../uikit/components/partials/_theme.color.scss */
+/* line 711, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .secondary-action {
-  border-top-color: #dcdcdc;
+  border-top-color: #cccccc;
 }
-/* line 708, ../../uikit/components/partials/_theme.color.scss */
+/* line 714, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .secondary-action .button {
   background: #f7f7f7;
 }
-/* line 719, ../../uikit/components/partials/_theme.color.scss */
+/* line 725, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .dropbutton-toggle button:hover {
   background: transparent;
 }
 
-/* line 729, ../../uikit/components/partials/_theme.color.scss */
+/* line 735, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton {
-  border-right-color: #dcdcdc;
+  border-right-color: #cccccc;
 }
-/* line 733, ../../uikit/components/partials/_theme.color.scss */
+/* line 739, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .publish .button {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
   color: #fffffe;
   background-color: #333333;
-  border-color: #999999;
+  border-color: #d3d3d3;
 }
 /* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
   color: #fffffe;
   background-color: #262626;
-  border-color: #8c8c8c;
+  border-color: #c6c6c6;
 }
-/* line 740, ../../uikit/components/partials/_theme.color.scss */
+/* line 746, ../../uikit/components/partials/_theme.color.scss */
 [dir="rtl"] .dropbutton-multiple .dropbutton {
-  border-left-color: #dcdcdc;
+  border-left-color: #cccccc;
 }
-/* line 747, ../../uikit/components/partials/_theme.color.scss */
+/* line 753, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple.open .dropbutton-action .button {
-  border-radius: 4px 0 0 0;
+  border-radius: 2px 0 0 0;
 }
-/* line 756, ../../uikit/components/partials/_theme.color.scss */
+/* line 762, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .secondary-action .button {
-  border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 2px;
 }
-/* line 759, ../../uikit/components/partials/_theme.color.scss */
+/* line 765, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .secondary-action .button:hover, .dropbutton-multiple .dropbutton .secondary-action .button:focus {
-  border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 2px;
 }
 
 /**
@@ -676,7 +674,7 @@ button[disabled]:hover,
  * AT unsets Drupal core file field CSS for image icons and replaces them
  * with FontAwesome icons.
  ========================================================================== */
-/* line 776, ../../uikit/components/partials/_theme.color.scss */
+/* line 782, ../../uikit/components/partials/_theme.color.scss */
 .file a:before {
   color: #363636;
 }
@@ -690,10 +688,10 @@ button[disabled]:hover,
  *
  *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
  ========================================================================== */
-/* line 819, ../../uikit/components/partials/_theme.color.scss */
+/* line 825, ../../uikit/components/partials/_theme.color.scss */
 .filter-help a:after,
 .more-help-link a:after {
-  color: #dcdcdc;
+  color: #cccccc;
 }
 
 /**
@@ -701,63 +699,62 @@ button[disabled]:hover,
  *  - style system messages such as status, warning and error.
  ========================================================================== */
 /* Success (status) */
-/* line 831, ../../uikit/components/partials/_theme.color.scss */
+/* line 837, ../../uikit/components/partials/_theme.color.scss */
 .messages--status,
 table tr.ok {
   background-color: #f3faef;
 }
 
-/* line 836, ../../uikit/components/partials/_theme.color.scss */
+/* line 842, ../../uikit/components/partials/_theme.color.scss */
 .messages--status,
 .ok {
   color: #325e1c;
 }
 
 /* Warning */
-/* line 843, ../../uikit/components/partials/_theme.color.scss */
+/* line 849, ../../uikit/components/partials/_theme.color.scss */
 .messages--warning,
 table tr.warning {
   background-color: #fdf8ed;
 }
 
-/* line 848, ../../uikit/components/partials/_theme.color.scss */
+/* line 854, ../../uikit/components/partials/_theme.color.scss */
 .messages--warning,
 .warning {
   color: #734c00;
 }
 
 /* Error */
-/* line 855, ../../uikit/components/partials/_theme.color.scss */
+/* line 861, ../../uikit/components/partials/_theme.color.scss */
 .messages--error,
 table tr.error {
   background-color: #fcf4f2;
 }
 
-/* line 860, ../../uikit/components/partials/_theme.color.scss */
+/* line 866, ../../uikit/components/partials/_theme.color.scss */
 .messages--error,
 .error {
   color: #a51b00;
 }
 
-/* line 867, ../../uikit/components/partials/_theme.color.scss */
+/* line 873, ../../uikit/components/partials/_theme.color.scss */
 .dev-query {
   color: #f7f7f7;
 }
 
-/* line 873, ../../uikit/components/partials/_theme.color.scss */
+/* line 879, ../../uikit/components/partials/_theme.color.scss */
 body > pre,
 .xdebug-var-dump {
   color: #f7f7f7;
 }
 
-/* line 880, ../../uikit/components/partials/_theme.color.scss */
+/* line 886, ../../uikit/components/partials/_theme.color.scss */
 .page .xdebug-var-dump {
   color: #363636;
 }
 
-/* line 888, ../../uikit/components/partials/_theme.color.scss */
+/* line 894, ../../uikit/components/partials/_theme.color.scss */
 body:before {
   color: #a51b00;
 }
-
 /*# sourceMappingURL=color.css.map */

@@ -14,11 +14,9 @@
     @include output-rhythm(padding, $xx-small 0);
   }
 
-  /**
-   * Image Alignment Theme Settings
-   * - settings are applied using the Image extension in theme settings, where you can
-   *   set image alignment and captions per node type and view mode.
-   */
+  // Image Alignment Theme Settings
+  // - settings are applied using the Image extension in theme settings, where you can
+  //   set image alignment and captions per node type and view mode.
   &.align-none figure,
   &.align-left figure {
     @include output-rhythm(margin, 0 $medium $medium 0); // LTR

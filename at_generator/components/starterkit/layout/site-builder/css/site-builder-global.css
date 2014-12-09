@@ -1,2 +1,2 @@
-.regions { max-width: 75em; margin-left: auto; margin-right: auto; }
-.regions:after { content: " "; display: block; clear: both; }
+.l-rw { max-width: 75em; margin-left: auto; margin-right: auto; }
+.l-rw:after { content: " "; display: block; clear: both; }

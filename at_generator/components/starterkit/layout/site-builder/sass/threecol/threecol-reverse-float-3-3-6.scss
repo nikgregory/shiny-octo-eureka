@@ -18,7 +18,7 @@
   .hr--1-2,
   .hr--1-3,
   .hr--2-3 {
-    .region {
+    .l-r {
       @include span(6 of 12);
     }
   }
@@ -26,7 +26,7 @@
   // Region first and second OR third are active.
   .hr--1-2,
   .hr--1-3 {
-    .region {
+    .l-r {
       &:first-child {
         @include last;
       }
@@ -34,13 +34,13 @@
   }
 
   // Region second and third are active.
-  .hr--2-3 .region:last-child {
+  .hr--2-3 .l-r:last-child {
     @include last;
   }
 
   // All 3col regions are active.
   .arc--3 {
-    .region {
+    .l-r {
       @include span(3 of 12);
 
       &:first-child {

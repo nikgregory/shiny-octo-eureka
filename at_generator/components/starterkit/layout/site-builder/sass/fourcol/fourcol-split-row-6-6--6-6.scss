@@ -14,40 +14,31 @@
 
 .fourcol-split-row-6-6--6-6 {
 
-  .arc--2 {
-    .region {
-      @include span(6 of 12);
+  // Two three or four active regions.
+  .arc--2 .l-r,
+  .arc--3 .l-r:first-child,
+  .arc--4 .l-r {
+    @include span(6 of 12);
+  }
 
-      &:last-child {
-        @include last;
-      }
+  // Two active regions.
+  .arc--2 .l-r:last-child {
+    @include last;
+  }
+
+  // Three active regions.
+  .arc--3 .l-r{
+    &:nth-child(2) {
+      @include span(6 of 12 last);
+    }
+
+    &:last-child {
+      clear: both;
     }
   }
 
-
-  .arc--3 {
-    .region {
-      &:first-child {
-        @include span(6 of 12);
-      }
-
-      &:nth-child(2) {
-        @include span(6 of 12 last);
-      }
-    }
-  }
-
-
-  .arc--4 {
-    .region {
-      &:nth-child(2n+1) {
-        @include span(6 of 12);
-      }
-
-      &:nth-child(2n+2) {
-        @include span(6 of 12 last);
-      }
-    }
+  // Four active regions.
+  .arc--4 .l-r:nth-child(2n) {
+    @include last;
   }
 }
-

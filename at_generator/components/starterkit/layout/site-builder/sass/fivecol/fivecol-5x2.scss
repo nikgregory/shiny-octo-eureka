@@ -7,7 +7,7 @@
 
   // Two active regions.
   .arc--2 {
-    .region {
+    .l-r {
       @include span(6 of 12);
     }
   }
@@ -15,7 +15,7 @@
 
   // Three active regions.
   .arc--3 {
-    .region {
+    .l-r {
       @include span(4 of 12);
     }
   }
@@ -23,7 +23,7 @@
 
   // Four active regions.
   .arc--4 {
-    .region {
+    .l-r {
       @include span(3 of 12);
     }
   }
@@ -32,14 +32,14 @@
   // Five active regions.
   @include with-layout($container-10) {
     .arc--5 {
-      .region {
+      .l-r {
         @include span(2 of 10);
       }
     }
   }
 
   // The last region in the source is always the :last-child.
-  .regions:not(.arc--1) .region:last-child {
+  .l-rw:not(.arc--1) .l-r:last-child {
     @include last;
   }
 }

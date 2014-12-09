@@ -26,8 +26,9 @@
 #}
 {%
   set classes = [
+    'l-r',
     'region',
-    'region--' ~ region|clean_class,
+    region_row ? 'pr-' ~ region_row ~ '__' ~ region|clean_class : region|clean_class
   ]
 %}
 {% if content %}

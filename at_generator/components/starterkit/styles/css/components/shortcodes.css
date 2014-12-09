@@ -34,7 +34,7 @@
   margin-right: auto;
 }
 
-@media all and (min-width: 45em) {
+@media all and (max-width: 60em) {
   /* line 36, ../../uikit/components/partials/_theme.shortcodes.scss */
   .pull-right,
   [dir="rtl"] .pull-left {
@@ -72,7 +72,7 @@
     width: 66.6667%;
   }
 }
-@media all and (min-width: 45em) {
+@media all and (max-width: 60em) {
   /* line 71, ../../uikit/components/partials/_theme.shortcodes.scss */
   .grid-block-2 .block {
     width: 49.15254%;
@@ -278,5 +278,4 @@
   margin-bottom: 20px;
 }
 */
-
 /*# sourceMappingURL=shortcodes.css.map */

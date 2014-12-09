@@ -31,7 +31,7 @@
 }
 
 // Layout columns and pull classes
-@media #{$tablet} {
+@media #{$mobile} {
 
   .pull-right,
   [dir="rtl"] .pull-left {
@@ -65,7 +65,7 @@
 }
 
 // Grid blocks
-@media #{$tablet} {
+@media #{$mobile} {
 
   .grid-block-2 {
     .block {

@@ -21,7 +21,7 @@
 
   // Second and third is a special case.
   .hr--2-3 {
-    .region {
+    .l-r {
       &:first-child {
         @include span(6 of 12);
       }
@@ -34,7 +34,7 @@
 
   // First, second and third.
   .hr--1-2-3 {
-    .region {
+    .l-r {
       &:nth-child(2) {
         @include span(6 of 12);
       }
@@ -47,7 +47,7 @@
 
   // Second, third and fourth.
   .hr--2-3-4 {
-    .region {
+    .l-r {
       &:first-child {
         @include span(6 of 12);
       }
@@ -64,7 +64,7 @@
 
   // All regions.
   .arc--4 {
-    .region {
+    .l-r {
       &:nth-child(2) {
         @include span(6 of 12);
       }

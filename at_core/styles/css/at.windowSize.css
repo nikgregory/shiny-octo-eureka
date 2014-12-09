@@ -1,0 +1,27 @@
+/* Basic styles for the window size debugger */
+/* line 2, ../sass/at.windowSize.scss */
+.window-size-indicator {
+  background-color: rgba(0, 0, 0, 0.9);
+  bottom: 3px;
+  color: #fff;
+  font: 1rem/1 sans-serif;
+  padding: 3px 10px;
+  position: fixed;
+  right: 3px;
+  opacity: 0.95;
+  z-index: 999999;
+  border-radius: 4px;
+  width: 100px;
+  text-align: center;
+}
+/* line 16, ../sass/at.windowSize.scss */
+.window-size-indicator p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 22, ../sass/at.windowSize.scss */
+.wsi_em {
+  right: 105px;
+}
+/*# sourceMappingURL=at.windowSize.css.map */

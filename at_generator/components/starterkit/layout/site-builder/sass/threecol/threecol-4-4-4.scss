@@ -10,19 +10,19 @@
 .threecol-4-4-4 {
 
   // Two active regions.
-  .arc--2 .region {
+  .arc--2 .l-r {
     @include span(6 of 12);
   }
 
   // Three active regions.
-  .arc--3 .region {
+  .arc--3 .l-r {
     @include span(4 of 12);
   }
 
   // Two and tree active regions.
   .arc--2,
   .arc--3 {
-    .region:last-child {
+    .l-r:last-child {
       @include last;
     }
   }

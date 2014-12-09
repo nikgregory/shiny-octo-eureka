@@ -26,7 +26,7 @@
   }
 }
 
-@media #{$tablet} {
+@media #{$mobile} {
   @include list-multicolumn('.list-multicolumn', 12em);
 }
 
@@ -97,7 +97,7 @@ dd {
 
 
 // Horizontal description lists, adjust the media query to suit.
-@media #{$tablet} {
+@media #{$mobile} {
   .dl-horizontal {
     dt {
       float: $flow-from;

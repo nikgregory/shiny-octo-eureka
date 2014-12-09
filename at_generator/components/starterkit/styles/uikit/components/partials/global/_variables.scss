@@ -151,21 +151,21 @@ $font-monospace   : $courier;
 // -----------------------------------------------------------------------------
 $border-width                : 1px;
 $border-style                : solid;
-$border-color                : #dcdcdc;
-$border-radius               : 4px;
+$border-color                : #cccccc;
+$border-radius               : 2px;
 
 
 // Main colors
 // -----------------------------------------------------------------------------
 $primary-color               : #333333;
 $secondary-color             : #666666;
-$tertiary-color              : #999999;
+$tertiary-color              : #d3d3d3;
 
 
 // Text colors
 // -----------------------------------------------------------------------------
 $text-color                  : #363636;
-$text-background-color       : #eeeeee;
+$text-background-color       : #ededed;
 
 
 // Link colors
@@ -254,9 +254,9 @@ $regions-background-color : $page-background-color;  // we set a default so we c
 // Page Row colors (for site-builder layout plugin)
 // -----------------------------------------------------------------------------
 // @include these in the page-color mixin from _page.scss using the
-// .page__[row name] selectors, e.g.:
+// .pr-[row name] selectors, e.g.:
 //
-//  .page__header {
+//  .pr-header {
 //    @include page-colors($page-header-background-color, $page-header-color, $page-backgrounds-full-width);
 //  }
 
@@ -336,6 +336,34 @@ $dropmenu-item-width              : 12em;
 $dropmenu-arrows                  : true;
 
 
+// Forms
+// -----------------------------------------------------------------------------
+$form-text-align                  : center;
+
+//$form-text-color                  : $text-color; // If text is #000, lighten 20% is #333
+$form-text-color                  : lighten($text-color, $lighten-most); // If text is #000, lighten 20% is #333
+
+$form-text-focus-color            : $text-color;
+
+$form-border-color                : $border-color;
+$form-border-focus-color          : $border-color;
+
+$form-background-color            : #ffffff;
+//$form-background-focus-color      : $page-background-color;
+$form-background-focus-color      : lighten($text-background-color, $lighten-most);
+
+//$form-help-color                  : $text-color;
+$form-help-color                  : lighten($text-color, $lighten-most);
+$form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
+
+$form-border-width                : $border-width;
+$form-border-style                : $border-style;
+$form-border-radius               : $border-radius;
+
+$form_input_button_select_height  : $xx-large;
+$form-box-shadow                  : false;
+
+
 // Buttons
 // -----------------------------------------------------------------------------
 $button-text-align                : center;
@@ -355,6 +383,8 @@ $button-background-hover-color    : darken($button-background-color, $darken);
 $button-border-width              : $border-width;
 $button-border-style              : $border-style;
 $button-border-radius             : $border-radius;
+
+$button-box-shadow                 : false;
 
 
 // Tabs
@@ -401,31 +431,6 @@ $list-background-active-color     : $text-background-color;
 $list-border-width                : $border-width;
 $list-border-style                : $border-style;
 $list-border-radius               : $border-radius;
-
-
-// Forms
-// -----------------------------------------------------------------------------
-$form-text-align                  : center;
-
-//$form-text-color                  : $text-color; // If text is #000, lighten 20% is #333
-$form-text-color                  : lighten($text-color, $lighten-most); // If text is #000, lighten 20% is #333
-
-$form-text-focus-color            : $text-color;
-
-$form-border-color                : #E5E5E5; //$border-color;
-$form-border-focus-color          : $border-color;
-
-$form-background-color            : #ffffff;
-//$form-background-focus-color      : $page-background-color;
-$form-background-focus-color      : lighten($text-background-color, $lighten-more);
-
-//$form-help-color                  : $text-color;
-$form-help-color                  : lighten($text-color, $lighten-most);
-$form-marker-color                : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
-
-$form-border-width                : $border-width;
-$form-border-style                : $border-style;
-$form-border-radius               : $border-radius;
 
 
 // Breadcrumbs

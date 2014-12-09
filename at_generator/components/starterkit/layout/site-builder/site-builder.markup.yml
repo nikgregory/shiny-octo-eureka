@@ -53,14 +53,7 @@ rows:
       subfeatures_first: 'Sub-features first'
       subfeatures_second: 'Sub-features second'
       subfeatures_third: 'Sub-features third'
-  footercols:
-    attributes:
-      id: footer-cols
-    regions:
-      footercol_first: 'Footer col first'
-      footercol_second: 'Footer col second'
-      footercol_third: 'Footer col third'
-      #footercol_fourth: 'Footer col fourth'
+      subfeatures_fourth: 'Sub-features fourth'
   footer:
     attributes:
       role: contentinfo

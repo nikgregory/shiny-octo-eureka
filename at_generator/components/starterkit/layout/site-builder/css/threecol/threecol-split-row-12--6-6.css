@@ -1,4 +1,2 @@
-.threecol-split-row-12--6-6 .hr--2-3 .region { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.threecol-split-row-12--6-6 .hr--2-3 .region:last-child { float: right; margin-right: 0; }
-.threecol-split-row-12--6-6 .arc--3 .region:nth-child(2) { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.threecol-split-row-12--6-6 .arc--3 .region:last-child { width: 49.15254%; float: right; margin-right: 0; }
+.threecol-split-row-12--6-6 .hr--2-3 .l-r, .threecol-split-row-12--6-6 .arc--3 .l-r:nth-child(2) { width: 49.15254%; float: left; margin-right: 1.69492%; }
+.threecol-split-row-12--6-6 .hr--2-3 .l-r:last-child, .threecol-split-row-12--6-6 .arc--3 .l-r:last-child { width: 49.15254%; float: right; margin-right: 0; }

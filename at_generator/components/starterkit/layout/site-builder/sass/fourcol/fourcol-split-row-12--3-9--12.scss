@@ -21,7 +21,7 @@
 
   // Two active regions.
   .hr--2-3 {
-    .region {
+    .l-r {
       &:first-child {
         @include span(3 of 12);
       }
@@ -34,7 +34,7 @@
 
   // Three active regions.
   .hr--1-2-3 {
-    .region {
+    .l-r {
       &:nth-child(2) {
         @include span(3 of 12);
       }
@@ -46,7 +46,7 @@
   }
 
   .hr--2-3-4 {
-    .region {
+    .l-r {
       &:first-child {
         @include span(3 of 12);
       }
@@ -63,7 +63,7 @@
 
   // Four active regions.
   .arc--4 {
-    .region {
+    .l-r {
       &:nth-child(2) {
         @include span(3 of 12);
       }

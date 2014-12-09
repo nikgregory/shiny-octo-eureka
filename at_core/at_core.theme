@@ -602,11 +602,20 @@ function at_core_preprocess_region(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // This could be expensive to call so many times on the page.
+  $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
+  $region_row = $layout_loaded->regionAttributes($variables['region']);
+  if (!empty($region_row)) {
+    $variables['region_row'] = $region_row;
+  }
+
+  //$variables['attributes']['class'][] = 'pr-' . $region_row . '__' . $variables['region'];
+
   // Set wrapper element.
   $variables['html_element'] = 'div';
   if ($variables['region'] == 'content') {
-    $variables['html_element'] = 'main';
-    $variables['attributes']['role'][] = 'main';
+    //$variables['html_element'] = 'main';
+    //$variables['attributes']['role'][] = 'main';
   }
 
   // Extension settings

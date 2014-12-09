@@ -4,13 +4,13 @@
 # Required
 # -----------------------------------------------------------------------------
 require 'sass-globbing'
-require "susy"
+require 'susy'
 
 
 # Directory paths
 # -----------------------------------------------------------------------------
-css_dir = "css"
-sass_dir = "sass"
+css_dir = 'css'
+sass_dir = 'sass'
 
 
 # Precision

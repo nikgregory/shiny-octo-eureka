@@ -8,10 +8,10 @@ ul.tabs {
 }
 
 // Fix and repair when local tasks become a block.
-.page__temporary-tabs {
+.pr-temporary-tabs {
 
   // Temp solution until tabs become a block...
-  .regions {
+  .l-rw {
     @include output-rhythm(padding, $x-large 0);
   }
 
@@ -20,12 +20,12 @@ ul.tabs {
   }
 
   // Here we call mixins that automagically apply styles to list items.
-  @media #{$mobile-tablet} {
+  @media #{$mobile} {
     @include list-style-button-group-vertical('ul.tabs.primary');
     @include list-style-seven-vertical('ul.tabs.secondary');
   }
 
-  @media #{$widescreen} {
+  @media #{$wide} {
     @include list-style-tab-group('ul.tabs.primary');
     @include list-style-seven-horizontal('ul.tabs.secondary');
   }

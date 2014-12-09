@@ -149,7 +149,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
           foreach ($css_config['css'] as $css_key => $css_values) {
             if ($css_values['regions'] == $reg_count[$row_key]) {
               foreach ($css_values['files'] as $css_file) {
-                $css_options[$row_key][$css_file] = $css_file; // convert to associative array, we need the key
+                $css_options[$row_key][$css_file] =  str_replace('-', ' ', $css_file); // convert to associative array, we need the key
               }
             }
           }
@@ -164,12 +164,12 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
             if ($reg_count[$row_key] > 1) {
               for ($i=0; $i<$reg_count[$row_key]; $i++) {
-                $regions_markup[$row_key][] = '<div class="region"><span>R' . $reg_num++ . '</span></div>';
+                $regions_markup[$row_key][] = '<div class="l-r region"><span>R' . $reg_num++ . '</span></div>';
               }
               $markup[$row_key] = implode('', $regions_markup[$row_key]);
             }
             else {
-              $markup[$row_key] = '<div class="region"><span>R1</span></div>';
+              $markup[$row_key] = '<div class="l-r region"><span>R1</span></div>';
             }
 
             // Try to inherit the default page layout, by default.
@@ -200,7 +200,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = array(
               '#type' => t('container'),
-              '#markup' => '<div class="regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
+              '#markup' => '<div class="l-rw regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
               '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),
             );
           }

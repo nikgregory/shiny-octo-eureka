@@ -188,23 +188,23 @@ a:hover, a:focus {
 
 /* line 133, ../../uikit/components/partials/_base.elements.scss */
 ul,
-ol {
-  padding: 0 0 0 16px;
-  padding: 0 0 0 1rem;
-}
-/* line 137, ../../uikit/components/partials/_base.elements.scss */
-[dir="rtl"] ul, [dir="rtl"] ol {
-  padding: 0 18px 0 0;
-  padding: 0 1.13rem 0 0;
+ol,
+dl {
+  padding-left: 47px;
+  padding-left: 2.95838rem;
+  padding-right: 0;
 }
 
-/* line 144, ../../uikit/components/partials/_base.elements.scss */
+/* line 142, ../../uikit/components/partials/_base.elements.scss */
 blockquote {
   padding: 16px;
   padding: 1rem;
+  margin-left: 47px;
+  margin-left: 2.95838rem;
+  margin-right: 0;
   border-left: 5px solid;
 }
-/* line 148, ../../uikit/components/partials/_base.elements.scss */
+/* line 149, ../../uikit/components/partials/_base.elements.scss */
 blockquote p {
   font-size: 18px;
   font-size: 1.13rem;
@@ -212,11 +212,11 @@ blockquote p {
   line-height: 1.5rem;
   font-weight: 300;
 }
-/* line 152, ../../uikit/components/partials/_base.elements.scss */
+/* line 153, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child {
   margin-top: 0;
 }
-/* line 155, ../../uikit/components/partials/_base.elements.scss */
+/* line 156, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child:before {
   font-family: FontAwesome, sans-serif;
   content: "";
@@ -227,11 +227,11 @@ blockquote p:first-child:before {
   width: 18px;
   width: 1.13rem;
 }
-/* line 166, ../../uikit/components/partials/_base.elements.scss */
+/* line 167, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:last-child {
   margin-bottom: 0;
 }
-/* line 171, ../../uikit/components/partials/_base.elements.scss */
+/* line 172, ../../uikit/components/partials/_base.elements.scss */
 blockquote small {
   display: block;
   font-size: 11px;
@@ -239,32 +239,32 @@ blockquote small {
   line-height: 18px;
   line-height: 1.125rem;
 }
-/* line 175, ../../uikit/components/partials/_base.elements.scss */
+/* line 176, ../../uikit/components/partials/_base.elements.scss */
 blockquote small:before {
   content: '\2014 \00A0';
 }
-/* line 181, ../../uikit/components/partials/_base.elements.scss */
+/* line 182, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right {
   padding-right: 5.26316%;
   padding-left: 0;
   border-right: 5px solid;
   border-left: 0;
 }
-/* line 187, ../../uikit/components/partials/_base.elements.scss */
+/* line 188, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right p,
 blockquote.pull-right small {
   text-align: right;
 }
-/* line 193, ../../uikit/components/partials/_base.elements.scss */
+/* line 194, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:before {
   content: '';
 }
-/* line 196, ../../uikit/components/partials/_base.elements.scss */
+/* line 197, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:after {
   content: '\00A0 \2014';
 }
 
-/* line 205, ../../uikit/components/partials/_base.elements.scss */
+/* line 206, ../../uikit/components/partials/_base.elements.scss */
 hr {
   height: 1px;
   border: 0;
@@ -274,13 +274,13 @@ hr {
 }
 
 /* Set hidden styles for non-supporting browers */
-/* line 215, ../../uikit/components/partials/_base.elements.scss */
+/* line 216, ../../uikit/components/partials/_base.elements.scss */
 *[hidden] {
   display: none;
 }
 
 /* Webfont smoothing */
-/* line 221, ../../uikit/components/partials/_base.elements.scss */
+/* line 222, ../../uikit/components/partials/_base.elements.scss */
 :before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -402,14 +402,16 @@ input[type="url"],
 input[type="week"] {
   max-width: 100%;
   box-sizing: border-box;
-  padding: 7px 10px;
-  padding: 0.43162rem 0.61803rem;
-  border-radius: 4px;
+  height: 29px;
+  height: 1.82838rem;
+  padding: 0 10px;
+  padding: 0 0.61803rem;
+  border-radius: 2px;
   border: 1px solid;
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-/* line 40, ../../uikit/components/partials/_base.form.scss */
+/* line 41, ../../uikit/components/partials/_base.form.scss */
 textarea:focus,
 select:focus,
 input[type="date"]:focus,
@@ -428,7 +430,7 @@ input[type="week"]:focus {
   outline: 0;
   outline: thin dotted \9;
 }
-/* line 49, ../../uikit/components/partials/_base.form.scss */
+/* line 50, ../../uikit/components/partials/_base.form.scss */
 textarea[disabled],
 select[disabled],
 input[type="date"][disabled],
@@ -447,64 +449,64 @@ input[type="week"][disabled] {
   cursor: not-allowed;
 }
 
-/* line 61, ../../uikit/components/partials/_base.form.scss */
+/* line 62, ../../uikit/components/partials/_base.form.scss */
 input {
   min-width: 13px;
   line-height: 1;
   vertical-align: baseline;
 }
 
-/* line 70, ../../uikit/components/partials/_base.form.scss */
+/* line 71, ../../uikit/components/partials/_base.form.scss */
 input[type="checkbox"], input[type="radio"] {
   display: inline-block;
   position: relative;
   bottom: 1px;
 }
 
-/* line 91, ../../uikit/components/partials/_base.form.scss */
+/* line 92, ../../uikit/components/partials/_base.form.scss */
 textarea,
 select[size],
 select[multiple] {
   height: auto;
 }
 
-/* line 99, ../../uikit/components/partials/_base.form.scss */
+/* line 100, ../../uikit/components/partials/_base.form.scss */
 label {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   display: block;
 }
-/* line 106, ../../uikit/components/partials/_base.form.scss */
+/* line 107, ../../uikit/components/partials/_base.form.scss */
 label.option {
   font-weight: normal;
   display: inline;
   padding: 0 3px;
 }
 
-/* line 115, ../../uikit/components/partials/_base.form.scss */
+/* line 116, ../../uikit/components/partials/_base.form.scss */
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* line 126, ../../uikit/components/partials/_base.form.scss */
+/* line 127, ../../uikit/components/partials/_base.form.scss */
 details {
   border: 1px solid;
-  border-radius: 4px;
+  border-radius: 2px;
   margin: 16px 0;
   margin: 1rem 0;
 }
 
-/* line 134, ../../uikit/components/partials/_base.form.scss */
+/* line 135, ../../uikit/components/partials/_base.form.scss */
 summary {
   cursor: pointer;
   padding: 10px;
   padding: 0.61803rem;
 }
 
-/* line 150, ../../uikit/components/partials/_base.form.scss */
+/* line 151, ../../uikit/components/partials/_base.form.scss */
 button[disabled],
 input[disabled],
 select[disabled],
@@ -521,7 +523,7 @@ a.button_disabled {
   cursor: default;
 }
 
-/* line 170, ../../uikit/components/partials/_base.form.scss */
+/* line 171, ../../uikit/components/partials/_base.form.scss */
 input:invalid,
 button:invalid,
 .button:invalid,
@@ -723,6 +725,11 @@ details > .details-wrapper {
 }
 
 /* line 227, ../../uikit/components/partials/_component.form.generic.scss */
+.vertical-tabs {
+  background: #ffffff;
+}
+
+/* line 233, ../../uikit/components/partials/_component.form.generic.scss */
 .block-list-secondary {
   border-bottom-width: 1px;
   box-sizing: border-box;
@@ -730,14 +737,14 @@ details > .details-wrapper {
   padding: 0 0.69838rem;
 }
 
-/* line 235, ../../uikit/components/partials/_component.form.generic.scss */
+/* line 241, ../../uikit/components/partials/_component.form.generic.scss */
 .reset-appearance {
   -webkit-transition: none;
           transition: none;
   box-shadow: none;
   border-radius: 0;
 }
-/* line 240, ../../uikit/components/partials/_component.form.generic.scss */
+/* line 246, ../../uikit/components/partials/_component.form.generic.scss */
 .reset-appearance:hover, .reset-appearance:focus {
   background: none;
   color: inherit;
@@ -757,11 +764,15 @@ details > .details-wrapper {
 /* line 13, ../../uikit/components/partials/_component.form.buttons.scss */
 button,
 .button {
-  padding: 7px 16px;
-  padding: 0.43162rem 1rem;
+  max-width: 100%;
   width: auto;
   position: relative;
-  border-radius: 4px;
+  box-sizing: border-box;
+  height: 29px;
+  height: 1.82838rem;
+  padding: 0 10px;
+  padding: 0 0.61803rem;
+  border-radius: 2px;
   border: 1px solid;
   -webkit-transition: background-color, .15s, ease-in-out;
           transition: background-color, .15s, ease-in-out;
@@ -772,14 +783,14 @@ button,
   line-height: 1;
   white-space: nowrap;
 }
-/* line 32, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 35, ../../uikit/components/partials/_component.form.buttons.scss */
 button:hover, button:focus,
 .button:hover,
 .button:focus {
   text-decoration: none;
 }
 
-/* line 61, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 64, ../../uikit/components/partials/_component.form.buttons.scss */
 .button-action:before {
   content: "";
   font-family: FontAwesome, sans-serif;
@@ -791,19 +802,19 @@ button:hover, button:focus,
   padding: 0 4px 0 0;
   vertical-align: middle;
 }
-/* line 71, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 74, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .button-action:before {
   padding: 0 0 0 4px;
 }
 
 /* Drop buttons */
-/* line 78, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 81, ../../uikit/components/partials/_component.form.buttons.scss */
 .js .dropbutton-widget {
   border: 1px solid;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
-/* line 83, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 86, ../../uikit/components/partials/_component.form.buttons.scss */
 .js .dropbutton-wrapper {
   display: block;
   min-height: 2em;
@@ -811,89 +822,101 @@ button:hover, button:focus,
   position: relative;
 }
 
-/* line 90, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 93, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .js .dropbutton-wrapper {
   margin-right: 0;
   margin-left: 4px;
 }
 
-/* line 96, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 99, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton input {
   text-align: left;
+  height: 27px;
+  height: 1.70338rem;
 }
-/* line 100, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 104, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton .dropbutton-action > * {
   white-space: nowrap;
   line-height: normal;
-  padding: 7px 16px;
-  padding: 0.43162rem 1rem;
-}
-/* line 106, ../../uikit/components/partials/_component.form.buttons.scss */
-.dropbutton .secondary-action {
-  border-top: 1px solid;
-  border-radius: 0 0 0 4px;
+  padding: 0 10px;
+  padding: 0 0.61803rem;
 }
 /* line 110, ../../uikit/components/partials/_component.form.buttons.scss */
+.dropbutton .secondary-action {
+  border-top: 1px solid;
+  border-radius: 0 0 0 2px;
+}
+/* line 114, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton .secondary-action .button {
   border: 0;
   width: 100%;
 }
-/* line 114, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 119, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton .secondary-action .button:hover, .dropbutton .secondary-action .button:focus {
-  border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 2px;
 }
-/* line 130, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 127, ../../uikit/components/partials/_component.form.buttons.scss */
+.dropbutton .dropbutton-toggle button {
+  background: none;
+  box-shadow: none;
+}
+/* line 131, ../../uikit/components/partials/_component.form.buttons.scss */
+.dropbutton .dropbutton-toggle button:hover, .dropbutton .dropbutton-toggle button:focus, .dropbutton .dropbutton-toggle button:actived {
+  background: none;
+  box-shadow: none;
+}
+/* line 142, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .dropbutton {
   margin: 0 3px 0 0;
 }
-/* line 133, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 145, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .dropbutton input {
   text-align: right;
 }
 
-/* line 143, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 155, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton-multiple .dropbutton {
   border-right: 1px solid;
 }
-/* line 146, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 158, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton-multiple .dropbutton .dropbutton-action > * {
   margin-right: 0;
   border: 0;
 }
-/* line 151, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 163, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton-multiple .dropbutton .dropbutton-action .button {
-  border-radius: 4px 0 0 4px;
+  border-radius: 2px 0 0 2px;
 }
-/* line 156, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 168, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton-multiple .dropbutton .publish .button {
   width: 100%;
 }
-/* line 163, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 175, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .dropbutton-multiple .dropbutton {
   border-left: 1px solid;
   border-right: 0;
 }
-/* line 167, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 179, ../../uikit/components/partials/_component.form.buttons.scss */
 [dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
   margin-left: 0;
 }
-/* line 175, ../../uikit/components/partials/_component.form.buttons.scss */
-.dropbutton-multiple.open .dropbutton-action .button {
-  border-radius: 4px 0 0 0;
-}
-/* line 184, ../../uikit/components/partials/_component.form.buttons.scss */
-.dropbutton-multiple .dropbutton .secondary-action .button {
-  border-radius: 0 0 0 4px;
-}
 /* line 187, ../../uikit/components/partials/_component.form.buttons.scss */
+.dropbutton-multiple.open .dropbutton-action .button {
+  border-radius: 2px 0 0 0;
+}
+/* line 196, ../../uikit/components/partials/_component.form.buttons.scss */
+.dropbutton-multiple .dropbutton .secondary-action .button {
+  border-radius: 0 0 0 2px;
+}
+/* line 199, ../../uikit/components/partials/_component.form.buttons.scss */
 .dropbutton-multiple .dropbutton .secondary-action .button:hover, .dropbutton-multiple .dropbutton .secondary-action .button:focus {
-  border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 2px;
 }
 
 /**
  * Show buttons as links.
  */
-/* line 200, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 212, ../../uikit/components/partials/_component.form.buttons.scss */
 button.link {
   background: transparent;
   border: 0;
@@ -903,7 +926,7 @@ button.link {
   font-size: 1em;
 }
 
-/* line 209, ../../uikit/components/partials/_component.form.buttons.scss */
+/* line 221, ../../uikit/components/partials/_component.form.buttons.scss */
 label button.link {
   font-weight: bold;
 }
@@ -1129,7 +1152,7 @@ img.align-center {
   padding: 0;
 }
 
-@media all and (min-width: 45em) {
+@media all and (max-width: 60em) {
   /* line 13, ../../uikit/components/mixins/_list-columns.scss */
   .list-multicolumn {
     list-style: none;
@@ -1245,7 +1268,7 @@ dd {
   margin-right: 1rem;
 }
 
-@media all and (min-width: 45em) {
+@media all and (max-width: 60em) {
   /* line 102, ../../uikit/components/partials/_component.list-styles.scss */
   .dl-horizontal dt {
     float: left;
@@ -1267,7 +1290,7 @@ dd {
 /**
  * Page
  *  - mainly for markup that is printed directly in page.html.twig and
- *    .region {}
+ *    .l-r {}
  ========================================================================== */
 /* line 11, ../../uikit/components/partials/_component.page.scss */
 .page {
@@ -1275,39 +1298,37 @@ dd {
 }
 
 /* line 16, ../../uikit/components/partials/_component.page.scss */
-.page-row {
+.l-pr {
   padding: 0 2vw;
 }
 
 /* line 32, ../../uikit/components/partials/_component.page.scss */
-.region {
+.l-r {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
-  padding: 26px 0;
-  padding: 1.61803rem 0;
 }
 /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-.region {
+.l-r {
   zoom: 1;
 }
 /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-.region:before, .region:after {
+.l-r:before, .l-r:after {
   content: "";
   display: table;
 }
 /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-.region:after {
+.l-r:after {
   clear: both;
 }
 
 /* line 39, ../../uikit/components/partials/_component.page.scss */
-.region--page-top,
-.region--page-bottom {
+.page-top,
+.page-bottom {
   padding: 0;
   margin: 0;
 }
 
-/* line 104, ../../uikit/components/partials/_component.page.scss */
+/* line 108, ../../uikit/components/partials/_component.page.scss */
 .attribution {
   font-size: 11px;
   font-size: 0.69838rem;
@@ -1438,51 +1459,51 @@ ul.tabs {
 }
 
 /* line 14, ../../uikit/components/partials/_component.tabs.scss */
-.page__temporary-tabs .regions {
+.pr-temporary-tabs .l-rw {
   padding: 26px 0;
   padding: 1.61803rem 0;
 }
 /* line 18, ../../uikit/components/partials/_component.tabs.scss */
-.page__temporary-tabs ul.tabs.primary {
+.pr-temporary-tabs ul.tabs.primary {
   margin-bottom: 0;
 }
-@media all and (max-width: 65em) {
+@media all and (max-width: 60em) {
   /* line 105, ../../uikit/components/mixins/_list-buttons.scss */
-  .page__temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs.primary {
     list-style: none;
   }
   /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .page__temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs.primary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary:before, .page__temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs.primary:before, .pr-temporary-tabs ul.tabs.primary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs.primary:after {
     clear: both;
   }
   /* line 110, ../../uikit/components/mixins/_list-buttons.scss */
-  .page__temporary-tabs ul.tabs.primary li:first-child a {
-    border-radius: 4px 4px 0 0;
+  .pr-temporary-tabs ul.tabs.primary li:first-child a {
+    border-radius: 2px 2px 0 0;
   }
   /* line 113, ../../uikit/components/mixins/_list-buttons.scss */
-  .page__temporary-tabs ul.tabs.primary li:last-child a {
-    border-radius: 0 0 4px 4px;
+  .pr-temporary-tabs ul.tabs.primary li:last-child a {
+    border-radius: 0 0 2px 2px;
   }
   /* line 117, ../../uikit/components/mixins/_list-buttons.scss */
-  .page__temporary-tabs ul.tabs.primary li a {
+  .pr-temporary-tabs ul.tabs.primary li a {
     color: #363636;
-    background-color: #fbfbfb;
-    border-color: #dcdcdc;
+    background-color: #fafafa;
+    border-color: #cccccc;
     border-width: 1px;
     border-style: solid;
     margin-bottom: -1px;
@@ -1500,43 +1521,43 @@ ul.tabs {
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   }
   /* line 10, ../../uikit/components/mixins/_button-variant.scss */
-  .page__temporary-tabs ul.tabs.primary li a:link, .page__temporary-tabs ul.tabs.primary li a:visited {
+  .pr-temporary-tabs ul.tabs.primary li a:link, .pr-temporary-tabs ul.tabs.primary li a:visited {
     color: #363636;
-    background-color: #fbfbfb;
-    border-color: #dcdcdc;
+    background-color: #fafafa;
+    border-color: #cccccc;
   }
   /* line 17, ../../uikit/components/mixins/_button-variant.scss */
-  .page__temporary-tabs ul.tabs.primary li a:hover, .page__temporary-tabs ul.tabs.primary li a:focus, .page__temporary-tabs ul.tabs.primary li a:active, .page__temporary-tabs ul.tabs.primary li a.active {
+  .pr-temporary-tabs ul.tabs.primary li a:hover, .pr-temporary-tabs ul.tabs.primary li a:focus, .pr-temporary-tabs ul.tabs.primary li a:active, .pr-temporary-tabs ul.tabs.primary li a.active {
     color: #363636;
-    background-color: #eeeeee;
-    border-color: #cfcfcf;
+    background-color: #ededed;
+    border-color: #bfbfbf;
   }
   /* line 58, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs.secondary {
     list-style: none;
     text-align: left;
   }
   /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .page__temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs.secondary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary:before, .page__temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs.secondary:before, .pr-temporary-tabs ul.tabs.secondary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs.secondary:after {
     clear: both;
   }
   /* line 73, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a {
+  .pr-temporary-tabs ul.tabs.secondary a {
     display: inline-block;
     line-height: 1;
     color: #363636;
@@ -1547,74 +1568,74 @@ ul.tabs {
             transition: background-color, .15s, ease-out;
   }
   /* line 83, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a:hover, .page__temporary-tabs ul.tabs.secondary a:focus {
+  .pr-temporary-tabs ul.tabs.secondary a:hover, .pr-temporary-tabs ul.tabs.secondary a:focus {
     text-decoration: none;
     color: #363636;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid #cccccc;
   }
   /* line 90, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a.active {
-    border-bottom: 1px solid #dcdcdc;
+  .pr-temporary-tabs ul.tabs.secondary a.active {
+    border-bottom: 1px solid #cccccc;
   }
   /* line 93, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a.active:hover, .page__temporary-tabs ul.tabs.secondary a.active:focus {
+  .pr-temporary-tabs ul.tabs.secondary a.active:hover, .pr-temporary-tabs ul.tabs.secondary a.active:focus {
     color: #363636;
   }
 }
-@media all and (min-width: 65em) {
+@media all and (min-width: 60.063em) {
   /* line 66, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary {
-    border-bottom: 1px solid #dcdcdc;
+  .pr-temporary-tabs ul.tabs.primary {
+    border-bottom: 1px solid #cccccc;
     list-style: none;
   }
   /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .page__temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs.primary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary:before, .page__temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs.primary:before, .pr-temporary-tabs ul.tabs.primary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs.primary:after {
     clear: both;
   }
   /* line 12, ../../uikit/components/mixins/_list.scss */
-  .page__temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs.primary li {
     float: left;
     margin: 0 0 0 0;
   }
   /* line 18, ../../uikit/components/mixins/_list.scss */
-  .page__temporary-tabs ul.tabs.primary ul,
-  .page__temporary-tabs ul.tabs.primary ol {
+  .pr-temporary-tabs ul.tabs.primary ul,
+  .pr-temporary-tabs ul.tabs.primary ol {
     display: none;
   }
   /* line 70, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs.primary li {
     margin-bottom: -1px;
   }
   /* line 75, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary li:first-child a {
-    border-radius: 4px 0 0 0;
+  .pr-temporary-tabs ul.tabs.primary li:first-child a {
+    border-radius: 2px 0 0 0;
   }
   /* line 78, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary li:last-child a {
-    border-radius: 0 4px 0 0;
+  .pr-temporary-tabs ul.tabs.primary li:last-child a {
+    border-radius: 0 2px 0 0;
   }
   /* line 92, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary a {
+  .pr-temporary-tabs ul.tabs.primary a {
     display: block;
     line-height: 1;
     color: #363636;
-    background: #fbfbfb;
-    border: 1px solid #dcdcdc;
+    background: #fafafa;
+    border: 1px solid #cccccc;
     padding: 7px 16px;
     padding: 0.43162rem 1rem;
     -webkit-transition: background-color, .15s, ease-in-out;
@@ -1623,59 +1644,59 @@ ul.tabs {
     margin-right: -1px;
   }
   /* line 107, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary a:hover, .page__temporary-tabs ul.tabs.primary a:focus {
+  .pr-temporary-tabs ul.tabs.primary a:hover, .pr-temporary-tabs ul.tabs.primary a:focus {
     color: #363636;
-    background: #eeeeee;
+    background: #ededed;
     text-decoration: none;
   }
   /* line 114, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary a.active {
+  .pr-temporary-tabs ul.tabs.primary a.active {
     color: #363636;
     background: none;
     border-bottom-color: #f7f7f7;
   }
   /* line 119, ../../uikit/components/mixins/_list-tabs.scss */
-  .page__temporary-tabs ul.tabs.primary a.active:hover, .page__temporary-tabs ul.tabs.primary a.active:focus {
+  .pr-temporary-tabs ul.tabs.primary a.active:hover, .pr-temporary-tabs ul.tabs.primary a.active:focus {
     color: #363636;
     background: none;
   }
   /* line 18, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs.secondary {
     list-style: none;
     padding: 0;
   }
   /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .page__temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs.secondary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary:before, .page__temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs.secondary:before, .pr-temporary-tabs ul.tabs.secondary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .page__temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs.secondary:after {
     clear: both;
   }
   /* line 12, ../../uikit/components/mixins/_list.scss */
-  .page__temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs.secondary li {
     float: left;
     margin: 0 7px 0 7px;
     margin: 0 0.43162rem 0 0.43162rem;
   }
   /* line 18, ../../uikit/components/mixins/_list.scss */
-  .page__temporary-tabs ul.tabs.secondary ul,
-  .page__temporary-tabs ul.tabs.secondary ol {
+  .pr-temporary-tabs ul.tabs.secondary ul,
+  .pr-temporary-tabs ul.tabs.secondary ol {
     display: none;
   }
   /* line 22, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a {
+  .pr-temporary-tabs ul.tabs.secondary a {
     display: block;
     line-height: 1;
     color: #363636;
@@ -1686,17 +1707,17 @@ ul.tabs {
             transition: background-color, .15s, ease-in-out;
   }
   /* line 33, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a:hover, .page__temporary-tabs ul.tabs.secondary a:focus {
+  .pr-temporary-tabs ul.tabs.secondary a:hover, .pr-temporary-tabs ul.tabs.secondary a:focus {
     text-decoration: none;
     color: #363636;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid #cccccc;
   }
   /* line 40, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a.active {
-    border-bottom: 1px solid #dcdcdc;
+  .pr-temporary-tabs ul.tabs.secondary a.active {
+    border-bottom: 1px solid #cccccc;
   }
   /* line 43, ../../uikit/components/mixins/_list-seven.scss */
-  .page__temporary-tabs ul.tabs.secondary a.active:hover, .page__temporary-tabs ul.tabs.secondary a.active:focus {
+  .pr-temporary-tabs ul.tabs.secondary a.active:hover, .pr-temporary-tabs ul.tabs.secondary a.active:focus {
     color: #363636;
   }
 }
@@ -1854,6 +1875,12 @@ ul.tabs {
  * Blocks
  * Base styles for block templates.
  ========================================================================== */
+/* line 8, ../../uikit/components/partials/_component.block.scss */
+.block {
+  padding: 26px 0;
+  padding: 1.61803rem 0;
+}
+
 /**
  * Menus
  *  - style Drupal core block menus.
@@ -1950,14 +1977,6 @@ ul.tabs {
 /**
  * Field Image
  ========================================================================== */
-/* line 6, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image {
-  /**
-   * Image Alignment Theme Settings
-   * - settings are applied using the Image extension in theme settings, where you can
-   *   set image alignment and captions per node type and view mode.
-   */
-}
 /* line 8, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image figure {
   margin: 0;
@@ -1971,59 +1990,59 @@ ul.tabs {
   padding: 7px 0;
   padding: 0.43162rem 0;
 }
-/* line 22, ../../uikit/components/partials/_component.field.image.scss */
+/* line 20, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-none figure, .field-type-image.align-left figure {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
 }
-/* line 26, ../../uikit/components/partials/_component.field.image.scss */
+/* line 24, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-none figure figcaption, .field-type-image.align-left figure figcaption {
   text-align: left;
 }
-/* line 31, ../../uikit/components/partials/_component.field.image.scss */
+/* line 29, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-center figure {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-/* line 36, ../../uikit/components/partials/_component.field.image.scss */
+/* line 34, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-center figure figcaption {
   text-align: center;
 }
-/* line 41, ../../uikit/components/partials/_component.field.image.scss */
+/* line 39, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-right figure {
   margin: 5px 0 16px 16px;
   margin: 0.3125rem 0 1rem 1rem;
 }
-/* line 44, ../../uikit/components/partials/_component.field.image.scss */
+/* line 42, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-right figure figcaption {
   text-align: left;
 }
-/* line 51, ../../uikit/components/partials/_component.field.image.scss */
+/* line 49, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.float-none {
   float: none !important;
 }
-/* line 54, ../../uikit/components/partials/_component.field.image.scss */
+/* line 52, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.float-none figure {
   margin-right: 0 !important;
   margin-left: 0 !important;
 }
-/* line 62, ../../uikit/components/partials/_component.field.image.scss */
+/* line 60, ../../uikit/components/partials/_component.field.image.scss */
 [dir="rtl"] .field-type--image.align-none figure, [dir="rtl"] .field-type--image.align-left figure {
   margin: 5px 0 16px 16px;
   margin: 0.3125rem 0 1rem 1rem;
 }
-/* line 66, ../../uikit/components/partials/_component.field.image.scss */
+/* line 64, ../../uikit/components/partials/_component.field.image.scss */
 [dir="rtl"] .field-type--image.align-none figure figcaption, [dir="rtl"] .field-type--image.align-left figure figcaption {
   text-align: right;
 }
-/* line 71, ../../uikit/components/partials/_component.field.image.scss */
+/* line 69, ../../uikit/components/partials/_component.field.image.scss */
 [dir="rtl"] .field-type--image.align-right figure {
   margin: 5px 16px 16px 0;
   margin: 0.3125rem 1rem 1rem 0;
 }
-/* line 74, ../../uikit/components/partials/_component.field.image.scss */
+/* line 72, ../../uikit/components/partials/_component.field.image.scss */
 [dir="rtl"] .field-type--image.align-right figure figcaption {
   text-align: right;
 }
@@ -2268,12 +2287,12 @@ ul.tabs {
   .node__footer,
   ul.links,
   .comment-form-wrapper,
-  .region--page-top,
-  .region--page-bottom,
+  .l-r--page-top,
+  .l-r--page-bottom,
   .contextual,
-  .page__temporary-tabs,
+  .pr-temporary-tabs,
   .tabs,
-  .regions-navbar,
+  .l-rw-navbar,
   .rmr,
   [class*="region--sidebar-"] {
     display: none;
@@ -2283,7 +2302,7 @@ ul.tabs {
   }
 
   /* line 38, ../../uikit/components/partials/_theme.print.scss */
-  .page__main .region--content,
+  .pr-main .l-r--content,
   .block-main-content,
   article {
     margin: 0;

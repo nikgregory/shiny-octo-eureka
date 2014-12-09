@@ -17,7 +17,7 @@ comment:
   version: 0.0.1
   css:
     component:
-      styles/css/components/comment.css: {}
+      styles/css/components/comments.css: {}
 
 # Forum
 forum:

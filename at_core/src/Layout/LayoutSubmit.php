@@ -76,7 +76,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
           foreach ($this->css_config['css'] as $css_key => $css_values) {
             if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css')) {
               $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css');
-              $replace_class = 'page__' . $row_keys;
+              $replace_class = 'pr-' . $row_keys;
               if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
                 $file = str_replace($row_values, $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
                 $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
@@ -275,13 +275,13 @@ class LayoutSubmit implements LayoutSubmitInterface {
           }
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="page__temporary-tabs page-row"><div class="regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
           }
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
           }
           // move the dynamic region classes to the regions wrapper, hard code the page-row class
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="page__' . $row . ' page-row">';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="l-pr page__row pr-' . $row . '">';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
           $output[$suggestion_key][$row]['container_close'] = '    </div>';

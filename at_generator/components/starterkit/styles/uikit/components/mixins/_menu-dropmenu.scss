@@ -13,7 +13,7 @@
     }
 
     .rm-block__content {
-      /*
+
       a {
         position: relative;
         @include output-rhythm(padding, $xx-small $large);
@@ -23,7 +23,6 @@
           @include output-rhythm(right, $medium); // LTR
         }
       }
-      */
 
       .menu-level-1 {
         position: relative;

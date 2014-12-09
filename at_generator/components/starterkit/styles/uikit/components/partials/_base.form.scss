@@ -30,7 +30,8 @@ input[type="week"] {
 
   max-width: 100%;
   box-sizing: border-box;
-  @include output-rhythm(padding, $xx-small $x-small);
+  @include output-rhythm(height, $form_input_button_select_height);
+  @include output-rhythm(padding, 0 $x-small);
 
   border-radius: $form-border-radius;
   border: $form-border-width $form-border-style;

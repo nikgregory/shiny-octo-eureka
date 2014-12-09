@@ -16,7 +16,7 @@ settings:
   suggestions:
     page: page
   max_width_enable: 0
-  max_width_value: ''
+  max_width_value: '75'
   max_width_unit: em
   enable_backups: 0
   responsive_menu_block: THEMENAME_main_menu
