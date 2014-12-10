@@ -19,20 +19,12 @@ function at_core_submit_login_block($values, $theme, $generated_files_path) {
     }
   }
 
-  $login_block_css = ".block-login--horizontal .block__title {
-  font-size:$font_size_px;
-  font-size:$font_size_rem;
-}
-.block-login--horizontal .block__title,
-.block-login--horizontal > div,
-.block-login--horizontal .user-login-form,
-.block-login--horizontal .user-login-form > div,
-.block-login--horizontal .form-item,
-.block-login--horizontal .form-actions {
-  display:inline;
-}";
+  $login_block_css = ".block-login--horizontal .block__title{font-size:$font_size_px;font-size:$font_size_rem;}.block-login--horizontal .block__title,.block-login--horizontal > div,.block-login--horizontal .user-login-form,.block-login--horizontal .user-login-form > div,.block-login--horizontal .form-item,.block-login--horizontal .form-actions{display:inline-block;}";
 
-  $file_name = $theme . '.login-block.css';
+  //$file_name = $theme . '.login-block.css';
+
+  $file_name = 'login-block.css';
+
   $filepath = $generated_files_path . '/' . $file_name;
   file_unmanaged_save_data($login_block_css, $filepath, FILE_EXISTS_REPLACE);
 }

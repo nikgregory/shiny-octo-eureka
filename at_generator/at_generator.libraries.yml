@@ -1,0 +1,6 @@
+# Generator styles
+at.generator:
+  version: 1.0.0
+  css:
+    component:
+      styles/css/appearance--generator.css: {}

@@ -70,3 +70,52 @@ scripts:
     scripts/scripts.js: {}
   dependencies:
     - at_core/at.fastclick
+
+# Form Layout Widget CSS, do not use this in the front end, its only
+# for the layout theme settings, since Drupal8 fucking lame.
+site_builder_layout:
+  version: 0.0.1
+  css:
+    theme:
+      layout/site-builder/css/site-builder-form.css: {}
+
+#
+# Generated File Libraries, do not delete these if you are using Extension settings!
+#
+
+# File to show the grid for debugging.
+show_grid:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/show-grid.css: {}
+
+fonts:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/generated/fonts.css: {}
+
+title_styles:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/generated/title-styles.css: {}
+
+login_block:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/generated/login-block.css: {}
+
+custom_css:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/generated/custom-css.css: {}
+
+breadcrumb:
+  version: 0.0.1
+  css:
+    theme:
+      styles/css/generated/breadcrumb.css: {}

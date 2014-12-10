@@ -1,7 +1,7 @@
 id: THEMENAME_help
 theme: THEMENAME
 weight: 0
-status: true
+status: false
 langcode: en
 region: messages
 plugin: system_help_block

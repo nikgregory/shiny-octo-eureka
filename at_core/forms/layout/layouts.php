@@ -51,11 +51,16 @@ $form['layouts'] = array(
 );
 
 // Attached required CSS and JS libraries and files.
+/*
 $form['layouts']['#attached'] = array(
   'css' => array(
     $provider_path . '/' .  $css_config['css_form_styles_path'],
   ),
 );
+*/
+
+$form['layouts']['#attached']['library'][] = "$theme/site_builder_layout";
+
 
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(

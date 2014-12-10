@@ -23,7 +23,7 @@
  * - set element global styles, bascially whenever this element appears
  * it should look like this by default.
  ========================================================================== */
-/* line 106, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 106, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 100%;
   line-height: 0.375em;
@@ -1087,7 +1087,7 @@ img.align-center {
 .list-horizontal {
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .list-horizontal li {
   list-style-image: none;
   list-style-type: none;
@@ -1123,7 +1123,7 @@ img.align-center {
   padding: 0;
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .list-multicolumn li {
   list-style-image: none;
   list-style-type: none;
@@ -1157,7 +1157,7 @@ img.align-center {
   .list-multicolumn {
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .list-multicolumn li {
     list-style-image: none;
     list-style-type: none;
@@ -1198,7 +1198,7 @@ ul.inline, ul.links.inline {
 ul.inline {
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 ul.inline li {
   list-style-image: none;
   list-style-type: none;
@@ -1244,7 +1244,7 @@ ul.inline ol {
   padding: 0;
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .item-list li li {
   list-style-image: none;
   list-style-type: none;
@@ -1472,7 +1472,7 @@ ul.tabs {
   .pr-temporary-tabs ul.tabs.primary {
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
@@ -1537,7 +1537,7 @@ ul.tabs {
     list-style: none;
     text-align: left;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
@@ -1588,7 +1588,7 @@ ul.tabs {
     border-bottom: 1px solid #cccccc;
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
@@ -1665,7 +1665,7 @@ ul.tabs {
     list-style: none;
     padding: 0;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
@@ -1786,7 +1786,7 @@ ul.tabs {
   padding: 11px;
   padding: 0.69838rem;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .item-list .pager li li {
   list-style-image: none;
   list-style-type: none;
@@ -2001,14 +2001,11 @@ ul.tabs {
 }
 /* line 29, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-center figure {
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
-}
-/* line 34, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-center figure figcaption {
-  text-align: center;
 }
 /* line 39, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.align-right figure {

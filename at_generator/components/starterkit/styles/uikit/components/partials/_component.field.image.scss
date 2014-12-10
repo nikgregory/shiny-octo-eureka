@@ -27,12 +27,12 @@
   }
 
   &.align-center figure {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     @include output-rhythm(margin-bottom, $medium);
 
     figcaption {
-      text-align: center;
     }
   }
 

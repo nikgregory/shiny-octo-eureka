@@ -32,9 +32,7 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
   $form['#attached'] = array(
     'library' => array(
       'system' => 'core/drupal.machine-name',
-    ),
-    'css' => array(
-      $at_generator_path . '/styles/css/appearance--generator.css',
+      'at_generator' => 'at_generator/at.generator',
     ),
   );
 

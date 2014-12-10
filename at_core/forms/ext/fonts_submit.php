@@ -4,6 +4,56 @@
  * @file
  * Output formatted CSS for fonts.
  */
+
+
+
+    //  // Google font.
+    //  if (!empty($config['font_google'])) {
+    //    $google_font_path = check_url($config['font_google']);
+    //    $google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
+    //    $page['#attached']['css'][] = array(
+    //      'data' => $google_font_path_fixed,
+    //      'type' => 'external',
+    //    );
+    //  }
+
+
+    ///   @import url(http://fonts.googleapis.com/css?family=Slabo+27px);
+
+/*
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Pacifico::latin', 'Open+Sans:400,700:latin,latin-ext' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+*/
+
+
+// Typekit
+// http://help.typekit.com/customer/portal/articles/6852
+// Typically you probably don't need to worry about this because on most
+// AT Themes there are default fallback fonts already set globally and AT
+// will use the .wf-active selector in all styles set in Appearance settings
+// that use Typekit fonts.
+// styles to use before Typekit is loaded
+//.wf-loading {
+//}
+
+// styles to use after Typekit is loaded
+//.wf-active {
+//}
+
+
+
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
   // Websafe fonts.
@@ -26,6 +76,16 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 */
 
   foreach ($font_elements as $font_key => $font_values) {
+
+    $font_styles = array();
+
+
+    if (isset($values['settings_font_google'])) {
+      //$google_font_path = check_url($config['font_google']);
+      //$google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
+      $font_styles[] = $values['settings_font_google'] . "\n";
+
+    }
 
     // Get the selectors for each element.
     $fonts[$font_key]['selectors'] = $font_values['selector'];
@@ -73,10 +133,9 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
   // Output data to file
   if (!empty($fonts)) {
-    $font_styles = array();
     foreach ($fonts as $key => $values) {
       if (isset($values['family']) || isset($values['size'])) {
-        $font_style  = $values['selectors'] . '{';
+        $font_style = $values['selectors'] . '{';
 
         if (isset($values['family'])) {
           $font_style .= $values['family'];
@@ -99,7 +158,10 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   }
 
   $output = $output ? $output : '/** No fonts styles set **/';
-  $file_name = $theme . '.fonts.css';
+
+  //$file_name = $theme . '.fonts.css';
+
+  $file_name = 'fonts.css';
   $filepath = "$generated_files_path/$file_name";
   file_unmanaged_save_data($output, $filepath, FILE_EXISTS_REPLACE);
 }

@@ -16,3 +16,18 @@
 // more common in Drupal that you will set the font via an existing class/selector
 // than adding a selector to a template.
 @import "font-awesome/path";
+
+
+// Typekit
+// http://help.typekit.com/customer/portal/articles/6852
+// Typically you probably don't need to worry about this because on most
+// AT Themes there are default fallback fonts already set globally and AT
+// will use the .wf-active selector in all styles set in Appearance settings
+// that use Typekit fonts.
+// styles to use before Typekit is loaded
+.wf-loading {
+}
+
+// styles to use after Typekit is loaded
+.wf-active {
+}

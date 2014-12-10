@@ -67,7 +67,10 @@ function at_core_submit_images($values, $theme, $generated_files_path) {
   }
 
   $image_styles = $image_styles ? $image_styles : '/** No image styles set **/';
-  $file_name = $theme . '.images.css';
+
+  //$file_name = $theme . '.images.css';
+
+  $file_name = 'image-settings.css';
   $filepath = "$generated_files_path/$file_name";
   file_unmanaged_save_data($image_styles, $filepath, FILE_EXISTS_REPLACE);
 }

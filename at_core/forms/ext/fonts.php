@@ -73,14 +73,16 @@ $form['fonts']['setup']['settings_font_websafe'] = array(
 );
 
 // FONT Setup: Google font
-$google_font_path = check_url(theme_get_setting('settings.font_google'));
-$google_font_path_fixed = str_replace('&amp;', '&', $google_font_path);
+//$google_font_path = check_url(theme_get_setting('settings.font_google'));
+//$google_font_path_fixed = str_replace('&amp;', '&', $google_font_path);
+
+$google_font_path_fixed = String::checkPlain(theme_get_setting('settings.font_google'));
 
 $form['fonts']['setup']['settings_font_google'] = array(
   '#type' => 'textfield',
   '#title' => t('Google fonts'),
   '#default_value' => $google_font_path_fixed,
-  '#description' => t('Use the Google font wizard to select your fonts, then paste in only the URL, e.g. <code>fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext</code>'),
+  '#description' => t('Use the Google font wizard to select your fonts, click the "Use" button, then copy/paste in the @import string, e.g.: <br><code>@import url(http://fonts.googleapis.com/css?family=Slabo+27px);</code>'),
 );
 
 // FONT Setup: Webfont - Typekit

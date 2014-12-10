@@ -47,7 +47,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     if (isset($values['settings_enable_markup_overrides']) && $values['settings_enable_markup_overrides'] === 1) {
 
       // Breadcrumbs
-      if ((isset($values['settings_breadcrumb_title']) && $values['settings_breadcrumb_title'] === 1) || !empty($values['settings_breadcrumb_separator'])) {
+      if (!empty($values['settings_breadcrumb_separator'])) {
         require_once($at_core_path . '/forms/ext/breadcrumb_submit.php');
         at_core_submit_breadcrumb($values, $theme, $generated_files_path);
       }
