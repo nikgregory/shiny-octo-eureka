@@ -36,14 +36,14 @@ if (theme_get_setting('settings.font_customstack')) {
 if ($websafe = theme_get_setting('settings.font_websafe')) {
   foreach ($websafe_fonts as $websafe_font_key => $websafe_font_value) {
     if ($websafe == $websafe_font_key) {
-      $selected_websafe_stack = $websafe_font_value;
+      $selected_websafe_stack = String::checkPlain($websafe_font_value);
     }
   }
 }
 
 // Custom stack message
 if ($customstack = theme_get_setting('settings.font_customstack')) {
-  $selected_customstack = $customstack;
+  $selected_customstack = String::checkPlain($customstack);
 }
 
 $form['fonts'] = array(
@@ -68,36 +68,41 @@ $form['fonts']['setup']['help'] = array(
 $form['fonts']['setup']['settings_font_websafe'] = array(
   '#type' => 'select',
   '#title' => t('Websafe stack'),
-  '#default_value' => theme_get_setting('settings.font_websafe'),
+  '#default_value' => Xss::filter(theme_get_setting('settings.font_websafe')),
   '#options' => $websafe_fonts,
 );
 
 // FONT Setup: Google font
-//$google_font_path = check_url(theme_get_setting('settings.font_google'));
-//$google_font_path_fixed = str_replace('&amp;', '&', $google_font_path);
-
-$google_font_path_fixed = String::checkPlain(theme_get_setting('settings.font_google'));
-
 $form['fonts']['setup']['settings_font_google'] = array(
   '#type' => 'textfield',
   '#title' => t('Google fonts'),
-  '#default_value' => $google_font_path_fixed,
-  '#description' => t('Use the Google font wizard to select your fonts, click the "Use" button, then copy/paste in the @import string, e.g.: <br><code>@import url(http://fonts.googleapis.com/css?family=Slabo+27px);</code>'),
+  '#default_value' => Xss::filter(theme_get_setting('settings.font_google')),
+  '#description' => t('<ol><li>Use the <a href="!google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the code from the @import method, e.g.:<br /><code>@import url(http://fonts.googleapis.com/css?family=Open+Sans);</code></li></ol>', array('!google_font_wizard' => 'http://www.google.com/fonts')),
+);
+
+$form['fonts']['setup']['font_google_current'] = array(
+  '#type' => 'hidden',
+  '#value' => Xss::filter(theme_get_setting('settings.font_google')),
 );
 
 // FONT Setup: Webfont - Typekit
 $form['fonts']['setup']['settings_font_typekit'] = array(
   '#type' => 'textfield',
-  '#title' => t('Typekit'),
-  '#default_value' => check_url(theme_get_setting('settings.font_typekit')),
-  '#description' => t('Paste in Typekit script src URL, e.g. <code>use.typekit.net/okb4kwr.js</code>'),
+  '#title' => t('Typekit ID'),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.font_typekit')),
+  '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
+);
+
+$form['fonts']['setup']['font_typekit_current'] = array(
+  '#type' => 'hidden',
+  '#value' => String::checkPlain(theme_get_setting('settings.font_typekit')),
 );
 
 // FONT Setup: Custom string
 $form['fonts']['setup']['settings_font_customstack'] = array(
   '#type' => 'textfield',
   '#title' => t('Custom stack'),
-  '#default_value' => Xss::filterAdmin(theme_get_setting('settings.font_customstack')),
+  '#default_value' => Xss::filter(theme_get_setting('settings.font_customstack')),
   '#description' => t('Enter a comma seperated list of fonts. Quote font names with spaces, e.g. <code>"Times New Roman", Garamond, sans-serif</code>'),
 );
 
@@ -112,7 +117,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_defau
   '#title' => t('Default'),
   '#max-lenght' => 3,
   '#step' => 0.1,
-  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_default'),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_default')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -127,7 +132,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large
   '#max-lenght' => 3,
   '#step' => 0.1,
   '#description' => t('Large fonts usually require a smaller multiplier.'),
-  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_large'),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_large')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -142,7 +147,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large
   '#field_suffix' => 'px',
   '#max-lenght' => 2,
   '#description' => t('What is considerd a large font?'),
-  '#default_value' => theme_get_setting('settings.font_lineheight_multiplier_large_size'),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_large_size')),
   '#attributes' => array(
     'min' => 1,
     'max' => 99,
@@ -207,7 +212,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     '#type' => 'textfield',
     '#title' => t('Google font name'),
     '#description' => t('Enter the name of <b>one</b> Google font you set in <em>Fonts</em>. You can find this in step 4 of the Google font wizard, e.g. <code>"Open Sans"</code>'),
-    '#default_value' => theme_get_setting('settings.font_google_' . $font_element_key),
+    '#default_value' => Xss::filter(theme_get_setting('settings.font_google_' . $font_element_key)),
     '#states' => array(
       'visible' => array(
         'select[name="settings_font_' . $font_element_key . '"]' => array(
@@ -222,7 +227,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     '#type' => 'textfield',
     '#title' => t('Typekit font name'),
     '#description' => t('Enter the name of <b>one</b> Typekit font you set in <em>Fonts</em>. You can find this by checking the Typekit Kit Editor settings. Quote names with space, e.g. <code>"Proxima nova"</code>'),
-    '#default_value' => theme_get_setting('settings.font_typekit_' . $font_element_key),
+    '#default_value' => Xss::filter(theme_get_setting('settings.font_typekit_' . $font_element_key)),
     '#states' => array(
       'visible' => array(
         'select[name="settings_font_' . $font_element_key . '"]' => array(
@@ -254,7 +259,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#type' => 'textarea',
       '#title' => t('Custom Selectors'),
       '#rows' => 3,
-      '#default_value' => Xss::filterAdmin(theme_get_setting('settings.custom_selectors')),
+      '#default_value' => Xss::filter(theme_get_setting('settings.custom_selectors')),
       '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
       '#states' => array(
         'disabled' => array('select[name="settings_selectors_font_type"]' => array('value' => '<none>')),
@@ -262,14 +267,3 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     );
   }
 }
-
-// FONT Setup: Webfont, leave this out for now, could be one option too many and conceptually difficult
-// for low tech users to grasp since it requires knowing paths and understanding how to modify them.
-/*
-$form['fonts']['setup']['settings_font_webfont'] = array(
-  '#type' => 'textarea',
-  '#title' => t('Webfonts'),
-  '#default_value' => theme_get_setting('settings.font_webfont'),
-  '#description' => t('Paste in webfont code, e.g. as generated by the http://www.fontsquirrel.com/tools/webfont-generator.'),
-);
-*/

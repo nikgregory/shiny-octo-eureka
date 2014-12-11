@@ -1,16 +1,16 @@
-(function ($, drupalSettings) {
+(function ($) {
 
   "use strict";
 
   Drupal.behaviors.atrM = {
-    attach: function (context) {
+    attach: function (context, settings) {
 
       // Verify that the user agent understands media queries.
       if (!window.matchMedia('only screen').matches) {
         return;
       }
 
-      var rm = drupalSettings[drupalSettings['ajaxPageState']['theme']]['rm'];
+      var rm = settings[settings.ajaxPageState.theme]['rm'];
       var def = rm['default'];
       var resp = rm['responsive'];
 
@@ -61,4 +61,4 @@
       });
     }
   };
-}(jQuery, drupalSettings));
+}(jQuery));

@@ -62,6 +62,7 @@ $form['devel']['settings_nuke_toolbar'] = array(
 );
 
 // LiveReload
+/*
 $form['devel']['settings_livereload'] = array(
   '#type' => 'checkbox',
   '#title' => t('Enable LiveReload'),
@@ -80,6 +81,7 @@ $form['devel']['settings_livereload_snippet'] = array(
     'visible' => array('input[name="settings_livereload"]' => array('checked' => TRUE)),
   ),
 );
+*/
 
 
 // Support legacy browsers

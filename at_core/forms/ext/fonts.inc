@@ -37,7 +37,7 @@ function font_elements() {
       ),
       'sitename' => array(
         'label' => 'Site name',
-        'selector' => '.site-name',
+        'selector' => '.site-name, .site-name a',
       ),
       'siteslogan' => array(
         'label' => 'Site slogan',
@@ -49,19 +49,27 @@ function font_elements() {
       ),
       'nodetitle' => array(
         'label' => 'Node title',
-        'selector' => '.node__title',
+        'selector' => '.node__title, .node__title a',
       ),
       'commenttitle' => array(
         'label' => 'Comment title',
-        'selector' => '.comment__title',
+        'selector' => '.comment__title, .comment__title a',
       ),
       'blocktitle' => array(
         'label' => 'Block title',
-        'selector' => '.block__title, .pane__title',
+        'selector' => '.block__title, .block-menu__title, .pane__title',
       ),
-      'navbar' => array(
-        'label' => 'Navbar',
-        'selector' => '#nav',
+      'links' => array(
+        'label' => 'Links',
+        'selector' => 'a',
+      ),
+      'menus' => array(
+        'label' => 'Menus',
+        'selector' => '.menu a',
+      ),
+      'responsivemenu' => array(
+        'label' => 'Responsive menu',
+        'selector' => '.rm-block, .rm-block a',
       ),
       'buttons' => array(
         'label' => 'Buttons',
@@ -69,11 +77,7 @@ function font_elements() {
       ),
       'tabs' => array(
         'label' => 'Tabs',
-        'selector' => '.tabs',
-      ),
-      'tasks' => array(
-        'label' => 'Local tasks',
-        'selector' => '.local-tasks',
+        'selector' => '.tabs a',
       ),
       'h1h4' => array(
         'label' => 'h1 to h4 headings',

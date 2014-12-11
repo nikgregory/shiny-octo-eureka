@@ -1,6 +1,13 @@
 
 // Global styles for appearance.
 
+// Ensure some long urls or hypenated strings don't
+// break the layout.
+#system-theme-settings {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 #system-theme-settings .vertical-tabs,
 #system-theme-settings .form-type-vertical-tabs {
   margin: 0;
@@ -146,7 +153,20 @@ pre.code-block {
     .css-layout-options {
       float: right;
     }
-
   }
 }
+
+// Toolbar tray, while being awesome to use, messes up responsive design so much
+// it's unusable in the front end, however we must try to support it at least
+// in admin.
+@media all and (max-width: 75em) {
+  .toolbar-tray-open #system-theme-settings fieldset {
+    &[class*="layouts-column-"] {
+      width: 100%;
+      float: none;
+    }
+  }
+}
+
+
 

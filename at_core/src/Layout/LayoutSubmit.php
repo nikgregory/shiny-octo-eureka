@@ -14,6 +14,8 @@ use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
+use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\Xss;
 
 
 class LayoutSubmit implements LayoutSubmitInterface {
@@ -101,7 +103,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     $max_width_override = '';
     if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
-      $max_width_override = 'div.regions{max-width:' . trim($this->form_values['settings_max_width_value']) . $this->form_values['settings_max_width_unit'] . '}';
+      $max_width_value = String::checkPlain($this->form_values['settings_max_width_value']);
+      $max_width_override = 'div.regions{max-width:' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '}';
     }
 
     // Dont regenerate CSS files to be removed.
@@ -247,8 +250,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
     // We have to save every template every time, in case a row has been added to the layout, all template MUST update.
     // This could be changed later to only do this IF a row has been added, we're not that flash right now :)
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
-
       $output = array();
+      $suggestion_key = String::checkPlain($suggestion_key);
 
       // Doc block
       $doc = array();

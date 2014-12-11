@@ -49,6 +49,25 @@
       margin: 0;
       padding: 1em 0.5em;
     }
+
+    // Toolbar tray, while being awesome to use, messes up responsive design so much
+    // it's unusable in the front end, however we must try to support it at least
+    // in admin.
+    @media all and (min-width: 60em) {
+      select {
+        max-width: 160px;
+      }
+    }
+
+    @media all and (min-width: 75em) {
+      select {
+        max-width: 90%;
+      }
+
+      @at-root .toolbar-tray-open #edit-layouts #edit-adv-options select {
+        max-width: 160px;
+      }
+    }
   }
 
   #edit-settings-max-width-value {

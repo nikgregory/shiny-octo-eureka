@@ -2,7 +2,7 @@
 
 use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
-
+use Drupal\Component\Utility\String;
 use Drupal\Component\Utility\Xss;
 use Symfony\Component\Yaml\Parser;
 
@@ -43,7 +43,7 @@ foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
   $form['shortcodes']['page_classes']['rows']['settings_page_classes_row_' . $row_data_key] = array(
     '#type' => 'textfield',
     '#title' => t('page-row__' . $row_data_key),
-    '#default_value' => Xss::filterAdmin(theme_get_setting('settings.page_classes_row_' . $row_data_key, $theme)),
+    '#default_value' => String::checkPlain(theme_get_setting('settings.page_classes_row_' . $row_data_key, $theme)),
   );
 }
 
@@ -56,7 +56,7 @@ foreach ($theme_regions as $region_key => $region_value) {
   $form['shortcodes']['page_classes']['regions']['settings_page_classes_region_' . $region_key] = array(
     '#type' => 'textfield',
     '#title' => t($region_value),
-    '#default_value' => Xss::filterAdmin(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
+    '#default_value' => String::checkPlain(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
   );
 }
 
@@ -70,7 +70,7 @@ foreach ($theme_blocks as $block_key => $block_value) {
   $form['shortcodes']['block_classes']['settings_block_classes_' . $block_key] = array(
     '#type' => 'textfield',
     '#title' => t($block_label),
-    '#default_value' => Xss::filterAdmin(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
+    '#default_value' => String::checkPlain(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
   );
 }
 
@@ -85,7 +85,7 @@ foreach ($node_types as $nt) {
   $form['shortcodes']['nodetype_classes']['settings_nodetype_classes_' . $node_type] = array(
     '#type' => 'textfield',
     '#title' => t($node_type_name),
-    '#default_value' => Xss::filterAdmin(theme_get_setting('settings.nodetype_classes_' . $node_type, $theme)),
+    '#default_value' => String::checkPlain(theme_get_setting('settings.nodetype_classes_' . $node_type, $theme)),
   );
 }
 

@@ -7,8 +7,9 @@
 
 namespace Drupal\at_core\Layout;
 
-use Drupal\Component\Utility\Tags;
 use Drupal\Core\Template\Attribute;
+use Drupal\Component\Utility\Tags;
+use Drupal\Component\Utility\Html;
 
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutCompatible;
@@ -113,11 +114,11 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
 
         // Add theme setting defined classes if Classitis is enabled.
         if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
-          if (isset($config_settings['enable_classitis']) && $config_settings['enable_classitis'] === 1) {
+          if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
             if (!empty($config_settings['page_classes_row_' . $row_region_key])) {
-              $classitis = Tags::explode($config_settings['page_classes_row_' . $row_region_key]);
-              foreach ($classitis as $class) {
-                $variables[$row_region_key . '__attributes']['class'][] = $class;
+              $shortcodes = Tags::explode($config_settings['page_classes_row_' . $row_region_key]);
+              foreach ($shortcodes as $class) {
+                $variables[$row_region_key . '__attributes']['class'][] = Html::getClass($class);
               }
             }
           }

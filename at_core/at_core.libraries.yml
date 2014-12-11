@@ -42,6 +42,14 @@ at.fastclick:
   dependencies:
     - core/jquery
 
+# Fastclick
+at.fastclick_initialize:
+  version: 1.0.3
+  js:
+    scripts/min/at.fastclickInitialize.min.js: {}
+  dependencies:
+    - at_core/at.fastclick
+
 # Responsive Menus (AT Core)
 at.responsivemenus:
   version: 1.0.0
@@ -55,15 +63,19 @@ at.responsivemenus:
     - core/matchmedia
     - at_core/at.enquire
 
-# Respond TODO: test with respond, I have deprecated loading Ie8 specific stylesheets for now, I might bring this back
-# however in the new layout system this is a huge pita, its much easier to load respond for the dwindling numbers of IE8 users.
+#TypeKit font loader.
+at.typekit_fonts:
+  version: 0.0.1
+  js:
+    scripts/min/at.typekitfonts.min.js: {}
+
+# Respond TODO: test with respond in IE8.
 at.respond:
   version: 1.0.0
   js:
     scripts/min/respond.min.js: { every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
-# Selectivizr TODO: test with IE8, layout and UIKit are critical, at least basic support must be had with both respond and either
-# IE9js or Selectivizr + yui3 (jQuery 2 does not support IE8)
+# Selectivizr TODO: test with IE8.
 at.selectivizr:
   version: 1.0.2
   js:

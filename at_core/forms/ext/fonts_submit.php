@@ -1,60 +1,20 @@
 <?php
 
+use Drupal\at_core\File\FileOperations;
+use Drupal\at_core\File\DirectoryOperations;
+
+use Drupal\Component\Utility\Xss;
+
 /**
  * @file
  * Output formatted CSS for fonts.
  */
 
-
-
-    //  // Google font.
-    //  if (!empty($config['font_google'])) {
-    //    $google_font_path = check_url($config['font_google']);
-    //    $google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
-    //    $page['#attached']['css'][] = array(
-    //      'data' => $google_font_path_fixed,
-    //      'type' => 'external',
-    //    );
-    //  }
-
-
-    ///   @import url(http://fonts.googleapis.com/css?family=Slabo+27px);
-
-/*
-<script type="text/javascript">
-  WebFontConfig = {
-    google: { families: [ 'Pacifico::latin', 'Open+Sans:400,700:latin,latin-ext' ] }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })();
-</script>
-*/
-
-
-// Typekit
-// http://help.typekit.com/customer/portal/articles/6852
-// Typically you probably don't need to worry about this because on most
-// AT Themes there are default fallback fonts already set globally and AT
-// will use the .wf-active selector in all styles set in Appearance settings
-// that use Typekit fonts.
-// styles to use before Typekit is loaded
-//.wf-loading {
-//}
-
-// styles to use after Typekit is loaded
-//.wf-active {
-//}
-
-
-
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
+
+  // Paths
+  $subtheme_path = drupal_get_path('theme', $theme);
+  $generated_scripts_path = $subtheme_path . '/scripts/generated';
 
   // Websafe fonts.
   $websafe_fonts = websafe_fonts();
@@ -69,23 +29,20 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $px_size = '';
   $rem_size = '';
 
-/*
-  $line_height_multiplier = $values['font_lineheight_multiplier_default'];
-  $values['font_lineheight_multiplier_large'];
-  $values['font_lineheight_multiplier_large_size'];
-*/
+  $fileOperations = new FileOperations();
+  $font_styles = array();
+
+  // Google fonts
+  // This uses the @import method, not ideal but easy to use and it works all the time,
+  // and does not require hacking html_head or using JS (which always gives a FOUT).
+  // The FOUT is avoided because @import blocks page rendering, which is why this is bad,
+  // however users generally hate FOUT's and find them very disconcerting.
+  if (!empty($values['settings_font_google'])) {
+    $safe_google_font = Xss::filter($values['settings_font_google']);
+    $font_styles[] = $safe_google_font;
+  }
 
   foreach ($font_elements as $font_key => $font_values) {
-
-    $font_styles = array();
-
-
-    if (isset($values['settings_font_google'])) {
-      //$google_font_path = check_url($config['font_google']);
-      //$google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
-      $font_styles[] = $values['settings_font_google'] . "\n";
-
-    }
 
     // Get the selectors for each element.
     $fonts[$font_key]['selectors'] = $font_values['selector'];
@@ -97,6 +54,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
     // Size/Line height
     if (!empty($values['settings_font_size_' . $font_key])) {
+
       $px_size = $values['settings_font_size_' . $font_key];
       $rem_size = $values['settings_font_size_' . $font_key] / $base_size;
 
@@ -157,7 +115,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
     $output = implode("\n", $font_styles);
   }
 
-  $output = $output ? $output : '/** No fonts styles set **/';
+  $output = $output ? Xss::filter($output) : '/** No fonts styles set **/';
 
   //$file_name = $theme . '.fonts.css';
 

@@ -35,6 +35,25 @@
       max-width: 6em;
     }
   }
+
+  #edit-setup {
+
+    #edit-help,
+    .form-item-settings-font-websafe,
+    .form-item-settings-font-google,
+    .form-item-settings-font-typekit,
+    .form-item-settings-font-customstack {
+      margin-bottom: 2em;
+    }
+  }
+
+  #edit-settings-font-websafe {
+    max-width: 100%;
+  }
+
+  #edit-settings-font-google {
+    width: 100%;
+  }
 }
 
 

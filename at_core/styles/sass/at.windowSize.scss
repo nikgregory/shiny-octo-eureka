@@ -1,17 +1,17 @@
 /* Basic styles for the window size debugger */
 .window-size-indicator {
-  background-color: rgba(0,0,0,0.9);
-  bottom: 3px;
-  color: #fff;
+  background-color: rgba(0,0,0,0.85);
+  bottom: 0.3rem;
+  color: #e5e5e5;
   font: 1rem/1 sans-serif;
-  padding: 3px 10px;
+  padding: 0.3rem 0 0.3rem 0.5rem;
   position: fixed;
-  right: 3px;
+  right: 0.3rem;
   opacity: 0.95;
   z-index: 999999;
-  border-radius: 4px;
-  width: 100px;
-  text-align: center;
+  border-radius: 2px;
+  width: 7rem;
+  text-align: left;
 
   p {
     margin: 0;
@@ -20,7 +20,7 @@
 }
 
 .wsi_em {
-  right: 105px;
+  right: 7.6rem;
 }
 
 .wsi_px {}

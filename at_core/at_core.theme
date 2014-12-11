@@ -5,18 +5,18 @@ use Drupal\Core\Language\Language;
 use Drupal\Core\Theme\ThemeSettings;
 use Drupal\Core\Url;
 use Drupal\user\UserInterface;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\Xss;
+use Drupal\Component\Utility\Tags;
+use Drupal\Component\Utility\Html;
+use Drupal\node\NodeInterface;
 
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Library\SystemLibraries;
 use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
-
-use Drupal\image\Entity\ImageStyle;
-use Drupal\Component\Utility\String;
-use Drupal\Component\Utility\Tags;
-use Drupal\node\NodeInterface;
-
 
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
@@ -33,6 +33,10 @@ use Drupal\node\NodeInterface;
 function at_core_page_attachments_alter(array &$page) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  if ($theme === 'seven') {
+    return;
+  }
 
   // Common paths.
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
@@ -71,17 +75,45 @@ function at_core_page_attachments_alter(array &$page) {
   // from this library (as declared in color.inc etc).
   $page['#attached']['library'][] = "$theme/color";
 
-  // Subtheme JS library script, by defualt this loads two dependancies (in the chain)
-  // - jQuery and Fastclick, the script itself intializes Fastclick on document.body.
-  $page['#attached']['library'][] = "$theme/scripts";
+  // We always load fastclick, at least for now this is a hard requirement of the theme.
+  $page['#attached']['library'][] = 'at_core/at.fastclick_initialize';
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
+    // Initialize a variable to collect head elements, we're going to hammer this.
+    $head_elements = array();
+
     // Fonts.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+
       if (file_exists($generated_files_path . '/fonts.css')) {
         $page['#attached']['library'][] = "$theme/fonts";
+      }
+
+      // An ugly trial and error hack on html_head to add a stylesheet link. This is not
+      // very pretty but it does work, however I have elected to go with the @import
+      // method since this is easier for low-tech users to use.
+      /*
+      if (!empty($config['font_google'])) {
+        $safe_google_fonts = Xss::filter($config['font_google']);
+        $head_elements['font_google'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#weight' => 1000,
+          '#attributes' => array(
+            'href' => $safe_google_fonts,
+            'rel' => 'stylesheet',
+          ),
+        );
+      }
+      */
+
+      // With Typekit we can do things sensibly and use drupalSettings and load a script file.
+      if (!empty($config['font_typekit'])) {
+        $tfk = String::checkPlain($config['font_typekit']);
+        $page['#attached']['drupalSettings'][$theme]['tkf'] = $tfk;
+        $page['#attached']['library'][] = 'at_core/at.typekit_fonts';
       }
     }
 
@@ -150,18 +182,18 @@ function at_core_page_attachments_alter(array &$page) {
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
-        $drupalSettings['rm']['bp'] = $config['responsive_menu_breakpoint'];
+        $drupalSettings['bp'] = $config['responsive_menu_breakpoint'];
       }
 
       // Loop the config settings and build an array for drupalSettings.
       foreach (array('default', 'responsive') as $style) {
         if (isset($config['responsive_menu_' . $style . '_style'])) {
-          $drupalSettings['rm'][$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
+          $drupalSettings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
         }
       }
 
       // Attach JS settings.
-      $page['#attached']['drupalSettings'][$theme] = $drupalSettings;
+      $page['#attached']['drupalSettings'][$theme]['rm'] = $drupalSettings;
     }
 
     // Attach polyfills to support IE8.
@@ -172,8 +204,6 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
     if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
-      $head_elements = array();
-
       $rel = 'apple-touch-icon';
       if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
         $rel = 'apple-touch-icon-precomposed';
@@ -258,6 +288,7 @@ function at_core_page_attachments_alter(array &$page) {
   }
 }
 
+
 /**
  * Alter CSS files before they are output on the page.
  *
@@ -296,43 +327,44 @@ function at_core_css_alter(&$css) {
   // and since themes cannot fire hook_libraries_alter() https://www.drupal.org/node/2050269
   // and we don't yet have dynamic libraries https://www.drupal.org/node/2358981
   // I have no recourse but to hack hook_css_alter() to load the layout files. Hooray for
-  // hook_css_alter(), now some dogooder will propose to remove this hook as well and then
-  // we are truly screwed until we get dynamic libraries.
+  // hook_css_alter().
   //
   // This determines the page suggestion for the current page and checks if there is an
-  // existing config key for that suggestion, if so assume a css file exists and try to
-  // load it.
+  // existing config key for that suggestion, then loads a layout CSS file appropriatly.
   if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
 
-    // Commonly used paths
+    // If we don't have the base path to generated files throw an error.
     if (!empty($config['generated_files_path'])) {
       $generated_files_path = $config['generated_files_path'];
     }
     else {
-      drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
+      drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes layout settings.'), 'error');
     }
 
     // Get theme registry.
     $theme_registry = \Drupal::service('theme.registry')->getRuntime();
 
-    // Is this the front page or?
+    // Build an array of path arguments to pass to theme_get_suggestions()
     $path = \Drupal::request()->getPathInfo();
-    $page_args = explode('/', $path);
+    $path_args = explode('/', $path);
 
-    if (empty($page_args[1])) {
-      $page_args = [''];
+    // This is the front page.
+    if (empty($path_args[1])) {
+      $path_args = [''];
     }
+
+    // Unset the first item in the array, othewise delimeters are doubled, don't ask me why.
+    unset($path_args[0]);
+    $path_args = array_values($path_args);
 
     // Add node type suggestion.
     if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      $page_args[] = $node->getType();
+      $path_args[] = $node->getType();
     }
 
-    //var_dump($page_args);
-
-    // Get page suggestions, loop, check for a config key, then break
-    // if/when we have a match.
-    if ($suggestions = theme_get_suggestions($page_args, 'page', '__')) {
+    // Get page suggestions, loop, check for a config key and break
+    // if/when we have a match in the registry.
+    if ($suggestions = theme_get_suggestions($path_args, 'page')) {
       foreach ($suggestions as $suggestion) {
         if (isset($config['suggestions'][$suggestion])) {
           $suggestions_layout = $config['suggestions'][$suggestion];
@@ -344,7 +376,8 @@ function at_core_css_alter(&$css) {
       }
     }
 
-    // If there is no layout for this suggestion load the default.
+    // Get the layout, fallback to the default layout if for some reason it does
+    // not exists, perhaps it was deleted by mistake etc.
     if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
       $layout = $theme . '.layout.'  . $suggestions_layout . '.css';
     }
@@ -433,6 +466,16 @@ function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
 
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
+ * we can remove this.
+ */
+function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
+}
+
+
+/**
  * Preprocess variables for html templates.
  */
 function at_core_preprocess_html(&$variables) {
@@ -441,7 +484,7 @@ function at_core_preprocess_html(&$variables) {
 
   // Add a "site name" body classes for advanced theming of multi-sites.
   if ($variables['head_title_array']['name']) {
-    $variables['attributes']['class'][] = 'site-name--' . drupal_html_class($variables['head_title_array']['name']);
+    $variables['attributes']['class'][] = 'site-name--' . Html::getClass($variables['head_title_array']['name']);
   }
 
   // Set the skip navigation target ID
@@ -452,7 +495,7 @@ function at_core_preprocess_html(&$variables) {
 
     // Skip navigation target setting.
     if (isset($config['skip_link_target'])) {
-      $variables['skip_link_target'] = '#' . drupal_html_class($config['skip_link_target']);
+      $variables['skip_link_target'] = '#' . Html::getClass($config['skip_link_target']);
     }
 
     // Add the responsive menu styles settings.
@@ -463,7 +506,7 @@ function at_core_preprocess_html(&$variables) {
 
   // Add theme name class, using this for debugging in development since I switch
   // themes a lot and need to know which one I am looking at, could be removed later on?
-  $variables['attributes']['class'][] = 'theme-name--' . drupal_html_class($theme);
+  $variables['attributes']['class'][] = 'theme-name--' . Html::getClass($theme);
 }
 
 
@@ -558,7 +601,7 @@ function at_core_preprocess_region(&$variables) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
         $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = $class;
+          $variables['attributes']['class'][] = Html::getClass($class);
         }
       }
     }
@@ -579,7 +622,7 @@ function at_core_preprocess_node(&$variables) {
       if (!empty($config['nodetype_classes_' . $node->getType()])) {
         $shortcodes = Tags::explode($config['nodetype_classes_' . $node->getType()]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = $class;
+          $variables['attributes']['class'][] = Html::getClass($class);
         }
       }
     }
@@ -745,7 +788,7 @@ function at_core_preprocess_block(&$variables) {
       if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
         $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = $class;
+          $variables['attributes']['class'][] = Html::getClass($class);
         }
       }
     }
@@ -883,18 +926,29 @@ function at_core_preprocess_user(&$variables) {
 
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter().
- * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
- * we can remove this.
+ * Preprocess variables for user templates.
  */
-function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
-  $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
+function at_core_preprocess_views_view(&$variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Theme settings.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+      if (isset($config['views_hide_feedicon']) && $config['views_hide_feedicon'] === 1) {
+        $variables['feed_icons'] = array();
+      }
+    }
+  }
 }
+
+
+
 
 
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
-//function at_core_preprocess_views_view(&$variables) {}
+//
 //function at_core_preprocess_menu(&$variables) {}
 
 

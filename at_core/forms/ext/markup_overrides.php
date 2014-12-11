@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\Xss;
 
 /**
  * @file
@@ -49,8 +50,8 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'][
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
-  '#description' => t('Set in CSS using the <a href="!content_property" target="_blank">content property</a>.', array('!content_property' => 'http://www.w3schools.com/cssref/pr_gen_content.asp')),
-  '#default_value' => t(theme_get_setting('settings.breadcrumb_separator')),
+  '#description' => t('Use UTF8 chars or escaped unicode, e.g. <code> \00BB </code> (chevron &#187;). You can add spaces also. <a href="!unicodetable" target="_blank">Unicode-table.com</a> is a good place to find codes.', array('!unicodetable' => 'http://unicode-table.com/')),
+  '#default_value' => String::checkPlain(theme_get_setting('settings.breadcrumb_separator')),
   '#size' => 25,
   '#maxlength' => 60,
 );
@@ -97,6 +98,13 @@ $form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_
   '#default_value' => theme_get_setting('settings.comments_hide_title'),
   '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
 );
+$form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_views_hide_feedicon'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Hide Feed icon in views pages'),
+  '#default_value' => theme_get_setting('settings.views_hide_feedicon'),
+  '#description' => t('Page views such as the Frontpage show an RSS feed icon by default, use this setting to remove all page view feedicons.'),
+);
+
 
 // Accessibility
 $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
