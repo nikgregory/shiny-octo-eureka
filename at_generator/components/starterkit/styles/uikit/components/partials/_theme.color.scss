@@ -696,7 +696,7 @@ button,
 
 // Action button
 .button-action {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+  //@include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
 }
 
 

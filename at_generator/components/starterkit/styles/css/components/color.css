@@ -591,25 +591,6 @@ button[disabled]:hover,
   border-color: transparent;
 }
 
-/* line 698, ../../uikit/components/partials/_theme.color.scss */
-.button-action {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
-}
-/* line 10, ../../uikit/components/mixins/_button-variant.scss */
-.button-action:link, .button-action:visited {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
-}
-/* line 17, ../../uikit/components/mixins/_button-variant.scss */
-.button-action:hover, .button-action:focus, .button-action:active, .button-action.active {
-  color: #fffffe;
-  background-color: #262626;
-  border-color: #c6c6c6;
-}
-
 /* Drop buttons */
 /* line 704, ../../uikit/components/partials/_theme.color.scss */
 .js .dropbutton-widget {

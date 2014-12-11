@@ -29,7 +29,7 @@ button,
   text-decoration: none;
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
-  line-height: 1;
+  @include output-rhythm(line-height, $form_input_button_select_height);
   white-space: nowrap;
 
   &:hover,
@@ -60,6 +60,9 @@ button,
 // Action button
 // - are links with an icon, and we add an icon for extra visibility.
 .button-action {
+  display: inline-block;
+  vertical-align: baseline;
+  border: 0;
 
   &:before {
     content: $button-action-icon;
@@ -226,25 +229,9 @@ label button.link {
 /**
  * Styles for link buttons and action links. TODO.
  */
-/*
-.action-links {
+li[class*="action--"] {
   list-style: none;
   padding: 0;
   @include output-rhythm(margin, $medium 0);
-
-  li {
-    display: inline-block;
-    margin: 0 $small;
-
-    &:first-child {
-      margin-left: 0; // LTR
-    }
-  }
-
-  // RTL
-  @at-root [dir="rtl"] .action-links li:first-child {
-    margin-left: $small;
-    margin-right: 0;
-  }
 }
-*/
+
