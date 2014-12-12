@@ -4,8 +4,6 @@ Drupal.behaviors.ATtypekitFonts = {
 
     var tkf = settings[settings.ajaxPageState.theme]['tkf'];
 
-    console.log(tkf);
-
     (function(d) {
       var config = {
         kitId: tkf,

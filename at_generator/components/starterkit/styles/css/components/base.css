@@ -402,16 +402,12 @@ input[type="url"],
 input[type="week"] {
   max-width: 100%;
   box-sizing: border-box;
-  height: 29px;
-  height: 1.82838rem;
-  padding: 0 10px;
-  padding: 0 0.61803rem;
   border-radius: 2px;
   border: 1px solid;
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-/* line 41, ../../uikit/components/partials/_base.form.scss */
+/* line 38, ../../uikit/components/partials/_base.form.scss */
 textarea:focus,
 select:focus,
 input[type="date"]:focus,
@@ -430,7 +426,7 @@ input[type="week"]:focus {
   outline: 0;
   outline: thin dotted \9;
 }
-/* line 50, ../../uikit/components/partials/_base.form.scss */
+/* line 47, ../../uikit/components/partials/_base.form.scss */
 textarea[disabled],
 select[disabled],
 input[type="date"][disabled],
@@ -449,49 +445,65 @@ input[type="week"][disabled] {
   cursor: not-allowed;
 }
 
-/* line 62, ../../uikit/components/partials/_base.form.scss */
+/* line 59, ../../uikit/components/partials/_base.form.scss */
 input {
   min-width: 13px;
   line-height: 1;
   vertical-align: middle;
+  height: 29px;
+  height: 1.82838rem;
+  padding: 0 7px;
+  padding: 0 0.43162rem;
 }
 
-/* line 71, ../../uikit/components/partials/_base.form.scss */
+/* line 70, ../../uikit/components/partials/_base.form.scss */
 input[type="checkbox"], input[type="radio"] {
   display: inline-block;
   position: relative;
   bottom: 1px;
 }
 
-/* line 92, ../../uikit/components/partials/_base.form.scss */
+/* line 85, ../../uikit/components/partials/_base.form.scss */
+select {
+  height: 29px;
+  height: 1.82838rem;
+}
+
+/* line 90, ../../uikit/components/partials/_base.form.scss */
+textarea {
+  padding: 7px;
+  padding: 0.43162rem;
+}
+
+/* line 96, ../../uikit/components/partials/_base.form.scss */
 textarea,
 select[size],
 select[multiple] {
   height: auto;
 }
 
-/* line 100, ../../uikit/components/partials/_base.form.scss */
+/* line 104, ../../uikit/components/partials/_base.form.scss */
 label {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   display: block;
 }
-/* line 107, ../../uikit/components/partials/_base.form.scss */
+/* line 111, ../../uikit/components/partials/_base.form.scss */
 label.option {
   font-weight: normal;
   display: inline;
   padding: 0 3px;
 }
 
-/* line 116, ../../uikit/components/partials/_base.form.scss */
+/* line 120, ../../uikit/components/partials/_base.form.scss */
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* line 127, ../../uikit/components/partials/_base.form.scss */
+/* line 131, ../../uikit/components/partials/_base.form.scss */
 details {
   border: 1px solid;
   border-radius: 2px;
@@ -499,14 +511,14 @@ details {
   margin: 1rem 0;
 }
 
-/* line 135, ../../uikit/components/partials/_base.form.scss */
+/* line 139, ../../uikit/components/partials/_base.form.scss */
 summary {
   cursor: pointer;
   padding: 10px;
   padding: 0.61803rem;
 }
 
-/* line 151, ../../uikit/components/partials/_base.form.scss */
+/* line 155, ../../uikit/components/partials/_base.form.scss */
 button[disabled],
 input[disabled],
 select[disabled],
@@ -523,7 +535,7 @@ a.button_disabled {
   cursor: default;
 }
 
-/* line 171, ../../uikit/components/partials/_base.form.scss */
+/* line 175, ../../uikit/components/partials/_base.form.scss */
 input:invalid,
 button:invalid,
 .button:invalid,

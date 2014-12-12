@@ -30,9 +30,6 @@ input[type="week"] {
 
   max-width: 100%;
   box-sizing: border-box;
-  @include output-rhythm(height, $form_input_button_select_height);
-  @include output-rhythm(padding, 0 $x-small);
-
   border-radius: $form-border-radius;
   border: $form-border-width $form-border-style;
 
@@ -63,6 +60,8 @@ input {
   min-width: 13px;
   line-height: 1; // reset line-height
   vertical-align: middle; // make sure this happens
+  @include output-rhythm(height, $form_input_button_select_height);
+  @include output-rhythm(padding, 0 $xx-small);
 }
 
 
@@ -84,7 +83,13 @@ input {
 
 // Select
 select {
+  @include output-rhythm(height, $form_input_button_select_height);
   > option {}
+}
+
+
+textarea {
+  @include output-rhythm(padding, $xx-small);
 }
 
 

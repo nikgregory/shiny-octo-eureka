@@ -197,9 +197,11 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Attach polyfills to support IE8.
-    if ((isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) && (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1)) {
-      $page['#attached']['library'][] = 'at_core/at.respond';
-      $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
+    if (isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) {
+      if (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1) {
+        $page['#attached']['library'][] = 'at_core/at.respond';
+        $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
+      }
     }
 
     // Apple touch icons - low, medium and high (see the Apple docs on touch icons).

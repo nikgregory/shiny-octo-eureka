@@ -30,7 +30,9 @@
   //visually-hidden by default
   label {}
 
-  input.form-search {}
+  input.form-search {
+    width: 100%; // Risky!
+  }
 
   .form-actions {
     input.button {}
@@ -40,13 +42,28 @@
 
 
 // Advanced Search Form.
-#edit-advanced {
-  .details-wrapper {
-    > fieldset > legend {
-      display: none; // Remove redundant legends. This is a bit dangerous.
+.search-page-form {
+
+  #edit-basic {
+    display: block;
+
+    .form-type-search,
+    .form-search {
+      display: block;
+      width: 100%;
+      @include output-rhythm(margin, $xx-small 0);
+    }
+  }
+
+  #edit-advanced {
+    .details-wrapper {
+      > fieldset > legend {
+        display: none; // Remove redundant legends. This is a bit dangerous.
+      }
     }
   }
 }
+
 
 
 

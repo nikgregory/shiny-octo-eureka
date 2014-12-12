@@ -84,19 +84,3 @@ $form['devel']['settings_livereload_snippet'] = array(
 */
 
 
-// Support legacy browsers
-//----------------------------------------------------------------------
-$form['devel']['legacy_browsers'] = array(
-  '#type' => 'details',
-  '#title' => t('Legacy Browsers'),
-  //'#group' => 'at_settings',
-  '#description' => t('Support IE8 (and maybe below - no guarantees given). Without this setting IE8 will display in one column and some styles may fail to be applied. By checking this setting two polyfills will be loaded for IE8 and below: <b>Respond.js</b> - mainly to support the Layout and Responsive Menu options, and <b>Selectivrz</b> - mainly for the Layout and UIKit styles which use many CSS3 selectors. Additionally the YUI3 library will load for IE8 only - this is for Selectivr because Drupal core uses jQuery 2, which does not support IE8. In all, this is a bit of a hack and good luck.'),
-);
-
-// Show page suggestions.
-$form['devel']['legacy_browsers']['settings_legacy_browser_polyfills'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Loads polyfills to support IE8'),
-  '#default_value' => theme_get_setting('settings.legacy_browser_polyfills', $theme),
-);
-

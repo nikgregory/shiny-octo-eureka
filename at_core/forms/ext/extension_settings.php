@@ -132,6 +132,13 @@ $form['enable_extensions']['settings_enable_devel'] = array(
   '#default_value' => theme_get_setting('settings.enable_devel', $theme),
 );
 
+// Legacy browsers
+$form['enable_extensions']['settings_enable_legacy_browsers'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Legacy browsers'),
+  '#description' => t('Settings to support really old browsers like IE8.'),
+  '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
+);
 
 // Extensions master toggle.
 if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
@@ -149,6 +156,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'custom_css',
     'markup_overrides',
     'devel',
+    'legacy_browsers',
   );
 
   // get form values

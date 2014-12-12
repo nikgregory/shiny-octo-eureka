@@ -30,8 +30,25 @@
   margin: 0.43162rem 0;
 }
 
-/* line 45, ../../uikit/components/partials/_component.search.forms.scss */
-#edit-advanced .details-wrapper > fieldset > legend {
+/* line 33, ../../uikit/components/partials/_component.search.forms.scss */
+.form-type-search input.form-search {
+  width: 100%;
+}
+
+/* line 47, ../../uikit/components/partials/_component.search.forms.scss */
+.search-page-form #edit-basic {
+  display: block;
+}
+/* line 50, ../../uikit/components/partials/_component.search.forms.scss */
+.search-page-form #edit-basic .form-type-search,
+.search-page-form #edit-basic .form-search {
+  display: block;
+  width: 100%;
+  margin: 7px 0;
+  margin: 0.43162rem 0;
+}
+/* line 60, ../../uikit/components/partials/_component.search.forms.scss */
+.search-page-form #edit-advanced .details-wrapper > fieldset > legend {
   display: none;
 }
 /*# sourceMappingURL=search.css.map */

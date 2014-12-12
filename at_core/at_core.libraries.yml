@@ -5,7 +5,7 @@ at.windowsize:
     component:
       styles/css/at.windowSize.css: {}
   js:
-    scripts/min/at.windowSize.min.js: {}
+    scripts/min/at.windowSize.min.js: { minified: true }
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -14,7 +14,7 @@ at.windowsize:
 at.matchheight:
   version: 0.5.2
   js:
-    scripts/min/jquery.matchHeight.min.js: {}
+    scripts/min/jquery.matchHeight.min.js: { minified: true }
   dependencies:
     - core/jquery
 
@@ -22,7 +22,7 @@ at.matchheight:
 at.enquire:
   version: 2.1.2
   js:
-    scripts/min/enquire.min.js: {}
+    scripts/min/enquire.min.js: { minified: true }
   dependencies:
     - core/matchmedia
 
@@ -30,7 +30,7 @@ at.enquire:
 at.doubletaptogo:
   version: 1.0.0
   js:
-    scripts/min/doubleTapToGo.min.js: {}
+    scripts/min/doubleTapToGo.min.js: { minified: true }
   dependencies:
     - core/jquery
 
@@ -38,7 +38,7 @@ at.doubletaptogo:
 at.fastclick:
   version: 1.0.3
   js:
-    scripts/min/fastclick.min.js: {}
+    scripts/min/fastclick.min.js: { minified: true }
   dependencies:
     - core/jquery
 
@@ -46,15 +46,16 @@ at.fastclick:
 at.fastclick_initialize:
   version: 1.0.3
   js:
-    scripts/min/at.fastclickInitialize.min.js: {}
+    scripts/min/at.fastclickInitialize.min.js: { minified: true }
   dependencies:
     - at_core/at.fastclick
+    - core/jquery
 
 # Responsive Menus (AT Core)
 at.responsivemenus:
   version: 1.0.0
   js:
-    scripts/min/at.responsiveMenus.min.js: {}
+    scripts/min/at.responsiveMenus.min.js: { minified: true }
   dependencies:
     - core/modernizr
     - core/jquery
@@ -67,19 +68,19 @@ at.responsivemenus:
 at.typekit_fonts:
   version: 0.0.1
   js:
-    scripts/min/at.typekitfonts.min.js: {}
+    scripts/min/at.typekitfonts.min.js: { minified: true }
 
 # Respond TODO: test with respond in IE8.
 at.respond:
   version: 1.0.0
   js:
-    scripts/min/respond.min.js: { every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+    scripts/min/respond.min.js: { minified: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
 # Selectivizr TODO: test with IE8.
 at.selectivizr:
   version: 1.0.2
   js:
-    scripts/min/at.selectivizr.min.js: { every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+    scripts/min/at.selectivizr.min.js: { minified: true, browsers: { IE: 'lte IE 8', '!IE': false } }
   dependencies:
     - at_core/at.yui3
 
@@ -92,26 +93,26 @@ at.yui3:
     gpl-compatible: true
   version: 3.18.0
   js:
-    http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, every_page: true, browsers: { IE: 'lte IE 8', '!IE': false } }
+    http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, browsers: { IE: 'lte IE 8', '!IE': false } }
 
 # AT Core libs for theme dev.
 at.devel_debug_layout:
   version: 0.0.1
   css:
     theme:
-      styles/css/at.devel.debug.layout.css: { every_page: true }
+      styles/css/at.devel.debug.layout.css: {}
 
 at.devel_colorize_regions:
   version: 0.0.1
   css:
     theme:
-      styles/css/at.devel.colorize.regions.css: { every_page: true }
+      styles/css/at.devel.colorize.regions.css: {}
 
 at.devel_nuke_toolbar:
   version: 0.0.1
   css:
     theme:
-      styles/css/at.devel.nuke.toolbar.css: { every_page: true }
+      styles/css/at.devel.nuke.toolbar.css: {}
 
 # Appearance settings scripts
 at.appearance_settings:
@@ -120,7 +121,7 @@ at.appearance_settings:
     theme:
       styles/css/at.appearance.css: {}
   js:
-    scripts/min/at.appearance.min.js: {}
+    scripts/min/at.appearance.min.js: { minified: true }
   dependencies:
     - core/jquery
     - core/drupal

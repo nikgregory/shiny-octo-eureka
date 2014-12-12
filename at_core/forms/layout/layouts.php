@@ -17,8 +17,6 @@ $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 $css_config = $layout_compatible_data['css_config'];
 
-//kpr($css_config);
-
 // Prepare variables for getting the visual layout thingee CSS file.
 $provider_path = drupal_get_path('theme', $css_config['layout_provider']) . '/layout/' . $css_config['layout'];
 
@@ -35,11 +33,13 @@ $template_suggestions['page'] = 'page';
 foreach ($config as $config_key => $config_value) {
   if (substr($config_key, 0, 16) == 'suggestion_page_') {
     if (!empty($config_value) && $config_value !== 'page') {
-      $template_suggestions['page__' . $config_value] = 'page__' . $config_value;
+      $clean_config_value = String::checkPlain($config_value);
+      $template_suggestions['page__' . $clean_config_value] = 'page__' . $clean_config_value;
     }
   }
 }
 
+// Checkbox setting that keeps the layouts details form open.
 $layouts_form_open = theme_get_setting('settings.layouts_form_open', $theme);
 
 $form['layouts'] = array(
@@ -51,16 +51,7 @@ $form['layouts'] = array(
 );
 
 // Attached required CSS and JS libraries and files.
-/*
-$form['layouts']['#attached'] = array(
-  'css' => array(
-    $provider_path . '/' .  $css_config['css_form_styles_path'],
-  ),
-);
-*/
-
 $form['layouts']['#attached']['library'][] = "$theme/site_builder_layout";
-
 
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(
@@ -105,6 +96,8 @@ $form['layouts']['layout_select']['settings_suggestions'] = array(
 );
 
 foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
+
+  //$suggestions_name = String::checkPlain($suggestions_name);
 
   if ($suggestions_name == 'page') {
     $suggestions_name = 'page (default)';

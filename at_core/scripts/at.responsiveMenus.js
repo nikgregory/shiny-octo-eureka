@@ -5,6 +5,8 @@
   Drupal.behaviors.atrM = {
     attach: function (context, settings) {
 
+      $(document.body).removeClass('no-fouc');
+
       // Verify that the user agent understands media queries.
       if (!window.matchMedia('only screen').matches) {
         return;
@@ -38,7 +40,7 @@
       .register(rm['bp'], {
         // Setup fires strait away.
         setup: function() {
-          $(document.body).addClass(def).removeClass('no-fouc');
+          $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region');
           $('.rm-block h2.block-menu__title').removeClass('visually-hidden');
         },
