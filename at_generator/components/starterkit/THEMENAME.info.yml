@@ -4,6 +4,8 @@ base theme: at_core
 subtheme type: adaptive_subtheme
 layout: site-builder
 description: 'Practical starter theme for site builders, themers, and rapid prototyping.'
+alt text: 'Screenshot for THEMENAME.'
+tags: 'sub-theme'
 core: 8.x
 hidden: true
 regions:

@@ -261,6 +261,9 @@ class ThemeGeneratorSubmit {
     $theme_info_data['description'] = "'$description (base theme: $base_theme)'";
 
 
+    // alt text
+    $theme_info_data['alt text'] = "'Screenshot for $friendly_name'";
+
     // Version
     $version = $version ?: '8.0.x';
     $theme_info_data['version']     = $version;
@@ -294,6 +297,7 @@ class ThemeGeneratorSubmit {
 
     // Reset the themes list, see if we can get this to show up without having the clear the cache manually.
     system_list_reset();
+    \Drupal::service('theme_handler')->rebuildThemeData();
 
 
     // Set messages, however we may need more validation?

@@ -51,10 +51,10 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       return;
     }
 
-    foreach ($this->layout_config['rows'] as $row => $regions) {
-      foreach ($regions['regions'] as $region_key => $region_name) {
+    foreach ($this->layout_config['rows'] as $row_name => $row_data) {
+      foreach ($row_data['regions'] as $region_key => $region_name) {
         if ($region_key == $region) {
-          $region_row = $row;
+          $region_row = $row_name;
           break;
         }
       }
@@ -66,7 +66,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
   // Return row attributes
   public function rowAttributes() {
     $variables = array();
-    $row_region_intersect = array();
+    $active_row_regions = array();
     $config_settings = \Drupal::config($this->theme_name . '.settings')->get('settings');
 
     // If rows are empty return early.
@@ -74,100 +74,72 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       return;
     }
 
-    // Build array of rows with region and attribute values.
-    foreach ($this->layout_config['rows'] as $row => $regions) {
-      $rows[$row] = $regions;
+    // Build array of rows with region values.
+    foreach ($this->layout_config['rows'] as $row_name => $row_data) {
 
-      // Set an increment value for each region in a row. "rso" is "row source order".
+      // Set a bool for active regions, assume false.
+      $variables[$row_name . '__regions']['active'] = FALSE;
+
       $i = 1;
-      foreach ($regions['regions'] as $rg_key => $rg_value) {
-        $rso[$row][$rg_key] = $i++;
+      foreach ($row_data['regions'] as $region_key => $region_name) {
+        $region_source_order[$row_name][$region_key] = $i++; // Set an increment value for each region for the .hr class (has-regions)
+        $row_regions[$row_name][] = $region_key; // Build array to intersect and use for the .arc class (active region count).
       }
-    }
 
-    // Loop over rows and build attributes, cull out inactive regions, settings attributes for inactive
-    // regions is a performance hit of massive proportions.
-    foreach ($rows as $row_key => $row_values) {
-      if (!empty($row_values['regions'])) {
-        foreach ($row_values['regions'] as $region_key => $region_name) {
-          $new_row_values[$row_key][] = $region_key;
-        }
+      // Remove inactive regions.
+      $active_row_regions[$row_name]['regions'] = array_intersect($row_regions[$row_name], $this->active_regions);
+
+      // Unset inactive rows.
+      if (empty($active_row_regions[$row_name]['regions'])) {
+        unset($active_row_regions[$row_name]);
       }
-      $row_region_intersect[$row_key] = array_intersect($new_row_values[$row_key], $this->active_regions);
     }
 
     // Set additional attributes for rows.
-    foreach ($row_region_intersect as $row_region_key => $row_region_values) {
+    foreach ($active_row_regions as $row_key => $row_values) {
+      //if (!empty($row_values['regions'])) {}
 
-      // Set a bool for active regions, assume false.
-      $variables[$row_region_key . '__regions']['active'] = FALSE;
+      // If active regions set to true to print the row, basically a catch all condition.
+      $variables[$row_key . '__regions']['active'] = TRUE;
 
-      if (!empty($row_region_values)) {
+      // Instantiate attribute object arrays per row.
+      $variables[$row_key . '__attributes'] = new Attribute(array('class' => array()));
 
-        // Instantiate attribute object arrays per row.
-        $variables[$row_region_key . '__attributes'] = new Attribute(array('class' => array()));
+      // Add the region wrapper classes.
+      $variables[$row_key . '__attributes']['class'][] = 'l-rw';  // l-rw = layout region wrapper
+      $variables[$row_key . '__attributes']['class'][] = 'regions'; // theming class
+      $variables[$row_key . '__attributes']['class'][] = 'pr-'. str_replace('_', '-', $row_key) . '__rw'; // BEM block-element class
 
-        // Add the row class in page generate, shift the attributes to the regions wrapper
-        $variables[$row_region_key . '__attributes']['class'][] = 'l-rw';  // rw = region wrapper
-        $variables[$row_region_key . '__attributes']['class'][] = 'regions';
-        $variables[$row_region_key . '__attributes']['class'][] = 'pr-'. str_replace('_', '-', $row_region_key) . '__rw'; // pr = page row
-
-        // Add theme setting defined classes if Classitis is enabled.
-        if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
-          if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
-            if (!empty($config_settings['page_classes_row_' . $row_region_key])) {
-              $shortcodes = Tags::explode($config_settings['page_classes_row_' . $row_region_key]);
-              foreach ($shortcodes as $class) {
-                $variables[$row_region_key . '__attributes']['class'][] = Html::getClass($class);
-              }
-            }
-          }
-        }
-
-        // Set row attributes as defined in the layout configuration yml file.
-        if (isset($row_region_values['attributes'])) {
-          foreach ($row_region_values['attributes'] as $attribute => $value) {
-            if (is_array($value)) {
-              foreach ($value as $attr_value) {
-                $variables[$row_region_key . '__attributes'][$attribute][] = $attr_value;
-              }
-            }
-            else {
-              $variables[$row_region_key . '__attributes'][$attribute] = $value;
-            }
-          }
-        }
-
-        if (!empty($row_region_intersect[$row_region_key])) {
-
-          // Count how many active regions.
-          $count = count($row_region_values);
-
-          // If active regions set to true to print the row, basically a catch all condition.
-          $variables[$row_region_key . '__regions']['active'] = TRUE;
-
-          // Region count class. "arc" is "active region count"
-          $variables[$row_region_key . '__attributes']['class'][] = 'arc--'. $count;
-
-          // Active region classes.
-          foreach ($row_region_values as $region_class) {
-            if ($rso[$row_region_key][$region_class]) {
-              $rso_count_class[$row_region_key][] = $rso[$row_region_key][$region_class];
+      // Add theme setting defined classes if Shortcodes is enabled.
+      if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
+        if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
+          if (!empty($config_settings['page_classes_row_' . $row_key])) {
+            $shortcodes = Tags::explode($config_settings['page_classes_row_' . $row_key]);
+            foreach ($shortcodes as $class) {
+              $variables[$row_key . '__attributes']['class'][] = Html::getClass($class);
             }
           }
         }
       }
 
-      // rso, or "region source order" tells us which regions are actually printing based on the original source order, this
-      // is a powerful class that will be used for any order columns type layout with minimal CSS and classes, think of this
-      // like Drupals "two-sidebars" type class but automated for any row and any number of regions.
-      // The class hr is "has regions".
-      if (isset($rso_count_class[$row_region_key])) {
-        $variables[$row_region_key . '__attributes']['class'][] =  'hr--' . implode('-', $rso_count_class[$row_region_key]);
+      // Active Regions: "arc" is "active region count", this is number of active regions in this row on this page.
+      $count = count($row_values['regions']);
+      $variables[$row_key . '__attributes']['class'][] = 'arc--'. $count;
+
+      // Match each active region with its'corrosponding source order increment.
+      foreach ($row_values['regions'] as $region) {
+        if (isset($region_source_order[$row_key][$region])) {
+          $row_has_regions[$row_key][] = $region_source_order[$row_key][$region];
+        }
+      }
+
+      // Has Regions: the "hr" class tells us which regions are active by source order (as per the layout markup yml),
+      // this allows us to push layout dependant on exactly which regions are active.
+      if (isset($row_has_regions[$row_key])) {
+        $variables[$row_key . '__attributes']['class'][] =  'hr--' . implode('-', $row_has_regions[$row_key]);
       }
     }
 
     return $variables;
   }
-
 }

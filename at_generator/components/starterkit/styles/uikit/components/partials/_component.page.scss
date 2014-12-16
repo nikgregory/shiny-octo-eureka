@@ -1,38 +1,83 @@
 /**
  * Page
- *  - mainly for markup that is printed directly in page.html.twig and
- *    .l-r {}
+ *  - for page.html.twig and region markup.
  ========================================================================== */
 
 // Page wrapper
 // Set relative to make it easier to use absolute positioning and ensure items do
 // not go under the toolbar or other items in the page-top region. If you are using
-// offcanvas responsive menu, it's the page wrapper that pushes over, not body.
+// offcanvas responsive menu, it's .page that transforms, not body.
 .page {
   position: relative;
 }
 
-// We need some padding to avoid browser collisions.
+
+// Page Rows
+// These match the Site Builder layout.
+// Do not add layout to these selectors, other than top/bottom margin etc. You might break the layout.
+
+// Messages
+.pr-messages {} // outer wrapper. This wrapper will also have the .l-pr class.
+.pr-messages__rw {} // inner wrapper (rw - region-wrapper), wraps regions. This wrapper also has the .l-rw and .region classes.
+
+
+// Leaderboard
+.pr-leaderboard {}
+.pr-leaderboard__rw {}
+
+
+// Header
+.pr-header {}
+.pr-header__rw {}
+
+
+// Navbar
+.pr-navbar {}
+.pr-navbar__rw {}
+
+
+// Features
+.pr-features {}
+.pr-features__rw {}
+
+
+// Main
+.pr-main {}
+.pr-main__rw {}
+
+
+// Tertiary
+.pr-tertiary {}
+.pr-tertiary__rw {}
+
+
+// Footer
+.pr-footer {}
+.pr-footer__rw {}
+
+
+// .l-pr is a layout class on each page row outer wrapper.
 .l-pr {
   padding: 0 2vw;
 }
 
-// Regions wrapper
-//  - .l-rw is the main wrapper selector for all regions within a page.
-.l-rw {
-}
+
+// Regions wrappers
+//  - .l-rw is the main layout wrapper selector for all regions within a row. The layout system
+//           uses this wrapper and selector extensively.
+//  - .region is a theme component class for adding styles like backgrounds etc.
+.l-rw {}
+.region {}
 
 
 // Region
 //  - .l-r is the global selector for all regions, each region also includes
 //    a region-name selector, e.g. .l-r__sidebar-first {}
-//  - animate regions for that smooth flow effect, e.g. on orientation change.
-//  - apply a micro clearfix globally, this ensures dynamic height content
-//    does not disrupt the layout in unexpected ways.
 .l-r {
   transition: $transition_global;
   @include clearfix-micro;
 }
+
 
 // Remove layout form hidden regions. These regions have no row, so
 // they get a basic region class unlike theme regions.
@@ -40,66 +85,6 @@
 .page-bottom {
   padding: 0;
   margin: 0;
-}
-
-
-//  Page Rows - these match the Site Builder layout.
-//  You can find your layouts page row and region classes by viewing the theme
-//  settings and looking under Layouts > Options > Layout Selectors.
-//
-//  Do not add layout to .l-rw directly, instead if you want to modify the layout
-//  you should hack the actual layout SASS/CSS, see your themes /layouts/ directory.
-
-
-// Messages
-.pr-messages {
-  .l-rw {}
-}
-
-
-// Messages
-.pr-leaderboard {
-  .l-rw {}
-}
-
-
-// Header
-.pr-header {
-  .l-rw {}
-}
-
-
-// Navbar
-.pr-navbar {
-  .l-rw {
-    .l-r {
-      //padding: 0;
-    }
-  }
-}
-
-
-// Features
-.pr-features {
-  .l-rw {}
-}
-
-
-// Main
-.pr-main {
-  .l-rw {}
-}
-
-
-// Tertiary
-.pr-tertiary {
-  .l-rw {}
-}
-
-
-// Footer
-.pr-footer {
-  .l-rw {}
 }
 
 

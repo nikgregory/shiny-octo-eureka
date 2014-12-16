@@ -57,12 +57,12 @@ at.responsivemenus:
   js:
     scripts/min/at.responsiveMenus.min.js: { minified: true }
   dependencies:
-    - core/modernizr
     - core/jquery
     - core/drupal
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+#    - core/modernizr
 
 #TypeKit font loader.
 at.typekit_fonts:

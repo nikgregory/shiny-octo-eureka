@@ -208,6 +208,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
   // Save each suggestion template, these are saved every time the layout settings
   // are saved because the rows and regions might change, so we resave every template.
   public function saveLayoutSuggestionsMarkup() {
+
     $template_suggestions = array();
 
     if (!empty($this->form_values['settings_suggestions'])) {
@@ -250,6 +251,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
     // We have to save every template every time, in case a row has been added to the layout, all template MUST update.
     // This could be changed later to only do this IF a row has been added, we're not that flash right now :)
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
+
       $output = array();
       $suggestion_key = String::checkPlain($suggestion_key);
 
@@ -269,13 +271,31 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
       else {
         foreach ($this->layout_config['rows'] as $row => $row_values) {
+
           foreach ($row_values['regions'] as $region_name => $region_value) {
             $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_name . ' }}';
           }
+
+          // Row attributes.
+          $attributes[$row]['class'][] = 'l-pr page__row ' . 'pr-' . $row;
+          foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
+            if (is_array($attribute_values)) {
+              $attributes[$row][$attribute_type][] = implode(' ', $attribute_values);
+            }
+            else {
+              $attributes[$row][$attribute_type][] = $attribute_values;
+            }
+          }
+          ksort($attributes[$row], SORT_STRING);
+          foreach ($attributes[$row] as $attr_type => $attr_array_vales) {
+            $this_row_attr[$row][$attr_type] = $attr_type . '="' . implode(' ', $attr_array_vales) . '"';
+          }
+
           $wrapper_element[$suggestion_key] = 'div';
           if ($row == 'header' || $row == 'footer') {
             $wrapper_element[$suggestion_key] = $row;
           }
+
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
             $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
@@ -283,8 +303,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
           }
+
           // move the dynamic region classes to the regions wrapper, hard code the page-row class
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="l-pr page__row pr-' . $row . '">';
+          //$output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="l-pr page__row pr-' . $row . '">';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . '>';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
           $output[$suggestion_key][$row]['container_close'] = '    </div>';

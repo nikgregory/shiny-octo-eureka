@@ -6,12 +6,12 @@
     background-color: $background-color;
     color: $color;
 
-    .l-rw {
-      background-color: inherit; // override the default bg for regions
+    .regions {
+      background-color: inherit;
     }
   }
   @else {
-    .l-rw {
+    .regions {
       background-color: $background-color;
       color: $color;
       padding: $regions-padding;

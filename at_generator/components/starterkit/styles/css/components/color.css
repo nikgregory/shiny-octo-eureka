@@ -88,7 +88,7 @@ hr {
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.pr-header .l-rw {
+.pr-header .regions {
   background-color: inherit;
 }
 
@@ -98,7 +98,7 @@ hr {
   color: #ffffff;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.pr-navbar .l-rw {
+.pr-navbar .regions {
   background-color: inherit;
 }
 /* line 125, ../../uikit/components/partials/_theme.color.scss */
@@ -113,7 +113,7 @@ hr {
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.pr-features .l-rw {
+.pr-features .regions {
   background-color: inherit;
 }
 
@@ -123,7 +123,7 @@ hr {
   color: #363636;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.pr-tertiary .l-rw {
+.pr-tertiary .regions {
   background-color: inherit;
 }
 
@@ -133,7 +133,7 @@ hr {
   color: #ffffff;
 }
 /* line 9, ../../uikit/components/mixins/_page.scss */
-.pr-footer .l-rw {
+.pr-footer .regions {
   background-color: inherit;
 }
 /* line 151, ../../uikit/components/partials/_theme.color.scss */

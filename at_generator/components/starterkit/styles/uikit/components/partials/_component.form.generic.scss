@@ -26,6 +26,14 @@
 }
 
 
+// Long text textarea (with tips)
+.field-type-text-long {
+  textarea {
+    border-radius: $form-border-radius $form-border-radius 0 0;
+  }
+}
+
+
 // Filters and tips
 .filter-wrapper {
   border-style: $form-border-style;
