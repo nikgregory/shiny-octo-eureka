@@ -5,7 +5,7 @@
   Drupal.behaviors.atrM = {
     attach: function (context, settings) {
 
-      $(document.body).removeClass('no-fouc');
+      $('.rm-block').removeClass('js-hide');
 
       // Verify that the user agent understands media queries.
       if (!window.matchMedia('only screen').matches) {
@@ -42,7 +42,7 @@
         setup: function() {
           $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region');
-          $('.rm-block h2.block-menu__title').removeClass('visually-hidden');
+          $('.rm-block .block-menu__title').removeClass('visually-hidden');
         },
         // The resp menu system only uses one breakpoint,
         // if it matches this fires strait after setup.

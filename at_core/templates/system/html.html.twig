@@ -20,6 +20,16 @@
  * - styles: Style tags necessary to import all necessary CSS files in the head.
  * - scripts: Script tags necessary to load the JavaScript files and settings
  *   in the head.
+ * - touch_icons: bool, true if touch icons extension is enabled.
+ * - touch_rel: string, defaults to apple-touch-icon, or apple-touch-icon-precomposed
+ *   if set in appearance settings.
+ * - touch_icon_ipad_retina: path to ipad retina touch icon.
+ * - touch_icon_iphone_retina: path to iphone retina touch icon.
+ * - touch_icon_ipad: path to ipad touch icon.
+ * - touch_icon_default: path to old iphone touch icon.
+ * - touch_icon_nokia: path to old school nokia touch icon.
+ * - googlefonts_url: URL as supplied by the Google fonts wizard.
+ * - typekit_id: Typekit ID as supplied by the Typekit embed wizard.
  *
  * @see template_preprocess_html()
  *
@@ -29,8 +39,22 @@
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
+    {% if touch_icons == true %}
+      {% if touch_icon_ipad_retina %}<link href="{{ touch_icon_ipad_retina }}" rel="{{ touch_rel }}" sizes="152x152" /> {% endif %}
+      {% if touch_icon_iphone_retina %}<link href="{{ touch_icon_iphone_retina }}" rel="{{ touch_rel }}" sizes="120x120" /> {% endif %}
+      {% if touch_icon_ipad %}<link href="{{ touch_icon_ipad }}" rel="{{ touch_rel }}" sizes="76x76" /> {% endif %}
+      {% if touch_icon_default %}<link href="{{ touch_icon_default }}" rel="{{ touch_rel }}" sizes="60x60" /> {% endif %}
+      {% if touch_icon_nokia %}<link href="{{ touch_icon_nokia }}" rel="shortcut icon" /> {% endif %}
+    {% endif %}
     {{ head }}
     <title>{{ head_title }}</title>
+    {% if googlefonts_url %}
+      <link href="{{ googlefonts_url }}" rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if typekit_id %}
+      <script src="//use.typekit.net/{{ typekit_id }}.js"></script>
+      <script>try{Typekit.load();}catch(e){}</script>
+    {% endif %}
     {{ styles }}
     {{ scripts }}
   </head>

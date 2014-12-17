@@ -27,26 +27,26 @@
  *  3. Theme settings as set in your themes Advanced extention settings.
  ========================================================================== */
 
+// Tiles
 @include tiles($context: 12, $tile_count: 2, $arrows: false);
 
+// Overlay menu
 @include overlay($toggle_position: (vert: bottom, hozr: right), $arrows: false);
 
+// Dropmenu
 @include dropmenu($item-width: 12em, $arrows: true);
 
+// Off canvas
 @include offcanvas($oc-position: left, $width: 15em, $arrows: false);
 
+// FlipSlide
 @include flipslide($col-width: 12em, $arrows: false);
 
+// Slidedown (classic hamburger menu)
 @include slidedown($arrows: false);
 
+// Horizontal (plain hoz menu)
 @include horizontal($arrows: false);
-
-
-// Hide the menu until the JS is loaded, on some pages such as "create new account"
-// this can take a split second longer than usual, so this prevents a FOUC.
-.no-fouc .rm-block .block-menu__content {
-  display: none;
-}
 
 
 // Global styles for the navbar region.

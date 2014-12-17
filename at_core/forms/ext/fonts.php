@@ -77,12 +77,7 @@ $form['fonts']['setup']['settings_font_google'] = array(
   '#type' => 'textfield',
   '#title' => t('Google fonts'),
   '#default_value' => Xss::filter(theme_get_setting('settings.font_google')),
-  '#description' => t('<ol><li>Use the <a href="!google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the code from the @import method, e.g.:<br /><code>@import url(http://fonts.googleapis.com/css?family=Open+Sans);</code></li></ol>', array('!google_font_wizard' => 'http://www.google.com/fonts')),
-);
-
-$form['fonts']['setup']['font_google_current'] = array(
-  '#type' => 'hidden',
-  '#value' => Xss::filter(theme_get_setting('settings.font_google')),
+  '#description' => t('<ol><li>Use the <a href="!google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code></li></ol>', array('!google_font_wizard' => 'http://www.google.com/fonts')),
 );
 
 // FONT Setup: Webfont - Typekit
@@ -91,11 +86,6 @@ $form['fonts']['setup']['settings_font_typekit'] = array(
   '#title' => t('Typekit ID'),
   '#default_value' => String::checkPlain(theme_get_setting('settings.font_typekit')),
   '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
-);
-
-$form['fonts']['setup']['font_typekit_current'] = array(
-  '#type' => 'hidden',
-  '#value' => String::checkPlain(theme_get_setting('settings.font_typekit')),
 );
 
 // FONT Setup: Custom string

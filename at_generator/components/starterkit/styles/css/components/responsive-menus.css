@@ -465,11 +465,6 @@
   display: none;
 }
 
-/* line 47, ../../uikit/components/partials/_component.menu.responsive.scss */
-.no-fouc .rm-block .block-menu__content {
-  display: none;
-}
-
 /* line 53, ../../uikit/components/partials/_component.menu.responsive.scss */
 .rm-region {
   padding: 0;
@@ -598,4 +593,5 @@
 .ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li:last-child {
   border-bottom: none;
 }
+
 /*# sourceMappingURL=responsive-menus.css.map */

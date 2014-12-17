@@ -1,10 +1,6 @@
 <?php
 
-
 use Drupal\at_core\Layout\LayoutCompatible;
-
-//use Drupal\at_core\Layout\LayoutSettings; // will use this again, to format the selectors in advanced options.
-
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 

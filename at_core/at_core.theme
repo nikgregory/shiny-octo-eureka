@@ -81,39 +81,10 @@ function at_core_page_attachments_alter(array &$page) {
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
-    // Initialize a variable to collect head elements, we're going to hammer this.
-    $head_elements = array();
-
     // Fonts.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
-
       if (file_exists($generated_files_path . '/fonts.css')) {
         $page['#attached']['library'][] = "$theme/fonts";
-      }
-
-      // An ugly trial and error hack on html_head to add a stylesheet link. This is not
-      // very pretty but it does work, however I have elected to go with the @import
-      // method since this is easier for low-tech users to use.
-      /*
-      if (!empty($config['font_google'])) {
-        $safe_google_fonts = Xss::filter($config['font_google']);
-        $head_elements['font_google'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => 1000,
-          '#attributes' => array(
-            'href' => $safe_google_fonts,
-            'rel' => 'stylesheet',
-          ),
-        );
-      }
-      */
-
-      // With Typekit we can do things sensibly and use drupalSettings and load a script file.
-      if (!empty($config['font_typekit'])) {
-        $tfk = String::checkPlain($config['font_typekit']);
-        $page['#attached']['drupalSettings'][$theme]['tkf'] = $tfk;
-        $page['#attached']['library'][] = 'at_core/at.typekit_fonts';
       }
     }
 
@@ -201,90 +172,6 @@ function at_core_page_attachments_alter(array &$page) {
       if (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.respond';
         $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
-      }
-    }
-
-    // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
-    if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
-      $rel = 'apple-touch-icon';
-      if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
-        $rel = 'apple-touch-icon-precomposed';
-      }
-
-      // Apple default icon and Nokia shortcut icon.
-      if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $icon_path_default = String::checkPlain($config['icon_path_default']);
-        $default_icon = file_create_url($path_to_theme . '/' . $icon_path_default);
-        $head_elements['at_core_touch_icon_nokia'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -97,
-          '#attributes' => array(
-            'href' => $default_icon,
-            'rel' => "shortcut icon",
-          ),
-        );
-        $head_elements['at_core_touch_icon_default'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -98,
-          '#attributes' => array(
-            'href' => $default_icon,
-            'rel' => $rel,
-          ),
-        );
-      }
-
-      // iPad (standard display).
-      if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $apple_touch_icon_path_ipad = String::checkPlain($config['apple_touch_icon_path_ipad']);
-        $head_elements['at_core_touch_icon_ipad'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -99,
-          '#attributes' => array(
-            'href' => file_create_url($ipad_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad),
-            'rel' => $rel,
-            'sizes' => "76x76",
-          ),
-        );
-      }
-
-      // iPhone retina.
-      if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $apple_touch_icon_path_iphone_retina = String::checkPlain($config['apple_touch_icon_path_iphone_retina']);
-        $head_elements['at_core_touch_icon_iphone_retina'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -100,
-          '#attributes' => array(
-            'href' => file_create_url($iphone_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_iphone_retina),
-            'rel' => $rel,
-            'sizes' => "120x120",
-          ),
-        );
-      }
-
-      // iPad retina.
-      if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $apple_touch_icon_path_ipad_retina = String::checkPlain($config['apple_touch_icon_path_ipad_retina']);
-        $head_elements['at_core_touch_icon_ipad_retina'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'link',
-          '#weight' => -100,
-          '#attributes' => array(
-            'href' => file_create_url($ipad_retina_icon_path = $path_to_theme . '/' . $apple_touch_icon_path_ipad_retina),
-            'rel' => $rel,
-            'sizes' => "152x152",
-          ),
-        );
-      }
-
-      // Load touch icons.
-      if (!empty($head_elements)) {
-        foreach ($head_elements as $head_element_key => $head_element_value) {
-          $page['#attached']['html_head'][] = [$head_element_value, $head_element_key];
-        }
       }
     }
   }
@@ -387,7 +274,7 @@ function at_core_css_alter(&$css) {
       $layout = $theme . '.layout.page.css';
     }
 
-    // And you thought loading CSS assets in Drupal was getting easier, lol, don't kid yourself.
+    // And you thought loading CSS assets in Drupal was getting easier?
     $css[$layout] = array(
       'weight' => 0,
       'group' => 100,
@@ -402,7 +289,8 @@ function at_core_css_alter(&$css) {
     );
   }
 
-  // Drupal is stupid, again, so we have to load our own colorized CSS file, for f'ks sake.
+  // Color module doesn't know anything about libraries loaded in hook_page_attachments_alter(),
+  // therefor we need to load the colorized CSS file ourselves.
   if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
     $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
     if (!empty($color_paths)) {
@@ -482,6 +370,7 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
  */
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Add a "site name" body classes for advanced theming of multi-sites.
@@ -489,8 +378,17 @@ function at_core_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'site-name--' . Html::getClass($variables['head_title_array']['name']);
   }
 
+  // Add theme name class, using this for debugging in development since I switch
+  // themes a lot and need to know which one I am looking at, could be removed later on?
+  $variables['attributes']['class'][] = 'theme-name--' . Html::getClass($theme);
+
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
+
+  // Defaults for Appearance setting variables.
+  $variables['touch_icons'] = FALSE;
+  $variables['googlefonts_url'] = '';
+  $variables['typekit_id'] = '';
 
   // Extensions
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -500,15 +398,52 @@ function at_core_preprocess_html(&$variables) {
       $variables['skip_link_target'] = '#' . Html::getClass($config['skip_link_target']);
     }
 
-    // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-      $variables['attributes']['class'][] = 'no-fouc';
+    // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
+    if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
+
+      $variables['touch_icons'] = TRUE;
+      $variables['touch_rel'] = 'apple-touch-icon';
+
+      if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
+        $variables['touch_rel'] = 'apple-touch-icon-precomposed';
+      }
+
+      // Apple default icon and Nokia shortcut icon.
+      if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
+        $default_icon = file_create_url($path_to_theme . '/' . String::checkPlain($config['icon_path_default']));
+        $variables['touch_icon_nokia'] = $default_icon;
+        $variables['touch_icon_default'] = $default_icon;
+      }
+
+      // iPad (standard display).
+      if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
+        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_ipad']));
+      }
+
+      // iPhone retina.
+      if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
+        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_iphone_retina']));
+      }
+
+      // iPad retina.
+      if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
+        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_ipad_retina']));
+      }
+    }
+
+    // Fonts.
+    if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+      // Google fonts.
+      if (!empty($config['font_google'])) {
+        $variables['googlefonts_url'] = Xss::filter($config['font_google']);
+      }
+
+      // Typekit.
+      if (!empty($config['font_typekit'])) {
+        $variables['typekit_id'] = String::checkPlain($config['font_typekit']);
+      }
     }
   }
-
-  // Add theme name class, using this for debugging in development since I switch
-  // themes a lot and need to know which one I am looking at, could be removed later on?
-  $variables['attributes']['class'][] = 'theme-name--' . Html::getClass($theme);
 }
 
 
@@ -587,13 +522,9 @@ function at_core_preprocess_region(&$variables) {
     $variables['region_row'] = $region_row;
   }
 
-  //$variables['attributes']['class'][] = 'pr-' . $region_row . '__' . $variables['region'];
-
   // Set wrapper element.
   $variables['html_element'] = 'div';
   if ($variables['region'] == 'content') {
-    //$variables['html_element'] = 'main';
-    //$variables['attributes']['role'][] = 'main';
   }
 
   // Extension settings
@@ -763,11 +694,12 @@ function at_core_preprocess_block(&$variables) {
     // Responsive menu block.
     if (isset($config['responsive_menu_block'])) {
       if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
-        $variables['attributes']['class'][] = 'rm-block';
-        $variables['title_attributes']['class'][] = 'rm-toggle';
-        $variables['title_attributes']['aria-controls'][] = 'rm-content';
-        $variables['content_attributes']['id'][] = 'rm-content';
-        $variables['content_attributes']['class'][] = 'rm-block__content';
+        $variables['attributes']['class'][] = 'rm-block'; // main class that sets this as the responsive menu block
+        $variables['attributes']['class'][] = 'js-hide';  // hides the block until the dom is ready
+        $variables['title_attributes']['class'][] = 'rm-toggle'; // set a class for the js toggles
+        $variables['title_attributes']['aria-controls'][] = 'rm-content';  // aria controls
+        $variables['content_attributes']['id'][] = 'rm-content'; // target id for aria controls
+        $variables['content_attributes']['class'][] = 'rm-block__content'; // toggle target, the div that actually opens/closes
       }
     }
 
@@ -945,243 +877,6 @@ function at_core_preprocess_views_view(&$variables) {
 }
 
 
-
-
-
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
-//
 //function at_core_preprocess_menu(&$variables) {}
-
-
-
-
-/*
-  // Layout
-  // This determines the page suggestion for the current page and checks if there is an
-  // existing config key for that suggestion, if so assume a css file exists and try to
-  // load it.
-  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
-
-    // Get theme registry.
-    $theme_registry = \Drupal::service('theme.registry')->getRuntime();
-
-    // Is this the front page or?
-    if ($variables['is_front'] === TRUE) {
-      $page_args = [''];
-    }
-    else {
-      //$page_args = explode('/', Url::fromRoute('<current>')->getInternalPath()); // getInternalPath deprecated?
-      $page_args = explode('/', Url::fromRoute('<current>'));
-    }
-
-    //$otherargs = explode('/', Url::fromRoute('<current>'));
-    //var_dump($page_args);
-    //var_dump($otherargs);
-
-    // Add node type suggestion.
-    if (isset($variables['node'])) {
-      $page_args[] = $variables['node']->getType();
-    }
-
-    // Get page suggestions, loop, check for a config key, then break
-    // if/when we have a match.
-    if ($suggestions = theme_get_suggestions($page_args, 'page', '__')) {
-      foreach ($suggestions as $suggestion) {
-        if (isset($config['suggestions'][$suggestion])) {
-          $suggestions_layout = $config['suggestions'][$suggestion];
-          $suggestions_layout = str_replace('_', '-', $suggestions_layout);
-        }
-        if ($theme_registry->has($suggestion)) {
-          break;
-        }
-      }
-    }
-
-    // If there is no layout for this suggestion load the default.
-    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
-      $layout = $generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css';
-    }
-    else {
-      $layout = $generated_files_path . '/' . $theme . '.layout.page.css';
-    }
-
-    // Attach the layout.
-    //$variables['#attached']['css'][] = array(
-    //  'type' => 'file',
-    //  'data' => $layout,
-    //  'every_page' => TRUE,
-    //  'group' => CSS_AGGREGATE_THEME,
-    //  'weight' => CSS_LAYOUT,
-    //);
-  }
-*/
-
-    //$load_failure = array();
-    //$load_failure['fail'] = FALSE;
-
-    // Fonts.
-    //if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
-    //  $fonts_file = $generated_files_path . '/' . $theme . '.fonts.css';
-    //  if (file_exists($fonts_file)) {
-    //    $page['#attached']['css'][] = array(
-    //      'type' => 'file',
-    //      'data' => $fonts_file,
-    //      'group' => CSS_AGGREGATE_THEME,
-    //      'weight' => CSS_THEME,
-    //    );
-    //  }
-    //  else {
-    //    $load_failure['fail'] = TRUE;
-    //    $load_failure['files'][] = $fonts_file;
-    //  }
-    //
-    //  // Google font.
-    //  if (!empty($config['font_google'])) {
-    //    $google_font_path = check_url($config['font_google']);
-    //    $google_font_path_clean = '//' . str_replace('&amp;', '&', $google_font_path);
-    //    $page['#attached']['css'][] = array(
-    //      'data' => $google_font_path_fixed,
-    //      'type' => 'external',
-    //    );
-    //  }
-    //
-    //  // Typekit script.
-    //  if (!empty($config['font_typekit'])) {
-    //    $typekit_script_path = '//' . check_url($config['font_typekit']);
-    //    $page['#attached']['js'][] = array(
-    //      'data' => $typekit_script_path,
-    //      'type' => 'external',
-    //      'weight' => CSS_THEME,
-    //    );
-    //  }
-    //}
-    //
-    //// Titles CSS.
-    //if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
-    //  $titles_file = $generated_files_path . '/' . $theme . '.titles.css';
-    //  if (file_exists($titles_file)) {
-    //    $page['#attached']['css'][] = array(
-    //      'type' => 'file',
-    //      'data' => $titles_file,
-    //      'group' => CSS_AGGREGATE_THEME,
-    //      'weight' => CSS_THEME,
-    //    );
-    //  }
-    //  else {
-    //    $load_failure['fail'] = TRUE;
-    //    $load_failure['files'][] = $titles_file;
-    //  }
-    //}
-
-    // Images CSS.
-    // TODO - needs more testing since we moved to a class attr only approach, rather than writing CSS.
-    /*
-    if (isset($config['enable_images']) && $config['enable_images'] === 1) {
-      $images_file = $generated_files_path . '/' . $theme . '.images.css';
-      if (file_exists($images_file)) {
-        $page['#attached']['css'][] = array(
-          'type' => 'file',
-          'data' => $images_file,
-          'group' => CSS_AGGREGATE_THEME,
-          'weight' => CSS_THEME,
-        );
-      }
-      else {
-        $load_failure['fail'] = TRUE;
-        $load_failure['files'][] = $images_file;
-      }
-    }
-    */
-
-    // Custom CSS.
-    //if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
-    //  $custom_css_file = $generated_files_path . '/' . $theme . '.custom-css.css';
-    //  if (file_exists($custom_css_file)) {
-    //    $page['#attached']['css'][] = array(
-    //      'type' => 'file',
-    //      'data' => $custom_css_file,
-    //      'group' => CSS_AGGREGATE_THEME,
-    //      'weight' => CSS_THEME,
-    //    );
-    //  }
-    //  else {
-    //    $load_failure['fail'] = TRUE;
-    //    $load_failure['files'][] = $custom_css_file;
-    //  }
-    //}
-    //
-    //// Show grid.
-    //if (isset($config['show_grid']) && $config['show_grid'] === 1) {
-    //  $show_grid_file = $path_to_theme . '/styles/css/show-grid.css';
-    //  if (file_exists($show_grid_file)) {
-    //    $page['#attached']['css'][] = array(
-    //      'type' => 'file',
-    //      'data' => $show_grid_file,
-    //      'group' => CSS_AGGREGATE_THEME,
-    //      'weight' => CSS_THEME,
-    //    );
-    //  }
-    //}
-    //
-    //// Markup overrides.
-    //if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-    //
-    //  // Breadcrumbs.
-    //  if ($config['breadcrumb_label'] === 1 || $config['breadcrumb_separator'] === 1) {
-    //    $breadcrumb_file = $generated_files_path . '/' . $theme . '.breadcrumb.css';
-    //    if (file_exists($breadcrumb_file)) {
-    //      $page['#attached']['css'][] = array(
-    //        'type' => 'file',
-    //        'data' => $breadcrumb_file,
-    //        'group' => CSS_AGGREGATE_THEME,
-    //        'weight' => CSS_THEME,
-    //      );
-    //    }
-    //    else {
-    //      $load_failure['fail'] = TRUE;
-    //      $load_failure['files'][] = $breadcrumb_file;
-    //    }
-    //  }
-    //
-    //  // Login block.
-    //  if (\Drupal::currentUser()->isAuthenticated() === FALSE) {
-    //    if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-    //      $login_block_file = $generated_files_path . '/' . $theme . '.login-block.css';
-    //      if (file_exists($login_block_file)) {
-    //        $page['#attached']['css'][] = array(
-    //          'type' => 'file',
-    //          'data' => $login_block_file,
-    //          'group' => CSS_AGGREGATE_THEME,
-    //          'weight' => CSS_THEME,
-    //        );
-    //      }
-    //      else {
-    //        $load_failure['fail'] = TRUE;
-    //        $load_failure['files'][] = $login_block_file;
-    //      }
-    //    }
-    //  }
-    //}
-
-    // Print a message if required files do not exist.
-    //if ($load_failure['fail'] == TRUE) {
-    //  $item_list = array(
-    //    '#theme' => 'item_list',
-    //    '#items' => $load_failure['files'],
-    //  );
-    //  $failed_files_list = drupal_render($item_list);
-    //  drupal_set_message(t('<p>One or more generated CSS files not found:</p> !failuers <p>Go to this themes Appearance settings and click <em>Save extension settings</em> to generate new files.</p>', array('!failuers' => $failed_files_list)), 'error');
-    //}
-
-
-    // Attach Livereload snippet (inline)
-    //if (isset($config['livereload']) && $config['livereload'] === 1) {
-    //  $livereload_snippet = '';
-    //  if (isset($config['livereload_snippet'])) {
-    //    $page['#attached']['js'][] = array(
-    //      'data' => $config['livereload_snippet'],
-    //      'type' => 'inline',
-    //    );
-    //  }
-    //}

@@ -32,16 +32,6 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $fileOperations = new FileOperations();
   $font_styles = array();
 
-  // Google fonts
-  // This uses the @import method, not ideal but easy to use and it works all the time,
-  // and does not require hacking html_head or using JS (which always gives a FOUT).
-  // The FOUT is avoided because @import blocks page rendering, which is why this is bad,
-  // however users generally hate FOUT's and find them very disconcerting.
-  if (!empty($values['settings_font_google'])) {
-    $safe_google_font = Xss::filter($values['settings_font_google']);
-    $font_styles[] = $safe_google_font;
-  }
-
   foreach ($font_elements as $font_key => $font_values) {
 
     // Get the selectors for each element.

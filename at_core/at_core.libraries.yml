@@ -62,13 +62,6 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
-#    - core/modernizr
-
-#TypeKit font loader.
-at.typekit_fonts:
-  version: 0.0.1
-  js:
-    scripts/min/at.typekitfonts.min.js: { minified: true }
 
 # Respond TODO: test with respond in IE8.
 at.respond:
