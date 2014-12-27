@@ -1,21 +1,23 @@
 {#
 /**
  * @file
- * Default theme implementation for comments.
+ * Adaptivetheme implementation for comments.
  *
  * Available variables:
  * - author: Comment author. Can be a link or plain text.
  * - content: The content-related items for the comment display. Use
  *   {{ content }} to print them all, or print a subset such as
- *   {{ content.field_example }}. Use hide(content.field_example) to temporarily
- *   suppress the printing of a given element.
+ *   {{ content.field_example }}. Use the following code to temporarily suppress
+ *   the printing of a given child element:
+ *   @code
+ *   {{ content|without('field_example') }}
+ *   @endcode
  * - created: Formatted date and time for when the comment was created.
  *   Preprocess functions can reformat it by calling format_date() with the
  *   desired parameters on the 'comment.created' variable.
  * - changed: Formatted date and time for when the comment was last changed.
  *   Preprocess functions can reformat it by calling format_date() with the
  *   desired parameters on the 'comment.changed' variable.
- * - new: New comment marker.
  * - permalink: Comment permalink.
  * - submitted: Submission information created from author and created
  *   during template_preprocess_comment().
@@ -24,21 +26,22 @@
  * - status: Comment status. Possible values are:
  *   unpublished, published, or preview.
  * - title: Comment title, linked to the comment.
- * - attributes.class: List of classes that can be used to style contextually
- *   through CSS. The default values can be one or more of the following:
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class may contain one or more of the following classes:
  *   - comment: The current template type; e.g., 'theming hook'.
  *   - by-anonymous: Comment by an unregistered user.
- *   - by-node-author: Comment by the author of the parent node.
+ *   - by-{entity-type}-author: Comment by the author of the parent entity,
+ *     eg. by-node-author.
  *   - preview: When previewing a new or edited comment.
  *   The following applies only to viewers who are registered users:
  *   - unpublished: An unpublished comment visible only to administrators.
- *   - by-viewer: Comment by the user currently viewing the page.
- *   - new: New comment since the last visit.
  * - title_prefix: Additional output populated by modules, intended to be
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
  * - content_attributes: List of classes for the styling of the comment content.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
  *
  * These variables are provided to give context about the parent comment (if
  * any):
@@ -56,14 +59,23 @@
  *
  * These two variables are provided for context:
  * - comment: Full comment object.
- * - node: Node entity the comments are attached to.
+ * - entity: Entity the comments are attached to.
  *
  * @see template_preprocess_comment()
  *
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+{%
+  set classes = [
+    'comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
 
   {% if title %}
     {{ title_prefix }}
@@ -77,18 +89,18 @@
   <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
   {% if title %}
-    <h3{{ title_attributes.addClass('comment__title') }}>{{ title }}</h3>
+    <h3{{ title_attributes }}>{{ title }}</h3>
     {{ title_suffix }}
   {% endif %}
 
-  <div{{ submitted_attributes.addClass('comment__submitted') }}>
+  <div{{ submitted_attributes }}>
     {{ user_picture }}
     <div class="comment__meta">
       {{ submitted }}
     </div>
   </div>
 
-  <div{{ content_attributes.addClass('comment__content').removeClass('content') }}>
+  <div{{ content_attributes }}>
     {#
       Indicate the semantic relationship between parent and child comments
       for accessibility. The list is difficult to navigate in a screen

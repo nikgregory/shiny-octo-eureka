@@ -599,8 +599,8 @@ function at_core_preprocess_node(&$variables) {
     $variables['author_attributes']['class'][] = 'node__author';
 
     // Seriously, we actually need to do this?
-    $rdf_module = \Drupal::moduleHandler()->moduleExists('rdf');
-    if ($rdf_module == FALSE) {
+    //$rdf_module = \Drupal::moduleHandler()->moduleExists('rdf');
+    if (\Drupal::moduleHandler()->moduleExists('rdf') == FALSE) {
       $variables['author_attributes']['rel'] = array();
     }
     $variables['author_attributes']['rel'][] = 'author';
@@ -623,13 +623,16 @@ function at_core_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $account = comment_prepare_author($comment);
 
-  // Initialize new attribute arrays.
+  // Attributes.
+  $variables['title_attributes']['class'][] = 'comment__title';
+  $variables['content_attributes']['class'][] = 'comment__content';
+
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
-  //$variables['footer_attributes'] = new Attribute(array('class' => array()));
+  $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
   // Clean up user picture and add has class.
   // TODO: review before release: https://www.drupal.org/node/2247677
-  // TODO: recheck what we are doing with node user pictures???
+  // TODO: recheck what we are doing with node user pictures?
   if (theme_get_setting('features.comment_user_picture')) {
     $user_picture = user_view($account, 'compact');
 
@@ -671,13 +674,6 @@ function at_core_preprocess_comment(&$variables) {
       '!username' => $variables['author'],
       '!datetime' => $variables['created'],
     ));
-  }
-
-  // TODO: move to template when comment template is finished!
-  foreach ($variables['attributes']['class'] as $class) {
-    if ($class !== 'comment') {
-      $variables['attributes']['class'] = str_replace($class, 'comment--' . $class, $variables['attributes']['class']);
-    }
   }
 }
 
