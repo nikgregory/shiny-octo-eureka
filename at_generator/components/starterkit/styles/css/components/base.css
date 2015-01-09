@@ -23,7 +23,7 @@
  * - set element global styles, bascially whenever this element appears
  * it should look like this by default.
  ========================================================================== */
-/* line 106, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 106, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 100%;
   line-height: 0.375em;
@@ -168,7 +168,17 @@ img {
   display: inline-block;
 }
 
-/* line 100, ../../uikit/components/partials/_base.elements.scss */
+/* line 99, ../../uikit/components/partials/_base.elements.scss */
+figcaption {
+  font-size: 11px;
+  font-size: 0.69838rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  padding: 7px 0;
+  padding: 0.43162rem 0;
+}
+
+/* line 107, ../../uikit/components/partials/_base.elements.scss */
 audio,
 canvas,
 img,
@@ -176,17 +186,17 @@ video {
   vertical-align: middle;
 }
 
-/* line 109, ../../uikit/components/partials/_base.elements.scss */
+/* line 116, ../../uikit/components/partials/_base.elements.scss */
 a {
   text-decoration: none;
   cursor: pointer;
 }
-/* line 125, ../../uikit/components/partials/_base.elements.scss */
+/* line 132, ../../uikit/components/partials/_base.elements.scss */
 a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* line 133, ../../uikit/components/partials/_base.elements.scss */
+/* line 140, ../../uikit/components/partials/_base.elements.scss */
 ul,
 ol,
 dl {
@@ -195,7 +205,7 @@ dl {
   padding-right: 0;
 }
 
-/* line 142, ../../uikit/components/partials/_base.elements.scss */
+/* line 149, ../../uikit/components/partials/_base.elements.scss */
 blockquote {
   padding: 16px;
   padding: 1rem;
@@ -204,7 +214,7 @@ blockquote {
   margin-right: 0;
   border-left: 5px solid;
 }
-/* line 149, ../../uikit/components/partials/_base.elements.scss */
+/* line 156, ../../uikit/components/partials/_base.elements.scss */
 blockquote p {
   font-size: 18px;
   font-size: 1.13rem;
@@ -212,11 +222,11 @@ blockquote p {
   line-height: 1.5rem;
   font-weight: 300;
 }
-/* line 153, ../../uikit/components/partials/_base.elements.scss */
+/* line 160, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child {
   margin-top: 0;
 }
-/* line 156, ../../uikit/components/partials/_base.elements.scss */
+/* line 163, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:first-child:before {
   font-family: FontAwesome, sans-serif;
   content: "";
@@ -227,11 +237,11 @@ blockquote p:first-child:before {
   width: 18px;
   width: 1.13rem;
 }
-/* line 167, ../../uikit/components/partials/_base.elements.scss */
+/* line 174, ../../uikit/components/partials/_base.elements.scss */
 blockquote p:last-child {
   margin-bottom: 0;
 }
-/* line 172, ../../uikit/components/partials/_base.elements.scss */
+/* line 179, ../../uikit/components/partials/_base.elements.scss */
 blockquote small {
   display: block;
   font-size: 11px;
@@ -239,32 +249,32 @@ blockquote small {
   line-height: 18px;
   line-height: 1.125rem;
 }
-/* line 176, ../../uikit/components/partials/_base.elements.scss */
+/* line 183, ../../uikit/components/partials/_base.elements.scss */
 blockquote small:before {
   content: '\2014 \00A0';
 }
-/* line 182, ../../uikit/components/partials/_base.elements.scss */
+/* line 189, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right {
   padding-right: 5.26316%;
   padding-left: 0;
   border-right: 5px solid;
   border-left: 0;
 }
-/* line 188, ../../uikit/components/partials/_base.elements.scss */
+/* line 195, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right p,
 blockquote.pull-right small {
   text-align: right;
 }
-/* line 194, ../../uikit/components/partials/_base.elements.scss */
+/* line 201, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:before {
   content: '';
 }
-/* line 197, ../../uikit/components/partials/_base.elements.scss */
+/* line 204, ../../uikit/components/partials/_base.elements.scss */
 blockquote.pull-right small:after {
   content: '\00A0 \2014';
 }
 
-/* line 206, ../../uikit/components/partials/_base.elements.scss */
+/* line 213, ../../uikit/components/partials/_base.elements.scss */
 hr {
   height: 1px;
   border: 0;
@@ -274,13 +284,13 @@ hr {
 }
 
 /* Set hidden styles for non-supporting browers */
-/* line 216, ../../uikit/components/partials/_base.elements.scss */
+/* line 223, ../../uikit/components/partials/_base.elements.scss */
 *[hidden] {
   display: none;
 }
 
 /* Webfont smoothing */
-/* line 222, ../../uikit/components/partials/_base.elements.scss */
+/* line 229, ../../uikit/components/partials/_base.elements.scss */
 :before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1072,20 +1082,28 @@ tr .form-item {
 /**
  * Images
  ========================================================================== */
-/* line 7, ../../uikit/components/partials/_component.image.scss */
-img.align-left {
-  margin: 7px 16px 16px 0;
-  margin: 0.43162rem 1rem 1rem 0;
+/* line 10, ../../uikit/components/partials/_component.image.scss */
+img.align-left,
+figure.align-left {
+  margin: 0 16px 16px 0;
+  margin: 0 1rem 1rem 0;
 }
-/* line 11, ../../uikit/components/partials/_component.image.scss */
-img.align-right {
-  margin: 4px 0 16px 16px;
-  margin: 0.26676rem 0 1rem 1rem;
+/* line 14, ../../uikit/components/partials/_component.image.scss */
+img.align-right,
+figure.align-right {
+  margin: 0 0 16px 16px;
+  margin: 0 0 1rem 1rem;
 }
-/* line 15, ../../uikit/components/partials/_component.image.scss */
-img.align-center {
-  margin: 4px 0 16px;
-  margin: 0.26676rem 0 1rem;
+/* line 18, ../../uikit/components/partials/_component.image.scss */
+img.align-center,
+figure.align-center {
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+}
+/* line 22, ../../uikit/components/partials/_component.image.scss */
+img[class*="align-"],
+figure[class*="align-"] {
+  clear: both;
 }
 
 /**
@@ -1097,7 +1115,7 @@ img.align-center {
 .list-horizontal {
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .list-horizontal li {
   list-style-image: none;
   list-style-type: none;
@@ -1133,7 +1151,7 @@ img.align-center {
   padding: 0;
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .list-multicolumn li {
   list-style-image: none;
   list-style-type: none;
@@ -1167,7 +1185,7 @@ img.align-center {
   .list-multicolumn {
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .list-multicolumn li {
     list-style-image: none;
     list-style-type: none;
@@ -1208,7 +1226,7 @@ ul.inline, ul.links.inline {
 ul.inline {
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 ul.inline li {
   list-style-image: none;
   list-style-type: none;
@@ -1254,7 +1272,7 @@ ul.inline ol {
   padding: 0;
   list-style: none;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .item-list li li {
   list-style-image: none;
   list-style-type: none;
@@ -1350,18 +1368,24 @@ dd {
  * Branding styles
  *  - Drupal core branding block.
  ========================================================================== */
-/* line 10, ../../uikit/components/partials/_component.branding.scss */
+/* line 8, ../../uikit/components/partials/_component.branding.scss */
+.site-logo {
+  display: block;
+  max-width: 240px;
+}
+
+/* line 18, ../../uikit/components/partials/_component.branding.scss */
 .site-branding-text a:hover, .site-branding-text a:focus {
   text-decoration: none;
 }
 
-/* line 19, ../../uikit/components/partials/_component.branding.scss */
+/* line 25, ../../uikit/components/partials/_component.branding.scss */
 .site-name {
   font-weight: 700;
   margin: 0;
 }
 
-/* line 24, ../../uikit/components/partials/_component.branding.scss */
+/* line 30, ../../uikit/components/partials/_component.branding.scss */
 .site-slogan {
   margin: 0;
 }
@@ -1481,7 +1505,7 @@ ul.tabs {
   .pr-temporary-tabs ul.tabs.primary {
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
@@ -1546,7 +1570,7 @@ ul.tabs {
     list-style: none;
     text-align: left;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
@@ -1597,7 +1621,7 @@ ul.tabs {
     border-bottom: 1px solid #cccccc;
     list-style: none;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.primary li {
     list-style-image: none;
     list-style-type: none;
@@ -1674,7 +1698,7 @@ ul.tabs {
     list-style: none;
     padding: 0;
   }
-  /* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+  /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
   .pr-temporary-tabs ul.tabs.secondary li {
     list-style-image: none;
     list-style-type: none;
@@ -1790,7 +1814,7 @@ ul.tabs {
   padding: 11px;
   padding: 0.69838rem;
 }
-/* line 11, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
+/* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
 .item-list .pager li li {
   list-style-image: none;
   list-style-type: none;
@@ -1956,25 +1980,29 @@ ul.tabs {
 }
 
 /* line 26, ../../uikit/components/partials/_component.field.scss */
-.field-label--inline .field__label {
+.field-label-inline .field__label {
   margin: 0;
   display: inline-block;
-  padding: 0 11px 0 0;
-  padding: 0 0.69838rem 0 0;
+  padding: 0 4px 0 0;
+  padding: 0 0.26676rem 0 0;
 }
-/* line 32, ../../uikit/components/partials/_component.field.scss */
-.field-label--inline .field__items {
-  display: inline-block;
+/* line 31, ../../uikit/components/partials/_component.field.scss */
+.field-label-inline .field__label:after {
+  content: ":";
 }
 /* line 36, ../../uikit/components/partials/_component.field.scss */
-[dir="rtl"] .field-label--inline .field__label, [dir="rtl"] .field-label--inline .field__items {
-  padding: 0 0 0 11px;
-  padding: 0 0 0 0.69838rem;
+.field-label-inline .field__items {
+  display: inline-block;
+}
+/* line 40, ../../uikit/components/partials/_component.field.scss */
+[dir="rtl"] .field-label-inline .field__label {
+  padding: 0 0 0 4px;
+  padding: 0 0 0 0.26676rem;
 }
 
-/* line 44, ../../uikit/components/partials/_component.field.scss */
-.field-label--above .field__label,
-.field-label--above .field__items {
+/* line 48, ../../uikit/components/partials/_component.field.scss */
+.field-label-above .field__label,
+.field-label-above .field__items {
   display: block;
 }
 
@@ -1985,26 +2013,17 @@ ul.tabs {
 .field-type-image figure {
   margin: 0;
 }
-/* line 12, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image figcaption {
-  font-size: 12px;
-  font-size: 0.76923rem;
-  line-height: 5px;
-  line-height: 0.28125rem;
-  padding: 7px 0;
-  padding: 0.43162rem 0;
-}
-/* line 20, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-none figure, .field-type-image.align-left figure {
+/* line 17, ../../uikit/components/partials/_component.field.image.scss */
+.field-type-image.align-none .field__label, .field-type-image.align-none figure, .field-type-image.align-left .field__label, .field-type-image.align-left figure {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
 }
 /* line 24, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-none figure figcaption, .field-type-image.align-left figure figcaption {
+.field-type-image.align-none figcaption, .field-type-image.align-left figcaption {
   text-align: left;
 }
-/* line 29, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-center figure {
+/* line 30, ../../uikit/components/partials/_component.field.image.scss */
+.field-type-image.align-center .field__label, .field-type-image.align-center figure {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -2012,40 +2031,26 @@ ul.tabs {
   margin-bottom: 1rem;
 }
 /* line 39, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-right figure {
-  margin: 5px 0 16px 16px;
-  margin: 0.3125rem 0 1rem 1rem;
+.field-type-image.align-right .field__label, .field-type-image.align-right figure {
+  margin: 0 0 16px 16px;
+  margin: 0 0 1rem 1rem;
 }
-/* line 42, ../../uikit/components/partials/_component.field.image.scss */
-.field-type-image.align-right figure figcaption {
+/* line 44, ../../uikit/components/partials/_component.field.image.scss */
+.field-type-image.align-right figcaption {
   text-align: left;
 }
-/* line 49, ../../uikit/components/partials/_component.field.image.scss */
+/* line 50, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.float-none {
   float: none !important;
 }
-/* line 52, ../../uikit/components/partials/_component.field.image.scss */
+/* line 53, ../../uikit/components/partials/_component.field.image.scss */
 .field-type-image.float-none figure {
   margin-right: 0 !important;
   margin-left: 0 !important;
 }
 /* line 60, ../../uikit/components/partials/_component.field.image.scss */
-[dir="rtl"] .field-type--image.align-none figure, [dir="rtl"] .field-type--image.align-left figure {
-  margin: 5px 0 16px 16px;
-  margin: 0.3125rem 0 1rem 1rem;
-}
-/* line 64, ../../uikit/components/partials/_component.field.image.scss */
-[dir="rtl"] .field-type--image.align-none figure figcaption, [dir="rtl"] .field-type--image.align-left figure figcaption {
-  text-align: right;
-}
-/* line 69, ../../uikit/components/partials/_component.field.image.scss */
-[dir="rtl"] .field-type--image.align-right figure {
-  margin: 5px 16px 16px 0;
-  margin: 0.3125rem 1rem 1rem 0;
-}
-/* line 72, ../../uikit/components/partials/_component.field.image.scss */
-[dir="rtl"] .field-type--image.align-right figure figcaption {
-  text-align: right;
+.field-type-image[class*="align-"] + .field-type-image {
+  clear: both;
 }
 
 /**
@@ -2075,27 +2080,30 @@ ul.tabs {
   padding-right: 0.5em;
 }
 
-/* line 37, ../../uikit/components/partials/_component.field.file.scss */
+/* line 36, ../../uikit/components/partials/_component.field.file.scss */
 .file--package-x-generic a:before {
   content: "";
 }
 
-/* line 44, ../../uikit/components/partials/_component.field.file.scss */
-.file--x-office-spreadsheet a:before {
+/* line 42, ../../uikit/components/partials/_component.field.file.scss */
+.file--x-office-spreadsheet a:before,
+.file [href$='.numbers']:before {
   content: "";
 }
 
-/* line 51, ../../uikit/components/partials/_component.field.file.scss */
-.file--x-office-document a:before {
+/* line 49, ../../uikit/components/partials/_component.field.file.scss */
+.file--x-office-document a:before,
+.file [href$='.pages']:before {
   content: "";
 }
 
-/* line 58, ../../uikit/components/partials/_component.field.file.scss */
-.file--x-office-presentation a:before {
+/* line 56, ../../uikit/components/partials/_component.field.file.scss */
+.file--x-office-presentation a:before,
+.file [href$='.key']:before {
   content: "";
 }
 
-/* line 89, ../../uikit/components/partials/_component.field.file.scss */
+/* line 87, ../../uikit/components/partials/_component.field.file.scss */
 .file--text-x-script:before,
 .file--text-html:before,
 .file [href*='.js']:before,
@@ -2120,28 +2128,28 @@ ul.tabs {
   content: "";
 }
 
-/* line 97, ../../uikit/components/partials/_component.field.file.scss */
+/* line 95, ../../uikit/components/partials/_component.field.file.scss */
 .file--text a:before,
 .file--text-plain a:before {
   content: "";
 }
 
-/* line 104, ../../uikit/components/partials/_component.field.file.scss */
+/* line 101, ../../uikit/components/partials/_component.field.file.scss */
 .file--application-pdf a:before {
   content: "";
 }
 
-/* line 111, ../../uikit/components/partials/_component.field.file.scss */
+/* line 106, ../../uikit/components/partials/_component.field.file.scss */
 .file--audio a:before {
   content: "";
 }
 
-/* line 118, ../../uikit/components/partials/_component.field.file.scss */
+/* line 111, ../../uikit/components/partials/_component.field.file.scss */
 .file--video a:before {
   content: "";
 }
 
-/* line 125, ../../uikit/components/partials/_component.field.file.scss */
+/* line 116, ../../uikit/components/partials/_component.field.file.scss */
 .file--image a:before {
   content: "";
 }

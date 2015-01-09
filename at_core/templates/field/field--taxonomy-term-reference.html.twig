@@ -35,19 +35,36 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
+{% set field_name_class = field_name|clean_class %}
+{%
+  set classes = [
+    'field',
+    'field-' ~ entity_type|clean_class ~ '--' ~ field_name_class,
+    'field-name-' ~ field_name_class,
+    'field-type-' ~ field_type|clean_class,
+    'field-label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
   {% if not label_hidden %}
-    <h3{{ title_attributes.addClass('field__label') }}>{{ label }}</h3>
+    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
   {% endif %}
-  <ul{{ content_attributes.addClass('field__items') }}>
+  <ul{{ content_attributes.addClass('field__items', 'tags') }}>
     {% for item in items %}
       {%
-        set classes = [
+        set item_classes = [
           'field__item',
-          'tag__' ~ item.content['#title']|clean_class,
+          'tags__' ~ item.content['#title']|clean_class,
         ]
       %}
-      <li{{ item.attributes.addClass(classes) }}><span>{{ item.content }}</span></li>
+      <li{{ item.attributes.addClass(item_classes) }}><span>{{ item.content }}</span></li>
     {% endfor %}
   </ul>
 </div>

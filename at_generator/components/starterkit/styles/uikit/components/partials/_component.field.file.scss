@@ -33,31 +33,29 @@
 }
 
 
-.file--package-x-generic {
-  a:before {
-    content: $fa-var-file-archive-o;
-  }
+.file--package-x-generic a:before {
+  content: $fa-var-file-archive-o;
 }
 
 
-.file--x-office-spreadsheet {
-  a:before {
-    content: $fa-var-file-excel-o;
-  }
+// Spreadsheet type files.
+.file--x-office-spreadsheet a:before,
+.file [href$='.numbers']:before {
+  content: $fa-var-file-excel-o;
 }
 
 
-.file--x-office-document {
-  a:before {
-    content: $fa-var-file-word-o;
-  }
+// Word type files.
+.file--x-office-document a:before,
+.file [href$='.pages']:before {
+  content: $fa-var-file-word-o;
 }
 
 
-.file--x-office-presentation {
-  a:before {
-    content: $fa-var-file-powerpoint-o;
-  }
+// Presentation type files.
+.file--x-office-presentation a:before,
+.file [href$='.key']:before {
+  content: $fa-var-file-powerpoint-o;
 }
 
 
@@ -100,29 +98,22 @@
 }
 
 
-.file--application-pdf {
-  a:before {
-    content: $fa-var-file-pdf-o;
-  }
+.file--application-pdf a:before {
+  content: $fa-var-file-pdf-o;
 }
 
 
-.file--audio {
-  a:before {
-    content: $fa-var-file-audio-o;
-  }
+.file--audio a:before {
+  content: $fa-var-file-audio-o;
 }
 
 
-.file--video {
-  a:before {
-    content: $fa-var-file-video-o;
-  }
+.file--video a:before {
+  content: $fa-var-file-video-o;
 }
 
 
-.file--image {
-  a:before {
-    content: $fa-var-file-image-o;
-  }
+.file--image a:before {
+  content: $fa-var-file-image-o;
 }
+

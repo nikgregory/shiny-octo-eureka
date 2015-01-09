@@ -2,17 +2,24 @@
  * Images
  ========================================================================== */
 
-// Set styles for Drupal core data-align classes.
-img {
+// Set styles for Drupal core data-align classes. These are applied using
+// the CKEditor (wysiwyg). When captions are used images are wrapped in
+// a figure element.
+img,
+figure {
   &.align-left {
-    @include output-rhythm(margin, $xx-small $medium $medium 0);
+    @include output-rhythm(margin, 0 $medium $medium 0);
   }
 
   &.align-right {
-    @include output-rhythm(margin, $xxxx-small 0 $medium $medium);
+    @include output-rhythm(margin, 0 0 $medium $medium);
   }
 
   &.align-center {
-    @include output-rhythm(margin, $xxxx-small 0 $medium);
+    @include output-rhythm(margin, 0 0 $medium);
+  }
+
+  &[class*="align-"] {
+    clear: both;
   }
 }

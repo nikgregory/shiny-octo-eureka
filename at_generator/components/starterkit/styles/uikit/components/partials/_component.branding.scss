@@ -5,6 +5,14 @@
 
 .block--system-branding-block {}
 
+.site-logo {
+  display: block;
+  max-width: 240px; // alter this to suit your logo.
+
+  img {}
+  svg {}
+}
+
 .site-branding-text {
   a {
     &:hover,
@@ -14,8 +22,6 @@
   }
 }
 
-.site-logo {}
-
 .site-name {
   font-weight: $font-weight-bold;
   margin: 0;
@@ -24,6 +30,3 @@
 .site-slogan {
   margin: 0;
 }
-
-
-

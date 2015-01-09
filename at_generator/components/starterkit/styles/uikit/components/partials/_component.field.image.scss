@@ -9,42 +9,43 @@
     margin: 0;
   }
 
-  figcaption {
-    @include adjust-font-size-to($medium/1.3, .75);
-    @include output-rhythm(padding, $xx-small 0);
-  }
-
   // Image Alignment Theme Settings
   // - settings are applied using the Image extension in theme settings, where you can
   //   set image alignment and captions per node type and view mode.
+
+  // Align left or none.
+  &.align-none .field__label,
   &.align-none figure,
+  &.align-left .field__label,
   &.align-left figure {
     @include output-rhythm(margin, 0 $medium $medium 0); // LTR
-
-    figcaption {
-      text-align: left; // LTR
-    }
   }
 
+  &.align-none figcaption,
+  &.align-left figcaption {
+    text-align: $flow-from; // LTR
+  }
+
+  // Align center.
+  &.align-center .field__label,
   &.align-center figure {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     @include output-rhythm(margin-bottom, $medium);
-
-    figcaption {
-    }
   }
 
+  // Align right.
+  &.align-right .field__label,
   &.align-right figure {
-    @include output-rhythm(margin, 5px 0 $medium $medium); // LTR
-
-    figcaption {
-      text-align: left; // LTR
-    }
+    @include output-rhythm(margin, 0 0 $medium $medium); // LTR
   }
 
-  // If there is not image style set Firefox and other browsers will not respect max-width 100% inside a float.
+  &.align-right figcaption {
+    text-align: $flow-from; // LTR
+  }
+
+  // If there is no image style set Firefox and other browsers will not respect max-width 100% inside a float.
   // This can happen if the user does not set a style, so we are protecting the site from breaking.
   &.float-none {
     float: none !important;
@@ -55,24 +56,9 @@
     }
   }
 
-  // RTL
-  @at-root [dir="rtl"] .field-type--image {
-    &.align-none figure,
-    &.align-left figure {
-      @include output-rhythm(margin, 5px 0 $medium $medium);
-
-      figcaption {
-        text-align: right;
-      }
-    }
-
-    &.align-right figure {
-      @include output-rhythm(margin, 5px $medium $medium 0);
-
-      figcaption {
-        text-align: right;
-      }
-    }
+  // Be sure image fields with alignment clear each other.
+  &[class*="align-"] + .field-type-image {
+    clear: both;
   }
 }
 

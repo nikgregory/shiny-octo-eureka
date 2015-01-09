@@ -25,17 +25,35 @@
  * @see comment_preprocess_field()
  */
 #}
-<section{{ attributes }}>
+{% set field_name_class = field_name|clean_class %}
+{%
+  set classes = [
+    'field',
+    'field-' ~ entity_type|clean_class ~ '--' ~ field_name_class,
+    'field-name-' ~ field_name_class,
+    'field-type-' ~ field_type|clean_class,
+    'field-label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+    'comment-wrapper',
+  ]
+%}
+{%
+  set title_classes = [
+    'comment-field__title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
   {% if comments.1 and not label_hidden %}
     {{ title_prefix }}
-    <h2{{ title_attributes.addClass('comment-field__title').removeClass('title') }}>{{ label }}</h2>
+    <h2{{ title_attributes.addClass(title_classes) }}>{{ label }}</h2>
     {{ title_suffix }}
   {% endif %}
 
   {{ comments }}
 
   {% if comment_form %}
-    <div{{ content_attributes.addClass('comment-form-wrapper').removeClass('comment-form__title', 'title') }}>
+    <div{{ content_attributes.addClass('comment-form-wrapper') }}>
       <h2 class="comment-form__title">{{ 'Add new comment'|t }}</h2>
       {{ comment_form }}
     </div>

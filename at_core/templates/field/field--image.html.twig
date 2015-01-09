@@ -31,10 +31,30 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
+{% set field_name_class = field_name|clean_class %}
+{%
+  set classes = [
+    'field',
+    'field-' ~ entity_type|clean_class ~ '--' ~ field_name_class,
+    'field-name-' ~ field_name_class,
+    'field-type-' ~ field_type|clean_class,
+    'field-label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% if not label_hidden %}
+    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+  {% endif %}
   {% for delta, item in items %}
     {% if item.caption.show == true %}
-      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1)) }} role="group" style="max-width:{{ item.caption.width }}">
+      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1), 'caption', 'caption-img') }} role="group">
     {% else %}
       <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1)) }}>
     {% endif %}

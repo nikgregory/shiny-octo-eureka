@@ -761,6 +761,7 @@ function at_core_preprocess_field(&$variables) {
                 'title' => $values['title'],
               );
 
+              /* TODO: remove after more tests, instead we set a class in the template ("caption") and use Drupal cores figcaption CSS hack.
               if (!empty($item['content']['#image_style'])) {
                 $style = entity_load('image_style', $item['content']['#image_style']);
                 $dimensions = array(
@@ -771,6 +772,7 @@ function at_core_preprocess_field(&$variables) {
                 $variables['items'][$delta]['caption']['width'] = $dimensions['width'] . 'px';
                 $variables['items'][$delta]['caption']['height'] = $dimensions['height'] . 'px';
               }
+              */
             }
             else {
               $variables['items'][$delta]['caption'] = array(

@@ -11,19 +11,26 @@
         font-family: FontAwesome, sans-serif;
         content: $field-taxonomy-label-icon;
         display: inline-block;
-        @include output-rhythm(margin, 0 $small 0 0); // LTR
+        @include output-rhythm(margin, 0 $xx-small 0 0);
       }
+    }
+
+    // In left-to-right flip the icon.
+    @at-root [dir="ltr"] .field-type-taxonomy-term-reference .field__label:before {
+      @include fa-icon-flip(-1, 1, 0);
+    }
+
+    @at-root [dir="rtl"] .field-type-taxonomy-term-reference .field__label:before {
+      @include output-rhythm(margin, 0 0 0 $xx-small);
     }
   }
 
   @if ($field-taxonomy-item-as-labels == true) {
     span {
       display: inline-block;
-      margin: 0 3px 3px 0; // LTR
-      
+      margin: 0 $xxxx-small $xxxx-small 0; // LTR
       border: $border-width $border-style;
       border-radius: $border-radius;
-
       @include output-rhythm(padding, 0 $small);
 
       &:hover,
@@ -40,8 +47,8 @@
       }
     }
 
-    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span {
-      margin: 0 0 3px 3px;
+    @at-root [dir="rtl"] .field-type-taxonomy-term-reference span {
+      margin: 0 0 $xxxx-small $xxxx-small;
     }
   }
 
@@ -51,14 +58,21 @@
 
       &:before {
         font-family: FontAwesome, sans-serif;
+        @include adjust-font-size-to($small);
         content: $field-taxonomy-item-icon;
         display: inline-block;
-        @include output-rhythm(margin, 0 $small 0 0); // LTR
+        vertical-align: text-bottom;
+        @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
       }
     }
 
-    @at-root [dir="rtl"] .field-type--taxonomy-term-reference span:before {
-      @include output-rhythm(margin, 0 0 0 $small);
+    // In left-to-right flip the icon.
+    @at-root [dir="ltr"] .field-type-taxonomy-term-reference span:before {
+      @include fa-icon-flip(-1, 1, 0);
+    }
+
+    @at-root [dir="rtl"] .field-type-taxonomy-term-reference span:before {
+      @include output-rhythm(margin, 0 0 0 $xx-small);
     }
   }
 
@@ -67,7 +81,7 @@
       @include output-rhythm(margin, 0 $small 0 0); // LTR
     }
 
-    @at-root [dir="rtl"] .field-type--taxonomy-term-reference li {
+    @at-root [dir="rtl"] .field-type-taxonomy-term-reference li {
       @include output-rhythm(margin, 0 0 0 $small);
     }
   }
@@ -82,12 +96,5 @@
     display: inline-block;
     list-style: none;
   }
-
-  &.field-label--inline .field__item {
-    //float: left;  // LTR
-  }
-
-  @at-root [dir="rtl"] .field-type--taxonomy-term-reference.field-label--inline .field__item {
-    //float: right;
-  }
 }
+

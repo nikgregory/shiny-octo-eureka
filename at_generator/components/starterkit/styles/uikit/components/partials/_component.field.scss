@@ -21,26 +21,30 @@
 
 
 // Label inline
-.field-label--inline {
+.field-label-inline {
   // Remove the margin on inline field lables to preserve vertical formatting.
   .field__label {
     margin: 0;
     display: inline-block;
-    @include output-rhythm(padding, 0 $small 0 0); // LTR
+    @include output-rhythm(padding, 0 $xxxx-small 0 0); // LTR
+
+    &:after {
+      content: ":";
+    }
   }
 
   .field__items {
     display: inline-block;
   }
 
-  @at-root [dir="rtl"] .field-label--inline .field__label, [dir="rtl"] .field-label--inline .field__items {
-    @include output-rhythm(padding, 0 0 0 $small);
+  @at-root [dir="rtl"] .field-label-inline .field__label {
+    @include output-rhythm(padding, 0 0 0 $xxxx-small);
   }
 }
 
 
 // Label above
-.field-label--above {
+.field-label-above {
   .field__label,
   .field__items {
     display: block;

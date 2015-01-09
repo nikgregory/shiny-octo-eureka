@@ -3,6 +3,10 @@
 use Drupal\Core\Config\Config;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityManagerInterface;
+//use Drupal\Core\PhpStorage\PhpStorageFactory;
+
 /**
  * Form submit handler for the theme settings form.
  */
@@ -36,12 +40,9 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     }
 
     // Submit handler for Images.
-    /*
-    if (isset($values['settings_enable_images']) && $values['settings_enable_images'] === 1) {
-      require_once($at_core_path . '/forms/ext/images_submit.php');
-      at_core_submit_images($values, $theme, $generated_files_path);
-    }
-    */
+    //if (isset($values['settings_enable_images']) && $values['settings_enable_images'] === 1) {
+    //  Cache::invalidateTags(array('rendered'));
+    //}
 
     // Submit handler for Markup Overrides.
     if (isset($values['settings_enable_markup_overrides']) && $values['settings_enable_markup_overrides'] === 1) {
@@ -71,6 +72,9 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   $config = \Drupal::config($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
+
+  // Invalidate rendered cache tag
+  Cache::invalidateTags(array('rendered'));
 
   drupal_set_message(t('Extensions configuration saved.'), 'status');
 }
