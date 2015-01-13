@@ -30,10 +30,9 @@ $form['images']['image-settings']['description'] = array(
 
 // Loop node types and set form elements for each type.
 foreach ($node_types as $nt) {
-
   // Node type variables.
-  $node_type = $nt->type;
-  $node_type_name = $nt->name;
+  $node_type = $nt->get('type');
+  $node_type_name = $nt->get('name');
 
   $form['images']['image-settings']['node_type_' . $node_type] = array(
     '#type' => 'details',

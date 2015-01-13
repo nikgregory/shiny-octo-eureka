@@ -80,8 +80,9 @@ $form['shortcodes']['nodetype_classes'] = array(
   '#title' => t('Content types'),
 );
 foreach ($node_types as $nt) {
-  $node_type = $nt->type;
-  $node_type_name = $nt->name;
+  $node_type = $nt->get('type');
+  $node_type_name = $nt->get('name');
+
   $form['shortcodes']['nodetype_classes']['settings_nodetype_classes_' . $node_type] = array(
     '#type' => 'textfield',
     '#title' => t($node_type_name),

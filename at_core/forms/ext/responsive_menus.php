@@ -16,7 +16,7 @@ if (!empty($theme_blocks)) {
     $block_plugin = $block_values->get('plugin');
     $block_settings = $block_values->get('settings');
     if (in_array('system_menu_block', explode(':', $block_plugin))) {
-      $menu_blocks[$block_values->id] = $block_settings['label'];
+      $menu_blocks[$block_values->id()] = $block_settings['label'];
     }
   }
 }
