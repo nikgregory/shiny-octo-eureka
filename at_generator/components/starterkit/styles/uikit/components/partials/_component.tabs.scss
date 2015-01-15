@@ -1,8 +1,11 @@
 /**
  * Tabs (local tasks)
+ * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
+ * mean the tabs are now a block, and we probably need some template revisions
+ * also.
  ========================================================================== */
 
-ul.tabs {
+.tabs {
   margin: 0;
   padding: 0;
 }
@@ -15,19 +18,19 @@ ul.tabs {
     @include output-rhythm(padding, $x-large 0);
   }
 
-  ul.tabs.primary {
+  ul.tabs--primary {
     margin-bottom: 0;
   }
 
   // Here we call mixins that automagically apply styles to list items.
   @media #{$mobile} {
-    @include list-style-button-group-vertical('ul.tabs.primary');
-    @include list-style-seven-vertical('ul.tabs.secondary');
+    @include list-style-button-group-vertical('ul.tabs--primary');
+    @include list-style-seven-vertical('ul.tabs--secondary');
   }
 
   @media #{$wide} {
-    @include list-style-tab-group('ul.tabs.primary');
-    @include list-style-seven-horizontal('ul.tabs.secondary');
+    @include list-style-tab-group('ul.tabs--primary');
+    @include list-style-seven-horizontal('ul.tabs--secondary');
   }
 }
 

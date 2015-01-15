@@ -1484,56 +1484,59 @@ dd {
 
 /**
  * Tabs (local tasks)
+ * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
+ * mean the tabs are now a block, and we probably need some template revisions
+ * also.
  ========================================================================== */
-/* line 5, ../../uikit/components/partials/_component.tabs.scss */
-ul.tabs {
+/* line 8, ../../uikit/components/partials/_component.tabs.scss */
+.tabs {
   margin: 0;
   padding: 0;
 }
 
-/* line 14, ../../uikit/components/partials/_component.tabs.scss */
+/* line 17, ../../uikit/components/partials/_component.tabs.scss */
 .pr-temporary-tabs .l-rw {
   padding: 26px 0;
   padding: 1.61803rem 0;
 }
-/* line 18, ../../uikit/components/partials/_component.tabs.scss */
-.pr-temporary-tabs ul.tabs.primary {
+/* line 21, ../../uikit/components/partials/_component.tabs.scss */
+.pr-temporary-tabs ul.tabs--primary {
   margin-bottom: 0;
 }
 @media all and (max-width: 60em) {
   /* line 105, ../../uikit/components/mixins/_list-buttons.scss */
-  .pr-temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs--primary {
     list-style: none;
   }
   /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .pr-temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs--primary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs--primary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary:before, .pr-temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs--primary:after {
     clear: both;
   }
   /* line 110, ../../uikit/components/mixins/_list-buttons.scss */
-  .pr-temporary-tabs ul.tabs.primary li:first-child a {
+  .pr-temporary-tabs ul.tabs--primary li:first-child a {
     border-radius: 2px 2px 0 0;
   }
   /* line 113, ../../uikit/components/mixins/_list-buttons.scss */
-  .pr-temporary-tabs ul.tabs.primary li:last-child a {
+  .pr-temporary-tabs ul.tabs--primary li:last-child a {
     border-radius: 0 0 2px 2px;
   }
   /* line 117, ../../uikit/components/mixins/_list-buttons.scss */
-  .pr-temporary-tabs ul.tabs.primary li a {
+  .pr-temporary-tabs ul.tabs--primary li a {
     color: #363636;
     background-color: #fafafa;
     border-color: #cccccc;
@@ -1554,43 +1557,43 @@ ul.tabs {
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   }
   /* line 10, ../../uikit/components/mixins/_button-variant.scss */
-  .pr-temporary-tabs ul.tabs.primary li a:link, .pr-temporary-tabs ul.tabs.primary li a:visited {
+  .pr-temporary-tabs ul.tabs--primary li a:link, .pr-temporary-tabs ul.tabs--primary li a:visited {
     color: #363636;
     background-color: #fafafa;
     border-color: #cccccc;
   }
   /* line 17, ../../uikit/components/mixins/_button-variant.scss */
-  .pr-temporary-tabs ul.tabs.primary li a:hover, .pr-temporary-tabs ul.tabs.primary li a:focus, .pr-temporary-tabs ul.tabs.primary li a:active, .pr-temporary-tabs ul.tabs.primary li a.active {
+  .pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus, .pr-temporary-tabs ul.tabs--primary li a:active, .pr-temporary-tabs ul.tabs--primary li a.active {
     color: #363636;
     background-color: #ededed;
     border-color: #bfbfbf;
   }
   /* line 58, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs--secondary {
     list-style: none;
     text-align: left;
   }
   /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .pr-temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs--secondary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs--secondary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary:before, .pr-temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs--secondary:after {
     clear: both;
   }
   /* line 73, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a {
+  .pr-temporary-tabs ul.tabs--secondary a {
     display: inline-block;
     line-height: 1;
     color: #363636;
@@ -1601,69 +1604,69 @@ ul.tabs {
             transition: background-color, .15s, ease-out;
   }
   /* line 83, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a:hover, .pr-temporary-tabs ul.tabs.secondary a:focus {
+  .pr-temporary-tabs ul.tabs--secondary a:hover, .pr-temporary-tabs ul.tabs--secondary a:focus {
     text-decoration: none;
     color: #363636;
     border-bottom: 1px solid #cccccc;
   }
   /* line 90, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a.active {
+  .pr-temporary-tabs ul.tabs--secondary a.active {
     border-bottom: 1px solid #cccccc;
   }
   /* line 93, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a.active:hover, .pr-temporary-tabs ul.tabs.secondary a.active:focus {
+  .pr-temporary-tabs ul.tabs--secondary a.active:hover, .pr-temporary-tabs ul.tabs--secondary a.active:focus {
     color: #363636;
   }
 }
 @media all and (min-width: 60.063em) {
   /* line 66, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs--primary {
     border-bottom: 1px solid #cccccc;
     list-style: none;
   }
   /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .pr-temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs--primary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary {
+  .pr-temporary-tabs ul.tabs--primary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary:before, .pr-temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.primary:after {
+  .pr-temporary-tabs ul.tabs--primary:after {
     clear: both;
   }
   /* line 12, ../../uikit/components/mixins/_list.scss */
-  .pr-temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs--primary li {
     float: left;
     margin: 0 0 0 0;
   }
   /* line 18, ../../uikit/components/mixins/_list.scss */
-  .pr-temporary-tabs ul.tabs.primary ul,
-  .pr-temporary-tabs ul.tabs.primary ol {
+  .pr-temporary-tabs ul.tabs--primary ul,
+  .pr-temporary-tabs ul.tabs--primary ol {
     display: none;
   }
   /* line 70, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary li {
+  .pr-temporary-tabs ul.tabs--primary li {
     margin-bottom: -1px;
   }
   /* line 75, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary li:first-child a {
+  .pr-temporary-tabs ul.tabs--primary li:first-child a {
     border-radius: 2px 0 0 0;
   }
   /* line 78, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary li:last-child a {
+  .pr-temporary-tabs ul.tabs--primary li:last-child a {
     border-radius: 0 2px 0 0;
   }
   /* line 92, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary a {
+  .pr-temporary-tabs ul.tabs--primary a {
     display: block;
     line-height: 1;
     color: #363636;
@@ -1677,59 +1680,59 @@ ul.tabs {
     margin-right: -1px;
   }
   /* line 107, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary a:hover, .pr-temporary-tabs ul.tabs.primary a:focus {
+  .pr-temporary-tabs ul.tabs--primary a:hover, .pr-temporary-tabs ul.tabs--primary a:focus {
     color: #363636;
     background: #ededed;
     text-decoration: none;
   }
   /* line 114, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary a.active {
+  .pr-temporary-tabs ul.tabs--primary a.active {
     color: #363636;
     background: none;
     border-bottom-color: #f7f7f7;
   }
   /* line 119, ../../uikit/components/mixins/_list-tabs.scss */
-  .pr-temporary-tabs ul.tabs.primary a.active:hover, .pr-temporary-tabs ul.tabs.primary a.active:focus {
+  .pr-temporary-tabs ul.tabs--primary a.active:hover, .pr-temporary-tabs ul.tabs--primary a.active:focus {
     color: #363636;
     background: none;
   }
   /* line 18, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs--secondary {
     list-style: none;
     padding: 0;
   }
   /* line 11, ../../../../../../../../../../../../.rvm/gems/ruby-2.2.0/gems/compass-core-1.0.1/stylesheets/compass/typography/lists/_bullets.scss */
-  .pr-temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs--secondary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
   /* line 14, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary {
+  .pr-temporary-tabs ul.tabs--secondary {
     zoom: 1;
   }
   /* line 17, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary:before, .pr-temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
     content: "";
     display: table;
   }
   /* line 22, ../../uikit/components/mixins/_clearfixes.scss */
-  .pr-temporary-tabs ul.tabs.secondary:after {
+  .pr-temporary-tabs ul.tabs--secondary:after {
     clear: both;
   }
   /* line 12, ../../uikit/components/mixins/_list.scss */
-  .pr-temporary-tabs ul.tabs.secondary li {
+  .pr-temporary-tabs ul.tabs--secondary li {
     float: left;
     margin: 0 7px 0 7px;
     margin: 0 0.43162rem 0 0.43162rem;
   }
   /* line 18, ../../uikit/components/mixins/_list.scss */
-  .pr-temporary-tabs ul.tabs.secondary ul,
-  .pr-temporary-tabs ul.tabs.secondary ol {
+  .pr-temporary-tabs ul.tabs--secondary ul,
+  .pr-temporary-tabs ul.tabs--secondary ol {
     display: none;
   }
   /* line 22, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a {
+  .pr-temporary-tabs ul.tabs--secondary a {
     display: block;
     line-height: 1;
     color: #363636;
@@ -1740,17 +1743,17 @@ ul.tabs {
             transition: background-color, .15s, ease-in-out;
   }
   /* line 33, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a:hover, .pr-temporary-tabs ul.tabs.secondary a:focus {
+  .pr-temporary-tabs ul.tabs--secondary a:hover, .pr-temporary-tabs ul.tabs--secondary a:focus {
     text-decoration: none;
     color: #363636;
     border-bottom: 1px solid #cccccc;
   }
   /* line 40, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a.active {
+  .pr-temporary-tabs ul.tabs--secondary a.active {
     border-bottom: 1px solid #cccccc;
   }
   /* line 43, ../../uikit/components/mixins/_list-seven.scss */
-  .pr-temporary-tabs ul.tabs.secondary a.active:hover, .pr-temporary-tabs ul.tabs.secondary a.active:focus {
+  .pr-temporary-tabs ul.tabs--secondary a.active:hover, .pr-temporary-tabs ul.tabs--secondary a.active:focus {
     color: #363636;
   }
 }
