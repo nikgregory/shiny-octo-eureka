@@ -3,13 +3,17 @@
  *  - see table.scss for generic table styles.
  ========================================================================== */
 
-.page-forum {
+.path-forum {
 
   table {}
 
   thead {}
 
-  th {}
+  th {
+    white-space: nowrap;
+    text-align: $flow-from;
+    font-weight: $font-weight-normal;
+  }
 
   tbody {}
 
@@ -20,19 +24,35 @@
 
    .icon {}
 
-   .name {}
+   .name {
+     @include cf; // create new formatting context so text "clears" the floating icon, we want to perfectly align the name and desc.
+   }
 
-   &.topics {}
-
-   &.posts {}
-
-   &.last-reply {}
+   &.topics,
+   &.posts,
+   &.last-reply {
+     text-align: center;
+   }
   }
 }
 
 
 // Set on the div wrapper around forum the main forum table.
-#forum {}
+#forum {
+  // Drupal core uses an ID so we need to match the specificity.
+  .description {
+    @include adjust-font-size-to($medium/1.25); // 13px
+    @include output-rhythm(margin, $xx-small $xx-small $xx-small 33px); // LTR, force the desc text to align with the forum name.
+  }
 
-// Specific Forum ID, each forum has an ID, the first is 0
+  div.indent {
+    @include output-rhythm(margin-#{$flow-from}, 33px);
+  }
+
+  @at-root [dir="rtl"] #forum .description {
+    @include output-rhythm(margin, $xx-small 33px $xx-small $xx-small);
+  }
+}
+
+// Specific Forum ID, each forum table element has an ID, the first is 0
 #forum-0 {}

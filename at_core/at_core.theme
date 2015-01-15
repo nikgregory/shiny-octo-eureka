@@ -199,7 +199,6 @@ function at_core_css_alter(&$css) {
     'book.theme.css',
     'comment.theme.css',
     'file.formatter.generic.css',
-    'forum.module.css',
     'search.theme.css',
     'system.theme.css',
     'taxonomy.module.css',
