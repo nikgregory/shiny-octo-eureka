@@ -13,14 +13,23 @@ at.windowsize:
 # matchHeight
 at.matchheight:
   version: 0.5.2
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/liabru/jquery-match-height/master/LICENSE
+    gpl-compatible: true
   js:
     scripts/min/jquery.matchHeight.min.js: { minified: true }
   dependencies:
     - core/jquery
 
 # enquire
+# Issued opened to add licence to project: https://github.com/WickyNilliams/enquire.js/issues/126
 at.enquire:
   version: 2.1.2
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/mit-license.php
+    gpl-compatible: true
   js:
     scripts/min/enquire.min.js: { minified: true }
   dependencies:
@@ -29,6 +38,10 @@ at.enquire:
 # doubleTapToGo
 at.doubletaptogo:
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/dachcom-digital/jquery-doubleTapToGo/master/LICENSE
+    gpl-compatible: true
   js:
     scripts/min/doubleTapToGo.min.js: { minified: true }
   dependencies:
@@ -37,6 +50,10 @@ at.doubletaptogo:
 # Fastclick
 at.fastclick:
   version: 1.0.3
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/ftlabs/fastclick/master/LICENSE
+    gpl-compatible: true
   js:
     scripts/min/fastclick.min.js: { minified: true }
   dependencies:
@@ -51,7 +68,7 @@ at.fastclick_initialize:
     - at_core/at.fastclick
     - core/jquery
 
-# Responsive Menus (AT Core)
+# Responsive Menus
 at.responsivemenus:
   version: 1.0.0
   js:
@@ -66,12 +83,20 @@ at.responsivemenus:
 # Respond TODO: test with respond in IE8.
 at.respond:
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/scottjehl/Respond/master/LICENSE-MIT
+    gpl-compatible: true
   js:
     scripts/min/respond.min.js: { minified: true, browsers: { IE: 'lte IE 8', '!IE': false } }
 
 # Selectivizr TODO: test with IE8.
 at.selectivizr:
   version: 1.0.2
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/mit-license.php
+    gpl-compatible: true
   js:
     scripts/min/at.selectivizr.min.js: { minified: true, browsers: { IE: 'lte IE 8', '!IE': false } }
   dependencies:
@@ -82,7 +107,7 @@ at.yui3:
   remote: https://github.com/yui/yui3
   license:
     name: BSD
-    url: https://github.com/yui/yui3/blob/master/LICENSE.md
+    url: https://raw.githubusercontent.com/yui/yui3/master/LICENSE.md
     gpl-compatible: true
   version: 3.18.0
   js:

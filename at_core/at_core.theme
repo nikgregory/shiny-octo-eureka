@@ -373,14 +373,10 @@ function at_core_preprocess_html(&$variables) {
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Add a "site name" body classes for advanced theming of multi-sites.
-  if ($variables['head_title_array']['name']) {
-    $variables['attributes']['class'][] = 'site-name--' . Html::getClass($variables['head_title_array']['name']);
-  }
-
-  // Add theme name class, using this for debugging in development since I switch
-  // themes a lot and need to know which one I am looking at, could be removed later on?
-  $variables['attributes']['class'][] = 'theme-name--' . Html::getClass($theme);
+  // Add theme variables, we use these to set a class and provide a very easy way for themers to link
+  // to files in the theme, such as background images or other files.
+  $variables['theme']['name'] = String::checkPlain($theme);
+  $variables['theme']['path'] = $path_to_theme;
 
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
