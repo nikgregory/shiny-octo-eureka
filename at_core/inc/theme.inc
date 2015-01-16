@@ -591,8 +591,8 @@ function adaptivetheme_field__image($vars) {
 
   // Check if captions are enabled for full and/or teaser view modes
   if ($image_settings_enabled == TRUE) {
-    $caption_full = at_get_setting('image_caption_full', $theme_name) === 1 ? TRUE : FALSE;
-    $caption_teaser = at_get_setting('image_caption_teaser', $theme_name) === 1 ? TRUE : FALSE;
+    $caption_full = at_get_setting('image_caption_full', $theme_name) == 1 ? TRUE : FALSE; // some users report the return value being a string: https://www.drupal.org/node/2331883
+    $caption_teaser = at_get_setting('image_caption_teaser', $theme_name) == 1 ? TRUE : FALSE;
   }
 
   $output = '';
