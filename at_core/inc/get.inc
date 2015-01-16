@@ -224,7 +224,7 @@ function at_get_browser() {
     }
     else if (function_exists('browscap_get_browser')) {
       $browscap = browscap_get_browser();
-      if ($browscap) {
+      if (isset($browscap['ismobiledevice'])) {
         if (filter_var($browscap['ismobiledevice'], FILTER_VALIDATE_BOOLEAN) == TRUE) {
           $browser['is_mobile'] = TRUE;
         }
