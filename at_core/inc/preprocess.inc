@@ -101,8 +101,7 @@ function adaptivetheme_preprocess_html(&$vars) {
   // Set the skip navigation target ID
   $vars['skip_link_target'] = '#main-content';
   if (at_get_setting('skip_link_target', $theme_name)) {
-    $skip_link_target = at_get_setting('skip_link_target', $theme_name);
-    $vars['skip_link_target'] = check_plain($skip_link_target);
+    $vars['skip_link_target'] = check_plain(at_get_setting('skip_link_target', $theme_name));
   }
 
   // Generate body classes
@@ -216,6 +215,15 @@ function adaptivetheme_preprocess_page(&$vars) {
   if (module_exists('search')) {
     $search_box = drupal_get_form('search_form');
     $vars['search_box'] = '<div id="search-box" role="search">' . drupal_render($search_box) . '</div>';
+  }
+
+  // Test if this is a page manager page, we need this to set things like the page title in themes
+  // want to control the page title, e.g. not show it on nodes.
+  $vars['page_manager_get_current_page'] = FALSE;
+  if (function_exists('page_manager_get_current_page')) {
+    if (page_manager_get_current_page()) {
+      $vars['page_manager_get_current_page'] = TRUE;
+    }
   }
 
   // Process enabled Extensions
