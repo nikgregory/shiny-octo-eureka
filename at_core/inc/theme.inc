@@ -216,7 +216,7 @@ function adaptivetheme_item_list($vars) {
 
   // If a class exists use it on the wrapper, for Drupal core this mainly applies
   // to the pager, so you get the wrapper class .item-list-pager
-  if (isset($attributes['class'])) {
+  if (isset($attributes['class'][0])) {
     $output = '<div class="item-list item-list-' . $attributes['class'][0] . '">';
   }
   else {
