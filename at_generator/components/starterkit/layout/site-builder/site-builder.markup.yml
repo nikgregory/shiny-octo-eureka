@@ -19,7 +19,6 @@ rows:
       id: leaderboard
     regions:
       leaderboard: 'Leaderboard'
-      leaderboardtwo: 'Leaderboard two'
   header:
     attributes:
       role: banner
