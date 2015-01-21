@@ -30,7 +30,15 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('menu', 'odd' ,'menu-level-1') }}>
+      {%
+        set classes = [
+          'menu',
+          'odd',
+          'menu-level-1',
+          menu_name_original ? 'menu-name-original--' ~ menu_name_original,
+        ]
+      %}
+      <ul{{ attributes.addClass(classes) }}>
     {% else %}
       <ul class="menu {{ cycle(["odd", "even"], menu_level) }} {{ 'menu-level-' ~ (menu_level + 1) }}">
     {% endif %}

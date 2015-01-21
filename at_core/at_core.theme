@@ -498,10 +498,14 @@ function at_core_preprocess_page(&$variables) {
       drupal_set_message(t('Bummer, something went wrong. Check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
     }
     else {
-      $variables += $row_attributes;
+      // I like this syntax better than Drupals usual habit of += shorthand, mainly because it's
+      // very obvious at a glance what we are doing here.
+      $variables = $variables + $row_attributes;
     }
   }
 }
+
+
 
 /**
  * Preprocess variables for region templates.
@@ -870,6 +874,20 @@ function at_core_preprocess_views_view(&$variables) {
 }
 
 
+/**
+ * Preprocess variables for menu templates.
+ */
+function at_core_preprocess_menu(&$variables) {
+  // Add a reasonably useful class to the root ul, it won't be unique but
+  // can be very useful if and when you need it.
+  if (!empty($variables['theme_hook_original'])) {
+    $menu_name = str_replace('menu__', '', $variables['theme_hook_original']);
+    $variables['menu_name_original'] = Html::getClass($menu_name);
+  }
+  else {
+    $variables['menu_name_original'] = '';
+  }
+}
+
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
-//function at_core_preprocess_menu(&$variables) {}
