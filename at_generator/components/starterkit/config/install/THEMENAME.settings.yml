@@ -51,8 +51,7 @@ settings:
   page_tabletisolate_navbar: ''
   page_tabletisolate_features: threecol-split-row-12--6-6
   page_tabletisolate_main: threecol-split-row-12--6-6
-  page_tabletisolate_subfeatures: ''
-  page_tabletisolate_footercols: fourcol-split-row-6-6--6-6
+  page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
   page_tabletisolate_footer: ''
   page_wide_messages: ''
   page_wide_leaderboard: ''
@@ -60,8 +59,7 @@ settings:
   page_wide_navbar: ''
   page_wide_features: threecol-source-ordered-2-8-2
   page_wide_main: threecol-source-ordered-3-6-3
-  page_wide_subfeatures: threecol-source-ordered-4-4-4
-  page_wide_footercols: fourcol-3-3-3-3
+  page_wide_subfeatures: fourcol-3-3-3-3
   page_wide_footer: ''
 features:
   logo: 1
