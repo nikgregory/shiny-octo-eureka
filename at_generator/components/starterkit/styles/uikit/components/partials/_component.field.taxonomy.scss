@@ -3,7 +3,7 @@
  ========================================================================== */
 
 .field-type-taxonomy-term-reference {
-  @include output-rhythm(margin, $medium 0);
+  //@include output-rhythm(margin, $medium 0);
 
   @if $field-taxonomy-label-as-icon == true {
     .field__label {

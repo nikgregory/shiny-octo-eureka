@@ -3,39 +3,31 @@
  *  - comment field (holds comment title, form, comments etc)
  *  - styles for comments
  ========================================================================== */
-/* line 10, ../../uikit/components/partials/_component.comments.scss */
 .field-node--comment {
   clear: both;
 }
-/* line 14, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment {
   zoom: 1;
 }
-/* line 17, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment:before, .field-node--comment:after {
   content: "";
   display: table;
 }
-/* line 22, ../../uikit/components/mixins/_clearfixes.scss */
 .field-node--comment:after {
   clear: both;
 }
 
-/* line 14, ../../uikit/components/mixins/_clearfixes.scss */
 .comment {
   zoom: 1;
 }
-/* line 17, ../../uikit/components/mixins/_clearfixes.scss */
 .comment:before, .comment:after {
   content: "";
   display: table;
 }
-/* line 22, ../../uikit/components/mixins/_clearfixes.scss */
 .comment:after {
   clear: both;
 }
 
-/* line 38, ../../uikit/components/partials/_component.comments.scss */
 .comment__author {
   display: inline;
 }

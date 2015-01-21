@@ -2,23 +2,19 @@
  * Forums
  *  - see table.scss for generic table styles.
  ========================================================================== */
-/* line 12, ../../uikit/components/partials/_component.forums.scss */
 .path-forum th {
   white-space: nowrap;
   text-align: left;
   font-weight: 400;
 }
-/* line 27, ../../uikit/components/partials/_component.forums.scss */
 .path-forum td .name {
   overflow: hidden;
   zoom: 1;
 }
-/* line 31, ../../uikit/components/partials/_component.forums.scss */
 .path-forum td.topics, .path-forum td.posts, .path-forum td.last-reply {
   text-align: center;
 }
 
-/* line 43, ../../uikit/components/partials/_component.forums.scss */
 #forum .description {
   font-size: 13px;
   font-size: 0.8rem;
@@ -27,12 +23,10 @@
   margin: 7px 7px 7px 33px;
   margin: 0.43162rem 0.43162rem 0.43162rem 2.0625rem;
 }
-/* line 48, ../../uikit/components/partials/_component.forums.scss */
 #forum div.indent {
   margin-left: 33px;
   margin-left: 2.0625rem;
 }
-/* line 52, ../../uikit/components/partials/_component.forums.scss */
 [dir="rtl"] #forum .description {
   margin: 7px 33px 7px 7px;
   margin: 0.43162rem 2.0625rem 0.43162rem 0.43162rem;

@@ -4,52 +4,41 @@
 /**
  * base.elements
  ========================================================================== */
-/* line 11, ../../uikit/components/partials/_theme.color.scss */
 html,
 body {
   background-color: #333333;
 }
 
-/* line 17, ../../uikit/components/partials/_theme.color.scss */
 body {
   color: #363636;
 }
 
-/* line 23, ../../uikit/components/partials/_theme.color.scss */
 a {
   color: #0066cc;
 }
-/* line 26, ../../uikit/components/partials/_theme.color.scss */
 a:link, a:visited {
   color: #0066cc;
 }
-/* line 31, ../../uikit/components/partials/_theme.color.scss */
 a:active, a.active {
   color: #0066cc;
 }
-/* line 36, ../../uikit/components/partials/_theme.color.scss */
 a:hover, a:focus {
   color: #0066cc;
 }
 
-/* line 44, ../../uikit/components/partials/_theme.color.scss */
 blockquote {
   border-color: #cccccc;
 }
-/* line 49, ../../uikit/components/partials/_theme.color.scss */
 blockquote p:first-child:before {
   color: #cccccc;
 }
-/* line 55, ../../uikit/components/partials/_theme.color.scss */
 blockquote small {
   color: #434343;
 }
-/* line 60, ../../uikit/components/partials/_theme.color.scss */
 blockquote.pull-right {
   border-right-color: #cccccc;
 }
 
-/* line 67, ../../uikit/components/partials/_theme.color.scss */
 hr {
   border-color: #cccccc;
 }
@@ -59,15 +48,10 @@ hr {
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
-/* line 77, ../../uikit/components/partials/_theme.color.scss */
 ::-moz-selection {
   background: #b3d4fc;
 }
 
-/* line 81, ../../uikit/components/partials/_theme.color.scss */
-::-moz-selection {
-  background: #b3d4fc;
-}
 ::selection {
   background: #b3d4fc;
 }
@@ -77,78 +61,63 @@ hr {
  *  - mainly for markup that is printed directly in page.html.twig and
  *    .l-r {}
  ========================================================================== */
-/* line 93, ../../uikit/components/partials/_theme.color.scss */
 .page {
   background-color: #f7f7f7;
 }
 
-/* line 116, ../../uikit/components/partials/_theme.color.scss */
 .pr-header {
   background-color: #ffffff;
   color: #363636;
 }
-/* line 9, ../../uikit/components/mixins/_page.scss */
 .pr-header .regions {
   background-color: inherit;
 }
 
-/* line 122, ../../uikit/components/partials/_theme.color.scss */
 .pr-navbar {
   background-color: #666666;
   color: #ffffff;
 }
-/* line 9, ../../uikit/components/mixins/_page.scss */
 .pr-navbar .regions {
   background-color: inherit;
 }
-/* line 125, ../../uikit/components/partials/_theme.color.scss */
 .pr-navbar a,
 .pr-navbar .menu a {
   color: inherit;
 }
 
-/* line 133, ../../uikit/components/partials/_theme.color.scss */
 .pr-features {
   background-color: #d3d3d3;
   color: #363636;
 }
-/* line 9, ../../uikit/components/mixins/_page.scss */
 .pr-features .regions {
   background-color: inherit;
 }
 
-/* line 143, ../../uikit/components/partials/_theme.color.scss */
 .pr-tertiary {
   background-color: #d3d3d3;
   color: #363636;
 }
-/* line 9, ../../uikit/components/mixins/_page.scss */
 .pr-tertiary .regions {
   background-color: inherit;
 }
 
-/* line 148, ../../uikit/components/partials/_theme.color.scss */
 .pr-footer {
   background-color: #666666;
   color: #ffffff;
 }
-/* line 9, ../../uikit/components/mixins/_page.scss */
 .pr-footer .regions {
   background-color: inherit;
 }
-/* line 151, ../../uikit/components/partials/_theme.color.scss */
 .pr-footer a,
 .pr-footer .menu a {
   color: inherit;
 }
-/* line 155, ../../uikit/components/partials/_theme.color.scss */
 .pr-footer a:hover, .pr-footer a:focus,
 .pr-footer .menu a:hover,
 .pr-footer .menu a:focus {
   color: inherit;
 }
 
-/* line 164, ../../uikit/components/partials/_theme.color.scss */
 .attribution {
   background-color: #666666;
 }
@@ -166,19 +135,15 @@ hr {
  *  - for the drop menu and other responsive menus see the mixins and the
  *    _navbar.scss partial.
  ========================================================================== */
-/* line 211, ../../uikit/components/partials/_theme.color.scss */
 .menu li.collapsed > a:after, .menu li.expanded > a:after {
   color: #363636;
 }
-/* line 218, ../../uikit/components/partials/_theme.color.scss */
 .menu a {
   color: #0066cc;
 }
-/* line 222, ../../uikit/components/partials/_theme.color.scss */
 .menu a:hover, .menu a:focus {
   color: #0066cc;
 }
-/* line 228, ../../uikit/components/partials/_theme.color.scss */
 .menu a.active {
   color: #0066cc;
 }
@@ -211,70 +176,57 @@ hr {
  *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
  *  3. Theme settings as set in your themes Advanced extention settings.
  ========================================================================== */
-/* line 277, ../../uikit/components/partials/_theme.color.scss */
 .rm-block,
 .rm-block * {
   background-color: inherit;
   color: inherit;
 }
 
-/* line 286, ../../uikit/components/partials/_theme.color.scss */
 .rm-toggle span {
   background: transparent;
 }
 
-/* line 298, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu li.active-trail > a {
   color: inherit;
   background: rgba(255, 255, 255, 0.3);
 }
-/* line 304, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a {
   color: inherit;
   background: inherit;
 }
-/* line 308, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a:active {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   opacity: 0.9;
 }
-/* line 313, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a:hover, .rm-block__content .menu a:focus {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.3);
 }
-/* line 319, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a.active {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.3);
 }
-/* line 323, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a.active[href="/"] {
   background-color: transparent;
 }
-/* line 326, ../../uikit/components/partials/_theme.color.scss */
 .rm-block__content .menu a.active[href="/"]:hover, .rm-block__content .menu a.active[href="/"]:focus {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* line 366, ../../uikit/components/partials/_theme.color.scss */
 .ms-offcanvas .rm-block__content {
   opacity: .001;
   background-color: #333333;
   color: #f7f7f7;
 }
 
-/* line 381, ../../uikit/components/partials/_theme.color.scss */
 .ms-tiles .rm-block__content .menu-level-1 > li {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* line 392, ../../uikit/components/partials/_theme.color.scss */
 .ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
-/* line 398, ../../uikit/components/partials/_theme.color.scss */
 .ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li > a {
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -282,11 +234,9 @@ hr {
 /**
  * Breadcrumbs
  ========================================================================== */
-/* line 413, ../../uikit/components/partials/_theme.color.scss */
 .breadcrumb li:before {
   color: #cccccc;
 }
-/* line 418, ../../uikit/components/partials/_theme.color.scss */
 .breadcrumb a {
   color: #0066cc;
   text-decoration: none;
@@ -296,7 +246,6 @@ hr {
  * Tables
  * Base styles.
  ========================================================================== */
-/* line 430, ../../uikit/components/partials/_theme.color.scss */
 table {
   border-color: #cccccc;
 }
@@ -305,18 +254,15 @@ table {
  * Table Theme
  * Style Drupal selectors for tables.
  ========================================================================== */
-/* line 441, ../../uikit/components/partials/_theme.color.scss */
 tr {
   border-color: #cccccc;
 }
 
-/* line 482, ../../uikit/components/partials/_theme.color.scss */
 thead tr {
   color: #363636;
   background-color: #ededed;
 }
 
-/* line 490, ../../uikit/components/partials/_theme.color.scss */
 tr,
 td,
 th {
@@ -332,7 +278,6 @@ th {
  *  - input type submit is treated as a 'button', see _buttons.scss
  *  - for drop buttons see _buttons.scss
  ========================================================================== */
-/* line 509, ../../uikit/components/partials/_theme.color.scss */
 textarea,
 select,
 input[type="date"],
@@ -352,7 +297,6 @@ input[type="week"] {
   border-color: #cccccc;
   background-color: #ffffff;
 }
-/* line 533, ../../uikit/components/partials/_theme.color.scss */
 textarea:focus,
 select:focus,
 input[type="date"]:focus,
@@ -371,7 +315,6 @@ input[type="week"]:focus {
   border-color: #cccccc;
   color: #363636;
 }
-/* line 538, ../../uikit/components/partials/_theme.color.scss */
 textarea:hover, textarea:focus,
 select:hover,
 select:focus,
@@ -403,7 +346,6 @@ input[type="week"]:hover,
 input[type="week"]:focus {
   background-color: white;
 }
-/* line 544, ../../uikit/components/partials/_theme.color.scss */
 textarea[disabled]:hover, textarea[disabled]:focus,
 select[disabled]:hover,
 select[disabled]:focus,
@@ -442,12 +384,10 @@ input[type="week"][disabled]:focus {
  * @see collapse.js
  * @thanks http://nicolasgallagher.com/css-background-image-hacks/
  */
-/* line 558, ../../uikit/components/partials/_theme.color.scss */
 details {
   border-color: #cccccc;
 }
 
-/* line 567, ../../uikit/components/partials/_theme.color.scss */
 input[readonly],
 select[readonly],
 textarea[readonly] {
@@ -455,7 +395,6 @@ textarea[readonly] {
   color: #363636;
 }
 
-/* line 575, ../../uikit/components/partials/_theme.color.scss */
 button[disabled],
 input[disabled],
 select[disabled],
@@ -467,19 +406,16 @@ a.button_disabled {
   color: #363636;
 }
 
-/* line 588, ../../uikit/components/partials/_theme.color.scss */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #505050;
 }
 
-/* line 593, ../../uikit/components/partials/_theme.color.scss */
 input:-moz-placeholder,
 textarea:-moz-placeholder {
   color: #505050;
 }
 
-/* line 598, ../../uikit/components/partials/_theme.color.scss */
 input.placeholder_text,
 textarea.placeholder_text {
   color: #505050;
@@ -488,32 +424,26 @@ textarea.placeholder_text {
 /**
  * Form Theme
  ========================================================================== */
-/* line 609, ../../uikit/components/partials/_theme.color.scss */
 .filter-wrapper {
   border-color: #cccccc;
 }
 
-/* line 615, ../../uikit/components/partials/_theme.color.scss */
 .tips {
   color: #505050;
 }
 
-/* line 621, ../../uikit/components/partials/_theme.color.scss */
 .description {
   color: #505050;
 }
 
-/* line 626, ../../uikit/components/partials/_theme.color.scss */
 .marker {
   color: #ee0000;
 }
 
-/* line 631, ../../uikit/components/partials/_theme.color.scss */
 .form-required:after {
   color: #ee0000;
 }
 
-/* line 638, ../../uikit/components/partials/_theme.color.scss */
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
@@ -531,7 +461,6 @@ textarea.placeholder_text {
  *  - drop buttons
  *  - action link buttons
  ========================================================================== */
-/* line 658, ../../uikit/components/partials/_theme.color.scss */
 button,
 .button {
   color: #363636;
@@ -539,7 +468,6 @@ button,
   border-color: #cccccc;
   opacity: 0.9;
 }
-/* line 670, ../../uikit/components/partials/_theme.color.scss */
 button:hover, button:focus,
 .button:hover,
 .button:focus {
@@ -547,44 +475,37 @@ button:hover, button:focus,
   color: #363636;
   background-color: #f2f2f2;
 }
-/* line 678, ../../uikit/components/partials/_theme.color.scss */
 button[disabled]:hover,
 .button[disabled]:hover {
   color: #2e2e2e;
 }
 
-/* line 686, ../../uikit/components/partials/_theme.color.scss */
 .button--primary {
   color: #fffffe;
   background-color: #333333;
   border-color: #d3d3d3;
 }
-/* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .button--primary:link, .button--primary:visited {
   color: #fffffe;
   background-color: #333333;
   border-color: #d3d3d3;
 }
-/* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
   color: #fffffe;
   background-color: #262626;
   border-color: #c6c6c6;
 }
 
-/* line 692, ../../uikit/components/partials/_theme.color.scss */
 .button--danger {
   color: #a51b00;
   background-color: transparent;
   border-color: transparent;
 }
-/* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .button--danger:link, .button--danger:visited {
   color: #a51b00;
   background-color: transparent;
   border-color: transparent;
 }
-/* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .button--danger:hover, .button--danger:focus, .button--danger:active, .button--danger.active {
   color: #a51b00;
   background-color: transparent;
@@ -592,60 +513,48 @@ button[disabled]:hover,
 }
 
 /* Drop buttons */
-/* line 704, ../../uikit/components/partials/_theme.color.scss */
 .js .dropbutton-widget {
   background-color: #f7f7f7;
   border-color: #cccccc;
 }
 
-/* line 711, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .secondary-action {
   border-top-color: #cccccc;
 }
-/* line 714, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .secondary-action .button {
   background: #f7f7f7;
 }
-/* line 725, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton .dropbutton-toggle button:hover {
   background: transparent;
 }
 
-/* line 735, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton {
   border-right-color: #cccccc;
 }
-/* line 739, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .publish .button {
   color: #fffffe;
   background-color: #333333;
   border-color: #d3d3d3;
 }
-/* line 10, ../../uikit/components/mixins/_button-variant.scss */
 .dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
   color: #fffffe;
   background-color: #333333;
   border-color: #d3d3d3;
 }
-/* line 17, ../../uikit/components/mixins/_button-variant.scss */
 .dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
   color: #fffffe;
   background-color: #262626;
   border-color: #c6c6c6;
 }
-/* line 746, ../../uikit/components/partials/_theme.color.scss */
 [dir="rtl"] .dropbutton-multiple .dropbutton {
   border-left-color: #cccccc;
 }
-/* line 753, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple.open .dropbutton-action .button {
   border-radius: 2px 0 0 0;
 }
-/* line 762, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .secondary-action .button {
   border-radius: 0 0 0 2px;
 }
-/* line 765, ../../uikit/components/partials/_theme.color.scss */
 .dropbutton-multiple .dropbutton .secondary-action .button:hover, .dropbutton-multiple .dropbutton .secondary-action .button:focus {
   border-radius: 0 0 0 2px;
 }
@@ -655,7 +564,6 @@ button[disabled]:hover,
  * AT unsets Drupal core file field CSS for image icons and replaces them
  * with FontAwesome icons.
  ========================================================================== */
-/* line 782, ../../uikit/components/partials/_theme.color.scss */
 .file a:before {
   color: #363636;
 }
@@ -669,7 +577,6 @@ button[disabled]:hover,
  *
  *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
  ========================================================================== */
-/* line 825, ../../uikit/components/partials/_theme.color.scss */
 .filter-help a:after,
 .more-help-link a:after {
   color: #cccccc;
@@ -680,61 +587,51 @@ button[disabled]:hover,
  *  - style system messages such as status, warning and error.
  ========================================================================== */
 /* Success (status) */
-/* line 837, ../../uikit/components/partials/_theme.color.scss */
 .messages--status,
 table tr.ok {
   background-color: #f3faef;
 }
 
-/* line 842, ../../uikit/components/partials/_theme.color.scss */
 .messages--status,
 .ok {
   color: #325e1c;
 }
 
 /* Warning */
-/* line 849, ../../uikit/components/partials/_theme.color.scss */
 .messages--warning,
 table tr.warning {
   background-color: #fdf8ed;
 }
 
-/* line 854, ../../uikit/components/partials/_theme.color.scss */
 .messages--warning,
 .warning {
   color: #734c00;
 }
 
 /* Error */
-/* line 861, ../../uikit/components/partials/_theme.color.scss */
 .messages--error,
 table tr.error {
   background-color: #fcf4f2;
 }
 
-/* line 866, ../../uikit/components/partials/_theme.color.scss */
 .messages--error,
 .error {
   color: #a51b00;
 }
 
-/* line 873, ../../uikit/components/partials/_theme.color.scss */
 .dev-query {
   color: #f7f7f7;
 }
 
-/* line 879, ../../uikit/components/partials/_theme.color.scss */
 body > pre,
 .xdebug-var-dump {
   color: #f7f7f7;
 }
 
-/* line 886, ../../uikit/components/partials/_theme.color.scss */
 .page .xdebug-var-dump {
   color: #363636;
 }
 
-/* line 894, ../../uikit/components/partials/_theme.color.scss */
 body:before {
   color: #a51b00;
 }

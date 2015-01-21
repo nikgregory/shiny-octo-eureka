@@ -5,28 +5,44 @@
 
 .block--system-branding-block {}
 
-.site-logo {
-  display: block;
-  max-width: 240px; // alter this to suit your logo.
 
-  img {}
-  svg {}
-}
+.site-branding {
 
-.site-branding-text {
-  a {
+  &__logo-link,
+  &__name,
+  &__slogan {
+    display: block;
+  }
+
+  // link around the logo image
+  &__logo-link {
+    max-width: 240px; // alter this to suit your logo.
+  }
+
+  // logo image
+  &__login-img {}
+
+  // wrapper around site name and slogan (byline)
+  &__text {
+    margin: 0;
+  }
+
+  // site name
+  &__name {
+    @include adjust-font-size-to($x-large);
+    font-weight: $font-weight-normal;
+  }
+
+  // site name link
+  &__name-link {
     &:hover,
     &:focus {
       text-decoration: none;
     }
   }
-}
 
-.site-name {
-  font-weight: $font-weight-bold;
-  margin: 0;
-}
-
-.site-slogan {
-  margin: 0;
+  // site slogan
+  &__slogan {
+    font-style: normal;
+  }
 }

@@ -1,11 +1,9 @@
 /**
  * Search results pages
  ========================================================================== */
-/* line 6, ../../uikit/components/partials/_component.search.results.scss */
 .search-results {
   padding: 0;
 }
-/* line 12, ../../uikit/components/partials/_component.search.results.scss */
 .search-results p {
   margin: 0;
 }
@@ -15,7 +13,6 @@
  * - search block form
  * - advanced search form
  ========================================================================== */
-/* line 13, ../../uikit/components/partials/_component.search.forms.scss */
 .block-search .form-type-search,
 .block-search .form-actions {
   display: inline-block;
@@ -23,23 +20,19 @@
   margin: 0.43162rem 0;
 }
 
-/* line 22, ../../uikit/components/partials/_component.search.forms.scss */
 .search-form .container-inline label {
   display: block;
   margin: 7px 0;
   margin: 0.43162rem 0;
 }
 
-/* line 33, ../../uikit/components/partials/_component.search.forms.scss */
 .form-type-search input.form-search {
   width: 100%;
 }
 
-/* line 47, ../../uikit/components/partials/_component.search.forms.scss */
 .search-page-form #edit-basic {
   display: block;
 }
-/* line 50, ../../uikit/components/partials/_component.search.forms.scss */
 .search-page-form #edit-basic .form-type-search,
 .search-page-form #edit-basic .form-search {
   display: block;
@@ -47,7 +40,6 @@
   margin: 7px 0;
   margin: 0.43162rem 0;
 }
-/* line 60, ../../uikit/components/partials/_component.search.forms.scss */
 .search-page-form #edit-advanced .details-wrapper > fieldset > legend {
   display: none;
 }
