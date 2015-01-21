@@ -170,7 +170,7 @@ $form['generate']['options']['generate_color'] = array(
   '#type' => 'checkbox',
   '#title' => t('Color Module'),
   '#default_value' => 0,
-  '#description' => t('Provides Color module support - includes a starter color.inc file. Requires UI Kit'),
+  '#description' => t('Provides Color module support - includes a starter color.inc file. Requires UI Kit.'),
   '#states' => array(
     'disabled' => array(
       'input[name="generate[options][generate_uikit]"]' => array('checked' => FALSE),

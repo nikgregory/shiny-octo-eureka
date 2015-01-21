@@ -56,6 +56,16 @@ class ThemeGeneratorSubmit {
     $target = $path . '/../../' . $machine_name;
 
 
+    // Array of UIKit tools
+    $uikit_tools = array(
+      'package.json',
+      '.csslintrc',
+      'Gruntfile.js',
+      'Gemfile',
+      'Gemfile.lock',
+    );
+
+
     // Standard and Minimal variables
     if ($subtheme_type === 'standard') {
       $source_theme = 'THEMENAME';
@@ -111,6 +121,12 @@ class ThemeGeneratorSubmit {
       // UIKit
       if ($uikit === 0) {
         $directoryOperations->directoryRemove("$target/styles/uikit");
+        // remove files like GEM, Gruntfile.js etc
+        foreach ($uikit_tools as $tool) {
+          unlink("$target/$tool");
+        }
+        // remove all the map files from the css dir "$target/styles/uikit"
+        array_map('unlink', glob("$target/styles/css/components/*.map"));
       }
 
       // Color
@@ -119,10 +135,10 @@ class ThemeGeneratorSubmit {
         //$directoryOperations->directoryRemove("$target/styles/css/colors.css");
 
         // If UIKit and not color
-        if ($uikit === 1) {
+        //if ($uikit === 1) {
           //$directoryOperations->directoryRemove("$target/styles/uikit/colors.scss");
           //$directoryOperations->directoryRemove("$target/styles/uikit/components/_colors.scss");
-        }
+        //}
       }
     }
 
@@ -164,11 +180,11 @@ class ThemeGeneratorSubmit {
     // libraries
     $fileOperations->fileRename("$target/$source_theme.libraries.yml", $library_file);
 
-    if ($subtheme_type === 'standard') {
+    //if ($subtheme_type === 'standard') {
       //if ($color === 0) {
       //  $fileOperations->fileStrReplace($library_file, 'styles/css/colors.css: {}', '');
       //}
-    }
+    //}
 
     if ($subtheme_type === 'skin') {
       $skin_libraries = file_get_contents("$at_generator_path/components/starterkit_skin/SKIN.libraries.yml");
