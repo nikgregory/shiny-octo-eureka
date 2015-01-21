@@ -27,12 +27,6 @@ add_import_path '../../layout/site-builder/sass'
 Sass::Script::Number.precision = 5
 
 
-# Environment
-# -----------------------------------------------------------------------------
-environment = :development
-#environment = :production
-
-
 # Output Style
 # -----------------------------------------------------------------------------
 # You can select your preferred output style here (:expanded, :nested, :compact
@@ -49,12 +43,12 @@ relative_assets = true
 
 # Line Comments
 # -----------------------------------------------------------------------------
-line_comments = (environment == :development) ? true : false
+line_comments = false
 
 
 # Sourcemaps
 # -----------------------------------------------------------------------------
-sourcemap = (environment == :development) ? true : false
+sourcemap = true
 
 
 # Autoprefixer
