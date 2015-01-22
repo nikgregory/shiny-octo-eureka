@@ -63,7 +63,10 @@ function at_core_submit_layouts(&$form, &$form_state) {
   }
 
   // Manage settings and configuration.
-  $config = \Drupal::config($theme . '.settings');
+  //$config = \Drupal::config($theme . '.settings');
+
+  // Must get mutable config otherwise bad things happen.
+  $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
 }

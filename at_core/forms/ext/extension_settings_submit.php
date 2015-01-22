@@ -1,11 +1,10 @@
 <?php
 
-use Drupal\Core\Config\Config;
-use Drupal\at_core\Theme\ThemeSettingsConfig;
-
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Config\Config;
 use Drupal\Core\Entity\EntityManagerInterface;
-//use Drupal\Core\PhpStorage\PhpStorageFactory;
+
+use Drupal\at_core\Theme\ThemeSettingsConfig;
 
 /**
  * Form submit handler for the theme settings form.
@@ -69,7 +68,10 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
 
   // Manage settings and configuration.
   //$config = config($theme . '_settings');
-  $config = \Drupal::config($theme . '.settings');
+  //$config = \Drupal::config($theme . '.settings');
+
+  // Must get mutable config otherwise bad things happen.
+  $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
 
