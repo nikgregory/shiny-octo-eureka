@@ -686,6 +686,7 @@ function at_core_preprocess_block(&$variables) {
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+
     // Responsive menu block.
     if (isset($config['responsive_menu_block'])) {
       if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
@@ -698,10 +699,23 @@ function at_core_preprocess_block(&$variables) {
       }
     }
 
-    // Remove login block links.
+    // Markup overrides
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-      if ((isset($config['login_block_remove_links']) && $config['login_block_remove_links'] === 1) || (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1)) {
-        if ($variables['plugin_id'] == 'user_login_block') {
+
+      // Use png logo instead of svg.
+      if ($variables['base_plugin_id'] == 'system_branding_block') {
+        if (isset($config['png_logo']) && $config['png_logo'] === 1) {
+          if (\Drupal::config($theme . '.settings')->get('features.logo') === 1) {
+            if (file_exists($png_logo = $variables['directory'] . '/logo.png')) {
+              $variables['site_logo'] = file_create_url($png_logo);
+            }
+          }
+        }
+      }
+
+      // Remove login block links.
+      if ($variables['base_plugin_id'] === 'user_login_block') {
+        if ((isset($config['login_block_remove_links']) && $config['login_block_remove_links'] === 1) || (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1)) {
           unset($variables['content']['user_links']);
 
           // Add class for horizontal login.
