@@ -17,7 +17,6 @@ class ThemeSettingsConfig {
    * have custom settings that you probably very much need in config.
    */
   public function settingsConvertToConfig(array $values, Config $config) {
-    //$config = \Drupal::config($values['config_key']);
     foreach ($values as $key => $value) {
       // Save settings as config
       if (substr($key, 0, 9) == 'settings_') {

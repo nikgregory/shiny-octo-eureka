@@ -189,7 +189,6 @@ $form['extensions']['actions']['submit'] = array(
   '#weight' => -10000,
 );
 
-
 //$form['#validate'][] = 'at_core_validate_advanced_settings';
 //$form['#submit'][] = 'at_core_submit_advanced_settings';
 //$form['actions']['submit']['#validate'][] = 'at_core_validate_advanced_settings';

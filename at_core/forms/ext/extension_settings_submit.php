@@ -1,6 +1,5 @@
 <?php
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Entity\EntityManagerInterface;
 
@@ -38,11 +37,6 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
       at_core_submit_titles($values, $theme, $generated_files_path);
     }
 
-    // Submit handler for Images.
-    //if (isset($values['settings_enable_images']) && $values['settings_enable_images'] === 1) {
-    //  Cache::invalidateTags(array('rendered'));
-    //}
-
     // Submit handler for Markup Overrides.
     if (isset($values['settings_enable_markup_overrides']) && $values['settings_enable_markup_overrides'] === 1) {
 
@@ -67,16 +61,10 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   }
 
   // Manage settings and configuration.
-  //$config = config($theme . '_settings');
-  //$config = \Drupal::config($theme . '.settings');
-
   // Must get mutable config otherwise bad things happen.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
-
-  // Invalidate rendered cache tag
-  Cache::invalidateTags(array('rendered'));
 
   drupal_set_message(t('Extensions configuration saved.'), 'status');
 }

@@ -31,11 +31,7 @@ function at_core_submit_layouts(&$form, &$form_state) {
     // Add a new suggestion to the page suggestions array in config.
     if (!empty($values['ts_name'])) {
       $suggestion = trim($values['ts_name']);
-      //$clean_suggestion = strtr($suggestion, '-', '_');
       $clean_suggestion = str_replace('-', '_', $suggestion);
-
-      //$template_file = str_replace('_', '-', $suggestion_key) . '.html.twig';
-
       $values["settings_suggestion_page__$clean_suggestion"] = $clean_suggestion;
     }
 
@@ -63,8 +59,6 @@ function at_core_submit_layouts(&$form, &$form_state) {
   }
 
   // Manage settings and configuration.
-  //$config = \Drupal::config($theme . '.settings');
-
   // Must get mutable config otherwise bad things happen.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();

@@ -1,14 +1,13 @@
 <?php
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Config;
 
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
-
-use Drupal\at_core\File\DirectoryOperations;
-
 use Drupal\at_core\Layout\Layout;
+use Drupal\at_core\File\DirectoryOperations;
 use Drupal\at_core\Breakpoints\ATBreakpoints;
 
 /**
@@ -119,10 +118,10 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       );
 
       // Extension settings.
-      include_once($at_core_path . '/forms/ext/extension_settings.php');
+      require_once($at_core_path . '/forms/ext/extension_settings.php');
 
       // Layouts.
-      include_once($at_core_path . '/forms/layout/layouts.php');
+      require_once($at_core_path . '/forms/layout/layouts.php');
 
       // Basic settings - move into details wrapper and collapse.
       $form['basic_settings'] = array(
@@ -145,6 +144,9 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       $form['actions']['submit']['#button_type'] = $form['basic_settings']['actions']['submit']['#button_type'] = 'primary';
       unset($form['actions']);
     }
+
+    // Invalidate rendered cache tag
+    Cache::invalidateTags(array('rendered'));
   }
 
   // Modify the color scheme form.

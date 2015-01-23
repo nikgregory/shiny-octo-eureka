@@ -7,13 +7,12 @@
 
 namespace Drupal\at_core\Layout;
 
-use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Theme\ThemeSettingsInfo;
-use Drupal\at_core\File\ParseFile;
-
 use Drupal\Core\Cache;
 use Symfony\Component\Yaml\Parser;
 
+use Drupal\at_core\Theme\ThemeInfo;
+use Drupal\at_core\Theme\ThemeSettingsInfo;
+use Drupal\at_core\File\ParseFile;
 
 class Layout implements LayoutInterface {
 
