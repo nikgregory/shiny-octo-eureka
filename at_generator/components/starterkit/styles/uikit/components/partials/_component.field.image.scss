@@ -5,8 +5,11 @@
 // AT uses <figure> as the image field wrapper and <figcaption> for image captions.
 .field-type-image {
 
+  &.has-single {}
+  &.has-multiple {}
+
   figure {
-    margin: 0;
+    @include output-rhythm(margin-bottom, $medium);
   }
 
   // Image Alignment Theme Settings
@@ -33,6 +36,9 @@
     margin-left: auto;
     margin-right: auto;
     @include output-rhythm(margin-bottom, $medium);
+  }
+  &.align-center figure {
+    display: table;
   }
 
   // Align right.

@@ -15,5 +15,8 @@
 .block.has-title {}
 
 // Note, Menu blocks use .block-menu__content, see below.
-.block__content {}
+.block__content {
+
+  p:last-of-type {}
+}
 

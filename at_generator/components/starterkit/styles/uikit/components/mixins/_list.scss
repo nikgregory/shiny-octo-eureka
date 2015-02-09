@@ -5,12 +5,12 @@
 
 
 // Basic horizonal list, uses a map and the familiar trbl (top, left, bottom, right) CSS syntax.
-@mixin list-horizontal($margin: (t: 0, r: $medium, b: 0, l: $medium)) {
+@mixin list-horizontal($float-direction, $margin: (t: 0, r: $medium, b: 0, l: $medium)) {
   @include no-bullets;
   @include clearfix-micro;
 
   li {
-    float: $flow-from;
+    float: $float-direction;
     @include output-rhythm(margin, map-get($margin, t) map-get($margin, r) map-get($margin, b) map-get($margin, l));
   }
 

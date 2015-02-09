@@ -16,7 +16,7 @@
 @mixin list-style-seven-horizontal($list_selector) {
 
   #{$list_selector} {
-    @include list-horizontal($margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
+    @include list-horizontal($flow-from, $margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
     padding: 0;
 
     a {

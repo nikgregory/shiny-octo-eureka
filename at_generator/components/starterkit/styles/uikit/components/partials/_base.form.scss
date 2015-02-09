@@ -69,7 +69,8 @@ input {
   &[type="radio"] {
     display: inline-block;
     position: relative;
-    bottom: 1px;
+    @include output-rhythm(bottom, 1px);
+    @include output-rhythm(margin-#{$flow-from}, 3px);
   }
 
   // Focus for file, radio and checkbox
@@ -109,8 +110,7 @@ label {
   // radio, checkbox options
   &.option {
     font-weight: normal;
-    display: inline;
-    padding: 0 3px;
+    display: inline-block;
   }
 }
 

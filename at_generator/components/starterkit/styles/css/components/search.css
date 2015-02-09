@@ -13,6 +13,9 @@
  * - search block form
  * - advanced search form
  ========================================================================== */
+.block-search {
+  display: block;
+}
 .block-search .form-type-search,
 .block-search .form-actions {
   display: inline-block;
@@ -21,26 +24,26 @@
 }
 
 .search-form .container-inline label {
-  display: block;
-  margin: 7px 0;
-  margin: 0.43162rem 0;
-}
-
-.form-type-search input.form-search {
-  width: 100%;
+  display: inline-block;
 }
 
 .search-page-form #edit-basic {
   display: block;
 }
-.search-page-form #edit-basic .form-type-search,
+.search-page-form #edit-basic .form-type-search {
+  display: inline;
+}
 .search-page-form #edit-basic .form-search {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  min-width: 75%;
   margin: 7px 0;
   margin: 0.43162rem 0;
 }
-.search-page-form #edit-advanced .details-wrapper > fieldset > legend {
+.search-page-form .search-advanced .form-text {
+  min-width: 75%;
+}
+.search-page-form .search-advanced .details-wrapper > fieldset > legend {
   display: none;
 }
+
 /*# sourceMappingURL=search.css.map */

@@ -24,6 +24,11 @@
 .node--unpublished {}
 
 
+// Header - includes title (h1 full, h2 teaser), user picture, author and date.
+.node__header
+.node__title {}
+
+
 // View modes
 .node--view-mode-full {
   .node__title {
@@ -31,39 +36,47 @@
   }
 }
 
-.node--view-mode-teaser {}
+.node--view-mode-teaser {
+  .node__title {}
+}
 
 
-// Header - includes title (h1 full, h2 teaser), user picture, author and date.
-.node__header
-.node__title {}
+// Node title link (only applies to view-mode teaser).
+.node__title-link {}
 
 
 // Author name and date details.
 .node__meta {
   @include output-rhythm(margin, $medium 0);
-}
-
-.node__author {
-  display: inline;
-}
-
-.node__datetime {}
-
-.node__submitted {
-  // User picture.
-  .field-type--image {
-    img {}
-  }
-
-  // Conditional class: if user picture?
-  &.node__submitted--user-picture {}
 
   // Remove potentially empty article element.
   article:empty {
     display: none;
   }
+
+  &.node__meta--has-author-picture {}
+
+  // User picture.
+  .field-type-image {
+    img {}
+  }
 }
+
+.node__submitted {}
+
+.node__author {
+  display: inline;
+  font-style: normal;
+}
+
+.node__datetime {}
+
+.node__meta--has-author-picture {
+  .node__submitted {
+    //@include adjust-font-size-to($medium/1.125);
+  }
+}
+
 
 
 // Footer wraps links.
@@ -73,4 +86,28 @@
 
   .links {}
 }
+
+
+
+// Node fields
+// Example styling for placing a border on image field figure, this will
+// correctly add borders even when figcaptions are enabled and in use, these
+// example styles come from Pixture Reloaded.
+.node {
+  .field-type-image figure {
+    //border: $border-width $border-style;
+    //@include output-rhythm(padding, $small);
+
+    &.caption {
+      //border-bottom: 0;
+    }
+
+    figcaption {
+      //border: $border-width $border-style;
+      //border-top: 0;
+      //@include output-rhythm(padding, 0 $small $small);
+    }
+  }
+}
+
 

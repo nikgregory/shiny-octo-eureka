@@ -108,8 +108,10 @@
     a {
       transition: $transition_global;
 
-      &:active {
-      }
+      &:after,
+      &:before {}
+
+      &:active {}
 
       &:hover,
       &:focus {

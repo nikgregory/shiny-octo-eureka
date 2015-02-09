@@ -30,6 +30,10 @@
       clear: both;
       opacity: 0.001;
       transition: $transition_global;
+
+      .menu a {
+        @include output-rhythm(margin-bottom, 1px);
+      }
     }
 
     &.rm-is-open {

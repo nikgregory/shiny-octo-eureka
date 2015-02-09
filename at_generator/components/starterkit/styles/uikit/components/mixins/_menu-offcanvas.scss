@@ -39,6 +39,13 @@
     &.rm-is-open {
       > .page {
         position: fixed;
+        transform: $transform_page;
+      }
+
+      // Remove any space so the menu butts right up against the page edge.
+      .l-pr {
+        margin: 0;
+        padding: 0;
       }
 
       .rm-block__content {
@@ -47,12 +54,7 @@
         width: $width;
         position: absolute;
         top: 0;
-
       }
-    }
-
-    &.rm-is-open > .page {
-      transform: $transform_page;
     }
   }
 }

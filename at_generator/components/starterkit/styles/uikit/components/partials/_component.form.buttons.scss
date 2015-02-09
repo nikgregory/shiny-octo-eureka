@@ -24,7 +24,6 @@ button,
   border: $button-border-width $button-border-style;
 
   transition: background-color, .15s, ease-in-out;
-
   cursor: pointer;
 
   text-decoration: none;
@@ -62,8 +61,7 @@ button,
 // - are links with an icon, and we add an icon for extra visibility.
 .button-action {
   display: inline-block;
-  vertical-align: baseline;
-  border: 0;
+  vertical-align: bottom;
 
   &:before {
     content: $button-action-icon;
@@ -71,7 +69,7 @@ button,
     @include adjust-font-size-to($small);
     display: inline-block;
     padding: 0 4px 0 0;
-    vertical-align: middle;
+    vertical-align: text-bottom;
   }
 
   // RTL
@@ -79,6 +77,10 @@ button,
     padding: 0 0 0 4px;
   }
 }
+
+
+// Preview buttons should be neutral. See _theme.color.scss
+#edit-preview {}
 
 
 /* Drop buttons */
@@ -105,10 +107,16 @@ button,
     @include output-rhythm(height, $form_input_button_select_height -$button-border-width * 2);
   }
 
-  .dropbutton-action > * {
-    white-space: nowrap;
-    line-height: normal; // some drop buttons are links
-    @include output-rhythm(padding, 0 $x-small);
+  .dropbutton-action {
+    > * {
+      white-space: nowrap;
+      line-height: normal; // some drop buttons are links
+      @include output-rhythm(padding, 0 $x-small);
+    }
+
+    a {
+      @include output-rhythm(padding, 2px $x-small);
+    }
   }
 
   .secondary-action {
@@ -118,7 +126,6 @@ button,
     .button {
       border: 0;
       width: 100%;
-
 
       &:hover,
       &:focus {
@@ -166,12 +173,7 @@ button,
 
     .dropbutton-action .button {
       border-radius: $button-border-radius 0 0 $button-border-radius;
-    }
-
-    .publish {
-      .button {
-        width: 100%;
-      }
+      width: 100%;
     }
 
     // RTL
@@ -235,4 +237,9 @@ li[class*="action--"] {
   padding: 0;
   @include output-rhythm(margin, $medium 0);
 }
+
+
+
+
+
 

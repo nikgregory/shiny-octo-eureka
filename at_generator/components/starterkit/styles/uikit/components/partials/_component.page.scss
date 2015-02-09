@@ -9,6 +9,8 @@
 // offcanvas responsive menu, it's .page that transforms, not body.
 .page {
   position: relative;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 
@@ -58,6 +60,7 @@
 
 // .l-pr is a layout class on each page row outer wrapper.
 .l-pr {
+  padding: 0 2%;
   padding: 0 2vw;
 }
 
@@ -91,6 +94,11 @@
 // Theme attribution message. This is a toggle setting in the advanced theme
 // settings, you can turn it on/off using the Markup overrides extension.
 .attribution {
-  @include adjust-font-size-to($small);
-  text-align: center;
+  text-align: $flow-to;
+
+  .attribution__link {
+    text-decoration: none;
+    @include adjust-font-size-to($small);
+  }
 }
+

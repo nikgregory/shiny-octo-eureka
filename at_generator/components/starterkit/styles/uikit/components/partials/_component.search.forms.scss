@@ -4,8 +4,11 @@
  * - advanced search form
  ========================================================================== */
 
-// Search Block & advanced search form.
+// Search block.
 .block-search {
+  // Negate any chance of the wrong template being used, which might have the
+  // container-inline class applied to the wrapper.
+  display: block;
 
   // AT removes the container-inline class from search block as this adds unwanted
   // display: inline styles, instead we use inline-block so we can add vertical
@@ -20,19 +23,17 @@
 
 // Search form on the /search page
 .search-form .container-inline label {
-  display: block;
-  @include output-rhythm(margin, $xx-small 0);
+  display: inline-block;
 }
 
 
 // Full structure of the form.
 .form-type-search {
+
   //visually-hidden by default
   label {}
 
-  input.form-search {
-    width: 100%; // Risky!
-  }
+  input.form-search {}
 
   .form-actions {
     input.button {}
@@ -47,15 +48,23 @@
   #edit-basic {
     display: block;
 
-    .form-type-search,
+    .form-type-search {
+      display: inline; // Collapse the div wrapper
+    }
+
     .form-search {
-      display: block;
-      width: 100%;
+      display: inline-block;
+      min-width: 75%;
       @include output-rhythm(margin, $xx-small 0);
     }
   }
 
-  #edit-advanced {
+  .search-advanced {
+
+    .form-text {
+      min-width: 75%;
+    }
+
     .details-wrapper {
       > fieldset > legend {
         display: none; // Remove redundant legends. This is a bit dangerous.

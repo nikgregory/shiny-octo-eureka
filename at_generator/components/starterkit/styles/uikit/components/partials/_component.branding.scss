@@ -8,7 +8,10 @@
 
 .site-branding {
 
+  @include clearfix-micro;
+
   &__logo-link,
+  &__text,
   &__name,
   &__slogan {
     display: block;

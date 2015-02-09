@@ -1,35 +1,6 @@
 /**
  * List Styles
- *  - Prestyled classes for embedding in content lists or applying to
- *    views output (needs tests for views).
  ========================================================================== */
-
-// Simple horizontal list, see: mixins/_list.scss.
-.list-horizontal {
-  @include list-horizontal();
-}
-
-
-// Simple horizontal list, see: mixins/_list.scss.
-.list-multicolumn {
-  padding: 0;
-  @include no-bullets;
-  @include clearfix-micro;
-
-  > li {
-    font-weight: $font-weight-bold;
-  }
-
-  ul, ol {
-    font-weight: $font-weight-normal;
-    padding: 0;
-  }
-}
-
-@media #{$mobile} {
-  @include list-multicolumn('.list-multicolumn', 12em);
-}
-
 
 // Links inline, e.g. node and comment "links".
 ul {
@@ -39,7 +10,7 @@ ul {
   }
 
   &.inline {
-    @include list-horizontal($margin: (t: 0, r: $medium, b: 0, l: 0));
+    @include list-horizontal($flow-to, $margin: (t: 0, r: $medium, b: 0, l: 0));
 
     a {
       &:hover,
@@ -79,20 +50,30 @@ ul {
 }
 
 
-// Definition lists.
-dl {}
-
-dt {
-  font-weight: $font-weight-semibold;
+// Simple horizontal list, see: mixins/_list.scss.
+.list-horizontal {
+  @include list-horizontal($flow-from);
 }
 
-dd {
-  @include output-rhythm(margin-left, $medium); // LTR
 
-  @at-root [dir="rtl"] dd {
-    margin-left: 0;
-    @include output-rhythm(margin-right, $medium);
+// Simple horizontal list, see: mixins/_list.scss.
+.list-multicolumn {
+  padding: 0;
+  @include no-bullets;
+  @include clearfix-micro;
+
+  > li {
+    font-weight: $font-weight-bold;
   }
+
+  ul, ol {
+    font-weight: $font-weight-normal;
+    padding: 0;
+  }
+}
+
+@media #{$mobile} {
+  @include list-multicolumn('.list-multicolumn', 12em);
 }
 
 
@@ -115,3 +96,8 @@ dd {
     }
   }
 }
+
+
+
+
+

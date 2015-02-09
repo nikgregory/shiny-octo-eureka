@@ -14,7 +14,7 @@
 
   #{$list_selector} {
     border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-    @include list-horizontal($margin: (t: 0, r: $tab-border-width, b: 0, l: 0));  // LTR
+    @include list-horizontal($flow-from, $margin: (t: 0, r: $tab-border-width, b: 0, l: 0));  // LTR
 
     li {
       margin-bottom: -$tab-border-width;
@@ -45,7 +45,7 @@
       &.active {
         color: $tab-active-color;
         background: none;
-        border-bottom-color: $page-background-color;
+        border-bottom-color: $regions-background-color;
 
         &:hover,
         &:focus {
@@ -65,7 +65,7 @@
 
   #{$list_selector} {
     border-bottom: $tab-border-width $tab-border-style $tab-border-color;
-    @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
+    @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
 
     li {
       margin-bottom: -$tab-border-width;
@@ -114,7 +114,7 @@
       &.active {
         color: $tab-active-color;
         background: none;
-        border-bottom-color: $page-background-color;
+        border-bottom-color: $regions-background-color;
 
         &:hover,
         &:focus {

@@ -145,6 +145,23 @@ dl {
 }
 
 
+// Definition lists.
+dl {}
+
+dt {
+  font-weight: $font-weight-semibold;
+}
+
+dd {
+  @include output-rhythm(margin-left, $medium); // LTR
+
+  @at-root [dir="rtl"] dd {
+    margin-left: 0;
+    @include output-rhythm(margin-right, $medium);
+  }
+}
+
+
 // Blockquotes, Bootstrap style.
 blockquote {
   @include output-rhythm(padding, $medium);

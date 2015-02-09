@@ -98,11 +98,141 @@
   }
 }
 
-/*
-[class*="grid-block-"] .block {
-  border: 1px solid #ccc;
-  background: #eee;
-  padding: 20px;
-  margin-bottom: 20px;
+
+// Rounded corners
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+
+  [class*="__title"],
+  .node .field-type-image__figure.caption {
+    border-radius: $radius $radius 0 0;
+  }
+
+  .node .field-type-image__figcaption {
+    border-radius: 0 0 $radius $radius;
+  }
+
+  .block, // this allows the class to be set on a region.
+  .node--view-mode-teaser, // node teaser have a border
+  .node .field-type-image__figure, // border on image fields in nodes
+  input,
+  .button,
+  textarea,
+  select {
+    border-radius: $radius;
+  }
 }
-*/
+
+.rc-2 {
+  @include rounded-corners(2px);
+}
+.rc-3 {
+  @include rounded-corners(3px);
+}
+.rc-4 {
+  @include rounded-corners(4px);
+}
+.rc-5 {
+  @include rounded-corners(5px);
+}
+.rc-6 {
+  @include rounded-corners(6px);
+}
+.rc-7 {
+  @include rounded-corners(7px);
+}
+.rc-8 {
+  @include rounded-corners(8px);
+}
+.rc-9 {
+  @include rounded-corners(9px);
+}
+.rc-10 {
+  @include rounded-corners(10px);
+}
+.rc-12 {
+  @include rounded-corners(12px);
+}
+.rc-15 {
+  @include rounded-corners(15px);
+}
+.rc-20 {
+  @include rounded-corners(20px);
+}
+
+
+// Menu bullets.
+@mixin menu-bullets($bullet-closed, $bullet-open, $bullet-closed-rtl) {
+  .menu {
+    li {
+      &.collapsed > a:after {
+        content: $bullet-closed; // LTR
+      }
+
+      &.expanded > a:after {
+        content: $bullet-open ;
+      }
+    }
+
+    @at-root [dir="rtl"] .menu {
+      li.collapsed > a:after {
+        content: $bullet-closed-rtl;
+      }
+    }
+  }
+}
+// fat arrows
+.fa-arrow {
+  @include menu-bullets($fa-var-arrow-left, $fa-var-arrow-down, $fa-var-arrow-left);
+}
+// caret
+.fa-caret {
+  @include menu-bullets($fa-var-caret-left, $fa-var-caret-down, $fa-var-caret-left);
+}
+// double angle
+.fa-angle-double {
+  @include menu-bullets($fa-var-angle-double-left, $fa-var-angle-double-down, $fa-var-angle-double-left);
+}
+// chevron
+.fa-chevron {
+  @include menu-bullets($fa-var-chevron-left, $fa-var-chevron-down, $fa-var-chevron-left);
+}
+
+// We must special case drop menus
+@mixin ms-dropmenu-bullets($bullet-down, $bullet-right) {
+  .rm-block__content .menu-level-1 li.expanded > a:after,
+  .rm-block__content .odd ul .odd > .expanded > a:after {
+    content: $bullet-down;
+  }
+  .rm-block__content .odd ul > .expanded > a:after,
+  .rm-block__content .odd ul > .collapsed > a:after {
+    content: $bullet-right;
+  }
+}
+
+.ms-dropmenu {
+  .fa-arrow {
+    @include ms-dropmenu-bullets($fa-var-arrow-down, $fa-var-arrow-right);
+  }
+  .fa-caret {
+    @include ms-dropmenu-bullets($fa-var-caret-down, $fa-var-caret-right);
+  }
+  .fa-angle-double {
+    @include ms-dropmenu-bullets($fa-var-angle-double-down, $fa-var-angle-double-right);
+  }
+  .fa-chevron {
+    @include ms-dropmenu-bullets($fa-var-chevron-down, $fa-var-chevron-right);
+  }
+}
+
+
+// Patterns
+@if $patterns {
+ @each $pattern in $patterns {
+    .pattern-#{$pattern} {
+      @include page-row-pattern-overlay('../images/patterns/#{$pattern}.png', $page-row-fullwidth);
+    }
+  }
+}
+
+

@@ -16,7 +16,7 @@ body {
 a {
   color: #0066cc;
 }
-a:link, a:visited {
+a:visited {
   color: #0066cc;
 }
 a:active, a.active {
@@ -65,20 +65,24 @@ hr {
   background-color: #f7f7f7;
 }
 
+.regions {
+  background-color: #f7f7f7;
+}
+
 .pr-header {
-  background-color: #ffffff;
   color: #363636;
+  background-color: #ffffff;
 }
 .pr-header .regions {
-  background-color: inherit;
+  background: inherit;
 }
 
 .pr-navbar {
-  background-color: #666666;
   color: #ffffff;
+  background-color: #666666;
 }
 .pr-navbar .regions {
-  background-color: inherit;
+  background: inherit;
 }
 .pr-navbar a,
 .pr-navbar .menu a {
@@ -86,40 +90,44 @@ hr {
 }
 
 .pr-features {
-  background-color: #d3d3d3;
   color: #363636;
+  background-color: #d3d3d3;
 }
 .pr-features .regions {
-  background-color: inherit;
+  background: inherit;
 }
 
-.pr-tertiary {
-  background-color: #d3d3d3;
+.pr-subfeature {
   color: #363636;
+  background-color: #d3d3d3;
 }
-.pr-tertiary .regions {
-  background-color: inherit;
+.pr-subfeature .regions {
+  background: inherit;
 }
 
 .pr-footer {
-  background-color: #666666;
   color: #ffffff;
+  background-color: #666666;
 }
 .pr-footer .regions {
-  background-color: inherit;
+  background: inherit;
 }
 .pr-footer a,
 .pr-footer .menu a {
   color: inherit;
 }
-.pr-footer a:hover, .pr-footer a:focus,
+.pr-footer a.active, .pr-footer a:hover, .pr-footer a:focus,
+.pr-footer .menu a.active,
 .pr-footer .menu a:hover,
 .pr-footer .menu a:focus {
   color: inherit;
 }
 
-.attribution {
-  background-color: #666666;
+.attribution .l-rw {
+  background-color: transparent;
+}
+.attribution .attribution__link {
+  color: #363636;
 }
 
 /**
@@ -176,6 +184,7 @@ hr {
  *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
  *  3. Theme settings as set in your themes Advanced extention settings.
  ========================================================================== */
+.rm-region,
 .rm-block,
 .rm-block * {
   background-color: inherit;
@@ -194,6 +203,9 @@ hr {
   color: inherit;
   background: inherit;
 }
+.rm-block__content .menu a:after, .rm-block__content .menu a:before {
+  color: inherit !important;
+}
 .rm-block__content .menu a:active {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   opacity: 0.9;
@@ -210,6 +222,12 @@ hr {
   background-color: transparent;
 }
 .rm-block__content .menu a.active[href="/"]:hover, .rm-block__content .menu a.active[href="/"]:focus {
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ms-slidedown .rm-block__content .menu a.active[href="/"],
+.ms-slidedown .rm-block__content .menu a {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -240,6 +258,26 @@ hr {
 .breadcrumb a {
   color: #0066cc;
   text-decoration: none;
+}
+
+/**
+ * Pagers
+ * - Full system pager.
+ * - Views mini pager.
+ ========================================================================== */
+.pager__link {
+  border-color: #cccccc;
+}
+.pager__link:focus, .pager__link:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.pager__link:active {
+  box-shadow: inset 0px 0px 3px 0 rgba(0, 0, 0, 0.75);
+  opacity: 0.9;
+}
+
+.pager__link--is-active {
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 /**
@@ -424,6 +462,16 @@ textarea.placeholder_text {
 /**
  * Form Theme
  ========================================================================== */
+.form-type-radio label.option,
+.form-type-checkbox label.option {
+  border-color: #cccccc;
+}
+.form-type-radio label.option:focus, .form-type-radio label.option:hover,
+.form-type-checkbox label.option:focus,
+.form-type-checkbox label.option:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
 .filter-wrapper {
   border-color: #cccccc;
 }
@@ -463,43 +511,52 @@ textarea.placeholder_text {
  ========================================================================== */
 button,
 .button {
-  color: #363636;
-  background: #fafafa;
-  border-color: #cccccc;
+  color: #ffffff;
+  background: #0066cc;
+  border-color: #0066cc;
   opacity: 0.9;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
 }
 button:hover, button:focus,
 .button:hover,
 .button:focus {
   opacity: 1;
-  color: #363636;
-  background-color: #f2f2f2;
+  color: #ffffff;
+  background-color: #0066cc;
+}
+button:visited,
+.button:visited {
+  color: #ffffff;
+  background: #0066cc;
 }
 button[disabled]:hover,
 .button[disabled]:hover {
-  color: #2e2e2e;
+  opacity: 1;
 }
 
 .button--primary {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
+  opacity: 0.9;
 }
 .button--primary:link, .button--primary:visited {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
 }
 .button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
-  color: #fffffe;
-  background-color: #262626;
-  border-color: #c6c6c6;
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
+  opacity: 1;
 }
 
 .button--danger {
   color: #a51b00;
   background-color: transparent;
   border-color: transparent;
+  opacity: 0.9;
 }
 .button--danger:link, .button--danger:visited {
   color: #a51b00;
@@ -510,53 +567,144 @@ button[disabled]:hover,
   color: #a51b00;
   background-color: transparent;
   border-color: transparent;
+  opacity: 1;
+}
+
+.button-action {
+  opacity: 1;
+}
+
+#edit-preview {
+  background-color: inherit;
+  color: #0066cc;
+}
+
+button.link-edit-summary {
+  background-color: inherit;
+  color: #363636;
+}
+button.link-edit-summary:hover, button.link-edit-summary:focus {
+  background-color: inherit;
+  color: #363636;
 }
 
 /* Drop buttons */
 .js .dropbutton-widget {
   background-color: #f7f7f7;
-  border-color: #cccccc;
+  border-color: #0066cc;
+}
+.js .dropbutton-widget:hover, .js .dropbutton-widget:focus {
+  border-color: #0066cc;
 }
 
+.dropbutton .dropbutton-action .button {
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
+  opacity: 0.9;
+}
+.dropbutton .dropbutton-action .button:link, .dropbutton .dropbutton-action .button:visited {
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
+}
+.dropbutton .dropbutton-action .button:hover, .dropbutton .dropbutton-action .button:focus, .dropbutton .dropbutton-action .button:active, .dropbutton .dropbutton-action .button.active {
+  color: #ffffff;
+  background-color: #0066cc;
+  border-color: #0066cc;
+  opacity: 1;
+}
 .dropbutton .secondary-action {
-  border-top-color: #cccccc;
+  border-top-color: #0066cc;
 }
 .dropbutton .secondary-action .button {
   background: #f7f7f7;
+  color: #0066cc;
 }
 .dropbutton .dropbutton-toggle button:hover {
   background: transparent;
 }
 
 .dropbutton-multiple .dropbutton {
-  border-right-color: #cccccc;
-}
-.dropbutton-multiple .dropbutton .publish .button {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
-}
-.dropbutton-multiple .dropbutton .publish .button:link, .dropbutton-multiple .dropbutton .publish .button:visited {
-  color: #fffffe;
-  background-color: #333333;
-  border-color: #d3d3d3;
-}
-.dropbutton-multiple .dropbutton .publish .button:hover, .dropbutton-multiple .dropbutton .publish .button:focus, .dropbutton-multiple .dropbutton .publish .button:active, .dropbutton-multiple .dropbutton .publish .button.active {
-  color: #fffffe;
-  background-color: #262626;
-  border-color: #c6c6c6;
+  border-right-color: #0066cc;
 }
 [dir="rtl"] .dropbutton-multiple .dropbutton {
-  border-left-color: #cccccc;
+  border-left-color: #0066cc;
 }
 .dropbutton-multiple.open .dropbutton-action .button {
   border-radius: 2px 0 0 0;
 }
-.dropbutton-multiple .dropbutton .secondary-action .button {
-  border-radius: 0 0 0 2px;
+
+.dropbutton-arrow {
+  color: #0066cc;
 }
-.dropbutton-multiple .dropbutton .secondary-action .button:hover, .dropbutton-multiple .dropbutton .secondary-action .button:focus {
-  border-radius: 0 0 0 2px;
+
+/**
+ * Tabs (local tasks)
+ * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
+ * mean the tabs are now a block, and we probably need some template revisions
+ * also.
+ ========================================================================== */
+.pr-temporary-tabs ul.tabs--primary {
+  border-bottom-color: #cccccc;
+}
+.pr-temporary-tabs ul.tabs--primary li a {
+  color: #363636;
+  background-color: #fafafa;
+  border-color: #cccccc;
+  opacity: 0.9;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+}
+.pr-temporary-tabs ul.tabs--primary li a:link, .pr-temporary-tabs ul.tabs--primary li a:visited {
+  color: #363636;
+  background-color: #fafafa;
+  border-color: #cccccc;
+}
+.pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus, .pr-temporary-tabs ul.tabs--primary li a:active, .pr-temporary-tabs ul.tabs--primary li a.active {
+  color: #363636;
+  background-color: #fafafa;
+  border-color: #cccccc;
+  opacity: 1;
+}
+.pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus {
+  color: #363636;
+  background-color: #ededed;
+}
+.pr-temporary-tabs ul.tabs--primary li a:active {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.pr-temporary-tabs ul.tabs--primary li a.active {
+  color: #363636;
+  background: none;
+}
+@media all and (min-width: 60.063em) {
+  .pr-temporary-tabs ul.tabs--primary li a.active {
+    border-bottom-color: #f7f7f7;
+  }
+}
+@media all and (max-width: 60em) {
+  .pr-temporary-tabs ul.tabs--primary li a.active {
+    border-bottom-color: #cccccc;
+  }
+}
+.pr-temporary-tabs ul.tabs--primary li a.active:hover, .pr-temporary-tabs ul.tabs--primary li a.active:focus {
+  color: #363636;
+  background: none;
+}
+.pr-temporary-tabs ul.tabs--secondary li a {
+  color: #363636;
+  border-bottom-color: transparent;
+}
+.pr-temporary-tabs ul.tabs--secondary li a:hover, .pr-temporary-tabs ul.tabs--secondary li a:focus {
+  text-decoration: none;
+  color: #363636;
+  border-bottom-color: #cccccc;
+}
+.pr-temporary-tabs ul.tabs--secondary li a.active {
+  border-bottom-color: #cccccc;
+}
+.pr-temporary-tabs ul.tabs--secondary li a.active:hover, .pr-temporary-tabs ul.tabs--secondary li a.active:focus {
+  color: #363636;
 }
 
 /**
@@ -584,41 +732,10 @@ button[disabled]:hover,
 
 /**
  * Messages
- *  - style system messages such as status, warning and error.
+ *  - System messages such as status, warning and error are NOT included
+ *    here as we don't want them to shift or change in color module, since
+ *    they are too important with regards to accessibility etc.
  ========================================================================== */
-/* Success (status) */
-.messages--status,
-table tr.ok {
-  background-color: #f3faef;
-}
-
-.messages--status,
-.ok {
-  color: #325e1c;
-}
-
-/* Warning */
-.messages--warning,
-table tr.warning {
-  background-color: #fdf8ed;
-}
-
-.messages--warning,
-.warning {
-  color: #734c00;
-}
-
-/* Error */
-.messages--error,
-table tr.error {
-  background-color: #fcf4f2;
-}
-
-.messages--error,
-.error {
-  color: #a51b00;
-}
-
 .dev-query {
   color: #f7f7f7;
 }
@@ -635,4 +752,17 @@ body > pre,
 body:before {
   color: #a51b00;
 }
+
+/**
+ * Content Types (nodes)
+ *  - in Drupal a content type is a bunch of fields we use to enter and display
+ *    content, such as pages, blog posts, forum posts and so on. Each of those
+ *    is usually a content type you create in the Drupal admin.
+ *  - an instance of a content type (e.g. a single blog post) is called a node,
+ *    the root template is called node.html.twg and the base selector is .node {}
+ ========================================================================== */
+.node--sticky {
+  background-color: #f7f7f7;
+}
+
 /*# sourceMappingURL=color.css.map */

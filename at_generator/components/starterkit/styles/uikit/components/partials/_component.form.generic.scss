@@ -10,13 +10,30 @@
 }
 
 
+// Radio and checkbox items are radically restyled to stretch the label
+// underneath the input using padding and margin, this gives a bigger target
+// for touch/clicks. This is ususally known as a "button zone", see:
+// http://uxmovement.com/forms/ways-to-make-checkboxes-radio-buttons-easier-to-click/
 .form-type-radio,
 .form-type-checkbox {
-  margin: 0;
+  @include output-rhythm(margin, 0 0 $xxxx-small $xxx-small);
 
-  .description {
-    margin-#{$flow-from}: 2.4em;
+  label.option {
+    @include output-rhythm(padding, $xxxx-small $xx-small $xxxx-small $xx-large);
+    @include output-rhythm(margin-#{$flow-from}, -#{$x-large});
+    min-width: 50%;
+    border-style: $form-border-style;
+    border-width: $form-border-width;
+    border-radius: $border-radius;
+
+    &:focus,
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+    }
   }
+
+  .description {}
 }
 
 

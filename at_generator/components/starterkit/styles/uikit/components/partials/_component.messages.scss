@@ -38,42 +38,41 @@
 }
 
 
+// Messages colors are kept here, we don't want these to shift in color module.
+
 /* Success (status) */
 .messages--status,
 table tr.ok {
+  background-color: $success-background-color;
 }
 
 .messages--status,
 .ok {
-}
-
-.messages--status {
+  color: $success-text-color;
 }
 
 
 /* Warning */
 .messages--warning,
 table tr.warning {
+  background-color: $warning-background-color;
 }
 
 .messages--warning,
 .warning {
-}
-
-.messages--warning {
+  color: $warning-text-color;
 }
 
 
 /* Error */
 .messages--error,
 table tr.error {
+  background-color: $error-background-color;
 }
 
 .messages--error,
 .error {
-}
-
-.messages--error {
+  color: $error-text-color;
 }
 
 
@@ -83,6 +82,7 @@ table tr.error {
 .messages--error {
   background-image: none;
 }
+
 
 
 /* RTL */

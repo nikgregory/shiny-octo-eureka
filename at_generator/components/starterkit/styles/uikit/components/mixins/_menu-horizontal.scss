@@ -13,7 +13,7 @@
 
     .rm-block__content {
       .menu-level-1 {
-        @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
+        @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
       }
     }
   }

@@ -11,14 +11,19 @@
 @mixin list-style-buttons($list_selector) {
 
   #{$list_selector} {
-    @include list-horizontal($margin: (t: 0, r: $xxxx-small, b: 0, l: 0));  // LTR
+    @include list-horizontal($flow-from, $margin: (t: 0, r: $xxxx-small, b: 0, l: 0));  // LTR
 
     li {
       a {
+        // Copy the markup for this mixin to _theme.color.scss and manually apply the selector.
         @include button-variant($button-color, $button-background-color, $button-border-color);
 
-        border-width: $button-border-width;
-        border-style: $button-border-style;
+        @if $button-box-shadow == true {
+          box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
+        }
+
+        border: $button-border-width $button-border-style $button-border-color;
+        border-radius: $button-border-radius;
 
         text-align: $button-text-align;
         text-decoration: none;
@@ -30,17 +35,14 @@
         position: relative;
 
         @include output-rhythm(padding, $xx-small $medium);
-
-        border-radius: $button-border-radius;
         transition: background-color, .15s, ease-in-out;
-        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
       }
     }
   }
 
   // Use .page to increase the specificity as a safety margin.
   @at-root [dir="rtl"] .page #{$list_selector} {
-    @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: $xxxx-small));
+    @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: $xxxx-small));
   }
 }
 
@@ -49,7 +51,7 @@
 @mixin list-style-button-group-horizontal($list_selector) {
 
   #{$list_selector} {
-    @include list-horizontal($margin: (t: 0, r: 0, b: 0, l: 0));
+    @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
 
     li {
       // LTR, RTL
@@ -73,10 +75,14 @@
       a {
         @include button-variant($button-color, $button-background-color, $button-border-color);
 
-        border-width: $button-border-width;
-        border-style: $button-border-style;
+        @if $button-box-shadow == true {
+          box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
+        }
 
-        margin-#{$flow-to}: -$tab-border-width;  // LTR, RTL
+        border: $button-border-width $button-border-style $button-border-color;
+
+        margin-#{$flow-to}: -$tab-border-width;
+        @include output-rhythm(padding, $xx-small $medium);
 
         text-align: $button-text-align;
         text-decoration: none;
@@ -87,10 +93,8 @@
         display: block;
         position: relative;
 
-        @include output-rhythm(padding, $xx-small $medium);
-
         transition: background-color, .15s, ease-in-out;
-        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
+
       }
     }
   }
@@ -117,10 +121,14 @@
       a {
         @include button-variant($button-color, $button-background-color, $button-border-color);
 
-        border-width: $button-border-width;
-        border-style: $button-border-style;
+        @if $button-box-shadow == true {
+          box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
+        }
+
+        border: $button-border-width $button-border-style $button-border-color;
 
         margin-bottom: -$tab-border-width;
+        @include output-rhythm(padding, $xx-small $medium);
 
         text-align: $flow-from;
         text-decoration: none;
@@ -131,10 +139,7 @@
         display: block;
         position: relative;
 
-        @include output-rhythm(padding, $xx-small $medium);
-
         transition: background-color, .15s, ease-in-out;
-        box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
       }
     }
   }

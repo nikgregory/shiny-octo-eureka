@@ -24,6 +24,11 @@ table {
   .view-table__details--description {
     font-style: italic;
   }
+
+  // Lists, such as item-lists, can appear in tables.
+  ul {
+    margin: 0;
+  }
 }
 
 

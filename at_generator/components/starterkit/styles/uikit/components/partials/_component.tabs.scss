@@ -13,6 +13,10 @@
 // Fix and repair when local tasks become a block.
 .pr-temporary-tabs {
 
+  .local-tasks {
+    @include output-rhythm(margin-bottom, $medium);
+  }
+
   // Temp solution until tabs become a block...
   .l-rw {
     @include output-rhythm(padding, $x-large 0);

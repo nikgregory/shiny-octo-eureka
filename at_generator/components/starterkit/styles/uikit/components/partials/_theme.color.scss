@@ -23,7 +23,6 @@ body {
 a {
   color: $link-color;
 
-  &:link,
   &:visited {
     color: $link-color; // or use $link-visited-color
   }
@@ -96,9 +95,9 @@ hr {
 
 
 // Regions
-//  - .l-rw is the main wrapper selector for all regions within a page.
-.l-rw {
-  //background-color: $regions-background-color;
+//  - .regions is the main wrapper selector for all regions within a page.
+.regions {
+  background-color: $regions-background-color;
 }
 
 
@@ -114,13 +113,15 @@ hr {
 
 // Header
 .pr-header {
-  @include page-row-colors($page-header-background-color, $page-header-color, $page-row-fullwidth);
+  color: $page-header-color;
+  @include page-row-background-color($page-header-background-color, $page-row-fullwidth);
 }
 
 
 // Navbar
 .pr-navbar {
-  @include page-row-colors($page-navbar-background-color, $page-navbar-color, $page-row-fullwidth);
+  color: $page-navbar-color;
+  @include page-row-background-color($page-navbar-background-color, $page-row-fullwidth);
 
   a,
   .menu a {
@@ -131,7 +132,8 @@ hr {
 
 // Features
 .pr-features {
-  @include page-row-colors($page-features-background-color, $page-features-color, $page-row-fullwidth);
+  color: $page-features-color;
+  @include page-row-background-color($page-features-background-color, $page-row-fullwidth);
 }
 
 
@@ -139,19 +141,23 @@ hr {
 .pr-main {}
 
 
-// Tertiary
-.pr-tertiary {
-  @include page-row-colors($page-tertiary-background-color, $page-tertiary-color , $page-row-fullwidth);
+// Sub features
+.pr-subfeature {
+  color: $page-subfeatures-color;
+  @include page-row-background-color($page-subfeatures-background-color, $page-row-fullwidth);
 }
+
 
 // Footer
 .pr-footer {
-  @include page-row-colors($page-footer-background-color, $page-footer-color, $page-row-fullwidth);
+  color: $page-footer-color;
+  @include page-row-background-color($page-footer-background-color, $page-row-fullwidth);
 
   a,
   .menu a {
     color: inherit;
 
+    &.active,
     &:hover,
     &:focus {
       color: inherit;
@@ -162,7 +168,12 @@ hr {
 // Theme attribution message. This is a toggle setting in the advanced theme
 // settings, you can turn it on/off using the Markup overrides extension.
 .attribution {
-  background-color: $page-navbar-background-color;
+  .l-rw {
+    background-color: transparent;
+  }
+  .attribution__link {
+    color: $text-color;
+  }
 }
 
 
@@ -274,6 +285,7 @@ hr {
 
 // Aggressively force the menu to inherit the page/regions background,
 // this gives us some pretty usable styles for free.
+.rm-region,
 .rm-block,
 .rm-block * {
   background-color: inherit;
@@ -304,6 +316,11 @@ hr {
     a {
       color: $resp-menu-color;
       background: $resp-menu-background-color;
+
+      &:after,
+      &:before {
+        color: $resp-menu-color !important;
+      }
 
       &:active {
         text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
@@ -338,24 +355,25 @@ hr {
 // Customize responsive menus for this theme.
 .ms-dropmenu {
   .rm-block__content {
-    a {
-      &:after {
-      }
-    }
-
-    li {
-      &.expanded li {
-      }
-    }
+    .menu {}
   }
 }
 
 
 .ms-horizontal {
   .rm-block__content {
-    a {
-      &:before,
-      &:after {
+    .menu {}
+  }
+}
+
+
+.ms-slidedown {
+  .rm-block__content {
+    .menu {
+      a.active[href="/"],
+      a {
+        color: $resp-menu-hover-color;
+        background-color: $resp-menu-hover-background-color;
       }
     }
   }
@@ -367,10 +385,6 @@ hr {
     opacity: .001;
     background-color: $body-background-color;
     color: $page-background-color;
-  }
-
-  > .page,
-  .rm-block__content {
   }
 }
 
@@ -420,6 +434,34 @@ hr {
     text-decoration: none;
   }
 }
+
+
+/**
+ * Pagers
+ * - Full system pager.
+ * - Views mini pager.
+ ========================================================================== */
+
+// Pager links are either an <a>, or a <span> for the current item in the Views mini-pager.
+.pager__link {
+  border-color: $border-color;
+
+  &:focus,
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+
+  &:active {
+    box-shadow: inset 0px 0px 3px 0 rgba(0, 0, 0, 0.75);
+    opacity: 0.9;
+  }
+}
+
+// Active item link.
+.pager__link--is-active {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
 
 
 /**
@@ -605,6 +647,19 @@ textarea.placeholder_text {
  * Form Theme
  ========================================================================== */
 
+.form-type-radio,
+.form-type-checkbox {
+  label.option {
+    border-color: $form-border-color;
+
+    &:focus,
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+}
+
+
 // Filters and tips
 .filter-wrapper {
   border-color: $form-border-color;
@@ -666,7 +721,6 @@ button,
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   }
 
-
   &:hover,
   &:focus {
     opacity: 1;
@@ -674,9 +728,15 @@ button,
     background-color: $button-background-hover-color;
   }
 
+  &:visited {
+    color: $button-color;
+    background: $button-background-color;
+  }
+
   &[disabled] {
     &:hover {
-      color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
+      opacity: 1;
+      //color: darken($button-color, $darken); // No variable because it's just disabled, this works fine.
     }
   }
 }
@@ -684,7 +744,7 @@ button,
 
 // Primary button
 .button--primary {
-  @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+  @include button-variant($button-primary-text-color, $button-primary-background-color, $button-primary-border-color);
 }
 
 
@@ -696,27 +756,57 @@ button,
 
 // Action button
 .button-action {
-  //@include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
+  //@include button-variant($button-primary-text-color, $button-primary-background-color, $button-primary-border-color);
+  opacity: 1;
+}
+
+
+// Preview buttons should be neutral.
+#edit-preview {
+  background-color: inherit;
+  color: $button-border-color;
+}
+
+
+// Summary hide buttons are actually button element and need special treatment
+button.link-edit-summary {
+  background-color: inherit;
+  color: $text-color;
+
+  &:hover,
+  &:focus {
+    background-color: inherit;
+    color: $text-color;
+  }
 }
 
 
 /* Drop buttons */
 .js .dropbutton-widget {
-  background-color: $page-background-color;
+  background-color: $regions-background-color;
   border-color: $button-border-color;
 
+  &:hover,
+  &:focus {
+    border-color: $button-border-color;
+  }
 }
 
+
+// Drop button actions and toggle.
 .dropbutton {
+  .dropbutton-action {
+    .button {
+      @include button-variant($button-primary-text-color, $button-primary-background-color, $button-primary-border-color);
+    }
+  }
+
   .secondary-action {
     border-top-color: $button-border-color;
 
     .button {
-      background: $page-background-color;
-
-      &:hover,
-      &:focus {
-      }
+      background: $regions-background-color;
+      color: $button-border-color;
     }
   }
 
@@ -735,12 +825,6 @@ button,
   .dropbutton {
     border-right-color: $button-border-color;
 
-    .publish {
-      .button {
-        @include button-variant($hightlight-text-color, $hightlight-background-color, $hightlight-border-color);
-      }
-    }
-
     // RTL
     @at-root [dir="rtl"] {
       .dropbutton-multiple .dropbutton {
@@ -754,22 +838,106 @@ button,
       border-radius: $button-border-radius 0 0 0;
     }
   }
+}
 
-  // Include secondary actions after "open" so
-  // the styles cascade properly.
-  .dropbutton {
-    .secondary-action {
-      .button {
-        border-radius: 0 0 0 $button-border-radius;
+
+// Color the arrow.
+.dropbutton-arrow {
+  color: $button-border-color;
+}
+
+
+
+
+/**
+ * Tabs (local tasks)
+ * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
+ * mean the tabs are now a block, and we probably need some template revisions
+ * also.
+ ========================================================================== */
+
+.tabs {}
+
+// Fix and repair when local tasks become a block.
+.pr-temporary-tabs {
+
+  // You MUST look in _component.tabs.scss to see which mixins are being called for
+  // primary and secondary tabs, these will most likely be in breakpoints with
+  // different mixins called into each breakpoint for both sets of tabs.
+
+  // These are set generically to match *almost* all tab/list styles (from mixins).
+  // There may be occassions when a particular declaration might clash or not work
+  // out exactly right, just set a special case for it.
+
+  ul.tabs--primary {
+    border-bottom-color: $tab-border-color;
+    li {
+      a {
+        @include button-variant($tab-color, $tab-background-color, $tab-border-color);
+        @if $button-box-shadow == true {
+          box-shadow: rgba(255, 255, 255, 0.5) 0 $tab-border-width 0 inset;
+        }
 
         &:hover,
         &:focus {
-          border-radius: 0 0 0 $button-border-radius;
+          color: $tab-hover-color;
+          background-color: $tab-background-hover-color;
+        }
+
+        &:active {
+          text-shadow: 0 1px 1px rgba(0, 0, 0,  0.3);
+        }
+
+        &.active {
+          color: $tab-active-color;
+          background: none;
+
+          // mobile and wide breakpoints have different style tabs, mobile
+          // needs the border to show, while the wide "tab style" needs to hide
+          // the border by matching it to the regions background color.
+          @media #{$wide} {
+            border-bottom-color: $regions-background-color;
+          }
+          @media #{$mobile} {
+            border-bottom-color: $tab-border-color;
+          }
+
+          &:hover,
+          &:focus {
+            color: $tab-hover-color;
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  ul.tabs--secondary {
+    li {
+      a {
+        color: $list-color;
+        border-bottom-color: transparent;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: $list-hover-color;
+          border-bottom-color: $list-border-color;
+        }
+
+        &.active {
+          border-bottom-color: $list-border-color;
+
+          &:hover,
+          &:focus {
+            color: $list-hover-color;
+          }
         }
       }
     }
   }
 }
+
 
 
 /**
@@ -830,44 +998,10 @@ button,
 
 /**
  * Messages
- *  - style system messages such as status, warning and error.
+ *  - System messages such as status, warning and error are NOT included
+ *    here as we don't want them to shift or change in color module, since
+ *    they are too important with regards to accessibility etc.
  ========================================================================== */
-
-/* Success (status) */
-.messages--status,
-table tr.ok {
-  background-color: $success-background-color;
-}
-
-.messages--status,
-.ok {
-  color: $success-text-color;
-}
-
-
-/* Warning */
-.messages--warning,
-table tr.warning {
-  background-color: $warning-background-color;
-}
-
-.messages--warning,
-.warning {
-  color: $warning-text-color;
-}
-
-
-/* Error */
-.messages--error,
-table tr.error {
-  background-color: $error-background-color;
-}
-
-.messages--error,
-.error {
-  color: $error-text-color;
-}
-
 
 // Devel query messages
 .dev-query {
@@ -895,4 +1029,43 @@ body {
     color: $error-text-color;
   }
 }
+
+
+/**
+ * Content Types (nodes)
+ *  - in Drupal a content type is a bunch of fields we use to enter and display
+ *    content, such as pages, blog posts, forum posts and so on. Each of those
+ *    is usually a content type you create in the Drupal admin.
+ *  - an instance of a content type (e.g. a single blog post) is called a node,
+ *    the root template is called node.html.twg and the base selector is .node {}
+ ========================================================================== */
+
+.node {}
+
+
+// States
+.node--promoted {}
+
+
+.node--sticky {
+  background-color: $sticky-background-color;
+}
+
+.node--unpublished {}
+
+
+// View modes
+.node--view-mode-full {}
+.node--view-mode-teaser {}
+
+
+
+
+
+
+
+
+
+
+
 
