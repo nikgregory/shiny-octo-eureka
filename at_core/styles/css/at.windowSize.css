@@ -1,27 +1,20 @@
 /* Basic styles for the window size debugger */
 /* line 2, ../sass/at.windowSize.scss */
-.window-size-indicator {
-  background-color: rgba(0, 0, 0, 0.85);
+.wsi {
+  background-color: rgba(0, 0, 0, 0.75);
   bottom: 0.3rem;
-  color: #e5e5e5;
-  font: 1rem/1 sans-serif;
-  padding: 0.3rem 0 0.3rem 0.5rem;
+  color: #fff;
+  font: 0.8rem/1.25 sans-serif;
+  padding: 0.3rem 0.5rem;
   position: fixed;
   right: 0.3rem;
-  opacity: 0.95;
+  opacity: 0.3;
   z-index: 999999;
   border-radius: 2px;
-  width: 7rem;
   text-align: left;
 }
-/* line 16, ../sass/at.windowSize.scss */
-.window-size-indicator p {
-  margin: 0;
-  padding: 0;
-}
-
-/* line 22, ../sass/at.windowSize.scss */
-.wsi_em {
-  right: 7.6rem;
+/* line 15, ../sass/at.windowSize.scss */
+.wsi:hover {
+  opacity: 1;
 }
 /*# sourceMappingURL=at.windowSize.css.map */

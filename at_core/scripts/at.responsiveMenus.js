@@ -12,7 +12,9 @@
         return;
       }
 
-      var rm = settings[settings.ajaxPageState.theme]['rm'];
+      //console.log(settings);
+
+      var rm = settings['at_rm'];
       var def = rm['default'];
       var resp = rm['responsive'];
 
@@ -42,6 +44,7 @@
         setup: function() {
           $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region');
+          $('.rm-block').parent().parent('.l-rw').addClass('rm-row');
           $('.rm-block .block-menu__title').removeClass('visually-hidden');
         },
         // The resp menu system only uses one breakpoint,

@@ -6,6 +6,7 @@ at.windowsize:
       styles/css/at.windowSize.css: {}
   js:
     scripts/min/at.windowSize.min.js: { minified: true }
+    #scripts/at.windowSize.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -68,11 +69,27 @@ at.fastclick_initialize:
     - at_core/at.fastclick
     - core/jquery
 
+# Breakpoints
+at.breakpoints:
+  #header: true
+  version: 1.0.0
+  js:
+    scripts/min/at.breakpoints.min.js: { minified: true }
+    #scripts/at.breakpoints.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/matchmedia
+    - at_core/at.enquire
+
 # Responsive Menus
 at.responsivemenus:
+  #header: true
   version: 1.0.0
   js:
     scripts/min/at.responsiveMenus.min.js: { minified: true }
+    #scripts/at.responsiveMenus.js: { }
   dependencies:
     - core/jquery
     - core/drupal

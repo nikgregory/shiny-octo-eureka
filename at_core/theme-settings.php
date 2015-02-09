@@ -2,13 +2,13 @@
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Config;
-
+use Drupal\Component\Utility\Html;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\File\DirectoryOperations;
-use Drupal\at_core\Breakpoints\ATBreakpoints;
+//use Drupal\at_core\Breakpoints\ATBreakpoints;
 
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
@@ -88,6 +88,15 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   unset($node_view_modes['rss']);
   unset($node_view_modes['search_index']);
   unset($node_view_modes['search_result']);
+
+  // Set a class on the form for the current admin theme, note if this is set to "Default theme"
+  // the result is always 0.
+  $system_theme_config = \Drupal::config('system.theme');
+  $admin_theme = $system_theme_config->get('admin');
+  if (!empty($admin_theme)) {
+    $admin_theme_class = 'admin-theme--' . Html::getClass($admin_theme);
+    $form['#attributes'] = array('class' => array($admin_theme_class));
+  }
 
   // Attached required CSS and JS.
   $form['#attached']['library'][] = 'at_core/at.appearance_settings';

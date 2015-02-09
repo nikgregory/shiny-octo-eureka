@@ -45,12 +45,12 @@
     'block',
     'block-menu',
     'block-menu--' ~ derivative_plugin_id|clean_class,
-    label ? 'has-title',
+    label ? 'has-title'
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
 <nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
-  <div class="block-menu__inner">
+  <div class="block__inner block-menu__inner">
 
     {# Label. If not displayed, we still provide it for screen readers. #}
     {% if not configuration.label_display %}
@@ -58,12 +58,12 @@
     {% endif %}
 
     {{ title_prefix }}
-    <h2 id="{{ heading_id }}"{{ title_attributes.addClass('block-menu__title') }}><span>{{ configuration.label }}</span></h2>
+    <h2 id="{{ heading_id }}"{{ title_attributes.addClass('block__title', 'block-menu__title') }}><span>{{ configuration.label }}</span></h2>
     {{ title_suffix }}
 
     {# Menu. #}
     {% block content %}
-      <div{{ content_attributes.addClass('block-menu__content') }}>
+      <div{{ content_attributes.addClass('block__content', 'block-menu__content') }}>
         {{ content }}
       </div>
     {% endblock %}

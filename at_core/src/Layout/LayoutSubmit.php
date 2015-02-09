@@ -298,7 +298,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
           // Temporarily add tabs, we can remove this later when the tabs become a block.
           if ($row == 'main') {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
+            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw pr-temporary-tabs__rw regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
           }
           else {
             $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';

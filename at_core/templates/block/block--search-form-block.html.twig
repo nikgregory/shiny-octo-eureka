@@ -39,11 +39,13 @@
   set classes = [
     'block',
     'block-search',
-    label ? 'has-title',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    label ? 'has-title'
   ]
 %}
 <div{{ attributes.addClass(classes).removeClass('container-inline') }}>
-  <div class="block-search__inner">
+  <div class="block__inner block-search__inner">
 
     {{ title_prefix }}
     {% if label %}
@@ -52,7 +54,7 @@
     {{ title_suffix }}
 
     {% block content %}
-      <div{{ content_attributes.addClass('block__content') }}>
+      <div{{ content_attributes.addClass('block__content', 'block-search__content') }}>
         {{ content }}
       </div>
     {% endblock %}

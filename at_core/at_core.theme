@@ -78,6 +78,9 @@ function at_core_page_attachments_alter(array &$page) {
   // We always load fastclick, at least for now this is a hard requirement of the theme.
   $page['#attached']['library'][] = 'at_core/at.fastclick_initialize';
 
+  // Always load at.breakpoints.js, this sets layout breakpoint body classes.
+  $page['#attached']['library'][] = 'at_core/at.breakpoints';
+
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
@@ -144,9 +147,10 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] == 1) {
 
-      // Load RM CSS styles.
+      // Load RM JS and CSS styles.
+      $page['#attached']['library'][] = "at_core/at.responsivemenus";
       $page['#attached']['library'][] = "$theme/responsive_menus";
 
       $drupalSettings = array();
@@ -164,7 +168,7 @@ function at_core_page_attachments_alter(array &$page) {
       }
 
       // Attach JS settings.
-      $page['#attached']['drupalSettings'][$theme]['rm'] = $drupalSettings;
+      $page['#attached']['drupalSettings']['at_rm'] = $drupalSettings;
     }
 
     // Attach polyfills to support IE8.
@@ -210,13 +214,6 @@ function at_core_css_alter(&$css) {
   }
 
   // Layout
-  //
-  // Since https://www.drupal.org/node/2382533 CSS/JS assets cannot be loaded without a library
-  // and since themes cannot fire hook_libraries_alter() https://www.drupal.org/node/2050269
-  // and we don't yet have dynamic libraries https://www.drupal.org/node/2358981
-  // I have no recourse but to hack hook_css_alter() to load the layout files. Hooray for
-  // hook_css_alter().
-  //
   // This determines the page suggestion for the current page and checks if there is an
   // existing config key for that suggestion, then loads a layout CSS file appropriatly.
   if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
@@ -237,6 +234,7 @@ function at_core_css_alter(&$css) {
     $path_args = explode('/', $path);
 
     // This is the front page.
+    // $is_front_page =  \Drupal::service('path.matcher')->isFrontPage();
     if (empty($path_args[1])) {
       $path_args = [''];
     }
@@ -369,8 +367,10 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
  */
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Common paths
+  $path_to_theme = $variables['directory'];
 
   // Add theme variables, we use these to set a class and provide a very easy way for themers to link
   // to files in the theme, such as background images or other files.
@@ -438,6 +438,16 @@ function at_core_preprocess_html(&$variables) {
         $variables['typekit_id'] = String::checkPlain($config['font_typekit']);
       }
     }
+
+    // shortcodes classes.
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+      if (!empty($config['page_classes_body'])) {
+        $shortcodes = Tags::explode($config['page_classes_body']);
+        foreach ($shortcodes as $class) {
+          $variables['attributes']['class'][] = Html::getClass($class);
+        }
+      }
+    }
   }
 }
 
@@ -458,7 +468,17 @@ function at_core_preprocess_page(&$variables) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
       // Set attribution.
       if (isset($config['attribution_toggle']) && $config['attribution_toggle'] === 1) {
-        $variables['attribution'] = '<div class="attribution"><a href="http://adaptivethemes.com" target="_blank">Design by Adaptivethemes.com</a></div>';
+        $variables['attribution']['#markup'] = '<div class="l-pr attribution"><div class="l-rw"><a href="http://adaptivethemes.com" class="attribution__link" target="_blank">Design by Adaptivethemes.com</a></div></div>';
+      }
+    }
+
+    // shortcodes classes.
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+      if (!empty($config['page_classes_page'])) {
+        $shortcodes = Tags::explode($config['page_classes_page']);
+        foreach ($shortcodes as $class) {
+          $variables['attributes']['class'][] = Html::getClass($class);
+        }
       }
     }
   }
@@ -501,6 +521,21 @@ function at_core_preprocess_page(&$variables) {
       // I like this syntax better than Drupals usual habit of += shorthand, mainly because it's
       // very obvious at a glance what we are doing here.
       $variables = $variables + $row_attributes;
+    }
+  }
+
+  // Add all breakpoints to drupalSettings (label:media query).
+  $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
+  if ($breakpoints_module == TRUE) {
+    if (isset($config['breakpoint_group_layout'])) {
+      $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
+
+      foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
+        $breakpoint_safe_label = Html::getClass($breakpoint_values->getLabel());
+        $breakpoints_array[$breakpoint_safe_label] = $breakpoint_values->getMediaQuery();
+      }
+
+      $variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
     }
   }
 }
@@ -568,7 +603,7 @@ function at_core_preprocess_node(&$variables) {
   if ($node->isPublished() === FALSE) {
     $variables['title_prefix']['status'] = array(
       '#markup' => t('Node unpublished'),
-      '#prefix' => '<p class="unpublished clearfix" aria-label="Status message" role="contentinfo">',
+      '#prefix' => '<p class="unpublished__title clearfix" aria-label="Status message" role="contentinfo">',
       '#suffix' => '</p>',
     );
   }
@@ -605,8 +640,11 @@ function at_core_preprocess_node(&$variables) {
     $variables['author_attributes']['rel'][] = 'author';
 
     // add a class if author picture is printing.
-    if (!empty($variables['author_picture'])) {
-      $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
+    if ($author_picture = drupal_render($variables['author_picture'])) {
+      // this fails if twig debugging is on. TODO ?
+      if (!empty($author_picture)) {
+        $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
+      }
     }
   }
 }
@@ -765,6 +803,9 @@ function at_core_preprocess_field(&$variables) {
 
         // Captions.
         if (isset($config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode]) && $config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode] === 1) {
+
+          //$variables['#attached']['library'][] = "filter/caption";
+
           foreach ($variables['items'] as $delta => $item) {
             $values = $item['content']['#item']->getValue();
 
@@ -795,9 +836,12 @@ function at_core_preprocess_field(&$variables) {
           }
         }
 
-        // Image align class
+        // Image align class, provide a variable for use in field template.
+        $variables['image_align'] = '';
         if (!empty($config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode])) {
-          $variables['attributes']['class'][] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
+          //$variables['attributes']['class'][] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
+
+          $variables['image_align'] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
         }
 
         // This is quite aggressive and it may be better to let the site fail?
@@ -846,13 +890,21 @@ function at_core_preprocess_breadcrumb(&$variables) {
 
       // Page title
       if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
+        $title = '';
         $request = \Drupal::request();
-        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
-          $title = \Drupal::service('title_resolver')->getTitle($request, $route);
-
-          if (!empty($title)) {
-            $variables['breadcrumb'][]['text'] = String::checkPlain($title);
+        if ($route_match = \Drupal::routeMatch()) {
+          $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+        }
+        // Could be a views page?
+        if (empty($title)) {
+          if (is_callable('views_get_page_view')) {
+            if ($view = views_get_page_view()) {
+              $title = $view->getTitle();
+            }
           }
+        }
+        if (!empty($title)) {
+          $variables['breadcrumb'][]['text'] = String::checkPlain($title);
         }
       }
     }

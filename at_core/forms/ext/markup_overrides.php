@@ -36,30 +36,30 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(
   '#type' => 'details',
   '#title' => t('Breadcrumbs'),
 );
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper'] = array(
-  '#type' => 'fieldset',
-  '#title' => t('Breadcrumbs'),
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['description'] = array(
+  '#type' => 'container',
+  '#markup' => t('Settings for the breadcrumb block. First enable the breadcrumb block from the <a href="!blockconfig" target="_blank">block configuration page</a>.', array('!blockconfig' => base_path() . 'admin/structure/block')),
 );
 // Breadcrumbs Label?
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper']['settings_breadcrumb_label'] = array(
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_label'] = array(
   '#type' => 'checkbox',
   '#title' => t('Show the "You are here" label'),
   '#default_value' => theme_get_setting('settings.breadcrumb_label'),
 );
 // Breadcrumbs Home link?
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper']['settings_breadcrumb_home'] = array(
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home'] = array(
   '#type' => 'checkbox',
   '#title' => t('Show the homepage link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home'),
 );
 // Breadcrumbs Page title?
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper']['settings_breadcrumb_title'] = array(
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_title'] = array(
   '#type' => 'checkbox',
   '#title' => t('Append the page title to the breadcrumb trail'),
   '#default_value' => theme_get_setting('settings.breadcrumb_title'),
 );
 // Breadcrumbs Seperator
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['wrapper']['settings_breadcrumb_separator'] = array(
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
   '#description' => t('Use UTF8 chars or escaped unicode, e.g. <code> \00BB </code> (chevron &#187;). You can add spaces also. <a href="!unicodetable" target="_blank">Unicode-table.com</a> is a good place to find codes.', array('!unicodetable' => 'http://unicode-table.com/')),

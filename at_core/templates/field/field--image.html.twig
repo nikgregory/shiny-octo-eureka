@@ -48,19 +48,28 @@
     label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
+{% if items|length > 1 %}
+  {% set count_class = 'has-multiple' %}
+{% else %}
+  {% set count_class = 'has-single' %}
+{% endif %}
+
+<div{{ attributes.addClass(classes, count_class) }}>
   {% if not label_hidden %}
     <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
   {% endif %}
+
+
+
   {% for delta, item in items %}
     {% if item.caption.show == true %}
-      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1), 'caption', 'caption-img') }} role="group">
+      <figure{{ item.attributes.addClass('field-type-image__figure', 'image-count-' ~ (delta + 1), 'caption', 'caption-img', image_align) }} role="group">
     {% else %}
-      <figure{{ item.attributes.addClass('image-count-' ~ (delta + 1)) }}>
+      <figure{{ item.attributes.addClass('field-type-image__figure', 'image-count-' ~ (delta + 1), image_align) }}>
     {% endif %}
       {{ item.content }}
       {% if item.caption.show == true %}
-        <figcaption property="schema:description">{{ item.caption.title }}</figcaption>
+        <figcaption class="field-type-image__figcaption" property="schema:description">{{ item.caption.title }}</figcaption>
       {% endif %}
     </figure>
   {% endfor %}

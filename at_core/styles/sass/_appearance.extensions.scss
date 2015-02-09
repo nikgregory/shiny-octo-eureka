@@ -1,198 +1,202 @@
 // Extensions
+.admin-theme--seven {
 
-#edit-extensions {
+  #edit-extensions {
 
-  &> .details-wrapper {
-    padding: 0;
-  }
-
-  details .details-wrapper {
-    padding: 0.35em 0.65em 0.75em;
-  }
-
-  .vertical-tabs {
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-  }
-
-  .vertical-tabs-list {
-    width: 25%;
-  }
-  .vertical-tabs-panes {
-    margin: 0 0 0 25%;
-  }
-
-  .submit--advanced-settings {}
-}
-
-
-// Fonts
-#edit-fonts {
-  .form-type-number {
-    input {
-      max-width: 6em;
-    }
-  }
-
-  #edit-setup {
-
-    #edit-help,
-    .form-item-settings-font-websafe,
-    .form-item-settings-font-google,
-    .form-item-settings-font-typekit,
-    .form-item-settings-font-customstack {
-      margin-bottom: 2em;
-    }
-  }
-
-  #edit-settings-font-websafe {
-    max-width: 100%;
-  }
-
-  #edit-settings-font-google {
-    width: 100%;
-  }
-}
-
-
-/* Image alignment options */
-#edit-image-settings {
-
-  .description,
-  .form-type-radios {
-    clear: both;
-  }
-
-  details {
-    details {
-      border: 0;
+    &> .details-wrapper {
       padding: 0;
-      margin: 0;
     }
 
-    fieldset legend {
-      @include visually-hidden-off;
-      padding: 0 0 15px;
+    details .details-wrapper {
+      padding: 0.35em 0.65em 0.75em;
+    }
+
+    .vertical-tabs {
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .vertical-tabs-list {
+      width: 25%;
+    }
+    .vertical-tabs-panes {
+      margin: 0 0 0 25%;
+    }
+
+    .submit--advanced-settings {}
+  }
+
+
+  // Fonts
+  #edit-fonts {
+    .form-type-number {
+      input {
+        max-width: 6em;
+      }
+    }
+
+    #edit-setup {
+
+      #edit-help,
+      .form-item-settings-font-websafe,
+      .form-item-settings-font-google,
+      .form-item-settings-font-typekit,
+      .form-item-settings-font-customstack {
+        margin-bottom: 2em;
+      }
+    }
+
+    #edit-settings-font-websafe {
+      max-width: 100%;
+    }
+
+    #edit-settings-font-google {
+      width: 100%;
     }
   }
 
-  .form-type-radios {
+
+  /* Image alignment options */
+  #edit-image-settings {
+
+    .description,
+    .form-type-radios {
+      clear: both;
+    }
+
+    details {
+      details {
+        border: 0;
+        padding: 0;
+        margin: 0;
+      }
+
+      fieldset legend {
+        @include visually-hidden-off;
+        padding: 0 0 15px;
+      }
+    }
+
+    .form-type-radios {
+      label {
+        margin-bottom: 5px;
+      }
+    }
+
+    .form-type-radio {
+      clear: none;
+      float: left;
+      margin: 0 30px 10px 0;
+      text-align: center;
+      width: 50px;
+
+      input.form-radio {
+        margin-bottom: 4px;
+      }
+
+      label {
+        background-image: url(images/image-alignment-sprite.png);
+        background-repeat: no-repeat;
+        display: table-cell;
+        font-size: 0.8em;
+        height: 80px;
+        text-align: center;
+        vertical-align: bottom;
+        width: 50px;
+
+        &[for$=-none]   {background-position: 0 0;}
+        &[for$=-left]   {background-position: -50px 0;}
+        &[for$=-center] {background-position: -100px 0;}
+        &[for$=-right]  {background-position: -150px 0;}
+      }
+    }
+  }
+
+
+
+  // Titles
+  #edit-titles {
+
+    details {
+      label {
+        display: inline-block;
+        width: 8em;
+      }
+    }
+  }
+
+
+
+  // Touch icons
+  #edit-touch-icons-settings {
+
+    .form-type-textfield {
+      margin-bottom: 20px;
+    }
+
     label {
       margin-bottom: 5px;
     }
+
+    .field-prefix {
+      color: #666;
+    }
   }
 
-  .form-type-radio {
-    clear: none;
-    float: left;
-    margin: 0 30px 10px 0;
-    text-align: center;
-    width: 50px;
 
-    input.form-radio {
-      margin-bottom: 4px;
-    }
+  // Resp menus
+  #edit-responsive-menus {
+  }
 
+
+  // Add Classes
+  #edit-block-classes {
     label {
-      background-image: url(images/image-alignment-sprite.png);
-      background-repeat: no-repeat;
-      display: table-cell;
-      font-size: 0.8em;
-      height: 80px;
-      text-align: center;
-      vertical-align: bottom;
-      width: 50px;
-
-      &[for$=-none]   {background-position: 0 0;}
-      &[for$=-left]   {background-position: -50px 0;}
-      &[for$=-center] {background-position: -100px 0;}
-      &[for$=-right]  {background-position: -150px 0;}
-    }
-  }
-}
-
-
-
-// Titles
-#edit-titles {
-
-  details {
-    label {
-      display: inline-block;
-      width: 8em;
-    }
-  }
-}
-
-
-
-// Touch icons
-#edit-touch-icons-settings {
-
-  .form-type-textfield {
-    margin-bottom: 20px;
-  }
-
-  label {
-    margin-bottom: 5px;
-  }
-
-  .field-prefix {
-    color: #666;
-  }
-}
-
-
-// Resp menus
-#edit-responsive-menus {
-}
-
-
-// Add Classes
-#edit-block-classes {
-  label {
-    span {
-      font-weight: 400;
-    }
-  }
-}
-
-#edit-classes {
-  dt {
-    font-weight: bold;
-  }
-  @media screen and (min-width: 75em) {
-    dl.class-list {
-      dt {
-        float: left;
-        clear: left;
-        text-align: left;
-        width: 30%;
-      }
-      dd {
-        margin-left: 35%;
-        overflow: hidden;
+      span {
+        font-weight: 400;
       }
     }
   }
-}
 
-
-// Developer settings
-#edit-devel {
-
-   label {
-     font-weight: bold;
-   }
-
-  .description {
-    color: #777;
+  #edit-classes {
+    dt {
+      font-weight: bold;
+    }
+    @media screen and (min-width: 75em) {
+      dl.class-list {
+        dt {
+          float: left;
+          clear: left;
+          text-align: left;
+          width: 30%;
+        }
+        dd {
+          margin-left: 35%;
+          overflow: hidden;
+        }
+      }
+    }
   }
 
-  .details-wrapper {
-    padding: 0.35em 0.65em 0.75em;
+
+  // Developer settings
+  #edit-devel {
+
+     label {
+       font-weight: bold;
+     }
+
+    .description {
+      color: #777;
+    }
+
+    .details-wrapper {
+      padding: 0.35em 0.65em 0.75em;
+    }
   }
+
 }
+
 

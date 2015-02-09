@@ -17,6 +17,12 @@ if (file_exists($shortcodes_yml)) {
   $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
 }
 
+$page_elements = array(
+  //'html' => 'html',
+  'body' => 'body',
+  'page' => '#page wrapper',
+);
+
 /**
  * @file
  * Generate settings for the Custom CSS form.
@@ -34,13 +40,26 @@ $form['shortcodes']['page_classes'] = array(
   '#title' => t('Page'),
 );
 
-// Rows
-$form['shortcodes']['page_classes']['rows'] = array(
+// Page
+$form['shortcodes']['page_classes'] = array(
   '#type' => 'details',
-  '#title' => t('Rows'),
+  '#title' => t('Body, Page'),
+);
+foreach ($page_elements as $page_elements_key => $page_elements_value) {
+  $form['shortcodes']['page_classes']['settings_page_classes_' . $page_elements_key] = array(
+    '#type' => 'textfield',
+    '#title' => t($page_elements_value),
+    '#default_value' => String::checkPlain(theme_get_setting('settings.page_classes_' . $page_elements_key, $theme)),
+  );
+}
+
+// Rows
+$form['shortcodes']['row_classes'] = array(
+  '#type' => 'details',
+  '#title' => t('Page Rows'),
 );
 foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
-  $form['shortcodes']['page_classes']['rows']['settings_page_classes_row_' . $row_data_key] = array(
+  $form['shortcodes']['row_classes']['settings_page_classes_row_' . $row_data_key] = array(
     '#type' => 'textfield',
     '#title' => t('page-row__' . $row_data_key),
     '#default_value' => String::checkPlain(theme_get_setting('settings.page_classes_row_' . $row_data_key, $theme)),
@@ -48,12 +67,12 @@ foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
 }
 
 // Regions
-$form['shortcodes']['page_classes']['regions'] = array(
+$form['shortcodes']['region_classes'] = array(
   '#type' => 'details',
   '#title' => t('Regions'),
 );
 foreach ($theme_regions as $region_key => $region_value) {
-  $form['shortcodes']['page_classes']['regions']['settings_page_classes_region_' . $region_key] = array(
+  $form['shortcodes']['region_classes']['settings_page_classes_region_' . $region_key] = array(
     '#type' => 'textfield',
     '#title' => t($region_value),
     '#default_value' => String::checkPlain(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
@@ -100,10 +119,24 @@ if (!empty($shortcodes)) {
   $class_output = array();
   foreach ($shortcodes as $class_type => $class_values) {
 
+    if (isset($class_values['description'])) {
+      $class_description = $class_values['description'];
+    }
+    else {
+      $class_description = 'No description provided.';
+    }
+
+    if (isset($class_values['elements'])) {
+      $class_elements = implode(', ', $class_values['elements']);
+    }
+    else {
+      $class_elements = 'Unspecified';
+    }
+
     $form['shortcodes']['classes'][$class_type] = array(
       '#type' => 'fieldset',
       '#title' => t($class_values['name']),
-      '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_values['description'] .'</p>'),
+      '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_description .'</p><p><b>Apply to:</b> <i>' . $class_elements . '</i></p>' ),
     );
 
     foreach ($class_values['classes'] as $class_key => $class_data) {
