@@ -16,10 +16,11 @@ figure {
   }
 
   &.align-center {
-    @include output-rhythm(margin, 0 0 $medium);
+    @include output-rhythm(margin-bottom, $medium);
   }
 
   &[class*="align-"] {
     clear: both;
   }
 }
+

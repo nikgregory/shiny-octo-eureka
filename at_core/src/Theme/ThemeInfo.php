@@ -11,9 +11,7 @@ use Drupal\at_core\Theme\ThemeData;
 
 /**
  * ThemeInfo declares methods used to return theme info
- * for use in themes, mainly the front end. Note the construtor
- * uses list_themes() which is statically cached and much faster
- * than system_rebuild_theme_data() as used in ThemeSettingsInfo.
+ * for use in themes, mainly the front end.
  */
 class ThemeInfo {
 

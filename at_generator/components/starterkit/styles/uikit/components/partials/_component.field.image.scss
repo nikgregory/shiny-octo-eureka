@@ -17,54 +17,53 @@
   //   set image alignment and captions per node type and view mode.
 
   // Align left or none.
-  &.align-none .field__label,
-  &.align-none figure,
-  &.align-left .field__label,
-  &.align-left figure {
+  figure.align-none,
+  figure.align-left,
+  .field__label.align-none,
+  .field__label.align-left {
     @include output-rhythm(margin, 0 $medium $medium 0); // LTR
   }
-
-  &.align-none figcaption,
-  &.align-left figcaption {
+  .align-none figcaption,
+  .align-left figcaption {
     text-align: $flow-from; // LTR
   }
 
   // Align center.
-  &.align-center .field__label,
-  &.align-center figure {
-    text-align: center;
+  .field__label.align-center,
+  figure.align-center {
+    text-align: center; // cascades to figcaption
     margin-left: auto;
     margin-right: auto;
     @include output-rhythm(margin-bottom, $medium);
   }
-  &.align-center figure {
+  figure.align-center {
     display: table;
   }
 
   // Align right.
-  &.align-right .field__label,
-  &.align-right figure {
+  .field__label.align-right,
+  figure.align-right {
     @include output-rhythm(margin, 0 0 $medium $medium); // LTR
   }
-
-  &.align-right figcaption {
+  .align-right figcaption {
     text-align: $flow-from; // LTR
   }
 
   // If there is no image style set Firefox and other browsers will not respect max-width 100% inside a float.
   // This can happen if the user does not set a style, so we are protecting the site from breaking.
-  &.float-none {
+  figure.float-none {
     float: none !important;
-
-    figure {
-      margin-right: 0 !important;
-      margin-left: 0 !important;
-    }
+    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
-  // Be sure image fields with alignment clear each other.
-  &[class*="align-"] + .field-type-image {
-    clear: both;
+  // Be sure clearing is OK.
+  + .field-type-image {
+    .field__label {clear: both}
   }
 }
+
+
+
+
 

@@ -56,10 +56,8 @@
 
 <div{{ attributes.addClass(classes, count_class) }}>
   {% if not label_hidden %}
-    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+    <h3{{ title_attributes.addClass(title_classes, image_align) }}>{{ label }}</h3>
   {% endif %}
-
-
 
   {% for delta, item in items %}
     {% if item.caption.show == true %}

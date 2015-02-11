@@ -23,11 +23,19 @@
 .admin-theme--seven#system-theme-settings label {
   margin: 0 0 3px;
 }
-/* line 39, ../sass/_appearance.global.scss */
+/* line 37, ../sass/_appearance.global.scss */
+.admin-theme--seven .form-item {
+  margin: 1em 0;
+}
+/* line 41, ../sass/_appearance.global.scss */
+.admin-theme--seven label.option {
+  font-weight: 700;
+}
+/* line 45, ../sass/_appearance.global.scss */
 .admin-theme--seven details > .details-wrapper {
   padding: 0;
 }
-/* line 43, ../sass/_appearance.global.scss */
+/* line 49, ../sass/_appearance.global.scss */
 .admin-theme--seven #block-seven-help,
 .admin-theme--seven legend {
   position: absolute !important;
@@ -39,45 +47,45 @@
   word-wrap: normal;
   font: 0/0 a;
 }
-/* line 48, ../sass/_appearance.global.scss */
+/* line 54, ../sass/_appearance.global.scss */
 .admin-theme--seven fieldset {
   margin: 0;
   border: 0;
 }
-/* line 54, ../sass/_appearance.global.scss */
+/* line 60, ../sass/_appearance.global.scss */
 .admin-theme--seven .form-type-vertical-tabs fieldset {
   padding: 0;
 }
-/* line 59, ../sass/_appearance.global.scss */
+/* line 65, ../sass/_appearance.global.scss */
 .admin-theme--seven details {
   margin: 0.5em 0;
   border-radius: 4px;
   background: #FCFCFA;
 }
-/* line 64, ../sass/_appearance.global.scss */
+/* line 70, ../sass/_appearance.global.scss */
 .admin-theme--seven details details {
   background: inherit;
 }
-/* line 69, ../sass/_appearance.global.scss */
+/* line 75, ../sass/_appearance.global.scss */
 .admin-theme--seven blockquote {
   border-left: 10px solid #A6A5A1;
   padding-left: 10px;
 }
-/* line 74, ../sass/_appearance.global.scss */
+/* line 80, ../sass/_appearance.global.scss */
 .admin-theme--seven code, .admin-theme--seven pre, .admin-theme--seven kbd {
   font-size: 1em !important;
 }
-/* line 78, ../sass/_appearance.global.scss */
+/* line 84, ../sass/_appearance.global.scss */
 .admin-theme--seven code {
   font-weight: 700;
 }
-/* line 82, ../sass/_appearance.global.scss */
+/* line 88, ../sass/_appearance.global.scss */
 .admin-theme--seven pre code {
   font-weight: 400;
   padding: 0;
   margin: 0;
 }
-/* line 88, ../sass/_appearance.global.scss */
+/* line 94, ../sass/_appearance.global.scss */
 .admin-theme--seven pre.code-block {
   background: #F5F5F2;
   border: 1px solid #ccc;
@@ -86,64 +94,64 @@
   padding: 20px;
   border-radius: 4px;
 }
-/* line 103, ../sass/_appearance.global.scss */
+/* line 109, ../sass/_appearance.global.scss */
 .admin-theme--seven .subsystem-enabled-container {
   box-sizing: border-box;
   float: right;
   margin-top: -1.75em;
   padding: 0;
 }
-/* line 109, ../sass/_appearance.global.scss */
+/* line 115, ../sass/_appearance.global.scss */
 .admin-theme--seven .subsystem-enabled-container .form-type-checkbox {
   display: block;
   float: right;
   margin: 0;
   padding-right: 10px;
 }
-/* line 117, ../sass/_appearance.global.scss */
+/* line 123, ../sass/_appearance.global.scss */
 .admin-theme--seven .layouts-column {
   border: 0;
   margin: 0;
   box-sizing: border-box;
 }
 @media all and (min-width: 60em) {
-  /* line 128, ../sass/_appearance.global.scss */
+  /* line 134, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column {
     float: left;
   }
-  /* line 132, ../sass/_appearance.global.scss */
+  /* line 138, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column-onethird {
     width: 34%;
   }
-  /* line 136, ../sass/_appearance.global.scss */
+  /* line 142, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column-twothirds {
     width: 66%;
   }
-  /* line 140, ../sass/_appearance.global.scss */
+  /* line 146, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column-onequarter {
     width: 25%;
   }
-  /* line 144, ../sass/_appearance.global.scss */
+  /* line 150, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column-half {
     width: 50%;
   }
-  /* line 148, ../sass/_appearance.global.scss */
+  /* line 154, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .layouts-column-threequarters {
     width: 75%;
   }
-  /* line 152, ../sass/_appearance.global.scss */
+  /* line 158, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .column-select-layouts {
     border-right: 1px solid #BFBFBA;
     margin-bottom: -99999px;
     padding-bottom: 99999px;
   }
-  /* line 158, ../sass/_appearance.global.scss */
+  /* line 164, ../sass/_appearance.global.scss */
   .admin-theme--seven#system-theme-settings .css-layout-options {
     float: right;
   }
 }
 @media all and (max-width: 75em) {
-  /* line 169, ../sass/_appearance.global.scss */
+  /* line 175, ../sass/_appearance.global.scss */
   .admin-theme--seven .toolbar-tray-open #system-theme-settings fieldset[class*="layouts-column-"] {
     width: 100%;
     float: none;
@@ -320,9 +328,20 @@
 .admin-theme--seven #edit-layouts #edit-layout-select details details {
   margin: 10px 0;
   border: 0;
-  padding: 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
 }
 /* line 181, ../sass/_appearance.layouts.scss */
+.admin-theme--seven #edit-layouts #edit-layout-select details details summary {
+  color: #0074bd;
+}
+/* line 184, ../sass/_appearance.layouts.scss */
+.admin-theme--seven #edit-layouts #edit-layout-select details details summary:focus {
+  border-top: 0;
+  margin-top: 0;
+}
+/* line 192, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select .css-layout-options .region {
   box-sizing: border-box;
   text-align: left;
@@ -330,7 +349,7 @@
   -webkit-transition: all, .15s, ease-in;
           transition: all, .15s, ease-in;
 }
-/* line 187, ../sass/_appearance.layouts.scss */
+/* line 198, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select .css-layout-options .region span {
   display: block;
   background-color: #b2b2b2;
@@ -339,15 +358,15 @@
   padding: 0.3em 0 0 0.45em;
   color: #f5f5f5;
 }
-/* line 201, ../sass/_appearance.layouts.scss */
+/* line 212, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions {
   background: #f7fcff;
 }
-/* line 204, ../sass/_appearance.layouts.scss */
+/* line 215, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions label {
   padding-bottom: 10px;
 }
-/* line 208, ../sass/_appearance.layouts.scss */
+/* line 219, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions .description {
   position: static !important;
   clip: auto;
@@ -360,37 +379,37 @@
   font-size: 0.9em;
   margin-top: 20px;
 }
-/* line 214, ../sass/_appearance.layouts.scss */
+/* line 225, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions ol {
   margin: 0;
   padding: 0 0 0 20px;
 }
-/* line 221, ../sass/_appearance.layouts.scss */
+/* line 232, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-options,
 .admin-theme--seven .form-item-layout-suggestion,
 .admin-theme--seven #edit-no-mq-css {
   clear: both;
 }
-/* line 229, ../sass/_appearance.layouts.scss */
+/* line 240, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-options .form-disabled {
   background: #f7f7f7;
   margin: 0;
   padding: 1em 0;
 }
-/* line 238, ../sass/_appearance.layouts.scss */
+/* line 249, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-max-width .form-item-settings-max-width-value,
 .admin-theme--seven #edit-max-width .form-item-settings-max-width-unit {
   display: inline-block;
   margin-right: 3px;
 }
 @media (max-width: 48em) {
-  /* line 248, ../sass/_appearance.layouts.scss */
+  /* line 259, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts .form-radios label {
     max-width: 120px;
   }
 }
 @media (max-width: 56em) {
-  /* line 255, ../sass/_appearance.layouts.scss */
+  /* line 266, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-default-layout {
     float: none;
     clear: both;
@@ -399,11 +418,11 @@
   }
 }
 
-/* line 268, ../sass/_appearance.layouts.scss */
+/* line 279, ../sass/_appearance.layouts.scss */
 #edit-layouts .fieldset-wrapper {
   overflow: hidden;
 }
-/* line 273, ../sass/_appearance.layouts.scss */
+/* line 284, ../sass/_appearance.layouts.scss */
 #edit-layouts .css-layout-options .region {
   box-sizing: border-box;
   text-align: left;
@@ -411,7 +430,7 @@
   -webkit-transition: all, .15s, ease-in;
           transition: all, .15s, ease-in;
 }
-/* line 279, ../sass/_appearance.layouts.scss */
+/* line 290, ../sass/_appearance.layouts.scss */
 #edit-layouts .css-layout-options .region span {
   display: block;
   background-color: #b2b2b2;
@@ -584,6 +603,21 @@
 /* line 195, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;
+}
+/* line 202, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-classes {
+  background-color: #fff;
+}
+/* line 205, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-classes fieldset {
+  border-bottom: 1px solid #ccc;
+}
+/* line 210, ../sass/_appearance.extensions.scss */
+.admin-theme--seven .pattern-image-clip {
+  width: 320px;
+  height: 80px;
+  background-color: #fff;
+  overflow: hidden;
 }
 
 /* line 4, ../sass/_appearance.basic.scss */

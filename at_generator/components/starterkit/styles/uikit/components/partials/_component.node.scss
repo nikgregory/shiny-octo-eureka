@@ -78,7 +78,6 @@
 }
 
 
-
 // Footer wraps links.
 .node__footer {
   @include clearfix-micro;
@@ -88,15 +87,27 @@
 }
 
 
-
-// Node fields
-// Example styling for placing a border on image field figure, this will
+// Node images
+// Example styling for placing a border on images & figures etc, this will
 // correctly add borders even when figcaptions are enabled and in use, these
 // example styles come from Pixture Reloaded.
 .node {
-  .field-type-image figure {
+
+  // CK Editor images without caption have no figure wrapper.
+  img {
     //border: $border-width $border-style;
     //@include output-rhythm(padding, $small);
+  }
+
+  figure {
+    //border: $border-width $border-style;
+    //@include output-rhythm(padding, $small);
+
+    img {
+      //padding: 0;
+      //border: 0;
+      //border-radius: 0 !important;
+    }
 
     &.caption {
       //border-bottom: 0;

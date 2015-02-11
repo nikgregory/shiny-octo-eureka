@@ -31,7 +31,7 @@
 @include tiles($context: 12, $tile_count: 2, $arrows: false);
 
 // Overlay menu
-@include overlay($toggle_position: (vert: bottom, hozr: right), $arrows: false);
+@include overlay($toggle_position: (vert: bottom, horz: right), $arrows: false);
 
 // Dropmenu
 @include dropmenu($item-width: 12em, $arrows: true);
@@ -64,10 +64,35 @@
 }
 
 
+// Remove any rounded corners applied to these menu styles.
+.ms-dropmenu,
+.ms-horizonal,
+.ms-offcanvas,
+.ms-flipslide {
+  .rm-block .menu a {
+    //border-radius: 0 !important;
+  }
+}
+.ms-overlay .block__title {
+  //border-radius: 0 !important;
+}
+
+
+// Menu <a> bottom whitespace.
+.ms-offcanvas,
+.ms-slidedown {
+  .menu a {
+    @include output-rhythm(margin-bottom, 2px);
+  }
+}
+
+
+// Mitigate any unwanted space.
 .rm-block {
   margin: 0;
   padding: 0;
 }
+
 
 // Provide a consistant style for visible click handles.
 .rm-toggle  {

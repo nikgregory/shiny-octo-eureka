@@ -197,6 +197,23 @@
     }
   }
 
+
+  // Shortcodes
+  #edit-classes {
+    background-color: #fff;
+
+    fieldset {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  .pattern-image-clip {
+    width: 320px;
+    height: 80px;
+    background-color: #fff;
+    overflow: hidden;
+  }
+
 }
 
 

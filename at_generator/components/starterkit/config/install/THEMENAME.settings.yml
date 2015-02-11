@@ -24,10 +24,10 @@ settings:
   responsive_menu_responsive_style: slidedown
   responsive_menu_breakpoint_group: at_core.responsive_menus
   responsive_menu_breakpoint: 'all and (max-width: 75em)'
-  icon_path_default: images/touch-icons/default-60x60.png
-  apple_touch_icon_path_ipad: images/touch-icons/ipad-standard-76x76.png
-  apple_touch_icon_path_iphone_retina: images/touch-icons/iphone-retina-120x120.png
-  apple_touch_icon_path_ipad_retina: images/touch-icons/ipad-retina-152x152.png
+  icon_path_default: images/touch-icons/Icon-60.png
+  apple_touch_icon_path_iphone_retina: images/touch-icons/Icon-60@2x.png
+  apple_touch_icon_path_ipad: images/touch-icons/Icon-76.png
+  apple_touch_icon_path_ipad_retina: images/touch-icons/Icon-76@2x.png
   apple_touch_icon_precomposed: 0
   generated_files_path: themes/THEMENAME/styles/css/generated
   extensions_form_open: 0

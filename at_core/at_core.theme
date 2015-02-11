@@ -4,6 +4,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Theme\ThemeSettings;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\UserInterface;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Component\Utility\String;
@@ -11,6 +12,7 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 use Drupal\node\NodeInterface;
+
 
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Library\SystemLibraries;
@@ -205,7 +207,7 @@ function at_core_css_alter(&$css) {
     'file.formatter.generic.css',
     'search.theme.css',
     'system.theme.css',
-    'taxonomy.module.css',
+    'taxonomy.theme.css',
   );
   foreach ($remove as $file) {
     if (array_key_exists($file, $css)) {
@@ -329,25 +331,41 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 
 
 /**
- * hook_form_FORM_ID_alter()
- * Modify the User Login Block Form
+ * Implements hook_form_alter().
  */
-function at_core_form_user_login_form_alter(&$form, &$form_state, $form_id) {
+function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Login block mods.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+  switch ($form_id) {
+    case 'user_login':
+      if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+        if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 
-      // Placeholders.
-      if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
-        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-        $form['name']['#title_display'] = 'invisible';
-        $form['pass']['#title_display'] = 'invisible';
+          // Placeholder labels.
+          if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
+            $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+            $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+            $form['name']['#title_display'] = 'invisible';
+            $form['pass']['#title_display'] = 'invisible';
+          }
+        }
       }
-    }
+      break;
+
+    case 'search_block_form':
+      // Add the missing 'search-block-form' class.
+      //$form['#attributes']['class'][] = 'search-block-from';
+
+      // Remove the size value.
+      $form['keys']['#size'] = '';
+      //kpr($form);
+      break;
+
+    case 'search_form':
+      // Add the missing 'search-basic' class.
+      $form['basic']['#attributes']['class'][] = 'search-basic';
+      break;
   }
 }
 
@@ -957,3 +975,58 @@ function at_core_preprocess_menu(&$variables) {
 
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
+
+
+//
+// DEPRECATED TODO REMOVE
+//
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * Modify the User Login block form.
+ */
+/*
+function at_core_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Login block mods.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+
+      // Placeholders.
+      if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
+        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+        $form['name']['#title_display'] = 'invisible';
+        $form['pass']['#title_display'] = 'invisible';
+      }
+    }
+  }
+}
+*/
+
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * Modify the Search block form.
+ */
+/*
+function at_core_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Remove the size attribute.
+  $form['keys']['#size'] = '';
+}
+*/
+
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * Modify the Search page form.
+ */
+/*
+function at_core_form_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Add the missing search-basic class so we don't have to use an ID.
+  // This has the added bonus of removing container-inline :)
+  $form['basic']['#attributes']['class'] = 'search-basic';
+}
+*/

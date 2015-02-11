@@ -18,9 +18,8 @@ if (file_exists($shortcodes_yml)) {
 }
 
 $page_elements = array(
-  //'html' => 'html',
   'body' => 'body',
-  'page' => '#page wrapper',
+  'page' => '.page wrapper',
 );
 
 /**
@@ -30,9 +29,9 @@ $page_elements = array(
 
 $form['shortcodes'] = array(
   '#type' => 'details',
-  '#title' => t('CSS Shortcodes'),
+  '#title' => t('Shortcodes'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Add Classes</h3><p>Enter comma seperated lists of class names. <b>Clear the cache</b> after adding classes.</p>'),
+  '#description' => t('<h3>Shortcode CSS Classes</h3><p>Enter comma seperated lists of CSS class names. <a href="/admin/config/development/performance" target="_blank"><b>Clear the cache</b></a> after adding or removing classes</span>.</p>'),
 );
 
 $form['shortcodes']['page_classes'] = array(
@@ -82,7 +81,7 @@ foreach ($theme_regions as $region_key => $region_value) {
 // Blocks
 $form['shortcodes']['block_classes'] = array(
   '#type' => 'details',
-  '#title' => t('Block'),
+  '#title' => t('Blocks'),
 );
 foreach ($theme_blocks as $block_key => $block_value) {
   $block_label = $block_value->label() . ' <span>(' . $block_key . ')</span>';
@@ -114,10 +113,14 @@ foreach ($node_types as $nt) {
 if (!empty($shortcodes)) {
   $form['shortcodes']['classes'] = array(
     '#type' => 'details',
-    '#title' => t('Classes'),
+    '#title' => t('Available Shortcode CSS Classes'),
+    '#open' => TRUE,
   );
   $class_output = array();
+  $class_image = '';
   foreach ($shortcodes as $class_type => $class_values) {
+
+    //kpr($class_values);
 
     if (isset($class_values['description'])) {
       $class_description = $class_values['description'];
@@ -141,7 +144,15 @@ if (!empty($shortcodes)) {
 
     foreach ($class_values['classes'] as $class_key => $class_data) {
       $class_name =  Xss::filterAdmin($class_data['class']);
-      $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '</dd>';
+
+      // This is a test, very rough and should be generalized to allow any shortcode to supply an image.
+      if ($class_data['image'] && $class_type == 'patterns') {
+        $class_image = $subtheme_path . '/' . $class_data['image'];
+        $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '<div class="pattern-image-clip"><img class="pattern-image" src="/' . $class_image .  '" alt="Background image for the ' . $class_name .  ' pattern." /></div></dd>';
+      }
+      else {
+        $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '</dd>';
+      }
     }
 
     $form['shortcodes']['classes'][$class_type]['classlist'] = array(

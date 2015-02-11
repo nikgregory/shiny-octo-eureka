@@ -2,10 +2,10 @@
 // hidden. When toggled the menu opens in an overlay above the content
 // and fills the whole screen.
 
-@mixin overlay($toggle_position: (vert: top, hozr: right), $arrows: false) {
+@mixin overlay($toggle_position: (vert: top, horz: right), $arrows: false) {
 
   $vert: map-get($toggle_position, vert);
-  $hozr: map-get($toggle_position, hozr);
+  $horz: map-get($toggle_position, hozr);
 
   .ms-overlay {
 
@@ -17,7 +17,7 @@
       opacity: 0.5;
       background: rgba(0, 0, 0, 0.875);
       @include output-rhythm(#{$vert}, $medium);
-      @include output-rhythm(#{$hozr}, $medium);
+      @include output-rhythm(#{$horz}, $medium);
 
       span {
         @include visually-hidden;

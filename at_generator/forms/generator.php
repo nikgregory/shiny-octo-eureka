@@ -9,8 +9,6 @@ $sourceThemeOptions = $themeSettingsInfo->baseThemeOptions();
 $form['generate'] = array(
   '#type' => 'details',
   '#title' => 'Generator',
-  '#group' => 'generator',
-  //'#description' => t('Use this form to generate a new sub-theme.'),
   '#tree' => TRUE,
 );
 
@@ -18,7 +16,7 @@ $form['generate'] = array(
 $form['generate']['generate_friendly_name'] = array(
   '#type' => 'textfield',
   '#title' => t('Theme name'),
-  '#maxlength' => 30,
+  '#maxlength' => 50, // the maximum allowable length of a module or theme name.
   '#size' => 30,
   '#required' => TRUE,
   '#default_value' => '',
@@ -28,7 +26,7 @@ $form['generate']['generate_friendly_name'] = array(
 // Machine name.
 $form['generate']['generate_machine_name'] = array(
   '#type' => 'machine_name',
-  '#maxlength' => 30,
+  '#maxlength' => 50,
   '#size' => 30,
   '#title' => t('Machine name'),
   '#required' => TRUE,

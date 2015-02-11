@@ -13,7 +13,7 @@ use Drupal\at_core\Theme\ThemeData;
  * ThemeSettingsInfo declares methods used to return theme info for use in
  * theme-settings.php. Note the constructor calls system_rebuild_theme_data()
  * which is not statically cached therefor only used in the backend, however
- * it always returns fresh data, whereas list_themes() does not.
+ * it always returns fresh data.
  */
 class ThemeSettingsInfo extends ThemeInfo {
 

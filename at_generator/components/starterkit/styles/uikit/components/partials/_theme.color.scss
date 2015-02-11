@@ -142,7 +142,7 @@ hr {
 
 
 // Sub features
-.pr-subfeature {
+.pr-subfeatures {
   color: $page-subfeatures-color;
   @include page-row-background-color($page-subfeatures-background-color, $page-row-fullwidth);
 }
@@ -1046,12 +1046,9 @@ body {
 // States
 .node--promoted {}
 
-
 .node--sticky {
   background-color: $sticky-background-color;
 }
-
-.node--unpublished {}
 
 
 // View modes
@@ -1059,6 +1056,14 @@ body {
 .node--view-mode-teaser {}
 
 
+// Node image borders.
+.node {
+  img,
+  figure,
+  figure figcaption {
+    //border-color: $border-color;
+  }
+}
 
 
 

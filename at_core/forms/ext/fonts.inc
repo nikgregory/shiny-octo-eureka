@@ -37,11 +37,11 @@ function font_elements() {
       ),
       'sitename' => array(
         'label' => 'Site name',
-        'selector' => '.site-name, .site-name a',
+        'selector' => '.site-branding__name-link',
       ),
       'siteslogan' => array(
         'label' => 'Site slogan',
-        'selector' => '.site-slogan',
+        'selector' => '.site-branding__slogan',
       ),
       'pagetitle' => array(
         'label' => 'Page title',

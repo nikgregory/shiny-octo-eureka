@@ -52,11 +52,11 @@ $form['enable_extensions']['description'] = array(
   '#markup' => t('<p>Extensions are settings for configuring and styling your site. Enabled extensions appear in new vertical tabs.</p>'),
 );
 
-// Menus
+// Responsive Menus
 $form['enable_extensions']['settings_enable_responsive_menus'] = array(
   '#type' => 'checkbox',
   '#title' => t('Responsive menus'),
-  '#description' => t('Select responsive menu styles.'),
+  '#description' => t('Select responsive menu styles and breakpoints.'),
   '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
 );
 
@@ -65,7 +65,7 @@ $form['enable_extensions']['settings_enable_fonts'] = array(
   '#type' => 'checkbox',
   '#title' => t('Fonts'),
   '#default_value' => theme_get_setting('settings.enable_fonts', $theme),
-  '#description' => t('Apply fonts to site elements (page, titles, headings, menus and custom selectors). Supports websafe, custom stacks, Google fonts, and <a href="!link" target="_blank">Typekit fonts</a>.', array('!link' => 'https://typekit.com/')),
+  '#description' => t('Apply fonts to site elements. Supports <a href="!gflink" target="_blank">Google</a> and <a href="!tklink" target="_blank">Typekit</a> fonts, as well as standard websafe fonts.', array('!tklink' => 'https://typekit.com/', '!gflink' => 'https://www.google.com/fonts')),
 );
 
 // Title styles
@@ -73,7 +73,7 @@ $form['enable_extensions']['settings_enable_titles'] = array(
   '#type' => 'checkbox',
   '#title' => t('Title styles'),
   '#default_value' => theme_get_setting('settings.enable_titles', $theme),
-  '#description' => t('Set case, weight and alignment for site name and slogan, page, node, block and comment titles.'),
+  '#description' => t('Set case, weight and alignment for titles (headings).'),
 );
 
 // Image alignment and captions
@@ -81,43 +81,43 @@ $form['enable_extensions']['settings_enable_images'] = array(
   '#type' => 'checkbox',
   '#title' => t('Image alignment and captions'),
   '#default_value' => theme_get_setting('settings.enable_images', $theme),
-  '#description' => t('Set default image alignment, image captions and teaser image view.'),
+  '#description' => t('Set image alignment, captions and teaser view per content type.'),
+);
+
+// shortcodes
+$form['enable_extensions']['settings_enable_shortcodes'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Shortcode CSS Classes'),
+  '#description' => t('Adjust and enhance theme styles with pre-styled CSS classes.'),
+  '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
 // Touch icons
 $form['enable_extensions']['settings_enable_touch_icons'] = array(
   '#type' => 'checkbox',
   '#title' => t('Touch icons'),
-  '#description' => t('Check this setting if you want to use touch icons.'),
+  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>!touchiconpath</code>.', array('!touchiconpath' => $subtheme_path . '/images/touch-icons/')),
   '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
-);
-
-// shortcodes
-$form['enable_extensions']['settings_enable_shortcodes'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Add Classes'),
-  '#description' => t('Enter classes for page rows, regions, blocks, and per node type.'),
-  '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
 // Custom CSS
 $form['enable_extensions']['settings_enable_custom_css'] = array(
   '#type' => 'checkbox',
   '#title' => t('Custom CSS'),
-  '#description' => t('Enter custom CSS rules for minor adjustment to your theme. Useful if you do not want to build a sub-theme and need modifications to survive theme upgrades if required.'),
+  '#description' => t('Enter custom CSS rules for minor adjustment to your theme.'),
   '#default_value' => theme_get_setting('settings.enable_custom_css', $theme),
 );
 
 // Markup overrides
 $form['enable_extensions']['settings_enable_markup_overrides'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Markup overrides <small>(Breadcrumb, Login block, Hide comment titles, Skip links and Attribution message)</small>'),
-  '#description' => t('Many additional options for adding, removing, hiding and changing site elements and markup - includes settings and options for:
+  '#title' => t('Markup overrides'),
+  '#description' => t('Options for modifying output, includes settings for:
     <ul>
       <li>Breadcrumbs</li>
       <li>Login block</li>
       <li>Comment titles</li>
-      <li>Skip link target</li>
+      <li>Skip link</li>
       <li>Attribution</li>
     </ul>
     '),
@@ -136,7 +136,7 @@ $form['enable_extensions']['settings_enable_devel'] = array(
 $form['enable_extensions']['settings_enable_legacy_browsers'] = array(
   '#type' => 'checkbox',
   '#title' => t('Legacy browsers'),
-  '#description' => t('Settings to support really old browsers like IE8.'),
+  '#description' => t('Settings to support really old browsers like IE8. Use with caution, do not enable this unless you really need it.'),
   '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
 );
 

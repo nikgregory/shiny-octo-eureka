@@ -4,71 +4,97 @@
  * - advanced search form
  ========================================================================== */
 
-// Search block.
+// Search Block form.
 .block-search {
-  // Negate any chance of the wrong template being used, which might have the
-  // container-inline class applied to the wrapper.
+
+  .contextual-render-processed {
+    //display: none; // use to debug, this can get in the way.
+  }
+
+  // Mitigate any template inheritance failure which might have container
+  // inline set on the block.
   display: block;
 
-  // AT removes the container-inline class from search block as this adds unwanted
-  // display: inline styles, instead we use inline-block so we can add vertical
-  // margin and or padding etc.
+  form {
+    position: relative;
+  }
+
  .form-type-search,
  .form-actions {
-    display: inline-block;
-    @include output-rhythm(margin, $xx-small 0);
+    display: inline;
+    @include output-rhythm(margin, 0 0 $xx-small);
   }
-}
 
-
-// Search form on the /search page
-.search-form .container-inline label {
-  display: inline-block;
-}
-
-
-// Full structure of the form.
-.form-type-search {
-
-  //visually-hidden by default
-  label {}
-
-  input.form-search {}
+ .form-search {
+    width: 100%;
+    @include output-rhythm(padding-#{$flow-to}, 35px);
+  }
 
   .form-actions {
-    input.button {}
+    position: absolute;
+    top: 0;
+    #{$flow-to}: 0;
+    z-index: 1;
+  }
+
+  // Search block input sumbit text removed, uses an SVG
+  // icon instead.
+  .form-submit {
+    margin: 0;
+    padding: 0;
+    @include output-rhythm(width, 32px);
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+    cursor: pointer;
+    background-image: url(../images/search-icon.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 }
 
 
-
-// Advanced Search Form.
+// Search Page form.
 .search-page-form {
 
-  #edit-basic {
+  // Basic search.
+  .search-basic {
     display: block;
 
-    .form-type-search {
-      display: inline; // Collapse the div wrapper
+    label {
+      display: block;
+      @include output-rhythm(margin, 0 0 $xx-small);
     }
 
+    .form-type-search,
     .form-search {
-      display: inline-block;
-      min-width: 75%;
+      display: block;
+      width: 100%;
       @include output-rhythm(margin, $xx-small 0);
     }
   }
 
+  // Advanced search.
   .search-advanced {
+    .details-wrapper {
+      // Hide visually redundant legends. This must be very specific so as not to remove
+      // required legends as well, hence the child selectors and over-specification.
+      > fieldset > legend {
+        @include visually-hidden;
+      }
+    }
 
     .form-text {
       min-width: 75%;
     }
 
-    .details-wrapper {
-      > fieldset > legend {
-        display: none; // Remove redundant legends. This is a bit dangerous.
-      }
+    .form-item,
+    .form-radios,
+    .form-checkboxes {
+      @include output-rhythm(margin-bottom, $xx-small);
     }
   }
 }
