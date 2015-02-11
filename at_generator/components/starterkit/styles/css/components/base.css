@@ -536,7 +536,6 @@ textarea:invalid {
 .form-type-radio label.option:focus, .form-type-radio label.option:hover,
 .form-type-checkbox label.option:focus,
 .form-type-checkbox label.option:hover {
-  background-color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
 }
 
@@ -979,8 +978,8 @@ figure.align-right {
 }
 img.align-center,
 figure.align-center {
-  margin: 0 0 16px;
-  margin: 0 0 1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 img[class*="align-"],
 figure[class*="align-"] {
@@ -1849,38 +1848,42 @@ table tr.error {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-.field-type-image.align-none .field__label, .field-type-image.align-none figure, .field-type-image.align-left .field__label, .field-type-image.align-left figure {
+.field-type-image figure.align-none,
+.field-type-image figure.align-left,
+.field-type-image .field__label.align-none,
+.field-type-image .field__label.align-left {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
 }
-.field-type-image.align-none figcaption, .field-type-image.align-left figcaption {
+.field-type-image .align-none figcaption,
+.field-type-image .align-left figcaption {
   text-align: left;
 }
-.field-type-image.align-center .field__label, .field-type-image.align-center figure {
+.field-type-image .field__label.align-center,
+.field-type-image figure.align-center {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-.field-type-image.align-center figure {
+.field-type-image figure.align-center {
   display: table;
 }
-.field-type-image.align-right .field__label, .field-type-image.align-right figure {
+.field-type-image .field__label.align-right,
+.field-type-image figure.align-right {
   margin: 0 0 16px 16px;
   margin: 0 0 1rem 1rem;
 }
-.field-type-image.align-right figcaption {
+.field-type-image .align-right figcaption {
   text-align: left;
 }
-.field-type-image.float-none {
+.field-type-image figure.float-none {
   float: none !important;
-}
-.field-type-image.float-none figure {
   margin-right: 0 !important;
   margin-left: 0 !important;
 }
-.field-type-image[class*="align-"] + .field-type-image {
+.field-type-image + .field-type-image .field__label {
   clear: both;
 }
 
@@ -2021,6 +2024,13 @@ table tr.error {
 }
 .node__footer:after {
   clear: both;
+}
+
+/**
+ * User forms, e.g. login, register, request password, user login block form.
+ ========================================================================== */
+.user-login-form .form-text {
+  width: 100%;
 }
 
 /**

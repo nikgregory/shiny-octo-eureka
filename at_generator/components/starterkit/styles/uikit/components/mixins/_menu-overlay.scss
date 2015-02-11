@@ -5,7 +5,7 @@
 @mixin overlay($toggle_position: (vert: top, horz: right), $arrows: false) {
 
   $vert: map-get($toggle_position, vert);
-  $horz: map-get($toggle_position, hozr);
+  $horz: map-get($toggle_position, horz);
 
   .ms-overlay {
 

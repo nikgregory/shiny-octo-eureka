@@ -250,13 +250,13 @@
 .ms-flipslide .rm-block {
   position: relative;
 }
-.ms-flipslide .rm-toggle {
+.ms-flipslide .rm-toggle.block-menu__title {
   position: absolute;
   right: 0;
   z-index: 200;
   padding: 0;
 }
-.ms-flipslide .rm-toggle:after {
+.ms-flipslide .rm-toggle.block-menu__title:after {
   display: block;
   font-family: FontAwesome, sans-serif;
   content: "";
@@ -265,7 +265,7 @@
   padding: 7px 16px;
   padding: 0.43162rem 1rem;
 }
-.ms-flipslide .rm-toggle span {
+.ms-flipslide .rm-toggle.block-menu__title span {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
@@ -418,6 +418,12 @@
   padding: 0;
   word-wrap: normal;
   font: 0/0 a;
+}
+
+.ms-offcanvas .menu a,
+.ms-slidedown .menu a {
+  margin-bottom: 2px;
+  margin-bottom: 0.125rem;
 }
 
 .rm-block {

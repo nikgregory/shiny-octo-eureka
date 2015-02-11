@@ -16,34 +16,76 @@
 .block-search {
   display: block;
 }
+.block-search form {
+  position: relative;
+}
 .block-search .form-type-search,
 .block-search .form-actions {
-  display: inline-block;
-  margin: 7px 0;
-  margin: 0.43162rem 0;
+  display: inline;
+  margin: 0 0 7px;
+  margin: 0 0 0.43162rem;
+}
+.block-search .form-search {
+  width: 100%;
+  padding-right: 35px;
+  padding-right: 2.1875rem;
+}
+.block-search .form-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.block-search .form-submit {
+  margin: 0;
+  padding: 0;
+  width: 32px;
+  width: 2rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  cursor: pointer;
+  background-image: url(../images/search-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.search-form .container-inline label {
-  display: inline-block;
-}
-
-.search-page-form #edit-basic {
+.search-page-form .search-basic {
   display: block;
 }
-.search-page-form #edit-basic .form-type-search {
-  display: inline;
+.search-page-form .search-basic label {
+  display: block;
+  margin: 0 0 7px;
+  margin: 0 0 0.43162rem;
 }
-.search-page-form #edit-basic .form-search {
-  display: inline-block;
-  min-width: 75%;
+.search-page-form .search-basic .form-type-search,
+.search-page-form .search-basic .form-search {
+  display: block;
+  width: 100%;
   margin: 7px 0;
   margin: 0.43162rem 0;
+}
+.search-page-form .search-advanced .details-wrapper > fieldset > legend {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
 }
 .search-page-form .search-advanced .form-text {
   min-width: 75%;
 }
-.search-page-form .search-advanced .details-wrapper > fieldset > legend {
-  display: none;
+.search-page-form .search-advanced .form-item,
+.search-page-form .search-advanced .form-radios,
+.search-page-form .search-advanced .form-checkboxes {
+  margin-bottom: 7px;
+  margin-bottom: 0.43162rem;
 }
 
 /*# sourceMappingURL=search.css.map */
