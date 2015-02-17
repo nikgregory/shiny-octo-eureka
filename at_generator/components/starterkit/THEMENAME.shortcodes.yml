@@ -49,6 +49,54 @@ layout:
       class: lc-two-thirds
       description: 'Element will be two thirds the container width.'
 
+whitespace:
+  name: 'Whitespace control'
+  description: 'Remove padding and margin. Useful if you want a containers contents to fill the entire container, e.g. remove block and region margin and padding.'
+  elements:
+    - blocks
+    - regions
+    - rows
+  classes:
+    spaceless:
+      class: spaceless
+      description: 'Remove all padding and margin from all wrappers. Use with caution, e.g. rows use margin auto for centering.'
+    remove-padding-vert:
+      class: rm-pad-vert
+      description: 'Remove top, bottom padding.'
+    remove-padding-top:
+      class: rm-pad-top
+      description: 'Remove top padding.'
+    remove-padding-right:
+      class: rm-pad-bot
+      description: 'Remove bottom padding.'
+    remove-padding-hoz:
+      class: rm-pad-hoz
+      description: 'Remove left, right padding.'
+    remove-padding-left:
+      class: rm-pad-left
+      description: 'Remove left padding.'
+    remove-padding-right:
+      class: rm-pad-right
+      description: 'Remove right padding.'
+    remove-margin-vert:
+      class: rm-marg-vert
+      description: 'Remove top, bottom margin.'
+    remove-margin-top:
+      class: rm-marg-top
+      description: 'Remove top margin.'
+    remove-margin-right:
+      class: rm-marg-bot
+      description: 'Remove bottom margin.'
+    remove-margin-hoz:
+      class: rm-marg-hoz
+      description: 'Remove left, right margin.'
+    remove-margin-left:
+      class: rm-marg-left
+      description: 'Remove left margin.'
+    remove-margin-right:
+      class: rm-marg-right
+      description: 'Remove right margin.'
+
 grid-blocks:
   name: Block Grid
   description: 'Layout blocks in a grid. Apply to full width regions only. A good alternative is to build a View with the format "Grid".'
@@ -78,16 +126,66 @@ grid-blocks:
       class: 'grid-block-12'
       description: 'Twelve grid columns.'
 
+rounded-corners:
+  name: 'Rounded Corners'
+  description: 'Add rounded corners (border radius). Rounded corners will automatically apply to form elements, tabs etc depending on your theme (e.g. the search block form). You can set a global border radius on the <code>body</code>, then override it in regions or blocks.'
+  elements:
+    - blocks
+    - regions
+    - body
+  classes:
+    rc-2:
+      class: 'rc-2'
+      description: 'Border radius 2px'
+    rc-3:
+      class: 'rc-3'
+      description: 'Border radius 3px'
+    rc-4:
+      class: 'rc-4'
+      description: 'Border radius 4px'
+    rc-5:
+      class: 'rc-5'
+      description: 'Border radius 5px'
+    rc-6:
+      class: 'rc-6'
+      description: 'Border radius 6px'
+    rc-7:
+      class: 'rc-7'
+      description: 'Border radius 7px'
+    rc-8:
+      class: 'rc-8'
+      description: 'Border radius 8px'
+    rc-9:
+      class: 'rc-9'
+      description: 'Border radius 9px'
+    rc-10:
+      class: 'rc-10'
+      description: 'Border radius 10px'
+    rc-12:
+      class: 'rc-12'
+      description: 'Border radius 12px'
+    rc-15:
+      class: 'rc-15'
+      description: 'Border radius 15px'
+    rc-20:
+      class: 'rc-20'
+      description: 'Border radius 20px'
 
-
-
-
-
-
-
-#font-awesome:
-#  name: 'Font Awesome'
-#  classes:
-#    arrow_down:
-#      class: 'fa-arrow-down'
-#      description: 'Arrow down'
+menu-bullets:
+  name: 'Menu Bullets'
+  description: 'Add font-icon arrows to collapsed and uncollapsed menu items.'
+  elements:
+    - 'menu blocks'
+  classes:
+    fa-arrow:
+      class: 'fa-arrow'
+      description: 'Simple arrows.'
+    fa-caret:
+      class: 'fa-caret'
+      description: 'Simple carets.'
+    fa-angle-double:
+      class: 'fa-angle-double'
+      description: 'Double angle (default with nothing applied is single angle).'
+    fa-chevron:
+      class: 'fa-chevron'
+      description: 'Chevron.'

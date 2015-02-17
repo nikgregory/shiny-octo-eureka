@@ -61,6 +61,65 @@
     width: 66.6667%;
   }
 }
+.spaceless {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  max-height: none;
+}
+
+.rm-pad-vert {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.rm-pad-top {
+  padding-top: 0;
+}
+
+.rm-pad-bot {
+  padding-bottom: 0;
+}
+
+.rm-pad-hoz {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.rm-pad-right {
+  padding-right: 0;
+}
+
+.rm-pad-left {
+  padding-left: 0;
+}
+
+.rm-marg-vert {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.rm-marg-top {
+  margin-top: 0;
+}
+
+.rm-marg-bot {
+  margin-bottom: 0;
+}
+
+.rm-marg-hoz {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.rm-marg-right {
+  margin-right: 0;
+}
+
+.rm-marg-left {
+  margin-left: 0;
+}
+
 @media all and (max-width: 60em) {
   .grid-block-2 .block {
     width: 49.15254%;
@@ -539,4 +598,5 @@
 .ms-dropmenu .fa-chevron .rm-block__content .odd ul > .collapsed > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=shortcodes.css.map */
