@@ -1,6 +1,6 @@
 # Window size widget (AT Core)
 at.windowsize:
-  version: 1.0.0
+  version: VERSION
   css:
     component:
       styles/css/at.windowSize.css: {}
@@ -60,7 +60,7 @@ at.fastclick:
   dependencies:
     - core/jquery
 
-# Fastclick
+# Fastclick initialize
 at.fastclick_initialize:
   version: 1.0.3
   js:
@@ -72,10 +72,10 @@ at.fastclick_initialize:
 # Breakpoints
 at.breakpoints:
   #header: true
-  version: 1.0.0
+  version: VERSION
   js:
     scripts/min/at.breakpoints.min.js: { minified: true }
-    #scripts/at.breakpoints.js: { }
+    #scripts/at.breakpoints.js: {}
   dependencies:
     - core/jquery
     - core/drupal
@@ -85,17 +85,39 @@ at.breakpoints:
 
 # Responsive Menus
 at.responsivemenus:
-  #header: true
-  version: 1.0.0
+  version: VERSION
   js:
     scripts/min/at.responsiveMenus.min.js: { minified: true }
-    #scripts/at.responsiveMenus.js: { }
+    #scripts/at.responsiveMenus.js: {}
   dependencies:
     - core/jquery
     - core/drupal
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+
+# Slidedshow
+at.slideshow:
+  version: 2.3.0
+  js:
+    scripts/min/jquery.flexslider.min.js: { minified: true }
+    scripts/min/at.flexsliderSettings.min.js: { minified: true }
+    #scripts/jquery.flexslider.js: {}
+    #scripts/at.flexsliderSettings.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+
+# Video - responsive YouTube and Vimeo iframes. This is pretty rough
+# and only works OK, the CSS method in the UIKit is better.
+at.responsivevideo:
+  version: VERSION
+  js:
+    scripts/at.responsiveVideo.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
 
 # Respond TODO: test with respond in IE8.
 at.respond:
@@ -132,26 +154,26 @@ at.yui3:
 
 # AT Core libs for theme dev.
 at.devel_debug_layout:
-  version: 0.0.1
+  version: VERSION
   css:
     theme:
       styles/css/at.devel.debug.layout.css: {}
 
 at.devel_colorize_regions:
-  version: 0.0.1
+  version: VERSION
   css:
     theme:
       styles/css/at.devel.colorize.regions.css: {}
 
 at.devel_nuke_toolbar:
-  version: 0.0.1
+  version: VERSION
   css:
     theme:
       styles/css/at.devel.nuke.toolbar.css: {}
 
 # Appearance settings scripts
 at.appearance_settings:
-  version: 0.0.1
+  version: VERSION
   css:
     theme:
       styles/css/at.appearance.css: {}
