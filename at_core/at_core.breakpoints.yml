@@ -14,14 +14,14 @@
 at_core.simple.tablet-isolate:
   label: Tablet-isolate
   mediaQuery: 'all and (min-width: 45em) and (max-width: 60em)'
-  weight: 0
+  weight: 1
   multipliers:
     - 1x
   group: at_core.simple
 at_core.simple.wide:
   label: Wide
   mediaQuery: 'all and (min-width: 60.063em)'
-  weight: 1
+  weight: 0
   multipliers:
     - 1x
   group: at_core.simple
@@ -59,7 +59,7 @@ at_core.simple.wide:
 at_core.advanced.mobile-isolate:
   label: Mobile-isolate
   mediaQuery: 'all and (max-width: 45em)'
-  weight: 0
+  weight: 4
   multipliers:
     - 1x
   group: at_core.advanced
@@ -67,7 +67,7 @@ at_core.advanced.mobile-isolate:
 at_core.advanced.tablet-isolate:
   label: Tablet-isolate
   mediaQuery: 'all and (min-width: 45.063em) and (max-width: 60em)'
-  weight: 1
+  weight: 3
   multipliers:
     - 1x
   group: at_core.advanced
@@ -82,14 +82,14 @@ at_core.advanced.wide-isolate:
 at_core.advanced.wide:
   label: Wide
   mediaQuery: 'all and (min-width: 60.063em)'
-  weight: 3
+  weight: 1
   multipliers:
     - 1x
   group: at_core.advanced
 at_core.advanced.huge:
   label: Huge
   mediaQuery: 'all and (min-width: 120.063em)'
-  weight: 4
+  weight: 0
   multipliers:
     - 1x
   group: at_core.advanced
@@ -109,14 +109,34 @@ at_core.advanced.huge:
 at_core.responsive_menus.mobile:
   label: Mobile
   mediaQuery: 'all and (max-width: 60em)'
-  weight: 0
+  weight: 1
   multipliers:
     - 1x
   group: at_core.responsive_menus
 at_core.responsive_menus.max-width:
   label: Max-width
   mediaQuery: 'all and (max-width: 75em)'
-  weight: 1
+  weight: 0
   multipliers:
     - 1x
   group: at_core.responsive_menus
+
+
+# Test providing a breakpoint for group matching the group provided by
+# breakpoint_test_theme.
+# breakpoint_module_test.breakpoint_theme_test.group2.tv:
+#   label: tv
+#   mediaQuery: '(min-width: 6000px)'
+#   weight: 0
+#   multipliers:
+#     - 1x
+#   group: breakpoint_theme_test.group2
+
+
+
+
+
+
+
+
+
