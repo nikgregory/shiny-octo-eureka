@@ -155,22 +155,22 @@ function at_core_page_attachments_alter(array &$page) {
       $page['#attached']['library'][] = "at_core/at.responsivemenus";
       $page['#attached']['library'][] = "$theme/responsive_menus";
 
-      $drupalSettings = array();
+      $responsivemenu_settings = array();
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
-        $drupalSettings['bp'] = $config['responsive_menu_breakpoint'];
+        $responsivemenu_settings['bp'] = $config['responsive_menu_breakpoint'];
       }
 
       // Loop the config settings and build an array for drupalSettings.
       foreach (array('default', 'responsive') as $style) {
         if (isset($config['responsive_menu_' . $style . '_style'])) {
-          $drupalSettings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
+          $responsivemenu_settings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
         }
       }
 
       // Attach JS settings.
-      $page['#attached']['drupalSettings']['at_rm'] = $drupalSettings;
+      $page['#attached']['drupalSettings']['at_rm'] = $responsivemenu_settings;
     }
 
     // Attach polyfills to support IE8.
@@ -178,6 +178,94 @@ function at_core_page_attachments_alter(array &$page) {
       if (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.respond';
         $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
+      }
+    }
+
+    // Load slideshow files
+    if (isset($config['enable_slideshows']) && $config['enable_slideshows'] == 1) {
+
+      // Get config settings and jam them into drupalSettings.
+      if (isset($config['slideshow_count']) && $config['slideshow_count'] >= 1) {
+
+        $basic_slider_settings = array(
+          'animation',
+          'direction',
+          'smoothheight',
+          'slideshowspeed',
+          'animationspeed',
+          'controlnav',
+          'directionnav',
+        );
+
+        $carousel_settings = array(
+          'as_carousel',
+          'itemwidth',
+          'itemmargin',
+          'minitems',
+          'maxitems',
+          'move',
+        );
+
+        $advanced_slider_settings = array(
+          'pauseonaction',
+          'pauseonhover',
+          'animationloop',
+          'reverse',
+          'randomize',
+          'autostart', // Flexslider calls this "slideshow"
+          'initdelay',
+          'easing',
+          'usecss',
+          'touch',
+          'video',
+          'prevtext',
+          'nexttext',
+          'selector',
+        );
+
+        for ($i = 0; $i < $config['slideshow_count']; $i++) {
+
+          // Set the initialaztion class and this slideshows key
+          $ss_class = Html::getClass($theme . '-slideshow-' . $i);
+          $slider_settings[$ss_class]['classname'] = $ss_class;
+
+          if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] == 1) {
+
+            // Basic settings
+            foreach ($basic_slider_settings as $basic_slider_setting) {
+              if (isset($config['slideshow_' . $i . '_' . $basic_slider_setting])) {
+                $slider_settings[$ss_class][$basic_slider_setting] = $config['slideshow_' . $i . '_' . $basic_slider_setting];
+              }
+            }
+
+            // As Carousel
+            if (isset($config['slideshow_' . $i . '_as_carousel']) && $config['slideshow_' . $i . '_as_carousel'] == 1) {
+              foreach ($carousel_settings as $carousel_setting) {
+                if (isset($config['slideshow_' . $i . '_' . $carousel_setting])) {
+                  $slider_settings[$ss_class][$carousel_setting] = $config['slideshow_' . $i . '_' . $carousel_setting];
+                }
+              }
+
+              // Reset options for carousels, fade won't work and vertical causes issues with Flexslider.
+              $slider_settings[$ss_class]['animation'] = 'slide';
+              $slider_settings[$ss_class]['direction'] = 'horizonal';
+            }
+
+            // Advanced options
+            if (isset($config['slideshow_' . $i . '_advanced_options']) && $config['slideshow_' . $i . '_advanced_options'] == 1) {
+              foreach ($advanced_slider_settings as $advanced_slider_setting) {
+                if (isset($config['slideshow_' . $i . '_' . $advanced_slider_setting])) {
+                  $slider_settings[$ss_class][$advanced_slider_setting] = $config['slideshow_' . $i . '_' . $advanced_slider_setting];
+                }
+              }
+            }
+          }
+        }
+
+        // Attach JS settings.
+        $page['#attached']['drupalSettings']['at_ss'] = $slider_settings;
+        $page['#attached']['library'][] = 'at_core/at.slideshow';
+        $page['#attached']['library'][] = "$theme/slideshow_styles";
       }
     }
   }
@@ -601,6 +689,8 @@ function at_core_preprocess_node(&$variables) {
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
 
+  //kpr($variables['content']['field_images_2']['#items']);
+
   // shortcodes classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
@@ -973,6 +1063,35 @@ function at_core_preprocess_menu(&$variables) {
   }
 }
 
+
+/**
+ * Preprocess variables for feed icons.
+ * TODO remove when https://www.drupal.org/node/2426967 lands so we can have a svg background image instead.
+ */
+function at_core_preprocess_feed_icon(&$variables) {
+  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
+
+  $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
+
+  // Replace the png icon with a nice svg icon.
+  $variables ['icon'] = array(
+    '#theme' => 'image__feed_icon',
+    '#uri' => $path_to_theme . '/images/rss.svg', // move to CSS images when the patch lands.
+    '#width' => 16,
+    '#height' => 16,
+    '#alt' => $text,
+  );
+}
+
+
+
+
+
+
+
+
+
+
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
 
@@ -1030,3 +1149,21 @@ function at_core_form_search_form_alter(&$form, \Drupal\Core\Form\FormStateInter
   $form['basic']['#attributes']['class'] = 'search-basic';
 }
 */
+
+
+// Debug code to remember
+/*
+if ( $something ) {
+  debug(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10));
+}
+*/
+
+
+
+
+
+
+
+
+
+
