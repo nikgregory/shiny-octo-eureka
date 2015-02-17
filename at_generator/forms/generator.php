@@ -10,6 +10,7 @@ $form['generate'] = array(
   '#type' => 'details',
   '#title' => 'Generator',
   '#tree' => TRUE,
+  '#group' => 'generator',
 );
 
 // Friendly name.

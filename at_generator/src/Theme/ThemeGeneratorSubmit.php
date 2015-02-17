@@ -321,7 +321,7 @@ class ThemeGeneratorSubmit {
     $generated_path = drupal_get_path('theme', $machine_name);
 
 
-    drupal_set_message(t("<p>A new theme <b>!theme_name</b> (machine name: <em>\"!machine_name\"</em>) has been generated.</p>", array('!theme_name' => $friendly_name, '!machine_name' => $machine_name, '!theme_path' => $generated_path, '!performance_settings' => base_path() . 'admin/config/development/performance')), 'status');
+    drupal_set_message(t("<p>A new theme <b>@theme_name</b>, with then machine name: <code>@machine_name</code>, has been generated.</p>", array('@theme_name' => $friendly_name, '@machine_name' => $machine_name, '@theme_path' => $generated_path, '@performance_settings' => base_path() . 'admin/config/development/performance')), 'status');
 
 
 /*
