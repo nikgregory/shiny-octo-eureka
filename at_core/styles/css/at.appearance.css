@@ -619,6 +619,20 @@
   background-color: #fff;
   overflow: hidden;
 }
+/* line 220, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-slideshows label {
+  display: inline-block;
+  width: 12rem;
+}
+/* line 227, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-slideshows .form-type-checkbox label,
+.admin-theme--seven #edit-slideshows .form-type-textarea label {
+  width: auto;
+}
+/* line 233, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-carousels {
+  margin: 0;
+}
 
 /* line 4, ../sass/_appearance.basic.scss */
 .admin-theme--seven #edit-basic-settings {

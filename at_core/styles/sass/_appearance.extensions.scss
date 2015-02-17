@@ -214,6 +214,24 @@
     overflow: hidden;
   }
 
-}
 
+  // Slideshows
+  #edit-slideshows {
+    label {
+      display: inline-block;
+      width: 12rem;
+    }
+
+    .form-type-checkbox,
+    .form-type-textarea {
+      label {
+        width: auto;
+      }
+    }
+  }
+
+  #edit-carousels {
+    margin: 0;
+  }
+}
 
