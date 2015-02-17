@@ -3,18 +3,22 @@
  *  - comment field (holds comment title, form, comments etc)
  *  - styles for comments
  ========================================================================== */
-.field-node--comment {
+.field-type-comment {
   clear: both;
 }
-.field-node--comment {
+.field-type-comment {
   zoom: 1;
 }
-.field-node--comment:before, .field-node--comment:after {
+.field-type-comment:before, .field-type-comment:after {
   content: "";
   display: table;
 }
-.field-node--comment:after {
+.field-type-comment:after {
   clear: both;
+}
+.field-type-comment .indented {
+  margin-left: 42px;
+  margin-left: 2.61803rem;
 }
 
 .comment {
@@ -31,5 +35,4 @@
 .comment__author {
   display: inline;
 }
-
 /*# sourceMappingURL=comments.css.map */

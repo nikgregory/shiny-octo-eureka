@@ -6,11 +6,21 @@
 
 // Typically comments are attached to nodes - this is the main
 // wrapper around comments and the comment form in nodes, on
-// a standard Drupal install.
-.field-node--comment {
+// a standard Drupal install which uses the mores specific class
+// .field-node--comment {}
+.field-type-comment {
   @include clearfix-micro;
   clear: both;
+
+  .indented {
+    @include output-rhythm(margin-#{$flow-from}, $xxx-large);
+  }
 }
+
+
+// Comment field on node content types.
+.field-node--comment {}
+
 
 .comment-field__title {} // typically this says 'Comments'.
 

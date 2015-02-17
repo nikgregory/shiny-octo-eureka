@@ -60,8 +60,10 @@
 
 // .l-pr is a layout class on each page row outer wrapper.
 .l-pr {
-  padding: 0 2%;
-  padding: 0 2vw;
+  // You can set padding here to avoid browser chrome colisions, if required.
+  // The viewport width (vw) unit is very useful here, but not all browsers support it.
+  //padding: 0 2%;
+  //padding: 0 2vw;
 }
 
 
@@ -69,7 +71,10 @@
 //  - .l-rw is the main layout wrapper selector for all regions within a row. The layout system
 //           uses this wrapper and selector extensively.
 //  - .region is a theme component class for adding styles like backgrounds etc.
-.l-rw {}
+.l-rw {
+  @include output-rhythm(padding, 0 $medium);
+}
+
 .region {}
 
 
@@ -100,5 +105,22 @@
     text-decoration: none;
     @include adjust-font-size-to($small);
   }
+}
+
+
+// Feed icon
+// TODO: Convert to background image when https://www.drupal.org/node/2426967 lands
+.feed-icons {}
+
+// Feed icon link
+.feed-icon {
+  opacity: 0.5;
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+
+  img {}
 }
 

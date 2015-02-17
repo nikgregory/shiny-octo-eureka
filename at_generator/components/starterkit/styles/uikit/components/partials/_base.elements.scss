@@ -86,12 +86,37 @@ h4 small, .h4 small {@include adjust-font-size-to($medium)}
 p {}
 
 
-// Flexible images
+// Media.
 img {
   height: auto;
   line-height: 0;
-  max-width: 100%;
   display: inline-block;
+}
+
+
+// Flexible responsive media elements.
+img,
+embed,
+object,
+video {
+  max-width: 100%;
+}
+
+
+// Video element gets width 100%, slightly dangerous.
+video {
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+// Remove the gap between images, videos, audio and canvas and the bottom of
+// their containers: h5bp.com/i/440
+img,
+audio,
+canvas,
+video {
+  vertical-align: middle;
 }
 
 
@@ -99,16 +124,6 @@ img {
 figcaption {
   @include adjust-font-size-to($small);
   @include output-rhythm(padding, $xx-small 0);
-}
-
-
-// Remove the gap between images, videos, audio and canvas and the bottom of
-// their containers: h5bp.com/i/440
-audio,
-canvas,
-img,
-video {
-  vertical-align: middle;
 }
 
 
