@@ -92,6 +92,14 @@ $form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
+// slideshows
+$form['enable_extensions']['settings_enable_slideshows'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Slideshows'),
+  '#description' => t('Enabled and configure slideshows and settings.'),
+  '#default_value' => theme_get_setting('settings.enable_slideshows', $theme),
+);
+
 // Touch icons
 $form['enable_extensions']['settings_enable_touch_icons'] = array(
   '#type' => 'checkbox',
@@ -153,6 +161,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'images',
     'touch_icons',
     'shortcodes',
+    'slideshows',
     'custom_css',
     'markup_overrides',
     'devel',
