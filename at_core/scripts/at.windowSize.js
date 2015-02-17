@@ -14,10 +14,10 @@
         // Get breakpoints from drupalSettings
         var bp = settings['at_bp'];
 
-        var indicator = $('<div class="window-size-indicator wsi" />').appendTo(this);
-        var indicator_px = $('<div class="wsi__px" />').appendTo(indicator);
-        var indicator_em = $('<div class="wsi__em" />').appendTo(indicator);
-        var indicator_bp = $('<div class="wsi__bp" />').appendTo(indicator);
+        var indicator = $('<div class="window-size-indicator wsi" />').appendTo(this),
+            indicator_px = $('<div class="wsi__px" />').appendTo(indicator),
+            indicator_em = $('<div class="wsi__em" />').appendTo(indicator),
+            indicator_bp = $('<div class="wsi__bp" />').appendTo(indicator);
 
         // Bind to the window.resize event to continuously update the width.
         $(window).bind('resize.window-size-indicator', function () {
@@ -38,9 +38,11 @@
         }
 
         for (var item in bp) {
-          var breakpoint_label = item;
-          var breakpoint_query = bp[item];
-          registerEnquire(breakpoint_label, breakpoint_query);
+          if (bp.hasOwnProperty(item)) {
+            var breakpoint_label = item,
+                breakpoint_query = bp[item];
+            registerEnquire(breakpoint_label, breakpoint_query);
+          }
         }
       });
     }

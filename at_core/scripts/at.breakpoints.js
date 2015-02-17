@@ -28,9 +28,11 @@
       }
 
       for (var item in bp) {
-        var breakpoint_label = item;
-        var breakpoint_query = bp[item];
-        registerEnquire(breakpoint_label, breakpoint_query);
+        if (bp.hasOwnProperty(item)) {
+          var breakpoint_label = item,
+              breakpoint_query = bp[item];
+          registerEnquire(breakpoint_label, breakpoint_query);
+        }
       }
     }
   };

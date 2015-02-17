@@ -12,11 +12,9 @@
         return;
       }
 
-      //console.log(settings);
-
-      var rm = settings['at_rm'];
-      var def = rm['default'];
-      var resp = rm['responsive'];
+      var rm = settings['at_rm'],
+          def = rm['default'],
+          resp = rm['responsive'];
 
       // Toggle handler.
       function toggleClick(e) {
