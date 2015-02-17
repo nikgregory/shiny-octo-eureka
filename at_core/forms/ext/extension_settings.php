@@ -84,7 +84,7 @@ $form['enable_extensions']['settings_enable_images'] = array(
   '#description' => t('Set image alignment, captions and teaser view per content type.'),
 );
 
-// shortcodes
+// Shortcodes
 $form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#type' => 'checkbox',
   '#title' => t('Shortcode CSS Classes'),
@@ -92,11 +92,11 @@ $form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
-// slideshows
+// Slideshows
 $form['enable_extensions']['settings_enable_slideshows'] = array(
   '#type' => 'checkbox',
   '#title' => t('Slideshows'),
-  '#description' => t('Enabled and configure slideshows and settings.'),
+  '#description' => t('Enable slideshows and configure settings.'),
   '#default_value' => theme_get_setting('settings.enable_slideshows', $theme),
 );
 
