@@ -42,23 +42,35 @@
 .comment__new {}
 
 
-// Submitted
+// Submitted selectors, meta comes first as we may override meta if user picture
+// is showing.
 .comment__meta {}
 
+
+// Comment author link, uses the <address> element.
 .comment__author {
   display: inline;
 }
 
+
+// <time> element
 .comment__datetime {}
 
+
+// Submitted wrapper
 .comment__submitted {
+
+  // <figure> wrapper
+  .field-type-image__figure {}
+
   // User picture.
   .field-type--image {
     img {}
   }
 
-  // Conditional class: if user picture?
-  &.comment__submitted--user-picture {}
+  // Conditional selectors: if user picture showing.
+  &--has-user-picture {}
+  &.comment__submitted--has-user-picture {}
 }
 
 
@@ -80,6 +92,8 @@
 .comment-form-wrapper {}
 .comment-form__title {}
 .comment-form {}
+
+
 
 
 
