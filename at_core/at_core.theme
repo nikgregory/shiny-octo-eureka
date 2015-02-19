@@ -751,7 +751,7 @@ function at_core_preprocess_node(&$variables) {
 
     // add a class if author picture is printing.
     if ($author_picture = drupal_render($variables['author_picture'])) {
-      // this fails if twig debugging is on. TODO ?
+      // Does this fails if twig debugging is on. TODO ?
       if (!empty($author_picture)) {
         $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
       }
@@ -777,24 +777,12 @@ function at_core_preprocess_comment(&$variables) {
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
-  // Clean up user picture and add has class.
-  // TODO: review before release: https://www.drupal.org/node/2247677
-  // TODO: recheck what we are doing with node user pictures?
-  if (theme_get_setting('features.comment_user_picture')) {
-    $user_picture = user_view($account, 'compact');
-
-    // Get rid of the user article wrapper when there is a user picture and
-    // output nothing when there isn't.
-    if (array_key_exists('#items', $user_picture['user_picture'])) {
-      $variables['user_picture'] = $user_picture['user_picture'];
+  // add a class if user picture is printing.
+  if ($user_picture = drupal_render($variables['user_picture'])) {
+    // Does this fails if twig debugging is on. TODO ?
+    if (!empty($user_picture)) {
       $variables['submitted_attributes']['class'][] = 'comment__submitted--has-user-picture';
     }
-    else {
-      $variables['user_picture'] = array();
-    }
-  }
-  else {
-    $variables['user_picture'] = array();
   }
 
   // Hide comment titles.
