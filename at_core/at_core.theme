@@ -441,14 +441,16 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }
       break;
 
-    case 'search_block_form':
+    //case 'search_block_form':
       // Add the missing 'search-block-form' class.
       //$form['#attributes']['class'][] = 'search-block-from';
 
       // Remove the size value.
-      $form['keys']['#size'] = '';
+      //$form['keys']['#size'] = '';
+      //$form['keys']['#attributes']['results'] = 3;
+      //$form['keys']['#attributes']['autosave'] = $theme . '-search-results-form-submissions';
       //kpr($form);
-      break;
+      //break;
 
     case 'search_form':
       // Add the missing 'search-basic' class.
