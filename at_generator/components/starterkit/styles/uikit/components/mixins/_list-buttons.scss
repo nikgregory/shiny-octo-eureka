@@ -40,8 +40,8 @@
     }
   }
 
-  // Use .page to increase the specificity as a safety margin.
-  @at-root [dir="rtl"] .page #{$list_selector} {
+  // Use .page to increase the specificity as a safety margin in RTL
+  [dir="rtl"] .page & {
     @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: $xxxx-small));
   }
 }
@@ -144,3 +144,6 @@
     }
   }
 }
+
+
+

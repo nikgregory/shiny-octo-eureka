@@ -16,10 +16,10 @@ ul {
       &:hover,
       &:focus {}
     }
-  }
 
-  @at-root [dir="rtl"] ul.inline li {
-    margin: 0 0 0 $medium;
+    [dir="rtl"] & li {
+      margin: 0 0 0 $medium;
+    }
   }
 }
 
@@ -33,10 +33,7 @@ ul {
   .title {}
 
   ul,
-  ol, {
-    padding: 0;
-  }
-
+  ol,
   li {
     margin: 0;
     padding: 0;

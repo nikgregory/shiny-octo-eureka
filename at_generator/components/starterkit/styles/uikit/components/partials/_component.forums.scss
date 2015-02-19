@@ -43,14 +43,15 @@
   .description {
     @include adjust-font-size-to($medium/1.25); // 13px
     @include output-rhythm(margin, $xx-small $xx-small $xx-small 33px); // LTR, force the desc text to align with the forum name.
+
+    // RTL
+    [dir="rtl"] & {
+      @include output-rhythm(margin, $xx-small 33px $xx-small $xx-small);
+    }
   }
 
   div.indent {
     @include output-rhythm(margin-#{$flow-from}, 33px);
-  }
-
-  @at-root [dir="rtl"] #forum .description {
-    @include output-rhythm(margin, $xx-small 33px $xx-small $xx-small);
   }
 }
 

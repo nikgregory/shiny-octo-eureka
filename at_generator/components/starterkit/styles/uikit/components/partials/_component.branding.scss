@@ -10,7 +10,6 @@
 
   @include clearfix-micro;
 
-  &__logo-link,
   &__text,
   &__name,
   &__slogan {
@@ -18,7 +17,10 @@
   }
 
   // link around the logo image
-  &__logo-link {}
+  &__logo-link {
+    display: inline-block;
+    @include output-rhythm(padding, $xxx-small 0);
+  }
 
   // logo image
   &__login-img {}

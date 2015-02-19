@@ -33,8 +33,12 @@
       padding: 0;
       margin: 0;
       text-align: center;
-
       @include output-rhythm(width, $medium);
+
+      // RTL
+      [dir="rtl"] & {
+        content: "\f104"; // RTL, fa-angle-left
+      }
     }
 
     &:first-child:before {
@@ -58,9 +62,5 @@
       //text-decoration: underline;
     }
   }
-
-  // RTL
-  @at-root [dir="rtl"] .breadcrumb li:before {
-    content: "\f104"; // RTL, fa-angle-left
-  }
 }
+

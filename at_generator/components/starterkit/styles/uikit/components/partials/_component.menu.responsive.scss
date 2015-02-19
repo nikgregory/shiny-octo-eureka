@@ -81,7 +81,7 @@
 // Menu <a> bottom whitespace.
 .ms-offcanvas,
 .ms-slidedown {
-  .menu a {
+  .rm-block__content .menu a {
     @include output-rhythm(margin-bottom, 2px);
   }
 }
@@ -132,6 +132,8 @@
 
     a {
       transition: $transition_global;
+      margin: 0;
+      border: 0;
 
       &:after,
       &:before {}

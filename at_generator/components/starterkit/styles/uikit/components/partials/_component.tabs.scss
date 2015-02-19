@@ -19,7 +19,7 @@
 
   // Temp solution until tabs become a block...
   .l-rw {
-    @include output-rhythm(padding, $x-large 0);
+    @include output-rhythm(padding, $x-large $medium 0);
   }
 
   ul.tabs--primary {

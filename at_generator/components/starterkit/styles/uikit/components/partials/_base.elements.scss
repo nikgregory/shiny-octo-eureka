@@ -170,7 +170,8 @@ dt {
 dd {
   @include output-rhythm(margin-left, $medium); // LTR
 
-  @at-root [dir="rtl"] dd {
+  // RTL
+  [dir="rtl"] & {
     margin-left: 0;
     @include output-rhythm(margin-right, $medium);
   }
@@ -261,3 +262,5 @@ hr {
 :before {
   @include font-smoothing();
 }
+
+

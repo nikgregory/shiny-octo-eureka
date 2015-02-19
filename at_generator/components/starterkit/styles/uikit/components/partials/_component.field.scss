@@ -31,14 +31,15 @@
     &:after {
       content: ":";
     }
+
+    // RTL
+    [dir="rtl"] & {
+      @include output-rhythm(padding, 0 0 0 $xxxx-small);
+    }
   }
 
   .field__items {
     display: inline-block;
-  }
-
-  @at-root [dir="rtl"] .field-label-inline .field__label {
-    @include output-rhythm(padding, 0 0 0 $xxxx-small);
   }
 }
 
@@ -50,4 +51,3 @@
     display: block;
   }
 }
-

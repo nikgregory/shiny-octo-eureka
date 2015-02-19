@@ -12,16 +12,12 @@
         content: $field-taxonomy-label-icon;
         display: inline-block;
         @include output-rhythm(margin, 0 $xx-small 0 0);
+
+        // In left-to-right flip the icon.
+        [dir="ltr"] & {
+          @include fa-icon-flip(-1, 1, 0);
+        }
       }
-    }
-
-    // In left-to-right flip the icon.
-    @at-root [dir="ltr"] .field-type-taxonomy-term-reference .field__label:before {
-      @include fa-icon-flip(-1, 1, 0);
-    }
-
-    @at-root [dir="rtl"] .field-type-taxonomy-term-reference .field__label:before {
-      @include output-rhythm(margin, 0 0 0 $xx-small);
     }
   }
 
@@ -45,10 +41,11 @@
           text-decoration: none;
         }
       }
-    }
 
-    @at-root [dir="rtl"] .field-type-taxonomy-term-reference span {
-      margin: 0 0 $xxxx-small $xxxx-small;
+      // RTL
+      [dir="rtl"] & {
+        margin: 0 0 $xxxx-small $xxxx-small;
+      }
     }
   }
 
@@ -63,16 +60,17 @@
         display: inline-block;
         vertical-align: text-bottom;
         @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
+
+        // In left-to-right flip the icon.
+        [dir="ltr"] & {
+          @include fa-icon-flip(-1, 1, 0);
+        }
+
+        // RTL
+        [dir="rtl"] & {
+          @include output-rhythm(margin, 0 0 0 $xx-small);
+        }
       }
-    }
-
-    // In left-to-right flip the icon.
-    @at-root [dir="ltr"] .field-type-taxonomy-term-reference span:before {
-      @include fa-icon-flip(-1, 1, 0);
-    }
-
-    @at-root [dir="rtl"] .field-type-taxonomy-term-reference span:before {
-      @include output-rhythm(margin, 0 0 0 $xx-small);
     }
   }
 
@@ -81,7 +79,8 @@
       @include output-rhythm(margin, 0 $small 0 0); // LTR
     }
 
-    @at-root [dir="rtl"] .field-type-taxonomy-term-reference li {
+    // RTL
+    [dir="rtl"] & li {
       @include output-rhythm(margin, 0 0 0 $small);
     }
   }
@@ -97,4 +96,3 @@
     list-style: none;
   }
 }
-

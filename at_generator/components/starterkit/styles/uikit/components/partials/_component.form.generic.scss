@@ -2,6 +2,25 @@
  * Form Theme
  ========================================================================== */
 
+// Give contact and comment subject forms some symetry.
+.form-text[name="subject[0][value]"] {
+  width: 50%;
+}
+
+// Punch these to full width on smaller devices.
+@media #{$mobile-isolate} {
+  .form-text[name="subject[0][value]"] {
+    width: 100%;
+  }
+}
+
+
+// Align selects with others if they are short.
+.form-select {
+  min-width: 50%;
+}
+
+
 // Checkboxes, Radios, Items
 .form-item,
 .form-radios,
@@ -19,7 +38,7 @@
   @include output-rhythm(margin, 0 0 $xxxx-small $xxx-small);
 
   label.option {
-    @include output-rhythm(padding, $xxxx-small $xx-small $xxxx-small $xx-large);
+    @include output-rhythm(padding, $xxxx-small $xx-small 0 $xx-large);
     @include output-rhythm(margin-#{$flow-from}, -#{$x-large});
     min-width: 50%;
     border-style: $form-border-style;
@@ -153,6 +172,11 @@ form {
       padding: 0;
       background: transparent;
       @include output-rhythm(margin, 0 $medium $medium 0); // LTR
+
+      // RTL
+      [dir="rtl"] & {
+        @include output-rhythm(margin, 0 0 $medium $medium);
+      }
     }
 
     .image-widget-data {
@@ -160,10 +184,6 @@ form {
         margin-top: 0;
       }
     }
-  }
-
-  @at-root [dir="rtl"] form .field-type-image .image-preview {
-    @include output-rhythm(margin, 0 0 $medium $medium);
   }
 
   // Table drag styles.
@@ -181,20 +201,20 @@ form {
       .tabledrag-handle {
         padding-right: .5em; // LTR
       }
+
+      // RTL for table drag.
+      [dir="rtl"] & {
+        padding-left: 0;
+
+        .tabledrag-handle {
+          padding-left: .5em;
+        }
+      }
     }
   }
 
   .field-add-more-submit {
     margin: .5em 0 0;
-  }
-
-  // RTL for table drag.
-  @at-root [dir="rtl"] form .field-multiple-table .field-multiple-drag {
-    padding-left: 0;
-
-    .tabledrag-handle {
-      padding-left: .5em;
-    }
   }
 }
 
@@ -273,3 +293,4 @@ details {
     color: inherit;
   }
 }
+

@@ -75,8 +75,9 @@
       line-height: 1;
       color: $list-color;
       border-bottom: $list-border-width $list-border-style transparent;
+      border-left: 3px $list-border-style;
 
-      @include output-rhythm(padding, $small $medium $xx-small 0); // LTR
+      @include output-rhythm(padding, $small $medium $xx-small ($medium - 2)); // LTR
 
       transition: background-color, .15s, ease-out;
 

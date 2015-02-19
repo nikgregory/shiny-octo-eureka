@@ -7,10 +7,6 @@
 // Search Block form.
 .block-search {
 
-  .contextual-render-processed {
-    //display: none; // use to debug, this can get in the way.
-  }
-
   // Mitigate any template inheritance failure which might have container
   // inline set on the block.
   display: block;
@@ -53,6 +49,14 @@
     background-image: url(../images/search-icon.svg);
     background-position: center center;
     background-repeat: no-repeat;
+    border-radius: 0 $border-radius $border-radius 0; // LTR
+  }
+
+  // The contextual links trigger can obsure the search submit input.
+  .contextual-render-processed {
+    //display: none;
+    top: 2px;
+    #{$flow-to}: 2em;
   }
 }
 

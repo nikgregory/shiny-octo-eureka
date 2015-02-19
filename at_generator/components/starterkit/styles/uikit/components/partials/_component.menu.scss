@@ -42,6 +42,11 @@
     display: block;
     @include output-rhythm(padding, $xx-small);
 
+    border: $border-width $border-style;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: -#{$border-width};
+
     &:hover,
     &:focus {
       text-decoration: none;
@@ -62,12 +67,20 @@
     }
   }
 
-  @at-root [dir="rtl"] .menu {
+  [dir="rtl"] & {
     @if $menu-arrows == true {
       li.collapsed > a:after {
         content: $menu-arrow-right; // fa-angle-right
       }
     }
+  }
+}
+
+
+// Region or row specfic menu overrides
+.pr-footer {
+  .menu a {
+    border: 0;
   }
 }
 

@@ -228,6 +228,7 @@ hr {
 
   a {
     color: $menu-color;
+    border-color: $border-color;
     //background-color: $menu-background-color;
 
     &:hover,
@@ -651,6 +652,7 @@ textarea.placeholder_text {
 .form-type-checkbox {
   label.option {
     border-color: $form-border-color;
+    background-color: $form-background-color;
 
     &:focus,
     &:hover {
@@ -826,10 +828,8 @@ button.link-edit-summary {
     border-right-color: $button-border-color;
 
     // RTL
-    @at-root [dir="rtl"] {
-      .dropbutton-multiple .dropbutton {
-        border-left-color: $button-border-color;
-      }
+    [dir="rtl"] & {
+      border-left-color: $button-border-color;
     }
   }
 
@@ -916,17 +916,18 @@ button.link-edit-summary {
     li {
       a {
         color: $list-color;
+        border-color: $list-border-color;
         border-bottom-color: transparent;
 
         &:hover,
         &:focus {
           text-decoration: none;
           color: $list-hover-color;
-          border-bottom-color: $list-border-color;
+          border-color: $list-border-color;
         }
 
         &.active {
-          border-bottom-color: $list-border-color;
+          border-color: $list-border-color;
 
           &:hover,
           &:focus {
