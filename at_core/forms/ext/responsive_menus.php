@@ -45,7 +45,7 @@ $tiles_count = array(
 
 $form['responsive_menus'] = array(
   '#type' => 'details',
-  '#title' => t('Responisve Menus'),
+  '#title' => t('Responsive Menus'),
   '#group' => 'extension_settings',
   '#description' => t('<h3>Responsive Menus</h3><p>Select a menu and breakpoint group, then a specific breakpoint for the responsive style. You can configure one default style and optionally a responsive style.</p>'),
 );
