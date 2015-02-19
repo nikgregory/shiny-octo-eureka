@@ -32,4 +32,9 @@
   font: 0/0 a;
 }
 
+/* line 35, ../sass/appearance--generator.scss */
+.messages code, .messages pre, .messages kbd {
+  font-size: 1em;
+}
+
 /*# sourceMappingURL=appearance--generator.css.map */

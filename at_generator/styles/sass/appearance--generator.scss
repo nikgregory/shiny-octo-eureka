@@ -30,3 +30,9 @@
   word-wrap: normal;
   font: 0/0 a;
 }
+
+.messages {
+  code, pre, kbd {
+    font-size: 1em;
+  }
+}
