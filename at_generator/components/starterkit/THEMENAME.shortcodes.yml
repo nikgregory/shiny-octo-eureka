@@ -60,42 +60,36 @@ whitespace:
     spaceless:
       class: spaceless
       description: 'Remove all padding and margin from all wrappers. Use with caution, e.g. rows use margin auto for centering.'
-    remove-padding-vert:
-      class: rm-pad-vert
-      description: 'Remove top, bottom padding.'
+    remove-padding:
+      class: rm-padding
+      description: 'Remove padding.'
     remove-padding-top:
-      class: rm-pad-top
+      class: rm-padding-top
       description: 'Remove top padding.'
-    remove-padding-right:
-      class: rm-pad-bot
+    remove-padding-bottom:
+      class: rm-padding-bottom
       description: 'Remove bottom padding.'
-    remove-padding-hoz:
-      class: rm-pad-hoz
-      description: 'Remove left, right padding.'
-    remove-padding-left:
-      class: rm-pad-left
-      description: 'Remove left padding.'
     remove-padding-right:
-      class: rm-pad-right
+      class: rm-padding-right
       description: 'Remove right padding.'
-    remove-margin-vert:
-      class: rm-marg-vert
-      description: 'Remove top, bottom margin.'
+    remove-padding-left:
+      class: rm-padding-left
+      description: 'Remove left padding.'
+    remove-margin:
+      class: rm-margin
+      description: 'Remove margin.'
     remove-margin-top:
-      class: rm-marg-top
+      class: rm-margin-top
       description: 'Remove top margin.'
-    remove-margin-right:
-      class: rm-marg-bot
+    remove-margin-botom:
+      class: rm-margin-bottom
       description: 'Remove bottom margin.'
-    remove-margin-hoz:
-      class: rm-marg-hoz
-      description: 'Remove left, right margin.'
-    remove-margin-left:
-      class: rm-marg-left
-      description: 'Remove left margin.'
     remove-margin-right:
-      class: rm-marg-right
+      class: rm-margin-right
       description: 'Remove right margin.'
+    remove-margin-left:
+      class: rm-margin-left
+      description: 'Remove left margin.'
 
 grid-blocks:
   name: Block Grid
@@ -134,6 +128,12 @@ rounded-corners:
     - regions
     - body
   classes:
+    rc-0:
+      class: 'rc-0'
+      description: 'Remove border radius.'
+    rc-1:
+      class: 'rc-1'
+      description: 'Border radius 1px'
     rc-2:
       class: 'rc-2'
       description: 'Border radius 2px'
