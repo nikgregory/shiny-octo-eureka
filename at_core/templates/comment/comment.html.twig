@@ -93,10 +93,12 @@
     {{ title_suffix }}
   {% endif %}
 
-  <div{{ submitted_attributes }}>
+  <div{{ meta_attributes }}>
     {{ user_picture }}
-    <div class="comment__meta">
-      {{ submitted }}
+    <div{{ submitted_attributes }}>
+      {% trans %}
+        Submitted by <address class="comment__author" rel="author">{{ author|passthrough }}</address> on <time class="comment__date">{{ created|passthrough }}</time>
+      {% endtrans %}
     </div>
   </div>
 

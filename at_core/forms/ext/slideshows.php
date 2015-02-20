@@ -48,7 +48,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['settings_slideshow_' . $i . '_enable'] = array(
       '#type' => 'checkbox',
       '#title' => t('Use custom settings for this slideshow'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_controls'),
+      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_enable'),
       //'#description' => t('Check this option to customize settings for this slideshow.'),
     );
 

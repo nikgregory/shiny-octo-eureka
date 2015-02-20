@@ -42,35 +42,52 @@
 .comment__new {}
 
 
-// Submitted selectors, meta comes first as we may override meta if user picture
-// is showing.
-.comment__meta {}
 
+// Comment author picture, name and date details.
+.comment__meta {
+  @include output-rhythm(margin, $medium 0);
 
-// Comment author link, uses the <address> element.
-.comment__author {
-  display: inline;
-}
-
-
-// <time> element
-.comment__datetime {}
-
-
-// Submitted wrapper
-.comment__submitted {
-
-  // <figure> wrapper
-  .field-type-image__figure {}
-
-  // User picture.
-  .field-type--image {
-    img {}
+  // User picture is showing.
+  &.comment__meta--has-user-picture {
+    @include output-rhythm(line-height, 48px);
   }
 
-  // Conditional selectors: if user picture showing.
-  &--has-user-picture {}
-  &.comment__submitted--has-user-picture {}
+  // User picture.
+  .field-type-image {
+    float: #{$flow-from};
+    @include output-rhythm(margin, 0 $small 0 0);
+
+    img {
+      width: auto;
+      @include output-rhythm(height, 48px);
+    }
+  }
+
+  // figure wraper
+  .field-type-image__figure {
+    margin: 0;
+    padding: 0;
+  }
+
+  // Remove potentially empty article element.
+  article:empty {
+    display: none;
+  }
+}
+
+.comment__submitted {}
+
+.comment__author {
+  display: inline;
+  font-style: normal;
+}
+
+.comment__date {}
+
+.comment__meta--has-user-picture {
+  .comment__submitted {
+    //@include adjust-font-size-to($medium/1.125);
+  }
 }
 
 
@@ -92,8 +109,6 @@
 .comment-form-wrapper {}
 .comment-form__title {}
 .comment-form {}
-
-
 
 
 

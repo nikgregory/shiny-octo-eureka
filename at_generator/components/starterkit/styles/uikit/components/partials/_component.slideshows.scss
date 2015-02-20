@@ -52,6 +52,7 @@
 
     > li {
       display: none;
+      position: relative;
       -webkit-backface-visibility: hidden;
 
       .no-js & {
@@ -87,6 +88,7 @@
 }
 
 
+
 /**
  * DEFAULT THEME
  ========================================================================== */
@@ -111,6 +113,31 @@
 
   .loading & {
     max-height: 300px;
+  }
+}
+
+
+// Captions
+.flex-caption {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  text-align: left;
+
+  margin: 0;
+  @include output-rhythm(padding, $medium $medium $xx-large);
+
+  // Color module ?
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+  // Responsive captions - hide in really small screens to prevent
+  // obscuring the image entirely when there are long captions.
+  @media #{$mobile-isolate} {
+    display: none;
   }
 }
 
@@ -153,12 +180,23 @@
     left: -50px;
     background-position: 0 0;
 
+    // Responsive nav
+    @media #{$mobile} {
+      opacity: 0.7;
+      left: 10px;
+    }
   }
 
   .flex-next {
     right: -50px;
     text-align: right;
     @include output-rhythm(background-position, -32px 0);
+
+    // Responsive nav
+    @media #{$mobile} {
+      opacity: 0.7;
+      right: 10px;
+    }
   }
 
   .flexslider:hover & {
@@ -296,20 +334,5 @@
   }
 }
 
-
-/**
- * RESPONSIVE
- ========================================================================== */
-@media #{$mobile} {
-  .flex-direction-nav .flex-prev {
-    opacity: 0.7;
-    left: 10px;
-  }
-
-  .flex-direction-nav .flex-next {
-    opacity: 0.7;
-    right: 10px;
-  }
-}
 
 

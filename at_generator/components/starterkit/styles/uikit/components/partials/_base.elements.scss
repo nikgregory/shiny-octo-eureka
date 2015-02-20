@@ -120,6 +120,12 @@ video {
 }
 
 
+// Bug in old webkit.
+svg {
+  max-height: 100%;
+}
+
+
 // Global caption style.
 figcaption {
   @include adjust-font-size-to($small);

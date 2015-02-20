@@ -148,6 +148,7 @@ hr {
 }
 .menu a {
   color: #0066cc;
+  border-color: #cccccc;
 }
 .menu a:hover, .menu a:focus {
   color: #0066cc;
@@ -242,10 +243,10 @@ hr {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
-.ms-flipslide.rm-is-open .rm-block__content .menu-level-1 > li > a {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li > a {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -465,6 +466,7 @@ textarea.placeholder_text {
 .form-type-radio label.option,
 .form-type-checkbox label.option {
   border-color: #cccccc;
+  background-color: #ffffff;
 }
 .form-type-radio label.option:focus, .form-type-radio label.option:hover,
 .form-type-checkbox label.option:focus,
@@ -693,15 +695,16 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 .pr-temporary-tabs ul.tabs--secondary li a {
   color: #363636;
+  border-color: #cccccc;
   border-bottom-color: transparent;
 }
 .pr-temporary-tabs ul.tabs--secondary li a:hover, .pr-temporary-tabs ul.tabs--secondary li a:focus {
   text-decoration: none;
   color: #363636;
-  border-bottom-color: #cccccc;
+  border-color: #cccccc;
 }
 .pr-temporary-tabs ul.tabs--secondary li a.active {
-  border-bottom-color: #cccccc;
+  border-color: #cccccc;
 }
 .pr-temporary-tabs ul.tabs--secondary li a.active:hover, .pr-temporary-tabs ul.tabs--secondary li a.active:focus {
   color: #363636;
@@ -761,6 +764,11 @@ body:before {
  *  - an instance of a content type (e.g. a single blog post) is called a node,
  *    the root template is called node.html.twg and the base selector is .node {}
  ========================================================================== */
+.node {
+  background-color: #ffffff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
 .node--sticky {
   background-color: #f7f7f7;
 }

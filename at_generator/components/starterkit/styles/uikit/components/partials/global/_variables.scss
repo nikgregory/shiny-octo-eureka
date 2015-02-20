@@ -412,8 +412,6 @@ $button-primary-background-color   : $link-color;
 $button-primary-border-color       : $link-color;
 
 
-
-
 // Tabs
 // -----------------------------------------------------------------------------
 $tab-text-align                    : center;
@@ -497,6 +495,18 @@ $table-col-even-color              : darken($text-background-color, 2%);
 $tr-hover                          : false;
 //$tr-hover-color                   : $text-background-color; // TODO - strategy for table row hover color
 $tr-hover-color                    : darken($text-background-color, $darken);
+
+
+// Nodes
+// -----------------------------------------------------------------------------
+$node-teaser-color                 : $text-color;
+$node-teaser-background-color      : #ffffff;
+
+$node-teaser-border-color          : $border-color;
+$node-teaser-border-width          : $border-width;
+$node-teaser-border-style          : $border-style;
+
+$node-teaser-box-shadow            : 0 3px 5px rgba(0, 0, 0, 0.1);
 
 
 // Fields

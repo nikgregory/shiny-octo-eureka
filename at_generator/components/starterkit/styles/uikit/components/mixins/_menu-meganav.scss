@@ -7,9 +7,9 @@
 // displayed horizontally.
 //
 
-@mixin flipslide($col-width: 12em, $arrows: true) {
+@mixin meganav($col-width: 12em, $arrows: true) {
 
-  .ms-flipslide {
+  .ms-meganav {
 
     .rm-region,
     .rm-block {

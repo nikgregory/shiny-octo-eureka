@@ -40,7 +40,7 @@
 @include offcanvas($oc-position: left, $width: 15em, $arrows: false);
 
 // FlipSlide
-@include flipslide($col-width: 12em, $arrows: false);
+@include meganav($col-width: 12em, $arrows: false);
 
 // Slidedown (classic hamburger menu)
 @include slidedown($arrows: false);
@@ -68,7 +68,7 @@
 .ms-dropmenu,
 .ms-horizonal,
 .ms-offcanvas,
-.ms-flipslide {
+.ms-meganav {
   .rm-block .menu a {
     //border-radius: 0 !important;
   }
@@ -87,10 +87,13 @@
 }
 
 
-// Mitigate any unwanted space.
-.rm-block {
-  margin: 0;
-  padding: 0;
+// Mitigate any unwanted space in specific regions.
+.pr-navbar__navbar,
+.pr-navbar__leaderboard {
+  .rm-block {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 
@@ -225,7 +228,7 @@
 }
 
 
-.ms-flipslide {
+.ms-meganav {
   &.rm-is-open {
     .rm-block__content {
       .menu-level-1 > li {

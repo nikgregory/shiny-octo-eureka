@@ -10,7 +10,7 @@ ul {
   }
 
   &.inline {
-    @include list-horizontal($flow-to, $margin: (t: 0, r: $medium, b: 0, l: 0));
+    @include list-horizontal($flow-to, $margin: (t: 0, r: 0, b: 0, l: $medium));
 
     a {
       &:hover,
@@ -18,7 +18,7 @@ ul {
     }
 
     [dir="rtl"] & li {
-      margin: 0 0 0 $medium;
+      margin: 0 $medium 0 0;
     }
   }
 }

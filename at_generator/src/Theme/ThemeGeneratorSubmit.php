@@ -53,6 +53,7 @@ class ThemeGeneratorSubmit {
 
 
     // Path to where we will save the cloned theme
+    // This could be configurable?
     $target = $path . '/../../' . $machine_name;
 
 

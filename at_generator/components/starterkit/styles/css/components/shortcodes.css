@@ -520,7 +520,7 @@
 .fa-arrow .menu li.expanded > a:after {
   content: "";
 }
-[dir="rtl"] .menu li.collapsed > a:after {
+[dir="rtl"] .fa-arrow .menu li.collapsed > a:after {
   content: "";
 }
 
@@ -530,7 +530,7 @@
 .fa-caret .menu li.expanded > a:after {
   content: "";
 }
-[dir="rtl"] .menu li.collapsed > a:after {
+[dir="rtl"] .fa-caret .menu li.collapsed > a:after {
   content: "";
 }
 
@@ -540,7 +540,7 @@
 .fa-angle-double .menu li.expanded > a:after {
   content: "";
 }
-[dir="rtl"] .menu li.collapsed > a:after {
+[dir="rtl"] .fa-angle-double .menu li.collapsed > a:after {
   content: "";
 }
 
@@ -550,7 +550,7 @@
 .fa-chevron .menu li.expanded > a:after {
   content: "";
 }
-[dir="rtl"] .menu li.collapsed > a:after {
+[dir="rtl"] .fa-chevron .menu li.collapsed > a:after {
   content: "";
 }
 
@@ -586,5 +586,4 @@
 .ms-dropmenu .fa-chevron .rm-block__content .odd ul > .collapsed > a:after {
   content: "";
 }
-
 /*# sourceMappingURL=shortcodes.css.map */

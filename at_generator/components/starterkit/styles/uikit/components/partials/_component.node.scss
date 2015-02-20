@@ -9,6 +9,13 @@
 
 .node {
   @include clearfix-micro;
+
+  //border: $node-teaser-border-color $node-teaser-border-width;
+
+  // Test card design by default
+  @include output-rhythm(margin-bottom, $medium);
+  @include output-rhythm(padding, $medium);
+  border-radius: $border-radius;
 }
 
 
@@ -45,20 +52,35 @@
 .node__title-link {}
 
 
-// Author name and date details.
+// Node author picture, name and date details.
 .node__meta {
   @include output-rhythm(margin, $medium 0);
+
+  // Author picture is showing.
+  &.node__meta--has-author-picture {
+    @include output-rhythm(line-height, 48px);
+  }
+
+  // User picture.
+  .field-type-image {
+    float: #{$flow-from};
+    @include output-rhythm(margin, 0 $small 0 0);
+
+    img {
+      width: auto;
+      @include output-rhythm(height, 48px);
+    }
+  }
+
+  // figure wraper
+  .field-type-image__figure {
+    margin: 0;
+    padding: 0;
+  }
 
   // Remove potentially empty article element.
   article:empty {
     display: none;
-  }
-
-  &.node__meta--has-author-picture {}
-
-  // User picture.
-  .field-type-image {
-    img {}
   }
 }
 

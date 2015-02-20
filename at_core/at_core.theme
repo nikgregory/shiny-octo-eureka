@@ -649,7 +649,6 @@ function at_core_preprocess_page(&$variables) {
 }
 
 
-
 /**
  * Preprocess variables for region templates.
  */
@@ -683,6 +682,7 @@ function at_core_preprocess_region(&$variables) {
   }
 }
 
+
 /**
  * Preprocess variables for node templates.
  */
@@ -690,8 +690,6 @@ function at_core_preprocess_node(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
-
-  //kpr($variables['content']['field_images_2']['#items']);
 
   // shortcodes classes.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -774,6 +772,10 @@ function at_core_preprocess_comment(&$variables) {
   $variables['title_attributes']['class'][] = 'comment__title';
   $variables['content_attributes']['class'][] = 'comment__content';
 
+  // Initialize new attributes arrays.
+  $variables['meta_attributes'] = new Attribute(array('class' => array()));
+  $variables['meta_attributes']['class'][] = 'comment__meta';
+
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
@@ -781,7 +783,7 @@ function at_core_preprocess_comment(&$variables) {
   if ($user_picture = drupal_render($variables['user_picture'])) {
     // Does this fails if twig debugging is on. TODO ?
     if (!empty($user_picture)) {
-      $variables['submitted_attributes']['class'][] = 'comment__submitted--has-user-picture';
+      $variables['meta_attributes']['class'][] = 'comment__meta--has-user-picture';
     }
   }
 
@@ -801,14 +803,6 @@ function at_core_preprocess_comment(&$variables) {
       '#prefix' => '<p class="unpublished clearfix" aria-label="Status message" role="contentinfo">',
       '#suffix' => '</p>',
     );
-  }
-
-  // Reset submitted variable.
-  if (!empty($variables['submitted'])) {
-    $variables['submitted'] = t('Submitted by <address class="comment__author" rel="author">!username</address> on <time class="comment__datetime">!datetime</time>', array(
-      '!username' => $variables['author'],
-      '!datetime' => $variables['created'],
-    ));
   }
 }
 
