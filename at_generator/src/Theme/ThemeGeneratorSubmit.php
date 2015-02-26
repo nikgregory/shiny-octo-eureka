@@ -54,7 +54,16 @@ class ThemeGeneratorSubmit {
 
     // Path to where we will save the cloned theme
     // This could be configurable?
-    $target = $path . '/../../' . $machine_name;
+    //$target = $path . '/../../' . $machine_name;
+    $at_core_path_parts = explode("/", $path);
+    if (in_array('contrib', $at_core_path_parts)) {
+      $target_path = array('themes', 'custom');
+    }
+    else {
+      $target_path = array('themes');
+    }
+    $target_dir = $directoryOperations->directoryPrepare($target_path);
+    $target = "$target_dir/$machine_name";
 
 
     // Array of UIKit tools
@@ -322,7 +331,7 @@ class ThemeGeneratorSubmit {
     $generated_path = drupal_get_path('theme', $machine_name);
 
 
-    drupal_set_message(t("<p>A new theme <b>@theme_name</b>, with then machine name: <code>@machine_name</code>, has been generated.</p>", array('@theme_name' => $friendly_name, '@machine_name' => $machine_name, '@theme_path' => $generated_path, '@performance_settings' => base_path() . 'admin/config/development/performance')), 'status');
+    drupal_set_message(t("<p>A new theme <b>@theme_name</b>, with then machine name: <code><b>@machine_name</b></code>, has been generated.</p><p>You can find your theme here: <code><b>@theme_path</b></code> </p>", array('@theme_name' => $friendly_name, '@machine_name' => $machine_name, '@theme_path' => $target, '@performance_settings' => base_path() . 'admin/config/development/performance')), 'status');
 
 
 /*
