@@ -60,6 +60,7 @@ function at_core_page_attachments_alter(array &$page) {
   // these files will load on every page, so when CSS aggregation
   // is on there will only be one CSS aggregate for the theme.
   $module_libraries = array(
+    'aggregator',
     'book',
     'comment',
     'forum',
@@ -293,6 +294,7 @@ function at_core_css_alter(&$css) {
     'book.theme.css',
     'comment.theme.css',
     'file.formatter.generic.css',
+    'forum.theme.css',
     'search.theme.css',
     'system.theme.css',
     'taxonomy.theme.css',
@@ -1049,29 +1051,24 @@ function at_core_preprocess_menu(&$variables) {
 
 
 /**
- * Preprocess variables for feed icons.
- * TODO remove when https://www.drupal.org/node/2426967 lands so we can have a svg background image instead.
+ * Preprocess variables for forums templates.
  */
-function at_core_preprocess_feed_icon(&$variables) {
-  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
+function at_core_preprocess_forums(&$variables) {
+  // Add a class to each forum topic table header td.
+  foreach ($variables['topics']['#header'] as $topic_list_key => $topic_list_value) {
+    $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::getClass($variables['topics']['#header'][$topic_list_key]['data']);
+  }
 
-  $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
-
-  // Replace the png icon with a nice svg icon.
-  $variables ['icon'] = array(
-    '#theme' => 'image__feed_icon',
-    '#uri' => $path_to_theme . '/images/rss.svg', // move to CSS images when the patch lands.
-    '#width' => 16,
-    '#height' => 16,
-    '#alt' => $text,
-  );
+  // Add BEM classes to row items, to match the forum-list.html.twig BEM classes.
+  foreach ($variables['topics']['#rows'] as $row_key => $row_values) {
+    foreach ($row_values as $row_values_key => $row_values_value) {
+      foreach ($row_values_value['class'] as $class_key => $class_value) {
+        $variables['topics']['#rows'][$row_key][$row_values_key]['class'][] = 'forum-list__' . $class_value;
+        unset($variables['topics']['#rows'][$row_key][$row_values_key]['class'][$class_key]);
+      }
+    }
+  }
 }
-
-
-
-
-
-
 
 
 
