@@ -1,6 +1,5 @@
 name: 'AT Core'
 type: theme
-version: VERSION
 description: 'Base theme only - do not set to default. Use the AT Theme Generator to generate or clone a theme to get started.'
 alt text: 'Adaptivetheme core. The base theme for all AT sub-themes.'
 tags: 'base theme, theme generator, starter theme'
