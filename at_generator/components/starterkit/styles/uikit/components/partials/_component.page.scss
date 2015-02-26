@@ -108,19 +108,19 @@
 }
 
 
-// Feed icon
-// TODO: Convert to background image when https://www.drupal.org/node/2426967 lands
-.feed-icons {}
-
-// Feed icon link
+// Feed icon link.
 .feed-icon {
-  opacity: 0.5;
-
-  &:hover,
-  &:focus {
-    opacity: 0.7;
-  }
-
-  img {}
+  display: block;
+  @include output-rhythm(width, $medium);
+  @include output-rhythm(height, $medium);
 }
+
+// RSS .svg icon.
+.feed-icon-rss {
+}
+
+
+
+
+
 

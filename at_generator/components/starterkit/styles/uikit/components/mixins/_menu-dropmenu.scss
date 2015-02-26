@@ -39,14 +39,19 @@
 
         li {
           float: left; // LTR
-          width: $item-width;
+          width: auto;
 
           @if $arrows == true {
-            &.expanded > a:after {
+            &.menu-item--collapsed > a,
+            &.menu-item--expanded > a {
+              @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
+            }
+
+            &.menu-item--expanded > a:after {
               content: $menu-arrow-down;
             }
 
-            &.collapsed > a:after {
+            &.menu-item--collapsed > a:after {
               content: '';
             }
           }
@@ -56,6 +61,9 @@
             transition: $transition_global;
 
             li {
+              min-width: $item-width;
+              text-align: #{$flow-from};
+
               &:hover,
               &:focus {}
             }
@@ -83,7 +91,7 @@
           //> li a {background-color: pink;}
 
           @if $arrows == true {
-            > .expanded > a:after {
+            > .menu-item--expanded > a:after {
               content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
             }
           }
@@ -95,7 +103,7 @@
             //> li a {background-color: yellow;}
 
             @if $arrows == true {
-              > .expanded > a:after {
+              > .menu-item--expanded > a:after {
                 content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
               }
             }

@@ -177,6 +177,14 @@ hr {
 }
 
 
+// Feed icon
+// SVG icon, SEE feed-icon.html.twig in AT Core templates directory.
+// Clear the cache if you add or change classes in the template file.
+.feed-icon-rss__path {
+  fill: rgba(0, 0, 0, 0.6);
+}
+
+
 /**
  * Branding styles
  *  - Drupal core branding block.
@@ -210,19 +218,29 @@ hr {
  ========================================================================== */
 
 .menu {
-  li {
-    &.active-trail > a {
-      //color: $menu-active-color;
-      //background-color: $menu-background-active-color;
-    }
 
-    // If menu arrows are true, add font-awesome and icons for
-    // expanded and collapsed selectors.
-    @if $menu-arrows == true {
-      &.collapsed > a:after,
-      &.expanded > a:after {
-        color: $text-color;
-      }
+  // Nested menus.
+  .menu {
+    a {
+      &:hover,
+      &:focus {}
+      &.active-trail {}
+    }
+  }
+}
+
+.menu-item {
+  &.active-trail > a {
+    //color: $menu-active-color;
+    //background-color: $menu-background-active-color;
+  }
+
+  // If menu arrows are true, add font-awesome and icons for
+  // expanded and collapsed selectors.
+  @if $menu-arrows == true {
+    &--collapsed > a:after,
+    &--expanded > a:after {
+      color: $text-color;
     }
   }
 
@@ -243,13 +261,9 @@ hr {
     }
   }
 
-  // Nested menus.
-  .menu {
-    a {
-      &:hover,
-      &:focus {}
-      &.active-trail {}
-    }
+  // Add the border top to the first item only.
+  &:first-child a {
+    border-color: $border-color;
   }
 }
 
@@ -378,6 +392,19 @@ hr {
       }
     }
   }
+
+  // Header second by default has a white background.
+  .pr-header__header-second {
+    .rm-block__content {
+      .menu {
+        a.active[href="/"],
+        a {
+          //color: $resp-menu-hover-color;
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
 }
 
 
@@ -453,7 +480,7 @@ hr {
   }
 
   &:active {
-    box-shadow: inset 0px 0px 3px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.75);
     opacity: 0.9;
   }
 }
@@ -569,7 +596,7 @@ input[type="week"] {
   background-color: $form-background-color;
 
   @if $form-box-shadow == true {
-    box-shadow: rgba(0,0,0,0.1) 0 1px 2px inset;
+    box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1) ;
   }
 
 
@@ -720,7 +747,7 @@ button,
   opacity: 0.9;
 
   @if $button-box-shadow == true {
-    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
   }
 
   &:hover,
@@ -875,7 +902,7 @@ button.link-edit-summary {
       a {
         @include button-variant($tab-color, $tab-background-color, $tab-border-color);
         @if $button-box-shadow == true {
-          box-shadow: rgba(255, 255, 255, 0.5) 0 $tab-border-width 0 inset;
+          box-shadow: inset 0 $tab-border-width 0 0 rgba(255, 255, 255, 0.5);
         }
 
         &:hover,
@@ -1070,11 +1097,30 @@ body {
 }
 
 
+/**
+ * Aggregator
+ ========================================================================== */
+
+.aggregator-item {
+  background-color: $node-teaser-background-color;
+  box-shadow: $node-teaser-box-shadow;
+}
 
 
 
+/**
+ * Forums
+ *  - see table.scss for generic table styles.
+ ========================================================================== */
 
 
-
+// Table selectors.
+.forum {
+  .icon {
+    svg {
+      fill: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
 
 

@@ -506,7 +506,7 @@ $node-teaser-border-color          : $border-color;
 $node-teaser-border-width          : $border-width;
 $node-teaser-border-style          : $border-style;
 
-$node-teaser-box-shadow            : 0 3px 5px rgba(0, 0, 0, 0.1);
+$node-teaser-box-shadow            : 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 
 
 // Fields
@@ -522,6 +522,7 @@ $field-taxonomy-label-icon         : $fa-var-tags;
 
 
 // Icons
+// TODO - locate all icons and reset to variables, this is not a complete list!
 // -----------------------------------------------------------------------------
 // AT uses Font Awesome by default for all icons, including replacing Drupal
 // core icons for things like details summery, action links and messages.

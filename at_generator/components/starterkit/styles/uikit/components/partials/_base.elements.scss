@@ -83,7 +83,13 @@ h4 small, .h4 small {@include adjust-font-size-to($medium)}
 
 
 // Paragraph.
-p {}
+p {
+
+  // Attempt to hide empty paragraph elements.
+  &:empty {
+    display: none;
+  }
+}
 
 
 // Media.

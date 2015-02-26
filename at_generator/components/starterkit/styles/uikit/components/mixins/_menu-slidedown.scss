@@ -13,7 +13,7 @@
   .ms-slidedown {
 
     .rm-toggle {
-      float: #{$flow-from};
+      //float: #{$flow-from};
       margin-#{$flow-from}: 0;
       padding-#{$flow-from}: 0;
 
@@ -32,7 +32,8 @@
       transition: $transition_global;
 
       .menu a {
-        @include output-rhythm(margin-bottom, 1px);
+        @include output-rhythm(margin-bottom, 3px);
+        @include output-rhythm(padding, $xx-small);
       }
     }
 

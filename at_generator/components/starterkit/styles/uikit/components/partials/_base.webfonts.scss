@@ -5,19 +5,22 @@
 /**
  * Font Awesome - http://fortawesome.github.io
  *
- * Import Font Awesome from the Bootstrap CDN.
- *
  * To find all icon codes see the Font Awesome cheatsheet -
  * http://fortawesome.github.io/Font-Awesome/cheatsheet/
+ *
+ * AT does not import all of fontawesome, only what we need to support more
+ * recent browsers:
+ *  - woff: Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+, Android 4.4+
+ *  - ttf: Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5, Android
 */
-
-// AT does not import all of font awesome because not-awesome is the fact that
-// it is over 100kb, so we just import the path partial here, and in _base.scss
-// we import the font-awesome/_variables.scss so we can use it's vars. It is far
-// more common in Drupal that you will set the font via an existing class/selector
-// than adding a selector to a template.
-@import "font-awesome/path";
-
+@font-face {
+  font-family: 'FontAwesome';
+  src:
+    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 // Typekit
 // http://help.typekit.com/customer/portal/articles/6852

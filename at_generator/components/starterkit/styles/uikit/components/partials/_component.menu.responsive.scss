@@ -89,7 +89,7 @@
 
 // Mitigate any unwanted space in specific regions.
 .pr-navbar__navbar,
-.pr-navbar__leaderboard {
+.pr-leaderboard__leaderboard {
   .rm-block {
     margin: 0;
     padding: 0;
@@ -129,7 +129,12 @@
       vertical-align: middle;
       @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
 
-      &.active-trail > a {
+      &.menu-item--active-trail > a {
+      }
+
+      // Strip border top from nested items.
+      &:first-child a {
+        border-top: 0;
       }
     }
 
@@ -177,7 +182,7 @@
     li {
       text-align: center;
 
-      &.expanded li {
+      &.menu-item--expanded li {
         text-align: $flow-from; // LTR
       }
     }
@@ -199,7 +204,27 @@
       }
     }
   }
+
+  // Header second specific styling.
+  .pr-header__header-second {
+    .menu {
+      float: #{$flow-to};
+    }
+  }
 }
+
+
+.ms-slidedown {
+  // Header second specific styling.
+  .pr-header__header-second {
+    .rm-toggle {
+      text-align: #{$flow-to};
+    }
+  }
+}
+
+
+
 
 
 .ms-offcanvas {

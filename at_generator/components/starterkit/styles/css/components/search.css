@@ -15,6 +15,7 @@
  ========================================================================== */
 .block-search {
   display: block;
+  clear: both;
 }
 .block-search form {
   position: relative;
@@ -92,4 +93,5 @@
   margin-bottom: 7px;
   margin-bottom: 0.43162rem;
 }
+
 /*# sourceMappingURL=search.css.map */

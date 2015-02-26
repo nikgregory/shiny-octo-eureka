@@ -5,17 +5,17 @@
 /**
  * Font Awesome - http://fortawesome.github.io
  *
- * Import Font Awesome from the Bootstrap CDN.
- *
  * To find all icon codes see the Font Awesome cheatsheet -
  * http://fortawesome.github.io/Font-Awesome/cheatsheet/
+ *
+ * AT does not import all of fontawesome, only what we need to support more
+ * recent browsers:
+ *  - woff: Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+, Android 4.4+
+ *  - ttf: Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5, Android
 */
-/* FONT PATH
- * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0");
-  src: url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0") format("embedded-opentype"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0") format("truetype"), url("//netdna.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular") format("svg");
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -141,6 +141,10 @@ h4 small, .h4 small {
   font-size: 1rem;
   line-height: 24px;
   line-height: 1.5rem;
+}
+
+p:empty {
+  display: none;
 }
 
 img {
@@ -307,6 +311,17 @@ table caption {
 
 tr {
   border: 1px solid;
+}
+
+caption,
+th,
+td {
+  text-align: left;
+}
+[dir*="rtl"] caption, [dir*="rtl"]
+th, [dir*="rtl"]
+td {
+  text-align: right;
 }
 
 thead tr {
@@ -784,12 +799,20 @@ button:hover, button:focus,
   font-size: 0.69838rem;
   line-height: 18px;
   line-height: 1.125rem;
+  padding-right: 4px;
+  padding-right: 0.25rem;
   display: inline-block;
-  padding: 0 4px 0 0;
   vertical-align: text-bottom;
 }
-[dir="rtl"] .button-action:before {
-  padding: 0 0 0 4px;
+.button-action[data-drupal-link-system-path="user/login"]:before {
+  content: "";
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+  padding-right: 7px;
+  padding-right: 0.4375rem;
+  vertical-align: baseline;
 }
 
 /* Drop buttons */
@@ -1049,11 +1072,8 @@ ul.inline li {
   list-style-type: none;
   margin-left: 0;
 }
-ul.inline {
-  zoom: 1;
-}
 ul.inline:before, ul.inline:after {
-  content: "";
+  content: " ";
   display: table;
 }
 ul.inline:after {
@@ -1095,11 +1115,8 @@ ul.inline ol {
   list-style-type: none;
   margin-left: 0;
 }
-.list-horizontal {
-  zoom: 1;
-}
 .list-horizontal:before, .list-horizontal:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .list-horizontal:after {
@@ -1124,11 +1141,8 @@ ul.inline ol {
   list-style-type: none;
   margin-left: 0;
 }
-.list-multicolumn {
-  zoom: 1;
-}
 .list-multicolumn:before, .list-multicolumn:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .list-multicolumn:after {
@@ -1151,11 +1165,8 @@ ul.inline ol {
     list-style-type: none;
     margin-left: 0;
   }
-  .list-multicolumn {
-    zoom: 1;
-  }
   .list-multicolumn:before, .list-multicolumn:after {
-    content: "";
+    content: " ";
     display: table;
   }
   .list-multicolumn:after {
@@ -1185,7 +1196,6 @@ ul.inline ol {
   .dl-horizontal dd {
     margin-left: 12em;
     overflow: hidden;
-    zoom: 1;
   }
 }
 /**
@@ -1207,11 +1217,8 @@ ul.inline ol {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-.l-r {
-  zoom: 1;
-}
 .l-r:before, .l-r:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .l-r:after {
@@ -1236,21 +1243,19 @@ ul.inline ol {
 }
 
 .feed-icon {
-  opacity: 0.5;
-}
-.feed-icon:hover, .feed-icon:focus {
-  opacity: 0.7;
+  display: block;
+  width: 16px;
+  width: 1rem;
+  height: 16px;
+  height: 1rem;
 }
 
 /**
  * Branding styles
  *  - Drupal core branding block.
  ========================================================================== */
-.site-branding {
-  zoom: 1;
-}
 .site-branding:before, .site-branding:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .site-branding:after {
@@ -1420,11 +1425,8 @@ table tr.error {
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--primary {
-    zoom: 1;
-  }
   .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
-    content: "";
+    content: " ";
     display: table;
   }
   .pr-temporary-tabs ul.tabs--primary:after {
@@ -1476,11 +1478,8 @@ table tr.error {
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--secondary {
-    zoom: 1;
-  }
   .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
-    content: "";
+    content: " ";
     display: table;
   }
   .pr-temporary-tabs ul.tabs--secondary:after {
@@ -1519,11 +1518,8 @@ table tr.error {
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--primary {
-    zoom: 1;
-  }
   .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
-    content: "";
+    content: " ";
     display: table;
   }
   .pr-temporary-tabs ul.tabs--primary:after {
@@ -1582,11 +1578,8 @@ table tr.error {
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--secondary {
-    zoom: 1;
-  }
   .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
-    content: "";
+    content: " ";
     display: table;
   }
   .pr-temporary-tabs ul.tabs--secondary:after {
@@ -1686,11 +1679,8 @@ table tr.error {
   list-style-type: none;
   margin-left: 0;
 }
-.pager__items {
-  zoom: 1;
-}
 .pager__items:before, .pager__items:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .pager__items:after {
@@ -1836,10 +1826,21 @@ table tr.error {
   margin: 0;
   list-style: none;
 }
-.menu li {
+.menu .menu {
+  padding-left: 16px;
+  padding-left: 1rem;
+}
+.menu .menu .menu-item:first-child a {
+  border-top: 0;
+}
+[dir="rtl"] .menu li.menu-item--collapsed > a:after {
+  content: "";
+}
+
+.menu-item {
   text-align: left;
 }
-.menu li.collapsed > a:after, .menu li.expanded > a:after {
+.menu-item--collapsed > a:after, .menu-item--expanded > a:after {
   font-family: FontAwesome, sans-serif;
   float: right;
   padding: 0 1px;
@@ -1847,33 +1848,26 @@ table tr.error {
   width: 16px;
   width: 1rem;
 }
-.menu li.collapsed > a:after {
+.menu-item--collapsed > a:after {
   content: "";
 }
-.menu li.expanded > a:after {
+.menu-item--expanded > a:after {
   content: "";
 }
-.menu a {
-  display: block;
-  padding: 7px;
-  padding: 0.43162rem;
-  border: 1px solid;
-  border-left: 0;
-  border-right: 0;
-  margin-bottom: -1px;
+.menu-item:first-child a {
+  border-top: 1px solid;
 }
-.menu a:hover, .menu a:focus {
+.menu-item a {
+  display: block;
+  padding: 7px 0;
+  padding: 0.43162rem 0;
+  border-bottom: 1px solid;
+}
+.menu-item a:hover, .menu-item a:focus {
   text-decoration: none;
 }
-.menu .menu {
-  padding-left: 16px;
-  padding-left: 1rem;
-}
-[dir="rtl"] .menu li.collapsed > a:after {
-  content: "";
-}
 
-.pr-footer .menu a {
+.pr-footer .menu-item a {
   border: 0;
 }
 
@@ -2064,11 +2058,8 @@ table tr.error {
   padding: 1rem;
   border-radius: 2px;
 }
-.node {
-  zoom: 1;
-}
 .node:before, .node:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .node:after {
@@ -2114,11 +2105,8 @@ table tr.error {
 .node__footer {
   clear: both;
 }
-.node__footer {
-  zoom: 1;
-}
 .node__footer:before, .node__footer:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .node__footer:after {
@@ -2138,17 +2126,6 @@ table tr.error {
 /**
  * Views
  ========================================================================== */
-.views-row {
-  zoom: 1;
-}
-.views-row:before, .views-row:after {
-  content: "";
-  display: table;
-}
-.views-row:after {
-  clear: both;
-}
-
 .views-view-grid .views-col {
   padding-right: 18px;
   padding-right: 1.13rem;
@@ -2324,4 +2301,5 @@ table tr.error {
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
 }
+
 /*# sourceMappingURL=base.css.map */

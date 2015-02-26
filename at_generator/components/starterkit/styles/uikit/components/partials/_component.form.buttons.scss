@@ -66,15 +66,22 @@ button,
   &:before {
     content: $button-action-icon;
     font-family: FontAwesome, sans-serif;
-    @include adjust-font-size-to($small);
-    display: inline-block;
-    padding: 0 4px 0 0;
-    vertical-align: text-bottom;
 
-    // RTL
-    [dir="rtl"] & {
-      padding: 0 0 0 4px;
-    }
+    @include adjust-font-size-to($small);
+    @include output-rhythm(padding-#{$flow-to}, 4px);
+
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
+
+  // User is logged out, gets a button link to login.
+  &[data-drupal-link-system-path="user/login"]:before {
+    content: $fa-var-user;
+
+    @include adjust-font-size-to($medium);
+    @include output-rhythm(padding-#{$flow-to}, 7px);
+
+    vertical-align: baseline;
   }
 }
 
@@ -233,3 +240,5 @@ li[class*="action--"] {
   padding: 0;
   @include output-rhythm(margin, $medium 0);
 }
+
+

@@ -10,66 +10,26 @@
   margin: 0;
   list-style: none;
 
-  li {
-    text-align: $menu-text-align;
-
-    &.active-trail > a {
-    }
-
-    // If menu arrows are true, add font-awesome and icons for
-    // expanded and collapsed selectors.
-    @if $menu-arrows == true {
-      &.collapsed > a:after,
-      &.expanded > a:after {
-        font-family: FontAwesome, sans-serif;
-        float: $flow-to; // LTR
-        padding: 0 1px;
-        text-align: $flow-to; // LTR
-        @include output-rhythm(width, $medium);
-      }
-
-      &.collapsed > a:after {
-        content: $menu-arrow-left; // LTR
-      }
-
-      &.expanded > a:after {
-        content: $menu-arrow-down ; //
-      }
-    }
-  }
-
-  a {
-    display: block;
-    @include output-rhythm(padding, $xx-small);
-
-    border: $border-width $border-style;
-    border-left: 0;
-    border-right: 0;
-    margin-bottom: -#{$border-width};
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-
-    &.active {
-    }
-  }
-
   // Nested menus.
   .menu {
     @include output-rhythm(padding-#{$flow-from}, $medium); // LTR
 
+    // Strip border top from nested items.
+    .menu-item:first-child a {
+      border-top:0;
+    }
+
     a {
       &:hover,
       &:focus {}
-      &.active-trail {}
+      &.active {}
     }
   }
 
+  // RTL, TODO why is this here?
   [dir="rtl"] & {
     @if $menu-arrows == true {
-      li.collapsed > a:after {
+      li.menu-item--collapsed > a:after {
         content: $menu-arrow-right; // fa-angle-right
       }
     }
@@ -77,9 +37,60 @@
 }
 
 
+.menu-item {
+  text-align: $menu-text-align;
+
+  &--active-trail > a {}
+
+  // If menu arrows are true, add font-awesome and icons for
+  // expanded and collapsed selectors.
+  @if $menu-arrows == true {
+    &--collapsed > a,
+    &--expanded > a {
+    }
+
+    &--collapsed > a:after,
+    &--expanded > a:after {
+      font-family: FontAwesome, sans-serif;
+      float: $flow-to; // LTR
+      padding: 0 1px;
+      text-align: $flow-to; // LTR
+      @include output-rhythm(width, $medium);
+    }
+
+    &--collapsed > a:after {
+      content: $menu-arrow-left; // LTR
+    }
+
+    &--expanded > a:after {
+      content: $menu-arrow-down ; //
+    }
+  }
+
+  // Add the border top to the first item only.
+  &:first-child a {
+    border-top: $border-width $border-style;
+  }
+
+  a {
+    display: block;
+    @include output-rhythm(padding, $xx-small 0);
+    border-bottom: $border-width $border-style;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &.active {}
+  }
+}
+
+
+
 // Region or row specfic menu overrides
 .pr-footer {
-  .menu a {
+  .menu-item a {
     border: 0;
   }
 }

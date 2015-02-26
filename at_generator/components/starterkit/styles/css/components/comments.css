@@ -6,11 +6,8 @@
 .field-type-comment {
   clear: both;
 }
-.field-type-comment {
-  zoom: 1;
-}
 .field-type-comment:before, .field-type-comment:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .field-type-comment:after {
@@ -21,11 +18,8 @@
   margin-left: 2.61803rem;
 }
 
-.comment {
-  zoom: 1;
-}
 .comment:before, .comment:after {
-  content: "";
+  content: " ";
   display: table;
 }
 .comment:after {
@@ -62,4 +56,5 @@
   display: inline;
   font-style: normal;
 }
+
 /*# sourceMappingURL=comments.css.map */

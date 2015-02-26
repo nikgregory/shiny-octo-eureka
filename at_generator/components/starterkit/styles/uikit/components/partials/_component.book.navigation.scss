@@ -2,54 +2,102 @@
  * Book
  * Set styles for book navigation.
  ========================================================================== */
+// @include output-rhythm(padding, $xx-small 0);
 
-.book-navigation .menu {
-  padding-bottom: 0;
-  padding-top: 1em;
-}
+// Menu tree in book navigation links.
+.book-menu-tree {}
 
 
-.book-navigation .book-pager {
-  margin: 0;
+.book-pager {
+  //@include output-rhythm(margin-bottom, $medium);
+  padding: 0;
   overflow: auto;
-  padding: 0.5em 0;
+
+  border-top: $border-width $border-style $border-color;
+  border-bottom: $border-width $border-style $border-color;
+
+  // Book navigation menu tree is showing.
+  .has-tree & {
+    border-top: 0;
+  }
 }
 
 
-.book-pager li {
-  display: inline-block;
-  list-style-type: none;
+.book-pager__item {
+  list-style: none;
   vertical-align: top;
 }
 
 
-.book-pager .previous {
-  text-align: left; /* LTR */
-  width: 45%;
+.book-pager__link {
+  @include output-rhythm(padding, $xx-small 0);
+  display: inline-block;
+
+  &:before,
+  &:after {
+    font-family: FontAwesome, sans-serif;
+    display: inline-block;
+
+    [dir="rtl"] & {
+      @include fa-icon-flip(-1, 1, 0);
+    }
+  }
 }
 
 
-[dir="rtl"] .book-pager .previous {
-  float: right;
-  text-align: right;
+// Use the maximum width by incorporating a more complex layout
+// of floats and box-sizing.
+.book-pager__previous {
+  text-align: left; // LTR
+  float: $flow-from; // LTR
+  width: 46%;
+
+  a {
+    &:before {
+      content: $menu-arrow-left;
+      @include output-rhythm(width, $medium);
+    }
+  }
+
+  // RTL
+  [dir="rtl"] & {
+    text-align: right;
+    float: $flow-to;
+  }
 }
 
 
-.book-pager .up {
+.book-pager__up {
   text-align: center;
+  float: $flow-from; // LTR
   width: 8%;
+
+  // RTL
+  [dir="rtl"] & {
+    float: $flow-to;
+  }
 }
 
 
-.book-pager .next {
-  float: right; /* LTR */
-  text-align: right; /* LTR */
-  width: 45%;
+.book-pager__next {
+  text-align: right; // LTR
+  float: $flow-to; // LTR
+  width: 46%;
+
+  a {
+    &:after {
+      content: $menu-arrow-right;
+      @include output-rhythm(width, $medium);
+    }
+  }
+
+  // RTL
+  [dir="rtl"] & {
+    text-align: left;
+    float: $flow-from;
+  }
 }
 
 
-[dir="rtl"] .book-pager .next {
-  float: left;
-  text-align: left;
-}
+
 

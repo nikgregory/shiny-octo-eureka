@@ -25,14 +25,11 @@ tr {
 caption,
 th,
 td {
-  //text-align: left; /* LTR */
-}
+  text-align: left; // LTR
 
-[dir*="rtl"] {
-  caption,
-  th,
-  td {
-    //text-align: right;
+  // RTL
+  [dir*="rtl"] & {
+    text-align: right;
   }
 }
 

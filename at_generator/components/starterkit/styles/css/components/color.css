@@ -130,6 +130,10 @@ hr {
   color: #363636;
 }
 
+.feed-icon-rss__path {
+  fill: rgba(0, 0, 0, 0.6);
+}
+
 /**
  * Branding styles
  *  - Drupal core branding block.
@@ -143,18 +147,21 @@ hr {
  *  - for the drop menu and other responsive menus see the mixins and the
  *    _navbar.scss partial.
  ========================================================================== */
-.menu li.collapsed > a:after, .menu li.expanded > a:after {
+.menu-item--collapsed > a:after, .menu-item--expanded > a:after {
   color: #363636;
 }
-.menu a {
+.menu-item a {
   color: #0066cc;
   border-color: #cccccc;
 }
-.menu a:hover, .menu a:focus {
+.menu-item a:hover, .menu-item a:focus {
   color: #0066cc;
 }
-.menu a.active {
+.menu-item a.active {
   color: #0066cc;
+}
+.menu-item:first-child a {
+  border-color: #cccccc;
 }
 
 /**
@@ -232,6 +239,10 @@ hr {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.3);
 }
+.ms-slidedown .pr-header__header-second .rm-block__content .menu a.active[href="/"],
+.ms-slidedown .pr-header__header-second .rm-block__content .menu a {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .ms-offcanvas .rm-block__content {
   opacity: .001;
@@ -273,7 +284,7 @@ hr {
   background-color: rgba(255, 255, 255, 0.75);
 }
 .pager__link:active {
-  box-shadow: inset 0px 0px 3px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.75);
   opacity: 0.9;
 }
 
@@ -517,7 +528,7 @@ button,
   background: #0066cc;
   border-color: #0066cc;
   opacity: 0.9;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 button:hover, button:focus,
 .button:hover,
@@ -655,7 +666,7 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
   background-color: #fafafa;
   border-color: #cccccc;
   opacity: 0.9;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 .pr-temporary-tabs ul.tabs--primary li a:link, .pr-temporary-tabs ul.tabs--primary li a:visited {
   color: #363636;
@@ -766,10 +777,27 @@ body:before {
  ========================================================================== */
 .node {
   background-color: #ffffff;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .node--sticky {
   background-color: #f7f7f7;
 }
+
+/**
+ * Aggregator
+ ========================================================================== */
+.aggregator-item {
+  background-color: #ffffff;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Forums
+ *  - see table.scss for generic table styles.
+ ========================================================================== */
+.forum .icon svg {
+  fill: rgba(0, 0, 0, 0.5);
+}
+
 /*# sourceMappingURL=color.css.map */

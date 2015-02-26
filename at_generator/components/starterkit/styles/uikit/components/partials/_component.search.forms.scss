@@ -10,6 +10,7 @@
   // Mitigate any template inheritance failure which might have container
   // inline set on the block.
   display: block;
+  clear: both;
 
   form {
     position: relative;
