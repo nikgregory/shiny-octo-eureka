@@ -35,9 +35,7 @@ ul {
   ul,
   ol,
   li {
-    margin: 0;
-    padding: 0;
-    @include no-bullets;
+    list-style: none;
   }
 
   a {

@@ -240,36 +240,36 @@ details {
     @include output-rhythm(padding, $x-small);
 
     &:before {
-      font-family: FontAwesome, sans-serif;
-      content: $form-details-summary-open;
+      font-family: $icon-font;
+      content: $form-details-summary-open; // LTR
+
       float: left;
       margin: -1px 0 0;
+
       @include output-rhythm(height, $medium);
       @include output-rhythm(width, $medium);
+
+      // RTL
+      [dir="rtl"] & {
+        float: right;
+      }
     }
   }
 }
 
 .collapse-processed:not([open]) > summary:before {
-  content: $form-details-summary-closed;
-}
+  content: $form-details-summary-closed; // LTR
 
-
-// RTL for collapsible elements.
-[dir="rtl"] {
-  .collapse-processed > summary:before {
-    float: right;
-  }
-
-  .collapse-processed:not([open]) > summary:before {
-    content: $form-details-summary-closed-rtl;
+  // RTL
+  [dir="rtl"] & {
+    @include fa-icon-flip(-1, 1, 0);
   }
 }
 
 
 // Vertical tabs
 .vertical-tabs {
-  background: #ffffff;
+  background: #ffffff;  // Color module?
 }
 
 
@@ -293,4 +293,3 @@ details {
     color: inherit;
   }
 }
-

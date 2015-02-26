@@ -21,7 +21,7 @@
       float: $oc-position;
 
       &:before {
-        font-family: FontAwesome, sans-serif;
+        font-family: $icon-font;
         content: $menu-hamburger;
         @include output-rhythm(width, $medium);
         @include output-rhythm($pad-dir, $xx-small);

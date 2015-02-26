@@ -8,8 +8,9 @@
   @if $field-taxonomy-label-as-icon == true {
     .field__label {
       &:before {
-        font-family: FontAwesome, sans-serif;
+        font-family: $icon-font;
         content: $field-taxonomy-label-icon;
+        
         display: inline-block;
         @include output-rhythm(margin, 0 $xx-small 0 0);
 
@@ -54,12 +55,14 @@
       display: inline-block;
 
       &:before {
-        font-family: FontAwesome, sans-serif;
-        @include adjust-font-size-to($small);
+        font-family: $icon-font;
         content: $field-taxonomy-item-icon;
+
+        @include adjust-font-size-to($small);
+         @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
+
         display: inline-block;
         vertical-align: text-bottom;
-        @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
 
         // In left-to-right flip the icon.
         [dir="ltr"] & {

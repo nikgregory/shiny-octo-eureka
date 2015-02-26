@@ -51,7 +51,7 @@
 
     &--collapsed > a:after,
     &--expanded > a:after {
-      font-family: FontAwesome, sans-serif;
+      font-family: $icon-font;
       float: $flow-to; // LTR
       padding: 0 1px;
       text-align: $flow-to; // LTR

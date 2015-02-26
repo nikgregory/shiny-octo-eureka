@@ -27,8 +27,9 @@
     list-style: none;
 
     &:before {
-      font-family: FontAwesome, sans-serif;
-      content: "\f105";  // fa-angle-right
+      font-family: $icon-font;
+      content: $breadcrumb-seperator-icon;
+
       display: inline-block;
       padding: 0;
       margin: 0;
@@ -37,7 +38,7 @@
 
       // RTL
       [dir="rtl"] & {
-        content: "\f104"; // RTL, fa-angle-left
+        @include fa-icon-flip(-1, 1, 0);
       }
     }
 
@@ -63,4 +64,3 @@
     }
   }
 }
-

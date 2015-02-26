@@ -206,8 +206,9 @@ blockquote {
       margin-top: 0;
 
       &:before {
-        font-family: FontAwesome, sans-serif;
-        content: $fa-var-quote-left;  // LTR
+        font-family: $icon-font;
+        content: $blockquote-icon;  // LTR
+
         display: inline-block;
         padding: 0 5px 0 0;  // LTR
         margin: 0;
@@ -274,5 +275,3 @@ hr {
 :before {
   @include font-smoothing();
 }
-
-

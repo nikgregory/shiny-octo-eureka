@@ -2,20 +2,34 @@
  * Search results pages
  ========================================================================== */
 
-// Search Results. Order list.
+// Search Results. Ordered list.
 .search-results {
-  padding: 0;
+  @include output-rhythm(margin-bottom, $medium);
+  @include output-rhythm(padding, $medium);
+  border-radius: $border-radius;
 
-  li {}
+  li {
+    @include output-rhythm(margin-bottom, $large);
+    padding: 0;
+  }
+
+  .search-result {}
+  .search-result__title {
+    margin: 0;
+
+    a {}
+  }
 
   // search-snippet & search-info
   p {
     margin: 0;
   }
 
-  .title {}
-  .search-snippet-info {}
-  .search-snippet {}
-  .search-info {}
+  .search-result__text {}
+  .search-result__snippet {}
+
+  .search-result__info {
+    @include adjust-font-size-to($small)
+  }
 }
 

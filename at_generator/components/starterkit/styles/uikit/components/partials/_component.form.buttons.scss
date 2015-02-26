@@ -64,8 +64,8 @@ button,
   vertical-align: bottom;
 
   &:before {
+    font-family: $icon-font;
     content: $button-action-icon;
-    font-family: FontAwesome, sans-serif;
 
     @include adjust-font-size-to($small);
     @include output-rhythm(padding-#{$flow-to}, 4px);
@@ -76,7 +76,7 @@ button,
 
   // User is logged out, gets a button link to login.
   &[data-drupal-link-system-path="user/login"]:before {
-    content: $fa-var-user;
+    content: $button-action-login-icon;
 
     @include adjust-font-size-to($medium);
     @include output-rhythm(padding-#{$flow-to}, 7px);

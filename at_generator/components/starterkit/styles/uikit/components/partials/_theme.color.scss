@@ -1107,14 +1107,11 @@ body {
 }
 
 
-
 /**
  * Forums
  *  - see table.scss for generic table styles.
  ========================================================================== */
 
-
-// Table selectors.
 .forum {
   .icon {
     svg {
@@ -1122,5 +1119,19 @@ body {
     }
   }
 }
+
+
+/**
+ * Search results pages
+ ========================================================================== */
+
+.search-results {
+  background-color: $node-teaser-background-color;
+  box-shadow: $node-teaser-box-shadow;
+}
+
+
+
+
 
 

@@ -12,13 +12,11 @@
     -ms-word-break: break-all;
     word-break: break-all;  // Be VERY careful with this, breaks normal words wh_erever
     word-break: break-word; // Non standard for webkit
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
     hyphens: auto;
 
     &:before {
-      font-family: FontAwesome, sans-serif;
-      content: $fa-var-file-o; // Set a default in case nothing else matches.
+      font-family: $icon-font;
+      content: $file-default-icon; // Set a default in case nothing else matches.
       padding-#{$flow-to}: 0.5em;
     }
   }
@@ -33,29 +31,30 @@
 }
 
 
+// Archives
 .file--package-x-generic a:before {
-  content: $fa-var-file-archive-o;
+  content: $file-archive-icon;
 }
 
 
 // Spreadsheet type files.
 .file--x-office-spreadsheet a:before,
 .file [href$='.numbers']:before {
-  content: $fa-var-file-excel-o;
+  content: $file-spreadsheet-icon;
 }
 
 
 // Word type files.
 .file--x-office-document a:before,
 .file [href$='.pages']:before {
-  content: $fa-var-file-word-o;
+  content: $file-office-document-icon;
 }
 
 
 // Presentation type files.
 .file--x-office-presentation a:before,
 .file [href$='.key']:before {
-  content: $fa-var-file-powerpoint-o;
+  content: $file-presentation-icon;
 }
 
 
@@ -85,35 +84,41 @@
 .file [href*='.json'],
 .file [href*='.sh'] {
   &:before {
-    content: $fa-var-file-code-o;
+    content: $file-code-icon;
   }
 }
 
 
+// Pain text
 .file--text,
 .file--text-plain {
   a:before {
-    content: $fa-var-file-text-o;
+    content: $file-plain-text-file-icon;
   }
 }
 
 
+// PDF
 .file--application-pdf a:before {
-  content: $fa-var-file-pdf-o;
+  content: $file-pdf-icon;
 }
 
 
+// Audio
 .file--audio a:before {
-  content: $fa-var-file-audio-o;
+  content: $file-audio-icon;
 }
 
 
+// Video
 .file--video a:before {
-  content: $fa-var-file-video-o;
+  content: $file-video-icon;
 }
 
 
+// Image
 .file--image a:before {
-  content: $fa-var-file-image-o;
+  content: $file-image-icon ;
 }
+
 

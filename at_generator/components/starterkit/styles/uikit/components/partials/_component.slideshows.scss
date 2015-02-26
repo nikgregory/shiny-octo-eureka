@@ -171,9 +171,11 @@ $direction-nav-size: 30px;
 
     // Use Font Awesome to save loading yet another webfont.
     &:before {
-      font-family: FontAwesome, sans-serif;
-      content: $fa-var-chevron-left;
+      font-family: $icon-font;
+      content: $slide-direction-previous;
+
       @include output-rhythm(font-size, $direction-nav-size);
+
       color: #ffffff; // Color module?
       line-height: 1;
       text-align: left;
@@ -194,7 +196,7 @@ $direction-nav-size: 30px;
     right: -50px;
 
     &:before {
-      content: $fa-var-chevron-right;
+      content: $slide-direction-next;
       text-align: right;
     }
 
@@ -339,6 +341,3 @@ $direction-nav-size: 30px;
     cursor: default;
   }
 }
-
-
-

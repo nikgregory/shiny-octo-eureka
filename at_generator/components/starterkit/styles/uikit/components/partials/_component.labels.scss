@@ -12,16 +12,14 @@
   display: inline-block;
 
   &:after {
-    //content: '\2026'; // Horizontal ellipsis fa-caret-right
-  }
-
-  &:after {
-    font-family: FontAwesome, sans-serif;
+    font-family: $icon-font;
+    content: $more-link-icon;
+    
     display: inline-block;
     vertical-align: bottom;
     padding: 0;
     text-align: $flow-to; // LTR
-    content: $fa-var-caret-right;
+
     @include output-rhythm(width, $x-small);
 
     [dir="rtl"] & {
@@ -65,11 +63,13 @@
   margin-#{$flow-to}: 0;
 
   &:after {
-    font-family: FontAwesome, sans-serif;
+    font-family: $icon-font;
+    content: $help-icon;
+
     float: $flow-to; // LTR
     padding: 0 1px;
     text-align: $flow-to; // LTR
-    content: $fa-var-question-circle;
+
     @include output-rhythm(width, $medium);
   }
 
@@ -77,4 +77,3 @@
     background: transparent;
   }
 }
-

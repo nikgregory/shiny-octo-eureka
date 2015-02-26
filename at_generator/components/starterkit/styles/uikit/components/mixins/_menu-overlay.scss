@@ -24,9 +24,9 @@
       }
 
       &:after {
-        display: block;
-        font-family: FontAwesome, sans-serif;
+        font-family: $icon-font;
         content: $menu-hamburger;
+        display: block;
         @include output-rhythm(width, $medium);
         @include output-rhythm(padding, $xx-small $medium);
       }
@@ -89,4 +89,3 @@
 
   }
 }
-

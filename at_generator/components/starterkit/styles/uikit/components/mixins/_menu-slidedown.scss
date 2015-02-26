@@ -18,7 +18,7 @@
       padding-#{$flow-from}: 0;
 
       &:after {
-        font-family: FontAwesome, sans-serif;
+        font-family: $icon-font;
         content: $menu-hamburger;
         @include output-rhythm(width, $medium);
         @include output-rhythm(padding-left, $xx-small);

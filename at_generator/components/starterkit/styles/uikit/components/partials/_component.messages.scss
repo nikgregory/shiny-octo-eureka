@@ -93,7 +93,7 @@ table tr.error {
 
 /* Message icons */
 .messages .icon:before {
-  font-family: FontAwesome, sans-serif;
+  font-family: $icon-font;
   float: left;
   vertical-align: top;
   @include output-rhythm(padding, 0 $small 0 0); // LTR
@@ -105,15 +105,15 @@ table tr.error {
 }
 
 .icon-status:before {
-  content: $messages-icon-status;
+  content: $messages-status-icon;
 }
 
 .icon-warning:before {
-  content: $messages-icon-warning ;
+  content: $messages-warning-icon;
 }
 
 .icon-error:before {
-  content: $messages-icon-error;
+  content: $messages-error-icon;
 }
 
 
@@ -132,4 +132,3 @@ body > pre,
 body {
   &:before {}
 }
-
