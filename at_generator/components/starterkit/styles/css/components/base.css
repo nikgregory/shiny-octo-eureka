@@ -714,16 +714,18 @@ details > .details-wrapper {
   width: 16px;
   width: 1rem;
 }
+[dir="rtl"] .collapse-processed > summary:before {
+  float: right;
+}
 
 .collapse-processed:not([open]) > summary:before {
   content: "";
 }
-
-[dir="rtl"] .collapse-processed > summary:before {
-  float: right;
-}
 [dir="rtl"] .collapse-processed:not([open]) > summary:before {
-  content: "";
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 .vertical-tabs {
@@ -793,8 +795,8 @@ button:hover, button:focus,
   vertical-align: bottom;
 }
 .button-action:before {
-  content: "";
   font-family: FontAwesome, sans-serif;
+  content: "";
   font-size: 11px;
   font-size: 0.69838rem;
   line-height: 18px;
@@ -1095,16 +1097,7 @@ ul.inline ol {
 .item-list ul,
 .item-list ol,
 .item-list li {
-  margin: 0;
-  padding: 0;
   list-style: none;
-}
-.item-list ul li,
-.item-list ol li,
-.item-list li li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
 }
 
 .list-horizontal {
@@ -1635,7 +1628,7 @@ table tr.error {
 }
 .breadcrumb li:before {
   font-family: FontAwesome, sans-serif;
-  content: "\f105";
+  content: "";
   display: inline-block;
   padding: 0;
   margin: 0;
@@ -1644,7 +1637,10 @@ table tr.error {
   width: 1rem;
 }
 [dir="rtl"] .breadcrumb li:before {
-  content: "\f104";
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 .breadcrumb li:first-child:before {
   content: none;
@@ -1749,11 +1745,11 @@ table tr.error {
 }
 .more-link:after {
   font-family: FontAwesome, sans-serif;
+  content: "";
   display: inline-block;
   vertical-align: bottom;
   padding: 0;
   text-align: right;
-  content: "";
   width: 10px;
   width: 0.61803rem;
 }
@@ -1794,10 +1790,10 @@ table tr.error {
 .filter-help a:after,
 .more-help-link a:after {
   font-family: FontAwesome, sans-serif;
+  content: "";
   float: right;
   padding: 0 1px;
   text-align: right;
-  content: "";
   width: 16px;
   width: 1rem;
 }
@@ -1969,9 +1965,9 @@ table tr.error {
   word-break: break-all;
   word-break: break-word;
   -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-      hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 .file a:before {
   font-family: FontAwesome, sans-serif;
@@ -2282,9 +2278,19 @@ table tr.error {
  * Toolbar
  * Drupal core does a poor job of protecting the toolbar items, so we isolate
  * and override the CSS. The ID should be enough specificity to do the job.
+ * This is not exhaustive, the toolbar can still break, however this gets
+ * most "very easily broken" things protected from normal theme styles.
  ========================================================================== */
+#toolbar-administration a {
+  font-family: 'Source Sans Pro', 'Lucida Grande', Verdana, sans-serif;
+  line-height: 1;
+}
 #toolbar-administration a:after {
   display: none !important;
+}
+#toolbar-administration button {
+  box-shadow: none;
+  text-shadow: none;
 }
 #toolbar-administration .toolbar-menu-administration ul {
   padding: 0;
@@ -2296,7 +2302,7 @@ table tr.error {
   border: 0;
 }
 #toolbar-administration .level-3 ul {
-  padding-left: 1rem;
+  padding-left: 1em;
 }
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
