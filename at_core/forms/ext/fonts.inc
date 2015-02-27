@@ -142,9 +142,9 @@ function title_style_options($style) {
     break;
     case ('weight'):
       $options = array(
+        '400' => t('Normal'),
         '700' => t('Bold'),
         '600' => t('Semibold'),
-        '400' => t('Normal'),
         '300' => t('Light'),
       );
     break;
