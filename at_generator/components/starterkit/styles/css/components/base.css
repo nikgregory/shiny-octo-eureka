@@ -12,6 +12,31 @@
  * recent browsers:
  *  - woff: Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+, Android 4.4+
  *  - ttf: Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5, Android
+ *
+ * Installing local fonts:
+ *
+ * NOTE: due to licencing restrictions imposed by Drupal.org we must load
+ * the font files from a CDN. It is recommended you install the font files
+ * locally on your server (in your theme) and link to those instead.
+ *
+ * To install locally:
+
+ * First download FontAwesome from Github (link above), check the version
+ * this theme shipped with ($fa-version) or view the generated CSS and look
+ * for the cache identifier string at the end of the font file path, e.g.
+ * "?v=4.3.0". You need to download the version this theme shipped with or
+ * newer.
+ *
+ * Next create the directory: "styles/css/fonts", then place the .woff
+ * and .ttf files in the "fonts" directory.
+ *
+ * If you are using SASS you can uncomment the $fa-font-path !default
+ * in uikit > components > font-awesome > _variables.scss and comment
+ * out the Bootstrap CDN path. Amend the
+ *
+ * If you are using CSS directly, just edit the path manually to point to
+ * the files, e.g.:
+ * src: url("../fonts/fontawesome-webfont.woff")
 */
 @font-face {
   font-family: 'FontAwesome';
@@ -566,8 +591,8 @@ textarea:invalid {
   margin: 0 0 4px 6px;
   margin: 0 0 0.26676rem 0.38197rem;
 }
-.form-type-radio label.option,
-.form-type-checkbox label.option {
+.form-type-radio .option,
+.form-type-checkbox .option {
   padding: 4px 7px 0 29px;
   padding: 0.26676rem 0.43162rem 0 1.82838rem;
   margin-left: -25.88854px;
@@ -576,9 +601,9 @@ textarea:invalid {
   border-width: 1px;
   border-radius: 2px;
 }
-.form-type-radio label.option:focus, .form-type-radio label.option:hover,
-.form-type-checkbox label.option:focus,
-.form-type-checkbox label.option:hover {
+.form-type-radio .option:focus, .form-type-radio .option:hover,
+.form-type-checkbox .option:focus,
+.form-type-checkbox .option:hover {
   cursor: pointer;
 }
 
@@ -1066,28 +1091,21 @@ figure[class*="align-"] {
 ul.inline, ul.links.inline {
   padding: 0;
 }
-ul.inline {
-  list-style: none;
-}
-ul.inline li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-}
-ul.inline:before, ul.inline:after {
+ul.inline:before, ul.inline:after, ul.links.inline:before, ul.links.inline:after {
   content: " ";
   display: table;
 }
-ul.inline:after {
+ul.inline:after, ul.links.inline:after {
   clear: both;
 }
 ul.inline li {
   float: right;
   margin: 0 0 0 16px;
   margin: 0 0 0 1rem;
+  list-style: none;
 }
-ul.inline ul,
-ul.inline ol {
+ul.inline li ul,
+ul.inline li ol {
   display: none;
 }
 [dir="rtl"] ul.inline li {
@@ -1100,28 +1118,14 @@ ul.inline ol {
   list-style: none;
 }
 
-.list-horizontal {
-  list-style: none;
-}
-.list-horizontal li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-}
-.list-horizontal:before, .list-horizontal:after {
-  content: " ";
-  display: table;
-}
-.list-horizontal:after {
-  clear: both;
-}
 .list-horizontal li {
   float: left;
   margin: 0 16px 0 16px;
   margin: 0 1rem 0 1rem;
+  list-style: none;
 }
-.list-horizontal ul,
-.list-horizontal ol {
+.list-horizontal li ul,
+.list-horizontal li ol {
   display: none;
 }
 
@@ -1406,6 +1410,13 @@ table tr.error {
   padding: 26px 16px 0;
   padding: 1.61803rem 1rem 0;
 }
+.pr-temporary-tabs ul:before, .pr-temporary-tabs ul:after {
+  content: " ";
+  display: table;
+}
+.pr-temporary-tabs ul:after {
+  clear: both;
+}
 .pr-temporary-tabs ul.tabs--primary {
   margin-bottom: 0;
 }
@@ -1504,26 +1515,14 @@ table tr.error {
 @media all and (min-width: 60.063em) {
   .pr-temporary-tabs ul.tabs--primary {
     border-bottom: 1px solid #cccccc;
-    list-style: none;
-  }
-  .pr-temporary-tabs ul.tabs--primary li {
-    list-style-image: none;
-    list-style-type: none;
-    margin-left: 0;
-  }
-  .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
-    content: " ";
-    display: table;
-  }
-  .pr-temporary-tabs ul.tabs--primary:after {
-    clear: both;
   }
   .pr-temporary-tabs ul.tabs--primary li {
     float: left;
     margin: 0 0 0 0;
+    list-style: none;
   }
-  .pr-temporary-tabs ul.tabs--primary ul,
-  .pr-temporary-tabs ul.tabs--primary ol {
+  .pr-temporary-tabs ul.tabs--primary li ul,
+  .pr-temporary-tabs ul.tabs--primary li ol {
     display: none;
   }
   .pr-temporary-tabs ul.tabs--primary li {
@@ -1563,28 +1562,16 @@ table tr.error {
     background: none;
   }
   .pr-temporary-tabs ul.tabs--secondary {
-    list-style: none;
     padding: 0;
-  }
-  .pr-temporary-tabs ul.tabs--secondary li {
-    list-style-image: none;
-    list-style-type: none;
-    margin-left: 0;
-  }
-  .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
-    content: " ";
-    display: table;
-  }
-  .pr-temporary-tabs ul.tabs--secondary:after {
-    clear: both;
   }
   .pr-temporary-tabs ul.tabs--secondary li {
     float: left;
     margin: 0 7px 0 7px;
     margin: 0 0.43162rem 0 0.43162rem;
+    list-style: none;
   }
-  .pr-temporary-tabs ul.tabs--secondary ul,
-  .pr-temporary-tabs ul.tabs--secondary ol {
+  .pr-temporary-tabs ul.tabs--secondary li ul,
+  .pr-temporary-tabs ul.tabs--secondary li ol {
     display: none;
   }
   .pr-temporary-tabs ul.tabs--secondary a {
@@ -1661,19 +1648,6 @@ table tr.error {
 
 .pager__items {
   padding: 0;
-  list-style: none;
-}
-@media all and (min-width: 60.063em) {
-  .pager__items {
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
-  }
-}
-.pager__items li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
 }
 .pager__items:before, .pager__items:after {
   content: " ";
@@ -1682,13 +1656,22 @@ table tr.error {
 .pager__items:after {
   clear: both;
 }
-.pager__items li {
+@media all and (min-width: 60.063em) {
+  .pager__items {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+  }
+}
+
+.pager__item {
   float: left;
   margin: 1px 1px 1px 1px;
   margin: 0.0625rem 0.0625rem 0.0625rem 0.0625rem;
+  list-style: none;
 }
-.pager__items ul,
-.pager__items ol {
+.pager__item ul,
+.pager__item ol {
   display: none;
 }
 
@@ -1826,9 +1809,6 @@ table tr.error {
   padding-left: 16px;
   padding-left: 1rem;
 }
-.menu .menu .menu-item:first-child a {
-  border-top: 0;
-}
 [dir="rtl"] .menu li.menu-item--collapsed > a:after {
   content: "";
 }
@@ -1850,21 +1830,13 @@ table tr.error {
 .menu-item--expanded > a:after {
   content: "";
 }
-.menu-item:first-child a {
-  border-top: 1px solid;
-}
 .menu-item a {
   display: block;
   padding: 7px 0;
   padding: 0.43162rem 0;
-  border-bottom: 1px solid;
 }
 .menu-item a:hover, .menu-item a:focus {
   text-decoration: none;
-}
-
-.pr-footer .menu-item a {
-  border: 0;
 }
 
 /**
@@ -1912,10 +1884,8 @@ table tr.error {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-.field-type-image figure.align-none,
-.field-type-image figure.align-left,
-.field-type-image .field__label.align-none,
-.field-type-image .field__label.align-left {
+.field-type-image .align-none,
+.field-type-image .align-left {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
 }
@@ -1923,8 +1893,7 @@ table tr.error {
 .field-type-image .align-left figcaption {
   text-align: left;
 }
-.field-type-image .field__label.align-center,
-.field-type-image figure.align-center {
+.field-type-image .align-center {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -1934,15 +1903,14 @@ table tr.error {
 .field-type-image figure.align-center {
   display: table;
 }
-.field-type-image .field__label.align-right,
-.field-type-image figure.align-right {
+.field-type-image .align-right {
   margin: 0 0 16px 16px;
   margin: 0 0 1rem 1rem;
 }
 .field-type-image .align-right figcaption {
   text-align: left;
 }
-.field-type-image figure.float-none {
+.field-type-image .float-none {
   float: none !important;
   margin-right: 0 !important;
   margin-left: 0 !important;
@@ -2060,6 +2028,10 @@ table tr.error {
 }
 .node:after {
   clear: both;
+}
+
+.node--sticky {
+  padding: 0;
 }
 
 .node--view-mode-full .node__title {

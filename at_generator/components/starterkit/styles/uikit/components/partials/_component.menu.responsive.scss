@@ -120,45 +120,45 @@
   .menu {
     position: relative;
 
-    > li {
+    > .menu-item {
       z-index: 100;
     }
+  }
 
-    li {
-      position: relative;
-      vertical-align: middle;
-      @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
+  .menu-item {
+    position: relative;
+    vertical-align: middle;
+    @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
 
-      &.menu-item--active-trail > a {
-      }
-
-      // Strip border top from nested items.
-      &:first-child a {
-        border-top: 0;
-      }
+    &.menu-item--active-trail > a {
     }
 
-    a {
-      transition: $transition_global;
-      margin: 0;
-      border: 0;
+    // Strip border top from nested items.
+    &:first-child a {
+      border-top: 0;
+    }
+  }
 
-      &:after,
-      &:before {}
+  a {
+    transition: $transition_global;
+    margin: 0;
+    border: 0;
 
-      &:active {}
+    &:after,
+    &:before {}
 
-      &:hover,
-      &:focus {
-        text-decoration: none;
-      }
+    &:active {}
 
-      &.active {
-        // Match Drupal base path for frontpage/home links
-        &[href="/"] {
-          &:hover,
-          &:focus {
-          }
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &.active {
+      // Match Drupal base path for frontpage/home links
+      &[href="/"] {
+        &:hover,
+        &:focus {
         }
       }
     }
@@ -179,7 +179,7 @@
       }
     }
 
-    li {
+    .menu-item {
       text-align: center;
 
       &.menu-item--expanded li {
@@ -245,7 +245,7 @@
     @include output-rhythm(padding, $xx-small 0);
 
     .menu-level-1 {
-      > li {
+      > .menu-item {
         @include output-rhythm(margin, $xx-small 0);
       }
     }
@@ -256,7 +256,7 @@
 .ms-meganav {
   &.rm-is-open {
     .rm-block__content {
-      .menu-level-1 > li {
+      .menu-level-1 > .menu-item {
 
         &:last-child {
           border-bottom: none;

@@ -5,20 +5,27 @@
 
 
 // Basic horizonal list, uses a map and the familiar trbl (top, left, bottom, right) CSS syntax.
-@mixin list-horizontal($float-direction, $margin: (t: 0, r: $medium, b: 0, l: $medium)) {
-  @include no-bullets;
-  @include clearfix-micro;
+@mixin list-horizontal($float-direction, $margin: (t: 0, r: $medium, b: 0, l: $medium), $list_item_selector: null) {
 
-  li {
+  $item_selector: 'li';
+  @if $list_item_selector {
+    $item_selector: $list_item_selector;
+  }
+
+  #{$item_selector} {
     float: $float-direction;
     @include output-rhythm(margin, map-get($margin, t) map-get($margin, r) map-get($margin, b) map-get($margin, l));
+
+    list-style: none;
+
+    // Hide sub-lists.
+    ul,
+    ol {
+      display: none;
+    }
   }
 
-  // Hide sub-lists.
-  ul,
-  ol {
-    display: none;
-  }
+
 }
 
 

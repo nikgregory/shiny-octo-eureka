@@ -17,10 +17,8 @@
   //   set image alignment and captions per node type and view mode.
 
   // Align left or none.
-  figure.align-none,
-  figure.align-left,
-  .field__label.align-none,
-  .field__label.align-left {
+  .align-none,
+  .align-left {
     @include output-rhythm(margin, 0 $medium $medium 0); // LTR
   }
   .align-none figcaption,
@@ -29,8 +27,7 @@
   }
 
   // Align center.
-  .field__label.align-center,
-  figure.align-center {
+  .align-center {
     text-align: center; // cascades to figcaption
     margin-left: auto;
     margin-right: auto;
@@ -41,8 +38,7 @@
   }
 
   // Align right.
-  .field__label.align-right,
-  figure.align-right {
+  .align-right {
     @include output-rhythm(margin, 0 0 $medium $medium); // LTR
   }
   .align-right figcaption {
@@ -51,7 +47,7 @@
 
   // If there is no image style set Firefox and other browsers will not respect max-width 100% inside a float.
   // This can happen if the user does not set a style, so we are protecting the site from breaking.
-  figure.float-none {
+  .float-none {
     float: none !important;
     margin-right: 0 !important;
     margin-left: 0 !important;

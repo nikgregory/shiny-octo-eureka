@@ -1078,7 +1078,8 @@ body {
 .node--promoted {}
 
 .node--sticky {
-  background-color: $sticky-background-color;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 

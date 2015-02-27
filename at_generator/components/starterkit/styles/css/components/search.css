@@ -13,13 +13,16 @@
   margin-bottom: 1.13rem;
   padding: 0;
 }
-.search-results .search-result__title {
+
+.search-result p {
   margin: 0;
 }
-.search-results p {
+
+.search-result__title {
   margin: 0;
 }
-.search-results .search-result__info {
+
+.search-result__info {
   font-size: 11px;
   font-size: 0.69838rem;
   line-height: 18px;
@@ -77,22 +80,23 @@
   right: 2em;
 }
 
-.search-page-form .search-basic {
+.search-basic {
   display: block;
 }
-.search-page-form .search-basic label {
+.search-basic label {
   display: block;
   margin: 0 0 7px;
   margin: 0 0 0.43162rem;
 }
-.search-page-form .search-basic .form-type-search,
-.search-page-form .search-basic .form-search {
+.search-basic .form-type-search,
+.search-basic .form-search {
   display: block;
   width: 100%;
   margin: 7px 0;
   margin: 0.43162rem 0;
 }
-.search-page-form .search-advanced .details-wrapper > fieldset > legend {
+
+.search-advanced .details-wrapper > fieldset > legend {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
@@ -102,12 +106,12 @@
   word-wrap: normal;
   font: 0/0 a;
 }
-.search-page-form .search-advanced .form-text {
+.search-advanced .form-text {
   min-width: 75%;
 }
-.search-page-form .search-advanced .form-item,
-.search-page-form .search-advanced .form-radios,
-.search-page-form .search-advanced .form-checkboxes {
+.search-advanced .form-item,
+.search-advanced .form-radios,
+.search-advanced .form-checkboxes {
   margin-bottom: 7px;
   margin-bottom: 0.43162rem;
 }

@@ -7,6 +7,7 @@ ul {
   &.inline,
   &.links.inline {
     padding: 0;
+    @include clearfix-micro;
   }
 
   &.inline {

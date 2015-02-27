@@ -37,7 +37,7 @@
 .form-type-checkbox {
   @include output-rhythm(margin, 0 0 $xxxx-small $xxx-small);
 
-  label.option {
+  .option {
     @include output-rhythm(padding, $xxxx-small $xx-small 0 $xx-large);
     @include output-rhythm(margin-#{$flow-from}, -#{$x-large});
     min-width: 50%;
@@ -77,7 +77,7 @@
 }
 
 
-// Tips
+// Tips - TODO, is this even used anymore?
 .tips {
   li {
     list-style: none;

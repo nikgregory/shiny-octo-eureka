@@ -27,8 +27,11 @@
 
 // States
 .node--promoted {}
-.node--sticky {}
 .node--unpublished {}
+
+.node--sticky {
+  padding: 0;
+}
 
 
 // Header - includes title (h1 full, h2 teaser), user picture, author and date.

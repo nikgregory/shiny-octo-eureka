@@ -63,47 +63,45 @@
 
 
 // Search Page form.
-.search-page-form {
+.search-page-form {}
 
-  // Basic search.
-  .search-basic {
+// Basic search.
+.search-basic {
+  display: block;
+
+  label {
     display: block;
-
-    label {
-      display: block;
-      @include output-rhythm(margin, 0 0 $xx-small);
-    }
-
-    .form-type-search,
-    .form-search {
-      display: block;
-      width: 100%;
-      @include output-rhythm(margin, $xx-small 0);
-    }
+    @include output-rhythm(margin, 0 0 $xx-small);
   }
 
-  // Advanced search.
-  .search-advanced {
-    .details-wrapper {
-      // Hide visually redundant legends. This must be very specific so as not to remove
-      // required legends as well, hence the child selectors and over-specification.
-      > fieldset > legend {
-        @include visually-hidden;
-      }
-    }
-
-    .form-text {
-      min-width: 75%;
-    }
-
-    .form-item,
-    .form-radios,
-    .form-checkboxes {
-      @include output-rhythm(margin-bottom, $xx-small);
-    }
+  .form-type-search,
+  .form-search {
+    display: block;
+    width: 100%;
+    @include output-rhythm(margin, $xx-small 0);
   }
 }
 
+// Advanced search.
+.search-advanced {
+  .details-wrapper {
+    // Hide visually redundant legends. This must be very specific so as not to remove
+    // required legends as well, hence the child selectors and over-specification.
+    > fieldset > legend {
+      @include visually-hidden;
+    }
+  }
+
+  .form-text {
+    min-width: 75%;
+  }
+
+  .form-item,
+  .form-radios,
+  .form-checkboxes {
+    @include output-rhythm(margin-bottom, $xx-small);
+  }
+}
 
 
 

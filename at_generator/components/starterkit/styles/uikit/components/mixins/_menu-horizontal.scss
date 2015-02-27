@@ -12,26 +12,29 @@
     }
 
     .rm-block__content {
-      .menu-level-1 {
-        @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
+      .menu {
+        @include clearfix-micro;
+      }
 
-        li {
-          a:after {
-            content: '';
-            display: none;
+      @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0), $list-item-selector: '.menu-item');
+
+      .menu-item {
+        a:after {
+          content: '';
+          display: none;
+        }
+
+        @if $arrows == true {
+          &.expanded > a:after {
+            content: $menu-arrow-down;
           }
 
-          @if $arrows == true {
-            &.expanded > a:after {
-              content: $menu-arrow-down;
-            }
-
-            &.collapsed > a:after {
-              content: '';
-            }
+          &.collapsed > a:after {
+            content: '';
           }
         }
       }
     }
   }
 }
+

@@ -16,7 +16,7 @@
 
     // Strip border top from nested items.
     .menu-item:first-child a {
-      border-top:0;
+      //border-top:0;
     }
 
     a {
@@ -69,13 +69,13 @@
 
   // Add the border top to the first item only.
   &:first-child a {
-    border-top: $border-width $border-style;
+    //border-top: $border-width $border-style;
   }
 
   a {
     display: block;
     @include output-rhythm(padding, $xx-small 0);
-    border-bottom: $border-width $border-style;
+    //border-bottom: $border-width $border-style;
 
     &:hover,
     &:focus {
@@ -91,7 +91,7 @@
 // Region or row specfic menu overrides
 .pr-footer {
   .menu-item a {
-    border: 0;
+    //border: 0;
   }
 }
 
