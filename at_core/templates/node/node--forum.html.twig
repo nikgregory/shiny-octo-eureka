@@ -106,7 +106,7 @@
   </header>
 
   <div{{ content_attributes }}>
-    {{ content|without('comment', 'links') }}
+    {{ content|without('comment_forum', 'links') }}
   </div>
 
   {% if content.links is not empty %}
@@ -115,8 +115,8 @@
     </footer>
   {% endif %}
 
-  {% if content.comment is not empty %}
-  {{ content.comment }}
+  {% if content.comment_forum is not empty %}
+  {{ content.comment_forum }}
   {% endif %}
 
 </article>
