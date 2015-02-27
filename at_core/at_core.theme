@@ -610,7 +610,7 @@ function at_core_preprocess_page(&$variables) {
   foreach ($regions as $region_name => $region_label) {
     if (!empty($variables['page'][$region_name])) {
       // Call drupal_render() to determine the regions visibility.
-      if ($region = drupal_render($variables['page'][$region_name])) {
+      if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
         $active_regions[] = $region_name;
       }
     }
@@ -750,7 +750,7 @@ function at_core_preprocess_node(&$variables) {
     $variables['author_attributes']['rel'][] = 'author';
 
     // add a class if author picture is printing.
-    if ($author_picture = drupal_render($variables['author_picture'])) {
+    if ($author_picture = \Drupal::service('renderer')->render($variables['author_picture'])) {
       // Does this fails if twig debugging is on. TODO ?
       if (!empty($author_picture)) {
         $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
@@ -782,7 +782,7 @@ function at_core_preprocess_comment(&$variables) {
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
   // add a class if user picture is printing.
-  if ($user_picture = drupal_render($variables['user_picture'])) {
+  if ($user_picture = \Drupal::service('renderer')->render($variables['user_picture'])) {
     // Does this fails if twig debugging is on. TODO ?
     if (!empty($user_picture)) {
       $variables['meta_attributes']['class'][] = 'comment__meta--has-user-picture';
