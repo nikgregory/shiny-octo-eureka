@@ -232,6 +232,7 @@ class ThemeGeneratorSubmit {
     foreach ($configuration_files as $old_config_file) {
       $new_config_file = str_replace($source_theme, $machine_name, $old_config_file);
       $fileOperations->fileRename("$target/config/install/$old_config_file", "$target/config/install/$new_config_file");
+      $fileOperations->fileStrReplace("$target/config/install/$new_config_file", 'TARGET', $target);
       $fileOperations->fileStrReplace("$target/config/install/$new_config_file", $source_theme, $machine_name);
     }
     // Skin and clone need their source themes configuration
