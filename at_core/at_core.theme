@@ -1038,14 +1038,10 @@ function at_core_preprocess_views_view(&$variables) {
  * Preprocess variables for menu templates.
  */
 function at_core_preprocess_menu(&$variables) {
-  // Add a reasonably useful class to the root ul, it won't be unique but
-  // can be very useful if and when you need it.
-  if (!empty($variables['theme_hook_original'])) {
+  // Add a somewhat useful class to the root UL in menus.
+  if (isset($variables['theme_hook_original'])) {
     $menu_name = str_replace('menu__', '', $variables['theme_hook_original']);
-    $variables['menu_name_original'] = Html::getClass($menu_name);
-  }
-  else {
-    $variables['menu_name_original'] = '';
+    $variables['attributes']['class'][] = 'menu-name-original--' . Html::getClass($menu_name);
   }
 }
 
