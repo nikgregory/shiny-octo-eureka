@@ -816,6 +816,8 @@ function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  //kpr($variables);
+
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 

@@ -120,8 +120,6 @@ if (!empty($shortcodes)) {
   $class_image = '';
   foreach ($shortcodes as $class_type => $class_values) {
 
-    //kpr($class_values);
-
     if (isset($class_values['description'])) {
       $class_description = $class_values['description'];
     }
@@ -146,7 +144,7 @@ if (!empty($shortcodes)) {
       $class_name =  Xss::filterAdmin($class_data['class']);
 
       // This is a test, very rough and should be generalized to allow any shortcode to supply an image.
-      if ($class_data['image'] && $class_type == 'patterns') {
+      if (isset($class_data['image']) && $class_type == 'patterns') {
         $class_image = $subtheme_path . '/' . $class_data['image'];
         $class_output[$class_type][] = '<dt>' . $class_name . '</dt><dd>' . t($class_data['description']) . '<div class="pattern-image-clip"><img class="pattern-image" src="/' . $class_image .  '" alt="Background image for the ' . $class_name .  ' pattern." /></div></dd>';
       }
@@ -159,5 +157,4 @@ if (!empty($shortcodes)) {
       '#markup' => '<dl class="class-list ' . $class_type . '">' . implode('', $class_output[$class_type]) . '</dl>',
     );
   }
-
 }
