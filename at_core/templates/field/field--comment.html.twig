@@ -47,7 +47,7 @@
   {# Fragment name #}
   <a name="comments"></a>
 
-  {% if comments['#pre_render'] and not label_hidden %}
+  {% if comments.pager and not label_hidden %}
     {{ title_prefix }}
     <h2{{ title_attributes.addClass(title_classes) }}>{{ label }}</h2>
     {{ title_suffix }}
