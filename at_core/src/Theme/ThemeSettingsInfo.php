@@ -7,8 +7,6 @@
 
 namespace Drupal\at_core\Theme;
 
-use Drupal\at_core\Theme\ThemeData;
-
 /**
  * ThemeSettingsInfo declares methods used to return theme info for use in
  * theme-settings.php. Note the constructor calls system_rebuild_theme_data()
@@ -25,7 +23,7 @@ class ThemeSettingsInfo extends ThemeInfo {
    */
   public function __construct($theme) {
     $this->theme = $theme;
-    $this->data = system_rebuild_theme_data();
+    $this->data = \Drupal::service('theme_handler')->rebuildThemeData();
   }
 
   /**
