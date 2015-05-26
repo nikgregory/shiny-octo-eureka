@@ -1,12 +1,12 @@
 id: at_responsive_image_mappings
 label: 'AT Picture Mappings'
-mappings:
-  theme.at_core.mobile:
-    1x: ''
-  theme.at_core.narrow:
-    1x: ''
-  theme.at_core.wide:
-    1x: large
-breakpointGroup: theme.at_core.at_core
-status: true
-langcode: en
+# mappings:
+#   theme.at_core.mobile:
+#     1x: ''
+#   theme.at_core.narrow:
+#     1x: ''
+#   theme.at_core.wide:
+#     1x: large
+# breakpointGroup: theme.at_core.at_core
+# status: true
+# langcode: en
