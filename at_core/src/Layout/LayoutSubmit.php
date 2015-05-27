@@ -14,7 +14,7 @@ use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 
 
@@ -103,7 +103,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     $max_width_override = '';
     if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
-      $max_width_value = String::checkPlain($this->form_values['settings_max_width_value']);
+      $max_width_value = SafeMarkup::checkPlain($this->form_values['settings_max_width_value']);
       $max_width_override = 'div.regions{max-width:' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '}';
     }
 
@@ -253,7 +253,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
       $output = array();
-      $suggestion_key = String::checkPlain($suggestion_key);
+      $suggestion_key = SafeMarkup::checkPlain($suggestion_key);
 
       // Doc block
       $doc = array();

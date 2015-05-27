@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 
 /**
@@ -10,7 +10,7 @@ use Drupal\Component\Utility\Xss;
 function at_core_submit_breadcrumb($values, $theme, $generated_files_path) {
   $breadcrumb_css = '';
   if (!empty($values['settings_breadcrumb_separator'])) {
-    $css = '.breadcrumb li:before {content: "' . String::checkPlain($values['settings_breadcrumb_separator']) . '"}';
+    $css = '.breadcrumb li:before {content: "' . SafeMarkup::checkPlain($values['settings_breadcrumb_separator']) . '"}';
   }
   if (!empty($css)) {
     $file_name = 'breadcrumb.css';

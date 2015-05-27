@@ -7,7 +7,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\UserInterface;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
@@ -286,17 +286,21 @@ function at_core_css_alter(&$css) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  //var_dump($css);
+
   // Individual CSS files to remove.
   // Sometimes we don't want to remove the entire library as it may
   // load dependancies we need, so we can use this more granular
   // approach to remove individual CSS assets.
+  // MOVED TO THEME INFO FILE FOR NOW.
+  /*
   $remove = array(
     'book.theme.css',
     'comment.theme.css',
     'file.formatter.generic.css',
     'forum.theme.css',
     'search.theme.css',
-    'system.theme.css',
+    'system.theme.css',            //core/modules/system/css/system.theme.css
     'taxonomy.theme.css',
   );
   foreach ($remove as $file) {
@@ -304,6 +308,7 @@ function at_core_css_alter(&$css) {
       unset($css[$file]);
     }
   }
+  */
 
   // Layout
   // This determines the page suggestion for the current page and checks if there is an
@@ -484,7 +489,7 @@ function at_core_preprocess_html(&$variables) {
 
   // Add theme variables, we use these to set a class and provide a very easy way for themers to link
   // to files in the theme, such as background images or other files.
-  $variables['theme']['name'] = String::checkPlain($theme);
+  $variables['theme']['name'] = SafeMarkup::checkPlain($theme);
   $variables['theme']['path'] = $path_to_theme;
 
   // Set the skip navigation target ID
@@ -515,24 +520,24 @@ function at_core_preprocess_html(&$variables) {
 
       // Apple default icon and Nokia shortcut icon.
       if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $default_icon = file_create_url($path_to_theme . '/' . String::checkPlain($config['icon_path_default']));
+        $default_icon = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['icon_path_default']));
         $variables['touch_icon_nokia'] = $default_icon;
         $variables['touch_icon_default'] = $default_icon;
       }
 
       // iPad (standard display).
       if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_ipad']));
+        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_ipad']));
       }
 
       // iPhone retina.
       if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_iphone_retina']));
+        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_iphone_retina']));
       }
 
       // iPad retina.
       if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . String::checkPlain($config['apple_touch_icon_path_ipad_retina']));
+        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_ipad_retina']));
       }
     }
 
@@ -545,7 +550,7 @@ function at_core_preprocess_html(&$variables) {
 
       // Typekit.
       if (!empty($config['font_typekit'])) {
-        $variables['typekit_id'] = String::checkPlain($config['font_typekit']);
+        $variables['typekit_id'] = SafeMarkup::checkPlain($config['font_typekit']);
       }
     }
 
@@ -767,8 +772,9 @@ function at_core_preprocess_comment(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  $comment = $variables['elements']['#comment'];
-  $account = comment_prepare_author($comment);
+  //$comment = $variables['elements']['#comment'];
+  //$account = comment_prepare_author($comment);
+  //$account = $comment->getOwner();
 
   // Attributes.
   $variables['title_attributes']['class'][] = 'comment__title';
@@ -1000,7 +1006,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
           }
         }
         if (!empty($title)) {
-          $variables['breadcrumb'][]['text'] = String::checkPlain($title);
+          $variables['breadcrumb'][]['text'] = SafeMarkup::checkPlain($title);
         }
       }
     }

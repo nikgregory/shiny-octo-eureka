@@ -5,7 +5,6 @@ use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 
 use Drupal\Component\Utility\SafeMarkup;
-use Drupal\Component\Utility\String;
 
 $layout_data = new LayoutCompatible($theme);
 $layout_compatible_data = $layout_data->getCompatibleLayout();
@@ -29,7 +28,7 @@ $template_suggestions['page'] = 'page';
 foreach ($config as $config_key => $config_value) {
   if (substr($config_key, 0, 16) == 'suggestion_page_') {
     if (!empty($config_value) && $config_value !== 'page') {
-      $clean_config_value = String::checkPlain($config_value);
+      $clean_config_value = SafeMarkup::checkPlain($config_value);
       $template_suggestions['page__' . $clean_config_value] = 'page__' . $clean_config_value;
     }
   }
@@ -93,7 +92,7 @@ $form['layouts']['layout_select']['settings_suggestions'] = array(
 
 foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
-  //$suggestions_name = String::checkPlain($suggestions_name);
+  //$suggestions_name = SafeMarkup::checkPlain($suggestions_name);
 
   if ($suggestions_name == 'page') {
     $suggestions_name = 'page (default)';
@@ -290,7 +289,7 @@ $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enabl
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_value'] = array(
   '#type' => 'number',
   '#title' => t('Value'),
-  '#default_value' => String::checkPlain(theme_get_setting('settings.max_width_value')),
+  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.max_width_value')),
   '#attributes' => array(
     'min' => 0,
     'max' => 9999,

@@ -7,7 +7,7 @@ use Drupal\at_core\File\FileOperations;
 use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Uuid;
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Serialization\Yaml;
 
 use Symfony\Component\Yaml\Parser;
@@ -29,7 +29,7 @@ class ThemeGeneratorSubmit {
 
     // Prepare form values and set them into variables
     $machine_name    = $values['generate']['generate_machine_name'];
-    $friendly_name   = String::checkPlain($values['generate']['generate_friendly_name']);
+    $friendly_name   = SafeMarkup::checkPlain($values['generate']['generate_friendly_name']);
     $subtheme_type   = $values['generate']['generate_type'];
     $skin_base_theme = $values['generate']['generate_skin_base'] ?: 0;
     $clone_source    = $values['generate']['generate_clone_source'] ?: '';

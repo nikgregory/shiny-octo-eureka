@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 
 // Development settings
 $form['devel'] = array(
@@ -69,8 +69,8 @@ $form['devel']['settings_livereload'] = array(
   '#description' => t('See <a href="!lv" target="_blank">Livereload.com</a> for more information on setting up and using LiveReload. Also see the Help tab for more details.'),
   '#default_value' => theme_get_setting('settings.livereload', $theme),
 );
-$livereload_snippet = String::checkPlain("document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1\"></' + 'script>');");
-$livereload_tags = String::checkPlain('<script></script>');
+$livereload_snippet = SafeMarkup::checkPlain("document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1\"></' + 'script>');");
+$livereload_tags = SafeMarkup::checkPlain('<script></script>');
 $form['devel']['settings_livereload_snippet'] = array(
   '#type' => 'textarea',
   '#rows' => 2,

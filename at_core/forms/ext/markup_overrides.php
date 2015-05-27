@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\Component\Utility\String;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 
 /**
@@ -63,7 +63,7 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
   '#type'  => 'textfield',
   '#title' => t('Separator'),
   '#description' => t('Use UTF8 chars or escaped unicode, e.g. <code> \00BB </code> (chevron &#187;). You can add spaces also. <a href="!unicodetable" target="_blank">Unicode-table.com</a> is a good place to find codes.', array('!unicodetable' => 'http://unicode-table.com/')),
-  '#default_value' => String::checkPlain(theme_get_setting('settings.breadcrumb_separator')),
+  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.breadcrumb_separator')),
   '#size' => 25,
   '#maxlength' => 60,
 );
@@ -126,7 +126,7 @@ $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(
 
 // Skip link target
 if (!empty(theme_get_setting('settings.skip_link_target'))) {
-  $skip_link_setting = String::checkPlain(theme_get_setting('settings.skip_link_target'));
+  $skip_link_setting = SafeMarkup::checkPlain(theme_get_setting('settings.skip_link_target'));
 }
 else {
   $skip_link_setting = 'block-' . $theme . '-content'; // try to provide the most likely match.
@@ -138,7 +138,7 @@ $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_li
   '#size' => 60,
   '#maxlength' => 255,
   '#field_prefix' => '#',
-  '#default_value' => String::checkPlain(theme_get_setting('settings.skip_link_target')),
+  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.skip_link_target')),
 );
 
 // Attribution
