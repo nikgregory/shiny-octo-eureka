@@ -1,9 +1,9 @@
 id: THEMENAME_tools
 theme: THEMENAME
-weight: 0
+weight: 1
 status: true
 langcode: en
-region: sidebar_first
+region: sidebar_second
 plugin: 'system_menu_block:tools'
 settings:
   visibility:

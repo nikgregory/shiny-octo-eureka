@@ -1,6 +1,6 @@
 id: THEMENAME_login
 theme: THEMENAME
-weight: 0
+weight: 99
 status: true
 langcode: en
 region: sidebar_first

@@ -33,3 +33,11 @@ features:
   - comment_user_verification
   - favicon
   - logo
+stylesheets-remove:
+  - '@classy/css/layout.css'
+  - '@book/css/book.theme.css'
+  - '@comment/css/comment.theme.css'
+  - '@file/css/file.theme.css'
+  - '@forum/css/forum.theme.css'
+  - '@system/css/system.theme.css'
+  - '@taxonomy/css/taxonomy.theme.css'

@@ -1,0 +1,18 @@
+id: THEMENAME_messages
+theme: THEMENAME
+status: true
+langcode: en
+dependencies:
+  module:
+    - system
+region: messages
+weight: -5
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Status Messages
+  provider: system
+  label_display: '0'
+  cache:
+    max_age: -1
+visibility: {  }
