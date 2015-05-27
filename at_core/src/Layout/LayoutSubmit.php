@@ -259,7 +259,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $doc = array();
       $doc[$suggestion_key][] = '{#';
       $doc[$suggestion_key][] = '/**';
-      $doc[$suggestion_key][] = ' * ' . $this->layout_name . ' for the ' . $suggestion_key . ' template.';
+      $doc[$suggestion_key][] = ' * ' . $this->layout_name . ' ' . $suggestion_key . ' template.';
       $doc[$suggestion_key][] = ' * Generated on: ' . date(DATE_RFC822);
       $doc[$suggestion_key][] = ' */';
       $doc[$suggestion_key][] = '#}' . "\n";
@@ -316,8 +316,9 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
         $generated[$suggestion_key][] = "{# No template file found - template code programmatically generated. #}" . "\n";
         $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
-        $generated[$suggestion_key][] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
-        $generated[$suggestion_key][] = "  {{ messages }}" . "\n";
+
+        //$generated[$suggestion_key][] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
+        //$generated[$suggestion_key][] = "  {{ messages }}" . "\n";
 
         foreach ($output[$suggestion_key] as $row_output) {
           $generated[$suggestion_key][] = implode("\n", $row_output);
