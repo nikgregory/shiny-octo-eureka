@@ -14,6 +14,7 @@ regions:
   header_first: 'Header first'
   header_second: 'Header second'
   navbar: 'Navbar'
+  highlighted: 'Highlighted'
   features_first: 'Features first'
   features_second: 'Features second'
   features_third: 'Features third'

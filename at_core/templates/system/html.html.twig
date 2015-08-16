@@ -20,6 +20,9 @@
  * - styles: Style tags necessary to import all necessary CSS files in the head.
  * - scripts: Script tags necessary to load the JavaScript files and settings
  *   in the head.
+ * - scripts_bottom: HTML necessary to load JavaScript files before closing
+ *   <body> tag.
+ * - db_offline: A flag indicating if the database is offline.
  * - touch_icons: bool, true if touch icons extension is enabled.
  * - touch_rel: string, defaults to apple-touch-icon, or apple-touch-icon-precomposed
  *   if set in appearance settings.
@@ -45,7 +48,8 @@
     not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
     node_type ? 'node--type-' ~ node_type|clean_class,
     head_title_array.name ? 'site-name-' ~ head_title_array.name|clean_class,
-    theme.name ? 'theme-name-' ~ theme.name|clean_class
+    theme.name ? 'theme-name-' ~ theme.name|clean_class,
+    db_offline ? 'db-offline',
   ]
 %}
 <!DOCTYPE html>
@@ -59,7 +63,7 @@
       {% if touch_icon_nokia %}<link href="{{ touch_icon_nokia }}" rel="shortcut icon" />{% endif %}
     {% endif %}
     {{ head }}
-    <title>{{ head_title }}</title>
+    <title>{{ head_title|safe_join(' | ') }}</title>
     {% if googlefonts_url %}
       <link href="{{ googlefonts_url }}" rel='stylesheet' type='text/css'>
     {% endif %}

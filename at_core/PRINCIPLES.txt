@@ -1,5 +1,5 @@
 
-Adaptivetheme for Drupal 8 was built with strick guiding principle that permeate
+Adaptivetheme for Drupal 8 was built with strict guiding principles that permeate
 the entire design philosphy. Each decision is measured against one or more of
 these principles before being committed.
 
@@ -9,7 +9,7 @@ The principles are simple:
 1. Turn hours into minutes, minutes into seconds.
 
 If we can do something faster, quicker, DRYer, do it. Do everything we can to reduce
-development time.
+theme development time.
 
 
 2. Narrow the scope.

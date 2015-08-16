@@ -31,6 +31,11 @@ rows:
       id: navbar
     regions:
       navbar: 'Navbar'
+  highlighted:
+    attributes:
+      id: highlighted
+    regions:
+      highlighted: 'Highlighted'
   features:
     attributes:
       id: features

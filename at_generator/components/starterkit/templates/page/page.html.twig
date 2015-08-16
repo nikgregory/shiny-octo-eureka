@@ -33,6 +33,13 @@
     </div>
   </div>
   {% endif %}
+  {% if highlighted__regions.active == true %}
+  <div class="l-pr page__row pr-highlighted" id="highlighted">
+    <div{{ highlighted__attributes }}>
+      {{ page.highlighted }}
+    </div>
+  </div>
+  {% endif %}
   {% if features__regions.active == true %}
   <div class="l-pr page__row pr-features" id="features">
     <div{{ features__attributes }}>

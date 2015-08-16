@@ -29,7 +29,7 @@ settings:
   apple_touch_icon_path_ipad: images/touch-icons/Icon-76.png
   apple_touch_icon_path_ipad_retina: images/touch-icons/Icon-76@2x.png
   apple_touch_icon_precomposed: 0
-  generated_files_path: TARGET/styles/css/generated
+  generated_files_path: themes/custom/THEMENAME/styles/css/generated
   extensions_form_open: 1
   layouts_form_open: 0
   font_size_base: '16'
@@ -49,6 +49,7 @@ settings:
   page_tabletisolate_leaderboard: ''
   page_tabletisolate_header: twocol-6-6
   page_tabletisolate_navbar: ''
+  page_tabletisolate_highlighted: ''
   page_tabletisolate_features: threecol-split-row-12--6-6
   page_tabletisolate_main: threecol-split-row-12--6-6
   page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
@@ -57,6 +58,7 @@ settings:
   page_wide_leaderboard: ''
   page_wide_header: twocol-6-6
   page_wide_navbar: ''
+  page_wide_highlighted: ''
   page_wide_features: threecol-source-ordered-2-8-2
   page_wide_main: threecol-source-ordered-3-6-3
   page_wide_subfeatures: fourcol-3-3-3-3
@@ -219,6 +221,7 @@ settings:
   page_classes_row_leaderboard: ''
   page_classes_row_header: ''
   page_classes_row_navbar: ''
+  page_classes_row_highlighted: ''
   page_classes_row_features: ''
   page_classes_row_main: ''
   page_classes_row_subfeatures: ''
@@ -228,6 +231,7 @@ settings:
   page_classes_region_header_first: ''
   page_classes_region_header_second: ''
   page_classes_region_navbar: ''
+  page_classes_region_highlighted: ''
   page_classes_region_features_first: ''
   page_classes_region_features_second: ''
   page_classes_region_features_third: ''
@@ -251,6 +255,7 @@ settings:
   block_classes_THEMENAME_main_menu: ''
   block_classes_THEMENAME_search: ''
   block_classes_THEMENAME_tools: ''
+  block_classes_THEMENAME_messages: ''
   nodetype_classes_article: ''
   nodetype_classes_book: ''
   nodetype_classes_forum: ''
