@@ -6,7 +6,7 @@ langcode: en
 region: navbar
 plugin: 'system_menu_block:main'
 settings:
-  label: 'Menu'
+  label: 'Main Menu'
   id: 'system_menu_block:main'
   provider: system
   label_display: 0
