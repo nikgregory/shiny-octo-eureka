@@ -8,6 +8,10 @@ use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\File\DirectoryOperations;
+
+use Drupal\block\BlockInterface;
+use Drupal\block\Entity\Block;
+
 //use Drupal\at_core\Breakpoints\ATBreakpoints;
 
 /**
@@ -47,7 +51,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
   // Active themes active blocks
-  $theme_blocks = _block_rehash($theme);
+  $theme_blocks = entity_load_multiple_by_properties('block', ['theme' => $theme]);
 
   // Check for breakpoints module and set a warning and a flag to disable much of the theme settings if its not available
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
