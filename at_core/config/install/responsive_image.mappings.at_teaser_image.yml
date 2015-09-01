@@ -1,0 +1,27 @@
+# Responsive Image Mappings
+# Example image mappings, quite useful for getting started and as
+# examples of how to create responsive image mappings for your theme.
+# See also: https://github.com/attiks/demotheme
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.medium
+    - image.style.thumbnail
+  theme:
+    - at_core
+id: at_teaser_image
+label: 'AT Teaser Image'
+image_style_mappings:
+  -
+    breakpoint_id: at_core.simple.tablet-isolate
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: thumbnail
+  -
+    breakpoint_id: at_core.simple.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: medium
+breakpoint_group: at_core.simple
+fallback_image_style: thumbnail
