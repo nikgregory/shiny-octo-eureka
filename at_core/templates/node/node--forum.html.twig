@@ -82,6 +82,11 @@
 <article{{ attributes.addClass(classes) }}>
 
   <header{{ header_attributes }}>
+    {% if not node.isPublished() %}
+      <p class="unpublished__title clearfix" aria-label="Status message" role="contentinfo">
+        {% trans %}Unpublished{% endtrans %}
+      </p>
+    {% endif %}
     {{ title_prefix }}
     {% if label %}
       {% if page %}

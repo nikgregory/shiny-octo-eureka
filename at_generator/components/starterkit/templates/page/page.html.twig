@@ -1,80 +1,87 @@
 {#
 /**
- * site-builder for the page template.
+ * site-builder page template.
+ * Generated on: Wed, 02 Sep 15 22:31:12 +1200
  */
 #}
 <div{{ attributes }}>
-  {% if messages__regions.active == true %}
-  <div class="l-pr page__row pr-messages" id="messages">
-    <div{{ messages__attributes }}>
-      {{ page.messages }}
-    </div>
-  </div>
-  {% endif %}
   {% if leaderboard__regions.active == true %}
-  <div class="l-pr page__row pr-leaderboard" id="leaderboard">
-    <div{{ leaderboard__attributes }}>
+    <div class="l-pr page__row pr-leaderboard" id="leaderboard">
+      <div{{ leaderboard__attributes }}>
       {{ page.leaderboard }}
+      </div>
     </div>
-  </div>
   {% endif %}
   {% if header__regions.active == true %}
-  <header class="l-pr page__row pr-header" id="masthead" role="banner">
-    <div{{ header__attributes }}>
+    <header class="l-pr page__row pr-header" id="masthead" role="banner">
+      <div{{ header__attributes }}>
       {{ page.header_first }}
       {{ page.header_second }}
-    </div>
-  </header>
+      </div>
+    </header>
   {% endif %}
   {% if navbar__regions.active == true %}
-  <div class="l-pr page__row pr-navbar" id="navbar">
-    <div{{ navbar__attributes }}>
+    <div class="l-pr page__row pr-navbar" id="navbar">
+      <div{{ navbar__attributes }}>
       {{ page.navbar }}
+      </div>
     </div>
-  </div>
   {% endif %}
   {% if highlighted__regions.active == true %}
-  <div class="l-pr page__row pr-highlighted" id="highlighted">
-    <div{{ highlighted__attributes }}>
+    <div class="l-pr page__row pr-highlighted" id="highlighted">
+      <div{{ highlighted__attributes }}>
       {{ page.highlighted }}
+      </div>
     </div>
-  </div>
   {% endif %}
   {% if features__regions.active == true %}
-  <div class="l-pr page__row pr-features" id="features">
-    <div{{ features__attributes }}>
+    <div class="l-pr page__row pr-features" id="features">
+      <div{{ features__attributes }}>
       {{ page.features_first }}
       {{ page.features_second }}
       {{ page.features_third }}
+      </div>
     </div>
-  </div>
   {% endif %}
-  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw regions">{{ tabs }}</div></div>{% endif %}
+  {% if content_prefix__regions.active == true %}
+    <div class="l-pr page__row pr-content_prefix" id="content-prefix">
+      <div{{ content_prefix__attributes }}>
+      {{ page.content_prefix }}
+      </div>
+    </div>
+  {% endif %}
   {% if main__regions.active == true %}
-  <div class="l-pr page__row pr-main" id="main-content">
-    <div{{ main__attributes }}>
+    <div class="l-pr page__row pr-main" id="main-content">
+      <div{{ main__attributes }}>
       {{ page.content }}
       {{ page.sidebar_first }}
       {{ page.sidebar_second }}
+      </div>
     </div>
-  </div>
+  {% endif %}
+  {% if content_suffix__regions.active == true %}
+    <div class="l-pr page__row pr-content_suffix" id="content-suffix">
+      <div{{ content_suffix__attributes }}>
+      {{ page.content_suffix }}
+      </div>
+    </div>
   {% endif %}
   {% if subfeatures__regions.active == true %}
-  <div class="l-pr page__row pr-subfeatures" id="sub-features">
-    <div{{ subfeatures__attributes }}>
+    <div class="l-pr page__row pr-subfeatures" id="sub-features">
+      <div{{ subfeatures__attributes }}>
       {{ page.subfeatures_first }}
       {{ page.subfeatures_second }}
       {{ page.subfeatures_third }}
       {{ page.subfeatures_fourth }}
+      </div>
     </div>
-  </div>
   {% endif %}
   {% if footer__regions.active == true %}
-  <footer class="l-pr page__row pr-footer" id="footer" role="contentinfo">
-    <div{{ footer__attributes }}>
+    <footer class="l-pr page__row pr-footer" id="footer" role="contentinfo">
+      <div{{ footer__attributes }}>
       {{ page.footer }}
-    </div>
-  </footer>
+      </div>
+    </footer>
   {% endif %}
   {{ attribution }}
 </div>

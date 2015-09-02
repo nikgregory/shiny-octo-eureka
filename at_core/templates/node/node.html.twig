@@ -82,6 +82,11 @@
 <article{{ attributes.addClass(classes) }}>
 
   <header{{ header_attributes }}>
+    {% if not node.isPublished() %}
+      <p class="unpublished__title clearfix" aria-label="Status message" role="contentinfo">
+        {% trans %}Unpublished{% endtrans %}
+      </p>
+    {% endif %}
     {{ title_prefix }}
     {% if label %}
       {% if page %}
@@ -109,14 +114,12 @@
     {{ content|without('comment', 'links') }}
   </div>
 
-  {% if content.links is not empty %}
+  {% if content.links %}
     <footer{{ footer_attributes }}>
       {{ content.links }}
     </footer>
   {% endif %}
 
-  {% if content.comment is not empty %}
   {{ content.comment }}
-  {% endif %}
 
 </article>
