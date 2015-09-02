@@ -9,7 +9,6 @@ tags: 'sub-theme'
 core: 8.x
 hidden: true
 regions:
-  messages: 'Messages'
   leaderboard: 'Leaderboard'
   header_first: 'Header first'
   header_second: 'Header second'
@@ -18,9 +17,11 @@ regions:
   features_first: 'Features first'
   features_second: 'Features second'
   features_third: 'Features third'
+  content_prefix: 'Content prefix'
   content: 'Main content'
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
+  content_suffix: 'Content suffix'
   subfeatures_first: 'Sub-features first'
   subfeatures_second: 'Sub-features second'
   subfeatures_third: 'Sub-features third'
@@ -35,10 +36,35 @@ features:
   - favicon
   - logo
 stylesheets-remove:
-  - '@classy/css/layout.css'
-  - '@book/css/book.theme.css'
-  - '@comment/css/comment.theme.css'
-  - '@file/css/file.theme.css'
-  - '@forum/css/forum.theme.css'
-  - '@system/css/system.theme.css'
-  - '@taxonomy/css/taxonomy.theme.css'
+  - @classy/css/layout.css
+  - @book/css/book.theme.css
+  - @comment/css/comment.theme.css
+  - @file/css/file.theme.css
+  - @forum/css/forum.theme.css
+  - @taxonomy/css/taxonomy.theme.css
+  - @system/css/components/action-links.theme.css
+  - @system/css/components/breadcrumb.theme.css
+  - @system/css/components/button.theme.css
+  - @system/css/components/collapse-processed.theme.css
+  - @system/css/components/container-inline.theme.css
+  - @system/css/components/details.theme.css
+  - @system/css/components/exposed-filters.theme.css
+  - @system/css/components/field.theme.css
+  - @system/css/components/form.theme.css
+  - @system/css/components/icons.theme.css
+  - @system/css/components/inline-form.theme.css
+  - @system/css/components/item-list.theme.css
+  - @system/css/components/link.theme.css
+  - @system/css/components/links.theme.css
+  - @system/css/components/menu.theme.css
+  - @system/css/components/messages.theme.css
+  - @system/css/components/more-link.theme.css
+  - @system/css/components/node.theme.css
+  - @system/css/components/pager.theme.css
+  - @system/css/components/progress.theme.css
+  - @system/css/components/tableselect.theme.css
+  - @system/css/components/tabledrag.theme.css
+  - @system/css/components/tablesort.theme.css
+  - @system/css/components/tabs.theme.css
+  - @system/css/components/textarea.theme.css
+  - @system/css/components/tree-child.module.css

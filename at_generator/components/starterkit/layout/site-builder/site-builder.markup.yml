@@ -9,16 +9,11 @@ version: '8.x-1.0-dev'                  # Version string. Optional.
 # info file, and to build the layout CSS classes. Here you must at least declare regions,
 # optionally you can add attributes (which are printed on the row HTML wrapper).
 rows:
-  messages:          # row key (name)
-    attributes:      # attributes key. Set id, role, classes etc. Optional.
-      id: messages
-    regions:         # use the key "regions" to declare row regions.
-      messages: 'Messages'
-  leaderboard:
-    attributes:
+  leaderboard:                      # row key (name of the row).
+    attributes:                     # attributes key. Set id, role, classes etc, optional.
       id: leaderboard
-    regions:
-      leaderboard: 'Leaderboard'
+    regions:                        # regions key.
+      leaderboard: 'Leaderboard'    # region name/s.
   header:
     attributes:
       role: banner
@@ -43,6 +38,11 @@ rows:
       features_first: 'Features first'
       features_second: 'Features second'
       features_third: 'Features third'
+  content_prefix:
+    attributes:
+      id: content-prefix
+    regions:
+      content_prefix: 'Content prefix'
   main:
     attributes:
       id: main-content
@@ -50,6 +50,11 @@ rows:
       content: 'Main content'
       sidebar_first: 'Sidebar first'
       sidebar_second: 'Sidebar second'
+  content_suffix:
+    attributes:
+      id: content-suffix
+    regions:
+      content_prefix: 'Content suffix'
   subfeatures:
     attributes:
       id: sub-features
@@ -64,3 +69,9 @@ rows:
       id: footer
     regions:
       footer: 'Footer'
+
+#   messages:          # row key (name)
+#     attributes:      # attributes key. Set id, role, classes etc. Optional.
+#       id: messages
+#     regions:         # use the key "regions" to declare row regions.
+#       messages: 'Messages'
