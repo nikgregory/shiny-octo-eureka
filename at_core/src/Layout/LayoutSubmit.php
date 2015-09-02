@@ -296,29 +296,17 @@ class LayoutSubmit implements LayoutSubmitInterface {
             $wrapper_element[$suggestion_key] = $row;
           }
 
-          // Temporarily add tabs, we can remove this later when the tabs become a block.
-          if ($row == 'main') {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if tabs %}<div class="pr-temporary-tabs l-pr"><div class="l-rw pr-temporary-tabs__rw regions">{{ tabs }}</div></div>{% endif %}'  . "\n\n" . '{% if '. $row . '__regions.active == true %}';
-          }
-          else {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
-          }
-
-          // move the dynamic region classes to the regions wrapper, hard code the page-row class
-          //$output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' class="l-pr page__row pr-' . $row . '">';
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . '>';
-          $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '__attributes }}>';
+          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . '>';
+          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '__attributes }}>';
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
-          $output[$suggestion_key][$row]['container_close'] = '    </div>';
-          $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
+          $output[$suggestion_key][$row]['container_close'] = '      </div>';
+          $output[$suggestion_key][$row]['wrapper_close'] = '    </' . $wrapper_element[$suggestion_key] . '>';
           $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
         }
 
         $generated[$suggestion_key][] = "{# No template file found - template code programmatically generated. #}" . "\n";
         $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
-
-        //$generated[$suggestion_key][] = "  {# Remove messages variable when https://www.drupal.org/node/2289917 lands. #}" . "\n";
-        //$generated[$suggestion_key][] = "  {{ messages }}" . "\n";
 
         foreach ($output[$suggestion_key] as $row_output) {
           $generated[$suggestion_key][] = implode("\n", $row_output);
