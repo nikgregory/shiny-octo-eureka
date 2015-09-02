@@ -45,22 +45,24 @@ settings:
   font_lineheight_multiplier_large_size: '24'
   enable_shortcodes: 1
   breakpoint_group_layout: at_core.simple
-  page_tabletisolate_messages: ''
   page_tabletisolate_leaderboard: ''
   page_tabletisolate_header: twocol-6-6
   page_tabletisolate_navbar: ''
   page_tabletisolate_highlighted: ''
   page_tabletisolate_features: threecol-split-row-12--6-6
+  page_tabletisolate_content_prefix: ''
   page_tabletisolate_main: threecol-split-row-12--6-6
+  page_tabletisolate_content_suffix: ''
   page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
   page_tabletisolate_footer: ''
-  page_wide_messages: ''
   page_wide_leaderboard: ''
   page_wide_header: twocol-6-6
   page_wide_navbar: ''
   page_wide_highlighted: ''
   page_wide_features: threecol-source-ordered-2-8-2
+  page_wide_content_prefix: ''
   page_wide_main: threecol-source-ordered-3-6-3
+  page_wide_content_suffix: ''
   page_wide_subfeatures: fourcol-3-3-3-3
   page_wide_footer: ''
   enable_slideshows: 1
