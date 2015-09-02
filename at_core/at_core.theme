@@ -375,7 +375,6 @@ function at_core_css_alter(&$css) {
       'type' => 'file',
       'data' => $generated_files_path . '/' . $layout,
       'version' => '8.0.0-dev',
-      'every_page' => false,
       'media' => 'all',
       'preprocess' => true,
       'browsers' => array ('IE' => true, '!IE' => true),
@@ -527,17 +526,17 @@ function at_core_preprocess_html(&$variables) {
 
       // iPad (standard display).
       if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_ipad']));
+        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_ipad']);
       }
 
       // iPhone retina.
       if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_iphone_retina']));
+        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_iphone_retina']);
       }
 
       // iPad retina.
       if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['apple_touch_icon_path_ipad_retina']));
+        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_ipad_retina']);
       }
     }
 
@@ -550,7 +549,7 @@ function at_core_preprocess_html(&$variables) {
 
       // Typekit.
       if (!empty($config['font_typekit'])) {
-        $variables['typekit_id'] = SafeMarkup::checkPlain($config['font_typekit']);
+        $variables['typekit_id'] = $config['font_typekit'];
       }
     }
 
@@ -715,6 +714,8 @@ function at_core_preprocess_node(&$variables) {
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
 
   // Unpublished status message.
+  // TODO - check render cache, should we use JS to inject this OR move to template?
+  /*
   if ($node->isPublished() === FALSE) {
     $variables['title_prefix']['status'] = array(
       '#markup' => t('Node unpublished'),
@@ -722,6 +723,7 @@ function at_core_preprocess_node(&$variables) {
       '#suffix' => '</p>',
     );
   }
+  */
 
   // Set attribute classes. TODO: move to template?
   $variables['header_attributes']['class'][] = 'node__header';
@@ -747,14 +749,14 @@ function at_core_preprocess_node(&$variables) {
     $variables['author_attributes']['class'] = array();
     $variables['author_attributes']['class'][] = 'node__author';
 
-    // Seriously, we actually need to do this?
-    //$rdf_module = \Drupal::moduleHandler()->moduleExists('rdf');
+    // If RDF module is uninstalled add a rel author attribute.
+    // TODO - does this break the entity render cache?
     if (\Drupal::moduleHandler()->moduleExists('rdf') == FALSE) {
-      $variables['author_attributes']['rel'] = array();
+      $variables['author_attributes']['rel'] = array('author');
     }
-    $variables['author_attributes']['rel'][] = 'author';
 
     // add a class if author picture is printing.
+    // TODO - does this break the entity render cache?
     if ($author_picture = \Drupal::service('renderer')->render($variables['author_picture'])) {
       // Does this fails if twig debugging is on. TODO ?
       if (!empty($author_picture)) {
@@ -805,6 +807,7 @@ function at_core_preprocess_comment(&$variables) {
   }
 
   // Unpublished status message.
+  // TODO - check render cache, should we use JS to inject this?
   if ($variables['status'] == 'unpublished') {
     $variables['title_prefix']['status'] = array(
       '#markup' => t('Comment unpublished'),
@@ -1059,19 +1062,26 @@ function at_core_preprocess_menu(&$variables) {
  */
 function at_core_preprocess_forums(&$variables) {
   // Add a class to each forum topic table header td.
-  foreach ($variables['topics']['#header'] as $topic_list_key => $topic_list_value) {
-    $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::getClass($variables['topics']['#header'][$topic_list_key]['data']);
+
+  if (isset($variables['topics']['#header'])) {
+    foreach ($variables['topics']['#header'] as $topic_list_key => $topic_list_value) {
+      $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::getClass($variables['topics']['#header'][$topic_list_key]['data']);
+    }
   }
 
+
   // Add BEM classes to row items, to match the forum-list.html.twig BEM classes.
-  foreach ($variables['topics']['#rows'] as $row_key => $row_values) {
-    foreach ($row_values as $row_values_key => $row_values_value) {
-      foreach ($row_values_value['class'] as $class_key => $class_value) {
-        $variables['topics']['#rows'][$row_key][$row_values_key]['class'][] = 'forum-list__' . $class_value;
-        unset($variables['topics']['#rows'][$row_key][$row_values_key]['class'][$class_key]);
+  if (isset($variables['topics']['#rows'])) {
+    foreach ($variables['topics']['#rows'] as $row_key => $row_values) {
+      foreach ($row_values as $row_values_key => $row_values_value) {
+        foreach ($row_values_value['class'] as $class_key => $class_value) {
+          $variables['topics']['#rows'][$row_key][$row_values_key]['class'][] = 'forum-list__' . $class_value;
+          unset($variables['topics']['#rows'][$row_key][$row_values_key]['class'][$class_key]);
+        }
       }
     }
   }
+
 }
 
 
