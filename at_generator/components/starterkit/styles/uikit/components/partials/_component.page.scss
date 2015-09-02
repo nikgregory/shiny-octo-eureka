@@ -11,6 +11,14 @@
   position: relative;
   min-height: 100%;
   min-width: 100%;
+
+  // Remove layout form hidden regions. These regions have no row, so
+  // they get a basic region class unlike theme regions.
+  &-top,
+  &-bottom {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 
@@ -87,12 +95,12 @@
 }
 
 
-// Remove layout form hidden regions. These regions have no row, so
-// they get a basic region class unlike theme regions.
-.page-top,
-.page-bottom {
-  padding: 0;
-  margin: 0;
+// Action links, place here for now, should be a seperate com.
+.action-links {
+  &__button {
+    padding: 0;
+    @include output-rhythm(margin, $medium 0);
+  }
 }
 
 
@@ -101,7 +109,7 @@
 .attribution {
   text-align: $flow-to;
 
-  .attribution__link {
+  &__link {
     text-decoration: none;
     @include adjust-font-size-to($small);
   }

@@ -3,7 +3,7 @@
  ========================================================================== */
 
 // Publishing status.
-[class*="--unpublished"] {
+article[class*="--unpublished"] {
 
   // Keep background-color here, we don't want this to shift in color module.
   background-color: $unpublished-background-color;

@@ -367,42 +367,6 @@ th {
 }
 
 /**
- * Table Theme
- * Style Drupal selectors for tables.
- ========================================================================== */
-table.sticky-header {
-  z-index: 10;
-}
-table .view-table__details {
-  padding: 0;
-  margin: 0 0 16px;
-  margin: 0 0 1rem;
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 24px;
-  line-height: 1.5rem;
-}
-table .view-table__details,
-table .view-table__details--summary {
-  border: 0;
-}
-table .view-table__details--description {
-  font-style: italic;
-}
-table ul {
-  margin: 0;
-}
-
-td,
-th {
-  border-width: 0;
-}
-
-thead .active img {
-  display: inline;
-}
-
-/**
  * Form Base
  * Set base styes for form elements.
  ========================================================================== */
@@ -564,7 +528,43 @@ textarea:invalid {
 }
 
 /**
- * Form Theme
+ * Table Theme
+ * Style Drupal selectors for tables.
+ ========================================================================== */
+table.sticky-header {
+  z-index: 10;
+}
+table .view-table__details {
+  padding: 0;
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+table .view-table__details,
+table .view-table__details--summary {
+  border: 0;
+}
+table .view-table__details--description {
+  font-style: italic;
+}
+table ul {
+  margin: 0;
+}
+
+td,
+th {
+  border-width: 0;
+}
+
+thead .active img {
+  display: inline;
+}
+
+/**
+ * Form Common - common styles for form elements and classes.
  ========================================================================== */
 .form-text[name="subject[0][value]"] {
   width: 50%;
@@ -1204,6 +1204,10 @@ ul.inline li ol {
   min-height: 100%;
   min-width: 100%;
 }
+.page-top, .page-bottom {
+  padding: 0;
+  margin: 0;
+}
 
 .l-rw {
   padding: 0 16px;
@@ -1222,16 +1226,16 @@ ul.inline li ol {
   clear: both;
 }
 
-.page-top,
-.page-bottom {
+.action-links__button {
   padding: 0;
-  margin: 0;
+  margin: 16px 0;
+  margin: 1rem 0;
 }
 
 .attribution {
   text-align: right;
 }
-.attribution .attribution__link {
+.attribution__link {
   text-decoration: none;
   font-size: 11px;
   font-size: 0.69838rem;
@@ -1398,51 +1402,48 @@ table tr.error {
  * also.
  ========================================================================== */
 .tabs {
-  margin: 0;
   padding: 0;
+  margin: 16px 0;
+  margin: 1rem 0;
 }
-
-.pr-temporary-tabs .local-tasks {
+.tabs ul {
   margin-bottom: 16px;
   margin-bottom: 1rem;
+  padding: 0;
 }
-.pr-temporary-tabs .l-rw {
-  padding: 26px 16px 0;
-  padding: 1.61803rem 1rem 0;
-}
-.pr-temporary-tabs ul:before, .pr-temporary-tabs ul:after {
+.tabs ul:before, .tabs ul:after {
   content: " ";
   display: table;
 }
-.pr-temporary-tabs ul:after {
+.tabs ul:after {
   clear: both;
 }
-.pr-temporary-tabs ul.tabs--primary {
+.tabs ul.tabs--primary {
   margin-bottom: 0;
 }
 @media all and (max-width: 60em) {
-  .pr-temporary-tabs ul.tabs--primary {
+  .tabs ul.tabs--primary {
     list-style: none;
   }
-  .pr-temporary-tabs ul.tabs--primary li {
+  .tabs ul.tabs--primary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--primary:before, .pr-temporary-tabs ul.tabs--primary:after {
+  .tabs ul.tabs--primary:before, .tabs ul.tabs--primary:after {
     content: " ";
     display: table;
   }
-  .pr-temporary-tabs ul.tabs--primary:after {
+  .tabs ul.tabs--primary:after {
     clear: both;
   }
-  .pr-temporary-tabs ul.tabs--primary li:first-child a {
+  .tabs ul.tabs--primary li:first-child a {
     border-radius: 2px 2px 0 0;
   }
-  .pr-temporary-tabs ul.tabs--primary li:last-child a {
+  .tabs ul.tabs--primary li:last-child a {
     border-radius: 0 0 2px 2px;
   }
-  .pr-temporary-tabs ul.tabs--primary li a {
+  .tabs ul.tabs--primary li a {
     color: #ffffff;
     background-color: #0066cc;
     border-color: #0066cc;
@@ -1462,34 +1463,34 @@ table tr.error {
     -webkit-transition: background-color, .15s, ease-in-out;
             transition: background-color, .15s, ease-in-out;
   }
-  .pr-temporary-tabs ul.tabs--primary li a:link, .pr-temporary-tabs ul.tabs--primary li a:visited {
+  .tabs ul.tabs--primary li a:link, .tabs ul.tabs--primary li a:visited {
     color: #ffffff;
     background-color: #0066cc;
     border-color: #0066cc;
   }
-  .pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus, .pr-temporary-tabs ul.tabs--primary li a:active, .pr-temporary-tabs ul.tabs--primary li a.active {
+  .tabs ul.tabs--primary li a:hover, .tabs ul.tabs--primary li a:focus, .tabs ul.tabs--primary li a:active, .tabs ul.tabs--primary li a.active {
     color: #ffffff;
     background-color: #0066cc;
     border-color: #0066cc;
     opacity: 1;
   }
-  .pr-temporary-tabs ul.tabs--secondary {
+  .tabs ul.tabs--secondary {
     list-style: none;
     text-align: left;
   }
-  .pr-temporary-tabs ul.tabs--secondary li {
+  .tabs ul.tabs--secondary li {
     list-style-image: none;
     list-style-type: none;
     margin-left: 0;
   }
-  .pr-temporary-tabs ul.tabs--secondary:before, .pr-temporary-tabs ul.tabs--secondary:after {
+  .tabs ul.tabs--secondary:before, .tabs ul.tabs--secondary:after {
     content: " ";
     display: table;
   }
-  .pr-temporary-tabs ul.tabs--secondary:after {
+  .tabs ul.tabs--secondary:after {
     clear: both;
   }
-  .pr-temporary-tabs ul.tabs--secondary a {
+  .tabs ul.tabs--secondary a {
     display: inline-block;
     line-height: 1;
     color: #363636;
@@ -1500,41 +1501,41 @@ table tr.error {
     -webkit-transition: background-color, .15s, ease-out;
             transition: background-color, .15s, ease-out;
   }
-  .pr-temporary-tabs ul.tabs--secondary a:hover, .pr-temporary-tabs ul.tabs--secondary a:focus {
+  .tabs ul.tabs--secondary a:hover, .tabs ul.tabs--secondary a:focus {
     text-decoration: none;
     color: #363636;
     border-bottom: 1px solid #cccccc;
   }
-  .pr-temporary-tabs ul.tabs--secondary a.active {
+  .tabs ul.tabs--secondary a.active {
     border-bottom: 1px solid #cccccc;
   }
-  .pr-temporary-tabs ul.tabs--secondary a.active:hover, .pr-temporary-tabs ul.tabs--secondary a.active:focus {
+  .tabs ul.tabs--secondary a.active:hover, .tabs ul.tabs--secondary a.active:focus {
     color: #363636;
   }
 }
 @media all and (min-width: 60.063em) {
-  .pr-temporary-tabs ul.tabs--primary {
+  .tabs ul.tabs--primary {
     border-bottom: 1px solid #cccccc;
   }
-  .pr-temporary-tabs ul.tabs--primary li {
+  .tabs ul.tabs--primary li {
     float: left;
     margin: 0 0 0 0;
     list-style: none;
   }
-  .pr-temporary-tabs ul.tabs--primary li ul,
-  .pr-temporary-tabs ul.tabs--primary li ol {
+  .tabs ul.tabs--primary li ul,
+  .tabs ul.tabs--primary li ol {
     display: none;
   }
-  .pr-temporary-tabs ul.tabs--primary li {
+  .tabs ul.tabs--primary li {
     margin-bottom: -1px;
   }
-  .pr-temporary-tabs ul.tabs--primary li:first-child a {
+  .tabs ul.tabs--primary li:first-child a {
     border-radius: 2px 0 0 0;
   }
-  .pr-temporary-tabs ul.tabs--primary li:last-child a {
+  .tabs ul.tabs--primary li:last-child a {
     border-radius: 0 2px 0 0;
   }
-  .pr-temporary-tabs ul.tabs--primary a {
+  .tabs ul.tabs--primary a {
     display: block;
     line-height: 1;
     color: #363636;
@@ -1547,34 +1548,34 @@ table tr.error {
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
     margin-right: -1px;
   }
-  .pr-temporary-tabs ul.tabs--primary a:hover, .pr-temporary-tabs ul.tabs--primary a:focus {
+  .tabs ul.tabs--primary a:hover, .tabs ul.tabs--primary a:focus {
     color: #363636;
     background: #ededed;
     text-decoration: none;
   }
-  .pr-temporary-tabs ul.tabs--primary a.active {
+  .tabs ul.tabs--primary a.active {
     color: #363636;
     background: none;
     border-bottom-color: #f7f7f7;
   }
-  .pr-temporary-tabs ul.tabs--primary a.active:hover, .pr-temporary-tabs ul.tabs--primary a.active:focus {
+  .tabs ul.tabs--primary a.active:hover, .tabs ul.tabs--primary a.active:focus {
     color: #363636;
     background: none;
   }
-  .pr-temporary-tabs ul.tabs--secondary {
+  .tabs ul.tabs--secondary {
     padding: 0;
   }
-  .pr-temporary-tabs ul.tabs--secondary li {
+  .tabs ul.tabs--secondary li {
     float: left;
     margin: 0 7px 0 7px;
     margin: 0 0.43162rem 0 0.43162rem;
     list-style: none;
   }
-  .pr-temporary-tabs ul.tabs--secondary li ul,
-  .pr-temporary-tabs ul.tabs--secondary li ol {
+  .tabs ul.tabs--secondary li ul,
+  .tabs ul.tabs--secondary li ol {
     display: none;
   }
-  .pr-temporary-tabs ul.tabs--secondary a {
+  .tabs ul.tabs--secondary a {
     display: block;
     line-height: 1;
     color: #363636;
@@ -1584,15 +1585,15 @@ table tr.error {
     -webkit-transition: background-color, .15s, ease-in-out;
             transition: background-color, .15s, ease-in-out;
   }
-  .pr-temporary-tabs ul.tabs--secondary a:hover, .pr-temporary-tabs ul.tabs--secondary a:focus {
+  .tabs ul.tabs--secondary a:hover, .tabs ul.tabs--secondary a:focus {
     text-decoration: none;
     color: #363636;
     border-bottom: 1px solid #cccccc;
   }
-  .pr-temporary-tabs ul.tabs--secondary a.active {
+  .tabs ul.tabs--secondary a.active {
     border-bottom: 1px solid #cccccc;
   }
-  .pr-temporary-tabs ul.tabs--secondary a.active:hover, .pr-temporary-tabs ul.tabs--secondary a.active:focus {
+  .tabs ul.tabs--secondary a.active:hover, .tabs ul.tabs--secondary a.active:focus {
     color: #363636;
   }
 }
@@ -1841,7 +1842,7 @@ table tr.error {
 
 /**
  * Fields
- * Base styles for field templates.
+ * Common styles for field templates.
  * SEE: image and taxonomy field styles as these both have unqique
  * template html markup and selectors.
  ========================================================================== */
@@ -2108,14 +2109,14 @@ table tr.error {
 /**
  * Publishing states.
  ========================================================================== */
-[class*="--unpublished"] {
+article[class*="--unpublished"] {
   background-color: #ffdbdb;
   opacity: 0.7;
 }
-[class*="--unpublished"]:hover, [class*="--unpublished"]:focus {
+article[class*="--unpublished"]:hover, article[class*="--unpublished"]:focus {
   opacity: 1;
 }
-[class*="--unpublished"] p.unpublished__title {
+article[class*="--unpublished"] p.unpublished__title {
   font-size: 47px;
   font-size: 2.95838rem;
   line-height: 54px;
