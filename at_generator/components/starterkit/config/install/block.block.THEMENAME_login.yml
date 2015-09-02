@@ -1,6 +1,6 @@
 id: THEMENAME_login
 theme: THEMENAME
-weight: 99
+weight: 20
 status: true
 langcode: en
 region: sidebar_first
@@ -10,5 +10,7 @@ settings:
   id: user_login_block
   provider: user
   label_display: 0
-  cache:
-    max_age: 0
+dependencies:
+  module:
+    - user
+visibility: {  }

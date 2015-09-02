@@ -3,11 +3,14 @@ theme: THEMENAME
 weight: 0
 status: false
 langcode: en
-region: -1
+region: content
 plugin: system_breadcrumb_block
 settings:
-  label: 'Breadcrumbs'
+  id: system_breadcrumb_block
+  label: Breadcrumbs
   provider: system
   label_display: 0
-  cache:
-    max_age: 0
+dependencies:
+  module:
+    - system
+visibility: {  }

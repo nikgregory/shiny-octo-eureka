@@ -12,5 +12,7 @@ settings:
   use_site_logo: true
   use_site_name: true
   use_site_slogan: true
-  cache:
-    max_age: -1
+dependencies:
+  module:
+    - system
+visibility: {  }

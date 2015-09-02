@@ -1,0 +1,14 @@
+id: THEMENAME_local_tasks
+theme: THEMENAME
+weight: -20
+status: true
+langcode: en
+region: content_prefix
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Tabs (local tasks)'
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

@@ -1,0 +1,12 @@
+id: THEMENAME_local_actions
+theme: THEMENAME
+weight: -30
+status: true
+langcode: en
+region: content_prefix
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: Actions
+  label_display: '0'
+visibility: {  }

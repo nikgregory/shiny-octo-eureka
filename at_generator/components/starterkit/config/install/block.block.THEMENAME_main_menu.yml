@@ -6,11 +6,15 @@ langcode: en
 region: navbar
 plugin: 'system_menu_block:main'
 settings:
-  label: 'Main Menu'
   id: 'system_menu_block:main'
+  label: 'Main Menu'
   provider: system
   label_display: 0
   level: 1
   depth: 1
-  cache:
-    max_age: -1
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+visibility: {}

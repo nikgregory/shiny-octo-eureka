@@ -1,14 +1,16 @@
 id: THEMENAME_help
 theme: THEMENAME
-weight: 0
-status: false
+weight: -10
+status: true
 langcode: en
-region: messages
-plugin: system_help_block
+region: content_prefix
+plugin: help_block
 settings:
-  label: 'System Help'
-  id: system_help_block
-  provider: system
+  label: 'Help'
+  id: help_block
+  provider: help
   label_display: 0
-  cache:
-    max_age: -1
+dependencies:
+  module:
+    - help
+visibility: {  }
