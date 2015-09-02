@@ -4,13 +4,6 @@
 # See also: https://github.com/attiks/demotheme
 langcode: en
 status: true
-dependencies:
-  config:
-    - image.style.large
-    - image.style.medium
-    - image.style.thumbnail
-  theme:
-    - at_core
 id: at_content_image
 label: 'AT Content Image'
 image_style_mappings:
@@ -26,4 +19,3 @@ image_style_mappings:
     image_mapping: large
 breakpoint_group: at_core.simple
 fallback_image_style: thumbnail
-

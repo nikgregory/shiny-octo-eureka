@@ -4,12 +4,6 @@
 # See also: https://github.com/attiks/demotheme
 langcode: en
 status: true
-dependencies:
-  config:
-    - image.style.medium
-    - image.style.thumbnail
-  theme:
-    - at_core
 id: at_teaser_image
 label: 'AT Teaser Image'
 image_style_mappings:
