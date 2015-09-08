@@ -4,9 +4,8 @@
  * Adaptivetheme implementation for the basic structure of a single Drupal page.
  *
  * Variables:
- * - css: A list of CSS files for the current page.
- * - head: Markup for the HEAD element (including meta tags, keyword tags, and
- *   so on).
+ * - placeholder_token: The token for generating head, css, js and js-bottom
+ *   placeholders.
  * - head_title: A modified version of the page title, for use in the TITLE tag.
  * - head_title_array: List of text elements that make up the head_title
  *   variable. May contain or more of the following:
@@ -17,11 +16,6 @@
  * - page: The rendered page markup.
  * - page_bottom: Closing rendered markup. This variable should be printed after
  *   'page'.
- * - styles: Style tags necessary to import all necessary CSS files in the head.
- * - scripts: Script tags necessary to load the JavaScript files and settings
- *   in the head.
- * - scripts_bottom: HTML necessary to load JavaScript files before closing
- *   <body> tag.
  * - db_offline: A flag indicating if the database is offline.
  * - touch_icons: bool, true if touch icons extension is enabled.
  * - touch_rel: string, defaults to apple-touch-icon, or apple-touch-icon-precomposed
@@ -62,7 +56,7 @@
       {% if touch_icon_default %}<link href="{{ touch_icon_default }}" rel="{{ touch_rel }}" sizes="60x60" />{% endif %}
       {% if touch_icon_nokia %}<link href="{{ touch_icon_nokia }}" rel="shortcut icon" />{% endif %}
     {% endif %}
-    {{ head }}
+    <head-placeholder token="{{ placeholder_token|raw }}" />
     <title>{{ head_title|safe_join(' | ') }}</title>
     {% if googlefonts_url %}
       <link href="{{ googlefonts_url }}" rel='stylesheet' type='text/css'>
@@ -71,14 +65,14 @@
       <script src="//use.typekit.net/{{ typekit_id }}.js"></script>
       <script>try{Typekit.load();}catch(e){}</script>
     {% endif %}
-    {{ styles }}
-    {{ scripts }}
+    <css-placeholder token="{{ placeholder_token|raw }}" />
+    <js-placeholder token="{{ placeholder_token|raw }}" />
   </head>
   <body{{ attributes.addClass(body_classes) }}>
     <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
-    {{ scripts_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token|raw }}" />
   </body>
 </html>
