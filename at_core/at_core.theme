@@ -5,14 +5,14 @@ use Drupal\Core\Language\Language;
 use Drupal\Core\Theme\ThemeSettings;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\user\UserInterface;
-use Drupal\image\Entity\ImageStyle;
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Asset\CssOptimizer;
+//use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 use Drupal\node\NodeInterface;
-
+use Drupal\user\UserInterface;
+use Drupal\image\Entity\ImageStyle;
 
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Library\SystemLibraries;
@@ -147,6 +147,11 @@ function at_core_page_attachments_alter(array &$page) {
     // Shortcodes
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       $page['#attached']['library'][] = "$theme/shortcodes";
+
+      // shortcodes_animate_enable
+      if (isset($config['shortcodes_animate_enable']) && $config['shortcodes_animate_enable'] === 1) {
+        $page['#attached']['library'][] = "$theme/animate";
+      }
     }
 
     // Add the responsive menu styles settings.
@@ -270,6 +275,95 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
   }
+
+  // Layout
+  // This determines the page suggestion for the current page and checks if there is an
+  // existing config key for that suggestion, then loads a layout CSS file appropriatly.
+  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
+
+    // If we don't have the base path to generated files throw an error.
+    if (!empty($config['generated_files_path'])) {
+      $generated_files_path = $config['generated_files_path'];
+    }
+    else {
+      drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes layout settings.'), 'error');
+    }
+
+    // Get theme registry.
+    $theme_registry = \Drupal::service('theme.registry')->getRuntime();
+
+    // Build an array of path arguments to pass to theme_get_suggestions()
+    $path = \Drupal::request()->getPathInfo();
+    $path_args = explode('/', $path);
+
+    // This is the front page.
+    // $is_front_page =  \Drupal::service('path.matcher')->isFrontPage();
+    if (empty($path_args[1])) {
+      $path_args = [''];
+    }
+
+    // Unset the first item in the array, othewise delimeters are doubled, don't ask me why.
+    unset($path_args[0]);
+    $path_args = array_values($path_args);
+
+    // Add node type suggestion.
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $path_args[] = $node->getType();
+    }
+
+    // Get page suggestions, loop, check for a config key and break
+    // if/when we have a match in the registry.
+    if ($suggestions = theme_get_suggestions($path_args, 'page')) {
+      foreach ($suggestions as $suggestion) {
+        if (isset($config['suggestions'][$suggestion])) {
+          $suggestions_layout = $config['suggestions'][$suggestion];
+          $suggestions_layout = str_replace('_', '-', $suggestions_layout);
+        }
+        if ($theme_registry->has($suggestion)) {
+          break;
+        }
+      }
+    }
+
+    // Get the layout, fallback to the default layout if for some reason it does
+    // not exists, perhaps it was deleted by mistake etc.
+    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
+      $layout = $theme . '.layout.'  . $suggestions_layout . '.css';
+
+      $layout_path = file_create_url($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css');
+    }
+    else {
+      $layout = $theme . '.layout.page.css';
+
+      $layout_path = file_create_url($generated_files_path . '/' . $theme . '.layout.page.css');
+    }
+
+    // Load using html_head_link
+    /*
+    $query_string = Drupal::state()->get('system.css_js_query_string') ?: '0';
+    $page ['#attached']['html_head_link'][][] = array(
+      'rel' => 'stylesheet',
+      'href' => file_create_url($generated_files_path . '/' . $layout) . '?' . $query_string,
+      'type' => 'text/css',
+    );
+    */
+
+    // Optimize and inline the layout styles in html head.
+    $css_optimizer = new CssOptimizer();
+    $layout_style = $css_optimizer->loadFile($layout_path, TRUE, FALSE);
+
+    // Load CSS inline using html_head and a style element, this is very fast as it removes
+    // an http request and is a relatively small amount of CSS.
+    $page['#attached']['html_head'][] = [[
+        '#tag' => 'style',
+        '#value' => $layout_style,
+      ],
+      $layout
+    ];
+  }
+
+
+  //kpr($page['#attached']);
 }
 
 
@@ -284,31 +378,12 @@ function at_core_page_attachments_alter(array &$page) {
  */
 function at_core_css_alter(&$css) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+
+/*
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  //var_dump($css);
 
-  // Individual CSS files to remove.
-  // Sometimes we don't want to remove the entire library as it may
-  // load dependancies we need, so we can use this more granular
-  // approach to remove individual CSS assets.
-  // MOVED TO THEME INFO FILE FOR NOW.
-  /*
-  $remove = array(
-    'book.theme.css',
-    'comment.theme.css',
-    'file.formatter.generic.css',
-    'forum.theme.css',
-    'search.theme.css',
-    'system.theme.css',            //core/modules/system/css/system.theme.css
-    'taxonomy.theme.css',
-  );
-  foreach ($remove as $file) {
-    if (array_key_exists($file, $css)) {
-      unset($css[$file]);
-    }
-  }
-  */
 
   // Layout
   // This determines the page suggestion for the current page and checks if there is an
@@ -370,17 +445,19 @@ function at_core_css_alter(&$css) {
 
     // And you thought loading CSS assets in Drupal was getting easier?
     $css[$layout] = array(
-      'weight' => 0,
-      'group' => 100,
+      'weight' => 999.999,
+      'group' => CSS_LAYOUT,
       'type' => 'file',
       'data' => $generated_files_path . '/' . $layout,
       'version' => '8.0.0-dev',
       'media' => 'all',
       'preprocess' => true,
       'browsers' => array ('IE' => true, '!IE' => true),
-      'basename' => $layout,
+      //'basename' => $layout,
     );
   }
+*/
+
 
   // Color module doesn't know anything about libraries loaded in hook_page_attachments_alter(),
   // therefor we need to load the colorized CSS file ourselves.
@@ -488,7 +565,7 @@ function at_core_preprocess_html(&$variables) {
 
   // Add theme variables, we use these to set a class and provide a very easy way for themers to link
   // to files in the theme, such as background images or other files.
-  $variables['theme']['name'] = SafeMarkup::checkPlain($theme);
+  $variables['theme']['name'] = Html::escape($theme);
   $variables['theme']['path'] = $path_to_theme;
 
   // Set the skip navigation target ID
@@ -519,7 +596,7 @@ function at_core_preprocess_html(&$variables) {
 
       // Apple default icon and Nokia shortcut icon.
       if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $default_icon = file_create_url($path_to_theme . '/' . SafeMarkup::checkPlain($config['icon_path_default']));
+        $default_icon = file_create_url($path_to_theme . '/' . Html::escape($config['icon_path_default']));
         $variables['touch_icon_nokia'] = $default_icon;
         $variables['touch_icon_default'] = $default_icon;
       }
@@ -558,7 +635,7 @@ function at_core_preprocess_html(&$variables) {
       if (!empty($config['page_classes_body'])) {
         $shortcodes = Tags::explode($config['page_classes_body']);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::getClass($class);
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -591,7 +668,7 @@ function at_core_preprocess_page(&$variables) {
       if (!empty($config['page_classes_page'])) {
         $shortcodes = Tags::explode($config['page_classes_page']);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::getClass($class);
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -638,6 +715,8 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
+  //kpr($row_attributes);
+
   // Add all breakpoints to drupalSettings (label:media query).
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
@@ -681,7 +760,7 @@ function at_core_preprocess_region(&$variables) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
         $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::getClass($class);
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -703,7 +782,7 @@ function at_core_preprocess_node(&$variables) {
       if (!empty($config['nodetype_classes_' . $node->getType()])) {
         $shortcodes = Tags::explode($config['nodetype_classes_' . $node->getType()]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::getClass($class);
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -874,7 +953,8 @@ function at_core_preprocess_block(&$variables) {
       if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
         $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
         foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::getClass($class);
+          //$variables['attributes']['class'][] = Html::getClass($class);
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -1009,7 +1089,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
           }
         }
         if (!empty($title)) {
-          $variables['breadcrumb'][]['text'] = SafeMarkup::checkPlain($title);
+          $variables['breadcrumb'][]['text'] = Html::escape($title);
         }
       }
     }
@@ -1052,7 +1132,7 @@ function at_core_preprocess_menu(&$variables) {
   // Add a somewhat useful class to the root UL in menus.
   if (isset($variables['theme_hook_original'])) {
     $menu_name = str_replace('menu__', '', $variables['theme_hook_original']);
-    $variables['attributes']['class'][] = 'menu-name-original--' . Html::getClass($menu_name);
+    $variables['attributes']['class'][] = 'menu-name-original--' . Html::cleanCssIdentifier($menu_name);
   }
 }
 
@@ -1065,7 +1145,7 @@ function at_core_preprocess_forums(&$variables) {
 
   if (isset($variables['topics']['#header'])) {
     foreach ($variables['topics']['#header'] as $topic_list_key => $topic_list_value) {
-      $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::getClass($variables['topics']['#header'][$topic_list_key]['data']);
+      $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::cleanCssIdentifier($variables['topics']['#header'][$topic_list_key]['data']);
     }
   }
 
