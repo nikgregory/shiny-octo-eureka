@@ -2,9 +2,14 @@
 
 use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
-use Drupal\Component\Utility\SafeMarkup;
+
+//use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
 use Drupal\Component\Utility\Xss;
 use Symfony\Component\Yaml\Parser;
+
+
 
 $layout_data = new LayoutCompatible($theme);
 $layout_compatible_data = $layout_data->getCompatibleLayout();
@@ -48,7 +53,7 @@ foreach ($page_elements as $page_elements_key => $page_elements_value) {
   $form['shortcodes']['page_classes']['settings_page_classes_' . $page_elements_key] = array(
     '#type' => 'textfield',
     '#title' => t($page_elements_value),
-    '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.page_classes_' . $page_elements_key, $theme)),
+    '#default_value' => Html::escape(theme_get_setting('settings.page_classes_' . $page_elements_key, $theme)),
   );
 }
 
@@ -58,10 +63,21 @@ $form['shortcodes']['row_classes'] = array(
   '#title' => t('Page Rows'),
 );
 foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
-  $form['shortcodes']['row_classes']['settings_page_classes_row_' . $row_data_key] = array(
+  $form['shortcodes']['row_classes'][$row_data_key] = array(
+    '#type' => 'details',
+    '#title' => t($row_data_key),
+  );
+  // Wrappers
+  $form['shortcodes']['row_classes'][$row_data_key]['settings_page_classes_row_wrapper_' . $row_data_key] = array(
     '#type' => 'textfield',
-    '#title' => t('page-row__' . $row_data_key),
-    '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.page_classes_row_' . $row_data_key, $theme)),
+    '#title' => t($row_data_key . ' wrapper'),
+    '#default_value' => Html::escape(theme_get_setting('settings.page_classes_row_wrapper_' . $row_data_key, $theme)),
+  );
+  // Containers
+  $form['shortcodes']['row_classes'][$row_data_key]['settings_page_classes_row_container_' . $row_data_key] = array(
+    '#type' => 'textfield',
+    '#title' => t($row_data_key . ' container'),
+    '#default_value' => Html::escape(theme_get_setting('settings.page_classes_row_container_' . $row_data_key, $theme)),
   );
 }
 
@@ -74,7 +90,7 @@ foreach ($theme_regions as $region_key => $region_value) {
   $form['shortcodes']['region_classes']['settings_page_classes_region_' . $region_key] = array(
     '#type' => 'textfield',
     '#title' => t($region_value),
-    '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
+    '#default_value' => Html::escape(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
   );
 }
 
@@ -88,7 +104,7 @@ foreach ($theme_blocks as $block_key => $block_value) {
   $form['shortcodes']['block_classes']['settings_block_classes_' . $block_key] = array(
     '#type' => 'textfield',
     '#title' => t($block_label),
-    '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
+    '#default_value' => Html::escape(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
   );
 }
 
@@ -104,7 +120,7 @@ foreach ($node_types as $nt) {
   $form['shortcodes']['nodetype_classes']['settings_nodetype_classes_' . $node_type] = array(
     '#type' => 'textfield',
     '#title' => t($node_type_name),
-    '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.nodetype_classes_' . $node_type, $theme)),
+    '#default_value' => Html::escape(theme_get_setting('settings.nodetype_classes_' . $node_type, $theme)),
   );
 }
 
@@ -131,13 +147,28 @@ if (!empty($shortcodes)) {
       $class_elements = implode(', ', $class_values['elements']);
     }
     else {
-      $class_elements = 'Unspecified';
+      $class_elements = 'Any';
     }
 
     $form['shortcodes']['classes'][$class_type] = array(
       '#type' => 'fieldset',
       '#title' => t($class_values['name']),
       '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_description .'</p><p><b>Apply to:</b> <i>' . $class_elements . '</i></p>' ),
+    );
+
+    // Use this setting to conditionally load only the CSS we need for this theme.
+    $form['shortcodes']['classes'][$class_type]['settings_shortcodes_'. $class_type . '_enable'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use ' . $class_values['name'] . ' classes'),
+      '#default_value' => theme_get_setting('settings.shortcodes_' . $class_type . '_enable'),
+    );
+
+    // Hide the class names by default to declutter the UI.
+    $form['shortcodes']['classes'][$class_type][$class_type . '_wrapper'] = array(
+      '#type' => 'container',
+      '#states' => array(
+        'visible' => array('input[name="settings_shortcodes_' . $class_type . '_enable"]' => array('checked' => TRUE)),
+      ),
     );
 
     foreach ($class_values['classes'] as $class_key => $class_data) {
@@ -153,7 +184,7 @@ if (!empty($shortcodes)) {
       }
     }
 
-    $form['shortcodes']['classes'][$class_type]['classlist'] = array(
+    $form['shortcodes']['classes'][$class_type][$class_type . '_wrapper'][$class_type . '_classlist'] = array(
       '#markup' => '<dl class="class-list ' . $class_type . '">' . implode('', $class_output[$class_type]) . '</dl>',
     );
   }

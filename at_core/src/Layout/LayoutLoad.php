@@ -64,6 +64,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
   }
 
   // Return row attributes
+  // Does this become rowContainerAttributes(), with a wrapper attributes method of rowWrapperAttributes() ?
   public function rowAttributes() {
     $variables = array();
     $active_row_regions = array();
@@ -86,6 +87,9 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
         $row_regions[$row_name][] = $region_key; // Build array to intersect and use for the .arc class (active region count).
       }
 
+      // Pass on row wrapper attributes only for rows with active regions
+      $active_row_regions[$row_name]['attributes'] = $row_data['attributes'];
+
       // Remove inactive regions.
       $active_row_regions[$row_name]['regions'] = array_intersect($row_regions[$row_name], $this->active_regions);
 
@@ -102,29 +106,25 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // If active regions set to true to print the row, basically a catch all condition.
       $variables[$row_key . '__regions']['active'] = TRUE;
 
-      // Instantiate attribute object arrays per row.
-      $variables[$row_key . '__attributes'] = new Attribute(array('class' => array()));
-
-      // Add the region wrapper classes.
-      $variables[$row_key . '__attributes']['class'][] = 'l-rw';  // l-rw = layout region wrapper
-      $variables[$row_key . '__attributes']['class'][] = 'regions'; // theming class
-      $variables[$row_key . '__attributes']['class'][] = 'pr-'. str_replace('_', '-', $row_key) . '__rw'; // BEM block-element class
-
-      // Add theme setting defined classes if Shortcodes is enabled.
-      if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
-        if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
-          if (!empty($config_settings['page_classes_row_' . $row_key])) {
-            $shortcodes = Tags::explode($config_settings['page_classes_row_' . $row_key]);
-            foreach ($shortcodes as $class) {
-              $variables[$row_key . '__attributes']['class'][] = Html::getClass($class);
-            }
-          }
+      // Wrapper attributes.
+      $variables[$row_key . '__wrapper_attributes'] = new Attribute;
+      $variables[$row_key . '__wrapper_attributes']['class'] = array('l-pr', 'page__row', 'pr-' . $row_key);
+      foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
+        if (is_array($attribute_values)) {
+          $variables[$row_key . '__wrapper_attributes'][$attribute_type] = array(implode(' ', $attribute_values));
+        }
+        else {
+          $variables[$row_key . '__wrapper_attributes'][$attribute_type] = array($attribute_values);
         }
       }
 
+      // Container attributes.
+      $variables[$row_key . '__container_attributes'] = new Attribute;
+      $variables[$row_key . '__container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. str_replace('_', '-', $row_key) . '__rw');
+
       // Active Regions: "arc" is "active region count", this is number of active regions in this row on this page.
       $count = count($row_values['regions']);
-      $variables[$row_key . '__attributes']['class'][] = 'arc--'. $count;
+      $variables[$row_key . '__container_attributes']['class'][] = 'arc--'. $count;
 
       // Match each active region with its'corrosponding source order increment.
       foreach ($row_values['regions'] as $region) {
@@ -136,7 +136,29 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // Has Regions: the "hr" class tells us which regions are active by source order (as per the layout markup yml),
       // this allows us to push layout dependant on exactly which regions are active.
       if (isset($row_has_regions[$row_key])) {
-        $variables[$row_key . '__attributes']['class'][] =  'hr--' . implode('-', $row_has_regions[$row_key]);
+        $variables[$row_key . '__container_attributes']['class'][] =  'hr--' . implode('-', $row_has_regions[$row_key]);
+      }
+
+      // Shortcode classes.
+      if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
+        if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
+
+          // Wrapper codes
+          if (!empty($config_settings['page_classes_row_wrapper_' . $row_key])) {
+            $shortcodes = Tags::explode($config_settings['page_classes_row_wrapper_' . $row_key]);
+            foreach ($shortcodes as $class) {
+              $variables[$row_key . '__wrapper_attributes']['class'][] = Html::cleanCssIdentifier($class);
+            }
+          }
+
+          // Container codes
+          if (!empty($config_settings['page_classes_row_container_' . $row_key])) {
+            $shortcodes = Tags::explode($config_settings['page_classes_row_container_' . $row_key]);
+            foreach ($shortcodes as $class) {
+              $variables[$row_key . '__container_attributes']['class'][] = Html::cleanCssIdentifier($class);
+            }
+          }
+        }
       }
     }
 

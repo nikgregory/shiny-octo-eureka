@@ -93,6 +93,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
           $output[$suggestion][] = '}';
         }
       }
+
+      // Flush asset file caches.
+      //\Drupal::service('asset.css.collection_optimizer')->deleteAll();
+      //\Drupal::service('asset.js.collection_optimizer')->deleteAll();
+      //_drupal_flush_css_js();
     }
 
     // Get the layouts global CSS if any.
@@ -122,12 +127,13 @@ class LayoutSubmit implements LayoutSubmitInterface {
     }
 
     // Add the time so we can tract it.
-    $time = '/* Generated on: ' . date(DATE_RFC822) . ' */';
+    $time = '/* Generated: ' . date(DATE_RFC822) . ' */';
 
     $saved_css = array();
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
         $file_content = $time ."\n". $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
+        //$file_content = $time . $global_css . implode("", $css) . $max_width_override;
         $file_name = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
@@ -272,12 +278,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
       else {
         foreach ($this->layout_config['rows'] as $row => $row_values) {
 
-          foreach ($row_values['regions'] as $region_name => $region_value) {
-            $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_name . ' }}';
-          }
-
           // Row attributes.
-          $attributes[$row]['class'][] = 'l-pr page__row ' . 'pr-' . $row;
+          $attributes[$row]['class'][] = 'l-pr page__row';
+          $attributes[$row]['class'][] = 'pr-' . $row;
+
           foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
             if (is_array($attribute_values)) {
               $attributes[$row][$attribute_type][] = implode(' ', $attribute_values);
@@ -286,8 +290,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
               $attributes[$row][$attribute_type][] = $attribute_values;
             }
           }
+
           ksort($attributes[$row], SORT_STRING);
+
           foreach ($attributes[$row] as $attr_type => $attr_array_vales) {
+            $attr_array_vales = array_unique($attr_array_vales);
             $this_row_attr[$row][$attr_type] = $attr_type . '="' . implode(' ', $attr_array_vales) . '"';
           }
 
@@ -297,9 +304,17 @@ class LayoutSubmit implements LayoutSubmitInterface {
           }
 
           $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
-          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . '>';
-          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '__attributes }}>';
+          //$output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . ' {{ ' .  $row . '__wrapper_attributes }}>';
+
+          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '__wrapper_attributes }}>';
+
+          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '__container_attributes }}>';
+
+          foreach ($row_values['regions'] as $region_name => $region_value) {
+            $row_regions[$suggestion_key][$row][] = '        {{ page.' . $region_name . ' }}';
+          }
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
+
           $output[$suggestion_key][$row]['container_close'] = '      </div>';
           $output[$suggestion_key][$row]['wrapper_close'] = '    </' . $wrapper_element[$suggestion_key] . '>';
           $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";

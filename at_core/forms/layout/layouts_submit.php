@@ -58,6 +58,11 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
   }
 
+  // Flush asset file caches.
+  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
+  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
+  _drupal_flush_css_js();
+
   // Manage settings and configuration.
   // Must get mutable config otherwise bad things happen.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
