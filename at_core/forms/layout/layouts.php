@@ -4,7 +4,7 @@ use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
 
 $layout_data = new LayoutCompatible($theme);
 $layout_compatible_data = $layout_data->getCompatibleLayout();
@@ -28,7 +28,7 @@ $template_suggestions['page'] = 'page';
 foreach ($config as $config_key => $config_value) {
   if (substr($config_key, 0, 16) == 'suggestion_page_') {
     if (!empty($config_value) && $config_value !== 'page') {
-      $clean_config_value = SafeMarkup::checkPlain($config_value);
+      $clean_config_value = Html::escape($config_value);
       $template_suggestions['page__' . $clean_config_value] = 'page__' . $clean_config_value;
     }
   }
@@ -47,6 +47,8 @@ $form['layouts'] = array(
 
 // Attached required CSS and JS libraries and files.
 $form['layouts']['#attached']['library'][] = "$theme/layout_settings";
+//$form['#attached']['library'][] = "$theme/layout_settings";
+
 
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(
@@ -91,7 +93,6 @@ $form['layouts']['layout_select']['settings_suggestions'] = array(
 );
 
 foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
-
   //$suggestions_name = SafeMarkup::checkPlain($suggestions_name);
 
   if ($suggestions_name == 'page') {
@@ -147,8 +148,8 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             }
           }
 
-          // Only print rows that have more than 1 region.
-          if ($reg_count[$row_key] >= 1) {
+          // Only print rows that have regions, maybe they don't...
+          if ($reg_count[$row_key]) {
 
             // Build markup for the visual display thingee.
             $regions_markup = array();
@@ -174,12 +175,12 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             }
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key] = array(
-              '#type' => t('fieldset'),
+              '#type' => 'fieldset',
               '#title' => t($row_key),
             );
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key] = array(
-              '#type' => t('select'),
+              '#type' => 'select',
               '#empty_option' => '--none--',
               '#title' => t(ucfirst($row_key)),
               '#options' => $css_options[$row_key],
@@ -187,12 +188,12 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             );
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'] = array(
-              '#type' => t('container'),
+              '#type' => 'container',
               '#attributes' => array('class' => array('css-layout-options', 'layouts-column-onequarter', 'pull-right')),
             );
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = array(
-              '#type' => t('container'),
+              '#type' => 'container',
               '#markup' => '<div class="l-rw regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
               '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),
             );
@@ -289,7 +290,7 @@ $form['layouts']['adv_options']['select']['max_width']['settings_max_width_enabl
 $form['layouts']['adv_options']['select']['max_width']['settings_max_width_value'] = array(
   '#type' => 'number',
   '#title' => t('Value'),
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.max_width_value')),
+  '#default_value' => Html::escape(theme_get_setting('settings.max_width_value')),
   '#attributes' => array(
     'min' => 0,
     'max' => 9999,
@@ -370,7 +371,6 @@ foreach ($these_selectors as $plugin_name => $selector_strings) {
   );
 }
 */
-
 
 // Submit button for layouts.
 $form['layouts']['actions'] = array(
