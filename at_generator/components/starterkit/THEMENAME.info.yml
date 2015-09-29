@@ -36,7 +36,7 @@ features:
   - favicon
   - logo
 stylesheets-remove:
-  - @classy/css/layout.css
+  - @classy/css/components/menu.css
   - @book/css/book.theme.css
   - @comment/css/comment.theme.css
   - @file/css/file.theme.css
@@ -56,7 +56,6 @@ stylesheets-remove:
   - @system/css/components/item-list.theme.css
   - @system/css/components/link.theme.css
   - @system/css/components/links.theme.css
-  - @system/css/components/menu.theme.css
   - @system/css/components/messages.theme.css
   - @system/css/components/more-link.theme.css
   - @system/css/components/node.theme.css
