@@ -360,6 +360,9 @@ function at_core_page_attachments_alter(array &$page) {
       ],
       $layout
     ];
+
+    // TODO test if this is even working and if we need it.
+    $page['#cache']['contexts'][] = 'url';
   }
 
 
@@ -714,8 +717,6 @@ function at_core_preprocess_page(&$variables) {
       $variables = $variables + $row_attributes;
     }
   }
-
-  //kpr($row_attributes);
 
   // Add all breakpoints to drupalSettings (label:media query).
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
@@ -1232,13 +1233,3 @@ if ( $something ) {
   debug(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10));
 }
 */
-
-
-
-
-
-
-
-
-
-
