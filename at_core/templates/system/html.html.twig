@@ -56,7 +56,7 @@
       {% if touch_icon_default %}<link href="{{ touch_icon_default }}" rel="{{ touch_rel }}" sizes="60x60" />{% endif %}
       {% if touch_icon_nokia %}<link href="{{ touch_icon_nokia }}" rel="shortcut icon" />{% endif %}
     {% endif %}
-    <head-placeholder token="{{ placeholder_token|raw }}" />
+    <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     {% if googlefonts_url %}
       <link href="{{ googlefonts_url }}" rel='stylesheet' type='text/css'>
@@ -65,14 +65,14 @@
       <script src="//use.typekit.net/{{ typekit_id }}.js"></script>
       <script>try{Typekit.load();}catch(e){}</script>
     {% endif %}
-    <css-placeholder token="{{ placeholder_token|raw }}" />
-    <js-placeholder token="{{ placeholder_token|raw }}" />
+    <css-placeholder token="{{ placeholder_token|raw }}">
+    <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
   <body{{ attributes.addClass(body_classes) }}>
     <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
-    <js-bottom-placeholder token="{{ placeholder_token|raw }}" />
+    <js-bottom-placeholder token="{{ placeholder_token|raw }}">
   </body>
 </html>
