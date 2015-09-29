@@ -719,19 +719,23 @@ function at_core_preprocess_page(&$variables) {
   }
 
   // Add all breakpoints to drupalSettings (label:media query).
+/*
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
     if (isset($config['breakpoint_group_layout'])) {
       $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
 
       foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
-        $breakpoint_safe_label = Html::getClass($breakpoint_values->getLabel());
-        $breakpoints_array[$breakpoint_safe_label] = $breakpoint_values->getMediaQuery();
+        //$breakpoint_safe_label = Html::getClass($breakpoint_values->getLabel());
+
+        $breakpoint_safe_label[$breakpoint_key] = $breakpoint_values->getLabel()->getLabel();
+        $breakpoints_array[$breakpoint_safe_label[$breakpoint_key]] = $breakpoint_values->getMediaQuery();
       }
 
       $variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
     }
   }
+*/
 }
 
 
@@ -1149,7 +1153,6 @@ function at_core_preprocess_forums(&$variables) {
       $variables['topics']['#header'][$topic_list_key]['class'][] = 'forum-header__' . Html::cleanCssIdentifier($variables['topics']['#header'][$topic_list_key]['data']);
     }
   }
-
 
   // Add BEM classes to row items, to match the forum-list.html.twig BEM classes.
   if (isset($variables['topics']['#rows'])) {
