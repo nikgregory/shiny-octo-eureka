@@ -4,3 +4,6 @@ at.generator:
   css:
     component:
       styles/css/appearance--generator.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.machine-name

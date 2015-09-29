@@ -28,23 +28,11 @@ function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
   $at_generator_path = drupal_get_path('theme', 'at_generator');
   $subtheme_path = drupal_get_path('theme', $theme);
 
-  // Attached required CSS and JS libraries and files.
-  $form['#attached'] = array(
-    'library' => array(
-      'system' => 'core/drupal.machine-name',
-      'at_generator' => 'at_generator/at.generator',
-    ),
-  );
-
-  $form['generator'] = array(
-    '#type' => 'vertical_tabs',
-  );
+  $form['#attached']['library'][] = 'at_generator/at.generator';
+  $form['generator'] = array('#type' => 'vertical_tabs');
 
   // Generator.
   include_once($at_generator_path . '/forms/generator.php');
-
-  // Help (at_core).
-  //include_once($at_generator_path . '/forms/help_core.php');
 
   // Hide form items.
   $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
