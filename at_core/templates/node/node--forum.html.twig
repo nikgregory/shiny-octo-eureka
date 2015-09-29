@@ -102,7 +102,7 @@
         {{ author_picture }}
         <div{{ submitted_attributes }}>
           {% trans %}
-            By <address{{ author_attributes|passthrough }}>{{ author_name|passthrough }}</address> on <time class="node__date">{{ date|passthrough }}</time>
+            By <address{{ author_attributes|raw }}>{{ author_name|raw }}</address> on <time class="node__date">{{ date|raw }}</time>
           {% endtrans %}
           {{ metadata }}
         </div>
