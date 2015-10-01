@@ -31,19 +31,27 @@
   {% if items %}
     {% if menu_level == 0 %}
       {%
-        set classes = [
+        set menu_classes = [
           'menu',
           'odd',
           'menu-level-1',
         ]
       %}
-      <ul{{ attributes.addClass(classes) }}>
+      <ul{{ attributes.addClass(menu_classes) }}>
     {% else %}
       <ul class="menu {{ cycle(["odd", "even"], menu_level) }} {{ 'menu-level-' ~ (menu_level + 1) }}">
     {% endif %}
       {% for item in items %}
+        {%
+          set item_classes = [
+            'menu-item',
+            item.is_expanded ? 'menu-item--expanded',
+            item.is_collapsed ? 'menu-item--collapsed',
+            item.in_active_trail ? 'menu-item--active-trail',
+          ]
+        %}
         {% spaceless %}
-          <li{{ item.attributes }}>
+          <li{{ item.attributes.addClass(item_classes) }}>
             {{ link(item.title, item.url) }}
             {% if item.below %}
               {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
