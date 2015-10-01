@@ -1,85 +1,85 @@
 {#
 /**
  * site-builder page template.
- * Generated on: Wed, 02 Sep 15 22:31:12 +1200
+ * Generated on: Thu, 01 Oct 15 14:49:40 +1300
  */
 #}
 <div{{ attributes }}>
   {% if leaderboard__regions.active == true %}
-    <div class="l-pr page__row pr-leaderboard" id="leaderboard">
-      <div{{ leaderboard__attributes }}>
-      {{ page.leaderboard }}
+    <div{{ leaderboard__wrapper_attributes }}>
+      <div{{ leaderboard__container_attributes }}>
+        {{ page.leaderboard }}
       </div>
     </div>
   {% endif %}
   {% if header__regions.active == true %}
-    <header class="l-pr page__row pr-header" id="masthead" role="banner">
-      <div{{ header__attributes }}>
-      {{ page.header_first }}
-      {{ page.header_second }}
+    <header{{ header__wrapper_attributes }}>
+      <div{{ header__container_attributes }}>
+        {{ page.header_first }}
+        {{ page.header_second }}
       </div>
     </header>
   {% endif %}
   {% if navbar__regions.active == true %}
-    <div class="l-pr page__row pr-navbar" id="navbar">
-      <div{{ navbar__attributes }}>
-      {{ page.navbar }}
+    <div{{ navbar__wrapper_attributes }}>
+      <div{{ navbar__container_attributes }}>
+        {{ page.navbar }}
       </div>
     </div>
   {% endif %}
   {% if highlighted__regions.active == true %}
-    <div class="l-pr page__row pr-highlighted" id="highlighted">
-      <div{{ highlighted__attributes }}>
-      {{ page.highlighted }}
+    <div{{ highlighted__wrapper_attributes }}>
+      <div{{ highlighted__container_attributes }}>
+        {{ page.highlighted }}
       </div>
     </div>
   {% endif %}
   {% if features__regions.active == true %}
-    <div class="l-pr page__row pr-features" id="features">
-      <div{{ features__attributes }}>
-      {{ page.features_first }}
-      {{ page.features_second }}
-      {{ page.features_third }}
+    <div{{ features__wrapper_attributes }}>
+      <div{{ features__container_attributes }}>
+        {{ page.features_first }}
+        {{ page.features_second }}
+        {{ page.features_third }}
       </div>
     </div>
   {% endif %}
   {% if content_prefix__regions.active == true %}
-    <div class="l-pr page__row pr-content_prefix" id="content-prefix">
-      <div{{ content_prefix__attributes }}>
-      {{ page.content_prefix }}
+    <div{{ content_prefix__wrapper_attributes }}>
+      <div{{ content_prefix__container_attributes }}>
+        {{ page.content_prefix }}
       </div>
     </div>
   {% endif %}
   {% if main__regions.active == true %}
-    <div class="l-pr page__row pr-main" id="main-content">
-      <div{{ main__attributes }}>
-      {{ page.content }}
-      {{ page.sidebar_first }}
-      {{ page.sidebar_second }}
+    <div{{ main__wrapper_attributes }}>
+      <div{{ main__container_attributes }}>
+        {{ page.content }}
+        {{ page.sidebar_first }}
+        {{ page.sidebar_second }}
       </div>
     </div>
   {% endif %}
   {% if content_suffix__regions.active == true %}
-    <div class="l-pr page__row pr-content_suffix" id="content-suffix">
-      <div{{ content_suffix__attributes }}>
-      {{ page.content_suffix }}
+    <div{{ content_suffix__wrapper_attributes }}>
+      <div{{ content_suffix__container_attributes }}>
+        {{ page.content_suffix }}
       </div>
     </div>
   {% endif %}
   {% if subfeatures__regions.active == true %}
-    <div class="l-pr page__row pr-subfeatures" id="sub-features">
-      <div{{ subfeatures__attributes }}>
-      {{ page.subfeatures_first }}
-      {{ page.subfeatures_second }}
-      {{ page.subfeatures_third }}
-      {{ page.subfeatures_fourth }}
+    <div{{ subfeatures__wrapper_attributes }}>
+      <div{{ subfeatures__container_attributes }}>
+        {{ page.subfeatures_first }}
+        {{ page.subfeatures_second }}
+        {{ page.subfeatures_third }}
+        {{ page.subfeatures_fourth }}
       </div>
     </div>
   {% endif %}
   {% if footer__regions.active == true %}
-    <footer class="l-pr page__row pr-footer" id="footer" role="contentinfo">
-      <div{{ footer__attributes }}>
-      {{ page.footer }}
+    <footer{{ footer__wrapper_attributes }}>
+      <div{{ footer__container_attributes }}>
+        {{ page.footer }}
       </div>
     </footer>
   {% endif %}

@@ -54,7 +54,7 @@ rows:
     attributes:
       id: content-suffix
     regions:
-      content_prefix: 'Content suffix'
+      content_suffix: 'Content suffix'
   subfeatures:
     attributes:
       id: sub-features
