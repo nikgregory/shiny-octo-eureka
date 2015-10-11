@@ -1,20 +1,23 @@
-id: THEMENAME_account_menu
-theme: THEMENAME
-weight: 0
-status: false
 langcode: en
-region: -1
-plugin: 'system_menu_block:account'
-settings:
-  id: 'system_menu_block:account'
-  label: 'User account menu'
-  provider: system
-  label_display: 0
-  level: 1
-  depth: 1
+status: true
 dependencies:
   config:
     - system.menu.account
   module:
     - system
-visibility: { }
+  theme:
+    - THEMENAME
+id: THEMENAME_account_menu
+theme: THEMENAME
+region: leaderboard
+weight: 0
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

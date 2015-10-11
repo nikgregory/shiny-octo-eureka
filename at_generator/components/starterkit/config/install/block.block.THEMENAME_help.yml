@@ -1,16 +1,19 @@
-id: THEMENAME_help
-theme: THEMENAME
-weight: -10
-status: true
 langcode: en
-region: content_prefix
-plugin: help_block
-settings:
-  label: 'Help'
-  id: help_block
-  provider: help
-  label_display: 0
+status: true
 dependencies:
   module:
     - help
+  theme:
+    - THEMENAME
+id: THEMENAME_help
+theme: THEMENAME
+region: content_prefix
+weight: 30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
 visibility: {  }

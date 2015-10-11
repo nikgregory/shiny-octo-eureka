@@ -1,13 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - THEMENAME
 id: THEMENAME_local_tasks
 theme: THEMENAME
-weight: -20
-status: true
-langcode: en
 region: content_prefix
+weight: 20
+provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: 'Tabs (local tasks)'
+  label: Tabs
+  provider: core
   label_display: '0'
   primary: true
   secondary: true
