@@ -3,12 +3,9 @@
 use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 
-//use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
-
 use Drupal\Component\Utility\Xss;
 use Symfony\Component\Yaml\Parser;
-
 
 
 $layout_data = new LayoutCompatible($theme);
@@ -82,6 +79,8 @@ foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
 }
 
 // Regions
+// TODO check if getUntranslatedString() is really the right method to use here.
+//kpr($theme_regions);
 $form['shortcodes']['region_classes'] = array(
   '#type' => 'details',
   '#title' => t('Regions'),
@@ -89,10 +88,11 @@ $form['shortcodes']['region_classes'] = array(
 foreach ($theme_regions as $region_key => $region_value) {
   $form['shortcodes']['region_classes']['settings_page_classes_region_' . $region_key] = array(
     '#type' => 'textfield',
-    '#title' => t($region_value),
+    '#title' => t($region_value->getUntranslatedString()),
     '#default_value' => Html::escape(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
   );
 }
+
 
 // Blocks
 $form['shortcodes']['block_classes'] = array(
