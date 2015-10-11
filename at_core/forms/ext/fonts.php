@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 
 /**
@@ -36,14 +36,14 @@ if (theme_get_setting('settings.font_customstack')) {
 if ($websafe = theme_get_setting('settings.font_websafe')) {
   foreach ($websafe_fonts as $websafe_font_key => $websafe_font_value) {
     if ($websafe == $websafe_font_key) {
-      $selected_websafe_stack = SafeMarkup::checkPlain($websafe_font_value);
+      $selected_websafe_stack = Html::escape($websafe_font_value);
     }
   }
 }
 
 // Custom stack message
 if ($customstack = theme_get_setting('settings.font_customstack')) {
-  $selected_customstack = SafeMarkup::checkPlain($customstack);
+  $selected_customstack = Html::escape($customstack);
 }
 
 $form['fonts'] = array(
@@ -77,14 +77,14 @@ $form['fonts']['setup']['settings_font_google'] = array(
   '#type' => 'textfield',
   '#title' => t('Google fonts'),
   '#default_value' => Xss::filter(theme_get_setting('settings.font_google')),
-  '#description' => t('<ol><li>Use the <a href="!google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code></li></ol>', array('!google_font_wizard' => 'http://www.google.com/fonts')),
+  '#description' => t('<ol><li>Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code></li></ol>', array('@google_font_wizard' => 'http://www.google.com/fonts')),
 );
 
 // FONT Setup: Webfont - Typekit
 $form['fonts']['setup']['settings_font_typekit'] = array(
   '#type' => 'textfield',
   '#title' => t('Typekit ID'),
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.font_typekit')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_typekit')),
   '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
 );
 
@@ -107,7 +107,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_defau
   '#title' => t('Default'),
   '#max-lenght' => 3,
   '#step' => 0.1,
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_default')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_default')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -122,7 +122,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large
   '#max-lenght' => 3,
   '#step' => 0.1,
   '#description' => t('Large fonts usually require a smaller multiplier.'),
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_large')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_large')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -137,7 +137,7 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large
   '#field_suffix' => 'px',
   '#max-lenght' => 2,
   '#description' => t('What is considerd a large font?'),
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.font_lineheight_multiplier_large_size')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_large_size')),
   '#attributes' => array(
     'min' => 1,
     'max' => 99,
@@ -233,7 +233,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#type' => 'number',
       '#title' => t('Size'),
       '#field_suffix' => 'px <small>(coverts to rem)</small>',
-      '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.font_size_' . $font_element_key)),
+      '#default_value' => Html::escape(theme_get_setting('settings.font_size_' . $font_element_key)),
       '#attributes' => array(
         'min' => 0,
         'max' => 999,

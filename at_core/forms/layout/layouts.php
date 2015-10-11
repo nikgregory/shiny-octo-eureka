@@ -182,7 +182,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key] = array(
               '#type' => 'select',
               '#empty_option' => '--none--',
-              '#title' => t(ucfirst($row_key)),
+              '#title' => t(ucfirst(str_replace('_', ' ', $row_key))),
               '#options' => $css_options[$row_key],
               '#default_value' => $row_default_value,
             );

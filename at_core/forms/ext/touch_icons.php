@@ -24,7 +24,7 @@ $form['touch_icons']['touch_icons_settings'] = array(
 );
 
 $form['touch_icons']['touch_icons_settings']['description'] = array(
-  '#markup' => t('<h3>Touch Icons</h3><p>Different devices can support different sized touch icons - see the <a href="!apple_docs" target="_blank">iOS developer documentation</a>.</p><p>A standard set of icons generated with the <b><a href="!icon_template" target="_blank">App Icon Template</a></b> are included by default.</p><p>Enter the path to each touch icon - paths must be relative to your theme folder. Leave the field empty to exclude an icon.</p>', array('!apple_docs' => 'https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html', '!icon_template' => 'http://appicontemplate.com')),
+  '#markup' => t('<h3>Touch Icons</h3><p>Different devices can support different sized touch icons - see the <a href="@apple_docs" target="_blank">iOS developer documentation</a>.</p><p>A standard set of icons generated with the <b><a href="@icon_template" target="_blank">App Icon Template</a></b> are included by default.</p><p>Enter the path to each touch icon - paths must be relative to your theme folder. Leave the field empty to exclude an icon.</p>', array('@apple_docs' => 'https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html', '@icon_template' => 'http://appicontemplate.com')),
 );
 
 $form['touch_icons']['touch_icons_settings']['icon-paths'] = array(

@@ -65,7 +65,7 @@ $form['enable_extensions']['settings_enable_fonts'] = array(
   '#type' => 'checkbox',
   '#title' => t('Fonts'),
   '#default_value' => theme_get_setting('settings.enable_fonts', $theme),
-  '#description' => t('Apply fonts to site elements. Supports <a href="!gflink" target="_blank">Google</a> and <a href="!tklink" target="_blank">Typekit</a> fonts, as well as standard websafe fonts.', array('!tklink' => 'https://typekit.com/', '!gflink' => 'https://www.google.com/fonts')),
+  '#description' => t('Apply fonts to site elements. Supports <a href="@gflink" target="_blank">Google</a> and <a href="@tklink" target="_blank">Typekit</a> fonts, as well as standard websafe fonts.', array('@tklink' => 'https://typekit.com/', '@gflink' => 'https://www.google.com/fonts')),
 );
 
 // Title styles
