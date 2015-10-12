@@ -45,7 +45,7 @@ foreach ($node_types as $nt) {
     '#type' => 'details',
     '#title' => t('Alignment'),
     '#collapsed'=> TRUE,
-    '#description' => t('Set alignment per display mode. The <em>search result</em> display mode is currently excluded from these settings pending <a href="!1166114" target="_blank">drupal.org/node/1166114</a>.', array('!1166114' => 'https://drupal.org/node/1166114')),
+    //'#description' => t('Set alignment per display mode. The <em>search result</em> display mode is currently excluded from these settings pending <a href="@1166114" target="_blank">drupal.org/node/1166114</a>.', array('@1166114' => 'https://drupal.org/node/1166114')),
   );
 
   // View modes
