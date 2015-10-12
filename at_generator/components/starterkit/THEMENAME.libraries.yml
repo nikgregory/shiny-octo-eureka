@@ -78,6 +78,17 @@ layout_settings:
     theme:
       layout/site-builder/css/site-builder-form.css: {} # You probably need to change this if your theme uses a different layout plugin, i.e. you built your own.
 
+# Vendor Libraries - CSS plugins from github etc.
+animate:
+  version: master
+  license:
+    name: MIT
+    url: https://github.com/daneden/animate.css/blob/master/README.md
+    gpl-compatible: true
+  css:
+    theme:
+      styles/css/vendor/animate.min.css: {}
+
 #
 # Generated File Libraries, do not delete these if you are using Extension settings!
 #

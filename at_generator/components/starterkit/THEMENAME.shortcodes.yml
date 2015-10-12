@@ -189,3 +189,245 @@ menu-bullets:
     fa-chevron:
       class: 'fa-chevron'
       description: 'Chevron.'
+
+animate:
+  name: Animatations
+  description: 'Add the "animated" class then one of the following Animate library class names, e.g. "animated, bounce". View demos http://daneden.github.io/animate.css.'
+  elements:
+    - blocks
+    - regions
+  classes:
+    # Attention seekers
+    bounce:
+      class: bounce
+      description: 'Attention: bounce'
+    flash:
+      class: flash
+      description: 'Attention: flash'
+    pulse:
+      class: pulse
+      description: 'Attention: pulse'
+    rubberBand:
+      class: rubberBand
+      description: 'Attention: rubberBand'
+    shake:
+      class: shake
+      description: 'Attention: shake'
+    swing:
+      class: swing
+      description: 'Attention: swing'
+    tada:
+      class: tada
+      description: 'Attention: tada'
+    wobble:
+      class: wobble
+      description: 'Attention: wobble'
+    jello:
+      class: jello
+      description: 'Attention: jello'
+    # Bounces
+    bounceIn:
+      class: bounceIn
+      description: 'Bounce: In'
+    bounceInDown:
+      class: bounceInDown
+      description: 'Bounce: In - Down'
+    bounceInLeft:
+      class: bounceInLeft
+      description: 'Bounce: In - Left'
+    bounceInRight:
+      class: bounceInRight
+      description: 'Bounce: In - Right'
+    bounceInUp:
+      class: bounceInUp
+      description: 'Bounce: In - Up'
+    # Bounces
+    bounceOut:
+      class: bounceOut
+      description: 'Bounce: Out'
+    bounceOutDown:
+      class: bounceOutDown
+      description: 'Bounce: Out - Down'
+    bounceOutLeft:
+      class: bounceOutLeft
+      description: 'Bounce: Out - Left'
+    bounceOutRight:
+      class: bounceOutRight
+      description: 'Bounce: Out - Right'
+    bounceOutUp:
+      class: bounceOutUp
+      description: 'Bounce: Out - Up'
+    # Fade entrances
+    fadeIn:
+      class: fadeIn
+      description: 'Fade: In'
+    fadeInDown:
+      class: fadeInDown
+      description: 'Fade: In - Down'
+    fadeInDownBig:
+      class: fadeInDownBig
+      description: 'Fade: In - Down Big'
+    fadeInLeft:
+      class: fadeInLeft
+      description: 'Fade: In - Left'
+    fadeInLeftBig:
+      class: fadeInLeftBig
+      description: 'Fade: In - Left Big'
+    fadeInRight:
+      class: fadeInRight
+      description: 'Fade: In - Right'
+    fadeInRightBig:
+      class: fadeInRightBig
+      description: 'Fade: In - Right Big'
+    fadeInUp:
+      class: fadeInUp
+      description: 'Fade: In - Up'
+    fadeInUpBig:
+      class: fadeInUpBig
+      description: 'Fade: In - Up Big'
+    # Fade exits
+    fadeOut:
+      class: fadeOut
+      description: 'Fade: Out'
+    fadeOutDown:
+      class: fadeOutDown
+      description: 'Fade: Out - Down'
+    fadeOutDownBig:
+      class: fadeOutDownBig
+      description: 'Fade: Out - Down Big'
+    fadeOutLeft:
+      class: fadeOutLeft
+      description: 'Fade: Out - Left'
+    fadeOutLeftBig:
+      class: fadeOutLeftBig
+      description: 'Fade: Out - Left Big'
+    fadeOutRight:
+      class: fadeOutRight
+      description: 'Fade: Out - Right'
+    fadeOutRightBig:
+      class: fadeOutRightBig
+      description: 'Fade: Out - Right Big'
+    fadeOutUp:
+      class: fadeOutUp
+      description: 'Fade: Out - Up'
+    fadeOutUpBig:
+      class: fadeOutUpBig
+      description: 'Fade: Out - Up Big'
+    # Flip
+    flipInX:
+      class: flipInX
+      description: 'Flip: In X axis'
+    flipInY:
+      class: flipInY
+      description: 'Flip: In Y axis'
+    flipOutX:
+      class: flipOutX
+      description: 'Flip: Out X axis'
+    flipOutY:
+      class: flipOutY
+      description: 'Flip: Out Y axis'
+    # LightSpeed
+    lightSpeedIn:
+      class: lightSpeedIn
+      description: 'Light Speed: In'
+    lightSpeedOut:
+      class: lightSpeedOut
+      description: 'Light Speed: Out'
+    # Rotate
+    rotateIn:
+      class: rotateIn
+      description: 'Rotate: In'
+    rotateInDownLeft:
+      class: rotateInDownLeft
+      description: 'Rotate: In - Down Left'
+    rotateInDownRight:
+      class: rotateInDownRight
+      description: 'Rotate: In - Down Right'
+    rotateInUpLeft:
+      class: rotateInUpLeft
+      description: 'Rotate: In - Up Left'
+    rotateInUpRight:
+      class: rotateInUpRight
+      description: 'Rotate: In - Up Right'
+    rotateOut:
+      class: rotateOut
+      description: 'Rotate: Out'
+    rotateOutDownLeft:
+      class: rotateOutDownLeft
+      description: 'Rotate: Out - Down Left'
+    rotateOutDownRight:
+      class: rotateOutDownRight
+      description: 'Rotate: Out - Down Right'
+    rotateOutUpLeft:
+      class: rotateOutUpLeft
+      description: 'Rotate: Out - Up Left'
+    rotateOutUpRight:
+      class: rotateOutUpRight
+      description: 'Rotate: Out - Up Right'
+    # Hinge
+    hinge:
+      class: hinge
+      description: 'Hinge'
+    # Roll
+    rollIn:
+      class: rollIn
+      description: 'Roll: In'
+    rollOut:
+      class: rollOut
+      description: 'Roll: Out'
+    # Zoom
+    zoomIn:
+      class: zoomIn
+      description: 'Zoom: In'
+    zoomInDown:
+      class: zoomInDown
+      description: 'Zoom: In - Down'
+    zoomInLeft:
+      class: zoomInLeft
+      description: 'Zoom: In - Left'
+    zoomInRight:
+      class: zoomInRight
+      description: 'Zoom: In - Right'
+    zoomInUp:
+      class: zoomInUp
+      description: 'Zoom: In - Up'
+    zoomOut:
+      class: zoomOut
+      description: 'Zoom: Out'
+    zoomOutDown:
+      class: zoomOutDown
+      description: 'Zoom: Out - Down'
+    zoomOutLeft:
+      class: zoomOutLeft
+      description: 'Zoom: Out - Left'
+    zoomOutRight:
+      class: zoomOutRight
+      description: 'Zoom: Out - Right'
+    zoomOutUp:
+      class: zoomOutUp
+      description: 'Zoom: Out - Up'
+    # Slide
+    slideInDown:
+      class: slideInDown
+      description: 'Slide: In - Down'
+    slideInLeft:
+      class: slideInLeft
+      description: 'Slide: In - Left'
+    slideInRight:
+      class: slideInRight
+      description: 'Slide: In - Right'
+    slideInUp:
+      class: slideInUp
+      description: 'Slide: In - Up'
+    slideOutDown:
+      class: slideOutDown
+      description: 'Slide: Out - Down'
+    slideOutLeft:
+      class: slideOutLeft
+      description: 'Slide: Out - Left'
+    slideOutRight:
+      class: slideOutRight
+      description: 'Slide: Out - Right'
+    slideOutUp:
+      class: slideOutUp
+      description: 'Slide: Out - Up'
