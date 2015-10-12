@@ -69,6 +69,17 @@
 }
 
 
+// Textarea wrapper
+.form-textarea-wrapper {
+  textarea {
+    display: block;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
 // Filters and tips
 .filter-wrapper {
   border-style: $form-border-style;
