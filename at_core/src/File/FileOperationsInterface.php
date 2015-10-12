@@ -53,14 +53,12 @@ interface FileOperationsInterface {
    *
    * @param array $data
    *   The associative array data to build the .info.yml file.
-   * @param string $prefix
-   *   A string to prefix each entry with, usually spaces for indentation.
    * @return string
-   *   A string corresponding to $data in the .yml format.
+   *   A string corresponding to $data encoded in the .yml format.
    *
    * @see drupal_parse_info_file()
    */
-  public function fileBuildInfoYml(array $data, $prefix = NULL);
+  public function fileBuildInfoYml(array $data);
 
   /**
    * Compare two files. First compare file size, then

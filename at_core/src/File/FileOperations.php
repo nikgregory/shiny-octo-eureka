@@ -2,6 +2,9 @@
 
 namespace Drupal\at_core\File;
 
+use Drupal\Component\Serialization\Yaml;
+
+
 class FileOperations implements FileOperationsInterface {
 
   /**
@@ -48,17 +51,8 @@ class FileOperations implements FileOperationsInterface {
   /**
    * {@inheritdoc}
    */
-  public function fileBuildInfoYml(array $data, $prefix = NULL) {
-    $info = '';
-    foreach ($data as $key => $value) {
-      if (is_array($value)) {
-        $info .= $prefix . "$key:\n";
-        $info .= self::fileBuildInfoYml($value, (!$prefix ? '  ' : $prefix = '  '));
-      }
-      else {
-        $info .= is_int($key) ? $prefix . '  - ' . "$value\n" : $prefix . $key . ": $value\n";
-      }
-    }
+  public function fileBuildInfoYml(array $data) {
+    $info = Yaml::encode($data);
     return $info;
   }
 
