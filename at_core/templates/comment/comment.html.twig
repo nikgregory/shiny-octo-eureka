@@ -69,6 +69,7 @@
 {%
   set classes = [
     'comment',
+    'js-comment',
     status != 'published' ? status,
     comment.owner.anonymous ? 'by-anonymous',
     author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
@@ -96,8 +97,11 @@
   <div{{ meta_attributes }}>
     {{ user_picture }}
     <div{{ submitted_attributes }}>
+      {# Render early for the trans tag #}
+      {% set author_name = render_var(author) %}
+      {% set created_time = render_var(created) %}
       {% trans %}
-        Submitted by <address class="comment__author" rel="author">{{ author|passthrough }}</address> on <time class="comment__date">{{ created|passthrough }}</time>
+        Submitted by <address class="comment__author" rel="author">{{ author_name }}</address> on <time class="comment__date">{{ created_time }}</time>
       {% endtrans %}
     </div>
   </div>
