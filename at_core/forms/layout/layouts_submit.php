@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Config\Config;
+use Drupal\Core\Cache\Cache;
 use Drupal\Component\Utility\Unicode;
 
 use Drupal\at_core\Theme\ThemeSettingsConfig;
@@ -58,10 +59,9 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
   }
 
-  // Flush asset file caches.
-  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
-  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
-  _drupal_flush_css_js();
+  // Flush all caches. This is the only realy reliable way I have found to ensure
+  // new templates and layouts work correctly.
+  drupal_flush_all_caches();
 
   // Manage settings and configuration.
   // Must get mutable config otherwise bad things happen.
