@@ -1,0 +1,114 @@
+/**
+ * Dialog
+ *  - Presentational styles for modal windows.
+ ========================================================================== */
+
+.ui-dialog {
+  position: absolute;
+  overflow: visible;
+  z-index: 1260;
+  padding: 0;
+
+  color: $form-text-color;
+  background: $form-background-color;
+  border: $form-border-style $form-border-width $form-border-color;
+
+  .ui-dialog {
+    &-titlebar {
+      font-weight: $font-weight-bold;
+      background: $text-background-color;
+      border-style: $form-border-style;
+      border-radius: 0;
+      border-width: 0 0 $form-border-width 0;
+      border-color: $form-border-color;
+    }
+
+    &-titlebar-close {
+      border: 0;
+      background: none;
+    }
+
+    &-buttonpane {
+      margin-top: 0;
+      @include output-rhythm(padding, $xx-small $medium);
+
+      background: $text-background-color;
+      border-width: $form-border-width 0 0 0;
+      border-color: #ccc;
+    }
+
+    &-buttonpane {
+      .ui-dialog-buttonset {
+        margin: 0;
+        padding: 0;
+      }
+
+      .ui-button-text-only .ui-button-text {
+        padding: 0;
+      }
+    }
+
+    // Form action buttons are moved in dialogs. Remove empty space.
+    &-content .form-actions {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .ajax-progress-throbber {
+    /* Can't do center:50% middle: 50%, so approximate it for a typical window size. */
+    left: 49%;
+    position: fixed;
+    top: 48.5%;
+    z-index: 1000;
+    background-color: #232323;
+
+    // TODO replace loader gif with font icon and rotation animation
+    //background-image: url(loading-small.gif);
+    //background-position: center center;
+    //background-repeat: no-repeat;
+
+    border-radius: 7px;
+    height: 24px;
+    opacity: 0.9;
+    padding: 4px;
+    width: 24px;
+  }
+
+  .ajax-progress-throbber .throbber,
+  .ajax-progress-throbber .message {
+    display: none;
+  }
+}
+
+
+// Layout
+@media all and (max-width: 48em) { /* 768px */
+  .ui-dialog {
+    width: 92% !important;
+  }
+}
+
+.ui-dialog--narrow {
+  max-width: 500px;
+
+  @media screen and (max-width: 600px) {
+    max-width: 95%;
+    min-width: 95%;
+  }
+}
+
+/*
+@media screen and (max-width: 600px) {
+  .ui-dialog--narrow {
+    max-width: 95%;
+    min-width: 95%;
+  }
+}
+*/
+
+
+
+
+
+
