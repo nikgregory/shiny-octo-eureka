@@ -144,7 +144,7 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Devel assets.
-    if (isset($config['enable_devel']) && $config['enable_devel'] === 1)
+    if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
       // Attach Windowsize library
       if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.windowsize';
