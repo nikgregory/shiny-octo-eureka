@@ -5,8 +5,8 @@ dependencies:
     - THEMENAME
 id: THEMENAME_local_actions
 theme: THEMENAME
-region: content_prefix
-weight: 10
+region: content
+weight: 3
 provider: null
 plugin: local_actions_block
 settings:

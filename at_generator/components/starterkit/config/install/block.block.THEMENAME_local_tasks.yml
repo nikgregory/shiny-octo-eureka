@@ -5,8 +5,8 @@ dependencies:
     - THEMENAME
 id: THEMENAME_local_tasks
 theme: THEMENAME
-region: content_prefix
-weight: 20
+region: content
+weight: 1
 provider: null
 plugin: local_tasks_block
 settings:

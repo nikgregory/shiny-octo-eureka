@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - THEMENAME
 id: THEMENAME_page_title
