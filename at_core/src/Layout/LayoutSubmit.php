@@ -14,8 +14,9 @@ use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Cache;
 
 
 class LayoutSubmit implements LayoutSubmitInterface {
@@ -93,11 +94,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
           $output[$suggestion][] = '}';
         }
       }
-
-      // Flush asset file caches.
-      //\Drupal::service('asset.css.collection_optimizer')->deleteAll();
-      //\Drupal::service('asset.js.collection_optimizer')->deleteAll();
-      //_drupal_flush_css_js();
     }
 
     // Get the layouts global CSS if any.
@@ -108,7 +104,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     $max_width_override = '';
     if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
-      $max_width_value = SafeMarkup::checkPlain($this->form_values['settings_max_width_value']);
+      $max_width_value = Html::escape($this->form_values['settings_max_width_value']);
       $max_width_override = 'div.regions{max-width:' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '}';
     }
 
@@ -153,19 +149,18 @@ class LayoutSubmit implements LayoutSubmitInterface {
     }
   }
 
-
   // Save regions to the theme info file, these can change if a new row is added.
   public function saveLayoutRegions() {
     $regions = array();
 
     foreach ($this->layout_config['rows'] as $row => $row_values) {
       foreach ($row_values['regions'] as $region_name => $region_value) {
-        $regions[$region_name] = "'" . $region_value . "'";
+        $regions[$region_name] = $region_value;
       }
     }
 
-    $regions['page_top'] = "'" . 'Page top' . "'";
-    $regions['page_bottom'] = "'" . 'Page bottom' . "'";
+    $regions['page_top'] = 'Page top';
+    $regions['page_bottom'] = 'Page bottom';
 
     $path = drupal_get_path('theme', $this->theme_name);
     $info_file = $this->theme_name . '.info.yml';
@@ -199,8 +194,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     // During the parse get contents single quotes are stripped from
     // strings, we have to add them back because they might have spaces.
-    $theme_info_data['name'] = "'" . $theme_info_data['name'] . "'";
-    $theme_info_data['description'] = "'" . $theme_info_data['description'] . "'";
+    //$theme_info_data['name'] = "'" . $theme_info_data['name'] . "'";
+    //$theme_info_data['description'] = "'" . $theme_info_data['description'] . "'";
 
     // Prepare the array for printing in yml format.
     $buildInfo = new FileOperations();
@@ -214,7 +209,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
   // Save each suggestion template, these are saved every time the layout settings
   // are saved because the rows and regions might change, so we resave every template.
   public function saveLayoutSuggestionsMarkup() {
-
     $template_suggestions = array();
 
     if (!empty($this->form_values['settings_suggestions'])) {
@@ -259,7 +253,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
       $output = array();
-      $suggestion_key = SafeMarkup::checkPlain($suggestion_key);
+      $suggestion_key = Html::escape($suggestion_key);
 
       // Doc block
       $doc = array();
@@ -270,6 +264,17 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $doc[$suggestion_key][] = ' */';
       $doc[$suggestion_key][] = '#}' . "\n";
       $docblock[$suggestion_key] = implode("\n", $doc[$suggestion_key]);
+
+      // Attach layout
+      $generated_files_path = $this->form_values['settings_generated_files_path'];
+      $layout_file = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion_key) . '.css';
+      if (file_exists($generated_files_path .'/'. $layout_file)) {
+        $library = $this->theme_name .'/'. $this->theme_name . '.layout.' . $suggestion_key;
+      }
+      else {
+        $library = $this->theme_name .'/'. $this->theme_name . '.layout.page';
+      }
+      $attach_layout = "{{ attach_library('$library') }}";
 
       // Get the template file, if not found attempt to generate template code programmatically.
       if (file_exists($template_file)) {
@@ -304,10 +309,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
           }
 
           $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
-          //$output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . ' ' . implode(' ', $this_row_attr[$row]) . ' {{ ' .  $row . '__wrapper_attributes }}>';
-
           $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '__wrapper_attributes }}>';
-
           $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '__container_attributes }}>';
 
           foreach ($row_values['regions'] as $region_name => $region_value) {
@@ -320,7 +322,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
           $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
         }
 
-        $generated[$suggestion_key][] = "{# No template file found - template code programmatically generated. #}" . "\n";
+        //$generated[$suggestion_key][] = "{# No template file found - template code programmatically generated. #}" . "\n";
         $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
 
         foreach ($output[$suggestion_key] as $row_output) {
@@ -333,7 +335,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
 
       // Prepend the docblock to the template markup.
-      $template_markup[$suggestion_key] = $docblock[$suggestion_key] . $template[$suggestion_key];
+      $template_markup[$suggestion_key] = $docblock[$suggestion_key] . $attach_layout . "\n" . $template[$suggestion_key];
 
       // Set the template file, either it's page or a page suggestion.
       if ($suggestion_key !== 'page') {
@@ -349,7 +351,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
       // Build array of files to be saved.
       $templates[$suggestion_key]['markup'] = $template_markup[$suggestion_key];
       $templates[$suggestion_key]['template_path'] = $template_path;
-
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {

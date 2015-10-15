@@ -145,6 +145,7 @@ class ThemeGeneratorSubmit {
 
     // Templates
     if ($subtheme_type === 'standard') {
+      $fileOperations->fileStrReplace("$target/templates/page/page.html.twig", 'THEMENAME', $machine_name);
       if ($templates === 1) {
         $directoryOperations->directoryRecursiveCopy("$path/templates", "$target/templates");
       }
