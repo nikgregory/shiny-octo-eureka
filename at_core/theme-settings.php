@@ -2,17 +2,17 @@
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Config;
+
 use Drupal\Component\Utility\Html;
+
+use Drupal\block\BlockInterface;
+use Drupal\block\Entity\Block;
+
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\File\DirectoryOperations;
-
-use Drupal\block\BlockInterface;
-use Drupal\block\Entity\Block;
-
-//use Drupal\at_core\Breakpoints\ATBreakpoints;
 
 /**
  * Implimentation of hook_form_system_theme_settings_alter()
@@ -157,9 +157,6 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       $form['actions']['submit']['#button_type'] = $form['basic_settings']['actions']['submit']['#button_type'] = 'primary';
       unset($form['actions']);
     }
-
-    // Invalidate rendered cache tag
-    Cache::invalidateTags(array('rendered'));
   }
 
   // Modify the color scheme form.
