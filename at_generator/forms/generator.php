@@ -50,9 +50,8 @@ $generate_type_options = array(
 if (!empty($sourceThemeOptions)) {
   $generate_type_options = array(
     'standard' => t('Standard kit'),
-    //'minimal' => t('Minimal kit'),
     'clone' => t('Clone'),
-    'skin' => t('Skin'),
+    //'skin' => t('Skin'), // TODO disable skins until further testing and dev.
   );
 }
 
