@@ -16,7 +16,8 @@
 @mixin list-style-seven-horizontal($list_selector) {
 
   #{$list_selector} {
-    @include list-horizontal($flow-from, $margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
+    //@include list-horizontal($flow-from, $margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
+    @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
     padding: 0;
 
     a {
@@ -24,9 +25,12 @@
       line-height: 1;
       color: $list-color;
 
-      border-bottom: $list-border-width $list-border-style transparent;
+      //border-bottom: $list-border-width $list-border-style transparent;
+      border-bottom: $list-border-width $list-border-style lighten($list-border-color, $lighten-more);
 
-      @include output-rhythm(padding, $xx-small $medium);
+
+      @include output-rhythm(padding, $medium $xx-small $x-small);
+      @include output-rhythm(margin-#{$flow-to}, $medium);
 
       transition: background-color, .15s, ease-in-out;
 
@@ -37,7 +41,8 @@
         border-bottom: $list-border-width $list-border-style $list-border-color;
       }
 
-      &.active {
+      &.active,
+      &.is-active {
         border-bottom: $list-border-width $list-border-style $list-border-color;
 
         &:hover,
@@ -88,7 +93,8 @@
         border-bottom: $list-border-width $list-border-style $list-border-color;
       }
 
-      &.active {
+      &.active,
+      &.is-active {
         border-bottom: $list-border-width $list-border-style $list-border-color;
 
         &:hover,

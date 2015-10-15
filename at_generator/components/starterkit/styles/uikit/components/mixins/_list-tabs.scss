@@ -42,7 +42,8 @@
         text-decoration: none;
       }
 
-      &.active {
+      &.active,
+      &.is-active {
         color: $tab-active-color;
         background: none;
         border-bottom-color: $regions-background-color;
@@ -111,7 +112,8 @@
         text-decoration: none;
       }
 
-      &.active {
+      &.active,
+      &.is-active {
         color: $tab-active-color;
         background: none;
         border-bottom-color: $regions-background-color;

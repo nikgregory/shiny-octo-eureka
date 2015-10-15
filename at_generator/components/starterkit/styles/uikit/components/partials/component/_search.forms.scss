@@ -104,6 +104,22 @@
 }
 
 
+.search-help-link {
+  float: $flow-to;
+  @include adjust-font-size-to($medium*.875);  // 14px
+  @include output-rhythm(margin-top, -24px);
+  @include output-rhythm(padding-#{$flow-to}, $xxx-small);
 
+  &:before {
+    font-family: $icon-font;
+    content: $help-icon;
+
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    @include output-rhythm(width, $medium);
+  }
+}
 
 

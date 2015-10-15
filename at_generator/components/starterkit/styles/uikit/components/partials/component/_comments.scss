@@ -17,17 +17,79 @@
   }
 }
 
-
 // Comment field on node content types.
 .field-node--comment {}
 
-
-.comment-field__title {} // typically this says 'Comments'.
+// typically this says 'Comments'.
+.comment-field__title {}
 
 
 // Comments are articles, they all have the base class of .comment:
 .comment {
   @include clearfix-micro;
+
+  // Title and New
+  &__title {}
+  &__new {}
+
+  // Comment author picture, name and date details.
+  &__meta {
+    @include output-rhythm(margin, $medium 0);
+
+    // User picture is showing.
+    &--has-user-picture {
+      @include output-rhythm(line-height, 48px);
+    }
+
+    // User picture.
+    .field-type-image {
+      float: #{$flow-from};
+      @include output-rhythm(margin, 0 $small 0 0);
+
+      img {
+        width: auto;
+        @include output-rhythm(height, 48px);
+      }
+    }
+
+    // figure wraper
+    .field-type-image__figure {
+      margin: 0;
+      padding: 0;
+    }
+
+    // Remove potentially empty article element.
+    article:empty {
+      display: none;
+    }
+  }
+
+  &__submitted {}
+
+  &__author {
+    display: inline;
+    font-style: normal;
+  }
+
+  &__date {}
+
+
+  // Comment content wrapper.
+  &__content {}
+
+
+  // Links
+  .links {}
+
+
+  // User signiture
+  &__user-signature {}
+
+
+  &.preview {
+    @include output-rhythm(padding, $medium);
+    @include output-rhythm(margin-bottom, $medium);
+  }
 }
 
 
@@ -36,73 +98,6 @@
 .by-viewer {}
 .comment--by-node-author {}
 
-
-// Title and New
-.comment__title {}
-.comment__new {}
-
-
-
-// Comment author picture, name and date details.
-.comment__meta {
-  @include output-rhythm(margin, $medium 0);
-
-  // User picture is showing.
-  &.comment__meta--has-user-picture {
-    @include output-rhythm(line-height, 48px);
-  }
-
-  // User picture.
-  .field-type-image {
-    float: #{$flow-from};
-    @include output-rhythm(margin, 0 $small 0 0);
-
-    img {
-      width: auto;
-      @include output-rhythm(height, 48px);
-    }
-  }
-
-  // figure wraper
-  .field-type-image__figure {
-    margin: 0;
-    padding: 0;
-  }
-
-  // Remove potentially empty article element.
-  article:empty {
-    display: none;
-  }
-}
-
-.comment__submitted {}
-
-.comment__author {
-  display: inline;
-  font-style: normal;
-}
-
-.comment__date {}
-
-.comment__meta--has-user-picture {
-  .comment__submitted {
-    //@include adjust-font-size-to($medium/1.125);
-  }
-}
-
-
-// Comment content wrapper.
-.comment__content {}
-
-
-// Links
-.comment {
-  .links {}
-}
-
-
-// User signiture
-.comment__user-signature {}
 
 
 // Comment form - basic classes only, see _form-styles.scss

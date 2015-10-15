@@ -1,32 +1,44 @@
+@charset "UTF-8";
 /**
- * Search results pages
+ * Search results.
+ *
  ========================================================================== */
-.search-results {
+.item-list--search-results {
+  border-radius: 2px;
+}
+
+.search-results,
+.search-results--empty {
   margin-bottom: 16px;
   margin-bottom: 1rem;
   padding: 16px;
   padding: 1rem;
-  border-radius: 2px;
 }
-.search-results li {
+
+.search-results--empty h3 {
+  font-size: 18px;
+  font-size: 1.13rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+
+.search-results__item {
   margin-bottom: 18px;
   margin-bottom: 1.13rem;
   padding: 0;
 }
 
-.search-result p {
-  margin: 0;
-}
-
 .search-result__title {
   margin: 0;
 }
-
-.search-result__info {
-  font-size: 11px;
-  font-size: 0.69838rem;
+.search-result__snippet-info {
+  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 18px;
   line-height: 1.125rem;
+}
+.search-result p {
+  margin: 0;
 }
 
 /**
@@ -114,5 +126,27 @@
 .search-advanced .form-checkboxes {
   margin-bottom: 7px;
   margin-bottom: 0.43162rem;
+}
+
+.search-help-link {
+  float: right;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  margin-top: -24px;
+  margin-top: -1.5rem;
+  padding-right: 6px;
+  padding-right: 0.38197rem;
+}
+.search-help-link:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 16px;
+  width: 1rem;
 }
 /*# sourceMappingURL=search.css.map */

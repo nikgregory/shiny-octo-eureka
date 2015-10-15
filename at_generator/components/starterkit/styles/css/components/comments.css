@@ -25,12 +25,11 @@
 .comment:after {
   clear: both;
 }
-
 .comment__meta {
   margin: 16px 0;
   margin: 1rem 0;
 }
-.comment__meta.comment__meta--has-user-picture {
+.comment__meta--has-user-picture {
   line-height: 48px;
   line-height: 3rem;
 }
@@ -51,9 +50,15 @@
 .comment__meta article:empty {
   display: none;
 }
-
 .comment__author {
   display: inline;
   font-style: normal;
 }
+.comment.preview {
+  padding: 16px;
+  padding: 1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+
 /*# sourceMappingURL=comments.css.map */

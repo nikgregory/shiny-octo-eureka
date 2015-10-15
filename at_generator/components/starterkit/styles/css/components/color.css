@@ -804,7 +804,7 @@ body:before {
 /**
  * Search results pages
  ========================================================================== */
-.search-results {
+.item-list--search-results {
   background-color: #ffffff;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 }

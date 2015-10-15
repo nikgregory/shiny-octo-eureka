@@ -74,7 +74,7 @@
 
   a {
     display: block;
-    @include output-rhythm(padding, $xx-small 0);
+    @include output-rhythm(padding, $xxxx-small 0);
     //border-bottom: $border-width $border-style;
 
     &:hover,
@@ -87,11 +87,14 @@
 }
 
 
+// Region specific menus
+@import "menu.leaderboard";
 
-// Region or row specfic menu overrides
-.pr-footer {
-  .menu-item a {
-    //border: 0;
-  }
-}
+
+
+
+
+
+
+
 

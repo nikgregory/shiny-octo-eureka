@@ -1,39 +1,48 @@
 /**
- * Search results pages
+ * Search results.
+ *
  ========================================================================== */
 
-// Search Results. Ordered list.
-.search-results {
-  @include output-rhythm(margin-bottom, $medium);
-  @include output-rhythm(padding, $medium);
+.item-list--search-results {
   border-radius: $border-radius;
-
-  li {
-    @include output-rhythm(margin-bottom, $large);
-    padding: 0;
-  }
-
 }
 
+.search-results,
+.search-results--empty {
+  @include output-rhythm(margin-bottom, $medium);
+  @include output-rhythm(padding, $medium);
+}
+
+// Style the emtpy message.
+.search-results--empty h3 {
+  @include adjust-font-size-to($large);
+}
+
+.search-results__item {
+  @include output-rhythm(margin-bottom, $large);
+  padding: 0;
+}
+
+// Individual search result.
 .search-result {
-  // search-snippet & search-info
+  &__title {
+    margin: 0;
+
+    a {}
+  }
+
+  // We assume, like Google and co, that most results get picked based on the title, not the
+  // snippet/description, so we make this smaller to enhance the scanability of the titles.
+  &__snippet-info {
+    @include adjust-font-size-to($medium*.875); // 14px
+  }
+
+  &__snippet {}
+  &__info {}
+
+  // search-snippet & search-info both use p
   p {
     margin: 0;
   }
 }
-
-.search-result__title {
-  margin: 0;
-
-  a {}
-}
-
-.search-result__text {}
-.search-result__snippet {}
-
-.search-result__info {
-  @include adjust-font-size-to($small)
-}
-
-
 

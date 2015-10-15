@@ -31,7 +31,9 @@ ul {
 // reset since item-lists are not usually bulletted etc.
 .item-list {
 
-  .title {}
+  .title {
+    font-weight: $font-weight-bold;
+  }
 
   ul,
   ol,
@@ -43,6 +45,19 @@ ul {
     &:hover,
     &:focus {}
   }
+}
+
+
+// Comma separated item lists.
+.item-list--comma-list {
+  display: inline;
+}
+
+.item-list--comma-list .item-list__comma-list,
+.item-list__comma-list li,
+[dir="rtl"] .item-list--comma-list .item-list__comma-list,
+[dir="rtl"] .item-list__comma-list li {
+  margin: 0;
 }
 
 
@@ -94,6 +109,13 @@ ul {
 }
 
 
+// DL list groups
+.list-group {
+  @include output-rhythm(padding-#{$flow-from}, 0);
+  @include output-rhythm(margin-#{$flow-from}, 0);
 
+  .list-group__link {}
+  .list-group__description {}
+}
 
 
