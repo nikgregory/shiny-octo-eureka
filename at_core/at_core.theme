@@ -6,7 +6,6 @@ use Drupal\Core\Theme\ThemeSettings;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Asset\CssOptimizer;
-//use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
@@ -20,14 +19,6 @@ use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
 
-
-
-/*
-function at_core_library_info_alter(&$libraries, $extension) {
-  kpr($libraries);
-  kpr($extension);
-}
-*/
 
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
@@ -49,7 +40,15 @@ function at_core_page_attachments_alter(array &$page) {
     return;
   }
 
-  //kpr($page['#attached']['library']);
+  // Alternate way to remove an entire library, however we want to keep
+  // this at the info file level.
+  /*
+  foreach ($page['#attached']['library'] as $lib_key => $lib_values) {
+    if ($lib_values == "classy/base") {
+      unset($page['#attached']['library'][$lib_key]);
+    }
+  }
+  */
 
   // Common paths.
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
@@ -144,24 +143,27 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
 
-    // Attach Windowsize library
-    if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
-      $page['#attached']['library'][] = 'at_core/at.windowsize';
-    }
+    // Devel assets.
+    if (isset($config['enable_devel']) && $config['enable_devel'] === 1)
+      // Attach Windowsize library
+      if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
+        $page['#attached']['library'][] = 'at_core/at.windowsize';
+      }
 
-    // Attach devel_layout CSS file.
-    if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
-       $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
-    }
+      // Attach devel_layout CSS file.
+      if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
+         $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
+      }
 
-    // Attach devel_colorize-regions CSS file.
-    if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
-      $page['#attached']['library'][] = 'at_core/at.devel_colorize_regions';
-    }
+      // Attach devel_colorize-regions CSS file.
+      if ((isset($config['devel_color_regions']) && $config['devel_color_regions'] === 1) && (isset($config['devel_layout']) && $config['devel_layout'] === 0)) {
+        $page['#attached']['library'][] = 'at_core/at.devel_colorize_regions';
+      }
 
-    // Attach nuke_toolbar CSS file.
-    if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
-      $page['#attached']['library'][] = 'at_core/at.devel_nuke_toolbar';
+      // Attach nuke_toolbar CSS file.
+      if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
+        $page['#attached']['library'][] = 'at_core/at.devel_nuke_toolbar';
+      }
     }
 
     // Shortcodes
@@ -295,99 +297,6 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
   }
-
-  // Layout
-  // This determines the page suggestion for the current page and checks if there is an
-  // existing config key for that suggestion, then loads a layout CSS file appropriatly.
-  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
-
-    // If we don't have the base path to generated files throw an error.
-    if (!empty($config['generated_files_path'])) {
-      $generated_files_path = $config['generated_files_path'];
-    }
-    else {
-      drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes layout settings.'), 'error');
-    }
-
-    // Get theme registry.
-    $theme_registry = \Drupal::service('theme.registry')->getRuntime();
-
-    // Build an array of path arguments to pass to theme_get_suggestions()
-    $path = \Drupal::request()->getPathInfo();
-    $path_args = explode('/', $path);
-
-    // This is the front page.
-    // $is_front_page =  \Drupal::service('path.matcher')->isFrontPage();
-    if (empty($path_args[1])) {
-      $path_args = [''];
-    }
-
-    // Unset the first item in the array, othewise delimeters are doubled, don't ask me why.
-    unset($path_args[0]);
-    $path_args = array_values($path_args);
-
-    // Add node type suggestion.
-    if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      $path_args[] = $node->getType();
-    }
-
-    // Get page suggestions, loop, check for a config key and break
-    // if/when we have a match in the registry.
-    if ($suggestions = theme_get_suggestions($path_args, 'page')) {
-      foreach ($suggestions as $suggestion) {
-        if (isset($config['suggestions'][$suggestion])) {
-          $suggestions_layout = $config['suggestions'][$suggestion];
-          $suggestions_layout = str_replace('_', '-', $suggestions_layout);
-        }
-        if ($theme_registry->has($suggestion)) {
-          break;
-        }
-      }
-    }
-
-    // Get the layout, fallback to the default layout if for some reason it does
-    // not exists, perhaps it was deleted by mistake etc.
-    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
-      $layout = $theme . '.layout.'  . $suggestions_layout . '.css';
-
-      $layout_path = file_create_url($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css');
-    }
-    else {
-      $layout = $theme . '.layout.page.css';
-
-      $layout_path = file_create_url($generated_files_path . '/' . $theme . '.layout.page.css');
-    }
-
-    // Load using html_head_link
-    /*
-    $query_string = Drupal::state()->get('system.css_js_query_string') ?: '0';
-    $page ['#attached']['html_head_link'][][] = array(
-      'rel' => 'stylesheet',
-      'href' => file_create_url($generated_files_path . '/' . $layout) . '?' . $query_string,
-      'type' => 'text/css',
-    );
-    */
-
-    // Optimize and inline the layout styles in html head.
-    $css_optimizer = new CssOptimizer();
-    $layout_style = $css_optimizer->loadFile($layout_path, TRUE, FALSE);
-
-    // Load CSS inline using html_head and a style element, this is very fast as it removes
-    // an http request and is a relatively small amount of CSS, however I have no idea if this
-    // is breaking a cache somewhere?
-    $page['#attached']['html_head'][] = [[
-        '#tag' => 'style',
-        '#value' => $layout_style,
-      ],
-      $layout
-    ];
-
-    // TODO test if this is even working and if we need it.
-    //$page['#cache']['contexts'][] = 'url';
-  }
-
-  //kpr($page['#attached']);
-  //kpr($page['#cache']);
 }
 
 
@@ -402,86 +311,6 @@ function at_core_page_attachments_alter(array &$page) {
  */
 function at_core_css_alter(&$css) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-
-/*
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
-
-
-  // Layout
-  // This determines the page suggestion for the current page and checks if there is an
-  // existing config key for that suggestion, then loads a layout CSS file appropriatly.
-  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
-
-    // If we don't have the base path to generated files throw an error.
-    if (!empty($config['generated_files_path'])) {
-      $generated_files_path = $config['generated_files_path'];
-    }
-    else {
-      drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes layout settings.'), 'error');
-    }
-
-    // Get theme registry.
-    $theme_registry = \Drupal::service('theme.registry')->getRuntime();
-
-    // Build an array of path arguments to pass to theme_get_suggestions()
-    $path = \Drupal::request()->getPathInfo();
-    $path_args = explode('/', $path);
-
-    // This is the front page.
-    // $is_front_page =  \Drupal::service('path.matcher')->isFrontPage();
-    if (empty($path_args[1])) {
-      $path_args = [''];
-    }
-
-    // Unset the first item in the array, othewise delimeters are doubled, don't ask me why.
-    unset($path_args[0]);
-    $path_args = array_values($path_args);
-
-    // Add node type suggestion.
-    if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      $path_args[] = $node->getType();
-    }
-
-    // Get page suggestions, loop, check for a config key and break
-    // if/when we have a match in the registry.
-    if ($suggestions = theme_get_suggestions($path_args, 'page')) {
-      foreach ($suggestions as $suggestion) {
-        if (isset($config['suggestions'][$suggestion])) {
-          $suggestions_layout = $config['suggestions'][$suggestion];
-          $suggestions_layout = str_replace('_', '-', $suggestions_layout);
-        }
-        if ($theme_registry->has($suggestion)) {
-          break;
-        }
-      }
-    }
-
-    // Get the layout, fallback to the default layout if for some reason it does
-    // not exists, perhaps it was deleted by mistake etc.
-    if (isset($suggestions_layout) && file_exists($generated_files_path . '/' . $theme . '.layout.'  . $suggestions_layout . '.css')) {
-      $layout = $theme . '.layout.'  . $suggestions_layout . '.css';
-    }
-    else {
-      $layout = $theme . '.layout.page.css';
-    }
-
-    // And you thought loading CSS assets in Drupal was getting easier?
-    $css[$layout] = array(
-      'weight' => 999.999,
-      'group' => CSS_LAYOUT,
-      'type' => 'file',
-      'data' => $generated_files_path . '/' . $layout,
-      'version' => '8.0.0-dev',
-      'media' => 'all',
-      'preprocess' => true,
-      'browsers' => array ('IE' => true, '!IE' => true),
-      //'basename' => $layout,
-    );
-  }
-*/
-
 
   // Color module doesn't know anything about libraries loaded in hook_page_attachments_alter(),
   // therefor we need to load the colorized CSS file ourselves.
@@ -513,13 +342,26 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   }
 
   // Show template suggestions.
-  if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
-    if ($suggestions) {
-      foreach ($suggestions as $suggestion_name) {
-        $formatted_suggestions[] = '<div>' . str_replace('_', '-', $suggestion_name) . '</div>';
+  if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
+    if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
+      if ($suggestions) {
+        foreach ($suggestions as $suggestion_name) {
+
+          if ($suggestion_name == 'page__') {
+            $suggestion_name = str_replace('_', '', $suggestion_name);
+          }
+
+          $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
+        }
+        //$these_suggestions = implode($formatted_suggestions);
+        $these_suggestions = array(
+          '#theme' => 'item_list',
+          '#items' => $formatted_suggestions,
+        );
+        $saved_formatted_suggestions = drupal_render($these_suggestions);
+
+        drupal_set_message(t('Template suggestions for this page:<br>!these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('!these_suggestions' => $saved_formatted_suggestions)), 'status');
       }
-      $these_suggestions = implode($formatted_suggestions);
-      drupal_set_message(t('Template suggestions for this page:<br>!these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('!these_suggestions' => $these_suggestions)), 'status');
     }
   }
 }
@@ -1259,3 +1101,12 @@ if ( $something ) {
   debug(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10));
 }
 */
+
+
+/* For debugging purposes TODO remove later on...
+function at_core_library_info_alter(&$libraries, $extension) {
+  //kpr($libraries);
+ // kpr($extension);
+}
+*/
+
