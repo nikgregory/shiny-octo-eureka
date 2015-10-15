@@ -93,7 +93,7 @@ $form['layouts']['layout_select']['settings_suggestions'] = array(
 );
 
 foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
-  //$suggestions_name = SafeMarkup::checkPlain($suggestions_name);
+  //$suggestions_name = Html::escape($suggestions_name);
 
   if ($suggestions_name == 'page') {
     $suggestions_name = 'page (default)';

@@ -1,7 +1,5 @@
 <?php
 
-use Drupal\Component\Utility\SafeMarkup;
-
 // Development settings
 $form['devel'] = array(
   '#type' => 'details',
@@ -60,27 +58,3 @@ $form['devel']['settings_nuke_toolbar'] = array(
   '#default_value' => theme_get_setting('settings.nuke_toolbar', $theme),
   '#description' => t('Completely removes the toolbar in the front end by hiding it with CSS and overriding all it\'s CSS rules.'),
 );
-
-// LiveReload
-/*
-$form['devel']['settings_livereload'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Enable LiveReload'),
-  '#description' => t('See <a href="!lv" target="_blank">Livereload.com</a> for more information on setting up and using LiveReload. Also see the Help tab for more details.'),
-  '#default_value' => theme_get_setting('settings.livereload', $theme),
-);
-$livereload_snippet = SafeMarkup::checkPlain("document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1\"></' + 'script>');");
-$livereload_tags = SafeMarkup::checkPlain('<script></script>');
-$form['devel']['settings_livereload_snippet'] = array(
-  '#type' => 'textarea',
-  '#rows' => 2,
-  '#title' => t('LiveReload Snippet'),
-  '#description' => t('Paste in the snippet from the LiveReload app. Remove the outer <code>!tags</code> tags and add a trailing semi-colon, e.g.:<br /><code>!snippet</code>', array('!snippet' => $livereload_snippet, '!tags' => $livereload_tags)),
-  '#default_value' => theme_get_setting('settings.livereload_snippet', $theme),
-  '#states' => array(
-    'visible' => array('input[name="settings_livereload"]' => array('checked' => TRUE)),
-  ),
-);
-*/
-
-

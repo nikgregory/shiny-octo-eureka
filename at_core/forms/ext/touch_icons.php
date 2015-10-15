@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
 
 /**
  * @file
@@ -38,7 +38,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_icon_path_d
   '#title' => t('iPhone @1x'),
   '#description' => t('If you only enter a path for this size it will be used by all devices.'),
   '#field_prefix' => $theme . '/',
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.icon_path_default')),
+  '#default_value' => Html::escape(theme_get_setting('settings.icon_path_default')),
   '#states' => array(
     'required' => array('input[name="enable_apple_touch_icons"]' => array('checked' => TRUE)),
   ),
@@ -50,7 +50,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#title' => t('iPhone @2x'),
   '#description' => t('Apple touch icon for iPhones with retina displays.'),
   '#field_prefix' => $theme . '/',
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.apple_touch_icon_path_iphone_retina')),
+  '#default_value' => Html::escape(theme_get_setting('settings.apple_touch_icon_path_iphone_retina')),
 );
 
 // iPad (standard display)
@@ -59,7 +59,7 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#title' => t('iPad @1x'),
   '#description' => t('Apple touch icon for older iPads with standard displays.'),
   '#field_prefix' => $theme . '/',
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.apple_touch_icon_path_ipad')),
+  '#default_value' => Html::escape(theme_get_setting('settings.apple_touch_icon_path_ipad')),
 );
 
 // iPad retina
@@ -68,12 +68,12 @@ $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch
   '#title' => t('iPad @2x'),
   '#description' => t('Apple touch icon for iPads with retina displays.'),
   '#field_prefix' => $theme . '/',
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.apple_touch_icon_path_ipad_retina')),
+  '#default_value' => Html::escape(theme_get_setting('settings.apple_touch_icon_path_ipad_retina')),
 );
 
 $form['touch_icons']['touch_icons_settings']['icon-paths']['settings_apple_touch_icon_precomposed'] = array(
   '#type' => 'checkbox',
   '#title' => t('Use apple-touch-icon-precomposed'),
   '#description' => t('Use precomposed if you want to remove icon effects in iOS6 or below. The default is <code>apple-touch-icon</code>. '),
-  '#default_value' => SafeMarkup::checkPlain(theme_get_setting('settings.apple_touch_icon_precomposed')),
+  '#default_value' => Html::escape(theme_get_setting('settings.apple_touch_icon_precomposed')),
 );
