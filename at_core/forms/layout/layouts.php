@@ -202,7 +202,6 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
       }
     }
   }
-
 }
 
 // Suggestions container.
