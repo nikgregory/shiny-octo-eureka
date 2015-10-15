@@ -36,6 +36,7 @@ class LayoutCompatible implements LayoutCompatibleInterface {
       $providers = $themeSettingsInfo->baseThemeInfo('base_themes');
 
       // Unset at_core and classy, these never have a layout.
+      unset($providers['stable']);
       unset($providers['classy']);
       unset($providers['at_core']);
 
