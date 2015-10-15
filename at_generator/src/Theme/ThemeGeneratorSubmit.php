@@ -92,8 +92,8 @@ class ThemeGeneratorSubmit {
     $configuration_files = $directoryOperations->directoryScan("$source/config/install");
 
     // Files to strip replace strings
-    $info_file      = "$target/$machine_name.info.yml";
-    $library_file   = "$target/$machine_name.libraries.yml";
+    $info_file = "$target/$machine_name.info.yml";
+    $library_file = "$target/$machine_name.libraries.yml";
     $shortcodes_file = "$target/$machine_name.shortcodes.yml";
 
     // Begin generation
