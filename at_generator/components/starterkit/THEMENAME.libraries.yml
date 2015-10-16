@@ -5,6 +5,13 @@ base:
     component:
       styles/css/components/base.css: {}
 
+# Aggregator
+aggregator:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/aggregator.css: {}
+
 # Book
 book:
   version: 8.x-1.0

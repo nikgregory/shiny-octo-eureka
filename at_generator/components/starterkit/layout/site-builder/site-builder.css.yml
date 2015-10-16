@@ -3,7 +3,7 @@
 
 css_files_path: 'css'                             # Path to CSS layout files.
 css_form_styles_path: 'css/site-builder-form.css' # Path to the CSS used in Appearance settings form.
-css_global_layout: 'site-builder-global.css'             # Sets global CSS for the layout. Path must be relative to "css_files_path".
+css_global_layout: 'site-builder-global.css'      # Sets global CSS for the layout. Path must be relative to "css_files_path".
 
 # CSS key holds all CSS files for this layout. Keyed by directory path (a folder).
 css:

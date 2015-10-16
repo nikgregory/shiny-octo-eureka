@@ -1,8 +1,8 @@
 # Site Builder Layout Plugin.
 
-name: 'Site Builder Row Styles'         # Human readable layout name. Required.
-type: 'at_layout'                       # All layouts are type 'at_layout'. Required.
-version: '8.x-1.0-dev'                  # Version string. Optional.
+name: 'Site Builder Row Styles'     # Human readable layout name. Required.
+type: 'at_layout'                   # All layouts are type 'at_layout'. Required.
+version: '8.x-1.0-dev'              # Version string. Optional.
 
 # Rows. Required!
 # Here we declare all rows and their regions. AT Core uses this to setup regions in the themes
@@ -69,9 +69,3 @@ rows:
       id: footer
     regions:
       footer: 'Footer'
-
-#   messages:          # row key (name)
-#     attributes:      # attributes key. Set id, role, classes etc. Optional.
-#       id: messages
-#     regions:         # use the key "regions" to declare row regions.
-#       messages: 'Messages'

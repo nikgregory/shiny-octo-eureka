@@ -21,6 +21,10 @@
   width: 20px;
   width: 1.25rem;
 }
+.forum td,
+.forum th {
+  vertical-align: top;
+}
 
 .forum-header th {
   white-space: nowrap;

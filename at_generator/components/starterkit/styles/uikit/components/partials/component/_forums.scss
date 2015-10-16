@@ -24,6 +24,11 @@
       @include output-rhythm(width, 20px);
     }
   }
+
+  td,
+  th {
+    vertical-align: top;
+  }
 }
 
 
@@ -106,15 +111,9 @@
   a {}
 }
 
-
 .forum-list__posts {}
 
-
 .forum-list__last-reply {}
-
-
-
-
 
 
 // TODO rtl stuff

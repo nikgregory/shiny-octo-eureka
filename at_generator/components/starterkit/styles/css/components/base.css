@@ -1366,6 +1366,15 @@ ul.inline li ol {
 }
 
 /**
+ * Blocks
+ * Base styles for block templates.
+ ========================================================================== */
+.block {
+  margin: 26px 0;
+  margin: 1.61803rem 0;
+}
+
+/**
  * Page
  *  - for page.html.twig and region markup.
  ========================================================================== */
@@ -1546,6 +1555,10 @@ ul.inline li ol {
   overflow-wrap: break-word;
   padding: 16px;
   padding: 1rem;
+  margin: 26px 0;
+  margin: 1.61803rem 0;
+  border: 1px solid;
+  border-radius: 2px;
 }
 .messages + .messages {
   margin-top: 18.08px;
@@ -1583,6 +1596,7 @@ table tr.ok {
 .messages--status,
 .ok {
   color: #325e1c;
+  border-color: #c9e1bd;
 }
 
 /* Warning */
@@ -1594,6 +1608,7 @@ table tr.warning {
 .messages--warning,
 .warning {
   color: #734c00;
+  border-color: #f4daa6;
 }
 
 /* Error */
@@ -1605,6 +1620,7 @@ table tr.error {
 .messages--error,
 .error {
   color: #a51b00;
+  border-color: #f9c9bf;
 }
 
 .messages--status,
@@ -1852,6 +1868,10 @@ table tr.error {
 /**
  * Breadcrumbs
  ========================================================================== */
+.block-system-breadcrumb-block {
+  margin: 0;
+}
+
 .breadcrumb__title {
   font-size: inherit;
 }
@@ -1955,15 +1975,6 @@ table tr.error {
 [dir="rtl"] .filter-help a, [dir="rtl"]
 .more-help-link a {
   background: transparent;
-}
-
-/**
- * Blocks
- * Base styles for block templates.
- ========================================================================== */
-.block {
-  margin: 26px 0;
-  margin: 1.61803rem 0;
 }
 
 /**

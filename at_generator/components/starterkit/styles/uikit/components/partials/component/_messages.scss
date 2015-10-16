@@ -6,7 +6,12 @@
 .messages {
   word-wrap: break-word;
   overflow-wrap: break-word;
+
   @include output-rhythm(padding, $medium);
+  @include output-rhythm(margin, $x-large 0);
+
+  border: $border-width $border-style;
+  border-radius: $border-radius;
 
   &+ .messages {
     margin-top: $large;
@@ -49,6 +54,7 @@ table tr.ok {
 .messages--status,
 .ok {
   color: $success-text-color;
+  border-color: $success-border-color;
 }
 
 
@@ -61,6 +67,7 @@ table tr.warning {
 .messages--warning,
 .warning {
   color: $warning-text-color;
+  border-color: $warning-border-color;
 }
 
 
@@ -73,6 +80,7 @@ table tr.error {
 .messages--error,
 .error {
   color: $error-text-color;
+  border-color: $error-border-color;
 }
 
 
