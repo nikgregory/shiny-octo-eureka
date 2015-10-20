@@ -1,0 +1,17 @@
+@media all and (min-width: 60.063em) {
+  .ds-3col-equal > [class*="group-"] {
+    width: 32%;
+    float: left;
+    margin-right: 2%;
+  }
+  .ds-3col-equal > [class*="group-"]:last-child {
+    margin-right: 0;
+  }
+  .ds-3col-equal.group-one-column > [class*="group-"] {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-3col-equal-width.css.map */

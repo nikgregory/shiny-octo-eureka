@@ -1,0 +1,17 @@
+@media all and (min-width: 60.063em) {
+  .ds-2col-stacked > .group-header,
+  .ds-2col-stacked > .group-footer {
+    clear: both;
+  }
+  .ds-2col-stacked > .group-left,
+  .ds-2col-stacked > .group-right {
+    float: left;
+    width: 49%;
+    margin-right: 2%;
+  }
+  .ds-2col-stacked > .group-right {
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-2col-stacked.css.map */

@@ -1,0 +1,15 @@
+@import '../base';
+
+@media #{$wide} {
+  .ds-3col {
+    > [class*="group-"] {
+      float: $flow-from;
+      width: 32%;
+      margin-#{$flow-to}: 2%;
+
+      &:last-child {
+        margin-#{$flow-to}: 0;
+      }
+    }
+  }
+}

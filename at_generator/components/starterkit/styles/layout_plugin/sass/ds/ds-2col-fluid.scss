@@ -1,0 +1,21 @@
+@import '../base';
+
+@media #{$wide} {
+  .ds-2col-fluid {
+    > [class*="group-"] {
+      width: 49%;
+      float: $flow-from;
+      margin-#{$flow-to}: 2%;
+
+      &:last-child {
+        margin-#{$flow-to}: 0;
+      }
+    }
+
+    &.group-one-column > [class*="group-"] {
+      width: 100%;
+      float: none;
+      margin-#{$flow-to}: 0;
+    }
+  }
+}

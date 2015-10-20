@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,oCAAgB;EAEZ,4BAAoB;IAClB,KAAK,EC+CC,IAAqB;ID9C3B,KAAK,EAAE,GAAG;IACV,YAAkB,EAAE,EAAE;;EAEtB,uCAAa;IACX,YAAkB,EAAE,CAAC",
+"sources": ["../../sass/ds/ds-2col.scss","../../../../layout/site-builder/sass/_site-builder-base.scss"],
+"names": [],
+"file": "ds-2col.css"
+}

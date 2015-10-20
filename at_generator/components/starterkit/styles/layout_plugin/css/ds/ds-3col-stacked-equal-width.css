@@ -1,0 +1,18 @@
+@media all and (min-width: 60.063em) {
+  .ds-3col-stacked-equal > .group-header,
+  .ds-3col-stacked-equal > .group-footer {
+    clear: both;
+  }
+  .ds-3col-stacked-equal > .group-left,
+  .ds-3col-stacked-equal > .group-right,
+  .ds-3col-stacked-equal > .group-middle {
+    float: left;
+    width: 32%;
+    margin-right: 2%;
+  }
+  .ds-3col-stacked-equal > .group-right {
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-3col-stacked-equal-width.css.map */

@@ -1,0 +1,36 @@
+@import '../base';
+
+@media #{$wide} {
+  .ds-3col-stacked-fluid {
+    > .group-header,
+    > .group-footer {
+      clear: both;
+    }
+
+    > .group-left,
+    > .group-right {
+      width: 23.5%;
+      float: $flow-from;
+      margin-#{$flow-to}: 2%;
+    }
+
+    > .group-middle {
+      width: 100%;
+      float: $flow-from;
+    }
+
+    &.group-one-sidebar > .group-middle {
+      width: 73.5%;
+      margin-#{$flow-to}: 2%;
+    }
+
+    &.group-two-sidebars > .group-middle {
+      width: 49%;
+      margin-#{$flow-to}: 2%;
+    }
+
+    > .group-right {
+      margin-#{$flow-to}: 0;
+    }
+  }
+}

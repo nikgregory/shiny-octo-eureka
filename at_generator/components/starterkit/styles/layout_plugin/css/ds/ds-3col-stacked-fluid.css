@@ -1,0 +1,29 @@
+@media all and (min-width: 60.063em) {
+  .ds-3col-stacked-fluid > .group-header,
+  .ds-3col-stacked-fluid > .group-footer {
+    clear: both;
+  }
+  .ds-3col-stacked-fluid > .group-left,
+  .ds-3col-stacked-fluid > .group-right {
+    width: 23.5%;
+    float: left;
+    margin-right: 2%;
+  }
+  .ds-3col-stacked-fluid > .group-middle {
+    width: 100%;
+    float: left;
+  }
+  .ds-3col-stacked-fluid.group-one-sidebar > .group-middle {
+    width: 73.5%;
+    margin-right: 2%;
+  }
+  .ds-3col-stacked-fluid.group-two-sidebars > .group-middle {
+    width: 49%;
+    margin-right: 2%;
+  }
+  .ds-3col-stacked-fluid > .group-right {
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-3col-stacked-fluid.css.map */

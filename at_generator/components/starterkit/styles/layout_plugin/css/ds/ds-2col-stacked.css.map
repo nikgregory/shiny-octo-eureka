@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,oCAAgB;EAEZ;kCACgB;IACd,KAAK,EAAE,IAAI;;EAGb;iCACe;IACb,KAAK,ECyCC,IAAqB;IDxC3B,KAAK,EAAE,GAAG;IACV,YAAkB,EAAE,EAAE;;EAGxB,+BAAe;IACb,YAAkB,EAAE,CAAC",
+"sources": ["../../sass/ds/ds-2col-stacked.scss","../../../../layout/site-builder/sass/_site-builder-base.scss"],
+"names": [],
+"file": "ds-2col-stacked.css"
+}

@@ -1,0 +1,23 @@
+@media all and (min-width: 60.063em) {
+  .ds-2col-stacked-fluid > .group-header,
+  .ds-2col-stacked-fluid > .group-footer {
+    clear: both;
+  }
+  .ds-2col-stacked-fluid > .group-left,
+  .ds-2col-stacked-fluid > .group-right {
+    width: 49%;
+    float: left;
+    margin-right: 2%;
+  }
+  .ds-2col-stacked-fluid > .group-right {
+    margin-right: 0;
+  }
+  .ds-2col-stacked-fluid.group-one-column > .group-left,
+  .ds-2col-stacked-fluid.group-one-column > .group-right {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-2col-stacked-fluid.css.map */

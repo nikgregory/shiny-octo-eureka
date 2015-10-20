@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,oCAAgB;EAEZ,kCAAoB;IAClB,KAAK,EAAE,GAAG;IACV,KAAK,EC8CC,IAAqB;ID7C3B,YAAkB,EAAE,EAAE;;EAEtB,6CAAa;IACX,YAAkB,EAAE,CAAC;;EAIzB,mDAAuC;IACrC,KAAK,EAAE,IAAI;IACX,KAAK,EAAE,IAAI;IACX,YAAkB,EAAE,CAAC",
+"sources": ["../../sass/ds/ds-2col-fluid.scss","../../../../layout/site-builder/sass/_site-builder-base.scss"],
+"names": [],
+"file": "ds-2col-fluid.css"
+}

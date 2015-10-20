@@ -1,0 +1,17 @@
+@media all and (min-width: 60.063em) {
+  .ds-2col-fluid > [class*="group-"] {
+    width: 49%;
+    float: left;
+    margin-right: 2%;
+  }
+  .ds-2col-fluid > [class*="group-"]:last-child {
+    margin-right: 0;
+  }
+  .ds-2col-fluid.group-one-column > [class*="group-"] {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-2col-fluid.css.map */

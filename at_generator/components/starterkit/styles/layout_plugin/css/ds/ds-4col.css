@@ -1,0 +1,12 @@
+@media all and (min-width: 60.063em) {
+  .ds-4col > [class*="group-"] {
+    float: left;
+    width: 23.5;
+    margin-right: 2%;
+  }
+  .ds-4col > [class*="group-"]:last-child {
+    margin-right: 0;
+  }
+}
+
+/*# sourceMappingURL=ds-4col.css.map */
