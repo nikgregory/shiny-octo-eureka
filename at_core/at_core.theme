@@ -19,6 +19,7 @@ use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
 
+require_once __DIR__ . '/vendor/Mobile_Detect/Mobile_Detect.php';
 
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
@@ -39,6 +40,8 @@ function at_core_page_attachments_alter(array &$page) {
   if ($theme === 'seven') {
     return;
   }
+
+  //kpr($page);
 
   // Alternate way to remove an entire library, however we want to keep
   // this at the info file level.
@@ -301,6 +304,56 @@ function at_core_page_attachments_alter(array &$page) {
 
 
 /**
+ * Alter libraries provided by an extension.
+ *
+ * Allows modules and themes to change libraries' definitions; mostly used to
+ * update a library to a newer version, while ensuring backward compatibility.
+ * In general, such manipulations should only be done to extend the library's
+ * functionality in a backward-compatible way, to avoid breaking other modules
+ * and themes that may be using the library.
+ *
+ * @param array $libraries
+ *   An associative array of libraries registered by $extension. Keyed by
+ *   internal library name and passed by reference.
+ * @param string $extension
+ *   Can either be 'core' or the machine name of the extension that registered
+ *   the libraries.
+ *
+ * @see \Drupal\Core\Asset\LibraryDiscoveryParser::parseLibraryInfo()
+ */
+/*
+function at_core_library_info_alter(&$libraries, $extension) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Unset Display suite assets and add a dependant library
+  // from the active theme. This is a hack and has been replaced
+  // with libraries-override in the themes info yml.
+  $ds_libraries = array(
+    'ds_2col',
+    'ds_2col_fluid',
+    'ds_2col_stacked',
+    'ds_2col_stacked_fluid',
+    'ds_3col',
+    'ds_3col_equal_width',
+    'ds_3col_stacked',
+    'ds_3col_stacked_fluid',
+    'ds_3col_stacked_equal_width',
+    'ds_4col',
+  );
+  if ($extension == 'layout_plugin') {
+    foreach ($libraries as $key => $values) {
+      if (in_array($key, $ds_libraries)) {
+        $css = str_replace('_', '-', $key) . '.css';
+        unset($libraries[$key]['css']['theme']['/modules/ds/css/' . $css]);
+        $libraries[$key]['dependencies'][] = $theme . '/' . $key;
+      }
+    }
+  }
+}
+*/
+
+
+/**
  * Alter CSS files before they are output on the page.
  *
  * @param $css
@@ -325,6 +378,8 @@ function at_core_css_alter(&$css) {
       }
     }
   }
+
+  //kpr($css);
 }
 
 
@@ -506,6 +561,21 @@ function at_core_preprocess_html(&$variables) {
       }
     }
   }
+
+  // Add mobile classes for global theming based on mobile or tablet devices.
+  $detect = new Mobile_Detect;
+  $isMobile = $detect->isMobile();
+  $isTablet = $detect->isTablet();
+  $mobile_detect_settings = array();
+  if ($isMobile == 1) {
+    $variables['attributes']['class'][] = 'is-mobile';
+    $mobile_detect_settings['device'][] = 'is-mobile';
+  }
+  if ($isTablet == 1) {
+    $variables['attributes']['class'][] = 'is-tablet';
+    $mobile_detect_settings['device'][] = 'is-tablet';
+  }
+  $variables['#attached']['drupalSettings']['at_md'] = $mobile_detect_settings;
 }
 
 
@@ -572,7 +642,7 @@ function at_core_preprocess_page(&$variables) {
 
     // Check if we have attributes to avoid a fatal error.
     if (empty($row_attributes)) {
-      drupal_set_message(t('Bummer, something went wrong. Check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
+      drupal_set_message(t('uh oh... check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
     }
     else {
       // I like this syntax better than Drupals usual habit of += shorthand, mainly because it's
@@ -1101,12 +1171,3 @@ if ( $something ) {
   debug(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10));
 }
 */
-
-
-/* For debugging purposes TODO remove later on...
-function at_core_library_info_alter(&$libraries, $extension) {
-  //kpr($libraries);
- // kpr($extension);
-}
-*/
-
