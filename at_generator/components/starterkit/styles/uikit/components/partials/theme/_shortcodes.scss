@@ -66,6 +66,99 @@
 }
 
 
+// Float region blocks
+@media #{$wide} {
+  .frb-2 .block {
+    width: 48%;
+    margin-right: 2%;
+    float: left;
+    clear: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .frb-3 .block {
+    width: 32%;
+    margin-right: 2%;
+    float: left;
+    clear: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .frb-4 .block {
+    width: 23.5%;
+    margin-right: 2%;
+    float: left;
+    clear: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .frb-5 .block {
+    width: 18.4%;
+    margin-right: 2%;
+    float: left;
+    clear: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .frb-6 .block {
+    width: 15%;
+    margin-right: 2%;
+    float: left;
+    clear: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+// Grid blocks
+@media #{$mobile} {
+
+  .grid-block-2 {
+    .block {
+      @include gallery(6 of 12);
+    }
+  }
+
+  .grid-block-3 {
+    .block {
+      @include gallery(4 of 12);
+    }
+  }
+
+  .grid-block-4 {
+    .block {
+      @include gallery(3 of 12);
+    }
+  }
+
+  .grid-block-6 {
+    .block {
+      @include gallery(2 of 12);
+    }
+  }
+
+  .grid-block-12 {
+    .block {
+      @include gallery(1 of 12);
+    }
+  }
+}
+
 // Whitespace control
 .spaceless {
   margin: 0;
@@ -113,42 +206,6 @@
 .rm-margin-left {
   margin-left: 0;
 }
-
-
-// Grid blocks
-@media #{$mobile} {
-
-  .grid-block-2 {
-    .block {
-      @include gallery(6 of 12);
-    }
-  }
-
-  .grid-block-3 {
-    .block {
-      @include gallery(4 of 12);
-    }
-  }
-
-  .grid-block-4 {
-    .block {
-      @include gallery(3 of 12);
-    }
-  }
-
-  .grid-block-6 {
-    .block {
-      @include gallery(2 of 12);
-    }
-  }
-
-  .grid-block-12 {
-    .block {
-      @include gallery(1 of 12);
-    }
-  }
-}
-
 
 // Rounded corners
 @mixin rounded-corners($radius) {
