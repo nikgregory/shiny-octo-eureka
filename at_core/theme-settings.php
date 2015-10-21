@@ -139,7 +139,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       // Basic settings - move into details wrapper and collapse.
       $form['basic_settings'] = array(
         '#type' => 'details',
-        '#title' => 'Basic Settings',
+        '#title' => t('Basic Settings'),
         '#open' => FALSE,
       );
 
