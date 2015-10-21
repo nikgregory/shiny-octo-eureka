@@ -136,3 +136,9 @@ breadcrumb:
   css:
     theme:
       styles/css/generated/breadcrumb.css: {}
+
+mobile_blocks:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/generated/mobile-blocks.css: {}

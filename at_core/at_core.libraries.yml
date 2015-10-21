@@ -113,6 +113,17 @@ at.slideshow:
     - core/drupal
     - core/drupalSettings
 
+# Mobile blocks
+# at.mobile_blocks:
+#   version: "8.x-1.0"
+#   js:
+#     #scripts/min/at.mobileBlocks.min.js: { minified: true }
+#     scripts/at.mobileBlocks.js: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/drupalSettings
+
 # Captionjs
 at.capitons:
   version: "0.9.8"

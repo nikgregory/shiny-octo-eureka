@@ -53,6 +53,12 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
       }
     }
 
+    // Submit handler for Mobile blocks.
+    if (isset($values['settings_enable_mobile_blocks']) && $values['settings_enable_mobile_blocks'] === 1) {
+      require_once($at_core_path . '/forms/ext/mobile_blocks_submit.php');
+      at_core_submit_mobile_blocks($values, $theme, $generated_files_path);
+    }
+
     // Submit handler for Custom CSS.
     if (isset($values['settings_enable_custom_css']) && $values['settings_enable_custom_css'] === 1) {
       require_once($at_core_path . '/forms/ext/custom_css_submit.php');

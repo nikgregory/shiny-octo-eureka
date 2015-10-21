@@ -139,6 +139,13 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
 
+    // Mobile blocks
+    if (isset($config['enable_mobile_blocks']) && $config['enable_mobile_blocks'] === 1) {
+      if (file_exists($generated_files_path . '/mobile-blocks.css')) {
+        $page['#attached']['library'][] = "$theme/mobile_blocks";
+      }
+    }
+
     // Custom CSS.
     if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
       if (file_exists($generated_files_path . '/custom-css.css')) {
@@ -180,7 +187,7 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] == 1) {
+    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
 
       // Load RM JS and CSS styles.
       $page['#attached']['library'][] = "at_core/at.responsivemenus";
@@ -213,7 +220,7 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Load slideshow files
-    if (isset($config['enable_slideshows']) && $config['enable_slideshows'] == 1) {
+    if (isset($config['enable_slideshows']) && $config['enable_slideshows'] === 1) {
 
       // Get config settings and jam them into drupalSettings.
       if (isset($config['slideshow_count']) && $config['slideshow_count'] >= 1) {

@@ -92,6 +92,14 @@ $form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
+// Mobile blocks
+$form['enable_extensions']['settings_enable_mobile_blocks'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Mobile Blocks'),
+  '#description' => t('Show or hide blocks in mobile devices.'),
+  '#default_value' => theme_get_setting('settings.enable_mobile_blocks', $theme),
+);
+
 // Slideshows
 $form['enable_extensions']['settings_enable_slideshows'] = array(
   '#type' => 'checkbox',
@@ -161,6 +169,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'images',
     'touch_icons',
     'shortcodes',
+    'mobile_blocks',
     'slideshows',
     'custom_css',
     'markup_overrides',
