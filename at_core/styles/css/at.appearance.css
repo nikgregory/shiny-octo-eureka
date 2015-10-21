@@ -633,6 +633,46 @@
 .admin-theme--seven #edit-carousels {
   margin: 0;
 }
+/* line 240, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks .details-description {
+  margin-bottom: 1em;
+}
+/* line 244, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks .details-description ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 248, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks .details-description ul li {
+  list-style: none;
+}
+/* line 254, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset {
+  border-top: 1px solid #ccc;
+  margin: 0;
+}
+/* line 258, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset:last-child {
+  border-bottom: 1px solid #ccc;
+}
+/* line 262, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset .fieldset-wrapper {
+  overflow: hidden;
+}
+/* line 266, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset .form-type-checkbox {
+  float: left;
+  margin-right: 1em;
+}
+/* line 271, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title {
+  font-size: 1em;
+  margin: 1em 0;
+}
+/* line 275, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title span {
+  font-weight: 400;
+}
 
 /* line 4, ../sass/_appearance.basic.scss */
 .admin-theme--seven #edit-basic-settings {

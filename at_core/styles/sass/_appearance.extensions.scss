@@ -233,5 +233,50 @@
   #edit-carousels {
     margin: 0;
   }
+
+  // Mobile blocks
+  #edit-mobile-blocks {
+
+    .details-description {
+
+      margin-bottom: 1em;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+        }
+      }
+    }
+
+    fieldset {
+      border-top: 1px solid #ccc;
+      margin: 0;
+
+      &:last-child {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .fieldset-wrapper {
+        overflow: hidden;
+      }
+
+      .form-type-checkbox {
+        float: left;
+        margin-right: 1em;
+      }
+
+      .mobile-blocks-title {
+        font-size: 1em;
+        margin: 1em 0;
+
+        span {
+          font-weight: 400;
+        }
+      }
+    }
+  }
 }
 
