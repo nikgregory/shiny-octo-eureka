@@ -1,7 +1,6 @@
 <?php
 
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Xss;
 
 /**
  * @file

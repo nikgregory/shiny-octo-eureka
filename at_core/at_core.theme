@@ -1010,17 +1010,15 @@ function at_core_preprocess_breadcrumb(&$variables) {
       }
 
       // Show or hide the Home link.
-/*
       if (isset($config['breadcrumb_home']) && $config['breadcrumb_home'] === 0) {
-
-        $first_item = array_shift($variables['breadcrumb']);
-        if (isset($first_item['text']['url']) && $first_item['text']['url'] == base_path()) {
+        $first_item = array_values($variables['breadcrumb'])[0];
+        if (isset($first_item['url']) && $first_item['url'] == base_path()) {
           array_shift($variables['breadcrumb']);
         }
       }
-*/
 
       // Page title
+      /*
       if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
         $title = '';
         $request = \Drupal::request();
@@ -1039,6 +1037,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
           $variables['breadcrumb'][]['text'] = Html::escape($title);
         }
       }
+      */
     }
   }
 }

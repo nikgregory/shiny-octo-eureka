@@ -49,15 +49,17 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
 // Breadcrumbs Home link?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Show the homepage link'),
+  '#title' => t('Show the "Home" link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home'),
 );
 // Breadcrumbs Page title?
+/*
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_title'] = array(
   '#type' => 'checkbox',
   '#title' => t('Append the page title to the breadcrumb trail'),
   '#default_value' => theme_get_setting('settings.breadcrumb_title'),
 );
+*/
 // Breadcrumbs Seperator
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
