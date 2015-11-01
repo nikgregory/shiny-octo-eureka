@@ -49,6 +49,34 @@ layout:
       class: lc-two-thirds
       description: 'Element will be two thirds the container width.'
 
+float_region_blocks:
+  name: 'Float Region Blocks'
+  description: 'A combination of positioning and layout for blocks within a region these classe allow you to set width and float direction. The count class shoud match the number of blocks you wish to have in the region lining up side by side. Example "frb-left, frb-3".'
+  elements:
+    - regions
+  classes:
+#     float-region-blocks-left:
+#       class: frb-left
+#       description: 'Float blocks left.'
+#     float-region-blocks-right:
+#       class: frb-right
+#       description: 'Float blocks right.'
+    float-region-blocks-count-2:
+      class: frb-2
+      description: 'Two blocks - 2 x 50%.'
+    float-region-blocks-count-3:
+      class: frb-3
+      description: 'Three blocks - 3 x 33.334%.'
+    float-region-blocks-count-4:
+      class: frb-4
+      description: 'Four blocks - 4 x 25%.'
+    float-region-blocks-count-5:
+      class: frb-5
+      description: 'Five blocks - 5 x 20%.'
+    float-region-blocks-count-6:
+      class: frb-6
+      description: 'Six blocks - 3 x 16.667.'
+
 whitespace:
   name: 'Whitespace control'
   description: 'Remove padding and margin. Useful if you want a containers contents to fill the entire container, e.g. remove block and region margin and padding.'
