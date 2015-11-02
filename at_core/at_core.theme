@@ -737,17 +737,6 @@ function at_core_preprocess_node(&$variables) {
   $variables['header_attributes'] = new Attribute(array('class' => array()));
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
 
-  // Unpublished status message.
-  // TODO - check render cache, should we use JS to inject this OR move to template?
-  /*
-  if ($node->isPublished() === FALSE) {
-    $variables['title_prefix']['status'] = array(
-      '#markup' => t('Node unpublished'),
-      '#prefix' => '<p class="unpublished__title clearfix" aria-label="Status message" role="contentinfo">',
-      '#suffix' => '</p>',
-    );
-  }
-  */
 
   // Set attribute classes. TODO: move to template?
   $variables['header_attributes']['class'][] = 'node__header';
@@ -768,16 +757,6 @@ function at_core_preprocess_node(&$variables) {
 
     $variables['submitted_attributes'] = new Attribute(array('class' => array()));
     $variables['submitted_attributes']['class'][] = 'node__submitted';
-
-    // Node author classes
-    $variables['author_attributes']['class'] = array();
-    $variables['author_attributes']['class'][] = 'node__author';
-
-    // If RDF module is uninstalled add a rel author attribute.
-    // TODO - does this break the entity render cache?
-    if (\Drupal::moduleHandler()->moduleExists('rdf') == FALSE) {
-      $variables['author_attributes']['rel'] = array('author');
-    }
 
     // add a class if author picture is printing.
     // TODO - does this break the entity render cache?

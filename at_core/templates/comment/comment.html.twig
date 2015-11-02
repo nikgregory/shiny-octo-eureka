@@ -87,7 +87,7 @@
   the server which comments are new for the user. Rendering the final
   "new" indicator here would break the render cache.
   #}
-  <mark class="hidden comment__new" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+  <span class="comment__new marker marker--success hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></span>
 
   {% if title %}
     <h3{{ title_attributes }}>{{ title }}</h3>
@@ -97,12 +97,7 @@
   <div{{ meta_attributes }}>
     {{ user_picture }}
     <div{{ submitted_attributes }}>
-      {# Render early for the trans tag #}
-      {% set author_name = render_var(author) %}
-      {% set created_time = render_var(created) %}
-      {% trans %}
-        Submitted by <address class="comment__author" rel="author">{{ author_name }}</address> on <time class="comment__date">{{ created_time }}</time>
-      {% endtrans %}
+      <span class="comment__submitted">{{ submitted }}</span>
     </div>
   </div>
 

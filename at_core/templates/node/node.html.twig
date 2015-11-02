@@ -83,10 +83,11 @@
 
   <header{{ header_attributes }}>
     {% if not node.isPublished() %}
-      <p class="unpublished__title clearfix" aria-label="Status message" role="contentinfo">
-        {% trans %}Unpublished{% endtrans %}
-      </p>
+      <span class="node__status node--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
+        <span class="visually-hidden">{% trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
+      </span>
     {% endif %}
+
     {{ title_prefix }}
     {% if label %}
       {% if page %}
@@ -101,9 +102,7 @@
       <div{{ meta_attributes }}>
         {{ author_picture }}
         <div{{ submitted_attributes }}>
-          {% trans %}
-            By <address{{ author_attributes|raw }}>{{ author_name|raw }}</address> on <time class="node__date">{{ date|raw }}</time>
-          {% endtrans %}
+          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
           {{ metadata }}
         </div>
       </div>
@@ -114,9 +113,10 @@
     {{ content|without('comment', 'links') }}
   </div>
 
-  {% if content.links %}
+  {% set content_links = render_var(content.links) %}
+  {% if content_links %}
     <footer{{ footer_attributes }}>
-      {{ content.links }}
+      {{ content_links }}
     </footer>
   {% endif %}
 
