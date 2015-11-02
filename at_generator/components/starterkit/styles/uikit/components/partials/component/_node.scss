@@ -34,6 +34,12 @@
 }
 
 
+// Status marker
+.node__status {
+  float: $flow-to;
+}
+
+
 // Header - includes title (h1 full, h2 teaser), user picture, author and date.
 .node__header
 .node__title {}
@@ -87,14 +93,16 @@
   }
 }
 
-.node__submitted {}
 
-.node__author {
-  display: inline;
-  font-style: normal;
+// Node submitted, typically "Submitted by... on..."
+.node__submitted {
+  // User name
+  .field--name-uid {}
+
+  // Created date/time
+  .field--name-created {}
 }
 
-.node__datetime {}
 
 .node__meta--has-author-picture {
   .node__submitted {

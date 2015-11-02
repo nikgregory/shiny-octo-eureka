@@ -1,8 +1,6 @@
 /**
- * Labels.
- *  -  for example "new" mark on comments, tags etc.
+ * Labels
  *
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
  ========================================================================== */
 
 
@@ -14,7 +12,7 @@
   &:after {
     font-family: $icon-font;
     content: $more-link-icon;
-    
+
     display: inline-block;
     vertical-align: bottom;
     padding: 0;

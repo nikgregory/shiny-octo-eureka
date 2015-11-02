@@ -4,6 +4,8 @@
  ========================================================================== */
 /**
  * Font Awesome - http://fortawesome.github.io
+ * by @davegandy - http://fontawesome.io - @fontawesome
+ * License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  *
  * To find all icon codes see the Font Awesome cheatsheet -
  * http://fortawesome.github.io/Font-Awesome/cheatsheet/
@@ -40,7 +42,7 @@
 */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("//netdna.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype");
+  src: url("//netdna.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.woff?v=4.4.0") format("woff"), url("//netdna.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf?v=4.4.0") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -1547,6 +1549,112 @@ ul.inline li ol {
 }
 
 /**
+ * Labels
+ *
+ ========================================================================== */
+.more-link {
+  text-align: right;
+  display: inline-block;
+}
+.more-link:after {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  padding: 0;
+  text-align: right;
+  width: 10px;
+  width: 0.61803rem;
+}
+[dir="rtl"] .more-link:after {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.more-help-link {
+  text-align: left;
+}
+[dir="rtl"] .more-help-link {
+  text-align: right;
+}
+
+.filter-help a:after {
+  position: static;
+  top: auto;
+  right: auto;
+  /* LTR */
+  display: block;
+  width: auto;
+  height: auto;
+  background: transparent;
+  margin: 0;
+}
+[dir="rtl"] .filter-help a:after {
+  left: auto;
+}
+
+.filter-help a,
+.more-help-link a {
+  background: transparent;
+  margin-right: 0;
+}
+.filter-help a:after,
+.more-help-link a:after {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  float: right;
+  padding: 0 1px;
+  text-align: right;
+  width: 16px;
+  width: 1rem;
+}
+[dir="rtl"] .filter-help a, [dir="rtl"]
+.more-help-link a {
+  background: transparent;
+}
+
+/**
+ * Markers
+ *  - used for things like node unpublished status.
+ *
+ ========================================================================== */
+.marker {
+  display: inline-block;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 1px 3px;
+  padding: 0.0625rem 0.1875rem;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
+
+.marker {
+  background: #ededed;
+  color: #fff;
+}
+.marker--info {
+  background-color: #0074bd;
+}
+.marker--success {
+  background: #77b259;
+}
+.marker--warning {
+  background: #e09600;
+}
+.marker--error {
+  background: #e62600;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/**
  * Messages
  *  - style system messages such as status, warning and error.
  ========================================================================== */
@@ -1872,20 +1980,22 @@ table tr.error {
   margin: 0;
 }
 
+.breadcrumb {
+  margin: 16px 0;
+  margin: 1rem 0;
+}
 .breadcrumb__title {
   font-size: inherit;
 }
-.breadcrumb__title,
-.breadcrumb ol,
-.breadcrumb li {
+.breadcrumb__title, .breadcrumb__list, .breadcrumb__list-item {
   display: inline-block;
   margin: 0;
   padding: 0;
 }
-.breadcrumb li {
+.breadcrumb__list-item {
   list-style: none;
 }
-.breadcrumb li:before {
+.breadcrumb__list-item:before {
   font-family: FontAwesome, sans-serif;
   content: "";
   display: inline-block;
@@ -1895,86 +2005,17 @@ table tr.error {
   width: 16px;
   width: 1rem;
 }
-[dir="rtl"] .breadcrumb li:before {
+[dir="rtl"] .breadcrumb__list-item:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
-.breadcrumb li:first-child:before {
+.breadcrumb__list-item:first-child:before {
   content: none;
 }
-.breadcrumb a {
+.breadcrumb__link {
   text-decoration: none;
-}
-
-/**
- * Labels.
- *  -  for example "new" mark on comments, tags etc.
- *
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
- ========================================================================== */
-.more-link {
-  text-align: right;
-  display: inline-block;
-}
-.more-link:after {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  display: inline-block;
-  vertical-align: bottom;
-  padding: 0;
-  text-align: right;
-  width: 10px;
-  width: 0.61803rem;
-}
-[dir="rtl"] .more-link:after {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
-  -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-  transform: scale(-1, 1);
-}
-
-.more-help-link {
-  text-align: left;
-}
-[dir="rtl"] .more-help-link {
-  text-align: right;
-}
-
-.filter-help a:after {
-  position: static;
-  top: auto;
-  right: auto;
-  /* LTR */
-  display: block;
-  width: auto;
-  height: auto;
-  background: transparent;
-  margin: 0;
-}
-[dir="rtl"] .filter-help a:after {
-  left: auto;
-}
-
-.filter-help a,
-.more-help-link a {
-  background: transparent;
-  margin-right: 0;
-}
-.filter-help a:after,
-.more-help-link a:after {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  float: right;
-  padding: 0 1px;
-  text-align: right;
-  width: 16px;
-  width: 1rem;
-}
-[dir="rtl"] .filter-help a, [dir="rtl"]
-.more-help-link a {
-  background: transparent;
 }
 
 /**
@@ -2237,6 +2278,10 @@ table tr.error {
   padding: 0;
 }
 
+.node__status {
+  float: right;
+}
+
 .node--view-mode-full .node__title {
   margin: 0 0 16px;
   margin: 0 0 1rem;
@@ -2266,11 +2311,6 @@ table tr.error {
 }
 .node__meta article:empty {
   display: none;
-}
-
-.node__author {
-  display: inline;
-  font-style: normal;
 }
 
 .node__footer {
@@ -2311,23 +2351,20 @@ table tr.error {
 /**
  * Publishing states.
  ========================================================================== */
+/* You may wish to include background color and styles for unpublished items.
+// Publishing status.
 article[class*="--unpublished"] {
-  background-color: #ffdbdb;
-  opacity: 0.7;
-}
-article[class*="--unpublished"]:hover, article[class*="--unpublished"]:focus {
-  opacity: 1;
-}
-article[class*="--unpublished"] p.unpublished__title {
-  font-size: 47px;
-  font-size: 2.95838rem;
-  line-height: 54px;
-  line-height: 3.375rem;
-  font-family: Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
-  text-align: center;
-  color: #fff4f4;
-}
 
+  // Keep background-color here, we don't want this to shift in color module.
+  background-color: $unpublished-background-color;
+  opacity: 0.7;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+*/
 [class*="preview"] {
   background-color: #ffffea;
 }
@@ -2482,4 +2519,5 @@ article[class*="--unpublished"] p.unpublished__title {
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
 }
+
 /*# sourceMappingURL=base.css.map */

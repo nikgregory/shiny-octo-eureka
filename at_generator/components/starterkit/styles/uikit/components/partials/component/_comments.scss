@@ -9,6 +9,7 @@
 // a standard Drupal install which uses the mores specific class
 // .field-node--comment {}
 .field-type-comment {
+  @include output-rhythm(margin, $large 0 0);
   @include clearfix-micro;
   clear: both;
 
@@ -30,7 +31,9 @@
 
   // Title and New
   &__title {}
-  &__new {}
+  &__new {
+    float: $flow-to;
+  }
 
   // Comment author picture, name and date details.
   &__meta {
@@ -64,14 +67,10 @@
     }
   }
 
-  &__submitted {}
-
-  &__author {
-    display: inline;
-    font-style: normal;
+  // Submitted information.
+  &__submitted {
+    .username {}
   }
-
-  &__date {}
 
 
   // Comment content wrapper.

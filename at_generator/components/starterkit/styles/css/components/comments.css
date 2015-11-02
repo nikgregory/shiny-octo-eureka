@@ -4,6 +4,8 @@
  *  - styles for comments
  ========================================================================== */
 .field-type-comment {
+  margin: 18px 0 0;
+  margin: 1.13rem 0 0;
   clear: both;
 }
 .field-type-comment:before, .field-type-comment:after {
@@ -24,6 +26,9 @@
 }
 .comment:after {
   clear: both;
+}
+.comment__new {
+  float: right;
 }
 .comment__meta {
   margin: 16px 0;
@@ -49,10 +54,6 @@
 }
 .comment__meta article:empty {
   display: none;
-}
-.comment__author {
-  display: inline;
-  font-style: normal;
 }
 .comment.preview {
   padding: 16px;

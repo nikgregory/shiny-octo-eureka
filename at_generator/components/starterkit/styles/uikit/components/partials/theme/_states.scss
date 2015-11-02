@@ -2,6 +2,7 @@
  * Publishing states.
  ========================================================================== */
 
+/* You may wish to include background color and styles for unpublished items.
 // Publishing status.
 article[class*="--unpublished"] {
 
@@ -13,22 +14,11 @@ article[class*="--unpublished"] {
   &:focus {
     opacity: 1;
   }
-
-  p.unpublished__title {
-    @include adjust-font-size-to($xxxx-large);
-    font-family: $impact;
-    text-align: center;
-
-    // Keep color here, we don't want this to shift in color module.
-    color: $unpublished-color;
-  }
 }
+*/
 
 
 // Preview
 [class*="preview"] {
   background-color: $preview-background-color;
 }
-
-
-
