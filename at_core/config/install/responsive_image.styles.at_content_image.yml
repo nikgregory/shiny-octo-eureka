@@ -1,9 +1,11 @@
-# Responsive Image Mappings
-# Example image mappings, quite useful for getting started and as
-# examples of how to create responsive image mappings for your theme.
-# See also: https://github.com/attiks/demotheme
-langcode: en
+# Responsive Image Styles - Content Images
 status: true
+dependencies:
+  config:
+    - image.style.large
+    - image.style.medium
+    - image.style.thumbnail
+langcode: en
 id: at_content_image
 label: 'AT Content Image'
 image_style_mappings:
