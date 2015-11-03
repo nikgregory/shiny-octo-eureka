@@ -81,44 +81,41 @@
 %}
 <article{{ attributes.addClass(classes) }}>
 
-  <header{{ header_attributes }}>
-    {% if not node.isPublished() %}
-      <span class="node__status node--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
-        <span class="visually-hidden">{% trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
-      </span>
-    {% endif %}
+  <div class="node__container">
 
-    {{ title_prefix }}
-    {% if label %}
-      {% if page %}
-        <h1{{ title_attributes }}>{{ label }}</h1>
-      {% else %}
-        <h2{{ title_attributes }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{ label }}</a></h2>
+    <header{{ header_attributes }}>
+      {% if not node.isPublished() %}
+        <span class="node__status node--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
+          <span class="visually-hidden">{% trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
+        </span>
       {% endif %}
-    {% endif %}
-    {{ title_suffix }}
 
-    {% if display_submitted %}
-      <div{{ meta_attributes }}>
-        {{ author_picture }}
-        <div{{ submitted_attributes }}>
-          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-          {{ metadata }}
+      {{ title_prefix }}
+      {% if label %}
+        {% if page %}
+          <h1{{ title_attributes }}>{{ label }}</h1>
+        {% else %}
+          <h2{{ title_attributes }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{ label }}</a></h2>
+        {% endif %}
+      {% endif %}
+      {{ title_suffix }}
+
+      {% if display_submitted %}
+        <div{{ meta_attributes }}>
+          {{ author_picture }}
+          <div{{ submitted_attributes }}>
+            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+            {{ metadata }}
+          </div>
         </div>
-      </div>
-    {% endif %}
-  </header>
+      {% endif %}
+    </header>
 
-  <div{{ content_attributes }}>
-    {{ content|without('comment', 'links') }}
+    <div{{ content_attributes }}>
+      {{ content|without('comment') }}
+    </div>
+
   </div>
-
-  {% set content_links = render_var(content.links) %}
-  {% if content_links %}
-    <footer{{ footer_attributes }}>
-      {{ content_links }}
-    </footer>
-  {% endif %}
 
   {{ content.comment }}
 
