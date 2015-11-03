@@ -2,14 +2,14 @@ settings:
   layouts_enable: 1
   enable_extensions: 1
   enable_responsive_menus: 1
-  enable_fonts: 1
-  enable_titles: 1
+  enable_fonts: 0
+  enable_titles: 0
   enable_images: 1
   enable_touch_icons: 1
   enable_libraries: 0
   enable_classitis: 0
-  enable_custom_css: 1
-  enable_markup_overrides: 1
+  enable_custom_css: 0
+  enable_markup_overrides: 0
   enable_devel: 0
   enable_legacy_browsers: 0
   skip_link_target: block-THEMENAME-content
@@ -25,11 +25,11 @@ settings:
   responsive_menu_breakpoint_group: at_core.responsive_menus
   responsive_menu_breakpoint: 'all and (max-width: 75em)'
   icon_path_default: images/touch-icons/Icon-60.png
-  apple_touch_icon_path_iphone_retina: images/touch-icons/Icon-60@2x.png
+  apple_touch_icon_path_iphone_retina: images/touch-icons/Icon-60-2x.png
   apple_touch_icon_path_ipad: images/touch-icons/Icon-76.png
-  apple_touch_icon_path_ipad_retina: images/touch-icons/Icon-76@2x.png
+  apple_touch_icon_path_ipad_retina: images/touch-icons/Icon-76-2x.png
   apple_touch_icon_precomposed: 0
-  generated_files_path: themes/custom/THEMENAME/styles/css/generated
+  generated_files_path: themes/THEMENAME/styles/css/generated
   extensions_form_open: 1
   layouts_form_open: 0
   font_size_base: '16'
@@ -43,7 +43,7 @@ settings:
   font_lineheight_multiplier_default: '1.5'
   font_lineheight_multiplier_large: '1.2'
   font_lineheight_multiplier_large_size: '24'
-  enable_shortcodes: 1
+  enable_shortcodes: 0
   breakpoint_group_layout: at_core.simple
   page_tabletisolate_leaderboard: ''
   page_tabletisolate_header: twocol-6-6
@@ -65,7 +65,7 @@ settings:
   page_wide_content_suffix: ''
   page_wide_subfeatures: fourcol-3-3-3-3
   page_wide_footer: ''
-  enable_slideshows: 1
+  enable_slideshows: 0
   font_websafe: none
   font_google: ''
   font_typekit: ''
@@ -181,7 +181,7 @@ settings:
   titles_h6_case: none
   titles_h6_weight: '400'
   titles_h6_alignment: left
-  image_alignment_article_node_full: right
+  image_alignment_article_node_full: center
   image_alignment_article_node_print: right
   image_alignment_article_node_teaser: right
   image_captions_article_node_full: 0
@@ -190,33 +190,33 @@ settings:
   image_count_article_node_full: 0
   image_count_article_node_print: 0
   image_count_article_node_teaser: 1
-  image_alignment_book_node_full: null
-  image_alignment_book_node_print: null
-  image_alignment_book_node_teaser: null
+  image_alignment_book_node_full: right
+  image_alignment_book_node_print: right
+  image_alignment_book_node_teaser: right
   image_captions_book_node_full: 0
   image_captions_book_node_print: 0
   image_captions_book_node_teaser: 0
   image_count_book_node_full: 0
   image_count_book_node_print: 0
-  image_count_book_node_teaser: 0
-  image_alignment_forum_node_full: null
-  image_alignment_forum_node_print: null
-  image_alignment_forum_node_teaser: null
+  image_count_book_node_teaser: 1
+  image_alignment_forum_node_full: center
+  image_alignment_forum_node_print: center
+  image_alignment_forum_node_teaser: right
   image_captions_forum_node_full: 0
   image_captions_forum_node_print: 0
   image_captions_forum_node_teaser: 0
   image_count_forum_node_full: 0
   image_count_forum_node_print: 0
-  image_count_forum_node_teaser: 0
-  image_alignment_page_node_full: null
+  image_count_forum_node_teaser: 1
+  image_alignment_page_node_full: center
   image_alignment_page_node_print: null
-  image_alignment_page_node_teaser: null
+  image_alignment_page_node_teaser: right
   image_captions_page_node_full: 0
   image_captions_page_node_print: 0
   image_captions_page_node_teaser: 0
   image_count_page_node_full: 0
   image_count_page_node_print: 0
-  image_count_page_node_teaser: 0
+  image_count_page_node_teaser: 1
   page_classes_body: ''
   page_classes_page: ''
   page_classes_row_messages: ''
@@ -281,6 +281,42 @@ settings:
   devel_layout: 0
   devel_color_regions: 0
   nuke_toolbar: 0
+  enable_mobile_blocks: 0
+  page_classes_row_wrapper_leaderboard: ''
+  page_classes_row_container_leaderboard: ''
+  page_classes_row_wrapper_header: ''
+  page_classes_row_container_header: ''
+  page_classes_row_wrapper_navbar: ''
+  page_classes_row_container_navbar: ''
+  page_classes_row_wrapper_highlighted: ''
+  page_classes_row_container_highlighted: ''
+  page_classes_row_wrapper_features: ''
+  page_classes_row_container_features: ''
+  page_classes_row_wrapper_content_prefix: ''
+  page_classes_row_container_content_prefix: ''
+  page_classes_row_wrapper_main: ''
+  page_classes_row_container_main: ''
+  page_classes_row_wrapper_content_suffix: ''
+  page_classes_row_container_content_suffix: ''
+  page_classes_row_wrapper_subfeatures: ''
+  page_classes_row_container_subfeatures: ''
+  page_classes_row_wrapper_footer: ''
+  page_classes_row_container_footer: ''
+  page_classes_region_content_prefix: ''
+  page_classes_region_content_suffix: ''
+  block_classes_THEMENAME_account_menu: ''
+  block_classes_THEMENAME_local_actions: ''
+  block_classes_THEMENAME_local_tasks: ''
+  block_classes_THEMENAME_page_title: ''
+  shortcodes_textalign_enable: 0
+  shortcodes_position_enable: 0
+  shortcodes_layout_enable: 0
+  shortcodes_float_region_blocks_enable: 0
+  shortcodes_whitespace_enable: 0
+  shortcodes_grid-blocks_enable: 0
+  shortcodes_rounded-corners_enable: 0
+  shortcodes_menu-bullets_enable: 0
+  shortcodes_animate_enable: 0
 features:
   logo: 1
   node_user_picture: 1
