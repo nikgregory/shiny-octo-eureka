@@ -430,6 +430,22 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
+ * we can remove this.
+ */
+function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+//function at_core_theme_suggestions_field_alter(array &$suggestions, array $variables) {}
+
+
+/**
  * Implements hook_form_alter().
  */
 function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -468,16 +484,6 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['basic']['#attributes']['class'][] = 'search-basic';
       break;
   }
-}
-
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- * TODO: keep on on https://drupal.org/node/2247677, this might add these suggestions in which case
- * we can remove this.
- */
-function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
-  $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
 }
 
 
@@ -807,16 +813,6 @@ function at_core_preprocess_comment(&$variables) {
         $variables['title_attributes']['class'][] = 'visually-hidden';
       }
     }
-  }
-
-  // Unpublished status message.
-  // TODO - check render cache, should we use JS to inject this?
-  if ($variables['status'] == 'unpublished') {
-    $variables['title_prefix']['status'] = array(
-      '#markup' => t('Comment unpublished'),
-      '#prefix' => '<p class="unpublished clearfix" aria-label="Status message" role="contentinfo">',
-      '#suffix' => '</p>',
-    );
   }
 }
 
