@@ -80,7 +80,6 @@
   ]
 %}
 <article{{ attributes.addClass(classes) }}>
-
   <div class="node__container">
 
     <header{{ header_attributes }}>
@@ -114,7 +113,6 @@
     <div{{ content_attributes }}>
       {{ content|without('comment') }}
     </div>
-
   </div>
 
   {{ content.comment }}
