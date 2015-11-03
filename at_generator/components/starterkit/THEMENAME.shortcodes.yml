@@ -32,6 +32,10 @@ position:
 layout:
   name: 'Layout columns'
   description: 'Set a width on an element. Do not use on Page rows or regions (you will break the layout). These are most useful or blocks or other elements within the page (for example you can apply these to elements in a node). All layout-column classes are full width in mobile, which is determined by your theme.'
+  elements:
+    - blocks
+    - other
+    - 'not rows or regions'
   classes:
     layout-column-quarter:
       class: lc-quarter
@@ -51,16 +55,10 @@ layout:
 
 float_region_blocks:
   name: 'Float Region Blocks'
-  description: 'A combination of positioning and layout for blocks within a region these classe allow you to set width and float direction. The count class shoud match the number of blocks you wish to have in the region lining up side by side. Example "frb-left, frb-3".'
+  description: 'A combination of positioning and layout for blocks within a region to float blocks. The count class shoud match the number of blocks you wish to have in the region lining up side by side. Example "frb-3". In RTL blocks float right, in LTR blocks float left.'
   elements:
     - regions
   classes:
-#     float-region-blocks-left:
-#       class: frb-left
-#       description: 'Float blocks left.'
-#     float-region-blocks-right:
-#       class: frb-right
-#       description: 'Float blocks right.'
     float-region-blocks-count-2:
       class: frb-2
       description: 'Two blocks - 2 x 50%.'
@@ -87,7 +85,7 @@ whitespace:
   classes:
     spaceless:
       class: spaceless
-      description: 'Remove all padding and margin from all wrappers. Use with caution, e.g. rows use margin auto for centering.'
+      description: 'Remove wrapper padding and margin. Use with caution.'
     remove-padding:
       class: rm-padding
       description: 'Remove padding.'
@@ -122,6 +120,8 @@ whitespace:
 grid-blocks:
   name: Block Grid
   description: 'Layout blocks in a grid. Apply to full width regions only. A good alternative is to build a View with the format "Grid".'
+  elements:
+    - 'regions that are full width, e.g. leaderboard or content with no sidebars'
   classes:
     grid-block-two:
       class: 'grid-block-2'

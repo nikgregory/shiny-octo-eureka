@@ -62,54 +62,33 @@
   }
 }
 @media all and (min-width: 60.063em) {
-  .frb-2 .block {
-    width: 48%;
+  [class*="frb-"] .block {
     margin-right: 2%;
     float: left;
     clear: none;
   }
-  .frb-2 .block:last-child {
+  [class*="frb-"] .block:last-child {
     margin-right: 0;
+  }
+
+  .frb-2 .block {
+    width: 48%;
   }
 
   .frb-3 .block {
     width: 32%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-  }
-  .frb-3 .block:last-child {
-    margin-right: 0;
   }
 
   .frb-4 .block {
     width: 23.5%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-  }
-  .frb-4 .block:last-child {
-    margin-right: 0;
   }
 
   .frb-5 .block {
     width: 18.4%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-  }
-  .frb-5 .block:last-child {
-    margin-right: 0;
   }
 
   .frb-6 .block {
     width: 15%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-  }
-  .frb-6 .block:last-child {
-    margin-right: 0;
   }
 }
 @media all and (max-width: 60em) {
@@ -637,4 +616,5 @@
 .ms-dropmenu .fa-chevron .rm-block__content .odd ul > .collapsed > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=shortcodes.css.map */

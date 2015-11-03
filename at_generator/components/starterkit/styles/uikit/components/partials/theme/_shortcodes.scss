@@ -68,62 +68,37 @@
 
 // Float region blocks
 @media #{$wide} {
-  .frb-2 .block {
-    width: 48%;
-    margin-right: 2%;
-    float: left;
+
+  [class*="frb-"] .block {
+    margin-#{$flow-to}: 2%;
+    float: $flow-from;
     clear: none;
 
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  .frb-2 .block {
+    width: 48%;
   }
 
   .frb-3 .block {
     width: 32%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   .frb-4 .block {
     width: 23.5%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   .frb-5 .block {
     width: 18.4%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   .frb-6 .block {
     width: 15%;
-    margin-right: 2%;
-    float: left;
-    clear: none;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 }
-
 
 // Grid blocks
 @media #{$mobile} {
