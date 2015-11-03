@@ -161,7 +161,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Modify the color scheme form.
   if (\Drupal::moduleHandler()->moduleExists('color')) {
-    //include_once($at_core_path . '/forms/color/color_submit.php');
+    include_once($at_core_path . '/forms/color/color_submit.php');
     if (isset($build_info['args'][0]) && ($theme = $build_info['args'][0]) && color_get_info($theme) && function_exists('gd_info')) {
       $form['#process'][] = 'at_core_make_collapsible';
     }
@@ -178,10 +178,20 @@ function at_core_make_collapsible($form) {
   $form['color']['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save color scheme'),
-    //'#submit'=> array('at_core_submit_color'),
     '#button_type' => 'primary',
     '#weight' => 100,
   );
-
+  $form['color']['actions']['log'] = array(
+    '#type' => 'submit',
+    '#value' => t('Log color scheme'),
+    '#submit'=> array('at_core_log_color_scheme'),
+    '#weight' => 101,
+    '#access' => FALSE,
+  );
+  $user_roles = \Drupal::currentUser()->getRoles();
+  if (in_array('administrator', $user_roles)) {
+    $form['color']['actions']['log']['#access'] = TRUE;
+  }
   return $form;
 }
+

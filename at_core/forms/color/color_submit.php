@@ -12,7 +12,7 @@
  * run if there is a problem, e.g. the user inputting non hexadecimal CSS color
  * strings, which color module validates to avoid XSS.
  */
-function at_core_submit_color(&$form, &$form_state) {
+function at_core_log_color_scheme(&$form, &$form_state) {
 
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
@@ -33,7 +33,7 @@ function at_core_submit_color(&$form, &$form_state) {
   foreach ($lines as $line) {
     if (strpos($line, ' => ') !== FALSE) {
       $parts = explode(' => ', $line);
-      $message .= $indent . $parts[0] . str_pad(' ', (46 - strlen($line))) . '=> ' . $parts[1];
+      $message .= $indent . $parts[0] . str_pad(' ', (26 - strlen($line))) . '=> ' . $parts[1];
     } else {
       $message .=  "$indent  $line";
     }
@@ -44,6 +44,11 @@ function at_core_submit_color(&$form, &$form_state) {
   $message .= "    ),\n";
   $message = '<pre>' . $message . '</pre>';
 
-  //watchdog('Custom color palette', $message);
   \Drupal::logger($theme)->notice($message);
+
+  // Hopefully this goes away if this ever lands, https://www.drupal.org/node/2415663
+  // I'm not holding my breath.
+  drupal_flush_all_caches();
+
+  drupal_set_message(t('Color scheme logged. Cache cleared.'), 'status');
 }
