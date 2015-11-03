@@ -28,12 +28,12 @@
 // Comments are articles, they all have the base class of .comment:
 .comment {
   @include clearfix-micro;
+  @include output-rhythm(padding-top, $medium);
+  border-top: $border-width $border-style;
 
   // Title and New
   &__title {}
-  &__new {
-    float: $flow-to;
-  }
+  &__new {}
 
   // Comment author picture, name and date details.
   &__meta {

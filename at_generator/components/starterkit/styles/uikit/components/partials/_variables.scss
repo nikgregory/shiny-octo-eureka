@@ -19,9 +19,9 @@
 // MS provides the scale, while Vertical Rhythm sets adjusted font sizes and line heights.
 // From these numbers you will get a base line-height of 1.5
 
-$base-font-size       : 16px;
-$base-line-height     : 6px;   // set adjust-leading-to(4); on body!
-$rhythm-unit          : 'rem';
+$base-font-size   : 16px;
+$base-line-height : 6px;   // set adjust-leading-to(4); on body!
+$rhythm-unit      : 'rem';
 
 
 // Modular Scale
@@ -101,12 +101,12 @@ $font-monospace   : $courier;
 
 // Lighten and Darken values
 // -----------------------------------------------------------------------------
-$lighten       : 3%;
-$lighten-more  : 5%;
-$lighten-most  : 10%;
-$darken        : 3%;
-$darken-more   : 5%;
-$darken-most   : 10%;
+$lighten      : 3%;
+$lighten-more : 5%;
+$lighten-most : 10%;
+$darken       : 3%;
+$darken-more  : 5%;
+$darken-most  : 10%;
 
 
 // Global Transition
@@ -116,56 +116,57 @@ $transition_global: all, .15s, ease;
 
 // Color module "shift" base.
 // -----------------------------------------------------------------------------
-$base-color                  : #000000;
+$base-color               : #000000;
 
 
 // Text colors
 // -----------------------------------------------------------------------------
-$text-color                  : #363636;
-$text-background-color       : #ededed;
+$text-color               : #363636;
+$text-background-color    : #ededed;
 
 
 // Link colors
 // -----------------------------------------------------------------------------
-$link-color                  : #0066cc;
-$link-hover-color            : $link-color;
-$link-active-color           : $link-color;
-$link-visited-color          : $link-color;
-$link-visited-hover-color    : $link-color;
+$link-color               : #0066cc;
+$link-hover-color         : $link-color;
+$link-active-color        : $link-color;
+$link-visited-color       : $link-color;
+$link-visited-hover-color : $link-color;
 
 
 // Borders
 // -----------------------------------------------------------------------------
-$border-width                : 1px;
-$border-style                : solid;
-$border-color                : #cccccc;
-$border-radius               : 2px;
+$border-width             : 1px;
+$border-style             : solid;
+$border-color             : #cccccc;
+$border-color-light       : #eeeeee;
+$border-radius            : 2px;
 
 
 // Success colors
 // -----------------------------------------------------------------------------
-$success-text-color          : #325e1c;
-$success-border-color        : #c9e1bd;
-$success-background-color    : #f3faef;
+$success-text-color       : #325e1c;
+$success-border-color     : #c9e1bd;
+$success-background-color : #f3faef;
 
 
 // Warning colors
 // -----------------------------------------------------------------------------
-$warning-text-color          : #734c00;
-$warning-border-color        : #f4daa6;
-$warning-background-color    : #fdf8ed;
+$warning-text-color       : #734c00;
+$warning-border-color     : #f4daa6;
+$warning-background-color : #fdf8ed;
 
 
 // Error colors
 // -----------------------------------------------------------------------------
-$error-text-color            : #a51b00;
-$error-border-color          : #f9c9bf;
-$error-background-color      : #fcf4f2;
+$error-text-color         : #a51b00;
+$error-border-color       : #f9c9bf;
+$error-background-color   : #fcf4f2;
 
 
 // Marker colors
 // -----------------------------------------------------------------------------
-$marker-color                    : #fff;
+$marker-color                    : #ffffff;
 $marker-background-color         : $text-background-color;
 
 $marker-info-background-color    : #0074bd;
@@ -176,7 +177,7 @@ $marker-error-background-color   : #e62600;
 
 // Selection color
 // -----------------------------------------------------------------------------
-$selection-color             : #b3d4fc;
+$selection-color : #b3d4fc;
 
 
 // Zebra striping
@@ -198,13 +199,13 @@ $even-color : $text-background-color;
 // -----------------------------------------------------------------------------
 
 // body element.
-$body-background-color       : #333333;
+$body-background-color    : #333333;
 
 // .page, an inner-body full width page background.
-$page-background-color       : #f7f7f7;
+$page-background-color    : #f7f7f7;
 
 // Wrapper around regions, the max-width is set on this wrapper.
-$regions-background-color    : $page-background-color;
+$regions-background-color : $page-background-color;
 
 
 
@@ -334,6 +335,8 @@ $form-border-radius                : $border-radius;
 $form_input_button_select_height   : $xx-large;
 $form-box-shadow                   : false;
 
+$form-details-background-color     : #fcfcfc;
+
 
 // Buttons
 // -----------------------------------------------------------------------------
@@ -458,7 +461,7 @@ $node-teaser-box-shadow            : 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 
 // Fields
 // -----------------------------------------------------------------------------
-// By default we only have settings for taxonomy term reference fields.
+// By default we only have settings for taxonomy term reference fields (tags).
 $field-taxonomy-item-as-labels     : false;
 $field-taxonomy-item-icons         : false;
 $field-taxonomy-label-as-icon      : false; // Label must not be hidden in field display settings.

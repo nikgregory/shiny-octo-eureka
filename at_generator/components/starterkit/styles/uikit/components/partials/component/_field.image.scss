@@ -5,6 +5,9 @@
 // AT uses <figure> as the image field wrapper and <figcaption> for image captions.
 .field-type-image {
 
+  margin: 0;
+  padding: 0;
+
   &.has-single {}
   &.has-multiple {}
 
@@ -60,6 +63,18 @@
 }
 
 
-
+// Remove any floats and reset whitespace in mobile.
+@media #{$mobile-isolate} {
+  .field-type-image [class*="align-"] {
+    text-align: center; // cascades to figcaption
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    @include output-rhythm(margin-bottom, $medium);
+  }
+  .field-type-image figure[class*="align-"] {
+    display: table;
+  }
+}
 
 

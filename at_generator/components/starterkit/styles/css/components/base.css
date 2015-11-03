@@ -1624,6 +1624,7 @@ ul.inline li ol {
   display: inline-block;
   letter-spacing: 0.025em;
   text-transform: uppercase;
+  vertical-align: middle;
   border-radius: 2px;
   padding: 1px 3px;
   padding: 0.0625rem 0.1875rem;
@@ -1635,7 +1636,7 @@ ul.inline li ol {
 
 .marker {
   background: #ededed;
-  color: #fff;
+  color: #ffffff;
 }
 .marker--info {
   background-color: #0074bd;
@@ -2089,6 +2090,11 @@ table tr.error {
  * SEE: image and taxonomy field styles as these both have unqique
  * template html markup and selectors.
  ========================================================================== */
+.field {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+
 .field__label {
   font-family: inherit;
   font-weight: 600;
@@ -2112,7 +2118,8 @@ table tr.error {
   padding: 0 0 0 4px;
   padding: 0 0 0 0.26676rem;
 }
-.field-label-inline .field__items {
+.field-label-inline .field__items,
+.field-label-inline .field__item {
   display: inline-block;
 }
 
@@ -2124,6 +2131,10 @@ table tr.error {
 /**
  * Field Image
  ========================================================================== */
+.field-type-image {
+  margin: 0;
+  padding: 0;
+}
 .field-type-image figure {
   margin-bottom: 16px;
   margin-bottom: 1rem;
@@ -2163,6 +2174,20 @@ table tr.error {
   clear: both;
 }
 
+@media all and (max-width: 45em) {
+  .field-type-image [class*="align-"] {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    margin-bottom: 16px;
+    margin-bottom: 1rem;
+  }
+
+  .field-type-image figure[class*="align-"] {
+    display: table;
+  }
+}
 /**
  * File icons
  * AT unsets Drupal core file field CSS for image icons and replaces them
@@ -2252,6 +2277,17 @@ table tr.error {
 }
 
 /**
+ * Field Language Display
+ ========================================================================== */
+[id*="field-language-display"] {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+[id*="field-language-display"] .form-item {
+  margin: 0;
+}
+
+/**
  * Content Types (nodes)
  *  - in Drupal a content type is a bunch of fields we use to enter and display
  *    content, such as pages, blog posts, forum posts and so on. Each of those
@@ -2313,14 +2349,14 @@ table tr.error {
   display: none;
 }
 
-.node__footer {
+.node__links {
   clear: both;
 }
-.node__footer:before, .node__footer:after {
+.node__links:before, .node__links:after {
   content: " ";
   display: table;
 }
-.node__footer:after {
+.node__links:after {
   clear: both;
 }
 

@@ -627,6 +627,7 @@ input[type="week"] {
  */
 details {
   border-color: $form-border-color;
+  background-color: $form-details-background-color;
 }
 
 
@@ -985,9 +986,9 @@ button.link-edit-summary {
  * Field Taxonomy Reference
  ========================================================================== */
 
-.field-type-taxonomy-term-reference {
+[class*="tags"].field-type-entity-reference {
   @if ($field-taxonomy-item-as-labels == true) {
-    span {
+    .field__item-wrapper {
       background: lighten($text-background-color, $lighten-more);
       color: $text-color;
       border-color: $border-color;
@@ -1133,6 +1134,14 @@ body {
 
 
 
+/**
+ * Comments
+ *  - comment field (holds comment title, form, comments etc)
+ *  - styles for comments
+ ========================================================================== */
 
-
+// Comments are articles, they all have the base class of .comment:
+.comment {
+  border-color: $border-color-light;
+}
 

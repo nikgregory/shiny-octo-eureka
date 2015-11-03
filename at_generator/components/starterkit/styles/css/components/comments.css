@@ -20,15 +20,17 @@
   margin-left: 2.61803rem;
 }
 
+.comment {
+  padding-top: 16px;
+  padding-top: 1rem;
+  border-top: 1px solid;
+}
 .comment:before, .comment:after {
   content: " ";
   display: table;
 }
 .comment:after {
   clear: both;
-}
-.comment__new {
-  float: right;
 }
 .comment__meta {
   margin: 16px 0;

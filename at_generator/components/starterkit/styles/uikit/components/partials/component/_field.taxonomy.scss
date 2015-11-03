@@ -1,8 +1,10 @@
 /**
- * Field Taxonomy Reference
+ * Field Taxonomy Reference (Entity Reference as tags).
+ *  - to have all taxonomy fields themed the same be sure to include the
+ *    word "tags" somewhere in the field name.
  ========================================================================== */
 
-.field-type-taxonomy-term-reference {
+[class*="tags"].field-type-entity-reference {
   //@include output-rhythm(margin, $medium 0);
 
   @if $field-taxonomy-label-as-icon == true {
@@ -10,7 +12,7 @@
       &:before {
         font-family: $icon-font;
         content: $field-taxonomy-label-icon;
-        
+
         display: inline-block;
         @include output-rhythm(margin, 0 $xx-small 0 0);
 
@@ -23,12 +25,12 @@
   }
 
   @if ($field-taxonomy-item-as-labels == true) {
-    span {
+    .field__item-wrapper {
       display: inline-block;
       margin: 0 $xxxx-small $xxxx-small 0; // LTR
       border: $border-width $border-style;
       border-radius: $border-radius;
-      @include output-rhythm(padding, 0 $small);
+      @include output-rhythm(padding, 0 $xx-small);
 
       &:hover,
       &:focus {
@@ -51,7 +53,7 @@
   }
 
   @if ($field-taxonomy-item-icons == true) {
-    span {
+    .field__item-wrapper {
       display: inline-block;
 
       &:before {
@@ -59,7 +61,7 @@
         content: $field-taxonomy-item-icon;
 
         @include adjust-font-size-to($small);
-         @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
+        @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
 
         display: inline-block;
         vertical-align: text-bottom;
@@ -95,7 +97,15 @@
   .field__item {
     margin: 0;
     padding: 0;
-    display: inline-block;
     list-style: none;
+  }
+
+  .field-label-above {}
+
+  .field-label-inline {
+    .field__label,
+    .field__item {
+      //display: inline-block;
+    }
   }
 }

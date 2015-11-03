@@ -436,6 +436,7 @@ input[type="week"][disabled]:focus {
  */
 details {
   border-color: #cccccc;
+  background-color: #fcfcfc;
 }
 
 input[readonly],
@@ -807,5 +808,14 @@ body:before {
 .item-list--search-results {
   background-color: #ffffff;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Comments
+ *  - comment field (holds comment title, form, comments etc)
+ *  - styles for comments
+ ========================================================================== */
+.comment {
+  border-color: #eeeeee;
 }
 /*# sourceMappingURL=color.css.map */

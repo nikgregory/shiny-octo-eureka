@@ -6,6 +6,8 @@
  ========================================================================== */
 
 .field {
+  @include output-rhythm(margin-bottom, $medium);
+
   .field__items {}
   .field__item {}
 }
@@ -38,7 +40,8 @@
     }
   }
 
-  .field__items {
+  .field__items,
+  .field__item {
     display: inline-block;
   }
 }
