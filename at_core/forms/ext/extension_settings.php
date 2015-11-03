@@ -112,7 +112,7 @@ $form['enable_extensions']['settings_enable_slideshows'] = array(
 $form['enable_extensions']['settings_enable_touch_icons'] = array(
   '#type' => 'checkbox',
   '#title' => t('Touch icons'),
-  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>!touchiconpath</code>.', array('!touchiconpath' => $subtheme_path . '/images/touch-icons/')),
+  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>@touchiconpath</code>.', array('@touchiconpath' => $subtheme_path . '/images/touch-icons/')),
   '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
 );
 
