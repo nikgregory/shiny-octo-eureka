@@ -770,7 +770,7 @@
 
 /* line 4, ../sass/_appearance.color.scss */
 .admin-theme--seven #color_scheme_form h2,
-.admin-theme--seven #color_scheme_form #preview {
+.admin-theme--seven #color_scheme_form .color-preview {
   display: none !important;
 }
 /* line 9, ../sass/_appearance.color.scss */
