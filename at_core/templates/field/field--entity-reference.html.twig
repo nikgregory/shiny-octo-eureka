@@ -1,12 +1,8 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for a taxonomy reference field.
- * AT displays taxonomy terms as a unordered list and uses h3 for the label.
- * We wrap the term item content in a span because sometimes tags are not links
- * and will print with no markup, in which case doing things like button styles
- * can be unpredictable, e.g a user later decides to change from "link" to
- * "plain text" in the field settings.
+ * Adaptivetheme implementation for a field.
+ * AT uses h3 for field labels.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -56,15 +52,17 @@
   {% if not label_hidden %}
     <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
   {% endif %}
-  <ul{{ content_attributes.addClass('field__items', 'tags') }}>
+  <div{{ content_attributes.addClass('field__items') }}>
     {% for item in items %}
       {%
         set item_classes = [
           'field__item',
-          'tags__' ~ item.content['#title']|clean_class,
+          item.content['#title'] ? 'field__item--' ~ item.content['#title']|clean_class,
         ]
       %}
-      <li{{ item.attributes.addClass(item_classes) }}><span>{{ item.content }}</span></li>
+      <div{{ item.attributes.addClass(item_classes) }}>
+        <span class="field__item-wrapper">{{ item.content }}</span>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 </div>
