@@ -33,7 +33,7 @@ $form['shortcodes'] = array(
   '#type' => 'details',
   '#title' => t('Shortcodes'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Shortcode CSS Classes</h3><p>Enter comma seperated lists of CSS class names. <a href="/admin/config/development/performance" target="_blank"><b>Clear the cache</b></a> after adding or removing classes</span>.</p>'),
+  '#description' => t('<h3>Shortcode CSS Classes</h3><p>Shortcodes are CSS classes that can add style, layout or behavior (such as an animation effect) to various page elements like blocks or regions.</p><p>To use enter comma seperated lists of CSS class names in the available fields. You may need to <a href="/admin/config/development/performance" target="_blank"><b>clear the cache</b></a> after adding or removing classes</span>.</p>'),
 );
 
 $form['shortcodes']['page_classes'] = array(
@@ -126,11 +126,14 @@ foreach ($node_types as $nt) {
 
 
 // Actual classes you can apply that are included in the theme.
+$form['shortcodes']['title'] = array(
+  '#type' => 'container',
+  '#markup' => t('<h3>Available shortcode classes</h3>'),
+);
 if (!empty($shortcodes)) {
-  $form['shortcodes']['classes'] = array(
-    '#type' => 'details',
-    '#title' => t('Available Shortcode CSS Classes'),
-    '#open' => TRUE,
+  $form['shortcodes']['available_classes'] = array(
+    '#type' => 'vertical_tabs',
+    '#attributes' => array('class' => array('clearfix')),
   );
   $class_output = array();
   $class_image = '';
@@ -151,9 +154,10 @@ if (!empty($shortcodes)) {
     }
 
     $form['shortcodes']['classes'][$class_type] = array(
-      '#type' => 'fieldset',
+      '#type' => 'details',
+      '#group' => 'available_classes',
       '#title' => t($class_values['name']),
-      '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_description .'</p><p><b>Apply to:</b> <i>' . $class_elements . '</i></p>' ),
+      '#markup' => t('<h3>' . $class_values['name'] . '</h3><p>'. $class_description .'</p><p><b>Use for:</b> <i>' . $class_elements . '</i></p>' ),
     );
 
     // Use this setting to conditionally load only the CSS we need for this theme.

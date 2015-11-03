@@ -604,72 +604,78 @@
 .admin-theme--seven #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;
 }
-/* line 202, ../sass/_appearance.extensions.scss */
-.admin-theme--seven #edit-classes {
-  background-color: #fff;
+/* line 204, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-shortcodes #edit-title {
+  padding: 1em 0 0;
 }
-/* line 205, ../sass/_appearance.extensions.scss */
-.admin-theme--seven #edit-classes fieldset {
-  border-bottom: 1px solid #ccc;
-}
-/* line 210, ../sass/_appearance.extensions.scss */
-.admin-theme--seven .pattern-image-clip {
+/* line 208, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-shortcodes .pattern-image-clip {
   width: 320px;
   height: 80px;
   background-color: #fff;
   overflow: hidden;
 }
-/* line 220, ../sass/_appearance.extensions.scss */
+/* line 216, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-shortcodes .class-list dt {
+  float: left;
+  clear: right;
+}
+/* line 221, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-shortcodes .class-list dt {
+  width: 15em;
+  font-weight: 700;
+}
+/* line 231, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-slideshows label {
   display: inline-block;
   width: 12rem;
 }
-/* line 227, ../sass/_appearance.extensions.scss */
+/* line 238, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-slideshows .form-type-checkbox label,
 .admin-theme--seven #edit-slideshows .form-type-textarea label {
   width: auto;
 }
-/* line 233, ../sass/_appearance.extensions.scss */
+/* line 244, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-carousels {
   margin: 0;
 }
-/* line 240, ../sass/_appearance.extensions.scss */
+/* line 251, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description {
   margin-bottom: 1em;
 }
-/* line 244, ../sass/_appearance.extensions.scss */
+/* line 255, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description ul {
   margin: 0;
   padding: 0;
 }
-/* line 248, ../sass/_appearance.extensions.scss */
+/* line 259, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description ul li {
   list-style: none;
 }
-/* line 254, ../sass/_appearance.extensions.scss */
+/* line 265, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset {
   border-top: 1px solid #ccc;
   margin: 0;
 }
-/* line 258, ../sass/_appearance.extensions.scss */
+/* line 269, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset:last-child {
   border-bottom: 1px solid #ccc;
 }
-/* line 262, ../sass/_appearance.extensions.scss */
+/* line 273, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .fieldset-wrapper {
   overflow: hidden;
 }
-/* line 266, ../sass/_appearance.extensions.scss */
+/* line 277, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .form-type-checkbox {
   float: left;
   margin-right: 1em;
 }
-/* line 271, ../sass/_appearance.extensions.scss */
+/* line 282, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title {
   font-size: 1em;
   margin: 1em 0;
 }
-/* line 275, ../sass/_appearance.extensions.scss */
+/* line 286, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title span {
   font-weight: 400;
 }

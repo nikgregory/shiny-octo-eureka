@@ -199,20 +199,31 @@
 
 
   // Shortcodes
-  #edit-classes {
-    background-color: #fff;
+  #edit-shortcodes {
 
-    fieldset {
-      border-bottom: 1px solid #ccc;
+    #edit-title {
+      padding: 1em 0 0;
+    }
+
+    .pattern-image-clip {
+      width: 320px;
+      height: 80px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .class-list {
+      dt {
+        float: left;
+        clear: right;
+      }
+
+      dt {width: 15em; font-weight: 700}
+      dd {}
     }
   }
 
-  .pattern-image-clip {
-    width: 320px;
-    height: 80px;
-    background-color: #fff;
-    overflow: hidden;
-  }
+
 
 
   // Slideshows
