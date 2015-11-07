@@ -77,7 +77,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     }
   }
   else {
-    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="!extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('!extendpage' => base_path() . 'admin/modules')), 'warning');
+    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="@extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'warning');
   }
 
   // Get node types (bundles).
@@ -188,10 +188,11 @@ function at_core_make_collapsible($form) {
     '#weight' => 101,
     '#access' => FALSE,
   );
-  $user_roles = \Drupal::currentUser()->getRoles();
-  if (in_array('administrator', $user_roles)) {
+
+  $user = \Drupal::currentUser();
+  if (in_array('administrator', $user->getRoles()) && $user->getUsername() == 'Obi Wan') {
     $form['color']['actions']['log']['#access'] = TRUE;
   }
+
   return $form;
 }
-
