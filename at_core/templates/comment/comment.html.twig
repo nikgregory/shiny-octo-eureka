@@ -84,7 +84,7 @@
     {% endif %}
 
     {% if title %}
-      <h3{{ title_attributes }}>
+      <h3{{ title_attributes.addClass('comment__title') }}>
         {{ title }}
       {% if status != 'published' %}
         <span class="comment__status comment--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <div{{ content_attributes }}>
+    <div{{ content_attributes.addClass('comment__content') }}>
       {#
         Indicate the semantic relationship between parent and child comments
         for accessibility. The list is difficult to navigate in a screen

@@ -82,7 +82,7 @@
 <article{{ attributes.addClass(classes) }}>
   <div class="node__container">
 
-    <header{{ header_attributes }}>
+    <header{{ header_attributes.addClass('node__header') }}>
       {% if not node.isPublished() %}
         <span class="node__status node--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
           <span class="visually-hidden">{% trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
@@ -92,9 +92,9 @@
       {{ title_prefix }}
       {% if label %}
         {% if page %}
-          <h1{{ title_attributes }}>{{ label }}</h1>
+          <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
         {% else %}
-          <h2{{ title_attributes }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{ label }}</a></h2>
+          <h2{{ title_attributes.addClass('node__title') }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{ label }}</a></h2>
         {% endif %}
       {% endif %}
       {{ title_suffix }}
@@ -110,7 +110,7 @@
       {% endif %}
     </header>
 
-    <div{{ content_attributes }}>
+    <div{{ content_attributes.addClass('node__content') }}>
       {{ content|without('comment') }}
     </div>
   </div>
