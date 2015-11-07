@@ -33,7 +33,9 @@
       }
 
       // Toggle.
-      $('.rm-block .block-menu__title', context).on('click', toggleClick);
+      //$('.rm-block .block-menu__title', context).on('click', toggleClick);
+      // Test with proper anchor/fragment link for accessibility.
+      $('.rm-block .block-menu__title', context).wrapInner('<a href="#rm-content" class="rm-toggle__link" />').on('click', toggleClick);
 
       // Enquire is a fancy wrapper for matchMedia.
       enquire
