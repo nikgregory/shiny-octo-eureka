@@ -514,30 +514,30 @@ tr {
   // Row striping (zebra).
   @if $table-row-striping == true {
     &.odd {
-      background: $table-row-odd-color;
+      background-color: $table-row-odd-color;
     }
 
     &.info,
     &.even,
     &:nth-child(2n+2)  {
-      background: $table-row-even-color;
+      background-color: $table-row-even-color;
     }
   }
 
   // Hover color.
   @if $tr-hover == true {
     &:hover {
-      background: $tr-hover-color;
+      background-color: $tr-hover-color;
     }
   }
 
   // Column striping, applies to the active column in sortable tables.
   @if $table-col-striping == true {
     &.odd td.active {
-      background: $table-col-odd-color;
+      background-color: $table-col-odd-color;
     }
     &.even td.active {
-      background: $table-col-even-color;
+      background-color: $table-col-even-color;
     }
   }
 }
