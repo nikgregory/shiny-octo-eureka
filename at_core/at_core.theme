@@ -744,11 +744,13 @@ function at_core_preprocess_node(&$variables) {
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
 
 
-  // Set attribute classes. TODO: move to template?
+  // Set attribute classes. MOved to template.
+  /*
   $variables['header_attributes']['class'][] = 'node__header';
   $variables['title_attributes']['class'][] = 'node__title';
   $variables['content_attributes']['class'][] = 'node__content';
   $variables['footer_attributes']['class'][] = 'node__footer';
+  */
 
 
   // SEE https://drupal.org/node/2004252 or a follow up issue.
@@ -788,8 +790,8 @@ function at_core_preprocess_comment(&$variables) {
   //$account = $comment->getOwner();
 
   // Attributes.
-  $variables['title_attributes']['class'][] = 'comment__title';
-  $variables['content_attributes']['class'][] = 'comment__content';
+  //$variables['title_attributes']['class'][] = 'comment__title';
+  //$variables['content_attributes']['class'][] = 'comment__content';
 
   // Initialize new attributes arrays.
   $variables['meta_attributes'] = new Attribute(array('class' => array()));
