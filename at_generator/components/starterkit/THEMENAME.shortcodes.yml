@@ -116,6 +116,9 @@ whitespace:
     remove-margin-left:
       class: rm-margin-left
       description: 'Remove left margin.'
+    full-width-viewport:
+      class: full-width-viewport
+      description: 'Stretch to full width of the viewport, this will only really work on Row Containers.'
 
 grid-blocks:
   name: Block Grid
