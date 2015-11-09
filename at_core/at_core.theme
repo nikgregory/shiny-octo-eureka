@@ -258,6 +258,7 @@ function at_core_page_attachments_alter(array &$page) {
           'video',
           'prevtext',
           'nexttext',
+          'slideshow_class',
           'selector',
         );
 
@@ -265,7 +266,7 @@ function at_core_page_attachments_alter(array &$page) {
 
           // Set the initialaztion class and this slideshows key
           $ss_class = Html::getClass($theme . '-slideshow-' . $i);
-          $slider_settings[$ss_class]['classname'] = $ss_class;
+          //$slider_settings[$ss_class]['classname'] = $ss_class;
 
           if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] == 1) {
 
