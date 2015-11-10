@@ -77,6 +77,13 @@ slideshow_styles:
     theme:
       styles/css/components/slideshows.css: {}
 
+# Maintenance page
+maintenance_page:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/maintenance_page.css: {}
+
 # Form Layout Widget CSS, do not use this in the front end, its only
 # for the layout theme settings.
 layout_settings:
