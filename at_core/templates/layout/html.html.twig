@@ -36,6 +36,10 @@
  * @ingroup themeable
  */
 #}
+{{ attach_library('at_core/at.fastclick_initialize') }}
+{{ attach_library('at_core/at.breakpoints') }}
+{{ attach_library(theme.name ~ '/base') }}
+{{ attach_library(theme.name ~ '/color') }}
 {%
   set body_classes = [
     logged_in ? 'user-logged-in',
