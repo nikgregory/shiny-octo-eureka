@@ -41,18 +41,6 @@ function at_core_page_attachments_alter(array &$page) {
     return;
   }
 
-  //kpr($page);
-
-  // Alternate way to remove an entire library, however we want to keep
-  // this at the info file level.
-  /*
-  foreach ($page['#attached']['library'] as $lib_key => $lib_values) {
-    if ($lib_values == "classy/base") {
-      unset($page['#attached']['library'][$lib_key]);
-    }
-  }
-  */
-
   // Common paths.
   $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
   $path_to_at_core = drupal_get_path('theme', 'at_core');
@@ -63,9 +51,6 @@ function at_core_page_attachments_alter(array &$page) {
   else {
     drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
   }
-
-  // Load this themes base library.
-  $page['#attached']['library'][] = "$theme/base";
 
   // Attach module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml
@@ -85,17 +70,6 @@ function at_core_page_attachments_alter(array &$page) {
       $page['#attached']['library'][] = "$theme/$module_library";
     }
   }
-
-  // Color library.
-  // We load this always, if color module is enabled it will rewrite the files
-  // from this library (as declared in color.inc etc).
-  $page['#attached']['library'][] = "$theme/color";
-
-  // We always load fastclick, at least for now this is a hard requirement of the theme.
-  $page['#attached']['library'][] = 'at_core/at.fastclick_initialize';
-
-  // Always load at.breakpoints.js, this sets layout breakpoint body classes.
-  $page['#attached']['library'][] = 'at_core/at.breakpoints';
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -122,16 +96,6 @@ function at_core_page_attachments_alter(array &$page) {
     }
 
     // Login block.
-    /*
-    // Extermely weary that using currentUser will cause caching issues.
-    if (\Drupal::currentUser()->isAuthenticated() === FALSE) {
-      if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-        if (file_exists($generated_files_path . '/login-block.css')) {
-          $page['#attached']['library'][] = "$theme/login_block";
-        }
-      }
-    }
-    */
     // Just load the login block CSS without the currentUser check.
     if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
       if (file_exists($generated_files_path . '/login-block.css')) {
@@ -370,6 +334,7 @@ function at_core_library_info_alter(&$libraries, $extension) {
  * @see _drupal_add_css()
  * @see drupal_get_css()
  */
+/*
 function at_core_css_alter(&$css) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
 
@@ -389,6 +354,7 @@ function at_core_css_alter(&$css) {
 
   //kpr($css);
 }
+*/
 
 
 /**
@@ -1088,7 +1054,13 @@ function at_core_preprocess_forums(&$variables) {
 }
 
 
-
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ */
+function at_core_preprocess_maintenance_page(&$variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $variables['#attached']['library'][] = $theme . '/maintenance_page';
+}
 
 // Functions for tests and possible future usage.
 //function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
