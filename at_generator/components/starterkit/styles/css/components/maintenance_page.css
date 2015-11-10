@@ -1,0 +1,14 @@
+/**
+ * Maintenance Page
+ ========================================================================== */
+body {
+  text-align: center;
+}
+
+.site-branding,
+.pr-main {
+  padding: 16px 0;
+  padding: 1rem 0;
+}
+
+/*# sourceMappingURL=maintenance_page.css.map */

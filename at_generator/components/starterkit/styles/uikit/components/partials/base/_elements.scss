@@ -22,6 +22,8 @@ html {
 
 body {
   @include adjust-font-size-to($medium);
+  padding: 0;
+  margin: 0;
 }
 
 
