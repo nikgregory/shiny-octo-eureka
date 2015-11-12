@@ -461,6 +461,13 @@ function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  /* test
+    $path_class = !$variables['root_path'] ? 'path-frontpageXXX' : 'path-XXX-' . Html::getClass($variables['root_path']);
+    if (isset($path_class)) {
+      $variables['attributes']['class'][] = $path_class;
+    }
+  */
+
   // Common paths
   $path_to_theme = $variables['directory'];
 
@@ -631,24 +638,19 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
-  // Add all breakpoints to drupalSettings (label:media query).
-/*
+  // Add all breakpoints to drupalSettings (key:media query).
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
     if (isset($config['breakpoint_group_layout'])) {
       $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
 
       foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
-        //$breakpoint_safe_label = Html::getClass($breakpoint_values->getLabel());
-
-        $breakpoint_safe_label[$breakpoint_key] = $breakpoint_values->getLabel()->getLabel();
-        $breakpoints_array[$breakpoint_safe_label[$breakpoint_key]] = $breakpoint_values->getMediaQuery();
+        $breakpoints_array[$breakpoint_key] = $breakpoint_values->getMediaQuery();
       }
 
       $variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
     }
   }
-*/
 }
 
 
@@ -664,11 +666,6 @@ function at_core_preprocess_region(&$variables) {
   $region_row = $layout_loaded->regionAttributes($variables['region']);
   if (!empty($region_row)) {
     $variables['region_row'] = $region_row;
-  }
-
-  // Set wrapper element.
-  $variables['html_element'] = 'div';
-  if ($variables['region'] == 'content') {
   }
 
   // Extension settings
