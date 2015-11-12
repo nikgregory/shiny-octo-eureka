@@ -35,7 +35,7 @@
           'menu',
           'odd',
           'menu-level-1',
-          'menu-name--' ~ menu_name,
+          menu_name ? 'menu-name--' ~ menu_name|clean_class,
         ]
       %}
       <ul{{ attributes.addClass(menu_classes) }}>
