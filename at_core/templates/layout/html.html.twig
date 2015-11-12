@@ -40,16 +40,6 @@
 {{ attach_library('at_core/at.breakpoints') }}
 {{ attach_library(theme.name ~ '/base') }}
 {{ attach_library(theme.name ~ '/color') }}
-{%
-  set body_classes = [
-    logged_in ? 'user-logged-in',
-    not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
-    node_type ? 'node--type-' ~ node_type|clean_class,
-    head_title_array.name ? 'site-name-' ~ head_title_array.name|clean_class,
-    theme.name ? 'theme-name-' ~ theme.name|clean_class,
-    db_offline ? 'db-offline',
-  ]
-%}
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
@@ -72,6 +62,16 @@
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
+  {%
+    set body_classes = [
+      logged_in ? 'user-logged-in',
+      not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+      node_type ? 'node--type-' ~ node_type|clean_class,
+      head_title_array.name ? 'site-name-' ~ head_title_array.name|clean_class,
+      theme.name ? 'theme-name-' ~ theme.name|clean_class,
+      db_offline ? 'db-offline',
+    ]
+  %}
   <body{{ attributes.addClass(body_classes) }}>
     <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
