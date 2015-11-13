@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Custom output if AT Generator is set as default, we really don't want to allow this at all.
+ */
+#}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <style>
+      .messages {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 16px;
+        padding: 1rem;
+        margin: 26px;
+        margin: 1.61803rem;
+        border: 1px solid;
+        border-radius: 2px;
+      }
+      .messages--error {
+        color: #a51b00;
+        background-color: #fcf4f2;
+        border-color: #f9c9bf;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="messages messages--error">
+      <h3>Error: The theme "AT Generator" cannot be used as the default theme!</h3>
+      <p>Set another theme as default, or generate one using AT Generator and set that as default.</p>
+    </div>
+  </body>
+</html>
