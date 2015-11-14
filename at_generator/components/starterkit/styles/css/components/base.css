@@ -805,6 +805,32 @@ abbr.form-required, abbr.tabledrag-changed, abbr.ajax-changed {
   margin: 0 1rem;
 }
 
+.form-composite--inline legend {
+  float: left;
+  margin-right: 0.5em;
+  margin-top: 1px;
+}
+@media screen and (min-width: 321px) {
+  .form-composite--inline legend {
+    margin-right: 1em;
+  }
+}
+.form-composite--inline .fieldset-legend:after {
+  content: ':';
+}
+.form-composite--inline input[type="radio"],
+.form-composite--inline label {
+  vertical-align: middle;
+}
+.form-composite--inline label:after {
+  content: none;
+}
+@media screen and (min-width: 480px) {
+  .form-composite--inline .form-item {
+    margin-right: 1.25em;
+  }
+}
+
 form .field-type-image .image-preview {
   padding: 0;
   background: transparent;
@@ -2577,4 +2603,5 @@ article[class*="--unpublished"] {
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
 }
+
 /*# sourceMappingURL=base.css.map */

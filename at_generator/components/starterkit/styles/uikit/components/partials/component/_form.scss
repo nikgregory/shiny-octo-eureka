@@ -175,6 +175,41 @@ abbr {
 }
 
 
+// Form Composite inline, e.g. dialog
+// TODO check https://www.drupal.org/node/2236789 when it lands
+.form-composite--inline {
+
+  legend {
+    float: $flow-from;
+    margin-#{$flow-to}: 0.5em;
+    margin-top: 1px;
+
+    @media screen and (min-width: 321px) {
+      margin-#{$flow-to}: 1em;
+    }
+  }
+
+  .fieldset-legend:after {
+    content: ':';
+  }
+
+  input[type="radio"],
+  label {
+    vertical-align: middle;
+  }
+
+  label:after {
+    content: none;
+  }
+
+  @media screen and (min-width: 480px) {
+    .form-item {
+      margin-#{$flow-to}: 1.25em;
+    }
+  }
+}
+
+
 // Fields in forms.
 form {
   // Form field image
