@@ -124,6 +124,8 @@ function at_core_page_attachments_alter(array &$page) {
         $page['#attached']['library'][] = 'at_core/at.windowsize';
       }
 
+      //kpr($page['#attached']['library']);
+
       // Attach devel_layout CSS file.
       if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
          $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
@@ -172,7 +174,8 @@ function at_core_page_attachments_alter(array &$page) {
       }
 
       // Attach JS settings.
-      $page['#attached']['drupalSettings']['at_rm'] = $responsivemenu_settings;
+      //$page['#attached']['drupalSettings']['at_rm'] = $responsivemenu_settings;
+      $page['#attached']['drupalSettings'][$theme]['at_responsivemenus'] = $responsivemenu_settings;
     }
 
     // Attach polyfills to support IE8.
@@ -266,7 +269,8 @@ function at_core_page_attachments_alter(array &$page) {
         }
 
         // Attach JS settings.
-        $page['#attached']['drupalSettings']['at_ss'] = $slider_settings;
+        //$page['#attached']['drupalSettings']['at_ss'] = $slider_settings;
+        $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
         $page['#attached']['library'][] = 'at_core/at.slideshow';
         $page['#attached']['library'][] = "$theme/slideshow_styles";
       }
@@ -461,12 +465,7 @@ function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  /* test
-    $path_class = !$variables['root_path'] ? 'path-frontpageXXX' : 'path-XXX-' . Html::getClass($variables['root_path']);
-    if (isset($path_class)) {
-      $variables['attributes']['class'][] = $path_class;
-    }
-  */
+  //kpr($variables['#attached']);
 
   // Common paths
   $path_to_theme = $variables['directory'];
@@ -551,6 +550,7 @@ function at_core_preprocess_html(&$variables) {
 
   // Add mobile classes for global theming based on mobile or tablet devices.
   $detect = new Mobile_Detect;
+  //kpr($detect);
   $isMobile = $detect->isMobile();
   $isTablet = $detect->isTablet();
   $mobile_detect_settings = array();
@@ -562,7 +562,10 @@ function at_core_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'is-tablet';
     $mobile_detect_settings['device'][] = 'is-tablet';
   }
-  $variables['#attached']['drupalSettings']['at_md'] = $mobile_detect_settings;
+  
+  $variables['mobile_detect'] = $detect;
+  //$variables['#attached']['drupalSettings']['at_md'] = $mobile_detect_settings;
+  $variables['#attached']['drupalSettings'][$theme]['at_mobiledetect'] = $mobile_detect_settings;
 }
 
 
@@ -645,10 +648,13 @@ function at_core_preprocess_page(&$variables) {
       $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
 
       foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
-        $breakpoints_array[$breakpoint_key] = $breakpoint_values->getMediaQuery();
+        $breakpoint_label =  strtolower($breakpoint_values->getLabel()->getUntranslatedString());
+        $breakpoints_array[$breakpoint_label]['breakpoint'] = $breakpoint_key;
+        $breakpoints_array[$breakpoint_label]['mediaquery'] = $breakpoint_values->getMediaQuery();
       }
 
-      $variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
+      //$variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
+      $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
     }
   }
 }

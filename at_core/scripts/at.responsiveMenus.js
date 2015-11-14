@@ -12,9 +12,10 @@
         return;
       }
 
-      var rm = settings['at_rm'],
-          def = rm['default'],
-          resp = rm['responsive'];
+      var activeTheme = settings['ajaxPageState']['theme'],
+          rm          = settings[activeTheme]['at_responsivemenus'],
+          def         = rm['default'],
+          resp        = rm['responsive'];
 
       // Toggle handler.
       function toggleClick(e) {

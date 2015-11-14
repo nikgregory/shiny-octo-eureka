@@ -2,17 +2,17 @@
 
   "use strict";
 
-  Drupal.behaviors.atsS = {
+  Drupal.behaviors.atFS = {
     attach: function (context, settings) {
-      var slideshowSettings = settings['at_ss'];
 
-      for (var item in settings['at_ss']) {
-        if (settings['at_ss'].hasOwnProperty(item)) {
+      var activeTheme = settings['ajaxPageState']['theme'];
+      var slideshowSettings = settings[activeTheme]['at_slideshows'];
+
+      for (var item in slideshowSettings) {
+        if (slideshowSettings.hasOwnProperty(item)) {
 
           // This items settings object.
-          var ss = settings['at_ss'][item];
-
-          //console.log(ss);
+          var ss = slideshowSettings[item];
 
           // Add a class if the pager is active.
           if (ss.controlnav) {

@@ -9,7 +9,8 @@ at.windowsize:
     #scripts/at.windowSize.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
 
 # matchHeight
 at.matchheight:
