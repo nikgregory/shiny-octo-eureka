@@ -136,6 +136,11 @@ function at_core_page_attachments_alter(array &$page) {
         $page['#attached']['library'][] = 'at_core/at.devel_colorize_regions';
       }
 
+      // Attach show_grid.
+      if (isset($config['show_grid']) && $config['show_grid'] === 1) {
+        $page['#attached']['library'][] = "$theme/show_grid";
+      }
+
       // Attach nuke_toolbar CSS file.
       if (isset($config['nuke_toolbar']) && $config['nuke_toolbar'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.devel_nuke_toolbar';
@@ -562,7 +567,7 @@ function at_core_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'is-tablet';
     $mobile_detect_settings['device'][] = 'is-tablet';
   }
-  
+
   $variables['mobile_detect'] = $detect;
   //$variables['#attached']['drupalSettings']['at_md'] = $mobile_detect_settings;
   $variables['#attached']['drupalSettings'][$theme]['at_mobiledetect'] = $mobile_detect_settings;
