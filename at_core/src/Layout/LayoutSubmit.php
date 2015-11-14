@@ -210,6 +210,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
   // are saved because the rows and regions might change, so we resave every template.
   public function saveLayoutSuggestionsMarkup() {
     $template_suggestions = array();
+    $fileOperations = new FileOperations();
+    $directoryOperations = new DirectoryOperations();
 
     if (!empty($this->form_values['settings_suggestions'])) {
       $template_suggestions = $this->form_values['settings_suggestions'];
@@ -239,8 +241,12 @@ class LayoutSubmit implements LayoutSubmitInterface {
     // Path to target theme where the template will be saved.
     $path = drupal_get_path('theme', $this->theme_name);
 
-    $template_directory = $path . '/templates/page';
+    //$template_directory = $path . '/templates/page';
+    // Remove if this exists, its now deprecated, this is a BC layer so to speak.
+    $directoryOperations->directoryRemove($path . '/templates/page');
+    $template_directory = $path . '/templates/generated';
 
+    // Check and create the templates directory if does not exist.
     if (!file_exists($path . '/templates')) {
       drupal_mkdir($path . '/templates');
     }
@@ -355,9 +361,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
 
-        $fileOperations = new FileOperations();
-        $directoryOperations = new DirectoryOperations();
-
         $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
 
         //Add a date time string to make unique and for easy identification, save as .txt to avoid conflicts.
@@ -388,7 +391,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#items' => $saved_templates,
       );
       $saved_templates_message = drupal_render($saved_templates_message_list);
-      drupal_set_message(t('The following <b>templates</b> were generated: !saved_templates', array('!saved_templates' => $saved_templates_message)), 'status');
+      drupal_set_message(t('The following <b>templates</b> were generated: @saved_templates', array('@saved_templates' => $saved_templates_message)), 'status');
     }
   }
 }
