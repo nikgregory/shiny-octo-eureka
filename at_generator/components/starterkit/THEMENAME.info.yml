@@ -35,16 +35,9 @@ features:
   - comment_user_verification
   - favicon
   - logo
+ckeditor_stylesheets:
+  - styles/css/components/base.css
 libraries-override:
-  classy/base: false
-  classy/book-navigation: false
-  classy/file: false
-  classy/forum: false
-  classy/indented: false
-  classy/messages: false
-  classy/node: false
-  classy/progress: false
-  classy/search-results: false
   layout_plugin/ds_2col:
     css:
       theme:
