@@ -1,5 +1,4 @@
 <?php
-
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Theme\ThemeSettings;
@@ -124,8 +123,6 @@ function at_core_page_attachments_alter(array &$page) {
         $page['#attached']['library'][] = 'at_core/at.windowsize';
       }
 
-      //kpr($page['#attached']['library']);
-
       // Attach devel_layout CSS file.
       if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
          $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
@@ -179,7 +176,6 @@ function at_core_page_attachments_alter(array &$page) {
       }
 
       // Attach JS settings.
-      //$page['#attached']['drupalSettings']['at_rm'] = $responsivemenu_settings;
       $page['#attached']['drupalSettings'][$theme]['at_responsivemenus'] = $responsivemenu_settings;
     }
 
@@ -238,7 +234,6 @@ function at_core_page_attachments_alter(array &$page) {
 
           // Set the initialaztion class and this slideshows key
           $ss_class = Html::getClass($theme . '-slideshow-' . $i);
-          //$slider_settings[$ss_class]['classname'] = $ss_class;
 
           if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] == 1) {
 
@@ -274,7 +269,6 @@ function at_core_page_attachments_alter(array &$page) {
         }
 
         // Attach JS settings.
-        //$page['#attached']['drupalSettings']['at_ss'] = $slider_settings;
         $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
         $page['#attached']['library'][] = 'at_core/at.slideshow';
         $page['#attached']['library'][] = "$theme/slideshow_styles";
@@ -282,88 +276,6 @@ function at_core_page_attachments_alter(array &$page) {
     }
   }
 }
-
-
-/**
- * Alter libraries provided by an extension.
- *
- * Allows modules and themes to change libraries' definitions; mostly used to
- * update a library to a newer version, while ensuring backward compatibility.
- * In general, such manipulations should only be done to extend the library's
- * functionality in a backward-compatible way, to avoid breaking other modules
- * and themes that may be using the library.
- *
- * @param array $libraries
- *   An associative array of libraries registered by $extension. Keyed by
- *   internal library name and passed by reference.
- * @param string $extension
- *   Can either be 'core' or the machine name of the extension that registered
- *   the libraries.
- *
- * @see \Drupal\Core\Asset\LibraryDiscoveryParser::parseLibraryInfo()
- */
-/*
-function at_core_library_info_alter(&$libraries, $extension) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-  // Unset Display suite assets and add a dependant library
-  // from the active theme. This is a hack and has been replaced
-  // with libraries-override in the themes info yml.
-  $ds_libraries = array(
-    'ds_2col',
-    'ds_2col_fluid',
-    'ds_2col_stacked',
-    'ds_2col_stacked_fluid',
-    'ds_3col',
-    'ds_3col_equal_width',
-    'ds_3col_stacked',
-    'ds_3col_stacked_fluid',
-    'ds_3col_stacked_equal_width',
-    'ds_4col',
-  );
-  if ($extension == 'layout_plugin') {
-    foreach ($libraries as $key => $values) {
-      if (in_array($key, $ds_libraries)) {
-        $css = str_replace('_', '-', $key) . '.css';
-        unset($libraries[$key]['css']['theme']['/modules/ds/css/' . $css]);
-        $libraries[$key]['dependencies'][] = $theme . '/' . $key;
-      }
-    }
-  }
-}
-*/
-
-
-/**
- * Alter CSS files before they are output on the page.
- *
- * @param $css
- *   An array of all CSS items (files and inline CSS) being requested on the page.
- *
- * @see _drupal_add_css()
- * @see drupal_get_css()
- */
-/*
-function at_core_css_alter(&$css) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-  // Color module doesn't know anything about libraries loaded in hook_page_attachments_alter(),
-  // therefor we need to load the colorized CSS file ourselves.
-  if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
-    $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
-    if (!empty($color_paths)) {
-      foreach ($color_paths as $color_path) {
-        $basename_color_path = drupal_basename($color_path);
-        if (array_key_exists($basename_color_path, $css)) {
-          $css[$basename_color_path]['data'] = $color_path;
-        }
-      }
-    }
-  }
-
-  //kpr($css);
-}
-*/
 
 
 /**
@@ -391,7 +303,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 
           $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
         }
-        //$these_suggestions = implode($formatted_suggestions);
+
         $these_suggestions = array(
           '#theme' => 'item_list',
           '#items' => $formatted_suggestions,
@@ -413,12 +325,6 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 function at_core_theme_suggestions_user_alter(array &$suggestions, array $variables) {
   $suggestions[] = 'user__' . $variables['elements']['#view_mode'];
 }
-
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-//function at_core_theme_suggestions_field_alter(array &$suggestions, array $variables) {}
 
 
 /**
@@ -469,8 +375,6 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  //kpr($variables['#attached']);
 
   // Common paths
   $path_to_theme = $variables['directory'];
@@ -567,10 +471,24 @@ function at_core_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'is-tablet';
     $mobile_detect_settings['device'][] = 'is-tablet';
   }
-
   $variables['mobile_detect'] = $detect;
-  //$variables['#attached']['drupalSettings']['at_md'] = $mobile_detect_settings;
   $variables['#attached']['drupalSettings'][$theme]['at_mobiledetect'] = $mobile_detect_settings;
+
+  // Add all breakpoints to drupalSettings (key:media query).
+  $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
+  if ($breakpoints_module == TRUE) {
+    if (isset($config['breakpoint_group_layout'])) {
+      $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
+
+      foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
+        $breakpoint_label =  strtolower($breakpoint_values->getLabel()->getUntranslatedString());
+        $breakpoints_array[$breakpoint_label]['breakpoint'] = $breakpoint_key;
+        $breakpoints_array[$breakpoint_label]['mediaquery'] = $breakpoint_values->getMediaQuery();
+      }
+
+      $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
+    }
+  }
 }
 
 
@@ -645,23 +563,6 @@ function at_core_preprocess_page(&$variables) {
       $variables = $variables + $row_attributes;
     }
   }
-
-  // Add all breakpoints to drupalSettings (key:media query).
-  $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
-  if ($breakpoints_module == TRUE) {
-    if (isset($config['breakpoint_group_layout'])) {
-      $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
-
-      foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
-        $breakpoint_label =  strtolower($breakpoint_values->getLabel()->getUntranslatedString());
-        $breakpoints_array[$breakpoint_label]['breakpoint'] = $breakpoint_key;
-        $breakpoints_array[$breakpoint_label]['mediaquery'] = $breakpoint_values->getMediaQuery();
-      }
-
-      //$variables['#attached']['drupalSettings']['at_bp'] = $breakpoints_array;
-      $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
-    }
-  }
 }
 
 
@@ -681,7 +582,6 @@ function at_core_preprocess_region(&$variables) {
 
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    // shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_region_' . $variables['region']])) {
         $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
@@ -702,7 +602,7 @@ function at_core_preprocess_node(&$variables) {
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
 
-  // shortcodes classes.
+  // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['nodetype_classes_' . $node->getType()])) {
@@ -717,16 +617,6 @@ function at_core_preprocess_node(&$variables) {
   // Header and Footer attributes.
   $variables['header_attributes'] = new Attribute(array('class' => array()));
   $variables['footer_attributes'] = new Attribute(array('class' => array()));
-
-
-  // Set attribute classes. MOved to template.
-  /*
-  $variables['header_attributes']['class'][] = 'node__header';
-  $variables['title_attributes']['class'][] = 'node__title';
-  $variables['content_attributes']['class'][] = 'node__content';
-  $variables['footer_attributes']['class'][] = 'node__footer';
-  */
-
 
   // SEE https://drupal.org/node/2004252 or a follow up issue.
   if ($variables['display_submitted']) {
@@ -760,14 +650,6 @@ function at_core_preprocess_comment(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  //$comment = $variables['elements']['#comment'];
-  //$account = comment_prepare_author($comment);
-  //$account = $comment->getOwner();
-
-  // Attributes.
-  //$variables['title_attributes']['class'][] = 'comment__title';
-  //$variables['content_attributes']['class'][] = 'comment__content';
-
   // Initialize new attributes arrays.
   $variables['meta_attributes'] = new Attribute(array('class' => array()));
   $variables['meta_attributes']['class'][] = 'comment__meta';
@@ -800,8 +682,6 @@ function at_core_preprocess_comment(&$variables) {
 function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  //kpr($variables);
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -850,7 +730,6 @@ function at_core_preprocess_block(&$variables) {
       if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
         $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
         foreach ($shortcodes as $class) {
-          //$variables['attributes']['class'][] = Html::getClass($class);
           $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
@@ -886,8 +765,6 @@ function at_core_preprocess_field(&$variables) {
         // Captions.
         if (isset($config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode]) && $config['image_captions_' . $node_type . '_' . $entity_type . '_' . $view_mode] === 1) {
 
-          //$variables['#attached']['library'][] = "filter/caption";
-
           foreach ($variables['items'] as $delta => $item) {
             $values = $item['content']['#item']->getValue();
 
@@ -896,19 +773,6 @@ function at_core_preprocess_field(&$variables) {
                 'show' => TRUE,
                 'title' => $values['title'],
               );
-
-              /* TODO: remove after more tests, instead we set a class in the template ("caption") and use Drupal cores figcaption CSS hack.
-              if (!empty($item['content']['#image_style'])) {
-                $style = entity_load('image_style', $item['content']['#image_style']);
-                $dimensions = array(
-                  'width' => $values['width'],
-                  'height' => $values['height'],
-                );
-                $style->transformDimensions($dimensions);
-                $variables['items'][$delta]['caption']['width'] = $dimensions['width'] . 'px';
-                $variables['items'][$delta]['caption']['height'] = $dimensions['height'] . 'px';
-              }
-              */
             }
             else {
               $variables['items'][$delta]['caption'] = array(
@@ -921,8 +785,6 @@ function at_core_preprocess_field(&$variables) {
         // Image align class, provide a variable for use in field template.
         $variables['image_align'] = '';
         if (!empty($config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode])) {
-          //$variables['attributes']['class'][] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
-
           $variables['image_align'] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
         }
 
@@ -968,28 +830,6 @@ function at_core_preprocess_breadcrumb(&$variables) {
           array_shift($variables['breadcrumb']);
         }
       }
-
-      // Page title
-      /*
-      if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
-        $title = '';
-        $request = \Drupal::request();
-        if ($route_match = \Drupal::routeMatch()) {
-          $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-        }
-        // Could be a views page?
-        if (empty($title)) {
-          if (is_callable('views_get_page_view')) {
-            if ($view = views_get_page_view()) {
-              $title = $view->getTitle();
-            }
-          }
-        }
-        if (!empty($title)) {
-          $variables['breadcrumb'][]['text'] = Html::escape($title);
-        }
-      }
-      */
     }
   }
 }
@@ -1069,69 +909,3 @@ function at_core_preprocess_maintenance_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $variables['#attached']['library'][] = $theme . '/maintenance_page';
 }
-
-// Functions for tests and possible future usage.
-//function at_core_node_links_alter(array &$node_links, NodeInterface $node, array &$context) {}
-
-
-//
-// DEPRECATED TODO REMOVE
-//
-
-/**
- * Implements hook_form_FORM_ID_alter()
- * Modify the User Login block form.
- */
-/*
-function at_core_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  // Login block mods.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-
-      // Placeholders.
-      if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
-        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-        $form['name']['#title_display'] = 'invisible';
-        $form['pass']['#title_display'] = 'invisible';
-      }
-    }
-  }
-}
-*/
-
-
-/**
- * Implements hook_form_FORM_ID_alter()
- * Modify the Search block form.
- */
-/*
-function at_core_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Remove the size attribute.
-  $form['keys']['#size'] = '';
-}
-*/
-
-
-/**
- * Implements hook_form_FORM_ID_alter()
- * Modify the Search page form.
- */
-/*
-function at_core_form_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Add the missing search-basic class so we don't have to use an ID.
-  // This has the added bonus of removing container-inline :)
-  $form['basic']['#attributes']['class'] = 'search-basic';
-}
-*/
-
-
-// Debug code to remember
-/*
-if ( $something ) {
-  debug(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10));
-}
-*/
