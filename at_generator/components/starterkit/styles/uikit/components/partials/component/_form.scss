@@ -2,9 +2,13 @@
  * Form Common - common styles for form elements and classes.
  ========================================================================== */
 
-// Give contact and comment subject forms some symetry.
-.form-text[name="subject[0][value]"] {
-  width: 50%;
+.form-text {
+  appearance: none;
+
+  // Give contact and comment subject forms some symetry.
+  &[name="subject[0][value]"] {
+    width: 50%;
+  }
 }
 
 // Punch these to full width on smaller devices.
@@ -39,7 +43,7 @@
 
   .option {
     @include output-rhythm(padding, $xxxx-small $xx-small 0 $xx-large);
-    @include output-rhythm(margin-#{$flow-from}, -#{$x-large});
+    @include output-rhythm(margin-#{$flow-from}, -30px);
     min-width: 50%;
     border-style: $form-border-style;
     border-width: $form-border-width;
@@ -114,8 +118,7 @@ h4.label,
 
 
 // Marker
-.marker {
-}
+.marker {}
 
 
 // Form required.
@@ -339,6 +342,7 @@ details {
     color: inherit;
   }
 }
+
 
 // CK Editor
 .cke_editable {

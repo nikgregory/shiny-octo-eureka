@@ -130,13 +130,14 @@ legend {}
 details {
   border: $form-border-width $form-border-style;
   border-radius: $border-radius;
-
+  display: block; // Firefox seems to need this?
   @include output-rhythm(margin, $medium 0);
 }
 
 
 summary {
   cursor: pointer;
+  display: block; // Firefox seems to need this?
   @include output-rhythm(padding, $x-small);
 }
 

@@ -29,7 +29,7 @@ button,
   text-decoration: none;
   text-align: $button-text-align;
   font-weight: $font-weight-normal;
-  @include output-rhythm(line-height, $form_input_button_select_height);
+
   white-space: nowrap;
 
   &:hover,
@@ -98,19 +98,15 @@ button,
 
 .js .dropbutton-wrapper {
   display: block;
-  min-height: 2em;
-  margin-right: 4px; // LTR
   position: relative;
-}
-
-[dir="rtl"] .js .dropbutton-wrapper {
-  margin-right: 0;
-  margin-left: 4px;
+  @include output-rhythm(min-height, $medium * 2);
+  @include output-rhythm(margin-#{$flow-to}, 4px);
+  @include output-rhythm(margin-bottom, $medium);
 }
 
 .dropbutton {
   input {
-    text-align: left; // LTR
+    text-align: $flow-from;
     @include output-rhythm(height, $form_input_button_select_height -$button-border-width * 2);
   }
 
@@ -240,5 +236,4 @@ li[class*="action--"] {
   padding: 0;
   @include output-rhythm(margin, $medium 0);
 }
-
 

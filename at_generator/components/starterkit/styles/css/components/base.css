@@ -497,12 +497,14 @@ fieldset {
 details {
   border: 1px solid;
   border-radius: 2px;
+  display: block;
   margin: 16px 0;
   margin: 1rem 0;
 }
 
 summary {
   cursor: pointer;
+  display: block;
   padding: 10px;
   padding: 0.61803rem;
 }
@@ -764,6 +766,11 @@ thead .active img {
 /**
  * Form Common - common styles for form elements and classes.
  ========================================================================== */
+.form-text {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
 .form-text[name="subject[0][value]"] {
   width: 50%;
 }
@@ -793,7 +800,8 @@ thead .active img {
 .form-type-checkbox .option {
   padding: 4px 7px 0 29px;
   padding: 0.26676rem 0.43162rem 0 1.82838rem;
-  margin-left: -25.88854px;
+  margin-left: -30px;
+  margin-left: -1.875rem;
   min-width: 50%;
   border-style: solid;
   border-width: 1px;
@@ -1040,8 +1048,6 @@ button,
   text-decoration: none;
   text-align: center;
   font-weight: 400;
-  line-height: 29px;
-  line-height: 1.82838rem;
   white-space: nowrap;
 }
 button:hover, button:focus,
@@ -1085,14 +1091,13 @@ button:hover, button:focus,
 
 .js .dropbutton-wrapper {
   display: block;
-  min-height: 2em;
-  margin-right: 4px;
   position: relative;
-}
-
-[dir="rtl"] .js .dropbutton-wrapper {
-  margin-right: 0;
-  margin-left: 4px;
+  min-height: 32px;
+  min-height: 2rem;
+  margin-right: 4px;
+  margin-right: 0.25rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .dropbutton input {
@@ -1329,6 +1334,17 @@ figure[class*="align-"] {
 /**
  * Image upload widget.
  ========================================================================== */
+.image-widget .form-file {
+  padding: 0;
+}
+
+.image-widget-data {
+  float: left;
+}
+.image-widget-data .text-field {
+  width: auto;
+}
+
 .image-preview {
   float: left;
   padding: 0 16px 16px 0;
@@ -1337,13 +1353,6 @@ figure[class*="align-"] {
 [dir="rtl"] .image-preview {
   padding: 0 0 16px 16px;
   padding: 0 0 1rem 1rem;
-}
-
-.image-widget-data {
-  float: left;
-}
-.image-widget-data .text-field {
-  width: auto;
 }
 
 /**
@@ -1818,8 +1827,8 @@ ul.inline li ol {
   margin-top: 0.375rem;
 }
 .messages__list .item-list ul {
-  margin: 18px 29px;
-  margin: 1.13rem 1.82838rem;
+  margin: 18px 0;
+  margin: 1.13rem 0;
 }
 .messages__list .item-list ul li {
   list-style: square;
@@ -2490,10 +2499,13 @@ table tr.error {
 }
 
 /**
- * User forms, e.g. login, register, request password, user login block form.
+ * User forms, e.g. login, register and password reset.
  ========================================================================== */
 .user-login-form .form-text {
   width: 100%;
+}
+.user-login-form + .item-list ul {
+  padding: 0;
 }
 
 /**

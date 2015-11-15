@@ -1,12 +1,12 @@
 /**
- * User forms, e.g. login, register, request password, user login block form.
+ * User forms, e.g. login, register and password reset.
  ========================================================================== */
 
-// User login block form.
+// User login form.
 .user-login-form {
 
-  .form-type-textfield {}
   .form-item-name {}
+  .form-item-pass {}
 
   label {}
 
@@ -14,14 +14,19 @@
     width: 100%;
   }
 
-  .form-item-pass {}
-
   .form-actions {}
   .form-submit {}
 
+  + .item-list {
+    ul {
+      padding: 0;
+    }
+    li {}
+  }
 }
 
 
-
-
+// User register and password reset.
+.user-register-form {}
+.user-pass {}
 

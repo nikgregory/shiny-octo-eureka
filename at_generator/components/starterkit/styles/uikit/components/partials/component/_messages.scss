@@ -34,7 +34,7 @@
   }
 
   .item-list ul {
-    @include output-rhythm(margin, $large $xx-large);
+    @include output-rhythm(margin, $large 0);
 
     li {
       list-style: square;

@@ -732,6 +732,13 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 
 /**
+ * Image upload widget.
+ ========================================================================== */
+.image-preview {
+  background-color: transparent;
+}
+
+/**
  * Field Taxonomy Reference
  ========================================================================== */
 /**
@@ -818,5 +825,4 @@ body:before {
 .comment {
   border-color: #eeeeee;
 }
-
 /*# sourceMappingURL=color.css.map */
