@@ -423,7 +423,7 @@ $breadcrumb-seperator-color        : $border-color;
 
 // Tables
 // -----------------------------------------------------------------------------
-$table-cell-borders                : false; // set to true if you want borders on every cell
+$table-cell-borders                : true; // set to false to remove td/th borders
 $table-border-color                : $border-color;
 
 // thead

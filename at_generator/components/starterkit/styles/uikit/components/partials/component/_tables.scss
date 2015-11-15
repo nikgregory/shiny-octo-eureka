@@ -5,6 +5,9 @@
 
 table {
 
+  // Very agressive way to resize tables in small screens, could be problematic...
+  width: auto !important;
+
   // Prevent the sticky header from hiding behind other content.
   &.sticky-header {
     z-index: 10;
@@ -28,6 +31,15 @@ table {
   // Lists, such as item-lists, can appear in tables.
   ul {
     margin: 0;
+  }
+
+  // Support align attribute.
+  &[align='right'] {
+    @include output-rhythm(margin-left, $medium);
+  }
+
+  &[align='left'] {
+    @include output-rhythm(margin-right, $medium);
   }
 }
 
@@ -81,6 +93,35 @@ th {
   th,
   td {
     border-width: $border-width;
+
+    // Attempt to support border attributes up to 10px
+    [border='2'] & {
+      border-width: $border-width * 2;
+    }
+    [border='3'] & {
+      border-width: $border-width * 3;
+    }
+    [border='4'] & {
+      border-width: $border-width * 4;
+    }
+    [border='5'] & {
+      border-width: $border-width * 5;
+    }
+    [border='6'] & {
+      border-width: $border-width * 6;
+    }
+    [border='7'] & {
+      border-width: $border-width * 7;
+    }
+    [border='8'] & {
+      border-width: $border-width * 8;
+    }
+    [border='9'] & {
+      border-width: $border-width * 9;
+    }
+    [border='10'] & {
+      border-width: $border-width * 10;
+    }
   }
 }
 

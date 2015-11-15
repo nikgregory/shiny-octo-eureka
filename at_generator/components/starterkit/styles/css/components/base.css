@@ -652,6 +652,9 @@ textarea:invalid {
  * Table Theme
  * Style Drupal selectors for tables.
  ========================================================================== */
+table {
+  width: auto !important;
+}
 table.sticky-header {
   z-index: 10;
 }
@@ -674,10 +677,84 @@ table .view-table__details--description {
 table ul {
   margin: 0;
 }
+table[align='right'] {
+  margin-left: 16px;
+  margin-left: 1rem;
+}
+table[align='left'] {
+  margin-right: 16px;
+  margin-right: 1rem;
+}
 
-td,
-th {
-  border-width: 0;
+thead,
+tbody,
+tr,
+th,
+td {
+  border-width: 1px;
+}
+[border='2'] thead, [border='2']
+tbody, [border='2']
+tr, [border='2']
+th, [border='2']
+td {
+  border-width: 2px;
+}
+[border='3'] thead, [border='3']
+tbody, [border='3']
+tr, [border='3']
+th, [border='3']
+td {
+  border-width: 3px;
+}
+[border='4'] thead, [border='4']
+tbody, [border='4']
+tr, [border='4']
+th, [border='4']
+td {
+  border-width: 4px;
+}
+[border='5'] thead, [border='5']
+tbody, [border='5']
+tr, [border='5']
+th, [border='5']
+td {
+  border-width: 5px;
+}
+[border='6'] thead, [border='6']
+tbody, [border='6']
+tr, [border='6']
+th, [border='6']
+td {
+  border-width: 6px;
+}
+[border='7'] thead, [border='7']
+tbody, [border='7']
+tr, [border='7']
+th, [border='7']
+td {
+  border-width: 7px;
+}
+[border='8'] thead, [border='8']
+tbody, [border='8']
+tr, [border='8']
+th, [border='8']
+td {
+  border-width: 8px;
+}
+[border='9'] thead, [border='9']
+tbody, [border='9']
+tr, [border='9']
+th, [border='9']
+td {
+  border-width: 9px;
+}
+[border='10'] thead, [border='10']
+tbody, [border='10']
+tr, [border='10']
+th, [border='10']
+td {
+  border-width: 10px;
 }
 
 thead .active img {
@@ -927,6 +1004,10 @@ details > .details-wrapper {
 .reset-appearance:hover, .reset-appearance:focus {
   background: none;
   color: inherit;
+}
+
+.cke_editable {
+  padding: 5px 10px;
 }
 
 /**
