@@ -78,7 +78,3 @@ libraries-override:
     css:
       theme:
         /modules/ds/css/ds-4col.css: styles/layout_plugin/css/ds/ds-4col.css
-stylesheets-remove:
-  - @classy/css/components/user.css
-  - @classy/css/components/dialog.css
-  - @classy/css/components/dropbutton.css
