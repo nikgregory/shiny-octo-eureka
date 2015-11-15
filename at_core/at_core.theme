@@ -51,6 +51,9 @@ function at_core_page_attachments_alter(array &$page) {
     drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
   }
 
+  // Attach at.settings, we need the ajaxPageState theme name
+  $page['#attached']['library'][] = 'at_core/at.settings';
+
   // Attach module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml
   // and we only load if the module is installed. Unlike core

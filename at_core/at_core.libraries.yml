@@ -1,3 +1,10 @@
+at.settings:
+  version: "8.x-1.0"
+  drupalSettings:
+    # These placeholder values will be set by system_js_settings_alter().
+    ajaxPageState:
+      theme: null
+
 # Window size widget (AT Core)
 at.windowsize:
   version: "8.x-1.0"
@@ -35,6 +42,7 @@ at.enquire:
   js:
     scripts/min/enquire.min.js: { minified: true }
   dependencies:
+    - core/jquery
     - core/matchmedia
 
 # doubleTapToGo
