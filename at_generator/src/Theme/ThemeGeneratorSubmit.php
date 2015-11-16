@@ -50,7 +50,6 @@ class ThemeGeneratorSubmit {
 
     // Path to where we will save the cloned theme
     // This could be configurable?
-    //$target = $path . '/../../' . $machine_name;
     $at_core_path_parts = explode("/", $path);
     if (in_array('contrib', $at_core_path_parts)) {
       $target_path = array('themes', 'custom');
@@ -58,8 +57,14 @@ class ThemeGeneratorSubmit {
     else {
       $target_path = array('themes');
     }
+
     $target_dir = $directoryOperations->directoryPrepare($target_path);
     $target = "$target_dir/$machine_name";
+
+    if (!is_writable('themes')) {
+      drupal_set_message(t('The "themes" directory is not writable. To generate a new theme reset permissions for the "@themespath" directory so it is writable, e.g. chmod themes 0755.', array('@themespath' => base_path() .  'themes')), 'error');
+      return;
+    }
 
     // Array of UIKit tools
     $uikit_tools = array(
