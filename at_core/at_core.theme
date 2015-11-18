@@ -320,7 +320,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
         );
         $saved_formatted_suggestions = drupal_render($these_suggestions);
 
-        drupal_set_message(t('Template suggestions for this page:<br>!these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('!these_suggestions' => $saved_formatted_suggestions)), 'status');
+        drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('@these_suggestions' => $saved_formatted_suggestions)), 'status');
       }
     }
   }

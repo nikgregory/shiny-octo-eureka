@@ -145,7 +145,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#items' => $saved_css,
       );
       $saved_css_message = drupal_render($saved_css_message_list);
-      drupal_set_message(t('The following layout <b>CSS files</b> were generated: !saved_css', array('!saved_css' => $saved_css_message)), 'status');
+      drupal_set_message(t('The following layout <b>CSS files</b> were generated: @saved_css', array('@saved_css' => $saved_css_message)), 'status');
     }
   }
 
