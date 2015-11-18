@@ -1071,8 +1071,10 @@ button:hover, button:focus,
   line-height: 1.125rem;
   padding-right: 4px;
   padding-right: 0.25rem;
+  line-height: 29px;
+  line-height: 1.82838rem;
   display: inline-block;
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 .button-action[data-drupal-link-system-path="user/login"]:before {
   content: "";
@@ -1083,6 +1085,12 @@ button:hover, button:focus,
   padding-right: 7px;
   padding-right: 0.4375rem;
   vertical-align: baseline;
+}
+
+.action-links__button {
+  padding: 0;
+  margin: 16px 0;
+  margin: 1rem 0;
 }
 
 /* Drop buttons */
@@ -1547,31 +1555,6 @@ ul.inline li ol {
   clear: both;
 }
 
-.action-links__button {
-  padding: 0;
-  margin: 16px 0;
-  margin: 1rem 0;
-}
-
-.attribution {
-  text-align: right;
-}
-.attribution__link {
-  text-decoration: none;
-  font-size: 11px;
-  font-size: 0.69838rem;
-  line-height: 18px;
-  line-height: 1.125rem;
-}
-
-.feed-icon {
-  display: block;
-  width: 16px;
-  width: 1rem;
-  height: 16px;
-  height: 1rem;
-}
-
 /**
  * Pagers
  * - Full system pager.
@@ -1650,6 +1633,36 @@ ul.inline li ol {
   .pager__item--num-first {
     clear: both;
   }
+}
+
+/**
+ * Skip link
+ *  - Allows keyboard users to quickly skip to the main content of the page.
+ ========================================================================== */
+.skip-link {
+  color: #fff;
+  background: #444;
+  border-radius: 0 0 2px 2px;
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: all 0.15s ease-in;
+          transition: all 0.15s ease-in;
+  z-index: 50;
+  left: 50%;
+  padding: 6px 16px;
+  padding: 0.38197rem 1rem;
+}
+.skip-link:visited, .skip-link:active {
+  color: #fff;
+}
+.skip-link:focus {
+  text-decoration: none;
+  opacity: 1;
+}
+.skip-link.visually-hidden.focusable:focus {
+  position: absolute !important;
 }
 
 /**
@@ -1908,6 +1921,17 @@ table tr.error {
 
 .icon-error:before {
   content: "";
+}
+
+/**
+ * Feed Icons
+ ========================================================================== */
+.feed-icon {
+  display: block;
+  width: 16px;
+  width: 1rem;
+  height: 16px;
+  height: 1rem;
 }
 
 /**
@@ -2664,6 +2688,22 @@ article[class*="--unpublished"] {
   }
 }
 /**
+ * AT attribution message
+ *  - a toggle setting in the theme settings, you can turn it on/off using
+ *    the Markup overrides extension.
+ ========================================================================== */
+.attribution {
+  text-align: right;
+}
+.attribution__link {
+  text-decoration: none;
+  font-size: 11px;
+  font-size: 0.69838rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
+
+/**
  * Toolbar
  * Drupal core does a poor job of protecting the toolbar items, so we isolate
  * and override the CSS. The ID should be enough specificity to do the job.
@@ -2696,5 +2736,4 @@ article[class*="--unpublished"] {
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
 }
-
 /*# sourceMappingURL=base.css.map */

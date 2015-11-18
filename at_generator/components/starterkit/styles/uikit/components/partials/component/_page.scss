@@ -95,40 +95,5 @@
 }
 
 
-// Action links, place here for now, should be a seperate com.
-.action-links {
-  &__button {
-    padding: 0;
-    @include output-rhythm(margin, $medium 0);
-  }
-}
-
-
-// Theme attribution message. This is a toggle setting in the advanced theme
-// settings, you can turn it on/off using the Markup overrides extension.
-.attribution {
-  text-align: $flow-to;
-
-  &__link {
-    text-decoration: none;
-    @include adjust-font-size-to($small);
-  }
-}
-
-
-// Feed icon link.
-.feed-icon {
-  display: block;
-  @include output-rhythm(width, $medium);
-  @include output-rhythm(height, $medium);
-}
-
-// RSS .svg icon.
-.feed-icon-rss {
-}
-
-
-
-
 
 
