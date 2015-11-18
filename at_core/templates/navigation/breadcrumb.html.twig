@@ -11,12 +11,19 @@
 #}
 {% if breadcrumb %}
   {%
+    set classes = [
+      'breadcrumb',
+      'clearfix',
+      not breadcrumb_title_hidden ? 'has-title',
+    ]
+  %}
+  {%
     set title_classes = [
       breadcrumb_title_hidden ? 'visually-hidden',
       'breadcrumb__title',
     ]
   %}
-  <nav class="breadcrumb clearfix" role="navigation" aria-labelledby="system-breadcrumb">
+  <nav{{ attributes.addClass(classes) }}role="navigation" aria-labelledby="system-breadcrumb">
     <h2 id="system-breadcrumb"{{ title_attributes.addClass(title_classes) }}>{{ 'You are here:'|t }}</h2>
     <ol class="breadcrumb__list">
     {% for item in breadcrumb %}

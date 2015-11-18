@@ -98,7 +98,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $system_theme_config = \Drupal::config('system.theme');
   $admin_theme = $system_theme_config->get('admin');
   if (!empty($admin_theme)) {
-    $admin_theme_class = 'admin-theme--' . Html::getClass($admin_theme);
+    $admin_theme_class = 'admin-theme--' . Html::cleanCssIdentifier($admin_theme);
     $form['#attributes'] = array('class' => array($admin_theme_class));
   }
 

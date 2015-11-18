@@ -13,6 +13,8 @@
 .breadcrumb {
   @include output-rhythm(margin, $medium 0);
 
+  &.has-title {}
+
   &__title {
     font-size: inherit;
   }
@@ -36,7 +38,6 @@
       padding: 0;
       margin: 0;
       text-align: center;
-      @include output-rhythm(width, $medium);
 
       // RTL
       [dir="rtl"] & {

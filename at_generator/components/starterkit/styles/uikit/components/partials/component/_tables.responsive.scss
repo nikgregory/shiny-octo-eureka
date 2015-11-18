@@ -1,0 +1,44 @@
+/**
+ * Basic styles to support the Responsive Tables jQuery feature.
+ *  - to enable responsive tables turn on the extension in your
+ *    themes appearance settings and apply the class 'is-responsive'
+ *    to any tables you want to make responsive.
+ ========================================================================== */
+
+.responsive-table {
+  position: relative;
+  @include output-rhythm(margin, 0 0 $large);
+
+  &__scroll {
+  	width: 100%;
+  	overflow-x: scroll;
+
+    &::-webkit-scrollbar-thumb {
+    	border-radius: 8px;
+    	border: 3px solid #ffffff;
+    	background-color: rgba(0, 0, 0, .3);
+    }
+  }
+
+  &__message {
+    @include adjust-font-size-to($small);
+
+    em:after {
+      font-family: $icon-font;
+      content: $fa-var-long-arrow-right;
+      display: inline-block;
+      margin: 0;
+      @include output-rhythm(padding, 0 3px);
+      @include output-rhythm(width, $medium);
+
+      [dir="rtl"] & {
+        content: $fa-var-long-arrow-left;
+      }
+    }
+  }
+
+  table {
+    margin-bottom: 0;
+  }
+}
+

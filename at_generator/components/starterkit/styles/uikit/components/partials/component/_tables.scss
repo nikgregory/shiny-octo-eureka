@@ -6,7 +6,7 @@
 table {
 
   // Very agressive way to resize tables in small screens, could be problematic...
-  width: auto !important;
+  //width: auto !important;
 
   // Prevent the sticky header from hiding behind other content.
   &.sticky-header {
@@ -40,6 +40,14 @@ table {
 
   &[align='left'] {
     @include output-rhythm(margin-right, $medium);
+  }
+
+  @media #{$mobile-isolate} {
+    &[align='right'],
+    &[align='left'] {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 }
 

@@ -19,7 +19,21 @@ $form['markup_overrides']['markup_overrides_settings'] = array(
   '#weight' => 40,
 );
 
+
+// Responsive Tables
+$form['markup_overrides']['markup_overrides_settings']['responsive-tables'] = array(
+  '#type' => 'details',
+  '#title' => t('Responsive Tables'),
+);
+$form['markup_overrides']['markup_overrides_settings']['responsive-tables']['settings_responsive_tables'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Enable Responsive Tables'),
+  '#default_value' => theme_get_setting('settings.responsive_tables'),
+  '#description' => t('Enable the responsive tables plugin. To use apply the "is-responsive" class to the table element, e.g. <code>@tableexample</code>. In small screens this will hide the overflow and be horizontally scrollable.', array('@tableexample' => '<table class="is-responsive">')),
+);
+
 // PNG logo
+/*
 $form['markup_overrides']['markup_overrides_settings']['png_logo'] = array(
   '#type' => 'details',
   '#title' => t('png Logo default'),
@@ -30,6 +44,7 @@ $form['markup_overrides']['markup_overrides_settings']['png_logo']['settings_png
   '#description' => t('Force the branding block to use <code>logo.png</code> file instead of <code>logo.svg</code> for the default site logo. Place a logo.png file in your themes root directory, e.g. <code>!themelogopath</code>', array('!themelogopath' => $subtheme_path . '/logo.png')),
   '#default_value' => theme_get_setting('settings.png_logo'),
 );
+*/
 
 // Breadcrumbs
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(
@@ -49,7 +64,7 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
 // Breadcrumbs Home link?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Show the "Home" link'),
+  '#title' => t('Remove the "Home" link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home'),
 );
 // Breadcrumbs Page title?

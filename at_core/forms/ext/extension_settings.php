@@ -130,6 +130,7 @@ $form['enable_extensions']['settings_enable_markup_overrides'] = array(
   '#title' => t('Markup overrides'),
   '#description' => t('Options for modifying output, includes settings for:
     <ul>
+      <li>Responsive tables</li>
       <li>Breadcrumbs</li>
       <li>Login block</li>
       <li>Comment titles</li>

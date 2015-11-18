@@ -5,30 +5,31 @@
   Drupal.behaviors.atFS = {
     attach: function (context, settings) {
 
-      var activeTheme = settings['ajaxPageState']['theme'];
-      var slideshowSettings = settings[activeTheme]['at_slideshows'];
+      var activeTheme = settings['ajaxPageState']['theme'],
+          slideshowSettings = settings[activeTheme]['at_slideshows'];
 
       for (var item in slideshowSettings) {
         if (slideshowSettings.hasOwnProperty(item)) {
 
-          // This items settings object.
           var ss = slideshowSettings[item];
 
           // Add a class if the pager is active.
           if (ss.controlnav) {
-            $('.' + ss.classname).addClass('has-pager');
+            $(ss.slideshow_class).addClass('has-pager');
+          }
+
+          // Add a class if the direction nav is active.
+          if (ss.directionnav) {
+            $(ss.slideshow_class).addClass('has-direction-nav');
           }
 
           // Add a class if this is a carousel
           if (ss.as_carousel) {
-            $('.' + ss.classname).addClass('is-carousel');
+            $(ss.slideshow_class).addClass('is-carousel');
           }
 
-          // Stretch full width
-          //$('.' + ss.classname).width($(window).width());
-
           // Initialize and set options.
-          $('.' + ss.slideshow_class).flexslider({
+          $(ss.slideshow_class).flexslider({
 
             start: function(slider){$('.flexslider').resize().removeClass('loading')},
 
@@ -71,4 +72,4 @@
       }
     }
   };
-}(jQuery));
+})(jQuery, Drupal, drupalSettings);

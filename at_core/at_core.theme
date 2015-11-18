@@ -51,7 +51,7 @@ function at_core_page_attachments_alter(array &$page) {
     drupal_set_message(t('The path to generated CSS files is not saved in configuration, try saving your themes Appearance settings.'), 'error');
   }
 
-  // Attach at.settings, we need the ajaxPageState theme name
+  // Attach at.settings, we need the ajaxPageState theme name.
   $page['#attached']['library'][] = 'at_core/at.settings';
 
   // Attach module dependant libraries.
@@ -90,21 +90,6 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
 
-    // Breadcrumbs.
-    if (!empty($config['breadcrumb_separator'])) {
-      if (file_exists($generated_files_path . '/breadcrumb.css')) {
-        $page['#attached']['library'][] = "$theme/breadcrumb";
-      }
-    }
-
-    // Login block.
-    // Just load the login block CSS without the currentUser check.
-    if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-      if (file_exists($generated_files_path . '/login-block.css')) {
-        $page['#attached']['library'][] = "$theme/login_block";
-      }
-    }
-
     // Mobile blocks
     if (isset($config['enable_mobile_blocks']) && $config['enable_mobile_blocks'] === 1) {
       if (file_exists($generated_files_path . '/mobile-blocks.css')) {
@@ -119,8 +104,33 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
 
+    // Markup Overrides
+    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+
+      // Responsive tables
+      if (isset($config['responsive_tables']) && $config['responsive_tables'] === 1) {
+        $page['#attached']['library'][] = "$theme/responsive_tables";
+      }
+
+      // Breadcrumbs.
+      if (!empty($config['breadcrumb_separator'])) {
+        if (file_exists($generated_files_path . '/breadcrumb.css')) {
+          $page['#attached']['library'][] = "$theme/breadcrumb";
+        }
+      }
+
+      // Login block.
+      // Just load the login block CSS without the currentUser check.
+      if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
+        if (file_exists($generated_files_path . '/login-block.css')) {
+          $page['#attached']['library'][] = "$theme/login_block";
+        }
+      }
+    }
+
     // Devel assets.
     if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
+
       // Attach Windowsize library
       if (isset($config['show_window_size']) && $config['show_window_size'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.windowsize';
@@ -235,15 +245,15 @@ function at_core_page_attachments_alter(array &$page) {
 
         for ($i = 0; $i < $config['slideshow_count']; $i++) {
 
-          // Set the initialaztion class and this slideshows key
-          $ss_class = Html::getClass($theme . '-slideshow-' . $i);
+          // Set a key
+          $ss_key = Html::cleanCssIdentifier($theme . '-slideshow-' . $i);
 
           if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] == 1) {
 
             // Basic settings
             foreach ($basic_slider_settings as $basic_slider_setting) {
               if (isset($config['slideshow_' . $i . '_' . $basic_slider_setting])) {
-                $slider_settings[$ss_class][$basic_slider_setting] = $config['slideshow_' . $i . '_' . $basic_slider_setting];
+                $slider_settings[$ss_key][$basic_slider_setting] = $config['slideshow_' . $i . '_' . $basic_slider_setting];
               }
             }
 
@@ -251,21 +261,18 @@ function at_core_page_attachments_alter(array &$page) {
             if (isset($config['slideshow_' . $i . '_as_carousel']) && $config['slideshow_' . $i . '_as_carousel'] == 1) {
               foreach ($carousel_settings as $carousel_setting) {
                 if (isset($config['slideshow_' . $i . '_' . $carousel_setting])) {
-                  $slider_settings[$ss_class][$carousel_setting] = $config['slideshow_' . $i . '_' . $carousel_setting];
+                  $slider_settings[$ss_key][$carousel_setting] = $config['slideshow_' . $i . '_' . $carousel_setting];
                 }
               }
-
               // Reset options for carousels, fade won't work and vertical causes issues with Flexslider.
-              $slider_settings[$ss_class]['animation'] = 'slide';
-              $slider_settings[$ss_class]['direction'] = 'horizonal';
+              $slider_settings[$ss_key]['animation'] = 'slide';
+              $slider_settings[$ss_key]['direction'] = 'horizonal';
             }
 
             // Advanced options
-            if (isset($config['slideshow_' . $i . '_advanced_options']) && $config['slideshow_' . $i . '_advanced_options'] == 1) {
-              foreach ($advanced_slider_settings as $advanced_slider_setting) {
-                if (isset($config['slideshow_' . $i . '_' . $advanced_slider_setting])) {
-                  $slider_settings[$ss_class][$advanced_slider_setting] = $config['slideshow_' . $i . '_' . $advanced_slider_setting];
-                }
+            foreach ($advanced_slider_settings as $advanced_slider_setting) {
+              if (isset($config['slideshow_' . $i . '_' . $advanced_slider_setting])) {
+                $slider_settings[$ss_key][$advanced_slider_setting] = $config['slideshow_' . $i . '_' . $advanced_slider_setting];
               }
             }
           }
@@ -400,7 +407,7 @@ function at_core_preprocess_html(&$variables) {
 
     // Skip navigation target setting.
     if (isset($config['skip_link_target'])) {
-      $variables['skip_link_target'] = '#' . Html::getClass($config['skip_link_target']);
+      $variables['skip_link_target'] = '#' . Html::cleanCssIdentifier($config['skip_link_target']);
     }
 
     // Apple touch icons - low, medium and high (see the Apple docs on touch icons).
@@ -705,6 +712,7 @@ function at_core_preprocess_block(&$variables) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 
       // Use png logo instead of svg.
+      /*
       if ($variables['base_plugin_id'] == 'system_branding_block') {
         if (isset($config['png_logo']) && $config['png_logo'] === 1) {
           if (\Drupal::config($theme . '.settings')->get('features.logo') === 1) {
@@ -714,6 +722,7 @@ function at_core_preprocess_block(&$variables) {
           }
         }
       }
+      */
 
       // Remove login block links.
       if ($variables['base_plugin_id'] === 'user_login_block') {
@@ -827,7 +836,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
       }
 
       // Show or hide the Home link.
-      if (isset($config['breadcrumb_home']) && $config['breadcrumb_home'] === 0) {
+      if (isset($config['breadcrumb_home']) && $config['breadcrumb_home'] === 1) {
         $first_item = array_values($variables['breadcrumb'])[0];
         if (isset($first_item['url']) && $first_item['url'] == base_path()) {
           array_shift($variables['breadcrumb']);

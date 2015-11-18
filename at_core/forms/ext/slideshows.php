@@ -37,7 +37,7 @@ $slideshow_count = theme_get_setting('settings.slideshow_count');
 if (isset($slideshow_count) && $slideshow_count >= 1) {
   for ($i = 0; $i < $slideshow_count; $i++) {
 
-    $slideshow_class = Html::getClass($theme . '-slideshow-' . $i);
+    $slideshow_class = Html::cleanCssIdentifier($theme . '-slideshow-' . $i);
 
     $form['slideshows']['slideshow_' . $i]['slideshow_options'] = array(
       '#type' => 'details',
@@ -45,20 +45,24 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     );
 
     // Enable/disable toggle.
+/*
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['settings_slideshow_' . $i . '_enable'] = array(
       '#type' => 'checkbox',
       '#title' => t('Use custom settings for this slideshow'),
       '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_enable'),
       //'#description' => t('Check this option to customize settings for this slideshow.'),
     );
+*/
 
     // Fieldset to globally disabled or enable form elements
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper'] = array(
       '#type' => 'fieldset',
       '#title' => t('Settings for @slidername', array('@slidername' => $slideshow_class)),
+/*
       '#states' => array(
         'visible' => array('input[name="settings_slideshow_' . $i . '_enable"]' => array('checked' => TRUE)),
       ),
+*/
     );
 
     /* BASIC */
@@ -132,7 +136,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['settings_slideshow_' . $i . '_controlnav'] = array(
       '#type' => 'checkbox',
       '#title' => t('Pager <small>(Show the pager)</small>'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_controlnav'),
+      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_controlnav') ? theme_get_setting('settings.slideshow_' . $i . '_controlnav') : 1,
     );
 
     // Thumbnail controlNav toggle.
@@ -152,7 +156,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['settings_slideshow_' . $i . '_directionnav'] = array(
       '#type' => 'checkbox',
       '#title' => t('Controls <small>(Show previous/next links)</small>'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_directionnav'),
+      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_directionnav') ? theme_get_setting('settings.slideshow_' . $i . '_directionnav') : 1,
     );
 
     /* Carousels */
@@ -248,19 +252,23 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
 
 
     /* ADVANCED */
+/*
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['settings_slideshow_' . $i . '_advanced_options'] = array(
       '#type' => 'checkbox',
       '#title' => t('Advanced options <small>(show and configure advanced options)</small>'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_advanced_options'),
+      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_advanced_options') ? theme_get_setting('settings.slideshow_' . $i . '_advanced_options') : 1,
     );
+*/
 
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['advanced_options'] = array(
       '#type' => 'details',
       '#title' => t('Advanced Options'),
-      '#open'=> TRUE,
+      '#open'=> FALSE,
+/*
       '#states' => array(
         'visible' => array('input[name="settings_slideshow_' . $i . '_advanced_options"]' => array('checked' => TRUE)),
       ),
+*/
     );
 
     // pauseOnAction : Boolean Pause the slideshow when interacting with control elements.
@@ -326,7 +334,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
         'step' => 50,
       ),
       '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_initdelay'),
-      '#description' => t('Set an initialization delay, in milliseconds.'),
+      '#description' => t('Set an initialization delay, in milliseconds, e.g. 100.'),
     );
 
     // easing           : "swing",        // String Determines the easing method used in jQuery transitions.
@@ -388,7 +396,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['advanced_options']['settings_slideshow_' . $i . '_slideshow_class'] = array(
       '#type' => 'textfield',
       '#title' => t('Slideshow selector'),
-      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_slideshow_class') ? theme_get_setting('settings.slideshow_' . $i . '_slideshow_class') : $slideshow_class,
+      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_slideshow_class') ? theme_get_setting('settings.slideshow_' . $i . '_slideshow_class') : '.' . $slideshow_class,
       '#description' => t('Change this if you are using your own markup, e.g. a custom block with image fields.'),
     );
 
@@ -415,16 +423,16 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
 '<div class="flexslider loading ' . $this_slideshow_class . '">
   <ul class="slides">
     <li>
-      <img src="' . base_path() . $subtheme_path  . '/images/slides/desert-valley-1600.jpg" alt="Desert valley" />
-      <p class="flex-caption">Desert valley</p>
+      <img src="' . base_path() . $subtheme_path  . '/images/slides/test-slide-1.png" alt="Test slide one" />
+      <p class="flex-caption">Test slide one</p>
     </li>
     <li>
-      <img src="' . base_path() . $subtheme_path  . '/images/slides/iceberg-dramatic-1600.jpg" alt="Dramatic iceberg" />
-      <p class="flex-caption">Dramatic iceberg</p>
+      <img src="' . base_path() . $subtheme_path  . '/images/slides/test-slide-2.png" alt="Test slide two" />
+      <p class="flex-caption">Test slide two</p>
     </li>
     <li>
-      <img src="' . base_path() . $subtheme_path  . '/images/slides/sunset-orange-1600.jpg" alt="Sunset orange" />
-      <p class="flex-caption">Sunset orange</p>
+      <img src="' . base_path() . $subtheme_path  . '/images/slides/test-slide-3.png" alt="Test slide three" />
+      <p class="flex-caption">Test slide three</p>
     </li>
   </ul>
 </div>',

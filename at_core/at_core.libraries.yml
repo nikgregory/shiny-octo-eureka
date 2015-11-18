@@ -71,9 +71,10 @@ at.fastclick:
 
 # Fastclick initialize
 at.fastclick_initialize:
-  version: "1.0.3"
+  version: "8.x-1.0"
   js:
     scripts/min/at.fastclickInitialize.min.js: { minified: true }
+    #scripts/min/at.fastclickInitialize.js: {}
   dependencies:
     - at_core/at.fastclick
     - core/jquery
@@ -104,6 +105,16 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+
+# Responsive Tables
+at.responsivetables:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.responsiveTables.min.js: { minified: true }
+    #scripts/at.responsiveTables.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
 
 # Slidedshow
 at.slideshow:
@@ -153,7 +164,8 @@ at.capitons:
 at.responsivevideo:
   version: "8.x-1.0"
   js:
-    scripts/at.responsiveVideo.js: {}
+    scripts/at.responsiveVideo.min.js: {}
+    #scripts/at.responsiveVideo.js: {}
   dependencies:
     - core/jquery
     - core/drupal
