@@ -348,8 +348,6 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     case 'user_login':
       if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-
-          // Placeholder labels.
           if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
             $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
             $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
@@ -360,20 +358,15 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }
       break;
 
-    //case 'search_block_form':
-      // Add the missing 'search-block-form' class.
-      //$form['#attributes']['class'][] = 'search-block-from';
-
-      // Remove the size value.
-      //$form['keys']['#size'] = '';
-      //$form['keys']['#attributes']['results'] = 3;
-      //$form['keys']['#attributes']['autosave'] = $theme . '-search-results-form-submissions';
-      //kpr($form);
-      //break;
+    case 'search_block_form':
+      $form['keys']['#size'] = '';
+      $form['keys']['#attributes']['results'] = 3;
+      $form['keys']['#attributes']['autosave'] = $theme . '-search-results-form-submissions';
+      break;
 
     case 'search_form':
-      // Add the missing 'search-basic' class.
       $form['basic']['#attributes']['class'][] = 'search-basic';
+      unset($form['basic']['#attributes']['class'][array_search('container-inline', $form['basic']['#attributes']['class'])]);
       break;
   }
 }
