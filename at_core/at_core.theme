@@ -502,18 +502,30 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Initialise attribution variable.
-  $variables['attribution'] = '';
+  // Set attribution.
+  $attribution_url = Url::fromUri('http://adaptivethemes.com');
+  $attribution_link_options = array(
+    'attributes' => array(
+      'class' => array('attribution__link'),
+      'target' => '_blank',
+    ),
+  );
+  $attribution_url->setOptions($attribution_link_options);
+  $attribution_link = \Drupal::l(t('Design by Adaptivethemes.com'), $attribution_url);
+  $variables['attribution']['#type'] = 'markup';
+  $variables['attribution']['#prefix'] = '<div class="l-pr attribution"><div class="l-rw">';
+  $variables['attribution']['#markup'] = $attribution_link;
+  $variables['attribution']['#suffix'] = '</div></div>';
+
+  // Disallow access if attribution link is toggled off.
+  if (isset($config['attribution_toggle']) && $config['attribution_toggle'] === 0) {
+    $variables['attribution']['#access'] = FALSE;
+  }
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     // Markup overrides.
-    if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
-      // Set attribution.
-      if (isset($config['attribution_toggle']) && $config['attribution_toggle'] === 1) {
-        $variables['attribution']['#markup'] = '<div class="l-pr attribution"><div class="l-rw"><a href="http://adaptivethemes.com" class="attribution__link" target="_blank">Design by Adaptivethemes.com</a></div></div>';
-      }
-    }
+    //if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {}
 
     // shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
