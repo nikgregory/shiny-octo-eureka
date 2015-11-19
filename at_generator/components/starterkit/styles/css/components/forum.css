@@ -2,6 +2,9 @@
  * Forums
  *  - see table.scss for generic table styles.
  ========================================================================== */
+.forum {
+  width: 100%;
+}
 .forum .indent {
   overflow: hidden;
   margin-left: 33px;
@@ -31,8 +34,15 @@
   font-weight: 400;
 }
 
-.forum [class*="__last-reply"] {
+.forum [class*="__last-reply"],
+.forum [class*="__Last-reply"] {
   white-space: nowrap;
+}
+@media all and (max-width: 45em) {
+  .forum [class*="__last-reply"],
+  .forum [class*="__Last-reply"] {
+    display: none;
+  }
 }
 
 .forum [class*="__topics"],
@@ -72,4 +82,5 @@
 .action--forum {
   list-style: none;
 }
+
 /*# sourceMappingURL=forum.css.map */

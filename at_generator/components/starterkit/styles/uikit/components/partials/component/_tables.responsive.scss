@@ -5,13 +5,16 @@
  *    to any tables you want to make responsive.
  ========================================================================== */
 
+// This is a wrapper DIV around the responsive-enabled table, it is added
+// via JS when the Responsive Tables theme extension is enabled and you
+// have added the class "is-responsive" to a table.
 .responsive-table {
   position: relative;
   @include output-rhythm(margin, 0 0 $large);
 
   &__scroll {
   	width: 100%;
-  	overflow-x: scroll;
+  	overflow-x: auto;
 
     &::-webkit-scrollbar-thumb {
     	border-radius: 8px;
@@ -40,5 +43,31 @@
   table {
     margin-bottom: 0;
   }
+}
+
+
+/// Hide priority columns in small screens. Normally these classes
+// are set when creating a table with Views, or you can add classes
+// to tables created using the CK Editor.
+// SEE https://www.youtube.com/watch?v=Dn2RY9tvcfM
+@media #{$mobile} {
+  th.priority-low,
+  td.priority-low,
+  th.priority-medium,
+  td.priority-medium {
+    display: none;
+  }
+}
+
+
+table {
+  // is-responsive is the class you add to tables to make them responsive, after
+  // having enabled the Responsive Tables theme extension.
+  &.is-responsive {}
+
+  // has-overflow is added to the table element via JS if you have the Resposive
+  // Table theme extension enabled, have added the "is-responsive" class to
+  // a table and the tables width overflows the viewport.
+  &.has-overflow {}
 }
 

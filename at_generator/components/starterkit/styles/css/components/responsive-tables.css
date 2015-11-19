@@ -12,7 +12,7 @@
 }
 .responsive-table__scroll {
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .responsive-table__scroll::-webkit-scrollbar-thumb {
   border-radius: 8px;
@@ -41,4 +41,14 @@
 .responsive-table table {
   margin-bottom: 0;
 }
+
+@media all and (max-width: 60em) {
+  th.priority-low,
+  td.priority-low,
+  th.priority-medium,
+  td.priority-medium {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=responsive-tables.css.map */

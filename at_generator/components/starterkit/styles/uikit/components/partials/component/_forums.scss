@@ -6,6 +6,8 @@
 
 // Table selectors.
 .forum {
+  width: 100%;
+
   .indent {
     @include cf;
     @include output-rhythm(margin-#{$flow-from}, 33px);
@@ -58,8 +60,18 @@
 .forum-header__last-reply {}
 
 
-.forum [class*="__last-reply"] {
+// Hide some columns in mobile devives.
+.forum [class*="__last-reply"],
+.forum [class*="__Last-reply"] {
   white-space: nowrap;
+
+  @media #{$mobile-isolate} {
+    display: none;
+  }
+
+  @media #{$tablet-isolate} {
+    //display: none;
+  }
 }
 
 
