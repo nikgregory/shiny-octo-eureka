@@ -34,6 +34,24 @@ body {
 }
 
 
+// Set display block for html elements.
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+
 // Set a global margin bottom, strip other margins.
 ul,
 ol,

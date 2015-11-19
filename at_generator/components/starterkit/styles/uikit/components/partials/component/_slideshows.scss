@@ -153,6 +153,8 @@ $direction-nav-size: 30px;
   a {
     background-color: transparent;
     color: transparent;
+    border: 0;
+    text-decoration: none;
 
     @include output-rhythm(height, $direction-nav-size);
     @include output-rhythm(margin, -$direction-nav-size 0 0);
@@ -168,6 +170,14 @@ $direction-nav-size: 30px;
     cursor: pointer;
     opacity: 0;
     transition: all 0.3s ease-in-out;
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+      color: transparent;
+      border: 0;
+      text-decoration: none;
+    }
 
     // Use Font Awesome to save loading yet another webfont.
     &:before {

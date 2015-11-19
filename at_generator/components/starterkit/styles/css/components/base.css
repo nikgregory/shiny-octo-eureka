@@ -80,6 +80,22 @@ body {
   box-sizing: border-box;
 }
 
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
 ul,
 ol,
 dd,
@@ -2736,4 +2752,5 @@ article[class*="--unpublished"] {
 #toolbar-administration .toolbar-tray-horizontal a {
   padding-right: 1em;
 }
+
 /*# sourceMappingURL=base.css.map */
