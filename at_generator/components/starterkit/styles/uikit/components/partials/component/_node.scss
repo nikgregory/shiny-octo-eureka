@@ -66,7 +66,7 @@
   @include output-rhythm(margin, $medium 0);
 
   // Author picture is showing.
-  &.node__meta--has-author-picture {
+  &--has-author-picture {
     @include output-rhythm(line-height, 48px);
   }
 

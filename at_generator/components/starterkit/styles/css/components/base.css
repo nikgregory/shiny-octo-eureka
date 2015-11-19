@@ -816,10 +816,12 @@ thead .active img {
 }
 .form-type-radio .option,
 .form-type-checkbox .option {
-  padding: 4px 7px 0 29px;
-  padding: 0.26676rem 0.43162rem 0 1.82838rem;
+  padding: 4px 7px 4px 29px;
+  padding: 0.26676rem 0.43162rem 0.26676rem 1.82838rem;
   margin-left: -30px;
   margin-left: -1.875rem;
+  min-height: 29px;
+  min-height: 1.82838rem;
   min-width: 50%;
   border-style: solid;
   border-width: 1px;
@@ -1109,6 +1111,13 @@ button:hover, button:focus,
   margin: 1rem 0;
 }
 
+li[class*="action--"] {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  margin: 1rem 0;
+}
+
 /* Drop buttons */
 .js .dropbutton-widget {
   border: 1px solid;
@@ -1156,7 +1165,7 @@ button:hover, button:focus,
   background: none;
   box-shadow: none;
 }
-.dropbutton .dropbutton-toggle button:hover, .dropbutton .dropbutton-toggle button:focus, .dropbutton .dropbutton-toggle button:actived {
+.dropbutton .dropbutton-toggle button:hover, .dropbutton .dropbutton-toggle button:focus, .dropbutton .dropbutton-toggle button:active {
   background: none;
   box-shadow: none;
 }
@@ -1195,30 +1204,23 @@ button:hover, button:focus,
   border-radius: 0 0 0 2px;
 }
 
-/**
- * Show buttons as links.
- */
-button.link {
+button.link, button.link:hover, button.link:focus {
+  color: #0066cc;
   background: transparent;
   border: 0;
-  cursor: pointer;
+  box-shadow: none;
+  opacity: 1;
   margin: 0;
   padding: 0;
-  font-size: 1em;
+  cursor: pointer;
+}
+button.tableresponsive-toggle {
+  float: right;
+  overflow: hidden;
 }
 
 label button.link {
   font-weight: bold;
-}
-
-/**
- * Styles for link buttons and action links. TODO.
- */
-li[class*="action--"] {
-  list-style: none;
-  padding: 0;
-  margin: 16px 0;
-  margin: 1rem 0;
 }
 
 /**
@@ -2505,7 +2507,7 @@ table tr.error {
   margin: 16px 0;
   margin: 1rem 0;
 }
-.node__meta.node__meta--has-author-picture {
+.node__meta--has-author-picture {
   line-height: 48px;
   line-height: 3rem;
 }

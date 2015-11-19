@@ -42,8 +42,10 @@
   @include output-rhythm(margin, 0 0 $xxxx-small $xxx-small);
 
   .option {
-    @include output-rhythm(padding, $xxxx-small $xx-small 0 $xx-large);
+    @include output-rhythm(padding, $xxxx-small $xx-small $xxxx-small $xx-large);
     @include output-rhythm(margin-#{$flow-from}, -30px);
+    @include output-rhythm(min-height, $xx-large);
+
     min-width: 50%;
     border-style: $form-border-style;
     border-width: $form-border-width;

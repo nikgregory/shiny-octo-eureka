@@ -127,7 +127,7 @@ html[xmlns] .flexslider .slides {
   -webkit-transition: all 0.3s ease-in-out;
           transition: all 0.3s ease-in-out;
 }
-.flex-direction-nav a:hover, .flex-direction-nav a:active {
+.flex-direction-nav a:hover, .flex-direction-nav a:focus, .flex-direction-nav a:active {
   background-color: transparent;
   color: transparent;
   border: 0;
@@ -267,5 +267,4 @@ html[xmlns] .flexslider .slides {
   opacity: 1;
   cursor: default;
 }
-
 /*# sourceMappingURL=slideshows.css.map */

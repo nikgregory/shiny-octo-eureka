@@ -172,6 +172,7 @@ $direction-nav-size: 30px;
     transition: all 0.3s ease-in-out;
 
     &:hover,
+    &:focus,
     &:active {
       background-color: transparent;
       color: transparent;
