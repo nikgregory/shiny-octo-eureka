@@ -589,7 +589,7 @@ button[disabled]:hover,
 }
 
 #edit-preview {
-  background-color: inherit;
+  background-color: #ffffff;
   color: #0066cc;
 }
 
@@ -825,4 +825,5 @@ body:before {
 .comment {
   border-color: #eeeeee;
 }
+
 /*# sourceMappingURL=color.css.map */

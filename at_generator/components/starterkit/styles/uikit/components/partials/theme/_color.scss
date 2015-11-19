@@ -793,7 +793,7 @@ button,
 
 // Preview buttons should be neutral.
 #edit-preview {
-  background-color: inherit;
+  background-color: $form-background-color;
   color: $button-border-color;
 }
 
