@@ -1,13 +1,13 @@
 /**
  * Basic styles to support the Responsive Tables jQuery feature.
  *  - to enable responsive tables turn on the extension in your
- *    themes appearance settings and apply the class 'is-responsive'
+ *    themes appearance settings and apply the class 'responsive-enabled'
  *    to any tables you want to make responsive.
  ========================================================================== */
 
 // This is a wrapper DIV around the responsive-enabled table, it is added
 // via JS when the Responsive Tables theme extension is enabled and you
-// have added the class "is-responsive" to a table.
+// have added the class "responsive-enabled" to a table.
 .responsive-table {
   position: relative;
   @include output-rhythm(margin, 0 0 $large);
@@ -61,13 +61,20 @@
 
 
 table {
-  // is-responsive is the class you add to tables to make them responsive, after
+  // responsive-enabled is the class you add to tables to make them responsive, after
   // having enabled the Responsive Tables theme extension.
-  &.is-responsive {}
+  &.responsive-enabled {}
 
   // has-overflow is added to the table element via JS if you have the Resposive
-  // Table theme extension enabled, have added the "is-responsive" class to
+  // Table theme extension enabled, have added the "responsive-enabled" class to
   // a table and the tables width overflows the viewport.
   &.has-overflow {}
+}
+
+
+// Drupal core includes a responsive tables feature, we're not using it by default but
+// we can set some styles for core tables by targeting it's selector.
+.responsive-enabled {
+  width: 100%;
 }
 

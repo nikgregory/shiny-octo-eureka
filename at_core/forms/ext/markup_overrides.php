@@ -29,7 +29,7 @@ $form['markup_overrides']['markup_overrides_settings']['responsive-tables']['set
   '#type' => 'checkbox',
   '#title' => t('Enable Responsive Tables'),
   '#default_value' => theme_get_setting('settings.responsive_tables'),
-  '#description' => t('Enable the responsive tables plugin. To use apply the "is-responsive" class to the table element, e.g. <code>@tableexample</code>. In small screens this will hide the overflow and be horizontally scrollable.', array('@tableexample' => '<table class="is-responsive">')),
+  '#description' => t('Enable the responsive tables plugin. To use apply the "responsive-enabled" class to the table element, e.g. <code>@tableexample</code>. In small screens this will hide the overflow and be horizontally scrollable.', array('@tableexample' => '<table class="responsive-enabled">')),
 );
 
 // PNG logo

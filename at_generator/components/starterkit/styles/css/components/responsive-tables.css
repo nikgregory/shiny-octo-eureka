@@ -2,7 +2,7 @@
 /**
  * Basic styles to support the Responsive Tables jQuery feature.
  *  - to enable responsive tables turn on the extension in your
- *    themes appearance settings and apply the class 'is-responsive'
+ *    themes appearance settings and apply the class 'responsive-enabled'
  *    to any tables you want to make responsive.
  ========================================================================== */
 .responsive-table {
@@ -50,5 +50,7 @@
     display: none;
   }
 }
-
+.responsive-enabled {
+  width: 100%;
+}
 /*# sourceMappingURL=responsive-tables.css.map */
