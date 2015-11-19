@@ -1792,7 +1792,7 @@ ul.inline li ol {
  *
  ========================================================================== */
 .marker {
-  display: inline-block;
+  display: inline;
   letter-spacing: 0.025em;
   text-transform: uppercase;
   vertical-align: middle;
@@ -1803,6 +1803,7 @@ ul.inline li ol {
   font-size: 0.75rem;
   line-height: 18px;
   line-height: 1.125rem;
+  font-family: sans-serif;
 }
 
 .marker {
@@ -1824,6 +1825,10 @@ ul.inline li ol {
 
 .hidden {
   display: none !important;
+}
+
+.preview .marker {
+  color: #ffffff;
 }
 
 /**
@@ -2541,6 +2546,78 @@ table tr.error {
 }
 
 /**
+ * Node previews
+ *  - style the preview bar a little better than default.
+ ========================================================================== */
+.node-preview-container {
+  position: fixed;
+  z-index: 499;
+  width: 100%;
+  background: #d1e8f5;
+  background-image: -webkit-linear-gradient(top, #d1e8f5, #d3e8f4);
+  background-image: linear-gradient(to bottom, #d1e8f5, #d3e8f4);
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
+  position: fixed;
+  z-index: 499;
+  width: 100%;
+  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
+}
+.node-preview-container form {
+  max-width: 75em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.node-preview-container form:after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+@media all and (max-width: 45em) {
+  .node-preview-container .form-item-view-mode {
+    display: block !important;
+  }
+}
+
+.node-preview-backlink {
+  float: left;
+  margin-right: 18px;
+  margin-right: 1.13rem;
+}
+@media all and (max-width: 45em) {
+  .node-preview-backlink {
+    float: none;
+    display: block;
+    margin: 0 0 11px;
+    margin: 0 0 0.69838rem;
+  }
+}
+.node-preview-backlink:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  display: inline-block;
+  padding: 0 7px 0 0;
+  padding: 0 0.43162rem 0 0;
+  margin: 0;
+}
+[dir="rtl"] .node-preview-backlink:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.node-preview-form-select {
+  margin: 18px 0;
+  margin: 1.13rem 0;
+  padding: 0 18px;
+  padding: 0 1.13rem;
+}
+.node-preview-form-select .form-select {
+  min-width: 160px;
+  min-width: 10rem;
+}
+
+/**
  * User forms, e.g. login, register and password reset.
  ========================================================================== */
 .user-login-form .form-text {
@@ -2584,10 +2661,6 @@ article[class*="--unpublished"] {
   }
 }
 */
-[class*="preview"] {
-  background-color: #ffffea;
-}
-
 /**
  * Print
  * This aggressively styles print output, you can remove all of it if you want

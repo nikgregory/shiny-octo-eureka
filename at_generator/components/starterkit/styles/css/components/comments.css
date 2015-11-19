@@ -33,22 +33,25 @@
   clear: both;
 }
 .comment__meta {
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
+}
+.comment.has-title .comment__meta {
   margin: 16px 0;
   margin: 1rem 0;
 }
 .comment__meta--has-user-picture {
-  line-height: 48px;
-  line-height: 3rem;
+  line-height: 40px;
+  line-height: 2.5rem;
 }
 .comment__meta .field-type-image {
   float: left;
-  margin: 0 11px 0 0;
-  margin: 0 0.69838rem 0 0;
+  margin: 0;
 }
 .comment__meta .field-type-image img {
   width: auto;
-  height: 48px;
-  height: 3rem;
+  height: 32px;
+  height: 2rem;
 }
 .comment__meta .field-type-image__figure {
   margin: 0;
@@ -63,4 +66,5 @@
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
+
 /*# sourceMappingURL=comments.css.map */

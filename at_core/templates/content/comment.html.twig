@@ -73,6 +73,7 @@
     status != 'published' ? status,
     comment.owner.anonymous ? 'by-anonymous',
     author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+    title_visibility == true ? 'has-title',
     'clearfix',
   ]
 %}
@@ -81,22 +82,23 @@
 
     {% if title %}
       {{ title_prefix }}
-    {% endif %}
-
-    {% if title %}
-      <h3{{ title_attributes.addClass('comment__title') }}>
+      {%
+        set title_classes = [
+          'comment__title',
+          title_visibility == false ? 'visually-hidden',
+        ]
+      %}
+      <h3{{ title_attributes.addClass(title_classes) }}>
         {{ title }}
-      {% if status != 'published' %}
-        <span class="comment__status comment--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
-          <span class="visually-hidden">{% trans %}This comment is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
-        </span>
-      {% endif %}
-      {#
-      Hide the "new" indicator by default, let a piece of JavaScript ask
-      the server which comments are new for the user. Rendering the final
-      "new" indicator here would break the render cache.
-      #}
-      <span class="comment__new marker marker--success hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></span>
+        {% if status != 'published' %}
+            <span class="comment__status comment--unpublished marker marker--warning" aria-label="Status message" role="contentinfo"><span class="visually-hidden">{% trans %}This comment is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}</span>
+        {% endif %}
+        {#
+        Hide the "new" indicator by default, let a piece of JavaScript ask
+        the server which comments are new for the user. Rendering the final
+        "new" indicator here would break the render cache.
+        #}
+        <span class="comment__new marker marker--success hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></span>
       </h3>
       {{ title_suffix }}
     {% endif %}

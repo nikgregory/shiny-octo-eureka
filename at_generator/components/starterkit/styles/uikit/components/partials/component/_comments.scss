@@ -37,21 +37,25 @@
 
   // Comment author picture, name and date details.
   &__meta {
-    @include output-rhythm(margin, $medium 0);
+    @include output-rhythm(margin, 0 0 $medium 0);
+
+    .comment.has-title & {
+      @include output-rhythm(margin, $medium 0);
+    }
 
     // User picture is showing.
     &--has-user-picture {
-      @include output-rhythm(line-height, 48px);
+      @include output-rhythm(line-height, $medium * 2.5);
     }
 
     // User picture.
     .field-type-image {
       float: #{$flow-from};
-      @include output-rhythm(margin, 0 $small 0 0);
+      margin: 0;
 
       img {
         width: auto;
-        @include output-rhythm(height, 48px);
+        @include output-rhythm(height, $medium * 2);
       }
     }
 

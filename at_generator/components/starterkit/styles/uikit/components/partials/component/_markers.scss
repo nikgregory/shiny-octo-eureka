@@ -5,13 +5,16 @@
  ========================================================================== */
 
 .marker {
-  display: inline-block;
+  display: inline;
   letter-spacing: 0.025em;
   text-transform: uppercase;
   vertical-align: middle;
   border-radius: $border-radius;
+
   @include output-rhythm(padding, 1px 3px);
   @include adjust-font-size-to($medium*0.75);
+
+  font-family: $base-font-family;
 
   &--info {}
   &--success {}
@@ -43,4 +46,11 @@
 // display properties on the element.
 .hidden {
   display: none !important;
+}
+
+// Override form markers.
+.preview {
+  .marker {
+    color: $marker-color;
+  }
 }
