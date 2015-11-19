@@ -127,7 +127,7 @@ class ThemeGeneratorSubmit {
           unlink("$target/$tool");
         }
         // remove all the map files from the css dir "$target/styles/uikit"
-        array_map('unlink', glob("$target/styles/css/components/*.map"));
+        //array_map('unlink', glob("$target/styles/css/components/*.map"));
       }
 
       // Color
