@@ -271,15 +271,17 @@ class ThemeGeneratorSubmit {
 
     // Version
     $version = $version ?: '8.0.x';
-    $theme_info_data['version']     = $version;
+    $theme_info_data['version'] = $version;
 
     // Regions
     foreach($theme_info_data['regions'] as $region_key => $region_name) {
       $theme_info_data['regions'][$region_key] = "$region_name";
     }
 
-    // Unset hidden
+    // Unset stuff we don't want or need
     unset($theme_info_data['hidden']);
+    unset($theme_info_data['project']);
+    unset($theme_info_data['datestamp']);
 
     // Unset stylesheets-remove
     //if ($subtheme_type === 'skin') {
