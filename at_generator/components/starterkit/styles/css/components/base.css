@@ -1662,17 +1662,21 @@ ul.inline li ol {
   background: #444;
   border-radius: 0 0 2px 2px;
   opacity: 0;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-  -webkit-transition: all 0.15s ease-in;
-          transition: all 0.15s ease-in;
+  -webkit-transition: opacity 0.15s ease-in;
+          transition: opacity 0.15s ease-in;
   z-index: 50;
   left: 50%;
+  display: block;
+  text-align: center;
   padding: 6px 16px;
   padding: 0.38197rem 1rem;
 }
-.skip-link:visited, .skip-link:active {
+@media all and (max-width: 45em) {
+  .skip-link {
+    left: 10%;
+  }
+}
+.skip-link:visited, .skip-link:active, .skip-link:focus {
   color: #fff;
 }
 .skip-link:focus {
@@ -1681,6 +1685,13 @@ ul.inline li ol {
 }
 .skip-link.visually-hidden.focusable:focus {
   position: absolute !important;
+  width: 180px;
+  width: 11.25rem;
+}
+@media all and (max-width: 45em) {
+  .skip-link.visually-hidden.focusable:focus {
+    width: 80%;
+  }
 }
 
 /**
@@ -2550,17 +2561,17 @@ table tr.error {
  *  - style the preview bar a little better than default.
  ========================================================================== */
 .node-preview-container {
-  position: fixed;
+  position: relative;
   z-index: 499;
   width: 100%;
+  min-width: 100%;
   background: #d1e8f5;
   background-image: -webkit-linear-gradient(top, #d1e8f5, #d3e8f4);
   background-image: linear-gradient(to bottom, #d1e8f5, #d3e8f4);
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
-  position: fixed;
-  z-index: 499;
-  width: 100%;
   font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  padding: 18px 0;
+  padding: 1.13rem 0;
 }
 .node-preview-container form {
   max-width: 75em;
