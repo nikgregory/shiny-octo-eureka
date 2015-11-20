@@ -1,4 +1,5 @@
 <?php
+
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Theme\ThemeSettings;
@@ -294,7 +295,6 @@ function at_core_page_attachments_alter(array &$page) {
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
- * TODO: keep on on core regarding the alter hook and suggestions - https://drupal.org/node/2100775
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
@@ -456,7 +456,7 @@ function at_core_preprocess_html(&$variables) {
       }
     }
 
-    // shortcodes classes.
+    // Shortcodes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_body'])) {
         $shortcodes = Tags::explode($config['page_classes_body']);
@@ -469,7 +469,6 @@ function at_core_preprocess_html(&$variables) {
 
   // Add mobile classes for global theming based on mobile or tablet devices.
   $detect = new Mobile_Detect;
-  //kpr($detect);
   $isMobile = $detect->isMobile();
   $isTablet = $detect->isTablet();
   $mobile_detect_settings = array();
@@ -531,10 +530,6 @@ function at_core_preprocess_page(&$variables) {
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    // Markup overrides.
-    //if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {}
-
-    // shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
       if (!empty($config['page_classes_page'])) {
         $shortcodes = Tags::explode($config['page_classes_page']);
@@ -548,20 +543,16 @@ function at_core_preprocess_page(&$variables) {
   // Layout Attributes
   // Add dynamic classes to each region wrapper (.regions).
   // This adds two classes to every wrapper:
-  //  - "arc--[n]" describes the number of active regions in this row, e.g. "arc-2".
-  //  - "hr--[n-n etc]" describes the active regions by source order, so if there are
-  //    3 regions and the first and third regions are active the class is "hr--1-3".
+  //  - "arc--[n]" active region count in this row, e.g. "arc--2".
+  //  - "hr--[n-n]" has regions, by source order, e.g. "hr--1-3".
   $regions = system_region_list($theme, REGIONS_VISIBLE);
   $active_regions = array();
 
-  // This is bad, Drupal can populate the region but not print anything, perhaps
-  // due to user permissions, such as the Tools and Search blocks on a standard install.
-  // In effect this breaks the layout, or at the very least disturbs the layout by giving
-  // false positives, which results in the wrong layout classes being generated.
+  // Render early because themes cannot check renderable arrays to determine visibility.
   // This is a critical issue in D8 (and D7 also): https://www.drupal.org/node/953034
+  // Early rendering is the only way I have found to reliably set the layout.
   foreach ($regions as $region_name => $region_label) {
     if (!empty($variables['page'][$region_name])) {
-      // Call drupal_render() to determine the regions visibility.
       if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
         $active_regions[] = $region_name;
       }
@@ -580,8 +571,6 @@ function at_core_preprocess_page(&$variables) {
       drupal_set_message(t('uh oh... check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
     }
     else {
-      // I like this syntax better than Drupals usual habit of += shorthand, mainly because it's
-      // very obvious at a glance what we are doing here.
       $variables = $variables + $row_attributes;
     }
   }
@@ -595,7 +584,7 @@ function at_core_preprocess_region(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // This could be expensive to call so many times on the page.
+  // This tells a region what row they are in, could be expensive?
   $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
   $region_row = $layout_loaded->regionAttributes($variables['region']);
   if (!empty($region_row)) {
