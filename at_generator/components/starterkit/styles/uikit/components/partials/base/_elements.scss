@@ -154,7 +154,7 @@ svg {
 
 // Global caption style.
 figcaption {
-  @include adjust-font-size-to($small);
+  @include adjust-font-size-to($medium * 0.75);
   @include output-rhythm(padding, $xx-small 0);
 }
 

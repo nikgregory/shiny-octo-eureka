@@ -222,8 +222,8 @@ svg {
 }
 
 figcaption {
-  font-size: 11px;
-  font-size: 0.69838rem;
+  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 18px;
   line-height: 1.125rem;
   padding: 7px 0;
@@ -2334,6 +2334,9 @@ table tr.error {
 .field-type-image figure {
   margin-bottom: 16px;
   margin-bottom: 1rem;
+}
+.field-type-image__container {
+  display: block;
 }
 .field-type-image .align-none,
 .field-type-image .align-left {

@@ -15,6 +15,10 @@
     @include output-rhythm(margin-bottom, $medium);
   }
 
+  &__container {
+    display: block;
+  }
+
   // Image Alignment Theme Settings
   // - settings are applied using the Image extension in theme settings, where you can
   //   set image alignment and captions per node type and view mode.

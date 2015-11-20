@@ -65,10 +65,12 @@
     {% else %}
       <figure{{ item.attributes.addClass('field-type-image__figure', 'image-count-' ~ (delta + 1), image_align) }}>
     {% endif %}
-      {{ item.content }}
-      {% if item.caption.show == true %}
-        <figcaption class="field-type-image__figcaption" property="schema:description">{{ item.caption.title }}</figcaption>
-      {% endif %}
+      <span class="field-type-image__container">
+        {{ item.content }}
+        {% if item.caption.show == true %}
+          <figcaption class="field-type-image__figcaption" property="schema:description">{{ item.caption.title }}</figcaption>
+        {% endif %}
+      </span>
     </figure>
   {% endfor %}
 </div>
