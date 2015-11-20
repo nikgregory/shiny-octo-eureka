@@ -1,0 +1,7 @@
+/**
+ * Quick Edit tweaks
+ ========================================================================== */
+
+.quickedit-button {
+  @include output-rhythm(padding, 0 $x-small);
+}

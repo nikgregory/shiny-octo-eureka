@@ -84,6 +84,13 @@ maintenance_page:
     theme:
       styles/css/components/maintenance_page.css: {}
 
+# Quick Edit
+quickedit:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/quickedit.css: {}
+
 # Form Layout Widget CSS, do not use this in the front end, its only
 # for the layout theme settings.
 layout_settings:

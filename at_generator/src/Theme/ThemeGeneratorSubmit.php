@@ -287,6 +287,7 @@ class ThemeGeneratorSubmit {
     //}
 
     // Libraries
+    $theme_info_data['libraries-extend']['quickedit/quickedit'] = array($machine_name . '/quickedit');
     $theme_info_data['libraries-override'] = $theme_info_data['libraries-override'];
 
     // Save the info file

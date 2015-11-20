@@ -39,6 +39,9 @@ ckeditor_stylesheets:
   - styles/css/components/base.css
 stylesheets-remove:
   - @stable/css/node/node.preview.css
+libraries-extend:
+  quickedit/quickedit:
+    - MACHINENAME/quickedit
 libraries-override:
   layout_plugin/ds_2col:
     css:
