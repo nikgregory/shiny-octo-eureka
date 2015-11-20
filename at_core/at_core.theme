@@ -243,6 +243,8 @@ function at_core_page_attachments_alter(array &$page) {
           'selector',
         );
 
+        $slider_settings = array();
+
         for ($i = 0; $i < $config['slideshow_count']; $i++) {
 
           // Set a key
@@ -279,9 +281,11 @@ function at_core_page_attachments_alter(array &$page) {
         }
 
         // Attach JS settings.
-        $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
-        $page['#attached']['library'][] = 'at_core/at.slideshow';
-        $page['#attached']['library'][] = "$theme/slideshow_styles";
+        if (!empty($slider_settings)) {
+          $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
+          $page['#attached']['library'][] = 'at_core/at.slideshow';
+          $page['#attached']['library'][] = "$theme/slideshow_styles";
+        }
       }
     }
   }

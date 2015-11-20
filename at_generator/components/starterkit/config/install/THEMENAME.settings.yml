@@ -2,12 +2,14 @@ settings:
   layouts_enable: 1
   enable_extensions: 1
   enable_responsive_menus: 1
-  enable_fonts: 0
-  enable_titles: 0
   enable_images: 1
   enable_touch_icons: 1
+  enable_fonts: 0
+  enable_titles: 0
   enable_libraries: 0
-  enable_classitis: 0
+  enable_mobile_blocks: 0
+  enable_slideshows: 0
+  enable_shortcodes: 0
   enable_custom_css: 0
   enable_markup_overrides: 0
   enable_devel: 0
@@ -217,57 +219,39 @@ settings:
   image_count_page_node_full: 0
   image_count_page_node_print: 0
   image_count_page_node_teaser: 1
-  page_classes_body: ''
-  page_classes_page: ''
-  page_classes_row_messages: ''
-  page_classes_row_leaderboard: ''
-  page_classes_row_header: ''
-  page_classes_row_navbar: ''
-  page_classes_row_highlighted: ''
-  page_classes_row_features: ''
-  page_classes_row_main: ''
-  page_classes_row_subfeatures: ''
-  page_classes_row_footer: ''
-  page_classes_region_messages: ''
-  page_classes_region_leaderboard: ''
-  page_classes_region_header_first: ''
-  page_classes_region_header_second: ''
-  page_classes_region_navbar: ''
-  page_classes_region_highlighted: ''
-  page_classes_region_features_first: ''
-  page_classes_region_features_second: ''
-  page_classes_region_features_third: ''
-  page_classes_region_content: ''
-  page_classes_region_sidebar_first: ''
-  page_classes_region_sidebar_second: ''
-  page_classes_region_subfeatures_first: ''
-  page_classes_region_subfeatures_second: ''
-  page_classes_region_subfeatures_third: ''
-  page_classes_region_subfeatures_fourth: ''
-  page_classes_region_footer: ''
-  block_classes_aggregatorfeed: ''
-  block_classes_booknavigation: ''
-  block_classes_mainnavigation: ''
-  block_classes_THEMENAME_branding: ''
-  block_classes_THEMENAME_breadcrumbs: ''
-  block_classes_THEMENAME_content: ''
-  block_classes_THEMENAME_footer: ''
-  block_classes_THEMENAME_help: ''
-  block_classes_THEMENAME_login: ''
-  block_classes_THEMENAME_main_menu: ''
-  block_classes_THEMENAME_search: ''
-  block_classes_THEMENAME_tools: ''
-  block_classes_THEMENAME_messages: ''
-  nodetype_classes_article: ''
-  nodetype_classes_book: ''
-  nodetype_classes_forum: ''
-  nodetype_classes_page: ''
-  slideshow_count: ''
+  slideshow_count: '1'
+  slideshow_0_enable: 1
+  slideshow_0_animation: slide
+  slideshow_0_direction: horizontal
+  slideshow_0_smoothheight: 0
+  slideshow_0_slideshowspeed: '4000'
+  slideshow_0_animationspeed: '600'
+  slideshow_0_controlnav: 1
+  slideshow_0_directionnav: 1
+  slideshow_0_as_carousel: 0
+  slideshow_0_itemwidth: '300'
+  slideshow_0_itemmargin: '0'
+  slideshow_0_minitems: '2'
+  slideshow_0_maxitems: '4'
+  slideshow_0_move: '1'
+  slideshow_0_pauseonaction: 1
+  slideshow_0_pauseonhover: 0
+  slideshow_0_animationloop: 1
+  slideshow_0_reverse: 0
+  slideshow_0_randomize: 0
+  slideshow_0_autostart: 1
+  slideshow_0_initdelay: ''
+  slideshow_0_easing: swing
+  slideshow_0_usecss: 1
+  slideshow_0_touch: 1
+  slideshow_0_video: 0
+  slideshow_0_prevtext: Previous
+  slideshow_0_nexttext: Next
+  slideshow_0_slideshow_class: .THEMENAME-slideshow-0
+  slideshow_0_selector: '.slides > li'
   custom_css: '/* Custom CSS */'
-  png_logo: 0
   breadcrumb_label: 0
   breadcrumb_home: 0
-  breadcrumb_title: 0
   breadcrumb_separator: ''
   login_block_placeholder_labels: 0
   horizontal_login_block: 0
@@ -282,32 +266,6 @@ settings:
   devel_color_regions: 0
   nuke_toolbar: 0
   enable_mobile_blocks: 0
-  page_classes_row_wrapper_leaderboard: ''
-  page_classes_row_container_leaderboard: ''
-  page_classes_row_wrapper_header: ''
-  page_classes_row_container_header: ''
-  page_classes_row_wrapper_navbar: ''
-  page_classes_row_container_navbar: ''
-  page_classes_row_wrapper_highlighted: ''
-  page_classes_row_container_highlighted: ''
-  page_classes_row_wrapper_features: ''
-  page_classes_row_container_features: ''
-  page_classes_row_wrapper_content_prefix: ''
-  page_classes_row_container_content_prefix: ''
-  page_classes_row_wrapper_main: ''
-  page_classes_row_container_main: ''
-  page_classes_row_wrapper_content_suffix: ''
-  page_classes_row_container_content_suffix: ''
-  page_classes_row_wrapper_subfeatures: ''
-  page_classes_row_container_subfeatures: ''
-  page_classes_row_wrapper_footer: ''
-  page_classes_row_container_footer: ''
-  page_classes_region_content_prefix: ''
-  page_classes_region_content_suffix: ''
-  block_classes_THEMENAME_account_menu: ''
-  block_classes_THEMENAME_local_actions: ''
-  block_classes_THEMENAME_local_tasks: ''
-  block_classes_THEMENAME_page_title: ''
   shortcodes_textalign_enable: 0
   shortcodes_position_enable: 0
   shortcodes_layout_enable: 0

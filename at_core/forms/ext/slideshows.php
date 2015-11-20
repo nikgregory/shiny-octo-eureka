@@ -44,10 +44,21 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
       '#title' => t('Options: @slidername', array('@slidername' => $slideshow_class)),
     );
 
+    // Enable/disable toggle.
+    $form['slideshows']['slideshow_' . $i]['slideshow_options']['settings_slideshow_' . $i . '_enable'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable this slideshow'),
+      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_enable'),
+      '#description' => t('Only enable slideshows you are using.'),
+    );
+
     // Fieldset to globally disabled or enable form elements
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper'] = array(
       '#type' => 'fieldset',
       '#title' => t('Settings for @slidername', array('@slidername' => $slideshow_class)),
+      '#states' => array(
+        'visible' => array('input[name="settings_slideshow_' . $i . '_enable"]' => array('checked' => TRUE)),
+      ),
     );
 
     /* BASIC */
@@ -375,11 +386,11 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     }
 
     // Class and markup generator TODO: markup generator
-    $form['slideshows']['slideshow_' . $i]['slideshow_options']['slideshow_markup'] = array(
+    $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['slideshow_markup'] = array(
       '#type' => 'textarea',
       '#title' => t('Generated markup for this slideshow (with working examples)'),
       '#default_value' =>
-'<div class="flexslider loading ' . $this_slideshow_class . '">
+'<div class="flexslider loading ' . ltrim($this_slideshow_class, '.') . '">
   <ul class="slides">
     <li>
       <img src="' . base_path() . $subtheme_path  . '/images/slides/test-slide-1.png" alt="Test slide one" />
