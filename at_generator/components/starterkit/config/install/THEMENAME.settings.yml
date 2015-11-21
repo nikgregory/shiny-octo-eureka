@@ -68,7 +68,7 @@ settings:
   page_wide_subfeatures: fourcol-3-3-3-3
   page_wide_footer: ''
   enable_slideshows: 0
-  font_websafe: none
+  font_websafe: '-- none --'
   font_google: ''
   font_typekit: ''
   font_customstack: ''
