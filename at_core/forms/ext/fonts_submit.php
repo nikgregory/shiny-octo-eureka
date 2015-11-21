@@ -58,24 +58,26 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       $fonts[$font_key]['lineheight'] = 'line-height:' . ceil($px_size * $line_height_multiplier) . 'px; line-height:' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
-    // Websafe
-    if ($values['settings_font_' . $font_key] == 'websafe') {
-      $fonts[$font_key]['family'] = 'font-family:' . $websafe_fonts[$values['settings_font_websafe']] . ';';
-    }
+    if (isset($values['settings_font_' . $font_key]) {
+      // Websafe
+      if ($values['settings_font_' . $font_key] == 'websafe') {
+        $fonts[$font_key]['family'] = 'font-family:' . $websafe_fonts[$values['settings_font_websafe']] . ';';
+      }
 
-    // Customstack
-    if ($values['settings_font_' . $font_key] == 'customstack') {
-      $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_customstack'] . ';';
-    }
+      // Customstack
+      if ($values['settings_font_' . $font_key] == 'customstack') {
+        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_customstack'] . ';';
+      }
 
-    // Google
-    if ($values['settings_font_' . $font_key] == 'google') {
-      $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_google_' . $font_key] . ';';
-    }
+      // Google
+      if ($values['settings_font_' . $font_key] == 'google') {
+        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_google_' . $font_key] . ';';
+      }
 
-    // Typekit
-    if ($values['settings_font_' . $font_key] == 'typekit') {
-      $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_typekit_' . $font_key] . ';';
+      // Typekit
+      if ($values['settings_font_' . $font_key] == 'typekit') {
+        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_typekit_' . $font_key] . ';';
+      }
     }
   }
 
