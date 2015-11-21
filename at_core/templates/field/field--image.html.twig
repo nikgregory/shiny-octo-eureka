@@ -53,24 +53,22 @@
 {% else %}
   {% set count_class = 'has-single' %}
 {% endif %}
-
 <div{{ attributes.addClass(classes, count_class) }}>
   {% if not label_hidden %}
     <h3{{ title_attributes.addClass(title_classes, image_align) }}>{{ label }}</h3>
   {% endif %}
-
   {% for delta, item in items %}
     {% if item.caption.show == true %}
       <figure{{ item.attributes.addClass('field-type-image__figure', 'image-count-' ~ (delta + 1), 'caption', 'caption-img', image_align) }} role="group">
     {% else %}
       <figure{{ item.attributes.addClass('field-type-image__figure', 'image-count-' ~ (delta + 1), image_align) }}>
     {% endif %}
-      <span class="field-type-image__container">
+      <div class="field-type-image__item">
         {{ item.content }}
         {% if item.caption.show == true %}
           <figcaption class="field-type-image__figcaption" property="schema:description">{{ item.caption.title }}</figcaption>
         {% endif %}
-      </span>
+      </div>
     </figure>
   {% endfor %}
 </div>
