@@ -19,7 +19,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
 
   if ($values['settings_enable_extensions'] === 1) {
 
-    // Require submit handlers and helper functions for extensions. TODO - convert to classes and methods?
+    // Require submit handlers and helper functions for extensions.
     if ((isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) ||
         (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1)) {
       require_once($at_core_path . '/forms/ext/fonts.inc');
@@ -66,14 +66,15 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     }
   }
 
-  // Flush all caches, this is the only 100% reliable way to make sure all settings are applied.
-  drupal_flush_all_caches();
+  // Flush all caches, this is the only 100% reliable way to make sure all
+  // settings are applied.
+  //drupal_flush_all_caches();
 
   // Manage settings and configuration.
-  // Must get mutable config otherwise bad things happen.
+  set_time_limit(60);
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsConvertToConfig($values, $config);
 
-  drupal_set_message(t('Extensions configuration saved. Cache cleared.'), 'status');
+  drupal_set_message(t('Extensions configuration saved. If your settings have not taken effect, clear the cache.'), 'status');
 }
