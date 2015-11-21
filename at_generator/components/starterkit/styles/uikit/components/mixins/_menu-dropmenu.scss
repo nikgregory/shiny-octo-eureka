@@ -58,7 +58,7 @@
 
           ul {
             @include visually-hidden;
-            transition: $transition_global;
+            transition: $global-transition;
 
             li {
               min-width: $item-width;

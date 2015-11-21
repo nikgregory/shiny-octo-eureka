@@ -29,7 +29,7 @@
       display: none;
       clear: both;
       opacity: 0.001;
-      transition: $transition_global;
+      transition: $global-transition;
 
       .menu a {
         @include output-rhythm(margin-bottom, 3px);

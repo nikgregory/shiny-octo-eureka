@@ -31,7 +31,7 @@ input[type="week"] {
   box-sizing: border-box;
   border-radius: $form-border-radius;
   border: $form-border-width $form-border-style;
-  transition: $transition_global;
+  transition: $global-transition;
 
   &:focus {
     outline: 0;

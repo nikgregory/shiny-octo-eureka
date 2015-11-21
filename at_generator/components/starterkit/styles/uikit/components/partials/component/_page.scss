@@ -127,7 +127,7 @@
 //  - .l-r is the global selector for all regions, each region also includes
 //    a region-name selector, e.g. .l-r__sidebar-first {}
 .l-r {
-  transition: $transition_global;
+  transition: $global-transition;
   @include clearfix-micro;
 }
 

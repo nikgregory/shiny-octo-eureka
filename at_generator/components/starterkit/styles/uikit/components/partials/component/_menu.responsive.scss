@@ -139,7 +139,7 @@
   }
 
   a {
-    transition: $transition_global;
+    transition: $global-transition;
     margin: 0;
     border: 0;
 
@@ -230,7 +230,7 @@
 
   > .page,
   .rm-block__content {
-    transition: $transition_global;
+    transition: $global-transition;
   }
 }
 

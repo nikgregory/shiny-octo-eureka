@@ -14,7 +14,7 @@
   .ms-offcanvas {
 
     > .page {
-      transition: $transition_global;
+      transition: $global-transition;
     }
 
     .rm-toggle {
@@ -32,7 +32,7 @@
       opacity: .001;
       #{$oc-position}: 0;
       transform: $transform_block;
-      transition: $transition_global;
+      transition: $global-transition;
     }
 
     // Menu is open.
