@@ -37,7 +37,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
     // Get the selectors for each element.
     $fonts[$font_key]['selectors'] = $font_values['selector'];
 
-    // Custom selectors, reset the selectors variable if we have custom selectors.
+    // Reset the selectors variable if we have custom selectors.
     if ($font_key == 'custom_selectors' && !empty($values['settings_font_custom_selectors']) && !empty($values['settings_custom_selectors'])) {
       $fonts[$font_key]['selectors'] = $values['settings_custom_selectors']; // ? $values['settings_custom_selectors'] : 'ruby ruby'
     }
@@ -58,10 +58,12 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       $fonts[$font_key]['lineheight'] = 'line-height:' . ceil($px_size * $line_height_multiplier) . 'px; line-height:' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
-    if (isset($values['settings_font_' . $font_key]) {
+    if (isset($values['settings_font_' . $font_key])) {
       // Websafe
       if ($values['settings_font_' . $font_key] == 'websafe') {
-        $fonts[$font_key]['family'] = 'font-family:' . $websafe_fonts[$values['settings_font_websafe']] . ';';
+        if ($websafe_fonts[$values['settings_font_websafe']] != '-- none --') {
+          $fonts[$font_key]['family'] = 'font-family:' . $websafe_fonts[$values['settings_font_websafe']] . ';';
+        }
       }
 
       // Customstack
@@ -108,8 +110,6 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   }
 
   $output = $output ? Xss::filter($output) : '/** No fonts styles set **/';
-
-  //$file_name = $theme . '.fonts.css';
 
   $file_name = 'fonts.css';
   $filepath = "$generated_files_path/$file_name";
