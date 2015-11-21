@@ -1,23 +1,23 @@
 <?php
 
-use Drupal\Core\Template\Attribute;
-use Drupal\Core\Language\Language;
-use Drupal\Core\Theme\ThemeSettings;
 use Drupal\Core\Url;
+use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Asset\CssOptimizer;
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
-use Drupal\node\NodeInterface;
-use Drupal\user\UserInterface;
-use Drupal\image\Entity\ImageStyle;
 
 use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Library\SystemLibraries;
-use Drupal\at_core\Library\ThemeLibraries;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
+
+//use Drupal\Core\Language\Language;
+//use Drupal\Core\Theme\ThemeSettings;
+//use Drupal\Core\Asset\CssOptimizer;
+//use Drupal\comment\CommentInterface;
+//use Drupal\node\NodeInterface;
+//use Drupal\user\UserInterface;
+//use Drupal\image\Entity\ImageStyle;
 
 require_once __DIR__ . '/vendor/Mobile_Detect/Mobile_Detect.php';
 
@@ -56,10 +56,10 @@ function at_core_page_attachments_alter(array &$page) {
   $page['#attached']['library'][] = 'at_core/at.settings';
 
   // Attach module dependant libraries.
-  // These libraries are declared in your themeName.libraries.yml
-  // and we only load if the module is installed. Unlike core
-  // these files will load on every page, so when CSS aggregation
-  // is on there will only be one CSS aggregate for the theme.
+  // These libraries are declared in your themeName.libraries.yml and we only
+  // load if the module is installed. Unlike core these files will load on every
+  // page, so when CSS aggregation is on there will only be one CSS aggregate
+  // for the theme.
   $module_libraries = array(
     'aggregator',
     'book',
@@ -306,25 +306,23 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   }
 
   // Show template suggestions.
-  if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
-    if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
-      if ($suggestions) {
-        foreach ($suggestions as $suggestion_name) {
-
-          if ($suggestion_name == 'page__') {
-            $suggestion_name = str_replace('_', '', $suggestion_name);
+  if (\Drupal::currentUser()->hasPermission('administer themes')) {
+    if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
+      if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
+        if ($suggestions) {
+          foreach ($suggestions as $suggestion_name) {
+            if ($suggestion_name == 'page__') {
+              $suggestion_name = str_replace('_', '', $suggestion_name);
+            }
+            $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
           }
-
-          $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
+          $these_suggestions = array(
+            '#theme' => 'item_list',
+            '#items' => $formatted_suggestions,
+          );
+          $saved_formatted_suggestions = \Drupal::service('renderer')->render($these_suggestions);
+          drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('@these_suggestions' => $saved_formatted_suggestions)), 'status');
         }
-
-        $these_suggestions = array(
-          '#theme' => 'item_list',
-          '#items' => $formatted_suggestions,
-        );
-        $saved_formatted_suggestions = drupal_render($these_suggestions);
-
-        drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('@these_suggestions' => $saved_formatted_suggestions)), 'status');
       }
     }
   }
@@ -363,8 +361,11 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     case 'search_block_form':
       $form['keys']['#size'] = '';
-      $form['keys']['#attributes']['results'] = 3;
-      $form['keys']['#attributes']['autosave'] = $theme . '-search-results-form-submissions';
+      // This is cool for browsers that support it, but it's hard to theme, really it
+      // needs the modernizr test "input[search] search event" so we can theme webkit
+      // on Mac without messing with other browsers.
+      //$form['keys']['#attributes']['results'] = 5;
+      //$form['keys']['#attributes']['autosave'] = $theme . '-search-results-form-submissions';
       break;
 
     case 'search_form':
@@ -389,8 +390,9 @@ function at_core_preprocess_html(&$variables) {
   // Common paths
   $path_to_theme = $variables['directory'];
 
-  // Add theme variables, we use these to set a class and provide a very easy way for themers to link
-  // to files in the theme, such as background images or other files.
+  // Add theme variables, we use these to set a class and provide a very easy
+  // way for themers to link to files in the theme, such as background images
+  // or other files.
   $variables['theme']['name'] = Html::escape($theme);
   $variables['theme']['path'] = $path_to_theme;
 
@@ -642,7 +644,7 @@ function at_core_preprocess_node(&$variables) {
     $variables['submitted_attributes'] = new Attribute(array('class' => array()));
     $variables['submitted_attributes']['class'][] = 'node__submitted';
 
-    // add a class if author picture is printing.
+    // Add a class if author picture is printing.
     // TODO - does this break the entity render cache?
     if ($author_picture = \Drupal::service('renderer')->render($variables['author_picture'])) {
       // Does this fails if twig debugging is on. TODO ?
@@ -668,7 +670,7 @@ function at_core_preprocess_comment(&$variables) {
   $variables['submitted_attributes'] = new Attribute(array('class' => array()));
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
-  // add a class if user picture is printing.
+  // Add a class if user picture is printing. Render early.
   if ($user_picture = \Drupal::service('renderer')->render($variables['user_picture'])) {
     // Does this fails if twig debugging is on. TODO ?
     if (!empty($user_picture)) {
@@ -676,7 +678,18 @@ function at_core_preprocess_comment(&$variables) {
     }
   }
 
+  // Use permalink URI as the title link.
+  $comment = $variables['elements']['#comment'];
+  if (!isset($comment->in_preview)) {
+    $uri = $comment->permalink();
+    $attributes = $uri->getOption('attributes') ?: array();
+    $attributes += array('class' => array('permalink'), 'rel' => 'bookmark');
+    $uri->setOption('attributes', $attributes);
+    $variables['title'] = \Drupal::l($comment->getSubject(), $uri);
+  }
+
   // Hide comment titles.
+  $variables['title_visibility'] = TRUE;
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
       if (isset($config['comments_hide_title']) && $config['comments_hide_title'] === 1) {
@@ -766,7 +779,8 @@ function at_core_preprocess_field__image(&$variables) {
       $node_type = $variables['element']['#bundle'];
       $view_mode = $variables['element']['#view_mode'];
 
-      // Reset items array to first item only. This causes only the first image to be shown, e.g. in teaser view mode.
+      // Reset items array to first item only. This causes only the first image
+      // to be shown, e.g. in teaser view mode.
       if (isset($config['image_count_' . $node_type . '_' . $entity_type . '_' . $view_mode]) && $config['image_count_' . $node_type . '_' . $entity_type . '_' . $view_mode] === 1) {
         $item = reset($variables['items']);
         $variables['items'] = array($item);
@@ -895,7 +909,7 @@ function at_core_preprocess_forums(&$variables) {
     }
   }
 
-  // Add BEM classes to row items, to match the forum-list.html.twig BEM classes.
+  // Add BEM classes to row items to match the forum-list.html.twig BEM classes.
   if (isset($variables['topics']['#rows'])) {
     foreach ($variables['topics']['#rows'] as $row_key => $row_values) {
       foreach ($row_values as $row_values_key => $row_values_value) {
@@ -906,7 +920,6 @@ function at_core_preprocess_forums(&$variables) {
       }
     }
   }
-
 }
 
 
@@ -917,3 +930,11 @@ function at_core_preprocess_maintenance_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $variables['#attached']['library'][] = $theme . '/maintenance_page';
 }
+
+
+/**
+ * Implements hook_preprocess_HOOK() for item-list.html.twig.
+ */
+//function at_core_preprocess_item_list(&$variables) {
+//  kpr($variables);
+//}
