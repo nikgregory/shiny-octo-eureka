@@ -7,7 +7,6 @@
 .admin-theme--seven#system-theme-settings .vertical-tabs, .admin-theme--seven#system-theme-settings .form-type-vertical-tabs {
   margin: 0;
   padding: 0;
-  clear: both;
 }
 /* line 22, ../sass/_appearance.global.scss */
 .admin-theme--seven#system-theme-settings .form-actions {
