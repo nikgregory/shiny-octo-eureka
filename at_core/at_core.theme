@@ -339,6 +339,16 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
 
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ */
+function at_core_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  if ($variables['element']['#form_id'] == 'search_block_form') {
+    $suggestions[] = 'form__search_block_form';
+  }
+}
+
+
+/**
  * Implements hook_form_alter().
  */
 function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -354,6 +364,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
             $form['name']['#title_display'] = 'invisible';
             $form['pass']['#title_display'] = 'invisible';
+            $form['#attributes']['class'][] = 'has-placeholders';
           }
         }
       }
@@ -361,6 +372,25 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     case 'search_block_form':
       $form['keys']['#size'] = '';
+      if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+        if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
+          if (isset($config['search_block_hide_submit']) && $config['search_block_hide_submit'] === 1) {
+            $form['actions']['#attributes']['class'][] = 'visually-hidden';
+            $form['#attributes']['class'][] = 'submit-is-hidden';
+          }
+          else {
+            $form['#attributes']['class'][] = 'submit-is-visible';
+          }
+          if (isset($config['search_block_placeholder_text']) && !empty($config['search_block_hide_submit'])) {
+            $form['keys']['#attributes']['placeholder'] = $config['search_block_placeholder_text'];
+            $form['keys']['#attributes']['class'][] = 'has-attribute-placeholder';
+            $form['#attributes']['class'][] = 'has-placeholder';
+          }
+        }
+      }
+
+      //kpr($form);
+
       // This is cool for browsers that support it, but it's hard to theme, really it
       // needs the modernizr test "input[search] search event" so we can theme webkit
       // on Mac without messing with other browsers.

@@ -67,14 +67,6 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
   '#title' => t('Remove the "Home" link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home'),
 );
-// Breadcrumbs Page title?
-/*
-$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_title'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Append the page title to the breadcrumb trail'),
-  '#default_value' => theme_get_setting('settings.breadcrumb_title'),
-);
-*/
 // Breadcrumbs Seperator
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
@@ -84,6 +76,27 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
   '#size' => 25,
   '#maxlength' => 60,
 );
+
+
+// Search block.
+$form['markup_overrides']['markup_overrides_settings']['search-block'] = array(
+  '#type' => 'details',
+  '#title' => t('Search Block'),
+);
+// Hide search submit.
+$form['markup_overrides']['markup_overrides_settings']['search-block']['settings_search_block_hide_submit'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Hide the submit button'),
+  '#default_value' => theme_get_setting('settings.search_block_hide_submit'),
+);
+// Placeholder text.
+$form['markup_overrides']['markup_overrides_settings']['search-block']['settings_search_block_placeholder_text'] = array(
+  '#type' => 'textfield',
+  '#title' => t('Placeholder text'),
+  '#default_value' => theme_get_setting('settings.search_block_placeholder_text'),
+  '#description' => t('Enter placeholder text you wish to appear in the search field.'),
+);
+
 
 // Login block.
 $form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
@@ -116,18 +129,26 @@ $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_
   ),
 );
 
-// Hide or Remove
-$form['markup_overrides']['markup_overrides_settings']['hide-remove'] = array(
+
+// Comment titles
+$form['markup_overrides']['markup_overrides_settings']['comments'] = array(
   '#type' => 'details',
-  '#title' => t('Hide or Remove'),
+  '#title' => t('Comment Titles'),
 );
-$form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_comments_hide_title'] = array(
+$form['markup_overrides']['markup_overrides_settings']['comments']['settings_comments_hide_title'] = array(
   '#type' => 'checkbox',
   '#title' => t('Hide comment titles'),
   '#default_value' => theme_get_setting('settings.comments_hide_title'),
   '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
 );
-$form['markup_overrides']['markup_overrides_settings']['hide-remove']['settings_views_hide_feedicon'] = array(
+
+
+// Feed icons
+$form['markup_overrides']['markup_overrides_settings']['feed-icons'] = array(
+  '#type' => 'details',
+  '#title' => t('Feed Icons'),
+);
+$form['markup_overrides']['markup_overrides_settings']['feed-icons']['settings_views_hide_feedicon'] = array(
   '#type' => 'checkbox',
   '#title' => t('Hide Feed icon in views pages'),
   '#default_value' => theme_get_setting('settings.views_hide_feedicon'),

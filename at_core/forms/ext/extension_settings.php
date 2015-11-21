@@ -137,8 +137,10 @@ $form['enable_extensions']['settings_enable_markup_overrides'] = array(
     <ul>
       <li>Responsive tables</li>
       <li>Breadcrumbs</li>
+      <li>Search block</li>
       <li>Login block</li>
       <li>Comment titles</li>
+      <li>Feed icons</li>
       <li>Skip link</li>
       <li>Attribution</li>
     </ul>
