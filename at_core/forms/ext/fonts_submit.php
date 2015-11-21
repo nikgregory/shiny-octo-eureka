@@ -8,6 +8,7 @@ use Drupal\Component\Utility\Xss;
 /**
  * @file
  * Output formatted CSS for fonts.
+ * TODO: validate font elements, are they set and not empty?
  */
 
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
@@ -58,6 +59,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       $fonts[$font_key]['lineheight'] = 'line-height:' . ceil($px_size * $line_height_multiplier) . 'px; line-height:' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
+    // Set font family for each key.
     if (isset($values['settings_font_' . $font_key])) {
       // Websafe
       if ($values['settings_font_' . $font_key] == 'websafe') {
@@ -68,17 +70,32 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
       // Customstack
       if ($values['settings_font_' . $font_key] == 'customstack') {
-        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_customstack'] . ';';
+        if (isset($values['settings_font_customstack'])) {
+          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_customstack'] . ';';
+        }
+        else {
+          $fonts[$font_key]['family'] = 'font-family: inherit;';
+        }
       }
 
       // Google
       if ($values['settings_font_' . $font_key] == 'google') {
-        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_google_' . $font_key] . ';';
+        if (isset($values['settings_font_google_' . $font_key])) {
+          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_google_' . $font_key] . ';';
+        }
+        else {
+          $fonts[$font_key]['family'] = 'font-family: inherit;';
+        }
       }
 
       // Typekit
       if ($values['settings_font_' . $font_key] == 'typekit') {
-        $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_typekit_' . $font_key] . ';';
+        if (!empty($values['settings_font_typekit_' . $font_key])) {
+          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_typekit_' . $font_key] . ';';
+        }
+        else {
+          $fonts[$font_key]['family'] = 'font-family: inherit;';
+        }
       }
     }
   }

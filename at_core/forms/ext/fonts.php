@@ -14,12 +14,29 @@ $websafe_fonts = websafe_fonts();
 // Elements to apply fonts to.
 $font_elements = font_elements();
 
+// Websafe stacks
+if ($websafe = theme_get_setting('settings.font_websafe')) {
+  foreach ($websafe_fonts as $websafe_font_key => $websafe_font_value) {
+    if ($websafe == $websafe_font_key) {
+      $selected_websafe_stack = Html::escape($websafe_font_value);
+    }
+    else if ($websafe == '-- none --') {
+      $selected_websafe_stack = $websafe;
+    }
+  }
+}
+
+// Custom stack message
+if ($customstack = theme_get_setting('settings.font_customstack')) {
+  $selected_customstack = Html::escape($customstack);
+}
+
 // Font Options - here we must test if there are values set for each font type and populate the options list.
 $font_options = array(
   'none' => t('-- none --'),
 );
 
-if (theme_get_setting('settings.font_websafe')) {
+if (isset($selected_websafe_stack) && $selected_websafe_stack != '-- none --') {
   $font_options['websafe'] = t('Websafe stack');
 }
 if (theme_get_setting('settings.font_google')) {
@@ -30,20 +47,6 @@ if (theme_get_setting('settings.font_typekit')) {
 }
 if (theme_get_setting('settings.font_customstack')) {
   $font_options['customstack'] = t('Custom stack');
-}
-
-// Websafe stack message
-if ($websafe = theme_get_setting('settings.font_websafe')) {
-  foreach ($websafe_fonts as $websafe_font_key => $websafe_font_value) {
-    if ($websafe == $websafe_font_key) {
-      $selected_websafe_stack = Html::escape($websafe_font_value);
-    }
-  }
-}
-
-// Custom stack message
-if ($customstack = theme_get_setting('settings.font_customstack')) {
-  $selected_customstack = Html::escape($customstack);
 }
 
 $form['fonts'] = array(
@@ -168,7 +171,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   );
 
   // Websafe font message
-  if (isset($selected_websafe_stack) && $selected_websafe_stack !== 'none') {
+  if (isset($font_options['websafe'])) {
     $form['fonts']['apply'][$font_element_key]['websafe_font_default'] = array(
       '#type' => 'container',
       '#markup' => t('Current Websafe stack: <code>' . $selected_websafe_stack . '</code>'),
@@ -183,7 +186,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   }
 
   // Custom stack message
-  if (isset($selected_customstack)) {
+  if (isset($font_options['customstack'])) {
     $form['fonts']['apply'][$font_element_key]['customstack_font_default'] = array(
       '#type' => 'container',
       '#markup' => t('Current Custom stack: <code>' . $selected_customstack . '</code>'),
@@ -198,34 +201,38 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   }
 
   // Google font
-  $form['fonts']['apply'][$font_element_key]['settings_font_google_' . $font_element_key] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google font name'),
-    '#description' => t('Enter the name of <b>one</b> Google font you set in <em>Fonts</em>. You can find this in step 4 of the Google font wizard, e.g. <code>"Open Sans"</code>'),
-    '#default_value' => Xss::filter(theme_get_setting('settings.font_google_' . $font_element_key)),
-    '#states' => array(
-      'visible' => array(
-        'select[name="settings_font_' . $font_element_key . '"]' => array(
-          'value' => 'google',
+  if (isset($font_options['google'])) {
+    $form['fonts']['apply'][$font_element_key]['settings_font_google_' . $font_element_key] = array(
+      '#type' => 'textfield',
+      '#title' => t('Google font name'),
+      '#description' => t('Enter the name of <b>one</b> Google font you set in <em>Fonts</em>. You can find this in step 4 of the Google font wizard. Quote names with a space e.g. <code>"Open Sans"</code>'),
+      '#default_value' => Xss::filter(theme_get_setting('settings.font_google_' . $font_element_key)),
+      '#states' => array(
+        'visible' => array(
+          'select[name="settings_font_' . $font_element_key . '"]' => array(
+            'value' => 'google',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   // Typekit font
-  $form['fonts']['apply'][$font_element_key]['settings_font_typekit_' . $font_element_key] = array(
-    '#type' => 'textfield',
-    '#title' => t('Typekit font name'),
-    '#description' => t('Enter the name of <b>one</b> Typekit font you set in <em>Fonts</em>. You can find this by checking the Typekit Kit Editor settings. Quote names with space, e.g. <code>"Proxima nova"</code>'),
-    '#default_value' => Xss::filter(theme_get_setting('settings.font_typekit_' . $font_element_key)),
-    '#states' => array(
-      'visible' => array(
-        'select[name="settings_font_' . $font_element_key . '"]' => array(
-          'value' => 'typekit',
+  if (isset($font_options['typekit'])) {
+    $form['fonts']['apply'][$font_element_key]['settings_font_typekit_' . $font_element_key] = array(
+      '#type' => 'textfield',
+      '#title' => t('Typekit font name'),
+      '#description' => t('Enter the name of <b>one</b> Typekit font you set in <em>Fonts</em>. You can find the correct name to use by checking the kits selectors "Using fonts in CSS". Quote names with a space, e.g. <code>"Proxima nova"</code>'),
+      '#default_value' => Xss::filter(theme_get_setting('settings.font_typekit_' . $font_element_key)),
+      '#states' => array(
+        'visible' => array(
+          'select[name="settings_font_' . $font_element_key . '"]' => array(
+            'value' => 'typekit',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   // Font size
   if ($font_element_key !== 'h1h4' && $font_element_key !== 'h5h6') {

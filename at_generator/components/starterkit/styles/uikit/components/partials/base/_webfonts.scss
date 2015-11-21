@@ -50,15 +50,10 @@
 }
 
 // Typekit - styles to use before Typekit is loaded.
-// http://help.typekit.com/customer/portal/articles/6852
-// Typically you probably don't need to worry about this because on most
-// AT Themes there are default fallback fonts already set globally and AT
-// will use the .wf-active selector in all styles set in Appearance settings
-// that use Typekit fonts.
+// SEE http://help.typekit.com/customer/portal/articles/6852
 .wf-loading {}
 
 // Typekit - styles to use after Typekit is loaded
 .wf-active {}
-
 
 
