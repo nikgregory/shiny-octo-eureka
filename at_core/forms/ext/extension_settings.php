@@ -1,5 +1,10 @@
 <?php
 
+// Submit handlers for the advanced settings.
+include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_validate.php');
+include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_submit.php');
+include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_clearcache.php');
+
 $settings_extensions_form_open = theme_get_setting('settings.extensions_form_open', $theme);
 
 $form['extensions'] = array(
@@ -178,7 +183,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'legacy_browsers',
   );
 
-  // get form values
+  // Get form values.
   $values = $form_state->getValues();
 
   foreach ($extensions_array as $extension) {
@@ -190,9 +195,6 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     }
   }
 }
-
-// Help (sub-theme). TODO: rethink where help goes.
-// include_once($at_core_path . '/forms/help_subtheme.php');
 
 // Submit button for advanced settings.
 $form['extensions']['actions'] = array(
@@ -208,11 +210,15 @@ $form['extensions']['actions']['submit'] = array(
   '#weight' => -10000,
 );
 
+$form['extensions']['actions']['submit_clearcache'] = array(
+  '#type' => 'submit',
+  '#value' => t('Clear cache'),
+  '#submit'=> array('at_core_submit_extension_clearcache'),
+  //'#attributes' => array('class' => array('button--primary')),
+  '#weight' => -10000,
+);
+
 //$form['#validate'][] = 'at_core_validate_advanced_settings';
 //$form['#submit'][] = 'at_core_submit_advanced_settings';
 //$form['actions']['submit']['#validate'][] = 'at_core_validate_advanced_settings';
 //$form['actions']['submit']['#submit'][] = 'at_core_submit_advanced_settings';
-
-// Submit handlers for the advanced settings.
-include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_validate.php');
-include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_submit.php');
