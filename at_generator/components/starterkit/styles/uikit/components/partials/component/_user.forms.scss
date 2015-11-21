@@ -17,11 +17,14 @@
   .form-actions {}
   .form-submit {}
 
+  // User login block links
   + .item-list {
-    ul {
+    .item-list__list {
       padding: 0;
     }
-    li {}
+    .item-list__item {
+      list-style: none;
+    }
   }
 }
 

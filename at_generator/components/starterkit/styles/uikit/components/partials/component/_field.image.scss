@@ -15,9 +15,8 @@
     @include output-rhythm(margin-bottom, $medium);
   }
 
-  &__container {
-    display: block;
-  }
+  // Wraps the img and figcaption tags for each item.
+  &__item {}
 
   // Image Alignment Theme Settings
   // - settings are applied using the Image extension in theme settings, where you can

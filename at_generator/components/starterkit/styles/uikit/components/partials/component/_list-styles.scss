@@ -31,15 +31,12 @@ ul {
 // reset since item-lists are not usually bulletted etc.
 .item-list {
 
-  .title {
+  &__title {
     font-weight: $font-weight-bold;
   }
 
-  ul,
-  ol,
-  li {
-    list-style: none;
-  }
+  &__list {}
+  &__item {}
 
   a {
     &:hover,

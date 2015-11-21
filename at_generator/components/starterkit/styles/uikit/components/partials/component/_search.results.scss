@@ -7,24 +7,26 @@
   border-radius: $border-radius;
 }
 
-.search-results,
-.search-results--empty {
+.search-results {
   @include output-rhythm(margin-bottom, $medium);
   @include output-rhythm(padding, $medium);
+
+  // Style the emtpy message.
+  &--empty h3 {
+    @include adjust-font-size-to($large);
+  }
+
+  &__item {
+    @include output-rhythm(margin-bottom, $large);
+    padding: 0;
+    list-style: none;
+  }
 }
 
-// Style the emtpy message.
-.search-results--empty h3 {
-  @include adjust-font-size-to($large);
-}
-
-.search-results__item {
-  @include output-rhythm(margin-bottom, $large);
-  padding: 0;
-}
 
 // Individual search result.
 .search-result {
+
   &__title {
     margin: 0;
 
@@ -34,7 +36,7 @@
   // We assume, like Google and co, that most results get picked based on the title, not the
   // snippet/description, so we make this smaller to enhance the scanability of the titles.
   &__snippet-info {
-    @include adjust-font-size-to($medium*.875); // 14px
+    @include adjust-font-size-to($medium * .875); // 14px
   }
 
   &__snippet {}

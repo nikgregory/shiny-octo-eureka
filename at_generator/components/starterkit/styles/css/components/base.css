@@ -1431,13 +1431,8 @@ ul.inline li ol {
   margin: 0 16px 0 0;
 }
 
-.item-list .title {
+.item-list__title {
   font-weight: 700;
-}
-.item-list ul,
-.item-list ol,
-.item-list li {
-  list-style: none;
 }
 
 .item-list--comma-list {
@@ -2335,9 +2330,6 @@ table tr.error {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-.field-type-image__container {
-  display: block;
-}
 .field-type-image .align-none,
 .field-type-image .align-left {
   margin: 0 16px 16px 0;
@@ -2637,8 +2629,11 @@ table tr.error {
 .user-login-form .form-text {
   width: 100%;
 }
-.user-login-form + .item-list ul {
+.user-login-form + .item-list .item-list__list {
   padding: 0;
+}
+.user-login-form + .item-list .item-list__item {
+  list-style: none;
 }
 
 /**
