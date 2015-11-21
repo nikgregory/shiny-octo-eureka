@@ -2,9 +2,7 @@
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Config;
-
 use Drupal\Component\Utility\Html;
-
 use Drupal\block\BlockInterface;
 use Drupal\block\Entity\Block;
 
@@ -53,19 +51,21 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Active themes active blocks
   $theme_blocks = entity_load_multiple_by_properties('block', ['theme' => $theme]);
 
-  // Check for breakpoints module and set a warning and a flag to disable much of the theme settings if its not available
+  // Check for breakpoints module and set a warning and a flag to disable much
+  // of the theme settings if its not available.
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
 
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
 
-    // Unset core breakpoint groups due to notices and other issues, until this is resolved:
-    // SEE: https://www.drupal.org/node/2379283
+    // Unset core breakpoint groups due to notices and other issues, until this
+    // is resolved: SEE: https://www.drupal.org/node/2379283
     unset($breakpoint_groups['toolbar']);
     unset($breakpoint_groups['seven']);
     unset($breakpoint_groups['bartik']);
 
-    // Set breakpoint options, we use these in layout and other extensions like Responsive menus.
+    // Set breakpoint options, we use these in layout and other extensions like
+    // Responsive menus.
     foreach ($breakpoint_groups as $group_key => $group_values) {
       $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
     }
@@ -83,9 +83,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Get node types (bundles).
   $node_types = node_type_get_types();
 
-  // View or "Display modes", the search display mode is still problematic so we will exclude it for now,
-  // please see: https://drupal.org/node/1166114
-  //$node_view_modes = \Drupal::entityManager()->getViewModeOptions('node', TRUE);
+  // View or "Display modes".
   $node_view_modes = \Drupal::entityManager()->getViewModes('node');
 
   // Unset unwanted view modes
@@ -93,8 +91,8 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   unset($node_view_modes['search_index']);
   unset($node_view_modes['search_result']);
 
-  // Set a class on the form for the current admin theme, note if this is set to "Default theme"
-  // the result is always 0.
+  // Set a class on the form for the current admin theme, note if this is set to
+  // "Default theme" the result is always 0.
   $system_theme_config = \Drupal::config('system.theme');
   $admin_theme = $system_theme_config->get('admin');
   if (!empty($admin_theme)) {
@@ -150,7 +148,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
       $form['favicon']['#open'] = FALSE;
       $form['favicon']['#group'] = 'basic_settings';
 
-      // buttons don't work with #group, move it the hard way.
+      // Buttons don't work with #group, move it the hard way.
       $form['actions']['#type'] = $form['basic_settings']['actions']['#type'] = 'actions';
       $form['actions']['submit']['#type'] = $form['basic_settings']['actions']['submit']['#type'] = 'submit';
       $form['actions']['submit']['#value'] = $form['basic_settings']['actions']['submit']['#value'] = t('Save basic settings');
