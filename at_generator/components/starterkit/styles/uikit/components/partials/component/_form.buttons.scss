@@ -38,8 +38,7 @@ button,
   }
 
   &[disabled] {
-    &:hover {
-    }
+    &:hover {}
   }
 }
 
@@ -50,12 +49,10 @@ button,
 //
 
 // Primary button
-.button--primary {
-}
+.button--primary {}
 
 // Danger button, e.g. delete buttons often have this class.
-.button--danger {
-}
+.button--danger {}
 
 // Action button
 // - are links with an icon, and we add an icon for extra visibility.

@@ -11,7 +11,7 @@ textarea {
 }
 
 
-// Select, Textarea and most input types
+// Select, Textarea and most input types.
 textarea,
 select,
 input[type="date"],
@@ -39,15 +39,13 @@ input[type="week"] {
   }
 
   &:hover,
-  &:focus {
-  }
+  &:focus {}
 
   &[disabled] {
     cursor: not-allowed;
 
     &:hover,
-    &:focus {
-    }
+    &:focus {}
   }
 }
 
@@ -73,14 +71,31 @@ input {
     @include output-rhythm(margin-#{$flow-from}, 3px);
   }
 
-  // Focus for file, radio and checkbox
+  // Focus for file, radio and checkbox.
   &[type="file"]:focus,
   &[type="radio"]:focus,
   &[type="checkbox"]:focus {}
 }
 
 
-// Select
+// Search.
+input[type="search"] {
+
+  // Webkit search fields may need special attention.
+  -webkit-appearance: textfield;
+
+  // Remove all the special stuff webkit adds to
+  // search fields, it's just a huge PITA to theme.
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+
+// Select.
 select {
   @include output-rhythm(height, $form_input_button_select_height);
   > option {}
@@ -100,7 +115,7 @@ select[multiple] {
 }
 
 
-// Label
+// Label.
 label {
   font-weight: $font-weight-semibold;
   text-decoration: none;
@@ -115,7 +130,7 @@ label {
 }
 
 
-// Fieldset
+// Fieldset.
 fieldset {
   border: 0;
   margin: 0;
@@ -123,10 +138,11 @@ fieldset {
 }
 
 
-// Legend
+// Legend.
 legend {}
 
 
+// Details.
 details {
   border: $form-border-width $form-border-style;
   border-radius: $border-radius;
@@ -135,6 +151,7 @@ details {
 }
 
 
+// Summary.
 summary {
   cursor: pointer;
   display: block; // Firefox seems to need this?
@@ -142,16 +159,15 @@ summary {
 }
 
 
-// Readonly
+// Readonly.
 input,
 select,
 textarea {
-  &[readonly] {
-  }
+  &[readonly] {}
 }
 
 
-// Disabled
+// Disabled.
 button[disabled],
 input[disabled],
 select[disabled],
@@ -166,7 +182,7 @@ a.button_disabled {
 }
 
 
-// Invalid
+// Invalid.
 input,
 button,
 .button,
@@ -180,20 +196,15 @@ textarea {
 }
 
 
-// Placeholders
+// Placeholders.
 input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-}
+textarea::-webkit-input-placeholder {}
 
 input:-moz-placeholder,
-textarea:-moz-placeholder {
-}
+textarea:-moz-placeholder {}
 
 input.placeholder_text,
-textarea.placeholder_text {
-}
-
-
+textarea.placeholder_text {}
 
 
 

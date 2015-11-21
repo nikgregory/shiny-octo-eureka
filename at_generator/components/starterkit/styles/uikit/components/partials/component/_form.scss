@@ -119,10 +119,6 @@ h4.label,
 }
 
 
-// Marker
-.marker {}
-
-
 // Form required.
 .form-required:after {
   content: " \204E "; // Use a Unicode symbol to prevent screen readers from announcing the text.
@@ -293,7 +289,6 @@ details {
     &:before {
       font-family: $icon-font;
       content: $form-details-summary-open; // LTR
-
       float: left;
       margin: -1px 0 0;
 
@@ -350,3 +345,6 @@ details {
 .cke_editable {
   padding: 5px 10px;
 }
+
+
+

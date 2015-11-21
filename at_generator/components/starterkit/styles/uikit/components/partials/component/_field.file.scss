@@ -1,7 +1,7 @@
 /**
  * File icons
- * AT unsets Drupal core file field CSS for image icons and replaces them
- * with FontAwesome icons.
+ *  - AT unsets Drupal core file field CSS for image icons and replaces them
+ *    with FontAwesome icons.
  ========================================================================== */
 
 .file {
@@ -58,10 +58,10 @@
 }
 
 
-// Drupal will rename some file types for security reasons, in this case the class
-// name and type will be text/plain, so we search for a file extension in the href
-// which should find the original file extension, since Drupal simply appends .txt
-// to the file name.
+// Drupal renames some file types for security reasons, in this case the class
+// name and type will be "text/plain", so we search for a file extension in the
+// href attribute to find the original file extension, since Drupal simply
+// appends .txt to the file name.
 .file--text-x-script,
 .file--text-html,
 .file [href*='.js'],

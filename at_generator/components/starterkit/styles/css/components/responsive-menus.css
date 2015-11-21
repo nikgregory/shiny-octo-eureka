@@ -24,8 +24,8 @@
  *
  * Responsive styles are a combination of three things:
  *  1. Sass/CSS defined here (with breakpoints etc).
- *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
- *  3. Theme settings as set in your themes Advanced extention settings.
+ *  2. jQuery: at.responsiveMenus.js which adds/toggles classes etc.
+ *  3. Theme settings as set in your themes extention settings.
  ========================================================================== */
 .ms-tiles .rm-block .block-menu__title,
 .ms-tiles .rm-block .menu-level-2 {

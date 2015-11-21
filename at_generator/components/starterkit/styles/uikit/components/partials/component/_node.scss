@@ -41,7 +41,7 @@
 
 
 // Header - includes title (h1 full, h2 teaser), user picture, author and date.
-.node__header
+.node__header {}
 .node__title {}
 
 
@@ -119,39 +119,5 @@
   .links {}
 }
 
-
-// Node images
-// Example styling for placing a border on images & figures etc, this will
-// correctly add borders even when figcaptions are enabled and in use, these
-// example styles come from Pixture Reloaded.
-.node {
-
-  // CK Editor images without caption have no figure wrapper.
-  img {
-    //border: $border-width $border-style;
-    //@include output-rhythm(padding, $small);
-  }
-
-  figure {
-    //border: $border-width $border-style;
-    //@include output-rhythm(padding, $small);
-
-    img {
-      //padding: 0;
-      //border: 0;
-      //border-radius: 0 !important;
-    }
-
-    &.caption {
-      //border-bottom: 0;
-    }
-
-    figcaption {
-      //border: $border-width $border-style;
-      //border-top: 0;
-      //@include output-rhythm(padding, 0 $small $small);
-    }
-  }
-}
 
 

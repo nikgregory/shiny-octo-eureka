@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /**
  * Book
- * Set styles for book navigation.
+ *  - Set styles for book navigation.
  ========================================================================== */
 .book-pager {
   padding: 0;
@@ -12,12 +12,10 @@
 .has-tree .book-pager {
   border-top: 0;
 }
-
 .book-pager__item {
   list-style: none;
   vertical-align: top;
 }
-
 .book-pager__link {
   padding: 7px 0;
   padding: 0.43162rem 0;
@@ -33,7 +31,6 @@
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
-
 .book-pager__previous {
   text-align: left;
   float: left;
@@ -44,20 +41,11 @@
   width: 16px;
   width: 1rem;
 }
-[dir="rtl"] .book-pager__previous {
-  text-align: right;
-  float: right;
-}
-
 .book-pager__up {
   text-align: center;
   float: left;
   width: 8%;
 }
-[dir="rtl"] .book-pager__up {
-  float: right;
-}
-
 .book-pager__next {
   text-align: right;
   float: right;
@@ -67,10 +55,6 @@
   content: "";
   width: 16px;
   width: 1rem;
-}
-[dir="rtl"] .book-pager__next {
-  text-align: left;
-  float: left;
 }
 
 /*# sourceMappingURL=book.css.map */

@@ -54,16 +54,12 @@
     text-decoration: none;
 
     &:link,
-    &:visited {
-    }
+    &:visited {}
 
     &:active,
-    &.active {
-    }
+    &.active {}
 
     &:hover,
-    &:focus {
-      //text-decoration: underline;
-    }
+    &:focus {}
   }
 }

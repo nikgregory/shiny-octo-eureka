@@ -25,7 +25,7 @@
 .comment-field__title {}
 
 
-// Comments are articles, they all have the base class of .comment:
+// Comments are article element type.
 .comment {
   @include clearfix-micro;
   @include output-rhythm(padding-top, $medium);
@@ -76,19 +76,16 @@
     .username {}
   }
 
-
   // Comment content wrapper.
   &__content {}
 
-
-  // Links
+  // Links.
   .links {}
-
 
   // User signiture
   &__user-signature {}
 
-
+  // Preivew.
   &.preview {
     @include output-rhythm(padding, $medium);
     @include output-rhythm(margin-bottom, $medium);
@@ -100,7 +97,6 @@
 .by-anonymous {}
 .by-viewer {}
 .comment--by-node-author {}
-
 
 
 // Comment form - basic classes only, see _form-styles.scss

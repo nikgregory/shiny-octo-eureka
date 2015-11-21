@@ -5,8 +5,11 @@
 
 table {
 
-  // Very agressive way to resize tables in small screens, could be problematic...
-  //width: auto !important;
+  // If for some crazy reason this theme is used in admin, set tables to be
+  // 100% width.
+  .path-admin & {
+    width: 100%;
+  }
 
   // Prevent the sticky header from hiding behind other content.
   &.sticky-header {
@@ -57,29 +60,24 @@ table {
 tr {
   // Row striping (zebra).
   @if $table-row-striping == true {
-    &.odd {
-    }
+    &.odd {}
 
     // nth-child class will capture tables in content that do not
     // include the odd/even classes.
     &.info,
     &.even,
-    &:nth-child(2n+2)  {
-    }
+    &:nth-child(2n+2) {}
   }
 
   // Hover color.
   @if $tr-hover == true {
-    &:hover {
-    }
+    &:hover {}
   }
 
   // Column striping, applies to the active column in sortable tables.
   @if $table-col-striping == true {
-    &.odd td.active {
-    }
-    &.even td.active {
-    }
+    &.odd td.active {}
+    &.even td.active {}
   }
 }
 
@@ -140,3 +138,6 @@ thead {
     display: inline;
   }
 }
+
+
+

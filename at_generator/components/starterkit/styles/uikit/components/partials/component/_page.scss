@@ -4,9 +4,9 @@
  ========================================================================== */
 
 // Page wrapper
-// Set relative to make it easier to use absolute positioning and ensure items do
-// not go under the toolbar or other items in the page-top region. If you are using
-// offcanvas responsive menu, it's .page that transforms, not body.
+// Set relative to make it easier to use absolute positioning and ensure items
+// do not go under the toolbar or other items in the page-top region. If you are
+// using offcanvas responsive menu, it's .page that transforms, not body.
 .page {
   position: relative;
   min-height: 100%;
@@ -22,48 +22,87 @@
 }
 
 
-// Page Rows
+// Page Rows and Regions.
 // These match the Site Builder layout.
-// Do not add layout to these selectors, other than top/bottom margin etc. You might break the layout.
-
-// Messages
-.pr-messages {} // outer wrapper. This wrapper will also have the .l-pr class.
-.pr-messages__rw {} // inner wrapper (rw - region-wrapper), wraps regions. This wrapper also has the .l-rw and .region classes.
-
+// Do not add layout to these selectors, other than top/bottom margin as you
+// might break the layout.
 
 // Leaderboard
-.pr-leaderboard {}
-.pr-leaderboard__rw {}
+.pr-leaderboard {    // Outer wrapper
+  &__rw {}           // Regions wrapper (container that takes max-width from your layout settings)
+  &__leaderboard {}  // Region
+}
 
 
 // Header
-.pr-header {}
-.pr-header__rw {}
+.pr-header {
+  &__rw {}
+  &__header-first {}
+  &__header-second {}
+}
 
 
 // Navbar
-.pr-navbar {}
-.pr-navbar__rw {}
+.pr-navbar {
+  &__rw {}
+  &__navbar {}
+}
+
+
+// Highlighted
+.pr-highlighted {
+  &__rw {}
+  &__highlighted {}
+}
 
 
 // Features
-.pr-features {}
-.pr-features__rw {}
+.pr-features {
+  &__rw {}
+  &__features-first {}
+  &__features-second {}
+  &__features-third {}
+}
+
+
+// Content prefix
+.pr-content-prefix {
+  &__rw {}
+  &__content-prefix {}
+}
 
 
 // Main
-.pr-main {}
-.pr-main__rw {}
+.pr-main {
+  &__rw {}
+  &__content {}
+  &__sidebar-first {}
+  &__sidebar-second {}
+}
 
 
-// Tertiary
-.pr-tertiary {}
-.pr-tertiary__rw {}
+// Content suffix
+.pr-content-suffix {
+  &__rw {}
+  &__content-suffix {}
+}
+
+
+// Sub features
+.pr-subfeatures {
+  &__rw {}
+  &__subfeatures-first {}
+  &__subfeatures-second {}
+  &__subfeatures-third {}
+  &__subfeatures-fourth {}
+}
 
 
 // Footer
-.pr-footer {}
-.pr-footer__rw {}
+.pr-footer {
+  &__rw {}
+  &__footer {}
+}
 
 
 // .l-pr is a layout class on each page row outer wrapper.
@@ -77,13 +116,11 @@
 
 // Regions wrappers
 //  - .l-rw is the main layout wrapper selector for all regions within a row. The layout system
-//           uses this wrapper and selector extensively.
+//    uses this wrapper and selector extensively.
 //  - .region is a theme component class for adding styles like backgrounds etc.
 .l-rw {
   @include output-rhythm(padding, 0 $medium);
 }
-
-.region {}
 
 
 // Region

@@ -1,6 +1,6 @@
 /**
  * Blocks
- * Base styles for block templates.
+ *  - base styles for block templates.
  ========================================================================== */
 
 // Almost everything in Druapl 8 is a block, so these classes are very generic
@@ -9,6 +9,7 @@
   @include output-rhythm(margin, $x-large 0);
 }
 
+// Block title.
 .block__title {}
 
 // The block has a title.

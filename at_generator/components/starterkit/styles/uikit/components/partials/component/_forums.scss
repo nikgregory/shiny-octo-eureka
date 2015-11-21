@@ -3,8 +3,7 @@
  *  - see table.scss for generic table styles.
  ========================================================================== */
 
-
-// Table selectors.
+// Forum is a table.
 .forum {
   width: 100%;
 
@@ -34,7 +33,7 @@
 }
 
 
-// Forum id. Every top level forum has a unique ID.
+// Forum id. Every top level forum has a unique numeric ID.
 #forum-0 {}
 
 
@@ -124,25 +123,6 @@
 }
 
 .forum-list__posts {}
-
 .forum-list__last-reply {}
-
-
-// TODO rtl stuff
-[dir="rtl"] .forum-topic-navigation {
-  padding: 1em 3em 0 0;
-}
-[dir="rtl"] .forum-topic-navigation .topic-previous {
-  text-align: left;
-  float: right;
-}
-[dir="rtl"] .forum-topic-navigation .topic-next {
-  text-align: right;
-  float: left;
-}
-.action--forum {
-  list-style: none;
-}
-
 
 

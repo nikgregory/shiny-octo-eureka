@@ -5,7 +5,6 @@
  ========================================================================== */
 
 [class*="tags"].field-type-entity-reference {
-  //@include output-rhythm(margin, $medium 0);
 
   @if $field-taxonomy-label-as-icon == true {
     .field__label {
@@ -33,8 +32,7 @@
       @include output-rhythm(padding, 0 $xx-small);
 
       &:hover,
-      &:focus {
-      }
+      &:focus {}
 
       a {
         display: inline-block;
@@ -104,8 +102,9 @@
 
   .field-label-inline {
     .field__label,
-    .field__item {
-      //display: inline-block;
-    }
+    .field__item {}
   }
 }
+
+
+
