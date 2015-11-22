@@ -8,7 +8,6 @@
 //
 // =============================================================================
 
-
 // Vertical Rhythm
 // -----------------------------------------------------------------------------
 // Compass Vertical Rhythm is used in conjunction with Modular Scale.
@@ -73,24 +72,18 @@ $font-weight-light    : 300;
 
 // Font Families
 // -----------------------------------------------------------------------------
-$times-roman : "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
-$times       : Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
-$georgia     : Georgia, "Times New Roman", "DejaVu Serif", serif;
-$verdana     : Verdana, Tahoma, "DejaVu Sans", sans-serif;
-$tahoma      : Tahoma, Verdana, "DejaVu Sans", sans-serif;
-$helvetica   : Helvetica, Arial, "Nimbus Sans L", sans-serif;
-$arial       : Arial, Helvetica, "Nimbus Sans L", sans-serif;
-$impact      : Impact, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
-$courier     : "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
-$sans-serif  : sans-serif;
-$serif       : serif;
-
+$wide-sans-serif   : Verdana, Geneva, sans-serif;
+$narrow-sans-serif : Tahoma, Arial, Helvetica, sans-serif;
+$wide-serif        : Georgia, Utopia, Palatino, 'Palatino Linotype', serif;
+$narrow-serif      : 'Times New Roman', Times, serif;
+$impact            : 'Impact, "Helvetica Inserat", "Arial Black", sans-serif';
+$monospace         : 'Courier New', Courier, monospace, sans-serif;
+$sans-serif        : sans-serif;
+$serif             : serif;
 
 // Set default font families.
 $base-font-family : $sans-serif;
-$font-monospace   : $courier;
-
-
+$font-monospace   : $monospace;
 
 
 // =============================================================================
@@ -168,7 +161,6 @@ $error-background-color   : #fcf4f2;
 // -----------------------------------------------------------------------------
 $marker-color                    : #ffffff;
 $marker-background-color         : $text-background-color;
-
 $marker-info-background-color    : #0074bd;
 $marker-success-background-color : #77b259;
 $marker-warning-background-color : #e09600;
@@ -184,8 +176,6 @@ $selection-color : #b3d4fc;
 // -----------------------------------------------------------------------------
 $odd-color  : transparent;
 $even-color : $text-background-color;
-
-
 
 
 // =============================================================================
@@ -206,7 +196,6 @@ $page-background-color    : #f7f7f7;
 
 // Wrapper around regions, the max-width is set on this wrapper.
 $regions-background-color : $page-background-color;
-
 
 
 // Page Row colors (for site-builder layout plugin)
@@ -255,7 +244,6 @@ $page-subfeatures-background-color     : #d3d3d3;
 // Footer
 $page-footer-color                     : #ffffff;
 $page-footer-background-color          : #666666;
-
 
 
 // Branding
@@ -472,7 +460,6 @@ $field-taxonomy-item-icons         : false;
 $field-taxonomy-label-as-icon      : false; // Label must not be hidden in field display settings.
 
 
-
 // Font Icons
 // -----------------------------------------------------------------------------
 // AT uses Font Awesome by default for most icons, including replacing Drupal
@@ -523,6 +510,7 @@ $help-icon                         : $fa-var-question-circle;
 $breadcrumb-seperator-icon         : $fa-var-angle-right;
 
 // Labels
+$more-link-use-icon                : false;
 $more-link-icon                    : $fa-var-caret-right;
 
 // Taxonomy
@@ -536,7 +524,6 @@ $blockquote-icon                   : $fa-var-quote-left;
 $messages-status-icon              : $fa-var-smile-o;
 $messages-warning-icon             : $fa-var-exclamation-triangle;
 $messages-error-icon               : $fa-var-frown-o;
-
 
 
 // States - e.g. sticky, promoted etc.
@@ -557,9 +544,7 @@ $preview-background-color          : #ffffea;
 // Patterns
 // -----------------------------------------------------------------------------
 // Patterns are image files that can be set on the page and row backgrounds.
-
 $patterns: null; // A list of pattern file names
-
 
 
 // =============================================================================

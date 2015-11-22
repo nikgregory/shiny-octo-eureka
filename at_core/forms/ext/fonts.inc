@@ -5,16 +5,15 @@
  */
 function websafe_fonts() {
   $websafe_fonts = array(
-    'none'        => '-- none --',
-    'arial'       => 'Arial, Helvetica, "Nimbus Sans L", sans-serif',
-    'helvetica'   => 'Helvetica, Arial, "Nimbus Sans L", sans-serif',
-    'verdana'     => 'Verdana, Tahoma, "DejaVu Sans", sans-serif',
-    'tahoma'      => 'Tahoma, Verdana, "DejaVu Sans", sans-serif',
-    'georgia'     => 'Georgia, "Times New Roman", "DejaVu Serif", serif',
-    'times_roman' => '"Times New Roman", Times, Georgia, "DejaVu Serif", serif',
-    'times'       => 'Times, "Times New Roman", Georgia, "DejaVu Serif", serif',
-    'impact'      => 'Impact, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif',
-    'courier'     => '"Courier New", "DejaVu Sans Mono", monospace, sans-serif',
+    'none'              => '-- none --',
+    'wide_sans_serif'   => 'Verdana, Geneva, sans-serif',
+    'narrow_sans_serif' => 'Helvetica, Tahoma, Arial, sans-serif',
+    'wide_serif'        => 'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
+    'narrow_serif'      => '"Times New Roman", Times, serif;',
+    'impact'            => 'Impact, "Helvetica Inserat", "Arial Black", sans-serif',
+    'monospace'         => '"Courier New", Courier, monospace, sans-serif',
+    'sans_serif'        => 'sans-serif',
+    'serif'             => 'serif',
   );
 
   return $websafe_fonts;

@@ -52,6 +52,11 @@ table {
       margin-right: 0;
     }
   }
+
+  // Set responsive enabled tables to full width.
+  &.responsive-enabled {
+    width: 100%;
+  }
 }
 
 

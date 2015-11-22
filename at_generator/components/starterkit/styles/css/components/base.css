@@ -719,6 +719,9 @@ table[align='left'] {
     margin-right: 0;
   }
 }
+table.responsive-enabled {
+  width: 100%;
+}
 
 thead,
 tbody,
@@ -1050,6 +1053,13 @@ details > .details-wrapper {
 
 .cke_editable {
   padding: 5px 10px;
+}
+
+.field-storage-config-edit-form .container-inline {
+  display: block;
+}
+.field-storage-config-edit-form .form-select {
+  min-width: auto;
 }
 
 /**
@@ -1452,6 +1462,12 @@ ul.inline li ol {
 .item-list__title {
   font-weight: 700;
 }
+.item-list__list {
+  padding: 0;
+}
+.item-list__item {
+  list-style: none;
+}
 
 .item-list--comma-list {
   display: inline;
@@ -1750,22 +1766,6 @@ ul.inline li ol {
 .more-link {
   text-align: right;
   display: inline-block;
-}
-.more-link:after {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  display: inline-block;
-  vertical-align: bottom;
-  padding: 0;
-  text-align: right;
-  width: 10px;
-  width: 0.61803rem;
-}
-[dir="rtl"] .more-link:after {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
-  -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-  transform: scale(-1, 1);
 }
 
 .more-help-link {
@@ -2583,7 +2583,7 @@ table tr.error {
   background-image: -webkit-linear-gradient(top, #d1e8f5, #d3e8f4);
   background-image: linear-gradient(to bottom, #d1e8f5, #d3e8f4);
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
-  font-family: Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   padding: 18px 0;
   padding: 1.13rem 0;
 }
