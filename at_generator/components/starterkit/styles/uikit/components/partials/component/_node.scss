@@ -46,15 +46,15 @@
 
 
 // View modes
+.node--view-mode-default {}
+
 .node--view-mode-full {
   .node__title {
     @include output-rhythm(margin, 0 0 $medium);
   }
 }
 
-.node--view-mode-teaser {
-  .node__title {}
-}
+.node--view-mode-teaser {}
 
 
 // Node title link (only applies to view-mode teaser).
