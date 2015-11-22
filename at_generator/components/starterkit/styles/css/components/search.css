@@ -44,31 +44,31 @@
  * - search block form
  * - advanced search form
  ========================================================================== */
-.block-search {
+.search-block-form__form {
   display: block;
   clear: both;
-}
-.block-search form {
   position: relative;
 }
-.block-search .form-type-search,
-.block-search .form-actions {
+.search-block-form__form .form-type-search,
+.search-block-form__form .form-actions {
   display: inline;
   margin: 0 0 7px;
   margin: 0 0 0.43162rem;
 }
-.block-search .form-search {
+.search-block-form__form .form-search {
   width: 100%;
+}
+.submit-is-visible .search-block-form__form .form-search {
   padding-right: 35px;
   padding-right: 2.1875rem;
 }
-.block-search .form-actions {
+.search-block-form__form .form-actions {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 1;
 }
-.block-search .form-submit {
+.search-block-form__form .form-submit {
   margin: 0;
   padding: 0;
   width: 32px;
@@ -85,9 +85,25 @@
   background-repeat: no-repeat;
   border-radius: 0 2px 2px 0;
 }
-.block-search .contextual-render-processed {
+.search-block-form__form .contextual-render-processed {
   top: 2px;
   right: 2em;
+}
+.search-block-form__form ::-webkit-input-placeholder {
+  color: #cccccc;
+  opacity: 0.75;
+}
+.search-block-form__form :-moz-placeholder {
+  color: #cccccc;
+  opacity: 0.75;
+}
+.search-block-form__form ::-moz-placeholder {
+  color: #cccccc;
+  opacity: 0.75;
+}
+.search-block-form__form :-ms-input-placeholder {
+  color: #cccccc;
+  opacity: 0.75;
 }
 
 .search-basic {

@@ -103,18 +103,21 @@ hr {
 
 //  Page Rows - these match the Site Builder layout.
 
-// Messages
-.pr-messages {}
-
-
-// Messages
-.pr-leaderboard {}
+// Leaderboard
+.pr-leaderboard {    // Outer wrapper
+  &__rw {}           // Regions wrapper (container that takes max-width from your layout settings)
+  &__leaderboard {}  // Region
+}
 
 
 // Header
 .pr-header {
   color: $page-header-color;
   @include page-row-background-color($page-header-background-color, $page-row-fullwidth);
+
+  &__rw {}
+  &__header-first {}
+  &__header-second {}
 }
 
 
@@ -127,6 +130,16 @@ hr {
   .menu a {
     color: inherit;
   }
+
+  &__rw {}
+  &__navbar {}
+}
+
+
+// Highlighted
+.pr-highlighted {
+  &__rw {}
+  &__highlighted {}
 }
 
 
@@ -134,17 +147,47 @@ hr {
 .pr-features {
   color: $page-features-color;
   @include page-row-background-color($page-features-background-color, $page-row-fullwidth);
+
+  &__rw {}
+  &__features-first {}
+  &__features-second {}
+  &__features-third {}
+}
+
+
+// Content prefix
+.pr-content-prefix {
+  &__rw {}
+  &__content-prefix {}
 }
 
 
 // Main
-.pr-main {}
+.pr-main {
+  &__rw {}
+  &__content {}
+  &__sidebar-first {}
+  &__sidebar-second {}
+}
+
+
+// Content suffix
+.pr-content-suffix {
+  &__rw {}
+  &__content-suffix {}
+}
 
 
 // Sub features
 .pr-subfeatures {
   color: $page-subfeatures-color;
   @include page-row-background-color($page-subfeatures-background-color, $page-row-fullwidth);
+
+  &__rw {}
+  &__subfeatures-first {}
+  &__subfeatures-second {}
+  &__subfeatures-third {}
+  &__subfeatures-fourth {}
 }
 
 
@@ -163,10 +206,17 @@ hr {
       color: inherit;
     }
   }
+
+  &__rw {}
+  &__footer {}
 }
 
-// Theme attribution message. This is a toggle setting in the advanced theme
-// settings, you can turn it on/off using the Markup overrides extension.
+
+/**
+ * AT attribution message
+ *  - a toggle setting in the theme settings, you can turn it on/off using
+ *    the Markup overrides extension.
+ ========================================================================== */
 .attribution {
   .l-rw {
     background-color: transparent;
@@ -177,9 +227,10 @@ hr {
 }
 
 
-// Feed icon
-// SVG icon, SEE feed-icon.html.twig in AT Core templates directory.
-// Clear the cache if you add or change classes in the template file.
+/**
+ * Feed Icons
+ *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
+ ========================================================================== */
 .feed-icon-rss__path {
   fill: rgba(0, 0, 0, 0.6);
 }

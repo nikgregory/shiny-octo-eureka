@@ -5,16 +5,10 @@
  ========================================================================== */
 
 // Search Block form.
-.block-search {
-
-  // Mitigate any template inheritance failure which might have container
-  // inline set on the block.
+.search-block-form__form {
   display: block;
   clear: both;
-
-  form {
-    position: relative;
-  }
+  position: relative;
 
  .form-type-search,
  .form-actions {
@@ -24,6 +18,10 @@
 
  .form-search {
     width: 100%;
+  }
+
+  // The submit button is not hidden.
+  .submit-is-visible & .form-search {
     @include output-rhythm(padding-#{$flow-to}, 35px);
   }
 
@@ -58,6 +56,24 @@
     //display: none;
     top: 2px;
     #{$flow-to}: 2em;
+  }
+
+  // Style placeholders
+  ::-webkit-input-placeholder {
+    color: $border-color;
+    opacity: 0.75;
+  }
+  :-moz-placeholder {
+    color: $border-color;
+    opacity: 0.75;
+  }
+  ::-moz-placeholder {
+    color: $border-color;
+    opacity: 0.75;
+  }
+  :-ms-input-placeholder {
+    color: $border-color;
+    opacity: 0.75;
   }
 }
 

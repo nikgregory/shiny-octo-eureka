@@ -4,7 +4,7 @@
  * it should look like this by default.
  ========================================================================== */
 
-// Establish baseline
+// Establish (Compass) baseline.
 @include establish-baseline;
 
 
@@ -27,8 +27,7 @@ body {
 }
 
 
-// By default AT uses border-box globally. All the layouts use it also, i.e. susy is configured
-// to use border-box as opposed to it's normal default of content-box.
+// Use border-box globally.
 * {
   box-sizing: border-box;
 }
@@ -146,9 +145,14 @@ video {
 }
 
 
-// Bug in old webkit.
 svg {
+  // Mitigate a bug in old webkit.
   max-height: 100%;
+
+  // Make IE9 conform to spec.
+  &:not(:root) {
+    overflow: hidden;
+  }
 }
 
 
@@ -165,16 +169,13 @@ a {
   cursor: pointer;
 
   &:active,
-  &:hover {
-  }
+  &:hover {}
 
   &:link,
-  &:visited {
-  }
+  &:visited {}
 
   &:active,
-  &.active {
-  }
+  &.active {}
 
   &:hover,
   &:focus {
@@ -292,6 +293,7 @@ hr {
 
 
 /* Webfont smoothing */
+:after,
 :before {
   @include font-smoothing();
 }

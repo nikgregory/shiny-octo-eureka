@@ -213,43 +213,48 @@ $regions-background-color : $page-background-color;
 // -----------------------------------------------------------------------------
 
 // Full width background toggle
-$page-row-fullwidth                : true;
-$regions-padding                   : $medium;
+$page-row-fullwidth : true;
+$regions-padding    : $medium;
 
+// Leaderboard
+$page-leaderboard-color                : $text-color;
+$page-leaderboard-background-color     : $regions-background-color;
 
 // Header
-$page-header-color                 : $text-color;
-$page-header-background-color      : #ffffff;
-
+$page-header-color                     : $text-color;
+$page-header-background-color          : #ffffff;
 
 // Navbar
-$page-navbar-color                 : #ffffff;
-$page-navbar-background-color      : #666666;
+$page-navbar-color                     : #ffffff;
+$page-navbar-background-color          : #666666;
 
-
-// Messages
-$page-messages-color               : $text-color;
-$page-messages-background-color    : $regions-background-color;
-
+// Highlighted
+$page-highlighted-color                : $text-color;
+$page-highlighted-background-color     : $regions-background-color;
 
 // Features
-$page-features-color               : $text-color;
-$page-features-background-color    : #d3d3d3;
+$page-features-color                   : $text-color;
+$page-features-background-color        : #d3d3d3;
 
+// Content prefix
+$page-content-prefix-color             : $text-color;
+$page-content-prefix-background-color  : $regions-background-color;
 
 // Main
-$page-main-color                   : $text-color;
-$page-main-background-color        : $regions-background-color;
+$page-main-color                       : $text-color;
+$page-main-background-color            : $regions-background-color;
 
+// Content suffix
+$page-content-suffix-color             : $text-color;
+$page-content-suffix-background-color  : $regions-background-color;
 
-// Sub Features
-$page-subfeatures-color            : $text-color;
-$page-subfeatures-background-color : #d3d3d3;
-
+// Sub features
+$page-subfeatures-color                : $text-color;
+$page-subfeatures-background-color     : #d3d3d3;
 
 // Footer
-$page-footer-color                 : #ffffff;
-$page-footer-background-color      : #666666;
+$page-footer-color                     : #ffffff;
+$page-footer-background-color          : #666666;
 
 
 

@@ -123,6 +123,11 @@ hr {
   color: inherit;
 }
 
+/**
+ * AT attribution message
+ *  - a toggle setting in the theme settings, you can turn it on/off using
+ *    the Markup overrides extension.
+ ========================================================================== */
 .attribution .l-rw {
   background-color: transparent;
 }
@@ -130,6 +135,10 @@ hr {
   color: #363636;
 }
 
+/**
+ * Feed Icons
+ *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
+ ========================================================================== */
 .feed-icon-rss__path {
   fill: rgba(0, 0, 0, 0.6);
 }

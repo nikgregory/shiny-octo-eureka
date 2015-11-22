@@ -220,6 +220,9 @@ video {
 svg {
   max-height: 100%;
 }
+svg:not(:root) {
+  overflow: hidden;
+}
 
 figcaption {
   font-size: 12px;
@@ -332,6 +335,7 @@ hr {
 }
 
 /* Webfont smoothing */
+:after,
 :before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1968,6 +1972,7 @@ table tr.error {
 
 /**
  * Feed Icons
+ *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
  ========================================================================== */
 .feed-icon {
   display: block;
