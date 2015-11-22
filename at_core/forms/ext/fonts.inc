@@ -48,8 +48,12 @@ function font_elements() {
         'selector' => '.view-mode--full .node__title, .page__title, .user__title',
       ),
       'nodetitle' => array(
-        'label' => 'Node title',
+        'label' => 'Node full title',
         'selector' => '.node__title, .node__title a',
+      ),
+      'nodetitle_teaser' => array(
+        'label' => 'Node teaser title',
+        'selector' => '.node--view-mode-teaser .node__title, .node--view-mode-teaser .node__title-link',
       ),
       'commenttitle' => array(
         'label' => 'Comment title',
@@ -70,6 +74,10 @@ function font_elements() {
       'responsivemenu' => array(
         'label' => 'Responsive menu',
         'selector' => '.rm-block, .rm-block a',
+      ),
+      'responsivemenu_toggle' => array(
+        'label' => 'Responsive menu toggle',
+        'selector' => '.rm-toggle, .rm-toggle__link',
       ),
       'buttons' => array(
         'label' => 'Buttons',
@@ -169,6 +177,7 @@ function title_valid_type_options() {
     'siteslogan',
     'pagetitle',
     'nodetitle',
+    'nodetitle_teaser',
     'blocktitle',
     'commenttitle',
     'h1',

@@ -160,7 +160,7 @@ $form['enable_extensions']['settings_enable_devel'] = array(
 $form['enable_extensions']['settings_enable_legacy_browsers'] = array(
   '#type' => 'checkbox',
   '#title' => t('Legacy browsers'),
-  '#description' => t('Settings to support really old browsers like IE8. Use with caution, do not enable this unless you really need it.'),
+  '#description' => t('Settings to support crappy old browsers like IE8. Use with caution, do not enable this unless you really, really need it.'),
   '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
 );
 
