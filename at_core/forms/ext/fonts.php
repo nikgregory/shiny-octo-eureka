@@ -250,6 +250,14 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     );
   }
 
+  // Font smoothing
+  $form['fonts']['apply'][$font_element_key]['settings_font_smoothing_' . $font_element_key] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Apply font smoothing'),
+    '#description' => t('Font smoothing only works in Mac OS X and may improve legibility, in particular for Google and Typekit fonts.'),
+    '#default_value' => theme_get_setting('settings.font_smoothing_' . $font_element_key),
+  );
+
   // Custom selectors has a textarea.
   if ($font_element_key === 'custom_selectors') {
     $form['fonts']['apply']['custom_selectors']['settings_custom_selectors'] = array(

@@ -98,6 +98,11 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
         }
       }
     }
+
+    // Font smoothing
+    if (isset($values['settings_font_smoothing_' . $font_key]) && $values['settings_font_smoothing_' . $font_key] == 1) {
+      $fonts[$font_key]['smoothing'] = '-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;';
+    }
   }
 
   // Output data to file
@@ -116,6 +121,10 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
         if (isset($values['lineheight'])) {
           $font_style .= $values['lineheight'];
+        }
+
+        if (isset($values['smoothing'])) {
+          $font_style .= 	$values['smoothing'];
         }
 
         $font_style .= '}';
