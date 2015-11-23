@@ -71,13 +71,14 @@ $font-weight-light    : 300;
 
 
 // Font Families
+// http://code.stephenmorley.org/html-and-css/the-myth-of-web-safe-fonts/
 // -----------------------------------------------------------------------------
 $wide-sans-serif   : Verdana, Geneva, sans-serif;
 $narrow-sans-serif : Tahoma, Arial, Helvetica, sans-serif;
 $wide-serif        : Georgia, Utopia, Palatino, 'Palatino Linotype', serif;
 $narrow-serif      : 'Times New Roman', Times, serif;
-$impact            : 'Impact, "Helvetica Inserat", "Arial Black", sans-serif';
 $monospace         : 'Courier New', Courier, monospace, sans-serif;
+$impact            : 'Impact, "Helvetica Inserat", "Arial Black", sans-serif';
 $sans-serif        : sans-serif;
 $serif             : serif;
 

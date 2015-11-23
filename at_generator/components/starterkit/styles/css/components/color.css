@@ -302,21 +302,9 @@ hr {
 }
 
 /**
- * Tables
- * Base styles.
- ========================================================================== */
-table {
-  border-color: #cccccc;
-}
-
-/**
  * Table Theme
  * Style Drupal selectors for tables.
  ========================================================================== */
-tr {
-  border-color: #cccccc;
-}
-
 thead tr {
   color: #363636;
   background-color: #ededed;

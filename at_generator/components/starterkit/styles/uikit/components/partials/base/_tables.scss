@@ -5,8 +5,8 @@
 
 table {
   padding: 0;
-  //width: 100%;
-  border: $border-width $border-style;
+  border: 0;
+
   border-collapse: collapse;
 
   caption {
@@ -46,7 +46,7 @@ thead {
 tr,
 td,
 th {
-  border-style: $border-style;
+  border: $border-width $border-style;
 }
 
 

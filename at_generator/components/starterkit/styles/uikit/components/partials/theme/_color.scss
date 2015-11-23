@@ -542,17 +542,6 @@ hr {
 }
 
 
-
-/**
- * Tables
- * Base styles.
- ========================================================================== */
-
-table {
-  border-color: $border-color;
-}
-
-
 /**
  * Table Theme
  * Style Drupal selectors for tables.
@@ -560,8 +549,6 @@ table {
 
 // tr, takes extensive styles if enabled in variables.scss.
 tr {
-  border-color: $border-color;
-
   // Row striping (zebra).
   @if $table-row-striping == true {
     &.odd {

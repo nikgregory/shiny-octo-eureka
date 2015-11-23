@@ -78,14 +78,35 @@ input {
 }
 
 
-// Search.
+// Stop iOS/webkit styling form elements.
+textarea,
+button,
+.button,
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="submit"]
+input[type="tel"],
+input[type="text"],
+input[type="url"] {
+  -webkit-appearance: none;
+}
+
+
+// Just remove the box shadow form some inputs in webkit.
+input[type="time"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"] {
+  background-clip: padding-box;
+}
+
+
+// Remove all the special stuff webkit adds to
+// search fields, it's a PITA to theme.
 input[type="search"] {
-
-  // Webkit search fields may need special attention.
-  -webkit-appearance: textfield;
-
-  // Remove all the special stuff webkit adds to
-  // search fields, it's just a huge PITA to theme.
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
