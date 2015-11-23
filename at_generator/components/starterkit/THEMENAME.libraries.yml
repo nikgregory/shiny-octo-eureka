@@ -19,6 +19,13 @@ book:
     component:
       styles/css/components/book.css: {}
 
+# Block user login
+login_block:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/login-block.css: {}
+
 # Comment
 comment:
   version: 8.x-1.0
@@ -33,7 +40,7 @@ forum:
     component:
       styles/css/components/forum.css: {}
 
-# Responsive Menus
+# Responsive menus
 responsive_menus:
   version: 8.x-1.0
   css:
@@ -82,7 +89,7 @@ maintenance_page:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/components/maintenance_page.css: {}
+      styles/css/components/maintenance-page.css: {}
 
 # Quick Edit
 quickedit:
@@ -132,12 +139,6 @@ title_styles:
   css:
     theme:
       styles/css/generated/title-styles.css: {}
-
-login_block:
-  version: 8.x-1.0
-  css:
-    theme:
-      styles/css/generated/login-block.css: {}
 
 custom_css:
   version: 8.x-1.0

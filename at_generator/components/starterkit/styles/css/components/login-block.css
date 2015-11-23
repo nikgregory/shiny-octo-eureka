@@ -1,0 +1,37 @@
+/**
+ * Block User Login
+ *  - style the theme settings for login block (horizontal, placeholders etc).
+ ========================================================================== */
+.block-user-login-block.is-horizontal {
+  margin: 7px 0 16px;
+  margin: 0.43162rem 0 1rem;
+}
+.block-user-login-block.is-horizontal .block__title {
+  font-family: inherit;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
+  line-height: 1.5rem;
+}
+.block-user-login-block.is-horizontal .block__title,
+.block-user-login-block.is-horizontal > div,
+.block-user-login-block.is-horizontal .user-login-form,
+.block-user-login-block.is-horizontal .user-login-form > div,
+.block-user-login-block.is-horizontal .form-item,
+.block-user-login-block.is-horizontal .form-actions {
+  display: inline-block;
+}
+.block-user-login-block.is-horizontal form,
+.block-user-login-block.is-horizontal .form-item,
+.block-user-login-block.is-horizontal .form-actions {
+  margin-bottom: 0;
+}
+.block-user-login-block.is-horizontal label {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=login-block.css.map */

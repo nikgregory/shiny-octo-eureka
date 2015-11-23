@@ -356,7 +356,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
   switch ($form_id) {
-    case 'user_login':
+    case 'user_login_form':
       if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
           if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
@@ -388,8 +388,6 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
           }
         }
       }
-
-      //kpr($form);
 
       // This is cool for browsers that support it, but it's hard to theme, really it
       // needs the modernizr test "input[search] search event" so we can theme webkit
@@ -769,13 +767,13 @@ function at_core_preprocess_block(&$variables) {
       */
 
       // Remove login block links.
-      if ($variables['base_plugin_id'] === 'user_login_block') {
+      if ($variables['base_plugin_id'] == 'user_login_block') {
         if ((isset($config['login_block_remove_links']) && $config['login_block_remove_links'] === 1) || (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1)) {
           unset($variables['content']['user_links']);
 
           // Add class for horizontal login.
           if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-            $variables['attributes']['class'][] = 'block-login--horizontal';
+            $variables['attributes']['class'][] = 'is-horizontal';
           }
         }
       }

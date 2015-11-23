@@ -45,12 +45,6 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
         require_once($at_core_path . '/forms/ext/breadcrumb_submit.php');
         at_core_submit_breadcrumb($values, $theme, $generated_files_path);
       }
-
-      // Login block.
-      if (isset($values['settings_horizontal_login_block']) && $values['settings_horizontal_login_block'] === 1) {
-        require_once($at_core_path . '/forms/ext/login_block_submit.php');
-        at_core_submit_login_block($values, $theme, $generated_files_path);
-      }
     }
 
     // Submit handler for Mobile blocks.
