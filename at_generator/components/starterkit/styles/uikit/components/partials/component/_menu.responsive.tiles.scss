@@ -1,0 +1,15 @@
+// Tiles
+@include tiles($context: 12, $tile_count: 2, $arrows: false);
+
+.ms-tiles {
+  .rm-block__content {
+    @include output-rhythm(padding, $xx-small 0);
+
+    .menu-level-1 {
+      > .menu-item {
+        @include output-rhythm(margin, $xx-small 0);
+      }
+    }
+  }
+}
+

@@ -1,0 +1,43 @@
+.ms-tiles .rm-block .block-menu__title,
+.ms-tiles .rm-block .menu-level-2 {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+.ms-tiles .rm-block__content {
+  overflow: hidden;
+}
+.ms-tiles .rm-block__content .menu-level-1 > li {
+  width: 48.98785%;
+  float: left;
+}
+.ms-tiles .rm-block__content .menu-level-1 > li:nth-child(2n + 1) {
+  margin-left: 0;
+  margin-right: -100%;
+  clear: both;
+  margin-left: 0;
+}
+.ms-tiles .rm-block__content .menu-level-1 > li:nth-child(2n + 2) {
+  margin-left: 51.01215%;
+  margin-right: -100%;
+  clear: none;
+}
+.ms-tiles .rm-block__content .menu li.expanded > a:after {
+  content: none;
+}
+
+.ms-tiles .rm-block__content {
+  padding: 7px 0;
+  padding: 0.4375rem 0;
+}
+.ms-tiles .rm-block__content .menu-level-1 > .menu-item {
+  margin: 7px 0;
+  margin: 0.4375rem 0;
+}
+
+/*# sourceMappingURL=responsive-menus--tiles.css.map */

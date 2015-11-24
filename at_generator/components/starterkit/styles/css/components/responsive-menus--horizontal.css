@@ -1,0 +1,46 @@
+.ms-horizontal .rm-toggle {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+.ms-horizontal .rm-block__content .menu:before, .ms-horizontal .rm-block__content .menu:after {
+  content: " ";
+  display: table;
+}
+.ms-horizontal .rm-block__content .menu:after {
+  clear: both;
+}
+.ms-horizontal .rm-block__content .menu-item {
+  float: left;
+  margin: 0 0 0 0;
+  list-style: none;
+}
+.ms-horizontal .rm-block__content .menu-item ul,
+.ms-horizontal .rm-block__content .menu-item ol {
+  display: none;
+}
+.ms-horizontal .rm-block__content .menu-item a:after {
+  content: '';
+  display: none;
+}
+
+.ms-horizontal .rm-block__content a {
+  padding: 7px 18px;
+  padding: 0.4375rem 1.125rem;
+}
+.ms-horizontal .rm-block__content a:before, .ms-horizontal .rm-block__content a:after {
+  content: "";
+  float: none;
+  width: 0;
+  padding: 0;
+}
+.ms-horizontal .pr-header__header-second .menu {
+  float: right;
+}
+
+/*# sourceMappingURL=responsive-menus--horizontal.css.map */

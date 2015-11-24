@@ -1,0 +1,21 @@
+/**
+ * Shortcodes (Positioning)
+ ========================================================================== */
+
+.center-element {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media #{$mobile} {
+  .pull-right,
+  [dir="rtl"] .pull-left {
+    float: right;
+  }
+
+  .pull-left,
+  [dir="rtl"] .pull-right {
+    float: left;
+  }
+}
+

@@ -7,6 +7,8 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 
+use Symfony\Component\Yaml\Parser;
+
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
@@ -160,9 +162,20 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Shortcodes
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      $page['#attached']['library'][] = "$theme/shortcodes";
+      $shortcodes_yml = $path_to_theme . '/' . $theme . '.shortcodes.yml';
+      if (file_exists($shortcodes_yml)) {
+        $shortcodes_parser = new Parser();
+        $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
+        unset($shortcodes['animate']);
+        foreach ($shortcodes as $class_type => $class_values) {
+          if (isset($config['shortcodes_' . $class_type . '_enable']) && $config['shortcodes_' . $class_type . '_enable'] === 1) {
+            //$shortcode_library = str_replace($class_type, '_', '-');
+            $page['#attached']['library'][] = "$theme/shortcodes_$class_type";
+          }
+        }
+      }
 
-      // shortcodes_animate_enable
+      // Animate has its own naming convention, being a vendor library.
       if (isset($config['shortcodes_animate_enable']) && $config['shortcodes_animate_enable'] === 1) {
         $page['#attached']['library'][] = "$theme/animate";
       }
@@ -171,8 +184,7 @@ function at_core_page_attachments_alter(array &$page) {
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
 
-      // Load RM JS and CSS styles.
-      $page['#attached']['library'][] = "at_core/at.responsivemenus";
+      // Load Responsive menu dependancies.
       $page['#attached']['library'][] = "$theme/responsive_menus";
 
       $responsivemenu_settings = array();
@@ -182,9 +194,14 @@ function at_core_page_attachments_alter(array &$page) {
         $responsivemenu_settings['bp'] = $config['responsive_menu_breakpoint'];
       }
 
-      // Loop the config settings and build an array for drupalSettings.
+      // Loop the config settings to find selected menu styles.
       foreach (array('default', 'responsive') as $style) {
         if (isset($config['responsive_menu_' . $style . '_style'])) {
+
+          // Load the library for each selected menu style.
+          $page['#attached']['library'][] = "$theme/responsive_menus_" . $config['responsive_menu_' . $style . '_style'];
+
+          // Set drupalSettings
           $responsivemenu_settings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
         }
       }

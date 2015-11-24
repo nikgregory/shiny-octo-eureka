@@ -5,11 +5,11 @@
  ========================================================================== */
 [class*="tags"].field-type-entity-reference .field__item {
   margin: 0 11px 0 0;
-  margin: 0 0.69838rem 0 0;
+  margin: 0 0.6875rem 0 0;
 }
 [dir="rtl"] [class*="tags"].field-type-entity-reference li {
   margin: 0 0 0 11px;
-  margin: 0 0 0 0.69838rem;
+  margin: 0 0 0 0.6875rem;
 }
 [class*="tags"].field-type-entity-reference .field__items {
   padding: 0;

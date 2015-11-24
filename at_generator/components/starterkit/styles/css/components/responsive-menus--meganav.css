@@ -1,0 +1,91 @@
+@charset "UTF-8";
+.ms-meganav .rm-region,
+.ms-meganav .rm-block {
+  position: relative;
+}
+.ms-meganav .rm-toggle.block-menu__title {
+  position: absolute;
+  right: 0;
+  z-index: 200;
+  padding: 0;
+}
+.ms-meganav .rm-toggle.block-menu__title:after {
+  display: block;
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  width: 16px;
+  width: 1rem;
+  padding: 7px 16px;
+  padding: 0.4375rem 1rem;
+}
+.ms-meganav .rm-toggle.block-menu__title span {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+.ms-meganav .rm-block__content {
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
+}
+.ms-meganav .rm-block__content .menu-level-1 > li {
+  float: left;
+}
+.ms-meganav .rm-block__content .menu-level-1 > li > a:after {
+  content: "";
+  display: none;
+}
+.ms-meganav .rm-block__content .menu-level-2 {
+  display: none;
+  opacity: 0.001;
+}
+.ms-meganav.rm-is-open .rm-block__content {
+  padding: 0;
+  margin: 0;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li {
+  float: none;
+  margin-right: 3.5rem;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:before, .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:after {
+  content: " ";
+  display: table;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:after {
+  clear: both;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:last-child {
+  border-bottom: none;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li a {
+  float: left;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li > a {
+  width: 12em;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 {
+  display: block;
+  float: left;
+  opacity: 1;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul, .ms-meganav.rm-is-open .rm-block__content .menu-level-2 ol {
+  padding: 0;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 li,
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul {
+  float: left;
+}
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 li a,
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul a {
+  width: auto;
+}
+
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu-item:last-child {
+  border-bottom: none;
+}
+
+/*# sourceMappingURL=responsive-menus--meganav.css.map */

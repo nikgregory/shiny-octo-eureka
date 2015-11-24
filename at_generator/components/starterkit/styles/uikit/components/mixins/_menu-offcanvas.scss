@@ -19,6 +19,8 @@
 
     .rm-toggle {
       float: $oc-position;
+      margin-#{$oc-position}: 0;
+      padding-#{$oc-position}: 0;
 
       &:before {
         font-family: $icon-font;

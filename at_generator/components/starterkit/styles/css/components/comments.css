@@ -5,7 +5,7 @@
  ========================================================================== */
 .field-type-comment {
   margin: 18px 0 0;
-  margin: 1.13rem 0 0;
+  margin: 1.125rem 0 0;
   clear: both;
 }
 .field-type-comment:before, .field-type-comment:after {
@@ -17,7 +17,7 @@
 }
 .field-type-comment .indented {
   margin-left: 42px;
-  margin-left: 2.61803rem;
+  margin-left: 2.625rem;
 }
 
 .comment {

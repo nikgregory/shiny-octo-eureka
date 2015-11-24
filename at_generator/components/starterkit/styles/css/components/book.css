@@ -18,7 +18,7 @@
 }
 .book-pager__link {
   padding: 7px 0;
-  padding: 0.43162rem 0;
+  padding: 0.4375rem 0;
   display: inline-block;
 }
 .book-pager__link:before, .book-pager__link:after {

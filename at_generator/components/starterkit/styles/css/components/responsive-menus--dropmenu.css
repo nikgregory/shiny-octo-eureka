@@ -1,0 +1,96 @@
+@charset "UTF-8";
+.ms-dropmenu .rm-toggle {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+}
+.ms-dropmenu .rm-block__content a {
+  position: relative;
+  padding: 7px 18px;
+  padding: 0.4375rem 1.125rem;
+}
+.ms-dropmenu .rm-block__content a:after {
+  position: absolute;
+  right: 16px;
+  right: 1rem;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 {
+  position: relative;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li {
+  float: left;
+  width: auto;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li.menu-item--collapsed > a, .ms-dropmenu .rm-block__content .menu-level-1 li.menu-item--expanded > a {
+  padding-right: 40px;
+  padding-right: 2.5rem;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li.menu-item--expanded > a:after {
+  content: "";
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li.menu-item--collapsed > a:after {
+  content: '';
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li ul {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li ul li {
+  min-width: 12em;
+  text-align: left;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 li:hover > ul, .ms-dropmenu .rm-block__content .menu-level-1 li:focus > ul {
+  display: block;
+  opacity: 1;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+  font-family: inherit;
+}
+.ms-dropmenu .rm-block__content .odd ul {
+  left: 0;
+  top: auto;
+}
+.ms-dropmenu .rm-block__content .odd ul > .menu-item--expanded > a:after {
+  content: "";
+}
+.ms-dropmenu .rm-block__content .odd ul .odd {
+  left: 100%;
+  top: 0;
+}
+.ms-dropmenu .rm-block__content .odd ul .odd > .menu-item--expanded > a:after {
+  content: "";
+}
+
+.ms-dropmenu .rm-block__content a {
+  position: relative;
+  padding: 7px 18px;
+  padding: 0.4375rem 1.125rem;
+}
+.ms-dropmenu .rm-block__content a:after {
+  position: absolute;
+  right: 16px;
+  right: 1rem;
+}
+.ms-dropmenu .rm-block__content .menu-item {
+  text-align: center;
+}
+.ms-dropmenu .rm-block__content .menu-item.menu-item--expanded li {
+  text-align: left;
+}
+
+/*# sourceMappingURL=responsive-menus--dropmenu.css.map */

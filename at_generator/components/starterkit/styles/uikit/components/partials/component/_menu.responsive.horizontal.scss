@@ -1,0 +1,27 @@
+
+// Horizontal (plain hoz menu)
+@include horizontal($arrows: false);
+
+.ms-horizontal {
+  .rm-block__content {
+    a {
+      @include output-rhythm(padding, $xx-small $large);
+
+      &:before,
+      &:after {
+        content: "";
+        float: none;
+        width: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  // Header second specific styling.
+  .pr-header__header-second {
+    .menu {
+      float: #{$flow-to};
+    }
+  }
+}
+

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.ms-offcanvas > .page {
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
+}
+.ms-offcanvas .rm-toggle {
+  float: left;
+  margin-left: 0;
+  padding-left: 0;
+}
+.ms-offcanvas .rm-toggle:before {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  width: 16px;
+  width: 1rem;
+  padding-right: 7px;
+  padding-right: 0.4375rem;
+}
+.ms-offcanvas .rm-block__content {
+  opacity: .001;
+  left: 0;
+  -webkit-transform: translate(-15em, 0);
+      -ms-transform: translate(-15em, 0);
+          transform: translate(-15em, 0);
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
+}
+.ms-offcanvas.rm-is-open > .page {
+  position: fixed;
+  -webkit-transform: translate(15em, 0);
+      -ms-transform: translate(15em, 0);
+          transform: translate(15em, 0);
+}
+.ms-offcanvas.rm-is-open .l-pr {
+  margin: 0;
+  padding: 0;
+}
+.ms-offcanvas.rm-is-open .rm-block__content {
+  opacity: 1;
+  display: block;
+  width: 15em;
+  position: absolute;
+  top: 0;
+}
+
+.ms-offcanvas .rm-block__content {
+  display: none;
+  padding: 0 0 7px;
+  padding: 0 0 0.4375rem;
+}
+.ms-offcanvas .rm-block__content a {
+  padding: 7px 18px;
+  padding: 0.4375rem 1.125rem;
+}
+.ms-offcanvas .rm-block__content .menu a {
+  margin-bottom: 2px;
+  margin-bottom: 0.125rem;
+}
+.ms-offcanvas > .page,
+.ms-offcanvas .rm-block__content {
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
+}
+
+/*# sourceMappingURL=responsive-menus--offcanvas.css.map */

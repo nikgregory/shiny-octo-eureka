@@ -1,0 +1,17 @@
+// Slidedown (classic hamburger menu)
+@include slidedown($arrows: false);
+
+.ms-slidedown {
+  // Menu <a> bottom whitespace.
+  .rm-block__content .menu a {
+    @include output-rhythm(margin-bottom, 2px);
+  }
+
+  // Header second specific styling.
+  .pr-header__header-second {
+    .rm-toggle {
+      text-align: #{$flow-to};
+    }
+  }
+}
+

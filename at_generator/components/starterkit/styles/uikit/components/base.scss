@@ -1,5 +1,6 @@
 @import "partials/base/base";
 
+// TODO remove toolbar if/when it's fixed.
 @import
   "partials/base/webfonts",
   "partials/base/elements",
@@ -38,7 +39,7 @@
   "partials/component/user.forms",
   "partials/component/user.profile",
   "partials/component/views",
-  "partials/theme/states",
-  "partials/theme/print",
+  "partials/component/states",
   "partials/component/attribution",
-  "partials/theme/toolbar"; // remove toolbar overrides when toolbar CSS is fixed.
+  "partials/component/toolbar",
+  "partials/theme/print";

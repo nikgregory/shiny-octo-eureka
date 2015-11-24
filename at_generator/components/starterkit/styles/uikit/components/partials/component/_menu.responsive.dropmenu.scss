@@ -1,0 +1,27 @@
+
+// Dropmenu
+@include dropmenu($item-width: 12em, $arrows: true);
+
+// Customize responsive menus for this theme.
+.ms-dropmenu {
+  .rm-block__content {
+    a {
+      position: relative;
+      @include output-rhythm(padding, $xx-small $large);
+
+      &:after {
+        position: absolute;
+        @include output-rhythm(right, $medium); // LTR
+      }
+    }
+
+    .menu-item {
+      text-align: center;
+
+      &.menu-item--expanded li {
+        text-align: $flow-from; // LTR
+      }
+    }
+  }
+}
+
