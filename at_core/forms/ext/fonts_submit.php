@@ -55,8 +55,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
         $line_height_multiplier = $values['settings_font_lineheight_multiplier_large'];
       }
 
-      $fonts[$font_key]['size'] = 'font-size: ' . ceil($px_size) . 'px; font-size:' . round($rem_size, 3) . 'rem;';
-      $fonts[$font_key]['lineheight'] = 'line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+      $fonts[$font_key]['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
+      $fonts[$font_key]['lineheight'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
     // Set font family for each key.
@@ -65,7 +65,12 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       // Websafe.
       if ($values['settings_font_' . $font_key] == 'websafe') {
         if (isset($values['settings_font_websafe_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_fonts[$values['settings_font_websafe_' . $font_key]]) . ';';
+          if (!empty($websafe_fonts[$values['settings_font_websafe_' . $font_key]])) {
+            $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_fonts[$values['settings_font_websafe_' . $font_key]]) . ';';
+          }
+          else {
+            $fonts[$font_key]['family'] = 'font-family: inherit;';
+          }
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -95,7 +100,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
     // Font smoothing.
     if (isset($values['settings_font_smoothing_' . $font_key]) && $values['settings_font_smoothing_' . $font_key] == 1) {
-      $fonts[$font_key]['smoothing'] = '-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;';
+      $fonts[$font_key]['smoothing'] = ' -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;';
     }
   }
 
@@ -103,7 +108,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   if (!empty($fonts)) {
     foreach ($fonts as $key => $values) {
       if (isset($values['family']) || isset($values['size'])) {
-        $font_style = $values['selectors'] . '{';
+        $font_style = $values['selectors'] . ' { ';
 
         if (isset($values['family'])) {
           $font_style .= $values['family'];
@@ -121,7 +126,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
           $font_style .= 	$values['smoothing'];
         }
 
-        $font_style .= '}';
+        $font_style .= ' }';
         $font_styles[] = $font_style;
       }
     }

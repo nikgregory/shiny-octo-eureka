@@ -153,11 +153,12 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
 
   // Websafe fonts.
   if (isset($font_options['websafe'])) {
+    $websafe_font_element_key_setting = theme_get_setting('settings.font_websafe_' . $font_element_key);
     $form['fonts']['apply'][$font_element_key]['settings_font_websafe_' . $font_element_key] = array(
       '#type' => 'select',
       '#title' => t('Select a font stack to apply to this element.'),
       '#options' => $websafe_options,
-      '#default_value' => theme_get_setting('settings.font_websafe_' . $font_element_key),
+      '#default_value' => isset($websafe_font_element_key_setting) ? $websafe_font_element_key_setting : 0,
       '#states' => array(
         'visible' => array(
           'select[name="settings_font_' . $font_element_key . '"]' => array(
