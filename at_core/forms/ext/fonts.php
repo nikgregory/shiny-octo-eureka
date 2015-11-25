@@ -8,45 +8,26 @@ use Drupal\Component\Utility\Xss;
  * Generate form elments for the font settings.
  */
 
-// Websafe fonts.
-$websafe_fonts = websafe_fonts();
-
 // Elements to apply fonts to.
 $font_elements = font_elements();
 
-// Websafe stacks
-if ($websafe = theme_get_setting('settings.font_websafe')) {
-  foreach ($websafe_fonts as $websafe_font_key => $websafe_font_value) {
-    if ($websafe == $websafe_font_key) {
-      $selected_websafe_stack = Html::escape($websafe_font_value);
-    }
-    else if ($websafe == '-- none --') {
-      $selected_websafe_stack = $websafe;
-    }
-  }
-}
-
-// Custom stack message
-if ($customstack = theme_get_setting('settings.font_customstack')) {
-  $selected_customstack = Html::escape($customstack);
-}
+// Websafe stacks and select options.
+$websafe_fonts = theme_get_setting('settings.font_websafe') ? Xss::filter(theme_get_setting('settings.font_websafe')) : websafe_fonts();
+$websafe_options = explode(PHP_EOL, $websafe_fonts);
 
 // Font Options - here we must test if there are values set for each font type and populate the options list.
 $font_options = array(
   'none' => t('-- none --'),
 );
 
-if (isset($selected_websafe_stack) && $selected_websafe_stack != '-- none --') {
-  $font_options['websafe'] = t('Websafe stack');
+if (!empty($websafe_fonts)) {
+  $font_options['websafe'] = t('Websafe fonts');
 }
 if (theme_get_setting('settings.font_google')) {
   $font_options['google'] = t('Google font');
 }
 if (theme_get_setting('settings.font_typekit')) {
   $font_options['typekit'] = t('Typekit');
-}
-if (theme_get_setting('settings.font_customstack')) {
-  $font_options['customstack'] = t('Custom stack');
 }
 
 $form['fonts'] = array(
@@ -67,17 +48,25 @@ $form['fonts']['setup']['help'] = array(
   '#markup' => t('First set the fonts you want to use in your site and save the Extension settings. Then apply fonts to specific elements.'),
 );
 
-// FONT Setup: Websafe font
+// Pass in a hidden setting for submit
+$form['fonts']['setup']['websafe_options'] = array(
+  '#type' => 'hidden',
+  '#value' => $websafe_options,
+);
+
 $form['fonts']['setup']['settings_font_websafe'] = array(
-  '#type' => 'select',
-  '#title' => t('Websafe stack'),
-  '#default_value' => Xss::filter(theme_get_setting('settings.font_websafe')),
-  '#options' => $websafe_fonts,
+  '#type' => 'textarea',
+  '#title' => t('Websafe font stacks'),
+  '#rows' => 10,
+  '#default_value' => $websafe_fonts,
+  '#description' => t('Enter one font stack per line. Separate fonts with a comma, quote font names with spaces. Do not include a trailing semicolon.'),
 );
 
 // FONT Setup: Google font
 $form['fonts']['setup']['settings_font_google'] = array(
-  '#type' => 'textfield',
+  '#type' => 'textarea',
+  '#rows' => 3,
+  //'#maxlength' => 1024,
   '#title' => t('Google fonts'),
   '#default_value' => Xss::filter(theme_get_setting('settings.font_google')),
   '#description' => t('<ol><li>Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code></li></ol>', array('@google_font_wizard' => 'http://www.google.com/fonts')),
@@ -89,14 +78,6 @@ $form['fonts']['setup']['settings_font_typekit'] = array(
   '#title' => t('Typekit ID'),
   '#default_value' => Html::escape(theme_get_setting('settings.font_typekit')),
   '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
-);
-
-// FONT Setup: Custom string
-$form['fonts']['setup']['settings_font_customstack'] = array(
-  '#type' => 'textfield',
-  '#title' => t('Custom stack'),
-  '#default_value' => Xss::filter(theme_get_setting('settings.font_customstack')),
-  '#description' => t('Enter a comma seperated list of fonts. Quote font names with spaces, e.g. <code>"Times New Roman", Garamond, sans-serif</code>'),
 );
 
 $form['fonts']['setup']['lineheight'] = array(
@@ -170,11 +151,13 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     '#default_value' => theme_get_setting('settings.font_' . $font_element_key),
   );
 
-  // Websafe font message
+  // Websafe fonts.
   if (isset($font_options['websafe'])) {
-    $form['fonts']['apply'][$font_element_key]['websafe_font_default'] = array(
-      '#type' => 'container',
-      '#markup' => t('Current Websafe stack: <code>' . $selected_websafe_stack . '</code>'),
+    $form['fonts']['apply'][$font_element_key]['settings_font_websafe_' . $font_element_key] = array(
+      '#type' => 'select',
+      '#title' => t('Select a font stack to apply to this element.'),
+      '#options' => $websafe_options,
+      '#default_value' => theme_get_setting('settings.font_websafe_' . $font_element_key),
       '#states' => array(
         'visible' => array(
           'select[name="settings_font_' . $font_element_key . '"]' => array(
@@ -185,22 +168,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     );
   }
 
-  // Custom stack message
-  if (isset($font_options['customstack'])) {
-    $form['fonts']['apply'][$font_element_key]['customstack_font_default'] = array(
-      '#type' => 'container',
-      '#markup' => t('Current Custom stack: <code>' . $selected_customstack . '</code>'),
-      '#states' => array(
-        'visible' => array(
-          'select[name="settings_font_' . $font_element_key . '"]' => array(
-            'value' => 'customstack',
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Google font
+  // Google font.
   if (isset($font_options['google'])) {
     $form['fonts']['apply'][$font_element_key]['settings_font_google_' . $font_element_key] = array(
       '#type' => 'textfield',
@@ -217,7 +185,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
     );
   }
 
-  // Typekit font
+  // Typekit font.
   if (isset($font_options['typekit'])) {
     $form['fonts']['apply'][$font_element_key]['settings_font_typekit_' . $font_element_key] = array(
       '#type' => 'textfield',

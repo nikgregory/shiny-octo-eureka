@@ -5,7 +5,6 @@
  */
 function websafe_fonts() {
   $websafe_fonts = array(
-    'none'              => '-- none --',
     'wide_sans_serif'   => 'Verdana, Geneva, sans-serif',
     'narrow_sans_serif' => 'Helvetica, Tahoma, Arial, sans-serif',
     'wide_serif'        => 'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
@@ -44,14 +43,14 @@ function font_elements() {
       ),
       'pagetitle' => array(
         'label' => 'Page title',
-        'selector' => '.view-mode--full .node__title, .page__title, .user__title',
+        'selector' => '.node__title, .page__title, .user__title',
       ),
       'nodetitle' => array(
-        'label' => 'Node full title',
-        'selector' => '.node__title, .node__title a',
+        'label' => 'Node title (full)',
+        'selector' => '.node--view-mode-full .node__title, .node--view-mode-full .node__title a',
       ),
       'nodetitle_teaser' => array(
-        'label' => 'Node teaser title',
+        'label' => 'Node title (teaser)',
         'selector' => '.node--view-mode-teaser .node__title, .node--view-mode-teaser .node__title-link',
       ),
       'commenttitle' => array(
@@ -80,7 +79,7 @@ function font_elements() {
       ),
       'buttons' => array(
         'label' => 'Buttons',
-        'selector' => '.button',
+        'selector' => 'button, .button',
       ),
       'tabs' => array(
         'label' => 'Tabs',
@@ -88,11 +87,11 @@ function font_elements() {
       ),
       'h1h4' => array(
         'label' => 'h1 to h4 headings',
-        'selector' => 'h1,h2,h3,h4',
+        'selector' => 'h1, h2, h3, h4',
       ),
       'h5h6' => array(
         'label' => 'h5, h6 headings',
-        'selector' => 'h5,h6',
+        'selector' => 'h5, h6',
       ),
       'h1' => array(
         'label' => 'h1',

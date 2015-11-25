@@ -13,12 +13,12 @@ use Drupal\Component\Utility\Xss;
 
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
-  // Paths
+  // Paths.
   $subtheme_path = drupal_get_path('theme', $theme);
   $generated_scripts_path = $subtheme_path . '/scripts/generated';
 
   // Websafe fonts.
-  $websafe_fonts = websafe_fonts();
+  $websafe_fonts = $values['websafe_options'];
 
   // Elements to apply fonts to.
   $font_elements = font_elements();
@@ -43,7 +43,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       $fonts[$font_key]['selectors'] = $values['settings_custom_selectors']; // ? $values['settings_custom_selectors'] : 'ruby ruby'
     }
 
-    // Size/Line height
+    // Size/Line height.
     if (!empty($values['settings_font_size_' . $font_key])) {
 
       $px_size = $values['settings_font_size_' . $font_key];
@@ -55,43 +55,37 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
         $line_height_multiplier = $values['settings_font_lineheight_multiplier_large'];
       }
 
-      $fonts[$font_key]['size'] = 'font-size:' . ceil($px_size) . 'px; font-size:' . round($rem_size, 3) . 'rem;';
-      $fonts[$font_key]['lineheight'] = 'line-height:' . ceil($px_size * $line_height_multiplier) . 'px; line-height:' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+      $fonts[$font_key]['size'] = 'font-size: ' . ceil($px_size) . 'px; font-size:' . round($rem_size, 3) . 'rem;';
+      $fonts[$font_key]['lineheight'] = 'line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
     // Set font family for each key.
     if (isset($values['settings_font_' . $font_key])) {
-      // Websafe
-      if ($values['settings_font_' . $font_key] == 'websafe') {
-        if ($websafe_fonts[$values['settings_font_websafe']] != '-- none --') {
-          $fonts[$font_key]['family'] = 'font-family:' . $websafe_fonts[$values['settings_font_websafe']] . ';';
-        }
-      }
 
-      // Customstack
-      if ($values['settings_font_' . $font_key] == 'customstack') {
-        if (isset($values['settings_font_customstack'])) {
-          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_customstack'] . ';';
+      // Websafe.
+      if ($values['settings_font_' . $font_key] == 'websafe') {
+        if (isset($values['settings_font_websafe_' . $font_key])) {
+          $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_fonts[$values['settings_font_websafe_' . $font_key]]) . ';';
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
         }
       }
 
-      // Google
+      // Google.
       if ($values['settings_font_' . $font_key] == 'google') {
         if (isset($values['settings_font_google_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_google_' . $font_key] . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ';';
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
         }
       }
 
-      // Typekit
+      // Typekit.
       if ($values['settings_font_' . $font_key] == 'typekit') {
         if (!empty($values['settings_font_typekit_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family:' . $values['settings_font_typekit_' . $font_key] . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_typekit_' . $font_key] . ';';
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -99,13 +93,13 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       }
     }
 
-    // Font smoothing
+    // Font smoothing.
     if (isset($values['settings_font_smoothing_' . $font_key]) && $values['settings_font_smoothing_' . $font_key] == 1) {
       $fonts[$font_key]['smoothing'] = '-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;';
     }
   }
 
-  // Output data to file
+  // Output data to file.
   if (!empty($fonts)) {
     foreach ($fonts as $key => $values) {
       if (isset($values['family']) || isset($values['size'])) {
