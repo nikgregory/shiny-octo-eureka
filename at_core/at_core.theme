@@ -638,6 +638,9 @@ function at_core_preprocess_region(&$variables) {
     $variables['region_row'] = $region_row;
   }
 
+  // Set wrapper element. Required for BC. Deprecated.
+  $variables['html_element'] = 'div';
+
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
