@@ -7,6 +7,7 @@
 
   "use strict";
 
+  $('table.forum').addClass('responsive-enabled');
   $('table.responsive-enabled').wrap('<div class="responsive-table"><div class="responsive-table__scroll"></div></div>');
 
   if ($('table.responsive-enabled').prop('scrollWidth') > $(".responsive-table").width() ) {
