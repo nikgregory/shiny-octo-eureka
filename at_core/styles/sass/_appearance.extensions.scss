@@ -55,6 +55,14 @@
     #edit-settings-font-google {
       width: 100%;
     }
+
+    #edit-settings-font-fallback--wrapper {
+      legend {
+        @include visually-hidden-off;
+        line-height: 1.295em;
+        font-weight: 700;
+      }
+    }
   }
 
 

@@ -4,6 +4,7 @@ use Drupal\at_core\File\FileOperations;
 use Drupal\at_core\File\DirectoryOperations;
 
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Config\Config;
 
 /**
  * @file
@@ -12,6 +13,8 @@ use Drupal\Component\Utility\Xss;
  */
 
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
+  // Config, we need to save some config directly from this form.
+  $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Paths.
   $subtheme_path = drupal_get_path('theme', $theme);
@@ -23,12 +26,19 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   // Elements to apply fonts to.
   $font_elements = font_elements();
 
+  // Fallback family
+  $fallback_font_family = str_replace('_', '-', $values['settings_font_fallback']);
+
   // Initialize some variables.
   $fonts = array();
   $size = '';
   $base_size = '16'; // 16px default
   $px_size = '';
   $rem_size = '';
+
+  // Inject config settings for webfonts.
+  $values['settings_font_use_googlefonts'] = FALSE;
+  $values['settings_font_use_typekit'] = FALSE;
 
   $fileOperations = new FileOperations();
   $font_styles = array();
@@ -80,7 +90,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       // Google.
       if ($values['settings_font_' . $font_key] == 'google') {
         if (isset($values['settings_font_google_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ', ' . $fallback_font_family . ';';
+          $values['settings_font_use_googlefonts'] = TRUE;
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -90,7 +101,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       // Typekit.
       if ($values['settings_font_' . $font_key] == 'typekit') {
         if (!empty($values['settings_font_typekit_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_typekit_' . $font_key] . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_typekit_' . $font_key] . ', ' . $fallback_font_family . ';';
+          $values['settings_font_use_typekit'] = TRUE;
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -106,24 +118,24 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
   // Output data to file.
   if (!empty($fonts)) {
-    foreach ($fonts as $key => $values) {
-      if (isset($values['family']) || isset($values['size'])) {
-        $font_style = $values['selectors'] . ' { ';
+    foreach ($fonts as $font_key => $font_values) {
+      if (isset($font_values['family']) || isset($font_values['size'])) {
+        $font_style = $font_values['selectors'] . ' { ';
 
-        if (isset($values['family'])) {
-          $font_style .= $values['family'];
+        if (isset($font_values['family'])) {
+          $font_style .= $font_values['family'];
         }
 
-        if (isset($values['size'])) {
-          $font_style .= $values['size'];
+        if (isset($font_values['size'])) {
+          $font_style .= $font_values['size'];
         }
 
-        if (isset($values['lineheight'])) {
-          $font_style .= $values['lineheight'];
+        if (isset($font_values['lineheight'])) {
+          $font_style .= $font_values['lineheight'];
         }
 
-        if (isset($values['smoothing'])) {
-          $font_style .= 	$values['smoothing'];
+        if (isset($font_values['smoothing'])) {
+          $font_style .= 	$font_values['smoothing'];
         }
 
         $font_style .= ' }';
@@ -139,4 +151,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $file_name = 'fonts.css';
   $filepath = "$generated_files_path/$file_name";
   file_unmanaged_save_data($output, $filepath, FILE_EXISTS_REPLACE);
+
+  // Return modified values to convert to config.
+  return $values;
 }
+

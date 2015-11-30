@@ -29,7 +29,8 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
 
     // Submit handler for Fonts.
     if (isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) {
-      at_core_submit_fonts($values, $theme, $generated_files_path);
+      // Returns modified values to pass in new settings for typekit and google fonts.
+      $values = at_core_submit_fonts($values, $theme, $generated_files_path);
     }
 
     // Submit handler for Titles.

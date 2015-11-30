@@ -38,27 +38,31 @@
 #}
 {{ attach_library('at_core/at.fastclick_initialize') }}
 {{ attach_library('at_core/at.breakpoints') }}
+{{ attach_library(theme.name ~ '/fontfaceobserver') }}
 {{ attach_library(theme.name ~ '/base') }}
 {{ attach_library(theme.name ~ '/color') }}
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
     {% if touch_icons == true %}
-      {% if touch_icon_ipad_retina %}<link href="{{ touch_icon_ipad_retina }}" rel="{{ touch_rel }}" sizes="152x152" />{% endif %}
-      {% if touch_icon_iphone_retina %}<link href="{{ touch_icon_iphone_retina }}" rel="{{ touch_rel }}" sizes="120x120" />{% endif %}
-      {% if touch_icon_ipad %}<link href="{{ touch_icon_ipad }}" rel="{{ touch_rel }}" sizes="76x76" />{% endif %}
-      {% if touch_icon_default %}<link href="{{ touch_icon_default }}" rel="{{ touch_rel }}" sizes="60x60" />{% endif %}
-      {% if touch_icon_nokia %}<link href="{{ touch_icon_nokia }}" rel="shortcut icon" />{% endif %}
+      {% if touch_icon_ipad_retina %}
+        <link href="{{ touch_icon_ipad_retina }}" rel="{{ touch_rel }}" sizes="152x152" />
+      {% endif %}
+      {% if touch_icon_iphone_retina %}
+        <link href="{{ touch_icon_iphone_retina }}" rel="{{ touch_rel }}" sizes="120x120" />
+      {% endif %}
+      {% if touch_icon_ipad %}
+        <link href="{{ touch_icon_ipad }}" rel="{{ touch_rel }}" sizes="76x76" />
+      {% endif %}
+      {% if touch_icon_default %}
+        <link href="{{ touch_icon_default }}" rel="{{ touch_rel }}" sizes="60x60" />
+      {% endif %}
+      {% if touch_icon_nokia %}
+        <link href="{{ touch_icon_nokia }}" rel="shortcut icon" />
+      {% endif %}
     {% endif %}
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
-    {% if googlefonts_url %}
-      <link href="{{ googlefonts_url }}" rel='stylesheet' type='text/css' />
-    {% endif %}
-    {% if typekit_id %}
-      <script src="//use.typekit.net/{{ typekit_id }}.js"></script>
-      <script>try{Typekit.load();}catch(e){}</script>
-    {% endif %}
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
@@ -66,6 +70,7 @@
     set body_classes = [
       logged_in ? 'user-logged-in',
       not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+      path_info.query ? 'path-query--' ~ path_info.query,
       node_type ? 'node--type-' ~ node_type|clean_class,
       head_title_array.name ? 'site-name--' ~ head_title_array.name|clean_class,
       theme.name ? 'theme-name--' ~ theme.name|clean_class,

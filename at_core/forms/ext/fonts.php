@@ -80,6 +80,18 @@ $form['fonts']['setup']['settings_font_typekit'] = array(
   '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
 );
 
+// Fallback
+$form['fonts']['setup']['settings_font_fallback'] = array(
+  '#type' => 'radios',
+  '#title' => t('Fallback font family'),
+  '#options' => array(
+    'sans_serif' => t('sans-serif'),
+    'serif' => t('serif'),
+  ),
+  '#default_value' => theme_get_setting('settings.font_fallback') ? theme_get_setting('settings.font_fallback') : 'sans_serif',
+  '#description' => t('In the event a webfont does not load, set a fallback font family.'),
+);
+
 $form['fonts']['setup']['lineheight'] = array(
   '#type' => 'details',
   '#title' => t('Line height mulipliers'),

@@ -81,8 +81,18 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Fonts.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+      // Fonts generated CSS.
       if (file_exists($generated_files_path . '/fonts.css')) {
         $page['#attached']['library'][] = "$theme/fonts";
+      }
+      // Google font URL.
+      if (isset($config['font_use_googlefonts']) && $config['font_use_googlefonts'] == 1) {
+        $page['#attached']['library'][] = "$theme/google_fonts";
+      }
+      // Typekit ID and JS.
+      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] == 1) {
+        $page['#attached']['library'][] = "$theme/typekit_id";
+        $page['#attached']['library'][] = 'at_core/at.typekit';
       }
     }
 
@@ -214,7 +224,7 @@ function at_core_page_attachments_alter(array &$page) {
     if (isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) {
       if (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.respond';
-        $page['#attached']['library'][] = 'at_core/at.selectivizr'; // this will load yui3 as a dependancy because it supports IE8 and Selectivizr runs way better on yui3.
+        $page['#attached']['library'][] = 'at_core/at.selectivizr';
       }
     }
 
@@ -444,10 +454,16 @@ function at_core_preprocess_html(&$variables) {
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
 
-  // Defaults for Appearance setting variables.
+  // Defaults for Appearance setting variables. BC, deprecated.
   $variables['touch_icons'] = FALSE;
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
+
+  // Inject path info into variables, we can use the query path to
+  // set a body class for pager pages.
+  $variables['path_info'] = parse_url(Xss::filter($_SERVER['REQUEST_URI']));
+  $query = isset($variables['path_info']['query']) ? Html::cleanCssIdentifier($variables['path_info']['query']) : NULL;
+  $variables['path_info']['query'] = (strlen($query) > 25) ? substr($query, 0, 25) : $query;
 
   // Extensions
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
