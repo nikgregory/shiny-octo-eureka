@@ -98,6 +98,15 @@ responsive_menus_horizontal:
     component:
       styles/css/components/responsive-menus--horizontal.css: {}
 
+# Responsive Tables
+responsive_tables:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/responsive-tables.css: {}
+  dependencies:
+    - at_core/at.responsivetables
+
 # Search
 search:
   version: 8.x-1.0
@@ -222,8 +231,17 @@ animate:
     theme:
       styles/css/vendor/animate.min.css: {}
 
+# Fontfaceobserver
+# https://github.com/bramstein/fontfaceobserver
+fontfaceobserver:
+  version: 8.x-1.0
+  js:
+    scripts/fontfaceobserver-check.js: {}
+  dependencies:
+    - at_core/at.fontfaceobserver
+
 #
-# Generated File Libraries, do not delete these if you are using Extension settings!
+# Generated File Libraries, do not delete these if you are using extensions!
 #
 
 # File to show the grid for debugging.

@@ -74,10 +74,21 @@ at.fastclick_initialize:
   version: "8.x-1.0"
   js:
     scripts/min/at.fastclickInitialize.min.js: { minified: true }
-    #scripts/min/at.fastclickInitialize.js: {}
   dependencies:
     - at_core/at.fastclick
     - core/jquery
+
+# Fontfaceobserver
+# https://github.com/bramstein/fontfaceobserver
+at.fontfaceobserver:
+  version: "1.5.4"
+  license:
+    name: BSD
+    url: https://raw.githubusercontent.com/bramstein/fontfaceobserver/master/LICENSE
+    gpl-compatible: true
+  js:
+    #scripts/fontfaceobserver.js: {}
+    scripts/min/fontfaceobserver.min.js: { minified: true }
 
 # Breakpoints
 at.breakpoints:
@@ -117,6 +128,7 @@ at.responsivetables:
     - core/drupal
 
 # Slidedshow
+# https://github.com/woothemes/FlexSlider
 at.slideshow:
   version: "2.3.0"
   licence:
@@ -133,16 +145,14 @@ at.slideshow:
     - core/drupal
     - core/drupalSettings
 
-# Mobile blocks
-# at.mobile_blocks:
-#   version: "8.x-1.0"
-#   js:
-#     #scripts/min/at.mobileBlocks.min.js: { minified: true }
-#     scripts/at.mobileBlocks.js: {}
-#   dependencies:
-#     - core/jquery
-#     - core/drupal
-#     - core/drupalSettings
+# Typekit loader
+at.typekit:
+  version: "8.x-1.0"
+  header: true
+  weight: 1000
+  js:
+    scripts/min/at.typekit.min.js: { minified: true }
+    #scripts/at.typekit.js: {}
 
 # Captionjs
 at.capitons:
