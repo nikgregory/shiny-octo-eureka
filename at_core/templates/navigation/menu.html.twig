@@ -45,15 +45,15 @@
       {% for item in items %}
         {%
           set item_classes = [
-            'menu-item',
-            item.is_expanded ? 'menu-item--expanded',
-            item.is_collapsed ? 'menu-item--collapsed',
-            item.in_active_trail ? 'menu-item--active-trail',
+            'menu__item',
+            item.is_expanded ? 'menu__item--expanded',
+            item.is_collapsed ? 'menu__item--collapsed',
+            item.in_active_trail ? 'menu__item--active-trail',
           ]
         %}
         {% spaceless %}
           <li{{ item.attributes.addClass(item_classes) }}>
-            {{ link(item.title, item.url) }}
+            {{ link(item.title, item.url, { 'class':['menu__link']} ) }}
             {% if item.below %}
               {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
             {% endif %}
