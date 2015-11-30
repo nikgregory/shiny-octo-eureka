@@ -295,6 +295,13 @@ details {
       @include output-rhythm(height, $medium);
       @include output-rhythm(width, $medium);
 
+      display: none;
+
+      // Wait for FontAwesome to load.
+      .fa-loaded & {
+        display: block;
+      }
+
       // RTL
       [dir="rtl"] & {
         float: right;

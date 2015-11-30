@@ -141,6 +141,14 @@ html[xmlns] .flexslider .slides {
   color: #ffffff;
   line-height: 1;
   text-align: left;
+  display: none;
+}
+.fa-loaded .flex-direction-nav a:before {
+  display: block;
+}
+.fa-unavailable .flex-direction-nav a:before {
+  display: block;
+  content: "\2329";
 }
 .flex-direction-nav .flex-prev {
   left: -50px;
@@ -157,6 +165,9 @@ html[xmlns] .flexslider .slides {
 .flex-direction-nav .flex-next:before {
   content: "";
   text-align: right;
+}
+.fa-unavailable .flex-direction-nav .flex-next:before {
+  content: "\232a";
 }
 @media all and (max-width: 60em) {
   .flex-direction-nav .flex-next {

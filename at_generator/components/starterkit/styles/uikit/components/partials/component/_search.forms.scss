@@ -129,13 +129,16 @@
   &:before {
     font-family: $icon-font;
     content: $help-icon;
-
-    display: inline-block;
     padding: 0;
     margin: 0;
     text-align: center;
     @include output-rhythm(width, $medium);
+
+    // Wait for FontAwesome to load.
+    display: none;
+
+    .fa-loaded & {
+      display: inline-block;
+    }
   }
 }
-
-

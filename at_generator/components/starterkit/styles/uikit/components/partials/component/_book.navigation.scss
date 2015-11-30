@@ -33,7 +33,13 @@
     &:before,
     &:after {
       font-family: $icon-font;
-      display: inline-block;
+      
+      // Wait for FontAwesome to load.
+      display: none;
+      
+      .fa-loaded & {
+        display: inline-block;
+      }
 
       [dir="rtl"] & {
         @include fa-icon-flip(-1, 1, 0);
@@ -77,5 +83,3 @@
     }
   }
 }
-
-

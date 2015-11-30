@@ -41,9 +41,15 @@
   &:before {
     font-family: $icon-font;
     content: $fa-var-arrow-left;
-    display: inline-block;
     @include output-rhythm(padding, 0 $xx-small 0 0);
     margin: 0;
+
+    // Wait for FontAwesome to load.
+    display: none;
+
+    .fa-loaded & {
+      display: inline-block;
+    }
 
     // RTL
     [dir="rtl"] & {
@@ -60,4 +66,3 @@
     @include output-rhythm(min-width, 160px);
   }
 }
-

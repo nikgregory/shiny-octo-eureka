@@ -11,9 +11,14 @@
       &:before {
         font-family: $icon-font;
         content: $field-taxonomy-label-icon;
-
-        display: inline-block;
         @include output-rhythm(margin, 0 $xx-small 0 0);
+
+        // Wait for FontAwesome to load.
+        display: none;
+
+        .fa-loaded & {
+          display: inline-block;
+        }
 
         // In left-to-right flip the icon.
         [dir="ltr"] & {
@@ -57,12 +62,16 @@
       &:before {
         font-family: $icon-font;
         content: $field-taxonomy-item-icon;
-
         @include adjust-font-size-to($small);
         @include output-rhythm(margin, 0 $xx-small 0 0); // LTR
-
-        display: inline-block;
         vertical-align: text-bottom;
+
+        // Wait for FontAwesome to load.
+        display: none;
+
+        .fa-loaded & {
+          display: inline-block;
+        }
 
         // In left-to-right flip the icon.
         [dir="ltr"] & {

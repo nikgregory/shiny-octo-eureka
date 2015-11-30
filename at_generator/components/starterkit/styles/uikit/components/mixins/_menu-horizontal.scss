@@ -16,20 +16,20 @@
         @include clearfix-micro;
       }
 
-      @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0), $list-item-selector: '.menu-item');
+      @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0), $list-item-selector: '.menu__item');
 
-      .menu-item {
-        a:after {
+      .menu__item {
+        &__link:after {
           content: '';
           display: none;
         }
 
         @if $arrows == true {
-          &.expanded > a:after {
+          &.menu__item--expanded > .menu__link:after {
             content: $menu-arrow-down;
           }
 
-          &.collapsed > a:after {
+          &.menu__item--collapsed > .menu__link:after {
             content: '';
           }
         }

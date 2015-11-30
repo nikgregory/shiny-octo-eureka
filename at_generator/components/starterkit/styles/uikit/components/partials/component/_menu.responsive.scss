@@ -65,8 +65,14 @@
 
   span {}
 
+  &:before,
   &:after {
-    //cursor: pointer;
+    display: none;
+
+    // Wait for FontAwesome to load.
+    .fa-loaded & {
+      display: inline-block;
+    }
   }
 }
 
@@ -78,26 +84,26 @@
   .menu {
     position: relative;
 
-    > .menu-item {
+    > .menu__item {
       z-index: 100;
     }
   }
 
-  .menu-item {
+  &__item {
     position: relative;
     vertical-align: middle;
     @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
 
-    &.menu-item--active-trail > a {
+    &--active-trail > .menu__link {
     }
 
     // Strip border top from nested items.
-    &:first-child a {
+    &:first-child .menu__link {
       border-top: 0;
     }
   }
 
-  a {
+  .menu__link {
     transition: $global-transition;
     margin: 0;
     border: 0;
@@ -131,10 +137,5 @@
     padding: 0;
   }
 }
-
-
-
-
-
 
 

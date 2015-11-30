@@ -188,7 +188,7 @@ a {
 ul,
 ol,
 dl {
-  @include output-rhythm(padding-#{$flow-from}, $xxxx-large); // LTR
+  @include output-rhythm(padding-#{$flow-from}, $xxxx-large);
   padding-#{$flow-to}: 0;
 }
 
@@ -201,7 +201,7 @@ dt {
 }
 
 dd {
-  @include output-rhythm(margin-left, $medium); // LTR
+  @include output-rhythm(margin-left, $medium);
 
   // RTL
   [dir="rtl"] & {
@@ -214,10 +214,10 @@ dd {
 // Blockquotes, Bootstrap style.
 blockquote {
   @include output-rhythm(padding, $medium);
-  @include output-rhythm(margin-#{$flow-from}, $xxxx-large); // LTR, match list indent.
+  @include output-rhythm(margin-#{$flow-from}, $xxxx-large);
 
   margin-#{$flow-to}: 0;
-  border-#{$flow-from}: 5px solid; // LTR
+  border-#{$flow-from}: 5px solid;
 
   p {
     @include adjust-font-size-to($large);
@@ -228,13 +228,22 @@ blockquote {
 
       &:before {
         font-family: $icon-font;
-        content: $blockquote-icon;  // LTR
-
-        display: inline-block;
-        padding: 0 5px 0 0;  // LTR
+        content: $blockquote-icon;
+        @include output-rhythm(padding, 0 5px 0 0);
         margin: 0;
-        text-align: $flow-from; // LTR
+        text-align: $flow-from;
         @include output-rhythm(width, $large);
+
+        // Wait for FontAwesome to load.
+        display: none;
+        .fa-loaded & {
+          display: inline-block;
+        }
+
+        // RTL
+        [dir="rtl"] & {
+          @include fa-icon-flip(-1, 1, 0);
+        }
       }
     }
 
@@ -297,5 +306,3 @@ hr {
 :before {
   @include font-smoothing();
 }
-
-

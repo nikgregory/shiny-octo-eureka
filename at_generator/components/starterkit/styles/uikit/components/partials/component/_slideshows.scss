@@ -190,6 +190,19 @@ $direction-nav-size: 30px;
       color: #ffffff; // Color module?
       line-height: 1;
       text-align: left;
+
+      // Wait for FontAwesome to load.
+      display: none;
+
+      .fa-loaded & {
+        display: block;
+      }
+
+      // Use a unicode char if FontAwesome does not load.
+      .fa-unavailable & {
+        display: block;
+        content: "\2329";
+      }
     }
   }
 
@@ -209,6 +222,11 @@ $direction-nav-size: 30px;
     &:before {
       content: $slide-direction-next;
       text-align: right;
+
+      // Use a unicode char if FontAwesome does not load.
+      .fa-unavailable & {
+          content: "\232a";
+      }
     }
 
     // Responsive nav
@@ -352,6 +370,3 @@ $direction-nav-size: 30px;
     cursor: default;
   }
 }
-
-
-

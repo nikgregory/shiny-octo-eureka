@@ -1,25 +1,6 @@
+/**
+ * Responsive Menus - Off canvas.
+ ========================================================================== */
 
-// Off canvas
 @include offcanvas($oc-position: left, $width: 15em, $arrows: false);
-
-.ms-offcanvas {
-  .rm-block__content {
-    display: none;
-    @include output-rhythm(padding, 0 0 $xx-small);
-
-    a {
-      @include output-rhythm(padding, $xx-small $large);
-    }
-
-    // Menu <a> bottom whitespace.
-    .menu a {
-      @include output-rhythm(margin-bottom, 2px);
-    }
-  }
-
-  > .page,
-  .rm-block__content {
-    transition: $global-transition;
-  }
-}
 

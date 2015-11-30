@@ -12,6 +12,10 @@
   right: 1rem;
 }
 .ms-overlay .rm-toggle span {
+  padding: 7px 16px;
+  padding: 0.4375rem 1rem;
+}
+.fa-loaded .ms-overlay .rm-toggle span {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
@@ -24,7 +28,6 @@
 .ms-overlay .rm-toggle:after {
   font-family: FontAwesome, sans-serif;
   content: "";
-  display: block;
   width: 16px;
   width: 1rem;
   padding: 7px 16px;
@@ -56,19 +59,16 @@
 .ms-overlay.rm-is-open .rm-block__content .menu {
   background: transparent;
 }
-.ms-overlay.rm-is-open .rm-block__content .menu a,
-.ms-overlay.rm-is-open .rm-block__content .menu a:hover,
-.ms-overlay.rm-is-open .rm-block__content .menu a:focus,
-.ms-overlay.rm-is-open .rm-block__content .menu a.active {
+.ms-overlay.rm-is-open .rm-block__content .menu__link:hover, .ms-overlay.rm-is-open .rm-block__content .menu__link:focus, .ms-overlay.rm-is-open .rm-block__content .menu__link.active {
   background: transparent;
 }
-.ms-overlay.rm-is-open .rm-block__content .menu a.active[href="/"] {
+.ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"] {
   background-color: transparent;
 }
-.ms-overlay.rm-is-open .rm-block__content .menu a.active[href="/"]:hover, .ms-overlay.rm-is-open .rm-block__content .menu a.active[href="/"]:focus {
+.ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"]:hover, .ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"]:focus {
   background: transparent;
 }
-.ms-overlay.rm-is-open .rm-block__content .menu a:after {
+.ms-overlay.rm-is-open .rm-block__content .menu__link:after {
   content: none;
   display: none;
 }

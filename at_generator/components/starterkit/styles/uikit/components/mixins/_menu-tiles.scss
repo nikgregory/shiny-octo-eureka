@@ -1,11 +1,10 @@
-//
 // Tiles
 //
 // Parameters
 // - $tile_count: whole number, must be a factor of the $context
 // - $context: whole number, a $susy container, can be 8, 10 or 12 (or whatever if you write a new container).
 // - $arrows: boolean
-//
+
 @mixin tiles($context: 12, $tile_count: 2, $arrows: false) {
 
   $span: $context/$tile_count;
@@ -24,7 +23,7 @@
       @include cf;
 
       .menu-level-1 {
-        > li {
+        > .menu__item {
 
           @if $context == 12 {
             @include with-layout($container-12) {
@@ -47,7 +46,7 @@
         }
       }
 
-      .menu li.expanded > a:after {
+      .menu__item--expanded > .menu__link:after {
         content: none;
       }
     }

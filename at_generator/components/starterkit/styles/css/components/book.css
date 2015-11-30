@@ -23,6 +23,9 @@
 }
 .book-pager__link:before, .book-pager__link:after {
   font-family: FontAwesome, sans-serif;
+  display: none;
+}
+.fa-loaded .book-pager__link:before, .fa-loaded .book-pager__link:after {
   display: inline-block;
 }
 [dir="rtl"] .book-pager__link:before, [dir="rtl"] .book-pager__link:after {

@@ -11,6 +11,6 @@
     margin: 0;
   }
 
-  @include list-horizontal($flow-from, $margin: (t: $x-small, r: $medium, b: $x-small, l: 0), $list-item-selector: '.menu-item');
+  @include list-horizontal($flow-from, $margin: (t: $x-small, r: $medium, b: $x-small, l: 0), $list-item-selector: '.menu__item');
 }
 

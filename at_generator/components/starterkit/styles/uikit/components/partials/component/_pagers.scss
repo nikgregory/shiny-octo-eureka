@@ -49,9 +49,10 @@
 // Pager links are either an <a>, or a <span> for the current item in the Views mini-pager.
 .pager__link {
   display: block;
-  border: $border-width $border-style;
+  //border: $border-width $border-style;
+  border: 0;
   border-radius: $border-radius;
-  transition: background-color, .15s, ease-in-out;
+  transition: $global-transition;
 
   &:focus,
   &:hover {

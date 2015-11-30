@@ -284,12 +284,22 @@ blockquote p:first-child {
 blockquote p:first-child:before {
   font-family: FontAwesome, sans-serif;
   content: "";
-  display: inline-block;
   padding: 0 5px 0 0;
+  padding: 0 0.3125rem 0 0;
   margin: 0;
   text-align: left;
   width: 18px;
   width: 1.125rem;
+  display: none;
+}
+.fa-loaded blockquote p:first-child:before {
+  display: inline-block;
+}
+[dir="rtl"] blockquote p:first-child:before {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 blockquote p:last-child {
   margin-bottom: 0;
@@ -1033,6 +1043,10 @@ details > .details-wrapper {
   height: 1rem;
   width: 16px;
   width: 1rem;
+  display: none;
+}
+.fa-loaded .collapse-processed > summary:before {
+  display: block;
 }
 [dir="rtl"] .collapse-processed > summary:before {
   float: right;
@@ -1134,8 +1148,11 @@ button:hover, button:focus,
   padding-right: 0.25rem;
   line-height: 29px;
   line-height: 1.8125rem;
-  display: inline-block;
   vertical-align: middle;
+  display: none;
+}
+.fa-loaded .button-action:before {
+  display: inline-block;
 }
 .button-action[data-drupal-link-system-path="user/login"]:before {
   content: "";
@@ -1669,10 +1686,10 @@ ul.inline li ol {
 
 .pager__link {
   display: block;
-  border: 1px solid;
+  border: 0;
   border-radius: 2px;
-  -webkit-transition: background-color, .15s, ease-in-out;
-          transition: background-color, .15s, ease-in-out;
+  -webkit-transition: all, 0.15s, ease;
+          transition: all, 0.15s, ease;
 }
 .pager__link:focus, .pager__link:hover {
   text-decoration: none;
@@ -1798,7 +1815,6 @@ ul.inline li ol {
   position: static;
   top: auto;
   right: auto;
-  /* LTR */
   display: block;
   width: auto;
   height: auto;
@@ -1823,6 +1839,11 @@ ul.inline li ol {
   text-align: right;
   width: 16px;
   width: 1rem;
+  display: none;
+}
+.fa-loaded .filter-help a:after, .fa-loaded
+.more-help-link a:after {
+  display: inline-block;
 }
 [dir="rtl"] .filter-help a, [dir="rtl"]
 .more-help-link a {
@@ -1969,6 +1990,10 @@ table tr.error {
   vertical-align: top;
   padding: 0 11px 0 0;
   padding: 0 0.6875rem 0 0;
+  display: none;
+}
+.fa-loaded .messages .icon:before {
+  display: block;
 }
 
 [dir="rtl"] .messages .icon:before {
@@ -2263,34 +2288,39 @@ table tr.error {
   padding-left: 16px;
   padding-left: 1rem;
 }
-[dir="rtl"] .menu li.menu-item--collapsed > a:after {
-  content: "";
-}
 
-.menu-item {
+.menu__item {
   text-align: left;
 }
-.menu-item--collapsed > a:after, .menu-item--expanded > a:after {
+.menu__item > .menu__link:after {
   font-family: FontAwesome, sans-serif;
+  content: "";
   float: right;
   padding: 0 1px;
   text-align: right;
   width: 16px;
   width: 1rem;
 }
-.menu-item--collapsed > a:after {
-  content: "";
-}
-.menu-item--expanded > a:after {
+.menu__item--expanded > .menu__link:after {
   content: "";
 }
-.menu-item a {
+[dir="rtl"] .menu__item {
+  content: "";
+}
+
+.menu__link {
   display: block;
   padding: 4px 0;
   padding: 0.25rem 0;
 }
-.menu-item a:hover, .menu-item a:focus {
+.menu__link:hover, .menu__link:focus {
   text-decoration: none;
+}
+.menu__link:before, .menu__link:after {
+  display: none;
+}
+.fa-loaded .menu__link:before, .fa-loaded .menu__link:after {
+  display: inline-block;
 }
 
 /**
@@ -2302,14 +2332,14 @@ table tr.error {
   *zoom: 1;
   margin: 0;
 }
-.pr-leaderboard__leaderboard .menu-item {
+.pr-leaderboard__leaderboard .menu__item {
   float: left;
   margin: 10px 16px 10px 0;
   margin: 0.625rem 1rem 0.625rem 0;
   list-style: none;
 }
-.pr-leaderboard__leaderboard .menu-item ul,
-.pr-leaderboard__leaderboard .menu-item ol {
+.pr-leaderboard__leaderboard .menu__item ul,
+.pr-leaderboard__leaderboard .menu__item ol {
   display: none;
 }
 
@@ -2438,7 +2468,12 @@ table tr.error {
 .file a:before {
   font-family: FontAwesome, sans-serif;
   content: "";
-  padding-right: 0.5em;
+  padding-right: 7px;
+  padding-right: 0.4375rem;
+  display: none;
+}
+.fa-loaded .file a:before {
+  display: inline-block;
 }
 
 .file--package-x-generic a:before {
@@ -2638,10 +2673,13 @@ table tr.error {
 .node-preview-backlink:before {
   font-family: FontAwesome, sans-serif;
   content: "";
-  display: inline-block;
   padding: 0 7px 0 0;
   padding: 0 0.4375rem 0 0;
   margin: 0;
+  display: none;
+}
+.fa-loaded .node-preview-backlink:before {
+  display: inline-block;
 }
 [dir="rtl"] .node-preview-backlink:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);

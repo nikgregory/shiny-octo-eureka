@@ -67,9 +67,15 @@ button,
     @include adjust-font-size-to($small);
     @include output-rhythm(padding-#{$flow-to}, 4px);
     @include output-rhythm(line-height, $form_input_button_select_height);
-
-    display: inline-block;
+    
     vertical-align: middle;
+
+    // Wait for FontAwesome to load.
+    display: none;
+
+    .fa-loaded & {
+      display: inline-block;
+    }
   }
 
   // User is logged out, gets a button link to login.
@@ -251,8 +257,3 @@ button {
 label button.link {
   font-weight: bold;
 }
-
-
-
-
-

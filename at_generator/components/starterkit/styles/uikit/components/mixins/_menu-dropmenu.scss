@@ -4,6 +4,7 @@
 // visually-hidden on :hover
 //
 //
+
 @mixin dropmenu($item-width: 12em, $arrows: true) {
 
   .ms-dropmenu {
@@ -14,71 +15,81 @@
 
     .rm-block__content {
 
-      a {
+      .menu__item {
+        text-align: center;
+        position: relative;
+
+        // Nested items.
+        &--expanded .menu__item {
+          text-align: $flow-from;
+        }
+      }
+
+      .menu__link {
         position: relative;
         @include output-rhythm(padding, $xx-small $large);
 
         &:after {
           position: absolute;
-          @include output-rhythm(right, $medium); // LTR
+          @include output-rhythm($flow-to, $medium);
         }
       }
 
       .menu-level-1 {
         position: relative;
 
-        > li {
+        > .menu__item {
           &:first-child {}
           &:last-child {}
 
-          a {
+          .menu__link {
             &:hover,
             &:focus {}
           }
         }
 
-        li {
-          float: left; // LTR
+        .menu__item {
+          float: $flow-from;
           width: auto;
 
           @if $arrows == true {
-            &.menu-item--collapsed > a,
-            &.menu-item--expanded > a {
+            &--collapsed > a,
+            &--expanded > a {
               @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
             }
 
-            &.menu-item--expanded > a:after {
+            &--expanded > a:after {
               content: $menu-arrow-down;
             }
 
-            &.menu-item--collapsed > a:after {
+            &--collapsed > a:after {
               content: '';
             }
           }
 
-          ul {
-            @include visually-hidden;
+          .menu {
+            display: none;
+            position: absolute;
+            margin: 0;
+            padding: 0;
             transition: $global-transition;
 
-            li {
+            .menu__item {
               min-width: $item-width;
-              text-align: #{$flow-from};
+              text-align: $flow-from;
 
               &:hover,
-              &:focus {}
+              &:focus {
+                font-family: inherit;
+              }
             }
           }
 
-          // visusally-hidden-off but without positioning.
-          &:hover > ul,
-          &:focus > ul {
-            display: block;
-            opacity: 1;
-            clip: auto;
-            overflow: visible;
-            height: auto;
-            width: auto;
-            font-family: inherit;
+          &:hover,
+          &:focus {
+            > .menu {
+              display: block;
+            }
           }
         }
       }
@@ -86,24 +97,28 @@
       .odd {
         // Down
         ul {
-          left: 0; // LTR
+          #{$flow-from}: 0; // LTR
           top: auto;
           //> li a {background-color: pink;}
 
           @if $arrows == true {
-            > .menu-item--expanded > a:after {
+            > .menu__item--expanded > a:after {
               content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
+
+              [dir="rtl"] & {
+                content: $menu-arrow-left;
+              }
             }
           }
 
           // Accross
           .odd {
-            left: 100%; // LTR
+            #{$flow-from}: 100%; // LTR
             top: 0;
             //> li a {background-color: yellow;}
 
             @if $arrows == true {
-              > .menu-item--expanded > a:after {
+              > .menu__item--expanded > a:after {
                 content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
               }
             }
@@ -113,3 +128,4 @@
     }
   }
 }
+

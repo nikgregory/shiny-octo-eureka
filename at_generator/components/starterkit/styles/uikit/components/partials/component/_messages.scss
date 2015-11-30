@@ -100,11 +100,20 @@ table tr.error {
 
 
 /* Message icons */
-.messages .icon:before {
-  font-family: $icon-font;
-  float: left;
-  vertical-align: top;
-  @include output-rhythm(padding, 0 $small 0 0); // LTR
+.messages .icon {
+  &:before {
+    font-family: $icon-font;
+    float: left;
+    vertical-align: top;
+    @include output-rhythm(padding, 0 $small 0 0);
+
+    // Wait for FontAwesome to load.
+    display: none;
+
+    .fa-loaded & {
+      display: block;
+    }
+  }
 }
 
 [dir="rtl"] .messages .icon:before {
@@ -140,8 +149,3 @@ body > pre,
 body {
   &:before {}
 }
-
-
-
-
-

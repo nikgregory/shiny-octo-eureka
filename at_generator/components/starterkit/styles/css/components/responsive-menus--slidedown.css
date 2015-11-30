@@ -18,7 +18,7 @@
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-.ms-slidedown .rm-block__content .menu a {
+.ms-slidedown .rm-block__content .menu__link {
   margin-bottom: 3px;
   margin-bottom: 0.1875rem;
   padding: 7px;

@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/**
+ * Responsive Menus - Mega nav, aka "The Guardian" style flip down menu.
+ ========================================================================== */
 .ms-meganav .rm-region,
 .ms-meganav .rm-block {
   position: relative;
@@ -9,16 +12,11 @@
   z-index: 200;
   padding: 0;
 }
-.ms-meganav .rm-toggle.block-menu__title:after {
-  display: block;
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  width: 16px;
-  width: 1rem;
-  padding: 7px 16px;
-  padding: 0.4375rem 1rem;
-}
 .ms-meganav .rm-toggle.block-menu__title span {
+  vertical-align: middle;
+  display: none;
+}
+.fa-loaded .ms-meganav .rm-toggle.block-menu__title span {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
@@ -27,17 +25,40 @@
   padding: 0;
   word-wrap: normal;
   font: 0/0 a;
+  display: inline-block;
+}
+.ms-meganav .rm-toggle.block-menu__title:after {
+  font-family: FontAwesome, sans-serif;
+  content: "";
+  display: none;
+  z-index: 100;
+  width: 16px;
+  width: 1rem;
+  padding: 4px 11px;
+  padding: 0.25rem 0.6875rem;
+  margin-right: -11px;
+  margin-right: -0.6875rem;
+}
+.fa-loaded .ms-meganav .rm-toggle.block-menu__title:after {
+  display: inline-block;
 }
 .ms-meganav .rm-block__content {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
 }
-.ms-meganav .rm-block__content .menu-level-1 > li {
-  float: left;
+.ms-meganav .rm-block__content .menu {
+  padding: 0;
 }
-.ms-meganav .rm-block__content .menu-level-1 > li > a:after {
+.ms-meganav .rm-block__content .menu .menu__link {
+  padding: 7px 16px;
+  padding: 0.4375rem 1rem;
+}
+.ms-meganav .rm-block__content .menu .menu__link:before, .ms-meganav .rm-block__content .menu .menu__link:after {
   content: "";
   display: none;
+}
+.ms-meganav .rm-block__content .menu-level-1 > .menu__item {
+  float: left;
 }
 .ms-meganav .rm-block__content .menu-level-2 {
   display: none;
@@ -47,24 +68,24 @@
   padding: 0;
   margin: 0;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item {
   float: none;
-  margin-right: 3.5rem;
+  margin-right: 2.5rem;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:before, .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:after {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item:before, .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item:after {
   content: " ";
   display: table;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:after {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item:after {
   clear: both;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li:last-child {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item:last-child {
   border-bottom: none;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li a {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item .menu__link {
   float: left;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > li > a {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item > .menu__link {
   width: 12em;
 }
 .ms-meganav.rm-is-open .rm-block__content .menu-level-2 {
@@ -72,20 +93,16 @@
   float: left;
   opacity: 1;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul, .ms-meganav.rm-is-open .rm-block__content .menu-level-2 ol {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu {
   padding: 0;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 li,
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu,
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item {
   float: left;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 li a,
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 ul a {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu .menu__link,
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item .menu__link {
   width: auto;
-}
-
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu-item:last-child {
-  border-bottom: none;
 }
 
 /*# sourceMappingURL=responsive-menus--meganav.css.map */

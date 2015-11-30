@@ -28,12 +28,15 @@
 .responsive-table__message em:after {
   font-family: FontAwesome, sans-serif;
   content: "";
-  display: inline-block;
   margin: 0;
   padding: 0 3px;
   padding: 0 0.1875rem;
   width: 16px;
   width: 1rem;
+  display: none;
+}
+.fa-loaded .responsive-table__message em:after {
+  display: inline-block;
 }
 [dir="rtl"] .responsive-table__message em:after {
   content: "";

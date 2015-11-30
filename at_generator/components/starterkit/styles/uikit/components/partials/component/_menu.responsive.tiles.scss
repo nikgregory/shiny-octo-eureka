@@ -6,7 +6,7 @@
     @include output-rhythm(padding, $xx-small 0);
 
     .menu-level-1 {
-      > .menu-item {
+      > .menu__item {
         @include output-rhythm(margin, $xx-small 0);
       }
     }

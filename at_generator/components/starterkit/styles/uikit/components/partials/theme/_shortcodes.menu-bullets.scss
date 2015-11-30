@@ -13,18 +13,18 @@
         @include output-rhythm(width, $medium);
       }
 
-      &.menu-item > a:after {
+      &.menu__item > .menu__link:after {
         content: $bullet-closed; // LTR
-      }
 
-      &.expanded > a:after {
-        content: $bullet-open ;
+        &.--expanded > .menu__link:after {
+          content: $bullet-open ;
+        }
       }
     }
 
     // RTL
     [dir="rtl"] & {
-      li.collapsed > a:after {
+      li.menu__item--collapsed > .menu__link:after {
         content: $bullet-closed-rtl;
       }
     }
@@ -53,12 +53,12 @@
 
 // Special case drop menus.
 @mixin ms-dropmenu-bullets($bullet-down, $bullet-right) {
-  .rm-block__content .menu-level-1 li.expanded > a:after,
-  .rm-block__content .odd ul .odd > .expanded > a:after {
+  .rm-block__content .menu-level-1 .menu__item--expanded > a:after,
+  .rm-block__content .odd ul .odd > .menu__item--expanded > a:after {
     content: $bullet-down;
   }
-  .rm-block__content .odd ul > .expanded > a:after,
-  .rm-block__content .odd ul > .collapsed > a:after {
+  .rm-block__content .odd ul > .menu__item--expanded > a:after,
+  .rm-block__content .odd ul > .menu__item--collapsed > a:after {
     content: $bullet-right;
   }
 }
@@ -77,4 +77,5 @@
     @include ms-dropmenu-bullets($fa-var-chevron-down, $fa-var-chevron-right);
   }
 }
+
 

@@ -7,6 +7,10 @@
 // displayed horizontally.
 //
 
+
+
+
+
 @mixin meganav($col-width: 12em, $arrows: true) {
 
   .ms-meganav {
@@ -22,29 +26,51 @@
       z-index: 200;
       padding: 0;
 
-      &:after {
-        display: block;
-        font-family: $icon-font;
-        content: $menu-hamburger;
-        @include output-rhythm(width, $medium);
-        @include output-rhythm(padding, $xx-small $medium);
+      span {
+        vertical-align: middle;
+        display: none;
+
+        // Wait for FontAwesome to load.
+        .fa-loaded & {
+          @include visually-hidden;
+          display: inline-block;
+        }
       }
 
-      span {
-        @include visually-hidden;
+      &:after {
+        font-family: $icon-font;
+        content: $menu-hamburger;
+        display: none;
+        z-index: 100;
+        @include output-rhythm(width, $medium);
+        @include output-rhythm(padding, $xxxx-small $small);
+        @include output-rhythm(margin-#{$flow-to}, -$small);
+
+        .fa-loaded & {
+          display: inline-block;
+        }
       }
     }
 
     .rm-block__content {
       transition: $global-transition;
 
-      .menu-level-1 > li {
-        float: #{$flow-from};
+      .menu {
+        padding: 0;
 
-        > a:after {
-          content: "";
-          display: none;
+        .menu__link {
+          @include output-rhythm(padding, $xx-small $medium);
+
+          &:before,
+          &:after {
+            content: "";
+            display: none;
+          }
         }
+      }
+
+      .menu-level-1 > .menu__item {
+        float: #{$flow-from};
       }
 
       .menu-level-2 {
@@ -60,26 +86,20 @@
         padding: 0;
         margin: 0;
 
-        @if $arrows == true {
-          .menu li.expanded > a:after {
-            content: $menu-arrow-left;
-          }
-        }
-
-        .menu-level-1 > li {
+        .menu-level-1 > .menu__item {
           float: none;
-          margin-right: 3.5rem;
+          margin-right: 2.5rem;
           @include clearfix-micro;
 
           &:last-child {
             border-bottom: none;
           }
 
-          a {
+          .menu__link {
             float: #{$flow-from};
           }
 
-          > a {
+          > .menu__link {
             width: $col-width;
           }
         }
@@ -89,15 +109,15 @@
           float: #{$flow-from};
           opacity: 1;
 
-          ul, ol {
+          .menu {
             padding: 0;
           }
 
-          li,
-          ul {
+          .menu,
+          .menu__item {
             float: #{$flow-from};
 
-            a {
+            .menu__link {
               width: auto;
             }
           }
@@ -106,3 +126,7 @@
     }
   }
 }
+
+
+
+

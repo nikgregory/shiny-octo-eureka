@@ -29,10 +29,16 @@
     em:after {
       font-family: $icon-font;
       content: $fa-var-long-arrow-right;
-      display: inline-block;
       margin: 0;
       @include output-rhythm(padding, 0 3px);
       @include output-rhythm(width, $medium);
+
+      // Wait for FontAwesome to load.
+      display: none;
+
+      .fa-loaded & {
+        display: inline-block;
+      }
 
       [dir="rtl"] & {
         content: $fa-var-long-arrow-left;
@@ -77,4 +83,3 @@ table {
 .responsive-enabled {
   width: 100%;
 }
-

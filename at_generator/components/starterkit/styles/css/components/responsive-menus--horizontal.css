@@ -15,16 +15,16 @@
 .ms-horizontal .rm-block__content .menu:after {
   clear: both;
 }
-.ms-horizontal .rm-block__content .menu-item {
+.ms-horizontal .rm-block__content .menu__item {
   float: left;
   margin: 0 0 0 0;
   list-style: none;
 }
-.ms-horizontal .rm-block__content .menu-item ul,
-.ms-horizontal .rm-block__content .menu-item ol {
+.ms-horizontal .rm-block__content .menu__item ul,
+.ms-horizontal .rm-block__content .menu__item ol {
   display: none;
 }
-.ms-horizontal .rm-block__content .menu-item a:after {
+.ms-horizontal .rm-block__content .menu__item__link:after {
   content: '';
   display: none;
 }

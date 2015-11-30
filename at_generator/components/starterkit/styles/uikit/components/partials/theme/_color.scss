@@ -127,7 +127,7 @@ hr {
   @include page-row-background-color($page-navbar-background-color, $page-row-fullwidth);
 
   a,
-  .menu a {
+  .menu__link {
     color: inherit;
   }
 
@@ -197,7 +197,7 @@ hr {
   @include page-row-background-color($page-footer-background-color, $page-row-fullwidth);
 
   a,
-  .menu a {
+  .menu__link {
     color: inherit;
 
     &.active,
@@ -269,10 +269,10 @@ hr {
  ========================================================================== */
 
 .menu {
-
+  &__link {}
   // Nested menus.
   .menu {
-    a {
+    &__link {
       &:hover,
       &:focus {}
       &.active-trail {}
@@ -280,41 +280,42 @@ hr {
   }
 }
 
-.menu-item {
-  &.active-trail > a {
+.menu__item {
+  &--active-trail > .menu__link {
     //color: $menu-active-color;
     //background-color: $menu-background-active-color;
   }
 
-  // If menu arrows are true, add font-awesome and icons for
-  // expanded and collapsed selectors.
+  // If menu arrows are true.
   @if $menu-arrows == true {
-    &--collapsed > a:after,
-    &--expanded > a:after {
-      color: $text-color;
-    }
-  }
-
-  a {
-    color: $menu-color;
-    border-color: $border-color;
-    //background-color: $menu-background-color;
-
-    &:hover,
-    &:focus {
-      color: $menu-hover-color;
-      //background-color: $menu-background-hover-color;
-    }
-
-    &.active {
-      color: $menu-active-color;
-      //background-color: $menu-background-active-color;
+    &--collapsed,
+    &--expanded {
+      > .menu__link:after {
+        //color: $text-color;
+      }
     }
   }
 
   // Add the border top to the first item only.
-  &:first-child a {
+  &:first-child .menu__link {
     border-color: $border-color;
+  }
+}
+
+.menu__link {
+  color: $menu-color;
+  border-color: $border-color;
+  //background-color: $menu-background-color;
+
+  &:hover,
+  &:focus {
+    color: $menu-hover-color;
+    //background-color: $menu-background-hover-color;
+  }
+
+  &.active {
+    color: $menu-active-color;
+    //background-color: $menu-background-active-color;
   }
 }
 
@@ -372,14 +373,14 @@ hr {
 // and overall design of the menu.
 .rm-block__content {
   .menu {
-    li {
-      &.active-trail > a {
+    &__item {
+      &--active-trail > a {
         color: $resp-menu-active-color;
         background: $resp-menu-active-background-color;
       }
     }
 
-    a {
+    &__link {
       color: $resp-menu-color;
       background: $resp-menu-background-color;
 
@@ -436,8 +437,8 @@ hr {
 .ms-slidedown {
   .rm-block__content {
     .menu {
-      a.active[href="/"],
-      a {
+      &__link,
+      &__link.active[href="/"] {
         color: $resp-menu-hover-color;
         background-color: $resp-menu-hover-background-color;
       }
@@ -448,8 +449,8 @@ hr {
   .pr-header__header-second {
     .rm-block__content {
       .menu {
-        a.active[href="/"],
-        a {
+      &__link,
+      &__link.active[href="/"] {
           //color: $resp-menu-hover-color;
           background-color: rgba(0, 0, 0, 0.05);
         }
@@ -471,7 +472,7 @@ hr {
 .ms-tiles {
   .rm-block__content {
     .menu-level-1 {
-      > li {
+      > .menu__item {
         background-color: $resp-menu-active-background-color;
       }
     }
@@ -482,13 +483,12 @@ hr {
 .ms-meganav {
   &.rm-is-open {
     .rm-block__content {
-      .menu-level-1 > li {
+      .menu-level-1 > .menu__item {
         border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
-        &:last-child {
-        }
+        &:last-child {}
 
-        > a {
+        > .menu__link {
           background-color: rgba(255, 255, 255, 0.3);
         }
       }

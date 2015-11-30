@@ -1,19 +1,6 @@
+/**
+ * Responsive Menus - Mega nav, aka "The Guardian" style flip down menu.
+ ========================================================================== */
 
-// FlipSlide
 @include meganav($col-width: 12em, $arrows: false);
-
-.ms-meganav {
-  &.rm-is-open {
-    .rm-block__content {
-      .menu-level-1 > .menu-item {
-
-        &:last-child {
-          border-bottom: none;
-        }
-
-        > a {}
-      }
-    }
-  }
-}
 
