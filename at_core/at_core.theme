@@ -454,8 +454,9 @@ function at_core_preprocess_html(&$variables) {
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
 
-  // Defaults for Appearance setting variables. BC, deprecated.
+  // Defaults for Appearance setting variables.
   $variables['touch_icons'] = FALSE;
+  // BC, deprecated.
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
 
@@ -506,6 +507,7 @@ function at_core_preprocess_html(&$variables) {
       }
     }
 
+/*
     // Fonts.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
       // Google fonts.
@@ -518,6 +520,7 @@ function at_core_preprocess_html(&$variables) {
         $variables['typekit_id'] = $config['font_typekit'];
       }
     }
+*/
 
     // Shortcodes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
