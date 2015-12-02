@@ -19,16 +19,32 @@
     }
   }
 
-  // Here we call mixins that automagically apply styles to list items.
-  @media #{$mobile} {
+  // Set the narrow style.
+  .js & .is-vertical {
     @include list-style-button-group-vertical('ul.tabs--primary');
     @include list-style-seven-vertical('ul.tabs--secondary');
   }
 
-  @media #{$wide} {
+  // Set the wide style.
+  .js & .is-horizontal {
     @include list-style-tab-group('ul.tabs--primary');
     @include list-style-seven-horizontal('ul.tabs--secondary');
   }
+
+  // Use media queries if you don't want to rely on JS.
+  @media #{$mobile} {
+    .no-js & {
+      @include list-style-button-group-vertical('ul.tabs--primary');
+      @include list-style-seven-vertical('ul.tabs--secondary');
+    }
+  }
+  @media #{$wide} {
+    .no-js & {
+      @include list-style-tab-group('ul.tabs--primary');
+      @include list-style-seven-horizontal('ul.tabs--secondary');
+    }
+  }
 }
+
 
 

@@ -16,10 +16,14 @@
  */
 #}
 {% if primary %}
-  <h2 class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
-  <ul class="tabs--primary">{{ primary }}</ul>
+  <h2 id="primary-tabs-title" class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
+  <nav role="navigation" class="is-horizontal is-responsive" aria-labelledby="primary-tabs-title" data-at-nav-tabs>
+    <ul class="tabs tabs--primary">{{ primary }}</ul>
+  </nav>
 {% endif %}
 {% if secondary %}
-  <h2 class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
-  <ul class="tabs--secondary">{{ secondary }}</ul>
+  <h2 id="secondary-tabs-title" class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
+  <nav role="navigation" class="is-horizontal is-responsive" aria-labelledby="secondary-tabs-title" data-at-nav-tabs>
+    <ul class="tabs tabs--secondary">{{ secondary }}</ul>
+  </nav>
 {% endif %}

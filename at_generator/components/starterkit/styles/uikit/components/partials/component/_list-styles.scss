@@ -11,15 +11,11 @@ ul {
   }
 
   &.inline {
-    @include list-horizontal($flow-to, $margin: (t: 0, r: 0, b: 0, l: $medium));
+    @include list-horizontal-inline('inline-block', $margin: (t: 0, r: 0, b: 0, l: 0));
 
     a {
       &:hover,
       &:focus {}
-    }
-
-    [dir="rtl"] & li {
-      margin: 0 $medium 0 0;
     }
   }
 }

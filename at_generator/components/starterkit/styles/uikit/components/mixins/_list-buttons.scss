@@ -109,8 +109,11 @@
   #{$list_selector} {
     @include no-bullets;
     @include clearfix-micro;
+    border-bottom: 0;
 
     li {
+      float: none;
+
       &:first-child a {
         border-radius: $button-border-radius $button-border-radius 0 0;
       }
