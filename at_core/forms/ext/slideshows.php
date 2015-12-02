@@ -380,7 +380,8 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     );
 
     if (theme_get_setting('settings.slideshow_' . $i . '_slideshow_class') !== null) {
-      $this_slideshow_class = theme_get_setting('settings.slideshow_' . $i . '_slideshow_class');
+      $slideshow_class_setting = theme_get_setting('settings.slideshow_' . $i . '_slideshow_class');
+      $this_slideshow_class = Html::cleanCssIdentifier($slideshow_class_setting);
     } else {
       $this_slideshow_class = $slideshow_class;
     }
