@@ -301,8 +301,4 @@ hr {
 }
 
 
-/* Webfont smoothing */
-:after,
-:before {
-  @include font-smoothing();
-}
+

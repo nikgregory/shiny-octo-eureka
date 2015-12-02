@@ -40,18 +40,60 @@
  * the files, e.g.:
  * src: url("../fonts/fontawesome-webfont.woff")
 */
+
 @font-face {
   font-family: 'FontAwesome';
-  src:
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
     url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
-    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype');
+    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+  // src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
   font-weight: normal;
   font-style: normal;
+  font-stretch: normal;
 }
 
+// Reset important FA classes.
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  @include font-smoothing();
+}
+
+.fa-none {
+  font-size: inherit;
+}
+
+.fa-lg {
+  @include adjust-font-size-to($x-large);
+}
+
+.fa-2x {
+  @include adjust-font-size-to($medium * 2);
+}
+
+.fa-3x {
+  @include adjust-font-size-to($medium * 3);
+}
+
+.fa-4x {
+  @include adjust-font-size-to($medium * 4);
+}
+
+.fa-5x {
+  @include adjust-font-size-to($medium * 5);
+}
+
+.fa-fw {
+  @include output-rhythm(width, $x-large);
+}
 
 // FontFaceObserver will add/remove classes to the html element. By default we only
-// check if FontAwesome is loading etc.
+// check if FontAwesome is loading.
 .fa-loading {}      // Waiting for FontAwesome to load.
 .fa-loaded  {}      // FontAwesome has loaded.
 .fa-unavailable {}  // FontAwesome failed to load.
@@ -65,5 +107,11 @@
 .wf-active {}
 
 
+/* Webfont smoothing */
+:after,
+:before {
+  text-rendering: auto;
+  @include font-smoothing();
+}
 
 
