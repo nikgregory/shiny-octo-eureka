@@ -32,12 +32,11 @@ at.matchheight:
     - core/jquery
 
 # enquire
-# Issued opened to add licence to project: https://github.com/WickyNilliams/enquire.js/issues/126
 at.enquire:
   version: "2.1.2"
   license:
     name: MIT
-    url: http://opensource.org/licenses/mit-license.php
+    url: https://raw.githubusercontent.com/WickyNilliams/enquire.js/master/LICENSE
     gpl-compatible: true
   js:
     scripts/min/enquire.min.js: { minified: true }
@@ -66,6 +65,7 @@ at.fastclick:
     gpl-compatible: true
   js:
     scripts/min/fastclick.min.js: { minified: true }
+    #scripts/min/fastclick.js: {}
   dependencies:
     - core/jquery
 
@@ -74,6 +74,7 @@ at.fastclick_initialize:
   version: "8.x-1.0"
   js:
     scripts/min/at.fastclickInitialize.min.js: { minified: true }
+    #scripts/min/at.fastclickInitialize.js: {}
   dependencies:
     - at_core/at.fastclick
     - core/jquery
@@ -87,8 +88,8 @@ at.fontfaceobserver:
     url: https://raw.githubusercontent.com/bramstein/fontfaceobserver/master/LICENSE
     gpl-compatible: true
   js:
-    #scripts/fontfaceobserver.js: {}
     scripts/min/fontfaceobserver.min.js: { minified: true }
+    #scripts/fontfaceobserver.js: {}
 
 # Breakpoints
 at.breakpoints:
@@ -127,13 +128,24 @@ at.responsivetables:
     - core/jquery
     - core/drupal
 
+# Responsive Tabs
+at.responsivetabs:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.responsiveTabs.min.js: { minified: true }
+    #scripts/at.responsiveTabs.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/matchmedia
+
 # Slidedshow
 # https://github.com/woothemes/FlexSlider
 at.slideshow:
   version: "2.3.0"
   licence:
     name: GNU-GPL-2.0
-    url: https://github.com/woothemes/FlexSlider/blob/master/LICENSE.md
+    url: https://raw.githubusercontent.com/woothemes/FlexSlider/master/LICENSE.md
     gpl-compatible: true
   js:
     scripts/min/jquery.flexslider.min.js: { minified: true }
@@ -153,21 +165,6 @@ at.typekit:
   js:
     scripts/min/at.typekit.min.js: { minified: true }
     #scripts/at.typekit.js: {}
-
-# Captionjs
-at.capitons:
-  version: "0.9.8"
-  licence:
-    name: MIT
-    url: https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt
-    gpl-compatible: true
-  js:
-    scripts/min/jquery.caption.min.js: { minified: true }
-    #scripts/jquery.caption.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - core/drupalSettings
 
 # Video - responsive YouTube and Vimeo iframes. This is pretty rough
 # and only works OK, the CSS method in the UIKit is better.
