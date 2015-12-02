@@ -4,28 +4,6 @@
  *  - styles for comments
  ========================================================================== */
 
-// Typically comments are attached to nodes - this is the main
-// wrapper around comments and the comment form in nodes, on
-// a standard Drupal install which uses the mores specific class
-// .field-node--comment {}
-.field-type-comment {
-  @include output-rhythm(margin, $large 0 0);
-  @include clearfix-micro;
-  clear: both;
-
-  .indented {
-    @include output-rhythm(margin-#{$flow-from}, $xxx-large);
-  }
-}
-
-// Comment field on node content types.
-.field-node--comment {}
-
-// typically this says 'Comments'.
-.comment-field__title {}
-
-
-// Comments are article element type.
 .comment {
   @include clearfix-micro;
   @include output-rhythm(padding-top, $medium);
@@ -79,9 +57,6 @@
   // Comment content wrapper.
   &__content {}
 
-  // Links.
-  .links {}
-
   // User signiture
   &__user-signature {}
 
@@ -89,6 +64,24 @@
   &.preview {
     @include output-rhythm(padding, $medium);
     @include output-rhythm(margin-bottom, $medium);
+  }
+
+  // Comment links.
+  &__links {
+    @include clearfix-micro;
+    clear: both;
+
+    .inline {
+      float: right;
+
+      li {
+        margin: 0 0 0 $medium;
+
+        [dir="rtl"] & {
+          margin: 0 $medium 0 0;
+        }
+      }
+    }
   }
 }
 
@@ -99,10 +92,36 @@
 .comment--by-node-author {}
 
 
+// Typically comments are attached to nodes - this is the main
+// wrapper around comments and the comment form in nodes, on
+// a standard Drupal install which uses the mores specific class
+// .field-node--comment {}
+.field-type-comment {
+  @include output-rhythm(margin, $large 0 0);
+  @include clearfix-micro;
+  clear: both;
+
+  .indented {
+    @include output-rhythm(margin-#{$flow-from}, $xxx-large);
+  }
+}
+
+
+// Comment field on node content types.
+.field-node--comment {}
+
+
+// typically this says 'Comments'.
+.comment-field__title {}
+
+
 // Comment form - basic classes only, see _form-styles.scss
 .comment-form-wrapper {}
 .comment-form__title {}
 .comment-form {}
+
+
+
 
 
 

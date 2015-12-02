@@ -24,6 +24,10 @@
 .ms-horizontal .rm-block__content .menu__item ol {
   display: none;
 }
+[dir="rtl"] .ms-horizontal .rm-block__content .menu__item {
+  margin-right: 0;
+  margin-left: 0;
+}
 .ms-horizontal .rm-block__content .menu__item__link:after {
   content: '';
   display: none;

@@ -1192,3 +1192,29 @@ body {
   border-color: $border-color-light;
 }
 
+
+/**
+ * Social media
+ *  - styles for socila media links, modules etc.
+ ========================================================================== */
+
+// Social Media Links
+// https://www.drupal.org/project/social_media_links
+
+.block-social-media-links,
+.pane-social-media-link-widget {
+  .platform__link {
+    color: $text-color;
+    opacity: 0.65;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+

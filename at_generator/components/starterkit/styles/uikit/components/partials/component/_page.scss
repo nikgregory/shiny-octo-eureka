@@ -29,6 +29,15 @@
 
 // Leaderboard
 .pr-leaderboard {    // Outer wrapper
+
+  .block {
+    margin: 0;
+
+    ul {
+      margin: 0;
+    }
+  }
+
   &__rw {}           // Regions wrapper (container that takes max-width from your layout settings)
   &__leaderboard {}  // Region
 }
@@ -44,6 +53,15 @@
 
 // Navbar
 .pr-navbar {
+
+  .block {
+    margin: 0;
+
+    ul {
+      margin: 0;
+    }
+  }
+
   &__rw {}
   &__navbar {}
 }
