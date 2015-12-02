@@ -1,14 +1,14 @@
 /**
- * Menus in the Leaderboard region
+ * Menus in the Footer region
  *
  ========================================================================== */
 
 // Region or row specfic menu overrides
-.pr-leaderboard__leaderboard {
+.pr-footer__footer {
 
   .block-menu {
     @include clearfix;
-    margin: 0;
+    //margin: 0;
   }
 
   @include list-horizontal($flow-from, $margin: (t: $x-small, r: $medium, b: $x-small, l: 0), $list-item-selector: '.menu__item');
