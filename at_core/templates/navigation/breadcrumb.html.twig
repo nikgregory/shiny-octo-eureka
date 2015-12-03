@@ -10,10 +10,10 @@
  */
 #}
 {% if breadcrumb %}
+  {{ attach_library('at_core/at.responsivelists') }}
   {%
     set classes = [
       'breadcrumb',
-      'clearfix',
       not breadcrumb_title_hidden ? 'has-title',
     ]
   %}
@@ -23,18 +23,21 @@
       'breadcrumb__title',
     ]
   %}
-  <nav{{ attributes.addClass(classes) }}role="navigation" aria-labelledby="system-breadcrumb">
-    <h2 id="system-breadcrumb"{{ title_attributes.addClass(title_classes) }}>{{ 'You are here:'|t }}</h2>
-    <ol class="breadcrumb__list">
-    {% for item in breadcrumb %}
-      <li class="breadcrumb__list-item">
-        {% if item.url %}
-          <a href="{{ item.url }}" class="breadcrumb__link">{{ item.text }}</a>
-        {% else %}
-          {{ item.text }}
-        {% endif %}
-      </li>
-    {% endfor %}
-    </ol>
-  </nav>
+  <div{{ attributes.addClass(classes) }}>
+    <nav class="is-horizontal is-responsive" role="navigation" aria-labelledby="system-breadcrumb" data-at-responsive-list>
+      <h2 id="system-breadcrumb"{{ title_attributes.addClass(title_classes) }}>{{ 'You are here:'|t }}</h2>
+      <ol class="breadcrumb__list is-responsive__list">
+      {% for item in breadcrumb %}
+        {% set item_text = item.text|length > 32 ? item.text|slice(0, 32) ~ '...' : item.text %}
+        <li class="breadcrumb__list-item is-responsive__item">
+          {% if item.url %}
+            <a href="{{ item.url }}" class="breadcrumb__link">{{ item_text }}</a>
+          {% else %}
+            {{ item_text }}
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ol>
+    </nav>
+  </div>
 {% endif %}

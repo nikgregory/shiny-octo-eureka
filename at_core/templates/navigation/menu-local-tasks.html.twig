@@ -15,15 +15,18 @@
  * @ingroup themeable
  */
 #}
+{% if primary or secondary %}
+  {{ attach_library('at_core/at.responsivelists') }}
+{% endif %}
 {% if primary %}
-  <h2 id="primary-tabs-title" class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
-  <nav role="navigation" class="is-horizontal is-responsive" aria-labelledby="primary-tabs-title" data-at-nav-tabs>
-    <ul class="tabs tabs--primary">{{ primary }}</ul>
+  <nav class="is-horizontal is-responsive" role="navigation" aria-labelledby="primary-tabs-title" data-at-responsive-list>
+    <h2 id="primary-tabs-title" class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
+    <ul class="tabs tabs--primary is-responsive__list">{{ primary }}</ul>
   </nav>
 {% endif %}
 {% if secondary %}
-  <h2 id="secondary-tabs-title" class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
-  <nav role="navigation" class="is-horizontal is-responsive" aria-labelledby="secondary-tabs-title" data-at-nav-tabs>
-    <ul class="tabs tabs--secondary">{{ secondary }}</ul>
+  <nav class="is-horizontal is-responsive" role="navigation" aria-labelledby="secondary-tabs-title" data-at-responsive-list>
+    <h2 id="secondary-tabs-title" class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
+    <ul class="tabs tabs--secondary is-responsive__list">{{ secondary }}</ul>
   </nav>
 {% endif %}

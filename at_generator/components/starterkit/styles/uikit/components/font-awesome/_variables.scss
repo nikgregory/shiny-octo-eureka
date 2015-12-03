@@ -1,10 +1,12 @@
 // Variables
 // --------------------------
 
-$fa-font-path:        "../fonts" !default;
+//$fa-font-path:        "../fonts" !default;
 $fa-font-size-base:   14px !default;
 $fa-line-height-base: 1 !default;
 $fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.5.0/fonts" !default; // for referencing Bootstrap CDN font files directly
+//$fa-font-path:        "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/fonts" !default; // Use cloudflare instead, its more reliable.
+
 $fa-css-prefix:       fa !default;
 $fa-version:          "4.5.0" !default;
 $fa-border-color:     #eee !default;

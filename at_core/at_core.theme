@@ -321,31 +321,6 @@ function at_core_page_attachments_alter(array &$page) {
 
 
 /**
- * Implements hook_pre_render_HOOK() for menu-local-tasks templates.
- *
- * Use preprocess hook to set #attached to child elements
- * because they will be processed by Twig and drupal_render will
- * be invoked.
- */
-function at_core_preprocess_menu_local_tasks(&$variables) {
-  if (!empty($variables['primary'])) {
-    $variables['primary']['#attached'] = array(
-      'library' => array(
-        'at_core/at.responsivetabs',
-      ),
-    );
-  }
-  elseif (!empty($variables['secondary'])) {
-    $variables['secondary']['#attached'] = array(
-      'library' => array(
-        'at_core/at.responsivetabs',
-      ),
-    );
-  }
-}
-
-
-/**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
@@ -927,6 +902,12 @@ function at_core_preprocess_breadcrumb(&$variables) {
 
   // Set attributes.
   $variables['breadcrumb_title_hidden'] = TRUE;
+
+  // If home is the only item, remove it.
+  $arr_length = count($variables['breadcrumb']);
+  if ($arr_length == 1 && $variables['breadcrumb'][0]['url'] == base_path()) {
+    unset($variables['breadcrumb'][0]);
+  }
 
   // Theme settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {

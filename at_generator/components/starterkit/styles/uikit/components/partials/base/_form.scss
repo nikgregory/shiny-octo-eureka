@@ -69,6 +69,11 @@ input {
     position: relative;
     @include output-rhythm(bottom, 1px);
     @include output-rhythm(margin-#{$flow-from}, 3px);
+
+    // Fix Safari issue with moving options.
+    width: auto;
+    height: auto;
+    transform: scale(1);
   }
 
   // Focus for file, radio and checkbox.

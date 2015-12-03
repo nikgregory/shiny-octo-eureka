@@ -117,6 +117,7 @@ at.responsivemenus:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+    - core/modernizr
 
 # Responsive Tables
 at.responsivetables:
@@ -128,16 +129,20 @@ at.responsivetables:
     - core/jquery
     - core/drupal
 
-# Responsive Tabs
-at.responsivetabs:
+# Responsive Lists
+at.responsivelists:
   version: "8.x-1.0"
   js:
-    scripts/min/at.responsiveTabs.min.js: { minified: true }
-    #scripts/at.responsiveTabs.js: {}
+    scripts/min/at.responsiveLists.min.js: { minified: true }
+    #scripts/at.responsiveLists.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+    - core/drupalSettings
     - core/matchmedia
+    - core/jquery.once
+    - core/drupal.debounce
+    - core/modernizr
 
 # Slidedshow
 # https://github.com/woothemes/FlexSlider
