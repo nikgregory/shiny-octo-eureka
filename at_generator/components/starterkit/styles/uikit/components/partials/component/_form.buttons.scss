@@ -67,7 +67,7 @@ button,
     @include adjust-font-size-to($small);
     @include output-rhythm(padding-#{$flow-to}, 4px);
     @include output-rhythm(line-height, $form_input_button_select_height);
-    
+
     vertical-align: middle;
 
     // Wait for FontAwesome to load.
@@ -95,6 +95,12 @@ button,
   &__button {
     padding: 0;
     @include output-rhythm(margin, $medium 0);
+
+    @media #{$mobile-isolate} {
+      a {
+        display: block;
+      }
+    }
   }
 }
 

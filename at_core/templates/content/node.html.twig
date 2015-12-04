@@ -103,9 +103,10 @@
         <div{{ meta_attributes }}>
           {{ author_picture }}
           <div{{ submitted_attributes }}>
-            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-            {{ metadata }}
+             <span class="node__author">{{ author_name }}</span>
+             <span class="node__pubdate">{{ date }}</span>
           </div>
+          {{ metadata }}
         </div>
       {% endif %}
     </header>

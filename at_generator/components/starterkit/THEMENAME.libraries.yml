@@ -2,7 +2,7 @@
 base:
   version: 8.x-1.0
   css:
-    component:
+    base:
       styles/css/components/base.css: {}
 
 # Aggregator

@@ -7,6 +7,24 @@
   padding-top: 16px;
   padding-top: 1rem;
   border-top: 1px solid;
+  /*
+    &__links {
+      @include clearfix-micro;
+      clear: both;
+  
+      .inline {
+        float: right;
+  
+        li {
+          margin: 0 0 0 $medium;
+  
+          [dir="rtl"] & {
+            margin: 0 $medium 0 0;
+          }
+        }
+      }
+    }
+  */
 }
 .comment:before, .comment:after {
   content: " ";
@@ -15,26 +33,49 @@
 .comment:after {
   clear: both;
 }
+.comment p:last-of-type {
+  margin-bottom: 0;
+}
 .comment__meta {
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
+  overflow: hidden;
 }
 .comment.has-title .comment__meta {
   margin: 16px 0;
   margin: 1rem 0;
 }
-.comment__meta--has-user-picture {
-  line-height: 40px;
-  line-height: 2.5rem;
+.comment__meta .comment__author:after {
+  content: "-";
+  display: inline-block;
+}
+.comment__meta--has-user-picture .comment__author:after {
+  display: none;
+}
+.comment__meta--has-user-picture .comment__author,
+.comment__meta--has-user-picture .comment__pubdate {
+  margin: 0;
+  display: block;
+}
+@media all and (max-width: 60em) {
+  .comment__meta .comment__author:after {
+    display: none;
+  }
+  .comment__meta .comment__author,
+  .comment__meta .comment__pubdate {
+    margin: 0;
+    display: block;
+  }
 }
 .comment__meta .field-type-image {
   float: left;
-  margin: 0;
+  margin: 0 11px 0 0;
+  margin: 0 0.6875rem 0 0;
 }
 .comment__meta .field-type-image img {
   width: auto;
-  height: 32px;
-  height: 2rem;
+  height: 48px;
+  height: 3rem;
 }
 .comment__meta .field-type-image__figure {
   margin: 0;
@@ -59,14 +100,25 @@
 .comment__links:after {
   clear: both;
 }
-.comment__links .inline {
-  float: right;
+@media all and (max-width: 60em) {
+  .comment__links .inline {
+    float: none;
+    display: block;
+  }
+  .comment__links .inline li {
+    display: list-item;
+  }
 }
-.comment__links .inline li {
-  margin: 0 0 0 16px;
-}
-[dir="rtl"] .comment__links .inline li {
-  margin: 0 16px 0 0;
+@media all and (min-width: 60.063em) {
+  .comment__links .inline {
+    float: right;
+  }
+  .comment__links .inline li {
+    margin: 0 0 0 16px;
+  }
+  [dir="rtl"] .comment__links .inline li {
+    margin: 0 16px 0 0;
+  }
 }
 
 .field-type-comment {
@@ -85,5 +137,4 @@
   margin-left: 42px;
   margin-left: 2.625rem;
 }
-
 /*# sourceMappingURL=comments.css.map */

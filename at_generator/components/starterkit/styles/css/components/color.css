@@ -296,6 +296,10 @@ hr {
 .pager__link--is-active {
   background-color: rgba(255, 255, 255, 0.75);
 }
+.pager--mini .pager__link--is-active {
+  background-color: transparent;
+  opacity: 0.65;
+}
 
 /**
  * Table Theme
@@ -833,5 +837,4 @@ body:before {
 .pane-social-media-link-widget .platform__link:focus {
   opacity: 1;
 }
-
 /*# sourceMappingURL=color.css.map */

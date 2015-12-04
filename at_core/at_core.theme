@@ -66,6 +66,7 @@ function at_core_page_attachments_alter(array &$page) {
     'aggregator',
     'book',
     'comment',
+    'contact',
     'forum',
     'search',
     'taxonomy',
@@ -968,6 +969,16 @@ function at_core_preprocess_menu(&$variables) {
     $variables['attributes']['class'][] = 'menu-name-original--' . Html::cleanCssIdentifier($menu_name);
   }
 }
+
+
+/**
+ * Preprocess variables for menu local action templates.
+ */
+/*
+function at_core_preprocess_menu_local_action(&$variables) {
+  var_dump($variables);
+}
+*/
 
 
 /**

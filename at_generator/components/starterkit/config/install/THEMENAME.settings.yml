@@ -11,7 +11,7 @@ settings:
   enable_slideshows: 0
   enable_shortcodes: 0
   enable_custom_css: 0
-  enable_markup_overrides: 0
+  enable_markup_overrides: 1
   enable_devel: 0
   enable_legacy_browsers: 0
   skip_link_target: block-THEMENAME-content
@@ -250,6 +250,7 @@ settings:
   slideshow_0_slideshow_class: .THEMENAME-slideshow-0
   slideshow_0_selector: '.slides > li'
   custom_css: '/* Custom CSS */'
+  responsive_tables: 1
   breadcrumb_label: 0
   breadcrumb_home: 0
   breadcrumb_separator: ''

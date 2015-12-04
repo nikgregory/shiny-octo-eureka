@@ -7,39 +7,83 @@
 // <nav> element wrapper.
 .pager {
   @include output-rhythm(margin, $medium 0);
+  text-align: center;
+
+  // Local reset.
+  ul, ol {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
 }
 
 
 // The regular system pager, e.g. used by default pager for the front page view.
 .pager--full {}
 
-
 // The Views mini-pager, e.g. used by default for taxonomy term page views.
-.pager--mini {}
+.pager--mini {
+  .pager__link--is-active {
+    @include adjust-font-size-to($medium * 0.875); // 14px
+  }
+}
 
 
-// pager_items is a <ul> list
+// pager_items is a wrapper and the list root.
 .pager__items {
   padding: 0;
-  @include clearfix-micro;
-
-  @media #{$wide} {
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
-  }
+  margin: 0 auto;
 }
 
-// pager_item element classes are all on the <li> items.
-// 1px margin to negate touch errors.
-@include list-horizontal($flow-from, $margin: (t: 1px, r: 1px, b: 1px, l: 1px), $list_item_selector: '.pager__item');
 
+// li class for every pager item in any list.
 .pager__item {
-  @media #{$mobile} {
-    width: 100%;
+  margin: 1px;
+  display: inline-block;
+}
+
+
+@media #{$mobile} {
+  .pager__items__first-previous,
+  .pager__items__num-pages,
+  .pager__items__next-last {
     text-align: center;
   }
+  .pager__items__first-previous,
+  .pager__items__next-last {
+    .pager__item {
+      display: inline;
+    }
+  }
 }
+
+
+@media #{$wide} {
+  .pager__items__first-previous,
+  .pager__items__num-pages,
+  .pager__items__next-last {
+    display: inline-block;
+  }
+
+  .pager__items__num-pages {
+    text-align: center;
+  }
+
+  .pager__items__first-previous {
+    float: #{$flow-from};
+  }
+  .pager__items__next-last {
+    float: #{$flow-to};
+  }
+}
+
+
+.pager__items__first-previous {}
+.pager__items__num-pages {}
+.pager__items__next-last {}
 
 
 // Active or "current" list item.
@@ -48,11 +92,13 @@
 
 // Pager links are either an <a>, or a <span> for the current item in the Views mini-pager.
 .pager__link {
-  display: block;
-  //border: $border-width $border-style;
-  border: 0;
+  display: inline-block;
   border-radius: $border-radius;
   transition: $global-transition;
+  @include output-rhythm(padding, 2px 7px 0);
+
+  border: 0;
+  //border: $border-width $border-style;
 
   &:focus,
   &:hover {
@@ -63,7 +109,7 @@
 
 // Global padding for all pager links (anchors).
 .pager__link {
-  @include output-rhythm(padding, 2px $small 0);
+
 }
 
 
@@ -80,31 +126,18 @@
 
 
 // List item for the word "Next"
-.pager__item--next {
-  @media #{$mobile} {
-    clear: both;
-  }
-}
+.pager__item--next {}
 
 // List item for the word "Last"
 .pager__item--last {}
 
 
 // Each numeric pager item has this class.
-.pager__item--num {
-  @media #{$mobile} {
-    width: auto;
-  }
-}
+.pager__item--num {}
 
 
 // First and last classes for numeric pager items.
-.pager__item--num-first {
-  @media #{$mobile} {
-    clear: both;
-  }
-}
-
+.pager__item--num-first {}
 .pager__item--num-last {}
 
 

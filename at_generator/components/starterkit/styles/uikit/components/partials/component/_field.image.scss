@@ -40,7 +40,7 @@
     @include output-rhythm(margin-bottom, $medium);
   }
   figure.align-center {
-    display: table;
+    display: block;
   }
 
   // Align right.
@@ -76,7 +76,7 @@
     @include output-rhythm(margin-bottom, $medium);
   }
   .field-type-image figure[class*="align-"] {
-    display: table;
+    display: block;
   }
 }
 
