@@ -18,8 +18,9 @@ function HOOK_library_info_build() {
   $libraries = [];
   $theme = 'HOOK';
   $theme_registry = \Drupal::service('theme.registry')->get();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Add a library whose information changes depending on certain conditions.
+  // Layout libraries.
   $libraries[$theme . '.layout.page'] = [
     'css' => [
       'layout' => [
@@ -27,7 +28,6 @@ function HOOK_library_info_build() {
       ],
     ],
   ];
-
   foreach ($theme_registry as $key => $values) {
     if (substr($key, 0, 6) == 'page__') {
       $suggestion = str_replace('_', '-', $key);
@@ -38,6 +38,45 @@ function HOOK_library_info_build() {
           ],
         ],
       ];
+    }
+  }
+
+  // Extension libraries.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    // Fonts.
+    if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+      // Google fonts.
+      if (!empty($config['font_google'])) {
+        $libraries['google_fonts'] = [
+          'remote' => 'https://fonts.googleapis.com',
+          'license' => [
+            'name' => 'SIL (OFL)',
+            'url' => 'http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL',
+            'gpl-compatible' => TRUE,
+          ],
+          'css' => [
+            'base' => [
+              Xss::filter($config['font_google']) => [],
+            ],
+          ],
+          'weight' => -1000,
+        ];
+      }
+      // Typekit.
+      if (!empty($config['font_typekit'])) {
+        $libraries['typekit_id'] = [
+          'remote' => '//use.typekit.net/',
+          'license' => [
+            'name' => 'Apache 2.0',
+            'url' => 'http://www.apache.org/licenses/LICENSE-2.0',
+            'gpl-compatible' => TRUE,
+          ],
+          'js' => [
+            '//use.typekit.net/' . Html::escape($config['font_typekit']) . '.js' => ['type' => 'external'],
+          ],
+          'header' => TRUE,
+        ];
+      }
     }
   }
 
