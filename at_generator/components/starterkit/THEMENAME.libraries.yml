@@ -33,6 +33,13 @@ comment:
     component:
       styles/css/components/comments.css: {}
 
+# Contact forms
+contact:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/contact-forms.css: {}
+
 # Forum
 forum:
   version: 8.x-1.0
