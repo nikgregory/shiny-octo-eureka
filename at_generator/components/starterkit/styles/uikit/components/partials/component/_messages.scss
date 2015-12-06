@@ -1,7 +1,8 @@
 /**
  * Messages
- *  - style system messages such as status, warning and error.
- ========================================================================== */
+ * Style system messages such as status, warning and error.
+ * Colors are kept here, we don't want these to shift in color module.
+ ============================================================================ */
 
 .messages {
   word-wrap: break-word;
@@ -43,9 +44,7 @@
 }
 
 
-// Messages colors are kept here, we don't want these to shift in color module.
-
-/* Success (status) */
+// Success (status).
 .messages--status,
 table tr.ok {
   background-color: $success-background-color;
@@ -58,7 +57,7 @@ table tr.ok {
 }
 
 
-/* Warning */
+// Warning.
 .messages--warning,
 table tr.warning {
   background-color: $warning-background-color;
@@ -71,7 +70,7 @@ table tr.warning {
 }
 
 
-/* Error */
+// Error.
 .messages--error,
 table tr.error {
   background-color: $error-background-color;
@@ -92,14 +91,13 @@ table tr.error {
 }
 
 
-
-/* RTL */
+// RTL.
 [dir="rtl"] .messages {
   text-align: right;
 }
 
 
-/* Message icons */
+// Message icons.
 .messages .icon {
   &:before {
     font-family: $icon-font;

@@ -4,8 +4,8 @@
  *    content, such as pages, blog posts, forum posts and so on. Each of those
  *    is usually a content type you create in the Drupal admin.
  *  - an instance of a content type (e.g. a single blog post) is called a node,
- *    the root template is called node.html.twg and the base selector is .node {}
- ========================================================================== */
+ *    the root template is node.html.twig and the base selector is .node {}
+ ============================================================================ */
 
 .node {
   @include clearfix-micro;
@@ -174,12 +174,6 @@
     padding: 0;
   }
 }
-
-
-
-
-
-
 
 
 

@@ -1,10 +1,8 @@
-//
 // List mixins.
 // Common list mixins and import list style mixins.
-//
 
-
-// Basic horizonal list, uses a map and the familiar trbl (top, left, bottom, right) CSS syntax.
+// Basic horizontal list, uses a map and the familiar trbl (top, left, bottom,
+// right) CSS syntax.
 @mixin list-horizontal($float-direction, $margin: (t: 0, r: $medium, b: 0, l: $medium), $list_item_selector: null) {
 
   $item_selector: 'li';
@@ -65,3 +63,5 @@
   "list-tabs",
   "list-seven",
   "list-columns";
+
+

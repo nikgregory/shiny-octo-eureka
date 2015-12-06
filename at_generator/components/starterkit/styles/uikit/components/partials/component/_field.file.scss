@@ -2,7 +2,7 @@
  * File icons
  *  - AT unsets Drupal core file field CSS for image icons and replaces them
  *    with FontAwesome icons.
- ========================================================================== */
+ ============================================================================ */
 
 .file {
   display: block;
@@ -10,7 +10,7 @@
   a {
     text-decoration: none;
     -ms-word-break: break-all;
-    word-break: break-all;  // Be careful,  this breaks words wh_erever
+    word-break: break-all;  // Be careful,  this breaks words wherever
     word-break: break-word; // Non standard for webkit
     hyphens: auto;
 

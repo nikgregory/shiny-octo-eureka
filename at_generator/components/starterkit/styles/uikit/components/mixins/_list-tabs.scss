@@ -1,15 +1,9 @@
-//
-// List items as tabs and tab groups.
-//
+/// List items as tabs and tab groups.
 // By default these inherit most tab global styles, e.g. if you set
-// $tab-border-width in variables.scss it will apply here unless
-// overridden in the file you are calling the mixin from.
-//
+// $tab-border-width in variables.scss it will apply here unless overridden in
+// the file you are calling the mixin from.
 
-
-//
 // List items as tabs.
-//
 @mixin list-style-tabs($list_selector) {
 
   #{$list_selector} {
@@ -59,9 +53,7 @@
 }
 
 
-//
 // List items as a tab-group.
-//
 @mixin list-style-tab-group($list_selector) {
 
   #{$list_selector} {
@@ -127,3 +119,6 @@
     }
   }
 }
+
+
+

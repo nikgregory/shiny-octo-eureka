@@ -1,6 +1,10 @@
 /**
  * Breadcrumbs
- ========================================================================== */
+ * Breadcrumbs leverage AT's responsive lists JS feature. This sets a class if
+ * the list is too wide for it's container. This allows us to dynamically change
+ * the design of the breadcrumbs if they are too wide. We use media queries as a
+ * no-js fallback.
+ ============================================================================ */
 
 // Block wrapper for breadcrumbs
 .block-system-breadcrumb-block {

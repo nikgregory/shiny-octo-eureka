@@ -2,7 +2,7 @@
  * Comments
  *  - comment field (holds comment title, form, comments etc)
  *  - styles for comments
- ========================================================================== */
+ ============================================================================ */
 .comment {
   padding-top: 16px;
   padding-top: 1rem;
@@ -137,4 +137,5 @@
   margin-left: 42px;
   margin-left: 2.625rem;
 }
+
 /*# sourceMappingURL=comments.css.map */

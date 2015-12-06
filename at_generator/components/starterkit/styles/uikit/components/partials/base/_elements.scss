@@ -1,8 +1,8 @@
 /**
  * Base
- * - set element global styles, bascially whenever this element appears
- * it should look like this by default.
- ========================================================================== */
+ * - set element global styles, basically whenever this element appears
+ *   it should look like this by default.
+ ============================================================================ */
 
 // Establish (Compass) baseline.
 @include establish-baseline;
@@ -41,7 +41,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 menu,
 nav,
@@ -103,7 +102,6 @@ h4 small, .h4 small {@include adjust-font-size-to($medium)}
 
 // Paragraph.
 p {
-
   // Attempt to hide empty paragraph elements.
   &:empty {
     display: none;
@@ -299,7 +297,7 @@ hr {
 }
 
 
-/* Set hidden styles for non-supporting browers */
+// Set hidden styles for non-supporting browsers
 *[hidden] {
   display: none;
 }

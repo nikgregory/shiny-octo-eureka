@@ -1,3 +1,8 @@
+/**
+ * Basic Horizontal Menu
+ * This will hide all sub-menus no matter what, it has the advantage over the
+ * drop menu of not requiring a width on menu items or arrows.
+ */
 .ms-horizontal .rm-toggle {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
@@ -46,4 +51,5 @@
 .ms-horizontal .pr-header__header-second .menu {
   float: right;
 }
+
 /*# sourceMappingURL=responsive-menus--horizontal.css.map */

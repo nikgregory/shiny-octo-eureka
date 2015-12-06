@@ -46,7 +46,7 @@ relative_assets = true
 line_comments = false
 
 
-# Sourcemaps
+# Source maps
 # -----------------------------------------------------------------------------
 sourcemap = true
 
@@ -54,13 +54,6 @@ sourcemap = true
 # Autoprefixer
 # -----------------------------------------------------------------------------
 # Post process for autoprefixer: https://github.com/postcss/autoprefixer#compass
-# I have not been able to figure out how to autoprefix with sourcemaps using the gem,
-# instead I suggest using grunt, which works just fine. The inlining does work, but
-# no browser I tried could actually read it, patches and or advice welcome.
-# require "autoprefixer-rails"
-# on_stylesheet_saved do |file|
-# css = File.read(file)
-# File.open(file, 'w') do |io|
-#   io << AutoprefixerRails.process(css)
-# end
-# end
+# I have not been able to figure out how to autoprefix with sourcemaps using the
+# gem, instead I suggest using grunt, which works just fine. The inlining does
+# work, but no browser I tried could actually read it.

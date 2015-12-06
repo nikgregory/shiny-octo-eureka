@@ -1,7 +1,7 @@
 /**
  * Block User Login
  *  - style the theme settings for login block (horizontal, placeholders etc).
- ========================================================================== */
+ ============================================================================ */
 
 .block-user-login-block.is-horizontal {
   @include output-rhythm(margin, $xx-small 0 $medium);

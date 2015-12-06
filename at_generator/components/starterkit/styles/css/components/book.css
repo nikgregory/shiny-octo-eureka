@@ -2,7 +2,7 @@
 /**
  * Book
  *  - Set styles for book navigation.
- ========================================================================== */
+ ============================================================================ */
 .book-pager {
   padding: 0;
   overflow: auto;
@@ -59,4 +59,5 @@
   width: 16px;
   width: 1rem;
 }
+
 /*# sourceMappingURL=book.css.map */

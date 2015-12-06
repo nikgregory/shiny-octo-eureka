@@ -1,8 +1,7 @@
 @charset "UTF-8";
 /**
  * Search results.
- *
- ========================================================================== */
+ ============================================================================ */
 .item-list--search-results {
   border-radius: 2px;
 }
@@ -43,7 +42,7 @@
  * Search forms
  * - search block form
  * - advanced search form
- ========================================================================== */
+ ============================================================================ */
 .search-block-form__form {
   display: block;
   clear: both;
@@ -166,4 +165,5 @@
 .fa-loaded .search-help-link:before {
   display: inline-block;
 }
+
 /*# sourceMappingURL=search.css.map */

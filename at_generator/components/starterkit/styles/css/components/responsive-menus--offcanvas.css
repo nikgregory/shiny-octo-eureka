@@ -1,7 +1,8 @@
 @charset "UTF-8";
 /**
- * Responsive Menus - Off canvas.
- ========================================================================== */
+ * Off Canvas
+ * Toggle left or right menus that slide in.
+ ============================================================================ */
 .ms-offcanvas > .page {
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
@@ -52,4 +53,5 @@
   position: absolute;
   top: 0;
 }
+
 /*# sourceMappingURL=responsive-menus--offcanvas.css.map */

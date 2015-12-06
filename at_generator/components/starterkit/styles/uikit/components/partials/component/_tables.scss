@@ -1,7 +1,7 @@
 /**
  * Table Theme
  * Style Drupal selectors for tables.
- ========================================================================== */
+ ============================================================================ */
 
 table {
 
@@ -60,15 +60,15 @@ table {
 }
 
 
-// tr, takes extensive styles if enabled in variables.scss.
-// color is applied in _theme.color.scss to most of these selectors.
+// tr, takes extensive styles if enabled in variables.scss. Color is applied in
+//_theme.color.scss to most of these selectors.
 tr {
   // Row striping (zebra).
   @if $table-row-striping == true {
     &.odd {}
 
-    // nth-child class will capture tables in content that do not
-    // include the odd/even classes.
+    // nth-child class will capture tables in content that do not include the
+    // odd/even classes.
     &.info,
     &.even,
     &:nth-child(2n+2) {}

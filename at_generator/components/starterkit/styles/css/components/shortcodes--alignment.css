@@ -1,6 +1,6 @@
 /**
  * Shortcodes (Alignment)
- ========================================================================== */
+ ============================================================================ */
 .ta-center,
 .ta-center * {
   text-align: center;
@@ -20,4 +20,5 @@
 .ta-justify * {
   text-align: justify;
 }
+
 /*# sourceMappingURL=shortcodes--alignment.css.map */

@@ -1,11 +1,7 @@
-//
 // List items as buttons and button groups.
-//
 // By default these inherit most button global styles, e.g. if you set
-// $button-border-width in variables.scss it will apply here unless
-// overridden in the file you are calling the mixin from.
-//
-
+// $button-border-width in variables.scss it will apply here unless overridden
+// in the file you are calling the mixin from.
 
 // List items as buttons.
 @mixin list-style-buttons($list_selector) {
@@ -101,9 +97,7 @@
 }
 
 
-//
 // List items as a buttons-group, vertically.
-//
 @mixin list-style-button-group-vertical($list_selector) {
 
   #{$list_selector} {
@@ -147,6 +141,7 @@
     }
   }
 }
+
 
 
 

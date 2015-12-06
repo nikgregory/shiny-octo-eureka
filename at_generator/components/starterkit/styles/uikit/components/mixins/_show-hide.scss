@@ -20,7 +20,7 @@
   font-family: inherit;
 }
 
-// Visually hidden but focusable, e.g. skip links
+// Visually hidden but focus-able, e.g. skip links
 @mixin visually-hidden-focusable {
   @extend visually-hidden;
   &.focusable {
@@ -31,7 +31,7 @@
   }
 }
 
-// Shift content offscreen, can be usefull when you reall need to do this
+// Shift content off screen, can be useful when you really need to do this.
 @mixin offscreen {
   position: absolute;
   top: -99999em;
@@ -40,3 +40,5 @@
   overflow: hidden;
   outline: 0;
 }
+
+

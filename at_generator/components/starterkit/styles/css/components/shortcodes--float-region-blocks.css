@@ -1,6 +1,6 @@
 /**
  * Shortcodes (Float region blocks)
- ========================================================================== */
+ ============================================================================ */
 @media all and (min-width: 60.063em) {
   [class*="frb-"] .block {
     margin-right: 2%;
@@ -31,4 +31,5 @@
     width: 15%;
   }
 }
+
 /*# sourceMappingURL=shortcodes--float-region-blocks.css.map */

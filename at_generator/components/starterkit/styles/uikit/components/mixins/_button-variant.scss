@@ -1,5 +1,5 @@
-
 // Easily generate button style variants.
+
 @mixin button-variant($text-color, $background-color, $border-color) {
   color: $text-color;
   background-color: $background-color;

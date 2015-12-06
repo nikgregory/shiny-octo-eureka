@@ -1,18 +1,14 @@
-//
 // List items styled like Seven themes secondary links list. These have a
 // active/hover border bottom with transitions.
-//
 // By default these inherit most list global styles, e.g. if you set
 // $list-border-width in variables.scss it will apply here unless
 // overridden in the file you are calling the mixin from.
-//
 
 
-//
 // Standard horizontal display, just like the Seven theme, however
 // we remove the border bottom on the ul/ol container, this makes
-// it more versitile as a mixin style.
-//
+// it more versatile as a mixin style.
+
 @mixin list-style-seven-horizontal($list_selector) {
 
   #{$list_selector} {
@@ -105,3 +101,5 @@
     }
   }
 }
+
+

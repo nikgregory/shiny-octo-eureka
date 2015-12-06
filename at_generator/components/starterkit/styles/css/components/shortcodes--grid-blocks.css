@@ -1,6 +1,6 @@
 /**
  * Shortcodes (Grid blocks)
- ========================================================================== */
+ ============================================================================ */
 @media all and (max-width: 60em) {
   .grid-block-2 .block {
     width: 49.15254%;
@@ -167,4 +167,5 @@
     clear: none;
   }
 }
+
 /*# sourceMappingURL=shortcodes--grid-blocks.css.map */

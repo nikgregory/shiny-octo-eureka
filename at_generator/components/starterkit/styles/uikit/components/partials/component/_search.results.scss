@@ -1,7 +1,6 @@
 /**
  * Search results.
- *
- ========================================================================== */
+ ============================================================================ */
 
 .item-list--search-results {
   border-radius: $border-radius;
@@ -11,7 +10,7 @@
   @include output-rhythm(margin-bottom, $medium);
   @include output-rhythm(padding, $medium);
 
-  // Style the emtpy message.
+  // Style the empty message.
   &--empty h3 {
     @include adjust-font-size-to($large);
   }
@@ -33,8 +32,9 @@
     a {}
   }
 
-  // We assume, like Google and co, that most results get picked based on the title, not the
-  // snippet/description, so we make this smaller to enhance the scanability of the titles.
+  // We assume, like Google and co, that most results get picked based on the
+  // title, not the snippet/description, so we make this smaller to enhance the
+  // visibility of the titles.
   &__snippet-info {
     @include adjust-font-size-to($medium * .875); // 14px
   }

@@ -9,7 +9,7 @@
  *  - anchor links styled as buttons
  *  - drop buttons
  *  - action link buttons
- ========================================================================== */
+ ============================================================================ */
 
 button,
 .button {
@@ -44,8 +44,8 @@ button,
 
 
 //
-// Button variants are primarly changes in colors, so are set in _theme.color.scss using the
-// button-variant() mixin.
+// Button variants are primarly changes in colors, so are set in
+//_theme.color.scss using the button-variant() mixin.
 //
 
 // Primary button
@@ -104,7 +104,7 @@ button,
   }
 }
 
-// Styles for link buttons and action links. TODO.
+// Styles for link buttons and action links.
 li[class*="action--"] {
   list-style: none;
   padding: 0;

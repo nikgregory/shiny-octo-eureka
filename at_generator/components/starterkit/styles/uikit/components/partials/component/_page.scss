@@ -1,7 +1,7 @@
 /**
  * Page
  *  - for page.html.twig and region markup.
- ========================================================================== */
+ ============================================================================ */
 
 // Page wrapper
 // Set relative to make it easier to use absolute positioning and ensure items
@@ -38,7 +38,7 @@
     }
   }
 
-  &__rw {}           // Regions wrapper (container that takes max-width from your layout settings)
+  &__rw {}           // Regions wrapper (takes max-width from layout settings)
   &__leaderboard {}  // Region
 }
 
@@ -125,16 +125,16 @@
 
 // .l-pr is a layout class on each page row outer wrapper.
 .l-pr {
-  // You can set padding here to avoid browser chrome colisions, if required.
-  // The viewport width (vw) unit is very useful here, but not all browsers support it.
+  // You can set padding here to avoid browser chrome collisions, if required.
+  // The viewport width (vw) unit is useful here, but not all browsers support it.
   //padding: 0 2%;
   //padding: 0 2vw;
 }
 
 
 // Regions wrappers
-//  - .l-rw is the main layout wrapper selector for all regions within a row. The layout system
-//    uses this wrapper and selector extensively.
+//  - .l-rw is the main layout wrapper selector for all regions within a row.
+//    The layout system uses this wrapper and selector extensively.
 //  - .region is a theme component class for adding styles like backgrounds etc.
 .l-rw {
   @include output-rhythm(padding, 0 $medium);

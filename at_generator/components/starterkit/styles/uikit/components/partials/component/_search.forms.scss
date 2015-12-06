@@ -2,7 +2,7 @@
  * Search forms
  * - search block form
  * - advanced search form
- ========================================================================== */
+ ============================================================================ */
 
 // Search Block form.
 .search-block-form__form {
@@ -101,8 +101,9 @@
 // Advanced search.
 .search-advanced {
   .details-wrapper {
-    // Hide visually redundant legends. This must be very specific so as not to remove
-    // required legends as well, hence the child selectors and over-specification.
+    // Hide visually redundant legends. This must be very specific so as not to
+    // remove required legends as well, hence the child selectors and
+    // over-specification.
     > fieldset > legend {
       @include visually-hidden;
     }
@@ -142,3 +143,7 @@
     }
   }
 }
+
+
+
+

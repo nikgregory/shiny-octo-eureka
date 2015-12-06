@@ -1,11 +1,11 @@
 /**
  * Color
- ========================================================================== */
+ ============================================================================ */
 
 
 /**
  * base.elements
- ========================================================================== */
+ ============================================================================ */
 
 // html and body
 html,
@@ -86,7 +86,7 @@ hr {
  * Page
  *  - mainly for markup that is printed directly in page.html.twig and
  *    .l-r {}
- ========================================================================== */
+ ============================================================================ */
 
 // Page wrapper.
 .page {
@@ -216,7 +216,7 @@ hr {
  * AT attribution message
  *  - a toggle setting in the theme settings, you can turn it on/off using
  *    the Markup overrides extension.
- ========================================================================== */
+ ============================================================================ */
 .attribution {
   .l-rw {
     background-color: transparent;
@@ -230,7 +230,7 @@ hr {
 /**
  * Feed Icons
  *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
- ========================================================================== */
+ ============================================================================ */
 .feed-icon-rss__path {
   fill: rgba(0, 0, 0, 0.6);
 }
@@ -239,7 +239,7 @@ hr {
 /**
  * Branding styles
  *  - Drupal core branding block.
- ========================================================================== */
+ ============================================================================ */
 
 .block--system-branding-block {}
 
@@ -255,7 +255,7 @@ hr {
 
 /**
  * Blocks
- ========================================================================== */
+ ============================================================================ */
 
 .block {}
 .block__title {}
@@ -266,7 +266,7 @@ hr {
  *  - style Drupal core block menus.
  *  - for the drop menu and other responsive menus see the mixins and the
  *    _navbar.scss partial.
- ========================================================================== */
+ ============================================================================ */
 
 .menu {
   &__link {}
@@ -347,7 +347,7 @@ hr {
  *  1. Sass/CSS defined here (with breakpoints etc).
  *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
  *  3. Theme settings as set in your themes Advanced extention settings.
- ========================================================================== */
+ ============================================================================ */
 
 
 // Aggressively force the menu to inherit the page/regions background,
@@ -499,7 +499,7 @@ hr {
 
 /**
  * Breadcrumbs
- ========================================================================== */
+ ============================================================================ */
 
 .breadcrumb {
   li {
@@ -519,7 +519,7 @@ hr {
  * Pagers
  * - Full system pager.
  * - Views mini pager.
- ========================================================================== */
+ ============================================================================ */
 
 // Pager links are either an <a>, or a <span> for the current item in the Views mini-pager.
 .pager__link {
@@ -550,7 +550,7 @@ hr {
 /**
  * Table Theme
  * Style Drupal selectors for tables.
- ========================================================================== */
+ ============================================================================ */
 
 // tr, takes extensive styles if enabled in variables.scss.
 tr {
@@ -615,7 +615,7 @@ th {
  * Note:
  *  - input type submit is treated as a 'button', see _buttons.scss
  *  - for drop buttons see _buttons.scss
- ========================================================================== */
+ ============================================================================ */
 
 // Select, Textarea and most input types
 // Select, Textarea and most input types
@@ -717,7 +717,7 @@ textarea.placeholder_text {
 
 /**
  * Form Theme
- ========================================================================== */
+ ============================================================================ */
 
 .form-type-radio,
 .form-type-checkbox {
@@ -781,7 +781,7 @@ form .marker {
  *  - anchor links styled as buttons
  *  - drop buttons
  *  - action link buttons
- ========================================================================== */
+ ============================================================================ */
 
 button,
 .button {
@@ -925,7 +925,7 @@ button.link-edit-summary {
  * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
  * mean the tabs are now a block, and we probably need some template revisions
  * also.
- ========================================================================== */
+ ============================================================================ */
 
 .tabs {}
 
@@ -1016,7 +1016,7 @@ button.link-edit-summary {
  * File icons
  * AT unsets Drupal core file field CSS for image icons and replaces them
  * with FontAwesome icons.
- ========================================================================== */
+ ============================================================================ */
 
 .file {
   a:before {
@@ -1027,7 +1027,7 @@ button.link-edit-summary {
 
 /**
  * Image upload widget.
- ========================================================================== */
+ ============================================================================ */
 
 .image-preview {
   background-color: transparent;
@@ -1036,7 +1036,7 @@ button.link-edit-summary {
 
 /**
  * Field Taxonomy Reference
- ========================================================================== */
+ ============================================================================ */
 
 [class*="tags"].field-type-entity-reference {
   @if ($field-taxonomy-item-as-labels == true) {
@@ -1067,7 +1067,7 @@ button.link-edit-summary {
  *  -  for example "new" mark on comments, tags etc.
  *
  *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
- ========================================================================== */
+ ============================================================================ */
 
 .filter-help a,
 .more-help-link a {
@@ -1082,7 +1082,7 @@ button.link-edit-summary {
  *  - System messages such as status, warning and error are NOT included
  *    here as we don't want them to shift or change in color module, since
  *    they are too important with regards to accessibility etc.
- ========================================================================== */
+ ============================================================================ */
 
 // Devel query messages
 .dev-query {
@@ -1119,7 +1119,7 @@ body {
  *    is usually a content type you create in the Drupal admin.
  *  - an instance of a content type (e.g. a single blog post) is called a node,
  *    the root template is called node.html.twg and the base selector is .node {}
- ========================================================================== */
+ ============================================================================ */
 
 .node {
   // $node-teaser-border-color
@@ -1153,7 +1153,7 @@ body {
 
 /**
  * Aggregator
- ========================================================================== */
+ ============================================================================ */
 
 .aggregator-item {
   background-color: $node-teaser-background-color;
@@ -1164,7 +1164,7 @@ body {
 /**
  * Forums
  *  - see table.scss for generic table styles.
- ========================================================================== */
+ ============================================================================ */
 
 .forum {
   .icon {
@@ -1177,7 +1177,7 @@ body {
 
 /**
  * Search results pages
- ========================================================================== */
+ ============================================================================ */
 
 .item-list--search-results {
   background-color: $node-teaser-background-color;
@@ -1190,7 +1190,7 @@ body {
  * Comments
  *  - comment field (holds comment title, form, comments etc)
  *  - styles for comments
- ========================================================================== */
+ ============================================================================ */
 
 // Comments are articles, they all have the base class of .comment:
 .comment {
@@ -1201,7 +1201,7 @@ body {
 /**
  * Social media
  *  - styles for socila media links, modules etc.
- ========================================================================== */
+ ============================================================================ */
 
 // Social Media Links
 // https://www.drupal.org/project/social_media_links

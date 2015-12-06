@@ -1,6 +1,6 @@
 /**
  * Shortcodes (Positioning)
- ========================================================================== */
+ ============================================================================ */
 .center-element {
   margin-left: auto;
   margin-right: auto;
@@ -17,4 +17,5 @@
     float: left;
   }
 }
+
 /*# sourceMappingURL=shortcodes--positioning.css.map */

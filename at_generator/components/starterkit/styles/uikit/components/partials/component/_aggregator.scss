@@ -1,7 +1,6 @@
 /**
  * Aggregator
- *
- ========================================================================== */
+ ============================================================================ */
 
 .aggregator-feed {
   @include output-rhythm(margin-bottom, $medium);
@@ -42,7 +41,7 @@
 .field-aggregator-item--timestamp {}
 
 
-// Item author, sometimes this is emtpy but still prints empty markup in the output.
+// Item author, sometimes this is empty but still prints empty markup in the output.
 .field-aggregator-item--author {}
 
 

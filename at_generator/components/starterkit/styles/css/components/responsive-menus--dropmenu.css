@@ -1,7 +1,8 @@
 @charset "UTF-8";
 /**
- * Responsive Menus - Dropmenu.
- ========================================================================== */
+ * Drop menus
+ * Standard CSS drop menus that will expand any nesting level.
+ ============================================================================ */
 .ms-dropmenu .rm-toggle {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
@@ -81,4 +82,5 @@
 .ms-dropmenu .rm-block__content .odd ul .odd > .menu__item--expanded > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=responsive-menus--dropmenu.css.map */

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*
+/**
  * jQuery FlexSlider v2.3.0
  * http://www.woothemes.com/flexslider/
  *
@@ -8,9 +8,7 @@
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Ville Ristimäki (@villeristi)
- *
- * Converted to SCSS syntax by Jeff Burnz.
- *
+ * Converted to SCSS syntax for Adaptivetheme by Jeff Burnz.
  */
 .flex-container a:focus, .flex-slider a:focus, .flex-container a:focus, .flex-slider a:focus {
   outline: none;
@@ -26,7 +24,7 @@
 
 /**
  * BASE STYLES
- ========================================================================== */
+ ============================================================================ */
 .flexslider {
   position: relative;
   margin: 0;
@@ -70,7 +68,7 @@ html[xmlns] .flexslider .slides {
 
 /**
  * DEFAULT THEME
- ========================================================================== */
+ ============================================================================ */
 .flexslider {
   background: #ffffff;
   border-radius: 0;
@@ -278,4 +276,5 @@ html[xmlns] .flexslider .slides {
   opacity: 1;
   cursor: default;
 }
+
 /*# sourceMappingURL=slideshows.css.map */

@@ -2,8 +2,8 @@
  * Menus
  *  - style Drupal core block menus.
  *  - for the drop menu and other responsive menus see the mixins and the
- *    _component.menu.responsive.scss / responsive-menus.css.
- ========================================================================== */
+ *    respective responsive menu partials.
+ ============================================================================ */
 
 .menu {
   padding: 0;
@@ -82,9 +82,6 @@
 // Region specific menus
 @import "menu.leaderboard";
 @import "menu.footer";
-
-
-
 
 
 

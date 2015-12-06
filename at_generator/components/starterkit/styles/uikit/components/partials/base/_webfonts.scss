@@ -1,6 +1,6 @@
 /**
- * Webfonts
- ========================================================================== */
+ * Web fonts
+ ============================================================================ */
 
 /**
  * Font Awesome - http://fortawesome.github.io
@@ -92,8 +92,8 @@
   @include output-rhythm(width, $x-large);
 }
 
-// FontFaceObserver will add/remove classes to the html element. By default we only
-// check if FontAwesome is loading.
+// FontFaceObserver will add/remove classes to the html element. By default we
+// only check if FontAwesome is loading.
 .fa-loading {}      // Waiting for FontAwesome to load.
 .fa-loaded  {}      // FontAwesome has loaded.
 .fa-unavailable {}  // FontAwesome failed to load.
@@ -107,7 +107,7 @@
 .wf-active {}
 
 
-/* Webfont smoothing */
+/* Web font smoothing */
 :after,
 :before {
   text-rendering: auto;

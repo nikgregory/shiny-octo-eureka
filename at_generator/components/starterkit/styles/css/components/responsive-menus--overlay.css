@@ -1,4 +1,10 @@
 @charset "UTF-8";
+/**
+ * Overlay
+ * Overlay menu positions the toggle in a corner (any), with the menu
+ * hidden. When toggled the menu opens in an overlay above the content
+ * and fills the whole screen.
+ ============================================================================ */
 .ms-overlay .rm-toggle {
   display: block;
   position: fixed;
@@ -72,4 +78,5 @@
   content: none;
   display: none;
 }
+
 /*# sourceMappingURL=responsive-menus--overlay.css.map */

@@ -2,7 +2,7 @@
  * Comments
  *  - comment field (holds comment title, form, comments etc)
  *  - styles for comments
- ========================================================================== */
+ ============================================================================ */
 
 .comment {
   @include clearfix-micro;
@@ -76,7 +76,7 @@
       }
     }
 
-    // figure wraper
+    // figure wrapper.
     .field-type-image__figure {
       margin: 0;
       padding: 0;

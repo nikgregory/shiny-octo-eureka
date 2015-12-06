@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /**
- * Webfonts
- ========================================================================== */
+ * Web fonts
+ ============================================================================ */
 /**
  * Font Awesome - http://fortawesome.github.io
  * by @davegandy - http://fontawesome.io - @fontawesome
@@ -101,7 +101,7 @@
   width: 1.625rem;
 }
 
-/* Webfont smoothing */
+/* Web font smoothing */
 :after,
 :before {
   text-rendering: auto;
@@ -111,9 +111,9 @@
 
 /**
  * Base
- * - set element global styles, bascially whenever this element appears
- * it should look like this by default.
- ========================================================================== */
+ * - set element global styles, basically whenever this element appears
+ *   it should look like this by default.
+ ============================================================================ */
 html {
   font-size: 100%;
   line-height: 0.375em;
@@ -150,7 +150,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 menu,
 nav,
@@ -405,7 +404,6 @@ hr {
   box-sizing: border-box;
 }
 
-/* Set hidden styles for non-supporting browers */
 *[hidden] {
   display: none;
 }
@@ -413,7 +411,7 @@ hr {
 /**
  * Table Base
  * Set base styles for table elements.
- ========================================================================== */
+ ============================================================================ */
 table {
   padding: 0;
   border: 0;
@@ -460,8 +458,8 @@ th {
 
 /**
  * Form Base
- * Set base styes for form elements.
- ========================================================================== */
+ * Set base styles for form elements.
+ ============================================================================ */
 input,
 select,
 button,
@@ -652,10 +650,26 @@ textarea:invalid {
   box-shadow: none;
 }
 
+input:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+input:focus:-moz-placeholder {
+  opacity: 0.2;
+}
+
+input:focus::-moz-placeholder {
+  opacity: 0.2;
+}
+
+input:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
 /**
  * Dialog
  *  - Presentational styles for modal windows.
- ========================================================================== */
+ ============================================================================ */
 .ui-dialog {
   position: absolute;
   overflow: visible;
@@ -739,9 +753,8 @@ textarea:invalid {
 }
 */
 /**
- * Exposed Filters
- *
- ========================================================================== */
+ * Exposed Filters.
+ ============================================================================ */
 .exposed-filters .filters,
 .exposed-filters .additional-filters {
   float: left;
@@ -772,7 +785,7 @@ textarea:invalid {
 /**
  * Table Theme
  * Style Drupal selectors for tables.
- ========================================================================== */
+ ============================================================================ */
 .path-admin table {
   width: 100%;
 }
@@ -893,7 +906,7 @@ thead .active img {
 
 /**
  * Form Common - common styles for form elements and classes.
- ========================================================================== */
+ ============================================================================ */
 .form-text {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -1170,7 +1183,7 @@ details > .details-wrapper {
  *  - anchor links styled as buttons
  *  - drop buttons
  *  - action link buttons
- ========================================================================== */
+ ============================================================================ */
 button,
 .button {
   max-width: 100%;
@@ -1354,8 +1367,7 @@ label button.link {
 
 /**
  * Inline form styles.
- *
- ========================================================================== */
+ ============================================================================ */
 .form--inline .form-item {
   float: left;
   margin-right: 11px;
@@ -1378,12 +1390,11 @@ label button.link {
  *  - unlike Drupal core we don't include all the vendor prefixes, instead
  *    we just rely on autoprefixer doing it's thing.
  * @see progress.js
- ========================================================================== */
+ ============================================================================ */
 .progress {
   margin: 18px 0;
   margin: 1.125rem 0;
 }
-
 .progress__track {
   border-color: #b3b3b3;
   border-radius: 10em;
@@ -1392,7 +1403,6 @@ label button.link {
   background-image: linear-gradient(#e7e7df, #f0f0f0);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.16);
 }
-
 .progress__bar {
   border: 1px #07629a solid;
   background: #057ec9;
@@ -1430,7 +1440,7 @@ label button.link {
 /**
  * Form Tables
  * Table select and table drag are form elements.
- ========================================================================== */
+ ============================================================================ */
 tr.drag {
   background-color: #fffff1;
 }
@@ -1471,7 +1481,7 @@ tr .form-item {
 
 /**
  * Images
- ========================================================================== */
+ ============================================================================ */
 img.align-left,
 figure.align-left {
   margin: 0 16px 16px 0;
@@ -1494,7 +1504,7 @@ figure[class*="align-"] {
 
 /**
  * Image upload widget.
- ========================================================================== */
+ ============================================================================ */
 .image-widget .form-file {
   padding: 0;
 }
@@ -1519,7 +1529,7 @@ figure[class*="align-"] {
 /**
  * Media
  * - styles for media objects such as iframe, video, embedding codes etc.
- ========================================================================== */
+ ============================================================================ */
 .embed-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -1539,7 +1549,7 @@ figure[class*="align-"] {
 
 /**
  * List Styles
- ========================================================================== */
+ ============================================================================ */
 ul.inline, ul.links.inline {
   padding: 0;
 }
@@ -1674,7 +1684,7 @@ ul.inline li ol {
 /**
  * Blocks
  *  - base styles for block templates.
- ========================================================================== */
+ ============================================================================ */
 .block {
   margin: 26px 0;
   margin: 1.625rem 0;
@@ -1683,7 +1693,7 @@ ul.inline li ol {
 /**
  * Page
  *  - for page.html.twig and region markup.
- ========================================================================== */
+ ============================================================================ */
 .page {
   position: relative;
   min-height: 100%;
@@ -1729,7 +1739,7 @@ ul.inline li ol {
  * Pagers
  * - Full system pager.
  * - Views mini pager.
- ========================================================================== */
+ ============================================================================ */
 .pager {
   margin: 16px 0;
   margin: 1rem 0;
@@ -1807,7 +1817,7 @@ ul.inline li ol {
 /**
  * Skip link
  *  - Allows keyboard users to quickly skip to the main content of the page.
- ========================================================================== */
+ ============================================================================ */
 .skip-link {
   color: #fff;
   background: #444;
@@ -1848,7 +1858,7 @@ ul.inline li ol {
 /**
  * Branding styles
  *  - Drupal core branding block.
- ========================================================================== */
+ ============================================================================ */
 .site-branding:before, .site-branding:after {
   content: " ";
   display: table;
@@ -1883,8 +1893,7 @@ ul.inline li ol {
 
 /**
  * Labels
- *
- ========================================================================== */
+ ============================================================================ */
 .more-link {
   text-align: right;
   display: inline-block;
@@ -1939,8 +1948,7 @@ ul.inline li ol {
 /**
  * Markers
  *  - used for things like node unpublished status.
- *
- ========================================================================== */
+ ============================================================================ */
 .marker {
   display: inline;
   letter-spacing: 0.025em;
@@ -1983,8 +1991,9 @@ ul.inline li ol {
 
 /**
  * Messages
- *  - style system messages such as status, warning and error.
- ========================================================================== */
+ * Style system messages such as status, warning and error.
+ * Colors are kept here, we don't want these to shift in color module.
+ ============================================================================ */
 .messages {
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -2022,7 +2031,6 @@ ul.inline li ol {
   list-style: square;
 }
 
-/* Success (status) */
 .messages--status,
 table tr.ok {
   background-color: #f3faef;
@@ -2034,7 +2042,6 @@ table tr.ok {
   border-color: #c9e1bd;
 }
 
-/* Warning */
 .messages--warning,
 table tr.warning {
   background-color: #fdf8ed;
@@ -2046,7 +2053,6 @@ table tr.warning {
   border-color: #f4daa6;
 }
 
-/* Error */
 .messages--error,
 table tr.error {
   background-color: #fcf4f2;
@@ -2064,12 +2070,10 @@ table tr.error {
   background-image: none;
 }
 
-/* RTL */
 [dir="rtl"] .messages {
   text-align: right;
 }
 
-/* Message icons */
 .messages .icon:before {
   font-family: FontAwesome, sans-serif;
   float: left;
@@ -2103,7 +2107,7 @@ table tr.error {
 /**
  * Feed Icons
  *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
- ========================================================================== */
+ ============================================================================ */
 .feed-icon {
   display: block;
   width: 16px;
@@ -2113,11 +2117,12 @@ table tr.error {
 }
 
 /**
- * Tabs (local tasks)
- * TODO: fix selectors when https://www.drupal.org/node/507488 lands. This will
- * mean the tabs are now a block, and we probably need some template revisions
- * also.
- ========================================================================== */
+ * Tabs (local tasks).
+ * Tab styles leverage AT's responsive lists JS feature. This sets a class if
+ * the list is too wide for it's container. This allows us to dynamically change
+ * the design of the tabs menu if they are too wide. We use media queries as a
+ * no-js fallback.
+ ============================================================================ */
 .tabs {
   padding: 0;
   margin: 16px 0;
@@ -2515,7 +2520,11 @@ table tr.error {
 
 /**
  * Breadcrumbs
- ========================================================================== */
+ * Breadcrumbs leverage AT's responsive lists JS feature. This sets a class if
+ * the list is too wide for it's container. This allows us to dynamically change
+ * the design of the breadcrumbs if they are too wide. We use media queries as a
+ * no-js fallback.
+ ============================================================================ */
 .block-system-breadcrumb-block {
   margin: 0;
 }
@@ -2593,8 +2602,8 @@ table tr.error {
  * Menus
  *  - style Drupal core block menus.
  *  - for the drop menu and other responsive menus see the mixins and the
- *    _component.menu.responsive.scss / responsive-menus.css.
- ========================================================================== */
+ *    respective responsive menu partials.
+ ============================================================================ */
 .menu {
   padding: 0;
   margin: 0;
@@ -2640,9 +2649,8 @@ table tr.error {
 }
 
 /**
- * Menus in the Leaderboard region
- *
- ========================================================================== */
+ * Menus in the Leaderboard region.
+ ============================================================================ */
 .pr-leaderboard__leaderboard .block-menu {
   overflow: hidden;
   *zoom: 1;
@@ -2667,9 +2675,8 @@ table tr.error {
 }
 
 /**
- * Menus in the Footer region
- *
- ========================================================================== */
+ * Menus in the Footer region.
+ ============================================================================ */
 .pr-footer__footer .block-menu {
   overflow: hidden;
   *zoom: 1;
@@ -2695,9 +2702,9 @@ table tr.error {
 /**
  * Fields
  * Common styles for field templates.
- * SEE: image and taxonomy field styles as these both have unqique
+ * SEE: image and taxonomy field styles as these both have unique
  * template html markup and selectors.
- ========================================================================== */
+ ============================================================================ */
 .field {
   margin-bottom: 16px;
   margin-bottom: 1rem;
@@ -2738,7 +2745,7 @@ table tr.error {
 
 /**
  * Field Image
- ========================================================================== */
+ ============================================================================ */
 .field-type-image {
   margin: 0;
   padding: 0;
@@ -2800,7 +2807,7 @@ table tr.error {
  * File icons
  *  - AT unsets Drupal core file field CSS for image icons and replaces them
  *    with FontAwesome icons.
- ========================================================================== */
+ ============================================================================ */
 .file {
   display: block;
 }
@@ -2891,7 +2898,7 @@ table tr.error {
 
 /**
  * Field Language Display
- ========================================================================== */
+ ============================================================================ */
 [id*="field-language-display"] {
   margin-bottom: 16px;
   margin-bottom: 1rem;
@@ -2906,8 +2913,8 @@ table tr.error {
  *    content, such as pages, blog posts, forum posts and so on. Each of those
  *    is usually a content type you create in the Drupal admin.
  *  - an instance of a content type (e.g. a single blog post) is called a node,
- *    the root template is called node.html.twg and the base selector is .node {}
- ========================================================================== */
+ *    the root template is node.html.twig and the base selector is .node {}
+ ============================================================================ */
 .node {
   margin-bottom: 16px;
   margin-bottom: 1rem;
@@ -3013,7 +3020,7 @@ table tr.error {
 /**
  * Node previews
  *  - style the preview bar a little better than default.
- ========================================================================== */
+ ============================================================================ */
 .node-preview-container {
   position: relative;
   z-index: 499;
@@ -3087,7 +3094,7 @@ table tr.error {
 
 /**
  * User forms, e.g. login, register and password reset.
- ========================================================================== */
+ ============================================================================ */
 .user-login-form .form-text {
   width: 100%;
 }
@@ -3100,10 +3107,10 @@ table tr.error {
 
 /**
  * User Profiles
- ========================================================================== */
+ ============================================================================ */
 /**
  * Views
- ========================================================================== */
+ ============================================================================ */
 .views-view-grid .views-col {
   padding-right: 18px;
   padding-right: 1.125rem;
@@ -3118,7 +3125,7 @@ table tr.error {
 /**
  * Social media
  *  - styles for socila media links, modules etc.
- ========================================================================== */
+ ============================================================================ */
 .block-social-media-links .platforms,
 .pane-social-media-link-widget .platforms {
   padding-left: 0;
@@ -3246,7 +3253,7 @@ table tr.error {
 
 /**
  * Publishing states.
- ========================================================================== */
+ ============================================================================ */
 /* You may wish to include background color and styles for unpublished items.
 // Publishing status.
 article[class*="--unpublished"] {
@@ -3265,7 +3272,7 @@ article[class*="--unpublished"] {
  * AT attribution message
  *  - a toggle setting in the theme settings, you can turn it on/off using
  *    the Markup overrides extension.
- ========================================================================== */
+ ============================================================================ */
 .attribution {
   text-align: right;
 }
@@ -3283,7 +3290,7 @@ article[class*="--unpublished"] {
  * and override the CSS. The ID should be enough specificity to do the job.
  * This is not exhaustive, the toolbar can still break, however this gets
  * most "very easily broken" things protected from normal theme styles.
- ========================================================================== */
+ ============================================================================ */
 #toolbar-administration a {
   font-family: 'Source Sans Pro', 'Lucida Grande', Verdana, sans-serif;
   line-height: 1;
@@ -3317,7 +3324,7 @@ article[class*="--unpublished"] {
  * print to be identical to a normal webpage, or adjust it to better suit
  * your design and requirements. For example this only removes a sub-set of
  * regions, all others will print.
- ========================================================================== */
+ ============================================================================ */
 @media print {
   * {
     background: transparent !important;
@@ -3428,4 +3435,5 @@ article[class*="--unpublished"] {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=base.css.map */

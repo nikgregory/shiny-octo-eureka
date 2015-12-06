@@ -1,7 +1,7 @@
 /**
  * Form Base
- * Set base styes for form elements.
- ========================================================================== */
+ * Set base styles for form elements.
+ ============================================================================ */
 
 input,
 select,
@@ -50,8 +50,8 @@ input[type="week"] {
 }
 
 
-// Input radios can collapse in flexible tables, lets just hammer on
-// a min-width for all inputs as all are unsuable smaller than this.
+// Input radios can collapse in flexible tables, lets just hammer on a min-width
+// for all inputs as all are un-usable smaller than this.
 input {
   min-width: 13px;
   line-height: 1; // reset line-height
@@ -119,7 +119,6 @@ input[type="search"] {
     -webkit-appearance: none;
   }
 }
-
 
 // Select.
 select {
@@ -223,15 +222,27 @@ textarea {
 
 
 // Placeholders.
-input::-webkit-input-placeholder,
+input::-webkit-input-placeholder {}
 textarea::-webkit-input-placeholder {}
 
-input:-moz-placeholder,
+input:-moz-placeholder {}
 textarea:-moz-placeholder {}
 
-input.placeholder_text,
+input::-moz-placeholder {}
+textarea::-moz-placeholder {}
+
+input:-ms-input-placeholder {}
+textarea:-ms-input-placeholder {}
+
+input.placeholder_text {}
 textarea.placeholder_text {}
 
+
+// Hide placeholders on focus.
+input:focus::-webkit-input-placeholder {opacity: 0.2}
+input:focus:-moz-placeholder {opacity: 0.2}
+input:focus::-moz-placeholder {opacity: 0.2}
+input:focus:-ms-input-placeholder {opacity: 0.2}
 
 
 

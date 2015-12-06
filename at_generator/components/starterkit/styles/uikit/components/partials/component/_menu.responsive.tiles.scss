@@ -1,4 +1,10 @@
-// Tiles
+/**
+ * Tile menu
+ * $tile_count: whole number, must be a factor of the $context
+ * $context: whole number, a $susy container, can be 8, 10 or 12.
+ * $arrows: boolean
+ ============================================================================ */
+
 @include tiles($context: 12, $tile_count: 2, $arrows: false);
 
 .ms-tiles {

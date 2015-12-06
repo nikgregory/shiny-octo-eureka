@@ -1,5 +1,6 @@
 // Ghost vert/hoz align
 // http://css-tricks.com/centering-in-the-unknown/
+// Me thinks this is redundant now we can use flex box more and more.
 @mixin ghost-vertical-align($content, $content-width) {
   text-align: center;
 

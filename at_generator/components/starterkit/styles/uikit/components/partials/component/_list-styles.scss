@@ -1,6 +1,6 @@
 /**
  * List Styles
- ========================================================================== */
+ ============================================================================ */
 
 // Links inline, e.g. node and comment "links".
 ul {
@@ -21,10 +21,8 @@ ul {
 }
 
 
-// Item lists are frequently used in Drupal by Views and
-// other modules that need to output a list of something,
-// sometimes with a title. We zero everything else as a
-// reset since item-lists are not usually bulletted etc.
+// Item lists are frequently used in Drupal by Views and other modules that need
+// to output a list of something, sometimes with a title.
 .item-list {
 
   &__title {

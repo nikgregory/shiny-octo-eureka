@@ -1,4 +1,5 @@
-// Mixins for setting color, gradients, and patterns on the page wrapper and page rows.
+// Mixins for setting color, gradients, and patterns on the page wrapper and
+// page rows.
 
 // Page pattern over single color.
 @mixin page-pattern-overlay($background-color, $pattern_url) {
@@ -6,7 +7,7 @@
 }
 
 
-// Page pattern over gradiant.
+// Page pattern over gradient.
 @mixin page-pattern-overlay-gradient($color-start, $color-stop, $pattern_url) {
   background-image: url(#{$pattern_url}), linear-gradient($color-start 0%, $color-stop 100%);
 }

@@ -1,7 +1,7 @@
 /**
  * Block User Login
  *  - style the theme settings for login block (horizontal, placeholders etc).
- ========================================================================== */
+ ============================================================================ */
 .block-user-login-block.is-horizontal {
   margin: 7px 0 16px;
   margin: 0.4375rem 0 1rem;
@@ -33,4 +33,5 @@
   line-height: 1.125rem;
   font-weight: 400;
 }
+
 /*# sourceMappingURL=login-block.css.map */

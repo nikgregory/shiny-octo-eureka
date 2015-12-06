@@ -1,7 +1,7 @@
 /**
  * Forums
  *  - see table.scss for generic table styles.
- ========================================================================== */
+ ============================================================================ */
 .forum {
   width: 100%;
 }
@@ -64,4 +64,5 @@
   margin: 7px 33px 7px 7px;
   margin: 0.4375rem 2.0625rem 0.4375rem 0.4375rem;
 }
+
 /*# sourceMappingURL=forum.css.map */

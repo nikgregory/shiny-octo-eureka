@@ -1,4 +1,4 @@
-/*
+/**
  * jQuery FlexSlider v2.3.0
  * http://www.woothemes.com/flexslider/
  *
@@ -7,9 +7,7 @@
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Ville Ristimäki (@villeristi)
- *
- * Converted to SCSS syntax by Jeff Burnz.
- *
+ * Converted to SCSS syntax for Adaptivetheme by Jeff Burnz.
  */
 
 .flex {
@@ -37,7 +35,7 @@
 
 /**
  * BASE STYLES
- ========================================================================== */
+ ============================================================================ */
 .flexslider {
   position: relative;
   margin: 0;
@@ -91,7 +89,7 @@
 
 /**
  * DEFAULT THEME
- ========================================================================== */
+ ============================================================================ */
 .flexslider {
   background: #ffffff;  // Color module ?
   border-radius: 0;
@@ -280,8 +278,6 @@ $direction-nav-size: 30px;
     cursor: pointer;
     color: #000;
 
-
-    // This is broken, needs SVG icons, I really don't want to include the flexslider-icon font.
     &:before {
       font-family: "flexslider-icon";
       font-size: 20px;
@@ -341,7 +337,8 @@ $direction-nav-size: 30px;
 }
 
 
-// Thumbs can be supported, it needs documenting to add the data-image attributes to li items.
+// Thumbs can be supported, it needs documenting to add the data-image
+// attributes to li items.
 .flex-control-thumbs {
   margin: 5px 0 0;
   position: static;
@@ -370,3 +367,8 @@ $direction-nav-size: 30px;
     cursor: default;
   }
 }
+
+
+
+
+

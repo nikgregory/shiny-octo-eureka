@@ -4,7 +4,7 @@
  *  - to enable responsive tables turn on the extension in your
  *    themes appearance settings and apply the class 'responsive-enabled'
  *    to any tables you want to make responsive.
- ========================================================================== */
+ ============================================================================ */
 .responsive-table {
   position: relative;
   margin: 0 0 18px;
@@ -56,4 +56,5 @@
 .responsive-enabled {
   width: 100%;
 }
+
 /*# sourceMappingURL=responsive-tables.css.map */

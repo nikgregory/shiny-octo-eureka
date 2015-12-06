@@ -1,9 +1,5 @@
-//
-// Accessible CSS only Drop menus.
-// The hidden state does not use display properties, instead we toggle
-// visually-hidden on :hover
-//
-//
+// Drop menus
+// Standard CSS drop menus that will expand any nesting level.
 
 @mixin dropmenu($item-width: 12em, $arrows: true) {
 

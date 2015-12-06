@@ -1,11 +1,11 @@
 /**
  * Form Common - common styles for form elements and classes.
- ========================================================================== */
+ ============================================================================ */
 
 .form-text {
   appearance: none;
 
-  // Give contact and comment subject forms some symetry.
+  // Give contact and comment subject forms some symmetry.
   &[name="subject[0][value]"] {
     width: 50%;
   }
@@ -35,7 +35,7 @@
 
 // Radio and checkbox items are radically restyled to stretch the label
 // underneath the input using padding and margin, this gives a bigger target
-// for touch/clicks. This is ususally known as a "button zone", see:
+// for touch/clicks. This is usually known as a "button zone", see:
 // http://uxmovement.com/forms/ways-to-make-checkboxes-radio-buttons-easier-to-click/
 .form-type-radio,
 .form-type-checkbox {
@@ -177,7 +177,7 @@ abbr {
 
 
 // Form Composite inline, e.g. dialog
-// TODO check https://www.drupal.org/node/2236789 when it lands
+// TODO check https://www.drupal.org/node/2236789 when it lands.
 .form-composite--inline {
 
   legend {
@@ -218,7 +218,7 @@ form {
     .image-preview {
       padding: 0;
       background: transparent;
-      @include output-rhythm(margin, 0 $medium $medium 0); // LTR
+      @include output-rhythm(margin, 0 $medium $medium 0);
 
       // RTL
       [dir="rtl"] & {
@@ -243,10 +243,10 @@ form {
 
     .field-multiple-drag {
       width: 30px;
-      padding-right: 0; // LTR
+      padding-right: 0;
 
       .tabledrag-handle {
-        padding-right: .5em; // LTR
+        padding-right: .5em;
       }
 
       // RTL for table drag.
@@ -269,7 +269,7 @@ form {
 // Autocomplete.
 .ui-autocomplete li.ui-menu-item a.ui-state-focus,
 .autocomplete li.ui-menu-item a.ui-state-hover {
-  background: #0072b9; // TODO check background color
+  background: #0072b9; // TODO check background color.
   color: #fff;
   margin: 0;
 }
@@ -363,10 +363,6 @@ details {
     min-width: auto;
   }
 }
-
-
-
-
 
 
 
