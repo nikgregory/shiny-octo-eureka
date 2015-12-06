@@ -1,13 +1,12 @@
 <?php
 
-use Drupal\Core\Config\Config;
-use Drupal\Core\Entity\EntityManagerInterface;
+/**
+ * @file
+ * Process extension settings submits.
+ */
 
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
-/**
- * Form submit handler for the theme settings form.
- */
 function at_core_submit_extension_settings(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();

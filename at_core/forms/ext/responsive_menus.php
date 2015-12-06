@@ -1,6 +1,9 @@
 <?php
 
-use Drupal\Component\Utility\Html;
+/**
+ * @file
+ * Generate form elements for the Responsive Menu settings.
+ */
 
 $responsive_menu_breakpoint_group = theme_get_setting('settings.responsive_menu_breakpoint_group', $theme);
 $responsive_menu_breakpoints = $breakpoints[$responsive_menu_breakpoint_group];

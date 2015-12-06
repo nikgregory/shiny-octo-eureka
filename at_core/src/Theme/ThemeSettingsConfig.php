@@ -15,6 +15,8 @@ class ThemeSettingsConfig {
   /**
    * Set config for theme settings, core seems to have forgotten themes can
    * have custom settings that you probably very much need in config.
+   * @param array $values
+   * @param \Drupal\Core\Config\Config $config
    */
   public function settingsConvertToConfig(array $values, Config $config) {
     foreach ($values as $key => $value) {
@@ -34,4 +36,5 @@ class ThemeSettingsConfig {
       }
     }
   }
+
 }

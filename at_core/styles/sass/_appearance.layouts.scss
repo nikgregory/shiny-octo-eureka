@@ -25,14 +25,12 @@
       }
     }
 
-
     #edit-layouts-enable-container {
       label,
       .form-disabled {
         background: transparent !important;
       }
     }
-
 
     #edit-adv-options {
       .details-wrapper {
@@ -222,9 +220,10 @@
       margin-top: 20px;
     }
 
-    ol {
+    ol,
+    .suggestions-ts-name-desc {
       margin: 0;
-      padding: 0 0 0 20px;
+      padding: 0;
     }
   }
 

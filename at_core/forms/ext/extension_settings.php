@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Generate form elements for the Extension settings.
+ */
+
 // Submit handlers for the advanced settings.
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_validate.php');
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_submit.php');
@@ -133,18 +138,21 @@ $form['enable_extensions']['settings_enable_custom_css'] = array(
 $form['enable_extensions']['settings_enable_markup_overrides'] = array(
   '#type' => 'checkbox',
   '#title' => t('Markup overrides'),
-  '#description' => t('Options for modifying output, includes settings for:
-    <ul>
-      <li>Responsive tables</li>
-      <li>Breadcrumbs</li>
-      <li>Search block</li>
-      <li>Login block</li>
-      <li>Comment titles</li>
-      <li>Feed icons</li>
-      <li>Skip link</li>
-      <li>Attribution</li>
-    </ul>
-    '),
+  '#description' => array(
+    '#theme' => 'item_list',
+    '#list_type' => 'ul',
+    '#attributes' => array('class' => array('markup-overrides-desc')),
+    '#items' => array(
+      t('Responsive tables'),
+      t('Breadcrumbs'),
+      t('Search block'),
+      t('Login block'),
+      t('Comment titles'),
+      t('Feed icons'),
+      t('Skip link'),
+      t('Attribution'),
+    ),
+  ),
   '#default_value' => theme_get_setting('settings.enable_markup_overrides', $theme),
 );
 
@@ -216,11 +224,5 @@ $form['extensions']['actions']['submit_clearcache'] = array(
   '#type' => 'submit',
   '#value' => t('Clear cache'),
   '#submit'=> array('at_core_submit_extension_clearcache'),
-  //'#attributes' => array('class' => array('button--primary')),
   '#weight' => -10000,
 );
-
-//$form['#validate'][] = 'at_core_validate_advanced_settings';
-//$form['#submit'][] = 'at_core_submit_advanced_settings';
-//$form['actions']['submit']['#validate'][] = 'at_core_validate_advanced_settings';
-//$form['actions']['submit']['#submit'][] = 'at_core_submit_advanced_settings';

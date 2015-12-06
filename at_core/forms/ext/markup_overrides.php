@@ -1,12 +1,12 @@
 <?php
 
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Xss;
-
 /**
  * @file
- * Generate form elments for the Modify Output settings.
+ * Generate form elements for the Modify Output settings.
  */
+
+use Drupal\Component\Utility\Html;
+
 $form['markup_overrides'] = array(
   '#type' => 'details',
   '#title' => t('Markup Overrides'),
@@ -18,7 +18,6 @@ $form['markup_overrides']['markup_overrides_settings'] = array(
   '#title' => t('Markup Overrides'),
   '#weight' => 40,
 );
-
 
 // Responsive Tables
 $form['markup_overrides']['markup_overrides_settings']['responsive-tables'] = array(
@@ -77,7 +76,6 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
   '#maxlength' => 60,
 );
 
-
 // Search block.
 $form['markup_overrides']['markup_overrides_settings']['search-block'] = array(
   '#type' => 'details',
@@ -96,7 +94,6 @@ $form['markup_overrides']['markup_overrides_settings']['search-block']['settings
   '#default_value' => theme_get_setting('settings.search_block_placeholder_text'),
   '#description' => t('Enter placeholder text you wish to appear in the search field.'),
 );
-
 
 // Login block.
 $form['markup_overrides']['markup_overrides_settings']['login-block'] = array(
@@ -129,7 +126,6 @@ $form['markup_overrides']['markup_overrides_settings']['login-block']['settings_
   ),
 );
 
-
 // Comment titles
 $form['markup_overrides']['markup_overrides_settings']['comments'] = array(
   '#type' => 'details',
@@ -142,7 +138,6 @@ $form['markup_overrides']['markup_overrides_settings']['comments']['settings_com
   '#description' => t('Checking this setting will hide comment titles using element-invisible. Hiding rather than removing titles maintains accessibility and semantic structure while not showing titles to sighted users.'),
 );
 
-
 // Feed icons
 $form['markup_overrides']['markup_overrides_settings']['feed-icons'] = array(
   '#type' => 'details',
@@ -154,7 +149,6 @@ $form['markup_overrides']['markup_overrides_settings']['feed-icons']['settings_v
   '#default_value' => theme_get_setting('settings.views_hide_feedicon'),
   '#description' => t('Page views such as the Frontpage show an RSS feed icon by default, use this setting to remove all page view feedicons.'),
 );
-
 
 // Accessibility
 $form['markup_overrides']['markup_overrides_settings']['a11y'] = array(

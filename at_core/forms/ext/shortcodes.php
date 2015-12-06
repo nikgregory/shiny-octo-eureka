@@ -1,12 +1,14 @@
 <?php
 
-use Drupal\at_core\Layout\LayoutCompatible;
-use Drupal\at_core\Theme\ThemeSettingsInfo;
+/**
+ * @file
+ * Generate form elements for the Shortcodes settings.
+ */
 
+use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Symfony\Component\Yaml\Parser;
-
 
 $layout_data = new LayoutCompatible($theme);
 $layout_compatible_data = $layout_data->getCompatibleLayout();
@@ -24,21 +26,11 @@ $page_elements = array(
   'page' => '.page wrapper',
 );
 
-/**
- * @file
- * Generate settings for the Custom CSS form.
- */
-
 $form['shortcodes'] = array(
   '#type' => 'details',
   '#title' => t('Shortcodes'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Shortcode CSS Classes</h3><p>Shortcodes are CSS classes that can add style, layout or behavior (such as an animation effect) to various page elements like blocks or regions.</p><p>To use enter comma seperated lists of CSS class names in the available fields. You may need to <a href="/admin/config/development/performance" target="_blank"><b>clear the cache</b></a> after adding or removing classes</span>.</p>'),
-);
-
-$form['shortcodes']['page_classes'] = array(
-  '#type' => 'details',
-  '#title' => t('Page'),
+  '#description' => t('<h3>Shortcode CSS Classes</h3><p>Shortcodes are CSS classes that can add style, layout or behavior (such as an animation effect) to various page elements like blocks or regions.</p><p>To use enter comma separated lists of CSS class names in the available fields. You may need to <a href="/admin/config/development/performance" target="_blank"><b>clear the cache</b></a> after adding or removing classes</span>.</p>'),
 );
 
 // Page
@@ -80,7 +72,6 @@ foreach ($layout_config['rows'] as $row_data_key => $row_data_value) {
 
 // Regions
 // TODO check if getUntranslatedString() is really the right method to use here.
-//kpr($theme_regions);
 $form['shortcodes']['region_classes'] = array(
   '#type' => 'details',
   '#title' => t('Regions'),
@@ -92,7 +83,6 @@ foreach ($theme_regions as $region_key => $region_value) {
     '#default_value' => Html::escape(theme_get_setting('settings.page_classes_region_' . $region_key, $theme)),
   );
 }
-
 
 // Blocks
 $form['shortcodes']['block_classes'] = array(
@@ -123,7 +113,6 @@ foreach ($node_types as $nt) {
     '#default_value' => Html::escape(theme_get_setting('settings.nodetype_classes_' . $node_type, $theme)),
   );
 }
-
 
 // Actual classes you can apply that are included in the theme.
 $form['shortcodes']['title'] = array(
@@ -167,7 +156,7 @@ if (!empty($shortcodes)) {
       '#default_value' => theme_get_setting('settings.shortcodes_' . $class_type . '_enable'),
     );
 
-    // Hide the class names by default to declutter the UI.
+    // Hide the class names by default to de-clutter the UI.
     $form['shortcodes']['classes'][$class_type][$class_type . '_wrapper'] = array(
       '#type' => 'container',
       '#states' => array(

@@ -194,20 +194,20 @@
 .admin-theme--seven #edit-layouts .layouts-column.form-disabled img {
   opacity: 0.5;
 }
-/* line 30, ../sass/_appearance.layouts.scss */
+/* line 29, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layouts-enable-container label,
 .admin-theme--seven #edit-layouts #edit-layouts-enable-container .form-disabled {
   background: transparent !important;
 }
-/* line 38, ../sass/_appearance.layouts.scss */
+/* line 36, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-adv-options .details-wrapper {
   padding: 0.5em 1em;
 }
-/* line 42, ../sass/_appearance.layouts.scss */
+/* line 40, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-adv-options #edit-selectors details .details-wrapper {
   padding: 0;
 }
-/* line 46, ../sass/_appearance.layouts.scss */
+/* line 44, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-adv-options pre {
   background: #f5f5f2;
   border-top: 1px solid #ccc;
@@ -216,26 +216,26 @@
   padding: 1em 0.5em;
 }
 @media all and (min-width: 60em) {
-  /* line 58, ../sass/_appearance.layouts.scss */
+  /* line 56, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts #edit-adv-options select {
     max-width: 160px;
   }
 }
 @media all and (min-width: 75em) {
-  /* line 64, ../sass/_appearance.layouts.scss */
+  /* line 62, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts #edit-adv-options select {
     max-width: 90%;
   }
-  /* line 68, ../sass/_appearance.layouts.scss */
+  /* line 66, ../sass/_appearance.layouts.scss */
   .toolbar-tray-open #edit-layouts #edit-adv-options select {
     max-width: 160px;
   }
 }
-/* line 74, ../sass/_appearance.layouts.scss */
+/* line 72, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-settings-max-width-value {
   max-width: 6em;
 }
-/* line 78, ../sass/_appearance.layouts.scss */
+/* line 76, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .submit--layout {
   background: #f7fcff;
   border-top: 1px solid #bfbfba;
@@ -245,7 +245,7 @@
   position: relative;
   z-index: 10;
 }
-/* line 88, ../sass/_appearance.layouts.scss */
+/* line 86, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts h2,
 .admin-theme--seven #edit-layouts h3,
 .admin-theme--seven #edit-layouts h4,
@@ -253,31 +253,31 @@
   font-size: 1em;
   text-transform: uppercase;
 }
-/* line 96, ../sass/_appearance.layouts.scss */
+/* line 94, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .fieldset-wrapper {
   overflow: hidden;
 }
-/* line 100, ../sass/_appearance.layouts.scss */
+/* line 98, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-settings-layouts-disabled {
   font-size: 0.923em;
   line-height: 1.295em;
   color: #777;
 }
-/* line 106, ../sass/_appearance.layouts.scss */
+/* line 104, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .form-item-settings-layouts-enable {
   margin: 0;
 }
-/* line 110, ../sass/_appearance.layouts.scss */
+/* line 108, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .layouts-column {
   border-top: 1px solid #bfbfba;
   margin-top: 0;
 }
-/* line 116, ../sass/_appearance.layouts.scss */
+/* line 114, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .layouts-column-two details {
   border: 0 none;
   margin: 0;
 }
-/* line 122, ../sass/_appearance.layouts.scss */
+/* line 120, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .breakpoint-group-values {
   margin: 0;
   padding: 0;
@@ -285,20 +285,20 @@
   line-height: 1.295em;
   color: #666;
 }
-/* line 131, ../sass/_appearance.layouts.scss */
+/* line 129, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts dl dt {
   font-weight: 700;
 }
-/* line 135, ../sass/_appearance.layouts.scss */
+/* line 133, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts dl dd {
   margin: 0;
   margin-bottom: 0.5em;
 }
-/* line 141, ../sass/_appearance.layouts.scss */
+/* line 139, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts .column-select-layouts {
   clear: right;
 }
-/* line 149, ../sass/_appearance.layouts.scss */
+/* line 147, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select fieldset {
   background: none repeat scroll 0 0 transparent;
   line-height: 1;
@@ -306,24 +306,24 @@
   padding: 0;
 }
 @media all and (min-width: 60em) {
-  /* line 157, ../sass/_appearance.layouts.scss */
+  /* line 155, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts #edit-layout-select .form-type-select {
     width: 75%;
     float: left;
     margin: 0;
     padding: 0;
   }
-  /* line 163, ../sass/_appearance.layouts.scss */
+  /* line 161, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts #edit-layout-select .form-type-select label {
     float: left;
     width: 10em;
   }
 }
-/* line 170, ../sass/_appearance.layouts.scss */
+/* line 168, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select details .details-wrapper {
   padding: 10px;
 }
-/* line 174, ../sass/_appearance.layouts.scss */
+/* line 172, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select details details {
   margin: 10px 0;
   border: 0;
@@ -331,16 +331,16 @@
   border-bottom: 1px solid #ccc;
   border-radius: 0;
 }
-/* line 181, ../sass/_appearance.layouts.scss */
+/* line 179, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select details details summary {
   color: #0074bd;
 }
-/* line 184, ../sass/_appearance.layouts.scss */
+/* line 182, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select details details summary:focus {
   border-top: 0;
   margin-top: 0;
 }
-/* line 192, ../sass/_appearance.layouts.scss */
+/* line 190, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select .css-layout-options .region {
   box-sizing: border-box;
   text-align: left;
@@ -348,7 +348,7 @@
   -webkit-transition: all, .15s, ease-in;
           transition: all, .15s, ease-in;
 }
-/* line 198, ../sass/_appearance.layouts.scss */
+/* line 196, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-layouts #edit-layout-select .css-layout-options .region span {
   display: block;
   background-color: #b2b2b2;
@@ -357,15 +357,15 @@
   padding: 0.3em 0 0 0.45em;
   color: #f5f5f5;
 }
-/* line 212, ../sass/_appearance.layouts.scss */
+/* line 210, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions {
   background: #f7fcff;
 }
-/* line 215, ../sass/_appearance.layouts.scss */
+/* line 213, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions label {
   padding-bottom: 10px;
 }
-/* line 219, ../sass/_appearance.layouts.scss */
+/* line 217, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-suggestions .description {
   position: static !important;
   clip: auto;
@@ -378,37 +378,38 @@
   font-size: 0.9em;
   margin-top: 20px;
 }
-/* line 225, ../sass/_appearance.layouts.scss */
-.admin-theme--seven #edit-suggestions ol {
+/* line 223, ../sass/_appearance.layouts.scss */
+.admin-theme--seven #edit-suggestions ol,
+.admin-theme--seven #edit-suggestions .suggestions-ts-name-desc {
   margin: 0;
-  padding: 0 0 0 20px;
+  padding: 0;
 }
-/* line 232, ../sass/_appearance.layouts.scss */
+/* line 231, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-options,
 .admin-theme--seven .form-item-layout-suggestion,
 .admin-theme--seven #edit-no-mq-css {
   clear: both;
 }
-/* line 240, ../sass/_appearance.layouts.scss */
+/* line 239, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-options .form-disabled {
   background: #f7f7f7;
   margin: 0;
   padding: 1em 0;
 }
-/* line 249, ../sass/_appearance.layouts.scss */
+/* line 248, ../sass/_appearance.layouts.scss */
 .admin-theme--seven #edit-max-width .form-item-settings-max-width-value,
 .admin-theme--seven #edit-max-width .form-item-settings-max-width-unit {
   display: inline-block;
   margin-right: 3px;
 }
 @media (max-width: 48em) {
-  /* line 259, ../sass/_appearance.layouts.scss */
+  /* line 258, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-layouts .form-radios label {
     max-width: 120px;
   }
 }
 @media (max-width: 56em) {
-  /* line 266, ../sass/_appearance.layouts.scss */
+  /* line 265, ../sass/_appearance.layouts.scss */
   .admin-theme--seven #edit-default-layout {
     float: none;
     clear: both;
@@ -417,11 +418,11 @@
   }
 }
 
-/* line 279, ../sass/_appearance.layouts.scss */
+/* line 278, ../sass/_appearance.layouts.scss */
 #edit-layouts .fieldset-wrapper {
   overflow: hidden;
 }
-/* line 284, ../sass/_appearance.layouts.scss */
+/* line 283, ../sass/_appearance.layouts.scss */
 #edit-layouts .css-layout-options .region {
   box-sizing: border-box;
   text-align: left;
@@ -429,7 +430,7 @@
   -webkit-transition: all, .15s, ease-in;
           transition: all, .15s, ease-in;
 }
-/* line 290, ../sass/_appearance.layouts.scss */
+/* line 289, ../sass/_appearance.layouts.scss */
 #edit-layouts .css-layout-options .region span {
   display: block;
   background-color: #b2b2b2;
@@ -466,11 +467,15 @@
 .admin-theme--seven #edit-extensions .vertical-tabs-panes {
   margin: 0 0 0 25%;
 }
-/* line 35, ../sass/_appearance.extensions.scss */
+/* line 28, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-extensions .markup-overrides-desc {
+  margin: 0;
+}
+/* line 39, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-fonts .form-type-number input {
   max-width: 6em;
 }
-/* line 42, ../sass/_appearance.extensions.scss */
+/* line 46, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-fonts #edit-setup #edit-help,
 .admin-theme--seven #edit-fonts #edit-setup .form-item-settings-font-websafe,
 .admin-theme--seven #edit-fonts #edit-setup .form-item-settings-font-google,
@@ -478,15 +483,20 @@
 .admin-theme--seven #edit-fonts #edit-setup .form-item-settings-font-customstack {
   margin-bottom: 2em;
 }
-/* line 51, ../sass/_appearance.extensions.scss */
+/* line 55, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-fonts #edit-settings-font-websafe {
   max-width: 100%;
 }
-/* line 55, ../sass/_appearance.extensions.scss */
+/* line 59, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-fonts #edit-settings-font-google {
   width: 100%;
 }
-/* line 60, ../sass/_appearance.extensions.scss */
+/* line 63, ../sass/_appearance.extensions.scss */
+.admin-theme--seven #edit-fonts .web-font-desc {
+  padding: 0;
+  margin: 0;
+}
+/* line 69, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-fonts #edit-settings-font-fallback--wrapper legend {
   position: static !important;
   clip: auto;
@@ -499,18 +509,18 @@
   line-height: 1.295em;
   font-weight: 700;
 }
-/* line 72, ../sass/_appearance.extensions.scss */
+/* line 81, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .description,
 .admin-theme--seven #edit-image-settings .form-type-radios {
   clear: both;
 }
-/* line 78, ../sass/_appearance.extensions.scss */
+/* line 87, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings details details {
   border: 0;
   padding: 0;
   margin: 0;
 }
-/* line 84, ../sass/_appearance.extensions.scss */
+/* line 93, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings details fieldset legend {
   position: static !important;
   clip: auto;
@@ -522,11 +532,11 @@
   font-size: 1em;
   padding: 0 0 15px;
 }
-/* line 91, ../sass/_appearance.extensions.scss */
+/* line 100, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radios label {
   margin-bottom: 5px;
 }
-/* line 96, ../sass/_appearance.extensions.scss */
+/* line 105, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio {
   clear: none;
   float: left;
@@ -534,11 +544,11 @@
   text-align: center;
   width: 50px;
 }
-/* line 103, ../sass/_appearance.extensions.scss */
+/* line 112, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio input.form-radio {
   margin-bottom: 4px;
 }
-/* line 107, ../sass/_appearance.extensions.scss */
+/* line 116, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio label {
   background-image: url(images/image-alignment-sprite.png);
   background-repeat: no-repeat;
@@ -549,145 +559,145 @@
   vertical-align: bottom;
   width: 50px;
 }
-/* line 117, ../sass/_appearance.extensions.scss */
+/* line 126, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio label[for$=-none] {
   background-position: 0 0;
 }
-/* line 118, ../sass/_appearance.extensions.scss */
+/* line 127, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio label[for$=-left] {
   background-position: -50px 0;
 }
-/* line 119, ../sass/_appearance.extensions.scss */
+/* line 128, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio label[for$=-center] {
   background-position: -100px 0;
 }
-/* line 120, ../sass/_appearance.extensions.scss */
+/* line 129, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-image-settings .form-type-radio label[for$=-right] {
   background-position: -150px 0;
 }
-/* line 131, ../sass/_appearance.extensions.scss */
+/* line 140, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-titles details label {
   display: inline-block;
   width: 8em;
 }
-/* line 143, ../sass/_appearance.extensions.scss */
+/* line 152, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-touch-icons-settings .form-type-textfield {
   margin-bottom: 20px;
 }
-/* line 147, ../sass/_appearance.extensions.scss */
+/* line 156, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-touch-icons-settings label {
   margin-bottom: 5px;
 }
-/* line 151, ../sass/_appearance.extensions.scss */
+/* line 160, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-touch-icons-settings .field-prefix {
   color: #666;
 }
-/* line 165, ../sass/_appearance.extensions.scss */
+/* line 174, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-block-classes label span {
   font-weight: 400;
 }
-/* line 172, ../sass/_appearance.extensions.scss */
+/* line 181, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-classes dt {
   font-weight: bold;
 }
 @media screen and (min-width: 75em) {
-  /* line 177, ../sass/_appearance.extensions.scss */
+  /* line 186, ../sass/_appearance.extensions.scss */
   .admin-theme--seven #edit-classes dl.class-list dt {
     float: left;
     clear: left;
     text-align: left;
     width: 30%;
   }
-  /* line 183, ../sass/_appearance.extensions.scss */
+  /* line 192, ../sass/_appearance.extensions.scss */
   .admin-theme--seven #edit-classes dl.class-list dd {
     margin-left: 35%;
     overflow: hidden;
   }
 }
-/* line 195, ../sass/_appearance.extensions.scss */
+/* line 204, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-devel label {
   font-weight: bold;
 }
-/* line 199, ../sass/_appearance.extensions.scss */
+/* line 208, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-devel .description {
   color: #777;
 }
-/* line 203, ../sass/_appearance.extensions.scss */
+/* line 212, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;
 }
-/* line 212, ../sass/_appearance.extensions.scss */
+/* line 221, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-shortcodes #edit-title {
   padding: 1em 0 0;
 }
-/* line 216, ../sass/_appearance.extensions.scss */
+/* line 225, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-shortcodes .pattern-image-clip {
   width: 320px;
   height: 80px;
   background-color: #fff;
   overflow: hidden;
 }
-/* line 224, ../sass/_appearance.extensions.scss */
+/* line 233, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-shortcodes .class-list dt {
   float: left;
   clear: right;
 }
-/* line 229, ../sass/_appearance.extensions.scss */
+/* line 238, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-shortcodes .class-list dt {
   width: 15em;
   font-weight: 700;
 }
-/* line 239, ../sass/_appearance.extensions.scss */
+/* line 248, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-slideshows label {
   display: inline-block;
   width: 12rem;
 }
-/* line 246, ../sass/_appearance.extensions.scss */
+/* line 255, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-slideshows .form-type-checkbox label,
 .admin-theme--seven #edit-slideshows .form-type-textarea label {
   width: auto;
 }
-/* line 252, ../sass/_appearance.extensions.scss */
+/* line 261, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-carousels {
   margin: 0;
 }
-/* line 259, ../sass/_appearance.extensions.scss */
+/* line 268, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description {
   margin-bottom: 1em;
 }
-/* line 263, ../sass/_appearance.extensions.scss */
+/* line 272, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description ul {
   margin: 0;
   padding: 0;
 }
-/* line 267, ../sass/_appearance.extensions.scss */
+/* line 276, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks .details-description ul li {
   list-style: none;
 }
-/* line 273, ../sass/_appearance.extensions.scss */
+/* line 282, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset {
   border-top: 1px solid #ccc;
   margin: 0;
 }
-/* line 277, ../sass/_appearance.extensions.scss */
+/* line 286, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset:last-child {
   border-bottom: 1px solid #ccc;
 }
-/* line 281, ../sass/_appearance.extensions.scss */
+/* line 290, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .fieldset-wrapper {
   overflow: hidden;
 }
-/* line 285, ../sass/_appearance.extensions.scss */
+/* line 294, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .form-type-checkbox {
   float: left;
   margin-right: 1em;
 }
-/* line 290, ../sass/_appearance.extensions.scss */
+/* line 299, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title {
   font-size: 1em;
   margin: 1em 0;
 }
-/* line 294, ../sass/_appearance.extensions.scss */
+/* line 303, ../sass/_appearance.extensions.scss */
 .admin-theme--seven #edit-mobile-blocks fieldset .mobile-blocks-title span {
   font-weight: 400;
 }

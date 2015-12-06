@@ -1,16 +1,12 @@
 <?php
 
-use Drupal\at_core\File\FileOperations;
-use Drupal\at_core\File\DirectoryOperations;
-
-use Drupal\Component\Utility\Xss;
-use Drupal\Core\Config\Config;
-
 /**
  * @file
  * Output formatted CSS for fonts.
  * TODO: validate font elements, are they set and not empty?
  */
+
+use Drupal\Component\Utility\Xss;
 
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
   // Config, we need to save some config directly from this form.
@@ -18,7 +14,6 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
   // Paths.
   $subtheme_path = drupal_get_path('theme', $theme);
-  $generated_scripts_path = $subtheme_path . '/scripts/generated';
 
   // Websafe fonts.
   $websafe_fonts = $values['websafe_options'];
@@ -36,11 +31,10 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $px_size = '';
   $rem_size = '';
 
-  // Inject config settings for webfonts.
-  $values['settings_font_use_googlefonts'] = FALSE;
+  // Inject config settings for web-fonts.
+  $values['settings_font_use_google_fonts'] = FALSE;
   $values['settings_font_use_typekit'] = FALSE;
 
-  $fileOperations = new FileOperations();
   $font_styles = array();
 
   foreach ($font_elements as $font_key => $font_values) {
@@ -60,13 +54,13 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       $rem_size = $values['settings_font_size_' . $font_key] / $base_size;
 
       // line-height multipliers are a bit magical, but "pretty good" defaults.
-      $line_height_multiplier = $values['settings_font_lineheight_multiplier_default'];
-      if ($px_size >= $values['settings_font_lineheight_multiplier_large_size']) {
-        $line_height_multiplier = $values['settings_font_lineheight_multiplier_large'];
+      $line_height_multiplier = $values['settings_font_line_height_multiplier_default'];
+      if ($px_size >= $values['settings_font_line_height_multiplier_large_size']) {
+        $line_height_multiplier = $values['settings_font_line_height_multiplier_large'];
       }
 
       $fonts[$font_key]['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
-      $fonts[$font_key]['lineheight'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+      $fonts[$font_key]['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
     }
 
     // Set font family for each key.
@@ -91,7 +85,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       if ($values['settings_font_' . $font_key] == 'google') {
         if (isset($values['settings_font_google_' . $font_key])) {
           $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ', ' . $fallback_font_family . ';';
-          $values['settings_font_use_googlefonts'] = TRUE;
+          $values['settings_font_use_google_fonts'] = TRUE;
         }
         else {
           $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -130,8 +124,8 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
           $font_style .= $font_values['size'];
         }
 
-        if (isset($font_values['lineheight'])) {
-          $font_style .= $font_values['lineheight'];
+        if (isset($font_values['line_height'])) {
+          $font_style .= $font_values['line_height'];
         }
 
         if (isset($font_values['smoothing'])) {

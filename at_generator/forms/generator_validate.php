@@ -15,7 +15,7 @@ function at_generator_validate_generator(&$form, &$form_state) {
     $target = $path . '/../../' . $machine_name;
 
     $subtheme_type    = $values['generate']['generate_type'];
-    $skin_base_theme  = $values['generate']['generate_skin_base'];
+    //$skin_base_theme  = $values['generate']['generate_skin_base'];
     $clone_source     = $values['generate']['generate_clone_source'];
 
     if ($subtheme_type == 'at_standard' || $subtheme_type == 'at_minimal' || $subtheme_type == 'at_skin') {

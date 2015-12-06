@@ -16,6 +16,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+
 		autoprefixer: {
       atcore: {
         src: 'at_core/styles/css/*.css',
@@ -30,6 +31,7 @@ module.exports = function(grunt) {
         }
       }
 		},
+
 		compass: {
 			atcore: {
 				options: {
@@ -46,20 +48,22 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
     csslint: {
-			atcore: {
+      atcore: {
         options: {
           csslintrc: '.csslintrc'
         },
         src: ['at_core/styles/css/*.css']
-			},
-			atgen: {
+	  },
+      atgen: {
         options: {
           csslintrc: '.csslintrc'
         },
         src: ['at_generator/styles/css/*.css']
 			}
     },
+
 		watch: {
 			atcore: {
 				files: 'at_core/styles/sass/*.scss',

@@ -1,14 +1,22 @@
 <?php
 
+/**
+ * @file
+ * Save Mobile Blocks CSS to file.
+ */
+
 use Drupal\Component\Utility\Html;
 
 /**
- * @file
- * Save Breadcrumb CSS to file
+ * Submit Mobile Blocks settings.
+ * @param $values
+ * @param $theme
+ * @param $generated_files_path
  */
 function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
   $mobile_blocks_css = array();
-  $theme_blocks = entity_load_multiple_by_properties('block', ['theme' => $theme]);
+  // TODO entityManager() is deprecated, but how to replace?
+  $theme_blocks = \Drupal::entityManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
   if (!empty($theme_blocks)) {
     foreach ($theme_blocks as $block_key => $block_values) {

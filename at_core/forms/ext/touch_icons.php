@@ -1,15 +1,12 @@
 <?php
 
-use Drupal\Component\Utility\Html;
-
 /**
  * @file
- * Generate form elments for the touch icons settings.
+ * Generate form elements for the touch icons settings.
+ * TODO: touch icons are not inherited from the base theme, they should be, so check for config on the closest base theme and if its there, use those icons IF there is nothing set for the current theme.
  */
 
-
-// TODO: touch icons are not inherited from the base theme, they should be, so check for config on the closest base theme
-// and if its there, use those icons IF there is nothing set for the current theme.
+use Drupal\Component\Utility\Html;
 
 $form['touch_icons'] = array(
   '#type' => 'details',

@@ -1,9 +1,11 @@
 <?php
 
-use Drupal\at_core\Layout\LayoutCompatible;
-use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Theme\ThemeSettingsInfo;
+/**
+ * @file
+ * Generate form elements for the Layout settings.
+ */
 
+use Drupal\at_core\Layout\LayoutCompatible;
 use Drupal\Component\Utility\Html;
 
 $layout_data = new LayoutCompatible($theme);
@@ -47,8 +49,6 @@ $form['layouts'] = array(
 
 // Attached required CSS and JS libraries and files.
 $form['layouts']['#attached']['library'][] = "$theme/layout_settings";
-//$form['#attached']['library'][] = "$theme/layout_settings";
-
 
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(
@@ -80,7 +80,6 @@ $form['layouts']['layout_select'] = array(
   '#title' => t('Select Layouts'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-threequarters', 'column-select-layouts')),
   '#states' => array(
-    //'enabled' => array('select[name="settings_breakpoint_group"]' => array('value' => $breakpoints_group_layout)),
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
 );
@@ -93,8 +92,6 @@ $form['layouts']['layout_select']['settings_suggestions'] = array(
 );
 
 foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
-  //$suggestions_name = Html::escape($suggestions_name);
-
   if ($suggestions_name == 'page') {
     $suggestions_name = 'page (default)';
   }
@@ -217,14 +214,18 @@ $form['layouts']['layout_select']['suggestions']['ts_name'] = array(
   '#size' => 20,
   '#field_prefix' => 'page--',
   '#field_suffix' => '.html.twig',
-  '#description' => t('
-    <ol>
-      <li>Enter the template suggestion. Only enter the modifier, e.g. for "page--front" enter "front" (without quotes).</li>
-      <li>Save the layout settings.</li>
-      <li>After saving the suggestion configure a layout for it. If no layout is set it will use the default layout.</li>
-    </ol><p>Find page suggestions by turning on the Devel extension in Advanced settings and enable the option: <em>Show Page Suggestions</em>. Reload a page in the site and the suggestions will be shown in the messages area.</p>'),
+  '#description' => array(
+    '#theme' => 'item_list',
+    '#list_type' => 'ol',
+    '#attributes' => array('class' => array('suggestions-ts-name-desc')),
+    '#items' => array(
+      t('Enter the template suggestion. Only enter the modifier, e.g. for "page--front" enter "front" (without quotes).'),
+      t('Save the layout settings.'),
+      t('After saving the suggestion configure a layout for it. If no layout is set it will use the default layout.'),
+    ),
+    '#suffix' => t('<p>Find page suggestions by turning on the Devel extension in Advanced settings and enable the option: <em>Show Page Suggestions</em>. Reload a page in the site and the suggestions will be shown in the messages area.</p>'),
+  ),
 );
-
 
 // Layout OPTIONS
 // ---------------------------------------------------------------------------------
@@ -233,7 +234,6 @@ $form['layouts']['adv_options'] = array(
   '#title' => t('Options'),
   '#attributes' => array('class' => array('layouts-column', 'layouts-column-onequarter')),
   '#states' => array(
-    //'enabled' => array('select[name="settings_breakpoint_group"]' => array('value' => $breakpoints_group_layout)),
     'visible' => array('input[name="settings_layouts_enable"]' => array('checked' => TRUE)),
   ),
 );

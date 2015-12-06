@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Generate form elments for the $titles Styles settings.
+ * Generate form elements for the $titles Styles settings.
  */
 
 $form['titles'] = array(
@@ -12,7 +12,7 @@ $form['titles'] = array(
 );
 
 $form['titles']['description'] = array(
-  '#markup' => t('<h3>Title Styles</h3><p>Set title case, weight and alignment.</p><p>Semibold and light font-weight options will only work if the font supports those weights, otherwise these typically render as bold and normal respecitively.</p>'),
+  '#markup' => t('<h3>Title Styles</h3><p>Set title case, weight and alignment.</p><p>Semi-bold and light font-weight options will only work if the font supports those weights, otherwise these typically render as bold and normal respectively.</p>'),
 );
 
 // Array of valid title types

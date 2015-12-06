@@ -35,7 +35,14 @@
     {{ title_suffix }}
 
     {% block content %}
-      <div{{ content_attributes.addClass('block__content', 'block-branding__content', 'site-branding') }}>
+      {%
+        set content_classes = [
+          'block__content',
+          'block-branding__content',
+          'site-branding',
+        ]
+      %}
+      <div{{ content_attributes.addClass(content_classes) }}>
         {% if site_logo %}
           <a href="{{ url('<front>') }}" title="{{ 'Home'|t }}" itemprop="url" rel="home" class="site-branding__logo-link">
             <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" itemprop="logo" class="site-branding__logo-img" />

@@ -1,9 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\at_core\File\FileOperations
+ */
+
 namespace Drupal\at_core\File;
 
 use Drupal\Component\Serialization\Yaml;
-
 
 class FileOperations implements FileOperationsInterface {
 
@@ -81,4 +85,5 @@ class FileOperations implements FileOperationsInterface {
 
     return $result;
   }
+
 }

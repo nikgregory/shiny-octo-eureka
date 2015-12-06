@@ -1,37 +1,29 @@
 <?php
 
-use Drupal\Core\Config\Config;
-use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Theme\ThemeSettingsConfig;
+/**
+ * @file
+ * Generator theme settings.
+ */
 
 /**
- * Implimentation of hook_form_system_theme_settings_alter()
- *
+ * Implementation of hook_form_system_theme_settings_alter()
  * @param $form
  *   Nested array of form elements that comprise the form.
- *
  * @param $form_state
  *   A keyed array containing the current state of the form.
  */
 function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
 
-  // Set the theme name.
-  $build_info = $form_state->getBuildInfo();
-  $theme = $build_info['args'][0];
-
-  // Instantiate our Theme info object.
-  $themeInfo = new ThemeInfo($theme);
-  $getThemeInfo = ($themeInfo->getThemeInfo('info'));
-
   // Common paths.
-  $at_core_path  = drupal_get_path('theme', 'at_core');
   $at_generator_path = drupal_get_path('theme', 'at_generator');
-  $subtheme_path = drupal_get_path('theme', $theme);
 
+  // Attach libraries.
   $form['#attached']['library'][] = 'at_generator/at.generator';
+
+  // Set form type vertical tabs.
   $form['generator'] = array('#type' => 'vertical_tabs');
 
-  // Generator.
+  // Generator form.
   include_once($at_generator_path . '/forms/generator.php');
 
   // Hide form items.

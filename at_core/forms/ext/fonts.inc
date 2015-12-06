@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Preset lists of font options.
+ */
+
+/**
  * Websafe fonts list.
  */
 function websafe_fonts() {
@@ -129,9 +134,8 @@ function font_elements() {
 
 /**
  * Reusable style options for titles.
- *
  * @param $style
- * @param $element
+ * @return array
  */
 function title_style_options($style) {
   $options = &drupal_static(__FUNCTION__, array());
@@ -150,7 +154,7 @@ function title_style_options($style) {
       $options = array(
         '400' => t('Normal'),
         '700' => t('Bold'),
-        '600' => t('Semibold'),
+        '600' => t('Semi-bold'),
         '300' => t('Light'),
       );
     break;

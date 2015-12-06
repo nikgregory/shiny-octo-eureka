@@ -9,20 +9,20 @@ namespace Drupal\at_core\Layout;
 
 use Drupal\Core\Cache;
 use Symfony\Component\Yaml\Parser;
-
-use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Theme\ThemeSettingsInfo;
 use Drupal\at_core\File\ParseFile;
 
 class Layout implements LayoutInterface {
 
-  // The active theme name.
   protected $theme_name;
-
-  // This themes layout name.
+  protected $layout_markup;
+  protected $layout_css;
   protected $layout_name;
 
-  // Constructor
+  /**
+   * Layout constructor.
+   * @param $theme_name
+   * @param $layout_name
+   */
   public function __construct($theme_name, $layout_name) {
     $this->theme_name = $theme_name;
     $this->layout_name = $layout_name;
@@ -30,9 +30,10 @@ class Layout implements LayoutInterface {
     $this->layout_cid = $this->theme_name . ':' . $this->layout_name;
   }
 
-  // Returns layout configuration of a type (normally markup or css yml config).
-  // looks for cached config first, if none we parse the respective yml file.
-  public function getLayoutConfig($type) {
+  /**
+   * {@inheritdoc}
+   */
+  public function LayoutConfig($type) {
     $config_data = array();
 
     if ($cache = \Drupal::cache()->get($this->layout_cid . ':' . $type)) {
@@ -54,18 +55,25 @@ class Layout implements LayoutInterface {
     return $config_data;
   }
 
-  // Returns a layout markup object.
+  /**
+   * {@inheritdoc}
+   */
   public function getLayoutMarkup() {
-    $layout_markup = $this->getLayoutConfig(LayoutInterface::LayoutMarkup);
-
-    return $layout_markup;
+    return $this->LayoutConfig(LayoutInterface::LayoutMarkup);
   }
 
-  // Returns a layout CSS object.
+  /**
+   * {@inheritdoc}
+   */
   public function getLayoutCSS() {
-    $layout_css = $this->getLayoutConfig(LayoutInterface::LayoutCSS);
+    return $this->LayoutConfig(LayoutInterface::LayoutCSS);
+  }
 
-    return $layout_css;
+  /**
+   * {@inheritdoc}
+   */
+  public function getLayoutName() {
+    return $this->layout_name;
   }
 
 }

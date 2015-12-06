@@ -1,21 +1,22 @@
 <?php
 
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Xss;
-
 /**
  * @file
- * Generate form elments for the font settings.
+ * Generate form elements for the font settings.
  */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
 
 // Elements to apply fonts to.
 $font_elements = font_elements();
 
 // Websafe stacks and select options.
-$websafe_fonts = theme_get_setting('settings.font_websafe') ? Xss::filter(theme_get_setting('settings.font_websafe')) : websafe_fonts();
+$websafe_fonts = theme_get_setting('settings.font_websafe') ?: websafe_fonts();
 $websafe_options = explode(PHP_EOL, $websafe_fonts);
 
-// Font Options - here we must test if there are values set for each font type and populate the options list.
+// Font Options - here we must test if there are values set for each font type
+// and populate the options list.
 $font_options = array(
   'none' => t('-- none --'),
 );
@@ -36,7 +37,7 @@ $form['fonts'] = array(
   '#group' => 'extension_settings',
 );
 
-// FONT Setup
+// Font Setup
 $form['fonts']['setup'] = array(
   '#type' => 'details',
   '#title' => t('Fonts Setup'),
@@ -48,7 +49,7 @@ $form['fonts']['setup']['help'] = array(
   '#markup' => t('First set the fonts you want to use in your site and save the Extension settings. Then apply fonts to specific elements.'),
 );
 
-// Pass in a hidden setting for submit
+// Pass in a hidden setting for submit.
 $form['fonts']['setup']['websafe_options'] = array(
   '#type' => 'hidden',
   '#value' => $websafe_options,
@@ -62,22 +63,38 @@ $form['fonts']['setup']['settings_font_websafe'] = array(
   '#description' => t('Enter one font stack per line. Separate fonts with a comma, quote font names with spaces. Do not include a trailing semicolon.'),
 );
 
-// FONT Setup: Google font
+// Font Setup: Google font
 $form['fonts']['setup']['settings_font_google'] = array(
   '#type' => 'textarea',
   '#rows' => 3,
   //'#maxlength' => 1024,
   '#title' => t('Google fonts'),
   '#default_value' => Xss::filter(theme_get_setting('settings.font_google')),
-  '#description' => t('<ol><li>Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.</li><li>Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code></li></ol>', array('@google_font_wizard' => 'http://www.google.com/fonts')),
+  '#description' => array(
+    '#theme' => 'item_list',
+    '#list_type' => 'ol',
+    '#attributes' => array('class' => array('google-font-wizard-desc', 'web-font-desc')),
+    '#items' => array(
+      t('Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.', array('@google_font_wizard' => 'http://www.google.com/fonts')),
+      t('Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>http://fonts.googleapis.com/css?family=Open+Sans</code>'),
+    ),
+  ),
 );
 
-// FONT Setup: Webfont - Typekit
+// Font Setup: Typekit
 $form['fonts']['setup']['settings_font_typekit'] = array(
   '#type' => 'textfield',
   '#title' => t('Typekit ID'),
   '#default_value' => Html::escape(theme_get_setting('settings.font_typekit')),
-  '#description' => t('<ol><li>Locate the <em>Embed Code</em> details for your kit and find this line: <em>If you\'re using a plugin or service that asks for a Typekit Kit ID, use this: okb4kwr</em>.</li><li>Copy/paste the ID, e.g. <code>okb4kwr</code>.</li></ol>'),
+  '#description' => array(
+    '#theme' => 'item_list',
+    '#list_type' => 'ol',
+    '#attributes' => array('class' => array('typekit-font-desc', 'web-font-desc')),
+    '#items' => array(
+      t('Locate the <em>Embed Code</em> details for your kit.'),
+      t('Copy/paste the ID, e.g. <code>okb4kwr</code>.'),
+    ),
+  ),
 );
 
 // Fallback
@@ -89,21 +106,21 @@ $form['fonts']['setup']['settings_font_fallback'] = array(
     'serif' => t('serif'),
   ),
   '#default_value' => theme_get_setting('settings.font_fallback') ? theme_get_setting('settings.font_fallback') : 'sans_serif',
-  '#description' => t('In the event a webfont does not load, set a fallback font family.'),
+  '#description' => t('In the event a web-font does not load, set a fallback font family.'),
 );
 
-$form['fonts']['setup']['lineheight'] = array(
+$form['fonts']['setup']['line_height'] = array(
   '#type' => 'details',
-  '#title' => t('Line height mulipliers'),
+  '#title' => t('Line height multipliers'),
   '#description' => t('Multipliers are used to calculate the line-height for each font size. Normally this value will be between 1.0 and 3.0.'),
 );
 
-$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_default'] = array(
+$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_default'] = array(
   '#type' => 'number',
   '#title' => t('Default'),
   '#max-lenght' => 3,
   '#step' => 0.1,
-  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_default')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_default')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -112,13 +129,13 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_defau
   ),
 );
 
-$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large'] = array(
+$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large'] = array(
   '#type' => 'number',
   '#title' => t('Large font multiplier'),
-  '#max-lenght' => 3,
+  '#max-length' => 3,
   '#step' => 0.1,
   '#description' => t('Large fonts usually require a smaller multiplier.'),
-  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_large')),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
@@ -127,13 +144,13 @@ $form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large
   ),
 );
 
-$form['fonts']['setup']['lineheight']['settings_font_lineheight_multiplier_large_size'] = array(
+$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large_size'] = array(
   '#type' => 'number',
   '#title' => t('Large font size'),
   '#field_suffix' => 'px',
   '#max-lenght' => 2,
-  '#description' => t('What is considerd a large font?'),
-  '#default_value' => Html::escape(theme_get_setting('settings.font_lineheight_multiplier_large_size')),
+  '#description' => t('What is considered a large font?'),
+  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large_size')),
   '#attributes' => array(
     'min' => 1,
     'max' => 99,
@@ -246,7 +263,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#title' => t('Custom Selectors'),
       '#rows' => 3,
       '#default_value' => Xss::filter(theme_get_setting('settings.custom_selectors')),
-      '#description' => t("Enter a comma seperated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
+      '#description' => t("Enter a comma separated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
       '#states' => array(
         'disabled' => array('select[name="settings_selectors_font_type"]' => array('value' => '<none>')),
       ),

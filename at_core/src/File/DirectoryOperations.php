@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\at_core\File\DirectoryOperations
+ */
+
 namespace Drupal\at_core\File;
 
 class DirectoryOperations implements DirectoryOperationsInterface {
@@ -32,7 +37,6 @@ class DirectoryOperations implements DirectoryOperationsInterface {
         }
       }
     }
-
     closedir($dir);
   }
 
@@ -54,8 +58,8 @@ class DirectoryOperations implements DirectoryOperationsInterface {
       }
       self::directoryRemove("$directory/$entry");
     }
-
     $dir->close();
+
     return rmdir($directory);
   }
 
@@ -75,6 +79,7 @@ class DirectoryOperations implements DirectoryOperationsInterface {
    * {@inheritdoc}
    */
   public function directoryGlob($path, array $types) {
+    $files = array();
     $scan_directories = self::directoryScan($path);
     if (isset($scan_directories)) {
       foreach ($scan_directories as $directory) {

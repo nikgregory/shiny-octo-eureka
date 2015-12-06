@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Generate form elments for the Image styles settings.
+ * Generate form elements for the Image styles settings.
  */
 
 $image_alignment_options = array(
@@ -45,7 +45,6 @@ foreach ($node_types as $nt) {
     '#type' => 'details',
     '#title' => t('Alignment'),
     '#collapsed'=> TRUE,
-    //'#description' => t('Set alignment per display mode. The <em>search result</em> display mode is currently excluded from these settings pending <a href="@1166114" target="_blank">drupal.org/node/1166114</a>.', array('@1166114' => 'https://drupal.org/node/1166114')),
   );
 
   // View modes
@@ -92,7 +91,7 @@ foreach ($node_types as $nt) {
     '#type' => 'details',
     '#title' => t('Image Count'),
     '#collapsed'=> TRUE,
-    '#description' => t('Restrict to <b>one image</b> only in certain display modes - useful for teaser mode when you have multivalue or unlimited images.'),
+    '#description' => t('Restrict to <b>one image</b> only in certain display modes - useful for teaser mode when you have multi-value or unlimited images.'),
   );
 
   // View modes

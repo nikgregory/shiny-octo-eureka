@@ -1,19 +1,17 @@
 <?php
 
-use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\Config;
-use Drupal\Component\Utility\Html;
-use Drupal\block\BlockInterface;
-use Drupal\block\Entity\Block;
+/**
+ * @file
+ * Custom theme settings.
+ */
 
+use Drupal\Component\Utility\Html;
 use Drupal\at_core\Theme\ThemeInfo;
-use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutGenerator;
-use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\File\DirectoryOperations;
 
 /**
- * Implimentation of hook_form_system_theme_settings_alter()
+ * Implementation of hook_form_system_theme_settings_alter()
  *
  * @param $form
  *   Nested array of form elements that comprise the form.
@@ -37,6 +35,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   // Common paths.
   $at_core_path  = drupal_get_path('theme', 'at_core');
   $subtheme_path = drupal_get_path('theme', $theme);
+  $generated_files_path = NULL;
 
   // Path to save generated CSS files. We don't want this happening for at_core or the generator.
   if (isset($getThemeInfo['subtheme type']) && $getThemeInfo['subtheme type'] === 'adaptive_subtheme') {
@@ -57,6 +56,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
 
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
+    $breakpoints = array();
 
     // Unset core breakpoint groups due to notices and other issues, until this
     // is resolved: SEE: https://www.drupal.org/node/2379283
@@ -77,13 +77,14 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     }
   }
   else {
-    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="@extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'warning');
+    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="!extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('!extendpage' => base_path() . 'admin/modules')), 'warning');
   }
 
   // Get node types (bundles).
-  $node_types = node_type_get_types();
+  $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
 
   // View or "Display modes".
+  // TODO entityManager() is deprecated, but how to replace?
   $node_view_modes = \Drupal::entityManager()->getViewModes('node');
 
   // Unset unwanted view modes
@@ -187,6 +188,8 @@ function at_core_make_collapsible($form) {
     '#access' => FALSE,
   );
 
+  // Magic user Obi Wan gets special Jedi powers.
+  // TODO getUsername() is deprecated, no idea how to replace it.
   $user = \Drupal::currentUser();
   if (in_array('administrator', $user->getRoles()) && $user->getUsername() == 'Obi Wan') {
     $form['color']['actions']['log']['#access'] = TRUE;

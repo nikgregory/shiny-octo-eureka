@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Generate form elements for the Devel settings.
+ */
+
 // Development settings
 $form['devel'] = array(
   '#type' => 'details',
@@ -37,7 +42,7 @@ $form['devel']['settings_devel_layout'] = array(
   '#type' => 'checkbox',
   '#title' => t('Debug Layout <small>(hides all content, colorizes all rows and regions)</small>'),
   '#default_value' => theme_get_setting('settings.devel_layout', $theme),
-  '#description' => t('An agressive option that removes all content, hides the toolbar, and colorizes page rows and regions. Works with LiveReload.'),
+  '#description' => t('An aggressive option that removes all content, hides the toolbar, and colorizes page rows and regions. Works with LiveReload.'),
 );
 
 // Colorize regions.
@@ -45,7 +50,7 @@ $form['devel']['settings_devel_color_regions'] = array(
   '#type' => 'checkbox',
   '#title' => t('Colorize regions'),
   '#default_value' => theme_get_setting('settings.devel_color_regions', $theme),
-  '#description' => t('Add background color to regions. Also adds a margin-bottom for visual seperation.'),
+  '#description' => t('Add background color to regions. Also adds a margin-bottom for visual separation.'),
   '#states' => array(
     'disabled' => array('input[name="settings_devel_layout"]' => array('checked' => TRUE)),
   ),

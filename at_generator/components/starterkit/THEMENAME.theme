@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Component\Utility\Xss;
+use Drupal\Component\Utility\Html;
+
 /**
  * Add dynamic library definitions.
  *

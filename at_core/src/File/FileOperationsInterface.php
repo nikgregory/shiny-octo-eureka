@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\at_core\File\FileOperationsInterface
+ */
+
 namespace Drupal\at_core\File;
 
 interface FileOperationsInterface {

@@ -3,7 +3,11 @@
 /**
  * @file
  * Generate title styles.
+ * @param $values
+ * @param $theme
+ * @param $generated_files_path
  */
+
 function at_core_submit_titles($values, $theme, $generated_files_path) {
   $titles_styles = array();
 
@@ -25,10 +29,8 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
         $css[$font_element_key]['selector'] = $font_element_value['selector'];
       }
 
-      //var_dump($values['settings_titles_' . $font_element_key . '_case']);
-
       // Case or Font variant: small-caps is a font-variant, set properties and values accordingly.
-      // We need to set tranform and variant explicitly so selectors can override each other, without
+      // We need to set transform and variant explicitly so selectors can override each other, without
       // any nasty inheritance issues, such as when .page__title overrides h1.
       if (!empty($values['settings_titles_' . $font_element_key . '_case'])) {
         if ($values['settings_titles_' . $font_element_key . '_case'] == 'small-caps') {

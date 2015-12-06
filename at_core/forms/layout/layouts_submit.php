@@ -1,9 +1,11 @@
 <?php
 
-use Drupal\Core\Config\Config;
-use Drupal\Core\Cache\Cache;
-use Drupal\Component\Utility\Unicode;
+/**
+ * @file
+ * Submit layouts.
+ */
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutSubmit;
 
@@ -59,7 +61,7 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
   }
 
-  // Flush all caches. This is the only realy reliable way I have found to
+  // Flush all caches. This is the only really reliable way I have found to
   // ensure new templates and layouts work correctly.
   set_time_limit(60);
   drupal_flush_all_caches();

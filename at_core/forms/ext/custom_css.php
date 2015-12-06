@@ -1,11 +1,11 @@
 <?php
 
-use Drupal\Component\Utility\Xss;
-
 /**
  * @file
  * Generate settings for the Custom CSS form.
  */
+
+use Drupal\Component\Utility\Xss;
 
 $form['custom-styles'] = array(
   '#type' => 'details',

@@ -25,6 +25,10 @@
       margin: 0 0 0 25%;
     }
 
+    .markup-overrides-desc {
+      margin:0;
+    }
+
     .submit--advanced-settings {}
   }
 
@@ -54,6 +58,11 @@
 
     #edit-settings-font-google {
       width: 100%;
+    }
+
+    .web-font-desc {
+      padding: 0;
+      margin: 0;
     }
 
     #edit-settings-font-fallback--wrapper {

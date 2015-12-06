@@ -1,13 +1,11 @@
 <?php
 
-use Drupal\Component\Utility\Xss;
-use Drupal\Component\Utility\Html;
-
 /**
  * @file
  * Generate settings for the Slideshows form.
- * Uses the fantastic slider from http://bxslider.com.
  */
+
+use Drupal\Component\Utility\Html;
 
 $form['slideshows'] = array(
   '#type' => 'details',
@@ -410,7 +408,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
       '#disabled' => TRUE,
       '#cols' => 30,
       '#rows' => 16,
-      '#description' => t('Markup for this slideshow with initilialization class <code>@initilialization_class</code>. Use this in blocks, nodes, templates etc (anywhere in the output between the <code>&#60;body&#62;</code> elements). Each image or content must be in an <code>@licode</code>, add or remove as required. Note: this code and initialization class are re-usable, for example you want a slideshow for each section of your site and want to use the same settings - just re-use this snippet for each slideshow.', array('@licode' => '<li></li>', '@initilialization_class' => $slideshow_class)),
+      '#description' => t('Markup for this slideshow with initialization class <code>@initialization_class</code>. Use this in blocks, nodes, templates etc (anywhere in the output between the <code>&#60;body&#62;</code> elements). Each image or content must be in an <code>@licode</code>, add or remove as required. Note: this code and initialization class are re-usable, for example you want a slideshow for each section of your site and want to use the same settings - just re-use this snippet for each slideshow.', array('@licode' => '<li></li>', '@initialization_class' => $slideshow_class)),
     );
   }
 }

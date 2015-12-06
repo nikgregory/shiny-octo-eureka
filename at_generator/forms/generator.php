@@ -1,9 +1,14 @@
 <?php
 
+/**
+ * @file
+ * Generator settings.
+ * // TODO skins are disable until further testing and dev.
+ */
+
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 
-$theme_name =  '';
-$themeSettingsInfo = new ThemeSettingsInfo($theme);
+$themeSettingsInfo = new ThemeSettingsInfo();
 $sourceThemeOptions = $themeSettingsInfo->baseThemeOptions();
 
 $form['generate'] = array(
@@ -51,7 +56,7 @@ if (!empty($sourceThemeOptions)) {
   $generate_type_options = array(
     'standard' => t('Standard kit'),
     'clone' => t('Clone'),
-    //'skin' => t('Skin'), // TODO disable skins until further testing and dev.
+    //'skin' => t('Skin'),
   );
 }
 
@@ -71,16 +76,14 @@ $form['generate']['generate_type_description_standard_kit'] = array(
   ),
 );
 
-/*
-$form['generate']['generate_type_description_minimal_kit'] = array(
-  '#type' => 'container',
-  '#markup' => t('Minimal kit includes Drupal core regions only, no UIKit styles, no Color module option. This is a very basic "layout only" theme.'),
-  '#attributes' => array('class' => array('generate-type__description')),
-  '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'minimal')),
-  ),
-);
-*/
+//$form['generate']['generate_type_description_minimal_kit'] = array(
+//  '#type' => 'container',
+//  '#markup' => t('Minimal kit includes Drupal core regions only, no UIKit styles, no Color module option. This is a very basic "layout only" theme.'),
+//  '#attributes' => array('class' => array('generate-type__description')),
+//  '#states' => array(
+//    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'minimal')),
+//  ),
+//);
 
 $form['generate']['generate_clone_source'] = array(
   '#type' => 'select',
@@ -93,27 +96,25 @@ $form['generate']['generate_clone_source'] = array(
   ),
 );
 
-$form['generate']['generate_skin_base'] = array(
-  '#type' => 'select',
-  '#title' => t('Skin base'),
-  '#options' => $sourceThemeOptions,
-  '#default_value' => '',
-  '#description' => t('Skins are sub-sub-themes. Select an existing sub-theme to use as the base.'),
-  '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
-  ),
-);
+//$form['generate']['generate_skin_base'] = array(
+//  '#type' => 'select',
+//  '#title' => t('Skin base'),
+//  '#options' => $sourceThemeOptions,
+//  '#default_value' => '',
+//  '#description' => t('Skins are sub-sub-themes. Select an existing sub-theme to use as the base.'),
+//  '#states' => array(
+//    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
+//  ),
+//);
 
-/*
-$form['generate']['generate_skin_sass'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Include SASS partials'),
-  '#default_value' => 0,
-  '#states' => array(
-    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
-  ),
-);
-*/
+//$form['generate']['generate_skin_sass'] = array(
+//  '#type' => 'checkbox',
+//  '#title' => t('Include SASS partials'),
+//  '#default_value' => 0,
+//  '#states' => array(
+//    'visible' => array('select[name="generate[generate_type]"]' => array('value' => 'skin')),
+//  ),
+//);
 
 // Options
 $form['generate']['options'] = array(
@@ -181,25 +182,6 @@ $form['generate']['options']['generate_color'] = array(
     ),
   ),
 );
-
-// This becomes mandatory with the new asset management system.
-// themeName.theme file
-/*
-$form['generate']['options']['generate_themefile'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('themename.theme'),
-  '#default_value' => 0,
-  '#description' => t('Include a [theme_name].theme file. Includes a subset of commonly used preprocess functions.'),
-  '#states' => array(
-    'visible' => array(
-      'select[name="generate[generate_type]"]' => array(
-        array('value' => 'standard'),
-        array('value' => 'minimal'),
-      ),
-    ),
-  ),
-);
-*/
 
 // theme-settings.php file
 $form['generate']['options']['generate_themesettingsfile'] = array(

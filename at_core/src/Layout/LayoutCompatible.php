@@ -7,10 +7,8 @@
 
 namespace Drupal\at_core\Layout;
 
-use Drupal\at_core\Layout\Layout;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
-
 
 class LayoutCompatible implements LayoutCompatibleInterface {
 
@@ -21,11 +19,14 @@ class LayoutCompatible implements LayoutCompatibleInterface {
     $this->theme_name = $theme_name;
   }
 
-  // Find and return the most compatible layout.
+  /**
+   * {@inheritdoc}
+   */
   public function getCompatibleLayout() {
     $layout_compatible_data = array();
 
-    // Caching the data here appears to shave about 50ms off page execution. Needs performance testing?
+    // Caching the data here appears to shave about 50ms off page execution.
+    // TODO - needs performance testing?
     if ($cache = \Drupal::cache()->get($this->theme_name . ':compatiblelayout')) {
       $layout_compatible_data = $cache->data;
     }
@@ -43,18 +44,19 @@ class LayoutCompatible implements LayoutCompatibleInterface {
       $ThemeInfo = new ThemeInfo($this->theme_name);
       $info_layout = $ThemeInfo->getThemeInfo('info');
 
-      // This is critical to restrict the theme to use only the layout specified in the info file,
-      // because there can be many layouts sprinkled throughout the base_theme tree, but not
-      // all might be compatible and a theme can only use ONE layout at a time.
+      // This is critical to restrict the theme to use only the layout specified
+      // in the info file, because there can be many layouts throughout the
+      // base_theme tree, but not all might be compatible and a theme can only
+      // use one layout at a time.
       if (!empty($info_layout['layout'])) {
         $compatible_layout = $info_layout['layout'];
       }
       else {
-        drupal_set_message('"layout" not delcared in info file. Adaptivetheme requires a compatible layout to be declared in your theme info file e.g. "layout: site-builder". Add the declaration, clear the cache and try again.');
+        drupal_set_message('"layout" not declared in info file. Adaptivetheme requires a compatible layout to be declared in your theme info file e.g. "layout: site-builder". Add the declaration, clear the cache and try again.');
       }
 
 
-      // Push the current theme into the array - if it has a layout we will use it.
+      // Push the current theme into the array - if it has a layout, use it.
       $providers[$this->theme_name] = $this->theme_name;
 
       // Get the configuration data for layout markup and CSS.
@@ -65,7 +67,7 @@ class LayoutCompatible implements LayoutCompatibleInterface {
         $layout_markup[$key] = $this_layout[$key]->getLayoutMarkup();
         $layout_css[$key] = $this_layout[$key]->getLayoutCSS();
 
-        // Push additional information about the layout, this is very useful later on.
+        // Push additional information about the layout, useful later on.
         if (isset($layout_markup[$key]['rows'])) {
           $layout_markup[$key]['layout'] = $compatible_layout;
           $layout_markup[$key]['layout_provider'] = $key;
@@ -76,10 +78,11 @@ class LayoutCompatible implements LayoutCompatibleInterface {
         }
       }
 
-      // Remove empty values and get the last item values, this is our layout and css configuration.
-      // this only really matters if the exact same layout has been duplicated, which might happen if a
-      // themer is customizing the layout for a particular sub-theme and does not bother
-      // to change the name of the layout (and reflects that change in the themes info file etc).
+      // Remove empty values and get the last item values, this is our layout
+      // and css configuration.this only really matters if the exact same layout
+      // has been duplicated, which might happen if a themer is customizing the
+      // layout for a particular sub-theme and does not bother to change the
+      // name of the layout (and reflects that change in the themes info file).
       $filter_layout_config = array_filter($layout_markup);
       $filter_css_config = array_filter($layout_css);
 
@@ -87,7 +90,7 @@ class LayoutCompatible implements LayoutCompatibleInterface {
       $layout_compatible_data['layout_config'] = end($filter_layout_config);
       $layout_compatible_data['css_config'] = end($filter_css_config);
 
-      // Push the actual layout name into the array for quick access during form building.
+      // Push the layout name into the array for access during form building.
       $layout_compatible_data['layout_name'] = $compatible_layout;
 
       if (!empty($layout_compatible_data)) {

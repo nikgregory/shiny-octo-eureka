@@ -17,11 +17,9 @@ class ThemeSettingsInfo extends ThemeInfo {
 
   /**
    * Constructs a theme info object.
-   *
    * @param string $theme
-   *  The theme name
    */
-  public function __construct($theme) {
+  public function __construct($theme = 'at_core') {
     $this->theme = $theme;
     $this->data = \Drupal::service('theme_handler')->rebuildThemeData();
   }
@@ -30,9 +28,7 @@ class ThemeSettingsInfo extends ThemeInfo {
    * Return list of base theme options.
    * Looks for all themes with a base theme value of 'at_core' and returns
    * the list. This means you cannot sub-theme a "skin" type sub-theme.
-   *
    * @return array
-   *  List of theme names.
    */
   public function baseThemeOptions() {
     $base_themes = array();
@@ -61,10 +57,8 @@ class ThemeSettingsInfo extends ThemeInfo {
   /**
    * Returns either the whole info array for $this theme or just one key
    * if the $key parameter is set.
-   *
    * @param string $key
    *   A string that maps to a key within the theme settings data.
-   *
    * @return mixed
    *   The info data that was requested.
    */
@@ -80,7 +74,6 @@ class ThemeSettingsInfo extends ThemeInfo {
   /**
    * Return a list of base themes and their sub-themes.
    * This is borrowed from drupal_find_theme_templates().
-   *
    * @return array Arrays of sub themes keyed by base theme.
    */
   public function findThemePaths() {
@@ -107,10 +100,7 @@ class ThemeSettingsInfo extends ThemeInfo {
    * Looks in the list of themes to see if a theme name already exists, if so
    * returns TRUE. This is the callback method for the form field machine_name
    * as used in theme-settings.php for the theme Generator.
-   *
    * @param $machine_name
-   *   A themes machine name.
-   *
    * @return boolean
    */
   public function themeNameExists($machine_name) {
@@ -121,4 +111,4 @@ class ThemeSettingsInfo extends ThemeInfo {
     return $result;
   }
 
-} // end class
+}

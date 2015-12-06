@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Saves a parsable inc file with the full color info array for the active theme.
+ * Saves a parse-able inc file with the full color info array for the active theme.
  *
  * If a custom color scheme has been created in the UI it is injected into the
  * schemes array and saved. You must rename the Custom scheme and give it a
@@ -13,17 +13,12 @@
  * strings, which color module validates to avoid XSS.
  */
 function at_core_log_color_scheme(&$form, &$form_state) {
-
   $build_info = $form_state->getBuildInfo();
-  $values = $form_state->getValues();
-  $theme = $build_info['args'][0];
-
-  $palette = $values['palette'];
-
-  $indent = str_pad(' ', 6);
-  $lines = explode("\n", var_export($palette, TRUE));
-
-  array_shift($lines);
+  $values     = $form_state->getValues();
+  $theme      = $build_info['args'][0];
+  $palette    = $values['palette'];
+  $indent     = str_pad(' ', 6);
+  $lines      = explode("\n", var_export($palette, TRUE));
 
   $message  = "    'PaletteName' => array(\n";
   $message .= $indent . "'title' => t('PaletteName'),\n";
@@ -31,6 +26,7 @@ function at_core_log_color_scheme(&$form, &$form_state) {
   $last_line = $indent . array_pop($lines) . ',';
   $message_scss = '';
 
+  array_shift($lines);
   foreach ($lines as $line) {
     if (strpos($line, ' => ') !== FALSE) {
       $parts = explode(' => ', $line);
@@ -77,5 +73,5 @@ function at_core_log_color_scheme(&$form, &$form_state) {
   $obi_k = array_rand($obi_wan_quotes);
   $obi_wan = $obi_wan_quotes[$obi_k];
 
-  drupal_set_message(t('Color scheme logged. Cache cleared. <p><em>"@obiwan"</em></p>', array('@obiwan' => $obi_wan)), 'status');
+  drupal_set_message(t('Color scheme logged. Cache cleared. <p>Obi Wan says... <em>"@obiwan"</em></p>', array('@obiwan' => $obi_wan)), 'status');
 }
