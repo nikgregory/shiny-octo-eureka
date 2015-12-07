@@ -903,7 +903,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
 function at_core_preprocess_user(&$variables) {
   // Add a proper label for user profiles.
   $user = $variables['elements']['#user'];
-  $variables['label'] = $user->getUsername();
+  $variables['label'] = $user->getDisplayName();
 }
 
 /**
