@@ -34,156 +34,8 @@ settings:
   generated_files_path: themes/THEMENAME/styles/css/generated
   extensions_form_open: 1
   layouts_form_open: 0
-  font_size_base: '16'
-  font_size_sitename: '36'
-  font_size_h1: '42'
-  font_size_h2: '30'
-  font_size_h3: '26'
-  font_size_h4: '18'
-  font_size_h5: '16'
-  font_size_h6: '11'
-  font_lineheight_multiplier_default: '1.5'
-  font_lineheight_multiplier_large: '1.2'
-  font_lineheight_multiplier_large_size: '24'
-  enable_shortcodes: 0
-  breakpoint_group_layout: at_core.simple
-  page_tabletisolate_leaderboard: ''
-  page_tabletisolate_header: twocol-6-6
-  page_tabletisolate_navbar: ''
-  page_tabletisolate_highlighted: ''
-  page_tabletisolate_features: threecol-split-row-12--6-6
-  page_tabletisolate_content_prefix: ''
-  page_tabletisolate_main: threecol-split-row-12--6-6
-  page_tabletisolate_content_suffix: ''
-  page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
-  page_tabletisolate_footer: ''
-  page_wide_leaderboard: ''
-  page_wide_header: twocol-6-6
-  page_wide_navbar: ''
-  page_wide_highlighted: ''
-  page_wide_features: threecol-source-ordered-2-8-2
-  page_wide_content_prefix: ''
-  page_wide_main: threecol-source-ordered-3-6-3
-  page_wide_content_suffix: ''
-  page_wide_subfeatures: fourcol-3-3-3-3
-  page_wide_footer: ''
-  enable_slideshows: 0
-  font_websafe: "Verdana, Geneva, sans-serif\r\nHelvetica, Tahoma, Arial, sans-serif\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif\r\n\"Times New Roman\", Times, serif\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif\r\n\"Courier New\", Courier, monospace, sans-serif\r\nsans-serif\r\nserif"
-  font_google: ''
-  font_typekit: ''
-  font_base: none
-  font_google_base: ''
-  font_typekit_base: ''
-  font_sitename: none
-  font_google_sitename: ''
-  font_typekit_sitename: ''
-  font_siteslogan: none
-  font_google_siteslogan: ''
-  font_typekit_siteslogan: ''
-  font_size_siteslogan: ''
-  font_pagetitle: none
-  font_google_pagetitle: ''
-  font_typekit_pagetitle: ''
-  font_size_pagetitle: ''
-  font_nodetitle: none
-  font_google_nodetitle: ''
-  font_typekit_nodetitle: ''
-  font_size_nodetitle: ''
-  font_commenttitle: none
-  font_google_commenttitle: ''
-  font_typekit_commenttitle: ''
-  font_size_commenttitle: ''
-  font_blocktitle: none
-  font_google_blocktitle: ''
-  font_typekit_blocktitle: ''
-  font_size_blocktitle: ''
-  font_links: none
-  font_google_links: ''
-  font_typekit_links: ''
-  font_size_links: ''
-  font_menus: none
-  font_google_menus: ''
-  font_typekit_menus: ''
-  font_size_menus: ''
-  font_responsivemenu: none
-  font_google_responsivemenu: ''
-  font_typekit_responsivemenu: ''
-  font_size_responsivemenu: ''
-  font_buttons: none
-  font_google_buttons: ''
-  font_typekit_buttons: ''
-  font_size_buttons: ''
-  font_tabs: none
-  font_google_tabs: ''
-  font_typekit_tabs: ''
-  font_size_tabs: ''
-  font_h1h4: none
-  font_google_h1h4: ''
-  font_typekit_h1h4: ''
-  font_h5h6: none
-  font_google_h5h6: ''
-  font_typekit_h5h6: ''
-  font_h1: none
-  font_google_h1: ''
-  font_typekit_h1: ''
-  font_h2: none
-  font_google_h2: ''
-  font_typekit_h2: ''
-  font_h3: none
-  font_google_h3: ''
-  font_typekit_h3: ''
-  font_h4: none
-  font_google_h4: ''
-  font_typekit_h4: ''
-  font_h5: none
-  font_google_h5: ''
-  font_typekit_h5: ''
-  font_h6: none
-  font_google_h6: ''
-  font_typekit_h6: ''
-  font_custom_selectors: none
-  font_google_custom_selectors: ''
-  font_typekit_custom_selectors: ''
-  font_size_custom_selectors: ''
-  custom_selectors: ''
-  titles_sitename_case: none
-  titles_sitename_weight: '400'
-  titles_sitename_alignment: left
-  titles_siteslogan_case: none
-  titles_siteslogan_weight: '400'
-  titles_siteslogan_alignment: left
-  titles_pagetitle_case: none
-  titles_pagetitle_weight: '400'
-  titles_pagetitle_alignment: left
-  titles_nodetitle_case: none
-  titles_nodetitle_weight: '400'
-  titles_nodetitle_alignment: left
-  titles_commenttitle_case: none
-  titles_commenttitle_weight: '400'
-  titles_commenttitle_alignment: left
-  titles_blocktitle_case: none
-  titles_blocktitle_weight: '400'
-  titles_blocktitle_alignment: left
-  titles_h1_case: none
-  titles_h1_weight: '400'
-  titles_h1_alignment: left
-  titles_h2_case: none
-  titles_h2_weight: '400'
-  titles_h2_alignment: left
-  titles_h3_case: none
-  titles_h3_weight: '400'
-  titles_h3_alignment: left
-  titles_h4_case: none
-  titles_h4_weight: '400'
-  titles_h4_alignment: left
-  titles_h5_case: none
-  titles_h5_weight: '400'
-  titles_h5_alignment: left
-  titles_h6_case: none
-  titles_h6_weight: '400'
-  titles_h6_alignment: left
   image_alignment_article_node_full: center
-  image_alignment_article_node_print: right
+  image_alignment_article_node_print: center
   image_alignment_article_node_teaser: right
   image_captions_article_node_full: 0
   image_captions_article_node_print: 0
@@ -191,8 +43,8 @@ settings:
   image_count_article_node_full: 0
   image_count_article_node_print: 0
   image_count_article_node_teaser: 1
-  image_alignment_book_node_full: right
-  image_alignment_book_node_print: right
+  image_alignment_book_node_full: center
+  image_alignment_book_node_print: center
   image_alignment_book_node_teaser: right
   image_captions_book_node_full: 0
   image_captions_book_node_print: 0
@@ -210,7 +62,7 @@ settings:
   image_count_forum_node_print: 0
   image_count_forum_node_teaser: 1
   image_alignment_page_node_full: center
-  image_alignment_page_node_print: null
+  image_alignment_page_node_print: center
   image_alignment_page_node_teaser: right
   image_captions_page_node_full: 0
   image_captions_page_node_print: 0
@@ -218,8 +70,183 @@ settings:
   image_count_page_node_full: 0
   image_count_page_node_print: 0
   image_count_page_node_teaser: 1
+  responsive_tables: 1
+  breadcrumb_label: 0
+  breadcrumb_home: 0
+  breadcrumb_separator: ''
+  search_block_hide_submit: 0
+  search_block_placeholder_text: ''
+  login_block_placeholder_labels: 0
+  horizontal_login_block: 0
+  login_block_remove_links: 0
+  comments_hide_title: 0
+  views_hide_feedicon: 0
+  attribution_toggle: 1
+  breakpoint_group_layout: responsive_image
+  page_viewportsizing_leaderboard: ''
+  page_viewportsizing_header: ''
+  page_viewportsizing_navbar: ''
+  page_viewportsizing_highlighted: ''
+  page_viewportsizing_features: ''
+  page_viewportsizing_content_prefix: ''
+  page_viewportsizing_main: ''
+  page_viewportsizing_content_suffix: ''
+  page_viewportsizing_subfeatures: ''
+  page_viewportsizing_footer: ''
+  font_use_google_fonts: false
+  font_use_typekit: false
+  font_websafe: "Verdana, Geneva, sans-serif\r\nHelvetica, Tahoma, Arial, sans-serif\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif\r\n\"Times New Roman\", Times, serif\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif\r\n\"Courier New\", Courier, monospace, sans-serif\r\nsans-serif\r\nserif"
+  font_google: ''
+  font_typekit: ''
+  font_fallback: sans_serif
+  font_line_height_multiplier_default: '1.5'
+  font_line_height_multiplier_large: '1'
+  font_line_height_multiplier_large_size: '24'
+  font_base: none
+  font_websafe_base: '0'
+  font_size_base: ''
+  font_smoothing_base: 0
+  font_sitename: none
+  font_websafe_sitename: '0'
+  font_size_sitename: ''
+  font_smoothing_sitename: 0
+  font_siteslogan: none
+  font_websafe_siteslogan: '0'
+  font_size_siteslogan: ''
+  font_smoothing_siteslogan: 0
+  font_pagetitle: none
+  font_websafe_pagetitle: '0'
+  font_size_pagetitle: ''
+  font_smoothing_pagetitle: 0
+  font_nodetitle: none
+  font_websafe_nodetitle: '0'
+  font_size_nodetitle: ''
+  font_smoothing_nodetitle: 0
+  font_nodetitle_teaser: none
+  font_websafe_nodetitle_teaser: '0'
+  font_size_nodetitle_teaser: ''
+  font_smoothing_nodetitle_teaser: 0
+  font_commenttitle: none
+  font_websafe_commenttitle: '0'
+  font_size_commenttitle: ''
+  font_smoothing_commenttitle: 0
+  font_blocktitle: none
+  font_websafe_blocktitle: '0'
+  font_size_blocktitle: ''
+  font_smoothing_blocktitle: 0
+  font_links: none
+  font_websafe_links: '0'
+  font_size_links: ''
+  font_smoothing_links: 0
+  font_menus: none
+  font_websafe_menus: '0'
+  font_size_menus: ''
+  font_smoothing_menus: 0
+  font_responsivemenu: none
+  font_websafe_responsivemenu: '0'
+  font_size_responsivemenu: ''
+  font_smoothing_responsivemenu: 0
+  font_responsivemenu_toggle: none
+  font_websafe_responsivemenu_toggle: '0'
+  font_size_responsivemenu_toggle: ''
+  font_smoothing_responsivemenu_toggle: 0
+  font_buttons: none
+  font_websafe_buttons: '0'
+  font_size_buttons: ''
+  font_smoothing_buttons: 0
+  font_tabs: none
+  font_websafe_tabs: '0'
+  font_size_tabs: ''
+  font_smoothing_tabs: 0
+  font_h1h4: none
+  font_websafe_h1h4: '0'
+  font_smoothing_h1h4: 0
+  font_h5h6: none
+  font_websafe_h5h6: '0'
+  font_smoothing_h5h6: 0
+  font_h1: none
+  font_websafe_h1: '0'
+  font_size_h1: ''
+  font_smoothing_h1: 0
+  font_h2: none
+  font_websafe_h2: '0'
+  font_size_h2: ''
+  font_smoothing_h2: 0
+  font_h3: none
+  font_websafe_h3: '0'
+  font_size_h3: ''
+  font_smoothing_h3: 0
+  font_h4: none
+  font_websafe_h4: '0'
+  font_size_h4: ''
+  font_smoothing_h4: 0
+  font_h5: none
+  font_websafe_h5: '0'
+  font_size_h5: ''
+  font_smoothing_h5: 0
+  font_h6: none
+  font_websafe_h6: '0'
+  font_size_h6: ''
+  font_smoothing_h6: 0
+  font_custom_selectors: none
+  font_websafe_custom_selectors: '0'
+  font_size_custom_selectors: ''
+  font_smoothing_custom_selectors: 0
+  custom_selectors: ''
+  titles_sitename_case: none
+  titles_sitename_weight: '400'
+  titles_sitename_alignment: left
+  titles_sitename_letterspacing: ''
+  titles_siteslogan_case: none
+  titles_siteslogan_weight: '400'
+  titles_siteslogan_alignment: left
+  titles_siteslogan_letterspacing: ''
+  titles_pagetitle_case: none
+  titles_pagetitle_weight: '400'
+  titles_pagetitle_alignment: left
+  titles_pagetitle_letterspacing: ''
+  titles_nodetitle_case: none
+  titles_nodetitle_weight: '400'
+  titles_nodetitle_alignment: left
+  titles_nodetitle_letterspacing: ''
+  titles_nodetitle_teaser_case: none
+  titles_nodetitle_teaser_weight: '400'
+  titles_nodetitle_teaser_alignment: left
+  titles_nodetitle_teaser_letterspacing: ''
+  titles_commenttitle_case: none
+  titles_commenttitle_weight: '400'
+  titles_commenttitle_alignment: left
+  titles_commenttitle_letterspacing: ''
+  titles_blocktitle_case: none
+  titles_blocktitle_weight: '400'
+  titles_blocktitle_alignment: left
+  titles_blocktitle_letterspacing: ''
+  titles_h1_case: none
+  titles_h1_weight: '400'
+  titles_h1_alignment: left
+  titles_h1_letterspacing: ''
+  titles_h2_case: none
+  titles_h2_weight: '400'
+  titles_h2_alignment: left
+  titles_h2_letterspacing: ''
+  titles_h3_case: none
+  titles_h3_weight: '400'
+  titles_h3_alignment: left
+  titles_h3_letterspacing: ''
+  titles_h4_case: none
+  titles_h4_weight: '600'
+  titles_h4_alignment: left
+  titles_h4_letterspacing: ''
+  titles_h5_case: none
+  titles_h5_weight: '600'
+  titles_h5_alignment: left
+  titles_h5_letterspacing: ''
+  titles_h6_case: none
+  titles_h6_weight: '600'
+  titles_h6_alignment: left
+  titles_h6_letterspacing: ''
   slideshow_count: '1'
-  slideshow_0_enable: 1
+  slideshow_0_enable: 0
   slideshow_0_animation: slide
   slideshow_0_direction: horizontal
   slideshow_0_smoothheight: 0
@@ -246,35 +273,7 @@ settings:
   slideshow_0_video: 0
   slideshow_0_prevtext: Previous
   slideshow_0_nexttext: Next
-  slideshow_0_slideshow_class: .THEMENAME-slideshow-0
   slideshow_0_selector: '.slides > li'
-  custom_css: ''
-  responsive_tables: 1
-  breadcrumb_label: 0
-  breadcrumb_home: 0
-  breadcrumb_separator: ''
-  login_block_placeholder_labels: 0
-  horizontal_login_block: 0
-  login_block_remove_links: 0
-  comments_hide_title: 0
-  views_hide_feedicon: 0
-  attribution_toggle: 1
-  show_page_suggestions: 0
-  show_window_size: 0
-  show_grid: 0
-  devel_layout: 0
-  devel_color_regions: 0
-  nuke_toolbar: 0
-  enable_mobile_blocks: 0
-  shortcodes_textalign_enable: 0
-  shortcodes_position_enable: 0
-  shortcodes_layout_enable: 0
-  shortcodes_float_region_blocks_enable: 0
-  shortcodes_whitespace_enable: 0
-  shortcodes_grid-blocks_enable: 0
-  shortcodes_rounded-corners_enable: 0
-  shortcodes_menu-bullets_enable: 0
-  shortcodes_animate_enable: 0
 features:
   logo: 1
   node_user_picture: 1
