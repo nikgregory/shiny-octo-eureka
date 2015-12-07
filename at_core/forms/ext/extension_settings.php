@@ -70,6 +70,22 @@ $form['enable_extensions']['settings_enable_responsive_menus'] = array(
   '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
 );
 
+// Image alignment and captions
+$form['enable_extensions']['settings_enable_images'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Image alignment and captions'),
+  '#default_value' => theme_get_setting('settings.enable_images', $theme),
+  '#description' => t('Set image alignment, captions and teaser view per content type.'),
+);
+
+// Touch icons
+$form['enable_extensions']['settings_enable_touch_icons'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Touch icons'),
+  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>@touchiconpath</code>.', array('@touchiconpath' => $subtheme_path . '/images/touch-icons/')),
+  '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
+);
+
 // Fonts
 $form['enable_extensions']['settings_enable_fonts'] = array(
   '#type' => 'checkbox',
@@ -81,17 +97,9 @@ $form['enable_extensions']['settings_enable_fonts'] = array(
 // Title styles
 $form['enable_extensions']['settings_enable_titles'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Title styles'),
+  '#title' => t('Titles'),
   '#default_value' => theme_get_setting('settings.enable_titles', $theme),
-  '#description' => t('Set case, weight and alignment for titles (headings).'),
-);
-
-// Image alignment and captions
-$form['enable_extensions']['settings_enable_images'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Image alignment and captions'),
-  '#default_value' => theme_get_setting('settings.enable_images', $theme),
-  '#description' => t('Set image alignment, captions and teaser view per content type.'),
+  '#description' => t('Set case, weight, alignment and letter-spacing for titles (headings).'),
 );
 
 // Shortcodes
@@ -102,14 +110,6 @@ $form['enable_extensions']['settings_enable_shortcodes'] = array(
   '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 );
 
-// Mobile blocks
-$form['enable_extensions']['settings_enable_mobile_blocks'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Mobile Blocks'),
-  '#description' => t('Show or hide blocks in mobile devices.'),
-  '#default_value' => theme_get_setting('settings.enable_mobile_blocks', $theme),
-);
-
 // Slideshows
 $form['enable_extensions']['settings_enable_slideshows'] = array(
   '#type' => 'checkbox',
@@ -118,12 +118,12 @@ $form['enable_extensions']['settings_enable_slideshows'] = array(
   '#default_value' => theme_get_setting('settings.enable_slideshows', $theme),
 );
 
-// Touch icons
-$form['enable_extensions']['settings_enable_touch_icons'] = array(
+// Mobile blocks
+$form['enable_extensions']['settings_enable_mobile_blocks'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Touch icons'),
-  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>@touchiconpath</code>.', array('@touchiconpath' => $subtheme_path . '/images/touch-icons/')),
-  '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
+  '#title' => t('Mobile Blocks'),
+  '#description' => t('Show or hide blocks in mobile devices.'),
+  '#default_value' => theme_get_setting('settings.enable_mobile_blocks', $theme),
 );
 
 // Custom CSS
@@ -132,6 +132,22 @@ $form['enable_extensions']['settings_enable_custom_css'] = array(
   '#title' => t('Custom CSS'),
   '#description' => t('Enter custom CSS rules for minor adjustment to your theme.'),
   '#default_value' => theme_get_setting('settings.enable_custom_css', $theme),
+);
+
+// Devel
+$form['enable_extensions']['settings_enable_devel'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Developer tools'),
+  '#description' => t('Settings to help with theme development.'),
+  '#default_value' => theme_get_setting('settings.enable_devel', $theme),
+);
+
+// Legacy browsers
+$form['enable_extensions']['settings_enable_legacy_browsers'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Legacy browsers'),
+  '#description' => t('Settings to support crappy old browsers like IE8. Use with caution, do not enable this unless you really, really need it.'),
+  '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
 );
 
 // Markup overrides
@@ -154,22 +170,6 @@ $form['enable_extensions']['settings_enable_markup_overrides'] = array(
     ),
   ),
   '#default_value' => theme_get_setting('settings.enable_markup_overrides', $theme),
-);
-
-// Devel
-$form['enable_extensions']['settings_enable_devel'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Developer tools'),
-  '#description' => t('Settings to help with theme development.'),
-  '#default_value' => theme_get_setting('settings.enable_devel', $theme),
-);
-
-// Legacy browsers
-$form['enable_extensions']['settings_enable_legacy_browsers'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Legacy browsers'),
-  '#description' => t('Settings to support crappy old browsers like IE8. Use with caution, do not enable this unless you really, really need it.'),
-  '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
 );
 
 // Extensions master toggle.
