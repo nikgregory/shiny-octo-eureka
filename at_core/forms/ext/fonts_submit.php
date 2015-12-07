@@ -9,12 +9,6 @@
 use Drupal\Component\Utility\Xss;
 
 function at_core_submit_fonts($values, $theme, $generated_files_path) {
-  // Config, we need to save some config directly from this form.
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  // Paths.
-  $subtheme_path = drupal_get_path('theme', $theme);
-
   // Websafe fonts.
   $websafe_fonts = $values['websafe_options'];
 
@@ -26,10 +20,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
   // Initialize some variables.
   $fonts = array();
-  $size = '';
   $base_size = '16'; // 16px default
-  $px_size = '';
-  $rem_size = '';
 
   // Inject config settings for web-fonts.
   $values['settings_font_use_google_fonts'] = FALSE;
@@ -50,6 +41,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
     // Size/Line height.
     if (!empty($values['settings_font_size_' . $font_key])) {
 
+      //$base_size = $values['settings_font_size_base'] ? $values['settings_font_size_base'] : $base_size;
       $px_size = $values['settings_font_size_' . $font_key];
       $rem_size = $values['settings_font_size_' . $font_key] / $base_size;
 
@@ -61,6 +53,12 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
 
       $fonts[$font_key]['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
       $fonts[$font_key]['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+
+//      if (isset($values['settings_font_size_base'])) {
+//        $rem_size =  $base_size / 16;
+//        $fonts['base']['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
+//        $fonts['base']['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+//      }
     }
 
     // Set font family for each key.

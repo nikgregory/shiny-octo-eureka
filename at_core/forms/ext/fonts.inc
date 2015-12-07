@@ -13,7 +13,7 @@ function websafe_fonts() {
     'wide_sans_serif'   => 'Verdana, Geneva, sans-serif',
     'narrow_sans_serif' => 'Helvetica, Tahoma, Arial, sans-serif',
     'wide_serif'        => 'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
-    'narrow_serif'      => '"Times New Roman", Times, serif;',
+    'narrow_serif'      => '"Times New Roman", Times, serif',
     'impact'            => 'Impact, "Helvetica Inserat", "Arial Black", sans-serif',
     'monospace'         => '"Courier New", Courier, monospace, sans-serif',
     'sans_serif'        => 'sans-serif',

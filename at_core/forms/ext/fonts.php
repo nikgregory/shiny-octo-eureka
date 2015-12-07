@@ -118,7 +118,7 @@ $form['fonts']['setup']['line_height'] = array(
 $form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_default'] = array(
   '#type' => 'number',
   '#title' => t('Default'),
-  '#max-lenght' => 3,
+  '#max-length' => 3,
   '#step' => 0.1,
   '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_default')),
   '#attributes' => array(
@@ -148,7 +148,7 @@ $form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_lar
   '#type' => 'number',
   '#title' => t('Large font size'),
   '#field_suffix' => 'px',
-  '#max-lenght' => 2,
+  '#max-length' => 2,
   '#description' => t('What is considered a large font?'),
   '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large_size')),
   '#attributes' => array(
@@ -247,6 +247,30 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       ),
     );
   }
+
+//  // Case
+//  $form['fonts']['apply'][$font_element_key]['settings_font_case_' . $font_element_key] = array(
+//    '#type' => 'select',
+//    '#title' => t('Case'),
+//    '#default_value' => theme_get_setting('settings.font_case_' . $font_element_key),
+//    '#options' => title_style_options('case'),
+//  );
+//
+//  // Weight
+//  $form['fonts']['apply'][$font_element_key]['settings_font_weight_' . $font_element_key] = array(
+//    '#type' => 'select',
+//    '#title' => t('Weight'),
+//    '#default_value' => theme_get_setting('settings.font_weight_' . $font_element_key),
+//    '#options' => title_style_options('weight'),
+//  );
+//
+//  // Alignment
+//  $form['fonts']['apply'][$font_element_key]['settings_font_alignment_' . $font_element_key] = array(
+//    '#type' => 'select',
+//    '#title' => t('Alignment'),
+//    '#default_value' => theme_get_setting('settings.font_alignment_' . $font_element_key),
+//    '#options' => title_style_options('alignment'),
+//  );
 
   // Font smoothing
   $form['fonts']['apply'][$font_element_key]['settings_font_smoothing_' . $font_element_key] = array(
