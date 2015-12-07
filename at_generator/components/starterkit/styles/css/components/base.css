@@ -110,7 +110,7 @@
 }
 
 /**
- * Base
+ * Elements
  * - set element global styles, basically whenever this element appears
  *   it should look like this by default.
  ============================================================================ */
@@ -363,7 +363,6 @@ blockquote p:first-child:before {
 [dir="rtl"] blockquote p:first-child:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 blockquote p:last-child {
@@ -548,7 +547,6 @@ input[type="checkbox"], input[type="radio"] {
   width: auto;
   height: auto;
   -webkit-transform: scale(1);
-      -ms-transform: scale(1);
           transform: scale(1);
 }
 
@@ -905,6 +903,36 @@ thead .active img {
 }
 
 /**
+ * Table sort indicators.
+ ============================================================================ */
+.tablesort {
+  height: 16px;
+  height: 1rem;
+  width: 16px;
+  width: 1rem;
+  display: inline-block;
+}
+.tablesort--asc:after, .tablesort--desc:after {
+  font-family: FontAwesome, sans-serif;
+  height: 16px;
+  height: 1rem;
+  width: 16px;
+  width: 1rem;
+  padding: 0 3px;
+  padding: 0 0.1875rem;
+  display: none;
+}
+.fa-loaded .tablesort--asc:after, .fa-loaded .tablesort--desc:after {
+  display: inline-block;
+}
+.tablesort--asc:after {
+  content: "";
+}
+.tablesort--desc:after {
+  content: "";
+}
+
+/**
  * Form Common - common styles for form elements and classes.
  ============================================================================ */
 .form-text {
@@ -1135,7 +1163,6 @@ details > .details-wrapper {
 [dir="rtl"] .collapse-processed:not([open]) > summary:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
@@ -2564,7 +2591,6 @@ table tr.error {
 [dir="rtl"] .breadcrumb__list-item:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 .breadcrumb__link {
@@ -3077,7 +3103,6 @@ table tr.error {
 [dir="rtl"] .node-preview-backlink:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
@@ -3249,6 +3274,17 @@ table tr.error {
   font-size: 2.625rem;
   line-height: 48px;
   line-height: 3rem;
+}
+
+/**
+ * CK Editor
+ * - classes and styles set by CK Editor.
+ ============================================================================ */
+.text-align-justify {
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 /**

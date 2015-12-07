@@ -108,12 +108,17 @@
 .forum-list__description {
   @include cf;
 
-  @include adjust-font-size-to($medium/1.25); // 13px
+  @include adjust-font-size-to($medium / 1.25); // 13px
   @include output-rhythm(margin, $xx-small $xx-small $xx-small 33px); // LTR, force the desc text to align with the forum name.
 
   // RTL
   [dir="rtl"] & {
     @include output-rhythm(margin, $xx-small 33px $xx-small $xx-small);
+  }
+
+  // Paragraph.
+  &:empty {
+    display: none;
   }
 }
 
@@ -124,5 +129,26 @@
 
 .forum-list__posts {}
 .forum-list__last-reply {}
+
+
+// Topics
+.forum-list__forum__topic {}
+
+.forum__title {
+
+  @include cf;
+
+  a {}
+  .submitted {
+    @include adjust-font-size-to($medium * .875); // 14px
+  }
+}
+
+.forum-list__forum__replies {}
+.forum-list__forum__last-reply {}
+
+
+
+
 
 

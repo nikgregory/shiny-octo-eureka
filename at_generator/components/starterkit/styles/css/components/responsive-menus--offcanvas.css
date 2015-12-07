@@ -25,7 +25,6 @@
   display: none;
   left: 0;
   -webkit-transform: translate(-15em, 0);
-      -ms-transform: translate(-15em, 0);
           transform: translate(-15em, 0);
   -webkit-transition: all, 0.15s, ease;
           transition: all, 0.15s, ease;
@@ -39,7 +38,6 @@
 .ms-offcanvas.rm-is-open > .page {
   position: fixed;
   -webkit-transform: translate(15em, 0);
-      -ms-transform: translate(15em, 0);
           transform: translate(15em, 0);
 }
 .ms-offcanvas.rm-is-open .l-pr {

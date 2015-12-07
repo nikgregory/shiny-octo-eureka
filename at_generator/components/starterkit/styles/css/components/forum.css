@@ -64,5 +64,18 @@
   margin: 7px 33px 7px 7px;
   margin: 0.4375rem 2.0625rem 0.4375rem 0.4375rem;
 }
+.forum-list__description:empty {
+  display: none;
+}
+
+.forum__title {
+  overflow: hidden;
+}
+.forum__title .submitted {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
 
 /*# sourceMappingURL=forum.css.map */
