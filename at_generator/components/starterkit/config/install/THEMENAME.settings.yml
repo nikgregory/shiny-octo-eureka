@@ -68,10 +68,9 @@ settings:
   page_wide_subfeatures: fourcol-3-3-3-3
   page_wide_footer: ''
   enable_slideshows: 0
-  font_websafe: '-- none --'
+  font_websafe: "Verdana, Geneva, sans-serif\r\nHelvetica, Tahoma, Arial, sans-serif\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif\r\n\"Times New Roman\", Times, serif\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif\r\n\"Courier New\", Courier, monospace, sans-serif\r\nsans-serif\r\nserif"
   font_google: ''
   font_typekit: ''
-  font_customstack: ''
   font_base: none
   font_google_base: ''
   font_typekit_base: ''
@@ -249,7 +248,7 @@ settings:
   slideshow_0_nexttext: Next
   slideshow_0_slideshow_class: .THEMENAME-slideshow-0
   slideshow_0_selector: '.slides > li'
-  custom_css: '/* Custom CSS */'
+  custom_css: ''
   responsive_tables: 1
   breadcrumb_label: 0
   breadcrumb_home: 0

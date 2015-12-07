@@ -61,14 +61,16 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
   }
 
-  // Flush all caches. This is the only really reliable way I have found to
-  // ensure new templates and layouts work correctly.
+  // Don't let this timeout easily.
   set_time_limit(60);
-  drupal_flush_all_caches();
-  drupal_set_message(t('Cache automatically cleared.'), 'status');
 
   // Manage settings and configuration.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
-  $convertToConfig->settingsConvertToConfig($values, $config);
+  $convertToConfig->settingsLayoutConvertToConfig($values, $config);
+
+  // Flush all caches. This is the only really reliable way I have found to
+  // ensure new templates and layouts work correctly.
+  drupal_flush_all_caches();
+  drupal_set_message(t('Cache automatically cleared.'), 'status');
 }

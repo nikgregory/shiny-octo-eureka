@@ -7,6 +7,10 @@
 
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
+/**
+ * @param $form
+ * @param $form_state
+ */
 function at_core_submit_extension_settings(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
@@ -20,7 +24,8 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
 
     // Require submit handlers and helper functions for extensions.
     if ((isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) ||
-        (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1)) {
+      (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1)
+    ) {
       require_once($at_core_path . '/forms/ext/fonts.inc');
       require_once($at_core_path . '/forms/ext/fonts_submit.php');
       require_once($at_core_path . '/forms/ext/titles_submit.php');
@@ -60,15 +65,17 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     }
   }
 
-  // Flush all caches, this is the only 100% reliable way to make sure all
-  // settings are applied.
-  //drupal_flush_all_caches();
+  // Don't let this timeout easily.
+  set_time_limit(60);
 
   // Manage settings and configuration.
-  set_time_limit(60);
+  // Must get mutable config otherwise bad things happen.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
-  $convertToConfig->settingsConvertToConfig($values, $config);
+  $convertToConfig->settingsExtensionsConvertToConfig($values, $config);
 
-  drupal_set_message(t('Extensions configuration saved. If your settings have not taken effect, clear the cache.'), 'status');
+  // Flush all caches, this is the only 100% reliable way to make sure all settings are applied.
+  drupal_flush_all_caches();
+  drupal_set_message(t('Extensions configuration saved. Cache cleared.'), 'status');
 }
+
