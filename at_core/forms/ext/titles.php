@@ -12,7 +12,7 @@ $form['titles'] = array(
 );
 
 $form['titles']['description'] = array(
-  '#markup' => t('<h3>Title Styles</h3><p>Set title case, weight and alignment.</p><p>Semi-bold and light font-weight options will only work if the font supports those weights, otherwise these typically render as bold and normal respectively.</p>'),
+  '#markup' => t('<h3>Title Styles</h3><p>Set title case, weight, alignment and letter-spacing.</p><p>Semi-bold and light font-weight options will only work if the font supports those weights, otherwise these typically render as bold and normal respectively.</p>'),
 );
 
 // Array of valid title types
@@ -49,6 +49,21 @@ foreach ($font_elements as $font_element_key => $font_element_value) {
       '#title' => t('Alignment'),
       '#default_value' => theme_get_setting('settings.titles_' . $font_element_key . '_alignment'),
       '#options' => title_style_options('alignment'),
+    );
+    // Letter spacing
+    $form['titles'][$font_element_key . '_element']['settings_titles_' . $font_element_key . '_letterspacing'] = array(
+      '#type' => 'number',
+      '#title' => t('Letter spacing'),
+      '#max-length' => 2,
+      '#step' => 0.1,
+      '#field_suffix' => 'px',
+      '#default_value' => theme_get_setting('settings.titles_' . $font_element_key . '_letterspacing'),
+      '#attributes' => array(
+        'min' => -10,
+        'max' => 10,
+        'step' => 0.1,
+        'class' => array('font-option')
+      ),
     );
   }
 }

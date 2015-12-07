@@ -24,6 +24,8 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
       $case = ' text-transform: ';
       $weight = ' font-weight: ';
       $alignment = ' text-align: ';
+      $letter_spacing = ' letter-spacing: ';
+
       // Selector
       if (!empty($font_element_value['selector'])) {
         $css[$font_element_key]['selector'] = $font_element_value['selector'];
@@ -49,6 +51,10 @@ function at_core_submit_titles($values, $theme, $generated_files_path) {
       // Alignment
       if (!empty($values['settings_titles_' . $font_element_key . '_alignment'])) {
         $css[$font_element_key]['styles']['align'] = $alignment . $values['settings_titles_' . $font_element_key . '_alignment'];
+      }
+      // Letter spacing
+      if (!empty($values['settings_titles_' . $font_element_key . '_letterspacing'])) {
+        $css[$font_element_key]['styles']['letterspacing'] = $letter_spacing . $values['settings_titles_' . $font_element_key . '_letterspacing'] . 'px';
       }
     }
   }
