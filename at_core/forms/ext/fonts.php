@@ -12,8 +12,15 @@ use Drupal\Component\Utility\Xss;
 $font_elements = font_elements();
 
 // Websafe stacks and select options.
-$websafe_fonts = theme_get_setting('settings.font_websafe') ?: websafe_fonts();
-$websafe_options = explode(PHP_EOL, $websafe_fonts);
+if ($settings_font_websafe = theme_get_setting('settings.font_websafe')) {
+  $websafe_fonts = $settings_font_websafe;
+}
+else {
+  $websafe_fonts = implode("\n", websafe_fonts());
+}
+if (!empty($websafe_fonts)) {
+  $websafe_options = explode(PHP_EOL, $websafe_fonts);
+}
 
 // Font Options - here we must test if there are values set for each font type
 // and populate the options list.
@@ -60,7 +67,7 @@ $form['fonts']['setup']['settings_font_websafe'] = array(
   '#title' => t('Websafe font stacks'),
   '#rows' => 10,
   '#default_value' => $websafe_fonts,
-  '#description' => t('Enter one font stack per line. Separate fonts with a comma, quote font names with spaces. Do not include a trailing semicolon.'),
+  '#description' => t('Enter one font stack per line. Separate fonts with a comma, quote font names with spaces, e.g <code>"Times New Roman", Times, serif;</code>.'),
 );
 
 // Font Setup: Google font

@@ -34,12 +34,12 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     // Submit handler for Fonts.
     if (isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) {
       // Returns modified values to pass in new settings for typekit and google fonts.
-      $values = at_core_submit_fonts($values, $theme, $generated_files_path);
+      $values = at_core_submit_fonts($values, $generated_files_path);
     }
 
     // Submit handler for Titles.
     if (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1) {
-      at_core_submit_titles($values, $theme, $generated_files_path);
+      at_core_submit_titles($values, $generated_files_path);
     }
 
     // Submit handler for Markup Overrides.
@@ -48,7 +48,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
       // Breadcrumbs
       if (!empty($values['settings_breadcrumb_separator'])) {
         require_once($at_core_path . '/forms/ext/breadcrumb_submit.php');
-        at_core_submit_breadcrumb($values, $theme, $generated_files_path);
+        at_core_submit_breadcrumb($values, $generated_files_path);
       }
     }
 
@@ -61,7 +61,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     // Submit handler for Custom CSS.
     if (isset($values['settings_enable_custom_css']) && $values['settings_enable_custom_css'] === 1) {
       require_once($at_core_path . '/forms/ext/custom_css_submit.php');
-      at_core_submit_custom_css($values, $theme, $generated_files_path);
+      at_core_submit_custom_css($values, $generated_files_path);
     }
   }
 

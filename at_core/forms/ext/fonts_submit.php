@@ -8,7 +8,7 @@
 
 use Drupal\Component\Utility\Xss;
 
-function at_core_submit_fonts($values, $theme, $generated_files_path) {
+function at_core_submit_fonts($values, $generated_files_path) {
   // Websafe fonts.
   $websafe_fonts = $values['websafe_options'];
 
@@ -16,7 +16,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
   $font_elements = font_elements();
 
   // Fallback family
-  $fallback_font_family = str_replace('_', '-', $values['settings_font_fallback']);
+  $fallback_font_family = $values['settings_font_fallback'] ? str_replace('_', '-', $values['settings_font_fallback']) : 'sans-serif';
 
   // Initialize some variables.
   $fonts = array();
@@ -68,7 +68,10 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       if ($values['settings_font_' . $font_key] == 'websafe') {
         if (isset($values['settings_font_websafe_' . $font_key])) {
           if (!empty($websafe_fonts[$values['settings_font_websafe_' . $font_key]])) {
-            $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_fonts[$values['settings_font_websafe_' . $font_key]]) . ';';
+
+            $websafe_font = $websafe_fonts[$values['settings_font_websafe_' . $font_key]];
+
+            $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_font) . ';';
           }
           else {
             $fonts[$font_key]['family'] = 'font-family: inherit;';
@@ -82,7 +85,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       // Google.
       if ($values['settings_font_' . $font_key] == 'google') {
         if (isset($values['settings_font_google_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ', ' . $fallback_font_family . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_google_' . $font_key] . ', ' . trim($fallback_font_family) . ';';
           $values['settings_font_use_google_fonts'] = TRUE;
         }
         else {
@@ -93,7 +96,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
       // Typekit.
       if ($values['settings_font_' . $font_key] == 'typekit') {
         if (!empty($values['settings_font_typekit_' . $font_key])) {
-          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_typekit_' . $font_key] . ', ' . $fallback_font_family . ';';
+          $fonts[$font_key]['family'] = 'font-family: ' . $values['settings_font_typekit_' . $font_key] . ', ' . trim($fallback_font_family) . ';';
           $values['settings_font_use_typekit'] = TRUE;
         }
         else {
@@ -115,7 +118,7 @@ function at_core_submit_fonts($values, $theme, $generated_files_path) {
         $font_style = $font_values['selectors'] . ' { ';
 
         if (isset($font_values['family'])) {
-          $font_style .= $font_values['family'];
+          $font_style .= str_replace(';;', ';', $font_values['family']);
         }
 
         if (isset($font_values['size'])) {

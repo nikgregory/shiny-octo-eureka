@@ -8,9 +8,7 @@
  * @param $generated_files_path
  */
 
-function at_core_submit_titles($values, $theme, $generated_files_path) {
-  $titles_styles = array();
-
+function at_core_submit_titles($values, $generated_files_path) {
   // Array of valid title types
   $titles_valid_types = title_valid_type_options();
 

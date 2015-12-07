@@ -95,7 +95,7 @@ settings:
   page_viewportsizing_footer: ''
   font_use_google_fonts: false
   font_use_typekit: false
-  font_websafe: "Verdana, Geneva, sans-serif\r\nHelvetica, Tahoma, Arial, sans-serif\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif\r\n\"Times New Roman\", Times, serif\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif\r\n\"Courier New\", Courier, monospace, sans-serif\r\nsans-serif\r\nserif"
+  font_websafe: "Verdana, Geneva, sans-serif;\r\n\"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n\"Segoe UI\", Segoe, Tahoma, Geneva, sans-serif;\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif;\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif;\r\n\"Times New Roman\", Times, serif;\r\n\"Courier New\", Courier, monospace;\r\nsans-serif;\r\nserif;"
   font_google: ''
   font_typekit: ''
   font_fallback: sans_serif
