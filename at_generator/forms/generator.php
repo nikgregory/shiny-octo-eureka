@@ -3,7 +3,7 @@
 /**
  * @file
  * Generator settings.
- * // TODO skins are disable until further testing and dev.
+ * // TODO skins are disabled until further testing and dev.
  */
 
 use Drupal\at_core\Theme\ThemeSettingsInfo;
