@@ -14,9 +14,9 @@
       @include output-rhythm(height, $medium);
       @include output-rhythm(width, $medium);
       @include output-rhythm(padding, 0 3px);
-      display: none;
 
       // Wait for FontAwesome to load.
+      display: none;
       .fa-loaded & {
         display: inline-block;
       }

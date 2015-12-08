@@ -58,7 +58,7 @@
 // Reset important FA classes.
 .fa {
   display: inline-block;
-  font-family: FontAwesome;
+  font-family: FontAwesome, sans-serif;
   font-size: inherit;
   text-rendering: auto;
   @include font-smoothing();

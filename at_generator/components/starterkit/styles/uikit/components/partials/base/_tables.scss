@@ -6,11 +6,11 @@
 table {
   padding: 0;
   border: 0;
-
   border-collapse: collapse;
 
   caption {
-    @include adjust-font-size-to($large);
+    @include adjust-font-size-to($medium * .875); // 14px
+    font-style: italic;
   }
 }
 
@@ -25,12 +25,7 @@ tr {
 caption,
 th,
 td {
-  text-align: left; // LTR
-
-  // RTL
-  [dir*="rtl"] & {
-    text-align: right;
-  }
+  text-align: #{$flow-from};
 }
 
 

@@ -98,11 +98,7 @@ th {
 
 // Display all borders.
 @if $table-cell-borders == true {
-  thead,
-  tbody,
-  tr,
-  th,
-  td {
+  thead, tbody, tr, th, td {
     border-width: $border-width;
 
     // Attempt to support border attributes up to 10px

@@ -19,6 +19,10 @@
 .ta-justify
 .ta-justify * {
   text-align: justify;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 
 /*# sourceMappingURL=shortcodes--alignment.css.map */

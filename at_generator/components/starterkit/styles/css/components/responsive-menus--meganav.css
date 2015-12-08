@@ -46,8 +46,8 @@
   display: inline-block;
 }
 .ms-meganav .rm-block__content {
-  -webkit-transition: all, 0.15s, ease;
-          transition: all, 0.15s, ease;
+  -webkit-transition: all, 0.2s, ease-in-out;
+          transition: all, 0.2s, ease-in-out;
 }
 .ms-meganav .rm-block__content .menu {
   padding: 0;

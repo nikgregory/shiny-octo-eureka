@@ -67,9 +67,8 @@
 
   &:before,
   &:after {
-    display: none;
-
     // Wait for FontAwesome to load.
+    display: none;
     .fa-loaded & {
       display: inline-block;
     }
@@ -94,8 +93,7 @@
     vertical-align: middle;
     @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
 
-    &--active-trail > .menu__link {
-    }
+    &--active-trail > .menu__link {}
 
     // Strip border top from nested items.
     &:first-child .menu__link {

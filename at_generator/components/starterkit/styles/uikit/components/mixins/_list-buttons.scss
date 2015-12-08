@@ -11,14 +11,13 @@
 
     li {
       a {
-        // Copy the markup for this mixin to _theme.color.scss and manually apply the selector.
-        @include button-variant($button-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, true, $button-border-width, $button-border-color, $button-border-style);
 
         @if $button-box-shadow == true {
           box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
         }
 
-        border: $button-border-width $button-border-style $button-border-color;
+        //border: $button-border-width $button-border-style $button-border-color;
         border-radius: $button-border-radius;
 
         text-align: $button-text-align;
@@ -31,7 +30,7 @@
         position: relative;
 
         @include output-rhythm(padding, $xx-small $medium);
-        transition: background-color, .15s, ease-in-out;
+        transition: $global-transition;
       }
     }
   }
@@ -69,28 +68,22 @@
       }
 
       a {
-        @include button-variant($button-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, true, $button-border-width, $button-border-color, $button-border-style);
 
         @if $button-box-shadow == true {
           box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
         }
 
-        border: $button-border-width $button-border-style $button-border-color;
-
         margin-#{$flow-to}: -$tab-border-width;
         @include output-rhythm(padding, $xx-small $medium);
-
         text-align: $button-text-align;
         text-decoration: none;
         font-weight: $font-weight-normal;
         line-height: 1;
-
         width: auto;
         display: block;
         position: relative;
-
-        transition: background-color, .15s, ease-in-out;
-
+        transition: $global-transition;
       }
     }
   }
@@ -101,12 +94,12 @@
 @mixin list-style-button-group-vertical($list_selector) {
 
   #{$list_selector} {
-    @include no-bullets;
     @include clearfix-micro;
     border-bottom: 0;
 
     li {
       float: none;
+      list-style: none;
 
       &:first-child a {
         border-radius: $button-border-radius $button-border-radius 0 0;
@@ -116,27 +109,23 @@
       }
 
       a {
-        @include button-variant($button-color, $button-background-color, $button-border-color);
+        @include button-variant($button-color, $button-background-color, true, $button-border-width, $button-border-color, $button-border-style);
 
         @if $button-box-shadow == true {
           box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
         }
 
-        border: $button-border-width $button-border-style $button-border-color;
-
+        //border: $button-border-width $button-border-style;
         margin-bottom: -$tab-border-width;
         @include output-rhythm(padding, $xx-small $medium);
-
         text-align: $flow-from;
         text-decoration: none;
         font-weight: $font-weight-normal;
         line-height: 1;
-
         width: auto;
         display: block;
         position: relative;
-
-        transition: background-color, .15s, ease-in-out;
+        transition: $global-transition;
       }
     }
   }

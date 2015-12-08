@@ -1,12 +1,10 @@
 @import "partials/base/base";
 
-// TODO remove toolbar if/when it's fixed.
 @import
   "partials/base/webfonts",
   "partials/base/elements",
   "partials/base/tables",
   "partials/base/form",
-  "partials/component/dialog",
   "partials/component/exposed-filters",
   "partials/component/tables",
   "partials/component/tables.sort",

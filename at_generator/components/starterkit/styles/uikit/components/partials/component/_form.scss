@@ -1,5 +1,6 @@
 /**
- * Form Common - common styles for form elements and classes.
+ * Form Component
+ *  - common styles for form elements and classes.
  ============================================================================ */
 
 .form-text {
@@ -47,9 +48,8 @@
     @include output-rhythm(min-height, $xx-large);
 
     min-width: 50%;
-    border-style: $form-border-style;
-    border-width: $form-border-width;
-    border-radius: $border-radius;
+    border: $form-border-width $form-border-style;
+    border-radius: $form-border-radius;
 
     &:focus,
     &:hover {
@@ -88,8 +88,7 @@
 
 // Filters and tips
 .filter-wrapper {
-  border-style: $form-border-style;
-  border-width: $form-border-width;
+  border: $form-border-width $form-border-style;
   border-top: 0;
 }
 
@@ -142,7 +141,7 @@ abbr {
   input.error,
   textarea.error,
   select.error {
-    border: $border-width $border-style;
+    border: $form-border-width $form-border-style;
   }
 }
 
@@ -291,13 +290,11 @@ details {
       content: $form-details-summary-open; // LTR
       float: left;
       margin: -1px 0 0;
-
       @include output-rhythm(height, $medium);
       @include output-rhythm(width, $medium);
 
-      display: none;
-
       // Wait for FontAwesome to load.
+      display: none;
       .fa-loaded & {
         display: block;
       }
@@ -360,10 +357,9 @@ details {
     display: block;
   }
   .form-select {
-    min-width: auto;
+    min-width: unset;
   }
 }
-
 
 
 

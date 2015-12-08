@@ -18,14 +18,11 @@
     a {
       display: block;
       line-height: 1;
-
       color: $tab-color;
       background: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
       border-radius: $tab-border-radius $tab-border-radius 0 0;
-
       @include output-rhythm(padding, $xx-small $medium);
-
       transition: background-color, .15s, ease-in-out;
       box-shadow: rgba(255, 255, 255, 0.5) 0 $tab-border-width 0 inset;
 
@@ -85,16 +82,12 @@
     a {
       display: block;
       line-height: 1;
-
       color: $tab-color;
       background: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
-
       @include output-rhythm(padding, $xx-small $medium);
-
       transition: background-color, .15s, ease-in-out;
       box-shadow: rgba(255, 255, 255, 0.5) 0 $tab-border-width 0 inset;
-
       margin-#{$flow-to}: -$tab-border-width;  // LTR, RTL
 
       &:hover,
@@ -119,6 +112,4 @@
     }
   }
 }
-
-
 

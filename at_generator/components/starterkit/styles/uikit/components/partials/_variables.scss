@@ -14,11 +14,13 @@
 // https://github.com/chriseppstein/compass
 // https://github.com/modularscale/modularscale-sass
 // MS provides the scale, while Vertical Rhythm sets adjusted font sizes and
-// line heights. From these numbers you will get a base line-height of 1.5
+// line heights.
 
 $base-font-size   : 16px;
-$base-line-height : 6px;   // set adjust-leading-to(4); on body!
-$rhythm-unit      : 'rem';
+$base-line-height : 6px;    // adjust-leading-to(4) on body = 24px or 1.5rem
+$round-to-nearest-half-line : true;
+$rem-with-px-fallback       : true;
+$rhythm-unit                : 'rem';
 
 
 // Modular Scale
@@ -69,14 +71,15 @@ $font-weight-light    : 300;
 
 
 // Font Families
-// http://code.stephenmorley.org/html-and-css/the-myth-of-web-safe-fonts/
+// Same stacks as in the theme font settings (web safe stacks).
 // -----------------------------------------------------------------------------
 $wide-sans-serif   : Verdana, Geneva, sans-serif;
-$narrow-sans-serif : Tahoma, Arial, Helvetica, sans-serif;
-$wide-serif        : Georgia, Utopia, Palatino, 'Palatino Linotype', serif;
-$narrow-serif      : 'Times New Roman', Times, serif;
-$monospace         : 'Courier New', Courier, monospace, sans-serif;
-$impact            : 'Impact, "Helvetica Inserat", "Arial Black", sans-serif';
+$medium-sans-serif : "Segoe UI", Segoe, Tahoma, Geneva, sans-serif;
+$narrow-sans-serif : "Helvetica Neue", Helvetica, Arial, sans-serif;
+$wide-serif        : Georgia, Utopia, Palatino, "Palatino Linotype", serif;
+$narrow-serif      : "Times New Roman", Times, serif;
+$monospace         : "Courier New", Courier, monospace;
+$impact            : Impact, "Helvetica Inserat", "Arial Black", sans-serif;
 $sans-serif        : sans-serif;
 $serif             : serif;
 
@@ -103,7 +106,7 @@ $darken-most  : 10%;
 
 // Global Transition
 // -----------------------------------------------------------------------------
-$global-transition: all, .15s, ease;
+$global-transition: all, .2s, ease-in-out;
 
 
 // Color module "shift" base.

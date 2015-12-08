@@ -20,9 +20,9 @@
 
       span {
         vertical-align: middle;
-        display: none;
 
         // Wait for FontAwesome to load.
+        display: none;
         .fa-loaded & {
           @include visually-hidden;
           display: inline-block;

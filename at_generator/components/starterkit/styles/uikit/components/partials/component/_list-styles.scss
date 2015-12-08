@@ -66,11 +66,11 @@ ul {
 // Simple horizontal list, see: mixins/_list.scss.
 .list-multicolumn {
   padding: 0;
-  @include no-bullets;
   @include clearfix-micro;
 
   > li {
     font-weight: $font-weight-bold;
+    list-style: none;
   }
 
   ul, ol {

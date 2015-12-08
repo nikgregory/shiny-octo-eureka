@@ -4,8 +4,8 @@
  * Toggle left or right menus that slide in.
  ============================================================================ */
 .ms-offcanvas > .page {
-  -webkit-transition: all, 0.15s, ease;
-          transition: all, 0.15s, ease;
+  -webkit-transition: all, 0.2s, ease-in-out;
+          transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-toggle {
   float: left;
@@ -26,8 +26,8 @@
   left: 0;
   -webkit-transform: translate(-15em, 0);
           transform: translate(-15em, 0);
-  -webkit-transition: all, 0.15s, ease;
-          transition: all, 0.15s, ease;
+  -webkit-transition: all, 0.2s, ease-in-out;
+          transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-block__content .menu__link {
   padding: 7px 18px;

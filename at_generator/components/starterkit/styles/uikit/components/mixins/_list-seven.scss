@@ -12,7 +12,6 @@
 @mixin list-style-seven-horizontal($list_selector) {
 
   #{$list_selector} {
-    //@include list-horizontal($flow-from, $margin: (t: 0, r: $xx-small, b: 0, l: $xx-small));
     @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0));
     padding: 0;
 
@@ -20,15 +19,11 @@
       display: block;
       line-height: 1;
       color: $list-color;
-
-      //border-bottom: $list-border-width $list-border-style transparent;
       border-bottom: $list-border-width $list-border-style lighten($list-border-color, $lighten-more);
-
+      transition: $global-transition;
 
       @include output-rhythm(padding, $medium $xx-small $x-small);
       @include output-rhythm(margin-#{$flow-to}, $medium);
-
-      transition: background-color, .15s, ease-in-out;
 
       &:hover,
       &:focus {
@@ -57,12 +52,11 @@
 @mixin list-style-seven-vertical($list_selector) {
 
   #{$list_selector} {
-    @include no-bullets;
     @include clearfix-micro;
-
     text-align: $flow-from;
 
     li {
+      list-style: none;
       //border-bottom: $list-border-width $list-border-style $list-border-color;
       //display: block;
 
@@ -77,10 +71,9 @@
       color: $list-color;
       border-bottom: $list-border-width $list-border-style transparent;
       border-left: 3px $list-border-style;
+      transition: $global-transition;
 
       @include output-rhythm(padding, $small $medium $xx-small ($medium - 2)); // LTR
-
-      transition: background-color, .15s, ease-out;
 
       &:hover,
       &:focus {

@@ -8,13 +8,10 @@
   z-index: 499;
   width: 100%;
   min-width: 100%;
-
   background: #d1e8f5;
   background-image: linear-gradient(to bottom, #d1e8f5, #d3e8f4);
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
-
   font-family: $narrow-sans-serif;
-
   @include output-rhythm(padding, $large 0);
 
   form {
@@ -46,7 +43,6 @@
 
     // Wait for FontAwesome to load.
     display: none;
-
     .fa-loaded & {
       display: inline-block;
     }
@@ -66,3 +62,5 @@
     @include output-rhythm(min-width, 160px);
   }
 }
+
+

@@ -193,32 +193,6 @@ html[xmlns] .flexslider .slides {
   cursor: default;
 }
 
-.flex-pauseplay a {
-  display: block;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  bottom: 5px;
-  left: 10px;
-  opacity: 0.8;
-  z-index: 10;
-  overflow: hidden;
-  cursor: pointer;
-  color: #000;
-}
-.flex-pauseplay a:before {
-  font-family: "flexslider-icon";
-  font-size: 20px;
-  display: inline-block;
-  content: '\f004';
-}
-.flex-pauseplay a:hover {
-  opacity: 1;
-}
-.flex-pauseplay a .flex-play:before {
-  content: '\f003';
-}
-
 .flex-control-nav {
   width: 100%;
   position: absolute;

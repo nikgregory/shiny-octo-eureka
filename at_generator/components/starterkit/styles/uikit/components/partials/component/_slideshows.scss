@@ -191,7 +191,6 @@ $direction-nav-size: 30px;
 
       // Wait for FontAwesome to load.
       display: none;
-
       .fa-loaded & {
         display: block;
       }
@@ -262,38 +261,38 @@ $direction-nav-size: 30px;
 }
 
 
-//Pause play stuff, by default AT slideshows don't support adding play buttons,
-//We found almost no one uses them, this should or could be removed?
-.flex-pauseplay {
-  a {
-    display: block;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    bottom: 5px;
-    left: 10px;
-    opacity: 0.8;
-    z-index: 10;
-    overflow: hidden;
-    cursor: pointer;
-    color: #000;
-
-    &:before {
-      font-family: "flexslider-icon";
-      font-size: 20px;
-      display: inline-block;
-      content: '\f004';
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-
-    .flex-play:before {
-      content: '\f003';
-    }
-  }
-}
+// Pause play stuff, by default AT slideshows don't support adding play buttons.
+// We found almost no one uses them, to be removed?
+//.flex-pauseplay {
+//  a {
+//    display: block;
+//    width: 20px;
+//    height: 20px;
+//    position: absolute;
+//    bottom: 5px;
+//    left: 10px;
+//    opacity: 0.8;
+//    z-index: 10;
+//    overflow: hidden;
+//    cursor: pointer;
+//    color: #000;
+//
+//    &:before {
+//      font-family: "flexslider-icon";
+//      font-size: 20px;
+//      display: inline-block;
+//      content: '\f004';
+//    }
+//
+//    &:hover {
+//      opacity: 1;
+//    }
+//
+//    .flex-play:before {
+//      content: '\f003';
+//    }
+//  }
+//}
 
 
 // Controls (Pagers).

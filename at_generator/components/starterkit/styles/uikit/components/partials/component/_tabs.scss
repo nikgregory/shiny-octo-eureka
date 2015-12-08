@@ -13,6 +13,7 @@
   ul {
     @include clearfix-micro;
     @include output-rhythm(margin-bottom, $medium);
+
     padding: 0;
 
     &.tabs--primary {

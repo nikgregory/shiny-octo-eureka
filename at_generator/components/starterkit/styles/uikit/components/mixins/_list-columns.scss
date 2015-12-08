@@ -8,12 +8,12 @@
 @mixin list-multicolumn($list_selector, $col_width: 12em) {
 
   #{$list_selector} {
-    @include no-bullets;
     @include clearfix-micro;
 
     > li {
       width: $col_width;
       float: $flow-from;
+      list-style: none;
     }
 
     ul, ol {

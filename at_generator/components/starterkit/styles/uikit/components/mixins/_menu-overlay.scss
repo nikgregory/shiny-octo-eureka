@@ -24,7 +24,7 @@
 
         // Wait for FontAwesome to load.
         .fa-loaded & {
-          @include visually-hidden;
+          @include visually-hidden; // Hide the text but only when the icon has loaded.
         }
       }
 

@@ -10,8 +10,8 @@
   font-family: inherit;
   font-size: 16px;
   font-size: 1rem;
-  line-height: 24px;
-  line-height: 1.5rem;
+  line-height: 21px;
+  line-height: 1.3125rem;
 }
 .block-user-login-block.is-horizontal .block__title,
 .block-user-login-block.is-horizontal > div,
@@ -29,8 +29,8 @@
 .block-user-login-block.is-horizontal label {
   font-size: 12px;
   font-size: 0.75rem;
-  line-height: 18px;
-  line-height: 1.125rem;
+  line-height: 15px;
+  line-height: 0.9375rem;
   font-weight: 400;
 }
 

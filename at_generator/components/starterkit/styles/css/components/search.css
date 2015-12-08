@@ -15,8 +15,8 @@
 .search-results--empty h3 {
   font-size: 18px;
   font-size: 1.125rem;
-  line-height: 24px;
-  line-height: 1.5rem;
+  line-height: 21px;
+  line-height: 1.3125rem;
 }
 .search-results__item {
   margin-bottom: 18px;
@@ -79,9 +79,7 @@
   text-shadow: none;
   color: transparent;
   cursor: pointer;
-  background-image: url(../images/search-icon.svg);
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url(../images/search-icon.svg) center center no-repeat;
   border-radius: 0 2px 2px 0;
 }
 .search-block-form__form .contextual-render-processed {

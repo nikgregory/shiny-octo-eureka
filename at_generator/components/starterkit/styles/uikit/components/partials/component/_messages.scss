@@ -107,7 +107,6 @@ table tr.error {
 
     // Wait for FontAwesome to load.
     display: none;
-
     .fa-loaded & {
       display: block;
     }

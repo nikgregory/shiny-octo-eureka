@@ -19,7 +19,6 @@
 
       // Wait for FontAwesome to load.
       display: none;
-
       .fa-loaded & {
         display: inline-block;
       }
@@ -60,8 +59,7 @@
 }
 
 
-.filter-help a,
-.more-help-link a {
+.filter-help a, .more-help-link a {
   background: transparent;
   margin-#{$flow-to}: 0;
 
@@ -71,12 +69,10 @@
     float: $flow-to;
     padding: 0 1px;
     text-align: $flow-to;
-
     @include output-rhythm(width, $medium);
 
     // Wait for FontAwesome to load.
     display: none;
-
     .fa-loaded & {
       display: inline-block;
     }

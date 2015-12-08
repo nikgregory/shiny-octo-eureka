@@ -10,7 +10,6 @@
 .book-pager {
   padding: 0;
   overflow: auto;
-
   border-top: $border-width $border-style $border-color;
   border-bottom: $border-width $border-style $border-color;
 
@@ -36,7 +35,6 @@
       
       // Wait for FontAwesome to load.
       display: none;
-      
       .fa-loaded & {
         display: inline-block;
       }
