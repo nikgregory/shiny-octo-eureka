@@ -11,7 +11,8 @@
 function websafe_fonts() {
   $websafe_fonts = array(
     'wide_sans_serif'   => 'Verdana, Geneva, sans-serif',
-    'narrow_sans_serif' => 'Helvetica, Tahoma, Arial, sans-serif',
+    'medium_sans_serif' => '"Segoe UI", Segoe, Tahoma, Geneva, sans-serif',
+    'narrow_sans_serif' => '"Helvetica Neue", Helvetica, Arial, sans-serif',
     'wide_serif'        => 'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
     'narrow_serif'      => '"Times New Roman", Times, serif',
     'impact'            => 'Impact, "Helvetica Inserat", "Arial Black", sans-serif',
