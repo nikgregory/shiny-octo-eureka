@@ -24,20 +24,20 @@
 // Colors - keep here because we do not want these to shift
 // when the color module is enabled.
 .marker {
-  background: $marker-background-color;
+  background-color: $marker-background-color;
   color: $marker-color;
 
   &--info {
     background-color: $marker-info-background-color;
   }
   &--success {
-    background: $marker-success-background-color;
+    background-color: $marker-success-background-color;
   }
   &--warning {
-    background: $marker-warning-background-color;
+    background-color: $marker-warning-background-color;
   }
   &--error {
-    background: $marker-error-background-color;
+    background-color: $marker-error-background-color;
   }
 }
 

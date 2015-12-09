@@ -19,7 +19,7 @@
       display: block;
       line-height: 1;
       color: $tab-color;
-      background: $tab-background-color;
+      background-color: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
       border-radius: $tab-border-radius $tab-border-radius 0 0;
       @include output-rhythm(padding, $xx-small $medium);
@@ -29,7 +29,7 @@
       &:hover,
       &:focus {
         color: $tab-hover-color;
-        background: $tab-background-hover-color;
+        background-color: $tab-background-hover-color;
         text-decoration: none;
       }
 
@@ -83,7 +83,7 @@
       display: block;
       line-height: 1;
       color: $tab-color;
-      background: $tab-background-color;
+      background-color: $tab-background-color;
       border: $tab-border-width $tab-border-style $tab-border-color;
       @include output-rhythm(padding, $xx-small $medium);
       transition: background-color, .15s, ease-in-out;
@@ -93,7 +93,7 @@
       &:hover,
       &:focus {
         color: $tab-hover-color;
-        background: $tab-background-hover-color;
+        background-color: $tab-background-hover-color;
         text-decoration: none;
       }
 

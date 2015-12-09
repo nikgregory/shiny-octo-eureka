@@ -74,11 +74,11 @@ hr {
  * Customize the background color to match your design.
  */
 ::-moz-selection {
-  background: $selection-color;
+  background-color: $selection-color;
 }
 
 ::selection {
-  background: $selection-color;
+  background-color: $selection-color;
 }
 
 
@@ -363,7 +363,7 @@ hr {
 // Provide a consistant style for visible click handles.
 .rm-toggle  {
   span {
-    background: transparent;
+    background-color: transparent;
   }
 }
 
@@ -376,13 +376,13 @@ hr {
     &__item {
       &--active-trail > a {
         color: $resp-menu-active-color;
-        background: $resp-menu-active-background-color;
+        background-color: $resp-menu-active-background-color;
       }
     }
 
     &__link {
       color: $resp-menu-color;
-      background: $resp-menu-background-color;
+      background-color: $resp-menu-background-color;
 
       &:after,
       &:before {
@@ -679,7 +679,7 @@ input,
 select,
 textarea {
   &[readonly] {
-    background: $text-background-color;
+    background-color: $text-background-color;
     color: $text-color;
   }
 }
@@ -693,7 +693,7 @@ select[disabled] option,
 select[disabled] optgroup,
 textarea[disabled],
 a.button_disabled {
-  background: $text-background-color;
+  background-color: $text-background-color;
   color: $text-color;
 }
 
@@ -786,9 +786,11 @@ form .marker {
 button,
 .button {
   color: $button-color;
-  background: $button-background-color;
+  background-color: $button-background-color;
   border-color: $button-border-color;
   opacity: 0.9;
+
+
 
   @if $button-box-shadow == true {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
@@ -803,7 +805,7 @@ button,
 
   &:visited {
     color: $button-color;
-    background: $button-background-color;
+    background-color: $button-background-color;
   }
 
   &[disabled] {
@@ -878,7 +880,7 @@ button.link-edit-summary {
     border-top-color: $button-border-color;
 
     .button {
-      background: $regions-background-color;
+      background-color: $regions-background-color;
       color: $button-border-color;
     }
   }
@@ -886,7 +888,7 @@ button.link-edit-summary {
   .dropbutton-toggle {
     button {
       &:hover {
-        background: transparent;
+        background-color: transparent;
       }
     }
   }
@@ -961,7 +963,7 @@ button.link-edit-summary {
 
         &.active {
           color: $tab-active-color;
-          background: none;
+          background-color: none;
 
           // mobile and wide breakpoints have different style tabs, mobile
           // needs the border to show, while the wide "tab style" needs to hide
@@ -976,7 +978,7 @@ button.link-edit-summary {
           &:hover,
           &:focus {
             color: $tab-hover-color;
-            background: none;
+            background-color: none;
           }
         }
       }
@@ -1041,13 +1043,13 @@ button.link-edit-summary {
 [class*="tags"].field-type-entity-reference {
   @if ($field-taxonomy-item-as-labels == true) {
     .field__item-wrapper {
-      background: lighten($text-background-color, $lighten-more);
+      background-color: lighten($text-background-color, $lighten-more);
       color: $text-color;
       border-color: $border-color;
 
       &:hover,
       &:focus {
-        background: $text-background-color;
+        background-color: $text-background-color;
       }
 
       a {

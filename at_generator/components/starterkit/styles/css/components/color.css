@@ -49,11 +49,11 @@ hr {
  * Customize the background color to match your design.
  */
 ::-moz-selection {
-  background: #b3d4fc;
+  background-color: #b3d4fc;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background-color: #b3d4fc;
 }
 
 /**
@@ -207,16 +207,16 @@ hr {
 }
 
 .rm-toggle span {
-  background: transparent;
+  background-color: transparent;
 }
 
 .rm-block__content .menu__item--active-trail > a {
   color: inherit;
-  background: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 .rm-block__content .menu__link {
   color: inherit;
-  background: inherit;
+  background-color: inherit;
 }
 .rm-block__content .menu__link:after, .rm-block__content .menu__link:before {
   color: inherit !important;
@@ -439,7 +439,7 @@ details {
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  background: #ededed;
+  background-color: #ededed;
   color: #363636;
 }
 
@@ -450,7 +450,7 @@ select[disabled] option,
 select[disabled] optgroup,
 textarea[disabled],
 a.button_disabled {
-  background: #ededed;
+  background-color: #ededed;
   color: #363636;
 }
 
@@ -523,7 +523,7 @@ form .marker {
 button,
 .button {
   color: #ffffff;
-  background: #0066cc;
+  background-color: #0066cc;
   border-color: #0066cc;
   opacity: 0.9;
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
@@ -538,7 +538,7 @@ button:hover, button:focus,
 button:visited,
 .button:visited {
   color: #ffffff;
-  background: #0066cc;
+  background-color: #0066cc;
 }
 button[disabled]:hover,
 .button[disabled]:hover {
@@ -626,11 +626,11 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
   border-top-color: #0066cc;
 }
 .dropbutton .secondary-action .button {
-  background: #f7f7f7;
+  background-color: #f7f7f7;
   color: #0066cc;
 }
 .dropbutton .dropbutton-toggle button:hover {
-  background: transparent;
+  background-color: transparent;
 }
 
 .dropbutton-multiple .dropbutton {
@@ -682,7 +682,7 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 .pr-temporary-tabs ul.tabs--primary li a.active {
   color: #363636;
-  background: none;
+  background-color: none;
 }
 @media all and (min-width: 60.063em) {
   .pr-temporary-tabs ul.tabs--primary li a.active {
@@ -696,7 +696,7 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 .pr-temporary-tabs ul.tabs--primary li a.active:hover, .pr-temporary-tabs ul.tabs--primary li a.active:focus {
   color: #363636;
-  background: none;
+  background-color: none;
 }
 .pr-temporary-tabs ul.tabs--secondary li a {
   color: #363636;
@@ -833,5 +833,4 @@ body:before {
 .pane-social-media-link-widget .platform__link:focus {
   opacity: 1;
 }
-
 /*# sourceMappingURL=color.css.map */

@@ -70,7 +70,7 @@ html[xmlns] .flexslider .slides {
  * DEFAULT THEME
  ============================================================================ */
 .flexslider {
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 0;
 }
 
@@ -93,7 +93,7 @@ html[xmlns] .flexslider .slides {
   margin: 0;
   padding: 16px 16px 29px;
   padding: 1rem 1rem 1.8125rem;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
   -webkit-backface-visibility: hidden;
@@ -210,18 +210,18 @@ html[xmlns] .flexslider .slides {
   width: 11px;
   height: 11px;
   display: block;
-  background: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
   text-indent: -9999px;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 }
 .flex-control-paging li a:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .flex-control-paging li a.flex-active {
-  background: #000;
-  background: rgba(255, 255, 255, 0.9);
+  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.9);
   cursor: default;
 }
 
@@ -250,5 +250,4 @@ html[xmlns] .flexslider .slides {
   opacity: 1;
   cursor: default;
 }
-
 /*# sourceMappingURL=slideshows.css.map */

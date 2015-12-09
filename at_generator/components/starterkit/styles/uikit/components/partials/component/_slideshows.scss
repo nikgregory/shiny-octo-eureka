@@ -91,7 +91,7 @@
  * DEFAULT THEME
  ============================================================================ */
 .flexslider {
-  background: #ffffff;  // Color module ?
+  background-color: #ffffff;  // Color module ?
   border-radius: 0;
 
   // Add space for the pager. Set nothing to have the pager over the slider.
@@ -129,7 +129,7 @@
   @include output-rhythm(padding, $medium $medium $xx-large);
 
   // Color module ?
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 
@@ -317,19 +317,19 @@ $direction-nav-size: 30px;
     width: 11px;
     height: 11px;
     display: block;
-    background: rgba(255, 255, 255, 0.3);  // Color module ?
+    background-color: rgba(255, 255, 255, 0.3);  // Color module ?
     cursor: pointer;
     text-indent: -9999px;
     box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);  // Color module ?
     border-radius: 20px;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.6);  // Color module ?
+      background-color: rgba(255, 255, 255, 0.6);  // Color module ?
     }
 
     &.flex-active {
-      background: #000;  // Color module ?
-      background: rgba(255, 255, 255, 0.9);  // Color module ?
+      background-color: #000;  // Color module ?
+      background-color: rgba(255, 255, 255, 0.9);  // Color module ?
       cursor: default;
     }
   }

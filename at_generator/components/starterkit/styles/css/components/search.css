@@ -79,7 +79,9 @@
   text-shadow: none;
   color: transparent;
   cursor: pointer;
-  background: url(../images/search-icon.svg) center center no-repeat;
+  background-image: url(../images/search-icon.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
   border-radius: 0 2px 2px 0;
 }
 .search-block-form__form .contextual-render-processed {
@@ -163,5 +165,4 @@
 .fa-loaded .search-help-link:before {
   display: inline-block;
 }
-
 /*# sourceMappingURL=search.css.map */

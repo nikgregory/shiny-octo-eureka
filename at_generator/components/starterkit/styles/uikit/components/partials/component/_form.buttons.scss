@@ -18,7 +18,8 @@ button,
   position: relative;
   box-sizing: border-box;
   border-radius: $button-border-radius;
-  border: $button-border-width $button-border-style;
+  border-width: $button-border-width;
+  border-style: $button-border-style;
   transition: background-color, .15s, ease-in-out;
   cursor: pointer;
   text-decoration: none;
@@ -234,7 +235,7 @@ button {
   &.link:hover,
   &.link:focus {
     color: $link-color;
-    background: transparent;
+    background-color: transparent;
     border: 0;
     box-shadow: none;
     opacity: 1;

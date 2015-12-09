@@ -268,7 +268,7 @@ form {
 // Autocomplete.
 .ui-autocomplete li.ui-menu-item a.ui-state-focus,
 .autocomplete li.ui-menu-item a.ui-state-hover {
-  background: #0072b9; // TODO check background color.
+  background-color: #0072b9; // TODO check background color.
   color: #fff;
   margin: 0;
 }
@@ -319,7 +319,7 @@ details {
 
 // Vertical tabs
 .vertical-tabs {
-  background: #ffffff;  // Color module?
+  background-color: #ffffff;  // Color module?
 }
 
 

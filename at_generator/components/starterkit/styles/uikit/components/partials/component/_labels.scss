@@ -50,7 +50,6 @@
   display: block;
   width: auto;
   height: auto;
-  background: transparent;
   margin: 0;
 
   [dir="rtl"] & {
@@ -60,7 +59,7 @@
 
 
 .filter-help a, .more-help-link a {
-  background: transparent;
+  background-color: transparent;
   margin-#{$flow-to}: 0;
 
   &:after {
@@ -69,6 +68,8 @@
     float: $flow-to;
     padding: 0 1px;
     text-align: $flow-to;
+    background-color: transparent;
+    background-image: none;
     @include output-rhythm(width, $medium);
 
     // Wait for FontAwesome to load.
@@ -76,10 +77,6 @@
     .fa-loaded & {
       display: inline-block;
     }
-  }
-
-  [dir="rtl"] & {
-    background: transparent;
   }
 }
 

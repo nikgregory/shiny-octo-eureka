@@ -45,7 +45,9 @@
     text-shadow: none;
     color: transparent;
     cursor: pointer;
-    background: url(../images/search-icon.svg) center center no-repeat;
+    background-image: url(../images/search-icon.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
     border-radius: 0 $border-radius $border-radius 0; // LTR
   }
 

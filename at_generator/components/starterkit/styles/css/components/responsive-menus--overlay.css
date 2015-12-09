@@ -11,7 +11,7 @@
   padding: 0;
   z-index: 1000;
   opacity: 0.5;
-  background: rgba(0, 0, 0, 0.875);
+  background-color: rgba(0, 0, 0, 0.875);
   bottom: 16px;
   bottom: 1rem;
   right: 16px;
@@ -50,7 +50,7 @@
   opacity: 1;
   display: block;
   position: absolute;
-  background: rgba(0, 0, 0, 0.875);
+  background-color: rgba(0, 0, 0, 0.875);
   box-shadow: 0 6px 6px 6px rgba(0, 0, 0, 0.7);
   z-index: 990;
   top: 16px;
@@ -63,20 +63,19 @@
   left: 0.6875rem;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu {
-  background: transparent;
+  background-color: transparent;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu__link:hover, .ms-overlay.rm-is-open .rm-block__content .menu__link:focus, .ms-overlay.rm-is-open .rm-block__content .menu__link.active {
-  background: transparent;
+  background-color: transparent;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"] {
   background-color: transparent;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"]:hover, .ms-overlay.rm-is-open .rm-block__content .menu__link.active[href="/"]:focus {
-  background: transparent;
+  background-color: transparent;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu__link:after {
   content: none;
   display: none;
 }
-
 /*# sourceMappingURL=responsive-menus--overlay.css.map */
