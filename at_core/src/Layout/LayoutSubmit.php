@@ -119,13 +119,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
     }
 
-    // Add the time so we can tract it.
-    $time = '/* Generated: ' . date(DATE_RFC822) . ' */';
-
     $saved_css = array();
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
-        $file_content = $time ."\n". $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
+        $message = '/* Layout CSS for: ' . str_replace('_', '-', $suggestion) . '.html.twig, generated: ' . date(DATE_RFC822) . ' */';
+        $file_content = $message ."\n". $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
         $file_name = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
@@ -349,6 +347,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       // Build array of files to be saved.
       $templates[$suggestion_key]['markup'] = $template_markup[$suggestion_key];
       $templates[$suggestion_key]['template_path'] = $template_path;
+      $templates[$suggestion_key]['template_name'] = $template_file;
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
@@ -372,9 +371,14 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     $saved_templates = array();
     foreach ($templates as $suggestion => $template_values) {
+       if (!file_exists($templates[$suggestion]['template_path'])) {
+         $new_template = $templates[$suggestion]['template_name'];
+         drupal_set_message(t('<p>It looks like you generated a new template: @new_template</p><p>Save the layout settings again so they will take effect.</p>', array('@new_template' => $new_template)), 'warning');
+       }
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
         $saved_templates[] = $templates[$suggestion]['template_path'];
+
       }
     }
 
