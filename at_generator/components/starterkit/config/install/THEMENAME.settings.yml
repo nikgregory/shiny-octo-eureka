@@ -82,20 +82,30 @@ settings:
   comments_hide_title: 0
   views_hide_feedicon: 0
   attribution_toggle: 1
-  breakpoint_group_layout: responsive_image
-  page_viewportsizing_leaderboard: ''
-  page_viewportsizing_header: ''
-  page_viewportsizing_navbar: ''
-  page_viewportsizing_highlighted: ''
-  page_viewportsizing_features: ''
-  page_viewportsizing_content_prefix: ''
-  page_viewportsizing_main: ''
-  page_viewportsizing_content_suffix: ''
-  page_viewportsizing_subfeatures: ''
-  page_viewportsizing_footer: ''
+  breakpoint_group_layout: at_core.simple
+  page_tabletisolate_leaderboard: ''
+  page_tabletisolate_header: twocol-6-6
+  page_tabletisolate_navbar: ''
+  page_tabletisolate_highlighted: ''
+  page_tabletisolate_features: threecol-split-row-12--6-6
+  page_tabletisolate_content_prefix: ''
+  page_tabletisolate_main: threecol-split-row-12--6-6
+  page_tabletisolate_content_suffix: ''
+  page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
+  page_tabletisolate_footer: ''
+  page_wide_leaderboard: ''
+  page_wide_header: twocol-6-6
+  page_wide_navbar: ''
+  page_wide_highlighted: ''
+  page_wide_features: threecol-source-ordered-2-8-2
+  page_wide_content_prefix: ''
+  page_wide_main: threecol-source-ordered-3-6-3
+  page_wide_content_suffix: ''
+  page_wide_subfeatures: fourcol-3-3-3-3
+  page_wide_footer: ''
   font_use_google_fonts: false
   font_use_typekit: false
-  font_websafe: "Verdana, Geneva, sans-serif;\r\n\"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n\"Segoe UI\", Segoe, Tahoma, Geneva, sans-serif;\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif;\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif;\r\n\"Times New Roman\", Times, serif;\r\n\"Courier New\", Courier, monospace;\r\nsans-serif;\r\nserif;"
+  font_websafe: "Verdana, Geneva, sans-serif;\r\n\"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n\"Segoe UI\", Segoe, Geneva, Tahoma, sans-serif;\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif;\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif;\r\n\"Times New Roman\", Times, serif;\r\n\"Courier New\", Courier, monospace;\r\nsans-serif;\r\nserif;"
   font_google: ''
   font_typekit: ''
   font_fallback: sans_serif
