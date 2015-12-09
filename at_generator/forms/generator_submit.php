@@ -134,6 +134,13 @@ function at_generator_submit_generator(&$form, &$form_state) {
         foreach ($uikit_tools as $tool) {
           unlink("$target/$tool");
         }
+        // Remove all SASS map files and references.
+        array_map('unlink', glob("$target/styles/css/components/*.map"));
+        $component_css_files = $directoryOperations->directoryScan("$target/styles/css/components");
+        foreach ($component_css_files as $component_file_key => $component_file) {
+          $map_string = '/*# sourceMappingURL=' . str_replace('.css', '.css.map', $component_file) . ' */';
+          $fileOperations->fileStrReplace("$target/styles/css/components/$component_file", $map_string, '');
+        }
       }
 
       // Color.
