@@ -39,8 +39,8 @@ function at_generator_submit_generator(&$form, &$form_state) {
     $uikit               = $values['generate']['options']['generate_uikit'];
     $color               = $values['generate']['options']['generate_color'];
     $theme_settings_file = $values['generate']['options']['generate_themesettingsfile'];
-    $description         = preg_replace('/[^A-Za-z0-9. ]/', '', $values['generate']['options']['generate_description']);
-    $version             = $values['generate']['options']['generate_version'];
+    $description         = preg_replace('/[^A-Za-z0-9. ]/', '', Html::escape($values['generate']['options']['generate_description']));
+    $version             = Html::escape($values['generate']['options']['generate_version']);
 
     // Initialize variables.
     $source        = '';
@@ -154,6 +154,13 @@ function at_generator_submit_generator(&$form, &$form_state) {
         $directoryOperations->directoryRecursiveCopy("$path/templates", "$target/templates");
       }
     }
+    if ($subtheme_type === 'clone') {
+      $cloned_templates = $directoryOperations->directoryScan("$target/templates/generated");
+      foreach ($cloned_templates as $cloned_template) {
+        $fileOperations->fileStrReplace("$target/templates/generated/$cloned_template", $source_theme, $machine_name);
+      }
+    }
+
     //if ($subtheme_type === 'skin') {
     //  $directoryOperations->directoryRemove("$target/templates");
     //}
@@ -220,6 +227,7 @@ function at_generator_submit_generator(&$form, &$form_state) {
         $replace_generated_files = "themes/$machine_name/styles/css/generated";
         $new_config = str_replace($find_generated_files, $replace_generated_files, $new_config);
         $fileOperations->fileReplace($new_config, $old_config);
+        $fileOperations->fileStrReplace("$target/config/install/$new_config_file", $source_theme, $machine_name);
       }
     }
 
@@ -258,8 +266,7 @@ function at_generator_submit_generator(&$form, &$form_state) {
     $theme_info_data['alt text'] = "Screenshot for $friendly_name";
 
     // Version.
-    $version = $version ?: '8.0.x';
-    $theme_info_data['version'] = $version;
+    $theme_info_data['version'] = $version ? str_replace(' ', '-', trim($version)) : '8.0.x';
 
     // Regions.
     foreach($theme_info_data['regions'] as $region_key => $region_name) {
