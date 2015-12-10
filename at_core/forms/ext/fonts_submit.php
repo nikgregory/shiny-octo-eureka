@@ -16,7 +16,10 @@ function at_core_submit_fonts($values, $generated_files_path) {
   $font_elements = font_elements();
 
   // Fallback family
-  $fallback_font_family = $values['settings_font_fallback'] ? str_replace('_', '-', $values['settings_font_fallback']) : 'sans-serif';
+  $fallback_font_family = 'sans-serif';
+  if (isset($values['settings_font_fallback'])) {
+    $fallback_font_family = str_replace('_', '-', $values['settings_font_fallback']);
+  }
 
   // Initialize some variables.
   $fonts = array();
