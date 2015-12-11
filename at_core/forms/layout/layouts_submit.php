@@ -5,12 +5,16 @@
  * Submit layouts.
  */
 
+use Drupal\Core\PhpStorage\PhpStorageFactory;
+use Drupal\Core\Url;
 use Drupal\Component\Utility\Unicode;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutSubmit;
 
 /**
- * Form submit handler for the theme settings form.
+ * Form submit handler for the Layout settings.
+ * @param $form
+ * @param $form_state
  */
 function at_core_submit_layouts(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
@@ -39,9 +43,8 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
 
     // Delete suggestion files
-    $templates_directory = drupal_get_path('theme', $theme) . '/templates/page';
+    $templates_directory = drupal_get_path('theme', $theme) . '/templates/generated';
     $css_directory = $values['settings_generated_files_path'];
-
     foreach ($values as $values_key => $values_value) {
       if (substr($values_key, 0, 18) === 'delete_suggestion_') {
         if ($values_value === 1) {
@@ -49,28 +52,48 @@ function at_core_submit_layouts(&$form, &$form_state) {
         }
       }
     }
-
     if (isset($delete_suggestion_keys)) {
       foreach ($delete_suggestion_keys as $suggestion_to_remove) {
         $formatted_suggestion = str_replace('_', '-', $suggestion_to_remove);
         $template_file_path = $templates_directory . '/' . $formatted_suggestion . '.html.twig';
         $css_file_path = $css_directory . '/' . $theme . '--layout__' . $formatted_suggestion . '.css';
-        if (file_exists($template_file_path)) {unlink($template_file_path);}
-        if (file_exists($css_file_path)) {unlink($css_file_path);}
+        $files_to_delete['twig'] = $template_file_path;
+        $files_to_delete['css'] = $css_file_path;
+        if (file_exists($template_file_path)) {
+          unlink($template_file_path);
+        }
+        if (file_exists($css_file_path)) {
+          unlink($css_file_path);
+        }
       }
     }
+  }
+  if (isset($files_to_delete)) {
+    $deleted_files_message_list = array(
+      '#theme' => 'item_list',
+      '#items' => $files_to_delete,
+    );
+    $deleted_files_message = \Drupal::service('renderer')->render($deleted_files_message_list);
+    drupal_set_message(t('The following <b>files</b> were removed: @removed_files', array('@removed_files' => $deleted_files_message)), 'status');
   }
 
   // Don't let this timeout easily.
   set_time_limit(60);
+
+  // Flush caches. We try to avoid drupal_flush_all_caches() because it' slow.
+  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
+  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
+  _drupal_flush_css_js();
+  PhpStorageFactory::get('twig')->deleteAll();
+  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
+  $theme_handler = \Drupal::service('theme_handler');
+  $theme_handler->refreshInfo();
 
   // Manage settings and configuration.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsLayoutConvertToConfig($values, $config);
 
-  // Flush all caches. This is the only really reliable way I have found to
-  // ensure new templates and layouts work correctly.
-  drupal_flush_all_caches();
-  drupal_set_message(t('Cache automatically cleared.'), 'status');
+  $performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
+  drupal_set_message(t('Layout settings saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }

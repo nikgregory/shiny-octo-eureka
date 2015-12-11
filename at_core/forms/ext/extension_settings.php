@@ -8,7 +8,6 @@
 // Submit handlers for the advanced settings.
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_validate.php');
 include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_settings_submit.php');
-include_once(drupal_get_path('theme', 'at_core') . '/forms/ext/extension_clearcache.php');
 
 $settings_extensions_form_open = theme_get_setting('settings.extensions_form_open', $theme);
 
@@ -217,12 +216,4 @@ $form['extensions']['actions']['submit'] = array(
   '#validate'=> array('at_core_validate_extension_settings'),
   '#submit'=> array('at_core_submit_extension_settings'),
   '#attributes' => array('class' => array('button--primary')),
-  '#weight' => -10000,
-);
-
-$form['extensions']['actions']['submit_clearcache'] = array(
-  '#type' => 'submit',
-  '#value' => t('Clear cache'),
-  '#submit'=> array('at_core_submit_extension_clearcache'),
-  '#weight' => -10000,
 );

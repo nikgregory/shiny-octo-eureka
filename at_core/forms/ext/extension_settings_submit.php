@@ -5,9 +5,12 @@
  * Process extension settings submits.
  */
 
+use Drupal\Core\PhpStorage\PhpStorageFactory;
+use Drupal\Core\Url;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
 /**
+ * Form submit handler for the Extension settings.
  * @param $form
  * @param $form_state
  */
@@ -68,14 +71,21 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   // Don't let this timeout easily.
   set_time_limit(60);
 
+  // Flush caches. We try to avoid drupal_flush_all_caches() because it' slow.
+  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
+  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
+  _drupal_flush_css_js();
+  PhpStorageFactory::get('twig')->deleteAll();
+  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
+  $theme_handler = \Drupal::service('theme_handler');
+  $theme_handler->refreshInfo();
+
   // Manage settings and configuration.
   // Must get mutable config otherwise bad things happen.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsExtensionsConvertToConfig($values, $config);
 
-  // Flush all caches, this is the only 100% reliable way to make sure all settings are applied.
-  drupal_flush_all_caches();
-  drupal_set_message(t('Extensions configuration saved. Cache cleared.'), 'status');
+  $performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
+  drupal_set_message(t('Extensions configuration saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }
-

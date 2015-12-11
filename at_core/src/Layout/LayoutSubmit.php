@@ -373,7 +373,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
     foreach ($templates as $suggestion => $template_values) {
        if (!file_exists($templates[$suggestion]['template_path'])) {
          $new_template = $templates[$suggestion]['template_name'];
-         drupal_set_message(t('<p>It looks like you generated a new template: @new_template</p><p>Save the layout settings again so they will take effect.</p>', array('@new_template' => $new_template)), 'warning');
+         $new_template_message = t('It looks like you generated a new template: <b>@new_template</b>. Save the layout settings again so they will take effect.', array('@new_template' => $new_template));
        }
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
@@ -387,8 +387,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#theme' => 'item_list',
         '#items' => $saved_templates,
       );
-      $saved_templates_message = drupal_render($saved_templates_message_list);
+      $saved_templates_message = \Drupal::service('renderer')->render($saved_templates_message_list);
       drupal_set_message(t('The following <b>templates</b> were generated: @saved_templates', array('@saved_templates' => $saved_templates_message)), 'status');
+    }
+    if (isset($new_template_message)) {
+      drupal_set_message($new_template_message, 'status');
     }
   }
 }

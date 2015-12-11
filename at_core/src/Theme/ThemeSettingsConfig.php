@@ -21,12 +21,10 @@ class ThemeSettingsConfig {
     foreach ($values as $key => $value) {
       if (substr($key, 0, 9) == 'settings_') {
         $config_key = Unicode::substr($key, 9);
-        $config_save = $config->set('settings.' . $config_key, $value);
+        $config->set('settings.' . $config_key, $value);
       }
     }
-    if (is_object($config_save)) {
-      $config_save->save();
-    }
+    $config->save();
   }
 
   /**
@@ -38,7 +36,7 @@ class ThemeSettingsConfig {
     foreach ($values as $key => $value) {
       if (substr($key, 0, 9) == 'settings_') {
         $config_key = Unicode::substr($key, 9);
-        $config_save = $config->set('settings.' . $config_key, $value);
+        $config->set('settings.' . $config_key, $value);
       }
       // Delete suggestions config settings. Do not remove all the suggestions
       // setting because later on if the suggestion is recreated there will be
@@ -47,15 +45,10 @@ class ThemeSettingsConfig {
       if (substr($key, 0, 18) == 'delete_suggestion_') {
         $delete_suggestion_key = 'settings.suggestion_' . Unicode::substr($key, 18);
         if ($value == 1) {
-          $config_delete = $config->clear($delete_suggestion_key, $value);
+          $config->clear($delete_suggestion_key, $value);
         }
       }
     }
-    if (is_object($config_save)) {
-      $config_save->save();
-    }
-    if (is_object($config_delete)) {
-      $config_delete->save();
-    }
+    $config->save();
   }
 }

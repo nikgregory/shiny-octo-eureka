@@ -335,42 +335,6 @@ $form['layouts']['adv_options']['backups']['settings_enable_backups'] = array(
   '#description' => t('Warning: unchecking this option will disable backups.'),
 );
 
-/*
-// Layout Selectors.
-$form['layouts']['adv_options']['selectors'] = array(
-  '#type' => 'details',
-  '#title' => t('Layout Selectors'),
-  '#description' => t('This shows the unique row selectors for each row in the Plugin template. See the Help tab section "Building and Modifying Layouts" for more information on CSS selectors and building layouts.'),
-  '#collapsed' => TRUE,
-  '#collapsible' => TRUE,
-);
-
-// Loop selectors and implode values.
-foreach ($selectors as $layout_name => $css_selectors) {
-  foreach($css_selectors as $thiskey => $thesevalues) {
-    foreach ($thesevalues as $key => $values) {
-      $these_selectors[$layout_name][$key] = implode("\n", $values);
-    }
-  }
-}
-
-// Print selectors foreach layout in a details element.
-foreach ($these_selectors as $plugin_name => $selector_strings) {
-  $clean_plugin_name = str_replace('_', ' ', $plugin_name);
-  $form['layouts']['adv_options']['selectors'][$plugin_name] = array(
-    '#type' => 'details',
-    '#title' => t($clean_plugin_name),
-    '#collapsed' => TRUE,
-    '#collapsible' => TRUE,
-  );
-  $css = implode("\n\n", $selector_strings);
-  $form['layouts']['adv_options']['selectors'][$plugin_name]['css'] = array(
-    '#type' => 'container',
-    '#markup' => '<pre>' . $css . '</pre>' . "\n",
-  );
-}
-*/
-
 // Submit button for layouts.
 $form['layouts']['actions'] = array(
   '#type' => 'actions',
