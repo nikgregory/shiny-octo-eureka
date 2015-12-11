@@ -557,14 +557,14 @@ function at_core_preprocess_page(&$variables) {
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Set attribution.
-  $attribution_url = Url::fromUri('http://adaptivethemes.com');
-  $attribution_link_options = array(
-    'attributes' => array(
-      'class' => array('attribution__link'),
-      'target' => '_blank',
-    ),
+  $attribution_url = Url::fromUri('http://adaptivethemes.com')->setOptions(
+    array(
+      'attributes' => array(
+        'class' => array('attribution__link'),
+        'target' => '_blank',
+      ),
+    )
   );
-  $attribution_url->setOptions($attribution_link_options);
   $variables['attribution'] = array(
     '#type' => 'markup',
     '#prefix' => '<div class="l-pr attribution"><div class="l-rw">',
