@@ -22,13 +22,13 @@
   }
 
   // Set the narrow style.
-  .js & .is-vertical {
+  .is-vertical {
     @include list-style-button-group-vertical('ul.tabs--primary');
     @include list-style-seven-vertical('ul.tabs--secondary');
   }
 
   // Set the wide style.
-  .js & .is-horizontal {
+  .is-horizontal {
     @include list-style-tab-group('ul.tabs--primary');
     @include list-style-seven-horizontal('ul.tabs--secondary');
   }

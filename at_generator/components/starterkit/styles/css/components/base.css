@@ -1153,12 +1153,12 @@ li[class*="action--"] {
 }
 
 /* Drop buttons */
-.js .dropbutton-widget {
+.dropbutton-widget {
   border: 1px solid;
   border-radius: 2px;
 }
 
-.js .dropbutton-wrapper {
+.dropbutton-wrapper {
   display: block;
   position: relative;
   min-height: 32px;
@@ -2017,27 +2017,27 @@ table tr.error {
 .tabs ul.tabs--primary {
   margin-bottom: 0;
 }
-.js .tabs .is-vertical ul.tabs--primary {
+.tabs .is-vertical ul.tabs--primary {
   border-bottom: 0;
 }
-.js .tabs .is-vertical ul.tabs--primary:before, .js .tabs .is-vertical ul.tabs--primary:after {
+.tabs .is-vertical ul.tabs--primary:before, .tabs .is-vertical ul.tabs--primary:after {
   content: " ";
   display: table;
 }
-.js .tabs .is-vertical ul.tabs--primary:after {
+.tabs .is-vertical ul.tabs--primary:after {
   clear: both;
 }
-.js .tabs .is-vertical ul.tabs--primary li {
+.tabs .is-vertical ul.tabs--primary li {
   float: none;
   list-style: none;
 }
-.js .tabs .is-vertical ul.tabs--primary li:first-child a {
+.tabs .is-vertical ul.tabs--primary li:first-child a {
   border-radius: 2px 2px 0 0;
 }
-.js .tabs .is-vertical ul.tabs--primary li:last-child a {
+.tabs .is-vertical ul.tabs--primary li:last-child a {
   border-radius: 0 0 2px 2px;
 }
-.js .tabs .is-vertical ul.tabs--primary li a {
+.tabs .is-vertical ul.tabs--primary li a {
   color: #ffffff;
   background-color: #0066cc;
   opacity: 0.9;
@@ -2056,31 +2056,31 @@ table tr.error {
   -webkit-transition: all, 0.2s, ease-in-out;
           transition: all, 0.2s, ease-in-out;
 }
-.js .tabs .is-vertical ul.tabs--primary li a:link, .js .tabs .is-vertical ul.tabs--primary li a:visited {
+.tabs .is-vertical ul.tabs--primary li a:link, .tabs .is-vertical ul.tabs--primary li a:visited {
   color: #ffffff;
   background-color: #0066cc;
   border-color: #0066cc;
 }
-.js .tabs .is-vertical ul.tabs--primary li a:hover, .js .tabs .is-vertical ul.tabs--primary li a:focus, .js .tabs .is-vertical ul.tabs--primary li a:active, .js .tabs .is-vertical ul.tabs--primary li a.active {
+.tabs .is-vertical ul.tabs--primary li a:hover, .tabs .is-vertical ul.tabs--primary li a:focus, .tabs .is-vertical ul.tabs--primary li a:active, .tabs .is-vertical ul.tabs--primary li a.active {
   color: #ffffff;
   background-color: #0066cc;
   border-color: #0066cc;
   opacity: 1;
 }
-.js .tabs .is-vertical ul.tabs--secondary {
+.tabs .is-vertical ul.tabs--secondary {
   text-align: left;
 }
-.js .tabs .is-vertical ul.tabs--secondary:before, .js .tabs .is-vertical ul.tabs--secondary:after {
+.tabs .is-vertical ul.tabs--secondary:before, .tabs .is-vertical ul.tabs--secondary:after {
   content: " ";
   display: table;
 }
-.js .tabs .is-vertical ul.tabs--secondary:after {
+.tabs .is-vertical ul.tabs--secondary:after {
   clear: both;
 }
-.js .tabs .is-vertical ul.tabs--secondary li {
+.tabs .is-vertical ul.tabs--secondary li {
   list-style: none;
 }
-.js .tabs .is-vertical ul.tabs--secondary a {
+.tabs .is-vertical ul.tabs--secondary a {
   display: inline-block;
   line-height: 1;
   color: #363636;
@@ -2091,43 +2091,43 @@ table tr.error {
   padding: 11px 16px 7px 14px;
   padding: 0.6875rem 1rem 0.4375rem 0.875rem;
 }
-.js .tabs .is-vertical ul.tabs--secondary a:hover, .js .tabs .is-vertical ul.tabs--secondary a:focus {
+.tabs .is-vertical ul.tabs--secondary a:hover, .tabs .is-vertical ul.tabs--secondary a:focus {
   text-decoration: none;
   color: #363636;
   border-bottom: 1px solid #cccccc;
 }
-.js .tabs .is-vertical ul.tabs--secondary a.active, .js .tabs .is-vertical ul.tabs--secondary a.is-active {
+.tabs .is-vertical ul.tabs--secondary a.active, .tabs .is-vertical ul.tabs--secondary a.is-active {
   border-bottom: 1px solid #cccccc;
 }
-.js .tabs .is-vertical ul.tabs--secondary a.active:hover, .js .tabs .is-vertical ul.tabs--secondary a.active:focus, .js .tabs .is-vertical ul.tabs--secondary a.is-active:hover, .js .tabs .is-vertical ul.tabs--secondary a.is-active:focus {
+.tabs .is-vertical ul.tabs--secondary a.active:hover, .tabs .is-vertical ul.tabs--secondary a.active:focus, .tabs .is-vertical ul.tabs--secondary a.is-active:hover, .tabs .is-vertical ul.tabs--secondary a.is-active:focus {
   color: #363636;
 }
-.js .tabs .is-horizontal ul.tabs--primary {
+.tabs .is-horizontal ul.tabs--primary {
   border-bottom: 1px solid #cccccc;
 }
-.js .tabs .is-horizontal ul.tabs--primary li {
+.tabs .is-horizontal ul.tabs--primary li {
   float: left;
   margin: 0 0 0 0;
   list-style: none;
 }
-.js .tabs .is-horizontal ul.tabs--primary li ul,
-.js .tabs .is-horizontal ul.tabs--primary li ol {
+.tabs .is-horizontal ul.tabs--primary li ul,
+.tabs .is-horizontal ul.tabs--primary li ol {
   display: none;
 }
-[dir="rtl"] .js .tabs .is-horizontal ul.tabs--primary li {
+[dir="rtl"] .tabs .is-horizontal ul.tabs--primary li {
   margin-right: 0;
   margin-left: 0;
 }
-.js .tabs .is-horizontal ul.tabs--primary li {
+.tabs .is-horizontal ul.tabs--primary li {
   margin-bottom: -1px;
 }
-.js .tabs .is-horizontal ul.tabs--primary li:first-child a {
+.tabs .is-horizontal ul.tabs--primary li:first-child a {
   border-radius: 2px 0 0 0;
 }
-.js .tabs .is-horizontal ul.tabs--primary li:last-child a {
+.tabs .is-horizontal ul.tabs--primary li:last-child a {
   border-radius: 0 2px 0 0;
 }
-.js .tabs .is-horizontal ul.tabs--primary a {
+.tabs .is-horizontal ul.tabs--primary a {
   display: block;
   line-height: 1;
   color: #363636;
@@ -2140,37 +2140,37 @@ table tr.error {
   box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   margin-right: -1px;
 }
-.js .tabs .is-horizontal ul.tabs--primary a:hover, .js .tabs .is-horizontal ul.tabs--primary a:focus {
+.tabs .is-horizontal ul.tabs--primary a:hover, .tabs .is-horizontal ul.tabs--primary a:focus {
   color: #363636;
   background-color: #ededed;
   text-decoration: none;
 }
-.js .tabs .is-horizontal ul.tabs--primary a.active, .js .tabs .is-horizontal ul.tabs--primary a.is-active {
+.tabs .is-horizontal ul.tabs--primary a.active, .tabs .is-horizontal ul.tabs--primary a.is-active {
   color: #363636;
   background: none;
   border-bottom-color: #f7f7f7;
 }
-.js .tabs .is-horizontal ul.tabs--primary a.active:hover, .js .tabs .is-horizontal ul.tabs--primary a.active:focus, .js .tabs .is-horizontal ul.tabs--primary a.is-active:hover, .js .tabs .is-horizontal ul.tabs--primary a.is-active:focus {
+.tabs .is-horizontal ul.tabs--primary a.active:hover, .tabs .is-horizontal ul.tabs--primary a.active:focus, .tabs .is-horizontal ul.tabs--primary a.is-active:hover, .tabs .is-horizontal ul.tabs--primary a.is-active:focus {
   color: #363636;
   background: none;
 }
-.js .tabs .is-horizontal ul.tabs--secondary {
+.tabs .is-horizontal ul.tabs--secondary {
   padding: 0;
 }
-.js .tabs .is-horizontal ul.tabs--secondary li {
+.tabs .is-horizontal ul.tabs--secondary li {
   float: left;
   margin: 0 0 0 0;
   list-style: none;
 }
-.js .tabs .is-horizontal ul.tabs--secondary li ul,
-.js .tabs .is-horizontal ul.tabs--secondary li ol {
+.tabs .is-horizontal ul.tabs--secondary li ul,
+.tabs .is-horizontal ul.tabs--secondary li ol {
   display: none;
 }
-[dir="rtl"] .js .tabs .is-horizontal ul.tabs--secondary li {
+[dir="rtl"] .tabs .is-horizontal ul.tabs--secondary li {
   margin-right: 0;
   margin-left: 0;
 }
-.js .tabs .is-horizontal ul.tabs--secondary a {
+.tabs .is-horizontal ul.tabs--secondary a {
   display: block;
   line-height: 1;
   color: #363636;
@@ -2182,15 +2182,15 @@ table tr.error {
   margin-right: 16px;
   margin-right: 1rem;
 }
-.js .tabs .is-horizontal ul.tabs--secondary a:hover, .js .tabs .is-horizontal ul.tabs--secondary a:focus {
+.tabs .is-horizontal ul.tabs--secondary a:hover, .tabs .is-horizontal ul.tabs--secondary a:focus {
   text-decoration: none;
   color: #363636;
   border-bottom: 1px solid #cccccc;
 }
-.js .tabs .is-horizontal ul.tabs--secondary a.active, .js .tabs .is-horizontal ul.tabs--secondary a.is-active {
+.tabs .is-horizontal ul.tabs--secondary a.active, .tabs .is-horizontal ul.tabs--secondary a.is-active {
   border-bottom: 1px solid #cccccc;
 }
-.js .tabs .is-horizontal ul.tabs--secondary a.active:hover, .js .tabs .is-horizontal ul.tabs--secondary a.active:focus, .js .tabs .is-horizontal ul.tabs--secondary a.is-active:hover, .js .tabs .is-horizontal ul.tabs--secondary a.is-active:focus {
+.tabs .is-horizontal ul.tabs--secondary a.active:hover, .tabs .is-horizontal ul.tabs--secondary a.active:focus, .tabs .is-horizontal ul.tabs--secondary a.is-active:hover, .tabs .is-horizontal ul.tabs--secondary a.is-active:focus {
   color: #363636;
 }
 @media all and (max-width: 60em) {
@@ -2425,17 +2425,17 @@ table tr.error {
 .breadcrumb__link {
   text-decoration: none;
 }
-.js .is-vertical .breadcrumb__list-item:before {
+.is-vertical .breadcrumb__list-item:before {
   display: block;
   text-align: left;
   float: left;
   margin-right: 7px;
   margin-right: 0.4375rem;
 }
-.js .is-horizontal .breadcrumb__title, .js .is-horizontal .breadcrumb__list, .js .is-horizontal .breadcrumb__list-item {
+.is-horizontal .breadcrumb__title, .is-horizontal .breadcrumb__list, .is-horizontal .breadcrumb__list-item {
   float: left;
 }
-.js .is-horizontal .breadcrumb__list-item:first-child:before {
+.is-horizontal .breadcrumb__list-item:first-child:before {
   display: none;
 }
 @media all and (max-width: 60em) {
@@ -3298,4 +3298,5 @@ article[class*="--unpublished"] {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=base.css.map */

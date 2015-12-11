@@ -598,11 +598,11 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 
 /* Drop buttons */
-.js .dropbutton-widget {
+.dropbutton-widget {
   background-color: #f7f7f7;
   border-color: #0066cc;
 }
-.js .dropbutton-widget:hover, .js .dropbutton-widget:focus {
+.dropbutton-widget:hover, .dropbutton-widget:focus {
   border-color: #0066cc;
 }
 
@@ -833,4 +833,5 @@ body:before {
 .pane-social-media-link-widget .platform__link:focus {
   opacity: 1;
 }
+
 /*# sourceMappingURL=color.css.map */

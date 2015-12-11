@@ -109,12 +109,12 @@ li[class*="action--"] {
 
 
 /* Drop buttons */
-.js .dropbutton-widget {
+.dropbutton-widget {
   border: $button-border-width $button-border-style;
   border-radius: $button-border-radius;
 }
 
-.js .dropbutton-wrapper {
+.dropbutton-wrapper {
   display: block;
   position: relative;
   @include output-rhythm(min-height, $medium * 2);

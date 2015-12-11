@@ -88,9 +88,17 @@
   text-decoration: none;
 }
 
+.no-js .rm-block .menu__link {
+  padding: 7px;
+  padding: 0.4375rem;
+  margin: 1px 0;
+  margin: 0.0625rem 0;
+}
+
 .pr-navbar__navbar .rm-block,
 .pr-leaderboard__leaderboard .rm-block {
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=responsive-menus.css.map */

@@ -127,6 +127,17 @@
 }
 
 
+// No JS?
+.no-js {
+  .rm-block {
+    .menu__link {
+      @include output-rhythm(padding, $xx-small);
+      @include output-rhythm(margin, 1px 0);
+    }
+  }
+}
+
+
 // Mitigate any unwanted space in specific regions.
 .pr-navbar__navbar,
 .pr-leaderboard__leaderboard {
