@@ -10,6 +10,9 @@
   &__link {
     text-decoration: none;
     @include adjust-font-size-to($small);
+    display: inline-block;
+    @include output-rhythm(padding-bottom, $xxx-small);
   }
 }
+
 
