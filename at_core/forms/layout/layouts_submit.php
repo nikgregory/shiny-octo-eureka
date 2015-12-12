@@ -5,7 +5,6 @@
  * Submit layouts.
  */
 
-use Drupal\Core\PhpStorage\PhpStorageFactory;
 use Drupal\Core\Url;
 use Drupal\Component\Utility\Unicode;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
@@ -20,6 +19,9 @@ function at_core_submit_layouts(&$form, &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
   $theme = $build_info['args'][0];
+
+  // Don't let this timeout easily.
+  set_time_limit(60);
 
   // Generate and save a new layout.
   if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] == 1) {
@@ -77,23 +79,15 @@ function at_core_submit_layouts(&$form, &$form_state) {
     drupal_set_message(t('The following <b>files</b> were removed: @removed_files', array('@removed_files' => $deleted_files_message)), 'status');
   }
 
-  // Don't let this timeout easily.
-  set_time_limit(60);
-
-  // Flush caches. We try to avoid drupal_flush_all_caches() because it' slow.
-  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
-  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
-  _drupal_flush_css_js();
-  PhpStorageFactory::get('twig')->deleteAll();
-  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
-  $theme_handler = \Drupal::service('theme_handler');
-  $theme_handler->refreshInfo();
+  // Flush caches. I really, really tried to avoid this, but if you know a better
+  // way of always clearing twig, CSS and the registry?
+  drupal_flush_all_caches();
 
   // Manage settings and configuration.
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsLayoutConvertToConfig($values, $config);
 
-  $performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
-  drupal_set_message(t('Layout settings saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
+  //$performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
+  //drupal_set_message(t('Layout settings saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }

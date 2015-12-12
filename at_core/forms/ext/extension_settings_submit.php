@@ -20,6 +20,9 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   $theme = $build_info['args'][0];
   $at_core_path = drupal_get_path('theme', 'at_core');
 
+  // Don't let this timeout easily.
+  set_time_limit(60);
+
   // Path to save generated CSS files.
   $generated_files_path = $values['settings_generated_files_path'];
 
@@ -68,17 +71,9 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
     }
   }
 
-  // Don't let this timeout easily.
-  set_time_limit(60);
-
-  // Flush caches. We try to avoid drupal_flush_all_caches() because it' slow.
-  \Drupal::service('asset.css.collection_optimizer')->deleteAll();
-  \Drupal::service('asset.js.collection_optimizer')->deleteAll();
-  _drupal_flush_css_js();
-  PhpStorageFactory::get('twig')->deleteAll();
-  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
-  $theme_handler = \Drupal::service('theme_handler');
-  $theme_handler->refreshInfo();
+  // Flush caches. I really, really tried to avoid this, but if you know a better
+  // way of always clearing twig, CSS and the registry?
+  drupal_flush_all_caches();
 
   // Manage settings and configuration.
   // Must get mutable config otherwise bad things happen.
@@ -86,6 +81,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsExtensionsConvertToConfig($values, $config);
 
-  $performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
-  drupal_set_message(t('Extensions configuration saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
+  drupal_set_message(t('Extensions configuration saved.'), 'status');
+  //$performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
+  //drupal_set_message(t('Extensions configuration saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }

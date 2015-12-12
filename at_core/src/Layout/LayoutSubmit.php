@@ -128,7 +128,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
         if (file_exists($filepath)) {
-          $saved_css[] = $filepath;
+          $saved_css[] = $file_name;
         }
       }
     }
@@ -139,7 +139,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#items' => $saved_css,
       );
       $saved_css_message = \Drupal::service('renderer')->render($saved_css_message_list);
-      drupal_set_message(t('The following layout <b>CSS files</b> were generated: @saved_css', array('@saved_css' => $saved_css_message)), 'status');
+      drupal_set_message(t('The following layout <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', array(
+          '@saved_css' => $saved_css_message,
+          '@generated_files_path' => $generated_files_path . '/')
+      ), 'status');
     }
   }
 
@@ -377,7 +380,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
        }
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
-        $saved_templates[] = $templates[$suggestion]['template_path'];
+        $saved_templates[] = $templates[$suggestion]['template_name'];
 
       }
     }
@@ -388,7 +391,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#items' => $saved_templates,
       );
       $saved_templates_message = \Drupal::service('renderer')->render($saved_templates_message_list);
-      drupal_set_message(t('The following <b>templates</b> were generated: @saved_templates', array('@saved_templates' => $saved_templates_message)), 'status');
+      drupal_set_message(t('The following <b>templates</b> were generated in: <code>@template_directory</code> @saved_templates', array(
+          '@saved_templates' => $saved_templates_message,
+          '@template_directory' => $template_directory . '/')
+      ), 'status');
     }
     if (isset($new_template_message)) {
       drupal_set_message($new_template_message, 'status');

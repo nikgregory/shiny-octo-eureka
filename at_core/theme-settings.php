@@ -20,7 +20,6 @@ use Drupal\at_core\File\DirectoryOperations;
  *   A keyed array containing the current state of the form.
  */
 function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
-
   // Set the theme name.
   $build_info = $form_state->getBuildInfo();
   $theme = $build_info['args'][0];
