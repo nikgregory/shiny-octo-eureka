@@ -1,5 +1,5 @@
 /**
- * Shortcodes (Alignment)
+ * Shortcodes (textalign)
  ============================================================================ */
 .ta-center,
 .ta-center * {
@@ -25,4 +25,4 @@
           hyphens: auto;
 }
 
-/*# sourceMappingURL=shortcodes--alignment.css.map */
+/*# sourceMappingURL=shortcodes--textalign.css.map */

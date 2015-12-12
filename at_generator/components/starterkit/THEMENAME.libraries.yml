@@ -135,12 +135,12 @@ color:
     theme:
       styles/css/components/color.css: {}
 
-# Shortcodes Alignment
-shortcodes_alignment:
+# Shortcodes Text Align
+shortcodes_textalign:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/components/shortcodes--alignment.css: {}
+      styles/css/components/shortcodes--textalign.css: {}
 
 # Shortcodes Float Region Blocks
 shortcodes_float_region_blocks:
@@ -191,12 +191,12 @@ shortcodes_rounded_corners:
     theme:
       styles/css/components/shortcodes--rounded-corners.css: {}
 
-# Shortcodes Whitespace Control
-shortcodes_whitespace_control:
+# Shortcodes Whitespace
+shortcodes_whitespace:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/components/shortcodes--whitespace-control.css: {}
+      styles/css/components/shortcodes--whitespace.css: {}
 
 # Slideshow
 slideshow_styles:
