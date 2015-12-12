@@ -57,10 +57,12 @@ function at_core_submit_layouts(&$form, &$form_state) {
     if (isset($delete_suggestion_keys)) {
       foreach ($delete_suggestion_keys as $suggestion_to_remove) {
         $formatted_suggestion = str_replace('_', '-', $suggestion_to_remove);
-        $template_file_path = $templates_directory . '/' . $formatted_suggestion . '.html.twig';
-        $css_file_path = $css_directory . '/' . $theme . '.layout.' . $formatted_suggestion . '.css';
-        $files_to_delete['twig'] = $template_file_path;
-        $files_to_delete['css'] = $css_file_path;
+        $template_file_name = $formatted_suggestion . '.html.twig';
+        $css_file_name = $theme . '.layout.' . $formatted_suggestion . '.css';
+        $template_file_path = "$templates_directory/$template_file_name";
+        $css_file_path = "$css_directory/$css_file_name";
+        $files_to_delete[] = $template_file_name;
+        $files_to_delete[] = $css_file_name;
         if (file_exists($template_file_path)) {
           unlink($template_file_path);
         }

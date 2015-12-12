@@ -381,7 +381,6 @@ class LayoutSubmit implements LayoutSubmitInterface {
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
         $saved_templates[] = $templates[$suggestion]['template_name'];
-
       }
     }
 
