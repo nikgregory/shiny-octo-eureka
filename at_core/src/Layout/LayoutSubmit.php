@@ -138,9 +138,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#theme' => 'item_list',
         '#items' => $saved_css,
       );
-      $saved_css_message = \Drupal::service('renderer')->render($saved_css_message_list);
       drupal_set_message(t('The following layout <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', array(
-          '@saved_css' => $saved_css_message,
+          '@saved_css' => \Drupal::service('renderer')->renderPlain($saved_css_message_list),
           '@generated_files_path' => $generated_files_path . '/')
       ), 'status');
     }
@@ -308,9 +307,9 @@ class LayoutSubmit implements LayoutSubmitInterface {
             $wrapper_element[$suggestion_key] = $row;
           }
 
-          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '__regions.active == true %}';
-          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '__wrapper_attributes }}>';
-          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '__container_attributes }}>';
+          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '.wrapper_attributes }}>';
+          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '.container_attributes }}>';
 
           foreach ($row_values['regions'] as $region_name => $region_value) {
             $row_regions[$suggestion_key][$row][] = '        {{ page.' . $region_name . ' }}';
@@ -329,7 +328,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         }
 
         $generated[$suggestion_key][] = "  {{ attribution }}" . "\n";
-        $generated[$suggestion_key][] = '</div>';
+        $generated[$suggestion_key][] = '</div>' . "\n";
         $template[$suggestion_key] = implode($generated[$suggestion_key]);
       }
 
@@ -389,9 +388,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#theme' => 'item_list',
         '#items' => $saved_templates,
       );
-      $saved_templates_message = \Drupal::service('renderer')->render($saved_templates_message_list);
       drupal_set_message(t('The following <b>templates</b> were generated in: <code>@template_directory</code> @saved_templates', array(
-          '@saved_templates' => $saved_templates_message,
+          '@saved_templates' => \Drupal::service('renderer')->renderPlain($saved_templates_message_list),
           '@template_directory' => $template_directory . '/')
       ), 'status');
     }

@@ -79,7 +79,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
     foreach ($this->layout_config['rows'] as $row_name => $row_data) {
 
       // Set a bool for active regions, assume false.
-      $variables[$row_name . '__regions']['active'] = FALSE;
+      $variables[$row_name]['has_regions'] = FALSE;
 
       $i = 1;
       foreach ($row_data['regions'] as $region_key => $region_name) {
@@ -90,7 +90,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // Pass on row wrapper attributes only for rows with active regions
       $active_row_regions[$row_name]['attributes'] = $row_data['attributes'];
 
-      // Remove inactive regions.
+      // Remove inactive regions. array_intersect_key()
       $active_row_regions[$row_name]['regions'] = array_intersect($row_regions[$row_name], $this->active_regions);
 
       // Unset inactive rows.
@@ -103,29 +103,29 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
     foreach ($active_row_regions as $row_key => $row_values) {
 
       // If active regions set to true, print the row.
-      $variables[$row_key . '__regions']['active'] = TRUE;
+      $variables[$row_key]['has_regions'] = TRUE;
 
       // Wrapper attributes.
-      $variables[$row_key . '__wrapper_attributes'] = new Attribute;
-      $variables[$row_key . '__wrapper_attributes']['class'] = array('l-pr', 'page__row', 'pr-' . str_replace('_', '-', $row_key));
+      $variables[$row_key]['wrapper_attributes'] = new Attribute;
+      $variables[$row_key]['wrapper_attributes']['class'] = array('l-pr', 'page__row', 'pr-' . str_replace('_', '-', $row_key));
 
       // Wrapper attributes set in the layout yml file.
       foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
         if (is_array($attribute_values)) {
-          $variables[$row_key . '__wrapper_attributes'][$attribute_type] = array(implode(' ', $attribute_values));
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array(implode(' ', $attribute_values));
         }
         else {
-          $variables[$row_key . '__wrapper_attributes'][$attribute_type] = array($attribute_values);
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array($attribute_values);
         }
       }
 
       // Container attributes.
-      $variables[$row_key . '__container_attributes'] = new Attribute;
-      $variables[$row_key . '__container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. str_replace('_', '-', $row_key) . '__rw');
+      $variables[$row_key]['container_attributes'] = new Attribute;
+      $variables[$row_key]['container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. str_replace('_', '-', $row_key) . '__rw');
 
       // Active Regions: "arc" is "active region count", this is number of
       // active regions in this row on this page.
-      $variables[$row_key . '__container_attributes']['class'][] = 'arc--'. count($row_values['regions']);
+      $variables[$row_key]['container_attributes']['class'][] = 'arc--'. count($row_values['regions']);
 
       // Match each active region with its'corrosponding source order increment.
       foreach ($row_values['regions'] as $region) {
@@ -138,7 +138,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // order (as per the layout markup yml), this allows us to set layout
       // depending on which regions are active.
       if (isset($row_has_regions[$row_key])) {
-        $variables[$row_key . '__container_attributes']['class'][] =  'hr--' . implode('-', $row_has_regions[$row_key]);
+        $variables[$row_key]['container_attributes']['class'][] =  'hr--' . implode('-', $row_has_regions[$row_key]);
       }
 
       // Shortcode classes.
@@ -149,7 +149,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
           if (!empty($config_settings['page_classes_row_wrapper_' . $row_key])) {
             $wrappercodes = Tags::explode($config_settings['page_classes_row_wrapper_' . $row_key]);
             foreach ($wrappercodes as $wrapperclass) {
-              $variables[$row_key . '__wrapper_attributes']['class'][] = Html::cleanCssIdentifier($wrapperclass);
+              $variables[$row_key]['wrapper_attributes']['class'][] = Html::cleanCssIdentifier($wrapperclass);
             }
           }
 
@@ -157,7 +157,7 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
           if (!empty($config_settings['page_classes_row_container_' . $row_key])) {
             $containercodes = Tags::explode($config_settings['page_classes_row_container_' . $row_key]);
             foreach ($containercodes as $containerclass) {
-              $variables[$row_key . '__container_attributes']['class'][] = Html::cleanCssIdentifier($containerclass);
+              $variables[$row_key]['container_attributes']['class'][] = Html::cleanCssIdentifier($containerclass);
             }
           }
         }
