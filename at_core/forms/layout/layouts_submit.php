@@ -77,8 +77,9 @@ function at_core_submit_layouts(&$form, &$form_state) {
       '#theme' => 'item_list',
       '#items' => $files_to_delete,
     );
-    $deleted_files_message = \Drupal::service('renderer')->render($deleted_files_message_list);
-    drupal_set_message(t('The following <b>files</b> were removed: @removed_files', array('@removed_files' => $deleted_files_message)), 'status');
+    drupal_set_message(t('The following <b>files</b> were removed: @removed_files', array(
+      '@removed_files' => \Drupal::service('renderer')->renderPlain($deleted_files_message_list))
+    ), 'status');
   }
 
   // Flush caches. I really, really tried to avoid this, but if you know a better
