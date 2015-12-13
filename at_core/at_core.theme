@@ -340,8 +340,9 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
             '#theme' => 'item_list',
             '#items' => $formatted_suggestions,
           );
-          $saved_formatted_suggestions = \Drupal::service('renderer')->render($these_suggestions);
-          drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('@these_suggestions' => $saved_formatted_suggestions)), 'status');
+          drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array(
+            '@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))
+          ), 'status');
         }
       }
     }
@@ -597,9 +598,10 @@ function at_core_preprocess_page(&$variables) {
   $regions = system_region_list($theme, REGIONS_VISIBLE);
   $active_regions = array();
 
-  // Render early because themes cannot check renderable arrays to determine visibility.
-  // This is a critical issue in D8 (and D7 also): https://www.drupal.org/node/953034
-  // Early rendering is the only way I have found to reliably set the layout.
+  // Render early because themes cannot check render arrays to determine
+  // visibility. This is a critical issue in D8 (and D7 also):
+  // https://www.drupal.org/node/953034. Early rendering is the only way I have
+  // found to reliably set the layout.
   foreach ($regions as $region_name => $region_label) {
     if (!empty($variables['page'][$region_name])) {
       if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
@@ -610,17 +612,11 @@ function at_core_preprocess_page(&$variables) {
 
   if (!empty($active_regions)) {
     $variables['attributes']['class'][] = 'page';
-
     // This is where the heavy lifting takes place.
-    $layout_loaded = new LayoutLoad($theme, $active_regions);
-    $row_attributes = $layout_loaded->rowAttributes();
-
-    // Check if we have attributes to avoid a fatal error.
+    $layout_load = &drupal_static(__FUNCTION__);
     if (empty($row_attributes)) {
-      drupal_set_message(t('uh oh... check the themes Appearance settings, or maybe the layout yml is borked?'), 'error');
-    }
-    else {
-      $variables = $variables + $row_attributes;
+      $layout_load = new LayoutLoad($theme, $active_regions);
+      $variables = $variables + $layout_load->rowAttributes();
     }
   }
 }
