@@ -34,9 +34,7 @@
       }
 
       // Toggle.
-      //$('.rm-block .block-menu__title', context).on('click', toggleClick);
-      // Test with proper anchor/fragment link for accessibility.
-      $('.rm-block .block-menu__title', context).wrapInner('<a href="#rm-content" class="rm-toggle__link" />').on('click', toggleClick);
+      $('.rm-toggle').on('click', toggleClick);
 
       // Enquire is a fancy wrapper for matchMedia.
       enquire
@@ -46,7 +44,7 @@
           $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region');
           $('.rm-block').parent().parent('.l-rw').addClass('rm-row');
-          $('.rm-block .block-menu__title').removeClass('visually-hidden');
+          //$('.rm-block .block-menu__title').removeClass('visually-hidden');
         },
         // The resp menu system only uses one breakpoint,
         // if it matches this fires strait after setup.

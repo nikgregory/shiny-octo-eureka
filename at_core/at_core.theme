@@ -16,6 +16,10 @@ use Drupal\at_core\Layout\LayoutLoad;
 
 require_once __DIR__ . '/vendor/Mobile_Detect/Mobile_Detect.php';
 
+//function at_core_library_info_alter(&$libraries, $extension) {
+//  kpr($libraries);
+//}
+
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
  *
@@ -350,6 +354,25 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Use a custom block suggestion for responsive menus.
+  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    if (isset($config['responsive_menu_block'])) {
+      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
+        $suggestions[] = 'block__responsive_menu';
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter().
  * TODO: keep on on https://drupal.org/node/2247677
  * @param array $suggestions
@@ -458,11 +481,20 @@ function at_core_preprocess_html(&$variables) {
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
 
-  // Inject path info into variables, we can use the query path to set a body
-  // class for pager pages.
-  $variables['path_info'] = parse_url(Xss::filter($_SERVER['REQUEST_URI']));
-  $query = isset($variables['path_info']['query']) ? Html::cleanCssIdentifier($variables['path_info']['query']) : NULL;
+  // We use this to set body classes for query pages, this allows us to hide
+  // blocks or regions using CSS on pager pages, etc.
+  //$request_uri_old = parse_url(Xss::filter($_SERVER['REQUEST_URI']));
+  $request_uri = \Drupal::request()->getRequestUri();
+  $query = isset($request_uri) ? Html::cleanCssIdentifier(ltrim($request_uri, '/')) : NULL;
   $variables['path_info']['query'] = (strlen($query) > 25) ? substr($query, 0, 25) : $query;
+
+  // We use this to replicate Drupal 7's path-[root_path]-[id] type classes.
+  $variables['path_info']['args'] = FALSE;
+  $path = \Drupal::request()->getPathInfo();
+  $path_args = explode('/', $path);
+  if (count($path_args) >= 3) {
+    $variables['path_info']['args'] = Html::cleanCssIdentifier(ltrim($path, '/'));
+  }
 
   // Extensions
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -757,16 +789,16 @@ function at_core_preprocess_block(&$variables) {
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
     // Responsive menu block.
-    if (isset($config['responsive_menu_block'])) {
-      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
-        $variables['attributes']['class'][] = 'rm-block'; // main class that sets this as the responsive menu block
-        $variables['attributes']['class'][] = 'js-hide';  // hides the block until the dom is ready
-        $variables['title_attributes']['class'][] = 'rm-toggle'; // set a class for the js toggles
-        $variables['title_attributes']['aria-controls'][] = 'rm-content';  // aria controls
-        $variables['content_attributes']['id'][] = 'rm-content'; // target id for aria controls
-        $variables['content_attributes']['class'][] = 'rm-block__content'; // toggle target, the div that actually opens/closes
-      }
-    }
+//    if (isset($config['responsive_menu_block'])) {
+//      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
+//        $variables['attributes']['class'][] = 'rm-block'; // main class that sets this as the responsive menu block
+//        $variables['attributes']['class'][] = 'js-hide';  // hides the block until the dom is ready
+//        $variables['title_attributes']['class'][] = 'rm-toggle'; // set a class for the js toggles
+//        $variables['title_attributes']['aria-controls'][] = 'rm-content';  // aria controls
+//        $variables['content_attributes']['id'][] = 'rm-content'; // target id for aria controls
+//        $variables['content_attributes']['class'][] = 'rm-block__content'; // toggle target, the div that actually opens/closes
+//      }
+//    }
 
     // Markup overrides
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {

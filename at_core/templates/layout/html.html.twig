@@ -76,7 +76,8 @@
     set body_classes = [
       logged_in ? 'user-logged-in',
       not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
-      path_info.query ? 'path-query--' ~ path_info.query,
+      path_info.args ? 'path-' ~ path_info.args,
+      path_info.query ? 'path-query-' ~ path_info.query,
       node_type ? 'node--type-' ~ node_type|clean_class,
       head_title_array.name ? 'site-name--' ~ head_title_array.name|clean_class,
       theme.name ? 'theme-name--' ~ theme.name|clean_class,
