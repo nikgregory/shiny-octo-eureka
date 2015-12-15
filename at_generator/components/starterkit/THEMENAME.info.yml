@@ -30,11 +30,11 @@ regions:
   page_top: 'Page top'
   page_bottom: 'Page bottom'
 features:
+  - logo
+  - favicon
   - node_user_picture
   - comment_user_picture
   - comment_user_verification
-  - favicon
-  - logo
 ckeditor_stylesheets:
   - styles/css/components/base.css
 stylesheets-remove:
