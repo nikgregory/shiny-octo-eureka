@@ -12,10 +12,10 @@
         return;
       }
 
-      var activeTheme = settings['ajaxPageState']['theme'],
-          rm          = settings[activeTheme]['at_responsivemenus'],
-          def         = rm['default'],
-          resp        = rm['responsive'];
+      var at   = settings['ajaxPageState']['theme'],
+          rm   = settings[at]['at_responsivemenus'],
+          def  = rm['default'],
+          resp = rm['responsive'];
 
       // Toggle handler.
       function toggleClick(e) {
@@ -24,7 +24,7 @@
 
         // The toggle class is on <body> because we must account
         // for menu types that style block parent elements,
-        // e.g. offcanvas will transform the .page element.
+        // e.g. off-canvas will transform the .page element.
         $(document.body).toggleClass('rm-is-open');
         $(document).one('click', function(e) {
           if($('.rm-block').has(e.target).length === 0){
@@ -34,7 +34,7 @@
       }
 
       // Toggle.
-      $('.rm-toggle').on('click', toggleClick);
+      $('.rm-toggle', context).on('click', toggleClick);
 
       // Enquire is a fancy wrapper for matchMedia.
       enquire
@@ -44,7 +44,6 @@
           $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region');
           $('.rm-block').parent().parent('.l-rw').addClass('rm-row');
-          //$('.rm-block .block-menu__title').removeClass('visually-hidden');
         },
         // The resp menu system only uses one breakpoint,
         // if it matches this fires strait after setup.
