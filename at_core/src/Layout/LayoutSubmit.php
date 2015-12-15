@@ -45,6 +45,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
 
     $breakpoints_group = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($this->form_values['settings_breakpoint_group_layout']);
     $generated_files_path = $this->form_values['settings_generated_files_path'];
+    $css_data = array();
 
     foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
       foreach ($breakpoints_group as $breakpoint_id => $breakpoint_value) {
@@ -62,6 +63,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
     }
 
+    // Initialize or set vars.
     $output = array();
     $css_rows = array();
     $css_file = array();
@@ -138,7 +140,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
         '#theme' => 'item_list',
         '#items' => $saved_css,
       );
-      drupal_set_message(t('The following layout <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', array(
+      drupal_set_message(t('The following <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', array(
           '@saved_css' => \Drupal::service('renderer')->renderPlain($saved_css_message_list),
           '@generated_files_path' => $generated_files_path . '/')
       ), 'status');
@@ -182,7 +184,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
        'rename_oldname' => $backup_path . '/' . $info_file,
        'rename_newname' => $backup_path . '/' . $backup_file,
       );
-      $backupInfo = $fileOperations->fileCopyRename($file_paths);
+      $fileOperations->fileCopyRename($file_paths);
     }
 
     // Parse the current info file.
@@ -228,7 +230,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       }
     }
 
-    // Template path
+    // Template path.
     $template_file = $this->layout_path . '/' . $this->layout_name . '.html.twig';
 
     // Path to target theme where the template will be saved.
@@ -246,6 +248,11 @@ class LayoutSubmit implements LayoutSubmitInterface {
       \Drupal::service('file_system')->mkdir($template_directory);
     }
 
+    // Initialize vars.
+    $row_regions = array();
+    $templates = array();
+    $saved_templates = array();
+
     // We have to save every template every time, in case a row has been added to the layout, all template MUST update.
     // This could be changed later to only do this IF a row has been added, we're not that flash right now :)
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
@@ -253,7 +260,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $output = array();
       $suggestion_key = Html::escape($suggestion_key);
 
-      // Doc block
+      // Doc block.
       $doc = array();
       $doc[$suggestion_key][] = '{#';
       $doc[$suggestion_key][] = '/**';
@@ -263,7 +270,7 @@ class LayoutSubmit implements LayoutSubmitInterface {
       $doc[$suggestion_key][] = '#}' . "\n";
       $docblock[$suggestion_key] = implode("\n", $doc[$suggestion_key]);
 
-      // Attach layout
+      // Attach layout.
       $generated_files_path = $this->form_values['settings_generated_files_path'];
       $layout_file = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion_key) . '.css';
       if (file_exists($generated_files_path .'/'. $layout_file)) {
@@ -367,11 +374,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
          'rename_newname' => $backup_path . '/' . $backup_file,
         );
 
-        $backupTemplate = $fileOperations->fileCopyRename($file_paths);
+        $fileOperations->fileCopyRename($file_paths);
       }
     }
 
-    $saved_templates = array();
     foreach ($templates as $suggestion => $template_values) {
        if (!file_exists($templates[$suggestion]['template_path'])) {
          $new_template = $templates[$suggestion]['template_name'];
