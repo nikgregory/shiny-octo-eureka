@@ -12,7 +12,7 @@
       position: relative;
     }
 
-    .rm-toggle.block-menu__title {
+    .rm-toggle {
       position: absolute;
       #{$flow-to}: 0;
       z-index: 200;

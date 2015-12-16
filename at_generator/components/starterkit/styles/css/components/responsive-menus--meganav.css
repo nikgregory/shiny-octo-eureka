@@ -9,17 +9,17 @@
 .ms-meganav .rm-block {
   position: relative;
 }
-.ms-meganav .rm-toggle.block-menu__title {
+.ms-meganav .rm-toggle {
   position: absolute;
   right: 0;
   z-index: 200;
   padding: 0;
 }
-.ms-meganav .rm-toggle.block-menu__title span {
+.ms-meganav .rm-toggle span {
   vertical-align: middle;
   display: none;
 }
-.fa-loaded .ms-meganav .rm-toggle.block-menu__title span {
+.fa-loaded .ms-meganav .rm-toggle span {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
@@ -30,7 +30,7 @@
   font: 0/0 a;
   display: inline-block;
 }
-.ms-meganav .rm-toggle.block-menu__title:after {
+.ms-meganav .rm-toggle:after {
   font-family: FontAwesome, sans-serif;
   content: "";
   display: none;
@@ -42,7 +42,7 @@
   margin-right: -11px;
   margin-right: -0.6875rem;
 }
-.fa-loaded .ms-meganav .rm-toggle.block-menu__title:after {
+.fa-loaded .ms-meganav .rm-toggle:after {
   display: inline-block;
 }
 .ms-meganav .rm-block__content {

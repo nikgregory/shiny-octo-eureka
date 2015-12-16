@@ -17,7 +17,7 @@
       opacity: 0.5;
       background-color: rgba(0, 0, 0, 0.875);
       @include output-rhythm(#{$vert}, $medium);
-      @include output-rhythm(#{$horz}, $medium);
+      @include output-rhythm(#{$horz}, $x-large);
 
       span {
         @include output-rhythm(padding, $xx-small $medium);
@@ -50,12 +50,12 @@
         opacity: 1;
         display: block;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.875);
-        box-shadow: 0 6px 6px 6px rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.75);
+        //box-shadow: 0 6px 6px 6px rgba(0, 0, 0, 0.7);
         z-index: 990;
 
-        @include output-rhythm(top, $medium);
-        @include output-rhythm(bottom, $medium);
+        @include output-rhythm(top, $small);
+        @include output-rhythm(bottom, $small);
         @include output-rhythm(right, $small);
         @include output-rhythm(left, $small);
 
@@ -63,20 +63,24 @@
           background-color: transparent;
 
           &__link {
+            @include output-rhythm(padding, $xx-small $large);
+            @include output-rhythm(margin-bottom, 2px);
+            background-color: rgba(0, 0, 0, 0.85);
+
             &:hover,
             &:focus,
             &.active {
-              background-color: transparent;
+              background-color: rgba(0, 0, 0, 0.95);
             }
           }
 
           &__link.active {
             &[href="/"] {
-              background-color: transparent;
+              background-color: rgba(0, 0, 0, 0.95);
 
               &:hover,
               &:focus {
-                background-color: transparent;
+                background-color: rgba(0, 0, 0, 0.95);
               }
             }
           }
@@ -87,7 +91,6 @@
               display: none;
             }
           }
-
         }
       }
     }

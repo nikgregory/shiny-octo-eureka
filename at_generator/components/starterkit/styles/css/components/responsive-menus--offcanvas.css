@@ -20,6 +20,9 @@
   padding-right: 7px;
   padding-right: 0.4375rem;
 }
+.ms-offcanvas .rm-toggle__link {
+  display: inline-block;
+}
 .ms-offcanvas .rm-block__content {
   opacity: .001;
   display: none;
@@ -35,8 +38,14 @@
   margin-bottom: 2px;
   margin-bottom: 0.125rem;
 }
+.ms-offcanvas .rm-block__content .menu__link:after {
+  content: "";
+}
+.ms-offcanvas .rm-block__content .menu__item--expanded > .menu__link:after {
+  content: "";
+}
 .ms-offcanvas.rm-is-open > .page {
-  position: fixed;
+  position: static;
   -webkit-transform: translate(15em, 0);
           transform: translate(15em, 0);
 }

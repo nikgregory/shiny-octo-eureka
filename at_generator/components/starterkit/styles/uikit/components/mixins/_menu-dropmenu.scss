@@ -48,10 +48,19 @@
           float: $flow-from;
           width: auto;
 
+          a:after {
+            content: '';
+            display: none;
+          }
+
           @if $arrows == true {
             &--collapsed > a,
             &--expanded > a {
               @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
+
+              &:after {
+                display: inline-block;
+              }
             }
 
             &--expanded > a:after {

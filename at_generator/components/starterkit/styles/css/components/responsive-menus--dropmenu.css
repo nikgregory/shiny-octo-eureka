@@ -37,9 +37,16 @@
   float: left;
   width: auto;
 }
+.ms-dropmenu .rm-block__content .menu-level-1 .menu__item a:after {
+  content: '';
+  display: none;
+}
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item--collapsed > a, .ms-dropmenu .rm-block__content .menu-level-1 .menu__item--expanded > a {
   padding-right: 40px;
   padding-right: 2.5rem;
+}
+.ms-dropmenu .rm-block__content .menu-level-1 .menu__item--collapsed > a:after, .ms-dropmenu .rm-block__content .menu-level-1 .menu__item--expanded > a:after {
+  display: inline-block;
 }
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item--expanded > a:after {
   content: "";

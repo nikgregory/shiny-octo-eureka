@@ -52,15 +52,15 @@
 <nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
   <div class="rm-block__inner">
     {{ title_prefix }}
-    <h2 id="{{ heading_id }}"{{ title_attributes.addClass('rm-toggle').setAttribute('aria-controls', 'rm-content') }}>
+    <div id="{{ heading_id }}"{{ title_attributes.addClass('rm-toggle') }}>
       {% set rm_text_state = label ? 'rm-toggle__label' : 'visually-hidden' %}
-      <a href="#rm-content" class="rm-toggle__link">
+      <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false">
         <span class="{{ rm_text_state }}">{{ configuration.label }}</span>
-      </a>
-    </h2>
+      </button>
+    </div>
     {{ title_suffix }}
     {% block content %}
-      <div{{ content_attributes.addClass('rm-block__content').setAttribute('id', 'rm-content') }}>
+      <div class="rm-block__content" id="rm-content">
         {{ content }}
       </div>
     {% endblock %}

@@ -1107,6 +1107,19 @@ button:hover, button:focus,
   text-decoration: none;
 }
 
+.un-button,
+.un-button:hover,
+.un-button:focus,
+.un-button:active {
+  border: none;
+  box-shadow: none;
+  background-color: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+}
+
 .button-action {
   display: inline-block;
 }
