@@ -34,14 +34,17 @@
     padding: 0;
   }
 
+  &__list {
+    display: block;
+    width: 100%;
+  }
+
   &__list-item {
     list-style: none;
-    @include output-rhythm(margin-#{$flow-to}, $xxx-small);
-    transition: $global-transition;
 
     &:before {
-      font-family: $icon-font;
-      content: $breadcrumb-seperator-icon;
+      font-family: inherit;
+      content: "\00BB";
       display: inline-block;
       padding: 0;
       margin: 0;
@@ -50,6 +53,17 @@
       // RTL
       [dir="rtl"] & {
         @include fa-icon-flip(-1, 1, 0);
+      }
+
+      // FontAwesome loaded.
+      .fa-loaded & {
+        font-family: $icon-font;
+        content: $breadcrumb-seperator-icon;
+
+        // RTL
+        [dir="rtl"] & {
+          @include fa-icon-flip(-1, 1, 0);
+        }
       }
     }
   }
@@ -67,25 +81,30 @@
     &:focus {}
   }
 
-  // Responsive selectors set with JavaScript, if the breadcrumbs
-  // are too wide for their container they will display vertically.
+  // Responsive selectors set with JavaScript, if the breadcrumbs are too wide
+  // for their container they will display vertically.
   .is-vertical & {
-    &__list-item:before {
+    &__list-item {
       display: block;
-      text-align: #{$flow-from};
-      float: #{$flow-from};
-      @include output-rhythm(margin-#{$flow-to}, $xx-small);
+      &:before {
+        display: inline-block;
+        text-align: #{$flow-from};
+        @include output-rhythm(margin-#{$flow-to}, $xx-small);
+      }
     }
   }
   .is-horizontal & {
     &__title,
-    &__list,
     &__list-item {
-      float: left;
+      float: #{$flow-from};
     }
 
-    &__list-item:first-child:before {
-      display: none;
+    &__list-item {
+      @include output-rhythm(margin-#{$flow-to}, $xxx-small);
+
+      &:first-child:before {
+        display: none;
+      }
     }
   }
 
@@ -112,3 +131,5 @@
     }
   }
 }
+
+

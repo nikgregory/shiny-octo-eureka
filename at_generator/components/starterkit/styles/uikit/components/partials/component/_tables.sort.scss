@@ -15,6 +15,9 @@
       @include output-rhythm(width, $medium);
       @include output-rhythm(padding, 0 3px);
 
+      // Nuke any silly image icons.
+      background-image: none;
+
       // Wait for FontAwesome to load.
       display: none;
       .fa-loaded & {

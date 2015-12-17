@@ -54,21 +54,24 @@
           }
 
           @if $arrows == true {
-            &--collapsed > a,
-            &--expanded > a {
-              @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
+            // FontAwesome loaded.
+            .fa-loaded & {
+              &--collapsed > a,
+              &--expanded > a {
+                @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
 
-              &:after {
-                display: inline-block;
+                &:after {
+                  display: inline-block;
+                }
               }
-            }
 
-            &--expanded > a:after {
-              content: $menu-arrow-down;
-            }
+              &--expanded > a:after {
+                content: $menu-arrow-down;
+              }
 
-            &--collapsed > a:after {
-              content: '';
+              &--collapsed > a:after {
+                content: '';
+              }
             }
           }
 
@@ -107,11 +110,14 @@
           //> li a {background-color: pink;}
 
           @if $arrows == true {
-            > .menu__item--expanded > a:after {
-              content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
+            // FontAwesome loaded.
+            .fa-loaded & {
+              > .menu__item--expanded > a:after {
+                content: $menu-arrow-right; // LTR In the down UL, li items with sub-menus have right pointing arrows.
 
-              [dir="rtl"] & {
-                content: $menu-arrow-left;
+                [dir="rtl"] & {
+                  content: $menu-arrow-left;
+                }
               }
             }
           }
@@ -123,8 +129,11 @@
             //> li a {background-color: yellow;}
 
             @if $arrows == true {
-              > .menu__item--expanded > a:after {
-                content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
+              // FontAwesome loaded.
+              .fa-loaded & {
+                > .menu__item--expanded > a:after {
+                  content: $menu-arrow-down; // In the flyout UL, li items with sub-menus have down pointing arrows.
+                }
               }
             }
           }

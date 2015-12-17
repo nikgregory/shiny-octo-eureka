@@ -62,7 +62,7 @@
 // Hide some columns in mobile devives.
 .forum [class*="__last-reply"],
 .forum [class*="__Last-reply"] {
-  white-space: nowrap;
+  //white-space: nowrap;
 
   @media #{$mobile-isolate} {
     display: none;
@@ -148,6 +148,10 @@
 .forum-list__forum__last-reply {}
 
 
+// The link to the topic node that appears in the Replies column.
+.forum-list__replies-link {
+  display: block;
+}
 
 
 
