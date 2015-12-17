@@ -34,10 +34,6 @@
   font-weight: 400;
 }
 
-.forum [class*="__last-reply"],
-.forum [class*="__Last-reply"] {
-  white-space: nowrap;
-}
 @media all and (max-width: 45em) {
   .forum [class*="__last-reply"],
   .forum [class*="__Last-reply"] {
@@ -78,4 +74,7 @@
   line-height: 1.125rem;
 }
 
+.forum-list__replies-link {
+  display: block;
+}
 /*# sourceMappingURL=forum.css.map */
