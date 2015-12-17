@@ -39,6 +39,7 @@ ckeditor_stylesheets:
   - styles/css/components/base.css
 stylesheets-remove:
   - @stable/css/node/node.preview.css
+  - @stable/css/system/components/tablesort.module.css
 libraries-extend:
   quickedit/quickedit:
     - MACHINENAME/quickedit
