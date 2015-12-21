@@ -65,7 +65,7 @@ at.fastclick:
     gpl-compatible: true
   js:
     scripts/min/fastclick.min.js: { minified: true }
-    #scripts/min/fastclick.js: {}
+    #scripts/fastclick.js: {}
   dependencies:
     - core/jquery
 
@@ -74,10 +74,10 @@ at.fastclick_initialize:
   version: "8.x-1.0"
   js:
     scripts/min/at.fastclickInitialize.min.js: { minified: true }
-    #scripts/min/at.fastclickInitialize.js: {}
+    #scripts/at.fastclickInitialize.js: {}
   dependencies:
     - at_core/at.fastclick
-    - core/jquery
+    #- core/jquery
 
 # Fontfaceobserver
 # https://github.com/bramstein/fontfaceobserver
@@ -93,7 +93,6 @@ at.fontfaceobserver:
 
 # Breakpoints
 at.breakpoints:
-  #header: true
   version: "8.x-1.0"
   js:
     scripts/min/at.breakpoints.min.js: { minified: true }
@@ -104,6 +103,19 @@ at.breakpoints:
     - core/drupalSettings
     - core/matchmedia
     - at_core/at.enquire
+
+# Layout
+at.layout:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.layout.min.js: { minified: true }
+    #scripts/at.layout.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/matchmedia
+  weight: -1000
 
 # Responsive Menus
 at.responsivemenus:
