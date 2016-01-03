@@ -8,7 +8,7 @@
  * In AT we use this for both tabs (local tasks) and breadcrumbs. See the
  * breadcrumbs template and SCSS partial to see how this works.
  */
-(function ($, Drupal) {
+(function ($, Drupal, window) {
 
   'use strict';
 
@@ -47,4 +47,4 @@
       }
     }
   };
-})(jQuery, Drupal);
+})(jQuery, Drupal, window);

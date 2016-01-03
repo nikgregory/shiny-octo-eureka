@@ -1,3 +1,7 @@
+/**
+ * @file
+ * Appearance settings.
+ */
 (function ($, Drupal) {
   Drupal.behaviors.atCoreLayoutVisualization = {
     attach: function () {

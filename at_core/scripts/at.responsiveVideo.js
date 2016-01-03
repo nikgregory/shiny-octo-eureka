@@ -1,6 +1,8 @@
-// This sort of works OK, in reality the CSS method using a div wrapper with the class
-// embed-contianer works better.
-(function ($) {
+/**
+ * @file
+ * Responsive video. This is not used in the current theme.
+ */
+(function ($, window) {
 
   "use strict";
 
@@ -50,4 +52,4 @@
 
     }
   };
-}(jQuery));
+}(jQuery, window));

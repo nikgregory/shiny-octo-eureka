@@ -1,7 +1,6 @@
 /**
  * @file
  * Responsive tables.
- *
  */
 (function ($, Drupal) {
 

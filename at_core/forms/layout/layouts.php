@@ -332,7 +332,7 @@ $form['layouts']['adv_options']['backups']['settings_enable_backups'] = array(
   '#type' => 'checkbox',
   '#title' => t('Enable backups'),
   '#default_value' => theme_get_setting("settings.enable_backups", $theme),
-  '#description' => t('Warning: unchecking this option will disable backups.'),
+  '#description' => t('Warning: un-checking this option will disable backups.'),
 );
 
 // Submit button for layouts.

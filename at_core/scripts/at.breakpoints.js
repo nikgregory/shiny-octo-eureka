@@ -1,4 +1,8 @@
-(function ($) {
+/**
+ * @file
+ * Breakpoints.
+ */
+(function ($, window, document) {
 
   "use strict";
 
@@ -20,10 +24,10 @@
       function registerEnquire(breakpoint_label, breakpoint_query) {
         enquire.register(breakpoint_query, {
           match: function() {
-            $(document.body).addClass('bp--' + breakpoint_label);
+            document.body.classList.add('bp--' + breakpoint_label);
           },
           unmatch: function() {
-            $(document.body).removeClass('bp--' + breakpoint_label);
+            document.body.classList.remove('bp--' + breakpoint_label);
           }
         });
       }
@@ -35,4 +39,4 @@
       }
     }
   };
-}(jQuery));
+}(jQuery, window, document));

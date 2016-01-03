@@ -14,9 +14,10 @@
         return;
       }
 
+      // Never run this on really small devices.
       var notSmartPhone = window.matchMedia('(min-width: 320px)');
       if (notSmartPhone.matches) {
-        $('.regions').each(function() {
+        $('.regions').once().each(function() {
           // Remove empty regions first, otherwise classes will be wrong.
           $(this).children().filter(function() {
             return !($.trim($(this).text()).length);

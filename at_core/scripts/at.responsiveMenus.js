@@ -1,4 +1,8 @@
-(function ($) {
+/**
+ * @file
+ * Responsive menus.
+ */
+(function ($, document, window) {
 
   "use strict";
 
@@ -70,4 +74,4 @@
       });
     }
   };
-}(jQuery));
+}(jQuery, document, window));
