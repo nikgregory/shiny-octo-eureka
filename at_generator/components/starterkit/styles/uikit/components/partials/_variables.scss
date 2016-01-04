@@ -476,7 +476,7 @@ $menu-arrow-left                   : $fa-var-angle-left;
 $menu-arrow-right                  : $fa-var-angle-right;
 $menu-arrow-up                     : $fa-var-angle-up;
 $menu-arrow-down                   : $fa-var-angle-down;
-$menu-hamburger                    : $fa-var-bars;
+$menu-hamburger                    : $fa-var-bars; // deprecated, now uses embedded SVG
 
 // Forms
 $form-details-summary-open         : $fa-var-caret-down;

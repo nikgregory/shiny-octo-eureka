@@ -206,6 +206,9 @@ hr {
   color: inherit;
 }
 
+.rm-toggle__icon {
+  fill: white;
+}
 .rm-toggle span {
   background-color: transparent;
 }
@@ -833,4 +836,5 @@ body:before {
 .pane-social-media-link-widget .platform__link:focus {
   opacity: 1;
 }
+
 /*# sourceMappingURL=color.css.map */

@@ -51,18 +51,24 @@
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
 <nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
   <div class="rm-block__inner">
+
     {{ title_prefix }}
     <div id="{{ heading_id }}"{{ title_attributes.addClass('rm-toggle') }}>
-      {% set rm_text_state = label ? 'rm-toggle__label' : 'visually-hidden' %}
-      <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false">
-        <span class="{{ rm_text_state }}">{{ configuration.label }}</span>
+      {% set rm_label_class = label ? 'rm-toggle__label' : 'visually-hidden' %}
+      <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false" aria-lable="{{ configuration.label }}">
+        <svg class="rm-toggle__icon" viewBox="0 0 1792 1792" preserveAspectRatio="xMinYMid meet">
+          <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/>
+        </svg>
+        <span class="{{ rm_label_class }}">{{ configuration.label }}</span>
       </button>
     </div>
     {{ title_suffix }}
+
     {% block content %}
       <div class="rm-block__content" id="rm-content">
         {{ content }}
       </div>
     {% endblock %}
+
   </div>
 </nav>

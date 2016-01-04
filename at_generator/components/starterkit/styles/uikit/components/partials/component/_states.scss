@@ -1,19 +1,8 @@
 /**
- * Publishing states.
+ * States.
  ============================================================================ */
 
-/* You may wish to include background color and styles for unpublished items.
-// Publishing status.
-article[class*="--unpublished"] {
-
-  // Keep background-color here, we don't want this to shift in color module.
-  background-color: $unpublished-background-color;
-  opacity: 0.7;
-
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
+.js {
+  &.layout-not-loaded {}
+  &.layout-loaded {}
 }
-*/
-

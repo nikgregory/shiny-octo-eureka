@@ -10,13 +10,6 @@
     .rm-toggle {
       margin-#{$flow-from}: 0;
       padding-#{$flow-from}: 0;
-
-      &:after {
-        font-family: $icon-font;
-        content: $menu-hamburger;
-        @include output-rhythm(width, $medium);
-        @include output-rhythm(padding-left, $xx-small);
-      }
     }
 
     .rm-block__content {

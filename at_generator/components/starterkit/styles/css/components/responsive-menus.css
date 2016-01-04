@@ -54,11 +54,14 @@
   margin: 0;
   cursor: pointer;
 }
-.rm-toggle:before, .rm-toggle:after {
-  display: none;
-}
-.fa-loaded .rm-toggle:before, .fa-loaded .rm-toggle:after {
-  display: inline-block;
+.rm-toggle__icon {
+  position: relative;
+  top: 2px;
+  top: 0.125rem;
+  height: 16px;
+  height: 1rem;
+  width: 16px;
+  width: 1rem;
 }
 
 .rm-block__content .menu {
@@ -100,4 +103,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=responsive-menus.css.map */

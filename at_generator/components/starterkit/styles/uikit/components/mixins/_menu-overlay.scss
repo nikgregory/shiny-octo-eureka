@@ -16,23 +16,37 @@
       z-index: 1000;
       opacity: 0.5;
       background-color: rgba(0, 0, 0, 0.875);
+      border-radius: $border-radius;
       @include output-rhythm(#{$vert}, $medium);
       @include output-rhythm(#{$horz}, $x-large);
 
+      &:hover,
+      &:focus {
+        background-color: rgba(0, 0, 0, 0.95);
+      }
+
       span {
+        @include visually-hidden;
+      }
+
+      &__link {
+        border: 0;
+        box-sizing: content-box;
         @include output-rhythm(padding, $xx-small $medium);
 
-        // Wait for FontAwesome to load.
-        .fa-loaded & {
-          @include visually-hidden; // Hide the text but only when the icon has loaded.
+        &:focus {
+          outline: none;
         }
       }
 
-      &:after {
-        font-family: $icon-font;
-        content: $menu-hamburger;
-        @include output-rhythm(width, $medium);
-        @include output-rhythm(padding, $xx-small $medium);
+      &__link,
+      &__icon {
+        background-color: transparent;
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
       }
     }
 
@@ -44,6 +58,11 @@
     &.rm-is-open {
       .rm-toggle {
         opacity: 1;
+        background-color: rgba(255, 255, 255, 1);
+
+        &__icon {
+          fill: rgba(0, 0, 0, 1);
+        }
       }
 
       .rm-block__content {
@@ -51,7 +70,6 @@
         display: block;
         position: absolute;
         background-color: rgba(0, 0, 0, 0.75);
-        //box-shadow: 0 6px 6px 6px rgba(0, 0, 0, 0.7);
         z-index: 990;
 
         @include output-rhythm(top, $small);

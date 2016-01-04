@@ -19,28 +19,7 @@
       padding: 0;
 
       span {
-        vertical-align: middle;
-
-        // Wait for FontAwesome to load.
-        display: none;
-        .fa-loaded & {
-          @include visually-hidden;
-          display: inline-block;
-        }
-      }
-
-      &:after {
-        font-family: $icon-font;
-        content: $menu-hamburger;
-        display: none;
-        z-index: 100;
-        @include output-rhythm(width, $medium);
-        @include output-rhythm(padding, $xxxx-small $small);
-        @include output-rhythm(margin-#{$flow-to}, -$small);
-
-        .fa-loaded & {
-          display: inline-block;
-        }
+        @include visually-hidden;
       }
     }
 
@@ -118,7 +97,4 @@
     }
   }
 }
-
-
-
 

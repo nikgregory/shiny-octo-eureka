@@ -3,13 +3,13 @@
 @mixin offcanvas($oc-position: left, $width: 15em, $arrows: false) {
 
   $pad-dir: padding-right;
-  $transform_block: translate(-#{$width}, 0);
-  $transform_page: translate($width, 0);
+  $transform_block: translate3d(-#{$width}, 0, 0);
+  $transform_page: translate3d($width, 0, 0);
 
   @if $oc-position == right {
     $pad-dir: padding-left;
-    $transform_block: translate($width, 0);
-    $transform_page: translate(-#{$width}, 0);
+    $transform_block: translate3d($width, 0, 0);
+    $transform_page: translate3d(-#{$width}, 0, 0);
   }
 
   .ms-offcanvas {
@@ -22,13 +22,6 @@
       float: $oc-position;
       margin-#{$oc-position}: 0;
       padding-#{$oc-position}: 0;
-
-      &:before {
-        font-family: $icon-font;
-        content: $menu-hamburger;
-        @include output-rhythm(width, $medium);
-        @include output-rhythm($pad-dir, $xx-small);
-      }
 
       &__link {
         display: inline-block;
@@ -59,7 +52,7 @@
     // Menu is open.
     &.rm-is-open {
       > .page {
-        position: static;
+        position: relative;
         transform: $transform_page;
       }
 

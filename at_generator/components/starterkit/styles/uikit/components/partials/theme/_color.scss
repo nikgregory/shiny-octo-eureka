@@ -362,6 +362,10 @@ hr {
 
 // Provide a consistant style for visible click handles.
 .rm-toggle  {
+  &__icon {
+    fill: rgba(255, 255, 255, 1);
+  }
+
   span {
     background-color: transparent;
   }

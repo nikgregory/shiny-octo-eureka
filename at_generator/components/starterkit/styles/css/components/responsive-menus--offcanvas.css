@@ -12,14 +12,6 @@
   margin-left: 0;
   padding-left: 0;
 }
-.ms-offcanvas .rm-toggle:before {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  width: 16px;
-  width: 1rem;
-  padding-right: 7px;
-  padding-right: 0.4375rem;
-}
 .ms-offcanvas .rm-toggle__link {
   display: inline-block;
 }
@@ -27,8 +19,8 @@
   opacity: .001;
   display: none;
   left: 0;
-  -webkit-transform: translate(-15em, 0);
-          transform: translate(-15em, 0);
+  -webkit-transform: translate3d(-15em, 0, 0);
+          transform: translate3d(-15em, 0, 0);
   -webkit-transition: all, 0.2s, ease-in-out;
           transition: all, 0.2s, ease-in-out;
 }
@@ -45,9 +37,9 @@
   content: "";
 }
 .ms-offcanvas.rm-is-open > .page {
-  position: static;
-  -webkit-transform: translate(15em, 0);
-          transform: translate(15em, 0);
+  position: relative;
+  -webkit-transform: translate3d(15em, 0, 0);
+          transform: translate3d(15em, 0, 0);
 }
 .ms-offcanvas.rm-is-open .l-pr {
   margin: 0;
@@ -60,4 +52,5 @@
   position: absolute;
   top: 0;
 }
+
 /*# sourceMappingURL=responsive-menus--offcanvas.css.map */

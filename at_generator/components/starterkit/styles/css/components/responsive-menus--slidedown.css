@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * Slidedown
  * Simple hamburger menu that slides vertically downwards. Pushes and re-flows
@@ -8,14 +7,6 @@
 .ms-slidedown .rm-toggle {
   margin-left: 0;
   padding-left: 0;
-}
-.ms-slidedown .rm-toggle:after {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  width: 16px;
-  width: 1rem;
-  padding-left: 7px;
-  padding-left: 0.4375rem;
 }
 .ms-slidedown .rm-block__content {
   display: none;
@@ -40,4 +31,5 @@
 .ms-slidedown .pr-header__header-second .rm-toggle {
   text-align: right;
 }
+
 /*# sourceMappingURL=responsive-menus--slidedown.css.map */
