@@ -9,7 +9,7 @@ $form['mobile-blocks'] = array(
   '#type' => 'details',
   '#title' => t('Mobile Blocks'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Mobile Blocks</h3><p>Show or hide blocks in mobile devices (tablets, mobile phones etc).</p><ul><li><b>Show:</b> block shows in mobile, otherwise hidden.</li><li><b>Hide:</b> block is hidden in mobile, otherwise shows.</li></ul>'),
+  '#description' => t('<h3>Mobile Blocks</h3><p>Show or hide blocks in mobile devices (tablets, mobile phones etc).</p><p>This extension uses <b>device detection</b> via Mobile Detect (not media queries). To test you must either use a real mobile device or an emulator such as Chrome inspectors Device Mode.</p><ul><li><b>Show:</b> block shows in mobile, otherwise hidden.</li><li><b>Hide:</b> block is hidden in mobile, otherwise shows.</li></ul>'),
 );
 
 // Menu blocks
