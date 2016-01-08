@@ -88,8 +88,8 @@ $form['responsive_menus']['default_settings']['settings_responsive_menu_breakpoi
 // Change message
 $form['responsive_menus']['default_settings']['responsive_menu_breakpoint_group_haschanged'] = array(
   '#type' => 'container',
-  '#markup' => t('<em>Save the extension settings to change the breakpoint group.</em>'),
-  '#attributes' => array('class' => array('warning')),
+  '#markup' => t('<em>Save the extension settings to change the breakpoint group and update breakpoint options.</em>'),
+  '#attributes' => array('class' => array('warning', 'messages', 'messages--warning')),
   '#states' => array(
     'invisible' => array('select[name="settings_responsive_menu_breakpoint_group"]' => array('value' => $responsive_menu_breakpoint_group)),
   ),
