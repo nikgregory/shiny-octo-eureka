@@ -5,14 +5,60 @@
  * Generate settings for Mobile blocks.
  */
 
+$mobile_blocks_breakpoint_group = theme_get_setting('settings.mobile_blocks_breakpoint_group', $theme) ?: 'at_core.simple';
+$mobile_blocks_breakpoints = $breakpoints[$mobile_blocks_breakpoint_group];
+
+// Breakpoints
+foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
+  $mbs_query = $mbs_value->getMediaQuery();
+  $mbs_group_options[$mbs_query] = $mbs_value->getLabel() . ': ' . $mbs_query;
+}
+
 $form['mobile-blocks'] = array(
   '#type' => 'details',
   '#title' => t('Mobile Blocks'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Mobile Blocks</h3><p>Show or hide blocks in mobile devices (tablets, mobile phones etc).</p><p>This extension uses <b>device detection</b> via Mobile Detect (not media queries). To test you must either use a real mobile device or an emulator such as Chrome inspectors Device Mode.</p><ul><li><b>Show:</b> block shows in mobile, otherwise hidden.</li><li><b>Hide:</b> block is hidden in mobile, otherwise shows.</li></ul>'),
+  '#description' => t('<h3>Mobile Blocks</h3><p>Show or hide blocks in mobile devices (tablets, mobile phones etc).</p><ol><li>First select a breakpoint group and breakpoint.</li><li>Check hide or show. If nothing is set the block will always show.</li></ol></p>'),
 );
 
-// Menu blocks
+// Breakpoints group
+$form['mobile-blocks']['settings_mobile_blocks_breakpoint_group'] = array(
+  '#type' => 'select',
+  '#title' => t('Breakpoint group'),
+  '#options' => $breakpoint_options,
+  '#default_value' => $mobile_blocks_breakpoint_group,
+);
+
+// Breakpoint
+$form['mobile-blocks']['settings_mobile_blocks_breakpoint'] = array(
+  '#type' => 'select',
+  '#title' => t('Breakpoint'),
+  '#options' => $mbs_group_options,
+  '#default_value' => theme_get_setting('settings.mobile_blocks_breakpoint', $theme) ?: 'all and (max-width: 45em)',
+  '#states' => array(
+    'enabled' => array('select[name="settings_mobile_blocks_breakpoint_group"]' => array('value' => $mobile_blocks_breakpoint_group)),
+  ),
+);
+
+// Change message
+$form['mobile-blocks']['mobile_blocks_breakpoint_group_haschanged'] = array(
+  '#type' => 'container',
+  '#markup' => t('<em>Save the extension settings to change the breakpoint group and update breakpoint options.</em>'),
+  '#attributes' => array('class' => array('warning', 'messages', 'messages--warning')),
+  '#states' => array(
+    'invisible' => array('select[name="settings_mobile_blocks_breakpoint_group"]' => array('value' => $mobile_blocks_breakpoint_group)),
+  ),
+);
+
+/*
+$form['mobile-blocks']['show-hide-help'] = array(
+  '#type' => 'container',
+  '#markup' => t('<ul><li><b>Show:</b> block shows, otherwise hidden.</li><li><b>Hide:</b> block is hidden, otherwise shows.</li></ul><p>If nothing is checked the block will always show (if enabled).</p>'),
+  '#attributes' => array('class' => array('mobile-blocks-show-hide-help')),
+);
+*/
+
+// Blocks
 if (!empty($theme_blocks)) {
   foreach ($theme_blocks as $block_key => $block_values) {
 

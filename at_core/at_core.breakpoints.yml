@@ -8,12 +8,20 @@
 # tablet-isolate  - 45em and max-width 60em (720px to 960px), isolatate tablets.
 # wide            - 60.063em (961px) and up.
 #
-#                    | tablet-isolate -->|
+# | mobile --------->|
+#                    | tablet ---------->|
 #                                        | wide ---------------------------->
 #
+at_core.simple.mobile:
+  label: Mobile
+  mediaQuery: 'all and (max-width: 45em)'
+  weight: 4
+  multipliers:
+    - 1x
+  group: at_core.simple
 at_core.simple.tablet-isolate:
-  label: Tablet-isolate
-  mediaQuery: 'all and (min-width: 45em) and (max-width: 60em)'
+  label: Tablet
+  mediaQuery: 'all and (min-width: 45.063em) and (max-width: 60em)'
   weight: 1
   multipliers:
     - 1x
