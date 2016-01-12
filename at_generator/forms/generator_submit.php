@@ -11,7 +11,6 @@ use Drupal\at_core\File\DirectoryOperations;
 use Drupal\Component\Uuid;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Serialization\Yaml;
-use Symfony\Component\Yaml\Parser;
 
 /**
  * Form submit handler for the theme settings form.
@@ -245,8 +244,7 @@ function at_generator_submit_generator(&$form, &$form_state) {
     $fileOperations->fileRename("$target/$source_theme.shortcodes.yml", $shortcodes_file);
 
     // Parse, rebuild and save the themes info.yml file.
-    $parser = new Parser();
-    $theme_info_data = $parser->parse(file_get_contents($info_file));
+    $theme_info_data = \Drupal::service('info_parser')->parse($info_file);
 
     // Name and theme type.
     $theme_info_data['name'] = "$friendly_name";

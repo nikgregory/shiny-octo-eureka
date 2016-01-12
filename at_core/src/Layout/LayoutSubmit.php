@@ -10,7 +10,6 @@ namespace Drupal\at_core\Layout;
 use Drupal\at_core\File\FileOperations;
 use Drupal\at_core\File\DirectoryOperations;
 use Drupal\Component\Utility\Unicode;
-use Symfony\Component\Yaml\Parser;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache;
 
@@ -188,8 +187,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
     }
 
     // Parse the current info file.
-    $parser = new Parser();
-    $theme_info_data = $parser->parse(file_get_contents($file_path));
+    $theme_info_data =  \Drupal::service('info_parser')->parse($file_path);
+
     $theme_info_data['regions'] = $regions;
 
     // Prepare the array for printing in yml format.
