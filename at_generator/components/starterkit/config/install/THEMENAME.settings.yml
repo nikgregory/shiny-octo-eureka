@@ -17,15 +17,47 @@ settings:
   skip_link_target: block-THEMENAME-content
   suggestions:
     page: page
+  layout_method: 0
   max_width_enable: 0
   max_width_value: '75'
   max_width_unit: em
+  breakpoint_group_layout: at_core.simple
+  page_wide_leaderboard: ''
+  page_wide_header: twocol-6-6
+  page_wide_navbar: ''
+  page_wide_highlighted: ''
+  page_wide_features: threecol-source-ordered-2-8-2
+  page_wide_content_prefix: ''
+  page_wide_main: threecol-source-ordered-3-6-3
+  page_wide_content_suffix: ''
+  page_wide_subfeatures: fourcol-3-3-3-3
+  page_wide_footer: ''
+  page_tablet_leaderboard: ''
+  page_tablet_header: ''
+  page_tablet_navbar: ''
+  page_tablet_highlighted: ''
+  page_tablet_features: threecol-split-row-12--6-6
+  page_tablet_content_prefix: ''
+  page_tablet_main: threecol-split-row-12--6-6
+  page_tablet_content_suffix: ''
+  page_tablet_subfeatures: fourcol-split-row-6-6--6-6
+  page_tablet_footer: ''
+  page_mobile_leaderboard: ''
+  page_mobile_header: ''
+  page_mobile_navbar: ''
+  page_mobile_highlighted: ''
+  page_mobile_features: ''
+  page_mobile_content_prefix: ''
+  page_mobile_main: ''
+  page_mobile_content_suffix: ''
+  page_mobile_subfeatures: ''
+  page_mobile_footer: ''
   enable_backups: 0
   responsive_menu_block: THEMENAME_main_menu
-  responsive_menu_default_style: horizontal
-  responsive_menu_responsive_style: slidedown
-  responsive_menu_breakpoint_group: at_core.responsive_menus
-  responsive_menu_breakpoint: 'all and (max-width: 75em)'
+  responsive_menu_default_style: slidedown
+  responsive_menu_responsive_style: dropmenu
+  responsive_menu_breakpoint_group: at_core.simple
+  responsive_menu_breakpoint: 'all and (min-width: 60.063em)'
   icon_path_default: images/touch-icons/Icon-60.png
   apple_touch_icon_path_iphone_retina: images/touch-icons/Icon-60-2x.png
   apple_touch_icon_path_ipad: images/touch-icons/Icon-76.png
@@ -82,27 +114,6 @@ settings:
   comments_hide_title: 0
   views_hide_feedicon: 0
   attribution_toggle: 1
-  breakpoint_group_layout: at_core.simple
-  page_tabletisolate_leaderboard: ''
-  page_tabletisolate_header: twocol-6-6
-  page_tabletisolate_navbar: ''
-  page_tabletisolate_highlighted: ''
-  page_tabletisolate_features: threecol-split-row-12--6-6
-  page_tabletisolate_content_prefix: ''
-  page_tabletisolate_main: threecol-split-row-12--6-6
-  page_tabletisolate_content_suffix: ''
-  page_tabletisolate_subfeatures: fourcol-split-row-6-6--6-6
-  page_tabletisolate_footer: ''
-  page_wide_leaderboard: ''
-  page_wide_header: twocol-6-6
-  page_wide_navbar: ''
-  page_wide_highlighted: ''
-  page_wide_features: threecol-source-ordered-2-8-2
-  page_wide_content_prefix: ''
-  page_wide_main: threecol-source-ordered-3-6-3
-  page_wide_content_suffix: ''
-  page_wide_subfeatures: fourcol-3-3-3-3
-  page_wide_footer: ''
   font_use_google_fonts: false
   font_use_typekit: false
   font_websafe: "Verdana, Geneva, sans-serif;\r\n\"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n\"Segoe UI\", Segoe, Geneva, Tahoma, sans-serif;\r\nImpact, \"Helvetica Inserat\", \"Arial Black\", sans-serif;\r\nGeorgia, Utopia, Palatino, \"Palatino Linotype\", serif;\r\n\"Times New Roman\", Times, serif;\r\n\"Courier New\", Courier, monospace;\r\nsans-serif;\r\nserif;"
@@ -284,6 +295,8 @@ settings:
   slideshow_0_prevtext: Previous
   slideshow_0_nexttext: Next
   slideshow_0_selector: '.slides > li'
+  mobile_blocks_breakpoint_group: at_core.simple
+  mobile_blocks_breakpoint: 'all and (max-width: 45em)'
 features:
   logo: 1
   node_user_picture: 1

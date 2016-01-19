@@ -10,7 +10,7 @@ namespace Drupal\at_core\Layout;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Theme\ThemeSettingsInfo;
 
-class LayoutCompatible implements LayoutCompatibleInterface {
+class LayoutCompatible {
 
   // The active theme name.
   protected $theme_name;
@@ -20,7 +20,8 @@ class LayoutCompatible implements LayoutCompatibleInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Find and return the most compatible layout.
+   * @return mixed
    */
   public function getCompatibleLayout() {
     $layout_compatible_data = array();

@@ -10,10 +10,11 @@ namespace Drupal\at_core\Layout;
 use Drupal\at_core\File\FileOperations;
 use Drupal\at_core\File\DirectoryOperations;
 use Drupal\Component\Utility\Unicode;
+use Symfony\Component\Yaml\Parser;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache;
 
-class LayoutSubmit implements LayoutSubmitInterface {
+class LayoutSubmit {
 
   // The active theme name.
   protected $theme_name;
@@ -38,10 +39,9 @@ class LayoutSubmit implements LayoutSubmitInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Build and save the suggestions layout css files.
    */
   public function saveLayoutSuggestionsCSS() {
-
     $breakpoints_group = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($this->form_values['settings_breakpoint_group_layout']);
     $generated_files_path = $this->form_values['settings_generated_files_path'];
     $css_data = array();
@@ -147,14 +147,24 @@ class LayoutSubmit implements LayoutSubmitInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Update the themes info file with new regions.
    */
   public function saveLayoutRegions() {
     $regions = array();
 
     foreach ($this->layout_config['rows'] as $row => $row_values) {
-      foreach ($row_values['regions'] as $region_name => $region_value) {
-        $regions[$region_name] = $region_value;
+      foreach ($row_values['regions'] as $region_key => $region_values) {
+
+
+
+
+        if (isset($region_values['label'])) {
+          $regions[$region_key] = $region_values['label'];
+        }
+        // BC
+        else {
+          $regions[$region_key] = $region_values;
+        }
       }
     }
 
@@ -187,7 +197,8 @@ class LayoutSubmit implements LayoutSubmitInterface {
     }
 
     // Parse the current info file.
-    $theme_info_data =  \Drupal::service('info_parser')->parse($file_path);
+    $parser = new Parser();
+    $theme_info_data = $parser->parse(file_get_contents($file_path));
 
     $theme_info_data['regions'] = $regions;
 
@@ -200,7 +211,10 @@ class LayoutSubmit implements LayoutSubmitInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Build and save twig templates.
+   * Save each suggestion template, these are saved every time the layout
+   * settings are saved because the rows and regions might change, so we re-save
+   * every template, every time the form is submitted.
    */
   public function saveLayoutSuggestionsMarkup() {
     $template_suggestions = array();
@@ -313,18 +327,25 @@ class LayoutSubmit implements LayoutSubmitInterface {
             $wrapper_element[$suggestion_key] = $row;
           }
 
-          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
-          $output[$suggestion_key][$row]['wrapper_open'] =  '    <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '.wrapper_attributes }}>';
-          $output[$suggestion_key][$row]['container_open'] = '      <div{{ ' .  $row . '.container_attributes }}>';
+          if ($this->form_values['settings_layout_method'] === 0) {
+            $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
+          }
 
-          foreach ($row_values['regions'] as $region_name => $region_value) {
-            $row_regions[$suggestion_key][$row][] = '        {{ page.' . $region_name . ' }}';
+          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '.wrapper_attributes }}>';
+          $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '.container_attributes }}>';
+
+          foreach ($row_values['regions'] as $region_key => $region_values) {
+            $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_key . ' }}';
           }
           $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
 
-          $output[$suggestion_key][$row]['container_close'] = '      </div>';
-          $output[$suggestion_key][$row]['wrapper_close'] = '    </' . $wrapper_element[$suggestion_key] . '>';
-          $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
+          $output[$suggestion_key][$row]['container_close'] = '    </div>';
+          $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
+
+          if ($this->form_values['settings_layout_method'] === 0) {
+            $output[$suggestion_key][$row]['suffix'] = "\n";
+            $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
+          }
         }
 
         $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";

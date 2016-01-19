@@ -16,8 +16,9 @@
 
       // Never run this on really small devices.
       var notSmartPhone = window.matchMedia('(min-width: 320px)');
+
       if (notSmartPhone.matches) {
-        $('.regions').once().each(function() {
+        $('.regions').each(function() {
           // Remove empty regions first, otherwise classes will be wrong.
           $(this).children().filter(function() {
             return !($.trim($(this).text()).length);
@@ -28,10 +29,9 @@
             return $(this).attr('data-at-region');
           }).get().join('-');
           if (active_regions) {
-            //$(this).addClass('arc--' + this.children.length).addClass('hr--' + active_regions).attr('data-at-regions', 'has-regions');
             var hr = 'hr--' + active_regions;
             var arc = 'arc--' + this.children.length;
-            this.classList.add(hr, arc);
+            $(this).addClass(hr).addClass(arc).attr('data-at-regions', 'has-regions');
           }
 
           // Clean up empty parents.
@@ -40,11 +40,6 @@
           }).parent().remove();
         });
       }
-
-      //function layoutLoading() {
-      //  return '.layout-not-loaded'.removeClass('layout-not-loaded').addClass('layout-loaded');
-      //}
-      //setTimeout(function(){layoutLoading();}, 1000);
     }
   };
 }(jQuery, window));

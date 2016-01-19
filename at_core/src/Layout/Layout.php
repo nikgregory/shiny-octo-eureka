@@ -11,7 +11,7 @@ use Drupal\Core\Cache;
 use Symfony\Component\Yaml\Parser;
 use Drupal\at_core\File\ParseFile;
 
-class Layout implements LayoutInterface {
+class Layout {
 
   protected $theme_name;
   protected $layout_markup;
@@ -31,7 +31,10 @@ class Layout implements LayoutInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns layout configuration of a type (normally markup or css yml config).
+   * looks for cached config first, if none we parse the respective yml file.
+   * @param $type
+   * @return array|mixed
    */
   public function LayoutConfig($type) {
     $config_data = array();
@@ -56,21 +59,24 @@ class Layout implements LayoutInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns layout markup.
+   * @return array|mixed
    */
   public function getLayoutMarkup() {
-    return $this->LayoutConfig(LayoutInterface::LayoutMarkup);
+    return $this->LayoutConfig('markup');
   }
 
   /**
-   * {@inheritdoc}
+   * Returns layout CSS.
+   * @return array|mixed
    */
   public function getLayoutCSS() {
-    return $this->LayoutConfig(LayoutInterface::LayoutCSS);
+    return $this->LayoutConfig('css');
   }
 
   /**
-   * {@inheritdoc}
+   * Return a layouts name.
+   * @return mixed
    */
   public function getLayoutName() {
     return $this->layout_name;

@@ -115,6 +115,7 @@ at.layout:
     - core/drupal
     - core/drupalSettings
     - core/matchmedia
+    - core/jquery.once
   weight: -1000
 
 # Responsive Menus

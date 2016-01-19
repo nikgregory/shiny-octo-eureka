@@ -14,6 +14,9 @@ $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 $css_config = $layout_compatible_data['css_config'];
 
+//kpr($layout_config);
+
+
 // Prepare variables for getting the visual layout thingee CSS file.
 $provider_path = drupal_get_path('theme', $css_config['layout_provider']) . '/layout/' . $css_config['layout'];
 
@@ -242,7 +245,28 @@ $form['layouts']['adv_options']['description'] = array(
   '#markup' => t('<h3>Options</h3>'),
 );
 
-// Change breakpoint group
+// Layout method.
+$form['layouts']['adv_options']['method'] = array(
+  '#type' => 'details',
+  '#title' => t('Layout method'),
+  '#description' => t('By default layout classes are printed in twig templates. Alternatively you can use JavaScript. This will work-around the issue where <a href="@bugincore" target="_blank">Drupal may print empty regions</a> and break the layout. JS layout takes time to load and may feel slower overall.', array('@bugincore' => 'https://www.drupal.org/node/953034')),
+  '#collapsed' => TRUE,
+  '#collapsible' => TRUE,
+);
+
+$form['layouts']['adv_options']['method']['settings_layout_method'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Use JavaScript to set the layout'),
+  '#default_value' => theme_get_setting("settings.layout_method", $theme),
+);
+
+if (!isset($layout_config['js_layout']) || $layout_config['js_layout'] == FALSE) {
+  $form['layouts']['adv_options']['method']['settings_layout_method']['#default_value'] = 0;
+  $form['layouts']['adv_options']['method']['settings_layout_method']['#disabled'] = TRUE;
+  $form['layouts']['adv_options']['method']['settings_layout_method']['#description'] = t('This layout is not compatible with the JS layout method.');
+}
+
+// Breakpoint group.
 $form['layouts']['adv_options']['breakpoint_group'] = array(
   '#type' => 'details',
   '#title' => t('Breakpoints'),
@@ -332,7 +356,7 @@ $form['layouts']['adv_options']['backups']['settings_enable_backups'] = array(
   '#type' => 'checkbox',
   '#title' => t('Enable backups'),
   '#default_value' => theme_get_setting("settings.enable_backups", $theme),
-  '#description' => t('Warning: un-checking this option will disable backups.'),
+  //'#description' => t('Warning: un-checking this option will disable backups.'),
 );
 
 // Submit button for layouts.

@@ -11,7 +11,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 
-class LayoutLoad extends Layout implements LayoutLoadInterface {
+class LayoutLoad extends Layout {
 
   // The active theme name.
   protected $theme_name;
@@ -33,21 +33,42 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the active regions.
+   * @return mixed
    */
   public function activeRegions() {
     return $this->active_regions;
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the source order attribute.
+   * @param $region
+   * @return mixed
+   */
+  public function regionSourceOrder($region) {
+    $region_source_order = array();
+    foreach ($this->layout_config['rows'] as $row_name => $row_data) {
+      foreach ($row_data['regions'] as $region_key => $region_values) {
+        if ($region == $region_key) {
+          $region_source_order[$region] = $region_values['order'];
+        }
+      }
+    }
+
+    return $region_source_order;
+  }
+
+  /**
+   * Returns the row name for the region.
+   * @param $region
+   * @return mixed
    */
   public function regionAttributes($region) {
     $region_row = '';
 
     // If rows are empty return early.
     if (empty($this->layout_config['rows'])) {
-      return;
+      return NULL;
     }
 
     foreach ($this->layout_config['rows'] as $row_name => $row_data) {
@@ -63,7 +84,8 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Builds and returns layout attributes.
+   * @return int|string|void
    */
   public function rowAttributes() {
     $variables = array();
@@ -119,6 +141,11 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
         }
       }
 
+      // Set class multiple
+      if (count($row_values['regions']) > 1) {
+        $variables[$row_key]['wrapper_attributes']['class'][] = 'regions-multiple';
+      }
+
       // Container attributes.
       $variables[$row_key]['container_attributes'] = new Attribute;
       $variables[$row_key]['container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. str_replace('_', '-', $row_key) . '__rw');
@@ -126,6 +153,9 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
       // Active Regions: "arc" is "active region count", this is number of
       // active regions in this row on this page.
       $variables[$row_key]['container_attributes']['class'][] = 'arc--'. count($row_values['regions']);
+
+      // data attribute
+      $variables[$row_key]['container_attributes']['data-at-regions'] = '';
 
       // Match each active region with its'corrosponding source order increment.
       foreach ($row_values['regions'] as $region) {
@@ -158,6 +188,70 @@ class LayoutLoad extends Layout implements LayoutLoadInterface {
             $containercodes = Tags::explode($config_settings['page_classes_row_container_' . $row_key]);
             foreach ($containercodes as $containerclass) {
               $variables[$row_key]['container_attributes']['class'][] = Html::cleanCssIdentifier($containerclass);
+            }
+          }
+        }
+      }
+    }
+
+    return $variables;
+  }
+
+  public function rowAttributesJS() {
+    $variables = array();
+    $config_settings = \Drupal::config($this->theme_name . '.settings')->get('settings');
+
+    // If rows are empty return early.
+    if (empty($this->layout_config['rows'])) {
+      return NULL;
+    }
+
+    // Set additional attributes for rows.
+    foreach ($this->layout_config['rows'] as $row_key => $row_values) {
+
+      $row_key_class = str_replace('_', '-', $row_key);
+
+      // Wrapper attributes.
+      $variables[$row_key]['wrapper_attributes'] = new Attribute;
+      $variables[$row_key]['wrapper_attributes']['class'] = array('l-pr', 'page__row', 'pr-' . $row_key_class);
+
+      // Wrapper attributes set in the layout yml file.
+      foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
+        if (is_array($attribute_values)) {
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array(implode(' ', $attribute_values));
+        }
+        else {
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array($attribute_values);
+        }
+      }
+
+      // Set class multiple
+      if (count($row_values['regions']) > 1) {
+        $variables[$row_key]['wrapper_attributes']['class'][] = 'regions-multiple';
+      }
+
+      // Container attributes.
+      $variables[$row_key]['container_attributes'] = new Attribute;
+      $variables[$row_key]['container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. $row_key_class . '__rw');
+      $variables[$row_key]['container_attributes']['data-at-regions'] = '';
+
+      // Shortcode classes.
+      if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
+        if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
+
+          // Wrapper codes
+          if (!empty($config_settings['page_classes_row_wrapper_' . $row_key])) {
+            $wrapper_codes = Tags::explode($config_settings['page_classes_row_wrapper_' . $row_key]);
+            foreach ($wrapper_codes as $wrapper_class) {
+              $variables[$row_key]['wrapper_attributes']['class'][] = Html::cleanCssIdentifier($wrapper_class);
+            }
+          }
+
+          // Container codes
+          if (!empty($config_settings['page_classes_row_container_' . $row_key])) {
+            $container_codes = Tags::explode($config_settings['page_classes_row_container_' . $row_key]);
+            foreach ($container_codes as $container_class) {
+              $variables[$row_key]['container_attributes']['class'][] = Html::cleanCssIdentifier($container_class);
             }
           }
         }

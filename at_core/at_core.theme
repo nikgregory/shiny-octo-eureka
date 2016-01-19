@@ -49,6 +49,11 @@ function at_core_page_attachments_alter(array &$page) {
   // Attach at.settings, we need the ajaxPageState theme name.
   $page['#attached']['library'][] = 'at_core/at.settings';
 
+  // Attach the JS layout script if required.
+  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
+    $page['#attached']['library'][] = 'at_core/at.layout';
+  }
+
   // Attach module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
   // load if the module is installed. Unlike core these files will load on every
@@ -458,14 +463,11 @@ function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Common paths
-  $path_to_theme = $variables['directory'];
-
   // Add theme variables, we use these to set a class and provide a very easy
   // way for themers to link to files in the theme, such as background images
   // or other files.
   $variables['theme']['name'] = Html::escape($theme);
-  $variables['theme']['path'] = $path_to_theme;
+  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
@@ -510,24 +512,24 @@ function at_core_preprocess_html(&$variables) {
 
       // Apple default icon and Nokia shortcut icon.
       if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $default_icon = file_create_url($path_to_theme . '/' . Html::escape($config['icon_path_default']));
+        $default_icon = file_create_url($variables['directory'] . '/' . Html::escape($config['icon_path_default']));
         $variables['touch_icon_nokia'] = $default_icon;
         $variables['touch_icon_default'] = $default_icon;
       }
 
       // iPad (standard display).
       if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $variables['touch_icon_ipad'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_ipad']);
+        $variables['touch_icon_ipad'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_ipad']);
       }
 
       // iPhone retina.
       if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $variables['touch_icon_iphone_retina'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_iphone_retina']);
+        $variables['touch_icon_iphone_retina'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_iphone_retina']);
       }
 
       // iPad retina.
       if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $variables['touch_icon_ipad_retina'] = file_create_url($path_to_theme . '/' . $config['apple_touch_icon_path_ipad_retina']);
+        $variables['touch_icon_ipad_retina'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_ipad_retina']);
       }
     }
 
@@ -568,6 +570,9 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // Page classes
+  $variables['attributes']['class'][] = 'page';
+
   // Set attribution.
   $attribution_url = Url::fromUri('http://adaptivethemes.com')->setOptions(
     array(
@@ -606,26 +611,26 @@ function at_core_preprocess_page(&$variables) {
   // This adds two classes to every wrapper:
   //  - "arc--[n]" active region count in this row, e.g. "arc--2".
   //  - "hr--[n-n]" has regions, by source order, e.g. "hr--1-3".
-  $regions = system_region_list($theme, REGIONS_VISIBLE);
-  $active_regions = array();
-
-  // Render early because themes cannot check render arrays to determine
-  // visibility. This is a critical issue in D8 (and D7 also):
-  // https://www.drupal.org/node/953034. Early rendering is the only way I have
-  // found to reliably set the layout.
-  foreach ($regions as $region_name => $region_label) {
-    if (!empty($variables['page'][$region_name])) {
-      if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
-        $active_regions[] = $region_name;
+  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
+    $variables['attributes']['class'][] = 'js-layout';
+    $layout_load = new LayoutLoad($theme, $active_regions = NULL);
+    $variables = $variables + $layout_load->rowAttributesJS();
+  }
+  else {
+    $regions = system_region_list($theme, REGIONS_VISIBLE);
+    $active_regions = array();
+    // Render early because themes cannot check render arrays to determine
+    // visibility. This is a critical issue in D8 (and D7 also):
+    // https://www.drupal.org/node/953034. Early rendering is the only way I have
+    // found to reliably set the layout.
+    foreach ($regions as $region_name => $region_label) {
+      if (!empty($variables['page'][$region_name])) {
+        if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
+          $active_regions[] = $region_name;
+        }
       }
     }
-  }
-
-  if (!empty($active_regions)) {
-    $variables['attributes']['class'][] = 'page';
-    // This is where the heavy lifting takes place.
-    $layout_load = &drupal_static(__FUNCTION__);
-    if (empty($row_attributes)) {
+    if (!empty($active_regions)) {
       $layout_load = new LayoutLoad($theme, $active_regions);
       $variables = $variables + $layout_load->rowAttributes();
     }
@@ -639,9 +644,19 @@ function at_core_preprocess_page(&$variables) {
 function at_core_preprocess_region(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  // This tells a region what row they are in, could be expensive?
   $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
+
+  // Set source order data attribute, used to set the layout classes.
+  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
+    $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
+    $variables['attributes']['data-at-region'] = $region_source_order[$variables['region']];
+  }
+  // BC
+  else {
+    $variables['attributes']['data-at-region'] = 'region-' . Html::cleanCssIdentifier($variables['region']);
+  }
+
+  // Set variable for the row this region belongs to.
   $region_row = $layout_loaded->regionAttributes($variables['region']);
   if (!empty($region_row)) {
     $variables['region_row'] = $region_row;
