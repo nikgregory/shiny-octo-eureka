@@ -342,8 +342,9 @@ class LayoutSubmit {
           $output[$suggestion_key][$row]['container_close'] = '    </div>';
           $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
 
+          $output[$suggestion_key][$row]['suffix'] = "\n";
+
           if ($this->form_values['settings_layout_method'] === 0) {
-            $output[$suggestion_key][$row]['suffix'] = "\n";
             $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
           }
         }
