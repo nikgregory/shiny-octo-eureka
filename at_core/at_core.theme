@@ -14,7 +14,6 @@ use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
 use Drupal\at_core\Layout\LayoutLoad;
 
-
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
  *
@@ -361,6 +360,10 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
 
   // Use a custom block suggestion for responsive menus.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -779,21 +782,19 @@ function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  /* Use PNG logo in branding block
+    switch ($variables['base_plugin_id']) {
+      case 'system_branding_block':
+        $variables['site_logo'] = '';
+        if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+          $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
+        }
+        break;
+    }
+  */
+
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-
-    // Responsive menu block.
-//    if (isset($config['responsive_menu_block'])) {
-//      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
-//        $variables['attributes']['class'][] = 'rm-block'; // main class that sets this as the responsive menu block
-//        $variables['attributes']['class'][] = 'js-hide';  // hides the block until the dom is ready
-//        $variables['title_attributes']['class'][] = 'rm-toggle'; // set a class for the js toggles
-//        $variables['title_attributes']['aria-controls'][] = 'rm-content';  // aria controls
-//        $variables['content_attributes']['id'][] = 'rm-content'; // target id for aria controls
-//        $variables['content_attributes']['class'][] = 'rm-block__content'; // toggle target, the div that actually opens/closes
-//      }
-//    }
-
     // Markup overrides
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
       // Remove login block links.
@@ -943,18 +944,6 @@ function at_core_preprocess_views_view(&$variables) {
         $variables['feed_icons'] = array();
       }
     }
-  }
-}
-
-/**
- * Preprocess variables for menu templates.
- * @param $variables
- */
-function at_core_preprocess_menu(&$variables) {
-  // Add a somewhat useful class to the root UL in menus.
-  if (isset($variables['theme_hook_original'])) {
-    $menu_name = str_replace('menu__', '', $variables['theme_hook_original']);
-    $variables['attributes']['class'][] = 'menu-name-original--' . Html::cleanCssIdentifier($menu_name);
   }
 }
 
