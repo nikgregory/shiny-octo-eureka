@@ -20,7 +20,7 @@
  */
 #}
 <a href="{{ url }}"{{ attributes.addClass('feed-icon') }}>
-  <svg version="1.1" class="feed-icon-rss" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20 20">
+  <svg version="1.1" class="feed-icon-rss" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
     <g>
     	<path class="feed-icon-rss__path" d="M2.7,14.5c-0.8,0-1.4,0.3-1.9,0.8C0.3,15.9,0,16.5,0,17.3c0,0.8,0.3,1.4,0.8,1.9
     		C1.3,19.7,2,20,2.7,20s1.4-0.3,1.9-0.8c0.5-0.5,0.8-1.2,0.8-1.9c0-0.8-0.3-1.4-0.8-1.9C4.1,14.8,3.5,14.5,2.7,14.5z"/>
@@ -34,5 +34,6 @@
     		c0.2-0.2,0.3-0.4,0.3-0.7C19.9,16.6,19.3,14.2,18.3,11.9z"/>
     </g>
   </svg>
-  <span class="visually-hidden">{{ 'Subscribe to @title'|t({'@title': title}) }}</span>
+  {% set feed_title = title ? title %}
+  <span class="visually-hidden">{{ 'Subscribe' }}{% if feed_title %}{{ 'Subscribe to @title'|t({'@title': feed_title}) }}{% endif %}</span>
 </a>
