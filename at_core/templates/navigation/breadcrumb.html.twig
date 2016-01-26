@@ -25,7 +25,9 @@
   %}
   <div{{ attributes.addClass(classes) }}>
     <nav class="is-responsive is-horizontal" role="navigation" aria-labelledby="system-breadcrumb-title" data-at-responsive-list>
+
       <h2{{ title_attributes.addClass(title_classes).setAttribute('id', 'system-breadcrumb-title')}}>{{ 'You are here:'|t }}</h2>
+
       <ol class="breadcrumb__list is-responsive__list">
       {% for item in breadcrumb %}
         {% set item_text = item.text|length > 32 ? item.text|slice(0, 32) ~ '...' : item.text %}
@@ -38,6 +40,7 @@
         </li>
       {% endfor %}
       </ol>
+
     </nav>
   </div>
 {% endif %}
