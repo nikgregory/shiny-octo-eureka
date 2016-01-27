@@ -87,9 +87,9 @@ class LayoutSubmit {
         }
 
         if (!empty($css_rows[$suggestion][$breakpoint_keys])) {
-          $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . ' {';
+          $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . " {\n";
           $output[$suggestion][] =  implode($css_rows[$suggestion][$breakpoint_keys]);
-          $output[$suggestion][] = '}';
+          $output[$suggestion][] = "}\n";
         }
       }
     }
@@ -100,10 +100,22 @@ class LayoutSubmit {
       $global_css = file_get_contents($path_to_css_files . '/' . $this->css_config['css_global_layout']);
     }
 
-    $max_width_override = '';
+    // Max widths.
+    $max_width = array();
     if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
       $max_width_value = Html::escape($this->form_values['settings_max_width_value']);
-      $max_width_override = 'div.regions{max-width:' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '}';
+      $max_width['global'] = '.l-rw { max-width: ' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '; }';
+
+      // Per row.
+      if (isset($this->form_values['settings_max_width_enable_rows']) && $this->form_values['settings_max_width_enable_rows'] === 1) {
+        foreach ($this->layout_config['rows'] as $row_key => $row_values) {
+          if (isset($this->form_values['settings_max_width_value_' . $row_key]) && !empty($this->form_values['settings_max_width_value_' . $row_key])) {
+            $max_width_rows[$row_key]['value'] = trim($this->form_values['settings_max_width_value_' . $row_key]);
+            $max_width_rows[$row_key]['unit'] = trim($this->form_values['settings_max_width_unit_' . $row_key]);
+            $max_width[$row_key] = '.pr-' . str_replace('_', '-', $row_key) . '__rw { max-width: ' .  $max_width_rows[$row_key]['value'] .  $max_width_rows[$row_key]['unit'] . '; }';
+          }
+        }
+      }
     }
 
     // Don't regenerate CSS files to be removed.
@@ -124,7 +136,7 @@ class LayoutSubmit {
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
         $message = '/* Layout CSS for: ' . str_replace('_', '-', $suggestion) . '.html.twig, generated: ' . date(DATE_RFC822) . ' */';
-        $file_content = $message ."\n". $global_css ."\n". implode("\n", $css) . "\n" . $max_width_override;
+        $file_content = $message ."\n". $global_css . implode('', $css) . implode("\n", $max_width);
         $file_name = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
@@ -154,10 +166,6 @@ class LayoutSubmit {
 
     foreach ($this->layout_config['rows'] as $row => $row_values) {
       foreach ($row_values['regions'] as $region_key => $region_values) {
-
-
-
-
         if (isset($region_values['label'])) {
           $regions[$region_key] = $region_values['label'];
         }

@@ -296,34 +296,6 @@ foreach($breakpoints as $group_message_key => $group_message_values)  {
 }
 
 // Max width.
-$form['layouts']['adv_options']['select']['max_width'] = array(
-  '#type' => 'details',
-  '#title' => t('Max Width'),
-  '#collapsed' => TRUE,
-  '#collapsible' => TRUE,
-  '#description' => t('<p>Override the max-width value and unit. Percent (%) and viewport width (vw) will give a fluid layout.</p><p>Warning - if you change this and you are using the <em>Max-width</em> breakpoint you may need to adjust that breakpoint or set your own in a <code>@themename.breakpoints.yml</code> file inside your theme root and use those instead.', array('@themename' => $theme)),
-);
-
-$form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Override max-width'),
-  '#default_value' => theme_get_setting('settings.max_width_enable'),
-);
-
-$form['layouts']['adv_options']['select']['max_width']['settings_max_width_value'] = array(
-  '#type' => 'number',
-  '#title' => t('Value'),
-  '#default_value' => Html::escape(theme_get_setting('settings.max_width_value')),
-  '#attributes' => array(
-    'min' => 0,
-    'max' => 9999,
-    'step' => 1,
-  ),
-  '#states' => array(
-    'disabled' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
-  ),
-);
-
 $max_width_units = array(
   'em'  => 'em',
   'rem' => 'rem',
@@ -332,15 +304,89 @@ $max_width_units = array(
   'px'  => 'px',
 );
 
-$form['layouts']['adv_options']['select']['max_width']['settings_max_width_unit'] = array(
+$form['layouts']['adv_options']['select']['max_width'] = array(
+  '#type' => 'details',
+  '#title' => t('Max Width'),
+  '#collapsed' => TRUE,
+  '#collapsible' => TRUE,
+  '#description' => t('Override the global max-width and per row.'),
+);
+
+$form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Override max-widths'),
+  '#default_value' => theme_get_setting('settings.max_width_enable'),
+);
+
+$form['layouts']['adv_options']['select']['max_width']['global'] = array(
+  '#type' => 'details',
+  '#title' => t('Global max width'),
+  '#collapsed' => FALSE,
+  '#collapsible' => TRUE,
+  '#states' => array(
+    'invisible' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
+  ),
+);
+
+$form['layouts']['adv_options']['select']['max_width']['global']['settings_max_width_value'] = array(
+  '#type' => 'number',
+  '#title' => t('Value'),
+  '#default_value' => Html::escape(theme_get_setting('settings.max_width_value')),
+  '#attributes' => array(
+    'min' => 0,
+    'max' => 9999,
+    'step' => 1,
+  ),
+);
+
+$form['layouts']['adv_options']['select']['max_width']['global']['settings_max_width_unit'] = array(
   '#type' => 'select',
   '#title' => t('Unit'),
   '#options' => $max_width_units,
   '#default_value' => theme_get_setting('settings.max_width_unit'),
+);
+
+$form['layouts']['adv_options']['select']['max_width']['settings_max_width_enable_rows'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Override max-width per row'),
+  '#default_value' => theme_get_setting('settings.max_width_enable_rows'),
   '#states' => array(
-    'disabled' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
+    'invisible' => array('input[name="settings_max_width_enable"]' => array('checked' => FALSE)),
   ),
 );
+
+if (!empty($layout_config['rows'])) {
+  foreach ($layout_config['rows'] as $row_key => $row_values) {
+
+    $form['layouts']['adv_options']['select']['max_width'][$row_key] = array(
+      '#type' => 'details',
+      '#title' => t(str_replace('_', ' ', $row_key)),
+      '#collapsed' => TRUE,
+      '#collapsible' => TRUE,
+      '#states' => array(
+        'invisible' => array('input[name="settings_max_width_enable_rows"]' => array('checked' => FALSE)),
+      ),
+    );
+
+    $form['layouts']['adv_options']['select']['max_width'][$row_key]['settings_max_width_value_' . $row_key] = array(
+      '#type' => 'number',
+      '#title' => t('Value'),
+      '#default_value' => Html::escape(theme_get_setting('settings.max_width_value_' . $row_key)),
+      '#attributes' => array(
+        'min' => 0,
+        'max' => 9999,
+        'step' => 1,
+      ),
+    );
+
+    $form['layouts']['adv_options']['select']['max_width'][$row_key]['settings_max_width_unit_' . $row_key] = array(
+      '#type' => 'select',
+      '#title' => t('Unit'),
+      '#options' => $max_width_units,
+      '#default_value' => theme_get_setting('settings.max_width_unit_' . $row_key),
+    );
+  }
+}
 
 // Backups.
 $form['layouts']['adv_options']['backups'] = array(
