@@ -48,12 +48,4 @@ line_comments = false
 
 # Source maps
 # -----------------------------------------------------------------------------
-sourcemap = true
-
-
-# Autoprefixer
-# -----------------------------------------------------------------------------
-# Post process for autoprefixer: https://github.com/postcss/autoprefixer#compass
-# I have not been able to figure out how to autoprefix with sourcemaps using the
-# gem, instead I suggest using grunt, which works just fine. The inlining does
-# work, but no browser I tried could actually read it.
+#sourcemap = true

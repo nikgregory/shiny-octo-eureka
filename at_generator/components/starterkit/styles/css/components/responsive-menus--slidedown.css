@@ -13,7 +13,7 @@
   clear: both;
   opacity: 0.001;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .ms-slidedown .rm-block__content .menu__link {
   margin-bottom: 3px;

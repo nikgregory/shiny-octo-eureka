@@ -5,7 +5,7 @@
  ============================================================================ */
 .ms-offcanvas > .page {
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-toggle {
   float: left;
@@ -22,7 +22,7 @@
   -webkit-transform: translate3d(-15em, 0, 0);
           transform: translate3d(-15em, 0, 0);
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-block__content .menu__link {
   padding: 7px 18px;

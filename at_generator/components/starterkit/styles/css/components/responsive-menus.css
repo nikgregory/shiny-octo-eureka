@@ -83,7 +83,7 @@
 }
 .rm-block__content .menu__link {
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
   margin: 0;
   border: 0;
 }

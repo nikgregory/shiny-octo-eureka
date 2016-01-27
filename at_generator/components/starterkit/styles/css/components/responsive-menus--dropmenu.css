@@ -60,7 +60,7 @@
   margin: 0;
   padding: 0;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item .menu .menu__item {
   min-width: 12em;

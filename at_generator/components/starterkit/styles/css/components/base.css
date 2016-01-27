@@ -363,6 +363,7 @@ blockquote p:first-child:before {
 [dir="rtl"] blockquote p:first-child:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 blockquote p:last-child {
@@ -485,7 +486,7 @@ input[type="week"] {
   border-radius: 2px;
   border: 1px solid;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 textarea:focus,
 select:focus,
@@ -543,6 +544,7 @@ input[type="checkbox"], input[type="radio"] {
   width: auto;
   height: auto;
   -webkit-transform: scale(1);
+      -ms-transform: scale(1);
           transform: scale(1);
 }
 
@@ -1033,6 +1035,7 @@ details > .details-wrapper {
 [dir="rtl"] .collapse-processed:not([open]) > summary:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
@@ -1049,7 +1052,7 @@ details > .details-wrapper {
 
 .reset-appearance {
   -webkit-transition: none;
-          transition: none;
+  transition: none;
   box-shadow: none;
   border-radius: 0;
 }
@@ -1091,7 +1094,7 @@ button,
   border-width: 1px;
   border-style: solid;
   -webkit-transition: background-color, .15s, ease-in-out;
-          transition: background-color, .15s, ease-in-out;
+  transition: background-color, .15s, ease-in-out;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
@@ -1323,7 +1326,7 @@ label button.link {
   -webkit-animation: animate-stripes 3s linear infinite;
           animation: animate-stripes 3s linear infinite;
   -webkit-transition: width 0.5s ease-out;
-          transition: width 0.5s ease-out;
+  transition: width 0.5s ease-out;
 }
 
 @-webkit-keyframes animate-stripes {
@@ -1619,7 +1622,7 @@ ul.inline li ol {
 
 .l-r {
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .l-r:before, .l-r:after {
   content: " ";
@@ -1699,7 +1702,7 @@ ul.inline li ol {
   display: inline-block;
   border-radius: 2px;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
   padding: 2px 7px 0;
   padding: 0.125rem 0.4375rem 0;
   border: 0;
@@ -1718,7 +1721,7 @@ ul.inline li ol {
   border-radius: 0 0 2px 2px;
   opacity: 0;
   -webkit-transition: opacity 0.15s ease-in;
-          transition: opacity 0.15s ease-in;
+  transition: opacity 0.15s ease-in;
   z-index: 50;
   left: 50%;
   display: block;
@@ -2068,7 +2071,7 @@ table tr.error {
   display: block;
   position: relative;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
 }
 .tabs .is-vertical ul.tabs--primary li a:link, .tabs .is-vertical ul.tabs--primary li a:visited {
   color: #ffffff;
@@ -2101,7 +2104,7 @@ table tr.error {
   border-bottom: 1px solid transparent;
   border-left: 3px solid;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
   padding: 11px 16px 7px 14px;
   padding: 0.6875rem 1rem 0.4375rem 0.875rem;
 }
@@ -2150,7 +2153,7 @@ table tr.error {
   padding: 7px 16px;
   padding: 0.4375rem 1rem;
   -webkit-transition: background-color, .15s, ease-in-out;
-          transition: background-color, .15s, ease-in-out;
+  transition: background-color, .15s, ease-in-out;
   box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   margin-right: -1px;
 }
@@ -2190,7 +2193,7 @@ table tr.error {
   color: #363636;
   border-bottom: 1px solid #d9d9d9;
   -webkit-transition: all, 0.2s, ease-in-out;
-          transition: all, 0.2s, ease-in-out;
+  transition: all, 0.2s, ease-in-out;
   padding: 16px 7px 10px;
   padding: 1rem 0.4375rem 0.625rem;
   margin-right: 16px;
@@ -2245,7 +2248,7 @@ table tr.error {
     display: block;
     position: relative;
     -webkit-transition: all, 0.2s, ease-in-out;
-            transition: all, 0.2s, ease-in-out;
+    transition: all, 0.2s, ease-in-out;
   }
   .no-js .tabs ul.tabs--primary li a:link, .no-js .tabs ul.tabs--primary li a:visited {
     color: #ffffff;
@@ -2278,7 +2281,7 @@ table tr.error {
     border-bottom: 1px solid transparent;
     border-left: 3px solid;
     -webkit-transition: all, 0.2s, ease-in-out;
-            transition: all, 0.2s, ease-in-out;
+    transition: all, 0.2s, ease-in-out;
     padding: 11px 16px 7px 14px;
     padding: 0.6875rem 1rem 0.4375rem 0.875rem;
   }
@@ -2329,7 +2332,7 @@ table tr.error {
     padding: 7px 16px;
     padding: 0.4375rem 1rem;
     -webkit-transition: background-color, .15s, ease-in-out;
-            transition: background-color, .15s, ease-in-out;
+    transition: background-color, .15s, ease-in-out;
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
     margin-right: -1px;
   }
@@ -2369,7 +2372,7 @@ table tr.error {
     color: #363636;
     border-bottom: 1px solid #d9d9d9;
     -webkit-transition: all, 0.2s, ease-in-out;
-            transition: all, 0.2s, ease-in-out;
+    transition: all, 0.2s, ease-in-out;
     padding: 16px 7px 10px;
     padding: 1rem 0.4375rem 0.625rem;
     margin-right: 16px;
@@ -2434,6 +2437,7 @@ table tr.error {
 [dir="rtl"] .breadcrumb__list-item:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 .fa-loaded .breadcrumb__list-item:before {
@@ -2443,6 +2447,7 @@ table tr.error {
 [dir="rtl"] .fa-loaded .breadcrumb__list-item:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 .breadcrumb__link {
@@ -2959,6 +2964,7 @@ table tr.error {
 [dir="rtl"] .node-preview-backlink:before {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
