@@ -324,7 +324,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Add content type suggestions.
-  if ($node = \Drupal::request()->attributes->get('node')) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
     array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
   }
 
@@ -361,6 +361,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // Block suggestions for custom bloock bundles.
   if (isset($variables['elements']['content']['#block_content'])) {
     array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
   }
@@ -481,16 +482,22 @@ function at_core_preprocess_html(&$variables) {
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
 
-  // We use this to set body classes for query pages, this allows us to hide
-  // blocks or regions using CSS on pager pages, etc.
-  //$request_uri_old = parse_url(Xss::filter($_SERVER['REQUEST_URI']));
-  $request_uri = \Drupal::request()->getRequestUri();
-  $query = isset($request_uri) ? Html::cleanCssIdentifier(ltrim($request_uri, '/')) : NULL;
-  $variables['path_info']['query'] = (strlen($query) > 25) ? substr($query, 0, 25) : $query;
+  // We use this to set body classes based in the URI.
+  $request = \Drupal::request();
+
+  // Set a class for query pages, e,g, pager page 1, page 2 etc.
+  $request_uri = parse_url($request->getRequestUri());
+  if (isset($request_uri['query'])) {
+    $query = isset($request_uri['query']) ? Html::cleanCssIdentifier(ltrim($request_uri['query'], '/')) : NULL;
+    $variables['path_info']['query'] = (strlen($query) > 25) ? substr($query, 0, 25) : $query;
+  }
+  else {
+    $variables['path_info']['query'] = NULL;
+  }
 
   // We use this to replicate Drupal 7's path-[root_path]-[id] type classes.
   $variables['path_info']['args'] = FALSE;
-  $path = \Drupal::request()->getPathInfo();
+  $path = $request->getPathInfo();
   $path_args = explode('/', $path);
   if (count($path_args) >= 3) {
     $variables['path_info']['args'] = Html::cleanCssIdentifier(ltrim($path, '/'));

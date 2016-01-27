@@ -17,14 +17,20 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		autoprefixer: {
+    postcss: {
       css: {
         src: 'styles/css/components/**.css',
         options: {
-          map: true
+          map: {
+            inline: false,
+            //annotation: 'styles/css/components/maps/',
+          },
+          processors: [
+            require('autoprefixer')({browsers: 'last 5 versions'})
+          ]
         }
       }
-		},
+    },
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -39,7 +45,7 @@ module.exports = function(grunt) {
 		watch: {
 			uikit: {
 				files: 'styles/uikit/components/**/*.scss',
-				tasks: ['compass:uikit', 'autoprefixer:css']
+				tasks: ['compass:uikit', 'postcss:css']
 			},
 			layout: {
 				files: 'layout/site-builder/sass/**/*.scss',
@@ -47,10 +53,9 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-
 	grunt.registerTask('default', ['watch:uikit']);
 }
