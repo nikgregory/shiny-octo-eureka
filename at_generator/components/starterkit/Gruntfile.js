@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
+
 		pkg: grunt.file.readJSON('package.json'),
+
 		compass: {
 			uikit: {
 				options: {
@@ -17,6 +19,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
     postcss: {
       css: {
         src: 'styles/css/components/**.css',
@@ -31,6 +34,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -42,6 +46,7 @@ module.exports = function(grunt) {
         src: ['styles/css/components/**.css']
       }
     },
+
 		watch: {
 			uikit: {
 				files: 'styles/uikit/components/**/*.scss',
@@ -53,9 +58,11 @@ module.exports = function(grunt) {
 			}
 		}
 	});
+
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+
 	grunt.registerTask('default', ['watch:uikit']);
 }

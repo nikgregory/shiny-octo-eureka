@@ -17,20 +17,32 @@ module.exports = function(grunt) {
       }
     },
 
-		autoprefixer: {
+    postcss: {
       atcore: {
         src: 'at_core/styles/css/*.css',
-        options: {
-          map: true
+         options: {
+          map: {
+            inline: false,
+            //annotation: 'at_core/styles/css/maps/',
+          },
+          processors: [
+            require('autoprefixer')({browsers: 'last 5 versions'})
+          ]
         }
       },
       atgen: {
         src: 'at_generator/styles/css/*.css',
         options: {
-          map: true
+          map: {
+            inline: false,
+            //annotation: 'at_core/styles/css/maps/',
+          },
+          processors: [
+            require('autoprefixer')({browsers: 'last 5 versions'})
+          ]
         }
       }
-		},
+    },
 
 		compass: {
 			atcore: {
@@ -55,7 +67,7 @@ module.exports = function(grunt) {
           csslintrc: '.csslintrc'
         },
         src: ['at_core/styles/css/*.css']
-	  },
+	    },
       atgen: {
         options: {
           csslintrc: '.csslintrc'
@@ -67,17 +79,17 @@ module.exports = function(grunt) {
 		watch: {
 			atcore: {
 				files: 'at_core/styles/sass/*.scss',
-				tasks: ['compass:atcore', 'autoprefixer:atcore']
+				tasks: ['compass:atcore', 'postcss:atcore']
 			},
 			atgen: {
 				files: 'at_generator/styles/sass/*.scss',
-				tasks: ['compass:atgen', 'autoprefixer:atgen']
+				tasks: ['compass:atgen', 'postcss:atgen']
 			}
 		}
 	});
 
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
