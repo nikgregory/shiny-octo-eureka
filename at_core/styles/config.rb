@@ -11,8 +11,8 @@ Sass::Script::Number.precision = 5
 
 # Environment
 # -----------------------------------------------------------------------------
-environment = :development
-#environment = :production
+#environment = :development
+environment = :production
 
 
 # Output Style

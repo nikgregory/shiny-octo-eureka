@@ -245,8 +245,7 @@
 
 
   #edit-max-width {
-    .form-item-settings-max-width-value,
-    .form-item-settings-max-width-unit {
+    [class*="form-item-settings-max-width-"] {
       display: inline-block;
       margin-right: 3px;
     }
