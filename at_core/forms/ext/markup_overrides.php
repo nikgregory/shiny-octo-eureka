@@ -147,7 +147,7 @@ $form['markup_overrides']['markup_overrides_settings']['feed-icons']['settings_v
   '#type' => 'checkbox',
   '#title' => t('Hide Feed icon in views pages'),
   '#default_value' => theme_get_setting('settings.views_hide_feedicon'),
-  '#description' => t('Page views such as the Frontpage show an RSS feed icon by default, use this setting to remove all page view feedicons.'),
+  '#description' => t('Page views such as the Front page show an RSS feed icon by default, use this setting to remove all page view feed icons.'),
 );
 
 // Accessibility
