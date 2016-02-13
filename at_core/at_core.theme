@@ -584,14 +584,14 @@ function at_core_preprocess_page(&$variables) {
   $variables['attributes']['class'][] = 'page';
 
   // Set attribution.
-  $attribution_url = Url::fromUri('http://adaptivethemes.com')->setOptions(
-    array(
+  $attribution_url = Url::fromUri('http://adaptivethemes.com',
+    $options = array(
       'attributes' => array(
         'class' => array('attribution__link'),
         'target' => '_blank',
       ),
-    )
-  );
+      'absolute' => TRUE,
+    ));
   $variables['attribution'] = array(
     '#type' => 'markup',
     '#prefix' => '<div class="l-pr attribution"><div class="l-rw">',
