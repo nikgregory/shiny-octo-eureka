@@ -8,7 +8,6 @@
 use Drupal\Core\Url;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
@@ -361,7 +360,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Block suggestions for custom bloock bundles.
+  // Block suggestions for custom block bundles.
   if (isset($variables['elements']['content']['#block_content'])) {
     array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
   }
@@ -369,7 +368,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   // Use a custom block suggestion for responsive menus.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['responsive_menu_block'])) {
-      if ($variables['elements']['#id'] == $config['responsive_menu_block']) {
+      if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == $config['responsive_menu_block']) {
         $suggestions[] = 'block__responsive_menu';
       }
     }
