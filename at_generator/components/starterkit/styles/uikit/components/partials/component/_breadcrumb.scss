@@ -58,7 +58,7 @@
       // FontAwesome loaded.
       .fa-loaded & {
         font-family: $icon-font;
-        content: $breadcrumb-seperator-icon;
+        content: $breadcrumb-separator-icon;
 
         // RTL
         [dir="rtl"] & {
@@ -112,7 +112,7 @@
   @media #{$mobile} {
     .no-js & {
       &__list-item:first-child:before {
-        content: $breadcrumb-seperator-icon;
+        content: $breadcrumb-separator-icon;
       }
     }
   }
