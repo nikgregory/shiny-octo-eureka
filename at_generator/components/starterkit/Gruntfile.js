@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         options: {
           map: {
             inline: false,
-            //annotation: 'styles/css/components/maps/',
+            annotation: 'styles/css/components/maps/',
           },
           processors: [
             require('autoprefixer')({browsers: 'last 5 versions'})
