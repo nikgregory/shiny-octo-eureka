@@ -16,8 +16,8 @@
 // MS provides the scale, while Vertical Rhythm sets adjusted font sizes and
 // line heights.
 
-$base-font-size   : 16px;
-$base-line-height : 6px;    // adjust-leading-to(4) on body = 24px or 1.5rem
+$base-font-size             : 16px;
+$base-line-height           : 6px; // adjust-leading-to(4) on body = 24px or 1.5rem
 $round-to-nearest-half-line : true;
 $rem-with-px-fallback       : true;
 $rhythm-unit                : 'rem';
@@ -508,7 +508,7 @@ $file-image-icon                   : $fa-var-file-image-o;
 $help-icon                         : $fa-var-question-circle;
 
 // Breadcrumb
-$breadcrumb-seperator-icon         : $fa-var-angle-right;
+$breadcrumb-separator-icon         : $fa-var-angle-right;
 
 // Labels
 $more-link-use-icon                : false;
@@ -550,27 +550,4 @@ $preview-background-color          : #ffffea;
 // -----------------------------------------------------------------------------
 // Patterns are image files that can be set on the page and row backgrounds.
 $patterns: null; // A list of pattern file names
-
-
-// =============================================================================
-//
-//       Browser Versions
-//
-// =============================================================================
-// NOTE: by default the UIKit does not use any Compass vendor prefixing, instead
-// the CSS files are post processed using autofixer (grunt-autoprefixer). You
-// need to use Grunt if you want automated prefixing.
-// -----------------------------------------------------------------------------
-// Optional map of minimum browser versions to support. For example, to
-// remove support for IE 7 and earlier, set $browser-minimum-versions['ie']
-// to '8'.
-//$browser-minimum-versions: (
-//  'chrome'  : null,
-//  'firefox' : null,
-//  'ie'      : 9,
-//  'safari'  : null,
-//  'opera'   : null
-//) !default;
-
-
 
