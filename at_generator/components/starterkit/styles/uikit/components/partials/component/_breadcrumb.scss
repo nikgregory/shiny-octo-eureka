@@ -8,7 +8,10 @@
 
 // Block wrapper for breadcrumbs
 .block-system-breadcrumb-block {
-  margin: 0;
+
+  &:not(.has-title) {
+    margin: 0;
+  }
 
   .block__content {}
 }

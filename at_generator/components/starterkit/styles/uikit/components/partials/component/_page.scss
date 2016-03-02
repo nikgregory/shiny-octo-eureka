@@ -31,9 +31,16 @@
 .pr-leaderboard {    // Outer wrapper
 
   .block {
-    margin: 0;
+    &:not(.has-title) {
+      margin: 0;
 
-    ul {
+      p {
+        @include output-rhythm(margin, $medium 0 0);
+      }
+    }
+
+    ul,
+    ol {
       margin: 0;
     }
   }

@@ -1601,10 +1601,15 @@ ul.inline li ol {
   margin: 0;
 }
 
-.pr-leaderboard .block {
+.pr-leaderboard .block:not(.has-title) {
   margin: 0;
 }
-.pr-leaderboard .block ul {
+.pr-leaderboard .block:not(.has-title) p {
+  margin: 16px 0 0;
+  margin: 1rem 0 0;
+}
+.pr-leaderboard .block ul,
+.pr-leaderboard .block ol {
   margin: 0;
 }
 
@@ -2398,7 +2403,7 @@ table tr.error {
  * the design of the breadcrumbs if they are too wide. We use media queries as a
  * no-js fallback.
  ============================================================================ */
-.block-system-breadcrumb-block {
+.block-system-breadcrumb-block:not(.has-title) {
   margin: 0;
 }
 
