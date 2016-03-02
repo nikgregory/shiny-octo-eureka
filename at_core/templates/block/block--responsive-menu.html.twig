@@ -43,7 +43,9 @@
 {%
   set classes = [
     'rm-block',
-    'rm--menu--' ~ derivative_plugin_id|clean_class,
+    'rm-config-provider--' ~ configuration.provider|clean_class,
+    'rm-derivative-plugin--' ~ derivative_plugin_id|clean_class,
+    'rm-id--' ~ attributes.id|clean_id,
     label ? 'has-title',
     'js-hide',
   ]
@@ -53,7 +55,7 @@
   <div class="rm-block__inner">
 
     {{ title_prefix }}
-    <div id="{{ heading_id }}"{{ title_attributes.addClass('rm-toggle') }}>
+    <div{{ title_attributes.addClass('rm-toggle').setAttribute('id', heading_id) }}>
       {% set rm_label_class = label ? 'rm-toggle__label' : 'visually-hidden' %}
       <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false" aria-lable="{{ configuration.label }}">
         <svg class="rm-toggle__icon" viewBox="0 0 1792 1792" preserveAspectRatio="xMinYMid meet">
@@ -64,6 +66,7 @@
     </div>
     {{ title_suffix }}
 
+    {# Menu. #}
     {% block content %}
       <div class="rm-block__content" id="rm-content">
         {{ content }}
