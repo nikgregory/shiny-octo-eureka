@@ -987,3 +987,14 @@ function at_core_preprocess_maintenance_page(&$variables) {
   // Load the maintenance library CSS.
   $variables['#attached']['library'][] = $theme . '/maintenance_page';
 }
+
+/**
+ * Preprocess variables for menu templates.
+ * @param $variables
+ */
+function at_core_preprocess_menu(&$variables) {
+  foreach ($variables['items'] as $key => $values) {
+    $variables['items'][$key]['plugin_id'] = $values['original_link']->getPluginId();
+    //kpr($values['original_link']);
+  }
+}
