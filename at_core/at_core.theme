@@ -996,7 +996,8 @@ function at_core_preprocess_menu(&$variables) {
   foreach ($variables['items'] as $key => $values) {
     $variables['items'][$key]['plugin_id'] = $values['original_link']->getPluginId();
     $attributes = $variables['items'][$key]['url']->getOption('attributes') ?: [];
-    $menu_link_attribute_classes = array('class' => array('menu__link', explode('', $attributes['class'])));
+    $classes = isset($attributes['class']) ? implode($attributes['class']) : '';
+    $menu_link_attribute_classes = array('class' => array('menu__link', $classes));
     $variables['items'][$key]['url']->setOption('attributes', array_merge_recursive($attributes, $menu_link_attribute_classes));
   }
 }
