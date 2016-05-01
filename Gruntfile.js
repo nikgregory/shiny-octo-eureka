@@ -41,6 +41,18 @@ module.exports = function(grunt) {
             require('autoprefixer')({browsers: 'last 5 versions'})
           ]
         }
+      },
+      at_layout_plugin: {
+        src: 'at_core/layout_plugin/css/**/*.css',
+        options: {
+          map: {
+            inline: false,
+            //annotation: 'at_core/styles/css/maps/',
+          },
+          processors: [
+            require('autoprefixer')({browsers: 'last 5 versions'})
+          ]
+        }
       }
     },
 
@@ -58,7 +70,14 @@ module.exports = function(grunt) {
           basePath: 'at_generator/styles',
           bundleExec: true
 				}
-			}
+			},
+      at_layout_plugin: {
+        options: {
+          config: 'at_core/layout_plugin/config.rb',
+          basePath: 'at_core/layout_plugin',
+          bundleExec: true
+        }
+      }
 		},
 
     csslint: {
@@ -73,7 +92,13 @@ module.exports = function(grunt) {
           csslintrc: '.csslintrc'
         },
         src: ['at_generator/styles/css/*.css']
-			}
+			},
+      at_layout_plugin: {
+        options: {
+          csslintrc: '.csslintrc'
+        },
+        src: ['at_core/layout_plugin/css/**/*.css']
+      }
     },
 
 		watch: {
@@ -84,7 +109,11 @@ module.exports = function(grunt) {
 			atgen: {
 				files: 'at_generator/styles/sass/*.scss',
 				tasks: ['compass:atgen', 'postcss:atgen']
-			}
+			},
+      at_layout_plugin: {
+        files: 'at_core/layout_plugin/sass/**/*.scss',
+        tasks: ['compass:at_layout_plugin', 'postcss:at_layout_plugin']
+      }
 		}
 	});
 
