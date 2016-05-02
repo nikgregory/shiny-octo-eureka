@@ -4,16 +4,10 @@
  * Adaptivetheme implementation to display 2x2 grid Layout Plugin layout.
  *
  * Available variables:
- * - content
+ * - content: all output
+ * - attributes: layout attributes
 #}
-{%
-set classes = [
-  'atl',
-  'atl--' ~ content['#layout']['id']|clean_class,
-  'clearfix',
-]
-%}
-<div{{ attributes.addClass(classes) }}>
+<{{ html_element }}{{ attributes.addClass('clearfix') }}>
   {# Row 1 #}
   {% if content.r1c1 %}
     <div class="atl__lc lc-r1c1">
@@ -39,4 +33,4 @@ set classes = [
       {{ content.r2c2 }}
     </div>
   {% endif %}
-</div>
+</{{ html_element }}>

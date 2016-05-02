@@ -4,9 +4,9 @@
  * Adaptivetheme implementation to display a two column Layout Plugin layout.
  *
  * Available variables:
- * - content
+ * - content: all output
+ * - attributes: layout attributes
 #}
-{#{{ dump(content) }}#}
 {% set layout_classes %}
   {% if content.col_1 and content.col_2 %}
     l-arc--2 l-ac--1-2
@@ -16,16 +16,7 @@
     l-arc--1 l-ac--2
   {% endif %}
 {% endset %}
-{%
-set classes = [
-  'atl',
-  'atl--' ~ content['#layout']['id']|clean_class,
-  layout_classes|trim,
-  'clearfix',
-]
-%}
-<div{{ attributes.addClass(classes) }}>
-
+<{{ html_element }}{{ attributes.addClass(layout_classes|trim, 'clearfix') }}>
   {% if content.top %}
     <div class="atl__top clearfix">
       {{ content.top }}
@@ -53,4 +44,4 @@ set classes = [
       {{ content.bottom }}
     </div>
   {% endif %}
-</div>
+</{{ html_element }}>

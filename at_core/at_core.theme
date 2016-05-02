@@ -1001,3 +1001,114 @@ function at_core_preprocess_menu(&$variables) {
     $variables['items'][$key]['url']->setOption('attributes', array_merge_recursive($attributes, $menu_link_attribute_classes));
   }
 }
+
+function _at_core_layout_plugin_attributes(&$variables) {
+  $html_element = 'div';
+  $classes = array();
+
+  // Node
+  if (isset($variables['content']['#node'])) {
+    $classes[] = 'node';
+    $classes[] = $variables['content']['#view_mode'] ? 'node--view-mode-' . $variables['content']['#view_mode'] : '';
+    $classes[] = $variables['content']['#node']->bundle() ? 'node--type-' . Html::cleanCssIdentifier($variables['content']['#node']->bundle()) : '';
+    $classes[] = $variables['content']['#node']->id() ? 'node--id-' . $variables['content']['#node']->id() : '';
+    $classes[] = $variables['content']['#node']->isPromoted() ? 'node--promoted' : '';
+    $classes[] = $variables['content']['#node']->isSticky() ? 'node--sticky' : '';
+    $classes[] = $variables['content']['#node']->isPublished() ? 'node--unpublished' : '';
+    // Element
+    $html_element = 'article';
+  }
+
+  // Comment
+  if (isset($variables['content']['#comment'])) {
+    $classes[] = 'comment';
+    $classes[] = 'js-comment';
+    $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
+    if ($variables['content']['#comment']->getOwnerId() == $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
+      $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() .'-author';
+    }
+    // Element
+    $html_element = 'article';
+  }
+
+  // Panels
+  if (isset($variables['content']['#page_variant'])) {
+    $classes[] = 'panels-page';
+    $classes[] = 'panels-page--' . Html::cleanCssIdentifier($variables['content']['#page_variant']->get('page'));
+  }
+
+  // Block Content
+  if (isset($variables['content']['#block_content'])) {
+    $classes[] = 'block__atl';
+    $classes[] = 'block-type-' . Html::cleanCssIdentifier($variables['content']['#block_content']->bundle());
+  }
+
+  // Global classes
+  $classes[] = 'atl';
+  $classes[] = 'atl--' . Html::cleanCssIdentifier($variables['layout']['id']);
+
+  $attributes['classes'] = $classes;
+  $attributes['html_element'] = $html_element;
+
+  return $attributes;
+}
+
+/**
+ * Preprocess variables for the two col Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__twocol(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
+/**
+ * Preprocess variables for the three col Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__threecol(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
+/**
+ * Preprocess variables for the four col Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__fourcol(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
+/**
+ * Preprocess variables for the 2x2 grid Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__grid_2x2(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
+/**
+ * Preprocess variables for the 3x3 grid Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__grid_3x3(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
+/**
+ * Preprocess variables for the 4x4 grid Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__grid_4x4(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
