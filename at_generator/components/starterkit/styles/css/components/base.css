@@ -2541,6 +2541,12 @@ table tr.error {
 .fa-loaded .menu__link:before, .fa-loaded .menu__link:after {
   display: inline-block;
 }
+.menu__link.button {
+  padding-left: 16px;
+  padding-left: 1rem;
+  padding-right: 16px;
+  padding-right: 1rem;
+}
 
 /**
  * Menus in the Leaderboard region.
@@ -3391,5 +3397,4 @@ table tr.error {
     page-break-after: avoid;
   }
 }
-
 /*# sourceMappingURL=maps/base.css.map */
