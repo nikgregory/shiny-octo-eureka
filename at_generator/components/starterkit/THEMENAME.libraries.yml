@@ -47,6 +47,13 @@ forum:
     component:
       styles/css/components/forum.css: {}
 
+# Language
+language:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/language.css: {}
+
 # Responsive Menus
 responsive_menus:
   version: 8.x-1.0
