@@ -63,10 +63,20 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
 // Breadcrumbs Home link?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Remove the "Home" link'),
+  '#title' => t('Always remove the "Home" link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home'),
 );
-// Breadcrumbs Seperator
+// Breadcrumbs Home Alone link?
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home_alone'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Remove "Home" when it\'s the only link'),
+  '#default_value' => theme_get_setting('settings.breadcrumb_home_alone'),
+  '#states' => array(
+    //'unchecked' => array('input[name="settings_breadcrumb_home"]' => array('checked' => TRUE)),
+    'disabled' => array('input[name="settings_breadcrumb_home"]' => array('checked' => TRUE)),
+  ),
+);
+// Breadcrumbs Separator
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
