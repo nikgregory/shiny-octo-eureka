@@ -51,7 +51,7 @@ function HOOK_library_info_build() {
       // Google fonts.
       if (!empty($config['font_google'])) {
         $libraries['google_fonts'] = [
-          'remote' => 'https://fonts.googleapis.com',
+          'remote' => 'https://www.google.com/fonts',
           'license' => [
             'name' => 'SIL (OFL)',
             'url' => 'http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL',
