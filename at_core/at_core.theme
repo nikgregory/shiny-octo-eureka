@@ -66,6 +66,7 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
+    'superfish',
   );
   foreach ($module_libraries as $module_library) {
     if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
@@ -995,15 +996,32 @@ function at_core_preprocess_maintenance_page(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_menu(&$variables) {
-  foreach ($variables['items'] as $key => $values) {
-    $variables['items'][$key]['plugin_id'] = $values['original_link']->getPluginId();
-    $attributes = $variables['items'][$key]['url']->getOption('attributes') ?: [];
+  foreach ($variables['items'] as &$item) {
+    // Plugin ID.
+    $item['plugin_id'] = $item['original_link']->getPluginId();
+
+    // Menu link classes.
+    $attributes = $item['url']->getOption('attributes') ?: [];
     $classes = isset($attributes['class']) ? implode($attributes['class']) : '';
-    $menu_link_attribute_classes = array('class' => array('menu__link', $classes));
-    $variables['items'][$key]['url']->setOption('attributes', array_merge_recursive($attributes, $menu_link_attribute_classes));
+    $menu_link_classes = array('class' => array('menu__link', $classes));
+    $item['url']->setOption('attributes', array_merge_recursive($attributes, $menu_link_classes));
+
+    // Below items need additional effort, the macro is stupid.
+    foreach ($item['below'] as &$below_item) {
+      $below_attributes = $below_item['url']->getOption('attributes') ?: [];
+      $below_classes = isset($below_attributes['class']) ? implode($below_attributes['class']) : '';
+      $menu_link_below_classes = array('class' => array('menu__link', $below_classes));
+      $below_item['url']->setOption('attributes', array_merge_recursive($below_attributes, $menu_link_below_classes));
+
+    }
   }
 }
 
+/**
+ * Helper function for layout plugin attributes.
+ * @param $variables
+ * @return mixed
+ */
 function _at_core_layout_plugin_attributes(&$variables) {
   $html_element = 'div';
   $classes = array();
