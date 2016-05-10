@@ -2,9 +2,18 @@
  * Shortcodes (Positioning)
  ============================================================================ */
 
+.horizontal-center,
 .center-element {
   margin-left: auto;
   margin-right: auto;
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 @media #{$mobile} {
@@ -17,5 +26,21 @@
   [dir="rtl"] .pull-right {
     float: left;
   }
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-static {
+  position: static;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-fixed {
+  position: fixed;
 }
 

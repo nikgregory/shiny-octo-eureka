@@ -1,0 +1,47 @@
+/**
+ * Shortcodes (Positioning)
+ ============================================================================ */
+.horizontal-center,
+.center-element {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+@media all and (max-width: 60em) {
+  .pull-right,
+  [dir="rtl"] .pull-left {
+    float: right;
+  }
+
+  .pull-left,
+  [dir="rtl"] .pull-right {
+    float: left;
+  }
+}
+.position-relative {
+  position: relative;
+}
+
+.position-static {
+  position: static;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+/*# sourceMappingURL=maps/shortcodes--position.css.map */

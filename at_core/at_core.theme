@@ -28,14 +28,11 @@ use Drupal\at_core\Layout\LayoutLoad;
 function at_core_page_attachments_alter(array &$page) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+  $generated_files_path = NULL;
 
   if ($theme === 'seven') {
     return;
   }
-
-  // Common paths.
-  $path_to_theme = \Drupal::theme()->getActiveTheme()->getPath();
-  $generated_files_path = NULL;
 
   if (!empty($config['generated_files_path'])) {
     $generated_files_path = $config['generated_files_path'];
@@ -149,7 +146,7 @@ function at_core_page_attachments_alter(array &$page) {
 
       // Attach devel_layout CSS file.
       if (isset($config['devel_layout']) && $config['devel_layout'] === 1) {
-         $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
+        $page['#attached']['library'][] = 'at_core/at.devel_debug_layout';
       }
 
       // Attach devel_colorize-regions CSS file.
@@ -170,14 +167,14 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Shortcodes
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      $shortcodes_yml = $path_to_theme . '/' . $theme . '.shortcodes.yml';
+      $shortcodes_yml = \Drupal::theme()->getActiveTheme()->getPath() . '/' . $theme . '.shortcodes.yml';
       if (file_exists($shortcodes_yml)) {
         $shortcodes_parser = new Parser();
         $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
         unset($shortcodes['animate']);
         foreach ($shortcodes as $class_type => $class_values) {
           if (isset($config['shortcodes_' . $class_type . '_enable']) && $config['shortcodes_' . $class_type . '_enable'] === 1) {
-            $page['#attached']['library'][] = "$theme/shortcodes_$class_type";
+            $page['#attached']['library'][] = $theme . '/shortcodes_' . str_replace('-', '_', $class_type);
           }
         }
       }

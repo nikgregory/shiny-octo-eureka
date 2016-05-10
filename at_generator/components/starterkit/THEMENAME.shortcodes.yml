@@ -25,11 +25,17 @@ position:
     pull_right:
       class: pull-right
       description: 'Float element right.'
-    centered:
-      class: center-element
+    centered-horizontal:
+      class: horizontal-center
       description: 'Center the element horizontally. Combine with a layout-column to add a width.'
+    centered-vertical:
+      class: vertical-center
+      description: 'Center the element vertically. You must a) set "position-relative" on the parent container and b) combine with a layout-column to add width.'
+    position-relative:
+      class: position-relative
+      description: 'Use as directed - usually in combination with a position abosulte child element, such as when vertical centering.'
 
-layout:
+layout_columns:
   name: 'Layout columns'
   description: 'Set a width on an element. Do not use on Page rows or regions (you will break the layout). These are most useful or blocks or other elements within the page (for example you can apply these to elements in a node). All layout-column classes are full width in mobile, which is determined by your theme.'
   elements:
@@ -120,8 +126,32 @@ whitespace:
       class: full-width-viewport
       description: 'Stretch to full width of the viewport, this will only really work on Row Containers.'
 
-grid-blocks:
-  name: Block Grid
+image_styles:
+  name: 'Image Styles'
+  description: 'Set styles for images.'
+  elements:
+    - blocks
+    - regions
+    - rows
+  classes:
+    image-spaceless:
+      class: image-spaceless
+      description: 'Remove any padding or margin from img tags and all wrappers (such as field wrapper markup).'
+    image-full-width:
+      class: image-full-width
+      description: 'Stretch images to 100% of their container.'
+    image-align-left:
+      class: image-align-left
+      description: 'Align images left.'
+    image-align-right:
+      class: image-align-right
+      description: 'Align images right.'
+    image-align-center:
+      class: image-align-center
+      description: 'Align images center.'
+
+grid_blocks:
+  name: Block Grid'
   description: 'Layout blocks in a grid. Apply to full width regions only. A good alternative is to build a View with the format "Grid".'
   elements:
     - 'regions that are full width, e.g. leaderboard or content with no sidebars'
@@ -151,7 +181,7 @@ grid-blocks:
       class: 'grid-block-12'
       description: 'Twelve grid columns.'
 
-rounded-corners:
+rounded_corners:
   name: 'Rounded Corners'
   description: 'Add rounded corners (border radius). Rounded corners will automatically apply to form elements, tabs etc depending on your theme (e.g. the search block form). You can set a global border radius on the <code>body</code>, then override it in regions or blocks.'
   elements:
@@ -202,7 +232,7 @@ rounded-corners:
       class: 'rc-20'
       description: 'Border radius 20px'
 
-menu-bullets:
+menu_bullets:
   name: 'Menu Bullets'
   description: 'Add font-icon arrows to collapsed and uncollapsed menu items.'
   elements:

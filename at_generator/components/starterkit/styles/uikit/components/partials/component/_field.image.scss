@@ -23,7 +23,7 @@
   //   set image alignment and captions per node type and view mode.
 
   // Align left or none.
-  .align-none,
+  //.align-none,
   .align-left {
     @include output-rhythm(margin, 0 $medium $medium 0); // LTR
   }

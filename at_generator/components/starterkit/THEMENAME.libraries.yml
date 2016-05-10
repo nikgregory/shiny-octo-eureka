@@ -163,6 +163,13 @@ shortcodes_grid_blocks:
     theme:
       styles/css/components/shortcodes--grid-blocks.css: {}
 
+# Shortcodes Image Styles
+shortcodes_image_styles:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/shortcodes--image-styles.css: {}
+
 # Shortcodes Layout Columns
 shortcodes_layout_columns:
   version: 8.x-1.0
@@ -184,12 +191,12 @@ shortcodes_patterns:
     theme:
       styles/css/components/shortcodes--patterns.css: {}
 
-# Shortcodes Positioning
-shortcodes_positioning:
+# Shortcodes Position
+shortcodes_position:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/components/shortcodes--positioning.css: {}
+      styles/css/components/shortcodes--position.css: {}
 
 # Shortcodes Rounded Corners
 shortcodes_rounded_corners:
@@ -294,3 +301,10 @@ mobile_blocks:
   css:
     theme:
       styles/css/generated/mobile-blocks.css: {}
+
+# 3rd party module libraries
+superfish:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/superfish.css: {}

@@ -1392,22 +1392,22 @@ tr .form-item {
  * Images
  ============================================================================ */
 img.align-left,
-figure.align-left {
+.field-type-image__figure.align-left {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
 }
 img.align-right,
-figure.align-right {
+.field-type-image__figure.align-right {
   margin: 0 0 16px 16px;
   margin: 0 0 1rem 1rem;
 }
 img.align-center,
-figure.align-center {
+.field-type-image__figure.align-center {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
 img[class*="align-"],
-figure[class*="align-"] {
+.field-type-image__figure[class*="align-"] {
   clear: both;
 }
 
@@ -2547,6 +2547,10 @@ table tr.error {
   padding-right: 16px;
   padding-right: 1rem;
 }
+.menu__link.button:after {
+  content: '';
+  display: none;
+}
 
 /**
  * Menus in the Leaderboard region.
@@ -2654,7 +2658,6 @@ table tr.error {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
-.field-type-image .align-none,
 .field-type-image .align-left {
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
@@ -3397,4 +3400,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

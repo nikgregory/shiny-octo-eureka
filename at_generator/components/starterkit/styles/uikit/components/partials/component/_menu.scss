@@ -78,6 +78,11 @@
   &.button {
     @include output-rhythm(padding-left, $medium);
     @include output-rhythm(padding-right, $medium);
+
+    &:after {
+      content: '';
+      display: none;
+    }
   }
 }
 
