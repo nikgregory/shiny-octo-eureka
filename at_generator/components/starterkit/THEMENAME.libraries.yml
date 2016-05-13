@@ -288,7 +288,7 @@ custom_css:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/generated/custom-css.css: {}
+      styles/css/generated/custom-css.css: { weight: 1000 }
 
 breadcrumb:
   version: 8.x-1.0
