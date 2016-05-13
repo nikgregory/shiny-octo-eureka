@@ -308,3 +308,9 @@ superfish:
   css:
     theme:
       styles/css/components/superfish.css: {}
+
+social_media_links:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/social-media-links.css: {}

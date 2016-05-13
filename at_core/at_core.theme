@@ -63,6 +63,7 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
+    'social_media_links',
     'superfish',
   );
   foreach ($module_libraries as $module_library) {
