@@ -311,6 +311,9 @@ function at_core_page_attachments_alter(array &$page) {
       }
     }
   }
+
+  // Custom CSS file for novice users.
+  $page['#attached']['library'][] = "$theme/custom_css_file";
 }
 
 /**

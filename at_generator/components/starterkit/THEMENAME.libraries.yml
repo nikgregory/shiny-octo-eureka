@@ -302,7 +302,7 @@ mobile_blocks:
     theme:
       styles/css/generated/mobile-blocks.css: {}
 
-# 3rd party module libraries
+# 3rd party module libraries.
 superfish:
   version: 8.x-1.0
   css:
@@ -314,3 +314,10 @@ social_media_links:
   css:
     theme:
       styles/css/components/social-media-links.css: {}
+
+# Custom CSS library for novice users.
+custom_css_file:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/custom.css: {  weight: 1000 }
