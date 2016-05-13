@@ -18,7 +18,7 @@ $form['mobile-blocks'] = array(
   '#type' => 'details',
   '#title' => t('Mobile Blocks'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Mobile Blocks</h3><p>Show or hide blocks in mobile devices (tablets, mobile phones etc).</p><ol><li>First select a breakpoint group and breakpoint.</li><li>Check hide or show. If nothing is set the block will always show.</li></ol></p>'),
+  '#description' => t('<h3>Mobile Blocks</h3><p>Hide blocks in breakpoints (wide, tablet, mobile etc).</p><ol><li>First select a breakpoint then save.</li><li>Check hide to remove a block in a breakpoint. If nothing is set the block will always show.</li></ol></p>'),
 );
 
 // Breakpoints group
@@ -27,17 +27,6 @@ $form['mobile-blocks']['settings_mobile_blocks_breakpoint_group'] = array(
   '#title' => t('Breakpoint group'),
   '#options' => $breakpoint_options,
   '#default_value' => $mobile_blocks_breakpoint_group,
-);
-
-// Breakpoint
-$form['mobile-blocks']['settings_mobile_blocks_breakpoint'] = array(
-  '#type' => 'select',
-  '#title' => t('Breakpoint'),
-  '#options' => $mbs_group_options,
-  '#default_value' => theme_get_setting('settings.mobile_blocks_breakpoint', $theme) ?: 'all and (max-width: 45em)',
-  '#states' => array(
-    'enabled' => array('select[name="settings_mobile_blocks_breakpoint_group"]' => array('value' => $mobile_blocks_breakpoint_group)),
-  ),
 );
 
 // Change message
@@ -50,49 +39,41 @@ $form['mobile-blocks']['mobile_blocks_breakpoint_group_haschanged'] = array(
   ),
 );
 
-/*
-$form['mobile-blocks']['show-hide-help'] = array(
-  '#type' => 'container',
-  '#markup' => t('<ul><li><b>Show:</b> block shows, otherwise hidden.</li><li><b>Hide:</b> block is hidden, otherwise shows.</li></ul><p>If nothing is checked the block will always show (if enabled).</p>'),
-  '#attributes' => array('class' => array('mobile-blocks-show-hide-help')),
-);
-*/
+foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
+  $mbs_query = $mbs_value->getMediaQuery();
+  $mbs_label = $mbs_value->getLabel();
+  $mbs_group_options[$mbs_query] = $mbs_value->getLabel() . ': ' . $mbs_query;
 
-// Blocks
-if (!empty($theme_blocks)) {
-  foreach ($theme_blocks as $block_key => $block_values) {
+  $form['mobile-blocks']['breakpoints']['bp' . $mbs_label] = array(
+    '#type' => 'details',
+    '#title' => t($mbs_label . ' <small>' . $mbs_query . '</small>'),
+    //'#attributes' => array('class' => array('clearfix')),
+  );
 
-    $block_settings = $block_values->get('settings');
-    $block_id = $block_values->id();
+  // Blocks
+  if (!empty($theme_blocks)) {
+    foreach ($theme_blocks as $block_key => $block_values) {
 
-    $form['mobile-blocks'][$block_id] = array(
-      '#type' => 'fieldset',
-      '#title' => $block_settings['label'],
-      '#markup' => '<h4 class="mobile-blocks-title layouts-column-threequarters align-left">' . $block_settings['label'] . ' <span>(' . $block_id . ')</span></h4>',
-      '#attributes' => array('class' => array('clearfix')),
-    );
+      $block_settings = $block_values->get('settings');
+      $block_id = $block_values->id();
 
-    $form['mobile-blocks'][$block_id]['container'] = array(
-      '#type' => 'container',
-      '#attributes' => array('class' => array('layouts-column-onequarter', 'align-right')),
-    );
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id] = array(
+        '#type' => 'fieldset',
+        '#title' => $block_settings['label'],
+        '#markup' => '<h4 class="mobile-blocks-title layouts-column-threequarters align-left">' . $block_settings['label'] . ' <span>(' . $block_id . ')</span></h4>',
+        '#attributes' => array('class' => array('clearfix')),
+      );
 
-    $form['mobile-blocks'][$block_id]['container']['settings_mobile_block_show_' . $block_id] = array(
-      '#type' => 'checkbox',
-      '#title' =>  t('Show'),
-      '#default_value' => theme_get_setting('settings.mobile_block_show_' . $block_id, $theme),
-      '#states' => array(
-        'disabled' => array('input[name="settings_mobile_block_hide_' . $block_id . '"]' => array('checked' => TRUE)),
-      ),
-    );
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id]['container'] = array(
+        '#type' => 'container',
+        '#attributes' => array('class' => array('align-right')),
+      );
 
-    $form['mobile-blocks'][$block_id]['container']['settings_mobile_block_hide_' . $block_id] = array(
-      '#type' => 'checkbox',
-      '#title' =>  t('Hide'),
-      '#default_value' => theme_get_setting('settings.mobile_block_hide_' . $block_id, $theme),
-      '#states' => array(
-        'disabled' => array('input[name="settings_mobile_block_show_' . $block_id . '"]' => array('checked' => TRUE)),
-      ),
-    );
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id]['container']['settings_mobile_block_' .  'bp' . $mbs_label . '_' . $block_id] = array(
+        '#type' => 'checkbox',
+        '#title' =>  t('Hide'),
+        '#default_value' => theme_get_setting('settings.mobile_block_' .  'bp' . $mbs_label . '_' . $block_id, $theme),
+      );
+    }
   }
 }

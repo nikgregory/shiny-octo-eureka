@@ -32,48 +32,30 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
       $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
     }
   }
-
-  $mobile_blocks_css = '';
-  $mobile_breakpoint = $values['settings_mobile_blocks_breakpoint'];
-
+  
+  //$mobile_breakpoint = $values['settings_mobile_blocks_breakpoint'];
   $mobile_blocks_breakpoint_group = theme_get_setting('settings.mobile_blocks_breakpoint_group', $theme) ?: 'at_core.simple';
   $mobile_blocks_breakpoints = $breakpoints[$mobile_blocks_breakpoint_group];
-
-  foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
-  $mbs_query = $mbs_value->getMediaQuery();
-  $mbs_breakpoints_all[$mbs_query] = $mbs_query;
-  }
 
   // TODO entityManager() is deprecated, but how to replace?
   $theme_blocks = \Drupal::entityManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
-  if (!empty($theme_blocks)) {
-    foreach ($theme_blocks as $block_key => $block_values) {
-      $block_id = $block_values->id();
-      if (isset($values['settings_mobile_block_show_' . $block_id]) && $values['settings_mobile_block_show_' . $block_id] == 1) {
-        $block_selector = '#' . Html::getUniqueId('block-' . $block_id);
-        $hide_blocks[] = '  ' . $block_selector . ' {display:none}';
-        $show_blocks[] = '  ' . $block_selector . ' {display:block}';
-      }
-      if (isset($values['settings_mobile_block_hide_' . $block_id]) && $values['settings_mobile_block_hide_' . $block_id] == 1) {
-        $block_selector = '#' . Html::getUniqueId('block-' . $block_id);
-        $show_blocks[] = '  ' . $block_selector . ' {display:none}';
-        $hide_blocks[] = '  ' . $block_selector . ' {display:block}';
+  foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
+    $mbs_query = $mbs_value->getMediaQuery();
+    $mbs_breakpoints_all[$mbs_query] = $mbs_query;
+    $mbs_label = $mbs_value->getLabel();
+
+    if (!empty($theme_blocks)) {
+      foreach ($theme_blocks as $block_key => $block_values) {
+        $block_id = $block_values->id();
+        if (isset($values['settings_mobile_block_' . 'bp' . $mbs_label . '_' .  $block_id]) && $values['settings_mobile_block_' . 'bp' . $mbs_label . '_' .  $block_id] == 1) {
+          $block_selectors[] = '.bp--' . strtolower($mbs_label) . ' #' . Html::getUniqueId('block-' . $block_id);
+        }
       }
     }
   }
 
-  $output[] = '@media ' . $mobile_breakpoint . ' {' . "\n" .  implode("\n", $show_blocks) . "\n" . '}';
-
-  if (!empty($mbs_breakpoints_all)) {
-    $breakpoints_reversed = array_reverse($mbs_breakpoints_all);
-    unset($breakpoints_reversed[$mobile_breakpoint]);
-    foreach($breakpoints_reversed as $other_bp) {
-      $output[] = '@media ' . $other_bp . ' {' . "\n" . implode("\n", $hide_blocks) . "\n" . '}';
-    }
-  }
-
-  $mobile_blocks_css = implode("\n", $output);
+  $mobile_blocks_css = implode("," . "\n", $block_selectors) .  ' {display:none}';
 
   if (!empty($mobile_blocks_css)) {
     $file_name = 'mobile-blocks.css';
