@@ -52,12 +52,15 @@
   padding: 7px 16px;
   padding: 0.4375rem 1rem;
   margin: 0;
+}
+.rm-toggle__link, .rm-toggle__link:hover, .rm-toggle__link:focus, .rm-toggle__link:active {
+  padding: 7px;
+  padding: 0.4375rem;
+  border-radius: 2px;
   cursor: pointer;
 }
 .rm-toggle__icon {
   position: relative;
-  top: 2px;
-  top: 0.125rem;
   height: 16px;
   height: 1rem;
   width: 16px;
@@ -103,4 +106,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus.css.map */

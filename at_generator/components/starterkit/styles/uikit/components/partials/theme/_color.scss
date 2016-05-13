@@ -360,8 +360,15 @@ hr {
 }
 
 
-// Provide a consistant style for visible click handles.
+// Provide a consistent style for visible click handles.
 .rm-toggle  {
+  &__link,
+  &__link:hover,
+  &__link:focus,
+  &__link:active {
+    background-color: $text-color;
+  }
+
   &__icon {
     fill: rgba(255, 255, 255, 1);
   }
@@ -372,7 +379,7 @@ hr {
 }
 
 
-// Provide a reasonbly consistant menu style accross all menu types,
+// Provide a consistent menu style across all menu types,
 // you may need to tweak some types due to the differences in layout
 // and overall design of the menu.
 .rm-block__content {

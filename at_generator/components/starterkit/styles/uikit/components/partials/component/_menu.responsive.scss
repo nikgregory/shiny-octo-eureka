@@ -27,7 +27,12 @@
  *  3. Theme settings as set in your themes extention settings.
  ============================================================================ */
 
-// Global styles for the navbar region.
+// Global styles for the responsive menu row.
+.rm-row {
+  //position: relative;
+}
+
+// Global styles for the responsive menu region.
 .rm-region {
   padding: 0;
   margin: 0;
@@ -61,11 +66,19 @@
   @include adjust-font-size-to($medium);
   @include output-rhythm(padding, $xx-small $medium);
   margin: 0;
-  cursor: pointer;
+
+  &__link,
+  &__link:hover,
+  &__link:focus,
+  &__link:active {
+    @include output-rhythm(padding, $xx-small);
+    border-radius: $border-radius;
+    cursor: pointer;
+  }
 
   &__icon {
     position: relative;
-    @include output-rhythm(top, 2px);
+    //@include output-rhythm(top, 2px);
     @include output-rhythm(height, $medium);
     @include output-rhythm(width, $medium);
   }
@@ -143,4 +156,8 @@
   }
 }
 
-
+// Responsive menu in the header-second region.
+.pr-header__header-second {
+  .rm-block {
+  }
+}

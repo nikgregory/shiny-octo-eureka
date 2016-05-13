@@ -206,6 +206,9 @@ hr {
   color: inherit;
 }
 
+.rm-toggle__link, .rm-toggle__link:hover, .rm-toggle__link:focus, .rm-toggle__link:active {
+  background-color: #363636;
+}
 .rm-toggle__icon {
   fill: white;
 }
@@ -864,4 +867,5 @@ body:before {
   border-color: #ccc;
   opacity: 1;
 }
+
 /*# sourceMappingURL=maps/color.css.map */
