@@ -266,7 +266,6 @@
   #edit-mobile-blocks {
 
     .details-description {
-
       margin-bottom: 1em;
 
       ul {
@@ -279,12 +278,23 @@
       }
     }
 
+    details .details-wrapper {
+      padding: 0;
+    }
+
+    summary[aria-expanded="true"] {
+      background-color: #f2f2f0;
+      border-radius: 4px 4px 0 0;
+    }
+
+
     fieldset {
       border-top: 1px solid #ccc;
       margin: 0;
+      padding: 0.25em 0.75em;
 
       &:last-child {
-        border-bottom: 1px solid #ccc;
+        //border-bottom: 1px solid #ccc;
       }
 
       .fieldset-wrapper {

@@ -554,12 +554,17 @@
 .admin-theme--seven #edit-mobile-blocks .details-description ul li {
   list-style: none;
 }
+.admin-theme--seven #edit-mobile-blocks details .details-wrapper {
+  padding: 0;
+}
+.admin-theme--seven #edit-mobile-blocks summary[aria-expanded="true"] {
+  background-color: #f2f2f0;
+  border-radius: 4px 4px 0 0;
+}
 .admin-theme--seven #edit-mobile-blocks fieldset {
   border-top: 1px solid #ccc;
   margin: 0;
-}
-.admin-theme--seven #edit-mobile-blocks fieldset:last-child {
-  border-bottom: 1px solid #ccc;
+  padding: 0.25em 0.75em;
 }
 .admin-theme--seven #edit-mobile-blocks fieldset .fieldset-wrapper {
   overflow: hidden;
