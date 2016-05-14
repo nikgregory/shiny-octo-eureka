@@ -925,6 +925,19 @@ function at_core_preprocess_breadcrumb(&$variables) {
           unset($variables['breadcrumb'][0]);
         }
       }
+
+      // Add title to breadcrumbs.
+      if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
+        $request = \Drupal::request();
+        $route_match = \Drupal::routeMatch();
+        $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+        if (!empty($page_title)) {
+          $variables['breadcrumb'][] = ['text' => $page_title];
+          // Add cache context based on url.
+          $variables['#cache']['contexts'][] = 'url';
+        }
+      }
     }
   }
 }

@@ -76,6 +76,12 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
     'disabled' => array('input[name="settings_breadcrumb_home"]' => array('checked' => TRUE)),
   ),
 );
+// Breadcrumbs Title?
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_title'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Add the page title to breadcrumbs'),
+  '#default_value' => theme_get_setting('settings.breadcrumb_title'),
+);
 // Breadcrumbs Separator
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
