@@ -10,7 +10,7 @@ use Drupal\Component\Utility\Xss;
 
 function at_core_submit_fonts($values, $generated_files_path) {
   // Websafe fonts.
-  $websafe_fonts = $values['websafe_options'];
+  $websafe_fonts = isset($values['websafe_options']) ?: '';
 
   // Elements to apply fonts to.
   $font_elements = font_elements();

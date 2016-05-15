@@ -241,19 +241,23 @@ layout_settings:
     theme:
       layout/site-builder/css/site-builder-form.css: {} # You probably need to change this if your theme uses a different layout plugin, i.e. you built your own.
 
+#
 # Vendor Libraries - CSS plugins from github etc.
+#
+
+# Animate - https://daneden.github.io/animate.css/
 animate:
-  version: master
+  remote: https://github.com/daneden/animate.css/
+  version: "3.5.1"
   license:
     name: MIT
     url: https://github.com/daneden/animate.css/blob/master/README.md
     gpl-compatible: true
   css:
     theme:
-      styles/css/vendor/animate.min.css: {}
+      https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css: { type: external }
 
-# Fontfaceobserver
-# https://github.com/bramstein/fontfaceobserver
+# Fontfaceobserver - https://github.com/bramstein/fontfaceobserver
 fontfaceobserver:
   version: 8.x-1.0
   js:

@@ -305,7 +305,7 @@ function at_core_page_attachments_alter(array &$page) {
         // Attach JS settings.
         if (!empty($slider_settings)) {
           $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
-          $page['#attached']['library'][] = 'at_core/at.slideshow';
+          $page['#attached']['library'][] = 'at_core/at.slideshow_settings';
           $page['#attached']['library'][] = "$theme/slideshow_styles";
         }
       }
