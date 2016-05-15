@@ -57,21 +57,11 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
     $breakpoints = array();
 
-    // Unset core breakpoint groups due to notices and other issues, until this
-    // is resolved: SEE: https://www.drupal.org/node/2379283
-//    unset($breakpoint_groups['toolbar']);
-//    unset($breakpoint_groups['seven']);
-//    unset($breakpoint_groups['bartik']);
-
     // Set breakpoint options, we use these in layout and other extensions like
     // Responsive menus.
     foreach ($breakpoint_groups as $group_key => $group_values) {
       $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
-
-
     }
-
-    //kpr($breakpoints);
 
     foreach($breakpoints as $group => $breakpoint_values)  {
       if ($breakpoint_values !== array()) {
