@@ -1016,9 +1016,6 @@ function at_core_preprocess_maintenance_page(&$variables) {
  */
 function at_core_preprocess_menu(&$variables) {
   foreach ($variables['items'] as &$item) {
-    // Plugin ID.
-    $item['plugin_id'] = $item['original_link']->getPluginId();
-
     // Menu link classes.
     $attributes = $item['url']->getOption('attributes') ?: [];
     $classes = isset($attributes['class']) ? implode($attributes['class']) : '';
@@ -1031,7 +1028,6 @@ function at_core_preprocess_menu(&$variables) {
       $below_classes = isset($below_attributes['class']) ? implode($below_attributes['class']) : '';
       $menu_link_below_classes = array('class' => array('menu__link', $below_classes));
       $below_item['url']->setOption('attributes', array_merge_recursive($below_attributes, $menu_link_below_classes));
-
     }
   }
 }

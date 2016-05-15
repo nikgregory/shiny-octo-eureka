@@ -50,6 +50,7 @@
             item.is_collapsed ? 'menu__item--collapsed',
             item.in_active_trail ? 'menu__item--active-trail',
             'menu-title-' ~ item.title|render|clean_class,
+            item.original_link ? 'menu-plugin-id--' ~ item.original_link.getPluginId()|clean_class,
           ]
         %}
         {% spaceless %}
