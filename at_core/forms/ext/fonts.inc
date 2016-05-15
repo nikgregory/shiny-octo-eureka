@@ -10,15 +10,15 @@
  */
 function websafe_fonts() {
   $websafe_fonts = array(
-    'wide_sans_serif'   => 'Verdana, Geneva, sans-serif',
-    'medium_sans_serif' => '"Segoe UI", Segoe, Tahoma, Geneva, sans-serif',
-    'narrow_sans_serif' => '"Helvetica Neue", Helvetica, Arial, sans-serif',
-    'wide_serif'        => 'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
-    'narrow_serif'      => '"Times New Roman", Times, serif',
-    'impact'            => 'Impact, "Helvetica Inserat", "Arial Black", sans-serif',
-    'monospace'         => '"Courier New", Courier, monospace, sans-serif',
-    'sans_serif'        => 'sans-serif',
-    'serif'             => 'serif',
+    'Verdana, Geneva, sans-serif',
+    '"Segoe UI", Segoe, Tahoma, Geneva, sans-serif',
+    '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    'Georgia, Utopia, Palatino, "Palatino Linotype", serif',
+    '"Times New Roman", Times, serif',
+    'Impact, "Helvetica Inserat", "Arial Black", sans-serif',
+    '"Courier New", Courier, monospace, sans-serif',
+    'sans-serif',
+    'serif',
   );
 
   return $websafe_fonts;

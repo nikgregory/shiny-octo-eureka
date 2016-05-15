@@ -9,8 +9,14 @@
 use Drupal\Component\Utility\Xss;
 
 function at_core_submit_fonts($values, $generated_files_path) {
+
   // Websafe fonts.
-  $websafe_fonts = isset($values['websafe_options']) ?: '';
+  if (isset($values['settings_font_websafe'])) {
+    $websafe_fonts = explode(PHP_EOL, $values['settings_font_websafe']);
+  }
+  else {
+    $websafe_fonts = '';
+  }
 
   // Elements to apply fonts to.
   $font_elements = font_elements();
@@ -56,12 +62,6 @@ function at_core_submit_fonts($values, $generated_files_path) {
 
       $fonts[$font_key]['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
       $fonts[$font_key]['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
-
-//      if (isset($values['settings_font_size_base'])) {
-//        $rem_size =  $base_size / 16;
-//        $fonts['base']['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
-//        $fonts['base']['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
-//      }
     }
 
     // Set font family for each key.
@@ -71,9 +71,7 @@ function at_core_submit_fonts($values, $generated_files_path) {
       if ($values['settings_font_' . $font_key] == 'websafe') {
         if (isset($values['settings_font_websafe_' . $font_key])) {
           if (!empty($websafe_fonts[$values['settings_font_websafe_' . $font_key]])) {
-
             $websafe_font = $websafe_fonts[$values['settings_font_websafe_' . $font_key]];
-
             $fonts[$font_key]['family'] = 'font-family: ' . trim($websafe_font) . ';';
           }
           else {

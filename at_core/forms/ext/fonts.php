@@ -56,12 +56,7 @@ $form['fonts']['setup']['help'] = array(
   '#markup' => t('First set the fonts you want to use in your site and save the Extension settings. Then apply fonts to specific elements.'),
 );
 
-// Pass in a hidden setting for submit.
-$form['fonts']['setup']['websafe_options'] = array(
-  '#type' => 'hidden',
-  '#value' => $websafe_options,
-);
-
+// Websafe stacks
 $form['fonts']['setup']['settings_font_websafe'] = array(
   '#type' => 'textarea',
   '#title' => t('Websafe font stacks'),
