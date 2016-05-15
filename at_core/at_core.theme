@@ -27,6 +27,7 @@ use Drupal\at_core\Layout\LayoutLoad;
  */
 function at_core_page_attachments_alter(array &$page) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $theme_path = \Drupal::theme()->getActiveTheme()->getPath();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $generated_files_path = NULL;
 
@@ -168,7 +169,7 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Shortcodes
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      $shortcodes_yml = \Drupal::theme()->getActiveTheme()->getPath() . '/' . $theme . '.shortcodes.yml';
+      $shortcodes_yml = $theme_path . '/' . $theme . '.shortcodes.yml';
       if (file_exists($shortcodes_yml)) {
         $shortcodes_parser = new Parser();
         $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
@@ -313,7 +314,9 @@ function at_core_page_attachments_alter(array &$page) {
   }
 
   // Custom CSS file for novice users.
-  $page['#attached']['library'][] = "$theme/custom_css_file";
+  if (file_exists($theme_path . '/styles/css/custom.css')) {
+    $page['#attached']['library'][] = "$theme/custom_css_file";
+  }
 }
 
 /**
@@ -370,9 +373,11 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
 
   // Use a custom block suggestion for responsive menus.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['responsive_menu_block'])) {
-      if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == $config['responsive_menu_block']) {
-        $suggestions[] = 'block__responsive_menu';
+    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+      if (isset($config['responsive_menu_block'])) {
+        if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == $config['responsive_menu_block']) {
+          $suggestions[] = 'block__responsive_menu';
+        }
       }
     }
   }
