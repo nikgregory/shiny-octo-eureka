@@ -26,7 +26,7 @@ $form['markup_overrides']['markup_overrides_settings']['responsive-tables'] = ar
 );
 $form['markup_overrides']['markup_overrides_settings']['responsive-tables']['settings_responsive_tables'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Enable Responsive Tables'),
+  '#title' => t('Enable responsive tables'),
   '#default_value' => theme_get_setting('settings.responsive_tables'),
   '#description' => t('Enable the responsive tables plugin. To use apply the "responsive-enabled" class to the table element, e.g. <code>@tableexample</code>. In small screens this will hide the overflow and be horizontally scrollable.', array('@tableexample' => '<table class="responsive-enabled">')),
 );
@@ -161,7 +161,7 @@ $form['markup_overrides']['markup_overrides_settings']['feed-icons'] = array(
 );
 $form['markup_overrides']['markup_overrides_settings']['feed-icons']['settings_views_hide_feedicon'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Hide Feed icon in views pages'),
+  '#title' => t('Hide feed icon in views pages'),
   '#default_value' => theme_get_setting('settings.views_hide_feedicon'),
   '#description' => t('Page views such as the Front page show an RSS feed icon by default, use this setting to remove all page view feed icons.'),
 );

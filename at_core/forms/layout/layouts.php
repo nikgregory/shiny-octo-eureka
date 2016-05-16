@@ -207,7 +207,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 // Suggestions container.
 $form['layouts']['layout_select']['suggestions'] = array(
   '#type' => 'details',
-  '#title' => t('Add new Suggestion'),
+  '#title' => t('Add new suggestion'),
 );
 
 // Suggestions input and help.
@@ -306,7 +306,7 @@ $max_width_units = array(
 
 $form['layouts']['adv_options']['select']['max_width'] = array(
   '#type' => 'details',
-  '#title' => t('Max Width'),
+  '#title' => t('Max width'),
   '#collapsed' => TRUE,
   '#collapsible' => TRUE,
   '#description' => t('Override the global max-width and per row.'),

@@ -15,7 +15,7 @@ $form['slideshows'] = array(
 
 $form['slideshows']['help'] = array(
   '#type' => 'container',
-  '#markup' => t('Choose how many slideshow blocks you want to configure, then set options for each slideshow.'),
+  '#markup' => t('Choose how many slideshows you want to configure, then set options for each slideshow.'),
 );
 
 $form['slideshows']['settings_slideshow_count'] = array(
@@ -27,7 +27,7 @@ $form['slideshows']['settings_slideshow_count'] = array(
     'step' => 1,
   ),
   '#default_value' => theme_get_setting('settings.slideshow_count'),
-  '#description' => t('Set the number of slideshows you want to configure then save the Extension Settings to generate options and markup code for each slideshow. A "slideshow" is a re-usable collection of settings that you can apply using the generated markup.'),
+  '#description' => t('Set the number of slideshows you want to configure then save the Extension Settings to generate options and markup code for each slideshow. A "slideshow" is markup with associated CSS classes and settings that you can use in a custom block, node or template.'),
 );
 
 $slideshow_count = theme_get_setting('settings.slideshow_count');
@@ -326,7 +326,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
       '#type' => 'checkbox',
       '#title' => t('Use CSS'),
       '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_usecss') ? theme_get_setting('settings.slideshow_' . $i . '_usecss') : 1,
-      '#description' => t('Slider will use CSS3 transitions if the browser supports them. Uncheck this if you have issues with slides flashing or flickering, or if you prefer to use JavaScript animation.'),
+      '#description' => t('Slider will use CSS3 transitions if the browser supports them. Un-check this if you have issues with slides flashing or flickering, or if you prefer to use JavaScript animation.'),
     );
 
     // touch            : true,           // Boolean Allow touch swipe navigation of the slider on enabled devices
