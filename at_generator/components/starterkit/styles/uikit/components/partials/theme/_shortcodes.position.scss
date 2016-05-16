@@ -16,7 +16,7 @@
   transform: translateY(-50%);
 }
 
-@media #{$mobile} {
+@media #{$wide} {
   .pull-right,
   [dir="rtl"] .pull-left {
     float: right;
