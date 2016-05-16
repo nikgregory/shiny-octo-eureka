@@ -57,7 +57,7 @@ blockquote {
 
   // Float right with text-align: right
   &.pull-right {
-    border-#{$flow-to}-color: $border-color; // TODO check concantenation is OK
+    border-#{$flow-to}-color: $border-color; // TODO check concatenation is OK
   }
 }
 
@@ -104,9 +104,9 @@ hr {
 //  Page Rows - these match the Site Builder layout.
 
 // Leaderboard
-.pr-leaderboard {    // Outer wrapper
-  &__rw {}           // Regions wrapper (container that takes max-width from your layout settings)
-  &__leaderboard {}  // Region
+.pr-leaderboard {    // Outer wrapper.
+  &__rw {}           // Regions wrapper (container that takes max-width from your layout settings).
+  &__leaderboard {}  // Region.
 }
 
 
@@ -323,17 +323,17 @@ hr {
 /**
  * Responsive menu styles.
  *
- * Mixins provide the basic struture and a base style (not much), the rest
+ * Mixins provide the basic structure and a base style (not much), the rest
  * is up to you, add colors, borders, padding and so on. Icons such as
  * the hamburger and arrows are set in variables in _variables.scss, and you
- * use the color varaibles for menus from there also.
+ * use the color variables for menus from there also.
  *
  * Menu styles are set in Appearance settings using the Responsive Menus extension.
  * There you select a block, breakpoint, a default style and a responsive style.
  * You can safely remove mixins from this file if you not going to use them later
- * on, and want to save a few bytes in stylsheet size.
+ * on, and want to save a few bytes in stylesheet size.
  *
- * Each mixin takes one or more parameters. Use these to customize the basic struture
+ * Each mixin takes one or more parameters. Use these to customize the basic structure
  * of the menu, or call options, for example you can place the offcanvas menu on the
  * left or right.
  *
@@ -784,7 +784,7 @@ form .marker {
 
 /**
  * Buttons
- * We include button styling seperate (from _forms.scss) mainly because the form
+ * We include button styling separate (from _forms.scss) mainly because the form
  * styles are quite long already and we often want to add unique button variants.
  *
  *  - applies to elements with class "button", includes styles for:
@@ -906,7 +906,7 @@ button.link-edit-summary {
 }
 
 
-// Dropbutton Multiple
+// Dropbutton Multiple.
 .dropbutton-multiple {
   .dropbutton {
     border-right-color: $button-border-color;

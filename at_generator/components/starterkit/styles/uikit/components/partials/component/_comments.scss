@@ -91,10 +91,10 @@
   // Comment content wrapper.
   &__content {}
 
-  // User signiture
+  // User signature.
   &__user-signature {}
 
-  // Preivew.
+  // Preview.
   &.preview {
     @include output-rhythm(padding, $medium);
     @include output-rhythm(margin-bottom, $medium);

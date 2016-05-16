@@ -32,7 +32,7 @@
     z-index: 1;
   }
 
-  // Search block input sumbit text removed, uses an SVG
+  // Search block input submit text removed, uses an SVG
   // icon instead.
   .form-submit {
     margin: 0;
@@ -51,14 +51,14 @@
     border-radius: 0 $border-radius $border-radius 0; // LTR
   }
 
-  // The contextual links trigger can obsure the search submit input.
+  // The contextual links trigger can obscure the search submit input.
   .contextual-render-processed {
     //display: none;
     top: 2px;
     #{$flow-to}: 2em;
   }
 
-  // Style placeholders
+  // Style placeholders.
   ::-webkit-input-placeholder {
     color: $border-color;
     opacity: 0.75;

@@ -3,16 +3,6 @@
   layout you can turn on debugging manually in the $susy global settings, SEE _site-builder-base.scss.
 */
 
-.regions {
-  max-width: 75em;
-  margin-left: auto;
-  margin-right: auto;
-}
-.regions:after {
-  content: " ";
-  display: block;
-  clear: both;
-}
 head {
   display: block;
   position: fixed;
@@ -50,4 +40,5 @@ head:hover ~ .regions:before, head:hover ~ body .regions:before {
   background-origin: content-box;
   background-clip: content-box;
   background-position: left top;
+  margin: 0 1rem;
 }

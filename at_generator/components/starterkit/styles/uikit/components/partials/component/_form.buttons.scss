@@ -1,6 +1,6 @@
 /**
  * Buttons
- * We include button styling seperate (from _forms.scss, Form Base/Theme in base.css)
+ * We include button styling separate (from _forms.scss, Form Base/Theme in base.css)
  * mainly because the form styles are quite long already and we often want to add
  * unique button variants.
  *
@@ -56,7 +56,7 @@ button,
 
 
 //
-// Button variants are primarly changes in colors, so are set in
+// Button variants are primarily changes in colors, so are set in
 //_theme.color.scss using the button-variant() mixin.
 //
 

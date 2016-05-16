@@ -1,6 +1,9 @@
 //
 // Variable Settings.
 //
+// This file sets global variables that will change many style aspects of the
+// theme. You can achieve a lot simply by tweaking the values of variables.
+//
 
 // =============================================================================
 //
@@ -29,7 +32,7 @@ $ms-base  : $base-font-size ($base-font-size * 1.130);
 $ms-ratio : $phi;
 
 
-// Modular Scale size variables.
+// Modular Scale size variables
 // -----------------------------------------------------------------------------
 // The output is always a px value. We use Compass mixins and some internal
 // functions to convert to rem where required, or simply use the variable if you
@@ -94,7 +97,7 @@ $font-monospace   : $monospace;
 //
 // =============================================================================
 
-// Lighten and Darken values
+// Lighten and Darken
 // -----------------------------------------------------------------------------
 $lighten      : 3%;
 $lighten-more : 5%;
@@ -109,7 +112,7 @@ $darken-most  : 10%;
 $global-transition: all, .2s, ease-in-out;
 
 
-// Color module "shift" base.
+// Color module
 // -----------------------------------------------------------------------------
 $base-color               : #000000;
 
@@ -200,50 +203,50 @@ $page-background-color    : #f7f7f7;
 $regions-background-color : $page-background-color;
 
 
-// Page Row colors (for site-builder layout plugin)
+// Page Row colors - for the site-builder layout plugin.
 // -----------------------------------------------------------------------------
 
-// Full width background toggle
+// Full width background toggle.
 $page-row-fullwidth : true;
 $regions-padding    : $medium;
 
-// Leaderboard
+// Leaderboard.
 $page-leaderboard-color                : $text-color;
 $page-leaderboard-background-color     : $regions-background-color;
 
-// Header
+// Header.
 $page-header-color                     : $text-color;
 $page-header-background-color          : #ffffff;
 
-// Navbar
+// Navbar.
 $page-navbar-color                     : #ffffff;
 $page-navbar-background-color          : #666666;
 
-// Highlighted
+// Highlighted.
 $page-highlighted-color                : $text-color;
 $page-highlighted-background-color     : $regions-background-color;
 
-// Features
+// Features.
 $page-features-color                   : $text-color;
 $page-features-background-color        : #d3d3d3;
 
-// Content prefix
+// Content prefix.
 $page-content-prefix-color             : $text-color;
 $page-content-prefix-background-color  : $regions-background-color;
 
-// Main
+// Main.
 $page-main-color                       : $text-color;
 $page-main-background-color            : $regions-background-color;
 
-// Content suffix
+// Content suffix.
 $page-content-suffix-color             : $text-color;
 $page-content-suffix-background-color  : $regions-background-color;
 
-// Sub features
+// Sub features.
 $page-subfeatures-color                : $text-color;
 $page-subfeatures-background-color     : #d3d3d3;
 
-// Footer
+// Footer.
 $page-footer-color                     : #ffffff;
 $page-footer-background-color          : #666666;
 
@@ -288,7 +291,7 @@ $menu-border-radius                : $border-radius;
 $menu-arrows                       : true;
 
 
-// Responsive menus
+// Responsive Menus
 // -----------------------------------------------------------------------------
 $resp-menu-color                   : inherit;
 $resp-menu-background-color        : inherit;
@@ -300,13 +303,13 @@ $resp-menu-hover-background-color  : rgba(255,255,255,0.3);
 $resp-menu-active-background-color : rgba(255,255,255,0.3);
 
 
-// Drop menu
+// Drop Menu
 // -----------------------------------------------------------------------------
 $dropmenu-item-width               : 12em;
 $dropmenu-arrows                   : true;
 
 
-// Forms & dialog
+// Forms & Dialog
 // -----------------------------------------------------------------------------
 $form-text-align                   : center;
 
@@ -421,22 +424,22 @@ $breadcrumb-separator-color: $border-color;
 $table-cell-borders                : true; // set to false to remove td/th borders
 $table-border-color                : $border-color;
 
-// thead
+// thead.
 $thead-background-color            : $text-background-color;
 $thead-text-color                  : $text-color;
 
-// row striping
+// Row striping.
 $table-row-striping                : false;
 $table-row-odd-color               : $odd-color;
 $table-row-even-color              : $even-color;
 
-// col striping, applies to the active column in sortable tables.
+// Col striping - applies to the active column in sortable tables.
 $table-col-striping                : false;
 $table-col-odd-color               : $text-background-color;
 //$table-col-even-color             : $text-background-color; // TODO - strategy for column striping even color
 $table-col-even-color              : darken($text-background-color, 2%);
 
-// hover
+// Hover
 $tr-hover                          : false;
 //$tr-hover-color                   : $text-background-color; // TODO - strategy for table row hover color
 $tr-hover-color                    : darken($text-background-color, $darken);
@@ -471,27 +474,27 @@ $field-taxonomy-label-as-icon      : false; // Label must not be hidden in field
 
 $icon-font                         : FontAwesome, sans-serif;
 
-// Menu
+// Menu.
 $menu-arrow-left                   : $fa-var-angle-left;
 $menu-arrow-right                  : $fa-var-angle-right;
 $menu-arrow-up                     : $fa-var-angle-up;
 $menu-arrow-down                   : $fa-var-angle-down;
 $menu-hamburger                    : $fa-var-bars; // deprecated, now uses embedded SVG
 
-// Forms
+// Forms.
 $form-details-summary-open         : $fa-var-caret-down;
 $form-details-summary-closed       : $fa-var-caret-right;
 $form-details-summary-closed-rtl   : $fa-var-caret-left;
 
-// Buttons
+// Buttons.
 $button-action-icon                : $fa-var-plus;
 $button-action-login-icon          : $fa-var-user;
 
-// Slideshow
+// Slideshow.
 $slide-direction-previous          : $fa-var-chevron-left;
 $slide-direction-next              : $fa-var-chevron-right;
 
-// File types
+// File types.
 $file-default-icon                 : $fa-var-file-o;
 $file-archive-icon                 : $fa-var-file-archive-o;
 $file-spreadsheet-icon             : $fa-var-file-excel-o;
@@ -504,29 +507,29 @@ $file-audio-icon                   : $fa-var-file-audio-o;
 $file-video-icon                   : $fa-var-file-video-o;
 $file-image-icon                   : $fa-var-file-image-o;
 
-// Help (e.g. formatting tips link icon)
+// Help - e.g. formatting tips link icon.
 $help-icon                         : $fa-var-question-circle;
 
-// Breadcrumb
+// Breadcrumb.
 $breadcrumb-separator-icon         : $fa-var-angle-right;
 
-// Labels
+// Labels.
 $more-link-use-icon                : false;
 $more-link-icon                    : $fa-var-caret-right;
 
-// Taxonomy
+// Taxonomy.
 $field-taxonomy-label-icon         : $fa-var-tags;
 $field-taxonomy-item-icon          : $fa-var-tag;
 
-// Elements
+// Elements.
 $blockquote-icon                   : $fa-var-quote-left;
 
-// Messages                        // FontAwesome variables
+// Messages.                       // FontAwesome variables
 $messages-status-icon              : $fa-var-smile-o;
 $messages-warning-icon             : $fa-var-exclamation-triangle;
 $messages-error-icon               : $fa-var-frown-o;
 
-// Table sort
+// Table sort.
 $table-sort-asc                    : $fa-var-caret-down;
 $table-sort-desc                   : $fa-var-caret-up;
 

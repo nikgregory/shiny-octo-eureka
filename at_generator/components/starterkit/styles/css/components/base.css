@@ -1074,7 +1074,7 @@ details > .details-wrapper {
 
 /**
  * Buttons
- * We include button styling seperate (from _forms.scss, Form Base/Theme in base.css)
+ * We include button styling separate (from _forms.scss, Form Base/Theme in base.css)
  * mainly because the form styles are quite long already and we often want to add
  * unique button variants.
  *
@@ -3157,7 +3157,7 @@ table tr.error {
 /**
  * Print
  * This aggressively styles print output, you can remove all of it if you want
- * print to be identical to a normal webpage, or adjust it to better suit
+ * print to be identical to a normal web page, or adjust it to better suit
  * your design and requirements. For example this only removes a sub-set of
  * regions, all others will print.
  ============================================================================ */

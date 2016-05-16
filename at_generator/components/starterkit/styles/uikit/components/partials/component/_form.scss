@@ -26,7 +26,7 @@
 }
 
 
-// Checkboxes, Radios, Items
+// Checkboxes, Radios, Items.
 .form-item,
 .form-radios,
 .form-checkboxes {
@@ -61,13 +61,13 @@
 }
 
 
-// Actions
+// Actions.
 .form-actions {
   @include output-rhythm(margin, $medium 0);
 }
 
 
-// Long text textarea (with tips)
+// Long text textarea (with tips).
 .field-type-text-long {
   textarea {
     border-radius: $form-border-radius $form-border-radius 0 0;
@@ -75,7 +75,7 @@
 }
 
 
-// Textarea wrapper
+// Textarea wrapper.
 .form-textarea-wrapper {
   textarea {
     display: block;
@@ -86,7 +86,7 @@
 }
 
 
-// Filters and tips
+// Filters and tips.
 .filter-wrapper {
   border: $form-border-width $form-border-style;
   border-top: 0;
@@ -101,7 +101,7 @@
 }
 
 
-// Tips, Descriptions
+// Tips, Descriptions.
 .tips,
 .description {
   @include adjust-font-size-to($small);
@@ -175,7 +175,7 @@ abbr {
 }
 
 
-// Form Composite inline, e.g. dialog
+// Form Composite inline, e.g. dialog.
 // TODO check https://www.drupal.org/node/2236789 when it lands.
 .form-composite--inline {
 
@@ -331,7 +331,7 @@ details {
 }
 
 
-// Extend reset-appearance class
+// Extend reset-appearance class.
 .reset-appearance {
   transition: none;
   box-shadow: none;
@@ -345,13 +345,13 @@ details {
 }
 
 
-// CK Editor
+// CK Editor.
 .cke_editable {
   padding: 5px 10px;
 }
 
 
-// Pet peeves with core forms
+// Pet peeves with core forms.
 .field-storage-config-edit-form {
   .container-inline {
     display: block;

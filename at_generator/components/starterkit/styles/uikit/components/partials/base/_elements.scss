@@ -134,7 +134,7 @@ video {
 
 
 // Remove the gap between images, videos, audio and canvas and the bottom of
-// their containers: h5bp.com/i/440
+// their containers: h5bp.com/i/440.
 img,
 audio,
 canvas,
@@ -287,7 +287,7 @@ blockquote {
 }
 
 
-// A better looking default horizontal rule
+// A better looking default horizontal rule.
 hr {
   height: $border-width;
   border: 0;
@@ -297,7 +297,7 @@ hr {
 }
 
 
-// Set hidden styles for non-supporting browsers
+// Set hidden styles for non-supporting browsers.
 *[hidden] {
   display: none;
 }
