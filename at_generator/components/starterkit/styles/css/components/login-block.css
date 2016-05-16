@@ -2,31 +2,32 @@
  * Block User Login
  *  - style the theme settings for login block (horizontal, placeholders etc).
  ============================================================================ */
-.block-user-login-block.is-horizontal {
-  margin: 7px 0 16px;
-  margin: 0.4375rem 0 1rem;
+.is-horizontal-login-block {
+  margin: 10px 0 16px;
+  margin: 0.625rem 0 1rem;
 }
-.block-user-login-block.is-horizontal .block__title {
+.is-horizontal-login-block .block__title {
   font-family: inherit;
+  margin: 0;
   font-size: 16px;
   font-size: 1rem;
   line-height: 21px;
   line-height: 1.3125rem;
 }
-.block-user-login-block.is-horizontal .block__title,
-.block-user-login-block.is-horizontal > div,
-.block-user-login-block.is-horizontal .user-login-form,
-.block-user-login-block.is-horizontal .user-login-form > div,
-.block-user-login-block.is-horizontal .form-item,
-.block-user-login-block.is-horizontal .form-actions {
+.is-horizontal-login-block .block__title,
+.is-horizontal-login-block .block__content,
+.is-horizontal-login-block .user-login-form,
+.is-horizontal-login-block .user-login-form > div,
+.is-horizontal-login-block .form-item,
+.is-horizontal-login-block .form-actions {
   display: inline-block;
 }
-.block-user-login-block.is-horizontal form,
-.block-user-login-block.is-horizontal .form-item,
-.block-user-login-block.is-horizontal .form-actions {
-  margin-bottom: 0;
+.is-horizontal-login-block form,
+.is-horizontal-login-block .form-item,
+.is-horizontal-login-block .form-actions {
+  margin: 0;
 }
-.block-user-login-block.is-horizontal label {
+.is-horizontal-login-block label {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 15px;

@@ -132,9 +132,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Login block.
       // Just load the login block CSS without the currentUser check.
       if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-        if (file_exists($generated_files_path . '/login-block.css')) {
-          $page['#attached']['library'][] = "$theme/login_block";
-        }
+        $page['#attached']['library'][] = "$theme/login_block";
       }
     }
 
@@ -424,6 +422,9 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             $form['name']['#title_display'] = 'invisible';
             $form['pass']['#title_display'] = 'invisible';
             $form['#attributes']['class'][] = 'has-placeholders';
+          }
+          if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
+            $form['#attributes']['class'][] = 'is-horizontal-form';
           }
         }
       }
@@ -818,7 +819,7 @@ function at_core_preprocess_block(&$variables) {
 
           // Add class for horizontal login.
           if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-            $variables['attributes']['class'][] = 'is-horizontal';
+            $variables['attributes']['class'][] = 'is-horizontal-login-block';
           }
         }
       }

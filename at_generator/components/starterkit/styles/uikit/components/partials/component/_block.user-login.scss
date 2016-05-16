@@ -3,27 +3,28 @@
  *  - style the theme settings for login block (horizontal, placeholders etc).
  ============================================================================ */
 
-.block-user-login-block.is-horizontal {
-  @include output-rhythm(margin, $xx-small 0 $medium);
+.is-horizontal-login-block {
+  @include output-rhythm(margin, $x-small 0 $medium);
 
   .block__title {
-     font-family: inherit;
-     @include adjust-font-size-to($medium);
+    font-family: inherit;
+    margin: 0;
+    @include adjust-font-size-to($medium);
   }
 
   .block__title,
-  > div,
+  .block__content,
   .user-login-form,
   .user-login-form > div,
   .form-item,
   .form-actions{
-    display:inline-block;
+    display: inline-block;
   }
 
   form,
   .form-item,
   .form-actions {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   label {
