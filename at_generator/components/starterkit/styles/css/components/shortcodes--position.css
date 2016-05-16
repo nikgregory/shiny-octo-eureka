@@ -17,7 +17,7 @@
           transform: translateY(-50%);
 }
 
-@media all and (max-width: 60em) {
+@media all and (min-width: 60.063em) {
   .pull-right,
   [dir="rtl"] .pull-left {
     float: right;
