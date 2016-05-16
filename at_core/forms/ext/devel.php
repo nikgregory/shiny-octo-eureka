@@ -38,12 +38,12 @@ $form['devel']['settings_show_grid'] = array(
 );
 
 // Debug layout
-$form['devel']['settings_devel_layout'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Debug Layout <small>(hides all content, colorizes all rows and regions)</small>'),
-  '#default_value' => theme_get_setting('settings.devel_layout', $theme),
-  '#description' => t('An aggressive option that removes all content, hides the toolbar, and colorizes page rows and regions. Works with LiveReload.'),
-);
+//$form['devel']['settings_devel_layout'] = array(
+//  '#type' => 'checkbox',
+//  '#title' => t('Debug Layout <small>(hides all content, colorizes all rows and regions)</small>'),
+//  '#default_value' => theme_get_setting('settings.devel_layout', $theme),
+//  '#description' => t('An aggressive option that removes all content, hides the toolbar, and colorizes page rows and regions. Works with LiveReload.'),
+//);
 
 // Colorize regions.
 $form['devel']['settings_devel_color_regions'] = array(
@@ -52,7 +52,7 @@ $form['devel']['settings_devel_color_regions'] = array(
   '#default_value' => theme_get_setting('settings.devel_color_regions', $theme),
   '#description' => t('Add background color to regions. Also adds a margin-bottom for visual separation.'),
   '#states' => array(
-    'disabled' => array('input[name="settings_devel_layout"]' => array('checked' => TRUE)),
+    //'disabled' => array('input[name="settings_devel_layout"]' => array('checked' => TRUE)),
   ),
 );
 
