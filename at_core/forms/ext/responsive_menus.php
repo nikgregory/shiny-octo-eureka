@@ -119,3 +119,10 @@ $form['responsive_menus']['styles']['settings_responsive_menu_responsive_style']
   '#options' => $responsive_menu_options,
   '#default_value' => theme_get_setting('settings.responsive_menu_responsive_style', $theme),
 );
+
+$form['responsive_menus']['styles']['settings_responsive_menu_vertically_centered'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Vertically center the Responsive style menu.'),
+  '#description' => t('E.g. this will vertically center the drop menu or horizontal menu in it\'s region container.'),
+  '#default_value' => theme_get_setting('settings.responsive_menu_vertically_centered', $theme),
+);

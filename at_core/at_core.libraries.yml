@@ -112,7 +112,7 @@ at.vertical_center:
   version: "8.x-1.0"
   js:
     scripts/min/at.verticalCenter.min.js: { minified: true }
-    #scripts/at.verticalCentere.js: {}
+    #scripts/at.verticalCenter.js: {}
   dependencies:
     - core/jquery
 

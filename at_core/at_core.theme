@@ -210,6 +210,10 @@ function at_core_page_attachments_alter(array &$page) {
         }
       }
 
+      if (isset($config['responsive_menu_vertically_centered']) && $config['responsive_menu_vertically_centered'] === 1) {
+        $responsivemenu_settings['vertically_centered'] = TRUE;
+      }
+
       // Attach JS settings.
       $page['#attached']['drupalSettings'][$theme]['at_responsivemenus'] = $responsivemenu_settings;
     }

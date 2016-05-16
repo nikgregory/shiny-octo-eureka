@@ -3155,6 +3155,18 @@ table tr.error {
 }
 
 /**
+ * Utility
+ * - useful classes to be used anywhere.
+ ============================================================================ */
+.is-vertically-centered {
+  position: absolute !important;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+/**
  * Print
  * This aggressively styles print output, you can remove all of it if you want
  * print to be identical to a normal web page, or adjust it to better suit

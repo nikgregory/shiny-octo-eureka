@@ -21,7 +21,8 @@
           def  = rm['default'],
           resp = rm['responsive'],
           tl   = '.rm-block .rm-toggle__link',
-          exp  = $(tl).attr("aria-expanded") == "false";
+          exp  = $(tl).attr("aria-expanded") == "false",
+          vc   = rm['vertically_centered'];
 
       // Toggle handler.
       function toggleClick(e) {
@@ -61,12 +62,19 @@
           if(resp !== 'ms-none') {
             if(resp !== def) {
               $(document.body).removeClass(def).addClass(resp);
+              if(vc) {
+                $('.' + resp + ' .rm-block').atVerticalCenter('.rm-row');
+              }
             }
           }
         },
         // Unmatch fires the first time the media query is unmatched.
         unmatch : function() {
           $(document.body).addClass(def);
+          if(vc) {
+            $('.rm-region').removeAttr('style');
+            $('.' + resp + ' .rm-block').removeClass('is-vertically-centered');
+          }
           if(resp !== def) {
             $(document.body).removeClass(resp);
           }

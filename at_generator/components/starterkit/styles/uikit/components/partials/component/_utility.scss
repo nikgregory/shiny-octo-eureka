@@ -1,0 +1,12 @@
+/**
+ * Utility
+ * - useful classes to be used anywhere.
+ ============================================================================ */
+
+// Center Vertically - you need to set a height on parent container and position
+// relative.
+.is-vertically-centered {
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+}
