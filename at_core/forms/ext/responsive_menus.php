@@ -135,7 +135,6 @@ $form['responsive_menus']['position']['settings_responsive_menu_vertical_positio
     'bottom' => t('Bottom'),
     'none' => t('None'),
   ),
-  //'#description' => t('Vertically position the menu block in it\'s region container.'),
   '#default_value' => theme_get_setting('settings.responsive_menu_vertical_position', $theme),
   '#attributes' => array('class' => array('visually-hidden-off', 'radios-inline')),
 );
