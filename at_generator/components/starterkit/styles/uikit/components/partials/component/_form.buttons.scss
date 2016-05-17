@@ -64,7 +64,9 @@ button,
 .button--primary {}
 
 // Danger button, e.g. delete buttons often have this class.
-.button--danger {}
+.button--danger {
+  border: 0;
+}
 
 // Action button
 // - are links with an icon, and we add an icon for extra visibility.

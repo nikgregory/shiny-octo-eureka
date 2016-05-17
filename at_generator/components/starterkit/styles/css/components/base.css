@@ -1128,6 +1128,10 @@ button:hover, button:focus,
   opacity: 1;
 }
 
+.button--danger {
+  border: 0;
+}
+
 .button-action {
   display: inline-block;
 }
