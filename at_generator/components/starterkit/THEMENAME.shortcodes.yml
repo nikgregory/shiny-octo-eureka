@@ -91,7 +91,10 @@ whitespace:
   classes:
     spaceless:
       class: spaceless
-      description: 'Remove wrapper padding and margin. Use with caution.'
+      description: 'Remove padding and margin.'
+    spaceless-all:
+      class: spaceless-all
+      description: 'Remove padding and margin recursively (all elements).'
     remove-padding:
       class: rm-padding
       description: 'Remove padding.'
@@ -151,7 +154,7 @@ image_styles:
       description: 'Align images center.'
 
 grid_blocks:
-  name: Block Grid'
+  name: Block Grid
   description: 'Layout blocks in a grid. Apply to full width regions only. A good alternative is to build a View with the format "Grid".'
   elements:
     - 'regions that are full width, e.g. leaderboard or content with no sidebars'
