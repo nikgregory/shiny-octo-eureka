@@ -297,6 +297,8 @@ settings:
   slideshow_0_selector: '.slides > li'
   mobile_blocks_breakpoint_group: at_core.simple
   mobile_blocks_breakpoint: 'all and (max-width: 45em)'
+  responsive_menu_horizontal_position: none
+  responsive_menu_vertical_position: none
 features:
   logo: 1
   node_user_picture: 1
