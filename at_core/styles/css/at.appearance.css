@@ -677,46 +677,5 @@
 .admin-theme--seven #color_scheme_form .color-preview {
   display: none !important;
 }
-.admin-theme--seven #color_scheme_form .form-type-select {
-  margin-left: 20px;
-}
-.admin-theme--seven #color_scheme_form .color-form {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-}
-.admin-theme--seven #color_scheme_form .color-form label {
-  background: #f2f2f0;
-  border-bottom: 1px solid #eee;
-  clear: left;
-  float: left;
-  margin: 0 0.5em 0 0 !important;
-  padding: 0.35em;
-  width: 20em;
-}
-.admin-theme--seven #color_scheme_form #placeholder {
-  left: 45em;
-  position: absolute;
-  width: 195px;
-  z-index: 100;
-  float: none;
-}
-.admin-theme--seven #color_scheme_form #palette {
-  min-height: 195px;
-  margin: 0 0 0 20px;
-}
-@media all and (max-width: 66em) {
-  .admin-theme--seven #color_scheme_form #placeholder {
-    float: none;
-    left: auto;
-    margin: 20px auto;
-    position: static;
-  }
-  .admin-theme--seven #color_scheme_form #palette {
-    min-height: 0;
-    margin: 0 0 0 20px;
-  }
-}
 
 /*# sourceMappingURL=at.appearance.css.map */
