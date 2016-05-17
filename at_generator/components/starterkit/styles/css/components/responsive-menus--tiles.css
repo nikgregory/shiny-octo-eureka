@@ -1,3 +1,7 @@
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Tile menu
  * $tile_count: whole number, must be a factor of the $context
@@ -52,4 +56,5 @@
   margin: 7px 0;
   margin: 0.4375rem 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--tiles.css.map */

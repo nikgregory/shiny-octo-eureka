@@ -1,4 +1,8 @@
 @charset "UTF-8";
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Basic styles to support the Responsive Tables jQuery feature.
  *  - to enable responsive tables turn on the extension in your
@@ -56,4 +60,5 @@
 .responsive-enabled {
   width: 100%;
 }
+
 /*# sourceMappingURL=maps/responsive-tables.css.map */

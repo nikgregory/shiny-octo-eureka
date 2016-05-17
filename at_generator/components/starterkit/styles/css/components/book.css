@@ -1,4 +1,8 @@
 @charset "UTF-8";
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Book
  *  - Set styles for book navigation.
@@ -29,7 +33,7 @@
   display: inline-block;
 }
 [dir="rtl"] .book-pager__link:before, [dir="rtl"] .book-pager__link:after {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
@@ -59,4 +63,5 @@
   width: 16px;
   width: 1rem;
 }
+
 /*# sourceMappingURL=maps/book.css.map */

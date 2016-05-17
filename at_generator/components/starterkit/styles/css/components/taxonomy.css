@@ -1,3 +1,7 @@
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Field Taxonomy Reference (Entity Reference as tags).
  *  - to have all taxonomy fields themed the same be sure to include the
@@ -19,4 +23,5 @@
   padding: 0;
   list-style: none;
 }
+
 /*# sourceMappingURL=maps/taxonomy.css.map */

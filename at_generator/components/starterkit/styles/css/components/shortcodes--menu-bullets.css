@@ -1,4 +1,8 @@
 @charset "UTF-8";
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Shortcodes (Menu bullets)
  ============================================================================ */
@@ -106,4 +110,5 @@
 .ms-dropmenu .fa-chevron .rm-block__content .odd ul > .menu__item--collapsed > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=maps/shortcodes--menu-bullets.css.map */

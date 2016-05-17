@@ -1,3 +1,7 @@
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
 /**
  * Basic Horizontal Menu
  * This will hide all sub-menus no matter what, it has the advantage over the
@@ -48,4 +52,5 @@
   width: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--horizontal.css.map */
