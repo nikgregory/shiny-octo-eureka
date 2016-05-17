@@ -94,7 +94,7 @@ at.headroom:
   dependencies:
     - core/jquery
 
-# Masonry
+# Masonary
 at.masonry:
   remote: https://github.com/desandro/masonry
   version: "4.1.0"
