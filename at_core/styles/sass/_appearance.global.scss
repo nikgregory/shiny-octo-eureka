@@ -51,6 +51,11 @@
     @include visually-hidden;
   }
 
+  .visually-hidden-off legend {
+    @include visually-hidden-off;
+    font-weight: bold;
+  }
+
   fieldset {
     margin: 0;
     border: 0;
@@ -98,6 +103,11 @@
     margin: 0;
     padding: 20px;
     @include border-radius(4px);
+  }
+
+  .radios-inline .form-type-radio {
+    display: inline-block;
+    margin: 0.5em 1em 1em 0;
   }
 
   // Hide visually all descriptions by default, this massively cleans up the form but leaves

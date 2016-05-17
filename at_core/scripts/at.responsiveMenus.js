@@ -22,7 +22,8 @@
           resp = rm['responsive'],
           tl   = '.rm-block .rm-toggle__link',
           exp  = $(tl).attr("aria-expanded") == "false",
-          vc   = rm['vertically_centered'];
+          vc   = rm['vertical_position'] || 'none',
+          hp   = rm['horizontal_position'] || 'none';
 
       // Toggle handler.
       function toggleClick(e) {
@@ -63,7 +64,10 @@
             if(resp !== def) {
               $(document.body).removeClass(def).addClass(resp);
               if(vc) {
-                $('.' + resp + ' .rm-block').atVerticalCenter('.rm-row');
+                $('.' + resp + ' .rm-block').atFlexCenter({ verticalPosition: vc, horizontalPosition: hp, parentSelector: '.rm-row' });
+              }
+              else if(hp) {
+                $('.' + resp + ' .rm-block').atFlexCenter({ horizontalPosition: hp, parentSelector: '.rm-row' });
               }
             }
           }
@@ -73,7 +77,10 @@
           $(document.body).addClass(def);
           if(vc) {
             $('.rm-region').removeAttr('style');
-            $('.' + resp + ' .rm-block').removeClass('is-vertically-centered');
+            $('.' + resp + ' .rm-block').removeClass('is-vertical-' + vc).removeClass('is-horizontal-' + hp).removeAttr('style');
+          }
+          else if(hp) {
+            $('.' + resp + ' .rm-block').removeClass('is-horizontal-' + hp).removeAttr('style');
           }
           if(resp !== def) {
             $(document.body).removeClass(resp);

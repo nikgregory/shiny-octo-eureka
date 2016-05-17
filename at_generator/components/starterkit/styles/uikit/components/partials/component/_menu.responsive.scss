@@ -44,6 +44,11 @@
       @include visually-hidden;
     }
   }
+
+  // Required to override position static on contextual links.
+  [class*='is-vertical-'] {
+    position: absolute;
+  }
 }
 
 

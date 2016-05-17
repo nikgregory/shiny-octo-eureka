@@ -50,7 +50,7 @@ $form['responsive_menus'] = array(
   '#type' => 'details',
   '#title' => t('Responsive Menus'),
   '#group' => 'extension_settings',
-  '#description' => t('<h3>Responsive Menus</h3><p>Select a menu and breakpoint group, then a specific breakpoint for the responsive style. You can configure one default style and optionally a responsive style.</p>'),
+  '#description' => t('<h3>Responsive Menus</h3><p>Select a menu and breakpoint group, then a specific breakpoint for the responsive style. You can configure one default style and optionally a responsive style.</p><p>It is recommended to follow a mobile first approach where the <i>responsive style</i> is the one you typically associate with <i>desktop view</i>, and the <i>default style</i> is for small screens such as mobile touch devices.</p>'),
 );
 
 $form['responsive_menus']['default_settings'] = array(
@@ -120,9 +120,35 @@ $form['responsive_menus']['styles']['settings_responsive_menu_responsive_style']
   '#default_value' => theme_get_setting('settings.responsive_menu_responsive_style', $theme),
 );
 
-$form['responsive_menus']['styles']['settings_responsive_menu_vertically_centered'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('Vertically center the Responsive style menu.'),
-  '#description' => t('E.g. this will vertically center the drop menu or horizontal menu in it\'s region container.'),
-  '#default_value' => theme_get_setting('settings.responsive_menu_vertically_centered', $theme),
+$form['responsive_menus']['position'] = array(
+  '#type' => 'details',
+  '#title' => t('Responsive Style Position'),
+  '#description' => t('These settings only apply to the responsive style (i.e. the "desktop style").'),
+);
+
+$form['responsive_menus']['position']['settings_responsive_menu_vertical_position'] = array(
+  '#type' => 'radios',
+  '#title' => t('Vertical position'),
+  '#options' => array(
+    'top' => t('Top'),
+    'center' => t('Center'),
+    'bottom' => t('Bottom'),
+    'none' => t('None'),
+  ),
+  //'#description' => t('Vertically position the menu block in it\'s region container.'),
+  '#default_value' => theme_get_setting('settings.responsive_menu_vertical_position', $theme),
+  '#attributes' => array('class' => array('visually-hidden-off', 'radios-inline')),
+);
+
+$form['responsive_menus']['position']['settings_responsive_menu_horizontal_position'] = array(
+  '#type' => 'radios',
+  '#title' => t('Horizontal position'),
+  '#options' => array(
+    'left' => t('Left'),
+    'center' => t('Center'),
+    'right' => t('Right'),
+    'none' => t('None'),
+  ),
+  '#default_value' => theme_get_setting('settings.responsive_menu_horizontal_position', $theme),
+  '#attributes' => array('class' => array('visually-hidden-off', 'radios-inline')),
 );

@@ -210,8 +210,13 @@ function at_core_page_attachments_alter(array &$page) {
         }
       }
 
-      if (isset($config['responsive_menu_vertically_centered']) && $config['responsive_menu_vertically_centered'] === 1) {
-        $responsivemenu_settings['vertically_centered'] = TRUE;
+      if (isset($config['responsive_menu_vertical_position']) && $config['responsive_menu_vertical_position'] !== 'none') {
+        $responsivemenu_settings['vertical_position'] = $config['responsive_menu_vertical_position'];
+        $page['#attached']['library'][] = 'at_core/at.flex_position';
+      }
+      if (isset($config['responsive_menu_horizontal_position']) && $config['responsive_menu_horizontal_position'] !== 'none') {
+        $responsivemenu_settings['horizontal_position'] = $config['responsive_menu_horizontal_position'];
+        $page['#attached']['library'][] = 'at_core/at.flex_position';
       }
 
       // Attach JS settings.

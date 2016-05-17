@@ -107,12 +107,12 @@ at.masonry:
   dependencies:
     - core/jquery
 
-# Vertical Center
-at.vertical_center:
+# Vertical and horizontal positioning
+at.flex_position:
   version: "8.x-1.0"
   js:
-    scripts/min/at.verticalCenter.min.js: { minified: true }
-    #scripts/at.verticalCenter.js: {}
+    scripts/min/at.flexPosition.min.js: { minified: true }
+    #scripts/at.flexPosition.js: {}
   dependencies:
     - core/jquery
 

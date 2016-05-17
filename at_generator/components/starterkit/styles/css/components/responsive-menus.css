@@ -43,6 +43,9 @@
   word-wrap: normal;
   font: 0/0 a;
 }
+.rm-region [class*='is-vertical-'] {
+  position: absolute;
+}
 
 .rm-toggle {
   font-size: 16px;
@@ -107,4 +110,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus.css.map */
