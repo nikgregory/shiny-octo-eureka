@@ -22,8 +22,8 @@
           resp = rm['responsive'],
           tl   = '.rm-block .rm-toggle__link',
           exp  = $(tl).attr("aria-expanded") == "false",
-          vc   = rm['vertical_position'] || 'none',
-          hp   = rm['horizontal_position'] || 'none';
+          vc   = rm['vertical_position'] || null,
+          hp   = rm['horizontal_position'] || null;
 
       // Toggle handler.
       function toggleClick(e) {
