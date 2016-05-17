@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Saves a parse-able inc file with the full color info array for the active theme.
+ * Logs a notice of the custom color settings.
  *
  * If a custom color scheme has been created in the UI it is injected into the
  * schemes array and saved. You must rename the Custom scheme and give it a
