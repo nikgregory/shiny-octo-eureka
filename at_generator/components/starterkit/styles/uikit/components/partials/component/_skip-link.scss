@@ -11,12 +11,14 @@
   transition: opacity 0.15s ease-in;
   z-index: 50;
   left: 50%;
+  transform: translateX(-50%);
   display: block;
   text-align: center;
   @include output-rhythm(padding, $xxx-small $medium);
 
   @media #{$mobile-isolate} {
     left: 10%;
+    transform: none;
   }
 
   &:visited,

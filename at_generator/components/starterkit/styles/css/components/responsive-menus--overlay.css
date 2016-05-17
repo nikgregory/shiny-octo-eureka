@@ -39,6 +39,10 @@
 .ms-overlay .rm-toggle__link:focus {
   outline: none;
 }
+.ms-overlay .rm-toggle__icon {
+  margin-top: 3px;
+  margin-top: 0.1875rem;
+}
 .ms-overlay .rm-toggle__link, .ms-overlay .rm-toggle__icon {
   background-color: transparent;
 }
@@ -94,4 +98,5 @@
   content: none;
   display: none;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--overlay.css.map */

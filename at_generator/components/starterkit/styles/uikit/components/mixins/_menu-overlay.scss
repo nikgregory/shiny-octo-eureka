@@ -39,6 +39,10 @@
         }
       }
 
+      &__icon {
+        @include output-rhythm(margin-top, 3px);
+      }
+
       &__link,
       &__icon {
         background-color: transparent;

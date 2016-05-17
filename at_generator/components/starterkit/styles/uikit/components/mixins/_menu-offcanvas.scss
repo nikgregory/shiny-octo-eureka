@@ -39,13 +39,21 @@
         @include output-rhythm(padding, $xx-small $large);
         @include output-rhythm(margin-bottom, 2px);
 
-        &:after {
-          content: "";
+        @if $arrows == true {
+          &:after {
+            font-family: $icon-font;
+            padding: 0 1px;
+            text-align: $flow-to;
+            position: absolute;
+            @include output-rhythm($flow-to, $medium);
+          }
         }
       }
 
-      .menu__item--expanded > .menu__link:after {
-        content: $menu-arrow-down ;
+      @if $arrows == true {
+        .menu__item--expanded > .menu__link:after {
+          content: $menu-arrow-down;
+        }
       }
     }
 

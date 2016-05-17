@@ -47,6 +47,10 @@
   position: absolute;
 }
 
+.ms-vertical .rm-toggle {
+  display: none;
+}
+
 .rm-toggle {
   font-size: 16px;
   font-size: 1rem;
@@ -68,6 +72,11 @@
   height: 1rem;
   width: 16px;
   width: 1rem;
+}
+.rm-toggle__label {
+  top: -2px;
+  top: -0.125rem;
+  position: relative;
 }
 
 .rm-block__content .menu {

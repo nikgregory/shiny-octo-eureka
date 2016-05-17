@@ -65,6 +65,12 @@
   //border-radius: 0 !important;
 }
 
+.ms-vertical {
+  .rm-toggle {
+    display: none;
+  }
+}
+
 
 // Provide a consistent style for visible click handles.
 .rm-toggle  {
@@ -86,6 +92,11 @@
     //@include output-rhythm(top, 2px);
     @include output-rhythm(height, $medium);
     @include output-rhythm(width, $medium);
+  }
+
+  &__label {
+    @include output-rhythm(top, -2px);
+    position: relative;
   }
 }
 

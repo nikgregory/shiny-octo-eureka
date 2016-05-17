@@ -26,6 +26,9 @@
   padding: 0.4375rem 1.125rem;
 }
 .ms-dropmenu .rm-block__content .menu__link:after {
+  font-family: FontAwesome, sans-serif;
+  padding: 0 1px;
+  text-align: right;
   position: absolute;
   right: 16px;
   right: 1rem;
@@ -89,4 +92,5 @@
 .fa-loaded .ms-dropmenu .rm-block__content .odd ul .odd > .menu__item--expanded > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=maps/responsive-menus--dropmenu.css.map */

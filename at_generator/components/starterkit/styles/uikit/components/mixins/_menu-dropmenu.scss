@@ -1,7 +1,7 @@
 // Drop menus
 // Standard CSS drop menus that will expand any nesting level.
 
-@mixin dropmenu($item-width: 12em, $arrows: true) {
+@mixin dropmenu($dropmenu-item-width: 12em, $dropmenu-arrows: true) {
 
   .ms-dropmenu {
 
@@ -25,9 +25,14 @@
         position: relative;
         @include output-rhythm(padding, $xx-small $large);
 
-        &:after {
-          position: absolute;
-          @include output-rhythm($flow-to, $medium);
+        @if $dropmenu-arrows == true {
+          &:after {
+            font-family: $icon-font;
+            padding: 0 1px;
+            text-align: $flow-to;
+            position: absolute;
+            @include output-rhythm($flow-to, $medium);
+          }
         }
       }
 
@@ -53,7 +58,7 @@
             display: none;
           }
 
-          @if $arrows == true {
+          @if $dropmenu-arrows == true {
             // FontAwesome loaded.
             .fa-loaded & {
               &--collapsed > a,
@@ -83,7 +88,7 @@
             transition: $global-transition;
 
             .menu__item {
-              min-width: $item-width;
+              min-width: $dropmenu-item-width;
               text-align: $flow-from;
 
               &:hover,
@@ -109,7 +114,7 @@
           top: auto;
           //> li a {background-color: pink;}
 
-          @if $arrows == true {
+          @if $dropmenu-arrows == true {
             // FontAwesome loaded.
             .fa-loaded & {
               > .menu__item--expanded > a:after {
@@ -128,7 +133,7 @@
             top: 0;
             //> li a {background-color: yellow;}
 
-            @if $arrows == true {
+            @if $dropmenu-arrows == true {
               // FontAwesome loaded.
               .fa-loaded & {
                 > .menu__item--expanded > a:after {

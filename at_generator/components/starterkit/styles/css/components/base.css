@@ -1729,6 +1729,9 @@ ul.inline li ol {
   transition: opacity 0.15s ease-in;
   z-index: 50;
   left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   display: block;
   text-align: center;
   padding: 6px 16px;
@@ -1737,6 +1740,9 @@ ul.inline li ol {
 @media all and (max-width: 45em) {
   .skip-link {
     left: 10%;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
   }
 }
 .skip-link:visited, .skip-link:active, .skip-link:focus {
@@ -2510,21 +2516,6 @@ table tr.error {
 
 .menu__item {
   text-align: left;
-}
-.menu__item > .menu__link:after {
-  font-family: FontAwesome, sans-serif;
-  content: "";
-  float: right;
-  padding: 0 1px;
-  text-align: right;
-  width: 16px;
-  width: 1rem;
-}
-.menu__item--expanded > .menu__link:after {
-  content: "";
-}
-[dir="rtl"] .menu__item {
-  content: "";
 }
 
 .menu__link {
