@@ -307,6 +307,12 @@ mobile_blocks:
       styles/css/generated/mobile-blocks.css: {}
 
 # 3rd party module libraries.
+addtoany:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/add-to-any.css: {}
+
 superfish:
   version: 8.x-1.0
   css:

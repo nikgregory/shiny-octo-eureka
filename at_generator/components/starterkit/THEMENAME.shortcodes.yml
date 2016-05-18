@@ -33,7 +33,28 @@ position:
       description: 'Center the element vertically. You must a) set "position-relative" on the parent container and b) combine with a layout-column to add width.'
     position-relative:
       class: position-relative
-      description: 'Use as directed - usually in combination with a position abosulte child element, such as when vertical centering.'
+      description: 'Normally used to set relative for absolytley position child elements (e.g. vertically centered). Maybe used with a trbl class e.g position-top, position-right, position-bottom or position-left.'
+    position-absolute:
+      class: position-absolute
+      description: 'May be used with a trbl class e.g position-top, position-right, position-bottom or position-left.'
+    position-fixed:
+      class: position-fixed
+      description: 'May be used with a trbl class e.g position-top, position-right, position-bottom or position-left.'
+    position-top:
+      class: position-top
+      description: 'Set position in combination with relative or absolute positioning.'
+    position-right:
+      class: position-right
+      description: 'Set position in combination with relative or absolute positioning.'
+    position-bottom:
+      class: position-bottom
+      description: 'Set position in combination with relative or absolute positioning.'
+    position-left:
+      class: position-left
+      description: 'Set position in combination with relative or absolute positioning.'
+    z-index:
+      class: z-index-(1-10)
+      description: 'Layer positioned elements - use with an interger 1 to 10, e.g. z-index-5.'
 
 layout_columns:
   name: 'Layout columns'

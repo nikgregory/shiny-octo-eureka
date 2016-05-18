@@ -47,3 +47,27 @@
   position: fixed;
 }
 
+.position-top {
+  top: 0;
+  bottom: auto;
+}
+
+.position-right {
+  right: 0;
+  left: auto;
+}
+
+.position-bottom {
+  bottom: 0;
+  top: auto;
+}
+
+.position-left {
+  left: 0;
+  right: auto;
+}
+
+$z-indexes: 10;
+@for $i from 1 through $z-indexes {
+  .z-index-#{$i} { z-index: $i }
+}
