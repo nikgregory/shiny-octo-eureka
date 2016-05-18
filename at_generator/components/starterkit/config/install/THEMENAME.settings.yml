@@ -289,7 +289,7 @@ settings:
   slideshow_0_autostart: 1
   slideshow_0_initdelay: ''
   slideshow_0_easing: swing
-  slideshow_0_usecss: 1
+  slideshow_0_usecss: 0
   slideshow_0_touch: 1
   slideshow_0_video: 0
   slideshow_0_prevtext: Previous
