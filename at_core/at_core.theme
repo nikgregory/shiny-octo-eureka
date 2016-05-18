@@ -50,7 +50,7 @@ function at_core_page_attachments_alter(array &$page) {
     $page['#attached']['library'][] = 'at_core/at.layout';
   }
 
-  // Attach module dependant libraries.
+  // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
   // load if the module is installed. Unlike core these files will load on every
   // page, so when CSS aggregation is on there will only be one CSS aggregate
@@ -64,8 +64,6 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
-    'social_media_links',
-    'superfish',
   );
   foreach ($module_libraries as $module_library) {
     if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
@@ -806,16 +804,13 @@ function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  /* Use PNG logo in branding block
-    switch ($variables['base_plugin_id']) {
-      case 'system_branding_block':
-        $variables['site_logo'] = '';
-        if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
-          $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
-        }
-        break;
+  // Use PNG logo in branding block
+  if ($variables['base_plugin_id'] == 'system_branding_block') {
+    $variables['site_logo'] = '';
+    if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+      $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
     }
-  */
+  }
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -1097,6 +1092,17 @@ function _at_core_layout_plugin_attributes(&$variables) {
 
   return $attributes;
 }
+
+/**
+ * Preprocess variables for the one col Layout Plugin template.
+ * @param $variables
+ */
+function at_core_preprocess_at_layout__onecol(&$variables) {
+  $attributes = _at_core_layout_plugin_attributes($variables);
+  $variables['attributes']['class'] = $attributes['classes'];
+  $variables['html_element'] = $attributes['html_element'];
+}
+
 
 /**
  * Preprocess variables for the two col Layout Plugin template.
