@@ -34,12 +34,19 @@
 
         var container_height = settings.parentSelector ? $(settings.parentSelector).height() : null;
 
-        $(this).addClass('is-vertical-' + settings.verticalPosition);
-
         if(settings.parentSelector) {
           $(this).parent().css({
             'position' : 'relative',
             'height'   : container_height,
+          });
+        }
+
+        $(this).addClass('is-vertical-' + settings.verticalPosition);
+
+        if(settings.verticalPosition == 'center') {
+          $(this).css({
+            'top' : '50%',
+            'margin-top' : function() {return -$(this).outerHeight()/2},
           });
         }
 

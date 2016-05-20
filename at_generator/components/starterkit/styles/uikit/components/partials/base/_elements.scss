@@ -220,6 +220,12 @@ blockquote {
 
   margin-#{$flow-to}: 0;
   border-#{$flow-from}: 5px solid;
+  
+  &.simple-quote {
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+  }
 
   p {
     @include adjust-font-size-to($large);

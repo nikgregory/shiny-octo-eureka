@@ -32,7 +32,6 @@ $form['markup_overrides']['markup_overrides_settings']['responsive-tables']['set
 );
 
 // PNG logo
-/*
 $form['markup_overrides']['markup_overrides_settings']['png_logo'] = array(
   '#type' => 'details',
   '#title' => t('png Logo default'),
@@ -43,7 +42,6 @@ $form['markup_overrides']['markup_overrides_settings']['png_logo']['settings_png
   '#description' => t('Force the branding block to use <code>logo.png</code> file instead of <code>logo.svg</code> for the default site logo. Place a logo.png file in your themes root directory, e.g. <code>@themelogopath</code>', array('@themelogopath' => $subtheme_path . '/logo.png')),
   '#default_value' => theme_get_setting('settings.png_logo'),
 );
-*/
 
 // Breadcrumbs
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(

@@ -1,7 +1,3 @@
-/*!
- *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
 /**
  * Color
  ============================================================================ */
@@ -211,7 +207,8 @@ hr {
 }
 
 .rm-toggle__link, .rm-toggle__link:hover, .rm-toggle__link:focus, .rm-toggle__link:active {
-  background-color: #363636;
+  color: #ffffff;
+  background-color: #0066cc;
 }
 .rm-toggle__icon {
   fill: white;
@@ -221,39 +218,39 @@ hr {
 }
 
 .rm-block__content .menu__item--active-trail > a {
-  color: inherit;
-  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: #737373;
 }
 .rm-block__content .menu__link {
-  color: inherit;
-  background-color: inherit;
+  color: #ffffff;
+  background-color: #666666;
 }
 .rm-block__content .menu__link:after, .rm-block__content .menu__link:before {
-  color: inherit !important;
+  color: #ffffff !important;
 }
 .rm-block__content .menu__link:active {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   opacity: 0.9;
 }
 .rm-block__content .menu__link:hover, .rm-block__content .menu__link:focus {
-  color: inherit;
-  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: #737373;
 }
 .rm-block__content .menu__link.active {
-  color: inherit;
-  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: #737373;
 }
 .rm-block__content .menu__link.active[href="/"] {
   background-color: transparent;
 }
 .rm-block__content .menu__link.active[href="/"]:hover, .rm-block__content .menu__link.active[href="/"]:focus {
-  color: inherit;
-  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: #737373;
 }
 
 .ms-slidedown .rm-block__content .menu__link, .ms-slidedown .rm-block__content .menu__link.active[href="/"] {
-  color: inherit;
-  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: #737373;
 }
 .ms-slidedown .pr-header__header-second .rm-block__content .menu__link, .ms-slidedown .pr-header__header-second .rm-block__content .menu__link.active[href="/"] {
   background-color: rgba(0, 0, 0, 0.05);
@@ -266,7 +263,7 @@ hr {
 }
 
 .ms-tiles .rm-block__content .menu-level-1 > .menu__item {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #737373;
 }
 
 .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item {
@@ -871,4 +868,25 @@ body:before {
   border-color: #ccc;
   opacity: 1;
 }
+
+/**
+ * CKEditor
+ ============================================================================ */
+.cke_chrome {
+  border-color: #cccccc !important;
+}
+
+.cke_chrome {
+  border-top-color: #cccccc !important;
+  border-bottom-color: #cccccc !important;
+}
+
+.cke_top {
+  border-bottom-color: #cccccc !important;
+}
+
+.cke_bottom {
+  border-top-color: #cccccc !important;
+}
+
 /*# sourceMappingURL=maps/color.css.map */

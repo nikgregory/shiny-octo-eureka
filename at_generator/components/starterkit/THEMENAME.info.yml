@@ -43,3 +43,8 @@ stylesheets-remove:
 libraries-extend:
   quickedit/quickedit:
     - MACHINENAME/quickedit
+libraries-override:
+  ckeditor/drupal.ckeditor:
+    css:
+      state:
+        /core/themes/stable/css/ckeditor/ckeditor.css: styles/css/components/ckeditor.css

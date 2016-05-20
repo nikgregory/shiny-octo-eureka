@@ -1,3 +1,14 @@
+# One column
+onecol:
+  label: Adaptivetheme One Column
+  category: Adaptivetheme Layouts
+  path: layout_plugin
+  icon: templates/onecol/onecol.png
+  template: templates/onecol/at-layout--onecol
+  regions:
+    col_1:
+      label: Column 1
+
 # Two columns
 twocol-2-10:
   label: Adaptivetheme Two Column: 2-10
