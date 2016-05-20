@@ -715,10 +715,12 @@ function at_core_preprocess_node(&$variables) {
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if (!empty($config['nodetype_classes_' . $node->getType()])) {
-        $shortcodes = Tags::explode($config['nodetype_classes_' . $node->getType()]);
-        foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+      if ($node_type = $node->getType()) {
+        if (!empty($config['nodetype_classes_' . $node_type])) {
+          $shortcodes = Tags::explode($config['nodetype_classes_' . $node_type]);
+          foreach ($shortcodes as $class) {
+            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+          }
         }
       }
     }
@@ -831,10 +833,12 @@ function at_core_preprocess_block(&$variables) {
 
     // Shortcodes classes.
     if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if (!empty($config['block_classes_' . $variables['elements']['#id']])) {
-        $shortcodes = Tags::explode($config['block_classes_' . $variables['elements']['#id']]);
-        foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+      if ($id = $variables['elements']['#id']) {
+        if (!empty($config['block_classes_' . $id])) {
+          $shortcodes = Tags::explode($config['block_classes_' . $id]);
+          foreach ($shortcodes as $class) {
+            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+          }
         }
       }
     }
@@ -1045,6 +1049,8 @@ function at_core_preprocess_menu(&$variables) {
 function _at_core_layout_plugin_attributes(&$variables) {
   $html_element = 'div';
   $classes = array();
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
 
   // Node
   if (isset($variables['content']['#node'])) {
@@ -1055,6 +1061,21 @@ function _at_core_layout_plugin_attributes(&$variables) {
     $classes[] = $variables['content']['#node']->isPromoted() ? 'node--promoted' : '';
     $classes[] = $variables['content']['#node']->isSticky() ? 'node--sticky' : '';
     $classes[] = $variables['content']['#node']->isPublished() ? 'node--unpublished' : '';
+
+    // Shortcodes classes
+    if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+      if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+        if ($node_type = $variables['content']['#node']->getType()) {
+          if (!empty($config['nodetype_classes_' . $node_type])) {
+            $shortcodes = Tags::explode($config['nodetype_classes_' . $node_type]);
+            foreach ($shortcodes as $class) {
+              $classes[] = Html::cleanCssIdentifier($class);
+            }
+          }
+        }
+      }
+    }
+
     // Element
     $html_element = 'article';
   }
@@ -1081,6 +1102,18 @@ function _at_core_layout_plugin_attributes(&$variables) {
   if (isset($variables['content']['#block_content'])) {
     $classes[] = 'block__atl';
     $classes[] = 'block-type-' . Html::cleanCssIdentifier($variables['content']['#block_content']->bundle());
+
+    // Shortcodes classes
+    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+      if ($id = $variables['content']['#block_content']->id()) {
+        if (!empty($config['block_classes_' . $id])) {
+          $shortcodes = Tags::explode($config['block_classes_' . $id]);
+          foreach ($shortcodes as $class) {
+            $classes[] = Html::cleanCssIdentifier($class);
+          }
+        }
+      }
+    }
   }
 
   // Global classes
