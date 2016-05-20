@@ -366,7 +366,8 @@ hr {
   &__link:hover,
   &__link:focus,
   &__link:active {
-    background-color: $text-color;
+    color: $button-color;
+    background-color: $button-background-color;
   }
 
   &__icon {
@@ -1265,4 +1266,24 @@ body {
   }
 }
 
+
+/**
+ * CKEditor
+ ============================================================================ */
+.cke_chrome {
+  border-color: $border-color !important;
+}
+
+.cke_chrome {
+  border-top-color: $border-color !important;
+  border-bottom-color: $border-color !important;
+}
+
+.cke_top {
+  border-bottom-color: $border-color !important;
+}
+
+.cke_bottom {
+  border-top-color: $border-color !important;
+}
 

@@ -1,8 +1,4 @@
 @charset "UTF-8";
-/*!
- *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
 /**
  * jQuery FlexSlider v2.3.0
  * http://www.woothemes.com/flexslider/
@@ -31,6 +27,7 @@
  ============================================================================ */
 .flexslider {
   position: relative;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   zoom: 1;
@@ -254,5 +251,4 @@ html[xmlns] .flexslider .slides {
   opacity: 1;
   cursor: default;
 }
-
 /*# sourceMappingURL=maps/slideshows.css.map */

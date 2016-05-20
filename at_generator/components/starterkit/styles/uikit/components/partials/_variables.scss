@@ -293,14 +293,14 @@ $menu-arrows                       : false;
 
 // Responsive Menus
 // -----------------------------------------------------------------------------
-$resp-menu-color                   : inherit;
-$resp-menu-background-color        : inherit;
+$resp-menu-color                   : $page-navbar-color;
+$resp-menu-background-color        : $page-navbar-background-color;
 
-$resp-menu-hover-color             : inherit;
-$resp-menu-active-color            : inherit;
+$resp-menu-hover-color             : $resp-menu-color;
+$resp-menu-active-color            : $resp-menu-color;
 
-$resp-menu-hover-background-color  : rgba(255,255,255,0.3);
-$resp-menu-active-background-color : rgba(255,255,255,0.3);
+$resp-menu-hover-background-color  : lighten($resp-menu-background-color, $lighten-more);
+$resp-menu-active-background-color : $resp-menu-hover-background-color;
 
 
 // Drop Menu
