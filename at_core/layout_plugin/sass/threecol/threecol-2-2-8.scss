@@ -23,21 +23,6 @@
   }
 }
 
-.bp--wide {
-  .atl--threecol-2-2-8 {
-    // Three active regions.
-    &.l-arc--3 {
-      .atl__lc {
-        @include span(2 of 12);
-
-        &:first-child {
-          @include span(8 of 12 last);
-        }
-      }
-    }
-  }
-}
-
 .bp--tablet {
   .atl--threecol-2-2-8 {
     // Three active regions.
@@ -51,6 +36,21 @@
         &:first-child,
         &:last-child {
           @include last;
+        }
+      }
+    }
+  }
+}
+
+.bp--wide {
+  .atl--threecol-2-2-8 {
+    // Three active regions.
+    &.l-arc--3 {
+      .atl__lc {
+        @include span(2 of 12);
+
+        &:last-child {
+          @include span(8 of 12 last);
         }
       }
     }
