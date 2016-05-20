@@ -89,9 +89,9 @@ twocol-6-6:
     top:
       label: Top
     col_1:
-      label: Column 1 (6, right)
+      label: Column 1 (6, left)
     col_2:
-      label: Column 2 (6, left)
+      label: Column 2 (6, right)
     bottom:
       label: Bottom
 
