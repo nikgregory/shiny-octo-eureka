@@ -2,7 +2,7 @@
  * Shortcodes (Grid blocks)
  ============================================================================ */
 
-@media #{$mobile} {
+@media #{$wide} {
   .grid-block-2 {
     .block {
       @include gallery(6 of 12);

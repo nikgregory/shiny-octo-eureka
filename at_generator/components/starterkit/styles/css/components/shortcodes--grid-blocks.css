@@ -1,7 +1,7 @@
 /**
  * Shortcodes (Grid blocks)
  ============================================================================ */
-@media all and (max-width: 60em) {
+@media all and (min-width: 60.063em) {
   .grid-block-2 .block {
     width: 49.15254%;
     float: left;
