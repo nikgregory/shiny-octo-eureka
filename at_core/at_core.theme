@@ -363,6 +363,18 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function at_core_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  // Add the entity reference type as a field template suggestion.
+  if (isset($variables['element']['#items']) && is_object($variables['element']['#items'])) {
+    array_splice($suggestions, 1, 0, 'field__entity-reference-type__' . $variables['element']['#items']->getSetting('target_type'));
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter() for form templates.
  * @param array $suggestions
  * @param array $variables
@@ -842,6 +854,29 @@ function at_core_preprocess_block(&$variables) {
         }
       }
     }
+  }
+}
+
+/**
+ * Preprocess variables for field templates.
+ * @param $variables
+ */
+function at_core_preprocess_field(&$variables) {
+  if (isset($variables['element']['#formatter'])) {
+    $variables['field_formatter'] = $variables['element']['#formatter'];
+  }
+}
+
+/**
+ * Preprocess variables for entity reference field templates.
+ * @param $variables
+ */
+function at_core_preprocess_field__entity_reference(&$variables) {
+  if (isset($variables['element']['#items']) && is_object($variables['element']['#items'])) {
+    $variables['field_entity_type'] = $variables['element']['#items']->getSetting('target_type');
+  }
+  else {
+    $variables['field_entity_type'] = '';
   }
 }
 

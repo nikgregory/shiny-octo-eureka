@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for a field.
+ * Adaptivetheme implementation for an entity reference field.
  * AT uses h3 for field labels.
  *
  * To override output, copy the "field.html.twig" from the templates directory
@@ -25,6 +25,8 @@
  * - items: List of all the field items. Each item contains:
  *   - attributes: List of HTML attributes for each item.
  *   - content: The field item's content.
+ * - field_entity_type: the entity target_type setting.
+ * - field_formatter: the field display formatter.
  *
  * @see template_preprocess_field()
  *
@@ -33,14 +35,16 @@
 #}
 {% set field_name_class = field_name|clean_class %}
 {%
-  set classes = [
-    'field',
-    'field-' ~ entity_type|clean_class ~ '--' ~ field_name_class,
-    'field-name-' ~ field_name_class,
-    'field-type-' ~ field_type|clean_class,
-    'field-label-' ~ label_display,
-    label_display == 'inline' ? 'clearfix',
-  ]
+set classes = [
+  'field',
+  'field-' ~ entity_type|clean_class ~ '-' ~ field_name_class,
+  field_entity_type ? 'field-entity-reference-type-' ~ field_entity_type|clean_class,
+  field_formatter ? 'field-formatter-' ~ field_formatter|clean_class,
+  'field-name-' ~ field_name_class,
+  'field-type-' ~ field_type|clean_class,
+  'field-label-' ~ label_display,
+  label_display == 'inline' ? 'clearfix',
+]
 %}
 {%
   set title_classes = [

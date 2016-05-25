@@ -25,6 +25,7 @@
  * - items: List of all the field items. Each item contains:
  *   - attributes: List of HTML attributes for each item.
  *   - content: The field item's content.
+ * - field_formatter: the field display formatter.
  *
  * @see template_preprocess_field()
  *
@@ -36,6 +37,7 @@
   set classes = [
     'field',
     'field-' ~ entity_type|clean_class ~ '--' ~ field_name_class,
+    field_formatter ? 'field-formatter-' ~ field_formatter|clean_class,
     'field-name-' ~ field_name_class,
     'field-type-' ~ field_type|clean_class,
     'field-label-' ~ label_display,
