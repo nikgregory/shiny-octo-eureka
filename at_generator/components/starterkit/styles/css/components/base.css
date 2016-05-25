@@ -1400,15 +1400,29 @@ tr .form-item {
 /**
  * Images
  ============================================================================ */
-img.align-left,
-.field-type-image__figure.align-left {
-  margin: 0 16px 16px 0;
-  margin: 0 1rem 1rem 0;
+@media all and (min-width: 60.063em) {
+  img.align-left,
+  .field-type-image__figure.align-left {
+    margin: 0 16px 16px 0;
+    margin: 0 1rem 1rem 0;
+  }
+  img.align-right,
+  .field-type-image__figure.align-right {
+    margin: 0 0 16px 16px;
+    margin: 0 0 1rem 1rem;
+  }
 }
-img.align-right,
-.field-type-image__figure.align-right {
-  margin: 0 0 16px 16px;
-  margin: 0 0 1rem 1rem;
+@media all and (max-width: 60em) {
+  img.align-left, img.align-right,
+  .field-type-image__figure.align-left,
+  .field-type-image__figure.align-right {
+    float: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+    margin-bottom: 1rem;
+  }
 }
 img.align-center,
 .field-type-image__figure.align-center {
@@ -3312,4 +3326,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

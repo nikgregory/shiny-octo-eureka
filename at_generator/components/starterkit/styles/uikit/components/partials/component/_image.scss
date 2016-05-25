@@ -7,12 +7,26 @@
 // a figure element.
 img,
 .field-type-image__figure {
-  &.align-left {
-    @include output-rhythm(margin, 0 $medium $medium 0);
+
+  @media #{$wide} {
+    &.align-left {
+      @include output-rhythm(margin, 0 $medium $medium 0);
+    }
+
+    &.align-right {
+      @include output-rhythm(margin, 0 0 $medium $medium);
+    }
   }
 
-  &.align-right {
-    @include output-rhythm(margin, 0 0 $medium $medium);
+  @media #{$mobile} {
+    &.align-left,
+    &.align-right {
+      float: none;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      @include output-rhythm(margin-bottom, $medium);
+    }
   }
 
   &.align-center {
@@ -23,3 +37,4 @@ img,
     clear: both;
   }
 }
+
