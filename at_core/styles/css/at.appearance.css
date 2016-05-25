@@ -266,6 +266,10 @@
   margin: 0 0 10px;
   padding: 0;
 }
+.admin-theme--seven #edit-layouts #edit-layout-select select {
+  min-width: 18em;
+  max-width: 90%;
+}
 @media all and (min-width: 60em) {
   .admin-theme--seven #edit-layouts #edit-layout-select .form-type-select {
     width: 75%;

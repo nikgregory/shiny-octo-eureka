@@ -151,6 +151,11 @@
         padding: 0;
       }
 
+      select {
+        min-width: 18em;
+        max-width: 90%;
+      }
+
       @media all and (min-width: 60em) {
         .form-type-select {
           width: 75%;
