@@ -1139,30 +1139,20 @@ body {
   // $node-teaser-border-color
   background-color: $node-teaser-background-color;
   box-shadow: $node-teaser-box-shadow;
+
+  // States
+  &--promoted {}
+
+  &--sticky {
+    background-color: transparent;
+    box-shadow: none;
+  }
 }
-
-// States
-.node--promoted {}
-
-.node--sticky {
-  background-color: transparent;
-  box-shadow: none;
-}
-
 
 // View modes
 .node--view-mode-full {}
 .node--view-mode-teaser {}
 
-
-// Node image borders.
-.node {
-  img,
-  figure,
-  figure figcaption {
-    //border-color: $border-color;
-  }
-}
 
 
 /**

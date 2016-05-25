@@ -20,14 +20,11 @@
   background-image: none !important;
 }
 
-#cke_1_contents {
-  height: 160px !important;
-}
-
 .cke_bottom {
   box-shadow: none !important;
   border-top: 1px solid !important;
   background: #f7f7f7 !important;
   background-image: none !important;
 }
+
 /*# sourceMappingURL=maps/ckeditor.css.map */

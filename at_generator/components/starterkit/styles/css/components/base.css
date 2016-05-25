@@ -1402,11 +1402,13 @@ tr .form-item {
  ============================================================================ */
 @media all and (min-width: 60.063em) {
   img.align-left,
+  figure.align-left,
   .field-type-image__figure.align-left {
     margin: 0 16px 16px 0;
     margin: 0 1rem 1rem 0;
   }
   img.align-right,
+  figure.align-right,
   .field-type-image__figure.align-right {
     margin: 0 0 16px 16px;
     margin: 0 0 1rem 1rem;
@@ -1414,6 +1416,8 @@ tr .form-item {
 }
 @media all and (max-width: 60em) {
   img.align-left, img.align-right,
+  figure.align-left,
+  figure.align-right,
   .field-type-image__figure.align-left,
   .field-type-image__figure.align-right {
     float: none;
@@ -1425,11 +1429,13 @@ tr .form-item {
   }
 }
 img.align-center,
+figure.align-center,
 .field-type-image__figure.align-center {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
 img[class*="align-"],
+figure[class*="align-"],
 .field-type-image__figure[class*="align-"] {
   clear: both;
 }
@@ -3326,4 +3332,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

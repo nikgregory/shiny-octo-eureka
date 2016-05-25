@@ -6,6 +6,7 @@
 // the CKEditor (wysiwyg). When captions are used images are wrapped in
 // a figure element.
 img,
+figure,
 .field-type-image__figure {
 
   @media #{$wide} {
@@ -37,4 +38,5 @@ img,
     clear: both;
   }
 }
+
 

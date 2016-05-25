@@ -787,7 +787,6 @@ body:before {
   background-color: #ffffff;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 }
-
 .node--sticky {
   background-color: transparent;
   box-shadow: none;
@@ -888,4 +887,5 @@ body:before {
 .cke_bottom {
   border-top-color: #cccccc !important;
 }
+
 /*# sourceMappingURL=maps/color.css.map */
