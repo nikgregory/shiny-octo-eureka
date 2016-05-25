@@ -41,7 +41,7 @@ $form['mobile-blocks']['mobile_blocks_breakpoint_group_haschanged'] = array(
 
 foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
   $mbs_query = $mbs_value->getMediaQuery();
-  $mbs_label = $mbs_value->getLabel();
+  $mbs_label = strtolower($mbs_value->getLabel());
   $mbs_group_options[$mbs_query] = $mbs_value->getLabel() . ': ' . $mbs_query;
 
   $form['mobile-blocks']['breakpoints']['bp' . $mbs_label] = array(
