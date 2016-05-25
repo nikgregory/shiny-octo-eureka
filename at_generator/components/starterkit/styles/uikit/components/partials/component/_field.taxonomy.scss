@@ -1,10 +1,10 @@
 /**
  * Field Taxonomy Reference (Entity Reference as tags).
- *  - to have all taxonomy fields themed the same be sure to include the
- *    word "tags" somewhere in the field name.
  ============================================================================ */
 
-[class*="tags"].field-type-entity-reference {
+// Adaptivetheme sets entity reference type classes, e.g. taxonomy-term, node or
+// user depending on the reference entity type.
+.field-entity-reference-type-taxonomy-term {
 
   @if $field-taxonomy-label-as-icon == true {
     .field__label {
@@ -102,16 +102,39 @@
   .field__item {
     margin: 0;
     padding: 0;
-    list-style: none;
   }
 
-  .field-label-above {}
+  &.field-label-above {
+    .field__label {}
+    .field__item {}
+  }
 
-  .field-label-inline {
+  &.field-label-inline {
     .field__label,
     .field__item {}
   }
-}
 
+  &.field-label-hidden,
+  &.field-label-visually_hidden {
+    .field__label {}
+    .field__item {}
+  }
+
+  // Adaptivetheme sets entity reference classes for the formatter.
+  &.field-formatter-entity-reference-entity-id,
+  &.field-formatter-entity-reference-label {
+
+    &.field-label-inline,
+    &.field-label-hidden,
+    &.field-label-visually_hidden {
+
+      .field__label {}
+
+      .field__item {
+        display: inline-block;
+      }
+    }
+  }
+}
 
 
