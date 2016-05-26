@@ -10,12 +10,28 @@
 .threecol-5-4-3 {
 
   // Two active regions.
-  .arc--2 {
+  .hr--1-2 {
+    .l-r {
+      @include span(8 of 12);
+
+      &:last-child {
+        @include span(4 of 12);
+      }
+    }
+  }
+
+  .hr--1-3 {
+    .l-r {
+      @include span(9 of 12);
+    }
+  }
+
+  .hr--2-3 {
     .l-r {
       @include span(7 of 12);
 
       &:last-child {
-        @include span(5 of 12 last);
+        @include span(5 of 12);
       }
     }
   }
@@ -23,17 +39,27 @@
   // Three active regions.
   .arc--3 {
     .l-r {
-      &:first-child {
-        @include span(5 of 12);
-      }
+      @include span(5 of 12);
 
       &:nth-child(2) {
         @include span(4 of 12);
       }
+    }
+  }
 
+  .arc--3,
+  .hr--1-3 {
+    .l-r {
       &:last-child {
-        @include span(3 of 12 last);
+        @include span(3 of 12);
       }
+    }
+  }
+
+  .arc--2,
+  .arc--3 {
+    .l-r:last-child {
+      @include last;
     }
   }
 }
