@@ -108,6 +108,7 @@ function HOOK_page_attachments_alter(array &$page) {
   // for the theme.
   $module_libraries = array(
     'addtoany',
+    'ds',
     'social_media_links',
     'superfish',
   );

@@ -313,6 +313,12 @@ addtoany:
     theme:
       styles/css/components/add-to-any.css: {}
 
+ds:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/display-suite-fields.css: {}
+
 superfish:
   version: 8.x-1.0
   css:
