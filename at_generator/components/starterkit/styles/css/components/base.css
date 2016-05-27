@@ -2575,26 +2575,26 @@ table tr.error {
 /**
  * Menus in the Leaderboard region.
  ============================================================================ */
-.pr-leaderboard__leaderboard .block-menu {
+.pr-leaderboard .block-menu {
   overflow: hidden;
   *zoom: 1;
   margin: 0;
 }
-.pr-leaderboard__leaderboard .menu__item {
+.pr-leaderboard .menu__item {
   float: left;
   margin: 10px 16px 10px 0;
   margin: 0.625rem 1rem 0.625rem 0;
   list-style: none;
 }
-.pr-leaderboard__leaderboard .menu__item ul,
-.pr-leaderboard__leaderboard .menu__item ol {
+.pr-leaderboard .menu__item ul,
+.pr-leaderboard .menu__item ol {
   display: none;
 }
-[dir="rtl"] .pr-leaderboard__leaderboard .menu__item {
+[dir="rtl"] .pr-leaderboard .menu__item {
   margin-right: 0;
   margin-left: 16px;
 }
-.pr-leaderboard__leaderboard .menu__link:after {
+.pr-leaderboard .menu__link:after {
   display: none;
 }
 
