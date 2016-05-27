@@ -1147,12 +1147,16 @@ body {
     background-color: transparent;
     box-shadow: none;
   }
+
+  // View modes
+  &--view-mode-full {}
+  &--view-mode-teaser {}
+
+  // Field image borders.
+  .field-type-image__item {
+    //border-color: $border-color-light;
+  }
 }
-
-// View modes
-.node--view-mode-full {}
-.node--view-mode-teaser {}
-
 
 
 /**

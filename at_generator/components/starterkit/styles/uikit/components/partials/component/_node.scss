@@ -173,6 +173,18 @@
   &--sticky {
     padding: 0;
   }
+
+  // Field image borders.
+  .field-type-image__item {
+    //border: $border-width $border-style;
+    //border-radius: $border-radius;
+    //@include output-rhythm(padding, $small);
+    //display: inline-block;
+  }
+
+  .field-type-image__figcaption {
+    //@include output-rhythm(padding, $small  0 0 0);
+  }
 }
 
 
