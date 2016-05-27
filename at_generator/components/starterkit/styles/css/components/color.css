@@ -556,16 +556,17 @@ button[disabled]:hover,
   color: #ffffff;
   background-color: #0066cc;
   opacity: 0.9;
+  border: 1px #0066cc solid;
 }
 .button--primary:link, .button--primary:visited {
   color: #ffffff;
   background-color: #0066cc;
-  border-color: #ccc;
+  border-color: #0066cc;
 }
 .button--primary:hover, .button--primary:focus, .button--primary:active, .button--primary.active {
   color: #ffffff;
   background-color: #0066cc;
-  border-color: #ccc;
+  border-color: #0066cc;
   opacity: 1;
 }
 
@@ -577,12 +578,12 @@ button[disabled]:hover,
 .button--danger:link, .button--danger:visited {
   color: #a51b00;
   background-color: transparent;
-  border-color: #ccc;
+  border-color: transparent;
 }
 .button--danger:hover, .button--danger:focus, .button--danger:active, .button--danger.active {
   color: #a51b00;
   background-color: transparent;
-  border-color: #ccc;
+  border-color: transparent;
   opacity: 1;
 }
 
@@ -667,17 +668,18 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
   color: #363636;
   background-color: #fafafa;
   opacity: 0.9;
+  border: 1px solid #cccccc;
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 .pr-temporary-tabs ul.tabs--primary li a:link, .pr-temporary-tabs ul.tabs--primary li a:visited {
   color: #363636;
   background-color: #fafafa;
-  border-color: #ccc;
+  border-color: solid;
 }
 .pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus, .pr-temporary-tabs ul.tabs--primary li a:active, .pr-temporary-tabs ul.tabs--primary li a.active {
   color: #363636;
   background-color: #fafafa;
-  border-color: #ccc;
+  border-color: solid;
   opacity: 1;
 }
 .pr-temporary-tabs ul.tabs--primary li a:hover, .pr-temporary-tabs ul.tabs--primary li a:focus {
@@ -849,6 +851,7 @@ body:before {
   color: #ffffff;
   background-color: #0066cc;
   opacity: 0.9;
+  border: 1px #0066cc solid;
 }
 .view-empty:not(:empty) .links a[href="/node/add"]:hover, .view-empty:not(:empty) .links a[href="/node/add"]:focus {
   opacity: 1;
@@ -859,12 +862,12 @@ body:before {
 .view-empty:not(:empty) .links a[href="/node/add"]:link, .view-empty:not(:empty) .links a[href="/node/add"]:visited {
   color: #ffffff;
   background-color: #0066cc;
-  border-color: #ccc;
+  border-color: #0066cc;
 }
 .view-empty:not(:empty) .links a[href="/node/add"]:hover, .view-empty:not(:empty) .links a[href="/node/add"]:focus, .view-empty:not(:empty) .links a[href="/node/add"]:active, .view-empty:not(:empty) .links a[href="/node/add"].active {
   color: #ffffff;
   background-color: #0066cc;
-  border-color: #ccc;
+  border-color: #0066cc;
   opacity: 1;
 }
 
