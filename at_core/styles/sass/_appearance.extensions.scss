@@ -235,12 +235,16 @@
         clear: right;
       }
 
-      dt {width: 15em; font-weight: 700}
-      dd {}
+      dt {
+        width: 15em;
+        font-weight: 700;
+      }
+
+      dd {
+        margin: 0.35em 0 0.75em 0;
+      }
     }
   }
-
-
 
 
   // Slideshows

@@ -552,6 +552,9 @@
   width: 15em;
   font-weight: 700;
 }
+.admin-theme--seven #edit-shortcodes .class-list dd {
+  margin: 0.35em 0 0.75em 0;
+}
 .admin-theme--seven #edit-slideshows label {
   display: inline-block;
   width: 12rem;
