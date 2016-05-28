@@ -80,10 +80,10 @@ class DirectoryOperations {
   }
 
   /**
-   * Scan directorys.
+   * Scan directories.
    *
    * @return array
-   *   Directories below the path.
+   *   Files below the path.
    */
   public function directoryScan($path) {
     $scan_directories = array();
@@ -92,6 +92,30 @@ class DirectoryOperations {
     }
 
     return $scan_directories;
+  }
+
+  /**
+   * Scan directories recursively.
+   *
+   * @return array
+   *   Directories & files below the path.
+   */
+  public function directoryScanRecursive($path) {
+    $scan_directories_recursive = array();
+    $path_directory = scandir($path);
+
+    foreach ($path_directory as $key => $value) {
+      if (!in_array($value,array(".", ".."))) {
+        if (is_dir($path . '/' . $value)) {
+          $scan_directories_recursive[$value] = self::directoryScanRecursive($path . '/' . $value);
+        }
+        else {
+          $scan_directories_recursive[] = $value;
+        }
+      }
+    }
+
+    return $scan_directories_recursive;
   }
 
   /**

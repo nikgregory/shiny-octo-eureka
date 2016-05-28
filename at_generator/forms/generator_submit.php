@@ -100,8 +100,8 @@ function at_generator_submit_generator(&$form, &$form_state) {
 //      $source = drupal_get_path('theme', $source_theme);
 //    }
 
-    // All themes have configuration.
-    $configuration_files = $directoryOperations->directoryScan("$source/config/install");
+    // Recursively scan the config directory for config files.
+    $configuration = $directoryOperations->directoryScanRecursive("$source/config");
 
     // Files to strip replace strings
     $info_file = "$target/$machine_name.info.yml";
@@ -129,16 +129,22 @@ function at_generator_submit_generator(&$form, &$form_state) {
       // UIKit
       if ($uikit === 0) {
         $directoryOperations->directoryRemove("$target/styles/uikit");
+
         // remove files like GEM, Gruntfile.js etc
         foreach ($uikit_tools as $tool) {
           unlink("$target/$tool");
         }
-        // Remove all SASS map files and references.
-        array_map('unlink', glob("$target/styles/css/components/*.map"));
+
+        // Delete the maps directory and all map files.
+        $directoryOperations->directoryRemove("$target/styles/css/components/maps");
         $component_css_files = $directoryOperations->directoryScan("$target/styles/css/components");
+
         foreach ($component_css_files as $component_file_key => $component_file) {
-          $map_string = '/*# sourceMappingURL=' . str_replace('.css', '.css.map', $component_file) . ' */';
-          $fileOperations->fileStrReplace("$target/styles/css/components/$component_file", $map_string, '');
+          $map_string = '/*# sourceMappingURL=maps/' . str_replace('.css', '.css.map', $component_file) . ' */';
+
+          if (file_exists("$target/styles/css/components/$component_file")) {
+            $fileOperations->fileStrReplace("$target/styles/css/components/$component_file", $map_string, '');
+          }
         }
       }
 
@@ -214,24 +220,34 @@ function at_generator_submit_generator(&$form, &$form_state) {
 //    }
 
     // Config.
-    foreach ($configuration_files as $old_config_file) {
-      $new_config_file = str_replace($source_theme, $machine_name, $old_config_file);
-      $fileOperations->fileRename("$target/config/install/$old_config_file", "$target/config/install/$new_config_file");
-      $fileOperations->fileStrReplace("$target/config/install/$new_config_file", 'TARGET', $target);
-      $fileOperations->fileStrReplace("$target/config/install/$new_config_file", $source_theme, $machine_name);
+    foreach ($configuration as $config_path => $config_files) {
+      if (is_dir("$target/config/$config_path")) {
+        foreach ($config_files as $config_file) {
+          $new_config_file = str_replace($source_theme, $machine_name, $config_file);
+          $fileOperations->fileRename("$target/config/$config_path/$config_file", "$target/config/$config_path/$new_config_file");
+          $fileOperations->fileStrReplace("$target/config/$config_path/$new_config_file", 'TARGET', $target);
+          $fileOperations->fileStrReplace("$target/config/$config_path/$new_config_file", $source_theme, $machine_name);
+
+        }
+      }
     }
+
     // Skin and clone need their source themes configuration.
     //if ($subtheme_type === 'skin' || $subtheme_type === 'clone') {
+
     if ($subtheme_type === 'clone') {
       $source_config = \Drupal::config($source_theme . '.settings')->get();
       // Empty if the source theme has never been installed, in which case it
       // should be safe to assume there is no new configuration worth saving.
+
       if (!empty($source_config)) {
         $old_config = "$target/config/install/$machine_name.settings.yml";
         $new_config = Yaml::encode($source_config);
+
         $find_generated_files = "themes/$source_theme/styles/css/generated";
         $replace_generated_files = "themes/$machine_name/styles/css/generated";
         $new_config = str_replace($find_generated_files, $replace_generated_files, $new_config);
+
         $fileOperations->fileReplace($new_config, $old_config);
         $fileOperations->fileStrReplace("$target/config/install/$new_config_file", $source_theme, $machine_name);
       }
