@@ -69,7 +69,13 @@
     }
   }
 
-  &__rw {}
+  &__rw {
+    // Remove padding left/right in wide.
+    @media #{$wide} {
+      padding: 0;
+    }
+  }
+
   &__navbar {}
 }
 

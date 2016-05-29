@@ -1648,6 +1648,11 @@ ul.inline li ol {
 .pr-navbar .block ul {
   margin: 0;
 }
+@media all and (min-width: 60.063em) {
+  .pr-navbar__rw {
+    padding: 0;
+  }
+}
 
 .l-rw {
   padding: 0 16px;
@@ -3332,4 +3337,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */
