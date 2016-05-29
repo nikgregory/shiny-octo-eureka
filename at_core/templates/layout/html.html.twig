@@ -74,7 +74,7 @@
   </head>
   {%
     set body_classes = [
-      logged_in ? 'user-logged-in',
+      logged_in ? 'user-logged-in' : 'user-logged-out',
       not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
       path_info.args ? 'path-' ~ path_info.args,
       path_info.query ? 'path-query-' ~ path_info.query,
