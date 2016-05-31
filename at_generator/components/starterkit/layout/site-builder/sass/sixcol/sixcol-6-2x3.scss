@@ -9,10 +9,10 @@
   .arc--2 {
     .l-r {
       @include span(6 of 12);
-    }
 
-    &:last-child {
-      @include last;
+      &:last-child {
+        @include last;
+      }
     }
   }
 

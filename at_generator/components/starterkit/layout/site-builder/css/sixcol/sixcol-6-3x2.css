@@ -1,5 +1,5 @@
 .sixcol-6-3x2 .arc--2 .l-r { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.sixcol-6-3x2 .arc--2:last-child { float: right; margin-right: 0; }
+.sixcol-6-3x2 .arc--2 .l-r:last-child { float: right; margin-right: 0; }
 .sixcol-6-3x2 .arc--3 .l-r:first-child { width: 49.15254%; float: left; margin-right: 1.69492%; }
 .sixcol-6-3x2 .arc--3 .l-r:nth-child(2) { width: 49.15254%; float: right; margin-right: 0; }
 .sixcol-6-3x2 .arc--3 .l-r:last-child { clear: both; }

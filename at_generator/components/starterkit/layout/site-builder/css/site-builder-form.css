@@ -834,7 +834,7 @@
 .fivecol-5x2 .l-rw:not(.arc--1) .l-r:last-child { float: right; margin-right: 0; }
 
 .fivecol-6-6--4-4-4 .arc--2 .l-r { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.fivecol-6-6--4-4-4 .arc--2:last-child { float: right; margin-right: 0; }
+.fivecol-6-6--4-4-4 .arc--2 .l-r:last-child { float: right; margin-right: 0; }
 .fivecol-6-6--4-4-4 .arc--3 .l-r { width: 32.20339%; float: left; margin-right: 1.69492%; }
 .fivecol-6-6--4-4-4 .arc--3 .l-r:last-child { float: right; margin-right: 0; }
 .fivecol-6-6--4-4-4 .arc--3 .l-r { width: 23.72881%; float: left; margin-right: 1.69492%; }
@@ -856,7 +856,7 @@
 .fivecol-6-6-6-6--12 .arc--5 .l-r:last-child { width: 100%; float: left; margin-left: 0; margin-right: 0; clear: both; }
 
 .fivecol-source-ordered-2-2-4-2-2 .arc--2 .l-r { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.fivecol-source-ordered-2-2-4-2-2 .arc--2:last-child { float: right; margin-right: 0; }
+.fivecol-source-ordered-2-2-4-2-2 .arc--2 .l-r:last-child { float: right; margin-right: 0; }
 .fivecol-source-ordered-2-2-4-2-2 .arc--3 .l-r { width: 32.20339%; float: left; margin-right: 1.69492%; }
 .fivecol-source-ordered-2-2-4-2-2 .arc--3 .l-r:last-child { float: right; margin-right: 0; }
 .fivecol-source-ordered-2-2-4-2-2 .arc--4 .l-r { width: 32.20339%; float: left; margin-right: 1.69492%; }
@@ -868,7 +868,7 @@
 .fivecol-source-ordered-2-2-4-2-2 .arc--5 .l-r:last-child { float: right; margin-right: 0; }
 
 .sixcol-6-2x3 .arc--2 .l-r { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.sixcol-6-2x3 .arc--2:last-child { float: right; margin-right: 0; }
+.sixcol-6-2x3 .arc--2 .l-r:last-child { float: right; margin-right: 0; }
 .sixcol-6-2x3 .arc--3 .l-r:first-child { width: 49.15254%; float: left; margin-right: 1.69492%; }
 .sixcol-6-2x3 .arc--3 .l-r:nth-child(2) { width: 49.15254%; float: right; margin-right: 0; }
 .sixcol-6-2x3 .arc--3 .l-r:last-child { clear: both; }
@@ -880,7 +880,7 @@
 .sixcol-6-2x3 .arc--4 .l-r:nth-child(2n + 2), .sixcol-6-2x3 .arc--6 .l-r:nth-child(2n + 2) { margin-left: 50.84746%; margin-right: -100%; clear: none; }
 
 .sixcol-6-3x2 .arc--2 .l-r { width: 49.15254%; float: left; margin-right: 1.69492%; }
-.sixcol-6-3x2 .arc--2:last-child { float: right; margin-right: 0; }
+.sixcol-6-3x2 .arc--2 .l-r:last-child { float: right; margin-right: 0; }
 .sixcol-6-3x2 .arc--3 .l-r:first-child { width: 49.15254%; float: left; margin-right: 1.69492%; }
 .sixcol-6-3x2 .arc--3 .l-r:nth-child(2) { width: 49.15254%; float: right; margin-right: 0; }
 .sixcol-6-3x2 .arc--3 .l-r:last-child { clear: both; }
