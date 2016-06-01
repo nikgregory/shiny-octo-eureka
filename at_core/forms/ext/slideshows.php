@@ -321,12 +321,12 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
       '#description' => t('Determines the easing method used in jQuery transitions.'),
     );
 
-    // useCSS           : true,           // Boolean Slider will use CSS3 transitions, if available
+    // useCSS           : false,           // Boolean Slider will use CSS3 transitions, if available
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['advanced_options']['settings_slideshow_' . $i . '_usecss'] = array(
       '#type' => 'checkbox',
       '#title' => t('Use CSS'),
-      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_usecss') ? theme_get_setting('settings.slideshow_' . $i . '_usecss') : 1,
-      '#description' => t('Slider will use CSS3 transitions if the browser supports them. Un-check this if you have issues with slides flashing or flickering, or if you prefer to use JavaScript animation.'),
+      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_usecss') ? theme_get_setting('settings.slideshow_' . $i . '_usecss') : 0,
+      '#description' => t('Slider will use CSS3 transitions if the browser supports them. Un-check if you encounter issues with flickering or flashes.'),
     );
 
     // touch            : true,           // Boolean Allow touch swipe navigation of the slider on enabled devices
