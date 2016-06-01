@@ -19,7 +19,7 @@
  *   $('.element').atFlexCenter({ verticalPosition: 'center', horizontalPosition: 'left', parentSelector: '.outer-container' });
  * });
  */
-(function( $ ){
+(function($){
   $.fn.atFlexCenter = function(options) {
 
     var settings = $.extend({
@@ -31,7 +31,7 @@
     return this.each(function(){
 
       if(settings.verticalPosition) {
-
+        
         var container_height = settings.parentSelector ? $(settings.parentSelector).height() : null;
 
         if(settings.parentSelector) {
@@ -63,4 +63,4 @@
       }
     });
   };
-})( jQuery );
+})(jQuery);

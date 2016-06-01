@@ -218,39 +218,39 @@ hr {
 }
 
 .rm-block__content .menu__item--active-trail > a {
-  color: #ffffff;
-  background-color: #737373;
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 .rm-block__content .menu__link {
-  color: #ffffff;
-  background-color: #666666;
+  color: inherit;
+  background-color: inherit;
 }
 .rm-block__content .menu__link:after, .rm-block__content .menu__link:before {
-  color: #ffffff !important;
+  color: inherit !important;
 }
 .rm-block__content .menu__link:active {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   opacity: 0.9;
 }
 .rm-block__content .menu__link:hover, .rm-block__content .menu__link:focus {
-  color: #ffffff;
-  background-color: #737373;
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 .rm-block__content .menu__link.active {
-  color: #ffffff;
-  background-color: #737373;
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 .rm-block__content .menu__link.active[href="/"] {
   background-color: transparent;
 }
 .rm-block__content .menu__link.active[href="/"]:hover, .rm-block__content .menu__link.active[href="/"]:focus {
-  color: #ffffff;
-  background-color: #737373;
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 
 .ms-slidedown .rm-block__content .menu__link, .ms-slidedown .rm-block__content .menu__link.active[href="/"] {
-  color: #ffffff;
-  background-color: #737373;
+  color: inherit;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 .ms-slidedown .pr-header__header-second .rm-block__content .menu__link, .ms-slidedown .pr-header__header-second .rm-block__content .menu__link.active[href="/"] {
   background-color: rgba(0, 0, 0, 0.05);
@@ -263,7 +263,7 @@ hr {
 }
 
 .ms-tiles .rm-block__content .menu-level-1 > .menu__item {
-  background-color: #737373;
+  background-color: rgba(255, 255, 255, 0.095);
 }
 
 .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item {
@@ -890,4 +890,5 @@ body:before {
 .cke_bottom {
   border-top-color: #cccccc !important;
 }
+
 /*# sourceMappingURL=maps/color.css.map */
