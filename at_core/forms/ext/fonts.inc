@@ -91,6 +91,10 @@ function font_elements() {
         'label' => 'Tabs',
         'selector' => '.tabs a',
       ),
+      'breadcrumbs' => array(
+        'label' => 'Breadcrumbs',
+        'selector' => '.breadcrumb__list-item, .breadcrumb__link, .breadcrumb__title',
+      ),
       'h1h4' => array(
         'label' => 'h1 to h4 headings',
         'selector' => 'h1, h2, h3, h4',

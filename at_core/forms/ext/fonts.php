@@ -290,7 +290,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       '#title' => t('Custom Selectors'),
       '#rows' => 3,
       '#default_value' => Xss::filter(theme_get_setting('settings.custom_selectors')),
-      '#description' => t("Enter a comma separated list of valid CSS selectors, with no trailing comma, such as <code>.node-content, .block-content</code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
+      '#description' => t("Enter a comma separated list of valid CSS selectors, with no trailing comma, such as <code>.node__content, .block__content </code>. Note that due to security reason you cannot use the greater than symbol (>) as a child combinator selector."),
       '#states' => array(
         'disabled' => array('select[name="settings_selectors_font_type"]' => array('value' => '<none>')),
       ),

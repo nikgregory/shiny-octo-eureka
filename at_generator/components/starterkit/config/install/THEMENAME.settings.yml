@@ -175,6 +175,11 @@ settings:
   font_websafe_buttons: '0'
   font_size_buttons: ''
   font_smoothing_buttons: 0
+  font_breadcrumbs: none
+  font_websafe_breadcrumbs: '0'
+  font_google_breadcrumbs: ''
+  font_size_breadcrumbs: ''
+  font_smoothing_breadcrumbs: 0
   font_tabs: none
   font_websafe_tabs: '0'
   font_size_tabs: ''
