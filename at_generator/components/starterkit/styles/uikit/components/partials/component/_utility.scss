@@ -9,6 +9,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  filter: blur(0.1px); // hack to mitigate blurring in Chrome/Webkit.
 }
 
 .is-vertical-top {
