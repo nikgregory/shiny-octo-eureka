@@ -83,6 +83,14 @@ function font_elements() {
         'label' => 'Responsive menu toggle',
         'selector' => '.rm-toggle, .rm-toggle__link',
       ),
+      'image_captions' => array(
+        'label' => 'Image captions',
+        'selector' => 'figcaption, .field-type-image__figcaption',
+      ),
+      'slideshow_captions' => array(
+        'label' => 'Slideshow captions',
+        'selector' => 'p.flex-caption',
+      ),
       'buttons' => array(
         'label' => 'Buttons',
         'selector' => 'button, .button',

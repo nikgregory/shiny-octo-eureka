@@ -250,31 +250,7 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       ),
     );
   }
-
-//  // Case
-//  $form['fonts']['apply'][$font_element_key]['settings_font_case_' . $font_element_key] = array(
-//    '#type' => 'select',
-//    '#title' => t('Case'),
-//    '#default_value' => theme_get_setting('settings.font_case_' . $font_element_key),
-//    '#options' => title_style_options('case'),
-//  );
-//
-//  // Weight
-//  $form['fonts']['apply'][$font_element_key]['settings_font_weight_' . $font_element_key] = array(
-//    '#type' => 'select',
-//    '#title' => t('Weight'),
-//    '#default_value' => theme_get_setting('settings.font_weight_' . $font_element_key),
-//    '#options' => title_style_options('weight'),
-//  );
-//
-//  // Alignment
-//  $form['fonts']['apply'][$font_element_key]['settings_font_alignment_' . $font_element_key] = array(
-//    '#type' => 'select',
-//    '#title' => t('Alignment'),
-//    '#default_value' => theme_get_setting('settings.font_alignment_' . $font_element_key),
-//    '#options' => title_style_options('alignment'),
-//  );
-
+  
   // Font smoothing
   $form['fonts']['apply'][$font_element_key]['settings_font_smoothing_' . $font_element_key] = array(
     '#type' => 'checkbox',
