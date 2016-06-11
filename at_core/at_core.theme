@@ -55,7 +55,7 @@ function at_core_page_attachments_alter(array &$page) {
   // load if the module is installed. Unlike core these files will load on every
   // page, so when CSS aggregation is on there will only be one CSS aggregate
   // for the theme.
-  $module_libraries = array(
+  $module_libraries = [
     'aggregator',
     'book',
     'comment',
@@ -64,7 +64,7 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
-  );
+  ];
   foreach ($module_libraries as $module_library) {
     if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
       $page['#attached']['library'][] = "$theme/$module_library";
@@ -189,7 +189,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Load Responsive menu dependencies.
       $page['#attached']['library'][] = "$theme/responsive_menus";
 
-      $responsivemenu_settings = array();
+      $responsivemenu_settings = [];
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
@@ -235,7 +235,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Get config settings and jam them into drupalSettings.
       if (isset($config['slideshow_count']) && $config['slideshow_count'] >= 1) {
 
-        $basic_slider_settings = array(
+        $basic_slider_settings = [
           'animation',
           'direction',
           'smoothheight',
@@ -243,18 +243,18 @@ function at_core_page_attachments_alter(array &$page) {
           'animationspeed',
           'controlnav',
           'directionnav',
-        );
+        ];
 
-        $carousel_settings = array(
+        $carousel_settings = [
           'as_carousel',
           'itemwidth',
           'itemmargin',
           'minitems',
           'maxitems',
           'move',
-        );
+        ];
 
-        $advanced_slider_settings = array(
+        $advanced_slider_settings = [
           'pauseonaction',
           'pauseonhover',
           'animationloop',
@@ -270,9 +270,9 @@ function at_core_page_attachments_alter(array &$page) {
           'nexttext',
           'slideshow_class',
           'selector',
-        );
+        ];
 
-        $slider_settings = array();
+        $slider_settings = [];
         for ($i = 0; $i < $config['slideshow_count']; $i++) {
 
           // Set a key
@@ -1077,6 +1077,15 @@ function at_core_preprocess_menu(&$variables) {
       $below_item['url']->setOption('attributes', array_merge_recursive($below_attributes, $menu_link_below_classes));
     }
   }
+}
+
+/**
+ * Preprocess variables for the menu local task template.
+ * @param $variables
+ */
+function at_core_preprocess_menu_local_task(&$variables) {
+  // Add BEM class to local task links.
+  $variables['element']['#link']['url']->setOption('attributes', array('class' => array('tabs__link')));
 }
 
 /**
