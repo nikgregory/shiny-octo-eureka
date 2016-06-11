@@ -58,12 +58,11 @@
   content: '';
 }
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item .menu {
-  display: none;
   position: absolute;
+  visibility: hidden;
+  opacity: 0;
   margin: 0;
   padding: 0;
-  -webkit-transition: all, 0.2s, ease-in-out;
-  transition: all, 0.2s, ease-in-out;
 }
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item .menu .menu__item {
   min-width: 12em;
@@ -73,7 +72,16 @@
   font-family: inherit;
 }
 .ms-dropmenu .rm-block__content .menu-level-1 .menu__item:hover > .menu, .ms-dropmenu .rm-block__content .menu-level-1 .menu__item:focus > .menu {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+.ms-dropmenu .rm-block__content .menu {
+  -webkit-transition: 0.15s 0.5s;
+  transition: 0.15s 0.5s;
+}
+.ms-dropmenu .rm-block__content .menu:hover .menu {
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
 }
 .ms-dropmenu .rm-block__content .odd ul {
   left: 0;
@@ -92,4 +100,5 @@
 .fa-loaded .ms-dropmenu .rm-block__content .odd ul .odd > .menu__item--expanded > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=maps/responsive-menus--dropmenu.css.map */

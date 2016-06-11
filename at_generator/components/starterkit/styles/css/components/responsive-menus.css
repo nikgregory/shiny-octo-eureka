@@ -45,6 +45,7 @@
 }
 .rm-region [class*='is-vertical-'] {
   position: absolute;
+  z-index: 480;
 }
 
 .ms-vertical .rm-toggle {
@@ -83,7 +84,7 @@
   position: relative;
 }
 .rm-block__content .menu > .menu__item {
-  z-index: 100;
+  z-index: 490;
 }
 .rm-block__content__item {
   position: relative;
@@ -119,4 +120,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus.css.map */

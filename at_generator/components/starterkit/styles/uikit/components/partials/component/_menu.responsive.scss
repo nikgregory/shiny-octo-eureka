@@ -48,6 +48,7 @@
   // Required to override position static on contextual links.
   [class*='is-vertical-'] {
     position: absolute;
+    z-index: $resp-menu-z-index;
   }
 }
 
@@ -109,7 +110,7 @@
     position: relative;
 
     > .menu__item {
-      z-index: 100;
+      z-index: $resp-menu-z-index + 10;
     }
   }
 
