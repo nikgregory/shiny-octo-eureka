@@ -861,6 +861,20 @@ thead .active img {
 .form-type-checkbox .option:hover {
   cursor: pointer;
 }
+.ui-dialog .form-type-radio, .ui-dialog
+.form-type-checkbox {
+  margin: 6px;
+  margin: 0.375rem;
+}
+.ui-dialog .form-type-radio .option, .ui-dialog
+.form-type-checkbox .option {
+  padding: 4px;
+  padding: 0.25rem;
+  margin: 0;
+  min-width: 0;
+  border: none;
+  border-radius: 0;
+}
 
 .form-actions {
   margin: 16px 0;
@@ -1283,6 +1297,10 @@ label button.link {
   font-weight: 700;
 }
 
+.ui-button-text-only .ui-button-text {
+  padding: 0;
+}
+
 /**
  * Inline form styles.
  ============================================================================ */
@@ -1433,6 +1451,11 @@ figure.align-center,
 .field-type-image__figure.align-center {
   margin-bottom: 16px;
   margin-bottom: 1rem;
+}
+img.align-center figcaption,
+figure.align-center figcaption,
+.field-type-image__figure.align-center figcaption {
+  text-align: center;
 }
 img[class*="align-"],
 figure[class*="align-"],
@@ -3189,6 +3212,8 @@ table tr.error {
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
+  -webkit-filter: blur(0.1px);
+          filter: blur(0.1px);
 }
 
 .is-vertical-top {
@@ -3337,4 +3362,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

@@ -270,3 +270,11 @@ button {
 label button.link {
   font-weight: $font-weight-bold;
 }
+
+
+// UI Buttons (jQuery UI, e.g. dialogs)
+.ui-button-text-only .ui-button-text {
+  padding: 0;
+}
+
+

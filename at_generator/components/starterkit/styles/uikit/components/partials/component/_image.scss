@@ -32,6 +32,10 @@ figure,
 
   &.align-center {
     @include output-rhythm(margin-bottom, $medium);
+
+    figcaption {
+      text-align: center;
+    }
   }
 
   &[class*="align-"] {

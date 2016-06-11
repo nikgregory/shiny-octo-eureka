@@ -58,6 +58,19 @@
   }
 
   .description {}
+
+  // UI Dialog are buggered by the above radical styles... fix it.
+  .ui-dialog & {
+    @include output-rhythm(margin, $xxx-small);
+
+    .option {
+      @include output-rhythm(padding, $xxxx-small);
+      margin: 0;
+      min-width: 0;
+      border: none;
+      border-radius: 0;
+    }
+  }
 }
 
 
