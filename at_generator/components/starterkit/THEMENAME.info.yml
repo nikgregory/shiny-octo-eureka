@@ -36,7 +36,9 @@ features:
   - comment_user_picture
   - comment_user_verification
 ckeditor_stylesheets:
+  - styles/css/components/ckeditor-iframe.css
   - styles/css/components/base.css
+  - styles/css/components/color.css
 stylesheets-remove:
   - '@stable/css/node/node.preview.css'
   - '@stable/css/system/components/tablesort.module.css'
