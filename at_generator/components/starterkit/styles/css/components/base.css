@@ -2123,10 +2123,10 @@ table tr.error {
   border-radius: 0 0 2px 2px;
 }
 .tabs .is-vertical ul.tabs--primary li a {
-  color: #ffffff;
-  background-color: #0066cc;
+  color: #fcfcfc;
+  background-color: #828282;
   opacity: 0.9;
-  border: 1px #0066cc solid;
+  border: 1px #828282 solid;
   box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   margin-bottom: -1px;
   padding: 7px 16px;
@@ -2142,14 +2142,14 @@ table tr.error {
   transition: all, 0.2s, ease-in-out;
 }
 .tabs .is-vertical ul.tabs--primary li a:link, .tabs .is-vertical ul.tabs--primary li a:visited {
-  color: #ffffff;
-  background-color: #0066cc;
-  border-color: #0066cc;
+  color: #fcfcfc;
+  background-color: #828282;
+  border-color: #828282;
 }
 .tabs .is-vertical ul.tabs--primary li a:hover, .tabs .is-vertical ul.tabs--primary li a:focus, .tabs .is-vertical ul.tabs--primary li a:active, .tabs .is-vertical ul.tabs--primary li a.active {
-  color: #ffffff;
-  background-color: #0066cc;
-  border-color: #0066cc;
+  color: #fcfcfc;
+  background-color: #828282;
+  border-color: #828282;
   opacity: 1;
 }
 .tabs .is-vertical ul.tabs--secondary {
@@ -2216,14 +2216,14 @@ table tr.error {
   display: block;
   line-height: 1;
   color: #363636;
-  background-color: #fafafa;
+  background-color: #f7f7f7;
   border: 1px solid #cccccc;
   padding: 7px 16px;
   padding: 0.4375rem 1rem;
   -webkit-transition: background-color, .15s, ease-in-out;
   transition: background-color, .15s, ease-in-out;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   margin-right: -1px;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
 }
 .tabs .is-horizontal ul.tabs--primary a:hover, .tabs .is-horizontal ul.tabs--primary a:focus {
   color: #363636;
@@ -2300,10 +2300,10 @@ table tr.error {
     border-radius: 0 0 2px 2px;
   }
   .no-js .tabs ul.tabs--primary li a {
-    color: #ffffff;
-    background-color: #0066cc;
+    color: #fcfcfc;
+    background-color: #828282;
     opacity: 0.9;
-    border: 1px #0066cc solid;
+    border: 1px #828282 solid;
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
     margin-bottom: -1px;
     padding: 7px 16px;
@@ -2319,14 +2319,14 @@ table tr.error {
     transition: all, 0.2s, ease-in-out;
   }
   .no-js .tabs ul.tabs--primary li a:link, .no-js .tabs ul.tabs--primary li a:visited {
-    color: #ffffff;
-    background-color: #0066cc;
-    border-color: #0066cc;
+    color: #fcfcfc;
+    background-color: #828282;
+    border-color: #828282;
   }
   .no-js .tabs ul.tabs--primary li a:hover, .no-js .tabs ul.tabs--primary li a:focus, .no-js .tabs ul.tabs--primary li a:active, .no-js .tabs ul.tabs--primary li a.active {
-    color: #ffffff;
-    background-color: #0066cc;
-    border-color: #0066cc;
+    color: #fcfcfc;
+    background-color: #828282;
+    border-color: #828282;
     opacity: 1;
   }
   .no-js .tabs ul.tabs--secondary {
@@ -2395,14 +2395,14 @@ table tr.error {
     display: block;
     line-height: 1;
     color: #363636;
-    background-color: #fafafa;
+    background-color: #f7f7f7;
     border: 1px solid #cccccc;
     padding: 7px 16px;
     padding: 0.4375rem 1rem;
     -webkit-transition: background-color, .15s, ease-in-out;
     transition: background-color, .15s, ease-in-out;
-    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
     margin-right: -1px;
+    box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
   }
   .no-js .tabs ul.tabs--primary a:hover, .no-js .tabs ul.tabs--primary a:focus {
     color: #363636;
@@ -3362,5 +3362,4 @@ table tr.error {
     page-break-after: avoid;
   }
 }
-
 /*# sourceMappingURL=maps/base.css.map */

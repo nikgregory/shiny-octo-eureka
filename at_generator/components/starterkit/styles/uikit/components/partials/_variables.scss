@@ -121,7 +121,10 @@ $base-color               : #000000;
 // -----------------------------------------------------------------------------
 $text-color               : #363636;
 $text-color-light         : #808080;
-$text-background-color    : #ededed;
+
+$text-background-color-light  : #f2f2f2;
+$text-background-color-normal : #ededed;
+$text-background-color-dark   : #e8e8e8;
 
 
 // Link colors
@@ -166,7 +169,7 @@ $error-background-color   : #fcf4f2;
 // Marker colors
 // -----------------------------------------------------------------------------
 $marker-color                    : #ffffff;
-$marker-background-color         : $text-background-color;
+$marker-background-color         : $text-background-color-normal;
 $marker-info-background-color    : #0074bd;
 $marker-success-background-color : #77b259;
 $marker-warning-background-color : #e09600;
@@ -181,7 +184,7 @@ $selection-color : #b3d4fc;
 // Zebra striping
 // -----------------------------------------------------------------------------
 $odd-color  : transparent;
-$even-color : $text-background-color;
+$even-color : $text-background-color-normal;
 
 
 // =============================================================================
@@ -268,6 +271,12 @@ $block-title-background-color      : #ffffff;
 
 $block-link-color                  : $link-color;
 
+// Sidebar blocks
+//$sidebar-block-header-background-color : $regions-background-color;
+//$sidebar-block-header-color            : $text-color;
+//$sidebar-block-body-background-color   : $regions-background-color;
+//$sidebar-block-body-color              : $text-color;
+
 
 // Menus
 // -----------------------------------------------------------------------------
@@ -282,8 +291,8 @@ $menu-border-hover-color           : $border-color;
 $menu-border-active-color          : $border-color;
 
 $menu-background-color             : $regions-background-color;
-$menu-background-hover-color       : $text-background-color;
-$menu-background-active-color      : $text-background-color;
+$menu-background-hover-color       : $text-background-color-normal;
+$menu-background-active-color      : $text-background-color-normal;
 
 $menu-border-width                 : $border-width;
 $menu-border-style                 : $border-style;
@@ -311,22 +320,36 @@ $dropmenu-item-width               : 12em;
 $dropmenu-arrows                   : true;
 
 
+// Nodes
+// -----------------------------------------------------------------------------
+$node-teaser-color                 : $text-color;
+$node-background-color             : #ffffff;
+$node-teaser-background-color      : $node-background-color;
+
+
+$node-teaser-border-color          : $border-color;
+$node-teaser-border-width          : $border-width;
+$node-teaser-border-style          : $border-style;
+
+$node-box-shadow                   : 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+$node-teaser-box-shadow            : $node-box-shadow;
+
+
 // Forms & Dialog
 // -----------------------------------------------------------------------------
 $form-text-align                   : center;
 
-$form-text-color                   : lighten($text-color, $lighten-most); // If text is #000, lighten 20% is #333
-
+$form-text-color                   : $text-color;
 $form-text-focus-color             : $text-color;
 
 $form-border-color                 : $border-color;
 $form-border-focus-color           : $border-color;
 
-$form-background-color             : #ffffff;
-$form-background-focus-color       : lighten($text-background-color, $lighten-most);
+$form-background-color             : $node-background-color;
+$form-background-focus-color       : $form-background-color;
 
-$form-help-color                   : lighten($text-color, $lighten-most);
-$form-marker-color                 : #ee0000; // bright red, typically styles the asterisk (*) on required form fields.
+$form-help-color                   : $text-color;
+$form-marker-color                 : #ee0000; // bright red, styles the asterisk (*) on required form fields.
 
 $form-border-width                 : $border-width;
 $form-border-style                 : $border-style;
@@ -335,20 +358,20 @@ $form-border-radius                : $border-radius;
 $form_input_button_select_height   : $xx-large;
 $form-box-shadow                   : false;
 
-$form-details-background-color     : #fcfcfc;
+$form-details-background-color     : $regions-background-color;
 
 
 // Buttons
 // -----------------------------------------------------------------------------
 $button-text-align                 : center;
 
-$button-color                      : #ffffff;
+$button-color                      : #fcfcfc;
 $button-hover-color                : $button-color;
 
-$button-background-color           : $link-color;
-$button-background-hover-color     : $link-color;
+$button-background-color           : #828282;
+$button-background-hover-color     : $button-background-color;
 
-$button-border-color               : $link-color;
+$button-border-color               : $button-background-color;
 $button-border-width               : $border-width;
 $button-border-style               : $border-style;
 $button-border-radius              : $border-radius;
@@ -373,15 +396,17 @@ $tab-border-color                  : $border-color;
 $tab-border-hover-color            : $border-color;
 $tab-border-active-color           : $border-color;
 
-//$tab-background-color             : $text-background-color;
-$tab-background-color              : lighten($text-background-color, $lighten-more);
+//$tab-background-color             : $text-background-color-normal;
+$tab-background-color              : $regions-background-color;
 
-$tab-background-hover-color        : $text-background-color;
-$tab-background-active-color       : $text-background-color;
+$tab-background-hover-color        : $text-background-color-normal;
+$tab-background-active-color       : $text-background-color-normal;
 
 $tab-border-width                  : $border-width;
 $tab-border-style                  : $border-style;
 $tab-border-radius                 : $border-radius;
+
+$tab-box-shadow                    : true;
 
 
 // Lists
@@ -396,11 +421,11 @@ $list-border-color                 : $border-color;
 $list-border-hover-color           : $border-color;
 $list-border-active-color          : $border-color;
 
-//$list-background-color            : $text-background-color;
-$list-background-color             : lighten($text-background-color, $lighten-more);
+//$list-background-color            : $text-background-color-normal;
+$list-background-color             : $regions-background-color;
 
-$list-background-hover-color       : $text-background-color;
-$list-background-active-color      : $text-background-color;
+$list-background-hover-color       : $text-background-color-normal;
+$list-background-active-color      : $text-background-color-normal;
 
 $list-border-width                 : $border-width;
 $list-border-style                 : $border-style;
@@ -426,7 +451,7 @@ $table-cell-borders                : true; // set to false to remove td/th borde
 $table-border-color                : $border-color;
 
 // thead.
-$thead-background-color            : $text-background-color;
+$thead-background-color            : $text-background-color-dark;
 $thead-text-color                  : $text-color;
 
 // Row striping.
@@ -436,26 +461,13 @@ $table-row-even-color              : $even-color;
 
 // Col striping - applies to the active column in sortable tables.
 $table-col-striping                : false;
-$table-col-odd-color               : $text-background-color;
-//$table-col-even-color             : $text-background-color; // TODO - strategy for column striping even color
-$table-col-even-color              : darken($text-background-color, 2%);
+$table-col-odd-color               : $text-background-color-light;
+$table-col-even-color              : $regions-background-color;
+
 
 // Hover
 $tr-hover                          : false;
-//$tr-hover-color                   : $text-background-color; // TODO - strategy for table row hover color
-$tr-hover-color                    : darken($text-background-color, $darken);
-
-
-// Nodes
-// -----------------------------------------------------------------------------
-$node-teaser-color                 : $text-color;
-$node-teaser-background-color      : #ffffff;
-
-$node-teaser-border-color          : $border-color;
-$node-teaser-border-width          : $border-width;
-$node-teaser-border-style          : $border-style;
-
-$node-teaser-box-shadow            : 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+$tr-hover-color                    : $text-background-color-normal;
 
 
 // Fields
