@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 21px;
+  line-height: 1.3125rem;
+  color: inherit;
+  background-color: transparent;
+  margin: 11px;
+  margin: 0.6875rem;
+}
+
+.cke_reset,
+.cke_editable,
+textarea.cke_source {
+  background-color: inherit;
+  color: inherit;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+ul,
+ol,
+dl {
+  padding-left: 47px;
+  padding-left: 2.9375rem;
+  padding-right: 0;
+}
+/*# sourceMappingURL=maps/ckeditor-iframe.css.map */

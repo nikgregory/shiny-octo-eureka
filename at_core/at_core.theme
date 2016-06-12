@@ -55,7 +55,7 @@ function at_core_page_attachments_alter(array &$page) {
   // load if the module is installed. Unlike core these files will load on every
   // page, so when CSS aggregation is on there will only be one CSS aggregate
   // for the theme.
-  $module_libraries = [
+  $module_libraries = array(
     'aggregator',
     'book',
     'comment',
@@ -64,7 +64,7 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
-  ];
+  );
   foreach ($module_libraries as $module_library) {
     if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
       $page['#attached']['library'][] = "$theme/$module_library";
@@ -189,7 +189,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Load Responsive menu dependencies.
       $page['#attached']['library'][] = "$theme/responsive_menus";
 
-      $responsivemenu_settings = [];
+      $responsivemenu_settings = array();
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
@@ -235,7 +235,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Get config settings and jam them into drupalSettings.
       if (isset($config['slideshow_count']) && $config['slideshow_count'] >= 1) {
 
-        $basic_slider_settings = [
+        $basic_slider_settings = array(
           'animation',
           'direction',
           'smoothheight',
@@ -243,18 +243,18 @@ function at_core_page_attachments_alter(array &$page) {
           'animationspeed',
           'controlnav',
           'directionnav',
-        ];
+        );
 
-        $carousel_settings = [
+        $carousel_settings = array(
           'as_carousel',
           'itemwidth',
           'itemmargin',
           'minitems',
           'maxitems',
           'move',
-        ];
+        );
 
-        $advanced_slider_settings = [
+        $advanced_slider_settings = array(
           'pauseonaction',
           'pauseonhover',
           'animationloop',
@@ -270,9 +270,9 @@ function at_core_page_attachments_alter(array &$page) {
           'nexttext',
           'slideshow_class',
           'selector',
-        ];
+        );
 
-        $slider_settings = [];
+        $slider_settings = array();
         for ($i = 0; $i < $config['slideshow_count']; $i++) {
 
           // Set a key
@@ -325,6 +325,125 @@ function at_core_page_attachments_alter(array &$page) {
 }
 
 /**
+ * Implements hook_css_alter().
+ *
+ * @param $css
+ *   An array of all CSS items (files and inline CSS) being requested on the page.
+ * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
+ *   The assets attached to the current response.
+ */
+//function at_core_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+//  kpr($css);
+//}
+
+/**
+ * Implements hook_js_alter().
+ *
+ * @param $javascript
+ *   An array of all JavaScript being presented on the page.
+ * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
+ *   The assets attached to the current response.
+ */
+//function at_core_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+//  kpr($javascript);
+//}
+
+/**
+ * Implements hook_js_settings_alter().
+ * Perform necessary alterations to the JavaScript settings (drupalSettings).
+ *
+ * @param array &$settings
+ *   An array of all JavaScript settings (drupalSettings) being presented on the
+ *   page.
+ * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
+ *   The assets attached to the current response.
+ *
+ * @see \Drupal\Core\Asset\AssetResolver
+ */
+function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+
+  // Alter CKEditor JS settings.
+  if (\Drupal::moduleHandler()->moduleExists('ckeditor') == TRUE) {
+
+    // Get the active theme and it's configuration.
+    $theme = \Drupal::theme()->getActiveTheme()->getName();
+    $config = \Drupal::config($theme . '.settings')->get('settings');
+
+    if (isset($settings['editor']['formats'])) {
+
+      // Get the color module saved stylesheets for this theme.
+      $color_paths = array();
+      if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
+        $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
+      }
+
+      // Generated font and title theme styles (from theme settings).
+      $text_styles = array();
+      if (!empty($config['generated_files_path'])) {
+        $generated_files_path = $config['generated_files_path'];
+
+        if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+          if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+            if (file_exists($generated_files_path . '/fonts.css')) {
+              $text_styles[] = $generated_files_path . '/fonts.css';
+            }
+          }
+          if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
+            if (file_exists($generated_files_path . '/title-styles.css')) {
+              $text_styles[] = $generated_files_path . '/title-styles.css';
+            }
+          }
+        }
+      }
+
+      // Alter the JS Settings for CKEditor. If color path/s exist we add the
+      // color module saved files and remove the original color.css. Also we add
+      // font and text generated theme styles.
+      foreach ($settings['editor']['formats'] as $format_key => $format_values) {
+        $content_css = $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'];
+
+        // Add the modified color css file.
+        if (!empty($color_paths)) {
+          $color_css = "/themes/$theme/styles/css/components/color.css";
+
+          if (in_array($color_css, $content_css)) {
+            // Remove the original color.css file.
+            $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'] = array_merge(array_diff($content_css, array($color_css)));
+
+            // Add the color module saved files.
+            foreach ($color_paths as $color_path) {
+              $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($color_path);
+            }
+          }
+        }
+
+        // Add the generated font and title styles.
+        if (!empty($text_styles)) {
+          foreach ($text_styles as $text_style) {
+            $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($text_style);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * @param array $libraries
+ *   An associative array of libraries registered by $extension. Keyed by
+ *   internal library name and passed by reference.
+ * @param string $extension
+ *   Can either be 'core' or the machine name of the extension that registered
+ *   the libraries.
+ */
+//function at_core_library_info_alter(&$libraries, $extension) {
+//  kpr($libraries);
+//  kpr($extension);
+//}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter().
  * @param array $suggestions
  * @param array $variables
@@ -354,7 +473,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
             '#items' => $formatted_suggestions,
           );
           drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array(
-            '@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))
+              '@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))
           ), 'status');
         }
       }
@@ -644,22 +763,40 @@ function at_core_preprocess_page(&$variables) {
   }
 
   // Layout Attributes
+
+  // Allow the main content to render in at_generator so users can login if they
+  // set it as default and blew their site up.
+  if ($theme == 'at_generator') {
+    $variables['main']['has_regions'] = TRUE;
+    return; // return early to avoid notices and errors.
+  }
+
   // Add dynamic classes to each region wrapper (.regions).
   // This adds two classes to every wrapper:
   //  - "arc--[n]" active region count in this row, e.g. "arc--2".
   //  - "hr--[n-n]" has regions, by source order, e.g. "hr--1-3".
+  //
+  // There are two layout methods - a JavaScript that applies layout classes
+  // and avoids having to render early. The second (and default) method renders
+  // regions early, as this is the only way to reliably check if the region is
+  // has content. Rendering early is discouraged and for those who wish to avoid
+  // it can set the JS method as default in theme settings.
+
+  // First check if the JS layout method is being used.
   if (isset($config['layout_method']) && $config['layout_method'] === 1) {
     $variables['attributes']['class'][] = 'js-layout';
     $layout_load = new LayoutLoad($theme, $active_regions = NULL);
     $variables = $variables + $layout_load->rowAttributesJS();
   }
+  // Nope, lets go ahead with the our standard render early method.
   else {
     $regions = system_region_list($theme, REGIONS_VISIBLE);
     $active_regions = array();
     // Render early because themes cannot check render arrays to determine
     // visibility. This is a critical issue in D8 (and D7 also):
-    // https://www.drupal.org/node/953034. Early rendering is the only way I have
-    // found to reliably set the layout.
+    // https://www.drupal.org/node/953034. Early rendering is the only way I
+    // have found to reliably set the layout (JS does a reasonable job but can
+    // be slow and do odd things).
     foreach ($regions as $region_name => $region_label) {
       if (!empty($variables['page'][$region_name])) {
         if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
@@ -952,15 +1089,18 @@ function at_core_preprocess_breadcrumb(&$variables) {
   $variables['title_attributes'] = new Attribute(array('class' => array()));
 
   // Set attributes.
-  $variables['breadcrumb_title_hidden'] = TRUE;
+  $variables['breadcrumb_label'] = FALSE;
+
+  // Label value
+  $variables['breadcrumb_label_value'] = isset($config['breadcrumb_label_value']) ? $config['breadcrumb_label_value'] : 'You are here:';
 
   // Theme settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 
-      // Remove the label.
+      // Show the label.
       if (isset($config['breadcrumb_label']) && $config['breadcrumb_label'] === 1) {
-        $variables['breadcrumb_title_hidden'] = FALSE;
+        $variables['breadcrumb_label'] = TRUE;
       }
 
       // Remove the Home link.
@@ -1077,15 +1217,6 @@ function at_core_preprocess_menu(&$variables) {
       $below_item['url']->setOption('attributes', array_merge_recursive($below_attributes, $menu_link_below_classes));
     }
   }
-}
-
-/**
- * Preprocess variables for the menu local task template.
- * @param $variables
- */
-function at_core_preprocess_menu_local_task(&$variables) {
-  // Add BEM class to local task links.
-  $variables['element']['#link']['url']->setOption('attributes', array('class' => array('tabs__link')));
 }
 
 /**

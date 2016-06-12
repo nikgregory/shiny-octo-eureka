@@ -1,0 +1,29 @@
+// CSS added to iframe-based instances only.
+
+body {
+  font-family: $base-font-family;
+  @include adjust-font-size-to($medium);
+  color: inherit;
+  background-color: transparent;
+  @include output-rhythm(margin, $small);
+}
+
+.cke_reset,
+.cke_editable,
+textarea.cke_source {
+  background-color: inherit;
+  color: inherit;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+// Equalize margins for indented elements.
+ul,
+ol,
+dl {
+  @include output-rhythm(padding-#{$flow-from}, $xxxx-large);
+  padding-#{$flow-to}: 0;
+}
+
+
+

@@ -6,29 +6,34 @@
  ============================================================================ */
 
 .cke_chrome {
-  border: $border-width $border-style !important;
   box-shadow: none !important;
-}
-
-.cke_chrome {
+  border: $border-width $border-style !important;
   border-top: $border-width $border-style !important;
   border-bottom: $border-width $border-style !important;
 }
 
 .cke_top {
+  box-shadow: none !important;
   border-bottom: $border-width $border-style !important;
-  background: $page-background-color !important;
   background-image: none !important;
-}
-
-#cke_1_contents {
-  //height: 160px !important;
 }
 
 .cke_bottom {
   box-shadow: none !important;
   border-top: $border-width $border-style !important;
-  background: $page-background-color !important;
   background-image: none !important;
 }
+
+textarea.cke_source {
+  padding: 0.5em !important;
+  font-family: $monospace !important;
+  font-size: $medium * .875 !important;
+}
+
+a.cke_path_item,
+span.cke_path_empty {
+  text-shadow: none !important;
+}
+
+
 
