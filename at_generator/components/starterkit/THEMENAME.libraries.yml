@@ -141,6 +141,7 @@ color:
   css:
     theme:
       styles/css/components/color.css: {}
+      styles/css/components/tabs.css: {}
 
 # Shortcodes Text Align
 shortcodes_textalign:

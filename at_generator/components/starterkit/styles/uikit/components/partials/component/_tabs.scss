@@ -13,7 +13,6 @@
   ul {
     @include clearfix-micro;
     @include output-rhythm(margin-bottom, $medium);
-
     padding: 0;
 
     &.tabs--primary {
@@ -40,6 +39,7 @@
       @include list-style-seven-vertical('ul.tabs--secondary');
     }
   }
+
   @media #{$wide} {
     .no-js & {
       @include list-style-tab-group('ul.tabs--primary');
@@ -47,6 +47,5 @@
     }
   }
 }
-
 
 

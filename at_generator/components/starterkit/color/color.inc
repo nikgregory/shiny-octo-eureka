@@ -46,6 +46,7 @@ $info = array(
   // CSS files (excluding @import) to rewrite with new color scheme.
   'css' => array(
     'styles/css/components/color.css',
+    'styles/css/components/tabs.css',
   ),
 
   // Files to copy.

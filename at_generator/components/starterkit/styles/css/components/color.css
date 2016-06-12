@@ -312,6 +312,10 @@ hr {
  * Table Theme
  * Style Drupal selectors for tables.
  ============================================================================ */
+tr:hover {
+  background-color: #ededed;
+}
+
 thead tr {
   color: #363636;
   background-color: #e8e8e8;
@@ -656,108 +660,8 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 }
 
 /**
- * Tabs (local tasks)
- ============================================================================ */
-.tabs .is-horizontal ul.tabs--primary {
-  border-bottom-color: #cccccc;
-}
-.tabs .is-horizontal ul.tabs--primary li a {
-  color: #363636;
-  background-color: #f7f7f7;
-  opacity: 0.9;
-  border: 1px #cccccc solid;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
-}
-.tabs .is-horizontal ul.tabs--primary li a:link, .tabs .is-horizontal ul.tabs--primary li a:visited {
-  color: #363636;
-  background-color: #f7f7f7;
-  border-color: #cccccc;
-}
-.tabs .is-horizontal ul.tabs--primary li a:hover, .tabs .is-horizontal ul.tabs--primary li a:focus, .tabs .is-horizontal ul.tabs--primary li a:active, .tabs .is-horizontal ul.tabs--primary li a.active {
-  color: #363636;
-  background-color: #f7f7f7;
-  border-color: #cccccc;
-  opacity: 1;
-}
-.tabs .is-horizontal ul.tabs--primary li a:hover, .tabs .is-horizontal ul.tabs--primary li a:focus {
-  color: #363636;
-  background-color: #ededed;
-}
-.tabs .is-horizontal ul.tabs--primary li a:active {
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  background-color: transparent;
-}
-.tabs .is-horizontal ul.tabs--primary li a.is-active {
-  color: #363636;
-  background-color: #f7f7f7;
-}
-@media all and (min-width: 60.063em) {
-  .tabs .is-horizontal ul.tabs--primary li a.is-active {
-    border-bottom-color: #f7f7f7;
-  }
-}
-@media all and (max-width: 60em) {
-  .tabs .is-horizontal ul.tabs--primary li a.is-active {
-    border-bottom-color: #cccccc;
-  }
-}
-.tabs .is-horizontal ul.tabs--primary li a.is-active:hover, .tabs .is-horizontal ul.tabs--primary li a.is-active:focus {
-  color: #363636;
-  background-color: transparent;
-}
-.tabs .is-horizontal ul.tabs--secondary li a {
-  color: #363636;
-  border-color: #cccccc;
-  border-bottom-color: transparent;
-}
-.tabs .is-horizontal ul.tabs--secondary li a:hover, .tabs .is-horizontal ul.tabs--secondary li a:focus {
-  text-decoration: none;
-  color: #363636;
-  border-color: #cccccc;
-}
-.tabs .is-horizontal ul.tabs--secondary li a.active {
-  border-color: #cccccc;
-}
-.tabs .is-horizontal ul.tabs--secondary li a.active:hover, .tabs .is-horizontal ul.tabs--secondary li a.active:focus {
-  color: #363636;
-}
-.tabs .is-vertical ul.tabs--primary li a {
-  color: #fcfcfc;
-  background-color: #828282;
-  opacity: 0.9;
-  border: 1px #828282 solid;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 inset;
-}
-.tabs .is-vertical ul.tabs--primary li a:link, .tabs .is-vertical ul.tabs--primary li a:visited {
-  color: #fcfcfc;
-  background-color: #828282;
-  border-color: #828282;
-}
-.tabs .is-vertical ul.tabs--primary li a:hover, .tabs .is-vertical ul.tabs--primary li a:focus, .tabs .is-vertical ul.tabs--primary li a:active, .tabs .is-vertical ul.tabs--primary li a.active {
-  color: #fcfcfc;
-  background-color: #828282;
-  border-color: #828282;
-  opacity: 1;
-}
-.tabs ul.tabs--secondary li a {
-  color: #363636;
-  border-bottom-color: transparent;
-  border-left-color: #cccccc;
-}
-.tabs ul.tabs--secondary li a:hover, .tabs ul.tabs--secondary li a:focus {
-  color: #363636;
-  border-bottom-color: #cccccc;
-}
-.tabs ul.tabs--secondary li a.active, .tabs ul.tabs--secondary li a.is-active {
-  border-bottom-color: #cccccc;
-}
-.tabs ul.tabs--secondary li a.active:hover, .tabs ul.tabs--secondary li a.active:focus, .tabs ul.tabs--secondary li a.is-active:hover, .tabs ul.tabs--secondary li a.is-active:focus {
-  color: #363636;
-}
-
-/**
  * File icons
- * AT unsets Drupal core file field CSS for image icons and replaces them
+ * AT un-sets Drupal core file field CSS for image icons and replaces them
  * with FontAwesome icons.
  ============================================================================ */
 .file a:before {
@@ -777,8 +681,7 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 /**
  * Labels.
  *  -  for example "new" mark on comments, tags etc.
- *
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
+ *  TODO: fix this stuff up, its just a copy/paste from system.theme.css.
  ============================================================================ */
 .filter-help a:after,
 .more-help-link a:after {
