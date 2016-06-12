@@ -2,7 +2,6 @@
  * Color
  ============================================================================ */
 
-
 /**
  * base.elements
  ============================================================================ */
@@ -802,8 +801,6 @@ button,
   border-color: $button-border-color;
   opacity: 0.9;
 
-
-
   @if $button-box-shadow == true {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
   }
@@ -931,133 +928,9 @@ button.link-edit-summary {
 }
 
 
-
-
-/**
- * Tabs (local tasks)
- ============================================================================ */
-
-.tabs {
-  // You MUST look in _component.tabs.scss to see which mixins are being called
-  // for primary and secondary tabs, these will most likely be in breakpoints
-  // with different mixins called into each breakpoint for both sets of tabs.
-
-  // These are set generically to match most tab/list styles (from mixins).
-  // There may be occasions when a particular declaration might not work
-  // out exactly right, just set a special case for it.
-
-  .is-horizontal {
-    ul.tabs--primary {
-      border-bottom-color: $tab-border-color;
-      li {
-        a {
-          @include button-variant($tab-color, $tab-background-color, true, $tab-border-width, $tab-border-color, $tab-border-style);
-          @if $tab-box-shadow == true {
-            box-shadow: inset 0 $tab-border-width 0 0 rgba(255, 255, 255, 0.5);
-          }
-
-          &:hover,
-          &:focus {
-            color: $tab-hover-color;
-            background-color: $tab-background-hover-color;
-          }
-
-          &:active {
-            text-shadow: 0 1px 1px rgba(0, 0, 0,  0.3);
-            background-color: transparent;
-          }
-
-          &.is-active {
-            color: $tab-active-color;
-            background-color: $regions-background-color;
-
-            // mobile and wide breakpoints have different style tabs, mobile
-            // needs the border to show, while the wide "tab style" needs to hide
-            // the border by matching it to the regions background color.
-            @media #{$wide} {
-              border-bottom-color: $regions-background-color;
-            }
-            @media #{$mobile} {
-              border-bottom-color: $tab-border-color;
-            }
-
-            &:hover,
-            &:focus {
-              color: $tab-hover-color;
-              background-color: transparent;
-            }
-          }
-        }
-      }
-    }
-
-    ul.tabs--secondary {
-      li {
-        a {
-          color: $list-color;
-          border-color: $list-border-color;
-          border-bottom-color: transparent;
-
-          &:hover,
-          &:focus {
-            text-decoration: none;
-            color: $list-hover-color;
-            border-color: $list-border-color;
-          }
-
-          &.active {
-            border-color: $list-border-color;
-
-            &:hover,
-            &:focus {
-              color: $list-hover-color;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .is-vertical {
-    ul.tabs--primary {
-      li a {
-        @include button-variant($button-color, $button-background-color, true, $button-border-width, $button-border-color, $button-border-style);
-        @if $button-box-shadow == true {
-          box-shadow: rgba(255, 255, 255, 0.5) 0 $button-border-width 0 inset;
-        }
-      }
-    }
-  }
-
-  ul.tabs--secondary {
-    li a {
-      color: $list-color;
-      border-bottom-color: transparent;
-      border-left-color: $list-border-color;
-
-      &:hover,
-      &:focus {
-        color: $list-hover-color;
-        border-bottom-color: $list-border-color;
-      }
-
-      &.active,
-      &.is-active {
-        border-bottom-color: $list-border-color;
-
-        &:hover,
-        &:focus {
-          color: $list-hover-color;
-        }
-      }
-    }
-  }
-}
-
-
 /**
  * File icons
- * AT unsets Drupal core file field CSS for image icons and replaces them
+ * AT un-sets Drupal core file field CSS for image icons and replaces them
  * with FontAwesome icons.
  ============================================================================ */
 
@@ -1108,8 +981,7 @@ button.link-edit-summary {
 /**
  * Labels.
  *  -  for example "new" mark on comments, tags etc.
- *
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css at the moment.
+ *  TODO: fix this stuff up, its just a copy/paste from system.theme.css.
  ============================================================================ */
 
 .filter-help a,
