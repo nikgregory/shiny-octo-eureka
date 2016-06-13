@@ -33,7 +33,7 @@ blockquote p:first-child:before {
   color: #cccccc;
 }
 blockquote small {
-  color: #434343;
+  color: #5c5c5c;
 }
 blockquote.pull-right {
   border-right-color: #cccccc;

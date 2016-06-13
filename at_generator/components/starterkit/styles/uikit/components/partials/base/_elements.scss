@@ -262,7 +262,7 @@ blockquote {
 
   small {
     display: block;
-    @include adjust-font-size-to($small);
+    @include adjust-font-size-to($medium * 0.875);
 
     &:before {
       content: '\2014 \00A0'; // EM DASH, NBSP

@@ -376,10 +376,10 @@ blockquote p:last-child {
 }
 blockquote small {
   display: block;
-  font-size: 11px;
-  font-size: 0.6875rem;
-  line-height: 15px;
-  line-height: 0.9375rem;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  line-height: 1.125rem;
 }
 blockquote small:before {
   content: '\2014 \00A0';
@@ -2994,4 +2994,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

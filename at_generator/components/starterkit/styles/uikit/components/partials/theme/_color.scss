@@ -52,7 +52,7 @@ blockquote {
   }
 
   small {
-    color: lighten($text-color, $lighten-more);
+    color: $text-color-medium;
   }
 
   // Float right with text-align: right
