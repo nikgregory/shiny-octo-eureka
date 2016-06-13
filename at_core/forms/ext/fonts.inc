@@ -37,7 +37,7 @@ function font_elements() {
     $elements_array = array(
       'base' => array(
         'label' => 'Base',
-        'selector' => 'body',
+        'selector' => 'body, input, textarea, select, table',
       ),
       'sitename' => array(
         'label' => 'Site name',
@@ -91,9 +91,17 @@ function font_elements() {
         'label' => 'Slideshow captions',
         'selector' => 'p.flex-caption',
       ),
+      'formitems' => array(
+        'label' => 'Form elements',
+        'selector' => 'form, input, select, textarea',
+      ),
       'buttons' => array(
         'label' => 'Buttons',
         'selector' => 'button, .button',
+      ),
+      'tables' => array(
+        'label' => 'Tables',
+        'selector' => 'table',
       ),
       'tabs' => array(
         'label' => 'Tabs',
