@@ -1,20 +1,31 @@
 // CSS added to iframe-based instances only.
 
+html {
+  background-color: transparent !important;
+}
+
 body {
   font-family: $base-font-family;
   @include adjust-font-size-to($medium);
-  color: inherit;
-  background-color: transparent;
-  @include output-rhythm(margin, $small);
+  @include output-rhythm(padding, $small);
+}
+
+textarea {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .cke_reset,
 .cke_editable,
-textarea.cke_source {
-  background-color: inherit;
-  color: inherit;
+.cke_editable *,
+.cke_source {
+  background-color: inherit !important;
+  color: inherit !important;
   box-shadow: none !important;
   background-image: none !important;
+  visibility: visible;
+  opacity: 1;
+  transition: $global-transition;
 }
 
 // Equalize margins for indented elements.
@@ -24,6 +35,5 @@ dl {
   @include output-rhythm(padding-#{$flow-from}, $xxxx-large);
   padding-#{$flow-to}: 0;
 }
-
 
 

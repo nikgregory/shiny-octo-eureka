@@ -6,14 +6,15 @@
  * base.elements
  ============================================================================ */
 
-// html and body
-html,
-body {
-  background-color: $body-background-color; // this matches the navbar for offcanvas menus.
+// Background for offcanvas menus goes on html so CKEditor does not inherit
+// it from the body element.
+html {
+  background-color: $body-background-color;
 }
 
-
+// Body.
 body {
+  background-color: transparent;
   color: $text-color;
 }
 
@@ -779,6 +780,41 @@ form .marker {
   select.error {
     border-color: $error-border-color;
   }
+}
+
+
+/**
+ * Vertical tabs.
+ ============================================================================ */
+
+// Wrapper
+.vertical-tabs {
+  background-color: $vertical-tabs-selected-color;
+  border-color: $vertical-tabs-border-color;
+}
+
+// Menu
+.vertical-tabs__menu {
+  background-color: $vertical-tabs-menu-background-color;
+  border-top-color: $vertical-tabs-border-color;
+}
+
+.vertical-tabs__menu-item {
+  background: $vertical-tabs-background-color;
+  border-color: $vertical-tabs-border-color;
+
+  &.is-selected {
+    background-color: $vertical-tabs-selected-color;
+
+    .vertical-tabs__menu-item-title {
+      color: $vertical-tabs-color;
+    }
+  }
+}
+
+// Panes
+.vertical-tabs__pane {
+  background-color: $vertical-tabs-selected-color;
 }
 
 

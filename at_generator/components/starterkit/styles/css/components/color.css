@@ -4,12 +4,12 @@
 /**
  * base.elements
  ============================================================================ */
-html,
-body {
+html {
   background-color: #333333;
 }
 
 body {
+  background-color: transparent;
   color: #363636;
 }
 
@@ -521,6 +521,34 @@ form .marker {
 }
 
 /**
+ * Vertical tabs.
+ ============================================================================ */
+.vertical-tabs {
+  background-color: #f2f2f2;
+  border-color: #cccccc;
+}
+
+.vertical-tabs__menu {
+  background-color: #ffffff;
+  border-top-color: #cccccc;
+}
+
+.vertical-tabs__menu-item {
+  background: #ffffff;
+  border-color: #cccccc;
+}
+.vertical-tabs__menu-item.is-selected {
+  background-color: #f2f2f2;
+}
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-item-title {
+  color: #363636;
+}
+
+.vertical-tabs__pane {
+  background-color: #f2f2f2;
+}
+
+/**
  * Buttons
  * We include button styling separate (from _forms.scss) mainly because the form
  * styles are quite long already and we often want to add unique button variants.
@@ -834,5 +862,4 @@ textarea.cke_source {
   background-color: #ffffff;
   color: #363636;
 }
-
 /*# sourceMappingURL=maps/color.css.map */

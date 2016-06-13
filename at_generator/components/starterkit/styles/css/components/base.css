@@ -841,8 +841,8 @@ thead .active img {
 
 .form-type-radio,
 .form-type-checkbox {
-  margin: 0 0 4px 6px;
-  margin: 0 0 0.25rem 0.375rem;
+  margin-left: 6px;
+  margin-left: 0.375rem;
 }
 .form-type-radio .option,
 .form-type-checkbox .option {
@@ -1413,6 +1413,22 @@ tr .form-item {
   margin-top: 0;
   margin-bottom: 0;
   white-space: nowrap;
+}
+
+/**
+ * Vertical tabs.
+ ============================================================================ */
+.vertical-tabs {
+  border: 1px solid;
+}
+
+.vertical-tabs__menu {
+  border-top: 1px solid;
+}
+
+.vertical-tabs__menu-item {
+  border: 1px solid;
+  border-top: 0;
 }
 
 /**
@@ -2978,5 +2994,4 @@ table tr.error {
     page-break-after: avoid;
   }
 }
-
 /*# sourceMappingURL=maps/base.css.map */

@@ -315,7 +315,6 @@ $resp-menu-active-background-color : rgba(255, 255, 255, 0.095);
 $resp-menu-z-index                  : 480;
 
 // Drop Menu
-// -----------------------------------------------------------------------------
 $dropmenu-item-width               : 12em;
 $dropmenu-arrows                   : true;
 
@@ -325,7 +324,6 @@ $dropmenu-arrows                   : true;
 $node-teaser-color                 : $text-color;
 $node-background-color             : #ffffff;
 $node-teaser-background-color      : $node-background-color;
-
 
 $node-teaser-border-color          : $border-color;
 $node-teaser-border-width          : $border-width;
@@ -359,6 +357,16 @@ $form_input_button_select_height   : $xx-large;
 $form-box-shadow                   : false;
 
 $form-details-background-color     : $regions-background-color;
+
+
+// Vertical Tabs
+// -----------------------------------------------------------------------------
+$vertical-tabs-color                 : $text-color;
+$vertical-tabs-border-color          : $form-border-color;
+$vertical-tabs-background-color      : $form-background-color;
+
+$vertical-tabs-menu-background-color : $form-background-color;
+$vertical-tabs-selected-color        : $text-background-color-light;
 
 
 // Buttons
@@ -442,7 +450,7 @@ $breadcrumb-active-color           : $link-color;
 $breadcrumb-visited-color          : $link-visited-color;
 $breadcrumb-visited-hover-color    : $link-visited-color;
 
-$breadcrumb-separator-color: $border-color;
+$breadcrumb-separator-color        : $border-color;
 
 
 // Tables
@@ -463,7 +471,6 @@ $table-row-even-color              : $even-color;
 $table-col-striping                : false;
 $table-col-odd-color               : $text-background-color-light;
 $table-col-even-color              : $regions-background-color;
-
 
 // Hover
 $tr-hover                          : true;
