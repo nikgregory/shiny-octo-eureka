@@ -709,7 +709,6 @@ button.link-edit-summary:hover, button.link-edit-summary:focus {
 /**
  * Labels.
  *  -  for example "new" mark on comments, tags etc.
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css.
  ============================================================================ */
 .filter-help a:after,
 .more-help-link a:after {

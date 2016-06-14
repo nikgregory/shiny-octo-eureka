@@ -106,16 +106,17 @@
 }
 
 
-// Tips - TODO, is this even used anymore?
+// Tips (filter tips help page)
 .tips {
+  padding-#{$flow-from}: 0;
+
   li {
     list-style: none;
   }
 }
 
 
-// Tips, Descriptions.
-.tips,
+// Descriptions.
 .description {
   @include adjust-font-size-to($small);
 }

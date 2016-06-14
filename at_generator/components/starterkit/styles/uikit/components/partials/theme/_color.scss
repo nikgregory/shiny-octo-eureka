@@ -57,7 +57,7 @@ blockquote {
 
   // Float right with text-align: right
   &.pull-right {
-    border-#{$flow-to}-color: $border-color; // TODO check concatenation is OK
+    border-#{$flow-to}-color: $border-color; // TODO check interpolation is OK
   }
 }
 
@@ -1017,7 +1017,6 @@ button.link-edit-summary {
 /**
  * Labels.
  *  -  for example "new" mark on comments, tags etc.
- *  TODO: fix this stuff up, its just a copy/paste from system.theme.css.
  ============================================================================ */
 
 .filter-help a,
