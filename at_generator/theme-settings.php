@@ -7,12 +7,13 @@
 
 /**
  * Implementation of hook_form_system_theme_settings_alter()
+ *
  * @param $form
  *   Nested array of form elements that comprise the form.
  * @param $form_state
  *   A keyed array containing the current state of the form.
  */
-function at_generator_form_system_theme_settings_alter(&$form, &$form_state) {
+function at_generator_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   // Common paths.
   $at_generator_path = drupal_get_path('theme', 'at_generator');

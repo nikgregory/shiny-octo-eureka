@@ -2,14 +2,20 @@
 
 /**
  * @file
- * Implimentation of hook_form_system_theme_settings_alter()
+ * Theme settings.
+ */
+
+/**
+ * Implementation of hook_form_system_theme_settings_alter()
  *
- * @param $form: Nested array of form elements that comprise the form.
- * @param $form_state: A keyed array containing the current state of the form.
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ * @param $form_state
+ *   A keyed array containing the current state of the form.
  */
 
 /* -- Delete this line to enable.
-function HOOK_form_system_theme_settings_alter(&$form, &$form_state) {
+function HOOK_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   // $build_info = $form_state->getBuildInfo();
   // $theme = $build_info['args'][0];
 
