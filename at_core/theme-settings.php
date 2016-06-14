@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Entity\Entity;
 use Drupal\at_core\Theme\ThemeInfo;
 use Drupal\at_core\Layout\LayoutGenerator;
 use Drupal\at_core\File\DirectoryOperations;
@@ -47,7 +48,8 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
   // Active themes active blocks
-  $theme_blocks = entity_load_multiple_by_properties('block', ['theme' => $theme]);
+  // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
+  $theme_blocks = \Drupal::entityManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
   // Check for breakpoints module and set a warning and a flag to disable much
   // of the theme settings if its not available.
@@ -77,7 +79,7 @@ function at_core_form_system_theme_settings_alter(&$form, &$form_state) {
   $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
 
   // View or "Display modes".
-  // TODO entityManager() is deprecated, but how to replace?
+  // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
   $node_view_modes = \Drupal::entityManager()->getViewModes('node');
 
   // Unset unwanted view modes
@@ -182,9 +184,8 @@ function at_core_make_collapsible($form) {
   );
 
   // Magic user Obi Wan gets special Jedi powers.
-  // TODO getUsername() is deprecated, no idea how to replace it.
   $user = \Drupal::currentUser();
-  if (in_array('administrator', $user->getRoles()) && $user->getUsername() == 'Obi Wan') {
+  if (in_array('administrator', $user->getRoles()) && $user->getAccountName() == 'Obi Wan') {
     $form['color']['actions']['log']['#access'] = TRUE;
   }
 

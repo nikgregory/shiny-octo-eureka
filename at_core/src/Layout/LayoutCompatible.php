@@ -27,7 +27,6 @@ class LayoutCompatible {
     $layout_compatible_data = array();
 
     // Caching the data here appears to shave about 50ms off page execution.
-    // TODO - needs performance testing?
     if ($cache = \Drupal::cache()->get($this->theme_name . ':compatiblelayout')) {
       $layout_compatible_data = $cache->data;
     }

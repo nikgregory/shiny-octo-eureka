@@ -27,9 +27,7 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
 
   $mobile_blocks_breakpoint_group = theme_get_setting('settings.mobile_blocks_breakpoint_group', $theme) ?: 'at_core.simple';
   $mobile_blocks_breakpoints = $breakpoints[$mobile_blocks_breakpoint_group];
-
-  // TODO entityManager() is deprecated, but how to replace?
-  $theme_blocks = \Drupal::entityManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
+  $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
   if (!empty($theme_blocks)) {
     foreach (array_reverse($mobile_blocks_breakpoints) as $mbs_key => $mbs_value) {

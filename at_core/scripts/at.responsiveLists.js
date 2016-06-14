@@ -5,8 +5,8 @@
  * generalized it so we can use it for any list. Also we use outerWidth and
  * calculate the total width of all list items.
  *
- * In AT we use this for both tabs (local tasks) and breadcrumbs. See the
- * breadcrumbs template and SCSS partial to see how this works.
+ * In AT we use this for tabs (local tasks), pagers and breadcrumbs.
+ * See the breadcrumbs template and SCSS partial to see how this works.
  */
 (function ($, Drupal, window) {
 

@@ -3,7 +3,6 @@
 /**
  * @file
  * Output formatted CSS for fonts.
- * TODO: validate font elements, are they set and not empty?
  */
 
 use Drupal\Component\Utility\Xss;

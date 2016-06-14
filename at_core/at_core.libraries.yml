@@ -237,7 +237,7 @@ at.responsivevideo:
     - core/jquery
     - core/drupal
 
-# Respond TODO: test with respond in IE8.
+# Respond
 at.respond:
   version: "1.4.2"
   license:
@@ -247,7 +247,7 @@ at.respond:
   js:
     https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false } }
 
-# Selectivizr TODO: test with IE8.
+# Selectivizr
 at.selectivizr:
   version: "1.0.2"
   license:

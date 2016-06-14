@@ -14,7 +14,6 @@ $layout_data = new LayoutCompatible($theme);
 $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 
-// TODO: search base themes, we need all declarations from all base themes, they can all potentially work.
 $shortcodes_yml = $subtheme_path . '/' . $theme . '.shortcodes.yml';
 if (file_exists($shortcodes_yml)) {
   $shortcodes_parser = new Parser();

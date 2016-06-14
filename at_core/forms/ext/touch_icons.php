@@ -3,7 +3,6 @@
 /**
  * @file
  * Generate form elements for the touch icons settings.
- * TODO: touch icons are not inherited from the base theme, they should be, so check for config on the closest base theme and if its there, use those icons IF there is nothing set for the current theme.
  */
 
 use Drupal\Component\Utility\Html;

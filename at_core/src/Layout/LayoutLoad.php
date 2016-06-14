@@ -94,7 +94,7 @@ class LayoutLoad extends Layout {
 
     // If rows are empty return early.
     if (empty($this->layout_config['rows'])) {
-      return;
+      return null;
     }
 
     // Build array of rows with region values.
