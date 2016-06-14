@@ -98,7 +98,6 @@
   border-top: 0;
 }
 .rm-block__content .menu__link {
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
   font-weight: 300;
   margin: 0;
@@ -120,4 +119,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus.css.map */

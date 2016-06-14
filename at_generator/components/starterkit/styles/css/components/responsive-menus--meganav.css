@@ -27,7 +27,6 @@
   font: 0/0 a;
 }
 .ms-meganav .rm-block__content {
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
 }
 .ms-meganav .rm-block__content .menu {
@@ -88,4 +87,5 @@
 .ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item .menu__link {
   width: auto;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--meganav.css.map */

@@ -3,7 +3,6 @@
  * Toggle left or right menus that slide in.
  ============================================================================ */
 .ms-offcanvas > .page {
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-toggle {
@@ -20,7 +19,6 @@
   left: 0;
   -webkit-transform: translate3d(-15em, 0, 0);
           transform: translate3d(-15em, 0, 0);
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
 }
 .ms-offcanvas .rm-block__content .menu__link {
@@ -45,4 +43,5 @@
   position: absolute;
   top: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--offcanvas.css.map */

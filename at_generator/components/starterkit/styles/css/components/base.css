@@ -490,7 +490,6 @@ input[type="week"] {
   box-sizing: border-box;
   border-radius: 2px;
   border: 1px solid;
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
 }
 textarea:focus,
@@ -1070,7 +1069,6 @@ details > .details-wrapper {
 }
 
 .reset-appearance {
-  -webkit-transition: none;
   transition: none;
   box-shadow: none;
   border-radius: 0;
@@ -1112,7 +1110,6 @@ button,
   border-radius: 2px;
   border-width: 1px;
   border-style: solid;
-  -webkit-transition: background-color, .15s, ease-in-out;
   transition: background-color, .15s, ease-in-out;
   cursor: pointer;
   text-decoration: none;
@@ -1335,14 +1332,12 @@ label button.link {
   border-color: #b3b3b3;
   border-radius: 10em;
   background-color: #f2f1eb;
-  background-image: -webkit-linear-gradient(#e7e7df, #f0f0f0);
   background-image: linear-gradient(#e7e7df, #f0f0f0);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.16);
 }
 .progress__bar {
   border: 1px #07629a solid;
   background-color: #057ec9;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), -webkit-linear-gradient(left top, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), linear-gradient(to right bottom, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
   background-size: 40px 40px;
   margin-top: -1px;
@@ -1352,7 +1347,6 @@ label button.link {
   border-radius: 10em;
   -webkit-animation: animate-stripes 3s linear infinite;
           animation: animate-stripes 3s linear infinite;
-  -webkit-transition: width 0.5s ease-out;
   transition: width 0.5s ease-out;
 }
 
@@ -1699,7 +1693,6 @@ ul.inline li ol {
 }
 
 .l-r {
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
 }
 .l-r:before, .l-r:after {
@@ -1779,7 +1772,6 @@ ul.inline li ol {
 .pager__link {
   display: inline-block;
   border-radius: 2px;
-  -webkit-transition: all, 0.2s, ease-in-out;
   transition: all, 0.2s, ease-in-out;
   padding: 2px 7px 0;
   padding: 0.125rem 0.4375rem 0;
@@ -1798,7 +1790,6 @@ ul.inline li ol {
   background-color: #444;
   border-radius: 0 0 2px 2px;
   opacity: 0;
-  -webkit-transition: opacity 0.15s ease-in;
   transition: opacity 0.15s ease-in;
   z-index: 50;
   left: 50%;
@@ -2398,7 +2389,6 @@ table tr.error {
   text-decoration: none;
   word-break: break-all;
   -webkit-hyphens: auto;
-     -moz-hyphens: auto;
       -ms-hyphens: auto;
           hyphens: auto;
 }
@@ -2608,7 +2598,6 @@ table tr.error {
   width: 100%;
   min-width: 100%;
   background-color: #d1e8f5;
-  background-image: -webkit-linear-gradient(top, #d1e8f5, #d3e8f4);
   background-image: linear-gradient(to bottom, #d1e8f5, #d3e8f4);
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2616,7 +2605,7 @@ table tr.error {
   padding: 1.125rem 0;
 }
 .node-preview-container form {
-  max-width: 75em;
+  max-width: 76em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -2735,7 +2724,6 @@ table tr.error {
   border-radius: 2px;
   border-width: 1px;
   border-style: solid;
-  -webkit-transition: background-color, .15s, ease-in-out;
   transition: background-color, .15s, ease-in-out;
   cursor: pointer;
   text-decoration: none;
@@ -2773,7 +2761,6 @@ table tr.error {
  ============================================================================ */
 .text-align-justify {
   -webkit-hyphens: auto;
-     -moz-hyphens: auto;
       -ms-hyphens: auto;
           hyphens: auto;
 }
