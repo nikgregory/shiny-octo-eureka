@@ -50,12 +50,9 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
   // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
   $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
-
   // Check for breakpoints module and set a warning and a flag to disable much
   // of the theme settings if its not available.
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
-
-  $breakpoints_module = FALSE;
 
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
