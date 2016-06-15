@@ -4,6 +4,7 @@
  * Adaptivetheme implementation to display a block.
  *
  * Available variables:
+  * Available variables:
  * - plugin_id: The ID of the block implementation.
  * - label: The configured label of the block if visible.
  * - configuration: A list of the block's configuration values.
@@ -17,12 +18,17 @@
  *   - id: A valid HTML ID and guaranteed unique.
  * - title_attributes: Same as attributes, except applied to the main title
  *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
  * - title_prefix: Additional output populated by modules, intended to be
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
  *
  * @see template_preprocess_block()
+ * @see at_core_preprocess_block()
+ *
+ * @ingroup themeable
 #}
 {%
   set classes = [
