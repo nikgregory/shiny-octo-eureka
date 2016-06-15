@@ -461,6 +461,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   if (\Drupal::currentUser()->hasPermission('administer themes')) {
     if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
       if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
+        $formatted_suggestions = array();
         if ($suggestions) {
           foreach ($suggestions as $suggestion_name) {
             if ($suggestion_name == 'page__') {
@@ -938,7 +939,7 @@ function at_core_preprocess_comment(&$variables) {
     $attributes = $uri->getOption('attributes') ?: array();
     $attributes += array('class' => array('permalink'), 'rel' => 'bookmark');
     $uri->setOption('attributes', $attributes);
-    $variables['title'] = \Drupal\Core\Link::fromTextAndUrl($comment->getSubject(), $uri); //->toString();
+    $variables['title'] = \Drupal\Core\Link::fromTextAndUrl($comment->getSubject(), $uri);
   }
 
   // Hide comment titles.

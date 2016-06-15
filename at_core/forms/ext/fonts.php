@@ -10,6 +10,7 @@ use Drupal\Component\Utility\Xss;
 
 // Elements to apply fonts to.
 $font_elements = font_elements();
+$websafe_options = array();
 
 // Websafe stacks and select options.
 if ($settings_font_websafe = theme_get_setting('settings.font_websafe')) {

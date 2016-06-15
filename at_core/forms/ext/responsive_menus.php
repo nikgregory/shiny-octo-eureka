@@ -9,6 +9,7 @@ $responsive_menu_breakpoint_group = theme_get_setting('settings.responsive_menu_
 $responsive_menu_breakpoints = $breakpoints[$responsive_menu_breakpoint_group];
 
 // Breakpoint options
+$rmb_group_options = array();
 foreach ($responsive_menu_breakpoints as $rmb_key => $rmb_value) {
   $rmb_group_options[$rmb_value->getMediaQuery()] = $rmb_value->getLabel() . ': ' . $rmb_value->getMediaQuery();
 }

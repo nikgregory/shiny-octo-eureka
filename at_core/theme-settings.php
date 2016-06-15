@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\Entity;
 use Drupal\at_core\Theme\ThemeInfo;
+use Drupal\at_core\File\FileOperations;
 use Drupal\at_core\File\DirectoryOperations;
 
 /**
@@ -47,13 +48,14 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
 
   // Active themes active blocks
   // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
-  //$theme_blocks = \Drupal::entityManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
   $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
 
   // Check for breakpoints module and set a warning and a flag to disable much
   // of the theme settings if its not available.
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
+
+  $breakpoints_module = FALSE;
 
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
@@ -72,7 +74,7 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
     }
   }
   else {
-    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="!extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('!extendpage' => base_path() . 'admin/modules')), 'warning');
+    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="@extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'warning');
   }
 
   // Get node types (bundles).
@@ -157,13 +159,29 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
   if (\Drupal::moduleHandler()->moduleExists('color')) {
     include_once($at_core_path . '/forms/color/color_submit.php');
     if (isset($build_info['args'][0]) && ($theme = $build_info['args'][0]) && color_get_info($theme) && function_exists('gd_info')) {
-      $form['#process'][] = 'at_core_make_collapsible';
+      $form['#process'][] = 'at_core_color_form';
+    }
+    // TODO This should only happen after color form submit. We need this to
+    // stop 404 errors for the map URL for rewritten color stylesheets.
+    $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
+    if (!empty($color_paths)) {
+      $fileOperations = new FileOperations();
+      foreach ($color_paths as $color_path) {
+        $map_string = '/*# sourceMappingURL=maps/' . str_replace('.css', '.css.map', basename($color_path)) . ' */';
+        $fileOperations->fileStrReplace("$color_path", $map_string, '');
+      }
     }
   }
 }
 
-// Helper function to modify the color scheme form.
-function at_core_make_collapsible($form) {
+//
+/**
+ * Helper function to modify the color scheme form.
+ *
+ * @param $form
+ * @return array $form
+ */
+function at_core_color_form($form) {
   $form['color']['#open'] = FALSE;
   $form['color']['actions'] = array(
     '#type' => 'actions',

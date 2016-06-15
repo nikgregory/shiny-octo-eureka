@@ -14,7 +14,7 @@ use Drupal\at_core\Theme\ThemeSettingsConfig;
  * @param $form
  * @param $form_state
  */
-function at_core_submit_extension_settings(&$form, &$form_state) {
+function at_core_submit_extension_settings(&$form, \Drupal\Core\Form\FormStateInterface &$form_state) {
   $build_info = $form_state->getBuildInfo();
   $values = $form_state->getValues();
   $theme = $build_info['args'][0];
@@ -29,9 +29,7 @@ function at_core_submit_extension_settings(&$form, &$form_state) {
   if ($values['settings_enable_extensions'] === 1) {
 
     // Require submit handlers and helper functions for extensions.
-    if ((isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) ||
-      (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1)
-    ) {
+    if ((isset($values['settings_enable_fonts']) && $values['settings_enable_fonts'] === 1) || (isset($values['settings_enable_titles']) && $values['settings_enable_titles'] === 1)) {
       require_once($at_core_path . '/forms/ext/fonts.inc');
       require_once($at_core_path . '/forms/ext/fonts_submit.php');
       require_once($at_core_path . '/forms/ext/titles_submit.php');

@@ -82,8 +82,9 @@ class DirectoryOperations {
   /**
    * Scan directories.
    *
-   * @return array
-   *   Files below the path.
+   * @param $path
+   * @return array Files below the path.
+   * Files below the path.
    */
   public function directoryScan($path) {
     $scan_directories = array();
@@ -97,8 +98,9 @@ class DirectoryOperations {
   /**
    * Scan directories recursively.
    *
-   * @return array
-   *   Directories & files below the path.
+   * @param $path
+   * @return array Directories & files below the path.
+   * Directories & files below the path.
    */
   public function directoryScanRecursive($path) {
     $scan_directories_recursive = array();
@@ -122,6 +124,8 @@ class DirectoryOperations {
    * Recursively glob files below the path
    * of a specified type.
    *
+   * @param $path
+   * @param array $types
    * @return array globbed files
    */
   public function directoryGlob($path, array $types) {

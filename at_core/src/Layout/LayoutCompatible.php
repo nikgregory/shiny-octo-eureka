@@ -21,6 +21,7 @@ class LayoutCompatible {
 
   /**
    * Find and return the most compatible layout.
+   * 
    * @return mixed
    */
   public function getCompatibleLayout() {
@@ -52,11 +53,16 @@ class LayoutCompatible {
         $compatible_layout = $info_layout['layout'];
       }
       else {
+        $compatible_layout = '';
         drupal_set_message(t('"layout" not declared in info file. Adaptivetheme requires a compatible layout to be declared in your theme info file e.g. "layout: site-builder". Add the declaration, clear the cache and try again.'), 'error');
       }
 
       // Push the current theme into the array - if it has a layout, use it.
       $providers[$this->theme_name] = $this->theme_name;
+
+      // Define variables.
+      $layout_markup = array();
+      $layout_css = array();
 
       // Get the configuration data for layout markup and CSS.
       foreach ($providers as $key => $provider_name) {

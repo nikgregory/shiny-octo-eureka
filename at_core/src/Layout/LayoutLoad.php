@@ -21,6 +21,7 @@ class LayoutLoad extends Layout {
 
   /**
    * LayoutInterface constructor.
+   *
    * @param $theme_name
    * @param $active_regions
    */
@@ -34,6 +35,7 @@ class LayoutLoad extends Layout {
 
   /**
    * Returns the active regions.
+   *
    * @return mixed
    */
   public function activeRegions() {
@@ -42,6 +44,7 @@ class LayoutLoad extends Layout {
 
   /**
    * Returns the source order attribute.
+   *
    * @param $region
    * @return mixed
    */
@@ -60,6 +63,7 @@ class LayoutLoad extends Layout {
 
   /**
    * Returns the row name for the region.
+   *
    * @param $region
    * @return mixed
    */
@@ -85,6 +89,7 @@ class LayoutLoad extends Layout {
 
   /**
    * Builds and returns layout attributes.
+   *
    * @return int|string|void
    */
   public function rowAttributes() {
@@ -197,6 +202,11 @@ class LayoutLoad extends Layout {
     return $variables;
   }
 
+  /**
+   * Builds and returns layout attributes for the JS layout method.
+   *
+   * @return int|string|void
+   */
   public function rowAttributesJS() {
     $variables = array();
     $config_settings = \Drupal::config($this->theme_name . '.settings')->get('settings');

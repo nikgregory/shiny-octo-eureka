@@ -100,6 +100,7 @@ class FileOperations {
    *   Path to 'a' file.
    * @param string $bfile
    *   Path to 'b' file.
+   * @return array $results
    */
   public function fileCompare($afile, $bfile) {
     // Check if filesize is different

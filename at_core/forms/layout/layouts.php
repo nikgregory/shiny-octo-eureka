@@ -14,8 +14,6 @@ $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 $css_config = $layout_compatible_data['css_config'];
 
-//kpr($layout_config);
-
 
 // Prepare variables for getting the visual layout thingee CSS file.
 $provider_path = drupal_get_path('theme', $css_config['layout_provider']) . '/layout/' . $css_config['layout'];

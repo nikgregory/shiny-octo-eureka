@@ -2,12 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\at_core\Theme\ThemeDataInfo.
+ * Contains \Drupal\at_core\Theme\ThemeInfo.
  */
 
 namespace Drupal\at_core\Theme;
-
-use Drupal\at_core\Theme\ThemeData;
 
 /**
  * ThemeInfo declares methods used to return theme info
@@ -17,18 +15,21 @@ class ThemeInfo {
 
   /**
    * The theme of the theme settings object.
+   * 
    * @var string
    */
   protected $theme;
 
   /**
    * The data of the theme settings object.
+   *
    * @var array
    */
   protected $data;
 
   /**
    * Constructs a theme info object.
+   *
    * @param string $theme
    */
   public function __construct($theme) {
@@ -38,6 +39,7 @@ class ThemeInfo {
 
   /**
    * Returns the theme of this theme info object.
+   *
    * @return string
    *   The theme of this theme settings object.
    */
@@ -48,6 +50,7 @@ class ThemeInfo {
   /**
    * Returns either the whole info array for $this theme or just one key
    * if the $key parameter is set.
+   *
    * @param string $key
    *   A string that maps to a key within the theme settings data.
    * @return mixed

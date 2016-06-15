@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * Validate form values.
  */
 function at_generator_validate_generator(&$form, &$form_state) {

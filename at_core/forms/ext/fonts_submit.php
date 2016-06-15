@@ -112,6 +112,7 @@ function at_core_submit_fonts($values, $generated_files_path) {
   }
 
   // Output data to file.
+  $output = '';
   if (!empty($fonts)) {
     foreach ($fonts as $font_key => $font_values) {
       if (isset($font_values['family']) || isset($font_values['size'])) {

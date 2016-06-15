@@ -220,14 +220,14 @@ function at_generator_submit_generator(&$form, &$form_state) {
 //    }
 
     // Config.
+    $new_config_file = '';
     foreach ($configuration as $config_path => $config_files) {
       if (is_dir("$target/config/$config_path")) {
         foreach ($config_files as $config_file) {
-          $new_config_file = str_replace($source_theme, $machine_name, $config_file);
+          $new_config_file = str_replace($source_theme, $machine_name, $config_file) ?: '';
           $fileOperations->fileRename("$target/config/$config_path/$config_file", "$target/config/$config_path/$new_config_file");
           $fileOperations->fileStrReplace("$target/config/$config_path/$new_config_file", 'TARGET', $target);
           $fileOperations->fileStrReplace("$target/config/$config_path/$new_config_file", $source_theme, $machine_name);
-
         }
       }
     }
@@ -239,7 +239,6 @@ function at_generator_submit_generator(&$form, &$form_state) {
       $source_config = \Drupal::config($source_theme . '.settings')->get();
       // Empty if the source theme has never been installed, in which case it
       // should be safe to assume there is no new configuration worth saving.
-
       if (!empty($source_config)) {
         $old_config = "$target/config/install/$machine_name.settings.yml";
         $new_config = Yaml::encode($source_config);

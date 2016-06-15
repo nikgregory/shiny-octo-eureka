@@ -9,7 +9,6 @@ namespace Drupal\at_core\Layout;
 
 use Drupal\Core\Cache;
 use Symfony\Component\Yaml\Parser;
-use Drupal\at_core\File\ParseFile;
 
 class Layout {
 
@@ -20,6 +19,7 @@ class Layout {
 
   /**
    * Layout constructor.
+   *
    * @param $theme_name
    * @param $layout_name
    */
@@ -33,6 +33,7 @@ class Layout {
   /**
    * Returns layout configuration of a type (normally markup or css yml config).
    * looks for cached config first, if none we parse the respective yml file.
+   *
    * @param $type
    * @return array|mixed
    */
@@ -60,6 +61,7 @@ class Layout {
 
   /**
    * Returns layout markup.
+   *
    * @return array|mixed
    */
   public function getLayoutMarkup() {
@@ -68,6 +70,7 @@ class Layout {
 
   /**
    * Returns layout CSS.
+   *
    * @return array|mixed
    */
   public function getLayoutCSS() {
@@ -76,6 +79,7 @@ class Layout {
 
   /**
    * Return a layouts name.
+   *
    * @return mixed
    */
   public function getLayoutName() {
