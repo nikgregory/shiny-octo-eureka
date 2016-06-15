@@ -737,11 +737,12 @@ function at_core_preprocess_page(&$variables) {
         'target' => '_blank',
       ),
       'absolute' => TRUE,
-    ));
+    )
+  );
   $variables['attribution'] = array(
     '#type' => 'markup',
     '#prefix' => '<div class="l-pr attribution"><div class="l-rw">',
-    '#markup' => \Drupal::l(t('Design by Adaptivethemes.com'), $attribution_url),
+    '#markup' => \Drupal\Core\Link::fromTextAndUrl(t('Design by Adaptivethemes.com'), $attribution_url)->toString(),
     '#suffix' => '</div></div>',
   );
 
@@ -786,7 +787,9 @@ function at_core_preprocess_page(&$variables) {
   if (isset($config['layout_method']) && $config['layout_method'] === 1) {
     $variables['attributes']['class'][] = 'js-layout';
     $layout_load = new LayoutLoad($theme, $active_regions = NULL);
-    $variables = $variables + $layout_load->rowAttributesJS();
+    if ($row_attributes = $layout_load->rowAttributesJS()) {
+      $variables += $row_attributes;
+    }
   }
   // Nope, lets go ahead with the our standard render early method.
   else {
@@ -806,7 +809,9 @@ function at_core_preprocess_page(&$variables) {
     }
     if (!empty($active_regions)) {
       $layout_load = new LayoutLoad($theme, $active_regions);
-      $variables = $variables + $layout_load->rowAttributes();
+      if ($row_attributes = $layout_load->rowAttributes()) {
+        $variables += $row_attributes;
+      }
     }
   }
 }
@@ -933,7 +938,7 @@ function at_core_preprocess_comment(&$variables) {
     $attributes = $uri->getOption('attributes') ?: array();
     $attributes += array('class' => array('permalink'), 'rel' => 'bookmark');
     $uri->setOption('attributes', $attributes);
-    $variables['title'] = \Drupal::l($comment->getSubject(), $uri);
+    $variables['title'] = \Drupal\Core\Link::fromTextAndUrl($comment->getSubject(), $uri); //->toString();
   }
 
   // Hide comment titles.
