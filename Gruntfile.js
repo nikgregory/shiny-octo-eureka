@@ -5,6 +5,9 @@ module.exports = function(grunt) {
 
     uglify: {
       min: {
+        options: {
+          sourceMap: true,
+        },
         files: [{
           expand: true,
           mangle: false,
@@ -22,8 +25,7 @@ module.exports = function(grunt) {
         src: 'at_core/styles/css/*.css',
          options: {
           map: {
-            inline: false,
-            //annotation: 'at_core/styles/css/maps/',
+            inline: false
           },
           processors: [
             require('autoprefixer')({browsers: 'last 5 versions'})
@@ -34,8 +36,7 @@ module.exports = function(grunt) {
         src: 'at_generator/styles/css/*.css',
         options: {
           map: {
-            inline: false,
-            //annotation: 'at_core/styles/css/maps/',
+            inline: false
           },
           processors: [
             require('autoprefixer')({browsers: 'last 5 versions'})
@@ -46,8 +47,7 @@ module.exports = function(grunt) {
         src: 'at_core/layout_plugin/css/**/*.css',
         options: {
           map: {
-            inline: false,
-            //annotation: 'at_core/styles/css/maps/',
+            inline: false
           },
           processors: [
             require('autoprefixer')({browsers: 'last 5 versions'})

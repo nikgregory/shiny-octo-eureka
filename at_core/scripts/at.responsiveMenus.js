@@ -54,8 +54,7 @@
         // Setup fires strait away.
         setup: function() {
           $(document.body).addClass(def);
-          $('.rm-block').parent('.l-r').addClass('rm-region');
-          $('.rm-block').parent().parent('.l-rw').addClass('rm-row');
+          $('.rm-block').parent('.l-r').addClass('rm-region').parent('.l-rw').addClass('rm-row');
         },
         // The resp menu system only uses one breakpoint, if it matches this
         // fires strait after setup.
