@@ -78,8 +78,7 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
   $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
 
   // View or "Display modes".
-  // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
-  $node_view_modes = \Drupal::entityManager()->getViewModes('node');
+  $node_view_modes = \Drupal::service('entity_display.repository')->getViewModes('node');
 
   // Unset unwanted view modes
   unset($node_view_modes['rss']);
