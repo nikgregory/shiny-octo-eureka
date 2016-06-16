@@ -10,7 +10,23 @@
   border-top: $border-width $border-style;
 
   // Title and New
-  &__title {}
+  &__title {
+    &--visually-hidden {
+      margin: 0;
+      padding: 0;
+      @include adjust-font-size-to($medium);
+
+      .permalink {
+        @include visually-hidden;
+      }
+
+      .marker {
+        float: $flow-to;
+        @include output-rhythm(margin-#{$flow-from}, 4px);
+      }
+    }
+  }
+  
   &__new {}
 
   p:last-of-type {
@@ -168,9 +184,5 @@
 .comment-form-wrapper {}
 .comment-form__title {}
 .comment-form {}
-
-
-
-
 
 
