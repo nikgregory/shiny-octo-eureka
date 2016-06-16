@@ -1235,6 +1235,7 @@ function at_core_preprocess_menu(&$variables) {
  */
 function _at_core_layout_plugin_attributes(&$variables) {
   $html_element = 'div';
+  $role = NULL;
   $classes = array();
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
@@ -1265,6 +1266,8 @@ function _at_core_layout_plugin_attributes(&$variables) {
 
     // Element
     $html_element = 'article';
+    // Role
+    $role = 'article';
   }
 
   // Comment
@@ -1277,6 +1280,8 @@ function _at_core_layout_plugin_attributes(&$variables) {
     }
     // Element
     $html_element = 'article';
+    // Role
+    $role = 'article';
   }
 
   // Panels
@@ -1309,6 +1314,9 @@ function _at_core_layout_plugin_attributes(&$variables) {
 
   $attributes['classes'] = $classes;
   $attributes['html_element'] = $html_element;
+  if (!empty($role)) {
+    $attributes['role'] = $role;
+  }
 
   return $attributes;
 }
@@ -1319,6 +1327,9 @@ function _at_core_layout_plugin_attributes(&$variables) {
  */
 function at_core_preprocess_at_layout__onecol(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1330,6 +1341,9 @@ function at_core_preprocess_at_layout__onecol(&$variables) {
  */
 function at_core_preprocess_at_layout__twocol(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1340,6 +1354,9 @@ function at_core_preprocess_at_layout__twocol(&$variables) {
  */
 function at_core_preprocess_at_layout__threecol(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1350,6 +1367,9 @@ function at_core_preprocess_at_layout__threecol(&$variables) {
  */
 function at_core_preprocess_at_layout__fourcol(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1360,6 +1380,9 @@ function at_core_preprocess_at_layout__fourcol(&$variables) {
  */
 function at_core_preprocess_at_layout__grid_2x2(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1370,6 +1393,9 @@ function at_core_preprocess_at_layout__grid_2x2(&$variables) {
  */
 function at_core_preprocess_at_layout__grid_3x3(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
@@ -1380,6 +1406,9 @@ function at_core_preprocess_at_layout__grid_3x3(&$variables) {
  */
 function at_core_preprocess_at_layout__grid_4x4(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
+  if (isset($attributes['role'])) {
+    $variables['attributes']['role'] = $attributes['role'];
+  }
   $variables['attributes']['class'] = $attributes['classes'];
   $variables['html_element'] = $attributes['html_element'];
 }
