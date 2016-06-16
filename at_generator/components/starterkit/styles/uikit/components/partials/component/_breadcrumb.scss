@@ -38,8 +38,7 @@
   }
 
   &__list {
-    display: block;
-    width: 100%;
+    display: inline-block;
   }
 
   &__list-item {
@@ -50,7 +49,7 @@
       content: "\00BB";
       display: inline-block;
       padding: 0;
-      margin: 0;
+      @include output-rhythm(margin-#{$flow-to}, 4px);
       text-align: center;
 
       // RTL
@@ -99,7 +98,7 @@
   .is-horizontal & {
     &__title,
     &__list-item {
-      float: #{$flow-from};
+      display: inline-block;
     }
 
     &__list-item {

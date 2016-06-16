@@ -55,8 +55,17 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['descriptio
 // Breadcrumbs Label?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_label'] = array(
   '#type' => 'checkbox',
-  '#title' => t('Show the "You are here" label'),
+  '#title' => t('Show the label'),
   '#default_value' => theme_get_setting('settings.breadcrumb_label'),
+);
+// Breadcrumbs Label value.
+$form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_label_value'] = array(
+  '#type' => 'textfield',
+  '#title' => t('Enter text for the breadcrumb label'),
+  '#default_value' => theme_get_setting('settings.breadcrumb_label_value') ? theme_get_setting('settings.breadcrumb_label_value') : t('You are here:'),
+  '#states' => array(
+    'visible' => array('input[name="settings_breadcrumb_label"]' => array('checked' => TRUE)),
+  ),
 );
 // Breadcrumbs Home link?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_home'] = array(
@@ -70,7 +79,6 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
   '#title' => t('Remove "Home" when it\'s the only link'),
   '#default_value' => theme_get_setting('settings.breadcrumb_home_alone'),
   '#states' => array(
-    //'unchecked' => array('input[name="settings_breadcrumb_home"]' => array('checked' => TRUE)),
     'disabled' => array('input[name="settings_breadcrumb_home"]' => array('checked' => TRUE)),
   ),
 );

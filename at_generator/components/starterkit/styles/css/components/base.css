@@ -2113,8 +2113,7 @@ table tr.error {
   padding: 0;
 }
 .breadcrumb__list {
-  display: block;
-  width: 100%;
+  display: inline-block;
 }
 .breadcrumb__list-item {
   list-style: none;
@@ -2124,7 +2123,8 @@ table tr.error {
   content: "\00BB";
   display: inline-block;
   padding: 0;
-  margin: 0;
+  margin-right: 4px;
+  margin-right: 0.25rem;
   text-align: center;
 }
 [dir="rtl"] .breadcrumb__list-item:before {
@@ -2156,7 +2156,7 @@ table tr.error {
   margin-right: 0.4375rem;
 }
 .is-horizontal .breadcrumb__title, .is-horizontal .breadcrumb__list-item {
-  float: left;
+  display: inline-block;
 }
 .is-horizontal .breadcrumb__list-item {
   margin-right: 6px;
@@ -2983,4 +2983,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

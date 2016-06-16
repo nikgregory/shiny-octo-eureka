@@ -34,28 +34,30 @@
  * @ingroup themeable
 #}
 {%
-set classes = [
-'block',
-'block-' ~ configuration.provider|clean_class,
-'block-' ~ plugin_id|clean_class,
-label ? 'has-title'
-]
+  set classes = [
+    'block',
+    'block-breadcrumbs',
+    'block-config-provider--' ~ configuration.provider|clean_class,
+    'block-plugin-id--' ~ plugin_id|clean_class,
+    configuration.label_display ? 'has-title'
+  ]
 %}
-<div{{ attributes.addClass(classes) }}>
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+<div aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
   <div class="block__inner">
 
-    {{ title_prefix }}
-    {% if label %}
-      <h2{{ title_attributes.addClass('block__title', 'h4') }}><span>{{ label }}</span></h2>
+    {# Label. If not displayed, we still provide it for screen readers. #}
+    {% if not configuration.label_display %}
+      {% set title_attributes = title_attributes.addClass('visually-hidden') %}
     {% endif %}
+
+    {{ title_prefix }}
+    <h2{{ title_attributes.addClass('block__title', 'block-breadcrumbs__title').setAttribute('id', heading_id) }}><span>{{ configuration.label }}</span></h2>
     {{ title_suffix }}
 
     {% block content %}
-      <div{{ content_attributes.addClass('block__content') }}>
-        {{ content }}
-      </div>
+      {{ content }}
     {% endblock %}
 
   </div>
 </div>
-

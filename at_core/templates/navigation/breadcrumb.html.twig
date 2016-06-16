@@ -14,19 +14,18 @@
   {%
     set classes = [
       'breadcrumb',
-      not breadcrumb_title_hidden ? 'has-title',
+      breadcrumb_label ? 'has-title',
     ]
   %}
   {%
     set title_classes = [
-      breadcrumb_title_hidden ? 'visually-hidden',
-      'breadcrumb__title',
+      breadcrumb_label ? 'breadcrumb__title' : 'visually-hidden',
     ]
   %}
   <div{{ attributes.addClass(classes) }}>
-    <nav class="is-responsive is-horizontal" role="navigation" aria-labelledby="system-breadcrumb-title" data-at-responsive-list>
+    <nav class="is-responsive is-horizontal" role="navigation" data-at-responsive-list>
 
-      <h2{{ title_attributes.addClass(title_classes).setAttribute('id', 'system-breadcrumb-title')}}>{{ 'You are here:'|t }}</h2>
+      <h3{{ title_attributes.addClass(title_classes) }}>{{ breadcrumb_label_value }}</h3>
 
       <ol class="breadcrumb__list is-responsive__list">
       {% for item in breadcrumb %}
