@@ -1,10 +1,14 @@
 /**
  * Book
- *  - Set styles for book navigation.
+ *  - Set styles for book navigation and the menu tree.
  ============================================================================ */
 
 // Menu tree in book navigation links.
-.book-menu-tree {}
+.menu--book-tree {
+  .menu__item {
+    a {}
+  }
+}
 
 
 .book-pager {
