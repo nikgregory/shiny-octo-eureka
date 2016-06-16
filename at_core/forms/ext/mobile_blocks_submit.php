@@ -14,9 +14,8 @@ use Drupal\Component\Utility\Html;
  * @param $generated_files_path
  */
 function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
-  // Check for breakpoints module.
+  // Breakpoints.
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
-
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
     $breakpoints = array();
@@ -24,12 +23,19 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
       $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
     }
   }
-
   $mobile_blocks_breakpoint_group = theme_get_setting('settings.mobile_blocks_breakpoint_group', $theme) ?: 'at_core.simple';
   $mobile_blocks_breakpoints = $breakpoints[$mobile_blocks_breakpoint_group];
-  $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
 
-  if (!empty($theme_blocks)) {
+  // Active themes active blocks
+  $block_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
+  if ($block_module == TRUE) {
+    $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
+  }
+  else {
+    $theme_blocks = NULL;
+  }
+
+  if (!empty($theme_blocks) && !empty($mobile_blocks_breakpoints)) {
     foreach (array_reverse($mobile_blocks_breakpoints) as $mbs_key => $mbs_value) {
       $mbs_query = $mbs_value->getMediaQuery();
       $mbs_breakpoints_all[$mbs_query] = $mbs_query;

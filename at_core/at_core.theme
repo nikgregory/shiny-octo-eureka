@@ -717,6 +717,9 @@ function at_core_preprocess_html(&$variables) {
       $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
     }
   }
+  else {
+    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'error');
+  }
 }
 
 /**

@@ -47,8 +47,13 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
   $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
   // Active themes active blocks
-  // TODO entityManager() is deprecated. SEE https://www.drupal.org/node/2549139
-  $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
+  $block_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
+  if ($block_module == TRUE) {
+    $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
+  }
+  else {
+    $theme_blocks = NULL;
+  }
 
   // Check for breakpoints module and set a warning and a flag to disable much
   // of the theme settings if its not available.
@@ -71,7 +76,7 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
     }
   }
   else {
-    drupal_set_message(t('Adaptivetheme requires the <b>Breakpoint module</b>. Open the <a href="@extendpage" target="_blank">Extend</a> page and enable Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'warning');
+    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint. You cannot set the layout or use this themes custom settings until Breakpoint is installed.', array('@extendpage' => base_path() . 'admin/modules')), 'error');
   }
 
   // Get node types (bundles).
@@ -122,11 +127,14 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
         '#value' => $generated_files_path,
       );
 
-      // Extension settings.
-      require_once($at_core_path . '/forms/ext/extension_settings.php');
+      // Check for breakpoint module, a lot of errors without it, this is brutal.
+      if ($breakpoints_module == TRUE) {
+        // Extension settings.
+        require_once($at_core_path . '/forms/ext/extension_settings.php');
 
-      // Layouts.
-      require_once($at_core_path . '/forms/layout/layouts.php');
+        // Layouts.
+        require_once($at_core_path . '/forms/layout/layouts.php');
+      }
 
       // Basic settings - move into details wrapper and collapse.
       $form['basic_settings'] = array(

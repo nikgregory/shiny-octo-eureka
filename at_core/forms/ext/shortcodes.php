@@ -84,17 +84,16 @@ foreach ($theme_regions as $region_key => $region_value) {
 }
 
 // Blocks
-$form['shortcodes']['block_classes'] = array(
-  '#type' => 'details',
-  '#title' => t('Blocks'),
-);
-foreach ($theme_blocks as $block_key => $block_value) {
-  $block_label = $block_value->label() . ' <span>(' . $block_key . ')</span>';
-  $form['shortcodes']['block_classes']['settings_block_classes_' . $block_key] = array(
-    '#type' => 'textfield',
-    '#title' => t($block_label),
-    '#default_value' => Html::escape(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
-  );
+if (!empty($theme_blocks)) {
+  $form['shortcodes']['block_classes'] = array('#type' => 'details', '#title' => t('Blocks'),);
+  foreach ($theme_blocks as $block_key => $block_value) {
+    $block_label = $block_value->label() . ' <span>(' . $block_key . ')</span>';
+    $form['shortcodes']['block_classes']['settings_block_classes_' . $block_key] = array(
+      '#type' => 'textfield',
+      '#title' => t($block_label),
+      '#default_value' => Html::escape(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
+    );
+  }
 }
 
 // Node types
