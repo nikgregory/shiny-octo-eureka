@@ -4,7 +4,6 @@
  * Adaptivetheme implementation to display a block.
  *
  * Available variables:
-  * Available variables:
  * - plugin_id: The ID of the block implementation.
  * - label: The configured label of the block if visible.
  * - configuration: A list of the block's configuration values.
@@ -18,8 +17,8 @@
  *   - id: A valid HTML ID and guaranteed unique.
  * - title_attributes: Same as attributes, except applied to the main title
  *   tag that appears in the template.
- * - content_attributes: Same as attributes, except applied to the main content
- *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the block content
+ *   div wrapper that appears in the template.
  * - title_prefix: Additional output populated by modules, intended to be
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
@@ -34,17 +33,17 @@
   set classes = [
     'block',
     'block-config-provider--' ~ configuration.provider|clean_class,
-    'block-derivative-plugin--' ~ derivative_plugin_id|clean_class,
-    'block-id--' ~ attributes.id|clean_id,
+    'block-plugin-id--' ~ plugin_id|clean_class,
     label ? 'has-title'
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
+{% set heading_id = attributes.id ~ '-title'|clean_id %}
+<div{{ attributes.addClass(classes)|without('aria-labelledby') }}{% if label %} aria-labelledby="{{ heading_id }}"{% endif %}>
   <div class="block__inner">
 
     {{ title_prefix }}
     {% if label %}
-      <h2 id="{{ heading_id }}"{{ title_attributes.addClass('block__title') }}><span>{{ label }}</span></h2>
+      <h2 {{ title_attributes.addClass('block__title').setAttribute('id', heading_id) }}><span>{{ label }}</span></h2>
     {% endif %}
     {{ title_suffix }}
 

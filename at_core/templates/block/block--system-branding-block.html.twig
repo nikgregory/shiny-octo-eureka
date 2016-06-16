@@ -38,14 +38,7 @@
     {{ title_suffix }}
 
     {% block content %}
-      {%
-        set content_classes = [
-          'block__content',
-          'block-branding__content',
-          'site-branding',
-        ]
-      %}
-      <div{{ content_attributes.addClass(content_classes) }}>
+      <div{{ content_attributes.addClass('block__content', 'block-branding__content', 'site-branding') }}>
         {% if site_logo %}
           <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" itemprop="url" rel="home" class="site-branding__logo-link">
             <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" itemprop="logo" class="site-branding__logo-img" />
@@ -55,7 +48,7 @@
           <span class="site-branding__text">
             {% if site_name %}
               <strong class="site-branding__name">
-                <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" itemprop="url" rel="home" class="site-branding__name-link">{{ site_name|e }}</a>
+                <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" itemprop="url" rel="home" class="site-branding__name-link">{{ site_name }}</a>
               </strong>
             {% endif %}
             {% if site_slogan %}

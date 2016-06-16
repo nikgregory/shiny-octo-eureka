@@ -44,27 +44,26 @@
   set classes = [
     'rm-block',
     'rm-config-provider--' ~ configuration.provider|clean_class,
-    'rm-derivative-plugin--' ~ derivative_plugin_id|clean_class,
-    'rm-id--' ~ attributes.id|clean_id,
-    label ? 'has-title',
+    'rm-plugin-id--' ~ plugin_id|clean_class,
     'js-hide',
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
+{% set config_label = configuration.label ? configuration.label : 'Main menu'|t %}
+{% set rm_label_class = configuration.label ? 'rm-toggle__label' : 'visually-hidden' %}
+<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
   <div class="rm-block__inner">
 
-    {{ title_prefix }}
-    <div{{ title_attributes.addClass('rm-toggle').setAttribute('id', heading_id) }}>
-      {% set rm_label_class = label ? 'rm-toggle__label' : 'visually-hidden' %}
-      <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false" aria-lable="{{ configuration.label }}">
+    <div{{ title_attributes.addClass('rm-toggle')|without('id') }}>
+      <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false">
+        {# SVG hamburger icon. #}
         <svg class="rm-toggle__icon" viewBox="0 0 1792 1792" preserveAspectRatio="xMinYMid meet">
           <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/>
         </svg>
-        <span class="{{ rm_label_class }}">{{ configuration.label }}</span>
+        {# Button text, may be visually hidden. #}
+        <span class="{{ rm_label_class }}" id="{{ heading_id }}">{{ config_label }}</span>
       </button>
     </div>
-    {{ title_suffix }}
 
     {# Menu. #}
     {% block content %}

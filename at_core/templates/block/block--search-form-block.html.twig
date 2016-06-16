@@ -41,12 +41,11 @@
     'block-search',
     'block-config-provider--' ~ configuration.provider|clean_class,
     'block-plugin-id--' ~ plugin_id|clean_class,
-    'block-id--' ~ attributes.id|clean_id,
     label ? 'has-title'
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<div{{ attributes.addClass(classes).removeClass('container-inline') }} aria-labelledby="{{ heading_id }}">
+<div{{ attributes.addClass(classes)|without('aria-labelledby') }} aria-labelledby="{{ heading_id }}">
   <div class="block__inner block-search__inner">
 
     {# Label. If not displayed, we still provide it for screen readers. #}

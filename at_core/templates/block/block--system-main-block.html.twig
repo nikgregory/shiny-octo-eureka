@@ -25,13 +25,7 @@
  * @see template_preprocess_block()
  */
 #}
-{%
-  set classes = [
-    'block',
-    'block-main-content'
-  ]
-%}
-<main{{ attributes.addClass(classes) }} role="main">
+<main{{ attributes.addClass('block', 'block-main-content')|without('role') }} role="main">
   {{ title_prefix }}
   {{ content }}
   {{ title_suffix }}

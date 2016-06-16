@@ -25,19 +25,17 @@
  * @see template_preprocess_block()
  */
 #}
-
 {%
   set classes = [
     'block',
     'block-menu',
     'block-config-provider--' ~ configuration.provider|clean_class,
-    'block-derivative-plugin--' ~ derivative_plugin_id|clean_class,
-    'block-id--' ~ attributes.id|clean_id,
-    label ? 'has-title'
+    'block-plugin-id--' ~ plugin_id|clean_class,
+    configuration.label_display ? 'has-title'
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<nav{{ attributes.addClass(classes) }} role="navigation" aria-labelledby="{{ heading_id }}">
+<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
   <div class="block__inner block-menu__inner">
 
     {# Label. If not displayed, we still provide it for screen readers. #}
