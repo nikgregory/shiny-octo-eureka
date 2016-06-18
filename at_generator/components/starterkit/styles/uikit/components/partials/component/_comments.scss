@@ -26,7 +26,7 @@
       }
     }
   }
-  
+
   &__new {}
 
   p:last-of-type {
@@ -42,7 +42,6 @@
     .comment.has-title & {
       @include output-rhythm(margin, $medium 0);
     }
-
 
     .comment__author {
       &:after {
