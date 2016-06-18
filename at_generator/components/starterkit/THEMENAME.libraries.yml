@@ -234,6 +234,13 @@ quickedit:
     theme:
       styles/css/components/quickedit.css: {}
 
+# CKEditor
+ckeditor:
+  version: 8.x-1.0
+  css:
+    state:
+      styles/css/components/ckeditor.css: {}
+
 # Form Layout Widget CSS, do not use this in the front end, its only
 # for the layout theme settings.
 layout_settings:

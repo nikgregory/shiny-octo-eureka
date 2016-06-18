@@ -22,7 +22,10 @@ use Drupal\at_core\File\DirectoryOperations;
 function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   // Set the theme name.
   $build_info = $form_state->getBuildInfo();
-  $theme = $build_info['args'][0];
+
+  $active_theme = \Drupal::theme()->getActiveTheme();
+  $theme = $active_theme->getName();
+  $theme_extension = $active_theme->getExtension();
 
   // Instantiate our Theme info object.
   $themeInfo = new ThemeInfo($theme);

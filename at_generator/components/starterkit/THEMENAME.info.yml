@@ -35,18 +35,9 @@ features:
   - node_user_picture
   - comment_user_picture
   - comment_user_verification
-ckeditor_stylesheets:
-  - styles/css/components/ckeditor-iframe.css
-  - styles/css/components/base.css
-  - styles/css/components/color.css
 stylesheets-remove:
   - '@stable/css/node/node.preview.css'
   - '@stable/css/system/components/tablesort.module.css'
 libraries-extend:
   quickedit/quickedit:
     - MACHINENAME/quickedit
-libraries-override:
-  ckeditor/drupal.ckeditor:
-    css:
-      state:
-        /core/themes/stable/css/ckeditor/ckeditor.css: styles/css/components/ckeditor.css

@@ -133,6 +133,14 @@ $form['enable_extensions']['settings_enable_custom_css'] = array(
   '#default_value' => theme_get_setting('settings.enable_custom_css', $theme),
 );
 
+// CKEditor
+$form['enable_extensions']['settings_enable_ckeditor'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('CKEditor Skin'),
+  '#description' => t('Select CKEditor skin.'),
+  '#default_value' => theme_get_setting('settings.enable_ckeditor', $theme),
+);
+
 // Devel
 $form['enable_extensions']['settings_enable_devel'] = array(
   '#type' => 'checkbox',
@@ -187,6 +195,7 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
     'mobile_blocks',
     'slideshows',
     'custom_css',
+    'ckeditor',
     'markup_overrides',
     'devel',
     'legacy_browsers',

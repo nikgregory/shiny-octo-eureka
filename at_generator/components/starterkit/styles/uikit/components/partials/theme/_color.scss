@@ -1199,8 +1199,9 @@ body {
 
 /**
  * CKEditor Colors
+ * Pretty brutal, but effective, combines with other editor partials and files,
+ * mainly for Mimic but will color borders for moono also.
  ============================================================================ */
-
 .cke_chrome {
   border-color: $border-color !important;
   border-top-color: $border-color !important;
@@ -1223,9 +1224,11 @@ body {
 .cke_reset,
 .cke_editable,
 .cke_editable *,
-textarea.cke_source {
+textarea.cke_source,
+.cke_combopanel {
   background-color: $node-background-color;
   color: $text-color;
 }
+
 
 
