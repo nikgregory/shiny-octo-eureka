@@ -27,6 +27,7 @@
 
     .has-title & {
       @include output-rhythm(margin-#{$flow-to}, $xxx-small);
+      display: inline-block;
     }
   }
 
@@ -86,8 +87,13 @@
   // Responsive selectors set with JavaScript, if the breadcrumbs are too wide
   // for their container they will display vertically.
   .is-vertical & {
-    &__list-item {
+    &__title {
       display: block;
+    }
+
+    &__title,
+    &__list-item {
+
       &:before {
         display: inline-block;
         text-align: #{$flow-from};
@@ -96,13 +102,17 @@
     }
   }
   .is-horizontal & {
-    &__title,
-    &__list-item {
+    &__title {
       display: inline-block;
     }
 
     &__list-item {
+      display: inline;
+    }
+
+    &__list-item {
       @include output-rhythm(margin-#{$flow-to}, $xxx-small);
+      display: inline-block;
 
       &:first-child:before {
         display: none;

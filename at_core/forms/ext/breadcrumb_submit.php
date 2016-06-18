@@ -9,7 +9,8 @@ use Drupal\Component\Utility\Html;
 
 function at_core_submit_breadcrumb($values, $generated_files_path) {
   if (!empty($values['settings_breadcrumb_separator'])) {
-    $css = '.breadcrumb__list-item:before {content: "' . Html::escape($values['settings_breadcrumb_separator']) . '"} .fa-loaded .breadcrumb__list-item:before {content: "' . Html::escape($values['settings_breadcrumb_separator']) . '"}';
+    $breadcrumb_separator = Html::escape(trim($values['settings_breadcrumb_separator']));
+    $css = '.breadcrumb__list-item:before {content: "' . $breadcrumb_separator . '"} .fa-loaded .breadcrumb__list-item:before {content: "' . $breadcrumb_separator . '"}';
   }
   if (!empty($css)) {
     $file_name = 'breadcrumb.css';

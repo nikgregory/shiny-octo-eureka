@@ -29,7 +29,11 @@
         <h3{{ title_attributes.addClass(title_classes) }}>{{ breadcrumb_label_value }}</h3>
         <ol class="breadcrumb__list">
           {% for item in breadcrumb %}
-            {% set item_text = item.text|length > 32 ? item.text|slice(0, 32) ~ '...' : item.text %}
+            {% if breadcrumb_item_length > 0 %}
+              {% set item_text = item.text|length > breadcrumb_item_length ? item.text|slice(0, breadcrumb_item_length) ~ '...' : item.text %}
+            {% else %}
+              {% set item_text = item.text %}
+            {% endif %}
             <li class="breadcrumb__list-item is-responsive__item">
               {% if item.url %}
                 <a href="{{ item.url }}" class="breadcrumb__link">{{ item_text }}</a>
