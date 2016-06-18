@@ -43,7 +43,7 @@
   ]
 %}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<div aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
+<div role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
   <div class="block__inner">
 
     {# Label. If not displayed, we still provide it for screen readers. #}
