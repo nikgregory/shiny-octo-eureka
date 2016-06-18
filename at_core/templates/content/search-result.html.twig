@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for displaying a single search result.
+ * Theme override for displaying a single search result.
  *
  * This template renders a single search result. The list of results is
  * rendered using '#theme' => 'item_list', with suggestions of:
@@ -54,19 +54,11 @@
  * @endcode
  *
  * @see template_preprocess_search_result()
- *
- * @ingroup themeable
  */
 #}
 {{ title_prefix }}
 <div class="search-result">
-  {%
-    set title_classes = [
-      'search-result__title',
-      'h4',
-    ]
-  %}
-  <h3{{ title_attributes.addClass(title_classes) }}>
+  <h3{{ title_attributes.addClass('search-result__title', 'h4') }}>
     <a href="{{ url }}">{{ title }}</a>
   </h3>
   {{ title_suffix }}
@@ -79,4 +71,3 @@
     {% endif %}
   </div>
 </div>
-
