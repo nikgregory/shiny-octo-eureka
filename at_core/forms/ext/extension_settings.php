@@ -134,12 +134,15 @@ $form['enable_extensions']['settings_enable_custom_css'] = array(
 );
 
 // CKEditor
-$form['enable_extensions']['settings_enable_ckeditor'] = array(
-  '#type' => 'checkbox',
-  '#title' => t('CKEditor Skin'),
-  '#description' => t('Select CKEditor skin.'),
-  '#default_value' => theme_get_setting('settings.enable_ckeditor', $theme),
-);
+// Check if theme is Mimic compatible.
+if (theme_get_setting('settings.mimic_compatible', $theme) === 1) {
+  $form['enable_extensions']['settings_enable_ckeditor'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('CKEditor Skin'),
+    '#description' => t('Select CKEditor skin.'),
+    '#default_value' => theme_get_setting('settings.enable_ckeditor', $theme),
+  );
+}
 
 // Devel
 $form['enable_extensions']['settings_enable_devel'] = array(
@@ -205,10 +208,9 @@ if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
   $values = $form_state->getValues();
 
   foreach ($extensions_array as $extension) {
-    $form_state_value = isset($values["settings_enable_$extension"]);
-    $form_value = $form['enable_extensions']["settings_enable_$extension"]['#default_value'];
-    if (($form_state_value && $form_state_value === 1) ||
-       (!$form_state_value && $form_value == 1)) {
+    $form_state_value = isset($values["settings_enable_$extension"]) ? $values["settings_enable_$extension"] : 0;
+    $form_value = isset($form['enable_extensions']["settings_enable_$extension"]['#default_value']) ? $form['enable_extensions']["settings_enable_$extension"]['#default_value'] : 0;
+    if (($form_state_value && $form_state_value === 1) || (!$form_state_value && $form_value === 1)) {
       include_once($at_core_path . '/forms/ext/' . $extension . '.php');
     }
   }

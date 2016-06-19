@@ -78,7 +78,7 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Mimic is active, load the ckeditor.css.
     if (isset($config['enable_ckeditor']) && $config['enable_ckeditor'] === 1) {
-      if (isset($config['ckeditor']) && $config['ckeditor'] === 1) {
+      if (isset($config['mimic_enabled']) && $config['mimic_enabled'] === 1) {
         // BC for older sub-themes that may have info file entires that mess up Mimic.
         $mimic_good_to_go = TRUE;
         $theme_extension = $active_theme->getExtension();
@@ -403,7 +403,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
           $mimic_good_to_go = FALSE;
         }
         if ($mimic_good_to_go == TRUE) {
-          if (isset($config['ckeditor']) && $config['ckeditor'] === 1) {
+          if (isset($config['mimic_enabled']) && $config['mimic_enabled'] === 1) {
             $mimic = TRUE;
             global $base_url;
             // AT Cores "Mimic" ckeditor skin.
@@ -475,8 +475,6 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       }
     }
   }
-
-  //kpr($settings['editor']);
 }
 
 /**

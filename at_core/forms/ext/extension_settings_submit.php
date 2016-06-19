@@ -19,6 +19,7 @@ function at_core_submit_extension_settings(&$form, \Drupal\Core\Form\FormStateIn
   $values = $form_state->getValues();
   $theme = $build_info['args'][0];
   $at_core_path = drupal_get_path('theme', 'at_core');
+  $subtheme_path = drupal_get_path('theme', $theme);
 
   // Don't let this timeout easily.
   set_time_limit(60);
@@ -61,7 +62,7 @@ function at_core_submit_extension_settings(&$form, \Drupal\Core\Form\FormStateIn
       require_once($at_core_path . '/forms/ext/mobile_blocks_submit.php');
       at_core_submit_mobile_blocks($values, $theme, $generated_files_path);
     }
-
+    
     // Submit handler for Custom CSS.
     if (isset($values['settings_enable_custom_css']) && $values['settings_enable_custom_css'] === 1) {
       require_once($at_core_path . '/forms/ext/custom_css_submit.php');

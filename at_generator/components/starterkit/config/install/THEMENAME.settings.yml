@@ -304,6 +304,9 @@ settings:
   mobile_blocks_breakpoint: 'all and (max-width: 45em)'
   responsive_menu_horizontal_position: none
   responsive_menu_vertical_position: none
+  mimic_compatible: 1
+  enable_ckeditor: 1
+  mimic_enabled: 1
 features:
   logo: 1
   node_user_picture: 1
