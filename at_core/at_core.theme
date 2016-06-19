@@ -88,7 +88,7 @@ function at_core_page_attachments_alter(array &$page) {
         if (isset($theme_extension->info['libraries-override']['ckeditor/drupal.ckeditor'])) {
           $mimic_good_to_go = FALSE;
         }
-        if ($mimic_good_to_go == TRUE) {
+        if ($mimic_good_to_go === TRUE) {
           $page['#attached']['library'][] = "$theme/ckeditor";
         }
       }
@@ -101,11 +101,11 @@ function at_core_page_attachments_alter(array &$page) {
         $page['#attached']['library'][] = "$theme/fonts";
       }
       // Google font URL.
-      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] == 1) {
+      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === 1) {
         $page['#attached']['library'][] = "$theme/google_fonts";
       }
       // Typekit ID and JS.
-      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] == 1) {
+      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] === 1) {
         $page['#attached']['library'][] = "$theme/typekit_id";
         $page['#attached']['library'][] = 'at_core/at.typekit';
       }
@@ -298,7 +298,7 @@ function at_core_page_attachments_alter(array &$page) {
           // Set a key
           $ss_key = Html::cleanCssIdentifier($theme . '-slideshow-' . $i);
 
-          if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] == 1) {
+          if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] === 1) {
 
             // Basic settings
             foreach ($basic_slider_settings as $basic_slider_setting) {
@@ -308,7 +308,7 @@ function at_core_page_attachments_alter(array &$page) {
             }
 
             // As Carousel
-            if (isset($config['slideshow_' . $i . '_as_carousel']) && $config['slideshow_' . $i . '_as_carousel'] == 1) {
+            if (isset($config['slideshow_' . $i . '_as_carousel']) && $config['slideshow_' . $i . '_as_carousel'] === 1) {
               foreach ($carousel_settings as $carousel_setting) {
                 if (isset($config['slideshow_' . $i . '_' . $carousel_setting])) {
                   $slider_settings[$ss_key][$carousel_setting] = $config['slideshow_' . $i . '_' . $carousel_setting];
@@ -402,7 +402,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
         if (isset($theme_extension->info['libraries-override']['ckeditor/drupal.ckeditor'])) {
           $mimic_good_to_go = FALSE;
         }
-        if ($mimic_good_to_go == TRUE) {
+        if ($mimic_good_to_go === TRUE) {
           if (isset($config['mimic_enabled']) && $config['mimic_enabled'] === 1) {
             $mimic = TRUE;
             global $base_url;
@@ -439,7 +439,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
         }
       }
       foreach ($settings['editor']['formats'] as $format_key => $format_values) {
-        if ($mimic == TRUE) {
+        if ($mimic === TRUE) {
           // Alter ckeditor-iframe CSS.
           $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url("$theme_path/styles/css/components/ckeditor-iframe.css");
           // Remove cores version, it just gets in the way.
@@ -453,7 +453,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       }
 
       // Color styles.
-      if ($mimic == TRUE) {
+      if ($mimic === TRUE) {
         if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
           $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
           foreach ($settings['editor']['formats'] as $format_key => $format_values) {
@@ -461,7 +461,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
             if (!empty($color_paths)) {
               // Add the color module saved files.
               foreach ($color_paths as $color_key => $color_path) {
-                if (basename($color_path) == 'color.css') {
+                if (basename($color_path) === 'color.css') {
                   $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($color_path);
                 }
               }
@@ -514,7 +514,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
           $formatted_suggestions = array();
           if ($suggestions) {
             foreach ($suggestions as $suggestion_name) {
-              if ($suggestion_name == 'page__') {
+              if ($suggestion_name === 'page__') {
                 $suggestion_name = str_replace('_', '', $suggestion_name);
               }
               $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
@@ -558,7 +558,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
       if (isset($config['responsive_menu_block'])) {
-        if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == $config['responsive_menu_block']) {
+        if (isset($variables['elements']['#id']) && $variables['elements']['#id'] === $config['responsive_menu_block']) {
           $suggestions[] = 'block__responsive_menu';
         }
       }
@@ -582,7 +582,7 @@ function at_core_theme_suggestions_user_alter(array &$suggestions, array $variab
  * @param array $variables
  */
 function at_core_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-  if ($variables['element']['#form_id'] == 'search_block_form') {
+  if ($variables['element']['#form_id'] === 'search_block_form') {
     $suggestions[] = 'form__search_block_form';
   }
 }
@@ -752,10 +752,10 @@ function at_core_preprocess_html(&$variables) {
 
     // Prefetch Font provider DNS.
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
-      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] == 1) {
+      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === 1) {
         $variables['google_dns_prefetch'] = TRUE;
       }
-      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] == 1) {
+      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] === 1) {
         $variables['typekit_dns_prefetch'] = TRUE;
       }
     }
@@ -831,7 +831,7 @@ function at_core_preprocess_page(&$variables) {
 
   // Allow the main content to render in at_generator so users can login if they
   // set it as default and blew their site up.
-  if ($theme == 'at_generator') {
+  if ($theme === 'at_generator') {
     $variables['main']['has_regions'] = TRUE;
     return; // return early to avoid notices and errors.
   }
@@ -1030,7 +1030,7 @@ function at_core_preprocess_block(&$variables) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 
       // Use PNG logo in branding block
-      if ($variables['base_plugin_id'] == 'system_branding_block') {
+      if ($variables['base_plugin_id'] === 'system_branding_block') {
         if (isset($config['png_logo']) && $config['png_logo'] === 1) {
           $variables['site_logo'] = '';
           if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
@@ -1040,7 +1040,7 @@ function at_core_preprocess_block(&$variables) {
       }
 
       // Remove login block links.
-      if ($variables['base_plugin_id'] == 'user_login_block') {
+      if ($variables['base_plugin_id'] === 'user_login_block') {
         if ((isset($config['login_block_remove_links']) && $config['login_block_remove_links'] === 1) || (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1)) {
           unset($variables['content']['user_links']);
 
@@ -1175,14 +1175,14 @@ function at_core_preprocess_breadcrumb(&$variables) {
       // Remove the Home link.
       if (isset($config['breadcrumb_home']) && $config['breadcrumb_home'] === 1) {
         $first_item = array_values($variables['breadcrumb'])[0];
-        if (isset($first_item['url']) && $first_item['url'] == base_path()) {
+        if (isset($first_item['url']) && $first_item['url'] === base_path()) {
           array_shift($variables['breadcrumb']);
         }
       }
       // If home is the only item, remove it.
       elseif (isset($config['breadcrumb_home_alone']) && $config['breadcrumb_home_alone'] === 1) {
         $arr_length = count($variables['breadcrumb']);
-        if ($arr_length == 1 && $variables['breadcrumb'][0]['url'] == base_path()) {
+        if ($arr_length === 1 && $variables['breadcrumb'][0]['url'] === base_path()) {
           unset($variables['breadcrumb'][0]);
         }
       }
@@ -1341,7 +1341,7 @@ function _at_core_layout_plugin_attributes(&$variables) {
     $classes[] = 'comment';
     $classes[] = 'js-comment';
     $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
-    if ($variables['content']['#comment']->getOwnerId() == $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
+    if ($variables['content']['#comment']->getOwnerId() === $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
       $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() .'-author';
     }
     // Element
