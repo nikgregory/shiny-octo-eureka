@@ -675,6 +675,10 @@ function at_core_preprocess_html(&$variables) {
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
 
+  // Initialize prefetch variables
+  $variables['google_dns_prefetch'] = FALSE;
+  $variables['false_dns_prefetch'] = FALSE;
+
   // We use this to set body classes based in the URI.
   $request = \Drupal::request();
 
@@ -743,6 +747,16 @@ function at_core_preprocess_html(&$variables) {
         foreach ($shortcodes as $class) {
           $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
+      }
+    }
+
+    // Prefetch Font provider DNS.
+    if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
+      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] == 1) {
+        $variables['google_dns_prefetch'] = TRUE;
+      }
+      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] == 1) {
+        $variables['typekit_dns_prefetch'] = TRUE;
       }
     }
   }

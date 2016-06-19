@@ -68,6 +68,13 @@
       {% endif %}
     {% endif %}
     <head-placeholder token="{{ placeholder_token|raw }}">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    {% if google_dns_prefetch %}
+      <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    {% endif %}
+    {% if typekit_dns_prefetch %}
+      <link rel="dns-prefetch" href="//use.typekit.net">
+    {% endif %}
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
