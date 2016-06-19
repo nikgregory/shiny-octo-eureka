@@ -494,6 +494,35 @@ textarea.placeholder_text {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
+.ui-dialog .form-text {
+  background-color: inherit !important;
+  color: black !important;
+  border-color: silver !important;
+}
+.ui-dialog .form-text::-webkit-input-placeholder {
+  color: silver;
+}
+.ui-dialog .form-text::-moz-placeholder {
+  color: silver;
+}
+.ui-dialog .form-text:-ms-input-placeholder {
+  color: silver;
+}
+.ui-dialog .form-text::placeholder {
+  color: silver;
+}
+.ui-dialog .form-type-radio label.option,
+.ui-dialog .form-type-checkbox label.option {
+  border-color: transparent;
+  background-color: inherit;
+}
+.ui-dialog .form-type-radio label.option:focus, .ui-dialog .form-type-radio label.option:hover,
+.ui-dialog .form-type-checkbox label.option:focus,
+.ui-dialog .form-type-checkbox label.option:hover {
+  color: inherit;
+  background-color: inherit;
+}
+
 .filter-wrapper {
   border-color: #cccccc;
 }
@@ -861,8 +890,96 @@ body:before {
 .cke_editable *,
 textarea.cke_source,
 .cke_combopanel {
-  background-color: #ffffff;
-  color: #363636;
+  background-color: #ffffff !important;
+  color: #363636 !important;
+}
+
+.cke_combo_off a.cke_combo_button,
+a.cke_button_off {
+  color: #363636 !important;
+}
+.cke_combo_off a.cke_combo_button:hover, .cke_combo_off a.cke_combo_button:focus, .cke_combo_off a.cke_combo_button:active,
+a.cke_button_off:hover,
+a.cke_button_off:focus,
+a.cke_button_off:active {
+  background-color: #f2f2f2 !important;
+  color: #363636 !important;
+}
+
+.cke_combo_on a.cke_combo_button,
+a.cke_button_on {
+  background-color: #f2f2f2 !important;
+  color: #363636 !important;
+}
+.cke_combo_on a.cke_combo_button:hover, .cke_combo_on a.cke_combo_button:focus, .cke_combo_on a.cke_combo_button:active,
+a.cke_button_on:hover,
+a.cke_button_on:focus,
+a.cke_button_on:active {
+  background-color: #f2f2f2 !important;
+  color: #363636 !important;
+}
+
+.cke_panel,
+.cke_combopanel {
+  background-color: #ffffff !important;
+  border-color: #cccccc !important;
+}
+
+.cke_combo_text {
+  color: #363636 !important;
+}
+
+.cke_combo_arrow {
+  border-top-color: #cccccc !important;
+}
+
+.cke_panel_listItem a {
+  color: inherit !important;
+}
+
+* html .cke_panel_listItem a {
+  color: #363636 !important;
+}
+*:first-child + html .cke_panel_listItem a {
+  color: #363636 !important;
+}
+
+.cke_panel_listItem.cke_selected a {
+  background-color: #f2f2f2 !important;
+}
+.cke_panel_listItem a:hover, .cke_panel_listItem a:focus, .cke_panel_listItem a:active {
+  background-color: #f2f2f2 !important;
+  color: #363636 !important;
+}
+
+.cke_reset_all,
+.cke_button_icon:before {
+  color: #363636 !important;
+}
+
+.cke_resizer {
+  border-color: transparent #cccccc transparent transparent !important;
+}
+
+a.cke_menu_button:after, a.cke_menu_button:before,
+a.cke_combo_button:after,
+a.cke_combo_button:before,
+a.cke_button:after,
+a.cke_button:before {
+  display: none !important;
+}
+
+input.cke_dialog_ui_input_text,
+input.cke_dialog_ui_input_password {
+  background-color: white !important;
+  color: black !important;
+}
+
+.ckeditor-dialog-loading,
+.ckeditor-dialog-loading * {
+  background-color: #f2f2f2 !important;
+  color: #363636 !important;
+  border-color: #eeeeee !important;
 }
 
 /*# sourceMappingURL=maps/color.css.map */

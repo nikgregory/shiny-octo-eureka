@@ -272,9 +272,20 @@ label button.link {
 }
 
 
-// UI Buttons (jQuery UI, e.g. dialogs)
-.ui-button-text-only .ui-button-text {
-  padding: 0;
+// UI Buttons (jQuery UI)
+.ui-button-text-only {
+  .ui-button-text {
+    padding: 0;
+  }
+
+  button,
+  .button {
+    &:hover,
+    &:focus {
+      background: inherit !important;
+      color: #292929 !important;
+    }
+  }
 }
 
 

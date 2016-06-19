@@ -217,6 +217,7 @@ hr {
  *  - a toggle setting in the theme settings, you can turn it on/off using
  *    the Markup overrides extension.
  ============================================================================ */
+
 .attribution {
   .l-rw {
     background-color: transparent;
@@ -231,6 +232,7 @@ hr {
  * Feed Icons
  *  - icons are SVG, SEE feed-icon.html.twig in AT Core templates directory.
  ============================================================================ */
+
 .feed-icon-rss__path {
   fill: rgba(0, 0, 0, 0.6);
 }
@@ -348,7 +350,6 @@ hr {
  *  2. jQuery: responsive-menus.js in AT Core libraries which adds/toggles classes.
  *  3. Theme settings as set in your themes Advanced extention settings.
  ============================================================================ */
-
 
 // Aggressively force the menu to inherit the page/regions background,
 // this gives us some pretty usable styles for free.
@@ -740,6 +741,34 @@ textarea.placeholder_text {
     &:focus,
     &:hover {
       background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+}
+
+
+// Dialog stuff needs an override to look OK.
+.ui-dialog {
+  .form-text {
+    background-color: inherit !important;
+    color: black !important;
+    border-color: silver !important;
+
+    &::placeholder {
+      color: silver;
+    }
+  }
+
+  .form-type-radio,
+  .form-type-checkbox {
+    label.option {
+      border-color: transparent;
+      background-color: inherit;
+
+      &:focus,
+      &:hover {
+        color: inherit;
+        background-color: inherit;
+      }
     }
   }
 }
@@ -1167,6 +1196,7 @@ body {
 /**
  * Views
  ============================================================================ */
+
 .view-empty:not(:empty) {
   // Front page no content, add content links
   .links {
@@ -1202,6 +1232,7 @@ body {
  * Pretty brutal, but effective, combines with other editor partials and files,
  * mainly for Mimic but will color borders for moono also.
  ============================================================================ */
+
 .cke_chrome {
   border-color: $border-color !important;
   border-top-color: $border-color !important;
@@ -1226,9 +1257,109 @@ body {
 .cke_editable *,
 textarea.cke_source,
 .cke_combopanel {
-  background-color: $node-background-color;
-  color: $text-color;
+  background-color: $node-background-color !important;
+  color: $text-color !important;
 }
 
+.cke_combo_off a.cke_combo_button,
+a.cke_button_off {
+  color: $text-color !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $text-background-color-light !important;
+    color: $text-color !important;
+  }
+}
+
+.cke_combo_on a.cke_combo_button,
+a.cke_button_on {
+  background-color: $text-background-color-light !important;
+  color: $text-color !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $text-background-color-light !important;
+    color: $text-color !important;
+  }
+}
+
+.cke_panel,
+.cke_combopanel {
+  background-color: $node-background-color !important;
+  border-color: $border-color !important;
+}
+
+.cke_combo_text {
+  color: $text-color !important;
+}
+
+.cke_combo_arrow {
+  border-top-color: $border-color !important;
+}
+
+.cke_panel_listItem {
+  a {
+    color: inherit !important;
+  }
+}
+
+* {
+  html .cke_panel_listItem a {
+    color: $text-color !important;
+  }
+
+  &:first-child + html .cke_panel_listItem a {
+    color: $text-color !important;
+  }
+}
+
+.cke_panel_listItem {
+  &.cke_selected a {
+    background-color: $text-background-color-light !important;
+  }
+
+  a {
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $text-background-color-light !important;
+      color: $text-color !important;
+    }
+  }
+}
+
+.cke_reset_all,
+.cke_button_icon:before {
+  color: $text-color !important;
+}
+
+.cke_resizer {
+  border-color: transparent $border-color transparent transparent !important;
+}
+
+a.cke_menu_button,
+a.cke_combo_button,
+a.cke_button {
+  &:after,
+  &:before {
+    display: none !important;
+  }
+}
+
+input.cke_dialog_ui_input_text,
+input.cke_dialog_ui_input_password {
+  background-color: white !important;
+  color: black !important;
+}
+
+.ckeditor-dialog-loading,
+.ckeditor-dialog-loading * {
+  background-color: $text-background-color-light !important;
+  color: $text-color !important;
+  border-color: $border-color-light !important;
+}
 
 
