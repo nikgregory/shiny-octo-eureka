@@ -13,6 +13,23 @@ use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
 use Drupal\at_core\Layout\LayoutLoad;
 
+
+/**
+ * Alter the element type information returned from modules.
+ *
+ * @param array $info
+ * @see \Drupal\Core\Render\ElementInfoManager
+ * @see \Drupal\Core\Render\Element\ElementInterface
+ *
+ * TODO Review/remove after https://www.drupal.org/node/2409083 lands.
+ */
+function at_core_element_info_alter(&$info) {
+  // Remove the html5 shiv. Add it later if legacy browser support is enabled.
+  if (in_array('core/html5shiv', $info['html']['#attached']['library'])) {
+    $info['html']['#attached']['library'] = array_merge(array_diff($info['html']['#attached']['library'], array('core/html5shiv')));
+  }
+}
+
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
  *
@@ -26,7 +43,6 @@ use Drupal\at_core\Layout\LayoutLoad;
  * @see hook_page_attachments_alter()
  */
 function at_core_page_attachments_alter(array &$page) {
-
   $active_theme = \Drupal::theme()->getActiveTheme();
   $theme = $active_theme->getName();
   $theme_path = $active_theme->getPath();
@@ -244,6 +260,7 @@ function at_core_page_attachments_alter(array &$page) {
     // Attach poly-fills to support IE8.
     if (isset($config['enable_legacy_browsers']) && $config['enable_legacy_browsers'] === 1) {
       if (isset($config['legacy_browser_polyfills']) && $config['legacy_browser_polyfills'] === 1) {
+        $page['#attached']['library'][] = 'at_core/at.html5shiv';
         $page['#attached']['library'][] = 'at_core/at.respond';
         $page['#attached']['library'][] = 'at_core/at.selectivizr';
       }
@@ -443,7 +460,12 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
           // Alter ckeditor-iframe CSS.
           $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url("$theme_path/styles/css/components/ckeditor-iframe.css");
           // Remove cores version, it just gets in the way.
-          $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'] = array_merge(array_diff($settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'], array("/core/modules/ckeditor/css/ckeditor-iframe.css")));
+          $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'] = array_merge(
+            array_diff(
+              $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'],
+              array('/core/modules/ckeditor/css/ckeditor-iframe.css')
+            )
+          );
         }
         if (!empty($styles)) {
           foreach ($styles as $stylesheet) {

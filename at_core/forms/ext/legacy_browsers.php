@@ -15,7 +15,13 @@ $form['legacy-browsers'] = array(
 //----------------------------------------------------------------------
 $form['legacy-browsers']['legacy-browser-polyfills'] = array(
   '#type' => 'container',
-  '#markup' => t('<p>By checking this setting two poly-fills will be loaded for IE8 and below:</p><ol><li><b>Respond.js:</b> to support the Layout and Responsive Menu options.</li><li><b>Selectivrz:</b> for the Layout and UIKit styles which use many CSS3 selectors.</li></ol><p>Additionally the YUI3 library will load for IE8 only. This is for Selectivrz because Drupal core uses jQuery 2, which does not support IE8. Combined this should work to give basic layout and most styles, however no guarantees are given.</p><p>Without this setting IE8 will display in one column and some styling will fail. The advice is to NOT turn this on, it loads a lot of JavaScript for IE8 and below, it may be better to simply allow those browsers to fail a bit, rather than throwing a huge chunk of JS at them.</p>'),
+  '#markup' => t('<p>By checking this setting poly-fills will be loaded for IE8 and below:</p>
+    <dl>
+      <dt><b>html5shiv.js:</b></dt><dd>To support HTML5 elements.</dd>
+      <dt><b>Respond.js:</b></dt><dd>To support media queries.</dd>
+      <dt><b>Selectivrz + YUI3*:</b></dt><dd>To support CSS3.</dd>
+    </dl>
+    <p>* Selectivrz runs better on YUI3 and Drupal uses jQuery 2 which does not support IE8.</p><p>Without this setting IE8 will display in one column and some styling will fail. The advice is to NOT turn this on, it loads a lot of JavaScript for IE8 and below, it may be better to simply allow those browsers to fail a bit, rather than throwing a huge chunk of JS at them.</p>'),
 );
 
 // Show page suggestions.

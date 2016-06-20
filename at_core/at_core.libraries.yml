@@ -28,7 +28,7 @@ at.matchheight:
     url: https://raw.githubusercontent.com/liabru/jquery-match-height/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
 
@@ -41,7 +41,7 @@ at.enquire:
     url: https://raw.githubusercontent.com/WickyNilliams/enquire.js/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
     - core/matchmedia
@@ -55,7 +55,7 @@ at.fastclick:
     url: https://raw.githubusercontent.com/ftlabs/fastclick/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
 
@@ -79,7 +79,7 @@ at.fontfaceobserver:
     url: https://raw.githubusercontent.com/bramstein/fontfaceobserver/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/1.7.1/fontfaceobserver.standalone.min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/1.7.1/fontfaceobserver.standalone.min.js: { type: external, minified: true }
 
 # Headroom
 at.headroom:
@@ -90,7 +90,7 @@ at.headroom:
     url: https://github.com/WickyNilliams/headroom.js/blob/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.3/headroom.min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.3/headroom.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
 
@@ -103,7 +103,7 @@ at.masonry:
     url: https://github.com/desandro/masonry/blob/master/README.md
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.0/masonry.pkgd.min.js: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.0/masonry.pkgd.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
 
@@ -187,24 +187,11 @@ at.slideshow:
   remote: https://github.com/woothemes/FlexSlider
   version: "2.6.1"
   license:
-    name: GNU-GPL-2.0
+    name: GNU-GPL-2.0-or-later
     url: https://github.com/woothemes/FlexSlider/blob/master/LICENSE.md
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.1/jquery.flexslider.min.js: { type: external }
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - core/drupalSettings
-
-at.slideshow:
-  version: "2.6.1"
-  license:
-    name: GNU-GPL-2.0
-    url: https://github.com/woothemes/FlexSlider/blob/master/LICENSE.md
-    gpl-compatible: true
-  js:
-    https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.1/flexslider.min.css: { type: external }
+    https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.1/jquery.flexslider.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
     - core/drupal
@@ -232,30 +219,45 @@ at.typekit:
 at.responsivevideo:
   version: "8.x-1.0"
   js:
-    scripts/at.responsiveVideo.min.js: {}
+    scripts/at.responsiveVideo.min.js: { minified: true }
   dependencies:
     - core/jquery
     - core/drupal
 
+# html5shiv
+at.html5shiv:
+  # Block the page from being loaded until html5shiv is initialized.
+  header: true
+  remote: https://github.com/aFarkas/html5shiv
+  version: "3.7.3"
+  license:
+    name: GNU-GPL-2.0-or-later
+    url: http://www.gnu.org/licenses/gpl-2.0.html
+    gpl-compatible: true
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js: { weight: -22, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
+
 # Respond
 at.respond:
+  remote: https://github.com/scottjehl/Respond
   version: "1.4.2"
   license:
     name: MIT
     url: https://raw.githubusercontent.com/scottjehl/Respond/master/LICENSE-MIT
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false } }
+    https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
 
 # Selectivizr
 at.selectivizr:
+  remote: https://github.com/keithclark/selectivizr
   version: "1.0.2"
   license:
     name: MIT
     url: http://opensource.org/licenses/mit-license.php
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false } }
+    https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
   dependencies:
     - at_core/at.yui3
 
@@ -268,7 +270,7 @@ at.yui3:
     url: https://raw.githubusercontent.com/yui/yui3/master/LICENSE.md
     gpl-compatible: true
   js:
-    http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, browsers: { IE: 'lte IE 8', '!IE': false } }
+    http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
 
 # AT Core libs for theme dev.
 at.devel_debug_layout:
