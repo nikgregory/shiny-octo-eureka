@@ -6,13 +6,13 @@
  * Available variables:
  * - attributes: Attributes for the UL containing the list of links.
  * - links: Links to be output.
- *   Each link will have the following elements:
+ *   Each item in links will have the following elements:
  *   - title: The link text.
- *   - href: The link URL. If omitted, the 'title' is shown as a plain text
- *     item in the links list. If 'href' is supplied, the entire link is passed
- *     to l() as its $options parameter.
- *   - attributes: (optional) HTML attributes for the anchor, or for the <span>
- *     tag if no 'href' is supplied.
+ *   - link: The generated link. If omitted, the 'title' is shown as a plain
+ *     text item in the links list in a <span> element.
+ *   - text_attributes: (optional) HTML attributes for the <span> element if no
+ *     'link' is supplied.
+ *   - attributes: (optional) HTML attributes for the <li>..
  * - heading: (optional) A heading to precede the links.
  *   - text: The heading text.
  *   - level: The heading level (e.g. 'h2', 'h3').
