@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation to display the search block.
+ * Theme override for the search form block.
  *
  * Available variables:
  * - plugin_id: The ID of the block implementation.
@@ -9,15 +9,8 @@
  * - configuration: A list of the block's configuration values, including:
  *   - label: The configured label for the block.
  *   - label_display: The display settings for the label.
- *   - module: The module that provided this block plugin.
- *   - cache: The cache settings.
+ *   - provider: The module or other provider that provided this block plugin.
  *   - Block plugin specific settings will also be stored here.
- * - block - The full block entity, including:
- *   - label_hidden: The hidden block title value if the block was
- *     configured to hide the title ('label' is empty in this case).
- *   - module: The module that generated the block.
- *   - delta: An ID for the block, unique within each module.
- *   - region: The block region embedding the current block.
  * - content: The content of this block.
  * - attributes: A list HTML attributes populated by modules, intended to
  *   be added to the main container tag of this template. Includes:
@@ -31,11 +24,9 @@
  *
  * @see template_preprocess_block()
  * @see search_preprocess_block()
- *
- * @ingroup themeable
  */
 #}
-{%
+{%-
   set classes = [
     'block',
     'block-search',
@@ -43,25 +34,25 @@
     'block-plugin-id--' ~ plugin_id|clean_class,
     label ? 'has-title'
   ]
-%}
-{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+-%}
+{%- set heading_id = attributes.id ~ '-menu'|clean_id -%}
 <div{{ attributes.addClass(classes)|without('aria-labelledby') }} aria-labelledby="{{ heading_id }}">
   <div class="block__inner block-search__inner">
 
     {# Label. If not displayed, we still provide it for screen readers. #}
-    {% if not configuration.label_display %}
-      {% set title_attributes = title_attributes.addClass('visually-hidden') %}
-    {% endif %}
+    {%- if not configuration.label_display -%}
+      {%- set title_attributes = title_attributes.addClass('visually-hidden') -%}
+    {%- endif -%}
 
     {{ title_prefix }}
       <h2{{ title_attributes.addClass('block__title', 'block-search__title').setAttribute('id', heading_id) }}><span>{{ configuration.label }}</span></h2>
     {{ title_suffix }}
 
-    {% block content %}
+    {%- block content -%}
       <div{{ content_attributes.addClass('block__content', 'block-search__content') }}>
-        {{ content }}
+        {{- content -}}
       </div>
-    {% endblock %}
+    {%- endblock -%}
 
   </div>
 </div>

@@ -1434,7 +1434,6 @@ th.checkbox {
 tr .form-item {
   margin-top: 0;
   margin-bottom: 0;
-  white-space: nowrap;
 }
 
 /**
@@ -2725,20 +2724,6 @@ table tr.error {
   padding-right: 0;
 }
 
-/**
- * Views
- ============================================================================ */
-.views-view-grid .views-col {
-  padding-right: 18px;
-  padding-right: 1.125rem;
-  margin-bottom: 18px;
-  margin-bottom: 1.125rem;
-  box-sizing: border-box;
-}
-.views-view-grid .views-col:last-child {
-  padding-right: 0;
-}
-
 .view-empty:not(:empty) {
   margin-bottom: 18px;
   margin-bottom: 1.125rem;
@@ -3014,4 +2999,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

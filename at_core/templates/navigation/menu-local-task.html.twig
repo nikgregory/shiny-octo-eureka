@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for a local task link.
+ * Theme override for a local task link.
  *
  * Available variables:
  * - attributes: HTML attributes for the wrapper element.
@@ -12,10 +12,6 @@
  * menu-local-tasks.html.twig.
  *
  * @see template_preprocess_menu_local_task()
- *
- * @ingroup themeable
  */
 #}
-<li{{ attributes.addClass('tabs__tab', is_active ? 'tabs__tab--is-active', 'is-responsive__item') }}>
-  {{ link }}
-</li>
+<li{{ attributes.addClass('tabs__tab', is_active ? 'tabs__tab--is-active', 'is-responsive__item') }}>{{ link }}</li>

@@ -1,10 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation to display a pager.
- * Notable differences to core include removal of li items for ellipsis and
- * instead placing ellipsis inside the first or last anchors on numeric items.
- * Also we add many classes for theming pager items and states.
+ * Theme override to display a pager.
  *
  * Available variables:
  * - items: List of pager items.
@@ -30,44 +27,41 @@
  *   - next: Present if the visible list of pages ends before the last page.
  *
  * @see template_preprocess_pager()
- *
- * @ingroup themeable
  */
 #}
-{% if items %}
+{% if items -%}
   <nav class="pager pager--full" role="navigation" aria-labelledby="pagination-heading">
     <h4 id="pagination-heading" class="visually-hidden">{{ 'Pagination'|t }}</h4>
     <ul class="pager__items">
-      {% if items.first or items.previous %}
+      {# Prev/first. #}
+      {%- if items.first or items.previous -%}
         <ul class="pager__items__first-previous">
-      {% endif %}
+      {%- endif -%}
         {# Print first item if we are not on the first page. #}
-        {% if items.first %}
+        {%- if items.first -%}
           <li class="pager__item pager__item--first pager__item--text">
             <a href="{{ items.first.href }}" class="pager__link" title="{{ 'Go to first page'|t }}"{{ items.first.attributes }}>
               <span class="visually-hidden">{{ 'First page'|t }}</span>
-              <span aria-hidden="true">{{ items.first.text|default('« first'|t) }}</span>
+              <span class="pager__first" aria-hidden="true">{{ items.first.text|default('« first'|t) }}</span>
             </a>
           </li>
-        {% endif %}
-
+        {%- endif -%}
         {# Print previous item if we are not on the first page. #}
-        {% if items.previous %}
+        {%- if items.previous -%}
           <li class="pager__item pager__item--previous pager__item--text">
             <a href="{{ items.previous.href }}" class="pager__link" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes }}>
               <span class="visually-hidden">{{ 'Previous page'|t }}</span>
-              <span aria-hidden="true">{{ items.previous.text|default('‹ previous'|t) }}</span>
+              <span class="pager__previous" aria-hidden="true">{{ items.previous.text|default('‹ previous'|t) }}</span>
             </a>
           </li>
-        {% endif %}
-      {% if items.first or items.previous %}
+        {%- endif -%}
+      {%- if items.first or items.previous -%}
         </ul>
-      {% endif %}
-
+      {%- endif -%}
+      {# Items. #}
       <ol class="pager__items__num-pages">
-        {# Now generate the actual pager piece. #}
-        {% for key, item in items.pages %}
-          {%
+        {%- for key, item in items.pages -%}
+          {%-
             set classes = [
               'pager__item',
               'pager__item--num',
@@ -75,54 +69,53 @@
               loop.last ? 'pager__item--num-last',
               current == key ? 'is-active' : '',
             ]
-          %}
+          -%}
           <li class="{{ classes|join(' ')|trim }}">
-            {% if current == key %}
-              {% set title = 'Current page'|t %}
-            {% else %}
-              {% set title = 'Go to page @key'|t({'@key': key}) %}
-            {% endif %}
+            {%- if current == key -%}
+              {%- set title = 'Current page'|t -%}
+            {%- else -%}
+              {%- set title = 'Go to page @key'|t({'@key': key}) -%}
+            {%- endif -%}
             <a href="{{ item.href }}" class="pager__link{{ current == key ? ' pager__link--is-active' : '' }}" title="{{ title }}"{{ item.attributes }}>
               <span class="visually-hidden">{{ current == key ? 'Current page'|t : 'Page'|t }}</span>
               {# Add an ellipsis if there are further previous pages. #}
-              {% if ellipses.previous and loop.first %}
+              {%- if ellipses.previous and loop.first -%}
                 <span class="pager__ellipsis pager__ellipsis--before" role="presentation">&hellip;</span>
-              {% endif %}
-              {{- key -}}
+              {%- endif -%}
+              <span class="pager__key">{{- key -}}</span>
               {# Add an ellipsis if there are further next pages. #}
-              {% if ellipses.next and loop.last %}
+              {%- if ellipses.next and loop.last -%}
                 <span class="pager__ellipsis pager__ellipsis--after" role="presentation">&hellip;</span>
-              {% endif %}
+              {%- endif -%}
             </a>
           </li>
         {% endfor %}
       </ol>
-
-      {% if items.next or items.last %}
+      {# Next/last. #}
+      {%- if items.next or items.last -%}
         <ul class="pager__items__next-last">
-      {% endif %}
+      {%- endif -%}
         {# Print next item if we are not on the last page. #}
-        {% if items.next %}
+        {%- if items.next -%}
           <li class="pager__item pager__item--next pager__item--text">
             <a href="{{ items.next.href }}" class="pager__link" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes }}>
               <span class="visually-hidden">{{ 'Next page'|t }}</span>
-              <span aria-hidden="true">{{ items.next.text|default('next ›'|t) }}</span>
+              <span class="pager__next" aria-hidden="true">{{ items.next.text|default('next ›'|t) }}</span>
             </a>
           </li>
-        {% endif %}
-
+        {%- endif -%}
         {# Print last item if we are not on the last page. #}
-        {% if items.last %}
+        {%- if items.last -%}
           <li class="pager__item pager__item--last pager__item--text">
             <a href="{{ items.last.href }}" class="pager__link" title="{{ 'Go to last page'|t }}"{{ items.last.attributes }}>
               <span class="visually-hidden">{{ 'Last page'|t }}</span>
-              <span aria-hidden="true">{{ items.last.text|default('last »'|t) }}</span>
+              <span class="pager__last" aria-hidden="true">{{ items.last.text|default('last »'|t) }}</span>
             </a>
           </li>
-        {% endif %}
-      {% if items.next or items.last %}
+        {%- endif -%}
+      {%- if items.next or items.last -%}
         </ul>
-      {% endif %}
+      {%- endif -%}
     </ul>
   </nav>
-{% endif %}
+{%- endif %}

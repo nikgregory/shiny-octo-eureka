@@ -6,6 +6,7 @@
 .views-element-container {}
 
 .view {}
+.view-title {}
 .view-content {}
 .views-row {}
 
@@ -28,44 +29,6 @@
 // Some core views, not exhaustive.
 .view-frontpage {}
 .view-taxonomy-term {}
-
-
-/**
- * Views
- ============================================================================ */
-
-// View wrapper.
-.views-element-container {}
-
-.view {}
-.view-content {}
-.views-row {}
-
-
-// Grid view overrides.
-.views-view-grid  {
-  .views-col {
-    @include output-rhythm(padding-#{$flow-to}, $large);
-    @include output-rhythm(margin-bottom, $large);
-
-    box-sizing: border-box;
-
-    &:last-child {
-      padding-#{$flow-to}: 0;
-    }
-  }
-}
-
-
-// Some core views, not exhaustive.
-.view-frontpage {}
-.view-taxonomy-term {}
-
-
-// Some core views, not exhaustive.
-.view-frontpage {}
-.view-taxonomy-term {}
-
 
 
 // View is empty, but has message etc.

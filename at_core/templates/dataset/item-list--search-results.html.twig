@@ -19,10 +19,11 @@
  * @see template_preprocess_item_list()
  */
 #}
+{% set attributes = attributes.addClass(classes) %}
 {% if items or empty -%}
-  <div{{ wrapper_attributes.addClass('item-list item-list--search-results') }}>
+  <div{{ wrapper_attributes.addClass('item-list', 'item-list--search-results') }}>
     {%- if items -%}
-      <{{ list_type }}{{ attributes.addClass('search-results') }}>
+      <{{ list_type }}{{ attributes.addClass('search-results', context.plugin ~ '-results') }}>
         {%- for item in items -%}
           <li{{ item.attributes.addClass('search-results__item') }}>{{ item.value }}</li>
         {%- endfor -%}

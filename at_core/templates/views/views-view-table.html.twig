@@ -32,6 +32,7 @@
 #}
 {%
   set classes = [
+    'table',
     'views-table',
     'views-view-table',
     'cols-' ~ header|length,
@@ -41,16 +42,16 @@
 %}
 <table{{ attributes.addClass(classes) }}>
   {% if caption_needed %}
-    <caption>
+    <caption class="table__caption caption">{{ caption }}</caption>
     {% if caption %}
       {{ caption }}
     {% else %}
       {{ title }}
     {% endif %}
     {% if (summary is not empty) or (description is not empty) %}
-      <details>
+      <details class="table__details">
         {% if summary is not empty %}
-          <summary>{{ summary }}</summary>
+          <summary class="table__summary">{{ summary }}</summary>
         {% endif %}
         {% if description is not empty %}
           {{ description }}
@@ -60,12 +61,13 @@
     </caption>
   {% endif %}
   {% if header %}
-    <thead>
-      <tr>
+    <thead class="table__header">
+      <tr class="table__row">
         {% for key, column in header %}
           {% if column.default_classes %}
             {%
               set column_classes = [
+                'table__cell',
                 'views-field',
                 'views-field-' ~ fields[key],
               ]
@@ -92,9 +94,15 @@
       </tr>
     </thead>
   {% endif %}
-  <tbody>
+  <tbody class="table__body">
     {% for row in rows %}
-      <tr{{ row.attributes }}>
+      {%
+        set row_classes = [
+          'table__row',
+          not no_striping ? cycle(['odd', 'even'], loop.index0),
+        ]
+      %}
+      <tr{{ row.attributes.addClass(row_classes) }}>
         {% for key, column in row.columns %}
           {% if column.default_classes %}
             {%
@@ -106,7 +114,7 @@
               {% set column_classes = column_classes|merge(['views-field-' ~ field]) %}
             {% endfor %}
           {% endif %}
-          <td{{ column.attributes.addClass(column_classes) }}>
+          <td{{ column.attributes.addClass(column_classes, 'table__cell') }}>
             {%- if column.wrapper_element -%}
               <{{ column.wrapper_element }}>
               {% for content in column.content %}

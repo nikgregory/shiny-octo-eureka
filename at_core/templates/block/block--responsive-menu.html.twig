@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for a responisve menu block.
+ * Theme override to display a block.
  *
  * Available variables:
  * - plugin_id: The ID of the block implementation.
@@ -9,68 +9,47 @@
  * - configuration: A list of the block's configuration values.
  *   - label: The configured label for the block.
  *   - label_display: The display settings for the label.
- *   - module: The module that provided this block plugin.
- *   - cache: The cache settings.
+ *   - provider: The module or other provider that provided this block plugin.
  *   - Block plugin specific settings will also be stored here.
- * - block - The full block entity.
- *   - label_hidden: The hidden block title value if the block was
- *     configured to hide the title ('label' is empty in this case).
- *   - module: The module that generated the block.
- *   - delta: An ID for the block, unique within each module.
- *   - region: The block region embedding the current block.
  * - content: The content of this block.
- * - attributes: HTML attributes for the containing element.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
  *   - id: A valid HTML ID and guaranteed unique.
- * - title_attributes: HTML attributes for the title element.
- * - content_attributes: HTML attributes for the content element.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
  * - title_prefix: Additional output populated by modules, intended to be
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
  *
- * Headings should be used on navigation menus that consistently appear on
- * multiple pages. When this menu block's label is configured to not be
- * displayed, it is automatically made invisible using the 'visually-hidden' CSS
- * class, which still keeps it visible for screen-readers and assistive
- * technology. Headings allow screen-reader and keyboard only users to navigate
- * to or skip the links.
- * See http://juicystudio.com/article/screen-readers-display-none.php and
- * http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
- *
- * @ingroup themeable
+ * @see template_preprocess_block()
  */
 #}
-{%
+{%-
   set classes = [
     'rm-block',
     'rm-config-provider--' ~ configuration.provider|clean_class,
     'rm-plugin-id--' ~ plugin_id|clean_class,
     'js-hide',
   ]
-%}
-{% set heading_id = attributes.id ~ '-menu'|clean_id %}
-{% set config_label = configuration.label ? configuration.label : 'Main menu'|t %}
-{% set rm_label_class = configuration.label ? 'rm-toggle__label' : 'visually-hidden' %}
+-%}
+{%- set heading_id = attributes.id ~ '-menu'|clean_id -%}
+{%- set config_label = configuration.label ? configuration.label : 'Main menu'|t -%}
+{%- set rm_label_class = configuration.label ? 'rm-toggle__label' : 'visually-hidden' -%}
 <nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
   <div class="rm-block__inner">
-
     <div{{ title_attributes.addClass('rm-toggle')|without('id') }}>
       <button href="#rm-content" class="rm-toggle__link un-button" role='button' aria-controls="rm-content" aria-expanded="false">
         {# SVG hamburger icon. #}
-        <svg class="rm-toggle__icon" viewBox="0 0 1792 1792" preserveAspectRatio="xMinYMid meet">
-          <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/>
-        </svg>
+        <svg class="rm-toggle__icon" viewBox="0 0 1792 1792" preserveAspectRatio="xMinYMid meet"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"/></svg>
         {# Button text, may be visually hidden. #}
-        <span class="{{ rm_label_class }}" id="{{ heading_id }}">{{ config_label }}</span>
+        <span class="{{ rm_label_class }}" id="{{ heading_id }}">{{- config_label -}}</span>
       </button>
     </div>
-
-    {# Menu. #}
-    {% block content %}
+    {%- block content -%}
       <div class="rm-block__content" id="rm-content">
-        {{ content }}
+        {{- content -}}
       </div>
-    {% endblock %}
-
+    {%- endblock -%}
   </div>
 </nav>

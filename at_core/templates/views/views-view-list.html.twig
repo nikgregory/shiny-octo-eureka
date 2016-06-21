@@ -16,21 +16,13 @@
  * @see template_preprocess_views_view_list()
  */
 #}
-{% if attributes -%}
-  <div{{ attributes }}>
-{% endif %}
+<div{{ attributes.addClass('item-list') }}>
   {% if title %}
-    <h3>{{ title }}</h3>
+    <h3 class="item-list__title">{{ title }}</h3>
   {% endif %}
-
-  <{{ list.type }}{{ list.attributes }}>
-
+  <{{ list.type }}{{ list.attributes.addClass('item-list__list') }}>
     {% for row in rows %}
-      <li{{ row.attributes }}>{{ row.content }}</li>
+      <li{{ row.attributes.addClass('item-list__item') }}>{{ row.content }}</li>
     {% endfor %}
-
   </{{ list.type }}>
-
-{% if attributes -%}
-  </div>
-{% endif %}
+</div>

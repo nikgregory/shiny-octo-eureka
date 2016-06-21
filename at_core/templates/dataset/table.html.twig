@@ -39,30 +39,40 @@
  * @see template_preprocess_table()
  */
 #}
-<table{{ attributes }}>
+{% set column_count = 'cols-' ~ header|length %}
+<table{{ attributes.addClass('table', column_count) }}>
   {% if caption %}
-    <caption>{{ caption }}</caption>
+    <caption class="table__caption caption">{{ caption }}</caption>
   {% endif %}
 
   {% for colgroup in colgroups %}
     {% if colgroup.cols %}
-      <colgroup{{ colgroup.attributes }}>
+      <colgroup{{ colgroup.attributes.addClass('table__colgroup') }}>
         {% for col in colgroup.cols %}
-          <col{{ col.attributes }} />
+          <col{{ col.attributes.addClass('table__colgroup__col') }} />
         {% endfor %}
       </colgroup>
     {% else %}
-      <colgroup{{ colgroup.attributes }} />
+      <colgroup{{ colgroup.attributes.addClass('table__colgroup', 'no-cols') }} />
     {% endif %}
   {% endfor %}
 
   {% if header %}
-    <thead>
-      <tr>
+    <thead class="table__header">
+      <tr class="table__row">
         {% for cell in header %}
+          {% if cell.content.generatedLink %}
+            {% set cell_content = null %}
+            {% set is_sortable = 'is-sortable' %}
+          {% else %}
+            {% set cell_content = cell.content|length > 32 ? cell.content|slice(0, 32) : cell.content %}
+          {% endif %}
           {%
             set cell_classes = [
+              'table__cell',
+              ('table__header__cell' ~ (cell_content ?  '--' ~ cell_content))|clean_class,
               cell.active_table_sort ? 'is-active',
+              is_sortable ? is_sortable,
             ]
           %}
           <{{ cell.tag }}{{ cell.attributes.addClass(cell_classes) }}>
@@ -74,16 +84,17 @@
   {% endif %}
 
   {% if rows %}
-    <tbody>
+    <tbody class="table__body">
       {% for row in rows %}
         {%
           set row_classes = [
+            'table__row',
             not no_striping ? cycle(['odd', 'even'], loop.index0),
           ]
         %}
         <tr{{ row.attributes.addClass(row_classes) }}>
           {% for cell in row.cells %}
-            <{{ cell.tag }}{{ cell.attributes }}>
+            <{{ cell.tag }}{{ cell.attributes.addClass('table__cell') }}>
               {{- cell.content -}}
             </{{ cell.tag }}>
           {% endfor %}
@@ -91,18 +102,18 @@
       {% endfor %}
     </tbody>
   {% elseif empty %}
-    <tbody>
-      <tr class="odd">
-        <td colspan="{{ header_columns }}" class="empty message">{{ empty }}</td>
+    <tbody class="table__body table__body--empty">
+      <tr class="table__row odd">
+        <td colspan="{{ header_columns }}" class="table__cell empty message">{{ empty }}</td>
       </tr>
     </tbody>
   {% endif %}
   {% if footer %}
-    <tfoot>
+    <tfoot class="table__foot">
       {% for row in footer %}
-        <tr{{ row.attributes }}>
+        <tr{{ row.attributes.addClass('table__row') }}>
           {% for cell in row.cells %}
-            <{{ cell.tag }}{{ cell.attributes }}>
+            <{{ cell.tag }}{{ cell.attributes.addClass('table__cell') }}>
               {{- cell.content -}}
             </{{ cell.tag }}>
           {% endfor %}

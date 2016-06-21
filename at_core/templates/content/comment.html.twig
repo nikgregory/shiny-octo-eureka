@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Adaptivetheme implementation for comments.
+ * Theme override for comments.
  *
  * Available variables:
  * - author: Comment author. Can be a link or plain text.
@@ -62,12 +62,9 @@
  * - entity: Entity the comments are attached to.
  *
  * @see template_preprocess_comment()
- * @see at_core_preprocess_comment()
- *
- * @ingroup themeable
  */
 #}
-{%
+{%-
   set classes = [
     'comment',
     'js-comment',
@@ -77,22 +74,24 @@
     title_visibility ? 'has-title',
     'clearfix',
   ]
-%}
+-%}
 <article role="article"{{ attributes.addClass(classes)|without('role') }}>
   <div class="comment__container">
 
-    {% if title %}
+    {%- if title -%}
       {{ title_prefix }}
-      {%
+      {%-
         set title_classes = [
           title_visibility ? 'comment__title' : 'comment__title--visually-hidden',
         ]
-      %}
+      -%}
       <h3{{ title_attributes.addClass(title_classes) }}>
         {{ title }}
-        {% if status != 'published' %}
-            <span class="comment__status comment--unpublished marker marker--warning" aria-label="Status message" role="contentinfo"><span class="visually-hidden">{% trans %}This comment is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}</span>
-        {% endif %}
+        {%- if status != 'published' -%}
+            <span class="comment__status comment--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
+              <span class="visually-hidden">{% trans %}This comment is {% endtrans %}</span>{% trans %}Unpublished{% endtrans -%}
+            </span>
+        {%- endif -%}
         {#
         Hide the "new" indicator by default, let a piece of JavaScript ask
         the server which comments are new for the user. Rendering the final
@@ -101,7 +100,7 @@
         <mark class="comment__new marker marker--success hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
       </h3>
       {{ title_suffix }}
-    {% endif %}
+    {%- endif -%}
 
     <div{{ meta_attributes }}>
       {{ user_picture }}
@@ -117,11 +116,11 @@
         for accessibility. The list is difficult to navigate in a screen
         reader without this information.
       #}
-      {% if parent %}
+      {%- if parent -%}
         <p class="comment__parent visually-hidden">{{ parent }}</p>
-      {% endif %}
+      {%- endif -%}
 
-      {{ content }}
+      {{- content -}}
     </div>
 
   </div>

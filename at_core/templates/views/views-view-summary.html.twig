@@ -18,10 +18,10 @@
  * @see template_preprocess_views_view_summary()
  */
 #}
-<div class="item-list">
-  <ul class="views-summary">
+<div class="item-list item-list--views-summary">
+  <ul class="views-summary item-list__list">
   {% for row in rows %}
-    <li><a href="{{ row.url }}"{{ row.attributes.addClass(row.active ? 'is-active')|without('href') }}>{{ row.link }}</a>
+    <li class="item-list__item"><a href="{{ row.url }}"{{ row.attributes.addClass(row.active ? 'is-active')|without('href') }}>{{ row.link }}</a>
       {% if options.count %}
         ({{ row.count }})
       {% endif %}

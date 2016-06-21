@@ -82,38 +82,38 @@
   <div class="node__container">
 
     <header{{ header_attributes.addClass('node__header') }}>
-      {% if not node.isPublished() %}
+      {%- if not node.isPublished() -%}
         <span class="node__status node--unpublished marker marker--warning" aria-label="Status message" role="contentinfo">
-          <span class="visually-hidden">{% trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans %}
+          <span class="visually-hidden">{%- trans %}This node is {% endtrans %}</span>{% trans %}Unpublished{% endtrans -%}
         </span>
-      {% endif %}
+      {%- endif -%}
 
-      {{ title_prefix }}
-      {% if label %}
-        {% if page %}
-          <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
-        {% else %}
-          <h2{{ title_attributes.addClass('node__title') }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{ label }}</a></h2>
-        {% endif %}
-      {% endif %}
-      {{ title_suffix }}
+      {{- title_prefix -}}
+      {%- if label -%}
+        {%- if page -%}
+          <h1{{ title_attributes.addClass('node__title') }}>{{- label -}}</h1>
+        {%- else -%}
+          <h2{{ title_attributes.addClass('node__title') }}><a href="{{ url }}" class="node__title-link" rel="bookmark">{{- label -}}</a></h2>
+        {%- endif -%}
+      {%- endif -%}
+      {{- title_suffix -}}
 
-      {% if display_submitted %}
+      {%- if display_submitted -%}
         <div{{ meta_attributes }}>
-          {{ author_picture }}
+          {{- author_picture -}}
           <div{{ submitted_attributes }}>
-             <span class="node__author">{{ author_name }}</span>
-             <span class="node__pubdate">{{ date }}</span>
+             <span class="node__author">{{- author_name -}}</span>
+             <span class="node__pubdate">{{- date -}}</span>
           </div>
-          {{ metadata }}
+          {{- metadata -}}
         </div>
-      {% endif %}
+      {%- endif -%}
     </header>
 
     <div{{ content_attributes.addClass('node__content') }}>
-      {{ content|without('comment') }}
+      {{- content|without('comment') -}}
     </div>
 
-  {{ content.comment }}
+  {{- content.comment -}}
 
 </article>

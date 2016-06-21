@@ -12,7 +12,6 @@
 }
 .responsive-table__scroll {
   width: 100%;
-  overflow-x: auto;
 }
 .responsive-table__scroll::-webkit-scrollbar-thumb {
   border-radius: 8px;
