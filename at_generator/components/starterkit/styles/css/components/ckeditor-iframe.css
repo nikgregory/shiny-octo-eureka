@@ -30,7 +30,7 @@ textarea {
   background-image: none !important;
   visibility: visible;
   opacity: 1;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
 }
 
 ul,

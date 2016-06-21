@@ -490,7 +490,7 @@ input[type="week"] {
   box-sizing: border-box;
   border-radius: 2px;
   border: 1px solid;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
 }
 textarea:focus,
 select:focus,
@@ -617,6 +617,28 @@ details {
   display: block;
   margin: 16px 0;
   margin: 1rem 0;
+  max-height: 50px;
+  max-height: 3.125rem;
+  overflow-y: hidden;
+  transition: all 450ms ease-in-out;
+}
+details:focus {
+  outline: none !important;
+}
+details .details-wrapper {
+  transition: all 650ms ease-in-out;
+}
+.js details:not([open]) .details-wrapper {
+  display: block;
+  visibility: hidden;
+  opacity: 0.1;
+}
+.js details[open] {
+  max-height: 2000px;
+}
+.js details[open] .details-wrapper {
+  opacity: 1;
+  visibility: visible;
 }
 
 summary {
@@ -1720,7 +1742,7 @@ ul.inline li ol {
 }
 
 .l-r {
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
 }
 .l-r:before, .l-r:after {
   content: " ";
@@ -1799,7 +1821,7 @@ ul.inline li ol {
 .pager__link {
   display: inline-block;
   border-radius: 2px;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
   padding: 2px 7px 0;
   padding: 0.125rem 0.4375rem 0;
   border: 0;

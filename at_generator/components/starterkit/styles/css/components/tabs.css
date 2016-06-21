@@ -61,7 +61,7 @@
   width: auto;
   display: block;
   position: relative;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
 }
 .tabs .is-vertical ul.tabs--primary li a:link, .tabs .is-vertical ul.tabs--primary li a:visited {
   color: #fcfcfc;
@@ -93,7 +93,7 @@
   color: #363636;
   border-bottom: 1px solid transparent;
   border-left: 3px solid;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
   padding: 11px 16px 7px 14px;
   padding: 0.6875rem 1rem 0.4375rem 0.875rem;
 }
@@ -180,7 +180,7 @@
   line-height: 1;
   color: #363636;
   border-bottom: 1px solid #d9d9d9;
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
   padding: 16px 7px 10px;
   padding: 1rem 0.4375rem 0.625rem;
   margin-right: 16px;
@@ -234,7 +234,7 @@
     width: auto;
     display: block;
     position: relative;
-    transition: all, 0.2s, ease-in-out;
+    transition: all, 225ms, ease-in-out;
   }
   .no-js .tabs ul.tabs--primary li a:link, .no-js .tabs ul.tabs--primary li a:visited {
     color: #fcfcfc;
@@ -266,7 +266,7 @@
     color: #363636;
     border-bottom: 1px solid transparent;
     border-left: 3px solid;
-    transition: all, 0.2s, ease-in-out;
+    transition: all, 225ms, ease-in-out;
     padding: 11px 16px 7px 14px;
     padding: 0.6875rem 1rem 0.4375rem 0.875rem;
   }
@@ -355,7 +355,7 @@
     line-height: 1;
     color: #363636;
     border-bottom: 1px solid #d9d9d9;
-    transition: all, 0.2s, ease-in-out;
+    transition: all, 225ms, ease-in-out;
     padding: 16px 7px 10px;
     padding: 1rem 0.4375rem 0.625rem;
     margin-right: 16px;

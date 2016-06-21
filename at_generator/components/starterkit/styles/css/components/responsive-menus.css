@@ -98,7 +98,7 @@
   border-top: 0;
 }
 .rm-block__content .menu__link {
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
   font-weight: 300;
   margin: 0;
   border: 0;

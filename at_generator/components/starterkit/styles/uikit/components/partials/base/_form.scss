@@ -173,6 +173,36 @@ details {
   border-radius: $border-radius;
   display: block; // Firefox seems to need this?
   @include output-rhythm(margin, $medium 0);
+  @include output-rhythm(max-height, 50px);
+  overflow-y: hidden;
+  transition: all 450ms ease-in-out;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  .details-wrapper {
+    transition: all 650ms ease-in-out;
+  }
+
+  .js & {
+    &:not([open]) {
+      .details-wrapper {
+        display: block;
+        visibility: hidden;
+        opacity: 0.1;
+      }
+    }
+
+    &[open] {
+      max-height: 2000px;
+
+      .details-wrapper {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
 }
 
 

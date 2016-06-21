@@ -27,7 +27,7 @@
   font: 0/0 a;
 }
 .ms-meganav .rm-block__content {
-  transition: all, 0.2s, ease-in-out;
+  transition: all, 225ms, ease-in-out;
 }
 .ms-meganav .rm-block__content .menu {
   padding: 0;
