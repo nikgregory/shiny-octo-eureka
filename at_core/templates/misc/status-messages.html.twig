@@ -23,38 +23,33 @@
  * @see template_preprocess_status_messages()
  */
 #}
+{% block messages %}
 <div data-drupal-messages>
-  {% for type, messages in message_list %}
-    {%
-    set classes = [
-    'messages',
-    'messages--' ~ type,
-    ]
-    %}
-    <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
-
+  {%- for type, messages in message_list -%}
+    {%- set classes = ['messages', 'messages--' ~ type] -%}
+    <div role="contentinfo" aria-label="{{- status_headings[type] -}}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
       <div class="messages__container"{% if type == 'error' %} role="alert"{% endif %}>
 
-        {% if status_headings[type] %}
-          <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
-        {% endif %}
+        {%- if status_headings[type] -%}
+          <h2 class="visually-hidden">{{- status_headings[type] -}}</h2>
+        {%- endif -%}
 
-        <span class="icon icon-{{ type }}" aria-hidden="true"></span>
+        <span class="icon icon-{{- type -}}" aria-hidden="true"></span>
 
-        {% if messages|length > 1 %}
+        {%- if messages|length > 1 -%}
           <ul class="messages__list">
-            {% for message in messages %}
-              <li class="messages__item">{{ message }}</li>
-            {% endfor %}
+            {%- for message in messages -%}
+              <li class="messages__item">{{- message -}}</li>
+            {%- endfor -%}
           </ul>
-        {% else %}
-          <div class="messages__list">{{ messages|first }}</div>
-        {% endif %}
+        {%- else -%}
+          <div class="messages__list">{{- messages|first -}}</div>
+        {%- endif -%}
 
       </div>
-
     </div>
     {# Remove type specific classes. #}
-    {{ attributes.removeClass(classes) }}
-  {% endfor %}
+    {%- set attributes = attributes.removeClass(classes) -%}
+  {%- endfor -%}
 </div>
+{% endblock messages %}
