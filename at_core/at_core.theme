@@ -13,7 +13,6 @@ use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
 use Drupal\at_core\Layout\LayoutLoad;
 
-
 /**
  * Alter the element type information returned from modules.
  *
