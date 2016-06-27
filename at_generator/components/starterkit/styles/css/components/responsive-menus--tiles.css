@@ -36,11 +36,11 @@
   margin-right: -100%;
   clear: none;
 }
-.ms-tiles .rm-block__content .menu-level-1 .menu__link {
+.ms-tiles .rm-block__content .menu-level-1 a {
   padding: 7px 16px;
   padding: 0.4375rem 1rem;
 }
-.ms-tiles .rm-block__content .menu__item--expanded > .menu__link:after {
+.ms-tiles .rm-block__content .menu__item--expanded > a:after {
   content: none;
 }
 
@@ -52,4 +52,5 @@
   margin: 7px 0;
   margin: 0.4375rem 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--tiles.css.map */

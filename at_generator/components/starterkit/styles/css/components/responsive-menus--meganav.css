@@ -32,11 +32,11 @@
 .ms-meganav .rm-block__content .menu {
   padding: 0;
 }
-.ms-meganav .rm-block__content .menu .menu__link {
+.ms-meganav .rm-block__content .menu a {
   padding: 7px 16px;
   padding: 0.4375rem 1rem;
 }
-.ms-meganav .rm-block__content .menu .menu__link:before, .ms-meganav .rm-block__content .menu .menu__link:after {
+.ms-meganav .rm-block__content .menu a:before, .ms-meganav .rm-block__content .menu a:after {
   content: "";
   display: none;
 }
@@ -65,10 +65,10 @@
 .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item:last-child {
   border-bottom: none;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item .menu__link {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item a {
   float: left;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item > .menu__link {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item > span > a {
   width: 12em;
 }
 .ms-meganav.rm-is-open .rm-block__content .menu-level-2 {
@@ -83,8 +83,9 @@
 .ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item {
   float: left;
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu .menu__link,
-.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item .menu__link {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu a,
+.ms-meganav.rm-is-open .rm-block__content .menu-level-2 .menu__item a {
   width: auto;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--meganav.css.map */

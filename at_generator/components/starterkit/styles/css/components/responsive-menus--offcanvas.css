@@ -21,11 +21,26 @@
           transform: translate3d(-15em, 0, 0);
   transition: all, 225ms, ease-in-out;
 }
-.ms-offcanvas .rm-block__content .menu__link {
+.ms-offcanvas .rm-block__content a {
+  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   padding: 7px 18px;
   padding: 0.4375rem 1.125rem;
-  margin-bottom: 2px;
-  margin-bottom: 0.125rem;
+}
+.ms-offcanvas .rm-block__content a:after {
+  content: none;
+  display: none;
+}
+.ms-offcanvas .rm-block__content .is-child {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: all, 225ms, ease-in-out;
+}
+.ms-offcanvas .rm-block__content .is-child.is-open--child {
+  position: relative;
+  visibility: visible;
+  opacity: 1;
 }
 .ms-offcanvas.rm-is-open > .page {
   position: relative;
@@ -43,4 +58,5 @@
   position: absolute;
   top: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--offcanvas.css.map */

@@ -220,11 +220,9 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-
-      // Load Responsive menu dependencies.
-      $page['#attached']['library'][] = "$theme/responsive_menus";
-
+      
       $responsivemenu_settings = array();
+      $load_accordion = FALSE;
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
@@ -238,11 +236,25 @@ function at_core_page_attachments_alter(array &$page) {
           // Load the library for each selected menu style.
           $page['#attached']['library'][] = "$theme/responsive_menus_" . $config['responsive_menu_' . $style . '_style'];
 
-          // Set drupalSettings
+          // Accordion bools.
+          $responsivemenu_settings['acd']['acd_' . $style] = FALSE;
+          if (in_array($config['responsive_menu_' . $style . '_style'], ['vertical', 'slidedown', 'offcanvas', 'overlay'])) {
+            $load_accordion = TRUE;
+            $responsivemenu_settings['acd']['acd_' . $style] = TRUE;
+          }
+
+          // Set the menu option for each style.
           $responsivemenu_settings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
         }
       }
 
+      // Accordion bools.
+      $responsivemenu_settings['acd']['acd_both'] = FALSE;
+      if ($responsivemenu_settings['acd']['acd_default'] == $responsivemenu_settings['acd']['acd_responsive']) {
+        $responsivemenu_settings['acd']['acd_both'] = TRUE;
+      }
+
+      // Vertical and horizontal positioning.
       if (isset($config['responsive_menu_vertical_position']) && $config['responsive_menu_vertical_position'] !== 'none') {
         $responsivemenu_settings['vertical_position'] = $config['responsive_menu_vertical_position'];
         $page['#attached']['library'][] = 'at_core/at.flex_position';
@@ -251,6 +263,15 @@ function at_core_page_attachments_alter(array &$page) {
         $responsivemenu_settings['horizontal_position'] = $config['responsive_menu_horizontal_position'];
         $page['#attached']['library'][] = 'at_core/at.flex_position';
       }
+
+      // Load Responsive menu dependencies.
+      $page['#attached']['library'][] = "$theme/responsive_menus";
+      $page['#attached']['library'][] = "at_core/at.responsivemenus";
+      if ($load_accordion == TRUE) {
+        $page['#attached']['library'][] = "$theme/responsive_menus_accordion";
+        $page['#attached']['library'][] = "at_core/at.accordion";
+      }
+      $page['#attached']['library'][] = "at_core/at.orientationchangereload";
 
       // Attach JS settings.
       $page['#attached']['drupalSettings'][$theme]['at_responsivemenus'] = $responsivemenu_settings;
@@ -1302,24 +1323,40 @@ function at_core_preprocess_maintenance_page(&$variables) {
   $variables['#attached']['library'][] = $theme . '/maintenance_page';
 }
 
+// Stupid helper for setting classes on menu links.
+function _at_core_menu_link_classes($i) {
+  if (isset($i['url'])) {
+    $attr = $i['url']->getOption('attributes') ?: [];
+    $ac = isset($attr['class']) ? implode($attr['class']) : '';
+    $mlc = array('class' => array('menu__link', $ac));
+    return $i['url']->setOption('attributes', array_merge_recursive($attr, $mlc));
+  }
+}
+
 /**
  * Preprocess variables for menu templates.
  * @param $variables
+ * TODO Remove this bullshit if https://www.drupal.org/node/2755375 ever gets
+ * answered with something reasonable and doable.
  */
 function at_core_preprocess_menu(&$variables) {
-  foreach ($variables['items'] as &$item) {
-    // Menu link classes.
-    $attributes = $item['url']->getOption('attributes') ?: [];
-    $classes = isset($attributes['class']) ? implode($attributes['class']) : '';
-    $menu_link_classes = array('class' => array('menu__link', $classes));
-    $item['url']->setOption('attributes', array_merge_recursive($attributes, $menu_link_classes));
-
-    // Below items need additional effort, the macro is stupid.
-    foreach ($item['below'] as &$below_item) {
-      $below_attributes = $below_item['url']->getOption('attributes') ?: [];
-      $below_classes = isset($below_attributes['class']) ? implode($below_attributes['class']) : '';
-      $menu_link_below_classes = array('class' => array('menu__link', $below_classes));
-      $below_item['url']->setOption('attributes', array_merge_recursive($below_attributes, $menu_link_below_classes));
+  // BC for older sub-themes to four levels.
+  foreach ($variables['items'] as &$i) {
+    _at_core_menu_link_classes($i);
+    if (isset($i['below']) && !empty($i['below'])) {
+      foreach ($i['below'] as &$bi) {
+        _at_core_menu_link_classes($bi);
+        if (isset($bi['below']) && !empty($bi['below'])) {
+          foreach ($bi['below'] as &$bbi) {
+            _at_core_menu_link_classes($bbi);
+            if (isset($bbi['below']) && !empty($bbi['below'])) {
+              foreach ($bbi['below'] as &$bbbi) {
+                _at_core_menu_link_classes($bbbi);
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

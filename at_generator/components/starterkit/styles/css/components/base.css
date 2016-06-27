@@ -2243,6 +2243,30 @@ table tr.error {
   margin: 0;
   list-style: none;
 }
+.menu a {
+  display: block;
+  padding: 4px 0;
+  padding: 0.25rem 0;
+}
+.menu a:hover, .menu a:focus {
+  text-decoration: none;
+}
+.menu a:before, .menu a:after {
+  display: none;
+}
+.fa-loaded .menu a:before, .fa-loaded .menu a:after {
+  display: inline-block;
+}
+.menu a.button {
+  padding-left: 16px;
+  padding-left: 1rem;
+  padding-right: 16px;
+  padding-right: 1rem;
+}
+.menu a.button:after {
+  content: '';
+  display: none;
+}
 .menu .menu {
   padding-left: 16px;
   padding-left: 1rem;
@@ -2250,31 +2274,6 @@ table tr.error {
 
 .menu__item {
   text-align: left;
-}
-
-.menu__link {
-  display: block;
-  padding: 4px 0;
-  padding: 0.25rem 0;
-}
-.menu__link:hover, .menu__link:focus {
-  text-decoration: none;
-}
-.menu__link:before, .menu__link:after {
-  display: none;
-}
-.fa-loaded .menu__link:before, .fa-loaded .menu__link:after {
-  display: inline-block;
-}
-.menu__link.button {
-  padding-left: 16px;
-  padding-left: 1rem;
-  padding-right: 16px;
-  padding-right: 1rem;
-}
-.menu__link.button:after {
-  content: '';
-  display: none;
 }
 
 /**
@@ -2299,7 +2298,8 @@ table tr.error {
   margin-right: 0;
   margin-left: 16px;
 }
-.pr-leaderboard .menu__link:after {
+.pr-leaderboard .menu a:after {
+  content: none;
   display: none;
 }
 
@@ -2324,7 +2324,8 @@ table tr.error {
   margin-right: 0;
   margin-left: 16px;
 }
-.pr-footer__footer .menu__link:after {
+.pr-footer__footer .menu a:after {
+  content: none;
   display: none;
 }
 

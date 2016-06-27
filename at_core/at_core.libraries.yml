@@ -19,6 +19,13 @@ at.windowsize:
     - core/drupal
     - core/drupalSettings
 
+# Orientation Change Reload
+at.orientationchangereload:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.orientationChangeReload.min.js: { minified: true }
+    #scripts/at.orientationChangeReload.js: {}
+
 # matchHeight
 at.matchheight:
   remote: https://raw.githubusercontent.com/liabru/jquery-match-height
@@ -143,6 +150,15 @@ at.layout:
     - core/jquery.once
   weight: -1000
 
+# Double tap to go
+at.doubletaptogo:
+  version: "8.x-1.0"
+  js:
+    scripts/min/doubletaptogo.min.js: { minified: true }
+    #scripts/doubletaptogo.js: {}
+  dependencies:
+    - core/jquery
+
 # Responsive Menus
 at.responsivemenus:
   version: "8.x-1.0"
@@ -154,8 +170,9 @@ at.responsivemenus:
     - core/drupal
     - core/drupalSettings
     - core/matchmedia
-    - at_core/at.enquire
     - core/modernizr
+    - at_core/at.enquire
+    - at_core/at.doubletaptogo
 
 # Responsive Tables
 at.responsivetables:
@@ -202,6 +219,7 @@ at.slideshow_settings:
   version: "8.x-1.0"
   js:
     scripts/min/at.flexsliderSettings.min.js: { minified: true }
+    #scripts/at.flexsliderSettings.js: {}
   dependencies:
     - at_core/at.slideshow
 
@@ -220,6 +238,7 @@ at.responsivevideo:
   version: "8.x-1.0"
   js:
     scripts/at.responsiveVideo.min.js: { minified: true }
+    #scripts/at.responsiveVideo.js: {}
   dependencies:
     - core/jquery
     - core/drupal
@@ -299,6 +318,7 @@ at.appearance_settings:
       styles/css/at.appearance.css: {}
   js:
     scripts/min/at.appearance.min.js: { minified: true }
+    #scripts/at.appearance.js: {}
   dependencies:
     - core/jquery
     - core/drupal

@@ -126,8 +126,7 @@ hr {
   color: $page-navbar-color;
   @include page-row-background-color($page-navbar-background-color, $page-row-fullwidth);
 
-  a,
-  .menu__link {
+  .menu a {
     color: inherit;
   }
 
@@ -196,8 +195,7 @@ hr {
   color: $page-footer-color;
   @include page-row-background-color($page-footer-background-color, $page-row-fullwidth);
 
-  a,
-  .menu__link {
+  .menu a {
     color: inherit;
 
     &.active,
@@ -246,8 +244,7 @@ hr {
 .block--system-branding-block {}
 
 .site-branding-text {
-  a {
-  }
+  a {}
 }
 
 .site-logo {}
@@ -271,10 +268,26 @@ hr {
  ============================================================================ */
 
 .menu {
-  &__link {}
+  a {
+    color: $menu-color;
+    border-color: $border-color;
+    //background-color: $menu-background-color;
+
+    &:hover,
+    &:focus {
+      color: $menu-hover-color;
+      //background-color: $menu-background-hover-color;
+    }
+
+    &.active {
+      color: $menu-active-color;
+      //background-color: $menu-background-active-color;
+    }
+  }
+
   // Nested menus.
   .menu {
-    &__link {
+    a {
       &:hover,
       &:focus {}
       &.active-trail {}
@@ -283,7 +296,7 @@ hr {
 }
 
 .menu__item {
-  &--active-trail > .menu__link {
+  &--active-trail > a {
     //color: $menu-active-color;
     //background-color: $menu-background-active-color;
   }
@@ -292,32 +305,15 @@ hr {
   @if $menu-arrows == true {
     &--collapsed,
     &--expanded {
-      > .menu__link:after {
+      > a:after {
         //color: $text-color;
       }
     }
   }
 
   // Add the border top to the first item only.
-  &:first-child .menu__link {
+  &:first-child a {
     border-color: $border-color;
-  }
-}
-
-.menu__link {
-  color: $menu-color;
-  border-color: $border-color;
-  //background-color: $menu-background-color;
-
-  &:hover,
-  &:focus {
-    color: $menu-hover-color;
-    //background-color: $menu-background-hover-color;
-  }
-
-  &.active {
-    color: $menu-active-color;
-    //background-color: $menu-background-active-color;
   }
 }
 
@@ -393,7 +389,7 @@ hr {
       }
     }
 
-    &__link {
+    a {
       color: $resp-menu-color;
       background-color: $resp-menu-background-color;
 
@@ -447,11 +443,12 @@ hr {
 }
 
 
+.ms-vertical,
 .ms-slidedown {
   .rm-block__content {
     .menu {
-      &__link,
-      &__link.active[href="/"] {
+      a,
+      a.active[href="/"] {
         color: $resp-menu-hover-color;
         background-color: $resp-menu-hover-background-color;
       }
@@ -462,8 +459,8 @@ hr {
   .pr-header__header-second {
     .rm-block__content {
       .menu {
-        &__link,
-        &__link.active[href="/"] {
+        a,
+        a.active[href="/"] {
           //color: $resp-menu-hover-color;
           background-color: rgba(0, 0, 0, 0.05);
         }
@@ -478,6 +475,10 @@ hr {
     opacity: .001;
     background-color: $body-background-color;
     color: $page-background-color;
+
+    .menu a {
+      background-color: rgba(255, 255, 255, 0.095);
+    }
   }
 }
 
@@ -501,9 +502,35 @@ hr {
 
         &:last-child {}
 
-        > .menu__link {
+        > span > a {
           background-color: rgba(255, 255, 255, 0.3);
         }
+      }
+    }
+  }
+}
+
+
+.ms-accordion {
+  .rm-accordion-trigger {
+    background-color: rgba(255, 255, 255, 0.095);
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .rm-accordion-trigger__icon {
+    background-color: transparent !important;
+    fill: white;
+  }
+
+  .rm-block__content & {
+    a {
+      &:hover,
+      &:focus {
+        background-color: rgba(255, 255, 255, 0.2);
       }
     }
   }

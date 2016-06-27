@@ -21,22 +21,26 @@
           def  = rm['default'],
           resp = rm['responsive'],
           tl   = '.rm-block .rm-toggle__link',
-          exp  = $(tl).attr("aria-expanded") == "false",
           vc   = rm['vertical_position'] || null,
-          hp   = rm['horizontal_position'] || null;
+          hp   = rm['horizontal_position'] || null,
+          acd_def = rm['acd']['acd_default'],
+          acd_resp = rm['acd']['acd_responsive'],
+          acd_both = rm['acd']['acd_both'];
 
-      // Toggle handler.
+      // Hamburger toggles.
       function toggleClick(e) {
         e.preventDefault();
         e.stopPropagation();
-
         // The toggle class is on <body> because we must account for menu types
         // that style block parent elements, e.g. off-canvas will transform the
         // .page element. Toggle aria attributes for accessibility on block
         // elements.
         $(document.body).toggleClass('rm-is-open');
-        $(tl).attr("aria-expanded", exp ? "true" : "false");
-
+        if ($(this).attr('aria-expanded') == 'true') {
+          $(this).attr('aria-expanded', 'false');
+        } else if ($(this).attr('aria-expanded') == 'false') {
+          $(this).attr('aria-expanded', 'true');
+        }
         $(document).one('click', function(e) {
           if($('.rm-block').has(e.target).length === 0){
             $(document.body).removeClass('rm-is-open');
@@ -44,44 +48,129 @@
           }
         });
       }
-
-      // Toggle.
       $(tl, context).on('click', toggleClick);
+
+      // Accordion toggles.
+      function accordionClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).toggleClass('is-open--parent');
+        if ($(this).attr('aria-expanded') == 'true') {
+          $(this).attr('aria-expanded', 'false');
+        } else if ($(this).attr('aria-expanded') == 'false') {
+          $(this).attr('aria-expanded', 'true');
+        }
+        $(this).parent().next('.is-child').toggleClass('is-open--child');
+      }
+
+      // Copy and prepend buttons to parent item links.
+      function copyButtons(p) {
+        var button = $('#rm-accordion-trigger').html();
+        $(p).each(function() {
+          // Avoid adding buttons twice if enquire fires twice.
+          if($(this).next('.rm-accordion-trigger').length == 0) {
+            $(this).after(button);
+          }
+          // Debug buttons added twice (enquire fires twice for unknown reason).
+          // if($(this).next('.rm-accordion-trigger').length == 0) {
+          //   console.log('trigger_does_not_exist');
+          // }
+          // if($(this).next('.rm-accordion-trigger').length !== 0) {
+          //   console.log('trigger_does_exist');
+          // }
+          var mlid = $(this).parent().parent().attr('id');
+          $(this).next().attr('aria-controls', mlid + '__child-menu');
+          $(this).parent().next('.is-child').attr('id', mlid + '__child-menu');
+        });
+      }
 
       // Enquire is a fancy wrapper for matchMedia.
       enquire
       .register(rm['bp'], {
-        // Setup fires strait away.
+        // Setup fires strait away unless deferred.
         setup: function() {
           $(document.body).addClass(def);
           $('.rm-block').parent('.l-r').addClass('rm-region').parent('.l-rw').addClass('rm-row');
+
+          if (def == 'ms-dropmenu') {
+            $('.rm-block__content li:has(ul)').doubleTapToGo();
+          }
+
+          if (acd_def == true) {
+            $('.rm-block .menu-level-1').addClass('ms-accordion');
+            $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
+            $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+          }
         },
         // The resp menu system only uses one breakpoint, if it matches this
-        // fires strait after setup.
+        // fires strait after setup. By default resp is a "desktop view".
         match: function() {
-          if(resp !== 'ms-none') {
-            if(resp !== def) {
+          if (resp !== 'ms-none') {
+            if (resp !== def) {
               $(document.body).removeClass(def).addClass(resp);
-              if(vc) {
-                $('.' + resp + ' .rm-block').atFlexCenter({ verticalPosition: vc, horizontalPosition: hp, parentSelector: '.rm-row' });
+
+              if (acd_resp == true) {
+                if (acd_both == false) {
+                  $('.rm-block .menu-level-1').addClass('ms-accordion');
+                  $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
+                  $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+                }
+              } else {
+                $('.ms-accordion .rm-accordion-trigger').remove();
+                $('.rm-block .menu-level-1').removeClass('ms-accordion');
+                $('.rm-block .menu').removeClass('is-open--child');
               }
-              else if(hp) {
-                $('.' + resp + ' .rm-block').atFlexCenter({ horizontalPosition: hp, parentSelector: '.rm-row' });
+
+              if (resp == 'ms-dropmenu') {
+                $('.rm-block__content li:has(ul)').doubleTapToGo();
+              } else {
+                $('.rm-block__content li:has(ul)').doubleTapToGo('unbind');
+              }
+
+              if (vc) {
+                $('.' + resp + ' .rm-block').atFlexCenter({
+                  verticalPosition: vc,
+                  horizontalPosition: hp,
+                  parentSelector: '.rm-row'
+                });
+              } else if (hp) {
+                $('.' + resp + ' .rm-block').atFlexCenter({
+                  horizontalPosition: hp,
+                  parentSelector: '.rm-row'
+                });
               }
             }
           }
         },
-        // Unmatch fires the first time the media query is unmatched.
+        // unmatch fires the first time the media query is unmatched.
         unmatch : function() {
           $(document.body).addClass(def);
-          if(vc) {
+
+          if (acd_def == true) {
+            if (acd_both == false) {
+              $('.rm-block .menu-level-1').addClass('ms-accordion');
+              $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
+              $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+            }
+          } else {
+            $('.ms-accordion .rm-accordion-trigger').remove();
+            $('.rm-block .menu-level-1').removeClass('ms-accordion');
+            $('.rm-block .menu').removeClass('is-open--child');
+          }
+
+          if (def == 'ms-dropmenu') {
+            $('.rm-block__content li:has(ul)').doubleTapToGo();
+          } else {
+            $('.rm-block__content li:has(ul)').doubleTapToGo('unbind');
+          }
+
+          if (vc) {
             $('.rm-region').removeAttr('style');
             $('.' + resp + ' .rm-block').removeClass('is-vertical-' + vc).removeClass('is-horizontal-' + hp).removeAttr('style');
-          }
-          else if(hp) {
+          } else if (hp) {
             $('.' + resp + ' .rm-block').removeClass('is-horizontal-' + hp).removeAttr('style');
           }
-          if(resp !== def) {
+          if (resp !== def) {
             $(document.body).removeClass(resp);
           }
         }

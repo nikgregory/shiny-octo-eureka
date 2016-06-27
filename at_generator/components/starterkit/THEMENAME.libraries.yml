@@ -60,8 +60,13 @@ responsive_menus:
   css:
     component:
       styles/css/components/responsive-menus.css: {}
-  dependencies:
-    - at_core/at.responsivemenus
+
+# Responsive Menu Accordion
+responsive_menus_accordion:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/responsive-menus--accordion.css: {}
 
 # Responsive Menu Tiles
 responsive_menus_tiles:
@@ -111,6 +116,13 @@ responsive_menus_horizontal:
   css:
     component:
       styles/css/components/responsive-menus--horizontal.css: {}
+
+# Responsive Menu Vertical
+responsive_menus_vertical:
+  version: 8.x-1.0
+  css:
+    component:
+      styles/css/components/responsive-menus--vertical.css: {}
 
 # Responsive Tables
 responsive_tables:

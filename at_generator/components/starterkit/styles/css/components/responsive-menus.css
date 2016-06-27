@@ -85,6 +85,7 @@
 }
 .rm-block__content .menu > .menu__item {
   z-index: 490;
+  position: relative;
 }
 .rm-block__content__item {
   position: relative;
@@ -94,20 +95,20 @@
   line-height: 21px;
   line-height: 1.3125rem;
 }
-.rm-block__content__item:first-child .menu__link {
+.rm-block__content__item:first-child a {
   border-top: 0;
 }
-.rm-block__content .menu__link {
+.rm-block__content a {
   transition: all, 225ms, ease-in-out;
   font-weight: 300;
   margin: 0;
   border: 0;
 }
-.rm-block__content .menu__link:hover, .rm-block__content .menu__link:focus {
+.rm-block__content a:hover, .rm-block__content a:focus {
   text-decoration: none;
 }
 
-.no-js .rm-block .menu__link {
+.no-js .rm-block a {
   padding: 7px;
   padding: 0.4375rem;
   margin: 1px 0;
@@ -119,4 +120,5 @@
   margin: 0;
   padding: 0;
 }
+
 /*# sourceMappingURL=maps/responsive-menus.css.map */

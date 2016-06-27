@@ -50,12 +50,12 @@
           }
         }
 
-        .menu__link {
+        a {
           @include output-rhythm(padding, $xx-small $medium);
         }
       }
 
-      .menu__item--expanded > .menu__link:after {
+      .menu__item--expanded > a:after {
         content: none;
       }
     }

@@ -84,8 +84,7 @@ hr {
 .pr-navbar .regions {
   background: inherit;
 }
-.pr-navbar a,
-.pr-navbar .menu__link {
+.pr-navbar .menu a {
   color: inherit;
 }
 
@@ -112,14 +111,10 @@ hr {
 .pr-footer .regions {
   background: inherit;
 }
-.pr-footer a,
-.pr-footer .menu__link {
+.pr-footer .menu a {
   color: inherit;
 }
-.pr-footer a.active, .pr-footer a:hover, .pr-footer a:focus,
-.pr-footer .menu__link.active,
-.pr-footer .menu__link:hover,
-.pr-footer .menu__link:focus {
+.pr-footer .menu a.active, .pr-footer .menu a:hover, .pr-footer .menu a:focus {
   color: inherit;
 }
 
@@ -156,19 +151,19 @@ hr {
  *  - for the drop menu and other responsive menus see the mixins and the
  *    _navbar.scss partial.
  ============================================================================ */
-.menu__item:first-child .menu__link {
+.menu a {
+  color: #0066cc;
   border-color: #cccccc;
+}
+.menu a:hover, .menu a:focus {
+  color: #0066cc;
+}
+.menu a.active {
+  color: #0066cc;
 }
 
-.menu__link {
-  color: #0066cc;
+.menu__item:first-child a {
   border-color: #cccccc;
-}
-.menu__link:hover, .menu__link:focus {
-  color: #0066cc;
-}
-.menu__link.active {
-  color: #0066cc;
 }
 
 /**
@@ -221,38 +216,44 @@ hr {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.095);
 }
-.rm-block__content .menu__link {
+.rm-block__content .menu a {
   color: inherit;
   background-color: inherit;
 }
-.rm-block__content .menu__link:after, .rm-block__content .menu__link:before {
+.rm-block__content .menu a:after, .rm-block__content .menu a:before {
   color: inherit !important;
 }
-.rm-block__content .menu__link:active {
+.rm-block__content .menu a:active {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
   opacity: 0.9;
 }
-.rm-block__content .menu__link:hover, .rm-block__content .menu__link:focus {
+.rm-block__content .menu a:hover, .rm-block__content .menu a:focus {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.095);
 }
-.rm-block__content .menu__link.active {
+.rm-block__content .menu a.active {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.095);
 }
-.rm-block__content .menu__link.active[href="/"] {
+.rm-block__content .menu a.active[href="/"] {
   background-color: transparent;
 }
-.rm-block__content .menu__link.active[href="/"]:hover, .rm-block__content .menu__link.active[href="/"]:focus {
+.rm-block__content .menu a.active[href="/"]:hover, .rm-block__content .menu a.active[href="/"]:focus {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.095);
 }
 
-.ms-slidedown .rm-block__content .menu__link, .ms-slidedown .rm-block__content .menu__link.active[href="/"] {
+.ms-vertical .rm-block__content .menu a,
+.ms-vertical .rm-block__content .menu a.active[href="/"],
+.ms-slidedown .rm-block__content .menu a,
+.ms-slidedown .rm-block__content .menu a.active[href="/"] {
   color: inherit;
   background-color: rgba(255, 255, 255, 0.095);
 }
-.ms-slidedown .pr-header__header-second .rm-block__content .menu__link, .ms-slidedown .pr-header__header-second .rm-block__content .menu__link.active[href="/"] {
+.ms-vertical .pr-header__header-second .rm-block__content .menu a,
+.ms-vertical .pr-header__header-second .rm-block__content .menu a.active[href="/"],
+.ms-slidedown .pr-header__header-second .rm-block__content .menu a,
+.ms-slidedown .pr-header__header-second .rm-block__content .menu a.active[href="/"] {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -260,6 +261,9 @@ hr {
   opacity: .001;
   background-color: #333333;
   color: #f7f7f7;
+}
+.ms-offcanvas .rm-block__content .menu a {
+  background-color: rgba(255, 255, 255, 0.095);
 }
 
 .ms-tiles .rm-block__content .menu-level-1 > .menu__item {
@@ -269,8 +273,22 @@ hr {
 .ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
-.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item > .menu__link {
+.ms-meganav.rm-is-open .rm-block__content .menu-level-1 > .menu__item > span > a {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ms-accordion .rm-accordion-trigger {
+  background-color: rgba(255, 255, 255, 0.095);
+}
+.ms-accordion .rm-accordion-trigger:hover, .ms-accordion .rm-accordion-trigger:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.ms-accordion .rm-accordion-trigger__icon {
+  background-color: transparent !important;
+  fill: white;
+}
+.rm-block__content .ms-accordion a:hover, .rm-block__content .ms-accordion a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /**
@@ -981,4 +999,5 @@ input.cke_dialog_ui_input_password {
   color: #363636 !important;
   border-color: #eeeeee !important;
 }
+
 /*# sourceMappingURL=maps/color.css.map */

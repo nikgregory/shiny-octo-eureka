@@ -35,24 +35,26 @@
       transform: $transform_block;
       transition: $global-transition;
 
-      .menu__link {
+      a {
+        @include output-rhythm(margin-bottom, 4px);
         @include output-rhythm(padding, $xx-small $large);
-        @include output-rhythm(margin-bottom, 2px);
 
-        @if $arrows == true {
-          &:after {
-            font-family: $icon-font;
-            padding: 0 1px;
-            text-align: $flow-to;
-            position: absolute;
-            @include output-rhythm($flow-to, $medium);
-          }
+        &:after {
+          content: none;
+          display: none;
         }
       }
 
-      @if $arrows == true {
-        .menu__item--expanded > .menu__link:after {
-          content: $menu-arrow-down;
+      .is-child {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: $global-transition;
+
+        &.is-open--child {
+          position: relative;
+          visibility: visible;
+          opacity: 1;
         }
       }
     }

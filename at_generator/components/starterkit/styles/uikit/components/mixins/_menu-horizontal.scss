@@ -18,17 +18,17 @@
       @include list-horizontal($flow-from, $margin: (t: 0, r: 0, b: 0, l: 0), $list-item-selector: '.menu__item');
 
       .menu__item {
-        &__link:after {
+        a:after {
           content: '';
           display: none;
         }
 
         @if $arrows == true {
-          &.menu__item--expanded > .menu__link:after {
+          &.menu__item--expanded > span > a:after {
             content: $menu-arrow-down;
           }
 
-          &.menu__item--collapsed > .menu__link:after {
+          &.menu__item--collapsed > span > a:after {
             content: '';
           }
         }

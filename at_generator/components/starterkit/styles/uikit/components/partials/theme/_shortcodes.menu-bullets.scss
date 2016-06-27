@@ -13,18 +13,18 @@
         @include output-rhythm(width, $medium);
       }
 
-      &.menu__item > .menu__link:after {
+      &.menu__item > a:after {
         content: $bullet-closed; // LTR
+      }
 
-        &.--expanded > .menu__link:after {
-          content: $bullet-open ;
-        }
+      &.menu__item--expanded > a:after {
+        content: $bullet-open ;
       }
     }
 
     // RTL
     [dir="rtl"] & {
-      li.menu__item--collapsed > .menu__link:after {
+      li.menu__item--collapsed > a:after {
         content: $bullet-closed-rtl;
       }
     }

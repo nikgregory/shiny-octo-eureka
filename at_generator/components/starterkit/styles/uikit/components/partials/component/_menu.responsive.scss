@@ -111,6 +111,7 @@
 
     > .menu__item {
       z-index: $resp-menu-z-index + 10;
+      position: relative;
     }
   }
 
@@ -119,15 +120,15 @@
     vertical-align: middle;
     @include adjust-font-size-to($medium); // explicitly set the font-size since the container may be font-size 0
 
-    &--active-trail > .menu__link {}
+    &--active-trail > a {}
 
     // Strip border top from nested items.
-    &:first-child .menu__link {
+    &:first-child a {
       border-top: 0;
     }
   }
 
-  .menu__link {
+  a {
     transition: $global-transition;
     font-weight: $font-weight-light;
     margin: 0;
@@ -157,7 +158,7 @@
 // No JS?
 .no-js {
   .rm-block {
-    .menu__link {
+    a {
       @include output-rhythm(padding, $xx-small);
       @include output-rhythm(margin, 1px 0);
     }

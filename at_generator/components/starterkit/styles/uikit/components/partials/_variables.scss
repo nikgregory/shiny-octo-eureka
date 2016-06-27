@@ -314,7 +314,8 @@ $resp-menu-active-color            : inherit;
 $resp-menu-hover-background-color  : rgba(255, 255, 255, 0.095);
 $resp-menu-active-background-color : rgba(255, 255, 255, 0.095);
 
-$resp-menu-z-index                  : 480;
+$resp-menu-z-index                 : 480;
+$resp-menu-arrows                  : true;
 
 // Drop Menu
 $dropmenu-item-width               : 12em;
@@ -575,4 +576,6 @@ $preview-background-color          : #ffffea;
 // -----------------------------------------------------------------------------
 // Patterns are image files that can be set on the page and row backgrounds.
 $patterns: null; // A list of pattern file names
+
+
 

@@ -10,13 +10,13 @@
   width: 16px;
   width: 1rem;
 }
-.fa-arrow .menu li.menu__item > .menu__link:after {
+.fa-arrow .menu li.menu__item > a:after {
   content: "";
 }
-.fa-arrow .menu li.menu__item > .menu__link:after.--expanded > .menu__link:after {
+.fa-arrow .menu li.menu__item--expanded > a:after {
   content: "";
 }
-[dir="rtl"] .fa-arrow .menu li.menu__item--collapsed > .menu__link:after {
+[dir="rtl"] .fa-arrow .menu li.menu__item--collapsed > a:after {
   content: "";
 }
 
@@ -28,13 +28,13 @@
   width: 16px;
   width: 1rem;
 }
-.fa-caret .menu li.menu__item > .menu__link:after {
+.fa-caret .menu li.menu__item > a:after {
   content: "";
 }
-.fa-caret .menu li.menu__item > .menu__link:after.--expanded > .menu__link:after {
+.fa-caret .menu li.menu__item--expanded > a:after {
   content: "";
 }
-[dir="rtl"] .fa-caret .menu li.menu__item--collapsed > .menu__link:after {
+[dir="rtl"] .fa-caret .menu li.menu__item--collapsed > a:after {
   content: "";
 }
 
@@ -46,13 +46,13 @@
   width: 16px;
   width: 1rem;
 }
-.fa-angle-double .menu li.menu__item > .menu__link:after {
+.fa-angle-double .menu li.menu__item > a:after {
   content: "";
 }
-.fa-angle-double .menu li.menu__item > .menu__link:after.--expanded > .menu__link:after {
+.fa-angle-double .menu li.menu__item--expanded > a:after {
   content: "";
 }
-[dir="rtl"] .fa-angle-double .menu li.menu__item--collapsed > .menu__link:after {
+[dir="rtl"] .fa-angle-double .menu li.menu__item--collapsed > a:after {
   content: "";
 }
 
@@ -64,13 +64,13 @@
   width: 16px;
   width: 1rem;
 }
-.fa-chevron .menu li.menu__item > .menu__link:after {
+.fa-chevron .menu li.menu__item > a:after {
   content: "";
 }
-.fa-chevron .menu li.menu__item > .menu__link:after.--expanded > .menu__link:after {
+.fa-chevron .menu li.menu__item--expanded > a:after {
   content: "";
 }
-[dir="rtl"] .fa-chevron .menu li.menu__item--collapsed > .menu__link:after {
+[dir="rtl"] .fa-chevron .menu li.menu__item--collapsed > a:after {
   content: "";
 }
 
@@ -106,4 +106,5 @@
 .ms-dropmenu .fa-chevron .rm-block__content .odd ul > .menu__item--collapsed > a:after {
   content: "";
 }
+
 /*# sourceMappingURL=maps/shortcodes--menu-bullets.css.map */
