@@ -307,6 +307,7 @@ settings:
   mimic_compatible: 1
   enable_ckeditor: 1
   mimic_enabled: 1
+  click_menus_enabled: 1
 features:
   logo: 1
   node_user_picture: 1

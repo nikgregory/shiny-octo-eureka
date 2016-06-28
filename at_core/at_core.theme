@@ -1076,9 +1076,18 @@ function at_core_preprocess_comment(&$variables) {
 function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+  $variables['click_menus_enabled'] = FALSE;
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+
+    // Add bool for click menus enabled.
+    if (isset($config['click_menus_enabled']) && $config['click_menus_enabled'] === 1) {
+      if ($variables['base_plugin_id'] === 'system_menu_block') {
+        $variables['click_menus_enabled'] = TRUE;
+      }
+    }
+
     // Markup overrides
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 

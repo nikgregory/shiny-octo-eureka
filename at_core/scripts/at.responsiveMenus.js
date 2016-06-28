@@ -23,9 +23,9 @@
           tl   = '.rm-block .rm-toggle__link',
           vc   = rm['vertical_position'] || null,
           hp   = rm['horizontal_position'] || null,
-          acd_def = rm['acd']['acd_default'] || null,
-          acd_resp = rm['acd']['acd_responsive'] || null,
-          acd_both = rm['acd']['acd_both'] || null,
+          acd_def = rm['acd']['acd_default'],
+          acd_resp = rm['acd']['acd_responsive'],
+          acd_both = rm['acd']['acd_both'],
           acd_load = rm['acd']['acd_load'];
 
       // Hamburger toggles.

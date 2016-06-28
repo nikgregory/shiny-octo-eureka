@@ -11,6 +11,15 @@
 
     .rm-block__content {
 
+      // Allow for momentary mouse out.
+      .menu {
+        transition: 0.15s 0.5s;
+
+        &:hover .menu {
+          transition-delay: 0s;
+        }
+      }
+
       .menu__item {
         text-align: center;
         position: relative;
@@ -38,32 +47,6 @@
           float: $flow-from;
           width: auto;
 
-          a:after {
-            content: '';
-            display: none;
-          }
-
-          @if $dropmenu-arrows == true {
-            .fa-loaded & {
-              &--collapsed > span > a,
-              &--expanded > span > a {
-                @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
-
-                &:after {
-                  display: inline-block;
-                }
-              }
-
-              &--expanded > span > a:after {
-                content: $menu-arrow-down;
-              }
-
-              &--collapsed > span > a:after {
-                content: '';
-              }
-            }
-          }
-
           &:hover,
           &:focus {
             > .is-child {
@@ -72,8 +55,35 @@
             }
           }
         }
+
+        a:after {
+          content: '';
+          display: none;
+        }
+
+        @if $dropmenu-arrows == true {
+          .fa-loaded & {
+            .menu__item--collapsed > span > a,
+            .menu__item--expanded > span > a {
+              @include output-rhythm(padding-#{$flow-to}, $medium * 2.5);
+
+              &:after {
+                display: inline-block;
+              }
+            }
+
+            .menu__item--expanded > span > a:after {
+              content: $menu-arrow-down;
+            }
+
+            .menu__item--collapsed > span > a:after {
+              content: '';
+            }
+          }
+        }
       }
 
+      // Hide child menus until hovered (or touch).
       .is-child {
         position: absolute;
         visibility: hidden;
@@ -81,6 +91,7 @@
         margin: 0;
         padding: 0;
         max-height: 1000px;
+        width: 100%;
 
         &:hover,
         &:focus {
@@ -91,26 +102,19 @@
         .menu__item {
           min-width: $dropmenu-item-width;
           text-align: $flow-from;
+          width: 100%;
         }
       }
 
-      // Allow for momentary mouse out.
-      .menu {
-        transition: 0.15s 0.5s;
-
-        &:hover .menu {
-          transition-delay: 0s;
-        }
-      }
-
-      // Down
-      .is-child {
+      // Menu level 2 and below.
+      .menu-level-2 {
         #{$flow-from}: 0; // LTR
         top: auto;
 
         @if $dropmenu-arrows == true {
+          // FontAwesome loaded.
           .fa-loaded & {
-            > .menu__item--expanded > a:after {
+            .menu__item--expanded > span > a:after {
               content: $menu-arrow-right;
 
               [dir="rtl"] & {
@@ -119,19 +123,10 @@
             }
           }
         }
-      }
 
-      // Across
-      .is-child.odd {
-        #{$flow-from}: 100%; // LTR
-        top: 0;
-
-        @if $dropmenu-arrows == true {
-          .fa-loaded & {
-            > .menu__item--expanded > a:after {
-              content: $menu-arrow-down;
-            }
-          }
+        .is-child {
+          #{$flow-from}: 100%; // LTR
+          top: 0;
         }
       }
     }
