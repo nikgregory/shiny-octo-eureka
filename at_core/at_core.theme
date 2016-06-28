@@ -220,9 +220,14 @@ function at_core_page_attachments_alter(array &$page) {
 
     // Add the responsive menu styles settings.
     if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-      
       $responsivemenu_settings = array();
       $load_accordion = FALSE;
+      $click_menus_enabled = FALSE;
+      $click_menu_settings['acd_load'] = FALSE;
+
+      if (isset($config['click_menus_enabled']) && $config['click_menus_enabled'] === 1) {
+        $click_menus_enabled = TRUE;
+      }
 
       // Breakpoint
       if (isset($config['responsive_menu_breakpoint'])) {
@@ -236,11 +241,14 @@ function at_core_page_attachments_alter(array &$page) {
           // Load the library for each selected menu style.
           $page['#attached']['library'][] = "$theme/responsive_menus_" . $config['responsive_menu_' . $style . '_style'];
 
-          // Accordion bools.
-          $responsivemenu_settings['acd']['acd_' . $style] = FALSE;
-          if (in_array($config['responsive_menu_' . $style . '_style'], ['vertical', 'slidedown', 'offcanvas', 'overlay'])) {
-            $load_accordion = TRUE;
-            $responsivemenu_settings['acd']['acd_' . $style] = TRUE;
+          // Accordion click menu settings.
+          if ($click_menus_enabled == TRUE) {
+            $click_menu_settings['acd_' . $style] = FALSE;
+            if (in_array($config['responsive_menu_' . $style . '_style'], ['vertical', 'slidedown', 'offcanvas', 'overlay'])) {
+              $click_menu_settings['acd_' . $style] = TRUE;
+              $click_menu_settings['acd_load'] = TRUE;
+              $load_accordion = TRUE;
+            }
           }
 
           // Set the menu option for each style.
@@ -248,11 +256,14 @@ function at_core_page_attachments_alter(array &$page) {
         }
       }
 
-      // Accordion bools.
-      $responsivemenu_settings['acd']['acd_both'] = FALSE;
-      if ($responsivemenu_settings['acd']['acd_default'] == $responsivemenu_settings['acd']['acd_responsive']) {
-        $responsivemenu_settings['acd']['acd_both'] = TRUE;
+      // Accordion click menu settings.
+      if ($click_menus_enabled == TRUE) {
+        $click_menu_settings['acd_both'] = FALSE;
+        if ($click_menu_settings['acd_default'] == $click_menu_settings['acd_responsive']) {
+          $click_menu_settings['acd_both'] = TRUE;
+        }
       }
+      $responsivemenu_settings['acd'] = $click_menu_settings;
 
       // Vertical and horizontal positioning.
       if (isset($config['responsive_menu_vertical_position']) && $config['responsive_menu_vertical_position'] !== 'none') {

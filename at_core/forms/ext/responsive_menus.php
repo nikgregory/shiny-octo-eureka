@@ -121,6 +121,28 @@ $form['responsive_menus']['styles']['settings_responsive_menu_responsive_style']
   '#default_value' => theme_get_setting('settings.responsive_menu_responsive_style', $theme),
 );
 
+// Click menus
+$form['responsive_menus']['click_menus'] = array(
+  '#type' => 'details',
+  '#title' => t('Click Menus'),
+  //'#description' => t('These settings only apply to the responsive style (i.e. the "desktop style").'),
+);
+
+$form['responsive_menus']['click_menus']['settings_click_menus_enabled'] = array(
+  '#type' => 'checkbox',
+  '#title' => t('Use folding click menus for Off Canvas, Slide Down, Overlay and Vertical menu items.'),
+  '#default_value' => theme_get_setting('settings.click_menus_enabled', $theme),
+);
+
+if (!isset($getThemeInfo['base theme original'])) {
+  $form['responsive_menus']['click_menus']['upgrade_message'] = array(
+    '#type' => 'container',
+    '#markup' => t('Themes generated with AT RC1 and prior are not compatible with click menus, <a href="@upgrade_message" target="_blank"><b>click here for upgrade instructions</b></a>.', array('@upgrade_message' => 'https://www.drupal.org/node/2753187')),
+  );
+  $form['responsive_menus']['click_menus']['settings_click_menus_enabled']['#disabled'] = TRUE;
+}
+
+// Position
 $form['responsive_menus']['position'] = array(
   '#type' => 'details',
   '#title' => t('Responsive Style Position'),

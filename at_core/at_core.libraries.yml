@@ -163,8 +163,8 @@ at.doubletaptogo:
 at.responsivemenus:
   version: "8.x-1.0"
   js:
-    scripts/min/at.responsiveMenus.min.js: { minified: true }
-    #scripts/at.responsiveMenus.js: {}
+    #scripts/min/at.responsiveMenus.min.js: { minified: true }
+    scripts/at.responsiveMenus.js: {}
   dependencies:
     - core/jquery
     - core/drupal

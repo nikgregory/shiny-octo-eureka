@@ -1,6 +1,7 @@
 name: 'THEMENAME'
 type: theme
 base theme: at_core
+base theme original: rc2
 subtheme type: adaptive_subtheme
 layout: site-builder
 description: 'Practical starter theme for site builders, themers, and rapid prototyping.'

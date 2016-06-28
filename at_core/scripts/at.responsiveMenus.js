@@ -23,9 +23,10 @@
           tl   = '.rm-block .rm-toggle__link',
           vc   = rm['vertical_position'] || null,
           hp   = rm['horizontal_position'] || null,
-          acd_def = rm['acd']['acd_default'],
-          acd_resp = rm['acd']['acd_responsive'],
-          acd_both = rm['acd']['acd_both'];
+          acd_def = rm['acd']['acd_default'] || null,
+          acd_resp = rm['acd']['acd_responsive'] || null,
+          acd_both = rm['acd']['acd_both'] || null,
+          acd_load = rm['acd']['acd_load'];
 
       // Hamburger toggles.
       function toggleClick(e) {
@@ -96,7 +97,7 @@
             $('.rm-block__content li:has(ul)').doubleTapToGo();
           }
 
-          if (acd_def == true) {
+          if (acd_def == true && acd_load == true) {
             $('.rm-block .menu-level-1').addClass('ms-accordion');
             $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
             $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
@@ -109,16 +110,18 @@
             if (resp !== def) {
               $(document.body).removeClass(def).addClass(resp);
 
-              if (acd_resp == true) {
-                if (acd_both == false) {
-                  $('.rm-block .menu-level-1').addClass('ms-accordion');
-                  $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
-                  $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+              if (acd_load == true) {
+                if (acd_resp == true) {
+                  if (acd_both == false) {
+                    $('.rm-block .menu-level-1').addClass('ms-accordion');
+                    $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
+                    $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+                  }
+                } else {
+                  $('.ms-accordion .rm-accordion-trigger').remove();
+                  $('.rm-block .menu-level-1').removeClass('ms-accordion');
+                  $('.rm-block .menu').removeClass('is-open--child');
                 }
-              } else {
-                $('.ms-accordion .rm-accordion-trigger').remove();
-                $('.rm-block .menu-level-1').removeClass('ms-accordion');
-                $('.rm-block .menu').removeClass('is-open--child');
               }
 
               if (resp == 'ms-dropmenu') {
@@ -146,16 +149,18 @@
         unmatch : function() {
           $(document.body).addClass(def);
 
-          if (acd_def == true) {
-            if (acd_both == false) {
-              $('.rm-block .menu-level-1').addClass('ms-accordion');
-              $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
-              $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+          if (acd_load == true) {
+            if (acd_def == true) {
+              if (acd_both == false) {
+                $('.rm-block .menu-level-1').addClass('ms-accordion');
+                $.ready(copyButtons('.ms-accordion .is-parent__wrapper a'));
+                $('.ms-accordion .rm-accordion-trigger', context).on('click', accordionClick);
+              }
+            } else {
+              $('.ms-accordion .rm-accordion-trigger').remove();
+              $('.rm-block .menu-level-1').removeClass('ms-accordion');
+              $('.rm-block .menu').removeClass('is-open--child');
             }
-          } else {
-            $('.ms-accordion .rm-accordion-trigger').remove();
-            $('.rm-block .menu-level-1').removeClass('ms-accordion');
-            $('.rm-block .menu').removeClass('is-open--child');
           }
 
           if (def == 'ms-dropmenu') {
