@@ -106,6 +106,7 @@ settings:
   breadcrumb_label: 0
   breadcrumb_home: 0
   breadcrumb_separator: ''
+  breadcrumb_item_length: '32'
   search_block_hide_submit: 0
   search_block_placeholder_text: ''
   login_block_placeholder_labels: 0
