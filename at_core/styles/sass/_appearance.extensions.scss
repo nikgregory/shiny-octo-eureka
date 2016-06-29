@@ -165,6 +165,24 @@
 
   // Resp menus
   #edit-responsive-menus {
+    .form-type-select {
+      @include clearfix-micro;
+
+      select {
+        width: 100%;
+      }
+
+      @media screen and (min-width: 65em) {
+        label {
+          float: left;
+          width: 150px;
+        }
+
+        select {
+          width: 350px;
+        }
+      }
+    }
   }
 
 

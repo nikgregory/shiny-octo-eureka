@@ -508,6 +508,25 @@
 .admin-theme--seven #edit-touch-icons-settings .field-prefix {
   color: #666;
 }
+.admin-theme--seven #edit-responsive-menus .form-type-select:before, .admin-theme--seven #edit-responsive-menus .form-type-select:after {
+  content: " ";
+  display: table;
+}
+.admin-theme--seven #edit-responsive-menus .form-type-select:after {
+  clear: both;
+}
+.admin-theme--seven #edit-responsive-menus .form-type-select select {
+  width: 100%;
+}
+@media screen and (min-width: 65em) {
+  .admin-theme--seven #edit-responsive-menus .form-type-select label {
+    float: left;
+    width: 150px;
+  }
+  .admin-theme--seven #edit-responsive-menus .form-type-select select {
+    width: 350px;
+  }
+}
 .admin-theme--seven #edit-block-classes label span {
   font-weight: 400;
 }
