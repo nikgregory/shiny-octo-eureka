@@ -20,6 +20,7 @@
   padding: 7px;
   padding: 0.4375rem;
   position: relative;
+  display: block;
 }
 .ms-slidedown .rm-block__content a:after {
   content: none;
@@ -50,4 +51,5 @@
 .ms-slidedown a:after {
   display: none !important;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--slidedown.css.map */

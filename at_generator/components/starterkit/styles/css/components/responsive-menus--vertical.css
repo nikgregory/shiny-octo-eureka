@@ -14,6 +14,7 @@
   padding: 7px;
   padding: 0.4375rem;
   position: relative;
+  display: block;
 }
 .ms-vertical .rm-block__content a:after {
   content: none;
@@ -33,4 +34,5 @@
 .ms-vertical .rm-block__content .menu__item {
   font-family: inherit;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--vertical.css.map */

@@ -38,6 +38,7 @@
       a {
         @include output-rhythm(margin-bottom, 4px);
         @include output-rhythm(padding, $xx-small $large);
+        display: block;
 
         &:after {
           content: none;

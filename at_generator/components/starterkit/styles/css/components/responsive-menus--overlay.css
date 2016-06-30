@@ -99,6 +99,7 @@
   margin-bottom: 4px;
   margin-bottom: 0.25rem;
   background-color: rgba(0, 0, 0, 0.95);
+  display: block;
 }
 .ms-overlay.rm-is-open .rm-block__content .menu a:hover, .ms-overlay.rm-is-open .rm-block__content .menu a:focus, .ms-overlay.rm-is-open .rm-block__content .menu a.active {
   background-color: rgba(0, 0, 0, 0.85);
@@ -119,4 +120,5 @@
 .ms-overlay.rm-is-open .rm-block__content .menu .rm-accordion-trigger:hover, .ms-overlay.rm-is-open .rm-block__content .menu .rm-accordion-trigger:focus {
   background-color: rgba(0, 0, 0, 0.85);
 }
+
 /*# sourceMappingURL=maps/responsive-menus--overlay.css.map */

@@ -27,6 +27,7 @@
 
       a {
         position: relative;
+        display: block;
         @include output-rhythm(padding, $xx-small $large);
 
         @if $dropmenu-arrows == true {

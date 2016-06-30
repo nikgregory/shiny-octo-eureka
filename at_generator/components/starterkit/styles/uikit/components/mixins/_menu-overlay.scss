@@ -103,6 +103,7 @@
             @include output-rhythm(padding, $xx-small $large);
             @include output-rhythm(margin-bottom, 4px);
             background-color: rgba(0, 0, 0, 0.95);
+            display: block;
 
             &:hover,
             &:focus,
