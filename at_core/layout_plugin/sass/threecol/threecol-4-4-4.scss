@@ -11,19 +11,19 @@
 .bp--tablet {
   .atl--threecol-4-4-4 {
     // Two active regions.
-    &.l-arc--2 .atl__lc {
+    &.l-arc--2 > .atl__lr > .atl__lc {
       @include span(6 of 12);
     }
 
     // Three active regions.
-    &.l-arc--3 .atl__lc {
+    &.l-arc--3 > .atl__lr > .atl__lc {
       @include span(4 of 12);
     }
 
     // Two and tree active regions.
     &.l-arc--2,
     &.l-arc--3 {
-      .atl__lc:last-child {
+      > .atl__lr > .atl__lc:last-child {
         @include last;
       }
     }

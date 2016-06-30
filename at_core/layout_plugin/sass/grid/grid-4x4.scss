@@ -4,14 +4,14 @@
 // -----------------------------------------------------------------------------
 
 .atl--grid-4x4 {
-  .atl__lc {
+  > .atl__lc {
     margin-bottom: gutter(12);
   }
 }
 
 .bp--tablet {
   .atl--grid-4x4 {
-    .atl__lc {
+    > .atl__lc {
       @include gallery(6 of 12);
     }
   }
@@ -19,7 +19,7 @@
 
 .bp--wide {
   .atl--grid-4x4 {
-    .atl__lc {
+    > .atl__lc {
       @include gallery(3 of 12);
     }
   }
