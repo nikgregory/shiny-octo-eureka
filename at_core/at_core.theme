@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
+use Drupal\layout_plugin\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
 
 /**
@@ -1356,8 +1357,7 @@ function _at_core_menu_link_classes($i) {
 /**
  * Preprocess variables for menu templates.
  * @param $variables
- * TODO Remove this bullshit if https://www.drupal.org/node/2755375 ever gets
- * answered with something reasonable and doable.
+ * TODO Remove depending on if https://www.drupal.org/node/2755375
  */
 function at_core_preprocess_menu(&$variables) {
   // BC for older sub-themes to four levels.
@@ -1382,59 +1382,67 @@ function at_core_preprocess_menu(&$variables) {
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+function at_core_theme_registry_alter(&$theme_registry) {
+  $layouts = Layout::layoutPluginManager()->getDefinitions();
+  foreach ($layouts as $info) {
+    if ($info['provider'] == 'at_core') {
+      $layout_theme_hooks[] = $info['theme'];
+    }
+  }
+  // Only add preprocess functions if entity exposes theme function, and this
+  // layout is provided by at_core.
+  foreach ($theme_registry as $theme_hook => $info) {
+    if (in_array($theme_hook, $layout_theme_hooks) || (!empty($info['base hook']) && in_array($info['base hook'], $layout_theme_hooks))) {
+      $theme_registry[$theme_hook]['preprocess functions'][] = 'at_core_preprocess_at_layout';
+    }
+  }
+}
+
+/**
  * Helper function for layout plugin attributes.
  * @param $variables
  * @return mixed
  */
 function _at_core_layout_plugin_attributes(&$variables) {
-  $html_element = 'div';
-  $role = NULL;
-  $classes = array();
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+  $html_element = 'div';
+  $classes = array();
+  $role = NULL;
+  $bundle = NULL;
+  $entity_type = NULL;
+  $view_mode = NULL;
+  $id = NULL;;
 
-  // Node
-  if (isset($variables['content']['#node'])) {
-    $classes[] = 'node';
-    $classes[] = $variables['content']['#view_mode'] ? 'node--view-mode-' . $variables['content']['#view_mode'] : '';
-    $classes[] = $variables['content']['#node']->bundle() ? 'node--type-' . Html::cleanCssIdentifier($variables['content']['#node']->bundle()) : '';
-    $classes[] = $variables['content']['#node']->id() ? 'node--id-' . $variables['content']['#node']->id() : '';
-    $classes[] = $variables['content']['#node']->isPromoted() ? 'node--promoted' : '';
-    $classes[] = $variables['content']['#node']->isSticky() ? 'node--sticky' : '';
-    $classes[] = $variables['content']['#node']->isPublished() ? 'node--unpublished' : '';
+  // Entity and bundle.
+  if (isset($variables['content']['#entity_type'])) {
+    $entity_type = $variables['content']['#entity_type'];
+    $bundle = $variables['content']['#bundle'];
+    $view_mode = $variables['content']['#view_mode'];
+    $id = $variables['content']['#'. $entity_type]->id();
 
-    // Shortcodes classes
-    if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-      if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-        if ($node_type = $variables['content']['#node']->getType()) {
-          if (!empty($config['nodetype_classes_' . $node_type])) {
-            $shortcodes = Tags::explode($config['nodetype_classes_' . $node_type]);
-            foreach ($shortcodes as $class) {
-              $classes[] = Html::cleanCssIdentifier($class);
-            }
-          }
-        }
+    $entity_classes = !empty($variables['content']['#ds_configuration']['layout']['entity_classes']) ? $variables['content']['#ds_configuration']['layout']['entity_classes'] : '';
+    if ($entity_classes !== 'no_classes') {
+      $classes[] = $entity_type;
+      $classes[] = $view_mode ? Html::cleanCssIdentifier($entity_type . '--view-mode-' . $view_mode) : '';
+      $classes[] = $bundle ? Html::cleanCssIdentifier($entity_type . '--type-' . $bundle) : '';
+      $classes[] = $id ? Html::cleanCssIdentifier($entity_type . '--id-' . $id) : '';
+    }
+
+    if (in_array($entity_type, ['node', 'comment'])) {
+      $html_element = 'article';
+      $role = 'article';
+    }
+
+    if ($entity_type == 'comment') {
+      $classes[] = 'js-comment';
+      $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
+      if ($variables['content']['#comment']->getOwnerId() === $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
+        $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() . '-author';
       }
     }
-
-    // Element
-    $html_element = 'article';
-    // Role
-    $role = 'article';
-  }
-
-  // Comment
-  if (isset($variables['content']['#comment'])) {
-    $classes[] = 'comment';
-    $classes[] = 'js-comment';
-    $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
-    if ($variables['content']['#comment']->getOwnerId() === $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
-      $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() .'-author';
-    }
-    // Element
-    $html_element = 'article';
-    // Role
-    $role = 'article';
   }
 
   // Panels
@@ -1443,19 +1451,13 @@ function _at_core_layout_plugin_attributes(&$variables) {
     $classes[] = 'panels-page--' . Html::cleanCssIdentifier($variables['content']['#page_variant']->get('page'));
   }
 
-  // Block Content
-  if (isset($variables['content']['#block_content'])) {
-    $classes[] = 'block__atl';
-    $classes[] = 'block-type-' . Html::cleanCssIdentifier($variables['content']['#block_content']->bundle());
-
-    // Shortcodes classes
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if ($id = $variables['content']['#block_content']->id()) {
-        if (!empty($config['block_classes_' . $id])) {
-          $shortcodes = Tags::explode($config['block_classes_' . $id]);
-          foreach ($shortcodes as $class) {
-            $classes[] = Html::cleanCssIdentifier($class);
-          }
+  // Shortcodes for blocks.
+  if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+    if ($bid = $variables['content']['#block_content']->id()) {
+      if (!empty($config['block_classes_' . $bid])) {
+        $shortcodes = Tags::explode($config['block_classes_' . $bid]);
+        foreach ($shortcodes as $class) {
+          $classes[] = Html::cleanCssIdentifier($class);
         }
       }
     }
@@ -1475,89 +1477,12 @@ function _at_core_layout_plugin_attributes(&$variables) {
 }
 
 /**
- * Preprocess variables for the one col Layout Plugin template.
+ * Preprocess variables for AT Layout Plugin templates.
+ * This function is added in at_core_theme_registry_alter().
+ *
  * @param $variables
  */
-function at_core_preprocess_at_layout__onecol(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-
-/**
- * Preprocess variables for the two col Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__twocol(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-/**
- * Preprocess variables for the three col Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__threecol(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-/**
- * Preprocess variables for the four col Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__fourcol(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-/**
- * Preprocess variables for the 2x2 grid Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__grid_2x2(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-/**
- * Preprocess variables for the 3x3 grid Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__grid_3x3(&$variables) {
-  $attributes = _at_core_layout_plugin_attributes($variables);
-  if (isset($attributes['role'])) {
-    $variables['attributes']['role'] = $attributes['role'];
-  }
-  $variables['attributes']['class'] = $attributes['classes'];
-  $variables['html_element'] = $attributes['html_element'];
-}
-
-/**
- * Preprocess variables for the 4x4 grid Layout Plugin template.
- * @param $variables
- */
-function at_core_preprocess_at_layout__grid_4x4(&$variables) {
+function at_core_preprocess_at_layout(&$variables) {
   $attributes = _at_core_layout_plugin_attributes($variables);
   if (isset($attributes['role'])) {
     $variables['attributes']['role'] = $attributes['role'];
