@@ -1385,17 +1385,22 @@ function at_core_preprocess_menu(&$variables) {
  * Implements hook_theme_registry_alter().
  */
 function at_core_theme_registry_alter(&$theme_registry) {
-  $layouts = Layout::layoutPluginManager()->getDefinitions();
-  foreach ($layouts as $info) {
-    if ($info['provider'] == 'at_core') {
-      $layout_theme_hooks[] = $info['theme'];
+  if (\Drupal::moduleHandler()->moduleExists('layout_plugin') == TRUE) {
+    $layouts = Layout::layoutPluginManager()->getDefinitions();
+    $layout_theme_hooks = array();
+    foreach ($layouts as $info) {
+      if ($info['provider'] == 'at_core') {
+        $layout_theme_hooks[] = $info['theme'];
+      }
     }
-  }
-  // Only add preprocess functions if entity exposes theme function, and this
-  // layout is provided by at_core.
-  foreach ($theme_registry as $theme_hook => $info) {
-    if (in_array($theme_hook, $layout_theme_hooks) || (!empty($info['base hook']) && in_array($info['base hook'], $layout_theme_hooks))) {
-      $theme_registry[$theme_hook]['preprocess functions'][] = 'at_core_preprocess_at_layout';
+    // Only add preprocess functions if entity exposes theme function, and this
+    // layout is provided by at_core.
+    if (!empty($layout_theme_hooks)) {
+      foreach ($theme_registry as $theme_hook => $info) {
+        if (in_array($theme_hook, $layout_theme_hooks) || (!empty($info['base hook']) && in_array($info['base hook'], $layout_theme_hooks))) {
+          $theme_registry[$theme_hook]['preprocess functions'][] = 'at_core_preprocess_at_layout';
+        }
+      }
     }
   }
 }
