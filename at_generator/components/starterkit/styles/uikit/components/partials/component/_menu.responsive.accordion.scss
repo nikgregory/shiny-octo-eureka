@@ -35,6 +35,7 @@
     border: 0;
     margin: 0;
     height: 100%;
+    @include output-rhythm(max-width, 36px);
 
     &:hover,
     &:focus {
@@ -67,5 +68,4 @@
     }
   }
 }
-
 

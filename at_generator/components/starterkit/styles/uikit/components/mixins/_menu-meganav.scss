@@ -15,13 +15,21 @@
     .rm-toggle {
       position: absolute;
       #{$flow-to}: 0;
-      @include output-rhythm(top, 3px);
+      top: 0;
       z-index: 200;
       padding: 0;
+      @include output-rhythm(margin, 2px 0 0);
 
-      span {
-        @include visually-hidden;
+      &__link,
+      &__link:hover,
+      &__link:focus,
+      &__link:active {
+        @include output-rhythm(padding, 5px 6px 3px);
       }
+    }
+
+    .rm-toggle__label {
+      @include visually-hidden;
     }
 
     .rm-block__content {

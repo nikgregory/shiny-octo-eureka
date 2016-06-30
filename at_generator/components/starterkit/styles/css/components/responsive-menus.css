@@ -62,8 +62,9 @@
   margin: 0;
 }
 .rm-toggle__link, .rm-toggle__link:hover, .rm-toggle__link:focus, .rm-toggle__link:active {
-  padding: 7px;
-  padding: 0.4375rem;
+  padding: 8px 16px 4px 12px;
+  padding: 0.5rem 1rem 0.25rem 0.75rem;
+  height: auto;
   border-radius: 2px;
   cursor: pointer;
 }

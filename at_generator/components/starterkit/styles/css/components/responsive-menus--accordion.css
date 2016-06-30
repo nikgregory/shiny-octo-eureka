@@ -25,6 +25,8 @@
   border: 0;
   margin: 0;
   height: 100%;
+  max-width: 36px;
+  max-width: 2.25rem;
 }
 .ms-accordion .rm-accordion-trigger:hover, .ms-accordion .rm-accordion-trigger:focus {
   outline: 0;
@@ -53,4 +55,5 @@
   margin-left: 40px;
   margin-left: 2.5rem;
 }
+
 /*# sourceMappingURL=maps/responsive-menus--accordion.css.map */

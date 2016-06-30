@@ -83,14 +83,14 @@
   &__link:hover,
   &__link:focus,
   &__link:active {
-    @include output-rhythm(padding, $xx-small);
+    @include output-rhythm(padding, 8px 16px 4px 12px);
+    height: auto;
     border-radius: $border-radius;
     cursor: pointer;
   }
 
   &__icon {
     position: relative;
-    //@include output-rhythm(top, 2px);
     @include output-rhythm(height, $medium);
     @include output-rhythm(width, $medium);
   }

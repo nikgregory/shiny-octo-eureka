@@ -11,12 +11,17 @@
 .ms-meganav .rm-toggle {
   position: absolute;
   right: 0;
-  top: 3px;
-  top: 0.1875rem;
+  top: 0;
   z-index: 200;
   padding: 0;
+  margin: 2px 0 0;
+  margin: 0.125rem 0 0;
 }
-.ms-meganav .rm-toggle span {
+.ms-meganav .rm-toggle__link, .ms-meganav .rm-toggle__link:hover, .ms-meganav .rm-toggle__link:focus, .ms-meganav .rm-toggle__link:active {
+  padding: 5px 6px 3px;
+  padding: 0.3125rem 0.375rem 0.1875rem;
+}
+.ms-meganav .rm-toggle__label {
   position: absolute !important;
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
