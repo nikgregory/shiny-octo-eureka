@@ -19,7 +19,12 @@ use Drupal\at_core\File\DirectoryOperations;
  * @param $form_state
  *   A keyed array containing the current state of the form.
  */
-function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
   // Set the theme name.
   $build_info = $form_state->getBuildInfo();
 
