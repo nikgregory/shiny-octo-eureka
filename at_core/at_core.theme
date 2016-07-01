@@ -16,12 +16,10 @@ use Drupal\at_core\Layout\LayoutLoad;
 
 /**
  * Alter the element type information returned from modules.
- *
+ * TODO Review/remove after https://www.drupal.org/node/2409083 lands.
  * @param array $info
  * @see \Drupal\Core\Render\ElementInfoManager
  * @see \Drupal\Core\Render\Element\ElementInterface
- *
- * TODO Review/remove after https://www.drupal.org/node/2409083 lands.
  */
 function at_core_element_info_alter(&$info) {
   // Remove the html5 shiv. Add it later if legacy browser support is enabled.
@@ -1335,7 +1333,7 @@ function at_core_preprocess_forums(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig
  * @param $variables
  */
 function at_core_preprocess_maintenance_page(&$variables) {
@@ -1356,8 +1354,8 @@ function _at_core_menu_link_classes($i) {
 
 /**
  * Preprocess variables for menu templates.
- * @param $variables
  * TODO Remove depending on if https://www.drupal.org/node/2755375
+ * @param $variables
  */
 function at_core_preprocess_menu(&$variables) {
   // BC for older sub-themes to four levels.
@@ -1383,6 +1381,7 @@ function at_core_preprocess_menu(&$variables) {
 
 /**
  * Implements hook_theme_registry_alter().
+ * @param $theme_registry
  */
 function at_core_theme_registry_alter(&$theme_registry) {
   if (\Drupal::moduleHandler()->moduleExists('layout_plugin') == TRUE) {
@@ -1410,7 +1409,7 @@ function at_core_theme_registry_alter(&$theme_registry) {
  * @param $variables
  * @return mixed
  */
-function _at_core_layout_plugin_attributes(&$variables) {
+function _at_core_layout_plugin_attributes($variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $html_element = 'div';
@@ -1484,7 +1483,6 @@ function _at_core_layout_plugin_attributes(&$variables) {
 /**
  * Preprocess variables for AT Layout Plugin templates.
  * This function is added in at_core_theme_registry_alter().
- *
  * @param $variables
  */
 function at_core_preprocess_at_layout(&$variables) {
