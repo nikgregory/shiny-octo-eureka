@@ -668,7 +668,9 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       break;
 
     case 'search_block_form':
+      // Remove the size attribute.
       $form['keys']['#size'] = '';
+      // Classes.
       if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
           if (isset($config['search_block_hide_submit']) && $config['search_block_hide_submit'] === 1) {
@@ -678,6 +680,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
           else {
             $form['#attributes']['class'][] = 'submit-is-visible';
           }
+          // Placeholders.
           if (isset($config['search_block_placeholder_text']) && !empty($config['search_block_hide_submit'])) {
             $form['keys']['#attributes']['placeholder'] = $config['search_block_placeholder_text'];
             $form['keys']['#attributes']['class'][] = 'has-attribute-placeholder';
@@ -1275,9 +1278,33 @@ function at_core_preprocess_breadcrumb(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_user(&$variables) {
-  // Add a proper label for user profiles.
   $user = $variables['elements']['#user'];
-  $variables['label'] = $user->getDisplayName();
+
+  // Label.
+  $variables['label'] = Html::escape($user->getDisplayName());
+
+  // Roles.
+  $roles = $user->getRoles(FALSE);
+  $variables['roles'] = array();
+  // Playing it safe here because I don't trust Drupal to return an array...
+  if (!empty($roles) && is_array($roles)) {
+    foreach ($roles as $role) {
+      $variables['roles'][] = 'has-role--' . Html::cleanCssIdentifier($role);
+    }
+  }
+
+  // View mode.
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  // Check if he current user has permission to access user profiles.
+  $current_user = \Drupal::currentUser();
+  $variables['access_profiles'] = FALSE;
+  if ($current_user->hasPermission('access user profiles')) {
+    $variables['access_profiles'] = TRUE;
+  }
+
+  // Base path.
+  $variables['base_path'] = base_path();
 }
 
 /**
