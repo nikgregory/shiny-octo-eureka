@@ -1457,7 +1457,7 @@ function _at_core_layout_plugin_attributes(&$variables) {
   }
 
   // Shortcodes for blocks.
-  if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
+  if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1 && isset($variables['content']['#block_content'])) {
     if ($bid = $variables['content']['#block_content']->id()) {
       if (!empty($config['block_classes_' . $bid])) {
         $shortcodes = Tags::explode($config['block_classes_' . $bid]);
