@@ -646,6 +646,7 @@ summary {
   display: block;
   padding: 10px;
   padding: 0.625rem;
+  outline: 0;
 }
 
 button[disabled],
@@ -1593,6 +1594,14 @@ ul.inline li ol {
 [dir="rtl"] ul.inline li {
   margin-right: 0;
   margin-left: 0;
+}
+
+.no-bullets li {
+  list-style: none;
+}
+
+.no-padding {
+  padding: 0;
 }
 
 .item-list__title {
@@ -2556,7 +2565,7 @@ table tr.error {
 .node:after {
   clear: both;
 }
-.node p:last-of-type {
+.node p:last-child {
   margin-bottom: 0;
 }
 .node__status {
@@ -2734,6 +2743,10 @@ table tr.error {
 /**
  * User Profiles
  ============================================================================ */
+.user__status {
+  float: right;
+}
+
 /**
  * Views
  ============================================================================ */
@@ -3023,4 +3036,5 @@ table tr.error {
     page-break-after: avoid;
   }
 }
+
 /*# sourceMappingURL=maps/base.css.map */

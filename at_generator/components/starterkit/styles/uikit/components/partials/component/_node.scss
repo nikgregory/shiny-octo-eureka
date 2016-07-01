@@ -17,7 +17,7 @@
   @include output-rhythm(padding, $medium);
   border-radius: $border-radius;
 
-  p:last-of-type {
+  p:last-child {
     margin-bottom: 0;
   }
 

@@ -211,6 +211,7 @@ summary {
   cursor: pointer;
   display: block; // Firefox seems to need this?
   @include output-rhythm(padding, $x-small);
+  outline: 0;
 }
 
 
