@@ -79,6 +79,7 @@
     ]
   -%}
   <body role="document"{{ attributes.addClass(body_classes)|without('role') }}>
+    {# Keyboard navigation/accessibility links to content in page.html.twig. #}
     <a href="{{ skip_link_target }}" class="visually-hidden focusable skip-link">{{ 'Skip to main content'|t }}</a>
     {{ page_top }}
     {{ page }}
