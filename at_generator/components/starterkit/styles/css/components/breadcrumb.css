@@ -6,7 +6,7 @@
  * the design of the breadcrumbs if they are too wide. We use media queries as a
  * no-js fallback.
  ============================================================================ */
-.block-system-breadcrumb-block:not(.has-title) {
+.block-breadcrumbs:not(.has-title) {
   margin: 0;
 }
 
@@ -99,4 +99,5 @@
     display: none;
   }
 }
+
 /*# sourceMappingURL=maps/breadcrumb.css.map */
