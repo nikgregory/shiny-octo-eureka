@@ -539,10 +539,43 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
  *   Can either be 'core' or the machine name of the extension that registered
  *   the libraries.
  */
-//function at_core_library_info_alter(&$libraries, $extension) {
-//  kpr($libraries);
-//  kpr($extension);
-//}
+function at_core_library_info_alter(&$libraries, $extension) {
+  $theme_path = \Drupal::theme()->getActiveTheme()->getPath();
+  // Replace layout_plugin CSS auto-magically. This avoids the whole issue
+  // of absolute paths in libraries-override in the info.yml file.
+  if (file_exists($theme_path . '/styles/layout_plugin') && $extension == 'layout_plugin') {
+    $at_layout_plugin_libraries = array(
+      'twocol-2-10',
+      'twocol-3-9',
+      'twocol-4-8',
+      'twocol-5-7',
+      'twocol-6-6',
+      'twocol-7-5',
+      'twocol-8-4',
+      'twocol-9-3',
+      'twocol-10-2',
+      'threecol-2-8-2',
+      'threecol-2-2-8',
+      'threecol-8-2-2',
+      'threecol-3-6-3',
+      'threecol-3-3-6',
+      'threecol-6-3-3',
+      'threecol-4-4-4',
+      'fourcol-3-3-3-3',
+      'grid-2x2',
+      'grid-3x3',
+      'grid-4x4',
+    );
+    foreach ($libraries as $lib_key => $library) {
+      if (in_array($lib_key, $at_layout_plugin_libraries)) {
+        $new_css = $theme_path . '/styles/layout_plugin/css/' . $lib_key .  '.css';
+        if (file_exists($new_css)) {
+          $libraries[$lib_key]['css']['theme'] = array('/' . $new_css => array());
+        }
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().

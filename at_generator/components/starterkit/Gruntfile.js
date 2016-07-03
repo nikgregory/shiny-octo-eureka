@@ -11,6 +11,13 @@ module.exports = function(grunt) {
           bundleExec: true
 				}
 			},
+			layout_plugin: {
+				options: {
+          config: 'styles/layout_plugin/config.rb',
+          basePath: 'styles/layout_plugin',
+          bundleExec: true
+				}
+			},
 			layout: {
 				options: {
           config: 'layout/site-builder/config.rb',
@@ -19,7 +26,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
     postcss: {
       css: {
         src: 'styles/css/components/**.css',
@@ -34,7 +40,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -46,11 +51,14 @@ module.exports = function(grunt) {
         src: ['styles/css/components/**.css']
       }
     },
-
 		watch: {
 			uikit: {
 				files: 'styles/uikit/components/**/*.scss',
 				tasks: ['compass:uikit', 'postcss:css']
+			},
+      layout_plugin: {
+				files: 'styles/layout_plugin/sass/**/*.scss',
+				tasks: ['compass:layout_plugin']
 			},
 			layout: {
 				files: 'layout/site-builder/sass/**/*.scss',
