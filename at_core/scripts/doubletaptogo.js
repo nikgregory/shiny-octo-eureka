@@ -4,6 +4,11 @@
   Version: 0.3
   Originally by Osvaldas Valutis, www.osvaldas.info
   Available for use under the MIT License
+
+  Upstream request to include this in cdnjs.com:
+  https://github.com/cdnjs/cdnjs/issues/8439
+
+  TODO: pull from CDN or find a better way.
 */
 ;(function($, window, document, undefined) {
 	$.fn.doubleTapToGo = function(action) {
