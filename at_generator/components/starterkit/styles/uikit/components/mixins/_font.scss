@@ -19,6 +19,7 @@
   //Default font size on html element is 100%, equivalent to 16px;
   @return #{$remSize}rem;
 }
+
 // Mixin that will include the fall back px declaration as well as the
 // calculated rem value.
 @mixin font-size($size) {
@@ -26,6 +27,12 @@
   font-size: calculateRem($size);
 }
 
+// Mixin that will include the fall back px declaration as well as the
+// calculated rem value.
+@mixin line-height($size) {
+  line-height: $size;
+  line-height: calculateRem($size);
+}
 
 @mixin font-icon-before($font, $char, $color: '', $size: '') {
   font-family: $font;

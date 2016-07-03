@@ -19,8 +19,8 @@
   line-height: 1.3125rem;
 }
 .search-results__item {
-  margin-bottom: 18px;
-  margin-bottom: 1.125rem;
+  margin-bottom: 26px;
+  margin-bottom: 1.625rem;
   padding: 0;
   list-style: none;
 }
@@ -165,4 +165,5 @@
 .fa-loaded .search-help-link:before {
   display: inline-block;
 }
+
 /*# sourceMappingURL=maps/search.css.map */

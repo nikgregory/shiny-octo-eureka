@@ -16,7 +16,7 @@
   }
 
   &__item {
-    @include output-rhythm(margin-bottom, $large);
+    @include output-rhythm(margin-bottom, $x-large);
     padding: 0;
     list-style: none;
   }

@@ -68,9 +68,7 @@ function at_core_page_attachments_alter(array &$page) {
 
   // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
-  // load if the module is installed. Unlike core these files will load on every
-  // page, so when CSS aggregation is on there will only be one CSS aggregate
-  // for the theme.
+  // load if the module is installed.
   $module_libraries = array(
     'aggregator',
     'book',
@@ -80,9 +78,11 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
+    'toolbar',
   );
+  $theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($theme);
   foreach ($module_libraries as $module_library) {
-    if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
+    if (array_key_exists($module_library, $theme_libraries) && \Drupal::moduleHandler()->moduleExists($module_library) === TRUE) {
       $page['#attached']['library'][] = "$theme/$module_library";
     }
   }
@@ -1398,7 +1398,7 @@ function at_core_preprocess_forums(&$variables) {
  */
 function at_core_preprocess_maintenance_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-  // Load the maintenance library CSS.
+  // Load the maintenance page library.
   $variables['#attached']['library'][] = $theme . '/maintenance_page';
 }
 

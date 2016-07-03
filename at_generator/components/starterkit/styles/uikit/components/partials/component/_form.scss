@@ -122,6 +122,14 @@
 }
 
 
+// Text field with formatting.
+.text-format-wrapper {
+  .text-full {
+    width: 100%;
+  }
+}
+
+
 // Filters and tips.
 .filter-wrapper {
   border: $form-border-width $form-border-style;

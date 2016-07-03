@@ -356,7 +356,7 @@ $form-border-width                 : $border-width;
 $form-border-style                 : $border-style;
 $form-border-radius                : $border-radius;
 
-$form_input_button_select_height   : $xx-large;
+$form_input_button_select_height   : 32px;
 $form-box-shadow                   : false;
 
 $form-details-background-color     : $regions-background-color;
@@ -576,6 +576,4 @@ $preview-background-color          : #ffffea;
 // -----------------------------------------------------------------------------
 // Patterns are image files that can be set on the page and row backgrounds.
 $patterns: null; // A list of pattern file names
-
-
 

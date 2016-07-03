@@ -826,6 +826,10 @@ body:before {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
+.search-result__snippet-info {
+  color: #5c5c5c;
+}
+
 /**
  * Comments
  *  - comment field (holds comment title, form, comments etc)

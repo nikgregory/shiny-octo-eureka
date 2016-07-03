@@ -67,6 +67,9 @@ button,
 // Danger button, e.g. delete buttons often have this class.
 .button--danger {
   border: 0;
+  float: $flow-to;
+  position: relative;
+  @include output-rhythm(top, 3px);
 }
 
 // Action button

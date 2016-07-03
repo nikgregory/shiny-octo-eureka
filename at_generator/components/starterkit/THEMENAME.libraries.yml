@@ -3,7 +3,25 @@ base:
   version: 8.x-1.0
   css:
     base:
+      styles/css/components/webfonts.css: {}
       styles/css/components/base.css: {}
+      styles/css/components/tables.css: {}
+      styles/css/components/form.css: {}
+      styles/css/components/field.css: {}
+      styles/css/components/image.css: {}
+      styles/css/components/page.css: {}
+      styles/css/components/block.css: {}
+      styles/css/components/node.css: {}
+      styles/css/components/user.css: {}
+      styles/css/components/views.css: {}
+      styles/css/components/menu.css: {}
+      styles/css/components/branding.css: {}
+      styles/css/components/pagers.css: {}
+      styles/css/components/breadcrumb.css: {}
+      styles/css/components/labels.css: {}
+      styles/css/components/markers.css: {}
+      styles/css/components/messages.css: {}
+      styles/css/components/print.css: {}
 
 # Aggregator
 aggregator:
@@ -24,7 +42,7 @@ login_block:
   version: 8.x-1.0
   css:
     theme:
-      styles/css/components/login-block.css: {}
+      styles/css/components/block--user-login.css: {}
 
 # Comment
 comment:
@@ -253,6 +271,13 @@ ckeditor:
     state:
       styles/css/components/ckeditor.css: {}
 
+# Toolbar
+toolbar:
+  version: 8.x-1.0
+  css:
+    theme:
+      styles/css/components/toolbar.css: {}
+
 # Form Layout Widget CSS, do not use this in the front end, its only
 # for the layout theme settings.
 layout_settings:
@@ -296,6 +321,7 @@ show_grid:
     theme:
       styles/css/show-grid.css: {}
 
+# Theme settings generated libraries.
 fonts:
   version: 8.x-1.0
   css:

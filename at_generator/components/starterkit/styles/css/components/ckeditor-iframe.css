@@ -33,6 +33,11 @@ textarea {
   transition: all, 225ms, ease-in-out;
 }
 
+.cke_editable {
+  cursor: text;
+  padding: 0.5em !important;
+}
+
 ul,
 ol,
 dl {

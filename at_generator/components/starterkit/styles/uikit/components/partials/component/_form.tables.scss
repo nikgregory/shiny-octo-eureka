@@ -56,3 +56,24 @@ tr {
     //white-space: nowrap;
   }
 }
+
+
+// Paragraph admin overrides.
+.js .field--widget-entity-reference-paragraphs {
+  td {
+    @include output-rhythm(padding, $medium);
+
+    &.field-multiple-drag {
+      @include output-rhythm(padding, $medium $xxx-small);
+    }
+  }
+
+  a.tabledrag-handle .handle {
+    margin: -0.4em 0.5em 0 0;
+  }
+}
+
+
+
+
+

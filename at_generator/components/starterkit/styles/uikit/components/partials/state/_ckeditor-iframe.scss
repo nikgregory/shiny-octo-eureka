@@ -30,6 +30,11 @@ textarea {
   transition: $global-transition;
 }
 
+.cke_editable {
+  cursor: text;
+  padding: 0.5em !important;
+}
+
 // Equalize margins for indented elements.
 ul,
 ol,
