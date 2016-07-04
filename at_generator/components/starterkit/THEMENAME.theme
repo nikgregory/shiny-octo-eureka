@@ -103,17 +103,16 @@ function HOOK_page_attachments_alter(array &$page) {
 
   // Attach module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
-  // load if the module is installed. Unlike core these files will load on every
-  // page, so when CSS aggregation is on there will only be one CSS aggregate
-  // for the theme.
+  // load if the module is installed.
   $module_libraries = array(
     'addtoany',
     'ds',
     'social_media_links',
     'superfish',
   );
+  $theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($theme);
   foreach ($module_libraries as $module_library) {
-    if (\Drupal::moduleHandler()->moduleExists($module_library) == TRUE) {
+    if (array_key_exists($module_library, $theme_libraries) && \Drupal::moduleHandler()->moduleExists($module_library) === TRUE) {
       $page['#attached']['library'][] = "$theme/$module_library";
     }
   }
