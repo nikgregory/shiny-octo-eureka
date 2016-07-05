@@ -9,63 +9,6 @@
  *   safer to place colors in a partial that is not parsed by the Color module.
  ============================================================================ */
 /**
- * Web fonts
- ============================================================================ */
-/* Override Font Awesome classes. */
-.fa-border {
-  border-color: #cccccc;
-}
-
-/*  Extra classes for Font Awesome. */
-.fa-text-color {
-  color: #363636;
-}
-
-.fa-text-color-light {
-  color: #808080;
-}
-
-.fa-text-color-medium {
-  color: #5c5c5c;
-}
-
-.fa-match-border {
-  color: #cccccc;
-}
-
-.fa-match-border-light {
-  color: #eeeeee;
-}
-
-.fa-match-link {
-  color: #0066cc;
-}
-
-.fa-trans-white-25 {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.fa-trans-white-50 {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.fa-trans-white-75 {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.fa-trans-black-25 {
-  color: rgba(0, 0, 0, 0.25);
-}
-
-.fa-trans-black-50 {
-  color: rgba(0, 0, 0, 0.25);
-}
-
-.fa-trans-black-75 {
-  color: rgba(0, 0, 0, 0.75);
-}
-
-/**
  * base.elements
  ============================================================================ */
 html {
@@ -118,6 +61,63 @@ hr {
 
 ::selection {
   background-color: #b3d4fc;
+}
+
+/**
+ * Web fonts
+ ============================================================================ */
+/* Override Font Awesome classes. */
+.fa-border {
+  border-color: #cccccc;
+}
+
+/*  Extra classes for Font Awesome. */
+.fa-text-color {
+  color: #363636;
+}
+
+.fa-text-color-light {
+  color: #808080;
+}
+
+.fa-text-color-medium {
+  color: #5c5c5c;
+}
+
+.fa-match-border {
+  color: #cccccc;
+}
+
+.fa-match-border-light {
+  color: #eeeeee;
+}
+
+.fa-match-border-link {
+  color: #0066cc;
+}
+
+.fa-trans-white-25 {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.fa-trans-white-50 {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.fa-trans-white-75 {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.fa-trans-black-25 {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.fa-trans-black-50 {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.fa-trans-black-75 {
+  color: rgba(0, 0, 0, 0.75);
 }
 
 /**
@@ -1067,5 +1067,4 @@ input.cke_dialog_ui_input_password {
   color: #363636 !important;
   border-color: #eeeeee !important;
 }
-
 /*# sourceMappingURL=maps/color.css.map */
