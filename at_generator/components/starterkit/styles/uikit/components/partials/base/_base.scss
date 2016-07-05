@@ -12,9 +12,11 @@
 
 // UI Kit Variables.
 @import
-  "../../font-awesome/font-awesome",
+  "../../font-awesome/mixins",
+  "../../font-awesome/variables",
   "../media-queries",
   "../variables";
 
 // UI Kit Mixins.
 @import "../../mixins/mixins";
+

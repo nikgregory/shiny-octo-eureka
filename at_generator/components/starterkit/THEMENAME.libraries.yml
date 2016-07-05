@@ -3,6 +3,7 @@ base:
   version: 8.x-1.0
   css:
     base:
+      styles/css/components/font-awesome.css: {}
       styles/css/components/webfonts.css: {}
       styles/css/components/base.css: {}
       styles/css/components/tables.css: {}
