@@ -575,6 +575,13 @@ function at_core_library_info_alter(&$libraries, $extension) {
       }
     }
   }
+
+  // Blow away Social Media Links (module) Font Awesome library.
+  if ($extension == 'social_media_links') {
+    if (isset($libraries['fontawesome.component'])) {
+      unset($libraries['fontawesome.component']);
+    }
+  }
 }
 
 /**
@@ -605,7 +612,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
               $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
             }
             $these_suggestions = array('#theme' => 'item_list', '#items' => $formatted_suggestions,);
-            drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing these turn it off in your themes Appearance settings - see the Devel tab.</p>', array('@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))), 'status');
+            drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing suggestions switch them off in your themes Appearance settings > Developer tools.</p>', array('@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))), 'status');
           }
         }
       }
