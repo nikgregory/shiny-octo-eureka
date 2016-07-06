@@ -110,6 +110,12 @@ function at_core_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Form
   // Attached required CSS and JS.
   $form['#attached']['library'][] = 'at_core/at.appearance_settings';
 
+  // Display a rude message if AT Tools is missing...
+  $at_tools_module = \Drupal::moduleHandler()->moduleExists('at_tools');
+  if ($at_tools_module == FALSE) {
+    drupal_set_message(t('Please install the <a href="@at_tools_href" target="_blank">AT Tools</a> module for Drupal 8. Your theme may not operate correctly without this module installed.', array('@at_tools_href' => 'https://www.drupal.org/project/at_tools')), 'warning');
+  }
+
   // AT Core
   if ($theme == 'at_core') {
     $form['at_core']['message'] = array(
