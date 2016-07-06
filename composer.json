@@ -17,12 +17,6 @@
             "role": "Maintainer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git://git.drupal.org/project/adaptivetheme.git"
-        }
-    ],
     "require": {
         "drupal/layout_plugin": "8.*",
         "drupal/at_tools": "8.*"
