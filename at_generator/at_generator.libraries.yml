@@ -1,9 +1,0 @@
-# Generator styles
-at.generator:
-  version: 8.x-1.0
-  css:
-    component:
-      styles/css/appearance--generator.css: {}
-  dependencies:
-    - core/jquery
-    - core/drupal.machine-name

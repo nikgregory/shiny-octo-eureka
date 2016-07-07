@@ -32,17 +32,6 @@ module.exports = function(grunt) {
           ]
         }
       },
-      atgen: {
-        src: 'at_generator/styles/css/*.css',
-        options: {
-          map: {
-            inline: false
-          },
-          processors: [
-            require('autoprefixer')({browsers: 'last 5 versions'})
-          ]
-        }
-      },
       layout_plugin: {
         src: 'at_core/layout_plugin/css/**/*.css',
         options: {
@@ -75,13 +64,6 @@ module.exports = function(grunt) {
           bundleExec: true
         }
       },
-      atgen: {
-        options: {
-          config: 'at_generator/styles/config.rb',
-          basePath: 'at_generator/styles',
-          bundleExec: true
-        }
-      },
       layout_plugin: {
         options: {
           config: 'at_core/layout_plugin/config.rb',
@@ -105,12 +87,6 @@ module.exports = function(grunt) {
         },
         src: ['at_core/styles/css/*.css']
       },
-      atgen: {
-        options: {
-          csslintrc: '.csslintrc'
-        },
-        src: ['at_generator/styles/css/*.css']
-      },
       layout_plugin: {
         options: {
           csslintrc: '.csslintrc'
@@ -129,10 +105,6 @@ module.exports = function(grunt) {
       atcore: {
         files: 'at_core/styles/sass/*.scss',
         tasks: ['compass:atcore', 'postcss:atcore']
-      },
-      atgen: {
-        files: 'at_generator/styles/sass/*.scss',
-        tasks: ['compass:atgen', 'postcss:atgen']
       },
       layout_plugin: {
         files: 'at_core/layout_plugin/sass/**/*.scss',
