@@ -387,6 +387,22 @@
 .admin-theme--seven {
   /* Image alignment options */
 }
+.admin-theme--seven #edit-docs {
+  overflow: hidden;
+  *overflow: visible;
+  *zoom: 1;
+}
+.admin-theme--seven #edit-docs .at-docs {
+  float: right;
+  font-weight: 700;
+}
+.admin-theme--seven #edit-docs .docs-help-icon {
+  fill: #ccc;
+  height: 1.5em;
+  width: 1.5em;
+  position: relative;
+  top: .4em;
+}
 .admin-theme--seven #edit-extensions > .details-wrapper {
   padding: 0;
 }
