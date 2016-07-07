@@ -9,12 +9,11 @@
       font-weight: 700;
     }
 
-    .docs-help-icon {
-      fill: #ccc;
-      height: 1.5em;
-      width: 1.5em;
+    .docs-ext-link-icon {
+      fill: #a6a6a6;
+      width: 1.1em;
       position: relative;
-      top: .4em;
+      top: .25em;
     }
   }
 
@@ -32,6 +31,19 @@
       border-left: 0;
       border-right: 0;
       border-bottom: 0;
+    }
+
+    .vertical-tabs__menu {
+       border-top: 0;
+    }
+
+    .vertical-tabs__menu-item {
+      border: 0;
+    }
+
+    .vertical-tabs__menu-item.is-selected {
+      border-right: 1px solid #fcfcfa;
+      border-bottom: 1px solid #b3b2ad;
     }
 
     .vertical-tabs-list {

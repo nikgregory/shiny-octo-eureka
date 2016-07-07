@@ -64,6 +64,17 @@
 .admin-theme--seven details details {
   background: inherit;
 }
+.admin-theme--seven details summary {
+  padding-top: .75em;
+  padding-bottom: .75em;
+}
+.admin-theme--seven ul.tips,
+.admin-theme--seven .description,
+.admin-theme--seven div.description,
+.admin-theme--seven .form-item .description,
+.admin-theme--seven .details-description {
+  color: #757575;
+}
 .admin-theme--seven blockquote {
   border-left: 10px solid #A6A5A1;
   padding-left: 10px;
@@ -94,7 +105,7 @@
 .admin-theme--seven .subsystem-enabled-container {
   box-sizing: border-box;
   float: right;
-  margin-top: -1.75em;
+  margin-top: -2em;
   padding: 0;
 }
 .admin-theme--seven .subsystem-enabled-container .form-type-checkbox {
@@ -106,6 +117,7 @@
 .admin-theme--seven .layouts-column {
   border: 0;
   margin: 0;
+  padding-top: 12px;
   box-sizing: border-box;
 }
 @media all and (min-width: 60em) {
@@ -396,12 +408,11 @@
   float: right;
   font-weight: 700;
 }
-.admin-theme--seven #edit-docs .docs-help-icon {
-  fill: #ccc;
-  height: 1.5em;
-  width: 1.5em;
+.admin-theme--seven #edit-docs .docs-ext-link-icon {
+  fill: #a6a6a6;
+  width: 1.1em;
   position: relative;
-  top: .4em;
+  top: .25em;
 }
 .admin-theme--seven #edit-extensions > .details-wrapper {
   padding: 0;
@@ -414,6 +425,16 @@
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
+}
+.admin-theme--seven #edit-extensions .vertical-tabs__menu {
+  border-top: 0;
+}
+.admin-theme--seven #edit-extensions .vertical-tabs__menu-item {
+  border: 0;
+}
+.admin-theme--seven #edit-extensions .vertical-tabs__menu-item.is-selected {
+  border-right: 1px solid #fcfcfa;
+  border-bottom: 1px solid #b3b2ad;
 }
 .admin-theme--seven #edit-extensions .vertical-tabs-list {
   width: 25%;
