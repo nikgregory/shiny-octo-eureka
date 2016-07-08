@@ -477,9 +477,9 @@
   line-height: 1.295em;
   font-weight: 700;
 }
-.admin-theme--seven #edit-fonts #edit-selector {
+.admin-theme--seven #edit-fonts div.font-selector-list {
   color: #757575;
-  font-size: 90%;
+  font-size: 0.95em;
 }
 .admin-theme--seven #edit-image-settings .description,
 .admin-theme--seven #edit-image-settings .form-type-radios {
