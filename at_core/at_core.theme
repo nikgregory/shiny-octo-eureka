@@ -115,11 +115,11 @@ function at_core_page_attachments_alter(array &$page) {
         $page['#attached']['library'][] = "$theme/fonts";
       }
       // Google font URL.
-      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === 1) {
+      if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === TRUE) {
         $page['#attached']['library'][] = "$theme/google_fonts";
       }
       // Typekit ID and JS.
-      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] === 1) {
+      if (isset($config['font_use_typekit']) && $config['font_use_typekit'] === TRUE) {
         $page['#attached']['library'][] = "$theme/typekit_id";
         $page['#attached']['library'][] = 'at_core/at.typekit';
       }
