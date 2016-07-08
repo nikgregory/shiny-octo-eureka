@@ -273,4 +273,10 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
       ),
     );
   }
+
+  // Show the selectors this applies to.
+  $form['fonts']['apply'][$font_element_key]['selector'] = array(
+    '#type' => 'container',
+    '#markup' => t('Applies to: @selectors' , array('@selectors' => $font_element_values['selector'])),
+  );
 }

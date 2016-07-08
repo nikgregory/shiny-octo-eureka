@@ -91,18 +91,6 @@ function font_elements() {
         'label' => 'Slideshow captions',
         'selector' => 'p.flex-caption',
       ),
-      'formitems' => array(
-        'label' => 'Form elements',
-        'selector' => 'form, input, select, textarea',
-      ),
-      'buttons' => array(
-        'label' => 'Buttons',
-        'selector' => 'button, .button',
-      ),
-      'tables' => array(
-        'label' => 'Tables',
-        'selector' => 'table',
-      ),
       'tabs' => array(
         'label' => 'Tabs',
         'selector' => '.tabs a',
@@ -142,6 +130,26 @@ function font_elements() {
       'h6' => array(
         'label' => 'h6',
         'selector' => 'h6',
+      ),
+      'formitems' => array(
+        'label' => 'Form elements',
+        'selector' => 'form, input, select, textarea',
+      ),
+      'buttons' => array(
+        'label' => 'Buttons',
+        'selector' => 'button, .button',
+      ),
+      'tables' => array(
+        'label' => 'Tables',
+        'selector' => 'table',
+      ),
+      'blockquotes' => array(
+        'label' => 'Blockquotes & citations',
+        'selector' => 'blockquote, cite, q',
+      ),
+      'code' => array(
+        'label' => 'Code',
+        'selector' => 'code, pre, var, kbd, samp',
       ),
       'custom_selectors' => array(
         'label' => 'Custom selectors',

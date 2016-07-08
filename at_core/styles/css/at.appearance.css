@@ -477,6 +477,10 @@
   line-height: 1.295em;
   font-weight: 700;
 }
+.admin-theme--seven #edit-fonts #edit-selector {
+  color: #757575;
+  font-size: 90%;
+}
 .admin-theme--seven #edit-image-settings .description,
 .admin-theme--seven #edit-image-settings .form-type-radios {
   clear: both;
@@ -586,7 +590,7 @@
   font-weight: bold;
 }
 .admin-theme--seven #edit-devel .description {
-  color: #777;
+  color: #757575;
 }
 .admin-theme--seven #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;

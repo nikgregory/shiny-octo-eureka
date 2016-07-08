@@ -98,8 +98,12 @@
         font-weight: 700;
       }
     }
-  }
 
+    #edit-selector {
+      color: #757575;
+      font-size: 90%;
+    }
+  }
 
   /* Image alignment options */
   #edit-image-settings {
@@ -239,7 +243,7 @@
      }
 
     .description {
-      color: #777;
+      color: #757575;
     }
 
     .details-wrapper {
