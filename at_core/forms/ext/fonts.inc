@@ -37,7 +37,7 @@ function font_elements() {
     $elements_array = array(
       'base' => array(
         'label' => 'Base',
-        'selector' => 'body, input, textarea, select, table',
+        'selector' => 'body',
       ),
       'sitename' => array(
         'label' => 'Site name',
@@ -69,7 +69,7 @@ function font_elements() {
       ),
       'links' => array(
         'label' => 'Links',
-        'selector' => 'a',
+        'selector' => 'a, .un-button',
       ),
       'menus' => array(
         'label' => 'Menus',
