@@ -278,5 +278,6 @@ foreach ($font_elements as $font_element_key => $font_element_values) {
   $form['fonts']['apply'][$font_element_key]['selector'] = array(
     '#type' => 'container',
     '#markup' => t('Applies to: @selectors' , array('@selectors' => $font_element_values['selector'])),
+    '#attributes' => array('class' => array('font-selector-list')),
   );
 }
