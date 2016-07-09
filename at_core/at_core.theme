@@ -9,6 +9,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Tags;
+use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Html;
 use Symfony\Component\Yaml\Parser;
 use Drupal\layout_plugin\Layout;
@@ -433,7 +434,6 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
 
   // Alter CKEditor JS settings.
   if (\Drupal::moduleHandler()->moduleExists('ckeditor') == TRUE) {
-
     $active_theme = \Drupal::theme()->getActiveTheme();
     $theme = $active_theme->getName();
     $theme_path = $active_theme->getPath();
@@ -468,7 +468,14 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
     }
 
     if (isset($settings['editor']['formats'])) {
-      // base, font, text styles
+      // Fontawesome + webfont CSS.
+      if (file_exists($theme_path . '/styles/css/components/font-awesome.css')) {
+        $styles[] = $theme_path . '/styles/css/components/font-awesome.css';
+      }
+      if (file_exists($theme_path . '/styles/css/components/webfonts.css')) {
+        $styles[] = $theme_path . '/styles/css/components/webfonts.css';
+      }
+      // base, font, text styles.
       $styles[] = "$theme_path/styles/css/components/base.css";
       if (!empty($config['generated_files_path'])) {
         $generated_files_path = $config['generated_files_path'];
@@ -477,6 +484,10 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
             if (file_exists($generated_files_path . '/fonts.css')) {
               $styles[] = $generated_files_path . '/fonts.css';
             }
+          }
+          // Google fonts.
+          if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === TRUE) {
+            $styles[] = Xss::filter($config['font_google']);
           }
           if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
             if (file_exists($generated_files_path . '/title-styles.css')) {
@@ -503,7 +514,6 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
           }
         }
       }
-
       // Color styles.
       if ($mimic === TRUE) {
         if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
