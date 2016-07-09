@@ -78,7 +78,7 @@ $form['fonts']['setup']['settings_font_google'] = array(
     '#list_type' => 'ol',
     '#attributes' => array('class' => array('google-font-wizard-desc', 'web-font-desc')),
     '#items' => array(
-      t('Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.', array('@google_font_wizard' => 'https://www.google.com/fonts')),
+      t('Use the <a href="@google_font_wizard" target="_blank">Google font wizard</a> to select your fonts.', array('@google_font_wizard' => 'https://fonts.google.com/')),
       t('Click the "Use" button, then copy/paste the URL from the <em>Standard</em> method, e.g. <code>https://fonts.googleapis.com/css?family=Open+Sans</code>'),
       t('Note: always use <code>https</code>, even with <code>http</code> and mixed content websites.'),
     ),
