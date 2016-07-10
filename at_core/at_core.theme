@@ -475,8 +475,14 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       if (file_exists($theme_path . '/styles/css/components/webfonts.css')) {
         $styles[] = $theme_path . '/styles/css/components/webfonts.css';
       }
-      // base, font, text styles.
-      $styles[] = "$theme_path/styles/css/components/base.css";
+      // Component base, image & tables.
+      $base_styles = array('base', 'image', 'tables');
+      foreach ($base_styles as $base_style) {
+        if (file_exists("$theme_path/styles/css/components/$base_style.css")) {
+          $styles[] = "$theme_path/styles/css/components/$base_style.css";
+        }
+      }
+      // Generated font & text styles.
       if (!empty($config['generated_files_path'])) {
         $generated_files_path = $config['generated_files_path'];
         if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
