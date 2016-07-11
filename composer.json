@@ -20,5 +20,11 @@
     "require": {
         "drupal/layout_plugin": "8.*",
         "drupal/at_tools": "8.*"
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
     }
 }
