@@ -1,13 +1,13 @@
 #
 # Breakpoints - Simple
 #
-# These breakpoints use ems, which mean they are dependant on the base font size,
-# so any pixel equivalents stated here assume base font size of 16px. Change them
-# to suit your requirements.
+# Pixel values based on 1em = 16px.
 #
-# tablet-isolate  - 45em and max-width 60em (720px to 960px), isolatate tablets.
-# wide            - 60.063em (961px) and up.
+# mobile  - 0 to 45em (0 to 720px), small screens only.
+# tablet  - 45.063em and max-width 60em (721px to 960px), isolate tablets.
+# wide    - 60.063em (961px) and up.
 #
+#                  45em                60em
 # | mobile --------->|
 #                    | tablet ---------->|
 #                                        | wide ---------------------------->
@@ -35,24 +35,14 @@ at_core.simple.wide:
   group: at_core.simple
 
 # Breakpoints Advanced
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Pixel values based on 1em = 16px.
 #
-# Adaptivetheme ships with two breakpoint module groups - simple and advanced.
-# The simple group is a subset of the advanced group and uses just two breakpoints,
-# tablet-isolate and widescreen. Below is a list of all breakpoints included with
-# AT Core (usable by all sub-themes in layout theme settings and here).
-#
-# SEE: adaptivetheme/at_core/at_core.breakpoints.yml
-#
-# These breakpoints use ems, which mean they are dependant on the base font size,
-# so any pixel equivalents stated here assume base font size of 16px. Change them
-# to suit your requirements.
-#
-#   mobile-isolate - 0 to 45em (0 to 720px), small screens only.
-#   tablet-isolate - 45.063em and max-width 65em (721px to 960px), isolatate tablets.
-#   wide-isolate   - 60.063em and max-width 120em (961px to 1920px), isolatate tablets.
-#   wide           - 60.063em (961px) and up.
-#   huge           - 120.063em (1921px) and up, for big resolution.
+#  mobile-isolate - 0 to 45em (0 to 720px), small screens only.
+#  tablet-isolate - 45.063em and max-width 65em (721px to 960px), isolate tablets.
+#  wide-isolate   - 60.063em and max-width 120em (961px to 1920px), isolate tablets.
+#  wide           - 60.063em (961px) and up.
+#  huge           - 120.063em (1921px) and up, for big resolution.
 #
 # Here you can see how each breakpoint cascades or isolates. Most of the time
 # a layout will use tablet-isolate and widescreen OR tablet-isolate, widescreen-isolate
@@ -104,9 +94,7 @@ at_core.advanced.huge:
 
 # Breakpoints - Responsive Menus
 #
-# These breakpoints use ems, which mean they are dependant on the base font size,
-# so any pixel equivalents stated here assume base font size of 16px. Change them
-# to suit your requirements.
+# Pixel values based on 1em = 16px.
 #
 #   mobile   - 0 to 60em (0 to 960px)
 #   maxwidth - 0 to 75em (0 to 1200px)
