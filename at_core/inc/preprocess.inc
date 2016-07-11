@@ -1034,9 +1034,10 @@ function adaptivetheme_preprocess_user_profile(&$vars) {
  */
 function adaptivetheme_preprocess_breadcrumb(&$vars) {
   // Add Google rich snippets to breadcrumbs using RDFa
-  if (module_exists('rdf')) {
+  if (module_exists('rdf') && !empty($vars['breadcrumb'])) {
     $snippet_url = ' rel="v:url" ';
     $snippet_title = ' property="v:title" ';
+
     foreach ($vars['breadcrumb'] as $key => $breadcrumb) {
       preg_match_all('/<([\w]+)[^>]*>.*?<\/\\1>/', $breadcrumb, $matches);
       if (count($matches[0]) > 0) {
