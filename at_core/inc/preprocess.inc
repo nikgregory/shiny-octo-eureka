@@ -159,7 +159,7 @@ function adaptivetheme_preprocess_page(&$vars) {
   $vars['site_name'] = &drupal_static('adaptivetheme_preprocess_page_site_name');
   if (empty($vars['site_name'])) {
     $vars['site_name_title'] = variable_get('site_name', 'Drupal');
-    $vars['site_name'] = l($vars['site_name_title'], '<front>', array('attributes' => array('title' => t('Home page'))));
+    $vars['site_name'] = l($vars['site_name_title'], '<front>', $options = array('attributes' => array('title' => t('Home page'))));
     $vars['site_name_unlinked'] = $vars['site_name_title'];
   }
 
@@ -239,6 +239,11 @@ function adaptivetheme_preprocess_page(&$vars) {
       // Remove the infernal feed icons
       if (at_get_setting('feed_icons_hide', $theme_name) == 1) {
         $vars['feed_icons'] = '';
+      }
+      // Remove local tasks
+      if (at_get_setting('unset_local_tasks', $theme_name) == 1) {
+        $vars['primary_local_tasks'] = '';
+        $vars['secondary_local_tasks'] = '';
       }
     }
   }
