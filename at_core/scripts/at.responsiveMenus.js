@@ -72,13 +72,6 @@
           if($(this).next('.rm-accordion-trigger').length == 0) {
             $(this).after(button);
           }
-          // Debug buttons added twice (enquire fires twice for unknown reason).
-          // if($(this).next('.rm-accordion-trigger').length == 0) {
-          //   console.log('trigger_does_not_exist');
-          // }
-          // if($(this).next('.rm-accordion-trigger').length !== 0) {
-          //   console.log('trigger_does_exist');
-          // }
           var mlid = $(this).parent().parent().attr('id');
           $(this).next().attr('aria-controls', mlid + '__child-menu');
           $(this).parent().next('.is-child').attr('id', mlid + '__child-menu');

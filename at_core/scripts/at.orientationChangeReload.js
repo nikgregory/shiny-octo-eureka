@@ -6,8 +6,10 @@
   Drupal.behaviors.atOrientationChangeReload = {
     attach: function () {
       window.addEventListener('orientationchange', function () {
+        // Wipe out the dom.
         document.body.style.display = 'none';
-        window.location.reload();
+        // Reload from cache if available.
+        window.location.reload(false);
       });
     }
   };
