@@ -24,7 +24,6 @@
  */
 #}
 {% block messages %}
-<div data-drupal-messages>
   {%- for type, messages in message_list -%}
     {%- set classes = ['messages', 'messages--' ~ type] -%}
     <div role="contentinfo" aria-label="{{- status_headings[type] -}}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
@@ -51,5 +50,4 @@
     {# Remove type specific classes. #}
     {%- set attributes = attributes.removeClass(classes) -%}
   {%- endfor -%}
-</div>
 {% endblock messages %}

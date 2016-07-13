@@ -150,6 +150,16 @@ at.layout:
     - core/jquery.once
   weight: -1000
 
+# Status Messages (removes if empty)
+at.status_messages:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.StatusMessages.min.js: { minified: true }
+    #scripts/at.StatusMessages.js: {}
+  dependencies:
+    - core/jquery
+  weight: -1000
+
 # Double tap to go
 at.doubletaptogo:
   version: "8.x-1.0"

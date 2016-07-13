@@ -66,6 +66,10 @@ function at_core_page_attachments_alter(array &$page) {
   if (isset($config['layout_method']) && $config['layout_method'] === 1) {
     $page['#attached']['library'][] = 'at_core/at.layout';
   }
+  // Else attach JS to remove empty messages block, region etc.
+  else {
+    $page['#attached']['library'][] = 'at_core/at.status_messages';
+  }
 
   // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
@@ -1461,6 +1465,12 @@ function at_core_preprocess_menu(&$variables) {
     }
   }
 }
+
+/**
+ * Preprocess variables for status messages templates.
+ * @param $variables
+ */
+//function at_core_preprocess_status_messages(&$variables) {}
 
 /**
  * Implements hook_theme_registry_alter().
