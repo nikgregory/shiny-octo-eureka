@@ -369,7 +369,7 @@ a:hover.cke_colorauto, a:hover.cke_colormore, a:focus.cke_colorauto, a:focus.cke
 
 .cke_toolgroup {
   float: left;
-  margin: 0 6px 6px 0;
+  margin: 1px 7px 6px 1px;
   border: 0;
 }
 
@@ -392,9 +392,8 @@ a:hover.cke_colorauto, a:hover.cke_colormore, a:focus.cke_colorauto, a:focus.cke
 }
 
 a.cke_button {
-  display: inline-block;
   height: 18px;
-  padding: 4px 6px 4px;
+  padding: 4px 6px 4px 7px;
   outline: 0;
   float: left;
   border: 0 solid transparent;
@@ -404,6 +403,7 @@ a.cke_button {
   position: relative;
   -webkit-transition: background-color, .15s, ease-in-out;
   transition: background-color, .15s, ease-in-out;
+  border-radius: 2px;
 }
 
 .cke_rtl .cke_button {
@@ -459,12 +459,10 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
 
 .cke_button_icon {
   cursor: inherit;
-  background-repeat: no-repeat;
   margin-bottom: 1px;
   width: 16px;
   height: 16px;
   float: left;
-  display: inline-block;
 }
 
 .cke_rtl .cke_button_icon {
@@ -692,6 +690,10 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
 
 .cke_combo_label {
   display: none;
+  float: left;
+  line-height: 28px;
+  vertical-align: top;
+  margin-right: 5px;
 }
 
 .cke_rtl .cke_combo_label {
@@ -701,12 +703,13 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
 }
 
 .cke_combo_button {
-  display: inline-block;
-  margin: 0 6px 6px 0;
+  float: left;
+  margin: 0 6px 5px 0;
   border: 0 solid #f7f7f7;
   background-color: transparent;
   -webkit-transition: background-color, .15s, ease-in-out;
   transition: background-color, .15s, ease-in-out;
+  border-radius: 2px;
 }
 
 .cke_combo_off a.cke_combo_button:hover, .cke_combo_off a.cke_combo_button:focus {
@@ -755,8 +758,7 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
   float: left;
   cursor: default;
   color: #333333;
-  min-width: 40px;
-  max-width: 100px;
+  width: 60px;
 }
 
 .cke_rtl .cke_combo_text {
@@ -775,10 +777,9 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
   cursor: default;
   display: inline-block;
   font-size: 0;
-  height: 24px;
-  line-height: 1;
-  margin: 0;
-  padding: 0 3px;
+  height: 19px;
+  line-height: 17px;
+  margin: 1px 7px 1px;
   width: 5px;
 }
 
@@ -787,7 +788,7 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
 }
 
 .cke_combo_arrow {
-  margin: 11px 0 0 0;
+  margin: 11px 0 0;
   float: left;
   height: 0;
   width: 0;
@@ -886,15 +887,12 @@ legend.cke_voice_label {
 }
 
 .cke_button_icon {
-  background: none !important;
+  background-image: none !important;
 }
 .cke_button_icon:before {
   font: normal normal normal 14px/1 FontAwesome;
   color: #333333;
   font-weight: normal;
-  width: 16px;
-  height: 14px;
-  text-align: center;
   float: left;
   padding: 1px 0;
   -webkit-font-smoothing: antialiased;
@@ -1177,4 +1175,5 @@ legend.cke_voice_label {
   left: 0 !important;
   right: auto !important;
 }
+
 /*# sourceMappingURL=editor.css.map */

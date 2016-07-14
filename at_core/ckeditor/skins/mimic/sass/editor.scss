@@ -15,6 +15,8 @@ $button-hover-border     : $global-border;
 $button-on-background    : $global-background;
 $button-on-border        : $global-border;
 
+$button-border-radius    : 2px;
+
 $font : normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
 
 .cke_reset {
@@ -261,7 +263,7 @@ body,
     text-decoration: none;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-radius: 2px;
+    border-radius: $button-border-radius;
     outline: 0;
     padding: 8px;
     line-height: 1;
@@ -317,7 +319,7 @@ body,
   padding: 4px 6px;
   color: $global-text-color;
   border-bottom: 1px solid $button-border;
-  border-radius: 2px 2px 0 0;
+  border-radius: $button-border-radius $button-border-radius 0 0;
   background-color: $button-background;
   display: none;
 }
@@ -391,7 +393,7 @@ a {
   &:active.cke_colorbox {
     border: 1px solid $button-border;
     background-color: $button-background;
-    border-radius: 2px;
+    border-radius: $button-border-radius;
     color: $global-text-hover-color;
   }
 
@@ -410,7 +412,7 @@ a {
     &.cke_colormore {
       border: 1px solid $button-hover-border;
       background-color: $button-hover-background;
-      border-radius: 2px;
+      border-radius: $button-border-radius;
       color: $global-text-hover-color;
     }
   }
@@ -453,7 +455,7 @@ a {
     }
 
     &:last-child {
-      border-radius: 2px 0 0 0;
+      border-radius: $button-border-radius 0 0 0;
     }
   }
 
@@ -463,9 +465,8 @@ a {
 }
 
 a.cke_button {
-  display: inline-block;
   height: 18px;
-  padding: 4px 6px 4px;
+  padding: 4px 6px 4px 7px;
   outline: 0;
   float: left;
   border: 0 solid transparent;
@@ -474,6 +475,7 @@ a.cke_button {
   font-size: 0;
   position: relative;
   transition: background-color, .15s, ease-in-out;
+  border-radius: $button-border-radius;
 }
 
 .cke_rtl .cke_button {
@@ -548,12 +550,10 @@ a.cke_button_disabled {
 
 .cke_button_icon {
   cursor: inherit;
-  background-repeat: no-repeat;
   margin-bottom: 1px;
   width: 16px;
   height: 16px;
   float: left;
-  display: inline-block;
 }
 
 .cke_rtl .cke_button_icon {
@@ -815,12 +815,12 @@ a.cke_button_disabled {
 }
 
 .cke_combo_button {
-  display: inline-block;
   float: left;
   margin: 0 6px 5px 0;
   border: 0 solid $button-background;
   background-color: transparent;
   transition: background-color, .15s, ease-in-out;
+  border-radius: $button-border-radius;
 }
 
 .cke_combo_off a.cke_combo_button {
@@ -1027,15 +1027,12 @@ legend.cke_voice_label {
 }
 
 .cke_button_icon {
-  background: none !important;
+  background-image: none !important;
 
   &:before {
     font: normal normal normal 14px/1 FontAwesome;
     color: $global-text-color;
     font-weight: normal;
-    width: 16px;
-    height: 14px;
-    text-align: center;
     float: left;
     padding: 1px 0;
     -webkit-font-smoothing: antialiased;
@@ -1309,8 +1306,6 @@ legend.cke_voice_label {
   content: "\f127";
 }
 
-
-
 .InputfieldCKEditor {
   position: relative;
 }
@@ -1321,3 +1316,4 @@ legend.cke_voice_label {
   left: 0 !important;
   right: auto !important;
 }
+
