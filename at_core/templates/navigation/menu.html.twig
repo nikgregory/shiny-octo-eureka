@@ -16,9 +16,6 @@
  *   - is_collapsed: TRUE if the link has children within the current menu tree
  *     that are not currently visible.
  *   - in_active_trail: TRUE if the link is in the active trail.
- snippets...
- item.original_link ? 'menu__item-original-link--' ~ item.original_link.getPluginId()|clean_class,
- {{ link(item.title, item.url, {'class':['main-nav__link']}) }}
  */
 #}
 {%- import _self as menus -%}
@@ -27,47 +24,46 @@
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
 {{- menus.menu_links(items, attributes, 0, menu_name) -}}
-
 {%- macro menu_links(items, attributes, menu_level, menu_name) -%}
   {%- import _self as menus -%}
-  {%- if items -%}
-    {%- if menu_level == 0 -%}
-      {%-
-        set menu_classes = [
-          'menu',
-          'odd',
-          'menu-level-1',
-          menu_name ? 'menu-name--' ~ menu_name|clean_class,
-        ]
-      -%}
-      <ul{{ attributes.addClass(menu_classes) }}>
-    {%- else -%}
-      <ul class="menu is-child {{ cycle(['odd', 'even'], menu_level) }} {{ 'menu-level-' ~ (menu_level + 1) }}">
-    {%- endif -%}
-      {%- for item in items -%}
-        {%- if item.below is not empty -%}
-          {%- set is_parent = true -%}
-        {% else %}
-          {%- set is_parent = false -%}
+  {% if items %}
+    {%- for item in items -%}
+
+      {% if loop.first %}
+        <ul
+        {%- if menu_level == 0 -%}
+          {{ attributes.addClass(['menu', 'odd', 'menu-level-1', menu_name ? 'menu-name--' ~ menu_name|clean_class ]) }}
+        {%- else %}
+          class="menu is-child {{ cycle(['odd', 'even'], menu_level) }} {{ 'menu-level-' ~ (menu_level + 1) }}"
         {%- endif -%}
-        {%-
-          set item_classes = [
-            'menu__item',
-            is_parent ? 'is-parent',
-            item.is_expanded ? 'menu__item--expanded',
-            item.is_collapsed ? 'menu__item--collapsed',
-            item.in_active_trail ? 'menu__item--active-trail',
-            'menu__item-title--' ~ item.title|render|clean_class,
-          ]
-        -%}
-        {# We set an id on list items to provide context for aria attributes in responsive menu toggle buttons. #}
-        <li{{ item.attributes.addClass(item_classes).setAttribute('id', 'mlid-' ~ item.title|render|clean_class)|without('role') }}>
-          <span class="menu__link--wrapper{{ is_parent ? ' is-parent__wrapper' }}">{{ link(item.title, item.url) }}</span>
-          {%- if item.below -%}
-            {{ menus.menu_links(item.below, attributes, menu_level + 1, menu_name) }}
-          {%- endif -%}
-        </li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
+        >
+      {% endif %}
+
+      {%- if item.below is not empty -%}
+        {%- set is_parent = true -%}
+      {%- else -%}
+        {%- set is_parent = false -%}
+      {%- endif -%}
+
+      {%- set item_classes = [
+        'menu__item',
+        is_parent ? 'is-parent',
+        item.is_expanded ? 'menu__item--expanded',
+        item.is_collapsed ? 'menu__item--collapsed',
+        item.in_active_trail ? 'menu__item--active-trail',
+        'menu__item-title--' ~ item.title|render|clean_class
+      ] -%}
+      {# We set an id on list items to provide context for aria attributes in responsive menu toggle buttons. #}
+      <li{{ item.attributes.addClass(item_classes).setAttribute('id', 'mlid-' ~ item.title|render|clean_class)|without('role') }}>
+        <span class="menu__link--wrapper{{ is_parent ? ' is-parent__wrapper' }}">{{ link(item.title, item.url) }}</span>
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1, menu_name) }}
+        {% endif %}
+      </li>
+
+      {% if loop.last %}
+        </ul>
+      {% endif %}
+    {%- endfor -%}
+  {% endif %}
 {%- endmacro -%}
