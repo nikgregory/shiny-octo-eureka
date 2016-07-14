@@ -2,8 +2,6 @@
  * Double Tap To Go
  *
  * Fork: by Jeff Burnz https://github.com/jmburnz/DoubleTapToGo
- * - Remove win7 mobile check.
- * - Rewrite to Drupal coding standards.
  *
  * Originally by Osvaldas Valutis, www.osvaldas.info
  * unbind & other improvements by https://github.com/zenopopovici/DoubleTapToGo
@@ -12,50 +10,55 @@
  * TODO: upstream request to include the zenopopovici version in cdnjs.com:
  * https://github.com/cdnjs/cdnjs/issues/8439
  */
-;(function($, window, document) {
+(function ($, window, document) {
 
-	"use strict";
+  "use strict";
 
-	$.fn.doubleTapToGo = function(action) {
+  Drupal.behaviors.atdoubleTap = {
+    attach: function () {
 
-		if (action === 'unbind') {
-			this.each(function() {
-				$(this).off();
-				$(document).off('click touchstart MSPointerDown', handleTouch);
-			});
-		}
-		else {
-			this.each(function() {
-				var currentItem = false;
+      $.fn.doubleTapToGo = function(action) {
 
-				$(this).on('click', function(e) {
-					var item = $(this);
+        if (!('ontouchstart' in window) &&
+          !navigator.msMaxTouchPoints &&
+          !navigator.userAgent.toLowerCase().match( /windows phone os 7/i )) return false;
 
-					if (item[0] != currentItem[0]) {
-						e.preventDefault();
-            currentItem = item;
-					}
-				});
+        if (action === 'unbind') {
+          this.each(function() {
+            $(this).off();
+            $(document).off('click touchstart MSPointerDown', handleTouch);
+          });
 
-				$(document).on('click touchstart MSPointerDown', handleTouch);
+        } else {
+          this.each(function() {
+            var curItem = false;
 
-				function handleTouch(e) {
-          var resetItem = true,
-            parents = $(e.target).parents();
+            $(this).on('click', function(e) {
+              var item = $(this);
+              if (item[0] != curItem[0]) {
+                e.preventDefault();
+                curItem = item;
+              }
+            });
 
-          for (var i = 0; i < parents.length; i++) {
-						if (parents[i] == currentItem[0]) {
-							resetItem = false;
-						}
-					}
+            $(document).on('click touchstart MSPointerDown', handleTouch);
 
-          if (resetItem) {
-            currentItem = false;
-          }
-				}
-			});
-		}
+            function handleTouch(e) {
+              var resetItem = true,
+                parents = $(e.target).parents();
 
-		return this;
-	};
+              for (var i = 0; i < parents.length; i++)
+                if (parents[i] == curItem[0])
+                  resetItem = false;
+
+              if(resetItem)
+                curItem = false;
+            }
+          });
+        }
+
+        return this;
+      };
+    }
+  };
 })(jQuery, window, document);
