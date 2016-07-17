@@ -36,6 +36,7 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
   }
 
   if (!empty($theme_blocks) && !empty($mobile_blocks_breakpoints)) {
+    $output = array();
     foreach (array_reverse($mobile_blocks_breakpoints) as $mbs_key => $mbs_value) {
       $mbs_query = $mbs_value->getMediaQuery();
       $mbs_breakpoints_all[$mbs_query] = $mbs_query;
