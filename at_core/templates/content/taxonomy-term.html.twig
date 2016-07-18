@@ -26,16 +26,30 @@
 {%
   set classes = [
     'taxonomy-term',
+    view_mode ? 'taxonomy-term--view-mode-' ~ view_mode|clean_class,
     'vocabulary-' ~ term.bundle|clean_class,
   ]
 %}
-<div{{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
+{% if view_mode == 'default' %}
+  {% set html_element = 'article' %}
+{% else %}
+  {% set html_element = 'section' %}
+{% endif %}
+<{{ html_element }}{{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
+
   {{ title_prefix }}
   {% if not page %}
-    <h2><a href="{{ url }}">{{ name }}</a></h2>
+    <h2 class="taxonomy-term__title"><a href="{{ url }}">{{ name }}</a></h2>
   {% endif %}
   {{ title_suffix }}
-  <div class="content">
+
+  {% set content_rendered %}
     {{ content }}
-  </div>
-</div>
+  {% endset %}
+  {% if content_rendered|trim is not empty %}
+    <div class="taxonomy-term__content">
+      {{ content_rendered }}
+    </div>
+  {% endif %}
+
+</{{ html_element }}>
