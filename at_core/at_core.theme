@@ -16,6 +16,17 @@ use Drupal\layout_plugin\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
 
 /**
+ * Clean away twig debugging output, it breaks some stuff.
+ *
+ * @param $variable
+ * @return mixed
+ */
+function _at_core_cleanup_twig_debug_output($variable) {
+  $output = preg_replace('~>\s+<~', '><', preg_replace('/<!--(.|\s)*?-->/', '', $variable));
+  return preg_replace(array('/\r/', '/\n/'), '', $output);
+}
+
+/**
  * Alter the element type information returned from modules.
  * TODO Review/remove after https://www.drupal.org/node/2409083 lands.
  * @param array $info
@@ -1036,6 +1047,8 @@ function at_core_preprocess_region(&$variables) {
   }
 }
 
+
+
 /**
  * Preprocess variables for node templates.
  * @param $variables
@@ -1077,10 +1090,16 @@ function at_core_preprocess_node(&$variables) {
     $variables['submitted_attributes']['class'][] = 'node__submitted';
 
     // Add a class if author picture is printing.
-    // TODO - does this break the entity render cache?
     if ($author_picture = \Drupal::service('renderer')->render($variables['author_picture'])) {
-      // TODO - does this fail if twig debugging is on?
-      if (!empty($author_picture)) {
+      // If twig debug is on $author_picture is not empty.
+      $twig_debug = \Drupal::service('twig')->isDebug();
+      if ($twig_debug == TRUE) {
+        $ap = _at_core_cleanup_twig_debug_output($author_picture);
+      }
+      else {
+        $ap = $author_picture;
+      }
+      if (!empty($ap)) {
         $variables['meta_attributes']['class'][] = 'node__meta--has-author-picture';
       }
     }
