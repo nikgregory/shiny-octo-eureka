@@ -22,7 +22,7 @@ use Drupal\at_core\Layout\LayoutLoad;
  * @return mixed
  */
 function _at_core_cleanup_twig_debug_output($variable) {
-  $output = preg_replace('~>\s+<~', '><', preg_replace('/<!--(.|\s)*?-->/', '', $variable));
+  $output = preg_replace('/[ \t]+/', ' ', preg_replace('/<!--(.|\s)*?-->/', '', $variable));
   return preg_replace(array('/\r/', '/\n/'), '', $output);
 }
 
