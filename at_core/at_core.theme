@@ -73,14 +73,10 @@ function at_core_page_attachments_alter(array &$page) {
   // Attach at.settings, we need the ajaxPageState theme name.
   $page['#attached']['library'][] = 'at_core/at.settings';
 
-  // Attach the JS layout script if required.
-  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
-    $page['#attached']['library'][] = 'at_core/at.layout';
-  }
-  // Else attach JS to remove empty messages block, region etc.
-  else {
-    $page['#attached']['library'][] = 'at_core/at.status_messages';
-  }
+  // Attach the JS layout script. Always run this to cleanup potentially
+  // incorrect layout classes in the markup due to placeholders.
+  // See: https://www.drupal.org/node/953034
+  $page['#attached']['library'][] = 'at_core/at.layout';
 
   // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
@@ -416,7 +412,8 @@ function at_core_page_attachments_alter(array &$page) {
  *   The assets attached to the current response.
  */
 //function at_core_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-//  kpr($css);
+//  ksm($css);
+//  ksm($assets);
 //}
 
 /**
@@ -428,7 +425,8 @@ function at_core_page_attachments_alter(array &$page) {
  *   The assets attached to the current response.
  */
 //function at_core_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-//  kpr($javascript);
+//  ksm($javascript);
+//  ksm($assets);
 //}
 
 /**
@@ -958,10 +956,12 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
-  // Layout Attributes
+  //--- Layout Attributes --------------------------------------------------- //
 
-  // Allow the main content to render in at_generator so users can login if they
-  // set it as default and blew their site up.
+  // BC for pre RC2 themes:
+  // - allow the main content to render in at_generator so users can login if
+  // they set it as default and blew their site up.
+  // TODO remove at some stage.
   if ($theme === 'at_generator') {
     $variables['main']['has_regions'] = TRUE;
     return; // return early to avoid notices and errors.
@@ -971,42 +971,23 @@ function at_core_preprocess_page(&$variables) {
   // This adds two classes to every wrapper:
   //  - "arc--[n]" active region count in this row, e.g. "arc--2".
   //  - "hr--[n-n]" has regions, by source order, e.g. "hr--1-3".
-  //
-  // There are two layout methods - a JavaScript that applies layout classes
-  // and avoids having to render early. The second (and default) method renders
-  // regions early, as this is the only way to reliably check if the region is
-  // has content. Rendering early is discouraged and for those who wish to avoid
-  // it can set the JS method as default in theme settings.
-
-  // First check if the JS layout method is being used.
-  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
-    $variables['attributes']['class'][] = 'js-layout';
-    $layout_load = new LayoutLoad($theme, $active_regions = NULL);
-    if ($row_attributes = $layout_load->rowAttributesJS()) {
-      $variables += $row_attributes;
+  $variables['attributes']['class'][] = 'js-layout';
+  $regions = system_region_list($theme, REGIONS_VISIBLE);
+  $active_regions = array();
+  // Do a basic check for emptiness, however we can never be sure because of
+  // placeholders: https://www.drupal.org/node/953034
+  // After the page loads at.layout.js runs to fix incorrect layout classes.
+  // Note the old render early code has been removed, i.e.:
+  // if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {}
+  foreach ($regions as $region_name => $region_label) {
+    if (!empty($variables['page'][$region_name])) {
+      $active_regions[] = $region_name;
     }
   }
-  // Nope, lets go ahead with the our standard render early method.
-  else {
-    $regions = system_region_list($theme, REGIONS_VISIBLE);
-    $active_regions = array();
-    // Render early because themes cannot check render arrays to determine
-    // visibility. This is a critical issue in D8 (and D7 also):
-    // https://www.drupal.org/node/953034. Early rendering is the only way I
-    // have found to reliably set the layout (JS does a reasonable job but can
-    // be slow and do odd things).
-    foreach ($regions as $region_name => $region_label) {
-      if (!empty($variables['page'][$region_name])) {
-        if ($region = \Drupal::service('renderer')->render($variables['page'][$region_name])) {
-          $active_regions[] = $region_name;
-        }
-      }
-    }
-    if (!empty($active_regions)) {
-      $layout_load = new LayoutLoad($theme, $active_regions);
-      if ($row_attributes = $layout_load->rowAttributes()) {
-        $variables += $row_attributes;
-      }
+  if (!empty($active_regions)) {
+    $layout_load = new LayoutLoad($theme, $active_regions);
+    if ($row_attributes = $layout_load->rowAttributes()) {
+      $variables += $row_attributes;
     }
   }
 }
@@ -1021,14 +1002,8 @@ function at_core_preprocess_region(&$variables) {
   $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
 
   // Set source order data attribute, used to set the layout classes.
-  if (isset($config['layout_method']) && $config['layout_method'] === 1) {
-    $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
-    $variables['attributes']['data-at-region'] = $region_source_order[$variables['region']];
-  }
-  // BC
-  else {
-    $variables['attributes']['data-at-region'] = 'region-' . Html::cleanCssIdentifier($variables['region']);
-  }
+  $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
+  $variables['attributes']['data-at-region'] = $region_source_order[$variables['region']];
 
   // Set variable for the row this region belongs to.
   $region_row = $layout_loaded->regionAttributes($variables['region']);

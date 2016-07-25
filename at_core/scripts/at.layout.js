@@ -1,6 +1,6 @@
 /**
  * @file
- * Load layout.
+ * Load layout - taking out the thrash, oh hell yeah.
  */
 (function ($, window) {
 
@@ -14,30 +14,51 @@
         return;
       }
 
+      $.fn.switchClass = function(remove, add) {
+        var regex = new RegExp(
+          '\\s' + remove
+            .replace(/\*/g, '[A-Za-z0-9-_]+')
+            .split(' ')
+            .join('\\s|\\s')
+          + '\\s', 'g'
+        );
+        this.each(function(i, it) {
+          var classname = ' ' + it.className + ' ';
+          while (regex.test(classname) ) {
+            classname = classname.replace(regex, ' ');
+          }
+          it.className = $.trim(classname);
+        });
+
+        return !add ? this : this.addClass(add);
+      };
+
       // Never run this on really small devices.
       var notSmartPhone = window.matchMedia('(min-width: 320px)');
 
       if (notSmartPhone.matches) {
         $('.regions').each(function() {
-          // Remove empty regions first, otherwise classes will be wrong.
+          //Remove empty regions first, otherwise classes will be wrong.
           $(this).children().filter(function() {
-            return !($.trim($(this).text()).length);
+            return !($(this).find('*[class*="block"], .messages, .panel-panel')).length;
           }).remove();
 
-          // Add classes.
+          // data-at-region holds an int value corresponding to it's place in
+          // the source order.
           var active_regions = $(this).children().map(function() {
             return $(this).attr('data-at-region');
           }).get().join('-');
+
           if (active_regions) {
             var hr = 'hr--' + active_regions;
-            var arc = 'arc--' + this.children.length;
-            $(this).addClass(hr).addClass(arc).attr('data-at-regions', 'has-regions');
+            var arc = 'arc--' + $(this).children.length;
+            if (!$(this).hasClass(hr)) {
+              $(this).switchClass('arc-*', arc).switchClass('hr-*', hr);
+            }
+            $(this).attr('data-at-regions', 'has-regions');
+          } else {
+            $(this).parents('.page__row').remove();
           }
-
-          // Clean up empty parents.
-          $(this).filter(function() {
-            return !($.trim($(this).text()).length);
-          }).parent().remove();
         });
       }
     }

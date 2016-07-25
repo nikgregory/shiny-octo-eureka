@@ -285,7 +285,9 @@ class LayoutSubmit {
       $doc = array();
       $doc[$suggestion_key][] = '{#';
       $doc[$suggestion_key][] = '/**';
-      $doc[$suggestion_key][] = ' * ' . $this->layout_name . ' ' . $suggestion_key . ' template.';
+      $doc[$suggestion_key][] = ' * Layout provider: ' . $this->layout_name;
+      $doc[$suggestion_key][] = ' * Template suggestion: ' . $suggestion_key;
+      $doc[$suggestion_key][] = ' * Theme: ' . $this->theme_name;
       $doc[$suggestion_key][] = ' * Generated on: ' . date(DATE_RFC822);
       $doc[$suggestion_key][] = ' */';
       $doc[$suggestion_key][] = '#}' . "\n";
@@ -302,8 +304,7 @@ class LayoutSubmit {
       }
       $attach_layout = "{{ attach_library('$library') }}";
 
-      // Get the template file, if not found attempt to generate template
-      // code programmatically.
+      // Get the template file, if not found attempt to generate the template.
       if (file_exists($template_file)) {
         $template = file_get_contents($template_file);
       }
@@ -335,26 +336,19 @@ class LayoutSubmit {
             $wrapper_element[$suggestion_key] = $row;
           }
 
-          if ($this->form_values['settings_layout_method'] === 0) {
-            $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
-          }
-
+          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
           $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '.wrapper_attributes }}>';
           $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '.container_attributes }}>';
 
           foreach ($row_values['regions'] as $region_key => $region_values) {
             $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_key . ' }}';
           }
-          $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
 
+          $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
           $output[$suggestion_key][$row]['container_close'] = '    </div>';
           $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
-
           $output[$suggestion_key][$row]['suffix'] = "\n";
-
-          if ($this->form_values['settings_layout_method'] === 0) {
-            $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
-          }
+          $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
         }
 
         $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
