@@ -19,7 +19,7 @@
       // set in breakpoints module config, i.e. themeName.breakpoints.yml and are
       // the group selected to be used by the themes layout.
       var activeTheme = settings['ajaxPageState']['theme'];
-      var bp = settings[activeTheme]['at_breakpoints'];
+      var bps = settings[activeTheme]['at_breakpoints'];
 
       function registerEnquire(breakpoint_label, breakpoint_query) {
         enquire.register(breakpoint_query, {
@@ -32,9 +32,10 @@
         });
       }
 
-      for (var item in bp) {
-        if (bp.hasOwnProperty(item)) {
-          registerEnquire(item, bp[item]['mediaquery']);
+      for (var item in bps) {
+        if (bps.hasOwnProperty(item)) {
+          var item_class = item.split('_').join('-');
+          registerEnquire(item_class, bps[item]['mediaquery']);
         }
       }
     }

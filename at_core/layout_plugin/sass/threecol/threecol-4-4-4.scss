@@ -7,8 +7,8 @@
 // Third region  : 4 grid columns.
 // -----------------------------------------------------------------------------
 
-.bp--wide,
-.bp--tablet {
+.bp--at-core-simple-wide,
+.bp--at-core-simple-tablet {
   .atl--threecol-4-4-4 {
     // Two active regions.
     &.l-arc--2 > .atl__lr > .atl__lc {

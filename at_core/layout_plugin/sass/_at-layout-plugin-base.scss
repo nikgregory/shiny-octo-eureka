@@ -1,17 +1,24 @@
 //
-// Import required plugins and define base variables.
-//
-// Don't write any actual styles here, it's just for configuration and imports.
+// Import required plugins, define base variables & global styles.
 // ---------------------------------------------------------------------------
 
 // Requirements
 @import "susy";
 
 
-//// Susy default settings override
-//// http://susy.readthedocs.org/en/latest/settings/#global-defaults
+// Susy default settings override
+// http://susy.readthedocs.org/en/latest/settings/#global-defaults
 $susy: (
-  global-box-sizing: border-box
+  global-box-sizing: border-box,
+  columns: 12,
+  gutters: 0,
+
+  debug: (
+    image: show-columns,
+    color: rgba(0,0,0,0.25),
+    output: overlay,
+    toggle: bottom left,
+  ),
 );
 
 // Flow Direction
@@ -23,3 +30,9 @@ $susy: (
 $flow-direction: susy-get(flow, $susy) !global;
 $flow-to: to($flow-direction);
 $flow-from: from($flow-direction);
+
+// Set display flex on row containers.
+.atl__lr {
+  display: flex;
+  justify-content: space-between;
+}

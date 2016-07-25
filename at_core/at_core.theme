@@ -891,15 +891,20 @@ function at_core_preprocess_html(&$variables) {
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
     $breakpoints_array = array();
-    if (isset($config['breakpoint_group_layout'])) {
-      $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($config['breakpoint_group_layout']);
-
+    $breakpoint_groups[] = isset($config['breakpoint_group_layout']) ? $config['breakpoint_group_layout']: 'at_core.simple';
+    // Push 'at_core.simple' onto the array, out Layout Plugin layouts always
+    // require these breakpoints to be set.
+    if ($breakpoint_groups !== 'at_core.simple') {
+      $breakpoint_groups[] = 'at_core.simple';
+    }
+    foreach ($breakpoint_groups as $breakpoint_group) {
+      $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($breakpoint_group);
       foreach ($breakpoints as $breakpoint_key => $breakpoint_values) {
-        $breakpoint_label =  strtolower($breakpoint_values->getLabel()->getUntranslatedString());
-        $breakpoints_array[$breakpoint_label]['breakpoint'] = $breakpoint_key;
-        $breakpoints_array[$breakpoint_label]['mediaquery'] = $breakpoint_values->getMediaQuery();
+        $breakpoint_label = strtolower($breakpoint_values->getLabel()->getUntranslatedString());
+        $clean_breakpoint_key = str_replace('.', '_', $breakpoint_key);
+        $breakpoints_array[$clean_breakpoint_key]['breakpoint'] = $breakpoint_label;
+        $breakpoints_array[$clean_breakpoint_key]['mediaquery'] = $breakpoint_values->getMediaQuery();
       }
-
       $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
     }
   }

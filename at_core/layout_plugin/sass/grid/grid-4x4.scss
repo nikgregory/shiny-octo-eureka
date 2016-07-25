@@ -9,7 +9,7 @@
   }
 }
 
-.bp--tablet {
+.bp--at-core-simple-tablet {
   .atl--grid-4x4 {
     > .atl__lc {
       @include gallery(6 of 12);
@@ -17,7 +17,7 @@
   }
 }
 
-.bp--wide {
+.bp--at-core-simple-wide {
   .atl--grid-4x4 {
     > .atl__lc {
       @include gallery(3 of 12);
