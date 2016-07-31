@@ -1,8 +1,6 @@
-
 // Global styles for appearance.
 
-
-.admin-theme--seven {
+[class*="admin-theme"] {
 
   // Ensure some long urls or hypenated strings don't
   // break the layout.
@@ -185,9 +183,7 @@
       	padding-bottom: 99999px;
       }
 
-      .css-layout-options {
-        float: right;
-      }
+
     }
   }
 

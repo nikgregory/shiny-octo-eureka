@@ -1,6 +1,6 @@
 // Extensions
-.admin-theme--seven {
 
+[class*="admin-theme"] {
   #edit-docs {
     @include cf;
 
@@ -18,7 +18,7 @@
   }
 
   #edit-extensions {
-    &> .details-wrapper {
+    & > .details-wrapper {
       padding: 0;
     }
 
@@ -34,7 +34,7 @@
     }
 
     .vertical-tabs__menu {
-       border-top: 0;
+      border-top: 0;
     }
 
     .vertical-tabs__menu-item {
@@ -54,10 +54,11 @@
     }
 
     .markup-overrides-desc {
-      margin:0;
+      margin: 0;
     }
 
-    .submit--advanced-settings {}
+    .submit--advanced-settings {
+    }
   }
 
   // Fonts
@@ -104,7 +105,6 @@
       font-size: 0.95em;
     }
   }
-
 
   /* Image alignment options */
   #edit-image-settings {
@@ -153,10 +153,18 @@
         vertical-align: bottom;
         width: 50px;
 
-        &[for$=-none]   {background-position: 0 0;}
-        &[for$=-left]   {background-position: -50px 0;}
-        &[for$=-center] {background-position: -100px 0;}
-        &[for$=-right]  {background-position: -150px 0;}
+        &[for$=-none] {
+          background-position: 0 0;
+        }
+        &[for$=-left] {
+          background-position: -50px 0;
+        }
+        &[for$=-center] {
+          background-position: -100px 0;
+        }
+        &[for$=-right] {
+          background-position: -150px 0;
+        }
       }
     }
   }
@@ -239,9 +247,9 @@
 
   // Developer settings
   #edit-devel {
-     label {
-       font-weight: bold;
-     }
+    label {
+      font-weight: bold;
+    }
 
     .description {
       color: #757575;
@@ -325,7 +333,6 @@
       border-radius: 4px 4px 0 0;
     }
 
-
     fieldset {
       border-top: 1px solid #ccc;
       margin: 0;
@@ -354,5 +361,5 @@
       }
     }
   }
-}
 
+}

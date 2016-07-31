@@ -1,7 +1,6 @@
 // Layouts
 
-.admin-theme--seven {
-
+[class*="admin-theme"] {
   #edit-layouts {
     padding: 0;
     overflow: hidden;
@@ -138,27 +137,27 @@
 
     .column-select-layouts {
       clear: right;
+      border-right: 1px solid #BFBFBA;
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
     }
-
 
     // new page layout fieldsets
     #edit-layout-select {
-
       fieldset {
-        background: none repeat scroll 0 0 transparent;
-        line-height: 1;
-        margin: 0 0 10px;
-        padding: 0;
+        background: #f5f4f1;
+        margin: 0 0 2px;
+        padding: 10px 10px 8px;
       }
 
       select {
-        min-width: 18em;
+        min-width: 65%;
         max-width: 90%;
       }
 
       @media all and (min-width: 60em) {
         .form-type-select {
-          width: 75%;
+          width: 65%;
           float: left;
           margin: 0;
           padding: 0;
@@ -167,6 +166,11 @@
             float: left;
             width: 10em;
           }
+        }
+
+        .css-layout-options {
+          width: 34%;
+          float: right;
         }
       }
 
@@ -195,15 +199,15 @@
         .region {
           box-sizing: border-box;
           text-align: left;
-          margin-bottom: 1.69492%;
+          margin-bottom: 2px;
           transition: all, .15s, ease-in;
 
           span {
             display: block;
-            background-color: #b2b2b2;
-            font-size: 0.8rem;
+            background-color: #a4a39f;
+            font-size: 0.75rem;
             height: 1.5em;
-            padding: 0.3em 0 0 0.45em;
+            padding: 0.2em 0 0 0.45em;
             color: #f5f5f5;
           }
         }
@@ -271,33 +275,6 @@
       clear: both;
       margin: 0;
       padding: 0 0 10px;
-    }
-  }
-
-}
-
-// Set these here again in case someone is not using Seven, however this theme is REALLY designed to use Seven admin theme
-// and nothing else, everything might break because this is so propriatary.
-#edit-layouts {
-  .fieldset-wrapper {
-    overflow: hidden;
-  }
-
-  .css-layout-options {
-    .region {
-      box-sizing: border-box;
-      text-align: left;
-      margin-bottom: 1.69492%;
-      transition: all, .15s, ease-in;
-
-      span {
-        display: block;
-        background-color: #b2b2b2;
-        font-size: 0.8rem;
-        height: 1.5em;
-        padding: 0.3em 0 0 0.45em;
-        color: #f5f5f5;
-      }
     }
   }
 }

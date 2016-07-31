@@ -1,6 +1,6 @@
 // Core (basic settings - toggle, logo, favicon etc)
 
-.admin-theme--seven {
+[class*="admin-theme"] {
   #edit-basic-settings {
     overflow: hidden;
     padding: 0;
@@ -41,5 +41,5 @@
       }
     }
   }
-}
 
+}
