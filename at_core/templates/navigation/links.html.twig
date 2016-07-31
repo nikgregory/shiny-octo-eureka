@@ -12,7 +12,8 @@
  *     text item in the links list in a <span> element.
  *   - text_attributes: (optional) HTML attributes for the <span> element if no
  *     'link' is supplied.
- *   - attributes: (optional) HTML attributes for the <li>..
+ *   - attributes: (optional) HTML attributes for the <li>.
+ *   - wrapper_attributes: extra classes for theming link wrappers.
  * - heading: (optional) A heading to precede the links.
  *   - text: The heading text.
  *   - level: The heading level (e.g. 'h2', 'h3').
@@ -40,11 +41,11 @@
     {%- for item in links -%}
       <li{{ item.attributes }}>
         {%- if item.link -%}
-          {{ item.link }}
+          <span{{ item.wrapper_attributes }}>{{ item.link }}</span>
         {%- elseif item.text_attributes -%}
           <span{{ item.text_attributes }}>{{ item.text }}</span>
         {%- else -%}
-          {{ item.text }}
+          <span{{ item.wrapper_attributes }}>{{ item.text }}</span>
         {%- endif -%}
       </li>
     {%- endfor -%}

@@ -3,7 +3,8 @@
  * @file
  * Theme override for a node edit form.
  *
- * Two column template for the node add/edit form.
+ * Two column template for the node add/edit form. The clearfix is for backwards
+ * compatibility with early sub-themes that did not use flexbox.
  *
  * This template will be used when a node edit form specifies 'node_edit_form'
  * as its #theme callback.  Otherwise, by default, node add/edit forms will be
@@ -17,12 +18,20 @@
 #}
 <div class="layout-node-form clearfix">
   <div class="layout-region layout-region-node-main">
-    {{ form|without('advanced', 'actions') }}
+    <div class="layout-region__inner layout-region-node-main__inner">
+     {{ form|without('advanced', 'actions') }}
+    </div>
   </div>
   <div class="layout-region layout-region-node-secondary">
-    {{ form.advanced }}
+    <div class="layout-region__inner layout-region-node-secondary__inner">
+      {{ form.advanced }}
+    </div>
   </div>
+</div>
+<div class="layout-node-form-footer clearfix">
   <div class="layout-region layout-region-node-footer">
-    {{ form.actions }}
+    <div class="layout-region__inner layout-region-node-footer__inner">
+      {{ form.actions }}
+    </div>
   </div>
 </div>

@@ -29,13 +29,7 @@
 {{- attach_library(theme.name ~ '/base') -}}
 {{- attach_library(theme.name ~ '/color') -}}
 <!DOCTYPE html>
-{%-
-  set html_classes = [
-    'no-js',
-    'adaptivetheme',
-  ]
--%}
-<html{{ html_attributes.addClass(html_classes) }}>
+<html{{ html_attributes.addClass('no-js', 'adaptivetheme') }}>
   <head>
     {%- if touch_icons == true -%}
       {%- if touch_icon_ipad_retina -%}
