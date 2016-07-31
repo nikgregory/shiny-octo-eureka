@@ -7,7 +7,7 @@
   "use strict";
 
   Drupal.behaviors.atLayoutLoad = {
-    attach: function () {
+    attach: function (context) {
 
       // Verify that the user agent understands media queries.
       if (!window.matchMedia('only screen').matches) {
@@ -37,7 +37,7 @@
       var notSmartPhone = window.matchMedia('(min-width: 320px)');
 
       if (notSmartPhone.matches) {
-        $('.regions').each(function() {
+        $(context).find('.regions').once('atLayoutLoad').each(function() {
           //Remove empty regions first, otherwise classes will be wrong.
           $(this).children().filter(function() {
             return !($(this).find('*[class*="block"], .messages, .panel-panel')).length;
@@ -64,3 +64,4 @@
     }
   };
 }(jQuery, window));
+//$(context)
