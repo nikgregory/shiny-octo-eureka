@@ -1,0 +1,54 @@
+.atl__lr {
+  margin: 0 -0.625em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.atl__lc {
+  -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  padding: 0 0.625em;
+}
+
+.bp--at-core-simple-wide .atl--threecol-8-2-2.l-arc--2 > .atl__cw > .atl__lc,
+.bp--at-core-simple-tablet .atl--threecol-8-2-2.l-arc--2 > .atl__cw > .atl__lc {
+  -webkit-flex-basis: 66.66667%;
+      -ms-flex-preferred-size: 66.66667%;
+          flex-basis: 66.66667%;
+}
+.bp--at-core-simple-wide .atl--threecol-8-2-2.l-arc--2 > .atl__cw > .atl__lc:last-child,
+.bp--at-core-simple-tablet .atl--threecol-8-2-2.l-arc--2 > .atl__cw > .atl__lc:last-child {
+  -webkit-flex-basis: 33.33333%;
+      -ms-flex-preferred-size: 33.33333%;
+          flex-basis: 33.33333%;
+}
+
+.bp--at-core-simple-tablet .atl--threecol-8-2-2.l-arc--3 > .atl__cw > .atl__lc:nth-child(2), .bp--at-core-simple-tablet .atl--threecol-8-2-2.l-arc--3 > .atl__cw > .atl__lc:last-child {
+  -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+          flex-basis: 50%;
+}
+
+.bp--at-core-simple-wide .atl--threecol-8-2-2.l-arc--3 > .atl__cw > .atl__lc {
+  -webkit-flex-basis: 16.66667%;
+      -ms-flex-preferred-size: 16.66667%;
+          flex-basis: 16.66667%;
+}
+.bp--at-core-simple-wide .atl--threecol-8-2-2.l-arc--3 > .atl__cw > .atl__lc:first-child {
+  -webkit-flex-basis: 66.66667%;
+      -ms-flex-preferred-size: 66.66667%;
+          flex-basis: 66.66667%;
+}
+
+/*# sourceMappingURL=threecol-8-2-2.css.map */

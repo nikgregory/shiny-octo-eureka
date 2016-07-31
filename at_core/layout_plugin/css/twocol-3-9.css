@@ -1,0 +1,37 @@
+.atl__lr {
+  margin: 0 -0.625em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.atl__lc {
+  -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  padding: 0 0.625em;
+}
+
+.bp--at-core-simple-wide .atl--twocol-3-9.l-arc--2 > .atl__cw > .atl__lc,
+.bp--at-core-simple-tablet .atl--twocol-3-9.l-arc--2 > .atl__cw > .atl__lc {
+  -webkit-flex-basis: 25%;
+      -ms-flex-preferred-size: 25%;
+          flex-basis: 25%;
+}
+.bp--at-core-simple-wide .atl--twocol-3-9.l-arc--2 > .atl__cw > .atl__lc:last-child,
+.bp--at-core-simple-tablet .atl--twocol-3-9.l-arc--2 > .atl__cw > .atl__lc:last-child {
+  -webkit-flex-basis: 75%;
+      -ms-flex-preferred-size: 75%;
+          flex-basis: 75%;
+}
+
+/*# sourceMappingURL=twocol-3-9.css.map */

@@ -17,11 +17,11 @@ sass_dir = 'sass'
 Sass::Script::Number.precision = 5
 
 
-# Environment
+# Line Comments
 # -----------------------------------------------------------------------------
-environment = :production
+line_comments = false
 
 
-# Output Style
+# Source maps
 # -----------------------------------------------------------------------------
-output_style = :compact
+#sourcemap = true

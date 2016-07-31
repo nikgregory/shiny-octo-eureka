@@ -18,7 +18,7 @@ twocol-2-10:
   path: layout_plugin
   icon: templates/twocol/twocol-2-10.png
   template: templates/twocol/at-layout--twocol
-  css: css/twocol/twocol-2-10.css
+  css: css/twocol-2-10.css
   regions:
     top:
       label: Top
@@ -36,7 +36,7 @@ twocol-3-9:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-3-9.png
-  css: css/twocol/twocol-3-9.css
+  css: css/twocol-3-9.css
   regions:
     top:
       label: Top
@@ -54,7 +54,7 @@ twocol-4-8:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-4-8.png
-  css: css/twocol/twocol-4-8.css
+  css: css/twocol-4-8.css
   regions:
     top:
       label: Top
@@ -72,7 +72,7 @@ twocol-5-7:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-5-7.png
-  css: css/twocol/twocol-5-7.css
+  css: css/twocol-5-7.css
   regions:
     top:
       label: Top
@@ -90,7 +90,7 @@ twocol-6-6:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-6-6.png
-  css: css/twocol/twocol-6-6.css
+  css: css/twocol-6-6.css
   regions:
     top:
       label: Top
@@ -108,7 +108,7 @@ twocol-7-5:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-7-5.png
-  css: css/twocol/twocol-7-5.css
+  css: css/twocol-7-5.css
   regions:
     top:
       label: Top
@@ -126,7 +126,7 @@ twocol-8-4:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-8-4.png
-  css: css/twocol/twocol-8-4.css
+  css: css/twocol-8-4.css
   regions:
     top:
       label: Top
@@ -144,7 +144,7 @@ twocol-9-3:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-9-3.png
-  css: css/twocol/twocol-9-3.css
+  css: css/twocol-9-3.css
   regions:
     top:
       label: Top
@@ -162,7 +162,7 @@ twocol-10-2:
   path: layout_plugin
   template: templates/twocol/at-layout--twocol
   icon: templates/twocol/twocol-10-2.png
-  css: css/twocol/twocol-10-2.css
+  css: css/twocol-10-2.css
   regions:
     top:
       label: Top
@@ -181,12 +181,12 @@ threecol-2-8-2:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-2-8-2.png
-  css: css/threecol/threecol-2-8-2.css
+  css: css/threecol-2-8-2.css
   regions:
     top:
       label: Top
     col_1:
-      label: Column One (8, middle)
+      label: Column One (8, center)
     col_2:
       label: Column Two (2, left)
     col_3:
@@ -201,7 +201,7 @@ threecol-2-2-8:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-2-2-8.png
-  css: css/threecol/threecol-2-2-8.css
+  css: css/threecol-2-2-8.css
   regions:
     top:
       label: Top
@@ -221,7 +221,7 @@ threecol-8-2-2:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-8-2-2.png
-  css: css/threecol/threecol-8-2-2.css
+  css: css/threecol-8-2-2.css
   regions:
     top:
       label: Top
@@ -241,14 +241,14 @@ threecol-3-6-3:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-3-6-3.png
-  css: css/threecol/threecol-3-6-3.css
+  css: css/threecol-3-6-3.css
   regions:
     top:
       label: Top
     col_1:
       label: Column One (6, center)
     col_2:
-      label: Column Two (3, middle)
+      label: Column Two (3, left)
     col_3:
       label: Column Three (3, right)
     bottom:
@@ -261,7 +261,7 @@ threecol-3-3-6:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-3-3-6.png
-  css: css/threecol/threecol-3-3-6.css
+  css: css/threecol-3-3-6.css
   regions:
     top:
       label: Top
@@ -281,7 +281,7 @@ threecol-6-3-3:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-6-3-3.png
-  css: css/threecol/threecol-6-3-3.css
+  css: css/threecol-6-3-3.css
   regions:
     top:
       label: Top
@@ -301,7 +301,7 @@ threecol-4-4-4:
   path: layout_plugin
   template: templates/threecol/at-layout--threecol
   icon: templates/threecol/threecol-4-4-4.png
-  css: css/threecol/threecol-4-4-4.css
+  css: css/threecol-4-4-4.css
   regions:
     top:
       label: Top
@@ -322,7 +322,7 @@ fourcol-3-3-3-3:
   path: layout_plugin
   template: templates/fourcol/at-layout--fourcol
   icon: templates/fourcol/fourcol-3-3-3-3.png
-  css: css/fourcol/fourcol-3-3-3-3.css
+  css: css/fourcol-3-3-3-3.css
   regions:
     top:
       label: Top
@@ -345,7 +345,7 @@ grid-2x2:
   path: layout_plugin
   template: templates/grid/at-layout--grid-2x2
   icon: templates/grid/grid-2x2.png
-  css: css/grid/grid-2x2.css
+  css: css/grid-2x2.css
   regions:
     r1c1:
       label: Row 1 Left
@@ -363,7 +363,7 @@ grid-3x3:
   path: layout_plugin
   template: templates/grid/at-layout--grid-3x3
   icon: templates/grid/grid-3x3.png
-  css: css/grid/grid-3x3.css
+  css: css/grid-3x3.css
   regions:
     r1c1:
       label: Row 1 Left
@@ -391,7 +391,7 @@ grid-4x4:
   path: layout_plugin
   template: templates/grid/at-layout--grid-4x4
   icon: templates/grid/grid-4x4.png
-  css: css/grid/grid-4x4.css
+  css: css/grid-4x4.css
   regions:
     r1c1:
       label: Row 1 Left

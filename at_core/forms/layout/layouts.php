@@ -14,10 +14,6 @@ $layout_compatible_data = $layout_data->getCompatibleLayout();
 $layout_config = $layout_compatible_data['layout_config'];
 $css_config = $layout_compatible_data['css_config'];
 
-
-// Prepare variables for getting the visual layout thingee CSS file.
-$provider_path = drupal_get_path('theme', $css_config['layout_provider']) . '/layout/' . $css_config['layout'];
-
 // Breakpoints
 $breakpoints_group_layout = theme_get_setting('settings.breakpoint_group_layout', $theme);
 $layout_breakpoints = $breakpoints[$breakpoints_group_layout];
@@ -49,7 +45,7 @@ $form['layouts'] = array(
 );
 
 // Attached required CSS and JS libraries and files.
-$form['layouts']['#attached']['library'][] = "$theme/layout_settings";
+$form['layouts']['#attached']['library'][] = $css_config['layout_provider'] . '/layout_settings';
 
 // Enable layouts, this is a master setting that totally disables the page layout system.
 $form['layouts']['layouts-enable-container'] = array(
@@ -192,7 +188,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
             $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = array(
               '#type' => 'container',
-              '#markup' => '<div class="l-rw regions"><div class="arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div></div>',
+              '#markup' => '<div class="l-rw regions arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div>',
               '#attributes' => array('class' => array('css-layout-option-not-set', $row_default_value)),
             );
           }
