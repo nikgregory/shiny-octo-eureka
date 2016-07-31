@@ -34,8 +34,7 @@
 
       for (var item in bps) {
         if (bps.hasOwnProperty(item)) {
-          var item_class = item.split('_').join('-');
-          registerEnquire(item_class, bps[item]['mediaquery']);
+          registerEnquire(item.split('_').join('-'), bps[item]['mediaquery']);
         }
       }
     }
