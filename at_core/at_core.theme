@@ -709,6 +709,17 @@ function at_core_theme_suggestions_form_alter(array &$suggestions, array $variab
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+//function at_core_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+//  ksm($suggestions);
+//  ksm($variables);
+//}
+
+
+/**
  * Implements hook_form_alter().
  * @param $form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
@@ -740,6 +751,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       // Remove the size attribute.
       $form['keys']['#size'] = '';
       // Classes.
+      $form['actions']['submit']['#attributes']['class'][] = 'search-form__submit';
       if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
           if (isset($config['search_block_hide_submit']) && $config['search_block_hide_submit'] === 1) {
@@ -767,6 +779,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     case 'search_form':
       $form['basic']['#attributes']['class'][] = 'search-basic';
+      $form['basic']['submit']['#attributes']['class'][] = 'search-form__submit';
       unset($form['basic']['#attributes']['class'][array_search('container-inline', $form['basic']['#attributes']['class'])]);
       break;
 
@@ -774,6 +787,68 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['backlink']['#options']['attributes']['class'][] = 'button';
       break;
   }
+}
+
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ *
+ * Changes vertical tabs to container and adds meta information.
+ */
+function at_core_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+
+  $form['#theme'] = array('node_edit_form');
+  $form['#attached']['library'][] = "$theme/node_form";
+
+  $form['advanced']['#type'] = 'container';
+  $is_new = !$node->isNew() ? format_date($node->getChangedTime(), 'short') : t('Not saved yet');
+  $form['meta'] = array(
+    '#attributes' => array('class' => array('entity-meta__header')),
+    '#type' => 'container',
+    '#group' => 'advanced',
+    '#weight' => -100,
+    'published' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'h3',
+      '#value' => $node->isPublished() ? t('Published') : t('Not published'),
+      '#access' => !$node->isNew(),
+      '#attributes' => array(
+        'class' => array(
+          'entity-meta__title',
+          $node->isPublished() ? 'is-published' : 'unpublished',
+        ),
+      ),
+    ),
+    'changed' => array(
+      '#type' => 'item',
+      '#wrapper_attributes' => array('class' => array('entity-meta__last-saved')),
+      '#markup' => '<h4 class="label inline">' . t('Last saved') . '</h4> ' . $is_new,
+    ),
+    'author' => array(
+      '#type' => 'item',
+      '#wrapper_attributes' => array('class' => array('entity-meta__author')),
+      '#markup' => '<h4 class="label inline">' . t('Author') . '</h4> ' . $node->getOwner()->getUsername(),
+    ),
+  );
+  $form['revision_information']['#type'] = 'container';
+  $form['revision_information']['#group'] = 'meta';
+}
+
+/**
+ * Preprocess variables for all templates.
+ * @param $variables
+ */
+function at_core_preprocess(&$variables) {
+  // Inject the current language into every template to ease theme development.
+  $variables['current_language'] = \Drupal::languageManager()->getCurrentLanguage();
+
+  // Inject a usable directory path.
+  $variables['theme_path'] = base_path() . $variables['directory'];
 }
 
 /**
@@ -1137,14 +1212,14 @@ function at_core_preprocess_comment(&$variables) {
 function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-  $variables['click_menus_enabled'] = FALSE;
 
   // Extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
     // Add bool for click menus enabled.
-    if (isset($config['click_menus_enabled']) && $config['click_menus_enabled'] === 1) {
-      if ($variables['base_plugin_id'] === 'system_menu_block') {
+    if ($variables['base_plugin_id'] === 'system_menu_block') {
+      $variables['click_menus_enabled'] = FALSE;
+      if (isset($config['click_menus_enabled']) && $config['click_menus_enabled'] === 1) {
         $variables['click_menus_enabled'] = TRUE;
       }
     }
@@ -1255,6 +1330,12 @@ function at_core_preprocess_field__image(&$variables) {
 
       // Image align class, provide a variable for use in field template.
       $variables['image_align'] = 'align-none';
+
+      // Preview mode default uses view mode default not full.
+      if ($view_mode == 'default') {
+        $view_mode = 'full';
+      }
+
       if (!empty($config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode])) {
         $variables['image_align'] = 'align-' . $config['image_alignment_' . $node_type . '_' . $entity_type . '_' . $view_mode];
       }
@@ -1385,11 +1466,29 @@ function at_core_preprocess_views_view(&$variables) {
 }
 
 /**
+ * Preprocess variables for links templates.
+ * @param $variables
+ */
+function at_core_preprocess_links(&$variables) {
+  foreach ($variables['links'] as $key => $values) {
+    $variables['links'][$key]['wrapper_attributes'] = new Attribute();
+    $variables['links'][$key]['wrapper_attributes']->addClass(Html::cleanCssIdentifier($key . '__link-wrapper'));
+
+    if (isset($variables['links'][$key]['link']['#options']['attributes']['class'])) {
+      $class = $variables['links'][$key]['link']['#options']['attributes']['class'];
+      if (is_string($class)) {
+        $variables['links'][$key]['attributes']->addClass(Html::cleanCssIdentifier($key . '--item' . '--' . $class));
+      }
+    }
+  }
+}
+
+/**
  * Preprocess variables for table templates.
  * @param $variables
  */
 //function at_core_preprocess_table(&$variables) {
-//  kpr($variables);
+//  ksm($variables);
 //}
 
 /**
@@ -1437,6 +1536,7 @@ function _at_core_menu_link_classes($i) {
     return $i['url']->setOption('attributes', array_merge_recursive($attr, $mlc));
   }
 }
+
 
 /**
  * Preprocess variables for menu templates.
