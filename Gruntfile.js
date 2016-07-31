@@ -28,7 +28,7 @@ module.exports = function(grunt) {
             inline: false
           },
           processors: [
-            require('autoprefixer')({browsers: 'last 5 versions'})
+            require('autoprefixer')({browsers: 'last 2 versions'})
           ]
         }
       },
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             inline: false
           },
           processors: [
-            require('autoprefixer')({browsers: 'last 5 versions'})
+            require('autoprefixer')({browsers: 'last 2 versions'})
           ]
         }
       },
@@ -59,6 +59,7 @@ module.exports = function(grunt) {
     compass: {
       atcore: {
         options: {
+          sourcemap: true,
           config: 'at_core/styles/config.rb',
           basePath: 'at_core/styles',
           bundleExec: true
@@ -66,6 +67,7 @@ module.exports = function(grunt) {
       },
       layout_plugin: {
         options: {
+          sourcemap: true,
           config: 'at_core/layout_plugin/config.rb',
           basePath: 'at_core/layout_plugin',
           bundleExec: true
@@ -73,6 +75,7 @@ module.exports = function(grunt) {
       },
       mimic: {
         options: {
+          sourcemap: true,
           config: 'at_core/ckeditor/skins/mimic/config.rb',
           basePath: 'at_core/ckeditor/skins/mimic',
           bundleExec: true
