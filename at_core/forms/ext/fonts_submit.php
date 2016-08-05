@@ -28,7 +28,8 @@ function at_core_submit_fonts($values, $generated_files_path) {
 
   // Initialize some variables.
   $fonts = array();
-  $base_size = '16'; // 16px default
+  $base_size = 16; // 16px default
+  $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
   // Inject config settings for web-fonts.
   $values['settings_font_use_google_fonts'] = FALSE;
@@ -54,13 +55,20 @@ function at_core_submit_fonts($values, $generated_files_path) {
       $rem_size = $values['settings_font_size_' . $font_key] / $base_size;
 
       // line-height multipliers are a bit magical, but "pretty good" defaults.
-      $line_height_multiplier = $values['settings_font_line_height_multiplier_default'];
-      if ($px_size >= $values['settings_font_line_height_multiplier_large_size']) {
-        $line_height_multiplier = $values['settings_font_line_height_multiplier_large'];
+      $line_height = $values['settings_font_line_height_multiplier_default'];
+      if (in_array($font_key, $headings)) {
+        $line_height = $values['settings_font_line_height_multiplier_large'];
       }
 
-      $fonts[$font_key]['size'] = ' font-size: ' . ceil($px_size) . 'px; font-size: ' . round($rem_size, 3) . 'rem;';
-      $fonts[$font_key]['line_height'] = ' line-height: ' . ceil($px_size * $line_height_multiplier) . 'px; line-height: ' . round($rem_size * $line_height_multiplier, 3) . 'rem;';
+      if ($font_key == 'base') {
+        $fonts[$font_key]['size'] = ' font-size: ' . 100 * ($px_size/$base_size) . '%;';
+        $fonts[$font_key]['line_height'] = ' line-height: ' . $line_height . 'em;';
+      }
+      // All other elements.
+      else {
+        $fonts[$font_key]['size'] = ' font-size: ' . round($rem_size, 3) . 'rem;';
+        $fonts[$font_key]['line_height'] = ' line-height: ' . $line_height . ';';
+      }
     }
 
     // Set font family for each key.
