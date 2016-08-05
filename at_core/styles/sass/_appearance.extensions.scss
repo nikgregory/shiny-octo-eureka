@@ -260,6 +260,15 @@
     }
   }
 
+  // Devel live reload.
+  #edit-live-reload {
+    margin: 0;
+
+    .form-item-settings-live-reload-port {
+      margin-left: 1.25em;
+    }
+  }
+
   // Shortcodes
   #edit-shortcodes {
     #edit-title {

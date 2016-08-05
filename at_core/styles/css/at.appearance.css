@@ -578,6 +578,12 @@
 [class*="admin-theme"] #edit-devel .details-wrapper {
   padding: 0.35em 0.65em 0.75em;
 }
+[class*="admin-theme"] #edit-live-reload {
+  margin: 0;
+}
+[class*="admin-theme"] #edit-live-reload .form-item-settings-live-reload-port {
+  margin-left: 1.25em;
+}
 [class*="admin-theme"] #edit-shortcodes #edit-title {
   padding: 1em 0 0;
 }
