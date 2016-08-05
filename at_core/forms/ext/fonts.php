@@ -115,55 +115,55 @@ $form['fonts']['setup']['settings_font_fallback'] = array(
 
 $form['fonts']['setup']['line_height'] = array(
   '#type' => 'details',
-  '#title' => t('Line height multipliers'),
-  '#description' => t('Multipliers are used to calculate the line-height for each font size. Normally this value will be between 1.0 and 3.0.'),
+  '#title' => t('Line height'),
+  '#description' => t('Normally this value will be between 1.0 and 3.0.'),
 );
 
 $form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_default'] = array(
   '#type' => 'number',
-  '#title' => t('Default'),
-  '#max-length' => 3,
-  '#step' => 0.1,
+  '#title' => t('Base'),
+  '#max-length' => 4,
+  '#step' => 0.001,
   '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_default')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
-    'step' => 0.1,
+    'step' => 0.001,
     'class' => array('font-option')
   ),
 );
 
 $form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large'] = array(
   '#type' => 'number',
-  '#title' => t('Large font multiplier'),
-  '#max-length' => 3,
-  '#step' => 0.1,
-  '#description' => t('Large fonts usually require a smaller multiplier.'),
+  '#title' => t('Headings'),
+  '#max-length' => 4,
+  '#step' => 0.001,
+  '#description' => t('Headings usually require a smaller line-height.'),
   '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large')),
   '#attributes' => array(
     'min' => 1,
     'max' => 10,
-    'step' => 0.1,
+    'step' => 0.001,
     'class' => array('font-option')
   ),
 );
 
-$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large_size'] = array(
-  '#type' => 'number',
-  '#title' => t('Large font size'),
-  '#field_suffix' => 'px',
-  '#max-length' => 2,
-  '#description' => t('What is considered a large font?'),
-  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large_size')),
-  '#attributes' => array(
-    'min' => 1,
-    'max' => 99,
-    'step' => 1,
-    'class' => array('font-option')
-  ),
-);
+//$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large_size'] = array(
+//  '#type' => 'number',
+//  '#title' => t('Large font size'),
+//  '#field_suffix' => 'px',
+//  '#max-length' => 2,
+//  '#description' => t('What is considered a large font?'),
+//  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large_size')),
+//  '#attributes' => array(
+//    'min' => 1,
+//    'max' => 99,
+//    'step' => 1,
+//    'class' => array('font-option')
+//  ),
+//);
 
-// APPLY Fonts
+// Apply Fonts
 $form['fonts']['apply'] = array(
   '#type' => 'details',
   '#title' => t('Apply Fonts'),
