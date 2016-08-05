@@ -314,6 +314,11 @@ at.devel_colorize_regions:
     theme:
       styles/css/at.devel.colorize.regions.css: {}
 
+at.livereload:
+  version: "8.x-1.0"
+  js:
+    //localhost:1337/livereload.js: {}
+
 at.devel_nuke_toolbar:
   version: "8.x-1.0"
   css:
