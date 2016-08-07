@@ -141,36 +141,3 @@ if (!isset($getThemeInfo['base theme original'])) {
   );
   $form['responsive_menus']['click_menus']['settings_click_menus_enabled']['#disabled'] = TRUE;
 }
-
-// Position
-$form['responsive_menus']['position'] = array(
-  '#type' => 'details',
-  '#title' => t('Responsive Style Position'),
-  '#description' => t('These settings only apply to the responsive style (i.e. the "desktop style").'),
-);
-
-$form['responsive_menus']['position']['settings_responsive_menu_vertical_position'] = array(
-  '#type' => 'radios',
-  '#title' => t('Vertical position'),
-  '#options' => array(
-    'top' => t('Top'),
-    'center' => t('Center'),
-    'bottom' => t('Bottom'),
-    'none' => t('None'),
-  ),
-  '#default_value' => theme_get_setting('settings.responsive_menu_vertical_position', $theme),
-  '#attributes' => array('class' => array('visually-hidden-off', 'radios-inline')),
-);
-
-$form['responsive_menus']['position']['settings_responsive_menu_horizontal_position'] = array(
-  '#type' => 'radios',
-  '#title' => t('Horizontal position'),
-  '#options' => array(
-    'left' => t('Left'),
-    'center' => t('Center'),
-    'right' => t('Right'),
-    'none' => t('None'),
-  ),
-  '#default_value' => theme_get_setting('settings.responsive_menu_horizontal_position', $theme),
-  '#attributes' => array('class' => array('visually-hidden-off', 'radios-inline')),
-);

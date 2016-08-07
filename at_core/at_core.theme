@@ -283,16 +283,6 @@ function at_core_page_attachments_alter(array &$page) {
       }
       $responsivemenu_settings['acd'] = $click_menu_settings;
 
-      // Vertical and horizontal positioning.
-      if (isset($config['responsive_menu_vertical_position']) && $config['responsive_menu_vertical_position'] !== 'none') {
-        $responsivemenu_settings['vertical_position'] = $config['responsive_menu_vertical_position'];
-        $page['#attached']['library'][] = 'at_core/at.flex_position';
-      }
-      if (isset($config['responsive_menu_horizontal_position']) && $config['responsive_menu_horizontal_position'] !== 'none') {
-        $responsivemenu_settings['horizontal_position'] = $config['responsive_menu_horizontal_position'];
-        $page['#attached']['library'][] = 'at_core/at.flex_position';
-      }
-
       // Load Responsive menu dependencies.
       $page['#attached']['library'][] = "$theme/responsive_menus";
       $page['#attached']['library'][] = "at_core/at.responsivemenus";

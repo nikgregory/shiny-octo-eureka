@@ -21,8 +21,6 @@
           def  = rm['default'],
           resp = rm['responsive'],
           tl   = '.rm-block .rm-toggle__link',
-          vc   = rm['vertical_position'] || null,
-          hp   = rm['horizontal_position'] || null,
           acd_def = rm['acd']['acd_default'],
           acd_resp = rm['acd']['acd_responsive'],
           acd_both = rm['acd']['acd_both'],
@@ -122,19 +120,6 @@
               } else {
                 $('.rm-block__content li:has(ul)').doubleTapToGo('unbind');
               }
-
-              if (vc) {
-                $('.' + resp + ' .rm-block').atFlexCenter({
-                  verticalPosition: vc,
-                  horizontalPosition: hp,
-                  parentSelector: '.rm-row'
-                });
-              } else if (hp) {
-                $('.' + resp + ' .rm-block').atFlexCenter({
-                  horizontalPosition: hp,
-                  parentSelector: '.rm-row'
-                });
-              }
             }
           }
         },
@@ -162,12 +147,6 @@
             $('.rm-block__content li:has(ul)').doubleTapToGo('unbind');
           }
 
-          if (vc) {
-            $('.rm-region').removeAttr('style');
-            $('.' + resp + ' .rm-block').removeClass('is-vertical-' + vc).removeClass('is-horizontal-' + hp).removeAttr('style');
-          } else if (hp) {
-            $('.' + resp + ' .rm-block').removeClass('is-horizontal-' + hp).removeAttr('style');
-          }
           if (resp !== def) {
             $(document.body).removeClass(resp);
           }
