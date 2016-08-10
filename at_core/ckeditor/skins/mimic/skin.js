@@ -6,6 +6,10 @@
 // Set the skin name.
 CKEDITOR.skin.name = "mimic";
 
+// Unset browser based skin css files.
+CKEDITOR.skin.ua_editor = '';
+CKEDITOR.skin.ua_dialog = '';
+
 // Check if font-awesome has loaded & set body classes.
 if (document.documentElement.classList.contains('fa-loaded') == true) {
   CKEDITOR.config.bodyClass = "fa-loaded";
