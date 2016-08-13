@@ -16,15 +16,17 @@
  * @see seven_form_node_form_alter()
  */
 #}
-<div class="layout-node-form clearfix">
-  <div class="layout-region layout-region-node-main">
-    <div class="layout-region__inner layout-region-node-main__inner">
-     {{ form|without('advanced', 'actions') }}
+<div data-at-responsive-columns>
+  <div class="layout-node-form clearfix is-responsive__layout">
+    <div class="layout-region layout-region-node-main is-responsive__column">
+      <div class="layout-region__inner layout-region-node-main__inner">
+       {{ form|without('advanced', 'actions') }}
+      </div>
     </div>
-  </div>
-  <div class="layout-region layout-region-node-secondary">
-    <div class="layout-region__inner layout-region-node-secondary__inner">
-      {{ form.advanced }}
+    <div class="layout-region layout-region-node-secondary is-responsive__column">
+      <div class="layout-region__inner layout-region-node-secondary__inner">
+        {{ form.advanced }}
+      </div>
     </div>
   </div>
 </div>

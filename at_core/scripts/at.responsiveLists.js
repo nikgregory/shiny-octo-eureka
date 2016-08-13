@@ -12,26 +12,26 @@
 
   'use strict';
 
-  function init(i, list_item) {
+  function init(i, list) {
 
-    var list_item = $(list_item);
+    var rep_list = $(list);
 
     function handleResize(e) {
-      list_item.addClass('is-horizontal');
+      rep_list.addClass('is-horizontal');
 
-      var lists = list_item.find('.is-responsive__list');
+      var lists = rep_list.find('.is-responsive__list');
       var list_items_width = 0;
 
       lists.find('.is-responsive__item').each(function() {
         list_items_width += $(this).outerWidth(true);
       });
 
-      var isHorizontal = lists.outerWidth(true) <= list_items_width;
+      var isVertical = lists.outerWidth(true) <= list_items_width;
 
-      if (isHorizontal ==  true) {
-        list_item.removeClass('is-horizontal').addClass('is-vertical');
+      if (isVertical == true) {
+        rep_list.removeClass('is-horizontal').addClass('is-vertical');
       } else {
-        list_item.removeClass('is-vertical').addClass('is-horizontal');
+        rep_list.removeClass('is-vertical').addClass('is-horizontal');
       }
     }
 
@@ -41,9 +41,9 @@
   // Initialize the Responsive lists JS.
   Drupal.behaviors.atRL = {
     attach: function (context) {
-      var list_items = $(context).find('[data-at-responsive-list]');
-      if (list_items.length) {
-        list_items.once().each(init);
+      var list = $(context).find('[data-at-responsive-list]');
+      if (list.length) {
+        list.once().each(init);
       }
     }
   };

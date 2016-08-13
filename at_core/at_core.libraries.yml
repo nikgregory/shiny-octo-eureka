@@ -203,11 +203,20 @@ at.responsivelists:
   dependencies:
     - core/jquery
     - core/drupal
-    - core/drupalSettings
-    - core/matchmedia
     - core/jquery.once
     - core/drupal.debounce
-    - core/modernizr
+
+# Node form
+at.responsivecolumns:
+  version: "8.x-1.0"
+  js:
+    scripts/min/at.responsiveColumns.min.js: { minified: true }
+    #scripts/at.responsiveColumns.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+    - core/drupal.debounce
 
 # Slidedshow
 at.slideshow:
