@@ -43,6 +43,7 @@
 {%-
   set title_classes = [
     'comment-field__title',
+    'h3',
     label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 -%}
@@ -58,7 +59,7 @@
 
   {%- if comment_form -%}
     <div{{ content_attributes.addClass('comment-form-wrapper') }}>
-      <h2 class="comment-form__title">{{ 'Add new comment'|t }}</h2>
+      <h2 class="comment-form__title h3">{{ 'Add new comment'|t }}</h2>
       {{- comment_form -}}
     </div>
   {%- endif -%}
