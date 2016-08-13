@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\at_core\File\DirectoryOperations
+ * Contains \Drupal\at_theme_generator\File\DirectoryOperations
  */
 
 namespace Drupal\at_core\File;
@@ -38,14 +38,14 @@ class DirectoryOperations {
    */
   public function directoryRecursiveCopy($source, $target, $ignore = '/^(\.(\.)?|CVS|\.sass-cache|\.svn|\.git|\.DS_Store)$/') {
     $dir = opendir($source);
-    @mkdir($target);
+    file_prepare_directory($target, FILE_CREATE_DIRECTORY);
     while($file = readdir($dir)) {
       if (!preg_match($ignore, $file)) {
         if (is_dir($source . '/' . $file)) {
           self::directoryRecursiveCopy($source . '/' . $file, $target . '/' . $file, $ignore);
         }
         else {
-          copy($source . '/' . $file, $target . '/' . $file);
+          file_unmanaged_copy($source . '/' . $file, $target . '/' . $file, FILE_EXISTS_RENAME);
         }
       }
     }
@@ -64,7 +64,7 @@ class DirectoryOperations {
       return false;
     }
     if (is_file($directory)) {
-      return unlink($directory);
+      return \Drupal::service('file_system')->unlink($directory);
     }
 
     $dir = dir($directory);
@@ -76,7 +76,7 @@ class DirectoryOperations {
     }
     $dir->close();
 
-    return rmdir($directory);
+    return \Drupal::service('file_system')->rmdir($directory);
   }
 
   /**

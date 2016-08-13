@@ -39,7 +39,7 @@ class FileOperations {
     if (file_exists($file_path)) {
       $file_contents = file_get_contents($file_path);
       $file_contents = str_replace($find, $replace, $file_contents);
-      file_put_contents($file_path, $file_contents);
+      file_unmanaged_save_data($file_path, $file_contents, FILE_EXISTS_REPLACE);
     }
   }
 
@@ -55,10 +55,7 @@ class FileOperations {
    */
   public function fileCopyRename($file_paths) {
     if (file_exists($file_paths['copy_source'])) {
-      copy($file_paths['copy_source'], $file_paths['copy_dest']);
-    }
-    if (file_exists($file_paths['rename_oldname'])) {
-      rename($file_paths['rename_oldname'], $file_paths['rename_newname']);
+      file_unmanaged_copy($file_paths['copy_source'], $file_paths['copy_dest'], FILE_EXISTS_RENAME);
     }
   }
 
@@ -92,37 +89,16 @@ class FileOperations {
   }
 
   /**
-   * Compare two files. First compare file size, then
-   * compare their contents. Return true if the files
-   * are the same, otherwise false.
+   * Unlink all files by extension in a directory.
    *
-   * @param string $afile
-   *   Path to 'a' file.
-   * @param string $bfile
-   *   Path to 'b' file.
-   * @return array $results
+   * @param string $ext
+   * @param string $file_path
    */
-  public function fileCompare($afile, $bfile) {
-    // Check if filesize is different
-    if(filesize($afile) !== filesize($bfile))
-      return false;
-
-    // Check if content is different
-    $aopen = fopen($afile, 'rb');
-    $bopen = fopen($bfile, 'rb');
-
-    $result = true;
-    while(!feof($aopen)) {
-      if(fread($aopen, 8192) != fread($bopen, 8192)) {
-        $result = false;
-        break;
-      }
+  public function fileDeleteByExtension($file_path, $ext) {
+    $glob_files = glob("$file_path/*.$ext");
+    foreach ($glob_files as $file) {
+      \Drupal::service('file_system')->unlink($file);
     }
-
-    fclose($aopen);
-    fclose($bopen);
-
-    return $result;
   }
 
 }
