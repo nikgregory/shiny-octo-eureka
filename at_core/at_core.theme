@@ -1301,14 +1301,6 @@ function at_core_preprocess_field(&$variables) {
   if (isset($variables['element']['#formatter'])) {
     $variables['field_formatter'] = $variables['element']['#formatter'];
   }
-
-  if ($variables['field_name'] == 'field_currency') {
-
-    ksm($variables['element']['#items']->getValue());
-
-    $variables['currency_key'] = $variables['element']['#items']->getValue()[0]['value'];
-  }
-
 }
 
 /**
