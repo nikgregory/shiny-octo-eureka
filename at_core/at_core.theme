@@ -33,7 +33,7 @@ function _at_core_cleanup_twig_debug_output($variable) {
  * @see \Drupal\Core\Render\ElementInfoManager
  * @see \Drupal\Core\Render\Element\ElementInterface
  */
-function at_core_element_info_alter(&$info) {
+function at_core_element_info_alter(array &$info) {
   // Remove the html5 shiv. Add it later if legacy browser support is enabled.
   if (in_array('core/html5shiv', $info['html']['#attached']['library'])) {
     $info['html']['#attached']['library'] = array_merge(array_diff($info['html']['#attached']['library'], array('core/html5shiv')));
@@ -847,18 +847,6 @@ function at_core_form_node_form_alter(&$form, FormStateInterface $form_state) {
 }
 
 /**
- * Preprocess variables for all templates.
- * @param $variables
- */
-function at_core_preprocess(&$variables) {
-  // Inject the current language into every template to ease theme development.
-  $variables['current_language'] = \Drupal::languageManager()->getCurrentLanguage();
-
-  // Inject a usable directory path.
-  $variables['theme_path'] = base_path() . $variables['directory'];
-}
-
-/**
  * Preprocess variables for html templates.
  * @param $variables
  */
@@ -1001,6 +989,9 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
+
   // Page classes
   $variables['attributes']['class'][] = 'page';
 
@@ -1083,9 +1074,12 @@ function at_core_preprocess_page(&$variables) {
 function at_core_preprocess_region(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-  $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
+
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   // Set source order data attribute, used to set the layout classes.
+  $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
   $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
   $variables['attributes']['data-at-region'] = $region_source_order[$variables['region']];
 
@@ -1121,6 +1115,9 @@ function at_core_preprocess_node(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
+
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -1178,6 +1175,9 @@ function at_core_preprocess_comment(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
+
   // Initialize new attributes arrays.
   $variables['meta_attributes'] = new Attribute(array('class' => array()));
   $variables['meta_attributes']['class'][] = 'comment__meta';
@@ -1187,8 +1187,16 @@ function at_core_preprocess_comment(&$variables) {
 
   // Add a class if user picture is printing. Render early.
   if ($user_picture = \Drupal::service('renderer')->render($variables['user_picture'])) {
-    // TODO - does this fail if twig debugging is on? Probably yes it does...
-    if (!empty($user_picture)) {
+
+    // If twig debug is on $author_picture is not empty.
+    $twig_debug = \Drupal::service('twig')->isDebug();
+    if ($twig_debug == TRUE) {
+      $up = _at_core_cleanup_twig_debug_output($user_picture);
+    }
+    else {
+      $up = $user_picture;
+    }
+    if (!empty($up)) {
       $variables['meta_attributes']['class'][] = 'comment__meta--has-user-picture';
     }
   }
@@ -1221,6 +1229,9 @@ function at_core_preprocess_comment(&$variables) {
 function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   if (\Drupal::currentUser()->isAnonymous()) {
     if ($variables['base_plugin_id'] === 'system_branding_block') {
@@ -1284,9 +1295,20 @@ function at_core_preprocess_block(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_field(&$variables) {
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
+
   if (isset($variables['element']['#formatter'])) {
     $variables['field_formatter'] = $variables['element']['#formatter'];
   }
+
+  if ($variables['field_name'] == 'field_currency') {
+
+    ksm($variables['element']['#items']->getValue());
+
+    $variables['currency_key'] = $variables['element']['#items']->getValue()[0]['value'];
+  }
+
 }
 
 /**
@@ -1294,11 +1316,9 @@ function at_core_preprocess_field(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_field__entity_reference(&$variables) {
+  $variables['field_entity_type'] = NULL;
   if (isset($variables['element']['#items']) && is_object($variables['element']['#items'])) {
     $variables['field_entity_type'] = $variables['element']['#items']->getSetting('target_type');
-  }
-  else {
-    $variables['field_entity_type'] = '';
   }
 }
 
@@ -1433,6 +1453,9 @@ function at_core_preprocess_breadcrumb(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_user(&$variables) {
+  // Path to theme.
+  $variables['theme']['path'] = base_path() . $variables['directory'];
+
   $user = $variables['elements']['#user'];
 
   // Label.
@@ -1485,9 +1508,15 @@ function at_core_preprocess_views_view(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_links(&$variables) {
+  // We add lots of classes to link items, wrappers and links to support many
+  // options for icons, backgrounds, borders etc.
   foreach ($variables['links'] as $key => $values) {
     $variables['links'][$key]['wrapper_attributes'] = new Attribute();
     $variables['links'][$key]['wrapper_attributes']->addClass(Html::cleanCssIdentifier($key . '__link-wrapper'));
+
+    if (isset($variables['links'][$key]['link']['#options']['attributes'])) {
+      $variables['links'][$key]['link']['#options']['attributes']['class'] = array(Html::cleanCssIdentifier($key . '__link'));
+    }
 
     if (isset($variables['links'][$key]['link']['#options']['attributes']['class'])) {
       $class = $variables['links'][$key]['link']['#options']['attributes']['class'];
@@ -1577,6 +1606,17 @@ function at_core_preprocess_menu(&$variables) {
         }
       }
     }
+  }
+}
+
+/**
+ * Preprocess variables for the select template.
+ * @param $variables
+ */
+function at_core_preprocess_select(&$variables) {
+  $variables['content_attributes']['class'][] = 'form-type-select__select-wrapper';
+  if ($variables['element']['#multiple'] == TRUE) {
+    $variables['content_attributes']['class'][] = 'is-multiple';
   }
 }
 
