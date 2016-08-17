@@ -1055,10 +1055,11 @@ function at_core_preprocess_page(&$variables) {
     )
   );
   $variables['attribution'] = array(
-    '#type' => 'markup',
-    '#prefix' => '<div class="l-pr attribution"><div class="l-rw">',
-    '#markup' => \Drupal\Core\Link::fromTextAndUrl(t('Design by Adaptivethemes.com'), $attribution_url)->toString(),
-    '#suffix' => '</div></div>',
+    '#type' => 'inline_template',
+    '#template' => '<div class="l-pr attribution"><div class="l-rw">{{ attribution }}</div></div>',
+    '#context' => array(
+      'attribution' => \Drupal\Core\Link::fromTextAndUrl(t('Design by Adaptivethemes.com'), $attribution_url)->toString(),
+    ),
   );
 
   // Disallow access if attribution link is toggled off.
