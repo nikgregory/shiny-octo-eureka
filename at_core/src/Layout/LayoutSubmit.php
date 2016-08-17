@@ -293,7 +293,7 @@ class LayoutSubmit {
       $doc[$suggestion_key][] = '#}' . "\n";
       $docblock[$suggestion_key] = implode("\n", $doc[$suggestion_key]);
 
-      // Attach layout.
+      // Attach the dynamic layout library.
       $generated_files_path = $this->form_values['settings_generated_files_path'];
       $layout_file = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion_key) . '.css';
       if (file_exists($generated_files_path .'/'. $layout_file)) {
@@ -309,63 +309,17 @@ class LayoutSubmit {
         $template = file_get_contents($template_file);
       }
       else {
-        foreach ($this->layout_config['rows'] as $row => $row_values) {
-
-          // Row attributes.
-          $attributes[$row]['class'][] = 'l-pr page__row';
-          $attributes[$row]['class'][] = 'pr-' . $row;
-
-          foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
-            if (is_array($attribute_values)) {
-              $attributes[$row][$attribute_type][] = implode(' ', $attribute_values);
-            }
-            else {
-              $attributes[$row][$attribute_type][] = $attribute_values;
-            }
-          }
-
-          ksort($attributes[$row], SORT_STRING);
-
-          foreach ($attributes[$row] as $attr_type => $attr_array_vales) {
-            $attr_array_vales = array_unique($attr_array_vales);
-            $this_row_attr[$row][$attr_type] = $attr_type . '="' . implode(' ', $attr_array_vales) . '"';
-          }
-
-          $wrapper_element[$suggestion_key] = 'div';
-          if ($row == 'header' || $row == 'footer') {
-            $wrapper_element[$suggestion_key] = $row;
-          }
-
-          $output[$suggestion_key][$row]['prefix'] = '  {% if '. $row . '.has_regions == true %}';
-          $output[$suggestion_key][$row]['wrapper_open'] =  '  <'. $wrapper_element[$suggestion_key] . '{{ ' .  $row . '.wrapper_attributes }}>';
-          $output[$suggestion_key][$row]['container_open'] = '    <div{{ ' .  $row . '.container_attributes }}>';
-
-          foreach ($row_values['regions'] as $region_key => $region_values) {
-            $row_regions[$suggestion_key][$row][] = '      {{ page.' . $region_key . ' }}';
-          }
-
-          $output[$suggestion_key][$row]['regions'] = implode("\n", $row_regions[$suggestion_key][$row]);
-          $output[$suggestion_key][$row]['container_close'] = '    </div>';
-          $output[$suggestion_key][$row]['wrapper_close'] = '  </' . $wrapper_element[$suggestion_key] . '>';
-          $output[$suggestion_key][$row]['suffix'] = "\n";
-          $output[$suggestion_key][$row]['suffix'] = '  {% endif %}' . "\n";
-        }
-
-        $generated[$suggestion_key][] = '<div{{ attributes }}>'. "\n";
-
-        foreach ($output[$suggestion_key] as $row_output) {
-          $generated[$suggestion_key][] = implode("\n", $row_output);
-        }
-
+        $generated[$suggestion_key][] = '<div{{ attributes }}>' . "\n";
+        $generated[$suggestion_key][] = '  {{ rows }}' . "\n";
         $generated[$suggestion_key][] = "  {{ attribution }}" . "\n";
         $generated[$suggestion_key][] = '</div>' . "\n";
         $template[$suggestion_key] = implode($generated[$suggestion_key]);
       }
 
-      // Prepend the docblock to the template markup.
+      // Prepend the doc block and attached layout to the template markup.
       $template_markup[$suggestion_key] = $docblock[$suggestion_key] . $attach_layout . "\n" . $template[$suggestion_key];
 
-      // Set the template file, either it's page or a page suggestion.
+      // Set the template file name, either it's page or a page suggestion.
       if ($suggestion_key !== 'page') {
         $template_file = str_replace('_', '-', $suggestion_key) . '.html.twig';
       }
@@ -383,7 +337,6 @@ class LayoutSubmit {
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
-
         $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
 
         //Add a date time string to make unique and for easy identification,

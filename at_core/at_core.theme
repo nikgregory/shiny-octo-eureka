@@ -16,6 +16,32 @@ use Drupal\layout_plugin\Layout;
 use Drupal\at_core\Layout\LayoutLoad;
 
 /**
+ * Implements hook_theme().
+ */
+function at_core_theme() {
+  $path = drupal_get_path('theme', 'at_core') . '/templates/layout';
+  return array(
+    // Define the row template/hook.
+    'row' => array(
+      'variables' => array(
+        'regions' => NULL
+      ),
+      'template' => 'row',
+      'path' => $path,
+    ),
+    // Ensure suggestions are picked up in the base theme first.
+    'row__header' => array(
+      'base hook' => 'row',
+      'path' => $path,
+    ),
+    'row__footer' => array(
+      'base hook' => 'row',
+      'path' => $path,
+    ),
+  );
+}
+
+/**
  * Clean away twig debugging output, it breaks some stuff.
  *
  * @param $variable
@@ -654,6 +680,29 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for row templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function at_core_theme_suggestions_row_alter(array &$suggestions, array $variables) {
+  if (isset($variables['regions']['#row'])) {
+    $row = $variables['regions']['#row'];
+    $suggestions[] = 'row__' . $row;
+
+    // Add content type suggestions, e.g. page--node--article.html.twig.
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      if (is_object($node)) {
+        array_splice($suggestions, 1, 0, 'row__' . $row  . '__node_' . $node->getType());
+      }
+      // Row front.
+      if (\Drupal::service('path.matcher')->isFrontPage() == TRUE) {
+        array_splice($suggestions, 2, 0, 'row__' . $row . '__front');
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter() for field templates.
  * @param array $suggestions
  * @param array $variables
@@ -1029,7 +1078,7 @@ function at_core_preprocess_page(&$variables) {
     }
   }
 
-  //--- Layout Attributes --------------------------------------------------- //
+  //--- Layout -------------------------------------------------------------- //
 
   // BC for pre RC2 themes:
   // - allow the main content to render in at_generator so users can login if
@@ -1061,10 +1110,39 @@ function at_core_preprocess_page(&$variables) {
     if (!empty($active_regions)) {
       $layout_load = new LayoutLoad($theme, $active_regions);
       if ($row_attributes = $layout_load->rowAttributes()) {
+        // Append to $variables for backwards compatibility.
         $variables += $row_attributes;
+      }
+
+      // Rows.
+      foreach ($active_regions as $key => $region) {
+        // Get the row key for each region.
+        $row_key = $layout_load->regionAttributes($region);
+        if (!empty($row_key)) {
+          // Prepare variables for each row template.
+          $row_regions[$row_key]['#row'] = $row_key;
+          $row_regions[$row_key][$region] = $variables['page'][$region];
+          $row_regions[$row_key]['#wrapper_attributes'] = $row_attributes[$row_key]['wrapper_attributes'];
+          $row_regions[$row_key]['#container_attributes'] = $row_attributes[$row_key]['container_attributes'];
+          // Call the row template and pass in the processed variables.
+          $variables['rows'][$row_key] = array(
+            '#theme' => 'row',
+            '#regions' => $row_regions[$row_key],
+          );
+        }
       }
     }
   }
+}
+
+/**
+ * Preprocess variables for row templates.
+ * @param $variables
+ */
+function at_core_preprocess_row(&$variables) {
+  // Set easy to print variables for attributes.
+  $variables['wrapper_attributes'] = $variables['regions']['#wrapper_attributes'];
+  $variables['container_attributes'] = $variables['regions']['#container_attributes'];
 }
 
 /**

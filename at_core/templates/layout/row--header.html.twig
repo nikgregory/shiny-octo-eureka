@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Row template suggestion to display the header row.
+ *
+ * Available variables:
+ * - regions: contains regions data to appear in this row.
+ * - wrapper_attributes: HTML attributes for the row outer wrapper.
+ * - container_attributes: HTML attributes for the row inner wrapper.
+ *
+ * @see at_core_preprocess_row()
+ */
+#}
+<header{{ wrapper_attributes }}>
+  <div{{ container_attributes }}>
+    {{ regions }}
+  </div>
+</header>
