@@ -650,10 +650,15 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Add content type suggestions.
+  // Add content type suggestions, e.g. page--node--article.html.twig.
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
+    }
+    // If no page--front template is set, inherit the page--node-[id] template
+    // when a node/nid is set as the homepage.
+    if (\Drupal::service('path.matcher')->isFrontPage() == TRUE) {
+      array_splice($suggestions, 2, 0, 'page__node__' . $node->id());
     }
   }
 
