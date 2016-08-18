@@ -137,7 +137,7 @@ $form['responsive_menus']['click_menus']['settings_click_menus_enabled'] = array
 if (!isset($getThemeInfo['base theme original'])) {
   $form['responsive_menus']['click_menus']['upgrade_message'] = array(
     '#type' => 'container',
-    '#markup' => t('Themes generated with AT RC1 and prior are not compatible with click menus, <a href="@upgrade_message" target="_blank"><b>click here for upgrade instructions</b></a>.', array('@upgrade_message' => 'https://www.drupal.org/node/2753187')),
+    '#markup' => t('Themes generated with AT RC1 and prior are not compatible with click menus, <a href=":upgrade_message" target="_blank"><b>click here for upgrade instructions</b></a>.', array(':upgrade_message' => 'https://www.drupal.org/node/2753187')),
   );
   $form['responsive_menus']['click_menus']['settings_click_menus_enabled']['#disabled'] = TRUE;
 }

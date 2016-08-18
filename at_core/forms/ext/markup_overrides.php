@@ -50,7 +50,7 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb'] = array(
 );
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['description'] = array(
   '#type' => 'container',
-  '#markup' => t('Settings for the breadcrumb block. First enable the breadcrumb block from the <a href="@blockconfig" target="_blank">block configuration page</a>.', array('@blockconfig' => base_path() . 'admin/structure/block')),
+  '#markup' => t('Settings for the breadcrumb block. First enable the breadcrumb block from the <a href=":blockconfig" target="_blank">block configuration page</a>.', array(':blockconfig' => base_path() . 'admin/structure/block')),
 );
 // Breadcrumbs label?
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_label'] = array(
@@ -106,7 +106,7 @@ $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_b
 $form['markup_overrides']['markup_overrides_settings']['breadcrumb']['settings_breadcrumb_separator'] = array(
   '#type'  => 'textfield',
   '#title' => t('Separator'),
-  '#description' => t('Use UTF8 chars or escaped unicode, e.g. <code> \00BB </code> (chevron &#187;). Spaces are trimmed. <a href="@unicodetable" target="_blank">Unicode-table.com</a> is a good place to find codes.', array('@unicodetable' => 'http://unicode-table.com/')),
+  '#description' => t('Use UTF8 chars or escaped unicode, e.g. <code> \00BB </code> (chevron &#187;). Spaces are trimmed. <a href=":unicodetable" target="_blank">Unicode-table.com</a> is a good place to find codes.', array(':unicodetable' => 'http://unicode-table.com/')),
   '#default_value' => Html::escape(theme_get_setting('settings.breadcrumb_separator')),
   '#size' => 25,
   '#maxlength' => 60,

@@ -56,7 +56,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
     $memory_limit = ini_get('memory_limit');
     $size = Bytes::toInt($memory_limit);
     if (!Environment::checkMemoryLimit($usage + $required, $memory_limit)) {
-      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href="http://php.net/manual/ini.core.php#ini.sect.resource-limits">PHP documentation</a> for more information.', array('%size' => format_size($usage + $required - $size))), 'error');
+      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href=":php_url">PHP documentation</a> for more information.', array(':php_url' => 'http://php.net/manual/ini.core.php#ini.sect.resource-limits', '%size' => format_size($usage + $required - $size))), 'error');
       return;
     }
   }

@@ -1050,7 +1050,7 @@ function at_core_preprocess_page(&$variables) {
   $variables['attributes']['class'][] = 'page';
 
   // Set attribution.
-  $attribution_url = Url::fromUri('http://adaptivethemes.com',
+  $attribution_url = Url::fromUri('//adaptivethemes.com',
     $options = array(
       'attributes' => array(
         'class' => array('attribution__link'),
