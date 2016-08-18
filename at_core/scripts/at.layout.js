@@ -38,10 +38,12 @@
 
       if (notSmartPhone.matches) {
         $(context).find('.regions').once('atLayoutLoad').each(function() {
-          //Remove empty regions first, otherwise classes will be wrong.
+          // Remove data-at-region first for "empty" regions, otherwise layout
+          // classes will be wrong. Regions lacking the data attribute are
+          // hidden with CSS.
           $(this).find('.region').filter(function() {
             return !($(this).find('*[class*="block"], .messages, .panel-panel')).length;
-          }).remove();
+          }).removeAttr('data-at-region').prop('hidden', true);
 
           // data-at-region holds an int value corresponding to it's place in
           // the source order.
@@ -57,7 +59,8 @@
             }
             $(this).attr('data-at-regions', 'has-regions');
           } else {
-            $(this).parents('.page__row').remove();
+            // Set attribute hidden on the row wrapper.
+            $(this).parents('.page__row').prop('hidden', true);
           }
         });
       }
