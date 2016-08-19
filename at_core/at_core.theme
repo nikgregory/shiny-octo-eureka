@@ -772,17 +772,6 @@ function at_core_theme_suggestions_form_alter(array &$suggestions, array $variab
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter() for form templates.
- * @param array $suggestions
- * @param array $variables
- */
-//function at_core_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
-//  ksm($suggestions);
-//  ksm($variables);
-//}
-
-
-/**
  * Implements hook_form_alter().
  * @param $form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
@@ -851,7 +840,6 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       break;
   }
 }
-
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
@@ -1194,8 +1182,6 @@ function at_core_preprocess_region(&$variables) {
   }
 }
 
-
-
 /**
  * Preprocess variables for node templates.
  * @param $variables
@@ -1386,7 +1372,7 @@ function at_core_preprocess_block(&$variables) {
 function at_core_preprocess_field(&$variables) {
   // Path to theme.
   $variables['theme']['path'] = base_path() . $variables['directory'];
-
+  // Field formatter variable.
   if (isset($variables['element']['#formatter'])) {
     $variables['field_formatter'] = $variables['element']['#formatter'];
   }
@@ -1553,6 +1539,7 @@ function at_core_preprocess_user(&$variables) {
   // Path to theme.
   $variables['theme']['path'] = base_path() . $variables['directory'];
 
+  // Current user.
   $user = $variables['elements']['#user'];
 
   // Label.
@@ -1578,7 +1565,7 @@ function at_core_preprocess_user(&$variables) {
     $variables['access_profiles'] = TRUE;
   }
 
-  // Base path.
+  // Base path, used to build a link to the profile in non-full view modes.
   $variables['base_path'] = base_path();
 }
 
@@ -1623,14 +1610,6 @@ function at_core_preprocess_links(&$variables) {
     }
   }
 }
-
-/**
- * Preprocess variables for table templates.
- * @param $variables
- */
-//function at_core_preprocess_table(&$variables) {
-//  ksm($variables);
-//}
 
 /**
  * Preprocess variables for forums templates.
@@ -1678,7 +1657,6 @@ function _at_core_menu_link_classes($i) {
   }
 }
 
-
 /**
  * Preprocess variables for menu templates.
  * TODO Remove depending on if https://www.drupal.org/node/2755375
@@ -1716,12 +1694,6 @@ function at_core_preprocess_select(&$variables) {
     $variables['content_attributes']['class'][] = 'is-multiple';
   }
 }
-
-/**
- * Preprocess variables for status messages templates.
- * @param $variables
- */
-//function at_core_preprocess_status_messages(&$variables) {}
 
 /**
  * Implements hook_theme_registry_alter().
