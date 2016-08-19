@@ -19,7 +19,7 @@ use Drupal\at_core\Layout\LayoutLoad;
  * Implements hook_theme().
  */
 function at_core_theme() {
-  $path = drupal_get_path('theme', 'at_core') . '/templates/layout';
+  $path = drupal_get_path('theme', 'at_core');
   return array(
     // Define the row template/hook.
     'row' => array(
@@ -27,16 +27,21 @@ function at_core_theme() {
         'regions' => NULL
       ),
       'template' => 'row',
-      'path' => $path,
+      'path' => $path . '/templates/layout',
     ),
     // Ensure suggestions are picked up in the base theme first.
     'row__header' => array(
       'base hook' => 'row',
-      'path' => $path,
+      'path' => $path . '/templates/layout',
     ),
     'row__footer' => array(
       'base hook' => 'row',
-      'path' => $path,
+      'path' => $path . '/templates/layout',
+    ),
+    // Template suggestion for the breadcrumb page title placeholder.
+    'page_title__breadcrumb' => array(
+      'base hook' => 'page_title',
+      'path' => $path . '/templates/content',
     ),
   );
 }
@@ -1462,6 +1467,24 @@ function at_core_preprocess_field__image(&$variables) {
 }
 
 /**
+ * Return values for the breadcrumb title placeholder.
+ * @param $param
+ * @return array
+ */
+function _at_core_breadcrumb_title_placeholder($page_title) {
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+  $title_array = array(
+    '#theme' => 'page_title__breadcrumb',
+    '#title' => $page_title,
+  );
+
+  return $title_array;
+}
+
+/**
  * Preprocess variables for breadcrumb templates.
  * @param $variables
  */
@@ -1494,24 +1517,22 @@ function at_core_preprocess_breadcrumb(&$variables) {
           array_shift($variables['breadcrumb']);
         }
       }
-      // If home is the only item, remove it.
-      elseif (isset($config['breadcrumb_home_alone']) && $config['breadcrumb_home_alone'] === 1) {
-        $arr_length = count($variables['breadcrumb']);
-        if ($arr_length === 1 && $variables['breadcrumb'][0]['url'] === base_path()) {
-          unset($variables['breadcrumb'][0]);
-        }
-      }
 
       // Add title to breadcrumbs.
       if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
-        $request = \Drupal::request();
-        $route_match = \Drupal::routeMatch();
-        $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+        // Use a placeholder to inject dynamic content.
+        $placeholder_title = array(
+          '#lazy_builder' => ['_at_core_breadcrumb_title_placeholder', ['page_title']],
+          '#create_placeholder' => TRUE,
+        );
+        $variables['breadcrumb'][] = ['text' => $placeholder_title];
+      }
 
-        if (!empty($page_title)) {
-          $variables['breadcrumb'][] = ['text' => $page_title];
-          // Add cache context based on url.
-          $variables['#cache']['contexts'][] = 'url';
+      // If home is the only item, remove it.
+      if (isset($config['breadcrumb_home_alone']) && $config['breadcrumb_home_alone'] === 1) {
+        $arr_length = count($variables['breadcrumb']);
+        if ($arr_length === 1 && $variables['breadcrumb'][0]['url'] === base_path()) {
+          unset($variables['breadcrumb'][0]);
         }
       }
 
