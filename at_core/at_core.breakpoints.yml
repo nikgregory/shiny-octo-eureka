@@ -19,6 +19,7 @@ at_core.simple.mobile:
   multipliers:
     - 1x
   group: at_core.simple
+
 at_core.simple.tablet-isolate:
   label: Tablet
   mediaQuery: 'all and (min-width: 45.063em) and (max-width: 60em)'
@@ -26,6 +27,7 @@ at_core.simple.tablet-isolate:
   multipliers:
     - 1x
   group: at_core.simple
+
 at_core.simple.wide:
   label: Wide
   mediaQuery: 'all and (min-width: 60.063em)'
@@ -41,6 +43,7 @@ at_core.simple.wide:
 #  mobile-isolate - 0 to 45em (0 to 720px), small screens only.
 #  tablet-isolate - 45.063em and max-width 65em (721px to 960px), isolate tablets.
 #  wide-isolate   - 60.063em and max-width 120em (961px to 1920px), isolate tablets.
+#  tablet         - 45.063em (721px) and up.
 #  wide           - 60.063em (961px) and up.
 #  huge           - 120.063em (1921px) and up, for big resolution.
 #
@@ -50,9 +53,10 @@ at_core.simple.wide:
 #
 # | $mobile-isolate -->|
 #                      | $tablet-isolate -->|
-#                                           | $wide-isolate ------->|
-#                                           | $wide ------------------------------>
-#                                                                   | $huge ------>
+#                                           | $wide-isolate ----->|
+#                      | $tablet ---------------------------------------------->
+#                                           | $wide --------------------------->
+#                                                                 | $huge ----->
 #
 at_core.advanced.mobile-isolate:
   label: Mobile-isolate
@@ -77,6 +81,15 @@ at_core.advanced.wide-isolate:
   multipliers:
     - 1x
   group: at_core.advanced
+
+at_core.advanced.tablet:
+  label: Tablet
+  mediaQuery: 'all and (min-width: 45.063em)'
+  weight: 1
+  multipliers:
+    - 1x
+  group: at_core.advanced
+
 at_core.advanced.wide:
   label: Wide
   mediaQuery: 'all and (min-width: 60.063em)'
@@ -84,6 +97,7 @@ at_core.advanced.wide:
   multipliers:
     - 1x
   group: at_core.advanced
+
 at_core.advanced.huge:
   label: Huge
   mediaQuery: 'all and (min-width: 120.063em)'
@@ -109,6 +123,7 @@ at_core.responsive_menus.mobile:
   multipliers:
     - 1x
   group: at_core.responsive_menus
+
 at_core.responsive_menus.max-width:
   label: Max-width
   mediaQuery: 'all and (max-width: 75em)'
