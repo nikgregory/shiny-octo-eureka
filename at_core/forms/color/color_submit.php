@@ -65,11 +65,11 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
   $files = $config->get('files');
   if (isset($files)) {
     foreach ($files as $file) {
-      @drupal_unlink($file);
+      \Drupal::service('file_system')->unlink($file);
     }
   }
   if (isset($file) && $file = dirname($file)) {
-    @drupal_rmdir($file);
+    \Drupal::service('file_system')->rmdir($file);
   }
 
   // No change in color config, use the standard theme from color.inc.
@@ -98,7 +98,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
 
   // Copy over neutral images.
   foreach ($info['copy'] as $file) {
-    $base = drupal_basename($file);
+    $base = \Drupal::service('file_system')->basename($file);
     $source = $paths['source'] . $file;
     $filepath = file_unmanaged_copy($source, $paths['target'] . $base);
     $paths['map'][$file] = $base;
@@ -150,7 +150,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
 
       // Rewrite stylesheet with new colors.
       $style = _color_rewrite_stylesheet($theme, $info, $paths, $palette, $style);
-      $base_file = drupal_basename($file);
+      $base_file = \Drupal::service('file_system')->basename($file);
       $css[] = $paths['target'] . $base_file;
       _color_save_stylesheet($paths['target'] . $base_file, $style, $paths);
     }
