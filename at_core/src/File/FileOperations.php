@@ -39,7 +39,7 @@ class FileOperations {
     if (file_exists($file_path)) {
       $file_contents = file_get_contents($file_path);
       $file_contents = str_replace($find, $replace, $file_contents);
-      file_unmanaged_save_data($file_path, $file_contents, FILE_EXISTS_REPLACE);
+      file_put_contents($file_path, $file_contents);
     }
   }
 
