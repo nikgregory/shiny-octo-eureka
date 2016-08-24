@@ -37,7 +37,7 @@ function font_elements() {
     $elements_array = array(
       'base' => array(
         'label' => 'Base',
-        'selector' => 'html',
+        'selector' => 'html, body',
       ),
       'sitename' => array(
         'label' => 'Site name',

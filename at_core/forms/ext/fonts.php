@@ -103,14 +103,17 @@ $form['fonts']['setup']['settings_font_typekit'] = array(
 
 // Fallback
 $form['fonts']['setup']['settings_font_fallback'] = array(
-  '#type' => 'radios',
+  '#type' => 'select',
   '#title' => t('Fallback font family'),
   '#options' => array(
-    'sans_serif' => t('sans-serif'),
-    'serif' => t('serif'),
+    'sans_serif' => t('Sans-serif'),
+    'serif' => t('Serif'),
+    'monospace' => t('Monospace'),
+    'cursive' => t('Cursive'),
+    'fantasy' => t('Fantasy'),
   ),
   '#default_value' => theme_get_setting('settings.font_fallback') ? theme_get_setting('settings.font_fallback') : 'sans_serif',
-  '#description' => t('In the event a web-font does not load, set a fallback font family.'),
+  '#description' => t('In the event a font does not load use a generic fallback.'),
 );
 
 $form['fonts']['setup']['line_height'] = array(
