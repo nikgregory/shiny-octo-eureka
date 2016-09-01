@@ -35,7 +35,7 @@
     <ul class="pager__items">
       {# Prev/first. #}
       {%- if items.first or items.previous -%}
-        <ul class="pager__items__first-previous">
+        <ul class="pager__items__first-previous js-pager__items">
       {%- endif -%}
         {# Print first item if we are not on the first page. #}
         {%- if items.first -%}
@@ -59,7 +59,7 @@
         </ul>
       {%- endif -%}
       {# Items. #}
-      <ol class="pager__items__num-pages">
+      <ul class="pager__items__num-pages js-pager__items">
         {%- for key, item in items.pages -%}
           {%-
             set classes = [
@@ -90,10 +90,10 @@
             </a>
           </li>
         {% endfor %}
-      </ol>
+      </ul>
       {# Next/last. #}
       {%- if items.next or items.last -%}
-        <ul class="pager__items__next-last">
+        <ul class="pager__items__next-last js-pager__items">
       {%- endif -%}
         {# Print next item if we are not on the last page. #}
         {%- if items.next -%}
