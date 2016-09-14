@@ -7,18 +7,25 @@ use Drupal\Component\Utility\Tags;
 use Drupal\at_core\Layout\LayoutLoad;
 
 /**
+ * Preprocess variables for all templates.
+ * @param $variables
+ */
+function at_core_preprocess(&$variables) {
+  // Add theme variables, we use these to set a class and provide a very easy
+  // way for themers to link to files in the theme, such as background images
+  // or other files.
+  $theme = \Drupal::theme()->getActiveTheme();
+  $variables['theme']['name'] = Html::escape($theme->getName());
+  $variables['theme']['path'] = base_path() . $theme->getPath();
+}
+
+/**
  * Preprocess variables for html templates.
  * @param $variables
  */
 function at_core_preprocess_html(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  // Add theme variables, we use these to set a class and provide a very easy
-  // way for themers to link to files in the theme, such as background images
-  // or other files.
-  $variables['theme']['name'] = Html::escape($theme);
-  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   // Set the skip navigation target ID
   $variables['skip_link_target'] = '#block-' . $theme . '-content';
@@ -149,9 +156,6 @@ function at_core_preprocess_page(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
-
   // Page classes
   $variables['attributes']['class'][] = 'page';
 
@@ -265,9 +269,6 @@ function at_core_preprocess_region(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
-
   // Set source order data attribute, used to set the layout classes.
   $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
   $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
@@ -303,9 +304,6 @@ function at_core_preprocess_node(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
   $node = $variables['node'];
-
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   // Extension settings
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
@@ -363,9 +361,6 @@ function at_core_preprocess_comment(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
-
   // Initialize new attributes arrays.
   $variables['meta_attributes'] = new Attribute(array('class' => array()));
   $variables['meta_attributes']['class'][] = 'comment__meta';
@@ -417,9 +412,6 @@ function at_core_preprocess_comment(&$variables) {
 function at_core_preprocess_block(&$variables) {
   $theme = \Drupal::theme()->getActiveTheme()->getName();
   $config = \Drupal::config($theme . '.settings')->get('settings');
-
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
 
   if (\Drupal::currentUser()->isAnonymous()) {
     if ($variables['base_plugin_id'] === 'system_branding_block') {
@@ -483,8 +475,6 @@ function at_core_preprocess_block(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_field(&$variables) {
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
   // Field formatter variable.
   if (isset($variables['element']['#formatter'])) {
     $variables['field_formatter'] = $variables['element']['#formatter'];
@@ -631,9 +621,6 @@ function at_core_preprocess_breadcrumb(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_user(&$variables) {
-  // Path to theme.
-  $variables['theme']['path'] = base_path() . $variables['directory'];
-
   // Current user.
   $user = $variables['elements']['#user'];
 
