@@ -23,11 +23,12 @@ $font : normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent;
+  //background: transparent;
   text-decoration: none;
   width: auto;
   height: auto;
   vertical-align: baseline;
+  display: block;
   box-sizing: content-box;
 }
 
@@ -43,7 +44,7 @@ $font : normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
   box-sizing: content-box;
   border-collapse: collapse;
   font: $font;
-  color: $global-text-color;
+  //color: $global-text-color;
   text-align: left;
   white-space: nowrap;
   cursor: auto;
@@ -118,21 +119,28 @@ $font : normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
 
 .cke_top,
 .cke_contents,
-.cke_bottom {
-  display: block;
-  float: left;
-  overflow: visible;
-  width: 100%;
-}
+.cke_bottom {}
 
 .cke_top {
   border-bottom: 1px solid $global-border;
   padding: 6px 8px 0;
   white-space: normal;
   background: none;
-  float: left;
   width: 100%;
   box-sizing: border-box;
+  display: block;
+
+  .cke_toolbox {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+.cke_toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .cke_float .cke_top {
@@ -429,11 +437,11 @@ a {
 }
 
 .cke_toolbar {
-  float: left;
+ // float: left;
 }
 
 .cke_rtl .cke_toolbar {
-  float: right;
+ // float: right;
 }
 
 .cke_toolgroup {
@@ -770,7 +778,7 @@ a.cke_button_disabled {
 }
 
 .cke_menuarrow {
-  background: url(images/arrow.png) no-repeat 0 10px;
+  //background: url(images/arrow.png) no-repeat 0 10px;
   padding: 0 5px;
 }
 
@@ -1031,6 +1039,7 @@ legend.cke_voice_label {
 
   &:before {
     font: normal normal normal 14px/1 FontAwesome;
+    content: "\f096"; // set a default so at least something shows up.
     color: $global-text-color;
     font-weight: normal;
     float: left;
@@ -1040,7 +1049,7 @@ legend.cke_voice_label {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     box-sizing: content-box;
-    transform:rotateZ(0);
+    //transform:rotateZ(0);
   }
 
   &:hover,
@@ -1092,6 +1101,10 @@ legend.cke_voice_label {
   content: "\f14a";
 }
 
+.cke_button__codesnippet_icon:before {
+  content: "\f121";
+}
+
 .cke_button__copy_icon:before {
   content: "\f0c5";
 }
@@ -1100,8 +1113,8 @@ legend.cke_voice_label {
   content: "\f121";
 }
 
-.cke_button__cut_icon {
-  content: "\f0c4";
+.cke_button__cut_icon:before {
+  content: "\f0c4"; // f0c4
 }
 
 .cke_button__docprops_icon:before {
@@ -1161,6 +1174,10 @@ legend.cke_voice_label {
 
 .cke_button__justifyright_icon:before {
   content: "\f038";
+}
+
+.cke_button__language_icon:before {
+  content: "\f1ab";
 }
 
 .cke_button__drupallink_icon:before, // Drupal
@@ -1246,11 +1263,11 @@ legend.cke_voice_label {
 }
 
 .cke_button__source_icon:before {
-  content: "\f121";
+  content: "\f120";
 }
 
 .cke_button__specialchar_icon:before {
-  content: "\f031";
+  content: "\f11c"; // \f031
 }
 
 .cke_button__spellchecker_icon:before {

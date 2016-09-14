@@ -2,11 +2,11 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent;
   text-decoration: none;
   width: auto;
   height: auto;
   vertical-align: baseline;
+  display: block;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
 }
@@ -24,7 +24,6 @@
           box-sizing: content-box;
   border-collapse: collapse;
   font: normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
-  color: #333333;
   text-align: left;
   white-space: nowrap;
   cursor: auto;
@@ -83,24 +82,43 @@
   padding-bottom: 0;
 }
 
-.cke_top,
-.cke_contents,
-.cke_bottom {
-  display: block;
-  float: left;
-  overflow: visible;
-  width: 100%;
-}
-
 .cke_top {
   border-bottom: 1px solid #e3e3e3;
   padding: 6px 8px 0;
   white-space: normal;
   background: none;
-  float: left;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  display: block;
+}
+.cke_top .cke_toolbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.cke_toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .cke_float .cke_top {
@@ -357,14 +375,6 @@ a:hover.cke_colorauto, a:hover.cke_colormore, a:focus.cke_colorauto, a:focus.cke
   background-color: #f7f7f7;
   border-radius: 2px;
   color: #212121;
-}
-
-.cke_toolbar {
-  float: left;
-}
-
-.cke_rtl .cke_toolbar {
-  float: right;
 }
 
 .cke_toolgroup {
@@ -658,7 +668,6 @@ a.cke_button_disabled:hover, a.cke_button_disabled:active, a.cke_button_disabled
 }
 
 .cke_menuarrow {
-  background: url(images/arrow.png) no-repeat 0 10px;
   padding: 0 5px;
 }
 
@@ -891,6 +900,7 @@ legend.cke_voice_label {
 }
 .cke_button_icon:before {
   font: normal normal normal 14px/1 FontAwesome;
+  content: "\f096";
   color: #333333;
   font-weight: normal;
   float: left;
@@ -901,9 +911,6 @@ legend.cke_voice_label {
   text-rendering: optimizeLegibility;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-  -webkit-transform: rotateZ(0);
-      -ms-transform: rotate(0);
-          transform: rotateZ(0);
 }
 .cke_button_icon:hover:before, .cke_button_icon:focus:before, .cke_button_icon:active:before {
   color: #212121;
@@ -949,6 +956,10 @@ legend.cke_voice_label {
   content: "\f14a";
 }
 
+.cke_button__codesnippet_icon:before {
+  content: "\f121";
+}
+
 .cke_button__copy_icon:before {
   content: "\f0c5";
 }
@@ -957,7 +968,7 @@ legend.cke_voice_label {
   content: "\f121";
 }
 
-.cke_button__cut_icon {
+.cke_button__cut_icon:before {
   content: "\f0c4";
 }
 
@@ -1018,6 +1029,10 @@ legend.cke_voice_label {
 
 .cke_button__justifyright_icon:before {
   content: "\f038";
+}
+
+.cke_button__language_icon:before {
+  content: "\f1ab";
 }
 
 .cke_button__drupallink_icon:before,
@@ -1105,11 +1120,11 @@ legend.cke_voice_label {
 }
 
 .cke_button__source_icon:before {
-  content: "\f121";
+  content: "\f120";
 }
 
 .cke_button__specialchar_icon:before {
-  content: "\f031";
+  content: "\f11c";
 }
 
 .cke_button__spellchecker_icon:before {
