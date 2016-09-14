@@ -53,6 +53,17 @@ module.exports = function(grunt) {
             require('autoprefixer')({browsers: 'last 7 versions'})
           ]
         }
+      },
+      toolbar_theme: {
+        src: 'at_core/toolbar_theme/*.css',
+        options: {
+          map: {
+            inline: false
+          },
+          processors: [
+            require('autoprefixer')({browsers: 'last 7 versions'})
+          ]
+        }
       }
     },
 
@@ -80,6 +91,14 @@ module.exports = function(grunt) {
           basePath: 'at_core/ckeditor/skins/mimic',
           bundleExec: true
         }
+      },
+      toolbar_theme: {
+        options: {
+          sourcemap: true,
+          config: 'at_core/toolbar_theme/config.rb',
+          basePath: 'at_core/toolbar_theme',
+          bundleExec: true
+        }
       }
     },
 
@@ -101,6 +120,12 @@ module.exports = function(grunt) {
           csslintrc: '.csslintrc'
         },
         src: ['at_core/ckeditor/skins/mimic/*.css']
+      },
+      toolbar_theme: {
+        options: {
+          csslintrc: '.csslintrc'
+        },
+        src: ['at_core/toolbar_theme/*.css']
       }
     },
 
@@ -116,6 +141,10 @@ module.exports = function(grunt) {
       mimic: {
         files: 'at_core/ckeditor/skins/mimic/sass/*.scss',
         tasks: ['compass:mimic', 'postcss:mimic']
+      },
+      toolbar_theme: {
+        files: 'at_core/toolbar_theme/*.scss',
+        tasks: ['compass:toolbar_theme', 'postcss:toolbar_theme']
       }
     }
   });
