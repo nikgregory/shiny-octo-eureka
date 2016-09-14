@@ -4,6 +4,16 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Tags;
 
 /**
+ * Because I'm such a lazy kint().
+ * @param $var
+ */
+function kt($var) {
+  if (function_exists('kint')) {
+    return kint($var);
+  }
+}
+
+/**
  * Clean away twig debugging output, it breaks some stuff.
  * @param $variable
  * @return mixed
