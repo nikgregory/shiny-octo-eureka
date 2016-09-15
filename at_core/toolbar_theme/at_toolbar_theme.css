@@ -75,7 +75,7 @@
   margin-right: .25em;
 }
 #toolbar-administration .toolbar-bar.no-tabs .toolbar-tab__items-wrapper a {
-  width: 3em;
+  width: 3.3em;
   height: 2.75em;
   padding: 0;
 }
@@ -318,23 +318,23 @@
   right: 0;
 }
 
+.adminimal #toolbar-bar {
+  font: normal 83.1%/1.5 "Open Sans", sans-serif !important;
+}
 .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-themes {
-  padding-top: 3.5rem !important;
+  padding-top: 4.75em !important;
 }
 .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal #toolbar-administration {
   background-color: #333;
 }
 .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-has-tabs #toolbar-administration {
-  min-height: 3.5em;
+  min-height: 4em;
 }
 .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs #toolbar-administration {
-  min-height: 2.5em;
+  min-height: 2em;
 }
-.adminimal.toolbar-fixed.toolbar-vertical.toolbar-has-tabs, .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs {
-  padding-top: 2em !important;
-}
-.adminimal.toolbar-fixed.toolbar-vertical.toolbar-no-tabs {
-  padding-top: 0 !important;
+.adminimal.toolbar-fixed.toolbar-vertical.toolbar-has-tabs, .adminimal.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs, .adminimal.toolbar-fixed.toolbar-vertical.toolbar-no-tabs, .adminimal.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs {
+  padding-top: 2.4em !important;
 }
 
 /*# sourceMappingURL=at_toolbar_theme.css.map */

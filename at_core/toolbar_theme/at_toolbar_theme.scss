@@ -128,7 +128,7 @@
     }
 
     &.no-tabs .toolbar-tab__items-wrapper a {
-      width: 3em;
+      width: 3.3em;
       height: 2.75em;
       padding: 0;
 
@@ -462,11 +462,16 @@
 
 // Support for the Adminimal admin theme.
 .adminimal {
+
+  #toolbar-bar {
+    font: normal 83.1%/1.5 "Open Sans", sans-serif !important;
+  }
+
   &.toolbar-tray-open {
     &.toolbar-fixed {
       &.toolbar-horizontal {
         &.toolbar-themes {
-          padding-top: 3.5rem !important;
+          padding-top: 4.75em !important;
         }
 
         #toolbar-administration {
@@ -474,23 +479,21 @@
         }
 
         &.toolbar-has-tabs #toolbar-administration {
-          min-height: 3.5em;
+          min-height: 4em;
         }
 
         &.toolbar-no-tabs #toolbar-administration {
-          min-height: 2.5em;
+          min-height: 2em;
         }
       }
     }
   }
 
   &.toolbar-fixed.toolbar-vertical.toolbar-has-tabs,
+  &.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs,
+  &.toolbar-fixed.toolbar-vertical.toolbar-no-tabs,
   &.toolbar-tray-open.toolbar-fixed.toolbar-horizontal.toolbar-no-tabs {
-    padding-top: 2em !important;
-  }
-
-  &.toolbar-fixed.toolbar-vertical.toolbar-no-tabs {
-    padding-top: 0 !important;
+    padding-top: 2.4em !important;
   }
 }
 
