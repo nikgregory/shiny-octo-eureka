@@ -38,11 +38,14 @@ function at_core_page_attachments_alter(array &$page) {
   // Attach at.settings, we need the ajaxPageState theme name.
   $page['#attached']['library'][] = 'at_core/at.settings';
 
-  // Attach the JS layout script. Always run this to cleanup potentially
+  // Attach the JS layout script. We run this to cleanup potentially
   // incorrect layout classes in the markup due to placeholders.
   // See: https://www.drupal.org/node/953034
   if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
-    $page['#attached']['library'][] = 'at_core/at.layout';
+    // Never run on admin pages, it may cause issues with theme setting pages or module forms.
+    if (\Drupal::service('router.admin_context')->isAdminRoute(\Drupal::routeMatch()->getRouteObject()) == FALSE) {
+      $page['#attached']['library'][] = 'at_core/at.layout';
+    }
   }
 
   // Attach Drupal Core module dependant libraries.
@@ -57,7 +60,7 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
-    'toolbar',
+   // 'toolbar',
   );
   $theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($theme);
   foreach ($module_libraries as $module_library) {
@@ -65,6 +68,9 @@ function at_core_page_attachments_alter(array &$page) {
       $page['#attached']['library'][] = "$theme/$module_library";
     }
   }
+
+  // Special case toolbar to support modules that modify the toolbar.
+  // ??
 
   // Process extension settings.
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
