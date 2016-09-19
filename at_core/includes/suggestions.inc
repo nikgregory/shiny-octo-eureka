@@ -74,7 +74,10 @@ function at_core_theme_suggestions_row_alter(array &$suggestions, array $variabl
 function at_core_theme_suggestions_field_alter(array &$suggestions, array $variables) {
   // Add the entity reference type as a field template suggestion.
   if (isset($variables['element']['#items']) && is_object($variables['element']['#items'])) {
-    array_splice($suggestions, 1, 0, 'field__entity_reference_type__' . $variables['element']['#items']->getSetting('target_type'));
+    $target_type = $variables['element']['#items']->getSetting('target_type') ?: NULL;
+    if ($target_type !== NULL) {
+      array_splice($suggestions, 1, 0, 'field__entity_reference_type__' . $target_type);
+    }
   }
 }
 
