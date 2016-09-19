@@ -13,6 +13,17 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $config = \Drupal::config($theme . '.settings')->get('settings');
 
   switch ($form_id) {
+    case 'comment_comment_form':
+      $form['#theme_wrappers']['form__node_comment'] = array(
+        '#attributes' => array(
+          'class' => array(
+            'comment-form',
+            'comment-form--node',
+          )
+        ),
+      );
+      break;
+
     case 'user_login_form':
       if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
@@ -86,7 +97,6 @@ function at_core_form_node_form_alter(&$form, FormStateInterface $form_state) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
 
-  //$form['#title'] = t('Edit Node');
   $form['#theme'] = array('node_edit_form');
   $form['#attached']['library'][] = "$theme/node_form";
 
