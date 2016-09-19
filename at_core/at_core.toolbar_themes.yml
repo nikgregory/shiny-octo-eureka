@@ -4,7 +4,9 @@ toolbar_at_core:
   label: "AT Toolbar"
   version: 8.0-1.x
   description: "Adaptivetheme style toolbar."
-  screen_shot: 'toolbar_theme/screenshot.png'
+  path: toolbar_theme
+  screen_shot: screenshot.png
+  base_theme: toolbar_themes_base
   libraries:
     base: at_core/at.toolbar_themes.base
     icons: at_core/at.toolbar_themes.icons
