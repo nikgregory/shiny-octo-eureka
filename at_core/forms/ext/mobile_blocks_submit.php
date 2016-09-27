@@ -36,7 +36,7 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
   }
 
   if (!empty($theme_blocks) && !empty($mobile_blocks_breakpoints)) {
-    $output = array();
+    $output = [];
     foreach (array_reverse($mobile_blocks_breakpoints) as $mbs_key => $mbs_value) {
       $mbs_query = $mbs_value->getMediaQuery();
       $mbs_breakpoints_all[$mbs_query] = $mbs_query;
@@ -46,7 +46,8 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
 
       foreach ($theme_blocks as $block_key => $block_values) {
         $block_id = $block_values->id();
-        $block_selector[$mbs_label] = '#block-' . Html::cleanCssIdentifier($block_id);
+        $block_plugin_id = $block_values->getPluginId();
+        $block_selector[$mbs_label] = '#block-' . Html::cleanCssIdentifier($block_id) .  ', .block-plugin-id--' . Html::cleanCssIdentifier($block_plugin_id);
 
         if (isset($values['settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id]) && $values['settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id] == 1) {
           $output[$mbs_label][] = '  ' . $block_selector[$mbs_label] . ' {display:none}' . "\n";
