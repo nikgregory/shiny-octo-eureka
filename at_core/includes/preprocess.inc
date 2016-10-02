@@ -737,9 +737,8 @@ function at_core_preprocess_forums(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_maintenance_page(&$variables) {
- $active_theme_name = $variables['theme']['name'];
   // Load the maintenance page library.
-  $variables['#attached']['library'][] = $active_theme_name . '/maintenance_page';
+  $variables['#attached']['library'][] = $variables['theme']['provider'] . '/maintenance_page';
 }
 
 /**
