@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Theme\ThemeSettingsInfo.
- */
-
 namespace Drupal\at_core\Theme;
 
 /**
@@ -33,7 +28,7 @@ class ThemeSettingsInfo extends ThemeInfo {
    * @return array
    */
   public function baseThemeOptions() {
-    $base_themes = array();
+    $base_themes = [];
     foreach ($this->data as $machine_name => $info) {
       foreach ($info as $info_key => $info_values) {
         if ($info_key == 'base_themes') {
@@ -81,7 +76,7 @@ class ThemeSettingsInfo extends ThemeInfo {
    * @return array Arrays of sub themes keyed by base theme.
    */
   public function findThemePaths() {
-    $theme_paths = array();
+    $theme_paths = [];
 
     foreach ($this->data as $theme_info) {
       if (!empty($theme_info->base_theme)) {

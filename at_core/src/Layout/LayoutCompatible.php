@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Layout\LayoutCompatible
- */
-
 namespace Drupal\at_core\Layout;
 
 use Drupal\at_core\Theme\ThemeInfo;
@@ -25,7 +20,7 @@ class LayoutCompatible {
    * @return mixed
    */
   public function getCompatibleLayout() {
-    $layout_compatible_data = array();
+    $layout_compatible_data = [];
 
     // Caching the data here appears to shave about 50ms off page execution.
     if ($cache = \Drupal::cache()->get($this->theme_name . ':compatiblelayout')) {
@@ -61,8 +56,8 @@ class LayoutCompatible {
       $providers[$this->theme_name] = $this->theme_name;
 
       // Define variables.
-      $layout_markup = array();
-      $layout_css = array();
+      $layout_markup = [];
+      $layout_css = [];
 
       // Get the configuration data for layout markup and CSS.
       foreach ($providers as $key => $provider_name) {

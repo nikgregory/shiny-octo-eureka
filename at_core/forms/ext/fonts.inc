@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Preset lists of font options.
  */
 
@@ -9,7 +8,7 @@
  * Websafe fonts list.
  */
 function websafe_fonts() {
-  $websafe_fonts = array(
+  $websafe_fonts = [
     'Verdana, Geneva, sans-serif',
     '"Segoe UI", Segoe, Tahoma, Geneva, sans-serif',
     '"Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -19,143 +18,143 @@ function websafe_fonts() {
     '"Courier New", Courier, monospace, sans-serif',
     'sans-serif',
     'serif',
-  );
+  ];
 
   return $websafe_fonts;
 }
 
 /**
- * @file
+
  * Font Elements Config Array.
  *
  * The fonts array is used by the fonts sub-system to generate forms,
  * build stylesheets and load font styles.
  */
 function font_elements() {
-  $elements_array = &drupal_static(__FUNCTION__, array());
+  $elements_array = &drupal_static(__FUNCTION__, []);
   if (empty($elements_array)) {
-    $elements_array = array(
-      'base' => array(
+    $elements_array = [
+      'base' => [
         'label' => 'Base',
         'selector' => 'html, body',
-      ),
-      'sitename' => array(
+      ],
+      'sitename' => [
         'label' => 'Site name',
         'selector' => '.site-branding__name-link',
-      ),
-      'siteslogan' => array(
+      ],
+      'siteslogan' => [
         'label' => 'Site slogan',
         'selector' => '.site-branding__slogan',
-      ),
-      'pagetitle' => array(
+      ],
+      'pagetitle' => [
         'label' => 'Page title',
         'selector' => '.node__title, .page__title, .user__title',
-      ),
-      'nodetitle' => array(
+      ],
+      'nodetitle' => [
         'label' => 'Node title (full)',
-        'selector' => '.node--view-mode-full .node__title, .node--view-mode-full .node__title a',
-      ),
-      'nodetitle_teaser' => array(
+        'selector' => '.node--view-mode-full .node__title, .node--view-mode-full .field-node--node-title *',
+      ],
+      'nodetitle_teaser' => [
         'label' => 'Node title (teaser)',
-        'selector' => '.node--view-mode-teaser .node__title, .node--view-mode-teaser .node__title-link',
-      ),
-      'commenttitle' => array(
+        'selector' => '.node--view-mode-teaser .node__title, .node--view-mode-teaser .field-node--node-title *',
+      ],
+      'commenttitle' => [
         'label' => 'Comment title',
-        'selector' => '.comment__title, .comment__title a',
-      ),
-      'blocktitle' => array(
+        'selector' => '.comment__title, .comment__title a, .field-comment--comment-title *',
+      ],
+      'blocktitle' => [
         'label' => 'Block title',
         'selector' => '.block__title, .block-menu__title, .pane__title',
-      ),
-      'links' => array(
+      ],
+      'links' => [
         'label' => 'Links',
         'selector' => 'a, .un-button',
-      ),
-      'menus' => array(
+      ],
+      'menus' => [
         'label' => 'Menus',
         'selector' => '.menu a',
-      ),
-      'responsivemenu' => array(
+      ],
+      'responsivemenu' => [
         'label' => 'Responsive menu',
         'selector' => '.rm-block, .rm-block a',
-      ),
-      'responsivemenu_toggle' => array(
+      ],
+      'responsivemenu_toggle' => [
         'label' => 'Responsive menu toggle',
         'selector' => '.rm-toggle, .rm-toggle__link',
-      ),
-      'image_captions' => array(
+      ],
+      'image_captions' => [
         'label' => 'Image captions',
         'selector' => 'figcaption, .field-type-image__figcaption',
-      ),
-      'slideshow_captions' => array(
+      ],
+      'slideshow_captions' => [
         'label' => 'Slideshow captions',
         'selector' => 'p.flex-caption',
-      ),
-      'tabs' => array(
+      ],
+      'tabs' => [
         'label' => 'Tabs',
         'selector' => '.tabs a',
-      ),
-      'breadcrumbs' => array(
+      ],
+      'breadcrumbs' => [
         'label' => 'Breadcrumbs',
         'selector' => '.breadcrumb__list-item, .breadcrumb__link, .breadcrumb__title',
-      ),
-      'h1h4' => array(
+      ],
+      'h1h4' => [
         'label' => 'h1 to h4 headings',
         'selector' => 'h1, h2, h3, h4',
-      ),
-      'h5h6' => array(
+      ],
+      'h5h6' => [
         'label' => 'h5, h6 headings',
         'selector' => 'h5, h6',
-      ),
-      'h1' => array(
+      ],
+      'h1' => [
         'label' => 'h1',
         'selector' => 'h1',
-      ),
-      'h2' => array(
+      ],
+      'h2' => [
         'label' => 'h2',
         'selector' => 'h2',
-      ),
-      'h3' => array(
+      ],
+      'h3' => [
         'label' => 'h3',
         'selector' => 'h3',
-      ),
-      'h4' => array(
+      ],
+      'h4' => [
         'label' => 'h4',
         'selector' => 'h4',
-      ),
-      'h5' => array(
+      ],
+      'h5' => [
         'label' => 'h5',
         'selector' => 'h5',
-      ),
-      'h6' => array(
+      ],
+      'h6' => [
         'label' => 'h6',
         'selector' => 'h6',
-      ),
-      'formitems' => array(
+      ],
+      'formitems' => [
         'label' => 'Form elements',
         'selector' => 'form, input, select, textarea',
-      ),
-      'buttons' => array(
+      ],
+      'buttons' => [
         'label' => 'Buttons',
         'selector' => 'button, .button',
-      ),
-      'tables' => array(
+      ],
+      'tables' => [
         'label' => 'Tables',
         'selector' => 'table',
-      ),
-      'blockquotes' => array(
+      ],
+      'blockquotes' => [
         'label' => 'Blockquotes & citations',
         'selector' => 'blockquote, cite, q',
-      ),
-      'code' => array(
+      ],
+      'code' => [
         'label' => 'Code',
         'selector' => 'code, pre, var, kbd, samp',
-      ),
-      'custom_selectors' => array(
+      ],
+      'custom_selectors' => [
         'label' => 'Custom selectors',
         'selector' => 'custom_selectors',
-      ),
-    );
+      ],
+    ];
   }
 
   return $elements_array;
@@ -167,32 +166,32 @@ function font_elements() {
  * @return array
  */
 function title_style_options($style) {
-  $options = &drupal_static(__FUNCTION__, array());
+  $options = &drupal_static(__FUNCTION__, []);
   switch ($style) {
     case ('case'):
-      $options = array(
+      $options = [
         'none'       => t('Normal'),
         'uppercase'  => t('Upper case'),
         'lowercase'  => t('Lower case'),
         'capitalize' => t('Capitalize'),
         'small-caps' => t('Small caps'),
         'inherit'    => t('Inherit'),
-      );
+      ];
     break;
     case ('weight'):
-      $options = array(
+      $options = [
         '400' => t('Normal'),
         '700' => t('Bold'),
         '600' => t('Semi-bold'),
         '300' => t('Light'),
-      );
+      ];
     break;
     case ('alignment'):
-      $options = array(
+      $options = [
         'left'   => t('Left'),
         'right'  => t('Right'),
         'center' => t('Centered'),
-      );
+      ];
     break;
   }
 
@@ -203,7 +202,7 @@ function title_style_options($style) {
  * Reusable valid type options for titles.
  */
 function title_valid_type_options() {
-  $options = array(
+  $options = [
     'sitename',
     'siteslogan',
     'pagetitle',
@@ -217,7 +216,7 @@ function title_valid_type_options() {
     'h4',
     'h5',
     'h6',
-  );
+  ];
 
   return $options;
 }

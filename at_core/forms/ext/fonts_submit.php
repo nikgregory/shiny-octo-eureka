@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Output formatted CSS for fonts.
  */
 
@@ -27,7 +26,7 @@ function at_core_submit_fonts($values, $generated_files_path) {
   }
 
   // Initialize some variables.
-  $fonts = array();
+  $fonts = [];
   $base_size = 16; // 16px default
   $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
@@ -35,7 +34,7 @@ function at_core_submit_fonts($values, $generated_files_path) {
   $values['settings_font_use_google_fonts'] = FALSE;
   $values['settings_font_use_typekit'] = FALSE;
 
-  $font_styles = array();
+  $font_styles = [];
 
   foreach ($font_elements as $font_key => $font_values) {
 

@@ -4,23 +4,13 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Tags;
 
 /**
- * Because I'm such a lazy kint().
- * @param $var
- */
-function kt($var) {
-  if (function_exists('kint')) {
-    return kint($var);
-  }
-}
-
-/**
  * Clean away twig debugging output, it breaks some stuff.
  * @param $variable
  * @return mixed
  */
 function _at_core_cleanup_twig_debug_output($variable) {
   $output = preg_replace('/[ \t]+/', ' ', preg_replace('/<!--(.|\s)*?-->/', '', $variable));
-  return preg_replace(array('/\r/', '/\n/'), '', $output);
+  return preg_replace(['/\r/', '/\n/'], '', $output);
 }
 
 /**
@@ -32,26 +22,11 @@ function _at_core_breadcrumb_title_placeholder($page_title) {
   $request = \Drupal::request();
   $route_match = \Drupal::routeMatch();
   $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-  $array = array(
+  $array = [
     '#theme' => 'page_title__breadcrumb',
     '#title' => $title,
-  );
-
+  ];
   return $array;
-}
-
-/**
- * Helper function for setting classes on menu links.
- * @param $i
- * @return mixed
- */
-function _at_core_menu_link_classes($i) {
-  if (isset($i['url'])) {
-    $attr = $i['url']->getOption('attributes') ?: [];
-    $ac = isset($attr['class']) ? implode($attr['class']) : '';
-    $mlc = array('class' => array('menu__link', $ac));
-    return $i['url']->setOption('attributes', array_merge_recursive($attr, $mlc));
-  }
 }
 
 /**
@@ -60,10 +35,8 @@ function _at_core_menu_link_classes($i) {
  * @return mixed
  */
 function _at_core_layout_plugin_attributes($variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
   $html_element = 'div';
-  $classes = array();
+  $classes = [];
   $role = NULL;
   $bundle = NULL;
   $entity_type = NULL;
@@ -89,7 +62,6 @@ function _at_core_layout_plugin_attributes($variables) {
       $html_element = 'article';
       $role = 'article';
     }
-
     if ($entity_type == 'comment') {
       $classes[] = 'js-comment';
       $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
@@ -105,13 +77,17 @@ function _at_core_layout_plugin_attributes($variables) {
     $classes[] = 'panels-page--' . Html::cleanCssIdentifier($variables['content']['#page_variant']->get('page'));
   }
 
-  // Shortcodes for blocks.
-  if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1 && isset($variables['content']['#block_content'])) {
-    if ($bid = $variables['content']['#block_content']->id()) {
-      if (!empty($config['block_classes_' . $bid])) {
-        $shortcodes = Tags::explode($config['block_classes_' . $bid]);
-        foreach ($shortcodes as $class) {
-          $classes[] = Html::cleanCssIdentifier($class);
+  // Extension settings.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      if (isset($variables['content']['#block_content'])) {
+        $bid = $variables['content']['#block_content']->id() ?: '';
+        if (isset($shortcodes_config['block_classes_' . $bid]) && !empty($shortcodes_config['block_classes_' . $bid])) {
+          $shortcodes = Tags::explode($shortcodes_config['block_classes_' . $bid]);
+          foreach ($shortcodes as $class) {
+            $classes[] = Html::cleanCssIdentifier($class);
+          }
         }
       }
     }

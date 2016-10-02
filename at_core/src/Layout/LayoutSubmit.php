@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Layout\LayoutSubmit
- */
-
 namespace Drupal\at_core\Layout;
 
 use Drupal\at_core\File\FileOperations;
@@ -12,7 +7,6 @@ use Drupal\at_core\File\DirectoryOperations;
 use Drupal\Component\Utility\Unicode;
 use Symfony\Component\Yaml\Parser;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Cache;
 
 class LayoutSubmit {
 
@@ -44,7 +38,7 @@ class LayoutSubmit {
   public function saveLayoutSuggestionsCSS() {
     $breakpoints_group = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($this->form_values['settings_breakpoint_group_layout']);
     $generated_files_path = $this->form_values['settings_generated_files_path'];
-    $css_data = array();
+    $css_data = [];
 
     foreach ($this->form_values['settings_suggestions'] as $suggestion_key => $suggestions_name) {
       foreach ($breakpoints_group as $breakpoint_id => $breakpoint_value) {
@@ -63,9 +57,9 @@ class LayoutSubmit {
     }
 
     // Initialize or set vars.
-    $output = array();
-    $css_rows = array();
-    $css_file = array();
+    $output = [];
+    $css_rows = [];
+    $css_file = [];
     $path_to_css_files = $this->layout_path . '/' . $this->css_config['css_files_path'];
 
     foreach ($css_data as $suggestion => $breakpoints) {
@@ -101,7 +95,7 @@ class LayoutSubmit {
     }
 
     // Max widths.
-    $max_width = array();
+    $max_width = [];
     if (isset($this->form_values['settings_max_width_enable']) && $this->form_values['settings_max_width_enable'] === 1) {
       $max_width_value = Html::escape($this->form_values['settings_max_width_value']);
       $max_width['global'] = '.l-rw { max-width: ' . trim($max_width_value) . $this->form_values['settings_max_width_unit'] . '; }';
@@ -132,7 +126,7 @@ class LayoutSubmit {
       }
     }
 
-    $saved_css = array();
+    $saved_css = [];
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
         $message = '/* Layout CSS for: ' . str_replace('_', '-', $suggestion) . '.html.twig, generated: ' . date(DATE_RFC822) . ' */';
@@ -147,13 +141,14 @@ class LayoutSubmit {
     }
 
     if (!empty($saved_css)) {
-      $saved_css_message_list = array(
+      $saved_css_message_list = [
         '#theme' => 'item_list',
         '#items' => $saved_css,
-      );
-      drupal_set_message(t('The following <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', array(
+      ];
+      drupal_set_message(t('The following <b>CSS</b> files were generated in: <code>@generated_files_path</code> @saved_css', [
           '@saved_css' => \Drupal::service('renderer')->renderPlain($saved_css_message_list),
-          '@generated_files_path' => $generated_files_path . '/')
+          '@generated_files_path' => $generated_files_path . '/'
+        ]
       ), 'status');
     }
   }
@@ -162,7 +157,7 @@ class LayoutSubmit {
    * Update the themes info file with new regions.
    */
   public function saveLayoutRegions() {
-    $regions = array();
+    $regions = [];
 
     foreach ($this->layout_config['rows'] as $row => $row_values) {
       foreach ($row_values['regions'] as $region_key => $region_values) {
@@ -189,18 +184,18 @@ class LayoutSubmit {
       $fileOperations = new FileOperations();
       $directoryOperations = new DirectoryOperations();
 
-      $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'info'));
+      $backup_path = $directoryOperations->directoryPrepare($backup_file_path = [$path, 'backup', 'info']);
 
       // Add a date time string to make unique and for easy identification,
       // save as .txt to avoid conflicts.
       $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
 
-      $file_paths = array(
+      $file_paths = [
        'copy_source' => $file_path,
        'copy_dest' => $backup_path . '/' . $info_file,
        'rename_oldname' => $backup_path . '/' . $info_file,
        'rename_newname' => $backup_path . '/' . $backup_file,
-      );
+      ];
       $fileOperations->fileCopyRename($file_paths);
     }
 
@@ -225,7 +220,7 @@ class LayoutSubmit {
    * every template, every time the form is submitted.
    */
   public function saveLayoutSuggestionsMarkup() {
-    $template_suggestions = array();
+    $template_suggestions = [];
     $fileOperations = new FileOperations();
     $directoryOperations = new DirectoryOperations();
 
@@ -270,19 +265,19 @@ class LayoutSubmit {
     }
 
     // Initialize vars.
-    $row_regions = array();
-    $templates = array();
-    $saved_templates = array();
+    $row_regions = [];
+    $templates = [];
+    $saved_templates = [];
 
     // We have to save every template every time, in case a row has been added to the layout, all template MUST update.
     // This could be changed later to only do this IF a row has been added, we're not that flash right now :)
     foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
 
-      $output = array();
+      $output = [];
       $suggestion_key = Html::escape($suggestion_key);
 
       // Doc block.
-      $doc = array();
+      $doc = [];
       $doc[$suggestion_key][] = '{#';
       $doc[$suggestion_key][] = '/**';
       $doc[$suggestion_key][] = ' * Layout provider: ' . $this->layout_name;
@@ -337,18 +332,18 @@ class LayoutSubmit {
 
       // Create a backup.
       if ($this->form_values['settings_enable_backups'] == 1) {
-        $backup_path = $directoryOperations->directoryPrepare($backup_file_path = array($path, 'backup', 'templates'));
+        $backup_path = $directoryOperations->directoryPrepare($backup_file_path = [$path, 'backup', 'templates']);
 
         //Add a date time string to make unique and for easy identification,
         // save as .txt to avoid conflicts.
         $backup_file =  $template_file . '.' . date(DATE_ISO8601) . '.txt';
 
-        $file_paths = array(
+        $file_paths = [
          'copy_source' => $template_path,
          'copy_dest' => $backup_path . '/' . $template_file,
          'rename_oldname' => $backup_path . '/' . $template_file,
          'rename_newname' => $backup_path . '/' . $backup_file,
-        );
+        ];
 
         $fileOperations->fileCopyRename($file_paths);
       }
@@ -357,7 +352,7 @@ class LayoutSubmit {
     foreach ($templates as $suggestion => $template_values) {
        if (!file_exists($templates[$suggestion]['template_path'])) {
          $new_template = $templates[$suggestion]['template_name'];
-         $new_template_message = t('It looks like you generated a new template: <b>@new_template</b>. Save the layout settings again so they will take effect.', array('@new_template' => $new_template));
+         $new_template_message = t('It looks like you generated a new template: <b>@new_template</b>. Save the layout settings again so they will take effect.', ['@new_template' => $new_template]);
        }
       file_unmanaged_save_data($templates[$suggestion]['markup'], $templates[$suggestion]['template_path'], FILE_EXISTS_REPLACE);
       if (file_exists($templates[$suggestion]['template_path'])) {
@@ -366,13 +361,14 @@ class LayoutSubmit {
     }
 
     if (!empty($saved_templates)) {
-      $saved_templates_message_list = array(
+      $saved_templates_message_list = [
         '#theme' => 'item_list',
         '#items' => $saved_templates,
-      );
-      drupal_set_message(t('The following <b>templates</b> were generated in: <code>@template_directory</code> @saved_templates', array(
+      ];
+      drupal_set_message(t('The following <b>templates</b> were generated in: <code>@template_directory</code> @saved_templates', [
           '@saved_templates' => \Drupal::service('renderer')->renderPlain($saved_templates_message_list),
-          '@template_directory' => $template_directory . '/')
+          '@template_directory' => $template_directory . '/'
+        ]
       ), 'status');
     }
     if (isset($new_template_message)) {

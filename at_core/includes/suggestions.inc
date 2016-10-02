@@ -1,13 +1,22 @@
 <?php
 
+use Drupal\at_core\Theme\ThemeConfig;
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  * @param array $suggestions
  * @param array $variables
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+
+  // TODO get the new $theme config object
+
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+
+  // Get the right config for this theme type.
+  $themeInfoConfig = new ThemeConfig($theme);
+  $config = $themeInfoConfig->getConfig();
 
   // Add content type suggestions, e.g. page--node--article.html.twig.
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -26,7 +35,7 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
     if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
       if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
         if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
-          $formatted_suggestions = array();
+          $formatted_suggestions = [];
           if ($suggestions) {
             foreach ($suggestions as $suggestion_name) {
               if ($suggestion_name === 'page__') {
@@ -34,8 +43,8 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
               }
               $formatted_suggestions[] = str_replace('_', '-', $suggestion_name);
             }
-            $these_suggestions = array('#theme' => 'item_list', '#items' => $formatted_suggestions,);
-            drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing suggestions switch them off in your themes Appearance settings > Developer tools.</p>', array('@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions))), 'status');
+            $these_suggestions = ['#theme' => 'item_list', '#items' => $formatted_suggestions,];
+            drupal_set_message(t('Template suggestions for this page:<br>@these_suggestions <p>To stop showing suggestions switch them off in your themes Appearance settings > Developer tools.</p>', ['@these_suggestions' => \Drupal::service('renderer')->renderPlain($these_suggestions)]), 'status');
           }
         }
       }
@@ -87,8 +96,14 @@ function at_core_theme_suggestions_field_alter(array &$suggestions, array $varia
  * @param array $variables
  */
 function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+  $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+  $theme = $data->getConfig();
+  if ($theme['type'] === 'adaptive_subtheme') {
+    $config = $theme['config'];
+  }
+  elseif ($theme['type'] === 'adaptive_skin') {
+    $config = $theme['config_skin'];
+  }
 
   // Block suggestions for custom block bundles.
   if (isset($variables['elements']['content']['#block_content'])) {

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_theme_generator\File\DirectoryOperations
- */
-
 namespace Drupal\at_core\File;
 
 class DirectoryOperations {
@@ -87,7 +82,7 @@ class DirectoryOperations {
    * Files below the path.
    */
   public function directoryScan($path) {
-    $scan_directories = array();
+    $scan_directories = [];
     if (file_exists($path)) {
       $scan_directories = preg_grep('/^([^.])/', scandir($path));
     }
@@ -103,11 +98,11 @@ class DirectoryOperations {
    * Directories & files below the path.
    */
   public function directoryScanRecursive($path) {
-    $scan_directories_recursive = array();
+    $scan_directories_recursive = [];
     $path_directory = scandir($path);
 
     foreach ($path_directory as $key => $value) {
-      if (!in_array($value,array(".", ".."))) {
+      if (!in_array($value, [".", ".."])) {
         if (is_dir($path . '/' . $value)) {
           $scan_directories_recursive[$value] = self::directoryScanRecursive($path . '/' . $value);
         }
@@ -129,7 +124,7 @@ class DirectoryOperations {
    * @return array globbed files
    */
   public function directoryGlob($path, array $types) {
-    $files = array();
+    $files = [];
     $scan_directories = self::directoryScan($path);
     if (isset($scan_directories)) {
       foreach ($scan_directories as $directory) {

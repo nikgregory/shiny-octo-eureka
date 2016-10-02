@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Layout\Layout
- */
-
 namespace Drupal\at_core\Layout;
 
-use Drupal\Core\Cache;
 use Symfony\Component\Yaml\Parser;
 
 class Layout {
@@ -38,7 +32,7 @@ class Layout {
    * @return array|mixed
    */
   public function LayoutConfig($type) {
-    $config_data = array();
+    $config_data = [];
 
     if ($cache = \Drupal::cache()->get($this->layout_cid . ':' . $type)) {
       $config_data = $cache->data;

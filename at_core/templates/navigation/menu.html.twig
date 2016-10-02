@@ -55,7 +55,9 @@
       ] -%}
       {# We set an id on list items to provide context for aria attributes in responsive menu toggle buttons. #}
       <li{{ item.attributes.addClass(item_classes).setAttribute('id', 'mlid-' ~ item.title|render|clean_class)|without('role') }}>
-        <span class="menu__link--wrapper{{ is_parent ? ' is-parent__wrapper' }}">{{ link(item.title, item.url) }}</span>
+        <span class="menu__link--wrapper{{ is_parent ? ' is-parent__wrapper' }}">
+          {{ link(item.title, item.url, item.attributes.removeClass(item_classes).addClass('menu__link')|without('id', 'role')) }}
+        </span>
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1, menu_name) }}
         {% endif %}

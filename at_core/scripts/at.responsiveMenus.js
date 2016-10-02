@@ -16,11 +16,11 @@
         return;
       }
 
-      var at   = settings['ajaxPageState']['theme'],
-          rm   = settings[at]['at_responsivemenus'],
-          def  = rm['default'],
+      var at = settings['ajaxPageState']['theme'],
+          rm = settings[at]['at_responsivemenus'],
+          def = rm['default'],
           resp = rm['responsive'],
-          tl   = '.rm-block .rm-toggle__link',
+          tl = '.rm-block .rm-toggle__link',
           acd_def = rm['acd']['acd_default'],
           acd_resp = rm['acd']['acd_responsive'],
           acd_both = rm['acd']['acd_both'],

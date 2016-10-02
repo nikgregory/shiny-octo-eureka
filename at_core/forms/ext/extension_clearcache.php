@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Form submit handler for the theme settings form.
  */
 

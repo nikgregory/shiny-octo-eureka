@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Theme\ThemeInfo.
- */
-
 namespace Drupal\at_core\Theme;
 
 /**
@@ -65,4 +60,38 @@ class ThemeInfo {
     }
   }
 
+  /**
+   * Determine the subtheme type, typically this is either adaptive_subtheme or
+   * adaptive_skin (skins are sub-sub themes).
+   * @return string
+   */
+  public function getSubthemeType() {
+    $theme_info = $this->getThemeInfo('info');
+    return $theme_info['subtheme type'];
+  }
+
+  /**
+   * Determine the subtheme type, typically this is either adaptive_subtheme or
+   * adaptive_skin (skins are sub-sub themes).
+   * @return string
+   */
+  public function getBaseTheme() {
+    return $this->getThemeInfo('base_theme');
+  }
+
+  /**
+   * Return the base themes info.
+   * @return string
+   */
+  public function getBaseThemeInfo() {
+    return $this->data[$this->getThemeInfo('base_theme')]->info;
+  }
+
+  /**
+   * Return the theme sub path.
+   * @return string
+   */
+  public function getSubPath() {
+    return $this->getThemeInfo('subpath');
+  }
 }

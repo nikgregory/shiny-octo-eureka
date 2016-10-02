@@ -5,18 +5,21 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Tags;
 use Drupal\at_core\Layout\LayoutLoad;
+use Drupal\at_core\Theme\ThemeConfig;
 
 /**
  * Preprocess variables for all templates.
  * @param $variables
  */
 function at_core_preprocess(&$variables) {
-  // Add theme variables, we use these to set a class and provide a very easy
-  // way for themers to link to files in the theme, such as background images
-  // or other files.
-  $theme = \Drupal::theme()->getActiveTheme();
-  $variables['theme']['name'] = Html::escape($theme->getName());
-  $variables['theme']['path'] = base_path() . $theme->getPath();
+  // Add theme variables. template_preprocess is hit many times so we statically
+  // cache $theme.
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
+  $variables['theme'] = $theme;
 }
 
 /**
@@ -24,11 +27,19 @@ function at_core_preprocess(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_html(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+  // Get the right config for this theme type.
+  //$themeConfig = new ThemeConfig($active_theme_name);
+  $config = $variables['theme']['config'];
+
+  // Reset $variables['directory'] if this is a skin theme.
+  if ($variables['theme']['type'] === 'adaptive_skin' && !empty($variables['theme']['base'])) {
+    $variables['directory'] = $variables['theme']['path'];
+  }
+
+ // kint($variables['directory']);
 
   // Set the skip navigation target ID
-  $variables['skip_link_target'] = '#block-' . $theme . '-content';
+  $variables['skip_link_target'] = '#block-' . $variables['theme']['name'] . '-content';
 
   // Defaults for Appearance setting variables.
   $variables['touch_icons'] = FALSE;
@@ -80,34 +91,24 @@ function at_core_preprocess_html(&$variables) {
 
       // Apple default icon and Nokia shortcut icon.
       if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $default_icon = file_create_url($variables['directory'] . '/' . Html::escape($config['icon_path_default']));
+        $default_icon = file_create_url($variables['theme']['path'] . '/' . Html::escape($config['icon_path_default']));
         $variables['touch_icon_nokia'] = $default_icon;
         $variables['touch_icon_default'] = $default_icon;
       }
 
       // iPad (standard display).
       if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $variables['touch_icon_ipad'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_ipad']);
+        $variables['touch_icon_ipad'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_ipad']);
       }
 
       // iPhone retina.
       if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $variables['touch_icon_iphone_retina'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_iphone_retina']);
+        $variables['touch_icon_iphone_retina'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_iphone_retina']);
       }
 
       // iPad retina.
       if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $variables['touch_icon_ipad_retina'] = file_create_url($variables['directory'] . '/' . $config['apple_touch_icon_path_ipad_retina']);
-      }
-    }
-
-    // Shortcodes.
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if (!empty($config['page_classes_body'])) {
-        $shortcodes = Tags::explode($config['page_classes_body']);
-        foreach ($shortcodes as $class) {
-          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
-        }
+        $variables['touch_icon_ipad_retina'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_ipad_retina']);
       }
     }
 
@@ -122,10 +123,23 @@ function at_core_preprocess_html(&$variables) {
     }
   }
 
+  // Short codes.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      if (!empty($shortcodes_config['page_classes_body'])) {
+        $shortcodes = Tags::explode($shortcodes_config['page_classes_body']);
+        foreach ($shortcodes as $class) {
+          $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+        }
+      }
+    }
+  }
+
   // Add all breakpoints to drupalSettings (key:media query).
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
-    $breakpoints_array = array();
+    $breakpoints_array = [];
     $breakpoint_groups[] = isset($config['breakpoint_group_layout']) ? $config['breakpoint_group_layout']: 'at_core.simple';
     // Push 'at_core.simple' onto the array, out Layout Plugin layouts always
     // require these breakpoints to be set.
@@ -140,11 +154,11 @@ function at_core_preprocess_html(&$variables) {
         $breakpoints_array[$clean_breakpoint_key]['breakpoint'] = $breakpoint_label;
         $breakpoints_array[$clean_breakpoint_key]['mediaquery'] = $breakpoint_values->getMediaQuery();
       }
-      $variables['#attached']['drupalSettings'][$theme]['at_breakpoints'] = $breakpoints_array;
+      $variables['#attached']['drupalSettings'][$variables['theme']['name']]['at_breakpoints'] = $breakpoints_array;
     }
   }
   else {
-    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint.', array('@extendpage' => base_path() . 'admin/modules')), 'error');
+    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint.', ['@extendpage' => base_path() . 'admin/modules']), 'error');
   }
 }
 
@@ -153,40 +167,41 @@ function at_core_preprocess_html(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_page(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+  // Config
+  $config = $variables['theme']['config'];
 
   // Page classes
   $variables['attributes']['class'][] = 'page';
 
   // Set attribution.
   $attribution_url = Url::fromUri('//adaptivethemes.com',
-    $options = array(
-      'attributes' => array(
-        'class' => array('attribution__link'),
+    $options = [
+      'attributes' => [
+        'class' => ['attribution__link'],
         'target' => '_blank',
-      ),
+      ],
       'absolute' => TRUE,
-    )
+    ]
   );
-  $variables['attribution'] = array(
+  $variables['attribution'] = [
     '#type' => 'inline_template',
     '#template' => '<div class="l-pr attribution"><div class="l-rw">{{ attribution }}</div></div>',
-    '#context' => array(
+    '#context' => [
       'attribution' => \Drupal\Core\Link::fromTextAndUrl(t('Design by Adaptivethemes.com'), $attribution_url)->toString(),
-    ),
-  );
+    ],
+  ];
 
   // Disallow access if attribution link is toggled off.
   if (isset($config['attribution_toggle']) && $config['attribution_toggle'] === 0) {
     $variables['attribution']['#access'] = FALSE;
   }
 
-  // Process extension settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if (!empty($config['page_classes_page'])) {
-        $shortcodes = Tags::explode($config['page_classes_page']);
+  // Short codes.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      if (!empty($shortcodes_config['page_classes_page'])) {
+        $shortcodes = Tags::explode($shortcodes_config['page_classes_page']);
         foreach ($shortcodes as $class) {
           $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
@@ -195,12 +210,14 @@ function at_core_preprocess_page(&$variables) {
   }
 
   //--- Layout -------------------------------------------------------------- //
+  // Active theme name.
+  $active_theme_name = $variables['theme']['name'];
 
   // BC for pre RC2 themes:
   // - allow the main content to render in at_generator so users can login if
   // they set it as default and blew their site up.
   // TODO remove at some stage.
-  if ($theme === 'at_generator') {
+  if ($active_theme_name === 'at_generator') {
     $variables['main']['has_regions'] = TRUE;
     return; // return early to avoid notices and errors.
   }
@@ -211,8 +228,8 @@ function at_core_preprocess_page(&$variables) {
     //  - "arc--[n]" active region count in this row, e.g. "arc--2".
     //  - "hr--[n-n]" has regions, by source order, e.g. "hr--1-3".
     $variables['attributes']['class'][] = 'js-layout';
-    $regions = system_region_list($theme, REGIONS_VISIBLE);
-    $active_regions = array();
+    $regions = system_region_list($active_theme_name, REGIONS_VISIBLE);
+    $active_regions = [];
     // Do a basic check for emptiness, however we can never be sure because of
     // placeholders: https://www.drupal.org/node/953034
     // After the page loads at.layout.js runs to fix incorrect layout classes.
@@ -224,7 +241,7 @@ function at_core_preprocess_page(&$variables) {
       }
     }
     if (!empty($active_regions)) {
-      $layout_load = new LayoutLoad($theme, $active_regions);
+      $layout_load = new LayoutLoad($active_theme_name, $active_regions);
       if ($row_attributes = $layout_load->rowAttributes()) {
         // Append to $variables for backwards compatibility.
         $variables += $row_attributes;
@@ -233,6 +250,8 @@ function at_core_preprocess_page(&$variables) {
       // Rows.
       foreach ($active_regions as $key => $region) {
         // Get the row key for each region.
+
+        // TODO shortcodes on method for rows
         $row_key = $layout_load->regionAttributes($region);
         if (!empty($row_key)) {
           // Prepare variables for each row template.
@@ -241,10 +260,10 @@ function at_core_preprocess_page(&$variables) {
           $row_regions[$row_key]['#wrapper_attributes'] = $row_attributes[$row_key]['wrapper_attributes'];
           $row_regions[$row_key]['#container_attributes'] = $row_attributes[$row_key]['container_attributes'];
           // Call the row template and pass in the processed variables.
-          $variables['rows'][$row_key] = array(
+          $variables['rows'][$row_key] = [
             '#theme' => 'row',
             '#regions' => $row_regions[$row_key],
-          );
+          ];
         }
       }
     }
@@ -266,11 +285,9 @@ function at_core_preprocess_row(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_region(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
   // Set source order data attribute, used to set the layout classes.
-  $layout_loaded = new LayoutLoad($theme, $active_regions = NULL);
+  $active_theme_name = $variables['theme']['name'];
+  $layout_loaded = new LayoutLoad($active_theme_name, $active_regions = NULL);
   $region_source_order = $layout_loaded->regionSourceOrder($variables['region']);
   $variables['attributes']['data-at-region'] = $region_source_order[$variables['region']];
 
@@ -283,12 +300,13 @@ function at_core_preprocess_region(&$variables) {
   // Set wrapper element. Required for BC. Deprecated.
   $variables['html_element'] = 'div';
 
-  // Extension settings
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if (!empty($config['page_classes_region_' . $variables['region']])) {
-        $shortcodes = Tags::explode($config['page_classes_region_' . $variables['region']]);
-        foreach ($shortcodes as $class) {
+  // Short codes.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      if (!empty($shortcodes_config['page_classes_region_' . $variables['region']])) {
+        $shortcode_tags = Tags::explode($shortcodes_config['page_classes_region_' . $variables['region']]);
+        foreach ($shortcode_tags as $class) {
           $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
         }
       }
@@ -301,27 +319,9 @@ function at_core_preprocess_region(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_node(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-  $node = $variables['node'];
-
-  // Extension settings
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if ($node_type = $node->getType()) {
-        if (!empty($config['nodetype_classes_' . $node_type])) {
-          $shortcodes = Tags::explode($config['nodetype_classes_' . $node_type]);
-          foreach ($shortcodes as $class) {
-            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
-          }
-        }
-      }
-    }
-  }
-
   // Header and Footer attributes.
-  $variables['header_attributes'] = new Attribute(array('class' => array()));
-  $variables['footer_attributes'] = new Attribute(array('class' => array()));
+  $variables['header_attributes'] = new Attribute(['class' => []]);
+  $variables['footer_attributes'] = new Attribute(['class' => []]);
 
   // SEE https://drupal.org/node/2004252 or a follow up issue.
   if ($variables['display_submitted']) {
@@ -330,14 +330,14 @@ function at_core_preprocess_node(&$variables) {
     $variables['header_attributes']['class'][] = 'node__header--has-meta';
 
     // Initialize new attributes arrays.
-    $variables['meta_attributes'] = new Attribute(array('class' => array()));
+    $variables['meta_attributes'] = new Attribute(['class' => []]);
     $variables['meta_attributes']['class'][] = 'node__meta';
-
-    $variables['submitted_attributes'] = new Attribute(array('class' => array()));
+    $variables['submitted_attributes'] = new Attribute(['class' => []]);
     $variables['submitted_attributes']['class'][] = 'node__submitted';
 
     // Add a class if author picture is printing.
-    if ($author_picture = \Drupal::service('renderer')->render($variables['author_picture'])) {
+    $author_picture = \Drupal::service('renderer')->render($variables['author_picture']);
+    if (!empty($author_picture)) {
       // If twig debug is on $author_picture is not empty.
       $twig_debug = \Drupal::service('twig')->isDebug();
       if ($twig_debug == TRUE) {
@@ -351,6 +351,22 @@ function at_core_preprocess_node(&$variables) {
       }
     }
   }
+
+  // Short codes.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      $node_type = $variables['node']->getType() ?: '';
+      if (!empty($node_type)) {
+        if (!empty($shortcodes_config['nodetype_classes_' . $node_type])) {
+          $shortcodes = Tags::explode($shortcodes_config['nodetype_classes_' . $node_type]);
+          foreach ($shortcodes as $class) {
+            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+          }
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -358,18 +374,16 @@ function at_core_preprocess_node(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_comment(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
   // Initialize new attributes arrays.
-  $variables['meta_attributes'] = new Attribute(array('class' => array()));
+  $variables['meta_attributes'] = new Attribute(['class' => []]);
   $variables['meta_attributes']['class'][] = 'comment__meta';
 
-  $variables['submitted_attributes'] = new Attribute(array('class' => array()));
+  $variables['submitted_attributes'] = new Attribute(['class' => []]);
   $variables['submitted_attributes']['class'][] = 'comment__submitted';
 
   // Add a class if user picture is printing. Render early.
-  if ($user_picture = \Drupal::service('renderer')->render($variables['user_picture'])) {
+  $user_picture = \Drupal::service('renderer')->render($variables['user_picture']);
+  if (!empty($user_picture)) {
 
     // If twig debug is on $author_picture is not empty.
     $twig_debug = \Drupal::service('twig')->isDebug();
@@ -388,15 +402,16 @@ function at_core_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   if (!isset($comment->in_preview)) {
     $uri = $comment->permalink();
-    $attributes = $uri->getOption('attributes') ?: array();
-    $attributes += array('class' => array('permalink'), 'rel' => 'bookmark');
+    $attributes = $uri->getOption('attributes') ?: [];
+    $attributes += ['class' => ['permalink'], 'rel' => 'bookmark'];
     $uri->setOption('attributes', $attributes);
     $variables['title'] = \Drupal\Core\Link::fromTextAndUrl($comment->getSubject(), $uri);
   }
 
   // Hide comment titles.
   $variables['title_visibility'] = TRUE;
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    $config = $variables['theme']['config'];
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
       if (isset($config['comments_hide_title']) && $config['comments_hide_title'] === 1) {
         $variables['title_visibility'] = FALSE;
@@ -410,17 +425,32 @@ function at_core_preprocess_comment(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_block(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
 
+  // TODO needs the right config, if skin or subhteme?
   if (\Drupal::currentUser()->isAnonymous()) {
     if ($variables['base_plugin_id'] === 'system_branding_block') {
-      $variables['#attached']['library'][] = "$theme/login_block";
+      //$variables['#attached']['library'][] = "$active_theme_name/login_block";
     }
   }
 
   // Extension settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    $config = $variables['theme']['config'];
+
+    // Short codes.
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+
+      if (isset($variables['content']['#block_content'])) {
+        $bid = $variables['content']['#block_content']->id() ?: '';
+        if (isset($shortcodes_config['block_classes_' . $bid]) && !empty($shortcodes_config['block_classes_' . $bid])) {
+          $shortcodes = Tags::explode($shortcodes_config['block_classes_' . $bid]);
+          foreach ($shortcodes as $class) {
+            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+          }
+        }
+      }
+    }
 
     // Add bool for click menus enabled.
     if ($variables['base_plugin_id'] === 'system_menu_block') {
@@ -447,22 +477,9 @@ function at_core_preprocess_block(&$variables) {
       if ($variables['base_plugin_id'] === 'user_login_block') {
         if ((isset($config['login_block_remove_links']) && $config['login_block_remove_links'] === 1) || (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1)) {
           unset($variables['content']['user_links']);
-
           // Add class for horizontal login.
           if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
             $variables['attributes']['class'][] = 'is-horizontal-login-block';
-          }
-        }
-      }
-    }
-
-    // Shortcodes classes.
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      if ($id = $variables['elements']['#id']) {
-        if (!empty($config['block_classes_' . $id])) {
-          $shortcodes = Tags::explode($config['block_classes_' . $id]);
-          foreach ($shortcodes as $class) {
-            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
           }
         }
       }
@@ -497,11 +514,9 @@ function at_core_preprocess_field__entity_reference(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_field__image(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
   // Extension settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    $config = $variables['theme']['config'];
     if (isset($config['enable_images']) && $config['enable_images'] === 1) {
 
       $entity_type = $variables['element']['#entity_type'];
@@ -512,7 +527,7 @@ function at_core_preprocess_field__image(&$variables) {
       // to be shown, e.g. in teaser view mode.
       if (isset($config['image_count_' . $node_type . '_' . $entity_type . '_' . $view_mode]) && $config['image_count_' . $node_type . '_' . $entity_type . '_' . $view_mode] === 1) {
         $item = reset($variables['items']);
-        $variables['items'] = array($item);
+        $variables['items'] = [$item];
       }
 
       // Captions.
@@ -520,15 +535,15 @@ function at_core_preprocess_field__image(&$variables) {
         foreach ($variables['items'] as $delta => $item) {
           $values = $item['content']['#item']->getValue();
           if (!empty($values['title'])) {
-            $variables['items'][$delta]['caption'] = array(
+            $variables['items'][$delta]['caption'] = [
               'show' => TRUE,
               'title' => $values['title'],
-            );
+            ];
           }
           else {
-            $variables['items'][$delta]['caption'] = array(
+            $variables['items'][$delta]['caption'] = [
               'show' => FALSE,
-            );
+            ];
           }
         }
       }
@@ -537,7 +552,7 @@ function at_core_preprocess_field__image(&$variables) {
       $variables['image_align'] = 'align-none';
 
       // Preview mode default uses view mode default not full.
-      if ($view_mode == 'default') {
+      if ($view_mode === 'default') {
         $view_mode = 'full';
       }
 
@@ -560,11 +575,11 @@ function at_core_preprocess_field__image(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_breadcrumb(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+  // Config
+  $config = $variables['theme']['config'];
 
   // New attributes array for breadcrumb title.
-  $variables['title_attributes'] = new Attribute(array('class' => array()));
+  $variables['title_attributes'] = new Attribute(['class' => []]);
 
   // Set attributes.
   $variables['breadcrumb_label'] = FALSE;
@@ -573,7 +588,7 @@ function at_core_preprocess_breadcrumb(&$variables) {
   $variables['breadcrumb_label_value'] = isset($config['breadcrumb_label_value']) ? $config['breadcrumb_label_value'] : 'You are here:';
 
   // Theme settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
 
       // Show the label.
@@ -592,10 +607,10 @@ function at_core_preprocess_breadcrumb(&$variables) {
       // Add title to breadcrumbs.
       if (isset($config['breadcrumb_title']) && $config['breadcrumb_title'] === 1) {
         // Use a placeholder to inject dynamic content.
-        $placeholder_title = array(
+        $placeholder_title = [
           '#lazy_builder' => ['_at_core_breadcrumb_title_placeholder', ['page_title']],
           '#create_placeholder' => TRUE,
-        );
+        ];
         $variables['breadcrumb'][] = ['text' => $placeholder_title];
       }
 
@@ -629,7 +644,7 @@ function at_core_preprocess_user(&$variables) {
 
   // Roles.
   $roles = $user->getRoles(FALSE);
-  $variables['roles'] = array();
+  $variables['roles'] = [];
   // Playing it safe here because I don't trust Drupal to return an array...
   if (!empty($roles) && is_array($roles)) {
     foreach ($roles as $role) {
@@ -656,14 +671,12 @@ function at_core_preprocess_user(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_views_view(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-
   // Theme settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    $config = $variables['theme']['config'];
     if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
       if (isset($config['views_hide_feedicon']) && $config['views_hide_feedicon'] === 1) {
-        $variables['feed_icons'] = array();
+        $variables['feed_icons'] = [];
       }
     }
   }
@@ -681,7 +694,7 @@ function at_core_preprocess_links(&$variables) {
     $variables['links'][$key]['wrapper_attributes']->addClass(Html::cleanCssIdentifier($key . '__link-wrapper'));
 
     if (isset($variables['links'][$key]['link']['#options']['attributes'])) {
-      $variables['links'][$key]['link']['#options']['attributes']['class'] = array(Html::cleanCssIdentifier($key . '__link'));
+      $variables['links'][$key]['link']['#options']['attributes']['class'] = [Html::cleanCssIdentifier($key . '__link')];
     }
 
     if (isset($variables['links'][$key]['link']['#options']['attributes']['class'])) {
@@ -724,34 +737,9 @@ function at_core_preprocess_forums(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_maintenance_page(&$variables) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
+ $active_theme_name = $variables['theme']['name'];
   // Load the maintenance page library.
-  $variables['#attached']['library'][] = $theme . '/maintenance_page';
-}
-
-/**
- * Preprocess variables for menu templates.
- * TODO Remove depending on if https://www.drupal.org/node/2755375
- * @param $variables
- */
-function at_core_preprocess_menu(&$variables) {
-  // Set a class on menu link item url.
-  if ($variables['menu_name'] !== 'admin') {
-    foreach ($variables['items'] as &$i) {
-      _at_core_menu_link_classes($i);
-    }
-    // Items below.
-    $iterator = new \RecursiveArrayIterator($variables['items']);
-    $recursive = new \RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST);
-    foreach ($recursive as $key => $values) {
-      if ($key === 'below') {
-        if (!empty($values)) {
-          foreach ($values as &$ib)
-          _at_core_menu_link_classes($ib);
-        }
-      }
-    }
-  }
+  $variables['#attached']['library'][] = $active_theme_name . '/maintenance_page';
 }
 
 /**

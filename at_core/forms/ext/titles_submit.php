@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @file
  * Generate title styles.
  * @param $values
- * @param $theme
  * @param $generated_files_path
  */
 
@@ -14,7 +12,7 @@ function at_core_submit_titles($values, $generated_files_path) {
 
   // Get the font elements array.
   $font_elements = font_elements();
-  $css = array();
+  $css = [];
 
   // Build arrays of selectors with associated styles.
   foreach ($font_elements as $font_element_key => $font_element_value) {
@@ -59,7 +57,7 @@ function at_core_submit_titles($values, $generated_files_path) {
 
   // Format CSS.
   if (!empty($css)) {
-    $output = array();
+    $output = [];
     foreach ($css as $selector_key => $selector_styles) {
       if (isset($selector_styles['styles'])) {
         $output[] = $selector_styles['selector'] . ' {' .  implode(';', $selector_styles['styles']) . '; }';

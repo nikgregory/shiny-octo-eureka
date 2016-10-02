@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\at_core\Theme\ThemeConfig;
 
 /**
  * Implements hook_form_alter().
@@ -9,23 +10,27 @@ use Drupal\Core\Form\FormStateInterface;
  * @param $form_id
  */
 function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
+  $config = $theme['config'];
 
   switch ($form_id) {
     case 'comment_comment_form':
-      $form['#theme_wrappers']['form__node_comment'] = array(
-        '#attributes' => array(
-          'class' => array(
+      $form['#theme_wrappers']['form__node_comment'] = [
+        '#attributes' => [
+          'class' => [
             'comment-form',
             'comment-form--node',
-          )
-        ),
-      );
+          ]
+        ],
+      ];
       break;
 
     case 'user_login_form':
-      if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+      if ($theme['extensions']['is_enabled'] === TRUE) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
           if (isset($config['login_block_placeholder_labels']) && $config['login_block_placeholder_labels'] === 1) {
             $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
@@ -46,7 +51,7 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['keys']['#size'] = '';
       // Classes.
       $form['actions']['submit']['#attributes']['class'][] = 'search-form__submit';
-      if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+      if ($theme['extensions']['is_enabled'] === TRUE) {
         if (isset($config['enable_markup_overrides']) && $config['enable_markup_overrides'] === 1) {
           if (isset($config['search_block_hide_submit']) && $config['search_block_hide_submit'] === 1) {
             $form['actions']['#attributes']['class'][] = 'visually-hidden';
@@ -92,45 +97,49 @@ function at_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function at_core_form_node_form_alter(&$form, FormStateInterface $form_state) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
 
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
 
-  $form['#theme'] = array('node_edit_form');
-  $form['#attached']['library'][] = "$theme/node_form";
+  $form['#theme'] = ['node_edit_form'];
+  $form['#attached']['library'][] = $theme['provider'] . '/node_form';
 
   $form['advanced']['#type'] = 'container';
   $is_new = !$node->isNew() ? \Drupal::service('date.formatter')->format($node->getChangedTime(), 'short') : t('Not saved yet');
 
-  $form['meta'] = array(
-    '#attributes' => array('class' => array('entity-meta__header')),
+  $form['meta'] = [
+    '#attributes' => ['class' => ['entity-meta__header']],
     '#type' => 'container',
     '#group' => 'advanced',
     '#weight' => -100,
-    'published' => array(
+    'published' => [
       '#type' => 'html_tag',
       '#tag' => 'h3',
       '#value' => $node->isPublished() ? t('Published') : t('Not published'),
       '#access' => !$node->isNew(),
-      '#attributes' => array(
-        'class' => array(
+      '#attributes' => [
+        'class' => [
           'entity-meta__title',
           $node->isPublished() ? 'is-published' : 'unpublished',
-        ),
-      ),
-    ),
-    'changed' => array(
+        ],
+      ],
+    ],
+    'changed' => [
       '#type' => 'item',
-      '#wrapper_attributes' => array('class' => array('entity-meta__last-saved')),
+      '#wrapper_attributes' => ['class' => ['entity-meta__last-saved']],
       '#markup' => '<h4 class="label inline">' . t('Last saved') . '</h4> ' . $is_new,
-    ),
-    'author' => array(
+    ],
+    'author' => [
       '#type' => 'item',
-      '#wrapper_attributes' => array('class' => array('entity-meta__author')),
+      '#wrapper_attributes' => ['class' => ['entity-meta__author']],
       '#markup' => '<h4 class="label inline">' . t('Author') . '</h4> ' . $node->getOwner()->getUsername(),
-    ),
-  );
+    ],
+  ];
 
   $form['revision_information']['#type'] = 'container';
   $form['revision_information']['#group'] = 'meta';

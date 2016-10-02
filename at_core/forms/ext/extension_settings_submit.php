@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Process extension settings submits.
  */
 

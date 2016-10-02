@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Save Mobile Blocks CSS to file.
  */
 
@@ -18,7 +17,7 @@ function at_core_submit_mobile_blocks($values, $theme, $generated_files_path) {
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
-    $breakpoints = array();
+    $breakpoints = [];
     foreach ($breakpoint_groups as $group_key => $group_values) {
       $breakpoints[$group_key] = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup($group_key);
     }

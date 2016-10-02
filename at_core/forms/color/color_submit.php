@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
 function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
 
   // Avoid color settings spilling over to theme settings.
-  $color_settings = array('theme', 'palette', 'scheme');
+  $color_settings = ['theme', 'palette', 'scheme'];
   if ($form_state->hasValue('info')) {
     $color_settings[] = 'info';
   }
@@ -56,7 +56,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
     $memory_limit = ini_get('memory_limit');
     $size = Bytes::toInt($memory_limit);
     if (!Environment::checkMemoryLimit($usage + $required, $memory_limit)) {
-      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href=":php_url">PHP documentation</a> for more information.', array(':php_url' => 'http://php.net/manual/ini.core.php#ini.sect.resource-limits', '%size' => format_size($usage + $required - $size))), 'error');
+      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href=":php_url">PHP documentation</a> for more information.', [':php_url' => 'http://php.net/manual/ini.core.php#ini.sect.resource-limits', '%size' => format_size($usage + $required - $size)]), 'error');
       return;
     }
   }
@@ -88,7 +88,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
   $paths['target'] = $paths['target'] . '/';
   $paths['id'] = $id;
   $paths['source'] = drupal_get_path('theme', $theme) . '/';
-  $paths['files'] = $paths['map'] = array();
+  $paths['files'] = $paths['map'] = [];
 
   // Save palette and logo location.
   $config
@@ -111,10 +111,10 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
   }
 
   // Rewrite theme stylesheets.
-  $css = array();
+  $css = [];
   foreach ($info['css'] as $stylesheet) {
     // Build a temporary array with CSS files.
-    $files = array();
+    $files = [];
     if (file_exists($paths['source'] . $stylesheet)) {
       $files[] = $stylesheet;
     }
@@ -146,7 +146,7 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
       );
 
       // Prefix all paths within this CSS file, ignoring absolute paths.
-      $style = preg_replace_callback('/url\([\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\)/i', array($css_optimizer, 'rewriteFileURI'), $style);
+      $style = preg_replace_callback('/url\([\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\)/i', [$css_optimizer, 'rewriteFileURI'], $style);
 
       // Rewrite stylesheet with new colors.
       $style = _color_rewrite_stylesheet($theme, $info, $paths, $palette, $style);
@@ -167,12 +167,11 @@ function at_color_scheme_form_submit($form, FormStateInterface $form_state) {
     ->set('files', $paths['files'])
     ->save();
 
-  drupal_set_message(t('Color scheme <i>@scheme</i> saved.', array('@scheme' => $scheme_name)), 'status');
+  drupal_set_message(t('Color scheme <i>@scheme</i> saved.', ['@scheme' => $scheme_name]), 'status');
 }
 
 
 /**
- * @file
  * Logs a notice of the custom color settings.
  *
  * If a custom color scheme has been created in the UI it is injected into the
@@ -230,7 +229,7 @@ function at_core_log_color_scheme($form, FormStateInterface $form_state) {
   // I'm not holding my breath.
   drupal_flush_all_caches();
 
-  $obi_wan_quotes = array(
+  $obi_wan_quotes = [
     "You'll find that many of the truths we cling to depend greatly on our own point of view.",
     "Only imperial storm troopers are so precise.",
     "You will never find a more wretched hive of scum and villainy.",
@@ -243,9 +242,9 @@ function at_core_log_color_scheme($form, FormStateInterface $form_state) {
     "You can't win, Darth.",
     "Use the Force, Luke.",
     "May the force be with you.",
-  );
+  ];
   $obi_k = array_rand($obi_wan_quotes);
   $obi_wan = $obi_wan_quotes[$obi_k];
 
-  drupal_set_message(t('Color scheme logged. Cache cleared. <p>Obi Wan says... <em>"@obiwan"</em></p>', array('@obiwan' => $obi_wan)), 'status');
+  drupal_set_message(t('Color scheme logged. Cache cleared. <p>Obi Wan says... <em>"@obiwan"</em></p>', ['@obiwan' => $obi_wan]), 'status');
 }

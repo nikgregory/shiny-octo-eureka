@@ -1,15 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\at_core\Layout\LayoutLoad
- */
-
 namespace Drupal\at_core\Layout;
 
 use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Html;
+use Drupal\at_core\Theme\ThemeConfig;
 
 class LayoutLoad extends Layout {
 
@@ -49,7 +45,7 @@ class LayoutLoad extends Layout {
    * @return mixed
    */
   public function regionSourceOrder($region) {
-    $region_source_order = array();
+    $region_source_order = [];
     foreach ($this->layout_config['rows'] as $row_name => $row_data) {
       foreach ($row_data['regions'] as $region_key => $region_values) {
         if ($region == $region_key) {
@@ -93,9 +89,14 @@ class LayoutLoad extends Layout {
    * @return int|string|void
    */
   public function rowAttributes() {
-    $variables = array();
-    $active_row_regions = array();
-    $config_settings = \Drupal::config($this->theme_name . '.settings')->get('settings');
+    $variables = [];
+    $active_row_regions = [];
+
+    $theme = &drupal_static(__METHOD__);
+    if (!isset($theme)) {
+      $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+      $theme = $data->getConfig();
+    }
 
     // If rows are empty return early.
     if (empty($this->layout_config['rows'])) {
@@ -134,15 +135,15 @@ class LayoutLoad extends Layout {
 
       // Wrapper attributes.
       $variables[$row_key]['wrapper_attributes'] = new Attribute;
-      $variables[$row_key]['wrapper_attributes']['class'] = array('l-pr', 'page__row', 'pr-' . str_replace('_', '-', $row_key));
+      $variables[$row_key]['wrapper_attributes']['class'] = ['l-pr', 'page__row', 'pr-' . str_replace('_', '-', $row_key)];
 
       // Wrapper attributes set in the layout yml file.
       foreach ($row_values['attributes'] as $attribute_type => $attribute_values) {
         if (is_array($attribute_values)) {
-          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array(implode(' ', $attribute_values));
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = [implode(' ', $attribute_values)];
         }
         else {
-          $variables[$row_key]['wrapper_attributes'][$attribute_type] = array($attribute_values);
+          $variables[$row_key]['wrapper_attributes'][$attribute_type] = [$attribute_values];
         }
       }
 
@@ -153,7 +154,7 @@ class LayoutLoad extends Layout {
 
       // Container attributes.
       $variables[$row_key]['container_attributes'] = new Attribute;
-      $variables[$row_key]['container_attributes']['class'] = array('l-rw', 'regions', 'container', 'pr-'. str_replace('_', '-', $row_key) . '__rw');
+      $variables[$row_key]['container_attributes']['class'] = ['l-rw', 'regions', 'container', 'pr-' . str_replace('_', '-', $row_key) . '__rw'];
 
       // Active Regions: "arc" is "active region count", this is number of
       // active regions in this row on this page.
@@ -177,22 +178,20 @@ class LayoutLoad extends Layout {
       }
 
       // Shortcode classes.
-      if (isset($config_settings['enable_extensions']) && $config_settings['enable_extensions'] === 1) {
-        if (isset($config_settings['enable_shortcodes']) && $config_settings['enable_shortcodes'] === 1) {
-
+      if ($theme['extensions']['is_enabled'] === TRUE) {
+        if ($theme['shortcodes']['is_enabled'] === TRUE) {
           // Wrapper codes
-          if (!empty($config_settings['page_classes_row_wrapper_' . $row_key])) {
-            $wrappercodes = Tags::explode($config_settings['page_classes_row_wrapper_' . $row_key]);
-            foreach ($wrappercodes as $wrapperclass) {
-              $variables[$row_key]['wrapper_attributes']['class'][] = Html::cleanCssIdentifier($wrapperclass);
+          if (!empty($theme['config']['page_classes_row_wrapper_' . $row_key])) {
+            $wrapper_codes = Tags::explode($theme['config']['page_classes_row_wrapper_' . $row_key]);
+            foreach ($wrapper_codes as $wrapper_class) {
+              $variables[$row_key]['wrapper_attributes']['class'][] = Html::cleanCssIdentifier($wrapper_class);
             }
           }
-
           // Container codes
-          if (!empty($config_settings['page_classes_row_container_' . $row_key])) {
-            $containercodes = Tags::explode($config_settings['page_classes_row_container_' . $row_key]);
-            foreach ($containercodes as $containerclass) {
-              $variables[$row_key]['container_attributes']['class'][] = Html::cleanCssIdentifier($containerclass);
+          if (!empty($theme['config']['page_classes_row_container_' . $row_key])) {
+            $container_codes = Tags::explode($theme['config']['page_classes_row_container_' . $row_key]);
+            foreach ($container_codes as $container_class) {
+              $variables[$row_key]['container_attributes']['class'][] = Html::cleanCssIdentifier($container_class);
             }
           }
         }

@@ -1,11 +1,9 @@
 <?php
 
 /**
- * @file
  * Submit layouts.
  */
 
-use Drupal\Core\Url;
 use Drupal\Component\Utility\Unicode;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 use Drupal\at_core\Layout\LayoutSubmit;
@@ -73,12 +71,13 @@ function at_core_submit_layouts(&$form, &$form_state) {
     }
   }
   if (isset($files_to_delete)) {
-    $deleted_files_message_list = array(
+    $deleted_files_message_list = [
       '#theme' => 'item_list',
       '#items' => $files_to_delete,
-    );
-    drupal_set_message(t('The following <b>files</b> were removed: @removed_files', array(
-      '@removed_files' => \Drupal::service('renderer')->renderPlain($deleted_files_message_list))
+    ];
+    drupal_set_message(t('The following <b>files</b> were removed: @removed_files', [
+      '@removed_files' => \Drupal::service('renderer')->renderPlain($deleted_files_message_list)
+      ]
     ), 'status');
   }
 

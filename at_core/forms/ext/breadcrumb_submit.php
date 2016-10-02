@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Save Breadcrumb CSS to file
  */
 

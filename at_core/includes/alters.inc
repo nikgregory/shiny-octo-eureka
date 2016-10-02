@@ -4,6 +4,7 @@ use Symfony\Component\Yaml\Parser;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Xss;
 use Drupal\layout_plugin\Layout;
+use Drupal\at_core\Theme\ThemeConfig;
 
 /**
  * Alter attachments (typically assets) to a page before it is rendered.
@@ -18,16 +19,28 @@ use Drupal\layout_plugin\Layout;
  * @see hook_page_attachments_alter()
  */
 function at_core_page_attachments_alter(array &$page) {
-  $active_theme = \Drupal::theme()->getActiveTheme();
-  $theme = $active_theme->getName();
-  $theme_path = $active_theme->getPath();
-  $config = \Drupal::config($theme . '.settings')->get('settings');
-  $generated_files_path = NULL;
+  // Theme data.
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
 
-  if ($theme === 'seven') {
+  // Config
+  $config = $theme['config'];
+
+  // Attach required libraries.
+  $page['#attached']['library'][] = $theme['provider'] . '/fontfaceobserver';
+  $page['#attached']['library'][] = $theme['provider'] . '/base';
+  $page['#attached']['library'][] = $theme['provider'] . '/color';
+
+  // Try to avoid running this stuff in admin on Seven.
+  if ($theme['provider'] === 'seven') {
     return;
   }
 
+  // Generated files path.
+  $generated_files_path = NULL;
   if (!empty($config['generated_files_path'])) {
     $generated_files_path = $config['generated_files_path'];
   }
@@ -51,7 +64,7 @@ function at_core_page_attachments_alter(array &$page) {
   // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
   // load if the module is installed.
-  $module_libraries = array(
+  $module_libraries = [
     'aggregator',
     'book',
     'comment',
@@ -60,35 +73,43 @@ function at_core_page_attachments_alter(array &$page) {
     'language',
     'search',
     'taxonomy',
-   // 'toolbar',
-  );
-  $theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($theme);
+  ];
+  $theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($theme['provider']);
   foreach ($module_libraries as $module_library) {
     if (array_key_exists($module_library, $theme_libraries) && \Drupal::moduleHandler()->moduleExists($module_library) === TRUE) {
-      $page['#attached']['library'][] = "$theme/$module_library";
+      $page['#attached']['library'][] = $theme['provider'] . '/'. $module_library;
+    }
+  }
+  // base theme libs.
+  if (isset($base_themes)) {
+    foreach ($base_themes as $base_key => $base_values) {
+      $base_theme_libraries = \Drupal::service('library.discovery')->getLibrariesByExtension($base_key);
+      foreach ($module_libraries as $module_library) {
+        if (array_key_exists($module_library, $base_theme_libraries) && \Drupal::moduleHandler()->moduleExists($module_library) === TRUE) {
+          $page['#attached']['library'][] = "$base_key/$module_library";
+        }
+      }
     }
   }
 
-  // Special case toolbar to support modules that modify the toolbar.
-  // ??
-
   // Process extension settings.
-  if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+  if ($theme['extensions']['is_enabled'] === TRUE) {
 
     // Mimic is active, load the ckeditor.css.
     if (isset($config['enable_ckeditor']) && $config['enable_ckeditor'] === 1) {
       if (isset($config['mimic_enabled']) && $config['mimic_enabled'] === 1) {
         // BC for older sub-themes that may have info file entires that mess up Mimic.
         $mimic_good_to_go = TRUE;
-        $theme_extension = $active_theme->getExtension();
-        if (isset($theme_extension->info['ckeditor_stylesheets'])) {
+
+        // TODO check mimic
+        if (isset($theme['provider']['info']['ckeditor_stylesheets'])) {
           $mimic_good_to_go = FALSE;
         }
-        if (isset($theme_extension->info['libraries-override']['ckeditor/drupal.ckeditor'])) {
+        if (isset($theme['provider']['info']['libraries-override']['ckeditor/drupal.ckeditor'])) {
           $mimic_good_to_go = FALSE;
         }
         if ($mimic_good_to_go === TRUE) {
-          $page['#attached']['library'][] = "$theme/ckeditor";
+          $page['#attached']['library'][] = $theme['provider'] . '/ckeditor';
         }
       }
     }
@@ -97,15 +118,15 @@ function at_core_page_attachments_alter(array &$page) {
     if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
       // Fonts generated CSS.
       if (file_exists($generated_files_path . '/fonts.css')) {
-        $page['#attached']['library'][] = "$theme/fonts";
+        $page['#attached']['library'][] = $theme['provider'] . '/fonts';
       }
       // Google font URL.
       if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === TRUE) {
-        $page['#attached']['library'][] = "$theme/google_fonts";
+        $page['#attached']['library'][] = $theme['provider'] . '/google_fonts';
       }
       // Typekit ID and JS.
       if (isset($config['font_use_typekit']) && $config['font_use_typekit'] === TRUE) {
-        $page['#attached']['library'][] = "$theme/typekit_id";
+        $page['#attached']['library'][] = $theme['provider'] . '/typekit_id';
         $page['#attached']['library'][] = 'at_core/at.typekit';
       }
     }
@@ -113,21 +134,21 @@ function at_core_page_attachments_alter(array &$page) {
     // Titles.
     if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
       if (file_exists($generated_files_path . '/title-styles.css')) {
-        $page['#attached']['library'][] = "$theme/title_styles";
+        $page['#attached']['library'][] = $theme['provider'] . '/title_styles';
       }
     }
 
     // Mobile blocks
     if (isset($config['enable_mobile_blocks']) && $config['enable_mobile_blocks'] === 1) {
       if (file_exists($generated_files_path . '/mobile-blocks.css')) {
-        $page['#attached']['library'][] = "$theme/mobile_blocks";
+        $page['#attached']['library'][] = $theme['provider'] . '/mobile_blocks';
       }
     }
 
     // Custom CSS.
     if (isset($config['enable_custom_css']) && $config['enable_custom_css'] === 1) {
       if (file_exists($generated_files_path . '/custom-css.css')) {
-        $page['#attached']['library'][] = "$theme/custom_css";
+        $page['#attached']['library'][] = $theme['provider'] . '/custom_css';
       }
     }
 
@@ -136,20 +157,20 @@ function at_core_page_attachments_alter(array &$page) {
 
       // Responsive tables
       if (isset($config['responsive_tables']) && $config['responsive_tables'] === 1) {
-        $page['#attached']['library'][] = "$theme/responsive_tables";
+        $page['#attached']['library'][] = $theme['provider'] . '/responsive_tables';
       }
 
       // Breadcrumbs.
       if (!empty($config['breadcrumb_separator'])) {
         if (file_exists($generated_files_path . '/breadcrumb.css')) {
-          $page['#attached']['library'][] = "$theme/breadcrumb";
+          $page['#attached']['library'][] = $theme['provider'] . '/breadcrumb';
         }
       }
 
       // Login block.
       // Just load the login block CSS without the currentUser check.
       if (isset($config['horizontal_login_block']) && $config['horizontal_login_block'] === 1) {
-        $page['#attached']['library'][] = "$theme/login_block";
+        $page['#attached']['library'][] = $theme['provider'] . '/login_block';
       }
     }
 
@@ -173,7 +194,7 @@ function at_core_page_attachments_alter(array &$page) {
 
       // Attach show_grid.
       if (isset($config['show_grid']) && $config['show_grid'] === 1) {
-        $page['#attached']['library'][] = "$theme/show_grid";
+        $page['#attached']['library'][] = $theme['provider'] . '/show_grid';
       }
 
       // Attach nuke_toolbar CSS file.
@@ -185,86 +206,6 @@ function at_core_page_attachments_alter(array &$page) {
       if (isset($config['enable_live_reload']) && $config['enable_live_reload'] === 1) {
         $page['#attached']['library'][] = 'at_core/at.livereload';
       }
-    }
-
-    // Shortcodes
-    if (isset($config['enable_shortcodes']) && $config['enable_shortcodes'] === 1) {
-      $shortcodes_yml = $theme_path . '/' . $theme . '.shortcodes.yml';
-      if (file_exists($shortcodes_yml)) {
-        $shortcodes_parser = new Parser();
-        $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
-        unset($shortcodes['animate']);
-        foreach ($shortcodes as $class_type => $class_values) {
-          if (isset($config['shortcodes_' . $class_type . '_enable']) && $config['shortcodes_' . $class_type . '_enable'] === 1) {
-            $page['#attached']['library'][] = $theme . '/shortcodes_' . str_replace('-', '_', $class_type);
-          }
-        }
-      }
-
-      // Animate has its own naming convention, being a vendor library.
-      if (isset($config['shortcodes_animate_enable']) && $config['shortcodes_animate_enable'] === 1) {
-        $page['#attached']['library'][] = "$theme/animate";
-      }
-    }
-
-    // Add the responsive menu styles settings.
-    if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
-      $responsivemenu_settings = array();
-      $load_accordion = FALSE;
-      $click_menus_enabled = FALSE;
-      $click_menu_settings['acd_load'] = FALSE;
-
-      if (isset($config['click_menus_enabled']) && $config['click_menus_enabled'] === 1) {
-        $click_menus_enabled = TRUE;
-      }
-
-      // Breakpoint
-      if (isset($config['responsive_menu_breakpoint'])) {
-        $responsivemenu_settings['bp'] = $config['responsive_menu_breakpoint'];
-      }
-
-      // Loop the config settings to find selected menu styles.
-      foreach (array('default', 'responsive') as $style) {
-        if (isset($config['responsive_menu_' . $style . '_style'])) {
-
-          // Load the library for each selected menu style.
-          $page['#attached']['library'][] = "$theme/responsive_menus_" . $config['responsive_menu_' . $style . '_style'];
-
-          // Accordion click menu settings.
-          if ($click_menus_enabled == TRUE) {
-            $click_menu_settings['acd_' . $style] = FALSE;
-            if (in_array($config['responsive_menu_' . $style . '_style'], ['vertical', 'slidedown', 'offcanvas', 'overlay'])) {
-              $click_menu_settings['acd_' . $style] = TRUE;
-              $click_menu_settings['acd_load'] = TRUE;
-              $load_accordion = TRUE;
-            }
-          }
-
-          // Set the menu option for each style.
-          $responsivemenu_settings[$style] = 'ms-' . $config['responsive_menu_' . $style . '_style'];
-        }
-      }
-
-      // Accordion click menu settings.
-      if ($click_menus_enabled == TRUE) {
-        $click_menu_settings['acd_both'] = FALSE;
-        if ($click_menu_settings['acd_default'] == $click_menu_settings['acd_responsive']) {
-          $click_menu_settings['acd_both'] = TRUE;
-        }
-      }
-      $responsivemenu_settings['acd'] = $click_menu_settings;
-
-      // Load Responsive menu dependencies.
-      $page['#attached']['library'][] = "$theme/responsive_menus";
-      $page['#attached']['library'][] = "at_core/at.responsivemenus";
-      if ($load_accordion == TRUE) {
-        $page['#attached']['library'][] = "$theme/responsive_menus_accordion";
-        $page['#attached']['library'][] = "at_core/at.accordion";
-      }
-      $page['#attached']['library'][] = "at_core/at.orientationchangereload";
-
-      // Attach JS settings.
-      $page['#attached']['drupalSettings'][$theme]['at_responsivemenus'] = $responsivemenu_settings;
     }
 
     // Attach poly-fills to support IE8.
@@ -282,7 +223,7 @@ function at_core_page_attachments_alter(array &$page) {
       // Get config settings and jam them into drupalSettings.
       if (isset($config['slideshow_count']) && $config['slideshow_count'] >= 1) {
 
-        $basic_slider_settings = array(
+        $basic_slider_settings = [
           'animation',
           'direction',
           'smoothheight',
@@ -290,18 +231,18 @@ function at_core_page_attachments_alter(array &$page) {
           'animationspeed',
           'controlnav',
           'directionnav',
-        );
+        ];
 
-        $carousel_settings = array(
+        $carousel_settings = [
           'as_carousel',
           'itemwidth',
           'itemmargin',
           'minitems',
           'maxitems',
           'move',
-        );
+        ];
 
-        $advanced_slider_settings = array(
+        $advanced_slider_settings = [
           'pauseonaction',
           'pauseonhover',
           'animationloop',
@@ -317,13 +258,13 @@ function at_core_page_attachments_alter(array &$page) {
           'nexttext',
           'slideshow_class',
           'selector',
-        );
+        ];
 
-        $slider_settings = array();
+        $slider_settings = [];
         for ($i = 0; $i < $config['slideshow_count']; $i++) {
 
           // Set a key
-          $ss_key = Html::cleanCssIdentifier($theme . '-slideshow-' . $i);
+          $ss_key = Html::cleanCssIdentifier($theme['provider'] . '-slideshow-' . $i);
 
           if (isset($config['slideshow_' . $i . '_enable']) && $config['slideshow_' . $i . '_enable'] === 1) {
 
@@ -357,22 +298,138 @@ function at_core_page_attachments_alter(array &$page) {
 
         // Attach JS settings.
         if (!empty($slider_settings)) {
-          $page['#attached']['drupalSettings'][$theme]['at_slideshows'] = $slider_settings;
+          $page['#attached']['drupalSettings'][$theme['name']]['at_slideshows'] = $slider_settings;
           $page['#attached']['library'][] = 'at_core/at.slideshow_settings';
-          $page['#attached']['library'][] = "$theme/slideshow_styles";
+          $page['#attached']['library'][] = $theme['provider'] . '/slideshow_styles';
         }
       }
     }
   }
 
+  // Short codes. For normal sub theme types yml and CSS comes from the theme,
+  // however skin themes can override the settings with the CSS and yml coming
+  // from the skins base theme.
+  if ($theme['extensions']['is_enabled'] === TRUE) {
+    if ($theme['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $theme[$theme['shortcodes']['config']];
+      $shortcodes_yml = $theme['path'] . '/' . $theme['provider'] . '.shortcodes.yml';
+      if (file_exists($shortcodes_yml)) {
+        $shortcodes_parser = new Parser();
+        $shortcodes = $shortcodes_parser->parse(file_get_contents($shortcodes_yml));
+        unset($shortcodes['animate']);
+        foreach ($shortcodes as $class_type => $class_values) {
+          if (isset($shortcodes_config['shortcodes_' . $class_type . '_enable']) && $shortcodes_config['shortcodes_' . $class_type . '_enable'] === 1) {
+            $page['#attached']['library'][] = $theme['provider'] . '/shortcodes_' . str_replace('-', '_', $class_type);
+          }
+        }
+      }
+      // Animate has its own naming convention, being a vendor library.
+      if (isset($shortcodes_config['shortcodes_animate_enable']) && $shortcodes_config['shortcodes_animate_enable'] === 1) {
+        $page['#attached']['library'][] = $theme['provider'] . '/animate';
+      }
+    }
+  }
+
+  // Add the responsive menu styles settings.
+  $responsive_menu_is_enabled = FALSE;
+  $responsive_menu_library_provider = '';
+  if ($theme['extensions']['is_enabled'] === TRUE) {
+    if ($theme['type'] === 'adaptive_subtheme') {
+
+      if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+        $responsive_menu_is_enabled = TRUE;
+        $responsive_menu_config = $config;
+        $responsive_menu_library_provider = $theme['provider'];
+      }
+    }
+    elseif ($theme['type'] === 'adaptive_skin') {
+      // In skin themes the provider is always the theme base.
+      $responsive_menu_library_provider = $theme['base'];
+      // skin theme has enabled responsive menus?
+      if (isset($theme['config_skin']['enable_responsive_menus']) && $theme['config_skin']['enable_responsive_menus'] === 1) {
+        $responsive_menu_is_enabled = TRUE;
+        $responsive_menu_config = $theme['config_skin'];
+      }
+      // base theme has enabled responsive menus?
+      elseif (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
+        $responsive_menu_is_enabled = TRUE;
+        $responsive_menu_config = $config;
+      }
+    }
+
+    // Process responsive menu settings.
+    if ($responsive_menu_is_enabled === TRUE) {
+      $responsive_menu_settings = [];
+      $load_accordion = FALSE;
+      $click_menus_enabled = FALSE;
+      $click_menu_settings['acd_load'] = FALSE;
+
+      if (isset($responsive_menu_config['click_menus_enabled']) && $responsive_menu_config['click_menus_enabled'] === 1) {
+        $click_menus_enabled = TRUE;
+      }
+
+      // Breakpoint
+      if (isset($responsive_menu_config['responsive_menu_breakpoint'])) {
+        $responsive_menu_settings['bp'] = $responsive_menu_config['responsive_menu_breakpoint'];
+      }
+
+      // Loop the config settings to find selected menu styles.
+      foreach (['default', 'responsive'] as $style) {
+        if (isset($responsive_menu_config['responsive_menu_' . $style . '_style'])) {
+
+          // Load the library for each selected menu style.
+          $page['#attached']['library'][] = "$responsive_menu_library_provider/responsive_menus_" . $responsive_menu_config['responsive_menu_' . $style . '_style'];
+
+          // Accordion click menu settings.
+          if ($click_menus_enabled == TRUE) {
+            $click_menu_settings['acd_' . $style] = FALSE;
+            if (in_array($responsive_menu_config['responsive_menu_' . $style . '_style'], [
+              'vertical',
+              'slidedown',
+              'offcanvas',
+              'overlay'
+            ])) {
+              $click_menu_settings['acd_' . $style] = TRUE;
+              $click_menu_settings['acd_load'] = TRUE;
+              $load_accordion = TRUE;
+            }
+          }
+          // Set the menu option for each style.
+          $responsive_menu_settings[$style] = 'ms-' . $responsive_menu_config['responsive_menu_' . $style . '_style'];
+        }
+      }
+
+      // Accordion click menu settings.
+      if ($click_menus_enabled == TRUE) {
+        $click_menu_settings['acd_both'] = FALSE;
+        if ($click_menu_settings['acd_default'] == $click_menu_settings['acd_responsive']) {
+          $click_menu_settings['acd_both'] = TRUE;
+        }
+      }
+      $responsive_menu_settings['acd'] = $click_menu_settings;
+
+      // Load Responsive menu dependencies.
+      $page['#attached']['library'][] = "$responsive_menu_library_provider/responsive_menus";
+      $page['#attached']['library'][] = "at_core/at.responsivemenus";
+      if ($load_accordion == TRUE) {
+        $page['#attached']['library'][] = "$responsive_menu_library_provider/responsive_menus_accordion";
+        $page['#attached']['library'][] = "at_core/at.accordion";
+      }
+      $page['#attached']['library'][] = "at_core/at.orientationchangereload";
+
+      // Attach JS settings.
+      $page['#attached']['drupalSettings'][$theme['name']]['at_responsivemenus'] = $responsive_menu_settings;
+    }
+  }
+
   // Custom CSS file for novice users.
-  if (file_exists($theme_path . '/styles/css/custom.css')) {
-    $page['#attached']['library'][] = "$theme/custom_css_file";
+  if (file_exists($theme['path'] . '/styles/css/custom.css')) {
+    $page['#attached']['library'][] = $theme['provider'] . '/custom_css_file';
   }
 
   // Finally we load our jquery.ui overides.
-  if (file_exists($theme_path . '/styles/css/components/jquery-ui.css')) {
-    $page['#attached']['library'][] = "$theme/jquery_ui";
+  if (file_exists($theme['path'] . '/styles/css/components/jquery-ui.css')) {
+    $page['#attached']['library'][] = $theme['provider'] . '/jquery_ui';
   }
 }
 
@@ -394,19 +451,20 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
 
   // Alter CKEditor JS settings.
   if (\Drupal::moduleHandler()->moduleExists('ckeditor') == TRUE) {
-    $active_theme = \Drupal::theme()->getActiveTheme();
-    $theme = $active_theme->getName();
-    $theme_path = $active_theme->getPath();
-    $config = \Drupal::config($theme . '.settings')->get('settings');
 
-    if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+    $theme = &drupal_static(__FUNCTION__);
+    if (!isset($theme)) {
+      $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+      $theme = $data->getConfig();
+    }
+    $config = $theme['config'];
+
+    if ($theme['extensions']['is_enabled'] === TRUE) {
       if (isset($config['enable_ckeditor']) && $config['enable_ckeditor'] === 1) {
-        // BC for older sub-themes that may have info file entires that mess up Mimic.
-        $theme_extension = $active_theme->getExtension();
-        if (isset($theme_extension->info['ckeditor_stylesheets'])) {
+        if (isset($theme['provider']['info']['ckeditor_stylesheets'])) {
           $mimic_good_to_go = FALSE;
         }
-        if (isset($theme_extension->info['libraries-override']['ckeditor/drupal.ckeditor'])) {
+        if (isset($theme['provider']['info']['libraries-override']['ckeditor/drupal.ckeditor'])) {
           $mimic_good_to_go = FALSE;
         }
         if ($mimic_good_to_go === TRUE) {
@@ -429,17 +487,17 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
 
     if (isset($settings['editor']['formats'])) {
       // Fontawesome + webfont CSS.
-      if (file_exists($theme_path . '/styles/css/components/font-awesome.css')) {
-        $styles[] = $theme_path . '/styles/css/components/font-awesome.css';
+      if (file_exists($theme['path'] . '/styles/css/components/font-awesome.css')) {
+        $styles[] = $theme['path'] . '/styles/css/components/font-awesome.css';
       }
-      if (file_exists($theme_path . '/styles/css/components/webfonts.css')) {
-        $styles[] = $theme_path . '/styles/css/components/webfonts.css';
+      if (file_exists($theme['path'] . '/styles/css/components/webfonts.css')) {
+        $styles[] = $theme['path'] . '/styles/css/components/webfonts.css';
       }
       // Component base, image & tables.
-      $base_styles = array('base', 'image', 'tables');
+      $base_styles = ['base', 'image', 'tables'];
       foreach ($base_styles as $base_style) {
-        if (file_exists("$theme_path/styles/css/components/$base_style.css")) {
-          $styles[] = "$theme_path/styles/css/components/$base_style.css";
+        if (file_exists($theme['path'] . '/styles/css/components/' . $base_style . '.css')) {
+          $styles[] = $theme['path'] . '/styles/css/components/' . $base_style . '.css';
         }
       }
       // Generated font & text styles.
@@ -465,12 +523,12 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       foreach ($settings['editor']['formats'] as $format_key => $format_values) {
         if ($mimic === TRUE) {
           // Alter ckeditor-iframe CSS.
-          $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url("$theme_path/styles/css/components/ckeditor-iframe.css");
+          $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($theme['path'] . '/styles/css/components/ckeditor-iframe.css');
           // Remove cores version, it just gets in the way.
           $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'] = array_merge(
             array_diff(
               $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'],
-              array('/core/modules/ckeditor/css/ckeditor-iframe.css')
+              ['/core/modules/ckeditor/css/ckeditor-iframe.css']
             )
           );
         }
@@ -483,7 +541,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       // Color styles.
       if ($mimic === TRUE) {
         if (\Drupal::moduleHandler()->moduleExists('color') == TRUE) {
-          $color_paths = \Drupal::config('color.theme.' . $theme)->get('stylesheets');
+          $color_paths = \Drupal::config('color.theme.' . $theme['provider'])->get('stylesheets');
           foreach ($settings['editor']['formats'] as $format_key => $format_values) {
             // Add Color module generated stylesheets.
             if (!empty($color_paths)) {
@@ -496,7 +554,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
             }
             // Else add the themes color component stylesheet.
             else {
-              $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url("$theme_path/styles/css/components/color.css");
+              $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($theme['path'] . '/styles/css/components/color.css');
             }
           }
         }
@@ -516,11 +574,16 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
  *   the libraries.
  */
 function at_core_library_info_alter(&$libraries, $extension) {
-  $theme_path = \Drupal::theme()->getActiveTheme()->getPath();
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
+
   // Replace layout_plugin CSS auto-magically. This avoids the whole issue
   // of absolute paths in libraries-override in the info.yml file.
-  if (file_exists($theme_path . '/styles/layout_plugin') && $extension == 'layout_plugin') {
-    $at_layout_plugin_libraries = array(
+  if (file_exists($theme['path'] . '/styles/layout_plugin') && $extension === 'layout_plugin') {
+    $at_layout_plugin_libraries = [
       'twocol-2-10',
       'twocol-3-9',
       'twocol-4-8',
@@ -541,12 +604,12 @@ function at_core_library_info_alter(&$libraries, $extension) {
       'grid-2x2',
       'grid-3x3',
       'grid-4x4',
-    );
+    ];
     foreach ($libraries as $lib_key => $library) {
       if (in_array($lib_key, $at_layout_plugin_libraries)) {
-        $new_css = $theme_path . '/styles/layout_plugin/css/' . $lib_key .  '.css';
+        $new_css = $theme['provider'] . '/styles/layout_plugin/css/' . $lib_key .  '.css';
         if (file_exists($new_css)) {
-          $libraries[$lib_key]['css']['theme'] = array('/' . $new_css => array());
+          $libraries[$lib_key]['css']['theme'] = ['/' . $new_css => []];
         }
       }
     }
@@ -567,7 +630,7 @@ function at_core_library_info_alter(&$libraries, $extension) {
 function at_core_theme_registry_alter(&$theme_registry) {
   if (\Drupal::moduleHandler()->moduleExists('layout_plugin') == TRUE) {
     $layouts = Layout::layoutPluginManager()->getDefinitions();
-    $layout_theme_hooks = array();
+    $layout_theme_hooks = [];
     foreach ($layouts as $info) {
       if ($info['provider'] == 'at_core') {
         $layout_theme_hooks[] = $info['theme'];
@@ -595,6 +658,6 @@ function at_core_theme_registry_alter(&$theme_registry) {
 function at_core_element_info_alter(array &$info) {
   // Remove the html5 shiv. Add it later if legacy browser support is enabled.
   if (in_array('core/html5shiv', $info['html']['#attached']['library'])) {
-    $info['html']['#attached']['library'] = array_merge(array_diff($info['html']['#attached']['library'], array('core/html5shiv')));
+    $info['html']['#attached']['library'] = array_merge(array_diff($info['html']['#attached']['library'], ['core/html5shiv']));
   }
 }

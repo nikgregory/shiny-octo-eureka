@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Custom theme settings.
  */
 
@@ -45,9 +44,9 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $generated_files_path = NULL;
 
   // Path to save generated CSS files. We don't want this happening for at_core or the generator.
-  if (isset($getThemeInfo['subtheme type']) && $getThemeInfo['subtheme type'] === 'adaptive_subtheme') {
+  if (isset($getThemeInfo['subtheme type']) && ($getThemeInfo['subtheme type'] === 'adaptive_subtheme' || $getThemeInfo['subtheme type'] === 'adaptive_skin')) {
     $directoryOperations = new DirectoryOperations();
-    $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = array($subtheme_path, 'styles/css/generated'));
+    $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = [$subtheme_path, 'styles/css/generated']);
   }
 
   // Get the active themes regions so we can use this in
@@ -69,7 +68,7 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
 
   if ($breakpoints_module == TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
-    $breakpoints = array();
+    $breakpoints = [];
 
     // Set breakpoint options, we use these in layout and other extensions like
     // Responsive menus.
@@ -78,13 +77,13 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     }
 
     foreach($breakpoints as $group => $breakpoint_values)  {
-      if ($breakpoint_values !== array()) {
+      if ($breakpoint_values !== []) {
         $breakpoint_options[$group] = $group;
       }
     }
   }
   else {
-    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint. You cannot set the layout or use this themes custom settings until Breakpoint is installed.', array('@extendpage' => base_path() . 'admin/modules')), 'error');
+    drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint. You cannot set the layout or use this themes custom settings until Breakpoint is installed.', ['@extendpage' => base_path() . 'admin/modules']), 'error');
   }
 
   // Get node types (bundles).
@@ -104,7 +103,7 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $admin_theme = $system_theme_config->get('admin');
   if (!empty($admin_theme)) {
     $admin_theme_class = 'admin-theme--' . Html::cleanCssIdentifier($admin_theme);
-    $form['#attributes'] = array('class' => array($admin_theme_class));
+    $form['#attributes'] = ['class' => [$admin_theme_class]];
   }
 
   // Attached required CSS and JS.
@@ -113,49 +112,53 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   // Display a rude message if AT Tools is missing...
   $at_tools_module = \Drupal::moduleHandler()->moduleExists('at_tools');
   if ($at_tools_module == FALSE) {
-    drupal_set_message(t('Please install the <a href="@at_tools_href" target="_blank">AT Tools</a> module for Drupal 8. Your theme may not operate correctly without this module installed.', array('@at_tools_href' => 'https://www.drupal.org/project/at_tools')), 'warning');
+    drupal_set_message(t('Please install the <a href="@at_tools_href" target="_blank">AT Tools</a> module for Drupal 8. Your theme may not operate correctly without this module installed.', ['@at_tools_href' => 'https://www.drupal.org/project/at_tools']), 'warning');
   }
 
   // AT Core
   if ($theme == 'at_core') {
-    $form['at_core']['message'] = array(
+    $form['at_core']['message'] = [
       '#type' => 'container',
       '#markup' => t('AT Core has no configuration and cannot be used as a front end theme - it is a base them only. Use the <b>AT Theme Generator</b> to generate or clone a theme to get started.'),
-    );
+    ];
 
     // Hide form items.
-    $form['theme_settings']['#attributes']['class'] = array('visually-hidden');
-    $form['logo']['#attributes']['class'] = array('visually-hidden');
-    $form['favicon']['#attributes']['class'] = array('visually-hidden');
-    $form['actions']['#attributes']['class'] = array('visually-hidden');
+    $form['theme_settings']['#attributes']['class'] = ['visually-hidden'];
+    $form['logo']['#attributes']['class'] = ['visually-hidden'];
+    $form['favicon']['#attributes']['class'] = ['visually-hidden'];
+    $form['actions']['#attributes']['class'] = ['visually-hidden'];
   }
 
   // AT Subtheme
   if (isset($getThemeInfo['subtheme type'])) {
 
+    // BC layer for older themes.
     if ($getThemeInfo['subtheme type'] !== 'adaptive_generator') {
 
       // Pass in the generated files path to values and settings.
-      $form['at']['settings_generated_files_path'] = array(
+      $form['at']['settings_generated_files_path'] = [
         '#type' => 'hidden',
         '#value' => $generated_files_path,
-      );
+      ];
 
       // Check for breakpoint module, a lot of errors without it, this is brutal.
       if ($breakpoints_module == TRUE) {
-        // Extension settings.
-        require_once($at_core_path . '/forms/ext/extension_settings.php');
 
-        // Layouts.
-        require_once($at_core_path . '/forms/layout/layouts.php');
+        if ($getThemeInfo['subtheme type'] === 'adaptive_subtheme') {
+          require_once($at_core_path . '/forms/ext/extension_settings.php');
+          require_once($at_core_path . '/forms/layout/layouts.php');
+        }
+        elseif ($getThemeInfo['subtheme type'] === 'adaptive_skin') {
+          require_once($at_core_path . '/forms/ext/extension_settings_skin.php');
+        }
       }
 
       // Basic settings - move into details wrapper and collapse.
-      $form['basic_settings'] = array(
+      $form['basic_settings'] = [
         '#type' => 'details',
         '#title' => t('Basic Settings'),
         '#open' => FALSE,
-      );
+      ];
 
       $form['theme_settings']['#open'] = FALSE;
       $form['theme_settings']['#group'] = 'basic_settings';
@@ -201,24 +204,24 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
  */
 function at_core_color_form($form) {
   $form['color']['#open'] = FALSE;
-  $form['color']['actions'] = array(
+  $form['color']['actions'] = [
     '#type' => 'actions',
-    '#attributes' => array('class' => array('submit--color-scheme')),
-  );
-  $form['color']['actions']['submit'] = array(
+    '#attributes' => ['class' => ['submit--color-scheme']],
+  ];
+  $form['color']['actions']['submit'] = [
     '#type' => 'submit',
     '#value' => t('Save color scheme'),
     '#button_type' => 'primary',
-    '#submit'=> array('at_color_scheme_form_submit'),
+    '#submit'=> ['at_color_scheme_form_submit'],
     '#weight' => 100,
-  );
-  $form['color']['actions']['log'] = array(
+  ];
+  $form['color']['actions']['log'] = [
     '#type' => 'submit',
     '#value' => t('Log color scheme'),
-    '#submit'=> array('at_core_log_color_scheme'),
+    '#submit'=> ['at_core_log_color_scheme'],
     '#weight' => 101,
     '#access' => FALSE,
-  );
+  ];
 
   // Magic user Obi Wan gets special Jedi powers.
   $user = \Drupal::currentUser();

@@ -29,7 +29,7 @@ $form['extensions'] = [
 // extension in other logical operations.
 $form['extensions']['extensions-enable-container'] = [
   '#type' => 'container',
-  '#attributes' => ['class' => ['subsystem-enabled-container', 'layouts-column-onequarter']],
+  '#attributes' => ['class' => ['subsystem-enabled-container', 'layouts-column-onequarter', 'visually-hidden']], // TODO make it visible when form accounts for base theme config
 ];
 
 $form['extensions']['extensions-enable-container']['settings_extensions_form_open'] = [
@@ -44,7 +44,8 @@ $form['extensions']['extensions-enable-container']['settings_extensions_form_ope
 $form['extensions']['extensions-enable-container']['settings_enable_extensions'] = [
   '#type' => 'checkbox',
   '#title' => t('Enable'),
-  '#default_value' => theme_get_setting('settings.enable_extensions', $theme),
+  '#default_value' => 1, // TODO never can be disabled unless base theme is also disabled
+  //'#default_value' => theme_get_setting('settings.enable_extensions', $theme),
 ];
 
 $form['extensions']['extension_settings'] = [
@@ -71,39 +72,9 @@ $form['enable_extensions']['settings_enable_responsive_menus'] = [
   '#type' => 'checkbox',
   '#title' => t('Responsive menus'),
   '#description' => t('Select responsive menu styles and breakpoints.'),
-  '#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
-];
-
-// Image alignment and captions
-$form['enable_extensions']['settings_enable_images'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Image alignment and captions'),
-  '#default_value' => theme_get_setting('settings.enable_images', $theme),
-  '#description' => t('Set image alignment, captions and teaser view per content type.'),
-];
-
-// Touch icons
-$form['enable_extensions']['settings_enable_touch_icons'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Touch icons'),
-  '#description' => t('Add touch icon meta tags. A default set of icons are located in <code>@touchiconpath</code>.', ['@touchiconpath' => $subtheme_path . '/images/touch-icons/']),
-  '#default_value' => theme_get_setting('settings.enable_touch_icons', $theme),
-];
-
-// Fonts
-$form['enable_extensions']['settings_enable_fonts'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Fonts'),
-  '#default_value' => theme_get_setting('settings.enable_fonts', $theme),
-  '#description' => t('Apply fonts to site elements. Supports <a href=":gflink" target="_blank">Google</a> and <a href=":tklink" target="_blank">Typekit</a> fonts, as well as standard websafe fonts.', [':tklink' => 'https://typekit.com/', ':gflink' => 'https://fonts.google.com/']),
-];
-
-// Title styles
-$form['enable_extensions']['settings_enable_titles'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Titles'),
-  '#default_value' => theme_get_setting('settings.enable_titles', $theme),
-  '#description' => t('Set case, weight, alignment and letter-spacing for titles (headings).'),
+  '#disabled' => TRUE, // TODO allow toggles off when base theme settings are accounted for
+  '#default_value' => 1, // TODO never can be disabled unless base theme is also disabled
+  //'#default_value' => theme_get_setting('settings.enable_responsive_menus', $theme),
 ];
 
 // Shortcodes
@@ -114,14 +85,6 @@ $form['enable_extensions']['settings_enable_shortcodes'] = [
   '#default_value' => theme_get_setting('settings.enable_shortcodes', $theme),
 ];
 
-// Slideshows
-$form['enable_extensions']['settings_enable_slideshows'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Slideshows'),
-  '#description' => t('Enable slideshows and configure settings.'),
-  '#default_value' => theme_get_setting('settings.enable_slideshows', $theme),
-];
-
 // Mobile blocks
 $form['enable_extensions']['settings_enable_mobile_blocks'] = [
   '#type' => 'checkbox',
@@ -130,83 +93,12 @@ $form['enable_extensions']['settings_enable_mobile_blocks'] = [
   '#default_value' => theme_get_setting('settings.enable_mobile_blocks', $theme),
 ];
 
-// Custom CSS
-$form['enable_extensions']['settings_enable_custom_css'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Custom CSS'),
-  '#description' => t('Enter custom CSS rules for minor adjustment to your theme.'),
-  '#default_value' => theme_get_setting('settings.enable_custom_css', $theme),
-];
-
-// CKEditor
-// Check if theme is Mimic compatible.
-if (theme_get_setting('settings.mimic_compatible', $theme) === 1) {
-  $form['enable_extensions']['settings_enable_ckeditor'] = [
-    '#type' => 'checkbox',
-    '#title' => t('CKEditor Skin'),
-    '#description' => t('Select CKEditor skin.'),
-    '#default_value' => theme_get_setting('settings.enable_ckeditor', $theme),
-  ];
-}
-
-// Devel
-$form['enable_extensions']['settings_enable_devel'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Developer tools'),
-  '#description' => t('Settings to help with theme development.'),
-  '#default_value' => theme_get_setting('settings.enable_devel', $theme),
-];
-
-// Legacy browsers
-$form['enable_extensions']['settings_enable_legacy_browsers'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Legacy browsers'),
-  '#description' => t('Settings to support crappy old browsers like IE8. Use with caution, do not enable this unless you really, really need it.'),
-  '#default_value' => theme_get_setting('settings.enable_legacy_browsers', $theme),
-];
-
-// Markup overrides
-$form['enable_extensions']['settings_enable_markup_overrides'] = [
-  '#type' => 'checkbox',
-  '#title' => t('Markup overrides'),
-  '#description' => [
-    '#theme' => 'item_list',
-    '#list_type' => 'ul',
-    '#attributes' => ['class' => ['markup-overrides-desc']],
-    '#items' => [
-      t('Responsive tables'),
-      t('Breadcrumbs'),
-      t('Search block'),
-      t('Login block'),
-      t('Comment titles'),
-      t('Feed icons'),
-      t('Skip link'),
-      t('Attribution'),
-    ],
-  ],
-  '#default_value' => theme_get_setting('settings.enable_markup_overrides', $theme),
-];
-
 // Extensions master toggle.
 if (theme_get_setting('settings.enable_extensions', $theme) == 1) {
-
-  // Include fonts.inc by default.
-  include_once($at_core_path . '/forms/ext/fonts.inc');
-
   $extensions_array = [
     'responsive_menus',
-    'fonts',
-    'titles',
-    'images',
-    'touch_icons',
     'shortcodes',
     'mobile_blocks',
-    'slideshows',
-    'custom_css',
-    'ckeditor',
-    'markup_overrides',
-    'devel',
-    'legacy_browsers',
   ];
 
   // Get form values.

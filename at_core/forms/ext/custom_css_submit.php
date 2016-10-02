@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @file
  * Save custom CSS to file
  */
 
