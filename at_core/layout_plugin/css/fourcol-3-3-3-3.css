@@ -15,22 +15,19 @@
 }
 
 .atl__lc {
-  -webkit-flex: 0 0 100%;
-      -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   padding: 0 0.625em;
+  width: 100%;
 }
 
 .bp--at-core-simple-tablet .atl--fourcol-3-3-3-3 > .atl__cw > .atl__lc {
-  -webkit-flex-basis: 50%;
-      -ms-flex-preferred-size: 50%;
-          flex-basis: 50%;
+  width: 50%;
 }
 
 .bp--at-core-simple-wide .atl--fourcol-3-3-3-3 > .atl__cw > .atl__lc {
-  -webkit-flex-basis: 25%;
-      -ms-flex-preferred-size: 25%;
-          flex-basis: 25%;
+  width: 25%;
 }
 
 /*# sourceMappingURL=fourcol-3-3-3-3.css.map */

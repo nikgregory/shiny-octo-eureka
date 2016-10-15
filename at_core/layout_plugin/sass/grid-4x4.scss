@@ -13,12 +13,14 @@
   .atl--grid-4x4 {
     > .atl__cw {
       > .atl__lc {
-        flex: 0 0 span(6 of 12);
+        flex: 0 0 auto;
+        width: span(6 of 12);
       }
 
       // Full width hanging widows.
       > .atl__lc:nth-of-type(odd):last-child {
-        flex: 1 1 100%;
+        flex: 1 1 auto ;
+        width: 100%;
       }
     }
   }
@@ -28,7 +30,8 @@
   .atl--grid-4x4 {
     > .atl__cw {
       > .atl__lc {
-        flex: 0 0 span(3 of 12);
+        flex: 0 0 auto;
+        width: span(3 of 12);
       }
     }
   }

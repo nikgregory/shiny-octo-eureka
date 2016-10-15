@@ -12,12 +12,12 @@
   .atl--threecol-4-4-4 {
     // Two active regions.
     &.l-arc--2 > .atl__cw > .atl__lc {
-      flex-basis: span(6 of 12);
+      width: span(6 of 12);
     }
 
     // Three active regions.
     &.l-arc--3 > .atl__cw > .atl__lc {
-      flex-basis: span(4 of 12);
+      width: span(4 of 12);
     }
   }
 }

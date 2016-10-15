@@ -14,12 +14,12 @@
   .atl--grid-2x2 {
     > .atl__cw {
       > .atl__lc {
-        flex-basis: span(6 of 12);
+        width: span(6 of 12);
       }
 
       // Full width hanging widow.
       > .lc-3:last-child {
-        flex: 1 1 100%;
+        flex: 1 1 auto;
       }
     }
   }

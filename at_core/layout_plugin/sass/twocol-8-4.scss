@@ -8,10 +8,10 @@
   .atl--twocol-8-4 {
     &.l-arc--2 {
       > .atl__cw > .atl__lc {
-        flex-basis: span(8 of 12);
+        width: span(8 of 12);
 
         &:last-child {
-          flex-basis: span(4 of 12);
+          width: span(4 of 12);
         }
       }
     }

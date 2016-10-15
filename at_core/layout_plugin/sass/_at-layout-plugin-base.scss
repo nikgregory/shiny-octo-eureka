@@ -19,6 +19,7 @@ $flow-from: from($flow-direction);
 
 // Set the row direction.
 $row-direction: if($flow-from == left, row, row-reverse);
+$row-direction-reverse: if($flow-from == left, row-reverse, row);
 
 // Set display flex on row containers.
 .atl__lr {
@@ -30,7 +31,7 @@ $row-direction: if($flow-from == left, row, row-reverse);
 }
 
 .atl__lc {
-  flex: 0 0 100%;
+  flex: 0 0 auto;
   padding: 0 0.625em;
+  width: 100%;
 }
-

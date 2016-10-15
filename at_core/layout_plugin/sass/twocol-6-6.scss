@@ -8,7 +8,7 @@
   .atl--twocol-6-6 {
     &.l-arc--2 {
       > .atl__cw > .atl__lc {
-        flex-basis: span(6 of 12);
+        width: span(6 of 12);
       }
     }
   }
