@@ -578,42 +578,44 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
  *   the libraries.
  */
 function at_core_library_info_alter(&$libraries, $extension) {
-  $theme = &drupal_static(__FUNCTION__);
-  if (!isset($theme)) {
-    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
-    $theme = $data->getConfig();
-  }
+  if ($extension === 'layout_plugin') {
+    $theme = &drupal_static(__FUNCTION__);
+    if (!isset($theme)) {
+      $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+      $theme = $data->getConfig();
+    }
 
-  // Replace layout_plugin CSS auto-magically. This avoids the whole issue
-  // of absolute paths in libraries-override in the info.yml file.
-  if (file_exists($theme['path'] . '/styles/layout_plugin') && $extension === 'layout_plugin') {
-    $at_layout_plugin_libraries = [
-      'twocol-2-10',
-      'twocol-3-9',
-      'twocol-4-8',
-      'twocol-5-7',
-      'twocol-6-6',
-      'twocol-7-5',
-      'twocol-8-4',
-      'twocol-9-3',
-      'twocol-10-2',
-      'threecol-2-8-2',
-      'threecol-2-2-8',
-      'threecol-8-2-2',
-      'threecol-3-6-3',
-      'threecol-3-3-6',
-      'threecol-6-3-3',
-      'threecol-4-4-4',
-      'fourcol-3-3-3-3',
-      'grid-2x2',
-      'grid-3x3',
-      'grid-4x4',
-    ];
-    foreach ($libraries as $lib_key => $library) {
-      if (in_array($lib_key, $at_layout_plugin_libraries)) {
-        $new_css = $theme['provider'] . '/styles/layout_plugin/css/' . $lib_key .  '.css';
-        if (file_exists($new_css)) {
-          $libraries[$lib_key]['css']['theme'] = ['/' . $new_css => []];
+    // Replace layout_plugin CSS auto-magically. This avoids the whole issue
+    // of absolute paths in libraries-override in the info.yml file.
+    if (is_dir($theme['path'] . '/styles/layout_plugin')) {
+      $at_layout_plugin_libraries = [
+        'twocol-2-10',
+        'twocol-3-9',
+        'twocol-4-8',
+        'twocol-5-7',
+        'twocol-6-6',
+        'twocol-7-5',
+        'twocol-8-4',
+        'twocol-9-3',
+        'twocol-10-2',
+        'threecol-2-8-2',
+        'threecol-2-2-8',
+        'threecol-8-2-2',
+        'threecol-3-6-3',
+        'threecol-3-3-6',
+        'threecol-6-3-3',
+        'threecol-4-4-4',
+        'fourcol-3-3-3-3',
+        'grid-2x2',
+        'grid-3x3',
+        'grid-4x4',
+      ];
+      foreach ($libraries as $lib_key => $library) {
+        if (in_array($lib_key, $at_layout_plugin_libraries)) {
+          $new_css = $theme['path'] . '/styles/layout_plugin/css/' . $lib_key .  '.css';
+          if (file_exists($new_css)) {
+            $libraries[$lib_key]['css']['theme'] = ['/' . $new_css => []];
+          }
         }
       }
     }
