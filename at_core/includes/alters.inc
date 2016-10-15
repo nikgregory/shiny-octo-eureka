@@ -334,8 +334,10 @@ function at_core_page_attachments_alter(array &$page) {
   $responsive_menu_is_enabled = FALSE;
   $responsive_menu_library_provider = '';
   if ($theme['extensions']['is_enabled'] === TRUE) {
+    // TODO deprecated, skins now always use the base themes config.
+    // Leave this in place because we might switch back and it's not really
+    // hurting being here.
     if ($theme['type'] === 'adaptive_subtheme') {
-
       if (isset($config['enable_responsive_menus']) && $config['enable_responsive_menus'] === 1) {
         $responsive_menu_is_enabled = TRUE;
         $responsive_menu_config = $config;
@@ -457,6 +459,8 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
       $theme = $data->getConfig();
     }
+
+    // Config.
     $config = $theme['config'];
 
     if ($theme['extensions']['is_enabled'] === TRUE) {
@@ -472,7 +476,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
             $mimic = TRUE;
             global $base_url;
             // AT Cores "Mimic" ckeditor skin.
-            $editor_skin = $base_url . base_path() . drupal_get_path('theme', 'at_core') . '/ckeditor/skins/mimic/';
+            $editor_skin = $base_url . '/' . drupal_get_path('theme', 'at_core') . '/ckeditor/skins/mimic/';
             if (isset($settings['editor']['formats'])) {
               foreach (array_keys($settings['editor']['formats']) as $text_format_id) {
                 if ($settings['editor']['formats'][$text_format_id]['editor'] === 'ckeditor') {

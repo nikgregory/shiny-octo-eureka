@@ -16,9 +16,9 @@
   set classes = [
     'block',
     'block-branding',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    label ? 'has-title'
+    'block-config-provider--' ~ configuration.provider|clean_class,
+    'block-plugin-id--' ~ plugin_id_clean|clean_class,
+    label ? 'has-title',
   ]
 -%}
 <div{{ attributes.addClass(classes) }}>

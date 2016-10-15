@@ -29,8 +29,8 @@
   set classes = [
     'block',
     'block-config-provider--' ~ configuration.provider|clean_class,
-    'block-plugin-id--' ~ plugin_id|clean_class,
-    label ? 'has-title'
+    'block-plugin-id--' ~ plugin_id_clean|clean_class,
+    label ? 'has-title',
   ]
 -%}
 {%- set heading_id = attributes.id ~ '-title'|clean_id -%}

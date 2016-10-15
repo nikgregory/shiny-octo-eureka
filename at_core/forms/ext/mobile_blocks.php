@@ -51,37 +51,55 @@ foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
   // Blocks
   if (!empty($theme_blocks)) {
     foreach ($theme_blocks as $block_key => $block_values) {
-
-      $block_settings = $block_values->get('settings');
       $block_id = $block_values->id();
+      $plugin_id = $block_values->getPluginId();
+      $block_plugin = str_replace(':', '_', $plugin_id);
+      $block_label = t($block_values->label());
 
-      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id] = [
+      $old_default_value_show = theme_get_setting('settings.mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
+      $old_default_value_hide = theme_get_setting('settings.mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
+
+      if (!empty($old_default_value_show)) {
+        $default_value_show = $old_default_value_show;
+      }
+      else {
+        $default_value_show = theme_get_setting('settings.mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_plugin, $theme) ?: '';
+      }
+
+      if (!empty($old_default_value_hide)) {
+        $default_value_hide = $old_default_value_hide;
+      }
+      else {
+        $default_value_hide = theme_get_setting('settings.mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_plugin, $theme) ?: '';
+      }
+
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_plugin] = [
         '#type' => 'fieldset',
-        '#title' => $block_settings['label'],
-        '#markup' => '<h4 class="mobile-blocks-title layouts-column-threequarters align-left">' . $block_settings['label'] . ' <span>(' . $block_id . ')</span></h4>',
+        '#title' => $block_label,
+        '#markup' => '<h4 class="mobile-blocks-title layouts-column-threequarters align-left">' . $block_label . ' <span>(' . $plugin_id . ')</span></h4>',
         '#attributes' => ['class' => ['clearfix']],
       ];
 
-      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id]['container'] = [
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_plugin]['container'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['align-right']],
       ];
 
-      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id]['container']['settings_mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id] = [
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_plugin]['container']['settings_mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_plugin] = [
         '#type' => 'checkbox',
         '#title' =>  t('Show'),
-        '#default_value' => theme_get_setting('settings.mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id, $theme),
+        '#default_value' => $default_value_show,
         '#states' => [
-          'disabled' => ['input[name="settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id . '"]' => ['checked' => TRUE]],
+          'disabled' => ['input[name="settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_plugin . '"]' => ['checked' => TRUE]],
         ],
       ];
 
-      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_id]['container']['settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id] = [
+      $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_plugin]['container']['settings_mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_plugin] = [
         '#type' => 'checkbox',
         '#title' =>  t('Hide'),
-        '#default_value' => theme_get_setting('settings.mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id, $theme),
+        '#default_value' => $default_value_hide,
         '#states' => [
-          'disabled' => ['input[name="settings_mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id . '"]' => ['checked' => TRUE]],
+          'disabled' => ['input[name="settings_mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_plugin . '"]' => ['checked' => TRUE]],
         ],
       ];
     }

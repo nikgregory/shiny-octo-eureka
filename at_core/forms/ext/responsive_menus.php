@@ -15,11 +15,15 @@ foreach ($responsive_menu_breakpoints as $rmb_key => $rmb_value) {
 
 // Menu blocks
 if (!empty($theme_blocks)) {
+  $default_value = theme_get_setting('settings.responsive_menu_block', $theme);
   foreach ($theme_blocks as $block_key => $block_values) {
-    $block_plugin = $block_values->get('plugin');
-    $block_settings = $block_values->get('settings');
-    if (in_array('system_menu_block', explode(':', $block_plugin))) {
-      $menu_blocks[$block_values->id()] = $block_settings['label'];
+    $plugin_id = $block_values->getPluginId();
+    $block_plugin_id = str_replace(':', '_', $plugin_id);
+    if (in_array('system_menu_block', explode(':', $plugin_id))) {
+      $menu_blocks[$block_plugin_id] = $block_values->label();
+      if ($default_value === $block_values->id()) {
+        $default_value = $block_plugin_id;
+      }
     }
   }
 }
@@ -63,7 +67,9 @@ $form['responsive_menus']['default_settings']['settings_responsive_menu_block'] 
   '#type' => 'select',
   '#title' => t('Menu'),
   '#options' => $menu_blocks,
-  '#default_value' => theme_get_setting('settings.responsive_menu_block', $theme),
+  //'#default_value' => theme_get_setting('settings.responsive_menu_block', $theme),
+  '#default_value' => $default_value,
+
 ];
 
 // Breakpoints group

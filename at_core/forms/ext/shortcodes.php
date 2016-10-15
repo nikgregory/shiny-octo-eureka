@@ -84,13 +84,28 @@ foreach ($theme_regions as $region_key => $region_value) {
 
 // Blocks
 if (!empty($theme_blocks)) {
-  $form['shortcodes']['block_classes'] = ['#type' => 'details', '#title' => t('Blocks'),];
+  $form['shortcodes']['block_classes'] = [
+    '#type' => 'details',
+    '#title' => t('Blocks'),
+  ];
   foreach ($theme_blocks as $block_key => $block_value) {
-    $block_label = $block_value->label() . ' <span>(' . $block_key . ')</span>';
-    $form['shortcodes']['block_classes']['settings_block_classes_' . $block_key] = [
+    $plugin_id = $block_value->getPluginId();
+    $block_plugin = str_replace(':', '_', $plugin_id);
+    $block_label = $block_value->label();
+    // BC - use block plugin ID instead of the key, replace the new setting with
+    // the old keyed default.
+    $old_default_value = Html::escape(theme_get_setting('settings.block_classes_' . $block_key, $theme));
+    if (!empty($old_default_value)) {
+      $default_value = $old_default_value;
+    }
+    else {
+      $default_value = theme_get_setting('settings.block_classes_' . $block_plugin, $theme) ?: '';
+    }
+    $form['shortcodes']['block_classes']['settings_block_classes_' . $block_plugin] = [
       '#type' => 'textfield',
       '#title' => t($block_label),
-      '#default_value' => Html::escape(theme_get_setting('settings.block_classes_' . $block_key, $theme)),
+      '#default_value' => $default_value,
+      '#description' => t('<small><b>Block id:</b> ' . $block_key . '</small> <br><small><b>Plugin id:</b> ' .  $plugin_id . '</small>'),
     ];
   }
 }
@@ -111,10 +126,27 @@ foreach ($node_types as $nt) {
   ];
 }
 
+// Comment types
+$comment_types = \Drupal\comment\Entity\CommentType::loadMultiple();
+$form['shortcodes']['commenttype_classes'] = [
+  '#type' => 'details',
+  '#title' => t('Comment types'),
+];
+foreach ($comment_types as $ct) {
+  $comment_type = $ct->id();
+  $comment_type_name = $ct->label();
+
+  $form['shortcodes']['commenttype_classes']['settings_commenttype_classes_' . $comment_type] = [
+    '#type' => 'textfield',
+    '#title' => t($comment_type_name),
+    '#default_value' => Html::escape(theme_get_setting('settings.commenttype_classes_' . $comment_type, $theme)),
+  ];
+}
+
 // Actual classes you can apply that are included in the theme.
 $form['shortcodes']['title'] = [
   '#type' => 'container',
-  '#markup' => t('<h3>Available shortcode classes</h3>'),
+  '#markup' => '<h3>' . t('Available shortcode classes') . '</h3>',
 ];
 if (!empty($shortcodes)) {
   $form['shortcodes']['available_classes'] = [

@@ -2,11 +2,11 @@
 
 [class*="admin-theme"] {
 
-  // Ensure some long urls or hypenated strings don't
+  // Ensure some long urls or hyphenated strings don't
   // break the layout.
   &#system-theme-settings {
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: break-word; // Non standard for webkit
   }
 
   &#system-theme-settings .vertical-tabs,
@@ -185,6 +185,15 @@
 
 
     }
+  }
+
+
+  // message warning sub-sub themes inherit settings.
+  .message-skin {
+    padding: 1em;
+    background: rgba(242, 242, 240, 0.7);
+    border-radius: 4px;
+    border: 1px solid #ccc;
   }
 
   // Toolbar tray, while being awesome to use, messes up responsive design so much

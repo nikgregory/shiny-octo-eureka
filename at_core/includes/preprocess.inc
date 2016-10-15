@@ -418,6 +418,22 @@ function at_core_preprocess_comment(&$variables) {
       }
     }
   }
+
+  // Short codes.
+  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+      $content_type = $variables['comment']->bundle() ?: '';
+      if (!empty($content_type)) {
+        if (!empty($shortcodes_config['commenttype_classes_' . $content_type])) {
+          $shortcodes = Tags::explode($shortcodes_config['commenttype_classes_' . $content_type]);
+          foreach ($shortcodes as $class) {
+            $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
+          }
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -425,6 +441,14 @@ function at_core_preprocess_comment(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_block(&$variables) {
+
+  // Plugin ID variables for block class and shortcodes.
+  if (isset($variables['base_plugin_id']) && !empty($variables['base_plugin_id'])) {
+    $variables['plugin_id_clean'] = $variables['base_plugin_id'];
+    if (isset($variables['derivative_plugin_id']) && !empty($variables['derivative_plugin_id'])) {
+      $variables['plugin_id_clean'] = $variables['base_plugin_id'] . '_' . $variables['derivative_plugin_id'];
+    }
+  }
 
   // TODO needs the right config, if skin or subhteme?
   if (\Drupal::currentUser()->isAnonymous()) {
@@ -440,11 +464,9 @@ function at_core_preprocess_block(&$variables) {
     // Short codes.
     if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
       $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
-
-      if (isset($variables['content']['#block_content'])) {
-        $bid = $variables['content']['#block_content']->id() ?: '';
-        if (isset($shortcodes_config['block_classes_' . $bid]) && !empty($shortcodes_config['block_classes_' . $bid])) {
-          $shortcodes = Tags::explode($shortcodes_config['block_classes_' . $bid]);
+      if (isset($variables['content'])) {
+        if (isset($shortcodes_config['block_classes_' . $variables['plugin_id_clean']]) && !empty($shortcodes_config['block_classes_' . $variables['plugin_id_clean']])) {
+          $shortcodes = Tags::explode($shortcodes_config['block_classes_' . $variables['plugin_id_clean']]);
           foreach ($shortcodes as $class) {
             $variables['attributes']['class'][] = Html::cleanCssIdentifier($class);
           }

@@ -145,6 +145,12 @@
     padding-bottom: 99999px;
   }
 }
+[class*="admin-theme"] .message-skin {
+  padding: 1em;
+  background: rgba(242, 242, 240, 0.7);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
 @media all and (max-width: 75em) {
   [class*="admin-theme"] .toolbar-tray-open #system-theme-settings fieldset[class*="layouts-column-"] {
     width: 100%;

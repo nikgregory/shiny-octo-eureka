@@ -65,8 +65,31 @@ function _at_core_layout_plugin_attributes($variables) {
     if ($entity_type == 'comment') {
       $classes[] = 'js-comment';
       $classes[] = $variables['content']['#comment']->getStatus() != 1 ? 'unpublished' : '';
-      if ($variables['content']['#comment']->getOwnerId() === $variables['content']['#comment']->getCommentedEntity()->getOwnerId()) {
-        $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() . '-author';
+      if ($variables['content']['#comment']->getCommentedEntityTypeId() !== 'block_content') {
+        $comment_owner = $variables['content']['#comment']->getOwnerId();
+        $commented_entity_owner = $variables['content']['#comment']->getCommentedEntity()->getOwnerId();
+        if ($comment_owner === $commented_entity_owner) {
+          $classes[] = 'by-' . $variables['content']['#comment']->getCommentedEntity()->getEntityTypeId() . '-author';
+        }
+      }
+    }
+
+    // Extension settings.
+    if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
+      if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
+        $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
+        if (isset($variables['content'])) {
+
+          //kint($shortcodes_config);
+
+          $entity_type_bundle_setting = $entity_type . 'type_classes_' . $bundle;
+          if (isset($shortcodes_config[$entity_type_bundle_setting]) && !empty($shortcodes_config[$entity_type_bundle_setting])) {
+            $shortcodes = Tags::explode($shortcodes_config[$entity_type_bundle_setting]);
+            foreach ($shortcodes as $class) {
+              $classes[] = Html::cleanCssIdentifier($class);
+            }
+          }
+        }
       }
     }
   }
@@ -75,22 +98,6 @@ function _at_core_layout_plugin_attributes($variables) {
   if (isset($variables['content']['#page_variant'])) {
     $classes[] = 'panels-page';
     $classes[] = 'panels-page--' . Html::cleanCssIdentifier($variables['content']['#page_variant']->get('page'));
-  }
-
-  // Extension settings.
-  if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
-    if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
-      $shortcodes_config = $variables['theme'][$variables['theme']['shortcodes']['config']];
-      if (isset($variables['content']['#block_content'])) {
-        $bid = $variables['content']['#block_content']->id() ?: '';
-        if (isset($shortcodes_config['block_classes_' . $bid]) && !empty($shortcodes_config['block_classes_' . $bid])) {
-          $shortcodes = Tags::explode($shortcodes_config['block_classes_' . $bid]);
-          foreach ($shortcodes as $class) {
-            $classes[] = Html::cleanCssIdentifier($class);
-          }
-        }
-      }
-    }
   }
 
   // Global classes

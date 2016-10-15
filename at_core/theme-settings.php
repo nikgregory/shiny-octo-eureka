@@ -143,7 +143,6 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
 
       // Check for breakpoint module, a lot of errors without it, this is brutal.
       if ($breakpoints_module == TRUE) {
-
         if ($getThemeInfo['subtheme type'] === 'adaptive_subtheme') {
           require_once($at_core_path . '/forms/ext/extension_settings.php');
           require_once($at_core_path . '/forms/layout/layouts.php');
@@ -157,8 +156,12 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
       $form['basic_settings'] = [
         '#type' => 'details',
         '#title' => t('Basic Settings'),
-        '#open' => FALSE,
       ];
+
+      // If it's skin type, set details to open.
+      if ($getThemeInfo['subtheme type'] === 'adaptive_skin') {
+        $form['basic_settings']['#open'] = TRUE;
+      }
 
       $form['theme_settings']['#open'] = FALSE;
       $form['theme_settings']['#group'] = 'basic_settings';

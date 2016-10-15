@@ -30,8 +30,8 @@
     'block',
     'block-breadcrumbs',
     'block-config-provider--' ~ configuration.provider|clean_class,
-    'block-plugin-id--' ~ plugin_id|clean_class,
-    configuration.label_display ? 'has-title'
+    'block-plugin-id--' ~ plugin_id_clean|clean_class,
+    configuration.label_display ? 'has-title',
   ]
 -%}
 {%- set heading_id = attributes.id ~ '-menu'|clean_id -%}
