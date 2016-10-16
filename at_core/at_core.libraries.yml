@@ -204,11 +204,11 @@ at.waypoints_initialize:
 
 # matchHeight
 at.matchheight:
-  remote: https://raw.githubusercontent.com/liabru/jquery-match-height
+  remote: https://github.com/liabru/jquery-match-height
   version: "0.7.0"
   license:
     name: MIT
-    url: https://raw.githubusercontent.com/liabru/jquery-match-height/master/LICENSE
+    url: https://github.com/liabru/jquery-match-height/blob/master/LICENSE
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js: { type: external, minified: true }
@@ -217,11 +217,11 @@ at.matchheight:
 
 # enquire
 at.enquire:
-  remote: https://raw.githubusercontent.com/WickyNilliams/enquire.js
+  remote: https://github.com/WickyNilliams/enquire.js
   version: "2.1.2"
   license:
     name: MIT
-    url: https://raw.githubusercontent.com/WickyNilliams/enquire.js/master/LICENSE
+    url: https://github.com/WickyNilliams/enquire.js/blob/master/LICENSE
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min.js: { type: external, minified: true }
@@ -231,11 +231,11 @@ at.enquire:
 
 # Fastclick
 at.fastclick:
-  remote: https://raw.githubusercontent.com/ftlabs/fastclick
+  remote: https://github.com/ftlabs/fastclick
   version: "1.0.6"
   license:
     name: MIT
-    url: https://raw.githubusercontent.com/ftlabs/fastclick/master/LICENSE
+    url: https://github.com/ftlabs/fastclick/blob/master/LICENSE
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js: { type: external, minified: true }
@@ -252,13 +252,12 @@ at.fastclick_initialize:
     - at_core/at.fastclick
 
 # Fontfaceobserver
-# https://github.com/bramstein/fontfaceobserver
 at.fontfaceobserver:
-  remote: https://raw.githubusercontent.com/bramstein/fontfaceobserver
+  remote: https://github.com/bramstein/fontfaceobserver
   version: "2.0.5"
   license:
     name: BSD
-    url: https://raw.githubusercontent.com/bramstein/fontfaceobserver/master/LICENSE
+    url: https://github.com/bramstein/fontfaceobserver/blob/master/LICENSE
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.0.5/fontfaceobserver.standalone.js: { type: external, minified: true }
@@ -279,13 +278,13 @@ at.headroom:
 # Masonary
 at.masonry:
   remote: https://github.com/desandro/masonry
-  version: "4.1.0"
+  version: "4.1.1"
   license:
     name: MIT
     url: https://github.com/desandro/masonry/blob/master/README.md
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.0/masonry.pkgd.min.js: { type: external, minified: true }
+    https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
 
@@ -317,7 +316,7 @@ at.respond:
   version: "1.4.2"
   license:
     name: MIT
-    url: https://raw.githubusercontent.com/scottjehl/Respond/master/LICENSE-MIT
+    url: https://github.com/scottjehl/Respond/blob/master/LICENSE-MIT
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js: { type: external, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
@@ -341,7 +340,7 @@ at.yui3:
   version: "3.18.0"
   license:
     name: BSD
-    url: https://raw.githubusercontent.com/yui/yui3/master/LICENSE.md
+    url: https://github.com/yui/yui3/blob/master/LICENSE.md
     gpl-compatible: true
   js:
     http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js:  { type: external, browsers: { IE: 'lte IE 8', '!IE': false }, minified: true }
