@@ -18,29 +18,6 @@
         indicator_px.html($(this).width() + 'px');
         indicator_em.html($(this).width() /16 + 'em');
       }).trigger('resize.window-size-indicator');
-
-      // Buggy...
-      /*
-      function registerEnquire(breakpoint_label, breakpoint_query) {
-        enquire.register(breakpoint_query, {
-          match: function() {
-            indicator_bp.html(breakpoint_label);
-          },
-          unmatch: function() {
-            indicator_bp.html('');
-          },
-        });
-      }
-
-      var activeTheme = settings['ajaxPageState']['theme'];
-      var bp = settings[activeTheme]['at_breakpoints'];
-
-      for (var item in bp) {
-        if (bp.hasOwnProperty(item)) {
-          registerEnquire(item, bp[item]['mediaquery']);
-        }
-      }
-      */
     }
   };
 })(jQuery);

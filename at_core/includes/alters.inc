@@ -19,14 +19,12 @@ use Drupal\at_core\Theme\ThemeConfig;
  * @see hook_page_attachments_alter()
  */
 function at_core_page_attachments_alter(array &$page) {
-  // Theme data.
+  // Config.
   $theme = &drupal_static(__FUNCTION__);
   if (!isset($theme)) {
     $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
     $theme = $data->getConfig();
   }
-
-  // Config
   $config = $theme['config'];
 
   // Attach required libraries.
@@ -454,13 +452,12 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
   // Alter CKEditor JS settings.
   if (\Drupal::moduleHandler()->moduleExists('ckeditor') == TRUE) {
 
+    // Config.
     $theme = &drupal_static(__FUNCTION__);
     if (!isset($theme)) {
       $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
       $theme = $data->getConfig();
     }
-
-    // Config.
     $config = $theme['config'];
 
     if ($theme['extensions']['is_enabled'] === TRUE) {
@@ -579,6 +576,7 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
  */
 function at_core_library_info_alter(&$libraries, $extension) {
   if ($extension === 'layout_plugin') {
+    // Theme data.
     $theme = &drupal_static(__FUNCTION__);
     if (!isset($theme)) {
       $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());

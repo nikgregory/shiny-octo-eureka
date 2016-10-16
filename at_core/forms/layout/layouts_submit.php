@@ -89,7 +89,4 @@ function at_core_submit_layouts(&$form, &$form_state) {
   $config = \Drupal::configFactory()->getEditable($theme . '.settings');
   $convertToConfig = new ThemeSettingsConfig();
   $convertToConfig->settingsLayoutConvertToConfig($values, $config);
-
-  //$performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
-  //drupal_set_message(t('Layout settings saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }

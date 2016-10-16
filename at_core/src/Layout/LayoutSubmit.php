@@ -288,7 +288,7 @@ class LayoutSubmit {
       $doc[$suggestion_key][] = '#}' . "\n";
       $docblock[$suggestion_key] = implode("\n", $doc[$suggestion_key]);
 
-      // Attach the dynamic layout library.
+      // Attach the layout library.
       $generated_files_path = $this->form_values['settings_generated_files_path'];
       $layout_file = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion_key) . '.css';
       if (file_exists($generated_files_path .'/'. $layout_file)) {

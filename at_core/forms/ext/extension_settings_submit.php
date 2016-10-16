@@ -4,8 +4,6 @@
  * Process extension settings submits.
  */
 
-use Drupal\Core\PhpStorage\PhpStorageFactory;
-use Drupal\Core\Url;
 use Drupal\at_core\Theme\ThemeSettingsConfig;
 
 /**
@@ -18,7 +16,6 @@ function at_core_submit_extension_settings(&$form, \Drupal\Core\Form\FormStateIn
   $values = $form_state->getValues();
   $theme = $build_info['args'][0];
   $at_core_path = drupal_get_path('theme', 'at_core');
-  $subtheme_path = drupal_get_path('theme', $theme);
 
   // Don't let this timeout easily.
   set_time_limit(60);
@@ -80,6 +77,4 @@ function at_core_submit_extension_settings(&$form, \Drupal\Core\Form\FormStateIn
   $convertToConfig->settingsExtensionsConvertToConfig($values, $config);
 
   drupal_set_message(t('Extensions configuration saved.'), 'status');
-  //$performance_url = Url::fromRoute('system.performance_settings')->setOptions(array('attributes' => array('target' => '_blank')));
-  //drupal_set_message(t('Extensions configuration saved. If settings have not taken effect, please <b>@perm</b>.', array('@perm' => \Drupal::l(t('clear the cache'), $performance_url))), 'status');
 }

@@ -196,7 +196,7 @@ if (!empty(theme_get_setting('settings.skip_link_target'))) {
   $skip_link_setting = Html::escape(theme_get_setting('settings.skip_link_target'));
 }
 else {
-  $skip_link_setting = 'block-' . $theme . '-content'; // try to provide the most likely match.
+  $skip_link_setting = 'main-content'; // try to provide the most likely match.
 }
 $form['markup_overrides']['markup_overrides_settings']['a11y']['settings_skip_link_target'] = [
   '#type' => 'textfield',

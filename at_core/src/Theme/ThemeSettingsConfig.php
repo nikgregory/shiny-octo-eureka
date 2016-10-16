@@ -46,4 +46,5 @@ class ThemeSettingsConfig {
     }
     $config->save();
   }
+
 }

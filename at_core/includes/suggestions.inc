@@ -8,16 +8,6 @@ use Drupal\at_core\Theme\ThemeConfig;
  * @param array $variables
  */
 function at_core_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
-
-  // TODO get the new $theme config object
-
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-
-  // Get the right config for this theme type.
-  $themeInfoConfig = new ThemeConfig($theme);
-  $config = $themeInfoConfig->getConfig();
-
   // Add content type suggestions, e.g. page--node--article.html.twig.
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
@@ -32,6 +22,14 @@ function at_core_theme_suggestions_page_alter(array &$suggestions, array $variab
 
   // Show template suggestions.
   if (\Drupal::currentUser()->hasPermission('administer themes')) {
+    // Config.
+    $theme = &drupal_static(__FUNCTION__);
+    if (!isset($theme)) {
+      $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+      $theme = $data->getConfig();
+    }
+    $config = $theme['config'];
+
     if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
       if (isset($config['enable_devel']) && $config['enable_devel'] === 1) {
         if (isset($config['show_page_suggestions']) && $config['show_page_suggestions'] === 1) {
@@ -96,8 +94,12 @@ function at_core_theme_suggestions_field_alter(array &$suggestions, array $varia
  * @param array $variables
  */
 function at_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-  $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
-  $theme = $data->getConfig();
+  // Config.
+  $theme = &drupal_static(__FUNCTION__);
+  if (!isset($theme)) {
+    $data = new ThemeConfig(\Drupal::theme()->getActiveTheme()->getName());
+    $theme = $data->getConfig();
+  }
 
   // Block suggestions for custom block bundles.
   if (isset($variables['elements']['content']['#block_content'])) {

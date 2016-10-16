@@ -30,10 +30,7 @@
 
           // Initialize and set options.
           $(ss.slideshow_class).flexslider({
-
             start: function(slider){$('.flexslider').resize().removeClass('loading')},
-
-            //start: function(slider) { slider.removeClass('loading');
 
             // Basic settings
             animation      : ss.animation ? ss.animation : 'slide',       // String Controls the animation type, "fade" or "slide".
@@ -66,7 +63,6 @@
             prevText      : ss.prevtext ? ss.prevtext : 'Previous',        // String Set the text for the "previous" directionNav item
             nextText      : ss.nexttext ? ss.nexttext : 'Next',            // String Set the text for the "next" directionNav item
             selector      : ss.selector ? ss.selector : '.slides > li',    // Selector Must match a simple pattern. '{container} > {slide}'.
-
           });
         }
       }

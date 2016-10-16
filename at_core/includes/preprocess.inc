@@ -36,10 +36,8 @@ function at_core_preprocess_html(&$variables) {
     $variables['directory'] = $variables['theme']['path'];
   }
 
- // kint($variables['directory']);
-
   // Set the skip navigation target ID
-  $variables['skip_link_target'] = '#block-' . $variables['theme']['name'] . '-content';
+  $variables['skip_link_target'] = '#main-content';
 
   // Defaults for Appearance setting variables.
   $variables['touch_icons'] = FALSE;
@@ -441,7 +439,6 @@ function at_core_preprocess_comment(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_block(&$variables) {
-
   // Plugin ID variables for block class and shortcodes.
   if (isset($variables['base_plugin_id']) && !empty($variables['base_plugin_id'])) {
     $variables['plugin_id_clean'] = $variables['base_plugin_id'];
@@ -450,10 +447,10 @@ function at_core_preprocess_block(&$variables) {
     }
   }
 
-  // TODO needs the right config, if skin or subhteme?
+  // Login block.
   if (\Drupal::currentUser()->isAnonymous()) {
-    if ($variables['base_plugin_id'] === 'system_branding_block') {
-      //$variables['#attached']['library'][] = "$active_theme_name/login_block";
+    if ($variables['base_plugin_id'] === 'user_login_block') {
+      $variables['#attached']['library'][] = $variables['theme']['provider'] . '/login_block';
     }
   }
 

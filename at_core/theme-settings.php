@@ -198,7 +198,6 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   }
 }
 
-//
 /**
  * Helper function to modify the color scheme form.
  *

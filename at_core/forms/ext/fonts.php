@@ -150,21 +150,6 @@ $form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_lar
   ],
 ];
 
-//$form['fonts']['setup']['line_height']['settings_font_line_height_multiplier_large_size'] = array(
-//  '#type' => 'number',
-//  '#title' => t('Large font size'),
-//  '#field_suffix' => 'px',
-//  '#max-length' => 2,
-//  '#description' => t('What is considered a large font?'),
-//  '#default_value' => Html::escape(theme_get_setting('settings.font_line_height_multiplier_large_size')),
-//  '#attributes' => array(
-//    'min' => 1,
-//    'max' => 99,
-//    'step' => 1,
-//    'class' => array('font-option')
-//  ),
-//);
-
 // Apply Fonts
 $form['fonts']['apply'] = [
   '#type' => 'details',
