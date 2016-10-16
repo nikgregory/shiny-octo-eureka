@@ -36,7 +36,7 @@ class ThemeConfig extends ThemeInfo {
   public function shortcodesEnabled($theme) {
     $shortcodes['is_enabled'] = FALSE;
     if ($theme['type'] === 'adaptive_subtheme') {
-      if (isset($variables['config']['enable_shortcodes']) && $theme['config']['enable_shortcodes'] === 1) {
+      if (isset($theme['config']['enable_shortcodes']) && $theme['config']['enable_shortcodes'] === 1) {
         $shortcodes['is_enabled'] = TRUE;
         $shortcodes['config'] = 'config';
       }
