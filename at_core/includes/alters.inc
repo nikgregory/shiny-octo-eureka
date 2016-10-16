@@ -505,15 +505,17 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
       if (!empty($config['generated_files_path'])) {
         $generated_files_path = $config['generated_files_path'];
         if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
+          // Google fonts.
+          if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === TRUE) {
+            $styles[] = Xss::filter($config['font_google']);
+          }
+          // Fonts.
           if (isset($config['enable_fonts']) && $config['enable_fonts'] === 1) {
             if (file_exists($generated_files_path . '/fonts.css')) {
               $styles[] = $generated_files_path . '/fonts.css';
             }
           }
-          // Google fonts.
-          if (isset($config['font_use_google_fonts']) && $config['font_use_google_fonts'] === TRUE) {
-            $styles[] = Xss::filter($config['font_google']);
-          }
+          // Title styles.
           if (isset($config['enable_titles']) && $config['enable_titles'] === 1) {
             if (file_exists($generated_files_path . '/title-styles.css')) {
               $styles[] = $generated_files_path . '/title-styles.css';
@@ -527,12 +529,10 @@ function at_core_js_settings_alter(array &$settings, \Drupal\Core\Asset\Attached
           $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($theme['path'] . '/styles/css/components/ckeditor-iframe.css');
           // Remove cores version, it just gets in the way.
           $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'] = array_merge(
-            array_diff(
-              $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'],
-              ['/core/modules/ckeditor/css/ckeditor-iframe.css']
-            )
+            array_diff($settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'], ['/core/modules/ckeditor/css/ckeditor-iframe.css'])
           );
         }
+        // Add styles to settings.
         if (!empty($styles)) {
           foreach ($styles as $stylesheet) {
             $settings['editor']['formats'][$format_key]['editorSettings']['contentsCss'][] = file_create_url($stylesheet);
