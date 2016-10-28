@@ -54,8 +54,8 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $theme_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
   // Active themes active blocks
-  $block_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
-  if ($block_module == TRUE) {
+  $block_module = \Drupal::moduleHandler()->moduleExists('block');
+  if ($block_module === TRUE) {
     $theme_blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(['theme' => $theme]);
   }
   else {
@@ -65,8 +65,7 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   // Check for breakpoints module and set a warning and a flag to disable much
   // of the theme settings if its not available.
   $breakpoints_module = \Drupal::moduleHandler()->moduleExists('breakpoint');
-
-  if ($breakpoints_module == TRUE) {
+  if ($breakpoints_module === TRUE) {
     $breakpoint_groups = \Drupal::service('breakpoint.manager')->getGroups();
     $breakpoints = [];
 
@@ -86,8 +85,17 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint. You cannot set the layout or use this themes custom settings until Breakpoint is installed.', ['@extendpage' => base_path() . 'admin/modules']), 'error');
   }
 
-  // Get node types (bundles).
-  $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
+  // Get node types.
+  $node_module = \Drupal::moduleHandler()->moduleExists('node');
+  if ($node_module === TRUE) {
+    $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
+  }
+
+  // Get comment types.
+  $comment_module = \Drupal::moduleHandler()->moduleExists('comment');
+  if ($comment_module === TRUE) {
+    $comment_types = \Drupal\comment\Entity\CommentType::loadMultiple();
+  }
 
   // View or "Display modes".
   $node_view_modes = \Drupal::service('entity_display.repository')->getViewModes('node');
@@ -111,12 +119,12 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
 
   // Display a rude message if AT Tools is missing...
   $at_tools_module = \Drupal::moduleHandler()->moduleExists('at_tools');
-  if ($at_tools_module == FALSE) {
+  if ($at_tools_module === FALSE) {
     drupal_set_message(t('Please install the <a href="@at_tools_href" target="_blank">AT Tools</a> module for Drupal 8. Your theme may not operate correctly without this module installed.', ['@at_tools_href' => 'https://www.drupal.org/project/at_tools']), 'warning');
   }
 
   // AT Core
-  if ($theme == 'at_core') {
+  if ($theme === 'at_core') {
     $form['at_core']['message'] = [
       '#type' => 'container',
       '#markup' => t('AT Core has no configuration and cannot be used as a front end theme - it is a base them only. Use the <b>AT Theme Generator</b> to generate or clone a theme to get started.'),
