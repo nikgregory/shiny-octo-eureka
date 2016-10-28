@@ -44,7 +44,7 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $generated_files_path = NULL;
 
   // Path to save generated CSS files. We don't want this happening for at_core or the generator.
-  if (isset($getThemeInfo['subtheme type']) && ($getThemeInfo['subtheme type'] === 'adaptive_subtheme' || $getThemeInfo['subtheme type'] === 'adaptive_skin')) {
+  if (isset($getThemeInfo['subtheme type']) && ($getThemeInfo['subtheme type'] === 'adaptive_subtheme')) {
     $directoryOperations = new DirectoryOperations();
     $generated_files_path = $directoryOperations->directoryPrepare($backup_file_path = [$subtheme_path, 'styles/css/generated']);
   }
