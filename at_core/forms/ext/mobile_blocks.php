@@ -55,7 +55,6 @@ foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
       $plugin_id = $block_values->getPluginId();
       $block_plugin = str_replace(':', '_', $plugin_id);
       $block_label = t($block_values->label());
-
       $old_default_value_show = theme_get_setting('settings.mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
       $old_default_value_hide = theme_get_setting('settings.mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
 
@@ -76,7 +75,7 @@ foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
       $form['mobile-blocks']['breakpoints']['bp' . $mbs_label][$block_plugin] = [
         '#type' => 'fieldset',
         '#title' => $block_label,
-        '#markup' => '<h4 class="mobile-blocks-title layouts-column-threequarters align-left">' . $block_label . ' <span>(' . $plugin_id . ')</span></h4>',
+        '#markup' => '<div class="mobile-blocks-title layouts-column-threequarters align-left"><h4 class="h4">' . $block_label . '</h4><small><b>Block id:</b> ' . $block_key . '</small> <br><small><b>Plugin id:</b> ' .  $plugin_id . '</small></div>',
         '#attributes' => ['class' => ['clearfix']],
       ];
 

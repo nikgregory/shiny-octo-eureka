@@ -652,7 +652,7 @@
 }
 [class*="admin-theme"] #edit-mobile-blocks fieldset .mobile-blocks-title {
   font-size: 1em;
-  margin: 1em 0;
+  margin: 0 0 0.5em;
 }
 [class*="admin-theme"] #edit-mobile-blocks fieldset .mobile-blocks-title span {
   font-weight: 400;
