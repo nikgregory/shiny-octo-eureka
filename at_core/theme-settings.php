@@ -85,25 +85,73 @@ function at_core_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint. You cannot set the layout or use this themes custom settings until Breakpoint is installed.', ['@extendpage' => base_path() . 'admin/modules']), 'error');
   }
 
+  // Entity types / view modes.
+  $entity_types = [];
+  $view_modes = [];
+
   // Get node types.
   $node_module = \Drupal::moduleHandler()->moduleExists('node');
   if ($node_module === TRUE) {
     $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
+    $entity_types['node'] = $node_types;
+    $view_modes['node'] = \Drupal::service('entity_display.repository')->getViewModes('node');
+
+    // Unset unwanted view modes
+    unset($view_modes['node']['rss']);
+    unset($view_modes['node']['search_index']);
+    unset($view_modes['node']['search_result']);
   }
 
   // Get comment types.
   $comment_module = \Drupal::moduleHandler()->moduleExists('comment');
   if ($comment_module === TRUE) {
     $comment_types = \Drupal\comment\Entity\CommentType::loadMultiple();
+    $entity_types['comment'] = $comment_types;
+    $view_modes['comment'] = \Drupal::service('entity_display.repository')->getViewModes('comment');
   }
 
-  // View or "Display modes".
-  $node_view_modes = \Drupal::service('entity_display.repository')->getViewModes('node');
+  // Get block types.
+  $block_content_module = \Drupal::moduleHandler()->moduleExists('block_content');
+  if ($block_content_module === TRUE) {
+    $block_content_types = \Drupal\block_content\Entity\BlockContentType::loadMultiple();
+    $entity_types['block_content'] = $block_content_types;
+    $view_modes['block_content'] = \Drupal::service('entity_display.repository')->getViewModes('block_content');
+  }
 
-  // Unset unwanted view modes
-  unset($node_view_modes['rss']);
-  unset($node_view_modes['search_index']);
-  unset($node_view_modes['search_result']);
+  // Get paragraph types.
+  $paragraphs_module = \Drupal::moduleHandler()->moduleExists('paragraphs');
+  if ($paragraphs_module === TRUE) {
+    $paragraph_types = \Drupal\paragraphs\Entity\ParagraphsType::loadMultiple();
+    $entity_types['paragraphs'] = $paragraph_types;
+    $view_modes['paragraphs'] = \Drupal::service('entity_display.repository')->getViewModes('paragraph');
+  }
+
+  // $getAllViewModes = \Drupal::service('entity_display.repository')->getAllViewModes();
+
+//  // Get user types.
+//  $user_module = \Drupal::moduleHandler()->moduleExists('user');
+//  if ($user_module === TRUE) {
+//    $user_types = \Drupal\user\Entity\User::loadMultiple();
+//    $entity_types['user'] = $user_types;
+//    $view_modes['user'] = \Drupal::service('entity_display.repository')->getViewModes('user');
+//  }
+//
+//  // Get taxonomy term types.
+//  $taxonomy_module = \Drupal::moduleHandler()->moduleExists('taxonomy');
+//  if ($taxonomy_module === TRUE) {
+//    $taxonomy_types = \Drupal\taxonomy\Entity\Term::loadMultiple();
+//    $entity_types['taxonomy_term'] = $taxonomy_types;
+//    $view_modes['taxonomy_term'] = \Drupal::service('entity_display.repository')->getViewModes('taxonomy_term');
+//  }
+
+  // Get Image types.
+  $image_module = \Drupal::moduleHandler()->moduleExists('image');
+  if ($image_module === TRUE) {
+    $image_styles = \Drupal\image\Entity\ImageStyle::loadMultiple();
+  }
+
+  // Possible future extensions will use this.
+  //$entity_types = \Drupal::entityTypeManager()->getDefinitions();
 
   // Set a class on the form for the current admin theme, note if this is set to
   // "Default theme" the result is always 0.
