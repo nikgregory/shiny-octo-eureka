@@ -7,12 +7,16 @@
  * - regions: contains regions data to appear in this row.
  * - wrapper_attributes: HTML attributes for the row outer wrapper.
  * - container_attributes: HTML attributes for the row inner wrapper.
+ * - row_prefix: insert content/markup etc before the row.
+ * - row_suffix: insert content/markup etc after the row.
  *
  * @see at_core_preprocess_row()
  */
 #}
+{{ row_prefix }}
 <div{{ wrapper_attributes }}>
   <div{{ container_attributes }}>
     {{ regions }}
   </div>
 </div>
+{{ row_suffix }}

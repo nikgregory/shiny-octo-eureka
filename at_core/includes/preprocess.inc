@@ -139,7 +139,7 @@ function at_core_preprocess_html(&$variables) {
   if ($breakpoints_module == TRUE) {
     $breakpoints_array = [];
     $breakpoint_groups[] = isset($config['breakpoint_group_layout']) ? $config['breakpoint_group_layout']: 'at_core.simple';
-    // Push 'at_core.simple' onto the array, out Layout Plugin layouts always
+    // Push 'at_core.simple' onto the array, the Layout Plugin layouts always
     // require these breakpoints to be set.
     if ($breakpoint_groups !== 'at_core.simple') {
       $breakpoint_groups[] = 'at_core.simple';
@@ -273,6 +273,9 @@ function at_core_preprocess_page(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_row(&$variables) {
+  // Insert content/markup before or after a row.
+  $variables['row_prefix'] = [];
+  $variables['row_suffix'] = [];
   // Set easy to print variables for attributes.
   $variables['wrapper_attributes'] = $variables['regions']['#wrapper_attributes'];
   $variables['container_attributes'] = $variables['regions']['#container_attributes'];

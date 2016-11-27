@@ -71,7 +71,9 @@ class LayoutSubmit {
           foreach ($this->css_config['css'] as $css_key => $css_values) {
             if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css')) {
               $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css');
-              $replace_class = 'pr-' . $row_keys;
+              // TODO review fix for underscores in row names.
+              //$replace_class = 'pr-' . $row_keys;
+              $replace_class = 'pr-' . str_replace('_', '-', $row_keys);
               if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
                 $file = str_replace($row_values, $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
                 $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
