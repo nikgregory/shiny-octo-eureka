@@ -40,7 +40,7 @@ function at_core_preprocess_html(&$variables) {
   $variables['skip_link_target'] = '#main-content';
 
   // Defaults for Appearance setting variables.
-  $variables['touch_icons'] = FALSE;
+  $variables['touch_icons'] = [];
   // BC, deprecated.
   $variables['googlefonts_url'] = '';
   $variables['typekit_id'] = '';
@@ -80,33 +80,90 @@ function at_core_preprocess_html(&$variables) {
 
     // Apple touch icons - low, medium and high (see the Apple docs).
     if (isset($config['enable_touch_icons']) && $config['enable_touch_icons'] === 1) {
-      $variables['touch_icons'] = TRUE;
-      $variables['touch_rel'] = 'apple-touch-icon';
+      $icons = [];
+      $touch_rel = 'apple-touch-icon';
 
       if (isset($config['apple_touch_icon_precomposed']) && $config['apple_touch_icon_precomposed'] === 1) {
-        $variables['touch_rel'] = 'apple-touch-icon-precomposed';
+        $touch_rel = 'apple-touch-icon-precomposed';
       }
 
-      // Apple default icon and Nokia shortcut icon.
+      // For non-Retina iPhone, iPod Touch, and Android 2.1+ devices
       if (isset($config['icon_path_default']) && !empty($config['icon_path_default'])) {
-        $default_icon = file_create_url($variables['theme']['path'] . '/' . Html::escape($config['icon_path_default']));
-        $variables['touch_icon_nokia'] = $default_icon;
-        $variables['touch_icon_default'] = $default_icon;
+        $icon_path_default = $variables['theme']['path'] . '/' . Html::escape($config['icon_path_default']);
+        if (file_exists($icon_path_default) === TRUE) {
+          $icons['touch_icon_iphone_1x'] = [
+            'href' => file_create_url($icon_path_default),
+            'size' => '60x60',
+            'rel' => $touch_rel,
+          ];
+        }
       }
-
-      // iPad (standard display).
+      // For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7 (76x76).
       if (isset($config['apple_touch_icon_path_ipad']) && !empty($config['apple_touch_icon_path_ipad'])) {
-        $variables['touch_icon_ipad'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_ipad']);
+        $icon_path_ipad = $variables['theme']['path'] . '/' . Html::escape($config['apple_touch_icon_path_ipad']);
+        if (file_exists($icon_path_ipad) === TRUE) {
+          $icons['touch_icon_ipad_1x'] = [
+            'href' => file_create_url($icon_path_ipad),
+            'size' => '76x76',
+            'rel' => $touch_rel,
+          ];
+        }
       }
-
-      // iPhone retina.
+      // For iPhone with @2× display running iOS ≥ 7 (120x120).
       if (isset($config['apple_touch_icon_path_iphone_retina']) && !empty($config['apple_touch_icon_path_iphone_retina'])) {
-        $variables['touch_icon_iphone_retina'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_iphone_retina']);
+        $icon_path_iphone_retina = $variables['theme']['path'] . '/' . Html::escape($config['apple_touch_icon_path_iphone_retina']);
+        if (file_exists($icon_path_iphone_retina) === TRUE) {
+          $icons['touch_icon_iphone_2x'] = [
+            'href' => file_create_url($icon_path_iphone_retina),
+            'size' => '120x120',
+            'rel' => $touch_rel,
+          ];
+        }
       }
-
-      // iPad retina.
+      // For iPad with @2× display running iOS ≥ 7 (152x152)
       if (isset($config['apple_touch_icon_path_ipad_retina']) && !empty($config['apple_touch_icon_path_ipad_retina'])) {
-        $variables['touch_icon_ipad_retina'] = file_create_url($variables['theme']['path'] . '/' . $config['apple_touch_icon_path_ipad_retina']);
+        $icon_path_ipad_retina = $variables['theme']['path'] . '/' . Html::escape($config['apple_touch_icon_path_ipad_retina']);
+        if (file_exists($icon_path_ipad_retina) === TRUE) {
+          $icons['touch_icon_ipad_2x'] = [
+            'href' => file_create_url($icon_path_ipad_retina),
+            'size' => '152x152',
+            'rel' => $touch_rel,
+          ];
+        }
+      }
+      // For iPhone 6 Plus with @3× display (180x180)
+      if (isset($config['apple_touch_icon_path_ipad_retina_3x']) && !empty($config['apple_touch_icon_path_ipad_retina_3x'])) {
+        $icon_path_ipad_retina_3x = $variables['theme']['path'] . '/' . Html::escape($config['apple_touch_icon_path_ipad_retina_3x']);
+        if (file_exists($icon_path_ipad_retina_3x) === TRUE) {
+          $icons['touch_icon_iphone_3x'] = [
+            'href' => file_create_url($icon_path_ipad_retina_3x),
+            'size' => '180x180',
+            'rel' => $touch_rel,
+          ];
+        }
+      }
+      // For Chrome on Android (192x192)
+      if (isset($config['apple_touch_icon_path_chrome_android']) && !empty($config['apple_touch_icon_path_chrome_android'])) {
+        $icon_path_chrome_android = $variables['theme']['path'] . '/' . Html::escape($config['apple_touch_icon_path_chrome_android']);
+        if (file_exists($icon_path_chrome_android) === TRUE) {
+          $icons['touch_icon_chrome_android'] = [
+            'href' => file_create_url($icon_path_chrome_android),
+            'size' => '192x192',
+            'rel' => 'icon',
+          ];
+        }
+      }
+      // Inline template for touch icons.
+      foreach ($icons as $touch_item => $touch_item_values) {
+        $variables['touch_icons'][$touch_item] = [
+          '#type'     => 'inline_template',
+          '#template' => '<link href="{{ href }}" rel="{{ rel }}" sizes="{{ size }}" />',
+          '#context'  => array(
+            'href' => $touch_item_values['href'],
+            'rel'  => $touch_item_values['rel'],
+            'size' => $touch_item_values['size'],
+          ),
+        ];
       }
     }
 
