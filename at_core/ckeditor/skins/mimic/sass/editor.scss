@@ -48,6 +48,10 @@ $font : normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, sans-serif;
   text-align: left;
   white-space: nowrap;
   cursor: auto;
+
+  // Mitigate Moono loading (error).
+  background: none;
+  box-shadow: none;
 }
 
 .cke_reset_all {
