@@ -439,6 +439,15 @@ function at_core_preprocess_comment(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_block(&$variables) {
+  // Variable for custom block bundle.
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $variables['bundle'] = $variables['elements']['content']['#block_content']->bundle();
+    // Variable for custom block view mode.
+    if (isset($variables['elements']['#configuration']['view_mode'])) {
+      $variables['view_mode'] = $variables['elements']['#configuration']['view_mode'];
+    }
+  }
+
   // Plugin ID variables for block class and shortcodes.
   if (isset($variables['base_plugin_id']) && !empty($variables['base_plugin_id'])) {
     $variables['plugin_id_clean'] = $variables['base_plugin_id'];
