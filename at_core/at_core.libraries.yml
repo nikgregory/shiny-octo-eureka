@@ -198,7 +198,8 @@ at.waypoints_infinite:
 at.waypoints_initialize:
   version: "8.x-1.0"
   js:
-    scripts/at.waypoints.js: {}
+    scripts/min/at.waypoints.min.js: { minified: true }
+    #scripts/at.waypoints.js: {}
   dependencies:
     - at_core/at.waypoints_sticky
 
