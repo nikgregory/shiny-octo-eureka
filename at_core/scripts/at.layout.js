@@ -42,7 +42,7 @@
           // classes will be wrong. Regions lacking the data attribute are
           // hidden with CSS.
           $(this).find('.region').filter(function() {
-            return !($(this).find('*[class*="block"], .messages, .panel-panel')).length;
+            return !($(this).find('.l-bl, .panel-panel')).length;
           }).removeAttr('data-at-region').prop('hidden', true);
 
           // data-at-region holds an int value corresponding to it's place in
@@ -50,7 +50,7 @@
           var active_regions = $(this).find('.region').map(function() {
             return $(this).attr('data-at-region');
           }).get().join('-');
-          //
+
           if (active_regions) {
             var hr = 'hr--' + active_regions;
             var arc = 'arc--' + $(this).children.length;

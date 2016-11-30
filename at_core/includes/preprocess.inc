@@ -499,6 +499,9 @@ function at_core_preprocess_comment(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_block(&$variables) {
+  // Inject a block layout class.
+  $variables['attributes']['class'][] = 'l-bl';
+
   // Variable for custom block bundle.
   if (isset($variables['elements']['content']['#block_content'])) {
     $variables['bundle'] = $variables['elements']['content']['#block_content']->bundle();
