@@ -49,15 +49,20 @@ function at_core_page_attachments_alter(array &$page) {
   // Attach at.settings, we need the ajaxPageState theme name.
   $page['#attached']['library'][] = 'at_core/at.settings';
 
+  // Load at messages JS.
+  // TODO this is currently disabled, it's very complex and we need to review the usefulness vs the performance issues.
+//  $page['#attached']['library'][] = 'at_core/at.status_messages';
+
   // Attach the JS layout script. We run this to cleanup potentially
   // incorrect layout classes in the markup due to placeholders.
   // See: https://www.drupal.org/node/953034
-  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
-    // Never run on admin pages, it may cause issues with theme setting pages or module forms.
-    if (\Drupal::service('router.admin_context')->isAdminRoute(\Drupal::routeMatch()->getRouteObject()) == FALSE) {
-      $page['#attached']['library'][] = 'at_core/at.layout';
-    }
-  }
+  // TODO this is currently disabled, it's very complex and we need to review the usefulness vs the performance issues.
+//  if (isset($config['layouts_enable']) && $config['layouts_enable'] === 1) {
+//    // Never run on admin pages, it may cause issues with theme setting pages or module forms.
+//    if (\Drupal::service('router.admin_context')->isAdminRoute(\Drupal::routeMatch()->getRouteObject()) == FALSE) {
+//      $page['#attached']['library'][] = 'at_core/at.layout';
+//    }
+//  }
 
   // Attach Drupal Core module dependant libraries.
   // These libraries are declared in your themeName.libraries.yml and we only
