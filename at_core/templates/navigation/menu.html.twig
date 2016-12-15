@@ -40,7 +40,10 @@
 
     {%- for item in items -%}
 
-      {% set is_parent = [item.below is not empty ? true : false] %}
+      {% set is_parent = false %}
+      {% if item.below and item.is_expanded %}
+        {% set is_parent = true %}
+      {% endif %}
 
       {% set item_classes = [
           'menu__item',
