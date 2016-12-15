@@ -17,13 +17,8 @@ foreach ($responsive_menu_breakpoints as $rmb_key => $rmb_value) {
 if (!empty($theme_blocks)) {
   $default_value = theme_get_setting('settings.responsive_menu_block', $theme);
   foreach ($theme_blocks as $block_key => $block_values) {
-    $plugin_id = $block_values->getPluginId();
-    $block_plugin_id = str_replace(':', '_', $plugin_id);
-    if (in_array('system_menu_block', explode(':', $plugin_id))) {
-      $menu_blocks[$block_plugin_id] = $block_values->label();
-      if ($default_value === $block_values->id()) {
-        $default_value = $block_plugin_id;
-      }
+    if ($block_values->getPlugin()->getPluginDefinition()['id'] === 'system_menu_block') {
+      $menu_blocks[$block_values->id()] = $block_values->label() . ' (' . $block_values->id() . ')';
     }
   }
 }

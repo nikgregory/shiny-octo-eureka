@@ -112,7 +112,7 @@ function at_core_theme_suggestions_block_alter(array &$suggestions, array $varia
       if (isset($theme['config']['responsive_menu_block'])) {
         if (isset($variables['elements']['#base_plugin_id']) && $variables['elements']['#base_plugin_id'] === 'system_menu_block') {
           if (isset($variables['elements']['#derivative_plugin_id'])) {
-            if ($theme['config']['responsive_menu_block'] === $variables['elements']['#base_plugin_id'] . '_' . $variables['elements']['#derivative_plugin_id']) {
+            if ($theme['config']['responsive_menu_block'] === $variables['elements']['#id']) {
               $suggestions[] = 'block__responsive_menu';
             }
           }
