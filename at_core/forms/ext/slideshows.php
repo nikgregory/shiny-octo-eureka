@@ -128,7 +128,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['settings_slideshow_' . $i . '_controlnav'] = [
       '#type' => 'checkbox',
       '#title' => t('Pager <small>(Show the pager)</small>'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_controlnav') ? theme_get_setting('settings.slideshow_' . $i . '_controlnav') : 1,
+      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_controlnav') ? theme_get_setting('settings.slideshow_' . $i . '_controlnav') : 1,
     ];
 
     // Thumbnail controlNav toggle.
@@ -148,7 +148,7 @@ if (isset($slideshow_count) && $slideshow_count >= 1) {
     $form['slideshows']['slideshow_' . $i]['slideshow_options']['wrapper']['settings_slideshow_' . $i . '_directionnav'] = [
       '#type' => 'checkbox',
       '#title' => t('Controls <small>(Show previous/next links)</small>'),
-      '#default_value' => theme_get_setting('settings.slideshow_' . $i . '_directionnav') ? theme_get_setting('settings.slideshow_' . $i . '_directionnav') : 1,
+      '#default_value' => null !== theme_get_setting('settings.slideshow_' . $i . '_directionnav') ? theme_get_setting('settings.slideshow_' . $i . '_directionnav') : 1,
     ];
 
     /* Carousels */
