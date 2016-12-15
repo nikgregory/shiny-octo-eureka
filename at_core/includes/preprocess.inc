@@ -358,6 +358,21 @@ function at_core_preprocess_region(&$variables) {
   // Set wrapper element. Required for BC. Deprecated.
   $variables['html_element'] = 'div';
 
+  $i = 0;
+  $block_count[$variables['region']] = 0;
+  foreach ($variables['elements'] as $element => $values) {
+    if (isset($values) && !empty($values) && is_array($values)) {
+      foreach ($values as $vk => $vv) {
+        if ($vk == '#markup') {
+          $block_count[$variables['region']] = $i++;
+        }
+      }
+    }
+  }
+  if (!empty($block_count[$variables['region']])) {
+    $variables['attributes']['data-at-block-count'] = $block_count[$variables['region']];
+  }
+
   // Short codes.
   if ($variables['theme']['extensions']['is_enabled'] === TRUE) {
     if ($variables['theme']['shortcodes']['is_enabled'] === TRUE) {
