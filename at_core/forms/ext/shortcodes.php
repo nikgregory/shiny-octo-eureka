@@ -104,9 +104,9 @@ if ($block_module === TRUE) {
       }
       $form['shortcodes']['block_classes']['settings_block_classes_' . $block_plugin] = [
         '#type'          => 'textfield',
-        '#title'         => t($block_label),
+        '#title'         => $block_label,
         '#default_value' => $default_value,
-        '#description'   => t('<small><b>Block id:</b> ' . $block_key . '</small> <br><small><b>Plugin id:</b> ' . $plugin_id . '</small>'),
+        '#description'   => '<small><b>Block id:</b> ' . $block_key . '</small> <br><small><b>Plugin id:</b> ' . $plugin_id . '</small>',
       ];
     }
   }

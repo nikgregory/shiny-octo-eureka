@@ -54,7 +54,7 @@ foreach ($mobile_blocks_breakpoints as $mbs_key => $mbs_value) {
       $block_id = $block_values->id();
       $plugin_id = $block_values->getPluginId();
       $block_plugin = str_replace(':', '_', $plugin_id);
-      $block_label = t($block_values->label());
+      $block_label = $block_values->label();
       $old_default_value_show = theme_get_setting('settings.mobile_block_show_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
       $old_default_value_hide = theme_get_setting('settings.mobile_block_hide_' . 'bp' . $mbs_label . '_' . $block_id, $theme);
 
