@@ -16,6 +16,14 @@ function at_core_submit_fonts($values, $generated_files_path) {
     $websafe_fonts = '';
   }
 
+  // Local fonts
+  if (isset($values['settings_font_local'])) {
+    $local_fonts = "\n\n" . $values['settings_font_local'] . "\n";
+  }
+  else {
+    $local_fonts = '';
+  }
+
   // Elements to apply fonts to.
   $font_elements = font_elements();
 
@@ -114,6 +122,18 @@ function at_core_submit_fonts($values, $generated_files_path) {
       }
     }
 
+    // Local fonts.
+    if ($values['settings_font_' . $font_key] == 'local') {
+      if (!empty($values['settings_font_localfont_' . $font_key])) {
+        $fonts[$font_key]['family'] = 'font-family: "' . str_replace('_', ' ', $values['settings_font_localfont_' . $font_key]) . '", ' . trim($fallback_font_family) . ';';
+        // Inject settings into the config.
+        $values['settings_font_use_localfont'] = TRUE;
+      }
+      else {
+        $fonts[$font_key]['family'] = 'font-family: inherit;';
+      }
+    }
+
     // Font smoothing.
     if (isset($values['settings_font_smoothing_' . $font_key]) && $values['settings_font_smoothing_' . $font_key] == 1) {
       $fonts[$font_key]['smoothing'] = ' -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;';
@@ -148,7 +168,7 @@ function at_core_submit_fonts($values, $generated_files_path) {
       }
     }
 
-    $output = implode("\n", $font_styles);
+    $output = implode("\n", $font_styles) . $local_fonts;
   }
 
   $output = $output ? Xss::filter($output) : '/** No fonts styles set **/';
@@ -160,4 +180,3 @@ function at_core_submit_fonts($values, $generated_files_path) {
   // Return modified values to convert to config.
   return $values;
 }
-
