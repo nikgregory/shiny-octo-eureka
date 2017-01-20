@@ -166,6 +166,9 @@ class LayoutSubmit {
       }
     }
 
+    // Attribution row order, we need this for BC.
+    $attribution_order = '.l-attribution { -webkit-order: 100; -ms-flex-order: 100; order: 100; }' . "\n";
+
     // Don't regenerate CSS files to be removed.
     foreach ($this->form_values as $values_key => $values_value) {
       if (substr($values_key, 0, 18) === 'delete_suggestion_') {
@@ -184,7 +187,7 @@ class LayoutSubmit {
     foreach ($output as $suggestion => $css) {
       if (!empty($css)) {
         $message = '/* Layout CSS for: ' . str_replace('_', '-', $suggestion) . '.html.twig, generated: ' . date(DATE_RFC822) . ' */';
-        $file_content = $message ."\n". $global_css . implode('', $css) . implode("\n", $max_width);
+        $file_content = $message ."\n". $global_css . implode('', $css) . implode("\n", $max_width) . "\n" . $attribution_order;
         $file_name = $this->theme_name . '.layout.' . str_replace('_', '-', $suggestion) . '.css';
         $filepath = "$generated_files_path/$file_name";
         file_unmanaged_save_data($file_content, $filepath, FILE_EXISTS_REPLACE);
