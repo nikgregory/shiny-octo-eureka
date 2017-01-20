@@ -413,3 +413,10 @@ at.toolbar_themes.icons:
       toolbar_theme/at_toolbar_icons.css: {}
   dependencies:
     - toolbar_themes/toolbar_themes_base.icons
+
+# Backwards compatibility CSS.
+at.bc:
+  version: "8.x-1.0"
+  css:
+    component:
+      styles/css/at.bc.css: {}

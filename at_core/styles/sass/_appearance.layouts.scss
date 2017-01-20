@@ -142,35 +142,77 @@
       padding-bottom: 99999px;
     }
 
-    // new page layout fieldsets
+
+    // Layout rows
     #edit-layout-select {
-      fieldset {
-        background: #f5f4f1;
-        margin: 0 0 2px;
-        padding: 10px 10px 8px;
+      .draggable td {
+        padding: 1px 10px 10px;
+
+        a.tabledrag-handle {
+          top: 11.5px;
+          position: relative;
+
+          .handle {
+            height: 25px;
+          }
+        }
       }
 
-      select {
-        min-width: 65%;
-        max-width: 90%;
+      .form-type-select {
+        margin: 12px 0;
+        padding: 0;
+
+        label {
+          display: inline-block;
+          margin: 1px 0;
+        }
+
+        select {
+          width: 60%;
+          float: right;
+
+          &.row-weight {
+            width: auto;
+          }
+        }
       }
 
-      @media all and (min-width: 60em) {
+      @media all and (min-width: 64em) {
         .form-type-select {
-          width: 65%;
-          float: left;
-          margin: 0;
-          padding: 0;
+          margin: 12px 0;
 
           label {
-            float: left;
             width: 10em;
+            float: left;
+          }
+
+          select {
+            width: 30%;
+            float: left;
           }
         }
 
-        .css-layout-options {
-          width: 34%;
-          float: right;
+        .layout-preview {
+           float: right;
+           width: 40%;
+        }
+      }
+
+      .layout-preview {
+        .region {
+          box-sizing: border-box;
+          text-align: left;
+          margin-bottom: 2px;
+          transition: all, .15s, ease-in;
+
+          span {
+            display: block;
+            background-color: #a4a39f;
+            font-size: 0.75rem;
+            height: 1.5em;
+            padding: 0.2em 0 0 0.45em;
+            color: #f5f5f5;
+          }
         }
       }
 
@@ -194,23 +236,33 @@
           }
         }
       }
+    }
 
-      .css-layout-options {
-        .region {
-          box-sizing: border-box;
-          text-align: left;
-          margin-bottom: 2px;
-          transition: all, .15s, ease-in;
-
-          span {
-            display: block;
-            background-color: #a4a39f;
-            font-size: 0.75rem;
-            height: 1.5em;
-            padding: 0.2em 0 0 0.45em;
-            color: #f5f5f5;
-          }
+    .row-layout-table {
+      thead th {
+        text-transform: none;
+      }
+      thead th,
+      tbody td {
+        &:last-child {
+          text-align: center;
+          width: 3em;
         }
+      }
+    }
+
+    tr.draggable {
+      td:first-child {}
+      td:nth-child(2) {}
+
+      td.tabledrag-hide {
+        select {
+          width: auto;
+        }
+      }
+
+      .warning.tabledrag-changed {
+        @include visually-hidden;
       }
     }
   }
@@ -278,5 +330,4 @@
     }
   }
 }
-
 

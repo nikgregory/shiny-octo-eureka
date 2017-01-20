@@ -23,7 +23,6 @@ function at_core_submit_layouts(&$form, &$form_state) {
 
   // Generate and save a new layout.
   if (isset($values['settings_layouts_enable']) && $values['settings_layouts_enable'] == 1) {
-
     $generateLayout = new LayoutSubmit($theme, $values);
 
     // Update the themes info file with new regions.
@@ -34,6 +33,12 @@ function at_core_submit_layouts(&$form, &$form_state) {
 
     // Build and save the suggestions twig templates.
     $generateLayout->saveLayoutSuggestionsMarkup();
+
+    // Merge in row order (weight) settings.
+    $converted_layout_settings = $generateLayout->convertLayoutSettings();
+    if (!empty($converted_layout_settings)) {
+      $values = array_merge($converted_layout_settings, $values);
+    }
 
     // Add a new suggestion to the page suggestions array in config.
     if (!empty($values['ts_name'])) {

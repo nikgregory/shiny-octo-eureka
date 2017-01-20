@@ -133,6 +133,11 @@ class LayoutLoad extends Layout {
       // If active regions set to true, print the row.
       $variables[$row_key]['has_regions'] = TRUE;
 
+      // Row outer attributes.
+      $variables[$row_key]['row_attributes'] = new Attribute;
+      $variables[$row_key]['row_attributes']['data-at-row'] = str_replace('_', '-', $row_key);
+      $variables[$row_key]['row_attributes']['class'] = ['l-' . str_replace('_', '-', $row_key), 'l-row'];
+
       // Wrapper attributes.
       $variables[$row_key]['wrapper_attributes'] = new Attribute;
       $variables[$row_key]['wrapper_attributes']['class'] = ['l-pr', 'page__row', 'pr-' . str_replace('_', '-', $row_key)];

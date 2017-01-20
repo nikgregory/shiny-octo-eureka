@@ -278,30 +278,61 @@
   margin-bottom: -99999px;
   padding-bottom: 99999px;
 }
-[class*="admin-theme"] #edit-layouts #edit-layout-select fieldset {
-  background: #f5f4f1;
-  margin: 0 0 2px;
-  padding: 10px 10px 8px;
+[class*="admin-theme"] #edit-layouts #edit-layout-select .draggable td {
+  padding: 1px 10px 10px;
 }
-[class*="admin-theme"] #edit-layouts #edit-layout-select select {
-  min-width: 65%;
-  max-width: 90%;
+[class*="admin-theme"] #edit-layouts #edit-layout-select .draggable td a.tabledrag-handle {
+  top: 11.5px;
+  position: relative;
 }
-@media all and (min-width: 60em) {
+[class*="admin-theme"] #edit-layouts #edit-layout-select .draggable td a.tabledrag-handle .handle {
+  height: 25px;
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select {
+  margin: 12px 0;
+  padding: 0;
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select label {
+  display: inline-block;
+  margin: 1px 0;
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select select {
+  width: 60%;
+  float: right;
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select select.row-weight {
+  width: auto;
+}
+@media all and (min-width: 64em) {
   [class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select {
-    width: 65%;
-    float: left;
-    margin: 0;
-    padding: 0;
+    margin: 12px 0;
   }
   [class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select label {
-    float: left;
     width: 10em;
+    float: left;
   }
-  [class*="admin-theme"] #edit-layouts #edit-layout-select .css-layout-options {
-    width: 34%;
+  [class*="admin-theme"] #edit-layouts #edit-layout-select .form-type-select select {
+    width: 30%;
+    float: left;
+  }
+  [class*="admin-theme"] #edit-layouts #edit-layout-select .layout-preview {
     float: right;
+    width: 40%;
   }
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .layout-preview .region {
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 2px;
+  transition: all, .15s, ease-in;
+}
+[class*="admin-theme"] #edit-layouts #edit-layout-select .layout-preview .region span {
+  display: block;
+  background-color: #a4a39f;
+  font-size: 0.75rem;
+  height: 1.5em;
+  padding: 0.2em 0 0 0.45em;
+  color: #f5f5f5;
 }
 [class*="admin-theme"] #edit-layouts #edit-layout-select details .details-wrapper {
   padding: 10px;
@@ -320,19 +351,26 @@
   border-top: 0;
   margin-top: 0;
 }
-[class*="admin-theme"] #edit-layouts #edit-layout-select .css-layout-options .region {
-  box-sizing: border-box;
-  text-align: left;
-  margin-bottom: 2px;
-  transition: all, .15s, ease-in;
+[class*="admin-theme"] #edit-layouts .row-layout-table thead th {
+  text-transform: none;
 }
-[class*="admin-theme"] #edit-layouts #edit-layout-select .css-layout-options .region span {
-  display: block;
-  background-color: #a4a39f;
-  font-size: 0.75rem;
-  height: 1.5em;
-  padding: 0.2em 0 0 0.45em;
-  color: #f5f5f5;
+[class*="admin-theme"] #edit-layouts .row-layout-table thead th:last-child,
+[class*="admin-theme"] #edit-layouts .row-layout-table tbody td:last-child {
+  text-align: center;
+  width: 3em;
+}
+[class*="admin-theme"] #edit-layouts tr.draggable td.tabledrag-hide select {
+  width: auto;
+}
+[class*="admin-theme"] #edit-layouts tr.draggable .warning.tabledrag-changed {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  word-wrap: normal;
+  font: 0/0 a;
 }
 [class*="admin-theme"] #edit-suggestions {
   background: #f7fcff;
@@ -739,5 +777,4 @@
 #color_scheme_form .color-preview {
   display: none !important;
 }
-
 /*# sourceMappingURL=at.appearance.css.map */

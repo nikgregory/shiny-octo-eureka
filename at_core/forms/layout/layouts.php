@@ -128,11 +128,53 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
       ];
 
       if (!empty($layout_config['rows'])) {
+        $group_class = $theme . '-' . $suggestion_key . '-' . $breakpoint_layout_key;
+        $row_count = count($layout_config['rows']);
+
+        $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'] = [
+          '#type' => 'table',
+          '#header' => [t('Layout'), t('Order'), t('Hide')],
+          '#empty' => t('No rows to display.'),
+          '#tabledrag' => [
+            [
+              'action' => 'order',
+              'relationship' => 'sibling',
+              'group' => $group_class,
+              //'hidden' => TRUE,
+            ],
+          ],
+          '#attributes' => [
+            'class' => ['row-layout-table', 'row-weight'],
+            'id' => $group_class,
+          ],
+        ];
+
+        // Sort rows by weight.
+        $rows = [];
+        $sw = -1;
         foreach ($layout_config['rows'] as $row_key => $row_values) {
+          $sort_weight = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_weight');
+          if (!empty($sort_weight)) {
+            $rows[$row_key] = $sort_weight;
+          }
+          else {
+            $rows[$row_key] = ++$sw;
+          }
+        }
+        array_multisort($rows, SORT_ASC, $layout_config['rows']);
+
+        $rw = -1;
+        foreach ($layout_config['rows'] as $row_key => $row_values) {
+          $reg_count[$row_key] = count($row_values['regions']);
+          $row_weight_setting = theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_weight');
+          if (!empty($row_weight_setting)) {
+            $row_weight = $row_weight_setting;
+          }
+          else {
+            $row_weight = ++$rw;
+          }
 
           // CSS files
-          $reg_count[$row_key] = count($row_values['regions']);
-
           foreach ($css_config['css'] as $css_key => $css_values) {
             if ($css_values['regions'] == $reg_count[$row_key]) {
               foreach ($css_values['files'] as $css_file) {
@@ -148,6 +190,7 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
             $regions_markup = [];
             $markup[$row_key] = '';
             $reg_num = 1;
+            $row_label = ucfirst(str_replace('_', ' ', $row_key));
 
             if ($reg_count[$row_key] > 1) {
               for ($i=0; $i<$reg_count[$row_key]; $i++) {
@@ -167,28 +210,51 @@ foreach ($template_suggestions as $suggestion_key => $suggestions_name) {
               $row_default_value = theme_get_setting('settings.page_' . $breakpoint_layout_key . '_' . $row_key);
             }
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key] = [
-              '#type' => 'fieldset',
-              '#title' => t($row_key),
-            ];
+            // Mark the table row as draggable.
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['#attributes']['class'] = ['draggable'];
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key] = [
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['layout']['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key] = [
               '#type' => 'select',
               '#empty_option' => '--none--',
-              '#title' => t(ucfirst(str_replace('_', ' ', $row_key))),
+              '#title' => t($row_label),
               '#options' => $css_options[$row_key],
               '#default_value' => $row_default_value,
+              '#attributes' => ['class' => ['row-layout-select']],
+//              '#states' => [
+//                'disabled' => ['input[name="table[' . $row_key . '][hide][settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_hide]"' => ['checked' => TRUE]],
+//              ],
             ];
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'] = [
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['layout']['layout_preview'] = [
               '#type' => 'container',
-              '#attributes' => ['class' => ['css-layout-options', 'layouts-column-onequarter', 'pull-right']],
+              '#attributes' => ['class' => ['layout-preview']],
             ];
 
-            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key][$row_key]['css-options-visuals'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = [
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['layout']['layout_preview'][$suggestion_key . '-' . $breakpoint_layout_key . '-' . $row_key . '-row_region_markup'] = [
               '#type' => 'container',
               '#markup' => '<div class="l-rw regions arc--' . $reg_count[$row_key] . '">' . $markup[$row_key] . '</div>',
-              '#attributes' => ['class' => ['css-layout-option-not-set', $row_default_value]],
+              '#attributes' => ['class' => ['layout-option-not-set', $row_default_value]],
+            ];
+
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['weight']['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_weight'] = [
+              '#type' => 'weight',
+              '#title' => t('Weight for @title', ['@title' => $row_label]),
+              '#title_display' => 'invisible',
+              '#delta' => $row_count,
+              '#weight' => $row_weight,
+              '#default_value' => $row_weight,
+              '#attributes' => ['class' => [$group_class, 'row-weight']],
+              '#states' => [
+                'disabled' => ['input[name="table[' . $row_key . '][hide][settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_hide]"' => ['checked' => TRUE]],
+              ],
+            ];
+
+// Todo - bring back hidden when I have more time to write the submit code and test it.
+            $form['layouts']['layout_select'][$suggestion_key][$breakpoint_layout_key]['table'][$row_key]['hide']['settings_' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_hide'] = [
+              '#type' => 'checkbox',
+              '#title' => t('Hide @title in this breakpoint', ['@title' => $row_label]),
+              '#title_display' => 'invisible',
+              '#default_value' => theme_get_setting('settings.' . $suggestion_key . '_' . $breakpoint_layout_key . '_' . $row_key . '_hide'),
             ];
           }
         }

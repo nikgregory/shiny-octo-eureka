@@ -3,9 +3,9 @@
  * Appearance settings.
  */
 (function ($, Drupal) {
-  Drupal.behaviors.atCoreLayoutVisualization = {
+  Drupal.behaviors.atCoreLayoutPreview = {
     attach: function () {
-      $('#edit-layout-select select[id*="edit-settings-page-"]').change(function(){
+      $('#edit-layout-select select.row-layout-select').change(function(){
         $('#' + $(this).attr('id')).parent().next().children().removeClass().addClass(this.value);
       });
     }

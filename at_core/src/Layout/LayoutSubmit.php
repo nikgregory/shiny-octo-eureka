@@ -19,17 +19,33 @@ class LayoutSubmit {
   // Constructor
   public function __construct($theme_name, $values) {
     $this->theme_name = $theme_name;
-
     $layout_data = new LayoutCompatible($this->theme_name);
     $layout_compatible_data = $layout_data->getCompatibleLayout();
-
     $this->layout_config = $layout_compatible_data['layout_config'];
     $this->css_config = $layout_compatible_data['css_config'];
-
     $this->layout_name = $layout_compatible_data['layout_name'];
     $this->layout_path = drupal_get_path('theme', $this->layout_config['layout_provider']) . '/layout/' . $this->layout_name;
-
     $this->form_values = $values;
+  }
+
+  /**
+   * Convert the table row array to settings the rest of the system can use.
+   */
+  public function convertLayoutSettings() {
+    $settings = [];
+    foreach ($this->form_values['table'] as $row_key => $row_values) {
+      foreach ($row_values['layout'] as $setting_layout => $layout) {
+        $settings[$setting_layout] = $layout;
+      }
+      foreach ($row_values['weight'] as $setting_weight => $weight) {
+        $settings[$setting_weight] = $weight;
+      }
+      foreach ($row_values['hide'] as $setting_hide => $hide) {
+        $settings[$setting_hide] = $hide;
+      }
+    }
+
+    return $settings;
   }
 
   /**
@@ -46,11 +62,32 @@ class LayoutSubmit {
           // match the key set in the form, hacking on get label
           $breakpoint_layout_key = strtolower(preg_replace("/\W|_/", "", $breakpoint_value->getLabel()));
           $css_data[$suggestion_key][$breakpoint_layout_key]['query'] = $breakpoint_value->getMediaQuery();
+
+          // Layout with impossible BC.
           if (!empty($this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key])) {
             $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key] = $this->form_values['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key];
           }
+          else if (!empty($this->form_values['table'][$row_key]['layout']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key])) {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['layout'] = $this->form_values['table'][$row_key]['layout']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key];
+          }
           else {
-            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key] = 'not_set';
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['layout'] = 'not_set';
+          }
+
+          // Row order (weight).
+          if (!empty($this->form_values['table'][$row_key]['weight']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key . '_weight'])) {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['weight'] = $this->form_values['table'][$row_key]['weight']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key . '_weight'];
+          }
+          else {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['weight'] = 1;
+          }
+
+          // Row hidden (hide).
+          if (!empty($this->form_values['table'][$row_key]['hide']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key . '_hide'])) {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['hide'] = $this->form_values['table'][$row_key]['hide']['settings_'. $suggestion_key .'_'. $breakpoint_layout_key .'_'. $row_key . '_hide'];
+          }
+          else {
+            $css_data[$suggestion_key][$breakpoint_layout_key]['rows'][$row_key]['hide'] = 0;
           }
         }
       }
@@ -60,33 +97,48 @@ class LayoutSubmit {
     $output = [];
     $css_rows = [];
     $css_file = [];
+    $row_hide_css = [];
+    $row_weight_css = [];
     $path_to_css_files = $this->layout_path . '/' . $this->css_config['css_files_path'];
 
     foreach ($css_data as $suggestion => $breakpoints) {
       foreach ($breakpoints as $breakpoint_keys => $breakpoint_values) {
         foreach ($breakpoint_values['rows'] as $row_keys => $row_values) {
-          if ($row_values == 'not_set') {
-            continue;
+          $row_key = str_replace('_', '-', $row_keys);
+
+          if (isset($row_values['hide']) && $row_values['hide'] == 1) {
+            $row_hide_css[$suggestion][$breakpoint_keys][$row_keys] = '.l-' . $row_key . ' {display: none;}' . "\n";
           }
-          foreach ($this->css_config['css'] as $css_key => $css_values) {
-            if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css')) {
-              $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values . '.css');
-              // TODO review fix for underscores in row names.
-              //$replace_class = 'pr-' . $row_keys;
-              $replace_class = 'pr-' . str_replace('_', '-', $row_keys);
-              if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
-                $file = str_replace($row_values, $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
-                $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
+          else {
+            if (isset($row_values['weight'])) {
+              $row_weight_css[$suggestion][$breakpoint_keys][$row_keys] = '.l-' . $row_key . ' { -webkit-order: ' . $row_values['weight'] . '; -ms-flex-order: ' . $row_values['weight'] . '; order: ' . $row_values['weight'] . "; }\n";
+            }
+
+            foreach ($this->css_config['css'] as $css_key => $css_values) {
+              if (file_exists($path_to_css_files . '/' . $css_key . '/' . $row_values['layout'] . '.css')) {
+                $css_file[$suggestion][$breakpoint_keys][$row_keys] = file_get_contents($path_to_css_files . '/' . $css_key . '/' . $row_values['layout'] . '.css');
+                // TODO review fix for underscores in row names.
+                $replace_class = 'pr-' . $row_key;
+                if (!empty($css_file[$suggestion][$breakpoint_keys][$row_keys])) {
+                  $file = str_replace($row_values['layout'], $replace_class, $css_file[$suggestion][$breakpoint_keys][$row_keys]);
+                  $css_rows[$suggestion][$breakpoint_keys][$breakpoint_keys . '_' . $row_keys] = $file;
+                }
               }
             }
           }
         }
 
-        if (!empty($css_rows[$suggestion][$breakpoint_keys])) {
-          $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . " {\n";
-          $output[$suggestion][] =  implode($css_rows[$suggestion][$breakpoint_keys]);
-          $output[$suggestion][] = "}\n";
+        $output[$suggestion][] = '@media ' . $breakpoint_values['query'] . " {\n";
+        if (!empty($row_hide_css[$suggestion][$breakpoint_keys])) {
+          $output[$suggestion][] = implode($row_hide_css[$suggestion][$breakpoint_keys]);
         }
+        if (!empty($row_weight_css[$suggestion][$breakpoint_keys])) {
+          $output[$suggestion][] = implode($row_weight_css[$suggestion][$breakpoint_keys]);
+        }
+        if (!empty($css_rows[$suggestion][$breakpoint_keys])) {
+          $output[$suggestion][] = implode($css_rows[$suggestion][$breakpoint_keys]);
+        }
+        $output[$suggestion][] = "}\n";
       }
     }
 

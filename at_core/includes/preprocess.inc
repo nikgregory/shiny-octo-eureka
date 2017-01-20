@@ -70,6 +70,11 @@ function at_core_preprocess_html(&$variables) {
     $variables['path_info']['args'] = Html::cleanCssIdentifier(ltrim($path, '/'));
   }
 
+  // Bring back our beloved D7 is_front.
+  if (\Drupal::service('path.matcher')->isFrontPage() === TRUE) {
+    $variables['is_front'] = TRUE;
+  }
+
   // Extensions
   if (isset($config['enable_extensions']) && $config['enable_extensions'] === 1) {
 
@@ -215,6 +220,16 @@ function at_core_preprocess_html(&$variables) {
   else {
     drupal_set_message(t('This theme requires the <b>Breakpoint module</b> to be installed. Go to the <a href="@extendpage" target="_blank">Modules</a> page and install Breakpoint.', ['@extendpage' => base_path() . 'admin/modules']), 'error');
   }
+
+  // Layout type class & CSS for BC and other usage.
+  if (isset($variables['theme']['provider_info']['layout'])) {
+    $variables['attributes']['class'][] = 'layout-type--' . Html::cleanCssIdentifier($variables['theme']['provider_info']['layout']);
+
+    // TODO remove BC at some time in the future when rc2 usage is dead.
+    if ($variables['theme']['provider_info']['layout'] === 'flex-builder' && $variables['theme']['provider_info']['base theme original'] === '8.x-1.0-rc2') {
+      $variables['#attached']['library'][] = 'at_core/at.bc';
+    }
+  }
 }
 
 /**
@@ -240,7 +255,7 @@ function at_core_preprocess_page(&$variables) {
   );
   $variables['attribution'] = [
     '#type' => 'inline_template',
-    '#template' => '<div class="l-pr attribution"><div class="l-rw">{{ attribution }}</div></div>',
+    '#template' => '<div data-at-row="attribution" class="l-attribution l-row"><div class="l-pr attribution"><div class="l-rw">{{ attribution }}</div></div></div>',
     '#context' => [
       'attribution' => \Drupal\Core\Link::fromTextAndUrl(t('Design by Adaptivethemes.com'), $attribution_url)->toString(),
     ],
@@ -312,6 +327,7 @@ function at_core_preprocess_page(&$variables) {
           // Prepare variables for each row template.
           $row_regions[$row_key]['#row'] = $row_key;
           $row_regions[$row_key][$region] = $variables['page'][$region];
+          $row_regions[$row_key]['#row_attributes'] = $row_attributes[$row_key]['row_attributes'];
           $row_regions[$row_key]['#wrapper_attributes'] = $row_attributes[$row_key]['wrapper_attributes'];
           $row_regions[$row_key]['#container_attributes'] = $row_attributes[$row_key]['container_attributes'];
           // Call the row template and pass in the processed variables.
@@ -330,12 +346,17 @@ function at_core_preprocess_page(&$variables) {
  * @param $variables
  */
 function at_core_preprocess_row(&$variables) {
-  // Insert content/markup before or after a row.
-  $variables['row_prefix'] = [];
-  $variables['row_suffix'] = [];
+  // Easy printing variable for the row name.
+  $variables['row_name'] = $variables['regions']['#row'];
+
   // Set easy to print variables for attributes.
+  $variables['row_attributes'] = $variables['regions']['#row_attributes'];
   $variables['wrapper_attributes'] = $variables['regions']['#wrapper_attributes'];
   $variables['container_attributes'] = $variables['regions']['#container_attributes'];
+
+  // Initialize variables for inserting content/markup before or after a row.
+  $variables['row_prefix'] = [];
+  $variables['row_suffix'] = [];
 }
 
 /**
@@ -592,6 +613,14 @@ function at_core_preprocess_block(&$variables) {
     }
   }
 }
+
+/**
+ * Preprocess variables for block templates.
+ * @param $variables
+ */
+//function at_core_preprocess_menu(&$variables) {
+//  kint($variables);
+//}
 
 /**
  * Preprocess variables for field templates.
