@@ -261,7 +261,7 @@ at.fontfaceobserver:
     url: https://github.com/bramstein/fontfaceobserver/blob/master/LICENSE
     gpl-compatible: true
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.0.5/fontfaceobserver.standalone.js: { type: external, minified: true }
+    https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.0.5/fontfaceobserver.js: { type: external, minified: true }
 
 # Headroom
 at.headroom:
