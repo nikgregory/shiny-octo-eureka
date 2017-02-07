@@ -62,7 +62,7 @@
   {% endif %}
 
   {% if rows %}
-    <div class="view-content">
+    <div class="view-content view-rows view-row--count-{{ rows|length }}">
       {{ rows }}
     </div>
   {% elseif empty %}
