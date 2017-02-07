@@ -68,6 +68,8 @@
   set classes = [
     'comment',
     'js-comment',
+    'comment--type-' ~ comment.bundle|clean_class,
+    view_mode ? 'comment--view-mode-' ~ view_mode|clean_class,
     status != 'published' ? status,
     comment.owner.anonymous ? 'by-anonymous',
     author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
