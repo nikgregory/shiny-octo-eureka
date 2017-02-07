@@ -100,35 +100,35 @@ function font_elements() {
       ],
       'h1h4' => [
         'label' => 'h1 to h4 headings',
-        'selector' => 'h1, h2, h3, h4',
+        'selector' => 'h1, h2, h3, h4, .h1, .h2, .h3, .h4',
       ],
       'h5h6' => [
         'label' => 'h5, h6 headings',
-        'selector' => 'h5, h6',
+        'selector' => 'h5, h6, .h5, .h6',
       ],
       'h1' => [
         'label' => 'h1',
-        'selector' => 'h1',
+        'selector' => 'h1, .h1',
       ],
       'h2' => [
         'label' => 'h2',
-        'selector' => 'h2',
+        'selector' => 'h2, .h2',
       ],
       'h3' => [
         'label' => 'h3',
-        'selector' => 'h3',
+        'selector' => 'h3, .h3',
       ],
       'h4' => [
         'label' => 'h4',
-        'selector' => 'h4',
+        'selector' => 'h4, .h4',
       ],
       'h5' => [
         'label' => 'h5',
-        'selector' => 'h5',
+        'selector' => 'h5, .h5',
       ],
       'h6' => [
         'label' => 'h6',
-        'selector' => 'h6',
+        'selector' => 'h6, .h6',
       ],
       'formitems' => [
         'label' => 'Form elements',
