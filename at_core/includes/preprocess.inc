@@ -668,17 +668,19 @@ function at_core_preprocess_field__image(&$variables) {
       // Captions.
       if (isset($config['image_captions_' . $bundle . '_' . $entity_type . '_' . $view_mode]) && $config['image_captions_' . $bundle . '_' . $entity_type . '_' . $view_mode] === 1) {
         foreach ($variables['items'] as $delta => $item) {
-          $values = $item['content']['#item']->getValue();
-          if (!empty($values['title'])) {
-            $variables['items'][$delta]['caption'] = [
-              'show' => TRUE,
-              'title' => $values['title'],
-            ];
-          }
-          else {
-            $variables['items'][$delta]['caption'] = [
-              'show' => FALSE,
-            ];
+          if (isset($item['content']['#item'])) {
+            $values = $item['content']['#item']->getValue();
+            if (!empty($values['title'])) {
+              $variables['items'][$delta]['caption'] = [
+                'show' => TRUE,
+                'title' => $values['title'],
+              ];
+            }
+            else {
+              $variables['items'][$delta]['caption'] = [
+                'show' => FALSE,
+              ];
+            }
           }
         }
       }
@@ -693,7 +695,6 @@ function at_core_preprocess_field__image(&$variables) {
 
       if (!empty($config['image_alignment_' . $bundle . '_' . $entity_type . '_' . $view_mode])) {
         $variables['image_align'] = 'align-' . $config['image_alignment_' . $bundle . '_' . $entity_type . '_' . $view_mode];
-        //kint($variables);
       }
 
       // This is quite aggressive and it may be better to let the site fail?
