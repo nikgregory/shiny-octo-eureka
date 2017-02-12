@@ -17,7 +17,8 @@ foreach ($responsive_menu_breakpoints as $rmb_key => $rmb_value) {
 if (!empty($theme_blocks)) {
   $default_value = theme_get_setting('settings.responsive_menu_block', $theme);
   foreach ($theme_blocks as $block_key => $block_values) {
-    if ($block_values->getPlugin()->getPluginDefinition()['id'] === 'system_menu_block') {
+    // Support System module and Menu Block module blocks.
+    if ($block_values->getPlugin()->getPluginDefinition()['id'] === 'system_menu_block' || $block_values->getPlugin()->getPluginDefinition()['id'] === 'menu_block') {
       $menu_blocks[$block_values->id()] = $block_values->label() . ' (' . $block_values->id() . ')';
     }
   }
