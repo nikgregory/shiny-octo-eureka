@@ -231,43 +231,53 @@ class LayoutSubmit {
     $regions['page_top'] = 'Page top';
     $regions['page_bottom'] = 'Page bottom';
 
-    $path = drupal_get_path('theme', $this->theme_name);
-    $info_file = $this->theme_name . '.info.yml';
-    $file_path = $path . '/' . $info_file;
+    // Get the paths to this theme and all dependant skin themes.
+    $theme_info_data = new ThemeInfo($this->theme_name);
+    $theme_paths[$this->theme_name] = $theme_info_data->getThemeInfo()->getPath();
+    $sub_themes_info = $theme_info_data->getSubThemesInfo();
 
-    // Create a backup.
-    if ($this->form_values['settings_enable_backups'] == 1) {
-
-      $fileOperations = new FileOperations();
-      $directoryOperations = new DirectoryOperations();
-
-      $backup_path = $directoryOperations->directoryPrepare($backup_file_path = [$path, 'backup', 'info']);
-
-      // Add a date time string to make unique and for easy identification,
-      // save as .txt to avoid conflicts.
-      $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
-
-      $file_paths = [
-       'copy_source' => $file_path,
-       'copy_dest' => $backup_path . '/' . $info_file,
-       'rename_oldname' => $backup_path . '/' . $info_file,
-       'rename_newname' => $backup_path . '/' . $backup_file,
-      ];
-      $fileOperations->fileCopyRename($file_paths);
+    if (!empty($sub_themes_info)) {
+      $sub_theme_paths = $theme_info_data->getSubThemesPaths();
+      foreach ($sub_themes_info as $machine_name => $sub_theme) {
+        if (isset($sub_theme['subtheme type']) && $sub_theme['subtheme type'] == 'adaptive_skin') {
+          $theme_paths = array_merge($theme_paths, $sub_theme_paths);
+        }
+      }
     }
 
-    // Parse the current info file.
+    // Todo - move to method?
+    // Create a backup.
+//    if ($this->form_values['settings_enable_backups'] == 1) {
+//
+//      $fileOperations = new FileOperations();
+//      $directoryOperations = new DirectoryOperations();
+//
+//      $backup_path = $directoryOperations->directoryPrepare($backup_file_path = [$path, 'backup', 'info']);
+//
+//      // Add a date time string to make unique and for easy identification,
+//      // save as .txt to avoid conflicts.
+//      $backup_file =  $info_file . '.'. date(DATE_ISO8601) . '.txt';
+//
+//      $file_paths = [
+//       'copy_source' => $file_path,
+//       'copy_dest' => $backup_path . '/' . $info_file,
+//       'rename_oldname' => $backup_path . '/' . $info_file,
+//       'rename_newname' => $backup_path . '/' . $backup_file,
+//      ];
+//      $fileOperations->fileCopyRename($file_paths);
+//    }
+
+    // Parse, format and save info with new regions.
     $parser = new Parser();
-    $theme_info_data = $parser->parse(file_get_contents($file_path));
-
-    $theme_info_data['regions'] = $regions;
-
-    // Prepare the array for printing in yml format.
     $buildInfo = new FileOperations();
-    $rebuilt_info = $buildInfo->fileBuildInfoYml($theme_info_data);
 
-    // Replace the existing info.yml file.
-    file_unmanaged_save_data($rebuilt_info, $file_path, FILE_EXISTS_REPLACE);
+    foreach ($theme_paths as $theme_name => $path) {
+      $file_path = $path . '/' . $theme_name . '.info.yml';
+      $theme_info_data = $parser->parse(file_get_contents($file_path));
+      $theme_info_data['regions'] = $regions;
+      $rebuilt_info = $buildInfo->fileBuildInfoYml($theme_info_data);
+      file_unmanaged_save_data($rebuilt_info, $file_path, FILE_EXISTS_REPLACE);
+    }
   }
 
   /**
